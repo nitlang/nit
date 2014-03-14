@@ -27,9 +27,10 @@ assert sys.system("javac test_jvm/TestJvm.java") == 0
 
 print "Initialisation de la JVM ..."
 
-var env_ref = new JniEnvRef
-var jvm = new JavaVM(env_ref)
-var env = env_ref.jni_env
+var builder = new JavaVMBuilder
+builder.options.add "-Djava.class.path=."
+var jvm = builder.create_jvm
+var env = builder.jni_env
 assert env != null
 
 print "---------------------Test 1----------------------"

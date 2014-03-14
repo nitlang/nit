@@ -67,24 +67,98 @@ in "C Header" `{
 	}
 `}
 
+# Utility to select options to create the VM using `create_jvm`
+#
+# Usage example:
+# ~~~~
+# var builder = new JavaVMBuilder
+# builder.options.add "-Djava.class.path=."
+# var jvm = builder.create_jvm
+# var env = builder.jni_env
+# ~~~~
+class JavaVMBuilder
+	super JniEnvRef
+
+	var version: Int = "00010002".to_hex
+	var options = new Array[String]
+
+	fun create_jvm: nullable JavaVM
+	do
+		var args = new JavaVMInitArgs
+		args.version = version
+		args.set_default
+		args.n_options = options.length
+
+		var c_options = new JavaVMOptionArray(options.length)
+		for o in options.length.times do
+			var option = options[o]
+			var c_option = c_options[o]
+			c_option.string = option
+		end
+
+		args.options = c_options
+
+		var jvm = new JavaVM(args, self)
+
+		args.free
+		c_options.free
+
+		if jvm.address_is_null then return null
+		return jvm
+	end
+end
+
+extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
+	new `{ return (JavaVMInitArgs*)malloc(sizeof(JavaVMInitArgs)); `}
+
+	# Set the defaut config for a VM
+	# Can be called after setting the version
+	fun set_default `{ JNI_GetDefaultJavaVMInitArgs(recv); `}
+
+	fun version: Int `{ return recv->version; `}
+	fun version=(v: Int) `{ recv->version = v; `}
+
+	fun options: JavaVMOptionArray `{ return recv->options; `}
+	fun options=(v: JavaVMOptionArray) `{ recv->options = v; `}
+
+	fun n_options: Int `{ return recv->nOptions; `}
+	fun n_options=(v: Int) `{ recv->nOptions = v; `}
+end
+
+extern class JavaVMOption `{ JavaVMOption* `}
+	fun string: String import NativeString.to_s `{
+		return NativeString_to_s(recv->optionString);
+	`}
+	fun string=(v: String) import String.to_cstring `{
+		recv->optionString = String_to_cstring(v);
+	`}
+
+	fun extra_info: String import NativeString.to_s `{
+		return NativeString_to_s(recv->extraInfo);
+	`}
+	fun extra_info=(v: String) import String.to_cstring `{
+		recv->extraInfo = String_to_cstring(v);
+	`}
+end
+
+extern class JavaVMOptionArray `{ JavaVMOption* `}
+	new(size: Int) `{ return (JavaVMOption*)malloc(sizeof(JavaVMOption)*size); `}
+
+	fun [](i: Int): JavaVMOption `{ return recv+i; `}
+end
+
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
-	new(env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv as nullable `{
+	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
+	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv as nullable `{
 		JavaVM *jvm;
 		JNIEnv *env;
 		jint res;
 
-		JavaVMInitArgs args;
-		JavaVMOption options[1];
-		options[0].optionString = "-Djava.class.path=.";
-		args.version = 0x00010002;
-		args.options = options;
-		args.nOptions = 1;
-		
-		res = JNI_CreateJavaVM(&jvm, (void**)&env, &args);
+		res = JNI_CreateJavaVM(&jvm, (void**)&env, args);
 
 		if (res != 0) {
-			JavaVM_jni_error(NULL, "Could not create Java VM");
+			JavaVM_jni_error(NULL, "Could not create Java VM, error: {res}");
 			return NULL;
 		}
 		else {
