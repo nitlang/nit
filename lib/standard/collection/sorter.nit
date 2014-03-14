@@ -92,6 +92,7 @@ interface AbstractSorter[E]
 end
 
 # This comparator uses the operator `<=>` to compare objects.
+# see `default_comparator` for an easy-to-use general stateless default comparator.
 class DefaultComparator[E: Comparable]
 	super Comparator[E]
 	# Return a <=> b
@@ -104,3 +105,6 @@ end
 class ComparableSorter[E: Comparable]
 	super DefaultComparator[E]
 end
+
+# Easy-to-use general stateless default comparator that uses `<=>` to compare things.
+fun default_comparator: Comparator[Comparable] do return once new DefaultComparator[Comparable]
