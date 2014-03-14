@@ -11,15 +11,14 @@
 # another product.
 
 # This module contains classes used to sorts arrays.
-# In order to provide your own sort class you should define a subclass of `AbstractSorter` with
-# a custom `AbstractSorter::compare` function.
+# In order to provide your own sort class you should define a subclass of `Comparator` with
+# a custom `Comparator::compare` function.
 module sorter
 
 import array
 
 # This abstract class generalizes ways to sort an array
-# TODO: rename `AbstractSorter` to `Comparator`
-interface AbstractSorter[E]
+interface Comparator[E]
 	# Compare `a` and `b`.
 	# Returns:
 	# 	-1 if a < b
@@ -87,13 +86,21 @@ interface AbstractSorter[E]
 	end
 end
 
-# This class uses the operator <=> to sort arrays.
-# You can also use the `sort` method of the `Array` class.
-class ComparableSorter[E: Comparable]
-	super AbstractSorter[E]
+# Deprecated class, use `Comparator` instead
+interface AbstractSorter[E]
+	super Comparator[E]
+end
+
+# This comparator uses the operator `<=>` to compare objects.
+class DefaultComparator[E: Comparable]
+	super Comparator[E]
 	# Return a <=> b
 	redef fun compare(a, b) do return a <=> b
 
 	init do end
 end
 
+# Deprecated class, use `DefaultComparator` instead
+class ComparableSorter[E: Comparable]
+	super DefaultComparator[E]
+end
