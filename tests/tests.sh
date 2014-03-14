@@ -23,6 +23,17 @@ export NIT_TESTING=true
 
 unset NIT_DIR
 
+# Get the first Java lib available
+shopt -s nullglob
+paths=`echo /usr/lib/jvm/*/`
+paths=($paths)	
+JAVA_HOME=${paths[0]}
+
+paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/`
+paths=($paths)	
+JNI_LIB_PATH=${paths[0]}
+shopt -u nullglob
+
 usage()
 {
 	e=`basename "$0"`
@@ -405,7 +416,8 @@ END
 				echo ""
 				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 			fi
-			NIT_NO_STACK=1 $TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
+				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -423,8 +435,9 @@ END
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
-			fi
-			NIT_NO_STACK=1 $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+			fi	
+			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
+				$TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
