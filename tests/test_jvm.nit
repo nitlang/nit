@@ -20,6 +20,15 @@
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 import jvm
 
+redef extern class JniEnv
+	fun print_error(msg: String)
+	do
+		print "Error: {msg}"
+		if "NIT_TESTING".environ != "true" then exception_describe
+		exit 1
+	end
+end
+
 print "Compilation des classes Java ..."
 assert sys.system("javac test_jvm/Queue.java") == 0
 assert sys.system("javac test_jvm/Test2.java") == 0
@@ -36,17 +45,17 @@ assert env != null
 print "---------------------Test 1----------------------"
 # get the class
 var queue_c = env.find_class("test_jvm/Queue")
-if queue_c.address_is_null then print("Error, Queue class not found")
+if queue_c.address_is_null then env.print_error("Queue class not found")
 
 # get the methods of the class
 var f_init = env.get_method_id(queue_c, "<init>", "()V")
-if f_init.address_is_null then print("Error, fInit not found")
+if f_init.address_is_null then env.print_error("fInit not found")
 
 var f_push = env.get_method_id(queue_c, "push", "(Ljava/lang/String;)V")
-if f_push.address_is_null then print("Error, fPush not found")
+if f_push.address_is_null then env.print_error("fPush not found")
 
 var f_pop = env.get_method_id(queue_c, "pop", "()Ljava/lang/String;")
-if f_pop.address_is_null then print("Error, fPop not found")
+if f_pop.address_is_null then env.print_error("fPop not found")
 
 var element1 = "premier"
 var element2 = "deuxième"
@@ -54,7 +63,7 @@ var element3 = "troisième"
 
 # instanciate class
 var queue = env.new_object(queue_c, f_init)
-if queue.address_is_null then print("Error, object not initialized")
+if queue.address_is_null then env.print_error("object not initialized")
 
 var arg_tab = new Array[Object].with_items(element1)
 
@@ -75,49 +84,49 @@ print el.to_s
 print "--------------------Test 2---------------------"
 
 var test_c = env.find_class("test_jvm/TestJvm")
-if test_c.address_is_null then print("Error, TestJvm class not found")
+if test_c.address_is_null then env.print_error("TestJvm class not found")
 
 f_init = env.get_method_id(test_c, "<init>", "()V")
-if f_init.address_is_null then print("Error, finit not found")
+if f_init.address_is_null then env.print_error("finit not found")
 
 # Get the different methods ids
 var m_bool = env.get_method_id(test_c, "isBool", "()Z") 
-if m_bool.address_is_null then print("Error, mbool not found")
+if m_bool.address_is_null then env.print_error("mbool not found")
 var m_char = env.get_method_id(test_c, "getC", "()C")
-if m_char.address_is_null then print("Error, mchar not found")
+if m_char.address_is_null then env.print_error("mchar not found")
 var m_i = env.get_method_id(test_c, "getI", "()I")
-if m_i.address_is_null then print ("Error, mi not found")
+if m_i.address_is_null then env.print_error ("mi not found")
 var m_f = env.get_method_id(test_c, "getF", "()F")
-if m_f.address_is_null then print("Error, mf not found")
+if m_f.address_is_null then env.print_error("mf not found")
 var m_test = env.get_method_id(test_c, "getTest", "()Ltest_jvm/Test2;")
-if m_test.address_is_null then print("Error, mtest not found")
+if m_test.address_is_null then env.print_error("mtest not found")
 
 # Get the Field ids
 var f_bool =env.get_field_id(test_c, "bool", "Z")
-if f_bool.address_is_null then print("Error, fbool not found")
+if f_bool.address_is_null then env.print_error("fbool not found")
 var f_char = env.get_field_id(test_c, "c", "C")
-if f_char.address_is_null then print("Error, fchar not found")
+if f_char.address_is_null then env.print_error("fchar not found")
 var f_i =env.get_field_id(test_c, "i", "I")
-if f_i.address_is_null then print("Error, fi not found")
+if f_i.address_is_null then env.print_error("fi not found")
 var f_f = env.get_field_id(test_c, "f", "F")
-if f_f.address_is_null then print("Error, ff not found")
+if f_f.address_is_null then env.print_error("ff not found")
 var f_test = env.get_field_id(test_c, "test", "Ltest_jvm/TestJvm;")
 
 # Instanciate
 var test = env.new_object(test_c, f_init)
-if test.address_is_null then print("Error, object test not initialized")
+if test.address_is_null then env.print_error("object test not initialized")
 
 # Retrieve field value with field ids
 var v_bool = env.get_boolean_field(test, f_bool)
-if v_bool == null then print("Error, vbool not found")
+if v_bool == null then env.print_error("vbool not found")
 var v_char = env.get_char_field(test, f_char)
-if v_char == null then print("Error, vchar not found")
+if v_char == null then env.print_error("vchar not found")
 var v_i = env.get_int_field(test, f_i)
-if v_i == null then print("Error, vi not found")
+if v_i == null then env.print_error("vi not found")
 var v_f = env.get_float_field(test, f_f)
-if v_f == null then print("Error, vf not found")
+if v_f == null then env.print_error("vf not found")
 var v_test1 = env.get_object_field(test, f_test)
-if v_test1 == null then print("Error, vtest1 not found")
+if v_test1 == null then env.print_error("vtest1 not found")
 
 # Set the new values for the fields
 env.set_boolean_field(test, f_bool, true)
@@ -132,7 +141,7 @@ v_char = env.call_char_method(test, m_char, null)
 v_i = env.call_int_method(test, m_i, null)
 v_f = env.call_float_method(test, m_f, null)
 var v_test2 = env.call_object_method(test, m_test, null)
-if v_test2 == null then print("Error, vtest2 not found")
+if v_test2 == null then env.print_error("vtest2 not found")
 
 # assert the values of the fields
 print v_bool
