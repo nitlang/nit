@@ -111,6 +111,10 @@ class ExternFile
 	# The content of the rule in the make
 	# Usually the one-line shell command after the tabulation
 	fun makefile_rule_content: String is abstract
+
+	fun compiles_to_o_file: Bool do return false
+
+	fun add_to_jar: Bool do return false
 end
 
 # An extern C file to compile
@@ -141,5 +145,7 @@ class ExternCFile
 		var o = makefile_rule_name
 		return "$(CC) $(CFLAGS) {self.cflags} -c -o {o} {ff}"
 	end
+
+	redef fun compiles_to_o_file do return true
 end
 

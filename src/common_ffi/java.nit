@@ -232,8 +232,8 @@ redef class AModule
 	# Tell the C compiler where to find jni.h and how to link with libjvm
 	private fun insert_compiler_options
 	do
-		c_compiler_options = "{c_compiler_options} -I $(JAVA_HOME)/include/"
-		c_linker_options = "{c_linker_options} -L $(JNI_LIB_PATH) -ljvm"
+		mmodule.c_compiler_options = "{mmodule.c_compiler_options} -I $(JAVA_HOME)/include/"
+		mmodule.c_linker_options = "{mmodule.c_linker_options} -L $(JNI_LIB_PATH) -ljvm"
 	end
 end
 
@@ -332,6 +332,7 @@ class JavaFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
 	redef fun makefile_rule_content do return "javac {filename} -d ."
+	redef fun add_to_jar do return true
 end
 
 # Context in pure Java code

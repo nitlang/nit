@@ -324,6 +324,8 @@ class MakefileToolchain
 			dep_rules.add(o)
 		end
 
+		var java_files = new Array[ExternFile]
+
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
@@ -331,7 +333,21 @@ class MakefileToolchain
 			makefile.write("{o}: {ff}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
-			ofiles.add(o)
+
+			if f.compiles_to_o_file then ofiles.add(o)
+			if f.add_to_jar then java_files.add(f)
+		end
+		
+		if not java_files.is_empty then
+			var jar_file = "{outpath}.jar"
+
+			var class_files_array = new Array[String]
+			for f in java_files do class_files_array.add(f.makefile_rule_name)
+			var class_files = class_files_array.join(" ")
+
+			makefile.write("{jar_file}: {class_files}\n")
+			makefile.write("\tjar cf {jar_file} {class_files}\n\n")
+			dep_rules.add jar_file
 		end
 
 		# Link edition
