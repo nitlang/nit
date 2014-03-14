@@ -10,6 +10,7 @@ done
 	../examples/*.nit \
 	../examples/leapfrog/leapfrog.nit \
 	../examples/shoot/src/shoot_logic.nit \
+	../examples/*/src/*_android.nit \
 	../lib/*.nit $list \
 	../src/nitdoc.nit \
 	../src/test_parser.nit \
