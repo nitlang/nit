@@ -209,6 +209,21 @@ interface Numeric
 
 	# Division of `self` with `i`
 	fun /(i: OTHER): OTHER is abstract
+
+	# The integer part of `self`.
+	#
+	#     assert (0.0).to_i      == 0
+	#     assert (0.9).to_i      == 0
+	#     assert (-0.9).to_i     == 0
+	#     assert (9.9).to_i      == 9
+	#     assert (-9.9).to_i     == -9
+	fun to_i: Int is abstract
+
+	# The float equivalent of `self`
+	#
+	#     assert 5.to_f         == 5.0
+	#     assert 5.to_f         != 5 # Float and Int are not equals
+	fun to_f: Float is abstract
 end
 
 ###############################################################################
@@ -256,14 +271,8 @@ universal Float
 	redef fun *(i) is intern
 	redef fun /(i) is intern
 
-	# The integer part of `self`.
-	#
-	#     assert (0.0).to_i      == 0
-	#     assert (0.9).to_i      == 0
-	#     assert (-0.9).to_i     == 0
-	#     assert (9.9).to_i      == 9
-	#     assert (-9.9).to_i     == -9
-	fun to_i: Int is intern
+	redef fun to_i is intern
+	redef fun to_f do return self
 end
 
 # Native integer numbers.
@@ -305,11 +314,8 @@ universal Int
 	#     assert 5.rshift(1)    == 2
 	fun rshift(i: Int): Int is intern
 
-	# The float equivalent of `self`
-	#
-	#     assert 5.to_f         == 5.0
-	#     assert 5.to_f         != 5 # Float and Int are not equals
-	fun to_f: Float is intern
+	redef fun to_i do return self
+	redef fun to_f is intern
 
 	redef fun distance(i)
 	do
