@@ -173,7 +173,7 @@ extern class JavaVM `{JavaVM *`}
 		abort
 	end
 
-	fun destroy_java_vm `{
+	fun destroy `{
 		(*recv)->DestroyJavaVM(recv);
 	`}
 end
