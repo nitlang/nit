@@ -73,7 +73,13 @@ extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
 
 	# Set the defaut config for a VM
 	# Can be called after setting the version
-	fun set_default `{ JNI_GetDefaultJavaVMInitArgs(recv); `}
+	#
+	# Unavailable on Android, where you cannot instanciate a new JVM.
+	fun set_default `{
+	#ifndef ANDROID
+		JNI_GetDefaultJavaVMInitArgs(recv);
+	#endif
+	`}
 
 	fun version: Int `{ return recv->version; `}
 	fun version=(v: Int) `{ recv->version = v; `}
@@ -110,7 +116,15 @@ end
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
 	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
+	#
+	# Unavailable on Android, where you cannot instanciate a new JVM.
 	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv as nullable `{
+
+	#ifdef ANDROID
+		JavaVM_jni_error(NULL, "JVM creation not supported on Android", 0);
+		return NULL;
+	#endif
+
 		JavaVM *jvm;
 		JNIEnv *env;
 		jint res;
