@@ -158,7 +158,7 @@ extern class JavaVM `{JavaVM *`}
 		res = JNI_CreateJavaVM(&jvm, (void**)&env, args);
 
 		if (res != 0) {
-			JavaVM_jni_error(NULL, "Could not create Java VM, error: {res}");
+			JavaVM_jni_error(NULL, "Could not create Java VM", res);
 			return NULL;
 		}
 		else {
@@ -167,9 +167,9 @@ extern class JavaVM `{JavaVM *`}
 		}
 	`}
 
-	fun jni_error(msg: NativeString)
+	fun jni_error(msg: NativeString, v: Int)
 	do
-		print "JNI Error: {msg}"
+		print "JNI Error: {msg} ({v})"
 		abort
 	end
 
