@@ -157,16 +157,10 @@ interface Discrete
 	redef type OTHER: Discrete
 
 	# The next element.
-	fun succ: OTHER do return self + 1
+	fun successor(i: Int): OTHER is abstract
 
 	# The previous element.
-	fun prec: OTHER do return self - 1
-
-	# The `i`-th successor element.
-	fun +(i: Int): OTHER is abstract
-
-	# The `i`-th previous element.
-	fun -(i: Int): OTHER is abstract
+	fun predecessor(i: Int): OTHER is abstract
 
 	# The distance between self and d.
 	#
@@ -188,11 +182,33 @@ interface Discrete
 
 		var nb = 0
 		while cursor < stop do
-			cursor = cursor.succ
+			cursor = cursor.successor(1)
 			nb += 1
 		end
 		return nb
 	end
+end
+
+# A numeric value supporting mathematical operations
+interface Numeric
+	super Comparable
+
+	redef type OTHER: Numeric
+
+	# Addition of `self` with `i`
+	fun +(i: OTHER): OTHER is abstract
+
+	# Substraction of `i` from `self`
+	fun -(i: OTHER): OTHER is abstract
+
+	# Inverse of `self`
+	fun -: OTHER is abstract
+
+	# Multiplication of `self` with `i`
+	fun *(i: OTHER): OTHER is abstract
+
+	# Division of `self` with `i`
+	fun /(i: OTHER): OTHER is abstract
 end
 
 ###############################################################################
@@ -222,22 +238,23 @@ end
 # Native floating point numbers.
 # Corresponds to C float.
 universal Float
-	super Comparable
+	super Numeric
 
 	redef type OTHER: Float
 
 	redef fun object_id is intern
 	redef fun output is intern
 
-	redef fun <=(i) is intern
-	redef fun <(i) is intern
-	redef fun >=(i) is intern
-	redef fun >(i) is intern
-	fun +(i: Float): Float is intern
-	fun -: Float is intern
-	fun -(i: Float): Float is intern
-	fun *(i: Float): Float is intern
-	fun /(i: Float): Float is intern
+	redef fun <=(i): Bool is intern
+	redef fun <(i): Bool is intern
+	redef fun >=(i): Bool is intern
+	redef fun >(i): Bool is intern
+
+	redef fun +(i) is intern
+	redef fun - is intern
+	redef fun -(i) is intern
+	redef fun *(i) is intern
+	redef fun /(i) is intern
 
 	# The integer part of `self`.
 	#
@@ -253,7 +270,12 @@ end
 # Correspond to C int.
 universal Int
 	super Discrete
+	super Numeric
+
 	redef type OTHER: Int
+
+	redef fun successor(i) do return self + i
+	redef fun predecessor(i) do return self - i
 
 	redef fun object_id is intern
 	redef fun hash do return self
@@ -266,10 +288,11 @@ universal Int
 	redef fun >=(i) is intern
 	redef fun >(i) is intern
 	redef fun +(i) is intern
-	fun -: Int is intern
+
+	redef fun - is intern
 	redef fun -(i) is intern
-	fun *(i: Int): Int is intern
-	fun /(i: Int): Int is intern
+	redef fun *(i) is intern
+	redef fun /(i) is intern
 	fun %(i: Int): Int is intern
 
 	# `i` bits shift fo the left (aka <<)
@@ -288,8 +311,6 @@ universal Int
 	#     assert 5.to_f         != 5 # Float and Int are not equals
 	fun to_f: Float is intern
 
-	redef fun succ is intern
-	redef fun prec is intern
 	redef fun distance(i)
 	do
 		var d = self - i
@@ -442,8 +463,8 @@ universal Char
 	redef fun >=(i) is intern
 	redef fun >(i) is intern
 
-	redef fun succ is intern
-	redef fun prec is intern
+	redef fun successor(i) is intern
+	redef fun predecessor(i) is intern
 
 	redef fun distance(c)
 	do
@@ -475,9 +496,6 @@ universal Char
 	#     assert 'a'.ascii    == 97
 	#     assert '\n'.ascii   == 10
 	fun ascii: Int is intern
-
-	redef fun +(i) is intern
-	redef fun -(i) is intern
 
 	# Return the lower case version of self.
 	# If self is not a letter, then return self

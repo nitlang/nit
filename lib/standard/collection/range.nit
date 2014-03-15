@@ -60,7 +60,7 @@ class Range[E: Discrete]
 	do
 		_first = from
 		_last = to
-		_after = to.succ
+		_after = to.successor(1)
 	end
 
 	# Create a range [`from`, `to`[.
@@ -68,7 +68,7 @@ class Range[E: Discrete]
 	init without_last(from: E, to: E)
 	do
 		_first = from
-		_last = to.prec
+		_last = to.predecessor(1)
 		_after = to
 	end
 end
@@ -81,7 +81,7 @@ private class IteratorRange[E: Discrete]
 
 	redef fun is_ok do return _item < _range.after
 	
-	redef fun next do _item = _item.succ
+	redef fun next do _item = _item.successor(1)
 	
 	init(r: Range[E])
 	do
