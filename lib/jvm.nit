@@ -176,6 +176,16 @@ extern class JavaVM `{JavaVM *`}
 	fun destroy `{
 		(*recv)->DestroyJavaVM(recv);
 	`}
+
+	fun env: JniEnv import jni_error `{
+		JNIEnv *env;
+		int res = (*recv)->GetEnv(recv, (void **)&env, JNI_VERSION_1_6);
+		if (res != JNI_OK) {
+			JavaVM_jni_error(NULL, "Could not get JNIEnv from Java VM", res);
+			return NULL;
+		}
+		return env;
+	`}
 end
 
 # Represents a jni JNIEnv, which is a thread in a JavaVM
