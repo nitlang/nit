@@ -222,13 +222,17 @@ end
 # Native floating point numbers.
 # Corresponds to C float.
 universal Float
+	super Comparable
+
+	redef type OTHER: Float
+
 	redef fun object_id is intern
 	redef fun output is intern
 
-	fun <=(i: Float): Bool is intern
-	fun <(i: Float): Bool is intern
-	fun >=(i: Float): Bool is intern
-	fun >(i: Float): Bool is intern
+	redef fun <=(i) is intern
+	redef fun <(i) is intern
+	redef fun >=(i) is intern
+	redef fun >(i) is intern
 	fun +(i: Float): Float is intern
 	fun -: Float is intern
 	fun -(i: Float): Float is intern
