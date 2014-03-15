@@ -224,6 +224,12 @@ interface Numeric
 	#     assert 5.to_f         == 5.0
 	#     assert 5.to_f         != 5 # Float and Int are not equals
 	fun to_f: Float is abstract
+
+	# Is this the value of zero in its domain?
+	fun is_zero: Bool do return self == zero
+
+	# The value of zero in the domain of `self`
+	fun zero: OTHER is abstract
 end
 
 ###############################################################################
@@ -273,6 +279,8 @@ universal Float
 
 	redef fun to_i is intern
 	redef fun to_f do return self
+
+	redef fun zero do return 0.0
 end
 
 # Native integer numbers.
@@ -303,6 +311,8 @@ universal Int
 	redef fun *(i) is intern
 	redef fun /(i) is intern
 	fun %(i: Int): Int is intern
+
+	redef fun zero do return 0
 
 	# `i` bits shift fo the left (aka <<)
 	#
