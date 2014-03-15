@@ -19,6 +19,7 @@ module android_platform
 
 import platform
 import abstract_compiler
+import common_ffi
 
 redef class ToolContext
 	redef fun platform_from_name(name)
@@ -231,5 +232,16 @@ $(call import-module,android/native_app_glue)
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}.apk"
 		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
+	end
+end
+
+redef class JavaClassTemplate
+	redef fun write_to_files(compdir)
+	do
+		var jni_path = "jni/nit_compile/"
+		if compdir.has_suffix(jni_path) then
+			var path = "{compdir.substring(0, compdir.length-jni_path.length)}/src/"
+			return super(path)
+		else return super
 	end
 end

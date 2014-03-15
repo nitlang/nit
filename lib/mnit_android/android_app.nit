@@ -588,3 +588,18 @@ redef class App
 		}
 	`}
 end
+
+redef class Sys
+	# Get the running JVM
+	redef fun create_default_jvm
+	do
+		var jvm = ndk_jvm
+		var jni_env = jvm.attach_current_thread
+		if jni_env.address_is_null then jni_env = jvm.env
+
+		self.jvm = jvm
+		self.jni_env = jni_env
+	end
+
+	protected fun ndk_jvm: JavaVM `{ return mnit_java_app->activity->vm; `}
+end
