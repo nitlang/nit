@@ -186,6 +186,15 @@ extern class JavaVM `{JavaVM *`}
 		}
 		return env;
 	`}
+
+	fun attach_current_thread: JniEnv `{
+		JNIEnv *env;
+		int res = (*recv)->AttachCurrentThread(recv, (void**)&env, NULL);
+		if (res != JNI_OK) {
+			JavaVM_jni_error(NULL, "Could not attach current thread to Java VM", res);
+			return NULL;
+		}
+	`}
 end
 
 # Represents a jni JNIEnv, which is a thread in a JavaVM
