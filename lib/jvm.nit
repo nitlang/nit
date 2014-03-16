@@ -87,14 +87,14 @@ end
 
 extern class JavaVMOption `{ JavaVMOption* `}
 	fun string: String import NativeString.to_s `{
-		return NativeString_to_s(recv->optionString);
+		return NativeString_to_s((char*)recv->optionString);
 	`}
 	fun string=(v: String) import String.to_cstring `{
 		recv->optionString = String_to_cstring(v);
 	`}
 
 	fun extra_info: String import NativeString.to_s `{
-		return NativeString_to_s(recv->extraInfo);
+		return NativeString_to_s((char*)recv->extraInfo);
 	`}
 	fun extra_info=(v: String) import String.to_cstring `{
 		recv->extraInfo = String_to_cstring(v);
@@ -377,7 +377,7 @@ end
 # Represents a jni JNINNativeMethod
 extern class JNINativeMethod `{ JNINativeMethod* `}
 	fun name: String import NativeString.to_s `{
-		return NativeString_to_s(recv->name);
+		return NativeString_to_s((void*)recv->name);
 	`}
 
 	fun name=(name: String) import String.to_cstring `{
@@ -385,7 +385,7 @@ extern class JNINativeMethod `{ JNINativeMethod* `}
 	`}
 
 	fun signature: String import NativeString.to_s `{
-		return NativeString_to_s(recv->signature);
+		return NativeString_to_s((void*)recv->signature);
 	`}
 
 	fun signature=(signature: String) import String.to_cstring `{
