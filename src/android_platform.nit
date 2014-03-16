@@ -141,10 +141,9 @@ $(call import-module,android/native_app_glue)
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk android:minSdkVersion="9" />
 
-    <!-- This .apk has no Java code itself, so set hasCode to false. -->
     <application
 		android:label="@string/app_name"
-		android:hasCode="false"
+		android:hasCode="true"
 		android:debuggable="true">
 
         <!-- Our activity is the built-in NativeActivity framework class.
