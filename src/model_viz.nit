@@ -62,7 +62,7 @@ end
 # Compare modules and groups using the
 # FIXME do not use Object, but a better common interface of MModule and MGroup
 private class LinexComparator
-	super AbstractSorter[Object]
+	super Comparator[Object]
 	var mins = new HashMap [MGroup, nullable MModule]
 	var maxs = new HashMap [MGroup, nullable MModule]
 	fun min(o: Object): nullable MModule do
