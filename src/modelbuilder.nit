@@ -395,6 +395,7 @@ class ModelBuilder
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
+		mgroup.module_paths.add(res)
 
 		identified_files[rp] = res
 		return res
@@ -647,6 +648,10 @@ private class ModulePath
 	redef fun to_s do return filepath
 end
 
+redef class MGroup
+	# modules paths associated with the group
+	private var module_paths = new Array[ModulePath]
+end
 
 redef class AStdImport
 	# The imported module once determined
