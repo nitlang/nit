@@ -240,12 +240,24 @@ redef class String
 	end
 
 	# Extract the basename of a path and remove the extension
+	#
+	#     assert "/path/to/a_file.ext".basename(".ext")         == "a_file"
+	#     assert "path/to/a_file.ext".basename(".ext")          == "a_file"
+	#     assert "path/to".basename(".ext")                     == "to"
+	#     assert "path/to/".basename(".ext")                    == "to"
+	#     assert "path".basename("")                        == "path"
+	#     assert "/path".basename("")                       == "path"
+	#     assert "/".basename("")                           == "/"
+	#     assert "".basename("")                            == ""
 	fun basename(ext: String): String
 	do
-		var pos = last_index_of_from('/', _length - 1)
+		var l = _length - 1 # Index of the last char
+		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
+		if l == 0 then return "/"
+		var pos = last_index_of_from('/', l)
 		var n = self
 		if pos >= 0 then
-			n = substring_from(pos+1)
+			n = substring(pos+1, l-pos)
 		end
 		return n.strip_extension(ext)
 	end
@@ -263,7 +275,7 @@ redef class String
 	fun dirname: String
 	do
 		var l = _length - 1 # Index of the last char
-		if l > 0 and self.chars[l] == '/' then l -= 1 # remove trailing `/`
+		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
 			return substring(0, pos)
