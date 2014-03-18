@@ -86,9 +86,9 @@ for mm in mmodules do
 	end
 
 	if dir != null then
-		page.save("{dir}/{mm.name}.html")
+		page.write_to_file("{dir}/{mm.name}.html")
 	else
-		print page.html
+		page.write_to(stdout)
 	end
 end
 
@@ -109,7 +109,7 @@ if dir != null then
 		n2.text(mm.name)
 	end
 	page.add_raw_html "</li></body>"
-	page.save("{dir}/index.html")
+	page.write_to_file("{dir}/index.html")
 
 	var v = new HighlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)
