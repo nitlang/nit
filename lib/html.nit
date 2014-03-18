@@ -27,6 +27,7 @@ module html
 # HTMLPage use fluent interface so you can chain calls as:
 #	add("div").attr("id", "mydiv").text("My Div")
 class HTMLPage
+	super Streamable
 
 	# Define head content
 	fun head do end
@@ -37,8 +38,7 @@ class HTMLPage
 	private var current: HTMLTag = root
 	private var stack = new List[HTMLTag]
 
-	# Render the page as a html string
-	fun render: String do
+	redef fun write_to(stream) do
 		root.children.clear
 		open("head")
 		head
@@ -46,7 +46,8 @@ class HTMLPage
 		open("body")
 		body
 		close("body")
-		return "<!DOCTYPE html>{root.html}"
+		stream.write "<!DOCTYPE html>"
+		root.write_to(stream)
 	end
 
 	# Add a html tag to the current element
@@ -81,16 +82,11 @@ class HTMLPage
 		end
 		current = stack.pop
 	end
-
-	# Save html page in the specified file
-	fun save(file: String) do
-		var out = new OFStream.open(file)
-		out.write(self.render)
-		out.close
-	end
 end
 
 class HTMLTag
+	super Streamable
+
 	# HTML tagname: 'div' for <div></div>
 	var tag: String
 	init(tag: String) do
@@ -164,7 +160,7 @@ class HTMLTag
 	# Clear all child and set the text of element
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
-	#     assert p.html      ==  "<p>Hello World!</p>"
+	#     assert p.write_to_string      ==  "<p>Hello World!</p>"
 	# Text is escaped see: `standard::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
@@ -178,7 +174,7 @@ class HTMLTag
 	#     p.append("Hello")
 	#     p.add(new HTMLTag("br"))
 	#     p.append("World!")
-	#     assert p.html      ==  "<p>Hello<br/>World!</p>"
+	#     assert p.write_to_string      ==  "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
 		add(new HTMLRaw(txt.html_escape))
@@ -196,22 +192,12 @@ class HTMLTag
 		return self
 	end
 
-	# Render the element as HTML string
-	fun html: String do
-		var res = new Array[String]
-		render_in(res)
-		return res.to_s
-	end
-
-	# Save html page in the specified file
-	fun save(file: String) do
-		var out = new OFStream.open(file)
+	redef fun write_to(stream) do
 		var res = new Array[String]
 		render_in(res)
 		for r in res do
-			out.write(r)
+			stream.write(r)
 		end
-		out.close
 	end
 
 	# In order to avoid recursive concatenation,
@@ -280,6 +266,5 @@ private class HTMLRaw
 
 	private var content: String
 	init(content: String) do self.content = content
-	redef fun html do return content
 	redef fun render_in(res) do res.add content
 end

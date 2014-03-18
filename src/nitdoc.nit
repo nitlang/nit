@@ -1814,7 +1814,7 @@ redef class AModule
 
 	private fun full_markdown: String do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			return n_moduledecl.n_doc.full_markdown.html
+			return n_moduledecl.n_doc.full_markdown.write_to_string
 		end
 		return ""
 	end
@@ -1841,7 +1841,7 @@ redef class AStdClassdef
 	end
 
 	private fun full_markdown: String do
-		if n_doc != null then return n_doc.full_markdown.html
+		if n_doc != null then return n_doc.full_markdown.write_to_string
 		return ""
 	end
 
@@ -1865,7 +1865,7 @@ redef class APropdef
 	end
 
 	private fun full_markdown: String do
-		if n_doc != null then return n_doc.full_markdown.html
+		if n_doc != null then return n_doc.full_markdown.write_to_string
 		return ""
 	end
 
