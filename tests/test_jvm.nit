@@ -15,9 +15,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Manipulats the Java Virtual Machine
-#
-# See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
+# No alt works
+# alt1 sets a wrong classpath and should fail on class loading
+# alt2 looks for a non existant class
+# alt3-4 looks for non existant methods
+
 import jvm
 
 redef extern class JniEnv
@@ -38,6 +40,8 @@ print "Initialisation de la JVM ..."
 
 var builder = new JavaVMBuilder
 builder.options.add "-Djava.class.path=."
+#alt1#builder.options.clear
+#alt1#builder.options.add "-Djava.class.path=/tmp/"
 var jvm = builder.create_jvm
 var env = builder.jni_env
 assert env != null
@@ -48,6 +52,7 @@ assert not jvm.env.address_is_null
 print "---------------------Test 1----------------------"
 # get the class
 var queue_c = env.find_class("test_jvm/Queue")
+#alt2#queue_c = env.find_class("test_jvm/Queue_error_in_name")
 if queue_c.address_is_null then env.print_error("Queue class not found")
 
 # get the methods of the class
@@ -55,6 +60,8 @@ var f_init = env.get_method_id(queue_c, "<init>", "()V")
 if f_init.address_is_null then env.print_error("fInit not found")
 
 var f_push = env.get_method_id(queue_c, "push", "(Ljava/lang/String;)V")
+#alt3#f_push = env.get_method_id(queue_c, "push_error", "(Ljava/lang/String;)V")
+#alt4#f_push = env.get_method_id(queue_c, "push", "(Ljava/lang/String;ZZZ)V")
 if f_push.address_is_null then env.print_error("fPush not found")
 
 var f_pop = env.get_method_id(queue_c, "pop", "()Ljava/lang/String;")
