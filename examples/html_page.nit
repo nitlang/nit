@@ -101,5 +101,5 @@ class NitHomepage
 end
 
 var page = new NitHomepage
-print page.render
-page.save("nit.html")
+page.write_to stdout
+page.write_to_file("nit.html")

@@ -102,10 +102,24 @@ end
 #
 # The point of this interface it to allow is instance to be efficenty
 # writen into a OStream without having to allocate a big String object
+#
+# ready-to-save documents usually provide this interface.
 interface Streamable
 	# Write itself to a `stream`
 	# The specific logic it let to the concrete subclasses
 	fun write_to(stream: OStream) is abstract
+
+	# Like `write_to` but return a new String (may be quite large)
+	#
+	# This funtionnality is anectodical, since the point
+	# of streamable object to to be efficienlty written to a
+	# stream without having to allocate and concatenate strings
+	fun write_to_string: String
+	do
+		var stream = new StringOStream
+		write_to(stream)
+		return stream.to_s
+	end
 end
 
 redef class String

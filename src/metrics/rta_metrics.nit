@@ -83,10 +83,7 @@ private class RTAMetricsPhase
 		# dump type and method infos
 		if csv then
 			analysis.live_types_to_csv.save("{out}/rta_types.csv")
-
-			var s = new OFStream.open("{out}/rta_methods.dat")
-			analysis.live_methods_to_tree.pretty(s)
-			s.close
+			analysis.live_methods_to_tree.write_to_file("{out}/rta_methods.dat")
 		end
 	end
 end

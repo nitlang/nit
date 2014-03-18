@@ -247,4 +247,4 @@ end
 
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
-page.save(file)
+page.write_to_file(file)
