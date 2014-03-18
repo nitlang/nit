@@ -297,6 +297,25 @@ class ModelBuilder
 			end
 		end
 
+		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+
+		if candidate == null then
+			if mmodule != null then
+				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
+			else
+				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
+			end
+			return null
+		end
+		var res = self.load_module(candidate)
+		if res == null then return null # Forward error
+		return res.mmodule.as(not null)
+	end
+
+	# Search a module `name` from path `lookpaths`.
+	# If found, the path of the file is returned
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable String
+	do
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
@@ -308,7 +327,7 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
@@ -321,22 +340,12 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
 		end
-		if candidate == null then
-			if mmodule != null then
-				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
-			else
-				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
-			end
-			return null
-		end
-		var res = self.load_module(candidate)
-		if res == null then return null # Forward error
-		return res.mmodule.as(not null)
+		return candidate
 	end
 
 	# cache for `identify_file` by realpath
