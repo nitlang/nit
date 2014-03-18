@@ -553,4 +553,7 @@ end
 extern Pointer
 	# Is the address behind this Object at NULL?
 	fun address_is_null: Bool `{ return recv == NULL; `}
+
+	# Free the memory pointed by this pointer
+	fun free `{ free(recv); `}
 end
