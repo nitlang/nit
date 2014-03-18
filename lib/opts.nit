@@ -68,7 +68,7 @@ abstract class Option
 	# A pretty print for this help
 	fun pretty(off: Int): String
 	do
-		var text = new Buffer.from("  ")
+		var text = new FlatBuffer.from("  ")
 		text.append(_names.join(", "))
 		text.append("  ")
 		var rest = off - text.length
