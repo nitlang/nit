@@ -44,7 +44,7 @@ doc/stdlib/index.html: bin/nitdoc
 		--piwik-site-id "2"
 
 doc/nitc/index.html: bin/nitdoc
-	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
+	bin/nitdoc src/nit*.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
