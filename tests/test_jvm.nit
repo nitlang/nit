@@ -42,6 +42,9 @@ var jvm = builder.create_jvm
 var env = builder.jni_env
 assert env != null
 
+# Test JavaVM::env
+assert not jvm.env.address_is_null
+
 print "---------------------Test 1----------------------"
 # get the class
 var queue_c = env.find_class("test_jvm/Queue")
@@ -148,3 +151,5 @@ print v_bool
 print v_char
 print v_i
 print v_f
+
+jvm.destroy
