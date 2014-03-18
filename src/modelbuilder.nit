@@ -355,9 +355,25 @@ class ModelBuilder
 	# Load the associated project and groups if required
 	private fun identify_file(path: String): nullable ModulePath
 	do
-		if not path.file_exists then
-			toolcontext.error(null, "Error: `{path}` does not exists")
-			return null
+		# special case for not a nit file
+		if path.file_extension != "nit" then
+			# search in known -I paths
+			var candidate = search_module_in_paths(null, path, self.paths)
+
+			# Found nothins? maybe it is a group...
+			if candidate == null and path.file_exists then
+				var mgroup = get_mgroup(path)
+				if mgroup != null then
+					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
+					if owner_path.file_exists then candidate = owner_path
+				end
+			end
+
+			if candidate == null then
+				toolcontext.error(null, "Error: cannot find module `{path}`.")
+				return null
+			end
+			path = candidate
 		end
 
 		# Fast track, the path is already known
@@ -478,7 +494,7 @@ class ModelBuilder
 		end
 
 		# Load it manually
-		var nmodule = load_module_ast(filename)
+		var nmodule = load_module_ast(file.filepath)
 		if nmodule == null then return null # forward error
 
 		# build the mmodule and load imported modules
