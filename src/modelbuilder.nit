@@ -252,9 +252,6 @@ class ModelBuilder
 	# FIXME: add a way to handle module name conflict
 	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
 	do
-		# what path where tried to display on error message
-		var tries = new Array[String]
-
 		# First, look in groups of the module
 		if mmodule != null then
 			var mgroup = mmodule.mgroup
@@ -265,7 +262,6 @@ class ModelBuilder
 
 				# Second, try the directory to find a file
 				var try_file = dirname + "/" + name + ".nit"
-				tries.add try_file
 				if try_file.file_exists then
 					var res = self.load_module(try_file.simplify_path)
 					if res == null then return null # Forward error
@@ -304,7 +300,6 @@ class ModelBuilder
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -333,9 +328,9 @@ class ModelBuilder
 		end
 		if candidate == null then
 			if mmodule != null then
-				error(anode, "Error: cannot find module {name} from {mmodule}. tried {tries.join(", ")}")
+				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
 			else
-				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
+				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
 			end
 			return null
 		end
