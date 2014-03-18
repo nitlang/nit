@@ -23,7 +23,7 @@ let loaded_syntastic_nit_nitg_checker = 1
 if exists('g:syntastic_nitg')
 	let s:nitg = g:syntastic_nitg
 else
-	let s:nitg = "nitg"
+	let s:nitg = "nitc"
 endif
 
 if !executable(s:nitg)
