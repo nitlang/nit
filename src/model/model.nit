@@ -1813,8 +1813,11 @@ class MMethodDef
 	# The signature attached to the property definition
 	var msignature: nullable MSignature writable = null
 
-	# The the method definition abstract?
+	# Is the method definition abstract?
 	var is_abstract: Bool writable = false
+
+	# Is the method definition intern?
+	var is_intern writable = false
 end
 
 # A local definition of an attribute

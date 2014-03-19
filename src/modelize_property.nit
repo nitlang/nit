@@ -502,6 +502,7 @@ redef class AMethPropdef
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
+		mpropdef.is_intern = self isa AInternMethPropdef
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
