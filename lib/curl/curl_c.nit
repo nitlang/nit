@@ -200,18 +200,18 @@ extern CCurl `{ CURL * `}
 		CURLcode e;
 		switch(cbtype){
 			case CURLcallbackTypeHeader:
-				e = curl_easy_setopt( recv, CURLOPT_HEADERFUNCTION, &nit_curl_callback_func);
+				e = curl_easy_setopt( recv, CURLOPT_HEADERFUNCTION, (curl_write_callback)&nit_curl_callback_func);
 				if(e != CURLE_OK) return e;
 				e = curl_easy_setopt( recv, CURLOPT_WRITEHEADER, d);
 			break;
 			case CURLcallbackTypeBody:
 			case CURLcallbackTypeStream:
-				e = curl_easy_setopt( recv, CURLOPT_WRITEFUNCTION, &nit_curl_callback_func);
+				e = curl_easy_setopt( recv, CURLOPT_WRITEFUNCTION, (curl_write_callback)&nit_curl_callback_func);
 				if(e != CURLE_OK) return e;
 				e = curl_easy_setopt( recv, CURLOPT_WRITEDATA, d);
 			break;
 			case CURLcallbackTypeRead:
-				e = curl_easy_setopt( recv, CURLOPT_READFUNCTION, &nit_curl_callback_read_func);
+				e = curl_easy_setopt( recv, CURLOPT_READFUNCTION, (curl_write_callback)&nit_curl_callback_read_func);
 			default:
 			break;
 		}
