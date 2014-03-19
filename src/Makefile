@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight
+all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls
 
 ../bin/nitg: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
@@ -66,6 +66,13 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitlight -v nitlight.nit
+
+../bin/nitls : ../bin/nitg
+	@echo '***************************************************************'
+	@echo '* Compile nitls from NIT source files                         *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitg ${NITCOPT} -o ../bin/nitls -v nitls.nit
 
 ../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'

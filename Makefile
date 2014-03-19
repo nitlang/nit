@@ -27,11 +27,14 @@ tools:
 bin/nitdoc:
 	cd src; make ../bin/nitdoc
 
-doc/stdlib/index.html: bin/nitdoc
+bin/nitls:
+	cd src; make ../bin/nitls
+
+doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit $$(find lib/*/*.nit -maxdepth 0 -type f ) -d doc/stdlib \
+	bin/nitdoc $$(bin/nitls lib -r) -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
@@ -44,7 +47,7 @@ doc/stdlib/index.html: bin/nitdoc
 		--piwik-site-id "2"
 
 doc/nitc/index.html: bin/nitdoc
-	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
+	bin/nitdoc src/nit*.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
