@@ -238,6 +238,12 @@ redef class APropdef
 		return mvisibility
 	end
 
+	private fun set_doc(mpropdef: MPropDef)
+	do
+		var ndoc = self.n_doc
+		if ndoc != null then mpropdef.mdoc = ndoc.to_mdoc
+	end
+
 	private fun check_redef_property_visibility(modelbuilder: ModelBuilder, nclassdef: AClassdef, nvisibility: nullable AVisibility, mprop: MProperty)
 	do
 		if nvisibility == null then return
@@ -415,6 +421,8 @@ redef class AMethPropdef
 		end
 
 		mclassdef.propdef_names.add(mpropdef.mproperty.name)
+
+		set_doc(mpropdef)
 
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -594,6 +602,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
+			set_doc(mpropdef)
 
 			var nreadable = self.n_readable
 			if nreadable != null then
@@ -612,6 +621,7 @@ redef class AAttrPropdef
 				var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 				self.mreadpropdef = mreadpropdef
 				modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+				mreadpropdef.mdoc = mpropdef.mdoc
 			end
 
 			var nwritable = self.n_writable
@@ -631,6 +641,7 @@ redef class AAttrPropdef
 				var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 				self.mwritepropdef = mwritepropdef
 				modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+				mwritepropdef.mdoc = mpropdef.mdoc
 			end
 		else
 			# New attribute style
@@ -639,6 +650,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
+			set_doc(mpropdef)
 
 			var readname = name
 			var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
@@ -655,6 +667,7 @@ redef class AAttrPropdef
 			var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+			mreadpropdef.mdoc = mpropdef.mdoc
 
 			var writename = name + "="
 			var nwritable = self.n_writable
@@ -681,6 +694,7 @@ redef class AAttrPropdef
 			var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 			self.mwritepropdef = mwritepropdef
 			modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+			mwritepropdef.mdoc = mpropdef.mdoc
 		end
 	end
 
@@ -869,6 +883,7 @@ redef class ATypePropdef
 
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
+		set_doc(mpropdef)
 	end
 
 	redef fun build_signature(modelbuilder, nclassdef)
