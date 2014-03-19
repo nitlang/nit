@@ -17,3 +17,4 @@ List Nit source files
   -t, --tree              List source files in their groups and projects
   -s, --source            List source files
   -p, --project           List projects paths (default)
+  -M, --depends           List dependencies of given modules

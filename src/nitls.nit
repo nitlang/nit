@@ -29,17 +29,30 @@ var opt_recursive = new OptionBool("Process directories recussively", "-r", "--r
 var opt_tree = new OptionBool("List source files in their groups and projects", "-t", "--tree")
 var opt_source = new OptionBool("List source files", "-s", "--source")
 var opt_project = new OptionBool("List projects paths (default)", "-p", "--project")
+var opt_depends = new OptionBool("List dependencies of given modules", "-M", "--depends")
 
-tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project)
+tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends)
 
 tc.process_options
 
-var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
+var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i + opt_depends.value.to_i
 if sum > 1 or tc.option_context.rest.is_empty or tc.opt_help.value then
 	print "Usage: nitls [OPTION].. [FILES]..."
 	print "List Nit source files"
 	tc.option_context.usage
 	exit 0
+end
+
+if opt_depends.value then
+	if opt_recursive.value then
+		print "-M incompatible with -r"
+		exit 1
+	end
+
+	mb.parse(tc.option_context.rest)
+	for x in model.mmodules do
+		print x.location.file.filename
+	end
 end
 
 if sum == 0 then opt_project.value = true
