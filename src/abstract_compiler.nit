@@ -335,7 +335,7 @@ class MakefileToolchain
 				var o = f.makefile_rule_name
 				var ff = f.filename.basename("")
 				makefile.write("{o}: {ff}\n")
-				makefile.write("\t{f.makefile_rule_content}\n")
+				makefile.write("\t{f.makefile_rule_content}\n\n")
 				dep_rules.add(f.makefile_rule_name)
 
 				if f isa ExternCppFile then ofiles.add(o)
@@ -343,7 +343,7 @@ class MakefileToolchain
 		end
 
 		# Link edition
-		makefile.write("{outpath}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
