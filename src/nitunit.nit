@@ -70,7 +70,7 @@ class NitUnitExecutor
 	do
 		block.clear
 
-		work(ndoc)
+		work(ndoc.to_mdoc)
 
 		if block.is_empty then return
 
