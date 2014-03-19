@@ -792,6 +792,10 @@ abstract class AbstractCompilerVisitor
 
 	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
+		var mmethoddef = callsite.mpropdef
+		if mmethoddef.is_intern then
+			return self.call(mmethoddef, mmethoddef.mclassdef.bound_mtype, args)
+		end
 		return self.send(callsite.mproperty, args)
 	end
 
