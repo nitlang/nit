@@ -571,21 +571,64 @@ interface SequenceRead[E]
 		return self[length-1]
 	end
 
-	# Return the index of the first occurrence of `item`.
-	# Return -1 if `item` is not found
-	# Comparison is done with ==
+	# The index of the first occurrence of `item`.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
 	#
 	#     var a = [10,20,30,10,20,30]
 	#     assert a.index_of(20)   == 1
 	#     assert a.index_of(40)   == -1
-	fun index_of(item: E): Int
+	fun index_of(item: E): Int do return index_of_from(item, 0)
+
+	# The index of the last occurrence of `item`.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.last_index_of(20)   == 4
+	#     assert a.last_index_of(40)   == -1
+	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+
+	# The index of the first occurrence of `item`, starting from pos.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.index_of_from(20, 3)   == 4
+	#     assert a.index_of_from(20, 4)   == 4
+	#     assert a.index_of_from(20, 5)   == -1
+	fun index_of_from(item: E, pos: Int): Int
 	do
+		var p = 0
 		var i = iterator
 		while i.is_ok do
-			if i.item == item then return i.index
+			if p>pos and i.item == item then return i.index
 			i.next
+			p += 1
 		end
 		return -1
+	end
+
+	# The index of the last occurrence of `item` starting from `pos` and decrementing.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.last_index_of_from(20, 2)   == 1
+	#     assert a.last_index_of_from(20, 1)   == 1
+	#     assert a.last_index_of_from(20, 0)   == -1
+	fun last_index_of_from(item: E, pos: Int): Int
+	do
+		var res = -1
+		var p = 0
+		var i = iterator
+		while i.is_ok do
+			if p>pos then break
+			if i.item == item then res = p
+			i.next
+			p += 1
+		end
+		return res
 	end
 
 	redef fun iterator: IndexedIterator[E] is abstract
