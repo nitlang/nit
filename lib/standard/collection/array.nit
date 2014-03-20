@@ -343,7 +343,7 @@ class Array[E]
 end
 
 # An `Iterator` on `AbstractArray`
-class ArrayIterator[E]
+private class ArrayIterator[E]
 	super IndexedIterator[E]
 
 	redef fun item do return _array[_index]
@@ -416,7 +416,7 @@ class ArraySet[E: Object]
 end
 
 # Iterators on sets implemented with arrays.
-class ArraySetIterator[E: Object]
+private class ArraySetIterator[E: Object]
 	super Iterator[E]
 
 	redef fun is_ok do return _iter.is_ok
@@ -520,7 +520,7 @@ class ArrayMap[K: Object, E]
 	end
 end
 
-class ArrayMapKeys[K: Object, E]
+private class ArrayMapKeys[K: Object, E]
 	super RemovableCollection[K]
 	# The original map
 	var map: ArrayMap[K, E]
@@ -540,7 +540,7 @@ class ArrayMapKeys[K: Object, E]
 	redef fun remove_all(key) do self.remove(key)
 end
 
-class ArrayMapValues[K: Object, E]
+private class ArrayMapValues[K: Object, E]
 	super RemovableCollection[E]
 	# The original map
 	var map: ArrayMap[K, E]

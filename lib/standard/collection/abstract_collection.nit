@@ -189,7 +189,7 @@ class Container[E]
 end
 
 # This iterator is quite stupid since it is used for only one item.
-class ContainerIterator[E]
+private class ContainerIterator[E]
 	super Iterator[E]
 	redef fun item do return _container.item
 
