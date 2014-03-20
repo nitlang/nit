@@ -148,11 +148,35 @@ class HTMLTag
 		if not css_props.has_key(prop) then return null
 		return css_props[prop]
 	end
+	
+	# Replace self by parent
+	# var elem = new HTMLTag("li")
+	# elem.add_outer(new HTMLTag("ul"))
+	# elem is now an ul HTMLTag
+	# li.add_outer(ul)
+	fun add_outer(parent: HTMLTag) do
+		# copy self in new object
+                var child = new HTMLTag(self.tag)
+                child.attrs = self.attrs
+                child.classes = self.classes
+                child.css_props = self.css_props
+                child.children = self.children
+                # add copy in parent children elements
+                parent.children.add(child)
+                # replace self by parent
+                self.tag = parent.tag
+                self.attrs = parent.attrs
+                self.classes = parent.classes
+                self.css_props = parent.css_props
+                self.is_void = parent.is_void
+                self.children = parent.children
+        end
 
 	# Add a HTML 'child' to self
 	# var ul = new HTMLTag("ul")
 	# ul.add(new HTMLTag("li"))
-	fun add(child: HTMLTag) do children.add(child)
+        fun add(child: HTMLTag) do children.add(child)
+
 
 	# List of children HTML elements
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
