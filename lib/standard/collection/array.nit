@@ -176,7 +176,7 @@ abstract class AbstractArray[E]
 	redef fun unshift(item)
 	do
 		var i = length - 1
-		while i > 0 do
+		while i >= 0 do
 			self[i+1] = self[i]
 			i -= 1
 		end
