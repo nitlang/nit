@@ -252,9 +252,6 @@ class ModelBuilder
 	# FIXME: add a way to handle module name conflict
 	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
 	do
-		# what path where tried to display on error message
-		var tries = new Array[String]
-
 		# First, look in groups of the module
 		if mmodule != null then
 			var mgroup = mmodule.mgroup
@@ -265,7 +262,6 @@ class ModelBuilder
 
 				# Second, try the directory to find a file
 				var try_file = dirname + "/" + name + ".nit"
-				tries.add try_file
 				if try_file.file_exists then
 					var res = self.load_module(try_file.simplify_path)
 					if res == null then return null # Forward error
@@ -301,10 +297,28 @@ class ModelBuilder
 			end
 		end
 
+		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+
+		if candidate == null then
+			if mmodule != null then
+				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
+			else
+				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
+			end
+			return null
+		end
+		var res = self.load_module(candidate)
+		if res == null then return null # Forward error
+		return res.mmodule.as(not null)
+	end
+
+	# Search a module `name` from path `lookpaths`.
+	# If found, the path of the file is returned
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable String
+	do
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -313,7 +327,7 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
@@ -326,22 +340,12 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
 		end
-		if candidate == null then
-			if mmodule != null then
-				error(anode, "Error: cannot find module {name} from {mmodule}. tried {tries.join(", ")}")
-			else
-				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
-			end
-			return null
-		end
-		var res = self.load_module(candidate)
-		if res == null then return null # Forward error
-		return res.mmodule.as(not null)
+		return candidate
 	end
 
 	# cache for `identify_file` by realpath
@@ -351,9 +355,25 @@ class ModelBuilder
 	# Load the associated project and groups if required
 	private fun identify_file(path: String): nullable ModulePath
 	do
-		if not path.file_exists then
-			toolcontext.error(null, "Error: `{path}` does not exists")
-			return null
+		# special case for not a nit file
+		if path.file_extension != "nit" then
+			# search in known -I paths
+			var candidate = search_module_in_paths(null, path, self.paths)
+
+			# Found nothins? maybe it is a group...
+			if candidate == null and path.file_exists then
+				var mgroup = get_mgroup(path)
+				if mgroup != null then
+					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
+					if owner_path.file_exists then candidate = owner_path
+				end
+			end
+
+			if candidate == null then
+				toolcontext.error(null, "Error: cannot find module `{path}`.")
+				return null
+			end
+			path = candidate
 		end
 
 		# Fast track, the path is already known
@@ -375,6 +395,7 @@ class ModelBuilder
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
+		mgroup.module_paths.add(res)
 
 		identified_files[rp] = res
 		return res
@@ -474,7 +495,7 @@ class ModelBuilder
 		end
 
 		# Load it manually
-		var nmodule = load_module_ast(filename)
+		var nmodule = load_module_ast(file.filepath)
 		if nmodule == null then return null # forward error
 
 		# build the mmodule and load imported modules
@@ -632,6 +653,10 @@ private class ModulePath
 	redef fun to_s do return filepath
 end
 
+redef class MGroup
+	# modules paths associated with the group
+	private var module_paths = new Array[ModulePath]
+end
 
 redef class AStdImport
 	# The imported module once determined

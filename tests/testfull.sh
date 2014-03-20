@@ -13,13 +13,8 @@ done
 	../examples/*/src/*_android.nit \
 	../examples/*/src/*_linux.nit \
 	../lib/*.nit $list \
-	../src/nitdoc.nit \
+	../src/nit*.nit \
 	../src/test_*.nit \
-	../src/nit.nit \
-	../src/nitmetrics.nit \
-	../src/nitg.nit \
-	../src/nitx.nit \
-	../src/nitunit.nit \
 	../src/netdbg.nit \
 	../src/nitlight.nit \
 	../contrib/sort_downloads/src/sort_downloads.nit
