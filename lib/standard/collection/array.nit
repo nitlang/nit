@@ -463,7 +463,7 @@ class ArrayMap[K: Object, E]
 	# O(1)
 	redef fun length do return _items.length
 
-	redef fun iterator: CoupleMapIterator[K, E] do return new CoupleMapIterator[K, E](_items.iterator)
+	redef fun couple_iterator do return _items.iterator
 
 	redef fun is_empty do return _items.is_empty
 

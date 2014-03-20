@@ -790,11 +790,19 @@ interface IndexedIterator[E]
 end
 
 # Associative arrays that internally uses couples to represent each (key, value) pairs.
+# This is an helper class that some specific implementation of Map may implements.
 interface CoupleMap[K: Object, E]
 	super Map[K, E]
+
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
 	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
+
+	# Return a new iteralot on all couples
+	# Used to provide `iterator` and others
+	protected fun couple_iterator: Iterator[Couple[K,E]] is abstract
+
+	redef fun iterator do return new CoupleMapIterator[K,E](couple_iterator)
 
 	redef fun [](key)
 	do
@@ -809,8 +817,8 @@ end
 
 # Iterator on CoupleMap
 #
-# Actually is is a wrapper around an iterator of the internal array of the map.
-class CoupleMapIterator[K: Object, E]
+# Actually it is a wrapper around an iterator of the internal array of the map.
+private class CoupleMapIterator[K: Object, E]
 	super MapIterator[K, E]
 	redef fun item do return _iter.item.second
 	
