@@ -247,7 +247,7 @@ class HashMap[K: Object, V]
 end
 
 # View of the keys of a HashMap
-class HashMapKeys[K: Object, V]
+private class HashMapKeys[K: Object, V]
 	super RemovableCollection[K]
 	# The original map
 	var map: HashMap[K, V]
@@ -268,7 +268,7 @@ class HashMapKeys[K: Object, V]
 end
 
 # View of the values of a Map
-class HashMapValues[K: Object, V]
+private class HashMapValues[K: Object, V]
 	super RemovableCollection[V]
 	# The original map
 	var map: HashMap[K, V]
@@ -453,7 +453,7 @@ private class HashSetNode[E: Object]
 	end
 end
 
-class HashSetIterator[E: Object]
+private class HashSetIterator[E: Object]
 	super Iterator[E]
 	redef fun is_ok do return _node != null
 
