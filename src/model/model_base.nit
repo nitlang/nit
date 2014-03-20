@@ -22,6 +22,11 @@ module model_base
 class Model
 end
 
+# A named and possibly documented entity in the model.
+# This class is usefull to generalize presentation of entities to the human.
+abstract class MEntity
+end
+
 # A visibility (for modules, class and properties)
 # Valid visibility are:
 #

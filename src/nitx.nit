@@ -383,22 +383,18 @@ redef class MModule
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mmodule2nmodule.has_key(self) then
-			var node = index.mbuilder.mmodule2nmodule[self]
-			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.short_comment.is_empty then
-				pager.add(node.n_moduledecl.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(prototype)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mmodule2nmodule.has_key(self) then
-			var node = index.mbuilder.mmodule2nmodule[self]
-			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.comment.is_empty then
-				for comment in node.n_moduledecl.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(prototype)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -498,11 +494,9 @@ redef class MClass
 
 	redef fun content(index, pager) do
 		# intro comment
-		if index.mbuilder.mclassdef2nclassdef.has_key(intro) then
-			var node = index.mbuilder.mclassdef2nclassdef[intro]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.comment.is_empty then
-				for comment in node.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = intro.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(intro.to_console)
 		pager.add("{intro.namespace}".bold.gray + " (lines {intro.location.lines})".gray)
@@ -583,22 +577,18 @@ redef class MClassDef
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mclassdef2nclassdef.has_key(self) then
-			var node = index.mbuilder.mclassdef2nclassdef[self]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.short_comment.is_empty then
-				pager.add(node.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mclassdef2nclassdef.has_key(self) then
-			var node = index.mbuilder.mclassdef2nclassdef[self]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.comment.is_empty then
-				for comment in node.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -684,22 +674,18 @@ redef class MPropDef
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = index.mbuilder.mpropdef2npropdef[self]
-			if not nprop.n_doc == null and not nprop.n_doc.short_comment.is_empty then
-				pager.add(nprop.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = index.mbuilder.mpropdef2npropdef[self]
-			if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
-				for comment in nprop.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -797,17 +783,9 @@ redef class MVirtualType
 	redef fun to_console do return mproperty.name
 end
 
-redef class ADoc
-	private fun comment: List[String] do
-		var res = new List[String]
-		for t in n_comment do
-			res.add(t.text.replace("\n", ""))
-		end
-		return res
-	end
-
+redef class MDoc
 	private fun short_comment: String do
-		return n_comment.first.text.replace("\n", "")
+		return content.first
 	end
 end
 

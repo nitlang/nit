@@ -69,6 +69,8 @@ end
 
 # A Nit module is usually associated with a Nit source file.
 class MModule
+	super MEntity
+
 	# The model considered
 	var model: Model
 

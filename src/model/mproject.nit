@@ -21,6 +21,8 @@ import poset
 
 # A Nit project, thas encompass a product
 class MProject
+	super MEntity
+
 	# The name of the project
 	var name: String
 
@@ -46,6 +48,8 @@ end
 
 # A group of modules in a project
 class MGroup
+	super MEntity
+
 	# The name of the group
 	# empty name for a default group in a single-module project
 	var name: String
