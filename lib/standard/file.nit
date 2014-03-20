@@ -447,21 +447,33 @@ redef class NativeString
 	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
 end
 
-extern FileStat `{ struct stat * `}
 # This class is system dependent ... must reify the vfs
-	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
-	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
-	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
-	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
-	fun size: Int is extern "file_FileStat_FileStat_size_0"
+extern FileStat `{ struct stat * `}
+	# Returns the permission bits of file
+        fun mode: Int is extern "file_FileStat_FileStat_mode_0"
+        # Returns the last access time
+        fun atime: Int is extern "file_FileStat_FileStat_atime_0"
+        # Returns the last status change time 
+        fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
+        # Returns the last modification time
+        fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
+        # Returns the size
+        fun size: Int is extern "file_FileStat_FileStat_size_0"
 
-	fun is_reg: Bool `{ return S_ISREG(recv->st_mode); `}
-	fun is_dir: Bool `{ return S_ISDIR(recv->st_mode); `}
-	fun is_chr: Bool `{ return S_ISCHR(recv->st_mode); `}
-	fun is_blk: Bool `{ return S_ISBLK(recv->st_mode); `}
-	fun is_fifo: Bool `{ return S_ISFIFO(recv->st_mode); `}
-	fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
-	fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
+	# Returns true if it is a regular file (not a device file, pipe, sockect, ...)
+        fun is_reg: Bool `{ return S_ISREG(recv->st_mode); `}
+        # Returns true if it is a directory
+        fun is_dir: Bool `{ return S_ISDIR(recv->st_mode); `}
+        # Returns true if it is a character device
+        fun is_chr: Bool `{ return S_ISCHR(recv->st_mode); `}
+        # Returns true if it is a block device
+        fun is_blk: Bool `{ return S_ISBLK(recv->st_mode); `}
+        # Returns true if the type is fifo
+        fun is_fifo: Bool `{ return S_ISFIFO(recv->st_mode); `}
+        # Returns true if the type is a link
+        fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
+        # Returns true if the type is a socket
+        fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
 end
 
 # Instance of this class are standard FILE * pointers
