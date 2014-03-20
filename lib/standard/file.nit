@@ -389,7 +389,6 @@ extern FileStat `{ struct stat * `}
         fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
         # Returns true if the type is a socket
         fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
-
 end
 
 # Instance of this class are standard FILE * pointers
