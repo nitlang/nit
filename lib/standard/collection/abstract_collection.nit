@@ -762,6 +762,16 @@ interface Sequence[E]
 	# REQUIRE `index >= 0 and index <= length`
 	fun []=(index: Int, item: E) is abstract
 
+	# Insert an element at a given position, following elements are shifted.
+	#
+	#     var a = [10, 20, 30, 40]
+	#     a.insert(100, 2)
+	#     assert a      ==  [10, 20, 100, 30, 40]
+	#
+	# REQUIRE `index >= 0 and index < length`
+	# ENSURE `self[index] == item`
+	fun insert(item: E, index: Int) is abstract
+
 	# Remove the item at `index` and shift all following elements
 	#
 	#     var a = [10,20,30]

@@ -177,12 +177,7 @@ abstract class AbstractArray[E]
 		self[0] = item
 	end
 
-	# Insert an element at a given position, following elements are shifted.
-	#
-	#     var a= [10, 20, 30, 40]
-	#     a.insert(100, 2)
-	#     assert a      ==  [10, 20, 100, 30, 40]
-	fun insert(item: E, pos: Int)
+	redef fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
 		copy_to(pos, length-pos, self, pos + 1)
