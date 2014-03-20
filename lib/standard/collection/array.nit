@@ -353,7 +353,7 @@ class Array[E]
 	var _capacity: Int = 0
 end
 
-# An `Iterator` on `AbstractArray`
+# An `Iterator` on `AbstractArrayRead`
 class ArrayIterator[E]
 	super IndexedIterator[E]
 
