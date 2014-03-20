@@ -24,32 +24,27 @@ redef class ModelBuilder
 		page.add_raw_html "<a id='{mmodule.full_name}'></a>"
 		page.add_raw_html "<h1>module {mmodule}</h1>"
 		if mmodule2nmodule.has_key(mmodule) then
-			var nmodule = mmodule2nmodule[mmodule]
 			do
-				var nmoduledecl = nmodule.n_moduledecl
-				if nmoduledecl == null then break label x
-				var ndoc = nmoduledecl.n_doc
-				if ndoc == null then break label x
-				page.add ndoc.full_markdown
+				var mdoc = mmodule.mdoc
+				if mdoc == null then break label x
+				page.add mdoc.full_markdown
 			end label x
-			for nclassdef in nmodule.n_classdefs do
-				var mclassdef = nclassdef.mclassdef.as(not null)
-				if nclassdef isa AStdClassdef then
-					var ndoc = nclassdef.n_doc
-					if ndoc != null then
+			for mclassdef in mmodule.mclassdefs do
+				do
+					var mdoc = mclassdef.mdoc
+					if mdoc != null then
 						if mclassdef.mclass.intro == mclassdef then page.add_raw_html "<a id='{mclassdef.mclass.full_name}'></a>"
 						page.add_raw_html "<h2>class {mclassdef}</h2>"
-						page.add ndoc.full_markdown
+						page.add mdoc.full_markdown
 					end
 				end
-				for npropdef in nclassdef.n_propdefs do
-					var mpropdef = npropdef.mpropdef.as(not null)
-					var ndoc = npropdef.n_doc
-					if ndoc != null then
+				for mpropdef in mclassdef.mpropdefs do
+					var mdoc = mpropdef.mdoc
+					if mdoc != null then
 						if mpropdef.mproperty.intro == mpropdef then page.add_raw_html "<a id='{mpropdef.mproperty.full_name}'></a>"
 
 						page.add_raw_html "<h3>prop {mpropdef}</h3>"
-						page.add ndoc.full_markdown
+						page.add mdoc.full_markdown
 					end
 				end
 			end
@@ -116,4 +111,4 @@ else
 end
 
 page.add_raw_html "</body>"
-print page.html
+page.write_to(stdout)

@@ -529,6 +529,11 @@ class ModelBuilder
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
+		if decl != null then
+			var ndoc = decl.n_doc
+			if ndoc != null then mmodule.mdoc = ndoc.to_mdoc
+		end
+
 		return mmodule
 	end
 
@@ -655,4 +660,31 @@ redef class AProtectedVisibility
 end
 redef class APrivateVisibility
 	redef fun mvisibility do return private_visibility
+end
+
+redef class ADoc
+	private var mdoc_cache: nullable MDoc
+	fun to_mdoc: MDoc
+	do
+		var res = mdoc_cache
+		if res != null then return res
+		res = new MDoc
+		for c in n_comment do
+			var text = c.text
+			if text.length < 2 then
+				res.content.add ""
+				continue
+			end
+			assert text.chars[0] == '#'
+			if text.chars[1] == ' ' then
+				text = text.substring_from(2) # eat starting `#` and space
+			else
+				text = text.substring_from(1) # eat atarting `#` only
+			end
+			if text.chars.last == '\n' then text = text.substring(0, text.length-1) # drop \n
+			res.content.add(text)
+		end
+		mdoc_cache = res
+		return res
+	end
 end

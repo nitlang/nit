@@ -32,6 +32,7 @@ module model
 import poset
 import location
 import mmodule
+import mdoc
 private import more_collections
 
 redef class Model
@@ -287,6 +288,8 @@ end
 # belong to a hierarchy since the property and the
 # hierarchy of a class depends of a module.
 class MClass
+	super MEntity
+
 	# The module that introduce the class
 	# While classes are not bound to a specific module,
 	# the introducing module is used for naming an visibility
@@ -412,6 +415,8 @@ end
 # class. Unlike `MClass`, a `MClassDef` is a local definition that belong to
 # a specific module
 class MClassDef
+	super MEntity
+
 	# The module where the definition is
 	var mmodule: MModule
 
@@ -542,6 +547,7 @@ end
 #  * foo(anchor, mmodule, othertype)
 #  * foo(othertype, mmodule, anchor)
 abstract class MType
+	super MEntity
 
 	# The model of the type
 	fun model: Model is abstract
@@ -1482,6 +1488,8 @@ end
 # of any dynamic type).
 # For instance, a call site "x.foo" is associated to a `MProperty`.
 abstract class MProperty
+	super MEntity
+
 	# The associated MPropDef subclass.
 	# The two specialization hierarchy are symmetric.
 	type MPROPDEF: MPropDef
@@ -1745,6 +1753,7 @@ end
 # Unlike `MProperty`, a `MPropDef` is a local definition that belong to a
 # specific class definition (which belong to a specific module)
 abstract class MPropDef
+	super MEntity
 
 	# The associated `MProperty` subclass.
 	# the two specialization hierarchy are symmetric

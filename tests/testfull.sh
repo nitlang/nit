@@ -14,8 +14,7 @@ done
 	../examples/*/src/*_linux.nit \
 	../lib/*.nit $list \
 	../src/nitdoc.nit \
-	../src/test_parser.nit \
-	../src/test_phase.nit \
+	../src/test_*.nit \
 	../src/nit.nit \
 	../src/nitmetrics.nit \
 	../src/nitg.nit \

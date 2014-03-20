@@ -161,6 +161,11 @@ redef class ModelBuilder
 		nclassdef.mclassdef = mclassdef
 		self.mclassdef2nclassdef[mclassdef] = nclassdef
 
+		if nclassdef isa AStdClassdef then
+			var ndoc = nclassdef.n_doc
+			if ndoc != null then mclassdef.mdoc = ndoc.to_mdoc
+		end
+
 		if mclassdef.is_intro then
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
