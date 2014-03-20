@@ -53,7 +53,7 @@ class HTMLPage
 	# add("div").attr("id", "mydiv").text("My Div")
 	fun add(tag: String): HTMLTag do
 		var node = new HTMLTag(tag)
-		current.add_inner(node)
+		current.add(node)
 		return node
 	end
 
@@ -178,8 +178,8 @@ class HTMLTag
 
 	# Add a HTML 'child' to self
 	# var ul = new HTMLTag("ul")
-	# ul.add_inner(new HTMLTag("li"))
-        fun add_inner(child: HTMLTag) do children.add(child)
+	# ul.add(new HTMLTag("li"))
+        fun add(child: HTMLTag) do children.add(child)
 
 
 	# List of children HTML elements
