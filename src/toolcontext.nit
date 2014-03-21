@@ -171,6 +171,22 @@ class ToolContext
 		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_verbose)
 	end
 
+	# Name, usage and synopsis of the tool.
+	# It is mainly used in `usage`.
+	# Should be correctly set by the client before calling `process_options`
+	# A multi-line string is recommmended.
+	#
+	# eg. `"Usage: tool [OPTION]... [FILE]...\nDo some things."`
+	var tooldescription: String writable = "Usage: [OPTION]... [ARG]..."
+
+	# print the full usage of the tool.
+	# It also could be called by the client.
+	fun usage
+	do
+		print tooldescription
+		option_context.usage
+	end
+
 	# Parse and process the options given on the command line
 	fun process_options
 	do
