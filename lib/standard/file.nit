@@ -387,10 +387,27 @@ redef class String
 	fun chdir do to_cstring.file_chdir
 
 	# Return right-most extension (without the dot)
-	fun file_extension : nullable String
+	#
+	# Only the last extension is returned.
+	# There is no special case for combined extensions.
+	#
+	#     assert "file.txt".file_extension      == "txt"
+	#     assert "file.tar.gz".file_extension   == "gz"
+	#
+	# For file without extension, `null` is returned.
+	# Hoever, for trailing dot, `""` is returned.
+	#
+	#     assert "file".file_extension          == null
+	#     assert "file.".file_extension         == ""
+	#
+	# The starting dot of hidden files is never considered.
+	#
+	#     assert ".file.txt".file_extension     == "txt"
+	#     assert ".file".file_extension         == null
+	fun file_extension: nullable String
 	do
 		var last_slash = last_index_of('.')
-		if last_slash >= 0 then
+		if last_slash > 0 then
 			return substring( last_slash+1, length )
 		else
 			return null
