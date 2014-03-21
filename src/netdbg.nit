@@ -18,7 +18,7 @@
 module netdbg
 
 import network_debugger
-import nitdbg_commons
+import debugger_commons
 
 redef class InterpretCommons
 
