@@ -28,7 +28,7 @@ end
 
 private class ModelHyperdocPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
 		generate_model_hyperdoc(toolcontext, toolcontext.modelbuilder.model)
