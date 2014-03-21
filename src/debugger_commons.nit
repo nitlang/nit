@@ -36,6 +36,7 @@ class InterpretCommons
 	do
 		# Create a tool context to handle options and paths
 		toolcontext = new ToolContext
+		toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets and debbugs Nit programs."
 		# Add an option "-o" to enable compatibilit with the tests.sh script
 		var opt = new OptionString("compatibility (does noting)", "-o")
 		toolcontext.option_context.add_option(opt)
@@ -51,10 +52,6 @@ class InterpretCommons
 		modelbuilder = new ModelBuilder(model, toolcontext.as(not null))
 		
 		arguments = toolcontext.option_context.rest
-		if arguments.is_empty or toolcontext.opt_help.value then
-			toolcontext.option_context.usage
-			exit(0)
-		end
 		var progname = arguments.first
 		
 		# Here we load an process all modules passed on the command line

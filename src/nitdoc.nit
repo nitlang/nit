@@ -73,14 +73,10 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_github_gitdir)
 		toolcontext.option_context.add_option(opt_piwik_tracker)
 		toolcontext.option_context.add_option(opt_piwik_site_id)
+		toolcontext.tooldescription = "Usage: nitdoc [OPTION]... <file.nit>...\nGenerates HTML pages of API documentation from Nit source files."
 		toolcontext.process_options
 		self.arguments = toolcontext.option_context.rest
 
-		if arguments.length < 1 then
-			print "usage: nitdoc [options] file..."
-			toolcontext.option_context.usage
-			exit(0)
-		end
 		self.process_options
 
 		model = new Model

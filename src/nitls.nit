@@ -32,15 +32,14 @@ var opt_project = new OptionBool("List projects paths (default)", "-p", "--proje
 var opt_depends = new OptionBool("List dependencies of given modules", "-M", "--depends")
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends)
-
+tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
 tc.process_options
 
 var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i + opt_depends.value.to_i
-if sum > 1 or tc.option_context.rest.is_empty or tc.opt_help.value then
-	print "Usage: nitls [OPTION].. [FILES]..."
-	print "List Nit source files"
-	tc.option_context.usage
-	exit 0
+if sum > 1 then
+	print "Error: options --tree, --source, and --project are exclusives."
+	print tc.tooldescription
+	exit 1
 end
 
 if opt_depends.value then

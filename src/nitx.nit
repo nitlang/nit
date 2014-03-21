@@ -45,12 +45,10 @@ class NitIndex
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
-		self.toolcontext.option_context.options.clear
 		self.arguments = toolcontext.option_context.rest
 
-		if arguments.is_empty or arguments.length > 2 then
-			print "usage: ni path/to/module.nit [expression]"
-			toolcontext.option_context.usage
+		if arguments.length > 2 then
+			print toolcontext.tooldescription
 			exit(1)
 		end
 
@@ -869,6 +867,7 @@ end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
+toolcontext.tooldescription = "Usage: nitx [OPTION]... <file.nit> [query]\nDisplays specific pieces of API information from Nit source files."
 toolcontext.process_options
 
 # Here we launch the nit index
