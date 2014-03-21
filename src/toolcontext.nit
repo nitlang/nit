@@ -180,6 +180,13 @@ class ToolContext
 	# eg. `"Usage: tool [OPTION]... [FILE]...\nDo some things."`
 	var tooldescription: String writable = "Usage: [OPTION]... [ARG]..."
 
+	# Does `process_options` should accept an empty sequence of arguments.
+	# ie. nothing except options.
+	# Is `false` by default.
+	#
+	# If required, if should be set by the client before calling `process_options`
+	var accept_no_arguments writable = false
+
 	# print the full usage of the tool.
 	# Is called by `process_option` on `--help`.
 	# It also could be called by the client.
@@ -210,6 +217,12 @@ class ToolContext
 		var errors = option_context.get_errors
 		if not errors.is_empty then
 			for e in errors do print "Error: {e}"
+			print tooldescription
+			print "Use --help for help"
+			exit 1
+		end
+
+		if option_context.rest.is_empty and not accept_no_arguments then
 			print tooldescription
 			print "Use --help for help"
 			exit 1
