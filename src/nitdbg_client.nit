@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Client for the nit debugger nitdbg
+# Client for the nit debugger nitdbg-server
 #
 # Can send commands to the debugger
-module dbgcli
+module nitdbg_client
 
 import socket
 import toolcontext
