@@ -52,8 +52,18 @@ redef class ToolContext
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
 	private var modelbuilder_real: nullable ModelBuilder = null
 
-	fun run_global_phases(mainmodule: MModule)
+	# Run `process_mainmodule` on all phases
+	fun run_global_phases(mmodules: Array[MModule])
 	do
+		assert not mmodules.is_empty
+		var mainmodule
+		if mmodules.length == 1 then
+			mainmodule = mmodules.first
+		else
+			# We need a main module, so we build it by importing all modules
+			mainmodule = new MModule(modelbuilder.model, null, "<main>", new Location(null, 0, 0, 0, 0))
+			mainmodule.set_imported_mmodules(mmodules)
+		end
 		for phase in phases_list do
 			phase.process_mainmodule(mainmodule)
 		end
