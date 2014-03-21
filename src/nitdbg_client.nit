@@ -105,7 +105,7 @@ end
 var toolcontext = new ToolContext
 toolcontext.tooldescription = "Usage: nitdbg_client [OPTION]...\nConnects to a nitdbg_server and controls it."
 toolcontext.accept_no_arguments = true
-toolcontext.process_options
+toolcontext.process_options(args)
 
 var debug: DebugClient
 

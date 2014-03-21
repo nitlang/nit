@@ -197,7 +197,7 @@ class ToolContext
 	end
 
 	# Parse and process the options given on the command line
-	fun process_options
+	fun process_options(args: Sequence[String])
 	do
 		self.opt_warn.value = 1
 

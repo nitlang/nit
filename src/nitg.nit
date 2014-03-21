@@ -39,7 +39,7 @@ toolcontext.option_context.add_option(opt_mixins)
 toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
-toolcontext.process_options
+toolcontext.process_options(args)
 
 # We need a model to collect stufs
 var model = new Model

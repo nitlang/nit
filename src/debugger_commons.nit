@@ -43,7 +43,7 @@ class InterpretCommons
 		var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 		toolcontext.option_context.add_option(opt_mixins)
 		# We do not add other options, so process them now!
-		toolcontext.process_options
+		toolcontext.process_options(args)
 		
 		# We need a model to collect stufs
 		var model = new Model

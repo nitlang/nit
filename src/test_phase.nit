@@ -25,7 +25,7 @@ var toolcontext = new ToolContext
 toolcontext.tooldescription = "Usage: [OPTION]... <file.nit>..."
 
 # We do not add other options, so process them now!
-toolcontext.process_options
+toolcontext.process_options(args)
 
 # Get arguments
 var arguments = toolcontext.option_context.rest

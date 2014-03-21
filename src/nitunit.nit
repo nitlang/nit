@@ -223,7 +223,7 @@ var toolcontext = new ToolContext
 toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
 
 var model = new Model

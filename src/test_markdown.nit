@@ -58,7 +58,7 @@ var opt_full = new OptionBool("Process also imported modules", "--full")
 toolcontext.option_context.add_option(opt_full)
 toolcontext.tooldescription = "Usage: test_markdown [OPTION]... <file.nit>...\nGenerates HTML of comments of documentation from Nit source files."
 
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
 
 var model = new Model

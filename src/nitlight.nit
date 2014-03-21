@@ -31,7 +31,7 @@ toolcontext.tooldescription = "Usage: nitlight [OPTION]... <file.nit>...\nGenera
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
 
 var mmodules = modelbuilder.parse(args)

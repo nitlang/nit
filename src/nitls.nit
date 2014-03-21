@@ -33,7 +33,7 @@ var opt_depends = new OptionBool("List dependencies of given modules", "-M", "--
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
-tc.process_options
+tc.process_options(args)
 
 var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i + opt_depends.value.to_i
 if sum > 1 then

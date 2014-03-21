@@ -74,7 +74,7 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_piwik_tracker)
 		toolcontext.option_context.add_option(opt_piwik_site_id)
 		toolcontext.tooldescription = "Usage: nitdoc [OPTION]... <file.nit>...\nGenerates HTML pages of API documentation from Nit source files."
-		toolcontext.process_options
+		toolcontext.process_options(args)
 		self.arguments = toolcontext.option_context.rest
 
 		self.process_options

@@ -868,7 +868,7 @@ end
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.tooldescription = "Usage: nitx [OPTION]... <file.nit> [query]\nDisplays specific pieces of API information from Nit source files."
-toolcontext.process_options
+toolcontext.process_options(args)
 
 # Here we launch the nit index
 var ni = new NitIndex(toolcontext)
