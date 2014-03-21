@@ -21,6 +21,7 @@ module toolcontext
 
 import opts
 import location
+import version
 
 class Message
 	super Comparable
@@ -180,6 +181,7 @@ class ToolContext
 	var tooldescription: String writable = "Usage: [OPTION]... [ARG]..."
 
 	# print the full usage of the tool.
+	# Is called by `process_option` on `--help`.
 	# It also could be called by the client.
 	fun usage
 	do
@@ -194,6 +196,24 @@ class ToolContext
 
 		# init options
 		option_context.parse(args)
+
+		if opt_help.value then
+			usage
+			exit 0
+		end
+
+		if opt_version.value then
+			print nit_version
+			exit 0
+		end
+
+		var errors = option_context.get_errors
+		if not errors.is_empty then
+			for e in errors do print "Error: {e}"
+			print tooldescription
+			print "Use --help for help"
+			exit 1
+		end
 
 		# Set verbose level
 		verbose_level = opt_verbose.value
