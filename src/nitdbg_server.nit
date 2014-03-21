@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Network debugger for a nit program
-module netdbg
+# Network debugger for a nit program (server part)
+module nitdbg_server
 
 import network_debugger
-import nitdbg_commons
+import debugger_commons
 
 redef class InterpretCommons
 

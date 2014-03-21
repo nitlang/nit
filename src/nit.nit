@@ -19,7 +19,7 @@ module nit
 
 import naive_interpreter
 import debugger
-import nitdbg_commons
+import debugger_commons
 
 redef class InterpretCommons
 

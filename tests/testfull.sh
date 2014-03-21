@@ -15,6 +15,4 @@ done
 	../lib/*.nit $list \
 	../src/nit*.nit \
 	../src/test_*.nit \
-	../src/netdbg.nit \
-	../src/nitlight.nit \
 	../contrib/sort_downloads/src/sort_downloads.nit
