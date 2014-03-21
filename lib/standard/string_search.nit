@@ -4,7 +4,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -20,13 +20,34 @@ interface Pattern
 	# Search `self` into `s` from a certain position.
 	# Return the position of the first character of the matching section.
 	# Return -1 if not found.
-	fun search_index_in(s: String, from: Int): Int is abstract
+	#
+	#     assert 'l'.search_index_in("hello world", 0)  == 2
+	#     assert 'l'.search_index_in("hello world", 3)  == 3
+	#     assert 'z'.search_index_in("hello world", 0)  == -1
+	#
+	# This method is usually faster than `search_in` if what is
+	# required is only the index.
+	# Note: in most implementation, `search_in` is implemented with this method.
+	protected fun search_index_in(s: String, from: Int): Int is abstract
 
 	# Search `self` into `s` from a certain position.
 	# Return null if not found.
-	fun search_in(s: String, from: Int): nullable Match is abstract
+	#
+	#     assert 'l'.search_in("hello world", 0).from  == 2
+	#     assert 'l'.search_in("hello world", 3).from  == 3
+	#     assert 'z'.search_in("hello world", 0)       == null
+	#
+	# If only the index of the first character if required, see `search_index_in`.
+	#
+	# Note: Is used by `String::search`, `String::search_from`, and others.
+	protected fun search_in(s: String, from: Int): nullable Match is abstract
 
 	# Search all `self` occurrences into `s`.
+	#
+	#     assert 'l'.search_all_in("hello world").length  == 3
+	#     assert 'z'.search_all_in("hello world"),length  == 0
+	#
+	# Note: Is used by `String::search_all`.
 	fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
@@ -39,6 +60,14 @@ interface Pattern
 	end
 
 	# Split `s` using `self` is separator.
+	#
+	# Returns an array of matches that are between each occurence of `self`.
+	# If self is not present, an array with a single match on `s` is retunred.
+	#
+	#     assert 'l'.split_in("hello world").join("|")  == "he||o wor|d"
+	#     assert 'z'.split_in("hello world").join("|")  == "hello world"
+	#
+	# Note: is used by `String::split`
 	fun split_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
@@ -61,6 +90,10 @@ end
 # (cf. A Fast String Searching Algorithm, with R.S. Boyer.  Communications
 # of the Association for Computing Machinery, 20(10), 1977, pp. 762-772.)
 # http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
+#
+#     var pat = new BM_Pattern("hello")
+#     assert "I say hello to the world!".search(pat).from  == 6
+#     assert "I say goodbye to the world!".search(pat)     == null
 class BM_Pattern
 	super Pattern
 
@@ -122,7 +155,7 @@ class BM_Pattern
 	var _length: Int
 
 	private fun bc(e: Char): Int
-	do 
+	do
 		if _bc_table.has_key(e) then
 			return _bc_table[e]
 		else
@@ -202,7 +235,7 @@ class BM_Pattern
 	redef fun ==(o) do return o isa BM_Pattern and o._motif == _motif
 end
 
-# Matches are a part of a string.
+# Matches are a part of a `String` found ba a `Pattern`.
 class Match
 	# The base string matched
 	readable var _string: String
@@ -284,12 +317,19 @@ redef class String
 		end
 	end
 
-	# Like `search_from` but from the first character.
+	# Search the first occurence of the pattern `p`.
+	# Return null if not found.
+	#
+	#     assert "I say hello to the world!".search("hello").from  == 6
+	#     assert "I say goodbye to the world!".search("hello")     == null
 	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
-	# Search the given pattern into self from a.
+	# Search the first occurence of the pattern `p` after `from`.
 	# The search starts at `from`.
 	# Return null if not found.
+	#
+	#     assert "I say hello to the world!".search_from("hello",4).from  == 6
+	#     assert "I say hello to the world!".search_from("hello",7)       == null
 	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
 	# Search all occurrences of p into self.
@@ -324,7 +364,7 @@ redef class String
 		return self.split_with(p).join(string)
 	end
 
-	# Escape the four characters < > & and " with their html counterpart
+	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
 	#
 	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
 	fun html_escape: String

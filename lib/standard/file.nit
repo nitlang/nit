@@ -219,7 +219,10 @@ redef class String
 	# return true if a file with this names exists
 	fun file_exists: Bool do return to_cstring.file_exists
 
+	# The status of a file. see POSIX stat(2).
 	fun file_stat: FileStat do return to_cstring.file_stat
+
+	# The status of a file or of a symlink. see POSIX lstat(2).
 	fun file_lstat: FileStat do return to_cstring.file_lstat
 
 	# Remove a file, return true if success
@@ -240,7 +243,17 @@ redef class String
 		output.close
 	end
 
-	# remove the trailing extension "ext"
+	# Remove the trailing extension `ext`.
+	#
+	# `ext` usually starts with a dot but could be anything.
+	#
+	#     assert "file.txt".strip_extension(".txt")  == "file"
+	#     assert "file.txt".strip_extension("le.txt")  == "fi"
+	#     assert "file.txt".strip_extension("xt")  == "file.t"
+	#
+	# if `ext` is not present, `self` is returned unmodified.
+	#
+	#     assert "file.txt".strip_extension(".tar.gz")  == "file.txt"
 	fun strip_extension(ext: String): String
 	do
 		if has_suffix(ext) then
@@ -387,10 +400,27 @@ redef class String
 	fun chdir do to_cstring.file_chdir
 
 	# Return right-most extension (without the dot)
-	fun file_extension : nullable String
+	#
+	# Only the last extension is returned.
+	# There is no special case for combined extensions.
+	#
+	#     assert "file.txt".file_extension      == "txt"
+	#     assert "file.tar.gz".file_extension   == "gz"
+	#
+	# For file without extension, `null` is returned.
+	# Hoever, for trailing dot, `""` is returned.
+	#
+	#     assert "file".file_extension          == null
+	#     assert "file.".file_extension         == ""
+	#
+	# The starting dot of hidden files is never considered.
+	#
+	#     assert ".file.txt".file_extension     == "txt"
+	#     assert ".file".file_extension         == null
+	fun file_extension: nullable String
 	do
 		var last_slash = last_index_of('.')
-		if last_slash >= 0 then
+		if last_slash > 0 then
 			return substring( last_slash+1, length )
 		else
 			return null

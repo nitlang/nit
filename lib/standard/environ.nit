@@ -19,8 +19,11 @@ import string
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
 
 redef class String
-	# Return environment value for this symbol
-	# If there is no such environment value, then return ""
+	# Return environment value for the symbol.
+	# If there is no such environment variable, then return ""
+	#
+	#     assert "PATH".environ     != ""
+	#     assert "NIT %\n".environ  == ""
 	fun environ: String
 	do
 		var res = self.to_cstring.get_environ
@@ -32,7 +35,12 @@ redef class String
 			return ""
 		end
 	end
-	fun setenv( v : String ) do to_cstring.setenv( v.to_cstring )
+
+	# Set the enviroment value of a variable.
+	#
+	#     "NITis".setenv("fun")
+	#     assert "NITis".environ  == "fun"
+	fun setenv(v: String) do to_cstring.setenv( v.to_cstring )
 end
 
 redef class NativeString
