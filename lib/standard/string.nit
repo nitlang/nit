@@ -1089,10 +1089,7 @@ class FlatBuffer
 	end
 
 	# Create a new empty string.
-	init
-	do
-		with_capacity(5)
-	end
+	init do with_capacity(5)
 
 	init from(s: Text)
 	do
