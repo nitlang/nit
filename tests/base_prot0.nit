@@ -12,31 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import base_prot0
-private import base_prot2
+import kernel
 
-class C
-	super A
-	#alt5#redef fun pub do 20.output
-	#alt6#redef fun pro do 21.output
-	#alt1#redef fun pri do 22.output
-	fun o do
-		#alt7#pub
-		#alt8#pro
-		#alt2#pri
-	end
+class A
 end
-
-class O3
-	fun o
-	do
-		var a = new C
-		#alt9#a.pub
-		#alt3#a.pro
-		#alt4#a.pri
-		23.output
-	end
-	init do end
-end
-
-(new O3).o
