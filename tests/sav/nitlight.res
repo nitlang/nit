@@ -1,18 +1,3 @@
-usage: nitlight [options] files...
-  -W, --warn              Show warnings
-  -q, --quiet             Do not show warnings
-  --stop-on-first-error   Stop on first error
-  --no-color              Do not use color to display errors and warnings
-  --log                   Generate various log files
-  --log-dir               Directory where to generate log files
-  -h, -?, --help          Show Help (This screen)
-  --version               Show version and exit
-  -v, --verbose           Verbose
-  -I, --path              Set include path for loaders (may be used more than once)
-  --only-parse            Only proceed to parse step of loaders
-  --only-metamodel        Stop after meta-model processing
-  -f, --fragment          Omit document header and footer
-  --first-line            Start the source file at this line (default: 1)
-  --last-line             End the source file at this line (default: to the end)
-  -d, --dir               Output html files in a specific directory (required if more than one module)
-  --full                  Process also imported modules
+Usage: nitlight [OPTION]... <file.nit>...
+Generates HTML of highlited code from Nit source files.
+Use --help for help

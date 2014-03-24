@@ -36,8 +36,10 @@ toolcontext.option_context.add_option(opt_global)
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
 
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+
 # We do not add other options, so process them now!
-toolcontext.process_options
+toolcontext.process_options(args)
 
 # We need a model to collect stufs
 var model = new Model
@@ -45,14 +47,10 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
-if arguments.is_empty then
-	toolcontext.option_context.usage
-	return
-end
 if arguments.length > 1 then
 	print "Too much arguments: {arguments.join(" ")}"
-	toolcontext.option_context.usage
-	return
+	print toolcontext.tooldescription
+	exit 1
 end
 var progname = arguments.first
 
