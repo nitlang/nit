@@ -109,7 +109,7 @@ redef class ToolContext
 				message_sorter.sort(messages)
 
 				for m in messages do
-					if "Warning".search_in(m.text, 0) == null then had_error = true
+					if m.text.search("Warning") == null then had_error = true
 					stderr.write("{m.to_color_string}\n")
 				end
 			end
