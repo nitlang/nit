@@ -14,38 +14,32 @@
 
 # Pipelined filters and operations on iterators.
 #
-# This module enhance `Collection`s with some methods that enable a
+# This module enhance `Iterator`s with some methods that enable a
 # pipeline-like programing that offers the manupulation of
 # collections trough connected filters with reasonable memory constraints.
-#
-# The filters methods return a view bounded on the original collection.
-# Filters can be chained to build complex virtual collections.
-#
-# FIXME: Fix vocabulary (lazy/view/filter)
-# FIXME: Maybe the name of the method should indicate that the method is 'lazy' (or is a filter).
 module pipeline
 
-redef interface Collection[E]
+redef interface Iterator[E]
 	# Filter: sort with `default_comparator`.
 	# SEE: `sort_with` for details
 	# REQUIRE: self isa Iterator[Comparable]
 	#
-	#     assert [1,3,2].sort_filter.to_a	     ==  [1,2,3]
-	fun sort_filter: Collection[E]
+	#     assert [1,3,2].iterator.sort.to_a	     ==  [1,2,3]
+	fun sort: Iterator[E]
 	do
-		assert self isa Collection[Comparable]
+		assert self isa Iterator[Comparable]
 		var a = self.to_a
 		default_comparator.sort(a)
-		return a
+		return a.iterator
 	end
 
 	# Filter: sort with a given `comparator`.
 	# Important: require O(n) memory.
-	fun sort_with(comparator: Comparator[E]): Collection[E]
+	fun sort_with(comparator: Comparator[E]): Iterator[E]
 	do
 		var a = self.to_a
 		comparator.sort(a)
-		return a
+		return a.iterator
 	end
 
 	# Filter: reject duplicates.
@@ -54,12 +48,12 @@ redef interface Collection[E]
 	# Important: rely on `==` and `hash`
 	# Important: require O(m) in memory, where m is the total number of uniq items.
 	#
-	#     assert [1,2,1,1,1,3,2].uniq.to_a	     ==  [1,2,3]
+	#     assert [1,2,1,1,1,3,2].iterator.uniq.to_a	     ==  [1,2,3]
 	#
 	# REQUIRE: self isa Iterator[Object]
-	fun uniq: Collection[E]
+	fun uniq: Iterator[E]
 	do
-		assert self isa Collection[Object]
+		assert self isa Iterator[Object]
 		return new PipeUniq[E](self)
 	end
 
@@ -67,84 +61,94 @@ redef interface Collection[E]
 	#
 	# Important: rely on `==`.
 	#
-	#     assert [1,2,1,1,1,3,2].seq_uniq.to_a	     ==  [1,2,1,3,2]
-	fun seq_uniq: Collection[E]
+	#     assert [1,2,1,1,1,3,2].iterator.seq_uniq.to_a	     ==  [1,2,1,3,2]
+	fun seq_uniq: Iterator[E]
 	do
 		return new PipeSeqUniq[E](self)
 	end
 
-	# The view of two combined collections.
+	# Combine two iterators.
 	#
-	#     assert ([1..20[ + [20..40[).to_a	     ==  ([1..40[).to_a
-	fun +(other: Collection[E]): Collection[E]
+	# When the first iterator is terminated, the second is started.
+	#
+	#     assert ([1..20[.iterator + [20..40[.iterator).to_a	     ==  ([1..40[).to_a
+	fun +(other: Iterator[E]): Iterator[E]
 	do
 		return new PipeJoin[E](self, other)
 	end
 
 	# Alternate each item with `e`.
 	#
-	#    assert [1,2,3].alternate(0).to_a		     ==  [1,0,2,0,3]
-	fun alternate(e: E): Collection[E]
+	#    assert [1,2,3].iterator.alternate(0).to_a		     ==  [1,0,2,0,3]
+	fun alternate(e: E): Iterator[E]
 	do
 		return new PipeAlternate[E](self, e)
 	end
 
 	# Filter: reject a given `item`.
 	#
-	#    assert [1,1,2,1,3].skip(1).to_a		     ==  [2,3]
-	fun skip(item: E): Collection[E]
+	#    assert [1,1,2,1,3].iterator.skip(1).to_a		     ==  [2,3]
+	fun skip(item: E): Iterator[E]
 	do
 		return new PipeSkip[E](self, item)
 	end
 
 	# Filter: keep only the first `length` items.
 	#
-	#     assert [1,2,3,4,5].head(2).to_a	     ==  [1,2]
-	fun head(length: Int): Collection[E]
+	# This filter does not always consume `self'.
+	#
+	#     var i = [1,2,3,4,5].iterator
+	#     assert i.head(2).to_a   == [1,2]
+	#     i.to_a		      == [3,4,5]
+	fun head(length: Int): Iterator[E]
 	do
 		return new PipeHead[E](self, length)
 	end
 
 	# Filter: reject the first `length` items.
 	#
-	#     assert [1,2,3,4,5].skip_head(2).to_a	     ==  [3,4,5]
+	#     assert [1,2,3,4,5].iterator.skip_head(2).to_a	     ==  [3,4,5]
 	#
 	# ENSURE: self == return
-	fun skip_head(length: Int): Collection[E]
+	fun skip_head(length: Int): Iterator[E]
 	do
-		return new PipeSkipHead[E](self, length)
+		while length > 0 and self.is_ok do
+			length -= 1
+			self.next
+		end
+		return self
 	end
 
 	# Filter: keep only the last `length` items.
 	#
-	#     assert [1,2,3,4,5].tail(2).to_a	     ==  [4,5]
+	#     assert [1,2,3,4,5].iterator.tail(2).to_a	     ==  [4,5]
 	#
 	# Important: require O(length) in memory
-	fun tail(length: Int): Collection[E]
+	fun tail(length: Int): Iterator[E]
 	do
-		return new PipeTail[E](self, length)
+		var lasts = new List[E]
+		while self.is_ok do
+			while lasts.length >= length do lasts.shift
+			lasts.push(self.item)
+			self.next
+		end
+		return lasts.iterator
 	end
 
 	# Filter: reject the last `length` items.
 	#
-	#     assert [1,2,3,4,5].skip_tail(2).to_a	     ==  [1,2,3]
+	#     assert [1,2,3,4,5].iterator.skip_tail(2).to_a	     ==  [1,2,3]
 	#
 	# Important: require O(length) in memory
-	fun skip_tail(length: Int): Collection[E]
+	fun skip_tail(length: Int): Iterator[E]
 	do
 		return new PipeSkipTail[E](self, length)
 	end
 end
 
-### Specific private collection and iterator classes
+### Specific private iterator classes
 
 private class PipeUniq[E]
-	super Collection[E]
-	var source: Collection[E]
-	redef fun iterator do return new PipeUniqIterator[E](source.iterator)
-end
-
-private class PipeUniqIterator[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -166,12 +170,6 @@ private class PipeUniqIterator[E]
 end
 
 private class PipeSeqUniq[E]
-	super Collection[E]
-	var source: Collection[E]
-	redef fun iterator do return new PipeSeqUniqIterator[E](source.iterator)
-end
-
-private class PipeSeqUniqIterator[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -191,13 +189,6 @@ private class PipeSeqUniqIterator[E]
 end
 
 private class PipeJoin[E]
-	super Collection[E]
-	var source1: Collection[E]
-	var source2: Collection[E]
-	redef fun iterator do return new PipeJoinIterator[E](source1.iterator, source2.iterator)
-end
-
-private class PipeJoinIterator[E]
 	super Iterator[E]
 	var source1: Iterator[E]
 	var source2: Iterator[E]
@@ -219,13 +210,6 @@ private class PipeJoinIterator[E]
 end
 
 private class PipeAlternate[E]
-	super Collection[E]
-	var source: Collection[E]
-	var odd_item: E
-	redef fun iterator do return new PipeAlternateIterator[E](source.iterator, odd_item)
-end
-
-private class PipeAlternateIterator[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -253,14 +237,6 @@ private class PipeAlternateIterator[E]
 end
 
 private class PipeSkip[E]
-	super Collection[E]
-	var source: Collection[E]
-	var skip_item: E
-	redef fun iterator do return new PipeSkipIterator[E](source.iterator, skip_item)
-end
-
-private class PipeSkipIterator[E]
-	super Collection[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -291,13 +267,6 @@ private class PipeSkipIterator[E]
 end
 
 private class PipeHead[E]
-	super Collection[E]
-	var source: Collection[E]
-	var pipe_length: Int
-	redef fun iterator do return new PipeHeadIterator[E](source.iterator, pipe_length)
-end
-
-private class PipeHeadIterator[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -315,48 +284,7 @@ private class PipeHeadIterator[E]
 	end
 end
 
-private class PipeSkipHead[E]
-	super Collection[E]
-	var source: Collection[E]
-	var pipe_length: Int
-	redef fun iterator
-	do
-		var res = source.iterator
-		var length = pipe_length
-		while length > 0 and res.is_ok do
-			length -= 1
-			res.next
-		end
-		return res
-	end
-end
-
-private class PipeTail[E]
-	super Collection[E]
-	var source: Collection[E]
-	var pipe_length: Int
-	redef fun iterator
-	do
-		var lasts = new List[E]
-		var res = source.iterator
-		var length = pipe_length
-		while res.is_ok do
-			while lasts.length >= length do lasts.shift
-			lasts.push(res.item)
-			res.next
-		end
-		return lasts.iterator
-	end
-end
-
 private class PipeSkipTail[E]
-	super Collection[E]
-	var source: Collection[E]
-	var pipe_length: Int
-	redef fun iterator do return new PipeSkipTailIterator[E](source.iterator, pipe_length)
-end
-
-private class PipeSkipTailIterator[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
