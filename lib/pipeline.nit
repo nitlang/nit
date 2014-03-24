@@ -144,6 +144,58 @@ redef interface Iterator[E]
 	do
 		return new PipeSkipTail[E](self, length)
 	end
+
+	# Filter: reject items that does not meet some criteria.
+	#
+	#     class IsEvenFunction
+	#       super Function[Int, Bool]
+	#       redef fun apply(i) do return i % 2 == 0
+	#     end
+	#     assert [1,2,3,4,8].iterator.select(new IsEvenFunction).to_a  == [2,4,8]
+	fun select(predicate: Function[E, Bool]): Iterator[E]
+	do
+		return new PipeSelect[E](self, predicate)
+	end
+end
+
+# Interface that reify a function.
+# Concrete subclasses must implements the `apply` method.
+#
+# This interface helps to manipulate function-like objects.
+#
+# The main usage it as a transformation; that takes an argument and produce a result.
+# See `map` for example.
+#
+# Another usage is as a predicate, with `Function[E, Bool]`.
+# See `Iterator::select` for example.
+#
+# Function with more than one argument can be reified with some uncurification.
+# Eg. `Function[ARG1, Function[ARG2, RES]]`.
+#
+# NOTE: Nit is not a functionnal language, this class is a very basic way to
+# simulate the reification of a simple function.
+interface Function[FROM, TO]
+	# How an element is mapped to another one.
+	fun apply(e: FROM): TO is abstract
+
+	# Filter: produce an iterator which each element is transformed.
+	#
+	#     var i = [1,2,3].iterator
+	#     assert fun_to_s.map(i).to_a  == ["1", "2", "3"]
+	#
+	# Note: because there is no generic method in Nit (yet?),
+	# there is no way to have a better API.
+	# eg. with the Iterator as receiver and the function as argument.
+	# (see `Iterator::select`)
+	fun map(i: Iterator[FROM]): Iterator[TO]
+	do
+		return new PipeMap[FROM, TO](i, self)
+	end
+end
+
+private class FunctionToS
+	super Function[Object, String]
+	redef fun apply(e) do return e.to_s
 end
 
 ### Specific private iterator classes
@@ -315,3 +367,63 @@ private class PipeSkipTail[E]
 		source.next
 	end
 end
+
+private class PipeSelect[E]
+	super Iterator[E]
+
+	var source: Iterator[E]
+
+	var predicate: Function[E, Bool]
+
+	init(source: Iterator[E], predicate: Function[E, Bool])
+	do
+		self.source = source
+		self.predicate = predicate
+
+		do_skip
+	end
+
+	fun do_skip
+	do
+		while source.is_ok and not predicate.apply(source.item) do source.next
+	end
+
+	redef fun is_ok do return source.is_ok
+
+	redef fun item do return source.item
+
+	redef fun next
+	do
+		source.next
+		do_skip
+	end
+end
+
+private class PipeMap[E, F]
+	super Iterator[F]
+
+	var source: Iterator[E]
+	var function: Function[E, F]
+
+	var item_cache: nullable F = null
+	var item_cached = false
+
+	redef fun is_ok do return source.is_ok
+
+	redef fun item do
+		if item_cached then return item_cache
+		item_cache = function.apply(source.item)
+		item_cached = true
+		return item_cache
+	end
+
+	redef fun next do
+		source.next
+		item_cached = false
+	end
+end
+
+# Stateless singleton that reify to the `to_s` method.
+#
+#     assert fun_to_s.apply(5)  == "5"
+fun fun_to_s: Function[Object, String] do return once new FunctionToS
