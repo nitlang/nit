@@ -71,7 +71,7 @@ abstract class Rope
 	end
 
 	# Stores a flat version of self in cache
-	private fun flatten: String
+	private fun flatten: FlatString
 	do
 		var native_final_str = calloc_string(length + 1)
 
@@ -82,7 +82,7 @@ abstract class Rope
 		var iter = new DFSRopeLeafIterator(self)
 
 		while iter.is_ok do
-			iter.item.value.items.copy_to(native_final_str, iter.item.value.length, 0, offset)
+			iter.item.value.as(FlatString).items.copy_to(native_final_str, iter.item.value.length, 0, offset)
 			offset += iter.item.value.length
 			iter.next
 		end
