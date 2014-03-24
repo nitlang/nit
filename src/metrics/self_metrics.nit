@@ -26,7 +26,7 @@ end
 
 private class SelfMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_self.value and not toolcontext.opt_all.value then return
 		compute_self_metrics(toolcontext.modelbuilder)

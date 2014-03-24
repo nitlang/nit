@@ -29,7 +29,7 @@ private class AstMetricsPhase
 	var node_counter = new Counter[String]
 	var id_counter = new Counter[String]
 
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_ast.value and not toolcontext.opt_all.value then return
 		print "--- AST Metrics ---"

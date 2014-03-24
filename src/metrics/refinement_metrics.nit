@@ -27,7 +27,7 @@ end
 
 private class RefinementMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_refinement.value and not toolcontext.opt_all.value then return
 		compute_refinement_metrics(toolcontext.modelbuilder.model)

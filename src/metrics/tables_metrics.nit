@@ -27,7 +27,7 @@ end
 
 private class TablesMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_tables.value and not toolcontext.opt_all.value then return
 		compute_tables_metrics(mainmodule)
