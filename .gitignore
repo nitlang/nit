@@ -21,7 +21,7 @@ doc/nit_version.sty
 src/parser/.nit.sablecc3
 src/parser/.nit.sablecc3.dump
 src/parser/.parser-nofact.nit
-src/nit_version.nit
+src/version.nit
 src/callgrind.*
 src/*.log
 src/*.dot

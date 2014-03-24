@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Client for the nit debugger nitdbg
+# Client for the nit debugger nitdbg-server
 #
 # Can send commands to the debugger
-module dbgcli
+module nitdbg_client
 
 import socket
 import toolcontext
@@ -65,7 +65,6 @@ class DebugClient
 		print "[HOST ADDRESS] : "+debugger_connection.address
 		print "[HOST] : "+debugger_connection.host.as(not null)
 		print "[PORT] : "+debugger_connection.port.to_s
-		print "Connecting ... "+debugger_connection.connect.to_s
 	end
 
 	init with_port (host: String, port: Int)
@@ -132,6 +131,10 @@ if toolcontext.opt_host_address.value != null then
 else
 	debug = new DebugClient("127.0.0.1", toolcontext.opt_debug_port.value)
 end
+
+var res = debug.debugger_connection.connect
+print "Connecting ... " + res.to_s
+if not res then exit 1
 
 var recv_cmd: String
 

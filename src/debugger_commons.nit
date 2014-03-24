@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module nitdbg_commons
+module debugger_commons
 
 import modelbuilder
 import frontend
