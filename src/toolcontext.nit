@@ -21,6 +21,7 @@ module toolcontext
 
 import opts
 import location
+import version
 
 class Message
 	super Comparable
@@ -171,13 +172,61 @@ class ToolContext
 		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_verbose)
 	end
 
+	# Name, usage and synopsis of the tool.
+	# It is mainly used in `usage`.
+	# Should be correctly set by the client before calling `process_options`
+	# A multi-line string is recommmended.
+	#
+	# eg. `"Usage: tool [OPTION]... [FILE]...\nDo some things."`
+	var tooldescription: String writable = "Usage: [OPTION]... [ARG]..."
+
+	# Does `process_options` should accept an empty sequence of arguments.
+	# ie. nothing except options.
+	# Is `false` by default.
+	#
+	# If required, if should be set by the client before calling `process_options`
+	var accept_no_arguments writable = false
+
+	# print the full usage of the tool.
+	# Is called by `process_option` on `--help`.
+	# It also could be called by the client.
+	fun usage
+	do
+		print tooldescription
+		option_context.usage
+	end
+
 	# Parse and process the options given on the command line
-	fun process_options
+	fun process_options(args: Sequence[String])
 	do
 		self.opt_warn.value = 1
 
 		# init options
 		option_context.parse(args)
+
+		if opt_help.value then
+			usage
+			exit 0
+		end
+
+		if opt_version.value then
+			print nit_version
+			exit 0
+		end
+
+		var errors = option_context.get_errors
+		if not errors.is_empty then
+			for e in errors do print "Error: {e}"
+			print tooldescription
+			print "Use --help for help"
+			exit 1
+		end
+
+		if option_context.rest.is_empty and not accept_no_arguments then
+			print tooldescription
+			print "Use --help for help"
+			exit 1
+		end
 
 		# Set verbose level
 		verbose_level = opt_verbose.value

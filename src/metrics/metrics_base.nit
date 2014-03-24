@@ -86,7 +86,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_nocolors)
 	end
 
-	redef fun process_options
+	redef fun process_options(args)
 	do
 		super
 		var val = self.opt_dir.value

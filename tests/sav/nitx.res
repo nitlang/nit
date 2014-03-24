@@ -1,1 +1,3 @@
-usage: ni path/to/module.nit [expression]
+Usage: nitx [OPTION]... <file.nit> [query]
+Displays specific pieces of API information from Nit source files.
+Use --help for help

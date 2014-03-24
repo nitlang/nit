@@ -103,14 +103,11 @@ end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
-toolcontext.process_options
+toolcontext.tooldescription = "Usage: nitdbg_client [OPTION]...\nConnects to a nitdbg_server and controls it."
+toolcontext.accept_no_arguments = true
+toolcontext.process_options(args)
 
 var debug: DebugClient
-
-if toolcontext.opt_help.value then
-	toolcontext.option_context.usage
-	return
-end
 
 # If the port value is not an Int between 0 and 65535 (Mandatory according to the norm)
 # Print the usage
