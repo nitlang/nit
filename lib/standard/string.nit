@@ -177,6 +177,9 @@ abstract class Text
 		return substring(from, length - from)
 	end
 
+	# Returns a reversed version of self
+	fun reversed: SELFTYPE is abstract
+
 	# Does self have a substring `str` starting from position `pos`?
 	#
 	#     assert "abcd".has_substring("bc",1)	     ==  true
@@ -627,6 +630,19 @@ class FlatString
 		# In other terms, if the index is valid
 		assert (index + index_from) <= index_to
 		return items[index + index_from]
+	end
+
+	redef fun reversed
+	do
+		var native = calloc_string(self.length + 1)
+		var reviter = chars.reverse_iterator
+		var pos = 0
+		while reviter.is_ok do
+			native[pos] = reviter.item
+			pos += 1
+			reviter.next
+		end
+		return native.to_s_with_length(self.length)
 	end
 
 	redef fun substring(from, count)
@@ -1111,6 +1127,17 @@ class FlatBuffer
 		else
 			return new FlatBuffer
 		end
+	end
+
+	redef fun reversed
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length)
+		var reviter = self.chars.reverse_iterator
+		while reviter.is_ok do
+			new_buf.add(reviter.item)
+			reviter.next
+		end
+		return new_buf
 	end
 
 	redef fun +(other)
