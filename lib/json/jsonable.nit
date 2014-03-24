@@ -39,6 +39,10 @@ redef class SequenceRead[ V ]
 	super Jsonable
 end
 
+redef class String
+	super Jsonable
+end
+
 # Can b converted to a Json object
 redef class Map[ K, V ]
 	super Jsonable

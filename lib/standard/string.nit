@@ -27,10 +27,12 @@ intrude import collection # FIXME should be collection::array
 
 # High-level abstraction for all text representations
 abstract class Text
-	super AbstractArrayRead[Char]
 
 	# Gets a view on the chars of the Text object
 	fun chars: StringCharView is abstract
+
+	# Number of characters contained in self.
+	fun length: Int is abstract
 
 	# Create a substring.
 	#
@@ -44,16 +46,44 @@ abstract class Text
 	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): String is abstract
 
-	redef fun is_empty: Bool do return self.length == 0
+	# Is the current Text empty (== "")
+	#	assert "".is_empty
+	#	assert not "foo".is_empty
+	fun is_empty: Bool do return self.length == 0
 
-	redef fun index_of(c: Char): Int
+	# Gets the first char of the Text
+	#
+	# DEPRECATED : Use self.chars.first instead
+	fun first: Char do return self.chars[0]
+
+	# Access a character at `index` in the string.
+	#
+	#     assert "abcd"[2]         == 'c'
+	#
+	# DEPRECATED : Use self.chars.[] instead
+	fun [](index: Int): Char do return self.chars[index]
+
+	# Gets the index of the first occurence of 'c'
+	#
+	# Returns -1 if not found
+	#
+	# DEPRECATED : Use self.chars.index_of instead
+	fun index_of(c: Char): Int
 	do
 		return index_of_from(c, 0)
 	end
 
-	redef fun last: Char do return self.chars[length-1]
+	# Gets the last char of self
+	#
+	# DEPRECATED : Use self.chars.last instead
+	fun last: Char do return self.chars[length-1]
 
-	redef fun index_of_from(c: Char, pos: Int): Int
+	# Gets the index of the first occurence of ´c´ starting from ´pos´
+	#
+	# Returns -1 if not found
+	#
+	# DEPRECATED : Use self.chars.index_of_from instead
+	fun index_of_from(c: Char, pos: Int): Int
 	do
 		var iter = self.chars.iterator_from(pos)
 		while iter.is_ok do
@@ -62,12 +92,25 @@ abstract class Text
 		return -1
 	end
 
-	redef fun last_index_of(c: Char): Int
+	# Gets the last index of char ´c´
+	#
+	# Returns -1 if not found
+	#
+	# DEPRECATED : Use self.chars.last_index_of instead
+	fun last_index_of(c: Char): Int
 	do
 		return last_index_of_from(c, length - 1)
 	end
 
-	redef fun last_index_of_from(item: Char, pos: Int): Int
+	# The index of the last occurrence of an element starting from pos (in reverse order).
+	# Example :
+	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', length-1) == 13
+	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', 12) == 8
+	#
+	# Returns -1 if not found
+	#
+	# DEPRECATED : Use self.chars.last_index_of_from instead
+	fun last_index_of_from(item: Char, pos: Int): Int
 	do
 		var iter = self.chars.reverse_iterator_from(pos)
 		while iter.is_ok do
@@ -77,17 +120,26 @@ abstract class Text
 		return -1
 	end
 
-	redef fun iterator: Iterator[Char]
+	# Gets an iterator on the chars of self
+	#
+	# DEPRECATED : Use self.chars.iterator instead
+	fun iterator: Iterator[Char]
 	do
 		return self.chars.iterator
 	end
 
-	redef fun has(c: Char): Bool
+	# Is 'c' contained in self ?
+	#
+	# DEPRECATED : Use self.chars.has instead
+	fun has(c: Char): Bool
 	do
 		return self.chars.has(c)
 	end
 
-	redef fun to_a: Array[Char] do return chars.to_a
+	# Gets an Array containing the chars of self
+	#
+	# DEPRECATED : Use self.chars.to_a instead
+	fun to_a: Array[Char] do return chars.to_a
 
 	# Create a substring from `self` beginning at the `from` position
 	#
@@ -377,7 +429,7 @@ abstract class AbstractString
 
 	readable private var _items: NativeString
 
-	redef var _length: Int
+	redef readable private var _length: Int
 
 	init do end
 
