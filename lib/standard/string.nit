@@ -991,6 +991,8 @@ abstract class Buffer
 	redef type SELFVIEW: BufferCharView
 	redef type SELFTYPE: Buffer
 
+	var is_dirty = true
+
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
@@ -1026,6 +1028,7 @@ class FlatBuffer
 
 	redef fun []=(index, item)
 	do
+		is_dirty = true
 		if index == length then
 			add(item)
 			return
@@ -1036,17 +1039,22 @@ class FlatBuffer
 
 	redef fun add(c)
 	do
+		is_dirty = true
 		if capacity <= length then enlarge(length + 5)
 		items[length] = c
 		length += 1
 	end
 
-	redef fun clear do length = 0
+	redef fun clear do
+		is_dirty = true
+		length = 0
+	end
 
 	redef fun empty do return new FlatBuffer
 
 	redef fun enlarge(cap)
 	do
+		is_dirty = true
 		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
@@ -1059,23 +1067,17 @@ class FlatBuffer
 
 	redef fun to_s: String
 	do
-		var l = length
-		var a = calloc_string(l+1)
-		items.copy_to(a, l, 0, 0)
-
-		# Ensure the afterlast byte is '\0' to nul-terminated char *
-		a[length] = '\0'
-
-		return a.to_s_with_length(length)
+		return to_cstring.to_s_with_length(length)
 	end
 
 	redef fun to_cstring
 	do
-		if real_items == null then
+		if is_dirty then
 			var new_native = calloc_string(length + 1)
 			new_native[length] = '\0'
 			items.copy_to(new_native, length, 0, 0)
 			real_items = new_native
+			is_dirty = false
 		end
 		return real_items.as(not null)
 	end
@@ -1116,6 +1118,7 @@ class FlatBuffer
 
 	redef fun append(s)
 	do
+		is_dirty = true
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
 		if s isa FlatString then
