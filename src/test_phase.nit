@@ -38,18 +38,4 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
 modelbuilder.run_phases
-
-if mmodules.length == 0 then
-	return
-end
-
-var mainmodule: MModule
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	# We need a main module, so we build it by importing all modules
-	mainmodule = new MModule(model, null, "<main>", new Location(null, 0, 0, 0, 0))
-	mainmodule.set_imported_mmodules(mmodules)
-end
-
-toolcontext.run_global_phases(mainmodule)
+toolcontext.run_global_phases(mmodules)

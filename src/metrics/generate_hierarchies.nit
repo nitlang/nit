@@ -30,11 +30,11 @@ end
 private class GenerateHierarchyPhase
 	super Phase
 
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
 		var model = toolcontext.modelbuilder.model
-		generate_module_hierarchy(toolcontext, model)
+		generate_module_hierarchy(toolcontext, given_mmodules)
 		generate_classdef_hierarchy(toolcontext, model)
 		generate_class_hierarchy(toolcontext, mainmodule)
 	end
@@ -43,12 +43,18 @@ end
 # Create a dot file representing the module hierarchy of a model.
 # Importation relation is represented with arrow
 # Nesting relation is represented with nested boxes
-fun generate_module_hierarchy(toolcontext: ToolContext, model: Model)
+fun generate_module_hierarchy(toolcontext: ToolContext, given_mmodules: Collection[MModule])
 do
+	var model = given_mmodules.first.model
 	var dot = new MProjectDot(model)
 
+	# Collect requested projects
+	for m in given_mmodules do
+		var g = m.mgroup
+		if g == null then continue
+		dot.mprojects.add(g.mproject)
+	end
 	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
-	dot.mprojects.add(model.mprojects.first)
 	print "generating {projectpath}"
 	dot.write_to_file(projectpath)
 

@@ -28,7 +28,7 @@ end
 
 private class StaticTypesMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_static_types.value and not toolcontext.opt_all.value then return
 		compute_static_types_metrics(toolcontext.modelbuilder)
