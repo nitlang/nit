@@ -24,7 +24,7 @@ import phase
 import frontend
 
 redef class ToolContext
-	var inheritance_metrics_phase = new InheritanceMetricsPhase(self, null)
+	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)
 end
 
 # Extract metrics about inheritance from model.

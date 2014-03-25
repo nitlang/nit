@@ -21,7 +21,7 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var self_metrics_phase = new SelfMetricsPhase(self, null)
+	var self_metrics_phase: Phase = new SelfMetricsPhase(self, null)
 end
 
 private class SelfMetricsPhase

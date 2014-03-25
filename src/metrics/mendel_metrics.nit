@@ -50,7 +50,7 @@ import phase
 import frontend
 
 redef class ToolContext
-	var mendel_metrics_phase = new MendelMetricsPhase(self, null)
+	var mendel_metrics_phase: Phase = new MendelMetricsPhase(self, null)
 end
 
 private class MendelMetricsPhase
