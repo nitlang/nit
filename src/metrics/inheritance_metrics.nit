@@ -76,9 +76,11 @@ private class InheritanceMetricsPhase
 				if mod_mclasses.is_empty then continue
 				mmodules.add_all(mgroup.mmodules)
 				mclasses.add_all(mod_mclasses)
+				cmetrics.clear
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
 				cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 				if csv then cmetrics.to_csv.save("{out}/{mgroup}_classes.csv")
+				hmetrics.clear
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 				if csv then hmetrics.to_csv.save("{out}/{mgroup}_inheritance.csv")

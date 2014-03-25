@@ -62,6 +62,7 @@ private class MClassesMetricsPhase
 
 			for mgroup in mproject.mgroups do
 				if mgroup.mmodules.is_empty then continue
+				metrics.clear
 
 				# Scalar metrics
 				print toolcontext.format_h3("  `- group {mgroup.full_name}")
@@ -75,6 +76,7 @@ private class MClassesMetricsPhase
 			end
 		end
 		if not mclasses.is_empty then
+			metrics.clear
 			# Global metrics
 			print toolcontext.format_h2("\n ## global metrics")
 			metrics.collect(mclasses)
