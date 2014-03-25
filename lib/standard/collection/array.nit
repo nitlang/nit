@@ -457,8 +457,8 @@ class ArrayMap[K: Object, E]
 		end
 	end
 
-	redef var keys: ArrayMapKeys[K, E] = new ArrayMapKeys[K, E](self)
-	redef var values: ArrayMapValues[K, E] = new ArrayMapValues[K, E](self)
+	redef var keys: RemovableCollection[K] = new ArrayMapKeys[K, E](self)
+	redef var values: RemovableCollection[E] = new ArrayMapValues[K, E](self)
 
 	# O(1)
 	redef fun length do return _items.length
