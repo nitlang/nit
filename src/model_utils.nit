@@ -255,6 +255,15 @@ redef class MClass
 	end
 end
 
+redef class MAttribute
+	# Is this attribute nullable for sure?
+	#
+	# This mean that its introduction is declarred with a nullable static type
+	# since attributes are invariant this will work on most cases
+	# attributes with static type anchored with a virtual type are not "nullable for-sure"
+	# because this type can be redefined in subclasses
+	fun is_nullable: Bool do return intro.static_mtype isa MNullableType
+end
 
 # Sorters
 
