@@ -54,6 +54,8 @@ redef class ToolContext
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
 	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
+	# --isset-checks-metrics
+	var opt_isset_checks_metrics: OptionBool = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
 	# --stacktrace
 	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
@@ -64,7 +66,7 @@ redef class ToolContext
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
-		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
+		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 	end
@@ -574,6 +576,13 @@ abstract class AbstractCompiler
 			v.compiler.header.add_decl("extern long count_invoke_by_inline;")
 		end
 
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add_decl("long count_attr_reads = 0;")
+			v.add_decl("long count_isset_checks = 0;")
+			v.compiler.header.add_decl("extern long count_attr_reads;")
+			v.compiler.header.add_decl("extern long count_isset_checks;")
+		end
+
 		v.add_decl("void sig_handler(int signo)\{")
 		v.add_decl("printf(\"Caught signal : %s\\n\", strsignal(signo));")
 		v.add_decl("show_backtrace(signo);")
@@ -673,6 +682,12 @@ abstract class AbstractCompiler
 			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
 			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
 		end
+
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add("printf(\"# dynamic attribute reads: %ld\\n\", count_attr_reads);")
+			v.add("printf(\"# dynamic isset checks: %ld\\n\", count_isset_checks);")
+		end
+
 		v.add("return 0;")
 		v.add("\}")
 	end
