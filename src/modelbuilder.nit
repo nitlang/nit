@@ -43,10 +43,13 @@ redef class ToolContext
 	# Option --only-parse
 	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
+	# Option --ignore-visibility
+	var opt_ignore_visibility: OptionBool = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel)
+		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel, opt_ignore_visibility)
 	end
 
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)

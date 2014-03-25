@@ -242,7 +242,7 @@ private class TypeVisitor
 		end
 
 		assert mproperty isa MMethod
-		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
+		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
 			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self.")
 			return null
 		end
