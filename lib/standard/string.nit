@@ -946,8 +946,8 @@ abstract class Buffer
 	# Enlarges the subsequent array containing the chars of self
 	fun enlarge(cap: Int) is abstract
 
-	# Adds the content of string `s` at the end of self
-	fun append(s: String) is abstract
+	# Adds the content of text `s` at the end of self
+	fun append(s: Text) is abstract
 
 end
 
@@ -1036,7 +1036,17 @@ class FlatBuffer
 	do
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
-		s.items.copy_to(items, sl, s.index_from, length)
+		if s isa String then
+			s.items.copy_to(items, sl, s.index_from, length)
+		else if s isa FlatBuffer then
+			s.items.copy_to(items, sl, 0, length)
+		else
+			var curr_pos = self.length
+			for i in s.chars do
+				items[curr_pos] = i
+				curr_pos += 1
+			end
+		end
 		length += sl
 	end
 
