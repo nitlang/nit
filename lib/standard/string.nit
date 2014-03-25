@@ -470,6 +470,9 @@ abstract class FlatText
 
 	private var items: NativeString
 
+	# Real items, used as cache for to_cstring is called
+	private var real_items: nullable NativeString = null
+
 	redef var length: Int
 
 	init do end
@@ -733,10 +736,12 @@ class FlatString
 	# Return a null terminated char *
 	redef fun to_cstring: NativeString
 	do
+		if real_items != null then return real_items.as(not null)
 		if index_from > 0 or index_to != items.cstring_length - 1 then
 			var newItems = calloc_string(length + 1)
 			self.items.copy_to(newItems, length, index_from, 0)
 			newItems[length] = '\0'
+			self.real_items = newItems
 			return newItems
 		end
 		return items
@@ -1043,10 +1048,13 @@ class FlatBuffer
 
 	redef fun to_cstring
 	do
-		var new_native = calloc_string(length + 1)
-		new_native[length] = '\0'
-		items.copy_to(new_native, length, 0, 0)
-		return new_native
+		if real_items == null then
+			var new_native = calloc_string(length + 1)
+			new_native[length] = '\0'
+			items.copy_to(new_native, length, 0, 0)
+			real_items = new_native
+		end
+		return real_items.as(not null)
 	end
 
 	# Create a new empty string.
