@@ -1023,12 +1023,22 @@ class FlatBuffer
 		with_capacity(5)
 	end
 
-	init from(s: String)
+	init from(s: Text)
 	do
 		capacity = s.length + 1
 		length = s.length
 		items = calloc_string(capacity)
-		s.items.copy_to(items, length, s.index_from, 0)
+		if s isa FlatString then
+			s.items.copy_to(items, length, s.index_from, 0)
+		else if s isa FlatBuffer then
+			s.items.copy_to(items, length, 0, 0)
+		else
+			var curr_pos = 0
+			for i in s.chars do
+				items[curr_pos] = i
+				curr_pos += 1
+			end
+		end
 	end
 
 	# Create a new empty string with a given capacity.
