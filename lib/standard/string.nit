@@ -56,6 +56,12 @@ abstract class Text
 	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
+	# Concatenates `o` to `self`
+	fun +(o: Text): SELFTYPE is abstract
+
+	# Auto-concatenates self `i` times
+	fun *(i: Int): SELFTYPE is abstract
+
 	# Is the current Text empty (== "")
 	#	assert "".is_empty
 	#	assert not "foo".is_empty
@@ -770,7 +776,7 @@ class String
 	# The concatenation of `self` with `s`
 	#
 	#     assert "hello " + "world!"         == "hello world!"
-	fun +(s: String): String
+	redef fun +(s)
 	do
 		var my_length = self.length
 		var its_length = s.length
@@ -780,19 +786,27 @@ class String
 		var target_string = calloc_string(my_length + its_length + 1)
 
 		self.items.copy_to(target_string, my_length, index_from, 0)
-		s.items.copy_to(target_string, its_length, s.index_from, my_length)
+		if s isa String then
+			s.items.copy_to(target_string, its_length, s.index_from, my_length)
+		else if s isa FlatBuffer then
+			s.items.copy_to(target_string, its_length, 0, my_length)
+		else
+			var curr_pos = my_length
+			for i in s.chars do
+				target_string[curr_pos] = i
+				curr_pos += 1
+			end
+		end
 
 		target_string[total_length] = '\0'
 
 		return target_string.to_s_with_length(total_length)
 	end
 
-	# `i` repetitions of `self`
-	#
 	#     assert "abc"*3           == "abcabcabc"
 	#     assert "abc"*1           == "abc"
 	#     assert "abc"*0           == ""
-	fun *(i: Int): String
+	redef fun *(i)
 	do
 		assert i >= 0
 
@@ -1052,6 +1066,23 @@ class FlatBuffer
 		else
 			return new FlatBuffer
 		end
+	end
+
+	redef fun +(other)
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length + other.length)
+		new_buf.append(self)
+		new_buf.append(other)
+		return new_buf
+	end
+
+	redef fun *(repeats)
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length * repeats)
+		for i in [0..repeats[ do
+			new_buf.append(self)
+		end
+		return new_buf
 	end
 end
 
