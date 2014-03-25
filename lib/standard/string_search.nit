@@ -45,10 +45,10 @@ interface Pattern
 	# Search all `self` occurrences into `s`.
 	#
 	#     assert 'l'.search_all_in("hello world").length  == 3
-	#     assert 'z'.search_all_in("hello world"),length  == 0
+	#     assert 'z'.search_all_in("hello world").length  == 0
 	#
 	# Note: Is used by `String::search_all`.
-	fun search_all_in(s: String): Array[Match]
+	protected fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var match = search_in(s, 0)
@@ -68,7 +68,7 @@ interface Pattern
 	#     assert 'z'.split_in("hello world").join("|")  == "hello world"
 	#
 	# Note: is used by `String::split`
-	fun split_in(s: String): Array[Match]
+	protected fun split_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var i = 0 # Cursor
