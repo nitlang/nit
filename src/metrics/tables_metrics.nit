@@ -22,7 +22,7 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var tables_metrics_phase = new TablesMetricsPhase(self, null)
+	var tables_metrics_phase: Phase = new TablesMetricsPhase(self, null)
 end
 
 private class TablesMetricsPhase

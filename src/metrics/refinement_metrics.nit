@@ -22,7 +22,7 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var refinement_metrics_phase = new RefinementMetricsPhase(self, null)
+	var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)
 end
 
 private class RefinementMetricsPhase

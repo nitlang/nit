@@ -23,7 +23,7 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var nullables_metrics_phase = new NullablesMetricsPhase(self, null)
+	var nullables_metrics_phase: Phase = new NullablesMetricsPhase(self, null)
 end
 
 private class NullablesMetricsPhase

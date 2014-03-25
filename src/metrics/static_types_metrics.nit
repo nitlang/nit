@@ -23,7 +23,7 @@ import modelize_class
 import frontend
 
 redef class ToolContext
-	var static_types_metrics_phase = new StaticTypesMetricsPhase(self, null)
+	var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)
 end
 
 private class StaticTypesMetricsPhase
