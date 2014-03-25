@@ -121,6 +121,9 @@ abstract class Text
 		return last_index_of_from(c, length - 1)
 	end
 
+	# Return a null terminated char *
+	fun to_cstring: NativeString do return flatten.to_cstring
+
 	# The index of the last occurrence of an element starting from pos (in reverse order).
 	# Example :
 	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', length-1) == 13
@@ -712,7 +715,7 @@ class FlatString
 	end
 
 	# Return a null terminated char *
-	fun to_cstring: NativeString
+	redef fun to_cstring: NativeString
 	do
 		if index_from > 0 or index_to != items.cstring_length - 1 then
 			var newItems = calloc_string(length + 1)
@@ -1020,6 +1023,14 @@ class FlatBuffer
 		a[length] = '\0'
 
 		return a.to_s_with_length(length)
+	end
+
+	redef fun to_cstring
+	do
+		var new_native = calloc_string(length + 1)
+		new_native[length] = '\0'
+		items.copy_to(new_native, length, 0, 0)
+		return new_native
 	end
 
 	# Create a new empty string.
