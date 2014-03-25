@@ -39,7 +39,7 @@ class MProjectTree
 		end
 	end
 
-	var linex_comparator: nullable LinexComparator = null
+	private var linex_comparator: nullable LinexComparator = null
 
 	# Sort modules and groups with their names
 	fun sort_with_alpha

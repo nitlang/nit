@@ -242,8 +242,8 @@ class HashMap[K: Object, V]
 		enlarge(0)
 	end
 
-	redef var keys: HashMapKeys[K, V] = new HashMapKeys[K, V](self)
-	redef var values: HashMapValues[K, V] = new HashMapValues[K, V](self)
+	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self)
+	redef var values: RemovableCollection[V] = new HashMapValues[K, V](self)
 end
 
 # View of the keys of a HashMap

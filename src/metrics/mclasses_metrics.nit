@@ -23,7 +23,7 @@ import phase
 import frontend
 
 redef class ToolContext
-	var mclasses_metrics_phase = new MClassesMetricsPhase(self, null)
+	var mclasses_metrics_phase: Phase = new MClassesMetricsPhase(self, null)
 end
 
 # Extract metrics about mclasses from model.

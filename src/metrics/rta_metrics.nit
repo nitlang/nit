@@ -25,7 +25,7 @@ import mclasses_metrics
 import frontend
 
 redef class ToolContext
-	var rta_metrics_phase = new RTAMetricsPhase(self, null)
+	var rta_metrics_phase: Phase = new RTAMetricsPhase(self, null)
 end
 
 private class RTAMetricsPhase

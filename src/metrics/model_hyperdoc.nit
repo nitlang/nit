@@ -23,7 +23,7 @@ import phase
 import frontend
 
 redef class ToolContext
-	var model_hyperdoc_phase = new ModelHyperdocPhase(self, null)
+	var model_hyperdoc_phase: Phase = new ModelHyperdocPhase(self, null)
 end
 
 private class ModelHyperdocPhase
