@@ -42,8 +42,8 @@ redef class ToolContext
 	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
 	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
-	# --no-check-initialization
-	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+	# --no-check-attr-isset
+	var opt_no_check_attr_isset: OptionBool = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
 	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 	# --no-check-autocast
@@ -63,7 +63,7 @@ redef class ToolContext
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
-		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
