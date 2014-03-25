@@ -175,6 +175,14 @@ redef class MClass
 		return set
 	end
 
+	# the set of all accessible mattributes for this class
+	fun all_mattributes(mainmodule: MModule, min_visibility: MVisibility): Set[MAttribute] do
+		var set = new HashSet[MAttribute]
+		for mprop in all_mproperties(mainmodule, min_visibility) do
+			if mprop isa MAttribute then set.add(mprop)
+		end
+		return set
+	end
 
 	# Get the list of locally refined methods in 'self'.
 	fun redef_methods: Set[MMethod] do
@@ -246,6 +254,7 @@ redef class MClass
 		return self.kind == abstract_kind
 	end
 end
+
 
 # Sorters
 
