@@ -17,8 +17,6 @@
 # Binding of C libCurl which allow us to interact with network.
 module curl_c is pkgconfig("libcurl")
 
-import pipeline
-
 in "C header" `{
 	#include <stdio.h>
 	#include <stdlib.h>
@@ -336,7 +334,11 @@ redef class Collection[E]
 			print "Collection item must be strings."
 		end
 		var primList = new CURLSList.with_str(self.first)
-		for s in self.skip_head(1) do primList.append(s)
+		var is_first = true
+		for s in self do
+			if not is_first then primList.append(s)
+			is_first = false
+		end
 		return primList
 	end
 end

@@ -14,26 +14,29 @@
 
 import pipeline
 
-var a1 = [1..1000]
+var a1 = [1,2,3,4,5]
 var a2 = [1,2,1,1,1,3,2]
 
-print a2.sort_filter.to_a
-print a2.uniq.to_a
-print a2.seq_uniq.to_a
+print a2.iterator.sort.to_a
+print a2.iterator.uniq.to_a
+print a2.iterator.seq_uniq.to_a
 
 ##
 
-print((a1 + a2).length)
+print((a1.iterator + a2.iterator).to_a)
 
-print a2.alternate(0).to_a
+print a1.iterator.alternate(0).to_a
 
-print a2.skip(1).to_a
+print a2.iterator.skip(1).to_a
 
 ##
 
-print a1.head(2).to_a
-print a1.skip_head(998).to_a
-print a1.tail(2).to_a
-print a1.skip_tail(998).to_a
+var i = a1.iterator
+print i.head(2).to_a
+print i.to_a
 
-print a1.skip_head(1).head(3).skip_tail(1).tail(1).to_a
+print a1.iterator.skip_head(2).to_a
+print a1.iterator.tail(2).to_a
+print a1.iterator.skip_tail(2).to_a
+
+print a1.iterator.skip_head(1).head(3).skip_tail(1).tail(1).to_a
