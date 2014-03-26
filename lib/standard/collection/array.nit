@@ -21,6 +21,9 @@ import abstract_collection
 abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
+	# Track the validity of iterators
+	var _protection = new CanaryProtection
+
 	redef readable var _length: Int = 0
 
 	redef fun is_empty do return _length == 0
@@ -143,13 +146,17 @@ abstract class AbstractArray[E]
 	# However, this method can be used to prepare a large amount of add
 	fun enlarge(cap: Int) is abstract
 
-	redef fun push(item) do add(item)
+	redef fun push(item) do
+		add(item)
+		#_protection.kill_canary
+	end
 
 	redef fun pop
 	do
 		assert not_empty: not is_empty
 		var r = last
 		_length -= 1
+		_protection.kill_canary
 		return r
 	end
 
@@ -164,6 +171,7 @@ abstract class AbstractArray[E]
 			i += 1
 		end
 		_length = l - 1
+		_protection.kill_canary
 		return r
 	end
 
@@ -175,6 +183,7 @@ abstract class AbstractArray[E]
 			i -= 1
 		end
 		self[0] = item
+		_protection.kill_canary
 	end
 
 	redef fun insert(item: E, pos: Int)
@@ -182,13 +191,26 @@ abstract class AbstractArray[E]
 		enlarge(length + 1)
 		copy_to(pos, length-pos, self, pos + 1)
 		self[pos] = item
+		_protection.kill_canary
 	end
 
-	redef fun add(item) do self[length] = item
+	redef fun add(item)
+	do
+		self[length] = item
+		_protection.kill_canary
+	end
 
-	redef fun clear do _length = 0
+	redef fun clear
+	do
+		_length = 0
+		_protection.kill_canary
+	end
 
-	redef fun remove(item) do remove_at(index_of(item))
+	redef fun remove(item)
+	do
+		remove_at(index_of(item))
+		_protection.kill_canary
+	end
 
 	redef fun remove_all(item)
 	do
@@ -210,6 +232,7 @@ abstract class AbstractArray[E]
 			end
 			_length = l - 1
 		end
+		_protection.kill_canary
 	end
 
 	# Invert two elements in the array
@@ -265,6 +288,7 @@ class Array[E]
 		end
 		_length = l + 1
 		_items[l] = item
+		#_protection.kill_canary
 	end
 
 	redef fun enlarge(cap)
@@ -346,16 +370,31 @@ end
 private class ArrayIterator[E]
 	super IndexedIterator[E]
 
-	redef fun item do return _array[_index]
+	redef fun item do
+		assert iterator_still_valid: _canary.item
+		return _array[_index]
+	end
 
 	# redef fun item=(e) do _array[_index] = e
 
-	redef fun is_ok do return _index < _array.length
+	redef fun is_ok do
+		assert iterator_still_valid: _canary.item
+		return _index < _array.length
+	end
 
-	redef fun next do _index += 1
+	redef fun next do
+		assert iterator_still_valid: _canary.item
+		_index += 1
+	end
+
+	redef fun is_still_valid do return _canary.item
+
+	# Track the validity
+	var _canary: Container[Bool]
 
 	init(a: AbstractArrayRead[E])
 	do
+		_canary = a._protection.get_canary
 		_array = a
 		_index = 0
 	end

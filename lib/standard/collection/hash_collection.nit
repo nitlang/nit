@@ -23,6 +23,9 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	var _capacity: Int = 0 # Size of _array
 	var _length: Int = 0 # Number of items in the map
 
+	# Track the validity of iterators
+	var _protection = new CanaryProtection
+
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
 
@@ -95,6 +98,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		if l >= _capacity then
 			enlarge(l * 2)
 		end
+
+		#_protection.kill_canary
 	end
 
 	# Remove the node assosiated with the key
@@ -132,6 +137,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		end
 
 		_last_accessed_key = null
+
+		_protection.kill_canary
 	end
 
 	# Clear the whole structure
@@ -146,6 +153,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		_first_item = null
 		_last_item = null
 		_last_accessed_key = null
+
+		_protection.kill_canary
 	end
 
 	# Force a capacity
@@ -352,7 +361,11 @@ end
 
 class HashMapIterator[K: Object, V]
 	super MapIterator[K, V]
-	redef fun is_ok do return _node != null
+	redef fun is_ok
+	do
+		assert iterator_still_valid: _canary.item
+		return _node != null
+	end
 
 	redef fun item
 	do
@@ -384,10 +397,16 @@ class HashMapIterator[K: Object, V]
 	# The current node
 	var _node: nullable HashMapNode[K, V]
 
+	# Track the validity
+	var _canary: Container[Bool]
+
+	redef fun is_still_valid do return _canary.item
+
 	init(map: HashMap[K, V])
 	do
 		_map = map
 		_node = map.first_item
+		_canary = map._protection.get_canary
 	end
 end
 
@@ -455,7 +474,11 @@ end
 
 private class HashSetIterator[E: Object]
 	super Iterator[E]
-	redef fun is_ok do return _node != null
+	redef fun is_ok
+	do
+		assert iterator_still_valid: _canary.item
+		return _node != null
+	end
 
 	redef fun item
 	do
@@ -475,10 +498,16 @@ private class HashSetIterator[E: Object]
 	# The position in the internal map storage
 	var _node: nullable HashSetNode[E]
 
+	# Track the validity
+	var _canary: Container[Bool]
+
+	redef fun is_still_valid do return _canary.item
+
 	init(set: HashSet[E])
 	do
 		_set = set
 		_node = set._first_item
+		_canary = set._protection.get_canary
 	end
 end
 
