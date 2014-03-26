@@ -439,6 +439,9 @@ abstract class AbstractCompiler
 			stream.write(names[i])
 			stream.write("\"\n")
 		end
+		if names.is_empty then
+			stream.write("DEAD,\t\"DEAD\"\n") # Force at least one entry
+		end
 		stream.write("####\n")
 		stream.write("%%\n")
 		stream.close
