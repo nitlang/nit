@@ -14,6 +14,7 @@
 module hash_collection
 
 import array
+intrude import abstract_collection
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K: Object, N: HashNode[Object]]
@@ -22,6 +23,9 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
 	var _capacity: Int = 0 # Size of _array
 	var _length: Int = 0 # Number of items in the map
+
+	# Track the validity of iterators
+	var _protection = new CanaryProtection
 
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
@@ -95,6 +99,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		if l >= _capacity then
 			enlarge(l * 2)
 		end
+
+		#_protection.kill_canary
 	end
 
 	# Remove the node assosiated with the key
@@ -132,6 +138,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		end
 
 		_last_accessed_key = null
+
+		_protection.kill_canary
 	end
 
 	# Clear the whole structure
@@ -146,6 +154,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		_first_item = null
 		_last_item = null
 		_last_accessed_key = null
+
+		_protection.kill_canary
 	end
 
 	# Force a capacity
@@ -352,22 +362,28 @@ end
 
 class HashMapIterator[K: Object, V]
 	super MapIterator[K, V]
-	redef fun is_ok do return _node != null
+	redef fun is_ok
+	do
+		return _node != null
+	end
 
 	redef fun item
 	do
+		assert iterator_still_valid: _canary._alive
 		assert is_ok
 		return _node._value
 	end
 
 	#redef fun item=(value)
 	#do
+	#	assert iterator_still_valid: _canary._alive
 	#	assert is_ok
 	#	_node.second = value
 	#end
 
 	redef fun key
 	do
+		assert iterator_still_valid: _canary._alive
 		assert is_ok
 		return _node._key
 	end
@@ -384,10 +400,16 @@ class HashMapIterator[K: Object, V]
 	# The current node
 	var _node: nullable HashMapNode[K, V]
 
+	# Track the validity
+	var _canary: Canary
+
+	redef fun is_still_valid do return _canary._alive
+
 	init(map: HashMap[K, V])
 	do
 		_map = map
 		_node = map.first_item
+		_canary = map._protection.get_canary
 	end
 end
 
@@ -455,10 +477,14 @@ end
 
 private class HashSetIterator[E: Object]
 	super Iterator[E]
-	redef fun is_ok do return _node != null
+	redef fun is_ok
+	do
+		return _node != null
+	end
 
 	redef fun item
 	do
+		assert iterator_still_valid: _canary._alive
 		assert is_ok
 		return _node._key
 	end
@@ -475,10 +501,16 @@ private class HashSetIterator[E: Object]
 	# The position in the internal map storage
 	var _node: nullable HashSetNode[E]
 
+	# Track the validity
+	var _canary: Canary
+
+	redef fun is_still_valid do return _canary._alive
+
 	init(set: HashSet[E])
 	do
 		_set = set
 		_node = set._first_item
+		_canary = set._protection.get_canary
 	end
 end
 

@@ -877,3 +877,73 @@ class Couple[F, S]
 		_second = s
 	end
 end
+
+# Helper class to implement the protection between readers and writers
+# This class is mainly used by collection to implements the invalidation
+# of iterators when the original collection is structurally modified.
+#
+# This implementation is adapted when numerous readers (iterator)
+# can be instantiated then forgotten.
+# The writer (collection) does not observe (register) its readers.
+# Thus, the logic of the protection yields in the readers as follow:
+#
+# The CanaryProtection(*) instance is shared by the writer and the readers.
+# In practice, only the collection must have it.
+# Iterators may access it trough the collection.
+#
+# Readers (iterators) adopt a canary `get_canary` from the collection.
+# Canaries are just shared references on a Boolean.
+# A fresh canary is always alive (true). `my_canary.alive == true`
+#
+# On access, the reader should check the canary.
+# If dead (false) it means that the collection was strucutrally modified.
+#
+# Writers (collection) does not care about readers.
+# It just kills the canary (`kill_canary`) when a strucutral modification occurs.
+#
+# If a modification is done by an iterator, it should, in order:
+#
+# * check the canary: to ensure there was no concurent modification
+# * do the modification. That shoud kill the canary to prevent concurent modification
+# * get a new canary: to replace the dead one
+#
+# (*) Note: The term "canary" as used here comes from coal mining originally.
+# See http://en.wikipedia.org/wiki/Animal_sentinel for details.
+class CanaryProtection
+	# The current canary.
+	# In the stable phase, it is either:
+	# * `null` no new iterator since the last modification
+	# * `true` the alive canary shared by iterators since the last modification
+	var _canary: nullable Canary = null
+
+	# Get a fresh live canary.
+	# To be called by the iterator, then checked regulally.
+	# ENSURE: `result.item  == true`
+	fun get_canary: Canary
+	do
+		var c = _canary
+		if c != null then return c
+		c = new Canary
+		_canary = c
+		return c
+	end
+
+	# Kill the curent canary, thus invalidate all potential readers.
+	# To be called by the collection when a structural modification is done.
+	fun kill_canary
+	do
+		var c = _canary
+		if c == null then return
+		c._alive = false
+		_canary = null
+	end
+end
+
+# A canary sentinel provided by `CanaryProtection`
+class Canary
+	# Is the canary still alive?
+	# The point of the whole Canary class is to
+	# share the `alive` flag, that is invalidated by
+	# writers and checked by readers.
+	var _alive = true
+end

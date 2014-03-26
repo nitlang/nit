@@ -13,7 +13,7 @@
 # This module handle double linked lists
 module list
 
-import abstract_collection
+intrude import abstract_collection
 
 # Double linked lists.
 class List[E]
@@ -101,6 +101,7 @@ class List[E]
 			node.prev = _tail
 		end
 		_tail = node
+		_protection.kill_canary
 	end
 
 	# O(1)
@@ -114,6 +115,7 @@ class List[E]
 			_head.prev = node
 		end
 		_head = node
+		_protection.kill_canary
 	end
 
 	# O(n)
@@ -134,6 +136,7 @@ class List[E]
 		nnode.prev = node
 		nnode.next = next
 		node.next = nnode
+		_protection.kill_canary
 	end
 
 	# Append `l` to `self` but clear `l`.
@@ -149,6 +152,8 @@ class List[E]
 		end
 		_tail = l._tail
 		l.clear
+		_protection.kill_canary
+		l._protection.kill_canary
 	end
 
 # Remove elements
@@ -164,6 +169,7 @@ class List[E]
 		else
 			_tail.next = null
 		end
+		_protection.kill_canary
 		return node.item
 	end
 
@@ -178,6 +184,7 @@ class List[E]
 		else
 			_head.prev = null
 		end
+		_protection.kill_canary
 		return node.item
 	end
 
@@ -197,6 +204,7 @@ class List[E]
 	do
 		_head = null
 		_tail = null
+		_protection.kill_canary
 	end
 
 
@@ -213,6 +221,9 @@ class List[E]
 
 	# The last node of the list
 	var _tail: nullable ListNode[E]
+
+	# Track the validity of iterators
+	var _protection = new CanaryProtection
 
 	# Get the `i`th node. get `null` otherwise.
 	private fun get_node(i: Int): nullable ListNode[E]
@@ -253,6 +264,7 @@ class List[E]
 			node.prev.next = node.next
 			node.next.prev = node.prev
 		end
+		_protection.kill_canary
 	end
 
 	private fun insert_before(element: E, node: ListNode[E])
@@ -267,17 +279,28 @@ class List[E]
 		nnode.prev = prev
 		nnode.next = node
 		node.prev = nnode
+		_protection.kill_canary
 	end
 end
 
 # This is the iterator class of List
 class ListIterator[E]
 	super IndexedIterator[E]
-	redef fun item do return _node.item
+	redef fun item do
+		assert iterator_still_valid: _canary._alive
+		return _node.item
+	end
 
-	fun item=(e: E) do _node.item = e
+	fun item=(e: E)
+	do
+		assert iterator_still_valid: _canary._alive
+		_node.item = e
+	end
 
-	redef fun is_ok do return not _node == null
+	redef fun is_ok
+	do
+		return not _node == null
+	end
 
 	redef fun next
 	do
@@ -285,9 +308,15 @@ class ListIterator[E]
 		_index += 1
 	end
 
+	# Track the validity
+	var _canary: Canary
+
+	redef fun is_still_valid do return _canary._alive
+
 	# Build a new iterator for `list`.
 	private init(list: List[E])
 	do
+		_canary = list._protection.get_canary
 		_list = list
 		_node = list._head
 		_index = 0
@@ -305,13 +334,17 @@ class ListIterator[E]
 	# Remove the current item
 	fun delete
 	do
+		assert iterator_still_valid: _canary._alive
 		_list.remove_node(_node.as(not null))
+		_canary = _list._protection.get_canary
 	end
 
 	# Insert before the current item
 	fun insert_before(element: E)
 	do
+		assert iterator_still_valid: _canary._alive
 		_list.insert_before(element, _node.as(not null))
+		_canary = _list._protection.get_canary
 	end
 end
 
