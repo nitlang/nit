@@ -80,11 +80,39 @@ private class RTAMetricsPhase
 		gmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 		if csv then gmetrics.to_csv.save("{out}/complexity.csv")
 
+		callsite_info(analysis)
+
 		# dump type and method infos
 		if csv then
 			analysis.live_types_to_csv.save("{out}/rta_types.csv")
 			analysis.live_methods_to_tree.write_to_file("{out}/rta_methods.dat")
 		end
+	end
+
+	fun callsite_info(rta: RapidTypeAnalysis)
+	do
+		print toolcontext.format_h2("\n ## Callsites")
+		print "* {rta.live_callsites.length} live callsites"
+
+		var csep = new Counter[MPropDef]
+		var cglo = new Counter[MPropDef]
+		var morphisme = new Counter[Int]
+		for cs in rta.live_callsites do
+			csep.inc(cs.mpropdef)
+			var targets = rta.live_targets(cs)
+			for d in targets do
+				cglo.inc(d)
+			end
+			morphisme.inc(targets.length)
+		end
+
+		print toolcontext.format_h3("MMethodDef locally designated (by number of CallSites)")
+		csep.print_summary
+		csep.print_elements(5)
+
+		print toolcontext.format_h3("MMethodDef possibly invoked at runtime (by number of CallSites)")
+		cglo.print_summary
+		cglo.print_elements(5)
 	end
 end
 
