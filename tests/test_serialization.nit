@@ -16,6 +16,8 @@
 
 import serialization
 import json_serialization
+import sql_serialization
+import sqlite3
 
 # Simple class
 class A
@@ -90,11 +92,32 @@ class D
 	redef fun to_s do return "<D: {super} {d != null}>"
 end
 
+class E
+	auto_serializable
+	super Serializable
+
+	var gender: Char
+	var age: Int
+	var name: String
+	var is_major: Bool
+	
+	init(c: Char, i: Int, s: String, b: Bool)
+	do
+		self.gender = c
+		self.age = i
+		self.name = s
+		self.is_major = b
+	end
+	redef fun to_s do return "<E: {gender} {name}, {age}, {is_major}>"
+end
+
 var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
 var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
 var c = new C(a, b)
 var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
 d.d = d
+
+var e = new E('M', 21, "Name", true)
 
 for o in new Array[nullable Serializable].with_items(a, b, c, d) do
 	var stream = new StringOStream
@@ -104,3 +127,25 @@ for o in new Array[nullable Serializable].with_items(a, b, c, d) do
 	print "# Nit:\n{o}\n"
 	print "# Json:\n{stream}\n"
 end
+
+var serializer = new SqlSerializer("serialization.db")
+serializer.serialize(e)
+
+var db = new Sqlite3.open("serialization.db")
+assert sqlite_open: db.error.is_ok
+
+var sel = "SELECT * FROM e;"
+
+var stm = db.prepare(sel)
+
+while stm.step.is_row do
+	assert stm.column_text(1) == 'M'
+	assert stm.column_int(2) == 21
+	assert stm.column_text(3) == "Name"
+end
+
+db.close
+
+
+
+
