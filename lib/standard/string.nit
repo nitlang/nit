@@ -632,7 +632,6 @@ class FlatString
 	super String
 
 	redef type SELFTYPE: FlatString
-	redef type SELFVIEW: FlatStringCharView
 
 	# Index in _items of the start of the string
 	private var index_from: Int
@@ -1025,7 +1024,6 @@ class FlatBuffer
 	super FlatText
 	super Buffer
 
-	redef type SELFVIEW: FlatBufferCharView
 	redef type SELFTYPE: FlatBuffer
 
 	redef var chars: SELFVIEW = new FlatBufferCharView(self)
