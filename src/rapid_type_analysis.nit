@@ -515,8 +515,7 @@ redef class ACrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "init")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -525,8 +524,7 @@ redef class AOrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "without_last")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 

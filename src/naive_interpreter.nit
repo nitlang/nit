@@ -1427,7 +1427,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end
@@ -1442,7 +1442,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end

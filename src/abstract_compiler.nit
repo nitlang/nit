@@ -2365,7 +2365,7 @@ redef class ACrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2377,7 +2377,7 @@ redef class AOrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end

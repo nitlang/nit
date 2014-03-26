@@ -1085,6 +1085,8 @@ redef class AArrayExpr
 end
 
 redef class ARangeExpr
+	var init_callsite: nullable CallSite
+
 	redef fun accept_typing(v)
 	do
 		var discrete_class = v.get_mclass(self, "Discrete")
@@ -1095,13 +1097,28 @@ redef class ARangeExpr
 		if t1 == null or t2 == null then return
 		var mclass = v.get_mclass(self, "Range")
 		if mclass == null then return # Forward error
+		var mtype
 		if v.is_subtype(t1, t2) then
-			self.mtype = mclass.get_mtype([t2])
+			mtype = mclass.get_mtype([t2])
 		else if v.is_subtype(t2, t1) then
-			self.mtype = mclass.get_mtype([t1])
+			mtype = mclass.get_mtype([t1])
 		else
 			v.error(self, "Type Error: Cannot create range: {t1} vs {t2}")
+			return
 		end
+
+		self.mtype = mtype
+
+		# get the constructor
+		var callsite
+		if self isa ACrangeExpr then
+			callsite = v.get_method(self, mtype, "init", false)
+		else if self isa AOrangeExpr then
+			callsite = v.get_method(self, mtype, "without_last", false)
+		else
+			abort
+		end
+		init_callsite = callsite
 	end
 end
 
