@@ -828,16 +828,6 @@ redef class AForExpr
 		if objcla == null then return
 
 		# check iterator method
-		var unsafe_type = v.anchor_to(mtype)
-		if v.try_get_mproperty_by_name2(self, unsafe_type, "iterator") == null then
-			if v.try_get_mproperty_by_name2(self, unsafe_type, "iterate") == null then
-				v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
-			else
-				v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
-			end
-			return
-		end
-
 		var itdef = v.get_method(self, mtype, "iterator", true)
 		if itdef == null then
 			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
