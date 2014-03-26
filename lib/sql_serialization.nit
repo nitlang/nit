@@ -1,3 +1,23 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2014 Benjamin JOSE - - SCHEIDT <beness.j@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Offers services to serialize a Nit objects to SQLite3 database
+# It first creates the table associated to the object, and then inserts the values.
+# If table already exists, it is not created again.
+
 module sql_serialization
 
 import serialization
@@ -34,10 +54,6 @@ class SqlSerializer
 		self.props_types = new ArrayMap[String, String]
 		self.props_values = new ArrayMap[String, nullable Object]
 		self.db_path = filename
-		
-		var db = new Sqlite3.open(filename)
-		assert sqlite_open: db.error.is_ok
-		db.close
 	end
 	
 	
@@ -68,17 +84,8 @@ class SqlSerializer
 				object.serialize_to_sqlite(self)
 				
 				insert_values
-			end
-			
-			
+			end	
 		end
-			
-#		if object isa List[Object] then
-#		
-#		else
-#		
-#		end
-
 	end
 
 	# Method called via double dispatch
@@ -142,7 +149,7 @@ class SqlSerializer
 	private fun create_database_schema
 	do
 		var a = ["int", "float", "bool", "char", "string"]
-		if ["int", "float", "bool", "char", "string"].has(self.object_type.to_lower) then return
+		if a.has(self.object_type.to_lower) then return
 		
 		var create_stmt = "CREATE TABLE IF NOT EXISTS " + self.object_type.to_lower		
 		create_stmt += "( \"_id_\" INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL  UNIQUE"
@@ -154,10 +161,9 @@ class SqlSerializer
 		create_stmt += " );"
 				
 		var db = new Sqlite3.open(self.db_path)
-		assert sqlite_open: db.error.is_ok
 		
 		db.exec(create_stmt)
-		assert sqlite_create_table: db.error.is_ok
+		# TODO : assert that the table has been correctly created
 		
 		db.close
 	end
@@ -180,11 +186,11 @@ class SqlSerializer
 		insert_stmt += ");"
 		
 		var db = new Sqlite3.open(self.db_path)
-		assert sqlite_open: db.error.is_ok
 		
 		db.exec(insert_stmt)
-		#assert sqlite_insert_1: db.error.is_ok
+		#TODO : assert that the row has been inserted
 		
 		db.close
 	end
 end
+
