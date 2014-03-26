@@ -352,7 +352,7 @@ private class PagerMatchesRenderer
 end
 
 private class Pager
-	var content = new Buffer
+	var content = new FlatBuffer
 	var indent = 0
 	fun add(text: String) do
 		add_indent
@@ -458,7 +458,7 @@ redef class MClass
 	# return the generic signature of the class
 	#	[E, F]
 	private fun signature: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if arity > 0 then
 			res.append("[")
 			for i in [0..intro.parameter_names.length[ do
@@ -474,7 +474,7 @@ redef class MClass
 	# class name is displayed with colors depending on visibility
 	#	abstract interface Foo[E]
 	private fun prototype: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{kind} ")
 		if visibility.to_s == "public" then res.append("{name}{signature}".bold.green)
 		if visibility.to_s == "private" then res.append("{name}{signature}".bold.red)
@@ -568,7 +568,7 @@ redef class MClassDef
 	end
 
 	fun to_console: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not is_intro then res.append("redef ")
 		res.append(mclass.prototype)
 		return res.to_s
@@ -692,7 +692,7 @@ end
 
 redef class MMethodDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not is_intro then res.append("redef ")
 		if not mproperty.is_init then res.append("fun ")
 		res.append(mproperty.to_console.bold)
@@ -707,7 +707,7 @@ end
 
 redef class MVirtualTypeDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("type ")
 		res.append(mproperty.to_console.bold)
 		res.append(": {bound.to_console}")
@@ -717,7 +717,7 @@ end
 
 redef class MAttributeDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("var ")
 		res.append(mproperty.to_console.bold)
 		res.append(": {static_mtype.to_console}")
@@ -727,7 +727,7 @@ end
 
 redef class MSignature
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not mparameters.is_empty then
 			res.append("(")
 			for i in [0..mparameters.length[ do
@@ -745,7 +745,7 @@ end
 
 redef class MParameter
 	fun to_console: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{name}: {mtype.to_console}")
 		if is_vararg then res.append("...")
 		return res.to_s
@@ -762,7 +762,7 @@ end
 
 redef class MGenericType
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{mclass.name}[")
 		for i in [0..arguments.length[ do
 			res.append(arguments[i].to_console)
@@ -837,7 +837,7 @@ redef class String
 
 	private fun escape: String
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")

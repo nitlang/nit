@@ -67,7 +67,7 @@ end
 # Create a dot file representing the class hierarchy of a model.
 fun generate_class_hierarchy(toolcontext: ToolContext, mmodule: MModule)
 do
-	var buf = new Buffer
+	var buf = new FlatBuffer
 	buf.append("digraph \{\n")
 	buf.append("node [shape=box];\n")
 	buf.append("rankdir=BT;\n")
@@ -88,7 +88,7 @@ end
 # For a simple user of the model, the classdef hierarchy is not really usefull, it is more an internal thing.
 fun generate_classdef_hierarchy(toolcontext: ToolContext, model: Model)
 do
-	var buf = new Buffer
+	var buf = new FlatBuffer
 	buf.append("digraph \{\n")
 	buf.append("node [shape=box];\n")
 	buf.append("rankdir=BT;\n")
