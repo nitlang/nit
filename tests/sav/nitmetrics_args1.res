@@ -849,6 +849,51 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Sys (0)
 	  min: Sys (0)
 	  std: 0.0
+
+ ## Callsites
+* 22 live callsites
+MMethodDef locally designated (by number of CallSites)
+ population: 13
+ minimum value: 1
+ maximum value: 10
+ total value: 22
+ average value: 1.69
+ distribution:
+  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
+  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+ list:
+  base_simple3#Int#output: 10 (45.45%)
+  base_simple3#B#val: 1 (4.54%)
+  base_simple3#B#val=: 1 (4.54%)
+  base_simple3#C#val2: 1 (4.54%)
+  base_simple3#C#val1: 1 (4.54%)
+  ...
+  base_simple3#A#init: 1 (4.54%)
+  base_simple3#Object#baz: 1 (4.54%)
+  base_simple3#Object#bar: 1 (4.54%)
+  base_simple3#Object#foo: 1 (4.54%)
+  base_simple3#C#init: 1 (4.54%)
+MMethodDef possibly invoked at runtime (by number of CallSites)
+ population: 13
+ minimum value: 1
+ maximum value: 10
+ total value: 22
+ average value: 1.69
+ distribution:
+  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
+  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+ list:
+  base_simple3#Int#output: 10 (45.45%)
+  base_simple3#B#val: 1 (4.54%)
+  base_simple3#B#val=: 1 (4.54%)
+  base_simple3#C#val2: 1 (4.54%)
+  base_simple3#C#val1: 1 (4.54%)
+  ...
+  base_simple3#A#init: 1 (4.54%)
+  base_simple3#Object#baz: 1 (4.54%)
+  base_simple3#Object#bar: 1 (4.54%)
+  base_simple3#Object#foo: 1 (4.54%)
+  base_simple3#C#init: 1 (4.54%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/
