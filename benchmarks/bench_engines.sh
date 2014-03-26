@@ -349,6 +349,22 @@ function bench_policy()
 }
 bench_policy
 
+function bench_nullables()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name-nitc.dat" "nitc" "nitc no options"
+	run_compiler "nitc" ./nitg --separate
+	prepare_res "$name-nitc-ni.dat" "nitc-ni" "nitc --no-check-attr-isset"
+	run_compiler "nitc" ./nitg --separate --no-check-attr-isset
+	prepare_res "$name-nitc-nu.dat" "nitc-nu" "nitc --no-union-attribute"
+	run_compiler "nitc" ./nitg --separate --no-union-attribute
+	prepare_res "$name-nitc-nu-ni.dat" "nitc-nu-ni" "nitc --no-union-attribute --no-check-attr-isset"
+	run_compiler "nitc" ./nitg --separate --no-union-attribute --no-check-attr-isset
+	plot "$name.gnu"
+}
+bench_nullables
+
 function bench_compilation_time
 {
 	name="$FUNCNAME"
