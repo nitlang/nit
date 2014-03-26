@@ -810,11 +810,11 @@ end
 redef class AForExpr
 	var coltype: nullable MClassType
 
-	var method_iterator: nullable MMethod
-	var method_is_ok: nullable MMethod
-	var method_item: nullable MMethod
-	var method_next: nullable MMethod
-	var method_key: nullable MMethod
+	var method_iterator: nullable CallSite
+	var method_is_ok: nullable CallSite
+	var method_item: nullable CallSite
+	var method_next: nullable CallSite
+	var method_key: nullable CallSite
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
@@ -833,7 +833,7 @@ redef class AForExpr
 			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			return
 		end
-		self.method_iterator = itdef.mproperty
+		self.method_iterator = itdef
 
 		# check that iterator return something
 		var ittype = itdef.msignature.return_mtype
@@ -890,21 +890,21 @@ redef class AForExpr
 			v.error(self, "Type Error: 'for' expects a method 'is_ok' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_is_ok = ikdef.mproperty
+		self.method_is_ok = ikdef
 
 		var itemdef = v.get_method(self, ittype, "item", false)
 		if itemdef == null then
 			v.error(self, "Type Error: 'for' expects a method 'item' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_item = itemdef.mproperty
+		self.method_item = itemdef
 
 		var nextdef = v.get_method(self, ittype, "next", false)
 		if nextdef == null then
 			v.error(self, "Type Error: 'for' expects a method 'next' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_next = nextdef.mproperty
+		self.method_next = nextdef
 
 		if is_map then
 			var keydef = v.get_method(self, ittype, "key", false)
@@ -912,7 +912,7 @@ redef class AForExpr
 				v.error(self, "Type Error: 'for' expects a method 'key' in 'Iterator' type {ittype}.")
 				return
 			end
-			self.method_key = keydef.mproperty
+			self.method_key = keydef
 		end
 	end
 
