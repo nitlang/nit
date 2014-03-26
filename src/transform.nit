@@ -88,13 +88,14 @@ redef class AVardeclExpr
 	#
 	# Declarations are only useful for scope rules
 	# Once names are associated with real objects, ther declaration become useless
-	# Therefore, if there is no initial value, then just detach it
+	# Therefore, if there is no initial value, then just ignore it
 	# Else, replace it with a simple assignment
 	redef fun accept_transform_visitor(v)
 	do
 		var nexpr = n_expr
 		if nexpr == null then
-			detach
+			# do nothing
+			# note: not detached because the collection is currently under iteration
 		else
 			var nvar = v.builder.make_var_assign(self.variable.as(not null), nexpr)
 			replace_with(nvar)
