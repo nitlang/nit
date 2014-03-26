@@ -313,20 +313,25 @@ redef class MNullableType
 		var base_cname = "null_{mtype.mangled_cname}"
 		ccu.header_decl.add("#define {base_cname} {v.compiler.mainmodule.name}___{base_cname}\n")
 
+		# FIXME: This is ugly an broke the separate compilation principle
+		# The real function MUST be compiled only once, #define pragma only protect the compiler, not the loader
+		# However, I am not sure of the right approach here (eg. week refs are ugly)
+		if is_already_compiled then return
+		is_already_compiled = true
+
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
 		var full_internal_csignature = "{cname_blind} {v.compiler.mainmodule.name}___null_{mtype.mangled_cname}()"
-		nitni_visitor.add("#ifndef NIT_NULL_null_{mtype.mangled_cname}")
-		nitni_visitor.add("#define NIT_NULL_null_{mtype.mangled_cname}")
 		nitni_visitor.add("{full_internal_csignature} \{")
 		nitni_visitor.add("struct nitni_instance* ret_for_c;")
 		nitni_visitor.add("ret_for_c = malloc(sizeof(struct nitni_instance));")
 		nitni_visitor.add("ret_for_c->value = NULL;")
 		nitni_visitor.add("return ret_for_c;")
 		nitni_visitor.add("\}")
-		nitni_visitor.add("#endif")
 	end
+
+	private var is_already_compiled = false # FIXME to remove, show above
 end
 
 redef class MExplicitCall
