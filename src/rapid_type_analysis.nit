@@ -132,6 +132,9 @@ class RapidTypeAnalysis
 	# Methods that are are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
 
+	# Methods that are are no more candidate to the try_send
+	private var totry_methods_to_remove = new Array[MMethod]
+
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
 
@@ -294,6 +297,10 @@ class RapidTypeAnalysis
 		for p in totry_methods do try_send(mtype, p)
 		for p in live_super_sends do try_super_send(mtype, p)
 
+		# Remove cleared ones
+		for p in totry_methods_to_remove do totry_methods.remove(p)
+		totry_methods_to_remove.clear
+
 		var bound_mtype = mtype.anchor_to(mainmodule, recv)
 		for cd in bound_mtype.collect_mclassdefs(mainmodule)
 		do
@@ -342,7 +349,7 @@ class RapidTypeAnalysis
 			if not live_methoddefs.has(d) then return
 		end
 		#print "full property: {mpropdef.mproperty} for {mpropdef.mproperty.mpropdefs.length} definitions"
-		totry_methods.remove(mpropdef.mproperty)
+		totry_methods_to_remove.add(mpropdef.mproperty)
 	end
 
 	fun add_send(recv: MType, mproperty: MMethod)
