@@ -191,9 +191,9 @@
 	  std: 0.926
 	cnbip: number of introduced properties
 	  avg: 2.0
-	  max: C (7)
+	  max: C (5)
 	  min: Bool (0)
-	  std: 2.42
+	  std: 1.69
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
@@ -234,9 +234,9 @@
 	  std: 0.866
 	cnbip: number of introduced properties
 	  avg: 2.0
-	  max: C (7)
+	  max: C (5)
 	  min: Bool (0)
-	  std: 2.291
+	  std: 1.62
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
@@ -276,9 +276,9 @@
 	  std: 0.866
 	cnbip: number of introduced properties
 	  avg: 2.0
-	  max: C (7)
+	  max: C (5)
 	  min: Bool (0)
-	  std: 2.291
+	  std: 1.62
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)

@@ -87,12 +87,12 @@ redef class String
 		var steps = length / 4
 		var result_length = steps*3
 
-		var padding_begin = padding.search_index_in( self, 0 )
+		var padding_begin = self.search(padding)
 		var padding_count : Int
-		if padding_begin == -1 then
+		if padding_begin == null then
 			padding_count = 0
 		else
-			padding_count = length - padding_begin
+			padding_count = length - padding_begin.from
 			steps -= 1
 			result_length -= padding_count
 		end

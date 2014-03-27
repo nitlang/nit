@@ -59,8 +59,8 @@ class MVisibility
 	end
 end
 
-fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 4)
+fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 5)
 fun public_visibility: MVisibility do return once new MVisibility("public", 4)
 fun protected_visibility: MVisibility do return once new MVisibility("protected", 3)
 fun private_visibility: MVisibility do return once new MVisibility("private", 2)
-fun none_visibility: MVisibility do return once new MVisibility("none", 2)
+fun none_visibility: MVisibility do return once new MVisibility("none", 1)
