@@ -238,7 +238,7 @@ redef class ANewExpr
 		if args != null then
 			n_args.n_exprs.add_all(args)
 		end
-		callsite = new CallSite(self, mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
+		callsite = new CallSite(self, mtype, mmethod.intro.mclassdef.mmodule, mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
 		self.mtype = mtype
 	end
 end
@@ -255,7 +255,7 @@ redef class ACallExpr
 			self.n_args.n_exprs.add_all(args)
 		end
 		var mtype = recv.mtype.as(not null)
-		callsite = new CallSite(self, mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
+		callsite = new CallSite(self, mtype, mmethod.intro.mclassdef.mmodule, mmethod.intro.mclassdef.bound_mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
 		self.mtype = t
 		self.is_typed = true
 	end
