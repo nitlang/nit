@@ -1136,9 +1136,7 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
-		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef and
-		not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
+		if mmethoddef.is_intern and not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
 			compiler.modelbuilder.nb_invok_by_inline += 1
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
