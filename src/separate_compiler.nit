@@ -31,7 +31,11 @@ redef class ToolContext
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
-	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
+	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
+	# --inline-some-methods
+	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
+	# --direct-call-monomorph
+	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -48,7 +52,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
@@ -1004,6 +1008,21 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	redef fun compile_callsite(callsite, args)
+	do
+		var rta = compiler.runtime_type_analysis
+		var recv = args.first.mtype
+		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and recv isa MClassType then
+			var tgs = rta.live_targets(callsite)
+			if tgs.length == 1 then
+				# DIRECT CALL
+				var mmethod = callsite.mproperty
+				self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), args)
+				return call(tgs.first, recv, args)
+			end
+		end
+		return super
+	end
 	redef fun send(mmethod, arguments)
 	do
 		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
@@ -1136,14 +1155,15 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		if mmethoddef.is_intern and not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
+		if (mmethoddef.is_intern and not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value) or
+			(compiler.modelbuilder.toolcontext.opt_inline_some_methods.value and mmethoddef.can_inline(self)) then
 			compiler.modelbuilder.nb_invok_by_inline += 1
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
 			var old_frame = self.frame
 			self.frame = frame
-			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) */")
+			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) on {arguments.first.inspect} */")
 			mmethoddef.compile_inside_to_c(self, arguments)
 			self.add("{frame.returnlabel.as(not null)}:(void)0;")
 			self.add("\}")
@@ -1157,7 +1177,7 @@ class SeparateCompilerVisitor
 
 		self.require_declaration(mmethoddef.c_name)
 		if res == null then
-			self.add("{mmethoddef.c_name}({arguments.join(", ")});")
+			self.add("{mmethoddef.c_name}({arguments.join(", ")}); /* Direct call {mmethoddef} on {arguments.first.inspect}*/")
 			return null
 		else
 			self.add("{res} = {mmethoddef.c_name}({arguments.join(", ")});")
