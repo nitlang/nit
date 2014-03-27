@@ -44,13 +44,13 @@ redef class ToolContext
 		var phases = phases_list
 
 		for phase in phases do
-			self.info(" registered phases: {phase.class_name}", 2)
+			self.info(" registered phases: {phase}", 2)
 		end
 
 		for nmodule in nmodules do
 			self.info("Semantic analysis module {nmodule.location.file.filename}", 2)
 			for phase in phases do
-				self.info(" phase: {phase.class_name}", 3)
+				self.info(" phase: {phase}", 3)
 				assert phase.toolcontext == self
 				var errcount = self.error_count
 				phase.process_nmodule(nmodule)
@@ -60,7 +60,7 @@ redef class ToolContext
 				end
 				errcount = self.error_count
 				for nclassdef in nmodule.n_classdefs do
-					self.info(" phase: {phase.class_name} for {nclassdef.location}", 3)
+					self.info(" phase: {phase} for {nclassdef.location}", 3)
 					assert phase.toolcontext == self
 					phase.process_nclassdef(nclassdef)
 					for npropdef in nclassdef.n_propdefs do
@@ -121,6 +121,9 @@ abstract class Phase
 			end
 		end
 	end
+
+	# By default, the name is the lowercased prefix of the classname
+	redef fun to_s do return class_name.strip_extension("Phase").to_lower
 
 	# Specific actions to execute on the whole tree of a module
 	# @toimplement
