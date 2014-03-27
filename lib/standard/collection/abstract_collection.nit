@@ -140,15 +140,32 @@ end
 # They are mainly used with collections.
 interface Iterator[E]
 	# The current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun item: E is abstract
 
 	# Jump to the next item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun next is abstract
 
-	# Is there a current item ?
+	# Is there a current item?
+	# Require `is_still_valid`
 	fun is_ok: Bool is abstract
+	
+	# The validity of the iterator, in respect to the the underlying data structure.
+	# Iterators may become invalid when the underlying data is structuraly modified
+	# in such a way that existing iterators may behave uncoherently.
+	#
+	# The exact semantic of "structurally modified" and "uncoherently"
+	# is let to each specific subclass.
+	# However, as a hard contract on all services, using a invalid iterator
+	# is considered a programmation error (like an infinite loop) instead of a
+	# program error (like a IO issue).
+	#
+	# Note that the automatic iteration trough a `for` does not preventively check
+	# `is_still_valid`, errors should be catched as failed preconditions of concrete services.
+	fun is_still_valid: Bool do return true
 end
 
 # A collection that contains only one item.
@@ -485,22 +502,30 @@ end
 # Iterators for Map.
 interface MapIterator[K: Object, E]
 	# The current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun item: E is abstract
 
 	# The key of the current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun key: K is abstract
 
 	# Jump to the next item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun next is abstract
 
 	# Is there a current item ?
+	# Require `is_still_valid`
 	fun is_ok: Bool is abstract
 
 	# Set a new `item` at `key`.
 	#fun item=(item: E) is abstract
+
+	# The validity of the iterator, in respect to the the underlying data structure.
+	# see `Iterator::is_still_valid`
+	fun is_still_valid: Bool do return true
 end
 
 # Iterator on a 'keys' point of view of a map
