@@ -1,1 +1,1 @@
-alt/base_prot2_alt1.nit:25,3--5: Error: Method or variable 'pri' unknown in A2.
+alt/base_prot2_alt1.nit:22,12--14: Error: No property B::pri is inherited. Remove the redef keyword to define a new property.
