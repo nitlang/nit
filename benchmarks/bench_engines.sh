@@ -259,7 +259,7 @@ function bench_nitg-s_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
+bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range "--no-gcc-directive likely" "--no-gcc-directive noreturn"
 bench_nitg-s_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 bench_nitg-s_options "faster" --inline-coloring-numbers
 bench_nitg-s_options "typing" NOALL --bm-typing --phand-typing
