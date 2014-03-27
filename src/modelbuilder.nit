@@ -65,6 +65,7 @@ redef class ToolContext
 			mainmodule.set_imported_mmodules(mmodules)
 		end
 		for phase in phases_list do
+			if phase.disabled then continue
 			phase.process_mainmodule(mainmodule, mmodules)
 		end
 	end
