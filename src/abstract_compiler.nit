@@ -56,6 +56,8 @@ redef class ToolContext
 	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
 	# --stack-trace-C-to-Nit-name-binding
 	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
+	# --no-gcc-directives
+	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 
 	redef init
 	do
@@ -65,6 +67,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_typing_test_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_stacktrace)
+		self.option_context.add_option(self.opt_no_gcc_directive)
 	end
 end
 
@@ -475,8 +478,26 @@ abstract class AbstractCompiler
 		compile_header_structs
 		compile_nitni_structs
 
-		# Signal handler function prototype
-		self.header.add_decl("void show_backtrace(int);")
+		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
+		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
+			# Signal handler function prototype
+			self.header.add_decl("void show_backtrace(int);")
+		else
+			self.header.add_decl("void show_backtrace(int) __attribute__ ((noreturn));")
+		end
+
+		if gccd_disable.has("likely") or gccd_disable.has("all") then
+			self.header.add_decl("#define likely(x)       (x)")
+			self.header.add_decl("#define unlikely(x)     (x)")
+		else if gccd_disable.has("correct-likely") then
+			# invert the `likely` definition
+			# Used by masochists to bench the worst case
+			self.header.add_decl("#define likely(x)       __builtin_expect((x),0)")
+			self.header.add_decl("#define unlikely(x)     __builtin_expect((x),1)")
+		else
+			self.header.add_decl("#define likely(x)       __builtin_expect((x),1)")
+			self.header.add_decl("#define unlikely(x)     __builtin_expect((x),0)")
+		end
 
 		# Global variable used by intern methods
 		self.header.add_decl("extern int glob_argc;")
@@ -933,7 +954,7 @@ abstract class AbstractCompilerVisitor
 
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
-			self.add("if ({recv} == NULL) \{")
+			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
 		end
@@ -1152,7 +1173,7 @@ abstract class AbstractCompilerVisitor
 	fun add_cast(value: RuntimeVariable, mtype: MType, tag: String)
 	do
 		var res = self.type_test(value, mtype, tag)
-		self.add("if (!{res}) \{")
+		self.add("if (unlikely(!{res})) \{")
 		var cn = self.class_name_string(value)
 		self.add("fprintf(stderr, \"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
 		self.add_raw_abort
@@ -2234,7 +2255,7 @@ redef class AAssertExpr
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return
 
 		var cond = v.expr_bool(self.n_expr)
-		v.add("if (!{cond}) \{")
+		v.add("if (unlikely(!{cond})) \{")
 		v.stmt(self.n_else)
 		var nid = self.n_id
 		if nid != null then
@@ -2419,7 +2440,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		v.add("if ({i} == NULL) \{")
+		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
 		return i

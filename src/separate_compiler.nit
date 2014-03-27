@@ -1231,7 +1231,7 @@ class SeparateCompilerVisitor
 
 			# Check for Uninitialized attribute
 			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
-				self.add("if ({res} == NULL) \{")
+				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
 			end
@@ -1245,7 +1245,7 @@ class SeparateCompilerVisitor
 
 			# Check for Uninitialized attribute
 			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
-				self.add("if ({res} == NULL) \{")
+				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
 			end
