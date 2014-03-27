@@ -225,8 +225,9 @@ function bench_nitg-g_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-g with option $opt"
-		run_compiler "nitg-g$opt" ./nitg --global $opt
+		ot=${opt// /+}
+		prepare_res "$name$ot.dat" "$opt" "nitg-g with option $opt"
+		run_compiler "nitg-g$ot" ./nitg --global $opt
 	done
 
 	plot "$name.gnu"
@@ -251,8 +252,9 @@ function bench_nitg-s_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-s with option $opt"
-		run_compiler "nitg-s$opt" ./nitg --separate $opt
+		ot=${opt// /+}
+		prepare_res "$name-$ot.dat" "$opt" "nitg-s with option $opt"
+		run_compiler "nitg-s$ot" ./nitg --separate $opt
 	done
 
 	plot "$name.gnu"
@@ -279,8 +281,9 @@ function bench_nitg-e_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-e with option $opt"
-		run_compiler "nitg-e$opt" ./nitg --erasure $opt
+		ot=${opt// /+}
+		prepare_res "$name$ot.dat" "$opt" "nitg-e with option $opt"
+		run_compiler "nitg-e$ot" ./nitg --erasure $opt
 	done
 
 	plot "$name.gnu"
