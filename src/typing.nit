@@ -274,7 +274,7 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -386,8 +386,14 @@ class CallSite
 	# The assiciated node for location
 	var node: ANode
 
-	# The statis type of the receiver
+	# The static type of the receiver (possibly unresolved)
 	var recv: MType
+
+	# The module where the callsite is present
+	var mmodule: MModule
+
+	# The anchor to use with `recv` or `msignature`
+	var anchor: nullable MClassType
 
 	# Is the receiver self?
 	# If "for_self", virtual types of the signature are keeped
@@ -1491,7 +1497,7 @@ redef class ASuperExpr
 		end
 
 		var msignature = v.resolve_signature_for(superprop, recvtype, true)
-		var callsite = new CallSite(self, recvtype, true, superprop.mproperty, superprop, msignature, false)
+		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 
 		var args = self.n_args.to_a

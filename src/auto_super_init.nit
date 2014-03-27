@@ -106,7 +106,7 @@ redef class AConcreteMethPropdef
 			var msignature = candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
-			var callsite = new CallSite(self, recvtype, true, candidate, candidatedef, msignature, false)
+			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, candidate, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
 		end
 		if auto_super_inits.is_empty then
