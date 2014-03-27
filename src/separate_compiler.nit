@@ -106,6 +106,13 @@ redef class ModelBuilder
 		self.toolcontext.info("*** END GENERATING C: {time1-time0} ***", 2)
 		write_and_make(compiler)
 	end
+
+	# Count number of invocations by VFT
+	private var nb_invok_by_tables = 0
+	# Count number of invocations by direct call
+	private var nb_invok_by_direct = 0
+	# Count number of invocations by inlining
+	private var nb_invok_by_inline = 0
 end
 
 # Singleton that store the knowledge about the separate compilation process
@@ -865,6 +872,14 @@ class SeparateCompiler
 		if self.modelbuilder.toolcontext.opt_tables_metrics.value then
 			display_sizes
 		end
+
+		var tc = self.modelbuilder.toolcontext
+		tc.info("# implementation of method invocation",2)
+		var nb_invok_total = modelbuilder.nb_invok_by_tables + modelbuilder.nb_invok_by_direct + modelbuilder.nb_invok_by_inline
+		tc.info("total number of invocations: {nb_invok_total}",2)
+		tc.info("invocations by VFT send:     {modelbuilder.nb_invok_by_tables} ({div(modelbuilder.nb_invok_by_tables,nb_invok_total)}%)",2)
+		tc.info("invocations by direct call:  {modelbuilder.nb_invok_by_direct} ({div(modelbuilder.nb_invok_by_direct,nb_invok_total)}%)",2)
+		tc.info("invocations by inlining:     {modelbuilder.nb_invok_by_inline} ({div(modelbuilder.nb_invok_by_inline,nb_invok_total)}%)",2)
 	end
 
 	fun display_sizes
@@ -1008,6 +1023,8 @@ class SeparateCompilerVisitor
 
 	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
 	do
+		compiler.modelbuilder.nb_invok_by_tables += 1
+
 		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
 
 		var res: nullable RuntimeVariable
@@ -1122,6 +1139,7 @@ class SeparateCompilerVisitor
 		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
 		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef and
 		not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
+			compiler.modelbuilder.nb_invok_by_inline += 1
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
@@ -1134,6 +1152,7 @@ class SeparateCompilerVisitor
 			self.frame = old_frame
 			return res
 		end
+		compiler.modelbuilder.nb_invok_by_direct += 1
 
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)
