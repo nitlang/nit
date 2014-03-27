@@ -27,7 +27,7 @@ class Gram
 	# Dump of the concrete grammar and the transformations
 	fun pretty: String
 	do
-		var res = new Buffer
+		var res = new FlatBuffer
 		for p in prods do
 			if p.spe != null then
 				res.append("{p.name} \{-> {p.spe.name}\}=\n")
@@ -1072,7 +1072,7 @@ class Item
 
 	redef fun to_s
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.append("{alt.prod.name}::{alt.name}=")
 		for i in [0..alt.elems.length[
 		do

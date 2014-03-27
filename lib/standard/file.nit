@@ -99,12 +99,12 @@ class IFStream
 
 	redef fun fill_buffer
 	do
-		var nb = _file.io_read(_buffer._items, _buffer._capacity)
+		var nb = _file.io_read(_buffer.items, _buffer.capacity)
 		if nb <= 0 then
 			_end_reached = true
 			nb = 0
 		end
-		_buffer._length = nb
+		_buffer.length = nb
 		_buffer_pos = 0
 	end
 	
@@ -274,7 +274,7 @@ redef class String
 	#     assert "".basename("")                            == ""
 	fun basename(ext: String): String
 	do
-		var l = _length - 1 # Index of the last char
+		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		if l == 0 then return "/"
 		var pos = last_index_of_from('/', l)
@@ -297,7 +297,7 @@ redef class String
 	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var l = _length - 1 # Index of the last char
+		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
@@ -375,7 +375,7 @@ redef class String
 	fun mkdir
 	do
 		var dirs = self.split_with("/")
-		var path = new Buffer
+		var path = new FlatBuffer
 		if dirs.is_empty then return
 		if dirs[0].is_empty then
 			# it was a starting /

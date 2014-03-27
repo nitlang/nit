@@ -152,7 +152,7 @@ redef class Stdin
 	var connection: nullable Socket = null
 
 	# Used to store data that has been read from the connection
-	var buf: Buffer = new Buffer
+	var buf: Buffer = new FlatBuffer
 	var buf_pos: Int = 0
 
 	# Checks if data is available for reading
@@ -165,7 +165,7 @@ redef class Stdin
 	# Blocking if the buffer is empty
 	redef fun read_all
 	do
-		var loc_buf = new Buffer
+		var loc_buf = new FlatBuffer
 		if connection.ready_to_read(0) then buf.append(connection.read)
 		for i in [buf_pos .. buf.length-1] do loc_buf.add(buf.chars[i])
 		buf.clear
@@ -193,7 +193,7 @@ redef class Stdin
 	# If the buffer is empty, the read_line call is blocking
 	redef fun read_line
 	do
-		var line_buf = new Buffer
+		var line_buf = new FlatBuffer
 		if connection.ready_to_read(0) then buf.append(connection.read)
 		var has_found_eol: Bool = false
 		loop
