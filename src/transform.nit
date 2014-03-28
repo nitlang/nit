@@ -225,9 +225,7 @@ redef class ACrangeExpr
 	redef fun accept_transform_visitor(v)
 	do
 		var mtype = self.mtype.as(MClassType)
-		var meth = v.get_method(self, "init", mtype.mclass)
-
-		replace_with(v.builder.make_new(mtype, meth, [n_expr, n_expr2]))
+		replace_with(v.builder.make_new(mtype, init_callsite.mproperty, [n_expr, n_expr2]))
 	end
 end
 
@@ -236,9 +234,7 @@ redef class AOrangeExpr
 	redef fun accept_transform_visitor(v)
 	do
 		var mtype = self.mtype.as(MClassType)
-		var meth = v.get_method(self, "without_last", mtype.mclass)
-
-		replace_with(v.builder.make_new(mtype, meth, [n_expr, n_expr2]))
+		replace_with(v.builder.make_new(mtype, init_callsite.mproperty, [n_expr, n_expr2]))
 	end
 end
 

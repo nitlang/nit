@@ -1261,19 +1261,19 @@ redef class AForExpr
 		if col.mtype isa MNullType then fatal(v, "Receiver is null")
 
 		#self.debug("col {col}")
-		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
+		var iter = v.callsite(method_iterator, [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
-			var isok = v.send(v.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
+			var isok = v.callsite(method_is_ok, [iter]).as(not null)
 			if not isok.is_true then return
 			if self.variables.length == 1 then
-				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.callsite(method_item, [iter]).as(not null)
 				#self.debug("item {item}")
 				v.frame.map[self.variables.first] = item
 			else if self.variables.length == 2 then
-				var key = v.send(v.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				var key = v.callsite(method_key, [iter]).as(not null)
 				v.frame.map[self.variables[0]] = key
-				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.callsite(method_item, [iter]).as(not null)
 				v.frame.map[self.variables[1]] = item
 			else
 				abort
@@ -1282,7 +1282,7 @@ redef class AForExpr
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
 			if v.is_escaping then return
-			v.send(v.force_get_primitive_method("next", iter.mtype), [iter])
+			v.callsite(method_next, [iter])
 		end
 	end
 end
@@ -1427,7 +1427,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end
@@ -1442,7 +1442,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end

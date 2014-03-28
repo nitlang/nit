@@ -550,8 +550,7 @@ redef class ACrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "init")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -560,8 +559,7 @@ redef class AOrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "without_last")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -640,22 +638,17 @@ end
 redef class AForExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var recvtype = self.n_expr.mtype.as(not null)
-		var colltype = self.coltype.as(not null)
-		var itmeth = v.get_method(colltype, "iterator")
-		v.add_send(recvtype, itmeth)
-		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.intro.bound_mtype
-		var objtype = v.get_class("Object").mclass_type
-		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
+		v.add_callsite(self.method_iterator)
+		v.add_callsite(self.method_is_ok)
 		if self.variables.length == 1 then
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_item)
 		else if self.variables.length == 2 then
-			v.add_send(objtype, v.get_method(iteratortype, "key"))
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_key)
+			v.add_callsite(self.method_item)
 		else
 			abort
 		end
-		v.add_send(objtype, v.get_method(iteratortype, "next"))
+		v.add_callsite(self.method_next)
 	end
 end
 
