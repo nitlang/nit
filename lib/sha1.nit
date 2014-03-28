@@ -228,7 +228,8 @@ redef class String
 	# If you want the hex string version of the digest, use
 	# sha1_to_s.
 	#
-	#	assert "The quick brown fox jumps over the lazy dog".sha1.encode_base64 == "L9ThxnotKPzthJ7hu3bnORuT6xI="
+	#     import base64
+	#     assert "The quick brown fox jumps over the lazy dog".sha1.encode_base64 == "L9ThxnotKPzthJ7hu3bnORuT6xI="
 	fun sha1: String import String.to_cstring, String.length, NativeString.to_s_with_length `{
 		uint32_t a;
 		sha1nfo s;
@@ -251,7 +252,7 @@ redef class String
 	# Returns a 40 char String containing the Hexadecimal
 	# Digest in its Char form.
 	#
-	#	assert "The quick brown fox jumps over the lazy dog".sha1_to_s == "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12"
+	#     assert "The quick brown fox jumps over the lazy dog".sha1_to_s == "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12"
 	fun sha1_to_s: String import String.to_cstring, String.length, NativeString.to_s_with_length `{
 		uint32_t a;
 		sha1nfo s;
