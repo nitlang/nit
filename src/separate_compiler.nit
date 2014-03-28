@@ -1043,6 +1043,7 @@ class SeparateCompilerVisitor
 	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
 	do
 		compiler.modelbuilder.nb_invok_by_tables += 1
+		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
 
 		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
 
@@ -1158,6 +1159,7 @@ class SeparateCompilerVisitor
 		if (mmethoddef.is_intern and not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value) or
 			(compiler.modelbuilder.toolcontext.opt_inline_some_methods.value and mmethoddef.can_inline(self)) then
 			compiler.modelbuilder.nb_invok_by_inline += 1
+			if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_inline++;")
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
@@ -1171,6 +1173,7 @@ class SeparateCompilerVisitor
 			return res
 		end
 		compiler.modelbuilder.nb_invok_by_direct += 1
+		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_direct++;")
 
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)

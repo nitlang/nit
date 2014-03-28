@@ -52,6 +52,8 @@ redef class ToolContext
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	# --invocation-metrics
+	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --no-stacktrace
 	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
 	# --stack-trace-C-to-Nit-name-binding
@@ -64,7 +66,7 @@ redef class ToolContext
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
-		self.option_context.add_option(self.opt_typing_test_metrics)
+		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
@@ -542,6 +544,15 @@ abstract class AbstractCompiler
 			end
 		end
 
+		if self.modelbuilder.toolcontext.opt_invocation_metrics.value then
+			v.add_decl("long count_invoke_by_tables;")
+			v.add_decl("long count_invoke_by_direct;")
+			v.add_decl("long count_invoke_by_inline;")
+			v.compiler.header.add_decl("extern long count_invoke_by_tables;")
+			v.compiler.header.add_decl("extern long count_invoke_by_direct;")
+			v.compiler.header.add_decl("extern long count_invoke_by_inline;")
+		end
+
 		v.add_decl("void sig_handler(int signo)\{")
 		v.add_decl("printf(\"Caught signal : %s\\n\", strsignal(signo));")
 		v.add_decl("show_backtrace(signo);")
@@ -633,6 +644,14 @@ abstract class AbstractCompiler
 			end
 		end
 
+		if self.modelbuilder.toolcontext.opt_invocation_metrics.value then
+			v.add_decl("long count_invoke_total;")
+			v.add("count_invoke_total = count_invoke_by_tables + count_invoke_by_direct + count_invoke_by_inline;")
+			v.add("printf(\"# dynamic count_invocation: total %ld\\n\", count_invoke_total);")
+			v.add("printf(\"by table: %ld (%.2f%%)\\n\", count_invoke_by_tables, 100.0*count_invoke_by_tables/count_invoke_total);")
+			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
+			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
+		end
 		v.add("return 0;")
 		v.add("\}")
 	end
