@@ -1040,12 +1040,78 @@ class SeparateCompilerVisitor
 		return table_send(mmethod, arguments, mmethod.const_color)
 	end
 
+	# Handel common special cases before doing the effective method invocation
+	# This methods handle the `==` and `!=` methods and the case of the null receiver.
+	# Note: a { is open in the generated C, that enclose and protect the effective method invocation.
+	# Client must not forget to close the } after them.
+	#
+	# The value returned is the result of the common special cases.
+	# If not null, client must compine it with the result of their own effective method invocation.
+	#
+	# If `before_send` can shortcut the whole message sending, a dummy `if(0){`
+	# is generated to cancel the effective method invocation that will follow
+	# TODO: find a better approach
+	private fun before_send(mmethod: MMethod, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var res: nullable RuntimeVariable = null
+		var recv = arguments.first
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
+		var maybenull = recv.mcasttype isa MNullableType and consider_null
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			if mmethod.name == "==" then
+				res = self.new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} == NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 1; /* is null */")
+				else
+					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
+				end
+			else if mmethod.name == "!=" then
+				res = self.new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} != NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 0; /* is null */")
+				else
+					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
+				end
+			else
+				self.add_abort("Receiver is null")
+			end
+			self.add("\} else \{")
+		else
+			self.add("\{")
+		end
+		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
+			if res == null then res = self.new_var(bool_type)
+			# Recv is not null, thus is arg is, it is easy to conclude (and respect the invariants)
+			var arg = arguments[1]
+			if arg.mcasttype isa MNullType then
+				if mmethod.name == "==" then
+					self.add("{res} = 0; /* arg is null but recv is not */")
+				else
+					self.add("{res} = 1; /* arg is null and recv is not */")
+				end
+				self.add("\}") # closes the null case
+				self.add("if (0) \{") # what follow is useless, CC will drop it
+			end
+		end
+		return res
+	end
+
 	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
 	do
 		compiler.modelbuilder.nb_invok_by_tables += 1
 		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
 
 		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
+		var recv = arguments.first
+
+		var res0 = before_send(mmethod, arguments)
 
 		var res: nullable RuntimeVariable
 		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
@@ -1062,7 +1128,6 @@ class SeparateCompilerVisitor
 		var s = new Buffer
 		var ss = new Buffer
 
-		var recv = arguments.first
 		s.append("val*")
 		ss.append("{recv}")
 		for i in [0..msignature.arity[ do
@@ -1076,51 +1141,6 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
-		var maybenull = recv.mcasttype isa MNullableType and consider_null
-		if maybenull then
-			self.add("if ({recv} == NULL) \{")
-			if mmethod.name == "==" then
-				assert res != null
-				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} == NULL);")
-				else if arg.mcasttype isa MNullType then
-					self.add("{res} = 1; /* is null */")
-				else
-					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
-				end
-			else if mmethod.name == "!=" then
-				assert res != null
-				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} != NULL);")
-				else if arg.mcasttype isa MNullType then
-					self.add("{res} = 0; /* is null */")
-				else
-					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
-				end
-			else
-				self.add_abort("Receiver is null")
-			end
-			self.add("\} else \{")
-		end
-		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
-			assert res != null
-			# Recv is not null, thus is arg is, it is easy to conclude (and respect the invariants)
-			var arg = arguments[1]
-			if arg.mcasttype isa MNullType then
-				if mmethod.name == "==" then
-					self.add("{res} = 0; /* arg is null but recv is not */")
-				else
-					self.add("{res} = 1; /* arg is null and recv is not */")
-				end
-				if maybenull then
-					self.add("\}")
-				end
-				return res
-			end
-		end
 
 		var r
 		if ret == null then r = "void" else r = ret.ctype
@@ -1133,9 +1153,13 @@ class SeparateCompilerVisitor
 			self.add("{call};")
 		end
 
-		if maybenull then
-			self.add("\}")
+		if res0 != null then
+			assert res != null
+			assign(res0,res)
+			res = res0
 		end
+
+		self.add("\}") # closes the null case
 
 		return res
 	end
