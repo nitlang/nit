@@ -1012,13 +1012,21 @@ class SeparateCompilerVisitor
 	do
 		var rta = compiler.runtime_type_analysis
 		var recv = args.first.mtype
-		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and recv isa MClassType then
+		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null then
 			var tgs = rta.live_targets(callsite)
 			if tgs.length == 1 then
 				# DIRECT CALL
 				var mmethod = callsite.mproperty
 				self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), args)
-				return call(tgs.first, recv, args)
+				var res0 = before_send(mmethod, args)
+				var res = call(tgs.first, tgs.first.mclassdef.bound_mtype, args)
+				if res0 != null then
+					assert res != null
+					self.assign(res0, res)
+					res = res0
+				end
+				add("\}") # close the before_send
+				return res
 			end
 		end
 		return super
