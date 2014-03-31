@@ -11,7 +11,7 @@
 # another product.
 
 # Provides the Clock utility class to keep time of real time flow
-module realtime
+module realtime is c_linker_option("-lrt")
 
 in "C header" `{
 #ifdef _POSIX_C_SOURCE

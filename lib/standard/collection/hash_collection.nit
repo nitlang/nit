@@ -178,6 +178,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 			# Then store it in the array
 			var next = new_array[index]
 			new_array[index] = node
+			node._prev_in_bucklet = null
 			node._next_in_bucklet = next
 			if next != null then next._prev_in_bucklet = node
 			node = node._next_item
@@ -208,7 +209,7 @@ class HashMap[K: Object, V]
 	do
 		var c = node_at(key)
 		if c == null then
-			abort
+			return provide_default_value(key)
 		else
 			return c._value
 		end
@@ -241,12 +242,12 @@ class HashMap[K: Object, V]
 		enlarge(0)
 	end
 
-	redef var keys: HashMapKeys[K, V] = new HashMapKeys[K, V](self)
-	redef var values: HashMapValues[K, V] = new HashMapValues[K, V](self)
+	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self)
+	redef var values: RemovableCollection[V] = new HashMapValues[K, V](self)
 end
 
 # View of the keys of a HashMap
-class HashMapKeys[K: Object, V]
+private class HashMapKeys[K: Object, V]
 	super RemovableCollection[K]
 	# The original map
 	var map: HashMap[K, V]
@@ -267,7 +268,7 @@ class HashMapKeys[K: Object, V]
 end
 
 # View of the values of a Map
-class HashMapValues[K: Object, V]
+private class HashMapValues[K: Object, V]
 	super RemovableCollection[V]
 	# The original map
 	var map: HashMap[K, V]
@@ -454,7 +455,7 @@ private class HashSetNode[E: Object]
 	end
 end
 
-class HashSetIterator[E: Object]
+private class HashSetIterator[E: Object]
 	super Iterator[E]
 	redef fun is_ok do return _node != null
 

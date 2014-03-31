@@ -1,25 +1,2 @@
-  -W, --warn              Show warnings
-  -q, --quiet             Do not show warnings
-  --stop-on-first-error   Stop on first error
-  --no-color              Do not use color to display errors and warnings
-  --log                   Generate various log files
-  --log-dir               Directory where to generate log files
-  -h, -?, --help          Show Help (This screen)
-  --version               Show version and exit
-  -v, --verbose           Verbose
-  -I, --path              Set include path for loaders (may be used more than once)
-  --only-parse            Only proceed to parse step of loaders
-  --only-metamodel        Stop after meta-model processing
-  --all                   Compute all metrics
-  --inheritance           Compute metrics about inheritance usage
-  --refinement            Compute metrics about refinement usage
-  --self                  Compute metrics about the usage of explicit and implicit self
-  --ast                   Compute metrics about the usage of nodes and identifiers in the AST
-  --nullables             Compute metrics on nullables send
-  --static-types          Compute explicit static types metrics
-  --tables                Compute tables metrics
-  --rta                   Compute RTA metrics
-  --generate-csv          Generate CVS format metrics
-  --generate_hyperdoc     Generate Hyperdoc
-  --poset                 Complete metrics on posets
-  -d, --dir               Directory where some statistics files are generated
+Usage: nitmetrics [OPTION]... <file.nit>...mComputes various metrics on Nit programs.
+Use --help for help

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Curses for Nit
-module curses
+module curses is pkgconfig("ncurses")
 
 in "C header" `{
 	#include <ncurses.h>
@@ -37,7 +37,7 @@ extern Window `{WINDOW *`}
 
 	# print a string somewhere
 	# NOTE: as with the curses API, the position is (y,x)
-	fun mvaddstr(y,x: Int, str: String) import String::to_cstring `{
+	fun mvaddstr(y,x: Int, str: String) import String.to_cstring `{
 		char *c_string = String_to_cstring( str );
 		mvaddstr(y, x, c_string);
 	`}

@@ -36,7 +36,7 @@ extern class TimeT `{time_t`}
 
 	fun update `{ time(&recv); `}
 
-	fun ctime: String import NativeString::to_s_with_copy `{
+	fun ctime: String import NativeString.to_s_with_copy `{
 		return NativeString_to_s_with_copy( ctime(&recv) );
 	`}
 
@@ -85,10 +85,10 @@ extern class Tm `{struct tm *`}
 	fun yday: Int `{ return recv->tm_yday; `}
 	fun is_dst: Bool `{ return recv->tm_isdst; `}
 
-	fun asctime: String import NativeString::to_s_with_copy `{
+	fun asctime: String import NativeString.to_s_with_copy `{
 		return NativeString_to_s_with_copy( asctime(recv) );
 	`}
-	fun strftime(format: String): String import String::to_cstring, NativeString::to_s `{
+	fun strftime(format: String): String import String.to_cstring, NativeString.to_s `{
 		char* buf, *c_format;
 		size_t res;
 

@@ -1,6 +1,4 @@
-closure
 init_inherit
 init_linext
 inline
-test_extern
-nitc
+test_json

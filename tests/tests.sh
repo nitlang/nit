@@ -23,6 +23,17 @@ export NIT_TESTING=true
 
 unset NIT_DIR
 
+# Get the first Java lib available
+shopt -s nullglob
+paths=`echo /usr/lib/jvm/*/`
+paths=($paths)	
+JAVA_HOME=${paths[0]}
+
+paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/`
+paths=($paths)	
+JNI_LIB_PATH=${paths[0]}
+shopt -u nullglob
+
 usage()
 {
 	e=`basename "$0"`
@@ -145,6 +156,7 @@ function process_result()
 			remains="$remains $OLD"
 		else
 			echo "[fixme] out/$pattern.res $FIXME"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
@@ -159,6 +171,7 @@ function process_result()
 			echo "not ok - $description # TODO not yet implemented"
 		else
 			echo "[todo] out/$pattern.res -> not yet implemented"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$SOSOF" ]; then
@@ -166,6 +179,7 @@ function process_result()
 			echo "not ok - $description # TODO SOSO expected failure"
 		else
 			echo "[fixme soso] out/$pattern.res $SOSOF"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$NSAV" ]; then
@@ -176,7 +190,7 @@ function process_result()
 		fi
 		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
-		head >>$xml -n 50 out/$pattern.diff.sav.log
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -188,7 +202,7 @@ function process_result()
 		fi
 		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
-		head >>$xml -n 50 out/$pattern.diff.sav.log
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -200,13 +214,13 @@ function process_result()
 		fi
 		echo >>$xml "<skipped/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat  >>$xml out/$pattern.res
+		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
-		cat  >>$xml out/$pattern.cmp.err
+		cat -v >>$xml out/$pattern.cmp.err
 		echo >>$xml "]]></system-err>"
 	fi
 	echo >>$xml "</testcase>"
@@ -402,7 +416,8 @@ END
 				echo ""
 				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 			fi
-			NIT_NO_STACK=1 $TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
+				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -420,8 +435,9 @@ END
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
-			fi
-			NIT_NO_STACK=1 $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+			fi	
+			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
+				$TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
@@ -448,6 +464,13 @@ END
 					# Sould we skip the input for this engine?
 					need_skip $bff "  $name" $pack && continue
 
+					# use a specific inputs file, if required
+					if [ -f "$bff.inputs" ]; then
+						ffinputs="$bff.inputs"
+					else
+						ffinputs=$inputs
+					fi
+
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
@@ -456,7 +479,7 @@ END
 					test -z "$tap" && echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
@@ -473,6 +496,9 @@ END
 					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
+		elif [ -f "./$ff.bin" ]; then
+			echo "Not executable (platform?)" > "$ff.res"
+			process_result $bf "$bf" $pack
 		else
 			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"

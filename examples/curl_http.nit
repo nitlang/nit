@@ -21,115 +21,93 @@ import curl
 
 # Small class to represent an Http Fetcher
 class MyHttpFetcher
-  super CurlCallbacks
+	super CurlCallbacks
 
-  var curl: Curl
-  var our_body: String = ""
+	var curl: Curl
+	var our_body: String = ""
 
-  init do self.curl = new Curl
+	init(curl: Curl) do self.curl = curl
 
-  # Release curl object
-  fun destroy do self.curl.destroy
+	# Release curl object
+	fun destroy do self.curl.destroy
 
-  fun request(url: String): nullable CurlRequest do return self.curl.http_request(url)
+	# Header callback
+	redef fun header_callback(line: String) do
+		# We keep this callback silent for testing purposes
+		#if not line.has_prefix("Date:") then print "Header_callback : {line}"
+	end
 
-  # Header callback
-  redef fun header_callback(line: String) do
-  	# We keep this callback silent for testing purposes
-    #if not line.has_prefix("Date:") then print "Header_callback : {line}"
-  end
+	# Body callback
+	redef fun body_callback(line: String) do self.our_body = "{self.our_body}{line}"
 
-  # Body callback
-  redef fun body_callback(line: String) do self.our_body = "{self.our_body}{line}"
-
-  # Stream callback - Cf : No one is registered
-  redef fun stream_callback(buffer: String, size: Int, count: Int) do print "Stream_callback : {buffer} - {size} - {count}"
+	# Stream callback - Cf : No one is registered
+	redef fun stream_callback(buffer: String, size: Int, count: Int) do print "Stream_callback : {buffer} - {size} - {count}"
 end
 
 
 # Program
 if args.length < 2 then
-  print "Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>"
+	print "Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>"
 else
+	var curl = new Curl
+	var url = args[1]
+	var request = new CurlHTTPRequest(url, curl)
 
-  var myHttpFetcher = new MyHttpFetcher
-  var url = args[1]
+	# HTTP Get Request
+	if args[0] == "GET" then
+		request.verbose = false
+		var getResponse = request.execute
 
-  # HTTP Get Request
-  if args[0] == "GET" then
-    var getContentRequest = myHttpFetcher.request(url)
-    if getContentRequest isa CurlHTTPRequest then
+		if getResponse isa CurlResponseSuccess then
+			print "Status code : {getResponse.status_code}"
+			print "Body : {getResponse.body_str}"
+		else if getResponse isa CurlResponseFailed then
+			print "Error code : {getResponse.error_code}"
+			print "Error msg : {getResponse.error_msg}"
+		end
 
-      getContentRequest.verbose = false
-      var getResponse = getContentRequest.execute
+	# HTTP Post Request
+	else if args[0] == "POST" then
+		var myHttpFetcher = new MyHttpFetcher(curl)
+		request.delegate = myHttpFetcher
 
-      if getResponse isa CurlResponseSuccess then
-        print "Status code : {getResponse.status_code}"
-        print "Body : {getResponse.body_str}"
-      else if getResponse isa CurlResponseFailed then
-        print "Error code : {getResponse.error_code}"
-        print "Error msg : {getResponse.error_msg}"
-      end
+		var postDatas = new HeaderMap
+		postDatas["Bugs Bunny"] = "Daffy Duck"
+		postDatas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
+		postDatas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only once, the last one"
+		request.datas = postDatas
+		request.verbose = false
+		var postResponse = request.execute
 
-    else
-      print "Wrong init with Curl HTTP request"
-    end
+		print "Our body from the callback : {myHttpFetcher.our_body}"
 
-  # HTTP Post Request
-  else if args[0] == "POST" then
-    var postContentRequest = myHttpFetcher.request(url)
-    if postContentRequest isa CurlHTTPRequest then
+		if postResponse isa CurlResponseSuccess then
+			print "*** Answer ***"
+			print "Status code : {postResponse.status_code}"
+			print "Body should be empty, because we decided to manage callbacks : {postResponse.body_str.length}"
+		else if postResponse isa CurlResponseFailed then
+			print "Error code : {postResponse.error_code}"
+			print "Error msg : {postResponse.error_msg}"
+		end
 
-      postContentRequest.delegate = myHttpFetcher
-      var postDatas = new HeaderMap
-      postDatas["Bugs Bunny"] = "Daffy Duck"
-      postDatas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
-      postDatas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only once, the last one"
-      postContentRequest.datas = postDatas
-      postContentRequest.verbose = false
-      var postResponse = postContentRequest.execute
+	# HTTP Get to file Request
+	else if args[0] == "GET_FILE" then
+		var headers = new HeaderMap
+		headers["Accept"] = "Moo"
+		request.headers = headers
+		request.verbose = false
+		var downloadResponse = request.download_to_file(null)
 
-      print "Our body from the callback : {myHttpFetcher.our_body}"
-
-      if postResponse isa CurlResponseSuccess then
-        print "*** Answer ***"
-        print "Status code : {postResponse.status_code}"
-        print "Body should be empty, because we decided to manage callbacks : {postResponse.body_str.length}"
-      else if postResponse isa CurlResponseFailed then
-        print "Error code : {postResponse.error_code}"
-        print "Error msg : {postResponse.error_msg}"
-      end
-
-    else
-      print "Wrong init with Curl HTTP request"
-    end
-
-  # HTTP Get to file Request
-  else if args[0] == "GET_FILE" then
-    var downloadFileRequest = myHttpFetcher.request(url)
-    if downloadFileRequest isa CurlHTTPRequest then
-
-      var headers = new HeaderMap
-      headers["Accept"] = "Moo"
-      downloadFileRequest.headers = headers
-      downloadFileRequest.verbose = false
-      var downloadResponse = downloadFileRequest.download_to_file(null)
-
-      if downloadResponse isa CurlFileResponseSuccess then
-        print "*** Answer ***"
-        print "Status code : {downloadResponse.status_code}"
-        print "Size downloaded : {downloadResponse.size_download}"
-      else if downloadResponse isa CurlResponseFailed then
-        print "Error code : {downloadResponse.error_code}"
-        print "Error msg : {downloadResponse.error_msg}"
-      end
-
-    else
-      print "Wrong init with Curl HTTP request"
-    end
-
-  # Program logic
-  else
-    print "Usage : Method[POST, GET, GET_FILE]"
-  end
+		if downloadResponse isa CurlFileResponseSuccess then
+			print "*** Answer ***"
+			print "Status code : {downloadResponse.status_code}"
+			print "Size downloaded : {downloadResponse.size_download}"
+		else if downloadResponse isa CurlResponseFailed then
+			print "Error code : {downloadResponse.error_code}"
+			print "Error msg : {downloadResponse.error_msg}"
+		end
+	# Program logic
+	else
+		print "Usage : Method[POST, GET, GET_FILE]"
+	end
 end

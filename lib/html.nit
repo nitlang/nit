@@ -27,6 +27,7 @@ module html
 # HTMLPage use fluent interface so you can chain calls as:
 #	add("div").attr("id", "mydiv").text("My Div")
 class HTMLPage
+	super Streamable
 
 	# Define head content
 	fun head do end
@@ -37,8 +38,7 @@ class HTMLPage
 	private var current: HTMLTag = root
 	private var stack = new List[HTMLTag]
 
-	# Render the page as a html string
-	fun render: String do
+	redef fun write_to(stream) do
 		root.children.clear
 		open("head")
 		head
@@ -46,7 +46,8 @@ class HTMLPage
 		open("body")
 		body
 		close("body")
-		return "<!DOCTYPE html>{root.html}"
+		stream.write "<!DOCTYPE html>"
+		root.write_to(stream)
 	end
 
 	# Add a html tag to the current element
@@ -81,16 +82,11 @@ class HTMLPage
 		end
 		current = stack.pop
 	end
-
-	# Save html page in the specified file
-	fun save(file: String) do
-		var out = new OFStream.open(file)
-		out.write(self.render)
-		out.close
-	end
 end
 
 class HTMLTag
+	super Streamable
+
 	# HTML tagname: 'div' for <div></div>
 	var tag: String
 	init(tag: String) do
@@ -99,6 +95,9 @@ class HTMLTag
 	end
 
 	# Is the HTML element a void element?
+	#
+	#     assert new HTMLTag("img").is_void    == true
+	#     assert new HTMLTag("p").is_void      == false
 	var is_void: Bool
 
 	init with_attrs(tag: String, attrs: Map[String, String]) do
@@ -110,37 +109,48 @@ class HTMLTag
 	var attrs: Map[String, String] = new HashMap[String, String]
 
 	# Get the attributed value of 'prop' or null if 'prop' is undifened
+	#     var img = new HTMLTag("img")
+	#     img.attr("src", "./image.png").attr("alt", "image")
+	#     assert img.get_attr("src")     == "./image.png"
 	fun get_attr(key: String): nullable String do
 		if not attrs.has_key(key) then return null
 		return attrs[key]
 	end
 
 	# Set a 'value' for 'key'
-	# var img = new HTMLTag("img")
-	# img.attr("src", "./image.png").attr("alt", "image")
+	#     var img = new HTMLTag("img")
+	#     img.attr("src", "./image.png").attr("alt", "image")
+	#     assert img.write_to_string      == """<img src="./image.png" alt="image"/>"""
 	fun attr(key: String, value: String): HTMLTag do
 		attrs[key] = value
 		return self
 	end
 
 	# Add a CSS class to the HTML tag
-	# var img = new HTMLTag("img")
-	# img.add_class("logo").add_class("fullpage")
+	#     var img = new HTMLTag("img")
+	#     img.add_class("logo").add_class("fullpage")
+	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
 	fun add_class(klass: String): HTMLTag do
 		classes.add(klass)
 		return self
 	end
+
+	# CSS classes
 	var classes: Set[String] = new HashSet[String]
 
 	# Add multiple CSS classes
+	#     var img = new HTMLTag("img")
+	#     img.add_classes(["logo", "fullpage"])
+	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
 	fun add_classes(classes: Collection[String]): HTMLTag do
 		self.classes.add_all(classes)
 		return self
 	end
 
 	# Set a CSS 'value' for 'prop'
-	# var img = new HTMLTag("img")
-	# img.css("border", "2px solid black").css("position", "absolute")
+	#     var img = new HTMLTag("img")
+	#     img.css("border", "2px solid black").css("position", "absolute")
+	#     assert img.write_to_string      == """<img style="border: 2px solid black; position: absolute"/>"""
 	fun css(prop: String, value: String): HTMLTag do
 		css_props[prop] = value
 		return self
@@ -148,14 +158,42 @@ class HTMLTag
 	private var css_props: Map[String, String] = new HashMap[String, String]
 
 	# Get CSS value for 'prop'
+	#     var img = new HTMLTag("img")
+	#     img.css("border", "2px solid black").css("position", "absolute")
+	#     assert img.get_css("border")    == "2px solid black"
+	#     assert img.get_css("color")     == null
 	fun get_css(prop: String): nullable String do
 		if not css_props.has_key(prop) then return null
 		return css_props[prop]
 	end
 
+	# Replace `self` by `parent`.
+	#
+	#     var elem = new HTMLTag("li")
+	#     elem.add_outer(new HTMLTag("ul"))
+	#     assert elem.write_to_string == "<ul><li></li></ul>"
+	fun add_outer(parent: HTMLTag) do
+		# copy self in new object
+                var child = new HTMLTag(self.tag)
+                child.attrs = self.attrs
+                child.classes = self.classes
+                child.css_props = self.css_props
+                child.children = self.children
+                # add copy in parent children elements
+                parent.children.add(child)
+                # replace self by parent
+                self.tag = parent.tag
+                self.attrs = parent.attrs
+                self.classes = parent.classes
+                self.css_props = parent.css_props
+                self.is_void = parent.is_void
+                self.children = parent.children
+        end
+
 	# Add a HTML 'child' to self
-	# var ul = new HTMLTag("ul")
-	# ul.add(new HTMLTag("li"))
+	#     var ul = new HTMLTag("ul")
+	#     ul.add(new HTMLTag("li"))
+	#     assert ul.write_to_string    == "<ul><li></li></ul>"
 	fun add(child: HTMLTag) do children.add(child)
 
 	# List of children HTML elements
@@ -164,7 +202,7 @@ class HTMLTag
 	# Clear all child and set the text of element
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
-	#     assert p.html      ==  "<p>Hello World!</p>"
+	#     assert p.write_to_string      ==  "<p>Hello World!</p>"
 	# Text is escaped see: `standard::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
@@ -178,7 +216,7 @@ class HTMLTag
 	#     p.append("Hello")
 	#     p.add(new HTMLTag("br"))
 	#     p.append("World!")
-	#     assert p.html      ==  "<p>Hello<br/>World!</p>"
+	#     assert p.write_to_string      ==  "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
 		add(new HTMLRaw(txt.html_escape))
@@ -196,22 +234,12 @@ class HTMLTag
 		return self
 	end
 
-	# Render the element as HTML string
-	fun html: String do
-		var res = new Array[String]
-		render_in(res)
-		return res.to_s
-	end
-
-	# Save html page in the specified file
-	fun save(file: String) do
-		var out = new OFStream.open(file)
+	redef fun write_to(stream) do
 		var res = new Array[String]
 		render_in(res)
 		for r in res do
-			out.write(r)
+			stream.write(r)
 		end
-		out.close
 	end
 
 	# In order to avoid recursive concatenation,
@@ -249,7 +277,7 @@ class HTMLTag
 
 		if attrs.has_key("style") or not css_props.is_empty then
 			res.add " style=\""
-			for k, v in attrs do
+			for k, v in css_props do
 				res.add k.html_escape
 				res.add ": "
 				res.add v.html_escape
@@ -280,6 +308,5 @@ private class HTMLRaw
 
 	private var content: String
 	init(content: String) do self.content = content
-	redef fun html do return content
 	redef fun render_in(res) do res.add content
 end

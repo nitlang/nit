@@ -14,21 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_opengles1
+module linux_opengles1 is
+	pkgconfig("glesv1_cm", "x11", "egl")
+	c_compiler_option(exec("sdl-config", "--cflags"))
+	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
+end
 
 import mnit # for
 # import opengles1
 
 import sdl
-
-in "C Header" `{
-	#define LOGW(...) ((void)fprintf(stderr, "# warn: %s", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)fprintf(stderr, "# info: %s", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
-`}
 
 in "C" `{
 	NativeWindowType mnit_window;
@@ -42,7 +37,7 @@ redef class Display
 	fun wanted_height: Int do return 600
 end
 
-redef class Opengles1Display # in "C" `{struct mnit_opengles_Texture *`}
+redef class Opengles1Display
 
 	# display managing the window, events, fonts? and image loading?
 	var sdl_display: SDLDisplay
@@ -92,13 +87,13 @@ redef extern Opengles1Image
 	`}
 
 	# using sdl
-	new from_file( path: String ) is extern import String::to_cstring `{
+	new from_file( path: String ) is extern import String.to_cstring `{
 		SDL_Surface *sdl_image;
 		struct mnit_opengles_Texture *opengles_image;
 
 		sdl_image = IMG_Load( String_to_cstring( path ) );
 		if ( !sdl_image ) {
-			LOGW( "SDL failed to load image <%s>: %s\n", String_to_cstring( path ), IMG_GetError() );
+			fprintf(stderr, "SDL failed to load image <%s>: %s\n", String_to_cstring(path), IMG_GetError());
 			return NULL;
 		} else {
 			opengles_image = mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );

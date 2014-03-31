@@ -1,1 +1,1 @@
---all base_simple3.nit -d out/nitmetrics_args1.write
+--no-colors --all --csv base_simple3.nit base_empty_module.nit -d $WRITE

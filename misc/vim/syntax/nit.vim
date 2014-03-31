@@ -31,7 +31,10 @@ endif
 " Expression Substitution and Backslash Notation
 syn match NITExprSubstError "{\|}" contained
 syn match NITExprSubst "\\." contained
-syn match NITExprSubst "{[^}]*}" contained
+syn match NITExprSubst "{\([^}]\|\n\)*}" contained
+
+syn match NITExprSubstLong "\\." contained
+syn match NITExprSubstLong "{*\zs{{{\([^}]\|\n\)*}}}\ze}*" contained
 
 " Numbers and ASCII Codes
 syn match NITNumber "\<\(\d\+\.\d\+\|\d\+\)\>"
@@ -42,6 +45,7 @@ syn match NITAttribute		"\<_\h\w*"
 
 " Literal strings
 syn region NITString matchgroup=NITStringDelimit start="\"" end="\"" skip="\\\\\|\\\"" contains=NITExprSubst,NITExprSubstError
+syn region NITString matchgroup=NITStringDelimit start="\"\"\"" end="\"*\zs\"\"\"" skip="\\\\\|\\\"" contains=NITExprSubstLong
 syn region NITString matchgroup=NITStringDelimit start="'"  end="'"  skip="\\\\\|\\'"
 
 " Labels
@@ -111,6 +115,7 @@ hi def link NITKeyword			Keyword
 hi def link NITString			String
 hi def link NITStringDelimit		Delimiter
 hi def link NITExprSubst		Special
+hi def link NITExprSubstLong		Special
 hi def link NITExprSubstError		Error
 
 hi def link NITComment			Comment
@@ -119,11 +124,24 @@ hi def link NITTodo			Todo
 " FFI Section
 syn match NITFFIDelimiters "\<\(`{\|`}\)\>"
 hi def link NITFFIDelimiters		Keyword
+
 " FFI Python
 syntax include @FFIPython syntax/python.vim
 unlet b:current_syntax
 syn match NITFFILanguage	'"Python"' nextgroup=NITFFIBlockPython skipwhite
 syn region NITFFIBlockPython matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIPython
+
+" FFI Java
+syntax include @FFIJava syntax/java.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"Java"' nextgroup=NITFFIBlockJava skipwhite
+syn region NITFFIBlockJava matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIJava
+
+" FFI C++
+syntax include @FFICpp syntax/cpp.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"C++"' nextgroup=NITFFIBlockCpp skipwhite
+syn region NITFFIBlockCpp matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFICpp
 
 " FFI C (the last one is the default)
 syntax include @FFIC syntax/c.vim

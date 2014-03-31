@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_modelize_property__ToolContext___64dmodelize_property_p
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @modelize_property_phase");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 23);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -72,7 +72,7 @@ var1 = self->attrs[COLOR_modelize_property__ModelBuilder___64dmpropdef2npropdef]
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mpropdef2npropdef");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 37);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -142,7 +142,7 @@ var2 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassd
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 48);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var2;
 var3 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef) /* in_hierarchy on <var_mclassdef:MClassDef>*/;
@@ -160,7 +160,7 @@ var6 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hi
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 50);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var6) /* direct_greaters on <var6:nullable POSetElement[MClassDef]>*/;
 }
@@ -447,7 +447,7 @@ var = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassde
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 70);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var;
 var1 = ((short int (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__is_intro]))(var_mclassdef) /* is_intro on <var_mclassdef:MClassDef>*/;
@@ -511,14 +511,13 @@ var19 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 86);
-exit(1);
+show_backtrace(1);
 } else {
 var20 = ((val* (*)(val*))(var19->class->vft[COLOR_model__MClassDef__mmodule]))(var19) /* mmodule on <var19:nullable MClassDef>*/;
 }
 var_mmodule = var20;
 var21 = NEW_array__Array(&type_array__Arraymodel__MMethod);
 ((void (*)(val*))(var21->class->vft[COLOR_array__Array__init]))(var21) /* init on <var21:Array[MMethod]>*/;
-CHECK_NEW_array__Array(var21);
 var_combine = var21;
 var22 = NULL;
 var_inhc = var22;
@@ -542,7 +541,7 @@ var32 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var32 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 93);
-exit(1);
+show_backtrace(1);
 } else {
 var33 = ((val* (*)(val*))(var32->class->vft[COLOR_model__MClassDef__bound_mtype]))(var32) /* bound_mtype on <var32:nullable MClassDef>*/;
 }
@@ -574,7 +573,7 @@ if (!var40) {
 var_class_name = var39 == NULL ? "null" : var39->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 94);
-exit(1);
+show_backtrace(1);
 }
 var_candidate = var39;
 var44 = NULL;
@@ -590,7 +589,7 @@ var47 = ((val* (*)(val*))(var46->class->vft[COLOR_model__MMethodDef__msignature]
 if (var47 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 95);
-exit(1);
+show_backtrace(1);
 } else {
 var48 = ((long (*)(val*))(var47->class->vft[COLOR_model__MSignature__arity]))(var47) /* arity on <var47:nullable MSignature>*/;
 }
@@ -661,7 +660,6 @@ var71 = NEW_array__NativeArray(var70, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var71)->values[2] = (val*) var65;
 ((struct instance_array__NativeArray*)var71)->values[3] = (val*) var_c;
 ((void (*)(val*, val*, long))(var69->class->vft[COLOR_array__Array__with_native]))(var69, var71, var70) /* with_native on <var69:Array[Object]>*/;
-CHECK_NEW_array__Array(var69);
 }
 var72 = ((val* (*)(val*))(var69->class->vft[COLOR_string__Object__to_s]))(var69) /* to_s on <var69:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var_nclassdef, var72) /* error on <self:ModelBuilder>*/;
@@ -704,7 +702,6 @@ var86 = NEW_array__NativeArray(var85, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var86)->values[1] = (val*) var80;
 ((struct instance_array__NativeArray*)var86)->values[2] = (val*) var_inhc;
 ((void (*)(val*, val*, long))(var84->class->vft[COLOR_array__Array__with_native]))(var84, var86, var85) /* with_native on <var84:Array[Object]>*/;
-CHECK_NEW_array__Array(var84);
 }
 var87 = ((val* (*)(val*))(var84->class->vft[COLOR_string__Object__to_s]))(var84) /* to_s on <var84:Array[Object]>*/;
 var88 = 3;
@@ -766,7 +763,6 @@ var114 = NEW_array__NativeArray(var113, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var114)->values[2] = (val*) var108;
 ((struct instance_array__NativeArray*)var114)->values[3] = (val*) var_inhc;
 ((void (*)(val*, val*, long))(var112->class->vft[COLOR_array__Array__with_native]))(var112, var114, var113) /* with_native on <var112:Array[Object]>*/;
-CHECK_NEW_array__Array(var112);
 }
 var115 = ((val* (*)(val*))(var112->class->vft[COLOR_string__Object__to_s]))(var112) /* to_s on <var112:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var_nclassdef, var115) /* error on <self:ModelBuilder>*/;
@@ -790,21 +786,17 @@ varonce119 = var120;
 var124 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__mclass]))(var_mclassdef) /* mclass on <var_mclassdef:MClassDef>*/;
 var125 = ((val* (*)(val*))(var124->class->vft[COLOR_model__MClass__visibility]))(var124) /* visibility on <var124:MClass>*/;
 ((void (*)(val*, val*, val*, val*))(var118->class->vft[COLOR_model__MMethod__init]))(var118, var_mclassdef, var120, var125) /* init on <var118:MMethod>*/;
-CHECK_NEW_model__MMethod(var118);
 var_mprop = var118;
 var126 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var127 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__ANode__location]))(var_nclassdef) /* location on <var_nclassdef:AClassdef(AStdClassdef)>*/;
 ((void (*)(val*, val*, val*, val*))(var126->class->vft[COLOR_model__MMethodDef__init]))(var126, var_mclassdef, var_mprop, var127) /* init on <var126:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var126);
 var_mpropdef128 = var126;
 var129 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 ((void (*)(val*))(var129->class->vft[COLOR_array__Array__init]))(var129) /* init on <var129:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var129);
 var_mparameters = var129;
 var130 = NEW_model__MSignature(&type_model__MSignature);
 var131 = NULL;
 ((void (*)(val*, val*, val*))(var130->class->vft[COLOR_model__MSignature__init]))(var130, var_mparameters, var131) /* init on <var130:MSignature>*/;
-CHECK_NEW_model__MSignature(var130);
 var_msignature = var130;
 ((void (*)(val*, val*))(var_mpropdef128->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_mpropdef128, var_msignature) /* msignature= on <var_mpropdef128:MMethodDef>*/;
 var132 = 1;
@@ -829,7 +821,6 @@ var141 = NEW_array__NativeArray(var140, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var141)->values[2] = (val*) var_mpropdef128;
 ((struct instance_array__NativeArray*)var141)->values[3] = (val*) var_msignature;
 ((void (*)(val*, val*, long))(var139->class->vft[COLOR_array__Array__with_native]))(var139, var141, var140) /* with_native on <var139:Array[Object]>*/;
-CHECK_NEW_array__Array(var139);
 }
 var142 = ((val* (*)(val*))(var139->class->vft[COLOR_string__Object__to_s]))(var139) /* to_s on <var139:Array[Object]>*/;
 var143 = 3;
@@ -839,7 +830,6 @@ goto RET_LABEL;
 }
 var144 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 ((void (*)(val*))(var144->class->vft[COLOR_array__Array__init]))(var144) /* init on <var144:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var144);
 var_mparameters145 = var144;
 var146 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__AClassdef__n_propdefs]))(var_nclassdef) /* n_propdefs on <var_nclassdef:AClassdef(AStdClassdef)>*/;
 var147 = ((val* (*)(val*))(var146->class->vft[COLOR_abstract_collection__Collection__iterator]))(var146) /* iterator on <var146:ANodes[APropdef]>*/;
@@ -885,7 +875,7 @@ var161 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APr
 if (var161 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 137);
-exit(1);
+show_backtrace(1);
 } else {
 var162 = ((val* (*)(val*))(var161->class->vft[COLOR_model__MPropDef__mproperty]))(var161) /* mproperty on <var161:nullable MPropDef(nullable MAttributeDef)>*/;
 }
@@ -897,7 +887,7 @@ var166 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APr
 if (var166 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 138);
-exit(1);
+show_backtrace(1);
 } else {
 var167 = ((val* (*)(val*))(var166->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var166) /* static_mtype on <var166:nullable MPropDef(nullable MAttributeDef)>*/;
 }
@@ -915,7 +905,6 @@ goto RET_LABEL;
 var170 = NEW_model__MParameter(&type_model__MParameter);
 var171 = 0;
 ((void (*)(val*, val*, val*, short int))(var170->class->vft[COLOR_model__MParameter__init]))(var170, var_paramname, var_ret_type, var171) /* init on <var170:MParameter>*/;
-CHECK_NEW_model__MParameter(var170);
 var_mparameter = var170;
 ((void (*)(val*, val*))(var_mparameters145->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_mparameters145, var_mparameter) /* add on <var_mparameters145:Array[MParameter]>*/;
 } else {
@@ -937,17 +926,14 @@ varonce174 = var175;
 var179 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__mclass]))(var_mclassdef) /* mclass on <var_mclassdef:MClassDef>*/;
 var180 = ((val* (*)(val*))(var179->class->vft[COLOR_model__MClass__visibility]))(var179) /* visibility on <var179:MClass>*/;
 ((void (*)(val*, val*, val*, val*))(var173->class->vft[COLOR_model__MMethod__init]))(var173, var_mclassdef, var175, var180) /* init on <var173:MMethod>*/;
-CHECK_NEW_model__MMethod(var173);
 var_mprop181 = var173;
 var182 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var183 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__ANode__location]))(var_nclassdef) /* location on <var_nclassdef:AClassdef(AStdClassdef)>*/;
 ((void (*)(val*, val*, val*, val*))(var182->class->vft[COLOR_model__MMethodDef__init]))(var182, var_mclassdef, var_mprop181, var183) /* init on <var182:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var182);
 var_mpropdef184 = var182;
 var185 = NEW_model__MSignature(&type_model__MSignature);
 var186 = NULL;
 ((void (*)(val*, val*, val*))(var185->class->vft[COLOR_model__MSignature__init]))(var185, var_mparameters145, var186) /* init on <var185:MSignature>*/;
-CHECK_NEW_model__MSignature(var185);
 var_msignature187 = var185;
 ((void (*)(val*, val*))(var_mpropdef184->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_mpropdef184, var_msignature187) /* msignature= on <var_mpropdef184:MMethodDef>*/;
 var188 = 1;
@@ -972,7 +958,6 @@ var197 = NEW_array__NativeArray(var196, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var197)->values[2] = (val*) var_mpropdef184;
 ((struct instance_array__NativeArray*)var197)->values[3] = (val*) var_msignature187;
 ((void (*)(val*, val*, long))(var195->class->vft[COLOR_array__Array__with_native]))(var195, var197, var196) /* with_native on <var195:Array[Object]>*/;
-CHECK_NEW_array__Array(var195);
 }
 var198 = ((val* (*)(val*))(var195->class->vft[COLOR_string__Object__to_s]))(var195) /* to_s on <var195:Array[Object]>*/;
 var199 = 3;
@@ -1104,7 +1089,7 @@ var1 = self->attrs[COLOR_modelize_property__AClassdef___64dmprop2npropdef].val; 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mprop2npropdef");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 170);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1144,7 +1129,6 @@ short int var7 /* : Bool */;
 val* var8 /* : String */;
 var1 = NEW_modelize_property__TextCollectorVisitor(&type_modelize_property__TextCollectorVisitor);
 ((void (*)(val*))(var1->class->vft[COLOR_modelize_property__TextCollectorVisitor__init]))(var1) /* init on <var1:TextCollectorVisitor>*/;
-CHECK_NEW_modelize_property__TextCollectorVisitor(var1);
 var_v = var1;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:TextCollectorVisitor>*/;
 var2 = ((val* (*)(val*))(var_v->class->vft[COLOR_modelize_property__TextCollectorVisitor__text]))(var_v) /* text on <var_v:TextCollectorVisitor>*/;
@@ -1161,7 +1145,7 @@ var7 = ((short int (*)(val*, val*))(var2->class->vft[COLOR_kernel__Object___33d_
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 182);
-exit(1);
+show_backtrace(1);
 }
 var8 = ((val* (*)(val*))(var_v->class->vft[COLOR_modelize_property__TextCollectorVisitor__text]))(var_v) /* text on <var_v:TextCollectorVisitor>*/;
 var = var8;
@@ -1186,7 +1170,7 @@ var1 = self->attrs[COLOR_modelize_property__TextCollectorVisitor___64dtext].val;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @text");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 189);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1299,7 +1283,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MPROPDEF", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 201);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_modelize_property__APropdef___64dmpropdef].val = p0; /* @mpropdef on <self:APropdef> */
 RET_LABEL:;
@@ -1315,7 +1299,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_property", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 204);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method modelize_property#APropdef#build_property for (self: Object, ModelBuilder, AClassdef) */
@@ -1329,7 +1313,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_signature", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 205);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method modelize_property#APropdef#build_signature for (self: Object, ModelBuilder, AClassdef) */
@@ -1343,7 +1327,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "check_signature", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 206);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method modelize_property#APropdef#check_signature for (self: Object, ModelBuilder, AClassdef) */
@@ -1426,7 +1410,7 @@ var12 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var12 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 217);
-exit(1);
+show_backtrace(1);
 } else {
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_model__MClassDef__mclass]))(var12) /* mclass on <var12:nullable MClassDef>*/;
 }
@@ -1446,7 +1430,7 @@ var20 = 1; /* arg is null and recv is not */
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 219);
-exit(1);
+show_backtrace(1);
 }
 if (varonce21) {
 var22 = varonce21;
@@ -1471,7 +1455,7 @@ var29 = 1; /* arg is null and recv is not */
 if (!var29) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 222);
-exit(1);
+show_backtrace(1);
 }
 } else {
 }
@@ -1580,7 +1564,6 @@ var20 = NEW_array__NativeArray(var19, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var20)->values[2] = (val*) var14;
 ((struct instance_array__NativeArray*)var20)->values[3] = (val*) var_mvisibility;
 ((void (*)(val*, val*, long))(var18->class->vft[COLOR_array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
-CHECK_NEW_array__Array(var18);
 }
 var21 = ((val* (*)(val*))(var18->class->vft[COLOR_string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_nvisibility, var21) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -1705,7 +1688,7 @@ var12 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var12 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 243);
-exit(1);
+show_backtrace(1);
 } else {
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_model__MClassDef__mclass]))(var12) /* mclass on <var12:nullable MClassDef>*/;
 }
@@ -1728,7 +1711,6 @@ var21 = NEW_array__NativeArray(var20, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var21)->values[3] = (val*) var13;
 ((struct instance_array__NativeArray*)var21)->values[4] = (val*) var15;
 ((void (*)(val*, val*, long))(var19->class->vft[COLOR_array__Array__with_native]))(var19, var21, var20) /* with_native on <var19:Array[Object]>*/;
-CHECK_NEW_array__Array(var19);
 }
 var22 = ((val* (*)(val*))(var19->class->vft[COLOR_string__Object__to_s]))(var19) /* to_s on <var19:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var22) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -1758,7 +1740,7 @@ var31 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var31 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 248);
-exit(1);
+show_backtrace(1);
 } else {
 var32 = ((val* (*)(val*))(var31->class->vft[COLOR_model__MClassDef__mclass]))(var31) /* mclass on <var31:nullable MClassDef>*/;
 }
@@ -1791,7 +1773,6 @@ var46 = NEW_array__NativeArray(var45, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var46)->values[3] = (val*) var38;
 ((struct instance_array__NativeArray*)var46)->values[4] = (val*) var40;
 ((void (*)(val*, val*, long))(var44->class->vft[COLOR_array__Array__with_native]))(var44, var46, var45) /* with_native on <var44:Array[Object]>*/;
-CHECK_NEW_array__Array(var44);
 }
 var47 = ((val* (*)(val*))(var44->class->vft[COLOR_string__Object__to_s]))(var44) /* to_s on <var44:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var47) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -1816,7 +1797,7 @@ var55 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 253);
-exit(1);
+show_backtrace(1);
 } else {
 var56 = ((val* (*)(val*))(var55->class->vft[COLOR_model__MClassDef__mclass]))(var55) /* mclass on <var55:nullable MClassDef>*/;
 }
@@ -1849,7 +1830,6 @@ var70 = NEW_array__NativeArray(var69, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var70)->values[3] = (val*) var62;
 ((struct instance_array__NativeArray*)var70)->values[4] = (val*) var64;
 ((void (*)(val*, val*, long))(var68->class->vft[COLOR_array__Array__with_native]))(var68, var70, var69) /* with_native on <var68:Array[Object]>*/;
-CHECK_NEW_array__Array(var68);
 }
 var71 = ((val* (*)(val*))(var68->class->vft[COLOR_string__Object__to_s]))(var68) /* to_s on <var68:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var71) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -1910,7 +1890,7 @@ var1 = self->attrs[COLOR_modelize_property__ASignature___64dparam_names].val; /*
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @param_names");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 265);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1943,7 +1923,7 @@ var1 = self->attrs[COLOR_modelize_property__ASignature___64dparam_types].val; /*
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @param_types");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 268);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -2156,7 +2136,6 @@ RET_LABEL21:(void)0;
 var23 = BOX_kernel__Int(var17); /* autobox from Int to Discrete */
 var24 = BOX_kernel__Int(var20); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var16->class->vft[COLOR_range__Range__without_last]))(var16, var23, var24) /* without_last on <var16:Range[Int]>*/;
-CHECK_NEW_range__Range(var16);
 var25 = ((val* (*)(val*))(var16->class->vft[COLOR_abstract_collection__Collection__iterator]))(var16) /* iterator on <var16:Range[Int]>*/;
 for(;;) {
 var26 = ((short int (*)(val*))(var25->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var25) /* is_ok on <var25:Iterator[nullable Object]>*/;
@@ -2221,7 +2200,6 @@ var54 = NEW_array__NativeArray(var53, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var54)->values[1] = (val*) var46;
 ((struct instance_array__NativeArray*)var54)->values[2] = (val*) var48;
 ((void (*)(val*, val*, long))(var52->class->vft[COLOR_array__Array__with_native]))(var52, var54, var53) /* with_native on <var52:Array[Object]>*/;
-CHECK_NEW_array__Array(var52);
 }
 var55 = ((val* (*)(val*))(var52->class->vft[COLOR_string__Object__to_s]))(var52) /* to_s on <var52:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_np, var55) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -2400,7 +2378,6 @@ var28 = NEW_array__NativeArray(var27, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var28)->values[1] = (val*) var20;
 ((struct instance_array__NativeArray*)var28)->values[2] = (val*) var22;
 ((void (*)(val*, val*, long))(var26->class->vft[COLOR_array__Array__with_native]))(var26, var28, var27) /* with_native on <var26:Array[Object]>*/;
-CHECK_NEW_array__Array(var26);
 }
 var29 = ((val* (*)(val*))(var26->class->vft[COLOR_string__Object__to_s]))(var26) /* to_s on <var26:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var12, var29) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -2411,7 +2388,6 @@ goto RET_LABEL;
 }
 var31 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 ((void (*)(val*))(var31->class->vft[COLOR_array__Array__init]))(var31) /* init on <var31:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var31);
 var_mparameters = var31;
 var32 = NEW_range__Range(&type_range__Rangekernel__Int);
 var33 = 0;
@@ -2420,7 +2396,6 @@ var35 = ((long (*)(val*))(var34->class->vft[COLOR_abstract_collection__Collectio
 var36 = BOX_kernel__Int(var33); /* autobox from Int to Discrete */
 var37 = BOX_kernel__Int(var35); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var32->class->vft[COLOR_range__Range__without_last]))(var32, var36, var37) /* without_last on <var32:Range[Int]>*/;
-CHECK_NEW_range__Range(var32);
 var38 = ((val* (*)(val*))(var32->class->vft[COLOR_abstract_collection__Collection__iterator]))(var32) /* iterator on <var32:Range[Int]>*/;
 for(;;) {
 var39 = ((short int (*)(val*))(var38->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var38) /* is_ok on <var38:Iterator[nullable Object]>*/;
@@ -2441,7 +2416,6 @@ goto RET_LABEL49;
 RET_LABEL49:(void)0;
 }
 ((void (*)(val*, val*, val*, short int))(var42->class->vft[COLOR_model__MParameter__init]))(var42, var44, var46, var48) /* init on <var42:MParameter>*/;
-CHECK_NEW_model__MParameter(var42);
 var_mparameter = var42;
 var51 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASignature__n_params]))(self) /* n_params on <self:ASignature>*/;
 var52 = ((val* (*)(val*, long))(var51->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var51, var_i) /* [] on <var51:ANodes[AParam]>*/;
@@ -2454,7 +2428,6 @@ BREAK_label: (void)0;
 var53 = NEW_model__MSignature(&type_model__MSignature);
 var54 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__ASignature__ret_type]))(self) /* ret_type on <self:ASignature>*/;
 ((void (*)(val*, val*, val*))(var53->class->vft[COLOR_model__MSignature__init]))(var53, var_mparameters, var54) /* init on <var53:MSignature>*/;
-CHECK_NEW_model__MSignature(var53);
 var_msignature = var53;
 var = var_msignature;
 goto RET_LABEL;
@@ -2651,7 +2624,7 @@ var1 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassd
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 343);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AMethPropdef__n_methid]))(self) /* n_methid on <self:AMethPropdef>*/;
@@ -2730,7 +2703,7 @@ var_name_node = var29;
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 358);
-exit(1);
+show_backtrace(1);
 }
 }
 }
@@ -2769,7 +2742,7 @@ var43 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AMethPropdef__n_s
 if (var43 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 368);
-exit(1);
+show_backtrace(1);
 } else {
 var44 = ((val* (*)(val*))(var43->class->vft[COLOR_parser_nodes__ASignature__n_params]))(var43) /* n_params on <var43:nullable ASignature>*/;
 }
@@ -2832,7 +2805,7 @@ if (!var62) {
 var_class_name = var61 == NULL ? "null" : var61->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 374);
-exit(1);
+show_backtrace(1);
 }
 var_mprop = var61;
 } else {
@@ -2849,7 +2822,6 @@ var68 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_prop
 var_mvisibility = var68;
 var69 = NEW_model__MMethod(&type_model__MMethod);
 ((void (*)(val*, val*, val*, val*))(var69->class->vft[COLOR_model__MMethod__init]))(var69, var_mclassdef, var_name, var_mvisibility) /* init on <var69:MMethod>*/;
-CHECK_NEW_model__MMethod(var69);
 var_mprop = var69;
 ((void (*)(val*, short int))(var_mprop->class->vft[COLOR_model__MMethod__is_init_61d]))(var_mprop, var_is_init) /* is_init= on <var_mprop:nullable MMethod(MMethod)>*/;
 /* <self:AMethPropdef> isa AExternInitPropdef */
@@ -2907,7 +2879,6 @@ var88 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__ACl
 var89 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var90 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AMethPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var89->class->vft[COLOR_model__MMethodDef__init]))(var89, var_mclassdef, var_mprop, var90) /* init on <var89:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var89);
 var_mpropdef = var89;
 /* <var_mpropdef:MMethodDef> isa nullable MPROPDEF */
 type_struct = self->type->resolution_table->types[COLOR_parser_nodes__APropdef_VTMPROPDEF];
@@ -2922,7 +2893,7 @@ if (!var91) {
 var_class_name94 = var_mpropdef == NULL ? "null" : var_mpropdef->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MPROPDEF", var_class_name94);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 395);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(self, var_mpropdef) /* mpropdef= on <self:AMethPropdef>*/;
 var95 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -2948,7 +2919,6 @@ var106 = NEW_array__NativeArray(var105, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var106)->values[1] = (val*) var99;
 ((struct instance_array__NativeArray*)var106)->values[2] = (val*) var103;
 ((void (*)(val*, val*, long))(var104->class->vft[COLOR_array__Array__with_native]))(var104, var106, var105) /* with_native on <var104:Array[Object]>*/;
-CHECK_NEW_array__Array(var104);
 }
 var107 = ((val* (*)(val*))(var104->class->vft[COLOR_string__Object__to_s]))(var104) /* to_s on <var104:Array[Object]>*/;
 var108 = 3;
@@ -2973,7 +2943,6 @@ var118 = NEW_array__NativeArray(var117, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var118)->values[1] = (val*) var111;
 ((struct instance_array__NativeArray*)var118)->values[2] = (val*) var115;
 ((void (*)(val*, val*, long))(var116->class->vft[COLOR_array__Array__with_native]))(var116, var118, var117) /* with_native on <var116:Array[Object]>*/;
-CHECK_NEW_array__Array(var116);
 }
 var119 = ((val* (*)(val*))(var116->class->vft[COLOR_string__Object__to_s]))(var116) /* to_s on <var116:Array[Object]>*/;
 var120 = 3;
@@ -3201,11 +3170,9 @@ var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AMethPropdef__n_si
 var_nsig = var5;
 var6 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var6->class->vft[COLOR_array__Array__init]))(var6) /* init on <var6:Array[String]>*/;
-CHECK_NEW_array__Array(var6);
 var_param_names = var6;
 var7 = NEW_array__Array(&type_array__Arraymodel__MType);
 ((void (*)(val*))(var7->class->vft[COLOR_array__Array__init]))(var7) /* init on <var7:Array[MType]>*/;
-CHECK_NEW_array__Array(var7);
 var_param_types = var7;
 var8 = 1;
 { /* Inline kernel#Int#unary - (var8) */
@@ -3347,7 +3314,6 @@ var69 = BOX_kernel__Int(var59); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var67)->values[9] = (val*) var_mpropdef;
 ((struct instance_array__NativeArray*)var67)->values[10] = (val*) var_msignature;
 ((void (*)(val*, val*, long))(var65->class->vft[COLOR_array__Array__with_native]))(var65, var67, var66) /* with_native on <var65:Array[Object]>*/;
-CHECK_NEW_array__Array(var65);
 }
 var70 = ((val* (*)(val*))(var65->class->vft[COLOR_string__Object__to_s]))(var65) /* to_s on <var65:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_node, var70) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -3362,7 +3328,7 @@ var73 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var73 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 440);
-exit(1);
+show_backtrace(1);
 } else {
 var74 = ((val* (*)(val*))(var73->class->vft[COLOR_model__MClassDef__supertypes]))(var73) /* supertypes on <var73:nullable MClassDef>*/;
 }
@@ -3376,7 +3342,7 @@ var78 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var78 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 441);
-exit(1);
+show_backtrace(1);
 } else {
 var79 = ((val* (*)(val*))(var78->class->vft[COLOR_model__MClassDef__bound_mtype]))(var78) /* bound_mtype on <var78:nullable MClassDef>*/;
 }
@@ -3413,7 +3379,7 @@ if (!var89) {
 var_class_name = var88 == NULL ? "null" : var88->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MMethodDef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 445);
-exit(1);
+show_backtrace(1);
 }
 var90 = ((val* (*)(val*))(var88->class->vft[COLOR_model__MMethodDef__msignature]))(var88) /* msignature on <var88:MPropDef(MMethodDef)>*/;
 var_msignature = var90;
@@ -3480,7 +3446,6 @@ var91 = var_108;
 if (var91){
 var114 = NEW_array__Array(&type_array__Arraymodel__MType);
 ((void (*)(val*))(var114->class->vft[COLOR_array__Array__init]))(var114) /* init on <var114:Array[MType]>*/;
-CHECK_NEW_array__Array(var114);
 var_param_types = var114;
 var115 = ((val* (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__mparameters]))(var_msignature) /* mparameters on <var_msignature:nullable MSignature(MSignature)>*/;
 var116 = ((val* (*)(val*))(var115->class->vft[COLOR_abstract_collection__Collection__iterator]))(var115) /* iterator on <var115:Array[MParameter]>*/;
@@ -3535,7 +3500,7 @@ if (var131){
 if (var_nsig == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 467);
-exit(1);
+show_backtrace(1);
 } else {
 var135 = ((val* (*)(val*))(var_nsig->class->vft[COLOR_parser_nodes__ASignature__n_params]))(var_nsig) /* n_params on <var_nsig:nullable ASignature>*/;
 }
@@ -3569,7 +3534,6 @@ var152 = NEW_array__NativeArray(var151, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var152)->values[1] = (val*) var144;
 ((struct instance_array__NativeArray*)var152)->values[2] = (val*) var146;
 ((void (*)(val*, val*, long))(var150->class->vft[COLOR_array__Array__with_native]))(var150, var152, var151) /* with_native on <var150:Array[Object]>*/;
-CHECK_NEW_array__Array(var150);
 }
 var153 = ((val* (*)(val*))(var150->class->vft[COLOR_string__Object__to_s]))(var150) /* to_s on <var150:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var137, var153) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -3578,7 +3542,6 @@ goto RET_LABEL;
 }
 var154 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 ((void (*)(val*))(var154->class->vft[COLOR_array__Array__init]))(var154) /* init on <var154:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var154);
 var_mparameters = var154;
 var155 = NEW_range__Range(&type_range__Rangekernel__Int);
 var156 = 0;
@@ -3586,7 +3549,6 @@ var157 = ((long (*)(val*))(var_param_names->class->vft[COLOR_abstract_collection
 var158 = BOX_kernel__Int(var156); /* autobox from Int to Discrete */
 var159 = BOX_kernel__Int(var157); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var155->class->vft[COLOR_range__Range__without_last]))(var155, var158, var159) /* without_last on <var155:Range[Int]>*/;
-CHECK_NEW_range__Range(var155);
 var160 = ((val* (*)(val*))(var155->class->vft[COLOR_abstract_collection__Collection__iterator]))(var155) /* iterator on <var155:Range[Int]>*/;
 for(;;) {
 var161 = ((short int (*)(val*))(var160->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var160) /* is_ok on <var160:Iterator[nullable Object]>*/;
@@ -3604,7 +3566,6 @@ goto RET_LABEL168;
 RET_LABEL168:(void)0;
 }
 ((void (*)(val*, val*, val*, short int))(var164->class->vft[COLOR_model__MParameter__init]))(var164, var165, var166, var167) /* init on <var164:MParameter>*/;
-CHECK_NEW_model__MParameter(var164);
 var_mparameter170 = var164;
 var171 = NULL;
 if (var_nsig == NULL) {
@@ -3625,7 +3586,6 @@ CONTINUE_label175: (void)0;
 BREAK_label175: (void)0;
 var176 = NEW_model__MSignature(&type_model__MSignature);
 ((void (*)(val*, val*, val*))(var176->class->vft[COLOR_model__MSignature__init]))(var176, var_mparameters, var_ret_type) /* init on <var176:MSignature>*/;
-CHECK_NEW_model__MSignature(var176);
 var_msignature = var176;
 ((void (*)(val*, val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_mpropdef, var_msignature) /* msignature= on <var_mpropdef:nullable MMethodDef(MMethodDef)>*/;
 /* <self:AMethPropdef> isa ADeferredMethPropdef */
@@ -3812,7 +3772,7 @@ var6 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpr
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 489);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_model__MMethodDef__msignature]))(var6) /* msignature on <var6:nullable MPropDef(nullable MMethodDef)>*/;
 }
@@ -3870,14 +3830,14 @@ if (var19){
 if (var_nsig == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 501);
-exit(1);
+show_backtrace(1);
 } else {
 var24 = ((val* (*)(val*))(var_nsig->class->vft[COLOR_parser_nodes__ASignature__n_type]))(var_nsig) /* n_type on <var_nsig:nullable ASignature>*/;
 }
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 501);
-exit(1);
+show_backtrace(1);
 }
 if (varonce) {
 var25 = varonce;
@@ -3906,7 +3866,6 @@ var37 = NEW_array__NativeArray(var36, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var37)->values[1] = (val*) var29;
 ((struct instance_array__NativeArray*)var37)->values[2] = (val*) var31;
 ((void (*)(val*, val*, long))(var35->class->vft[COLOR_array__Array__with_native]))(var35, var37, var36) /* with_native on <var35:Array[Object]>*/;
-CHECK_NEW_array__Array(var35);
 }
 var38 = ((val* (*)(val*))(var35->class->vft[COLOR_string__Object__to_s]))(var35) /* to_s on <var35:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var24, var38) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -3923,7 +3882,7 @@ if (!var43) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var44 = var39 > var40;
 var41 = var44;
@@ -3937,7 +3896,6 @@ var47 = ((long (*)(val*))(var_mysignature->class->vft[COLOR_model__MSignature__a
 var48 = BOX_kernel__Int(var46); /* autobox from Int to Discrete */
 var49 = BOX_kernel__Int(var47); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var45->class->vft[COLOR_range__Range__without_last]))(var45, var48, var49) /* without_last on <var45:Range[Int]>*/;
-CHECK_NEW_range__Range(var45);
 var50 = ((val* (*)(val*))(var45->class->vft[COLOR_abstract_collection__Collection__iterator]))(var45) /* iterator on <var45:Range[Int]>*/;
 for(;;) {
 var51 = ((short int (*)(val*))(var50->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var50) /* is_ok on <var50:Iterator[nullable Object]>*/;
@@ -3957,7 +3915,7 @@ var61 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var61 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 510);
-exit(1);
+show_backtrace(1);
 } else {
 var62 = ((val* (*)(val*))(var61->class->vft[COLOR_model__MClassDef__bound_mtype]))(var61) /* bound_mtype on <var61:nullable MClassDef>*/;
 }
@@ -3969,7 +3927,7 @@ var66 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var66 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 511);
-exit(1);
+show_backtrace(1);
 } else {
 var67 = ((val* (*)(val*))(var66->class->vft[COLOR_model__MClassDef__bound_mtype]))(var66) /* bound_mtype on <var66:nullable MClassDef>*/;
 }
@@ -3983,7 +3941,7 @@ if (var60){
 if (var_nsig == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 512);
-exit(1);
+show_backtrace(1);
 } else {
 var70 = ((val* (*)(val*))(var_nsig->class->vft[COLOR_parser_nodes__ASignature__n_params]))(var_nsig) /* n_params on <var_nsig:nullable ASignature>*/;
 }
@@ -4039,7 +3997,6 @@ var97 = NEW_array__NativeArray(var96, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var97)->values[5] = (val*) var_prt;
 ((struct instance_array__NativeArray*)var97)->values[6] = (val*) var91;
 ((void (*)(val*, val*, long))(var95->class->vft[COLOR_array__Array__with_native]))(var95, var97, var96) /* with_native on <var95:Array[Object]>*/;
-CHECK_NEW_array__Array(var95);
 }
 var98 = ((val* (*)(val*))(var95->class->vft[COLOR_string__Object__to_s]))(var95) /* to_s on <var95:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var71, var98) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -4071,7 +4028,7 @@ var103 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClas
 if (var103 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 520);
-exit(1);
+show_backtrace(1);
 } else {
 var104 = ((val* (*)(val*))(var103->class->vft[COLOR_model__MClassDef__bound_mtype]))(var103) /* bound_mtype on <var103:nullable MClassDef>*/;
 }
@@ -4081,14 +4038,14 @@ if (var106){
 if (var_nsig == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 521);
-exit(1);
+show_backtrace(1);
 } else {
 var107 = ((val* (*)(val*))(var_nsig->class->vft[COLOR_parser_nodes__ASignature__n_type]))(var_nsig) /* n_type on <var_nsig:nullable ASignature>*/;
 }
 if (var107 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 521);
-exit(1);
+show_backtrace(1);
 }
 if (varonce108) {
 var109 = varonce108;
@@ -4127,7 +4084,6 @@ var125 = NEW_array__NativeArray(var124, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var125)->values[3] = (val*) var_precursor_ret_type;
 ((struct instance_array__NativeArray*)var125)->values[4] = (val*) var119;
 ((void (*)(val*, val*, long))(var123->class->vft[COLOR_array__Array__with_native]))(var123, var125, var124) /* with_native on <var123:Array[Object]>*/;
-CHECK_NEW_array__Array(var123);
 }
 var126 = ((val* (*)(val*))(var123->class->vft[COLOR_string__Object__to_s]))(var123) /* to_s on <var123:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var107, var126) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -4491,7 +4447,7 @@ var = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassde
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 537);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var;
 var1 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__mclass]))(var_mclassdef) /* mclass on <var_mclassdef:MClassDef>*/;
@@ -4508,7 +4464,7 @@ var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 542);
-exit(1);
+show_backtrace(1);
 } else {
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_parser_nodes__Token__text]))(var5) /* text on <var5:nullable TAttrid>*/;
 }
@@ -4518,7 +4474,7 @@ var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 544);
-exit(1);
+show_backtrace(1);
 } else {
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_parser_nodes__Token__text]))(var7) /* text on <var7:nullable TId>*/;
 }
@@ -4575,7 +4531,6 @@ var33 = NEW_array__NativeArray(var32, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var33)->values[3] = (val*) var_mclass;
 ((struct instance_array__NativeArray*)var33)->values[4] = (val*) var27;
 ((void (*)(val*, val*, long))(var31->class->vft[COLOR_array__Array__with_native]))(var31, var33, var32) /* with_native on <var31:Array[Object]>*/;
-CHECK_NEW_array__Array(var31);
 }
 var34 = ((val* (*)(val*))(var31->class->vft[COLOR_string__Object__to_s]))(var31) /* to_s on <var31:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var34) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -4621,7 +4576,6 @@ var55 = NEW_array__NativeArray(var54, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var55)->values[3] = (val*) var_mclass;
 ((struct instance_array__NativeArray*)var55)->values[4] = (val*) var49;
 ((void (*)(val*, val*, long))(var53->class->vft[COLOR_array__Array__with_native]))(var53, var55, var54) /* with_native on <var53:Array[Object]>*/;
-CHECK_NEW_array__Array(var53);
 }
 var56 = ((val* (*)(val*))(var53->class->vft[COLOR_string__Object__to_s]))(var53) /* to_s on <var53:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var56) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -4667,7 +4621,6 @@ var77 = NEW_array__NativeArray(var76, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var77)->values[3] = (val*) var_mclass;
 ((struct instance_array__NativeArray*)var77)->values[4] = (val*) var71;
 ((void (*)(val*, val*, long))(var75->class->vft[COLOR_array__Array__with_native]))(var75, var77, var76) /* with_native on <var75:Array[Object]>*/;
-CHECK_NEW_array__Array(var75);
 }
 var78 = ((val* (*)(val*))(var75->class->vft[COLOR_string__Object__to_s]))(var75) /* to_s on <var75:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var78) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -4698,7 +4651,6 @@ var86 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_prop
 var_mvisibility = var86;
 var87 = NEW_model__MAttribute(&type_model__MAttribute);
 ((void (*)(val*, val*, val*, val*))(var87->class->vft[COLOR_model__MAttribute__init]))(var87, var_mclassdef, var_name, var_mvisibility) /* init on <var87:MAttribute>*/;
-CHECK_NEW_model__MAttribute(var87);
 var_mprop = var87;
 var88 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_kwredef]))(self) /* n_kwredef on <self:AAttrPropdef>*/;
 var89 = 0;
@@ -4720,7 +4672,7 @@ var92 = var_mprop->type->type_table[cltype] == idtype;
 if (!var92) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 564);
-exit(1);
+show_backtrace(1);
 }
 var93 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_visibility]))(self) /* n_visibility on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__check_redef_property_visibility]))(self, var_modelbuilder, var_nclassdef, var93, var_mprop) /* check_redef_property_visibility on <self:AAttrPropdef>*/;
@@ -4738,7 +4690,6 @@ var98 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__ACl
 var99 = NEW_model__MAttributeDef(&type_model__MAttributeDef);
 var100 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var99->class->vft[COLOR_model__MAttributeDef__init]))(var99, var_mclassdef, var_mprop, var100) /* init on <var99:MAttributeDef>*/;
-CHECK_NEW_model__MAttributeDef(var99);
 var_mpropdef = var99;
 /* <var_mpropdef:MAttributeDef> isa nullable MPROPDEF */
 type_struct = self->type->resolution_table->types[COLOR_parser_nodes__APropdef_VTMPROPDEF];
@@ -4753,7 +4704,7 @@ if (!var101) {
 var_class_name = var_mpropdef == NULL ? "null" : var_mpropdef->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MPROPDEF", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 571);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(self, var_mpropdef) /* mpropdef= on <self:AAttrPropdef>*/;
 var104 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -4787,7 +4738,7 @@ if (!var111) {
 var_class_name114 = var110 == NULL ? "null" : var110->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name114);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 577);
-exit(1);
+show_backtrace(1);
 }
 var_mreadprop = var110;
 var115 = NULL;
@@ -4802,7 +4753,6 @@ var118 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_pro
 var_mvisibility119 = var118;
 var120 = NEW_model__MMethod(&type_model__MMethod);
 ((void (*)(val*, val*, val*, val*))(var120->class->vft[COLOR_model__MMethod__init]))(var120, var_mclassdef, var_readname, var_mvisibility119) /* init on <var120:MMethod>*/;
-CHECK_NEW_model__MMethod(var120);
 var_mreadprop = var120;
 var121 = ((val* (*)(val*))(var_nreadable->class->vft[COLOR_parser_nodes__AAble__n_kwredef]))(var_nreadable) /* n_kwredef on <var_nreadable:nullable AAble(AAble)>*/;
 var122 = 0;
@@ -4829,7 +4779,6 @@ var130 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__AC
 var131 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var132 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var131->class->vft[COLOR_model__MMethodDef__init]))(var131, var_mclassdef, var_mreadprop, var132) /* init on <var131:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var131);
 var_mreadpropdef = var131;
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__AAttrPropdef__mreadpropdef_61d]))(self, var_mreadpropdef) /* mreadpropdef= on <self:AAttrPropdef>*/;
 var133 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -4875,7 +4824,7 @@ if (!var146) {
 var_class_name149 = var145 == NULL ? "null" : var145->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name149);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 596);
-exit(1);
+show_backtrace(1);
 }
 var_mwriteprop = var145;
 var150 = NULL;
@@ -4890,7 +4839,6 @@ var153 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_pro
 var_mvisibility154 = var153;
 var155 = NEW_model__MMethod(&type_model__MMethod);
 ((void (*)(val*, val*, val*, val*))(var155->class->vft[COLOR_model__MMethod__init]))(var155, var_mclassdef, var_writename, var_mvisibility154) /* init on <var155:MMethod>*/;
-CHECK_NEW_model__MMethod(var155);
 var_mwriteprop = var155;
 var156 = ((val* (*)(val*))(var_nwritable->class->vft[COLOR_parser_nodes__AAble__n_kwredef]))(var_nwritable) /* n_kwredef on <var_nwritable:nullable AAble(AAble)>*/;
 var157 = 0;
@@ -4917,7 +4865,6 @@ var165 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__AC
 var166 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var167 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var166->class->vft[COLOR_model__MMethodDef__init]))(var166, var_mclassdef, var_mwriteprop, var167) /* init on <var166:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var166);
 var_mwritepropdef = var166;
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__AAttrPropdef__mwritepropdef_61d]))(self, var_mwritepropdef) /* mwritepropdef= on <self:AAttrPropdef>*/;
 var168 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -4929,7 +4876,7 @@ var169 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_
 if (var169 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 613);
-exit(1);
+show_backtrace(1);
 }
 var_nid2 = var169;
 var170 = NEW_model__MAttribute(&type_model__MAttribute);
@@ -4945,12 +4892,10 @@ varonce171 = var172;
 var176 = ((val* (*)(val*, val*))(var172->class->vft[COLOR_string__String___43d]))(var172, var_name) /* + on <var172:String>*/;
 var177 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__none_visibility]))(self) /* none_visibility on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var170->class->vft[COLOR_model__MAttribute__init]))(var170, var_mclassdef, var176, var177) /* init on <var170:MAttribute>*/;
-CHECK_NEW_model__MAttribute(var170);
 var_mprop178 = var170;
 var179 = NEW_model__MAttributeDef(&type_model__MAttributeDef);
 var180 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var179->class->vft[COLOR_model__MAttributeDef__init]))(var179, var_mclassdef, var_mprop178, var180) /* init on <var179:MAttributeDef>*/;
-CHECK_NEW_model__MAttributeDef(var179);
 var_mpropdef181 = var179;
 /* <var_mpropdef181:MAttributeDef> isa nullable MPROPDEF */
 type_struct185 = self->type->resolution_table->types[COLOR_parser_nodes__APropdef_VTMPROPDEF];
@@ -4965,7 +4910,7 @@ if (!var182) {
 var_class_name186 = var_mpropdef181 == NULL ? "null" : var_mpropdef181->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MPROPDEF", var_class_name186);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 616);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(self, var_mpropdef181) /* mpropdef= on <self:AAttrPropdef>*/;
 var187 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -4988,7 +4933,7 @@ if (!var190) {
 var_class_name193 = var189 == NULL ? "null" : var189->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name193);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 620);
-exit(1);
+show_backtrace(1);
 }
 var_mreadprop194 = var189;
 var195 = NULL;
@@ -5003,7 +4948,6 @@ var198 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_pro
 var_mvisibility199 = var198;
 var200 = NEW_model__MMethod(&type_model__MMethod);
 ((void (*)(val*, val*, val*, val*))(var200->class->vft[COLOR_model__MMethod__init]))(var200, var_mclassdef, var_readname188, var_mvisibility199) /* init on <var200:MMethod>*/;
-CHECK_NEW_model__MMethod(var200);
 var_mreadprop194 = var200;
 var201 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_kwredef]))(self) /* n_kwredef on <self:AAttrPropdef>*/;
 var202 = 0;
@@ -5030,7 +4974,6 @@ var210 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__AC
 var211 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var212 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var211->class->vft[COLOR_model__MMethodDef__init]))(var211, var_mclassdef, var_mreadprop194, var212) /* init on <var211:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var211);
 var_mreadpropdef213 = var211;
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__AAttrPropdef__mreadpropdef_61d]))(self, var_mreadpropdef213) /* mreadpropdef= on <self:AAttrPropdef>*/;
 var214 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -5065,7 +5008,7 @@ if (!var225) {
 var_class_name228 = var224 == NULL ? "null" : var224->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name228);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 637);
-exit(1);
+show_backtrace(1);
 }
 var_mwriteprop229 = var224;
 var230 = NULL;
@@ -5104,7 +5047,6 @@ var_mvisibility240 = var241;
 }
 var242 = NEW_model__MMethod(&type_model__MMethod);
 ((void (*)(val*, val*, val*, val*))(var242->class->vft[COLOR_model__MMethod__init]))(var242, var_mclassdef, var_writename221, var_mvisibility240) /* init on <var242:MMethod>*/;
-CHECK_NEW_model__MMethod(var242);
 var_mwriteprop229 = var242;
 var243 = 0;
 var244 = ((short int (*)(val*, val*, val*, val*, short int, val*))(self->class->vft[COLOR_modelize_property__APropdef__check_redef_keyword]))(self, var_modelbuilder, var_nclassdef, var_nwkwredef, var243, var_mwriteprop229) /* check_redef_keyword on <self:AAttrPropdef>*/;
@@ -5138,7 +5080,6 @@ var252 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__AC
 var253 = NEW_model__MMethodDef(&type_model__MMethodDef);
 var254 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:AAttrPropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var253->class->vft[COLOR_model__MMethodDef__init]))(var253, var_mclassdef, var_mwriteprop229, var254) /* init on <var253:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var253);
 var_mwritepropdef255 = var253;
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__AAttrPropdef__mwritepropdef_61d]))(self, var_mwritepropdef255) /* mwritepropdef= on <self:AAttrPropdef>*/;
 var256 = ((val* (*)(val*))(var_modelbuilder->class->vft[COLOR_modelize_property__ModelBuilder__mpropdef2npropdef]))(var_modelbuilder) /* mpropdef2npropdef on <var_modelbuilder:ModelBuilder>*/;
@@ -5633,7 +5574,6 @@ var108 = NEW_array__NativeArray(var107, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var108)->values[1] = (val*) var_mpropdef;
 ((struct instance_array__NativeArray*)var108)->values[2] = (val*) var102;
 ((void (*)(val*, val*, long))(var106->class->vft[COLOR_array__Array__with_native]))(var106, var108, var107) /* with_native on <var106:Array[Object]>*/;
-CHECK_NEW_array__Array(var106);
 }
 var109 = ((val* (*)(val*))(var106->class->vft[COLOR_string__Object__to_s]))(var106) /* to_s on <var106:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var109) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -5661,7 +5601,6 @@ var117 = NEW_array__NativeArray(var116, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var117)->values[0] = (val*) var111;
 ((struct instance_array__NativeArray*)var117)->values[1] = (val*) var_mpropdef;
 ((void (*)(val*, val*, long))(var115->class->vft[COLOR_array__Array__with_native]))(var115, var117, var116) /* with_native on <var115:Array[Object]>*/;
-CHECK_NEW_array__Array(var115);
 }
 var118 = ((val* (*)(val*))(var115->class->vft[COLOR_string__Object__to_s]))(var115) /* to_s on <var115:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var118) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -5676,7 +5615,7 @@ var120 = 1; /* arg is null and recv is not */
 if (!var120) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 707);
-exit(1);
+show_backtrace(1);
 }
 /* <var_nexpr:nullable AExpr> isa ANewExpr */
 cltype122 = type_parser_nodes__ANewExpr.color;
@@ -5713,7 +5652,7 @@ if (!var134) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var137 = ((struct instance_kernel__Int*)var130)->value; /* autounbox from nullable Object to Int */;
 var138 = var137 >= var131;
@@ -5764,9 +5703,7 @@ if (var148){
 var149 = NEW_model__MSignature(&type_model__MSignature);
 var150 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 ((void (*)(val*))(var150->class->vft[COLOR_array__Array__init]))(var150) /* init on <var150:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var150);
 ((void (*)(val*, val*, val*))(var149->class->vft[COLOR_model__MSignature__init]))(var149, var150, var_mtype) /* init on <var149:MSignature>*/;
-CHECK_NEW_model__MSignature(var149);
 var_msignature = var149;
 ((void (*)(val*, val*))(var_mreadpropdef->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_mreadpropdef, var_msignature) /* msignature= on <var_mreadpropdef:nullable MMethodDef(MMethodDef)>*/;
 } else {
@@ -5793,7 +5730,7 @@ var158 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_
 if (var158 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 730);
-exit(1);
+show_backtrace(1);
 } else {
 var159 = ((val* (*)(val*))(var158->class->vft[COLOR_parser_nodes__Token__text]))(var158) /* text on <var158:nullable TAttrid>*/;
 }
@@ -5805,7 +5742,7 @@ var162 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_
 if (var162 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 732);
-exit(1);
+show_backtrace(1);
 } else {
 var163 = ((val* (*)(val*))(var162->class->vft[COLOR_parser_nodes__Token__text]))(var162) /* text on <var162:nullable TId>*/;
 }
@@ -5814,24 +5751,21 @@ var_name = var163;
 var164 = NEW_model__MParameter(&type_model__MParameter);
 var165 = 0;
 ((void (*)(val*, val*, val*, short int))(var164->class->vft[COLOR_model__MParameter__init]))(var164, var_name, var_mtype, var165) /* init on <var164:MParameter>*/;
-CHECK_NEW_model__MParameter(var164);
 var_mparameter = var164;
 var166 = NEW_model__MSignature(&type_model__MSignature);
 var167 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 var168 = 1;
 ((void (*)(val*, long))(var167->class->vft[COLOR_array__Array__with_capacity]))(var167, var168) /* with_capacity on <var167:Array[MParameter]>*/;
-CHECK_NEW_array__Array(var167);
 var_169 = var167;
 ((void (*)(val*, val*))(var_169->class->vft[COLOR_abstract_collection__Sequence__push]))(var_169, var_mparameter) /* push on <var_169:Array[MParameter]>*/;
 var170 = NULL;
 ((void (*)(val*, val*, val*))(var166->class->vft[COLOR_model__MSignature__init]))(var166, var_169, var170) /* init on <var166:MSignature>*/;
-CHECK_NEW_model__MSignature(var166);
 var_msignature171 = var166;
 var172 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__AAttrPropdef__mwritepropdef]))(self) /* mwritepropdef on <self:AAttrPropdef>*/;
 if (var172 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 736);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var172->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var172, var_msignature171) /* msignature= on <var172:nullable MMethodDef>*/;
 }
@@ -5920,7 +5854,7 @@ var6 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpr
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 746);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var6) /* static_mtype on <var6:nullable MPropDef(nullable MAttributeDef)>*/;
 }
@@ -5957,7 +5891,7 @@ if (var17){
 if (var_ntype == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 756);
-exit(1);
+show_backtrace(1);
 }
 if (varonce) {
 var18 = varonce;
@@ -5996,7 +5930,6 @@ var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var34)->values[3] = (val*) var_precursor_type;
 ((struct instance_array__NativeArray*)var34)->values[4] = (val*) var28;
 ((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
-CHECK_NEW_array__Array(var32);
 }
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_ntype, var35) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -6314,7 +6247,6 @@ var41 = BOX_kernel__Int(var31); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var39)->values[5] = (val*) var_mpropdef;
 ((struct instance_array__NativeArray*)var39)->values[6] = (val*) var_msignature;
 ((void (*)(val*, val*, long))(var37->class->vft[COLOR_array__Array__with_native]))(var37, var39, var38) /* with_native on <var37:Array[Object]>*/;
-CHECK_NEW_array__Array(var37);
 }
 var42 = ((val* (*)(val*))(var37->class->vft[COLOR_string__Object__to_s]))(var37) /* to_s on <var37:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_node, var42) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -6382,7 +6314,6 @@ var66 = NEW_array__NativeArray(var65, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var66)->values[1] = (val*) var58;
 ((struct instance_array__NativeArray*)var66)->values[2] = (val*) var60;
 ((void (*)(val*, val*, long))(var64->class->vft[COLOR_array__Array__with_native]))(var64, var66, var65) /* with_native on <var64:Array[Object]>*/;
-CHECK_NEW_array__Array(var64);
 }
 var67 = ((val* (*)(val*))(var64->class->vft[COLOR_string__Object__to_s]))(var64) /* to_s on <var64:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_node52, var67) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -6399,7 +6330,7 @@ if (!var72) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var73 = var68 > var69;
 var70 = var73;
@@ -6413,7 +6344,6 @@ var76 = ((long (*)(val*))(var_mysignature->class->vft[COLOR_model__MSignature__a
 var77 = BOX_kernel__Int(var75); /* autobox from Int to Discrete */
 var78 = BOX_kernel__Int(var76); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var74->class->vft[COLOR_range__Range__without_last]))(var74, var77, var78) /* without_last on <var74:Range[Int]>*/;
-CHECK_NEW_range__Range(var74);
 var79 = ((val* (*)(val*))(var74->class->vft[COLOR_abstract_collection__Collection__iterator]))(var74) /* iterator on <var74:Range[Int]>*/;
 for(;;) {
 var80 = ((short int (*)(val*))(var79->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var79) /* is_ok on <var79:Iterator[nullable Object]>*/;
@@ -6433,7 +6363,7 @@ var90 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var90 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 801);
-exit(1);
+show_backtrace(1);
 } else {
 var91 = ((val* (*)(val*))(var90->class->vft[COLOR_model__MClassDef__bound_mtype]))(var90) /* bound_mtype on <var90:nullable MClassDef>*/;
 }
@@ -6445,7 +6375,7 @@ var95 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClass
 if (var95 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 802);
-exit(1);
+show_backtrace(1);
 } else {
 var96 = ((val* (*)(val*))(var95->class->vft[COLOR_model__MClassDef__bound_mtype]))(var95) /* bound_mtype on <var95:nullable MClassDef>*/;
 }
@@ -6518,7 +6448,6 @@ var127 = NEW_array__NativeArray(var126, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var127)->values[5] = (val*) var_prt;
 ((struct instance_array__NativeArray*)var127)->values[6] = (val*) var121;
 ((void (*)(val*, val*, long))(var125->class->vft[COLOR_array__Array__with_native]))(var125, var127, var126) /* with_native on <var125:Array[Object]>*/;
-CHECK_NEW_array__Array(var125);
 }
 var128 = ((val* (*)(val*))(var125->class->vft[COLOR_string__Object__to_s]))(var125) /* to_s on <var125:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_node101, var128) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -6550,7 +6479,7 @@ var133 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClas
 if (var133 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 813);
-exit(1);
+show_backtrace(1);
 } else {
 var134 = ((val* (*)(val*))(var133->class->vft[COLOR_model__MClassDef__bound_mtype]))(var133) /* bound_mtype on <var133:nullable MClassDef>*/;
 }
@@ -6605,7 +6534,6 @@ var157 = NEW_array__NativeArray(var156, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var157)->values[3] = (val*) var_precursor_ret_type;
 ((struct instance_array__NativeArray*)var157)->values[4] = (val*) var151;
 ((void (*)(val*, val*, long))(var155->class->vft[COLOR_array__Array__with_native]))(var155, var157, var156) /* with_native on <var155:Array[Object]>*/;
-CHECK_NEW_array__Array(var155);
 }
 var158 = ((val* (*)(val*))(var155->class->vft[COLOR_string__Object__to_s]))(var155) /* to_s on <var155:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, var_node139, var158) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -6699,7 +6627,7 @@ var = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassde
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 828);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ATypePropdef__n_id]))(self) /* n_id on <self:ATypePropdef>*/;
@@ -6720,7 +6648,6 @@ var8 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelize_prope
 var_mvisibility = var8;
 var9 = NEW_model__MVirtualTypeProp(&type_model__MVirtualTypeProp);
 ((void (*)(val*, val*, val*, val*))(var9->class->vft[COLOR_model__MVirtualTypeProp__init]))(var9, var_mclassdef, var_name, var_mvisibility) /* init on <var9:MVirtualTypeProp>*/;
-CHECK_NEW_model__MVirtualTypeProp(var9);
 var_mprop = var9;
 var10 = ((val* (*)(val*))(var_name->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_name) /* iterator on <var_name:String>*/;
 for(;;) {
@@ -6738,7 +6665,7 @@ if (!var18) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var19 = var_c >= var15;
 var16 = var19;
@@ -6756,7 +6683,7 @@ if (!var23) {
 var_class_name26 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var27 = var_c <= var20;
 var21 = var27;
@@ -6785,7 +6712,6 @@ var35 = NEW_array__NativeArray(var34, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var35)->values[0] = (val*) var29;
 ((struct instance_array__NativeArray*)var35)->values[1] = (val*) var_name;
 ((void (*)(val*, val*, long))(var33->class->vft[COLOR_array__Array__with_native]))(var33, var35, var34) /* with_native on <var33:Array[Object]>*/;
-CHECK_NEW_array__Array(var33);
 }
 var36 = ((val* (*)(val*))(var33->class->vft[COLOR_string__Object__to_s]))(var33) /* to_s on <var33:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__warning]))(var_modelbuilder, var28, var36) /* warning on <var_modelbuilder:ModelBuilder>*/;
@@ -6824,7 +6750,7 @@ var45 = var_mprop->type->type_table[cltype46] == idtype47;
 if (!var45) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 841);
-exit(1);
+show_backtrace(1);
 }
 var48 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ATypePropdef__n_visibility]))(self) /* n_visibility on <self:ATypePropdef>*/;
 ((void (*)(val*, val*, val*, val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__check_redef_property_visibility]))(self, var_modelbuilder, var_nclassdef, var48, var_mprop) /* check_redef_property_visibility on <self:ATypePropdef>*/;
@@ -6834,7 +6760,6 @@ var49 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_property__ACl
 var50 = NEW_model__MVirtualTypeDef(&type_model__MVirtualTypeDef);
 var51 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__location]))(self) /* location on <self:ATypePropdef>*/;
 ((void (*)(val*, val*, val*, val*))(var50->class->vft[COLOR_model__MVirtualTypeDef__init]))(var50, var_mclassdef, var_mprop, var51) /* init on <var50:MVirtualTypeDef>*/;
-CHECK_NEW_model__MVirtualTypeDef(var50);
 var_mpropdef = var50;
 /* <var_mpropdef:MVirtualTypeDef> isa nullable MPROPDEF */
 type_struct = self->type->resolution_table->types[COLOR_parser_nodes__APropdef_VTMPROPDEF];
@@ -6849,7 +6774,7 @@ if (!var52) {
 var_class_name55 = var_mpropdef == NULL ? "null" : var_mpropdef->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MPROPDEF", var_class_name55);
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 847);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(self, var_mpropdef) /* mpropdef= on <self:ATypePropdef>*/;
 RET_LABEL:;
@@ -6970,7 +6895,7 @@ var = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpro
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 867);
-exit(1);
+show_backtrace(1);
 } else {
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_model__MVirtualTypeDef__bound]))(var) /* bound on <var:nullable MPropDef(nullable MVirtualTypeDef)>*/;
 }
@@ -6996,7 +6921,7 @@ var4 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassd
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 872);
-exit(1);
+show_backtrace(1);
 } else {
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_model__MClassDef__mmodule]))(var4) /* mmodule on <var4:nullable MClassDef>*/;
 }
@@ -7005,7 +6930,7 @@ var6 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassd
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 873);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_model__MClassDef__bound_mtype]))(var6) /* bound_mtype on <var6:nullable MClassDef>*/;
 }
@@ -7013,13 +6938,12 @@ var_anchor = var7;
 var8 = NEW_array__Array(&type_array__Arraymodel__MVirtualType);
 var9 = 1;
 ((void (*)(val*, long))(var8->class->vft[COLOR_array__Array__with_capacity]))(var8, var9) /* with_capacity on <var8:Array[MVirtualType]>*/;
-CHECK_NEW_array__Array(var8);
 var_ = var8;
 var10 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(self) /* mpropdef on <self:ATypePropdef>*/;
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_property.nit", 876);
-exit(1);
+show_backtrace(1);
 } else {
 var11 = ((val* (*)(val*))(var10->class->vft[COLOR_model__MPropDef__mproperty]))(var10) /* mproperty on <var10:nullable MPropDef(nullable MVirtualTypeDef)>*/;
 }
@@ -7056,7 +6980,6 @@ var26 = NEW_array__NativeArray(var25, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var26)->values[0] = (val*) var14;
 ((struct instance_array__NativeArray*)var26)->values[1] = (val*) var23;
 ((void (*)(val*, val*, long))(var24->class->vft[COLOR_array__Array__with_native]))(var24, var26, var25) /* with_native on <var24:Array[Object]>*/;
-CHECK_NEW_array__Array(var24);
 }
 var27 = ((val* (*)(val*))(var24->class->vft[COLOR_string__Object__to_s]))(var24) /* to_s on <var24:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var27) /* error on <var_modelbuilder:ModelBuilder>*/;

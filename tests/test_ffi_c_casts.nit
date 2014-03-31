@@ -32,7 +32,7 @@ redef class Int
 	redef fun foo do print self
 end
 
-fun callbacks_with_as_casts(a: A, b: B) import B::foo, A::foo, B as(A), A as(B) `{
+fun callbacks_with_as_casts(a: A, b: B) import B.foo, A.foo, B.as(A), A.as(B) `{
 	A_foo(a);
 	B_foo(b);
 
@@ -47,7 +47,7 @@ fun callbacks_with_as_casts(a: A, b: B) import B::foo, A::foo, B as(A), A as(B) 
 	B_foo(bb);
 `}
 
-fun callbacks_with_nullable_casts(a: A, b: nullable B) import B as not nullable, A as nullable, A as(nullable B), B::foo `{
+fun callbacks_with_nullable_casts(a: A, b: nullable B) import B as not nullable, A as nullable, A.as(nullable B), B.foo `{
 	if (!nullable_B_is_a_B(b)) {
 		printf("Instance b is not a B (it is null)\n");
 	} else {
@@ -63,7 +63,7 @@ fun callbacks_with_nullable_casts(a: A, b: nullable B) import B as not nullable,
 	}
 `}
 
-fun callbacks_with_failed_checks(a: A, b: nullable B) import B as not nullable, B as nullable, A as(B), B as (A) `{
+fun callbacks_with_failed_checks(a: A, b: nullable B) import B as not nullable, B as nullable, A.as(B), B.as(A) `{
 	if (!A_is_a_B(a)) {
 		printf("Instance of A is not a B.\n");
 	}
@@ -72,7 +72,7 @@ fun callbacks_with_failed_checks(a: A, b: nullable B) import B as not nullable, 
 	}
 `}
 
-fun callbacks_with_primitives(o: Object, i: Int, ni: nullable Int) import Object as(Int), Int as(Object), nullable Int as(Int), Int::foo, Object::foo `{
+fun callbacks_with_primitives(o: Object, i: Int, ni: nullable Int) import Object.as(Int), Int.as(Object), nullable Int.as(Int), Int.foo, Object.foo `{
 	Object_foo(o);
 	Int_foo(i);
 

@@ -58,7 +58,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "parser_index", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 25);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -3070,7 +3070,7 @@ var1 = self->attrs[COLOR_lexer__AError___message].val; /* _message on <self:AErr
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _message");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1183);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3108,7 +3108,7 @@ var1 = self->attrs[COLOR_lexer__ALexerError___string].val; /* _string on <self:A
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _string");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1193);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3148,7 +3148,7 @@ var1 = self->attrs[COLOR_lexer__AParserError___token].val; /* _token on <self:AP
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _token");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1203);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3188,7 +3188,7 @@ var1 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1222);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4014,7 +4014,7 @@ var5 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1287);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_location__SourceFile__string]))(var5) /* string on <var5:SourceFile>*/;
 var_string = var6;
@@ -4069,7 +4069,7 @@ if (!var30) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var31 = var_sp >= var_string_len;
 var28 = var31;
@@ -4124,7 +4124,7 @@ var53 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var53 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1309);
-exit(1);
+show_backtrace(1);
 }
 var54 = ((val* (*)(val*))(var53->class->vft[COLOR_location__SourceFile__line_starts]))(var53) /* line_starts on <var53:SourceFile>*/;
 var55 = BOX_kernel__Int(var_sp); /* autobox from Int to nullable Object */
@@ -4144,7 +4144,7 @@ var61 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var61 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1313);
-exit(1);
+show_backtrace(1);
 }
 var62 = ((val* (*)(val*))(var61->class->vft[COLOR_location__SourceFile__line_starts]))(var61) /* line_starts on <var61:SourceFile>*/;
 var63 = BOX_kernel__Int(var_sp); /* autobox from Int to nullable Object */
@@ -4175,7 +4175,7 @@ var74 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var74 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1319);
-exit(1);
+show_backtrace(1);
 }
 var75 = ((val* (*)(val*))(var74->class->vft[COLOR_location__SourceFile__line_starts]))(var74) /* line_starts on <var74:SourceFile>*/;
 var76 = BOX_kernel__Int(var_sp); /* autobox from Int to nullable Object */
@@ -4210,7 +4210,7 @@ if (!var88) {
 var_class_name91 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name91);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var92 = var_dfa_state < var83;
 var86 = var92;
@@ -4263,7 +4263,7 @@ if (!var114) {
 var_class_name117 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name117);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var118 = var_high >= var111;
 var112 = var118;
@@ -4280,7 +4280,7 @@ if (!var121) {
 var_class_name124 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name124);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var125 = var_low <= var_high;
 var119 = var125;
@@ -4326,7 +4326,7 @@ if (!var144) {
 var_class_name147 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name147);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var148 = var_c < var141;
 var142 = var148;
@@ -4359,7 +4359,7 @@ if (!var160) {
 var_class_name163 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name163);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var164 = var_c > var157;
 var158 = var164;
@@ -4408,7 +4408,7 @@ if (!var180) {
 var_class_name183 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name183);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var184 = var_dfa_state > var175;
 var178 = var184;
@@ -4435,7 +4435,7 @@ if (!var189) {
 var_class_name192 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name192);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var193 = var_dfa_state >= var186;
 var187 = var193;
@@ -4496,7 +4496,7 @@ var217 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var217 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1370);
-exit(1);
+show_backtrace(1);
 }
 var218 = 1;
 { /* Inline kernel#Int#+ (var_start_line,var218) */
@@ -4520,7 +4520,6 @@ goto RET_LABEL228;
 RET_LABEL228:(void)0;
 }
 ((void (*)(val*, val*, long, long, long, long))(var216->class->vft[COLOR_location__Location__init]))(var216, var217, var219, var223, var227, var_accept_pos) /* init on <var216:Location>*/;
-CHECK_NEW_location__Location(var216);
 var_location = var216;
 self->attrs[COLOR_lexer__Lexer___pos].l = var_accept_pos; /* _pos on <self:Lexer> */
 self->attrs[COLOR_lexer__Lexer___line].l = var_accept_line; /* _line on <self:Lexer> */
@@ -4554,7 +4553,6 @@ RET_LABEL240:(void)0;
 if (var239){
 var242 = NEW_parser_nodes__TEol(&type_parser_nodes__TEol);
 ((void (*)(val*, val*))(var242->class->vft[COLOR_lexer__TEol__init_tk]))(var242, var_location) /* init_tk on <var242:TEol>*/;
-CHECK_NEW_parser_nodes__TEol(var242);
 var = var242;
 goto RET_LABEL;
 } else {
@@ -4569,7 +4567,6 @@ RET_LABEL245:(void)0;
 if (var244){
 var247 = NEW_parser_nodes__TComment(&type_parser_nodes__TComment);
 ((void (*)(val*, val*))(var247->class->vft[COLOR_lexer__TComment__init_tk]))(var247, var_location) /* init_tk on <var247:TComment>*/;
-CHECK_NEW_parser_nodes__TComment(var247);
 var = var247;
 goto RET_LABEL;
 } else {
@@ -4584,7 +4581,6 @@ RET_LABEL250:(void)0;
 if (var249){
 var252 = NEW_parser_nodes__TKwpackage(&type_parser_nodes__TKwpackage);
 ((void (*)(val*, val*))(var252->class->vft[COLOR_lexer__TKwpackage__init_tk]))(var252, var_location) /* init_tk on <var252:TKwpackage>*/;
-CHECK_NEW_parser_nodes__TKwpackage(var252);
 var = var252;
 goto RET_LABEL;
 } else {
@@ -4599,7 +4595,6 @@ RET_LABEL255:(void)0;
 if (var254){
 var257 = NEW_parser_nodes__TKwmodule(&type_parser_nodes__TKwmodule);
 ((void (*)(val*, val*))(var257->class->vft[COLOR_lexer__TKwmodule__init_tk]))(var257, var_location) /* init_tk on <var257:TKwmodule>*/;
-CHECK_NEW_parser_nodes__TKwmodule(var257);
 var = var257;
 goto RET_LABEL;
 } else {
@@ -4614,7 +4609,6 @@ RET_LABEL260:(void)0;
 if (var259){
 var262 = NEW_parser_nodes__TKwimport(&type_parser_nodes__TKwimport);
 ((void (*)(val*, val*))(var262->class->vft[COLOR_lexer__TKwimport__init_tk]))(var262, var_location) /* init_tk on <var262:TKwimport>*/;
-CHECK_NEW_parser_nodes__TKwimport(var262);
 var = var262;
 goto RET_LABEL;
 } else {
@@ -4629,7 +4623,6 @@ RET_LABEL265:(void)0;
 if (var264){
 var267 = NEW_parser_nodes__TKwclass(&type_parser_nodes__TKwclass);
 ((void (*)(val*, val*))(var267->class->vft[COLOR_lexer__TKwclass__init_tk]))(var267, var_location) /* init_tk on <var267:TKwclass>*/;
-CHECK_NEW_parser_nodes__TKwclass(var267);
 var = var267;
 goto RET_LABEL;
 } else {
@@ -4644,7 +4637,6 @@ RET_LABEL270:(void)0;
 if (var269){
 var272 = NEW_parser_nodes__TKwabstract(&type_parser_nodes__TKwabstract);
 ((void (*)(val*, val*))(var272->class->vft[COLOR_lexer__TKwabstract__init_tk]))(var272, var_location) /* init_tk on <var272:TKwabstract>*/;
-CHECK_NEW_parser_nodes__TKwabstract(var272);
 var = var272;
 goto RET_LABEL;
 } else {
@@ -4659,7 +4651,6 @@ RET_LABEL275:(void)0;
 if (var274){
 var277 = NEW_parser_nodes__TKwinterface(&type_parser_nodes__TKwinterface);
 ((void (*)(val*, val*))(var277->class->vft[COLOR_lexer__TKwinterface__init_tk]))(var277, var_location) /* init_tk on <var277:TKwinterface>*/;
-CHECK_NEW_parser_nodes__TKwinterface(var277);
 var = var277;
 goto RET_LABEL;
 } else {
@@ -4674,7 +4665,6 @@ RET_LABEL280:(void)0;
 if (var279){
 var282 = NEW_parser_nodes__TKwenum(&type_parser_nodes__TKwenum);
 ((void (*)(val*, val*))(var282->class->vft[COLOR_lexer__TKwenum__init_tk]))(var282, var_location) /* init_tk on <var282:TKwenum>*/;
-CHECK_NEW_parser_nodes__TKwenum(var282);
 var = var282;
 goto RET_LABEL;
 } else {
@@ -4689,7 +4679,6 @@ RET_LABEL285:(void)0;
 if (var284){
 var287 = NEW_parser_nodes__TKwend(&type_parser_nodes__TKwend);
 ((void (*)(val*, val*))(var287->class->vft[COLOR_lexer__TKwend__init_tk]))(var287, var_location) /* init_tk on <var287:TKwend>*/;
-CHECK_NEW_parser_nodes__TKwend(var287);
 var = var287;
 goto RET_LABEL;
 } else {
@@ -4704,7 +4693,6 @@ RET_LABEL290:(void)0;
 if (var289){
 var292 = NEW_parser_nodes__TKwmeth(&type_parser_nodes__TKwmeth);
 ((void (*)(val*, val*))(var292->class->vft[COLOR_lexer__TKwmeth__init_tk]))(var292, var_location) /* init_tk on <var292:TKwmeth>*/;
-CHECK_NEW_parser_nodes__TKwmeth(var292);
 var = var292;
 goto RET_LABEL;
 } else {
@@ -4719,7 +4707,6 @@ RET_LABEL295:(void)0;
 if (var294){
 var297 = NEW_parser_nodes__TKwtype(&type_parser_nodes__TKwtype);
 ((void (*)(val*, val*))(var297->class->vft[COLOR_lexer__TKwtype__init_tk]))(var297, var_location) /* init_tk on <var297:TKwtype>*/;
-CHECK_NEW_parser_nodes__TKwtype(var297);
 var = var297;
 goto RET_LABEL;
 } else {
@@ -4734,7 +4721,6 @@ RET_LABEL300:(void)0;
 if (var299){
 var302 = NEW_parser_nodes__TKwinit(&type_parser_nodes__TKwinit);
 ((void (*)(val*, val*))(var302->class->vft[COLOR_lexer__TKwinit__init_tk]))(var302, var_location) /* init_tk on <var302:TKwinit>*/;
-CHECK_NEW_parser_nodes__TKwinit(var302);
 var = var302;
 goto RET_LABEL;
 } else {
@@ -4749,7 +4735,6 @@ RET_LABEL305:(void)0;
 if (var304){
 var307 = NEW_parser_nodes__TKwredef(&type_parser_nodes__TKwredef);
 ((void (*)(val*, val*))(var307->class->vft[COLOR_lexer__TKwredef__init_tk]))(var307, var_location) /* init_tk on <var307:TKwredef>*/;
-CHECK_NEW_parser_nodes__TKwredef(var307);
 var = var307;
 goto RET_LABEL;
 } else {
@@ -4764,7 +4749,6 @@ RET_LABEL310:(void)0;
 if (var309){
 var312 = NEW_parser_nodes__TKwis(&type_parser_nodes__TKwis);
 ((void (*)(val*, val*))(var312->class->vft[COLOR_lexer__TKwis__init_tk]))(var312, var_location) /* init_tk on <var312:TKwis>*/;
-CHECK_NEW_parser_nodes__TKwis(var312);
 var = var312;
 goto RET_LABEL;
 } else {
@@ -4779,7 +4763,6 @@ RET_LABEL315:(void)0;
 if (var314){
 var317 = NEW_parser_nodes__TKwdo(&type_parser_nodes__TKwdo);
 ((void (*)(val*, val*))(var317->class->vft[COLOR_lexer__TKwdo__init_tk]))(var317, var_location) /* init_tk on <var317:TKwdo>*/;
-CHECK_NEW_parser_nodes__TKwdo(var317);
 var = var317;
 goto RET_LABEL;
 } else {
@@ -4794,7 +4777,6 @@ RET_LABEL320:(void)0;
 if (var319){
 var322 = NEW_parser_nodes__TKwreadable(&type_parser_nodes__TKwreadable);
 ((void (*)(val*, val*))(var322->class->vft[COLOR_lexer__TKwreadable__init_tk]))(var322, var_location) /* init_tk on <var322:TKwreadable>*/;
-CHECK_NEW_parser_nodes__TKwreadable(var322);
 var = var322;
 goto RET_LABEL;
 } else {
@@ -4809,7 +4791,6 @@ RET_LABEL325:(void)0;
 if (var324){
 var327 = NEW_parser_nodes__TKwwritable(&type_parser_nodes__TKwwritable);
 ((void (*)(val*, val*))(var327->class->vft[COLOR_lexer__TKwwritable__init_tk]))(var327, var_location) /* init_tk on <var327:TKwwritable>*/;
-CHECK_NEW_parser_nodes__TKwwritable(var327);
 var = var327;
 goto RET_LABEL;
 } else {
@@ -4824,7 +4805,6 @@ RET_LABEL330:(void)0;
 if (var329){
 var332 = NEW_parser_nodes__TKwvar(&type_parser_nodes__TKwvar);
 ((void (*)(val*, val*))(var332->class->vft[COLOR_lexer__TKwvar__init_tk]))(var332, var_location) /* init_tk on <var332:TKwvar>*/;
-CHECK_NEW_parser_nodes__TKwvar(var332);
 var = var332;
 goto RET_LABEL;
 } else {
@@ -4839,7 +4819,6 @@ RET_LABEL335:(void)0;
 if (var334){
 var337 = NEW_parser_nodes__TKwintern(&type_parser_nodes__TKwintern);
 ((void (*)(val*, val*))(var337->class->vft[COLOR_lexer__TKwintern__init_tk]))(var337, var_location) /* init_tk on <var337:TKwintern>*/;
-CHECK_NEW_parser_nodes__TKwintern(var337);
 var = var337;
 goto RET_LABEL;
 } else {
@@ -4854,7 +4833,6 @@ RET_LABEL340:(void)0;
 if (var339){
 var342 = NEW_parser_nodes__TKwextern(&type_parser_nodes__TKwextern);
 ((void (*)(val*, val*))(var342->class->vft[COLOR_lexer__TKwextern__init_tk]))(var342, var_location) /* init_tk on <var342:TKwextern>*/;
-CHECK_NEW_parser_nodes__TKwextern(var342);
 var = var342;
 goto RET_LABEL;
 } else {
@@ -4869,7 +4847,6 @@ RET_LABEL345:(void)0;
 if (var344){
 var347 = NEW_parser_nodes__TKwprotected(&type_parser_nodes__TKwprotected);
 ((void (*)(val*, val*))(var347->class->vft[COLOR_lexer__TKwprotected__init_tk]))(var347, var_location) /* init_tk on <var347:TKwprotected>*/;
-CHECK_NEW_parser_nodes__TKwprotected(var347);
 var = var347;
 goto RET_LABEL;
 } else {
@@ -4884,7 +4861,6 @@ RET_LABEL350:(void)0;
 if (var349){
 var352 = NEW_parser_nodes__TKwprivate(&type_parser_nodes__TKwprivate);
 ((void (*)(val*, val*))(var352->class->vft[COLOR_lexer__TKwprivate__init_tk]))(var352, var_location) /* init_tk on <var352:TKwprivate>*/;
-CHECK_NEW_parser_nodes__TKwprivate(var352);
 var = var352;
 goto RET_LABEL;
 } else {
@@ -4899,7 +4875,6 @@ RET_LABEL355:(void)0;
 if (var354){
 var357 = NEW_parser_nodes__TKwintrude(&type_parser_nodes__TKwintrude);
 ((void (*)(val*, val*))(var357->class->vft[COLOR_lexer__TKwintrude__init_tk]))(var357, var_location) /* init_tk on <var357:TKwintrude>*/;
-CHECK_NEW_parser_nodes__TKwintrude(var357);
 var = var357;
 goto RET_LABEL;
 } else {
@@ -4914,7 +4889,6 @@ RET_LABEL360:(void)0;
 if (var359){
 var362 = NEW_parser_nodes__TKwif(&type_parser_nodes__TKwif);
 ((void (*)(val*, val*))(var362->class->vft[COLOR_lexer__TKwif__init_tk]))(var362, var_location) /* init_tk on <var362:TKwif>*/;
-CHECK_NEW_parser_nodes__TKwif(var362);
 var = var362;
 goto RET_LABEL;
 } else {
@@ -4929,7 +4903,6 @@ RET_LABEL365:(void)0;
 if (var364){
 var367 = NEW_parser_nodes__TKwthen(&type_parser_nodes__TKwthen);
 ((void (*)(val*, val*))(var367->class->vft[COLOR_lexer__TKwthen__init_tk]))(var367, var_location) /* init_tk on <var367:TKwthen>*/;
-CHECK_NEW_parser_nodes__TKwthen(var367);
 var = var367;
 goto RET_LABEL;
 } else {
@@ -4944,7 +4917,6 @@ RET_LABEL370:(void)0;
 if (var369){
 var372 = NEW_parser_nodes__TKwelse(&type_parser_nodes__TKwelse);
 ((void (*)(val*, val*))(var372->class->vft[COLOR_lexer__TKwelse__init_tk]))(var372, var_location) /* init_tk on <var372:TKwelse>*/;
-CHECK_NEW_parser_nodes__TKwelse(var372);
 var = var372;
 goto RET_LABEL;
 } else {
@@ -4959,7 +4931,6 @@ RET_LABEL375:(void)0;
 if (var374){
 var377 = NEW_parser_nodes__TKwwhile(&type_parser_nodes__TKwwhile);
 ((void (*)(val*, val*))(var377->class->vft[COLOR_lexer__TKwwhile__init_tk]))(var377, var_location) /* init_tk on <var377:TKwwhile>*/;
-CHECK_NEW_parser_nodes__TKwwhile(var377);
 var = var377;
 goto RET_LABEL;
 } else {
@@ -4974,7 +4945,6 @@ RET_LABEL380:(void)0;
 if (var379){
 var382 = NEW_parser_nodes__TKwloop(&type_parser_nodes__TKwloop);
 ((void (*)(val*, val*))(var382->class->vft[COLOR_lexer__TKwloop__init_tk]))(var382, var_location) /* init_tk on <var382:TKwloop>*/;
-CHECK_NEW_parser_nodes__TKwloop(var382);
 var = var382;
 goto RET_LABEL;
 } else {
@@ -4989,7 +4959,6 @@ RET_LABEL385:(void)0;
 if (var384){
 var387 = NEW_parser_nodes__TKwfor(&type_parser_nodes__TKwfor);
 ((void (*)(val*, val*))(var387->class->vft[COLOR_lexer__TKwfor__init_tk]))(var387, var_location) /* init_tk on <var387:TKwfor>*/;
-CHECK_NEW_parser_nodes__TKwfor(var387);
 var = var387;
 goto RET_LABEL;
 } else {
@@ -5004,7 +4973,6 @@ RET_LABEL390:(void)0;
 if (var389){
 var392 = NEW_parser_nodes__TKwin(&type_parser_nodes__TKwin);
 ((void (*)(val*, val*))(var392->class->vft[COLOR_lexer__TKwin__init_tk]))(var392, var_location) /* init_tk on <var392:TKwin>*/;
-CHECK_NEW_parser_nodes__TKwin(var392);
 var = var392;
 goto RET_LABEL;
 } else {
@@ -5019,7 +4987,6 @@ RET_LABEL395:(void)0;
 if (var394){
 var397 = NEW_parser_nodes__TKwand(&type_parser_nodes__TKwand);
 ((void (*)(val*, val*))(var397->class->vft[COLOR_lexer__TKwand__init_tk]))(var397, var_location) /* init_tk on <var397:TKwand>*/;
-CHECK_NEW_parser_nodes__TKwand(var397);
 var = var397;
 goto RET_LABEL;
 } else {
@@ -5034,7 +5001,6 @@ RET_LABEL400:(void)0;
 if (var399){
 var402 = NEW_parser_nodes__TKwor(&type_parser_nodes__TKwor);
 ((void (*)(val*, val*))(var402->class->vft[COLOR_lexer__TKwor__init_tk]))(var402, var_location) /* init_tk on <var402:TKwor>*/;
-CHECK_NEW_parser_nodes__TKwor(var402);
 var = var402;
 goto RET_LABEL;
 } else {
@@ -5049,7 +5015,6 @@ RET_LABEL405:(void)0;
 if (var404){
 var407 = NEW_parser_nodes__TKwnot(&type_parser_nodes__TKwnot);
 ((void (*)(val*, val*))(var407->class->vft[COLOR_lexer__TKwnot__init_tk]))(var407, var_location) /* init_tk on <var407:TKwnot>*/;
-CHECK_NEW_parser_nodes__TKwnot(var407);
 var = var407;
 goto RET_LABEL;
 } else {
@@ -5064,7 +5029,6 @@ RET_LABEL410:(void)0;
 if (var409){
 var412 = NEW_parser_nodes__TKwimplies(&type_parser_nodes__TKwimplies);
 ((void (*)(val*, val*))(var412->class->vft[COLOR_lexer__TKwimplies__init_tk]))(var412, var_location) /* init_tk on <var412:TKwimplies>*/;
-CHECK_NEW_parser_nodes__TKwimplies(var412);
 var = var412;
 goto RET_LABEL;
 } else {
@@ -5079,7 +5043,6 @@ RET_LABEL415:(void)0;
 if (var414){
 var417 = NEW_parser_nodes__TKwreturn(&type_parser_nodes__TKwreturn);
 ((void (*)(val*, val*))(var417->class->vft[COLOR_lexer__TKwreturn__init_tk]))(var417, var_location) /* init_tk on <var417:TKwreturn>*/;
-CHECK_NEW_parser_nodes__TKwreturn(var417);
 var = var417;
 goto RET_LABEL;
 } else {
@@ -5094,7 +5057,6 @@ RET_LABEL420:(void)0;
 if (var419){
 var422 = NEW_parser_nodes__TKwcontinue(&type_parser_nodes__TKwcontinue);
 ((void (*)(val*, val*))(var422->class->vft[COLOR_lexer__TKwcontinue__init_tk]))(var422, var_location) /* init_tk on <var422:TKwcontinue>*/;
-CHECK_NEW_parser_nodes__TKwcontinue(var422);
 var = var422;
 goto RET_LABEL;
 } else {
@@ -5109,7 +5071,6 @@ RET_LABEL425:(void)0;
 if (var424){
 var427 = NEW_parser_nodes__TKwbreak(&type_parser_nodes__TKwbreak);
 ((void (*)(val*, val*))(var427->class->vft[COLOR_lexer__TKwbreak__init_tk]))(var427, var_location) /* init_tk on <var427:TKwbreak>*/;
-CHECK_NEW_parser_nodes__TKwbreak(var427);
 var = var427;
 goto RET_LABEL;
 } else {
@@ -5124,7 +5085,6 @@ RET_LABEL430:(void)0;
 if (var429){
 var432 = NEW_parser_nodes__TKwabort(&type_parser_nodes__TKwabort);
 ((void (*)(val*, val*))(var432->class->vft[COLOR_lexer__TKwabort__init_tk]))(var432, var_location) /* init_tk on <var432:TKwabort>*/;
-CHECK_NEW_parser_nodes__TKwabort(var432);
 var = var432;
 goto RET_LABEL;
 } else {
@@ -5139,7 +5099,6 @@ RET_LABEL435:(void)0;
 if (var434){
 var437 = NEW_parser_nodes__TKwassert(&type_parser_nodes__TKwassert);
 ((void (*)(val*, val*))(var437->class->vft[COLOR_lexer__TKwassert__init_tk]))(var437, var_location) /* init_tk on <var437:TKwassert>*/;
-CHECK_NEW_parser_nodes__TKwassert(var437);
 var = var437;
 goto RET_LABEL;
 } else {
@@ -5154,7 +5113,6 @@ RET_LABEL440:(void)0;
 if (var439){
 var442 = NEW_parser_nodes__TKwnew(&type_parser_nodes__TKwnew);
 ((void (*)(val*, val*))(var442->class->vft[COLOR_lexer__TKwnew__init_tk]))(var442, var_location) /* init_tk on <var442:TKwnew>*/;
-CHECK_NEW_parser_nodes__TKwnew(var442);
 var = var442;
 goto RET_LABEL;
 } else {
@@ -5169,7 +5127,6 @@ RET_LABEL445:(void)0;
 if (var444){
 var447 = NEW_parser_nodes__TKwisa(&type_parser_nodes__TKwisa);
 ((void (*)(val*, val*))(var447->class->vft[COLOR_lexer__TKwisa__init_tk]))(var447, var_location) /* init_tk on <var447:TKwisa>*/;
-CHECK_NEW_parser_nodes__TKwisa(var447);
 var = var447;
 goto RET_LABEL;
 } else {
@@ -5184,7 +5141,6 @@ RET_LABEL450:(void)0;
 if (var449){
 var452 = NEW_parser_nodes__TKwonce(&type_parser_nodes__TKwonce);
 ((void (*)(val*, val*))(var452->class->vft[COLOR_lexer__TKwonce__init_tk]))(var452, var_location) /* init_tk on <var452:TKwonce>*/;
-CHECK_NEW_parser_nodes__TKwonce(var452);
 var = var452;
 goto RET_LABEL;
 } else {
@@ -5199,7 +5155,6 @@ RET_LABEL455:(void)0;
 if (var454){
 var457 = NEW_parser_nodes__TKwsuper(&type_parser_nodes__TKwsuper);
 ((void (*)(val*, val*))(var457->class->vft[COLOR_lexer__TKwsuper__init_tk]))(var457, var_location) /* init_tk on <var457:TKwsuper>*/;
-CHECK_NEW_parser_nodes__TKwsuper(var457);
 var = var457;
 goto RET_LABEL;
 } else {
@@ -5214,7 +5169,6 @@ RET_LABEL460:(void)0;
 if (var459){
 var462 = NEW_parser_nodes__TKwself(&type_parser_nodes__TKwself);
 ((void (*)(val*, val*))(var462->class->vft[COLOR_lexer__TKwself__init_tk]))(var462, var_location) /* init_tk on <var462:TKwself>*/;
-CHECK_NEW_parser_nodes__TKwself(var462);
 var = var462;
 goto RET_LABEL;
 } else {
@@ -5229,7 +5183,6 @@ RET_LABEL465:(void)0;
 if (var464){
 var467 = NEW_parser_nodes__TKwtrue(&type_parser_nodes__TKwtrue);
 ((void (*)(val*, val*))(var467->class->vft[COLOR_lexer__TKwtrue__init_tk]))(var467, var_location) /* init_tk on <var467:TKwtrue>*/;
-CHECK_NEW_parser_nodes__TKwtrue(var467);
 var = var467;
 goto RET_LABEL;
 } else {
@@ -5244,7 +5197,6 @@ RET_LABEL470:(void)0;
 if (var469){
 var472 = NEW_parser_nodes__TKwfalse(&type_parser_nodes__TKwfalse);
 ((void (*)(val*, val*))(var472->class->vft[COLOR_lexer__TKwfalse__init_tk]))(var472, var_location) /* init_tk on <var472:TKwfalse>*/;
-CHECK_NEW_parser_nodes__TKwfalse(var472);
 var = var472;
 goto RET_LABEL;
 } else {
@@ -5259,7 +5211,6 @@ RET_LABEL475:(void)0;
 if (var474){
 var477 = NEW_parser_nodes__TKwnull(&type_parser_nodes__TKwnull);
 ((void (*)(val*, val*))(var477->class->vft[COLOR_lexer__TKwnull__init_tk]))(var477, var_location) /* init_tk on <var477:TKwnull>*/;
-CHECK_NEW_parser_nodes__TKwnull(var477);
 var = var477;
 goto RET_LABEL;
 } else {
@@ -5274,7 +5225,6 @@ RET_LABEL480:(void)0;
 if (var479){
 var482 = NEW_parser_nodes__TKwas(&type_parser_nodes__TKwas);
 ((void (*)(val*, val*))(var482->class->vft[COLOR_lexer__TKwas__init_tk]))(var482, var_location) /* init_tk on <var482:TKwas>*/;
-CHECK_NEW_parser_nodes__TKwas(var482);
 var = var482;
 goto RET_LABEL;
 } else {
@@ -5289,7 +5239,6 @@ RET_LABEL485:(void)0;
 if (var484){
 var487 = NEW_parser_nodes__TKwnullable(&type_parser_nodes__TKwnullable);
 ((void (*)(val*, val*))(var487->class->vft[COLOR_lexer__TKwnullable__init_tk]))(var487, var_location) /* init_tk on <var487:TKwnullable>*/;
-CHECK_NEW_parser_nodes__TKwnullable(var487);
 var = var487;
 goto RET_LABEL;
 } else {
@@ -5304,7 +5253,6 @@ RET_LABEL490:(void)0;
 if (var489){
 var492 = NEW_parser_nodes__TKwisset(&type_parser_nodes__TKwisset);
 ((void (*)(val*, val*))(var492->class->vft[COLOR_lexer__TKwisset__init_tk]))(var492, var_location) /* init_tk on <var492:TKwisset>*/;
-CHECK_NEW_parser_nodes__TKwisset(var492);
 var = var492;
 goto RET_LABEL;
 } else {
@@ -5319,7 +5267,6 @@ RET_LABEL495:(void)0;
 if (var494){
 var497 = NEW_parser_nodes__TKwlabel(&type_parser_nodes__TKwlabel);
 ((void (*)(val*, val*))(var497->class->vft[COLOR_lexer__TKwlabel__init_tk]))(var497, var_location) /* init_tk on <var497:TKwlabel>*/;
-CHECK_NEW_parser_nodes__TKwlabel(var497);
 var = var497;
 goto RET_LABEL;
 } else {
@@ -5334,7 +5281,6 @@ RET_LABEL500:(void)0;
 if (var499){
 var502 = NEW_parser_nodes__TKwdebug(&type_parser_nodes__TKwdebug);
 ((void (*)(val*, val*))(var502->class->vft[COLOR_lexer__TKwdebug__init_tk]))(var502, var_location) /* init_tk on <var502:TKwdebug>*/;
-CHECK_NEW_parser_nodes__TKwdebug(var502);
 var = var502;
 goto RET_LABEL;
 } else {
@@ -5349,7 +5295,6 @@ RET_LABEL505:(void)0;
 if (var504){
 var507 = NEW_parser_nodes__TOpar(&type_parser_nodes__TOpar);
 ((void (*)(val*, val*))(var507->class->vft[COLOR_lexer__TOpar__init_tk]))(var507, var_location) /* init_tk on <var507:TOpar>*/;
-CHECK_NEW_parser_nodes__TOpar(var507);
 var = var507;
 goto RET_LABEL;
 } else {
@@ -5364,7 +5309,6 @@ RET_LABEL510:(void)0;
 if (var509){
 var512 = NEW_parser_nodes__TCpar(&type_parser_nodes__TCpar);
 ((void (*)(val*, val*))(var512->class->vft[COLOR_lexer__TCpar__init_tk]))(var512, var_location) /* init_tk on <var512:TCpar>*/;
-CHECK_NEW_parser_nodes__TCpar(var512);
 var = var512;
 goto RET_LABEL;
 } else {
@@ -5379,7 +5323,6 @@ RET_LABEL515:(void)0;
 if (var514){
 var517 = NEW_parser_nodes__TObra(&type_parser_nodes__TObra);
 ((void (*)(val*, val*))(var517->class->vft[COLOR_lexer__TObra__init_tk]))(var517, var_location) /* init_tk on <var517:TObra>*/;
-CHECK_NEW_parser_nodes__TObra(var517);
 var = var517;
 goto RET_LABEL;
 } else {
@@ -5394,7 +5337,6 @@ RET_LABEL520:(void)0;
 if (var519){
 var522 = NEW_parser_nodes__TCbra(&type_parser_nodes__TCbra);
 ((void (*)(val*, val*))(var522->class->vft[COLOR_lexer__TCbra__init_tk]))(var522, var_location) /* init_tk on <var522:TCbra>*/;
-CHECK_NEW_parser_nodes__TCbra(var522);
 var = var522;
 goto RET_LABEL;
 } else {
@@ -5409,7 +5351,6 @@ RET_LABEL525:(void)0;
 if (var524){
 var527 = NEW_parser_nodes__TComma(&type_parser_nodes__TComma);
 ((void (*)(val*, val*))(var527->class->vft[COLOR_lexer__TComma__init_tk]))(var527, var_location) /* init_tk on <var527:TComma>*/;
-CHECK_NEW_parser_nodes__TComma(var527);
 var = var527;
 goto RET_LABEL;
 } else {
@@ -5424,7 +5365,6 @@ RET_LABEL530:(void)0;
 if (var529){
 var532 = NEW_parser_nodes__TColumn(&type_parser_nodes__TColumn);
 ((void (*)(val*, val*))(var532->class->vft[COLOR_lexer__TColumn__init_tk]))(var532, var_location) /* init_tk on <var532:TColumn>*/;
-CHECK_NEW_parser_nodes__TColumn(var532);
 var = var532;
 goto RET_LABEL;
 } else {
@@ -5439,7 +5379,6 @@ RET_LABEL535:(void)0;
 if (var534){
 var537 = NEW_parser_nodes__TQuad(&type_parser_nodes__TQuad);
 ((void (*)(val*, val*))(var537->class->vft[COLOR_lexer__TQuad__init_tk]))(var537, var_location) /* init_tk on <var537:TQuad>*/;
-CHECK_NEW_parser_nodes__TQuad(var537);
 var = var537;
 goto RET_LABEL;
 } else {
@@ -5454,7 +5393,6 @@ RET_LABEL540:(void)0;
 if (var539){
 var542 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
 ((void (*)(val*, val*))(var542->class->vft[COLOR_lexer__TAssign__init_tk]))(var542, var_location) /* init_tk on <var542:TAssign>*/;
-CHECK_NEW_parser_nodes__TAssign(var542);
 var = var542;
 goto RET_LABEL;
 } else {
@@ -5469,7 +5407,6 @@ RET_LABEL545:(void)0;
 if (var544){
 var547 = NEW_parser_nodes__TPluseq(&type_parser_nodes__TPluseq);
 ((void (*)(val*, val*))(var547->class->vft[COLOR_lexer__TPluseq__init_tk]))(var547, var_location) /* init_tk on <var547:TPluseq>*/;
-CHECK_NEW_parser_nodes__TPluseq(var547);
 var = var547;
 goto RET_LABEL;
 } else {
@@ -5484,7 +5421,6 @@ RET_LABEL550:(void)0;
 if (var549){
 var552 = NEW_parser_nodes__TMinuseq(&type_parser_nodes__TMinuseq);
 ((void (*)(val*, val*))(var552->class->vft[COLOR_lexer__TMinuseq__init_tk]))(var552, var_location) /* init_tk on <var552:TMinuseq>*/;
-CHECK_NEW_parser_nodes__TMinuseq(var552);
 var = var552;
 goto RET_LABEL;
 } else {
@@ -5499,7 +5435,6 @@ RET_LABEL555:(void)0;
 if (var554){
 var557 = NEW_parser_nodes__TDotdotdot(&type_parser_nodes__TDotdotdot);
 ((void (*)(val*, val*))(var557->class->vft[COLOR_lexer__TDotdotdot__init_tk]))(var557, var_location) /* init_tk on <var557:TDotdotdot>*/;
-CHECK_NEW_parser_nodes__TDotdotdot(var557);
 var = var557;
 goto RET_LABEL;
 } else {
@@ -5514,7 +5449,6 @@ RET_LABEL560:(void)0;
 if (var559){
 var562 = NEW_parser_nodes__TDotdot(&type_parser_nodes__TDotdot);
 ((void (*)(val*, val*))(var562->class->vft[COLOR_lexer__TDotdot__init_tk]))(var562, var_location) /* init_tk on <var562:TDotdot>*/;
-CHECK_NEW_parser_nodes__TDotdot(var562);
 var = var562;
 goto RET_LABEL;
 } else {
@@ -5529,7 +5463,6 @@ RET_LABEL565:(void)0;
 if (var564){
 var567 = NEW_parser_nodes__TDot(&type_parser_nodes__TDot);
 ((void (*)(val*, val*))(var567->class->vft[COLOR_lexer__TDot__init_tk]))(var567, var_location) /* init_tk on <var567:TDot>*/;
-CHECK_NEW_parser_nodes__TDot(var567);
 var = var567;
 goto RET_LABEL;
 } else {
@@ -5544,7 +5477,6 @@ RET_LABEL570:(void)0;
 if (var569){
 var572 = NEW_parser_nodes__TPlus(&type_parser_nodes__TPlus);
 ((void (*)(val*, val*))(var572->class->vft[COLOR_lexer__TPlus__init_tk]))(var572, var_location) /* init_tk on <var572:TPlus>*/;
-CHECK_NEW_parser_nodes__TPlus(var572);
 var = var572;
 goto RET_LABEL;
 } else {
@@ -5559,7 +5491,6 @@ RET_LABEL575:(void)0;
 if (var574){
 var577 = NEW_parser_nodes__TMinus(&type_parser_nodes__TMinus);
 ((void (*)(val*, val*))(var577->class->vft[COLOR_lexer__TMinus__init_tk]))(var577, var_location) /* init_tk on <var577:TMinus>*/;
-CHECK_NEW_parser_nodes__TMinus(var577);
 var = var577;
 goto RET_LABEL;
 } else {
@@ -5574,7 +5505,6 @@ RET_LABEL580:(void)0;
 if (var579){
 var582 = NEW_parser_nodes__TStar(&type_parser_nodes__TStar);
 ((void (*)(val*, val*))(var582->class->vft[COLOR_lexer__TStar__init_tk]))(var582, var_location) /* init_tk on <var582:TStar>*/;
-CHECK_NEW_parser_nodes__TStar(var582);
 var = var582;
 goto RET_LABEL;
 } else {
@@ -5589,7 +5519,6 @@ RET_LABEL585:(void)0;
 if (var584){
 var587 = NEW_parser_nodes__TSlash(&type_parser_nodes__TSlash);
 ((void (*)(val*, val*))(var587->class->vft[COLOR_lexer__TSlash__init_tk]))(var587, var_location) /* init_tk on <var587:TSlash>*/;
-CHECK_NEW_parser_nodes__TSlash(var587);
 var = var587;
 goto RET_LABEL;
 } else {
@@ -5604,7 +5533,6 @@ RET_LABEL590:(void)0;
 if (var589){
 var592 = NEW_parser_nodes__TPercent(&type_parser_nodes__TPercent);
 ((void (*)(val*, val*))(var592->class->vft[COLOR_lexer__TPercent__init_tk]))(var592, var_location) /* init_tk on <var592:TPercent>*/;
-CHECK_NEW_parser_nodes__TPercent(var592);
 var = var592;
 goto RET_LABEL;
 } else {
@@ -5619,7 +5547,6 @@ RET_LABEL595:(void)0;
 if (var594){
 var597 = NEW_parser_nodes__TEq(&type_parser_nodes__TEq);
 ((void (*)(val*, val*))(var597->class->vft[COLOR_lexer__TEq__init_tk]))(var597, var_location) /* init_tk on <var597:TEq>*/;
-CHECK_NEW_parser_nodes__TEq(var597);
 var = var597;
 goto RET_LABEL;
 } else {
@@ -5634,7 +5561,6 @@ RET_LABEL600:(void)0;
 if (var599){
 var602 = NEW_parser_nodes__TNe(&type_parser_nodes__TNe);
 ((void (*)(val*, val*))(var602->class->vft[COLOR_lexer__TNe__init_tk]))(var602, var_location) /* init_tk on <var602:TNe>*/;
-CHECK_NEW_parser_nodes__TNe(var602);
 var = var602;
 goto RET_LABEL;
 } else {
@@ -5649,7 +5575,6 @@ RET_LABEL605:(void)0;
 if (var604){
 var607 = NEW_parser_nodes__TLt(&type_parser_nodes__TLt);
 ((void (*)(val*, val*))(var607->class->vft[COLOR_lexer__TLt__init_tk]))(var607, var_location) /* init_tk on <var607:TLt>*/;
-CHECK_NEW_parser_nodes__TLt(var607);
 var = var607;
 goto RET_LABEL;
 } else {
@@ -5664,7 +5589,6 @@ RET_LABEL610:(void)0;
 if (var609){
 var612 = NEW_parser_nodes__TLe(&type_parser_nodes__TLe);
 ((void (*)(val*, val*))(var612->class->vft[COLOR_lexer__TLe__init_tk]))(var612, var_location) /* init_tk on <var612:TLe>*/;
-CHECK_NEW_parser_nodes__TLe(var612);
 var = var612;
 goto RET_LABEL;
 } else {
@@ -5679,7 +5603,6 @@ RET_LABEL615:(void)0;
 if (var614){
 var617 = NEW_parser_nodes__TLl(&type_parser_nodes__TLl);
 ((void (*)(val*, val*))(var617->class->vft[COLOR_lexer__TLl__init_tk]))(var617, var_location) /* init_tk on <var617:TLl>*/;
-CHECK_NEW_parser_nodes__TLl(var617);
 var = var617;
 goto RET_LABEL;
 } else {
@@ -5694,7 +5617,6 @@ RET_LABEL620:(void)0;
 if (var619){
 var622 = NEW_parser_nodes__TGt(&type_parser_nodes__TGt);
 ((void (*)(val*, val*))(var622->class->vft[COLOR_lexer__TGt__init_tk]))(var622, var_location) /* init_tk on <var622:TGt>*/;
-CHECK_NEW_parser_nodes__TGt(var622);
 var = var622;
 goto RET_LABEL;
 } else {
@@ -5709,7 +5631,6 @@ RET_LABEL625:(void)0;
 if (var624){
 var627 = NEW_parser_nodes__TGe(&type_parser_nodes__TGe);
 ((void (*)(val*, val*))(var627->class->vft[COLOR_lexer__TGe__init_tk]))(var627, var_location) /* init_tk on <var627:TGe>*/;
-CHECK_NEW_parser_nodes__TGe(var627);
 var = var627;
 goto RET_LABEL;
 } else {
@@ -5724,7 +5645,6 @@ RET_LABEL630:(void)0;
 if (var629){
 var632 = NEW_parser_nodes__TGg(&type_parser_nodes__TGg);
 ((void (*)(val*, val*))(var632->class->vft[COLOR_lexer__TGg__init_tk]))(var632, var_location) /* init_tk on <var632:TGg>*/;
-CHECK_NEW_parser_nodes__TGg(var632);
 var = var632;
 goto RET_LABEL;
 } else {
@@ -5739,7 +5659,6 @@ RET_LABEL635:(void)0;
 if (var634){
 var637 = NEW_parser_nodes__TStarship(&type_parser_nodes__TStarship);
 ((void (*)(val*, val*))(var637->class->vft[COLOR_lexer__TStarship__init_tk]))(var637, var_location) /* init_tk on <var637:TStarship>*/;
-CHECK_NEW_parser_nodes__TStarship(var637);
 var = var637;
 goto RET_LABEL;
 } else {
@@ -5754,7 +5673,6 @@ RET_LABEL640:(void)0;
 if (var639){
 var642 = NEW_parser_nodes__TBang(&type_parser_nodes__TBang);
 ((void (*)(val*, val*))(var642->class->vft[COLOR_lexer__TBang__init_tk]))(var642, var_location) /* init_tk on <var642:TBang>*/;
-CHECK_NEW_parser_nodes__TBang(var642);
 var = var642;
 goto RET_LABEL;
 } else {
@@ -5769,7 +5687,6 @@ RET_LABEL645:(void)0;
 if (var644){
 var647 = NEW_parser_nodes__TAt(&type_parser_nodes__TAt);
 ((void (*)(val*, val*))(var647->class->vft[COLOR_lexer__TAt__init_tk]))(var647, var_location) /* init_tk on <var647:TAt>*/;
-CHECK_NEW_parser_nodes__TAt(var647);
 var = var647;
 goto RET_LABEL;
 } else {
@@ -5784,7 +5701,6 @@ RET_LABEL650:(void)0;
 if (var649){
 var652 = NEW_parser_nodes__TClassid(&type_parser_nodes__TClassid);
 ((void (*)(val*, val*))(var652->class->vft[COLOR_lexer__TClassid__init_tk]))(var652, var_location) /* init_tk on <var652:TClassid>*/;
-CHECK_NEW_parser_nodes__TClassid(var652);
 var = var652;
 goto RET_LABEL;
 } else {
@@ -5799,7 +5715,6 @@ RET_LABEL655:(void)0;
 if (var654){
 var657 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*, val*))(var657->class->vft[COLOR_lexer__TId__init_tk]))(var657, var_location) /* init_tk on <var657:TId>*/;
-CHECK_NEW_parser_nodes__TId(var657);
 var = var657;
 goto RET_LABEL;
 } else {
@@ -5814,7 +5729,6 @@ RET_LABEL660:(void)0;
 if (var659){
 var662 = NEW_parser_nodes__TAttrid(&type_parser_nodes__TAttrid);
 ((void (*)(val*, val*))(var662->class->vft[COLOR_lexer__TAttrid__init_tk]))(var662, var_location) /* init_tk on <var662:TAttrid>*/;
-CHECK_NEW_parser_nodes__TAttrid(var662);
 var = var662;
 goto RET_LABEL;
 } else {
@@ -5829,7 +5743,6 @@ RET_LABEL665:(void)0;
 if (var664){
 var667 = NEW_parser_nodes__TNumber(&type_parser_nodes__TNumber);
 ((void (*)(val*, val*))(var667->class->vft[COLOR_lexer__TNumber__init_tk]))(var667, var_location) /* init_tk on <var667:TNumber>*/;
-CHECK_NEW_parser_nodes__TNumber(var667);
 var = var667;
 goto RET_LABEL;
 } else {
@@ -5844,7 +5757,6 @@ RET_LABEL670:(void)0;
 if (var669){
 var672 = NEW_parser_nodes__TFloat(&type_parser_nodes__TFloat);
 ((void (*)(val*, val*))(var672->class->vft[COLOR_lexer__TFloat__init_tk]))(var672, var_location) /* init_tk on <var672:TFloat>*/;
-CHECK_NEW_parser_nodes__TFloat(var672);
 var = var672;
 goto RET_LABEL;
 } else {
@@ -5859,7 +5771,6 @@ RET_LABEL675:(void)0;
 if (var674){
 var677 = NEW_parser_nodes__TString(&type_parser_nodes__TString);
 ((void (*)(val*, val*))(var677->class->vft[COLOR_lexer__TString__init_tk]))(var677, var_location) /* init_tk on <var677:TString>*/;
-CHECK_NEW_parser_nodes__TString(var677);
 var = var677;
 goto RET_LABEL;
 } else {
@@ -5874,7 +5785,6 @@ RET_LABEL680:(void)0;
 if (var679){
 var682 = NEW_parser_nodes__TStartString(&type_parser_nodes__TStartString);
 ((void (*)(val*, val*))(var682->class->vft[COLOR_lexer__TStartString__init_tk]))(var682, var_location) /* init_tk on <var682:TStartString>*/;
-CHECK_NEW_parser_nodes__TStartString(var682);
 var = var682;
 goto RET_LABEL;
 } else {
@@ -5889,7 +5799,6 @@ RET_LABEL685:(void)0;
 if (var684){
 var687 = NEW_parser_nodes__TMidString(&type_parser_nodes__TMidString);
 ((void (*)(val*, val*))(var687->class->vft[COLOR_lexer__TMidString__init_tk]))(var687, var_location) /* init_tk on <var687:TMidString>*/;
-CHECK_NEW_parser_nodes__TMidString(var687);
 var = var687;
 goto RET_LABEL;
 } else {
@@ -5904,7 +5813,6 @@ RET_LABEL690:(void)0;
 if (var689){
 var692 = NEW_parser_nodes__TEndString(&type_parser_nodes__TEndString);
 ((void (*)(val*, val*))(var692->class->vft[COLOR_lexer__TEndString__init_tk]))(var692, var_location) /* init_tk on <var692:TEndString>*/;
-CHECK_NEW_parser_nodes__TEndString(var692);
 var = var692;
 goto RET_LABEL;
 } else {
@@ -5919,7 +5827,6 @@ RET_LABEL695:(void)0;
 if (var694){
 var697 = NEW_parser_nodes__TChar(&type_parser_nodes__TChar);
 ((void (*)(val*, val*))(var697->class->vft[COLOR_lexer__TChar__init_tk]))(var697, var_location) /* init_tk on <var697:TChar>*/;
-CHECK_NEW_parser_nodes__TChar(var697);
 var = var697;
 goto RET_LABEL;
 } else {
@@ -5934,7 +5841,6 @@ RET_LABEL700:(void)0;
 if (var699){
 var702 = NEW_parser_nodes__TBadString(&type_parser_nodes__TBadString);
 ((void (*)(val*, val*))(var702->class->vft[COLOR_lexer__TBadString__init_tk]))(var702, var_location) /* init_tk on <var702:TBadString>*/;
-CHECK_NEW_parser_nodes__TBadString(var702);
 var = var702;
 goto RET_LABEL;
 } else {
@@ -5949,7 +5855,6 @@ RET_LABEL705:(void)0;
 if (var704){
 var707 = NEW_parser_nodes__TBadChar(&type_parser_nodes__TBadChar);
 ((void (*)(val*, val*))(var707->class->vft[COLOR_lexer__TBadChar__init_tk]))(var707, var_location) /* init_tk on <var707:TBadChar>*/;
-CHECK_NEW_parser_nodes__TBadChar(var707);
 var = var707;
 goto RET_LABEL;
 } else {
@@ -5964,7 +5869,6 @@ RET_LABEL710:(void)0;
 if (var709){
 var712 = NEW_parser_nodes__TExternCodeSegment(&type_parser_nodes__TExternCodeSegment);
 ((void (*)(val*, val*))(var712->class->vft[COLOR_lexer__TExternCodeSegment__init_tk]))(var712, var_location) /* init_tk on <var712:TExternCodeSegment>*/;
-CHECK_NEW_parser_nodes__TExternCodeSegment(var712);
 var = var712;
 goto RET_LABEL;
 } else {
@@ -5976,7 +5880,7 @@ var714 = self->attrs[COLOR_lexer__Lexer___file].val; /* _file on <self:Lexer> */
 if (var714 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _file");
 fprintf(stderr, " (%s:%d)\n", "src/parser/lexer.nit", 1664);
-exit(1);
+show_backtrace(1);
 }
 var715 = 1;
 { /* Inline kernel#Int#+ (var_start_line,var715) */
@@ -6007,7 +5911,6 @@ goto RET_LABEL729;
 RET_LABEL729:(void)0;
 }
 ((void (*)(val*, val*, long, long, long, long))(var713->class->vft[COLOR_location__Location__init]))(var713, var714, var716, var720, var724, var728) /* init on <var713:Location>*/;
-CHECK_NEW_location__Location(var713);
 var_location731 = var713;
 { /* Inline kernel#Int#> (var_sp,var_start_stream_pos) */
 /* Covariant cast for argument 0 (i) <var_start_stream_pos:Int> isa OTHER */
@@ -6017,7 +5920,7 @@ if (!var734) {
 var_class_name737 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name737);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var738 = var_sp > var_start_stream_pos;
 var732 = var738;
@@ -6037,7 +5940,6 @@ var743 = NEW_parser_nodes__ALexerError(&type_parser_nodes__ALexerError);
 var744 = NEW_array__Array(&type_array__Arraykernel__Object);
 var745 = 3;
 ((void (*)(val*, long))(var744->class->vft[COLOR_array__Array__with_capacity]))(var744, var745) /* with_capacity on <var744:Array[Object]>*/;
-CHECK_NEW_array__Array(var744);
 var_ = var744;
 if (varonce) {
 var746 = varonce;
@@ -6062,14 +5964,12 @@ varonce750 = var751;
 ((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var751) /* add on <var_:Array[Object]>*/;
 var755 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
 ((void (*)(val*, val*, val*, val*))(var743->class->vft[COLOR_lexer__ALexerError__init_lexer_error]))(var743, var755, var_location731, var_text) /* init_lexer_error on <var743:ALexerError>*/;
-CHECK_NEW_parser_nodes__ALexerError(var743);
 var_token = var743;
 var = var_token;
 goto RET_LABEL;
 } else {
 var756 = NEW_parser_nodes__EOF(&type_parser_nodes__EOF);
 ((void (*)(val*, val*))(var756->class->vft[COLOR_lexer__EOF__init_tk]))(var756, var_location731) /* init_tk on <var756:EOF>*/;
-CHECK_NEW_parser_nodes__EOF(var756);
 var_token757 = var756;
 var = var_token757;
 goto RET_LABEL;

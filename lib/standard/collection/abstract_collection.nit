@@ -4,13 +4,15 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module define several abstract collection classes.
+# Abstract collection classes and services.
+#
+# TODO specify the behavior on iterators when collections are modified.
 module abstract_collection
 
 import kernel
@@ -71,7 +73,6 @@ interface Collection[E]
 		return nb
 	end
 
-
 	# Is `item` in the collection ?
 	# Comparisons are done with ==
 	#
@@ -113,7 +114,7 @@ interface Collection[E]
 		return nb
 	end
 
-	# Return one the item of the collection
+	# Return the first item of the collection
 	#
 	#    assert [1,2,3].first                == 1
 	fun first: E
@@ -151,6 +152,11 @@ interface Iterator[E]
 end
 
 # A collection that contains only one item.
+#
+# Used to pass arguments by reference.
+#
+# Also used when one want to give asingle element when a full
+# collection is expected
 class Container[E]
 	super Collection[E]
 
@@ -183,7 +189,7 @@ class Container[E]
 end
 
 # This iterator is quite stupid since it is used for only one item.
-class ContainerIterator[E]
+private class ContainerIterator[E]
 	super Iterator[E]
 	redef fun item do return _container.item
 
@@ -199,30 +205,57 @@ end
 # Items can be removed from this collection
 interface RemovableCollection[E]
 	super Collection[E]
+
 	# Remove all items
+	#
+	#     var a = [1,2,3]
+	#     a.clear
+	#     assert a.length == 0
+	#
+	# ENSURE `is_empty`
 	fun clear is abstract
 
 	# Remove an occucence of `item`
+	#
+	#     var a = [1,2,3,1,2,3]
+	#     a.remove 2
+	#     assert a == [1,3,1,2,3]
 	fun remove(item: E) is abstract
 
 	# Remove all occurences of `item`
+	#
+	#     var a = [1,2,3,1,2,3]
+	#     a.remove_all 2
+	#     assert a == [1,3,1,3]
 	fun remove_all(item: E) do while has(item) do remove(item)
 end
 
 # Items can be added to these collections.
 interface SimpleCollection[E]
 	super RemovableCollection[E]
+
 	# Add an item in a collection.
+	#
+	#     var a = [1,2]
+	#     a.add 3
+	#     assert a.has(3)  == true
+	#     assert a.has(10) == false
+	#
 	# Ensure col.has(item)
 	fun add(item: E) is abstract
 
 	# Add each item of `coll`.
+	#     var a = [1,2]
+	#     a.add_all [3..5]
+	#     assert a.has(4)  == true
+	#     assert a.has(10) == false
 	fun add_all(coll: Collection[E]) do for i in coll do add(i)
 end
 
 # Abstract sets.
 #
-# Set contains contains only one element with the same value (according to ==).
+# Set is a collection without duplicates (according to `==`)
+#
 #      var s: Set[String] = new ArraySet[String]
 #      var a = "Hello"
 #      var b = "Hel" + "lo"
@@ -265,7 +298,7 @@ interface Set[E: Object]
 		return has_all(other)
 	end
 
-	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	# Because of the law between `==` and `hash`, `hash` is redefined to be the sum of the hash of the elements
 	redef fun hash
 	do
 		var res = 0
@@ -295,10 +328,38 @@ end
 
 # MapRead are abstract associative collections: `key` -> `item`.
 interface MapRead[K: Object, E]
-	# Get the item at `key`.
+	# Get the item at `key`
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x["four"] == 4
+	#     # assert x["five"] #=> abort
+	#
+	# If the key is not in the map, `provide_default_value` is called (that aborts by default)
+	# See `get_or_null` and `get_or_default` for safe variations.
 	fun [](key: K): E is abstract
 
+	# Get the item at `key` or null if `key` is not in the map.
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.get_or_null("four") == 4
+	#     assert x.get_or_null("five") == null
+	#
+	# Note: use `has_key` and `[]` if you need the distinction bewteen a key associated with null, and no key.
+	fun get_or_null(key: K): nullable E
+	do
+		if has_key(key) then return self[key]
+		return null
+	end
+
 	# Get the item at `key` or return `default` if not in map
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.get_or_default("four", 40) == 4
+	#     assert x.get_or_default("five", 50) == 50
+	#
 	fun get_or_default(key: K, default: E): E
 	do
 		if has_key(key) then return self[key]
@@ -314,18 +375,47 @@ interface MapRead[K: Object, E]
 	# Return the point of view of self on the values only.
 	# Note that `self` and `values` are views on the same data;
 	# therefore any modification of one is visible on the other.
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.values.has(4) == true
+	#     assert x.values.has(5) == false
 	fun values: Collection[E] is abstract
 
 	# Return the point of view of self on the keys only.
 	# Note that `self` and `keys` are views on the same data;
 	# therefore any modification of one is visible on the other.
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.keys.has("four") == true
+	#     assert x.keys.has("five") == false
 	fun keys: Collection[K] is abstract
 
 	# Is there no item in the collection?
+	#
+	#     var x = new HashMap[String, Int]
+	#     assert x.is_empty  == true
+	#     x["four"] = 4
+	#     assert x.is_empty  == false
 	fun is_empty: Bool is abstract
 
 	# Number of items in the collection.
+	#
+	#     var x = new HashMap[String, Int]
+	#     assert x.length  == 0
+	#     x["four"] = 4
+	#     assert x.length  == 1
+	#     x["five"] = 5
+	#     assert x.length  == 2
 	fun length: Int is abstract
+
+	# Called by the underling implementation of `[]` to provide a default value when a `key` has no value
+	# By default the behavior is to abort.
+	#
+	# Note: the value is returned *as is*, implementations may want to store the value in the map before returning it
+	# @toimplement
+	protected fun provide_default_value(key: K): E do abort
 end
 
 # Maps are associative collections: `key` -> `item`.
@@ -354,11 +444,39 @@ end
 #
 interface Map[K: Object, E]
 	super MapRead[K, E]
-	# Set the`item` at `key`.
-	fun []=(key: K, item: E) is abstract
+
+	# Set the `value` at `key`.
+	#
+	# Values can then get retrieved with `[]`.
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x["four"]   == 4
+	#
+	# If the key was associated with a value, this old value is discarted
+	# and replaced with the new one.
+	#
+	#     x["four"] = 40
+	#     assert x["four"]         == 40
+	#     assert x.values.has(4)   == false
+	#
+	fun []=(key: K, value: E) is abstract
 
 	# Add each (key,value) of `map` into `self`.
 	# If a same key exists in `map` and `self`, then the value in self is discarded.
+	#
+	# It is the analogous of `SimpleCollection::add_all`
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     x["five"] = 5
+	#     var y = new HashMap[String, Int]
+	#     y["four"] = 40
+	#     y["nine"] = 90
+	#     x.recover_with y
+	#     assert x["four"]  == 40
+	#     assert x["five"]  == 5
+	#     assert x["nine"]  == 90
 	fun recover_with(map: Map[K, E])
 	do
 		var i = map.iterator
@@ -369,6 +487,13 @@ interface Map[K: Object, E]
 	end
 
 	# Remove all items
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     x.clear
+	#     x.keys.has("four") == false
+	#
+	# ENSURE `is_empty`
 	fun clear is abstract
 
 	redef fun values: RemovableCollection[E] is abstract
@@ -421,45 +546,120 @@ end
 
 # Sequences are indexed collections.
 # The first item is 0. The last is `length-1`.
+#
+# The order is the main caracteristic of sequence
+# and all concrete implementation of sequences are basically interchangeable.
 interface SequenceRead[E]
 	super Collection[E]
+
 	# Get the first item.
 	# Is equivalent with `self[0]`.
+	#
+	#     var a = [1,2,3]
+	#     assert a.first   == 1
+	#
+	# REQUIRE `not is_empty`
 	redef fun first
 	do
 		assert not_empty: not is_empty
 		return self[0]
 	end
 
-	# Return the index=th element of the sequence.
-	# The first element is 0 and the last if `length-1`
+	# Return the index-th element of the sequence.
+	# The first element is 0 and the last is `length-1`
 	# If index is invalid, the program aborts
+	#
+	#     var a = [10,20,30]
+	#     assert a[0]   == 10
+	#     assert a[1]   == 20
+	#     assert a[2]   == 30
+	#
+	# REQUIRE `index >= 0 and index < length`
 	fun [](index: Int): E is abstract
 
 	# Get the last item.
 	# Is equivalent with `self[length-1]`.
+	#
+	#     var a = [1,2,3]
+	#     assert a.last   == 3
+	#
+	# REQUIRE `not is_empty`
 	fun last: E
 	do
 		assert not_empty: not is_empty
 		return self[length-1]
 	end
 
-	# Return the index of the first occurrence of `item`.
-	# Return -1 if `item` is not found
-	# Comparison is done with ==
-	fun index_of(item: E): Int
+	# The index of the first occurrence of `item`.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.index_of(20)   == 1
+	#     assert a.index_of(40)   == -1
+	fun index_of(item: E): Int do return index_of_from(item, 0)
+
+	# The index of the last occurrence of `item`.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.last_index_of(20)   == 4
+	#     assert a.last_index_of(40)   == -1
+	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+
+	# The index of the first occurrence of `item`, starting from pos.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.index_of_from(20, 3)   == 4
+	#     assert a.index_of_from(20, 4)   == 4
+	#     assert a.index_of_from(20, 5)   == -1
+	fun index_of_from(item: E, pos: Int): Int
 	do
+		var p = 0
 		var i = iterator
 		while i.is_ok do
-			if i.item == item then return i.index
+			if p>pos and i.item == item then return i.index
 			i.next
+			p += 1
 		end
 		return -1
+	end
+
+	# The index of the last occurrence of `item` starting from `pos` and decrementing.
+	# Return -1 if `item` is not found.
+	# Comparison is done with `==`.
+	#
+	#     var a = [10,20,30,10,20,30]
+	#     assert a.last_index_of_from(20, 2)   == 1
+	#     assert a.last_index_of_from(20, 1)   == 1
+	#     assert a.last_index_of_from(20, 0)   == -1
+	fun last_index_of_from(item: E, pos: Int): Int
+	do
+		var res = -1
+		var p = 0
+		var i = iterator
+		while i.is_ok do
+			if p>pos then break
+			if i.item == item then res = p
+			i.next
+			p += 1
+		end
+		return res
 	end
 
 	redef fun iterator: IndexedIterator[E] is abstract
 
 	# Two sequences are equals if they have the same items in the same order.
+	#
+	#     var a = new List[Int]
+	#     a.add(1)
+	#     a.add(2)
+	#     a.add(3)
+	#     assert a == [1,2,3]
+	#     assert a != [1,3,2]
 	redef fun ==(o)
 	do
 		if not o isa SequenceRead[nullable Object] then return false
@@ -473,7 +673,7 @@ interface SequenceRead[E]
 		return true
 	end
 
-	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	# Because of the law between `==` and `hash`, `hash` is redefined to be the sum of the hash of the elements
 	redef fun hash
 	do
 		var res = 0
@@ -490,13 +690,27 @@ interface Sequence[E]
 
 	# Set the first item.
 	# Is equivalent with `self[0] = item`.
+	#
+	#     var a = [1,2,3]
+	#     a.first = 10
+	#     assert a == [10,2,3]
 	fun first=(item: E)
 	do self[0] = item end
 
 	# Set the last item.
 	# Is equivalent with `self[length-1] = item`.
-	fun last=(item: E) 
-	do 
+	#
+	#     var a = [1,2,3]
+	#     a.last = 10
+	#     assert a == [1,2,10]
+	#
+	# If the sequence is empty, `last=` is equivalent with `self[0]=` (thus with `first=`)
+	#
+	#     var b = new Array[Int]
+	#     b.last = 10
+	#     assert b == [10]
+	fun last=(item: E)
+	do
 		var l = length
 		if l > 0 then
 			self[l-1] = item
@@ -508,26 +722,82 @@ interface Sequence[E]
 	# A synonym of `push`
 	redef fun add(e) do push(e)
 
-	# Add an item after the last.
+	# Add an item after the last one.
+	#
+	#     var a = [1,2,3]
+	#     a.push(10)
+	#     a.push(20)
+	#     assert a  == [1,2,3,10,20]
 	fun push(e: E) is abstract
 
 	# Add each item of `coll` after the last.
+	#
+	#     var a = [1,2,3]
+	#     a.append([7..9])
+	#     assert a  == [1,2,3,7,8,9]
 	fun append(coll: Collection[E]) do for i in coll do push(i)
 
 	# Remove the last item.
+	#
+	#     var a = [1,2,3]
+	#     assert a.pop  == 3
+	#     assert a.pop  == 2
+	#     assert a == [1]
+	#
+	# REQUIRE `not is_empty`
 	fun pop: E is abstract
 
-	# Add an item before the last.
+	# Add an item before the first one.
+	#
+	#     var a = [1,2,3]
+	#     a.unshift(10)
+	#     a.unshift(20)
+	#     assert a  == [20,10,1,2,3]
 	fun unshift(e: E) is abstract
 
 	# Remove the first item.
-	# The second item become the first.
+	# The second item thus become the first.
+	#
+	#     var a = [1,2,3]
+	#     assert a.shift  == 1
+	#     assert a.shift  == 2
+	#     assert a == [3]
+	#
+	# REQUIRE `not is_empty`
 	fun shift: E is abstract
 
 	# Set the `item` at `index`.
+	#
+	#     var a = [10,20,30]
+	#     a[1] = 200
+	#     assert a  == [10,200,30]
+	#
+	# like with `[]`, index should be between `0` and `length-1`
+	# However, if `index==length`, `[]=` works like `push`.
+	#
+	#     a[3] = 400
+	#     assert a  == [10,200,30,400]
+	#
+	# REQUIRE `index >= 0 and index <= length`
 	fun []=(index: Int, item: E) is abstract
 
+	# Insert an element at a given position, following elements are shifted.
+	#
+	#     var a = [10, 20, 30, 40]
+	#     a.insert(100, 2)
+	#     assert a      ==  [10, 20, 100, 30, 40]
+	#
+	# REQUIRE `index >= 0 and index < length`
+	# ENSURE `self[index] == item`
+	fun insert(item: E, index: Int) is abstract
+
 	# Remove the item at `index` and shift all following elements
+	#
+	#     var a = [10,20,30]
+	#     a.remove_at(1)
+	#     assert a  == [10,30]
+	#
+	# REQUIRE `index >= 0 and index < length`
 	fun remove_at(index: Int) is abstract
 end
 
@@ -539,17 +809,25 @@ interface IndexedIterator[E]
 end
 
 # Associative arrays that internally uses couples to represent each (key, value) pairs.
+# This is an helper class that some specific implementation of Map may implements.
 interface CoupleMap[K: Object, E]
 	super Map[K, E]
+
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
 	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
+
+	# Return a new iteralot on all couples
+	# Used to provide `iterator` and others
+	protected fun couple_iterator: Iterator[Couple[K,E]] is abstract
+
+	redef fun iterator do return new CoupleMapIterator[K,E](couple_iterator)
 
 	redef fun [](key)
 	do
 		var c = couple_at(key)
 		if c == null then
-			abort
+			return provide_default_value(key)
 		else
 			return c.second
 		end
@@ -558,8 +836,8 @@ end
 
 # Iterator on CoupleMap
 #
-# Actually is is a wrapper around an iterator of the internal array of the map.
-class CoupleMapIterator[K: Object, E]
+# Actually it is a wrapper around an iterator of the internal array of the map.
+private class CoupleMapIterator[K: Object, E]
 	super MapIterator[K, E]
 	redef fun item do return _iter.item.second
 	
@@ -570,7 +848,7 @@ class CoupleMapIterator[K: Object, E]
 	redef fun is_ok do return _iter.is_ok
 
 	redef fun next
-	do 
+	do
 		_iter.next
 	end
 

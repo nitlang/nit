@@ -1,0 +1,3 @@
+Usage: nitls [OPTION]... <file.nit|directory>...
+Lists the projects and/or paths of Nit sources files.
+Use --help for help

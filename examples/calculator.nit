@@ -27,7 +27,12 @@ class CalculatorContext
 	fun push_op( op : Char )
 	do
 		apply_last_op_if_any
-		last_op = op # store for next push_op
+		if op == 'C' then
+			self.result = 0.0
+			last_op = null
+		else
+			last_op = op # store for next push_op
+		end
 
 		# prepare next current
 		after_point = null
@@ -44,7 +49,7 @@ class CalculatorContext
 			current = current * 10.0 + digit.to_f
 		else
 			current = current + digit.to_f * 10.0.pow(after_point.to_f)
-			after_point -= 1
+			self.after_point -= 1
 		end
 
 		self.current = current
@@ -52,6 +57,7 @@ class CalculatorContext
 
 	fun switch_to_decimals
 	do
+		if self.current == null then current = 0.0
 		if after_point != null then return
 
 		after_point = -1
@@ -91,23 +97,49 @@ class CalculatorGui
 
 	var lbl_disp : GtkLabel
 	var but_eq : GtkButton
+	var but_dot : GtkButton
 
 	var context = new CalculatorContext
 
 	redef fun signal( sender, user_data )
 	do
+		var after_point = context.after_point
+		if after_point == null then 
+		    after_point = 0
+		else
+		    after_point = (after_point.abs)
+		end
+		
 		if user_data isa Char then # is an operation
 			var c = user_data
 			if c == '.' then
+				but_dot.sensitive= false
 				context.switch_to_decimals
+				lbl_disp.text = "{context.current.to_i}."
 			else
+				but_dot.sensitive= true
 				context.push_op( c )
-				lbl_disp.text = context.result.to_s
+				
+				var s = context.result.to_precision_native(6)
+				var index : nullable Int = null
+				for i in s.length.times do
+				    var chiffre = s[i]
+				    if chiffre == '0' and index == null then
+					index = i
+				    else if chiffre != '0' then
+					index = null
+				    end
+				end
+				if index != null then
+					s = s.substring(0, index)
+					if s[s.length-1] == ',' then s = s.substring(0, s.length-1)
+				end
+				lbl_disp.text = s
 			end
 		else if user_data isa Int then # is a number
 			var n = user_data
 			context.push_digit( n )
-			lbl_disp.text = context.current.to_s
+			lbl_disp.text = context.current.to_precision_native(after_point)
 		end
 	end
 
@@ -117,7 +149,7 @@ class CalculatorGui
 
 		win = new GtkWindow( 0 )
 
-		container = new GtkGrid(2,1,true)
+		container = new GtkGrid(5,5,true)
 		win.add( container )
 
 		lbl_disp = new GtkLabel( "_" )
@@ -139,7 +171,7 @@ class CalculatorGui
 			var but = new GtkButton.with_label( op.to_s )
 			but.request_size( 64, 64 )
 			but.signal_connect( "clicked", self, op )
-			container.attach( but, 4, r, 1, 1 )
+			container.attach( but, 3, r, 1, 1 )
 			r+=1
 		end
 
@@ -147,13 +179,19 @@ class CalculatorGui
 		but_eq = new GtkButton.with_label( "=" )
 		but_eq.request_size( 64, 64 )
 		but_eq.signal_connect( "clicked", self, '=' )
-		container.attach( but_eq, 5, 3, 1, 2 )
+		container.attach( but_eq, 4, 3, 1, 2 )
 
 		# .
-		var but_dot = new GtkButton.with_label( "." )
+		but_dot = new GtkButton.with_label( "." )
 		but_dot.request_size( 64, 64 )
 		but_dot.signal_connect( "clicked", self, '.' )
 		container.attach( but_dot, 1, 4, 1, 1 )
+
+		#C
+		var but_c =  new GtkButton.with_label( "C" )
+		but_c.request_size( 64, 64 )
+		but_c.signal_connect("clicked", self, 'C')
+		container.attach( but_c, 2, 4, 1, 1 )
 
 		win.show_all
 	end
@@ -199,6 +237,32 @@ context.push_digit( 3 )
 context.push_op( '=' )
 r = context.result.to_precision( 2 )
 assert r == "14.10" else print r
+
+#test multiple decimals
+context = new CalculatorContext
+context.push_digit( 5 )
+context.push_digit( 0 )
+context.switch_to_decimals
+context.push_digit( 1 )
+context.push_digit( 2 )
+context.push_digit( 3 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_op( '=' )
+r = context.result.to_precision( 3 )
+assert r == "51.123" else print r
+
+#test 'C' button
+context = new CalculatorContext
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '=' )
+context.push_op( 'C' )
+r = context.result.to_precision( 1 )
+assert r == "0.0" else print r
 
 # graphical application
 

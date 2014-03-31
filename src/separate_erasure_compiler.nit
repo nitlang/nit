@@ -32,7 +32,7 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
+	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: nullable RapidTypeAnalysis)
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** GENERATING C ***", 1)
@@ -76,7 +76,7 @@ class SeparateErasureCompiler
 	private var class_layout: nullable Layout[MClass]
 	protected var vt_layout: nullable Layout[MVirtualTypeProp]
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
@@ -219,6 +219,7 @@ class SeparateErasureCompiler
 	do
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
+		var c_instance_name = mclass.c_instance_name
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
@@ -282,17 +283,19 @@ class SeparateErasureCompiler
 		v.add_decl("\};")
 
 		if mtype.ctype != "val*" then
-			#Build instance struct
-			self.header.add_decl("struct instance_{c_name} \{")
-			self.header.add_decl("const struct class *class;")
-			self.header.add_decl("{mtype.ctype} value;")
-			self.header.add_decl("\};")
+			if mtype.mclass.name == "Pointer" or mtype.mclass.kind != extern_kind then
+				#Build instance struct
+				self.header.add_decl("struct instance_{c_instance_name} \{")
+				self.header.add_decl("const struct class *class;")
+				self.header.add_decl("{mtype.ctype} value;")
+				self.header.add_decl("\};")
+			end
 
 			#Build BOX
-			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
+			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
+			v.add("struct instance_{c_instance_name}*res = nit_alloc(sizeof(struct instance_{c_instance_name}));")
 			v.require_declaration("class_{c_name}")
 			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
@@ -333,8 +336,6 @@ class SeparateErasureCompiler
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
-
-		generate_check_init_instance(mtype)
 	end
 
 	private fun build_class_vts_table(mclass: MClass): Bool do
@@ -600,11 +601,10 @@ class SeparateErasureCompilerVisitor
 		self.add("{nat} = NEW_{nclass.c_name}({array.length});")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], self.object_type)
-			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
+			self.add("((struct instance_{nclass.c_instance_name}*){nat})->values[{i}] = (val*) {r};")
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end

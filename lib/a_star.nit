@@ -17,39 +17,42 @@
 # Services related to pathfinding of graphs using A*
 # A single graph may have different properties according to the `PathContext` used
 #
+#
 # Usage:
 #
-#    # Weighted graph (letters are nodes, digits are weights):
-#    #
-#    #     a -2- b
-#    #    /     /
-#    #   3     1
-#    #  /     /
-#    # c -3- d -8- e
-#    #
-#    var graph = new Graph[Node,WeigthedLink[Node]]
+# ~~~
+# # Weighted graph (letters are nodes, digits are weights):
+# #
+# #     a -2- b
+# #    /     /
+# #   3     1
+# #  /     /
+# # c -3- d -8- e
+# #
+# var graph = new Graph[Node,WeigthedLink[Node]]
 #
-#    var na = new Node(graph)
-#    var nb = new Node(graph)
-#    var nc = new Node(graph)
-#    var nd = new Node(graph)
-#    var ne = new Node(graph)
+# var na = new Node(graph)
+# var nb = new Node(graph)
+# var nc = new Node(graph)
+# var nd = new Node(graph)
+# var ne = new Node(graph)
 #
-#    var lab = new WeightedLink(graph, na, nb, 2)
-#    var lac = new WeightedLink(graph, na, nc, 3)
-#    var lbd = new WeightedLink(graph, nb, nd, 1)
-#    var lcd = new WeightedLink(graph, nc, nd, 3)
-#    var lde = new WeightedLink(graph, nd, ne, 8)
+# var lab = new WeightedLink(graph, na, nb, 2)
+# var lac = new WeightedLink(graph, na, nc, 3)
+# var lbd = new WeightedLink(graph, nb, nd, 1)
+# var lcd = new WeightedLink(graph, nc, nd, 3)
+# var lde = new WeightedLink(graph, nd, ne, 8)
 #
-#    var context = new WeightedPathContext(graph)
+# var context = new WeightedPathContext(graph)
 #
-#    var path = na.path_to(ne, 100, context)
-#    assert path != null else print "No possible path"
+# var path = na.path_to(ne, 100, context)
+# assert path != null else print "No possible path"
 #
-#    assert path.step == nb
-#    assert path.step == nd
-#    assert path.step == ne
-#    assert path.at_end_of_path
+# assert path.step == nb
+# assert path.step == nd
+# assert path.step == ne
+# assert path.at_end_of_path
+# ~~~
 module a_star
 
 redef class Object
@@ -79,28 +82,27 @@ class Node
 	private var last_pathfinding_evocation: Int = 0
 
 	# cost up to in current evocation
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var best_cost_up_to: Int = 0
 
 	# source node
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var best_source: nullable N = null
 
 	# is in frontier or buckets
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var open: Bool = false
 
-
 	# Main functionnality, returns path from `self` to `dest`
-	fun path_to(dest: Node, max_cost: Int, context: PathContext): nullable Path[N]
+	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable Path[N]
 	do
 		var cost = 0
 
 		var nbr_buckets = context.worst_cost + context.worst_heuristic_cost + 1
-		var buckets = new Array[List[Node]].with_capacity(nbr_buckets)
+		var buckets = new Array[List[N]].with_capacity(nbr_buckets)
 
 		for i in [0 .. nbr_buckets[ do
-			buckets.add(new List[Node])
+			buckets.add(new List[N])
 		end
 
 		graph.pathfinding_current_evocation += 1
@@ -112,7 +114,7 @@ class Node
 		self.best_cost_up_to = 0
 
 		loop
-			var frontier_node: nullable Node = null
+			var frontier_node: nullable N = null
 
 			var bucket_searched: Int = 0
 

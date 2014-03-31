@@ -24,6 +24,7 @@ import rapid_type_analysis
 import global_compiler
 import separate_erasure_compiler
 import separate_compiler
+import android_platform
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -35,8 +36,10 @@ toolcontext.option_context.add_option(opt_global)
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
 
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+
 # We do not add other options, so process them now!
-toolcontext.process_options
+toolcontext.process_options(args)
 
 # We need a model to collect stufs
 var model = new Model
@@ -44,14 +47,10 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
-if arguments.is_empty then
-	toolcontext.option_context.usage
-	return
-end
 if arguments.length > 1 then
 	print "Too much arguments: {arguments.join(" ")}"
-	toolcontext.option_context.usage
-	return
+	print toolcontext.tooldescription
+	exit 1
 end
 var progname = arguments.first
 
@@ -70,12 +69,18 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
-var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+var platform = mainmodule.target_platform
+if platform != null and not platform.supports_libunwind then
+	toolcontext.opt_no_stacktrace.value = true
+	toolcontext.opt_stacktrace.value = false
+end
 
 if toolcontext.opt_erasure.value then
-	modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
+	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
 else if opt_global.value then
+	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_global_compiler(mainmodule, analysis)
 else
+	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_separate_compiler(mainmodule, analysis)
 end

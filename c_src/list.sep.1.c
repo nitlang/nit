@@ -10,7 +10,7 @@ var1 = ((val* (*)(val*, long))(self->class->vft[COLOR_list__List__get_node]))(se
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 22);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Container__item]))(var1) /* item on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -58,7 +58,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 24);
-exit(1);
+show_backtrace(1);
 }
 var_index = p0;
 var_item = p1;
@@ -66,7 +66,7 @@ var1 = ((val* (*)(val*, long))(self->class->vft[COLOR_list__List__get_node]))(se
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 24);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__Container__item_61d]))(var1, var_item) /* item= on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -86,7 +86,7 @@ var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 27);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Container__item]))(var1) /* item on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -133,14 +133,14 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 29);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 30);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__Container__item_61d]))(var1, var_e) /* item= on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -160,7 +160,7 @@ var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 33);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Container__item]))(var1) /* item on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -207,14 +207,14 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 35);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 36);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__Container__item_61d]))(var1, var_e) /* item= on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -337,7 +337,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 55);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
@@ -400,7 +400,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 58);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
@@ -486,7 +486,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 68);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = 0;
@@ -605,7 +605,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_from >= var2;
 var3 = var6;
@@ -623,7 +623,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_from < var7;
 var8 = var14;
@@ -637,7 +637,7 @@ var1 = var_;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 81);
-exit(1);
+show_backtrace(1);
 }
 var17 = 0;
 { /* Inline kernel#Int#>= (var_to,var17) */
@@ -648,7 +648,7 @@ if (!var20) {
 var_class_name23 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var24 = var_to >= var17;
 var18 = var24;
@@ -666,7 +666,7 @@ if (!var29) {
 var_class_name32 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var33 = var_to < var26;
 var27 = var33;
@@ -687,7 +687,7 @@ if (!var37) {
 var_class_name40 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var41 = var_from <= var_to;
 var35 = var41;
@@ -701,11 +701,10 @@ var15 = var_34;
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 82);
-exit(1);
+show_backtrace(1);
 }
 var42 = NEW_list__List(self->type->resolution_table->types[COLOR_list__Listlist__List_FT0]);
 ((void (*)(val*))(var42->class->vft[COLOR_list__List__init]))(var42) /* init on <var42:List[nullable Object]>*/;
-CHECK_NEW_list__List(var42);
 var_list = var42;
 for(;;) {
 { /* Inline kernel#Int#<= (var_from,var_to) */
@@ -716,7 +715,7 @@ if (!var45) {
 var_class_name48 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var49 = var_from <= var_to;
 var43 = var49;
@@ -786,12 +785,11 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 93);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = NEW_list__ListNode(self->type->resolution_table->types[COLOR_list__ListNodelist__List_FT0]);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_list__ListNode__init]))(var1, var_e) /* init on <var1:ListNode[nullable Object]>*/;
-CHECK_NEW_list__ListNode(var1);
 var_node = var1;
 var2 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 var3 = NULL;
@@ -807,7 +805,7 @@ var5 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 100);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var5->class->vft[COLOR_list__ListNode__next_61d]))(var5, var_node) /* next= on <var5:nullable ListNode[nullable Object]>*/;
 }
@@ -857,12 +855,11 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 106);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = NEW_list__ListNode(self->type->resolution_table->types[COLOR_list__ListNodelist__List_FT0]);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_list__ListNode__init]))(var1, var_e) /* init on <var1:ListNode[nullable Object]>*/;
-CHECK_NEW_list__ListNode(var1);
 var_node = var1;
 var2 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 var3 = NULL;
@@ -880,7 +877,7 @@ var6 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 114);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var6->class->vft[COLOR_list__ListNode__prev_61d]))(var6, var_node) /* prev= on <var6:nullable ListNode[nullable Object]>*/;
 }
@@ -928,7 +925,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "List[List#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 119);
-exit(1);
+show_backtrace(1);
 }
 var_l = p0;
 var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
@@ -955,7 +952,7 @@ var9 = var_l->attrs[COLOR_list__List___head].val; /* _head on <var_l:List[nullab
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 127);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var8->class->vft[COLOR_list__ListNode__next_61d]))(var8, var9) /* next= on <var8:nullable ListNode[nullable Object]>*/;
 }
@@ -963,7 +960,7 @@ var10 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullabl
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 128);
-exit(1);
+show_backtrace(1);
 } else {
 var11 = ((val* (*)(val*))(var10->class->vft[COLOR_list__ListNode__next]))(var10) /* next on <var10:nullable ListNode[nullable Object]>*/;
 }
@@ -971,7 +968,7 @@ var12 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullabl
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 128);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var11->class->vft[COLOR_list__ListNode__prev_61d]))(var11, var12) /* prev= on <var11:nullable ListNode[nullable Object]>*/;
 }
@@ -1007,7 +1004,7 @@ var_node = var1;
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 140);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1016,7 +1013,7 @@ var3 = NULL;
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 141);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_list__ListNode__prev_61d]))(var_node, var3) /* prev= on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1036,7 +1033,7 @@ var9 = NULL;
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 145);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var8->class->vft[COLOR_list__ListNode__next_61d]))(var8, var9) /* next= on <var8:nullable ListNode[nullable Object]>*/;
 }
@@ -1044,7 +1041,7 @@ exit(1);
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 147);
-exit(1);
+show_backtrace(1);
 } else {
 var10 = ((val* (*)(val*))(var_node->class->vft[COLOR_abstract_collection__Container__item]))(var_node) /* item on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1081,7 +1078,7 @@ var_node = var1;
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 154);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var_node) /* next on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1090,7 +1087,7 @@ var3 = NULL;
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 155);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_list__ListNode__next_61d]))(var_node, var3) /* next= on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1110,7 +1107,7 @@ var9 = NULL;
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 159);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var8->class->vft[COLOR_list__ListNode__prev_61d]))(var8, var9) /* prev= on <var8:nullable ListNode[nullable Object]>*/;
 }
@@ -1118,7 +1115,7 @@ exit(1);
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 161);
-exit(1);
+show_backtrace(1);
 } else {
 var10 = ((val* (*)(val*))(var_node->class->vft[COLOR_abstract_collection__Container__item]))(var_node) /* item on <var_node:nullable ListNode[nullable Object]>*/;
 }
@@ -1169,7 +1166,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 164);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
@@ -1240,7 +1237,6 @@ val* var /* : ListIterator[nullable Object] */;
 val* var1 /* : ListIterator[nullable Object] */;
 var1 = NEW_list__ListIterator(self->type->resolution_table->types[COLOR_list__ListIteratorlist__List_FT0]);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_list__ListIterator__init]))(var1, self) /* init on <var1:ListIterator[nullable Object]>*/;
-CHECK_NEW_list__ListIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1286,7 +1282,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[List#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 188);
-exit(1);
+show_backtrace(1);
 }
 var_coll = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__Sequence__append]))(self, var_coll) /* append on <self:List[nullable Object]>*/;
@@ -1338,7 +1334,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_i < var2;
 var3 = var6;
@@ -1369,7 +1365,7 @@ if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var18 = var_i > var11;
 var12 = var18;
@@ -1451,7 +1447,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "List#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 211);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (after) <p1:nullable ListNode[nullable Object]> isa nullable ListNode[List#0] */
 /* <p1:nullable ListNode[nullable Object]> isa nullable ListNode[List#0] */
@@ -1471,7 +1467,7 @@ if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[List#0]", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 211);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var_after = p1;
@@ -1557,7 +1553,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ListNode[List#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 219);
-exit(1);
+show_backtrace(1);
 }
 var_node = p0;
 var1 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:ListNode[nullable Object]>*/;
@@ -1586,7 +1582,7 @@ var10 = NULL;
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 227);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var9->class->vft[COLOR_list__ListNode__prev_61d]))(var9, var10) /* prev= on <var9:nullable ListNode[nullable Object]>*/;
 }
@@ -1607,7 +1603,7 @@ var16 = NULL;
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 231);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var15->class->vft[COLOR_list__ListNode__next_61d]))(var15, var16) /* next= on <var15:nullable ListNode[nullable Object]>*/;
 }
@@ -1617,7 +1613,7 @@ var18 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 233);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var17->class->vft[COLOR_list__ListNode__next_61d]))(var17, var18) /* next= on <var17:nullable ListNode[nullable Object]>*/;
 }
@@ -1626,7 +1622,7 @@ var20 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 234);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var19->class->vft[COLOR_list__ListNode__prev_61d]))(var19, var20) /* prev= on <var19:nullable ListNode[nullable Object]>*/;
 }
@@ -1679,7 +1675,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "List#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 238);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (node) <p1:ListNode[nullable Object]> isa ListNode[List#0] */
 /* <p1:ListNode[nullable Object]> isa ListNode[List#0] */
@@ -1695,13 +1691,12 @@ if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ListNode[List#0]", var_class_name5);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 238);
-exit(1);
+show_backtrace(1);
 }
 var_element = p0;
 var_node = p1;
 var6 = NEW_list__ListNode(self->type->resolution_table->types[COLOR_list__ListNodelist__List_FT0]);
 ((void (*)(val*, val*))(var6->class->vft[COLOR_list__ListNode__init]))(var6, var_element) /* init on <var6:ListNode[nullable Object]>*/;
-CHECK_NEW_list__ListNode(var6);
 var_nnode = var6;
 var7 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:ListNode[nullable Object]>*/;
 var_prev = var7;
@@ -1735,7 +1730,7 @@ var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListI
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 256);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Container__item]))(var1) /* item on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -1782,14 +1777,14 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ListIterator#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 258);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 258);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__Container__item_61d]))(var1, var_e) /* item= on <var1:nullable ListNode[nullable Object]>*/;
 }
@@ -1842,7 +1837,7 @@ var = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIt
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 264);
-exit(1);
+show_backtrace(1);
 } else {
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_list__ListNode__next]))(var) /* next on <var:nullable ListNode[nullable Object]>*/;
 }
@@ -1888,7 +1883,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "List[ListIterator#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 268);
-exit(1);
+show_backtrace(1);
 }
 var_list = p0;
 self->attrs[COLOR_list__ListIterator___list].val = var_list; /* _list on <self:ListIterator[nullable Object]> */
@@ -1929,13 +1924,13 @@ var = self->attrs[COLOR_list__ListIterator___list].val; /* _list on <self:ListIt
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _list");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 288);
-exit(1);
+show_backtrace(1);
 }
 var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 288);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var->class->vft[COLOR_list__List__remove_node]))(var, var1) /* remove_node on <var:List[nullable Object]>*/;
 RET_LABEL:;
@@ -1975,20 +1970,20 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ListIterator#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 291);
-exit(1);
+show_backtrace(1);
 }
 var_element = p0;
 var1 = self->attrs[COLOR_list__ListIterator___list].val; /* _list on <self:ListIterator[nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _list");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 294);
-exit(1);
+show_backtrace(1);
 }
 var2 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 294);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_list__List__insert_before]))(var1, var_element, var2) /* insert_before on <var1:List[nullable Object]>*/;
 RET_LABEL:;
@@ -2026,7 +2021,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ListNode#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 301);
-exit(1);
+show_backtrace(1);
 }
 var_i = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__Container__init]))(self, p0) /* init on <self:ListNode[nullable Object]>*/;
@@ -2081,7 +2076,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[ListNode#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 306);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_list__ListNode___next].val = p0; /* _next on <self:ListNode[nullable Object]> */
 RET_LABEL:;
@@ -2134,7 +2129,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[ListNode#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 309);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_list__ListNode___prev].val = p0; /* _prev on <self:ListNode[nullable Object]> */
 RET_LABEL:;

@@ -47,7 +47,7 @@ end
 #alt2#for i in new Collection[Int] do i.output
 #alt3#var s = "str"
 #alt4#var s2 = "str{5}str"
-#alt5#var r = [1..10]
+#alt5# #var r = [1..10] # DISABLE
 #alt6#var r = [1..10[
 #alt7#fun foo(x: Int...) do end
 #alt7#foo(1, 2, 3)

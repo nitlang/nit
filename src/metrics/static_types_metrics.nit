@@ -23,12 +23,12 @@ import modelize_class
 import frontend
 
 redef class ToolContext
-	var static_types_metrics_phase = new StaticTypesMetricsPhase(self, null)
+	var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)
 end
 
 private class StaticTypesMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_static_types.value and not toolcontext.opt_all.value then return
 		compute_static_types_metrics(toolcontext.modelbuilder)
@@ -79,8 +79,8 @@ do
 
 	# Display data
 	print "--- Metrics of the explitic static types ---"
-	print "Total number of explicit static types: {typecount.total}"
-	if typecount.total == 0 then return
+	print "Total number of explicit static types: {typecount.sum}"
+	if typecount.sum == 0 then return
 
 	print "Statistics of type usage:"
 	typecount.print_summary

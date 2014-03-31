@@ -15,6 +15,13 @@ module stream
 
 import string
 
+in "C" `{
+	#include <unistd.h>
+	#include <poll.h>
+	#include <errno.h>
+	#include <string.h>
+`}
+
 # Abstract stream class
 interface IOS
 	# close the stream
@@ -30,7 +37,7 @@ interface IStream
 	# Read at most i bytes
 	fun read(i: Int): String
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
 			if c >= 0 then
@@ -45,7 +52,7 @@ interface IStream
 	fun read_line: String
 	do
 		assert not eof
-		var s = new Buffer
+		var s = new FlatBuffer
 		append_line_to(s)
 		return s.to_s
 	end
@@ -53,7 +60,7 @@ interface IStream
 	# Read all the stream until the eof.
 	fun read_all: String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
 			if c >= 0 then s.add(c.ascii)
@@ -70,13 +77,14 @@ interface IStream
 				if eof then return
 			else
 				var c = x.ascii
-				s.push(c)
+				s.chars.push(c)
 				if c == '\n' then return
 			end
 		end
 	end
 
 	# Is there something to read.
+	# This function returns 'false' if there is something to read.
 	fun eof: Bool is abstract
 end
 
@@ -88,6 +96,35 @@ interface OStream
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
+end
+
+# Things that can be efficienlty writen to a OStream
+#
+# The point of this interface it to allow is instance to be efficenty
+# writen into a OStream without having to allocate a big String object
+#
+# ready-to-save documents usually provide this interface.
+interface Streamable
+	# Write itself to a `stream`
+	# The specific logic it let to the concrete subclasses
+	fun write_to(stream: OStream) is abstract
+
+	# Like `write_to` but return a new String (may be quite large)
+	#
+	# This funtionnality is anectodical, since the point
+	# of streamable object to to be efficienlty written to a
+	# stream without having to allocate and concatenate strings
+	fun write_to_string: String
+	do
+		var stream = new StringOStream
+		write_to(stream)
+		return stream.to_s
+	end
+end
+
+redef class String
+	super Streamable
+	redef fun write_to(stream) do stream.write(self)
 end
 
 # Input streams with a buffer
@@ -102,14 +139,14 @@ abstract class BufferedIStream
 		if _buffer_pos >= _buffer.length then
 			return -1
 		end
-		var c = _buffer[_buffer_pos]
+		var c = _buffer.chars[_buffer_pos]
 		_buffer_pos += 1
 		return c.ascii
 	end
 
 	redef fun read(i)
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		var j = _buffer_pos
 		var k = _buffer.length
 		while i > 0 do
@@ -120,7 +157,7 @@ abstract class BufferedIStream
 				k = _buffer.length
 			end
 			while j < k and i > 0 do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j +=  1
 				i -= 1
 			end
@@ -131,12 +168,12 @@ abstract class BufferedIStream
 
 	redef fun read_all
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -150,7 +187,7 @@ abstract class BufferedIStream
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer[i] != '\n' do i += 1
+			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
 			# if there is something to append
 			if i > _buffer_pos then
@@ -160,7 +197,7 @@ abstract class BufferedIStream
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer[j])
+					s.add(_buffer.chars[j])
 					j += 1
 				end
 			end
@@ -184,7 +221,7 @@ abstract class BufferedIStream
 	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	var _buffer: nullable Buffer = null
+	var _buffer: nullable FlatBuffer = null
 
 	# The current position in the buffer
 	var _buffer_pos: Int = 0
@@ -198,7 +235,7 @@ abstract class BufferedIStream
 	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
-		_buffer = new Buffer.with_capacity(capacity)
+		_buffer = new FlatBuffer.with_capacity(capacity)
 		_buffer_pos = 0 # need to read
 	end
 end
@@ -294,5 +331,65 @@ redef interface Object
 		end
 	end
 
-	private fun intern_poll( in_fds : Array[Int], out_fds : Array[Int] ) : nullable Int is extern import Array::length, Array::[], nullable Object as ( Int ), Int as nullable
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+		int in_len, out_len, total_len;
+		struct pollfd *c_fds;
+		sigset_t sigmask;
+		int i;
+		int first_polled_fd = -1;
+		int result;
+
+		in_len = Array_of_Int_length( in_fds );
+		out_len = Array_of_Int_length( out_fds );
+		total_len = in_len + out_len;
+		c_fds = malloc( sizeof(struct pollfd) * total_len );
+
+		/* input streams */
+		for ( i=0; i<in_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( in_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLIN;
+		}
+
+		/* output streams */
+		for ( i=0; i<out_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( out_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLOUT;
+		}
+
+		/* poll all fds, unlimited timeout */
+		result = poll( c_fds, total_len, -1 );
+
+		if ( result > 0 ) {
+			/* analyse results */
+			for ( i=0; i<total_len; i++ )
+				if ( c_fds[i].revents & c_fds[i].events || /* awaited event */
+					 c_fds[i].revents & POLLHUP ) /* closed */
+				{
+					first_polled_fd = c_fds[i].fd;
+					break;
+				}
+
+			return Int_as_nullable( first_polled_fd );
+		}
+		else if ( result < 0 )
+			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+
+		return null_Int();
+	`}
+end
+
+# Stream to a String. Mainly used for compatibility with OStream type and tests.
+class StringOStream
+	super OStream
+
+	private var content = new Array[String]
+	redef fun to_s do return content.to_s
+	redef fun is_writable do return true
+	redef fun write(str) do content.add(str)
 end

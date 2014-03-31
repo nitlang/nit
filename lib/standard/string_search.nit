@@ -4,7 +4,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -20,14 +20,35 @@ interface Pattern
 	# Search `self` into `s` from a certain position.
 	# Return the position of the first character of the matching section.
 	# Return -1 if not found.
-	fun search_index_in(s: String, from: Int): Int is abstract
+	#
+	#     assert 'l'.search_index_in("hello world", 0)  == 2
+	#     assert 'l'.search_index_in("hello world", 3)  == 3
+	#     assert 'z'.search_index_in("hello world", 0)  == -1
+	#
+	# This method is usually faster than `search_in` if what is
+	# required is only the index.
+	# Note: in most implementation, `search_in` is implemented with this method.
+	protected fun search_index_in(s: String, from: Int): Int is abstract
 
 	# Search `self` into `s` from a certain position.
 	# Return null if not found.
-	fun search_in(s: String, from: Int): nullable Match is abstract
+	#
+	#     assert 'l'.search_in("hello world", 0).from  == 2
+	#     assert 'l'.search_in("hello world", 3).from  == 3
+	#     assert 'z'.search_in("hello world", 0)       == null
+	#
+	# If only the index of the first character if required, see `search_index_in`.
+	#
+	# Note: Is used by `String::search`, `String::search_from`, and others.
+	protected fun search_in(s: String, from: Int): nullable Match is abstract
 
 	# Search all `self` occurrences into `s`.
-	fun search_all_in(s: String): Array[Match]
+	#
+	#     assert 'l'.search_all_in("hello world").length  == 3
+	#     assert 'z'.search_all_in("hello world").length  == 0
+	#
+	# Note: Is used by `String::search_all`.
+	protected fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var match = search_in(s, 0)
@@ -39,7 +60,15 @@ interface Pattern
 	end
 
 	# Split `s` using `self` is separator.
-	fun split_in(s: String): Array[Match]
+	#
+	# Returns an array of matches that are between each occurence of `self`.
+	# If self is not present, an array with a single match on `s` is retunred.
+	#
+	#     assert 'l'.split_in("hello world").join("|")  == "he||o wor|d"
+	#     assert 'z'.split_in("hello world").join("|")  == "hello world"
+	#
+	# Note: is used by `String::split`
+	protected fun split_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var i = 0 # Cursor
@@ -61,6 +90,10 @@ end
 # (cf. A Fast String Searching Algorithm, with R.S. Boyer.  Communications
 # of the Association for Computing Machinery, 20(10), 1977, pp. 762-772.)
 # http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
+#
+#     var pat = new BM_Pattern("hello")
+#     assert "I say hello to the world!".search(pat).from  == 6
+#     assert "I say goodbye to the world!".search(pat)     == null
 class BM_Pattern
 	super Pattern
 
@@ -76,12 +109,12 @@ class BM_Pattern
 		var j = from
 		while j < n - m + 1 do
 			var i = m - 1 # Cursor in the pattern
-			while i >= 0 and _motif[i] == s[i + j] do i -= 1
+			while i >= 0 and _motif.chars[i] == s.chars[i + j] do i -= 1
 			if i < 0 then
 				return j
 			else
 				var gs = _gs[i] # Good shift
-				var bc = bc(s[i+j]) - m + 1 + i # Bad char
+				var bc = bc(s.chars[i+j]) - m + 1 + i # Bad char
 				# Both are true, do move to the best
 				if gs > bc then
 					j += gs
@@ -122,7 +155,7 @@ class BM_Pattern
 	var _length: Int
 
 	private fun bc(e: Char): Int
-	do 
+	do
 		if _bc_table.has_key(e) then
 			return _bc_table[e]
 		else
@@ -142,7 +175,7 @@ class BM_Pattern
 		var m = _length
 		var i = 0
 		while i < m - 1 do
-			_bc_table[x[i]] = m - i - 1
+			_bc_table[x.chars[i]] = m - i - 1
 			i += 1
 		end
 	end
@@ -162,7 +195,7 @@ class BM_Pattern
 			else
 				if i < g then g = i
 				f = i
-				while g >= 0 and x[g] == x[g + m - 1 - f] do g -= 1
+				while g >= 0 and x.chars[g] == x.chars[g + m - 1 - f] do g -= 1
 				suff[i] = f - g
 			end
 			i -= 1
@@ -202,7 +235,7 @@ class BM_Pattern
 	redef fun ==(o) do return o isa BM_Pattern and o._motif == _motif
 end
 
-# Matches are a part of a string.
+# Matches are a part of a `String` found ba a `Pattern`.
 class Match
 	# The base string matched
 	readable var _string: String
@@ -239,7 +272,7 @@ redef class Char
 	do
 		var stop = s.length
 		while from < stop do
-			if s[from] == self then return from
+			if s.chars[from] == self then return from
 			from += 1
 		end
 		return -1
@@ -265,7 +298,7 @@ redef class String
 		var stop = s.length - length + 1
 		while from < stop do
 			var i = length - 1
-			while i >= 0 and self[i] == s[i + from] do i -= 1
+			while i >= 0 and self.chars[i] == s.chars[i + from] do i -= 1
 			# Test if we found
 			if i < 0 then return from
 			# Not found so try next one
@@ -284,12 +317,19 @@ redef class String
 		end
 	end
 
-	# Like `search_from` but from the first character.
+	# Search the first occurence of the pattern `p`.
+	# Return null if not found.
+	#
+	#     assert "I say hello to the world!".search("hello").from  == 6
+	#     assert "I say goodbye to the world!".search("hello")     == null
 	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
-	# Search the given pattern into self from a.
+	# Search the first occurence of the pattern `p` after `from`.
 	# The search starts at `from`.
 	# Return null if not found.
+	#
+	#     assert "I say hello to the world!".search_from("hello",4).from  == 6
+	#     assert "I say hello to the world!".search_from("hello",7)       == null
 	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
 	# Search all occurrences of p into self.
@@ -324,16 +364,16 @@ redef class String
 		return self.split_with(p).join(string)
 	end
 
-	# Escape the four characters < > & and " with their html counterpart
+	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
 	#
 	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
 	fun html_escape: String
 	do
 		var ret = self
-		if ret.has('&') then ret = ret.replace('&', "&amp;")
-		if ret.has('<') then ret = ret.replace('<', "&lt;")
-		if ret.has('>') then ret = ret.replace('>', "&gt;")
-		if ret.has('"') then ret = ret.replace('"', "&quot;")
+		if ret.chars.has('&') then ret = ret.replace('&', "&amp;")
+		if ret.chars.has('<') then ret = ret.replace('<', "&lt;")
+		if ret.chars.has('>') then ret = ret.replace('>', "&gt;")
+		if ret.chars.has('"') then ret = ret.replace('"', "&quot;")
 		return ret
 	end
 end

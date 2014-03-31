@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_simple_misc_analysis__ToolContext___64dsimple_misc_anal
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @simple_misc_analysis_phase");
 fprintf(stderr, " (%s:%d)\n", "src/simple_misc_analysis.nit", 29);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -54,7 +54,6 @@ val* var_v /* var v: SimpleMiscVisitor */;
 var_toolcontext = p0;
 var = NEW_simple_misc_analysis__SimpleMiscVisitor(&type_simple_misc_analysis__SimpleMiscVisitor);
 ((void (*)(val*, val*))(var->class->vft[COLOR_simple_misc_analysis__SimpleMiscVisitor__init]))(var, var_toolcontext) /* init on <var:SimpleMiscVisitor>*/;
-CHECK_NEW_simple_misc_analysis__SimpleMiscVisitor(var);
 var_v = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:SimpleMiscVisitor>*/;
 RET_LABEL:;
@@ -112,7 +111,7 @@ var1 = self->attrs[COLOR_simple_misc_analysis__SimpleMiscVisitor___64dtoolcontex
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/simple_misc_analysis.nit", 57);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -516,7 +515,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var5 = var > var1;
 var2 = var5;

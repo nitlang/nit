@@ -150,12 +150,66 @@ redef class ModelBuilder
 		nclassdef.mfree_init = mpropdef
 		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
 	end
+
+	# Check the visibility of `mtype` as an element of the signature of `mpropdef`.
+	fun check_visibility(node: ANode, mtype: MType, mpropdef: MPropDef)
+	do
+		var mmodule = mpropdef.mclassdef.mmodule
+		var mproperty = mpropdef.mproperty
+
+		# Extract visibility information of the main part of `mtype`
+		# It is a case-by case
+		var vis_type: nullable MVisibility = null # The own visibility of the type
+		var mmodule_type: nullable MModule = null # The origial module of the type
+		if mtype isa MNullableType then mtype = mtype.mtype
+		if mtype isa MClassType then
+			vis_type = mtype.mclass.visibility
+			mmodule_type = mtype.mclass.intro.mmodule
+		else if mtype isa MVirtualType then
+			vis_type = mtype.mproperty.visibility
+			mmodule_type = mtype.mproperty.intro_mclassdef.mmodule
+		else if mtype isa MParameterType then
+			# nothing, always visible
+		else
+			node.debug "Unexpected type {mtype}"
+			abort
+		end
+
+		if vis_type != null then
+			assert mmodule_type != null
+			var vis_module_type = mmodule.visibility_for(mmodule_type) # the visibility of the original module
+			if mproperty.visibility > vis_type then
+				error(node, "Error: The {mproperty.visibility} property `{mproperty}` cannot contain the {vis_type} type `{mtype}`")
+				return
+			else if mproperty.visibility > vis_module_type then
+				error(node, "Error: The {mproperty.visibility} property `{mproperty}` cannot contain the type `{mtype}` from the {vis_module_type} module `{mmodule_type}`")
+				return
+			end
+		end
+
+		# No error, try to go deeper in generic types
+		if node isa AType then
+			for a in node.n_types do check_visibility(a, a.mtype.as(not null), mpropdef)
+		else if mtype isa MGenericType then
+			for t in mtype.arguments do check_visibility(node, t, mpropdef)
+		end
+	end
 end
 
 redef class MClass
 	# The class whose self inherit all the constructors.
 	# FIXME: this is needed to implement the crazy constructor mixin thing of the of old compiler. We need to think what to do with since this cannot stay in the modelbuilder
 	var inherit_init_from: nullable MClass = null
+end
+
+redef class MClassDef
+	private var propdef_names = new HashSet[String]
+end
+
+redef class MPropDef
+	# Does the MPropDef contains a call to super or a call of a super-constructor?
+	# Subsequent phases of the frontend (esp. typing) set it if required
+	var has_supercall: Bool writable = false
 end
 
 redef class AClassdef
@@ -226,6 +280,12 @@ redef class APropdef
 			mvisibility = private_visibility
 		end
 		return mvisibility
+	end
+
+	private fun set_doc(mpropdef: MPropDef)
+	do
+		var ndoc = self.n_doc
+		if ndoc != null then mpropdef.mdoc = ndoc.to_mdoc
 	end
 
 	private fun check_redef_property_visibility(modelbuilder: ModelBuilder, nclassdef: AClassdef, nvisibility: nullable AVisibility, mprop: MProperty)
@@ -392,6 +452,22 @@ redef class AMethPropdef
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
+		if mclassdef.propdef_names.has(mprop.name) then
+			var loc: nullable Location = null
+			for i in mclassdef.mpropdefs do
+				if i.mproperty.name == mprop.name then
+					loc = i.location
+					break
+				end
+			end
+			if loc == null then abort
+			modelbuilder.error(self, "Error: a property {mprop} is already defined in class {mclassdef.mclass} at {loc}")
+		end
+
+		mclassdef.propdef_names.add(mpropdef.mproperty.name)
+
+		set_doc(mpropdef)
+
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		if mpropdef.is_intro then
@@ -507,9 +583,9 @@ redef class AMethPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) and
+					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
-						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
+						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
 					end
 				end
 			end
@@ -518,9 +594,19 @@ redef class AMethPropdef
 					# Inherit the return type
 					ret_type = precursor_ret_type
 				else if not ret_type.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, precursor_ret_type) then
-					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
+					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
 				end
 			end
+		end
+
+		if mysignature.arity > 0 then
+			# Check parameters visibility
+			for i in [0..mysignature.arity[ do
+				var nt = nsig.n_params[i].n_type
+				if nt != null then modelbuilder.check_visibility(nt, nt.mtype.as(not null), mpropdef)
+			end
+			var nt = nsig.n_type
+			if nt != null then modelbuilder.check_visibility(nt, nt.mtype.as(not null), mpropdef)
 		end
 	end
 end
@@ -570,6 +656,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
+			set_doc(mpropdef)
 
 			var nreadable = self.n_readable
 			if nreadable != null then
@@ -588,6 +675,7 @@ redef class AAttrPropdef
 				var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 				self.mreadpropdef = mreadpropdef
 				modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+				mreadpropdef.mdoc = mpropdef.mdoc
 			end
 
 			var nwritable = self.n_writable
@@ -607,6 +695,7 @@ redef class AAttrPropdef
 				var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 				self.mwritepropdef = mwritepropdef
 				modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+				mwritepropdef.mdoc = mpropdef.mdoc
 			end
 		else
 			# New attribute style
@@ -615,6 +704,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
+			set_doc(mpropdef)
 
 			var readname = name
 			var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
@@ -631,6 +721,7 @@ redef class AAttrPropdef
 			var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+			mreadpropdef.mdoc = mpropdef.mdoc
 
 			var writename = name + "="
 			var nwritable = self.n_writable
@@ -657,6 +748,7 @@ redef class AAttrPropdef
 			var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 			self.mwritepropdef = mwritepropdef
 			modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+			mwritepropdef.mdoc = mpropdef.mdoc
 		end
 	end
 
@@ -760,9 +852,19 @@ redef class AAttrPropdef
 
 		# Check getter and setter
 		var meth = self.mreadpropdef
-		if meth != null then self.check_method_signature(modelbuilder, nclassdef, meth)
+		if meth != null then
+			self.check_method_signature(modelbuilder, nclassdef, meth)
+			var node: nullable ANode = ntype
+			if node == null then node = self
+			modelbuilder.check_visibility(node, mtype, meth)
+		end
 		meth = self.mwritepropdef
-		if meth != null then self.check_method_signature(modelbuilder, nclassdef, meth)
+		if meth != null then
+			self.check_method_signature(modelbuilder, nclassdef, meth)
+			var node: nullable ANode = ntype
+			if node == null then node = self
+			modelbuilder.check_visibility(node, mtype, meth)
+		end
 	end
 
 	private fun check_method_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef, mpropdef: MMethodDef)
@@ -845,6 +947,7 @@ redef class ATypePropdef
 
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
+		set_doc(mpropdef)
 	end
 
 	redef fun build_signature(modelbuilder, nclassdef)
@@ -864,7 +967,13 @@ redef class ATypePropdef
 
 	redef fun check_signature(modelbuilder, nclassdef)
 	do
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # Error thus skiped
+
 		var bound = self.mpropdef.bound
+		if bound == null then return # Error thus skiped
+
+		modelbuilder.check_visibility(n_type.as(not null), bound, mpropdef)
 
 		# Fast case: the bound is not a formal type
 		if not bound isa MVirtualType then return
@@ -882,7 +991,7 @@ redef class ATypePropdef
 			end
 			seen.add(bound)
 			var next = bound.lookup_bound(mmodule, anchor)
-			if not next isa MVirtualType then return
+			if not next isa MVirtualType then break
 			bound = next
 		end
 	end

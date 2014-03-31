@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,19 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import base_prot0
 private import base_prot2
-intrude import base_prot
+
+class C
+	super A
+	#alt5#redef fun pub do 20.output
+	#alt6#redef fun pro do 21.output
+	#alt1#redef fun pri do 22.output
+	fun o do
+		#alt7#pub
+		#alt8#pro
+		#alt2#pri
+	end
+end
 
 class O3
 	fun o
 	do
-		var a = new A
-		a.pub
-		a.pro
-		a.pri
+		var a = new C
+		#alt9#a.pub
+		#alt3#a.pro
+		#alt4#a.pri
+		23.output
 	end
 	init do end
 end
 
 (new O3).o
-

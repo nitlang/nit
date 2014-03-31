@@ -18,10 +18,10 @@
 
 fun first_word(s: String): String
 do
-	var result = new Buffer
+	var result = new FlatBuffer
 	var i = 0
-	while i < s.length and s[i] != ' ' do
-		result.add(s[i])
+	while i < s.length and s.chars[i] != ' ' do
+		result.add(s.chars[i])
 		i = i + 1
 	end
 	return result.to_s

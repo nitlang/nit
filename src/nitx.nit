@@ -17,7 +17,6 @@ module nitx
 
 import model_utils
 import modelize_property
-import frontend
 
 # Main class of the nit index tool
 # NitIndex build the model using the toolcontext argument
@@ -46,12 +45,10 @@ class NitIndex
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
-		self.toolcontext.option_context.options.clear
 		self.arguments = toolcontext.option_context.rest
 
-		if arguments.is_empty or arguments.length > 2 then
-			print "usage: ni path/to/module.nit [expression]"
-			toolcontext.option_context.usage
+		if arguments.length > 2 then
+			print toolcontext.tooldescription
 			exit(1)
 		end
 
@@ -159,7 +156,7 @@ class NitIndex
 		else
 			var category = parts[0]
 			var keyword = parts[1]
-			if keyword.first == ' ' then keyword = keyword.substring_from(1)
+			if keyword.chars.first == ' ' then keyword = keyword.substring_from(1)
 			return new IndexQueryPair(str, keyword, category)
 		end
 	end
@@ -265,7 +262,7 @@ end
 # Code Analysis
 
 redef class ToolContext
-	private var nitx_phase: NitxPhase = new NitxPhase(self, [typing_phase])
+	private var nitx_phase: NitxPhase = new NitxPhase(self, [modelize_property_phase])
 end
 
 # Compiler phase for nitx
@@ -355,7 +352,7 @@ private class PagerMatchesRenderer
 end
 
 private class Pager
-	var content = new Buffer
+	var content = new FlatBuffer
 	var indent = 0
 	fun add(text: String) do
 		add_indent
@@ -370,36 +367,32 @@ end
 redef class MModule
 	super IndexMatch
 	# prototype of the module
-	#	module ownername::name
+	#	module name
 	private fun prototype: String do return "module {name.bold}"
 
 	# namespace of the module
-	#	ownername::name
+	#	project::name
 	private fun namespace: String do
-		if public_owner == null then
+		if mgroup == null or mgroup.mproject.name == self.name then
 			return self.name
 		else
-			return "{public_owner.namespace}::{self.name}"
+			return "{mgroup.mproject}::{self.name}"
 		end
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mmodule2nmodule.has_key(self) then
-			var node = index.mbuilder.mmodule2nmodule[self]
-			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.short_comment.is_empty then
-				pager.add(node.n_moduledecl.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(prototype)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mmodule2nmodule.has_key(self) then
-			var node = index.mbuilder.mmodule2nmodule[self]
-			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.comment.is_empty then
-				for comment in node.n_moduledecl.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(prototype)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -408,7 +401,7 @@ redef class MModule
 		# imported modules
 		var imports = new Array[MModule]
 		for mmodule in in_importation.direct_greaters.to_a do
-			if not in_nesting.direct_greaters.has(mmodule) then imports.add(mmodule)
+			imports.add(mmodule)
 		end
 		if not imports.is_empty then
 			sorter.sort(imports)
@@ -416,19 +409,6 @@ redef class MModule
 			pager.add("== imported modules".bold)
 			pager.indent = pager.indent + 1
 			for mmodule in imports do
-				pager.add("")
-				mmodule.preview(index, pager)
-			end
-			pager.indent = pager.indent - 1
-		end
-		# nested modules
-		var nested = in_nesting.direct_greaters.to_a
-		if not nested.is_empty then
-			sorter.sort(nested)
-			pager.add("")
-			pager.add("== nested modules".bold)
-			pager.indent = pager.indent + 1
-			for mmodule in nested do
 				pager.add("")
 				mmodule.preview(index, pager)
 			end
@@ -478,7 +458,7 @@ redef class MClass
 	# return the generic signature of the class
 	#	[E, F]
 	private fun signature: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if arity > 0 then
 			res.append("[")
 			for i in [0..intro.parameter_names.length[ do
@@ -494,7 +474,7 @@ redef class MClass
 	# class name is displayed with colors depending on visibility
 	#	abstract interface Foo[E]
 	private fun prototype: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{kind} ")
 		if visibility.to_s == "public" then res.append("{name}{signature}".bold.green)
 		if visibility.to_s == "private" then res.append("{name}{signature}".bold.red)
@@ -512,11 +492,9 @@ redef class MClass
 
 	redef fun content(index, pager) do
 		# intro comment
-		if index.mbuilder.mclassdef2nclassdef.has_key(intro) then
-			var node = index.mbuilder.mclassdef2nclassdef[intro]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.comment.is_empty then
-				for comment in node.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = intro.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(intro.to_console)
 		pager.add("{intro.namespace}".bold.gray + " (lines {intro.location.lines})".gray)
@@ -590,29 +568,25 @@ redef class MClassDef
 	end
 
 	fun to_console: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not is_intro then res.append("redef ")
 		res.append(mclass.prototype)
 		return res.to_s
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mclassdef2nclassdef.has_key(self) then
-			var node = index.mbuilder.mclassdef2nclassdef[self]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.short_comment.is_empty then
-				pager.add(node.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mclassdef2nclassdef.has_key(self) then
-			var node = index.mbuilder.mclassdef2nclassdef[self]
-			if node isa AStdClassdef and not node.n_doc == null and not node.n_doc.comment.is_empty then
-				for comment in node.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -698,22 +672,18 @@ redef class MPropDef
 	end
 
 	redef fun preview(index, pager) do
-		if index.mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = index.mbuilder.mpropdef2npropdef[self]
-			if not nprop.n_doc == null and not nprop.n_doc.short_comment.is_empty then
-				pager.add(nprop.n_doc.short_comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			pager.add(mdoc.short_comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 	end
 
 	redef fun content(index, pager) do
-		if index.mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = index.mbuilder.mpropdef2npropdef[self]
-			if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
-				for comment in nprop.n_doc.comment do pager.add(comment.green)
-			end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			for comment in mdoc.content do pager.add(comment.green)
 		end
 		pager.add(to_console)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
@@ -722,7 +692,7 @@ end
 
 redef class MMethodDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not is_intro then res.append("redef ")
 		if not mproperty.is_init then res.append("fun ")
 		res.append(mproperty.to_console.bold)
@@ -737,7 +707,7 @@ end
 
 redef class MVirtualTypeDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("type ")
 		res.append(mproperty.to_console.bold)
 		res.append(": {bound.to_console}")
@@ -747,7 +717,7 @@ end
 
 redef class MAttributeDef
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("var ")
 		res.append(mproperty.to_console.bold)
 		res.append(": {static_mtype.to_console}")
@@ -757,7 +727,7 @@ end
 
 redef class MSignature
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not mparameters.is_empty then
 			res.append("(")
 			for i in [0..mparameters.length[ do
@@ -775,7 +745,7 @@ end
 
 redef class MParameter
 	fun to_console: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{name}: {mtype.to_console}")
 		if is_vararg then res.append("...")
 		return res.to_s
@@ -792,7 +762,7 @@ end
 
 redef class MGenericType
 	redef fun to_console do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append("{mclass.name}[")
 		for i in [0..arguments.length[ do
 			res.append(arguments[i].to_console)
@@ -811,17 +781,9 @@ redef class MVirtualType
 	redef fun to_console do return mproperty.name
 end
 
-redef class ADoc
-	private fun comment: List[String] do
-		var res = new List[String]
-		for t in n_comment do
-			res.add(t.text.replace("\n", ""))
-		end
-		return res
-	end
-
+redef class MDoc
 	private fun short_comment: String do
-		return n_comment.first.text.replace("\n", "")
+		return content.first
 	end
 end
 
@@ -875,8 +837,8 @@ redef class String
 
 	private fun escape: String
 	do
-		var b = new Buffer
-		for c in self do
+		var b = new FlatBuffer
+		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")
 			else if c == '\0' then
@@ -905,7 +867,8 @@ end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
-toolcontext.process_options
+toolcontext.tooldescription = "Usage: nitx [OPTION]... <file.nit> [query]\nDisplays specific pieces of API information from Nit source files."
+toolcontext.process_options(args)
 
 # Here we launch the nit index
 var ni = new NitIndex(toolcontext)

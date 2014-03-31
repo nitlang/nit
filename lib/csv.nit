@@ -17,15 +17,16 @@ module csv
 
 # A CSV document representation
 class CSVDocument
-	private var file: String
-	private var header: Array[String] = new Array[String]
-	private var lines: Array[Array[String]] = new Array[Array[String]]
+	super Streamable
 
-	init(file: String) do self.file = file
+	var header: Array[String] writable = new Array[String]
+	var lines: Array[Array[String]] = new Array[Array[String]]
 
 	fun set_header(values: Object...) do
 		header.clear
-		for value in values do header.add(value.to_s)
+		for value in values do
+			header.add(value.to_s)
+		end
 	end
 
 	fun add_line(values: Object...) do
@@ -34,19 +35,33 @@ class CSVDocument
 			abort
 		end
 		var line = new Array[String]
-		for value in values do line.add(value.to_s)
+		for value in values do
+			line.add(value.to_s)
+		end
 		lines.add(line)
 	end
 
-	redef fun to_s do
-		var str = header.join(";") + "\n"
-		for line in lines do str += line.join(";") + "\n"
-		return str
+	private fun write_line_to(line: Collection[String], stream: OStream)
+	do
+		var i = line.iterator
+		if i.is_ok then
+			stream.write(i.item)
+			i.next
+			while i.is_ok do
+				stream.write(";")
+				stream.write(i.item)
+				i.next
+			end
+		end
+		stream.write("\n")
 	end
 
-	fun save do
-		var out = new OFStream.open(self.file)
-		out.write(self.to_s)
-		out.close
+	redef fun write_to(stream)
+	do
+		write_line_to(header, stream)
+		for line in lines do write_line_to(line, stream)
 	end
+
+	# deprecated alias for `write_to_file`
+	fun save(file: String) do write_to_file(file)
 end

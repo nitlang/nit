@@ -7,7 +7,6 @@ val* NEW_div_by_zero__DivByZeroVisitor(const struct type* type);
 extern const struct type type_div_by_zero__DivByZeroVisitor;
 extern const int COLOR_phase__Phase__toolcontext;
 extern const int COLOR_div_by_zero__DivByZeroVisitor__init;
-void CHECK_NEW_div_by_zero__DivByZeroVisitor(val*);
 extern const int COLOR_parser_nodes__Visitor__enter_visit;
 void div_by_zero__DivByZeroPhase__process_nmodule(val* self, val* p0);
 extern const int COLOR_div_by_zero__DivByZeroVisitor___64dtoolcontext;

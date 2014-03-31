@@ -27,6 +27,43 @@ redef class ToolContext
 	# it is often simpler to use the constructor in `Phase`
 	var phases = new POSet[Phase]
 
+	# --disable-phase
+	var opt_disable_phase = new OptionArray("DEBUG: Disable a specific phase; use `list` to get the list.", "--disable-phase")
+
+	redef init
+	do
+		super
+
+		option_context.add_option(opt_disable_phase)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		for v in opt_disable_phase.value do
+			if v == "list" then
+				for p in phases_list do
+					var deps = p.in_hierarchy.direct_greaters
+					if deps.is_empty then
+						print p
+					else
+						print "{p} (dep: {deps.join(", ")})"
+					end
+				end
+				exit 0
+			end
+
+			var found = false
+			for p in phases do
+				if v != p.to_s then continue
+				found = true
+				p.disabled = true
+			end
+			if not found then fatal_error(null, "Error: no phase named `{v}`. Use `list` to list all phases.")
+		end
+	end
+
 	fun phases_list: Sequence[Phase]
 	do
 		var phases = self.phases.to_a
@@ -44,13 +81,14 @@ redef class ToolContext
 		var phases = phases_list
 
 		for phase in phases do
-			self.info(" registered phases: {phase.class_name}", 2)
+			self.info(" registered phases: {phase}", 2)
 		end
 
 		for nmodule in nmodules do
 			self.info("Semantic analysis module {nmodule.location.file.filename}", 2)
 			for phase in phases do
-				self.info(" phase: {phase.class_name}", 3)
+				if phase.disabled then continue
+				self.info(" phase: {phase}", 3)
 				assert phase.toolcontext == self
 				var errcount = self.error_count
 				phase.process_nmodule(nmodule)
@@ -60,7 +98,7 @@ redef class ToolContext
 				end
 				errcount = self.error_count
 				for nclassdef in nmodule.n_classdefs do
-					self.info(" phase: {phase.class_name} for {nclassdef.location}", 3)
+					self.info(" phase: {phase} for {nclassdef.location}", 3)
 					assert phase.toolcontext == self
 					phase.process_nclassdef(nclassdef)
 					for npropdef in nclassdef.n_propdefs do
@@ -121,6 +159,13 @@ abstract class Phase
 			end
 		end
 	end
+
+	# By default, the name is the lowercased prefix of the classname
+	redef fun to_s do return class_name.strip_extension("Phase").to_lower
+
+	# Is the phase globally disabled?
+	# A disabled phase is not called automatically called by `ToolContext::run_phases` and cie.
+	var disabled = false
 
 	# Specific actions to execute on the whole tree of a module
 	# @toimplement

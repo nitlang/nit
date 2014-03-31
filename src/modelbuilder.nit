@@ -43,16 +43,54 @@ redef class ToolContext
 	# Option --only-parse
 	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
+	# Option --ignore-visibility
+	var opt_ignore_visibility: OptionBool = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel)
+		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel, opt_ignore_visibility)
 	end
 
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
 	private var modelbuilder_real: nullable ModelBuilder = null
 
+	# Run `process_mainmodule` on all phases
+	fun run_global_phases(mmodules: Array[MModule])
+	do
+		assert not mmodules.is_empty
+		var mainmodule
+		if mmodules.length == 1 then
+			mainmodule = mmodules.first
+		else
+			# We need a main module, so we build it by importing all modules
+			mainmodule = new MModule(modelbuilder.model, null, "<main>", new Location(null, 0, 0, 0, 0))
+			mainmodule.set_imported_mmodules(mmodules)
+		end
+		for phase in phases_list do
+			if phase.disabled then continue
+			phase.process_mainmodule(mainmodule, mmodules)
+		end
+	end
 end
+
+redef class Phase
+	# Specific action to execute on the whole program.
+	# Called by the `ToolContext::run_global_phases`.
+	#
+	# `mainmodule` is the main module of the program.
+	# It could be an implicit module (called "<main>").
+	#
+	# `given_modules` is the list of explicitely requested modules.
+	# from the command-line for instance.
+	#
+	# REQUIRE: `not given_modules.is_empty`
+	# REQUIRE: `(given_modules.length == 1) == (mainmodule == given_modules.first)`
+	#
+	# @toimplement
+	fun process_mainmodule(mainmodule: MModule, given_mmodules: SequenceRead[MModule]) do end
+end
+
 
 # A model builder knows how to load nit source files and build the associated model
 class ModelBuilder
@@ -118,9 +156,9 @@ class ModelBuilder
 		var time0 = get_time
 		# Parse and recursively load
 		self.toolcontext.info("*** PARSE ***", 1)
-		var mmodules = new Array[MModule]
+		var mmodules = new ArraySet[MModule]
 		for a in modules do
-			var nmodule = self.load_module(null, a)
+			var nmodule = self.load_module(a)
 			if nmodule == null then continue # Skip error
 			mmodules.add(nmodule.mmodule.as(not null))
 		end
@@ -134,7 +172,7 @@ class ModelBuilder
 			exit(0)
 		end
 
-		return mmodules
+		return mmodules.to_a
 	end
 
 	# Return a class named `name` visible by the module `mmodule`.
@@ -238,80 +276,73 @@ class ModelBuilder
 	# FIXME: add a way to handle module name conflict
 	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
 	do
-		var origmmodule = mmodule
-		var modules = model.get_mmodules_by_name(name)
+		# First, look in groups of the module
+		if mmodule != null then
+			var mgroup = mmodule.mgroup
+			while mgroup != null do
+				var dirname = mgroup.filepath
+				if dirname == null then break # virtual group
+				if dirname.has_suffix(".nit") then break # singleton project
 
-		var tries = new Array[String]
-
-		var lastmodule = mmodule
-		while mmodule != null do
-			var dirname = mmodule.location.file.filename.dirname
-
-			# Determine the owner
-			var owner: nullable MModule
-			if dirname.basename("") != mmodule.name then
-				owner = mmodule.direct_owner
-			else
-				owner = mmodule
-			end
-
-			# First, try the already known nested modules
-			if modules != null then
-				for candidate in modules do
-					if candidate.direct_owner == owner then
-						return candidate
-					end
+				# Second, try the directory to find a file
+				var try_file = dirname + "/" + name + ".nit"
+				if try_file.file_exists then
+					var res = self.load_module(try_file.simplify_path)
+					if res == null then return null # Forward error
+					return res.mmodule.as(not null)
 				end
-			end
 
-			# Second, try the directory to find a file
-			var try_file = dirname + "/" + name + ".nit"
-			tries.add try_file
-			if try_file.file_exists then
-				var res = self.load_module(owner, try_file.simplify_path)
-				if res == null then return null # Forward error
-				return res.mmodule.as(not null)
-			end
-
-			# Third, try if the requested module is itself an owner
-			try_file = dirname + "/" + name + "/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.load_module(owner, try_file.simplify_path)
-				if res == null then return null # Forward error
-				return res.mmodule.as(not null)
-			end
-
-			lastmodule = mmodule
-			mmodule = mmodule.direct_owner
-		end
-
-		if modules != null then
-			for candidate in modules do
-				if candidate.direct_owner == null then
-					return candidate
+				# Third, try if the requested module is itself a group
+				try_file = dirname + "/" + name + "/" + name + ".nit"
+				if try_file.file_exists then
+					mgroup = get_mgroup(dirname + "/" + name)
+					var res = self.load_module(try_file.simplify_path)
+					if res == null then return null # Forward error
+					return res.mmodule.as(not null)
 				end
+
+				mgroup = mgroup.parent
 			end
 		end
 
 		# Look at some known directories
 		var lookpaths = self.paths
 
-		# Look in the directory of the last module also (event if not in the path)
-		if lastmodule != null then
-			var dirname = lastmodule.location.file.filename.dirname
-			if dirname.basename("") == lastmodule.name then
-				dirname = dirname.dirname
-			end
-			if not lookpaths.has(dirname) then
-				lookpaths = lookpaths.to_a
-				lookpaths.add(dirname)
+		# Look in the directory of module project also (even if not explicitely in the path)
+		if mmodule != null and mmodule.mgroup != null then
+			# path of the root group
+			var dirname = mmodule.mgroup.mproject.root.filepath
+			if dirname != null then
+				dirname = dirname.join_path("..").simplify_path
+				if not lookpaths.has(dirname) and dirname.file_exists then
+					lookpaths = lookpaths.to_a
+					lookpaths.add(dirname)
+				end
 			end
 		end
 
+		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+
+		if candidate == null then
+			if mmodule != null then
+				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
+			else
+				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
+			end
+			return null
+		end
+		var res = self.load_module(candidate)
+		if res == null then return null # Forward error
+		return res.mmodule.as(not null)
+	end
+
+	# Search a module `name` from path `lookpaths`.
+	# If found, the path of the file is returned
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable String
+	do
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -320,7 +351,7 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
@@ -333,39 +364,113 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
 		end
-		if candidate == null then
-			if origmmodule != null then
-				error(anode, "Error: cannot find module {name} from {origmmodule}. tried {tries.join(", ")}")
-			else
-				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
+		return candidate
+	end
+
+	# cache for `identify_file` by realpath
+	private var identified_files = new HashMap[String, nullable ModulePath]
+
+	# Identify a source file
+	# Load the associated project and groups if required
+	private fun identify_file(path: String): nullable ModulePath
+	do
+		# special case for not a nit file
+		if path.file_extension != "nit" then
+			# search in known -I paths
+			var candidate = search_module_in_paths(null, path, self.paths)
+
+			# Found nothins? maybe it is a group...
+			if candidate == null and path.file_exists then
+				var mgroup = get_mgroup(path)
+				if mgroup != null then
+					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
+					if owner_path.file_exists then candidate = owner_path
+				end
 			end
-			return null
+
+			if candidate == null then
+				toolcontext.error(null, "Error: cannot find module `{path}`.")
+				return null
+			end
+			path = candidate
 		end
-		var res = self.load_module(mmodule, candidate)
-		if res == null then return null # Forward error
-		return res.mmodule.as(not null)
+
+		# Fast track, the path is already known
+		var pn = path.basename(".nit")
+		var rp = module_absolute_path(path)
+		if identified_files.has_key(rp) then return identified_files[rp]
+
+		# Search for a group
+		var mgrouppath = path.join_path("..").simplify_path
+		var mgroup = get_mgroup(mgrouppath)
+
+		if mgroup == null then
+			# singleton project
+			var mproject = new MProject(pn, model)
+			mgroup = new MGroup(pn, mproject, null) # same name for the root group
+			mgroup.filepath = path
+			mproject.root = mgroup
+			toolcontext.info("found project `{pn}` at {path}", 2)
+		end
+
+		var res = new ModulePath(pn, path, mgroup)
+		mgroup.module_paths.add(res)
+
+		identified_files[rp] = res
+		return res
+	end
+
+	# groups by path
+	private var mgroups = new HashMap[String, nullable MGroup]
+
+	# return the mgroup associated to a directory path
+	# if the directory is not a group null is returned
+	private fun get_mgroup(dirpath: String): nullable MGroup
+	do
+		var rdp = module_absolute_path(dirpath)
+		if mgroups.has_key(rdp) then
+			return mgroups[rdp]
+		end
+
+		# Hack, a dir is determined by the presence of a honomymous nit file
+		var pn = rdp.basename(".nit")
+		var mp = dirpath.join_path(pn + ".nit").simplify_path
+
+		if not mp.file_exists then return null
+
+		# check parent directory
+		var parentpath = dirpath.join_path("..").simplify_path
+		var parent = get_mgroup(parentpath)
+
+		var mgroup
+		if parent == null then
+			# no parent, thus new project
+			var mproject = new MProject(pn, model)
+			mgroup = new MGroup(pn, mproject, null) # same name for the root group
+			mproject.root = mgroup
+			toolcontext.info("found project `{mproject}` at {dirpath}", 2)
+		else
+			mgroup = new MGroup(pn, parent.mproject, parent)
+			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
+		end
+		mgroup.filepath = dirpath
+		mgroups[rdp] = mgroup
+		return mgroup
 	end
 
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
-		if path.has_prefix("..") then
-			return getcwd.join_path(path).simplify_path
-		end
-		return path
+		return getcwd.join_path(path).simplify_path
 	end
 
-	# loaded module by absolute path
-	private var loaded_nmodules = new HashMap[String, AModule]
-
-	# Try to load a module using a path.
+	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
-	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
-	fun load_module(owner: nullable MModule, filename: String): nullable AModule
+	fun load_module_ast(filename: String): nullable AModule
 	do
 		if filename.file_extension != "nit" then
 			self.toolcontext.error(null, "Error: file {filename} is not a valid nit module.")
@@ -376,13 +481,7 @@ class ModelBuilder
 			return null
 		end
 
-		var module_path = module_absolute_path(filename)
-		if loaded_nmodules.keys.has(module_path) then
-			return loaded_nmodules[module_path]
-		end
-
-		var x = if owner != null then owner.to_s else "."
-		self.toolcontext.info("load module {filename} in {x}", 2)
+		self.toolcontext.info("load module {filename}", 2)
 
 		# Load the file
 		var file = new IFStream.open(filename)
@@ -391,32 +490,7 @@ class ModelBuilder
 		var tree = parser.parse
 		file.close
 		var mod_name = filename.basename(".nit")
-		return load_module_commons(owner, tree, mod_name)
-	end
 
-	fun load_rt_module(owner: MModule, nmodule: AModule, mod_name: String): nullable AModule
-	do
-		# Create the module
-		var mmodule = new MModule(model, owner, mod_name, nmodule.location)
-		nmodule.mmodule = mmodule
-		nmodules.add(nmodule)
-		self.mmodule2nmodule[mmodule] = nmodule
-
-		var imported_modules = new Array[MModule]
-
-		imported_modules.add(owner)
-		mmodule.set_visibility_for(owner, intrude_visibility)
-
-		mmodule.set_imported_mmodules(imported_modules)
-
-		return nmodule
-	end
-
-	# Try to load a module using a path.
-	# Display an error if there is a problem (IO / lexer / parser) and return null
-	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
-	private fun load_module_commons(owner: nullable MModule, tree: Start, mod_name: String): nullable AModule
-	do
 		# Handle lexer and parser error
 		var nmodule = tree.n_base
 		if nmodule == null then
@@ -426,6 +500,63 @@ class ModelBuilder
 			return null
 		end
 
+		return nmodule
+	end
+
+	# Try to load a module and its imported modules using a path.
+	# Display an error if there is a problem (IO / lexer / parser / importation) and return null
+	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
+	fun load_module(filename: String): nullable AModule
+	do
+		# Look for the module
+		var file = identify_file(filename)
+		if file == null then return null # forward error
+
+		# Already known and loaded? then return it
+		var mmodule = file.mmodule
+		if mmodule != null then
+			return mmodule2nmodule[mmodule]
+		end
+
+		# Load it manually
+		var nmodule = load_module_ast(file.filepath)
+		if nmodule == null then return null # forward error
+
+		# build the mmodule and load imported modules
+		mmodule = build_a_mmodule(file.mgroup, file.name, nmodule)
+
+		if mmodule == null then return null # forward error
+
+		# Update the file information
+		file.mmodule = mmodule
+
+		# Load imported module
+		build_module_importation(nmodule)
+
+		return nmodule
+	end
+
+	fun load_rt_module(parent: MModule, nmodule: AModule, mod_name: String): nullable AModule
+	do
+		# Create the module
+		var mmodule = new MModule(model, parent.mgroup, mod_name, nmodule.location)
+		nmodule.mmodule = mmodule
+		nmodules.add(nmodule)
+		self.mmodule2nmodule[mmodule] = nmodule
+
+		var imported_modules = new Array[MModule]
+
+		imported_modules.add(parent)
+		mmodule.set_visibility_for(parent, intrude_visibility)
+
+		mmodule.set_imported_mmodules(imported_modules)
+
+		return nmodule
+	end
+
+	# Visit the AST and create the `MModule` object
+	private fun build_a_mmodule(mgroup: nullable MGroup, mod_name: String, nmodule: AModule): nullable MModule
+	do
 		# Check the module name
 		var decl = nmodule.n_moduledecl
 		if decl == null then
@@ -438,14 +569,17 @@ class ModelBuilder
 		end
 
 		# Create the module
-		var mmodule = new MModule(model, owner, mod_name, nmodule.location)
+		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
-		build_module_importation(nmodule)
+		if decl != null then
+			var ndoc = decl.n_doc
+			if ndoc != null then mmodule.mdoc = ndoc.to_mdoc
+		end
 
-		return nmodule
+		return mmodule
 	end
 
 	# Analysis the module importation and fill the module_importation_hierarchy
@@ -469,6 +603,13 @@ class ModelBuilder
 			var mvisibility = aimport.n_visibility.mvisibility
 			if mvisibility == protected_visibility then
 				error(aimport.n_visibility, "Error: only properties can be protected.")
+				return
+			end
+			if sup == mmodule then
+				error(aimport.n_name, "Error: Dependency loop in module {mmodule}.")
+			end
+			if sup.in_importation < mmodule then
+				error(aimport.n_name, "Error: Dependency loop between modules {mmodule} and {sup}.")
 				return
 			end
 			mmodule.set_visibility_for(sup, mvisibility)
@@ -518,6 +659,29 @@ class ModelBuilder
 	end
 end
 
+# placeholder to a module file identified but not always loaded in a project
+private class ModulePath
+	# The name of the module
+	# (it's the basename of the filepath)
+	var name: String
+
+	# The human path of the module
+	var filepath: String
+
+	# The group (and the project) of the possible module
+	var mgroup: MGroup
+
+	# The loaded module (if any)
+	var mmodule: nullable MModule = null
+
+	redef fun to_s do return filepath
+end
+
+redef class MGroup
+	# modules paths associated with the group
+	private var module_paths = new Array[ModulePath]
+end
+
 redef class AStdImport
 	# The imported module once determined
 	var mmodule: nullable MModule = null
@@ -545,4 +709,31 @@ redef class AProtectedVisibility
 end
 redef class APrivateVisibility
 	redef fun mvisibility do return private_visibility
+end
+
+redef class ADoc
+	private var mdoc_cache: nullable MDoc
+	fun to_mdoc: MDoc
+	do
+		var res = mdoc_cache
+		if res != null then return res
+		res = new MDoc
+		for c in n_comment do
+			var text = c.text
+			if text.length < 2 then
+				res.content.add ""
+				continue
+			end
+			assert text.chars[0] == '#'
+			if text.chars[1] == ' ' then
+				text = text.substring_from(2) # eat starting `#` and space
+			else
+				text = text.substring_from(1) # eat atarting `#` only
+			end
+			if text.chars.last == '\n' then text = text.substring(0, text.length-1) # drop \n
+			res.content.add(text)
+		end
+		mdoc_cache = res
+		return res
+	end
 end

@@ -1,1 +1,1 @@
-alt/base_prot2_alt3.nit:36,3--7: Error: Method 'pri' doesn't exists in A.
+alt/base_prot2_alt3.nit:35,3--7: Error: Method 'pro' is protected and can only acceded by self.

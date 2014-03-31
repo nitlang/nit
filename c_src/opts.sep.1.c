@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_opts__Option___names].val; /* _names on <self:Option> *
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _names");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 19);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -30,7 +30,7 @@ var1 = self->attrs[COLOR_opts__Option___helptext].val; /* _helptext on <self:Opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _helptext");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 25);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -53,7 +53,7 @@ var1 = self->attrs[COLOR_opts__Option___errors].val; /* _errors on <self:Option>
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 28);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -139,7 +139,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 37);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_opts__Option___value].val = p0; /* _value on <self:Option> */
 RET_LABEL:;
@@ -178,7 +178,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 41);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -237,7 +237,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 43);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_opts__Option___default_value].val = p0; /* _default_value on <self:Option> */
 RET_LABEL:;
@@ -282,7 +282,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 46);
-exit(1);
+show_backtrace(1);
 }
 var_help = p0;
 var_default = p1;
@@ -296,7 +296,6 @@ var2 = 0; /* arg is null but recv is not */
 if (var2){
 var3 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[String]>*/;
-CHECK_NEW_array__Array(var3);
 self->attrs[COLOR_opts__Option___names].val = var3; /* _names on <self:Option> */
 } else {
 var4 = ((val* (*)(val*))(var_names->class->vft[COLOR_array__Collection__to_a]))(var_names) /* to_a on <var_names:nullable Array[String](Array[String])>*/;
@@ -311,7 +310,6 @@ self->attrs[COLOR_opts__Option___default_value].val = var_default; /* _default_v
 self->attrs[COLOR_opts__Option___value].val = var_default; /* _value on <self:Option> */
 var7 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var7->class->vft[COLOR_array__Array__init]))(var7) /* init on <var7:Array[String]>*/;
-CHECK_NEW_array__Array(var7);
 self->attrs[COLOR_opts__Option___errors].val = var7; /* _errors on <self:Option> */
 RET_LABEL:;
 }
@@ -329,7 +327,7 @@ var = self->attrs[COLOR_opts__Option___names].val; /* _names on <self:Option> */
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _names");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 63);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var, var_names) /* add_all on <var:Array[String]>*/;
 RET_LABEL:;
@@ -414,13 +412,12 @@ var2 = var5;
 varonce = var2;
 }
 ((void (*)(val*, val*))(var1->class->vft[COLOR_string__Buffer__from]))(var1, var2) /* from on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_text = var1;
 var6 = self->attrs[COLOR_opts__Option___names].val; /* _names on <self:Option> */
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _names");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 if (varonce7) {
 var8 = varonce7;
@@ -460,7 +457,7 @@ if (!var25) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var26 = var_rest > var22;
 var23 = var26;
@@ -536,7 +533,6 @@ if (var3){
 var4 = NEW_array__Array(&type_array__Arraykernel__Object);
 var5 = 3;
 ((void (*)(val*, long))(var4->class->vft[COLOR_array__Array__with_capacity]))(var4, var5) /* with_capacity on <var4:Array[Object]>*/;
-CHECK_NEW_array__Array(var4);
 var_ = var4;
 if (varonce) {
 var6 = varonce;
@@ -748,7 +744,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "convert", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 133);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -857,7 +853,7 @@ var13 = self->attrs[COLOR_opts__Option___errors].val; /* _errors on <self:Option
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 146);
-exit(1);
+show_backtrace(1);
 }
 if (varonce) {
 var14 = varonce;
@@ -887,7 +883,6 @@ var27 = NEW_array__NativeArray(var26, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var27)->values[1] = (val*) var19;
 ((struct instance_array__NativeArray*)var27)->values[2] = (val*) var21;
 ((void (*)(val*, val*, long))(var25->class->vft[COLOR_array__Array__with_native]))(var25, var27, var26) /* with_native on <var25:Array[Object]>*/;
-CHECK_NEW_array__Array(var25);
 }
 var28 = ((val* (*)(val*))(var25->class->vft[COLOR_string__Object__to_s]))(var25) /* to_s on <var25:Array[Object]>*/;
 ((void (*)(val*, val*))(var13->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var13, var28) /* add on <var13:Array[String]>*/;
@@ -930,7 +925,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 151);
-exit(1);
+show_backtrace(1);
 }
 var_h = p0;
 var_d = p1;
@@ -984,7 +979,7 @@ if (!var1) {
 var_class_name = var_str == NULL ? "null" : var_str->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 164);
-exit(1);
+show_backtrace(1);
 }
 var = var_str;
 goto RET_LABEL;
@@ -1050,7 +1045,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var5 = var > var1;
 var2 = var5;
@@ -1060,7 +1055,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 174);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((val* (*)(val*))(var_values->class->vft[COLOR_array__Collection__to_a]))(var_values) /* to_a on <var_values:Array[String]>*/;
 self->attrs[COLOR_opts__OptionEnum___values].val = var6; /* _values on <self:OptionEnum> */
@@ -1101,7 +1096,6 @@ var24 = NEW_array__NativeArray(var23, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var24)->values[2] = (val*) var16;
 ((struct instance_array__NativeArray*)var24)->values[3] = (val*) var18;
 ((void (*)(val*, val*, long))(var22->class->vft[COLOR_array__Array__with_native]))(var22, var24, var23) /* with_native on <var22:Array[Object]>*/;
-CHECK_NEW_array__Array(var22);
 }
 var25 = ((val* (*)(val*))(var22->class->vft[COLOR_string__Object__to_s]))(var22) /* to_s on <var22:Array[Object]>*/;
 var26 = BOX_kernel__Int(var_default); /* autobox from Int to nullable Object */
@@ -1175,7 +1169,7 @@ var1 = self->attrs[COLOR_opts__OptionEnum___values].val; /* _values on <self:Opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 181);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__SequenceRead__index_of]))(var1, var_str) /* index_of on <var1:Array[String]>*/;
 var_id = var2;
@@ -1196,7 +1190,6 @@ if (var7){
 var10 = NEW_array__Array(&type_array__Arraykernel__Object);
 var11 = 3;
 ((void (*)(val*, long))(var10->class->vft[COLOR_array__Array__with_capacity]))(var10, var11) /* with_capacity on <var10:Array[Object]>*/;
-CHECK_NEW_array__Array(var10);
 var_ = var10;
 if (varonce) {
 var12 = varonce;
@@ -1212,7 +1205,7 @@ var16 = self->attrs[COLOR_opts__Option___names].val; /* _names on <self:OptionEn
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _names");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 183);
-exit(1);
+show_backtrace(1);
 }
 if (varonce17) {
 var18 = varonce17;
@@ -1240,7 +1233,6 @@ var_e = var28;
 var29 = NEW_array__Array(&type_array__Arraykernel__Object);
 var30 = 3;
 ((void (*)(val*, long))(var29->class->vft[COLOR_array__Array__with_capacity]))(var29, var30) /* with_capacity on <var29:Array[Object]>*/;
-CHECK_NEW_array__Array(var29);
 var_31 = var29;
 if (varonce32) {
 var33 = varonce32;
@@ -1256,7 +1248,7 @@ var37 = self->attrs[COLOR_opts__OptionEnum___values].val; /* _values on <self:Op
 if (var37 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 184);
-exit(1);
+show_backtrace(1);
 }
 if (varonce38) {
 var39 = varonce38;
@@ -1286,7 +1278,7 @@ var51 = self->attrs[COLOR_opts__Option___errors].val; /* _errors on <self:Option
 if (var51 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 185);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var51->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var51, var_e) /* add on <var51:Array[String]>*/;
 } else {
@@ -1318,7 +1310,7 @@ var1 = self->attrs[COLOR_opts__OptionEnum___values].val; /* _values on <self:Opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 190);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_opts__Option__value]))(self) /* value on <self:OptionEnum>*/;
 var4 = ((struct instance_kernel__Int*)var2)->value; /* autounbox from nullable Object to Int */;
@@ -1377,7 +1369,6 @@ if (var3){
 var4 = NEW_array__Array(&type_array__Arraykernel__Object);
 var5 = 3;
 ((void (*)(val*, long))(var4->class->vft[COLOR_array__Array__with_capacity]))(var4, var5) /* with_capacity on <var4:Array[Object]>*/;
-CHECK_NEW_array__Array(var4);
 var_ = var4;
 if (varonce) {
 var6 = varonce;
@@ -1393,13 +1384,13 @@ var10 = self->attrs[COLOR_opts__OptionEnum___values].val; /* _values on <self:Op
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 195);
-exit(1);
+show_backtrace(1);
 }
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_opts__Option__default_value]))(self) /* default_value on <self:OptionEnum>*/;
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 195);
-exit(1);
+show_backtrace(1);
 }
 var13 = ((struct instance_kernel__Int*)var11)->value; /* autounbox from nullable Int to Int */;
 var12 = ((val* (*)(val*, long))(var10->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var10, var13) /* [] on <var10:Array[String]>*/;
@@ -1498,13 +1489,12 @@ var_help = p0;
 var_names = p1;
 var = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var->class->vft[COLOR_array__Array__init]))(var) /* init on <var:Array[String]>*/;
-CHECK_NEW_array__Array(var);
 self->attrs[COLOR_opts__OptionArray___values].val = var; /* _values on <self:OptionArray> */
 var1 = self->attrs[COLOR_opts__OptionArray___values].val; /* _values on <self:OptionArray> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 218);
-exit(1);
+show_backtrace(1);
 }
 /* <var1:Array[String]> isa nullable VALUE */
 type_struct = self->type->resolution_table->types[COLOR_opts__Option_VTVALUE];
@@ -1519,7 +1509,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 218);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*, val*))(self->class->vft[COLOR_opts__OptionParameter__init_opt]))(self, var_help, var1, var_names) /* init_opt on <self:OptionArray>*/;
 RET_LABEL:;
@@ -1545,14 +1535,14 @@ var1 = self->attrs[COLOR_opts__OptionArray___values].val; /* _values on <self:Op
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 224);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var1, var_str) /* add on <var1:Array[String]>*/;
 var2 = self->attrs[COLOR_opts__OptionArray___values].val; /* _values on <self:OptionArray> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _values");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 225);
-exit(1);
+show_backtrace(1);
 }
 /* <var2:Array[String]> isa VALUE */
 type_struct = self->type->resolution_table->types[COLOR_opts__Option_VTVALUE];
@@ -1567,7 +1557,7 @@ if (!var3) {
 var_class_name = var2 == NULL ? "null" : var2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VALUE", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 225);
-exit(1);
+show_backtrace(1);
 }
 var = var2;
 goto RET_LABEL;
@@ -1591,7 +1581,7 @@ var1 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <sel
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 230);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1614,7 +1604,7 @@ var1 = self->attrs[COLOR_opts__OptionContext___rest].val; /* _rest on <self:Opti
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _rest");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 231);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1637,7 +1627,7 @@ var1 = self->attrs[COLOR_opts__OptionContext___errors].val; /* _errors on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 232);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1692,7 +1682,7 @@ var1 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <sel
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 239);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__iterator]))(var1) /* iterator on <var1:Array[Option]>*/;
 for(;;) {
@@ -1736,7 +1726,7 @@ if (!var20) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var21 = var_lmax < var_l;
 var18 = var21;
@@ -1755,7 +1745,7 @@ var23 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <se
 if (var23 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 247);
-exit(1);
+show_backtrace(1);
 }
 var24 = ((val* (*)(val*))(var23->class->vft[COLOR_abstract_collection__Collection__iterator]))(var23) /* iterator on <var23:Array[Option]>*/;
 for(;;) {
@@ -1906,7 +1896,7 @@ var1 = self->attrs[COLOR_opts__OptionContext___rest].val; /* _rest on <self:Opti
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _rest");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var_rest = var1;
 for(;;) {
@@ -1959,7 +1949,7 @@ if (!var25) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var26 = var21 > var22;
 var23 = var26;
@@ -1979,7 +1969,6 @@ var30 = ((long (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collect
 var31 = BOX_kernel__Int(var29); /* autobox from Int to Discrete */
 var32 = BOX_kernel__Int(var30); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var28->class->vft[COLOR_range__Range__init]))(var28, var31, var32) /* init on <var28:Range[Int]>*/;
-CHECK_NEW_range__Range(var28);
 var33 = ((val* (*)(val*))(var28->class->vft[COLOR_abstract_collection__Collection__iterator]))(var28) /* iterator on <var28:Range[Int]>*/;
 for(;;) {
 var34 = ((short int (*)(val*))(var33->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var33) /* is_ok on <var33:Iterator[nullable Object]>*/;
@@ -2005,7 +1994,7 @@ var46 = self->attrs[COLOR_opts__OptionContext___optmap].val; /* _optmap on <self
 if (var46 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _optmap");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 277);
-exit(1);
+show_backtrace(1);
 }
 var47 = ((short int (*)(val*, val*))(var46->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var46, var_short_opt) /* has_key on <var46:Map[String, Option]>*/;
 if (var47){
@@ -2013,7 +2002,7 @@ var48 = self->attrs[COLOR_opts__OptionContext___optmap].val; /* _optmap on <self
 if (var48 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _optmap");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 278);
-exit(1);
+show_backtrace(1);
 }
 var49 = ((val* (*)(val*, val*))(var48->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var48, var_short_opt) /* [] on <var48:Map[String, Option]>*/;
 var_option = var49;
@@ -2048,7 +2037,7 @@ var55 = self->attrs[COLOR_opts__OptionContext___optmap].val; /* _optmap on <self
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _optmap");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 288);
-exit(1);
+show_backtrace(1);
 }
 var56 = ((short int (*)(val*, val*))(var55->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var55, var_str) /* has_key on <var55:Map[String, Option]>*/;
 if (var56){
@@ -2056,7 +2045,7 @@ var57 = self->attrs[COLOR_opts__OptionContext___optmap].val; /* _optmap on <self
 if (var57 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _optmap");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 289);
-exit(1);
+show_backtrace(1);
 }
 var58 = ((val* (*)(val*, val*))(var57->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var57, var_str) /* [] on <var57:Map[String, Option]>*/;
 var_opt = var58;
@@ -2076,7 +2065,7 @@ var61 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <se
 if (var61 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 300);
-exit(1);
+show_backtrace(1);
 }
 var62 = ((val* (*)(val*))(var61->class->vft[COLOR_abstract_collection__Collection__iterator]))(var61) /* iterator on <var61:Array[Option]>*/;
 for(;;) {
@@ -2098,7 +2087,7 @@ var71 = self->attrs[COLOR_opts__OptionContext___errors].val; /* _errors on <self
 if (var71 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 302);
-exit(1);
+show_backtrace(1);
 }
 if (varonce72) {
 var73 = varonce72;
@@ -2137,7 +2126,6 @@ var91 = NEW_array__NativeArray(var90, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var91)->values[1] = (val*) var83;
 ((struct instance_array__NativeArray*)var91)->values[2] = (val*) var85;
 ((void (*)(val*, val*, long))(var89->class->vft[COLOR_array__Array__with_native]))(var89, var91, var90) /* with_native on <var89:Array[Object]>*/;
-CHECK_NEW_array__Array(var89);
 }
 var92 = ((val* (*)(val*))(var89->class->vft[COLOR_string__Object__to_s]))(var89) /* to_s on <var89:Array[Object]>*/;
 ((void (*)(val*, val*))(var71->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var71, var92) /* add on <var71:Array[String]>*/;
@@ -2173,7 +2161,7 @@ var3 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <sel
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 310);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var3->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var3, var_opt) /* add on <var3:Array[Option]>*/;
 CONTINUE_label: (void)0;
@@ -2195,19 +2183,15 @@ val* var2 /* : Array[String] */;
 val* var3 /* : Array[String] */;
 var = NEW_array__Array(&type_array__Arrayopts__Option);
 ((void (*)(val*))(var->class->vft[COLOR_array__Array__init]))(var) /* init on <var:Array[Option]>*/;
-CHECK_NEW_array__Array(var);
 self->attrs[COLOR_opts__OptionContext___options].val = var; /* _options on <self:OptionContext> */
 var1 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapstring__Stringopts__Option);
 ((void (*)(val*))(var1->class->vft[COLOR_hash_collection__HashMap__init]))(var1) /* init on <var1:HashMap[String, Option]>*/;
-CHECK_NEW_hash_collection__HashMap(var1);
 self->attrs[COLOR_opts__OptionContext___optmap].val = var1; /* _optmap on <self:OptionContext> */
 var2 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[String]>*/;
-CHECK_NEW_array__Array(var2);
 self->attrs[COLOR_opts__OptionContext___rest].val = var2; /* _rest on <self:OptionContext> */
 var3 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[String]>*/;
-CHECK_NEW_array__Array(var3);
 self->attrs[COLOR_opts__OptionContext___errors].val = var3; /* _errors on <self:OptionContext> */
 RET_LABEL:;
 }
@@ -2233,7 +2217,7 @@ var = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <self
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 324);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__iterator]))(var) /* iterator on <var:Array[Option]>*/;
 for(;;) {
@@ -2252,7 +2236,7 @@ var8 = self->attrs[COLOR_opts__OptionContext___optmap].val; /* _optmap on <self:
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _optmap");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 326);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*))(var8->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var8, var_n, var_o) /* []= on <var8:Map[String, Option]>*/;
 CONTINUE_label: (void)0;
@@ -2288,20 +2272,19 @@ val* var10 /* : nullable Object */;
 val* var_e /* var e: String */;
 var1 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[String]>*/;
-CHECK_NEW_array__Array(var1);
 var_errors = var1;
 var2 = self->attrs[COLOR_opts__OptionContext___errors].val; /* _errors on <self:OptionContext> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _errors");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 335);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_errors->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var_errors, var2) /* add_all on <var_errors:Array[String]>*/;
 var3 = self->attrs[COLOR_opts__OptionContext___options].val; /* _options on <self:OptionContext> */
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _options");
 fprintf(stderr, " (%s:%d)\n", "lib/opts.nit", 337);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__iterator]))(var3) /* iterator on <var3:Array[Option]>*/;
 for(;;) {

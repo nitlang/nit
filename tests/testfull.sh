@@ -6,4 +6,14 @@ do
 	y="$x/$bx.nit"
 	test -f $y && list="$list $y"
 done
-./tests.sh "$@" *.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/src/shoot_logic.nit ../lib/*.nit $list ../src/nitdoc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nitg.nit ../src/nitx.nit ../src/netdbg.nit ../src/nitlight.nit ../contrib/sort_downloads/src/sort_downloads.nit ../contrib/pep8analysis/src/pep8analysis.nit
+./tests.sh "$@" *.nit \
+	../examples/*.nit \
+	../examples/leapfrog/leapfrog.nit \
+	../examples/shoot/src/shoot_logic.nit \
+	../examples/*/src/*_android.nit \
+	../examples/*/src/*_linux.nit \
+	../lib/*.nit $list \
+	../src/nit*.nit \
+	../src/test_*.nit \
+	../contrib/sort_downloads/src/sort_downloads.nit \
+	../contrib/pep8analysis/src/pep8analysis.nit

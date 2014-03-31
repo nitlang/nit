@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_ropes__TupleLeafNodePos___64dcurr_node].val; /* @curr_n
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @curr_node");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 24);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -68,7 +68,7 @@ var1 = self->attrs[COLOR_ropes__TupleLeafNodePos___64dvisit_stack].val; /* @visi
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @visit_stack");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -141,7 +141,7 @@ var1 = self->attrs[COLOR_ropes__Rope___64dparent_node].val; /* @parent_node on <
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @parent_node");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 39);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -171,7 +171,6 @@ void ropes__Rope__init(val* self) {
 val* var /* : ConcatNode */;
 var = NEW_ropes__ConcatNode(&type_ropes__ConcatNode);
 ((void (*)(val*))(var->class->vft[COLOR_ropes__ConcatNode__init]))(var) /* init on <var:ConcatNode>*/;
-CHECK_NEW_ropes__ConcatNode(var);
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__Rope__parent_node_61d]))(self, var) /* parent_node= on <self:Rope>*/;
 RET_LABEL:;
 }
@@ -198,7 +197,6 @@ const char* var_class_name8;
 var_str = p0;
 var = NEW_ropes__ConcatNode(&type_ropes__ConcatNode);
 ((void (*)(val*))(var->class->vft[COLOR_ropes__ConcatNode__init]))(var) /* init on <var:ConcatNode>*/;
-CHECK_NEW_ropes__ConcatNode(var);
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__Rope__parent_node_61d]))(self, var) /* parent_node= on <self:Rope>*/;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__parent_node]))(self) /* parent_node on <self:Rope>*/;
 /* <var1:RopeNode> isa ConcatNode */
@@ -213,11 +211,10 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 50);
-exit(1);
+show_backtrace(1);
 }
 var3 = NEW_ropes__LeafNode(&type_ropes__LeafNode);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_ropes__LeafNode__init]))(var3, var_str) /* init on <var3:LeafNode>*/;
-CHECK_NEW_ropes__LeafNode(var3);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_ropes__ConcatNode__right_child_61d]))(var1, var3) /* right_child= on <var1:RopeNode(ConcatNode)>*/;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__parent_node]))(self) /* parent_node on <self:Rope>*/;
 /* <var4:RopeNode> isa ConcatNode */
@@ -232,7 +229,7 @@ if (!var5) {
 var_class_name8 = var4 == NULL ? "null" : var4->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 51);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*))(var4->class->vft[COLOR_ropes__ConcatNode__update_data]))(var4) /* update_data on <var4:RopeNode(ConcatNode)>*/;
 RET_LABEL:;
@@ -248,7 +245,6 @@ val* var /* : SequenceRead[Char] */;
 val* var1 /* : CharRopeView */;
 var1 = NEW_ropes__CharRopeView(&type_ropes__CharRopeView);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_ropes__CharRopeView__init]))(var1, self) /* init on <var1:CharRopeView>*/;
-CHECK_NEW_ropes__CharRopeView(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -308,7 +304,7 @@ var5 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__str_representation]
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 70);
-exit(1);
+show_backtrace(1);
 }
 var = var5;
 goto RET_LABEL;
@@ -374,7 +370,6 @@ var10 = 0;
 var_offset = var10;
 var11 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var11->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var11, self) /* init on <var11:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var11);
 var_iter = var11;
 for(;;) {
 var12 = ((short int (*)(val*))(var_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_iter) /* is_ok on <var_iter:DFSRopeLeafIterator>*/;
@@ -495,7 +490,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_position >= var2;
 var3 = var6;
@@ -513,7 +508,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_position < var7;
 var8 = var14;
@@ -527,13 +522,12 @@ var1 = var_;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 96);
-exit(1);
+show_backtrace(1);
 }
 var15 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__parent_node]))(self) /* parent_node on <self:Rope>*/;
 var_curr_node = var15;
 var16 = NEW_list__List(&type_list__Listropes__TupleVisitNode);
 ((void (*)(val*))(var16->class->vft[COLOR_list__List__init]))(var16) /* init on <var16:List[TupleVisitNode]>*/;
-CHECK_NEW_list__List(var16);
 var_visit_stack = var16;
 for(;;) {
 /* <var_curr_node:nullable RopeNode> isa ConcatNode */
@@ -551,7 +545,6 @@ var17 = var_curr_node->type->type_table[cltype18] == idtype19;
 if (var17){
 var20 = NEW_ropes__TupleVisitNode(&type_ropes__TupleVisitNode);
 ((void (*)(val*, val*))(var20->class->vft[COLOR_ropes__TupleVisitNode__init]))(var20, var_curr_node) /* init on <var20:TupleVisitNode>*/;
-CHECK_NEW_ropes__TupleVisitNode(var20);
 var_curr_visit_tuple = var20;
 var22 = ((val* (*)(val*))(var_curr_node->class->vft[COLOR_ropes__ConcatNode__left_child]))(var_curr_node) /* left_child on <var_curr_node:nullable RopeNode(ConcatNode)>*/;
 var23 = NULL;
@@ -567,7 +560,7 @@ var25 = ((val* (*)(val*))(var_curr_node->class->vft[COLOR_ropes__ConcatNode__lef
 if (var25 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 107);
-exit(1);
+show_backtrace(1);
 } else {
 var26 = ((long (*)(val*))(var25->class->vft[COLOR_ropes__RopeNode__length]))(var25) /* length on <var25:nullable RopeNode>*/;
 }
@@ -579,7 +572,7 @@ if (!var29) {
 var_class_name32 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var33 = var_position < var26;
 var27 = var33;
@@ -618,7 +611,7 @@ var44 = ((val* (*)(val*))(var_curr_node->class->vft[COLOR_ropes__ConcatNode__lef
 if (var44 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 113);
-exit(1);
+show_backtrace(1);
 } else {
 var45 = ((long (*)(val*))(var44->class->vft[COLOR_ropes__RopeNode__length]))(var44) /* length on <var44:nullable RopeNode>*/;
 }
@@ -646,7 +639,7 @@ varonce = var50;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var50) /* print on <self:Rope>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 117);
-exit(1);
+show_backtrace(1);
 }
 }
 ((void (*)(val*, val*))(var_visit_stack->class->vft[COLOR_abstract_collection__Sequence__push]))(var_visit_stack, var_curr_visit_tuple) /* push on <var_visit_stack:List[TupleVisitNode]>*/;
@@ -666,7 +659,6 @@ var54 = var_curr_node->type->type_table[cltype55] == idtype56;
 if (var54){
 var57 = NEW_ropes__TupleLeafNodePos(&type_ropes__TupleLeafNodePos);
 ((void (*)(val*, val*, long, val*))(var57->class->vft[COLOR_ropes__TupleLeafNodePos__init]))(var57, var_curr_node, var_position, var_visit_stack) /* init on <var57:TupleLeafNodePos>*/;
-CHECK_NEW_ropes__TupleLeafNodePos(var57);
 var = var57;
 goto RET_LABEL;
 } else {
@@ -708,11 +700,9 @@ val* var11 /* : BufferRope */;
 var_other = p0;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_new_rope = var1;
 var2 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var2->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var2, self) /* init on <var2:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var2);
 var_first_iter = var2;
 for(;;) {
 var3 = ((short int (*)(val*))(var_first_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_first_iter) /* is_ok on <var_first_iter:DFSRopeLeafIterator>*/;
@@ -727,7 +717,6 @@ CONTINUE_label: (void)0;
 BREAK_label: (void)0;
 var7 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var7->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var7, var_other) /* init on <var7:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var7);
 var_second_iter = var7;
 for(;;) {
 var8 = ((short int (*)(val*))(var_second_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_second_iter) /* is_ok on <var_second_iter:DFSRopeLeafIterator>*/;
@@ -779,7 +768,6 @@ val* var14 /* : BufferRope */;
 var_ropes = p0;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_new_rope = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__iterator]))(self) /* iterator on <self:Rope>*/;
 var_self_iter = var2;
@@ -852,7 +840,6 @@ val* var11 /* : BufferRope */;
 var_repeats = p0;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_new_rope = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_string__Object__to_s]))(self) /* to_s on <self:Rope>*/;
 var_str = var2;
@@ -861,7 +848,6 @@ var4 = 1;
 var5 = BOX_kernel__Int(var4); /* autobox from Int to Discrete */
 var6 = BOX_kernel__Int(var_repeats); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var3->class->vft[COLOR_range__Range__init]))(var3, var5, var6) /* init on <var3:Range[Int]>*/;
-CHECK_NEW_range__Range(var3);
 var7 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__iterator]))(var3) /* iterator on <var3:Range[Int]>*/;
 for(;;) {
 var8 = ((short int (*)(val*))(var7->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var7) /* is_ok on <var7:Iterator[nullable Object]>*/;
@@ -895,7 +881,6 @@ val* var /* : Iterator[LeafNode] */;
 val* var1 /* : DFSRopeLeafIterator */;
 var1 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var1, self) /* init on <var1:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1029,7 +1014,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_count >= var1;
 var2 = var5;
@@ -1039,7 +1024,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 205);
-exit(1);
+show_backtrace(1);
 }
 var6 = 0;
 { /* Inline kernel#Int#< (var_index_from,var6) */
@@ -1050,7 +1035,7 @@ if (!var9) {
 var_class_name12 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var13 = var_index_from < var6;
 var7 = var13;
@@ -1074,7 +1059,7 @@ if (!var20) {
 var_class_name23 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var24 = var_count < var17;
 var18 = var24;
@@ -1105,7 +1090,7 @@ if (!var33) {
 var_class_name36 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var37 = var27 >= var30;
 var31 = var37;
@@ -1125,11 +1110,9 @@ var_count = var39;
 }
 var42 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var42->class->vft[COLOR_ropes__BufferRope__init]))(var42) /* init on <var42:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var42);
 var_buffer = var42;
 var43 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*, long))(var43->class->vft[COLOR_ropes__DFSRopeLeafIterator__with_index]))(var43, self, var_index_from) /* with_index on <var43:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var43);
 var_iter = var43;
 var44 = ((long (*)(val*))(var_iter->class->vft[COLOR_ropes__RopeIterator__pos]))(var_iter) /* pos on <var_iter:DFSRopeLeafIterator>*/;
 { /* Inline kernel#Int#- (var_index_from,var44) */
@@ -1162,7 +1145,7 @@ if (!var56) {
 var_class_name59 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name59);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var60 = var_curr_subrope_index > var53;
 var54 = var60;
@@ -1181,7 +1164,7 @@ if (!var66) {
 var_class_name69 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var70 = var_count >= var63;
 var64 = var70;
@@ -1232,7 +1215,7 @@ if (!var94) {
 var_class_name97 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name97);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var98 = var_count >= var91;
 var92 = var98;
@@ -1296,11 +1279,9 @@ val* var6 /* : String */;
 val* var7 /* : BufferRope */;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_new_rope = var1;
 var2 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var2->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var2, self) /* init on <var2:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var2);
 var_iter = var2;
 for(;;) {
 var3 = ((short int (*)(val*))(var_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_iter) /* is_ok on <var_iter:DFSRopeLeafIterator>*/;
@@ -1342,11 +1323,9 @@ val* var6 /* : String */;
 val* var7 /* : BufferRope */;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_new_rope = var1;
 var2 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var2->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var2, self) /* init on <var2:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var2);
 var_iter = var2;
 for(;;) {
 var3 = ((short int (*)(val*))(var_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_iter) /* is_ok on <var_iter:DFSRopeLeafIterator>*/;
@@ -1478,7 +1457,6 @@ goto RET_LABEL;
 }
 var12 = NEW_ropes__RopeCharIterator(&type_ropes__RopeCharIterator);
 ((void (*)(val*, val*))(var12->class->vft[COLOR_ropes__RopeCharIterator__init]))(var12, self) /* init on <var12:RopeCharIterator>*/;
-CHECK_NEW_ropes__RopeCharIterator(var12);
 var_self_iter = var12;
 /* <var_other:nullable Object> isa Rope */
 cltype14 = type_ropes__Rope.color;
@@ -1510,7 +1488,6 @@ goto RET_LABEL;
 }
 var23 = NEW_ropes__RopeCharIterator(&type_ropes__RopeCharIterator);
 ((void (*)(val*, val*))(var23->class->vft[COLOR_ropes__RopeCharIterator__init]))(var23, var_other) /* init on <var23:RopeCharIterator>*/;
-CHECK_NEW_ropes__RopeCharIterator(var23);
 var_other_iterator = var23;
 for(;;) {
 var24 = ((short int (*)(val*))(var_self_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_self_iter) /* is_ok on <var_self_iter:RopeCharIterator>*/;
@@ -1670,7 +1647,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 301);
-exit(1);
+show_backtrace(1);
 }
 var_other = p0;
 var2 = ((val* (*)(val*))(var_other->class->vft[COLOR_ropes__Rope__chars]))(var_other) /* chars on <var_other:Rope>*/;
@@ -1701,7 +1678,7 @@ if (!var15) {
 var_class_name18 = var12 == NULL ? "null" : var12->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 437);
-exit(1);
+show_backtrace(1);
 }
 var19 = ((struct instance_kernel__Char*)var12)->value; /* autounbox from nullable Object to Char */;
 var20 = var_i < var19;
@@ -1724,7 +1701,7 @@ if (!var25) {
 var_class_name28 = var22 == NULL ? "null" : var22->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 439);
-exit(1);
+show_backtrace(1);
 }
 var29 = ((struct instance_kernel__Char*)var22)->value; /* autounbox from nullable Object to Char */;
 var30 = var_i > var29;
@@ -1847,7 +1824,7 @@ var2 = 1; /* arg is null and recv is not */
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 353);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var_root->class->vft[COLOR_ropes__ConcatNode__left_child]))(var_root) /* left_child on <var_root:ConcatNode>*/;
 /* <var3:nullable RopeNode> isa ConcatNode */
@@ -1866,7 +1843,7 @@ if (!var4) {
 var_class_name = var3 == NULL ? "null" : var3->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 354);
-exit(1);
+show_backtrace(1);
 }
 var_pivot = var3;
 var5 = ((val* (*)(val*))(var_pivot->class->vft[COLOR_ropes__ConcatNode__right_child]))(var_pivot) /* right_child on <var_pivot:ConcatNode>*/;
@@ -1941,7 +1918,7 @@ var2 = 1; /* arg is null and recv is not */
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 386);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var_root->class->vft[COLOR_ropes__ConcatNode__right_child]))(var_root) /* right_child on <var_root:ConcatNode>*/;
 /* <var3:nullable RopeNode> isa ConcatNode */
@@ -1960,7 +1937,7 @@ if (!var4) {
 var_class_name = var3 == NULL ? "null" : var3->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 387);
-exit(1);
+show_backtrace(1);
 }
 var_pivot = var3;
 var5 = ((val* (*)(val*))(var_pivot->class->vft[COLOR_ropes__ConcatNode__left_child]))(var_pivot) /* left_child on <var_pivot:ConcatNode>*/;
@@ -2056,7 +2033,7 @@ if (!var10) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var11 = var_node_balance < var5;
 var8 = var11;
@@ -2076,7 +2053,7 @@ if (!var15) {
 var_class_name18 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var19 = var_node_balance > var12;
 var13 = var19;
@@ -2163,7 +2140,7 @@ if (!var7) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var8 = var_balance_factor < var2;
 var5 = var8;
@@ -2175,7 +2152,7 @@ var9 = ((val* (*)(val*))(var_node->class->vft[COLOR_ropes__ConcatNode__right_chi
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 429);
-exit(1);
+show_backtrace(1);
 } else {
 var10 = ((long (*)(val*))(var9->class->vft[COLOR_ropes__RopeNode__balance_factor]))(var9) /* balance_factor on <var9:nullable RopeNode>*/;
 }
@@ -2189,7 +2166,7 @@ if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var18 = var_right_balance < var11;
 var12 = var18;
@@ -2216,7 +2193,7 @@ if (!var20) {
 var_class_name23 = var19 == NULL ? "null" : var19->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 433);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__rotate_right]))(self, var19) /* rotate_right on <self:BufferRope>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__rotate_left]))(self, var_node) /* rotate_left on <self:BufferRope>*/;
@@ -2226,7 +2203,7 @@ var24 = ((val* (*)(val*))(var_node->class->vft[COLOR_ropes__ConcatNode__left_chi
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 437);
-exit(1);
+show_backtrace(1);
 } else {
 var25 = ((long (*)(val*))(var24->class->vft[COLOR_ropes__RopeNode__balance_factor]))(var24) /* balance_factor on <var24:nullable RopeNode>*/;
 }
@@ -2240,7 +2217,7 @@ if (!var29) {
 var_class_name32 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var33 = var_left_balance > var26;
 var27 = var33;
@@ -2267,7 +2244,7 @@ if (!var35) {
 var_class_name38 = var34 == NULL ? "null" : var34->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ConcatNode", var_class_name38);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 441);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__rotate_left]))(self, var34) /* rotate_left on <self:BufferRope>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__rotate_right]))(self, var_node) /* rotate_right on <self:BufferRope>*/;
@@ -2369,7 +2346,7 @@ var10 = ((val* (*)(val*))(var_last_node->class->vft[COLOR_ropes__ConcatNode__rig
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 458);
-exit(1);
+show_backtrace(1);
 }
 var_last_node = var10;
 CONTINUE_label: (void)0;
@@ -2387,7 +2364,6 @@ if (var11){
 var14 = NEW_ropes__LeafNode(&type_ropes__LeafNode);
 var15 = ((val* (*)(val*))(var_str->class->vft[COLOR_string__Object__to_s]))(var_str) /* to_s on <var_str:Collection[Char](AbstractString)>*/;
 ((void (*)(val*, val*))(var14->class->vft[COLOR_ropes__LeafNode__init]))(var14, var15) /* init on <var14:LeafNode>*/;
-CHECK_NEW_ropes__LeafNode(var14);
 ((void (*)(val*, val*))(var_last_node->class->vft[COLOR_ropes__ConcatNode__right_child_61d]))(var_last_node, var14) /* right_child= on <var_last_node:RopeNode(ConcatNode)>*/;
 } else {
 /* <var_last_node:RopeNode> isa LeafNode */
@@ -2403,12 +2379,11 @@ var19 = ((val* (*)(val*))(var_last_node->class->vft[COLOR_ropes__RopeNode__paren
 var_last_node_parent = var19;
 var20 = NEW_ropes__ConcatNode(&type_ropes__ConcatNode);
 ((void (*)(val*))(var20->class->vft[COLOR_ropes__ConcatNode__init]))(var20) /* init on <var20:ConcatNode>*/;
-CHECK_NEW_ropes__ConcatNode(var20);
 var_new_concat = var20;
 if (var_last_node_parent == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 466);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_last_node_parent->class->vft[COLOR_ropes__ConcatNode__right_child_61d]))(var_last_node_parent, var_new_concat) /* right_child= on <var_last_node_parent:nullable ConcatNode>*/;
 }
@@ -2416,7 +2391,6 @@ exit(1);
 var21 = NEW_ropes__LeafNode(&type_ropes__LeafNode);
 var22 = ((val* (*)(val*))(var_str->class->vft[COLOR_string__Object__to_s]))(var_str) /* to_s on <var_str:Collection[Char](AbstractString)>*/;
 ((void (*)(val*, val*))(var21->class->vft[COLOR_ropes__LeafNode__init]))(var21, var22) /* init on <var21:LeafNode>*/;
-CHECK_NEW_ropes__LeafNode(var21);
 ((void (*)(val*, val*))(var_new_concat->class->vft[COLOR_ropes__ConcatNode__right_child_61d]))(var_new_concat, var21) /* right_child= on <var_new_concat:ConcatNode>*/;
 var_last_node = var_new_concat;
 } else {
@@ -2432,7 +2406,7 @@ varonce = var23;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var23) /* print on <self:BufferRope>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 472);
-exit(1);
+show_backtrace(1);
 }
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__balance_from_node]))(self, var_last_node) /* balance_from_node on <self:BufferRope>*/;
@@ -2440,7 +2414,6 @@ exit(1);
 var27 = NEW_string__Buffer(&type_string__Buffer);
 var28 = ((long (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collection__length]))(var_str) /* length on <var_str:Collection[Char]>*/;
 ((void (*)(val*, long))(var27->class->vft[COLOR_string__Buffer__with_capacity]))(var27, var28) /* with_capacity on <var27:Buffer>*/;
-CHECK_NEW_string__Buffer(var27);
 var_buf = var27;
 var29 = ((val* (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_str) /* iterator on <var_str:Collection[Char]>*/;
 for(;;) {
@@ -2606,7 +2579,7 @@ var10 = ((val* (*)(val*))(var_curr_node->class->vft[COLOR_ropes__ConcatNode__lef
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 505);
-exit(1);
+show_backtrace(1);
 }
 var_curr_node = var10;
 CONTINUE_label: (void)0;
@@ -2624,7 +2597,6 @@ if (var11){
 var14 = NEW_ropes__LeafNode(&type_ropes__LeafNode);
 var15 = ((val* (*)(val*))(var_str->class->vft[COLOR_string__Object__to_s]))(var_str) /* to_s on <var_str:Collection[Char](AbstractString)>*/;
 ((void (*)(val*, val*))(var14->class->vft[COLOR_ropes__LeafNode__init]))(var14, var15) /* init on <var14:LeafNode>*/;
-CHECK_NEW_ropes__LeafNode(var14);
 ((void (*)(val*, val*))(var_curr_node->class->vft[COLOR_ropes__ConcatNode__left_child_61d]))(var_curr_node, var14) /* left_child= on <var_curr_node:RopeNode(ConcatNode)>*/;
 } else {
 /* <var_curr_node:RopeNode> isa LeafNode */
@@ -2640,19 +2612,17 @@ var19 = ((val* (*)(val*))(var_curr_node->class->vft[COLOR_ropes__RopeNode__paren
 var_parent = var19;
 var20 = NEW_ropes__ConcatNode(&type_ropes__ConcatNode);
 ((void (*)(val*))(var20->class->vft[COLOR_ropes__ConcatNode__init]))(var20) /* init on <var20:ConcatNode>*/;
-CHECK_NEW_ropes__ConcatNode(var20);
 var_new_concat = var20;
 var21 = NEW_ropes__LeafNode(&type_ropes__LeafNode);
 var22 = ((val* (*)(val*))(var_str->class->vft[COLOR_string__Object__to_s]))(var_str) /* to_s on <var_str:Collection[Char](AbstractString)>*/;
 ((void (*)(val*, val*))(var21->class->vft[COLOR_ropes__LeafNode__init]))(var21, var22) /* init on <var21:LeafNode>*/;
-CHECK_NEW_ropes__LeafNode(var21);
 var_new_leaf = var21;
 ((void (*)(val*, val*))(var_new_concat->class->vft[COLOR_ropes__ConcatNode__left_child_61d]))(var_new_concat, var_new_leaf) /* left_child= on <var_new_concat:ConcatNode>*/;
 ((void (*)(val*, val*))(var_new_concat->class->vft[COLOR_ropes__ConcatNode__right_child_61d]))(var_new_concat, var_curr_node) /* right_child= on <var_new_concat:ConcatNode>*/;
 if (var_parent == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 516);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_parent->class->vft[COLOR_ropes__ConcatNode__left_child_61d]))(var_parent, var_new_concat) /* left_child= on <var_parent:nullable ConcatNode>*/;
 }
@@ -2670,7 +2640,7 @@ varonce = var23;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var23) /* print on <self:BufferRope>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 520);
-exit(1);
+show_backtrace(1);
 }
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__BufferRope__balance_from_node]))(self, var_curr_node) /* balance_from_node on <self:BufferRope>*/;
@@ -2678,7 +2648,6 @@ exit(1);
 var27 = NEW_string__Buffer(&type_string__Buffer);
 var28 = ((long (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collection__length]))(var_str) /* length on <var_str:Collection[Char]>*/;
 ((void (*)(val*, long))(var27->class->vft[COLOR_string__Buffer__with_capacity]))(var27, var28) /* with_capacity on <var27:Buffer>*/;
-CHECK_NEW_string__Buffer(var27);
 var_buf = var27;
 var29 = ((val* (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_str) /* iterator on <var_str:Collection[Char]>*/;
 for(;;) {
@@ -2781,11 +2750,9 @@ short int var17 /* : Bool */;
 var_str = p0;
 var1 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var1, var_str) /* init on <var1:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var1);
 var_other_iter = var1;
 var2 = NEW_list__List(&type_list__Liststring__String);
 ((void (*)(val*))(var2->class->vft[COLOR_list__List__init]))(var2) /* init on <var2:List[String]>*/;
-CHECK_NEW_list__List(var2);
 var_modif_list = var2;
 for(;;) {
 var3 = ((short int (*)(val*))(var_other_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_other_iter) /* is_ok on <var_other_iter:DFSRopeLeafIterator>*/;
@@ -2808,7 +2775,7 @@ if (!var10) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var11 = var6 > var7;
 var8 = var11;
@@ -2862,15 +2829,12 @@ short int var10 /* : Bool */;
 val* var11 /* : nullable String */;
 var1 = NEW_ropes__BufferRope(&type_ropes__BufferRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__init]))(var1) /* init on <var1:BufferRope>*/;
-CHECK_NEW_ropes__BufferRope(var1);
 var_buffer_rope = var1;
 var2 = NEW_ropes__ImmutableRope(&type_ropes__ImmutableRope);
 ((void (*)(val*))(var2->class->vft[COLOR_ropes__ImmutableRope__init]))(var2) /* init on <var2:ImmutableRope>*/;
-CHECK_NEW_ropes__ImmutableRope(var2);
 var_new_rope = var2;
 var3 = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var3, self) /* init on <var3:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var3);
 var_iter = var3;
 for(;;) {
 var4 = ((short int (*)(val*))(var_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_iter) /* is_ok on <var_iter:DFSRopeLeafIterator>*/;
@@ -2914,7 +2878,6 @@ val* var_immutable_self /* var immutable_self: ImmutableRope */;
 val* var2 /* : RopeNode */;
 var1 = NEW_ropes__ImmutableRope(&type_ropes__ImmutableRope);
 ((void (*)(val*))(var1->class->vft[COLOR_ropes__ImmutableRope__init]))(var1) /* init on <var1:ImmutableRope>*/;
-CHECK_NEW_ropes__ImmutableRope(var1);
 var_immutable_self = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__parent_node]))(self) /* parent_node on <self:BufferRope>*/;
 ((void (*)(val*, val*))(var_immutable_self->class->vft[COLOR_ropes__Rope__parent_node_61d]))(var_immutable_self, var2) /* parent_node= on <var_immutable_self:ImmutableRope>*/;
@@ -2957,7 +2920,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 603);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -2996,7 +2959,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 608);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -3035,7 +2998,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 613);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -3074,7 +3037,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 618);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -3127,7 +3090,7 @@ var8 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__Rope__str_representation]
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 629);
-exit(1);
+show_backtrace(1);
 }
 var = var8;
 goto RET_LABEL;
@@ -3191,7 +3154,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 654);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__to_immutable]))(var1) /* to_immutable on <var1:Rope(BufferRope)>*/;
 var = var3;
@@ -3232,7 +3195,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 659);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__to_immutable]))(var1) /* to_immutable on <var1:Rope(BufferRope)>*/;
 var = var3;
@@ -3273,7 +3236,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 664);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__to_immutable]))(var1) /* to_immutable on <var1:Rope(BufferRope)>*/;
 var = var3;
@@ -3314,7 +3277,7 @@ if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "BufferRope", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 669);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var1->class->vft[COLOR_ropes__BufferRope__to_immutable]))(var1) /* to_immutable on <var1:Rope(BufferRope)>*/;
 var = var3;
@@ -3339,7 +3302,7 @@ var1 = self->attrs[COLOR_ropes__CharRopeView___64dtarget].val; /* @target on <se
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @target");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 681);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3465,13 +3428,12 @@ if (!var1) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SequenceRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 697);
-exit(1);
+show_backtrace(1);
 }
 var_char = p0;
 var2 = NEW_ropes__RopeCharIterator(&type_ropes__RopeCharIterator);
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__CharRopeView__target]))(self) /* target on <self:CharRopeView>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_ropes__RopeCharIterator__init]))(var2, var3) /* init on <var2:RopeCharIterator>*/;
-CHECK_NEW_ropes__RopeCharIterator(var2);
 var_intern_iter = var2;
 for(;;) {
 var4 = ((short int (*)(val*))(var_intern_iter->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_intern_iter) /* is_ok on <var_intern_iter:RopeCharIterator>*/;
@@ -3528,7 +3490,6 @@ val* var2 /* : Rope */;
 var1 = NEW_ropes__RopeCharIterator(&type_ropes__RopeCharIterator);
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__CharRopeView__target]))(self) /* target on <self:CharRopeView>*/;
 ((void (*)(val*, val*))(var1->class->vft[COLOR_ropes__RopeCharIterator__init]))(var1, var2) /* init on <var1:RopeCharIterator>*/;
-CHECK_NEW_ropes__RopeCharIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3628,7 +3589,7 @@ if (!var1) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 715);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -3704,7 +3665,7 @@ if (!var1) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 727);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:CharRopeView>*/;
@@ -3953,7 +3914,7 @@ var1 = self->attrs[COLOR_ropes__TupleVisitNode___64dnode].val; /* @node on <self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @node");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 775);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4042,7 +4003,7 @@ var1 = self->attrs[COLOR_ropes__RopeIterator___target].val; /* _target on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _target");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 789);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -4120,7 +4081,7 @@ var1 = self->attrs[COLOR_ropes__RopeCharIterator___64dsub_str_iter].val; /* @sub
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @sub_str_iter");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 810);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4241,7 +4202,6 @@ val* var5 /* : String */;
 var_tgt = p0;
 var = NEW_ropes__DFSRopeLeafIterator(&type_ropes__DFSRopeLeafIterator);
 ((void (*)(val*, val*))(var->class->vft[COLOR_ropes__DFSRopeLeafIterator__init]))(var, var_tgt) /* init on <var:DFSRopeLeafIterator>*/;
-CHECK_NEW_ropes__DFSRopeLeafIterator(var);
 ((void (*)(val*, val*))(self->class->vft[COLOR_ropes__RopeCharIterator__sub_str_iter_61d]))(self, var) /* sub_str_iter= on <self:RopeCharIterator>*/;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__sub_str_iter]))(self) /* sub_str_iter on <self:RopeCharIterator>*/;
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var1) /* is_ok on <var1:DFSRopeLeafIterator>*/;
@@ -4271,7 +4231,7 @@ var2 = ((long (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__sub_pos
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 828);
-exit(1);
+show_backtrace(1);
 } else {
 var3 = ((val* (*)(val*, long))(var1->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var1, var2) /* [] on <var1:nullable String>*/;
 }
@@ -4350,7 +4310,7 @@ var14 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__curr_s
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 833);
-exit(1);
+show_backtrace(1);
 } else {
 var15 = ((long (*)(val*))(var14->class->vft[COLOR_abstract_collection__Collection__length]))(var14) /* length on <var14:nullable String>*/;
 }
@@ -4362,7 +4322,7 @@ if (!var18) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var19 = var13 < var15;
 var16 = var19;
@@ -4432,14 +4392,14 @@ var = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterato
 if (!var) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 839);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((long (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__sub_pos]))(self) /* sub_pos on <self:RopeCharIterator>*/;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__curr_substring]))(self) /* curr_substring on <self:RopeCharIterator>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 840);
-exit(1);
+show_backtrace(1);
 } else {
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:nullable String>*/;
 }
@@ -4458,7 +4418,7 @@ if (!var10) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var11 = var1 < var5;
 var8 = var11;
@@ -4493,7 +4453,7 @@ var24 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__RopeCharIterator__curr_s
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 848);
-exit(1);
+show_backtrace(1);
 } else {
 var25 = ((long (*)(val*))(var24->class->vft[COLOR_abstract_collection__Collection__length]))(var24) /* length on <var24:nullable String>*/;
 }
@@ -4544,7 +4504,7 @@ var1 = self->attrs[COLOR_ropes__DFSRopeLeafIterator___64dvisit_stack].val; /* @v
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @visit_stack");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 865);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4628,7 +4588,6 @@ if (var2){
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__DFSRopeLeafIterator__visit_stack]))(self) /* visit_stack on <self:DFSRopeLeafIterator>*/;
 var4 = NEW_ropes__TupleVisitNode(&type_ropes__TupleVisitNode);
 ((void (*)(val*, val*))(var4->class->vft[COLOR_ropes__TupleVisitNode__init]))(var4, var_first_node) /* init on <var4:TupleVisitNode>*/;
-CHECK_NEW_ropes__TupleVisitNode(var4);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_abstract_collection__Sequence__push]))(var3, var4) /* push on <var3:List[TupleVisitNode]>*/;
 } else {
 /* <var_first_node:RopeNode> isa LeafNode */
@@ -4731,7 +4690,7 @@ var = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterato
 if (!var) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 902);
-exit(1);
+show_backtrace(1);
 }
 var_ = self;
 var1 = ((long (*)(val*))(var_->class->vft[COLOR_ropes__RopeIterator__pos]))(var_) /* pos on <var_:DFSRopeLeafIterator>*/;
@@ -4739,7 +4698,7 @@ var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__DFSRopeLeafIterator__curr
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 903);
-exit(1);
+show_backtrace(1);
 } else {
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_ropes__LeafNode__value]))(var2) /* value on <var2:nullable LeafNode>*/;
 }
@@ -4839,7 +4798,6 @@ if (var12){
 var13 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__DFSRopeLeafIterator__visit_stack]))(self) /* visit_stack on <self:DFSRopeLeafIterator>*/;
 var14 = NEW_ropes__TupleVisitNode(&type_ropes__TupleVisitNode);
 ((void (*)(val*, val*))(var14->class->vft[COLOR_ropes__TupleVisitNode__init]))(var14, var_next_node) /* init on <var14:TupleVisitNode>*/;
-CHECK_NEW_ropes__TupleVisitNode(var14);
 ((void (*)(val*, val*))(var13->class->vft[COLOR_abstract_collection__Sequence__push]))(var13, var14) /* push on <var13:List[TupleVisitNode]>*/;
 } else {
 /* <var_next_node:nullable RopeNode(RopeNode)> isa LeafNode */
@@ -4887,7 +4845,6 @@ if (var25){
 var28 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__DFSRopeLeafIterator__visit_stack]))(self) /* visit_stack on <self:DFSRopeLeafIterator>*/;
 var29 = NEW_ropes__TupleVisitNode(&type_ropes__TupleVisitNode);
 ((void (*)(val*, val*))(var29->class->vft[COLOR_ropes__TupleVisitNode__init]))(var29, var_next_node) /* init on <var29:TupleVisitNode>*/;
-CHECK_NEW_ropes__TupleVisitNode(var29);
 ((void (*)(val*, val*))(var28->class->vft[COLOR_abstract_collection__Sequence__push]))(var28, var29) /* push on <var28:List[TupleVisitNode]>*/;
 } else {
 /* <var_next_node:nullable RopeNode(RopeNode)> isa LeafNode */
@@ -4931,13 +4888,13 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterat
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 951);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__DFSRopeLeafIterator__curr_leaf]))(self) /* curr_leaf on <self:DFSRopeLeafIterator>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 952);
-exit(1);
+show_backtrace(1);
 }
 var = var2;
 goto RET_LABEL;
@@ -5148,7 +5105,7 @@ self->attrs[COLOR_ropes__ConcatNode___left_child].val = var_new_node; /* _left_c
 if (var_new_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1010);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_new_node->class->vft[COLOR_ropes__RopeNode__parent_61d]))(var_new_node, self) /* parent= on <var_new_node:nullable RopeNode>*/;
 }
@@ -5168,7 +5125,7 @@ self->attrs[COLOR_ropes__ConcatNode___right_child].val = var_new_node; /* _right
 if (var_new_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1017);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_new_node->class->vft[COLOR_ropes__RopeNode__parent_61d]))(var_new_node, self) /* parent= on <var_new_node:nullable RopeNode>*/;
 }
@@ -5254,7 +5211,7 @@ var6 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__left_child]))
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1029);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((long (*)(val*))(var6->class->vft[COLOR_ropes__RopeNode__length]))(var6) /* length on <var6:nullable RopeNode>*/;
 }
@@ -5269,7 +5226,7 @@ var11 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__left_child])
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1030);
-exit(1);
+show_backtrace(1);
 } else {
 var12 = ((long (*)(val*))(var11->class->vft[COLOR_ropes__RopeNode__height]))(var11) /* height on <var11:nullable RopeNode>*/;
 }
@@ -5289,7 +5246,7 @@ if (!var20) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var21 = var14 > var17;
 var18 = var21;
@@ -5301,7 +5258,7 @@ var22 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__left_child])
 if (var22 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1030);
-exit(1);
+show_backtrace(1);
 } else {
 var23 = ((long (*)(val*))(var22->class->vft[COLOR_ropes__RopeNode__height]))(var22) /* height on <var22:nullable RopeNode>*/;
 }
@@ -5331,7 +5288,7 @@ var33 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__right_child]
 if (var33 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1033);
-exit(1);
+show_backtrace(1);
 } else {
 var34 = ((long (*)(val*))(var33->class->vft[COLOR_ropes__RopeNode__length]))(var33) /* length on <var33:nullable RopeNode>*/;
 }
@@ -5346,7 +5303,7 @@ var38 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__right_child]
 if (var38 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1034);
-exit(1);
+show_backtrace(1);
 } else {
 var39 = ((long (*)(val*))(var38->class->vft[COLOR_ropes__RopeNode__height]))(var38) /* height on <var38:nullable RopeNode>*/;
 }
@@ -5366,7 +5323,7 @@ if (!var47) {
 var_class_name50 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name50);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var51 = var41 > var44;
 var45 = var51;
@@ -5378,7 +5335,7 @@ var52 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__right_child]
 if (var52 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1034);
-exit(1);
+show_backtrace(1);
 } else {
 var53 = ((long (*)(val*))(var52->class->vft[COLOR_ropes__RopeNode__height]))(var52) /* height on <var52:nullable RopeNode>*/;
 }
@@ -5436,7 +5393,7 @@ var6 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__left_child]))
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1045);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((long (*)(val*))(var6->class->vft[COLOR_ropes__RopeNode__height]))(var6) /* height on <var6:nullable RopeNode>*/;
 }
@@ -5455,7 +5412,7 @@ var11 = ((val* (*)(val*))(self->class->vft[COLOR_ropes__ConcatNode__right_child]
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1046);
-exit(1);
+show_backtrace(1);
 } else {
 var12 = ((long (*)(val*))(var11->class->vft[COLOR_ropes__RopeNode__height]))(var11) /* height on <var11:nullable RopeNode>*/;
 }
@@ -5518,7 +5475,7 @@ var1 = self->attrs[COLOR_ropes__LeafNode___value].val; /* _value on <self:LeafNo
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _value");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/ropes.nit", 1064);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;

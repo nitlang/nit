@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight
+all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_server ../bin/nitdbg_client
 
 ../bin/nitg: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
@@ -46,6 +46,20 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nit -v nit.nit
 
+../bin/nitdbg_client : ../bin/nitg
+	@echo '***************************************************************'
+	@echo '* Compile nitdbg_client from NIT source files                      *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_client -v nitdbg_client.nit
+
+../bin/nitdbg_server : ../bin/nitg
+	@echo '***************************************************************'
+	@echo '* Compile nitdbg_server from NIT source files                      *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_server -v nitdbg_server.nit
+
 ../bin/nitx: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nitx from NIT source files                          *'
@@ -67,6 +81,13 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitlight -v nitlight.nit
 
+../bin/nitls : ../bin/nitg
+	@echo '***************************************************************'
+	@echo '* Compile nitls from NIT source files                         *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitg ${NITCOPT} -o ../bin/nitls -v nitls.nit
+
 ../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
 	@echo '* Compile nitg from C source files                            *'
@@ -80,7 +101,7 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* nit_version.nit 2> /dev/null || true
+	rm -rf -- .nit_compile* version.nit 2> /dev/null || true
 	cd parser; make clean
 
 distclean: clean

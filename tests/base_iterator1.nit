@@ -14,12 +14,12 @@
 
 class ColIterable
 	var col = new Array[String]
-	fun iterator: Iterator[String] do return new ArrayIterator[String](col)
+	fun iterator: Iterator[String] do return col.iterator
 end
 
 class MapIterable
 	var map = new HashMap[String, Array[Char]]
-	fun iterator: MapIterator[String, Array[Char]] do return new HashMapIterator[String, Array[Char]](map)
+	fun iterator: MapIterator[String, Array[Char]] do return map.iterator
 end
 
 # ok

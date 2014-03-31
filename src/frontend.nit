@@ -25,31 +25,19 @@ import typing
 import auto_super_init
 import div_by_zero
 import cached
+import serialization_phase
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
 	private var dummy: Bool = do_dummy
 	fun do_dummy: Bool
 	do
-		# Force easy warnings aftrm modelbuilder
+		# Force easy warnings after modelbuilder
 		phases.add_edge(simple_misc_analysis_phase, modelize_property_phase)
 		# Force easy warnings before intraproc-errors
 		phases.add_edge(scope_phase, simple_misc_analysis_phase)
+		# Code genrated by the serialization phase must be analyzed for literals
+		phases.add_edge(literal_phase, serialization_phase)
 		return true
 	end
-
-	fun run_global_phases(mainmodule: MModule)
-	do
-		for phase in phases_list do
-			phase.process_mainmodule(mainmodule)
-		end
-	end
 end
-
-redef class Phase
-	# Specific action to execute on the whole program
-	# Called by the `ToolContext::run_global_phases`
-	# @toimplement
-	fun process_mainmodule(mainmodule: MModule) do end
-end
-

@@ -26,13 +26,6 @@ in "C header" `{
 	#include <GLES/glext.h>
 	#include <errno.h>
 
-	#define LOGW(...) ((void)fprintf(stderr, "# warn: %s", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)fprintf(stderr, "# info: %s", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
-
 	EGLDisplay mnit_display;
 	EGLSurface mnit_surface;
 	EGLContext mnit_context;
@@ -62,10 +55,6 @@ in "C header" `{
 		GLuint fbo;
 		GLuint depth;
 		GLuint color;
-		/*
-		EGLSurface surface;
-		int width, height;
-		*/
 	};
 
 	GLenum mnit_opengles_error_code;
@@ -74,16 +63,21 @@ in "C header" `{
 `}
 
 in "C" `{
+	#define LOGW(...) ((void)fprintf(stderr, "# warn: %s (%i)\n", __VA_ARGS__))
+	#ifdef DEBUG
+		#define LOGI(...) ((void)fprintf(stderr, "# info: %s (%i)\n", __VA_ARGS__))
+	#else
+		#define LOGI(...) (void)0
+	#endif
+
 	extern NativeWindowType mnit_window;
 	extern EGLNativeDisplayType mnit_native_display;
 
 	GLfloat mnit_opengles_vertices[6][3] =
 	{
-		{0.0f, 0.0f, 0.0f},
 		{0.0f, 1.0f, 0.0f},
 		{1.0f, 1.0f, 0.0f},
 		{0.0f, 0.0f, 0.0f},
-		{1.0f, 1.0f, 0.0f},
 		{1.0f, 0.0f, 0.0f},
 	};
 	GLfloat mnit_opengles_texture[6][2] =
@@ -113,35 +107,33 @@ in "C" `{
 		image->src_xi = 1.0;
 		image->src_yi = 1.0;
 
-
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW ("a error loading image: %i\n", mnit_opengles_error_code);
-			printf( "%i\n", mnit_opengles_error_code );
+			LOGW("error loading image after malloc", mnit_opengles_error_code);
 		}
+
 		glGenTextures(1, &image->texture);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW ("b error loading image: %i\n", mnit_opengles_error_code);
-			printf( "%i\n", mnit_opengles_error_code );
+			LOGW("error loading image after glGenTextures", mnit_opengles_error_code);
 		}
+
 		glBindTexture(GL_TEXTURE_2D, image->texture);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW ("c error loading image: %i\n", mnit_opengles_error_code);
-			printf( "%i\n", mnit_opengles_error_code );
+			LOGW("error loading image glBindTexture", mnit_opengles_error_code);
 		}
+
 		glTexImage2D(	GL_TEXTURE_2D, 0, format, width, height,
 						0, format, GL_UNSIGNED_BYTE, (GLvoid*)pixels);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW ("d error loading image: %i\n", mnit_opengles_error_code);
-			printf( "%i\n", mnit_opengles_error_code );
+			LOGW("error loading image after glTexImage2D", mnit_opengles_error_code);
 		}
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW ("e error loading image: %i\n", mnit_opengles_error_code);
-			printf( "%i\n", mnit_opengles_error_code );
+			LOGW("error loading image after gtTexParameter", mnit_opengles_error_code);
 		}
 
 		return image;
@@ -174,27 +166,27 @@ class Opengles1Display
 
 		EGLDisplay display = eglGetDisplay(mnit_native_display);
 		if ( display == EGL_NO_DISPLAY) {
-			LOGW("Unable to eglGetDisplay");
+			LOGW("Unable to eglGetDisplay", 0);
 			return -1;
 		}
 
 		if ( eglInitialize(display, 0, 0) == EGL_FALSE) {
-			LOGW("Unable to eglInitialize");
+			LOGW("Unable to eglInitialize", 0);
 			return -1;
 		}
 
 		if ( eglChooseConfig(display, attribs, &config, 1, &numConfigs) == EGL_FALSE) {
-			LOGW("Unable to eglChooseConfig");
+			LOGW("Unable to eglChooseConfig", 0);
 			return -1;
 		}
 
 		if ( numConfigs == 0 ) {
-			LOGW("No configs available for egl");
+			LOGW("No configs available for egl", 0);
 			return -1;
 		}
 
 		if ( eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format) == EGL_FALSE) {
-			LOGW("Unable to eglGetConfigAttrib");
+			LOGW("Unable to eglGetConfigAttrib", 0);
 			return -1;
 		}
 
@@ -205,7 +197,7 @@ class Opengles1Display
 		context = eglCreateContext(display, config, NULL, NULL);
 
 		if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE) {
-			LOGW("Unable to eglMakeCurrent");
+			LOGW("Unable to eglMakeCurrent", 0);
 			return -1;
 		}
 
@@ -220,7 +212,10 @@ class Opengles1Display
 		mnit_height = h;
 		mnit_zoom = 1.0f;
 
-		LOGI( "surface: %i, display: %i, w %i, h %i", (int)surface, (int)display, w, h );
+		LOGI("surface", (int)surface);
+		LOGI("display", (int)display);
+		LOGI("width", w);
+		LOGI("height", h);
 
 		glViewport(0, 0, mnit_width, mnit_height);
 		glMatrixMode(GL_PROJECTION);
@@ -275,20 +270,17 @@ class Opengles1Display
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrthof(x, x+w, y+h, y, 0.0f, 1.0f);
-		/*glOrthof(0.0f, w, h, 0.0f, 0.0f, 1.0f);*/
 		mnit_zoom = ((float)w)/mnit_width;
 		glMatrixMode(GL_MODELVIEW);
 		glFrontFace( GL_CW );
 	`}
 
 	redef fun blit( image, x, y ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
@@ -310,9 +302,9 @@ class Opengles1Display
 		glDisable(GL_DEPTH_TEST);
 
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices);
-		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord ); /* mnit_opengles_texture); */
+		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -320,7 +312,7 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW ("error drawing: %i", mnit_opengles_error_code);
+		   LOGW("error drawing", mnit_opengles_error_code);
 		}
 	`}
 
@@ -332,13 +324,11 @@ class Opengles1Display
     end
 
 	redef fun blit_rotated( image, x, y, angle ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
@@ -362,7 +352,7 @@ class Opengles1Display
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices);
 		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -370,32 +360,25 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW ("error drawing: %i", mnit_opengles_error_code);
+		   LOGW("error drawing", mnit_opengles_error_code);
 		}
 	`}
-#    fun clear( r, g, b: Int ) is extern `{
-#	glClear(GL_COLOR_BUFFER_BIT);
-#    `}
 
 	# a = top left, b = bottom left, c = bottom right, d = top right
 	redef fun blit_stretched( image, ax, ay, bx, by, cx, cy, dx, dy ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
 		GLfloat mnit_opengles_vertices_stretched[6][3] =
 		{
-			{ax, ay, 0.0f},
 			{bx, by, 0.0f},
 			{cx, cy, 0.0f},
 			{ax, ay, 0.0f},
-			{cx, cy, 0.0f},
 			{dx, dy, 0.0f},
 		};
 
@@ -417,7 +400,7 @@ class Opengles1Display
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices_stretched);
 		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -425,7 +408,7 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW ("error drawing: %i", mnit_opengles_error_code);
+		   LOGW("error drawing", mnit_opengles_error_code);
 		}
 	`}
 
@@ -462,7 +445,7 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
     redef fun blended: Bool is extern `{ return recv->blended; `}
 
     # inherits scale and blend from source
-    redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image as ( Image ) `{
+    redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image.as( Image ) `{
 		struct mnit_opengles_Texture* image =
 			malloc( sizeof( struct mnit_opengles_Texture ) );
 
@@ -476,45 +459,20 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 
 		image->src_xo = ((float)x)/recv->width;
 		image->src_yo = ((float)y)/recv->height;
-		image->src_xi = ((float)w+w)/recv->width;
-		image->src_yi = ((float)x+h)/recv->height;
+		image->src_xi = ((float)x+w)/recv->width;
+		image->src_yi = ((float)y+h)/recv->height;
 
 		return Opengles1Image_as_Image( image );
     `}
 end
 
-
+# FIXME this class is broken
 extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 	super DrawableImage
     new ( w, h: Int ) is extern `{
 		struct mnit_opengles_DrawableTexture *image =
 			malloc( sizeof(struct mnit_opengles_DrawableTexture) );
 
-		#ifdef a
-		const EGLint attribs[] = {
-			EGL_WIDTH, w,
-			EGL_HEIGHT, h,
-			EGL_TEXTURE_FORMAT, EGL_TEXTURE_RGBA,
-			EGL_TEXTURE_TARGET, EGL_TEXTURE_2D,
-			EGL_NONE
-		};
-
-		image->surface = eglCreatePbufferSurface( andronit.display,
-								 andronit.config,
-								 attribs );
-		if ( eglGetError() )
-			LOGW( "eglCreatePbuffer error" );
-
-		image->width = w;
-		image->height = h;
-		image->center_x = w/2;
-		image->center_y = h/2;
-		eglMakeCurrent( andronit.display,
-						surface,
-						surface,
-						andronit.context );
-
-	#else
 		/* texture */
 		glGenTextures(1, &image->super.texture);
 		glBindTexture(GL_TEXTURE_2D, image->super.texture);
@@ -554,15 +512,8 @@ extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 
 		if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) != GL_FRAMEBUFFER_COMPLETE_OES )
 		{
-			LOGW( "framebuffer not set" );
-			if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_OES )
-				LOGW( "framebuffer not set a" );
-			else if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_OES )
-				LOGW( "framebuffer not set b" );
-			else if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES )
-				LOGW( "framebuffer not set c" );
-			else if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES )
-				LOGW( "framebuffer not set d" );
+			LOGW("framebuffer not set", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+			exit(1);
 		}
 
 		image->super.width = w;
@@ -572,29 +523,20 @@ extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 		image->super.scale = 1.0f;
 		image->super.blended = 0;
 
-		#endif
-
-		if (glGetError() != GL_NO_ERROR) LOGW( "gl error");
+		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
+		   LOGW("gl error in Opengles1DrawableImage::init", mnit_opengles_error_code);
+		   exit(1);
+		}
 
 		return image;
 	`}
 
-#    fun image: I is extern `{
-#        struct mnit_opengles_Texture *image;
-#        const uint_least32_t *pixels;
-#        pixels = malloc( sizeof(uint_least32_t)*recv->width*recv->height );
-#        glReadPixels( 0, 0, recv->width, recv->height,
-#                      GL_RGBA, GL_UNSIGNED_BYTE, pixels );
-#        image = mnit_opengles_load_image( pixels, recv->width, recv->height );
-#        return image;
-
     fun set_as_target is extern `{
 		LOGI( "sat %i", recv->fbo );
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, recv->fbo);
-		/*glBindRenderbufferOES(GL_FRAMEBUFFER_OES, recv->color);*/
-		if (glGetError() != GL_NO_ERROR) LOGW( "gl error 0");
+		if (glGetError() != GL_NO_ERROR) LOGW("gl error", 0);
 		/*glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES,&recv->fbo);
-		//if (glGetError() != GL_NO_ERROR) LOGW( "gl error a");*/
+		if (glGetError() != GL_NO_ERROR) LOGW( "gl error a");*/
 		glViewport(0, 0, recv->super.width, recv->super.height);
 
 		glMatrixMode(GL_PROJECTION);
@@ -613,7 +555,7 @@ extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 		glGenerateMipmapOES(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);*/
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, 0);
-		if (glGetError() != GL_NO_ERROR) LOGW( "gl error");
+		if (glGetError() != GL_NO_ERROR) LOGW("gl error", 0);
 	`}
 end
 

@@ -73,8 +73,8 @@ class E
 	init(i: Int) do initelt2(i)
 end
 
-class EltSorter
-	super AbstractSorter[Elt]
+class EltComparator
+	super Comparator[Elt]
 	redef fun compare(a: Elt, b: Elt): Int
 	do
 		if _is_val1 then
@@ -121,9 +121,9 @@ for i in [0..n[ do
 	array.push(generator)
 end
 
-var sorter = new EltSorter
+var comparator = new EltComparator
 for i in [0..n[ do
-	sorter.sort(array)
-	sorter.toggle
+	comparator.sort(array)
+	comparator.toggle
 end
 

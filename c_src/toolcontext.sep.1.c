@@ -35,7 +35,7 @@ var1 = self->attrs[COLOR_toolcontext__Message___64dtext].val; /* @text on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @text");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 30);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -94,7 +94,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 32);
-exit(1);
+show_backtrace(1);
 }
 var_other = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__Message__location]))(self) /* location on <self:Message>*/;
@@ -127,13 +127,13 @@ var10 = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__Message__location]
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 37);
-exit(1);
+show_backtrace(1);
 }
 var11 = ((val* (*)(val*))(var_other->class->vft[COLOR_toolcontext__Message__location]))(var_other) /* location on <var_other:Message>*/;
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 37);
-exit(1);
+show_backtrace(1);
 }
 var12 = ((short int (*)(val*, val*))(var10->class->vft[COLOR_kernel__Comparable___60d]))(var10, var11) /* < on <var10:nullable Location(Location)>*/;
 var = var12;
@@ -194,7 +194,6 @@ goto RET_LABEL;
 var5 = NEW_array__Array(&type_array__Arraykernel__Object);
 var6 = 5;
 ((void (*)(val*, long))(var5->class->vft[COLOR_array__Array__with_capacity]))(var5, var6) /* with_capacity on <var5:Array[Object]>*/;
-CHECK_NEW_array__Array(var5);
 var_ = var5;
 if (varonce) {
 var7 = varonce;
@@ -422,7 +421,6 @@ var_esc = var2;
 var5 = NEW_array__Array(&type_array__Arraykernel__Object);
 var6 = 3;
 ((void (*)(val*, long))(var5->class->vft[COLOR_array__Array__with_capacity]))(var5, var6) /* with_capacity on <var5:Array[Object]>*/;
-CHECK_NEW_array__Array(var5);
 var_ = var5;
 if (varonce) {
 var7 = varonce;
@@ -451,7 +449,6 @@ var_red = var17;
 var18 = NEW_array__Array(&type_array__Arraykernel__Object);
 var19 = 3;
 ((void (*)(val*, long))(var18->class->vft[COLOR_array__Array__with_capacity]))(var18, var19) /* with_capacity on <var18:Array[Object]>*/;
-CHECK_NEW_array__Array(var18);
 var_20 = var18;
 if (varonce21) {
 var22 = varonce21;
@@ -480,7 +477,6 @@ var_bred = var32;
 var33 = NEW_array__Array(&type_array__Arraykernel__Object);
 var34 = 3;
 ((void (*)(val*, long))(var33->class->vft[COLOR_array__Array__with_capacity]))(var33, var34) /* with_capacity on <var33:Array[Object]>*/;
-CHECK_NEW_array__Array(var33);
 var_35 = var33;
 if (varonce36) {
 var37 = varonce36;
@@ -509,7 +505,6 @@ var_green = var47;
 var48 = NEW_array__Array(&type_array__Arraykernel__Object);
 var49 = 3;
 ((void (*)(val*, long))(var48->class->vft[COLOR_array__Array__with_capacity]))(var48, var49) /* with_capacity on <var48:Array[Object]>*/;
-CHECK_NEW_array__Array(var48);
 var_50 = var48;
 if (varonce51) {
 var52 = varonce51;
@@ -538,7 +533,6 @@ var_yellow = var62;
 var63 = NEW_array__Array(&type_array__Arraykernel__Object);
 var64 = 3;
 ((void (*)(val*, long))(var63->class->vft[COLOR_array__Array__with_capacity]))(var63, var64) /* with_capacity on <var63:Array[Object]>*/;
-CHECK_NEW_array__Array(var63);
 var_65 = var63;
 if (varonce66) {
 var67 = varonce66;
@@ -588,7 +582,6 @@ if (var84){
 var85 = NEW_array__Array(&type_array__Arraykernel__Object);
 var86 = 9;
 ((void (*)(val*, long))(var85->class->vft[COLOR_array__Array__with_capacity]))(var85, var86) /* with_capacity on <var85:Array[Object]>*/;
-CHECK_NEW_array__Array(var85);
 var_87 = var85;
 if (varonce88) {
 var89 = varonce88;
@@ -652,7 +645,6 @@ goto RET_LABEL;
 var115 = NEW_array__Array(&type_array__Arraykernel__Object);
 var116 = 11;
 ((void (*)(val*, long))(var115->class->vft[COLOR_array__Array__with_capacity]))(var115, var116) /* with_capacity on <var115:Array[Object]>*/;
-CHECK_NEW_array__Array(var115);
 var_117 = var115;
 if (varonce118) {
 var119 = varonce118;
@@ -822,7 +814,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dlog_directory].val; /* @l
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @log_directory");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 78);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -855,7 +847,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dmessages].val; /* @messag
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @messages");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 81);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -888,7 +880,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dmessage_sorter].val; /* @
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @message_sorter");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 83);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -976,7 +968,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var6 = var1 > var2;
 var3 = var6;
@@ -1015,7 +1007,6 @@ var23 = NEW_array__NativeArray(var22, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var23)->values[0] = (val*) var_m;
 ((struct instance_array__NativeArray*)var23)->values[1] = (val*) var17;
 ((void (*)(val*, val*, long))(var21->class->vft[COLOR_array__Array__with_native]))(var21, var23, var22) /* with_native on <var21:Array[Object]>*/;
-CHECK_NEW_array__Array(var21);
 }
 var24 = ((val* (*)(val*))(var21->class->vft[COLOR_string__Object__to_s]))(var21) /* to_s on <var21:Array[Object]>*/;
 ((void (*)(val*, val*))(var16->class->vft[COLOR_stream__OStream__write]))(var16, var24) /* write on <var16:OFStream>*/;
@@ -1038,7 +1029,6 @@ var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var34)->values[0] = (val*) var26;
 ((struct instance_array__NativeArray*)var34)->values[1] = (val*) var28;
 ((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
-CHECK_NEW_array__Array(var32);
 }
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 ((void (*)(val*, val*))(var25->class->vft[COLOR_stream__OStream__write]))(var25, var35) /* write on <var25:OFStream>*/;
@@ -1061,7 +1051,7 @@ if (!var41) {
 var_class_name44 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name44);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var45 = var37 > var38;
 var39 = var45;
@@ -1098,7 +1088,6 @@ var_s = p1;
 var = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__messages]))(self) /* messages on <self:ToolContext>*/;
 var1 = NEW_toolcontext__Message(&type_toolcontext__Message);
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_toolcontext__Message__init]))(var1, var_l, var_s) /* init on <var1:Message>*/;
-CHECK_NEW_toolcontext__Message(var1);
 ((void (*)(val*, val*))(var->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var, var1) /* add on <var:Array[Message]>*/;
 var2 = ((long (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__error_count]))(self) /* error_count on <self:ToolContext>*/;
 var3 = 1;
@@ -1179,7 +1168,6 @@ goto RET_LABEL;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__messages]))(self) /* messages on <self:ToolContext>*/;
 var8 = NEW_toolcontext__Message(&type_toolcontext__Message);
 ((void (*)(val*, val*, val*))(var8->class->vft[COLOR_toolcontext__Message__init]))(var8, var_l, var_s) /* init on <var8:Message>*/;
-CHECK_NEW_toolcontext__Message(var8);
 ((void (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var7, var8) /* add on <var7:Array[Message]>*/;
 var9 = ((long (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__warning_count]))(self) /* warning_count on <self:ToolContext>*/;
 var10 = 1;
@@ -1230,7 +1218,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_level <= var;
 var1 = var4;
@@ -1244,7 +1232,6 @@ var6 = 1;
 var7 = NEW_array__NativeArray(var6, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var7)->values[0] = (val*) var_s;
 ((void (*)(val*, val*, long))(var5->class->vft[COLOR_array__Array__with_native]))(var5, var7, var6) /* with_native on <var5:Array[Object]>*/;
-CHECK_NEW_array__Array(var5);
 }
 var8 = ((val* (*)(val*))(var5->class->vft[COLOR_string__Object__to_s]))(var5) /* to_s on <var5:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var8) /* print on <self:ToolContext>*/;
@@ -1265,7 +1252,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64doption_context].val; /* @
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @option_context");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 136);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1298,7 +1285,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_warn].val; /* @opt_wa
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_warn");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 139);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1331,7 +1318,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_quiet].val; /* @opt_q
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_quiet");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 142);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1364,7 +1351,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_log].val; /* @opt_log
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_log");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 145);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1397,7 +1384,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_log_dir].val; /* @opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_log_dir");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 148);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1430,7 +1417,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_help].val; /* @opt_he
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_help");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 151);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1463,7 +1450,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_version].val; /* @opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_version");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 154);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1496,7 +1483,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_verbose].val; /* @opt
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_verbose");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 157);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1529,7 +1516,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_stop_on_first_error].
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_stop_on_first_error");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 160);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1562,7 +1549,7 @@ var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_no_color].val; /* @op
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_no_color");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 163);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1654,7 +1641,6 @@ var12 = NEW_array__NativeArray(var11, &type_array__NativeArrayopts__Option);
 ((struct instance_array__NativeArray*)var12)->values[7] = (val*) var8;
 ((struct instance_array__NativeArray*)var12)->values[8] = (val*) var9;
 ((void (*)(val*, val*, long))(var10->class->vft[COLOR_array__Array__with_native]))(var10, var12, var11) /* with_native on <var10:Array[Option]>*/;
-CHECK_NEW_array__Array(var10);
 }
 ((void (*)(val*, val*))(var->class->vft[COLOR_opts__OptionContext__add_option]))(var, var10) /* add_option on <var:OptionContext>*/;
 RET_LABEL:;
@@ -1725,7 +1711,7 @@ var19 = ((val* (*)(val*))(var18->class->vft[COLOR_opts__Option__value]))(var18) 
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 187);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_toolcontext__ToolContext__log_directory_61d]))(self, var19) /* log_directory= on <self:ToolContext>*/;
 } else {

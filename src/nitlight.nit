@@ -26,18 +26,13 @@ var opt_dir = new OptionString("Output html files in a specific directory (requi
 var opt_full = new OptionBool("Process also imported modules", "--full")
 var opt_ast = new OptionBool("Generate specific HTML elements for each Node of the AST", "--ast")
 toolcontext.option_context.add_option(opt_fragment, opt_first_line, opt_last_line, opt_dir, opt_full)
+toolcontext.tooldescription = "Usage: nitlight [OPTION]... <file.nit>...\nGenerates HTML of highlited code from Nit source files."
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
-
-if args.is_empty then
-	print "usage: nitlight [options] files..."
-	toolcontext.option_context.usage
-	return
-end
 
 var mmodules = modelbuilder.parse(args)
 modelbuilder.run_phases
@@ -86,9 +81,9 @@ for mm in mmodules do
 	end
 
 	if dir != null then
-		page.save("{dir}/{mm.name}.html")
+		page.write_to_file("{dir}/{mm.name}.html")
 	else
-		print page.html
+		page.write_to(stdout)
 	end
 end
 
@@ -109,7 +104,7 @@ if dir != null then
 		n2.text(mm.name)
 	end
 	page.add_raw_html "</li></body>"
-	page.save("{dir}/index.html")
+	page.write_to_file("{dir}/index.html")
 
 	var v = new HighlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)

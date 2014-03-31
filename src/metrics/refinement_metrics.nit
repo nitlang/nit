@@ -22,12 +22,12 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var refinement_metrics_phase = new RefinementMetricsPhase(self, null)
+	var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)
 end
 
 private class RefinementMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_refinement.value and not toolcontext.opt_all.value then return
 		compute_refinement_metrics(toolcontext.modelbuilder.model)

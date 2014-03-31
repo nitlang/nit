@@ -42,6 +42,7 @@ class NitdocContext
 	private var opt_dir = new OptionString("Directory where doc is generated", "-d", "--dir")
 	private var opt_source = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("Directory containing the nitdoc files", "--sharedir")
+	private var opt_shareurl = new OptionString("Do not copy shared files, link JS and CSS file to share url instead", "--shareurl")
 	private var opt_nodot = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 	private var opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 
@@ -60,7 +61,7 @@ class NitdocContext
 	init do
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
-		toolcontext.option_context.add_option(opt_sharedir)
+		toolcontext.option_context.add_option(opt_sharedir, opt_shareurl)
 		toolcontext.option_context.add_option(opt_nodot)
 		toolcontext.option_context.add_option(opt_private)
 		toolcontext.option_context.add_option(opt_custom_title)
@@ -72,14 +73,10 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_github_gitdir)
 		toolcontext.option_context.add_option(opt_piwik_tracker)
 		toolcontext.option_context.add_option(opt_piwik_site_id)
-		toolcontext.process_options
+		toolcontext.tooldescription = "Usage: nitdoc [OPTION]... <file.nit>...\nGenerates HTML pages of API documentation from Nit source files."
+		toolcontext.process_options(args)
 		self.arguments = toolcontext.option_context.rest
 
-		if arguments.length < 1 then
-			print "usage: nitdoc [options] file..."
-			toolcontext.option_context.usage
-			exit(1)
-		end
 		self.process_options
 
 		model = new Model
@@ -119,17 +116,11 @@ class NitdocContext
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
-			dir = "{share_dir.to_s}/scripts/js-facilities.js"
-			if share_dir == null then
-				print "Error: Invalid nitdoc share files. Check --sharedir or envvar NIT_DIR"
-				abort
-			end
-
-			if opt_private.value then
-				min_visibility = none_visibility
-			else
-				min_visibility = protected_visibility
-			end
+		end
+		if opt_private.value then
+			min_visibility = none_visibility
+		else
+			min_visibility = protected_visibility
 		end
 		var gh_upstream = opt_github_upstream.value
 		var gh_base_sha = opt_github_base_sha1.value
@@ -150,7 +141,11 @@ class NitdocContext
 	fun generate_nitdoc do
 		# Create destination dir if it's necessary
 		if not output_dir.file_exists then output_dir.mkdir
-		sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+		if opt_shareurl.value == null then
+			sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+		else
+			sys.system("cp -r {share_dir.to_s}/resources/ {output_dir.to_s}/resources/")
+		end
 		self.dot_dir = null
 		if not opt_nodot.value then self.dot_dir = output_dir.to_s
 		overview
@@ -161,7 +156,7 @@ class NitdocContext
 	end
 
 	private fun overview do
-		var overviewpage = new NitdocOverview(self, dot_dir)
+		var overviewpage = new NitdocOverview(self)
 		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
@@ -173,14 +168,14 @@ class NitdocContext
 	private fun modules do
 		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
-			var modulepage = new NitdocModule(mmodule, self, dot_dir)
+			var modulepage = new NitdocModule(mmodule, self)
 			modulepage.save("{output_dir.to_s}/{mmodule.url}")
 		end
 	end
 
 	private fun classes do
 		for mclass in mbuilder.model.mclasses do
-			var classpage = new NitdocClass(mclass, self, dot_dir, source)
+			var classpage = new NitdocClass(mclass, self)
 			classpage.save("{output_dir.to_s}/{mclass.url}")
 		end
 	end
@@ -223,28 +218,21 @@ end
 # Nitdoc base page
 abstract class NitdocPage
 
-	var dot_dir: nullable String
-	var source: nullable String
 	var ctx: NitdocContext
+	var shareurl = "."
 
 	init(ctx: NitdocContext) do
 		self.ctx = ctx
+		if ctx.opt_shareurl.value != null then shareurl = ctx.opt_shareurl.value.as(not null)
 	end
 
 	protected fun head do
 		append("<meta charset='utf-8'/>")
-		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
-		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
-		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
-		append("<script type='text/javascript' src='scripts/base64.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.GitHub.js'></script>")
-		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
-		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/main.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.UI.css' type='text/css''/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.QuickSearch.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.GitHub.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.ModalBox.css' type='text/css'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"
@@ -280,7 +268,7 @@ abstract class NitdocPage
 
 	# Generate a clickable graphviz image using a dot content
 	protected fun generate_dot(dot: String, name: String, alt: String) do
-		var output_dir = dot_dir
+		var output_dir = ctx.dot_dir
 		if output_dir == null then return
 		var file = new OFStream.open("{output_dir}/{name}.dot")
 		file.write(dot)
@@ -297,6 +285,7 @@ abstract class NitdocPage
 	# Add a (source) link for a given location
 	protected fun show_source(l: Location): String
 	do
+		var source = ctx.source
 		if source == null then
 			return "({l.file.filename.simplify_path})"
 		else
@@ -307,6 +296,7 @@ abstract class NitdocPage
 			source = x.join(l.line_start.to_s)
 			x = source.split_with("%L")
 			source = x.join(l.line_end.to_s)
+			source = source.simplify_path
 			return " (<a target='_blank' title='Show source' href=\"{source.to_s}\">source</a>)"
 		end
 	end
@@ -318,6 +308,7 @@ abstract class NitdocPage
 		head
 		append("</head>")
 		append("<body")
+		append(" data-bootstrap-share='{shareurl}'")
 		if ctx.opt_github_upstream.value != null and ctx.opt_github_base_sha1.value != null then
 			append(" data-github-upstream='{ctx.opt_github_upstream.value.as(not null)}'")
 			append(" data-github-base-sha1='{ctx.opt_github_base_sha1.value.as(not null)}'")
@@ -328,6 +319,9 @@ abstract class NitdocPage
 		if ctx.opt_custom_footer_text.value != null then footed = "footed"
 		append("<div class='page {footed}'>")
 		content
+		append("</div>")
+		footer
+		append("<script data-main=\"{shareurl}/js/nitdoc\" src=\"{shareurl}/js/lib/require.js\"></script>")
 
 		# piwik tracking
 		var tracker_url = ctx.opt_piwik_tracker.value
@@ -348,8 +342,6 @@ abstract class NitdocPage
 			append(" </script>")
 			append("<!-- End Piwik Code -->")
 		end
-		append("</div>")
-		footer
 		append("</body>")
 	end
 
@@ -371,10 +363,9 @@ class NitdocOverview
 	private var mbuilder: ModelBuilder
 	private var mmodules = new Array[MModule]
 
-	init(ctx: NitdocContext, dot_dir: nullable String) do
+	init(ctx: NitdocContext) do
 		super(ctx)
 		self.mbuilder = ctx.mbuilder
-		self.dot_dir = dot_dir
 		# get modules
 		var mmodules = new HashSet[MModule]
 		for mmodule in mbuilder.model.mmodule_importation_hierarchy do
@@ -445,7 +436,7 @@ class NitdocOverview
 			end
 		end
 		# build graph
-		var op = new Buffer
+		var op = new FlatBuffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
 			op.append("\"{mmodule.name}\"[URL=\"{mmodule.url}\"];\n")
@@ -464,7 +455,6 @@ class NitdocSearch
 
 	init(ctx: NitdocContext) do
 		super(ctx)
-		self.dot_dir = null
 	end
 
 	redef fun title do return "Search"
@@ -553,11 +543,10 @@ class NitdocModule
 	private var intro_mclasses = new HashSet[MClass]
 	private var redef_mclasses = new HashSet[MClass]
 
-	init(mmodule: MModule, ctx: NitdocContext, dot_dir: nullable String) do
+	init(mmodule: MModule, ctx: NitdocContext) do
 		super(ctx)
 		self.mmodule = mmodule
 		self.mbuilder = ctx.mbuilder
-		self.dot_dir = dot_dir
 		# get local mclasses
 		for m in mmodule.in_nesting.greaters do
 			for mclassdef in m.mclassdefs do
@@ -718,7 +707,7 @@ class NitdocModule
 			end
 		end
 		# build graph
-		var op = new Buffer
+		var op = new FlatBuffer
 		var name = "dep_{mmodule.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
@@ -746,11 +735,9 @@ class NitdocClass
 	private var meths = new HashSet[MMethodDef]
 	private var inherited = new HashSet[MPropDef]
 
-	init(mclass: MClass, ctx: NitdocContext, dot_dir: nullable String, source: nullable String) do
+	init(mclass: MClass, ctx: NitdocContext) do
 		super(ctx)
 		self.mclass = mclass
-		self.dot_dir = dot_dir
-		self.source = source
 		# load properties
 		var locals = new HashSet[MProperty]
 		for mclassdef in mclass.mclassdefs do
@@ -1104,7 +1091,7 @@ class NitdocClass
 		end
 		cla.add_all(pe.greaters)
 
-		var op = new Buffer
+		var op = new FlatBuffer
 		var name = "dep_{mclass.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for c in cla do
@@ -1145,7 +1132,7 @@ redef class MModule
 	#	module_owner_name.html
 	private fun url: String do
 		if url_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("module_")
 			var mowner = public_owner
 			if mowner != null then
@@ -1162,7 +1149,7 @@ redef class MModule
 	#	MOD_owner_name
 	private fun anchor: String do
 		if anchor_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("MOD_")
 			var mowner = public_owner
 			if mowner != null then
@@ -1179,7 +1166,7 @@ redef class MModule
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
 				res.append("<a href='{url}' title='{page.ctx.mbuilder.mmodule2nmodule[self].short_comment}'>{html_name}</a>")
 			else
@@ -1291,7 +1278,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name(signature)</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='{url}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1310,7 +1297,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_short_link(page: NitdocPage) do
 		if html_short_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='{url}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1329,7 +1316,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link_anchor(page: NitdocPage) do
 		if html_link_anchor_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='#{anchor}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1591,7 +1578,7 @@ redef class MPropDef
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
 				var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
 				res.append("<a href=\"{url}\" title=\"{nprop.short_comment}\">{mproperty.html_name}</a>")
@@ -1754,7 +1741,7 @@ redef class MSignature
 	end
 
 	private fun untyped_signature(page: NitdocPage): String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not mparameters.is_empty then
 			res.append("(")
 			for i in [0..mparameters.length[ do
@@ -1794,7 +1781,7 @@ redef class ADoc
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		for t in n_comment do
 			var text = t.text
 			text = text.substring_from(1)
@@ -1823,16 +1810,18 @@ redef class AModule
 
 	private fun full_markdown: String do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			return n_moduledecl.n_doc.full_markdown.html
+			return n_moduledecl.n_doc.to_mdoc.full_markdown.write_to_string
 		end
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
 			return n_moduledecl.n_doc.location
 		end
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1848,13 +1837,15 @@ redef class AStdClassdef
 	end
 
 	private fun full_markdown: String do
-		if n_doc != null then return n_doc.full_markdown.html
+		if n_doc != null then return n_doc.to_mdoc.full_markdown.write_to_string
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1870,13 +1861,15 @@ redef class APropdef
 	end
 
 	private fun full_markdown: String do
-		if n_doc != null then return n_doc.full_markdown.html
+		if n_doc != null then return n_doc.to_mdoc.full_markdown.write_to_string
 		return ""
 	end
 
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
+
 	end
 end
 

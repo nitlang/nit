@@ -23,12 +23,12 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var nullables_metrics_phase = new NullablesMetricsPhase(self, null)
+	var nullables_metrics_phase: Phase = new NullablesMetricsPhase(self, null)
 end
 
 private class NullablesMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_nullables.value and not toolcontext.opt_all.value then return
 		compute_nullables_metrics(toolcontext.modelbuilder)
@@ -76,7 +76,7 @@ end
 # Visit the AST and print metrics about the usage of send on nullable reciever.
 fun compute_nullables_metrics(modelbuilder: ModelBuilder)
 do
-	print "--- Sends on Nullable Reciever ---"
+	print "--- Sends on Nullable Receiver ---"
 	var total_sends = 0
 	var nullable_sends = 0
 	var buggy_sends = 0

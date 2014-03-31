@@ -61,13 +61,9 @@ abstract class AbstractArrayRead[E]
 
 	redef fun index_of(item) do return index_of_from(item, 0)
 
-	# The index of the last occurrence of an element.
-	# Return -1 if not found.
-	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+	redef fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
 
-	# The index of the first occurrence of an element starting from pos.
-	# Return -1 if not found.
-	fun index_of_from(item: E, pos: Int): Int
+	redef fun index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
 		var len = length
@@ -80,9 +76,7 @@ abstract class AbstractArrayRead[E]
 		return -1
 	end
 
-	# The index of the last occurrence of an element starting from pos.
-	# Return -1 if not found.
-	fun last_index_of_from(item: E, pos: Int): Int
+	redef fun last_index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
 		while i >= 0 do
@@ -176,19 +170,14 @@ abstract class AbstractArray[E]
 	redef fun unshift(item)
 	do
 		var i = length - 1
-		while i > 0 do
+		while i >= 0 do
 			self[i+1] = self[i]
 			i -= 1
 		end
 		self[0] = item
 	end
 
-	# Insert an element at a given position, following elements are shifted.
-	#
-	#     var a= [10, 20, 30, 40]
-	#     a.insert(100, 2)
-	#     assert a      ==  [10, 20, 100, 30, 40]
-	fun insert(item: E, pos: Int)
+	redef fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
 		copy_to(pos, length-pos, self, pos + 1)
@@ -354,7 +343,7 @@ class Array[E]
 end
 
 # An `Iterator` on `AbstractArray`
-class ArrayIterator[E]
+private class ArrayIterator[E]
 	super IndexedIterator[E]
 
 	redef fun item do return _array[_index]
@@ -429,7 +418,7 @@ class ArraySet[E: Object]
 end
 
 # Iterators on sets implemented with arrays.
-class ArraySetIterator[E: Object]
+private class ArraySetIterator[E: Object]
 	super Iterator[E]
 
 	redef fun is_ok do return _iter.is_ok
@@ -455,7 +444,7 @@ class ArrayMap[K: Object, E]
 		if i >= 0 then
 			return _items[i].second
 		else
-			abort
+			return provide_default_value(key)
 		end
 	end
 
@@ -470,13 +459,13 @@ class ArrayMap[K: Object, E]
 		end
 	end
 
-	redef var keys: ArrayMapKeys[K, E] = new ArrayMapKeys[K, E](self)
-	redef var values: ArrayMapValues[K, E] = new ArrayMapValues[K, E](self)
+	redef var keys: RemovableCollection[K] = new ArrayMapKeys[K, E](self)
+	redef var values: RemovableCollection[E] = new ArrayMapValues[K, E](self)
 
 	# O(1)
 	redef fun length do return _items.length
 
-	redef fun iterator: CoupleMapIterator[K, E] do return new CoupleMapIterator[K, E](_items.iterator)
+	redef fun couple_iterator do return _items.iterator
 
 	redef fun is_empty do return _items.is_empty
 
@@ -533,7 +522,7 @@ class ArrayMap[K: Object, E]
 	end
 end
 
-class ArrayMapKeys[K: Object, E]
+private class ArrayMapKeys[K: Object, E]
 	super RemovableCollection[K]
 	# The original map
 	var map: ArrayMap[K, E]
@@ -553,7 +542,7 @@ class ArrayMapKeys[K: Object, E]
 	redef fun remove_all(key) do self.remove(key)
 end
 
-class ArrayMapValues[K: Object, E]
+private class ArrayMapValues[K: Object, E]
 	super RemovableCollection[E]
 	# The original map
 	var map: ArrayMap[K, E]

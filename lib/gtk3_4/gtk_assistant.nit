@@ -15,7 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk_assistant
+module gtk_assistant is pkgconfig("gtk+-3.0")
+
 import gtk_core
 
 in "C Header" `{
@@ -71,11 +72,11 @@ extern GtkAssistant `{GtkAssistant *`}
 		gtk_assistant_set_page_type( recv, page, t );
 	`}
 
-	fun get_page_title( page : GtkWidget ) : String is extern `{
+	fun get_page_title( page : GtkWidget ) : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_assistant_get_page_title( recv, page ) );
 	`}
 
-	fun set_page_title( page : GtkWidget, title : String) is extern import String::to_cstring`{
+	fun set_page_title( page : GtkWidget, title : String) is extern import String.to_cstring `{
 		gtk_assistant_set_page_title( recv, page, String_to_cstring( title ) );
 	`}
 

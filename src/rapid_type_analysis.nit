@@ -28,6 +28,11 @@ import modelbuilder
 import typing
 import auto_super_init
 
+import csv # for live_types_to_csv
+import ordered_tree # for live_methods_to_tree
+
+private import more_collections
+
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
@@ -60,7 +65,7 @@ class RapidTypeAnalysis
 	var live_classes = new HashSet[MClass]
 
 	# The pool of types used to perform type checks (isa and as).
-	var live_cast_types = new HashSet[MClassType]
+	var live_cast_types = new HashSet[MType]
 
 	# The pool of undesolved types used to perform type checks (isa and as).
 	# They are globally resolved at the end of the analaysis
@@ -72,14 +77,101 @@ class RapidTypeAnalysis
 	# Live methods.
 	var live_methods = new HashSet[MMethod]
 
+	# Live callsites.
+	var live_callsites = new HashSet[CallSite]
+
+	private var live_targets_cache = new HashMap2[MType, MProperty, Set[MMethodDef]]
+
+	# The live targets of a specific callsite.
+	fun live_targets(callsite: CallSite): Set[MMethodDef]
+	do
+		var mtype = callsite.recv
+		var anchor = callsite.anchor
+		if anchor != null then mtype = mtype.anchor_to(callsite.mmodule, anchor)
+		if mtype isa MNullableType then mtype = mtype.mtype
+		assert mtype isa MClassType
+		mtype = mtype.mclass.intro.bound_mtype
+		var mproperty = callsite.mproperty
+		var res = live_targets_cache[mtype, mproperty]
+		if res != null then return res
+		res = new ArraySet[MMethodDef]
+		live_targets_cache[mtype, mproperty] = res
+
+		for c in live_classes do
+			var tc = c.intro.bound_mtype
+			if not tc.is_subtype(mainmodule, null, mtype) then continue
+			var d = mproperty.lookup_first_definition(mainmodule, tc)
+			res.add d
+		end
+
+		return res
+	end
+
 	# Live call-to-super.
 	var live_super_sends = new HashSet[MMethodDef]
+
+	# Return a ready-to-save CSV document objet that agregates informations about live types.
+	# Each discovered type is listed in a line, with its status: resolution, liveness, cast-liveness.
+	# Note: types are listed in an alphanumeric order to improve human reading.
+	fun live_types_to_csv: CSVDocument
+	do
+		# Gather all kind of type
+		var typeset = new HashSet[MType]
+		typeset.add_all(live_types)
+		typeset.add_all(live_open_types)
+		typeset.add_all(live_cast_types)
+		typeset.add_all(live_open_cast_types)
+		var types = typeset.to_a
+		(new CachedAlphaComparator).sort(types)
+		var res = new CSVDocument
+		res.header = ["Type", "Resolution", "Liveness", "Cast-liveness"]
+		for t in types do
+			var reso
+			if t.need_anchor then reso = "OPEN " else reso = "CLOSED"
+			var live
+			if t isa MClassType and (live_types.has(t) or live_open_types.has(t)) then live = "LIVE" else live = "DEAD"
+			var cast
+			if live_cast_types.has(t) or live_open_cast_types.has(t) then cast = "CAST LIVE" else cast = "CAST DEAD"
+			res.add_line(t, reso, live, cast)
+		end
+		return res
+	end
+
+	# Return a ready-to-save OrderedTree object that agregates infomration about live methods.
+	# Note: methods are listed in an alphanumeric order to improve human reading.
+	fun live_methods_to_tree: OrderedTree[Object]
+	do
+		var tree = new OrderedTree[Object]
+		for x in live_methods do
+			var xn = x.full_name
+			tree.add(null, xn)
+			for z in x.mpropdefs do
+				var zn = z.to_s
+				if live_methoddefs.has(z) then
+					tree.add(xn, zn)
+					if live_super_sends.has(z) then
+						tree.add(zn, zn + "(super)")
+					end
+				else if live_super_sends.has(z) then
+					tree.add(xn, zn + "(super)")
+				end
+			end
+		end
+		tree.sort_with(alpha_comparator)
+		return tree
+	end
 
 	# Methods that are are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
 
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
+
+	private fun force_alive(classname: String)
+	do
+		var classes = self.modelbuilder.model.get_mclasses_by_name(classname)
+		if classes != null then for c in classes do self.add_new(c.mclass_type, c.mclass_type)
+	end
 
 	# Run the analysis until all visitable method definitions are visited.
 	fun run_analysis
@@ -96,9 +188,11 @@ class RapidTypeAnalysis
 			add_send(maintype, mainprop)
 		end
 
-		# Force Bool
-		var classes = self.modelbuilder.model.get_mclasses_by_name("Bool")
-		if classes != null then for c in classes do self.add_new(c.mclass_type, c.mclass_type)
+		# Force primitive types
+		force_alive("Bool")
+		force_alive("Int")
+		force_alive("Float")
+		force_alive("Char")
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
@@ -112,9 +206,9 @@ class RapidTypeAnalysis
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				v.add_type(vararg)
-				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				v.add_type(native)
+				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
 
@@ -150,15 +244,19 @@ class RapidTypeAnalysis
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
-						v.add_monomorphic_send(v.receiver, auto_super_init)
+						v.add_callsite(auto_super_init)
 					end
 				end
-			else if npropdef isa AInternMethPropdef or npropdef isa AExternMethPropdef then
+			else if npropdef isa AInternMethPropdef or
+			  (npropdef isa AExternMethPropdef and npropdef.n_extern != null) then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
+			else if npropdef isa AExternMethPropdef then
+				var nclassdef = npropdef.parent.as(AClassdef)
+				v.enter_visit(npropdef)
 			else if npropdef isa AExternInitPropdef then
 				v.add_type(v.receiver)
 			else
@@ -195,8 +293,6 @@ class RapidTypeAnalysis
 			for t in live_types do
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
-				if rt isa MNullableType then rt = rt.mtype
-				assert rt isa MClassType
 				live_cast_types.add(rt)
 				#print "  {ot}/{t} -> {rt}"
 			end
@@ -249,11 +345,9 @@ class RapidTypeAnalysis
 
 	fun add_cast(mtype: MType)
 	do
-		if mtype isa MNullableType then mtype = mtype.mtype
 		if mtype.need_anchor then
 			live_open_cast_types.add(mtype)
 		else
-			assert mtype isa MClassType
 			live_cast_types.add(mtype)
 		end
 	end
@@ -379,6 +473,11 @@ class RapidTypeVisitor
 	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
 
 	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
+
+	fun add_callsite(callsite: nullable CallSite) do if callsite != null then
+		analysis.add_send(callsite.recv, callsite.mproperty)
+		analysis.live_callsites.add(callsite)
+	end
 end
 
 ###
@@ -428,7 +527,7 @@ redef class AStringFormExpr
 	do
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s")
+		var prop = v.get_method(native, "to_s_with_length")
 		v.add_monomorphic_send(native, prop)
 	end
 end
@@ -451,8 +550,7 @@ redef class ACrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "init")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -461,8 +559,7 @@ redef class AOrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "without_last")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -497,9 +594,7 @@ end
 redef class ASendExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mproperty = self.mproperty.as(not null)
-		var recvtype = self.n_expr.mtype.as(not null)
-		v.add_send(recvtype, mproperty)
+		v.add_callsite(callsite)
 	end
 end
 
@@ -507,66 +602,53 @@ end
 redef class ASendReassignFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
-		var mproperty = self.mproperty.as(not null)
-		var write_mproperty = self.write_mproperty.as(not null)
-		if n_expr isa ASelfExpr then
-			v.add_monomorphic_send(v.receiver, mproperty)
-			v.add_monomorphic_send(v.receiver, write_mproperty)
-		else
-			var recvtype = self.n_expr.mtype.as(not null)
-			v.add_send(recvtype, mproperty)
-			v.add_send(recvtype, write_mproperty)
-		end
+		v.add_callsite(callsite)
+		v.add_callsite(reassign_callsite)
+		v.add_callsite(write_callsite)
 	end
 end
 
 redef class AVarReassignExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
+		v.add_callsite(reassign_callsite)
 	end
 end
 
 redef class AAttrReassignExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
+		v.add_callsite(reassign_callsite)
 	end
 end
 
 redef class ASuperExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mproperty = self.mproperty
-		if mproperty != null then
-			v.add_monomorphic_send(v.receiver, mproperty)
+		var callsite = self.callsite
+		if callsite != null then
+			v.add_callsite(callsite)
 			return
 		end
 
-		v.analysis.add_super_send(v.receiver, v.mpropdef.as(MMethodDef))
+		v.analysis.add_super_send(v.receiver, mpropdef.as(not null))
 	end
 end
 
 redef class AForExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var recvtype = self.n_expr.mtype.as(not null)
-		var colltype = self.coltype.as(not null)
-		var itmeth = v.get_method(colltype, "iterator")
-		v.add_send(recvtype, itmeth)
-		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.intro.bound_mtype
-		var objtype = v.get_class("Object").mclass_type
-		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
+		v.add_callsite(self.method_iterator)
+		v.add_callsite(self.method_is_ok)
 		if self.variables.length == 1 then
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_item)
 		else if self.variables.length == 2 then
-			v.add_send(objtype, v.get_method(iteratortype, "key"))
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_key)
+			v.add_callsite(self.method_item)
 		else
 			abort
 		end
-		v.add_send(objtype, v.get_method(iteratortype, "next"))
+		v.add_callsite(self.method_next)
 	end
 end
 
@@ -575,7 +657,6 @@ redef class ANewExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var mproperty = self.mproperty.as(not null)
-		v.add_monomorphic_send(mtype, mproperty)
+		v.add_callsite(callsite)
 	end
 end

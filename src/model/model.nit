@@ -31,7 +31,8 @@ module model
 
 import poset
 import location
-import model_base
+import mmodule
+import mdoc
 private import more_collections
 
 redef class Model
@@ -287,6 +288,8 @@ end
 # belong to a hierarchy since the property and the
 # hierarchy of a class depends of a module.
 class MClass
+	super MEntity
+
 	# The module that introduce the class
 	# While classes are not bound to a specific module,
 	# the introducing module is used for naming an visibility
@@ -412,6 +415,8 @@ end
 # class. Unlike `MClass`, a `MClassDef` is a local definition that belong to
 # a specific module
 class MClassDef
+	super MEntity
+
 	# The module where the definition is
 	var mmodule: MModule
 
@@ -542,6 +547,7 @@ end
 #  * foo(anchor, mmodule, othertype)
 #  * foo(othertype, mmodule, anchor)
 abstract class MType
+	super MEntity
 
 	# The model of the type
 	fun model: Model is abstract
@@ -1412,7 +1418,7 @@ class MSignature
 
 	redef fun to_s
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		if not mparameters.is_empty then
 			b.append("(")
 			for i in [0..mparameters.length[ do
@@ -1482,6 +1488,8 @@ end
 # of any dynamic type).
 # For instance, a call site "x.foo" is associated to a `MProperty`.
 abstract class MProperty
+	super MEntity
+
 	# The associated MPropDef subclass.
 	# The two specialization hierarchy are symmetric.
 	type MPROPDEF: MPropDef
@@ -1561,37 +1569,7 @@ abstract class MProperty
 		end
 
 		# Second, filter the most specific ones
-		var res = new Array[MPROPDEF]
-		for pd1 in candidates do
-			var cd1 = pd1.mclassdef
-			var c1 = cd1.mclass
-			var keep = true
-			for pd2 in candidates do
-				if pd2 == pd1 then continue # do not compare with self!
-				var cd2 = pd2.mclassdef
-				var c2 = cd2.mclass
-				if c2.mclass_type == c1.mclass_type then
-					if cd2.mmodule.in_importation <= cd1.mmodule then
-						# cd2 refines cd1; therefore we skip pd1
-						keep = false
-						break
-					end
-				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) then
-					# cd2 < cd1; therefore we skip pd1
-					keep = false
-					break
-				end
-			end
-			if keep then
-				res.add(pd1)
-			end
-		end
-		if res.is_empty then
-			print "All lost! {candidates.join(", ")}"
-			# FIXME: should be abort!
-		end
-		self.lookup_definitions_cache[mmodule, mtype] = res
-		return res
+		return select_most_specific(mmodule, candidates)
 	end
 
 	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
@@ -1604,13 +1582,13 @@ abstract class MProperty
 	# If you want the really most specific property, then look at `lookup_next_definition`
 	#
 	# FIXME: Move to `MPropDef`?
-	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPropDef]
+	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
 		if mtype isa MNullableType then mtype = mtype.mtype
 
 		# First, select all candidates
-		var candidates = new Array[MPropDef]
+		var candidates = new Array[MPROPDEF]
 		for mpropdef in self.mpropdefs do
 			# If the definition is not imported by the module, then skip
 			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
@@ -1625,7 +1603,14 @@ abstract class MProperty
 		if candidates.length <= 1 then return candidates
 
 		# Second, filter the most specific ones
-		var res = new Array[MPropDef]
+		return select_most_specific(mmodule, candidates)
+	end
+
+	# Return an array containing olny the most specific property definitions
+	# This is an helper function for `lookup_definitions` and `lookup_super_definitions`
+	private fun select_most_specific(mmodule: MModule, candidates: Array[MPROPDEF]): Array[MPROPDEF]
+	do
+		var res = new Array[MPROPDEF]
 		for pd1 in candidates do
 			var cd1 = pd1.mclassdef
 			var c1 = cd1.mclass
@@ -1635,12 +1620,12 @@ abstract class MProperty
 				var cd2 = pd2.mclassdef
 				var c2 = cd2.mclass
 				if c2.mclass_type == c1.mclass_type then
-					if cd2.mmodule.in_importation <= cd1.mmodule then
+					if cd2.mmodule.in_importation < cd1.mmodule then
 						# cd2 refines cd1; therefore we skip pd1
 						keep = false
 						break
 					end
-				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) then
+				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) and cd2.bound_mtype != cd1.bound_mtype then
 					# cd2 < cd1; therefore we skip pd1
 					keep = false
 					break
@@ -1768,6 +1753,7 @@ end
 # Unlike `MProperty`, a `MPropDef` is a local definition that belong to a
 # specific class definition (which belong to a specific module)
 abstract class MPropDef
+	super MEntity
 
 	# The associated `MProperty` subclass.
 	# the two specialization hierarchy are symmetric

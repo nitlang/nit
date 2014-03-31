@@ -109,7 +109,7 @@ redef class ToolContext
 				message_sorter.sort(messages)
 
 				for m in messages do
-					if "Warning".search_in(m.text, 0) == null then had_error = true
+					if m.text.search("Warning") == null then had_error = true
 					stderr.write("{m.to_color_string}\n")
 				end
 			end
@@ -271,12 +271,7 @@ class Debugger
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
 		end
-		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
-			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
-		end
-		if args.length < mpropdef.msignature.arity + 1 then
-			fatal("NOT YET IMPLEMENTED: default closures")
-		end
+		assert args.length == mpropdef.msignature.arity + 1 else debug("Invalid arity for {mpropdef}. {args.length} arguments given.")
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
@@ -334,7 +329,6 @@ class Debugger
 				if initprop != null then
 					self.send(initprop, [mobj])
 				end
-				self.check_init_instance(mobj)
 				var mainprop = mmod.try_get_primitive_method("main", sys_type.mclass)
 				if mainprop != null then
 					self.rt_send(mainprop, [mobj])
@@ -486,7 +480,7 @@ class Debugger
 		else if command == "nit" then
 			printn "$~> "
 			command = gets
-			var nit_buf = new Buffer
+			var nit_buf = new FlatBuffer
 			while not command == ":q" do
 				nit_buf.append(command)
 				nit_buf.append("\n")
@@ -597,7 +591,7 @@ class Debugger
 			print "\nEnd of current instruction \n"
 		else if parts_of_command[1] == "stack" then
 			print self.stack_trace
-		else if parts_of_command[1].has('[') and parts_of_command[1].has(']') then
+		else if parts_of_command[1].chars.has('[') and parts_of_command[1].chars.has(']') then
 			process_array_command(parts_of_command)
 		else
 			var instance = seek_variable(get_real_variable_name(parts_of_command[1]), frame)
@@ -824,16 +818,16 @@ class Debugger
 
 	# Gets all the identifiers of an instruction (uses the rules of Nit as of Mar 05 2013)
 	#
-	fun get_identifiers_in_current_instruction(instruction: AbstractString): Array[String]
+	fun get_identifiers_in_current_instruction(instruction: Text): Array[String]
 	do
 		var result_array = new Array[String]
-		var instruction_buffer = new Buffer
+		var instruction_buffer = new FlatBuffer
 
 		var trigger_char_escape = false
 		var trigger_string_escape = false
 		var trigger_concat_in_string = false
 
-		for i in instruction do
+		for i in instruction.chars do
 			if trigger_char_escape then
 				if i == '\'' then trigger_char_escape = false
 			else if trigger_string_escape then
@@ -845,7 +839,7 @@ class Debugger
 				if i.is_alphanumeric or i == '_' then
 					instruction_buffer.add(i)
 				else if i == '.' then
-					if instruction_buffer.is_numeric or (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then
+					if instruction_buffer.is_numeric or (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then
 						instruction_buffer.clear
 					else
 						result_array.push(instruction_buffer.to_s)
@@ -859,25 +853,25 @@ class Debugger
 					trigger_concat_in_string = false
 					trigger_string_escape = true
 				else
-					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
 					instruction_buffer.clear
 				end
 			end
 		end
 
-		if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+		if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
 
 		return result_array
 	end
 
 	# Takes a function call or declaration and strips all but the arguments
 	#
-	fun get_function_arguments(function: AbstractString): String
+	fun get_function_arguments(function: Text): String
 	do
-		var buf = new Buffer
+		var buf = new FlatBuffer
 		var trigger_copy = false
 
-		for i in function do
+		for i in function.chars do
 			if i == ')' then break
 			if trigger_copy then buf.add(i)
 			if i == '(' then trigger_copy = true
@@ -910,7 +904,7 @@ class Debugger
 	fun get_real_variable_name(name: String): String
 	do
 		var explode_string = name.split_with(".")
-		var final_string = new Buffer
+		var final_string = new FlatBuffer
 		for i in explode_string do
 			var alias_resolved = get_variable_name_by_alias(i)
 			if alias_resolved != null then
@@ -1158,7 +1152,7 @@ class Debugger
 	# Returns an array containing their content
 	fun remove_braces(braces: String): nullable Array[String]
 	do
-		var buffer = new Buffer
+		var buffer = new FlatBuffer
 
 		var result_array = new Array[String]
 
@@ -1167,7 +1161,7 @@ class Debugger
 
 		var last_was_opening_bracket = false
 
-		for i in braces do
+		for i in braces.chars do
 			if i == '[' then
 				if last_was_opening_bracket then
 					return null
@@ -1345,7 +1339,7 @@ class Debugger
 	fun get_char(value: String): nullable Instance
 	do
 		if value.length >= 1 then
-			return char_instance(value[0])
+			return char_instance(value.chars[0])
 		else
 			return null
 		end

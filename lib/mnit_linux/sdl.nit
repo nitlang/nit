@@ -15,7 +15,10 @@
 # limitations under the License.
 
 # SDL display support (used in Linux for windows and inputes only)
-module sdl
+module sdl is
+	c_compiler_option(exec("sdl-config", "--cflags"))
+	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_ttf")
+end
 
 import mnit # for
 # import display
@@ -29,12 +32,14 @@ in "C header" `{
 #include <SDL/SDL_ttf.h>
 `}
 
+# Represent a screen surface
 extern SDLDisplay in "C" `{SDL_Surface *`}
 	super Display
 
 	redef type I: SDLImage
 
-	new ( w, h: Int) is extern `{
+	# Initialize a surface with width and height
+	new ( w, h: Int) is extern import enable_mouse_motion_events `{
 		SDL_Init(SDL_INIT_VIDEO);
 
 		if(TTF_Init()==-1) {
@@ -42,12 +47,22 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 			exit(2);
 		}
 
-		/* ignores mousemotion for performance reasons */
-		SDL_EventState( SDL_MOUSEMOTION, SDL_IGNORE );
+ 		SDL_Surface *self = SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
 
-		return SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
+		if (!SDLDisplay_enable_mouse_motion_events(self)) {
+			/* ignores mousemotion for performance reasons */
+			SDL_EventState( SDL_MOUSEMOTION, SDL_IGNORE );
+		}
+
+		return self;
 	`}
 
+	# Indicates wether we want the SDL mouse motion event (or only clicks).
+	# Disabled by defaut for performance reason. To activate, redef this method
+	# andd return true
+	fun enable_mouse_motion_events: Bool do return false
+
+	# Destroy the surface
 	fun destroy is extern `{
 	if ( SDL_WasInit( SDL_INIT_VIDEO ) )
 		SDL_Quit();
@@ -58,6 +73,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 	redef fun finish is extern `{ SDL_Flip( recv ); `}
 
+	# Clear the entire window with given RGB color (integer values)
 	fun clear_int( r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, NULL, SDL_MapRGB(recv->format,r,g,b) ); 
 	`}
@@ -65,6 +81,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	redef fun width: Int is extern `{ return recv->w; `}
 	redef fun height: Int is extern `{ return recv->h; `}
 
+	# Fill a rectangle with given color
 	fun fill_rect( rect: SDLRectangle, r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, rect,  SDL_MapRGB(recv->format,r,g,b) );
 	`}
@@ -92,7 +109,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return events
 	end
 
-	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString::to_s, SDLMouseButtonEvent as (nullable IE), SDLMouseMotionEvent as (nullable IE), SDLKeyEvent as (nullable IE), SDLQuitEvent as (nullable IE) `{
+	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString.to_s, SDLMouseButtonEvent.as(nullable IE), SDLMouseMotionEvent.as(nullable IE), SDLKeyEvent.as(nullable IE), SDLQuitEvent.as(nullable IE) `{
 		SDL_Event event;
 
 		SDL_PumpEvents();
@@ -107,7 +124,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 						   SDL_GetKeyName(event.key.keysym.sym));
 	#endif
 
-					return SDLKeyEvent_as_nullable_InputEvent(
+					return SDLKeyEvent_as_nullable_IE(
 							new_SDLKeyEvent( NativeString_to_s(
 								SDL_GetKeyName(event.key.keysym.sym) ),
 								event.type==SDL_KEYDOWN ) );
@@ -119,9 +136,9 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 						   event.motion.x, event.motion.y);
 	#endif
 
-					return SDLMouseMotionEvent_as_nullable_InputEvent(
+					return SDLMouseMotionEvent_as_nullable_IE(
 							new_SDLMouseMotionEvent( event.motion.x, event.motion.y,
-								event.motion.xrel, event.motion.yrel ) );
+								event.motion.xrel, event.motion.yrel, SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)) );
 
 				case SDL_MOUSEBUTTONDOWN:
 				case SDL_MOUSEBUTTONUP:
@@ -129,7 +146,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 					printf("Mouse button \"%d\" pressed at (%d,%d)\n",
 						   event.button.button, event.button.x, event.button.y);
 	#endif
-					return SDLMouseButtonEvent_as_nullable_InputEvent(
+					return SDLMouseButtonEvent_as_nullable_IE(
 							new_SDLMouseButtonEvent( event.button.x, event.button.y,
 								event.button.button, event.type == SDL_MOUSEBUTTONDOWN ) );
 
@@ -137,18 +154,21 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	#ifdef DEBUG
 					printf("Quit event\n");
 	#endif
-					return SDLQuitEvent_as_nullable_InputEvent( new_SDLQuitEvent() );
+					return SDLQuitEvent_as_nullable_IE( new_SDLQuitEvent() );
 			}
 		}
 
 		return null_InputEvent();
 	`}
 
+	# Set the position of the cursor to x,y
 	fun warp_mouse( x,y: Int ) `{ SDL_WarpMouse( x, y ); `}
 
+	# Show or hide the cursor
 	fun show_cursor( show: Bool ) `{ SDL_ShowCursor( show ); `}
 end
 
+# Basic Drawing figures
 extern SDLDrawable in "C" `{SDL_Surface*`}
 	super Drawable
 
@@ -172,19 +192,23 @@ extern SDLDrawable in "C" `{SDL_Surface*`}
 	end
 end
 
+# A drawable Image
 extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	super DrawableImage
 	super SDLDrawable
 
-	new from_file( path: String ) is extern import String::to_cstring `{
+	# Import image from a file
+	new from_file( path: String ) is extern import String.to_cstring `{
 		SDL_Surface *image = IMG_Load( String_to_cstring( path ) );
 		return image;
 	`}
+
 
 	new partial( original: Image, clip: SDLRectangle ) is extern `{
 		return NULL;
 	`}
 
+	# Copy of an existing SDLImage
 	new copy_of( image: SDLImage ) is extern `{
 		SDL_Surface *new_image = SDL_CreateRGBSurface( image->flags, image->w, image->h, 24,
 							  0, 0, 0, 0 );
@@ -199,8 +223,10 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 		return new_image;
 	`}
 
+	# Save the image into the specified file
 	fun save_to_file( path: String ) is extern import String::to_cstring `{ `}
 
+	# Destroy the image and free the memory
 	redef fun destroy is extern `{ SDL_FreeSurface( recv ); `}
 
 	redef fun width: Int is extern `{ return recv->w; `}
@@ -209,7 +235,9 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	fun is_ok: Bool do return true # TODO
 end
 
+# A simple rectangle
 extern SDLRectangle in "C" `{SDL_Rect*`}
+	# Constructor with x,y positions width and height of the rectangle
 	new ( x: Int, y: Int, w: Int, h: Int ) is extern `{
 		SDL_Rect *rect = malloc( sizeof( SDL_Rect ) );
 		rect->x = (Sint16)x;
@@ -238,6 +266,7 @@ interface SDLInputEvent
 	super InputEvent
 end
 
+# MouseEvent class containing the cursor position
 class SDLMouseEvent
 	super PointerEvent
 	super SDLInputEvent
@@ -252,6 +281,7 @@ class SDLMouseEvent
 	end
 end
 
+# MouseButtonEvent used to get information when a button is pressed/depressed
 class SDLMouseButtonEvent
 	super SDLMouseEvent
 
@@ -278,23 +308,29 @@ class SDLMouseButtonEvent
 	end
 end
 
+# MouseMotionEvent to get the cursor position when the mouse is moved
 class SDLMouseMotionEvent
 	super SDLMouseEvent
 
 	var rel_x: Float
 	var rel_y: Float
 
-	init ( x, y, rel_x, rel_y: Float )
+	redef var pressed: Bool
+	redef fun depressed: Bool do return not pressed
+
+	init ( x, y, rel_x, rel_y: Float, pressed: Bool )
 	do
 		super( x, y )
 
 		self.rel_x = rel_x
 		self.rel_y = rel_y
+		self.pressed = pressed
 	end
 
 	redef fun to_s do return "MouseMotionEvent at {x}, {y}"
 end
 
+# SDLKeyEvent for when a key is pressed
 class SDLKeyEvent
 	super KeyEvent
 	super SDLInputEvent
@@ -310,7 +346,7 @@ class SDLKeyEvent
 
 	redef fun to_c: nullable Char
 	do
-		if key_name.length == 1 then return key_name.first
+		if key_name.length == 1 then return key_name.chars.first
 		return null
 	end
 
@@ -323,11 +359,16 @@ class SDLKeyEvent
 		end
 	end
 
+	# Return true if the key is down, false otherwise
 	redef fun is_down do return down
 
+	# Return true if the key is the up arrow
 	redef fun is_arrow_up do return key_name == "up"
+	# Return true if the key is the left arrow
 	redef fun is_arrow_left do return key_name == "left"
+	# Return true if the key is the down arrow
 	redef fun is_arrow_down do return key_name == "down"
+	# Return true if the key is the right arrow
 	redef fun is_arrow_right do return key_name == "right"
 end
 
@@ -340,8 +381,10 @@ redef class Int
 	fun delay is extern `{ SDL_Delay( recv ); `}
 end
 
+# Class to load and use TTF_Font
 extern SDLFont in "C" `{TTF_Font *`}
-	new ( name: String, points: Int ) is extern import String::to_cstring `{
+	# Load a font with a specified name and size
+	new ( name: String, points: Int ) is extern import String.to_cstring `{
 	char * cname = String_to_cstring( name );
 
 	TTF_Font *font = TTF_OpenFont( cname, (int)points);
@@ -355,7 +398,8 @@ extern SDLFont in "C" `{TTF_Font *`}
 
 	fun destroy is extern `{ TTF_CloseFont( recv ); `}
 
-	fun render( text: String, r, g, b: Int ): SDLImage is extern import String::to_cstring `{
+	# Create a String with the specified color, return an SDLImage
+	fun render( text: String, r, g, b: Int ): SDLImage is extern import String.to_cstring `{
 		SDL_Color color;
 		SDL_Surface *text_surface;
 		char *ctext;
@@ -394,15 +438,18 @@ extern SDLFont in "C" `{TTF_Font *`}
 		return TTF_FontDescent( recv );
 	`}
 
-	# Get the recommended pixel height of a rendered line of text of the loaded font. This is usually larger than the Font::height.
+	# Get the recommended pixel height of a rendered line of text of the loaded font. This is usually larger than the Font.height.
 	fun line_skip: Int is extern `{
 		return TTF_FontLineSkip( recv );
 	`}
 
+	# Return true is the font used fixed width for each char
 	fun is_fixed_width: Bool is extern `{
 		return TTF_FontFaceIsFixedWidth( recv );
 	`}
-	fun family_name: nullable String is extern import String::to_cstring, String as nullable `{
+
+	# Return the family name of the font
+	fun family_name: nullable String is extern import String.to_cstring, String as nullable `{
 		char *fn = TTF_FontFaceFamilyName( recv );
 
 		if ( fn == NULL )
@@ -410,7 +457,9 @@ extern SDLFont in "C" `{TTF_Font *`}
 		else
 			return String_as_nullable( NativeString_to_s( fn ) );
 	`}
-	fun style_name: nullable String is extern import String::to_cstring, String as nullable `{
+
+	# Return the style name of the font
+	fun style_name: nullable String is extern import String.to_cstring, String as nullable `{
 		char *sn = TTF_FontFaceStyleName( recv );
 
 		if ( sn == NULL )
@@ -419,7 +468,8 @@ extern SDLFont in "C" `{TTF_Font *`}
 			return String_as_nullable( NativeString_to_s( sn ) );
 	`}
 
-	fun width_of( text: String ): Int is extern import NativeString::to_s `{
+	# Return the estimated width of a String if used with the current font
+	fun width_of( text: String ): Int is extern import NativeString.to_s `{
 		char *ctext = String_to_cstring( text );
 		int w;
 		if ( TTF_SizeText( recv, ctext, &w, NULL ) )
@@ -429,5 +479,28 @@ extern SDLFont in "C" `{TTF_Font *`}
 		}
 		else
 			return w;
+	`}
+end
+
+# Information on the SDL window
+# Used in other modules to get window handle
+extern class SDLSystemWindowManagerInfo `{SDL_SysWMinfo *`}
+
+	new `{
+		SDL_SysWMinfo *val = malloc(sizeof(SDL_SysWMinfo));
+
+		SDL_VERSION(&val->version);
+
+		if(SDL_GetWMInfo(val) <= 0) {
+			printf("Unable to get window handle");
+			return 0;
+		}
+
+		return val;
+	`}
+
+	# Returns the handle of this window on a X11 window system
+	fun x11_window_handle: Pointer `{
+		return (void*)recv->info.x11.window;
 	`}
 end

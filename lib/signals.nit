@@ -119,16 +119,88 @@ interface SignalHandler
 		}
 	`}
 
-	fun sigalarm: Int do return 14
+	# Hang up detected on controlling terminal or death of controlling process
 	fun sighup: Int do return 1
+	
+	# Issued if the user sends an interrupt signal
 	fun sigint: Int do return 2
-	fun sigkill: Int do return 9
-	fun sigpipe: Int do return 13
-	fun sigterm: Int do return 15
-	fun sigabrt: Int do return 6
-	fun sigfpe: Int do return 8
+	
+	# Issued if the user sends a quit signal
 	fun sigquit: Int do return 3
+	
+	# Issued if the user attempts to execute an illegal, malformed, unknown, or privileged instruction
+	fun sigill: Int do return 4
+	
+	# Issued when an exception occurs: a condition that a debugger has requested to be informed of
+	fun sigtrap: Int do return 5
+	
+	# This signal is sent to a process to tell it to abort, i. e. to terminate
+	fun sigabrt: Int do return 6
+	
+	#This signal is sent to a process when it causes a bus error
+	fun sigbus: Int do return 7
+	
+	# Issued if an illegal mathematical operation is attempted
+	fun sigfpe: Int do return 8
+	
+	# If a process gets this signal it must quit immediately and will not perform any clean-up operations
+	fun sigkill: Int do return 9
+	
+	# Sent to a process to indicate user-defined conditions
+	fun sigusr1: Int do return 10
+	
+	# Sent to a process when it makes an invalid virtual memory reference, or segmentation fault
 	fun sigsegv: Int do return 11
+	
+	# Sent to a process to indicate user-defined conditions
+	fun sigusr2: Int do return 12
+	
+	# Sent to a process when it attempts to write to a pipe without a process connected to the other end
+	fun sigpipe: Int do return 13
+	
+	# Alarm Clock signal
+	fun sigalarm: Int do return 14
+	
+	# Software termination signal
+	fun sigterm: Int do return 15
+	
+	# Sent to a process when a child process terminates or is interrupted
+	fun sigchild: Int do return 17
+	
+	# Tell the operating system to continue (restart) a process previously paused by the SIGSTOP or SIGTSTP signal
+	fun sigcont: Int do return 18
+	
+	# Tell the operating system to stop a process
+	fun sigstop: Int do return 19
+	
+	# Sent to a process by its terminal to request it to stop temporarily
+	fun sigtstp: Int do return 20
+	
+	# Sent to a process when a socket has urgent or out-of-band data available to read
+	fun sigurg: Int do return 23
+	
+	# Sent to a process when it has used the CPU for a duration that exceeds a user-settable value
+	fun sigxcpu: Int do return 24
+	
+	# Sent to a process when it grows a file larger than the maximum allowed size
+	fun sigxfsz: Int do return 25
+	
+	# Virtual timer expired
+	fun sigvtalrm: Int do return 26
+	
+	# Profiling timer expired
+	fun sigprof: Int do return 27
+	
+	# Sent to a process when its controlling terminal changes its window size 
+	fun sigwinch: Int do return 28
+	
+	# Sent to a process when the system experiences a power failure
+	fun sigpwr: Int do return 30
+	
+	# Sent to a process when it passes a bad argument to a system call
+	fun sigsys: Int do return 31
+	
+	
 end
 
 redef interface Object
@@ -136,7 +208,7 @@ redef interface Object
 	# Check signals for safe operation
 	# will callback receiver of raised signals
 	# can callback any instance of SignalHandler, not just this one
-	protected fun check_signals: Bool is extern import SignalHandler::receive_signal `{
+	protected fun check_signals: Bool is extern import SignalHandler.receive_signal `{
 		int sig;
 		int raised_something = 0;
 

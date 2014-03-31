@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,7 +14,9 @@
 
 import kernel
 
-class A
+import base_prot0
+
+redef class A
 	fun pub do 0.output
 	protected fun pro do 1.output
 	private fun pri do 2.output
@@ -30,6 +30,7 @@ class O1
 		a.pub
 		a.pro
 		a.pri
+		3.output
 	end
 	init do end
 end

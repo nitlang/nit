@@ -34,7 +34,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractSorter#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 23);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (b) <p1:nullable Object> isa AbstractSorter#0 */
 /* <p1:nullable Object> isa AbstractSorter#0 */
@@ -55,12 +55,12 @@ if (!var2) {
 var_class_name7 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractSorter#0", var_class_name7);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 23);
-exit(1);
+show_backtrace(1);
 }
 var_class_name8 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "compare", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 23);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -100,7 +100,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[AbstractSorter#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 30);
-exit(1);
+show_backtrace(1);
 }
 var_array = p0;
 var1 = 0;
@@ -159,7 +159,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[AbstractSorter#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 33);
-exit(1);
+show_backtrace(1);
 }
 var_array = p0;
 var_from = p1;
@@ -172,7 +172,7 @@ if (!var3) {
 var_class_name6 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_from >= var_to;
 var1 = var7;
@@ -197,7 +197,7 @@ if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var18 = var9 < var_to;
 var12 = var18;
@@ -310,7 +310,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[AbstractSorter#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 45);
-exit(1);
+show_backtrace(1);
 }
 var_array = p0;
 var_from = p1;
@@ -328,7 +328,7 @@ if (!var4) {
 var_class_name7 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var8 = var_j > var_i;
 var2 = var8;
@@ -345,7 +345,7 @@ if (!var12) {
 var_class_name15 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var16 = var_i <= var_to;
 var10 = var16;
@@ -365,7 +365,7 @@ if (!var22) {
 var_class_name25 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var26 = var18 <= var19;
 var20 = var26;
@@ -397,7 +397,7 @@ if (!var34) {
 var_class_name37 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name37);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var38 = var_j > var_i;
 var32 = var38;
@@ -417,7 +417,7 @@ if (!var45) {
 var_class_name48 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var49 = var41 >= var42;
 var43 = var49;
@@ -448,7 +448,7 @@ if (!var57) {
 var_class_name60 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var61 = var_j > var_i;
 var55 = var61;
@@ -560,7 +560,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[AbstractSorter#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 66);
-exit(1);
+show_backtrace(1);
 }
 var_array = p0;
 var_from = p1;
@@ -575,7 +575,7 @@ if (!var3) {
 var_class_name6 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_i < var_to;
 var1 = var7;
@@ -596,7 +596,7 @@ if (!var11) {
 var_class_name14 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var15 = var_j <= var_to;
 var9 = var15;
@@ -615,7 +615,7 @@ if (!var21) {
 var_class_name24 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var25 = var17 > var18;
 var19 = var25;
@@ -700,7 +700,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractSorter#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 94);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (b) <p1:Comparable> isa AbstractSorter#0 */
 /* <p1:Comparable> isa AbstractSorter#0 */
@@ -716,7 +716,7 @@ if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractSorter#0", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/sorter.nit", 94);
-exit(1);
+show_backtrace(1);
 }
 var_a = p0;
 var_b = p1;

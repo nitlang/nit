@@ -90,7 +90,7 @@ redef class ACharExpr
 			v.toolcontext.error(self.hot_location, "Invalid character literal {txt}")
 			return
 		end
-		self.value = txt[1]
+		self.value = txt.chars[1]
 	end
 end
 
@@ -100,8 +100,13 @@ redef class AStringFormExpr
 	redef fun accept_literal(v)
 	do
 		var txt = self.n_string.text
-		var skip = 1
-		if txt[0] == txt[1] and txt.length >= 6 then skip = 3
-		self.value = txt.substring(skip, txt.length-(2*skip)).unescape_nit
+		var behead = 1
+		var betail = 1
+		if txt.chars[0] == txt.chars[1] and txt.length >= 6 then
+			behead = 3
+			betail = 3
+			if txt.chars[0] == '"' and txt.chars[3] == '\n' then behead = 4 # ignore first \n in """
+		end
+		self.value = txt.substring(behead, txt.length - behead - betail).unescape_nit
 	end
 end

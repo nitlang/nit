@@ -37,7 +37,8 @@ Copyright: 2009-2012 Alexis Laferrière <alexis.laf@xymus.net>
 License: GPL 2.0 (see LICENSE-GPL-2)
 Comment: GPL because the original work is GPL
 
-Files: share/nitdoc/ZeroClipboard.swf
-       share/nitdoc/scripts/ZeroClipboard.min.js
-Copyright: 2013 Jon Rohan, James M. Greene
-Licence: MIT (see LICENSE-MIT)
+Files: /share/png/*
+Copyright: 1998-2014 Glenn Randers-Pehrson
+           1996-1997 Andreas Dilger
+           1995-1996 Guy Eric Schalnat, Group 42, Inc.
+License: libpng license (see share/png/LICENSE)

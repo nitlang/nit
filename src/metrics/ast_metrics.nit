@@ -21,7 +21,7 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var ast_metrics_phase = new AstMetricsPhase(self, null)
+	var ast_metrics_phase: Phase = new AstMetricsPhase(self, null)
 end
 
 private class AstMetricsPhase
@@ -29,7 +29,7 @@ private class AstMetricsPhase
 	var node_counter = new Counter[String]
 	var id_counter = new Counter[String]
 
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_ast.value and not toolcontext.opt_all.value then return
 		print "--- AST Metrics ---"

@@ -116,6 +116,26 @@ class List[E]
 		_head = node
 	end
 
+	# O(n)
+	redef fun insert(e, i)
+	do
+		var node = get_node(i)
+		if node == null then
+			push(e)
+			return
+		end
+		var nnode = new ListNode[E](e)
+		var next = node.next
+		if next == null then
+			_tail = nnode
+		else
+			next.prev = nnode
+		end
+		nnode.prev = node
+		nnode.next = next
+		node.next = nnode
+	end
+
 	# Append `l` to `self` but clear `l`.
 	##
 	# O(1)

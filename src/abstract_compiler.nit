@@ -21,6 +21,8 @@ import literal
 import typing
 import auto_super_init
 import frontend
+import common_ffi
+import platform
 
 # Add compiling options
 redef class ToolContext
@@ -50,6 +52,10 @@ redef class ToolContext
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	# --no-stacktrace
+	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
+	# --stack-trace-C-to-Nit-name-binding
+	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
 
 	redef init
 	do
@@ -57,10 +63,59 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics)
+		self.option_context.add_option(self.opt_stacktrace)
+		self.option_context.add_option(self.opt_no_stacktrace)
 	end
 end
 
 redef class ModelBuilder
+	redef init(model, toolcontext)
+	do
+		if toolcontext.opt_no_stacktrace.value and toolcontext.opt_stacktrace.value then
+			print "Cannot use --nit-stacktrace when --no-stacktrace is activated"
+			exit(1)
+		end
+
+		super
+	end
+
+	# The compilation directory
+	var compile_dir: String
+
+	# Simple indirection to `Toolchain::write_and_make`
+	protected fun write_and_make(compiler: AbstractCompiler)
+	do
+		var platform = compiler.mainmodule.target_platform
+		var toolchain
+		if platform == null then
+			toolchain = new MakefileToolchain(toolcontext)
+		else
+			toolchain = platform.toolchain(toolcontext)
+		end
+		compile_dir = toolchain.compile_dir
+		toolchain.write_and_make compiler
+	end
+end
+
+redef class Platform
+	fun toolchain(toolcontext: ToolContext): Toolchain is abstract
+end
+
+class Toolchain
+	var toolcontext: ToolContext
+
+	fun compile_dir: String
+	do
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+		return compile_dir
+	end
+
+	fun write_and_make(compiler: AbstractCompiler) is abstract
+end
+
+class MakefileToolchain
+	super Toolchain
 	# The list of directories to search for included C headers (-I for C compilers)
 	# The list is initially set with :
 	#   * the toolcontext --cc-path option
@@ -69,10 +124,8 @@ redef class ModelBuilder
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
-	redef init(model, toolcontext)
+	protected fun gather_cc_paths
 	do
-		super
-
 		# Look for the the Nit clib path
 		var path_env = "NIT_DIR".environ
 		if not path_env.is_empty then
@@ -94,12 +147,14 @@ redef class ModelBuilder
 		if not path_env.is_empty then
 			cc_paths.append(path_env.split_with(':'))
 		end
-
 	end
 
-	protected fun write_and_make(compiler: AbstractCompiler)
+	redef fun write_and_make(compiler)
 	do
+		gather_cc_paths
+
 		var mainmodule = compiler.mainmodule
+		var compile_dir = compile_dir
 
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
@@ -107,17 +162,56 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
-		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
-
 		compile_dir.mkdir
-		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
+		var cfiles = new Array[String]
+		write_files(compiler, compile_dir, cfiles)
+
+		# Generate the Makefile
+
+		write_makefile(compiler, compile_dir, cfiles)
+
+		var time1 = get_time
+		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+
+		# Execute the Makefile
+
+		if self.toolcontext.opt_no_cc.value then return
+
+		time0 = time1
+		self.toolcontext.info("*** COMPILING C ***", 1)
+
+		compile_c_code(compiler, compile_dir)
+
+		time1 = get_time
+		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
+	end
+
+	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
+		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
+
+		# Add gc_choser.h to aditionnal bodies
+		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
+		compiler.extern_bodies.add(gc_chooser)
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
+
+		# FFI
+		var m2m = toolcontext.modelbuilder.mmodule2nmodule
+		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
+			var amodule = m2m[m]
+			if m.uses_ffi or amodule.uses_legacy_ni then
+				compiler.finalize_ffi_for_module(amodule)
+			end
 		end
-		var outpath = orig_dir.join_path(outname).simplify_path
+
+		# Copy original .[ch] files to compile_dir
+		for src in compiler.files_to_copy do
+			var basename = src.basename("")
+			var dst = "{compile_dir}/{basename}"
+			src.file_copy_to dst
+		end
 
 		var hfilename = compiler.header.file.name + ".h"
 		var hfilepath = "{compile_dir}/{hfilename}"
@@ -132,8 +226,6 @@ redef class ModelBuilder
 		end
 		h.close
 
-		var cfiles = new Array[String]
-
 		for f in compiler.files do
 			var i = 0
 			var hfile: nullable OFStream = null
@@ -144,7 +236,12 @@ redef class ModelBuilder
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
 				if not compiler.provided_declarations.has_key(key) then
-					print "No provided declaration for {key}"
+					var node = compiler.requirers_of_declarations.get_or_null(key)
+					if node != null then
+						node.debug "No provided declaration for {key}"
+					else
+						print "No provided declaration for {key}"
+					end
 					abort
 				end
 				hfile.write compiler.provided_declarations[key]
@@ -181,58 +278,82 @@ redef class ModelBuilder
 		end
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
+	end
 
-		# Generate the Makefile
+	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
+		var mainmodule = compiler.mainmodule
 
+		var outname = self.toolcontext.opt_output.value
+		if outname == null then
+			outname = "{mainmodule.name}"
+		end
+
+		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
+		var outpath = orig_dir.join_path(outname).simplify_path
 		var makename = "{mainmodule.name}.mk"
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
 		var cc_includes = ""
 		for p in cc_paths do
-			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
+
+		var linker_options = new HashSet[String]
+		var m2m = toolcontext.modelbuilder.mmodule2nmodule
+		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
+			var amod = m2m[m]
+			linker_options.add(amod.c_linker_options)
+		end
+
+		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
+
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
+		var dep_rules = new Array[String]
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
+			dep_rules.add(o)
 		end
-
-		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
-		compiler.extern_bodies.add(gc_chooser)
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			var basename = f.filename.basename(".c")
-			var o = "{basename}.extern.o"
-			var ff = orig_dir.join_path(f.filename).simplify_path
-			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-			ofiles.add(o)
+			if f isa ExternCFile then
+				var basename = f.filename.basename(".c")
+				var o = "{basename}.extern.o"
+				var ff = f.filename.basename("")
+				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
+				ofiles.add(o)
+				dep_rules.add(o)
+			else
+				var o = f.makefile_rule_name
+				var ff = f.filename.basename("")
+				makefile.write("{o}: {ff}\n")
+				makefile.write("\t{f.makefile_rule_content}\n\n")
+				dep_rules.add(f.makefile_rule_name)
+
+				if f isa ExternCppFile then ofiles.add(o)
+			end
 		end
 
 		# Link edition
-		makefile.write("{outpath}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
+	end
 
-		var time1 = get_time
-		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
+	do
+		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
 
-		# Execute the Makefile
-
-		if self.toolcontext.opt_no_cc.value then return
-
-		time0 = time1
-		self.toolcontext.info("*** COMPILING C ***", 1)
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
 		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
@@ -246,15 +367,15 @@ redef class ModelBuilder
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
 		end
-
-		time1 = get_time
-		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
 	end
 end
 
 # Singleton that store the knowledge about the compilation process
 abstract class AbstractCompiler
 	type VISITOR: AbstractCompilerVisitor
+
+	# Table corresponding c_names to nit names (methods)
+	var names = new HashMap[String, String]
 
 	# The main module of the program currently compiled
 	# Is assigned during the separate compilation
@@ -306,31 +427,68 @@ abstract class AbstractCompiler
 
 	private var provided_declarations = new HashMap[String, String]
 
+	private var requirers_of_declarations = new HashMap[String, ANode]
+
+	# Builds the .c and .h files to be used when generating a Stack Trace
+	# Binds the generated C function names to Nit function names
+	fun build_c_to_nit_bindings
+	do
+		var compile_dir = modelbuilder.compile_dir
+
+		var stream = new OFStream.open("{compile_dir}/C_fun_names")
+		stream.write("%\{\n#include \"c_functions_hash.h\"\n%\}\n")
+		stream.write("%define lookup-function-name get_nit_name\n")
+		stream.write("struct C_Nit_Names;\n")
+		stream.write("%%\n")
+		stream.write("####\n")
+		for i in names.keys do
+			stream.write(i)
+			stream.write(",\t\"")
+			stream.write(names[i])
+			stream.write("\"\n")
+		end
+		stream.write("####\n")
+		stream.write("%%\n")
+		stream.close
+
+		stream = new OFStream.open("{compile_dir}/c_functions_hash.h")
+		stream.write("typedef struct C_Nit_Names\{char* name; char* nit_name;\}C_Nit_Names;\n")
+		stream.write("const struct C_Nit_Names* get_nit_name(register const char *str, register unsigned int len);\n")
+		stream.close
+
+		var x = new Process("gperf","{compile_dir}/C_fun_names","-t","-7","--output-file={compile_dir}/c_functions_hash.c","-C")
+		x.wait
+
+		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
+	end
+
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
 	fun compile_header do
 		var v = self.header
-		self.header.add_decl("#define UNW_LOCAL_ONLY")
+		var toolctx = modelbuilder.toolcontext
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		self.header.add_decl("#include <libunwind.h>")
-		self.header.add_decl("#include <signal.h>")
-		self.header.add_decl("#include <gc_chooser.h>")
+		self.header.add_decl("#include \"gc_chooser.h\"")
 
 		compile_header_structs
+		compile_nitni_structs
 
 		# Signal handler function prototype
 		self.header.add_decl("void show_backtrace(int);")
 
-		# Global variable used by the legacy native interface
+		# Global variable used by intern methods
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
 	end
 
-	# Declaration of structures the live Nit types
+	# Declaration of structures for live Nit types
 	protected fun compile_header_structs is abstract
+
+	# Declaration of structures for nitni undelying the FFI
+	protected fun compile_nitni_structs is abstract
 
 	# Generate the main C function.
 	# This function:
@@ -340,6 +498,14 @@ abstract class AbstractCompiler
 	fun compile_main_function
 	do
 		var v = self.new_visitor
+		if modelbuilder.toolcontext.opt_stacktrace.value then
+			v.add_decl("#include \"c_functions_hash.h\"")
+		end
+		v.add_decl("#include <signal.h>")
+		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+			v.add_decl("#define UNW_LOCAL_ONLY")
+			v.add_decl("#include <libunwind.h>")
+		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
@@ -355,36 +521,53 @@ abstract class AbstractCompiler
 			end
 		end
 
+		v.add_decl("void sig_handler(int signo)\{")
+		v.add_decl("printf(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl("show_backtrace(signo);")
+		v.add_decl("\}")
+
 		v.add_decl("void show_backtrace (int signo) \{")
-		v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
-		v.add_decl("unw_cursor_t cursor;")
-		v.add_decl("if(opt==NULL)\{")
-		v.add_decl("unw_context_t uc;")
-		v.add_decl("unw_word_t ip;")
-		v.add_decl("char* procname = malloc(sizeof(char) * 100);")
-		v.add_decl("unw_getcontext(&uc);")
-		v.add_decl("unw_init_local(&cursor, &uc);")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("printf(\"-- C Stack Trace   ------------------------------\\n\");")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("while (unw_step(&cursor) > 0) \{")
-		v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-		v.add_decl("	printf(\"` %s \\n\",procname);")
-		v.add_decl("\}")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("free(procname);")
-		v.add_decl("\}")
+		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
+			v.add_decl("unw_cursor_t cursor;")
+			v.add_decl("if(opt==NULL)\{")
+			v.add_decl("unw_context_t uc;")
+			v.add_decl("unw_word_t ip;")
+			v.add_decl("char* procname = malloc(sizeof(char) * 100);")
+			v.add_decl("unw_getcontext(&uc);")
+			v.add_decl("unw_init_local(&cursor, &uc);")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("printf(\"--   Stack Trace   ------------------------------\\n\");")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("while (unw_step(&cursor) > 0) \{")
+			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
+			if modelbuilder.toolcontext.opt_stacktrace.value then
+			v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
+			v.add_decl("	if (recv != 0)\{")
+			v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
+			v.add_decl("	\}else\{")
+			v.add_decl("		printf(\"` %s\\n\", procname);")
+			v.add_decl("	\}")
+			else
+			v.add_decl("	printf(\"` %s \\n\",procname);")
+			end
+			v.add_decl("\}")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("free(procname);")
+			v.add_decl("\}")
+		end
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
 		v.add_decl("int main(int argc, char** argv) \{")
 
-		v.add("signal(SIGABRT, show_backtrace);")
-		v.add("signal(SIGFPE, show_backtrace);")
-		v.add("signal(SIGILL, show_backtrace);")
-		v.add("signal(SIGINT, show_backtrace);")
-		v.add("signal(SIGTERM, show_backtrace);")
-		v.add("signal(SIGSEGV, show_backtrace);")
+		v.add("signal(SIGABRT, sig_handler);")
+		v.add("signal(SIGFPE, sig_handler);")
+		v.add("signal(SIGILL, sig_handler);")
+		v.add("signal(SIGINT, sig_handler);")
+		v.add("signal(SIGTERM, sig_handler);")
+		v.add("signal(SIGSEGV, sig_handler);")
+		v.add("signal(SIGPIPE, sig_handler);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
@@ -433,14 +616,14 @@ abstract class AbstractCompiler
 		v.add("\}")
 	end
 
-	# List of additional .c files required to compile (native interface)
-	var extern_bodies = new Array[ExternCFile]
+	# List of additional files required to compile (FFI)
+	var extern_bodies = new Array[ExternFile]
+
+	# List of source files to copy over to the compile dir
+	var files_to_copy = new Array[String]
 
 	# This is used to avoid adding an extern file more than once
 	private var seen_extern = new ArraySet[String]
-
-	# Generate code that check if an instance is correctly initialized
-	fun generate_check_init_instance(mtype: MClassType) is abstract
 
 	# Generate code that initialize the attributes on a new instance
 	fun generate_init_attr(v: VISITOR, recv: RuntimeVariable, mtype: MClassType)
@@ -532,6 +715,13 @@ abstract class AbstractCompiler
 	do
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
+	end
+
+	fun finalize_ffi_for_module(nmodule: AModule)
+	do
+		var visitor = new_visitor
+		nmodule.finalize_ffi(visitor, modelbuilder)
+		nmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -744,13 +934,10 @@ abstract class AbstractCompilerVisitor
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
-			self.add_abort("Reciever is null")
+			self.add_abort("Receiver is null")
 			self.add("\}")
 		end
 	end
-
-	# Generate a check-init-instance
-	fun check_init_instance(recv: RuntimeVariable, mtype: MClassType) is abstract
 
 	# Names handling
 
@@ -892,7 +1079,11 @@ abstract class AbstractCompilerVisitor
 	# Request the presence of a global declaration
 	fun require_declaration(key: String)
 	do
-		self.writer.file.required_declarations.add(key)
+		var reqs = self.writer.file.required_declarations
+		if reqs.has(key) then return
+		reqs.add(key)
+		var node = current_node
+		if node != null then compiler.requirers_of_declarations[key] = node
 	end
 
 	# Add a declaration in the local-header
@@ -910,11 +1101,13 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 
 		if self.compiler.seen_extern.has(file) then return
@@ -924,8 +1117,9 @@ abstract class AbstractCompilerVisitor
 			tryfile = file + "_nit.c"
 			if not tryfile.file_exists then return
 		end
-		var f = new ExternCFile(tryfile, "")
+		var f = new ExternCFile(tryfile.basename(""), "")
 		self.compiler.extern_bodies.add(f)
+		self.compiler.files_to_copy.add(tryfile)
 	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr`.
@@ -1124,14 +1318,6 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String writable = null
-end
-
-# An extern C file to compile
-class ExternCFile
-	# The filename of the file
-	var filename: String
-	# Additionnal specific CC compiler -c flags
-	var cflags: String
 end
 
 redef class MType
@@ -1371,13 +1557,13 @@ redef class AConcreteMethPropdef
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
-			var selfarg = [arguments.first]
+			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
-				if auto_super_init.intro.msignature.arity == 0 then
-					v.send(auto_super_init, selfarg)
-				else
-					v.send(auto_super_init, arguments)
+				args.clear
+				for i in [0..auto_super_init.msignature.arity+1[ do
+					args.add(arguments[i])
 				end
+				v.compile_callsite(auto_super_init, args)
 			end
 		end
 		v.stmt(self.n_block)
@@ -1599,7 +1785,7 @@ redef class AInternMethPropdef
 			return
 		end
 		if pname == "exit" then
-			v.add("show_backtrace({arguments[1]});")
+			v.add("exit({arguments[1]});")
 			return
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
@@ -2004,29 +2190,29 @@ redef class AForExpr
 		var cl = v.expr(self.n_expr, null)
 		var it_meth = self.method_iterator
 		assert it_meth != null
-		var it = v.send(it_meth, [cl])
+		var it = v.compile_callsite(it_meth, [cl])
 		assert it != null
 		v.add("for(;;) \{")
 		var isok_meth = self.method_is_ok
 		assert isok_meth != null
-		var ok = v.send(isok_meth, [it])
+		var ok = v.compile_callsite(isok_meth, [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
 		if self.variables.length == 1 then
 			var item_meth = self.method_item
 			assert item_meth != null
-			var i = v.send(item_meth, [it])
+			var i = v.compile_callsite(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables.first), i)
 		else if self.variables.length == 2 then
 			var key_meth = self.method_key
 			assert key_meth != null
-			var i = v.send(key_meth, [it])
+			var i = v.compile_callsite(key_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[0]), i)
 			var item_meth = self.method_item
 			assert item_meth != null
-			i = v.send(item_meth, [it])
+			i = v.compile_callsite(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[1]), i)
 		else
@@ -2036,7 +2222,7 @@ redef class AForExpr
 		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		var next_meth = self.method_next
 		assert next_meth != null
-		v.send(next_meth, [it])
+		v.compile_callsite(next_meth, [it])
 		v.add("\}")
 		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
@@ -2179,8 +2365,7 @@ redef class ACrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
-		v.check_init_instance(res, mtype)
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2192,8 +2377,7 @@ redef class AOrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
-		v.check_init_instance(res, mtype)
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2308,22 +2492,26 @@ redef class ASuperExpr
 		for a in self.n_args.n_exprs do
 			args.add(v.expr(a, null))
 		end
+
+		var callsite = self.callsite
+		if callsite != null then
+			# Add additionnals arguments for the super init call
+			if args.length == 1 then
+				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+					args.add(v.frame.arguments[i+1])
+				end
+			end
+			# Super init call
+			var res = v.compile_callsite(callsite, args)
+			return res
+		end
+
 		if args.length == 1 then
 			args = v.frame.arguments
 		end
 
-		var mproperty = self.mproperty
-		if mproperty != null then
-			if mproperty.intro.msignature.arity == 0 then
-				args = [recv]
-			end
-			# Super init call
-			var res = v.send(mproperty, args)
-			return res
-		end
-
 		# stantard call-next-method
-		return v.supercall(v.frame.mpropdef.as(MMethodDef), recv.mtype.as(MClassType), args)
+		return v.supercall(mpropdef.as(not null), recv.mtype.as(MClassType), args)
 	end
 end
 
@@ -2350,7 +2538,6 @@ redef class ANewExpr
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv, mtype)
 		return recv
 	end
 end
@@ -2436,4 +2623,15 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
+end
+
+redef class AModule
+	# Does this module use the legacy native interface?
+	fun uses_legacy_ni: Bool is abstract
+
+	# Write FFI results to file
+	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
+
+	# Write nitni results to file
+	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
 end

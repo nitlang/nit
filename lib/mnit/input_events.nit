@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Defines abstract classes for user inputs
+# Defines abstract classes for user and general inputs to the application.
+# Implemented independantly for each platforms and technologies.
 module input_events
 
-# General type of inputs
+# Input to the App, propagated through `App::input`.
 interface InputEvent
 end
 

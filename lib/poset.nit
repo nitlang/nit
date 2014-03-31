@@ -24,7 +24,7 @@ module poset
 #  * transitivity: `(self.has_edge(e,f) and self.has_edge(f,g)) implies self.has_edge(e,g)`
 class POSet[E: Object]
 	super Collection[E]
-	super AbstractSorter[E]
+	super Comparator[E]
 
 	redef fun iterator do return elements.keys.iterator
 
@@ -229,5 +229,21 @@ class POSetElement[E: Object]
 	fun <(t: E): Bool
 	do
 		return t != self.element and self.tos.has(t)
+	end
+
+	# The length of the shortest path to the root of the poset hierarchy
+	fun depth: Int do
+		if direct_greaters.is_empty then
+			return 0
+		end
+		var min = -1
+		for p in direct_greaters do
+			var d = poset[p].depth + 1
+			if min == -1 or d < min then
+				min = d
+			end
+		end
+		return min
+
 	end
 end

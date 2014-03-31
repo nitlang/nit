@@ -27,7 +27,7 @@ var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___64dpath].val; /* 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @path");
 fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 30);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -60,7 +60,7 @@ var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___64dseen].val; /* 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @seen");
 fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 31);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -157,7 +157,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var7 = var2 > var3;
 var4 = var7;
@@ -208,7 +208,6 @@ var25 = NEW_array__NativeArray(var24, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var25)->values[2] = (val*) var19;
 ((struct instance_array__NativeArray*)var25)->values[3] = (val*) var_parent;
 ((void (*)(val*, val*, long))(var23->class->vft[COLOR_array__Array__with_native]))(var23, var25, var24) /* with_native on <var23:Array[Object]>*/;
-CHECK_NEW_array__Array(var23);
 }
 var26 = ((val* (*)(val*))(var23->class->vft[COLOR_string__Object__to_s]))(var23) /* to_s on <var23:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__debug]))(self, var26) /* debug on <self:ANode>*/;
@@ -246,7 +245,7 @@ var38 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(
 if (var38 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 57);
-exit(1);
+show_backtrace(1);
 } else {
 var39 = ((val* (*)(val*))(var38->class->vft[COLOR_parser_nodes__ANode__location]))(var38) /* location on <var38:nullable ANode>*/;
 }

@@ -27,11 +27,6 @@ redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
 end
 
-redef class MPropDef
-	# Does the MPropDef contains a call to super or a call of a super-constructor?
-	var has_supercall: Bool = false
-end
-
 private class TypingPhase
 	super Phase
 	redef fun process_npropdef(npropdef) do npropdef.do_typing(toolcontext.modelbuilder)
@@ -247,8 +242,8 @@ private class TypeVisitor
 		end
 
 		assert mproperty isa MMethod
-		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
-			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self. {mproperty.intro_mclassdef.mmodule.visibility_for(self.mmodule)}")
+		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
+			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self.")
 			return null
 		end
 
@@ -279,7 +274,7 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -391,8 +386,14 @@ class CallSite
 	# The assiciated node for location
 	var node: ANode
 
-	# The statis type of the receiver
+	# The static type of the receiver (possibly unresolved)
 	var recv: MType
+
+	# The module where the callsite is present
+	var mmodule: MModule
+
+	# The anchor to use with `recv` or `msignature`
+	var anchor: nullable MClassType
 
 	# Is the receiver self?
 	# If "for_self", virtual types of the signature are keeped
@@ -529,7 +530,7 @@ end
 
 redef class AExpr
 	# The static type of the expression.
-	# null if self is a statement of in case of error
+	# null if self is a statement or in case of error
 	var mtype: nullable MType = null
 
 	# Is the statement correctly typed?
@@ -640,9 +641,6 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
-	# @depreciated use `reassign_callsite`
-	fun reassign_property: nullable MMethodDef do return self.reassign_callsite.mpropdef
-
 	# The method designed by the reassign operator.
 	var reassign_callsite: nullable CallSite
 
@@ -695,6 +693,8 @@ redef class AVarReassignExpr
 
 		var readtype = v.get_variable(self, variable)
 		if readtype == null then return
+
+		read_type = readtype
 
 		var writetype = variable.declared_type
 		if writetype == null then return
@@ -816,40 +816,35 @@ end
 redef class AForExpr
 	var coltype: nullable MClassType
 
-	var method_iterator: nullable MMethod
-	var method_is_ok: nullable MMethod
-	var method_item: nullable MMethod
-	var method_next: nullable MMethod
-	var method_key: nullable MMethod
+	var method_iterator: nullable CallSite
+	var method_is_ok: nullable CallSite
+	var method_item: nullable CallSite
+	var method_next: nullable CallSite
+	var method_key: nullable CallSite
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
+		if mtype isa MNullType then
+			v.error(self, "Type error: 'for' cannot iterate over 'null'")
+			return
+		end
+
 		# get obj class
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
 
 		# check iterator method
-		var unsafe_type = v.anchor_to(mtype)
-		if v.try_get_mproperty_by_name2(self, unsafe_type, "iterator") == null then
-			if v.try_get_mproperty_by_name2(self, unsafe_type, "iterate") == null then
-				v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
-			else
-				v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
-			end
-			return
-		end
-
 		var itdef = v.get_method(self, mtype, "iterator", true)
 		if itdef == null then
-			v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			return
 		end
-		self.method_iterator = itdef.mproperty
+		self.method_iterator = itdef
 
 		# check that iterator return something
 		var ittype = itdef.msignature.return_mtype
 		if ittype == null then
-			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator or MapIterator type")
+			v.error(self, "Type Error: 'for' expects method 'iterator' to return an 'Iterator' or 'MapIterator' type'.")
 			return
 		end
 
@@ -864,7 +859,7 @@ redef class AForExpr
 			var coltype = ittype.supertype_to(v.mmodule, v.anchor, colit_cla)
 			var variables =  self.variables
 			if variables.length != 1 then
-				v.error(self, "Type Error: Expected one variable")
+				v.error(self, "Type Error: 'for' expects only one variable when using 'Iterator'.")
 			else
 				variables.first.declared_type = coltype.arguments.first
 			end
@@ -876,7 +871,7 @@ redef class AForExpr
 			var coltype = ittype.supertype_to(v.mmodule, v.anchor, mapit_cla)
 			var variables = self.variables
 			if variables.length != 2 then
-				v.error(self, "Type Error: Expected two variables")
+				v.error(self, "Type Error: 'for' expects two variables when using 'MapIterator'.")
 			else
 				variables[0].declared_type = coltype.arguments[0]
 				variables[1].declared_type = coltype.arguments[1]
@@ -885,44 +880,45 @@ redef class AForExpr
 		end
 
 		if not is_col and not is_map then
-			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator of MapIterator type")
+			v.error(self, "Type Error: 'for' expects method 'iterator' to return an 'Iterator' or 'MapIterator' type'.")
 			return
 		end
 
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
+		if mtype isa MNullableType then mtype = mtype.mtype
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
 		var ikdef = v.get_method(self, ittype, "is_ok", false)
 		if ikdef == null then
-			v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'is_ok' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_is_ok = ikdef.mproperty
+		self.method_is_ok = ikdef
 
 		var itemdef = v.get_method(self, ittype, "item", false)
 		if itemdef == null then
-			v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'item' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_item = itemdef.mproperty
+		self.method_item = itemdef
 
 		var nextdef = v.get_method(self, ittype, "next", false)
 		if nextdef == null then
-			v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'next' in 'Iterator' type {ittype}.")
 			return
 		end
-		self.method_next = nextdef.mproperty
+		self.method_next = nextdef
 
 		if is_map then
 			var keydef = v.get_method(self, ittype, "key", false)
 			if keydef == null then
-				v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+				v.error(self, "Type Error: 'for' expects a method 'key' in 'Iterator' type {ittype}.")
 				return
 			end
-			self.method_key = keydef.mproperty
+			self.method_key = keydef
 		end
 	end
 
@@ -1095,6 +1091,8 @@ redef class AArrayExpr
 end
 
 redef class ARangeExpr
+	var init_callsite: nullable CallSite
+
 	redef fun accept_typing(v)
 	do
 		var discrete_class = v.get_mclass(self, "Discrete")
@@ -1105,13 +1103,28 @@ redef class ARangeExpr
 		if t1 == null or t2 == null then return
 		var mclass = v.get_mclass(self, "Range")
 		if mclass == null then return # Forward error
+		var mtype
 		if v.is_subtype(t1, t2) then
-			self.mtype = mclass.get_mtype([t2])
+			mtype = mclass.get_mtype([t2])
 		else if v.is_subtype(t2, t1) then
-			self.mtype = mclass.get_mtype([t1])
+			mtype = mclass.get_mtype([t1])
 		else
 			v.error(self, "Type Error: Cannot create range: {t1} vs {t2}")
+			return
 		end
+
+		self.mtype = mtype
+
+		# get the constructor
+		var callsite
+		if self isa ACrangeExpr then
+			callsite = v.get_method(self, mtype, "init", false)
+		else if self isa AOrangeExpr then
+			callsite = v.get_method(self, mtype, "without_last", false)
+		else
+			abort
+		end
+		init_callsite = callsite
 	end
 end
 
@@ -1188,9 +1201,6 @@ end
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
-	# @depreciated: use `callsite`
-	fun mproperty: nullable MMethod do return callsite.mproperty
-
 	# The property invoked by the send.
 	var callsite: nullable CallSite
 
@@ -1351,9 +1361,6 @@ redef class ABraAssignExpr
 end
 
 redef class ASendReassignFormExpr
-	# @depreciated use `write_callsite`
-	fun write_mproperty: nullable MMethod do return write_callsite.mproperty
-
 	# The property invoked for the writing
 	var write_callsite: nullable CallSite
 
@@ -1424,7 +1431,11 @@ end
 redef class ASuperExpr
 	# The method to call if the super is in fact a 'super init call'
 	# Note: if the super is a normal call-next-method, then this attribute is null
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
+
+	# The method to call is the super is a standard `call-next-method` super-call
+	# Note: if the super is a special super-init-call, then this attribute is null
+	var mpropdef: nullable MMethodDef
 
 	redef fun accept_typing(v)
 	do
@@ -1445,7 +1456,6 @@ redef class ASuperExpr
 		end
 		# FIXME: covariance of return type in linear extension?
 		var superprop = superprops.first
-		assert superprop isa MMethodDef
 
 		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		var args = self.n_args.to_a
@@ -1455,12 +1465,15 @@ redef class ASuperExpr
 		self.mtype = msignature.return_mtype
 		self.is_typed = true
 		v.mpropdef.has_supercall = true
+		mpropdef = v.mpropdef.as(MMethodDef)
 	end
 
 	private fun process_superinit(v: TypeVisitor)
 	do
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var mproperty = v.mpropdef.mproperty
+		var mpropdef = v.mpropdef
+		assert mpropdef isa MMethodDef
+		var mproperty = mpropdef.mproperty
 		var superprop: nullable MMethodDef = null
 		for msupertype in v.nclassdef.mclassdef.supertypes do
 			msupertype = msupertype.anchor_to(v.mmodule, recvtype)
@@ -1489,14 +1502,30 @@ redef class ASuperExpr
 			v.error(self, "Error: No super method to call for {mproperty}.")
 			return
 		end
-		self.mproperty = superprop.mproperty
+
+		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
+		self.callsite = callsite
 
 		var args = self.n_args.to_a
-		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		if args.length > 0 then
-			v.check_signature(self, args, mproperty.name, msignature)
+			callsite.check_signature(v, args)
 		else
-			# TODO: Check signature
+			# Check there is at least enough parameters
+			if mpropdef.msignature.arity < msignature.arity then
+				v.error(self, "Error: Not enough implicit arguments to pass. Got {mpropdef.msignature.arity}, expected at least {msignature.arity}. Signature is {msignature}")
+				return
+			end
+			# Check that each needed parameter is conform
+			var i = 0
+			for sp in msignature.mparameters do
+				var p = mpropdef.msignature.mparameters[i]
+				if not v.is_subtype(p.mtype, sp.mtype) then
+					v.error(self, "Type error: expected argument #{i} of type {sp.mtype}, got implicit argument {p.name} of type {p.mtype}. Signature is {msignature}")
+					return
+				end
+				i += 1
+			end
 		end
 
 		self.is_typed = true
@@ -1506,9 +1535,6 @@ end
 ####
 
 redef class ANewExpr
-	# @depreciated use `callsite`
-	fun mproperty: nullable MMethod do return self.callsite.mproperty
-
 	# The constructor invoked by the new.
 	var callsite: nullable CallSite
 

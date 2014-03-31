@@ -1,4 +1,3 @@
-closure
 init_inherit
 init_linext
 inline
@@ -13,3 +12,5 @@ nitg_args3
 nitg_args5
 nitg_args6
 pep8analysis
+test_android_platform
+android

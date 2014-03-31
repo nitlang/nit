@@ -70,7 +70,7 @@ class NitUnitExecutor
 	do
 		block.clear
 
-		work(ndoc)
+		work(ndoc.to_mdoc)
 
 		if block.is_empty then return
 
@@ -93,7 +93,7 @@ class NitUnitExecutor
 		end
 		f.close
 
-		var cmd = "../bin/nitg --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var cmd = "../bin/nitg --ignore-visibility --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
@@ -149,15 +149,22 @@ end
 redef class ModelBuilder
 	fun test_markdown(mmodule: MModule): HTMLTag
 	do
+		var ts = new HTMLTag("testsuite")
 		toolcontext.info("nitunit: {mmodule}", 2)
+		if not mmodule2nmodule.has_key(mmodule) then return ts
+
+		var nmodule = mmodule2nmodule[mmodule]
+		assert nmodule != null
+
+		# what module to import in the unit test.
+		# try to detect the main module of the project
+		# TODO do things correctly once the importation of arbitraty nested module is legal
 		var o = mmodule
-		var d = o.public_owner
-		while d != null do
-			o = d
-			d = o.public_owner
+		var g = o.mgroup
+		if g != null then
+			o = get_mmodule_by_name(nmodule, mmodule, g.mproject.name).as(not null)
 		end
 
-		var ts = new HTMLTag("testsuite")
 		ts.attr("package", mmodule.full_name)
 
 		var prefix = toolcontext.opt_dir.value
@@ -167,39 +174,36 @@ redef class ModelBuilder
 
 		var tc
 
-		if mmodule2nmodule.has_key(mmodule) then
-			var nmodule = mmodule2nmodule[mmodule]
-			do
-				var nmoduledecl = nmodule.n_moduledecl
-				if nmoduledecl == null then break label x
-				var ndoc = nmoduledecl.n_doc
-				if ndoc == null then break label x
-				tc = new HTMLTag("testcase")
-				# NOTE: jenkins expects a '.' in the classname attr
-				tc.attr("classname", mmodule.full_name + ".<module>")
-				tc.attr("name", "<module>")
-				d2m.extract(ndoc, tc)
-			end label x
-			for nclassdef in nmodule.n_classdefs do
-				var mclassdef = nclassdef.mclassdef.as(not null)
-				if nclassdef isa AStdClassdef then
-					var ndoc = nclassdef.n_doc
-					if ndoc != null then
-						tc = new HTMLTag("testcase")
-						tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
-						tc.attr("name", "<class>")
-						d2m.extract(ndoc, tc)
-					end
+		do
+			var nmoduledecl = nmodule.n_moduledecl
+			if nmoduledecl == null then break label x
+			var ndoc = nmoduledecl.n_doc
+			if ndoc == null then break label x
+			tc = new HTMLTag("testcase")
+			# NOTE: jenkins expects a '.' in the classname attr
+			tc.attr("classname", mmodule.full_name + ".<module>")
+			tc.attr("name", "<module>")
+			d2m.extract(ndoc, tc)
+		end label x
+		for nclassdef in nmodule.n_classdefs do
+			var mclassdef = nclassdef.mclassdef.as(not null)
+			if nclassdef isa AStdClassdef then
+				var ndoc = nclassdef.n_doc
+				if ndoc != null then
+					tc = new HTMLTag("testcase")
+					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
+					tc.attr("name", "<class>")
+					d2m.extract(ndoc, tc)
 				end
-				for npropdef in nclassdef.n_propdefs do
-					var mpropdef = npropdef.mpropdef.as(not null)
-					var ndoc = npropdef.n_doc
-					if ndoc != null then
-						tc = new HTMLTag("testcase")
-						tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
-						tc.attr("name", mpropdef.mproperty.full_name)
-						d2m.extract(ndoc, tc)
-					end
+			end
+			for npropdef in nclassdef.n_propdefs do
+				var mpropdef = npropdef.mpropdef.as(not null)
+				var ndoc = npropdef.n_doc
+				if ndoc != null then
+					tc = new HTMLTag("testcase")
+					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
+					tc.attr("name", mpropdef.mproperty.full_name)
+					d2m.extract(ndoc, tc)
 				end
 			end
 		end
@@ -217,15 +221,10 @@ end
 var toolcontext = new ToolContext
 
 toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir)
+toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
-
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
-if args.is_empty or toolcontext.opt_help.value then
-	print "usage: nitunit [options] file.nit..."
-	toolcontext.option_context.usage
-	return
-end
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
@@ -243,4 +242,4 @@ end
 
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
-page.save(file)
+page.write_to_file(file)

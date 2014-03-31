@@ -26,7 +26,7 @@ private class Doc2Mdwn
 	# The lines of the current code block, empty is no current code block
 	var curblock = new Array[String]
 
-	fun work(ndoc: ADoc): HTMLTag
+	fun work(mdoc: MDoc): HTMLTag
 	do
 		var root = new HTMLTag("div")
 		root.add_class("nitdoc")
@@ -43,20 +43,19 @@ private class Doc2Mdwn
 		# The current ul element (if any)
 		var ul: nullable HTMLTag = null
 
+		var is_first_line = true
 		# Local variable to benefit adaptive typing
-		for c in ndoc.n_comment do
-			# Remove the starting `#`
-			var text = c.text.substring_from(1)
-
+		for text in mdoc.content do
 			# Count the number of spaces
 			lastindent = indent
 			indent = 0
-			while text.length > indent and text[indent] == ' ' do indent += 1
+			while text.length > indent and text.chars[indent] == ' ' do indent += 1
 
 			# Is codeblock? Then just collect them
-			if indent > 4 then
+			if indent >= 4 then
 				var part = text.substring_from(4)
 				curblock.add(part)
+				curblock.add("\n")
 				continue
 			end
 
@@ -115,9 +114,10 @@ private class Doc2Mdwn
 			process_line(n, text)
 
 			# Special case, the fist line is the synopsys and is in its own paragraph
-			if c == ndoc.n_comment.first then
+			if is_first_line then
 				n.add_class("synopsys")
 				n = null
+				is_first_line = false
 			end
 		end
 
@@ -127,9 +127,9 @@ private class Doc2Mdwn
 		return root
 	end
 
-	fun short_work(ndoc: ADoc): HTMLTag
+	fun short_work(mdoc: MDoc): HTMLTag
 	do
-			var text = ndoc.n_comment.first.text.substring_from(1)
+			var text = mdoc.content.first
 			var n = new HTMLTag("span")
 			n.add_class("synopsys")
 			n.add_class("nitdoc")
@@ -188,20 +188,32 @@ private class Doc2Mdwn
 	end
 end
 
-redef class ADoc
+redef class MDoc
 	# Build a `<div>` element that contains the full documentation in HTML
 	fun full_markdown: HTMLTag
 	do
+		var res = full_markdown_cache
+		if res != null then return res
 		var tc = new ToolContext
 		var d2m = new Doc2Mdwn(tc)
-		return d2m.work(self)
+		res = d2m.work(self)
+		full_markdown_cache = res
+		return res
 	end
+
+	private var full_markdown_cache: nullable HTMLTag
 
 	# Build a `<span>` element that contains the synopsys in HTML
 	fun short_markdown: HTMLTag
 	do
+		var res = short_markdown_cache
+		if res != null then return res
 		var tc = new ToolContext
 		var d2m = new Doc2Mdwn(tc)
-		return d2m.short_work(self)
+		res = d2m.short_work(self)
+		short_markdown_cache = res
+		return res
 	end
+
+	private var short_markdown_cache: nullable HTMLTag
 end
