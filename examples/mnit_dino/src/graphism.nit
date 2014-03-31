@@ -90,6 +90,15 @@ redef class Javelin
 	end
 end
 
+redef class Bush
+	redef fun draw( display, imgs, turn )
+	do
+		var spos = pos.to_screen( display )
+		var img = imgs.bush_img
+		display.blit_centered( img, spos.x.to_i, spos.y.to_i )
+	end
+end
+
 class ImageSet
 	var javelin_img : Image
 
@@ -100,6 +109,7 @@ class ImageSet
 	var caveman_afraid_img : Image
 	var caveman_ready_img : Image
 	var blood_img : Image
+	var bush_img : Image
 
 	var life_img : Image
 	var life_empty_img : Image
@@ -122,6 +132,7 @@ class ImageSet
 		caveman_afraid_img = app.load_image( "images/caveman_afraid.png" )
 		caveman_ready_img = app.load_image( "images/caveman_ready.png" )
 		blood_img = app.load_image( "images/blood.png" )
+		bush_img = app.load_image( "images/bush.png" )
 
 		life_img = app.load_image( "images/life.png" )
 		life_empty_img = app.load_image( "images/life_empty.png" )

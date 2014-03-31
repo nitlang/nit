@@ -28,7 +28,7 @@ class Game
 	var dino = new Dino
 	var cavemen = new Array[Caveman]
 	var javelins_in_air = new Array[Javelin]
-	var javelins_on_ground = new Array[Javelin]
+	var items_on_ground = new Array[Entity]
 	var entities = new Array[Entity].with_items(dino)
 	var turn_nbr = 0
 
@@ -61,6 +61,13 @@ class Game
 			man.pos.x = ( angle.cos * radius ).to_i
 			man.pos.y = ( angle.sin * radius ).to_i
 		end
+
+		for b in 24.times do
+			var bush = new Bush
+			bush.pos = new GamePos([-300..300[.rand, [-400..400[.rand)
+			items_on_ground.add bush
+			entities.add bush
+		end
 	end
 
 	fun do_turn : Turn
@@ -84,7 +91,7 @@ class Game
 				entities.remove( j )
 			else if j.hit_ground then
 				javelins_in_air.remove( j )
-				javelins_on_ground.add( j )
+				items_on_ground.add( j )
 			end
 		end
 
@@ -350,6 +357,8 @@ class Javelin
 		end
 	end
 end
+
+class Bush super Entity end
 
 # Sort entities on screen in order of Y, entities in the back are drawn first
 class EntitiesSorter
