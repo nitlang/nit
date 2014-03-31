@@ -140,9 +140,6 @@ end
 abstract class ARichBinaryInstruction
 	super ABinaryInstruction
 
-	#redef var n_access : AAccess
-	#redef var n_id : TId
-
 	init from( src: ABinaryInstruction ) do
 		_n_operand = src.n_operand
 		_n_id = src.n_id
@@ -153,8 +150,6 @@ end
 
 abstract class ARichUnaryInstruction
 	super AUnaryInstruction
-
-	#redef var n_id : TId
 
 	init from( src: AUnaryInstruction ) do
 		_n_id = src.n_id
