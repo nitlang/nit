@@ -85,8 +85,8 @@ class CFG
 		end
 
 		# sort breakpoints in order
-		starts = starts.uniq.sort_filter.to_a
-		ends = ends.uniq.sort_filter.to_a
+		starts = starts.iterator.uniq.sort.to_a
+		ends = ends.iterator.uniq.sort.to_a
 
 		# create basic blocks
 		var current_block: nullable BasicBlock = null

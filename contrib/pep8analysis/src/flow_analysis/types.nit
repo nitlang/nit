@@ -214,7 +214,7 @@ class TypesMap
 		var block_begin: nullable Int = null
 		var block_end = 0
 		var block_type = ' '
-		for a in mem.keys.to_a.sort_filter do
+		for a in mem.keys.iterator.sort do
 			var t = mem[a]
 			if block_begin != null and (block_type != t or block_end != a-1) then
 				var lbl = label_at(block_begin)

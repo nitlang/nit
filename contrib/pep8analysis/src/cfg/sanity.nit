@@ -53,7 +53,7 @@ redef class AnalysisManager
 
 	private fun group(lines: Array[ALine], msg: String, error: Bool)
 	do
-		lines = lines.sort_filter.to_a
+		lines = lines.iterator.sort.to_a
 		var len = lines.length
 		var first: nullable ALine = null
 		for i in [0..len[ do

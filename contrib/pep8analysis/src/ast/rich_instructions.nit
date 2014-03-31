@@ -143,8 +143,9 @@ abstract class ARichBinaryInstruction
 	init from( src: ABinaryInstruction ) do
 		_n_operand = src.n_operand
 		_n_id = src.n_id
-		location = src.location
 		parent = src.parent
+
+		init(src.location)
 	end
 end
 
@@ -153,8 +154,9 @@ abstract class ARichUnaryInstruction
 
 	init from( src: AUnaryInstruction ) do
 		_n_id = src.n_id
-		_location = src.location
 		parent = src.parent
+
+		init(src.location)
 	end
 end
 
