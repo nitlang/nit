@@ -225,8 +225,9 @@ function bench_nitg-g_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-g with option $opt"
-		run_compiler "nitg-g$opt" ./nitg --global $opt
+		ot=${opt// /+}
+		prepare_res "$name$ot.dat" "$opt" "nitg-g with option $opt"
+		run_compiler "nitg-g$ot" ./nitg --global $opt
 	done
 
 	plot "$name.gnu"
@@ -251,15 +252,16 @@ function bench_nitg-s_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-s with option $opt"
-		run_compiler "nitg-s$opt" ./nitg --separate $opt
+		ot=${opt// /+}
+		prepare_res "$name-$ot.dat" "$opt" "nitg-s with option $opt"
+		run_compiler "nitg-s$ot" ./nitg --separate $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
+bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range "--no-gcc-directive likely" "--no-gcc-directive noreturn"
 bench_nitg-s_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
-bench_nitg-s_options "faster" --inline-coloring-numbers
+bench_nitg-s_options "faster" --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
 bench_nitg-s_options "typing" NOALL --bm-typing --phand-typing
 
 function bench_nitg-e_options()
@@ -279,8 +281,9 @@ function bench_nitg-e_options()
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg-e with option $opt"
-		run_compiler "nitg-e$opt" ./nitg --erasure $opt
+		ot=${opt// /+}
+		prepare_res "$name$ot.dat" "$opt" "nitg-e with option $opt"
+		run_compiler "nitg-e$ot" ./nitg --erasure $opt
 	done
 
 	plot "$name.gnu"
