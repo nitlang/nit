@@ -90,6 +90,15 @@ redef class Javelin
 	end
 end
 
+redef class Bush
+	redef fun draw( display, imgs, turn )
+	do
+		var spos = pos.to_screen( display )
+		var img = imgs.bush_img
+		display.blit_centered( img, spos.x.to_i, spos.y.to_i )
+	end
+end
+
 class ImageSet
 	var javelin_img : Image
 
@@ -100,6 +109,7 @@ class ImageSet
 	var caveman_afraid_img : Image
 	var caveman_ready_img : Image
 	var blood_img : Image
+	var bush_img : Image
 
 	var life_img : Image
 	var life_empty_img : Image
@@ -108,6 +118,8 @@ class ImageSet
 	var you_lost_img : Image
 	var start_over_img : Image
 	fun start_over_path : String is abstract
+
+	var numbers: NumberImages
 
 	init ( app : App )
 	do
@@ -120,6 +132,7 @@ class ImageSet
 		caveman_afraid_img = app.load_image( "images/caveman_afraid.png" )
 		caveman_ready_img = app.load_image( "images/caveman_ready.png" )
 		blood_img = app.load_image( "images/blood.png" )
+		bush_img = app.load_image( "images/bush.png" )
 
 		life_img = app.load_image( "images/life.png" )
 		life_empty_img = app.load_image( "images/life_empty.png" )
@@ -127,14 +140,15 @@ class ImageSet
 		you_won_img = app.load_image( "images/you_won.png" )
 		you_lost_img = app.load_image( "images/you_lost.png" )
 		start_over_img = app.load_image( start_over_path )
+
+		numbers = app.load_numbers("images/#.png")
 	end
 end
-
 
 redef class Game
 	fun draw( display : Display, imgs : ImageSet, turn : Turn )
 	do
-		display.clear( 0.0, 0.5, 0.1 )
+		display.clear(0.05, 0.45, 0.1)
 
 		# entities (dino, cavemen and javelins)
 		for e in entities do
@@ -148,12 +162,15 @@ redef class Game
 		end
 
 		for life in [0..life_out_of_ten[ do
-			display.blit_centered( imgs.life_img, display.width*(life+1)/11, 20 )
+			display.blit_centered( imgs.life_img, display.width*(life+1)/11, display.top_offset )
 		end
 
 		for empty in [life_out_of_ten..10[ do
-			display.blit_centered( imgs.life_empty_img, display.width*(empty+1)/11, 20 )
+			display.blit_centered( imgs.life_empty_img, display.width*(empty+1)/11, display.top_offset )
 		end
+
+		# display score
+		display.blit_number(imgs.numbers, score.item,  display.width/11, display.top_offset+32)
 
 		# game over messages
 		if over then
@@ -163,11 +180,15 @@ redef class Game
 			else
 				concl_img = imgs.you_lost_img
 			end
-			display.blit_centered( concl_img, display.width/2, 80 )
+			display.blit_centered( concl_img, display.width/2, 60+display.top_offset )
 
 			if ready_to_start_over then
-				display.blit_centered( imgs.start_over_img, display.width/2, 120 )
+				display.blit_centered( imgs.start_over_img, display.width/2, 100+display.top_offset )
 			end
 		end
 	end
+end
+
+redef interface Display
+	fun top_offset: Int do return 48
 end

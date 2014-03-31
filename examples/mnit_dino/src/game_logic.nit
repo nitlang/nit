@@ -28,11 +28,13 @@ class Game
 	var dino = new Dino
 	var cavemen = new Array[Caveman]
 	var javelins_in_air = new Array[Javelin]
-	var javelins_on_ground = new Array[Javelin]
+	var items_on_ground = new Array[Entity]
 	var entities = new Array[Entity].with_items(dino)
 	var turn_nbr = 0
 
 	var over_since = 0
+
+	var score: Container[Int]
 
 	var random_radius_min = 200
 	var random_radius_max = 400
@@ -41,9 +43,11 @@ class Game
 
 	var entities_sorter = new EntitiesSorter
 
-	init( cavemen_nbr : Int )
+	init( cavemen_nbr : Int, score: Container[Int] )
 	do
-		srand
+		srand_from(cavemen_nbr)
+
+		self.score = score
 
 		nbr_wanted_cavemen = cavemen_nbr
 
@@ -57,6 +61,13 @@ class Game
 			man.pos.x = ( angle.cos * radius ).to_i
 			man.pos.y = ( angle.sin * radius ).to_i
 		end
+
+		for b in 24.times do
+			var bush = new Bush
+			bush.pos = new GamePos([-300..300[.rand, [-400..400[.rand)
+			items_on_ground.add bush
+			entities.add bush
+		end
 	end
 
 	fun do_turn : Turn
@@ -69,6 +80,7 @@ class Game
 			man.do_turn( turn )
 			if not man.is_alive then
 				cavemen.remove( man )
+				score.item += 1
 			end
 		end
 
@@ -79,7 +91,7 @@ class Game
 				entities.remove( j )
 			else if j.hit_ground then
 				javelins_in_air.remove( j )
-				javelins_on_ground.add( j )
+				items_on_ground.add( j )
 			end
 		end
 
@@ -147,6 +159,7 @@ end
 class Entity
 	super Turnable
 
+	fun run_over_distance: Int do return 500
 	var pos = new GamePos( 0, 0 )
 
 	fun squared_dist_with_dino( game : Game ) : Int
@@ -218,6 +231,14 @@ class Dino
 		if is_alive then
 			super
 		end
+
+		for i in t.game.items_on_ground do
+			var dwd = i.squared_dist_with_dino(t.game)
+			if dwd < i.run_over_distance then
+				t.game.items_on_ground.remove i
+				t.game.entities.remove i
+			end
+		end
 	end
 end
 
@@ -231,14 +252,18 @@ class Caveman
 	var throw_distance : Int = 400*40+10.rand
 	var fear_distance : Int = 300*20+8.rand
 	var flee_distance : Int = 600*60+16.rand
-	var run_over_distance = 500
 
 	var fear_duration : Int = 80+40.rand
 	var throw_period : Int = 40+8.rand
 
+	var variance_angle: Float = 2.0*pi.rand
+	var variance_dist: Int = throw_distance.to_f.sqrt.to_i-4
+	var variance_x: Int = (variance_angle.cos*variance_dist.to_f).to_i
+	var variance_y: Int = (variance_angle.sin*variance_dist.to_f).to_i
+
 	redef var is_alive : Bool = true
 
-	redef fun speed do return 4
+	redef var speed: Int = 3+3.rand
 
 	fun is_afraid( turn : Turn ) : Bool do return turn.nbr < afraid_until
 	fun can_throw( turn : Turn ) : Bool do return cannot_throw_until < turn.nbr
@@ -249,7 +274,7 @@ class Caveman
 			var dwd = squared_dist_with_dino( t.game )
 
 			if dwd < run_over_distance then
-				is_alive = false
+				if t.game.dino.is_alive then is_alive = false
 				return
 			else if is_afraid( t ) then
 				# going to destination
@@ -264,6 +289,7 @@ class Caveman
 					var dy = dino_pos.y - pos.y
 					var a = atan2( dy.to_f, dx.to_f )
 					a += pi # get opposite
+					a += [-100..100[.rand.to_f*pi/3.0/100.0
 					var x = a.cos*flee_distance.to_f
 					var y = a.sin*flee_distance.to_f
 					going_to = new GamePos( x.to_i, y.to_i )
@@ -276,7 +302,8 @@ class Caveman
 					end
 				else
 					# get closer to dino
-					going_to = t.game.dino.pos
+					var dino_pos = t.game.dino.pos
+					going_to = new GamePos(dino_pos.x+variance_x, dino_pos.y+variance_y)
 				end
 			end
 
@@ -320,6 +347,12 @@ class Javelin
 		else
 			if z <= 0 then
 				hit_ground = true
+				if thrown_angle_xy.cos > 0.0 then
+					angle = pi*5.0/8.0+(pi/4.0).rand
+				else
+					# left of the screen
+					angle = pi*9.0/8.0+(pi/4.0).rand
+				end
 			else
 				# in the air
 				speed_z += gravity
@@ -338,6 +371,8 @@ class Javelin
 		end
 	end
 end
+
+class Bush super Entity end
 
 # Sort entities on screen in order of Y, entities in the back are drawn first
 class EntitiesSorter
