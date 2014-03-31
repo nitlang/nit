@@ -28,4 +28,8 @@ redef class SplashScreen
 	redef fun splash_play_path do return "images/splash_play_mobile.png"
 end
 
+redef class Display
+	redef fun top_offset do return 92
+end
+
 super

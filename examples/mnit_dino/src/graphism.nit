@@ -148,11 +148,11 @@ redef class Game
 		end
 
 		for life in [0..life_out_of_ten[ do
-			display.blit_centered( imgs.life_img, display.width*(life+1)/11, 20 )
+			display.blit_centered( imgs.life_img, display.width*(life+1)/11, display.top_offset )
 		end
 
 		for empty in [life_out_of_ten..10[ do
-			display.blit_centered( imgs.life_empty_img, display.width*(empty+1)/11, 20 )
+			display.blit_centered( imgs.life_empty_img, display.width*(empty+1)/11, display.top_offset )
 		end
 
 		# game over messages
@@ -170,4 +170,8 @@ redef class Game
 			end
 		end
 	end
+end
+
+redef interface Display
+	fun top_offset: Int do return 48
 end
