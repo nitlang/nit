@@ -68,6 +68,8 @@ class Hole
 
 	fun intercepts(event: PointerEvent): Bool
 	do
+		if not up or hitted then return false
+
 		var ex = event.x.to_i - display_offset_x
 		var ey = event.y.to_i - display_offset_y
 		return ex > x - dx and ex < x + dx and
