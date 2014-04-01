@@ -106,8 +106,8 @@ class Game
 	init
 	do
 		var d = (dist_between_holes.to_f*display_scale).to_i
-		for x in [0 .. rows[ do
-			for y in [0 .. columns[ do
+		for x in [0 .. columns[ do
+			for y in [0 .. rows[ do
 				holes.add(new Hole(self, x*d, y*d))
 			end
 		end
