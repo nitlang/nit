@@ -147,16 +147,24 @@ class Screen
 
 		for hole in game.holes do
 			var img
+			var dx
+			var dy
 
 			if hole.hitted then
 				img = hit_img
+				dx = 256.0*display_scale
+				dy = 417.0*display_scale
 			else if hole.up then
 				img = up_img
+				dx = 512.0*display_scale
+				dy = 830.0*display_scale
 			else
 				img = empty_img
+				dx = 256.0*display_scale
+				dy = 244.0*display_scale
 			end
 
-			display.blit(img, hole.x, hole.y-64)
+			display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 		end
 
 		display.blit_number(numbers, game.points, 20, 20)
