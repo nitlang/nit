@@ -100,15 +100,17 @@ class Game
 	var speed_modifier = 1.0
 
 	# configs
-	var dist_between_holes = 512
+	var dist_between_rows = 512
+	var dist_between_columns = 600
 	fun global_speed_modifier: Float do return 2.0
 
 	init
 	do
-		var d = (dist_between_holes.to_f*display_scale).to_i
+		var dx = (dist_between_columns.to_f*display_scale).to_i
+		var dy = (dist_between_rows.to_f*display_scale).to_i
 		for x in [0 .. columns[ do
 			for y in [0 .. rows[ do
-				holes.add(new Hole(self, x*d, y*d))
+				holes.add(new Hole(self, x*dx, y*dy))
 			end
 		end
 	end
