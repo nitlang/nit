@@ -37,6 +37,7 @@ class Hole
 	# state
 	var up = false
 	var hitted = false
+	var trap = false
 
 	init (g: Game, x, y: Int)
 	do
@@ -61,6 +62,17 @@ class Hole
 		else if (100.0*game.speed_modifier).to_i.rand == 0 then
 			# show up
 			up = true
+
+			# shot traps only at 50 points and up
+			trap = false
+			if game.points > 50 then
+
+				# After 50 points we have more and more traps until point 1000
+				var d = 1250-(game.points - 50)
+				if d < 200 then d = 200
+
+				if d.rand < 100 then trap = true
+			end
 		end
 	end
 
@@ -80,10 +92,14 @@ class Hole
 	do
 		if hitted then return
 
-		if up then
+		if trap then
+			up = false
+			game.points -= 5
+			if game.points < 0 then game.points = 0
+		else
 			hitted = true
 			game.points += 1
-		else abort # should not happen
+		end
 	end
 end
 
@@ -127,6 +143,7 @@ class Screen
 	var empty_img: Image
 	var up_img: Image
 	var hit_img: Image
+	var trap_img: Image
 	var numbers: NumberImages
 
 	var sign_warning: Image
@@ -140,6 +157,7 @@ class Screen
 		empty_img = app.load_image("images/empty.png")
 		up_img = app.load_image("images/up.png")
 		hit_img = app.load_image("images/hit.png")
+		trap_img = app.load_image("images/trap.png")
 		numbers = app.load_numbers("images/#.png")
 
 		sign_warning = app.load_image("images/sign-warning.png")
@@ -176,9 +194,15 @@ class Screen
 				dx = 256.0*display_scale
 				dy = 417.0*display_scale
 			else if hole.up then
-				img = up_img
-				dx = 512.0*display_scale
-				dy = 830.0*display_scale
+				if hole.trap then
+					img = trap_img
+					dx = 512.0*display_scale
+					dy = 830.0*display_scale
+				else
+					img = up_img
+					dx = 512.0*display_scale
+					dy = 830.0*display_scale
+				end
 			else empty = true
 
 			if not empty then
