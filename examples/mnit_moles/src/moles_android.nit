@@ -24,4 +24,28 @@ redef class Game
 	redef fun rows do return 5
 end
 
-redef fun display_scale do return 0.4
+redef class MyApp
+	redef fun init_screen_and_game
+	do
+		# We use as a reference the Moto X
+		var tw = 720
+		var th = 1184
+
+		# Calculate the scale to fit a Moto X screen in this device screen
+		var xs = display.width.to_f/tw.to_f*0.4
+		var ys = display.height.to_f/th.to_f*0.4
+
+		# Use the smaller scale so everything fits
+		# FIXME replace these conditions with xs.min(ys) when Float isa Comparable
+		if xs < ys then
+			display_scale_container.item = xs
+		else display_scale_container.item = ys
+
+		super
+	end
+end
+
+fun display_scale_container: Container[Float] do return once new Container[Float](0.1)
+redef fun display_scale do return display_scale_container.item
+redef fun display_offset_x: Int do return (400.0*display_scale).to_i
+redef fun display_offset_y: Int do return (800.0*display_scale).to_i
