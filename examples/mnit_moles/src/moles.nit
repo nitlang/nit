@@ -30,9 +30,9 @@ class Hole
 	var y: Int
 
 	# Half width of the hit box
-	var dx: Int
+	var dx = 200.0
 	# Heigth of the hit box
-	var dy: Int
+	var dy = 800.0
 
 	# state
 	var up = false
@@ -43,8 +43,6 @@ class Hole
 		game = g
 		self.x = x
 		self.y = y
-		self.dx = (200.0*display_scale).to_i
-		self.dy = (800.0*display_scale).to_i
 	end
 
 	fun do_turn
@@ -70,6 +68,8 @@ class Hole
 	do
 		if not up or hitted then return false
 
+		var dx = (dx*display_scale).to_i
+		var dy = (dy*display_scale).to_i
 		var ex = event.x.to_i - display_offset_x
 		var ey = event.y.to_i - display_offset_y
 		return ex > x - dx and ex < x + dx and
@@ -92,7 +92,7 @@ class Game
 
 	# rule / const
 	var modifier_half_life = 40.0
-	fun rows: Int do return 5
+	fun rows: Int do return 4
 	fun columns: Int do return 5
 
 	# state
@@ -135,10 +135,6 @@ class Screen
 		up_img = app.load_image("images/up.png")
 		hit_img = app.load_image("images/hit.png")
 		numbers = app.load_numbers("images/#.png")
-
-		empty_img.scale = display_scale
-		up_img.scale = display_scale
-		hit_img.scale = display_scale
 	end
 
 	fun do_frame(display: Display)
@@ -164,6 +160,7 @@ class Screen
 				dy = 244.0*display_scale
 			end
 
+			img.scale = display_scale
 			display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 		end
 
@@ -198,8 +195,10 @@ class MyApp
 	do
 		super
 
-		screen = new Screen(self)
+		init_screen_and_game
 	end
+
+	fun init_screen_and_game do screen = new Screen(self)
 
 	redef fun frame_core(display)
 	do
