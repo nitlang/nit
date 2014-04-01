@@ -19,6 +19,4 @@ module moles_linux
 import moles
 import mnit_linux
 
-redef class Game
-	redef fun img_dim do return 128
-end
+redef fun display_scale do return 0.25

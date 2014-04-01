@@ -24,9 +24,15 @@ import realtime
 
 class Hole
 	var game: Game
+
+	# Center of the hole
 	var x: Int
 	var y: Int
-	var dim: Int
+
+	# Half width of the hit box
+	var dx: Int
+	# Heigth of the hit box
+	var dy: Int
 
 	# state
 	var up = false
@@ -37,7 +43,8 @@ class Hole
 		game = g
 		self.x = x
 		self.y = y
-		dim = game.img_dim
+		self.dx = (200.0*display_scale).to_i
+		self.dy = (800.0*display_scale).to_i
 	end
 
 	fun do_turn
@@ -61,10 +68,10 @@ class Hole
 
 	fun intercepts(event: PointerEvent): Bool
 	do
-		var ex = event.x.to_i
-		var ey = event.y.to_i
-		return ex > x and ex < x + dim and
-			ey > y and ey < y + dim
+		var ex = event.x.to_i - display_offset_x
+		var ey = event.y.to_i - display_offset_y
+		return ex > x - dx and ex < x + dx and
+			ey > y - dy and ey < y
 	end
 
 	fun hit
@@ -91,15 +98,14 @@ class Game
 	var speed_modifier = 1.0
 
 	# configs
-	var img_ori_dim: Int = 256
-	fun img_dim: Int do return 210
+	var dist_between_holes = 512
 	fun global_speed_modifier: Float do return 2.0
 
 	init
 	do
-		var d = img_dim
-		for x in [0 .. rows[do
-			for y in [0 .. columns[do
+		var d = (dist_between_holes.to_f*display_scale).to_i
+		for x in [0 .. rows[ do
+			for y in [0 .. columns[ do
 				holes.add(new Hole(self, x*d, y*d))
 			end
 		end
@@ -128,10 +134,9 @@ class Screen
 		hit_img = app.load_image("images/hit.png")
 		numbers = app.load_numbers("images/#.png")
 
-		var scale = game.img_dim.to_f / game.img_ori_dim.to_f
-		empty_img.scale = scale
-		up_img.scale = scale
-		hit_img.scale = scale
+		empty_img.scale = display_scale
+		up_img.scale = display_scale
+		hit_img.scale = display_scale
 	end
 
 	fun do_frame(display: Display)
@@ -218,6 +223,14 @@ class MyApp
 		end
 	end
 end
+
+fun display_scale: Float do return 1.0
+
+# Depends on the hole center in the uo image
+fun display_offset_x: Int do return (512.0*display_scale).to_i
+
+# Depends on the width of the holes
+fun display_offset_y: Int do return (800.0*display_scale).to_i
 
 var app = new MyApp
 app.main_loop

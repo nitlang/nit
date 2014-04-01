@@ -18,3 +18,5 @@ module moles_android
 
 import moles
 import mnit_android
+
+redef fun display_scale do return 0.4
