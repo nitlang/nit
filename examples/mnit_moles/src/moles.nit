@@ -129,6 +129,10 @@ class Screen
 	var hit_img: Image
 	var numbers: NumberImages
 
+	var sign_warning: Image
+	var sign_cute: Image
+	var sign_hits: Image
+
 	var game = new Game
 
 	init (app: App)
@@ -137,11 +141,25 @@ class Screen
 		up_img = app.load_image("images/up.png")
 		hit_img = app.load_image("images/hit.png")
 		numbers = app.load_numbers("images/#.png")
+
+		sign_warning = app.load_image("images/sign-warning.png")
+		sign_cute = app.load_image("images/sign-cute.png")
+		sign_hits = app.load_image("images/sign-hits.png")
 	end
 
 	fun do_frame(display: Display)
 	do
 		display.clear(0.1, 0.65, 0.2)
+
+		sign_warning.scale = display_scale
+		sign_cute.scale = display_scale
+		sign_hits.scale = display_scale
+		for img in numbers.imgs do img.scale = display_scale
+
+		display.blit(sign_warning, (-120.0*display_scale).to_i, (-235.0*display_scale).to_i)
+		display.blit(sign_cute, (540.0*display_scale).to_i, (-180.0*display_scale).to_i)
+		display.blit(sign_hits, (1340.0*display_scale).to_i, (55.0*display_scale).to_i)
+		display.blit_number(numbers, game.points, (1460.0*display_scale).to_i, (270.0*display_scale).to_i)
 
 		for hole in game.holes do
 			# Hole
@@ -168,8 +186,6 @@ class Screen
 				display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 			end
 		end
-
-		display.blit_number(numbers, game.points, 20, 20)
 	end
 
 	fun input(event: InputEvent): Bool
