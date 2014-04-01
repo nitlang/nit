@@ -141,7 +141,7 @@ class Screen
 
 	fun do_frame(display: Display)
 	do
-		display.clear(0.0, 0.7, 0.0)
+		display.clear(0.1, 0.65, 0.2)
 
 		for hole in game.holes do
 			var img
