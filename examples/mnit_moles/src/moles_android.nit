@@ -18,5 +18,3 @@ module moles_android
 
 import moles
 import mnit_android
-
-super

@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2012-2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#	 http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,16 +21,16 @@ import mnit
 import realtime
 
 class Hole
-	var game : Game
-	var x : Int
-	var y : Int
-	var dim : Int # Should it be removed?
+	var game: Game
+	var x: Int
+	var y: Int
+	var dim: Int
 
 	# state
-	var up : Bool = false
-	var hitted : Bool = false
+	var up = false
+	var hitted = false
 
-	init ( g : Game, x, y : Int )
+	init (g: Game, x, y: Int)
 	do
 		game = g
 		self.x = x
@@ -57,7 +57,7 @@ class Hole
 		end
 	end
 
-	fun intercepts( event : PointerEvent ) : Bool
+	fun intercepts(event: PointerEvent): Bool
 	do
 		var ex = event.x.to_i
 		var ey = event.y.to_i
@@ -72,35 +72,33 @@ class Hole
 		if up then
 			hitted = true
 			game.points += 1
-		else
-			abort # should not happen
-		end
+		else abort # should not happen
 	end
 end
 
 class Game
-	var holes : Sequence[Hole] = new Array[Hole].with_capacity(4)
+	var holes = new Array[Hole].with_capacity(4)
 
 	# rule / const
-	var modifier_half_life : Float = 40.0
-	var rows : Int = 5
-	var columns : Int = 3
+	var modifier_half_life = 40.0
+	var rows = 5
+	var columns = 3
 
 	# state
-	var points : Int = 0
-	var speed_modifier : Float = 1.0
+	var points = 0
+	var speed_modifier = 1.0
 
 	# configs
-	var img_ori_dim : Int = 256
-	fun img_dim : Int do return 210
-	fun global_speed_modifier : Float do return 2.0
+	var img_ori_dim: Int = 256
+	fun img_dim: Int do return 210
+	fun global_speed_modifier: Float do return 2.0
 
 	init
 	do
 		var d = img_dim
-		for x in [ 0 .. rows [ do
-			for y in [ 0 .. columns [ do
-				holes.add( new Hole( self, x*d, y*d ) )
+		for x in [0 .. rows[do
+			for y in [0 .. columns[do
+				holes.add(new Hole(self, x*d, y*d))
 			end
 		end
 	end
@@ -109,25 +107,23 @@ class Game
 		for hole in holes do hole.do_turn
 
 		speed_modifier = modifier_half_life / (modifier_half_life+points.to_f) * global_speed_modifier
-
-		print "p: {points} sm: {speed_modifier}"
 	end
 end
 
 # Where all the UI stuff is done
 class Screen
-	var empty_img : Image
-	var up_img : Image
-	var hit_img : Image
+	var empty_img: Image
+	var up_img: Image
+	var hit_img: Image
 	var numbers: NumberImages
 
-	var game : Game = new Game
+	var game = new Game
 
-	init ( app : App )
+	init (app: App)
 	do
-		empty_img = app.load_asset( "images/empty.png" ).as(Image)
-		up_img = app.load_asset( "images/up.png" ).as(Image)
-		hit_img = app.load_asset( "images/hit.png" ).as(Image)
+		empty_img = app.load_image("images/empty.png")
+		up_img = app.load_image("images/up.png")
+		hit_img = app.load_image("images/hit.png")
 		numbers = app.load_numbers("images/#.png")
 
 		var scale = game.img_dim.to_f / game.img_ori_dim.to_f
@@ -136,9 +132,9 @@ class Screen
 		hit_img.scale = scale
 	end
 
-	fun do_frame( display : Display )
+	fun do_frame(display: Display)
 	do
-		display.clear( 0.0, 0.7, 0.0 )
+		display.clear(0.0, 0.7, 0.0)
 
 		for hole in game.holes do
 			var img
@@ -151,20 +147,18 @@ class Screen
 				img = empty_img
 			end
 
-			display.blit( img, hole.x, hole.y-64 )
+			display.blit(img, hole.x, hole.y-64)
 		end
 
 		display.blit_number(numbers, game.points, 20, 20)
 	end
 
-	fun input( event : InputEvent ) : Bool
+	fun input(event: InputEvent): Bool
 	do
 		if event isa PointerEvent then
 			for hole in game.holes do
-				if hole.intercepts( event ) then
-					if hole.up then
-						hole.hit
-					end
+				if hole.intercepts(event) then
+					if hole.up then hole.hit
 					return true
 				end
 			end
@@ -177,7 +171,7 @@ end
 class MyApp
 	super App
 
-	var screen : nullable Screen = null
+	var screen: nullable Screen = null
 
 	var target_dt = 20000000
 
@@ -187,17 +181,17 @@ class MyApp
 	do
 		super
 
-		screen = new Screen( self )
+		screen = new Screen(self)
 	end
 
-	redef fun frame_core( display )
+	redef fun frame_core(display)
 	do
 		var screen = self.screen
 		if screen != null then
 			var clock = new Clock
 
 			screen.game.do_turn
-			screen.do_frame( display )
+			screen.do_frame(display)
 
 			var dt = clock.lapse
 			if dt.sec == 0 and dt.nanosec < target_dt then
@@ -207,15 +201,15 @@ class MyApp
 		end
 	end
 
-	redef fun input( ie )
+	redef fun input(ie)
 	do
 		var screen = screen
 		if ie isa QuitEvent or
-			( ie isa KeyEvent and ie.to_c == 'q' ) then
+			(ie isa KeyEvent and ie.to_c == 'q') then
 			quit = true
 			return true
 		else if screen != null then
-			return screen.input( ie )
+			return screen.input(ie)
 		else
 			print "unknown input: {ie}"
 			return false
@@ -225,4 +219,3 @@ end
 
 var app = new MyApp
 app.main_loop
-
