@@ -22,16 +22,16 @@ import debugger_commons
 
 redef class InterpretCommons
 
-	redef fun launch
-	do
-		super
-		if toolcontext.opt_debug_port.value < 0 or toolcontext.opt_debug_port.value > 65535 then
-			toolcontext.option_context.usage
-			return
-		end
+   redef fun launch
+   do
+      super
+      if toolcontext.opt_debug_port.value < 0 or toolcontext.opt_debug_port.value > 65535 then
+         toolcontext.option_context.usage
+         return
+      end
 
-		modelbuilder.run_debugger_network_mode(mainmodule.as(not null),arguments.as(not null),toolcontext.opt_debug_port.value)
-	end
+      modelbuilder.run_debugger_network_mode(mainmodule.as(not null),arguments.as(not null),toolcontext.opt_debug_port.value)
+   end
 
 end
 

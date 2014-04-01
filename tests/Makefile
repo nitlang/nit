@@ -1,9 +1,9 @@
 
-PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../lib/*.nit ../src/nitdoc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nitg.nit
+PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../lib/*.nit ../src/nitdoc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nith.nit
 
-all: niti nitg-g nitg-s
+all: niti nith-g nith-s
 
-alot: niti nitg-g nitg-s nitg-s-bm nitg-s-phmod nitg-s-phand nitg-e nitg-e-bm nitg-e-phmod nitg-e-phand icode
+alot: niti nith-g nith-s nith-s-bm nith-s-phmod nith-s-phand nith-e nith-e-bm nith-e-phmod nith-e-phand icode
 
 some:
 	./tests.sh base_compile.nit base_attr.nit base_gen.nit test_gen_inh.nit bench_fib.nit example_objet.nit
@@ -11,32 +11,32 @@ some:
 niti:
 	./testfull.sh --engine niti
 
-nitg-g:
-	./testfull.sh --engine nitg-g
+nith-g:
+	./testfull.sh --engine nith-g
 
-nitg-s:
-	./testfull.sh --engine nitg-s
+nith-s:
+	./testfull.sh --engine nith-s
 
-nitg-s-bm:
-	./testfull.sh --engine nitg-s -o --bm-typing
+nith-s-bm:
+	./testfull.sh --engine nith-s -o --bm-typing
 
-nitg-s-phmod:
-	./testfull.sh --engine nitg-s -o --phmod-typing
+nith-s-phmod:
+	./testfull.sh --engine nith-s -o --phmod-typing
 
-nitg-s-phand:
-	./testfull.sh --engine nitg-s -o --phand-typing
+nith-s-phand:
+	./testfull.sh --engine nith-s -o --phand-typing
 
-nitg-e:
-	./testfull.sh --engine nitg-e
+nith-e:
+	./testfull.sh --engine nith-e
 
-nitg-e-bm:
-	./testfull.sh --engine nitg-e -o --bm-typing
+nith-e-bm:
+	./testfull.sh --engine nith-e -o --bm-typing
 
-nitg-e-phmod:
-	./testfull.sh --engine nitg-e -o --phmod-typing
+nith-e-phmod:
+	./testfull.sh --engine nith-e -o --phmod-typing
 
-nitg-e-phand:
-	./testfull.sh --engine nitg-e -o --phand-typing
+nith-e-phand:
+	./testfull.sh --engine nith-e -o --phand-typing
 
 failed:
 	@[ ! -s errlist ] && echo 'No failed tests to execute' ; true

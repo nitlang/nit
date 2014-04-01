@@ -26,161 +26,161 @@ import parser
 import phase
 
 redef class ToolContext
-	var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
+   var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
 end
 
 private class SimpleMiscAnalysisPhase
-	super Phase
-	redef fun process_nmodule(nmodule) do nmodule.do_simple_misc_analysis(toolcontext)
+   super Phase
+   redef fun process_nmodule(nmodule) do nmodule.do_simple_misc_analysis(toolcontext)
 end
 
 redef class AModule
-	# Visit the module to detect easy warnings that does not need the metamodel or the importation
-	# Warnings are displayed on the toolcontext
-	fun do_simple_misc_analysis(toolcontext: ToolContext)
-	do
-		var v = new SimpleMiscVisitor(toolcontext)
-		v.enter_visit(self)
-	end
+   # Visit the module to detect easy warnings that does not need the metamodel or the importation
+   # Warnings are displayed on the toolcontext
+   fun do_simple_misc_analysis(toolcontext: ToolContext)
+   do
+      var v = new SimpleMiscVisitor(toolcontext)
+      v.enter_visit(self)
+   end
 end
 
 private class SimpleMiscVisitor
-	super Visitor
-	redef fun visit(n)
-	do
-		n.accept_simple_misc(self)
-	end
+   super Visitor
+   redef fun visit(n)
+   do
+      n.accept_simple_misc(self)
+   end
 
-	# Number of nested once
-	var once_count: Int = 0
+   # Number of nested once
+   var once_count: Int = 0
 
-	var toolcontext: ToolContext
+   var toolcontext: ToolContext
 
-	fun warning(node: ANode, msg: String)
-	do
-		toolcontext.warning(node.hot_location, msg)
-	end
+   fun warning(node: ANode, msg: String)
+   do
+      toolcontext.warning(node.hot_location, msg)
+   end
 
-	init(toolcontext: ToolContext)
-	do
-		self.toolcontext = toolcontext
-	end
+   init(toolcontext: ToolContext)
+   do
+      self.toolcontext = toolcontext
+   end
 end
 
 
 ###############################################################################
 
 redef class ANode
-	private fun accept_simple_misc(v: SimpleMiscVisitor)
-	do
-		visit_all(v)
-		after_simple_misc(v)
-	end
-	private fun after_simple_misc(v: SimpleMiscVisitor) do end
+   private fun accept_simple_misc(v: SimpleMiscVisitor)
+   do
+      visit_all(v)
+      after_simple_misc(v)
+   end
+   private fun after_simple_misc(v: SimpleMiscVisitor) do end
 end
 
 redef class ASignature
-	redef fun after_simple_misc(v)
-	do
-		if self.n_opar != null and self.n_params.is_empty then
-			v.warning(self, "Warning: superfluous parentheses.")
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      if self.n_opar != null and self.n_params.is_empty then
+         v.warning(self, "Warning: superfluous parentheses.")
+      end
+   end
 end
 
 redef class AExpr
-	# Warn in case of superfluous parentheses
-	private fun warn_parentheses(v: SimpleMiscVisitor) do end
+   # Warn in case of superfluous parentheses
+   private fun warn_parentheses(v: SimpleMiscVisitor) do end
 end
 
 redef class AParExpr
-	redef fun warn_parentheses(v)
-	do
-		v.warning(self, "Warning: superfluous parentheses.")
-	end
+   redef fun warn_parentheses(v)
+   do
+      v.warning(self, "Warning: superfluous parentheses.")
+   end
 end
 
 redef class AParExprs
-	redef fun after_simple_misc(v)
-	do
-		if n_exprs.is_empty then
-			v.warning(self, "Warning: superfluous parentheses.")
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      if n_exprs.is_empty then
+         v.warning(self, "Warning: superfluous parentheses.")
+      end
+   end
 end
 
 redef class AReturnExpr
-	redef fun after_simple_misc(v)
-	do
-		var e = n_expr
-		if e != null then
-			e.warn_parentheses(v)
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      var e = n_expr
+      if e != null then
+         e.warn_parentheses(v)
+      end
+   end
 end
 
 redef class AContinueExpr
-	redef fun after_simple_misc(v)
-	do
-		var e = n_expr
-		if e != null then
-			e.warn_parentheses(v)
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      var e = n_expr
+      if e != null then
+         e.warn_parentheses(v)
+      end
+   end
 end
 
 redef class ABreakExpr
-	redef fun after_simple_misc(v)
-	do
-		var e = n_expr
-		if e != null then
-			e.warn_parentheses(v)
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      var e = n_expr
+      if e != null then
+         e.warn_parentheses(v)
+      end
+   end
 end
 
 redef class AWhileExpr
-	redef fun after_simple_misc(v)
-	do
-		if n_expr isa ATrueExpr then
-			v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
-		else
-			n_expr.warn_parentheses(v)
-		end
-	end
+   redef fun after_simple_misc(v)
+   do
+      if n_expr isa ATrueExpr then
+         v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
+      else
+         n_expr.warn_parentheses(v)
+      end
+   end
 end
 
 redef class AForExpr
-	redef fun after_simple_misc(v)
-	do
-		n_expr.warn_parentheses(v)
-	end
+   redef fun after_simple_misc(v)
+   do
+      n_expr.warn_parentheses(v)
+   end
 end
 
 redef class AIfExpr
-	redef fun after_simple_misc(v)
-	do
-		n_expr.warn_parentheses(v)
-	end
+   redef fun after_simple_misc(v)
+   do
+      n_expr.warn_parentheses(v)
+   end
 end
 
 redef class AIfexprExpr
-	redef fun after_simple_misc(v)
-	do
-		n_expr.warn_parentheses(v)
-	end
+   redef fun after_simple_misc(v)
+   do
+      n_expr.warn_parentheses(v)
+   end
 end
 
 redef class AOnceExpr
-	redef fun accept_simple_misc(v)
-	do
-		if v.once_count > 0 then
-			v.warning(self, "Useless once in a once expression.")
-		end
-		v.once_count = v.once_count + 1
+   redef fun accept_simple_misc(v)
+   do
+      if v.once_count > 0 then
+         v.warning(self, "Useless once in a once expression.")
+      end
+      v.once_count = v.once_count + 1
 
-		super
+      super
 
-		v.once_count = v.once_count - 1
-	end
+      v.once_count = v.once_count - 1
+   end
 end

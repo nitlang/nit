@@ -43,7 +43,7 @@ Usage: $e [options] modulenames
 -v          Verbose (show tests steps)
 -h          This help
 --tap       Produce TAP output
---engine    Use a specific engine (default=nitg)
+--engine    Use a specific engine (default=nith)
 --noskip    Do not skip a test even if the .skip file matches
 --[no]soso  Force enable (or disable) SOSO
 END
@@ -267,7 +267,7 @@ find_nitc()
 verbose=false
 stop=false
 tapcount=0
-engine=nitg
+engine=nith
 noskip=
 while [ $stop = false ]; do
 	case $1 in
@@ -284,24 +284,24 @@ while [ $stop = false ]; do
 done
 enginebinname=$engine
 case $engine in
-	nitg)
-		engine=nitg-s;
-		enginebinname=nitg;
+	nith)
+		engine=nith-s;
+		enginebinname=nith;
 		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
-	nitg-s)
-		enginebinname=nitg;
+	nith-s)
+		enginebinname=nith;
 		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
-	nitg-e)
-		enginebinname=nitg;
+	nith-e)
+		enginebinname=nith;
 		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--erasure $OPT"
 		;;
-	nitg-g)
-		enginebinname=nitg;
+	nith-g)
+		enginebinname=nith;
 		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--global $OPT"
 		;;

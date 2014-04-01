@@ -22,91 +22,91 @@ import toolcontext
 import phase
 
 redef class ToolContext
-	var literal_phase: Phase = new LiteralPhase(self, null)
+   var literal_phase: Phase = new LiteralPhase(self, null)
 end
 
 private class LiteralPhase
-	super Phase
+   super Phase
 
-	redef fun process_nmodule(nmodule) do nmodule.do_literal(toolcontext)
+   redef fun process_nmodule(nmodule) do nmodule.do_literal(toolcontext)
 end
 
 redef class AModule
-	# Visit the module to compute the real value of the literal-related node of the AST.
-	# Warnings and errors are displayed on the toolcontext.
-	fun do_literal(toolcontext: ToolContext)
-	do
-		var v = new LiteralVisitor(toolcontext)
-		v.enter_visit(self)
-	end
+   # Visit the module to compute the real value of the literal-related node of the AST.
+   # Warnings and errors are displayed on the toolcontext.
+   fun do_literal(toolcontext: ToolContext)
+   do
+      var v = new LiteralVisitor(toolcontext)
+      v.enter_visit(self)
+   end
 end
 
 private class LiteralVisitor
-	super Visitor
+   super Visitor
 
-	var toolcontext: ToolContext
+   var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext)
-	do
-		self.toolcontext = toolcontext
-	end
+   init(toolcontext: ToolContext)
+   do
+      self.toolcontext = toolcontext
+   end
 
-	redef fun visit(n)
-	do
-		n.accept_literal(self)
-		n.visit_all(self)
-	end
+   redef fun visit(n)
+   do
+      n.accept_literal(self)
+      n.visit_all(self)
+   end
 end
 
 redef class ANode
-	private fun accept_literal(v: LiteralVisitor) do end
+   private fun accept_literal(v: LiteralVisitor) do end
 end
 
 redef class AIntExpr
-	# The value of the literal int once computed.
-	var value: nullable Int
-	redef fun accept_literal(v)
-	do
-		self.value = self.n_number.text.to_i
-	end
+   # The value of the literal int once computed.
+   var value: nullable Int
+   redef fun accept_literal(v)
+   do
+      self.value = self.n_number.text.to_i
+   end
 end
 
 redef class AFloatExpr
-	# The value of the literal float once computed.
-	var value: nullable Float
-	redef fun accept_literal(v)
-	do
-		self.value = self.n_float.text.to_f
-	end
+   # The value of the literal float once computed.
+   var value: nullable Float
+   redef fun accept_literal(v)
+   do
+      self.value = self.n_float.text.to_f
+   end
 end
 
 redef class ACharExpr
-	# The value of the literal char once computed.
-	var value: nullable Char
-	redef fun accept_literal(v)
-	do
-		var txt = self.n_char.text.unescape_nit
-		if txt.length != 3 then
-			v.toolcontext.error(self.hot_location, "Invalid character literal {txt}")
-			return
-		end
-		self.value = txt.chars[1]
-	end
+   # The value of the literal char once computed.
+   var value: nullable Char
+   redef fun accept_literal(v)
+   do
+      var txt = self.n_char.text.unescape_nit
+      if txt.length != 3 then
+         v.toolcontext.error(self.hot_location, "Invalid character literal {txt}")
+         return
+      end
+      self.value = txt.chars[1]
+   end
 end
 
 redef class AStringFormExpr
-	# The value of the literal string once computed.
-	var value: nullable String
-	redef fun accept_literal(v)
-	do
-		var txt = self.n_string.text
-		var behead = 1
-		var betail = 1
-		if txt.chars[0] == txt.chars[1] and txt.length >= 6 then
-			behead = 3
-			betail = 3
-			if txt.chars[0] == '"' and txt.chars[3] == '\n' then behead = 4 # ignore first \n in """
-		end
-		self.value = txt.substring(behead, txt.length - behead - betail).unescape_nit
-	end
+   # The value of the literal string once computed.
+   var value: nullable String
+   redef fun accept_literal(v)
+   do
+      var txt = self.n_string.text
+      var behead = 1
+      var betail = 1
+      if txt.chars[0] == txt.chars[1] and txt.length >= 6 then
+         behead = 3
+         betail = 3
+         if txt.chars[0] == '"' and txt.chars[3] == '\n' then behead = 4 # ignore first \n in """
+      end
+      self.value = txt.substring(behead, txt.length - behead - betail).unescape_nit
+   end
 end

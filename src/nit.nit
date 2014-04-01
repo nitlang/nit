@@ -23,19 +23,19 @@ import debugger_commons
 
 redef class InterpretCommons
 
-	redef fun launch
-	do
-		super
-		var self_mm = mainmodule.as(not null)
-		var self_args = arguments.as(not null)
-		if toolcontext.opt_debugger_autorun.value then
-			modelbuilder.run_debugger_autorun(self_mm, self_args)
-		else if toolcontext.opt_debugger_mode.value then
-			modelbuilder.run_debugger(self_mm, self_args)
-		else
-			modelbuilder.run_naive_interpreter(self_mm, self_args)
-		end
-	end
+   redef fun launch
+   do
+      super
+      var self_mm = mainmodule.as(not null)
+      var self_args = arguments.as(not null)
+      if toolcontext.opt_debugger_autorun.value then
+         modelbuilder.run_debugger_autorun(self_mm, self_args)
+      else if toolcontext.opt_debugger_mode.value then
+         modelbuilder.run_debugger(self_mm, self_args)
+      else
+         modelbuilder.run_naive_interpreter(self_mm, self_args)
+      end
+   end
 
 end
 

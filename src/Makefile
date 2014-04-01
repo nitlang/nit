@@ -16,81 +16,26 @@
 
 NITCOPT=
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_server ../bin/nitdbg_client
+all: ../bin/nith ../bin/nitdoc
 
-../bin/nitg: ../c_src/nitg parser/parser.nit
+../bin/nith: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
-	@echo '* Compile nitg from NIT source files                          *'
+	@echo '* Compile nith from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${NITCOPT} -o ../bin/nitg -v nitg.nit
+	../c_src/nitg ${NITCOPT} -o ../bin/nith -v nith.nit
 
-../bin/nitdoc: ../bin/nitg
+../bin/nitdoc: ../bin/nith
 	@echo '***************************************************************'
 	@echo '* Compile nitdoc from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdoc -v nitdoc.nit
+	../bin/nith ${NITCOPT} -o ../bin/nitdoc -v nitdoc.nit
 
-../bin/nitmetrics: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitmetrics from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
-
-../bin/nit: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nit from NIT source files                           *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nit -v nit.nit
-
-../bin/nitdbg_client : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdbg_client from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_client -v nitdbg_client.nit
-
-../bin/nitdbg_server : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdbg_server from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_server -v nitdbg_server.nit
-
-../bin/nitx: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitx from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitx -v nitx.nit
-
-../bin/nitunit : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitunit from NIT source files                       *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitunit -v nitunit.nit
-
-../bin/nitlight : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitlight from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitlight -v nitlight.nit
-
-../bin/nitls : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitls from NIT source files                         *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitls -v nitls.nit
 
 ../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
-	@echo '* Compile nitg from C source files                            *'
+	@echo '* Compile nith from C source files                            *'
 	@echo '***************************************************************'
 	cd ../c_src; make
 

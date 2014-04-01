@@ -1,11 +1,11 @@
 #!/bin/bash
-rm nitg nitg_? hello_world 2>/dev/null
+rm nith nith_? hello_world 2>/dev/null
 set -x
 set -e
-time ../c_src/nitg nitg.nit -v -o nitg
-time ./nitg nitg.nit -v "$@" -o nitg_2
-time ./nitg_2 nitg.nit -v "$@" -o nitg_3
-time ./nitg_3 nitg.nit -v "$@" -o nitg_4
-./nitg_4 ../examples/hello_world.nit "$@" -o hello_world
+time ../c_src/nith nith.nit -v -o nith
+time ./nith nith.nit -v "$@" -o nith_2
+time ./nith_2 nith.nit -v "$@" -o nith_3
+time ./nith_3 nith.nit -v "$@" -o nith_4
+./nith_4 ../examples/hello_world.nit "$@" -o hello_world
 ./hello_world
 

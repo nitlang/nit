@@ -21,92 +21,92 @@ import poset
 
 # A Nit project, thas encompass a product
 class MProject
-	super MEntity
+   super MEntity
 
-	# The name of the project
-	var name: String
+   # The name of the project
+   var name: String
 
-	# The model of the project
-	var model: Model
+   # The model of the project
+   var model: Model
 
-	# The root of the group tree
-	var root: nullable MGroup writable = null
+   # The root of the group tree
+   var root: nullable MGroup writable = null
 
-	# The group tree, as a POSet
-	var mgroups = new POSet[MGroup]
+   # The group tree, as a POSet
+   var mgroups = new POSet[MGroup]
 
-	redef fun to_s do return name
+   redef fun to_s do return name
 
-	init(name: String, model: Model)
-	do
-		self.name = name
-		self.model = model
-		model.mprojects.add(self)
-		model.mproject_by_name.add_one(name, self)
-	end
+   init(name: String, model: Model)
+   do
+      self.name = name
+      self.model = model
+      model.mprojects.add(self)
+      model.mproject_by_name.add_one(name, self)
+   end
 end
 
 # A group of modules in a project
 class MGroup
-	super MEntity
+   super MEntity
 
-	# The name of the group
-	# empty name for a default group in a single-module project
-	var name: String
+   # The name of the group
+   # empty name for a default group in a single-module project
+   var name: String
 
-	# The englobing project
-	var mproject: MProject
+   # The englobing project
+   var mproject: MProject
 
-	# The parent group if any
-	# see `in_nesting` for more
-	var parent: nullable MGroup
+   # The parent group if any
+   # see `in_nesting` for more
+   var parent: nullable MGroup
 
-	# fully qualified name
-	fun full_name: String
-	do
-		var p = parent
-		if p == null then return name
-		return "{p.full_name}/{name}"
-	end
+   # fully qualified name
+   fun full_name: String
+   do
+      var p = parent
+      if p == null then return name
+      return "{p.full_name}/{name}"
+   end
 
-	# The group is the group tree on the project (`mproject.mgroups`)
-	# nested groups (children) are smallers
-	# nesting group (see `parent`) is bigger
-	var in_nesting: POSetElement[MGroup]
+   # The group is the group tree on the project (`mproject.mgroups`)
+   # nested groups (children) are smallers
+   # nesting group (see `parent`) is bigger
+   var in_nesting: POSetElement[MGroup]
 
-	# The filepath (usualy a directory) of the group, if any
-	var filepath: nullable String writable
+   # The filepath (usualy a directory) of the group, if any
+   var filepath: nullable String writable
 
-	init (name: String, mproject: MProject, parent: nullable MGroup)
-	do
-		self.name = name
-		self.mproject = mproject
-		self.parent = parent
-		var tree = mproject.mgroups
-		self.in_nesting = tree.add_node(self)
-		if parent != null then
-			tree.add_edge(self, parent)
-		end
-	end
+   init (name: String, mproject: MProject, parent: nullable MGroup)
+   do
+      self.name = name
+      self.mproject = mproject
+      self.parent = parent
+      var tree = mproject.mgroups
+      self.in_nesting = tree.add_node(self)
+      if parent != null then
+         tree.add_edge(self, parent)
+      end
+   end
 
-	redef fun to_s do return name
+   redef fun to_s do return name
 end
 
 redef class Model
-	# projects of the model
-	var mprojects = new Array[MProject]
+   # projects of the model
+   var mprojects = new Array[MProject]
 
-	# Collections of project grouped by their names
-	private var mproject_by_name: MultiHashMap[String, MProject] = new MultiHashMap[String, MProject]
+   # Collections of project grouped by their names
+   private var mproject_by_name: MultiHashMap[String, MProject] = new MultiHashMap[String, MProject]
 
-	# Return all project named `name`
-	# If such a project is not yet loaded, null is returned (instead of an empty array)
-	fun get_mprojects_by_name(name: String): nullable Array[MProject]
-	do
-		if mproject_by_name.has_key(name) then
-			return mproject_by_name[name]
-		else
-			return null
-		end
-	end
+   # Return all project named `name`
+   # If such a project is not yet loaded, null is returned (instead of an empty array)
+   fun get_mprojects_by_name(name: String): nullable Array[MProject]
+   do
+      if mproject_by_name.has_key(name) then
+         return mproject_by_name[name]
+      else
+         return null
+      end
+   end
 end

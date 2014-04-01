@@ -23,15 +23,15 @@ module test_phase
 import modelbuilder
 
 redef class ToolContext
-	var default_phase = new DefaultPhase(self, null)
+   var default_phase = new DefaultPhase(self, null)
 end
 
 # Empty phase that delegates `process_mainmodule` to the global `do_work`.
 class DefaultPhase
-	super Phase
-	redef fun process_mainmodule(mainmodule, given_mmodules) do
-		do_work(mainmodule, given_mmodules, toolcontext.modelbuilder)
-	end
+   super Phase
+   redef fun process_mainmodule(mainmodule, given_mmodules) do
+      do_work(mainmodule, given_mmodules, toolcontext.modelbuilder)
+   end
 end
 
 # Easy entry point to prototype a specific work or proof-of-concept.

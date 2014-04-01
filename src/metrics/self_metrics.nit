@@ -21,46 +21,46 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var self_metrics_phase: Phase = new SelfMetricsPhase(self, null)
+   var self_metrics_phase: Phase = new SelfMetricsPhase(self, null)
 end
 
 private class SelfMetricsPhase
-	super Phase
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_self.value and not toolcontext.opt_all.value then return
-		compute_self_metrics(toolcontext.modelbuilder)
-	end
+   super Phase
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_self.value and not toolcontext.opt_all.value then return
+      compute_self_metrics(toolcontext.modelbuilder)
+   end
 end
 
 private class ASelfVisitor
-	super Visitor
-	var total: Int = 0
-	var implicits: Int = 0
+   super Visitor
+   var total: Int = 0
+   var implicits: Int = 0
 
-	redef fun visit(n)
-	do
-		if n isa ASelfExpr then
-			self.total += 1
-			if n isa AImplicitSelfExpr then
-				self.implicits += 1
-			end
-		end
-		n.visit_all(self)
-	end
+   redef fun visit(n)
+   do
+      if n isa ASelfExpr then
+         self.total += 1
+         if n isa AImplicitSelfExpr then
+            self.implicits += 1
+         end
+      end
+      n.visit_all(self)
+   end
 end
 
 # Visit the AST and print metics about the usage of self.
 fun compute_self_metrics(modelbuilder: ModelBuilder)
 do
-	print "--- Explicit vs. Implicit Self ---"
-	# Visit all the source code to collect data
-	var visitor = new ASelfVisitor
-	for nmodule in modelbuilder.nmodules do
-		for nclassdef in nmodule.n_classdefs do
-			visitor.enter_visit(nclassdef)
-		end
-	end
-	print "Total number of self: {visitor.total}"
-	print "Total number of implicit self: {visitor.implicits} ({div(visitor.implicits*100,visitor.total)}%)"
+   print "--- Explicit vs. Implicit Self ---"
+   # Visit all the source code to collect data
+   var visitor = new ASelfVisitor
+   for nmodule in modelbuilder.nmodules do
+      for nclassdef in nmodule.n_classdefs do
+         visitor.enter_visit(nclassdef)
+      end
+   end
+   print "Total number of self: {visitor.total}"
+   print "Total number of implicit self: {visitor.implicits} ({div(visitor.implicits*100,visitor.total)}%)"
 end

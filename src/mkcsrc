@@ -4,8 +4,8 @@ out=c_src
 rm -r "$out/" 2> /dev/null
 set -e
 set -x
-src/nitg src/nitg.nit -v "$@" --compile-dir "$out" -o "$out/nitg" --no-cc
-cp "$out/nitg.mk" "$out/Makefile"
+src/nith src/nith.nit -v "$@" --compile-dir "$out" -o "$out/nith" --no-cc
+cp "$out/nith.mk" "$out/Makefile"
 sed -i -e "s#../$out/##g" "$out/Makefile"
 
 # Copy all direct dependencies

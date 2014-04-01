@@ -20,68 +20,68 @@ intrude import parser
 import astbuilder
 
 class ASTValidationVisitor
-	super Visitor
-	redef fun visit(node)
-	do
-		path.unshift(node)
-		node.accept_ast_validation(self)
-		path.shift
-	end
-	private var path = new List[ANode]
-	private var seen = new HashSet[ANode]
+   super Visitor
+   redef fun visit(node)
+   do
+      path.unshift(node)
+      node.accept_ast_validation(self)
+      path.shift
+   end
+   private var path = new List[ANode]
+   private var seen = new HashSet[ANode]
 end
 
 redef class ANode
-	private fun accept_ast_validation(v: ASTValidationVisitor)
-	do
-		var parent = self.parent
+   private fun accept_ast_validation(v: ASTValidationVisitor)
+   do
+      var parent = self.parent
 
-		if v.path.length > 1 then
-			var path_parent = v.path[1]
-			if parent == null then
-				self.parent = path_parent
-				#debug "PARENT: expected parent: {path_parent}"
-			else if parent != path_parent then
-				self.parent = path_parent
-				debug "PARENT: expected parent: {path_parent}, got {parent}"
-			end
-		end
+      if v.path.length > 1 then
+         var path_parent = v.path[1]
+         if parent == null then
+            self.parent = path_parent
+            #debug "PARENT: expected parent: {path_parent}"
+         else if parent != path_parent then
+            self.parent = path_parent
+            debug "PARENT: expected parent: {path_parent}, got {parent}"
+         end
+      end
 
-		if v.seen.has(self) then
-			debug "DUPLICATE: already seen node. NOTATREE"
-		end
-		v.seen.add(self)
+      if v.seen.has(self) then
+         debug "DUPLICATE: already seen node. NOTATREE"
+      end
+      v.seen.add(self)
 
-		if _location == null then
-			#debug "LOCATION: unlocated node {v.path.join(", ")}"
-			_location = self.parent.location
-		end
+      if _location == null then
+         #debug "LOCATION: unlocated node {v.path.join(", ")}"
+         _location = self.parent.location
+      end
 
-		visit_all(v)
-	end
+      visit_all(v)
+   end
 end
 
 redef class AAnnotations
-	redef fun accept_ast_validation(v)
-	do
-		# Do not enter in annotations
-	end
+   redef fun accept_ast_validation(v)
+   do
+      # Do not enter in annotations
+   end
 end
 
 redef class AExpr
-	redef fun accept_ast_validation(v)
-	do
-		super
-		if mtype == null and not is_typed then
-			debug "TYPING: untyped expression"
-		end
-	end
+   redef fun accept_ast_validation(v)
+   do
+      super
+      if mtype == null and not is_typed then
+         debug "TYPING: untyped expression"
+      end
+   end
 end
 
 redef class APlaceholderExpr
-	redef fun accept_ast_validation(v)
-	do
-		super
-		debug "PARENT: remaining placeholder"
-	end
+   redef fun accept_ast_validation(v)
+   do
+      super
+      debug "PARENT: remaining placeholder"
+   end
 end

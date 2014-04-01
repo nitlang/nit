@@ -2,11 +2,11 @@ default: linux
 
 linux:
 	mkdir -p bin
-	../../bin/nitg -o bin/dino src/dino_linux.nit
+	../../bin/nith -o bin/dino src/dino_linux.nit
 
 android:
 	mkdir -p bin
-	../../bin/nitg -o bin/dino.apk src/dino_android.nit
+	../../bin/nith -o bin/dino.apk src/dino_android.nit
 
 doc:
 	mkdir -p doc

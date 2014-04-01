@@ -19,13 +19,13 @@ import model_base
 
 # Structured documentation of a `MEntity` object
 class MDoc
-	# Raw content, line by line
-	# The starting `#` and first space are stripped.
-	# The trailing `\n` are chomped.
-	var content = new Array[String]
+   # Raw content, line by line
+   # The starting `#` and first space are stripped.
+   # The trailing `\n` are chomped.
+   var content = new Array[String]
 end
 
 redef class MEntity
-	# The documentation assiciated to the entity
-	var mdoc: nullable MDoc writable
+   # The documentation assiciated to the entity
+   var mdoc: nullable MDoc writable
 end

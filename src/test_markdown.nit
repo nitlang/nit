@@ -19,37 +19,37 @@ import modelize_property
 import markdown
 
 redef class ModelBuilder
-	fun test_markdown(page: HTMLTag, mmodule: MModule)
-	do
-		page.add_raw_html "<a id='{mmodule.full_name}'></a>"
-		page.add_raw_html "<h1>module {mmodule}</h1>"
-		if mmodule2nmodule.has_key(mmodule) then
-			do
-				var mdoc = mmodule.mdoc
-				if mdoc == null then break label x
-				page.add mdoc.full_markdown
-			end label x
-			for mclassdef in mmodule.mclassdefs do
-				do
-					var mdoc = mclassdef.mdoc
-					if mdoc != null then
-						if mclassdef.mclass.intro == mclassdef then page.add_raw_html "<a id='{mclassdef.mclass.full_name}'></a>"
-						page.add_raw_html "<h2>class {mclassdef}</h2>"
-						page.add mdoc.full_markdown
-					end
-				end
-				for mpropdef in mclassdef.mpropdefs do
-					var mdoc = mpropdef.mdoc
-					if mdoc != null then
-						if mpropdef.mproperty.intro == mpropdef then page.add_raw_html "<a id='{mpropdef.mproperty.full_name}'></a>"
+   fun test_markdown(page: HTMLTag, mmodule: MModule)
+   do
+      page.add_raw_html "<a id='{mmodule.full_name}'></a>"
+      page.add_raw_html "<h1>module {mmodule}</h1>"
+      if mmodule2nmodule.has_key(mmodule) then
+         do
+            var mdoc = mmodule.mdoc
+            if mdoc == null then break label x
+            page.add mdoc.full_markdown
+         end label x
+         for mclassdef in mmodule.mclassdefs do
+            do
+               var mdoc = mclassdef.mdoc
+               if mdoc != null then
+                  if mclassdef.mclass.intro == mclassdef then page.add_raw_html "<a id='{mclassdef.mclass.full_name}'></a>"
+                  page.add_raw_html "<h2>class {mclassdef}</h2>"
+                  page.add mdoc.full_markdown
+               end
+            end
+            for mpropdef in mclassdef.mpropdefs do
+               var mdoc = mpropdef.mdoc
+               if mdoc != null then
+                  if mpropdef.mproperty.intro == mpropdef then page.add_raw_html "<a id='{mpropdef.mproperty.full_name}'></a>"
 
-						page.add_raw_html "<h3>prop {mpropdef}</h3>"
-						page.add mdoc.full_markdown
-					end
-				end
-			end
-		end
-	end
+                  page.add_raw_html "<h3>prop {mpropdef}</h3>"
+                  page.add mdoc.full_markdown
+               end
+            end
+         end
+      end
+   end
 end
 
 var toolcontext = new ToolContext
@@ -97,13 +97,13 @@ border-color: red;
 """
 
 if opt_full.value then
-	for m in model.mmodules do
-		modelbuilder.test_markdown(page, m)
-	end
+   for m in model.mmodules do
+      modelbuilder.test_markdown(page, m)
+   end
 else
-	for m in mmodules do
-		modelbuilder.test_markdown(page, m)
-	end
+   for m in mmodules do
+      modelbuilder.test_markdown(page, m)
+   end
 end
 
 page.add_raw_html "</body>"

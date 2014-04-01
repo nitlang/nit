@@ -38,25 +38,25 @@ end
 # Note this class is basically an enum.
 # FIXME: use a real enum once user-defined enums are available
 class MVisibility
-	super Comparable
-	redef type OTHER: MVisibility
+   super Comparable
+   redef type OTHER: MVisibility
 
-	redef var to_s: String
+   redef var to_s: String
 
-	private var level: Int
+   private var level: Int
 
-	private init(s: String, level: Int)
-	do
-		self.to_s = s
-		self.level = level
-	end
+   private init(s: String, level: Int)
+   do
+      self.to_s = s
+      self.level = level
+   end
 
-	# Is self give less visibility than other
-	# none < private < protected < public < intrude
-	redef fun <(other)
-	do
-		return self.level < other.level
-	end
+   # Is self give less visibility than other
+   # none < private < protected < public < intrude
+   redef fun <(other)
+   do
+      return self.level < other.level
+   end
 end
 
 fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 4)

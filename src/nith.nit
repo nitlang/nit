@@ -14,17 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A global Nit compiler
-module nitg
+# A highly efficient Nit compiler
+module nith
 
 import modelbuilder
 import frontend
-import transform
-import rapid_type_analysis
-import global_compiler
 import separate_erasure_compiler
 import separate_compiler
-import android_platform
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -36,7 +32,7 @@ toolcontext.option_context.add_option(opt_global)
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
 
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+toolcontext.tooldescription = "Usage: nith [OPTION]... file.nit\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
@@ -48,9 +44,9 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
 if arguments.length > 1 then
-	print "Too much arguments: {arguments.join(" ")}"
-	print toolcontext.tooldescription
-	exit 1
+   print "Too much arguments: {arguments.join(" ")}"
+   print toolcontext.tooldescription
+   exit 1
 end
 var progname = arguments.first
 
@@ -63,24 +59,10 @@ modelbuilder.run_phases
 
 var mainmodule
 if mmodules.length == 1 then
-	mainmodule = mmodules.first
+   mainmodule = mmodules.first
 else
-	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
-	mainmodule.set_imported_mmodules(mmodules)
+   mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+   mainmodule.set_imported_mmodules(mmodules)
 end
 
-var platform = mainmodule.target_platform
-if platform != null and not platform.supports_libunwind then
-	toolcontext.opt_no_stacktrace.value = true
-	toolcontext.opt_stacktrace.value = false
-end
-
-if toolcontext.opt_erasure.value then
-	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
-else if opt_global.value then
-	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-	modelbuilder.run_global_compiler(mainmodule, analysis)
-else
-	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-	modelbuilder.run_separate_compiler(mainmodule, analysis)
-end
+   modelbuilder.run_separate_erasure_compiler(mainmodule, null)

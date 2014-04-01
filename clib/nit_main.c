@@ -24,7 +24,7 @@
 #endif
 
 bigint object_id_counter = 1000000;
-enum gc_option { large, gc_opt_malloc, boehm, nitgc } gc_option;
+enum gc_option { large, gc_opt_malloc, boehm, nithc } gc_option;
 
 #ifdef WITH_LIBGC
 #define GC_DEBUG
@@ -34,7 +34,7 @@ enum gc_option { large, gc_opt_malloc, boehm, nitgc } gc_option;
 void *raw_alloc(size_t s0)
 {
 	switch (gc_option) {
-	case nitgc: return malloc(s0);
+	case nithc: return malloc(s0);
 	case gc_opt_malloc: return malloc(s0);
 	default: return alloc(s0);
 	}
@@ -43,7 +43,7 @@ void *raw_alloc(size_t s0)
 void register_static_object(val_t *o)
 {
 	switch (gc_option) {
-	case nitgc: GC_add_static_object(o); break;
+	case nithc: GC_add_static_object(o); break;
 	default: break;
 	}
 	return;
@@ -71,7 +71,7 @@ void * alloc(size_t s0)
 #ifdef WITH_LIBGC
 	case boehm: return GC_MALLOC(s0);
 #endif
-	case nitgc: return Nit_gc_malloc(s0);
+	case nithc: return Nit_gc_malloc(s0);
 	case gc_opt_malloc: return calloc(1, s0);
 	case large:
 	default: return large_alloc(s0);
@@ -89,8 +89,8 @@ void exithandler(int s) {
 void initialize_gc_option(void) {
 	/* GC default */
 	char *def;
-	gc_option = nitgc;
-	def = "nitgc";
+	gc_option = nithc;
+	def = "nithc";
 
 	/* Process GC runtime selection */
 	if (getenv("NIT_GC_OPTION") != NULL) {
@@ -101,14 +101,14 @@ void initialize_gc_option(void) {
 #else
 		PRINT_ERROR( "Compiled without Boehm GC support. Using default '%s'.\n", def);
 #endif
-		} else if (strcmp(opt, "nitgc")==0) {
-			gc_option = nitgc;
+		} else if (strcmp(opt, "nithc")==0) {
+			gc_option = nithc;
 		} else if (strcmp(opt, "malloc")==0) {
 			gc_option = gc_opt_malloc;
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
 		} else if (strcmp(opt, "help")==0) {
-			PRINT_ERROR( "NIT_GC_OPTION accepts 'nitgc'"
+			PRINT_ERROR( "NIT_GC_OPTION accepts 'nithc'"
 #ifdef WITH_LIBGC
 					", 'boehm'"
 #endif
@@ -124,7 +124,7 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 		case boehm: GC_INIT(); break;
 #endif
-		case nitgc: Nit_gc_init(); break;
+		case nithc: Nit_gc_init(); break;
 		default: break; /* Nothing */
 	}
 

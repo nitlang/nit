@@ -23,144 +23,144 @@ intrude import parser
 import literal
 
 private class ASTPrinterVisitor
-	super Visitor
-	redef fun visit(node)
-	do
-		node.accept_printer(self)
-	end
+   super Visitor
+   redef fun visit(node)
+   do
+      node.accept_printer(self)
+   end
 
-	var out = new List[String]
-	var indent_level = 0
+   var out = new List[String]
+   var indent_level = 0
 
-	var has_eol = true
+   var has_eol = true
 
-	fun eol
-	do
-		if has_eol then return
-		out.add("\n")
-		for x in [0..indent_level[ do out.add("\t")
-		has_eol = true
-	end
+   fun eol
+   do
+      if has_eol then return
+      out.add("\n")
+      for x in [0..indent_level[ do out.add("\t")
+      has_eol = true
+   end
 
-	var last_current: nullable ANode
+   var last_current: nullable ANode
 
-	fun write(s: String)
-	do
-		if last_current != current_node then
-			last_current = current_node
-			var l = current_node._location
-			if l != null then
-				eol
-				out.add(s)
-				out.add("\t# {l.colored_line("0;32").split_with('\n').first}")
-				has_eol = false
-				eol
-				return
-			end
-		end
-		out.add(s)
-		has_eol = false
-	end
+   fun write(s: String)
+   do
+      if last_current != current_node then
+         last_current = current_node
+         var l = current_node._location
+         if l != null then
+            eol
+            out.add(s)
+            out.add("\t# {l.colored_line("0;32").split_with('\n').first}")
+            has_eol = false
+            eol
+            return
+         end
+      end
+      out.add(s)
+      has_eol = false
+   end
 
-	fun indent do indent_level += 1
-	fun unindent do indent_level -= 1
+   fun indent do indent_level += 1
+   fun unindent do indent_level -= 1
 end
 
 redef class ANode
-	# print the tree (using the semantic information) on screen
-	# This method is used to debug AST transformations
-	fun print_tree
-	do
-		var v = new ASTPrinterVisitor
-		v.enter_visit(self)
-		v.eol
-		for s in v.out do
-			printn s
-		end
-	end
+   # print the tree (using the semantic information) on screen
+   # This method is used to debug AST transformations
+   fun print_tree
+   do
+      var v = new ASTPrinterVisitor
+      v.enter_visit(self)
+      v.eol
+      for s in v.out do
+         printn s
+      end
+   end
 
-	private fun accept_printer(v: ASTPrinterVisitor)
-	do
-		v.eol
-		v.write("({inspect}")
-		v.indent
-		visit_all(v)
-		v.write(")")
-		v.unindent
-	end
+   private fun accept_printer(v: ASTPrinterVisitor)
+   do
+      v.eol
+      v.write("({inspect}")
+      v.indent
+      visit_all(v)
+      v.write(")")
+      v.unindent
+   end
 end
 
 redef class ABlockExpr
-	redef fun accept_printer(v)
-	do
-		for x in n_expr do
-			v.enter_visit(x)
-			v.eol
-		end
-	end
+   redef fun accept_printer(v)
+   do
+      for x in n_expr do
+         v.enter_visit(x)
+         v.eol
+      end
+   end
 end
 
 redef class AIntExpr
-	redef fun accept_printer(v)
-	do
-		v.write(value.to_s)
-	end
+   redef fun accept_printer(v)
+   do
+      v.write(value.to_s)
+   end
 end
 
 redef class ANewExpr
-	redef fun accept_printer(v)
-	do
-		v.write("new {mtype.as(not null)}.{mproperty.as(not null)}")
-		if not n_args.n_exprs.is_empty then
-			v.write("(")
-			v.indent
-			var is_first = true
-			for a in n_args.n_exprs do
-				if is_first then is_first = false else v.write(",")
-				v.enter_visit(a)
-			end
-			v.unindent
-			v.write(")")
-		end
-	end
+   redef fun accept_printer(v)
+   do
+      v.write("new {mtype.as(not null)}.{mproperty.as(not null)}")
+      if not n_args.n_exprs.is_empty then
+         v.write("(")
+         v.indent
+         var is_first = true
+         for a in n_args.n_exprs do
+            if is_first then is_first = false else v.write(",")
+            v.enter_visit(a)
+         end
+         v.unindent
+         v.write(")")
+      end
+   end
 end
 
 redef class ASendExpr
-	redef fun accept_printer(v)
-	do
-		v.enter_visit(n_expr)
-		v.write(".{mproperty.name}")
-		if not raw_arguments.is_empty then
-			v.write("(")
-			v.indent
-			var is_first = true
-			for a in raw_arguments.as(not null) do
-				if is_first then is_first = false else v.write(",")
-				v.enter_visit(a)
-			end
-			v.unindent
-			v.write(")")
-		end
-	end
+   redef fun accept_printer(v)
+   do
+      v.enter_visit(n_expr)
+      v.write(".{mproperty.name}")
+      if not raw_arguments.is_empty then
+         v.write("(")
+         v.indent
+         var is_first = true
+         for a in raw_arguments.as(not null) do
+            if is_first then is_first = false else v.write(",")
+            v.enter_visit(a)
+         end
+         v.unindent
+         v.write(")")
+      end
+   end
 end
 
 redef class AVarExpr
-	redef fun accept_printer(v)
-	do
-		var name = variable.name
-		if name == "" then name = "t{variable.object_id}"
-		v.write(name)
-	end
+   redef fun accept_printer(v)
+   do
+      var name = variable.name
+      if name == "" then name = "t{variable.object_id}"
+      v.write(name)
+   end
 end
 
 redef class AVarAssignExpr
-	redef fun accept_printer(v)
-	do
-		var name = variable.name
-		if name == "" then name = "t{variable.object_id}"
-		v.write("{name} = ")
-		v.indent
-		v.enter_visit(n_value)
-		v.unindent
-	end
+   redef fun accept_printer(v)
+   do
+      var name = variable.name
+      if name == "" then name = "t{variable.object_id}"
+      v.write("{name} = ")
+      v.indent
+      v.enter_visit(n_value)
+      v.unindent
+   end
 end

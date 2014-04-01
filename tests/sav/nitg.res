@@ -1,3 +1,3 @@
-Usage: nitg [OPTION]... file.nit
+Usage: nith [OPTION]... file.nit
 Compiles Nit programs.
 Use --help for help

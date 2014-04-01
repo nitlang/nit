@@ -19,215 +19,215 @@ intrude import parser
 import toolcontext
 
 redef class ToolContext
-	# Parse a full module given as a string
-	# Fatal error if the `string` is not a syntactically correct module
-	fun parse_module(string: String): AModule
-	do
-		var source = new SourceFile.from_string("", string)
-		var lexer = new Lexer(source)
-		var parser = new Parser(lexer)
-		var tree = parser.parse
+   # Parse a full module given as a string
+   # Fatal error if the `string` is not a syntactically correct module
+   fun parse_module(string: String): AModule
+   do
+      var source = new SourceFile.from_string("", string)
+      var lexer = new Lexer(source)
+      var parser = new Parser(lexer)
+      var tree = parser.parse
 
-		var eof = tree.n_eof
-		if eof isa AError then
-			self.fatal_error(null, "Fatal Error: {eof.message}")
-			abort
-		end
-		return tree.n_base.as(not null)
-	end
+      var eof = tree.n_eof
+      if eof isa AError then
+         self.fatal_error(null, "Fatal Error: {eof.message}")
+         abort
+      end
+      return tree.n_base.as(not null)
+   end
 
-	# Parse a full classdef given as a string
-	# Fatal error if the `string` is not a syntactically correct class definition
-	fun parse_classdef(string: String): AClassdef
-	do
-		var nmodule = parse_module(string)
-		var nclassdefs = nmodule.n_classdefs
-		if nclassdefs.length != 1 then
-			self.fatal_error(null, "Fatal Error: not a classdef")
-			abort
-		end
-		return nclassdefs.first
-	end
+   # Parse a full classdef given as a string
+   # Fatal error if the `string` is not a syntactically correct class definition
+   fun parse_classdef(string: String): AClassdef
+   do
+      var nmodule = parse_module(string)
+      var nclassdefs = nmodule.n_classdefs
+      if nclassdefs.length != 1 then
+         self.fatal_error(null, "Fatal Error: not a classdef")
+         abort
+      end
+      return nclassdefs.first
+   end
 
-	# Parse a full propdef given as a string
-	# Fatal error if the `string` is not a syntactically correct property definition
-	fun parse_propdef(string: String): APropdef
-	do
-		var mod_string = "class Dummy\n{string}\nend"
-		var nclassdef = parse_classdef(mod_string)
-		var npropdefs = nclassdef.n_propdefs
-		if npropdefs.length != 1 then
-			self.fatal_error(null, "Fatal Error: not a propdef")
-			abort
-		end
-		return npropdefs.first
-	end
+   # Parse a full propdef given as a string
+   # Fatal error if the `string` is not a syntactically correct property definition
+   fun parse_propdef(string: String): APropdef
+   do
+      var mod_string = "class Dummy\n{string}\nend"
+      var nclassdef = parse_classdef(mod_string)
+      var npropdefs = nclassdef.n_propdefs
+      if npropdefs.length != 1 then
+         self.fatal_error(null, "Fatal Error: not a propdef")
+         abort
+      end
+      return npropdefs.first
+   end
 
-	# Parse a full statement block given as a string
-	# Fatal error if the `string` is not a syntactically correct statement block
-	fun parse_stmts(string: String): AExpr
-	do
-		var mod_string = "do\n{string}\nend"
-		var nmodule = parse_module(mod_string)
-		var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
-		return nblock
-	end
+   # Parse a full statement block given as a string
+   # Fatal error if the `string` is not a syntactically correct statement block
+   fun parse_stmts(string: String): AExpr
+   do
+      var mod_string = "do\n{string}\nend"
+      var nmodule = parse_module(mod_string)
+      var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+      return nblock
+   end
 
-	# Parse a full expression given as a string
-	# Fatal error if the `string` is not a syntactically correct expression
-	fun parse_expr(string: String): AExpr
-	do
-		var mod_string = "var dummy = \n{string}"
-		var nmodule = parse_module(mod_string)
-		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
-		return nexpr
-	end
+   # Parse a full expression given as a string
+   # Fatal error if the `string` is not a syntactically correct expression
+   fun parse_expr(string: String): AExpr
+   do
+      var mod_string = "var dummy = \n{string}"
+      var nmodule = parse_module(mod_string)
+      var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
+      return nexpr
+   end
 
-	# Try to parse the `string` as something
-	#
-	# Returns the first possible syntacticaly correct type among:
-	#
-	# - a type `AType`
-	# - a single `Token`
-	# - an expression `AExpr`
-	# - a block of statements `ABlockExpr`
-	# - a full module `AModule`
-	# - a `AError` if nothing else matches
-	fun parse_something(string: String): ANode
-	do
-		var source = new SourceFile.from_string("", string)
-		var error
-		var tree
-		var eof
-		var lexer
+   # Try to parse the `string` as something
+   #
+   # Returns the first possible syntacticaly correct type among:
+   #
+   # - a type `AType`
+   # - a single `Token`
+   # - an expression `AExpr`
+   # - a block of statements `ABlockExpr`
+   # - a full module `AModule`
+   # - a `AError` if nothing else matches
+   fun parse_something(string: String): ANode
+   do
+      var source = new SourceFile.from_string("", string)
+      var error
+      var tree
+      var eof
+      var lexer
 
-		lexer = new InjectedLexer(source)
-		lexer.injected_before.add new TKwvar
-		lexer.injected_before.add new TId
-		lexer.injected_before.add new TColumn
-		lexer.injected_before.add new TClassid
-		lexer.injected_before.add new TObra
-		lexer.injected_after.add new TCbra
-		tree = (new Parser(lexer)).parse
-		eof = tree.n_eof
-		if not eof isa AError then
-			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
-			return ntype
-		end
-		error = eof
+      lexer = new InjectedLexer(source)
+      lexer.injected_before.add new TKwvar
+      lexer.injected_before.add new TId
+      lexer.injected_before.add new TColumn
+      lexer.injected_before.add new TClassid
+      lexer.injected_before.add new TObra
+      lexer.injected_after.add new TCbra
+      tree = (new Parser(lexer)).parse
+      eof = tree.n_eof
+      if not eof isa AError then
+         var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
+         return ntype
+      end
+      error = eof
 
-		lexer = new Lexer(source)
-		var first = lexer.next
-		if not first isa EOF then
-			var second = lexer.next
-			if second isa EOF and not second isa AError then
-				return first
-			end
-		end
+      lexer = new Lexer(source)
+      var first = lexer.next
+      if not first isa EOF then
+         var second = lexer.next
+         if second isa EOF and not second isa AError then
+            return first
+         end
+      end
 
-		lexer = new InjectedLexer(source)
-		lexer.injected_before.add new TKwvar
-		lexer.injected_before.add new TId
-		lexer.injected_before.add new TAssign
-		lexer.injected_before.add new TOpar
-		lexer.injected_after.add new TCpar
-		tree = (new Parser(lexer)).parse
-		eof = tree.n_eof
-		if not eof isa AError then
-			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
-			return nexpr
-		end
-		if eof.location > error.location then error = eof
+      lexer = new InjectedLexer(source)
+      lexer.injected_before.add new TKwvar
+      lexer.injected_before.add new TId
+      lexer.injected_before.add new TAssign
+      lexer.injected_before.add new TOpar
+      lexer.injected_after.add new TCpar
+      tree = (new Parser(lexer)).parse
+      eof = tree.n_eof
+      if not eof isa AError then
+         var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
+         return nexpr
+      end
+      if eof.location > error.location then error = eof
 
-		lexer = new InjectedLexer(source)
-		lexer.injected_before.add new TKwdo
-		lexer.injected_after.add new TKwend
-		tree = (new Parser(lexer)).parse
-		eof = tree.n_eof
-		if not eof isa AError then
-			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
-			return nblock
-		end
-		if eof.location > error.location then error = eof
+      lexer = new InjectedLexer(source)
+      lexer.injected_before.add new TKwdo
+      lexer.injected_after.add new TKwend
+      tree = (new Parser(lexer)).parse
+      eof = tree.n_eof
+      if not eof isa AError then
+         var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+         return nblock
+      end
+      if eof.location > error.location then error = eof
 
-		lexer = new Lexer(source)
-		tree = (new Parser(lexer)).parse
-		eof = tree.n_eof
-		if not eof isa AError then
-			return tree.n_base.as(not null)
-		end
-		if eof.location > error.location then error = eof
+      lexer = new Lexer(source)
+      tree = (new Parser(lexer)).parse
+      eof = tree.n_eof
+      if not eof isa AError then
+         return tree.n_base.as(not null)
+      end
+      if eof.location > error.location then error = eof
 
-		return error
-	end
+      return error
+   end
 end
 
 class InjectedLexer
-	super Lexer
+   super Lexer
 
-	var injected_before = new List[Token]
-	var injected_after = new List[Token]
-	private var is_finished = false
+   var injected_before = new List[Token]
+   var injected_after = new List[Token]
+   private var is_finished = false
 
-	redef fun get_token
-	do
-		if not injected_before.is_empty then
-			var tok = injected_before.shift
-			if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
-			return tok
-		end
-		if not is_finished then
-			var next = super
-			if not next isa EOF then return next
-			injected_after.push(next)
-			is_finished = true
-		end
+   redef fun get_token
+   do
+      if not injected_before.is_empty then
+         var tok = injected_before.shift
+         if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+         return tok
+      end
+      if not is_finished then
+         var next = super
+         if not next isa EOF then return next
+         injected_after.push(next)
+         is_finished = true
+      end
 
-		var tok = injected_after.shift
-		if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
-		return tok
-	end
+      var tok = injected_after.shift
+      if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+      return tok
+   end
 end
 
 redef class ANode
-	# Return an array of tokens that match a given text
-	fun collect_tokens_by_text(text: String): Array[Token]
-	do
-		var v = new CollectTokensByTextVisitor(text)
-		v.enter_visit(self)
-		return v.result
-	end
+   # Return an array of tokens that match a given text
+   fun collect_tokens_by_text(text: String): Array[Token]
+   do
+      var v = new CollectTokensByTextVisitor(text)
+      v.enter_visit(self)
+      return v.result
+   end
 
-	# Return an array of node that are annotated
-	# The attached node can be retrieved by two invocation of parent
-	fun collect_annotations_by_name(name: String): Array[AAnnotation]
-	do
-		var v = new CollectAnnotationsByNameVisitor(name)
-		v.enter_visit(self)
-		return v.result
-	end
+   # Return an array of node that are annotated
+   # The attached node can be retrieved by two invocation of parent
+   fun collect_annotations_by_name(name: String): Array[AAnnotation]
+   do
+      var v = new CollectAnnotationsByNameVisitor(name)
+      v.enter_visit(self)
+      return v.result
+   end
 end
 
 private class CollectTokensByTextVisitor
-	super Visitor
-	var text: String
-	init(text: String) do self.text = text
-	var result = new Array[Token]
-	redef fun visit(node)
-	do
-		node.visit_all(self)
-		if node isa Token and node.text == text then result.add(node)
-	end
+   super Visitor
+   var text: String
+   init(text: String) do self.text = text
+   var result = new Array[Token]
+   redef fun visit(node)
+   do
+      node.visit_all(self)
+      if node isa Token and node.text == text then result.add(node)
+   end
 end
 
 private class CollectAnnotationsByNameVisitor
-	super Visitor
-	var name: String
-	init(name: String) do self.name = name
-	var result = new Array[AAnnotation]
-	redef fun visit(node)
-	do
-		node.visit_all(self)
-		if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
-	end
+   super Visitor
+   var name: String
+   init(name: String) do self.name = name
+   var result = new Array[AAnnotation]
+   redef fun visit(node)
+   do
+      node.visit_all(self)
+      if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
+   end
 end

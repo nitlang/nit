@@ -24,20 +24,20 @@ import frontend
 import model_viz
 
 redef class ToolContext
-	var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)
+   var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)
 end
 
 private class GenerateHierarchyPhase
-	super Phase
+   super Phase
 
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
-		var model = toolcontext.modelbuilder.model
-		generate_module_hierarchy(toolcontext, given_mmodules)
-		generate_classdef_hierarchy(toolcontext, model)
-		generate_class_hierarchy(toolcontext, mainmodule)
-	end
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
+      var model = toolcontext.modelbuilder.model
+      generate_module_hierarchy(toolcontext, given_mmodules)
+      generate_classdef_hierarchy(toolcontext, model)
+      generate_class_hierarchy(toolcontext, mainmodule)
+   end
 end
 
 # Create a dot file representing the module hierarchy of a model.
@@ -45,63 +45,63 @@ end
 # Nesting relation is represented with nested boxes
 fun generate_module_hierarchy(toolcontext: ToolContext, given_mmodules: Collection[MModule])
 do
-	var model = given_mmodules.first.model
-	var dot = new MProjectDot(model)
+   var model = given_mmodules.first.model
+   var dot = new MProjectDot(model)
 
-	# Collect requested projects
-	for m in given_mmodules do
-		var g = m.mgroup
-		if g == null then continue
-		dot.mprojects.add(g.mproject)
-	end
-	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
-	print "generating {projectpath}"
-	dot.write_to_file(projectpath)
+   # Collect requested projects
+   for m in given_mmodules do
+      var g = m.mgroup
+      if g == null then continue
+      dot.mprojects.add(g.mproject)
+   end
+   var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
+   print "generating {projectpath}"
+   dot.write_to_file(projectpath)
 
-	var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
-	dot.mprojects.add_all(model.mprojects)
-	print "generating {modulepath}"
-	dot.write_to_file(modulepath)
+   var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
+   dot.mprojects.add_all(model.mprojects)
+   print "generating {modulepath}"
+   dot.write_to_file(modulepath)
 end
 
 # Create a dot file representing the class hierarchy of a model.
 fun generate_class_hierarchy(toolcontext: ToolContext, mmodule: MModule)
 do
-	var buf = new Buffer
-	buf.append("digraph \{\n")
-	buf.append("node [shape=box];\n")
-	buf.append("rankdir=BT;\n")
-	var hierarchy = mmodule.flatten_mclass_hierarchy
-	for mclass in hierarchy do
-		buf.append("\"{mclass}\" [label=\"{mclass}\"];\n")
-		for s in hierarchy[mclass].direct_greaters do
-			buf.append("\"{mclass}\" -> \"{s}\";\n")
-		end
-	end
-	buf.append("\}\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("class_hierarchy.dot"))
-	f.write(buf.to_s)
-	f.close
+   var buf = new Buffer
+   buf.append("digraph \{\n")
+   buf.append("node [shape=box];\n")
+   buf.append("rankdir=BT;\n")
+   var hierarchy = mmodule.flatten_mclass_hierarchy
+   for mclass in hierarchy do
+      buf.append("\"{mclass}\" [label=\"{mclass}\"];\n")
+      for s in hierarchy[mclass].direct_greaters do
+         buf.append("\"{mclass}\" -> \"{s}\";\n")
+      end
+   end
+   buf.append("\}\n")
+   var f = new OFStream.open(toolcontext.output_dir.join_path("class_hierarchy.dot"))
+   f.write(buf.to_s)
+   f.close
 end
 
 # Create a dot file representing the classdef hierarchy of a model.
 # For a simple user of the model, the classdef hierarchy is not really usefull, it is more an internal thing.
 fun generate_classdef_hierarchy(toolcontext: ToolContext, model: Model)
 do
-	var buf = new Buffer
-	buf.append("digraph \{\n")
-	buf.append("node [shape=box];\n")
-	buf.append("rankdir=BT;\n")
-	for mmodule in model.mmodules do
-		for mclassdef in mmodule.mclassdefs do
-			buf.append("\"{mclassdef} {mclassdef.bound_mtype}\" [label=\"{mclassdef.mmodule}\\n{mclassdef.bound_mtype}\"];\n")
-			for s in mclassdef.in_hierarchy.direct_greaters do
-				buf.append("\"{mclassdef} {mclassdef.bound_mtype}\" -> \"{s} {s.bound_mtype}\";\n")
-			end
-		end
-	end
-	buf.append("\}\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("classdef_hierarchy.dot"))
-	f.write(buf.to_s)
-	f.close
+   var buf = new Buffer
+   buf.append("digraph \{\n")
+   buf.append("node [shape=box];\n")
+   buf.append("rankdir=BT;\n")
+   for mmodule in model.mmodules do
+      for mclassdef in mmodule.mclassdefs do
+         buf.append("\"{mclassdef} {mclassdef.bound_mtype}\" [label=\"{mclassdef.mmodule}\\n{mclassdef.bound_mtype}\"];\n")
+         for s in mclassdef.in_hierarchy.direct_greaters do
+            buf.append("\"{mclassdef} {mclassdef.bound_mtype}\" -> \"{s} {s.bound_mtype}\";\n")
+         end
+      end
+   end
+   buf.append("\}\n")
+   var f = new OFStream.open(toolcontext.output_dir.join_path("classdef_hierarchy.dot"))
+   f.write(buf.to_s)
+   f.close
 end

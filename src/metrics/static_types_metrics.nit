@@ -23,66 +23,66 @@ import modelize_class
 import frontend
 
 redef class ToolContext
-	var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)
+   var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)
 end
 
 private class StaticTypesMetricsPhase
-	super Phase
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_static_types.value and not toolcontext.opt_all.value then return
-		compute_static_types_metrics(toolcontext.modelbuilder)
-	end
+   super Phase
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_static_types.value and not toolcontext.opt_all.value then return
+      compute_static_types_metrics(toolcontext.modelbuilder)
+   end
 end
 
 # The job of this visitor is to resolve all types found
 private class ATypeCounterVisitor
-	super Visitor
-	var modelbuilder: ModelBuilder
-	var nclassdef: AClassdef
+   super Visitor
+   var modelbuilder: ModelBuilder
+   var nclassdef: AClassdef
 
-	var typecount: Counter[MType]
+   var typecount: Counter[MType]
 
-	# Get a new visitor on a classef to add type count in `typecount`.
-	init(modelbuilder: ModelBuilder, nclassdef: AClassdef, typecount: Counter[MType])
-	do
-		self.modelbuilder = modelbuilder
-		self.nclassdef = nclassdef
-		self.typecount = typecount
-	end
+   # Get a new visitor on a classef to add type count in `typecount`.
+   init(modelbuilder: ModelBuilder, nclassdef: AClassdef, typecount: Counter[MType])
+   do
+      self.modelbuilder = modelbuilder
+      self.nclassdef = nclassdef
+      self.typecount = typecount
+   end
 
-	redef fun visit(n)
-	do
-		if n isa AType then
-			var mtype = modelbuilder.resolve_mtype(self.nclassdef, n)
-			if mtype != null then
-				self.typecount.inc(mtype)
-			end
-		end
-		n.visit_all(self)
-	end
+   redef fun visit(n)
+   do
+      if n isa AType then
+         var mtype = modelbuilder.resolve_mtype(self.nclassdef, n)
+         if mtype != null then
+            self.typecount.inc(mtype)
+         end
+      end
+      n.visit_all(self)
+   end
 end
 
 # Visit the AST and print metrics on the usage of explicit static types.
 fun compute_static_types_metrics(modelbuilder: ModelBuilder)
 do
-	# Count each occurence of a specific static type
-	var typecount = new Counter[MType]
+   # Count each occurence of a specific static type
+   var typecount = new Counter[MType]
 
-	# Visit all the source code to collect data
-	for nmodule in modelbuilder.nmodules do
-		for nclassdef in nmodule.n_classdefs do
-			var visitor = new ATypeCounterVisitor(modelbuilder, nclassdef, typecount)
-			visitor.enter_visit(nclassdef)
-		end
-	end
+   # Visit all the source code to collect data
+   for nmodule in modelbuilder.nmodules do
+      for nclassdef in nmodule.n_classdefs do
+         var visitor = new ATypeCounterVisitor(modelbuilder, nclassdef, typecount)
+         visitor.enter_visit(nclassdef)
+      end
+   end
 
-	# Display data
-	print "--- Metrics of the explitic static types ---"
-	print "Total number of explicit static types: {typecount.sum}"
-	if typecount.sum == 0 then return
+   # Display data
+   print "--- Metrics of the explitic static types ---"
+   print "Total number of explicit static types: {typecount.sum}"
+   if typecount.sum == 0 then return
 
-	print "Statistics of type usage:"
-	typecount.print_summary
-	typecount.print_elements(10)
+   print "Statistics of type usage:"
+   typecount.print_summary
+   typecount.print_elements(10)
 end

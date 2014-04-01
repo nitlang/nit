@@ -1,4 +1,4 @@
-for x in nitg-g nitg-s nitg-e niti; do
+for x in nith-g nith-s nith-e niti; do
 	echo "--engine $x"
 	./tests.sh --engine $x "$@"
 done

@@ -137,7 +137,7 @@ fi
 cd ../src
 test -f ./nitc_3 || ./ncall.sh -O
 cd ../benchmarks
-test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
+test -f ./nith || ../src/nitc_3 ../src/nith.nit -O -v
 
 ## EFFECTIVE BENCHS ##
 
@@ -154,7 +154,7 @@ function bench_language()
 	s=20
 	seq="2 4 8"
 	for b in $seq; do
-		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
+		run_command ./nith languages/$name.nit -o $basedir/$name.bin
 		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
 	done
 
@@ -219,56 +219,56 @@ function bench_language()
 	done
 
 	nitdir="${basedir}/nit"
-	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
+	prepare_res $nitdir/$name-nith.dat "nith" "nith"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --global -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
+		run_command ./nith $nitdir/${t}_$b.nit --global -o "$nitdir/${t}_$b.nith.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nith.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
+	prepare_res $nitdir/$name-nith-s.dat "nith-s" "nith-s"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
+		run_command ./nith $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nith-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nith-s.bin" $s
 	done
 
 <<XXX
-	tg="nitg-s-bm"
+	tg="nith-s-bm"
 	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --bm-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		run_command ./nith $nitdir/${t}_$b.nit --separate --bm-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
 	done
 
-	tg="nitg-s-pha"
+	tg="nith-s-pha"
 	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --phand-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		run_command ./nith $nitdir/${t}_$b.nit --separate --phand-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
 	done
 
-	tg="nitg-s-phm"
+	tg="nith-s-phm"
 	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --phmod-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		run_command ./nith $nitdir/${t}_$b.nit --separate --phmod-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
+	prepare_res $nitdir/$name-nith-su.dat "nith-su" "nith-su"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
+		run_command ./nith $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nith-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nith-su.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
+	prepare_res $nitdir/$name-nith-e.dat "nith-e" "nith-e"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
+		run_command ./nith $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nith-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nith-e.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
+	prepare_res $nitdir/$name-nith-eu.dat "nith-eu" "nith-eu"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
+		run_command ./nith $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nith-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nith-eu.bin" $s
 	done
 XXX
 

@@ -41,74 +41,74 @@ if opt_full.value then mmodules = model.mmodules
 
 var dir = opt_dir.value
 if dir != null then
-	dir.mkdir
+   dir.mkdir
 else if mmodules.length > 1 then
-	print "More than one module to render, use option -d"
-	return
+   print "More than one module to render, use option -d"
+   return
 end
 
 for mm in mmodules do
-	if dir != null then toolcontext.info("write {dir}/{mm.name}.html", 1)
+   if dir != null then toolcontext.info("write {dir}/{mm.name}.html", 1)
 
-	var v = new HighlightVisitor
+   var v = new HighlightVisitor
 
-	if opt_first_line.value != 0 then v.first_line = opt_first_line.value
-	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
-	if opt_ast.value then v.with_ast = true
-	var page = null
-	if not opt_fragment.value then
-		page = new HTMLTag("html")
-		page.add_raw_html """<head>
-		<meta charset="utf-8">"""
-		if dir == null then
-			page.add_raw_html """
-			<style type="text/css">
-			{{{v.css_content}}}
-			</style>
-			"""
-		else
-			page.add_raw_html """<link rel="stylesheet" type="text/css" href="style.css" />"""
-		end
-		page.add_raw_html "</head><body><pre>"
-	end
-	var m = modelbuilder.mmodule2nmodule[mm]
-	v.enter_visit(m)
-	if not opt_fragment.value then
-		page.add(v.html)
-		page.add_raw_html "</pre></body>"
-	else
-		page = v.html
-	end
+   if opt_first_line.value != 0 then v.first_line = opt_first_line.value
+   if opt_last_line.value != 0 then v.last_line = opt_last_line.value
+   if opt_ast.value then v.with_ast = true
+   var page = null
+   if not opt_fragment.value then
+      page = new HTMLTag("html")
+      page.add_raw_html """<head>
+      <meta charset="utf-8">"""
+      if dir == null then
+         page.add_raw_html """
+         <style type="text/css">
+         {{{v.css_content}}}
+         </style>
+         """
+      else
+         page.add_raw_html """<link rel="stylesheet" type="text/css" href="style.css" />"""
+      end
+      page.add_raw_html "</head><body><pre>"
+   end
+   var m = modelbuilder.mmodule2nmodule[mm]
+   v.enter_visit(m)
+   if not opt_fragment.value then
+      page.add(v.html)
+      page.add_raw_html "</pre></body>"
+   else
+      page = v.html
+   end
 
-	if dir != null then
-		page.write_to_file("{dir}/{mm.name}.html")
-	else
-		page.write_to(stdout)
-	end
+   if dir != null then
+      page.write_to_file("{dir}/{mm.name}.html")
+   else
+      page.write_to(stdout)
+   end
 end
 
 if dir != null then
-	toolcontext.info("write {dir}/index.html", 1)
+   toolcontext.info("write {dir}/index.html", 1)
 
-	var page = new HTMLTag("html")
-	page.add_raw_html """<head>
-	<meta charset="utf-8">
-	</head><body><ul>
-	"""
-	for mm in mmodules do
-		var n = new HTMLTag("li")
-		var n2 = new HTMLTag("a")
-		page.add n
-		n.add n2
-		n2.attr("href", "{mm.name}.html")
-		n2.text(mm.name)
-	end
-	page.add_raw_html "</li></body>"
-	page.write_to_file("{dir}/index.html")
+   var page = new HTMLTag("html")
+   page.add_raw_html """<head>
+   <meta charset="utf-8">
+   </head><body><ul>
+   """
+   for mm in mmodules do
+      var n = new HTMLTag("li")
+      var n2 = new HTMLTag("a")
+      page.add n
+      n.add n2
+      n2.attr("href", "{mm.name}.html")
+      n2.text(mm.name)
+   end
+   page.add_raw_html "</li></body>"
+   page.write_to_file("{dir}/index.html")
 
-	var v = new HighlightVisitor
-	toolcontext.info("write {dir}/style.css", 1)
-	var f = new OFStream.open("{dir}/style.css")
-	f.write v.css_content
-	f.close
+   var v = new HighlightVisitor
+   toolcontext.info("write {dir}/style.css", 1)
+   var f = new OFStream.open("{dir}/style.css")
+   f.write v.css_content
+   f.close
 end

@@ -20,24 +20,24 @@ module test_parser
 import parser
 
 class PrintTreeVisitor
-	super Visitor
-	var _rank: Int
-	redef fun visit(n)
-	do
-		if n isa Token then
-			printn("  " * _rank, n.class_name, " \"", n.text.escape_to_c, "\" ", n.location, "\n")
-		else
-			printn("  " * _rank, n.class_name, " ", n.location, "\n")
-		end
-		_rank = _rank + 1
-		n.visit_all(self)
-		_rank = _rank - 1
-	end
+   super Visitor
+   var _rank: Int
+   redef fun visit(n)
+   do
+      if n isa Token then
+         printn("  " * _rank, n.class_name, " \"", n.text.escape_to_c, "\" ", n.location, "\n")
+      else
+         printn("  " * _rank, n.class_name, " ", n.location, "\n")
+      end
+      _rank = _rank + 1
+      n.visit_all(self)
+      _rank = _rank - 1
+   end
 
-	init
-	do
-		_rank = 0
-	end
+   init
+   do
+      _rank = 0
+   end
 end
 
 var no_print = false
@@ -46,64 +46,64 @@ var need_help = false
 var no_file = false
 
 while not args.is_empty and args.first.chars.first == '-' do
-	if args.first == "-n" then
-		no_print = true
-	else if args.first == "-l" then
-		only_lexer = true
-	else if args.first == "-p" then
-		only_lexer = false
-	else if args.first == "-e" then
-		no_file = true
-	else if args.first == "-h" or args.first == "-?" then
-		need_help = true
-	else
-		stderr.write("Unknown option {args.first}.\n")
-		exit(0)
-	end
-	args.shift
+   if args.first == "-n" then
+      no_print = true
+   else if args.first == "-l" then
+      only_lexer = true
+   else if args.first == "-p" then
+      only_lexer = false
+   else if args.first == "-e" then
+      no_file = true
+   else if args.first == "-h" or args.first == "-?" then
+      need_help = true
+   else
+      stderr.write("Unknown option {args.first}.\n")
+      exit(0)
+   end
+   args.shift
 end
 
 if args.is_empty or need_help then
-	print("usage:")
-	print("  test_parser [options]... <filename.nit>...")
-	print("options:")
-	print("  -n	do not print anything")
-	print("  -l	only lexer")
-	print("  -p	lexer and parser (default)")
-	print("  -e	instead on files, each argument is a content to parse")
-	print("  -h	print this help")
+   print("usage:")
+   print("  test_parser [options]... <filename.nit>...")
+   print("options:")
+   print("  -n   do not print anything")
+   print("  -l   only lexer")
+   print("  -p   lexer and parser (default)")
+   print("  -e   instead on files, each argument is a content to parse")
+   print("  -h   print this help")
 else
-	for a in args do
-		var source
-		if no_file then
-			source = new SourceFile.from_string("", a)
-		else
-			var f = new IFStream.open(a)
-			source = new SourceFile(a, f)
-			f.close
-		end
-		var lexer = new Lexer(source)
-		if only_lexer then
-			var token = lexer.next
-			while not token isa EOF do
-				if not no_print then
-					print("Read token at {token.location} text='{token.text}'")
-				end
-				token = lexer.next
-			end
-		else
-			var parser = new Parser(lexer)
-			var tree = parser.parse
+   for a in args do
+      var source
+      if no_file then
+         source = new SourceFile.from_string("", a)
+      else
+         var f = new IFStream.open(a)
+         source = new SourceFile(a, f)
+         f.close
+      end
+      var lexer = new Lexer(source)
+      if only_lexer then
+         var token = lexer.next
+         while not token isa EOF do
+            if not no_print then
+               print("Read token at {token.location} text='{token.text}'")
+            end
+            token = lexer.next
+         end
+      else
+         var parser = new Parser(lexer)
+         var tree = parser.parse
 
-			var error = tree.n_eof
-			if error isa AError then
-				print("Error at {error.location}:\n\t{error.message}")
-				return
-			end
+         var error = tree.n_eof
+         if error isa AError then
+            print("Error at {error.location}:\n\t{error.message}")
+            return
+         end
 
-			if not no_print then
-				(new PrintTreeVisitor).enter_visit(tree)
-			end
-		end
-	end
+         if not no_print then
+            (new PrintTreeVisitor).enter_visit(tree)
+         end
+      end
+   end
 end

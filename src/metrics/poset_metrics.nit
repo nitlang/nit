@@ -20,23 +20,23 @@ import metrics_base
 import frontend
 
 redef class ToolContext
-	var poset_metrics_phase: Phase = new PosetMetricsPhase(self, null)
+   var poset_metrics_phase: Phase = new PosetMetricsPhase(self, null)
 end
 
 private class PosetMetricsPhase
-	super Phase
-	
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_poset.value and not toolcontext.opt_all.value then return
+   super Phase
+   
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_poset.value and not toolcontext.opt_all.value then return
 
-		var model = mainmodule.model
-		print "--- Poset metrics ---"
-		print "## Module importation hierarchy"
-		model.mmodule_importation_hierarchy.print_metrics
-		print "## Classdef hierarchy"
-		model.mclassdef_hierarchy.print_metrics
-		print "## Class hierarchy"
-		mainmodule.flatten_mclass_hierarchy.print_metrics
-	end
+      var model = mainmodule.model
+      print "--- Poset metrics ---"
+      print "## Module importation hierarchy"
+      model.mmodule_importation_hierarchy.print_metrics
+      print "## Classdef hierarchy"
+      model.mclassdef_hierarchy.print_metrics
+      print "## Class hierarchy"
+      mainmodule.flatten_mclass_hierarchy.print_metrics
+   end
 end

@@ -21,45 +21,45 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var ast_metrics_phase: Phase = new AstMetricsPhase(self, null)
+   var ast_metrics_phase: Phase = new AstMetricsPhase(self, null)
 end
 
 private class AstMetricsPhase
-	super Phase
-	var node_counter = new Counter[String]
-	var id_counter = new Counter[String]
+   super Phase
+   var node_counter = new Counter[String]
+   var id_counter = new Counter[String]
 
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_ast.value and not toolcontext.opt_all.value then return
-		print "--- AST Metrics ---"
-		# Visit all the source code to collect data
-		var visitor = new AstMetricsVisitor(self)
-		for nmodule in toolcontext.modelbuilder.nmodules do
-			visitor.enter_visit(nmodule)
-		end
-		print "## All nodes of the AST"
-		node_counter.print_summary
-		node_counter.print_elements(10)
-		print "## All identifiers of the AST"
-		id_counter.print_summary
-		id_counter.print_elements(10)
-	end
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_ast.value and not toolcontext.opt_all.value then return
+      print "--- AST Metrics ---"
+      # Visit all the source code to collect data
+      var visitor = new AstMetricsVisitor(self)
+      for nmodule in toolcontext.modelbuilder.nmodules do
+         visitor.enter_visit(nmodule)
+      end
+      print "## All nodes of the AST"
+      node_counter.print_summary
+      node_counter.print_elements(10)
+      print "## All identifiers of the AST"
+      id_counter.print_summary
+      id_counter.print_elements(10)
+   end
 end
 
 private class AstMetricsVisitor
-	super Visitor
+   super Visitor
 
-	var phase: AstMetricsPhase
-	init(phase: AstMetricsPhase) do self.phase = phase
+   var phase: AstMetricsPhase
+   init(phase: AstMetricsPhase) do self.phase = phase
 
-	redef fun visit(n)
-	do
-		n.visit_all(self)
-		phase.node_counter.inc(n.class_name)
-		if n isa TId or n isa TAttrid or n isa TClassid then
-			assert n isa Token
-			phase.id_counter.inc(n.text)
-		end
-	end
+   redef fun visit(n)
+   do
+      n.visit_all(self)
+      phase.node_counter.inc(n.class_name)
+      if n isa TId or n isa TAttrid or n isa TClassid then
+         assert n isa Token
+         phase.id_counter.inc(n.text)
+      end
+   end
 end

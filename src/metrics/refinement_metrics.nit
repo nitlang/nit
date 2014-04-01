@@ -22,78 +22,78 @@ private import metrics_base
 import frontend
 
 redef class ToolContext
-	var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)
+   var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)
 end
 
 private class RefinementMetricsPhase
-	super Phase
-	redef fun process_mainmodule(mainmodule, given_mmodules)
-	do
-		if not toolcontext.opt_refinement.value and not toolcontext.opt_all.value then return
-		compute_refinement_metrics(toolcontext.modelbuilder.model)
-	end
+   super Phase
+   redef fun process_mainmodule(mainmodule, given_mmodules)
+   do
+      if not toolcontext.opt_refinement.value and not toolcontext.opt_all.value then return
+      compute_refinement_metrics(toolcontext.modelbuilder.model)
+   end
 end
 
 # Print refinement usage metrics
 fun compute_refinement_metrics(model: Model)
 do
-	print "--- Metrics of refinement usage ---"
-	var nbmod = model.mmodules.length
-	print "Number of modules: {nbmod}"
+   print "--- Metrics of refinement usage ---"
+   var nbmod = model.mmodules.length
+   print "Number of modules: {nbmod}"
 
-	print ""
+   print ""
 
-	var nbcla = model.mclasses.length
-	var nbcladef = model.mclassdef_hierarchy.length
-	print "Number of classes: {nbcla}"
+   var nbcla = model.mclasses.length
+   var nbcladef = model.mclassdef_hierarchy.length
+   print "Number of classes: {nbcla}"
 
-	# determine the distribution of:
-	#  * class kinds (interface, abstract class, etc.)
-	#  * refinex classes (vs. unrefined ones)
-	var kinds = new Counter[MClassKind]
-	var refined = 0
-	for c in model.mclasses do
-		kinds.inc(c.kind)
-		if c.mclassdefs.length > 1 then
-			refined += 1
-		end
-	end
-	for k in kinds.sort do
-		var v = kinds[k]
-		print "  Number of {k} kind: {v} ({div(v*100,nbcla)}%)"
-	end
+   # determine the distribution of:
+   #  * class kinds (interface, abstract class, etc.)
+   #  * refinex classes (vs. unrefined ones)
+   var kinds = new Counter[MClassKind]
+   var refined = 0
+   for c in model.mclasses do
+      kinds.inc(c.kind)
+      if c.mclassdefs.length > 1 then
+         refined += 1
+      end
+   end
+   for k in kinds.sort do
+      var v = kinds[k]
+      print "  Number of {k} kind: {v} ({div(v*100,nbcla)}%)"
+   end
 
 
-	print ""
+   print ""
 
-	print "Number of class definitions: {nbcladef}"
-	print "Number of refined classes: {refined} ({div(refined*100,nbcla)}%)"
-	print "Average number of class refinments by classes: {div(nbcladef-nbcla,nbcla)}"
-	print "Average number of class refinments by refined classes: {div(nbcladef-nbcla,refined)}"
+   print "Number of class definitions: {nbcladef}"
+   print "Number of refined classes: {refined} ({div(refined*100,nbcla)}%)"
+   print "Average number of class refinments by classes: {div(nbcladef-nbcla,nbcla)}"
+   print "Average number of class refinments by refined classes: {div(nbcladef-nbcla,refined)}"
 
-	print ""
+   print ""
 
-	var nbprop = model.mproperties.length
-	var nbpropdef = 0
-	var redefined = 0
-	print "Number of properties: {model.mproperties.length}"
-	var pkinds = new Counter[String]
-	for p in model.mproperties do
-		nbpropdef += p.mpropdefs.length
-		if p.mpropdefs.length > 1 then
-			redefined += 1
-		end
-		pkinds.inc(p.class_name)
-	end
-	for k in pkinds.sort do
-		var v = pkinds[k]
-		print "  Number of {k}: {v} ({div(v*100,nbprop)}%)"
-	end
+   var nbprop = model.mproperties.length
+   var nbpropdef = 0
+   var redefined = 0
+   print "Number of properties: {model.mproperties.length}"
+   var pkinds = new Counter[String]
+   for p in model.mproperties do
+      nbpropdef += p.mpropdefs.length
+      if p.mpropdefs.length > 1 then
+         redefined += 1
+      end
+      pkinds.inc(p.class_name)
+   end
+   for k in pkinds.sort do
+      var v = pkinds[k]
+      print "  Number of {k}: {v} ({div(v*100,nbprop)}%)"
+   end
 
-	print ""
+   print ""
 
-	print "Number of property definitions: {nbpropdef}"
-	print "Number of redefined properties: {redefined} ({div(redefined*100,nbprop)}%)"
-	print "Average number of property redefinitions by property: {div(nbpropdef-nbprop,nbprop)}"
-	print "Average number of property redefinitions by redefined property: {div(nbpropdef-nbprop,redefined)}"
+   print "Number of property definitions: {nbpropdef}"
+   print "Number of redefined properties: {redefined} ({div(redefined*100,nbprop)}%)"
+   print "Average number of property redefinitions by property: {div(nbpropdef-nbprop,nbprop)}"
+   print "Average number of property redefinitions by redefined property: {div(nbpropdef-nbprop,redefined)}"
 end

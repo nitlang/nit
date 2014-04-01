@@ -29,9 +29,9 @@ import frontend
 # This function is then automatically (unless errors where found).
 redef fun do_work(mainmodule, given_mmodules, modelbuilder)
 do
-	print "It works"
-	var model = modelbuilder.model
-	print "I have {model.mmodules.length} modules"
-	var mclasses = mainmodule.flatten_mclass_hierarchy
-	print "I have also {mclasses.length} classes"
+   print "It works"
+   var model = modelbuilder.model
+   print "I have {model.mmodules.length} modules"
+   var mclasses = mainmodule.flatten_mclass_hierarchy
+   print "I have also {mclasses.length} classes"
 end

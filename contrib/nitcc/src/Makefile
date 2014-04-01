@@ -1,4 +1,4 @@
-NITC=../../../bin/nitg
+NITC=../../../bin/nith
 
 all: nitcc calc
 

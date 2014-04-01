@@ -32,7 +32,7 @@ src/*.bin
 
 c_src/*.o
 c_src/*.cksum
-c_src/nitg
+c_src/nith
 
 csrc2/
 

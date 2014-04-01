@@ -1,6 +1,6 @@
---global ../examples/hello_world.nit -o out/nitg-hello_world ; out/nitg-hello_world
---global base_simple3.nit -o out/nitg-base_simple3 ; out/nitg-base_simple3
---separate ../examples/hello_world.nit -o out/nitgs-hello_world ; out/nitgs-hello_world
---separate base_simple3.nit -o out/nitgs-base_simple3 ; out/nitgs-base_simple3
---global ../examples/hello_world.nit -m test_mixin.nit -o out/nitg-hello_world_mixed ; out/nitg-hello_world_mixed
---separate ../examples/hello_world.nit -m test_mixin.nit -o out/nitgs-hello_world_mixed ; out/nitgs-hello_world_mixed
+--global ../examples/hello_world.nit -o out/nith-hello_world ; out/nith-hello_world
+--global base_simple3.nit -o out/nith-base_simple3 ; out/nith-base_simple3
+--separate ../examples/hello_world.nit -o out/niths-hello_world ; out/niths-hello_world
+--separate base_simple3.nit -o out/niths-base_simple3 ; out/niths-base_simple3
+--global ../examples/hello_world.nit -m test_mixin.nit -o out/nith-hello_world_mixed ; out/nith-hello_world_mixed
+--separate ../examples/hello_world.nit -m test_mixin.nit -o out/niths-hello_world_mixed ; out/niths-hello_world_mixed

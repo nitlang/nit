@@ -7,9 +7,9 @@ bench_
 nit_args1
 nit_args3
 nitc_args1
-nitg_args1
-nitg_args3
-nitg_args5
-nitg_args6
+nith_args1
+nith_args3
+nith_args5
+nith_args6
 test_android_platform
 android

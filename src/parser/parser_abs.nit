@@ -5,301 +5,301 @@ module parser_abs
 import location
 
 class TEol
-	super Token
+   super Token
 end
 class TComment
-	super Token
+   super Token
 end
 class TKwpackage
-	super Token
+   super Token
 end
 class TKwmodule
-	super Token
+   super Token
 end
 class TKwimport
-	super Token
+   super Token
 end
 class TKwclass
-	super Token
+   super Token
 end
 class TKwabstract
-	super Token
+   super Token
 end
 class TKwinterface
-	super Token
+   super Token
 end
 class TKwenum
-	super Token
+   super Token
 end
 class TKwend
-	super Token
+   super Token
 end
 class TKwmeth
-	super Token
+   super Token
 end
 class TKwtype
-	super Token
+   super Token
 end
 class TKwinit
-	super Token
+   super Token
 end
 class TKwredef
-	super Token
+   super Token
 end
 class TKwis
-	super Token
+   super Token
 end
 class TKwdo
-	super Token
+   super Token
 end
 class TKwreadable
-	super Token
+   super Token
 end
 class TKwwritable
-	super Token
+   super Token
 end
 class TKwvar
-	super Token
+   super Token
 end
 class TKwintern
-	super Token
+   super Token
 end
 class TKwextern
-	super Token
+   super Token
 end
 class TKwprotected
-	super Token
+   super Token
 end
 class TKwprivate
-	super Token
+   super Token
 end
 class TKwintrude
-	super Token
+   super Token
 end
 class TKwif
-	super Token
+   super Token
 end
 class TKwthen
-	super Token
+   super Token
 end
 class TKwelse
-	super Token
+   super Token
 end
 class TKwwhile
-	super Token
+   super Token
 end
 class TKwloop
-	super Token
+   super Token
 end
 class TKwfor
-	super Token
+   super Token
 end
 class TKwin
-	super Token
+   super Token
 end
 class TKwand
-	super Token
+   super Token
 end
 class TKwor
-	super Token
+   super Token
 end
 class TKwnot
-	super Token
+   super Token
 end
 class TKwimplies
-	super Token
+   super Token
 end
 class TKwreturn
-	super Token
+   super Token
 end
 class TKwcontinue
-	super Token
+   super Token
 end
 class TKwbreak
-	super Token
+   super Token
 end
 class TKwabort
-	super Token
+   super Token
 end
 class TKwassert
-	super Token
+   super Token
 end
 class TKwnew
-	super Token
+   super Token
 end
 class TKwisa
-	super Token
+   super Token
 end
 class TKwonce
-	super Token
+   super Token
 end
 class TKwsuper
-	super Token
+   super Token
 end
 class TKwself
-	super Token
+   super Token
 end
 class TKwtrue
-	super Token
+   super Token
 end
 class TKwfalse
-	super Token
+   super Token
 end
 class TKwnull
-	super Token
+   super Token
 end
 class TKwas
-	super Token
+   super Token
 end
 class TKwnullable
-	super Token
+   super Token
 end
 class TKwisset
-	super Token
+   super Token
 end
 class TKwlabel
-	super Token
+   super Token
 end
 class TKwdebug
-	super Token
+   super Token
 end
 class TOpar
-	super Token
+   super Token
 end
 class TCpar
-	super Token
+   super Token
 end
 class TObra
-	super Token
+   super Token
 end
 class TCbra
-	super Token
+   super Token
 end
 class TComma
-	super Token
+   super Token
 end
 class TColumn
-	super Token
+   super Token
 end
 class TQuad
-	super Token
+   super Token
 end
 class TAssign
-	super Token
+   super Token
 end
 class TPluseq
-	super Token
+   super Token
 end
 class TMinuseq
-	super Token
+   super Token
 end
 class TDotdotdot
-	super Token
+   super Token
 end
 class TDotdot
-	super Token
+   super Token
 end
 class TDot
-	super Token
+   super Token
 end
 class TPlus
-	super Token
+   super Token
 end
 class TMinus
-	super Token
+   super Token
 end
 class TStar
-	super Token
+   super Token
 end
 class TSlash
-	super Token
+   super Token
 end
 class TPercent
-	super Token
+   super Token
 end
 class TEq
-	super Token
+   super Token
 end
 class TNe
-	super Token
+   super Token
 end
 class TLt
-	super Token
+   super Token
 end
 class TLe
-	super Token
+   super Token
 end
 class TLl
-	super Token
+   super Token
 end
 class TGt
-	super Token
+   super Token
 end
 class TGe
-	super Token
+   super Token
 end
 class TGg
-	super Token
+   super Token
 end
 class TStarship
-	super Token
+   super Token
 end
 class TBang
-	super Token
+   super Token
 end
 class TAt
-	super Token
+   super Token
 end
 class TClassid
-	super Token
+   super Token
 end
 class TId
-	super Token
+   super Token
 end
 class TAttrid
-	super Token
+   super Token
 end
 class TNumber
-	super Token
+   super Token
 end
 class TFloat
-	super Token
+   super Token
 end
 class TString
-	super Token
+   super Token
 end
 class TStartString
-	super Token
+   super Token
 end
 class TMidString
-	super Token
+   super Token
 end
 class TEndString
-	super Token
+   super Token
 end
 class TChar
-	super Token
+   super Token
 end
 class TBadString
-	super Token
+   super Token
 end
 class TBadChar
-	super Token
+   super Token
 end
 class TExternCodeSegment
-	super Token
+   super Token
 end
 class EOF
-	super Token
+   super Token
 end
 class AError
-	super EOF
+   super EOF
 end
 class ALexerError
-	super AError
+   super AError
 end
 class AParserError
-	super AError
+   super AError
 end
 
 class AModule super Prod end
@@ -333,49 +333,49 @@ class AAtArg super Prod end
 class AAtid super Prod end
 
 class AModule
-	super AModule
+   super AModule
     readable var _n_moduledecl: nullable AModuledecl = null
     readable var _n_imports: List[AImport] = new List[AImport]
     readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
     readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
 end
 class AModuledecl
-	super AModuledecl
+   super AModuledecl
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwmodule: TKwmodule
     readable var _n_name: AModuleName
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AStdImport
-	super AImport
+   super AImport
     readable var _n_visibility: AVisibility
     readable var _n_kwimport: TKwimport
     readable var _n_name: AModuleName
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ANoImport
-	super AImport
+   super AImport
     readable var _n_visibility: AVisibility
     readable var _n_kwimport: TKwimport
     readable var _n_kwend: TKwend
 end
 class APublicVisibility
-	super AVisibility
+   super AVisibility
 end
 class APrivateVisibility
-	super AVisibility
+   super AVisibility
     readable var _n_kwprivate: TKwprivate
 end
 class AProtectedVisibility
-	super AVisibility
+   super AVisibility
     readable var _n_kwprotected: TKwprotected
 end
 class AIntrudeVisibility
-	super AVisibility
+   super AVisibility
     readable var _n_kwintrude: TKwintrude
 end
 class AStdClassdef
-	super AClassdef
+   super AClassdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -389,49 +389,49 @@ class AStdClassdef
     readable var _n_kwend: TKwend
 end
 class ATopClassdef
-	super AClassdef
+   super AClassdef
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AMainClassdef
-	super AClassdef
+   super AClassdef
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AConcreteClasskind
-	super AClasskind
+   super AClasskind
     readable var _n_kwclass: TKwclass
 end
 class AAbstractClasskind
-	super AClasskind
+   super AClasskind
     readable var _n_kwabstract: TKwabstract
     readable var _n_kwclass: TKwclass
 end
 class AInterfaceClasskind
-	super AClasskind
+   super AClasskind
     readable var _n_kwinterface: TKwinterface
 end
 class AEnumClasskind
-	super AClasskind
+   super AClasskind
     readable var _n_kwenum: TKwenum
 end
 class AExternClasskind
-	super AClasskind
+   super AClasskind
     readable var _n_kwextern: TKwextern
     readable var _n_kwclass: nullable TKwclass = null
 end
 class AFormaldef
-	super AFormaldef
+   super AFormaldef
     readable var _n_id: TClassid
     readable var _n_type: nullable AType = null
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ASuperclass
-	super ASuperclass
+   super ASuperclass
     readable var _n_kwsuper: TKwsuper
     readable var _n_type: AType
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AAttrPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_readable: nullable AAble = null
     readable var _n_writable: nullable AAble = null
@@ -445,7 +445,7 @@ class AAttrPropdef
     readable var _n_expr: nullable AExpr = null
 end
 class AMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -453,7 +453,7 @@ class AMethPropdef
     readable var _n_signature: ASignature
 end
 class ADeferredMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -463,7 +463,7 @@ class ADeferredMethPropdef
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AInternMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -472,7 +472,7 @@ class AInternMethPropdef
     readable var _n_signature: ASignature
 end
 class AExternMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -484,7 +484,7 @@ class AExternMethPropdef
     readable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AConcreteMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -495,7 +495,7 @@ class AConcreteMethPropdef
     readable var _n_block: nullable AExpr = null
 end
 class AConcreteInitPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -506,7 +506,7 @@ class AConcreteInitPropdef
     readable var _n_block: nullable AExpr = null
 end
 class AExternInitPropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -518,12 +518,12 @@ class AExternInitPropdef
     readable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AMainMethPropdef
-	super APropdef
+   super APropdef
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_block: nullable AExpr = null
 end
 class ATypePropdef
-	super APropdef
+   super APropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
@@ -533,125 +533,125 @@ class ATypePropdef
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AReadAble
-	super AAble
+   super AAble
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_kwreadable: TKwreadable
 end
 class AWriteAble
-	super AAble
+   super AAble
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: nullable AVisibility = null
     readable var _n_kwwritable: TKwwritable
 end
 class AIdMethid
-	super AMethid
+   super AMethid
     readable var _n_id: TId
 end
 class APlusMethid
-	super AMethid
+   super AMethid
     readable var _n_plus: TPlus
 end
 class AMinusMethid
-	super AMethid
+   super AMethid
     readable var _n_minus: TMinus
 end
 class AStarMethid
-	super AMethid
+   super AMethid
     readable var _n_star: TStar
 end
 class ASlashMethid
-	super AMethid
+   super AMethid
     readable var _n_slash: TSlash
 end
 class APercentMethid
-	super AMethid
+   super AMethid
     readable var _n_percent: TPercent
 end
 class AEqMethid
-	super AMethid
+   super AMethid
     readable var _n_eq: TEq
 end
 class ANeMethid
-	super AMethid
+   super AMethid
     readable var _n_ne: TNe
 end
 class ALeMethid
-	super AMethid
+   super AMethid
     readable var _n_le: TLe
 end
 class AGeMethid
-	super AMethid
+   super AMethid
     readable var _n_ge: TGe
 end
 class ALtMethid
-	super AMethid
+   super AMethid
     readable var _n_lt: TLt
 end
 class AGtMethid
-	super AMethid
+   super AMethid
     readable var _n_gt: TGt
 end
 class ALlMethid
-	super AMethid
+   super AMethid
     readable var _n_ll: TLl
 end
 class AGgMethid
-	super AMethid
+   super AMethid
     readable var _n_gg: TGg
 end
 class ABraMethid
-	super AMethid
+   super AMethid
     readable var _n_obra: TObra
     readable var _n_cbra: TCbra
 end
 class AStarshipMethid
-	super AMethid
+   super AMethid
     readable var _n_starship: TStarship
 end
 class AAssignMethid
-	super AMethid
+   super AMethid
     readable var _n_id: TId
     readable var _n_assign: TAssign
 end
 class ABraassignMethid
-	super AMethid
+   super AMethid
     readable var _n_obra: TObra
     readable var _n_cbra: TCbra
     readable var _n_assign: TAssign
 end
 class ASignature
-	super ASignature
+   super ASignature
     readable var _n_opar: nullable TOpar = null
     readable var _n_params: List[AParam] = new List[AParam]
     readable var _n_cpar: nullable TCpar = null
     readable var _n_type: nullable AType = null
 end
 class AParam
-	super AParam
+   super AParam
     readable var _n_id: TId
     readable var _n_type: nullable AType = null
     readable var _n_dotdotdot: nullable TDotdotdot = null
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AType
-	super AType
+   super AType
     readable var _n_kwnullable: nullable TKwnullable = null
     readable var _n_id: TClassid
     readable var _n_types: List[AType] = new List[AType]
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ALabel
-	super ALabel
+   super ALabel
     readable var _n_kwlabel: TKwlabel
     readable var _n_id: TId
 end
 class ABlockExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: List[AExpr] = new List[AExpr]
     readable var _n_kwend: nullable TKwend = null
 end
 class AVardeclExpr
-	super AExpr
+   super AExpr
     readable var _n_kwvar: TKwvar
     readable var _n_id: TId
     readable var _n_type: nullable AType = null
@@ -660,41 +660,41 @@ class AVardeclExpr
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AReturnExpr
-	super AExpr
+   super AExpr
     readable var _n_kwreturn: nullable TKwreturn = null
     readable var _n_expr: nullable AExpr = null
 end
 class ABreakExpr
-	super AExpr
+   super AExpr
     readable var _n_kwbreak: TKwbreak
     readable var _n_label: nullable ALabel = null
     readable var _n_expr: nullable AExpr = null
 end
 class AAbortExpr
-	super AExpr
+   super AExpr
     readable var _n_kwabort: TKwabort
 end
 class AContinueExpr
-	super AExpr
+   super AExpr
     readable var _n_kwcontinue: nullable TKwcontinue = null
     readable var _n_label: nullable ALabel = null
     readable var _n_expr: nullable AExpr = null
 end
 class ADoExpr
-	super AExpr
+   super AExpr
     readable var _n_kwdo: TKwdo
     readable var _n_block: nullable AExpr = null
     readable var _n_label: nullable ALabel = null
 end
 class AIfExpr
-	super AExpr
+   super AExpr
     readable var _n_kwif: TKwif
     readable var _n_expr: AExpr
     readable var _n_then: nullable AExpr = null
     readable var _n_else: nullable AExpr = null
 end
 class AIfexprExpr
-	super AExpr
+   super AExpr
     readable var _n_kwif: TKwif
     readable var _n_expr: AExpr
     readable var _n_kwthen: TKwthen
@@ -703,7 +703,7 @@ class AIfexprExpr
     readable var _n_else: AExpr
 end
 class AWhileExpr
-	super AExpr
+   super AExpr
     readable var _n_kwwhile: TKwwhile
     readable var _n_expr: AExpr
     readable var _n_kwdo: TKwdo
@@ -711,13 +711,13 @@ class AWhileExpr
     readable var _n_label: nullable ALabel = null
 end
 class ALoopExpr
-	super AExpr
+   super AExpr
     readable var _n_kwloop: TKwloop
     readable var _n_block: nullable AExpr = null
     readable var _n_label: nullable ALabel = null
 end
 class AForExpr
-	super AExpr
+   super AExpr
     readable var _n_kwfor: TKwfor
     readable var _n_ids: List[TId] = new List[TId]
     readable var _n_expr: AExpr
@@ -726,165 +726,165 @@ class AForExpr
     readable var _n_label: nullable ALabel = null
 end
 class AAssertExpr
-	super AExpr
+   super AExpr
     readable var _n_kwassert: TKwassert
     readable var _n_id: nullable TId = null
     readable var _n_expr: AExpr
     readable var _n_else: nullable AExpr = null
 end
 class AOnceExpr
-	super AExpr
+   super AExpr
     readable var _n_kwonce: TKwonce
     readable var _n_expr: AExpr
 end
 class ASendExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
 end
 class ABinopExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AOrExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AAndExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AOrElseExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AImpliesExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ANotExpr
-	super AExpr
+   super AExpr
     readable var _n_kwnot: TKwnot
     readable var _n_expr: AExpr
 end
 class AEqExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ANeExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ALtExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ALeExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ALlExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AGtExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AGeExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AGgExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AIsaExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_type: AType
 end
 class APlusExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AMinusExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AStarshipExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AStarExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class ASlashExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class APercentExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AUminusExpr
-	super AExpr
+   super AExpr
     readable var _n_minus: TMinus
     readable var _n_expr: AExpr
 end
 class ANewExpr
-	super AExpr
+   super AExpr
     readable var _n_kwnew: TKwnew
     readable var _n_type: AType
     readable var _n_id: nullable TId = null
     readable var _n_args: AExprs
 end
 class AAttrExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
 end
 class AAttrAssignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
     readable var _n_assign: TAssign
     readable var _n_value: AExpr
 end
 class AAttrReassignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
     readable var _n_assign_op: AAssignOp
     readable var _n_value: AExpr
 end
 class ACallExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
 end
 class ACallAssignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
@@ -892,7 +892,7 @@ class ACallAssignExpr
     readable var _n_value: AExpr
 end
 class ACallReassignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
@@ -900,60 +900,60 @@ class ACallReassignExpr
     readable var _n_value: AExpr
 end
 class ASuperExpr
-	super AExpr
+   super AExpr
     readable var _n_qualified: nullable AQualified = null
     readable var _n_kwsuper: TKwsuper
     readable var _n_args: AExprs
 end
 class AInitExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwinit: TKwinit
     readable var _n_args: AExprs
 end
 class ABraExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_args: AExprs
 end
 class ABraAssignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_args: AExprs
     readable var _n_assign: TAssign
     readable var _n_value: AExpr
 end
 class ABraReassignExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_args: AExprs
     readable var _n_assign_op: AAssignOp
     readable var _n_value: AExpr
 end
 class AVarExpr
-	super AExpr
+   super AExpr
     readable var _n_id: TId
 end
 class AVarAssignExpr
-	super AExpr
+   super AExpr
     readable var _n_id: TId
     readable var _n_assign: TAssign
     readable var _n_value: AExpr
 end
 class AVarReassignExpr
-	super AExpr
+   super AExpr
     readable var _n_id: TId
     readable var _n_assign_op: AAssignOp
     readable var _n_value: AExpr
 end
 class ARangeExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ACrangeExpr
-	super AExpr
+   super AExpr
     readable var _n_obra: TObra
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
@@ -961,7 +961,7 @@ class ACrangeExpr
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AOrangeExpr
-	super AExpr
+   super AExpr
     readable var _n_obra: TObra
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
@@ -969,79 +969,79 @@ class AOrangeExpr
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AArrayExpr
-	super AExpr
+   super AExpr
     readable var _n_exprs: AExprs
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ASelfExpr
-	super AExpr
+   super AExpr
     readable var _n_kwself: TKwself
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AImplicitSelfExpr
-	super AExpr
+   super AExpr
 end
 class ATrueExpr
-	super AExpr
+   super AExpr
     readable var _n_kwtrue: TKwtrue
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AFalseExpr
-	super AExpr
+   super AExpr
     readable var _n_kwfalse: TKwfalse
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ANullExpr
-	super AExpr
+   super AExpr
     readable var _n_kwnull: TKwnull
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AIntExpr
-	super AExpr
+   super AExpr
     readable var _n_number: TNumber
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AFloatExpr
-	super AExpr
+   super AExpr
     readable var _n_float: TFloat
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ACharExpr
-	super AExpr
+   super AExpr
     readable var _n_char: TChar
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AStringExpr
-	super AExpr
+   super AExpr
     readable var _n_string: TString
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AStartStringExpr
-	super AExpr
+   super AExpr
     readable var _n_string: TStartString
 end
 class AMidStringExpr
-	super AExpr
+   super AExpr
     readable var _n_string: TMidString
 end
 class AEndStringExpr
-	super AExpr
+   super AExpr
     readable var _n_string: TEndString
 end
 class ASuperstringExpr
-	super AExpr
+   super AExpr
     readable var _n_exprs: List[AExpr] = new List[AExpr]
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AParExpr
-	super AExpr
+   super AExpr
     readable var _n_opar: TOpar
     readable var _n_expr: AExpr
     readable var _n_cpar: TCpar
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AAsCastExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
     readable var _n_opar: TOpar
@@ -1049,7 +1049,7 @@ class AAsCastExpr
     readable var _n_cpar: TCpar
 end
 class AAsNotnullExpr
-	super AExpr
+   super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
     readable var _n_opar: TOpar
@@ -1058,122 +1058,122 @@ class AAsNotnullExpr
     readable var _n_cpar: TCpar
 end
 class AIssetAttrExpr
-	super AExpr
+   super AExpr
     readable var _n_kwisset: TKwisset
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
 end
 class ADebugTypeExpr
-	super AExpr
+   super AExpr
     readable var _n_kwdebug: TKwdebug
     readable var _n_kwtype: TKwtype
     readable var _n_expr: AExpr
     readable var _n_type: AType
 end
 class AListExprs
-	super AExprs
+   super AExprs
     readable var _n_exprs: List[AExpr] = new List[AExpr]
 end
 class AParExprs
-	super AExprs
+   super AExprs
     readable var _n_opar: TOpar
     readable var _n_exprs: List[AExpr] = new List[AExpr]
     readable var _n_cpar: TCpar
 end
 class ABraExprs
-	super AExprs
+   super AExprs
     readable var _n_obra: TObra
     readable var _n_exprs: List[AExpr] = new List[AExpr]
     readable var _n_cbra: TCbra
 end
 class APlusAssignOp
-	super AAssignOp
+   super AAssignOp
     readable var _n_pluseq: TPluseq
 end
 class AMinusAssignOp
-	super AAssignOp
+   super AAssignOp
     readable var _n_minuseq: TMinuseq
 end
 class AModuleName
-	super AModuleName
+   super AModuleName
     readable var _n_quad: nullable TQuad = null
     readable var _n_path: List[TId] = new List[TId]
     readable var _n_id: TId
 end
 class AExternCalls
-	super AExternCalls
+   super AExternCalls
     readable var _n_kwimport: TKwimport
     readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
 end
 class AExternCall
-	super AExternCall
+   super AExternCall
 end
 class ASuperExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_kwsuper: TKwsuper
 end
 class ALocalPropExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_methid: AMethid
 end
 class AFullPropExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_type: AType
     readable var _n_dot: nullable TDot = null
     readable var _n_methid: AMethid
 end
 class AInitPropExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_type: AType
 end
 class ACastAsExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_from_type: AType
     readable var _n_dot: nullable TDot = null
     readable var _n_kwas: TKwas
     readable var _n_to_type: AType
 end
 class AAsNullableExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_type: AType
     readable var _n_kwas: TKwas
     readable var _n_kwnullable: TKwnullable
 end
 class AAsNotNullableExternCall
-	super AExternCall
+   super AExternCall
     readable var _n_type: AType
     readable var _n_kwas: TKwas
     readable var _n_kwnot: TKwnot
     readable var _n_kwnullable: TKwnullable
 end
 class AInLanguage
-	super AInLanguage
+   super AInLanguage
     readable var _n_kwin: TKwin
     readable var _n_string: TString
 end
 class AExternCodeBlock
-	super AExternCodeBlock
+   super AExternCodeBlock
     readable var _n_in_language: nullable AInLanguage = null
     readable var _n_extern_code_segment: TExternCodeSegment
 end
 class AQualified
-	super AQualified
+   super AQualified
     readable var _n_id: List[TId] = new List[TId]
     readable var _n_classid: nullable TClassid = null
 end
 class ADoc
-	super ADoc
+   super ADoc
     readable var _n_comment: List[TComment] = new List[TComment]
 end
 class AAnnotations
-	super AAnnotations
+   super AAnnotations
     readable var _n_at: nullable TAt = null
     readable var _n_opar: nullable TOpar = null
     readable var _n_items: List[AAnnotation] = new List[AAnnotation]
     readable var _n_cpar: nullable TCpar = null
 end
 class AAnnotation
-	super AAnnotation
+   super AAnnotation
     readable var _n_atid: AAtid
     readable var _n_opar: nullable TOpar = null
     readable var _n_args: List[AAtArg] = new List[AAtArg]
@@ -1181,44 +1181,44 @@ class AAnnotation
     readable var _n_annotations: nullable AAnnotations = null
 end
 class ATypeAtArg
-	super AAtArg
+   super AAtArg
     readable var _n_type: AType
 end
 class AExprAtArg
-	super AAtArg
+   super AAtArg
     readable var _n_expr: AExpr
 end
 class AAtAtArg
-	super AAtArg
+   super AAtArg
     readable var _n_annotations: AAnnotations
 end
 class AIdAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TId
 end
 class AKwexternAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TKwextern
 end
 class AKwinternAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TKwintern
 end
 class AKwreadableAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TKwreadable
 end
 class AKwwritableAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TKwwritable
 end
 class AKwimportAtid
-	super AAtid
+   super AAtid
     readable var _n_id: TKwimport
 end
 
 class Start
-	super Prod
+   super Prod
     readable var _n_base: nullable AModule
     readable var _n_eof: EOF
     init(
