@@ -92,8 +92,8 @@ class Game
 
 	# rule / const
 	var modifier_half_life = 40.0
-	var rows = 5
-	var columns = 3
+	fun rows: Int do return 5
+	fun columns: Int do return 5
 
 	# state
 	var points = 0

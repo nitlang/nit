@@ -19,4 +19,9 @@ module moles_android
 import moles
 import mnit_android
 
+redef class Game
+	redef fun columns do return 3
+	redef fun rows do return 5
+end
+
 redef fun display_scale do return 0.4
