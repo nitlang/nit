@@ -914,10 +914,10 @@ class SeparateCompiler
 		self.header.add_decl("struct nitni_instance \{struct instance *value;\};")
 	end
 	
-	redef fun finalize_ffi_for_module(nmodule)
+	redef fun finalize_ffi_for_module(mmodule)
 	do
 		var old_module = self.mainmodule
-		self.mainmodule = nmodule.mmodule.as(not null)
+		self.mainmodule = mmodule
 		super
 		self.mainmodule = old_module
 	end

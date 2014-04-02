@@ -199,9 +199,8 @@ class MakefileToolchain
 
 		# FFI
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amodule = m2m[m]
-			compiler.finalize_ffi_for_module(amodule)
+		for m in compiler.mainmodule.in_importation.greaters do
+			compiler.finalize_ffi_for_module(m)
 		end
 
 		# Copy original .[ch] files to compile_dir
@@ -300,9 +299,8 @@ class MakefileToolchain
 
 		var linker_options = new HashSet[String]
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amod = m2m[m]
-			var libs = amod.collect_linker_libs
+		for m in mainmodule.in_importation.greaters do
+			var libs = m.collect_linker_libs
 			if libs != null then linker_options.add_all(libs)
 		end
 
@@ -706,11 +704,11 @@ abstract class AbstractCompiler
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
 	end
 
-	fun finalize_ffi_for_module(nmodule: AModule)
+	fun finalize_ffi_for_module(mmodule: MModule)
 	do
 		var visitor = new_visitor
-		nmodule.finalize_ffi(visitor, modelbuilder)
-		nmodule.finalize_nitni(visitor)
+		mmodule.finalize_ffi(visitor, modelbuilder)
+		mmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -2612,9 +2610,7 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
-end
 
-redef class AModule
 	# Write FFI results to file
 	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) do end
 

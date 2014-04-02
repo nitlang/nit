@@ -99,7 +99,7 @@ redef class AModule
 		end
 
 		ffi_ccu.write_as_impl(self, compdir)
-		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, self.c_compiler_options))
+		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, mmodule.c_compiler_options))
 	end
 end
 
