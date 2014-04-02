@@ -53,6 +53,15 @@ redef class AModule
 		end
 	end
 
+	redef fun collect_linker_libs
+	do
+		var s = c_linker_options
+		if s.is_empty then return null
+		var res = new ArraySet[String]
+		res.add s
+		return res
+	end
+
 	var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
 
 	# Returns true if callbacks has yet to be generated and register it as being generated

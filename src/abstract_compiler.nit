@@ -21,7 +21,6 @@ import literal
 import typing
 import auto_super_init
 import frontend
-import common_ffi
 import platform
 import c_tools
 
@@ -303,7 +302,8 @@ class MakefileToolchain
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
 		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
 			var amod = m2m[m]
-			linker_options.add(amod.c_linker_options)
+			var libs = amod.collect_linker_libs
+			if libs != null then linker_options.add_all(libs)
 		end
 
 		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
@@ -2623,4 +2623,8 @@ redef class AModule
 
 	# Write nitni results to file
 	fun finalize_nitni(v: AbstractCompilerVisitor) do end
+
+	# Give requided addinional system libraries (as given to LD_LIBS)
+	# Note: can return null instead of an empty set
+	fun collect_linker_libs: nullable Set[String] do return null
 end
