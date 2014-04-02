@@ -325,22 +325,12 @@ class MakefileToolchain
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then
-				var basename = f.filename.basename(".c")
-				var o = "{basename}.extern.o"
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-				ofiles.add(o)
-				dep_rules.add(o)
-			else
-				var o = f.makefile_rule_name
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n")
-				makefile.write("\t{f.makefile_rule_content}\n\n")
-				dep_rules.add(f.makefile_rule_name)
-
-				if f isa ExternCppFile then ofiles.add(o)
-			end
+			var o = f.makefile_rule_name
+			var ff = f.filename.basename("")
+			makefile.write("{o}: {ff}\n")
+			makefile.write("\t{f.makefile_rule_content}\n\n")
+			dep_rules.add(f.makefile_rule_name)
+			ofiles.add(o)
 		end
 
 		# Link edition
