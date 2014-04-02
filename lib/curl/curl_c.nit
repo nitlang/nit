@@ -483,7 +483,7 @@ extern CURLOption `{ CURLoption `}
 	new postfields `{ return CURLOPT_POSTFIELDS; `}
 #	new	`{ return CURLOPT_REFERER; `}
 #	new	`{ return CURLOPT_FTPPORT; `}
-#	new	`{ return CURLOPT_USERAGENT; `}
+	new user_agent	`{ return CURLOPT_USERAGENT; `}
 #	new	`{ return CURLOPT_LOW_SPEED_LIMIT; `}
 #	new	`{ return CURLOPT_LOW_SPEED_TIME; `}
 #	new	`{ return CURLOPT_RESUME_FROM; `}
