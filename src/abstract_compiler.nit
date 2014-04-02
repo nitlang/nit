@@ -202,9 +202,7 @@ class MakefileToolchain
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
 		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
 			var amodule = m2m[m]
-			if m.uses_ffi or amodule.uses_legacy_ni then
-				compiler.finalize_ffi_for_module(amodule)
-			end
+			compiler.finalize_ffi_for_module(amodule)
 		end
 
 		# Copy original .[ch] files to compile_dir
@@ -2621,8 +2619,8 @@ redef class AModule
 	fun uses_legacy_ni: Bool is abstract
 
 	# Write FFI results to file
-	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
+	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) do end
 
 	# Write nitni results to file
-	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
+	fun finalize_nitni(v: AbstractCompilerVisitor) do end
 end
