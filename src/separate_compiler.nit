@@ -965,7 +965,7 @@ class SeparateCompilerVisitor
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
-		else if value.mtype.cname_blind == "void*" and mtype.cname_blind == "void*" then
+		else if value.mtype.ctype == "void*" and mtype.ctype == "void*" then
 			return value
 		else
 			# Bad things will appen!
