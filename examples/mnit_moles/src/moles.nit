@@ -107,7 +107,7 @@ class Game
 	var holes = new Array[Hole].with_capacity(4)
 
 	# rule / const
-	var modifier_half_life = 40.0
+	var modifier_half_life = 1000.0
 	fun rows: Int do return 4
 	fun columns: Int do return 5
 
