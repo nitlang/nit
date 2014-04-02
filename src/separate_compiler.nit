@@ -18,7 +18,6 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
-import compiler_ffi
 
 # Add separate compiler specific options
 redef class ToolContext

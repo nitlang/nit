@@ -25,7 +25,6 @@ module global_compiler
 
 import abstract_compiler
 import rapid_type_analysis
-import compiler_ffi
 
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
