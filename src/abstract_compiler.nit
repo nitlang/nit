@@ -2615,9 +2615,6 @@ redef class MModule
 end
 
 redef class AModule
-	# Does this module use the legacy native interface?
-	fun uses_legacy_ni: Bool is abstract
-
 	# Write FFI results to file
 	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) do end
 

@@ -25,8 +25,6 @@ redef class AModule
 	private var foreign_callbacks = new ForeignCallbackSet
 	var nitni_ccu: nullable CCompilationUnit = null
 
-	redef var uses_legacy_ni: Bool = false
-
 	redef fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder)
 	do
 		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
@@ -128,7 +126,6 @@ redef class AExternMethPropdef
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
 		if nextern != null then
-			amodule.uses_legacy_ni = true
 			super
 			return
 		end
@@ -195,7 +192,6 @@ redef class AExternInitPropdef
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
 		if nextern != null then
-			amodule.uses_legacy_ni = true
 			super
 			return
 		end
