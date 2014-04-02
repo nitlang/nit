@@ -23,6 +23,7 @@ import auto_super_init
 import frontend
 import common_ffi
 import platform
+import c_tools
 
 # Add compiling options
 redef class ToolContext

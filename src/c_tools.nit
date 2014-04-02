@@ -98,3 +98,31 @@ class CFunction
 		return w
 	end
 end
+
+# An extern file to compile
+class ExternFile
+	# The filename of the file
+	var filename: String
+
+	fun makefile_rule_name: String is abstract
+	fun makefile_rule_content: String is abstract
+end
+
+# An extern C file to compile
+class ExternCFile
+	super ExternFile
+
+	init (filename, cflags: String)
+	do
+		super filename
+
+		self.cflags = cflags
+	end
+
+	# Additionnal specific CC compiler -c flags
+	var cflags: String
+
+	redef fun hash do return filename.hash
+	redef fun ==(o) do return o isa ExternCFile and filename == o.filename
+end
+

@@ -144,15 +144,6 @@ redef class TExternCodeSegment
 	end
 end
 
-# An extern file to compile
-class ExternFile
-	# The filename of the file
-	var filename: String
-
-	fun makefile_rule_name: String is abstract
-	fun makefile_rule_content: String is abstract
-end
-
 redef class CCompilationUnit
 	fun write_as_impl( amodule: AModule, compdir: String )
 	do
