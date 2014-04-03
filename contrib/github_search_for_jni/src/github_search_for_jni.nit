@@ -107,6 +107,8 @@ var main_query = "language:java"
 # Curl instance use for all requests
 var curl = new Curl
 
+if "NIT_TESTING".environ == "true" then exit 0
+
 # Current requested page
 var page = 0
 var per_page = 100

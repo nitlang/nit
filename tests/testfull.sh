@@ -15,4 +15,5 @@ done
 	../lib/*.nit $list \
 	../src/nit*.nit \
 	../src/test_*.nit \
-	../contrib/sort_downloads/src/sort_downloads.nit
+	../contrib/sort_downloads/src/sort_downloads.nit \
+	../contrib/github_search_for_jni/src/github_search_for_jni.nit
