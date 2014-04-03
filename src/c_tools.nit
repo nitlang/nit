@@ -139,7 +139,7 @@ class ExternCFile
 	redef fun makefile_rule_content do
 		var ff = filename.basename("")
 		var o = makefile_rule_name
-		return "$(CC) $(CFLAGS) -D NONITCNI {self.cflags} -c -o {o} {ff}"
+		return "$(CC) $(CFLAGS) {self.cflags} -c -o {o} {ff}"
 	end
 end
 

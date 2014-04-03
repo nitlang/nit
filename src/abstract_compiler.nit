@@ -314,7 +314,7 @@ class MakefileToolchain
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -c -o {o} {f}\n\n")
 			ofiles.add(o)
 			dep_rules.add(o)
 		end
