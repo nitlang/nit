@@ -208,7 +208,14 @@ class EGLConfigAttribs
 	var display: EGLDisplay
 	var config: EGLConfig
 
+	fun buffer_size: Int do return display.config_attrib(config, "3020".to_hex)
 	fun alpha_size: Int do return display.config_attrib(config, "3021".to_hex)
+	fun blue_size: Int do return display.config_attrib(config, "3022".to_hex)
+	fun green_size: Int do return display.config_attrib(config, "3023".to_hex)
+	fun red_size: Int do return display.config_attrib(config, "3024".to_hex)
+	fun depth_size: Int do return display.config_attrib(config, "3025".to_hex)
+	fun stencil_size: Int do return display.config_attrib(config, "3026".to_hex)
+
 	fun native_visual_id: Int do return display.config_attrib(config, "302E".to_hex)
 	fun native_visual_type: Int do return display.config_attrib(config, "302F".to_hex)
 
@@ -409,6 +416,7 @@ class EGLConfigChooser
 	fun green_size=(size: Int) do insert_attrib_with_val("3023".to_hex, size)
 	fun red_size=(size: Int) do insert_attrib_with_val("3024".to_hex, size)
 
+	fun buffer_size=(size: Int) do insert_attrib_with_val("3020".to_hex, size)
 	fun alpha_size=(size: Int) do insert_attrib_with_val("3021".to_hex, size)
 	fun depth_size=(size: Int) do insert_attrib_with_val("3025".to_hex, size)
 	fun stencil_size=(size: Int) do insert_attrib_with_val("3026".to_hex, size)
