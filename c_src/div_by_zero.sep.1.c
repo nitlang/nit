@@ -243,7 +243,7 @@ var19 = ((val* (*)(val*))(var_op1->class->vft[COLOR_typing__AExpr__mtype]))(var_
 var20 = ((val* (*)(val*))(self->class->vft[COLOR_div_by_zero__DivByZeroVisitor__mmodule]))(self) /* mmodule on <self:DivByZeroVisitor>*/;
 var21 = NULL;
 if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 86);
 show_backtrace(1);
 } else {

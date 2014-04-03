@@ -40,5 +40,6 @@ extern const int COLOR_abstract_collection__Collection__first;
 void range__IteratorRange__init(val* self, val* p0);
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
+val* BOX_kernel__Int(long);
 extern const int COLOR_range__Range__without_last;
 val* range__Int__times(long self);

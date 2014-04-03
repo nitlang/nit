@@ -253,7 +253,7 @@ varonce24 = var25;
 var29 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__ANode__location]))(var_nmodule) /* location on <var_nmodule:AModule>*/;
 var30 = ((val* (*)(val*))(var29->class->vft[COLOR_location__Location__file]))(var29) /* file on <var29:Location>*/;
 if (var30 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 51);
 show_backtrace(1);
 } else {
@@ -547,7 +547,7 @@ if (var){
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_phase__AnnotationPhaseVisitor__phase]))(self) /* phase on <self:AnnotationPhaseVisitor>*/;
 var2 = ((val* (*)(val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent]))(var_n) /* parent on <var_n:ANode(AAnnotation)>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 100);
 show_backtrace(1);
 } else {

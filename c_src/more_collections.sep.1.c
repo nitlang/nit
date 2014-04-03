@@ -32,7 +32,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MultiHashMap#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 22);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 35);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (v) <p1:nullable Object> isa MultiHashMap#1 */
@@ -53,7 +53,7 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MultiHashMap#1", var_class_name5);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 22);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 35);
 show_backtrace(1);
 }
 var_k = p0;
@@ -79,6 +79,52 @@ void VIRTUAL_more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1
 more_collections__MultiHashMap__add_one(self, p0, p1);
 RET_LABEL:;
 }
+/* method more_collections#MultiHashMap#provide_default_value for (self: MultiHashMap[Object, nullable Object], Object): Array[nullable Object] */
+val* more_collections__MultiHashMap__provide_default_value(val* self, val* p0) {
+val* var /* : Array[nullable Object] */;
+short int var1 /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+val* var_key /* var key: Object */;
+val* var2 /* : Array[nullable Object] */;
+val* var_res /* var res: Array[nullable Object] */;
+/* Covariant cast for argument 0 (key) <p0:Object> isa MapRead#0 */
+/* <p0:Object> isa MapRead#0 */
+type_struct = self->type->resolution_table->types[COLOR_abstract_collection__MapRead_FT0];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p0->type->table_size) {
+var1 = 0;
+} else {
+var1 = p0->type->type_table[cltype] == idtype;
+}
+if (!var1) {
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 46);
+show_backtrace(1);
+}
+var_key = p0;
+var2 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymore_collections__MultiHashMap_FT1]);
+((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[nullable Object]>*/;
+var_res = var2;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(self, var_key, var_res) /* []= on <self:MultiHashMap[Object, nullable Object]>*/;
+var = var_res;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method more_collections#MultiHashMap#provide_default_value for (self: Object, Object): nullable Object */
+val* VIRTUAL_more_collections__MultiHashMap__provide_default_value(val* self, val* p0) {
+val* var /* : nullable Object */;
+val* var1 /* : Array[nullable Object] */;
+var1 = more_collections__MultiHashMap__provide_default_value(self, p0);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method more_collections#MultiHashMap#init for (self: MultiHashMap[Object, nullable Object]) */
 void more_collections__MultiHashMap__init(val* self) {
 ((void (*)(val*))(self->class->vft[COLOR_hash_collection__HashMap__init]))(self) /* init on <self:MultiHashMap[Object, nullable Object]>*/;
@@ -96,7 +142,7 @@ val* var1 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
 var1 = self->attrs[COLOR_more_collections__HashMap2___64dlevel1].val; /* @level1 on <self:HashMap2[Object, Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @level1");
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 38);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 57);
 show_backtrace(1);
 }
 var = var1;
@@ -132,7 +178,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMap2#0, HashMap[HashMap2#1, HashMap2#2]]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 38);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 57);
 show_backtrace(1);
 }
 self->attrs[COLOR_more_collections__HashMap2___64dlevel1].val = p0; /* @level1 on <self:HashMap2[Object, Object, nullable Object]> */
@@ -182,7 +228,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 40);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 59);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap2#1 */
@@ -198,7 +244,7 @@ var2 = p1->type->type_table[cltype3] == idtype4;
 if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#1", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 40);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 59);
 show_backtrace(1);
 }
 var_k1 = p0;
@@ -279,7 +325,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap2#1 */
@@ -295,7 +341,7 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#1", var_class_name5);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 show_backtrace(1);
 }
 /* Covariant cast for argument 2 (v) <p2:nullable Object> isa HashMap2#2 */
@@ -316,7 +362,7 @@ var6 = p2->type->type_table[cltype7] == idtype8;
 if (!var6) {
 var_class_name10 = p2 == NULL ? "null" : p2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#2", var_class_name10);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 show_backtrace(1);
 }
 var_k1 = p0;
@@ -359,7 +405,7 @@ val* var1 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
 var1 = self->attrs[COLOR_more_collections__HashMap3___64dlevel1].val; /* @level1 on <self:HashMap3[Object, Object, Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @level1");
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 68);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 87);
 show_backtrace(1);
 }
 var = var1;
@@ -395,7 +441,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMap3#0, HashMap2[HashMap3#1, HashMap3#2, HashMap3#3]]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 68);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 87);
 show_backtrace(1);
 }
 self->attrs[COLOR_more_collections__HashMap3___64dlevel1].val = p0; /* @level1 on <self:HashMap3[Object, Object, Object, nullable Object]> */
@@ -448,7 +494,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 89);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap3#1 */
@@ -464,7 +510,7 @@ var2 = p1->type->type_table[cltype3] == idtype4;
 if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#1", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 89);
 show_backtrace(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:Object> isa HashMap3#2 */
@@ -480,7 +526,7 @@ var7 = p2->type->type_table[cltype8] == idtype9;
 if (!var7) {
 var_class_name11 = p2 == NULL ? "null" : p2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#2", var_class_name11);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 89);
 show_backtrace(1);
 }
 var_k1 = p0;
@@ -560,7 +606,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 99);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap3#1 */
@@ -576,7 +622,7 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#1", var_class_name5);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 99);
 show_backtrace(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:Object> isa HashMap3#2 */
@@ -592,7 +638,7 @@ var6 = p2->type->type_table[cltype7] == idtype8;
 if (!var6) {
 var_class_name10 = p2 == NULL ? "null" : p2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#2", var_class_name10);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 99);
 show_backtrace(1);
 }
 /* Covariant cast for argument 3 (v) <p3:nullable Object> isa HashMap3#3 */
@@ -613,7 +659,7 @@ var11 = p3->type->type_table[cltype12] == idtype13;
 if (!var11) {
 var_class_name15 = p3 == NULL ? "null" : p3->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#3", var_class_name15);
-fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 99);
 show_backtrace(1);
 }
 var_k1 = p0;

@@ -171,7 +171,7 @@ var3 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var3) {
 var_class_name6 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var7 = var_from >= var_to;
@@ -196,7 +196,7 @@ var14 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var18 = var9 < var_to;
@@ -327,7 +327,7 @@ var4 = 1; /* easy <var_i:Int> isa OTHER*/
 if (!var4) {
 var_class_name7 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var8 = var_j > var_i;
@@ -344,7 +344,7 @@ var12 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var12) {
 var_class_name15 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var16 = var_i <= var_to;
@@ -364,7 +364,7 @@ var22 = 1; /* easy <var19:Int> isa OTHER*/
 if (!var22) {
 var_class_name25 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var26 = var18 <= var19;
@@ -396,7 +396,7 @@ var34 = 1; /* easy <var_i:Int> isa OTHER*/
 if (!var34) {
 var_class_name37 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name37);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var38 = var_j > var_i;
@@ -416,7 +416,7 @@ var45 = 1; /* easy <var42:Int> isa OTHER*/
 if (!var45) {
 var_class_name48 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var49 = var41 >= var42;
@@ -447,7 +447,7 @@ var57 = 1; /* easy <var_i:Int> isa OTHER*/
 if (!var57) {
 var_class_name60 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var61 = var_j > var_i;
@@ -574,7 +574,7 @@ var3 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var3) {
 var_class_name6 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var7 = var_i < var_to;
@@ -595,7 +595,7 @@ var11 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var11) {
 var_class_name14 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var15 = var_j <= var_to;
@@ -614,7 +614,7 @@ var21 = 1; /* easy <var18:Int> isa OTHER*/
 if (!var21) {
 var_class_name24 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var25 = var17 > var18;

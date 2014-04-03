@@ -98,7 +98,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AInitExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7790);
 show_backtrace(1);
 } else {
@@ -111,7 +111,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInitExpr___n_kwinit].val = var_n_kwinit; /* _n_kwinit on <self:AInitExpr> */
 if (var_n_kwinit == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7792);
 show_backtrace(1);
 } else {
@@ -124,7 +124,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInitExpr___n_args].val = var_n_args; /* _n_args on <self:AInitExpr> */
 if (var_n_args == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7794);
 show_backtrace(1);
 } else {
@@ -382,7 +382,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ABraExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7865);
 show_backtrace(1);
 } else {
@@ -395,7 +395,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val = var_n_args; /* _n_args on <self:ABraExpr> */
 if (var_n_args == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7867);
 show_backtrace(1);
 } else {
@@ -591,7 +591,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ABraAssignExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7924);
 show_backtrace(1);
 } else {
@@ -604,7 +604,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val = var_n_args; /* _n_args on <self:ABraAssignExpr> */
 if (var_n_args == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7926);
 show_backtrace(1);
 } else {
@@ -617,7 +617,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val = var_n_assign; /* _n_assign on <self:ABraAssignExpr> */
 if (var_n_assign == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7928);
 show_backtrace(1);
 } else {
@@ -630,7 +630,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val = var_n_value; /* _n_value on <self:ABraAssignExpr> */
 if (var_n_value == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 7930);
 show_backtrace(1);
 } else {
@@ -958,7 +958,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ABraReassignExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8019);
 show_backtrace(1);
 } else {
@@ -971,7 +971,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val = var_n_args; /* _n_args on <self:ABraReassignExpr> */
 if (var_n_args == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8021);
 show_backtrace(1);
 } else {
@@ -984,7 +984,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val = var_n_assign_op; /* _n_assign_op on <self:ABraReassignExpr> */
 if (var_n_assign_op == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8023);
 show_backtrace(1);
 } else {
@@ -997,7 +997,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val = var_n_value; /* _n_value on <self:ABraReassignExpr> */
 if (var_n_value == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8025);
 show_backtrace(1);
 } else {
@@ -1319,7 +1319,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val = var_n_id; /* _n_id on <self:AVarExpr> */
 if (var_n_id == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8111);
 show_backtrace(1);
 } else {
@@ -1447,7 +1447,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val = var_n_id; /* _n_id on <self:AVarAssignExpr> */
 if (var_n_id == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8151);
 show_backtrace(1);
 } else {
@@ -1460,7 +1460,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val = var_n_assign; /* _n_assign on <self:AVarAssignExpr> */
 if (var_n_assign == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8153);
 show_backtrace(1);
 } else {
@@ -1473,7 +1473,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val = var_n_value; /* _n_value on <self:AVarAssignExpr> */
 if (var_n_value == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8155);
 show_backtrace(1);
 } else {
@@ -1733,7 +1733,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val = var_n_id; /* _n_id on <self:AVarReassignExpr> */
 if (var_n_id == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8227);
 show_backtrace(1);
 } else {
@@ -1746,7 +1746,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val = var_n_assign_op; /* _n_assign_op on <self:AVarReassignExpr> */
 if (var_n_assign_op == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8229);
 show_backtrace(1);
 } else {
@@ -1759,7 +1759,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val = var_n_value; /* _n_value on <self:AVarReassignExpr> */
 if (var_n_value == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8231);
 show_backtrace(1);
 } else {
@@ -2021,7 +2021,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ARangeExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8303);
 show_backtrace(1);
 } else {
@@ -2034,7 +2034,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr2].val = var_n_expr2; /* _n_expr2 on <self:ARangeExpr> */
 if (var_n_expr2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8305);
 show_backtrace(1);
 } else {
@@ -2334,7 +2334,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ACrangeExpr___n_obra].val = var_n_obra; /* _n_obra on <self:ACrangeExpr> */
 if (var_n_obra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8387);
 show_backtrace(1);
 } else {
@@ -2347,7 +2347,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ACrangeExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8389);
 show_backtrace(1);
 } else {
@@ -2360,7 +2360,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr2].val = var_n_expr2; /* _n_expr2 on <self:ACrangeExpr> */
 if (var_n_expr2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8391);
 show_backtrace(1);
 } else {
@@ -2373,7 +2373,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ACrangeExpr___n_cbra].val = var_n_cbra; /* _n_cbra on <self:ACrangeExpr> */
 if (var_n_cbra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8393);
 show_backtrace(1);
 } else {
@@ -2805,7 +2805,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AOrangeExpr___n_obra].val = var_n_obra; /* _n_obra on <self:AOrangeExpr> */
 if (var_n_obra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8507);
 show_backtrace(1);
 } else {
@@ -2818,7 +2818,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AOrangeExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8509);
 show_backtrace(1);
 } else {
@@ -2831,7 +2831,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr2].val = var_n_expr2; /* _n_expr2 on <self:AOrangeExpr> */
 if (var_n_expr2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8511);
 show_backtrace(1);
 } else {
@@ -2844,7 +2844,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AOrangeExpr___n_cbra].val = var_n_cbra; /* _n_cbra on <self:AOrangeExpr> */
 if (var_n_cbra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8513);
 show_backtrace(1);
 } else {
@@ -3270,7 +3270,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AArrayExpr___n_exprs].val = var_n_exprs; /* _n_exprs on <self:AArrayExpr> */
 if (var_n_exprs == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8624);
 show_backtrace(1);
 } else {
@@ -3498,7 +3498,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASelfExpr___n_kwself].val = var_n_kwself; /* _n_kwself on <self:ASelfExpr> */
 if (var_n_kwself == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8687);
 show_backtrace(1);
 } else {
@@ -3629,7 +3629,7 @@ val* var_node /* var node: nullable TKwself */;
 var_node = p0;
 self->attrs[COLOR_parser_nodes__ASelfExpr___n_kwself].val = var_node; /* _n_kwself on <self:ASelfExpr> */
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8721);
 show_backtrace(1);
 } else {
@@ -3769,7 +3769,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ATrueExpr___n_kwtrue].val = var_n_kwtrue; /* _n_kwtrue on <self:ATrueExpr> */
 if (var_n_kwtrue == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8768);
 show_backtrace(1);
 } else {
@@ -3997,7 +3997,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AFalseExpr___n_kwfalse].val = var_n_kwfalse; /* _n_kwfalse on <self:AFalseExpr> */
 if (var_n_kwfalse == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8831);
 show_backtrace(1);
 } else {
@@ -4225,7 +4225,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANullExpr___n_kwnull].val = var_n_kwnull; /* _n_kwnull on <self:ANullExpr> */
 if (var_n_kwnull == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8894);
 show_backtrace(1);
 } else {
@@ -4453,7 +4453,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AIntExpr___n_number].val = var_n_number; /* _n_number on <self:AIntExpr> */
 if (var_n_number == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 8957);
 show_backtrace(1);
 } else {
@@ -4681,7 +4681,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AFloatExpr___n_float].val = var_n_float; /* _n_float on <self:AFloatExpr> */
 if (var_n_float == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9020);
 show_backtrace(1);
 } else {
@@ -4909,7 +4909,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ACharExpr___n_char].val = var_n_char; /* _n_char on <self:ACharExpr> */
 if (var_n_char == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9083);
 show_backtrace(1);
 } else {
@@ -5137,7 +5137,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val = var_n_string; /* _n_string on <self:AStringExpr> */
 if (var_n_string == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9146);
 show_backtrace(1);
 } else {
@@ -5361,7 +5361,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val = var_n_string; /* _n_string on <self:AStartStringExpr> */
 if (var_n_string == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9208);
 show_backtrace(1);
 } else {
@@ -5485,7 +5485,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val = var_n_string; /* _n_string on <self:AMidStringExpr> */
 if (var_n_string == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9246);
 show_backtrace(1);
 } else {
@@ -5609,7 +5609,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val = var_n_string; /* _n_string on <self:AEndStringExpr> */
 if (var_n_string == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9284);
 show_backtrace(1);
 } else {
@@ -6044,7 +6044,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AParExpr___n_opar].val = var_n_opar; /* _n_opar on <self:AParExpr> */
 if (var_n_opar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9390);
 show_backtrace(1);
 } else {
@@ -6057,7 +6057,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AProxyExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AParExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9392);
 show_backtrace(1);
 } else {
@@ -6070,7 +6070,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AParExpr___n_cpar].val = var_n_cpar; /* _n_cpar on <self:AParExpr> */
 if (var_n_cpar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9394);
 show_backtrace(1);
 } else {
@@ -6434,7 +6434,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsCastExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AAsCastExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9492);
 show_backtrace(1);
 } else {
@@ -6447,7 +6447,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsCastExpr___n_kwas].val = var_n_kwas; /* _n_kwas on <self:AAsCastExpr> */
 if (var_n_kwas == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9494);
 show_backtrace(1);
 } else {
@@ -6460,7 +6460,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsCastExpr___n_opar].val = var_n_opar; /* _n_opar on <self:AAsCastExpr> */
 if (var_n_opar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9496);
 show_backtrace(1);
 } else {
@@ -6473,7 +6473,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsCastExpr___n_type].val = var_n_type; /* _n_type on <self:AAsCastExpr> */
 if (var_n_type == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9498);
 show_backtrace(1);
 } else {
@@ -6486,7 +6486,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsCastExpr___n_cpar].val = var_n_cpar; /* _n_cpar on <self:AAsCastExpr> */
 if (var_n_cpar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9500);
 show_backtrace(1);
 } else {
@@ -6884,7 +6884,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AAsNotnullExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9607);
 show_backtrace(1);
 } else {
@@ -6897,7 +6897,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwas].val = var_n_kwas; /* _n_kwas on <self:AAsNotnullExpr> */
 if (var_n_kwas == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9609);
 show_backtrace(1);
 } else {
@@ -6910,7 +6910,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_opar].val = var_n_opar; /* _n_opar on <self:AAsNotnullExpr> */
 if (var_n_opar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9611);
 show_backtrace(1);
 } else {
@@ -6923,7 +6923,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwnot].val = var_n_kwnot; /* _n_kwnot on <self:AAsNotnullExpr> */
 if (var_n_kwnot == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9613);
 show_backtrace(1);
 } else {
@@ -6936,7 +6936,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwnull].val = var_n_kwnull; /* _n_kwnull on <self:AAsNotnullExpr> */
 if (var_n_kwnull == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9615);
 show_backtrace(1);
 } else {
@@ -6949,7 +6949,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_cpar].val = var_n_cpar; /* _n_cpar on <self:AAsNotnullExpr> */
 if (var_n_cpar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9617);
 show_backtrace(1);
 } else {
@@ -7407,7 +7407,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AIssetAttrExpr___n_kwisset].val = var_n_kwisset; /* _n_kwisset on <self:AIssetAttrExpr> */
 if (var_n_kwisset == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9737);
 show_backtrace(1);
 } else {
@@ -7420,7 +7420,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val = var_n_expr; /* _n_expr on <self:AIssetAttrExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9739);
 show_backtrace(1);
 } else {
@@ -7433,7 +7433,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val = var_n_id; /* _n_id on <self:AIssetAttrExpr> */
 if (var_n_id == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9741);
 show_backtrace(1);
 } else {
@@ -7695,7 +7695,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_kwdebug].val = var_n_kwdebug; /* _n_kwdebug on <self:ADebugTypeExpr> */
 if (var_n_kwdebug == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9814);
 show_backtrace(1);
 } else {
@@ -7708,7 +7708,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_kwtype].val = var_n_kwtype; /* _n_kwtype on <self:ADebugTypeExpr> */
 if (var_n_kwtype == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9816);
 show_backtrace(1);
 } else {
@@ -7721,7 +7721,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_expr].val = var_n_expr; /* _n_expr on <self:ADebugTypeExpr> */
 if (var_n_expr == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9818);
 show_backtrace(1);
 } else {
@@ -7734,7 +7734,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_type].val = var_n_type; /* _n_type on <self:ADebugTypeExpr> */
 if (var_n_type == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9820);
 show_backtrace(1);
 } else {
@@ -8267,7 +8267,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AParExprs___n_opar].val = var_n_opar; /* _n_opar on <self:AParExprs> */
 if (var_n_opar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9948);
 show_backtrace(1);
 } else {
@@ -8311,7 +8311,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AParExprs___n_cpar].val = var_n_cpar; /* _n_cpar on <self:AParExprs> */
 if (var_n_cpar == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 9955);
 show_backtrace(1);
 } else {
@@ -8628,7 +8628,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ABraExprs___n_obra].val = var_n_obra; /* _n_obra on <self:ABraExprs> */
 if (var_n_obra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10026);
 show_backtrace(1);
 } else {
@@ -8672,7 +8672,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ABraExprs___n_cbra].val = var_n_cbra; /* _n_cbra on <self:ABraExprs> */
 if (var_n_cbra == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10033);
 show_backtrace(1);
 } else {
@@ -8977,7 +8977,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APlusAssignOp___n_pluseq].val = var_n_pluseq; /* _n_pluseq on <self:APlusAssignOp> */
 if (var_n_pluseq == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10102);
 show_backtrace(1);
 } else {
@@ -9101,7 +9101,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMinusAssignOp___n_minuseq].val = var_n_minuseq; /* _n_minuseq on <self:AMinusAssignOp> */
 if (var_n_minuseq == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10140);
 show_backtrace(1);
 } else {
@@ -9281,7 +9281,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuleName___n_id].val = var_n_id; /* _n_id on <self:AModuleName> */
 if (var_n_id == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10189);
 show_backtrace(1);
 } else {
@@ -9619,7 +9619,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternCalls___n_kwimport].val = var_n_kwimport; /* _n_kwimport on <self:AExternCalls> */
 if (var_n_kwimport == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10263);
 show_backtrace(1);
 } else {
@@ -9932,7 +9932,7 @@ show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASuperExternCall___n_kwsuper].val = var_n_kwsuper; /* _n_kwsuper on <self:ASuperExternCall> */
 if (var_n_kwsuper == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10339);
 show_backtrace(1);
 } else {

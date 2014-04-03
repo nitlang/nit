@@ -280,8 +280,9 @@ val* var15 /* : Array[Object] */;
 long var16 /* : Int */;
 val* var17 /* : NativeArray[Object] */;
 val* var18 /* : String */;
-long var19 /* : Int */;
-val* var20 /* : nullable Object */;
+val* var19 /* : StringCharView */;
+long var20 /* : Int */;
+val* var21 /* : nullable Object */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACharExpr__n_char]))(self) /* n_char on <self:ACharExpr>*/;
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_parser_nodes__Token__text]))(var) /* text on <var:TChar>*/;
@@ -321,9 +322,10 @@ var18 = ((val* (*)(val*))(var15->class->vft[COLOR_string__Object__to_s]))(var15)
 goto RET_LABEL;
 } else {
 }
-var19 = 1;
-var20 = ((val* (*)(val*, long))(var_txt->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_txt, var19) /* [] on <var_txt:String>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_literal__ACharExpr__value_61d]))(self, var20) /* value= on <self:ACharExpr>*/;
+var19 = ((val* (*)(val*))(var_txt->class->vft[COLOR_string__AbstractString__chars]))(var_txt) /* chars on <var_txt:String>*/;
+var20 = 1;
+var21 = ((val* (*)(val*, long))(var19->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var19, var20) /* [] on <var19:StringCharView>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_literal__ACharExpr__value_61d]))(self, var21) /* value= on <self:ACharExpr>*/;
 RET_LABEL:;
 }
 /* method literal#ACharExpr#accept_literal for (self: Object, LiteralVisitor) */
@@ -366,93 +368,158 @@ val* var /* : Token */;
 val* var1 /* : String */;
 val* var_txt /* var txt: String */;
 long var2 /* : Int */;
-long var_skip /* var skip: Int */;
-short int var3 /* : Bool */;
-long var4 /* : Int */;
-val* var5 /* : nullable Object */;
+long var_behead /* var behead: Int */;
+long var3 /* : Int */;
+long var_betail /* var betail: Int */;
+short int var4 /* : Bool */;
+val* var5 /* : StringCharView */;
 long var6 /* : Int */;
 val* var7 /* : nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-short int var_ /* var : Bool */;
-long var11 /* : Int */;
-long var12 /* : Int */;
+val* var8 /* : StringCharView */;
+long var9 /* : Int */;
+val* var10 /* : nullable Object */;
+short int var11 /* : Bool */;
 short int var13 /* : Bool */;
-short int var15 /* : Bool */;
+short int var_ /* var : Bool */;
+long var14 /* : Int */;
+long var15 /* : Int */;
+short int var16 /* : Bool */;
+short int var18 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var16 /* : Bool */;
-long var17 /* : Int */;
-long var18 /* : Int */;
-long var19 /* : Int */;
+short int var19 /* : Bool */;
 long var20 /* : Int */;
-long var22 /* : Int */;
-long var23 /* : Int */;
-long var25 /* : Int */;
-val* var26 /* : String */;
-val* var27 /* : String */;
+long var21 /* : Int */;
+short int var22 /* : Bool */;
+val* var23 /* : StringCharView */;
+long var24 /* : Int */;
+val* var25 /* : nullable Object */;
+char var26 /* : Char */;
+short int var27 /* : Bool */;
+short int var29 /* : Bool */;
+char var30 /* : Char */;
+short int var_31 /* var : Bool */;
+val* var32 /* : StringCharView */;
+long var33 /* : Int */;
+val* var34 /* : nullable Object */;
+char var35 /* : Char */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
+char var39 /* : Char */;
+long var40 /* : Int */;
+long var41 /* : Int */;
+long var42 /* : Int */;
+long var44 /* : Int */;
+long var45 /* : Int */;
+long var47 /* : Int */;
+val* var48 /* : String */;
+val* var49 /* : String */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AStringFormExpr__n_string]))(self) /* n_string on <self:AStringFormExpr>*/;
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_parser_nodes__Token__text]))(var) /* text on <var:Token>*/;
 var_txt = var1;
 var2 = 1;
-var_skip = var2;
-var4 = 0;
-var5 = ((val* (*)(val*, long))(var_txt->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_txt, var4) /* [] on <var_txt:String>*/;
-var6 = 1;
-var7 = ((val* (*)(val*, long))(var_txt->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_txt, var6) /* [] on <var_txt:String>*/;
-{ /* Inline kernel#Char#== (var5,var7) */
-var10 = var5 == var7 || (((struct instance_kernel__Char*)var5)->value == ((struct instance_kernel__Char*)var7)->value);
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var_behead = var2;
+var3 = 1;
+var_betail = var3;
+var5 = ((val* (*)(val*))(var_txt->class->vft[COLOR_string__AbstractString__chars]))(var_txt) /* chars on <var_txt:String>*/;
+var6 = 0;
+var7 = ((val* (*)(val*, long))(var5->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var5, var6) /* [] on <var5:StringCharView>*/;
+var8 = ((val* (*)(val*))(var_txt->class->vft[COLOR_string__AbstractString__chars]))(var_txt) /* chars on <var_txt:String>*/;
+var9 = 1;
+var10 = ((val* (*)(val*, long))(var8->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var8, var9) /* [] on <var8:StringCharView>*/;
+{ /* Inline kernel#Char#== (var7,var10) */
+var13 = var7 == var10 || (((struct instance_kernel__Char*)var7)->value == ((struct instance_kernel__Char*)var10)->value);
+var11 = var13;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
 }
-var_ = var8;
-if (var8){
-var11 = ((long (*)(val*))(var_txt->class->vft[COLOR_abstract_collection__Collection__length]))(var_txt) /* length on <var_txt:String>*/;
-var12 = 6;
-{ /* Inline kernel#Int#>= (var11,var12) */
-/* Covariant cast for argument 0 (i) <var12:Int> isa OTHER */
-/* <var12:Int> isa OTHER */
-var15 = 1; /* easy <var12:Int> isa OTHER*/
-if (!var15) {
+var_ = var11;
+if (var11){
+var14 = ((long (*)(val*))(var_txt->class->vft[COLOR_abstract_collection__Collection__length]))(var_txt) /* length on <var_txt:String>*/;
+var15 = 6;
+{ /* Inline kernel#Int#>= (var14,var15) */
+/* Covariant cast for argument 0 (i) <var15:Int> isa OTHER */
+/* <var15:Int> isa OTHER */
+var18 = 1; /* easy <var15:Int> isa OTHER*/
+if (!var18) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
-var16 = var11 >= var12;
-var13 = var16;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var19 = var14 >= var15;
+var16 = var19;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
 }
-var3 = var13;
+var4 = var16;
 } else {
-var3 = var_;
+var4 = var_;
 }
-if (var3){
-var17 = 3;
-var_skip = var17;
+if (var4){
+var20 = 3;
+var_behead = var20;
+var21 = 3;
+var_betail = var21;
+var23 = ((val* (*)(val*))(var_txt->class->vft[COLOR_string__AbstractString__chars]))(var_txt) /* chars on <var_txt:String>*/;
+var24 = 0;
+var25 = ((val* (*)(val*, long))(var23->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var23, var24) /* [] on <var23:StringCharView>*/;
+var26 = '\"';
+{ /* Inline kernel#Char#== (var25,var26) */
+var29 = (var25 != NULL) && (var25->class == &class_kernel__Char);
+if (var29) {
+var30 = ((struct instance_kernel__Char*)var25)->value; /* autounbox from nullable Object to Char */;
+var29 = (var30 == var26);
+}
+var27 = var29;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
+}
+var_31 = var27;
+if (var27){
+var32 = ((val* (*)(val*))(var_txt->class->vft[COLOR_string__AbstractString__chars]))(var_txt) /* chars on <var_txt:String>*/;
+var33 = 3;
+var34 = ((val* (*)(val*, long))(var32->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var32, var33) /* [] on <var32:StringCharView>*/;
+var35 = '\n';
+{ /* Inline kernel#Char#== (var34,var35) */
+var38 = (var34 != NULL) && (var34->class == &class_kernel__Char);
+if (var38) {
+var39 = ((struct instance_kernel__Char*)var34)->value; /* autounbox from nullable Object to Char */;
+var38 = (var39 == var35);
+}
+var36 = var38;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
+}
+var22 = var36;
+} else {
+var22 = var_31;
+}
+if (var22){
+var40 = 4;
+var_behead = var40;
 } else {
 }
-var18 = ((long (*)(val*))(var_txt->class->vft[COLOR_abstract_collection__Collection__length]))(var_txt) /* length on <var_txt:String>*/;
-var19 = 2;
-{ /* Inline kernel#Int#* (var19,var_skip) */
-var22 = var19 * var_skip;
-var20 = var22;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+} else {
 }
-{ /* Inline kernel#Int#- (var18,var20) */
-var25 = var18 - var20;
-var23 = var25;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
+var41 = ((long (*)(val*))(var_txt->class->vft[COLOR_abstract_collection__Collection__length]))(var_txt) /* length on <var_txt:String>*/;
+{ /* Inline kernel#Int#- (var41,var_behead) */
+var44 = var41 - var_behead;
+var42 = var44;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
 }
-var26 = ((val* (*)(val*, long, long))(var_txt->class->vft[COLOR_string__AbstractString__substring]))(var_txt, var_skip, var23) /* substring on <var_txt:String>*/;
-var27 = ((val* (*)(val*))(var26->class->vft[COLOR_string__AbstractString__unescape_nit]))(var26) /* unescape_nit on <var26:String>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_literal__AStringFormExpr__value_61d]))(self, var27) /* value= on <self:AStringFormExpr>*/;
+{ /* Inline kernel#Int#- (var42,var_betail) */
+var47 = var42 - var_betail;
+var45 = var47;
+goto RET_LABEL46;
+RET_LABEL46:(void)0;
+}
+var48 = ((val* (*)(val*, long, long))(var_txt->class->vft[COLOR_string__AbstractString__substring]))(var_txt, var_behead, var45) /* substring on <var_txt:String>*/;
+var49 = ((val* (*)(val*))(var48->class->vft[COLOR_string__AbstractString__unescape_nit]))(var48) /* unescape_nit on <var48:String>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_literal__AStringFormExpr__value_61d]))(self, var49) /* value= on <self:AStringFormExpr>*/;
 RET_LABEL:;
 }
 /* method literal#AStringFormExpr#accept_literal for (self: Object, LiteralVisitor) */

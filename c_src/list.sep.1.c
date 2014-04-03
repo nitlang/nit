@@ -8,7 +8,7 @@ val* var2 /* : nullable Object */;
 var_index = p0;
 var1 = ((val* (*)(val*, long))(self->class->vft[COLOR_list__List__get_node]))(self, var_index) /* get_node on <self:List[nullable Object]>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 22);
 show_backtrace(1);
 } else {
@@ -64,7 +64,7 @@ var_index = p0;
 var_item = p1;
 var1 = ((val* (*)(val*, long))(self->class->vft[COLOR_list__List__get_node]))(self, var_index) /* get_node on <self:List[nullable Object]>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 24);
 show_backtrace(1);
 } else {
@@ -84,7 +84,7 @@ val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 27);
 show_backtrace(1);
 } else {
@@ -138,7 +138,7 @@ show_backtrace(1);
 var_e = p0;
 var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 30);
 show_backtrace(1);
 } else {
@@ -158,7 +158,7 @@ val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 33);
 show_backtrace(1);
 } else {
@@ -212,7 +212,7 @@ show_backtrace(1);
 var_e = p0;
 var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 36);
 show_backtrace(1);
 } else {
@@ -604,7 +604,7 @@ var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var6 = var_from >= var2;
@@ -622,7 +622,7 @@ var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var14 = var_from < var7;
@@ -647,7 +647,7 @@ var20 = 1; /* easy <var17:Int> isa OTHER*/
 if (!var20) {
 var_class_name23 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var24 = var_to >= var17;
@@ -665,7 +665,7 @@ var29 = 1; /* easy <var26:Int> isa OTHER*/
 if (!var29) {
 var_class_name32 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var33 = var_to < var26;
@@ -686,7 +686,7 @@ var37 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var37) {
 var_class_name40 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var41 = var_from <= var_to;
@@ -714,7 +714,7 @@ var45 = 1; /* easy <var_to:Int> isa OTHER*/
 if (!var45) {
 var_class_name48 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var49 = var_from <= var_to;
@@ -803,7 +803,7 @@ self->attrs[COLOR_list__List___head].val = var_node; /* _head on <self:List[null
 } else {
 var5 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 100);
 show_backtrace(1);
 } else {
@@ -875,7 +875,7 @@ var5 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_list__ListNode__next_61d]))(var_node, var5) /* next= on <var_node:ListNode[nullable Object]>*/;
 var6 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 114);
 show_backtrace(1);
 } else {
@@ -950,7 +950,7 @@ if (var7){
 var8 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 var9 = var_l->attrs[COLOR_list__List___head].val; /* _head on <var_l:List[nullable Object]> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 127);
 show_backtrace(1);
 } else {
@@ -958,7 +958,7 @@ show_backtrace(1);
 }
 var10 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 128);
 show_backtrace(1);
 } else {
@@ -966,7 +966,7 @@ var11 = ((val* (*)(val*))(var10->class->vft[COLOR_list__ListNode__next]))(var10)
 }
 var12 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 128);
 show_backtrace(1);
 } else {
@@ -1002,7 +1002,7 @@ val* var10 /* : nullable Object */;
 var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 var_node = var1;
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 140);
 show_backtrace(1);
 } else {
@@ -1011,7 +1011,7 @@ var2 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_
 self->attrs[COLOR_list__List___tail].val = var2; /* _tail on <self:List[nullable Object]> */
 var3 = NULL;
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 141);
 show_backtrace(1);
 } else {
@@ -1031,7 +1031,7 @@ self->attrs[COLOR_list__List___head].val = var7; /* _head on <self:List[nullable
 var8 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 var9 = NULL;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 145);
 show_backtrace(1);
 } else {
@@ -1039,7 +1039,7 @@ show_backtrace(1);
 }
 }
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 147);
 show_backtrace(1);
 } else {
@@ -1076,7 +1076,7 @@ val* var10 /* : nullable Object */;
 var1 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 var_node = var1;
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 154);
 show_backtrace(1);
 } else {
@@ -1085,7 +1085,7 @@ var2 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var_
 self->attrs[COLOR_list__List___head].val = var2; /* _head on <self:List[nullable Object]> */
 var3 = NULL;
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 155);
 show_backtrace(1);
 } else {
@@ -1105,7 +1105,7 @@ self->attrs[COLOR_list__List___tail].val = var7; /* _tail on <self:List[nullable
 var8 = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
 var9 = NULL;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 159);
 show_backtrace(1);
 } else {
@@ -1113,7 +1113,7 @@ show_backtrace(1);
 }
 }
 if (var_node == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 161);
 show_backtrace(1);
 } else {
@@ -1333,7 +1333,7 @@ var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var6 = var_i < var2;
@@ -1364,7 +1364,7 @@ var14 = 1; /* easy <var11:Int> isa OTHER*/
 if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var18 = var_i > var11;
@@ -1451,7 +1451,7 @@ show_backtrace(1);
 }
 /* Covariant cast for argument 1 (after) <p1:nullable ListNode[nullable Object]> isa nullable ListNode[List#0] */
 /* <p1:nullable ListNode[nullable Object]> isa nullable ListNode[List#0] */
-type_struct5 = self->type->resolution_table->types[COLOR_list__ListNodelist__List_FT0];
+type_struct5 = self->type->resolution_table->types[COLOR_nullable_list__ListNodelist__List_FT0];
 cltype3 = type_struct5->color;
 idtype4 = type_struct5->id;
 if(p1 == NULL) {
@@ -1580,7 +1580,7 @@ self->attrs[COLOR_list__List___tail].val = var8; /* _tail on <self:List[nullable
 var9 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var_node) /* next on <var_node:ListNode[nullable Object]>*/;
 var10 = NULL;
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 227);
 show_backtrace(1);
 } else {
@@ -1601,7 +1601,7 @@ self->attrs[COLOR_list__List___tail].val = var14; /* _tail on <self:List[nullabl
 var15 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:ListNode[nullable Object]>*/;
 var16 = NULL;
 if (var15 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 231);
 show_backtrace(1);
 } else {
@@ -1611,7 +1611,7 @@ show_backtrace(1);
 var17 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:ListNode[nullable Object]>*/;
 var18 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var_node) /* next on <var_node:ListNode[nullable Object]>*/;
 if (var17 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 233);
 show_backtrace(1);
 } else {
@@ -1620,7 +1620,7 @@ show_backtrace(1);
 var19 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__next]))(var_node) /* next on <var_node:ListNode[nullable Object]>*/;
 var20 = ((val* (*)(val*))(var_node->class->vft[COLOR_list__ListNode__prev]))(var_node) /* prev on <var_node:ListNode[nullable Object]>*/;
 if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 234);
 show_backtrace(1);
 } else {
@@ -1728,7 +1728,7 @@ val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 256);
 show_backtrace(1);
 } else {
@@ -1782,7 +1782,7 @@ show_backtrace(1);
 var_e = p0;
 var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 258);
 show_backtrace(1);
 } else {
@@ -1835,7 +1835,7 @@ long var4 /* : Int */;
 long var6 /* : Int */;
 var = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 264);
 show_backtrace(1);
 } else {
@@ -2060,7 +2060,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (next) <p0:nullable ListNode[nullable Object]> isa nullable ListNode[ListNode#0] */
 /* <p0:nullable ListNode[nullable Object]> isa nullable ListNode[ListNode#0] */
-type_struct = self->type->resolution_table->types[COLOR_list__ListNodelist__ListNode_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_list__ListNodelist__ListNode_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {
@@ -2113,7 +2113,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (prev) <p0:nullable ListNode[nullable Object]> isa nullable ListNode[ListNode#0] */
 /* <p0:nullable ListNode[nullable Object]> isa nullable ListNode[ListNode#0] */
-type_struct = self->type->resolution_table->types[COLOR_list__ListNodelist__ListNode_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_list__ListNodelist__ListNode_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {

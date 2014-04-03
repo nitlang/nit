@@ -127,6 +127,7 @@ extern const int COLOR_abstract_collection__MapRead_FT0;
 extern const int COLOR_array__ArrayMap__index;
 extern const int COLOR_array__ArrayMap___items;
 extern const int COLOR_abstract_collection__Couple__second;
+extern const int COLOR_abstract_collection__MapRead__provide_default_value;
 val* array__ArrayMap___91d_93d(val* self, val* p0);
 extern const int COLOR_abstract_collection__Map_FT0;
 extern const int COLOR_abstract_collection__Map_FT1;

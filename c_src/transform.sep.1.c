@@ -424,7 +424,7 @@ var_nif = var3;
 var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then]))(var_nif) /* n_then on <var_nif:AIfExpr>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_then]))(self) /* n_then on <self:AIfexprExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 112);
 show_backtrace(1);
 } else {
@@ -433,7 +433,7 @@ show_backtrace(1);
 var6 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else]))(var_nif) /* n_else on <var_nif:AIfExpr>*/;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_else]))(self) /* n_else on <self:AIfexprExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 113);
 show_backtrace(1);
 } else {
@@ -470,7 +470,7 @@ var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AOrExpr__n_expr]))(self) /* n_expr on <self:AOrExpr>*/;
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var5) /* make_var_read on <var5:AExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 124);
 show_backtrace(1);
 } else {
@@ -479,7 +479,7 @@ show_backtrace(1);
 var7 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else]))(var_nif) /* n_else on <var_nif:AIfExpr>*/;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AOrExpr__n_expr2]))(self) /* n_expr2 on <self:AOrExpr>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 125);
 show_backtrace(1);
 } else {
@@ -526,7 +526,7 @@ var_nif = var3;
 var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then]))(var_nif) /* n_then on <var_nif:AIfExpr>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAndExpr__n_expr2]))(self) /* n_expr2 on <self:AAndExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 143);
 show_backtrace(1);
 } else {
@@ -536,7 +536,7 @@ var6 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAndExpr__n_expr]))(self) /* n_expr on <self:AAndExpr>*/;
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var7) /* make_var_read on <var7:AExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 144);
 show_backtrace(1);
 } else {
@@ -1169,7 +1169,7 @@ var12 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var12) /* make_var_read on <var12:AExpr>*/;
 var14 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(self) /* callsite on <self:ASendReassignFormExpr>*/;
 if (var14 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 274);
 show_backtrace(1);
 } else {
@@ -1180,7 +1180,7 @@ var_nread = var16;
 var17 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:ASendReassignFormExpr>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 276);
 show_backtrace(1);
 } else {
@@ -1202,7 +1202,7 @@ var26 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr
 var27 = ((val* (*)(val*))(var26->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var26) /* make_var_read on <var26:AExpr>*/;
 var28 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendReassignFormExpr__write_callsite]))(self) /* write_callsite on <self:ASendReassignFormExpr>*/;
 if (var28 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 279);
 show_backtrace(1);
 } else {
@@ -1260,7 +1260,7 @@ var_nread = var3;
 var4 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AVarReassignExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 294);
 show_backtrace(1);
 } else {
@@ -1336,7 +1336,7 @@ var_nread = var7;
 var8 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var9 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AAttrReassignExpr>*/;
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 310);
 show_backtrace(1);
 } else {

@@ -156,7 +156,7 @@ var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var7 = var2 > var3;
@@ -243,7 +243,7 @@ var37 = 0; /* arg is null but recv is not */
 if (var37){
 var38 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 if (var38 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 57);
 show_backtrace(1);
 } else {

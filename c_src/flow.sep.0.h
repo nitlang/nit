@@ -57,6 +57,7 @@ val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 extern const int COLOR_array__Array__with_capacity;
 extern const int COLOR_kernel__Object__object_id;
+val* BOX_kernel__Int(long);
 extern const int COLOR_string__Object__to_s;
 extern const int COLOR_parser_nodes__ANode__location;
 extern const int COLOR_string__Object__class_name;

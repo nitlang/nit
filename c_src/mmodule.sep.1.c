@@ -198,6 +198,52 @@ void VIRTUAL_mmodule__MGroup__mmodules_61d(val* self, val* p0) {
 mmodule__MGroup__mmodules_61d(self, p0);
 RET_LABEL:;
 }
+/* method mmodule#MGroup#fuzzy_owner for (self: MGroup): nullable MModule */
+val* mmodule__MGroup__fuzzy_owner(val* self) {
+val* var /* : nullable MModule */;
+val* var1 /* : Array[MModule] */;
+val* var2 /* : Iterator[nullable Object] */;
+short int var3 /* : Bool */;
+val* var4 /* : nullable Object */;
+val* var_m /* var m: MModule */;
+val* var5 /* : String */;
+val* var6 /* : String */;
+short int var7 /* : Bool */;
+val* var8 /* : null */;
+var1 = ((val* (*)(val*))(self->class->vft[COLOR_mmodule__MGroup__mmodules]))(self) /* mmodules on <self:MGroup>*/;
+var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__iterator]))(var1) /* iterator on <var1:Array[MModule]>*/;
+for(;;) {
+var3 = ((short int (*)(val*))(var2->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var2) /* is_ok on <var2:Iterator[nullable Object]>*/;
+if(!var3) break;
+var4 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Iterator__item]))(var2) /* item on <var2:Iterator[nullable Object]>*/;
+var_m = var4;
+var5 = ((val* (*)(val*))(var_m->class->vft[COLOR_mmodule__MModule__name]))(var_m) /* name on <var_m:MModule>*/;
+var6 = ((val* (*)(val*))(self->class->vft[COLOR_mproject__MGroup__name]))(self) /* name on <self:MGroup>*/;
+var7 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var6) /* == on <var5:String>*/;
+if (var7){
+var = var_m;
+goto RET_LABEL;
+} else {
+}
+CONTINUE_label: (void)0;
+((void (*)(val*))(var2->class->vft[COLOR_abstract_collection__Iterator__next]))(var2) /* next on <var2:Iterator[nullable Object]>*/;
+}
+BREAK_label: (void)0;
+var8 = NULL;
+var = var8;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method mmodule#MGroup#fuzzy_owner for (self: Object): nullable MModule */
+val* VIRTUAL_mmodule__MGroup__fuzzy_owner(val* self) {
+val* var /* : nullable MModule */;
+val* var1 /* : nullable MModule */;
+var1 = mmodule__MGroup__fuzzy_owner(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method mmodule#MModule#model for (self: MModule): Model */
 val* mmodule__MModule__model(val* self) {
 val* var /* : Model */;
@@ -205,7 +251,7 @@ val* var1 /* : Model */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dmodel].val; /* @model on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @model");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 64);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 72);
 show_backtrace(1);
 }
 var = var1;
@@ -294,7 +340,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dname].val; /* @name on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 76);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 84);
 show_backtrace(1);
 }
 var = var1;
@@ -327,7 +373,7 @@ val* var1 /* : Location */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dlocation].val; /* @location on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @location");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 79);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 87);
 show_backtrace(1);
 }
 var = var1;
@@ -379,7 +425,7 @@ val* var1 /* : POSetElement[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___64din_nesting].val; /* @in_nesting on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @in_nesting");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 85);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 93);
 show_backtrace(1);
 }
 var = var1;
@@ -412,7 +458,7 @@ val* var1 /* : POSetElement[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___64din_importation].val; /* @in_importation on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @in_importation");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 91);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 99);
 show_backtrace(1);
 }
 var = var1;
@@ -565,24 +611,25 @@ val* var3 /* : POSetElement[Object] */;
 val* var4 /* : null */;
 short int var5 /* : Bool */;
 val* var6 /* : Array[MModule] */;
-val* var7 /* : Array[MModule] */;
-val* var8 /* : nullable Object */;
-val* var_direct_owner /* var direct_owner: MModule */;
-short int var9 /* : Bool */;
-short int var10 /* : Bool */;
+val* var7 /* : nullable MModule */;
+val* var_direct_owner /* var direct_owner: nullable MModule */;
+short int var8 /* : Bool */;
+val* var9 /* : Array[MModule] */;
+val* var10 /* : Iterator[nullable Object] */;
 short int var11 /* : Bool */;
+val* var12 /* : nullable Object */;
+val* var_m /* var m: MModule */;
+short int var13 /* : Bool */;
+val* var14 /* : POSet[MModule] */;
+val* var15 /* : nullable MGroup */;
+val* var16 /* : null */;
+short int var17 /* : Bool */;
+val* var18 /* : nullable MGroup */;
+val* var19 /* : nullable MModule */;
+short int var20 /* : Bool */;
+short int var21 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var12 /* : nullable MGroup */;
-val* var13 /* : null */;
-short int var14 /* : Bool */;
-short int var_15 /* var : Bool */;
-val* var16 /* : nullable MGroup */;
-val* var17 /* : Array[MModule] */;
-short int var18 /* : Bool */;
-short int var19 /* : Bool */;
-val* var20 /* : nullable MGroup */;
-val* var21 /* : Array[MModule] */;
-val* var22 /* : nullable Object */;
+val* var22 /* : null */;
 short int var23 /* : Bool */;
 val* var24 /* : POSet[MModule] */;
 val* var25 /* : POSet[MModule] */;
@@ -611,54 +658,72 @@ var5 = 1; /* arg is null and recv is not */
 if (var5){
 var6 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__mmodules]))(var_mgroup) /* mmodules on <var_mgroup:nullable MGroup(MGroup)>*/;
 ((void (*)(val*, val*))(var6->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var6, self) /* add on <var6:Array[MModule]>*/;
-var7 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__mmodules]))(var_mgroup) /* mmodules on <var_mgroup:nullable MGroup(MGroup)>*/;
-var8 = ((val* (*)(val*))(var7->class->vft[COLOR_abstract_collection__Collection__first]))(var7) /* first on <var7:Array[MModule]>*/;
-var_direct_owner = var8;
-var11 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, self) /* == on <var_direct_owner:MModule>*/;
-var_ = var11;
-if (var11){
-var12 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__parent]))(var_mgroup) /* parent on <var_mgroup:nullable MGroup(MGroup)>*/;
-var13 = NULL;
-if (var12 == NULL) {
-var14 = 0; /* is null */
+var7 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__fuzzy_owner]))(var_mgroup) /* fuzzy_owner on <var_mgroup:nullable MGroup(MGroup)>*/;
+var_direct_owner = var7;
+if (var_direct_owner == NULL) {
+var8 = 0; /* <self:MModule> cannot be null */
 } else {
-var14 = 1; /* arg is null and recv is not */
+var8 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, self) /* == on <var_direct_owner:nullable MModule>*/;
 }
-var10 = var14;
+if (var8){
+var9 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__mmodules]))(var_mgroup) /* mmodules on <var_mgroup:nullable MGroup(MGroup)>*/;
+var10 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Collection__iterator]))(var9) /* iterator on <var9:Array[MModule]>*/;
+for(;;) {
+var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var10) /* is_ok on <var10:Iterator[nullable Object]>*/;
+if(!var11) break;
+var12 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__item]))(var10) /* item on <var10:Iterator[nullable Object]>*/;
+var_m = var12;
+var13 = ((short int (*)(val*, val*))(var_m->class->vft[COLOR_kernel__Object___61d_61d]))(var_m, self) /* == on <var_m:MModule>*/;
+if (var13){
+goto CONTINUE_label;
 } else {
-var10 = var_;
 }
-var_15 = var10;
-if (var10){
-var16 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__parent]))(var_mgroup) /* parent on <var_mgroup:nullable MGroup(MGroup)>*/;
-if (var16 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 120);
+((void (*)(val*, val*))(var_m->class->vft[COLOR_mmodule__MModule__direct_owner_61d]))(var_m, self) /* direct_owner= on <var_m:MModule>*/;
+var14 = ((val* (*)(val*))(var_model->class->vft[COLOR_mmodule__Model__mmodule_nesting_hierarchy]))(var_model) /* mmodule_nesting_hierarchy on <var_model:Model>*/;
+((void (*)(val*, val*, val*))(var14->class->vft[COLOR_poset__POSet__add_edge]))(var14, self, var_m) /* add_edge on <var14:POSet[MModule]>*/;
+CONTINUE_label: (void)0;
+((void (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__next]))(var10) /* next on <var10:Iterator[nullable Object]>*/;
+}
+BREAK_label: (void)0;
+var15 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__parent]))(var_mgroup) /* parent on <var_mgroup:nullable MGroup(MGroup)>*/;
+var16 = NULL;
+if (var15 == NULL) {
+var17 = 0; /* is null */
+} else {
+var17 = 1; /* arg is null and recv is not */
+}
+if (var17){
+var18 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__parent]))(var_mgroup) /* parent on <var_mgroup:nullable MGroup(MGroup)>*/;
+if (var18 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 136);
 show_backtrace(1);
 } else {
-var17 = ((val* (*)(val*))(var16->class->vft[COLOR_mmodule__MGroup__mmodules]))(var16) /* mmodules on <var16:nullable MGroup>*/;
+var19 = ((val* (*)(val*))(var18->class->vft[COLOR_mmodule__MGroup__fuzzy_owner]))(var18) /* fuzzy_owner on <var18:nullable MGroup>*/;
 }
-var18 = ((short int (*)(val*))(var17->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var17) /* is_empty on <var17:Array[MModule]>*/;
-var19 = !var18;
-var9 = var19;
-} else {
-var9 = var_15;
-}
-if (var9){
-var20 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__parent]))(var_mgroup) /* parent on <var_mgroup:nullable MGroup(MGroup)>*/;
-if (var20 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 121);
-show_backtrace(1);
-} else {
-var21 = ((val* (*)(val*))(var20->class->vft[COLOR_mmodule__MGroup__mmodules]))(var20) /* mmodules on <var20:nullable MGroup>*/;
-}
-var22 = ((val* (*)(val*))(var21->class->vft[COLOR_abstract_collection__Collection__first]))(var21) /* first on <var21:Array[MModule]>*/;
-var_direct_owner = var22;
+var_direct_owner = var19;
 } else {
 }
-var23 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___33d_61d]))(var_direct_owner, self) /* != on <var_direct_owner:MModule>*/;
-if (var23){
+} else {
+}
+if (var_direct_owner == NULL) {
+var21 = 1; /* <self:MModule> cannot be null */
+} else {
+var21 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___33d_61d]))(var_direct_owner, self) /* != on <var_direct_owner:nullable MModule>*/;
+}
+var_ = var21;
+if (var21){
+var22 = NULL;
+if (var_direct_owner == NULL) {
+var23 = 0; /* is null */
+} else {
+var23 = 1; /* arg is null and recv is not */
+}
+var20 = var23;
+} else {
+var20 = var_;
+}
+if (var20){
 ((void (*)(val*, val*))(self->class->vft[COLOR_mmodule__MModule__direct_owner_61d]))(self, var_direct_owner) /* direct_owner= on <self:MModule>*/;
 var24 = ((val* (*)(val*))(var_model->class->vft[COLOR_mmodule__Model__mmodule_nesting_hierarchy]))(var_model) /* mmodule_nesting_hierarchy on <var_model:Model>*/;
 ((void (*)(val*, val*, val*))(var24->class->vft[COLOR_poset__POSet__add_edge]))(var24, var_direct_owner, self) /* add_edge on <var24:POSet[MModule]>*/;
@@ -694,7 +759,7 @@ var1 = ((val* (*)(val*))(var->class->vft[COLOR_poset__POSetElement__direct_great
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var1) /* is_empty on <var1:Collection[Object](Collection[MModule])>*/;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'unique_invocation\' failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 136);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 151);
 show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var_imported_mmodules->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_imported_mmodules) /* iterator on <var_imported_mmodules:Array[MModule]>*/;
@@ -724,7 +789,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dintrude_mmodules].val; /* @intrude_mmodules on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @intrude_mmodules");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 142);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 157);
 show_backtrace(1);
 }
 var = var1;
@@ -757,7 +822,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dpublic_mmodules].val; /* @public_mmodules on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @public_mmodules");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 143);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 158);
 show_backtrace(1);
 }
 var = var1;
@@ -790,7 +855,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___64dprivate_mmodules].val; /* @private_mmodules on <self:MModule> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @private_mmodules");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 144);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 159);
 show_backtrace(1);
 }
 var = var1;
@@ -993,7 +1058,7 @@ var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var35) /* print on <self:MModule>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 175);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 190);
 show_backtrace(1);
 }
 }
@@ -1018,11 +1083,10 @@ val* var6 /* : nullable MGroup */;
 val* var7 /* : Array[MModule] */;
 short int var8 /* : Bool */;
 val* var9 /* : null */;
-val* var10 /* : Array[MModule] */;
-val* var11 /* : nullable Object */;
-val* var_res /* var res: MModule */;
-short int var12 /* : Bool */;
-val* var13 /* : null */;
+val* var10 /* : nullable MModule */;
+val* var_res /* var res: nullable MModule */;
+short int var11 /* : Bool */;
+val* var12 /* : null */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_mmodule__MModule__mgroup]))(self) /* mgroup on <self:MModule>*/;
 var_mgroup = var1;
 var2 = NULL;
@@ -1041,8 +1105,8 @@ var5 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mproject__MGroup__mproject
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_mproject__MProject__root]))(var5) /* root on <var5:MProject>*/;
 var_mgroup = var6;
 if (var_mgroup == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 185);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 200);
 show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__mmodules]))(var_mgroup) /* mmodules on <var_mgroup:nullable MGroup>*/;
@@ -1055,18 +1119,21 @@ goto RET_LABEL;
 } else {
 }
 if (var_mgroup == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 186);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 201);
 show_backtrace(1);
 } else {
-var10 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__mmodules]))(var_mgroup) /* mmodules on <var_mgroup:nullable MGroup>*/;
+var10 = ((val* (*)(val*))(var_mgroup->class->vft[COLOR_mmodule__MGroup__fuzzy_owner]))(var_mgroup) /* fuzzy_owner on <var_mgroup:nullable MGroup>*/;
 }
-var11 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Collection__first]))(var10) /* first on <var10:Array[MModule]>*/;
-var_res = var11;
-var12 = ((short int (*)(val*, val*))(var_res->class->vft[COLOR_kernel__Object___61d_61d]))(var_res, self) /* == on <var_res:MModule>*/;
-if (var12){
-var13 = NULL;
-var = var13;
+var_res = var10;
+if (var_res == NULL) {
+var11 = 0; /* <self:MModule> cannot be null */
+} else {
+var11 = ((short int (*)(val*, val*))(var_res->class->vft[COLOR_kernel__Object___61d_61d]))(var_res, self) /* == on <var_res:nullable MModule>*/;
+}
+if (var11){
+var12 = NULL;
+var = var12;
 goto RET_LABEL;
 } else {
 }
@@ -1142,7 +1209,7 @@ var = var16;
 goto RET_LABEL;
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 204);
+fprintf(stderr, " (%s:%d)\n", "src/model/mmodule.nit", 219);
 show_backtrace(1);
 }
 }
