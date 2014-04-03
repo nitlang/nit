@@ -31,25 +31,15 @@ redef class MModule
 		return m2n.get_or_null(self)
 	end
 
-	redef fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder)
+	redef fun finalize_ffi(compiler: AbstractCompiler)
 	do
+		if not uses_ffi then return
+
+		var v = compiler.new_visitor
 		var n = nmodule(v)
 		if n == null then return
 		n.finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
 		for file in n.ffi_files do v.compiler.extern_bodies.add(file)
-	end
-
-	fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
-	do
-		if nitni_ccu != null then return
-
-		nitni_ccu = new CCompilationUnit
-	end
-
-	redef fun finalize_nitni(v: AbstractCompilerVisitor)
-	do
-		var n = nmodule(v)
-		if n == null then return
 
 		ensure_compile_nitni_base(v)
 
@@ -60,6 +50,13 @@ redef class MModule
 		for file in nitni_ccu.files do
 			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
 		end
+	end
+
+	fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
+	do
+		if nitni_ccu != null then return
+
+		nitni_ccu = new CCompilationUnit
 	end
 
 	redef fun collect_linker_libs

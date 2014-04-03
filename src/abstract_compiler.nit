@@ -696,19 +696,14 @@ abstract class AbstractCompiler
 		end
 	end
 
+	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
+
 	# Division facility
 	# Avoid division by zero by returning the string "n/a"
 	fun div(a,b:Int):String
 	do
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
-	end
-
-	fun finalize_ffi_for_module(mmodule: MModule)
-	do
-		var visitor = new_visitor
-		mmodule.finalize_ffi(visitor, modelbuilder)
-		mmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -2611,11 +2606,8 @@ redef class MModule
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
 
-	# Write FFI results to file
-	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) do end
-
-	# Write nitni results to file
-	fun finalize_nitni(v: AbstractCompilerVisitor) do end
+	# Write FFI and nitni results to file
+	fun finalize_ffi(c: AbstractCompiler) do end
 
 	# Give requided addinional system libraries (as given to LD_LIBS)
 	# Note: can return null instead of an empty set
