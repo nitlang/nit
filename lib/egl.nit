@@ -164,7 +164,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	end
 
 	private fun query_string(name: Int): String import NativeString.to_s `{
-		return (void*)(long)NativeString_to_s(eglQueryString(recv, name));
+		return NativeString_to_s((char *)eglQueryString(recv, name));
 	`}
 
 	fun vendor: String do return query_string("3053".to_hex)
