@@ -73,5 +73,5 @@ fun three: Int do return 3
 (three<=>two).output
 '\n'.output
 
-one.succ.output
-three.prec.output
+one.successor(1).output
+three.predecessor(1).output
