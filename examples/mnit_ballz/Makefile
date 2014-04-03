@@ -2,7 +2,7 @@ default: android
 
 android:
 	mkdir -p bin
-	../../bin/nitg --no-stacktrace -o bin/ballz.apk src/ballz.nit
+	../../bin/nitg --no-stacktrace -o bin/ballz.apk src/ballz_android.nit
 
 clean:
 	rm -rf bin
