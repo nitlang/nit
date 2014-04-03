@@ -31,7 +31,11 @@ redef class ToolContext
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
-	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
+	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
+	# --inline-some-methods
+	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
+	# --direct-call-monomorph
+	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -48,7 +52,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
@@ -106,6 +110,13 @@ redef class ModelBuilder
 		self.toolcontext.info("*** END GENERATING C: {time1-time0} ***", 2)
 		write_and_make(compiler)
 	end
+
+	# Count number of invocations by VFT
+	private var nb_invok_by_tables = 0
+	# Count number of invocations by direct call
+	private var nb_invok_by_direct = 0
+	# Count number of invocations by inlining
+	private var nb_invok_by_inline = 0
 end
 
 # Singleton that store the knowledge about the separate compilation process
@@ -865,6 +876,14 @@ class SeparateCompiler
 		if self.modelbuilder.toolcontext.opt_tables_metrics.value then
 			display_sizes
 		end
+
+		var tc = self.modelbuilder.toolcontext
+		tc.info("# implementation of method invocation",2)
+		var nb_invok_total = modelbuilder.nb_invok_by_tables + modelbuilder.nb_invok_by_direct + modelbuilder.nb_invok_by_inline
+		tc.info("total number of invocations: {nb_invok_total}",2)
+		tc.info("invocations by VFT send:     {modelbuilder.nb_invok_by_tables} ({div(modelbuilder.nb_invok_by_tables,nb_invok_total)}%)",2)
+		tc.info("invocations by direct call:  {modelbuilder.nb_invok_by_direct} ({div(modelbuilder.nb_invok_by_direct,nb_invok_total)}%)",2)
+		tc.info("invocations by inlining:     {modelbuilder.nb_invok_by_inline} ({div(modelbuilder.nb_invok_by_inline,nb_invok_total)}%)",2)
 	end
 
 	fun display_sizes
@@ -989,6 +1008,29 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	redef fun compile_callsite(callsite, args)
+	do
+		var rta = compiler.runtime_type_analysis
+		var recv = args.first.mtype
+		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null then
+			var tgs = rta.live_targets(callsite)
+			if tgs.length == 1 then
+				# DIRECT CALL
+				var mmethod = callsite.mproperty
+				self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), args)
+				var res0 = before_send(mmethod, args)
+				var res = call(tgs.first, tgs.first.mclassdef.bound_mtype, args)
+				if res0 != null then
+					assert res != null
+					self.assign(res0, res)
+					res = res0
+				end
+				add("\}") # close the before_send
+				return res
+			end
+		end
+		return super
+	end
 	redef fun send(mmethod, arguments)
 	do
 		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
@@ -1006,9 +1048,78 @@ class SeparateCompilerVisitor
 		return table_send(mmethod, arguments, mmethod.const_color)
 	end
 
+	# Handel common special cases before doing the effective method invocation
+	# This methods handle the `==` and `!=` methods and the case of the null receiver.
+	# Note: a { is open in the generated C, that enclose and protect the effective method invocation.
+	# Client must not forget to close the } after them.
+	#
+	# The value returned is the result of the common special cases.
+	# If not null, client must compine it with the result of their own effective method invocation.
+	#
+	# If `before_send` can shortcut the whole message sending, a dummy `if(0){`
+	# is generated to cancel the effective method invocation that will follow
+	# TODO: find a better approach
+	private fun before_send(mmethod: MMethod, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var res: nullable RuntimeVariable = null
+		var recv = arguments.first
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
+		var maybenull = recv.mcasttype isa MNullableType and consider_null
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			if mmethod.name == "==" then
+				res = self.new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} == NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 1; /* is null */")
+				else
+					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
+				end
+			else if mmethod.name == "!=" then
+				res = self.new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} != NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 0; /* is null */")
+				else
+					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
+				end
+			else
+				self.add_abort("Receiver is null")
+			end
+			self.add("\} else \{")
+		else
+			self.add("\{")
+		end
+		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
+			if res == null then res = self.new_var(bool_type)
+			# Recv is not null, thus is arg is, it is easy to conclude (and respect the invariants)
+			var arg = arguments[1]
+			if arg.mcasttype isa MNullType then
+				if mmethod.name == "==" then
+					self.add("{res} = 0; /* arg is null but recv is not */")
+				else
+					self.add("{res} = 1; /* arg is null and recv is not */")
+				end
+				self.add("\}") # closes the null case
+				self.add("if (0) \{") # what follow is useless, CC will drop it
+			end
+		end
+		return res
+	end
+
 	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
 	do
+		compiler.modelbuilder.nb_invok_by_tables += 1
+		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
+
 		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
+		var recv = arguments.first
+
+		var res0 = before_send(mmethod, arguments)
 
 		var res: nullable RuntimeVariable
 		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
@@ -1025,7 +1136,6 @@ class SeparateCompilerVisitor
 		var s = new FlatBuffer
 		var ss = new FlatBuffer
 
-		var recv = arguments.first
 		s.append("val*")
 		ss.append("{recv}")
 		for i in [0..msignature.arity[ do
@@ -1039,51 +1149,6 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
-		var maybenull = recv.mcasttype isa MNullableType and consider_null
-		if maybenull then
-			self.add("if ({recv} == NULL) \{")
-			if mmethod.name == "==" then
-				assert res != null
-				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} == NULL);")
-				else if arg.mcasttype isa MNullType then
-					self.add("{res} = 1; /* is null */")
-				else
-					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
-				end
-			else if mmethod.name == "!=" then
-				assert res != null
-				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} != NULL);")
-				else if arg.mcasttype isa MNullType then
-					self.add("{res} = 0; /* is null */")
-				else
-					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
-				end
-			else
-				self.add_abort("Receiver is null")
-			end
-			self.add("\} else \{")
-		end
-		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
-			assert res != null
-			# Recv is not null, thus is arg is, it is easy to conclude (and respect the invariants)
-			var arg = arguments[1]
-			if arg.mcasttype isa MNullType then
-				if mmethod.name == "==" then
-					self.add("{res} = 0; /* arg is null but recv is not */")
-				else
-					self.add("{res} = 1; /* arg is null and recv is not */")
-				end
-				if maybenull then
-					self.add("\}")
-				end
-				return res
-			end
-		end
 
 		var r
 		if ret == null then r = "void" else r = ret.ctype
@@ -1096,9 +1161,13 @@ class SeparateCompilerVisitor
 			self.add("{call};")
 		end
 
-		if maybenull then
-			self.add("\}")
+		if res0 != null then
+			assert res != null
+			assign(res0,res)
+			res = res0
 		end
+
+		self.add("\}") # closes the null case
 
 		return res
 	end
@@ -1119,28 +1188,31 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
-		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef and
-		not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
+		if (mmethoddef.is_intern and not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value) or
+			(compiler.modelbuilder.toolcontext.opt_inline_some_methods.value and mmethoddef.can_inline(self)) then
+			compiler.modelbuilder.nb_invok_by_inline += 1
+			if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_inline++;")
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
 			var old_frame = self.frame
 			self.frame = frame
-			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) */")
+			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) on {arguments.first.inspect} */")
 			mmethoddef.compile_inside_to_c(self, arguments)
 			self.add("{frame.returnlabel.as(not null)}:(void)0;")
 			self.add("\}")
 			self.frame = old_frame
 			return res
 		end
+		compiler.modelbuilder.nb_invok_by_direct += 1
+		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_direct++;")
 
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)
 
 		self.require_declaration(mmethoddef.c_name)
 		if res == null then
-			self.add("{mmethoddef.c_name}({arguments.join(", ")});")
+			self.add("{mmethoddef.c_name}({arguments.join(", ")}); /* Direct call {mmethoddef} on {arguments.first.inspect}*/")
 			return null
 		else
 			self.add("{res} = {mmethoddef.c_name}({arguments.join(", ")});")
@@ -1231,7 +1303,7 @@ class SeparateCompilerVisitor
 
 			# Check for Uninitialized attribute
 			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
-				self.add("if ({res} == NULL) \{")
+				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
 			end
@@ -1245,7 +1317,7 @@ class SeparateCompilerVisitor
 
 			# Check for Uninitialized attribute
 			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
-				self.add("if ({res} == NULL) \{")
+				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
 			end
