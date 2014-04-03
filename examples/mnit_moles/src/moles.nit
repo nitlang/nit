@@ -1,12 +1,12 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
-# Copyright 2012-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2012-2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#	 http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,27 +15,35 @@
 # limitations under the License.
 
 # Classic moles game
+#
+# This is a minimal practical example of the mnit framework.
 module moles
 
 import mnit
 import realtime
 
 class Hole
-	var game : Game
-	var x : Int
-	var y : Int
-	var dim : Int # Should it be removed?
+	var game: Game
+
+	# Center of the hole
+	var x: Int
+	var y: Int
+
+	# Half width of the hit box
+	var dx = 200.0
+	# Heigth of the hit box
+	var dy = 800.0
 
 	# state
-	var up : Bool = false
-	var hitted : Bool = false
+	var up = false
+	var hitted = false
+	var trap = false
 
-	init ( g : Game, x, y : Int )
+	init (g: Game, x, y: Int)
 	do
 		game = g
 		self.x = x
 		self.y = y
-		dim = game.img_dim
 	end
 
 	fun do_turn
@@ -54,53 +62,71 @@ class Hole
 		else if (100.0*game.speed_modifier).to_i.rand == 0 then
 			# show up
 			up = true
+
+			# shot traps only at 50 points and up
+			trap = false
+			if game.points > 50 then
+
+				# After 50 points we have more and more traps until point 1000
+				var d = 1250-(game.points - 50)
+				if d < 200 then d = 200
+
+				if d.rand < 100 then trap = true
+			end
 		end
 	end
 
-	fun intercepts( event : PointerEvent ) : Bool
+	fun intercepts(event: PointerEvent): Bool
 	do
-		var ex = event.x.to_i
-		var ey = event.y.to_i
-		return ex > x and ex < x + dim and
-			ey > y and ey < y + dim
+		if not up or hitted then return false
+
+		var dx = (dx*display_scale).to_i
+		var dy = (dy*display_scale).to_i
+		var ex = event.x.to_i - display_offset_x
+		var ey = event.y.to_i - display_offset_y
+		return ex > x - dx and ex < x + dx and
+			ey > y - dy and ey < y
 	end
 
 	fun hit
 	do
 		if hitted then return
 
-		if up then
+		if trap then
+			up = false
+			game.points -= 5
+			if game.points < 0 then game.points = 0
+		else
 			hitted = true
 			game.points += 1
-		else
-			abort # should not happen
 		end
 	end
 end
 
 class Game
-	var holes : Sequence[Hole] = new Array[Hole].with_capacity(4)
+	var holes = new Array[Hole].with_capacity(4)
 
 	# rule / const
-	var modifier_half_life : Float = 40.0
-	var rows : Int = 5
-	var columns : Int = 3
+	var modifier_half_life = 1000.0
+	fun rows: Int do return 4
+	fun columns: Int do return 5
 
 	# state
-	var points : Int = 0
-	var speed_modifier : Float = 1.0
+	var points = 0
+	var speed_modifier = 1.0
 
 	# configs
-	var img_ori_dim : Int = 256
-	fun img_dim : Int do return 210
-	fun global_speed_modifier : Float do return 2.0
+	var dist_between_rows = 512
+	var dist_between_columns = 600
+	fun global_speed_modifier: Float do return 2.0
 
 	init
 	do
-		var d = img_dim
-		for x in [ 0 .. rows [ do
-			for y in [ 0 .. columns [ do
-				holes.add( new Hole( self, x*d, y*d ) )
+		var dx = (dist_between_columns.to_f*display_scale).to_i
+		var dy = (dist_between_rows.to_f*display_scale).to_i
+		for x in [0 .. columns[ do
+			for y in [0 .. rows[ do
+				holes.add(new Hole(self, x*dx, y*dy))
 			end
 		end
 	end
@@ -109,62 +135,89 @@ class Game
 		for hole in holes do hole.do_turn
 
 		speed_modifier = modifier_half_life / (modifier_half_life+points.to_f) * global_speed_modifier
-
-		print "p: {points} sm: {speed_modifier}"
 	end
 end
 
 # Where all the UI stuff is done
 class Screen
-	var empty_img : Image
-	var up_img : Image
-	var hit_img : Image
+	var empty_img: Image
+	var up_img: Image
+	var hit_img: Image
+	var trap_img: Image
 	var numbers: NumberImages
 
-	var game : Game = new Game
+	var sign_warning: Image
+	var sign_cute: Image
+	var sign_hits: Image
 
-	init ( app : App )
+	var game = new Game
+
+	init (app: App)
 	do
-		empty_img = app.load_asset( "images/empty.png" ).as(Image)
-		up_img = app.load_asset( "images/up.png" ).as(Image)
-		hit_img = app.load_asset( "images/hit.png" ).as(Image)
+		empty_img = app.load_image("images/empty.png")
+		up_img = app.load_image("images/up.png")
+		hit_img = app.load_image("images/hit.png")
+		trap_img = app.load_image("images/trap.png")
 		numbers = app.load_numbers("images/#.png")
 
-		var scale = game.img_dim.to_f / game.img_ori_dim.to_f
-		empty_img.scale = scale
-		up_img.scale = scale
-		hit_img.scale = scale
+		sign_warning = app.load_image("images/sign-warning.png")
+		sign_cute = app.load_image("images/sign-cute.png")
+		sign_hits = app.load_image("images/sign-hits.png")
 	end
 
-	fun do_frame( display : Display )
+	fun do_frame(display: Display)
 	do
-		display.clear( 0.0, 0.7, 0.0 )
+		display.clear(0.1, 0.65, 0.2)
+
+		sign_warning.scale = display_scale
+		sign_cute.scale = display_scale
+		sign_hits.scale = display_scale
+		for img in numbers.imgs do img.scale = display_scale
+
+		display.blit(sign_warning, (-120.0*display_scale).to_i, (-235.0*display_scale).to_i)
+		display.blit(sign_cute, (540.0*display_scale).to_i, (-180.0*display_scale).to_i)
+		display.blit(sign_hits, (1340.0*display_scale).to_i, (55.0*display_scale).to_i)
+		display.blit_number(numbers, game.points, (1460.0*display_scale).to_i, (270.0*display_scale).to_i)
 
 		for hole in game.holes do
-			var img
+			# Hole
+			var img = empty_img
+			var dx = 512.0*display_scale
+			var dy = 512.0*display_scale
+			img.scale = display_scale
+			display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 
+			# Mole
+			var empty = false
 			if hole.hitted then
 				img = hit_img
+				dx = 256.0*display_scale
+				dy = 417.0*display_scale
 			else if hole.up then
-				img = up_img
-			else
-				img = empty_img
+				if hole.trap then
+					img = trap_img
+					dx = 512.0*display_scale
+					dy = 830.0*display_scale
+				else
+					img = up_img
+					dx = 512.0*display_scale
+					dy = 830.0*display_scale
+				end
+			else empty = true
+
+			if not empty then
+				img.scale = display_scale
+				display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 			end
-
-			display.blit( img, hole.x, hole.y-64 )
 		end
-
-		display.blit_number(numbers, game.points, 20, 20)
 	end
 
-	fun input( event : InputEvent ) : Bool
+	fun input(event: InputEvent): Bool
 	do
 		if event isa PointerEvent then
 			for hole in game.holes do
-				if hole.intercepts( event ) then
-					if hole.up then
-						hole.hit
-					end
+				if hole.intercepts(event) then
+					if hole.up then hole.hit
 					return true
 				end
 			end
@@ -177,7 +230,7 @@ end
 class MyApp
 	super App
 
-	var screen : nullable Screen = null
+	var screen: nullable Screen = null
 
 	var target_dt = 20000000
 
@@ -187,17 +240,19 @@ class MyApp
 	do
 		super
 
-		screen = new Screen( self )
+		init_screen_and_game
 	end
 
-	redef fun frame_core( display )
+	fun init_screen_and_game do screen = new Screen(self)
+
+	redef fun frame_core(display)
 	do
 		var screen = self.screen
 		if screen != null then
 			var clock = new Clock
 
 			screen.game.do_turn
-			screen.do_frame( display )
+			screen.do_frame(display)
 
 			var dt = clock.lapse
 			if dt.sec == 0 and dt.nanosec < target_dt then
@@ -207,15 +262,15 @@ class MyApp
 		end
 	end
 
-	redef fun input( ie )
+	redef fun input(ie)
 	do
 		var screen = screen
 		if ie isa QuitEvent or
-			( ie isa KeyEvent and ie.to_c == 'q' ) then
+			(ie isa KeyEvent and ie.to_c == 'q') then
 			quit = true
 			return true
 		else if screen != null then
-			return screen.input( ie )
+			return screen.input(ie)
 		else
 			print "unknown input: {ie}"
 			return false
@@ -223,6 +278,13 @@ class MyApp
 	end
 end
 
+fun display_scale: Float do return 1.0
+
+# Depends on the hole center in the uo image
+fun display_offset_x: Int do return (512.0*display_scale).to_i
+
+# Depends on the width of the holes
+fun display_offset_y: Int do return (800.0*display_scale).to_i
+
 var app = new MyApp
 app.main_loop
-

@@ -45,8 +45,9 @@ redef class Display
 		for c in str.chars do
 			var d = c.ascii-'0'.ascii
 			assert d >= 0 and d <= 9
-			blit(imgs.imgs[d], x, y)
-			x += imgs.imgs[d].width
+			var img = imgs.imgs[d]
+			blit(img, x, y)
+			x += (img.width.to_f * img.scale).to_i
 		end
 	end
 end
