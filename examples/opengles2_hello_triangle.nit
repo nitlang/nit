@@ -72,6 +72,12 @@ var configs = config_chooser.choose(egl_display)
 assert configs != null else print "choosing config failed: {egl_display.error}"
 assert not configs.is_empty else print "no EGL config"
 
+print "{configs.length} EGL configs available"
+for config in configs do
+	var attribs = config.attribs(egl_display)
+	print "* caveats: {attribs.caveat}"
+end
+
 var config = configs.first
 
 var format = config.attribs(egl_display).native_visual_id

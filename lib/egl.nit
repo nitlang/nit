@@ -211,6 +211,37 @@ class EGLConfigAttribs
 	fun alpha_size: Int do return display.config_attrib(config, "3021".to_hex)
 	fun native_visual_id: Int do return display.config_attrib(config, "302E".to_hex)
 	fun native_visual_type: Int do return display.config_attrib(config, "302F".to_hex)
+
+	fun caveat: EGLConfigCaveat do
+		return new EGLConfigCaveat.from_i(display.config_attrib(config, "3027".to_hex))
+	end
+end
+
+extern class EGLConfigCaveat `{ EGLint `}
+	new from_i(val: Int) `{ return (EGLint)val; `}
+	fun to_i: Int `{ return recv; `}
+
+	new none `{ return EGL_NONE; `}
+	fun is_none: Bool `{ return recv == EGL_NONE; `}
+
+	new dont_care `{ return EGL_DONT_CARE; `}
+	fun is_dont_care: Bool `{ return recv == EGL_DONT_CARE; `}
+
+	new slow `{ return EGL_SLOW_CONFIG; `}
+	fun is_slow: Bool `{ return recv == EGL_SLOW_CONFIG; `}
+
+	# Obselete since EGL 1.3, use EGL_CONFORMANT instead
+	new non_conformant `{ return EGL_NON_CONFORMANT_CONFIG; `}
+	fun is_non_conformant: Bool `{ return recv == EGL_NON_CONFORMANT_CONFIG; `}
+
+	redef fun to_s
+	do
+		if is_none then return "EGL_NONE"
+		if is_dont_care then return "EGL_DONT_CARE"
+		if is_slow then return "EGL_SLOW_CONFIG"
+		if is_non_conformant then return "EGL_NON_CONFORMANT"
+		return "Unknown or invalid value"
+	end
 end
 
 # Attributes of a surface for a given EGL display
@@ -348,6 +379,8 @@ class EGLConfigChooser
 	fun depth_size=(size: Int) do insert_attrib_with_val("3025".to_hex, size)
 	fun stencil_size=(size: Int) do insert_attrib_with_val("3026".to_hex, size)
 	fun sample_buffers=(size: Int) do insert_attrib_with_val("3031".to_hex, size)
+
+	fun caveat=(caveat: EGLConfigCaveat) do insert_attrib_with_val("3050".to_hex, caveat.to_i)
 
 	fun choose(display: EGLDisplay): nullable Array[EGLConfig]
 	do
