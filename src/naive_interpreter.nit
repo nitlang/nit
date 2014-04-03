@@ -675,10 +675,6 @@ redef class AInternMethPropdef
 		else if cname == "Int" then
 			if pname == "unary -" then
 				return v.int_instance(-args[0].to_i)
-			else if pname == "succ" then
-				return v.int_instance(args[0].to_i + 1)
-			else if pname == "prec" then
-				return v.int_instance(args[0].to_i - 1)
 			else if pname == "+" then
 				return v.int_instance(args[0].to_i + args[1].to_i)
 			else if pname == "-" then
@@ -712,14 +708,6 @@ redef class AInternMethPropdef
 			var recv = args[0].val.as(Char)
 			if pname == "ascii" then
 				return v.int_instance(recv.ascii)
-			else if pname == "succ" then
-				return v.char_instance(recv.succ)
-			else if pname == "prec" then
-				return v.char_instance(recv.prec)
-			else if pname == "+" then
-				return v.char_instance(recv + args[1].to_i)
-			else if pname == "-" then
-				return v.char_instance(recv - args[1].to_i)
 			else if pname == "successor" then
 				return v.char_instance(recv.successor(args[1].to_i))
 			else if pname == "predecessor" then
