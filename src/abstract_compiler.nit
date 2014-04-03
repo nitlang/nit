@@ -1667,6 +1667,12 @@ redef class AInternMethPropdef
 			else if pname == "-" then
 				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
 				return
+			else if pname == "successor" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return
+			else if pname == "predecessor" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
 				return

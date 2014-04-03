@@ -720,6 +720,10 @@ redef class AInternMethPropdef
 				return v.char_instance(recv + args[1].to_i)
 			else if pname == "-" then
 				return v.char_instance(recv - args[1].to_i)
+			else if pname == "successor" then
+				return v.char_instance(recv.successor(args[1].to_i))
+			else if pname == "predecessor" then
+				return v.char_instance(recv.predecessor(args[1].to_i))
 			else if pname == "<" then
 				return v.bool_instance(recv < args[1].val.as(Char))
 			else if pname == ">" then
