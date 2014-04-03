@@ -76,6 +76,7 @@ print "{configs.length} EGL configs available"
 for config in configs do
 	var attribs = config.attribs(egl_display)
 	print "* caveats: {attribs.caveat}"
+	print "  conformant to: {attribs.conformant}"
 end
 
 var config = configs.first
