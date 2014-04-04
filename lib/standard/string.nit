@@ -592,23 +592,7 @@ abstract class StringCharView
 
 	redef fun iterator: IndexedIterator[Char] do return self.iterator_from(0)
 
-	# Gets a new Iterator starting at position `pos`
-	#
-	#     var iter = "abcd".chars.iterator_from(2)
-	#     assert iter.to_a == ['c', 'd']
-	fun iterator_from(pos: Int): IndexedIterator[Char] is abstract
-
-	# Gets an iterator starting at the end and going backwards
-	#
-	#     var reviter = "hello".chars.reverse_iterator
-	#     assert reviter.to_a == ['o', 'l', 'l', 'e', 'h']
-	fun reverse_iterator: IndexedIterator[Char] do return self.reverse_iterator_from(self.length - 1)
-
-	# Gets an iterator on the chars of self starting from `pos`
-	#
-	#     var reviter = "hello".chars.reverse_iterator_from(2)
-	#     assert reviter.to_a == ['l', 'e', 'h']
-	fun reverse_iterator_from(pos: Int): IndexedIterator[Char] is abstract
+	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
 end
 
 # View on Buffer objects, extends Sequence

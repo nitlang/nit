@@ -631,8 +631,6 @@ interface SequenceRead[E]
 		return res
 	end
 
-	redef fun iterator: IndexedIterator[E] is abstract
-
 	# Two sequences are equals if they have the same items in the same order.
 	#
 	#     var a = new List[Int]
@@ -659,6 +657,42 @@ interface SequenceRead[E]
 	do
 		var res = 0
 		for e in self do res += res.hash
+		return res
+	end
+
+	redef fun iterator: IndexedIterator[E] is abstract
+
+	# Gets a new Iterator starting at position `pos`
+	#
+	#     var iter = [10,20,30,40,50].iterator_from(2)
+	#     assert iter.to_a == [30, 40, 50]
+	fun iterator_from(pos: Int): IndexedIterator[E]
+	do
+		var res = iterator
+		while pos > 0 and res.is_ok do
+			res.next
+			pos -= 1
+		end
+		return res
+	end
+
+	# Gets an iterator starting at the end and going backwards
+	#
+	#     var reviter = [1,2,3].reverse_iterator
+	#     assert reviter.to_a == [3,2,1]
+	fun reverse_iterator: IndexedIterator[E] is abstract
+
+	# Gets an iterator on the chars of self starting from `pos`
+	#
+	#     var reviter = [10,20,30,40,50].reverse_iterator_from(2)
+	#     assert reviter.to_a == [30,20,10]
+	fun reverse_iterator_from(pos: Int): IndexedIterator[E]
+	do
+		var res = reverse_iterator
+		while pos > 0 and res.is_ok do
+			res.next
+			pos -= 1
+		end
 		return res
 	end
 end
