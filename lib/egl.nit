@@ -164,7 +164,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	end
 
 	private fun query_string(name: Int): String import NativeString.to_s `{
-		return (void*)(long)NativeString_to_s(eglQueryString(recv, name));
+		return NativeString_to_s((char *)eglQueryString(recv, name));
 	`}
 
 	fun vendor: String do return query_string("3053".to_hex)
@@ -208,9 +208,81 @@ class EGLConfigAttribs
 	var display: EGLDisplay
 	var config: EGLConfig
 
+	fun buffer_size: Int do return display.config_attrib(config, "3020".to_hex)
 	fun alpha_size: Int do return display.config_attrib(config, "3021".to_hex)
+	fun blue_size: Int do return display.config_attrib(config, "3022".to_hex)
+	fun green_size: Int do return display.config_attrib(config, "3023".to_hex)
+	fun red_size: Int do return display.config_attrib(config, "3024".to_hex)
+	fun depth_size: Int do return display.config_attrib(config, "3025".to_hex)
+	fun stencil_size: Int do return display.config_attrib(config, "3026".to_hex)
+
 	fun native_visual_id: Int do return display.config_attrib(config, "302E".to_hex)
 	fun native_visual_type: Int do return display.config_attrib(config, "302F".to_hex)
+
+	fun caveat: EGLConfigCaveat do
+		return new EGLConfigCaveat.from_i(display.config_attrib(config, "3027".to_hex))
+	end
+
+	fun conformant: EGLConformant do
+		return new EGLConformant.from_i(display.config_attrib(config, "3042".to_hex))
+	end
+end
+
+extern class EGLConfigCaveat `{ EGLint `}
+	new from_i(val: Int) `{ return (EGLint)val; `}
+	fun to_i: Int `{ return recv; `}
+
+	new none `{ return EGL_NONE; `}
+	fun is_none: Bool `{ return recv == EGL_NONE; `}
+
+	new dont_care `{ return EGL_DONT_CARE; `}
+	fun is_dont_care: Bool `{ return recv == EGL_DONT_CARE; `}
+
+	new slow `{ return EGL_SLOW_CONFIG; `}
+	fun is_slow: Bool `{ return recv == EGL_SLOW_CONFIG; `}
+
+	# Obselete since EGL 1.3, use EGL_CONFORMANT instead
+	new non_conformant `{ return EGL_NON_CONFORMANT_CONFIG; `}
+	fun is_non_conformant: Bool `{ return recv == EGL_NON_CONFORMANT_CONFIG; `}
+
+	redef fun to_s
+	do
+		if is_none then return "EGL_NONE"
+		if is_dont_care then return "EGL_DONT_CARE"
+		if is_slow then return "EGL_SLOW_CONFIG"
+		if is_non_conformant then return "EGL_NON_CONFORMANT"
+		return "Unknown or invalid value"
+	end
+end
+
+extern class EGLConformant `{ EGLint `}
+	new `{ return (EGLint)0; `}
+	new from_i(val: Int) `{ return (EGLint)val; `}
+	fun to_i: Int `{ return recv; `}
+
+	fun opengl: Bool `{ return recv & EGL_OPENGL_BIT; `}
+	fun with_opengl: EGLConformant `{ return recv | EGL_OPENGL_BIT; `}
+
+	fun opengl_es: Bool `{ return recv & EGL_OPENGL_ES_BIT; `}
+	fun with_opengl_es: EGLConformant `{ return recv | EGL_OPENGL_ES_BIT; `}
+
+	fun opengl_es2: Bool `{ return recv & EGL_OPENGL_ES2_BIT; `}
+	fun with_opengl_es2: EGLConformant `{ return recv | EGL_OPENGL_ES2_BIT; `}
+
+	fun openvg: Bool `{ return recv & EGL_OPENVG_BIT; `}
+	fun with_openvg: EGLConformant `{ return recv | EGL_OPENVG_BIT; `}
+
+	fun to_a: Array[String]
+	do
+		var features = new Array[String]
+		if opengl then features.add("OpenGL")
+		if opengl_es then features.add("OpenGL ES")
+		if opengl_es2 then features.add("OpenGL ES2")
+		if openvg then features.add("OpenVG")
+		return features
+	end
+
+	redef fun to_s do return to_a.join(", ")
 end
 
 # Attributes of a surface for a given EGL display
@@ -344,10 +416,15 @@ class EGLConfigChooser
 	fun green_size=(size: Int) do insert_attrib_with_val("3023".to_hex, size)
 	fun red_size=(size: Int) do insert_attrib_with_val("3024".to_hex, size)
 
+	fun buffer_size=(size: Int) do insert_attrib_with_val("3020".to_hex, size)
 	fun alpha_size=(size: Int) do insert_attrib_with_val("3021".to_hex, size)
 	fun depth_size=(size: Int) do insert_attrib_with_val("3025".to_hex, size)
 	fun stencil_size=(size: Int) do insert_attrib_with_val("3026".to_hex, size)
 	fun sample_buffers=(size: Int) do insert_attrib_with_val("3031".to_hex, size)
+
+	fun caveat=(caveat: EGLConfigCaveat) do insert_attrib_with_val("3050".to_hex, caveat.to_i)
+
+	fun conformant=(conformant: EGLConformant) do insert_attrib_with_val("3042".to_hex, conformant.to_i)
 
 	fun choose(display: EGLDisplay): nullable Array[EGLConfig]
 	do
