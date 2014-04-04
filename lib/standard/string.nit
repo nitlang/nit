@@ -680,12 +680,14 @@ class FlatString
 	redef fun reversed
 	do
 		var native = calloc_string(self.length + 1)
-		var reviter = chars.reverse_iterator
+		var length = self.length
+		var items = self.items
 		var pos = 0
-		while reviter.is_ok do
-			native[pos] = reviter.item
+		var ipos = length-1
+		while pos < length do
+			native[pos] = items[ipos]
 			pos += 1
-			reviter.next
+			ipos -= 1
 		end
 		return native.to_s_with_length(self.length)
 	end
