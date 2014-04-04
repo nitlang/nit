@@ -20,7 +20,7 @@ module sdl is
 	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_ttf")
 end
 
-import mnit
+import mnit_display
 
 in "C header" `{
 	#include <unistd.h>
