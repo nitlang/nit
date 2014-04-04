@@ -32,16 +32,13 @@ abstract class Text
 
 	redef type OTHER: Text
 
-	# Type of the view on self (.chars)
-	type SELFVIEW: StringCharView
-
 	# Type of self (used for factorization of several methods, ex : substring_from, empty...)
 	type SELFTYPE: Text
 
 	# Gets a view on the chars of the Text object
 	#
 	#     assert "hello".chars.to_a == ['h', 'e', 'l', 'l', 'o']
-	fun chars: SELFVIEW is abstract
+	fun chars: SequenceRead[Char] is abstract
 
 	# Number of characters contained in self.
 	#
@@ -574,7 +571,7 @@ end
 
 # Abstract class for the SequenceRead compatible
 # views on String and Buffer objects
-abstract class StringCharView
+private abstract class StringCharView
 	super SequenceRead[Char]
 
 	type SELFTYPE: Text
@@ -597,7 +594,7 @@ end
 
 # View on Buffer objects, extends Sequence
 # for mutation operations
-abstract class BufferCharView
+private abstract class BufferCharView
 	super StringCharView
 	super Sequence[Char]
 
@@ -627,7 +624,7 @@ class FlatString
 	# Indes in _items of the last item of the string
 	private var index_to: Int
 
-	redef var chars: SELFVIEW = new FlatStringCharView(self)
+	redef var chars: SequenceRead[Char] = new FlatStringCharView(self)
 
 	################################################
 	#       AbstractString specific methods        #
@@ -960,7 +957,6 @@ end
 abstract class Buffer
 	super Text
 
-	redef type SELFVIEW: BufferCharView
 	redef type SELFTYPE: Buffer
 
 	# Specific implementations MUST set this to `true` in order to invalidate caches
@@ -1002,6 +998,9 @@ abstract class Buffer
 		return super
 	end
 
+	# In Buffers, the internal sequence of character is mutable
+	# Thus, `chars` can be used to modify the buffer.
+	redef fun chars: Sequence[Char] is abstract
 end
 
 # Mutable strings of characters.
@@ -1011,7 +1010,7 @@ class FlatBuffer
 
 	redef type SELFTYPE: FlatBuffer
 
-	redef var chars: SELFVIEW = new FlatBufferCharView(self)
+	redef var chars: Sequence[Char] = new FlatBufferCharView(self)
 
 	private var capacity: Int
 
