@@ -38,12 +38,15 @@ abstract class Text
 	# Type of self (used for factorization of several methods, ex : substring_from, empty...)
 	type SELFTYPE: Text
 
-	var hash_cache: nullable Int = null
-
 	# Gets a view on the chars of the Text object
+	#
+	#     assert "hello".chars.to_a == ['h', 'e', 'l', 'l', 'o']
 	fun chars: SELFVIEW is abstract
 
 	# Number of characters contained in self.
+	#
+	#     assert "12345".length == 5
+	#     assert "".length == 0
 	fun length: Int is abstract
 
 	# Create a substring.
@@ -59,18 +62,29 @@ abstract class Text
 	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
 	# Concatenates `o` to `self`
+	#
+	#     assert "hello" + "world"  == "helloworld"
+	#     assert "" + "hello" + ""  == "hello"
 	fun +(o: Text): SELFTYPE is abstract
 
 	# Auto-concatenates self `i` times
+	#
+	#     assert "abc" * 4 == "abcabcabcabc"
+	#     assert "abc" * 1 == "abc"
+	#     assert "abc" * 0 == ""
 	fun *(i: Int): SELFTYPE is abstract
 
 	# Is the current Text empty (== "")
-	#	assert "".is_empty
-	#	assert not "foo".is_empty
+	#
+	#     assert "".is_empty
+	#     assert not "foo".is_empty
 	fun is_empty: Bool do return self.length == 0
 
 	# Returns an empty Text of the right type
-	fun empty: SELFTYPE is abstract
+	#
+	# This method is used internally to get the right
+	# implementation of an empty string.
+	protected fun empty: SELFTYPE is abstract
 
 	# Gets the first char of the Text
 	#
@@ -127,9 +141,10 @@ abstract class Text
 	fun to_cstring: NativeString do return flatten.to_cstring
 
 	# The index of the last occurrence of an element starting from pos (in reverse order).
-	# Example :
-	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', length-1) == 13
-	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', 12) == 8
+	#
+	#     var s = "/etc/bin/test/test.nit"
+	#     assert s.last_index_of_from('/', s.length-1) == 13
+	#     assert s.last_index_of_from('/', 12)         == 8
 	#
 	# Returns -1 if not found
 	#
@@ -180,6 +195,10 @@ abstract class Text
 	end
 
 	# Returns a reversed version of self
+	#
+	#     assert "hello".reversed  == "olleh"
+	#     assert "bob".reversed    == "bob"
+	#     assert "".reversed       == ""
 	fun reversed: SELFTYPE is abstract
 
 	# Does self have a substring `str` starting from position `pos`?
@@ -234,6 +253,8 @@ abstract class Text
 	end
 
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
+	#
+	#     assert "ff".to_hex == 255
 	fun to_hex: Int do return a_to(16)
 
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
@@ -301,6 +322,10 @@ abstract class Text
 	fun to_lower : SELFTYPE is abstract
 
 	# Removes the whitespaces at the beginning of self
+	#
+	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
+	#
+	# A whitespace is defined as any character which ascii value is less than or equal to 32
 	fun l_trim: SELFTYPE
 	do
 		var iter = self.chars.iterator
@@ -313,6 +338,10 @@ abstract class Text
 	end
 
 	# Removes the whitespaces at the end of self
+	#
+	#     assert " \n\thello \n\t".r_trim == " \n\thello"
+	#
+	# A whitespace is defined as any character which ascii value is less than or equal to 32
 	fun r_trim: SELFTYPE
 	do
 		var iter = self.chars.reverse_iterator
@@ -405,14 +434,13 @@ abstract class Text
 		return b.to_s
 	end
 
-	# Escape to c plus braces
+	# Escape to C plus braces
 	#
 	#     assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
 	fun escape_to_nit: String do return escape_more_to_c("\{\}")
 
 	# Return a string where Nit escape sequences are transformed.
 	#
-	# Example:
 	#     var s = "\\n"
 	#     assert s.length        ==  2
 	#     var u = s.unescape_nit
@@ -447,6 +475,22 @@ abstract class Text
 		return res.to_s
 	end
 
+	# Equality of text
+	# Two pieces of text are equals if thez have the same characters in the same order.
+	#
+	#     assert "hello" == "hello"
+	#     assert "hello" != "HELLO"
+	#     assert "hello" == "hel"+"lo"
+	#
+	# Things that are not Text are not equal.
+	#
+	#     assert "9" != '9'
+	#     assert "9" != ['9']
+	#     assert "9" != 9
+	#
+	#     assert "9".chars.first == '9'   # equality of Char
+	#     assert "9".chars       == ['9'] # equality of Sequence
+	#     assert "9".to_i        == 9     # equality of Int
 	redef fun ==(o)
 	do
 		if o == null then return false
@@ -456,6 +500,10 @@ abstract class Text
 		return self.chars == o.chars
 	end
 
+	# Lexicographical comparaison
+	#
+	#     assert "abc" < "xy"
+	#     assert "ABC" < "abc"
 	redef fun <(o)
 	do
 		return self.chars < o.chars
@@ -463,6 +511,8 @@ abstract class Text
 
 	# Flat representation of self
 	fun flatten: FlatText is abstract
+
+	private var hash_cache: nullable Int = null
 
 	redef fun hash
 	do
@@ -533,38 +583,20 @@ abstract class StringCharView
 
 	# Gets a new Iterator starting at position `pos`
 	#
-	# Ex :
-	#	var iter = "abcd".iterator_from(2)
-	#	while iter.is_ok do
-	#		printn iter.item
-	#		iter.next
-	#	end
-	#
-	# Outputs : cd
+	#     var iter = "abcd".chars.iterator_from(2)
+	#     assert iter.to_a == ['c', 'd']
 	fun iterator_from(pos: Int): IndexedIterator[Char] is abstract
 
 	# Gets an iterator starting at the end and going backwards
 	#
-	# Ex :
-	#	var reviter = "now step live...".reverse_iterator
-	#	while reviter.is_ok do
-	#		printn reviter.item
-	#		reviter.next
-	#	end
-	#
-	# Outputs : ...evil pets won
+	#     var reviter = "hello".chars.reverse_iterator
+	#     assert reviter.to_a == ['o', 'l', 'l', 'e', 'h']
 	fun reverse_iterator: IndexedIterator[Char] do return self.reverse_iterator_from(self.length - 1)
 
 	# Gets an iterator on the chars of self starting from `pos`
 	#
-	# Ex :
-	#	var iter = "abcd".reverse_iterator_from(1)
-	#	while iter.is_ok do
-	#		printn iter.item
-	#		iter.next
-	#	end
-	#
-	# Outputs : ba
+	#     var reviter = "hello".chars.reverse_iterator_from(2)
+	#     assert reviter.to_a == ['l', 'e', 'h']
 	fun reverse_iterator_from(pos: Int): IndexedIterator[Char] is abstract
 
 	redef fun has(c: Char): Bool
@@ -751,7 +783,6 @@ class FlatString
 		index_to = to
 	end
 
-	# Return a null terminated char *
 	redef fun to_cstring: NativeString
 	do
 		if real_items != null then return real_items.as(not null)
@@ -792,9 +823,6 @@ class FlatString
 		return true
 	end
 
-	# The comparison between two strings is done on a lexicographical basis
-	#
-	#     assert ("aa" < "b")      ==  true
 	redef fun <(other)
 	do
 		if not other isa FlatString then return super
@@ -831,9 +859,6 @@ class FlatString
 		return my_length < its_length
 	end
 
-	# The concatenation of `self` with `s`
-	#
-	#     assert "hello " + "world!"         == "hello world!"
 	redef fun +(s)
 	do
 		var my_length = self.length
@@ -861,9 +886,6 @@ class FlatString
 		return target_string.to_s_with_length(total_length)
 	end
 
-	#     assert "abc"*3           == "abcabcabc"
-	#     assert "abc"*1           == "abc"
-	#     assert "abc"*0           == ""
 	redef fun *(i)
 	do
 		assert i >= 0
@@ -990,7 +1012,8 @@ abstract class Buffer
 	redef type SELFVIEW: BufferCharView
 	redef type SELFTYPE: Buffer
 
-	var is_dirty = true
+	# Specific implementations MUST set this to `true` in order to invalidate caches
+	protected var is_dirty = true
 
 	# Modifies the char contained at pos `index`
 	#
@@ -1003,12 +1026,23 @@ abstract class Buffer
 	fun add(c: Char) is abstract
 
 	# Clears the buffer
+	#
+	#     var b = new FlatBuffer
+	#     b.append "hello"
+	#     assert not b.is_empty
+	#     b.clear
+	#     assert b.is_empty
 	fun clear is abstract
 
 	# Enlarges the subsequent array containing the chars of self
 	fun enlarge(cap: Int) is abstract
 
 	# Adds the content of text `s` at the end of self
+	#
+	#     var b = new FlatBuffer
+	#     b.append "hello"
+	#     b.append "world"
+	#     assert b == "helloworld"
 	fun append(s: Text) is abstract
 
 	redef fun hash
@@ -1028,7 +1062,7 @@ class FlatBuffer
 
 	redef var chars: SELFVIEW = new FlatBufferCharView(self)
 
-	var capacity: Int
+	private var capacity: Int
 
 	redef fun []=(index, item)
 	do
@@ -1343,7 +1377,7 @@ end
 redef class Int
 	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
-	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
+	private fun fill_buffer(s: Buffer, base: Int, signed: Bool)
 	do
 		var n: Int
 		# Sign
@@ -1377,7 +1411,10 @@ redef class Int
 		return native_int_to_s(len).to_s_with_length(len)
 	end
 
-	# return displayable int in hexadecimal (unsigned (not now))
+	# return displayable int in hexadecimal
+	#
+	#     assert 1.to_hex  == "1"
+	#     assert (-255).to_hex  == "-ff"
 	fun to_hex: String do return to_base(16,false)
 
 	# return displayable int in base base and signed
@@ -1392,6 +1429,11 @@ end
 
 redef class Float
 	# Pretty print self, print needoed decimals up to a max of 3.
+	#
+	#     assert 12.34.to_s        == "12.34"
+	#     assert (-0120.03450).to_s  == "-120.035"
+	#
+	# see `to_precision` for a different precision.
 	redef fun to_s do
 		var str = to_precision( 3 )
 		if is_inf != 0 or is_nan then return str
@@ -1411,6 +1453,11 @@ redef class Float
 	end
 
 	# `self` representation with `nb` digits after the '.'.
+	#
+	#     assert 12.345.to_precision(1) == "12.3"
+	#     assert 12.345.to_precision(2) == "12.35"
+	#     assert 12.345.to_precision(3) == "12.345"
+	#     assert 12.345.to_precision(4) == "12.3450"
 	fun to_precision(nb: Int): String
 	do
 		if is_nan then return "nan"
@@ -1443,6 +1490,12 @@ redef class Float
 		end
 	end
 
+	# `self` representation with `nb` digits after the '.'.
+	#
+	#     assert 12.345.to_precision_native(1) == "12.3"
+	#     assert 12.345.to_precision_native(2) == "12.35"
+	#     assert 12.345.to_precision_native(3) == "12.345"
+	#     assert 12.345.to_precision_native(4) == "12.3450"
 	fun to_precision_native(nb: Int): String import NativeString.to_s `{
 		int size;
 		char *str;
@@ -1465,27 +1518,37 @@ redef class Char
 	end
 
 	# Returns true if the char is a numerical digit
+	#
+	#      assert '0'.is_numeric
+	#      assert '9'.is_numeric
+	#      assert not 'a'.is_numeric
+	#      assert not '?'.is_numeric
 	fun is_numeric: Bool
 	do
-		if self >= '0' and self <= '9'
-		then
-			return true
-		end
-		return false
+		return self >= '0' and self <= '9'
 	end
 
 	# Returns true if the char is an alpha digit
+	#
+	#      assert 'a'.is_alpha
+	#      assert 'Z'.is_alpha
+	#      assert not '0'.is_alpha
+	#      assert not '?'.is_alpha
 	fun is_alpha: Bool
 	do
-		if (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z') then return true
-		return false
+		return (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z')
 	end
 
 	# Returns true if the char is an alpha or a numeric digit
+	#
+	#      assert 'a'.is_alphanumeric
+	#      assert 'Z'.is_alphanumeric
+	#      assert '0'.is_alphanumeric
+	#      assert '9'.is_alphanumeric
+	#      assert not '?'.is_alphanumeric
 	fun is_alphanumeric: Bool
 	do
-		if self.is_numeric or self.is_alpha then return true
-		return false
+		return self.is_numeric or self.is_alpha
 	end
 end
 
