@@ -80,6 +80,12 @@ class CurlHTTPRequest
 	var datas: nullable HeaderMap writable = null
 	var headers: nullable HeaderMap writable = null
 
+	# Set the user agent for all following HTTP requests
+	fun user_agent=(name: String)
+	do
+		curl.prim_curl.easy_setopt(new CURLOption.user_agent, name)
+	end
+
 	init (url: String, curl: nullable Curl)
 	do
 		self.url = url
