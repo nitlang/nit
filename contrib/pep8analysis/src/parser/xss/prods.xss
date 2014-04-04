@@ -1,0 +1,196 @@
+$ // This file is part of NIT ( http://www.nitlanguage.org ).
+$ //
+$ // Copyright 2008 Jean Privat <jean@pryen.org>
+$ // Based on algorithms developped for ( http://www.sablecc.org/ ).
+$ //
+$ // Licensed under the Apache License, Version 2.0 (the "License");
+$ // you may not use this file except in compliance with the License.
+$ // You may obtain a copy of the License at
+$ //
+$ //     http://www.apache.org/licenses/LICENSE-2.0
+$ //
+$ // Unless required by applicable law or agreed to in writing, software
+$ // distributed under the License is distributed on an "AS IS" BASIS,
+$ // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+$ // See the License for the specific language governing permissions and
+$ // limitations under the License.
+
+$ template make_abs_prods()
+$ set baseprod = {//prod/@ename}
+
+$ foreach {//prod}
+class @ename super Prod end
+$ end
+
+$ foreach {//alt}
+class @ename
+	super ${../@ename}
+$ foreach {elem}
+$   if @is_list
+    readable var _n_@name: List[@etype] = new List[@etype]
+$   else
+$   if @modifier
+    readable var _n_@name: nullable @etype = null
+$   else
+    readable var _n_@name: @etype
+$   end
+$   end
+$ end
+end
+$ end
+
+class Start
+	super Prod
+    readable var _n_base: nullable $baseprod
+    readable var _n_eof: EOF
+    init(
+        n_base: nullable $baseprod,
+        n_eof: EOF)
+    do
+        _n_base = n_base
+        _n_eof = n_eof
+    end
+
+end
+$ end template
+
+$ template make_prods()
+$ set baseprod = {//prod/@ename}
+$ foreach {//alt}
+redef class @ename
+    private init empty_init do end
+
+$ if {count(elem)!=0}
+    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
+$ foreach {elem}
+$   if {@is_list}
+            n_@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
+$   else
+            n_@{name}: nullable @etype[-sep ','-]
+$   end
+$ end
+    )
+$ else
+    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
+$ end
+    do
+        empty_init
+$ foreach {elem}
+$   if @is_list
+	for n in n_@{name} do
+		assert n isa @{etype}
+		_n_@{name}.add(n)
+		n.parent = self
+	end
+$   else
+$   if {@modifier}
+        _n_@name = n_@{name}
+	if n_@{name} != null then
+		n_@{name}.parent = self
+	end
+$   else
+        _n_@name = n_@{name}.as(not null)
+	n_@{name}.parent = self
+$   end
+$   end
+$ end
+    end
+
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    do
+$ foreach {elem}
+$   if @is_list
+        for i in [0.._n_@{name}.length[ do
+            if _n_@{name}[i] == old_child then
+                if new_child != null then
+		    assert new_child isa @etype
+                    _n_@{name}[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_@{name}.remove_at(i)
+                end
+                return
+            end
+        end
+$   else
+        if _n_@{name} == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa @etype
+                _n_@{name} = new_child
+	    else
+$   if @modifier
+		_n_@{name} = null
+$   else
+		abort
+$   end
+            end
+            return
+	end
+$   end
+$ end foreach
+    end
+
+$   foreach {elem}
+$     if @is_list
+$     else
+		redef fun n_@{name}=(node)
+		do
+			_n_@{name} = node
+$       if @modifier
+			if node != null then
+				node.parent = self
+			end
+$       else
+			node.parent = self
+$       end
+		end
+$     end
+$   end foreach
+
+
+    redef fun visit_all(v: Visitor)
+    do
+$   foreach {elem}
+$     if @is_list
+            for n in _n_@{name} do
+                v.enter_visit(n)
+	    end
+$     else
+$       if @modifier
+        if _n_@{name} != null then
+            v.enter_visit(_n_@{name}.as(not null))
+        end
+$       else
+        v.enter_visit(_n_@{name})
+$       end
+$     end
+$   end foreach
+    end
+end
+$ end foreach
+
+redef class Start
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    do
+        if _n_base == old_child then
+            if new_child == null then
+            else
+                new_child.parent = self
+		assert new_child isa $baseprod
+                _n_base = new_child
+            end
+            old_child.parent = null
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        if _n_base != null then
+            v.enter_visit(_n_base.as(not null))
+        end
+	v.enter_visit(_n_eof)
+    end
+end
+$ end template

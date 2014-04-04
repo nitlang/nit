@@ -1,0 +1,127 @@
+/*
+ * This file is part of the pep8analyser project.
+ *
+ * Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
+ *
+ * Inspired from the Nit language grammar by:
+ * Copyright 2008-2009 Jean Privat <jean@pryen.org>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* This grammar defines the Pep/8 language. */
+
+/*****************************************************************************/
+Helpers
+/*****************************************************************************/
+
+all = [0 .. 0xFF];
+lowercase = ['a' .. 'z'];
+uppercase = ['A' .. 'Z'];
+digit = ['0' .. '9'];
+letter = lowercase | uppercase | digit | '_';
+
+tab = 9;
+cr = 13;
+lf = 10;
+any = [all - [cr + lf]];
+
+str_char
+	= [[any - '"'] + '\']
+	| '\' any;
+
+eol_helper = cr lf | cr | lf; // This takes care of different platforms;
+
+hex_digit = ['0' .. '9'] | ['A' .. 'F'] | ['a' .. 'f'];
+
+/*****************************************************************************/
+States
+/*****************************************************************************/
+initial;
+
+/*****************************************************************************/
+Tokens
+/*****************************************************************************/
+
+blank = (' ' | tab)+;
+
+eol = eol_helper;
+
+number = '-'? digit+;
+float = digit* '.' digit+;
+char = (''' [[any - '''] - '\'] ''')
+	| (''' '\' any ''')
+	| (''' '\' 'x' hex_digit hex_digit ''');
+string = '"' str_char* '"';
+hex = '0' ('x'|'X') hex_digit+;
+
+colon = ':';
+comma = ',';
+comment = ';' any*;
+
+tk_byte = '.' ('B'|'b') ('Y'|'y') ('T'|'t') ('E'|'e');
+tk_word = '.' ('W'|'w') ('O'|'o') ('R'|'r') ('D'|'d');
+tk_block = '.' ('B'|'b') ('L'|'l') ('O'|'o') ('C'|'c') ('K'|'k');
+tk_ascii = '.' ('A'|'a') ('S'|'s') ('C'|'c') ('I'|'i') ('I'|'i');
+tk_addrss = '.' ('A'|'a') ('D'|'d') ('D'|'d') ('R'|'r') ('S'|'s') ('S'|'s');
+tk_equate = '.' ('E'|'e') ('Q'|'q') ('U'|'u') ('A'|'a') ('T'|'t') ('E'|'e');
+tk_burn = '.' ('B'|'b') ('U'|'u') ('R'|'r') ('N'|'n');
+
+end_block = '.' ('E'|'e') ('N'|'n') ('D'|'d') (any | eol_helper)*;
+
+id = letter+;
+
+/*****************************************************************************/
+Ignored Tokens
+/*****************************************************************************/
+
+blank;
+
+/*****************************************************************************/
+Productions
+/*****************************************************************************/
+listing = [lines]:line* label_decl? end_block;
+
+line
+	= {empty} label_decl? comment? eol
+	| {instruction} label_decl? instruction comment? eol
+	| {directive} label_decl? directive comment? eol;
+
+label_decl = id colon;
+
+instruction
+	= {unary} id
+	| {binary} id operand;
+
+/* operands
+ * We will manage which operands are possible with each stmt at a higher level.
+ * This will allow better error messages and a cleaner model. */
+operand
+	= {immediate} value
+	| {any} value comma id;
+
+value
+	= {label} id
+	| {number} number
+	| {char} char
+	| {string} string
+	| {hex} hex;
+directive
+	= {byte} tk_byte value
+	| {word} tk_word value
+	| {block} tk_block value
+	| {ascii} tk_ascii value
+	| {addrss} tk_addrss value
+	| {equate} tk_equate value
+	| {burn} tk_burn value;
+
