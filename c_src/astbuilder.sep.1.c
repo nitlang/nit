@@ -152,7 +152,7 @@ var_args = p2;
 var1 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]))(var_mmethod) /* intro on <var_mmethod:MMethod>*/;
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MMethodDef__msignature]))(var1) /* msignature on <var1:MPropDef(MMethodDef)>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 47);
 show_backtrace(1);
 } else {
@@ -291,7 +291,7 @@ var4 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__anchor])
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__mmodule]))(self) /* mmodule on <self:ASTBuilder>*/;
 var6 = 1;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 73);
 show_backtrace(1);
 } else {

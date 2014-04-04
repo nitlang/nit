@@ -5,6 +5,10 @@
 int glob_argc;
 char **glob_argv;
 val *glob_sys;
+void sig_handler(int signo){
+printf("Caught signal : %s\n", strsignal(signo));
+show_backtrace(signo);
+}
 void show_backtrace (int signo) {
 char* opt = getenv("NIT_NO_STACK");
 unw_cursor_t cursor;
@@ -28,12 +32,12 @@ exit(signo);
 }
 int main(int argc, char** argv) {
 val* var /* : Sys */;
-signal(SIGABRT, show_backtrace);
-signal(SIGFPE, show_backtrace);
-signal(SIGILL, show_backtrace);
-signal(SIGINT, show_backtrace);
-signal(SIGTERM, show_backtrace);
-signal(SIGSEGV, show_backtrace);
+signal(SIGABRT, sig_handler);
+signal(SIGFPE, sig_handler);
+signal(SIGILL, sig_handler);
+signal(SIGINT, sig_handler);
+signal(SIGTERM, sig_handler);
+signal(SIGSEGV, sig_handler);
 glob_argc = argc; glob_argv = argv;
 initialize_gc_option();
 var = NEW_kernel__Sys(&type_kernel__Sys);

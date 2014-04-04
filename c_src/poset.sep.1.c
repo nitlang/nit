@@ -1578,6 +1578,131 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method poset#POSetElement#depth for (self: POSetElement[Object]): Int */
+long poset__POSetElement__depth(val* self) {
+long var /* : Int */;
+val* var1 /* : Collection[Object] */;
+short int var2 /* : Bool */;
+long var3 /* : Int */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+long var7 /* : Int */;
+long var_min /* var min: Int */;
+val* var8 /* : Collection[Object] */;
+val* var9 /* : Iterator[nullable Object] */;
+short int var10 /* : Bool */;
+val* var11 /* : nullable Object */;
+val* var_p /* var p: Object */;
+val* var12 /* : POSet[Object] */;
+val* var13 /* : POSetElement[Object] */;
+long var14 /* : Int */;
+long var15 /* : Int */;
+long var16 /* : Int */;
+long var18 /* : Int */;
+long var_d /* var d: Int */;
+short int var19 /* : Bool */;
+long var20 /* : Int */;
+long var21 /* : Int */;
+long var23 /* : Int */;
+short int var24 /* : Bool */;
+short int var26 /* : Bool */;
+short int var_ /* var : Bool */;
+short int var27 /* : Bool */;
+short int var29 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+short int var30 /* : Bool */;
+var1 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSetElement__direct_greaters]))(self) /* direct_greaters on <self:POSetElement[Object]>*/;
+var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var1) /* is_empty on <var1:Collection[Object]>*/;
+if (var2){
+var3 = 0;
+var = var3;
+goto RET_LABEL;
+} else {
+}
+var4 = 1;
+{ /* Inline kernel#Int#unary - (var4) */
+var7 = -var4;
+var5 = var7;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
+}
+var_min = var5;
+var8 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSetElement__direct_greaters]))(self) /* direct_greaters on <self:POSetElement[Object]>*/;
+var9 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Collection__iterator]))(var8) /* iterator on <var8:Collection[Object]>*/;
+for(;;) {
+var10 = ((short int (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var9) /* is_ok on <var9:Iterator[nullable Object]>*/;
+if(!var10) break;
+var11 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__item]))(var9) /* item on <var9:Iterator[nullable Object]>*/;
+var_p = var11;
+var12 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSetElement__poset]))(self) /* poset on <self:POSetElement[Object]>*/;
+var13 = ((val* (*)(val*, val*))(var12->class->vft[COLOR_poset__POSet___91d_93d]))(var12, var_p) /* [] on <var12:POSet[Object]>*/;
+var14 = ((long (*)(val*))(var13->class->vft[COLOR_poset__POSetElement__depth]))(var13) /* depth on <var13:POSetElement[Object]>*/;
+var15 = 1;
+{ /* Inline kernel#Int#+ (var14,var15) */
+var18 = var14 + var15;
+var16 = var18;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
+}
+var_d = var16;
+var20 = 1;
+{ /* Inline kernel#Int#unary - (var20) */
+var23 = -var20;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
+}
+{ /* Inline kernel#Int#== (var_min,var21) */
+var26 = var_min == var21;
+var24 = var26;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
+}
+var_ = var24;
+if (var24){
+var19 = var_;
+} else {
+{ /* Inline kernel#Int#< (var_d,var_min) */
+/* Covariant cast for argument 0 (i) <var_min:Int> isa OTHER */
+/* <var_min:Int> isa OTHER */
+var29 = 1; /* easy <var_min:Int> isa OTHER*/
+if (!var29) {
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+show_backtrace(1);
+}
+var30 = var_d < var_min;
+var27 = var30;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
+}
+var19 = var27;
+}
+if (var19){
+var_min = var_d;
+} else {
+}
+CONTINUE_label: (void)0;
+((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__next]))(var9) /* next on <var9:Iterator[nullable Object]>*/;
+}
+BREAK_label: (void)0;
+var = var_min;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method poset#POSetElement#depth for (self: Object): Int */
+long VIRTUAL_poset__POSetElement__depth(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+var1 = poset__POSetElement__depth(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method poset#POSetElement#init for (self: POSetElement[Object], POSet[Object], Object, Int) */
 void poset__POSetElement__init(val* self, val* p0, val* p1, long p2) {
 short int var /* : Bool */;

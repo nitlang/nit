@@ -607,7 +607,7 @@ show_backtrace(1);
 }
 var32 = ((val* (*)(val*))(var28->class->vft[COLOR_flow__AExpr__after_flow_context]))(var28) /* after_flow_context on <var28:nullable ANode(AExpr)>*/;
 if (var32 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 89);
 show_backtrace(1);
 } else {
@@ -660,7 +660,7 @@ varonce53 = var54;
 }
 var58 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var_f) /* node on <var_f:FlowContext>*/;
 if (var58 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
 show_backtrace(1);
 } else {
@@ -677,7 +677,7 @@ varonce60 = var61;
 }
 var65 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var_f) /* node on <var_f:FlowContext>*/;
 if (var65 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
 show_backtrace(1);
 } else {

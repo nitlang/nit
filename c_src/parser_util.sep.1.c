@@ -809,7 +809,7 @@ var23 = !var22;
 if (var23){
 var24 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:nullable Object(Start)>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
 show_backtrace(1);
 } else {
@@ -869,7 +869,7 @@ show_backtrace(1);
 }
 var43 = ((val* (*)(val*))(var38->class->vft[COLOR_parser_nodes__AVardeclExpr__n_type]))(var38) /* n_type on <var38:AExpr(AVardeclExpr)>*/;
 if (var43 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
 show_backtrace(1);
 } else {
@@ -970,7 +970,7 @@ var78 = !var75;
 if (var78){
 var79 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:nullable Object(Start)>*/;
 if (var79 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
 show_backtrace(1);
 } else {
@@ -1089,7 +1089,7 @@ var119 = !var116;
 if (var119){
 var120 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:nullable Object(Start)>*/;
 if (var120 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
 show_backtrace(1);
 } else {

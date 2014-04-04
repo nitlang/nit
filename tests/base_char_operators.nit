@@ -14,8 +14,8 @@
 
 import kernel
 
-('a'+1).output
-('a'-1).output
+('a'.successor(1)).output
+('a'.predecessor(1)).output
 ('a'<'b').output
 ('a'>'b').output
 ('a'<='b').output

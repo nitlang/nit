@@ -42,7 +42,7 @@ var3 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27255);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27257);
 show_backtrace(1);
 }
 var_pexprsnode3 = var_nodearraylist2;
@@ -60,7 +60,7 @@ var4 = var_pexprsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27257);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27259);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ABraExpr(&type_parser_nodes__ABraExpr);
@@ -148,7 +148,7 @@ var8 = var_tkwnewnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27279);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27281);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -166,7 +166,7 @@ var9 = var_ptypenode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27281);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27283);
 show_backtrace(1);
 }
 var_tidnode4 = var_nodearraylist6;
@@ -184,7 +184,7 @@ var12 = var_tidnode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27283);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27285);
 show_backtrace(1);
 }
 var_pexprsnode5 = var_nodearraylist7;
@@ -202,7 +202,7 @@ var15 = var_pexprsnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27285);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27287);
 show_backtrace(1);
 }
 var18 = NEW_parser_nodes__ANewExpr(&type_parser_nodes__ANewExpr);
@@ -294,7 +294,7 @@ var9 = var_tkwnewnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27310);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27312);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -312,7 +312,7 @@ var10 = var_ptypenode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27312);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27314);
 show_backtrace(1);
 }
 var_tidnode4 = var_nodearraylist7;
@@ -330,7 +330,7 @@ var13 = var_tidnode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27314);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27316);
 show_backtrace(1);
 }
 var_pexprsnode5 = var_nodearraylist8;
@@ -348,7 +348,7 @@ var16 = var_pexprsnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27316);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27318);
 show_backtrace(1);
 }
 var19 = NEW_parser_nodes__ANewExpr(&type_parser_nodes__ANewExpr);
@@ -444,7 +444,7 @@ var10 = var_tkwnewnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27342);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27344);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -462,7 +462,7 @@ var11 = var_ptypenode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27344);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27346);
 show_backtrace(1);
 }
 var_tidnode4 = var_nodearraylist8;
@@ -480,7 +480,7 @@ var14 = var_tidnode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27346);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27348);
 show_backtrace(1);
 }
 var_pexprsnode5 = var_nodearraylist9;
@@ -498,7 +498,7 @@ var17 = var_pexprsnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27348);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27350);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__ANewExpr(&type_parser_nodes__ANewExpr);
@@ -595,7 +595,7 @@ var10 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27374);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27376);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -613,7 +613,7 @@ var11 = var_pexprnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27376);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27378);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist7;
@@ -631,7 +631,7 @@ var14 = var_pexprnode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27378);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27380);
 show_backtrace(1);
 }
 var_tcbranode5 = var_nodearraylist9;
@@ -649,7 +649,7 @@ var17 = var_tcbranode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27380);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27382);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__ACrangeExpr(&type_parser_nodes__ACrangeExpr);
@@ -754,7 +754,7 @@ var11 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27408);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27410);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -772,7 +772,7 @@ var12 = var_pexprnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27410);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27412);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist7;
@@ -790,7 +790,7 @@ var15 = var_pexprnode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27412);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27414);
 show_backtrace(1);
 }
 var_tcbranode5 = var_nodearraylist9;
@@ -808,7 +808,7 @@ var18 = var_tcbranode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27414);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27416);
 show_backtrace(1);
 }
 var_pannotationsnode6 = var_nodearraylist10;
@@ -826,7 +826,7 @@ var21 = var_pannotationsnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27416);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27418);
 show_backtrace(1);
 }
 var24 = NEW_parser_nodes__ACrangeExpr(&type_parser_nodes__ACrangeExpr);
@@ -923,7 +923,7 @@ var10 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27443);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27445);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -941,7 +941,7 @@ var11 = var_pexprnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27445);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27447);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist7;
@@ -959,7 +959,7 @@ var14 = var_pexprnode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27447);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27449);
 show_backtrace(1);
 }
 var_tobranode5 = var_nodearraylist9;
@@ -977,7 +977,7 @@ var17 = var_tobranode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27449);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27451);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__AOrangeExpr(&type_parser_nodes__AOrangeExpr);
@@ -1082,7 +1082,7 @@ var11 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27477);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27479);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -1100,7 +1100,7 @@ var12 = var_pexprnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27479);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27481);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist7;
@@ -1118,7 +1118,7 @@ var15 = var_pexprnode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27481);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27483);
 show_backtrace(1);
 }
 var_tobranode5 = var_nodearraylist9;
@@ -1136,7 +1136,7 @@ var18 = var_tobranode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27483);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27485);
 show_backtrace(1);
 }
 var_pannotationsnode6 = var_nodearraylist10;
@@ -1154,7 +1154,7 @@ var21 = var_pannotationsnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27485);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27487);
 show_backtrace(1);
 }
 var24 = NEW_parser_nodes__AOrangeExpr(&type_parser_nodes__AOrangeExpr);
@@ -1207,7 +1207,7 @@ var2 = var_pexprsnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27504);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27506);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AArrayExpr(&type_parser_nodes__AArrayExpr);
@@ -1268,7 +1268,7 @@ var3 = var_pexprsnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27521);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27523);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1286,7 +1286,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27523);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27525);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AArrayExpr(&type_parser_nodes__AArrayExpr);
@@ -1339,7 +1339,7 @@ var2 = var_tkwselfnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27539);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27541);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ASelfExpr(&type_parser_nodes__ASelfExpr);
@@ -1400,7 +1400,7 @@ var3 = var_tkwselfnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27556);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27558);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1418,7 +1418,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27558);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27560);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ASelfExpr(&type_parser_nodes__ASelfExpr);
@@ -1471,7 +1471,7 @@ var2 = var_tkwtruenode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27574);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27576);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ATrueExpr(&type_parser_nodes__ATrueExpr);
@@ -1532,7 +1532,7 @@ var3 = var_tkwtruenode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27591);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27593);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1550,7 +1550,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27593);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27595);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ATrueExpr(&type_parser_nodes__ATrueExpr);
@@ -1603,7 +1603,7 @@ var2 = var_tkwfalsenode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27609);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27611);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AFalseExpr(&type_parser_nodes__AFalseExpr);
@@ -1664,7 +1664,7 @@ var3 = var_tkwfalsenode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27626);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27628);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1682,7 +1682,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27628);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27630);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AFalseExpr(&type_parser_nodes__AFalseExpr);
@@ -1735,7 +1735,7 @@ var2 = var_tkwnullnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27644);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27646);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ANullExpr(&type_parser_nodes__ANullExpr);
@@ -1796,7 +1796,7 @@ var3 = var_tkwnullnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27661);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27663);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1814,7 +1814,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27663);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27665);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ANullExpr(&type_parser_nodes__ANullExpr);
@@ -1867,7 +1867,7 @@ var2 = var_tnumbernode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27679);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27681);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AIntExpr(&type_parser_nodes__AIntExpr);
@@ -1928,7 +1928,7 @@ var3 = var_tnumbernode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27696);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27698);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -1946,7 +1946,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27698);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27700);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AIntExpr(&type_parser_nodes__AIntExpr);
@@ -1999,7 +1999,7 @@ var2 = var_tfloatnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27714);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27716);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AFloatExpr(&type_parser_nodes__AFloatExpr);
@@ -2060,7 +2060,7 @@ var3 = var_tfloatnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27731);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27733);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -2078,7 +2078,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27733);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27735);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AFloatExpr(&type_parser_nodes__AFloatExpr);
@@ -2131,7 +2131,7 @@ var2 = var_tcharnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27749);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27751);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ACharExpr(&type_parser_nodes__ACharExpr);
@@ -2192,7 +2192,7 @@ var3 = var_tcharnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27766);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27768);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -2210,7 +2210,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27768);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27770);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ACharExpr(&type_parser_nodes__ACharExpr);
@@ -2263,7 +2263,7 @@ var2 = var_tstringnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27784);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27786);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AStringExpr(&type_parser_nodes__AStringExpr);
@@ -2324,7 +2324,7 @@ var3 = var_tstringnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27801);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27803);
 show_backtrace(1);
 }
 var_pannotationsnode3 = var_nodearraylist2;
@@ -2342,7 +2342,7 @@ var4 = var_pannotationsnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27803);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27805);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AStringExpr(&type_parser_nodes__AStringExpr);
@@ -2419,7 +2419,7 @@ var6 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27823);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27825);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -2437,7 +2437,7 @@ var7 = var_pexprnode3->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27825);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27827);
 show_backtrace(1);
 }
 var_tcparnode4 = var_nodearraylist5;
@@ -2455,7 +2455,7 @@ var10 = var_tcparnode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27827);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27829);
 show_backtrace(1);
 }
 var13 = NEW_parser_nodes__AParExpr(&type_parser_nodes__AParExpr);
@@ -2540,7 +2540,7 @@ var7 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27850);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27852);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist3;
@@ -2558,7 +2558,7 @@ var8 = var_pexprnode3->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27852);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27854);
 show_backtrace(1);
 }
 var_tcparnode4 = var_nodearraylist5;
@@ -2576,7 +2576,7 @@ var11 = var_tcparnode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27854);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27856);
 show_backtrace(1);
 }
 var_pannotationsnode5 = var_nodearraylist6;
@@ -2594,7 +2594,7 @@ var14 = var_pannotationsnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27856);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27858);
 show_backtrace(1);
 }
 var17 = NEW_parser_nodes__AParExpr(&type_parser_nodes__AParExpr);
@@ -2698,7 +2698,7 @@ var11 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27883);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27885);
 show_backtrace(1);
 }
 var_tkwasnode3 = var_nodearraylist4;
@@ -2716,7 +2716,7 @@ var12 = var_tkwasnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27885);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27887);
 show_backtrace(1);
 }
 var_toparnode4 = var_nodearraylist6;
@@ -2734,7 +2734,7 @@ var15 = var_toparnode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27887);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27889);
 show_backtrace(1);
 }
 var_ptypenode5 = var_nodearraylist8;
@@ -2752,7 +2752,7 @@ var18 = var_ptypenode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27889);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27891);
 show_backtrace(1);
 }
 var_tcparnode6 = var_nodearraylist10;
@@ -2770,7 +2770,7 @@ var21 = var_tcparnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27891);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27893);
 show_backtrace(1);
 }
 var24 = NEW_parser_nodes__AAsCastExpr(&type_parser_nodes__AAsCastExpr);
@@ -2886,7 +2886,7 @@ var13 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27921);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27923);
 show_backtrace(1);
 }
 var_tkwasnode3 = var_nodearraylist4;
@@ -2904,7 +2904,7 @@ var14 = var_tkwasnode3->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27923);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27925);
 show_backtrace(1);
 }
 var_toparnode4 = var_nodearraylist6;
@@ -2922,7 +2922,7 @@ var17 = var_toparnode4->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27925);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27927);
 show_backtrace(1);
 }
 var_tkwnotnode5 = var_nodearraylist8;
@@ -2940,7 +2940,7 @@ var20 = var_tkwnotnode5->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27927);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27929);
 show_backtrace(1);
 }
 var_tkwnullnode6 = var_nodearraylist10;
@@ -2958,7 +2958,7 @@ var23 = var_tkwnullnode6->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27929);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27931);
 show_backtrace(1);
 }
 var_tcparnode7 = var_nodearraylist12;
@@ -2976,7 +2976,7 @@ var26 = var_tcparnode7->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27931);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27933);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AAsNotnullExpr(&type_parser_nodes__AAsNotnullExpr);
@@ -3045,7 +3045,7 @@ var4 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27953);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27955);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist2;
@@ -3063,7 +3063,7 @@ var5 = var_pexprnode3->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27955);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27957);
 show_backtrace(1);
 }
 var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode2) /* concat on <self:ReduceAction807>*/;
@@ -3154,7 +3154,7 @@ var5 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27978);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27980);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -3172,7 +3172,7 @@ var6 = var_listnode3->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27980);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27982);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist3;
@@ -3190,7 +3190,7 @@ var9 = var_pexprnode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27982);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 27984);
 show_backtrace(1);
 }
 var12 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode2) /* concat on <self:ReduceAction808>*/;
@@ -3281,7 +3281,7 @@ var5 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28006);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28008);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist2;
@@ -3299,7 +3299,7 @@ var6 = var_pexprnode3->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28008);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28010);
 show_backtrace(1);
 }
 var9 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode2) /* concat on <self:ReduceAction809>*/;
@@ -3329,7 +3329,7 @@ var12 = var_pannotationsnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28014);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28016);
 show_backtrace(1);
 }
 var15 = NEW_parser_nodes__ASuperstringExpr(&type_parser_nodes__ASuperstringExpr);
@@ -3414,7 +3414,7 @@ var6 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28034);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28036);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -3432,7 +3432,7 @@ var7 = var_listnode3->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28036);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28038);
 show_backtrace(1);
 }
 var_pexprnode4 = var_nodearraylist3;
@@ -3450,7 +3450,7 @@ var10 = var_pexprnode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28038);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28040);
 show_backtrace(1);
 }
 var13 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode2) /* concat on <self:ReduceAction810>*/;
@@ -3482,7 +3482,7 @@ var17 = var_pannotationsnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28045);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28047);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__ASuperstringExpr(&type_parser_nodes__ASuperstringExpr);
@@ -3575,6 +3575,54 @@ val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var3 /* : Array[Object] */;
+val* var_listnode2 /* var listnode2: Array[Object] */;
+val* var_pexprnode1 /* var pexprnode1: nullable Object */;
+val* var4 /* : null */;
+short int var5 /* : Bool */;
+long var6 /* : Int */;
+long var7 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
+var_nodearraylist2 = var1;
+var2 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
+var_nodearraylist1 = var2;
+var3 = NEW_array__Array(&type_array__Arraykernel__Object);
+((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[Object]>*/;
+var_listnode2 = var3;
+var_pexprnode1 = var_nodearraylist1;
+var4 = NULL;
+if (var_pexprnode1 == NULL) {
+var5 = 0; /* is null */
+} else {
+var5 = 1; /* arg is null and recv is not */
+}
+if (var5){
+((void (*)(val*, val*))(var_listnode2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_listnode2, var_pexprnode1) /* add on <var_listnode2:Array[Object]>*/;
+} else {
+}
+var_node_list = var_listnode2;
+var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction812> */
+var7 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var6) /* go_to on <var_p:Parser>*/;
+((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var7, var_node_list) /* push on <var_p:Parser>*/;
+RET_LABEL:;
+}
+/* method parser#ReduceAction812#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction812__action(val* self, val* p0) {
+parser__ReduceAction812__action(self, p0);
+RET_LABEL:;
+}
+/* method parser#ReduceAction813#action for (self: ReduceAction813, Parser) */
+void parser__ReduceAction813__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
 val* var_tstartstringnode2 /* var tstartstringnode2: nullable Object */;
 short int var2 /* : Bool */;
@@ -3604,25 +3652,25 @@ var2 = var_tstartstringnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28083);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28101);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AStartStringExpr(&type_parser_nodes__AStartStringExpr);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AStartStringExpr__init_astartstringexpr]))(var3, var_tstartstringnode2) /* init_astartstringexpr on <var3:AStartStringExpr>*/;
 var_pexprnode1 = var3;
 var_node_list = var_pexprnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction812> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction813> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction812#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction812__action(val* self, val* p0) {
-parser__ReduceAction812__action(self, p0);
+/* method parser#ReduceAction813#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction813__action(val* self, val* p0) {
+parser__ReduceAction813__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction814#action for (self: ReduceAction814, Parser) */
-void parser__ReduceAction814__action(val* self, val* p0) {
+/* method parser#ReduceAction816#action for (self: ReduceAction816, Parser) */
+void parser__ReduceAction816__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3656,25 +3704,25 @@ var2 = var_tmidstringnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28098);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28116);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AMidStringExpr(&type_parser_nodes__AMidStringExpr);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AMidStringExpr__init_amidstringexpr]))(var3, var_tmidstringnode2) /* init_amidstringexpr on <var3:AMidStringExpr>*/;
 var_pexprnode1 = var3;
 var_node_list = var_pexprnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction814> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction816> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction814#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction814__action(val* self, val* p0) {
-parser__ReduceAction814__action(self, p0);
+/* method parser#ReduceAction816#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction816__action(val* self, val* p0) {
+parser__ReduceAction816__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction815#action for (self: ReduceAction815, Parser) */
-void parser__ReduceAction815__action(val* self, val* p0) {
+/* method parser#ReduceAction817#action for (self: ReduceAction817, Parser) */
+void parser__ReduceAction817__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3708,25 +3756,25 @@ var2 = var_tendstringnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28113);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28131);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AEndStringExpr(&type_parser_nodes__AEndStringExpr);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AEndStringExpr__init_aendstringexpr]))(var3, var_tendstringnode2) /* init_aendstringexpr on <var3:AEndStringExpr>*/;
 var_pexprnode1 = var3;
 var_node_list = var_pexprnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction815> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction817> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction815#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction815__action(val* self, val* p0) {
-parser__ReduceAction815__action(self, p0);
+/* method parser#ReduceAction817#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction817__action(val* self, val* p0) {
+parser__ReduceAction817__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction816#action for (self: ReduceAction816, Parser) */
-void parser__ReduceAction816__action(val* self, val* p0) {
+/* method parser#ReduceAction818#action for (self: ReduceAction818, Parser) */
+void parser__ReduceAction818__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3777,7 +3825,7 @@ var4 = var_tatnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28130);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28148);
 show_backtrace(1);
 }
 var_pannotationnode4 = var_nodearraylist2;
@@ -3795,7 +3843,7 @@ var5 = var_pannotationnode4->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28132);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28150);
 show_backtrace(1);
 }
 var8 = NULL;
@@ -3814,18 +3862,18 @@ var12 = NULL;
 ((void (*)(val*, val*, val*, val*, val*))(var10->class->vft[COLOR_parser_prod__AAnnotations__init_aannotations]))(var10, var_tatnode2, var11, var_listnode5, var12) /* init_aannotations on <var10:AAnnotations>*/;
 var_pannotationsnode1 = var10;
 var_node_list = var_pannotationsnode1;
-var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction816> */
+var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction818> */
 var14 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var13) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var14, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction816#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction816__action(val* self, val* p0) {
-parser__ReduceAction816__action(self, p0);
+/* method parser#ReduceAction818#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction818__action(val* self, val* p0) {
+parser__ReduceAction818__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction817#action for (self: ReduceAction817, Parser) */
-void parser__ReduceAction817__action(val* self, val* p0) {
+/* method parser#ReduceAction819#action for (self: ReduceAction819, Parser) */
+void parser__ReduceAction819__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3897,7 +3945,7 @@ var8 = var_tatnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28159);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28177);
 show_backtrace(1);
 }
 var_toparnode3 = var_nodearraylist2;
@@ -3915,7 +3963,7 @@ var9 = var_toparnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28161);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28179);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist4;
@@ -3933,10 +3981,10 @@ var12 = var_listnode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28163);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28181);
 show_backtrace(1);
 }
-var15 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction817>*/;
+var15 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction819>*/;
 var_listnode5 = var15;
 var_tcparnode6 = var_nodearraylist6;
 /* <var_tcparnode6:nullable Object> isa nullable TCpar */
@@ -3953,25 +4001,25 @@ var16 = var_tcparnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28166);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28184);
 show_backtrace(1);
 }
 var19 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
 ((void (*)(val*, val*, val*, val*, val*))(var19->class->vft[COLOR_parser_prod__AAnnotations__init_aannotations]))(var19, var_tatnode2, var_toparnode3, var_listnode5, var_tcparnode6) /* init_aannotations on <var19:AAnnotations>*/;
 var_pannotationsnode1 = var19;
 var_node_list = var_pannotationsnode1;
-var20 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction817> */
+var20 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction819> */
 var21 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var20) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var21, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction817#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction817__action(val* self, val* p0) {
-parser__ReduceAction817__action(self, p0);
+/* method parser#ReduceAction819#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction819__action(val* self, val* p0) {
+parser__ReduceAction819__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction818#action for (self: ReduceAction818, Parser) */
-void parser__ReduceAction818__action(val* self, val* p0) {
+/* method parser#ReduceAction820#action for (self: ReduceAction820, Parser) */
+void parser__ReduceAction820__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4013,7 +4061,7 @@ var3 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28185);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28203);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4023,18 +4071,18 @@ var7 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var4->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var4, var_patidnode2, var5, var_listnode4, var6, var7) /* init_aannotation on <var4:AAnnotation>*/;
 var_pannotationnode1 = var4;
 var_node_list = var_pannotationnode1;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction818> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction820> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction818#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction818__action(val* self, val* p0) {
-parser__ReduceAction818__action(self, p0);
+/* method parser#ReduceAction820#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction820__action(val* self, val* p0) {
+parser__ReduceAction820__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction819#action for (self: ReduceAction819, Parser) */
-void parser__ReduceAction819__action(val* self, val* p0) {
+/* method parser#ReduceAction821#action for (self: ReduceAction821, Parser) */
+void parser__ReduceAction821__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4083,7 +4131,7 @@ var4 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28206);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28224);
 show_backtrace(1);
 }
 var_pannotationsnode6 = var_nodearraylist2;
@@ -4101,7 +4149,7 @@ var5 = var_pannotationsnode6->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28208);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28226);
 show_backtrace(1);
 }
 var8 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4110,18 +4158,18 @@ var10 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var8->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var8, var_patidnode2, var9, var_listnode4, var10, var_pannotationsnode6) /* init_aannotation on <var8:AAnnotation>*/;
 var_pannotationnode1 = var8;
 var_node_list = var_pannotationnode1;
-var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction819> */
+var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction821> */
 var12 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var11) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var12, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction819#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction819__action(val* self, val* p0) {
-parser__ReduceAction819__action(self, p0);
+/* method parser#ReduceAction821#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction821__action(val* self, val* p0) {
+parser__ReduceAction821__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction820#action for (self: ReduceAction820, Parser) */
-void parser__ReduceAction820__action(val* self, val* p0) {
+/* method parser#ReduceAction822#action for (self: ReduceAction822, Parser) */
+void parser__ReduceAction822__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4194,7 +4242,7 @@ var8 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28233);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28251);
 show_backtrace(1);
 }
 var_toparnode3 = var_nodearraylist2;
@@ -4212,7 +4260,7 @@ var9 = var_toparnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28235);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28253);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist4;
@@ -4230,10 +4278,10 @@ var12 = var_listnode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28237);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28255);
 show_backtrace(1);
 }
-var15 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction820>*/;
+var15 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction822>*/;
 var_listnode5 = var15;
 var_tcparnode6 = var_nodearraylist6;
 /* <var_tcparnode6:nullable Object> isa nullable TCpar */
@@ -4250,7 +4298,7 @@ var16 = var_tcparnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28240);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28258);
 show_backtrace(1);
 }
 var19 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4258,18 +4306,18 @@ var20 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var19->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var19, var_patidnode2, var_toparnode3, var_listnode5, var_tcparnode6, var20) /* init_aannotation on <var19:AAnnotation>*/;
 var_pannotationnode1 = var19;
 var_node_list = var_pannotationnode1;
-var21 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction820> */
+var21 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction822> */
 var22 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var21) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var22, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction820#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction820__action(val* self, val* p0) {
-parser__ReduceAction820__action(self, p0);
+/* method parser#ReduceAction822#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction822__action(val* self, val* p0) {
+parser__ReduceAction822__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction821#action for (self: ReduceAction821, Parser) */
-void parser__ReduceAction821__action(val* self, val* p0) {
+/* method parser#ReduceAction823#action for (self: ReduceAction823, Parser) */
+void parser__ReduceAction823__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4349,7 +4397,7 @@ var9 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28266);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28284);
 show_backtrace(1);
 }
 var_toparnode3 = var_nodearraylist2;
@@ -4367,7 +4415,7 @@ var10 = var_toparnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28268);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28286);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist4;
@@ -4385,10 +4433,10 @@ var13 = var_listnode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28270);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28288);
 show_backtrace(1);
 }
-var16 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction821>*/;
+var16 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction823>*/;
 var_listnode5 = var16;
 var_tcparnode6 = var_nodearraylist6;
 /* <var_tcparnode6:nullable Object> isa nullable TCpar */
@@ -4405,7 +4453,7 @@ var17 = var_tcparnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28273);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28291);
 show_backtrace(1);
 }
 var_pannotationsnode7 = var_nodearraylist7;
@@ -4423,25 +4471,25 @@ var20 = var_pannotationsnode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28275);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28293);
 show_backtrace(1);
 }
 var23 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
 ((void (*)(val*, val*, val*, val*, val*, val*))(var23->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var23, var_patidnode2, var_toparnode3, var_listnode5, var_tcparnode6, var_pannotationsnode7) /* init_aannotation on <var23:AAnnotation>*/;
 var_pannotationnode1 = var23;
 var_node_list = var_pannotationnode1;
-var24 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction821> */
+var24 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction823> */
 var25 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var24) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var25, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction821#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction821__action(val* self, val* p0) {
-parser__ReduceAction821__action(self, p0);
+/* method parser#ReduceAction823#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction823__action(val* self, val* p0) {
+parser__ReduceAction823__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction822#action for (self: ReduceAction822, Parser) */
-void parser__ReduceAction822__action(val* self, val* p0) {
+/* method parser#ReduceAction824#action for (self: ReduceAction824, Parser) */
+void parser__ReduceAction824__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4484,10 +4532,10 @@ var3 = var_listnode4->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28295);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28313);
 show_backtrace(1);
 }
-var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction822>*/;
+var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction824>*/;
 var_listnode5 = var4;
 var5 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
 var6 = NULL;
@@ -4496,18 +4544,18 @@ var8 = NULL;
 ((void (*)(val*, val*, val*, val*, val*))(var5->class->vft[COLOR_parser_prod__AAnnotations__init_aannotations]))(var5, var6, var7, var_listnode5, var8) /* init_aannotations on <var5:AAnnotations>*/;
 var_pannotationsnode1 = var5;
 var_node_list = var_pannotationsnode1;
-var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction822> */
+var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction824> */
 var10 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var9) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var10, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction822#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction822__action(val* self, val* p0) {
-parser__ReduceAction822__action(self, p0);
+/* method parser#ReduceAction824#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction824__action(val* self, val* p0) {
+parser__ReduceAction824__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction823#action for (self: ReduceAction823, Parser) */
-void parser__ReduceAction823__action(val* self, val* p0) {
+/* method parser#ReduceAction825#action for (self: ReduceAction825, Parser) */
+void parser__ReduceAction825__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4540,18 +4588,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction823> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction825> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction823#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction823__action(val* self, val* p0) {
-parser__ReduceAction823__action(self, p0);
+/* method parser#ReduceAction825#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction825__action(val* self, val* p0) {
+parser__ReduceAction825__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction824#action for (self: ReduceAction824, Parser) */
-void parser__ReduceAction824__action(val* self, val* p0) {
+/* method parser#ReduceAction826#action for (self: ReduceAction826, Parser) */
+void parser__ReduceAction826__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4597,7 +4645,7 @@ var4 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28332);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28350);
 show_backtrace(1);
 }
 var5 = NULL;
@@ -4610,21 +4658,21 @@ if (var6){
 ((void (*)(val*, val*))(var_listnode3->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_listnode3, var_pannotationnode1) /* add on <var_listnode3:Array[Object]>*/;
 } else {
 }
-var7 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction824>*/;
+var7 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction826>*/;
 var_listnode3 = var7;
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction824> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction826> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction824#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction824__action(val* self, val* p0) {
-parser__ReduceAction824__action(self, p0);
+/* method parser#ReduceAction826#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction826__action(val* self, val* p0) {
+parser__ReduceAction826__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction826#action for (self: ReduceAction826, Parser) */
-void parser__ReduceAction826__action(val* self, val* p0) {
+/* method parser#ReduceAction828#action for (self: ReduceAction828, Parser) */
+void parser__ReduceAction828__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4674,7 +4722,7 @@ var5 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28351);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28369);
 show_backtrace(1);
 }
 var6 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4684,18 +4732,18 @@ var9 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var6->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var6, var_patidnode2, var7, var_listnode4, var8, var9) /* init_aannotation on <var6:AAnnotation>*/;
 var_pannotationnode1 = var6;
 var_node_list = var_pannotationnode1;
-var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction826> */
+var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction828> */
 var11 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var10) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var11, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction826#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction826__action(val* self, val* p0) {
-parser__ReduceAction826__action(self, p0);
+/* method parser#ReduceAction828#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction828__action(val* self, val* p0) {
+parser__ReduceAction828__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction827#action for (self: ReduceAction827, Parser) */
-void parser__ReduceAction827__action(val* self, val* p0) {
+/* method parser#ReduceAction829#action for (self: ReduceAction829, Parser) */
+void parser__ReduceAction829__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4752,7 +4800,7 @@ var6 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28374);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28392);
 show_backtrace(1);
 }
 var_pannotationsnode6 = var_nodearraylist3;
@@ -4770,7 +4818,7 @@ var7 = var_pannotationsnode6->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28376);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28394);
 show_backtrace(1);
 }
 var10 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4779,18 +4827,18 @@ var12 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var10->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var10, var_patidnode2, var11, var_listnode4, var12, var_pannotationsnode6) /* init_aannotation on <var10:AAnnotation>*/;
 var_pannotationnode1 = var10;
 var_node_list = var_pannotationnode1;
-var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction827> */
+var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction829> */
 var14 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var13) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var14, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction827#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction827__action(val* self, val* p0) {
-parser__ReduceAction827__action(self, p0);
+/* method parser#ReduceAction829#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction829__action(val* self, val* p0) {
+parser__ReduceAction829__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction828#action for (self: ReduceAction828, Parser) */
-void parser__ReduceAction828__action(val* self, val* p0) {
+/* method parser#ReduceAction830#action for (self: ReduceAction830, Parser) */
+void parser__ReduceAction830__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4867,7 +4915,7 @@ var9 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28402);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28420);
 show_backtrace(1);
 }
 var_toparnode3 = var_nodearraylist3;
@@ -4885,7 +4933,7 @@ var10 = var_toparnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28404);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28422);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist5;
@@ -4903,10 +4951,10 @@ var13 = var_listnode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28406);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28424);
 show_backtrace(1);
 }
-var16 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction828>*/;
+var16 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction830>*/;
 var_listnode5 = var16;
 var_tcparnode6 = var_nodearraylist6;
 /* <var_tcparnode6:nullable Object> isa nullable TCpar */
@@ -4923,7 +4971,7 @@ var17 = var_tcparnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28409);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28427);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
@@ -4931,18 +4979,18 @@ var21 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var20->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var20, var_patidnode2, var_toparnode3, var_listnode5, var_tcparnode6, var21) /* init_aannotation on <var20:AAnnotation>*/;
 var_pannotationnode1 = var20;
 var_node_list = var_pannotationnode1;
-var22 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction828> */
+var22 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction830> */
 var23 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var22) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var23, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction828#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction828__action(val* self, val* p0) {
-parser__ReduceAction828__action(self, p0);
+/* method parser#ReduceAction830#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction830__action(val* self, val* p0) {
+parser__ReduceAction830__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction829#action for (self: ReduceAction829, Parser) */
-void parser__ReduceAction829__action(val* self, val* p0) {
+/* method parser#ReduceAction831#action for (self: ReduceAction831, Parser) */
+void parser__ReduceAction831__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5026,7 +5074,7 @@ var10 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28436);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28454);
 show_backtrace(1);
 }
 var_toparnode3 = var_nodearraylist3;
@@ -5044,7 +5092,7 @@ var11 = var_toparnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28438);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28456);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist5;
@@ -5062,10 +5110,10 @@ var14 = var_listnode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28440);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28458);
 show_backtrace(1);
 }
-var17 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction829>*/;
+var17 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction831>*/;
 var_listnode5 = var17;
 var_tcparnode6 = var_nodearraylist6;
 /* <var_tcparnode6:nullable Object> isa nullable TCpar */
@@ -5082,7 +5130,7 @@ var18 = var_tcparnode6->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28443);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28461);
 show_backtrace(1);
 }
 var_pannotationsnode7 = var_nodearraylist7;
@@ -5100,25 +5148,25 @@ var21 = var_pannotationsnode7->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28445);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28463);
 show_backtrace(1);
 }
 var24 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
 ((void (*)(val*, val*, val*, val*, val*, val*))(var24->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var24, var_patidnode2, var_toparnode3, var_listnode5, var_tcparnode6, var_pannotationsnode7) /* init_aannotation on <var24:AAnnotation>*/;
 var_pannotationnode1 = var24;
 var_node_list = var_pannotationnode1;
-var25 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction829> */
+var25 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction831> */
 var26 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var25) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var26, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction829#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction829__action(val* self, val* p0) {
-parser__ReduceAction829__action(self, p0);
+/* method parser#ReduceAction831#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction831__action(val* self, val* p0) {
+parser__ReduceAction831__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction830#action for (self: ReduceAction830, Parser) */
-void parser__ReduceAction830__action(val* self, val* p0) {
+/* method parser#ReduceAction832#action for (self: ReduceAction832, Parser) */
+void parser__ReduceAction832__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5177,7 +5225,7 @@ var6 = var_patidnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28468);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28486);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist3;
@@ -5195,10 +5243,10 @@ var7 = var_listnode4->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28470);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28488);
 show_backtrace(1);
 }
-var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction830>*/;
+var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode5, var_listnode4) /* concat on <self:ReduceAction832>*/;
 var_listnode5 = var10;
 var11 = NEW_parser_nodes__AAnnotation(&type_parser_nodes__AAnnotation);
 var12 = NULL;
@@ -5207,18 +5255,18 @@ var14 = NULL;
 ((void (*)(val*, val*, val*, val*, val*, val*))(var11->class->vft[COLOR_parser_prod__AAnnotation__init_aannotation]))(var11, var_patidnode2, var12, var_listnode5, var13, var14) /* init_aannotation on <var11:AAnnotation>*/;
 var_pannotationnode1 = var11;
 var_node_list = var_pannotationnode1;
-var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction830> */
+var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction832> */
 var16 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var15) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var16, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction830#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction830__action(val* self, val* p0) {
-parser__ReduceAction830__action(self, p0);
+/* method parser#ReduceAction832#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction832__action(val* self, val* p0) {
+parser__ReduceAction832__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction831#action for (self: ReduceAction831, Parser) */
-void parser__ReduceAction831__action(val* self, val* p0) {
+/* method parser#ReduceAction833#action for (self: ReduceAction833, Parser) */
+void parser__ReduceAction833__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5242,18 +5290,18 @@ var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var3;
 var_pannotationnode1 = var_nodearraylist3;
 var_node_list = var_pannotationnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction831> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction833> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction831#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction831__action(val* self, val* p0) {
-parser__ReduceAction831__action(self, p0);
+/* method parser#ReduceAction833#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction833__action(val* self, val* p0) {
+parser__ReduceAction833__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction832#action for (self: ReduceAction832, Parser) */
-void parser__ReduceAction832__action(val* self, val* p0) {
+/* method parser#ReduceAction834#action for (self: ReduceAction834, Parser) */
+void parser__ReduceAction834__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5286,18 +5334,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction832> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction834> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction832#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction832__action(val* self, val* p0) {
-parser__ReduceAction832__action(self, p0);
+/* method parser#ReduceAction834#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction834__action(val* self, val* p0) {
+parser__ReduceAction834__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction833#action for (self: ReduceAction833, Parser) */
-void parser__ReduceAction833__action(val* self, val* p0) {
+/* method parser#ReduceAction835#action for (self: ReduceAction835, Parser) */
+void parser__ReduceAction835__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5343,7 +5391,7 @@ var4 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28521);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28539);
 show_backtrace(1);
 }
 var5 = NULL;
@@ -5356,21 +5404,21 @@ if (var6){
 ((void (*)(val*, val*))(var_listnode3->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_listnode3, var_patargnode1) /* add on <var_listnode3:Array[Object]>*/;
 } else {
 }
-var7 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction833>*/;
+var7 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction835>*/;
 var_listnode3 = var7;
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction833> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction835> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction833#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction833__action(val* self, val* p0) {
-parser__ReduceAction833__action(self, p0);
+/* method parser#ReduceAction835#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction835__action(val* self, val* p0) {
+parser__ReduceAction835__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction834#action for (self: ReduceAction834, Parser) */
-void parser__ReduceAction834__action(val* self, val* p0) {
+/* method parser#ReduceAction836#action for (self: ReduceAction836, Parser) */
+void parser__ReduceAction836__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5394,18 +5442,18 @@ var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var3;
 var_patargnode1 = var_nodearraylist3;
 var_node_list = var_patargnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction834> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction836> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction834#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction834__action(val* self, val* p0) {
-parser__ReduceAction834__action(self, p0);
+/* method parser#ReduceAction836#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction836__action(val* self, val* p0) {
+parser__ReduceAction836__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction835#action for (self: ReduceAction835, Parser) */
-void parser__ReduceAction835__action(val* self, val* p0) {
+/* method parser#ReduceAction837#action for (self: ReduceAction837, Parser) */
+void parser__ReduceAction837__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5439,25 +5487,25 @@ var2 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28550);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28568);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ATypeAtArg(&type_parser_nodes__ATypeAtArg);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__ATypeAtArg__init_atypeatarg]))(var3, var_ptypenode2) /* init_atypeatarg on <var3:ATypeAtArg>*/;
 var_patargnode1 = var3;
 var_node_list = var_patargnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction835> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction837> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction835#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction835__action(val* self, val* p0) {
-parser__ReduceAction835__action(self, p0);
+/* method parser#ReduceAction837#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction837__action(val* self, val* p0) {
+parser__ReduceAction837__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction836#action for (self: ReduceAction836, Parser) */
-void parser__ReduceAction836__action(val* self, val* p0) {
+/* method parser#ReduceAction838#action for (self: ReduceAction838, Parser) */
+void parser__ReduceAction838__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5491,25 +5539,25 @@ var2 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28565);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28583);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AExprAtArg(&type_parser_nodes__AExprAtArg);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AExprAtArg__init_aexpratarg]))(var3, var_pexprnode2) /* init_aexpratarg on <var3:AExprAtArg>*/;
 var_patargnode1 = var3;
 var_node_list = var_patargnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction836> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction838> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction836#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction836__action(val* self, val* p0) {
-parser__ReduceAction836__action(self, p0);
+/* method parser#ReduceAction838#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction838__action(val* self, val* p0) {
+parser__ReduceAction838__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction838#action for (self: ReduceAction838, Parser) */
-void parser__ReduceAction838__action(val* self, val* p0) {
+/* method parser#ReduceAction840#action for (self: ReduceAction840, Parser) */
+void parser__ReduceAction840__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5543,25 +5591,25 @@ var2 = var_pannotationsnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28580);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28598);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AAtAtArg(&type_parser_nodes__AAtAtArg);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AAtAtArg__init_aatatarg]))(var3, var_pannotationsnode2) /* init_aatatarg on <var3:AAtAtArg>*/;
 var_patargnode1 = var3;
 var_node_list = var_patargnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction838> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction840> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction838#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction838__action(val* self, val* p0) {
-parser__ReduceAction838__action(self, p0);
+/* method parser#ReduceAction840#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction840__action(val* self, val* p0) {
+parser__ReduceAction840__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction839#action for (self: ReduceAction839, Parser) */
-void parser__ReduceAction839__action(val* self, val* p0) {
+/* method parser#ReduceAction841#action for (self: ReduceAction841, Parser) */
+void parser__ReduceAction841__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5595,25 +5643,25 @@ var2 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28595);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28613);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AIdAtid(&type_parser_nodes__AIdAtid);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AIdAtid__init_aidatid]))(var3, var_tidnode2) /* init_aidatid on <var3:AIdAtid>*/;
 var_patidnode1 = var3;
 var_node_list = var_patidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction839> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction841> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction839#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction839__action(val* self, val* p0) {
-parser__ReduceAction839__action(self, p0);
+/* method parser#ReduceAction841#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction841__action(val* self, val* p0) {
+parser__ReduceAction841__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction840#action for (self: ReduceAction840, Parser) */
-void parser__ReduceAction840__action(val* self, val* p0) {
+/* method parser#ReduceAction842#action for (self: ReduceAction842, Parser) */
+void parser__ReduceAction842__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5647,25 +5695,25 @@ var2 = var_tkwreadablenode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28610);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28628);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AKwreadableAtid(&type_parser_nodes__AKwreadableAtid);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AKwreadableAtid__init_akwreadableatid]))(var3, var_tkwreadablenode2) /* init_akwreadableatid on <var3:AKwreadableAtid>*/;
 var_patidnode1 = var3;
 var_node_list = var_patidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction840> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction842> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction840#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction840__action(val* self, val* p0) {
-parser__ReduceAction840__action(self, p0);
+/* method parser#ReduceAction842#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction842__action(val* self, val* p0) {
+parser__ReduceAction842__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction841#action for (self: ReduceAction841, Parser) */
-void parser__ReduceAction841__action(val* self, val* p0) {
+/* method parser#ReduceAction843#action for (self: ReduceAction843, Parser) */
+void parser__ReduceAction843__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5699,25 +5747,25 @@ var2 = var_tkwwritablenode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28625);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28643);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AKwwritableAtid(&type_parser_nodes__AKwwritableAtid);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AKwwritableAtid__init_akwwritableatid]))(var3, var_tkwwritablenode2) /* init_akwwritableatid on <var3:AKwwritableAtid>*/;
 var_patidnode1 = var3;
 var_node_list = var_patidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction841> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction843> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction841#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction841__action(val* self, val* p0) {
-parser__ReduceAction841__action(self, p0);
+/* method parser#ReduceAction843#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction843__action(val* self, val* p0) {
+parser__ReduceAction843__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction842#action for (self: ReduceAction842, Parser) */
-void parser__ReduceAction842__action(val* self, val* p0) {
+/* method parser#ReduceAction844#action for (self: ReduceAction844, Parser) */
+void parser__ReduceAction844__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5751,25 +5799,25 @@ var2 = var_tkwimportnode2->type->type_table[cltype] == idtype;
 }
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28640);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28658);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AKwimportAtid(&type_parser_nodes__AKwimportAtid);
 ((void (*)(val*, val*))(var3->class->vft[COLOR_parser_prod__AKwimportAtid__init_akwimportatid]))(var3, var_tkwimportnode2) /* init_akwimportatid on <var3:AKwimportAtid>*/;
 var_patidnode1 = var3;
 var_node_list = var_patidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction842> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction844> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction842#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction842__action(val* self, val* p0) {
-parser__ReduceAction842__action(self, p0);
+/* method parser#ReduceAction844#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction844__action(val* self, val* p0) {
+parser__ReduceAction844__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction843#action for (self: ReduceAction843, Parser) */
-void parser__ReduceAction843__action(val* self, val* p0) {
+/* method parser#ReduceAction845#action for (self: ReduceAction845, Parser) */
+void parser__ReduceAction845__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5829,7 +5877,7 @@ var6 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28659);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28677);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist3;
@@ -5847,10 +5895,10 @@ var7 = var_listnode3->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28661);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28679);
 show_backtrace(1);
 }
-var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction843>*/;
+var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction845>*/;
 var_listnode4 = var10;
 var_tcparnode5 = var_nodearraylist4;
 /* <var_tcparnode5:nullable Object> isa nullable TCpar */
@@ -5867,25 +5915,25 @@ var11 = var_tcparnode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28664);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28682);
 show_backtrace(1);
 }
 var14 = NEW_parser_nodes__AParExprs(&type_parser_nodes__AParExprs);
 ((void (*)(val*, val*, val*, val*))(var14->class->vft[COLOR_parser_prod__AParExprs__init_aparexprs]))(var14, var_toparnode2, var_listnode4, var_tcparnode5) /* init_aparexprs on <var14:AParExprs>*/;
 var_pexprsnode1 = var14;
 var_node_list = var_pexprsnode1;
-var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction843> */
+var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction845> */
 var16 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var15) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var16, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction843#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction843__action(val* self, val* p0) {
-parser__ReduceAction843__action(self, p0);
+/* method parser#ReduceAction845#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction845__action(val* self, val* p0) {
+parser__ReduceAction845__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction844#action for (self: ReduceAction844, Parser) */
-void parser__ReduceAction844__action(val* self, val* p0) {
+/* method parser#ReduceAction846#action for (self: ReduceAction846, Parser) */
+void parser__ReduceAction846__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5936,7 +5984,7 @@ var5 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28684);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28702);
 show_backtrace(1);
 }
 var_tcparnode4 = var_nodearraylist3;
@@ -5954,25 +6002,25 @@ var6 = var_tcparnode4->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28686);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28704);
 show_backtrace(1);
 }
 var9 = NEW_parser_nodes__AParExprs(&type_parser_nodes__AParExprs);
 ((void (*)(val*, val*, val*, val*))(var9->class->vft[COLOR_parser_prod__AParExprs__init_aparexprs]))(var9, var_toparnode2, var_listnode3, var_tcparnode4) /* init_aparexprs on <var9:AParExprs>*/;
 var_pexprsnode1 = var9;
 var_node_list = var_pexprsnode1;
-var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction844> */
+var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction846> */
 var11 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var10) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var11, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction844#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction844__action(val* self, val* p0) {
-parser__ReduceAction844__action(self, p0);
+/* method parser#ReduceAction846#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction846__action(val* self, val* p0) {
+parser__ReduceAction846__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction845#action for (self: ReduceAction845, Parser) */
-void parser__ReduceAction845__action(val* self, val* p0) {
+/* method parser#ReduceAction847#action for (self: ReduceAction847, Parser) */
+void parser__ReduceAction847__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5992,18 +6040,18 @@ var2 = NEW_parser_nodes__AListExprs(&type_parser_nodes__AListExprs);
 ((void (*)(val*, val*))(var2->class->vft[COLOR_parser_prod__AListExprs__init_alistexprs]))(var2, var_listnode2) /* init_alistexprs on <var2:AListExprs>*/;
 var_pexprsnode1 = var2;
 var_node_list = var_pexprsnode1;
-var3 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction845> */
+var3 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction847> */
 var4 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var3) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var4, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction845#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction845__action(val* self, val* p0) {
-parser__ReduceAction845__action(self, p0);
+/* method parser#ReduceAction847#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction847__action(val* self, val* p0) {
+parser__ReduceAction847__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction847#action for (self: ReduceAction847, Parser) */
-void parser__ReduceAction847__action(val* self, val* p0) {
+/* method parser#ReduceAction849#action for (self: ReduceAction849, Parser) */
+void parser__ReduceAction849__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6044,7 +6092,7 @@ var3 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28717);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28735);
 show_backtrace(1);
 }
 var4 = NULL;
@@ -6061,18 +6109,18 @@ var6 = NEW_parser_nodes__AListExprs(&type_parser_nodes__AListExprs);
 ((void (*)(val*, val*))(var6->class->vft[COLOR_parser_prod__AListExprs__init_alistexprs]))(var6, var_listnode3) /* init_alistexprs on <var6:AListExprs>*/;
 var_pexprsnode1 = var6;
 var_node_list = var_pexprsnode1;
-var7 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction847> */
+var7 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction849> */
 var8 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var7) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var8, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction847#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction847__action(val* self, val* p0) {
-parser__ReduceAction847__action(self, p0);
+/* method parser#ReduceAction849#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction849__action(val* self, val* p0) {
+parser__ReduceAction849__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction850#action for (self: ReduceAction850, Parser) */
-void parser__ReduceAction850__action(val* self, val* p0) {
+/* method parser#ReduceAction852#action for (self: ReduceAction852, Parser) */
+void parser__ReduceAction852__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6132,7 +6180,7 @@ var6 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28739);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28757);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist3;
@@ -6150,10 +6198,10 @@ var7 = var_listnode3->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28741);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28759);
 show_backtrace(1);
 }
-var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction850>*/;
+var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction852>*/;
 var_listnode4 = var10;
 var_tcbranode5 = var_nodearraylist4;
 /* <var_tcbranode5:nullable Object> isa nullable TCbra */
@@ -6170,73 +6218,25 @@ var11 = var_tcbranode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28744);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28762);
 show_backtrace(1);
 }
 var14 = NEW_parser_nodes__ABraExprs(&type_parser_nodes__ABraExprs);
 ((void (*)(val*, val*, val*, val*))(var14->class->vft[COLOR_parser_prod__ABraExprs__init_abraexprs]))(var14, var_tobranode2, var_listnode4, var_tcbranode5) /* init_abraexprs on <var14:ABraExprs>*/;
 var_pexprsnode1 = var14;
 var_node_list = var_pexprsnode1;
-var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction850> */
+var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction852> */
 var16 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var15) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var16, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction850#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction850__action(val* self, val* p0) {
-parser__ReduceAction850__action(self, p0);
+/* method parser#ReduceAction852#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction852__action(val* self, val* p0) {
+parser__ReduceAction852__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction851#action for (self: ReduceAction851, Parser) */
-void parser__ReduceAction851__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var3 /* : Array[Object] */;
-val* var_listnode2 /* var listnode2: Array[Object] */;
-val* var_pexprnode1 /* var pexprnode1: nullable Object */;
-val* var4 /* : null */;
-short int var5 /* : Bool */;
-long var6 /* : Int */;
-long var7 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
-var_nodearraylist2 = var1;
-var2 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
-var_nodearraylist1 = var2;
-var3 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[Object]>*/;
-var_listnode2 = var3;
-var_pexprnode1 = var_nodearraylist1;
-var4 = NULL;
-if (var_pexprnode1 == NULL) {
-var5 = 0; /* is null */
-} else {
-var5 = 1; /* arg is null and recv is not */
-}
-if (var5){
-((void (*)(val*, val*))(var_listnode2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_listnode2, var_pexprnode1) /* add on <var_listnode2:Array[Object]>*/;
-} else {
-}
-var_node_list = var_listnode2;
-var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction851> */
-var7 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var6) /* go_to on <var_p:Parser>*/;
-((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var7, var_node_list) /* push on <var_p:Parser>*/;
-RET_LABEL:;
-}
-/* method parser#ReduceAction851#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction851__action(val* self, val* p0) {
-parser__ReduceAction851__action(self, p0);
-RET_LABEL:;
-}
-/* method parser#ReduceAction852#action for (self: ReduceAction852, Parser) */
-void parser__ReduceAction852__action(val* self, val* p0) {
+/* method parser#ReduceAction854#action for (self: ReduceAction854, Parser) */
+void parser__ReduceAction854__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6286,7 +6286,7 @@ var5 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28781);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28783);
 show_backtrace(1);
 }
 var6 = NULL;
@@ -6299,21 +6299,21 @@ if (var7){
 ((void (*)(val*, val*))(var_listnode3->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_listnode3, var_pexprnode1) /* add on <var_listnode3:Array[Object]>*/;
 } else {
 }
-var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction852>*/;
+var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction854>*/;
 var_listnode3 = var8;
 var_node_list = var_listnode3;
-var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction852> */
+var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction854> */
 var10 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var9) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var10, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction852#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction852__action(val* self, val* p0) {
-parser__ReduceAction852__action(self, p0);
+/* method parser#ReduceAction854#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction854__action(val* self, val* p0) {
+parser__ReduceAction854__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction853#action for (self: ReduceAction853, Parser) */
-void parser__ReduceAction853__action(val* self, val* p0) {
+/* method parser#ReduceAction855#action for (self: ReduceAction855, Parser) */
+void parser__ReduceAction855__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6341,18 +6341,18 @@ var4 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var4;
 var_pexprnode1 = var_nodearraylist3;
 var_node_list = var_pexprnode1;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction853> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction855> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction853#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction853__action(val* self, val* p0) {
-parser__ReduceAction853__action(self, p0);
+/* method parser#ReduceAction855#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction855__action(val* self, val* p0) {
+parser__ReduceAction855__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction854#action for (self: ReduceAction854, Parser) */
-void parser__ReduceAction854__action(val* self, val* p0) {
+/* method parser#ReduceAction856#action for (self: ReduceAction856, Parser) */
+void parser__ReduceAction856__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6385,18 +6385,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction854> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction856> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction854#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction854__action(val* self, val* p0) {
-parser__ReduceAction854__action(self, p0);
+/* method parser#ReduceAction856#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction856__action(val* self, val* p0) {
+parser__ReduceAction856__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction855#action for (self: ReduceAction855, Parser) */
-void parser__ReduceAction855__action(val* self, val* p0) {
+/* method parser#ReduceAction857#action for (self: ReduceAction857, Parser) */
+void parser__ReduceAction857__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6453,11 +6453,11 @@ var7 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28831);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28833);
 show_backtrace(1);
 }
 var_tidnode2 = var_nodearraylist5;
-var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction855>*/;
+var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction857>*/;
 var_listnode3 = var8;
 var9 = NULL;
 if (var_tidnode2 == NULL) {
@@ -6470,18 +6470,18 @@ if (var10){
 } else {
 }
 var_node_list = var_listnode3;
-var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction855> */
+var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction857> */
 var12 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var11) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var12, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction855#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction855__action(val* self, val* p0) {
-parser__ReduceAction855__action(self, p0);
+/* method parser#ReduceAction857#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction857__action(val* self, val* p0) {
+parser__ReduceAction857__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction856#action for (self: ReduceAction856, Parser) */
-void parser__ReduceAction856__action(val* self, val* p0) {
+/* method parser#ReduceAction858#action for (self: ReduceAction858, Parser) */
+void parser__ReduceAction858__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6521,7 +6521,7 @@ var3 = var_tidnode4->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28849);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28851);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__AModuleName(&type_parser_nodes__AModuleName);
@@ -6529,18 +6529,18 @@ var5 = NULL;
 ((void (*)(val*, val*, val*, val*))(var4->class->vft[COLOR_parser_prod__AModuleName__init_amodulename]))(var4, var5, var_listnode3, var_tidnode4) /* init_amodulename on <var4:AModuleName>*/;
 var_pmodulenamenode1 = var4;
 var_node_list = var_pmodulenamenode1;
-var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction856> */
+var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction858> */
 var7 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var6) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var7, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction856#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction856__action(val* self, val* p0) {
-parser__ReduceAction856__action(self, p0);
+/* method parser#ReduceAction858#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction858__action(val* self, val* p0) {
+parser__ReduceAction858__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction857#action for (self: ReduceAction857, Parser) */
-void parser__ReduceAction857__action(val* self, val* p0) {
+/* method parser#ReduceAction859#action for (self: ReduceAction859, Parser) */
+void parser__ReduceAction859__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6589,10 +6589,10 @@ var4 = var_listnode3->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28868);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28870);
 show_backtrace(1);
 }
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction857>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction859>*/;
 var_listnode4 = var5;
 var_tidnode5 = var_nodearraylist2;
 /* <var_tidnode5:nullable Object> isa nullable TId */
@@ -6609,7 +6609,7 @@ var6 = var_tidnode5->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28871);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28873);
 show_backtrace(1);
 }
 var9 = NEW_parser_nodes__AModuleName(&type_parser_nodes__AModuleName);
@@ -6617,18 +6617,18 @@ var10 = NULL;
 ((void (*)(val*, val*, val*, val*))(var9->class->vft[COLOR_parser_prod__AModuleName__init_amodulename]))(var9, var10, var_listnode4, var_tidnode5) /* init_amodulename on <var9:AModuleName>*/;
 var_pmodulenamenode1 = var9;
 var_node_list = var_pmodulenamenode1;
-var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction857> */
+var11 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction859> */
 var12 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var11) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var12, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction857#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction857__action(val* self, val* p0) {
-parser__ReduceAction857__action(self, p0);
+/* method parser#ReduceAction859#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction859__action(val* self, val* p0) {
+parser__ReduceAction859__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction858#action for (self: ReduceAction858, Parser) */
-void parser__ReduceAction858__action(val* self, val* p0) {
+/* method parser#ReduceAction860#action for (self: ReduceAction860, Parser) */
+void parser__ReduceAction860__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6679,7 +6679,7 @@ var5 = var_tquadnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28891);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28893);
 show_backtrace(1);
 }
 var_tidnode4 = var_nodearraylist3;
@@ -6697,25 +6697,25 @@ var6 = var_tidnode4->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28893);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28895);
 show_backtrace(1);
 }
 var9 = NEW_parser_nodes__AModuleName(&type_parser_nodes__AModuleName);
 ((void (*)(val*, val*, val*, val*))(var9->class->vft[COLOR_parser_prod__AModuleName__init_amodulename]))(var9, var_tquadnode2, var_listnode3, var_tidnode4) /* init_amodulename on <var9:AModuleName>*/;
 var_pmodulenamenode1 = var9;
 var_node_list = var_pmodulenamenode1;
-var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction858> */
+var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction860> */
 var11 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var10) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var11, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction858#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction858__action(val* self, val* p0) {
-parser__ReduceAction858__action(self, p0);
+/* method parser#ReduceAction860#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction860__action(val* self, val* p0) {
+parser__ReduceAction860__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction859#action for (self: ReduceAction859, Parser) */
-void parser__ReduceAction859__action(val* self, val* p0) {
+/* method parser#ReduceAction861#action for (self: ReduceAction861, Parser) */
+void parser__ReduceAction861__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6775,7 +6775,7 @@ var6 = var_tquadnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28914);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28916);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist3;
@@ -6793,10 +6793,10 @@ var7 = var_listnode3->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28916);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28918);
 show_backtrace(1);
 }
-var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction859>*/;
+var10 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction861>*/;
 var_listnode4 = var10;
 var_tidnode5 = var_nodearraylist4;
 /* <var_tidnode5:nullable Object> isa nullable TId */
@@ -6813,25 +6813,25 @@ var11 = var_tidnode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28919);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28921);
 show_backtrace(1);
 }
 var14 = NEW_parser_nodes__AModuleName(&type_parser_nodes__AModuleName);
 ((void (*)(val*, val*, val*, val*))(var14->class->vft[COLOR_parser_prod__AModuleName__init_amodulename]))(var14, var_tquadnode2, var_listnode4, var_tidnode5) /* init_amodulename on <var14:AModuleName>*/;
 var_pmodulenamenode1 = var14;
 var_node_list = var_pmodulenamenode1;
-var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction859> */
+var15 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction861> */
 var16 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var15) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var16, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction859#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction859__action(val* self, val* p0) {
-parser__ReduceAction859__action(self, p0);
+/* method parser#ReduceAction861#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction861__action(val* self, val* p0) {
+parser__ReduceAction861__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction860#action for (self: ReduceAction860, Parser) */
-void parser__ReduceAction860__action(val* self, val* p0) {
+/* method parser#ReduceAction862#action for (self: ReduceAction862, Parser) */
+void parser__ReduceAction862__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6855,18 +6855,18 @@ var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var3;
 var_tidnode1 = var_nodearraylist1;
 var_node_list = var_tidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction860> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction862> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction860#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction860__action(val* self, val* p0) {
-parser__ReduceAction860__action(self, p0);
+/* method parser#ReduceAction862#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction862__action(val* self, val* p0) {
+parser__ReduceAction862__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction861#action for (self: ReduceAction861, Parser) */
-void parser__ReduceAction861__action(val* self, val* p0) {
+/* method parser#ReduceAction863#action for (self: ReduceAction863, Parser) */
+void parser__ReduceAction863__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6890,18 +6890,18 @@ var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var3;
 var_tclassidnode1 = var_nodearraylist1;
 var_node_list = var_tclassidnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction861> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction863> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction861#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction861__action(val* self, val* p0) {
-parser__ReduceAction861__action(self, p0);
+/* method parser#ReduceAction863#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction863__action(val* self, val* p0) {
+parser__ReduceAction863__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction862#action for (self: ReduceAction862, Parser) */
-void parser__ReduceAction862__action(val* self, val* p0) {
+/* method parser#ReduceAction864#action for (self: ReduceAction864, Parser) */
+void parser__ReduceAction864__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6914,18 +6914,18 @@ var = NULL;
 var_node_list = var;
 var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
 var_nodearraylist1 = var1;
-var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction862> */
+var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction864> */
 var3 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var2) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var3, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction862#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction862__action(val* self, val* p0) {
-parser__ReduceAction862__action(self, p0);
+/* method parser#ReduceAction864#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction864__action(val* self, val* p0) {
+parser__ReduceAction864__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction864#action for (self: ReduceAction864, Parser) */
-void parser__ReduceAction864__action(val* self, val* p0) {
+/* method parser#ReduceAction866#action for (self: ReduceAction866, Parser) */
+void parser__ReduceAction866__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6965,27 +6965,27 @@ var3 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28972);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28974);
 show_backtrace(1);
 }
-var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction864>*/;
+var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction866>*/;
 var_listnode3 = var4;
 var5 = NEW_parser_nodes__ADoc(&type_parser_nodes__ADoc);
 ((void (*)(val*, val*))(var5->class->vft[COLOR_parser_prod__ADoc__init_adoc]))(var5, var_listnode3) /* init_adoc on <var5:ADoc>*/;
 var_pdocnode1 = var5;
 var_node_list = var_pdocnode1;
-var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction864> */
+var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction866> */
 var7 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var6) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var7, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction864#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction864__action(val* self, val* p0) {
-parser__ReduceAction864__action(self, p0);
+/* method parser#ReduceAction866#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction866__action(val* self, val* p0) {
+parser__ReduceAction866__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction865#action for (self: ReduceAction865, Parser) */
-void parser__ReduceAction865__action(val* self, val* p0) {
+/* method parser#ReduceAction867#action for (self: ReduceAction867, Parser) */
+void parser__ReduceAction867__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7029,27 +7029,27 @@ var4 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28990);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28992);
 show_backtrace(1);
 }
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction865>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction867>*/;
 var_listnode3 = var5;
 var6 = NEW_parser_nodes__ADoc(&type_parser_nodes__ADoc);
 ((void (*)(val*, val*))(var6->class->vft[COLOR_parser_prod__ADoc__init_adoc]))(var6, var_listnode3) /* init_adoc on <var6:ADoc>*/;
 var_pdocnode1 = var6;
 var_node_list = var_pdocnode1;
-var7 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction865> */
+var7 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction867> */
 var8 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var7) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var8, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction865#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction865__action(val* self, val* p0) {
-parser__ReduceAction865__action(self, p0);
+/* method parser#ReduceAction867#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction867__action(val* self, val* p0) {
+parser__ReduceAction867__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction867#action for (self: ReduceAction867, Parser) */
-void parser__ReduceAction867__action(val* self, val* p0) {
+/* method parser#ReduceAction869#action for (self: ReduceAction869, Parser) */
+void parser__ReduceAction869__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7061,18 +7061,18 @@ var = NULL;
 var_node_list = var;
 var1 = NULL;
 var_node_list = var1;
-var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction867> */
+var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction869> */
 var3 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var2) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var3, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction867#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction867__action(val* self, val* p0) {
-parser__ReduceAction867__action(self, p0);
+/* method parser#ReduceAction869#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction869__action(val* self, val* p0) {
+parser__ReduceAction869__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction868#action for (self: ReduceAction868, Parser) */
-void parser__ReduceAction868__action(val* self, val* p0) {
+/* method parser#ReduceAction870#action for (self: ReduceAction870, Parser) */
+void parser__ReduceAction870__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7088,18 +7088,18 @@ var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var1;
 var_pdocnode1 = var_nodearraylist1;
 var_node_list = var_pdocnode1;
-var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction868> */
+var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction870> */
 var3 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var2) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var3, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction868#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction868__action(val* self, val* p0) {
-parser__ReduceAction868__action(self, p0);
+/* method parser#ReduceAction870#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction870__action(val* self, val* p0) {
+parser__ReduceAction870__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction869#action for (self: ReduceAction869, Parser) */
-void parser__ReduceAction869__action(val* self, val* p0) {
+/* method parser#ReduceAction871#action for (self: ReduceAction871, Parser) */
+void parser__ReduceAction871__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7116,18 +7116,18 @@ var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist2 = var1;
 var2 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
 var_nodearraylist1 = var2;
-var3 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction869> */
+var3 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction871> */
 var4 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var3) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var4, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction869#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction869__action(val* self, val* p0) {
-parser__ReduceAction869__action(self, p0);
+/* method parser#ReduceAction871#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction871__action(val* self, val* p0) {
+parser__ReduceAction871__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction870#action for (self: ReduceAction870, Parser) */
-void parser__ReduceAction870__action(val* self, val* p0) {
+/* method parser#ReduceAction872#action for (self: ReduceAction872, Parser) */
+void parser__ReduceAction872__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7148,18 +7148,18 @@ var2 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist2 = var2;
 var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
 var_nodearraylist1 = var3;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction870> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction872> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction870#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction870__action(val* self, val* p0) {
-parser__ReduceAction870__action(self, p0);
+/* method parser#ReduceAction872#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction872__action(val* self, val* p0) {
+parser__ReduceAction872__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1215#action for (self: ReduceAction1215, Parser) */
-void parser__ReduceAction1215__action(val* self, val* p0) {
+/* method parser#ReduceAction1217#action for (self: ReduceAction1217, Parser) */
+void parser__ReduceAction1217__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7209,7 +7209,7 @@ var4 = var_tkwissetnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29049);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29051);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist2;
@@ -7227,7 +7227,7 @@ var5 = var_pexprnode3->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29051);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29053);
 show_backtrace(1);
 }
 var_tattridnode4 = var_nodearraylist3;
@@ -7245,25 +7245,25 @@ var8 = var_tattridnode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29053);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29055);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__AIssetAttrExpr(&type_parser_nodes__AIssetAttrExpr);
 ((void (*)(val*, val*, val*, val*))(var11->class->vft[COLOR_parser_prod__AIssetAttrExpr__init_aissetattrexpr]))(var11, var_tkwissetnode2, var_pexprnode3, var_tattridnode4) /* init_aissetattrexpr on <var11:AIssetAttrExpr>*/;
 var_pexprnode1 = var11;
 var_node_list = var_pexprnode1;
-var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1215> */
+var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1217> */
 var13 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var12) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var13, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1215#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1215__action(val* self, val* p0) {
-parser__ReduceAction1215__action(self, p0);
+/* method parser#ReduceAction1217#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1217__action(val* self, val* p0) {
+parser__ReduceAction1217__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1216#action for (self: ReduceAction1216, Parser) */
-void parser__ReduceAction1216__action(val* self, val* p0) {
+/* method parser#ReduceAction1218#action for (self: ReduceAction1218, Parser) */
+void parser__ReduceAction1218__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7317,7 +7317,7 @@ var5 = var_tkwissetnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29073);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29075);
 show_backtrace(1);
 }
 var_pexprnode3 = var_nodearraylist2;
@@ -7335,7 +7335,7 @@ var6 = var_pexprnode3->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29075);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29077);
 show_backtrace(1);
 }
 var_tattridnode4 = var_nodearraylist4;
@@ -7353,25 +7353,25 @@ var9 = var_tattridnode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29077);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29079);
 show_backtrace(1);
 }
 var12 = NEW_parser_nodes__AIssetAttrExpr(&type_parser_nodes__AIssetAttrExpr);
 ((void (*)(val*, val*, val*, val*))(var12->class->vft[COLOR_parser_prod__AIssetAttrExpr__init_aissetattrexpr]))(var12, var_tkwissetnode2, var_pexprnode3, var_tattridnode4) /* init_aissetattrexpr on <var12:AIssetAttrExpr>*/;
 var_pexprnode1 = var12;
 var_node_list = var_pexprnode1;
-var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1216> */
+var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1218> */
 var14 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var13) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var14, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1216#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1216__action(val* self, val* p0) {
-parser__ReduceAction1216__action(self, p0);
+/* method parser#ReduceAction1218#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1218__action(val* self, val* p0) {
+parser__ReduceAction1218__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1219#action for (self: ReduceAction1219, Parser) */
-void parser__ReduceAction1219__action(val* self, val* p0) {
+/* method parser#ReduceAction1221#action for (self: ReduceAction1221, Parser) */
+void parser__ReduceAction1221__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7413,7 +7413,7 @@ var3 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29095);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29097);
 show_backtrace(1);
 }
 var_tattridnode3 = var_nodearraylist2;
@@ -7431,25 +7431,25 @@ var4 = var_tattridnode3->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29097);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29099);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AAttrExpr(&type_parser_nodes__AAttrExpr);
 ((void (*)(val*, val*, val*))(var7->class->vft[COLOR_parser_prod__AAttrExpr__init_aattrexpr]))(var7, var_pexprnode2, var_tattridnode3) /* init_aattrexpr on <var7:AAttrExpr>*/;
 var_pexprnode1 = var7;
 var_node_list = var_pexprnode1;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1219> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1221> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1219#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1219__action(val* self, val* p0) {
-parser__ReduceAction1219__action(self, p0);
+/* method parser#ReduceAction1221#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1221__action(val* self, val* p0) {
+parser__ReduceAction1221__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1220#action for (self: ReduceAction1220, Parser) */
-void parser__ReduceAction1220__action(val* self, val* p0) {
+/* method parser#ReduceAction1222#action for (self: ReduceAction1222, Parser) */
+void parser__ReduceAction1222__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7495,7 +7495,7 @@ var4 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29115);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29117);
 show_backtrace(1);
 }
 var_tattridnode3 = var_nodearraylist3;
@@ -7513,25 +7513,25 @@ var5 = var_tattridnode3->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29117);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29119);
 show_backtrace(1);
 }
 var8 = NEW_parser_nodes__AAttrExpr(&type_parser_nodes__AAttrExpr);
 ((void (*)(val*, val*, val*))(var8->class->vft[COLOR_parser_prod__AAttrExpr__init_aattrexpr]))(var8, var_pexprnode2, var_tattridnode3) /* init_aattrexpr on <var8:AAttrExpr>*/;
 var_pexprnode1 = var8;
 var_node_list = var_pexprnode1;
-var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1220> */
+var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1222> */
 var10 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var9) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var10, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1220#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1220__action(val* self, val* p0) {
-parser__ReduceAction1220__action(self, p0);
+/* method parser#ReduceAction1222#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1222__action(val* self, val* p0) {
+parser__ReduceAction1222__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1223#action for (self: ReduceAction1223, Parser) */
-void parser__ReduceAction1223__action(val* self, val* p0) {
+/* method parser#ReduceAction1225#action for (self: ReduceAction1225, Parser) */
+void parser__ReduceAction1225__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7581,7 +7581,7 @@ var4 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29135);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29137);
 show_backtrace(1);
 }
 var_tidnode3 = var_nodearraylist2;
@@ -7599,7 +7599,7 @@ var5 = var_tidnode3->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29137);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29139);
 show_backtrace(1);
 }
 var_pexprsnode4 = var_nodearraylist3;
@@ -7617,25 +7617,25 @@ var8 = var_pexprsnode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29139);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29141);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__ACallExpr(&type_parser_nodes__ACallExpr);
 ((void (*)(val*, val*, val*, val*))(var11->class->vft[COLOR_parser_prod__ACallExpr__init_acallexpr]))(var11, var_pexprnode2, var_tidnode3, var_pexprsnode4) /* init_acallexpr on <var11:ACallExpr>*/;
 var_pexprnode1 = var11;
 var_node_list = var_pexprnode1;
-var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1223> */
+var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1225> */
 var13 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var12) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var13, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1223#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1223__action(val* self, val* p0) {
-parser__ReduceAction1223__action(self, p0);
+/* method parser#ReduceAction1225#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1225__action(val* self, val* p0) {
+parser__ReduceAction1225__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1224#action for (self: ReduceAction1224, Parser) */
-void parser__ReduceAction1224__action(val* self, val* p0) {
+/* method parser#ReduceAction1226#action for (self: ReduceAction1226, Parser) */
+void parser__ReduceAction1226__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7689,7 +7689,7 @@ var5 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29159);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29161);
 show_backtrace(1);
 }
 var_tidnode3 = var_nodearraylist3;
@@ -7707,7 +7707,7 @@ var6 = var_tidnode3->type->type_table[cltype7] == idtype8;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29161);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29163);
 show_backtrace(1);
 }
 var_pexprsnode4 = var_nodearraylist4;
@@ -7725,25 +7725,25 @@ var9 = var_pexprsnode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29163);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29165);
 show_backtrace(1);
 }
 var12 = NEW_parser_nodes__ACallExpr(&type_parser_nodes__ACallExpr);
 ((void (*)(val*, val*, val*, val*))(var12->class->vft[COLOR_parser_prod__ACallExpr__init_acallexpr]))(var12, var_pexprnode2, var_tidnode3, var_pexprsnode4) /* init_acallexpr on <var12:ACallExpr>*/;
 var_pexprnode1 = var12;
 var_node_list = var_pexprnode1;
-var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1224> */
+var13 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1226> */
 var14 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var13) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var14, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1224#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1224__action(val* self, val* p0) {
-parser__ReduceAction1224__action(self, p0);
+/* method parser#ReduceAction1226#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1226__action(val* self, val* p0) {
+parser__ReduceAction1226__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1231#action for (self: ReduceAction1231, Parser) */
-void parser__ReduceAction1231__action(val* self, val* p0) {
+/* method parser#ReduceAction1233#action for (self: ReduceAction1233, Parser) */
+void parser__ReduceAction1233__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7793,7 +7793,7 @@ var4 = var_pexprnode2->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29182);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29184);
 show_backtrace(1);
 }
 var_tkwinitnode3 = var_nodearraylist2;
@@ -7811,7 +7811,7 @@ var5 = var_tkwinitnode3->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29184);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29186);
 show_backtrace(1);
 }
 var_pexprsnode4 = var_nodearraylist3;
@@ -7829,25 +7829,25 @@ var8 = var_pexprsnode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29186);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29188);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__AInitExpr(&type_parser_nodes__AInitExpr);
 ((void (*)(val*, val*, val*, val*))(var11->class->vft[COLOR_parser_prod__AInitExpr__init_ainitexpr]))(var11, var_pexprnode2, var_tkwinitnode3, var_pexprsnode4) /* init_ainitexpr on <var11:AInitExpr>*/;
 var_pexprnode1 = var11;
 var_node_list = var_pexprnode1;
-var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1231> */
+var12 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1233> */
 var13 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var12) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var13, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1231#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1231__action(val* self, val* p0) {
-parser__ReduceAction1231__action(self, p0);
+/* method parser#ReduceAction1233#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1233__action(val* self, val* p0) {
+parser__ReduceAction1233__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1255#action for (self: ReduceAction1255, Parser) */
-void parser__ReduceAction1255__action(val* self, val* p0) {
+/* method parser#ReduceAction1257#action for (self: ReduceAction1257, Parser) */
+void parser__ReduceAction1257__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7871,18 +7871,18 @@ var3 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /
 var_nodearraylist1 = var3;
 var_pexprnode1 = var_nodearraylist1;
 var_node_list = var_pexprnode1;
-var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1255> */
+var4 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1257> */
 var5 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var4) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var5, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1255#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1255__action(val* self, val* p0) {
-parser__ReduceAction1255__action(self, p0);
+/* method parser#ReduceAction1257#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1257__action(val* self, val* p0) {
+parser__ReduceAction1257__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1256#action for (self: ReduceAction1256, Parser) */
-void parser__ReduceAction1256__action(val* self, val* p0) {
+/* method parser#ReduceAction1258#action for (self: ReduceAction1258, Parser) */
+void parser__ReduceAction1258__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7897,18 +7897,18 @@ var1 = NEW_parser_nodes__AImplicitSelfExpr(&type_parser_nodes__AImplicitSelfExpr
 ((void (*)(val*))(var1->class->vft[COLOR_parser_prod__AImplicitSelfExpr__init_aimplicitselfexpr]))(var1) /* init_aimplicitselfexpr on <var1:AImplicitSelfExpr>*/;
 var_pexprnode1 = var1;
 var_node_list = var_pexprnode1;
-var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1256> */
+var2 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1258> */
 var3 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var2) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var3, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1256#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1256__action(val* self, val* p0) {
-parser__ReduceAction1256__action(self, p0);
+/* method parser#ReduceAction1258#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1258__action(val* self, val* p0) {
+parser__ReduceAction1258__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1524#action for (self: ReduceAction1524, Parser) */
-void parser__ReduceAction1524__action(val* self, val* p0) {
+/* method parser#ReduceAction1526#action for (self: ReduceAction1526, Parser) */
+void parser__ReduceAction1526__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7941,18 +7941,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1524> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1526> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1524#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1524__action(val* self, val* p0) {
-parser__ReduceAction1524__action(self, p0);
+/* method parser#ReduceAction1526#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1526__action(val* self, val* p0) {
+parser__ReduceAction1526__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1525#action for (self: ReduceAction1525, Parser) */
-void parser__ReduceAction1525__action(val* self, val* p0) {
+/* method parser#ReduceAction1527#action for (self: ReduceAction1527, Parser) */
+void parser__ReduceAction1527__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7997,11 +7997,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29243);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29245);
 show_backtrace(1);
 }
 var_pimportnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1525>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1527>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pimportnode2 == NULL) {
@@ -8014,18 +8014,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1525> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1527> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1525#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1525__action(val* self, val* p0) {
-parser__ReduceAction1525__action(self, p0);
+/* method parser#ReduceAction1527#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1527__action(val* self, val* p0) {
+parser__ReduceAction1527__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1526#action for (self: ReduceAction1526, Parser) */
-void parser__ReduceAction1526__action(val* self, val* p0) {
+/* method parser#ReduceAction1528#action for (self: ReduceAction1528, Parser) */
+void parser__ReduceAction1528__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8058,18 +8058,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1526> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1528> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1526#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1526__action(val* self, val* p0) {
-parser__ReduceAction1526__action(self, p0);
+/* method parser#ReduceAction1528#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1528__action(val* self, val* p0) {
+parser__ReduceAction1528__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1527#action for (self: ReduceAction1527, Parser) */
-void parser__ReduceAction1527__action(val* self, val* p0) {
+/* method parser#ReduceAction1529#action for (self: ReduceAction1529, Parser) */
+void parser__ReduceAction1529__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8114,11 +8114,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29277);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29279);
 show_backtrace(1);
 }
 var_pexterncodeblocknode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1527>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1529>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pexterncodeblocknode2 == NULL) {
@@ -8131,18 +8131,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1527> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1529> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1527#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1527__action(val* self, val* p0) {
-parser__ReduceAction1527__action(self, p0);
+/* method parser#ReduceAction1529#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1529__action(val* self, val* p0) {
+parser__ReduceAction1529__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1528#action for (self: ReduceAction1528, Parser) */
-void parser__ReduceAction1528__action(val* self, val* p0) {
+/* method parser#ReduceAction1530#action for (self: ReduceAction1530, Parser) */
+void parser__ReduceAction1530__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8175,18 +8175,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1528> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1530> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1528#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1528__action(val* self, val* p0) {
-parser__ReduceAction1528__action(self, p0);
+/* method parser#ReduceAction1530#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1530__action(val* self, val* p0) {
+parser__ReduceAction1530__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1529#action for (self: ReduceAction1529, Parser) */
-void parser__ReduceAction1529__action(val* self, val* p0) {
+/* method parser#ReduceAction1531#action for (self: ReduceAction1531, Parser) */
+void parser__ReduceAction1531__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8231,11 +8231,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29311);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29313);
 show_backtrace(1);
 }
 var_pclassdefnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1529>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1531>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pclassdefnode2 == NULL) {
@@ -8248,18 +8248,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1529> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1531> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1529#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1529__action(val* self, val* p0) {
-parser__ReduceAction1529__action(self, p0);
+/* method parser#ReduceAction1531#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1531__action(val* self, val* p0) {
+parser__ReduceAction1531__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1530#action for (self: ReduceAction1530, Parser) */
-void parser__ReduceAction1530__action(val* self, val* p0) {
+/* method parser#ReduceAction1532#action for (self: ReduceAction1532, Parser) */
+void parser__ReduceAction1532__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8292,18 +8292,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1530> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1532> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1530#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1530__action(val* self, val* p0) {
-parser__ReduceAction1530__action(self, p0);
+/* method parser#ReduceAction1532#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1532__action(val* self, val* p0) {
+parser__ReduceAction1532__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1531#action for (self: ReduceAction1531, Parser) */
-void parser__ReduceAction1531__action(val* self, val* p0) {
+/* method parser#ReduceAction1533#action for (self: ReduceAction1533, Parser) */
+void parser__ReduceAction1533__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8348,11 +8348,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29345);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29347);
 show_backtrace(1);
 }
 var_ppropdefnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1531>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1533>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_ppropdefnode2 == NULL) {
@@ -8365,18 +8365,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1531> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1533> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1531#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1531__action(val* self, val* p0) {
-parser__ReduceAction1531__action(self, p0);
+/* method parser#ReduceAction1533#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1533__action(val* self, val* p0) {
+parser__ReduceAction1533__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1532#action for (self: ReduceAction1532, Parser) */
-void parser__ReduceAction1532__action(val* self, val* p0) {
+/* method parser#ReduceAction1534#action for (self: ReduceAction1534, Parser) */
+void parser__ReduceAction1534__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8409,18 +8409,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1532> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1534> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1532#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1532__action(val* self, val* p0) {
-parser__ReduceAction1532__action(self, p0);
+/* method parser#ReduceAction1534#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1534__action(val* self, val* p0) {
+parser__ReduceAction1534__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1533#action for (self: ReduceAction1533, Parser) */
-void parser__ReduceAction1533__action(val* self, val* p0) {
+/* method parser#ReduceAction1535#action for (self: ReduceAction1535, Parser) */
+void parser__ReduceAction1535__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8465,11 +8465,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29379);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29381);
 show_backtrace(1);
 }
 var_psuperclassnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1533>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1535>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_psuperclassnode2 == NULL) {
@@ -8482,18 +8482,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1533> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1535> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1533#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1533__action(val* self, val* p0) {
-parser__ReduceAction1533__action(self, p0);
+/* method parser#ReduceAction1535#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1535__action(val* self, val* p0) {
+parser__ReduceAction1535__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1536#action for (self: ReduceAction1536, Parser) */
-void parser__ReduceAction1536__action(val* self, val* p0) {
+/* method parser#ReduceAction1538#action for (self: ReduceAction1538, Parser) */
+void parser__ReduceAction1538__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8526,18 +8526,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1536> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1538> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1536#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1536__action(val* self, val* p0) {
-parser__ReduceAction1536__action(self, p0);
+/* method parser#ReduceAction1538#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1538__action(val* self, val* p0) {
+parser__ReduceAction1538__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1537#action for (self: ReduceAction1537, Parser) */
-void parser__ReduceAction1537__action(val* self, val* p0) {
+/* method parser#ReduceAction1539#action for (self: ReduceAction1539, Parser) */
+void parser__ReduceAction1539__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8582,11 +8582,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29413);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29415);
 show_backtrace(1);
 }
 var_pformaldefnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1537>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1539>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pformaldefnode2 == NULL) {
@@ -8599,18 +8599,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1537> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1539> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1537#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1537__action(val* self, val* p0) {
-parser__ReduceAction1537__action(self, p0);
+/* method parser#ReduceAction1539#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1539__action(val* self, val* p0) {
+parser__ReduceAction1539__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1538#action for (self: ReduceAction1538, Parser) */
-void parser__ReduceAction1538__action(val* self, val* p0) {
+/* method parser#ReduceAction1540#action for (self: ReduceAction1540, Parser) */
+void parser__ReduceAction1540__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8643,18 +8643,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1538> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1540> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1538#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1538__action(val* self, val* p0) {
-parser__ReduceAction1538__action(self, p0);
+/* method parser#ReduceAction1540#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1540__action(val* self, val* p0) {
+parser__ReduceAction1540__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1539#action for (self: ReduceAction1539, Parser) */
-void parser__ReduceAction1539__action(val* self, val* p0) {
+/* method parser#ReduceAction1541#action for (self: ReduceAction1541, Parser) */
+void parser__ReduceAction1541__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8699,11 +8699,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29447);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29449);
 show_backtrace(1);
 }
 var_pparamnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1539>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1541>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pparamnode2 == NULL) {
@@ -8716,18 +8716,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1539> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1541> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1539#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1539__action(val* self, val* p0) {
-parser__ReduceAction1539__action(self, p0);
+/* method parser#ReduceAction1541#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1541__action(val* self, val* p0) {
+parser__ReduceAction1541__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1540#action for (self: ReduceAction1540, Parser) */
-void parser__ReduceAction1540__action(val* self, val* p0) {
+/* method parser#ReduceAction1542#action for (self: ReduceAction1542, Parser) */
+void parser__ReduceAction1542__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8760,18 +8760,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1540> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1542> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1540#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1540__action(val* self, val* p0) {
-parser__ReduceAction1540__action(self, p0);
+/* method parser#ReduceAction1542#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1542__action(val* self, val* p0) {
+parser__ReduceAction1542__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1541#action for (self: ReduceAction1541, Parser) */
-void parser__ReduceAction1541__action(val* self, val* p0) {
+/* method parser#ReduceAction1543#action for (self: ReduceAction1543, Parser) */
+void parser__ReduceAction1543__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8816,11 +8816,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29481);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29483);
 show_backtrace(1);
 }
 var_pexterncallnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1541>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1543>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pexterncallnode2 == NULL) {
@@ -8833,18 +8833,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1541> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1543> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1541#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1541__action(val* self, val* p0) {
-parser__ReduceAction1541__action(self, p0);
+/* method parser#ReduceAction1543#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1543__action(val* self, val* p0) {
+parser__ReduceAction1543__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1543#action for (self: ReduceAction1543, Parser) */
-void parser__ReduceAction1543__action(val* self, val* p0) {
+/* method parser#ReduceAction1545#action for (self: ReduceAction1545, Parser) */
+void parser__ReduceAction1545__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8889,11 +8889,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29500);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29502);
 show_backtrace(1);
 }
 var_ptypenode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1543>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1545>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_ptypenode2 == NULL) {
@@ -8906,18 +8906,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1543> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1545> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1543#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1543__action(val* self, val* p0) {
-parser__ReduceAction1543__action(self, p0);
+/* method parser#ReduceAction1545#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1545__action(val* self, val* p0) {
+parser__ReduceAction1545__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1544#action for (self: ReduceAction1544, Parser) */
-void parser__ReduceAction1544__action(val* self, val* p0) {
+/* method parser#ReduceAction1546#action for (self: ReduceAction1546, Parser) */
+void parser__ReduceAction1546__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8950,18 +8950,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1544> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1546> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1544#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1544__action(val* self, val* p0) {
-parser__ReduceAction1544__action(self, p0);
+/* method parser#ReduceAction1546#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1546__action(val* self, val* p0) {
+parser__ReduceAction1546__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1545#action for (self: ReduceAction1545, Parser) */
-void parser__ReduceAction1545__action(val* self, val* p0) {
+/* method parser#ReduceAction1547#action for (self: ReduceAction1547, Parser) */
+void parser__ReduceAction1547__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9006,11 +9006,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29534);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29536);
 show_backtrace(1);
 }
 var_pexprnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1545>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1547>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pexprnode2 == NULL) {
@@ -9023,18 +9023,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1545> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1547> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1545#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1545__action(val* self, val* p0) {
-parser__ReduceAction1545__action(self, p0);
+/* method parser#ReduceAction1547#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1547__action(val* self, val* p0) {
+parser__ReduceAction1547__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1546#action for (self: ReduceAction1546, Parser) */
-void parser__ReduceAction1546__action(val* self, val* p0) {
+/* method parser#ReduceAction1548#action for (self: ReduceAction1548, Parser) */
+void parser__ReduceAction1548__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9072,24 +9072,24 @@ var3 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29552);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29554);
 show_backtrace(1);
 }
-var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode2, var_listnode1) /* concat on <self:ReduceAction1546>*/;
+var4 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode2, var_listnode1) /* concat on <self:ReduceAction1548>*/;
 var_listnode2 = var4;
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1546> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1548> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1546#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1546__action(val* self, val* p0) {
-parser__ReduceAction1546__action(self, p0);
+/* method parser#ReduceAction1548#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1548__action(val* self, val* p0) {
+parser__ReduceAction1548__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1547#action for (self: ReduceAction1547, Parser) */
-void parser__ReduceAction1547__action(val* self, val* p0) {
+/* method parser#ReduceAction1549#action for (self: ReduceAction1549, Parser) */
+void parser__ReduceAction1549__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9136,7 +9136,7 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29567);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29569);
 show_backtrace(1);
 }
 var_listnode2 = var_nodearraylist2;
@@ -9154,26 +9154,26 @@ var5 = var_listnode2->type->type_table[cltype6] == idtype7;
 }
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29569);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29571);
 show_backtrace(1);
 }
-var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1547>*/;
+var8 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1549>*/;
 var_listnode3 = var8;
-var9 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction1547>*/;
+var9 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode2) /* concat on <self:ReduceAction1549>*/;
 var_listnode3 = var9;
 var_node_list = var_listnode3;
-var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1547> */
+var10 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1549> */
 var11 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var10) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var11, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1547#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1547__action(val* self, val* p0) {
-parser__ReduceAction1547__action(self, p0);
+/* method parser#ReduceAction1549#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1549__action(val* self, val* p0) {
+parser__ReduceAction1549__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1549#action for (self: ReduceAction1549, Parser) */
-void parser__ReduceAction1549__action(val* self, val* p0) {
+/* method parser#ReduceAction1551#action for (self: ReduceAction1551, Parser) */
+void parser__ReduceAction1551__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9218,11 +9218,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29585);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29587);
 show_backtrace(1);
 }
 var_pannotationnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1549>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1551>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_pannotationnode2 == NULL) {
@@ -9235,18 +9235,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1549> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1551> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1549#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1549__action(val* self, val* p0) {
-parser__ReduceAction1549__action(self, p0);
+/* method parser#ReduceAction1551#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1551__action(val* self, val* p0) {
+parser__ReduceAction1551__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1553#action for (self: ReduceAction1553, Parser) */
-void parser__ReduceAction1553__action(val* self, val* p0) {
+/* method parser#ReduceAction1555#action for (self: ReduceAction1555, Parser) */
+void parser__ReduceAction1555__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9291,11 +9291,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29604);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29606);
 show_backtrace(1);
 }
 var_patargnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1553>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1555>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_patargnode2 == NULL) {
@@ -9308,18 +9308,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1553> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1555> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1553#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1553__action(val* self, val* p0) {
-parser__ReduceAction1553__action(self, p0);
+/* method parser#ReduceAction1555#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1555__action(val* self, val* p0) {
+parser__ReduceAction1555__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1557#action for (self: ReduceAction1557, Parser) */
-void parser__ReduceAction1557__action(val* self, val* p0) {
+/* method parser#ReduceAction1559#action for (self: ReduceAction1559, Parser) */
+void parser__ReduceAction1559__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9364,11 +9364,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29623);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29625);
 show_backtrace(1);
 }
 var_tidnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1557>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1559>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_tidnode2 == NULL) {
@@ -9381,18 +9381,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1557> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1559> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1557#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1557__action(val* self, val* p0) {
-parser__ReduceAction1557__action(self, p0);
+/* method parser#ReduceAction1559#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1559__action(val* self, val* p0) {
+parser__ReduceAction1559__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1558#action for (self: ReduceAction1558, Parser) */
-void parser__ReduceAction1558__action(val* self, val* p0) {
+/* method parser#ReduceAction1560#action for (self: ReduceAction1560, Parser) */
+void parser__ReduceAction1560__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9425,18 +9425,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1558> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1560> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1558#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1558__action(val* self, val* p0) {
-parser__ReduceAction1558__action(self, p0);
+/* method parser#ReduceAction1560#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1560__action(val* self, val* p0) {
+parser__ReduceAction1560__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1559#action for (self: ReduceAction1559, Parser) */
-void parser__ReduceAction1559__action(val* self, val* p0) {
+/* method parser#ReduceAction1561#action for (self: ReduceAction1561, Parser) */
+void parser__ReduceAction1561__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9481,11 +9481,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29657);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29659);
 show_backtrace(1);
 }
 var_tcommentnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1559>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1561>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_tcommentnode2 == NULL) {
@@ -9498,18 +9498,18 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1559> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1561> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1559#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1559__action(val* self, val* p0) {
-parser__ReduceAction1559__action(self, p0);
+/* method parser#ReduceAction1561#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1561__action(val* self, val* p0) {
+parser__ReduceAction1561__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1560#action for (self: ReduceAction1560, Parser) */
-void parser__ReduceAction1560__action(val* self, val* p0) {
+/* method parser#ReduceAction1562#action for (self: ReduceAction1562, Parser) */
+void parser__ReduceAction1562__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9542,18 +9542,18 @@ if (var4){
 } else {
 }
 var_node_list = var_listnode2;
-var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1560> */
+var5 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1562> */
 var6 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var5) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var6, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1560#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1560__action(val* self, val* p0) {
-parser__ReduceAction1560__action(self, p0);
+/* method parser#ReduceAction1562#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1562__action(val* self, val* p0) {
+parser__ReduceAction1562__action(self, p0);
 RET_LABEL:;
 }
-/* method parser#ReduceAction1561#action for (self: ReduceAction1561, Parser) */
-void parser__ReduceAction1561__action(val* self, val* p0) {
+/* method parser#ReduceAction1563#action for (self: ReduceAction1563, Parser) */
+void parser__ReduceAction1563__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9598,11 +9598,11 @@ var4 = var_listnode1->type->type_table[cltype] == idtype;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29691);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 29693);
 show_backtrace(1);
 }
 var_teolnode2 = var_nodearraylist2;
-var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1561>*/;
+var5 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode3, var_listnode1) /* concat on <self:ReduceAction1563>*/;
 var_listnode3 = var5;
 var6 = NULL;
 if (var_teolnode2 == NULL) {
@@ -9615,13 +9615,13 @@ if (var7){
 } else {
 }
 var_node_list = var_listnode3;
-var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1561> */
+var8 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1563> */
 var9 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var8) /* go_to on <var_p:Parser>*/;
 ((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var9, var_node_list) /* push on <var_p:Parser>*/;
 RET_LABEL:;
 }
-/* method parser#ReduceAction1561#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1561__action(val* self, val* p0) {
-parser__ReduceAction1561__action(self, p0);
+/* method parser#ReduceAction1563#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction1563__action(val* self, val* p0) {
+parser__ReduceAction1563__action(self, p0);
 RET_LABEL:;
 }
