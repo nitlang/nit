@@ -191,7 +191,7 @@ extern class SDLDrawable `{SDL_Surface*`}
 end
 
 # A drawable Image
-extern class SDLImage `{SDL_Surface*`} # TODO remove
+extern class SDLImage
 	super DrawableImage
 	super SDLDrawable
 
