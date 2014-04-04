@@ -609,26 +609,6 @@ abstract class StringCharView
 	#     var reviter = "hello".chars.reverse_iterator_from(2)
 	#     assert reviter.to_a == ['l', 'e', 'h']
 	fun reverse_iterator_from(pos: Int): IndexedIterator[Char] is abstract
-
-	redef fun has(c: Char): Bool
-	do
-		for i in self do
-			if i == c then return true
-		end
-		return false
-	end
-
-	redef fun ==(other)
-	do
-		if other == null then return false
-		if not other isa StringCharView then return false
-		var other_chars = other.iterator
-		for i in self do
-			if i != other_chars.item then return false
-			other_chars.next
-		end
-		return true
-	end
 end
 
 # View on Buffer objects, extends Sequence
