@@ -504,9 +504,23 @@ abstract class Text
 	#
 	#     assert "abc" < "xy"
 	#     assert "ABC" < "abc"
-	redef fun <(o)
+	redef fun <(other)
 	do
-		return self.chars < o.chars
+		var self_chars = self.chars.iterator
+		var other_chars = other.chars.iterator
+
+		while self_chars.is_ok and other_chars.is_ok do
+			if self_chars.item < other_chars.item then return true
+			if self_chars.item > other_chars.item then return false
+			self_chars.next
+			other_chars.next
+		end
+
+		if self_chars.is_ok then
+			return false
+		else
+			return true
+		end
 	end
 
 	# Flat representation of self
@@ -562,11 +576,8 @@ end
 # views on String and Buffer objects
 abstract class StringCharView
 	super SequenceRead[Char]
-	super Comparable
 
 	type SELFTYPE: Text
-
-	redef type OTHER: StringCharView
 
 	private var target: SELFTYPE
 
@@ -617,25 +628,6 @@ abstract class StringCharView
 			other_chars.next
 		end
 		return true
-	end
-
-	redef fun <(other)
-	do
-		var self_chars = self.iterator
-		var other_chars = other.iterator
-
-		while self_chars.is_ok and other_chars.is_ok do
-			if self_chars.item < other_chars.item then return true
-			if self_chars.item > other_chars.item then return false
-			self_chars.next
-			other_chars.next
-		end
-
-		if self_chars.is_ok then
-			return false
-		else
-			return true
-		end
 	end
 end
 
