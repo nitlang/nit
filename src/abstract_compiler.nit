@@ -54,10 +54,8 @@ redef class ToolContext
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
 	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
-	# --no-stacktrace
-	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
-	# --stack-trace-C-to-Nit-name-binding
-	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
+	# --stacktrace
+	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 
@@ -68,22 +66,27 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
-		self.option_context.add_option(self.opt_no_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		var st = opt_stacktrace.value
+		if st == null or st == "none" or st == "libunwind" or st == "gperf" then
+			# Fine, do nothing
+		else if st == "auto" then
+			# Default just unset
+			opt_stacktrace.value = null
+		else
+			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `gperf` or `auto`."
+			exit(1)
+		end
 	end
 end
 
 redef class ModelBuilder
-	redef init(model, toolcontext)
-	do
-		if toolcontext.opt_no_stacktrace.value and toolcontext.opt_stacktrace.value then
-			print "Cannot use --nit-stacktrace when --no-stacktrace is activated"
-			exit(1)
-		end
-
-		super
-	end
-
 	# The compilation directory
 	var compile_dir: String
 
@@ -194,7 +197,7 @@ class MakefileToolchain
 
 	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
-		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
+		if self.toolcontext.opt_stacktrace.value == "gperf" then compiler.build_c_to_nit_bindings
 
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
@@ -309,7 +312,8 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
+		var ost = toolcontext.opt_stacktrace.value
+		if ost == "libunwind" or ost == "gperf" then linker_options.add("-lunwind")
 
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
@@ -511,13 +515,20 @@ abstract class AbstractCompiler
 	fun compile_main_function
 	do
 		var v = self.new_visitor
-		if modelbuilder.toolcontext.opt_stacktrace.value then
-			v.add_decl("#include \"c_functions_hash.h\"")
-		end
 		v.add_decl("#include <signal.h>")
-		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+		var ost = modelbuilder.toolcontext.opt_stacktrace.value
+
+		if ost == null then
+			ost = "gperf"
+			modelbuilder.toolcontext.opt_stacktrace.value = ost
+		end
+
+		if ost == "gperf" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
+			if ost == "gperf" then
+				v.add_decl("#include \"c_functions_hash.h\"")
+			end
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -549,7 +560,7 @@ abstract class AbstractCompiler
 		v.add_decl("\}")
 
 		v.add_decl("void show_backtrace (int signo) \{")
-		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+		if ost == "gperf" or ost == "libunwind" then
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -563,7 +574,7 @@ abstract class AbstractCompiler
 			v.add_decl("printf(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if modelbuilder.toolcontext.opt_stacktrace.value then
+			if ost == "gperf" then
 			v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != 0)\{")
 			v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
