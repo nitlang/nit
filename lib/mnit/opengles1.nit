@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # OpenGL ES1 general support (most of it)
-module opengles1
+module opengles1 is pkgconfig("glesv1_cm", "x11", "egl")
 
 import mnit_display
 
