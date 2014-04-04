@@ -33,6 +33,7 @@ class DinoApp
 	var target_dt = 12000000
 
 	var game : nullable Game = null
+	var score = new Container[Int](0)
 	var imgs : nullable ImageSet = null
 	var splash : nullable SplashScreen = null
 
@@ -83,12 +84,17 @@ class DinoApp
 		else if input_event isa PointerEvent then
 			if game == null then
 				# start from splash
-				game = new Game( cavemen_at_first_level )
+				game = new Game( cavemen_at_first_level, score )
 			else if game.over and game.ready_to_start_over then
 				# play next game
 				var next_nbr_caveman = game.nbr_wanted_cavemen
-				if game.won then next_nbr_caveman += cavemen_incr
-				game = new Game( next_nbr_caveman )
+				if game.won then
+					next_nbr_caveman += cavemen_incr
+				else
+					score = new Container[Int](0)
+					next_nbr_caveman = cavemen_at_first_level
+				end
+				game = new Game( next_nbr_caveman, score )
 			else
 				# normal play
 				game.dino.going_to = (new ScreenPos( input_event.x, input_event.y )).to_game( display.as(not null) )

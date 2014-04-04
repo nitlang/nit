@@ -22,6 +22,11 @@ module model_base
 class Model
 end
 
+# A named and possibly documented entity in the model.
+# This class is usefull to generalize presentation of entities to the human.
+abstract class MEntity
+end
+
 # A visibility (for modules, class and properties)
 # Valid visibility are:
 #
@@ -54,8 +59,8 @@ class MVisibility
 	end
 end
 
-fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 4)
+fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 5)
 fun public_visibility: MVisibility do return once new MVisibility("public", 4)
 fun protected_visibility: MVisibility do return once new MVisibility("protected", 3)
 fun private_visibility: MVisibility do return once new MVisibility("private", 2)
-fun none_visibility: MVisibility do return once new MVisibility("none", 2)
+fun none_visibility: MVisibility do return once new MVisibility("none", 1)

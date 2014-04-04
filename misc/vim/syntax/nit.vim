@@ -124,11 +124,24 @@ hi def link NITTodo			Todo
 " FFI Section
 syn match NITFFIDelimiters "\<\(`{\|`}\)\>"
 hi def link NITFFIDelimiters		Keyword
+
 " FFI Python
 syntax include @FFIPython syntax/python.vim
 unlet b:current_syntax
 syn match NITFFILanguage	'"Python"' nextgroup=NITFFIBlockPython skipwhite
 syn region NITFFIBlockPython matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIPython
+
+" FFI Java
+syntax include @FFIJava syntax/java.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"Java"' nextgroup=NITFFIBlockJava skipwhite
+syn region NITFFIBlockJava matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIJava
+
+" FFI C++
+syntax include @FFICpp syntax/cpp.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"C++"' nextgroup=NITFFIBlockCpp skipwhite
+syn region NITFFIBlockCpp matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFICpp
 
 " FFI C (the last one is the default)
 syntax include @FFIC syntax/c.vim

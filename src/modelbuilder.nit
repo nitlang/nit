@@ -43,28 +43,52 @@ redef class ToolContext
 	# Option --only-parse
 	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
+	# Option --ignore-visibility
+	var opt_ignore_visibility: OptionBool = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel)
+		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel, opt_ignore_visibility)
 	end
 
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
 	private var modelbuilder_real: nullable ModelBuilder = null
 
-	fun run_global_phases(mainmodule: MModule)
+	# Run `process_mainmodule` on all phases
+	fun run_global_phases(mmodules: Array[MModule])
 	do
+		assert not mmodules.is_empty
+		var mainmodule
+		if mmodules.length == 1 then
+			mainmodule = mmodules.first
+		else
+			# We need a main module, so we build it by importing all modules
+			mainmodule = new MModule(modelbuilder.model, null, "<main>", new Location(null, 0, 0, 0, 0))
+			mainmodule.set_imported_mmodules(mmodules)
+		end
 		for phase in phases_list do
-			phase.process_mainmodule(mainmodule)
+			if phase.disabled then continue
+			phase.process_mainmodule(mainmodule, mmodules)
 		end
 	end
 end
 
 redef class Phase
-	# Specific action to execute on the whole program
-	# Called by the `ToolContext::run_global_phases`
+	# Specific action to execute on the whole program.
+	# Called by the `ToolContext::run_global_phases`.
+	#
+	# `mainmodule` is the main module of the program.
+	# It could be an implicit module (called "<main>").
+	#
+	# `given_modules` is the list of explicitely requested modules.
+	# from the command-line for instance.
+	#
+	# REQUIRE: `not given_modules.is_empty`
+	# REQUIRE: `(given_modules.length == 1) == (mainmodule == given_modules.first)`
+	#
 	# @toimplement
-	fun process_mainmodule(mainmodule: MModule) do end
+	fun process_mainmodule(mainmodule: MModule, given_mmodules: SequenceRead[MModule]) do end
 end
 
 
@@ -252,9 +276,6 @@ class ModelBuilder
 	# FIXME: add a way to handle module name conflict
 	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
 	do
-		# what path where tried to display on error message
-		var tries = new Array[String]
-
 		# First, look in groups of the module
 		if mmodule != null then
 			var mgroup = mmodule.mgroup
@@ -265,7 +286,6 @@ class ModelBuilder
 
 				# Second, try the directory to find a file
 				var try_file = dirname + "/" + name + ".nit"
-				tries.add try_file
 				if try_file.file_exists then
 					var res = self.load_module(try_file.simplify_path)
 					if res == null then return null # Forward error
@@ -301,10 +321,28 @@ class ModelBuilder
 			end
 		end
 
+		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+
+		if candidate == null then
+			if mmodule != null then
+				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
+			else
+				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
+			end
+			return null
+		end
+		var res = self.load_module(candidate)
+		if res == null then return null # Forward error
+		return res.mmodule.as(not null)
+	end
+
+	# Search a module `name` from path `lookpaths`.
+	# If found, the path of the file is returned
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable String
+	do
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -313,7 +351,7 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
@@ -326,22 +364,12 @@ class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
 					end
 				end
 			end
 		end
-		if candidate == null then
-			if mmodule != null then
-				error(anode, "Error: cannot find module {name} from {mmodule}. tried {tries.join(", ")}")
-			else
-				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
-			end
-			return null
-		end
-		var res = self.load_module(candidate)
-		if res == null then return null # Forward error
-		return res.mmodule.as(not null)
+		return candidate
 	end
 
 	# cache for `identify_file` by realpath
@@ -351,9 +379,25 @@ class ModelBuilder
 	# Load the associated project and groups if required
 	private fun identify_file(path: String): nullable ModulePath
 	do
-		if not path.file_exists then
-			toolcontext.error(null, "Error: `{path}` does not exists")
-			return null
+		# special case for not a nit file
+		if path.file_extension != "nit" then
+			# search in known -I paths
+			var candidate = search_module_in_paths(null, path, self.paths)
+
+			# Found nothins? maybe it is a group...
+			if candidate == null and path.file_exists then
+				var mgroup = get_mgroup(path)
+				if mgroup != null then
+					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
+					if owner_path.file_exists then candidate = owner_path
+				end
+			end
+
+			if candidate == null then
+				toolcontext.error(null, "Error: cannot find module `{path}`.")
+				return null
+			end
+			path = candidate
 		end
 
 		# Fast track, the path is already known
@@ -375,6 +419,7 @@ class ModelBuilder
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
+		mgroup.module_paths.add(res)
 
 		identified_files[rp] = res
 		return res
@@ -474,7 +519,7 @@ class ModelBuilder
 		end
 
 		# Load it manually
-		var nmodule = load_module_ast(filename)
+		var nmodule = load_module_ast(file.filepath)
 		if nmodule == null then return null # forward error
 
 		# build the mmodule and load imported modules
@@ -528,6 +573,11 @@ class ModelBuilder
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
+
+		if decl != null then
+			var ndoc = decl.n_doc
+			if ndoc != null then mmodule.mdoc = ndoc.to_mdoc
+		end
 
 		return mmodule
 	end
@@ -627,6 +677,10 @@ private class ModulePath
 	redef fun to_s do return filepath
 end
 
+redef class MGroup
+	# modules paths associated with the group
+	private var module_paths = new Array[ModulePath]
+end
 
 redef class AStdImport
 	# The imported module once determined
@@ -655,4 +709,31 @@ redef class AProtectedVisibility
 end
 redef class APrivateVisibility
 	redef fun mvisibility do return private_visibility
+end
+
+redef class ADoc
+	private var mdoc_cache: nullable MDoc
+	fun to_mdoc: MDoc
+	do
+		var res = mdoc_cache
+		if res != null then return res
+		res = new MDoc
+		for c in n_comment do
+			var text = c.text
+			if text.length < 2 then
+				res.content.add ""
+				continue
+			end
+			assert text.chars[0] == '#'
+			if text.chars[1] == ' ' then
+				text = text.substring_from(2) # eat starting `#` and space
+			else
+				text = text.substring_from(1) # eat atarting `#` only
+			end
+			if text.chars.last == '\n' then text = text.substring(0, text.length-1) # drop \n
+			res.content.add(text)
+		end
+		mdoc_cache = res
+		return res
+	end
 end

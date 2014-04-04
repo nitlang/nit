@@ -19,12 +19,14 @@ module android_app
 
 import mnit
 import android
+import android_sensor
 
 in "C header" `{
 	#include <jni.h>
 	#include <errno.h>
 	#include <android/log.h>
 	#include <android_native_app_glue.h>
+	#include <android/sensor.h>
 
 	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
 	#ifdef DEBUG
@@ -83,7 +85,7 @@ in "C" `{
 			LOGI("motion");
 			return App_extern_input_motion(nit_app, event);
 		}
-		
+
 		return 0;
 	}
 
@@ -92,7 +94,7 @@ in "C" `{
 		mnit_java_app = app;
 			AConfiguration_setOrientation(mnit_java_app->config, ACONFIGURATION_ORIENTATION_LAND);
 				LOGI("cmd %i", (int)pthread_self());
-		
+
 		switch (cmd) {
 			case APP_CMD_SAVE_STATE:
 				LOGI ("save state");
@@ -100,7 +102,7 @@ in "C" `{
 				mnit_java_app->savedState = malloc(1);
 				App_save(nit_app);
 				break;
-				
+
 			case APP_CMD_INIT_WINDOW:
 				LOGI ("init window");
 				if (mnit_java_app->window != NULL) {
@@ -110,43 +112,43 @@ in "C" `{
 					mnit_animating = 1;
 				}
 				break;
-				
+
 			case APP_CMD_TERM_WINDOW:
 				LOGI ("term window");
 				mnit_term_display();
 				App_term_window(nit_app);
 				break;
-				
+
 			case APP_CMD_GAINED_FOCUS:
 				LOGI ("gain foc");
 				mnit_animating = 1;
 				App_gained_focus(nit_app);
 				LOGI ("gain foc 1");
 				break;
-				
+
 			case APP_CMD_LOST_FOCUS:
 				LOGI ("lost foc");
 				mnit_animating = 0;
 				App_lost_focus(nit_app);
 				mnit_frame();
 				break;
-				
+
 			case APP_CMD_PAUSE:
 				LOGI ("app pause");
 				App_pause(nit_app);
 				break;
-				
+
 				/*
 			case APP_CMD_STOP:
 				LOGI ("app stop");
 				App_stop(nit_app);
 				break;
-				
+
 			case APP_CMD_DESTROY:
 				LOGI ("app destrop");
 				App_destroy(nit_app);
 				break;
-				
+
 			case APP_CMD_START:
 				LOGI ("app start");
 				App_start(nit_app);
@@ -157,28 +159,28 @@ in "C" `{
 				LOGI ("app resume");
 				App_resume(nit_app);
 				break;
-				
+
 			case APP_CMD_LOW_MEMORY:
 				LOGI ("app low mem");
 				break;
-				
+
 			case APP_CMD_CONFIG_CHANGED:
 				LOGI ("app cmd conf ch");
 				break;
-				
+
 			case APP_CMD_INPUT_CHANGED:
 				LOGI ("app cmd in ch");
 				break;
-				
+
 			case APP_CMD_WINDOW_RESIZED:
 				mnit_orientation_changed = 1;
 				LOGI ("app win res");
 				break;
-				
+
 			case APP_CMD_WINDOW_REDRAW_NEEDED:
 				LOGI ("app win redraw needed");
 				break;
-				
+
 			case APP_CMD_CONTENT_RECT_CHANGED:
 				LOGI ("app content rect ch");
 				break;
@@ -190,7 +192,7 @@ in "C" `{
 		mnit_java_app = app;
 
 		app_dummy();
-		
+
 		main(0, NULL);
 	}
 
@@ -240,7 +242,7 @@ in "C" `{
 
 extern InnerAndroidMotionEvent in "C" `{AInputEvent *`}
 	super Pointer
-	private fun pointers_count: Int is extern `{ 
+	private fun pointers_count: Int is extern `{
 	return AMotionEvent_getPointerCount(recv);
 	`}
 	private fun just_went_down: Bool is extern `{
@@ -271,16 +273,16 @@ extern class AMotionEventAction `{ int32_t `}
 end
 
 interface AndroidInputEvent
-	super InputEvent 
+	super InputEvent
 end
 
 class AndroidMotionEvent
 	super AndroidInputEvent
 	super MotionEvent
-	
+
 	private init(ie: InnerAndroidMotionEvent) do inner_event = ie
 	private var inner_event: InnerAndroidMotionEvent
-	
+
 	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
 	fun pointers: Array[AndroidPointerEvent]
 	do
@@ -318,17 +320,17 @@ class AndroidPointerEvent
 
 	protected var motion_event: AndroidMotionEvent
 	protected var pointer_id: Int
-	
+
 	redef fun x: Float do return extern_x(motion_event.inner_event, pointer_id)
 	private fun extern_x(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
 		return ((int) AMotionEvent_getX(motion_event, pointer_id) * mnit_zoom);
 	`}
-	
+
 	redef fun y: Float do return extern_y(motion_event.inner_event, pointer_id)
 	private fun extern_y(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
 		return ((int) AMotionEvent_getY(motion_event, pointer_id) * mnit_zoom) + 32;
 	`}
-	
+
 	fun pressure: Float do return extern_pressure(motion_event.inner_event, pointer_id)
 	private fun extern_pressure(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
 		return AMotionEvent_getPressure(motion_event, pointer_id);
@@ -356,7 +358,7 @@ extern AndroidKeyEvent in "C" `{AInputEvent *`}
 	fun key_code: Int is extern `{
 		return AKeyEvent_getKeyCode(recv);
 	`}
-	
+
 	fun key_char: Char is extern `{
 		int code = AKeyEvent_getKeyCode(recv);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
@@ -382,6 +384,15 @@ redef class App
 	redef type IE: AndroidInputEvent
 	redef type D: Opengles1Display
 
+	var accelerometer = new AndroidSensor
+	var magnetic_field = new AndroidSensor
+	var gyroscope = new AndroidSensor
+	var light = new AndroidSensor
+	var proximity = new AndroidSensor
+	var sensormanager: ASensorManager
+	var eventqueue: ASensorEventQueue
+	var sensors_support_enabled writable = false
+
 	redef fun log_warning(msg) is extern import String.to_cstring `{
 		LOGW("%s", String_to_cstring(msg));
 	`}
@@ -395,8 +406,8 @@ redef class App
 
 		display = new Opengles1Display
 	end
-	
-	# these two are used as a callback from native to type incoming events
+
+	# these are used as a callback from native to type incoming events
 	private fun extern_input_key(event: AndroidKeyEvent): Bool
 	do
 		return input(event)
@@ -414,42 +425,160 @@ redef class App
 
 		return handled
 	end
-	
-	redef fun main_loop is extern import full_frame, generate_input `{
+
+	private fun extern_input_sensor_accelerometer(event: ASensorAccelerometer) do input(event)
+	private fun extern_input_sensor_magnetic_field(event: ASensorMagneticField) do input(event)
+	private fun extern_input_sensor_gyroscope(event: ASensorGyroscope) do input(event)
+	private fun extern_input_sensor_light(event: ASensorLight) do input(event)
+	private fun extern_input_sensor_proximity(event: ASensorProximity) do input(event)
+
+	# Sensors support
+	# The user decides which sensors he wants to use by setting them enabled
+	private fun enable_sensors
+	do
+		if sensors_support_enabled then enable_sensors_management else return
+		if accelerometer.enabled then enable_accelerometer
+		if magnetic_field.enabled then enable_magnetic_field
+		if gyroscope.enabled then enable_gyroscope
+		if light.enabled then enable_light
+		if proximity.enabled then enable_proximity
+	end
+
+	private fun enable_sensors_management
+	do
+		sensormanager = new ASensorManager.get_instance
+		#eventqueue = sensormanager.create_event_queue(new NdkAndroidApp)
+		eventqueue = initialize_event_queue(sensormanager)
+	end
+
+	# HACK: need a nit method to get mnit_java_app, then we can use the appropriate sensormanager.create_event_queue method to initialize the event queue
+	private fun initialize_event_queue(sensormanager: ASensorManager): ASensorEventQueue `{
+		return ASensorManager_createEventQueue(sensormanager, mnit_java_app->looper, LOOPER_ID_USER, NULL, NULL);
+	`}
+
+	private fun enable_accelerometer
+	do
+		accelerometer.asensor = sensormanager.get_default_sensor(new ASensorType.accelerometer)
+		if accelerometer.asensor.address_is_null then 
+				print "Accelerometer sensor unavailable" 
+		else
+				if eventqueue.enable_sensor(accelerometer.asensor) < 0 then print "Accelerometer enabling failed"
+			eventqueue.set_event_rate(accelerometer.asensor, accelerometer.event_rate)
+		end
+	end
+
+	private fun enable_magnetic_field
+	do
+		magnetic_field.asensor = sensormanager.get_default_sensor(new ASensorType.magnetic_field)
+		if magnetic_field.asensor.address_is_null then
+				print "Magnetic Field unavailable"
+		else
+			if eventqueue.enable_sensor(magnetic_field.asensor) < 0 then print "Magnetic Field enabling failed"
+			eventqueue.set_event_rate(magnetic_field.asensor, magnetic_field.event_rate)
+		end
+	end
+
+	private fun enable_gyroscope
+	do
+		gyroscope.asensor = sensormanager.get_default_sensor(new ASensorType.gyroscope)
+		if gyroscope.asensor.address_is_null then
+				print "Gyroscope sensor unavailable"
+		else
+			if eventqueue.enable_sensor(gyroscope.asensor) < 0 then print "Gyroscope enabling failed"
+			eventqueue.set_event_rate(gyroscope.asensor, gyroscope.event_rate)
+		end
+	end
+
+	private fun enable_light
+	do
+		light.asensor = sensormanager.get_default_sensor(new ASensorType.light)
+		if light.asensor.address_is_null then
+				print "Light sensor unavailable"
+		else
+			if eventqueue.enable_sensor(light.asensor) < 0 then print "Light enabling failed"
+			eventqueue.set_event_rate(light.asensor, light.event_rate)
+		end
+	end
+
+	private fun enable_proximity
+	do
+		proximity.asensor = sensormanager.get_default_sensor(new ASensorType.proximity)
+		if proximity.asensor.address_is_null then 
+				print "Proximity sensor unavailable"
+		else
+			if eventqueue.enable_sensor(proximity.asensor) < 0 then print "Proximity enabling failed"
+			eventqueue.set_event_rate(light.asensor, light.event_rate)
+		end
+	end
+
+	redef fun main_loop is extern import full_frame, generate_input, enable_sensors `{
 		LOGI("nitni loop");
-		
+
 		nit_app = recv;
 
 		mnit_java_app->userData = &nit_app;
 		mnit_java_app->onAppCmd = mnit_handle_cmd;
 		mnit_java_app->onInputEvent = mnit_handle_input;
-		
+
+		//Enbales sensors if needed
+		App_enable_sensors(nit_app);
+
 		while (1) {
 			App_generate_input(recv);
 
 			if (mnit_java_app->destroyRequested != 0) return;
-			
+
 			if (mnit_animating == 1) {
 				mnit_frame();
 				LOGI("frame at loop end 1");
 			}
 		}
-		
-	   /* App_exit(); // this is unreachable anyway*/
+		/* App_exit(); // this is unreachable anyway*/
 	`}
 
-	redef fun generate_input import save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion `{
+	redef fun generate_input import save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion, extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue `{
 		int ident;
 		int events;
 		static int block = 0;
 		struct android_poll_source* source;
 
 		while ((ident=ALooper_pollAll(0, NULL, &events,
-				(void**)&source)) >= 0) { /* first 0 is for non-blocking */ 
+				(void**)&source)) >= 0) { /* first 0 is for non-blocking */
 
 			// Process this event.
 			if (source != NULL)
 				source->process(mnit_java_app, source);
+
+			//If a sensor has data, process it
+			if(ident == LOOPER_ID_USER) {
+				//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
+				ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
+				int nbevents;
+				ASensorEventQueue* queue = App_eventqueue(nit_app);
+				while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
+					int i;
+					for(i = 0; i < nbevents; i++){
+						ASensorEvent event = events[i];
+						switch (event.type) {
+							case ASENSOR_TYPE_ACCELEROMETER:
+								App_extern_input_sensor_accelerometer(nit_app, &event);
+								break;
+							case ASENSOR_TYPE_MAGNETIC_FIELD:
+								App_extern_input_sensor_magnetic_field(nit_app, &event);
+								break;
+							case ASENSOR_TYPE_GYROSCOPE:
+								App_extern_input_sensor_gyroscope(nit_app, &event);
+								break;
+							case ASENSOR_TYPE_LIGHT:
+								App_extern_input_sensor_light(nit_app, &event);
+								break;
+							case ASENSOR_TYPE_PROXIMITY:
+								App_extern_input_sensor_proximity(nit_app, &event);
+								break;
+						}
+					}
+				}
+			}
 
 			// Check if we are exiting.
 			if (mnit_java_app->destroyRequested != 0) {
@@ -459,4 +588,3 @@ redef class App
 		}
 	`}
 end
-

@@ -134,33 +134,33 @@ private class CCompilerOptionsPhase
 		end
 
 		# retreive module
-		var nmodule = nmoduledecl.parent.as(AModule)
+		var mmodule = nmoduledecl.parent.as(AModule).mmodule.as(not null)
 
 		for opt in simplified_options do
 			var cmd = opt.option
 			if annotation_name == compiler_annotation_name then
-				process_c_compiler_annotation(nmodule, cmd)
+				process_c_compiler_annotation(mmodule, cmd)
 			else if annotation_name == linker_annotation_name then
-				process_c_linker_annotation(nmodule, cmd)
+				process_c_linker_annotation(mmodule, cmd)
 			else if annotation_name == cpp_compiler_annotation_name then
-				process_cpp_compiler_annotation(nmodule, cmd)
+				process_cpp_compiler_annotation(mmodule, cmd)
 			else abort
 		end
 	end
 
-	fun process_c_compiler_annotation(nmodule: AModule, opt: String)
+	fun process_c_compiler_annotation(mmodule: MModule, opt: String)
 	do
-		nmodule.c_compiler_options = "{nmodule.c_compiler_options} {opt}"
+		mmodule.c_compiler_options = "{mmodule.c_compiler_options} {opt}"
 	end
 
-	fun process_c_linker_annotation(nmodule: AModule, opt: String)
+	fun process_c_linker_annotation(mmodule: MModule, opt: String)
 	do
-		nmodule.c_linker_options = "{nmodule.c_linker_options} {opt}"
+		mmodule.c_linker_options = "{mmodule.c_linker_options} {opt}"
 	end
 
-	fun process_cpp_compiler_annotation(nmodule: AModule, opt: String)
+	fun process_cpp_compiler_annotation(mmodule: MModule, opt: String)
 	do
-		nmodule.cpp_compiler_options = "{nmodule.cpp_compiler_options} {opt}"
+		mmodule.cpp_compiler_options = "{mmodule.cpp_compiler_options} {opt}"
 	end
 end
 

@@ -249,7 +249,7 @@ private class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new Buffer.from(txt)
+		var val = new FlatBuffer.from(txt)
 		val.add('\0')
 		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
@@ -264,7 +264,7 @@ private class NaiveInterpreter
 	# Return a stack stace. One line per function
 	fun stack_trace: String
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.append(",---- Stack trace -- - -  -\n")
 		for f in frames do
 			b.append("| {f.mpropdef} ({f.current_node.location})\n")
@@ -763,7 +763,7 @@ redef class AInternMethPropdef
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(Buffer)
+				var destval = args[1].val.as(FlatBuffer)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
@@ -779,7 +779,7 @@ redef class AInternMethPropdef
 				if toval + lenval >= destval.length then
 					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
 				end
-				recvval.copy(fromval, lenval, destval, toval)
+				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
 				return null
 			else if pname == "atoi" then
 				return v.int_instance(recvval.to_i)
@@ -866,12 +866,12 @@ redef class AExternMethPropdef
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
-				recvval.as(OStream).write(a1.substring(0, args[2].to_i))
+				recvval.as(OStream).write(a1.substring(0, args[2].to_i).to_s)
 				return args[2]
 			else if pname == "io_read" then
 				var str = recvval.as(IStream).read(args[2].to_i)
 				var a1 = args[1].val.as(Buffer)
-				new Buffer.from(str).copy(0, str.length, a1, 0)
+				new FlatBuffer.from(str).copy(0, str.length, a1.as(FlatBuffer), 0)
 				return v.int_instance(str.length)
 			else if pname == "io_close" then
 				recvval.as(IOS).close
@@ -1253,19 +1253,19 @@ redef class AForExpr
 		if col.mtype isa MNullType then fatal(v, "Receiver is null")
 
 		#self.debug("col {col}")
-		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
+		var iter = v.callsite(method_iterator, [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
-			var isok = v.send(v.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
+			var isok = v.callsite(method_is_ok, [iter]).as(not null)
 			if not isok.is_true then return
 			if self.variables.length == 1 then
-				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.callsite(method_item, [iter]).as(not null)
 				#self.debug("item {item}")
 				v.frame.map[self.variables.first] = item
 			else if self.variables.length == 2 then
-				var key = v.send(v.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				var key = v.callsite(method_key, [iter]).as(not null)
 				v.frame.map[self.variables[0]] = key
-				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.callsite(method_item, [iter]).as(not null)
 				v.frame.map[self.variables[1]] = item
 			else
 				abort
@@ -1274,7 +1274,7 @@ redef class AForExpr
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
 			if v.is_escaping then return
-			v.send(v.force_get_primitive_method("next", iter.mtype), [iter])
+			v.callsite(method_next, [iter])
 		end
 	end
 end
@@ -1419,7 +1419,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end
@@ -1434,7 +1434,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
+		v.callsite(init_callsite, [res, e1, e2])
 		return res
 	end
 end

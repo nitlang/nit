@@ -24,6 +24,8 @@ module ordered_tree
 # The class can be used as it to work with generic tree.
 # The class can also be specialized to provide more specific behavior.
 class OrderedTree[E: Object]
+	super Streamable
+
 	# Sequence
 	var roots = new Array[E]
 	var sub = new HashMap[E, Array[E]]
@@ -49,17 +51,17 @@ class OrderedTree[E: Object]
 
 	# print the full tree on `o`
 	# Write a ASCII-style tree and use the `display` method to label elements
-	fun pretty(o: OStream)
+	redef fun write_to(stream: OStream)
 	do
 		var last = roots.last
 		for r in roots do
-			o.write display(r)
-			o.write "\n"
-			sub_pretty(o, r, "")
+			stream.write display(r)
+			stream.write "\n"
+			sub_write_to(stream, r, "")
 		end
 	end
 
-	private fun sub_pretty(o: OStream, e: E, prefix: String)
+	private fun sub_write_to(o: OStream, e: E, prefix: String)
 	do
 		if not sub.has_key(e) then return
 		var subs = sub[e]
@@ -67,17 +69,17 @@ class OrderedTree[E: Object]
 		for e2 in subs do
 			if e2 != last then
 				o.write "{prefix}|--{display(e2)}\n"
-				sub_pretty(o, e2, prefix+"|  ")
+				sub_write_to(o, e2, prefix+"|  ")
 			else
 				o.write "{prefix}`--{display(e2)}\n"
-				sub_pretty(o, e2, prefix+"   ")
+				sub_write_to(o, e2, prefix+"   ")
 			end
 		end
 	end
 
 	# Sort roots and other elements using a comparator method
 	# This method basically sorts roots then each group of children
-	fun sort_with(comparator: AbstractSorter[E])
+	fun sort_with(comparator: Comparator[E])
 	do
 		comparator.sort(roots)
 		for a in sub.values do

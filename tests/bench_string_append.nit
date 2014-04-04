@@ -22,7 +22,7 @@ end
 var s = "*"
 var i = 0
 while i < n do
-	var s2 = new Buffer.from("Je dis «")
+	var s2 = new FlatBuffer.from("Je dis «")
 	s2.append(s)
 	s2.append("» et redis «")
 	s2.append(s)
@@ -33,16 +33,15 @@ while i < n do
 	s = s2.to_s
 	i = i + 1
 end
-print("Je dis «Je dis".search_all_in(s).length)
+print(s.search_all("Je dis «Je dis").length)
 
 i = 0
 var j = 0
 while j >= 0 do
-	j = "Je dis «Je dis".search_index_in(s, j)
-	if j >= 0 then
-		i = i + 1
-		j = j + 1
-	end
+	var r = s.search_from("Je dis «Je dis", j)
+	if r == null then break
+	i = i + 1
+	j = r.from + 1
 end
 print(i)
 

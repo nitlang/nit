@@ -21,8 +21,8 @@ import literal
 import typing
 import auto_super_init
 import frontend
-import common_ffi
 import platform
+import c_tools
 
 # Add compiling options
 redef class ToolContext
@@ -52,19 +52,24 @@ redef class ToolContext
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	# --invocation-metrics
+	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --no-stacktrace
 	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
 	# --stack-trace-C-to-Nit-name-binding
 	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
+	# --no-gcc-directives
+	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
-		self.option_context.add_option(self.opt_typing_test_metrics)
+		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_stacktrace)
+		self.option_context.add_option(self.opt_no_gcc_directive)
 	end
 end
 
@@ -199,11 +204,8 @@ class MakefileToolchain
 
 		# FFI
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amodule = m2m[m]
-			if m.uses_ffi or amodule.uses_legacy_ni then
-				compiler.finalize_ffi_for_module(amodule)
-			end
+		for m in compiler.mainmodule.in_importation.greaters do
+			compiler.finalize_ffi_for_module(m)
 		end
 
 		# Copy original .[ch] files to compile_dir
@@ -302,9 +304,9 @@ class MakefileToolchain
 
 		var linker_options = new HashSet[String]
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amod = m2m[m]
-			linker_options.add(amod.c_linker_options)
+		for m in mainmodule.in_importation.greaters do
+			var libs = m.collect_linker_libs
+			if libs != null then linker_options.add_all(libs)
 		end
 
 		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
@@ -317,33 +319,23 @@ class MakefileToolchain
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -c -o {o} {f}\n\n")
 			ofiles.add(o)
 			dep_rules.add(o)
 		end
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then
-				var basename = f.filename.basename(".c")
-				var o = "{basename}.extern.o"
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-				ofiles.add(o)
-				dep_rules.add(o)
-			else
-				var o = f.makefile_rule_name
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n")
-				makefile.write("\t{f.makefile_rule_content}\n")
-				dep_rules.add(f.makefile_rule_name)
-
-				if f isa ExternCppFile then ofiles.add(o)
-			end
+			var o = f.makefile_rule_name
+			var ff = f.filename.basename("")
+			makefile.write("{o}: {ff}\n")
+			makefile.write("\t{f.makefile_rule_content}\n\n")
+			dep_rules.add(f.makefile_rule_name)
+			ofiles.add(o)
 		end
 
 		# Link edition
-		makefile.write("{outpath}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
@@ -475,8 +467,26 @@ abstract class AbstractCompiler
 		compile_header_structs
 		compile_nitni_structs
 
-		# Signal handler function prototype
-		self.header.add_decl("void show_backtrace(int);")
+		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
+		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
+			# Signal handler function prototype
+			self.header.add_decl("void show_backtrace(int);")
+		else
+			self.header.add_decl("void show_backtrace(int) __attribute__ ((noreturn));")
+		end
+
+		if gccd_disable.has("likely") or gccd_disable.has("all") then
+			self.header.add_decl("#define likely(x)       (x)")
+			self.header.add_decl("#define unlikely(x)     (x)")
+		else if gccd_disable.has("correct-likely") then
+			# invert the `likely` definition
+			# Used by masochists to bench the worst case
+			self.header.add_decl("#define likely(x)       __builtin_expect((x),0)")
+			self.header.add_decl("#define unlikely(x)     __builtin_expect((x),1)")
+		else
+			self.header.add_decl("#define likely(x)       __builtin_expect((x),1)")
+			self.header.add_decl("#define unlikely(x)     __builtin_expect((x),0)")
+		end
 
 		# Global variable used by intern methods
 		self.header.add_decl("extern int glob_argc;")
@@ -519,6 +529,15 @@ abstract class AbstractCompiler
 				v.compiler.header.add_decl("extern long count_type_test_unresolved_{tag};")
 				v.compiler.header.add_decl("extern long count_type_test_skipped_{tag};")
 			end
+		end
+
+		if self.modelbuilder.toolcontext.opt_invocation_metrics.value then
+			v.add_decl("long count_invoke_by_tables;")
+			v.add_decl("long count_invoke_by_direct;")
+			v.add_decl("long count_invoke_by_inline;")
+			v.compiler.header.add_decl("extern long count_invoke_by_tables;")
+			v.compiler.header.add_decl("extern long count_invoke_by_direct;")
+			v.compiler.header.add_decl("extern long count_invoke_by_inline;")
 		end
 
 		v.add_decl("void sig_handler(int signo)\{")
@@ -567,6 +586,7 @@ abstract class AbstractCompiler
 		v.add("signal(SIGINT, sig_handler);")
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
+		v.add("signal(SIGPIPE, sig_handler);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
@@ -611,6 +631,14 @@ abstract class AbstractCompiler
 			end
 		end
 
+		if self.modelbuilder.toolcontext.opt_invocation_metrics.value then
+			v.add_decl("long count_invoke_total;")
+			v.add("count_invoke_total = count_invoke_by_tables + count_invoke_by_direct + count_invoke_by_inline;")
+			v.add("printf(\"# dynamic count_invocation: total %ld\\n\", count_invoke_total);")
+			v.add("printf(\"by table: %ld (%.2f%%)\\n\", count_invoke_by_tables, 100.0*count_invoke_by_tables/count_invoke_total);")
+			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
+			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
+		end
 		v.add("return 0;")
 		v.add("\}")
 	end
@@ -708,19 +736,14 @@ abstract class AbstractCompiler
 		end
 	end
 
+	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
+
 	# Division facility
 	# Avoid division by zero by returning the string "n/a"
 	fun div(a,b:Int):String
 	do
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
-	end
-
-	fun finalize_ffi_for_module(nmodule: AModule)
-	do
-		var visitor = new_visitor
-		nmodule.finalize_ffi(visitor, modelbuilder)
-		nmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -932,7 +955,7 @@ abstract class AbstractCompilerVisitor
 
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
-			self.add("if ({recv} == NULL) \{")
+			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
 		end
@@ -1151,7 +1174,7 @@ abstract class AbstractCompilerVisitor
 	fun add_cast(value: RuntimeVariable, mtype: MType, tag: String)
 	do
 		var res = self.type_test(value, mtype, tag)
-		self.add("if (!{res}) \{")
+		self.add("if (unlikely(!{res})) \{")
 		var cn = self.class_name_string(value)
 		self.add("fprintf(stderr, \"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
 		self.add_raw_abort
@@ -2177,29 +2200,29 @@ redef class AForExpr
 		var cl = v.expr(self.n_expr, null)
 		var it_meth = self.method_iterator
 		assert it_meth != null
-		var it = v.send(it_meth, [cl])
+		var it = v.compile_callsite(it_meth, [cl])
 		assert it != null
 		v.add("for(;;) \{")
 		var isok_meth = self.method_is_ok
 		assert isok_meth != null
-		var ok = v.send(isok_meth, [it])
+		var ok = v.compile_callsite(isok_meth, [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
 		if self.variables.length == 1 then
 			var item_meth = self.method_item
 			assert item_meth != null
-			var i = v.send(item_meth, [it])
+			var i = v.compile_callsite(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables.first), i)
 		else if self.variables.length == 2 then
 			var key_meth = self.method_key
 			assert key_meth != null
-			var i = v.send(key_meth, [it])
+			var i = v.compile_callsite(key_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[0]), i)
 			var item_meth = self.method_item
 			assert item_meth != null
-			i = v.send(item_meth, [it])
+			i = v.compile_callsite(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[1]), i)
 		else
@@ -2209,7 +2232,7 @@ redef class AForExpr
 		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		var next_meth = self.method_next
 		assert next_meth != null
-		v.send(next_meth, [it])
+		v.compile_callsite(next_meth, [it])
 		v.add("\}")
 		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
@@ -2221,7 +2244,7 @@ redef class AAssertExpr
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return
 
 		var cond = v.expr_bool(self.n_expr)
-		v.add("if (!{cond}) \{")
+		v.add("if (unlikely(!{cond})) \{")
 		v.stmt(self.n_else)
 		var nid = self.n_id
 		if nid != null then
@@ -2352,7 +2375,7 @@ redef class ACrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2364,7 +2387,7 @@ redef class AOrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
+		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2406,7 +2429,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		v.add("if ({i} == NULL) \{")
+		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
 		return i
@@ -2610,15 +2633,11 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
-end
 
-redef class AModule
-	# Does this module use the legacy native interface?
-	fun uses_legacy_ni: Bool is abstract
+	# Write FFI and nitni results to file
+	fun finalize_ffi(c: AbstractCompiler) do end
 
-	# Write FFI results to file
-	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
-
-	# Write nitni results to file
-	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
+	# Give requided addinional system libraries (as given to LD_LIBS)
+	# Note: can return null instead of an empty set
+	fun collect_linker_libs: nullable Set[String] do return null
 end

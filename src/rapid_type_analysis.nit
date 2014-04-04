@@ -31,6 +31,8 @@ import auto_super_init
 import csv # for live_types_to_csv
 import ordered_tree # for live_methods_to_tree
 
+private import more_collections
+
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
@@ -74,6 +76,36 @@ class RapidTypeAnalysis
 
 	# Live methods.
 	var live_methods = new HashSet[MMethod]
+
+	# Live callsites.
+	var live_callsites = new HashSet[CallSite]
+
+	private var live_targets_cache = new HashMap2[MType, MProperty, Set[MMethodDef]]
+
+	# The live targets of a specific callsite.
+	fun live_targets(callsite: CallSite): Set[MMethodDef]
+	do
+		var mtype = callsite.recv
+		var anchor = callsite.anchor
+		if anchor != null then mtype = mtype.anchor_to(callsite.mmodule, anchor)
+		if mtype isa MNullableType then mtype = mtype.mtype
+		assert mtype isa MClassType
+		mtype = mtype.mclass.intro.bound_mtype
+		var mproperty = callsite.mproperty
+		var res = live_targets_cache[mtype, mproperty]
+		if res != null then return res
+		res = new ArraySet[MMethodDef]
+		live_targets_cache[mtype, mproperty] = res
+
+		for c in live_classes do
+			var tc = c.intro.bound_mtype
+			if not tc.is_subtype(mainmodule, null, mtype) then continue
+			var d = mproperty.lookup_first_definition(mainmodule, tc)
+			res.add d
+		end
+
+		return res
+	end
 
 	# Live call-to-super.
 	var live_super_sends = new HashSet[MMethodDef]
@@ -442,7 +474,10 @@ class RapidTypeVisitor
 
 	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
 
-	fun add_callsite(callsite: nullable CallSite) do if callsite != null then analysis.add_send(callsite.recv, callsite.mproperty)
+	fun add_callsite(callsite: nullable CallSite) do if callsite != null then
+		analysis.add_send(callsite.recv, callsite.mproperty)
+		analysis.live_callsites.add(callsite)
+	end
 end
 
 ###
@@ -515,8 +550,7 @@ redef class ACrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "init")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -525,8 +559,7 @@ redef class AOrangeExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var prop = v.get_method(mtype, "without_last")
-		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(init_callsite)
 	end
 end
 
@@ -605,22 +638,17 @@ end
 redef class AForExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var recvtype = self.n_expr.mtype.as(not null)
-		var colltype = self.coltype.as(not null)
-		var itmeth = v.get_method(colltype, "iterator")
-		v.add_send(recvtype, itmeth)
-		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.intro.bound_mtype
-		var objtype = v.get_class("Object").mclass_type
-		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
+		v.add_callsite(self.method_iterator)
+		v.add_callsite(self.method_is_ok)
 		if self.variables.length == 1 then
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_item)
 		else if self.variables.length == 2 then
-			v.add_send(objtype, v.get_method(iteratortype, "key"))
-			v.add_send(objtype, v.get_method(iteratortype, "item"))
+			v.add_callsite(self.method_key)
+			v.add_callsite(self.method_item)
 		else
 			abort
 		end
-		v.add_send(objtype, v.get_method(iteratortype, "next"))
+		v.add_callsite(self.method_next)
 	end
 end
 

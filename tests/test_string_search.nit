@@ -23,11 +23,11 @@ fun search_and_split(s: String, p: Pattern)
 	    print("* [{m.from}, {m.after}[ = \"{m}\"")
 	end
 	print("splits:")
-	for m in p.split_in(s) do
-	    print("* [{m.from}, {m.after}[ = \"{m}\"")
+	for m in s.split(p) do
+	    print("* \"{m}\"")
 	end
 
-	print("join: {s.split_with(p).join(", ")}")
+	print("join: {s.split(p).join(", ")}")
     end
     
 search_and_split("A simple example", ' ')

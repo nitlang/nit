@@ -72,6 +72,15 @@ var configs = config_chooser.choose(egl_display)
 assert configs != null else print "choosing config failed: {egl_display.error}"
 assert not configs.is_empty else print "no EGL config"
 
+print "{configs.length} EGL configs available"
+for config in configs do
+	var attribs = config.attribs(egl_display)
+	print "* caveats: {attribs.caveat}"
+	print "  conformant to: {attribs.conformant}"
+	print "  size of RGBA: {attribs.red_size} {attribs.green_size} {attribs.blue_size} {attribs.alpha_size}"
+	print "  buffer, depth, stencil: {attribs.buffer_size} {attribs.depth_size} {attribs.stencil_size}"
+end
+
 var config = configs.first
 
 var format = config.attribs(egl_display).native_visual_id

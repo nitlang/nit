@@ -21,16 +21,35 @@ intrude import abstract_compiler
 intrude import common_ffi
 import nitni
 
-redef class AModule
+redef class MModule
 	private var foreign_callbacks = new ForeignCallbackSet
 	var nitni_ccu: nullable CCompilationUnit = null
 
-	redef var uses_legacy_ni: Bool = false
-
-	redef fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder)
+	private fun nmodule(v: AbstractCompilerVisitor): nullable AModule
 	do
-		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
-		for file in ffi_files do v.compiler.extern_bodies.add(file)
+		var m2n = v.compiler.modelbuilder.mmodule2nmodule
+		return m2n.get_or_null(self)
+	end
+
+	redef fun finalize_ffi(compiler: AbstractCompiler)
+	do
+		if not uses_ffi then return
+
+		var v = compiler.new_visitor
+		var n = nmodule(v)
+		if n == null then return
+		n.finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
+		for file in n.ffi_files do v.compiler.extern_bodies.add(file)
+
+		ensure_compile_nitni_base(v)
+
+		nitni_ccu.header_c_types.add("#include \"{name}._ffi.h\"\n")
+
+		nitni_ccu.write_as_nitni(n, v.compiler.modelbuilder.compile_dir)
+
+		for file in nitni_ccu.files do
+			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
+		end
 	end
 
 	fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
@@ -40,17 +59,13 @@ redef class AModule
 		nitni_ccu = new CCompilationUnit
 	end
 
-	redef fun finalize_nitni(v: AbstractCompilerVisitor)
+	redef fun collect_linker_libs
 	do
-		ensure_compile_nitni_base(v)
-
-		nitni_ccu.header_c_types.add("#include \"{mmodule.name}._ffi.h\"\n")
-
-		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
-
-		for file in nitni_ccu.files do
-			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
-		end
+		var s = c_linker_options
+		if s.is_empty then return null
+		var res = new ArraySet[String]
+		res.add s
+		return res
 	end
 
 	var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
@@ -68,7 +83,8 @@ redef class AExternPropdef
 	fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var amainmodule = v.compiler.modelbuilder.mmodule2nmodule[v.compiler.mainmodule]
+		var mainmodule = v.compiler.mainmodule
+		var amainmodule = v.compiler.modelbuilder.mmodule2nmodule[mainmodule]
 		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -80,33 +96,33 @@ redef class AExternPropdef
 		compile_ffi_method(amodule)
 
 		# nitni - Compile missing callbacks
-		amodule.ensure_compile_nitni_base(v)
-		var ccu = amodule.nitni_ccu.as(not null)
+		mmodule.ensure_compile_nitni_base(v)
+		var ccu = mmodule.nitni_ccu.as(not null)
 
 		for mtype in foreign_callbacks.types do
 			if not mtype.is_cprimitive then
 				mtype.compile_extern_type(v, ccu)
 
 				# has callbacks already been compiled? (this may very well happen with global compilation)
-				if amodule.check_callback_compilation(mtype) then mtype.compile_extern_helper_functions(v, ccu)
+				if mmodule.check_callback_compilation(mtype) then mtype.compile_extern_helper_functions(v, ccu)
 			end
 		end
 
 		# compile callbacks
-		for cb in foreign_callbacks.callbacks do if amainmodule.check_callback_compilation(cb) then
+		for cb in foreign_callbacks.callbacks do if mainmodule.check_callback_compilation(cb) then
 			cb.compile_extern_callback(v, ccu)
 		end
 
-		for cb in foreign_callbacks.supers do if amainmodule.check_callback_compilation(cb) then
+		for cb in foreign_callbacks.supers do if mainmodule.check_callback_compilation(cb) then
 			cb.compile_extern_callback(v, ccu)
 		end
 
-		for cb in foreign_callbacks.casts do if amainmodule.check_callback_compilation(cb) then
+		for cb in foreign_callbacks.casts do if mainmodule.check_callback_compilation(cb) then
 			cb.compile_extern_callbacks(v, ccu)
 		end
 
 		# manage nitni callback set
-		amodule.foreign_callbacks.join(foreign_callbacks)
+		mmodule.foreign_callbacks.join(foreign_callbacks)
 	end
 end
 
@@ -119,7 +135,6 @@ redef class AExternMethPropdef
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
 		if nextern != null then
-			amodule.uses_legacy_ni = true
 			super
 			return
 		end
@@ -186,7 +201,6 @@ redef class AExternInitPropdef
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
 		if nextern != null then
-			amodule.uses_legacy_ni = true
 			super
 			return
 		end
@@ -305,28 +319,35 @@ redef class MNullableType
 	do
 		super
 
+		var base_cname = "null_{mtype.mangled_cname}"
+		var full_cname = "NIT_NULL___{base_cname}"
+
 		# In nitni files, declare internal function as extern 
-		var full_friendly_csignature = "{cname} {v.compiler.mainmodule.name}___null_{mtype.mangled_cname}()"
+		var full_friendly_csignature = "{cname_blind} {full_cname}()"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
-		var base_cname = "null_{mtype.mangled_cname}"
-		ccu.header_decl.add("#define {base_cname} {v.compiler.mainmodule.name}___{base_cname}\n")
+		ccu.header_decl.add("#define {base_cname} {full_cname}\n")
+
+		# FIXME: This is ugly an broke the separate compilation principle
+		# The real function MUST be compiled only once, #define pragma only protect the compiler, not the loader
+		# However, I am not sure of the right approach here (eg. week refs are ugly)
+		if is_already_compiled then return
+		is_already_compiled = true
 
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
-		var full_internal_csignature = "{cname_blind} {v.compiler.mainmodule.name}___null_{mtype.mangled_cname}()"
-		nitni_visitor.add("#ifndef NIT_NULL_null_{mtype.mangled_cname}")
-		nitni_visitor.add("#define NIT_NULL_null_{mtype.mangled_cname}")
+		var full_internal_csignature = "{cname_blind} {full_cname}()"
 		nitni_visitor.add("{full_internal_csignature} \{")
 		nitni_visitor.add("struct nitni_instance* ret_for_c;")
 		nitni_visitor.add("ret_for_c = malloc(sizeof(struct nitni_instance));")
 		nitni_visitor.add("ret_for_c->value = NULL;")
 		nitni_visitor.add("return ret_for_c;")
 		nitni_visitor.add("\}")
-		nitni_visitor.add("#endif")
 	end
+
+	private var is_already_compiled = false # FIXME to remove, show above
 end
 
 redef class MExplicitCall

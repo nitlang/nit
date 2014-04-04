@@ -102,6 +102,11 @@ interface MobileKeyEvent
 	fun is_home_key: Bool is abstract
 end
 
+# Sensor events like accelerometer, gyroscope etc for mobile apps
+interface SensorEvent
+	super InputEvent
+end
+
 # Quit event, used for window close button
 interface QuitEvent
 	super InputEvent

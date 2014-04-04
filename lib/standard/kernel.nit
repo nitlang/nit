@@ -246,7 +246,10 @@ universal Bool
 	redef fun ==(b) is intern
 	redef fun !=(b) is intern
 	redef fun output is intern
-	redef fun hash
+	redef fun hash do return to_i
+
+	# 1 if true and 0 if false
+	fun to_i: Int
 	do
 		if self then
 			return 1
@@ -591,4 +594,7 @@ end
 extern Pointer
 	# Is the address behind this Object at NULL?
 	fun address_is_null: Bool `{ return recv == NULL; `}
+
+	# Free the memory pointed by this pointer
+	fun free `{ free(recv); `}
 end

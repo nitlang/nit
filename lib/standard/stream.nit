@@ -37,7 +37,7 @@ interface IStream
 	# Read at most i bytes
 	fun read(i: Int): String
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
 			if c >= 0 then
@@ -52,7 +52,7 @@ interface IStream
 	fun read_line: String
 	do
 		assert not eof
-		var s = new Buffer
+		var s = new FlatBuffer
 		append_line_to(s)
 		return s.to_s
 	end
@@ -60,7 +60,7 @@ interface IStream
 	# Read all the stream until the eof.
 	fun read_all: String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
 			if c >= 0 then s.add(c.ascii)
@@ -102,10 +102,24 @@ end
 #
 # The point of this interface it to allow is instance to be efficenty
 # writen into a OStream without having to allocate a big String object
+#
+# ready-to-save documents usually provide this interface.
 interface Streamable
 	# Write itself to a `stream`
 	# The specific logic it let to the concrete subclasses
 	fun write_to(stream: OStream) is abstract
+
+	# Like `write_to` but return a new String (may be quite large)
+	#
+	# This funtionnality is anectodical, since the point
+	# of streamable object to to be efficienlty written to a
+	# stream without having to allocate and concatenate strings
+	fun write_to_string: String
+	do
+		var stream = new StringOStream
+		write_to(stream)
+		return stream.to_s
+	end
 end
 
 redef class String
@@ -132,7 +146,7 @@ abstract class BufferedIStream
 
 	redef fun read(i)
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		var j = _buffer_pos
 		var k = _buffer.length
 		while i > 0 do
@@ -154,7 +168,7 @@ abstract class BufferedIStream
 
 	redef fun read_all
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var j = _buffer_pos
 			var k = _buffer.length
@@ -207,7 +221,7 @@ abstract class BufferedIStream
 	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	var _buffer: nullable Buffer = null
+	var _buffer: nullable FlatBuffer = null
 
 	# The current position in the buffer
 	var _buffer_pos: Int = 0
@@ -221,7 +235,7 @@ abstract class BufferedIStream
 	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
-		_buffer = new Buffer.with_capacity(capacity)
+		_buffer = new FlatBuffer.with_capacity(capacity)
 		_buffer_pos = 0 # need to read
 	end
 end

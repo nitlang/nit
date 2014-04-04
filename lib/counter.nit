@@ -65,7 +65,7 @@ class Counter[E: Object]
 	fun sort: Array[E]
 	do
 		var res = map.keys.to_a
-		var sorter = new CounterSorter[E](self)
+		var sorter = new CounterComparator[E](self)
 		sorter.sort(res)
 		return res
 	end
@@ -170,8 +170,8 @@ class Counter[E: Object]
 	end
 end
 
-private class CounterSorter[E: Object]
-	super AbstractSorter[E]
+private class CounterComparator[E: Object]
+	super Comparator[E]
 	var counter: Counter[E]
 	redef fun compare(a,b) do return self.counter.map[a] <=> self.counter.map[b]
 end
@@ -180,7 +180,7 @@ redef class POSet[E]
 	private fun show_counter(c: Counter[Int])
 	do
 		var list = c.sort
-		(new ComparableSorter[Int]).sort(list)
+		default_comparator.sort(list)
 		for e in list do
 			print " {e} -> {c[e]} times ({div(c[e]*100, c.sum)}%)"
 		end

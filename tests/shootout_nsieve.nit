@@ -17,7 +17,7 @@
 fun nsieve(n: Int): Int
 do
 	var count = 0
-	var array = new Buffer.with_capacity(n)
+	var array = new FlatBuffer.with_capacity(n)
 	for i in [0..n[ do
 		array.chars[i] = 'o'
 	end

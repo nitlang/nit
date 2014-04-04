@@ -70,7 +70,7 @@ class NitUnitExecutor
 	do
 		block.clear
 
-		work(ndoc)
+		work(ndoc.to_mdoc)
 
 		if block.is_empty then return
 
@@ -93,7 +93,7 @@ class NitUnitExecutor
 		end
 		f.close
 
-		var cmd = "../bin/nitg --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var cmd = "../bin/nitg --ignore-visibility --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
@@ -221,15 +221,10 @@ end
 var toolcontext = new ToolContext
 
 toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir)
+toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
-
-toolcontext.process_options
+toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
-if args.is_empty or toolcontext.opt_help.value then
-	print "usage: nitunit [options] file.nit..."
-	toolcontext.option_context.usage
-	return
-end
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
@@ -247,4 +242,4 @@ end
 
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
-page.save(file)
+page.write_to_file(file)

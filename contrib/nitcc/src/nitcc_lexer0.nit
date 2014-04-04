@@ -96,7 +96,7 @@ class Lexer_nitcc
 
 	fun str
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.add('\'')
 		while iter.is_ok do
 			var c = iter.item
@@ -123,7 +123,7 @@ class Lexer_nitcc
 
 	fun id(c: Char)
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.add c
 		while iter.is_ok do
 			c = iter.item
@@ -140,7 +140,7 @@ class Lexer_nitcc
 
 	fun kw(c: Char)
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.add c
 		while iter.is_ok do
 			c = iter.item

@@ -25,7 +25,6 @@ module global_compiler
 
 import abstract_compiler
 import rapid_type_analysis
-import compiler_ffi
 
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
@@ -274,7 +273,7 @@ class GlobalCompilerVisitor
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
-		else if value.mtype.cname_blind == "void*" and mtype.cname_blind == "void*" then
+		else if value.mtype.ctype == "void*" and mtype.ctype == "void*" then
 			return value
 		else
 			# Bad things will appen!
@@ -902,8 +901,8 @@ private class CustomizedRuntimeFunction
 		var frame = new Frame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
-		var sig = new Buffer
-		var comment = new Buffer
+		var sig = new FlatBuffer
+		var comment = new FlatBuffer
 		var ret = mmethoddef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, selfvar)

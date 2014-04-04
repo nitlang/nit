@@ -16,6 +16,9 @@
 
 module string_ffi_ref_test
 
+intrude import string
+import file
+
 class StringTest
 
 	var copied_str: nullable String
@@ -28,16 +31,16 @@ class StringTest
 		referenced_str = null
 	end
 
-	fun get_c_string import String.items, NativeString.to_s, NativeString.to_s_with_copy, StringTest.ref_test, StringTest.copy_test `{
+	fun get_c_string import FlatString.items, NativeString.to_s, NativeString.to_s_with_copy, StringTest.ref_test, StringTest.copy_test `{
 		char* string = "This is a test string";
 
-		String ref_string = NativeString_to_s(string);
+		FlatString ref_string = NativeString_to_s(string);
 		StringTest_ref_test(recv, ref_string);
 
-		String copy_string = NativeString_to_s_with_copy(string);
+		FlatString copy_string = NativeString_to_s_with_copy(string);
 		StringTest_copy_test(recv, copy_string);
 
-		int same_refs = String_items(copy_string) == String_items(ref_string);
+		int same_refs = FlatString_items(copy_string) == FlatString_items(ref_string);
 
 		printf("Do the strings have the same NativeString reference ? ");
 

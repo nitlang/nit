@@ -23,13 +23,13 @@ import phase
 import frontend
 
 redef class ToolContext
-	var mclasses_metrics_phase = new MClassesMetricsPhase(self, null)
+	var mclasses_metrics_phase: Phase = new MClassesMetricsPhase(self, null)
 end
 
 # Extract metrics about mclasses from model.
 private class MClassesMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_mclasses.value and not toolcontext.opt_all.value then return
 		var csv = toolcontext.opt_csv.value

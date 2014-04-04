@@ -27,7 +27,7 @@ printn("The value of a is: ", a, ".\n")
 # Second way: Build a string and display it.
 # Pro: Eiffel way (rigourous).
 # Con: Eiffel way (heavy).
-var s = new Buffer.from("The value of a is: ")
+var s = new FlatBuffer.from("The value of a is: ")
 s.append(a.to_s)
 s.append(".\n")
 printn(s)

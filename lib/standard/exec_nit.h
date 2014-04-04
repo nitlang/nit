@@ -19,10 +19,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-#ifndef NONITCNI
-#include <exec._nitni.h>
-#endif
-
 typedef struct se_exec_data se_exec_data_t;
 struct se_exec_data {
 	pid_t id;

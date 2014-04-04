@@ -23,12 +23,12 @@ import phase
 import frontend
 
 redef class ToolContext
-	var model_hyperdoc_phase = new ModelHyperdocPhase(self, null)
+	var model_hyperdoc_phase: Phase = new ModelHyperdocPhase(self, null)
 end
 
 private class ModelHyperdocPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
 		generate_model_hyperdoc(toolcontext, toolcontext.modelbuilder.model)
@@ -39,7 +39,7 @@ end
 # The generated file contains the description of each entity of the model
 fun generate_model_hyperdoc(toolcontext: ToolContext, model: Model)
 do
-	var buf = new Buffer
+	var buf = new FlatBuffer
 	buf.append("<html>\n<body>\n")
 	buf.append("<h1>Model</h1>\n")
 

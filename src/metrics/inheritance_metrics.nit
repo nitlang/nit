@@ -24,13 +24,13 @@ import phase
 import frontend
 
 redef class ToolContext
-	var inheritance_metrics_phase = new InheritanceMetricsPhase(self, null)
+	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)
 end
 
 # Extract metrics about inheritance from model.
 private class InheritanceMetricsPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule)
+	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_inheritance.value and not toolcontext.opt_all.value then return
 		var csv = toolcontext.opt_csv.value

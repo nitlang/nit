@@ -200,22 +200,4 @@ class Template
 
 	# Flag to avoid infinite recursivity if a template contains itself
 	private var is_writing = false
-
-	# Like `write_to` but return a new String (may be quite large)
-	#
-	# Examples in this documentation use `write_to_string` but mainly for simplicity.
-	fun write_to_string: String
-	do
-		var stream = new StringOStream
-		write_to(stream)
-		return stream.to_s
-	end
-
-	# Like `write_to` but take care of creating the file
-	fun write_to_file(filepath: String)
-	do
-		var stream = new OFStream.open(filepath)
-		write_to(stream)
-		stream.close
-	end
 end

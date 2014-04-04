@@ -1,0 +1,10 @@
+.nit_compile/
+
+doc/
+bin/
+out/
+
+src/parser/*.orig
+src/parser/*.dump
+
+tests/students/

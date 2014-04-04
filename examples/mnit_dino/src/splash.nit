@@ -42,9 +42,9 @@ class SplashScreen
 
 		display.clear( 0.0, 0.5, 0.1 )
 
-		display.blit_centered( splash_head, dc, display.height/2+64 )
-		display.blit_centered( splash_title, dc, 32 )
-		display.blit_centered( splash_text, dc, 128 )
+		display.blit_centered(splash_head, dc, display.height/2+64+display.top_offset)
+		display.blit_centered(splash_title, dc, 32+display.top_offset)
+		display.blit_centered(splash_text, dc, 128+display.top_offset)
 
 		if ready then display.blit_centered( splash_play, dc, display.height-64 )
 

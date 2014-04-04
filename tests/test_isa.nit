@@ -28,7 +28,7 @@ print("string:")
 var a2: Object = "Bonjour"
 print(not a2 isa Int)
 print(a2 isa String)
-print(a2 isa AbstractArrayRead[Char])
+print(a2 isa Text)
 print(not a2 isa Iterator[Int])
 print(not a2 isa Discrete)
 print(a2 isa Object)
