@@ -208,7 +208,7 @@ abstract class Text
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		var myiter = self.chars.iterator_from(pos)
-		var itsiter = str.iterator
+		var itsiter = str.chars.iterator
 		while myiter.is_ok and itsiter.is_ok do
 			if myiter.item != itsiter.item then return false
 			myiter.next
@@ -425,7 +425,7 @@ abstract class Text
 	fun escape_more_to_c(chars: String): String
 	do
 		var b = new FlatBuffer
-		for c in escape_to_c do
+		for c in escape_to_c.chars do
 			if chars.chars.has(c) then
 				b.add('\\')
 			end
@@ -445,12 +445,12 @@ abstract class Text
 	#     assert s.length        ==  2
 	#     var u = s.unescape_nit
 	#     assert u.length        ==  1
-	#     assert u[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
 		var res = new FlatBuffer.with_capacity(self.length)
 		var was_slash = false
-		for c in self do
+		for c in chars do
 			if not was_slash then
 				if c == '\\' then
 					was_slash = true

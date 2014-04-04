@@ -934,7 +934,7 @@ redef class ATypePropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
-			for c in name do if c >= 'a' and c<= 'z' then
+			for c in name.chars do if c >= 'a' and c<= 'z' then
 				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
 				break
 			end

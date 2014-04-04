@@ -45,7 +45,7 @@ redef class MMethod
 		if nit_name == ">>" then return "_right"
 		if nit_name == "<=>" then return "_starship"
 
-		if nit_name.last == '=' then return "{nit_name.substring(0, nit_name.length-1)}__assign"
+		if nit_name.chars.last == '=' then return "{nit_name.substring(0, nit_name.length-1)}__assign"
 		return nit_name
 	end
 end
