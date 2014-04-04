@@ -256,8 +256,6 @@ extern class SDLRectangle `{SDL_Rect*`}
 
 	fun h=(v: Int) `{ recv->h = (Uint16)v; `}
 	fun h: Int `{ return recv->h; `}
-
-	fun destroy `{ `}
 end
 
 interface SDLInputEvent
