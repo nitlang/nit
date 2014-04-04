@@ -191,7 +191,7 @@ abstract class Lexer
 				c = '\0'
 				next = null
 			else
-				c = text[pos]
+				c = text.chars[pos]
 				next = state.trans(c)
 			end
 			if next == null then
@@ -467,7 +467,7 @@ end
 class NLexerError
 	super NError
 
-	redef fun unexpected do return "character '{text.first}'"
+	redef fun unexpected do return "character '{text.chars.first}'"
 end
 
 # A parser error linked to a unexpected token

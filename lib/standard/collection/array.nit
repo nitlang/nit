@@ -131,6 +131,7 @@ abstract class AbstractArrayRead[E]
 	end
 
 	redef fun iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
+	redef fun reverse_iterator do return new ArrayReverseIterator[E](self)
 end
 
 # Resizable one dimension array of objects.
@@ -362,6 +363,20 @@ private class ArrayIterator[E]
 
 	redef readable var _index: Int = 0
 	var _array: AbstractArrayRead[E]
+end
+
+private class ArrayReverseIterator[E]
+	super ArrayIterator[E]
+
+	redef fun is_ok do return _index >= 0
+
+	redef fun next do _index -= 1
+
+	init(a: AbstractArrayRead[E])
+	do
+		_array = a
+		_index = a.length - 1
+	end
 end
 
 # Others collections ##########################################################

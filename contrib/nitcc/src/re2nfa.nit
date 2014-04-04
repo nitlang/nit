@@ -38,7 +38,7 @@ redef class Nstr
 	do
 		var a = new Automaton.epsilon
 		var val
-		for c in self.value do
+		for c in self.value.chars do
 			var b = new Automaton.atom(c.ascii)
 			a.concat(b)
 		end
@@ -50,7 +50,7 @@ redef class Nch_dec
 	redef fun value: String do return text.substring_from(1).to_i.ascii.to_s
 	redef fun make_rfa: Automaton
 	do
-		var a = new Automaton.atom(self.value.first.ascii)
+		var a = new Automaton.atom(self.value.chars.first.ascii)
 		return a
 	end
 end
@@ -219,7 +219,7 @@ redef class Nre_class
 			exit(1)
 			abort
 		end
-		var a = new Automaton.cla(c1.first.ascii, c2.first.ascii)
+		var a = new Automaton.cla(c1.chars.first.ascii, c2.chars.first.ascii)
 		return a
 	end
 end

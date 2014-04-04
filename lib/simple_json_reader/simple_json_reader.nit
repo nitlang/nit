@@ -27,7 +27,7 @@ redef class Nvalue_number
 	redef fun to_nit_object
 	do
 		var text = n_number.text
-		if text.has('.') or text.has('e') or text.has('E') then return text.to_f
+		if text.chars.has('.') or text.chars.has('e') or text.chars.has('E') then return text.to_f
 		return text.to_i
 	end
 end

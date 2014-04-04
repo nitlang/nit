@@ -154,7 +154,7 @@ class JsonDeserializer
 
 				if val.length != 1 then print "Error: expected a single char when deserializing '{val}'."
 				
-				return val.first
+				return val.chars.first
 			end
 
 			print "Malformed Json string: unexpected Json Object kind '{kind}'"

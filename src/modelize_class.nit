@@ -120,7 +120,7 @@ redef class ModelBuilder
 					error(nfd, "Error: A formal parameter type `{ptname}' already exists")
 					return
 				end
-				for c in ptname do if c >= 'a' and c<= 'z' then
+				for c in ptname.chars do if c >= 'a' and c<= 'z' then
 					warning(nfd, "Warning: lowercase in the formal parameter type {ptname}")
 					break
 				end

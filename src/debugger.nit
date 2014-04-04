@@ -639,7 +639,7 @@ class Debugger
 	# Processes an array print command
 	fun process_array_command(parts_of_command: Array[String])
 	do
-		var index_of_first_brace = parts_of_command[1].index_of('[')
+		var index_of_first_brace = parts_of_command[1].chars.index_of('[')
 		var variable_name = get_real_variable_name(parts_of_command[1].substring(0,index_of_first_brace))
 		var braces = parts_of_command[1].substring_from(index_of_first_brace)
 
@@ -1095,8 +1095,8 @@ class Debugger
 	# Returns an array containing all the indexes demanded
 	fun process_index(index_string: String): nullable Array[Int]
 	do
-		var from_end_index = index_string.index_of('.')
-		var to_start_index = index_string.last_index_of('.')
+		var from_end_index = index_string.chars.index_of('.')
+		var to_start_index = index_string.chars.last_index_of('.')
 
 		if from_end_index != -1 and to_start_index != -1 then
 			var index_from_string = index_string.substring(0,from_end_index)

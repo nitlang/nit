@@ -201,6 +201,7 @@ class List[E]
 
 
 	redef fun iterator: ListIterator[E] do return new ListIterator[E](self)
+	redef fun reverse_iterator: ListIterator[E] do return new ListReverseIterator[E](self)
 
 	# Build an empty list.
 	init do end
@@ -312,6 +313,23 @@ class ListIterator[E]
 	fun insert_before(element: E)
 	do
 		_list.insert_before(element, _node.as(not null))
+	end
+end
+
+private class ListReverseIterator[E]
+	super ListIterator[E]
+
+	redef fun next
+	do
+		_node = _node.prev
+		_index -= 1
+	end
+
+	private init(list: List[E])
+	do
+		_list = list
+		_node = list._tail
+		_index = list.length
 	end
 end
 

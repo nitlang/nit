@@ -277,7 +277,7 @@ redef class String
 		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		if l == 0 then return "/"
-		var pos = last_index_of_from('/', l)
+		var pos = chars.last_index_of_from('/', l)
 		var n = self
 		if pos >= 0 then
 			n = substring(pos+1, l-pos)
@@ -299,7 +299,7 @@ redef class String
 	do
 		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-		var pos = last_index_of_from('/', l)
+		var pos = chars.last_index_of_from('/', l)
 		if pos > 0 then
 			return substring(0, pos)
 		else if pos == 0 then
@@ -419,7 +419,7 @@ redef class String
 	#     assert ".file".file_extension         == null
 	fun file_extension: nullable String
 	do
-		var last_slash = last_index_of('.')
+		var last_slash = chars.last_index_of('.')
 		if last_slash > 0 then
 			return substring( last_slash+1, length )
 		else

@@ -270,7 +270,7 @@ class OptionContext
 				parseargs = false
 			else
 				# We're looking for packed short options
-				if str.last_index_of('-') == 0 and str.length > 2 then
+				if str.chars.last_index_of('-') == 0 and str.length > 2 then
 					var next_called = false
 					for i in [1..str.length] do
 						var short_opt = "-" + str.chars[i].to_s
