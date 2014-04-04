@@ -17,7 +17,7 @@
 # OpenGL ES1 general support (most of it)
 module opengles1
 
-import display
+import mnit_display
 
 in "C header" `{
 	#include <EGL/egl.h>
