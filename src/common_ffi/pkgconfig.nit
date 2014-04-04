@@ -67,6 +67,7 @@ class PkgconfigPhase
 
 		# retreive module
 		var nmodule = nmoduledecl.parent.as(AModule)
+		var mmodule = nmodule.mmodule.as(not null)
 
 		# check availability of pkg-config
 		var proc_which = new IProcess("which", "pkg-config")
@@ -92,12 +93,12 @@ class PkgconfigPhase
 			# compiler
 			var proc = new IProcess("pkg-config", "--cflags", pkg)
 			var compiler_opts = proc.read_all
-			nmodule.c_compiler_options = "{nmodule.c_compiler_options} {compiler_opts.replace("\n", " ")}"
+			mmodule.c_compiler_options = "{mmodule.c_compiler_options} {compiler_opts.replace("\n", " ")}"
 
 			# linker
 			proc = new IProcess("pkg-config", "--libs", pkg)
 			var linker_opts = proc.read_all
-			nmodule.c_linker_options = "{nmodule.c_linker_options} {linker_opts.replace("\n", " ")}"
+			mmodule.c_linker_options = "{mmodule.c_linker_options} {linker_opts.replace("\n", " ")}"
 		end
 
 	end

@@ -25,6 +25,7 @@ import global_compiler
 import separate_erasure_compiler
 import separate_compiler
 import android_platform
+import compiler_ffi
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext

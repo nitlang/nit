@@ -18,7 +18,6 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
-import compiler_ffi
 
 # Add separate compiler specific options
 redef class ToolContext
@@ -934,10 +933,10 @@ class SeparateCompiler
 		self.header.add_decl("struct nitni_instance \{struct instance *value;\};")
 	end
 	
-	redef fun finalize_ffi_for_module(nmodule)
+	redef fun finalize_ffi_for_module(mmodule)
 	do
 		var old_module = self.mainmodule
-		self.mainmodule = nmodule.mmodule.as(not null)
+		self.mainmodule = mmodule
 		super
 		self.mainmodule = old_module
 	end
@@ -984,7 +983,7 @@ class SeparateCompilerVisitor
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
-		else if value.mtype.cname_blind == "void*" and mtype.cname_blind == "void*" then
+		else if value.mtype.ctype == "void*" and mtype.ctype == "void*" then
 			return value
 		else
 			# Bad things will appen!

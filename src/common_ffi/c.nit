@@ -71,27 +71,9 @@ redef class Location
 	fun as_line_pragma: String do return "#line {line_start} \"{file.filename}\"\n"
 end
 
-redef class AModule
+redef class MModule
 	var c_compiler_options writable = ""
 	var c_linker_options writable = ""
-end
-
-# An extern C file to compile
-class ExternCFile
-	super ExternFile
-
-	init (filename, cflags: String)
-	do
-		super filename
-
-		self.cflags = cflags
-	end
-
-	# Additionnal specific CC compiler -c flags
-	var cflags: String
-
-	redef fun hash do return filename.hash
-	redef fun ==(o) do return o isa ExternCFile and filename == o.filename
 end
 
 class ForeignCType

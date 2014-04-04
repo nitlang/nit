@@ -21,8 +21,8 @@ import literal
 import typing
 import auto_super_init
 import frontend
-import common_ffi
 import platform
+import c_tools
 
 # Add compiling options
 redef class ToolContext
@@ -204,11 +204,8 @@ class MakefileToolchain
 
 		# FFI
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amodule = m2m[m]
-			if m.uses_ffi or amodule.uses_legacy_ni then
-				compiler.finalize_ffi_for_module(amodule)
-			end
+		for m in compiler.mainmodule.in_importation.greaters do
+			compiler.finalize_ffi_for_module(m)
 		end
 
 		# Copy original .[ch] files to compile_dir
@@ -307,9 +304,9 @@ class MakefileToolchain
 
 		var linker_options = new HashSet[String]
 		var m2m = toolcontext.modelbuilder.mmodule2nmodule
-		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
-			var amod = m2m[m]
-			linker_options.add(amod.c_linker_options)
+		for m in mainmodule.in_importation.greaters do
+			var libs = m.collect_linker_libs
+			if libs != null then linker_options.add_all(libs)
 		end
 
 		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
@@ -322,29 +319,19 @@ class MakefileToolchain
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -c -o {o} {f}\n\n")
 			ofiles.add(o)
 			dep_rules.add(o)
 		end
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then
-				var basename = f.filename.basename(".c")
-				var o = "{basename}.extern.o"
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-				ofiles.add(o)
-				dep_rules.add(o)
-			else
-				var o = f.makefile_rule_name
-				var ff = f.filename.basename("")
-				makefile.write("{o}: {ff}\n")
-				makefile.write("\t{f.makefile_rule_content}\n\n")
-				dep_rules.add(f.makefile_rule_name)
-
-				if f isa ExternCppFile then ofiles.add(o)
-			end
+			var o = f.makefile_rule_name
+			var ff = f.filename.basename("")
+			makefile.write("{o}: {ff}\n")
+			makefile.write("\t{f.makefile_rule_content}\n\n")
+			dep_rules.add(f.makefile_rule_name)
+			ofiles.add(o)
 		end
 
 		# Link edition
@@ -749,19 +736,14 @@ abstract class AbstractCompiler
 		end
 	end
 
+	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
+
 	# Division facility
 	# Avoid division by zero by returning the string "n/a"
 	fun div(a,b:Int):String
 	do
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
-	end
-
-	fun finalize_ffi_for_module(nmodule: AModule)
-	do
-		var visitor = new_visitor
-		nmodule.finalize_ffi(visitor, modelbuilder)
-		nmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -2663,15 +2645,11 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
-end
 
-redef class AModule
-	# Does this module use the legacy native interface?
-	fun uses_legacy_ni: Bool is abstract
+	# Write FFI and nitni results to file
+	fun finalize_ffi(c: AbstractCompiler) do end
 
-	# Write FFI results to file
-	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
-
-	# Write nitni results to file
-	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
+	# Give requided addinional system libraries (as given to LD_LIBS)
+	# Note: can return null instead of an empty set
+	fun collect_linker_libs: nullable Set[String] do return null
 end

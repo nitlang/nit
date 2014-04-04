@@ -98,3 +98,48 @@ class CFunction
 		return w
 	end
 end
+
+# An extern file to compile
+class ExternFile
+	# The filename of the file
+	var filename: String
+
+	# The name of the target in the Makefile
+	# Usually the produced .o file
+	fun makefile_rule_name: String is abstract
+
+	# The content of the rule in the make
+	# Usually the one-line shell command after the tabulation
+	fun makefile_rule_content: String is abstract
+end
+
+# An extern C file to compile
+class ExternCFile
+	super ExternFile
+
+	init (filename, cflags: String)
+	do
+		super filename
+
+		self.cflags = cflags
+	end
+
+	# Additionnal specific CC compiler -c flags
+	var cflags: String
+
+	redef fun hash do return filename.hash
+	redef fun ==(o) do return o isa ExternCFile and filename == o.filename
+
+	redef fun makefile_rule_name do
+		var basename = filename.basename(".c")
+		var res = "{basename}.extern.o"
+		return res
+	end
+
+	redef fun makefile_rule_content do
+		var ff = filename.basename("")
+		var o = makefile_rule_name
+		return "$(CC) $(CFLAGS) {self.cflags} -c -o {o} {ff}"
+	end
+end
+
