@@ -140,15 +140,32 @@ end
 # They are mainly used with collections.
 interface Iterator[E]
 	# The current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun item: E is abstract
 
 	# Jump to the next item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun next is abstract
 
-	# Is there a current item ?
+	# Is there a current item?
+	# Require `is_still_valid`
 	fun is_ok: Bool is abstract
+	
+	# The validity of the iterator, in respect to the the underlying data structure.
+	# Iterators may become invalid when the underlying data is structuraly modified
+	# in such a way that existing iterators may behave uncoherently.
+	#
+	# The exact semantic of "structurally modified" and "uncoherently"
+	# is let to each specific subclass.
+	# However, as a hard contract on all services, using a invalid iterator
+	# is considered a programmation error (like an infinite loop) instead of a
+	# program error (like a IO issue).
+	#
+	# Note that the automatic iteration trough a `for` does not preventively check
+	# `is_still_valid`, errors should be catched as failed preconditions of concrete services.
+	fun is_still_valid: Bool do return true
 end
 
 # A collection that contains only one item.
@@ -485,22 +502,30 @@ end
 # Iterators for Map.
 interface MapIterator[K: Object, E]
 	# The current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun item: E is abstract
 
 	# The key of the current item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun key: K is abstract
 
 	# Jump to the next item.
+	# Require `is_still_valid`
 	# Require `is_ok`.
 	fun next is abstract
 
 	# Is there a current item ?
+	# Require `is_still_valid`
 	fun is_ok: Bool is abstract
 
 	# Set a new `item` at `key`.
 	#fun item=(item: E) is abstract
+
+	# The validity of the iterator, in respect to the the underlying data structure.
+	# see `Iterator::is_still_valid`
+	fun is_still_valid: Bool do return true
 end
 
 # Iterator on a 'keys' point of view of a map
@@ -854,5 +879,65 @@ class Couple[F, S]
 	do
 		_first = f
 		_second = s
+	end
+end
+
+# Helper class to implement the protection between readers and writers
+# This class is mainly used by collection to implements the invalidation
+# of iterators when the original collection is structurally modified.
+#
+# This implementation is adapted when numerous readers (iterator)
+# can be instantiated then forgotten.
+# The writer (collection) does not observe (register) its readers.
+# Thus, the logic of the protection yields in the readers as follow:
+#
+# The CanaryProtection(*) instance is shared by the writer and the readers.
+# In practice, only the collection must have it.
+# Iterators may access it trough the collection.
+#
+# Readers (iterators) adopt a canary `get_canary` from the collection.
+# Canaries are just shared references on a Boolean.
+# A fresh canary is always alive (true). `my_canary.item == true`
+#
+# On access, the reader should check the canary.
+# If dead (false) it means that the collection was strucutrally modified.
+#
+# Writers (collection) does not care about readers.
+# It just kills the canary (`kill_canary`) when a strucutral modification occurs.
+#
+# If a modification is done by an iterator, it should, in order:
+# * check the canary: to ensure there was no concurent modification
+# * do the modification. That shoud kill the canary to prevent concurent modification
+# * get a new canary: to replace the dead one
+#
+# (*) Note: The term "canary" as used here comes from coal mining originally.
+# See http://en.wikipedia.org/wiki/Animal_sentinel for details.
+class CanaryProtection
+	# The current canary.
+	# In the stable phase, it is either:
+	# * `null` no new iterator since the last modification
+	# * `true` the alive canary shared by iterators since the last modification
+	var _canary: nullable Container[Bool] = null
+
+	# Get a fresh live canary.
+	# To be called by the iterator, then checked regulally.
+	# ENSURE: `result.item  == true`
+	fun get_canary: Container[Bool]
+	do
+		var c = _canary
+		if c != null then return c
+		c = new Container[Bool](true)
+		_canary = c
+		return c
+	end
+
+	# Kill the curent canary, thus invalidate all potential readers.
+	# To be called by the collection when a structural modification is done.
+	fun kill_canary
+	do
+		var c = _canary
+		if c == null then return
+		c.item = false
+		_canary = null
 	end
 end
