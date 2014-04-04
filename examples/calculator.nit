@@ -123,7 +123,7 @@ class CalculatorGui
 				var s = context.result.to_precision_native(6)
 				var index : nullable Int = null
 				for i in s.length.times do
-				    var chiffre = s[i]
+				    var chiffre = s.chars[i]
 				    if chiffre == '0' and index == null then
 					index = i
 				    else if chiffre != '0' then
@@ -132,7 +132,7 @@ class CalculatorGui
 				end
 				if index != null then
 					s = s.substring(0, index)
-					if s[s.length-1] == ',' then s = s.substring(0, s.length-1)
+					if s.chars[s.length-1] == ',' then s = s.substring(0, s.length-1)
 				end
 				lbl_disp.text = s
 			end

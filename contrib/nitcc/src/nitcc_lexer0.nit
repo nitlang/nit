@@ -25,14 +25,14 @@ import nitcc_parser
 class Lexer_nitcc
 	var text: String
 
-	var iter: Iterator[Char] = "".iterator
+	var iter: Iterator[Char] = "".chars.iterator
 	var pos = 0
 
 	var tokens = new Array[NToken]
 
 	fun lex: Array[NToken]
 	do
-		iter = text.iterator
+		iter = text.chars.iterator
 		while iter.is_ok do
 			trim
 			if not iter.is_ok then break

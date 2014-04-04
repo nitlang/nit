@@ -31,8 +31,8 @@ for v in col do print v
 
 # ok
 var map = new MapIterable
-map.map["Riri"] = "Riri".to_a
-map.map["Fifi"] = "Fifi".to_a
-map.map["Loulou"] = "Loulou".to_a
+map.map["Riri"] = "Riri".chars.to_a
+map.map["Fifi"] = "Fifi".chars.to_a
+map.map["Loulou"] = "Loulou".chars.to_a
 for k, v in map do print "{k}: {v.join(",")}"
 

@@ -87,7 +87,7 @@ class MPDConnection
 			var words = l.split_with(" ")
 			if words.length > 1 then
 				var key = words[0].to_lower
-				var first_space = l.index_of(' ')
+				var first_space = l.chars.index_of(' ')
 				var rest = l.substring_from(first_space+1)
 				if  key == "volume:" then
 					volume = rest.to_i
@@ -158,7 +158,7 @@ class MPDConnection
 			var words = l.split_with(" ")
 			if words.length > 1 then
 				var key = words[0].to_lower
-				var first_space = l.index_of(' ')
+				var first_space = l.chars.index_of(' ')
 				var rest = l.substring_from(first_space+1)
 				if key == "album:" then
 					album = rest

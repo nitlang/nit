@@ -454,7 +454,7 @@ redef class Token
 		var text = self.text
 		if text != null then
 			var nfa = new Automaton.epsilon
-			for c in text.as(not null) do
+			for c in text.chars do
 				nfa.concat(new Automaton.atom(c.ascii))
 			end
 			return nfa
