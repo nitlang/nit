@@ -26,6 +26,9 @@ end
 
 redef class AModule
 	private var cpp_file: nullable CPPCompilationUnit = null
+end
+
+redef class MModule
 	var cpp_compiler_options writable = ""
 end
 
@@ -133,7 +136,7 @@ class CPPLanguage
 		nmodule.ffi_files.add(file)
 
 		# add linked option to support C++
-		nmodule.c_linker_options = "{nmodule.c_linker_options} -lstdc++"
+		nmodule.mmodule.c_linker_options = "{nmodule.mmodule.c_linker_options} -lstdc++"
 	end
 
 	redef fun compile_callback(callback, nmodule, mmodule, ecc)
@@ -158,7 +161,8 @@ class CPPCompilationUnit
 
 	fun write_to_files(amodule: AModule, compdir: String): ExternCppFile
 	do
-		var base_name = "{amodule.mmodule.name}._ffi"
+		var mmodule = amodule.mmodule.as(not null)
+		var base_name = "{mmodule.name}._ffi"
 
 		var h_file = "{base_name}.hpp"
 		var guard = "{amodule.cname.to_s.to_upper}_NIT_HPP"
@@ -170,22 +174,22 @@ class CPPCompilationUnit
 
 		files.add("{compdir}/{c_file}")
 
-		return new ExternCppFile("{compdir}/{c_file}", amodule)
+		return new ExternCppFile("{compdir}/{c_file}", mmodule)
 	end
 end
 
 class ExternCppFile
 	super ExternFile
 
-	var amodule: AModule
-	init(path: String, amodule: AModule)
+	var mmodule: MModule
+	init(path: String, mmodule: MModule)
 	do
 		super
-		self.amodule = amodule
+		self.mmodule = mmodule
 	end
 
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "g++ {amodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_content do return "g++ {mmodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
 end
 
 class ForeignCppType
