@@ -149,6 +149,9 @@ interface Iterator[E]
 
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
+
+	# Iterate over `self`
+	fun iterator: Iterator[E] do return self
 end
 
 # A collection that contains only one item.
@@ -305,6 +308,25 @@ interface Set[E: Object]
 		for e in self do res += res.hash
 		return res
 	end
+
+	# Returns the union of this set with the `other` set
+	fun union(other: Set[E]): Set[E]
+	do
+		var nhs = new_set
+		nhs.add_all self
+		nhs.add_all other
+		return nhs
+	end
+
+	# Returns the intersection of this set with the `other` set
+	fun intersection(other: Set[E]): Set[E]
+	do
+		var nhs = new_set
+		for v in self do if other.has(v) then nhs.add(v)
+		return nhs
+	end
+
+	protected fun new_set: Set[E] is abstract
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
@@ -507,22 +529,22 @@ end
 class MapKeysIterator[K: Object, V]
 	super Iterator[K]
 	# The original iterator
-	var iterator: MapIterator[K, V]
+	var original_iterator: MapIterator[K, V]
 
-	redef fun is_ok do return self.iterator.is_ok
-	redef fun next do self.iterator.next
-	redef fun item do return self.iterator.key
+	redef fun is_ok do return self.original_iterator.is_ok
+	redef fun next do self.original_iterator.next
+	redef fun item do return self.original_iterator.key
 end
 
 # Iterator on a 'values' point of view of a map
 class MapValuesIterator[K: Object, V]
 	super Iterator[V]
 	# The original iterator
-	var iterator: MapIterator[K, V]
+	var original_iterator: MapIterator[K, V]
 
-	redef fun is_ok do return self.iterator.is_ok
-	redef fun next do self.iterator.next
-	redef fun item do return self.iterator.item
+	redef fun is_ok do return self.original_iterator.is_ok
+	redef fun next do self.original_iterator.next
+	redef fun item do return self.original_iterator.item
 end
 
 # Sequences are indexed collections.
