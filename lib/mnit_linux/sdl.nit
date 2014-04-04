@@ -201,10 +201,6 @@ extern class SDLImage `{SDL_Surface*`} # TODO remove
 		return image;
 	`}
 
-	new partial(original: Image, clip: SDLRectangle) `{
-		return NULL;
-	`}
-
 	# Copy of an existing SDLImage
 	new copy_of(image: SDLImage) `{
 		SDL_Surface *new_image = SDL_CreateRGBSurface(
