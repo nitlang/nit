@@ -669,14 +669,6 @@ class FlatString
 	#       AbstractString specific methods        #
 	################################################
 
-	redef fun [](index) do
-		assert index >= 0
-		# Check that the index (+ index_from) is not larger than indexTo
-		# In other terms, if the index is valid
-		assert (index + index_from) <= index_to
-		return items[index + index_from]
-	end
-
 	redef fun reversed
 	do
 		var native = calloc_string(self.length + 1)
@@ -990,6 +982,7 @@ private class FlatStringCharView
 		# Check that the index (+ index_from) is not larger than indexTo
 		# In other terms, if the index is valid
 		assert index >= 0
+		var target = self.target
 		assert (index + target.index_from) <= target.index_to
 		return target.items[index + target.index_from]
 	end
