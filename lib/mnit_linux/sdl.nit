@@ -226,7 +226,7 @@ extern class SDLImage
 	redef fun width: Int `{ return recv->w; `}
 	redef fun height: Int `{ return recv->h; `}
 
-	fun is_ok: Bool do return true # TODO
+	fun is_ok: Bool do return not address_is_null
 end
 
 # A simple rectangle
