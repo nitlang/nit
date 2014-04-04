@@ -908,10 +908,6 @@ redef class AExternMethPropdef
 			else if pname == "atof" then
 				return v.float_instance(recvval.to_f)
 			end
-		else if cname == "Int" then
-			if pname == "rand" then
-				return v.int_instance(args[0].to_i.rand)
-			end
 		else if cname == "Float" then
 			if pname == "cos" then
 				return v.float_instance(args[0].to_f.cos)
