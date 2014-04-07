@@ -146,7 +146,6 @@ class Socket
 		return new Socket.primitive_init(socket.accept)
 	end
 
-	fun errno: Int do return socket.errno
 end
 
 class SocketSet

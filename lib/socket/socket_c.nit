@@ -28,7 +28,6 @@ in "C Header" `{
 	#include <arpa/inet.h>
 	#include <netdb.h>
 	#include <sys/poll.h>
-	#include <errno.h>
 
 	typedef int S_DESCRIPTOR;
 	typedef struct sockaddr_in S_ADDR_IN;
@@ -116,7 +115,6 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun destroy `{ free(recv); `}
 	fun close: Int `{ return close( *recv ); `}
 	fun descriptor: Int `{ return *recv; `}
-	fun errno: Int `{ return errno; `}
 
 	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
 	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (S_ADDR*)addrIn, sizeof(*addrIn) ); `}

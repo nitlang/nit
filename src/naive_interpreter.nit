@@ -869,6 +869,8 @@ redef class AExternMethPropdef
 				return v.int_instance(res)
 			else if pname == "native_int_to_s" then
 				return v.native_string_instance(recvval.to_s)
+			else if pname == "strerror_ext" then
+				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "NativeFile" then
 			var recvval = args.first.val
@@ -966,6 +968,8 @@ redef class AExternMethPropdef
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
 		else if pname == "file_getcwd" then
 			return v.native_string_instance(getcwd)
+		else if pname == "errno" then
+			return v.int_instance(sys.errno)
 		end
 		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort
