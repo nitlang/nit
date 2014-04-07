@@ -38,7 +38,7 @@ loop
 	for c in clients do fs.readset.set(c)
 
 	if fs.select(max, 4, 0) == 0 then
-		print "Error occured in select {socket.errno.to_s}"
+		print "Error occured in select {sys.errno.strerror}"
 		break
 	end
 
