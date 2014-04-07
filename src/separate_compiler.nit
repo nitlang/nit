@@ -37,6 +37,8 @@ redef class ToolContext
 	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
+	# --semi-global
+	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -53,11 +55,24 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
 		self.option_context.add_option(self.opt_tables_metrics)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		var tc = self
+		if tc.opt_semi_global.value then
+			tc.opt_inline_coloring_numbers.value = true
+			tc.opt_inline_some_methods.value = true
+			tc.opt_direct_call_monomorph.value = true
+			tc.opt_skip_dead_methods.value = true
+		end
 	end
 end
 
