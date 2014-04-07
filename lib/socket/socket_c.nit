@@ -122,12 +122,18 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (S_ADDR*)addrIn, sizeof(*addrIn) ); `}
 	fun write(buffer: String): Int import String.to_cstring, String.length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
-	fun read: String import NativeString.to_s `{
-		char *c = (char*)malloc(1024);
-		int n = read(*recv, c, 1023);
-		if(n < 0) exit(-1);
-		c[n] = '\0';
-		return NativeString_to_s(c);
+	fun read: String import NativeString.to_s_with_length `{
+		static char c[1024];
+		int n = read(*recv, c, 1024);
+		if(n < 0) {
+			free(c);
+			return NativeString_to_s_with_length("",0);
+		}
+		char* ret = malloc(n + 1);
+		memcpy(ret, c, n);
+		ret[n] = '\0';
+		free(c);
+		return NativeString_to_s_with_length(ret, n);
 	`}
 
 	# Sets an option for the socket
