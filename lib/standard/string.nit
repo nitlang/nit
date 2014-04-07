@@ -19,6 +19,7 @@ intrude import collection # FIXME should be collection::array
 
 `{
 #include <stdio.h>
+#include <string.h>
 `}
 
 ###############################################################################
@@ -1325,6 +1326,15 @@ redef class Bool
 end
 
 redef class Int
+
+	# Wrapper of strerror C function
+	private fun strerror_ext: NativeString is extern `{
+		return strerror(recv);
+	`}
+
+	# Returns a string describing error number
+	fun strerror: String do return strerror_ext.to_s
+
 	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
 	private fun fill_buffer(s: Buffer, base: Int, signed: Bool)
