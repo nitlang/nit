@@ -130,6 +130,15 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 		return NativeString_to_s(c);
 	`}
 
+	# Sets an option for the socket
+	fun setsockopt(level: FFSocketOptLevels, option_name: FFSocketOptNames, option_value: Int) `{
+		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
+		if(err != 0){
+			perror("Error on setsockopts : ");
+			exit(1);
+		}
+	`}
+
 	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (S_ADDR*)addrIn, sizeof(*addrIn)); `}
 	fun listen(size: Int): Int `{ return listen(*recv, size); `}
 
@@ -311,7 +320,28 @@ extern FFSocketProtocolFamilies `{ int `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
 end
-
+# Level on which to set options
+extern FFSocketOptLevels `{ int `}
+	# Dummy for IP (As defined in C)
+	new ip `{ return IPPROTO_IP;`}
+	# Control message protocol
+	new icmp `{ return IPPROTO_ICMP;`}
+	# Use TCP
+	new tcp `{ return IPPROTO_TCP; `}
+	# Socket level options
+	new socket `{ return SOL_SOCKET; `}
+end
+# Options for socket, use with setsockopt
+extern FFSocketOptNames `{ int `}
+	# Enables debugging information
+	new debug `{ return SO_DEBUG; `}
+	# Authorizes the broadcasting of messages
+	new broadcast `{ return SO_BROADCAST; `}
+	# Authorizes the reuse of the local address
+	new reuseaddr `{ return SO_REUSEADDR; `}
+	# Authorizes the use of keep-alive packets in a connection
+	new keepalive `{ return SO_KEEPALIVE; `}
+end
 # Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
 extern FFSocketPollValues `{ int `}
 	new pollin `{ return POLLIN; `}           # Data other than high-priority data may be read without blocking.

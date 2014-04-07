@@ -39,6 +39,7 @@ class Socket
 			still_alive = false
 			return
 		end
+		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
 		var hostname = socket.gethostbyname(thost)
 		addrin = new FFSocketAddrIn.with_hostent(hostname, tport)
 		address = addrin.address
@@ -53,6 +54,7 @@ class Socket
 			still_alive = false
 			return
 		end
+		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
 		addrin = new FFSocketAddrIn.with(tport, new FFSocketAddressFamilies.af_inet)
 		address = addrin.address
 		port = addrin.port
