@@ -473,7 +473,11 @@ class RapidTypeVisitor
 
 	fun add_type(mtype: MClassType) do analysis.add_new(receiver, mtype)
 
-	fun add_monomorphic_send(mtype: MType, mproperty: MMethod) do analysis.try_send(mtype.as(MClassType), mproperty)
+	fun add_monomorphic_send(mtype: MType, mproperty: MMethod)
+	do
+		analysis.live_methods.add(mproperty)
+		analysis.try_send(mtype.as(MClassType), mproperty)
+	end
 
 	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
 
