@@ -182,7 +182,13 @@ redef class ModelBuilder
 		var mclass = nclassdef.mclass.as(not null)
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
+		# Do we need to specify Object as a super class?
 		var specobject = true
+
+		# Do we need to specify Pointer as a super class? (is only valid
+		# if `nclassdef` is an extern class)
+		var specpointer = true
+
 		var supertypes = new Array[MClassType]
 		if nclassdef isa AStdClassdef then
 			for nsc in nclassdef.n_superclasses do
@@ -196,16 +202,16 @@ redef class ModelBuilder
 				end
 				supertypes.add mtype
 				#print "new super : {mclass} < {mtype}"
+				if mtype.mclass.kind == extern_kind then specpointer = false
 			end
 		end
-		if specobject and mclassdef.is_intro then
-			if mclass.kind == extern_kind then
-				if mclass.name == "Pointer" then
-					supertypes.add objectclass.mclass_type
-				else
-					supertypes.add pointerclass.mclass_type
-				end
-			else if mclass.name != "Object" and objectclass != null then
+
+		if mclassdef.is_intro and objectclass != null then
+			if mclass.kind == extern_kind and mclass.name != "Pointer" then
+				# it is an extern class, but not a Pointer
+				if specpointer then supertypes.add pointerclass.mclass_type
+			else if specobject and mclass.name != "Object" then
+				# it is a standard class without super class (but is not Object)
 				supertypes.add objectclass.mclass_type
 			end
 		end

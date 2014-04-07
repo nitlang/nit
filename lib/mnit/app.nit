@@ -17,7 +17,7 @@
 # General Mnit application structure
 module app
 
-import display
+import mnit_display
 
 # An App instance serves as base to every Mnit projects.
 #

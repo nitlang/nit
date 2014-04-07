@@ -15,9 +15,9 @@
 # limitations under the License.
 
 # Defines abstract display classes
-module display
+module mnit_display
 
-import input_events
+import mnit_input
 
 # Any class with a size
 interface Sized

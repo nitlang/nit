@@ -14,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_opengles1 is
-	pkgconfig("glesv1_cm", "x11", "egl")
-	c_compiler_option(exec("sdl-config", "--cflags"))
-	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
-end
+module linux_opengles1
 
 import mnit # for
 # import opengles1
