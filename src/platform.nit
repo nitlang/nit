@@ -18,7 +18,6 @@ module platform
 
 import modelize_property
 import parser_util
-import simple_misc_analysis
 import modelbuilder
 
 redef class ToolContext
