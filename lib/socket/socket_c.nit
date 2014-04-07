@@ -106,6 +106,10 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
 		S_DESCRIPTOR *d = NULL; d = (S_DESCRIPTOR*) malloc( sizeof(S_DESCRIPTOR) );
 		int ds = socket(domain, socketType, protocol);
+		if(ds == -1){
+			free(d);
+			return NULL;
+		}
 		memcpy(d, &ds, sizeof(ds));
 		return d;
 	`}

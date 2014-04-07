@@ -26,9 +26,19 @@ class Socket
 	private var socket: FFSocket
 	private var addrin: FFSocketAddrIn
 
+	# Guard for errors
+	# If the socket could not be created or if the socket was destroyed
+	# before a call needing the socket was made
+	# this flag will be set to false.
+	var still_alive = true # Note : HUGE SUCCESS
+
 	init stream_with_host(thost: String, tport: Int)
 	do
 		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
+		if socket.address_is_null then
+			still_alive = false
+			return
+		end
 		var hostname = socket.gethostbyname(thost)
 		addrin = new FFSocketAddrIn.with_hostent(hostname, tport)
 		address = addrin.address
@@ -39,6 +49,10 @@ class Socket
 	init stream_with_port(tport: Int)
 	do
 		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
+		if socket.address_is_null then
+			still_alive = false
+			return
+		end
 		addrin = new FFSocketAddrIn.with(tport, new FFSocketAddressFamilies.af_inet)
 		address = addrin.address
 		port = addrin.port
@@ -60,7 +74,10 @@ class Socket
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	#
-	private fun poll_in(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
+	private fun poll_in(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
+		if not still_alive then return new Array[FFSocketPollValues]
+		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
+	end
 
 	# Easier use of poll_in to check for something to read on all channels of any priority
 	#
@@ -68,6 +85,7 @@ class Socket
 	#
 	fun ready_to_read(timeout: Int): Bool
 	do
+		if not still_alive then return false
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollin)
 		events.push(new FFSocketPollValues.pollrdnorm)
@@ -80,19 +98,52 @@ class Socket
 	#
 	fun connected: Bool
 	do
+		if not still_alive then return false
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollhup)
 		events.push(new FFSocketPollValues.pollerr)
 		return poll_in(events, 0).length == 0
 	end
 
-	fun connect: Bool do return socket.connect(addrin) >= 0
-	fun write(msg: String): Bool do return socket.write(msg) >= 0
-	fun read: String do return socket.read
-	fun close: Bool do return socket.close >= 0
-	fun bind: Bool do return socket.bind(addrin) >= 0
-	fun listen(size: Int): Bool do return socket.listen(size) >= 0
-	fun accept: Socket do return new Socket.primitive_init(socket.accept)
+	fun connect: Bool do
+		assert still_alive
+		return socket.connect(addrin) >= 0
+	end
+
+	fun write(msg: String): Bool do
+		if not still_alive then return false
+		return socket.write(msg) >= 0
+	end
+
+	fun read: String do
+		if not still_alive then return ""
+		return socket.read
+	end
+
+	fun close: Bool do
+		if not still_alive then return true
+		if socket.close >= 0 then
+			still_alive = false
+			return true
+		end
+		return false
+	end
+
+	fun bind: Bool do
+		if not still_alive then return false
+		return socket.bind(addrin) >= 0
+	end
+
+	fun listen(size: Int): Bool do
+		if not still_alive then return false
+		return socket.listen(size) >= 0
+	end
+
+	fun accept: Socket do
+		assert still_alive
+		return new Socket.primitive_init(socket.accept)
+	end
+
 	fun errno: Int do return socket.errno
 end
 
