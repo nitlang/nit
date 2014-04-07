@@ -226,7 +226,12 @@ class SeparateErasureCompiler
 		var class_table = self.class_tables[mclass]
 		var v = self.new_visitor
 
+		var rta = runtime_type_analysis
 		var is_dead = mclass.kind == abstract_kind or mclass.kind == interface_kind
+		if not is_dead and rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray" then
+			is_dead = true
+		end
+
 		v.add_decl("/* runtime class {c_name} */")
 
 		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
@@ -258,6 +263,10 @@ class SeparateErasureCompiler
 					v.add_decl("NULL, /* empty */")
 				else
 					assert mpropdef isa MMethodDef
+					if rta != null and not rta.live_methoddefs.has(mpropdef) then
+						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					end
 					if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
 						v.require_declaration("VIRTUAL_{mpropdef.c_name}")
 						v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")

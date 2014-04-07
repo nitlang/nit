@@ -32,7 +32,8 @@ var toolcontext = new ToolContext
 
 # Create a new option for --global
 var opt_global = new OptionBool("Use global compilation", "--global")
-toolcontext.option_context.add_option(opt_global)
+var opt_rta = new OptionBool("Activate RTA (implicit with --global and --separate)", "--rta")
+toolcontext.option_context.add_option(opt_global, opt_rta)
 
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
@@ -76,7 +77,13 @@ if platform != null and not platform.supports_libunwind then
 end
 
 if toolcontext.opt_erasure.value then
-	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
+	var analysis
+	if opt_rta.value then
+		analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+	else
+		analysis = null
+	end
+	modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
 else if opt_global.value then
 	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_global_compiler(mainmodule, analysis)
