@@ -226,6 +226,7 @@ class SeparateErasureCompiler
 		var class_table = self.class_tables[mclass]
 		var v = self.new_visitor
 
+		var is_dead = mclass.kind == abstract_kind or mclass.kind == interface_kind
 		v.add_decl("/* runtime class {c_name} */")
 
 		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
@@ -242,29 +243,32 @@ class SeparateErasureCompiler
 		else
 			v.add_decl("{layout.pos[mclass]},")
 		end
-		if build_class_vts_table(mclass) then
-			v.require_declaration("vts_table_{c_name}")
-			v.add_decl("&vts_table_{c_name},")
-		else
-			v.add_decl("NULL,")
-		end
-		v.add_decl("&type_table_{c_name},")
-		v.add_decl("\{")
-		for i in [0 .. vft.length[ do
-			var mpropdef = vft[i]
-			if mpropdef == null then
-				v.add_decl("NULL, /* empty */")
+		if not is_dead then
+			if build_class_vts_table(mclass) then
+				v.require_declaration("vts_table_{c_name}")
+				v.add_decl("&vts_table_{c_name},")
 			else
-				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
-					v.require_declaration("VIRTUAL_{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				v.add_decl("NULL,")
+			end
+			v.add_decl("&type_table_{c_name},")
+			v.add_decl("\{")
+			for i in [0 .. vft.length[ do
+				var mpropdef = vft[i]
+				if mpropdef == null then
+					v.add_decl("NULL, /* empty */")
 				else
-					v.require_declaration("{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					assert mpropdef isa MMethodDef
+					if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+						v.require_declaration("VIRTUAL_{mpropdef.c_name}")
+						v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					else
+						v.require_declaration("{mpropdef.c_name}")
+						v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					end
 				end
 			end
+			v.add_decl("\}")
 		end
-		v.add_decl("\}")
 		v.add_decl("\};")
 
 		# Build class type table
@@ -330,13 +334,18 @@ class SeparateErasureCompiler
 		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(void);")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
-		v.require_declaration("class_{c_name}")
-		v.add("{res}->class = &class_{c_name};")
-		self.generate_init_attr(v, res, mtype)
-		v.add("return {res};")
+		if is_dead then
+			v.add_abort("{mclass} is DEAD")
+		else
+
+			var res = v.new_named_var(mtype, "self")
+			res.is_exact = true
+			v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+			v.require_declaration("class_{c_name}")
+			v.add("{res}->class = &class_{c_name};")
+			self.generate_init_attr(v, res, mtype)
+			v.add("return {res};")
+		end
 		v.add("\}")
 	end
 
