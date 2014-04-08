@@ -74,13 +74,13 @@ redef class ToolContext
 		super
 
 		var st = opt_stacktrace.value
-		if st == null or st == "none" or st == "libunwind" or st == "gperf" then
+		if st == null or st == "none" or st == "libunwind" or st == "nitstack" then
 			# Fine, do nothing
 		else if st == "auto" then
 			# Default just unset
 			opt_stacktrace.value = null
 		else
-			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `gperf` or `auto`."
+			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
 			exit(1)
 		end
 	end
@@ -197,7 +197,7 @@ class MakefileToolchain
 
 	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
-		if self.toolcontext.opt_stacktrace.value == "gperf" then compiler.build_c_to_nit_bindings
+		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
 
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
@@ -313,7 +313,7 @@ class MakefileToolchain
 		end
 
 		var ost = toolcontext.opt_stacktrace.value
-		if ost == "libunwind" or ost == "gperf" then linker_options.add("-lunwind")
+		if ost == "libunwind" or ost == "nitstack" then linker_options.add("-lunwind")
 
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
@@ -530,14 +530,14 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 
 		if ost == null then
-			ost = "gperf"
+			ost = "nitstack"
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
-		if ost == "gperf" or ost == "libunwind" then
+		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
-			if ost == "gperf" then
+			if ost == "nitstack" then
 				v.add_decl("#include \"c_functions_hash.h\"")
 			end
 		end
@@ -571,7 +571,7 @@ abstract class AbstractCompiler
 		v.add_decl("\}")
 
 		v.add_decl("void show_backtrace (int signo) \{")
-		if ost == "gperf" or ost == "libunwind" then
+		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -585,7 +585,7 @@ abstract class AbstractCompiler
 			v.add_decl("printf(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if ost == "gperf" then
+			if ost == "nitstack" then
 			v.add_decl("	char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
 			v.add_decl("		printf(\"` %s\\n\", recv);")
