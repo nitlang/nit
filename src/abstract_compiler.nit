@@ -431,32 +431,43 @@ abstract class AbstractCompiler
 	do
 		var compile_dir = modelbuilder.compile_dir
 
-		var stream = new OFStream.open("{compile_dir}/C_fun_names")
-		stream.write("%\{\n#include \"c_functions_hash.h\"\n%\}\n")
-		stream.write("%define lookup-function-name get_nit_name\n")
-		stream.write("struct C_Nit_Names;\n")
-		stream.write("%%\n")
-		stream.write("####\n")
+		var stream = new OFStream.open("{compile_dir}/c_functions_hash.c")
+		stream.write("#include <string.h>\n")
+		stream.write("#include <stdlib.h>\n")
+		stream.write("#include \"c_functions_hash.h\"\n")
+		stream.write("char* get_nit_name(register const char* procproc, register unsigned int len)\{\n")
+		stream.write("char* procname = malloc(len+1);")
+		stream.write("memcpy(procname, procproc, len);")
+		stream.write("procname[len] = '\\0';")
+		stream.write("struct C_Nit_Names map[] = \{\n")
 		for i in names.keys do
+			stream.write("\{\"")
 			stream.write(i)
-			stream.write(",\t\"")
+			stream.write("\",\"")
 			stream.write(names[i])
-			stream.write("\"\n")
+			stream.write("\"\},\n")
 		end
 		if names.is_empty then
 			stream.write("DEAD,\t\"DEAD\"\n") # Force at least one entry
 		end
-		stream.write("####\n")
-		stream.write("%%\n")
+		stream.write("\};\n")
+		stream.write("int i;")
+		stream.write("for(i = 0; i < {names.length}; i++)\{")
+		stream.write("if(strcmp(procname,map[i].name) == 0)\{")
+		stream.write("free(procname);")
+		stream.write("return map[i].nit_name;")
+		stream.write("\}")
+		stream.write("\}")
+		stream.write("free(procname);")
+		stream.write("return NULL;")
+		stream.write("\}\n")
 		stream.close
 
 		stream = new OFStream.open("{compile_dir}/c_functions_hash.h")
 		stream.write("typedef struct C_Nit_Names\{char* name; char* nit_name;\}C_Nit_Names;\n")
-		stream.write("const struct C_Nit_Names* get_nit_name(register const char *str, register unsigned int len);\n")
+		stream.write("char* get_nit_name(register const char* procname, register unsigned int len);\n")
+		stream.write("extern struct C_Nit_Names map[];")
 		stream.close
-
-		var x = new Process("gperf","{compile_dir}/C_fun_names","-t","-7","--output-file={compile_dir}/c_functions_hash.c","-C")
-		x.wait
 
 		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
 	end
@@ -575,9 +586,9 @@ abstract class AbstractCompiler
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
 			if ost == "gperf" then
-			v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
-			v.add_decl("	if (recv != 0)\{")
-			v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
+			v.add_decl("	char* recv = get_nit_name(procname, strlen(procname));")
+			v.add_decl("	if (recv != NULL)\{")
+			v.add_decl("		printf(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
 			v.add_decl("		printf(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
