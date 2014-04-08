@@ -519,7 +519,7 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 
 		if ost == null then
-			ost = "gperf"
+			ost = "libunwind"
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
