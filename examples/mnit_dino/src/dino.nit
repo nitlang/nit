@@ -112,6 +112,6 @@ class DinoApp
 	end
 end
 
-var app = new DinoApp
-app.main_loop
+fun app: DinoApp do return once new DinoApp
 
+app.main_loop

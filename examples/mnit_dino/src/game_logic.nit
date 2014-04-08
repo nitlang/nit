@@ -267,6 +267,7 @@ class Caveman
 
 	fun is_afraid( turn : Turn ) : Bool do return turn.nbr < afraid_until
 	fun can_throw( turn : Turn ) : Bool do return cannot_throw_until < turn.nbr
+	fun die(turn: Turn) do is_alive = false
 
 	redef fun do_turn( t )
 	do
@@ -274,7 +275,7 @@ class Caveman
 			var dwd = squared_dist_with_dino( t.game )
 
 			if dwd < run_over_distance then
-				if t.game.dino.is_alive then is_alive = false
+				if t.game.dino.is_alive then die(t)
 				return
 			else if is_afraid( t ) then
 				# going to destination
