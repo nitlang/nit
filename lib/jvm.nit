@@ -163,7 +163,12 @@ extern class JavaVM `{JavaVM *`}
 
 	fun attach_current_thread: JniEnv `{
 		JNIEnv *env;
+	#ifdef ANDROID
+		// the signature is different (better actually) on Android
+		int res = (*recv)->AttachCurrentThread(recv, &env, NULL);
+	#else
 		int res = (*recv)->AttachCurrentThread(recv, (void**)&env, NULL);
+	#endif
 		if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not attach current thread to Java VM", res);
 			return NULL;
