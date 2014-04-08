@@ -587,6 +587,16 @@ redef class App
 			}
 		}
 	`}
+
+	# Main Android native activity
+	fun native_activity: NativeActivity `{
+		// the name 'clazz' is misleading, it's actually a 'jobject'
+		return mnit_java_app->activity->clazz;
+	`}
+end
+
+# Android Java activity from the NDK
+extern class NativeActivity in "Java" `{android.app.NativeActivity`}
 end
 
 extern class JavaClassLoader in "Java" `{java.lang.ClassLoader`}
