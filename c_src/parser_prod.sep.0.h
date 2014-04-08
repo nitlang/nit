@@ -20,6 +20,7 @@ extern const struct type type_parser_nodes__AModuledecl;
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
 extern const int COLOR_abstract_collection__Collection__length;
+val* BOX_kernel__Int(long);
 extern const int COLOR_range__Range__without_last;
 extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
 extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;

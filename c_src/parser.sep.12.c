@@ -78,7 +78,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20537);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20539);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -96,7 +96,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20539);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20541);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -114,7 +114,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20541);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20543);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -132,7 +132,7 @@ var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20543);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20545);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -150,7 +150,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20545);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20547);
 show_backtrace(1);
 }
 var21 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -250,7 +250,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20574);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20576);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -268,7 +268,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20576);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20578);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -286,7 +286,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20578);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20580);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -304,7 +304,7 @@ var15 = var_pmethidnode6->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20580);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20582);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -322,7 +322,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20582);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20584);
 show_backtrace(1);
 }
 var21 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -429,7 +429,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20612);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20614);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -447,7 +447,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20614);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20616);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -465,7 +465,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20616);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20618);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -483,7 +483,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20618);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20620);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -501,7 +501,7 @@ var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20620);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20622);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -519,7 +519,7 @@ var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20622);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20624);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -618,7 +618,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20651);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20653);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -636,7 +636,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20653);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20655);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -654,7 +654,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20655);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20657);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -672,7 +672,7 @@ var15 = var_psignaturenode7->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20657);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20659);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -690,7 +690,7 @@ var18 = var_tstringnode8->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20659);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20661);
 show_backtrace(1);
 }
 var21 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -797,7 +797,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20689);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20691);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -815,7 +815,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20691);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20693);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -833,7 +833,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20693);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20695);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -851,7 +851,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20695);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20697);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -869,7 +869,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20697);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20699);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -887,7 +887,7 @@ var22 = var_tstringnode8->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20699);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20701);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -993,7 +993,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20729);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20731);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -1011,7 +1011,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20731);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20733);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -1029,7 +1029,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20733);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20735);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -1047,7 +1047,7 @@ var16 = var_pmethidnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20735);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20737);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -1065,7 +1065,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20737);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20739);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -1083,7 +1083,7 @@ var22 = var_tstringnode8->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20739);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20741);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -1196,7 +1196,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20770);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20772);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -1214,7 +1214,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20772);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20774);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -1232,7 +1232,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20774);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20776);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -1250,7 +1250,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20776);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20778);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -1268,7 +1268,7 @@ var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20778);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20780);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -1286,7 +1286,7 @@ var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20780);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20782);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist9;
@@ -1304,7 +1304,7 @@ var26 = var_tstringnode8->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20782);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20784);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -1402,7 +1402,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20811);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20813);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -1420,7 +1420,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20813);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20815);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -1438,7 +1438,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20815);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20817);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -1456,7 +1456,7 @@ var15 = var_psignaturenode7->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20817);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20819);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist7;
@@ -1474,7 +1474,7 @@ var18 = var_pexterncallsnode9->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20819);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20821);
 show_backtrace(1);
 }
 var21 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -1581,7 +1581,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20849);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20851);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -1599,7 +1599,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20851);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20853);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -1617,7 +1617,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20853);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20855);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -1635,7 +1635,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20855);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20857);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -1653,7 +1653,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20857);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20859);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -1671,7 +1671,7 @@ var22 = var_pexterncallsnode9->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20859);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20861);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -1777,7 +1777,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20889);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20891);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -1795,7 +1795,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20891);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20893);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -1813,7 +1813,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20893);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20895);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -1831,7 +1831,7 @@ var16 = var_pmethidnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20895);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20897);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -1849,7 +1849,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20897);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20899);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -1867,7 +1867,7 @@ var22 = var_pexterncallsnode9->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20899);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20901);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -1980,7 +1980,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20930);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20932);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -1998,7 +1998,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20932);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20934);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -2016,7 +2016,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20934);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20936);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -2034,7 +2034,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20936);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20938);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -2052,7 +2052,7 @@ var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20938);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20940);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -2070,7 +2070,7 @@ var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20940);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20942);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -2088,7 +2088,7 @@ var26 = var_pexterncallsnode9->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20942);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20944);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -2193,7 +2193,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20972);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20974);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -2211,7 +2211,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20974);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20976);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -2229,7 +2229,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20976);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20978);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -2247,7 +2247,7 @@ var16 = var_psignaturenode7->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20978);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20980);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -2265,7 +2265,7 @@ var19 = var_tstringnode8->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20980);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20982);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -2283,7 +2283,7 @@ var22 = var_pexterncallsnode9->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20982);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 20984);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -2396,7 +2396,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21013);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21015);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -2414,7 +2414,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21015);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21017);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -2432,7 +2432,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21017);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21019);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -2450,7 +2450,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21019);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21021);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -2468,7 +2468,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21021);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21023);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -2486,7 +2486,7 @@ var23 = var_tstringnode8->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21023);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21025);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -2504,7 +2504,7 @@ var26 = var_pexterncallsnode9->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21025);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21027);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -2616,7 +2616,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21056);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21058);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -2634,7 +2634,7 @@ var11 = var_pvisibilitynode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21058);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21060);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -2652,7 +2652,7 @@ var14 = var_tkwnewnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21060);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21062);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -2670,7 +2670,7 @@ var17 = var_pmethidnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21062);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21064);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -2688,7 +2688,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21064);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21066);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -2706,7 +2706,7 @@ var23 = var_tstringnode8->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21066);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21068);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -2724,7 +2724,7 @@ var26 = var_pexterncallsnode9->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21068);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21070);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -2843,7 +2843,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21100);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21102);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -2861,7 +2861,7 @@ var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21102);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21104);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -2879,7 +2879,7 @@ var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21104);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21106);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -2897,7 +2897,7 @@ var18 = var_tkwnewnode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21106);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21108);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -2915,7 +2915,7 @@ var21 = var_pmethidnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21108);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21110);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -2933,7 +2933,7 @@ var24 = var_psignaturenode7->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21110);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21112);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist9;
@@ -2951,7 +2951,7 @@ var27 = var_tstringnode8->type->type_table[cltype28] == idtype29;
 }
 if (!var27) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21112);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21114);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist10;
@@ -2969,7 +2969,7 @@ var30 = var_pexterncallsnode9->type->type_table[cltype31] == idtype32;
 }
 if (!var30) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21114);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21116);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -3066,7 +3066,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21143);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21145);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -3084,7 +3084,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21145);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21147);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -3102,7 +3102,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21147);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21149);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -3120,7 +3120,7 @@ var15 = var_psignaturenode7->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21149);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21151);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -3138,7 +3138,7 @@ var18 = var_pexterncodeblocknode10->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21151);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21153);
 show_backtrace(1);
 }
 var21 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -3245,7 +3245,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21181);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21183);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3263,7 +3263,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21183);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21185);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3281,7 +3281,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21185);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21187);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -3299,7 +3299,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21187);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21189);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -3317,7 +3317,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21189);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21191);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -3335,7 +3335,7 @@ var22 = var_pexterncodeblocknode10->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21191);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21193);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -3441,7 +3441,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21221);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21223);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -3459,7 +3459,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21223);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21225);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -3477,7 +3477,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21225);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21227);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -3495,7 +3495,7 @@ var16 = var_pmethidnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21227);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21229);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -3513,7 +3513,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21229);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21231);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -3531,7 +3531,7 @@ var22 = var_pexterncodeblocknode10->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21231);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21233);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -3644,7 +3644,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21262);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21264);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3662,7 +3662,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21264);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21266);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3680,7 +3680,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21266);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21268);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -3698,7 +3698,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21268);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21270);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -3716,7 +3716,7 @@ var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21270);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21272);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -3734,7 +3734,7 @@ var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21272);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21274);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -3752,7 +3752,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21274);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21276);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -3857,7 +3857,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21304);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21306);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -3875,7 +3875,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21306);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21308);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -3893,7 +3893,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21308);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21310);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -3911,7 +3911,7 @@ var16 = var_psignaturenode7->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21310);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21312);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -3929,7 +3929,7 @@ var19 = var_tstringnode8->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21312);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21314);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -3947,7 +3947,7 @@ var22 = var_pexterncodeblocknode10->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21314);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21316);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -4060,7 +4060,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21345);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21347);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4078,7 +4078,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21347);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21349);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4096,7 +4096,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21349);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21351);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -4114,7 +4114,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21351);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21353);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -4132,7 +4132,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21353);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21355);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -4150,7 +4150,7 @@ var23 = var_tstringnode8->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21355);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21357);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -4168,7 +4168,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21357);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21359);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -4280,7 +4280,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21388);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21390);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -4298,7 +4298,7 @@ var11 = var_pvisibilitynode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21390);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21392);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -4316,7 +4316,7 @@ var14 = var_tkwnewnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21392);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21394);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -4334,7 +4334,7 @@ var17 = var_pmethidnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21394);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21396);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -4352,7 +4352,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21396);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21398);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -4370,7 +4370,7 @@ var23 = var_tstringnode8->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21398);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21400);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -4388,7 +4388,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21400);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21402);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -4507,7 +4507,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21432);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21434);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4525,7 +4525,7 @@ var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21434);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21436);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4543,7 +4543,7 @@ var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21436);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21438);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -4561,7 +4561,7 @@ var18 = var_tkwnewnode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21438);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21440);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -4579,7 +4579,7 @@ var21 = var_pmethidnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21440);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21442);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -4597,7 +4597,7 @@ var24 = var_psignaturenode7->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21442);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21444);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist9;
@@ -4615,7 +4615,7 @@ var27 = var_tstringnode8->type->type_table[cltype28] == idtype29;
 }
 if (!var27) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21444);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21446);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist10;
@@ -4633,7 +4633,7 @@ var30 = var_pexterncodeblocknode10->type->type_table[cltype31] == idtype32;
 }
 if (!var30) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21446);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21448);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -4737,7 +4737,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21476);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21478);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -4755,7 +4755,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21478);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21480);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -4773,7 +4773,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21480);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21482);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -4791,7 +4791,7 @@ var16 = var_psignaturenode7->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21482);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21484);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist7;
@@ -4809,7 +4809,7 @@ var19 = var_pexterncallsnode9->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21484);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21486);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -4827,7 +4827,7 @@ var22 = var_pexterncodeblocknode10->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21486);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21488);
 show_backtrace(1);
 }
 var25 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -4940,7 +4940,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21517);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21519);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4958,7 +4958,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21519);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21521);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4976,7 +4976,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21521);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21523);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -4994,7 +4994,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21523);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21525);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -5012,7 +5012,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21525);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21527);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -5030,7 +5030,7 @@ var23 = var_pexterncallsnode9->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21527);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21529);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -5048,7 +5048,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21529);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21531);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -5160,7 +5160,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21560);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21562);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -5178,7 +5178,7 @@ var11 = var_pvisibilitynode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21562);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21564);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -5196,7 +5196,7 @@ var14 = var_tkwnewnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21564);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21566);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -5214,7 +5214,7 @@ var17 = var_pmethidnode6->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21566);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21568);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -5232,7 +5232,7 @@ var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21568);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21570);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -5250,7 +5250,7 @@ var23 = var_pexterncallsnode9->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21570);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21572);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -5268,7 +5268,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21572);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21574);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -5387,7 +5387,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21604);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21606);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5405,7 +5405,7 @@ var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21606);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21608);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5423,7 +5423,7 @@ var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21608);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21610);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -5441,7 +5441,7 @@ var18 = var_tkwnewnode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21610);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21612);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -5459,7 +5459,7 @@ var21 = var_pmethidnode6->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21612);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21614);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -5477,7 +5477,7 @@ var24 = var_psignaturenode7->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21614);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21616);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -5495,7 +5495,7 @@ var27 = var_pexterncallsnode9->type->type_table[cltype28] == idtype29;
 }
 if (!var27) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21616);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21618);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist10;
@@ -5513,7 +5513,7 @@ var30 = var_pexterncodeblocknode10->type->type_table[cltype31] == idtype32;
 }
 if (!var30) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21618);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21620);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -5624,7 +5624,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21649);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21651);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -5642,7 +5642,7 @@ var11 = var_pvisibilitynode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21651);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21653);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -5660,7 +5660,7 @@ var14 = var_tkwnewnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21653);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21655);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -5678,7 +5678,7 @@ var17 = var_psignaturenode7->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21655);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21657);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -5696,7 +5696,7 @@ var20 = var_tstringnode8->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21657);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21659);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -5714,7 +5714,7 @@ var23 = var_pexterncallsnode9->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21659);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21661);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -5732,7 +5732,7 @@ var26 = var_pexterncodeblocknode10->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21661);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21663);
 show_backtrace(1);
 }
 var29 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -5851,7 +5851,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21693);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21695);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5869,7 +5869,7 @@ var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21695);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21697);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5887,7 +5887,7 @@ var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21697);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21699);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -5905,7 +5905,7 @@ var18 = var_tkwnewnode5->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21699);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21701);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -5923,7 +5923,7 @@ var21 = var_psignaturenode7->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21701);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21703);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -5941,7 +5941,7 @@ var24 = var_tstringnode8->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21703);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21705);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -5959,7 +5959,7 @@ var27 = var_pexterncallsnode9->type->type_table[cltype28] == idtype29;
 }
 if (!var27) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21705);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21707);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist10;
@@ -5977,7 +5977,7 @@ var30 = var_pexterncodeblocknode10->type->type_table[cltype31] == idtype32;
 }
 if (!var30) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21707);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21709);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -6095,7 +6095,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21739);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21741);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -6113,7 +6113,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21741);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21743);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -6131,7 +6131,7 @@ var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21743);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21745);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -6149,7 +6149,7 @@ var18 = var_pmethidnode6->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21745);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21747);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -6167,7 +6167,7 @@ var21 = var_psignaturenode7->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21747);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21749);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist8;
@@ -6185,7 +6185,7 @@ var24 = var_tstringnode8->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21749);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21751);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist9;
@@ -6203,7 +6203,7 @@ var27 = var_pexterncallsnode9->type->type_table[cltype28] == idtype29;
 }
 if (!var27) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21751);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21753);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist10;
@@ -6221,7 +6221,7 @@ var30 = var_pexterncodeblocknode10->type->type_table[cltype31] == idtype32;
 }
 if (!var30) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21753);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21755);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -6346,7 +6346,7 @@ var12 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21786);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21788);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6364,7 +6364,7 @@ var13 = var_tkwredefnode3->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21788);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21790);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6382,7 +6382,7 @@ var16 = var_pvisibilitynode4->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21790);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21792);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -6400,7 +6400,7 @@ var19 = var_tkwnewnode5->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21792);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21794);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -6418,7 +6418,7 @@ var22 = var_pmethidnode6->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21794);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21796);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -6436,7 +6436,7 @@ var25 = var_psignaturenode7->type->type_table[cltype26] == idtype27;
 }
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21796);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21798);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist9;
@@ -6454,7 +6454,7 @@ var28 = var_tstringnode8->type->type_table[cltype29] == idtype30;
 }
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21798);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21800);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist10;
@@ -6472,7 +6472,7 @@ var31 = var_pexterncallsnode9->type->type_table[cltype32] == idtype33;
 }
 if (!var31) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21800);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21802);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist11;
@@ -6490,7 +6490,7 @@ var34 = var_pexterncodeblocknode10->type->type_table[cltype35] == idtype36;
 }
 if (!var34) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21802);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21804);
 show_backtrace(1);
 }
 var37 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -6578,7 +6578,7 @@ var6 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21829);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21831);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -6596,7 +6596,7 @@ var7 = var_pvisibilitynode4->type->type_table[cltype8] == idtype9;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21831);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21833);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -6614,7 +6614,7 @@ var10 = var_tkwnewnode5->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21833);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21835);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -6632,7 +6632,7 @@ var13 = var_psignaturenode7->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21835);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21837);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist5;
@@ -6650,7 +6650,7 @@ var16 = var_pexterncodeblocknode10->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21837);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21839);
 show_backtrace(1);
 }
 var19 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -6749,7 +6749,7 @@ var7 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21865);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21867);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6767,7 +6767,7 @@ var8 = var_tkwredefnode3->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21867);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21869);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6785,7 +6785,7 @@ var11 = var_pvisibilitynode4->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21869);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21871);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -6803,7 +6803,7 @@ var14 = var_tkwnewnode5->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21871);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21873);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -6821,7 +6821,7 @@ var17 = var_psignaturenode7->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21873);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21875);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist6;
@@ -6839,7 +6839,7 @@ var20 = var_pexterncodeblocknode10->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21875);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21877);
 show_backtrace(1);
 }
 var23 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -6937,7 +6937,7 @@ var7 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21903);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21905);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -6955,7 +6955,7 @@ var8 = var_pvisibilitynode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21905);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21907);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -6973,7 +6973,7 @@ var11 = var_tkwnewnode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21907);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21909);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -6991,7 +6991,7 @@ var14 = var_pmethidnode6->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21909);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21911);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -7009,7 +7009,7 @@ var17 = var_psignaturenode7->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21911);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21913);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist6;
@@ -7027,7 +7027,7 @@ var20 = var_pexterncodeblocknode10->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21913);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21915);
 show_backtrace(1);
 }
 var23 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -7132,7 +7132,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21942);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21944);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7150,7 +7150,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21944);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21946);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7168,7 +7168,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21946);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21948);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -7186,7 +7186,7 @@ var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21948);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21950);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -7204,7 +7204,7 @@ var18 = var_pmethidnode6->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21950);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21952);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -7222,7 +7222,7 @@ var21 = var_psignaturenode7->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21952);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21954);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -7240,7 +7240,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21954);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21956);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -7337,7 +7337,7 @@ var7 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21982);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21984);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -7355,7 +7355,7 @@ var8 = var_pvisibilitynode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21984);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21986);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -7373,7 +7373,7 @@ var11 = var_tkwnewnode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21986);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21988);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -7391,7 +7391,7 @@ var14 = var_psignaturenode7->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21988);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21990);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist5;
@@ -7409,7 +7409,7 @@ var17 = var_tstringnode8->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21990);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21992);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist6;
@@ -7427,7 +7427,7 @@ var20 = var_pexterncodeblocknode10->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21992);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 21994);
 show_backtrace(1);
 }
 var23 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -7532,7 +7532,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22021);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22023);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7550,7 +7550,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22023);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22025);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7568,7 +7568,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22025);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22027);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -7586,7 +7586,7 @@ var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22027);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22029);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -7604,7 +7604,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22029);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22031);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist6;
@@ -7622,7 +7622,7 @@ var21 = var_tstringnode8->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22031);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22033);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -7640,7 +7640,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22033);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22035);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -7744,7 +7744,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22062);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22064);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -7762,7 +7762,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22064);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22066);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -7780,7 +7780,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22066);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22068);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -7798,7 +7798,7 @@ var15 = var_pmethidnode6->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22068);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22070);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -7816,7 +7816,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22070);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22072);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist6;
@@ -7834,7 +7834,7 @@ var21 = var_tstringnode8->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22072);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22074);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -7852,7 +7852,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22074);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22076);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -7963,7 +7963,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22104);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22106);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7981,7 +7981,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22106);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22108);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7999,7 +7999,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22108);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22110);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -8017,7 +8017,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22110);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22112);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -8035,7 +8035,7 @@ var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22112);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22114);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -8053,7 +8053,7 @@ var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22114);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22116);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -8071,7 +8071,7 @@ var25 = var_tstringnode8->type->type_table[cltype26] == idtype27;
 }
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22116);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22118);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -8089,7 +8089,7 @@ var28 = var_pexterncodeblocknode10->type->type_table[cltype29] == idtype30;
 }
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22118);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22120);
 show_backtrace(1);
 }
 var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -8185,7 +8185,7 @@ var7 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22146);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22148);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -8203,7 +8203,7 @@ var8 = var_pvisibilitynode4->type->type_table[cltype9] == idtype10;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22148);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22150);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -8221,7 +8221,7 @@ var11 = var_tkwnewnode5->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22150);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22152);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -8239,7 +8239,7 @@ var14 = var_psignaturenode7->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22152);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22154);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist5;
@@ -8257,7 +8257,7 @@ var17 = var_pexterncallsnode9->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22154);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22156);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist6;
@@ -8275,7 +8275,7 @@ var20 = var_pexterncodeblocknode10->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22156);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22158);
 show_backtrace(1);
 }
 var23 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -8380,7 +8380,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22185);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22187);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -8398,7 +8398,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22187);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22189);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8416,7 +8416,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22189);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22191);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -8434,7 +8434,7 @@ var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22191);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22193);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -8452,7 +8452,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22193);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22195);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist6;
@@ -8470,7 +8470,7 @@ var21 = var_pexterncallsnode9->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22195);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22197);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -8488,7 +8488,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22197);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22199);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -8592,7 +8592,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22226);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22228);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -8610,7 +8610,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22228);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22230);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -8628,7 +8628,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22230);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22232);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -8646,7 +8646,7 @@ var15 = var_pmethidnode6->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22232);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22234);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -8664,7 +8664,7 @@ var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22234);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22236);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist6;
@@ -8682,7 +8682,7 @@ var21 = var_pexterncallsnode9->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22236);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22238);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -8700,7 +8700,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22238);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22240);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -8811,7 +8811,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22268);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22270);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -8829,7 +8829,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22270);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22272);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8847,7 +8847,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22272);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22274);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -8865,7 +8865,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22274);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22276);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -8883,7 +8883,7 @@ var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22276);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22278);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -8901,7 +8901,7 @@ var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22278);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22280);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist7;
@@ -8919,7 +8919,7 @@ var25 = var_pexterncallsnode9->type->type_table[cltype26] == idtype27;
 }
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22280);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22282);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -8937,7 +8937,7 @@ var28 = var_pexterncodeblocknode10->type->type_table[cltype29] == idtype30;
 }
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22282);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22284);
 show_backtrace(1);
 }
 var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -9040,7 +9040,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22311);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22313);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -9058,7 +9058,7 @@ var9 = var_pvisibilitynode4->type->type_table[cltype10] == idtype11;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22313);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22315);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -9076,7 +9076,7 @@ var12 = var_tkwnewnode5->type->type_table[cltype13] == idtype14;
 }
 if (!var12) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22315);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22317);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist4;
@@ -9094,7 +9094,7 @@ var15 = var_psignaturenode7->type->type_table[cltype16] == idtype17;
 }
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22317);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22319);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist5;
@@ -9112,7 +9112,7 @@ var18 = var_tstringnode8->type->type_table[cltype19] == idtype20;
 }
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22319);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22321);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist6;
@@ -9130,7 +9130,7 @@ var21 = var_pexterncallsnode9->type->type_table[cltype22] == idtype23;
 }
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22321);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22323);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -9148,7 +9148,7 @@ var24 = var_pexterncodeblocknode10->type->type_table[cltype25] == idtype26;
 }
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22323);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22325);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -9259,7 +9259,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22353);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22355);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -9277,7 +9277,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22355);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22357);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -9295,7 +9295,7 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22357);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22359);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -9313,7 +9313,7 @@ var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22359);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22361);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -9331,7 +9331,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22361);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22363);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist6;
@@ -9349,7 +9349,7 @@ var22 = var_tstringnode8->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22363);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22365);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist7;
@@ -9367,7 +9367,7 @@ var25 = var_pexterncallsnode9->type->type_table[cltype26] == idtype27;
 }
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22365);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22367);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -9385,7 +9385,7 @@ var28 = var_pexterncodeblocknode10->type->type_table[cltype29] == idtype30;
 }
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22367);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22369);
 show_backtrace(1);
 }
 var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -9495,7 +9495,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22397);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22399);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist2;
@@ -9513,7 +9513,7 @@ var10 = var_pvisibilitynode4->type->type_table[cltype11] == idtype12;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22399);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22401);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist3;
@@ -9531,7 +9531,7 @@ var13 = var_tkwnewnode5->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22401);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22403);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist4;
@@ -9549,7 +9549,7 @@ var16 = var_pmethidnode6->type->type_table[cltype17] == idtype18;
 }
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22403);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22405);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist5;
@@ -9567,7 +9567,7 @@ var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
 }
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22405);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22407);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist6;
@@ -9585,7 +9585,7 @@ var22 = var_tstringnode8->type->type_table[cltype23] == idtype24;
 }
 if (!var22) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22407);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22409);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist7;
@@ -9603,7 +9603,7 @@ var25 = var_pexterncallsnode9->type->type_table[cltype26] == idtype27;
 }
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22409);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22411);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist8;
@@ -9621,7 +9621,7 @@ var28 = var_pexterncodeblocknode10->type->type_table[cltype29] == idtype30;
 }
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22411);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22413);
 show_backtrace(1);
 }
 var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
@@ -9738,7 +9738,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22442);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22444);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -9756,7 +9756,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22444);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22446);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -9774,7 +9774,7 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (!var14) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22446);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22448);
 show_backtrace(1);
 }
 var_tkwnewnode5 = var_nodearraylist4;
@@ -9792,7 +9792,7 @@ var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
 }
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22448);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22450);
 show_backtrace(1);
 }
 var_pmethidnode6 = var_nodearraylist5;
@@ -9810,7 +9810,7 @@ var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
 }
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22450);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22452);
 show_backtrace(1);
 }
 var_psignaturenode7 = var_nodearraylist6;
@@ -9828,7 +9828,7 @@ var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
 }
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22452);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22454);
 show_backtrace(1);
 }
 var_tstringnode8 = var_nodearraylist7;
@@ -9846,7 +9846,7 @@ var26 = var_tstringnode8->type->type_table[cltype27] == idtype28;
 }
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22454);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22456);
 show_backtrace(1);
 }
 var_pexterncallsnode9 = var_nodearraylist8;
@@ -9864,7 +9864,7 @@ var29 = var_pexterncallsnode9->type->type_table[cltype30] == idtype31;
 }
 if (!var29) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22456);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22458);
 show_backtrace(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist9;
@@ -9882,7 +9882,7 @@ var32 = var_pexterncodeblocknode10->type->type_table[cltype33] == idtype34;
 }
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22458);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 22460);
 show_backtrace(1);
 }
 var35 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);

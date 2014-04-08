@@ -308,7 +308,7 @@ show_backtrace(1);
 var_mpropdef = var17;
 var18 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 56);
 show_backtrace(1);
 } else {
@@ -337,7 +337,7 @@ goto RET_LABEL;
 }
 var27 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AMethPropdef__n_signature]))(var_npropdef) /* n_signature on <var_npropdef:ANode(AConcreteMethPropdef)>*/;
 if (var27 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 62);
 show_backtrace(1);
 } else {
@@ -650,7 +650,7 @@ var178 = ((val* (*)(val*))(var177->class->vft[COLOR_model__MProperty__name]))(va
 ((void (*)(val*, val*))(var176->class->vft[COLOR_parser_nodes__Token__text_61d]))(var176, var178) /* text= on <var176:nullable Object(Token)>*/;
 var179 = ((val* (*)(val*))(var_real_npropdef->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var_real_npropdef) /* n_block on <var_real_npropdef:AConcreteMethPropdef>*/;
 if (var179 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 115);
 show_backtrace(1);
 } else {

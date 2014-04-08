@@ -113,30 +113,30 @@ void VIRTUAL_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d(
 auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d(self, p0);
 RET_LABEL:;
 }
-/* method auto_super_init#AConcreteMethPropdef#auto_super_inits for (self: AConcreteMethPropdef): nullable Array[MMethod] */
+/* method auto_super_init#AConcreteMethPropdef#auto_super_inits for (self: AConcreteMethPropdef): nullable Array[CallSite] */
 val* auto_super_init__AConcreteMethPropdef__auto_super_inits(val* self) {
-val* var /* : nullable Array[MMethod] */;
-val* var1 /* : nullable Array[MMethod] */;
+val* var /* : nullable Array[CallSite] */;
+val* var1 /* : nullable Array[CallSite] */;
 var1 = self->attrs[COLOR_auto_super_init__AConcreteMethPropdef___64dauto_super_inits].val; /* @auto_super_inits on <self:AConcreteMethPropdef> */
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method auto_super_init#AConcreteMethPropdef#auto_super_inits for (self: Object): nullable Array[MMethod] */
+/* method auto_super_init#AConcreteMethPropdef#auto_super_inits for (self: Object): nullable Array[CallSite] */
 val* VIRTUAL_auto_super_init__AConcreteMethPropdef__auto_super_inits(val* self) {
-val* var /* : nullable Array[MMethod] */;
-val* var1 /* : nullable Array[MMethod] */;
+val* var /* : nullable Array[CallSite] */;
+val* var1 /* : nullable Array[CallSite] */;
 var1 = auto_super_init__AConcreteMethPropdef__auto_super_inits(self);
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method auto_super_init#AConcreteMethPropdef#auto_super_inits= for (self: AConcreteMethPropdef, nullable Array[MMethod]) */
+/* method auto_super_init#AConcreteMethPropdef#auto_super_inits= for (self: AConcreteMethPropdef, nullable Array[CallSite]) */
 void auto_super_init__AConcreteMethPropdef__auto_super_inits_61d(val* self, val* p0) {
 self->attrs[COLOR_auto_super_init__AConcreteMethPropdef___64dauto_super_inits].val = p0; /* @auto_super_inits on <self:AConcreteMethPropdef> */
 RET_LABEL:;
 }
-/* method auto_super_init#AConcreteMethPropdef#auto_super_inits= for (self: Object, nullable Array[MMethod]) */
+/* method auto_super_init#AConcreteMethPropdef#auto_super_inits= for (self: Object, nullable Array[CallSite]) */
 void VIRTUAL_auto_super_init__AConcreteMethPropdef__auto_super_inits_61d(val* self, val* p0) {
 auto_super_init__AConcreteMethPropdef__auto_super_inits_61d(self, p0);
 RET_LABEL:;
@@ -156,132 +156,222 @@ val* var_mpropdef /* var mpropdef: MMethodDef */;
 val* var4 /* : MClassDef */;
 val* var5 /* : MModule */;
 val* var_mmodule /* var mmodule: MModule */;
-val* var6 /* : MProperty */;
-short int var7 /* : Bool */;
-short int var8 /* : Bool */;
-val* var9 /* : MClassDef */;
+val* var6 /* : MClassType */;
+val* var_anchor /* var anchor: MClassType */;
+val* var7 /* : MClass */;
+val* var8 /* : MClassType */;
+val* var_recvtype /* var recvtype: MClassType */;
+val* var9 /* : MProperty */;
 short int var10 /* : Bool */;
 short int var11 /* : Bool */;
-short int var12 /* : Bool */;
+val* var12 /* : MClassDef */;
+short int var13 /* : Bool */;
+short int var14 /* : Bool */;
+short int var15 /* : Bool */;
 short int var_skip /* var skip: Bool */;
-val* var13 /* : nullable POSetElement[MClassDef] */;
-val* var14 /* : Collection[Object] */;
-val* var15 /* : Iterator[nullable Object] */;
-short int var16 /* : Bool */;
-val* var17 /* : nullable Object */;
+val* var16 /* : nullable POSetElement[MClassDef] */;
+val* var17 /* : Collection[Object] */;
+val* var18 /* : Iterator[nullable Object] */;
+short int var19 /* : Bool */;
+val* var20 /* : nullable Object */;
 val* var_cd /* var cd: MClassDef */;
-val* var18 /* : MClass */;
-val* var19 /* : MClassKind */;
-short int var20 /* : Bool */;
-short int var21 /* : Bool */;
-val* var22 /* : nullable AExpr */;
-val* var_nblock /* var nblock: nullable AExpr */;
-val* var23 /* : null */;
+val* var21 /* : MClass */;
+val* var22 /* : MClassKind */;
+short int var23 /* : Bool */;
 short int var24 /* : Bool */;
-val* var25 /* : AutoSuperInitVisitor */;
+val* var25 /* : nullable AExpr */;
+val* var_nblock /* var nblock: nullable AExpr */;
+val* var26 /* : null */;
+short int var27 /* : Bool */;
+val* var28 /* : AutoSuperInitVisitor */;
 val* var_v /* var v: AutoSuperInitVisitor */;
-short int var26 /* : Bool */;
-val* var27 /* : Array[MMethod] */;
-val* var_auto_super_inits /* var auto_super_inits: Array[MMethod] */;
-val* var28 /* : Array[MClassType] */;
-val* var29 /* : Iterator[nullable Object] */;
-short int var30 /* : Bool */;
-val* var31 /* : nullable Object */;
+short int var29 /* : Bool */;
+val* var30 /* : Array[CallSite] */;
+val* var_auto_super_inits /* var auto_super_inits: Array[CallSite] */;
+val* var31 /* : Array[MClassType] */;
+val* var32 /* : Iterator[nullable Object] */;
+short int var33 /* : Bool */;
+val* var34 /* : nullable Object */;
 val* var_msupertype /* var msupertype: MClassType */;
-val* var32 /* : MClass */;
-val* var33 /* : MClassKind */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
-val* var37 /* : MClassType */;
-val* var38 /* : MType */;
-val* var39 /* : MProperty */;
-val* var40 /* : String */;
-val* var41 /* : nullable MProperty */;
+val* var35 /* : MClass */;
+val* var36 /* : MClassKind */;
+short int var37 /* : Bool */;
+short int var38 /* : Bool */;
+val* var40 /* : MClassType */;
+val* var41 /* : MType */;
+val* var42 /* : MProperty */;
+val* var43 /* : String */;
+val* var44 /* : nullable MProperty */;
 val* var_candidate /* var candidate: nullable MProperty */;
-val* var42 /* : null */;
-short int var43 /* : Bool */;
+val* var45 /* : null */;
+short int var46 /* : Bool */;
 static val* varonce;
-val* var44 /* : String */;
-char* var45 /* : NativeString */;
-long var46 /* : Int */;
 val* var47 /* : String */;
-val* var48 /* : nullable MProperty */;
-val* var49 /* : null */;
-short int var50 /* : Bool */;
-static val* varonce51;
-val* var52 /* : String */;
-char* var53 /* : NativeString */;
-long var54 /* : Int */;
+char* var48 /* : NativeString */;
+long var49 /* : Int */;
+val* var50 /* : String */;
+val* var51 /* : nullable MProperty */;
+val* var52 /* : null */;
+short int var53 /* : Bool */;
+static val* varonce54;
 val* var55 /* : String */;
-static val* varonce56;
-val* var57 /* : String */;
-char* var58 /* : NativeString */;
-long var59 /* : Int */;
+char* var56 /* : NativeString */;
+long var57 /* : Int */;
+val* var58 /* : String */;
+static val* varonce59;
 val* var60 /* : String */;
-val* var61 /* : MProperty */;
-val* var62 /* : String */;
-static val* varonce63;
-val* var64 /* : String */;
-char* var65 /* : NativeString */;
-long var66 /* : Int */;
+char* var61 /* : NativeString */;
+long var62 /* : Int */;
+val* var63 /* : String */;
+val* var64 /* : MProperty */;
+val* var65 /* : String */;
+static val* varonce66;
 val* var67 /* : String */;
-static val* varonce68;
-val* var69 /* : String */;
-char* var70 /* : NativeString */;
-long var71 /* : Int */;
+char* var68 /* : NativeString */;
+long var69 /* : Int */;
+val* var70 /* : String */;
+static val* varonce71;
 val* var72 /* : String */;
-val* var73 /* : Array[Object] */;
+char* var73 /* : NativeString */;
 long var74 /* : Int */;
-val* var75 /* : NativeArray[Object] */;
-val* var76 /* : String */;
-short int var77 /* : Bool */;
-int cltype78;
-int idtype79;
+val* var75 /* : String */;
+val* var76 /* : Array[Object] */;
+long var77 /* : Int */;
+val* var78 /* : NativeArray[Object] */;
+val* var79 /* : String */;
 short int var80 /* : Bool */;
-static val* varonce81;
-val* var82 /* : String */;
-char* var83 /* : NativeString */;
-long var84 /* : Int */;
-val* var85 /* : String */;
-val* var86 /* : Iterator[nullable Object] */;
-short int var87 /* : Bool */;
-val* var88 /* : nullable Object */;
-val* var_auto_super_init /* var auto_super_init: MMethod */;
-val* var89 /* : MPropDef */;
-val* var_auto_super_init_def /* var auto_super_init_def: MMethodDef */;
-val* var90 /* : nullable MSignature */;
-val* var_msig /* var msig: MSignature */;
-val* var91 /* : nullable MSignature */;
-val* var_supermsig /* var supermsig: MSignature */;
-short int var92 /* : Bool */;
-val* var93 /* : nullable MSignature */;
-long var94 /* : Int */;
+int cltype81;
+int idtype82;
+val* var83 /* : Array[MPropDef] */;
+val* var_candidatedefs /* var candidatedefs: Array[MMethodDef] */;
+val* var84 /* : nullable Object */;
+val* var_candidatedef /* var candidatedef: MMethodDef */;
+val* var85 /* : nullable MSignature */;
+val* var_msignature /* var msignature: nullable MSignature */;
+short int var86 /* : Bool */;
+val* var87 /* : MType */;
+val* var88 /* : CallSite */;
+short int var89 /* : Bool */;
+short int var90 /* : Bool */;
+val* var_callsite /* var callsite: CallSite */;
+short int var91 /* : Bool */;
+static val* varonce92;
+val* var93 /* : String */;
+char* var94 /* : NativeString */;
 long var95 /* : Int */;
-short int var96 /* : Bool */;
-short int var98 /* : Bool */;
-short int var99 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var100 /* : nullable MSignature */;
-long var101 /* : Int */;
-val* var102 /* : nullable MSignature */;
+val* var96 /* : String */;
+static val* varonce97;
+val* var98 /* : String */;
+char* var99 /* : NativeString */;
+long var100 /* : Int */;
+val* var101 /* : String */;
+val* var102 /* : Array[Object] */;
 long var103 /* : Int */;
-short int var104 /* : Bool */;
-short int var106 /* : Bool */;
+val* var104 /* : NativeArray[Object] */;
+val* var105 /* : String */;
+val* var106 /* : Iterator[nullable Object] */;
 short int var107 /* : Bool */;
-static val* varonce108;
-val* var109 /* : String */;
-char* var110 /* : NativeString */;
-long var111 /* : Int */;
-val* var112 /* : String */;
-static val* varonce113;
-val* var114 /* : String */;
-char* var115 /* : NativeString */;
-long var116 /* : Int */;
-val* var117 /* : String */;
-val* var118 /* : Array[Object] */;
-long var119 /* : Int */;
-val* var120 /* : NativeArray[Object] */;
-val* var121 /* : String */;
+val* var108 /* : nullable Object */;
+val* var_auto_super_init /* var auto_super_init: CallSite */;
+val* var109 /* : MMethodDef */;
+val* var_auto_super_init_def /* var auto_super_init_def: MMethodDef */;
+val* var110 /* : nullable MSignature */;
+val* var_msig /* var msig: MSignature */;
+val* var111 /* : MSignature */;
+val* var_supermsig /* var supermsig: MSignature */;
+long var112 /* : Int */;
+long var113 /* : Int */;
+short int var114 /* : Bool */;
+short int var116 /* : Bool */;
+int cltype117;
+int idtype118;
+const char* var_class_name119;
+short int var120 /* : Bool */;
+static val* varonce121;
+val* var122 /* : String */;
+char* var123 /* : NativeString */;
+long var124 /* : Int */;
+val* var125 /* : String */;
+static val* varonce126;
+val* var127 /* : String */;
+char* var128 /* : NativeString */;
+long var129 /* : Int */;
+val* var130 /* : String */;
+long var131 /* : Int */;
+static val* varonce132;
+val* var133 /* : String */;
+char* var134 /* : NativeString */;
+long var135 /* : Int */;
+val* var136 /* : String */;
+long var137 /* : Int */;
+static val* varonce138;
+val* var139 /* : String */;
+char* var140 /* : NativeString */;
+long var141 /* : Int */;
+val* var142 /* : String */;
+val* var143 /* : Array[Object] */;
+long var144 /* : Int */;
+val* var145 /* : NativeArray[Object] */;
+val* var146 /* : Object */;
+val* var147 /* : Object */;
+val* var148 /* : String */;
+long var150 /* : Int */;
+long var_i /* var i: Int */;
+val* var151 /* : Array[MParameter] */;
+val* var152 /* : Iterator[nullable Object] */;
+short int var153 /* : Bool */;
+val* var154 /* : nullable Object */;
+val* var_sp /* var sp: MParameter */;
+val* var155 /* : Array[MParameter] */;
+val* var156 /* : nullable Object */;
+val* var_p /* var p: MParameter */;
+val* var157 /* : MType */;
+val* var_sub /* var sub: MType */;
+val* var158 /* : MType */;
+val* var_sup /* var sup: MType */;
+short int var159 /* : Bool */;
+short int var160 /* : Bool */;
+static val* varonce161;
+val* var162 /* : String */;
+char* var163 /* : NativeString */;
+long var164 /* : Int */;
+val* var165 /* : String */;
+static val* varonce166;
+val* var167 /* : String */;
+char* var168 /* : NativeString */;
+long var169 /* : Int */;
+val* var170 /* : String */;
+static val* varonce171;
+val* var172 /* : String */;
+char* var173 /* : NativeString */;
+long var174 /* : Int */;
+val* var175 /* : String */;
+val* var176 /* : MType */;
+static val* varonce177;
+val* var178 /* : String */;
+char* var179 /* : NativeString */;
+long var180 /* : Int */;
+val* var181 /* : String */;
+val* var182 /* : String */;
+static val* varonce183;
+val* var184 /* : String */;
+char* var185 /* : NativeString */;
+long var186 /* : Int */;
+val* var187 /* : String */;
+val* var188 /* : MType */;
+static val* varonce189;
+val* var190 /* : String */;
+char* var191 /* : NativeString */;
+long var192 /* : Int */;
+val* var193 /* : String */;
+val* var194 /* : Array[Object] */;
+long var195 /* : Int */;
+val* var196 /* : NativeArray[Object] */;
+val* var197 /* : Object */;
+val* var198 /* : String */;
+long var200 /* : Int */;
+long var201 /* : Int */;
+long var203 /* : Int */;
 var_modelbuilder = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:AConcreteMethPropdef>*/;
 /* <var:nullable ANode> isa AClassdef */
@@ -319,318 +409,467 @@ var_mpropdef = var3;
 var4 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mpropdef) /* mclassdef on <var_mpropdef:MMethodDef>*/;
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_model__MClassDef__mmodule]))(var4) /* mmodule on <var4:MClassDef>*/;
 var_mmodule = var5;
-var6 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
-var7 = ((short int (*)(val*))(var6->class->vft[COLOR_model__MMethod__is_init]))(var6) /* is_init on <var6:MProperty(MMethod)>*/;
-var8 = !var7;
-if (var8){
-goto RET_LABEL;
-} else {
-}
-var9 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mpropdef) /* mclassdef on <var_mpropdef:MMethodDef>*/;
-var10 = ((short int (*)(val*))(var9->class->vft[COLOR_model__MClassDef__is_intro]))(var9) /* is_intro on <var9:MClassDef>*/;
+var6 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_mclassdef) /* bound_mtype on <var_mclassdef:MClassDef>*/;
+var_anchor = var6;
+var7 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__mclass]))(var_mclassdef) /* mclass on <var_mclassdef:MClassDef>*/;
+var8 = ((val* (*)(val*))(var7->class->vft[COLOR_model__MClass__mclass_type]))(var7) /* mclass_type on <var7:MClass>*/;
+var_recvtype = var8;
+var9 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
+var10 = ((short int (*)(val*))(var9->class->vft[COLOR_model__MMethod__is_init]))(var9) /* is_init on <var9:MProperty(MMethod)>*/;
 var11 = !var10;
 if (var11){
 goto RET_LABEL;
 } else {
 }
-var12 = 1;
-var_skip = var12;
-var13 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef) /* in_hierarchy on <var_mclassdef:MClassDef>*/;
-if (var13 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 68);
+var12 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mpropdef) /* mclassdef on <var_mpropdef:MMethodDef>*/;
+var13 = ((short int (*)(val*))(var12->class->vft[COLOR_model__MClassDef__is_intro]))(var12) /* is_intro on <var12:MClassDef>*/;
+var14 = !var13;
+if (var14){
+goto RET_LABEL;
+} else {
+}
+var15 = 1;
+var_skip = var15;
+var16 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef) /* in_hierarchy on <var_mclassdef:MClassDef>*/;
+if (var16 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 70);
 show_backtrace(1);
 } else {
-var14 = ((val* (*)(val*))(var13->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var13) /* direct_greaters on <var13:nullable POSetElement[MClassDef]>*/;
+var17 = ((val* (*)(val*))(var16->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var16) /* direct_greaters on <var16:nullable POSetElement[MClassDef]>*/;
 }
-var15 = ((val* (*)(val*))(var14->class->vft[COLOR_abstract_collection__Collection__iterator]))(var14) /* iterator on <var14:Collection[Object](Collection[MClassDef])>*/;
+var18 = ((val* (*)(val*))(var17->class->vft[COLOR_abstract_collection__Collection__iterator]))(var17) /* iterator on <var17:Collection[Object](Collection[MClassDef])>*/;
 for(;;) {
-var16 = ((short int (*)(val*))(var15->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var15) /* is_ok on <var15:Iterator[nullable Object]>*/;
-if(!var16) break;
-var17 = ((val* (*)(val*))(var15->class->vft[COLOR_abstract_collection__Iterator__item]))(var15) /* item on <var15:Iterator[nullable Object]>*/;
-var_cd = var17;
-var18 = ((val* (*)(val*))(var_cd->class->vft[COLOR_model__MClassDef__mclass]))(var_cd) /* mclass on <var_cd:MClassDef>*/;
-var19 = ((val* (*)(val*))(var18->class->vft[COLOR_model__MClass__kind]))(var18) /* kind on <var18:MClass>*/;
-var20 = ((short int (*)(val*))(var19->class->vft[COLOR_model__MClassKind__need_init]))(var19) /* need_init on <var19:MClassKind>*/;
-if (var20){
-var21 = 0;
-var_skip = var21;
+var19 = ((short int (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var18) /* is_ok on <var18:Iterator[nullable Object]>*/;
+if(!var19) break;
+var20 = ((val* (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__item]))(var18) /* item on <var18:Iterator[nullable Object]>*/;
+var_cd = var20;
+var21 = ((val* (*)(val*))(var_cd->class->vft[COLOR_model__MClassDef__mclass]))(var_cd) /* mclass on <var_cd:MClassDef>*/;
+var22 = ((val* (*)(val*))(var21->class->vft[COLOR_model__MClass__kind]))(var21) /* kind on <var21:MClass>*/;
+var23 = ((short int (*)(val*))(var22->class->vft[COLOR_model__MClassKind__need_init]))(var22) /* need_init on <var22:MClassKind>*/;
+if (var23){
+var24 = 0;
+var_skip = var24;
 } else {
 }
 CONTINUE_label: (void)0;
-((void (*)(val*))(var15->class->vft[COLOR_abstract_collection__Iterator__next]))(var15) /* next on <var15:Iterator[nullable Object]>*/;
+((void (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__next]))(var18) /* next on <var18:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
 if (var_skip){
 goto RET_LABEL;
 } else {
 }
-var22 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(self) /* n_block on <self:AConcreteMethPropdef>*/;
-var_nblock = var22;
-var23 = NULL;
+var25 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(self) /* n_block on <self:AConcreteMethPropdef>*/;
+var_nblock = var25;
+var26 = NULL;
 if (var_nblock == NULL) {
-var24 = 0; /* is null */
+var27 = 0; /* is null */
 } else {
-var24 = 1; /* arg is null and recv is not */
+var27 = 1; /* arg is null and recv is not */
 }
-if (var24){
-var25 = NEW_auto_super_init__AutoSuperInitVisitor(&type_auto_super_init__AutoSuperInitVisitor);
-((void (*)(val*))(var25->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__init]))(var25) /* init on <var25:AutoSuperInitVisitor>*/;
-var_v = var25;
+if (var27){
+var28 = NEW_auto_super_init__AutoSuperInitVisitor(&type_auto_super_init__AutoSuperInitVisitor);
+((void (*)(val*))(var28->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__init]))(var28) /* init on <var28:AutoSuperInitVisitor>*/;
+var_v = var28;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_nblock) /* enter_visit on <var_v:AutoSuperInitVisitor>*/;
-var26 = ((short int (*)(val*))(var_v->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init]))(var_v) /* has_explicit_super_init on <var_v:AutoSuperInitVisitor>*/;
-if (var26){
+var29 = ((short int (*)(val*))(var_v->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init]))(var_v) /* has_explicit_super_init on <var_v:AutoSuperInitVisitor>*/;
+if (var29){
 goto RET_LABEL;
 } else {
 }
 } else {
 }
-var27 = NEW_array__Array(&type_array__Arraymodel__MMethod);
-((void (*)(val*))(var27->class->vft[COLOR_array__Array__init]))(var27) /* init on <var27:Array[MMethod]>*/;
-var_auto_super_inits = var27;
-var28 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__supertypes]))(var_mclassdef) /* supertypes on <var_mclassdef:MClassDef>*/;
-var29 = ((val* (*)(val*))(var28->class->vft[COLOR_abstract_collection__Collection__iterator]))(var28) /* iterator on <var28:Array[MClassType]>*/;
+var30 = NEW_array__Array(&type_array__Arraytyping__CallSite);
+((void (*)(val*))(var30->class->vft[COLOR_array__Array__init]))(var30) /* init on <var30:Array[CallSite]>*/;
+var_auto_super_inits = var30;
+var31 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__supertypes]))(var_mclassdef) /* supertypes on <var_mclassdef:MClassDef>*/;
+var32 = ((val* (*)(val*))(var31->class->vft[COLOR_abstract_collection__Collection__iterator]))(var31) /* iterator on <var31:Array[MClassType]>*/;
 for(;;) {
-var30 = ((short int (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var29) /* is_ok on <var29:Iterator[nullable Object]>*/;
-if(!var30) break;
-var31 = ((val* (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__item]))(var29) /* item on <var29:Iterator[nullable Object]>*/;
-var_msupertype = var31;
-var32 = ((val* (*)(val*))(var_msupertype->class->vft[COLOR_model__MClassType__mclass]))(var_msupertype) /* mclass on <var_msupertype:MClassType>*/;
-var33 = ((val* (*)(val*))(var32->class->vft[COLOR_model__MClass__kind]))(var32) /* kind on <var32:MClass>*/;
-var34 = ((short int (*)(val*))(var33->class->vft[COLOR_model__MClassKind__need_init]))(var33) /* need_init on <var33:MClassKind>*/;
-var35 = !var34;
-if (var35){
-goto CONTINUE_label36;
+var33 = ((short int (*)(val*))(var32->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var32) /* is_ok on <var32:Iterator[nullable Object]>*/;
+if(!var33) break;
+var34 = ((val* (*)(val*))(var32->class->vft[COLOR_abstract_collection__Iterator__item]))(var32) /* item on <var32:Iterator[nullable Object]>*/;
+var_msupertype = var34;
+var35 = ((val* (*)(val*))(var_msupertype->class->vft[COLOR_model__MClassType__mclass]))(var_msupertype) /* mclass on <var_msupertype:MClassType>*/;
+var36 = ((val* (*)(val*))(var35->class->vft[COLOR_model__MClass__kind]))(var35) /* kind on <var35:MClass>*/;
+var37 = ((short int (*)(val*))(var36->class->vft[COLOR_model__MClassKind__need_init]))(var36) /* need_init on <var36:MClassKind>*/;
+var38 = !var37;
+if (var38){
+goto CONTINUE_label39;
 } else {
 }
-var37 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_mclassdef) /* bound_mtype on <var_mclassdef:MClassDef>*/;
-var38 = ((val* (*)(val*, val*, val*))(var_msupertype->class->vft[COLOR_model__MType__anchor_to]))(var_msupertype, var_mmodule, var37) /* anchor_to on <var_msupertype:MClassType>*/;
-var_msupertype = var38;
-var39 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
-var40 = ((val* (*)(val*))(var39->class->vft[COLOR_model__MProperty__name]))(var39) /* name on <var39:MProperty(MMethod)>*/;
-var41 = ((val* (*)(val*, val*, val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__try_get_mproperty_by_name2]))(var_modelbuilder, self, var_mmodule, var_msupertype, var40) /* try_get_mproperty_by_name2 on <var_modelbuilder:ModelBuilder>*/;
-var_candidate = var41;
-var42 = NULL;
+var40 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_mclassdef) /* bound_mtype on <var_mclassdef:MClassDef>*/;
+var41 = ((val* (*)(val*, val*, val*))(var_msupertype->class->vft[COLOR_model__MType__anchor_to]))(var_msupertype, var_mmodule, var40) /* anchor_to on <var_msupertype:MClassType>*/;
+var_msupertype = var41;
+var42 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
+var43 = ((val* (*)(val*))(var42->class->vft[COLOR_model__MProperty__name]))(var42) /* name on <var42:MProperty(MMethod)>*/;
+var44 = ((val* (*)(val*, val*, val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__try_get_mproperty_by_name2]))(var_modelbuilder, self, var_mmodule, var_msupertype, var43) /* try_get_mproperty_by_name2 on <var_modelbuilder:ModelBuilder>*/;
+var_candidate = var44;
+var45 = NULL;
 if (var_candidate == NULL) {
-var43 = 1; /* is null */
+var46 = 1; /* is null */
 } else {
-var43 = 0; /* arg is null but recv is not */
+var46 = 0; /* arg is null but recv is not */
 }
-if (var43){
+if (var46){
 if (varonce) {
-var44 = varonce;
+var47 = varonce;
 } else {
-var45 = "init";
-var46 = 4;
-var47 = string__NativeString__to_s_with_length(var45, var46);
-var44 = var47;
-varonce = var44;
+var48 = "init";
+var49 = 4;
+var50 = string__NativeString__to_s_with_length(var48, var49);
+var47 = var50;
+varonce = var47;
 }
-var48 = ((val* (*)(val*, val*, val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__try_get_mproperty_by_name2]))(var_modelbuilder, self, var_mmodule, var_msupertype, var44) /* try_get_mproperty_by_name2 on <var_modelbuilder:ModelBuilder>*/;
-var_candidate = var48;
+var51 = ((val* (*)(val*, val*, val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__try_get_mproperty_by_name2]))(var_modelbuilder, self, var_mmodule, var_msupertype, var47) /* try_get_mproperty_by_name2 on <var_modelbuilder:ModelBuilder>*/;
+var_candidate = var51;
 } else {
 }
-var49 = NULL;
+var52 = NULL;
 if (var_candidate == NULL) {
-var50 = 1; /* is null */
+var53 = 1; /* is null */
 } else {
-var50 = 0; /* arg is null but recv is not */
+var53 = 0; /* arg is null but recv is not */
 }
-if (var50){
-if (varonce51) {
-var52 = varonce51;
+if (var53){
+if (varonce54) {
+var55 = varonce54;
 } else {
-var53 = "Cannot do an implicit constructor call for ";
-var54 = 43;
-var55 = string__NativeString__to_s_with_length(var53, var54);
-var52 = var55;
-varonce51 = var52;
+var56 = "Error: Cannot do an implicit constructor call in ";
+var57 = 49;
+var58 = string__NativeString__to_s_with_length(var56, var57);
+var55 = var58;
+varonce54 = var55;
 }
-if (varonce56) {
-var57 = varonce56;
+if (varonce59) {
+var60 = varonce59;
 } else {
-var58 = ": there is no costructor named ";
-var59 = 31;
-var60 = string__NativeString__to_s_with_length(var58, var59);
-var57 = var60;
-varonce56 = var57;
+var61 = "; there is no constructor named ";
+var62 = 32;
+var63 = string__NativeString__to_s_with_length(var61, var62);
+var60 = var63;
+varonce59 = var60;
 }
-var61 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
-var62 = ((val* (*)(val*))(var61->class->vft[COLOR_model__MProperty__name]))(var61) /* name on <var61:MProperty(MMethod)>*/;
-if (varonce63) {
-var64 = varonce63;
+var64 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MMethodDef>*/;
+var65 = ((val* (*)(val*))(var64->class->vft[COLOR_model__MProperty__name]))(var64) /* name on <var64:MProperty(MMethod)>*/;
+if (varonce66) {
+var67 = varonce66;
 } else {
-var65 = " in ";
-var66 = 4;
-var67 = string__NativeString__to_s_with_length(var65, var66);
-var64 = var67;
-varonce63 = var64;
+var68 = " in ";
+var69 = 4;
+var70 = string__NativeString__to_s_with_length(var68, var69);
+var67 = var70;
+varonce66 = var67;
 }
-if (varonce68) {
-var69 = varonce68;
+if (varonce71) {
+var72 = varonce71;
 } else {
-var70 = ".";
-var71 = 1;
-var72 = string__NativeString__to_s_with_length(var70, var71);
-var69 = var72;
-varonce68 = var69;
+var73 = ".";
+var74 = 1;
+var75 = string__NativeString__to_s_with_length(var73, var74);
+var72 = var75;
+varonce71 = var72;
 }
-var73 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var73 = array_instance Array[Object] */
-var74 = 7;
-var75 = NEW_array__NativeArray(var74, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var75)->values[0] = (val*) var52;
-((struct instance_array__NativeArray*)var75)->values[1] = (val*) var_mpropdef;
-((struct instance_array__NativeArray*)var75)->values[2] = (val*) var57;
-((struct instance_array__NativeArray*)var75)->values[3] = (val*) var62;
-((struct instance_array__NativeArray*)var75)->values[4] = (val*) var64;
-((struct instance_array__NativeArray*)var75)->values[5] = (val*) var_msupertype;
-((struct instance_array__NativeArray*)var75)->values[6] = (val*) var69;
-((void (*)(val*, val*, long))(var73->class->vft[COLOR_array__Array__with_native]))(var73, var75, var74) /* with_native on <var73:Array[Object]>*/;
+var76 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var76 = array_instance Array[Object] */
+var77 = 7;
+var78 = NEW_array__NativeArray(var77, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var78)->values[0] = (val*) var55;
+((struct instance_array__NativeArray*)var78)->values[1] = (val*) var_mpropdef;
+((struct instance_array__NativeArray*)var78)->values[2] = (val*) var60;
+((struct instance_array__NativeArray*)var78)->values[3] = (val*) var65;
+((struct instance_array__NativeArray*)var78)->values[4] = (val*) var67;
+((struct instance_array__NativeArray*)var78)->values[5] = (val*) var_msupertype;
+((struct instance_array__NativeArray*)var78)->values[6] = (val*) var72;
+((void (*)(val*, val*, long))(var76->class->vft[COLOR_array__Array__with_native]))(var76, var78, var77) /* with_native on <var76:Array[Object]>*/;
 }
-var76 = ((val* (*)(val*))(var73->class->vft[COLOR_string__Object__to_s]))(var73) /* to_s on <var73:Array[Object]>*/;
-((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var76) /* error on <var_modelbuilder:ModelBuilder>*/;
+var79 = ((val* (*)(val*))(var76->class->vft[COLOR_string__Object__to_s]))(var76) /* to_s on <var76:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var79) /* error on <var_modelbuilder:ModelBuilder>*/;
 goto RET_LABEL;
 } else {
 }
 /* <var_candidate:nullable MProperty(MProperty)> isa MMethod */
-cltype78 = type_model__MMethod.color;
-idtype79 = type_model__MMethod.id;
-if(cltype78 >= var_candidate->type->table_size) {
-var77 = 0;
+cltype81 = type_model__MMethod.color;
+idtype82 = type_model__MMethod.id;
+if(cltype81 >= var_candidate->type->table_size) {
+var80 = 0;
 } else {
-var77 = var_candidate->type->type_table[cltype78] == idtype79;
+var80 = var_candidate->type->type_table[cltype81] == idtype82;
 }
-if (!var77) {
+if (!var80) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 98);
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 100);
 show_backtrace(1);
 }
-((void (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_auto_super_inits, var_candidate) /* add on <var_auto_super_inits:Array[MMethod]>*/;
-CONTINUE_label36: (void)0;
-((void (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__next]))(var29) /* next on <var29:Iterator[nullable Object]>*/;
-}
-BREAK_label36: (void)0;
-var80 = ((short int (*)(val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_auto_super_inits) /* is_empty on <var_auto_super_inits:Array[MMethod]>*/;
-if (var80){
-if (varonce81) {
-var82 = varonce81;
+var83 = ((val* (*)(val*, val*, val*))(var_candidate->class->vft[COLOR_model__MProperty__lookup_definitions]))(var_candidate, var_mmodule, var_anchor) /* lookup_definitions on <var_candidate:nullable MProperty(MMethod)>*/;
+var_candidatedefs = var83;
+var84 = ((val* (*)(val*))(var_candidatedefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_candidatedefs) /* first on <var_candidatedefs:Array[MMethodDef]>*/;
+var_candidatedef = var84;
+var85 = ((val* (*)(val*))(var_candidatedef->class->vft[COLOR_model__MMethodDef__msignature]))(var_candidatedef) /* msignature on <var_candidatedef:MMethodDef>*/;
+var_msignature = var85;
+var86 = 1;
+if (var_msignature == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 107);
+show_backtrace(1);
 } else {
-var83 = "No constructors to call implicitely. Call one explicitely.";
-var84 = 58;
-var85 = string__NativeString__to_s_with_length(var83, var84);
-var82 = var85;
-varonce81 = var82;
+var87 = ((val* (*)(val*, val*, val*, val*, short int))(var_msignature->class->vft[COLOR_model__MType__resolve_for]))(var_msignature, var_recvtype, var_anchor, var_mmodule, var86) /* resolve_for on <var_msignature:nullable MSignature>*/;
 }
-((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var82) /* error on <var_modelbuilder:ModelBuilder>*/;
+var_msignature = var87;
+var88 = NEW_typing__CallSite(&type_typing__CallSite);
+var89 = 1;
+var90 = 0;
+((void (*)(val*, val*, val*, short int, val*, val*, val*, short int))(var88->class->vft[COLOR_typing__CallSite__init]))(var88, self, var_recvtype, var89, var_candidate, var_candidatedef, var_msignature, var90) /* init on <var88:CallSite>*/;
+var_callsite = var88;
+((void (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_auto_super_inits, var_callsite) /* add on <var_auto_super_inits:Array[CallSite]>*/;
+CONTINUE_label39: (void)0;
+((void (*)(val*))(var32->class->vft[COLOR_abstract_collection__Iterator__next]))(var32) /* next on <var32:Iterator[nullable Object]>*/;
+}
+BREAK_label39: (void)0;
+var91 = ((short int (*)(val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_auto_super_inits) /* is_empty on <var_auto_super_inits:Array[CallSite]>*/;
+if (var91){
+if (varonce92) {
+var93 = varonce92;
+} else {
+var94 = "Error: No constructors to call implicitely in ";
+var95 = 46;
+var96 = string__NativeString__to_s_with_length(var94, var95);
+var93 = var96;
+varonce92 = var93;
+}
+if (varonce97) {
+var98 = varonce97;
+} else {
+var99 = ". Call one explicitely.";
+var100 = 23;
+var101 = string__NativeString__to_s_with_length(var99, var100);
+var98 = var101;
+varonce97 = var98;
+}
+var102 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var102 = array_instance Array[Object] */
+var103 = 3;
+var104 = NEW_array__NativeArray(var103, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var104)->values[0] = (val*) var93;
+((struct instance_array__NativeArray*)var104)->values[1] = (val*) var_mpropdef;
+((struct instance_array__NativeArray*)var104)->values[2] = (val*) var98;
+((void (*)(val*, val*, long))(var102->class->vft[COLOR_array__Array__with_native]))(var102, var104, var103) /* with_native on <var102:Array[Object]>*/;
+}
+var105 = ((val* (*)(val*))(var102->class->vft[COLOR_string__Object__to_s]))(var102) /* to_s on <var102:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var105) /* error on <var_modelbuilder:ModelBuilder>*/;
 goto RET_LABEL;
 } else {
 }
-var86 = ((val* (*)(val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_auto_super_inits) /* iterator on <var_auto_super_inits:Array[MMethod]>*/;
+var106 = ((val* (*)(val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_auto_super_inits) /* iterator on <var_auto_super_inits:Array[CallSite]>*/;
 for(;;) {
-var87 = ((short int (*)(val*))(var86->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var86) /* is_ok on <var86:Iterator[nullable Object]>*/;
-if(!var87) break;
-var88 = ((val* (*)(val*))(var86->class->vft[COLOR_abstract_collection__Iterator__item]))(var86) /* item on <var86:Iterator[nullable Object]>*/;
-var_auto_super_init = var88;
-var89 = ((val* (*)(val*))(var_auto_super_init->class->vft[COLOR_model__MProperty__intro]))(var_auto_super_init) /* intro on <var_auto_super_init:MMethod>*/;
-var_auto_super_init_def = var89;
-var90 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
-if (var90 == NULL) {
+var107 = ((short int (*)(val*))(var106->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var106) /* is_ok on <var106:Iterator[nullable Object]>*/;
+if(!var107) break;
+var108 = ((val* (*)(val*))(var106->class->vft[COLOR_abstract_collection__Iterator__item]))(var106) /* item on <var106:Iterator[nullable Object]>*/;
+var_auto_super_init = var108;
+var109 = ((val* (*)(val*))(var_auto_super_init->class->vft[COLOR_typing__CallSite__mpropdef]))(var_auto_super_init) /* mpropdef on <var_auto_super_init:CallSite>*/;
+var_auto_super_init_def = var109;
+var110 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
+if (var110 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 107);
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 118);
 show_backtrace(1);
 }
-var_msig = var90;
-var91 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
-if (var91 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 108);
+var_msig = var110;
+var111 = ((val* (*)(val*))(var_auto_super_init->class->vft[COLOR_typing__CallSite__msignature]))(var_auto_super_init) /* msignature on <var_auto_super_init:CallSite>*/;
+var_supermsig = var111;
+var112 = ((long (*)(val*))(var_supermsig->class->vft[COLOR_model__MSignature__arity]))(var_supermsig) /* arity on <var_supermsig:MSignature>*/;
+var113 = ((long (*)(val*))(var_msig->class->vft[COLOR_model__MSignature__arity]))(var_msig) /* arity on <var_msig:MSignature>*/;
+{ /* Inline kernel#Int#> (var112,var113) */
+/* Covariant cast for argument 0 (i) <var113:Int> isa OTHER */
+/* <var113:Int> isa OTHER */
+var116 = 1; /* easy <var113:Int> isa OTHER*/
+if (!var116) {
+var_class_name119 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name119);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
-var_supermsig = var91;
-var93 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
-if (var93 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-show_backtrace(1);
+var120 = var112 > var113;
+var114 = var120;
+goto RET_LABEL115;
+RET_LABEL115:(void)0;
+}
+if (var114){
+if (varonce121) {
+var122 = varonce121;
 } else {
-var94 = ((long (*)(val*))(var93->class->vft[COLOR_model__MSignature__arity]))(var93) /* arity on <var93:nullable MSignature>*/;
+var123 = "Error: Cannot do an implicit constructor call to ";
+var124 = 49;
+var125 = string__NativeString__to_s_with_length(var123, var124);
+var122 = var125;
+varonce121 = var122;
 }
-var95 = 0;
-{ /* Inline kernel#Int#!= (var94,var95) */
-var98 = var94 == var95;
-var99 = !var98;
-var96 = var99;
-goto RET_LABEL97;
-RET_LABEL97:(void)0;
-}
-var_ = var96;
-if (var96){
-var100 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
-if (var100 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-show_backtrace(1);
+if (varonce126) {
+var127 = varonce126;
 } else {
-var101 = ((long (*)(val*))(var100->class->vft[COLOR_model__MSignature__arity]))(var100) /* arity on <var100:nullable MSignature>*/;
+var128 = ". Expected at least ";
+var129 = 20;
+var130 = string__NativeString__to_s_with_length(var128, var129);
+var127 = var130;
+varonce126 = var127;
 }
-var102 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
-if (var102 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-show_backtrace(1);
+var131 = ((long (*)(val*))(var_supermsig->class->vft[COLOR_model__MSignature__arity]))(var_supermsig) /* arity on <var_supermsig:MSignature>*/;
+if (varonce132) {
+var133 = varonce132;
 } else {
-var103 = ((long (*)(val*))(var102->class->vft[COLOR_model__MSignature__arity]))(var102) /* arity on <var102:nullable MSignature>*/;
+var134 = " arguments, got ";
+var135 = 16;
+var136 = string__NativeString__to_s_with_length(var134, var135);
+var133 = var136;
+varonce132 = var133;
 }
-{ /* Inline kernel#Int#!= (var101,var103) */
-var106 = var101 == var103;
-var107 = !var106;
-var104 = var107;
-goto RET_LABEL105;
-RET_LABEL105:(void)0;
-}
-var92 = var104;
+var137 = ((long (*)(val*))(var_msig->class->vft[COLOR_model__MSignature__arity]))(var_msig) /* arity on <var_msig:MSignature>*/;
+if (varonce138) {
+var139 = varonce138;
 } else {
-var92 = var_;
+var140 = ".";
+var141 = 1;
+var142 = string__NativeString__to_s_with_length(var140, var141);
+var139 = var142;
+varonce138 = var139;
 }
-if (var92){
-if (varonce108) {
-var109 = varonce108;
-} else {
-var110 = "Problem with signature of constructor ";
-var111 = 38;
-var112 = string__NativeString__to_s_with_length(var110, var111);
-var109 = var112;
-varonce108 = var109;
+var143 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var143 = array_instance Array[Object] */
+var144 = 8;
+var145 = NEW_array__NativeArray(var144, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var145)->values[0] = (val*) var122;
+((struct instance_array__NativeArray*)var145)->values[1] = (val*) var_auto_super_init_def;
+((struct instance_array__NativeArray*)var145)->values[2] = (val*) var_supermsig;
+((struct instance_array__NativeArray*)var145)->values[3] = (val*) var127;
+var146 = BOX_kernel__Int(var131); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var145)->values[4] = (val*) var146;
+((struct instance_array__NativeArray*)var145)->values[5] = (val*) var133;
+var147 = BOX_kernel__Int(var137); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var145)->values[6] = (val*) var147;
+((struct instance_array__NativeArray*)var145)->values[7] = (val*) var139;
+((void (*)(val*, val*, long))(var143->class->vft[COLOR_array__Array__with_native]))(var143, var145, var144) /* with_native on <var143:Array[Object]>*/;
 }
-if (varonce113) {
-var114 = varonce113;
-} else {
-var115 = ". Expected ";
-var116 = 11;
-var117 = string__NativeString__to_s_with_length(var115, var116);
-var114 = var117;
-varonce113 = var114;
-}
-var118 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var118 = array_instance Array[Object] */
-var119 = 5;
-var120 = NEW_array__NativeArray(var119, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var120)->values[0] = (val*) var109;
-((struct instance_array__NativeArray*)var120)->values[1] = (val*) var_auto_super_init_def;
-((struct instance_array__NativeArray*)var120)->values[2] = (val*) var_supermsig;
-((struct instance_array__NativeArray*)var120)->values[3] = (val*) var114;
-((struct instance_array__NativeArray*)var120)->values[4] = (val*) var_msig;
-((void (*)(val*, val*, long))(var118->class->vft[COLOR_array__Array__with_native]))(var118, var120, var119) /* with_native on <var118:Array[Object]>*/;
-}
-var121 = ((val* (*)(val*))(var118->class->vft[COLOR_string__Object__to_s]))(var118) /* to_s on <var118:Array[Object]>*/;
-((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var121) /* error on <var_modelbuilder:ModelBuilder>*/;
+var148 = ((val* (*)(val*))(var143->class->vft[COLOR_string__Object__to_s]))(var143) /* to_s on <var143:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var148) /* error on <var_modelbuilder:ModelBuilder>*/;
+goto CONTINUE_label149;
 } else {
 }
-CONTINUE_label122: (void)0;
-((void (*)(val*))(var86->class->vft[COLOR_abstract_collection__Iterator__next]))(var86) /* next on <var86:Iterator[nullable Object]>*/;
+var150 = 0;
+var_i = var150;
+var151 = ((val* (*)(val*))(var_supermsig->class->vft[COLOR_model__MSignature__mparameters]))(var_supermsig) /* mparameters on <var_supermsig:MSignature>*/;
+var152 = ((val* (*)(val*))(var151->class->vft[COLOR_abstract_collection__Collection__iterator]))(var151) /* iterator on <var151:Array[MParameter]>*/;
+for(;;) {
+var153 = ((short int (*)(val*))(var152->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var152) /* is_ok on <var152:Iterator[nullable Object]>*/;
+if(!var153) break;
+var154 = ((val* (*)(val*))(var152->class->vft[COLOR_abstract_collection__Iterator__item]))(var152) /* item on <var152:Iterator[nullable Object]>*/;
+var_sp = var154;
+var155 = ((val* (*)(val*))(var_msig->class->vft[COLOR_model__MSignature__mparameters]))(var_msig) /* mparameters on <var_msig:MSignature>*/;
+var156 = ((val* (*)(val*, long))(var155->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var155, var_i) /* [] on <var155:Array[MParameter]>*/;
+var_p = var156;
+var157 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__mtype]))(var_p) /* mtype on <var_p:MParameter>*/;
+var_sub = var157;
+var158 = ((val* (*)(val*))(var_sp->class->vft[COLOR_model__MParameter__mtype]))(var_sp) /* mtype on <var_sp:MParameter>*/;
+var_sup = var158;
+var159 = ((short int (*)(val*, val*, val*, val*))(var_sub->class->vft[COLOR_model__MType__is_subtype]))(var_sub, var_mmodule, var_anchor, var_sup) /* is_subtype on <var_sub:MType>*/;
+var160 = !var159;
+if (var160){
+if (varonce161) {
+var162 = varonce161;
+} else {
+var163 = "Error: Cannot do an implicit constructor call to ";
+var164 = 49;
+var165 = string__NativeString__to_s_with_length(var163, var164);
+var162 = var165;
+varonce161 = var162;
 }
-BREAK_label122: (void)0;
+if (varonce166) {
+var167 = varonce166;
+} else {
+var168 = ". Expected argument #";
+var169 = 21;
+var170 = string__NativeString__to_s_with_length(var168, var169);
+var167 = var170;
+varonce166 = var167;
+}
+if (varonce171) {
+var172 = varonce171;
+} else {
+var173 = " of type ";
+var174 = 9;
+var175 = string__NativeString__to_s_with_length(var173, var174);
+var172 = var175;
+varonce171 = var172;
+}
+var176 = ((val* (*)(val*))(var_sp->class->vft[COLOR_model__MParameter__mtype]))(var_sp) /* mtype on <var_sp:MParameter>*/;
+if (varonce177) {
+var178 = varonce177;
+} else {
+var179 = ", got implicit argument ";
+var180 = 24;
+var181 = string__NativeString__to_s_with_length(var179, var180);
+var178 = var181;
+varonce177 = var178;
+}
+var182 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__name]))(var_p) /* name on <var_p:MParameter>*/;
+if (varonce183) {
+var184 = varonce183;
+} else {
+var185 = " of type ";
+var186 = 9;
+var187 = string__NativeString__to_s_with_length(var185, var186);
+var184 = var187;
+varonce183 = var184;
+}
+var188 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__mtype]))(var_p) /* mtype on <var_p:MParameter>*/;
+if (varonce189) {
+var190 = varonce189;
+} else {
+var191 = ".";
+var192 = 1;
+var193 = string__NativeString__to_s_with_length(var191, var192);
+var190 = var193;
+varonce189 = var190;
+}
+var194 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var194 = array_instance Array[Object] */
+var195 = 12;
+var196 = NEW_array__NativeArray(var195, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var196)->values[0] = (val*) var162;
+((struct instance_array__NativeArray*)var196)->values[1] = (val*) var_auto_super_init_def;
+((struct instance_array__NativeArray*)var196)->values[2] = (val*) var_supermsig;
+((struct instance_array__NativeArray*)var196)->values[3] = (val*) var167;
+var197 = BOX_kernel__Int(var_i); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var196)->values[4] = (val*) var197;
+((struct instance_array__NativeArray*)var196)->values[5] = (val*) var172;
+((struct instance_array__NativeArray*)var196)->values[6] = (val*) var176;
+((struct instance_array__NativeArray*)var196)->values[7] = (val*) var178;
+((struct instance_array__NativeArray*)var196)->values[8] = (val*) var182;
+((struct instance_array__NativeArray*)var196)->values[9] = (val*) var184;
+((struct instance_array__NativeArray*)var196)->values[10] = (val*) var188;
+((struct instance_array__NativeArray*)var196)->values[11] = (val*) var190;
+((void (*)(val*, val*, long))(var194->class->vft[COLOR_array__Array__with_native]))(var194, var196, var195) /* with_native on <var194:Array[Object]>*/;
+}
+var198 = ((val* (*)(val*))(var194->class->vft[COLOR_string__Object__to_s]))(var194) /* to_s on <var194:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var198) /* error on <var_modelbuilder:ModelBuilder>*/;
+goto BREAK_label199;
+} else {
+}
+var200 = 1;
+{ /* Inline kernel#Int#+ (var_i,var200) */
+var203 = var_i + var200;
+var201 = var203;
+goto RET_LABEL202;
+RET_LABEL202:(void)0;
+}
+var_i = var201;
+CONTINUE_label199: (void)0;
+((void (*)(val*))(var152->class->vft[COLOR_abstract_collection__Iterator__next]))(var152) /* next on <var152:Iterator[nullable Object]>*/;
+}
+BREAK_label199: (void)0;
+CONTINUE_label149: (void)0;
+((void (*)(val*))(var106->class->vft[COLOR_abstract_collection__Iterator__next]))(var106) /* next on <var106:Iterator[nullable Object]>*/;
+}
+BREAK_label149: (void)0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_auto_super_init__AConcreteMethPropdef__auto_super_inits_61d]))(self, var_auto_super_inits) /* auto_super_inits= on <self:AConcreteMethPropdef>*/;
 RET_LABEL:;
 }
@@ -653,29 +892,33 @@ RET_LABEL:;
 /* method auto_super_init#ASendExpr#accept_auto_super_init for (self: ASendExpr, AutoSuperInitVisitor) */
 void auto_super_init__ASendExpr__accept_auto_super_init(val* self, val* p0) {
 val* var_v /* var v: AutoSuperInitVisitor */;
-val* var /* : nullable MMethod */;
-val* var_mproperty /* var mproperty: nullable MMethod */;
-val* var1 /* : null */;
-short int var2 /* : Bool */;
+val* var /* : nullable CallSite */;
+val* var1 /* : MMethod */;
+val* var_mproperty /* var mproperty: MMethod */;
+val* var2 /* : null */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
+short int var5 /* : Bool */;
 var_v = p0;
-var = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__mproperty]))(self) /* mproperty on <self:ASendExpr>*/;
-var_mproperty = var;
-var1 = NULL;
-if (var_mproperty == NULL) {
-var2 = 1; /* is null */
+var = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(self) /* callsite on <self:ASendExpr>*/;
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 149);
+show_backtrace(1);
 } else {
-var2 = 0; /* arg is null but recv is not */
+var1 = ((val* (*)(val*))(var->class->vft[COLOR_typing__CallSite__mproperty]))(var) /* mproperty on <var:nullable CallSite>*/;
 }
-if (var2){
+var_mproperty = var1;
+var2 = NULL;
+var3 = 0; /* arg is null but recv is not */
+if (var3){
 goto RET_LABEL;
 } else {
 }
-var3 = ((short int (*)(val*))(var_mproperty->class->vft[COLOR_model__MMethod__is_init]))(var_mproperty) /* is_init on <var_mproperty:nullable MMethod(MMethod)>*/;
-if (var3){
-var4 = 1;
-((void (*)(val*, short int))(var_v->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d]))(var_v, var4) /* has_explicit_super_init= on <var_v:AutoSuperInitVisitor>*/;
+var4 = ((short int (*)(val*))(var_mproperty->class->vft[COLOR_model__MMethod__is_init]))(var_mproperty) /* is_init on <var_mproperty:MMethod>*/;
+if (var4){
+var5 = 1;
+((void (*)(val*, short int))(var_v->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d]))(var_v, var5) /* has_explicit_super_init= on <var_v:AutoSuperInitVisitor>*/;
 } else {
 }
 RET_LABEL:;

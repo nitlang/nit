@@ -210,7 +210,7 @@ show_backtrace(1);
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 var4 = NULL;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 55);
 show_backtrace(1);
 } else {
@@ -248,7 +248,7 @@ show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 66);
 show_backtrace(1);
 } else {
@@ -3572,7 +3572,7 @@ val* var1 /* : nullable TClassid */;
 val* var2 /* : Location */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AStdClassdef__n_id]))(self) /* n_id on <self:AStdClassdef>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 658);
 show_backtrace(1);
 } else {
@@ -4375,7 +4375,7 @@ var3 = 1; /* arg is null and recv is not */
 if (var3){
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id]))(self) /* n_id on <self:AAttrPropdef>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 741);
 show_backtrace(1);
 } else {
@@ -4386,7 +4386,7 @@ goto RET_LABEL;
 } else {
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id2]))(self) /* n_id2 on <self:AAttrPropdef>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 741);
 show_backtrace(1);
 } else {
@@ -4548,7 +4548,7 @@ var3 = 1; /* arg is null and recv is not */
 if (var3){
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AMethPropdef__n_methid]))(self) /* n_methid on <self:AMethPropdef>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 755);
 show_backtrace(1);
 } else {

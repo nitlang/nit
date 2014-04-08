@@ -37,6 +37,7 @@ val* NEW_phase__AnnotationPhaseVisitor(const struct type* type);
 extern const struct type type_phase__AnnotationPhaseVisitor;
 extern const int COLOR_phase__AnnotationPhaseVisitor__init;
 extern const int COLOR_parser_nodes__Visitor__enter_visit;
+val* BOX_kernel__Int(long);
 void phase__ToolContext__run_phases(val* self, val* p0);
 extern const int COLOR_phase__AnnotationPhaseVisitor___64dphase;
 val* phase__AnnotationPhaseVisitor__phase(val* self);

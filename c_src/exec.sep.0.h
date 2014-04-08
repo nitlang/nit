@@ -20,6 +20,7 @@ extern const int COLOR_abstract_collection__Sequence__append;
 extern const int COLOR_abstract_collection__Collection__iterator;
 extern const int COLOR_abstract_collection__Iterator__is_ok;
 extern const int COLOR_abstract_collection__Iterator__item;
+val* BOX_kernel__Char(char);
 extern const int COLOR_abstract_collection__SimpleCollection__add;
 extern const int COLOR_abstract_collection__Iterator__next;
 extern const int COLOR_abstract_collection__Collection__length;

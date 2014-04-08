@@ -69,5 +69,5 @@ import kernel
 (3<=>2).output
 '\n'.output
 
-1.succ.output
-3.prec.output
+1.successor(1).output
+3.predecessor(1).output

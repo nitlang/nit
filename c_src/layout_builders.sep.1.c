@@ -676,7 +676,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingBMizer#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingBMizer#0] */
-type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingBMizer_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_poset__POSetlayout_builders__TypingBMizer_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {
@@ -810,7 +810,7 @@ var5 = ((val* (*)(val*, val*))(var4->class->vft[COLOR_layout_builders__POSetBuil
 ((void (*)(val*, val*))(self->class->vft[COLOR_layout_builders__TypingBMizer__poset_cache_61d]))(self, var5) /* poset_cache= on <self:TypingBMizer[Object]>*/;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingBMizer[Object]>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 148);
 show_backtrace(1);
 } else {
@@ -819,7 +819,7 @@ var7 = ((val* (*)(val*))(var6->class->vft[COLOR_array__Collection__to_a]))(var6)
 var_lin = var7;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingBMizer[Object]>*/;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 149);
 show_backtrace(1);
 } else {
@@ -1458,7 +1458,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingColorer#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingColorer#0] */
-type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingColorer_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_poset__POSetlayout_builders__TypingColorer_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {
@@ -1886,7 +1886,7 @@ var_elements = p1;
 var_color = p2;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 284);
 show_backtrace(1);
 } else {
@@ -1895,7 +1895,7 @@ var8 = ((short int (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__
 if (var8){
 var9 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 285);
 show_backtrace(1);
 } else {
@@ -1941,7 +1941,7 @@ BREAK_label: (void)0;
 }
 var24 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 289);
 show_backtrace(1);
 } else {
@@ -2086,7 +2086,7 @@ var4 = 1;
 var_all_subelements_si = var4;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 301);
 show_backtrace(1);
 } else {
@@ -2101,7 +2101,7 @@ var10 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__
 var_subelem = var10;
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 302);
 show_backtrace(1);
 } else {
@@ -2117,7 +2117,7 @@ var18 = 1; /* easy <var15:Int> isa OTHER*/
 if (!var18) {
 var_class_name21 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var22 = var14 > var15;
@@ -2137,7 +2137,7 @@ CONTINUE_label: (void)0;
 BREAK_label: (void)0;
 var24 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 309);
 show_backtrace(1);
 } else {
@@ -2153,7 +2153,7 @@ var31 = 1; /* easy <var28:Int> isa OTHER*/
 if (!var31) {
 var_class_name34 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var35 = var27 > var28;
@@ -2165,7 +2165,7 @@ if (var29){
 var36 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
 var37 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var37 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 310);
 show_backtrace(1);
 } else {
@@ -2184,7 +2184,7 @@ if (var41){
 var42 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
 var43 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var43 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 315);
 show_backtrace(1);
 } else {
@@ -2330,7 +2330,7 @@ var25 = ((val* (*)(val*))(var23->class->vft[COLOR_abstract_collection__Iterator_
 var_ed1 = var25;
 var26 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var26 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 340);
 show_backtrace(1);
 } else {
@@ -2342,7 +2342,7 @@ var29 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer_
 var30 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_hash_collection__HashSetlayout_builders__TypingColorer_FT0]);
 ((void (*)(val*))(var30->class->vft[COLOR_hash_collection__HashSet__init]))(var30) /* init on <var30:HashSet[Object]>*/;
 if (var29 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 340);
 show_backtrace(1);
 } else {
@@ -2358,7 +2358,7 @@ var33 = ((val* (*)(val*))(var31->class->vft[COLOR_abstract_collection__Iterator_
 var_ed2 = var33;
 var34 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var34 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 342);
 show_backtrace(1);
 } else {
@@ -2381,7 +2381,7 @@ var40 = ((val* (*)(val*))(var38->class->vft[COLOR_abstract_collection__Iterator_
 var_ed141 = var40;
 var42 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var42 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 345);
 show_backtrace(1);
 } else {
@@ -2393,7 +2393,7 @@ var45 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer_
 var46 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_hash_collection__HashSetlayout_builders__TypingColorer_FT0]);
 ((void (*)(val*))(var46->class->vft[COLOR_hash_collection__HashSet__init]))(var46) /* init on <var46:HashSet[Object]>*/;
 if (var45 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 345);
 show_backtrace(1);
 } else {
@@ -2409,7 +2409,7 @@ var49 = ((val* (*)(val*))(var47->class->vft[COLOR_abstract_collection__Iterator_
 var_ed250 = var49;
 var51 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var51 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 347);
 show_backtrace(1);
 } else {
@@ -2470,7 +2470,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (conflicts_graph) <p0:nullable HashMap[Object, Set[Object]]> isa nullable HashMap[TypingColorer#0, Set[TypingColorer#0]] */
 /* <p0:nullable HashMap[Object, Set[Object]]> isa nullable HashMap[TypingColorer#0, Set[TypingColorer#0]] */
-type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__TypingColorer_FT0abstract_collection__Setlayout_builders__TypingColorer_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_hash_collection__HashMaplayout_builders__TypingColorer_FT0abstract_collection__Setlayout_builders__TypingColorer_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {
@@ -2597,7 +2597,7 @@ var5 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_ha
 var_supers = var5;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 363);
 show_backtrace(1);
 } else {
@@ -2661,7 +2661,7 @@ var_lin = var2;
 ((void (*)(val*, val*))(var_lin->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var_lin, var_elements) /* add_all on <var_lin:Array[Object]>*/;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 372);
 show_backtrace(1);
 } else {
@@ -3047,7 +3047,7 @@ var_color = var10;
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__MPropertyColorer__class_colorer]))(self) /* class_colorer on <self:MPropertyColorer[PropertyLayoutElement]>*/;
 var12 = ((val* (*)(val*))(var11->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(var11) /* conflicts_graph on <var11:MClassColorer>*/;
 if (var12 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 424);
 show_backtrace(1);
 } else {
@@ -3057,7 +3057,7 @@ if (var13){
 var14 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__MPropertyColorer__class_colorer]))(self) /* class_colorer on <self:MPropertyColorer[PropertyLayoutElement]>*/;
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(var14) /* conflicts_graph on <var14:MClassColorer>*/;
 if (var15 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 425);
 show_backtrace(1);
 } else {
@@ -3314,7 +3314,7 @@ var16 = 1; /* easy <var_max_color:Int> isa OTHER*/
 if (!var16) {
 var_class_name19 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var20 = var_color >= var_max_color;
@@ -4475,7 +4475,7 @@ const struct type* type_struct;
 const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingHasher#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingHasher#0] */
-type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingHasher_FT0];
+type_struct = self->type->resolution_table->types[COLOR_nullable_poset__POSetlayout_builders__TypingHasher_FT0];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(p0 == NULL) {
@@ -4633,7 +4633,7 @@ var1 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_ha
 var_ids = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 648);
 show_backtrace(1);
 } else {
@@ -4642,7 +4642,7 @@ var3 = ((val* (*)(val*))(var2->class->vft[COLOR_array__Collection__to_a]))(var2)
 var_lin = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 649);
 show_backtrace(1);
 } else {
@@ -4733,7 +4733,7 @@ var6 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_ha
 var_supers = var6;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 660);
 show_backtrace(1);
 } else {

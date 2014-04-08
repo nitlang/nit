@@ -1123,7 +1123,7 @@ var36 = 1; /* arg is null and recv is not */
 }
 if (var36){
 if (var_res == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 217);
 show_backtrace(1);
 } else {
@@ -1182,7 +1182,7 @@ var66 = var69;
 varonce65 = var66;
 }
 if (var_res == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 221);
 show_backtrace(1);
 } else {
@@ -1795,7 +1795,7 @@ var73 = var_;
 if (var73){
 var79 = ((val* (*)(val*))(var_mmodule->class->vft[COLOR_mmodule__MModule__mgroup]))(var_mmodule) /* mgroup on <var_mmodule:nullable MModule(MModule)>*/;
 if (var79 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 294);
 show_backtrace(1);
 } else {
@@ -1803,7 +1803,7 @@ var80 = ((val* (*)(val*))(var79->class->vft[COLOR_mproject__MGroup__mproject]))(
 }
 var81 = ((val* (*)(val*))(var80->class->vft[COLOR_mproject__MProject__root]))(var80) /* root on <var80:MProject>*/;
 if (var81 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 294);
 show_backtrace(1);
 } else {
@@ -3107,6 +3107,7 @@ goto RET_LABEL;
 } else {
 }
 ((void (*)(val*, val*))(var_file->class->vft[COLOR_modelbuilder__ModulePath__mmodule_61d]))(var_file, var_mmodule) /* mmodule= on <var_file:nullable ModulePath(ModulePath)>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__build_module_importation]))(self, var_nmodule) /* build_module_importation on <self:ModelBuilder>*/;
 var = var_nmodule;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3271,7 +3272,6 @@ var25 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__nmo
 ((void (*)(val*, val*))(var25->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var25, var_nmodule) /* add on <var25:Array[AModule]>*/;
 var26 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__mmodule2nmodule]))(self) /* mmodule2nmodule on <self:ModelBuilder>*/;
 ((void (*)(val*, val*, val*))(var26->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var26, var_mmodule, var_nmodule) /* []= on <var26:HashMap[MModule, AModule]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__build_module_importation]))(self, var_nmodule) /* build_module_importation on <self:ModelBuilder>*/;
 var = var_mmodule;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3327,35 +3327,73 @@ val* var24 /* : String */;
 char* var25 /* : NativeString */;
 long var26 /* : Int */;
 val* var27 /* : String */;
-static val* varonce28;
-val* var29 /* : String */;
-char* var30 /* : NativeString */;
-long var31 /* : Int */;
-val* var32 /* : String */;
-val* var_mod_name33 /* var mod_name: String */;
-val* var34 /* : null */;
-val* var35 /* : nullable MModule */;
-val* var_sup36 /* var sup: nullable MModule */;
-val* var37 /* : null */;
-short int var38 /* : Bool */;
-val* var39 /* : MVisibility */;
-val* var40 /* : ToolContext */;
-static val* varonce41;
-val* var42 /* : String */;
-char* var43 /* : NativeString */;
-long var44 /* : Int */;
-val* var45 /* : String */;
-static val* varonce46;
-val* var47 /* : String */;
-char* var48 /* : NativeString */;
-long var49 /* : Int */;
-val* var50 /* : String */;
+short int var28 /* : Bool */;
+val* var29 /* : AModuleName */;
+static val* varonce30;
+val* var31 /* : String */;
+char* var32 /* : NativeString */;
+long var33 /* : Int */;
+val* var34 /* : String */;
+static val* varonce35;
+val* var36 /* : String */;
+char* var37 /* : NativeString */;
+long var38 /* : Int */;
+val* var39 /* : String */;
+val* var40 /* : Array[Object] */;
+long var41 /* : Int */;
+val* var42 /* : NativeArray[Object] */;
+val* var43 /* : String */;
+val* var44 /* : POSetElement[MModule] */;
+short int var45 /* : Bool */;
+val* var46 /* : AModuleName */;
+static val* varonce47;
+val* var48 /* : String */;
+char* var49 /* : NativeString */;
+long var50 /* : Int */;
 val* var51 /* : String */;
-val* var52 /* : Array[Object] */;
-long var53 /* : Int */;
-val* var54 /* : NativeArray[Object] */;
-val* var55 /* : String */;
-long var56 /* : Int */;
+static val* varonce52;
+val* var53 /* : String */;
+char* var54 /* : NativeString */;
+long var55 /* : Int */;
+val* var56 /* : String */;
+static val* varonce57;
+val* var58 /* : String */;
+char* var59 /* : NativeString */;
+long var60 /* : Int */;
+val* var61 /* : String */;
+val* var62 /* : Array[Object] */;
+long var63 /* : Int */;
+val* var64 /* : NativeArray[Object] */;
+val* var65 /* : String */;
+static val* varonce66;
+val* var67 /* : String */;
+char* var68 /* : NativeString */;
+long var69 /* : Int */;
+val* var70 /* : String */;
+val* var_mod_name71 /* var mod_name: String */;
+val* var72 /* : null */;
+val* var73 /* : nullable MModule */;
+val* var_sup74 /* var sup: nullable MModule */;
+val* var75 /* : null */;
+short int var76 /* : Bool */;
+val* var77 /* : MVisibility */;
+val* var78 /* : ToolContext */;
+static val* varonce79;
+val* var80 /* : String */;
+char* var81 /* : NativeString */;
+long var82 /* : Int */;
+val* var83 /* : String */;
+static val* varonce84;
+val* var85 /* : String */;
+char* var86 /* : NativeString */;
+long var87 /* : Int */;
+val* var88 /* : String */;
+val* var89 /* : String */;
+val* var90 /* : Array[Object] */;
+long var91 /* : Int */;
+val* var92 /* : NativeArray[Object] */;
+val* var93 /* : String */;
+long var94 /* : Int */;
 var_nmodule = p0;
 var = ((short int (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__is_importation_done]))(var_nmodule) /* is_importation_done on <var_nmodule:AModule>*/;
 if (var){
@@ -3437,71 +3475,152 @@ varonce = var24;
 goto RET_LABEL;
 } else {
 }
+var28 = ((short int (*)(val*, val*))(var_sup->class->vft[COLOR_kernel__Object___61d_61d]))(var_sup, var_mmodule) /* == on <var_sup:nullable MModule(MModule)>*/;
+if (var28){
+var29 = ((val* (*)(val*))(var_aimport->class->vft[COLOR_parser_nodes__AStdImport__n_name]))(var_aimport) /* n_name on <var_aimport:AImport(AStdImport)>*/;
+if (varonce30) {
+var31 = varonce30;
+} else {
+var32 = "Error: Dependency loop in module ";
+var33 = 33;
+var34 = string__NativeString__to_s_with_length(var32, var33);
+var31 = var34;
+varonce30 = var31;
+}
+if (varonce35) {
+var36 = varonce35;
+} else {
+var37 = ".";
+var38 = 1;
+var39 = string__NativeString__to_s_with_length(var37, var38);
+var36 = var39;
+varonce35 = var36;
+}
+var40 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var40 = array_instance Array[Object] */
+var41 = 3;
+var42 = NEW_array__NativeArray(var41, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var42)->values[0] = (val*) var31;
+((struct instance_array__NativeArray*)var42)->values[1] = (val*) var_mmodule;
+((struct instance_array__NativeArray*)var42)->values[2] = (val*) var36;
+((void (*)(val*, val*, long))(var40->class->vft[COLOR_array__Array__with_native]))(var40, var42, var41) /* with_native on <var40:Array[Object]>*/;
+}
+var43 = ((val* (*)(val*))(var40->class->vft[COLOR_string__Object__to_s]))(var40) /* to_s on <var40:Array[Object]>*/;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var29, var43) /* error on <self:ModelBuilder>*/;
+} else {
+}
+var44 = ((val* (*)(val*))(var_sup->class->vft[COLOR_mmodule__MModule__in_importation]))(var_sup) /* in_importation on <var_sup:nullable MModule(MModule)>*/;
+var45 = ((short int (*)(val*, val*))(var44->class->vft[COLOR_poset__POSetElement___60d]))(var44, var_mmodule) /* < on <var44:POSetElement[MModule]>*/;
+if (var45){
+var46 = ((val* (*)(val*))(var_aimport->class->vft[COLOR_parser_nodes__AStdImport__n_name]))(var_aimport) /* n_name on <var_aimport:AImport(AStdImport)>*/;
+if (varonce47) {
+var48 = varonce47;
+} else {
+var49 = "Error: Dependency loop between modules ";
+var50 = 39;
+var51 = string__NativeString__to_s_with_length(var49, var50);
+var48 = var51;
+varonce47 = var48;
+}
+if (varonce52) {
+var53 = varonce52;
+} else {
+var54 = " and ";
+var55 = 5;
+var56 = string__NativeString__to_s_with_length(var54, var55);
+var53 = var56;
+varonce52 = var53;
+}
+if (varonce57) {
+var58 = varonce57;
+} else {
+var59 = ".";
+var60 = 1;
+var61 = string__NativeString__to_s_with_length(var59, var60);
+var58 = var61;
+varonce57 = var58;
+}
+var62 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var62 = array_instance Array[Object] */
+var63 = 5;
+var64 = NEW_array__NativeArray(var63, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var64)->values[0] = (val*) var48;
+((struct instance_array__NativeArray*)var64)->values[1] = (val*) var_mmodule;
+((struct instance_array__NativeArray*)var64)->values[2] = (val*) var53;
+((struct instance_array__NativeArray*)var64)->values[3] = (val*) var_sup;
+((struct instance_array__NativeArray*)var64)->values[4] = (val*) var58;
+((void (*)(val*, val*, long))(var62->class->vft[COLOR_array__Array__with_native]))(var62, var64, var63) /* with_native on <var62:Array[Object]>*/;
+}
+var65 = ((val* (*)(val*))(var62->class->vft[COLOR_string__Object__to_s]))(var62) /* to_s on <var62:Array[Object]>*/;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var46, var65) /* error on <self:ModelBuilder>*/;
+goto RET_LABEL;
+} else {
+}
 ((void (*)(val*, val*, val*))(var_mmodule->class->vft[COLOR_mmodule__MModule__set_visibility_for]))(var_mmodule, var_sup, var_mvisibility) /* set_visibility_for on <var_mmodule:MModule>*/;
 CONTINUE_label: (void)0;
 ((void (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__next]))(var6) /* next on <var6:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
 if (var_stdimport){
-if (varonce28) {
-var29 = varonce28;
+if (varonce66) {
+var67 = varonce66;
 } else {
-var30 = "standard";
-var31 = 8;
-var32 = string__NativeString__to_s_with_length(var30, var31);
-var29 = var32;
-varonce28 = var29;
+var68 = "standard";
+var69 = 8;
+var70 = string__NativeString__to_s_with_length(var68, var69);
+var67 = var70;
+varonce66 = var67;
 }
-var_mod_name33 = var29;
-var34 = NULL;
-var35 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__get_mmodule_by_name]))(self, var_nmodule, var34, var_mod_name33) /* get_mmodule_by_name on <self:ModelBuilder>*/;
-var_sup36 = var35;
-var37 = NULL;
-if (var_sup36 == NULL) {
-var38 = 0; /* is null */
+var_mod_name71 = var67;
+var72 = NULL;
+var73 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__get_mmodule_by_name]))(self, var_nmodule, var72, var_mod_name71) /* get_mmodule_by_name on <self:ModelBuilder>*/;
+var_sup74 = var73;
+var75 = NULL;
+if (var_sup74 == NULL) {
+var76 = 0; /* is null */
 } else {
-var38 = 1; /* arg is null and recv is not */
+var76 = 1; /* arg is null and recv is not */
 }
-if (var38){
-((void (*)(val*, val*))(var_imported_modules->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_imported_modules, var_sup36) /* add on <var_imported_modules:Array[MModule]>*/;
-var39 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__public_visibility]))(self) /* public_visibility on <self:ModelBuilder>*/;
-((void (*)(val*, val*, val*))(var_mmodule->class->vft[COLOR_mmodule__MModule__set_visibility_for]))(var_mmodule, var_sup36, var39) /* set_visibility_for on <var_mmodule:MModule>*/;
-} else {
-}
+if (var76){
+((void (*)(val*, val*))(var_imported_modules->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_imported_modules, var_sup74) /* add on <var_imported_modules:Array[MModule]>*/;
+var77 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__public_visibility]))(self) /* public_visibility on <self:ModelBuilder>*/;
+((void (*)(val*, val*, val*))(var_mmodule->class->vft[COLOR_mmodule__MModule__set_visibility_for]))(var_mmodule, var_sup74, var77) /* set_visibility_for on <var_mmodule:MModule>*/;
 } else {
 }
-var40 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__toolcontext]))(self) /* toolcontext on <self:ModelBuilder>*/;
-if (varonce41) {
-var42 = varonce41;
 } else {
-var43 = " imports ";
-var44 = 9;
-var45 = string__NativeString__to_s_with_length(var43, var44);
-var42 = var45;
-varonce41 = var42;
 }
-if (varonce46) {
-var47 = varonce46;
+var78 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__toolcontext]))(self) /* toolcontext on <self:ModelBuilder>*/;
+if (varonce79) {
+var80 = varonce79;
 } else {
-var48 = ", ";
-var49 = 2;
-var50 = string__NativeString__to_s_with_length(var48, var49);
-var47 = var50;
-varonce46 = var47;
+var81 = " imports ";
+var82 = 9;
+var83 = string__NativeString__to_s_with_length(var81, var82);
+var80 = var83;
+varonce79 = var80;
 }
-var51 = ((val* (*)(val*, val*))(var_imported_modules->class->vft[COLOR_string__Collection__join]))(var_imported_modules, var47) /* join on <var_imported_modules:Array[MModule]>*/;
-var52 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var52 = array_instance Array[Object] */
-var53 = 3;
-var54 = NEW_array__NativeArray(var53, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var54)->values[0] = (val*) var_mmodule;
-((struct instance_array__NativeArray*)var54)->values[1] = (val*) var42;
-((struct instance_array__NativeArray*)var54)->values[2] = (val*) var51;
-((void (*)(val*, val*, long))(var52->class->vft[COLOR_array__Array__with_native]))(var52, var54, var53) /* with_native on <var52:Array[Object]>*/;
+if (varonce84) {
+var85 = varonce84;
+} else {
+var86 = ", ";
+var87 = 2;
+var88 = string__NativeString__to_s_with_length(var86, var87);
+var85 = var88;
+varonce84 = var85;
 }
-var55 = ((val* (*)(val*))(var52->class->vft[COLOR_string__Object__to_s]))(var52) /* to_s on <var52:Array[Object]>*/;
-var56 = 3;
-((void (*)(val*, val*, long))(var40->class->vft[COLOR_toolcontext__ToolContext__info]))(var40, var55, var56) /* info on <var40:ToolContext>*/;
+var89 = ((val* (*)(val*, val*))(var_imported_modules->class->vft[COLOR_string__Collection__join]))(var_imported_modules, var85) /* join on <var_imported_modules:Array[MModule]>*/;
+var90 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var90 = array_instance Array[Object] */
+var91 = 3;
+var92 = NEW_array__NativeArray(var91, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var92)->values[0] = (val*) var_mmodule;
+((struct instance_array__NativeArray*)var92)->values[1] = (val*) var80;
+((struct instance_array__NativeArray*)var92)->values[2] = (val*) var89;
+((void (*)(val*, val*, long))(var90->class->vft[COLOR_array__Array__with_native]))(var90, var92, var91) /* with_native on <var90:Array[Object]>*/;
+}
+var93 = ((val* (*)(val*))(var90->class->vft[COLOR_string__Object__to_s]))(var90) /* to_s on <var90:Array[Object]>*/;
+var94 = 3;
+((void (*)(val*, val*, long))(var78->class->vft[COLOR_toolcontext__ToolContext__info]))(var78, var93, var94) /* info on <var78:ToolContext>*/;
 ((void (*)(val*, val*))(var_mmodule->class->vft[COLOR_mmodule__MModule__set_imported_mmodules]))(var_mmodule, var_imported_modules) /* set_imported_mmodules on <var_mmodule:MModule>*/;
 RET_LABEL:;
 }
@@ -3517,7 +3636,7 @@ val* var1 /* : Array[AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dnmodules].val; /* @nmodules on <self:ModelBuilder> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @nmodules");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 572);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 579);
 show_backtrace(1);
 }
 var = var1;
@@ -3550,7 +3669,7 @@ val* var1 /* : HashMap[MModule, AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule].val; /* @mmodule2nmodule on <self:ModelBuilder> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule2nmodule");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 575);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 582);
 show_backtrace(1);
 }
 var = var1;
@@ -3700,7 +3819,7 @@ var22 = NEW_array__NativeArray(var21, &type_array__NativeArraykernel__Object);
 var23 = ((val* (*)(val*))(var20->class->vft[COLOR_string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var4->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(var4, var5, var23) /* fatal_error on <var4:ToolContext>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 599);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 606);
 show_backtrace(1);
 } else {
 }
@@ -3725,7 +3844,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_modelbuilder__ModulePath___64dname].val; /* @name on <self:ModulePath> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 607);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 614);
 show_backtrace(1);
 }
 var = var1;
@@ -3758,7 +3877,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_modelbuilder__ModulePath___64dfilepath].val; /* @filepath on <self:ModulePath> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @filepath");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 611);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 618);
 show_backtrace(1);
 }
 var = var1;
@@ -3791,7 +3910,7 @@ val* var1 /* : MGroup */;
 var1 = self->attrs[COLOR_modelbuilder__ModulePath___64dmgroup].val; /* @mgroup on <self:ModulePath> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mgroup");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 614);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 621);
 show_backtrace(1);
 }
 var = var1;
@@ -3966,7 +4085,7 @@ val* var /* : MVisibility */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "mvisibility", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 637);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 644);
 show_backtrace(1);
 RET_LABEL:;
 return var;

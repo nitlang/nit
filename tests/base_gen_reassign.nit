@@ -38,25 +38,25 @@ g.foo = gp
 g.foo = g.foo + 20
 g.foo += 30
 
-var gc = new G[Char]
+var gc = new G[Float]
 #alt1#var gcf = gc.foo
-#alt1#var gcp = gcf + 10
+#alt1#var gcp = gcf + 10.0
 #alt1#gc.foo = gcp
-#alt2#gc.foo = gc.foo + 20
+#alt2#gc.foo = gc.foo + 20.0
 #alt3#gc.foo += 30
 
-var gd: G[Discrete] = new G[Int]
+var gd: G[Numeric] = new G[Int]
 var gdf = gd.foo
 var gdp = gdf + 10
 gd.foo = gdp
 gd.foo = gd.foo + 20
 gd.foo += 30
 
-var gdc: G[Discrete] = new G[Char]
+var gdc: G[Numeric] = new G[Float]
 #alt4#var gdcf = gdc.foo
-#alt4#var gdcp = gdcf + 10
+#alt4#var gdcp = gdcf + 10.0
 #alt4#gdc.foo = gdcp
-#alt5#gdc.foo = gdc.foo + 20
-#alt6#gdc.foo += 30
+#alt5#gdc.foo = gdc.foo + 20.0
+#alt6#gdc.foo += 30.0
 
 var c = 'X'

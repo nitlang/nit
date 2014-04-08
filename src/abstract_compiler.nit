@@ -1644,12 +1644,6 @@ redef class AInternMethPropdef
 			else if pname == "unary -" then
 				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
 				return
-			else if pname == "succ" then
-				v.ret(v.new_expr("{arguments[0]}+1", ret.as(not null)))
-				return
-			else if pname == "prec" then
-				v.ret(v.new_expr("{arguments[0]}-1", ret.as(not null)))
-				return
 			else if pname == "*" then
 				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
 				return
@@ -1698,10 +1692,10 @@ redef class AInternMethPropdef
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
-			else if pname == "+" then
+			else if pname == "successor" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return
-			else if pname == "-" then
+			else if pname == "predecessor" then
 				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
 				return
 			else if pname == "==" then
@@ -1710,12 +1704,6 @@ redef class AInternMethPropdef
 			else if pname == "!=" then
 				var res = v.equal_test(arguments[0], arguments[1])
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
-			else if pname == "succ" then
-				v.ret(v.new_expr("{arguments[0]}+1", ret.as(not null)))
-				return
-			else if pname == "prec" then
-				v.ret(v.new_expr("{arguments[0]}-1", ret.as(not null)))
 				return
 			else if pname == "<" then
 				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))

@@ -2113,7 +2113,7 @@ var41 = NEW_string__Buffer(&type_string__Buffer);
 var_comment = var41;
 var42 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var42 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 907);
 show_backtrace(1);
 } else {
@@ -2244,7 +2244,7 @@ var99 = NEW_range__Range(&type_range__Rangekernel__Int);
 var100 = 0;
 var101 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var101 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 921);
 show_backtrace(1);
 } else {
@@ -2262,7 +2262,7 @@ var108 = ((struct instance_kernel__Int*)var107)->value; /* autounbox from nullab
 var_i = var108;
 var109 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var109 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 922);
 show_backtrace(1);
 } else {
@@ -2273,7 +2273,7 @@ var112 = ((val* (*)(val*))(var111->class->vft[COLOR_model__MParameter__mtype]))(
 var_mtype = var112;
 var113 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var113 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 923);
 show_backtrace(1);
 } else {
@@ -2679,7 +2679,7 @@ varonce299 = var300;
 var304 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__location]))(var_mmethoddef) /* location on <var_mmethoddef:MMethodDef>*/;
 var305 = ((val* (*)(val*))(var304->class->vft[COLOR_location__Location__file]))(var304) /* file on <var304:Location>*/;
 if (var305 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 954);
 show_backtrace(1);
 } else {
@@ -2890,7 +2890,7 @@ var_arguments = p1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRuntimeFunction__mmethoddef]))(self) /* mmethoddef on <self:CustomizedRuntimeFunction>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MMethodDef__msignature]))(var2) /* msignature on <var2:MMethodDef>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 959);
 show_backtrace(1);
 } else {
