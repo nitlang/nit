@@ -28,7 +28,7 @@ interface Pattern
 	# This method is usually faster than `search_in` if what is
 	# required is only the index.
 	# Note: in most implementation, `search_in` is implemented with this method.
-	protected fun search_index_in(s: String, from: Int): Int is abstract
+	protected fun search_index_in(s: Text, from: Int): Int is abstract
 
 	# Search `self` into `s` from a certain position.
 	# Return null if not found.
@@ -40,7 +40,7 @@ interface Pattern
 	# If only the index of the first character if required, see `search_index_in`.
 	#
 	# Note: Is used by `String::search`, `String::search_from`, and others.
-	protected fun search_in(s: String, from: Int): nullable Match is abstract
+	protected fun search_in(s: Text, from: Int): nullable Match is abstract
 
 	# Search all `self` occurrences into `s`.
 	#
@@ -48,7 +48,7 @@ interface Pattern
 	#     assert 'z'.search_all_in("hello world").length  == 0
 	#
 	# Note: Is used by `String::search_all`.
-	protected fun search_all_in(s: String): Array[Match]
+	protected fun search_all_in(s: Text): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var match = search_in(s, 0)
@@ -68,7 +68,7 @@ interface Pattern
 	#     assert 'z'.split_in("hello world").join("|")  == "hello world"
 	#
 	# Note: is used by `String::split`
-	protected fun split_in(s: String): Array[Match]
+	protected fun split_in(s: Text): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var i = 0 # Cursor
@@ -76,12 +76,12 @@ interface Pattern
 		while match != null do
 			# Compute the splited part length
 			var len = match.from - i
-			res.add(new Match(s, i, len))
+			res.add(new Match(s.to_s, i, len))
 			i = match.after
 			match = search_in(s, i)
 		end
 		# Add the last part
-		res.add(new Match(s, i, s.length - i))
+		res.add(new Match(s.to_s, i, s.length - i))
 		return res
 	end
 end
@@ -133,7 +133,7 @@ class BM_Pattern
 		if to < 0 then
 			return null
 		else
-			return new Match(s, to, _length)
+			return new Match(s.to_s, to, _length)
 		end
 	end
 
@@ -141,7 +141,7 @@ class BM_Pattern
 	init(motif: String)
 	do
 		_motif = motif
-		_length = motif.length
+		_length = _motif.length
 		_gs = new Array[Int].with_capacity(_length)
 		_bc_table = new ArrayMap[Char, Int]
 		compute_gs
@@ -235,7 +235,7 @@ class BM_Pattern
 	redef fun ==(o) do return o isa BM_Pattern and o._motif == _motif
 end
 
-# Matches are a part of a `String` found ba a `Pattern`.
+# Matches are a part of a `Text` found by a `Pattern`.
 class Match
 	# The base string matched
 	readable var _string: String
@@ -251,7 +251,7 @@ class Match
 	fun after: Int do return _from + _length
 
 	# The contents of the matching part
-	redef fun to_s do return _string.substring(_from, _length)
+	redef fun to_s do return _string.substring(_from,_length)
 
 	# Matches `len` characters of `s` from `f`.
 	init(s: String, f: Int, len: Int)
@@ -284,12 +284,12 @@ redef class Char
 		if pos < 0 then
 			return null
 		else
-			return new Match(s, pos, 1)
+			return new Match(s.to_s, pos, 1)
 		end
 	end
 end
 
-redef class String
+redef class Text
 	super Pattern
 
 	redef fun search_index_in(s, from)
@@ -313,7 +313,7 @@ redef class String
 		if pos < 0 then
 			return null
 		else
-			return new Match(s, pos, length)
+			return new Match(s.to_s, pos, length)
 		end
 	end
 
@@ -344,22 +344,22 @@ redef class String
 	# Split `self` using `p` as separator.
 	#
 	#     assert "hello world".split('o')          ==  ["hell", " w", "rld"]
-	fun split(p: Pattern): Array[String]
+	fun split(p: Pattern): Array[SELFTYPE]
 	do
 		var matches = p.split_in(self)
-		var res = new Array[String].with_capacity(matches.length)
+		var res = new Array[SELFTYPE].with_capacity(matches.length)
 		for m in matches do res.add(m.to_s)
 		return res
 	end
 
 	# @deprecated alias for `split`
-	fun split_with(p: Pattern): Array[String] do return self.split(p)
+	fun split_with(p: Pattern): Array[SELFTYPE] do return self.split(p)
 
 	# Replace all occurences of a pattern with a string
 	#
 	#     assert "hlelo".replace("le", "el")	     ==  "hello"
 	#     assert "hello".replace('l', "")	     ==  "heo"
-	fun replace(p: Pattern, string: String): String
+	fun replace(p: Pattern, string: SELFTYPE): SELFTYPE
 	do
 		return self.split_with(p).join(string)
 	end
@@ -367,7 +367,7 @@ redef class String
 	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
 	#
 	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
-	fun html_escape: String
+	fun html_escape: SELFTYPE
 	do
 		var ret = self
 		if ret.chars.has('&') then ret = ret.replace('&', "&amp;")

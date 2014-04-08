@@ -1515,7 +1515,7 @@ redef class Collection[E]
 	#
 	#     assert [1, 2, 3].join(":")         == "1:2:3"
 	#     assert [1..3].join(":")            == "1:2:3"
-	fun join(sep: String): String
+	fun join(sep: Text): String
 	do
 		if is_empty then return ""
 
