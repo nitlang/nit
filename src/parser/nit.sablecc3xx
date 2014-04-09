@@ -334,7 +334,7 @@ params {-> param*}
 params_tail {-> param}
 	= comma no param {-> param};
 param
-	= {untyped} id annotations? {-> New param(id, Null, Null, annotations)}
+	= {untyped} id annotations_o {-> New param(id, Null, Null, annotations_o.annotations)}
 	| id annotations? typing dotdotdot? {-> New param(id, typing.type, dotdotdot, annotations)}
 	;
 
@@ -373,8 +373,8 @@ extern_code_body {-> extern_code_block} = no extern_code_block {-> extern_code_b
 
 /* TYPES *********************************************************************/
 type~nobra~nopar {-> type}
-	= {simple} kwnullable? classid annotations~nopar? {-> New type(kwnullable, classid, [], annotations~nopar.annotations)}
-!nobra	| {generic} kwnullable? classid obra no types [n2]:no cbra annotations~nopar? {-> New type(kwnullable, classid, [types.type], annotations~nopar.annotations)}
+	= {simple} kwnullable? classid annotations_o~nopar {-> New type(kwnullable, classid, [], annotations_o~nopar.annotations)}
+!nobra	| {generic} kwnullable? classid obra no types [n2]:no cbra annotations_o~nopar {-> New type(kwnullable, classid, [types.type], annotations_o~nopar.annotations)}
 	;
 types {-> type*} 
 	= type types_tail* {-> [type, types_tail.type]};
@@ -549,25 +549,25 @@ expr_atom~nopar~nobra {-> expr}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
 	| {new} kwnew no type~nobra_nopar dot [n2]:no qualified? id args {-> New expr.new(kwnew, type~nobra_nopar.type, id, args.exprs)}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
-!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations? {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations)}
-!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations? {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations)}
-!nobra!nopar	| {array} braargs annotations? {-> New expr.array(braargs.exprs, annotations)}
-	| {self} kwself annotations? {-> New expr.self(kwself, annotations)}
-	| {true} kwtrue annotations? {-> New expr.true(kwtrue, annotations)}
-	| {false} kwfalse annotations? {-> New expr.false(kwfalse, annotations)}
-	| {null} kwnull annotations? {-> New expr.null(kwnull, annotations)}
-	| {int} number annotations? {-> New expr.int(number, annotations)}
-	| {float} float annotations? {-> New expr.float(float, annotations)}
-	| {char} char annotations? {-> New expr.char(char, annotations)}
-	| {string} string annotations? {-> New expr.string(string, annotations)}
+!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
+!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
+!nobra!nopar	| {array} braargs annotations_o {-> New expr.array(braargs.exprs, annotations_o.annotations)}
+	| {self} kwself annotations_o {-> New expr.self(kwself, annotations_o.annotations)}
+	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
+	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
+	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
+	| {int} number annotations_o {-> New expr.int(number, annotations_o.annotations)}
+	| {float} float annotations_o {-> New expr.float(float, annotations_o.annotations)}
+	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
+	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
 	| {superstring} superstring  {-> superstring.expr}
-!nopar	| {par} opar no expr [n2]:no cpar annotations? {-> New expr.par(opar, expr, cpar, annotations)}
+!nopar	| {par} opar no expr [n2]:no cpar annotations_o {-> New expr.par(opar, expr, cpar, annotations_o.annotations)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
 	;
 
 superstring {-> expr} 
-	= superstring_start superstring_middle* superstring_end annotations? {-> New expr.superstring([superstring_start.expr, superstring_middle.expr, superstring_end.expr], annotations)};
+	= superstring_start superstring_middle* superstring_end annotations_o {-> New expr.superstring([superstring_start.expr, superstring_middle.expr, superstring_end.expr], annotations_o.annotations)};
 superstring_start {-> expr*}
 	= start_string_p no expr [n2]:no {-> [start_string_p.expr, expr]}
 	| {noexpr} start_string_p no {-> [start_string_p.expr]}
@@ -589,11 +589,15 @@ annotations~nopar {-> annotations}
 	= {one} at one_annotation~nopar {-> New annotations(at, Null, [one_annotation~nopar.annotation], Null)}
 	| {many} at opar no annotation_list [n2]:no cpar {-> New annotations(at, opar, [annotation_list.annotation], cpar)}
 	;
+annotations_o~nopar {-> annotations?}
+	= annotations~nopar {-> annotations~nopar.annotations}
+	| {null} {-> Null}
+	;
 
 one_annotation~nopar {-> annotation}
-	= {alone} atid annotations~nopar? {-> New annotation(atid, Null, [], Null, annotations~nopar.annotations)}
+	= {alone} atid annotations_o~nopar {-> New annotation(atid, Null, [], Null, annotations_o~nopar.annotations)}
 // !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
-!nopar	| {args} atid opar no at_args [n2]:no cpar annotations~nopar? {-> New annotation(atid, opar, [at_args.at_arg], cpar, annotations~nopar.annotations)}
+!nopar	| {args} atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
 	;
 
 many_annotations {-> annotations}
