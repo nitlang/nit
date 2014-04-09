@@ -229,7 +229,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no qualified? classid formaldefs line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no qclassid formaldefs line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -694,6 +694,9 @@ qualified_o {-> qualified?}
 	;
 qid {-> id}
 	= qualified? id {-> id}
+	;
+qclassid {-> classid}
+	= qualified? classid {-> classid}
 	;
 modquad {-> id}
 	= id quad no {-> id};
