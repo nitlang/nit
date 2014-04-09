@@ -124,13 +124,11 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 		static char c[1024];
 		int n = read(*recv, c, 1024);
 		if(n < 0) {
-			free(c);
 			return NativeString_to_s_with_length("",0);
 		}
 		char* ret = malloc(n + 1);
 		memcpy(ret, c, n);
 		ret[n] = '\0';
-		free(c);
 		return NativeString_to_s_with_length(ret, n);
 	`}
 
