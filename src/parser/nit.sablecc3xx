@@ -211,8 +211,8 @@ moduledecl
 	= [doc]:no kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name, annotation_withend.annotations)};
 
 import
-	= {std} [doc]:no visibility kwimport no module_name annotation_withend [n2]:n1 {-> New import.std(visibility, kwimport, module_name, annotation_withend.annotations)}
-	| {no} [doc]:no visibility kwimport no kwend [n2]:n1 {-> New import.no(visibility, kwimport, kwend)}
+	= {std} [doc]:no redef visibility kwimport no module_name annotation_withend [n2]:n1 {-> New import.std(visibility, kwimport, module_name, annotation_withend.annotations)}
+	| {no} [doc]:no redef visibility kwimport no kwend [n2]:n1 {-> New import.no(visibility, kwimport, kwend)}
 	;
 
 implicit_top_class {-> classdef}
