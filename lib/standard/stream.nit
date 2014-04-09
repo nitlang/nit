@@ -92,7 +92,7 @@ end
 interface OStream
 	super IOS
 	# write a string
-	fun write(s: String) is abstract
+	fun write(s: Text) is abstract
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
@@ -122,7 +122,7 @@ interface Streamable
 	end
 end
 
-redef class String
+redef class Text
 	super Streamable
 	redef fun write_to(stream) do stream.write(self)
 end
@@ -391,5 +391,5 @@ class StringOStream
 	private var content = new Array[String]
 	redef fun to_s do return content.to_s
 	redef fun is_writable do return true
-	redef fun write(str) do content.add(str)
+	redef fun write(str) do content.add(str.to_s)
 end

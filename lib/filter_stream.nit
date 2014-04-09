@@ -116,7 +116,7 @@ class StreamDemux
 		end
 	end
 
-	redef fun write(s: String)
+	redef fun write(s: Text)
 	do
 		for i in _streams
 		do
