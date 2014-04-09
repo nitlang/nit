@@ -269,12 +269,8 @@ class ModelBuilder
 	# Path can be added (or removed) by the client
 	var paths: Array[String] = new Array[String]
 
-	# Get a module by its short name; if required, the module is loaded, parsed and its hierarchies computed.
-	# If `mgroup` is set, then the module search starts from it up to the top level (see `paths`);
-	# if `mgroup` is null then the module is searched in the top level only.
-	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
-	# FIXME: add a way to handle module name conflict
-	fun get_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable MModule
+	# Like (an used by) `get_mmodule_by_name` but just return the ModulePath
+	private fun search_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
 	do
 		# First, look in groups
 		var c = mgroup
@@ -286,17 +282,17 @@ class ModelBuilder
 			# Second, try the directory to find a file
 			var try_file = dirname + "/" + name + ".nit"
 			if try_file.file_exists then
-				var res = self.load_module(try_file.simplify_path)
-				if res == null then return null # Forward error
-				return res.mmodule.as(not null)
+				var res = self.identify_file(try_file.simplify_path)
+				assert res != null
+				return res
 			end
 
 			# Third, try if the requested module is itself a group
 			try_file = dirname + "/" + name + "/" + name + ".nit"
 			if try_file.file_exists then
-				var res = self.load_module(try_file.simplify_path)
-				if res == null then return null # Forward error
-				return res.mmodule.as(not null)
+				var res = self.identify_file(try_file.simplify_path)
+				assert res != null
+				return res
 			end
 
 			c = c.parent
@@ -328,7 +324,18 @@ class ModelBuilder
 			end
 			return null
 		end
-		var res = self.load_module(candidate)
+		return candidate
+	end
+
+	# Get a module by its short name; if required, the module is loaded, parsed and its hierarchies computed.
+	# If `mgroup` is set, then the module search starts from it up to the top level (see `paths`);
+	# if `mgroup` is null then the module is searched in the top level only.
+	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
+	fun get_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable MModule
+	do
+		var path = search_mmodule_by_name(anode, mgroup, name)
+		if path == null then return null # Forward error
+		var res = self.load_module(path.filepath)
 		if res == null then return null # Forward error
 		return res.mmodule.as(not null)
 	end
