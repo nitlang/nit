@@ -247,7 +247,7 @@ formaldefs {-> formaldef*}
 formaldefs_tail {-> formaldef}
 	= comma no formaldef {-> formaldef};
 formaldef
-	= classid annotations? typing? {-> New formaldef(classid, typing.type, annotations)};
+	= classid annotations? typing_o {-> New formaldef(classid, typing_o.type, annotations)};
 
 superclass {-> superclass}
 	= {super} no kwsuper [n2]:no type annotation_withend {-> New superclass(kwsuper, type, annotation_withend.annotations)}
@@ -264,10 +264,10 @@ propdef~toplevel {-> propdef}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
 	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature extern_calls extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, extern_calls, extern_code_block)}
-!toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, Null, Null)}
-!toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, Null, expr)}
-!toplevel| {var3} [doc]:no redef visibility kwvar id typing? writable? annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, annotation_withend.annotations, Null)}
-!toplevel| {var4} [doc]:no redef visibility kwvar id typing? writable? assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, annotation_withend.annotations, expr.expr)}
+!toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing_o {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, Null)}
+!toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing_o assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, expr)}
+!toplevel| {var3} [doc]:no redef visibility kwvar id typing_o writable? annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, Null)}
+!toplevel| {var4} [doc]:no redef visibility kwvar id typing_o writable? assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, expr.expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, annotation_noend.annotations, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
 !toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
@@ -383,6 +383,10 @@ types_tail {-> type}
 	= comma no type {-> type};
 typing {-> type}
 	= column no type {-> type};
+typing_o {-> type?}
+	= column no type {-> type}
+	| {null} {-> Null}
+	;
 
 /* STATMENTS *****************************************************************/
 stmtso~withelse~withend {-> expr?}
@@ -425,8 +429,8 @@ assign_continue~withelse{-> expr}
 	;
 
 vardecl~withelse{-> expr}
-	= kwvar id annotations? typing? {-> New expr.vardecl(kwvar, id, typing.type, Null, Null, annotations)}
-	| {assign} kwvar id annotations? typing? assign no expr_final~withelse {-> New expr.vardecl(kwvar, id, typing.type, assign, expr_final~withelse.expr, annotations)}
+	= kwvar id annotations? typing_o {-> New expr.vardecl(kwvar, id, typing_o.type, Null, Null, annotations)}
+	| {assign} kwvar id annotations? typing_o assign no expr_final~withelse {-> New expr.vardecl(kwvar, id, typing_o.type, assign, expr_final~withelse.expr, annotations)}
 	;
 
 assignment~withelse~nopar {-> expr}
