@@ -199,7 +199,7 @@ redef class Stdout
 	redef fun write(s)
 	do
 		if connection != null then
-			connection.write(s)
+			connection.write(s.to_s)
 		else
 			super
 		end
