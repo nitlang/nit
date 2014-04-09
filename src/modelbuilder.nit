@@ -335,7 +335,7 @@ class ModelBuilder
 
 	# Search a module `name` from path `lookpaths`.
 	# If found, the path of the file is returned
-	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable String
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
 	do
 		var candidate: nullable String = null
 		for dirname in lookpaths do
@@ -366,7 +366,8 @@ class ModelBuilder
 				end
 			end
 		end
-		return candidate
+		if candidate == null then return null
+		return identify_file(candidate)
 	end
 
 	# cache for `identify_file` by realpath
@@ -379,10 +380,12 @@ class ModelBuilder
 		# special case for not a nit file
 		if path.file_extension != "nit" then
 			# search in known -I paths
-			var candidate = search_module_in_paths(null, path, self.paths)
+			var res = search_module_in_paths(null, path, self.paths)
+			if res != null then return res
 
 			# Found nothins? maybe it is a group...
-			if candidate == null and path.file_exists then
+			var candidate = null
+			if path.file_exists then
 				var mgroup = get_mgroup(path)
 				if mgroup != null then
 					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
