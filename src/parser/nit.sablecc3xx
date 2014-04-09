@@ -320,14 +320,15 @@ methid {-> methid}
 	;
 
 signature~withret {-> signature}
-	= opar no params? cpar typing [no2]:no {-> New signature(opar, [params.param], cpar, typing.type)}
-!withret| {noret} opar no params? cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
+	= opar no params cpar typing [no2]:no {-> New signature(opar, [params.param], cpar, typing.type)}
+!withret| {noret} opar no params cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
 	| {nopar} typing no {-> New signature(Null, [], Null, typing.type)}
 !withret| {noparnoret} no {-> New signature(Null, [], Null, Null)}
 	;
 
 params {-> param*} 
 	= param params_tail* [n2]:no {-> [param, params_tail.param] }
+	| {null} {-> []}
 	;
 params_tail {-> param}
 	= comma no param {-> param};
