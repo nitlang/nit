@@ -49,7 +49,7 @@ abstract class Linearizable
 	#apply c3 algorithm on sequence list: 
 	#L: linearisation
 	#B1..BN are parents of C 
-        #L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
+	#L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
 
 
 	fun merge(seqs: Array[Array[Linearizable]]): Array[Linearizable]
@@ -139,7 +139,7 @@ redef class MModule
 end
 
 redef class ToolContext
-	        var maphase = new MaPhase(self, null)
+        var maphase = new MaPhase(self, null)
 end
 
 class MaPhase
