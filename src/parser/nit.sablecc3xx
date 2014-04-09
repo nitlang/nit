@@ -412,7 +412,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {loop} loop~withelse {-> loop~withelse.expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
-!noexpr	| {call} recv qualified? id args_nopar {-> New expr.call(recv.expr, id, args_nopar.exprs)}
+!noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid.id, args_nopar.exprs)}
 !noexpr	| {super} qualified_o kwsuper args_nopar {-> New expr.super(qualified_o.qualified, kwsuper, args_nopar.exprs)}
 !noexpr	| {init} recv qualified? kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
 	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
@@ -431,10 +431,10 @@ vardecl~withelse{-> expr}
 
 assignment~withelse~nopar {-> expr}
 	= {attr} recv~nopar qualified_o attrid assign expr_final~withelse {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr_final~withelse.expr)}
-	| {call} recv~nopar qualified? id args assign expr_final~withelse {-> New expr.call_assign(recv~nopar.expr, id, args.exprs, assign,  expr_final~withelse.expr)}
+	| {call} recv~nopar qid args assign expr_final~withelse {-> New expr.call_assign(recv~nopar.expr, qid.id, args.exprs, assign,  expr_final~withelse.expr)}
 	| {bra} expr_atom~nopar braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr_final~withelse.expr)}
 	| {attr_re} recv~nopar qualified_o attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr_final~withelse.expr)}
-	| {call_re} recv~nopar qualified? id args assign_op expr_final~withelse {-> New expr.call_reassign(recv~nopar.expr, id, args.exprs, assign_op,  expr_final~withelse.expr)}
+	| {call_re} recv~nopar qid args assign_op expr_final~withelse {-> New expr.call_reassign(recv~nopar.expr, qid.id, args.exprs, assign_op,  expr_final~withelse.expr)}
 	| {bra_re} expr_atom~nopar braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr_final~withelse.expr)}
 	;
 assign_op
@@ -544,11 +544,11 @@ expr_new~nopar~nobra {-> expr}
 
 expr_atom~nopar~nobra {-> expr}
 	= {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
-	| {call} recv~nopar~nobra qualified? id args {-> New expr.call(recv~nopar~nobra.expr, id, args.exprs)}
+	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
-	| {new} kwnew no type~nobra_nopar dot [n2]:no qualified? id args {-> New expr.new(kwnew, type~nobra_nopar.type, id, args.exprs)}
+	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid.id, args.exprs)}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
@@ -691,6 +691,9 @@ qualified
 qualified_o {-> qualified?}
 	= qualified {-> qualified}
 	| {null} {-> Null}
+	;
+qid {-> id}
+	= qualified? id {-> id}
 	;
 modquad {-> id}
 	= id quad no {-> id};
