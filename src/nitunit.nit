@@ -93,7 +93,8 @@ class NitUnitExecutor
 		end
 		f.close
 
-		var cmd = "../bin/nitg --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var nitdir = "NIT_DIR".environ
+		var cmd = "{nitdir}/bin/nitg --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
