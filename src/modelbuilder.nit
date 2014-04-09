@@ -270,48 +270,45 @@ class ModelBuilder
 	var paths: Array[String] = new Array[String]
 
 	# Get a module by its short name; if required, the module is loaded, parsed and its hierarchies computed.
-	# If `mmodule` is set, then the module search starts from it up to the top level (see `paths`);
-	# if `mmodule` is null then the module is searched in the top level only.
+	# If `mgroup` is set, then the module search starts from it up to the top level (see `paths`);
+	# if `mgroup` is null then the module is searched in the top level only.
 	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle module name conflict
-	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
+	fun get_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable MModule
 	do
-		# First, look in groups of the module
-		if mmodule != null then
-			var mgroup = mmodule.mgroup
-			while mgroup != null do
-				var dirname = mgroup.filepath
-				if dirname == null then break # virtual group
-				if dirname.has_suffix(".nit") then break # singleton project
+		# First, look in groups
+		var c = mgroup
+		while c != null do
+			var dirname = c.filepath
+			if dirname == null then break # virtual group
+			if dirname.has_suffix(".nit") then break # singleton project
 
-				# Second, try the directory to find a file
-				var try_file = dirname + "/" + name + ".nit"
-				if try_file.file_exists then
-					var res = self.load_module(try_file.simplify_path)
-					if res == null then return null # Forward error
-					return res.mmodule.as(not null)
-				end
-
-				# Third, try if the requested module is itself a group
-				try_file = dirname + "/" + name + "/" + name + ".nit"
-				if try_file.file_exists then
-					mgroup = get_mgroup(dirname + "/" + name)
-					var res = self.load_module(try_file.simplify_path)
-					if res == null then return null # Forward error
-					return res.mmodule.as(not null)
-				end
-
-				mgroup = mgroup.parent
+			# Second, try the directory to find a file
+			var try_file = dirname + "/" + name + ".nit"
+			if try_file.file_exists then
+				var res = self.load_module(try_file.simplify_path)
+				if res == null then return null # Forward error
+				return res.mmodule.as(not null)
 			end
+
+			# Third, try if the requested module is itself a group
+			try_file = dirname + "/" + name + "/" + name + ".nit"
+			if try_file.file_exists then
+				var res = self.load_module(try_file.simplify_path)
+				if res == null then return null # Forward error
+				return res.mmodule.as(not null)
+			end
+
+			c = c.parent
 		end
 
 		# Look at some known directories
 		var lookpaths = self.paths
 
-		# Look in the directory of module project also (even if not explicitely in the path)
-		if mmodule != null and mmodule.mgroup != null then
+		# Look in the directory of the group project also (even if not explicitely in the path)
+		if mgroup != null then
 			# path of the root group
-			var dirname = mmodule.mgroup.mproject.root.filepath
+			var dirname = mgroup.mproject.root.filepath
 			if dirname != null then
 				dirname = dirname.join_path("..").simplify_path
 				if not lookpaths.has(dirname) and dirname.file_exists then
@@ -324,8 +321,8 @@ class ModelBuilder
 		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
 
 		if candidate == null then
-			if mmodule != null then
-				error(anode, "Error: cannot find module {name} from {mmodule}. tried {lookpaths.join(", ")}")
+			if mgroup != null then
+				error(anode, "Error: cannot find module {name} from {mgroup.name}. tried {lookpaths.join(", ")}")
 			else
 				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
 			end
@@ -596,7 +593,7 @@ class ModelBuilder
 				continue
 			end
 			var mod_name = aimport.n_name.n_id.text
-			var sup = self.get_mmodule_by_name(aimport.n_name, mmodule, mod_name)
+			var sup = self.get_mmodule_by_name(aimport.n_name, mmodule.mgroup, mod_name)
 			if sup == null then continue # Skip error
 			aimport.mmodule = sup
 			imported_modules.add(sup)
