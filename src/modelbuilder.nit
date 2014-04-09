@@ -602,8 +602,15 @@ class ModelBuilder
 			if not aimport isa AStdImport then
 				continue
 			end
+			var mgroup = mmodule.mgroup
+			if aimport.n_name.n_quad != null then mgroup = null # Start from top level
+			for grp in aimport.n_name.n_path do
+				var path = search_mmodule_by_name(grp, mgroup, grp.text)
+				if path == null then return # Skip error
+				mgroup = path.mgroup
+			end
 			var mod_name = aimport.n_name.n_id.text
-			var sup = self.get_mmodule_by_name(aimport.n_name, mmodule.mgroup, mod_name)
+			var sup = self.get_mmodule_by_name(aimport.n_name, mgroup, mod_name)
 			if sup == null then continue # Skip error
 			aimport.mmodule = sup
 			imported_modules.add(sup)
