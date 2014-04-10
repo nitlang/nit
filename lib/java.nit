@@ -49,7 +49,6 @@ redef class Sys
 	fun jvm=(jvm: JavaVM) do jvm_cache = jvm
 
 	# Current main `JniEnv`
-	# FIXME support threaded Java
 	fun jni_env: JniEnv
 	do
 		if jni_env_cache == null then create_default_jvm

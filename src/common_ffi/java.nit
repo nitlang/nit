@@ -65,7 +65,12 @@ class JavaLanguage
 	JNIEnv *nit_ffi_jni_env = {{{mmodule.name}}}___Sys_jni_env(sys);
 
 	// retrieve the implementation Java class
-	java_class = (*nit_ffi_jni_env)->FindClass(nit_ffi_jni_env, "{{{mmodule.impl_java_class_name}}}");
+	java_class = {{{mmodule.name}}}___Sys_load_jclass(sys, "{{{mmodule.impl_java_class_name}}}");
+	if (java_class == NULL) {
+		fprintf(stderr, "Nit FFI with Java error: failed to load class.\\n");
+		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
+		exit(1);
+	}
 
 	// register callbacks (only once per Nit module)
 	if (!nit_ffi_with_java_registered_natives) nit_ffi_with_java_register_natives(nit_ffi_jni_env, java_class);
@@ -286,6 +291,15 @@ redef class AExternPropdef
 		assert sys_jni_env_meth isa MMethod
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_env_meth, mmodule)
+		fcc.callbacks.add(explicit_call)
+		explicit_call.fill_type_for(fcc, mmodule)
+
+		# Sys::load_jclass
+		var sys_jni_load_jclass_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "load_jclass")
+		assert sys_jni_load_jclass_meth != null
+		assert sys_jni_load_jclass_meth isa MMethod
+
+		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_load_jclass_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
 		explicit_call.fill_type_for(fcc, mmodule)
 	end
