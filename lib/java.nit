@@ -64,3 +64,47 @@ redef class Sys
 		self.jni_env = builder.jni_env.as(not null)
 	end
 end
+
+# A standard Java string `java.lang.String`
+#
+# Converted to a Nit string using `to_s`, or to a C string with `to_cstring`.
+# Created using `String::to_java_string` or `NativeString::to_java_string`.
+extern class JavaString in "Java" `{ java.lang.String `}
+
+	# Get the string from Java and copy it to Nit memory
+	fun to_cstring: NativeString import sys, Sys.jni_env `{
+		Sys sys = JavaString_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+
+		// Get the data from Java
+		const jbyte *java_cstr = (char*)(*env)->GetStringUTFChars(env, recv, NULL);
+		jsize len = (*env)->GetStringUTFLength(env, recv);
+
+		// Copy it in control of Nit
+		char *nit_cstr = (char*)malloc(len+1);
+		memcpy(nit_cstr, java_cstr, len);
+		nit_cstr[len] = '\0';
+
+		// Free JNI ref and return
+		(*env)->ReleaseStringUTFChars(env, recv, java_cstr);
+		return nit_cstr;
+	`}
+
+	redef fun to_s do return to_cstring.to_s
+end
+
+redef class NativeString
+	# Get a Java string from this C string
+	#
+	# This instance is only valid until the next execution of Java code.
+	# You can use `new_local_ref` to keep it longer.
+	fun to_java_string: JavaString import sys, Sys.jni_env `{
+		Sys sys = JavaString_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewStringUTF(env, recv);
+	`}
+end
+
+redef class String
+	fun to_java_string: JavaString do return to_cstring.to_java_string
+end
