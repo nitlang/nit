@@ -132,6 +132,40 @@ class ANodes[E: ANode]
 		assert e.parent == parent
 		e.parent = null
 	end
+
+	# Used in parent contructor to fill elements
+	private fun unsafe_add_all(nodes: Collection[Object])
+	do
+		var parent = self.parent
+		for n in nodes do
+			assert n isa E
+			add n
+			n.parent = parent
+		end
+	end
+
+	private fun replace_child(old_child: ANode, new_child: nullable ANode): Bool
+	do
+		var parent = self.parent
+		for i in [0..length[ do
+			if self[i] == old_child then
+				if new_child != null then
+					assert new_child isa E
+					self[i] = new_child
+					new_child.parent = parent
+				else
+					self.remove_at(i)
+				end
+				return true
+			end
+		end
+		return false
+	end
+
+	private fun visit_all(v: Visitor)
+	do
+		for n in self do v.enter_visit(n)
+	end
 end
 
 # Ancestor of all tokens
