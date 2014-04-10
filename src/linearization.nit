@@ -1,38 +1,31 @@
-
 module linearization
+
 import modelize_class
 import test_phase
 
-
-
-
 abstract class Linearizable
-	var name : String 
-	var parents = new HashSet[Linearizable]	
-	fun linearize: Array[Linearizable]
-	do
-		self.init_linearization
-		return self.mro
-	end
-	#initialise "name" and "parents"
-	fun init_linearization is abstract
+	# Return class or module name
+	fun element_name : String is abstract 
+	# Return Class or module parents
+	fun element_parents : HashSet[Linearizable] is abstract	
 
 	#Compute the class precedence list (mro) according to C3
-	fun mro:  Array[Linearizable]
+	fun linearize:  Array[Linearizable]
 	do
 		var result = new Array[Array[Linearizable]]
 		result.add([self])
-		for parent in self.parents do
-			result.add(parent.mro)
+		for parent in self.element_parents do
+			result.add(parent.linearize)
 		end
 		var new_arr = new Array[Linearizable]
-		for par in self.parents do
+		for par in self.element_parents do
 			new_arr.add(par)
 		end
 		result.add( new_arr)
 		return merge(result)
 	end
-
+	
+	# Debug the linearisation process
 	fun debug(seqs: Array[Array[Linearizable]])
 	do
 
@@ -40,21 +33,20 @@ abstract class Linearizable
 		for s in seqs do
 			printn "["
 			for t in s do
-				printn t.name + " "
+				printn t.element_name + " "
 			end
 			printn "]"
 		end
 		print"]"
 	end
+
 	#apply c3 algorithm on sequence list: 
 	#L: linearisation
 	#B1..BN are parents of C 
 	#L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
-
-
 	fun merge(seqs: Array[Array[Linearizable]]): Array[Linearizable]
 	do
-		printn "CPL["+ seqs[0][0].name + "]= "
+		printn "CPL["+ seqs[0][0].element_name + "]= "
 		debug(seqs)
 		var res = new Array[Linearizable]
 		var i = 0
@@ -74,19 +66,19 @@ abstract class Linearizable
 			printn "round" + i.to_s
 			for seq in nonemptyseqs do
 				cand = seq[0]
-				print " candidate... " + cand.name
+				print " candidate... " + cand.element_name
 				var nothead = new Array[Linearizable]
 				for s in nonemptyseqs do
 					if s.length > 1 then
 						for t in [1..s.length[ do
-							if cand.name == s[t].name then
+							if cand.element_name == s[t].element_name then
 								nothead.append(s)
 							end
 						end
 					end
 				end
 				if nothead.length > 0 then
-					problem_cand = cand.name
+					problem_cand = cand.element_name
 					cand = null
 				else
 					 break
@@ -107,34 +99,42 @@ abstract class Linearizable
 	end
 end
 
-
-
+# Implement abstract methods of Linearizable 
 redef class MClassDef
 	super Linearizable
-	redef fun init_linearization
-	do
-		self.name = self.mclass.name
-		for parent in self.supertypes do
-			self.parents.add parent.mclass.intro
-			parent.mclass.intro.init_linearization
-		end
+	
+	redef fun element_name 
+	do 
+		return self.mclass.name 
 	end
-
-
+	
+	redef fun element_parents
+	do
+		var parents = new HashSet[Linearizable]
+		for parent in self.supertypes do
+			parents.add parent.mclass.intro
+			parent.mclass.intro.element_parents
+		end
+		return parents
+	end
 end
 
 redef class MModule
 	super Linearizable
 
-	redef fun init_linearization
+	redef fun element_name
+	do
+		return self.name
+	end
+	
+	redef fun element_parents
         do
-		#FIXME I don't know if it is a bug or i misunderstood nit
-		#concept of redefiniton but if delete this line, the variable name of linearizable class will no longer initialized
-		self.name = self.name
+		var parents = new HashSet[Linearizable]
 		for parent in self.in_importation.direct_greaters do
-			self.parents.add parent
-			parent.init_linearization
+			parents.add parent
+			parent.element_parents
 		end
+		return parents
 	end
 end
 
@@ -144,14 +144,16 @@ end
 
 class MaPhase
 	super Phase
+	#Test Linearization algorithm
         redef fun process_mainmodule(mainmodule, mm)
         do
                 var classes = mainmodule.flatten_mclass_hierarchy
 		var result = new Array[Linearizable]
+		#Linearize modules
 		result = mainmodule.linearize
 		print "--------------------Result--------------"
 		for c in result do
-			print c.name
+			print c.element_name
 		end
 		print "-----------------Finish----------------"
 
@@ -161,10 +163,11 @@ class MaPhase
                 for class_ in classes do
                         var class_def = class_.intro
                         if class_def.mclass.name == name then
+				#Linearize class
 				result = class_def.linearize
 				print "--------------------Result--------------"
 				for c in result do
-                                        print c.name
+                                        print c.element_name
                                 end
                                 print "-----------------Finish----------------"
                         end
