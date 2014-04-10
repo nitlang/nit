@@ -78,7 +78,6 @@ end
 if toolcontext.opt_erasure.value then
 	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
 else if opt_global.value then
-	if toolcontext.opt_stacktrace.value == null then toolcontext.opt_stacktrace.value = "libunwind" # default is no gperf
 	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_global_compiler(mainmodule, analysis)
 else
