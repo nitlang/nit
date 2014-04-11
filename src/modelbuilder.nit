@@ -224,28 +224,55 @@ class ModelBuilder
 			if not mmodule.is_visible(mprop.intro_mclassdef.mmodule, mprop.visibility) then continue
 			if res == null then
 				res = mprop
-			else
+				continue
+			end
+
+			# Two global properties?
+			# First, special case for init, keep the most specific ones
+			if res isa MMethod and mprop isa MMethod and res.is_init and mprop.is_init then
 				var restype = res.intro_mclassdef.bound_mtype
 				var mproptype = mprop.intro_mclassdef.bound_mtype
-				if restype.is_subtype(mmodule, null, mproptype) then
-					# we keep res
-				else if mproptype.is_subtype(mmodule, null, restype) then
+				if mproptype.is_subtype(mmodule, null, restype) then
+					# found a most specific constructor, so keep it
 					res = mprop
-				else
-					if ress == null then ress = new Array[MProperty]
-					ress.add(mprop)
+					continue
 				end
 			end
+
+			# Ok, just keep all prop in the ress table
+			if ress == null then
+				ress = new Array[MProperty]
+				ress.add(res)
+			end
+			ress.add(mprop)
 		end
-		if ress != null then
+
+		# There is conflict?
+		if ress != null and res isa MMethod and res.is_init then
+			# special case forinit again
 			var restype = res.intro_mclassdef.bound_mtype
+			var ress2 = new Array[MProperty]
 			for mprop in ress do
 				var mproptype = mprop.intro_mclassdef.bound_mtype
 				if not restype.is_subtype(mmodule, null, mproptype) then
-					self.error(anode, "Ambigous property name '{name}' for {mtype}; conflict between {mprop.full_name} and {res.full_name}")
-					return null
+					ress2.add(mprop)
+				else if not mprop isa MMethod or not mprop.is_init then
+					ress2.add(mprop)
 				end
 			end
+			if ress2.is_empty then
+				ress = null
+			else
+				ress = ress2
+				ress.add(res)
+			end
+		end
+
+		if ress != null then
+			assert ress.length > 1
+			var s = new Array[String]
+			for mprop in ress do s.add mprop.full_name
+			self.error(anode, "Ambigous property name '{name}' for {mtype}; conflict between {s.join(" and ")}")
 		end
 
 		self.try_get_mproperty_by_name2_cache[mmodule, mtype, name] = res
