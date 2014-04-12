@@ -70,6 +70,9 @@ end
 # Converted to a Nit string using `to_s`, or to a C string with `to_cstring`.
 # Created using `String::to_java_string` or `NativeString::to_java_string`.
 extern class JavaString in "Java" `{ java.lang.String `}
+	super JavaObject
+
+	redef type SELF: JavaString
 
 	# Get the string from Java and copy it to Nit memory
 	fun to_cstring: NativeString import sys, Sys.jni_env `{
@@ -107,4 +110,25 @@ end
 
 redef class String
 	fun to_java_string: JavaString do return to_cstring.to_java_string
+end
+
+redef extern class JavaObject
+	type SELF: JavaObject
+
+	# Returns a global reference to the Java object behind this reference
+	#
+	# You must use a global reference when keeping a Java object
+	# across execution of Java code, per JNI specification.
+	fun new_global_ref: SELF import sys, Sys.jni_env `{
+		Sys sys = JavaObject_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
+
+	# Delete this global reference
+	fun delete_global_ref import sys, Sys.jni_env `{
+		Sys sys = JavaObject_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		(*env)->DeleteGlobalRef(env, recv);
+	`}
 end
