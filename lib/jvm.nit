@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Romain Chanoir <romain.chanoir@courrier.uqam.ca> 
+# Copyright 2014 Romain Chanoir <romain.chanoir@courrier.uqam.ca>
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,47 +25,6 @@ end
 
 in "C Header" `{
 	#include <jni.h>
-
-`}
-
-`{
-	inline jvalue * convert_array_of_Object_to_c(nullable_Array_of_nullable_Object nullable_nit_array, JNIEnv* env){
-		if(nullable_Array_of_nullable_Object_is_null(nullable_nit_array)){
-			return NULL;
-		}
-		Array_of_nullable_Object nit_array = nullable_Array_of_nullable_Object_as_Array_of_nullable_Object(nullable_nit_array);
-		int nit_array_length = Array_of_nullable_Object_length(nit_array);
-		int i;
-		jvalue *c_array = malloc(sizeof(jvalue)*(nit_array_length));
-		for (i = 0; i < nit_array_length; i ++) {
-			nullable_Object nullable_obj = Array_of_nullable_Object__index(nit_array, i);
-			if(nullable_Object_is_a_Int(nullable_obj)) {
-				int val = nullable_Object_as_Int(nullable_obj);
-				c_array[i].i = val;
-			}else if (nullable_Object_is_a_Char(nullable_obj)){
-				char val = nullable_Object_as_Char(nullable_obj);
-				c_array[i].c = val;
-			}else if (nullable_Object_is_a_Bool(nullable_obj)){
-				int val = nullable_Object_as_Bool(nullable_obj);
-				c_array[i].z = val;
-			}else if(nullable_Object_is_a_Float(nullable_obj)){
-				float val = nullable_Object_as_Float(nullable_obj);
-				c_array[i].f = val;
-			}else if(nullable_Object_is_a_JObject(nullable_obj)){
-				jobject val = nullable_Object_as_JObject(nullable_obj);
-				c_array[i].l = val;
-			}else if(nullable_Object_is_a_String(nullable_obj)){
-				String val = nullable_Object_as_String(nullable_obj);
-				char* c = String_to_cstring(val);
-				jstring js = (*env)->NewStringUTF(env, c);
-				c_array[i].l = js;
-			}else {
-				fprintf(stderr, "NOT YET SUPPORTED: nit objects are not supported\n");
-				exit(1);
-			}
-		}
-		return c_array;
-	}
 `}
 
 # Utility to select options to create the VM using `create_jvm`
@@ -213,12 +173,12 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 	
 	# Construct a new Java object from the `clazz`, using the constructor ̀ method_id`
-	fun new_object(clazz: JClass, method_id: JMethodID): JObject `{
+	fun new_object(clazz: JClass, method_id: JMethodID): JavaObject `{
 		return (*recv)->NewObject(recv, clazz, method_id);
 	`}
 	
 	# Return the JClass of `obj`
-	fun get_object_class(obj: JObject): JClass `{
+	fun get_object_class(obj: JavaObject): JClass `{
 		return (*recv)->GetObjectClass(recv, obj);
 	`}
 
@@ -228,53 +188,91 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments
-	fun call_void_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]) import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_void_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]) import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		(*recv)->CallVoidMethodA(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
-	# Call a method on `obj` designed by `method_id` with an array `args` of argument returning a JObject
-	fun call_object_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): JObject import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	# Call a method on `obj` designed by `method_id` with an array `args` of argument returning a JavaObject
+	fun call_object_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): JavaObject import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		(*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Bool
-	fun call_boolean_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_boolean_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		return (*recv)->CallBooleanMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Char
-	fun call_char_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Char import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_char_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Char import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		return (*recv)->CallCharMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning an Int
-	fun call_int_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Int import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_int_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Int import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		return (*recv)->CallIntMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Float
-	fun call_float_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_float_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		return (*recv)->CallFloatMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a NativeString
-	fun call_string_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): NativeString import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring, String.length `{
-		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
+	fun call_string_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): NativeString import convert_args_to_jni `{
+		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
 		jobject jobj = (*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 		return (char*)(*recv)->GetStringUTFChars(recv, (jstring)jobj, NULL);
+	`}
+
+	private fun convert_args_to_jni(args: nullable Array[nullable Object]): Pointer import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JavaObject), nullable Object.as(String), String.to_cstring, String.length `{
+		if(nullable_Array_of_nullable_Object_is_null(args)){
+			return NULL;
+		}
+		Array_of_nullable_Object nit_array = nullable_Array_of_nullable_Object_as_Array_of_nullable_Object(args);
+		int nit_array_length = Array_of_nullable_Object_length(nit_array);
+		int i;
+		jvalue *c_array = malloc(sizeof(jvalue)*(nit_array_length));
+		for (i = 0; i < nit_array_length; i ++) {
+			nullable_Object nullable_obj = Array_of_nullable_Object__index(nit_array, i);
+			if(nullable_Object_is_a_Int(nullable_obj)) {
+				int val = nullable_Object_as_Int(nullable_obj);
+				c_array[i].i = val;
+			} else if (nullable_Object_is_a_Char(nullable_obj)){
+				char val = nullable_Object_as_Char(nullable_obj);
+				c_array[i].c = val;
+			} else if (nullable_Object_is_a_Bool(nullable_obj)){
+				int val = nullable_Object_as_Bool(nullable_obj);
+				c_array[i].z = val;
+			} else if(nullable_Object_is_a_Float(nullable_obj)){
+				float val = nullable_Object_as_Float(nullable_obj);
+				c_array[i].f = val;
+			} else if(nullable_Object_is_a_JavaObject(nullable_obj)){
+				jobject val = nullable_Object_as_JavaObject(nullable_obj);
+				c_array[i].l = val;
+			} else if(nullable_Object_is_a_String(nullable_obj)){
+				String val = nullable_Object_as_String(nullable_obj);
+				char* c = String_to_cstring(val);
+				jstring js = (*recv)->NewStringUTF(recv, c);
+				c_array[i].l = js;
+			} else {
+				fprintf(stderr, "NOT YET SUPPORTED: nit objects are not supported\n");
+				exit(1);
+			}
+		}
+		return c_array;
 	`}
 
 	# Returns the field ID for an instance field of a class. The field is specified by its name and signature
@@ -283,43 +281,43 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 	
 	# returns the value of an instance (nonstatic) field of an object. The field to access is specified by a field ID obtained by calling get_field_id()
-	fun get_object_field(obj: JObject, fieldID: JFieldID): JObject `{
+	fun get_object_field(obj: JavaObject, fieldID: JFieldID): JavaObject `{
 		return (*recv)->GetObjectField(recv, obj, fieldID);
 	`}
 
-	fun get_boolean_field(obj: JObject, fieldID: JFieldID): Bool `{
+	fun get_boolean_field(obj: JavaObject, fieldID: JFieldID): Bool `{
 		return (*recv)->GetBooleanField(recv, obj, fieldID);
 	`}
 	
-	fun get_char_field(obj: JObject, fieldID: JFieldID): Char `{
+	fun get_char_field(obj: JavaObject, fieldID: JFieldID): Char `{
 		return (*recv)->GetCharField(recv, obj, fieldID);
 	`}
 
-	fun get_int_field(obj: JObject, fieldID: JFieldID): Int `{
+	fun get_int_field(obj: JavaObject, fieldID: JFieldID): Int `{
 		return (*recv)->GetIntField(recv, obj, fieldID);
 	`}
 
-	fun get_float_field(obj: JObject, fieldID: JFieldID): Float `{
+	fun get_float_field(obj: JavaObject, fieldID: JFieldID): Float `{
 		return (*recv)->GetFloatField(recv, obj, fieldID);
 	`}
 
-	fun set_object_field(obj: JObject, fieldID: JFieldID, value: JObject) `{
+	fun set_object_field(obj: JavaObject, fieldID: JFieldID, value: JavaObject) `{
 		(*recv)->SetObjectField(recv, obj, fieldID, value);
 	`}
 
-	fun set_boolean_field(obj: JObject, fieldID: JFieldID, value: Bool) `{
+	fun set_boolean_field(obj: JavaObject, fieldID: JFieldID, value: Bool) `{
 		(*recv)->SetBooleanField(recv, obj, fieldID, value);
 	`}
 
-	fun set_char_field(obj: JObject, fieldID: JFieldID, value: Char) `{
+	fun set_char_field(obj: JavaObject, fieldID: JFieldID, value: Char) `{
 		(*recv)->SetCharField(recv, obj, fieldID, value);
 	`}
 
-	fun set_int_field(obj: JObject, fieldID: JFieldID, value: Int) `{
+	fun set_int_field(obj: JavaObject, fieldID: JFieldID, value: Int) `{
 		(*recv)->SetIntField(recv, obj, fieldID, value);
 	`}		
 
-	fun set_float_field(obj: JObject, fieldID: JFieldID, value: Float) `{
+	fun set_float_field(obj: JavaObject, fieldID: JFieldID, value: Float) `{
 		(*recv)->SetFloatField(recv, obj, fieldID, value);
 	`}
 	
@@ -334,7 +332,7 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 
 	# return the exception if there is one in the process of being thrown, or NULL if no exception is currently being thrown
-	fun exception_occurred: JObject `{
+	fun exception_occurred: JavaObject `{
 		return (*recv)->ExceptionOccurred(recv);
 	`}
 
@@ -353,8 +351,8 @@ extern class JniEnv `{JNIEnv *`}
 		(*recv)->FatalError(recv, String_to_cstring(msg));
 	`}
 
-	# Transform a NIT String into a JObject
-	fun string_to_jobject(string: String): JObject `{
+	# Transform a NIT String into a JavaObject
+	fun string_to_jobject(string: String): JavaObject `{
 		return (*recv)->NewStringUTF(recv, String_to_cstring(string));
 	`}
 end
@@ -373,7 +371,7 @@ extern class JMethodID `{jmethodID`}
 end
 
 # Represens a jni jobject
-extern class JObject `{jobject`}
+extern class JavaObject `{jobject`}
 end
 
 # Represents a jni JNINNativeMethod
@@ -434,11 +432,11 @@ extern class JValue `{jvalue`}
 		return recv.f;
 	`}
 
-	fun set_jobject(obj: JObject) `{
+	fun set_jobject(obj: JavaObject) `{
 		recv.l = obj;
 	`}
 
-	fun get_jobject: JObject `{
+	fun get_jobject: JavaObject `{
 		return recv.l;
 	`}
 end
