@@ -31,6 +31,7 @@ import pkgconfig
 import c_compiler_options
 import c
 import cpp
+import java
 
 redef class MModule
 	# Does this module uses the FFI?
