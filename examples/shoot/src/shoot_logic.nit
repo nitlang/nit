@@ -22,6 +22,19 @@ import scene2d
 class Player
 	super Sprite
 
+	# Where the player is going
+	var going_target = new GoingTarget
+
+	# Activate the `going_target`
+	fun goes_to(x,y: Int, speed: Int)
+	do
+		going_target.x = x
+		going_target.y = y
+		going_target.active = true
+		var angle = angle_to(going_target)
+		set_velocity(angle, speed)
+	end
+
 	# Current forture of the player
 	var money: Int writable = 0
 
@@ -132,6 +145,27 @@ class Hitable
 	# What do do when self is hit by the player.
 	# By defaut, do nothing
 	fun hit_by_player(player: Player) do end
+end
+
+# Destination for the player (pointer position)
+class GoingTarget
+	super Hitable
+
+	# true in on move, false if player is at rest
+	var active writable = false
+
+	init do
+		self.width = 500
+		self.height = 500
+	end
+
+	redef fun hit_by_player(player)
+	do
+		if not active then return
+		active = false
+		player.vx = 0
+		player.vy = 0
+	end
 end
 
 # A bullet shooted by a ship
@@ -799,6 +833,8 @@ class PlayScene
 		for i in [0..100[ do
 			background.add(new Star)
 		end
+
+		hitables.add(player.going_target)
 	end
 
 	# Generate an explosion
