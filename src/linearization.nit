@@ -1,3 +1,19 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2014 Aymen Frikha <aymen.frikha88@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 module linearization
 
 import modelize_class
@@ -8,28 +24,26 @@ abstract class Linearizable
 	fun element_name : String is abstract 
 	# Return Class or module parents
 	fun element_parents : HashSet[Linearizable] is abstract	
-
 	#Compute the class precedence list (mro) according to C3
-	fun linearize:  Array[Linearizable]
+	fun linearize(dbg: Bool):  Array[Linearizable]
 	do
 		var result = new Array[Array[Linearizable]]
 		result.add([self])
 		for parent in self.element_parents do
-			result.add(parent.linearize)
+			result.add(parent.linearize(dbg))
 		end
 		var new_arr = new Array[Linearizable]
 		for par in self.element_parents do
 			new_arr.add(par)
 		end
 		result.add( new_arr)
-		return merge(result)
+		return merge(result, dbg)
 	end
 	
 	# Debug the linearisation process
 	fun debug(seqs: Array[Array[Linearizable]])
 	do
-
-	        printn"["
+		printn"["
 		for s in seqs do
 			printn "["
 			for t in s do
@@ -44,10 +58,12 @@ abstract class Linearizable
 	#L: linearisation
 	#B1..BN are parents of C 
 	#L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
-	fun merge(seqs: Array[Array[Linearizable]]): Array[Linearizable]
+	fun merge(seqs: Array[Array[Linearizable]], dbg: Bool): Array[Linearizable]
 	do
-		printn "CPL["+ seqs[0][0].element_name + "]= "
-		debug(seqs)
+		if dbg then
+			printn "CPL["+ seqs[0][0].element_name + "]= "
+			debug(seqs)
+		end
 		var res = new Array[Linearizable]
 		var i = 0
 		var cand: nullable Linearizable = null
@@ -62,11 +78,15 @@ abstract class Linearizable
 			if nonemptyseqs.length == 0 then
 				return res
 			end
-			i+=1
-			printn "round" + i.to_s
+			if dbg then 
+				i+=1
+				printn "round" + i.to_s
+			end
 			for seq in nonemptyseqs do
 				cand = seq[0]
-				print " candidate... " + cand.element_name
+				if dbg then
+					print " candidate... " + cand.element_name
+				end
 				var nothead = new Array[Linearizable]
 				for s in nonemptyseqs do
 					if s.length > 1 then
@@ -146,11 +166,15 @@ class MaPhase
 	super Phase
 	#Test Linearization algorithm
         redef fun process_mainmodule(mainmodule, mm)
-        do
+	do	
+		var dbg: Bool = false
                 var classes = mainmodule.flatten_mclass_hierarchy
 		var result = new Array[Linearizable]
+		if self.toolcontext.verbose_level > 0 then
+			dbg = true
+		end
 		#Linearize modules
-		result = mainmodule.linearize
+		result = mainmodule.linearize(dbg)
 		print "--------------------Result--------------"
 		for c in result do
 			print c.element_name
@@ -164,7 +188,7 @@ class MaPhase
                         var class_def = class_.intro
                         if class_def.mclass.name == name then
 				#Linearize class
-				result = class_def.linearize
+				result = class_def.linearize(dbg)
 				print "--------------------Result--------------"
 				for c in result do
                                         print c.element_name
