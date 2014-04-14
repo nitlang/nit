@@ -15,6 +15,17 @@
 # limitations under the License.
 
 # Supporting services for the FFI with Java
+#
+# This modules relies on `Sys::jvm`, `Sys::jni_env` and
+# `Sys::create_default_jvm` to get a handle on a JVM. You can adapt the
+# behavior of the FFI and services in this module by redefing
+# `Sys::create_default_jvm` and supply your own JVM object. You can manage
+# multiple java thread by switching the current environment in a redef
+# of `Sys::jni_env`, and multiple JVM using `Sys::jvm`.
+#
+# The module `jvm` gives more control over the JVM instances and wraps
+# most of JNI functions. You can use it to further customize the behavior 
+# of your code.
 module java is
 	c_compiler_option("-I $(JAVA_HOME)/include/")
 	c_linker_option("-L $(JNI_LIB_PATH) -ljvm")
@@ -49,7 +60,7 @@ redef class Sys
 	fun jni_env=(jni_env: JniEnv) do jni_env_cache = jni_env
 
 	# Called by `jvm` and `jni_env` to instanciate a Java Virual Machine.
-	# Used mostly for FFI with Java.
+	# Used mostly for the FFI with Java.
 	protected fun create_default_jvm
 	do
 		var builder = new JavaVMBuilder
