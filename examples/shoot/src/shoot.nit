@@ -218,6 +218,10 @@ redef class PlayScene
 					player.vx = 0
 				end
 			end
+			return true
+		else if input_event isa PointerEvent then
+			player.goes_to((input_event.x*100.0).to_i, (input_event.y*100.0).to_i, speed)
+			return true
 		end
 		return false # unknown event, can be handled by something else
 	end
@@ -238,6 +242,9 @@ redef class MenuScene
 	redef fun input(input_event)
 	do
 		if input_event isa KeyEvent then
+			play = true
+			return true
+		else if input_event isa PointerEvent then
 			play = true
 			return true
 		end
