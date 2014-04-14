@@ -780,14 +780,28 @@ class Star
 	end
 end
 
-redef class Scene
+class ShotScene
+	super Scene
+
 	# When a scene need to be replaced, just assign the next_scene to a non null value
-	var next_scene: nullable Scene writable = null
+	var next_scene: nullable ShotScene writable = null
+
+	# The width of the whole scene
+	var width: Int writable
+
+	# The height of the whole scene
+	var height: Int writable
+
+	init(w,h: Int)
+	do
+		width = w
+		height = h
+	end
 end
 
 # The main play state
 class PlayScene
-	super Scene
+	super ShotScene
 
 	# The player ship
 	var player: Player
@@ -816,8 +830,9 @@ class PlayScene
 	# All sprites
 	var sprites = new LiveGroup[LiveObject]
 
-	init
+	init(w,h)
 	do
+		super
 		self.player = new Player(self)
 		player.x = 400 * 100
 		player.y = 500 * 100
@@ -957,12 +972,13 @@ end
 ###
 
 class MenuScene
-	super Scene
+	super ShotScene
 
 	var sprites = new LiveGroup[LiveObject]
 
-	init
+	init(w,h)
 	do
+		super
 		for i in [0..100[ do
 			sprites.add(new Star)
 		end
@@ -980,7 +996,7 @@ class MenuScene
 			ttl -= 1
 			return
 		end
-		next_scene = new PlayScene
+		next_scene = new PlayScene(width,height)
 	end
 end
 
@@ -988,7 +1004,7 @@ fun headless_run
 do
 	print "Headless run"
 	# Only run the playscene
-	var scene = new PlayScene
+	var scene = new PlayScene(80000,60000)
 	# beefup the player
 	scene.player.nbshoots = 5
 	scene.player.nbmissiles = 5
