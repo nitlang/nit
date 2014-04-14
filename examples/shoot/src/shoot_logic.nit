@@ -73,15 +73,15 @@ class Player
 		if self.y < 0 then
 			self.y = 0
 			self.vy = 0
-		else if self.y > 60000 then
-			self.y = 60000
+		else if self.y > scene.height then
+			self.y = scene.height
 			self.vy = 0
 		end
 		if self.x < 0 then
 			self.x = 0
 			self.vx = 0
-		else if self.x > 80000 then
-			self.x = 80000
+		else if self.x > scene.width then
+			self.x = scene.width
 			self.vx = 0
 		end
 
@@ -94,7 +94,7 @@ class Player
 		else
 			shoot_ttl = 30
 			for i in [0..nbshoots[ do
-				var shoot = new Shoot
+				var shoot = new Shoot(scene)
 				shoot.x = x
 				shoot.y = top
 				shoot.vy = -500
@@ -108,7 +108,7 @@ class Player
 			missile_ttl -= 1
 		else if nbmissiles > 0 then
 			missile_ttl = 500 / nbmissiles
-			var shoot = new Missile
+			var shoot = new Missile(scene)
 			shoot.x = x
 			shoot.y = top
 			shoot.vy = -300
@@ -128,8 +128,8 @@ class Player
 		self.exists = false
 
 		# Reset the position for respawn
-		self.x = 400 * 100
-		self.y = 500 * 100
+		self.x = scene.width / 2
+		self.y = scene.height - 10000
 		self.vx = 0
 		self.vy = 0
 		self.respawn_ttl = 50
@@ -176,7 +176,13 @@ class Shoot
 	# Since there is no frendly fire, it is important to distinguish ownership
 	var enemy: Bool = false
 
-	init do
+	# The scene of the sprite
+	# Is used with bound limits
+	var scene: PlayScene
+
+	init(scene: PlayScene)
+	do
+		self.scene = scene
 		self.width = 800
 		self.height = 800
 	end
@@ -186,7 +192,7 @@ class Shoot
 		super
 
 		# Out of screen ?
-		if self.y < -100 * 100 or self.y > 700 * 100 or self.x < -100 * 100 or self.x > 900 * 100 then
+		if self.y < -100 * 100 or self.y > scene.height + 10000 or self.x < -100 * 100 or self.x > scene.width + 10000 then
 			self.exists = false
 		end
 	end
@@ -255,7 +261,7 @@ abstract class Enemy
 		super
 
 		# Out of screen ?
-		if self.y > 700 * 100 or self.x < -100 * 100 or self.x > 900 * 100 then
+		if self.y > scene.height + 10000 or self.x < -100 * 100 or self.x > scene.width + 10000 then
 			# Note: no control on the top to let ennemies appear
 			self.exists = false
 		end
@@ -282,7 +288,7 @@ abstract class Enemy
 		self.exists = false
 		scene.explosion(self.x, self.y, 5)
 		if 100.rand < 3 then
-			var upmissile = new UpMissile
+			var upmissile = new UpMissile(scene)
 			upmissile.x = self.x
 			upmissile.y = self.y
 			upmissile.vx = 0
@@ -291,7 +297,7 @@ abstract class Enemy
 			scene.hitables.add(new LootArea(upmissile, 2000))
 		else
 			for i in [0..self.loot[ do
-				var money = new Money
+				var money = new Money(scene)
 				money.x = self.x
 				money.y = self.y
 				money.set_velocity(100.rand.to_f*pi/50.0, (500+self.loot).rand)
@@ -326,7 +332,7 @@ class Enemy1
 
 		# two bullets shoot each time
 		for dx in [-11, 11] do
-			var shoot = new Shoot
+			var shoot = new Shoot(scene)
 			shoot.enemy = true
 			shoot.x = self.x + dx * 100
 			shoot.y = self.bottom
@@ -348,7 +354,7 @@ class Enemy2
 		shoot_ttl = 200
 
 		# The missile targets the player
-		var shoot = new Missile
+		var shoot = new Missile(scene)
 		shoot.enemy = true
 		shoot.x = self.x
 		shoot.y = self.bottom
@@ -370,7 +376,7 @@ class Enemy3
 		shoot_ttl = 50
 
 		for i in [0..10[ do
-			var shoot = new Shoot
+			var shoot = new Shoot(scene)
 			shoot.enemy = true
 			shoot.x = self.x
 			shoot.y = self.bottom
@@ -416,7 +422,7 @@ class Enemy4
 		end
 
 		# Shoot with the turret angle
-		var shoot = new Shoot
+		var shoot = new Shoot(scene)
 		shoot.enemy = true
 		shoot.x = self.x
 		shoot.y = self.y
@@ -461,7 +467,7 @@ class Boss
 		super
 		self.width = 128 * 100
 		self.height = 100 * 100
-		self.x = 400 * 100
+		self.x = scene.width / 2
 		self.y = -100 * 100
 		self.left_part = new BossPart(self, -48*100)
 		self.right_part = new BossPart(self, 48*100)
@@ -480,9 +486,9 @@ class Boss
 		else if self.vx == 0 then
 			self.vx = 100
 			self.vy = 0
-		else if self.x > 700 * 100 and self.vx > 0 then
+		else if self.x > scene.width - 10000 and self.vx > 0 then
 			self.vx = -self.vx
-		else if self.x < 100 * 100 and self.vx < 0 then
+		else if self.x < 10000 and self.vx < 0 then
 			self.vx = -self.vx
 		end
 
@@ -506,7 +512,7 @@ class Boss
 		end
 
 		# Shoot the player with a basic bullet
-		var shoot = new Shoot
+		var shoot = new Shoot(scene)
 		shoot.enemy = true
 		shoot.x = self.x
 		shoot.y = self.bottom
@@ -584,7 +590,7 @@ class BossPart
 		shoot_ttl = 600
 
 		# Shoot a missile that targets the player
-		var shoot = new Missile
+		var shoot = new Missile(scene)
 		shoot.enemy = true
 		shoot.x = self.x
 		shoot.y = self.bottom
@@ -612,8 +618,11 @@ end
 abstract class Loot
 	super Hitable
 
-	init
+	var scene: PlayScene
+
+	init(scene: PlayScene)
 	do
+		self.scene = scene
 		self.width = 400
 		self.height = 400
 	end
@@ -627,7 +636,7 @@ abstract class Loot
 		super
 
 		# Out of screen ?
-		if self.y > 700 * 100 then
+		if self.y > scene.height + 10000 then
 			self.exists = false
 		end
 
@@ -759,11 +768,16 @@ end
 class Star
 	super Sprite
 
-	init
+	# The scene of the sprite
+	# Is used with bound limits
+	var scene: ShotScene
+
+	init(scene: ShotScene)
 	do
+		self.scene = scene
 		# Randomely places stars on the plane
-		self.x = 800.rand * 100
-		self.y = 600.rand * 100
+		self.x = scene.width.rand
+		self.y = scene.height.rand
 		self.vy = 40.rand + 11
 	end
 
@@ -772,9 +786,9 @@ class Star
 		super
 
 		# Replace the star on the top
-		if self.y > 600 * 100 then
+		if self.y > scene.height then
 			self.y = 200.rand * -100
-			self.x = 800.rand * 100
+			self.x = scene.width.rand
 			self.vy = 40.rand + 11
 		end
 	end
@@ -834,8 +848,8 @@ class PlayScene
 	do
 		super
 		self.player = new Player(self)
-		player.x = 400 * 100
-		player.y = 500 * 100
+		player.x = self.width / 2
+		player.y = self.height - 10000
 		self.sprites.add(background)
 		self.sprites.add(pasive_stuff)
 		self.sprites.add(loots)
@@ -846,7 +860,7 @@ class PlayScene
 		self.sprites.add(hitables)
 
 		for i in [0..100[ do
-			background.add(new Star)
+			background.add(new Star(self))
 		end
 
 		hitables.add(player.going_target)
@@ -905,7 +919,7 @@ class PlayScene
 			else
 				enemy = new Enemy4(self)
 			end
-			enemy.x = 600.rand * 100 + 10000
+			enemy.x = (self.width - 20000).rand + 10000
 			enemy.vy = 200.rand + 100
 			if 10.rand < 3 then
 				enemy.vx = 200.rand - 100
@@ -980,7 +994,7 @@ class MenuScene
 	do
 		super
 		for i in [0..100[ do
-			sprites.add(new Star)
+			sprites.add(new Star(self))
 		end
 	end
 
