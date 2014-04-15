@@ -21,7 +21,8 @@ import abstract_collection
 abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
-	redef readable var _length: Int = 0
+	var _length: Int = 0
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
 
@@ -361,7 +362,8 @@ private class ArrayIterator[E]
 		_index = 0
 	end
 
-	redef readable var _index: Int = 0
+	var _index: Int = 0
+	redef fun index do return _index
 	var _array: AbstractArrayRead[E]
 end
 

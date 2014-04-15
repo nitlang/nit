@@ -5,7 +5,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -17,50 +17,47 @@ module opts
 # Super class of all option's class
 abstract class Option
 	# Names for the option (including long and short ones)
-	readable var _names: Array[String]
+	var names: Array[String]
 
 	# Type of the value of the option
 	type VALUE: nullable Object
 
 	# Human readable description of the option
-	readable var _helptext: String 
+	var helptext: String
 
 	# Gathering errors during parsing
-	readable var _errors: Array[String]
+	var errors: Array[String]
 
 	# Is this option mandatory?
-	readable writable var _mandatory: Bool 
+	var mandatory: Bool writable
 
 	# Has this option been read?
-	readable var _read:Bool
+	var read:Bool writable
 
 	# Current value of this option
-	writable var _value: nullable VALUE
-
-	# Current value of this option
-	fun value: VALUE do return _value.as(VALUE)
+	var value: VALUE writable
 
 	# Default value of this option
-	readable writable var _default_value: nullable VALUE
+	var default_value: nullable VALUE writable
 
 	# Create a new option
 	init init_opt(help: String, default: nullable VALUE, names: nullable Array[String])
 	do
 		if names == null then
-			_names = new Array[String]
+			self.names = new Array[String]
 		else
-			_names = names.to_a
+			self.names = names.to_a
 		end
-		_helptext = help
-		_mandatory = false
-		_read = false
-		_default_value = default
-		_value = default 
-		_errors = new Array[String]
+		helptext = help
+		mandatory = false
+		read = false
+		default_value = default
+		value = default
+		errors = new Array[String]
 	end
 
 	# Add new aliases for this option
-	fun add_aliases(names: String...) do _names.add_all(names)
+	fun add_aliases(names: String...) do names.add_all(names)
 	
 	# An help text for this option with default settings
 	redef fun to_s do return pretty(2)
@@ -69,7 +66,7 @@ abstract class Option
 	fun pretty(off: Int): String
 	do
 		var text = new FlatBuffer.from("  ")
-		text.append(_names.join(", "))
+		text.append(names.join(", "))
 		text.append("  ")
 		var rest = off - text.length
 		if rest > 0 then text.append(" " * rest)
@@ -88,7 +85,7 @@ abstract class Option
 	# Consume parameters for this option
 	protected fun read_param(it: Iterator[String])
 	do
-		_read = true
+		read = true
 	end
 end
 
@@ -133,7 +130,7 @@ abstract class OptionParameter
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
-	readable writable var _parameter_mandatory: Bool
+	var parameter_mandatory: Bool writable
 
 	redef fun read_param(it)
 	do
@@ -142,8 +139,8 @@ abstract class OptionParameter
 			value = convert(it.item)
 			it.next
 		else
-			if _parameter_mandatory then
-				_errors.add("Parameter expected for option {names.first}.")
+			if parameter_mandatory then
+				errors.add("Parameter expected for option {names.first}.")
 			end
 		end
 	end
@@ -151,7 +148,7 @@ abstract class OptionParameter
 	init init_opt(h, d, n)
 	do
 		super
-		_parameter_mandatory = true
+		parameter_mandatory = true
 	end
 end
 
@@ -167,22 +164,22 @@ end
 class OptionEnum
 	super OptionParameter
 	redef type VALUE: Int
-	var _values: Array[String]
+	var values: Array[String]
 
 	init(values: Array[String], help: String, default: Int, names: String...)
 	do
 		assert values.length > 0
-		_values = values.to_a
+		self.values = values.to_a
 		init_opt("{help} <{values.join(", ")}>", default, names)
 	end
 
 	redef fun convert(str)
 	do
-		var id = _values.index_of(str)
+		var id = values.index_of(str)
 		if id == -1 then
-			var e = "Unrecognized value for option {_names.join(", ")}.\n"
-			e += "Expected values are: {_values.join(", ")}."
-			_errors.add(e)
+			var e = "Unrecognized value for option {names.join(", ")}.\n"
+			e += "Expected values are: {values.join(", ")}."
+			errors.add(e)
 		end
 		return id
 	end
@@ -192,7 +189,7 @@ class OptionEnum
 	redef fun pretty_default
 	do
 		if default_value != null then
-			return " ({_values[default_value.as(not null)]})"
+			return " ({values[default_value.as(not null)]})"
 		else
 			return ""
 		end
@@ -214,29 +211,29 @@ class OptionArray
 
 	init(help: String, names: String...)
 	do
-		_values = new Array[String]
-		init_opt(help, _values, names)
+		values = new Array[String]
+		init_opt(help, values, names)
 	end
 
-	var _values: Array[String]	
+	private var values: Array[String]
 	redef fun convert(str)
 	do
-		_values.add(str)
-		return _values
+		values.add(str)
+		return values
 	end
 end
 
 class OptionContext
-	readable var _options: Array[Option] 
-	readable var _rest: Array[String] 
-	readable var _errors: Array[String]
+	var options: Array[Option]
+	var rest: Array[String]
+	var errors: Array[String]
 
-	var _optmap: Map[String, Option]
+	private var optmap: Map[String, Option]
 	
 	fun usage
 	do
 		var lmax = 1
-		for i in _options do
+		for i in options do
 			var l = 3
 			for n in i.names do
 				l += n.length + 2
@@ -244,7 +241,7 @@ class OptionContext
 			if lmax < l then lmax = l
 		end
 		
-		for i in _options do
+		for i in options do
 			print(i.pretty(lmax))
 		end
 	end
@@ -260,7 +257,7 @@ class OptionContext
 	do
 		var parseargs = true
 		build
-		var rest = _rest
+		var rest = rest
 
 		while parseargs and it.is_ok do
 			var str = it.item
@@ -274,8 +271,8 @@ class OptionContext
 					var next_called = false
 					for i in [1..str.length] do
 						var short_opt = "-" + str.chars[i].to_s
-						if _optmap.has_key(short_opt) then
-							var option = _optmap[short_opt]
+						if optmap.has_key(short_opt) then
+							var option = optmap[short_opt]
 							if option isa OptionParameter then
 								it.next
 								next_called = true
@@ -285,8 +282,8 @@ class OptionContext
 					end
 					if not next_called then it.next
 				else
-					if _optmap.has_key(str) then
-						var opt = _optmap[str]
+					if optmap.has_key(str) then
+						var opt = optmap[str]
 						it.next
 						opt.read_param(it)
 					else
@@ -297,9 +294,9 @@ class OptionContext
 			end
 		end
 
-		for opt in _options do
+		for opt in options do
 			if opt.mandatory and not opt.read then
-				_errors.add("Mandatory option {opt.names.join(", ")} not found.")
+				errors.add("Mandatory option {opt.names.join(", ")} not found.")
 			end
 		end
 	end
@@ -307,23 +304,23 @@ class OptionContext
 	fun add_option(opts: Option...)
 	do
 		for opt in opts do
-			_options.add(opt)
+			options.add(opt)
 		end
 	end
 
 	init
 	do
-		_options = new Array[Option]
-		_optmap = new HashMap[String, Option]
-		_rest = new Array[String]
-		_errors = new Array[String]
+		options = new Array[Option]
+		optmap = new HashMap[String, Option]
+		rest = new Array[String]
+		errors = new Array[String]
 	end
 
 	private fun build
 	do
-		for o in _options do
+		for o in options do
 			for n in o.names do
-				_optmap[n] = o
+				optmap[n] = o
 			end
 		end
 	end
@@ -332,9 +329,9 @@ class OptionContext
 	do
 		var errors: Array[String] = new Array[String]
 
-		errors.add_all(_errors)
+		errors.add_all(errors)
 
-		for o in _options do
+		for o in options do
 			for e in o.errors do
 				errors.add(e)
 			end

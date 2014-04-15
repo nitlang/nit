@@ -163,19 +163,19 @@ end
 class Container[E]
 	super Collection[E]
 
-	redef fun first do return _item
+	redef fun first do return item
 
 	redef fun is_empty do return false
 
 	redef fun length do return 1
 
-	redef fun has(an_item) do return _item == an_item
+	redef fun has(an_item) do return item == an_item
 
-	redef fun has_only(an_item) do return _item == an_item
+	redef fun has_only(an_item) do return item == an_item
 
 	redef fun count(an_item)
 	do
-		if _item == an_item then
+		if item == an_item then
 			return 1
 		else
 			return 0
@@ -185,10 +185,10 @@ class Container[E]
 	redef fun iterator do return new ContainerIterator[E](self)
 
 	# Create a new instance with a given initial value.
-	init(e: E) do _item = e
+	init(e: E) do item = e
 
 	# The stored item
-	readable writable var _item: E
+	var item: E writable
 end
 
 # This iterator is quite stupid since it is used for only one item.
@@ -196,11 +196,11 @@ private class ContainerIterator[E]
 	super Iterator[E]
 	redef fun item do return _container.item
 
-	redef fun next do _is_ok = false
+	redef fun next do is_ok = false
 
 	init(c: Container[E]) do _container = c
 
-	redef readable var _is_ok: Bool = true
+	redef var is_ok: Bool = true
 
 	var _container: Container[E]
 end
@@ -900,15 +900,15 @@ end
 class Couple[F, S]
 
 	# The first element of the couple.
-	readable writable var _first: F
+	var first: F writable
 
 	# The second element of the couple.
-	readable writable var _second: S
+	var second: S writable
 
 	# Create a new instance with a first and a second object.
 	init(f: F, s: S)
 	do
-		_first = f
-		_second = s
+		first = f
+		second = s
 	end
 end
