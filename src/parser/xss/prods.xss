@@ -27,12 +27,12 @@ class @ename
 	super ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable var _n_@name: List[@etype] = new List[@etype]
+    var n_@name: List[@etype] = new List[@etype]
 $   else
 $   if @modifier
-    readable var _n_@name: nullable @etype = null
+    var n_@name: nullable @etype = null
 $   else
-    readable var _n_@name: @etype
+    var n_@name: @etype
 $   end
 $   end
 $ end
@@ -41,14 +41,14 @@ $ end
 
 class Start
 	super Prod
-    readable var _n_base: nullable $baseprod
-    readable var _n_eof: EOF
+    var n_base: nullable $baseprod
+    var n_eof: EOF
     init(
         nbase: nullable $baseprod,
         neof: EOF)
     do
-        _n_base = nbase
-        _n_eof = neof
+        n_base = nbase
+        n_eof = neof
     end
 
 end
@@ -77,13 +77,13 @@ $ end
 		empty_init
 $ foreach {elem}
 $   if @is_list
-		_n_@{name}.unsafe_add_all(n@{name})
+		n_@{name}.unsafe_add_all(n@{name})
 $   else
 $   if {@modifier}
-		_n_@name = n@{name}
+		n_@name = n@{name}
 		if n@{name} != null then n@{name}.parent = self
 $   else
-		_n_@name = n@{name}.as(not null)
+		n_@name = n@{name}.as(not null)
 		n@{name}.parent = self
 $   end
 $   end
@@ -94,9 +94,9 @@ $ end
 	do
 $ foreach {elem}
 $   if @is_list
-		if _n_@{name}.replace_child(old_child, new_child) then return
+		if n_@{name}.replace_child(old_child, new_child) then return
 $   else
-		if _n_@{name} == old_child then
+		if n_@{name} == old_child then
 $   if @modifier
 			n_@{name} = new_child.as(nullable @etype)
 $   else
@@ -128,9 +128,9 @@ $   end foreach
 	do
 $   foreach {elem}
 $     if @is_list
-		_n_@{name}.visit_all(v)
+		n_@{name}.visit_all(v)
 $     else
-		v.enter_visit(_n_@{name})
+		v.enter_visit(n_@{name})
 $     end
 $   end foreach
 	end
@@ -140,12 +140,12 @@ $ end foreach
 redef class Start
     redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
-        if _n_base == old_child then
+        if n_base == old_child then
             if new_child == null then
             else
                 new_child.parent = self
 		assert new_child isa $baseprod
-                _n_base = new_child
+                n_base = new_child
             end
             old_child.parent = null
             return
@@ -154,10 +154,10 @@ redef class Start
 
     redef fun visit_all(v: Visitor)
     do
-        if _n_base != null then
-            v.enter_visit(_n_base.as(not null))
+        if n_base != null then
+            v.enter_visit(n_base.as(not null))
         end
-	v.enter_visit(_n_eof)
+	v.enter_visit(n_eof)
     end
 end
 $ end template

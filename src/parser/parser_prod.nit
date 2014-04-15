@@ -17,22 +17,22 @@ redef class AModule
 	)
 	do
 		empty_init
-		_n_moduledecl = nmoduledecl
+		n_moduledecl = nmoduledecl
 		if nmoduledecl != null then nmoduledecl.parent = self
-		_n_imports.unsafe_add_all(nimports)
-		_n_extern_code_blocks.unsafe_add_all(nextern_code_blocks)
-		_n_classdefs.unsafe_add_all(nclassdefs)
+		n_imports.unsafe_add_all(nimports)
+		n_extern_code_blocks.unsafe_add_all(nextern_code_blocks)
+		n_classdefs.unsafe_add_all(nclassdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_moduledecl == old_child then
+		if n_moduledecl == old_child then
 			n_moduledecl = new_child.as(nullable AModuledecl)
 			return
 		end
-		if _n_imports.replace_child(old_child, new_child) then return
-		if _n_extern_code_blocks.replace_child(old_child, new_child) then return
-		if _n_classdefs.replace_child(old_child, new_child) then return
+		if n_imports.replace_child(old_child, new_child) then return
+		if n_extern_code_blocks.replace_child(old_child, new_child) then return
+		if n_classdefs.replace_child(old_child, new_child) then return
 	end
 
 	redef fun n_moduledecl=(node)
@@ -44,10 +44,10 @@ redef class AModule
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_moduledecl)
-		_n_imports.visit_all(v)
-		_n_extern_code_blocks.visit_all(v)
-		_n_classdefs.visit_all(v)
+		v.enter_visit(n_moduledecl)
+		n_imports.visit_all(v)
+		n_extern_code_blocks.visit_all(v)
+		n_classdefs.visit_all(v)
 	end
 end
 redef class AModuledecl
@@ -61,31 +61,31 @@ redef class AModuledecl
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwmodule = nkwmodule.as(not null)
+		n_kwmodule = nkwmodule.as(not null)
 		nkwmodule.parent = self
-		_n_name = nname.as(not null)
+		n_name = nname.as(not null)
 		nname.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwmodule == old_child then
+		if n_kwmodule == old_child then
 			n_kwmodule = new_child.as(TKwmodule)
 			return
 		end
-		if _n_name == old_child then
+		if n_name == old_child then
 			n_name = new_child.as(AModuleName)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -115,10 +115,10 @@ redef class AModuledecl
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwmodule)
-		v.enter_visit(_n_name)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwmodule)
+		v.enter_visit(n_name)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AStdImport
@@ -132,31 +132,31 @@ redef class AStdImport
 	)
 	do
 		empty_init
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwimport = nkwimport.as(not null)
+		n_kwimport = nkwimport.as(not null)
 		nkwimport.parent = self
-		_n_name = nname.as(not null)
+		n_name = nname.as(not null)
 		nname.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwimport == old_child then
+		if n_kwimport == old_child then
 			n_kwimport = new_child.as(TKwimport)
 			return
 		end
-		if _n_name == old_child then
+		if n_name == old_child then
 			n_name = new_child.as(AModuleName)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -186,10 +186,10 @@ redef class AStdImport
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwimport)
-		v.enter_visit(_n_name)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwimport)
+		v.enter_visit(n_name)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ANoImport
@@ -202,25 +202,25 @@ redef class ANoImport
 	)
 	do
 		empty_init
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwimport = nkwimport.as(not null)
+		n_kwimport = nkwimport.as(not null)
 		nkwimport.parent = self
-		_n_kwend = nkwend.as(not null)
+		n_kwend = nkwend.as(not null)
 		nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwimport == old_child then
+		if n_kwimport == old_child then
 			n_kwimport = new_child.as(TKwimport)
 			return
 		end
-		if _n_kwend == old_child then
+		if n_kwend == old_child then
 			n_kwend = new_child.as(TKwend)
 			return
 		end
@@ -245,9 +245,9 @@ redef class ANoImport
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwimport)
-		v.enter_visit(_n_kwend)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwimport)
+		v.enter_visit(n_kwend)
 	end
 end
 redef class APublicVisibility
@@ -276,13 +276,13 @@ redef class APrivateVisibility
 	)
 	do
 		empty_init
-		_n_kwprivate = nkwprivate.as(not null)
+		n_kwprivate = nkwprivate.as(not null)
 		nkwprivate.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwprivate == old_child then
+		if n_kwprivate == old_child then
 			n_kwprivate = new_child.as(TKwprivate)
 			return
 		end
@@ -297,7 +297,7 @@ redef class APrivateVisibility
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwprivate)
+		v.enter_visit(n_kwprivate)
 	end
 end
 redef class AProtectedVisibility
@@ -308,13 +308,13 @@ redef class AProtectedVisibility
 	)
 	do
 		empty_init
-		_n_kwprotected = nkwprotected.as(not null)
+		n_kwprotected = nkwprotected.as(not null)
 		nkwprotected.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwprotected == old_child then
+		if n_kwprotected == old_child then
 			n_kwprotected = new_child.as(TKwprotected)
 			return
 		end
@@ -329,7 +329,7 @@ redef class AProtectedVisibility
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwprotected)
+		v.enter_visit(n_kwprotected)
 	end
 end
 redef class AIntrudeVisibility
@@ -340,13 +340,13 @@ redef class AIntrudeVisibility
 	)
 	do
 		empty_init
-		_n_kwintrude = nkwintrude.as(not null)
+		n_kwintrude = nkwintrude.as(not null)
 		nkwintrude.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwintrude == old_child then
+		if n_kwintrude == old_child then
 			n_kwintrude = new_child.as(TKwintrude)
 			return
 		end
@@ -361,7 +361,7 @@ redef class AIntrudeVisibility
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwintrude)
+		v.enter_visit(n_kwintrude)
 	end
 end
 redef class AStdClassdef
@@ -382,61 +382,61 @@ redef class AStdClassdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_classkind = nclasskind.as(not null)
+		n_classkind = nclasskind.as(not null)
 		nclasskind.parent = self
-		_n_id = nid
+		n_id = nid
 		if nid != null then nid.parent = self
-		_n_formaldefs.unsafe_add_all(nformaldefs)
-		_n_annotations = nannotations
+		n_formaldefs.unsafe_add_all(nformaldefs)
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
-		_n_extern_code_block = nextern_code_block
+		n_extern_code_block = nextern_code_block
 		if nextern_code_block != null then nextern_code_block.parent = self
-		_n_superclasses.unsafe_add_all(nsuperclasses)
-		_n_propdefs.unsafe_add_all(npropdefs)
-		_n_kwend = nkwend.as(not null)
+		n_superclasses.unsafe_add_all(nsuperclasses)
+		n_propdefs.unsafe_add_all(npropdefs)
+		n_kwend = nkwend.as(not null)
 		nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_classkind == old_child then
+		if n_classkind == old_child then
 			n_classkind = new_child.as(AClasskind)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(nullable TClassid)
 			return
 		end
-		if _n_formaldefs.replace_child(old_child, new_child) then return
-		if _n_annotations == old_child then
+		if n_formaldefs.replace_child(old_child, new_child) then return
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
-		if _n_extern_code_block == old_child then
+		if n_extern_code_block == old_child then
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
-		if _n_superclasses.replace_child(old_child, new_child) then return
-		if _n_propdefs.replace_child(old_child, new_child) then return
-		if _n_kwend == old_child then
+		if n_superclasses.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
+		if n_kwend == old_child then
 			n_kwend = new_child.as(TKwend)
 			return
 		end
@@ -486,17 +486,17 @@ redef class AStdClassdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_classkind)
-		v.enter_visit(_n_id)
-		_n_formaldefs.visit_all(v)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_extern_code_block)
-		_n_superclasses.visit_all(v)
-		_n_propdefs.visit_all(v)
-		v.enter_visit(_n_kwend)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_classkind)
+		v.enter_visit(n_id)
+		n_formaldefs.visit_all(v)
+		v.enter_visit(n_annotations)
+		v.enter_visit(n_extern_code_block)
+		n_superclasses.visit_all(v)
+		n_propdefs.visit_all(v)
+		v.enter_visit(n_kwend)
 	end
 end
 redef class ATopClassdef
@@ -507,19 +507,19 @@ redef class ATopClassdef
 	)
 	do
 		empty_init
-		_n_propdefs.unsafe_add_all(npropdefs)
+		n_propdefs.unsafe_add_all(npropdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_propdefs.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_propdefs.visit_all(v)
+		n_propdefs.visit_all(v)
 	end
 end
 redef class AMainClassdef
@@ -530,19 +530,19 @@ redef class AMainClassdef
 	)
 	do
 		empty_init
-		_n_propdefs.unsafe_add_all(npropdefs)
+		n_propdefs.unsafe_add_all(npropdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_propdefs.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_propdefs.visit_all(v)
+		n_propdefs.visit_all(v)
 	end
 end
 redef class AConcreteClasskind
@@ -553,13 +553,13 @@ redef class AConcreteClasskind
 	)
 	do
 		empty_init
-		_n_kwclass = nkwclass.as(not null)
+		n_kwclass = nkwclass.as(not null)
 		nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwclass == old_child then
+		if n_kwclass == old_child then
 			n_kwclass = new_child.as(TKwclass)
 			return
 		end
@@ -574,7 +574,7 @@ redef class AConcreteClasskind
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwclass)
+		v.enter_visit(n_kwclass)
 	end
 end
 redef class AAbstractClasskind
@@ -586,19 +586,19 @@ redef class AAbstractClasskind
 	)
 	do
 		empty_init
-		_n_kwabstract = nkwabstract.as(not null)
+		n_kwabstract = nkwabstract.as(not null)
 		nkwabstract.parent = self
-		_n_kwclass = nkwclass.as(not null)
+		n_kwclass = nkwclass.as(not null)
 		nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwabstract == old_child then
+		if n_kwabstract == old_child then
 			n_kwabstract = new_child.as(TKwabstract)
 			return
 		end
-		if _n_kwclass == old_child then
+		if n_kwclass == old_child then
 			n_kwclass = new_child.as(TKwclass)
 			return
 		end
@@ -618,8 +618,8 @@ redef class AAbstractClasskind
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwabstract)
-		v.enter_visit(_n_kwclass)
+		v.enter_visit(n_kwabstract)
+		v.enter_visit(n_kwclass)
 	end
 end
 redef class AInterfaceClasskind
@@ -630,13 +630,13 @@ redef class AInterfaceClasskind
 	)
 	do
 		empty_init
-		_n_kwinterface = nkwinterface.as(not null)
+		n_kwinterface = nkwinterface.as(not null)
 		nkwinterface.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwinterface == old_child then
+		if n_kwinterface == old_child then
 			n_kwinterface = new_child.as(TKwinterface)
 			return
 		end
@@ -651,7 +651,7 @@ redef class AInterfaceClasskind
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwinterface)
+		v.enter_visit(n_kwinterface)
 	end
 end
 redef class AEnumClasskind
@@ -662,13 +662,13 @@ redef class AEnumClasskind
 	)
 	do
 		empty_init
-		_n_kwenum = nkwenum.as(not null)
+		n_kwenum = nkwenum.as(not null)
 		nkwenum.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwenum == old_child then
+		if n_kwenum == old_child then
 			n_kwenum = new_child.as(TKwenum)
 			return
 		end
@@ -683,7 +683,7 @@ redef class AEnumClasskind
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwenum)
+		v.enter_visit(n_kwenum)
 	end
 end
 redef class AExternClasskind
@@ -695,19 +695,19 @@ redef class AExternClasskind
 	)
 	do
 		empty_init
-		_n_kwextern = nkwextern.as(not null)
+		n_kwextern = nkwextern.as(not null)
 		nkwextern.parent = self
-		_n_kwclass = nkwclass
+		n_kwclass = nkwclass
 		if nkwclass != null then nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwextern == old_child then
+		if n_kwextern == old_child then
 			n_kwextern = new_child.as(TKwextern)
 			return
 		end
-		if _n_kwclass == old_child then
+		if n_kwclass == old_child then
 			n_kwclass = new_child.as(nullable TKwclass)
 			return
 		end
@@ -727,8 +727,8 @@ redef class AExternClasskind
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwextern)
-		v.enter_visit(_n_kwclass)
+		v.enter_visit(n_kwextern)
+		v.enter_visit(n_kwclass)
 	end
 end
 redef class AFormaldef
@@ -741,25 +741,25 @@ redef class AFormaldef
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_type = ntype
+		n_type = ntype
 		if ntype != null then ntype.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TClassid)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -784,9 +784,9 @@ redef class AFormaldef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_id)
+		v.enter_visit(n_type)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ASuperclass
@@ -799,25 +799,25 @@ redef class ASuperclass
 	)
 	do
 		empty_init
-		_n_kwsuper = nkwsuper.as(not null)
+		n_kwsuper = nkwsuper.as(not null)
 		nkwsuper.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwsuper == old_child then
+		if n_kwsuper == old_child then
 			n_kwsuper = new_child.as(TKwsuper)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -842,9 +842,9 @@ redef class ASuperclass
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwsuper)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwsuper)
+		v.enter_visit(n_type)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AAttrPropdef
@@ -865,73 +865,73 @@ redef class AAttrPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_readable = nreadable
+		n_readable = nreadable
 		if nreadable != null then nreadable.parent = self
-		_n_writable = nwritable
+		n_writable = nwritable
 		if nwritable != null then nwritable.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwvar = nkwvar.as(not null)
+		n_kwvar = nkwvar.as(not null)
 		nkwvar.parent = self
-		_n_id = nid
+		n_id = nid
 		if nid != null then nid.parent = self
-		_n_id2 = nid2
+		n_id2 = nid2
 		if nid2 != null then nid2.parent = self
-		_n_type = ntype
+		n_type = ntype
 		if ntype != null then ntype.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
-		_n_expr = nexpr
+		n_expr = nexpr
 		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_readable == old_child then
+		if n_readable == old_child then
 			n_readable = new_child.as(nullable AAble)
 			return
 		end
-		if _n_writable == old_child then
+		if n_writable == old_child then
 			n_writable = new_child.as(nullable AAble)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwvar == old_child then
+		if n_kwvar == old_child then
 			n_kwvar = new_child.as(TKwvar)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(nullable TAttrid)
 			return
 		end
-		if _n_id2 == old_child then
+		if n_id2 == old_child then
 			n_id2 = new_child.as(nullable TId)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
 		end
@@ -996,17 +996,17 @@ redef class AAttrPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_readable)
-		v.enter_visit(_n_writable)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwvar)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_id2)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_readable)
+		v.enter_visit(n_writable)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwvar)
+		v.enter_visit(n_id)
+		v.enter_visit(n_id2)
+		v.enter_visit(n_type)
+		v.enter_visit(n_annotations)
+		v.enter_visit(n_expr)
 	end
 end
 redef class AMethPropdef
@@ -1021,37 +1021,37 @@ redef class AMethPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_methid = nmethid
+		n_methid = nmethid
 		if nmethid != null then nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(nullable AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
@@ -1086,11 +1086,11 @@ redef class AMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
 	end
 end
 redef class ADeferredMethPropdef
@@ -1107,49 +1107,49 @@ redef class ADeferredMethPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwmeth = nkwmeth.as(not null)
+		n_kwmeth = nkwmeth.as(not null)
 		nkwmeth.parent = self
-		_n_methid = nmethid.as(not null)
+		n_methid = nmethid.as(not null)
 		nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwmeth == old_child then
+		if n_kwmeth == old_child then
 			n_kwmeth = new_child.as(TKwmeth)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -1194,13 +1194,13 @@ redef class ADeferredMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwmeth)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AInternMethPropdef
@@ -1216,43 +1216,43 @@ redef class AInternMethPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwmeth = nkwmeth.as(not null)
+		n_kwmeth = nkwmeth.as(not null)
 		nkwmeth.parent = self
-		_n_methid = nmethid.as(not null)
+		n_methid = nmethid.as(not null)
 		nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwmeth == old_child then
+		if n_kwmeth == old_child then
 			n_kwmeth = new_child.as(TKwmeth)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
@@ -1292,12 +1292,12 @@ redef class AInternMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwmeth)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
 	end
 end
 redef class AExternMethPropdef
@@ -1316,61 +1316,61 @@ redef class AExternMethPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwmeth = nkwmeth.as(not null)
+		n_kwmeth = nkwmeth.as(not null)
 		nkwmeth.parent = self
-		_n_methid = nmethid.as(not null)
+		n_methid = nmethid.as(not null)
 		nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
-		_n_extern = nextern
+		n_extern = nextern
 		if nextern != null then nextern.parent = self
-		_n_extern_calls = nextern_calls
+		n_extern_calls = nextern_calls
 		if nextern_calls != null then nextern_calls.parent = self
-		_n_extern_code_block = nextern_code_block
+		n_extern_code_block = nextern_code_block
 		if nextern_code_block != null then nextern_code_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwmeth == old_child then
+		if n_kwmeth == old_child then
 			n_kwmeth = new_child.as(TKwmeth)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
-		if _n_extern == old_child then
+		if n_extern == old_child then
 			n_extern = new_child.as(nullable TString)
 			return
 		end
-		if _n_extern_calls == old_child then
+		if n_extern_calls == old_child then
 			n_extern_calls = new_child.as(nullable AExternCalls)
 			return
 		end
-		if _n_extern_code_block == old_child then
+		if n_extern_code_block == old_child then
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
@@ -1425,15 +1425,15 @@ redef class AExternMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_extern)
-		v.enter_visit(_n_extern_calls)
-		v.enter_visit(_n_extern_code_block)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwmeth)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
+		v.enter_visit(n_extern)
+		v.enter_visit(n_extern_calls)
+		v.enter_visit(n_extern_code_block)
 	end
 end
 redef class AConcreteMethPropdef
@@ -1451,55 +1451,55 @@ redef class AConcreteMethPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwmeth = nkwmeth.as(not null)
+		n_kwmeth = nkwmeth.as(not null)
 		nkwmeth.parent = self
-		_n_methid = nmethid
+		n_methid = nmethid
 		if nmethid != null then nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwmeth == old_child then
+		if n_kwmeth == old_child then
 			n_kwmeth = new_child.as(TKwmeth)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(nullable AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
@@ -1549,14 +1549,14 @@ redef class AConcreteMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_block)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwmeth)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
+		v.enter_visit(n_annotations)
+		v.enter_visit(n_block)
 	end
 end
 redef class AConcreteInitPropdef
@@ -1574,55 +1574,55 @@ redef class AConcreteInitPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwinit = nkwinit.as(not null)
+		n_kwinit = nkwinit.as(not null)
 		nkwinit.parent = self
-		_n_methid = nmethid
+		n_methid = nmethid
 		if nmethid != null then nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwinit == old_child then
+		if n_kwinit == old_child then
 			n_kwinit = new_child.as(TKwinit)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(nullable AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
@@ -1672,14 +1672,14 @@ redef class AConcreteInitPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwinit)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_block)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwinit)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
+		v.enter_visit(n_annotations)
+		v.enter_visit(n_block)
 	end
 end
 redef class AExternInitPropdef
@@ -1698,61 +1698,61 @@ redef class AExternInitPropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwnew = nkwnew.as(not null)
+		n_kwnew = nkwnew.as(not null)
 		nkwnew.parent = self
-		_n_methid = nmethid
+		n_methid = nmethid
 		if nmethid != null then nmethid.parent = self
-		_n_signature = nsignature.as(not null)
+		n_signature = nsignature.as(not null)
 		nsignature.parent = self
-		_n_extern = nextern
+		n_extern = nextern
 		if nextern != null then nextern.parent = self
-		_n_extern_calls = nextern_calls
+		n_extern_calls = nextern_calls
 		if nextern_calls != null then nextern_calls.parent = self
-		_n_extern_code_block = nextern_code_block
+		n_extern_code_block = nextern_code_block
 		if nextern_code_block != null then nextern_code_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwnew == old_child then
+		if n_kwnew == old_child then
 			n_kwnew = new_child.as(TKwnew)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(nullable AMethid)
 			return
 		end
-		if _n_signature == old_child then
+		if n_signature == old_child then
 			n_signature = new_child.as(ASignature)
 			return
 		end
-		if _n_extern == old_child then
+		if n_extern == old_child then
 			n_extern = new_child.as(nullable TString)
 			return
 		end
-		if _n_extern_calls == old_child then
+		if n_extern_calls == old_child then
 			n_extern_calls = new_child.as(nullable AExternCalls)
 			return
 		end
-		if _n_extern_code_block == old_child then
+		if n_extern_code_block == old_child then
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
@@ -1807,15 +1807,15 @@ redef class AExternInitPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwnew)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_extern)
-		v.enter_visit(_n_extern_calls)
-		v.enter_visit(_n_extern_code_block)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwnew)
+		v.enter_visit(n_methid)
+		v.enter_visit(n_signature)
+		v.enter_visit(n_extern)
+		v.enter_visit(n_extern_calls)
+		v.enter_visit(n_extern_code_block)
 	end
 end
 redef class AMainMethPropdef
@@ -1827,19 +1827,19 @@ redef class AMainMethPropdef
 	)
 	do
 		empty_init
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
@@ -1859,8 +1859,8 @@ redef class AMainMethPropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_block)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_block)
 	end
 end
 redef class ATypePropdef
@@ -1877,49 +1877,49 @@ redef class ATypePropdef
 	)
 	do
 		empty_init
-		_n_doc = ndoc
+		n_doc = ndoc
 		if ndoc != null then ndoc.parent = self
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility.as(not null)
+		n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_kwtype = nkwtype.as(not null)
+		n_kwtype = nkwtype.as(not null)
 		nkwtype.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_doc == old_child then
+		if n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
 			return
 		end
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwtype == old_child then
+		if n_kwtype == old_child then
 			n_kwtype = new_child.as(TKwtype)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TClassid)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -1964,13 +1964,13 @@ redef class ATypePropdef
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwtype)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_doc)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwtype)
+		v.enter_visit(n_id)
+		v.enter_visit(n_type)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AReadAble
@@ -1982,19 +1982,19 @@ redef class AReadAble
 	)
 	do
 		empty_init
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_kwreadable = nkwreadable.as(not null)
+		n_kwreadable = nkwreadable.as(not null)
 		nkwreadable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_kwreadable == old_child then
+		if n_kwreadable == old_child then
 			n_kwreadable = new_child.as(TKwreadable)
 			return
 		end
@@ -2014,8 +2014,8 @@ redef class AReadAble
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_kwreadable)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_kwreadable)
 	end
 end
 redef class AWriteAble
@@ -2028,25 +2028,25 @@ redef class AWriteAble
 	)
 	do
 		empty_init
-		_n_kwredef = nkwredef
+		n_kwredef = nkwredef
 		if nkwredef != null then nkwredef.parent = self
-		_n_visibility = nvisibility
+		n_visibility = nvisibility
 		if nvisibility != null then nvisibility.parent = self
-		_n_kwwritable = nkwwritable.as(not null)
+		n_kwwritable = nkwwritable.as(not null)
 		nkwwritable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwredef == old_child then
+		if n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
-		if _n_visibility == old_child then
+		if n_visibility == old_child then
 			n_visibility = new_child.as(nullable AVisibility)
 			return
 		end
-		if _n_kwwritable == old_child then
+		if n_kwwritable == old_child then
 			n_kwwritable = new_child.as(TKwwritable)
 			return
 		end
@@ -2071,9 +2071,9 @@ redef class AWriteAble
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwwritable)
+		v.enter_visit(n_kwredef)
+		v.enter_visit(n_visibility)
+		v.enter_visit(n_kwwritable)
 	end
 end
 redef class AIdMethid
@@ -2084,13 +2084,13 @@ redef class AIdMethid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
@@ -2105,7 +2105,7 @@ redef class AIdMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class APlusMethid
@@ -2116,13 +2116,13 @@ redef class APlusMethid
 	)
 	do
 		empty_init
-		_n_plus = nplus.as(not null)
+		n_plus = nplus.as(not null)
 		nplus.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_plus == old_child then
+		if n_plus == old_child then
 			n_plus = new_child.as(TPlus)
 			return
 		end
@@ -2137,7 +2137,7 @@ redef class APlusMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_plus)
+		v.enter_visit(n_plus)
 	end
 end
 redef class AMinusMethid
@@ -2148,13 +2148,13 @@ redef class AMinusMethid
 	)
 	do
 		empty_init
-		_n_minus = nminus.as(not null)
+		n_minus = nminus.as(not null)
 		nminus.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minus == old_child then
+		if n_minus == old_child then
 			n_minus = new_child.as(TMinus)
 			return
 		end
@@ -2169,7 +2169,7 @@ redef class AMinusMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minus)
+		v.enter_visit(n_minus)
 	end
 end
 redef class AStarMethid
@@ -2180,13 +2180,13 @@ redef class AStarMethid
 	)
 	do
 		empty_init
-		_n_star = nstar.as(not null)
+		n_star = nstar.as(not null)
 		nstar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_star == old_child then
+		if n_star == old_child then
 			n_star = new_child.as(TStar)
 			return
 		end
@@ -2201,7 +2201,7 @@ redef class AStarMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_star)
+		v.enter_visit(n_star)
 	end
 end
 redef class ASlashMethid
@@ -2212,13 +2212,13 @@ redef class ASlashMethid
 	)
 	do
 		empty_init
-		_n_slash = nslash.as(not null)
+		n_slash = nslash.as(not null)
 		nslash.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_slash == old_child then
+		if n_slash == old_child then
 			n_slash = new_child.as(TSlash)
 			return
 		end
@@ -2233,7 +2233,7 @@ redef class ASlashMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_slash)
+		v.enter_visit(n_slash)
 	end
 end
 redef class APercentMethid
@@ -2244,13 +2244,13 @@ redef class APercentMethid
 	)
 	do
 		empty_init
-		_n_percent = npercent.as(not null)
+		n_percent = npercent.as(not null)
 		npercent.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_percent == old_child then
+		if n_percent == old_child then
 			n_percent = new_child.as(TPercent)
 			return
 		end
@@ -2265,7 +2265,7 @@ redef class APercentMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_percent)
+		v.enter_visit(n_percent)
 	end
 end
 redef class AEqMethid
@@ -2276,13 +2276,13 @@ redef class AEqMethid
 	)
 	do
 		empty_init
-		_n_eq = neq.as(not null)
+		n_eq = neq.as(not null)
 		neq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_eq == old_child then
+		if n_eq == old_child then
 			n_eq = new_child.as(TEq)
 			return
 		end
@@ -2297,7 +2297,7 @@ redef class AEqMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_eq)
+		v.enter_visit(n_eq)
 	end
 end
 redef class ANeMethid
@@ -2308,13 +2308,13 @@ redef class ANeMethid
 	)
 	do
 		empty_init
-		_n_ne = nne.as(not null)
+		n_ne = nne.as(not null)
 		nne.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ne == old_child then
+		if n_ne == old_child then
 			n_ne = new_child.as(TNe)
 			return
 		end
@@ -2329,7 +2329,7 @@ redef class ANeMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ne)
+		v.enter_visit(n_ne)
 	end
 end
 redef class ALeMethid
@@ -2340,13 +2340,13 @@ redef class ALeMethid
 	)
 	do
 		empty_init
-		_n_le = nle.as(not null)
+		n_le = nle.as(not null)
 		nle.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_le == old_child then
+		if n_le == old_child then
 			n_le = new_child.as(TLe)
 			return
 		end
@@ -2361,7 +2361,7 @@ redef class ALeMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_le)
+		v.enter_visit(n_le)
 	end
 end
 redef class AGeMethid
@@ -2372,13 +2372,13 @@ redef class AGeMethid
 	)
 	do
 		empty_init
-		_n_ge = nge.as(not null)
+		n_ge = nge.as(not null)
 		nge.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ge == old_child then
+		if n_ge == old_child then
 			n_ge = new_child.as(TGe)
 			return
 		end
@@ -2393,7 +2393,7 @@ redef class AGeMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ge)
+		v.enter_visit(n_ge)
 	end
 end
 redef class ALtMethid
@@ -2404,13 +2404,13 @@ redef class ALtMethid
 	)
 	do
 		empty_init
-		_n_lt = nlt.as(not null)
+		n_lt = nlt.as(not null)
 		nlt.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_lt == old_child then
+		if n_lt == old_child then
 			n_lt = new_child.as(TLt)
 			return
 		end
@@ -2425,7 +2425,7 @@ redef class ALtMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_lt)
+		v.enter_visit(n_lt)
 	end
 end
 redef class AGtMethid
@@ -2436,13 +2436,13 @@ redef class AGtMethid
 	)
 	do
 		empty_init
-		_n_gt = ngt.as(not null)
+		n_gt = ngt.as(not null)
 		ngt.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_gt == old_child then
+		if n_gt == old_child then
 			n_gt = new_child.as(TGt)
 			return
 		end
@@ -2457,7 +2457,7 @@ redef class AGtMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_gt)
+		v.enter_visit(n_gt)
 	end
 end
 redef class ALlMethid
@@ -2468,13 +2468,13 @@ redef class ALlMethid
 	)
 	do
 		empty_init
-		_n_ll = nll.as(not null)
+		n_ll = nll.as(not null)
 		nll.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ll == old_child then
+		if n_ll == old_child then
 			n_ll = new_child.as(TLl)
 			return
 		end
@@ -2489,7 +2489,7 @@ redef class ALlMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ll)
+		v.enter_visit(n_ll)
 	end
 end
 redef class AGgMethid
@@ -2500,13 +2500,13 @@ redef class AGgMethid
 	)
 	do
 		empty_init
-		_n_gg = ngg.as(not null)
+		n_gg = ngg.as(not null)
 		ngg.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_gg == old_child then
+		if n_gg == old_child then
 			n_gg = new_child.as(TGg)
 			return
 		end
@@ -2521,7 +2521,7 @@ redef class AGgMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_gg)
+		v.enter_visit(n_gg)
 	end
 end
 redef class ABraMethid
@@ -2533,19 +2533,19 @@ redef class ABraMethid
 	)
 	do
 		empty_init
-		_n_obra = nobra.as(not null)
+		n_obra = nobra.as(not null)
 		nobra.parent = self
-		_n_cbra = ncbra.as(not null)
+		n_cbra = ncbra.as(not null)
 		ncbra.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_obra == old_child then
+		if n_obra == old_child then
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_cbra == old_child then
+		if n_cbra == old_child then
 			n_cbra = new_child.as(TCbra)
 			return
 		end
@@ -2565,8 +2565,8 @@ redef class ABraMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_obra)
-		v.enter_visit(_n_cbra)
+		v.enter_visit(n_obra)
+		v.enter_visit(n_cbra)
 	end
 end
 redef class AStarshipMethid
@@ -2577,13 +2577,13 @@ redef class AStarshipMethid
 	)
 	do
 		empty_init
-		_n_starship = nstarship.as(not null)
+		n_starship = nstarship.as(not null)
 		nstarship.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_starship == old_child then
+		if n_starship == old_child then
 			n_starship = new_child.as(TStarship)
 			return
 		end
@@ -2598,7 +2598,7 @@ redef class AStarshipMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_starship)
+		v.enter_visit(n_starship)
 	end
 end
 redef class AAssignMethid
@@ -2610,19 +2610,19 @@ redef class AAssignMethid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
@@ -2642,8 +2642,8 @@ redef class AAssignMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_assign)
+		v.enter_visit(n_id)
+		v.enter_visit(n_assign)
 	end
 end
 redef class ABraassignMethid
@@ -2656,25 +2656,25 @@ redef class ABraassignMethid
 	)
 	do
 		empty_init
-		_n_obra = nobra.as(not null)
+		n_obra = nobra.as(not null)
 		nobra.parent = self
-		_n_cbra = ncbra.as(not null)
+		n_cbra = ncbra.as(not null)
 		ncbra.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_obra == old_child then
+		if n_obra == old_child then
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_cbra == old_child then
+		if n_cbra == old_child then
 			n_cbra = new_child.as(TCbra)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
@@ -2699,9 +2699,9 @@ redef class ABraassignMethid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_obra)
-		v.enter_visit(_n_cbra)
-		v.enter_visit(_n_assign)
+		v.enter_visit(n_obra)
+		v.enter_visit(n_cbra)
+		v.enter_visit(n_assign)
 	end
 end
 redef class ASignature
@@ -2715,27 +2715,27 @@ redef class ASignature
 	)
 	do
 		empty_init
-		_n_opar = nopar
+		n_opar = nopar
 		if nopar != null then nopar.parent = self
-		_n_params.unsafe_add_all(nparams)
-		_n_cpar = ncpar
+		n_params.unsafe_add_all(nparams)
+		n_cpar = ncpar
 		if ncpar != null then ncpar.parent = self
-		_n_type = ntype
+		n_type = ntype
 		if ntype != null then ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_params.replace_child(old_child, new_child) then return
-		if _n_cpar == old_child then
+		if n_params.replace_child(old_child, new_child) then return
+		if n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
@@ -2760,10 +2760,10 @@ redef class ASignature
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_opar)
-		_n_params.visit_all(v)
-		v.enter_visit(_n_cpar)
-		v.enter_visit(_n_type)
+		v.enter_visit(n_opar)
+		n_params.visit_all(v)
+		v.enter_visit(n_cpar)
+		v.enter_visit(n_type)
 	end
 end
 redef class AParam
@@ -2777,31 +2777,31 @@ redef class AParam
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_type = ntype
+		n_type = ntype
 		if ntype != null then ntype.parent = self
-		_n_dotdotdot = ndotdotdot
+		n_dotdotdot = ndotdotdot
 		if ndotdotdot != null then ndotdotdot.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
-		if _n_dotdotdot == old_child then
+		if n_dotdotdot == old_child then
 			n_dotdotdot = new_child.as(nullable TDotdotdot)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -2831,10 +2831,10 @@ redef class AParam
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_dotdotdot)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_id)
+		v.enter_visit(n_type)
+		v.enter_visit(n_dotdotdot)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AType
@@ -2848,27 +2848,27 @@ redef class AType
 	)
 	do
 		empty_init
-		_n_kwnullable = nkwnullable
+		n_kwnullable = nkwnullable
 		if nkwnullable != null then nkwnullable.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_types.unsafe_add_all(ntypes)
-		_n_annotations = nannotations
+		n_types.unsafe_add_all(ntypes)
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwnullable == old_child then
+		if n_kwnullable == old_child then
 			n_kwnullable = new_child.as(nullable TKwnullable)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TClassid)
 			return
 		end
-		if _n_types.replace_child(old_child, new_child) then return
-		if _n_annotations == old_child then
+		if n_types.replace_child(old_child, new_child) then return
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -2893,10 +2893,10 @@ redef class AType
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwnullable)
-		v.enter_visit(_n_id)
-		_n_types.visit_all(v)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwnullable)
+		v.enter_visit(n_id)
+		n_types.visit_all(v)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ALabel
@@ -2908,19 +2908,19 @@ redef class ALabel
 	)
 	do
 		empty_init
-		_n_kwlabel = nkwlabel.as(not null)
+		n_kwlabel = nkwlabel.as(not null)
 		nkwlabel.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwlabel == old_child then
+		if n_kwlabel == old_child then
 			n_kwlabel = new_child.as(TKwlabel)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
@@ -2940,8 +2940,8 @@ redef class ALabel
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwlabel)
-		v.enter_visit(_n_id)
+		v.enter_visit(n_kwlabel)
+		v.enter_visit(n_id)
 	end
 end
 redef class ABlockExpr
@@ -2953,15 +2953,15 @@ redef class ABlockExpr
 	)
 	do
 		empty_init
-		_n_expr.unsafe_add_all(nexpr)
-		_n_kwend = nkwend
+		n_expr.unsafe_add_all(nexpr)
+		n_kwend = nkwend
 		if nkwend != null then nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr.replace_child(old_child, new_child) then return
-		if _n_kwend == old_child then
+		if n_expr.replace_child(old_child, new_child) then return
+		if n_kwend == old_child then
 			n_kwend = new_child.as(nullable TKwend)
 			return
 		end
@@ -2976,8 +2976,8 @@ redef class ABlockExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_expr.visit_all(v)
-		v.enter_visit(_n_kwend)
+		n_expr.visit_all(v)
+		v.enter_visit(n_kwend)
 	end
 end
 redef class AVardeclExpr
@@ -2993,43 +2993,43 @@ redef class AVardeclExpr
 	)
 	do
 		empty_init
-		_n_kwvar = nkwvar.as(not null)
+		n_kwvar = nkwvar.as(not null)
 		nkwvar.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_type = ntype
+		n_type = ntype
 		if ntype != null then ntype.parent = self
-		_n_assign = nassign
+		n_assign = nassign
 		if nassign != null then nassign.parent = self
-		_n_expr = nexpr
+		n_expr = nexpr
 		if nexpr != null then nexpr.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwvar == old_child then
+		if n_kwvar == old_child then
 			n_kwvar = new_child.as(TKwvar)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(nullable TAssign)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -3069,12 +3069,12 @@ redef class AVardeclExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwvar)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_assign)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwvar)
+		v.enter_visit(n_id)
+		v.enter_visit(n_type)
+		v.enter_visit(n_assign)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AReturnExpr
@@ -3086,19 +3086,19 @@ redef class AReturnExpr
 	)
 	do
 		empty_init
-		_n_kwreturn = nkwreturn
+		n_kwreturn = nkwreturn
 		if nkwreturn != null then nkwreturn.parent = self
-		_n_expr = nexpr
+		n_expr = nexpr
 		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwreturn == old_child then
+		if n_kwreturn == old_child then
 			n_kwreturn = new_child.as(nullable TKwreturn)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
 		end
@@ -3118,8 +3118,8 @@ redef class AReturnExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwreturn)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_kwreturn)
+		v.enter_visit(n_expr)
 	end
 end
 redef class ABreakExpr
@@ -3132,25 +3132,25 @@ redef class ABreakExpr
 	)
 	do
 		empty_init
-		_n_kwbreak = nkwbreak.as(not null)
+		n_kwbreak = nkwbreak.as(not null)
 		nkwbreak.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
-		_n_expr = nexpr
+		n_expr = nexpr
 		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwbreak == old_child then
+		if n_kwbreak == old_child then
 			n_kwbreak = new_child.as(TKwbreak)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
 		end
@@ -3175,9 +3175,9 @@ redef class ABreakExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwbreak)
-		v.enter_visit(_n_label)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_kwbreak)
+		v.enter_visit(n_label)
+		v.enter_visit(n_expr)
 	end
 end
 redef class AAbortExpr
@@ -3188,13 +3188,13 @@ redef class AAbortExpr
 	)
 	do
 		empty_init
-		_n_kwabort = nkwabort.as(not null)
+		n_kwabort = nkwabort.as(not null)
 		nkwabort.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwabort == old_child then
+		if n_kwabort == old_child then
 			n_kwabort = new_child.as(TKwabort)
 			return
 		end
@@ -3209,7 +3209,7 @@ redef class AAbortExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwabort)
+		v.enter_visit(n_kwabort)
 	end
 end
 redef class AContinueExpr
@@ -3222,25 +3222,25 @@ redef class AContinueExpr
 	)
 	do
 		empty_init
-		_n_kwcontinue = nkwcontinue
+		n_kwcontinue = nkwcontinue
 		if nkwcontinue != null then nkwcontinue.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
-		_n_expr = nexpr
+		n_expr = nexpr
 		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwcontinue == old_child then
+		if n_kwcontinue == old_child then
 			n_kwcontinue = new_child.as(nullable TKwcontinue)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
 		end
@@ -3265,9 +3265,9 @@ redef class AContinueExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwcontinue)
-		v.enter_visit(_n_label)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_kwcontinue)
+		v.enter_visit(n_label)
+		v.enter_visit(n_expr)
 	end
 end
 redef class ADoExpr
@@ -3280,25 +3280,25 @@ redef class ADoExpr
 	)
 	do
 		empty_init
-		_n_kwdo = nkwdo.as(not null)
+		n_kwdo = nkwdo.as(not null)
 		nkwdo.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwdo == old_child then
+		if n_kwdo == old_child then
 			n_kwdo = new_child.as(TKwdo)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
@@ -3323,9 +3323,9 @@ redef class ADoExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwdo)
-		v.enter_visit(_n_block)
-		v.enter_visit(_n_label)
+		v.enter_visit(n_kwdo)
+		v.enter_visit(n_block)
+		v.enter_visit(n_label)
 	end
 end
 redef class AIfExpr
@@ -3339,31 +3339,31 @@ redef class AIfExpr
 	)
 	do
 		empty_init
-		_n_kwif = nkwif.as(not null)
+		n_kwif = nkwif.as(not null)
 		nkwif.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_then = nthen
+		n_then = nthen
 		if nthen != null then nthen.parent = self
-		_n_else = nelse
+		n_else = nelse
 		if nelse != null then nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwif == old_child then
+		if n_kwif == old_child then
 			n_kwif = new_child.as(TKwif)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_then == old_child then
+		if n_then == old_child then
 			n_then = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_else == old_child then
+		if n_else == old_child then
 			n_else = new_child.as(nullable AExpr)
 			return
 		end
@@ -3393,10 +3393,10 @@ redef class AIfExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwif)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_then)
-		v.enter_visit(_n_else)
+		v.enter_visit(n_kwif)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_then)
+		v.enter_visit(n_else)
 	end
 end
 redef class AIfexprExpr
@@ -3412,43 +3412,43 @@ redef class AIfexprExpr
 	)
 	do
 		empty_init
-		_n_kwif = nkwif.as(not null)
+		n_kwif = nkwif.as(not null)
 		nkwif.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwthen = nkwthen.as(not null)
+		n_kwthen = nkwthen.as(not null)
 		nkwthen.parent = self
-		_n_then = nthen.as(not null)
+		n_then = nthen.as(not null)
 		nthen.parent = self
-		_n_kwelse = nkwelse.as(not null)
+		n_kwelse = nkwelse.as(not null)
 		nkwelse.parent = self
-		_n_else = nelse.as(not null)
+		n_else = nelse.as(not null)
 		nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwif == old_child then
+		if n_kwif == old_child then
 			n_kwif = new_child.as(TKwif)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwthen == old_child then
+		if n_kwthen == old_child then
 			n_kwthen = new_child.as(TKwthen)
 			return
 		end
-		if _n_then == old_child then
+		if n_then == old_child then
 			n_then = new_child.as(AExpr)
 			return
 		end
-		if _n_kwelse == old_child then
+		if n_kwelse == old_child then
 			n_kwelse = new_child.as(TKwelse)
 			return
 		end
-		if _n_else == old_child then
+		if n_else == old_child then
 			n_else = new_child.as(AExpr)
 			return
 		end
@@ -3488,12 +3488,12 @@ redef class AIfexprExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwif)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwthen)
-		v.enter_visit(_n_then)
-		v.enter_visit(_n_kwelse)
-		v.enter_visit(_n_else)
+		v.enter_visit(n_kwif)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwthen)
+		v.enter_visit(n_then)
+		v.enter_visit(n_kwelse)
+		v.enter_visit(n_else)
 	end
 end
 redef class AWhileExpr
@@ -3508,37 +3508,37 @@ redef class AWhileExpr
 	)
 	do
 		empty_init
-		_n_kwwhile = nkwwhile.as(not null)
+		n_kwwhile = nkwwhile.as(not null)
 		nkwwhile.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwdo = nkwdo.as(not null)
+		n_kwdo = nkwdo.as(not null)
 		nkwdo.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwwhile == old_child then
+		if n_kwwhile == old_child then
 			n_kwwhile = new_child.as(TKwwhile)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwdo == old_child then
+		if n_kwdo == old_child then
 			n_kwdo = new_child.as(TKwdo)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
@@ -3573,11 +3573,11 @@ redef class AWhileExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwwhile)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwdo)
-		v.enter_visit(_n_block)
-		v.enter_visit(_n_label)
+		v.enter_visit(n_kwwhile)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwdo)
+		v.enter_visit(n_block)
+		v.enter_visit(n_label)
 	end
 end
 redef class ALoopExpr
@@ -3590,25 +3590,25 @@ redef class ALoopExpr
 	)
 	do
 		empty_init
-		_n_kwloop = nkwloop.as(not null)
+		n_kwloop = nkwloop.as(not null)
 		nkwloop.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwloop == old_child then
+		if n_kwloop == old_child then
 			n_kwloop = new_child.as(TKwloop)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
@@ -3633,9 +3633,9 @@ redef class ALoopExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwloop)
-		v.enter_visit(_n_block)
-		v.enter_visit(_n_label)
+		v.enter_visit(n_kwloop)
+		v.enter_visit(n_block)
+		v.enter_visit(n_label)
 	end
 end
 redef class AForExpr
@@ -3651,39 +3651,39 @@ redef class AForExpr
 	)
 	do
 		empty_init
-		_n_kwfor = nkwfor.as(not null)
+		n_kwfor = nkwfor.as(not null)
 		nkwfor.parent = self
-		_n_ids.unsafe_add_all(nids)
-		_n_expr = nexpr.as(not null)
+		n_ids.unsafe_add_all(nids)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwdo = nkwdo.as(not null)
+		n_kwdo = nkwdo.as(not null)
 		nkwdo.parent = self
-		_n_block = nblock
+		n_block = nblock
 		if nblock != null then nblock.parent = self
-		_n_label = nlabel
+		n_label = nlabel
 		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwfor == old_child then
+		if n_kwfor == old_child then
 			n_kwfor = new_child.as(TKwfor)
 			return
 		end
-		if _n_ids.replace_child(old_child, new_child) then return
-		if _n_expr == old_child then
+		if n_ids.replace_child(old_child, new_child) then return
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwdo == old_child then
+		if n_kwdo == old_child then
 			n_kwdo = new_child.as(TKwdo)
 			return
 		end
-		if _n_block == old_child then
+		if n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
 			return
 		end
-		if _n_label == old_child then
+		if n_label == old_child then
 			n_label = new_child.as(nullable ALabel)
 			return
 		end
@@ -3718,12 +3718,12 @@ redef class AForExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwfor)
-		_n_ids.visit_all(v)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwdo)
-		v.enter_visit(_n_block)
-		v.enter_visit(_n_label)
+		v.enter_visit(n_kwfor)
+		n_ids.visit_all(v)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwdo)
+		v.enter_visit(n_block)
+		v.enter_visit(n_label)
 	end
 end
 redef class AAssertExpr
@@ -3737,31 +3737,31 @@ redef class AAssertExpr
 	)
 	do
 		empty_init
-		_n_kwassert = nkwassert.as(not null)
+		n_kwassert = nkwassert.as(not null)
 		nkwassert.parent = self
-		_n_id = nid
+		n_id = nid
 		if nid != null then nid.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_else = nelse
+		n_else = nelse
 		if nelse != null then nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwassert == old_child then
+		if n_kwassert == old_child then
 			n_kwassert = new_child.as(TKwassert)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(nullable TId)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_else == old_child then
+		if n_else == old_child then
 			n_else = new_child.as(nullable AExpr)
 			return
 		end
@@ -3791,10 +3791,10 @@ redef class AAssertExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwassert)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_else)
+		v.enter_visit(n_kwassert)
+		v.enter_visit(n_id)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_else)
 	end
 end
 redef class AOnceExpr
@@ -3806,19 +3806,19 @@ redef class AOnceExpr
 	)
 	do
 		empty_init
-		_n_kwonce = nkwonce.as(not null)
+		n_kwonce = nkwonce.as(not null)
 		nkwonce.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwonce == old_child then
+		if n_kwonce == old_child then
 			n_kwonce = new_child.as(TKwonce)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
@@ -3838,8 +3838,8 @@ redef class AOnceExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwonce)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_kwonce)
+		v.enter_visit(n_expr)
 	end
 end
 redef class ASendExpr
@@ -3850,13 +3850,13 @@ redef class ASendExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
@@ -3871,7 +3871,7 @@ redef class ASendExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_expr)
 	end
 end
 redef class ABinopExpr
@@ -3883,19 +3883,19 @@ redef class ABinopExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -3915,8 +3915,8 @@ redef class ABinopExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AOrExpr
@@ -3928,19 +3928,19 @@ redef class AOrExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -3960,8 +3960,8 @@ redef class AOrExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AAndExpr
@@ -3973,19 +3973,19 @@ redef class AAndExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4005,8 +4005,8 @@ redef class AAndExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AOrElseExpr
@@ -4018,19 +4018,19 @@ redef class AOrElseExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4050,8 +4050,8 @@ redef class AOrElseExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AImpliesExpr
@@ -4063,19 +4063,19 @@ redef class AImpliesExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4095,8 +4095,8 @@ redef class AImpliesExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ANotExpr
@@ -4108,19 +4108,19 @@ redef class ANotExpr
 	)
 	do
 		empty_init
-		_n_kwnot = nkwnot.as(not null)
+		n_kwnot = nkwnot.as(not null)
 		nkwnot.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwnot == old_child then
+		if n_kwnot == old_child then
 			n_kwnot = new_child.as(TKwnot)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
@@ -4140,8 +4140,8 @@ redef class ANotExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwnot)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_kwnot)
+		v.enter_visit(n_expr)
 	end
 end
 redef class AEqExpr
@@ -4153,19 +4153,19 @@ redef class AEqExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4185,8 +4185,8 @@ redef class AEqExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ANeExpr
@@ -4198,19 +4198,19 @@ redef class ANeExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4230,8 +4230,8 @@ redef class ANeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ALtExpr
@@ -4243,19 +4243,19 @@ redef class ALtExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4275,8 +4275,8 @@ redef class ALtExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ALeExpr
@@ -4288,19 +4288,19 @@ redef class ALeExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4320,8 +4320,8 @@ redef class ALeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ALlExpr
@@ -4333,19 +4333,19 @@ redef class ALlExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4365,8 +4365,8 @@ redef class ALlExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AGtExpr
@@ -4378,19 +4378,19 @@ redef class AGtExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4410,8 +4410,8 @@ redef class AGtExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AGeExpr
@@ -4423,19 +4423,19 @@ redef class AGeExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4455,8 +4455,8 @@ redef class AGeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AGgExpr
@@ -4468,19 +4468,19 @@ redef class AGgExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4500,8 +4500,8 @@ redef class AGgExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AIsaExpr
@@ -4513,19 +4513,19 @@ redef class AIsaExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
@@ -4545,8 +4545,8 @@ redef class AIsaExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_type)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_type)
 	end
 end
 redef class APlusExpr
@@ -4558,19 +4558,19 @@ redef class APlusExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4590,8 +4590,8 @@ redef class APlusExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AMinusExpr
@@ -4603,19 +4603,19 @@ redef class AMinusExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4635,8 +4635,8 @@ redef class AMinusExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AStarshipExpr
@@ -4648,19 +4648,19 @@ redef class AStarshipExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4680,8 +4680,8 @@ redef class AStarshipExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AStarExpr
@@ -4693,19 +4693,19 @@ redef class AStarExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4725,8 +4725,8 @@ redef class AStarExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class ASlashExpr
@@ -4738,19 +4738,19 @@ redef class ASlashExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4770,8 +4770,8 @@ redef class ASlashExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class APercentExpr
@@ -4783,19 +4783,19 @@ redef class APercentExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
@@ -4815,8 +4815,8 @@ redef class APercentExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
 	end
 end
 redef class AUminusExpr
@@ -4828,19 +4828,19 @@ redef class AUminusExpr
 	)
 	do
 		empty_init
-		_n_minus = nminus.as(not null)
+		n_minus = nminus.as(not null)
 		nminus.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minus == old_child then
+		if n_minus == old_child then
 			n_minus = new_child.as(TMinus)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
@@ -4860,8 +4860,8 @@ redef class AUminusExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minus)
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_minus)
+		v.enter_visit(n_expr)
 	end
 end
 redef class ANewExpr
@@ -4875,31 +4875,31 @@ redef class ANewExpr
 	)
 	do
 		empty_init
-		_n_kwnew = nkwnew.as(not null)
+		n_kwnew = nkwnew.as(not null)
 		nkwnew.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_id = nid
+		n_id = nid
 		if nid != null then nid.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwnew == old_child then
+		if n_kwnew == old_child then
 			n_kwnew = new_child.as(TKwnew)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(nullable TId)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
@@ -4929,10 +4929,10 @@ redef class ANewExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwnew)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_args)
+		v.enter_visit(n_kwnew)
+		v.enter_visit(n_type)
+		v.enter_visit(n_id)
+		v.enter_visit(n_args)
 	end
 end
 redef class AAttrExpr
@@ -4944,19 +4944,19 @@ redef class AAttrExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TAttrid)
 			return
 		end
@@ -4976,8 +4976,8 @@ redef class AAttrExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
 	end
 end
 redef class AAttrAssignExpr
@@ -4991,31 +4991,31 @@ redef class AAttrAssignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TAttrid)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5045,10 +5045,10 @@ redef class AAttrAssignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_assign)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
+		v.enter_visit(n_assign)
+		v.enter_visit(n_value)
 	end
 end
 redef class AAttrReassignExpr
@@ -5062,31 +5062,31 @@ redef class AAttrReassignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_assign_op = nassign_op.as(not null)
+		n_assign_op = nassign_op.as(not null)
 		nassign_op.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TAttrid)
 			return
 		end
-		if _n_assign_op == old_child then
+		if n_assign_op == old_child then
 			n_assign_op = new_child.as(AAssignOp)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5116,10 +5116,10 @@ redef class AAttrReassignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_assign_op)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
+		v.enter_visit(n_assign_op)
+		v.enter_visit(n_value)
 	end
 end
 redef class ACallExpr
@@ -5132,25 +5132,25 @@ redef class ACallExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
@@ -5175,9 +5175,9 @@ redef class ACallExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_args)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
+		v.enter_visit(n_args)
 	end
 end
 redef class ACallAssignExpr
@@ -5192,37 +5192,37 @@ redef class ACallAssignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5257,11 +5257,11 @@ redef class ACallAssignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_args)
-		v.enter_visit(_n_assign)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
+		v.enter_visit(n_args)
+		v.enter_visit(n_assign)
+		v.enter_visit(n_value)
 	end
 end
 redef class ACallReassignExpr
@@ -5276,37 +5276,37 @@ redef class ACallReassignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
-		_n_assign_op = nassign_op.as(not null)
+		n_assign_op = nassign_op.as(not null)
 		nassign_op.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
-		if _n_assign_op == old_child then
+		if n_assign_op == old_child then
 			n_assign_op = new_child.as(AAssignOp)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5341,11 +5341,11 @@ redef class ACallReassignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_args)
-		v.enter_visit(_n_assign_op)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
+		v.enter_visit(n_args)
+		v.enter_visit(n_assign_op)
+		v.enter_visit(n_value)
 	end
 end
 redef class ASuperExpr
@@ -5358,25 +5358,25 @@ redef class ASuperExpr
 	)
 	do
 		empty_init
-		_n_qualified = nqualified
+		n_qualified = nqualified
 		if nqualified != null then nqualified.parent = self
-		_n_kwsuper = nkwsuper.as(not null)
+		n_kwsuper = nkwsuper.as(not null)
 		nkwsuper.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_qualified == old_child then
+		if n_qualified == old_child then
 			n_qualified = new_child.as(nullable AQualified)
 			return
 		end
-		if _n_kwsuper == old_child then
+		if n_kwsuper == old_child then
 			n_kwsuper = new_child.as(TKwsuper)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
@@ -5401,9 +5401,9 @@ redef class ASuperExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_qualified)
-		v.enter_visit(_n_kwsuper)
-		v.enter_visit(_n_args)
+		v.enter_visit(n_qualified)
+		v.enter_visit(n_kwsuper)
+		v.enter_visit(n_args)
 	end
 end
 redef class AInitExpr
@@ -5416,25 +5416,25 @@ redef class AInitExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwinit = nkwinit.as(not null)
+		n_kwinit = nkwinit.as(not null)
 		nkwinit.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwinit == old_child then
+		if n_kwinit == old_child then
 			n_kwinit = new_child.as(TKwinit)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
@@ -5459,9 +5459,9 @@ redef class AInitExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwinit)
-		v.enter_visit(_n_args)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwinit)
+		v.enter_visit(n_args)
 	end
 end
 redef class ABraExpr
@@ -5473,19 +5473,19 @@ redef class ABraExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
@@ -5505,8 +5505,8 @@ redef class ABraExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_args)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_args)
 	end
 end
 redef class ABraAssignExpr
@@ -5520,31 +5520,31 @@ redef class ABraAssignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5574,10 +5574,10 @@ redef class ABraAssignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_args)
-		v.enter_visit(_n_assign)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_args)
+		v.enter_visit(n_assign)
+		v.enter_visit(n_value)
 	end
 end
 redef class ABraReassignExpr
@@ -5591,31 +5591,31 @@ redef class ABraReassignExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_args = nargs.as(not null)
+		n_args = nargs.as(not null)
 		nargs.parent = self
-		_n_assign_op = nassign_op.as(not null)
+		n_assign_op = nassign_op.as(not null)
 		nassign_op.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_args == old_child then
+		if n_args == old_child then
 			n_args = new_child.as(AExprs)
 			return
 		end
-		if _n_assign_op == old_child then
+		if n_assign_op == old_child then
 			n_assign_op = new_child.as(AAssignOp)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5645,10 +5645,10 @@ redef class ABraReassignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_args)
-		v.enter_visit(_n_assign_op)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_args)
+		v.enter_visit(n_assign_op)
+		v.enter_visit(n_value)
 	end
 end
 redef class AVarExpr
@@ -5659,13 +5659,13 @@ redef class AVarExpr
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
@@ -5680,7 +5680,7 @@ redef class AVarExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AVarAssignExpr
@@ -5693,25 +5693,25 @@ redef class AVarAssignExpr
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_assign = nassign.as(not null)
+		n_assign = nassign.as(not null)
 		nassign.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_assign == old_child then
+		if n_assign == old_child then
 			n_assign = new_child.as(TAssign)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5736,9 +5736,9 @@ redef class AVarAssignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_assign)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_id)
+		v.enter_visit(n_assign)
+		v.enter_visit(n_value)
 	end
 end
 redef class AVarReassignExpr
@@ -5751,25 +5751,25 @@ redef class AVarReassignExpr
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
-		_n_assign_op = nassign_op.as(not null)
+		n_assign_op = nassign_op.as(not null)
 		nassign_op.parent = self
-		_n_value = nvalue.as(not null)
+		n_value = nvalue.as(not null)
 		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
-		if _n_assign_op == old_child then
+		if n_assign_op == old_child then
 			n_assign_op = new_child.as(AAssignOp)
 			return
 		end
-		if _n_value == old_child then
+		if n_value == old_child then
 			n_value = new_child.as(AExpr)
 			return
 		end
@@ -5794,9 +5794,9 @@ redef class AVarReassignExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
-		v.enter_visit(_n_assign_op)
-		v.enter_visit(_n_value)
+		v.enter_visit(n_id)
+		v.enter_visit(n_assign_op)
+		v.enter_visit(n_value)
 	end
 end
 redef class ARangeExpr
@@ -5809,25 +5809,25 @@ redef class ARangeExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -5852,9 +5852,9 @@ redef class ARangeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ACrangeExpr
@@ -5869,37 +5869,37 @@ redef class ACrangeExpr
 	)
 	do
 		empty_init
-		_n_obra = nobra.as(not null)
+		n_obra = nobra.as(not null)
 		nobra.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
-		_n_cbra = ncbra.as(not null)
+		n_cbra = ncbra.as(not null)
 		ncbra.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_obra == old_child then
+		if n_obra == old_child then
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
-		if _n_cbra == old_child then
+		if n_cbra == old_child then
 			n_cbra = new_child.as(TCbra)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -5934,11 +5934,11 @@ redef class ACrangeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_obra)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
-		v.enter_visit(_n_cbra)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_obra)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
+		v.enter_visit(n_cbra)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AOrangeExpr
@@ -5953,37 +5953,37 @@ redef class AOrangeExpr
 	)
 	do
 		empty_init
-		_n_obra = nobra.as(not null)
+		n_obra = nobra.as(not null)
 		nobra.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_expr2 = nexpr2.as(not null)
+		n_expr2 = nexpr2.as(not null)
 		nexpr2.parent = self
-		_n_cbra = ncbra.as(not null)
+		n_cbra = ncbra.as(not null)
 		ncbra.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_obra == old_child then
+		if n_obra == old_child then
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_expr2 == old_child then
+		if n_expr2 == old_child then
 			n_expr2 = new_child.as(AExpr)
 			return
 		end
-		if _n_cbra == old_child then
+		if n_cbra == old_child then
 			n_cbra = new_child.as(TObra)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6018,11 +6018,11 @@ redef class AOrangeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_obra)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_expr2)
-		v.enter_visit(_n_cbra)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_obra)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_expr2)
+		v.enter_visit(n_cbra)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AArrayExpr
@@ -6034,19 +6034,19 @@ redef class AArrayExpr
 	)
 	do
 		empty_init
-		_n_exprs = nexprs.as(not null)
+		n_exprs = nexprs.as(not null)
 		nexprs.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_exprs == old_child then
+		if n_exprs == old_child then
 			n_exprs = new_child.as(AExprs)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6066,8 +6066,8 @@ redef class AArrayExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_exprs)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_exprs)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ASelfExpr
@@ -6079,19 +6079,19 @@ redef class ASelfExpr
 	)
 	do
 		empty_init
-		_n_kwself = nkwself.as(not null)
+		n_kwself = nkwself.as(not null)
 		nkwself.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwself == old_child then
+		if n_kwself == old_child then
 			n_kwself = new_child.as(TKwself)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6111,8 +6111,8 @@ redef class ASelfExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwself)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwself)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AImplicitSelfExpr
@@ -6142,19 +6142,19 @@ redef class ATrueExpr
 	)
 	do
 		empty_init
-		_n_kwtrue = nkwtrue.as(not null)
+		n_kwtrue = nkwtrue.as(not null)
 		nkwtrue.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwtrue == old_child then
+		if n_kwtrue == old_child then
 			n_kwtrue = new_child.as(TKwtrue)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6174,8 +6174,8 @@ redef class ATrueExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwtrue)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwtrue)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AFalseExpr
@@ -6187,19 +6187,19 @@ redef class AFalseExpr
 	)
 	do
 		empty_init
-		_n_kwfalse = nkwfalse.as(not null)
+		n_kwfalse = nkwfalse.as(not null)
 		nkwfalse.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwfalse == old_child then
+		if n_kwfalse == old_child then
 			n_kwfalse = new_child.as(TKwfalse)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6219,8 +6219,8 @@ redef class AFalseExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwfalse)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwfalse)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ANullExpr
@@ -6232,19 +6232,19 @@ redef class ANullExpr
 	)
 	do
 		empty_init
-		_n_kwnull = nkwnull.as(not null)
+		n_kwnull = nkwnull.as(not null)
 		nkwnull.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwnull == old_child then
+		if n_kwnull == old_child then
 			n_kwnull = new_child.as(TKwnull)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6264,8 +6264,8 @@ redef class ANullExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwnull)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_kwnull)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ADecIntExpr
@@ -6277,19 +6277,19 @@ redef class ADecIntExpr
 	)
 	do
 		empty_init
-		_n_number = nnumber.as(not null)
+		n_number = nnumber.as(not null)
 		nnumber.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_number == old_child then
+		if n_number == old_child then
 			n_number = new_child.as(TNumber)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6309,8 +6309,8 @@ redef class ADecIntExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_number)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_number)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AHexIntExpr
@@ -6322,19 +6322,19 @@ redef class AHexIntExpr
 	)
 	do
 		empty_init
-		_n_hex_number = nhex_number.as(not null)
+		n_hex_number = nhex_number.as(not null)
 		nhex_number.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_hex_number == old_child then
+		if n_hex_number == old_child then
 			n_hex_number = new_child.as(THexNumber)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6354,8 +6354,8 @@ redef class AHexIntExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_hex_number)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_hex_number)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AFloatExpr
@@ -6367,19 +6367,19 @@ redef class AFloatExpr
 	)
 	do
 		empty_init
-		_n_float = nfloat.as(not null)
+		n_float = nfloat.as(not null)
 		nfloat.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_float == old_child then
+		if n_float == old_child then
 			n_float = new_child.as(TFloat)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6399,8 +6399,8 @@ redef class AFloatExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_float)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_float)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ACharExpr
@@ -6412,19 +6412,19 @@ redef class ACharExpr
 	)
 	do
 		empty_init
-		_n_char = nchar.as(not null)
+		n_char = nchar.as(not null)
 		nchar.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_char == old_child then
+		if n_char == old_child then
 			n_char = new_child.as(TChar)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6444,8 +6444,8 @@ redef class ACharExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_char)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_char)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AStringExpr
@@ -6457,19 +6457,19 @@ redef class AStringExpr
 	)
 	do
 		empty_init
-		_n_string = nstring.as(not null)
+		n_string = nstring.as(not null)
 		nstring.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_string == old_child then
+		if n_string == old_child then
 			n_string = new_child.as(TString)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6489,8 +6489,8 @@ redef class AStringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_string)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_string)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AStartStringExpr
@@ -6501,13 +6501,13 @@ redef class AStartStringExpr
 	)
 	do
 		empty_init
-		_n_string = nstring.as(not null)
+		n_string = nstring.as(not null)
 		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_string == old_child then
+		if n_string == old_child then
 			n_string = new_child.as(TStartString)
 			return
 		end
@@ -6522,7 +6522,7 @@ redef class AStartStringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_string)
+		v.enter_visit(n_string)
 	end
 end
 redef class AMidStringExpr
@@ -6533,13 +6533,13 @@ redef class AMidStringExpr
 	)
 	do
 		empty_init
-		_n_string = nstring.as(not null)
+		n_string = nstring.as(not null)
 		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_string == old_child then
+		if n_string == old_child then
 			n_string = new_child.as(TMidString)
 			return
 		end
@@ -6554,7 +6554,7 @@ redef class AMidStringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_string)
+		v.enter_visit(n_string)
 	end
 end
 redef class AEndStringExpr
@@ -6565,13 +6565,13 @@ redef class AEndStringExpr
 	)
 	do
 		empty_init
-		_n_string = nstring.as(not null)
+		n_string = nstring.as(not null)
 		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_string == old_child then
+		if n_string == old_child then
 			n_string = new_child.as(TEndString)
 			return
 		end
@@ -6586,7 +6586,7 @@ redef class AEndStringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_string)
+		v.enter_visit(n_string)
 	end
 end
 redef class ASuperstringExpr
@@ -6598,15 +6598,15 @@ redef class ASuperstringExpr
 	)
 	do
 		empty_init
-		_n_exprs.unsafe_add_all(nexprs)
-		_n_annotations = nannotations
+		n_exprs.unsafe_add_all(nexprs)
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_exprs.replace_child(old_child, new_child) then return
-		if _n_annotations == old_child then
+		if n_exprs.replace_child(old_child, new_child) then return
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6621,8 +6621,8 @@ redef class ASuperstringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_exprs.visit_all(v)
-		v.enter_visit(_n_annotations)
+		n_exprs.visit_all(v)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AParExpr
@@ -6636,31 +6636,31 @@ redef class AParExpr
 	)
 	do
 		empty_init
-		_n_opar = nopar.as(not null)
+		n_opar = nopar.as(not null)
 		nopar.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_cpar = ncpar.as(not null)
+		n_cpar = ncpar.as(not null)
 		ncpar.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(TOpar)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_cpar == old_child then
+		if n_cpar == old_child then
 			n_cpar = new_child.as(TCpar)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -6690,10 +6690,10 @@ redef class AParExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_opar)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_cpar)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_opar)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_cpar)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AAsCastExpr
@@ -6708,37 +6708,37 @@ redef class AAsCastExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwas = nkwas.as(not null)
+		n_kwas = nkwas.as(not null)
 		nkwas.parent = self
-		_n_opar = nopar
+		n_opar = nopar
 		if nopar != null then nopar.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_cpar = ncpar
+		n_cpar = ncpar
 		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwas == old_child then
+		if n_kwas == old_child then
 			n_kwas = new_child.as(TKwas)
 			return
 		end
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_cpar == old_child then
+		if n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
@@ -6773,11 +6773,11 @@ redef class AAsCastExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwas)
-		v.enter_visit(_n_opar)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_cpar)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwas)
+		v.enter_visit(n_opar)
+		v.enter_visit(n_type)
+		v.enter_visit(n_cpar)
 	end
 end
 redef class AAsNotnullExpr
@@ -6793,43 +6793,43 @@ redef class AAsNotnullExpr
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_kwas = nkwas.as(not null)
+		n_kwas = nkwas.as(not null)
 		nkwas.parent = self
-		_n_opar = nopar
+		n_opar = nopar
 		if nopar != null then nopar.parent = self
-		_n_kwnot = nkwnot.as(not null)
+		n_kwnot = nkwnot.as(not null)
 		nkwnot.parent = self
-		_n_kwnull = nkwnull.as(not null)
+		n_kwnull = nkwnull.as(not null)
 		nkwnull.parent = self
-		_n_cpar = ncpar
+		n_cpar = ncpar
 		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_kwas == old_child then
+		if n_kwas == old_child then
 			n_kwas = new_child.as(TKwas)
 			return
 		end
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_kwnot == old_child then
+		if n_kwnot == old_child then
 			n_kwnot = new_child.as(TKwnot)
 			return
 		end
-		if _n_kwnull == old_child then
+		if n_kwnull == old_child then
 			n_kwnull = new_child.as(TKwnull)
 			return
 		end
-		if _n_cpar == old_child then
+		if n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
@@ -6869,12 +6869,12 @@ redef class AAsNotnullExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_kwas)
-		v.enter_visit(_n_opar)
-		v.enter_visit(_n_kwnot)
-		v.enter_visit(_n_kwnull)
-		v.enter_visit(_n_cpar)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_kwas)
+		v.enter_visit(n_opar)
+		v.enter_visit(n_kwnot)
+		v.enter_visit(n_kwnull)
+		v.enter_visit(n_cpar)
 	end
 end
 redef class AIssetAttrExpr
@@ -6887,25 +6887,25 @@ redef class AIssetAttrExpr
 	)
 	do
 		empty_init
-		_n_kwisset = nkwisset.as(not null)
+		n_kwisset = nkwisset.as(not null)
 		nkwisset.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwisset == old_child then
+		if n_kwisset == old_child then
 			n_kwisset = new_child.as(TKwisset)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TAttrid)
 			return
 		end
@@ -6930,9 +6930,9 @@ redef class AIssetAttrExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwisset)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
+		v.enter_visit(n_kwisset)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_id)
 	end
 end
 redef class ADebugTypeExpr
@@ -6946,31 +6946,31 @@ redef class ADebugTypeExpr
 	)
 	do
 		empty_init
-		_n_kwdebug = nkwdebug.as(not null)
+		n_kwdebug = nkwdebug.as(not null)
 		nkwdebug.parent = self
-		_n_kwtype = nkwtype.as(not null)
+		n_kwtype = nkwtype.as(not null)
 		nkwtype.parent = self
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwdebug == old_child then
+		if n_kwdebug == old_child then
 			n_kwdebug = new_child.as(TKwdebug)
 			return
 		end
-		if _n_kwtype == old_child then
+		if n_kwtype == old_child then
 			n_kwtype = new_child.as(TKwtype)
 			return
 		end
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
@@ -7000,10 +7000,10 @@ redef class ADebugTypeExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwdebug)
-		v.enter_visit(_n_kwtype)
-		v.enter_visit(_n_expr)
-		v.enter_visit(_n_type)
+		v.enter_visit(n_kwdebug)
+		v.enter_visit(n_kwtype)
+		v.enter_visit(n_expr)
+		v.enter_visit(n_type)
 	end
 end
 redef class AListExprs
@@ -7014,19 +7014,19 @@ redef class AListExprs
 	)
 	do
 		empty_init
-		_n_exprs.unsafe_add_all(nexprs)
+		n_exprs.unsafe_add_all(nexprs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_exprs.replace_child(old_child, new_child) then return
+		if n_exprs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_exprs.visit_all(v)
+		n_exprs.visit_all(v)
 	end
 end
 redef class AParExprs
@@ -7039,21 +7039,21 @@ redef class AParExprs
 	)
 	do
 		empty_init
-		_n_opar = nopar.as(not null)
+		n_opar = nopar.as(not null)
 		nopar.parent = self
-		_n_exprs.unsafe_add_all(nexprs)
-		_n_cpar = ncpar.as(not null)
+		n_exprs.unsafe_add_all(nexprs)
+		n_cpar = ncpar.as(not null)
 		ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(TOpar)
 			return
 		end
-		if _n_exprs.replace_child(old_child, new_child) then return
-		if _n_cpar == old_child then
+		if n_exprs.replace_child(old_child, new_child) then return
+		if n_cpar == old_child then
 			n_cpar = new_child.as(TCpar)
 			return
 		end
@@ -7073,9 +7073,9 @@ redef class AParExprs
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_opar)
-		_n_exprs.visit_all(v)
-		v.enter_visit(_n_cpar)
+		v.enter_visit(n_opar)
+		n_exprs.visit_all(v)
+		v.enter_visit(n_cpar)
 	end
 end
 redef class ABraExprs
@@ -7088,21 +7088,21 @@ redef class ABraExprs
 	)
 	do
 		empty_init
-		_n_obra = nobra.as(not null)
+		n_obra = nobra.as(not null)
 		nobra.parent = self
-		_n_exprs.unsafe_add_all(nexprs)
-		_n_cbra = ncbra.as(not null)
+		n_exprs.unsafe_add_all(nexprs)
+		n_cbra = ncbra.as(not null)
 		ncbra.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_obra == old_child then
+		if n_obra == old_child then
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_exprs.replace_child(old_child, new_child) then return
-		if _n_cbra == old_child then
+		if n_exprs.replace_child(old_child, new_child) then return
+		if n_cbra == old_child then
 			n_cbra = new_child.as(TCbra)
 			return
 		end
@@ -7122,9 +7122,9 @@ redef class ABraExprs
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_obra)
-		_n_exprs.visit_all(v)
-		v.enter_visit(_n_cbra)
+		v.enter_visit(n_obra)
+		n_exprs.visit_all(v)
+		v.enter_visit(n_cbra)
 	end
 end
 redef class APlusAssignOp
@@ -7135,13 +7135,13 @@ redef class APlusAssignOp
 	)
 	do
 		empty_init
-		_n_pluseq = npluseq.as(not null)
+		n_pluseq = npluseq.as(not null)
 		npluseq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_pluseq == old_child then
+		if n_pluseq == old_child then
 			n_pluseq = new_child.as(TPluseq)
 			return
 		end
@@ -7156,7 +7156,7 @@ redef class APlusAssignOp
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_pluseq)
+		v.enter_visit(n_pluseq)
 	end
 end
 redef class AMinusAssignOp
@@ -7167,13 +7167,13 @@ redef class AMinusAssignOp
 	)
 	do
 		empty_init
-		_n_minuseq = nminuseq.as(not null)
+		n_minuseq = nminuseq.as(not null)
 		nminuseq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minuseq == old_child then
+		if n_minuseq == old_child then
 			n_minuseq = new_child.as(TMinuseq)
 			return
 		end
@@ -7188,7 +7188,7 @@ redef class AMinusAssignOp
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minuseq)
+		v.enter_visit(n_minuseq)
 	end
 end
 redef class AModuleName
@@ -7201,21 +7201,21 @@ redef class AModuleName
 	)
 	do
 		empty_init
-		_n_quad = nquad
+		n_quad = nquad
 		if nquad != null then nquad.parent = self
-		_n_path.unsafe_add_all(npath)
-		_n_id = nid.as(not null)
+		n_path.unsafe_add_all(npath)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_quad == old_child then
+		if n_quad == old_child then
 			n_quad = new_child.as(nullable TQuad)
 			return
 		end
-		if _n_path.replace_child(old_child, new_child) then return
-		if _n_id == old_child then
+		if n_path.replace_child(old_child, new_child) then return
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
@@ -7235,9 +7235,9 @@ redef class AModuleName
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_quad)
-		_n_path.visit_all(v)
-		v.enter_visit(_n_id)
+		v.enter_visit(n_quad)
+		n_path.visit_all(v)
+		v.enter_visit(n_id)
 	end
 end
 redef class AExternCalls
@@ -7249,18 +7249,18 @@ redef class AExternCalls
 	)
 	do
 		empty_init
-		_n_kwimport = nkwimport.as(not null)
+		n_kwimport = nkwimport.as(not null)
 		nkwimport.parent = self
-		_n_extern_calls.unsafe_add_all(nextern_calls)
+		n_extern_calls.unsafe_add_all(nextern_calls)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwimport == old_child then
+		if n_kwimport == old_child then
 			n_kwimport = new_child.as(TKwimport)
 			return
 		end
-		if _n_extern_calls.replace_child(old_child, new_child) then return
+		if n_extern_calls.replace_child(old_child, new_child) then return
 	end
 
 	redef fun n_kwimport=(node)
@@ -7272,8 +7272,8 @@ redef class AExternCalls
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwimport)
-		_n_extern_calls.visit_all(v)
+		v.enter_visit(n_kwimport)
+		n_extern_calls.visit_all(v)
 	end
 end
 redef class AExternCall
@@ -7302,13 +7302,13 @@ redef class ASuperExternCall
 	)
 	do
 		empty_init
-		_n_kwsuper = nkwsuper.as(not null)
+		n_kwsuper = nkwsuper.as(not null)
 		nkwsuper.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwsuper == old_child then
+		if n_kwsuper == old_child then
 			n_kwsuper = new_child.as(TKwsuper)
 			return
 		end
@@ -7323,7 +7323,7 @@ redef class ASuperExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwsuper)
+		v.enter_visit(n_kwsuper)
 	end
 end
 redef class ALocalPropExternCall
@@ -7334,13 +7334,13 @@ redef class ALocalPropExternCall
 	)
 	do
 		empty_init
-		_n_methid = nmethid.as(not null)
+		n_methid = nmethid.as(not null)
 		nmethid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(AMethid)
 			return
 		end
@@ -7355,7 +7355,7 @@ redef class ALocalPropExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_methid)
+		v.enter_visit(n_methid)
 	end
 end
 redef class AFullPropExternCall
@@ -7368,25 +7368,25 @@ redef class AFullPropExternCall
 	)
 	do
 		empty_init
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_dot = ndot
+		n_dot = ndot
 		if ndot != null then ndot.parent = self
-		_n_methid = nmethid.as(not null)
+		n_methid = nmethid.as(not null)
 		nmethid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_dot == old_child then
+		if n_dot == old_child then
 			n_dot = new_child.as(nullable TDot)
 			return
 		end
-		if _n_methid == old_child then
+		if n_methid == old_child then
 			n_methid = new_child.as(AMethid)
 			return
 		end
@@ -7411,9 +7411,9 @@ redef class AFullPropExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_dot)
-		v.enter_visit(_n_methid)
+		v.enter_visit(n_type)
+		v.enter_visit(n_dot)
+		v.enter_visit(n_methid)
 	end
 end
 redef class AInitPropExternCall
@@ -7424,13 +7424,13 @@ redef class AInitPropExternCall
 	)
 	do
 		empty_init
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
@@ -7445,7 +7445,7 @@ redef class AInitPropExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_type)
+		v.enter_visit(n_type)
 	end
 end
 redef class ACastAsExternCall
@@ -7459,31 +7459,31 @@ redef class ACastAsExternCall
 	)
 	do
 		empty_init
-		_n_from_type = nfrom_type.as(not null)
+		n_from_type = nfrom_type.as(not null)
 		nfrom_type.parent = self
-		_n_dot = ndot
+		n_dot = ndot
 		if ndot != null then ndot.parent = self
-		_n_kwas = nkwas.as(not null)
+		n_kwas = nkwas.as(not null)
 		nkwas.parent = self
-		_n_to_type = nto_type.as(not null)
+		n_to_type = nto_type.as(not null)
 		nto_type.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_from_type == old_child then
+		if n_from_type == old_child then
 			n_from_type = new_child.as(AType)
 			return
 		end
-		if _n_dot == old_child then
+		if n_dot == old_child then
 			n_dot = new_child.as(nullable TDot)
 			return
 		end
-		if _n_kwas == old_child then
+		if n_kwas == old_child then
 			n_kwas = new_child.as(TKwas)
 			return
 		end
-		if _n_to_type == old_child then
+		if n_to_type == old_child then
 			n_to_type = new_child.as(AType)
 			return
 		end
@@ -7513,10 +7513,10 @@ redef class ACastAsExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_from_type)
-		v.enter_visit(_n_dot)
-		v.enter_visit(_n_kwas)
-		v.enter_visit(_n_to_type)
+		v.enter_visit(n_from_type)
+		v.enter_visit(n_dot)
+		v.enter_visit(n_kwas)
+		v.enter_visit(n_to_type)
 	end
 end
 redef class AAsNullableExternCall
@@ -7529,25 +7529,25 @@ redef class AAsNullableExternCall
 	)
 	do
 		empty_init
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_kwas = nkwas.as(not null)
+		n_kwas = nkwas.as(not null)
 		nkwas.parent = self
-		_n_kwnullable = nkwnullable.as(not null)
+		n_kwnullable = nkwnullable.as(not null)
 		nkwnullable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_kwas == old_child then
+		if n_kwas == old_child then
 			n_kwas = new_child.as(TKwas)
 			return
 		end
-		if _n_kwnullable == old_child then
+		if n_kwnullable == old_child then
 			n_kwnullable = new_child.as(TKwnullable)
 			return
 		end
@@ -7572,9 +7572,9 @@ redef class AAsNullableExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_kwas)
-		v.enter_visit(_n_kwnullable)
+		v.enter_visit(n_type)
+		v.enter_visit(n_kwas)
+		v.enter_visit(n_kwnullable)
 	end
 end
 redef class AAsNotNullableExternCall
@@ -7588,31 +7588,31 @@ redef class AAsNotNullableExternCall
 	)
 	do
 		empty_init
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
-		_n_kwas = nkwas.as(not null)
+		n_kwas = nkwas.as(not null)
 		nkwas.parent = self
-		_n_kwnot = nkwnot.as(not null)
+		n_kwnot = nkwnot.as(not null)
 		nkwnot.parent = self
-		_n_kwnullable = nkwnullable.as(not null)
+		n_kwnullable = nkwnullable.as(not null)
 		nkwnullable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_kwas == old_child then
+		if n_kwas == old_child then
 			n_kwas = new_child.as(TKwas)
 			return
 		end
-		if _n_kwnot == old_child then
+		if n_kwnot == old_child then
 			n_kwnot = new_child.as(TKwnot)
 			return
 		end
-		if _n_kwnullable == old_child then
+		if n_kwnullable == old_child then
 			n_kwnullable = new_child.as(TKwnullable)
 			return
 		end
@@ -7642,10 +7642,10 @@ redef class AAsNotNullableExternCall
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_kwas)
-		v.enter_visit(_n_kwnot)
-		v.enter_visit(_n_kwnullable)
+		v.enter_visit(n_type)
+		v.enter_visit(n_kwas)
+		v.enter_visit(n_kwnot)
+		v.enter_visit(n_kwnullable)
 	end
 end
 redef class AInLanguage
@@ -7657,19 +7657,19 @@ redef class AInLanguage
 	)
 	do
 		empty_init
-		_n_kwin = nkwin.as(not null)
+		n_kwin = nkwin.as(not null)
 		nkwin.parent = self
-		_n_string = nstring.as(not null)
+		n_string = nstring.as(not null)
 		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_kwin == old_child then
+		if n_kwin == old_child then
 			n_kwin = new_child.as(TKwin)
 			return
 		end
-		if _n_string == old_child then
+		if n_string == old_child then
 			n_string = new_child.as(TString)
 			return
 		end
@@ -7689,8 +7689,8 @@ redef class AInLanguage
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_kwin)
-		v.enter_visit(_n_string)
+		v.enter_visit(n_kwin)
+		v.enter_visit(n_string)
 	end
 end
 redef class AExternCodeBlock
@@ -7702,19 +7702,19 @@ redef class AExternCodeBlock
 	)
 	do
 		empty_init
-		_n_in_language = nin_language
+		n_in_language = nin_language
 		if nin_language != null then nin_language.parent = self
-		_n_extern_code_segment = nextern_code_segment.as(not null)
+		n_extern_code_segment = nextern_code_segment.as(not null)
 		nextern_code_segment.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_in_language == old_child then
+		if n_in_language == old_child then
 			n_in_language = new_child.as(nullable AInLanguage)
 			return
 		end
-		if _n_extern_code_segment == old_child then
+		if n_extern_code_segment == old_child then
 			n_extern_code_segment = new_child.as(TExternCodeSegment)
 			return
 		end
@@ -7734,8 +7734,8 @@ redef class AExternCodeBlock
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_in_language)
-		v.enter_visit(_n_extern_code_segment)
+		v.enter_visit(n_in_language)
+		v.enter_visit(n_extern_code_segment)
 	end
 end
 redef class AQualified
@@ -7747,15 +7747,15 @@ redef class AQualified
 	)
 	do
 		empty_init
-		_n_id.unsafe_add_all(nid)
-		_n_classid = nclassid
+		n_id.unsafe_add_all(nid)
+		n_classid = nclassid
 		if nclassid != null then nclassid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id.replace_child(old_child, new_child) then return
-		if _n_classid == old_child then
+		if n_id.replace_child(old_child, new_child) then return
+		if n_classid == old_child then
 			n_classid = new_child.as(nullable TClassid)
 			return
 		end
@@ -7770,8 +7770,8 @@ redef class AQualified
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_id.visit_all(v)
-		v.enter_visit(_n_classid)
+		n_id.visit_all(v)
+		v.enter_visit(n_classid)
 	end
 end
 redef class ADoc
@@ -7782,19 +7782,19 @@ redef class ADoc
 	)
 	do
 		empty_init
-		_n_comment.unsafe_add_all(ncomment)
+		n_comment.unsafe_add_all(ncomment)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_comment.replace_child(old_child, new_child) then return
+		if n_comment.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_comment.visit_all(v)
+		n_comment.visit_all(v)
 	end
 end
 redef class AAnnotations
@@ -7808,27 +7808,27 @@ redef class AAnnotations
 	)
 	do
 		empty_init
-		_n_at = nat
+		n_at = nat
 		if nat != null then nat.parent = self
-		_n_opar = nopar
+		n_opar = nopar
 		if nopar != null then nopar.parent = self
-		_n_items.unsafe_add_all(nitems)
-		_n_cpar = ncpar
+		n_items.unsafe_add_all(nitems)
+		n_cpar = ncpar
 		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_at == old_child then
+		if n_at == old_child then
 			n_at = new_child.as(nullable TAt)
 			return
 		end
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_items.replace_child(old_child, new_child) then return
-		if _n_cpar == old_child then
+		if n_items.replace_child(old_child, new_child) then return
+		if n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
@@ -7853,10 +7853,10 @@ redef class AAnnotations
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_at)
-		v.enter_visit(_n_opar)
-		_n_items.visit_all(v)
-		v.enter_visit(_n_cpar)
+		v.enter_visit(n_at)
+		v.enter_visit(n_opar)
+		n_items.visit_all(v)
+		v.enter_visit(n_cpar)
 	end
 end
 redef class AAnnotation
@@ -7871,33 +7871,33 @@ redef class AAnnotation
 	)
 	do
 		empty_init
-		_n_atid = natid.as(not null)
+		n_atid = natid.as(not null)
 		natid.parent = self
-		_n_opar = nopar
+		n_opar = nopar
 		if nopar != null then nopar.parent = self
-		_n_args.unsafe_add_all(nargs)
-		_n_cpar = ncpar
+		n_args.unsafe_add_all(nargs)
+		n_cpar = ncpar
 		if ncpar != null then ncpar.parent = self
-		_n_annotations = nannotations
+		n_annotations = nannotations
 		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_atid == old_child then
+		if n_atid == old_child then
 			n_atid = new_child.as(AAtid)
 			return
 		end
-		if _n_opar == old_child then
+		if n_opar == old_child then
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_args.replace_child(old_child, new_child) then return
-		if _n_cpar == old_child then
+		if n_args.replace_child(old_child, new_child) then return
+		if n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
@@ -7927,11 +7927,11 @@ redef class AAnnotation
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_atid)
-		v.enter_visit(_n_opar)
-		_n_args.visit_all(v)
-		v.enter_visit(_n_cpar)
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_atid)
+		v.enter_visit(n_opar)
+		n_args.visit_all(v)
+		v.enter_visit(n_cpar)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class ATypeAtArg
@@ -7942,13 +7942,13 @@ redef class ATypeAtArg
 	)
 	do
 		empty_init
-		_n_type = ntype.as(not null)
+		n_type = ntype.as(not null)
 		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_type == old_child then
+		if n_type == old_child then
 			n_type = new_child.as(AType)
 			return
 		end
@@ -7963,7 +7963,7 @@ redef class ATypeAtArg
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_type)
+		v.enter_visit(n_type)
 	end
 end
 redef class AExprAtArg
@@ -7974,13 +7974,13 @@ redef class AExprAtArg
 	)
 	do
 		empty_init
-		_n_expr = nexpr.as(not null)
+		n_expr = nexpr.as(not null)
 		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr == old_child then
+		if n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
 		end
@@ -7995,7 +7995,7 @@ redef class AExprAtArg
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_expr)
+		v.enter_visit(n_expr)
 	end
 end
 redef class AAtAtArg
@@ -8006,13 +8006,13 @@ redef class AAtAtArg
 	)
 	do
 		empty_init
-		_n_annotations = nannotations.as(not null)
+		n_annotations = nannotations.as(not null)
 		nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_annotations == old_child then
+		if n_annotations == old_child then
 			n_annotations = new_child.as(AAnnotations)
 			return
 		end
@@ -8027,7 +8027,7 @@ redef class AAtAtArg
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_annotations)
+		v.enter_visit(n_annotations)
 	end
 end
 redef class AIdAtid
@@ -8038,13 +8038,13 @@ redef class AIdAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TId)
 			return
 		end
@@ -8059,7 +8059,7 @@ redef class AIdAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AKwexternAtid
@@ -8070,13 +8070,13 @@ redef class AKwexternAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TKwextern)
 			return
 		end
@@ -8091,7 +8091,7 @@ redef class AKwexternAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AKwinternAtid
@@ -8102,13 +8102,13 @@ redef class AKwinternAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TKwintern)
 			return
 		end
@@ -8123,7 +8123,7 @@ redef class AKwinternAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AKwreadableAtid
@@ -8134,13 +8134,13 @@ redef class AKwreadableAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TKwreadable)
 			return
 		end
@@ -8155,7 +8155,7 @@ redef class AKwreadableAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AKwwritableAtid
@@ -8166,13 +8166,13 @@ redef class AKwwritableAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TKwwritable)
 			return
 		end
@@ -8187,7 +8187,7 @@ redef class AKwwritableAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 redef class AKwimportAtid
@@ -8198,13 +8198,13 @@ redef class AKwimportAtid
 	)
 	do
 		empty_init
-		_n_id = nid.as(not null)
+		n_id = nid.as(not null)
 		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id == old_child then
+		if n_id == old_child then
 			n_id = new_child.as(TKwimport)
 			return
 		end
@@ -8219,19 +8219,19 @@ redef class AKwimportAtid
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_id)
+		v.enter_visit(n_id)
 	end
 end
 
 redef class Start
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_base == old_child then
+        if n_base == old_child then
             if new_child == null then
             else
                 new_child.parent = self
 		assert new_child isa AModule
-                _n_base = new_child
+                n_base = new_child
             end
             old_child.parent = null
             return
@@ -8240,9 +8240,9 @@ redef class Start
 
     redef fun visit_all(v: Visitor)
     do
-        if _n_base != null then
-            v.enter_visit(_n_base.as(not null))
+        if n_base != null then
+            v.enter_visit(n_base.as(not null))
         end
-	v.enter_visit(_n_eof)
+	v.enter_visit(n_eof)
     end
 end
