@@ -113,7 +113,7 @@ $     if @is_list
 $     else
 	redef fun n_@{name}=(node)
 	do
-		_n_@{name} = node
+		super
 $       if @modifier
 		if node != null then node.parent = self
 $       else

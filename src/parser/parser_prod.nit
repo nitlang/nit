@@ -37,7 +37,7 @@ redef class AModule
 
 	redef fun n_moduledecl=(node)
 	do
-		_n_moduledecl = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -93,22 +93,22 @@ redef class AModuledecl
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwmodule=(node)
 	do
-		_n_kwmodule = node
+		super
 		node.parent = self
 	end
 	redef fun n_name=(node)
 	do
-		_n_name = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -164,22 +164,22 @@ redef class AStdImport
 
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwimport=(node)
 	do
-		_n_kwimport = node
+		super
 		node.parent = self
 	end
 	redef fun n_name=(node)
 	do
-		_n_name = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -228,17 +228,17 @@ redef class ANoImport
 
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwimport=(node)
 	do
-		_n_kwimport = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwend=(node)
 	do
-		_n_kwend = node
+		super
 		node.parent = self
 	end
 
@@ -290,7 +290,7 @@ redef class APrivateVisibility
 
 	redef fun n_kwprivate=(node)
 	do
-		_n_kwprivate = node
+		super
 		node.parent = self
 	end
 
@@ -322,7 +322,7 @@ redef class AProtectedVisibility
 
 	redef fun n_kwprotected=(node)
 	do
-		_n_kwprotected = node
+		super
 		node.parent = self
 	end
 
@@ -354,7 +354,7 @@ redef class AIntrudeVisibility
 
 	redef fun n_kwintrude=(node)
 	do
-		_n_kwintrude = node
+		super
 		node.parent = self
 	end
 
@@ -444,42 +444,42 @@ redef class AStdClassdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_classkind=(node)
 	do
-		_n_classkind = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_code_block=(node)
 	do
-		_n_extern_code_block = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwend=(node)
 	do
-		_n_kwend = node
+		super
 		node.parent = self
 	end
 
@@ -567,7 +567,7 @@ redef class AConcreteClasskind
 
 	redef fun n_kwclass=(node)
 	do
-		_n_kwclass = node
+		super
 		node.parent = self
 	end
 
@@ -606,12 +606,12 @@ redef class AAbstractClasskind
 
 	redef fun n_kwabstract=(node)
 	do
-		_n_kwabstract = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwclass=(node)
 	do
-		_n_kwclass = node
+		super
 		node.parent = self
 	end
 
@@ -644,7 +644,7 @@ redef class AInterfaceClasskind
 
 	redef fun n_kwinterface=(node)
 	do
-		_n_kwinterface = node
+		super
 		node.parent = self
 	end
 
@@ -676,7 +676,7 @@ redef class AEnumClasskind
 
 	redef fun n_kwenum=(node)
 	do
-		_n_kwenum = node
+		super
 		node.parent = self
 	end
 
@@ -715,12 +715,12 @@ redef class AExternClasskind
 
 	redef fun n_kwextern=(node)
 	do
-		_n_kwextern = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwclass=(node)
 	do
-		_n_kwclass = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -767,17 +767,17 @@ redef class AFormaldef
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -825,17 +825,17 @@ redef class ASuperclass
 
 	redef fun n_kwsuper=(node)
 	do
-		_n_kwsuper = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -939,57 +939,57 @@ redef class AAttrPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_readable=(node)
 	do
-		_n_readable = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_writable=(node)
 	do
-		_n_writable = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwvar=(node)
 	do
-		_n_kwvar = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_id2=(node)
 	do
-		_n_id2 = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1059,27 +1059,27 @@ redef class AMethPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 
@@ -1157,37 +1157,37 @@ redef class ADeferredMethPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwmeth=(node)
 	do
-		_n_kwmeth = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1260,32 +1260,32 @@ redef class AInternMethPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwmeth=(node)
 	do
-		_n_kwmeth = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 
@@ -1378,47 +1378,47 @@ redef class AExternMethPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwmeth=(node)
 	do
-		_n_kwmeth = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 	redef fun n_extern=(node)
 	do
-		_n_extern = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_calls=(node)
 	do
-		_n_extern_calls = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_code_block=(node)
 	do
-		_n_extern_code_block = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1507,42 +1507,42 @@ redef class AConcreteMethPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwmeth=(node)
 	do
-		_n_kwmeth = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1630,42 +1630,42 @@ redef class AConcreteInitPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwinit=(node)
 	do
-		_n_kwinit = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1760,47 +1760,47 @@ redef class AExternInitPropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwnew=(node)
 	do
-		_n_kwnew = node
+		super
 		node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
-		_n_signature = node
+		super
 		node.parent = self
 	end
 	redef fun n_extern=(node)
 	do
-		_n_extern = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_calls=(node)
 	do
-		_n_extern_calls = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_code_block=(node)
 	do
-		_n_extern_code_block = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1847,12 +1847,12 @@ redef class AMainMethPropdef
 
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -1927,37 +1927,37 @@ redef class ATypePropdef
 
 	redef fun n_doc=(node)
 	do
-		_n_doc = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwtype=(node)
 	do
-		_n_kwtype = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -2002,12 +2002,12 @@ redef class AReadAble
 
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwreadable=(node)
 	do
-		_n_kwreadable = node
+		super
 		node.parent = self
 	end
 
@@ -2054,17 +2054,17 @@ redef class AWriteAble
 
 	redef fun n_kwredef=(node)
 	do
-		_n_kwredef = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_visibility=(node)
 	do
-		_n_visibility = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwwritable=(node)
 	do
-		_n_kwwritable = node
+		super
 		node.parent = self
 	end
 
@@ -2098,7 +2098,7 @@ redef class AIdMethid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -2130,7 +2130,7 @@ redef class APlusMethid
 
 	redef fun n_plus=(node)
 	do
-		_n_plus = node
+		super
 		node.parent = self
 	end
 
@@ -2162,7 +2162,7 @@ redef class AMinusMethid
 
 	redef fun n_minus=(node)
 	do
-		_n_minus = node
+		super
 		node.parent = self
 	end
 
@@ -2194,7 +2194,7 @@ redef class AStarMethid
 
 	redef fun n_star=(node)
 	do
-		_n_star = node
+		super
 		node.parent = self
 	end
 
@@ -2226,7 +2226,7 @@ redef class ASlashMethid
 
 	redef fun n_slash=(node)
 	do
-		_n_slash = node
+		super
 		node.parent = self
 	end
 
@@ -2258,7 +2258,7 @@ redef class APercentMethid
 
 	redef fun n_percent=(node)
 	do
-		_n_percent = node
+		super
 		node.parent = self
 	end
 
@@ -2290,7 +2290,7 @@ redef class AEqMethid
 
 	redef fun n_eq=(node)
 	do
-		_n_eq = node
+		super
 		node.parent = self
 	end
 
@@ -2322,7 +2322,7 @@ redef class ANeMethid
 
 	redef fun n_ne=(node)
 	do
-		_n_ne = node
+		super
 		node.parent = self
 	end
 
@@ -2354,7 +2354,7 @@ redef class ALeMethid
 
 	redef fun n_le=(node)
 	do
-		_n_le = node
+		super
 		node.parent = self
 	end
 
@@ -2386,7 +2386,7 @@ redef class AGeMethid
 
 	redef fun n_ge=(node)
 	do
-		_n_ge = node
+		super
 		node.parent = self
 	end
 
@@ -2418,7 +2418,7 @@ redef class ALtMethid
 
 	redef fun n_lt=(node)
 	do
-		_n_lt = node
+		super
 		node.parent = self
 	end
 
@@ -2450,7 +2450,7 @@ redef class AGtMethid
 
 	redef fun n_gt=(node)
 	do
-		_n_gt = node
+		super
 		node.parent = self
 	end
 
@@ -2482,7 +2482,7 @@ redef class ALlMethid
 
 	redef fun n_ll=(node)
 	do
-		_n_ll = node
+		super
 		node.parent = self
 	end
 
@@ -2514,7 +2514,7 @@ redef class AGgMethid
 
 	redef fun n_gg=(node)
 	do
-		_n_gg = node
+		super
 		node.parent = self
 	end
 
@@ -2553,12 +2553,12 @@ redef class ABraMethid
 
 	redef fun n_obra=(node)
 	do
-		_n_obra = node
+		super
 		node.parent = self
 	end
 	redef fun n_cbra=(node)
 	do
-		_n_cbra = node
+		super
 		node.parent = self
 	end
 
@@ -2591,7 +2591,7 @@ redef class AStarshipMethid
 
 	redef fun n_starship=(node)
 	do
-		_n_starship = node
+		super
 		node.parent = self
 	end
 
@@ -2630,12 +2630,12 @@ redef class AAssignMethid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 
@@ -2682,17 +2682,17 @@ redef class ABraassignMethid
 
 	redef fun n_obra=(node)
 	do
-		_n_obra = node
+		super
 		node.parent = self
 	end
 	redef fun n_cbra=(node)
 	do
-		_n_cbra = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 
@@ -2743,17 +2743,17 @@ redef class ASignature
 
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -2809,22 +2809,22 @@ redef class AParam
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_dotdotdot=(node)
 	do
-		_n_dotdotdot = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -2876,17 +2876,17 @@ redef class AType
 
 	redef fun n_kwnullable=(node)
 	do
-		_n_kwnullable = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -2928,12 +2928,12 @@ redef class ALabel
 
 	redef fun n_kwlabel=(node)
 	do
-		_n_kwlabel = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -2969,7 +2969,7 @@ redef class ABlockExpr
 
 	redef fun n_kwend=(node)
 	do
-		_n_kwend = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3037,32 +3037,32 @@ redef class AVardeclExpr
 
 	redef fun n_kwvar=(node)
 	do
-		_n_kwvar = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3106,12 +3106,12 @@ redef class AReturnExpr
 
 	redef fun n_kwreturn=(node)
 	do
-		_n_kwreturn = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3158,17 +3158,17 @@ redef class ABreakExpr
 
 	redef fun n_kwbreak=(node)
 	do
-		_n_kwbreak = node
+		super
 		node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3202,7 +3202,7 @@ redef class AAbortExpr
 
 	redef fun n_kwabort=(node)
 	do
-		_n_kwabort = node
+		super
 		node.parent = self
 	end
 
@@ -3248,17 +3248,17 @@ redef class AContinueExpr
 
 	redef fun n_kwcontinue=(node)
 	do
-		_n_kwcontinue = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3306,17 +3306,17 @@ redef class ADoExpr
 
 	redef fun n_kwdo=(node)
 	do
-		_n_kwdo = node
+		super
 		node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3371,22 +3371,22 @@ redef class AIfExpr
 
 	redef fun n_kwif=(node)
 	do
-		_n_kwif = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_then=(node)
 	do
-		_n_then = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_else=(node)
 	do
-		_n_else = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3456,32 +3456,32 @@ redef class AIfexprExpr
 
 	redef fun n_kwif=(node)
 	do
-		_n_kwif = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwthen=(node)
 	do
-		_n_kwthen = node
+		super
 		node.parent = self
 	end
 	redef fun n_then=(node)
 	do
-		_n_then = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwelse=(node)
 	do
-		_n_kwelse = node
+		super
 		node.parent = self
 	end
 	redef fun n_else=(node)
 	do
-		_n_else = node
+		super
 		node.parent = self
 	end
 
@@ -3546,27 +3546,27 @@ redef class AWhileExpr
 
 	redef fun n_kwwhile=(node)
 	do
-		_n_kwwhile = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwdo=(node)
 	do
-		_n_kwdo = node
+		super
 		node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3616,17 +3616,17 @@ redef class ALoopExpr
 
 	redef fun n_kwloop=(node)
 	do
-		_n_kwloop = node
+		super
 		node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3691,27 +3691,27 @@ redef class AForExpr
 
 	redef fun n_kwfor=(node)
 	do
-		_n_kwfor = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwdo=(node)
 	do
-		_n_kwdo = node
+		super
 		node.parent = self
 	end
 	redef fun n_block=(node)
 	do
-		_n_block = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_label=(node)
 	do
-		_n_label = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3769,22 +3769,22 @@ redef class AAssertExpr
 
 	redef fun n_kwassert=(node)
 	do
-		_n_kwassert = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_else=(node)
 	do
-		_n_else = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -3826,12 +3826,12 @@ redef class AOnceExpr
 
 	redef fun n_kwonce=(node)
 	do
-		_n_kwonce = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 
@@ -3864,7 +3864,7 @@ redef class ASendExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 
@@ -3903,12 +3903,12 @@ redef class ABinopExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -3948,12 +3948,12 @@ redef class AOrExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -3993,12 +3993,12 @@ redef class AAndExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4038,12 +4038,12 @@ redef class AOrElseExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4083,12 +4083,12 @@ redef class AImpliesExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4128,12 +4128,12 @@ redef class ANotExpr
 
 	redef fun n_kwnot=(node)
 	do
-		_n_kwnot = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 
@@ -4173,12 +4173,12 @@ redef class AEqExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4218,12 +4218,12 @@ redef class ANeExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4263,12 +4263,12 @@ redef class ALtExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4308,12 +4308,12 @@ redef class ALeExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4353,12 +4353,12 @@ redef class ALlExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4398,12 +4398,12 @@ redef class AGtExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4443,12 +4443,12 @@ redef class AGeExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4488,12 +4488,12 @@ redef class AGgExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4533,12 +4533,12 @@ redef class AIsaExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 
@@ -4578,12 +4578,12 @@ redef class APlusExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4623,12 +4623,12 @@ redef class AMinusExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4668,12 +4668,12 @@ redef class AStarshipExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4713,12 +4713,12 @@ redef class AStarExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4758,12 +4758,12 @@ redef class ASlashExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4803,12 +4803,12 @@ redef class APercentExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 
@@ -4848,12 +4848,12 @@ redef class AUminusExpr
 
 	redef fun n_minus=(node)
 	do
-		_n_minus = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 
@@ -4907,22 +4907,22 @@ redef class ANewExpr
 
 	redef fun n_kwnew=(node)
 	do
-		_n_kwnew = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 
@@ -4964,12 +4964,12 @@ redef class AAttrExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -5023,22 +5023,22 @@ redef class AAttrAssignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5094,22 +5094,22 @@ redef class AAttrReassignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign_op=(node)
 	do
-		_n_assign_op = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5158,17 +5158,17 @@ redef class ACallExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 
@@ -5230,27 +5230,27 @@ redef class ACallAssignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5314,27 +5314,27 @@ redef class ACallReassignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign_op=(node)
 	do
-		_n_assign_op = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5384,17 +5384,17 @@ redef class ASuperExpr
 
 	redef fun n_qualified=(node)
 	do
-		_n_qualified = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwsuper=(node)
 	do
-		_n_kwsuper = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 
@@ -5442,17 +5442,17 @@ redef class AInitExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwinit=(node)
 	do
-		_n_kwinit = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 
@@ -5493,12 +5493,12 @@ redef class ABraExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 
@@ -5552,22 +5552,22 @@ redef class ABraAssignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5623,22 +5623,22 @@ redef class ABraReassignExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_args=(node)
 	do
-		_n_args = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign_op=(node)
 	do
-		_n_assign_op = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5673,7 +5673,7 @@ redef class AVarExpr
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -5719,17 +5719,17 @@ redef class AVarAssignExpr
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign=(node)
 	do
-		_n_assign = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5777,17 +5777,17 @@ redef class AVarReassignExpr
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 	redef fun n_assign_op=(node)
 	do
-		_n_assign_op = node
+		super
 		node.parent = self
 	end
 	redef fun n_value=(node)
 	do
-		_n_value = node
+		super
 		node.parent = self
 	end
 
@@ -5835,17 +5835,17 @@ redef class ARangeExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -5907,27 +5907,27 @@ redef class ACrangeExpr
 
 	redef fun n_obra=(node)
 	do
-		_n_obra = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 	redef fun n_cbra=(node)
 	do
-		_n_cbra = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -5991,27 +5991,27 @@ redef class AOrangeExpr
 
 	redef fun n_obra=(node)
 	do
-		_n_obra = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr2=(node)
 	do
-		_n_expr2 = node
+		super
 		node.parent = self
 	end
 	redef fun n_cbra=(node)
 	do
-		_n_cbra = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6054,12 +6054,12 @@ redef class AArrayExpr
 
 	redef fun n_exprs=(node)
 	do
-		_n_exprs = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6099,12 +6099,12 @@ redef class ASelfExpr
 
 	redef fun n_kwself=(node)
 	do
-		_n_kwself = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6162,12 +6162,12 @@ redef class ATrueExpr
 
 	redef fun n_kwtrue=(node)
 	do
-		_n_kwtrue = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6207,12 +6207,12 @@ redef class AFalseExpr
 
 	redef fun n_kwfalse=(node)
 	do
-		_n_kwfalse = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6252,12 +6252,12 @@ redef class ANullExpr
 
 	redef fun n_kwnull=(node)
 	do
-		_n_kwnull = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6297,12 +6297,12 @@ redef class ADecIntExpr
 
 	redef fun n_number=(node)
 	do
-		_n_number = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6342,12 +6342,12 @@ redef class AHexIntExpr
 
 	redef fun n_hex_number=(node)
 	do
-		_n_hex_number = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6387,12 +6387,12 @@ redef class AFloatExpr
 
 	redef fun n_float=(node)
 	do
-		_n_float = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6432,12 +6432,12 @@ redef class ACharExpr
 
 	redef fun n_char=(node)
 	do
-		_n_char = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6477,12 +6477,12 @@ redef class AStringExpr
 
 	redef fun n_string=(node)
 	do
-		_n_string = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6515,7 +6515,7 @@ redef class AStartStringExpr
 
 	redef fun n_string=(node)
 	do
-		_n_string = node
+		super
 		node.parent = self
 	end
 
@@ -6547,7 +6547,7 @@ redef class AMidStringExpr
 
 	redef fun n_string=(node)
 	do
-		_n_string = node
+		super
 		node.parent = self
 	end
 
@@ -6579,7 +6579,7 @@ redef class AEndStringExpr
 
 	redef fun n_string=(node)
 	do
-		_n_string = node
+		super
 		node.parent = self
 	end
 
@@ -6614,7 +6614,7 @@ redef class ASuperstringExpr
 
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6668,22 +6668,22 @@ redef class AParExpr
 
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6746,27 +6746,27 @@ redef class AAsCastExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwas=(node)
 	do
-		_n_kwas = node
+		super
 		node.parent = self
 	end
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6837,32 +6837,32 @@ redef class AAsNotnullExpr
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwas=(node)
 	do
-		_n_kwas = node
+		super
 		node.parent = self
 	end
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwnot=(node)
 	do
-		_n_kwnot = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwnull=(node)
 	do
-		_n_kwnull = node
+		super
 		node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -6913,17 +6913,17 @@ redef class AIssetAttrExpr
 
 	redef fun n_kwisset=(node)
 	do
-		_n_kwisset = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -6978,22 +6978,22 @@ redef class ADebugTypeExpr
 
 	redef fun n_kwdebug=(node)
 	do
-		_n_kwdebug = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwtype=(node)
 	do
-		_n_kwtype = node
+		super
 		node.parent = self
 	end
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 
@@ -7061,12 +7061,12 @@ redef class AParExprs
 
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		node.parent = self
 	end
 
@@ -7110,12 +7110,12 @@ redef class ABraExprs
 
 	redef fun n_obra=(node)
 	do
-		_n_obra = node
+		super
 		node.parent = self
 	end
 	redef fun n_cbra=(node)
 	do
-		_n_cbra = node
+		super
 		node.parent = self
 	end
 
@@ -7149,7 +7149,7 @@ redef class APlusAssignOp
 
 	redef fun n_pluseq=(node)
 	do
-		_n_pluseq = node
+		super
 		node.parent = self
 	end
 
@@ -7181,7 +7181,7 @@ redef class AMinusAssignOp
 
 	redef fun n_minuseq=(node)
 	do
-		_n_minuseq = node
+		super
 		node.parent = self
 	end
 
@@ -7223,12 +7223,12 @@ redef class AModuleName
 
 	redef fun n_quad=(node)
 	do
-		_n_quad = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -7265,7 +7265,7 @@ redef class AExternCalls
 
 	redef fun n_kwimport=(node)
 	do
-		_n_kwimport = node
+		super
 		node.parent = self
 	end
 
@@ -7316,7 +7316,7 @@ redef class ASuperExternCall
 
 	redef fun n_kwsuper=(node)
 	do
-		_n_kwsuper = node
+		super
 		node.parent = self
 	end
 
@@ -7348,7 +7348,7 @@ redef class ALocalPropExternCall
 
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 
@@ -7394,17 +7394,17 @@ redef class AFullPropExternCall
 
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_dot=(node)
 	do
-		_n_dot = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_methid=(node)
 	do
-		_n_methid = node
+		super
 		node.parent = self
 	end
 
@@ -7438,7 +7438,7 @@ redef class AInitPropExternCall
 
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 
@@ -7491,22 +7491,22 @@ redef class ACastAsExternCall
 
 	redef fun n_from_type=(node)
 	do
-		_n_from_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_dot=(node)
 	do
-		_n_dot = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_kwas=(node)
 	do
-		_n_kwas = node
+		super
 		node.parent = self
 	end
 	redef fun n_to_type=(node)
 	do
-		_n_to_type = node
+		super
 		node.parent = self
 	end
 
@@ -7555,17 +7555,17 @@ redef class AAsNullableExternCall
 
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwas=(node)
 	do
-		_n_kwas = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwnullable=(node)
 	do
-		_n_kwnullable = node
+		super
 		node.parent = self
 	end
 
@@ -7620,22 +7620,22 @@ redef class AAsNotNullableExternCall
 
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwas=(node)
 	do
-		_n_kwas = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwnot=(node)
 	do
-		_n_kwnot = node
+		super
 		node.parent = self
 	end
 	redef fun n_kwnullable=(node)
 	do
-		_n_kwnullable = node
+		super
 		node.parent = self
 	end
 
@@ -7677,12 +7677,12 @@ redef class AInLanguage
 
 	redef fun n_kwin=(node)
 	do
-		_n_kwin = node
+		super
 		node.parent = self
 	end
 	redef fun n_string=(node)
 	do
-		_n_string = node
+		super
 		node.parent = self
 	end
 
@@ -7722,12 +7722,12 @@ redef class AExternCodeBlock
 
 	redef fun n_in_language=(node)
 	do
-		_n_in_language = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_extern_code_segment=(node)
 	do
-		_n_extern_code_segment = node
+		super
 		node.parent = self
 	end
 
@@ -7763,7 +7763,7 @@ redef class AQualified
 
 	redef fun n_classid=(node)
 	do
-		_n_classid = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -7836,17 +7836,17 @@ redef class AAnnotations
 
 	redef fun n_at=(node)
 	do
-		_n_at = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -7905,22 +7905,22 @@ redef class AAnnotation
 
 	redef fun n_atid=(node)
 	do
-		_n_atid = node
+		super
 		node.parent = self
 	end
 	redef fun n_opar=(node)
 	do
-		_n_opar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_cpar=(node)
 	do
-		_n_cpar = node
+		super
 		if node != null then node.parent = self
 	end
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		if node != null then node.parent = self
 	end
 
@@ -7956,7 +7956,7 @@ redef class ATypeAtArg
 
 	redef fun n_type=(node)
 	do
-		_n_type = node
+		super
 		node.parent = self
 	end
 
@@ -7988,7 +7988,7 @@ redef class AExprAtArg
 
 	redef fun n_expr=(node)
 	do
-		_n_expr = node
+		super
 		node.parent = self
 	end
 
@@ -8020,7 +8020,7 @@ redef class AAtAtArg
 
 	redef fun n_annotations=(node)
 	do
-		_n_annotations = node
+		super
 		node.parent = self
 	end
 
@@ -8052,7 +8052,7 @@ redef class AIdAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -8084,7 +8084,7 @@ redef class AKwexternAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -8116,7 +8116,7 @@ redef class AKwinternAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -8148,7 +8148,7 @@ redef class AKwreadableAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -8180,7 +8180,7 @@ redef class AKwwritableAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
@@ -8212,7 +8212,7 @@ redef class AKwimportAtid
 
 	redef fun n_id=(node)
 	do
-		_n_id = node
+		super
 		node.parent = self
 	end
 
