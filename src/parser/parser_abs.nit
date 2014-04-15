@@ -1233,11 +1233,11 @@ class Start
     readable var _n_base: nullable AModule
     readable var _n_eof: EOF
     init(
-        n_base: nullable AModule,
-        n_eof: EOF)
+        nbase: nullable AModule,
+        neof: EOF)
     do
-        _n_base = n_base
-        _n_eof = n_eof
+        _n_base = nbase
+        _n_eof = neof
     end
 
 end

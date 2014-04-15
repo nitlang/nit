@@ -10,18 +10,18 @@ redef class AModule
 	private init empty_init do end
 
 	init init_amodule (
-		n_moduledecl: nullable AModuledecl,
-		n_imports: Collection[Object], # Should be Collection[AImport]
-		n_extern_code_blocks: Collection[Object], # Should be Collection[AExternCodeBlock]
-		n_classdefs: Collection[Object] # Should be Collection[AClassdef]
+		nmoduledecl: nullable AModuledecl,
+		nimports: Collection[Object], # Should be Collection[AImport]
+		nextern_code_blocks: Collection[Object], # Should be Collection[AExternCodeBlock]
+		nclassdefs: Collection[Object] # Should be Collection[AClassdef]
 	)
 	do
 		empty_init
-		_n_moduledecl = n_moduledecl
-		if n_moduledecl != null then n_moduledecl.parent = self
-		_n_imports.unsafe_add_all(n_imports)
-		_n_extern_code_blocks.unsafe_add_all(n_extern_code_blocks)
-		_n_classdefs.unsafe_add_all(n_classdefs)
+		_n_moduledecl = nmoduledecl
+		if nmoduledecl != null then nmoduledecl.parent = self
+		_n_imports.unsafe_add_all(nimports)
+		_n_extern_code_blocks.unsafe_add_all(nextern_code_blocks)
+		_n_classdefs.unsafe_add_all(nclassdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -54,21 +54,21 @@ redef class AModuledecl
 	private init empty_init do end
 
 	init init_amoduledecl (
-		n_doc: nullable ADoc,
-		n_kwmodule: nullable TKwmodule,
-		n_name: nullable AModuleName,
-		n_annotations: nullable AAnnotations
+		ndoc: nullable ADoc,
+		nkwmodule: nullable TKwmodule,
+		nname: nullable AModuleName,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwmodule = n_kwmodule.as(not null)
-		n_kwmodule.parent = self
-		_n_name = n_name.as(not null)
-		n_name.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwmodule = nkwmodule.as(not null)
+		nkwmodule.parent = self
+		_n_name = nname.as(not null)
+		nname.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -125,21 +125,21 @@ redef class AStdImport
 	private init empty_init do end
 
 	init init_astdimport (
-		n_visibility: nullable AVisibility,
-		n_kwimport: nullable TKwimport,
-		n_name: nullable AModuleName,
-		n_annotations: nullable AAnnotations
+		nvisibility: nullable AVisibility,
+		nkwimport: nullable TKwimport,
+		nname: nullable AModuleName,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwimport = n_kwimport.as(not null)
-		n_kwimport.parent = self
-		_n_name = n_name.as(not null)
-		n_name.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwimport = nkwimport.as(not null)
+		nkwimport.parent = self
+		_n_name = nname.as(not null)
+		nname.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -196,18 +196,18 @@ redef class ANoImport
 	private init empty_init do end
 
 	init init_anoimport (
-		n_visibility: nullable AVisibility,
-		n_kwimport: nullable TKwimport,
-		n_kwend: nullable TKwend
+		nvisibility: nullable AVisibility,
+		nkwimport: nullable TKwimport,
+		nkwend: nullable TKwend
 	)
 	do
 		empty_init
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwimport = n_kwimport.as(not null)
-		n_kwimport.parent = self
-		_n_kwend = n_kwend.as(not null)
-		n_kwend.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwimport = nkwimport.as(not null)
+		nkwimport.parent = self
+		_n_kwend = nkwend.as(not null)
+		nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -272,12 +272,12 @@ redef class APrivateVisibility
 	private init empty_init do end
 
 	init init_aprivatevisibility (
-		n_kwprivate: nullable TKwprivate
+		nkwprivate: nullable TKwprivate
 	)
 	do
 		empty_init
-		_n_kwprivate = n_kwprivate.as(not null)
-		n_kwprivate.parent = self
+		_n_kwprivate = nkwprivate.as(not null)
+		nkwprivate.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -304,12 +304,12 @@ redef class AProtectedVisibility
 	private init empty_init do end
 
 	init init_aprotectedvisibility (
-		n_kwprotected: nullable TKwprotected
+		nkwprotected: nullable TKwprotected
 	)
 	do
 		empty_init
-		_n_kwprotected = n_kwprotected.as(not null)
-		n_kwprotected.parent = self
+		_n_kwprotected = nkwprotected.as(not null)
+		nkwprotected.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -336,12 +336,12 @@ redef class AIntrudeVisibility
 	private init empty_init do end
 
 	init init_aintrudevisibility (
-		n_kwintrude: nullable TKwintrude
+		nkwintrude: nullable TKwintrude
 	)
 	do
 		empty_init
-		_n_kwintrude = n_kwintrude.as(not null)
-		n_kwintrude.parent = self
+		_n_kwintrude = nkwintrude.as(not null)
+		nkwintrude.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -368,39 +368,39 @@ redef class AStdClassdef
 	private init empty_init do end
 
 	init init_astdclassdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_classkind: nullable AClasskind,
-		n_id: nullable TClassid,
-		n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
-		n_annotations: nullable AAnnotations,
-		n_extern_code_block: nullable AExternCodeBlock,
-		n_superclasses: Collection[Object], # Should be Collection[ASuperclass]
-		n_propdefs: Collection[Object], # Should be Collection[APropdef]
-		n_kwend: nullable TKwend
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nclasskind: nullable AClasskind,
+		nid: nullable TClassid,
+		nformaldefs: Collection[Object], # Should be Collection[AFormaldef]
+		nannotations: nullable AAnnotations,
+		nextern_code_block: nullable AExternCodeBlock,
+		nsuperclasses: Collection[Object], # Should be Collection[ASuperclass]
+		npropdefs: Collection[Object], # Should be Collection[APropdef]
+		nkwend: nullable TKwend
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_classkind = n_classkind.as(not null)
-		n_classkind.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
-		_n_formaldefs.unsafe_add_all(n_formaldefs)
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_extern_code_block = n_extern_code_block
-		if n_extern_code_block != null then n_extern_code_block.parent = self
-		_n_superclasses.unsafe_add_all(n_superclasses)
-		_n_propdefs.unsafe_add_all(n_propdefs)
-		_n_kwend = n_kwend.as(not null)
-		n_kwend.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_classkind = nclasskind.as(not null)
+		nclasskind.parent = self
+		_n_id = nid
+		if nid != null then nid.parent = self
+		_n_formaldefs.unsafe_add_all(nformaldefs)
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
+		_n_extern_code_block = nextern_code_block
+		if nextern_code_block != null then nextern_code_block.parent = self
+		_n_superclasses.unsafe_add_all(nsuperclasses)
+		_n_propdefs.unsafe_add_all(npropdefs)
+		_n_kwend = nkwend.as(not null)
+		nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -503,11 +503,11 @@ redef class ATopClassdef
 	private init empty_init do end
 
 	init init_atopclassdef (
-		n_propdefs: Collection[Object] # Should be Collection[APropdef]
+		npropdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
 		empty_init
-		_n_propdefs.unsafe_add_all(n_propdefs)
+		_n_propdefs.unsafe_add_all(npropdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -526,11 +526,11 @@ redef class AMainClassdef
 	private init empty_init do end
 
 	init init_amainclassdef (
-		n_propdefs: Collection[Object] # Should be Collection[APropdef]
+		npropdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
 		empty_init
-		_n_propdefs.unsafe_add_all(n_propdefs)
+		_n_propdefs.unsafe_add_all(npropdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -549,12 +549,12 @@ redef class AConcreteClasskind
 	private init empty_init do end
 
 	init init_aconcreteclasskind (
-		n_kwclass: nullable TKwclass
+		nkwclass: nullable TKwclass
 	)
 	do
 		empty_init
-		_n_kwclass = n_kwclass.as(not null)
-		n_kwclass.parent = self
+		_n_kwclass = nkwclass.as(not null)
+		nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -581,15 +581,15 @@ redef class AAbstractClasskind
 	private init empty_init do end
 
 	init init_aabstractclasskind (
-		n_kwabstract: nullable TKwabstract,
-		n_kwclass: nullable TKwclass
+		nkwabstract: nullable TKwabstract,
+		nkwclass: nullable TKwclass
 	)
 	do
 		empty_init
-		_n_kwabstract = n_kwabstract.as(not null)
-		n_kwabstract.parent = self
-		_n_kwclass = n_kwclass.as(not null)
-		n_kwclass.parent = self
+		_n_kwabstract = nkwabstract.as(not null)
+		nkwabstract.parent = self
+		_n_kwclass = nkwclass.as(not null)
+		nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -626,12 +626,12 @@ redef class AInterfaceClasskind
 	private init empty_init do end
 
 	init init_ainterfaceclasskind (
-		n_kwinterface: nullable TKwinterface
+		nkwinterface: nullable TKwinterface
 	)
 	do
 		empty_init
-		_n_kwinterface = n_kwinterface.as(not null)
-		n_kwinterface.parent = self
+		_n_kwinterface = nkwinterface.as(not null)
+		nkwinterface.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -658,12 +658,12 @@ redef class AEnumClasskind
 	private init empty_init do end
 
 	init init_aenumclasskind (
-		n_kwenum: nullable TKwenum
+		nkwenum: nullable TKwenum
 	)
 	do
 		empty_init
-		_n_kwenum = n_kwenum.as(not null)
-		n_kwenum.parent = self
+		_n_kwenum = nkwenum.as(not null)
+		nkwenum.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -690,15 +690,15 @@ redef class AExternClasskind
 	private init empty_init do end
 
 	init init_aexternclasskind (
-		n_kwextern: nullable TKwextern,
-		n_kwclass: nullable TKwclass
+		nkwextern: nullable TKwextern,
+		nkwclass: nullable TKwclass
 	)
 	do
 		empty_init
-		_n_kwextern = n_kwextern.as(not null)
-		n_kwextern.parent = self
-		_n_kwclass = n_kwclass
-		if n_kwclass != null then n_kwclass.parent = self
+		_n_kwextern = nkwextern.as(not null)
+		nkwextern.parent = self
+		_n_kwclass = nkwclass
+		if nkwclass != null then nkwclass.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -735,18 +735,18 @@ redef class AFormaldef
 	private init empty_init do end
 
 	init init_aformaldef (
-		n_id: nullable TClassid,
-		n_type: nullable AType,
-		n_annotations: nullable AAnnotations
+		nid: nullable TClassid,
+		ntype: nullable AType,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_type = n_type
-		if n_type != null then n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_type = ntype
+		if ntype != null then ntype.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -793,18 +793,18 @@ redef class ASuperclass
 	private init empty_init do end
 
 	init init_asuperclass (
-		n_kwsuper: nullable TKwsuper,
-		n_type: nullable AType,
-		n_annotations: nullable AAnnotations
+		nkwsuper: nullable TKwsuper,
+		ntype: nullable AType,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwsuper = n_kwsuper.as(not null)
-		n_kwsuper.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwsuper = nkwsuper.as(not null)
+		nkwsuper.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -851,42 +851,42 @@ redef class AAttrPropdef
 	private init empty_init do end
 
 	init init_aattrpropdef (
-		n_doc: nullable ADoc,
-		n_readable: nullable AAble,
-		n_writable: nullable AAble,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwvar: nullable TKwvar,
-		n_id: nullable TAttrid,
-		n_id2: nullable TId,
-		n_type: nullable AType,
-		n_annotations: nullable AAnnotations,
-		n_expr: nullable AExpr
+		ndoc: nullable ADoc,
+		nreadable: nullable AAble,
+		nwritable: nullable AAble,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwvar: nullable TKwvar,
+		nid: nullable TAttrid,
+		nid2: nullable TId,
+		ntype: nullable AType,
+		nannotations: nullable AAnnotations,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_readable = n_readable
-		if n_readable != null then n_readable.parent = self
-		_n_writable = n_writable
-		if n_writable != null then n_writable.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwvar = n_kwvar.as(not null)
-		n_kwvar.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
-		_n_id2 = n_id2
-		if n_id2 != null then n_id2.parent = self
-		_n_type = n_type
-		if n_type != null then n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_expr = n_expr
-		if n_expr != null then n_expr.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_readable = nreadable
+		if nreadable != null then nreadable.parent = self
+		_n_writable = nwritable
+		if nwritable != null then nwritable.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwvar = nkwvar.as(not null)
+		nkwvar.parent = self
+		_n_id = nid
+		if nid != null then nid.parent = self
+		_n_id2 = nid2
+		if nid2 != null then nid2.parent = self
+		_n_type = ntype
+		if ntype != null then ntype.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
+		_n_expr = nexpr
+		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1013,24 +1013,24 @@ redef class AMethPropdef
 	private init empty_init do end
 
 	init init_amethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1097,30 +1097,30 @@ redef class ADeferredMethPropdef
 	private init empty_init do end
 
 	init init_adeferredmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwmeth: nullable TKwmeth,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwmeth = nkwmeth.as(not null)
+		nkwmeth.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1207,27 +1207,27 @@ redef class AInternMethPropdef
 	private init empty_init do end
 
 	init init_ainternmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwmeth: nullable TKwmeth,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwmeth = nkwmeth.as(not null)
+		nkwmeth.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1304,36 +1304,36 @@ redef class AExternMethPropdef
 	private init empty_init do end
 
 	init init_aexternmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_extern: nullable TString,
-		n_extern_calls: nullable AExternCalls,
-		n_extern_code_block: nullable AExternCodeBlock
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwmeth: nullable TKwmeth,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature,
+		nextern: nullable TString,
+		nextern_calls: nullable AExternCalls,
+		nextern_code_block: nullable AExternCodeBlock
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_extern = n_extern
-		if n_extern != null then n_extern.parent = self
-		_n_extern_calls = n_extern_calls
-		if n_extern_calls != null then n_extern_calls.parent = self
-		_n_extern_code_block = n_extern_code_block
-		if n_extern_code_block != null then n_extern_code_block.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwmeth = nkwmeth.as(not null)
+		nkwmeth.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
+		_n_extern = nextern
+		if nextern != null then nextern.parent = self
+		_n_extern_calls = nextern_calls
+		if nextern_calls != null then nextern_calls.parent = self
+		_n_extern_code_block = nextern_code_block
+		if nextern_code_block != null then nextern_code_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1440,33 +1440,33 @@ redef class AConcreteMethPropdef
 	private init empty_init do end
 
 	init init_aconcretemethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_block: nullable AExpr
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwmeth: nullable TKwmeth,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature,
+		nannotations: nullable AAnnotations,
+		nblock: nullable AExpr
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwmeth = nkwmeth.as(not null)
+		nkwmeth.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1563,33 +1563,33 @@ redef class AConcreteInitPropdef
 	private init empty_init do end
 
 	init init_aconcreteinitpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwinit: nullable TKwinit,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_block: nullable AExpr
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwinit: nullable TKwinit,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature,
+		nannotations: nullable AAnnotations,
+		nblock: nullable AExpr
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwinit = n_kwinit.as(not null)
-		n_kwinit.parent = self
-		_n_methid = n_methid
-		if n_methid != null then n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwinit = nkwinit.as(not null)
+		nkwinit.parent = self
+		_n_methid = nmethid
+		if nmethid != null then nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1686,36 +1686,36 @@ redef class AExternInitPropdef
 	private init empty_init do end
 
 	init init_aexterninitpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwnew: nullable TKwnew,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_extern: nullable TString,
-		n_extern_calls: nullable AExternCalls,
-		n_extern_code_block: nullable AExternCodeBlock
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwnew: nullable TKwnew,
+		nmethid: nullable AMethid,
+		nsignature: nullable ASignature,
+		nextern: nullable TString,
+		nextern_calls: nullable AExternCalls,
+		nextern_code_block: nullable AExternCodeBlock
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwnew = n_kwnew.as(not null)
-		n_kwnew.parent = self
-		_n_methid = n_methid
-		if n_methid != null then n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_extern = n_extern
-		if n_extern != null then n_extern.parent = self
-		_n_extern_calls = n_extern_calls
-		if n_extern_calls != null then n_extern_calls.parent = self
-		_n_extern_code_block = n_extern_code_block
-		if n_extern_code_block != null then n_extern_code_block.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwnew = nkwnew.as(not null)
+		nkwnew.parent = self
+		_n_methid = nmethid
+		if nmethid != null then nmethid.parent = self
+		_n_signature = nsignature.as(not null)
+		nsignature.parent = self
+		_n_extern = nextern
+		if nextern != null then nextern.parent = self
+		_n_extern_calls = nextern_calls
+		if nextern_calls != null then nextern_calls.parent = self
+		_n_extern_code_block = nextern_code_block
+		if nextern_code_block != null then nextern_code_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1822,15 +1822,15 @@ redef class AMainMethPropdef
 	private init empty_init do end
 
 	init init_amainmethpropdef (
-		n_kwredef: nullable TKwredef,
-		n_block: nullable AExpr
+		nkwredef: nullable TKwredef,
+		nblock: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1867,30 +1867,30 @@ redef class ATypePropdef
 	private init empty_init do end
 
 	init init_atypepropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwtype: nullable TKwtype,
-		n_id: nullable TClassid,
-		n_type: nullable AType,
-		n_annotations: nullable AAnnotations
+		ndoc: nullable ADoc,
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwtype: nullable TKwtype,
+		nid: nullable TClassid,
+		ntype: nullable AType,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwtype = n_kwtype.as(not null)
-		n_kwtype.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_doc = ndoc
+		if ndoc != null then ndoc.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility.as(not null)
+		nvisibility.parent = self
+		_n_kwtype = nkwtype.as(not null)
+		nkwtype.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1977,15 +1977,15 @@ redef class AReadAble
 	private init empty_init do end
 
 	init init_areadable (
-		n_kwredef: nullable TKwredef,
-		n_kwreadable: nullable TKwreadable
+		nkwredef: nullable TKwredef,
+		nkwreadable: nullable TKwreadable
 	)
 	do
 		empty_init
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_kwreadable = n_kwreadable.as(not null)
-		n_kwreadable.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_kwreadable = nkwreadable.as(not null)
+		nkwreadable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2022,18 +2022,18 @@ redef class AWriteAble
 	private init empty_init do end
 
 	init init_awriteable (
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwwritable: nullable TKwwritable
+		nkwredef: nullable TKwredef,
+		nvisibility: nullable AVisibility,
+		nkwwritable: nullable TKwwritable
 	)
 	do
 		empty_init
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility
-		if n_visibility != null then n_visibility.parent = self
-		_n_kwwritable = n_kwwritable.as(not null)
-		n_kwwritable.parent = self
+		_n_kwredef = nkwredef
+		if nkwredef != null then nkwredef.parent = self
+		_n_visibility = nvisibility
+		if nvisibility != null then nvisibility.parent = self
+		_n_kwwritable = nkwwritable.as(not null)
+		nkwwritable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2080,12 +2080,12 @@ redef class AIdMethid
 	private init empty_init do end
 
 	init init_aidmethid (
-		n_id: nullable TId
+		nid: nullable TId
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2112,12 +2112,12 @@ redef class APlusMethid
 	private init empty_init do end
 
 	init init_aplusmethid (
-		n_plus: nullable TPlus
+		nplus: nullable TPlus
 	)
 	do
 		empty_init
-		_n_plus = n_plus.as(not null)
-		n_plus.parent = self
+		_n_plus = nplus.as(not null)
+		nplus.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2144,12 +2144,12 @@ redef class AMinusMethid
 	private init empty_init do end
 
 	init init_aminusmethid (
-		n_minus: nullable TMinus
+		nminus: nullable TMinus
 	)
 	do
 		empty_init
-		_n_minus = n_minus.as(not null)
-		n_minus.parent = self
+		_n_minus = nminus.as(not null)
+		nminus.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2176,12 +2176,12 @@ redef class AStarMethid
 	private init empty_init do end
 
 	init init_astarmethid (
-		n_star: nullable TStar
+		nstar: nullable TStar
 	)
 	do
 		empty_init
-		_n_star = n_star.as(not null)
-		n_star.parent = self
+		_n_star = nstar.as(not null)
+		nstar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2208,12 +2208,12 @@ redef class ASlashMethid
 	private init empty_init do end
 
 	init init_aslashmethid (
-		n_slash: nullable TSlash
+		nslash: nullable TSlash
 	)
 	do
 		empty_init
-		_n_slash = n_slash.as(not null)
-		n_slash.parent = self
+		_n_slash = nslash.as(not null)
+		nslash.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2240,12 +2240,12 @@ redef class APercentMethid
 	private init empty_init do end
 
 	init init_apercentmethid (
-		n_percent: nullable TPercent
+		npercent: nullable TPercent
 	)
 	do
 		empty_init
-		_n_percent = n_percent.as(not null)
-		n_percent.parent = self
+		_n_percent = npercent.as(not null)
+		npercent.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2272,12 +2272,12 @@ redef class AEqMethid
 	private init empty_init do end
 
 	init init_aeqmethid (
-		n_eq: nullable TEq
+		neq: nullable TEq
 	)
 	do
 		empty_init
-		_n_eq = n_eq.as(not null)
-		n_eq.parent = self
+		_n_eq = neq.as(not null)
+		neq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2304,12 +2304,12 @@ redef class ANeMethid
 	private init empty_init do end
 
 	init init_anemethid (
-		n_ne: nullable TNe
+		nne: nullable TNe
 	)
 	do
 		empty_init
-		_n_ne = n_ne.as(not null)
-		n_ne.parent = self
+		_n_ne = nne.as(not null)
+		nne.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2336,12 +2336,12 @@ redef class ALeMethid
 	private init empty_init do end
 
 	init init_alemethid (
-		n_le: nullable TLe
+		nle: nullable TLe
 	)
 	do
 		empty_init
-		_n_le = n_le.as(not null)
-		n_le.parent = self
+		_n_le = nle.as(not null)
+		nle.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2368,12 +2368,12 @@ redef class AGeMethid
 	private init empty_init do end
 
 	init init_agemethid (
-		n_ge: nullable TGe
+		nge: nullable TGe
 	)
 	do
 		empty_init
-		_n_ge = n_ge.as(not null)
-		n_ge.parent = self
+		_n_ge = nge.as(not null)
+		nge.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2400,12 +2400,12 @@ redef class ALtMethid
 	private init empty_init do end
 
 	init init_altmethid (
-		n_lt: nullable TLt
+		nlt: nullable TLt
 	)
 	do
 		empty_init
-		_n_lt = n_lt.as(not null)
-		n_lt.parent = self
+		_n_lt = nlt.as(not null)
+		nlt.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2432,12 +2432,12 @@ redef class AGtMethid
 	private init empty_init do end
 
 	init init_agtmethid (
-		n_gt: nullable TGt
+		ngt: nullable TGt
 	)
 	do
 		empty_init
-		_n_gt = n_gt.as(not null)
-		n_gt.parent = self
+		_n_gt = ngt.as(not null)
+		ngt.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2464,12 +2464,12 @@ redef class ALlMethid
 	private init empty_init do end
 
 	init init_allmethid (
-		n_ll: nullable TLl
+		nll: nullable TLl
 	)
 	do
 		empty_init
-		_n_ll = n_ll.as(not null)
-		n_ll.parent = self
+		_n_ll = nll.as(not null)
+		nll.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2496,12 +2496,12 @@ redef class AGgMethid
 	private init empty_init do end
 
 	init init_aggmethid (
-		n_gg: nullable TGg
+		ngg: nullable TGg
 	)
 	do
 		empty_init
-		_n_gg = n_gg.as(not null)
-		n_gg.parent = self
+		_n_gg = ngg.as(not null)
+		ngg.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2528,15 +2528,15 @@ redef class ABraMethid
 	private init empty_init do end
 
 	init init_abramethid (
-		n_obra: nullable TObra,
-		n_cbra: nullable TCbra
+		nobra: nullable TObra,
+		ncbra: nullable TCbra
 	)
 	do
 		empty_init
-		_n_obra = n_obra.as(not null)
-		n_obra.parent = self
-		_n_cbra = n_cbra.as(not null)
-		n_cbra.parent = self
+		_n_obra = nobra.as(not null)
+		nobra.parent = self
+		_n_cbra = ncbra.as(not null)
+		ncbra.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2573,12 +2573,12 @@ redef class AStarshipMethid
 	private init empty_init do end
 
 	init init_astarshipmethid (
-		n_starship: nullable TStarship
+		nstarship: nullable TStarship
 	)
 	do
 		empty_init
-		_n_starship = n_starship.as(not null)
-		n_starship.parent = self
+		_n_starship = nstarship.as(not null)
+		nstarship.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2605,15 +2605,15 @@ redef class AAssignMethid
 	private init empty_init do end
 
 	init init_aassignmethid (
-		n_id: nullable TId,
-		n_assign: nullable TAssign
+		nid: nullable TId,
+		nassign: nullable TAssign
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2650,18 +2650,18 @@ redef class ABraassignMethid
 	private init empty_init do end
 
 	init init_abraassignmethid (
-		n_obra: nullable TObra,
-		n_cbra: nullable TCbra,
-		n_assign: nullable TAssign
+		nobra: nullable TObra,
+		ncbra: nullable TCbra,
+		nassign: nullable TAssign
 	)
 	do
 		empty_init
-		_n_obra = n_obra.as(not null)
-		n_obra.parent = self
-		_n_cbra = n_cbra.as(not null)
-		n_cbra.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
+		_n_obra = nobra.as(not null)
+		nobra.parent = self
+		_n_cbra = ncbra.as(not null)
+		ncbra.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2708,20 +2708,20 @@ redef class ASignature
 	private init empty_init do end
 
 	init init_asignature (
-		n_opar: nullable TOpar,
-		n_params: Collection[Object], # Should be Collection[AParam]
-		n_cpar: nullable TCpar,
-		n_type: nullable AType
+		nopar: nullable TOpar,
+		nparams: Collection[Object], # Should be Collection[AParam]
+		ncpar: nullable TCpar,
+		ntype: nullable AType
 	)
 	do
 		empty_init
-		_n_opar = n_opar
-		if n_opar != null then n_opar.parent = self
-		_n_params.unsafe_add_all(n_params)
-		_n_cpar = n_cpar
-		if n_cpar != null then n_cpar.parent = self
-		_n_type = n_type
-		if n_type != null then n_type.parent = self
+		_n_opar = nopar
+		if nopar != null then nopar.parent = self
+		_n_params.unsafe_add_all(nparams)
+		_n_cpar = ncpar
+		if ncpar != null then ncpar.parent = self
+		_n_type = ntype
+		if ntype != null then ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2770,21 +2770,21 @@ redef class AParam
 	private init empty_init do end
 
 	init init_aparam (
-		n_id: nullable TId,
-		n_type: nullable AType,
-		n_dotdotdot: nullable TDotdotdot,
-		n_annotations: nullable AAnnotations
+		nid: nullable TId,
+		ntype: nullable AType,
+		ndotdotdot: nullable TDotdotdot,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_type = n_type
-		if n_type != null then n_type.parent = self
-		_n_dotdotdot = n_dotdotdot
-		if n_dotdotdot != null then n_dotdotdot.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_type = ntype
+		if ntype != null then ntype.parent = self
+		_n_dotdotdot = ndotdotdot
+		if ndotdotdot != null then ndotdotdot.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2841,20 +2841,20 @@ redef class AType
 	private init empty_init do end
 
 	init init_atype (
-		n_kwnullable: nullable TKwnullable,
-		n_id: nullable TClassid,
-		n_types: Collection[Object], # Should be Collection[AType]
-		n_annotations: nullable AAnnotations
+		nkwnullable: nullable TKwnullable,
+		nid: nullable TClassid,
+		ntypes: Collection[Object], # Should be Collection[AType]
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwnullable = n_kwnullable
-		if n_kwnullable != null then n_kwnullable.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_types.unsafe_add_all(n_types)
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwnullable = nkwnullable
+		if nkwnullable != null then nkwnullable.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_types.unsafe_add_all(ntypes)
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2903,15 +2903,15 @@ redef class ALabel
 	private init empty_init do end
 
 	init init_alabel (
-		n_kwlabel: nullable TKwlabel,
-		n_id: nullable TId
+		nkwlabel: nullable TKwlabel,
+		nid: nullable TId
 	)
 	do
 		empty_init
-		_n_kwlabel = n_kwlabel.as(not null)
-		n_kwlabel.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_kwlabel = nkwlabel.as(not null)
+		nkwlabel.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2948,14 +2948,14 @@ redef class ABlockExpr
 	private init empty_init do end
 
 	init init_ablockexpr (
-		n_expr: Collection[Object], # Should be Collection[AExpr]
-		n_kwend: nullable TKwend
+		nexpr: Collection[Object], # Should be Collection[AExpr]
+		nkwend: nullable TKwend
 	)
 	do
 		empty_init
-		_n_expr.unsafe_add_all(n_expr)
-		_n_kwend = n_kwend
-		if n_kwend != null then n_kwend.parent = self
+		_n_expr.unsafe_add_all(nexpr)
+		_n_kwend = nkwend
+		if nkwend != null then nkwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -2984,27 +2984,27 @@ redef class AVardeclExpr
 	private init empty_init do end
 
 	init init_avardeclexpr (
-		n_kwvar: nullable TKwvar,
-		n_id: nullable TId,
-		n_type: nullable AType,
-		n_assign: nullable TAssign,
-		n_expr: nullable AExpr,
-		n_annotations: nullable AAnnotations
+		nkwvar: nullable TKwvar,
+		nid: nullable TId,
+		ntype: nullable AType,
+		nassign: nullable TAssign,
+		nexpr: nullable AExpr,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwvar = n_kwvar.as(not null)
-		n_kwvar.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_type = n_type
-		if n_type != null then n_type.parent = self
-		_n_assign = n_assign
-		if n_assign != null then n_assign.parent = self
-		_n_expr = n_expr
-		if n_expr != null then n_expr.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwvar = nkwvar.as(not null)
+		nkwvar.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_type = ntype
+		if ntype != null then ntype.parent = self
+		_n_assign = nassign
+		if nassign != null then nassign.parent = self
+		_n_expr = nexpr
+		if nexpr != null then nexpr.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3081,15 +3081,15 @@ redef class AReturnExpr
 	private init empty_init do end
 
 	init init_areturnexpr (
-		n_kwreturn: nullable TKwreturn,
-		n_expr: nullable AExpr
+		nkwreturn: nullable TKwreturn,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwreturn = n_kwreturn
-		if n_kwreturn != null then n_kwreturn.parent = self
-		_n_expr = n_expr
-		if n_expr != null then n_expr.parent = self
+		_n_kwreturn = nkwreturn
+		if nkwreturn != null then nkwreturn.parent = self
+		_n_expr = nexpr
+		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3126,18 +3126,18 @@ redef class ABreakExpr
 	private init empty_init do end
 
 	init init_abreakexpr (
-		n_kwbreak: nullable TKwbreak,
-		n_label: nullable ALabel,
-		n_expr: nullable AExpr
+		nkwbreak: nullable TKwbreak,
+		nlabel: nullable ALabel,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwbreak = n_kwbreak.as(not null)
-		n_kwbreak.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
-		_n_expr = n_expr
-		if n_expr != null then n_expr.parent = self
+		_n_kwbreak = nkwbreak.as(not null)
+		nkwbreak.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
+		_n_expr = nexpr
+		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3184,12 +3184,12 @@ redef class AAbortExpr
 	private init empty_init do end
 
 	init init_aabortexpr (
-		n_kwabort: nullable TKwabort
+		nkwabort: nullable TKwabort
 	)
 	do
 		empty_init
-		_n_kwabort = n_kwabort.as(not null)
-		n_kwabort.parent = self
+		_n_kwabort = nkwabort.as(not null)
+		nkwabort.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3216,18 +3216,18 @@ redef class AContinueExpr
 	private init empty_init do end
 
 	init init_acontinueexpr (
-		n_kwcontinue: nullable TKwcontinue,
-		n_label: nullable ALabel,
-		n_expr: nullable AExpr
+		nkwcontinue: nullable TKwcontinue,
+		nlabel: nullable ALabel,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwcontinue = n_kwcontinue
-		if n_kwcontinue != null then n_kwcontinue.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
-		_n_expr = n_expr
-		if n_expr != null then n_expr.parent = self
+		_n_kwcontinue = nkwcontinue
+		if nkwcontinue != null then nkwcontinue.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
+		_n_expr = nexpr
+		if nexpr != null then nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3274,18 +3274,18 @@ redef class ADoExpr
 	private init empty_init do end
 
 	init init_adoexpr (
-		n_kwdo: nullable TKwdo,
-		n_block: nullable AExpr,
-		n_label: nullable ALabel
+		nkwdo: nullable TKwdo,
+		nblock: nullable AExpr,
+		nlabel: nullable ALabel
 	)
 	do
 		empty_init
-		_n_kwdo = n_kwdo.as(not null)
-		n_kwdo.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
+		_n_kwdo = nkwdo.as(not null)
+		nkwdo.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3332,21 +3332,21 @@ redef class AIfExpr
 	private init empty_init do end
 
 	init init_aifexpr (
-		n_kwif: nullable TKwif,
-		n_expr: nullable AExpr,
-		n_then: nullable AExpr,
-		n_else: nullable AExpr
+		nkwif: nullable TKwif,
+		nexpr: nullable AExpr,
+		nthen: nullable AExpr,
+		nelse: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwif = n_kwif.as(not null)
-		n_kwif.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_then = n_then
-		if n_then != null then n_then.parent = self
-		_n_else = n_else
-		if n_else != null then n_else.parent = self
+		_n_kwif = nkwif.as(not null)
+		nkwif.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_then = nthen
+		if nthen != null then nthen.parent = self
+		_n_else = nelse
+		if nelse != null then nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3403,27 +3403,27 @@ redef class AIfexprExpr
 	private init empty_init do end
 
 	init init_aifexprexpr (
-		n_kwif: nullable TKwif,
-		n_expr: nullable AExpr,
-		n_kwthen: nullable TKwthen,
-		n_then: nullable AExpr,
-		n_kwelse: nullable TKwelse,
-		n_else: nullable AExpr
+		nkwif: nullable TKwif,
+		nexpr: nullable AExpr,
+		nkwthen: nullable TKwthen,
+		nthen: nullable AExpr,
+		nkwelse: nullable TKwelse,
+		nelse: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwif = n_kwif.as(not null)
-		n_kwif.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwthen = n_kwthen.as(not null)
-		n_kwthen.parent = self
-		_n_then = n_then.as(not null)
-		n_then.parent = self
-		_n_kwelse = n_kwelse.as(not null)
-		n_kwelse.parent = self
-		_n_else = n_else.as(not null)
-		n_else.parent = self
+		_n_kwif = nkwif.as(not null)
+		nkwif.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwthen = nkwthen.as(not null)
+		nkwthen.parent = self
+		_n_then = nthen.as(not null)
+		nthen.parent = self
+		_n_kwelse = nkwelse.as(not null)
+		nkwelse.parent = self
+		_n_else = nelse.as(not null)
+		nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3500,24 +3500,24 @@ redef class AWhileExpr
 	private init empty_init do end
 
 	init init_awhileexpr (
-		n_kwwhile: nullable TKwwhile,
-		n_expr: nullable AExpr,
-		n_kwdo: nullable TKwdo,
-		n_block: nullable AExpr,
-		n_label: nullable ALabel
+		nkwwhile: nullable TKwwhile,
+		nexpr: nullable AExpr,
+		nkwdo: nullable TKwdo,
+		nblock: nullable AExpr,
+		nlabel: nullable ALabel
 	)
 	do
 		empty_init
-		_n_kwwhile = n_kwwhile.as(not null)
-		n_kwwhile.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwdo = n_kwdo.as(not null)
-		n_kwdo.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
+		_n_kwwhile = nkwwhile.as(not null)
+		nkwwhile.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwdo = nkwdo.as(not null)
+		nkwdo.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3584,18 +3584,18 @@ redef class ALoopExpr
 	private init empty_init do end
 
 	init init_aloopexpr (
-		n_kwloop: nullable TKwloop,
-		n_block: nullable AExpr,
-		n_label: nullable ALabel
+		nkwloop: nullable TKwloop,
+		nblock: nullable AExpr,
+		nlabel: nullable ALabel
 	)
 	do
 		empty_init
-		_n_kwloop = n_kwloop.as(not null)
-		n_kwloop.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
+		_n_kwloop = nkwloop.as(not null)
+		nkwloop.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3642,26 +3642,26 @@ redef class AForExpr
 	private init empty_init do end
 
 	init init_aforexpr (
-		n_kwfor: nullable TKwfor,
-		n_ids: Collection[Object], # Should be Collection[TId]
-		n_expr: nullable AExpr,
-		n_kwdo: nullable TKwdo,
-		n_block: nullable AExpr,
-		n_label: nullable ALabel
+		nkwfor: nullable TKwfor,
+		nids: Collection[Object], # Should be Collection[TId]
+		nexpr: nullable AExpr,
+		nkwdo: nullable TKwdo,
+		nblock: nullable AExpr,
+		nlabel: nullable ALabel
 	)
 	do
 		empty_init
-		_n_kwfor = n_kwfor.as(not null)
-		n_kwfor.parent = self
-		_n_ids.unsafe_add_all(n_ids)
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwdo = n_kwdo.as(not null)
-		n_kwdo.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-		_n_label = n_label
-		if n_label != null then n_label.parent = self
+		_n_kwfor = nkwfor.as(not null)
+		nkwfor.parent = self
+		_n_ids.unsafe_add_all(nids)
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwdo = nkwdo.as(not null)
+		nkwdo.parent = self
+		_n_block = nblock
+		if nblock != null then nblock.parent = self
+		_n_label = nlabel
+		if nlabel != null then nlabel.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3730,21 +3730,21 @@ redef class AAssertExpr
 	private init empty_init do end
 
 	init init_aassertexpr (
-		n_kwassert: nullable TKwassert,
-		n_id: nullable TId,
-		n_expr: nullable AExpr,
-		n_else: nullable AExpr
+		nkwassert: nullable TKwassert,
+		nid: nullable TId,
+		nexpr: nullable AExpr,
+		nelse: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwassert = n_kwassert.as(not null)
-		n_kwassert.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_else = n_else
-		if n_else != null then n_else.parent = self
+		_n_kwassert = nkwassert.as(not null)
+		nkwassert.parent = self
+		_n_id = nid
+		if nid != null then nid.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_else = nelse
+		if nelse != null then nelse.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3801,15 +3801,15 @@ redef class AOnceExpr
 	private init empty_init do end
 
 	init init_aonceexpr (
-		n_kwonce: nullable TKwonce,
-		n_expr: nullable AExpr
+		nkwonce: nullable TKwonce,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwonce = n_kwonce.as(not null)
-		n_kwonce.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		_n_kwonce = nkwonce.as(not null)
+		nkwonce.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3846,12 +3846,12 @@ redef class ASendExpr
 	private init empty_init do end
 
 	init init_asendexpr (
-		n_expr: nullable AExpr
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3878,15 +3878,15 @@ redef class ABinopExpr
 	private init empty_init do end
 
 	init init_abinopexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3923,15 +3923,15 @@ redef class AOrExpr
 	private init empty_init do end
 
 	init init_aorexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -3968,15 +3968,15 @@ redef class AAndExpr
 	private init empty_init do end
 
 	init init_aandexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4013,15 +4013,15 @@ redef class AOrElseExpr
 	private init empty_init do end
 
 	init init_aorelseexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4058,15 +4058,15 @@ redef class AImpliesExpr
 	private init empty_init do end
 
 	init init_aimpliesexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4103,15 +4103,15 @@ redef class ANotExpr
 	private init empty_init do end
 
 	init init_anotexpr (
-		n_kwnot: nullable TKwnot,
-		n_expr: nullable AExpr
+		nkwnot: nullable TKwnot,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_kwnot = n_kwnot.as(not null)
-		n_kwnot.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		_n_kwnot = nkwnot.as(not null)
+		nkwnot.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4148,15 +4148,15 @@ redef class AEqExpr
 	private init empty_init do end
 
 	init init_aeqexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4193,15 +4193,15 @@ redef class ANeExpr
 	private init empty_init do end
 
 	init init_aneexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4238,15 +4238,15 @@ redef class ALtExpr
 	private init empty_init do end
 
 	init init_altexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4283,15 +4283,15 @@ redef class ALeExpr
 	private init empty_init do end
 
 	init init_aleexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4328,15 +4328,15 @@ redef class ALlExpr
 	private init empty_init do end
 
 	init init_allexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4373,15 +4373,15 @@ redef class AGtExpr
 	private init empty_init do end
 
 	init init_agtexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4418,15 +4418,15 @@ redef class AGeExpr
 	private init empty_init do end
 
 	init init_ageexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4463,15 +4463,15 @@ redef class AGgExpr
 	private init empty_init do end
 
 	init init_aggexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4508,15 +4508,15 @@ redef class AIsaExpr
 	private init empty_init do end
 
 	init init_aisaexpr (
-		n_expr: nullable AExpr,
-		n_type: nullable AType
+		nexpr: nullable AExpr,
+		ntype: nullable AType
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4553,15 +4553,15 @@ redef class APlusExpr
 	private init empty_init do end
 
 	init init_aplusexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4598,15 +4598,15 @@ redef class AMinusExpr
 	private init empty_init do end
 
 	init init_aminusexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4643,15 +4643,15 @@ redef class AStarshipExpr
 	private init empty_init do end
 
 	init init_astarshipexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4688,15 +4688,15 @@ redef class AStarExpr
 	private init empty_init do end
 
 	init init_astarexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4733,15 +4733,15 @@ redef class ASlashExpr
 	private init empty_init do end
 
 	init init_aslashexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4778,15 +4778,15 @@ redef class APercentExpr
 	private init empty_init do end
 
 	init init_apercentexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4823,15 +4823,15 @@ redef class AUminusExpr
 	private init empty_init do end
 
 	init init_auminusexpr (
-		n_minus: nullable TMinus,
-		n_expr: nullable AExpr
+		nminus: nullable TMinus,
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_minus = n_minus.as(not null)
-		n_minus.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		_n_minus = nminus.as(not null)
+		nminus.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4868,21 +4868,21 @@ redef class ANewExpr
 	private init empty_init do end
 
 	init init_anewexpr (
-		n_kwnew: nullable TKwnew,
-		n_type: nullable AType,
-		n_id: nullable TId,
-		n_args: nullable AExprs
+		nkwnew: nullable TKwnew,
+		ntype: nullable AType,
+		nid: nullable TId,
+		nargs: nullable AExprs
 	)
 	do
 		empty_init
-		_n_kwnew = n_kwnew.as(not null)
-		n_kwnew.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
+		_n_kwnew = nkwnew.as(not null)
+		nkwnew.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_id = nid
+		if nid != null then nid.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4939,15 +4939,15 @@ redef class AAttrExpr
 	private init empty_init do end
 
 	init init_aattrexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TAttrid
+		nexpr: nullable AExpr,
+		nid: nullable TAttrid
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -4984,21 +4984,21 @@ redef class AAttrAssignExpr
 	private init empty_init do end
 
 	init init_aattrassignexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TAttrid,
-		n_assign: nullable TAssign,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nid: nullable TAttrid,
+		nassign: nullable TAssign,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5055,21 +5055,21 @@ redef class AAttrReassignExpr
 	private init empty_init do end
 
 	init init_aattrreassignexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TAttrid,
-		n_assign_op: nullable AAssignOp,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nid: nullable TAttrid,
+		nassign_op: nullable AAssignOp,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_assign_op = n_assign_op.as(not null)
-		n_assign_op.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_assign_op = nassign_op.as(not null)
+		nassign_op.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5126,18 +5126,18 @@ redef class ACallExpr
 	private init empty_init do end
 
 	init init_acallexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TId,
-		n_args: nullable AExprs
+		nexpr: nullable AExpr,
+		nid: nullable TId,
+		nargs: nullable AExprs
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5184,24 +5184,24 @@ redef class ACallAssignExpr
 	private init empty_init do end
 
 	init init_acallassignexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TId,
-		n_args: nullable AExprs,
-		n_assign: nullable TAssign,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nid: nullable TId,
+		nargs: nullable AExprs,
+		nassign: nullable TAssign,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5268,24 +5268,24 @@ redef class ACallReassignExpr
 	private init empty_init do end
 
 	init init_acallreassignexpr (
-		n_expr: nullable AExpr,
-		n_id: nullable TId,
-		n_args: nullable AExprs,
-		n_assign_op: nullable AAssignOp,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nid: nullable TId,
+		nargs: nullable AExprs,
+		nassign_op: nullable AAssignOp,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
-		_n_assign_op = n_assign_op.as(not null)
-		n_assign_op.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
+		_n_assign_op = nassign_op.as(not null)
+		nassign_op.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5352,18 +5352,18 @@ redef class ASuperExpr
 	private init empty_init do end
 
 	init init_asuperexpr (
-		n_qualified: nullable AQualified,
-		n_kwsuper: nullable TKwsuper,
-		n_args: nullable AExprs
+		nqualified: nullable AQualified,
+		nkwsuper: nullable TKwsuper,
+		nargs: nullable AExprs
 	)
 	do
 		empty_init
-		_n_qualified = n_qualified
-		if n_qualified != null then n_qualified.parent = self
-		_n_kwsuper = n_kwsuper.as(not null)
-		n_kwsuper.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
+		_n_qualified = nqualified
+		if nqualified != null then nqualified.parent = self
+		_n_kwsuper = nkwsuper.as(not null)
+		nkwsuper.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5410,18 +5410,18 @@ redef class AInitExpr
 	private init empty_init do end
 
 	init init_ainitexpr (
-		n_expr: nullable AExpr,
-		n_kwinit: nullable TKwinit,
-		n_args: nullable AExprs
+		nexpr: nullable AExpr,
+		nkwinit: nullable TKwinit,
+		nargs: nullable AExprs
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwinit = n_kwinit.as(not null)
-		n_kwinit.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwinit = nkwinit.as(not null)
+		nkwinit.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5468,15 +5468,15 @@ redef class ABraExpr
 	private init empty_init do end
 
 	init init_abraexpr (
-		n_expr: nullable AExpr,
-		n_args: nullable AExprs
+		nexpr: nullable AExpr,
+		nargs: nullable AExprs
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5513,21 +5513,21 @@ redef class ABraAssignExpr
 	private init empty_init do end
 
 	init init_abraassignexpr (
-		n_expr: nullable AExpr,
-		n_args: nullable AExprs,
-		n_assign: nullable TAssign,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nargs: nullable AExprs,
+		nassign: nullable TAssign,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5584,21 +5584,21 @@ redef class ABraReassignExpr
 	private init empty_init do end
 
 	init init_abrareassignexpr (
-		n_expr: nullable AExpr,
-		n_args: nullable AExprs,
-		n_assign_op: nullable AAssignOp,
-		n_value: nullable AExpr
+		nexpr: nullable AExpr,
+		nargs: nullable AExprs,
+		nassign_op: nullable AAssignOp,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_args = n_args.as(not null)
-		n_args.parent = self
-		_n_assign_op = n_assign_op.as(not null)
-		n_assign_op.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_args = nargs.as(not null)
+		nargs.parent = self
+		_n_assign_op = nassign_op.as(not null)
+		nassign_op.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5655,12 +5655,12 @@ redef class AVarExpr
 	private init empty_init do end
 
 	init init_avarexpr (
-		n_id: nullable TId
+		nid: nullable TId
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5687,18 +5687,18 @@ redef class AVarAssignExpr
 	private init empty_init do end
 
 	init init_avarassignexpr (
-		n_id: nullable TId,
-		n_assign: nullable TAssign,
-		n_value: nullable AExpr
+		nid: nullable TId,
+		nassign: nullable TAssign,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_assign = n_assign.as(not null)
-		n_assign.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_assign = nassign.as(not null)
+		nassign.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5745,18 +5745,18 @@ redef class AVarReassignExpr
 	private init empty_init do end
 
 	init init_avarreassignexpr (
-		n_id: nullable TId,
-		n_assign_op: nullable AAssignOp,
-		n_value: nullable AExpr
+		nid: nullable TId,
+		nassign_op: nullable AAssignOp,
+		nvalue: nullable AExpr
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-		_n_assign_op = n_assign_op.as(not null)
-		n_assign_op.parent = self
-		_n_value = n_value.as(not null)
-		n_value.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
+		_n_assign_op = nassign_op.as(not null)
+		nassign_op.parent = self
+		_n_value = nvalue.as(not null)
+		nvalue.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5803,18 +5803,18 @@ redef class ARangeExpr
 	private init empty_init do end
 
 	init init_arangeexpr (
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr,
-		n_annotations: nullable AAnnotations
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5861,24 +5861,24 @@ redef class ACrangeExpr
 	private init empty_init do end
 
 	init init_acrangeexpr (
-		n_obra: nullable TObra,
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr,
-		n_cbra: nullable TCbra,
-		n_annotations: nullable AAnnotations
+		nobra: nullable TObra,
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr,
+		ncbra: nullable TCbra,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_obra = n_obra.as(not null)
-		n_obra.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
-		_n_cbra = n_cbra.as(not null)
-		n_cbra.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_obra = nobra.as(not null)
+		nobra.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
+		_n_cbra = ncbra.as(not null)
+		ncbra.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5945,24 +5945,24 @@ redef class AOrangeExpr
 	private init empty_init do end
 
 	init init_aorangeexpr (
-		n_obra: nullable TObra,
-		n_expr: nullable AExpr,
-		n_expr2: nullable AExpr,
-		n_cbra: nullable TObra,
-		n_annotations: nullable AAnnotations
+		nobra: nullable TObra,
+		nexpr: nullable AExpr,
+		nexpr2: nullable AExpr,
+		ncbra: nullable TObra,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_obra = n_obra.as(not null)
-		n_obra.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_expr2 = n_expr2.as(not null)
-		n_expr2.parent = self
-		_n_cbra = n_cbra.as(not null)
-		n_cbra.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_obra = nobra.as(not null)
+		nobra.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_expr2 = nexpr2.as(not null)
+		nexpr2.parent = self
+		_n_cbra = ncbra.as(not null)
+		ncbra.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6029,15 +6029,15 @@ redef class AArrayExpr
 	private init empty_init do end
 
 	init init_aarrayexpr (
-		n_exprs: nullable AExprs,
-		n_annotations: nullable AAnnotations
+		nexprs: nullable AExprs,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_exprs = n_exprs.as(not null)
-		n_exprs.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_exprs = nexprs.as(not null)
+		nexprs.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6074,15 +6074,15 @@ redef class ASelfExpr
 	private init empty_init do end
 
 	init init_aselfexpr (
-		n_kwself: nullable TKwself,
-		n_annotations: nullable AAnnotations
+		nkwself: nullable TKwself,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwself = n_kwself.as(not null)
-		n_kwself.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwself = nkwself.as(not null)
+		nkwself.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6137,15 +6137,15 @@ redef class ATrueExpr
 	private init empty_init do end
 
 	init init_atrueexpr (
-		n_kwtrue: nullable TKwtrue,
-		n_annotations: nullable AAnnotations
+		nkwtrue: nullable TKwtrue,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwtrue = n_kwtrue.as(not null)
-		n_kwtrue.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwtrue = nkwtrue.as(not null)
+		nkwtrue.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6182,15 +6182,15 @@ redef class AFalseExpr
 	private init empty_init do end
 
 	init init_afalseexpr (
-		n_kwfalse: nullable TKwfalse,
-		n_annotations: nullable AAnnotations
+		nkwfalse: nullable TKwfalse,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwfalse = n_kwfalse.as(not null)
-		n_kwfalse.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwfalse = nkwfalse.as(not null)
+		nkwfalse.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6227,15 +6227,15 @@ redef class ANullExpr
 	private init empty_init do end
 
 	init init_anullexpr (
-		n_kwnull: nullable TKwnull,
-		n_annotations: nullable AAnnotations
+		nkwnull: nullable TKwnull,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_kwnull = n_kwnull.as(not null)
-		n_kwnull.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_kwnull = nkwnull.as(not null)
+		nkwnull.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6272,15 +6272,15 @@ redef class ADecIntExpr
 	private init empty_init do end
 
 	init init_adecintexpr (
-		n_number: nullable TNumber,
-		n_annotations: nullable AAnnotations
+		nnumber: nullable TNumber,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_number = n_number.as(not null)
-		n_number.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_number = nnumber.as(not null)
+		nnumber.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6317,15 +6317,15 @@ redef class AHexIntExpr
 	private init empty_init do end
 
 	init init_ahexintexpr (
-		n_hex_number: nullable THexNumber,
-		n_annotations: nullable AAnnotations
+		nhex_number: nullable THexNumber,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_hex_number = n_hex_number.as(not null)
-		n_hex_number.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_hex_number = nhex_number.as(not null)
+		nhex_number.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6362,15 +6362,15 @@ redef class AFloatExpr
 	private init empty_init do end
 
 	init init_afloatexpr (
-		n_float: nullable TFloat,
-		n_annotations: nullable AAnnotations
+		nfloat: nullable TFloat,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_float = n_float.as(not null)
-		n_float.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_float = nfloat.as(not null)
+		nfloat.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6407,15 +6407,15 @@ redef class ACharExpr
 	private init empty_init do end
 
 	init init_acharexpr (
-		n_char: nullable TChar,
-		n_annotations: nullable AAnnotations
+		nchar: nullable TChar,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_char = n_char.as(not null)
-		n_char.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_char = nchar.as(not null)
+		nchar.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6452,15 +6452,15 @@ redef class AStringExpr
 	private init empty_init do end
 
 	init init_astringexpr (
-		n_string: nullable TString,
-		n_annotations: nullable AAnnotations
+		nstring: nullable TString,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_string = n_string.as(not null)
-		n_string.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_string = nstring.as(not null)
+		nstring.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6497,12 +6497,12 @@ redef class AStartStringExpr
 	private init empty_init do end
 
 	init init_astartstringexpr (
-		n_string: nullable TStartString
+		nstring: nullable TStartString
 	)
 	do
 		empty_init
-		_n_string = n_string.as(not null)
-		n_string.parent = self
+		_n_string = nstring.as(not null)
+		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6529,12 +6529,12 @@ redef class AMidStringExpr
 	private init empty_init do end
 
 	init init_amidstringexpr (
-		n_string: nullable TMidString
+		nstring: nullable TMidString
 	)
 	do
 		empty_init
-		_n_string = n_string.as(not null)
-		n_string.parent = self
+		_n_string = nstring.as(not null)
+		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6561,12 +6561,12 @@ redef class AEndStringExpr
 	private init empty_init do end
 
 	init init_aendstringexpr (
-		n_string: nullable TEndString
+		nstring: nullable TEndString
 	)
 	do
 		empty_init
-		_n_string = n_string.as(not null)
-		n_string.parent = self
+		_n_string = nstring.as(not null)
+		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6593,14 +6593,14 @@ redef class ASuperstringExpr
 	private init empty_init do end
 
 	init init_asuperstringexpr (
-		n_exprs: Collection[Object], # Should be Collection[AExpr]
-		n_annotations: nullable AAnnotations
+		nexprs: Collection[Object], # Should be Collection[AExpr]
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_exprs.unsafe_add_all(n_exprs)
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_exprs.unsafe_add_all(nexprs)
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6629,21 +6629,21 @@ redef class AParExpr
 	private init empty_init do end
 
 	init init_aparexpr (
-		n_opar: nullable TOpar,
-		n_expr: nullable AExpr,
-		n_cpar: nullable TCpar,
-		n_annotations: nullable AAnnotations
+		nopar: nullable TOpar,
+		nexpr: nullable AExpr,
+		ncpar: nullable TCpar,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_opar = n_opar.as(not null)
-		n_opar.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_cpar = n_cpar.as(not null)
-		n_cpar.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_opar = nopar.as(not null)
+		nopar.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_cpar = ncpar.as(not null)
+		ncpar.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6700,24 +6700,24 @@ redef class AAsCastExpr
 	private init empty_init do end
 
 	init init_aascastexpr (
-		n_expr: nullable AExpr,
-		n_kwas: nullable TKwas,
-		n_opar: nullable TOpar,
-		n_type: nullable AType,
-		n_cpar: nullable TCpar
+		nexpr: nullable AExpr,
+		nkwas: nullable TKwas,
+		nopar: nullable TOpar,
+		ntype: nullable AType,
+		ncpar: nullable TCpar
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwas = n_kwas.as(not null)
-		n_kwas.parent = self
-		_n_opar = n_opar
-		if n_opar != null then n_opar.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_cpar = n_cpar
-		if n_cpar != null then n_cpar.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwas = nkwas.as(not null)
+		nkwas.parent = self
+		_n_opar = nopar
+		if nopar != null then nopar.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_cpar = ncpar
+		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6784,27 +6784,27 @@ redef class AAsNotnullExpr
 	private init empty_init do end
 
 	init init_aasnotnullexpr (
-		n_expr: nullable AExpr,
-		n_kwas: nullable TKwas,
-		n_opar: nullable TOpar,
-		n_kwnot: nullable TKwnot,
-		n_kwnull: nullable TKwnull,
-		n_cpar: nullable TCpar
+		nexpr: nullable AExpr,
+		nkwas: nullable TKwas,
+		nopar: nullable TOpar,
+		nkwnot: nullable TKwnot,
+		nkwnull: nullable TKwnull,
+		ncpar: nullable TCpar
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_kwas = n_kwas.as(not null)
-		n_kwas.parent = self
-		_n_opar = n_opar
-		if n_opar != null then n_opar.parent = self
-		_n_kwnot = n_kwnot.as(not null)
-		n_kwnot.parent = self
-		_n_kwnull = n_kwnull.as(not null)
-		n_kwnull.parent = self
-		_n_cpar = n_cpar
-		if n_cpar != null then n_cpar.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_kwas = nkwas.as(not null)
+		nkwas.parent = self
+		_n_opar = nopar
+		if nopar != null then nopar.parent = self
+		_n_kwnot = nkwnot.as(not null)
+		nkwnot.parent = self
+		_n_kwnull = nkwnull.as(not null)
+		nkwnull.parent = self
+		_n_cpar = ncpar
+		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6881,18 +6881,18 @@ redef class AIssetAttrExpr
 	private init empty_init do end
 
 	init init_aissetattrexpr (
-		n_kwisset: nullable TKwisset,
-		n_expr: nullable AExpr,
-		n_id: nullable TAttrid
+		nkwisset: nullable TKwisset,
+		nexpr: nullable AExpr,
+		nid: nullable TAttrid
 	)
 	do
 		empty_init
-		_n_kwisset = n_kwisset.as(not null)
-		n_kwisset.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_kwisset = nkwisset.as(not null)
+		nkwisset.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6939,21 +6939,21 @@ redef class ADebugTypeExpr
 	private init empty_init do end
 
 	init init_adebugtypeexpr (
-		n_kwdebug: nullable TKwdebug,
-		n_kwtype: nullable TKwtype,
-		n_expr: nullable AExpr,
-		n_type: nullable AType
+		nkwdebug: nullable TKwdebug,
+		nkwtype: nullable TKwtype,
+		nexpr: nullable AExpr,
+		ntype: nullable AType
 	)
 	do
 		empty_init
-		_n_kwdebug = n_kwdebug.as(not null)
-		n_kwdebug.parent = self
-		_n_kwtype = n_kwtype.as(not null)
-		n_kwtype.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
+		_n_kwdebug = nkwdebug.as(not null)
+		nkwdebug.parent = self
+		_n_kwtype = nkwtype.as(not null)
+		nkwtype.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7010,11 +7010,11 @@ redef class AListExprs
 	private init empty_init do end
 
 	init init_alistexprs (
-		n_exprs: Collection[Object] # Should be Collection[AExpr]
+		nexprs: Collection[Object] # Should be Collection[AExpr]
 	)
 	do
 		empty_init
-		_n_exprs.unsafe_add_all(n_exprs)
+		_n_exprs.unsafe_add_all(nexprs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7033,17 +7033,17 @@ redef class AParExprs
 	private init empty_init do end
 
 	init init_aparexprs (
-		n_opar: nullable TOpar,
-		n_exprs: Collection[Object], # Should be Collection[AExpr]
-		n_cpar: nullable TCpar
+		nopar: nullable TOpar,
+		nexprs: Collection[Object], # Should be Collection[AExpr]
+		ncpar: nullable TCpar
 	)
 	do
 		empty_init
-		_n_opar = n_opar.as(not null)
-		n_opar.parent = self
-		_n_exprs.unsafe_add_all(n_exprs)
-		_n_cpar = n_cpar.as(not null)
-		n_cpar.parent = self
+		_n_opar = nopar.as(not null)
+		nopar.parent = self
+		_n_exprs.unsafe_add_all(nexprs)
+		_n_cpar = ncpar.as(not null)
+		ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7082,17 +7082,17 @@ redef class ABraExprs
 	private init empty_init do end
 
 	init init_abraexprs (
-		n_obra: nullable TObra,
-		n_exprs: Collection[Object], # Should be Collection[AExpr]
-		n_cbra: nullable TCbra
+		nobra: nullable TObra,
+		nexprs: Collection[Object], # Should be Collection[AExpr]
+		ncbra: nullable TCbra
 	)
 	do
 		empty_init
-		_n_obra = n_obra.as(not null)
-		n_obra.parent = self
-		_n_exprs.unsafe_add_all(n_exprs)
-		_n_cbra = n_cbra.as(not null)
-		n_cbra.parent = self
+		_n_obra = nobra.as(not null)
+		nobra.parent = self
+		_n_exprs.unsafe_add_all(nexprs)
+		_n_cbra = ncbra.as(not null)
+		ncbra.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7131,12 +7131,12 @@ redef class APlusAssignOp
 	private init empty_init do end
 
 	init init_aplusassignop (
-		n_pluseq: nullable TPluseq
+		npluseq: nullable TPluseq
 	)
 	do
 		empty_init
-		_n_pluseq = n_pluseq.as(not null)
-		n_pluseq.parent = self
+		_n_pluseq = npluseq.as(not null)
+		npluseq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7163,12 +7163,12 @@ redef class AMinusAssignOp
 	private init empty_init do end
 
 	init init_aminusassignop (
-		n_minuseq: nullable TMinuseq
+		nminuseq: nullable TMinuseq
 	)
 	do
 		empty_init
-		_n_minuseq = n_minuseq.as(not null)
-		n_minuseq.parent = self
+		_n_minuseq = nminuseq.as(not null)
+		nminuseq.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7195,17 +7195,17 @@ redef class AModuleName
 	private init empty_init do end
 
 	init init_amodulename (
-		n_quad: nullable TQuad,
-		n_path: Collection[Object], # Should be Collection[TId]
-		n_id: nullable TId
+		nquad: nullable TQuad,
+		npath: Collection[Object], # Should be Collection[TId]
+		nid: nullable TId
 	)
 	do
 		empty_init
-		_n_quad = n_quad
-		if n_quad != null then n_quad.parent = self
-		_n_path.unsafe_add_all(n_path)
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_quad = nquad
+		if nquad != null then nquad.parent = self
+		_n_path.unsafe_add_all(npath)
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7244,14 +7244,14 @@ redef class AExternCalls
 	private init empty_init do end
 
 	init init_aexterncalls (
-		n_kwimport: nullable TKwimport,
-		n_extern_calls: Collection[Object] # Should be Collection[AExternCall]
+		nkwimport: nullable TKwimport,
+		nextern_calls: Collection[Object] # Should be Collection[AExternCall]
 	)
 	do
 		empty_init
-		_n_kwimport = n_kwimport.as(not null)
-		n_kwimport.parent = self
-		_n_extern_calls.unsafe_add_all(n_extern_calls)
+		_n_kwimport = nkwimport.as(not null)
+		nkwimport.parent = self
+		_n_extern_calls.unsafe_add_all(nextern_calls)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7298,12 +7298,12 @@ redef class ASuperExternCall
 	private init empty_init do end
 
 	init init_asuperexterncall (
-		n_kwsuper: nullable TKwsuper
+		nkwsuper: nullable TKwsuper
 	)
 	do
 		empty_init
-		_n_kwsuper = n_kwsuper.as(not null)
-		n_kwsuper.parent = self
+		_n_kwsuper = nkwsuper.as(not null)
+		nkwsuper.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7330,12 +7330,12 @@ redef class ALocalPropExternCall
 	private init empty_init do end
 
 	init init_alocalpropexterncall (
-		n_methid: nullable AMethid
+		nmethid: nullable AMethid
 	)
 	do
 		empty_init
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7362,18 +7362,18 @@ redef class AFullPropExternCall
 	private init empty_init do end
 
 	init init_afullpropexterncall (
-		n_type: nullable AType,
-		n_dot: nullable TDot,
-		n_methid: nullable AMethid
+		ntype: nullable AType,
+		ndot: nullable TDot,
+		nmethid: nullable AMethid
 	)
 	do
 		empty_init
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_dot = n_dot
-		if n_dot != null then n_dot.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_dot = ndot
+		if ndot != null then ndot.parent = self
+		_n_methid = nmethid.as(not null)
+		nmethid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7420,12 +7420,12 @@ redef class AInitPropExternCall
 	private init empty_init do end
 
 	init init_ainitpropexterncall (
-		n_type: nullable AType
+		ntype: nullable AType
 	)
 	do
 		empty_init
-		_n_type = n_type.as(not null)
-		n_type.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7452,21 +7452,21 @@ redef class ACastAsExternCall
 	private init empty_init do end
 
 	init init_acastasexterncall (
-		n_from_type: nullable AType,
-		n_dot: nullable TDot,
-		n_kwas: nullable TKwas,
-		n_to_type: nullable AType
+		nfrom_type: nullable AType,
+		ndot: nullable TDot,
+		nkwas: nullable TKwas,
+		nto_type: nullable AType
 	)
 	do
 		empty_init
-		_n_from_type = n_from_type.as(not null)
-		n_from_type.parent = self
-		_n_dot = n_dot
-		if n_dot != null then n_dot.parent = self
-		_n_kwas = n_kwas.as(not null)
-		n_kwas.parent = self
-		_n_to_type = n_to_type.as(not null)
-		n_to_type.parent = self
+		_n_from_type = nfrom_type.as(not null)
+		nfrom_type.parent = self
+		_n_dot = ndot
+		if ndot != null then ndot.parent = self
+		_n_kwas = nkwas.as(not null)
+		nkwas.parent = self
+		_n_to_type = nto_type.as(not null)
+		nto_type.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7523,18 +7523,18 @@ redef class AAsNullableExternCall
 	private init empty_init do end
 
 	init init_aasnullableexterncall (
-		n_type: nullable AType,
-		n_kwas: nullable TKwas,
-		n_kwnullable: nullable TKwnullable
+		ntype: nullable AType,
+		nkwas: nullable TKwas,
+		nkwnullable: nullable TKwnullable
 	)
 	do
 		empty_init
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_kwas = n_kwas.as(not null)
-		n_kwas.parent = self
-		_n_kwnullable = n_kwnullable.as(not null)
-		n_kwnullable.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_kwas = nkwas.as(not null)
+		nkwas.parent = self
+		_n_kwnullable = nkwnullable.as(not null)
+		nkwnullable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7581,21 +7581,21 @@ redef class AAsNotNullableExternCall
 	private init empty_init do end
 
 	init init_aasnotnullableexterncall (
-		n_type: nullable AType,
-		n_kwas: nullable TKwas,
-		n_kwnot: nullable TKwnot,
-		n_kwnullable: nullable TKwnullable
+		ntype: nullable AType,
+		nkwas: nullable TKwas,
+		nkwnot: nullable TKwnot,
+		nkwnullable: nullable TKwnullable
 	)
 	do
 		empty_init
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_kwas = n_kwas.as(not null)
-		n_kwas.parent = self
-		_n_kwnot = n_kwnot.as(not null)
-		n_kwnot.parent = self
-		_n_kwnullable = n_kwnullable.as(not null)
-		n_kwnullable.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
+		_n_kwas = nkwas.as(not null)
+		nkwas.parent = self
+		_n_kwnot = nkwnot.as(not null)
+		nkwnot.parent = self
+		_n_kwnullable = nkwnullable.as(not null)
+		nkwnullable.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7652,15 +7652,15 @@ redef class AInLanguage
 	private init empty_init do end
 
 	init init_ainlanguage (
-		n_kwin: nullable TKwin,
-		n_string: nullable TString
+		nkwin: nullable TKwin,
+		nstring: nullable TString
 	)
 	do
 		empty_init
-		_n_kwin = n_kwin.as(not null)
-		n_kwin.parent = self
-		_n_string = n_string.as(not null)
-		n_string.parent = self
+		_n_kwin = nkwin.as(not null)
+		nkwin.parent = self
+		_n_string = nstring.as(not null)
+		nstring.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7697,15 +7697,15 @@ redef class AExternCodeBlock
 	private init empty_init do end
 
 	init init_aexterncodeblock (
-		n_in_language: nullable AInLanguage,
-		n_extern_code_segment: nullable TExternCodeSegment
+		nin_language: nullable AInLanguage,
+		nextern_code_segment: nullable TExternCodeSegment
 	)
 	do
 		empty_init
-		_n_in_language = n_in_language
-		if n_in_language != null then n_in_language.parent = self
-		_n_extern_code_segment = n_extern_code_segment.as(not null)
-		n_extern_code_segment.parent = self
+		_n_in_language = nin_language
+		if nin_language != null then nin_language.parent = self
+		_n_extern_code_segment = nextern_code_segment.as(not null)
+		nextern_code_segment.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7742,14 +7742,14 @@ redef class AQualified
 	private init empty_init do end
 
 	init init_aqualified (
-		n_id: Collection[Object], # Should be Collection[TId]
-		n_classid: nullable TClassid
+		nid: Collection[Object], # Should be Collection[TId]
+		nclassid: nullable TClassid
 	)
 	do
 		empty_init
-		_n_id.unsafe_add_all(n_id)
-		_n_classid = n_classid
-		if n_classid != null then n_classid.parent = self
+		_n_id.unsafe_add_all(nid)
+		_n_classid = nclassid
+		if nclassid != null then nclassid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7778,11 +7778,11 @@ redef class ADoc
 	private init empty_init do end
 
 	init init_adoc (
-		n_comment: Collection[Object] # Should be Collection[TComment]
+		ncomment: Collection[Object] # Should be Collection[TComment]
 	)
 	do
 		empty_init
-		_n_comment.unsafe_add_all(n_comment)
+		_n_comment.unsafe_add_all(ncomment)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7801,20 +7801,20 @@ redef class AAnnotations
 	private init empty_init do end
 
 	init init_aannotations (
-		n_at: nullable TAt,
-		n_opar: nullable TOpar,
-		n_items: Collection[Object], # Should be Collection[AAnnotation]
-		n_cpar: nullable TCpar
+		nat: nullable TAt,
+		nopar: nullable TOpar,
+		nitems: Collection[Object], # Should be Collection[AAnnotation]
+		ncpar: nullable TCpar
 	)
 	do
 		empty_init
-		_n_at = n_at
-		if n_at != null then n_at.parent = self
-		_n_opar = n_opar
-		if n_opar != null then n_opar.parent = self
-		_n_items.unsafe_add_all(n_items)
-		_n_cpar = n_cpar
-		if n_cpar != null then n_cpar.parent = self
+		_n_at = nat
+		if nat != null then nat.parent = self
+		_n_opar = nopar
+		if nopar != null then nopar.parent = self
+		_n_items.unsafe_add_all(nitems)
+		_n_cpar = ncpar
+		if ncpar != null then ncpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7863,23 +7863,23 @@ redef class AAnnotation
 	private init empty_init do end
 
 	init init_aannotation (
-		n_atid: nullable AAtid,
-		n_opar: nullable TOpar,
-		n_args: Collection[Object], # Should be Collection[AAtArg]
-		n_cpar: nullable TCpar,
-		n_annotations: nullable AAnnotations
+		natid: nullable AAtid,
+		nopar: nullable TOpar,
+		nargs: Collection[Object], # Should be Collection[AAtArg]
+		ncpar: nullable TCpar,
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_atid = n_atid.as(not null)
-		n_atid.parent = self
-		_n_opar = n_opar
-		if n_opar != null then n_opar.parent = self
-		_n_args.unsafe_add_all(n_args)
-		_n_cpar = n_cpar
-		if n_cpar != null then n_cpar.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
+		_n_atid = natid.as(not null)
+		natid.parent = self
+		_n_opar = nopar
+		if nopar != null then nopar.parent = self
+		_n_args.unsafe_add_all(nargs)
+		_n_cpar = ncpar
+		if ncpar != null then ncpar.parent = self
+		_n_annotations = nannotations
+		if nannotations != null then nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7938,12 +7938,12 @@ redef class ATypeAtArg
 	private init empty_init do end
 
 	init init_atypeatarg (
-		n_type: nullable AType
+		ntype: nullable AType
 	)
 	do
 		empty_init
-		_n_type = n_type.as(not null)
-		n_type.parent = self
+		_n_type = ntype.as(not null)
+		ntype.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7970,12 +7970,12 @@ redef class AExprAtArg
 	private init empty_init do end
 
 	init init_aexpratarg (
-		n_expr: nullable AExpr
+		nexpr: nullable AExpr
 	)
 	do
 		empty_init
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		_n_expr = nexpr.as(not null)
+		nexpr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8002,12 +8002,12 @@ redef class AAtAtArg
 	private init empty_init do end
 
 	init init_aatatarg (
-		n_annotations: nullable AAnnotations
+		nannotations: nullable AAnnotations
 	)
 	do
 		empty_init
-		_n_annotations = n_annotations.as(not null)
-		n_annotations.parent = self
+		_n_annotations = nannotations.as(not null)
+		nannotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8034,12 +8034,12 @@ redef class AIdAtid
 	private init empty_init do end
 
 	init init_aidatid (
-		n_id: nullable TId
+		nid: nullable TId
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8066,12 +8066,12 @@ redef class AKwexternAtid
 	private init empty_init do end
 
 	init init_akwexternatid (
-		n_id: nullable TKwextern
+		nid: nullable TKwextern
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8098,12 +8098,12 @@ redef class AKwinternAtid
 	private init empty_init do end
 
 	init init_akwinternatid (
-		n_id: nullable TKwintern
+		nid: nullable TKwintern
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8130,12 +8130,12 @@ redef class AKwreadableAtid
 	private init empty_init do end
 
 	init init_akwreadableatid (
-		n_id: nullable TKwreadable
+		nid: nullable TKwreadable
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8162,12 +8162,12 @@ redef class AKwwritableAtid
 	private init empty_init do end
 
 	init init_akwwritableatid (
-		n_id: nullable TKwwritable
+		nid: nullable TKwwritable
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8194,12 +8194,12 @@ redef class AKwimportAtid
 	private init empty_init do end
 
 	init init_akwimportatid (
-		n_id: nullable TKwimport
+		nid: nullable TKwimport
 	)
 	do
 		empty_init
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_id = nid.as(not null)
+		nid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)

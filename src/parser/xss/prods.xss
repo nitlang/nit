@@ -44,11 +44,11 @@ class Start
     readable var _n_base: nullable $baseprod
     readable var _n_eof: EOF
     init(
-        n_base: nullable $baseprod,
-        n_eof: EOF)
+        nbase: nullable $baseprod,
+        neof: EOF)
     do
-        _n_base = n_base
-        _n_eof = n_eof
+        _n_base = nbase
+        _n_eof = neof
     end
 
 end
@@ -64,9 +64,9 @@ $ if {count(elem)!=0}
 	init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
 $ foreach {elem}
 $   if {@is_list}
-		n_@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
+		n@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
 $   else
-		n_@{name}: nullable @etype[-sep ','-]
+		n@{name}: nullable @etype[-sep ','-]
 $   end
 $ end
 	)
@@ -77,14 +77,14 @@ $ end
 		empty_init
 $ foreach {elem}
 $   if @is_list
-		_n_@{name}.unsafe_add_all(n_@{name})
+		_n_@{name}.unsafe_add_all(n@{name})
 $   else
 $   if {@modifier}
-		_n_@name = n_@{name}
-		if n_@{name} != null then n_@{name}.parent = self
+		_n_@name = n@{name}
+		if n@{name} != null then n@{name}.parent = self
 $   else
-		_n_@name = n_@{name}.as(not null)
-		n_@{name}.parent = self
+		_n_@name = n@{name}.as(not null)
+		n@{name}.parent = self
 $   end
 $   end
 $ end
