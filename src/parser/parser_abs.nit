@@ -1047,18 +1047,18 @@ class AAsCastExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
-    readable var _n_opar: TOpar
+    readable var _n_opar: nullable TOpar = null
     readable var _n_type: AType
-    readable var _n_cpar: TCpar
+    readable var _n_cpar: nullable TCpar = null
 end
 class AAsNotnullExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
-    readable var _n_opar: TOpar
+    readable var _n_opar: nullable TOpar = null
     readable var _n_kwnot: TKwnot
     readable var _n_kwnull: TKwnull
-    readable var _n_cpar: TCpar
+    readable var _n_cpar: nullable TCpar = null
 end
 class AIssetAttrExpr
 	super AExpr

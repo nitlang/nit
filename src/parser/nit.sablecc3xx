@@ -570,6 +570,7 @@ expr_atom~nopar~nobra {-> expr}
 !nopar	| {par} opar no expr [n2]:no cpar annotations_o {-> New expr.par(opar, expr, cpar, annotations_o.annotations)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
+        | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
 	;
 
 superstring {-> expr} 
@@ -860,8 +861,8 @@ expr	= {block} expr* kwend?
 	| {end_string} [string]:end_string 
 	| {superstring} [exprs]:expr* annotations?
 	| {par} opar expr cpar annotations?
-        | {as_cast} expr kwas opar type cpar
-        | {as_notnull} expr kwas opar kwnot kwnull cpar
+        | {as_cast} expr kwas opar? type cpar?
+        | {as_notnull} expr kwas opar? kwnot kwnull cpar?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	;

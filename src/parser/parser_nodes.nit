@@ -1605,9 +1605,9 @@ class AAsCastExpr
 	super AExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_kwas: TKwas
-	readable writable var _n_opar: TOpar
+	readable writable var _n_opar: nullable TOpar = null
 	readable writable var _n_type: AType
-	readable writable var _n_cpar: TCpar
+	readable writable var _n_cpar: nullable TCpar = null
 end
 
 # A as-not-null cast. eg `x.as(not null)`
@@ -1615,10 +1615,10 @@ class AAsNotnullExpr
 	super AExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_kwas: TKwas
-	readable writable var _n_opar: TOpar
+	readable writable var _n_opar: nullable TOpar = null
 	readable writable var _n_kwnot: TKwnot
 	readable writable var _n_kwnull: TKwnull
-	readable writable var _n_cpar: TCpar
+	readable writable var _n_cpar: nullable TCpar = null
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
