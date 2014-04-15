@@ -999,7 +999,7 @@ class ANullExpr
     readable var _n_kwnull: TKwnull
     readable var _n_annotations: nullable AAnnotations = null
 end
-class AIntExpr
+class ADecIntExpr
 	super AExpr
     readable var _n_number: TNumber
     readable var _n_annotations: nullable AAnnotations = null

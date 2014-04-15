@@ -1542,6 +1542,10 @@ end
 # An integer literal
 class AIntExpr
 	super AExpr
+end
+# An integer literal in decimal format
+class ADecIntExpr
+	super AIntExpr
 	readable writable var _n_number: TNumber
 end
 # A float literal

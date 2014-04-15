@@ -65,6 +65,9 @@ end
 redef class AIntExpr
 	# The value of the literal int once computed.
 	var value: nullable Int
+end
+
+redef class ADecIntExpr
 	redef fun accept_literal(v)
 	do
 		self.value = self.n_number.text.to_i
