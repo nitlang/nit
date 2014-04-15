@@ -261,7 +261,6 @@ propdefs~toplevel {-> propdef}
 	;
 propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth methid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, annotation_noend.annotations, stmtso.expr)}
-	| {assign_return} [doc]:no redef visibility kwmeth methid signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature_withret.signature, Null, assign_return.expr)}
 	| {nobody} [doc]:no redef visibility kwmeth methid signature annotation_withend_nonull {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, annotation_withend_nonull.annotations)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null)}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
@@ -320,11 +319,11 @@ methid {-> methid}
 	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
 	;
 
-signature~withret {-> signature}
+signature {-> signature}
 	= opar no params cpar typing [no2]:no {-> New signature(opar, [params.param], cpar, typing.type)}
-!withret| {noret} opar no params cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
+	| {noret} opar no params cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
 	| {nopar} typing no {-> New signature(Null, [], Null, typing.type)}
-!withret| {noparnoret} no {-> New signature(Null, [], Null, Null)}
+	| {noparnoret} no {-> New signature(Null, [], Null, Null)}
 	;
 
 params {-> param*} 
@@ -336,10 +335,6 @@ params_tail {-> param}
 param
 	= {untyped} id annotations_o {-> New param(id, Null, Null, annotations_o.annotations)}
 	| id annotations? typing dotdotdot? {-> New param(id, typing.type, dotdotdot, annotations)}
-	;
-
-assign_return{-> expr}
-	= expr_final {-> New expr.return(Null, expr_final.expr)}
 	;
 
 extern_calls {-> extern_calls?}
