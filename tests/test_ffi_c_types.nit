@@ -8,7 +8,7 @@ in "C header" `{
 		};
 `}
 
-extern A in "C" `{struct s_a*`}
+extern class A in "C" `{struct s_a*`}
 	new `{
 		struct s_a* v = malloc(sizeof(struct s_a));
 		v->x = 1;
@@ -20,7 +20,7 @@ extern A in "C" `{struct s_a*`}
 	`}
 end
 
-extern B in "C" `{struct s_b*`}
+extern class B in "C" `{struct s_b*`}
 	super A
 	new `{
 		struct s_b* v = malloc(sizeof(struct s_b));
@@ -37,7 +37,7 @@ extern B in "C" `{struct s_b*`}
 	`}
 end
 
-extern C
+extern class C
 	super A
 	new `{
 		struct s_a* v = malloc(sizeof(struct s_a));

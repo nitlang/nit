@@ -23,7 +23,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	var _capacity: Int = 0 # Size of _array
 	var _length: Int = 0 # Number of items in the map
 
-	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
+	var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
 
 	# The last key accessed (used for cache)
@@ -189,8 +189,8 @@ end
 private abstract class HashNode[K: Object]
 	var _key: K
 	type N: HashNode[K]
-	readable writable var _next_item: nullable N = null
-	readable writable var _prev_item: nullable N = null
+	var _next_item: nullable N = null
+	var _prev_item: nullable N = null
 	var _prev_in_bucklet: nullable N = null
 	var _next_in_bucklet: nullable N = null
 	init(k: K)
@@ -387,7 +387,7 @@ class HashMapIterator[K: Object, V]
 	init(map: HashMap[K, V])
 	do
 		_map = map
-		_node = map.first_item
+		_node = map._first_item
 	end
 end
 

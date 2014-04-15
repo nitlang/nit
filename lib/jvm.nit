@@ -110,7 +110,7 @@ end
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
 	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
-	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv as nullable `{
+	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
 		JavaVM *jvm;
 		JNIEnv *env;
 		jint res;
@@ -237,7 +237,7 @@ extern class JniEnv `{JNIEnv *`}
 		return (char*)(*recv)->GetStringUTFChars(recv, (jstring)jobj, NULL);
 	`}
 
-	private fun convert_args_to_jni(args: nullable Array[nullable Object]): Pointer import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JavaObject), nullable Object.as(String), String.to_cstring, String.length `{
+	private fun convert_args_to_jni(args: nullable Array[nullable Object]): Pointer import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JavaObject), nullable Object.as(String), String.to_cstring, String.length `{
 		if(nullable_Array_of_nullable_Object_is_null(args)){
 			return NULL;
 		}

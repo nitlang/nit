@@ -65,7 +65,7 @@ end
 abstract class FStream
 	super IOS
 	# The path of the file.
-	readable var _path: nullable String = null
+	var path: nullable String = null
 
 	# The FILE *.
 	var _file: nullable NativeFile = null
@@ -85,8 +85,8 @@ class IFStream
 	fun reopen
 	do
 		if not eof then close
-		_file = new NativeFile.io_open_read(_path.to_cstring)
-		_end_reached = false
+		_file = new NativeFile.io_open_read(path.to_cstring)
+		end_reached = false
 		_buffer_pos = 0
 		_buffer.clear
 	end
@@ -94,14 +94,14 @@ class IFStream
 	redef fun close
 	do
 		var i = _file.io_close
-		_end_reached = true
+		end_reached = true
 	end
 
 	redef fun fill_buffer
 	do
 		var nb = _file.io_read(_buffer.items, _buffer.capacity)
 		if nb <= 0 then
-			_end_reached = true
+			end_reached = true
 			nb = 0
 		end
 		_buffer.length = nb
@@ -109,14 +109,14 @@ class IFStream
 	end
 	
 	# End of file?
-	redef readable var _end_reached: Bool = false
+	redef var end_reached: Bool = false
 
 	# Open the file at `path` for reading.
 	init open(path: String)
 	do
-		_path = path
+		self.path = path
 		prepare_buffer(10)
-		_file = new NativeFile.io_open_read(_path.to_cstring)
+		_file = new NativeFile.io_open_read(path.to_cstring)
 		assert cant_open_file: _file != null
 	end
 
@@ -162,7 +162,7 @@ class OFStream
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
 		assert cant_open_file: _file != null
-		_path = path
+		self.path = path
 		_writable = true
 	end
 	
@@ -176,7 +176,7 @@ class Stdin
 	super IFStream
 	private init do
 		_file = new NativeFile.native_stdin
-		_path = "/dev/stdin"
+		path = "/dev/stdin"
 		prepare_buffer(1)
 	end
 
@@ -189,7 +189,7 @@ class Stdout
 	super OFStream
 	private init do
 		_file = new NativeFile.native_stdout
-		_path = "/dev/stdout"
+		path = "/dev/stdout"
 		_writable = true
 	end
 end
@@ -198,7 +198,7 @@ class Stderr
 	super OFStream
 	private init do
 		_file = new NativeFile.native_stderr
-		_path = "/dev/stderr"
+		path = "/dev/stderr"
 		_writable = true
 	end
 end
@@ -507,7 +507,7 @@ extern class FileStat `{ struct stat * `}
 end
 
 # Instance of this class are standard FILE * pointers
-private extern NativeFile `{ FILE* `}
+private extern class NativeFile `{ FILE* `}
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"

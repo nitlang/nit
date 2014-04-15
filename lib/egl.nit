@@ -62,7 +62,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	#fun get_configs: nullable Array[EGLConfig] import Array[EGLConfig].with_native `{
 
 	# Returns some configs compatible with the specified `attributes`
-	fun choose_configs(attribs: Array[Int]): nullable Array[EGLConfig] import Array[Int].length, Array[Int].[], Array[EGLConfig], Array[EGLConfig].add, Array[EGLConfig] as nullable, report_egl_error `{
+	fun choose_configs(attribs: Array[Int]): nullable Array[EGLConfig] import Array[Int].length, Array[Int].[], Array[EGLConfig], Array[EGLConfig].add, Array[EGLConfig].as nullable, report_egl_error `{
 		EGLConfig *configs;
 		int n_configs;
 		int n_attribs = Array_of_Int_length(attribs);

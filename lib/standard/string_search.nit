@@ -238,20 +238,20 @@ end
 # Matches are a part of a `Text` found by a `Pattern`.
 class Match
 	# The base string matched
-	readable var _string: String
+	var string: String
 
 	# The starting position in the string
-	readable var _from: Int
+	var from: Int
 
 	# The length of the matching part
-	readable var _length: Int
+	var length: Int
 
 	# The position of the first character just after the matching part.
 	# May be out of the base string
-	fun after: Int do return _from + _length
+	fun after: Int do return from + length
 
 	# The contents of the matching part
-	redef fun to_s do return _string.substring(_from,_length)
+	redef fun to_s do return string.substring(from,length)
 
 	# Matches `len` characters of `s` from `f`.
 	init(s: String, f: Int, len: Int)
@@ -259,9 +259,9 @@ class Match
 		assert positive_length: len >= 0
 		assert valid_from: f >= 0
 		assert valid_after: f + len <= s.length
-		_string = s
-		_from = f
-		_length = len
+		string = s
+		from = f
+		length = len
 	end
 end
 

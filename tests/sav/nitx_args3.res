@@ -29,5 +29,11 @@
     [1m== refined classes[0m
       
       redef interface [32m[1mObject[0m[0m
-      [30m[1mbase_simple3::Object[0m[0m[30m (lines 49-51)[0m
+      [30m[1mbase_simple3::Object[0m[0m[30m (lines 49-49)[0m
+      
+      redef interface [32m[1mObject[0m[0m
+      [30m[1mbase_simple3::Object[0m[0m[30m (lines 50-50)[0m
+      
+      redef interface [32m[1mObject[0m[0m
+      [30m[1mbase_simple3::Object[0m[0m[30m (lines 51-51)[0m
 

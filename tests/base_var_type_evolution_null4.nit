@@ -19,13 +19,13 @@ import kernel
 class A
 end
 
-fun rand: Bool = true
+fun rand: Bool do return true
 
 fun eat_na(a: nullable A) do if a == null then 0.output else 1.output
 fun eat_a(a: A) do 2.output
 
-fun get_a: nullable A = new A
-fun get_na: nullable A = null
+fun get_a: nullable A do return new A
+fun get_na: nullable A do return null
 
 var a = get_na
 while a == null do

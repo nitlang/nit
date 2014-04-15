@@ -51,16 +51,16 @@ interface GtkCallable
 	fun signal( sender : GtkWidget, user_data : nullable Object ) is abstract
 end
 
-extern GdkEvent `{GdkEvent *`}
+extern class GdkEvent `{GdkEvent *`}
 end
 
 
 #Base class for all widgets
 #@https://developer.gnome.org/gtk3/stable/GtkWidget.html
-extern GtkWidget `{GtkWidget *`}
+extern class GtkWidget `{GtkWidget *`}
 	fun show_all is extern `{ gtk_widget_show_all( recv ); `}
 
-	fun signal_connect( signal_name : String, to_call : GtkCallable, user_data : nullable Object ) is extern import String.to_cstring, GtkCallable.signal, Object as not nullable `{
+	fun signal_connect( signal_name : String, to_call : GtkCallable, user_data : nullable Object ) is extern import String.to_cstring, GtkCallable.signal, Object.as not nullable `{
 		NitGtkSignal *data = malloc( sizeof(NitGtkSignal) );
 
 		GtkCallable_incr_ref( to_call );
@@ -120,7 +120,7 @@ end
 
 #Base class for widgets which contain other widgets
 #@https://developer.gnome.org/gtk3/stable/GtkContainer.html
-extern GtkContainer `{GtkContainer *`}
+extern class GtkContainer `{GtkContainer *`}
 	super GtkWidget
 
 	# Add a widget to the container
@@ -146,7 +146,7 @@ end
 
 #A container with just one child
 #@https://developer.gnome.org/gtk3/stable/GtkBin.html
-extern GtkBin `{GtkBin *`}
+extern class GtkBin `{GtkBin *`}
 	super GtkContainer
 
 	fun child : GtkWidget is extern `{
@@ -156,7 +156,7 @@ end
 
 #Toplevel which can contain other widgets
 #@https://developer.gnome.org/gtk3/stable/GtkWindow.html
-extern GtkWindow `{GtkWindow *`}
+extern class GtkWindow `{GtkWindow *`}
 	super GtkBin
 
 	new ( flag : Int ) is extern `{
@@ -278,7 +278,7 @@ end
 
 #A bin with a decorative frame and optional label
 #https://developer.gnome.org/gtk3/stable/GtkFrame.html
-extern GtkFrame `{GtkFrame *`}
+extern class GtkFrame `{GtkFrame *`}
 	super GtkBin
 
 	new ( lbl : String ) is extern import String.to_cstring`{
@@ -319,7 +319,7 @@ end
 
 #Pack widgets in a rows and columns
 #@https://developer.gnome.org/gtk3/3.3/GtkGrid.html
-extern GtkGrid `{GtkGrid *`}
+extern class GtkGrid `{GtkGrid *`}
 	super GtkContainer
 
 	# Create a grid with a fixed number of rows and columns
@@ -350,17 +350,17 @@ end
 
 #The tree interface used by GtkTreeView
 #@https://developer.gnome.org/gtk3/stable/GtkTreeModel.html
-extern GtkTreeModel `{GtkTreeModel *`}
+extern class GtkTreeModel `{GtkTreeModel *`}
 end
 
 #An abstract class for laying out GtkCellRenderers
 #@https://developer.gnome.org/gtk3/stable/GtkCellArea.html
-extern GtkCellArea `{GtkCellArea *`}
+extern class GtkCellArea `{GtkCellArea *`}
 end
 
 #Base class for widgets with alignments and padding
 #@https://developer.gnome.org/gtk3/3.2/GtkMisc.html
-extern GtkMisc `{GtkMisc *`}
+extern class GtkMisc `{GtkMisc *`}
 	super GtkWidget
 
 	fun alignment : GtkAlignment is abstract
@@ -379,7 +379,7 @@ end
 
 #A single line text entry field
 #@https://developer.gnome.org/gtk3/3.2/GtkEntry.html
-extern GtkEntry `{GtkEntry *`}
+extern class GtkEntry `{GtkEntry *`}
 	super GtkWidget
 
 	new is extern `{
@@ -416,7 +416,7 @@ end
 
 #Base class for widgets which visualize an adjustment
 #@https://developer.gnome.org/gtk3/3.2/GtkRange.html
-extern GtkRange `{GtkRange *`}
+extern class GtkRange `{GtkRange *`}
 	super GtkWidget
 
 	#Gets the current position of the fill level indicator.
@@ -513,7 +513,7 @@ end
 
 #A slider widget for selecting a value from a range
 #@https://developer.gnome.org/gtk3/3.2/GtkScale.html
-extern GtkScale `{GtkScale *`}
+extern class GtkScale `{GtkScale *`}
 	super GtkRange
 
 	new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
@@ -572,7 +572,7 @@ end
 
 #A scrollbar
 #@https://developer.gnome.org/gtk3/3.2/GtkScrollbar.html
-extern GtkScrollbar `{GtkScrollbar *`}
+extern class GtkScrollbar `{GtkScrollbar *`}
 	super GtkRange
 
 		new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
@@ -582,7 +582,7 @@ end
 
 #A widget that displays a small to medium amount of text
 #@https://developer.gnome.org/gtk3/3.2/GtkLabel.html
-extern GtkLabel `{GtkLabel *`}
+extern class GtkLabel `{GtkLabel *`}
 	super GtkMisc
 
 	# Create a GtkLabel with text
@@ -615,7 +615,7 @@ end
 
 #A widget displaying an image
 #@https://developer.gnome.org/gtk3/3.2/GtkImage.html
-extern GtkImage `{GtkImage *`}
+extern class GtkImage `{GtkImage *`}
 	super GtkMisc
 
 	# Create a GtkImage
@@ -644,7 +644,7 @@ end
 #enum GtkImageType
 #Describes the image data representation used by a GtkImage.
 #@https://developer.gnome.org/gtk3/3.2/GtkImage.html#GtkImageType
-extern GtkImageType `{GtkImageType`}
+extern class GtkImageType `{GtkImageType`}
 	# There is no image displayed by the widget.
 	new empty `{ return GTK_IMAGE_EMPTY; `}
 
@@ -669,7 +669,7 @@ end
 
 #Displays an arrow
 #@https://developer.gnome.org/gtk3/3.2/GtkArrow.html
-extern GtkArrow `{GtkArrow *`}
+extern class GtkArrow `{GtkArrow *`}
 	super GtkMisc
 
 	new ( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
@@ -683,7 +683,7 @@ end
 
 #A widget that emits a signal when clicked on
 #@https://developer.gnome.org/gtk3/stable/GtkButton.html
-extern GtkButton `{GtkButton *`}
+extern class GtkButton `{GtkButton *`}
 	super GtkBin
 
 	new is extern `{
@@ -715,7 +715,7 @@ end
 
 #A button which pops up a scale
 #@https://developer.gnome.org/gtk3/stable/GtkScaleButton.html
-extern GtkScaleButton `{GtkScaleButton *`}
+extern class GtkScaleButton `{GtkScaleButton *`}
 	super GtkButton
 
 	#const gchar **icons
@@ -726,7 +726,7 @@ end
 
 #Create buttons bound to a URL
 #@https://developer.gnome.org/gtk3/stable/GtkLinkButton.html
-extern GtkLinkButton `{GtkLinkButton *`}
+extern class GtkLinkButton `{GtkLinkButton *`}
 	super GtkButton
 
 	new( uri: String ) is extern import String.to_cstring `{
@@ -736,7 +736,7 @@ end
 
 #A container which can hide its child
 #https://developer.gnome.org/gtk3/stable/GtkExpander.html
-extern GtkExpander `{GtkExpander *`}
+extern class GtkExpander `{GtkExpander *`}
 	super GtkBin
 
 	new( lbl : String) is extern import String.to_cstring`{
@@ -815,7 +815,7 @@ end
 
 #An abstract class for laying out GtkCellRenderers
 #@https://developer.gnome.org/gtk3/stable/GtkCellArea.html
-extern GtkComboBox `{GtkComboBox *`}
+extern class GtkComboBox `{GtkComboBox *`}
 	super GtkBin
 
 	new is extern `{
@@ -935,7 +935,7 @@ end
 
 #Show a spinner animation
 #@https://developer.gnome.org/gtk3/3.2/GtkSpinner.html
-extern GtkSpinner `{GtkSpinner *`}
+extern class GtkSpinner `{GtkSpinner *`}
 	super GtkWidget
 
 	new is extern `{
@@ -953,7 +953,7 @@ end
 
 #A "light switch" style toggle
 #@https://developer.gnome.org/gtk3/3.2/GtkSwitch.html
-extern GtkSwitch `{GtkSwitch *`}
+extern class GtkSwitch `{GtkSwitch *`}
 	super GtkWidget
 
 	new is extern `{
@@ -972,7 +972,7 @@ end
 
 #A widget which controls the alignment and size of its child
 #https://developer.gnome.org/gtk3/stable/GtkAlignment.html
-extern GtkAlignment `{GtkAlignment *`}
+extern class GtkAlignment `{GtkAlignment *`}
 	super GtkBin
 
 	new ( xalign : Float, yalign : Float, xscale : Float, yscale : Float ) is extern `{
@@ -989,11 +989,11 @@ end
 
 #A representation of an adjustable bounded value
 #@https://developer.gnome.org/gtk3/stable/GtkAdjustment.html#GtkAdjustment.description
-extern GtkAdjustment `{GtkAdjustment *`}
+extern class GtkAdjustment `{GtkAdjustment *`}
 
 end
 
-extern GdkColor `{GdkColor*`}
+extern class GdkColor `{GdkColor*`}
 	new is extern `{
 		GdkColor * col = malloc(sizeof(GdkColor));
 		/*gdk_color_parse( "red", recv );*/
@@ -1002,7 +1002,7 @@ extern GdkColor `{GdkColor*`}
 	`}
 end
 
-extern GdkRGBA `{GdkRGBA*`}
+extern class GdkRGBA `{GdkRGBA*`}
 	new is extern `{
 	`}
 end

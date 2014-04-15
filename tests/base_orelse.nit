@@ -15,7 +15,7 @@
 import kernel
 
 class A
-	readable writable var _i: Int
+	var i: Int
 end
 
 var a: nullable A = new A(1)

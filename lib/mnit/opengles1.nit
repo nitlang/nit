@@ -423,7 +423,7 @@ class Opengles1Display
 	`}
 end
 
-extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
+extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 	super Image
 
     redef fun destroy is extern `{ free( recv ); `}
@@ -467,7 +467,7 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 end
 
 # FIXME this class is broken
-extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
+extern class Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 	super DrawableImage
     new ( w, h: Int ) is extern `{
 		struct mnit_opengles_DrawableTexture *image =

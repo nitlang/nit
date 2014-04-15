@@ -18,7 +18,7 @@ module gtk3_8
 
 import gtk3_6
 
-redef extern GtkWidget
+redef class GtkWidget
 	# Get the visibility of the widget, check if it's parents are visible too
 	fun visible: Bool is extern `{
 		return gtk_widget_is_visible(recv);

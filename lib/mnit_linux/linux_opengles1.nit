@@ -77,7 +77,7 @@ redef class Opengles1Display
 	end
 end
 
-redef extern Opengles1Image
+redef extern class Opengles1Image
 	new from_sdl_image( sdl_image: SDLImage ) is extern `{
 		return mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );
 	`}

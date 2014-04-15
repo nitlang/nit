@@ -18,7 +18,7 @@
 int dv = 1234;
 `}
 
-extern A `{int *`}
+extern class A `{int *`}
 	super Pointer
 
 	new import p `{

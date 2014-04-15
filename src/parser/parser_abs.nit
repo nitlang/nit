@@ -67,6 +67,9 @@ end
 class TKwextern
 	super Token
 end
+class TKwpublic
+	super Token
+end
 class TKwprotected
 	super Token
 end
@@ -260,6 +263,9 @@ class TAttrid
 	super Token
 end
 class TNumber
+	super Token
+end
+class THexNumber
 	super Token
 end
 class TFloat
@@ -996,9 +1002,14 @@ class ANullExpr
     readable var _n_kwnull: TKwnull
     readable var _n_annotations: nullable AAnnotations = null
 end
-class AIntExpr
+class ADecIntExpr
 	super AExpr
     readable var _n_number: TNumber
+    readable var _n_annotations: nullable AAnnotations = null
+end
+class AHexIntExpr
+	super AExpr
+    readable var _n_hex_number: THexNumber
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AFloatExpr
@@ -1044,18 +1055,18 @@ class AAsCastExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
-    readable var _n_opar: TOpar
+    readable var _n_opar: nullable TOpar = null
     readable var _n_type: AType
-    readable var _n_cpar: TCpar
+    readable var _n_cpar: nullable TCpar = null
 end
 class AAsNotnullExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
-    readable var _n_opar: TOpar
+    readable var _n_opar: nullable TOpar = null
     readable var _n_kwnot: TKwnot
     readable var _n_kwnull: TKwnull
-    readable var _n_cpar: TCpar
+    readable var _n_cpar: nullable TCpar = null
 end
 class AIssetAttrExpr
 	super AExpr

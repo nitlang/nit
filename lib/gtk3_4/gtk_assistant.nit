@@ -25,7 +25,7 @@ in "C Header" `{
 
 #A widget used to guide users through multi-step operations
 #@https://developer.gnome.org/gtk3/stable/GtkAssistant.html
-extern GtkAssistant `{GtkAssistant *`}
+extern class GtkAssistant `{GtkAssistant *`}
 	super GtkWindow
 
 	new is extern `{
@@ -116,7 +116,7 @@ end
 #enum GtkAssistantPageType
 #An enum for determining the page role inside the GtkAssistant. It's used to handle buttons sensitivity and visibility.
 #@https://developer.gnome.org/gtk3/stable/GtkAssistant.html#GtkAssistantPageType
-extern GtkAssistantPageType `{GtkAssistantPageType`}
+extern class GtkAssistantPageType `{GtkAssistantPageType`}
 	#The page has regular contents. Both the Back and forward buttons will be shown.
 	new content `{ return GTK_ASSISTANT_PAGE_CONTENT; `}
 

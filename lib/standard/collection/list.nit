@@ -301,7 +301,9 @@ class ListIterator[E]
 	var _node: nullable ListNode[E]
 
 	# The index of the current node
-	redef readable var _index: Int
+	var _index: Int
+
+	redef fun index do return _index
 
 	# Remove the current item
 	fun delete
@@ -342,8 +344,8 @@ private class ListNode[E]
 	end
 
 	# The next node.
-	readable writable var _next: nullable ListNode[E]
+	var next: nullable ListNode[E]
 
 	# The previous node.
-	readable writable var _prev: nullable ListNode[E]
+	var prev: nullable ListNode[E]
 end

@@ -26,7 +26,7 @@ class F
 end
 
 class G
-	readable writable var _a: Fail
+	var a: Fail
 	fun ma(a: Fail) do return
 	fun mb(a: Array[Fail]) do return
 	fun mc: Fail do return 0

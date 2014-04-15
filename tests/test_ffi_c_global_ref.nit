@@ -38,7 +38,7 @@ class A
 	fun recover_unsafe( i : Int ) : ToBePreserved `{
 		return global_tbps[i];
 	`}
-	fun recover( i : Int ) : nullable ToBePreserved import ToBePreserved as nullable `{
+	fun recover( i : Int ) : nullable ToBePreserved import ToBePreserved.as nullable `{
 		if ( global_tbps[i] != NULL ) {
 			return ToBePreserved_as_nullable( global_tbps[i] );
 		} else {

@@ -152,10 +152,10 @@ end
 
 class CountSink
 	super NodeSink
-	readable var _count: Int = 0
+	var count: Int = 0
 	redef fun recieve(n: NodeSource)
 	do
-		_count = _count + 1
+		count = count + 1
 	end
 end
 
@@ -192,12 +192,12 @@ class NodeEat
 	var _limit: Int
 	redef fun recieve(n: NodeSource)
 	do
-		var c = _count + 1
+		var c = count + 1
 		if c >= _limit then
-			_count = 0
+			count = 0
 			send
 		else
-			_count = c
+			count = c
 		end
 	end
 

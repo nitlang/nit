@@ -17,12 +17,12 @@
 import kernel
 
 class A
-	readable var _i: Int = 1
+	var i: Int = 1
 	init do end
 end
 
 class B
-	readable var _a: A = new A
+	var a: A = new A
 	init do end
 end
 

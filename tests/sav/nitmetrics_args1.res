@@ -35,9 +35,9 @@
 	  min: base_simple3 (7)
 	  std: 0.0
 	mnbr: number of refinement in module
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
+	  avg: 3.0
+	  max: base_simple3 (3)
+	  min: base_simple3 (3)
 	  std: 0.0
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 4.0
@@ -50,9 +50,9 @@
 	  min: base_simple3 (0)
 	  std: 0.0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 2.0
-	  max: base_simple3 (2)
-	  min: base_simple3 (2)
+	  avg: 4.0
+	  max: base_simple3 (4)
+	  min: base_simple3 (4)
 	  std: 0.0
 
  ## project base_empty_module
@@ -88,10 +88,10 @@
 	  min: base_empty_module (1)
 	  std: 3.0
 	mnbr: number of refinement in module
-	  avg: 0.0
-	  max: base_simple3 (1)
+	  avg: 1.0
+	  max: base_simple3 (3)
 	  min: base_empty_module (0)
-	  std: 0.707
+	  std: 1.581
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 2.0
 	  max: base_simple3 (4)
@@ -103,10 +103,10 @@
 	  min: base_simple3 (0)
 	  std: 0.0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 1.0
-	  max: base_simple3 (2)
+	  avg: 2.0
+	  max: base_simple3 (4)
 	  min: base_empty_module (0)
-	  std: 1.0
+	  std: 2.0
 
  ## global metrics
 	mnoa: number of ancestor modules
@@ -140,10 +140,10 @@
 	  min: base_empty_module (1)
 	  std: 5.0
 	mnbr: number of refinement in module
-	  avg: 1.0
-	  max: base_simple3 (1)
+	  avg: 3.0
+	  max: base_simple3 (3)
 	  min: base_empty_module (0)
-	  std: 0.707
+	  std: 2.121
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 5.0
 	  max: base_simple3 (4)
@@ -155,10 +155,10 @@
 	  min: base_simple3 (0)
 	  std: 0.0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 2.0
-	  max: base_simple3 (2)
+	  avg: 4.0
+	  max: base_simple3 (4)
 	  min: base_empty_module (0)
-	  std: 1.414
+	  std: 2.828
 
 # MClasses metrics
 
@@ -331,47 +331,48 @@ Distribution of direct smallers
   <=0: sub-population=1 (33.33%); cumulated value=0 (0.0%)
   <=1: sub-population=2 (66.66%); cumulated value=2 (100.00%)
 ## Classdef hierarchy
-Number of nodes: 9
-Number of edges: 23 (2.55 per node)
-Number of direct edges: 7 (0.77 per node)
+Number of nodes: 11
+Number of edges: 47 (4.27 per node)
+Number of direct edges: 9 (0.81 per node)
 Distribution of greaters
- population: 9
+ population: 11
  minimum value: 1
- maximum value: 3
- total value: 23
- average value: 2.55
+ maximum value: 5
+ total value: 47
+ average value: 4.27
  distribution:
-  <=1: sub-population=1 (11.11%); cumulated value=1 (4.34%)
-  <=2: sub-population=2 (22.22%); cumulated value=4 (17.39%)
-  <=4: sub-population=6 (66.66%); cumulated value=18 (78.26%)
+  <=1: sub-population=1 (9.09%); cumulated value=1 (2.12%)
+  <=4: sub-population=4 (36.36%); cumulated value=16 (34.04%)
+  <=8: sub-population=6 (54.54%); cumulated value=30 (63.82%)
 Distribution of direct greaters
- population: 9
+ population: 11
  minimum value: 0
- maximum value: 1
- total value: 7
- average value: 0.77
+ maximum value: 3
+ total value: 9
+ average value: 0.81
  distribution:
-  <=0: sub-population=2 (22.22%); cumulated value=0 (0.0%)
-  <=1: sub-population=7 (77.77%); cumulated value=7 (100.00%)
+  <=0: sub-population=4 (36.36%); cumulated value=0 (0.0%)
+  <=1: sub-population=6 (54.54%); cumulated value=6 (66.66%)
+  <=4: sub-population=1 (9.09%); cumulated value=3 (33.33%)
 Distribution of smallers
- population: 9
+ population: 11
  minimum value: 1
- maximum value: 8
- total value: 23
- average value: 2.55
+ maximum value: 10
+ total value: 47
+ average value: 4.27
  distribution:
-  <=1: sub-population=7 (77.77%); cumulated value=7 (30.43%)
-  <=8: sub-population=2 (22.22%); cumulated value=16 (69.56%)
+  <=1: sub-population=7 (63.63%); cumulated value=7 (14.89%)
+  <=16: sub-population=4 (36.36%); cumulated value=40 (85.10%)
 Distribution of direct smallers
- population: 9
+ population: 11
  minimum value: 0
  maximum value: 6
- total value: 7
- average value: 0.77
+ total value: 9
+ average value: 0.81
  distribution:
-  <=0: sub-population=7 (77.77%); cumulated value=0 (0.0%)
-  <=1: sub-population=1 (11.11%); cumulated value=1 (14.28%)
-  <=8: sub-population=1 (11.11%); cumulated value=6 (85.71%)
+  <=0: sub-population=7 (63.63%); cumulated value=0 (0.0%)
+  <=1: sub-population=3 (27.27%); cumulated value=3 (33.33%)
+  <=8: sub-population=1 (9.09%); cumulated value=6 (66.66%)
 ## Class hierarchy
 Number of nodes: 8
 Number of edges: 14 (1.75 per node)
@@ -417,36 +418,36 @@ Distribution of direct smallers
  population: 47
  minimum value: 1
  maximum value: 39
- total value: 265
- average value: 5.63
+ total value: 267
+ average value: 5.68
  distribution:
-  <=1: sub-population=11 (23.40%); cumulated value=11 (4.15%)
-  <=2: sub-population=9 (19.14%); cumulated value=18 (6.79%)
-  <=4: sub-population=9 (19.14%); cumulated value=31 (11.69%)
-  <=8: sub-population=9 (19.14%); cumulated value=54 (20.37%)
-  <=16: sub-population=5 (10.63%); cumulated value=55 (20.75%)
-  <=32: sub-population=3 (6.38%); cumulated value=57 (21.50%)
-  <=64: sub-population=1 (2.12%); cumulated value=39 (14.71%)
+  <=1: sub-population=10 (21.27%); cumulated value=10 (3.74%)
+  <=2: sub-population=9 (19.14%); cumulated value=18 (6.74%)
+  <=4: sub-population=10 (21.27%); cumulated value=34 (12.73%)
+  <=8: sub-population=9 (19.14%); cumulated value=54 (20.22%)
+  <=16: sub-population=5 (10.63%); cumulated value=55 (20.59%)
+  <=32: sub-population=3 (6.38%); cumulated value=57 (21.34%)
+  <=64: sub-population=1 (2.12%); cumulated value=39 (14.60%)
  list:
-  TId: 39 (14.71%)
-  APublicVisibility: 20 (7.54%)
-  AListExprs: 19 (7.16%)
-  ACallExpr: 18 (6.79%)
-  TClassid: 16 (6.03%)
-  TKwend: 10 (3.77%)
-  TNumber: 10 (3.77%)
-  AIntExpr: 10 (3.77%)
-  AType: 9 (3.39%)
-  ASignature: 8 (3.01%)
+  TId: 39 (14.60%)
+  APublicVisibility: 20 (7.49%)
+  AListExprs: 19 (7.11%)
+  ACallExpr: 18 (6.74%)
+  TClassid: 16 (5.99%)
+  TKwend: 10 (3.74%)
+  TNumber: 10 (3.74%)
+  ADecIntExpr: 10 (3.74%)
+  AType: 9 (3.37%)
+  ASignature: 8 (2.99%)
   ...
+  ASelfExpr: 1 (0.37%)
   ACallAssignExpr: 1 (0.37%)
-  TKwreturn: 1 (0.37%)
-  AInternMethPropdef: 1 (0.37%)
-  ATopClassdef: 1 (0.37%)
+  TKwself: 1 (0.37%)
+  AReturnExpr: 1 (0.37%)
   AInterfaceClasskind: 1 (0.37%)
   TKwinterface: 1 (0.37%)
-  AReturnExpr: 1 (0.37%)
-  TKwself: 1 (0.37%)
+  TKwreturn: 1 (0.37%)
+  AInternMethPropdef: 1 (0.37%)
   AMainMethPropdef: 1 (0.37%)
   AMainClassdef: 1 (0.37%)
 ## All identifiers of the AST
@@ -489,10 +490,10 @@ Number of classes: 8
   Number of enum kind: 2 (25.00%)
   Number of class kind: 5 (62.50%)
 
-Number of class definitions: 9
+Number of class definitions: 11
 Number of refined classes: 1 (12.50%)
-Average number of class refinments by classes: 0.12
-Average number of class refinments by refined classes: 1.00
+Average number of class refinments by classes: 0.37
+Average number of class refinments by refined classes: 3.00
 
 Number of properties: 20
   Number of MAttribute: 3 (15.00%)
@@ -527,7 +528,7 @@ Total number of self: 5
 Total number of implicit self: 4 (80.00%)
 --- Construction of tables ---
 Number of runtime classes: 7 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 2.71
+Average number of composing class definition by runtime class: 4.42
 Total size of tables (classes and instances): 35 (not including stuff like info for subtyping or call-next-method)
 Average size of table by runtime class: 5.00
 Values never redefined: 35 (100.00%)
@@ -545,8 +546,6 @@ Values never redefined: 35 (100.00%)
 	blooming mclasses (threshold: 2.388)
 	   B: 3.0
 	   C: 3.0
-generating out/nitmetrics_args1.write/project_hierarchy.dot
-generating out/nitmetrics_args1.write/module_hierarchy.dot
 
 # Inheritance metrics
 
@@ -894,6 +893,8 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3#Object#bar: 1 (4.54%)
   base_simple3#Object#foo: 1 (4.54%)
   base_simple3#C#init: 1 (4.54%)
+generating out/nitmetrics_args1.write/project_hierarchy.dot
+generating out/nitmetrics_args1.write/module_hierarchy.dot
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/

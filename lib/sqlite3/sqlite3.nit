@@ -134,7 +134,7 @@ extern class Sqlite3 `{sqlite3 *`}
 		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
 	`}
 
-	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement as nullable `{
+	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement.as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)
