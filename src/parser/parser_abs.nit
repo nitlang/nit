@@ -265,6 +265,9 @@ end
 class TNumber
 	super Token
 end
+class THexNumber
+	super Token
+end
 class TFloat
 	super Token
 end
@@ -1002,6 +1005,11 @@ end
 class ADecIntExpr
 	super AExpr
     readable var _n_number: TNumber
+    readable var _n_annotations: nullable AAnnotations = null
+end
+class AHexIntExpr
+	super AExpr
+    readable var _n_hex_number: THexNumber
     readable var _n_annotations: nullable AAnnotations = null
 end
 class AFloatExpr

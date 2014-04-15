@@ -74,6 +74,13 @@ redef class ADecIntExpr
 	end
 end
 
+redef class AHexIntExpr
+	redef fun accept_literal(v)
+	do
+		self.value = self.n_hex_number.text.substring_from(2).to_hex
+	end
+end
+
 redef class AFloatExpr
 	# The value of the literal float once computed.
 	var value: nullable Float

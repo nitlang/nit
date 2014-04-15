@@ -548,6 +548,9 @@ end
 class TNumber
 	super TokenLiteral
 end
+class THexNumber
+	super TokenLiteral
+end
 class TFloat
 	super TokenLiteral
 end
@@ -1547,6 +1550,11 @@ end
 class ADecIntExpr
 	super AIntExpr
 	readable writable var _n_number: TNumber
+end
+# An integer literal in hexadecimal format
+class AHexIntExpr
+	super AIntExpr
+	readable writable var _n_hex_number: THexNumber
 end
 # A float literal
 class AFloatExpr

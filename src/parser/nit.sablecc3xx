@@ -27,6 +27,7 @@ all = [0 .. 0xFF];
 lowercase = ['a' .. 'z'];
 uppercase = ['A' .. 'Z'];
 digit = ['0' .. '9'];
+hexdigit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'];
 letter = lowercase | uppercase | digit | '_';
 
 tab = 9;
@@ -183,6 +184,7 @@ id = lowercase letter*;
 attrid = '_' lowercase letter*;
 
 number = digit+;
+hex_number = ('0x' | '0X') hexdigit+;
 float = digit* '.' digit+;
 string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
 start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
@@ -561,7 +563,8 @@ expr_atom~nopar~nobra {-> expr}
 	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
 	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
 	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
-	| {int} number annotations_o {-> New expr.int(number, annotations_o.annotations)}
+	| {int} number annotations_o {-> New expr.dec_int(number, annotations_o.annotations)}
+	| {hex_int} hex_number annotations_o {-> New expr.hex_int(hex_number, annotations_o.annotations)}
 	| {float} float annotations_o {-> New expr.float(float, annotations_o.annotations)}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
@@ -851,7 +854,8 @@ expr	= {block} expr* kwend?
 	| {true} kwtrue annotations?
 	| {false} kwfalse annotations?
 	| {null} kwnull annotations?
-	| {int} number annotations?
+	| {dec_int} number annotations?
+	| {hex_int} hex_number annotations?
 	| {float} float annotations?
 	| {char} char annotations?
 	| {string} string annotations?
