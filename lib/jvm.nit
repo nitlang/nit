@@ -150,7 +150,7 @@ end
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
 	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
-	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv as nullable `{
+	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
 		JavaVM *jvm;
 		JNIEnv *env;
 		jint res;
@@ -228,49 +228,49 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments
-	fun call_void_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]) import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_void_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]) import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		(*recv)->CallVoidMethodA(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of argument returning a JObject
-	fun call_object_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): JObject import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_object_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): JObject import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		(*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Bool
-	fun call_boolean_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_boolean_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		return (*recv)->CallBooleanMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Char
-	fun call_char_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Char import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_char_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Char import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		return (*recv)->CallCharMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning an Int
-	fun call_int_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Int import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_int_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Int import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		return (*recv)->CallIntMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Float
-	fun call_float_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
+	fun call_float_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		return (*recv)->CallFloatMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a NativeString
-	fun call_string_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): NativeString import Array[nullable Object] as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring, String.length `{
+	fun call_string_method(obj: JObject, method_id: JMethodID, args: nullable Array[nullable Object]): NativeString import Array[nullable Object].as not nullable, Array[nullable Object].[], Array[nullable Object].length, nullable Object.as(Int), nullable Object.as(Char), nullable Object.as(Bool), nullable Object.as(Float), nullable Object.as(JObject), nullable Object.as(String), String.to_cstring, String.length `{
 		jvalue * args_tab = convert_array_of_Object_to_c(args, recv);
 		jobject jobj = (*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
 		free(args_tab);

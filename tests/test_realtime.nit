@@ -16,7 +16,7 @@
 
 import realtime
 
-redef extern Timespec
+redef extern class Timespec
 	fun simplify : Int
 	do
 		return sec*1000000 + nanosec/1000

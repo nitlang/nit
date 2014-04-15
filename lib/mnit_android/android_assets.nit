@@ -52,9 +52,9 @@ in "C" `{
 	}
 `}
 
-extern AndroidAsset in "C" `{struct AAsset*`}
+extern class AndroidAsset in "C" `{struct AAsset*`}
 
-	fun read(count: Int): nullable String is extern import String as nullable, NativeString.to_s `{
+	fun read(count: Int): nullable String is extern import String.as nullable, NativeString.to_s `{
 		char *buffer = malloc(sizeof(char) * (count+1));
 		int read = AAsset_read(recv, buffer, count);
 		if (read != count)
@@ -103,7 +103,7 @@ redef class App
 		return null
 	end
 
-	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset as nullable `{
+	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset.as nullable `{
 		struct AAsset* a = AAssetManager_open(mnit_java_app->activity->assetManager, String_to_cstring(path), AASSET_MODE_BUFFER);
 		if (a == NULL)
 		{

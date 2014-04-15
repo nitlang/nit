@@ -24,7 +24,7 @@ in "C Header" `{
 #enum GtkArrowPlacement
 #Used to specify the placement of scroll arrows in scrolling menus.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkArrowPlacement
-extern GtkArrowPlacement `{GtkArrowPlacement`}
+extern class GtkArrowPlacement `{GtkArrowPlacement`}
 	#Place one arrow on each end of the menu.
 	new both `{ return GTK_ARROWS_BOTH; `}
 
@@ -38,7 +38,7 @@ end
 #enum GtkArrowType
 #Used to indicate the direction in which a GtkArrow should point.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkArrowType
-extern GtkArrowType `{GtkArrowType`}
+extern class GtkArrowType `{GtkArrowType`}
 	#Represents an upward pointing arrow.
 	new up `{ return GTK_ARROW_UP; `}
 
@@ -58,7 +58,7 @@ end
 #enum GtkAttachOptions
 #Denotes the expansion properties that a widget will have when it (or its parent) is resized.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkAttachOptions
-extern GtkAttachOptions `{GtkAttachOptions`}
+extern class GtkAttachOptions `{GtkAttachOptions`}
 	#The widget should expand to take up any extra space in its container that has been allocated.
 	new expan `{ return GTK_EXPAND; `}
 
@@ -72,7 +72,7 @@ end
 #enum GtkButtonBoxStyle
 #Used to dictate the style that a GtkButtonBox uses to layout the buttons it contains.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkButtonBoxStyle
-extern GtkButtonBoxStyle `{GtkButtonBoxStyle`}
+extern class GtkButtonBoxStyle `{GtkButtonBoxStyle`}
 	#Buttons are evenly spread across the box.
 	new spread `{ return GTK_BUTTONBOX_SPREAD; `}
 
@@ -92,7 +92,7 @@ end
 #enum GtkCornerType
 #Specifies which corner a child widget should be placed in when packed into a GtkScrolledWindow. This is effectively the opposite of where the scroll bars are placed.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkCornerType
-extern GtkCornerType `{GtkCornerType`}
+extern class GtkCornerType `{GtkCornerType`}
 	#Place the scrollbars on the right and bottom of the widget (default behaviour).
 	new top_left `{ return GTK_CORNER_TOP_LEFT; `}
 
@@ -109,7 +109,7 @@ end
 #enum GtkExpanderStyle
 #Used to specify the style of the expanders drawn by a GtkTreeView.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkExpanderStyle
-extern GtkExpanderStyle `{GtkExpanderStyle`}
+extern class GtkExpanderStyle `{GtkExpanderStyle`}
 	#The style used for a collapsed subtree.
 	new collapsed `{ return GTK_EXPANDER_COLLAPSED; `}
 
@@ -126,7 +126,7 @@ end
 #enum GtkJustification
 #Used for justifying the text inside a GtkLabel widget.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkJustification
-extern GtkJustification `{GtkJustification`}
+extern class GtkJustification `{GtkJustification`}
 	#The text is placed at the left edge of the label.
 	new left `{ return GTK_JUSTIFY_LEFT; `}
 
@@ -143,7 +143,7 @@ end
 #enum GtkOrientation
 #Represents the orientation of widgets.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkOrientation
-extern GtkOrientation `{GtkOrientation`}
+extern class GtkOrientation `{GtkOrientation`}
 	#The widget is in horizontal orientation.
 	new horizontal `{ return GTK_ORIENTATION_HORIZONTAL; `}
 
@@ -154,7 +154,7 @@ end
 #enum GtkPackType
 #Represents the packing location GtkBox children.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPackType
-extern GtkPackType `{GtkPackType`}
+extern class GtkPackType `{GtkPackType`}
 	#The child is packed into the start of the box.
 	new start `{ return GTK_PACK_START; `}
 
@@ -165,7 +165,7 @@ end
 #enum GtkPolicyType
 #Determines when a scroll bar will be visible.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPolicyType
-extern GtkPolicyType `{GtkPolicyType`}
+extern class GtkPolicyType `{GtkPolicyType`}
 	#The scrollbar is always visible.
 	new always `{ return GTK_POLICY_ALWAYS; `}
 
@@ -179,7 +179,7 @@ end
 #enum GtkPositionType
 #Describes which edge of a widget a certain feature is positioned.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPositionType
-extern GtkPositionType `{GtkPositionType`}
+extern class GtkPositionType `{GtkPositionType`}
 	#The feature is at the left edge.
 	new left `{ return GTK_POS_LEFT; `}
 
@@ -196,7 +196,7 @@ end
 #enum GtkReliefStyle
 #Indicates the relief to be drawn around a GtkButton.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkReliefStyle
-extern GtkReliefStyle `{GtkReliefStyle`}
+extern class GtkReliefStyle `{GtkReliefStyle`}
 	#Draw a normal relief.
 	new normal `{ return GTK_RELIEF_NORMAL; `}
 
@@ -209,7 +209,7 @@ end
 
 #enum GtkResizeMode
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkResizeMode
-extern GtkResizeMode `{GtkResizeMode`}
+extern class GtkResizeMode `{GtkResizeMode`}
 	#Pass resize request to the parent.
 	new parent `{ return GTK_RESIZE_PARENT; `}
 
@@ -219,7 +219,7 @@ end
 
 #enum GtkSelectionMode
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkSelectionMode
-extern GtkSelectionMode `{GtkResizeMode`}
+extern class GtkSelectionMode `{GtkResizeMode`}
 	#No selection is possible.
 	new none `{ return GTK_SELECTION_NONE; `}
 
@@ -236,7 +236,7 @@ end
 #enum GtkShadowType
 #Used to change the appearance of an outline typically provided by a GtkFrame.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkShadowType
-extern GtkShadowType `{GtkShadowType`}
+extern class GtkShadowType `{GtkShadowType`}
 	#No outline.
 	new none `{ return GTK_SHADOW_NONE; `}
 
@@ -256,7 +256,7 @@ end
 #enum GtkStateType
 #Indicates the current state of a widget; the state determines how the widget is drawn.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkStateType
-extern GtkStateType `{GtkStateType`}
+extern class GtkStateType `{GtkStateType`}
 	#State during normal operation.
 	new normal `{ return GTK_STATE_NORMAL; `}
 
@@ -282,7 +282,7 @@ end
 #enum GtkStateFlags
 #Describes a widget state.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkStateFlags
-extern GtkStateFlags `{GtkStateFlags`}
+extern class GtkStateFlags `{GtkStateFlags`}
 	#State during normal operation.
 	new normal `{ return GTK_STATE_FLAG_NORMAL; `}
 
@@ -308,7 +308,7 @@ end
 #enum GtkToolbarStyle
 #Used to customize the appearance of a GtkToolbar.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkToolbarStyle
-extern GtkToolbarStyle `{GtkToolbarStyle`}
+extern class GtkToolbarStyle `{GtkToolbarStyle`}
 	#Buttons display only icons in the toolbar.
 	new icons `{ return GTK_TOOLBAR_ICONS; `}
 
@@ -325,7 +325,7 @@ end
 #enum GtkWindowPosition
 #Window placement can be influenced using this enumeration.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkWindowPosition
-extern GtkWindowPosition `{GtkWindowPosition`}
+extern class GtkWindowPosition `{GtkWindowPosition`}
 	#No influence is made on placement.
 	new none `{ return GTK_WIN_POS_NONE; `}
 
@@ -345,7 +345,7 @@ end
 #enum GtkWindowType
 #A GtkWindow can be one of these types.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkWindowType
-extern GtkWindowType `{GtkWindowType`}
+extern class GtkWindowType `{GtkWindowType`}
 	#A regular window, such as a dialog
 	new toplevel `{ return GTK_WINDOW_TOPLEVEL; `}
 
@@ -356,7 +356,7 @@ end
 #enum GtkSortType
 #Determines the direction of a sort.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkSortType
-extern GtkSortType `{GtkSortType`}
+extern class GtkSortType `{GtkSortType`}
 	#Sorting is in ascending order.
 	new asc `{ return GTK_SORT_ASCENDING; `}
 
@@ -367,7 +367,7 @@ end
 #enum GtkBorderStyle
 #Describes how the border of a UI element should be rendered.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkBorderStyle
-extern GtkBorderStyle `{GtkBorderStyle`}
+extern class GtkBorderStyle `{GtkBorderStyle`}
 	#No visible border.
 	new none `{ return GTK_BORDER_STYLE_NONE; `}
 
@@ -382,7 +382,7 @@ extern GtkBorderStyle `{GtkBorderStyle`}
 end
 
 # Icon size enum
-extern GtkIconSize `{GtkIconSize`}
+extern class GtkIconSize `{GtkIconSize`}
 	new invalid `{ return GTK_ICON_SIZE_INVALID; `}
 	new menu `{ return GTK_ICON_SIZE_MENU; `}
 	new small_toolbar `{ return GTK_ICON_SIZE_SMALL_TOOLBAR; `}

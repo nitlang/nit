@@ -84,7 +84,7 @@ class PollFD
 end
 
 # Data structure used by the poll function
-private extern FFSocketPollFD `{ struct pollfd `}
+private extern class FFSocketPollFD `{ struct pollfd `}
 	# File descriptor id
 	private fun fd: Int `{ return recv.fd; `}
 	# List of events to be watched
@@ -101,7 +101,7 @@ private extern FFSocketPollFD `{ struct pollfd `}
 
 end
 
-extern FFSocket `{ S_DESCRIPTOR* `}
+extern class FFSocket `{ S_DESCRIPTOR* `}
 	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
 		S_DESCRIPTOR *d = NULL; d = (S_DESCRIPTOR*) malloc( sizeof(S_DESCRIPTOR) );
 		int ds = socket(domain, socketType, protocol);
@@ -187,7 +187,7 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	end
 end
 
-extern FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
+extern class FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	new (socket: FFSocket, addrIn: FFSocketAddrIn) `{
 		S_ACCEPT_RESULT *sar = NULL;
 		sar = malloc( sizeof(S_ACCEPT_RESULT) );
@@ -200,7 +200,7 @@ extern FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	fun destroy `{ free(recv); `}
 end
 
-extern FFSocketAddrIn `{ S_ADDR_IN* `}
+extern class FFSocketAddrIn `{ S_ADDR_IN* `}
 	new `{
 		S_ADDR_IN *sai = NULL;
 		sai = malloc( sizeof(S_ADDR_IN) );
@@ -228,7 +228,7 @@ extern FFSocketAddrIn `{ S_ADDR_IN* `}
 	fun destroy `{ free(recv); `}
 end
 
-extern FFSocketHostent `{ S_HOSTENT* `}
+extern class FFSocketHostent `{ S_HOSTENT* `}
 	private fun i_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 	fun h_aliases: Array[String]
@@ -248,7 +248,7 @@ extern FFSocketHostent `{ S_HOSTENT* `}
 	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
 end
 
-extern FFTimeval `{ S_TIMEVAL* `}
+extern class FFTimeval `{ S_TIMEVAL* `}
 	new (seconds: Int, microseconds: Int) `{
 		S_TIMEVAL* tv = NULL;
 		tv = malloc( sizeof(S_TIMEVAL) );
@@ -261,7 +261,7 @@ extern FFTimeval `{ S_TIMEVAL* `}
 	fun destroy `{ free( recv ); `}
 end
 
-extern FFSocketSet `{ S_FD_SET* `}
+extern class FFSocketSet `{ S_FD_SET* `}
 	new `{
 		S_FD_SET *f = NULL;
 		f = malloc( sizeof(S_FD_SET) );
@@ -287,13 +287,13 @@ class FFSocketObserver
 	`}
 end
 
-extern FFSocketTypes `{ int `}
+extern class FFSocketTypes `{ int `}
 	new sock_stream `{ return SOCK_STREAM; `}
 	new sock_dgram `{ return SOCK_DGRAM; `}
 	new sock_raw `{ return SOCK_RAW; `}
 	new sock_seqpacket `{ return SOCK_SEQPACKET; `}
 end
-extern FFSocketAddressFamilies `{ int `}
+extern class FFSocketAddressFamilies `{ int `}
 	new af_null `{ return 0; `}
 	new af_unspec `{ return  AF_UNSPEC; `} 		# unspecified
 	new af_unix `{ return  AF_UNIX; `} 		# local to host (pipes)
@@ -307,7 +307,7 @@ extern FFSocketAddressFamilies `{ int `}
 	new af_inet6 `{ return  AF_INET6; `}		# IPv6
 	new af_max `{ return  AF_MAX; `}
 end
-extern FFSocketProtocolFamilies `{ int `}
+extern class FFSocketProtocolFamilies `{ int `}
 	new pf_null `{ return 0; `}
 	new pf_unspec `{ return PF_UNSPEC; `}
 	new pf_local `{ return PF_LOCAL; `}
@@ -323,7 +323,7 @@ extern FFSocketProtocolFamilies `{ int `}
 	new pf_max `{ return PF_MAX; `}
 end
 # Level on which to set options
-extern FFSocketOptLevels `{ int `}
+extern class FFSocketOptLevels `{ int `}
 	# Dummy for IP (As defined in C)
 	new ip `{ return IPPROTO_IP;`}
 	# Control message protocol
@@ -334,7 +334,7 @@ extern FFSocketOptLevels `{ int `}
 	new socket `{ return SOL_SOCKET; `}
 end
 # Options for socket, use with setsockopt
-extern FFSocketOptNames `{ int `}
+extern class FFSocketOptNames `{ int `}
 	# Enables debugging information
 	new debug `{ return SO_DEBUG; `}
 	# Authorizes the broadcasting of messages
@@ -345,7 +345,7 @@ extern FFSocketOptNames `{ int `}
 	new keepalive `{ return SO_KEEPALIVE; `}
 end
 # Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
-extern FFSocketPollValues `{ int `}
+extern class FFSocketPollValues `{ int `}
 	new pollin `{ return POLLIN; `}           # Data other than high-priority data may be read without blocking.
 	new pollrdnorm `{ return POLLRDNORM; `}   # Normal data may be read without blocking.
 	new pollrdband `{ return POLLRDBAND; `}   # Priority data may be read without blocking.

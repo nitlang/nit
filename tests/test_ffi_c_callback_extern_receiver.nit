@@ -22,7 +22,7 @@ module test_ffi_c_callback_extern_receiver
 #include <stdio.h>
 `}
 
-extern Test
+extern class Test
     new create_me is extern `{
         int* foobar = malloc(sizeof(int));
         *foobar = 12345;

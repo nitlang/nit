@@ -20,7 +20,7 @@ in "C header" `{
 `}
 
 # A curse windows
-extern Window `{WINDOW *`}
+extern class Window `{WINDOW *`}
 	# Initialize the screen
 	new `{
 		WINDOW *res;

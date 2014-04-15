@@ -600,7 +600,7 @@ universal Char
 end
 
 # Pointer classes are used to manipulate extern C structures.
-extern Pointer
+extern class Pointer
 	# Is the address behind this Object at NULL?
 	fun address_is_null: Bool `{ return recv == NULL; `}
 
