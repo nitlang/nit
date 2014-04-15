@@ -314,6 +314,9 @@ end
 class TKwextern
 	super TokenKeyword
 end
+class TKwpublic
+	super TokenKeyword
+end
 class TKwprotected
 	super TokenKeyword
 end

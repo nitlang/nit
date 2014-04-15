@@ -114,6 +114,7 @@ kwwritable = 'writable';
 kwvar = 'var';
 kwintern = 'intern';
 kwextern = 'extern';
+kwpublic = 'public';
 kwprotected = 'protected';
 kwprivate = 'private';
 kwintrude = 'intrude';

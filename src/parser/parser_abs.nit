@@ -67,6 +67,9 @@ end
 class TKwextern
 	super Token
 end
+class TKwpublic
+	super Token
+end
 class TKwprotected
 	super Token
 end
