@@ -240,7 +240,7 @@ classkind
 	| {abstract} kwabstract kwclass
 	| {interface} kwinterface
 	| {enum} kwenum
-	| {extern} kwextern kwclass?
+	| {extern} kwextern kwclass
 	;
 
 formaldefs {-> formaldef*}
@@ -344,20 +344,22 @@ extern_calls {-> extern_calls?}
 extern_call_tail {-> extern_call}
 	= comma no extern_call {-> extern_call};
 extern_call {-> extern_call}
-    = {prop} extern_call_prop {-> extern_call_prop.extern_call}
-    | {cast} extern_call_cast {-> extern_call_cast.extern_call}
+	= {prop} extern_call_prop {-> extern_call_prop.extern_call}
+	| {cast} extern_call_cast {-> extern_call_cast.extern_call}
 	| {super} kwsuper {-> New extern_call.super( kwsuper )}
-    ;
+	;
 extern_call_prop {-> extern_call}
-    = {local} methid {-> New extern_call.local_prop( methid )}
-	| {full} type quad methid {-> New extern_call.full_prop( type, Null, methid )}
-	| {full2} type dot methid {-> New extern_call.full_prop( type, dot, methid )}
+	= {local} methid {-> New extern_call.local_prop( methid )}
+	| {full} type dot methid {-> New extern_call.full_prop( type, dot, methid )}
 	| {init} type {-> New extern_call.init_prop( type )}
 	;
 extern_call_cast {-> extern_call}
-    = {as_cast} [from_type]:type dot? kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
-	| {as_nullable} type dot? kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
-	| {as_not_nullable} type dot? kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
+	= {as_cast} [from_type]:type dot kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
+	| {as_cast2}[from_type]:type dot kwas [n2]:no [to_type]:type {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
+	| {as_nullable} type dot kwas [n2]:no opar [n3]:no kwnullable [n4]:no cpar {-> New extern_call.as_nullable( type, kwas, kwnullable)}
+	| {as_nullable2}type dot kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
+	| {as_not_nullable} type dot kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnullable [n5]:no cpar {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
+	| {as_not_nullable2}type dot kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
 	;
 
 string_o {->string?} = string? {-> string};
