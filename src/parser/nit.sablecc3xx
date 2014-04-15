@@ -206,7 +206,7 @@ Productions
 
 /* MODULES *******************************************************************/
 module
-	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:classdef* implicit_top_class? implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
+	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:topdef* implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_main_class.classdef])};
 
 moduledecl
 	= [doc]:no kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name, annotation_withend.annotations)};
@@ -216,8 +216,10 @@ import
 	| {no} [doc]:no redef visibility kwimport no kwend [n2]:n1 {-> New import.no(visibility, kwimport, kwend)}
 	;
 
-implicit_top_class {-> classdef}
-	= propdefs_toplevel+ {-> New classdef.top([propdefs_toplevel.propdef])};
+topdef {-> classdef}
+	= {classdef} classdef {-> classdef}
+	| propdefs_toplevel {-> New classdef.top([propdefs_toplevel.propdef])}
+	;
 
 implicit_main_class {-> classdef?}
 	= implicit_main_meth {-> New classdef.main([implicit_main_meth.propdef])}
