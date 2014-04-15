@@ -15,9 +15,9 @@
 # limitations under the License.
 
 import kernel
-
 class A
-	readable writable var _foo: Int = 1
+	var foo: Int = 1
+	var _foo: Int = 2
 end
 
 var a: nullable A = null

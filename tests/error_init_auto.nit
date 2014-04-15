@@ -17,16 +17,16 @@
 import kernel
 
 class A
-	readable var _x: Int #alt1#
-	#alt1#readable var _x: Int = 2
-	readable var _y: Int = -2 #alt2#
-	#alt2#readable var _y: Int
-	#alt3#init (xx: Int) do _x = xx
-	#alt4#init foo(xx: Int) do _x = xx
+	var x: Int #alt1#
+	#alt1#var x: Int = 2
+	var y: Int = -2 #alt2#
+	#alt2#var y: Int
+	#alt3#init (xx: Int) do x = xx
+	#alt4#init foo(xx: Int) do x = xx
 	fun work
 	do
-		_x.output
-		_y.output
+		x.output
+		y.output
 	end
 end
 

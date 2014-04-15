@@ -17,28 +17,28 @@
 import kernel
 
 class A
-	readable var _a: Int 
-	
+	var a: Int
+
 	init(a: Int)
 	do
-		_a = a
+		a = a
 	end
 end
 
 class B
 	super A
-	redef fun ==(a: nullable Object): Bool
+	redef fun ==(o: nullable Object): Bool
 	do
-		if not a isa B then
+		if not o isa B then
 			return false
 		end
 
-		return a.a.is_same_instance(_a)
+		return o.a.is_same_instance(a)
 	end
 
 	init(b: Int)
 	do
-		_a = b
+		a = b
 	end
 end
 
