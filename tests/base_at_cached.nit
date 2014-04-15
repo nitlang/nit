@@ -17,7 +17,7 @@ import kernel
 class Base
 	var foo: Int = 10
 	fun -: Int do return foo + 20
-	fun bar: Int = -self + 40
+	fun bar: Int do return -self + 40
 end
 
 class CMinus

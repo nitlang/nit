@@ -187,7 +187,7 @@ class OptionEnum
 		return id
 	end
 
-	fun value_name: String = _values[value]
+	fun value_name: String do return values[value]
 
 	redef fun pretty_default
 	do
