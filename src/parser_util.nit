@@ -173,7 +173,7 @@ class InjectedLexer
 	do
 		if not injected_before.is_empty then
 			var tok = injected_before.shift
-			if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+			if tok.real_location == null then tok.real_location = new Location(file, 1, 1, 1, 0)
 			return tok
 		end
 		if not is_finished then
@@ -184,7 +184,7 @@ class InjectedLexer
 		end
 
 		var tok = injected_after.shift
-		if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+		if tok.real_location == null then tok.real_location = new Location(file, 1, 1, 1, 0)
 		return tok
 	end
 end

@@ -33,7 +33,7 @@ redef class TEol
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -45,7 +45,7 @@ redef class TComment
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -57,7 +57,7 @@ redef class TKwpackage
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -69,7 +69,7 @@ redef class TKwmodule
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -81,7 +81,7 @@ redef class TKwimport
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -93,7 +93,7 @@ redef class TKwclass
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -105,7 +105,7 @@ redef class TKwabstract
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -117,7 +117,7 @@ redef class TKwinterface
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -129,7 +129,7 @@ redef class TKwenum
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -141,7 +141,7 @@ redef class TKwend
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -153,7 +153,7 @@ redef class TKwmeth
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -165,7 +165,7 @@ redef class TKwtype
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -177,7 +177,7 @@ redef class TKwinit
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -189,7 +189,7 @@ redef class TKwredef
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -201,7 +201,7 @@ redef class TKwis
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -213,7 +213,7 @@ redef class TKwdo
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -225,7 +225,7 @@ redef class TKwreadable
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -237,7 +237,7 @@ redef class TKwwritable
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -249,7 +249,7 @@ redef class TKwvar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -261,7 +261,7 @@ redef class TKwintern
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -273,7 +273,7 @@ redef class TKwextern
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -285,7 +285,7 @@ redef class TKwpublic
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -297,7 +297,7 @@ redef class TKwprotected
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -309,7 +309,7 @@ redef class TKwprivate
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -321,7 +321,7 @@ redef class TKwintrude
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -333,7 +333,7 @@ redef class TKwif
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -345,7 +345,7 @@ redef class TKwthen
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -357,7 +357,7 @@ redef class TKwelse
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -369,7 +369,7 @@ redef class TKwwhile
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -381,7 +381,7 @@ redef class TKwloop
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -393,7 +393,7 @@ redef class TKwfor
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -405,7 +405,7 @@ redef class TKwin
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -417,7 +417,7 @@ redef class TKwand
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -429,7 +429,7 @@ redef class TKwor
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -441,7 +441,7 @@ redef class TKwnot
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -453,7 +453,7 @@ redef class TKwimplies
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -465,7 +465,7 @@ redef class TKwreturn
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -477,7 +477,7 @@ redef class TKwcontinue
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -489,7 +489,7 @@ redef class TKwbreak
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -501,7 +501,7 @@ redef class TKwabort
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -513,7 +513,7 @@ redef class TKwassert
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -525,7 +525,7 @@ redef class TKwnew
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -537,7 +537,7 @@ redef class TKwisa
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -549,7 +549,7 @@ redef class TKwonce
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -561,7 +561,7 @@ redef class TKwsuper
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -573,7 +573,7 @@ redef class TKwself
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -585,7 +585,7 @@ redef class TKwtrue
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -597,7 +597,7 @@ redef class TKwfalse
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -609,7 +609,7 @@ redef class TKwnull
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -621,7 +621,7 @@ redef class TKwas
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -633,7 +633,7 @@ redef class TKwnullable
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -645,7 +645,7 @@ redef class TKwisset
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -657,7 +657,7 @@ redef class TKwlabel
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -669,7 +669,7 @@ redef class TKwdebug
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -681,7 +681,7 @@ redef class TOpar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -693,7 +693,7 @@ redef class TCpar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -705,7 +705,7 @@ redef class TObra
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -717,7 +717,7 @@ redef class TCbra
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -729,7 +729,7 @@ redef class TComma
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -741,7 +741,7 @@ redef class TColumn
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -753,7 +753,7 @@ redef class TQuad
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -765,7 +765,7 @@ redef class TAssign
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -777,7 +777,7 @@ redef class TPluseq
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -789,7 +789,7 @@ redef class TMinuseq
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -801,7 +801,7 @@ redef class TDotdotdot
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -813,7 +813,7 @@ redef class TDotdot
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -825,7 +825,7 @@ redef class TDot
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -837,7 +837,7 @@ redef class TPlus
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -849,7 +849,7 @@ redef class TMinus
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -861,7 +861,7 @@ redef class TStar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -873,7 +873,7 @@ redef class TSlash
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -885,7 +885,7 @@ redef class TPercent
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -897,7 +897,7 @@ redef class TEq
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -909,7 +909,7 @@ redef class TNe
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -921,7 +921,7 @@ redef class TLt
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -933,7 +933,7 @@ redef class TLe
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -945,7 +945,7 @@ redef class TLl
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -957,7 +957,7 @@ redef class TGt
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -969,7 +969,7 @@ redef class TGe
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -981,7 +981,7 @@ redef class TGg
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -993,7 +993,7 @@ redef class TStarship
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1005,7 +1005,7 @@ redef class TBang
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1017,7 +1017,7 @@ redef class TAt
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1029,7 +1029,7 @@ redef class TClassid
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1041,7 +1041,7 @@ redef class TId
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1053,7 +1053,7 @@ redef class TAttrid
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1065,7 +1065,7 @@ redef class TNumber
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1077,7 +1077,7 @@ redef class THexNumber
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1089,7 +1089,7 @@ redef class TFloat
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1101,7 +1101,7 @@ redef class TString
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1113,7 +1113,7 @@ redef class TStartString
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1125,7 +1125,7 @@ redef class TMidString
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1137,7 +1137,7 @@ redef class TEndString
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1149,7 +1149,7 @@ redef class TChar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1161,7 +1161,7 @@ redef class TBadString
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1173,7 +1173,7 @@ redef class TBadChar
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1185,7 +1185,7 @@ redef class TExternCodeSegment
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -1199,7 +1199,7 @@ redef class EOF
     init init_tk(loc: Location)
     do
         _text = ""
-		_location = loc
+		real_location = loc
     end
 end
 

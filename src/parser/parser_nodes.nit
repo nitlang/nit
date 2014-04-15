@@ -20,11 +20,11 @@ import location
 
 # Root of the AST class-hierarchy
 abstract class ANode
-	var _location: nullable Location = null
+	private var real_location: nullable Location = null
 
 	# Location is set during AST building. Once built, location cannon be null.
 	# However, manual instantiated nodes may need more care.
-	fun location: Location do return _location.as(not null)
+	fun location: Location do return real_location.as(not null)
 
 	# The location of the important part of the node (identifier or whatever)
 	fun hot_location: Location do return location
@@ -198,7 +198,7 @@ end
 abstract class Prod
 	super ANode
 
-	fun location=(l: Location) do _location = l
+	fun location=(l: Location) do real_location = l
 
 	# All the annotations attached directly to the node
 	var n_annotations: nullable AAnnotations writable = null
@@ -207,7 +207,7 @@ abstract class Prod
 	do
 		super
 		assert n isa Prod
-		if n._location == null then n._location = _location
+		if n.real_location == null then n.real_location = real_location
 	end
 end
 
@@ -224,14 +224,14 @@ abstract class Visitor
 	fun enter_visit(e: nullable ANode)
 	do
 		if e == null then return
-		var old = _current_node
-		_current_node = e
+		var old = current_node
+		current_node = e
 		visit(e)
-		_current_node = old
+		current_node = old
 	end
 
 	# The current visited node
-	readable writable var _current_node: nullable ANode = null
+	var current_node: nullable ANode writable = null
 end
 
 # Token of end of line (basically `\n`)

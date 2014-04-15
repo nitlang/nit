@@ -52,9 +52,9 @@ redef class ANode
 		end
 		v.seen.add(self)
 
-		if _location == null then
+		if real_location == null then
 			#debug "LOCATION: unlocated node {v.path.join(", ")}"
-			_location = self.parent.location
+			real_location = self.parent.location
 		end
 
 		visit_all(v)
