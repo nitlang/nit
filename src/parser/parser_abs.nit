@@ -455,7 +455,7 @@ class AMethPropdef
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
-    readable var _n_methid: AMethid
+    readable var _n_methid: nullable AMethid = null
     readable var _n_signature: ASignature
 end
 class ADeferredMethPropdef
@@ -495,7 +495,7 @@ class AConcreteMethPropdef
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
     readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
+    readable var _n_methid: nullable AMethid = null
     readable var _n_signature: ASignature
     readable var _n_annotations: nullable AAnnotations = null
     readable var _n_block: nullable AExpr = null

@@ -1027,8 +1027,8 @@ redef class AMethPropdef
 		if nkwredef != null then nkwredef.parent = self
 		_n_visibility = nvisibility.as(not null)
 		nvisibility.parent = self
-		_n_methid = nmethid.as(not null)
-		nmethid.parent = self
+		_n_methid = nmethid
+		if nmethid != null then nmethid.parent = self
 		_n_signature = nsignature.as(not null)
 		nsignature.parent = self
 	end
@@ -1048,7 +1048,7 @@ redef class AMethPropdef
 			return
 		end
 		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
+			n_methid = new_child.as(nullable AMethid)
 			return
 		end
 		if _n_signature == old_child then
@@ -1075,7 +1075,7 @@ redef class AMethPropdef
 	redef fun n_methid=(node)
 	do
 		super
-		node.parent = self
+		if node != null then node.parent = self
 	end
 	redef fun n_signature=(node)
 	do
@@ -1459,8 +1459,8 @@ redef class AConcreteMethPropdef
 		nvisibility.parent = self
 		_n_kwmeth = nkwmeth.as(not null)
 		nkwmeth.parent = self
-		_n_methid = nmethid.as(not null)
-		nmethid.parent = self
+		_n_methid = nmethid
+		if nmethid != null then nmethid.parent = self
 		_n_signature = nsignature.as(not null)
 		nsignature.parent = self
 		_n_annotations = nannotations
@@ -1488,7 +1488,7 @@ redef class AConcreteMethPropdef
 			return
 		end
 		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
+			n_methid = new_child.as(nullable AMethid)
 			return
 		end
 		if _n_signature == old_child then
@@ -1528,7 +1528,7 @@ redef class AConcreteMethPropdef
 	redef fun n_methid=(node)
 	do
 		super
-		node.parent = self
+		if node != null then node.parent = self
 	end
 	redef fun n_signature=(node)
 	do

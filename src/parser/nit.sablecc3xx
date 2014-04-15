@@ -766,11 +766,11 @@ superclass = kwsuper type annotations?;
 
 
 propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwvar [id]:attrid? [id2]:id? type? annotations? expr?
-	| {meth} doc? kwredef? visibility methid signature
+	| {meth} doc? kwredef? visibility methid? signature
 	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature annotations?
 	| {intern_meth} doc? kwredef? visibility kwmeth methid signature
 	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls? extern_code_block?
-	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature annotations? [block]:expr?
+	| {concrete_meth} doc? kwredef? visibility kwmeth methid? signature annotations? [block]:expr?
 	| {concrete_init} doc? kwredef? visibility kwinit methid? signature annotations? [block]:expr?
 	//| {concrete_new} doc? kwredef? visibility kwnew methid? signature [block]:expr?
 	| {extern_init} doc? kwredef? visibility kwnew methid? signature [extern]:string? extern_calls? extern_code_block?
