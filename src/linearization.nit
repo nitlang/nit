@@ -151,7 +151,7 @@ redef class MModule
 	end
 	
 	redef fun element_parents
-        do
+	do
 		var parents = new HashSet[Linearizable]
 		for parent in self.in_importation.direct_greaters do
 			parents.add parent
@@ -162,17 +162,17 @@ redef class MModule
 end
 
 redef class ToolContext
-        var lin_phase = new LinearizationPhase(self, null)
+	var lin_phase = new LinearizationPhase(self, null)
 end
 
 class LinearizationPhase
 	super Phase
 	
 	#Test Linearization algorithm
-        redef fun process_mainmodule(mainmodule, mm)
+	redef fun process_mainmodule(mainmodule, mm)
 	do	
 		var dbg: Bool = false
-                var classes = mainmodule.flatten_mclass_hierarchy
+		var classes = mainmodule.flatten_mclass_hierarchy
 		var result = new Array[Linearizable]
 		if self.toolcontext.verbose_level > 0 then
 			dbg = true
@@ -186,21 +186,21 @@ class LinearizationPhase
 		end
 		print "-----------------Finish----------------"
 
-                result = new Array[Linearizable]
-                printn"Which class you want to linearize: "
-                var name = gets.to_s
-                for class_ in classes do
-                        var class_def = class_.intro
-                        if class_def.mclass.name == name then
+		result = new Array[Linearizable]
+		printn"Which class you want to linearize: "
+		var name = gets.to_s
+		for class_ in classes do
+			var class_def = class_.intro
+			if class_def.mclass.name == name then
 				#Linearize class
 				result = class_def.linearize(dbg)
 				
 				print "--------------------Result--------------"
 				for c in result do
-                                        print c.element_name
-                                end
-                                print "-----------------Finish----------------"
-                        end
-                end
-        end
+					print c.element_name
+				end
+				print "-----------------Finish----------------"
+			end
+		end
+	end
 end
