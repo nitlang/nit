@@ -14,16 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#Service to linearize modules and classes
 module linearization
 
 import modelize_class
 import test_phase
 
+#Ancetor of MClassDef and MModule to let classes and modules able to be linearized
 abstract class Linearizable
-	# Return class or module name
+	#Return class or module name
 	fun element_name : String is abstract 
-	# Return Class or module parents
+	
+	#Return class or module parents
 	fun element_parents : HashSet[Linearizable] is abstract	
+	
 	#Compute the class precedence list (mro) according to C3
 	fun linearize(dbg: Bool):  Array[Linearizable]
 	do
@@ -40,7 +44,7 @@ abstract class Linearizable
 		return merge(result, dbg)
 	end
 	
-	# Debug the linearisation process
+	#Debug the linearisation process
 	fun debug(seqs: Array[Array[Linearizable]])
 	do
 		printn"["
@@ -54,14 +58,14 @@ abstract class Linearizable
 		print"]"
 	end
 
-	#apply c3 algorithm on sequence list: 
+	#Apply c3 algorithm on sequence list: 
 	#L: linearisation
 	#B1..BN are parents of C 
 	#L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
 	fun merge(seqs: Array[Array[Linearizable]], dbg: Bool): Array[Linearizable]
 	do
 		if dbg then
-			printn "CPL["+ seqs[0][0].element_name + "]= "
+			printn "\n CPL["+ seqs[0][0].element_name + "]= "
 			debug(seqs)
 		end
 		var res = new Array[Linearizable]
@@ -80,7 +84,7 @@ abstract class Linearizable
 			end
 			if dbg then 
 				i+=1
-				printn "round" + i.to_s
+				print "round" + i.to_s
 			end
 			for seq in nonemptyseqs do
 				cand = seq[0]
@@ -119,7 +123,6 @@ abstract class Linearizable
 	end
 end
 
-# Implement abstract methods of Linearizable 
 redef class MClassDef
 	super Linearizable
 	
@@ -159,11 +162,12 @@ redef class MModule
 end
 
 redef class ToolContext
-        var maphase = new MaPhase(self, null)
+        var lin_phase = new LinearizationPhase(self, null)
 end
 
-class MaPhase
+class LinearizationPhase
 	super Phase
+	
 	#Test Linearization algorithm
         redef fun process_mainmodule(mainmodule, mm)
 	do	
@@ -175,6 +179,7 @@ class MaPhase
 		end
 		#Linearize modules
 		result = mainmodule.linearize(dbg)
+		
 		print "--------------------Result--------------"
 		for c in result do
 			print c.element_name
@@ -182,13 +187,14 @@ class MaPhase
 		print "-----------------Finish----------------"
 
                 result = new Array[Linearizable]
-                printn"Which class you want to linearise: "
+                printn"Which class you want to linearize: "
                 var name = gets.to_s
                 for class_ in classes do
                         var class_def = class_.intro
                         if class_def.mclass.name == name then
 				#Linearize class
 				result = class_def.linearize(dbg)
+				
 				print "--------------------Result--------------"
 				for c in result do
                                         print c.element_name
