@@ -117,7 +117,9 @@ class IFStream
 		self.path = path
 		prepare_buffer(10)
 		_file = new NativeFile.io_open_read(path.to_cstring)
-		assert cant_open_file: _file != null
+		assert not _file.address_is_null else
+			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
+		end
 	end
 
 	private init do end
@@ -161,7 +163,9 @@ class OFStream
 	init open(path: String)
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
-		assert cant_open_file: _file != null
+		assert not _file.address_is_null else
+			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
+		end
 		self.path = path
 		_writable = true
 	end
