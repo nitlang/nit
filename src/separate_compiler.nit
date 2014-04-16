@@ -265,6 +265,8 @@ class SeparateCompiler
 	fun do_property_coloring do
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
+		var rta = runtime_type_analysis
+
 		# Layouts
 		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
@@ -286,6 +288,9 @@ class SeparateCompiler
 		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
 		#end
 
+		# The dead methods, still need to provide a dead color symbol
+		var dead_methods = new Array[MMethod]
+
 		# lookup properties to build layout with
 		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
 		var mattributes = new HashMap[MClass, Set[MAttribute]]
@@ -294,6 +299,10 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
+					if rta != null and not rta.live_methods.has(mprop) then
+						dead_methods.add(mprop)
+						continue
+					end
 					mmethods[mclass].add(mprop)
 				else if mprop isa MAttribute then
 					mattributes[mclass].add(mprop)
@@ -316,8 +325,8 @@ class SeparateCompiler
 
 		# lookup super calls and add it to the list of mmethods to build layout with
 		var super_calls
-		if runtime_type_analysis != null then
-			super_calls = runtime_type_analysis.live_super_sends
+		if rta != null then
+			super_calls = rta.live_super_sends
 		else
 			super_calls = all_super_calls
 		end
@@ -335,7 +344,10 @@ class SeparateCompiler
 		self.method_tables = build_method_tables(mclasses, super_calls)
 		self.compile_color_consts(method_layout.pos)
 
-		# attribute null color to dead supercalls
+		# attribute null color to dead methods and supercalls
+		for mproperty in dead_methods do
+			compile_color_const(new_visitor, mproperty, -1)
+		end
 		for mpropdef in all_super_calls do
 			if super_calls.has(mpropdef) then continue
 			compile_color_const(new_visitor, mpropdef, -1)
@@ -365,6 +377,7 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
+					if not layout.pos.has_key(mproperty) then continue
 					var color = layout.pos[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
@@ -391,6 +404,7 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MMethod then continue
+				if not layout.pos.has_key(mproperty) then continue
 				var color = layout.pos[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
