@@ -306,6 +306,7 @@ class SeparateErasureCompiler
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("int length;")
 			self.header.add_decl("val* values[];")
 			self.header.add_decl("\};")
 
@@ -313,13 +314,14 @@ class SeparateErasureCompiler
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length);")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length) \{")
-			var res = v.new_named_var(mtype, "self")
-			res.is_exact = true
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_name} *{res};")
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			v.add("return {res};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
 			v.add("\}")
 			return
 		end

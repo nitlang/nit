@@ -806,7 +806,8 @@ class SeparateCompiler
 			self.header.add_decl("struct instance_{c_instance_name} \{")
 			self.header.add_decl("const struct type *type;")
 			self.header.add_decl("const struct class *class;")
-			# NativeArrays are just a instance header followed by an array of values
+			# NativeArrays are just a instance header followed by a length and an array of values
+			self.header.add_decl("int length;")
 			self.header.add_decl("val* values[0];")
 			self.header.add_decl("\};")
 
@@ -814,15 +815,16 @@ class SeparateCompiler
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length, const struct type* type);")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length, const struct type* type) \{")
-			var res = v.new_named_var(mtype, "self")
-			res.is_exact = true
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_instance_name} *{res};")
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct instance_{c_instance_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			v.add("return {res};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
 			v.add("\}")
 			return
 		end
@@ -1695,6 +1697,9 @@ class SeparateCompilerVisitor
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "length" then
+			self.ret(self.new_expr("((struct instance_{nclass.c_instance_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct instance_{nclass.c_instance_name}*){arguments[1]})->values"
