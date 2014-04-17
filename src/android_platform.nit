@@ -20,6 +20,7 @@ module android_platform
 import platform
 import abstract_compiler
 import common_ffi
+import android_annotations
 
 redef class ToolContext
 	redef fun platform_from_name(name)
