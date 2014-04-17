@@ -855,7 +855,7 @@ class SeparateCompiler
 		v.add_abort("type null")
 		v.add("\}")
 		v.add("if({t}->table_size == 0) \{")
-		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
+		v.add("PRINT_ERROR(\"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
 	end
@@ -977,7 +977,7 @@ class SeparateCompilerVisitor
 			var res = self.new_var(mtype)
 			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
+				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res
 			end
 			self.require_declaration("BOX_{valtype.c_name}")
@@ -989,7 +989,7 @@ class SeparateCompilerVisitor
 			# Bad things will appen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
-			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
+			self.add("PRINT_ERROR(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
 			return res
 		end
 	end
@@ -1366,7 +1366,7 @@ class SeparateCompilerVisitor
 		self.require_declaration(mtype.const_color)
 		var col = mtype.const_color
 		self.add("if({col} == -1) \{")
-		self.add("fprintf(stderr, \"Resolution of a dead open type: %s\\n\", \"{mtype.to_s.escape_to_c}\");")
+		self.add("PRINT_ERROR(\"Resolution of a dead open type: %s\\n\", \"{mtype.to_s.escape_to_c}\");")
 		self.add_abort("open type dead")
 		self.add("\}")
 	end
@@ -1379,7 +1379,7 @@ class SeparateCompilerVisitor
 		add_abort("cast type null")
 		add("\}")
 		add("if({t}->id == -1 || {t}->color == -1) \{")
-		add("fprintf(stderr, \"Try to cast on a dead cast type: %s\\n\", {t}->name);")
+		add("PRINT_ERROR(\"Try to cast on a dead cast type: %s\\n\", {t}->name);")
 		add_abort("cast type dead")
 		add("\}")
 	end
@@ -1474,7 +1474,7 @@ class SeparateCompilerVisitor
 				self.add("count_type_test_resolved_{tag}++;")
 			end
 		else
-			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); show_backtrace(1);")
+			self.add("PRINT_ERROR(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); show_backtrace(1);")
 		end
 
 		# check color is in table

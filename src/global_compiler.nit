@@ -268,7 +268,7 @@ class GlobalCompilerVisitor
 			var res = self.new_var(mtype)
 			if not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
+				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
@@ -279,7 +279,7 @@ class GlobalCompilerVisitor
 			# Bad things will appen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
-			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
+			self.add("PRINT_ERROR(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
 			return res
 		end
 	end
@@ -558,7 +558,7 @@ class GlobalCompilerVisitor
 	fun bugtype(recv: RuntimeVariable)
 	do
 		if recv.mtype.ctype != "val*" then return
-		self.add("fprintf(stderr, \"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
+		self.add("PRINT_ERROR(\"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
 		self.add("show_backtrace(1);")
 	end
 
