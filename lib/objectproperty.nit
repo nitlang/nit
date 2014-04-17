@@ -49,3 +49,4 @@ class ObjectProperty
 		return "Unique ID: {obj_id} Name: {name} Type: {property_type} Value: {value} Ref ID: {reference_id}\n"
 	end
 end
+
