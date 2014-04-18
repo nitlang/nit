@@ -796,6 +796,8 @@ redef class AInternMethPropdef
 			else if pname == "[]=" then
 				recvval[args[1].to_i] = args[2]
 				return null
+			else if pname == "length" then
+				return v.int_instance(recvval.length)
 			else if pname == "copy_to" then
 				recvval.copy(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
