@@ -16,9 +16,9 @@
 
 # Utility module used by the svg_to_png_and_nit tool. It is imported
 # by each generated modules.
-module generated_image_set
+module image_set
 
-import mnit
+import assets
 
 # A set of images, look for sub-classes in projects using svg_to_png_and_nit
 class ImageSet
