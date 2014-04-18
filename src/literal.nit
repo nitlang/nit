@@ -65,9 +65,19 @@ end
 redef class AIntExpr
 	# The value of the literal int once computed.
 	var value: nullable Int
+end
+
+redef class ADecIntExpr
 	redef fun accept_literal(v)
 	do
 		self.value = self.n_number.text.to_i
+	end
+end
+
+redef class AHexIntExpr
+	redef fun accept_literal(v)
+	do
+		self.value = self.n_hex_number.text.substring_from(2).to_hex
 	end
 end
 

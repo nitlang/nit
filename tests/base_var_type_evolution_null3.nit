@@ -31,7 +31,7 @@ class G[A: nullable Object]
 		_a = a
 	end
 
-	fun na: nullable A = _a
+	fun na: nullable A do return _a
 
 	fun run2
 	do

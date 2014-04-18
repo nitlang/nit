@@ -24,6 +24,7 @@ extern const struct type type_parser_nodes__ASlashExpr;
 extern const int COLOR_parser_nodes__ABinopExpr__n_expr2;
 extern const struct type type_parser_nodes__AIntExpr;
 extern const int COLOR_literal__AIntExpr__value;
+val* BOX_kernel__Int(long);
 extern const int COLOR_kernel__Object___33d_61d;
 extern const int COLOR_parser_nodes__ASendExpr__n_expr;
 extern const int COLOR_div_by_zero__DivByZeroVisitor__mmodule;

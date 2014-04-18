@@ -126,7 +126,7 @@ redef class JsonObject
 	new `{ return json_object_new_object(); `}
 
 	# Add a key and value to the object
-	fun add( key : String, val : nullable JsonObject ) import String.to_cstring, JsonObject as not nullable `{
+	fun add( key : String, val : nullable JsonObject ) import String.to_cstring, JsonObject.as not nullable `{
 		char* native_key;
 
 		native_key = String_to_cstring( key );
@@ -141,7 +141,7 @@ redef class JsonObject
 	`}
 end
 
-private extern JsonArray
+private extern class JsonArray
 	super JsonObject
 
 	new `{ return json_object_new_array(); `}

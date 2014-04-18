@@ -1,4 +1,802 @@
 #include "typing.sep.0.h"
+/* method typing#ASuperExpr#process_superinit for (self: ASuperExpr, TypeVisitor) */
+void typing__ASuperExpr__process_superinit(val* self, val* p0) {
+val* var_v /* var v: TypeVisitor */;
+val* var /* : AClassdef */;
+val* var1 /* : nullable MClassDef */;
+val* var2 /* : MClassType */;
+val* var_recvtype /* var recvtype: MClassType */;
+val* var3 /* : MPropDef */;
+val* var_mpropdef /* var mpropdef: MPropDef */;
+short int var4 /* : Bool */;
+int cltype;
+int idtype;
+val* var5 /* : MProperty */;
+val* var_mproperty /* var mproperty: MMethod */;
+val* var6 /* : null */;
+val* var_superprop /* var superprop: nullable MMethodDef */;
+val* var7 /* : AClassdef */;
+val* var8 /* : nullable MClassDef */;
+val* var9 /* : Array[MClassType] */;
+val* var10 /* : Iterator[nullable Object] */;
+short int var11 /* : Bool */;
+val* var12 /* : nullable Object */;
+val* var_msupertype /* var msupertype: MClassType */;
+val* var13 /* : MModule */;
+val* var14 /* : MType */;
+val* var15 /* : ModelBuilder */;
+val* var16 /* : ToolContext */;
+long var17 /* : Int */;
+long var_errcount /* var errcount: Int */;
+val* var18 /* : String */;
+val* var19 /* : nullable MProperty */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+const char* var_class_name;
+val* var_candidate /* var candidate: nullable MMethod */;
+val* var23 /* : null */;
+short int var24 /* : Bool */;
+val* var25 /* : ModelBuilder */;
+val* var26 /* : ToolContext */;
+long var27 /* : Int */;
+short int var28 /* : Bool */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+const char* var_class_name33;
+short int var34 /* : Bool */;
+short int var35 /* : Bool */;
+val* var36 /* : null */;
+short int var37 /* : Bool */;
+short int var_ /* var : Bool */;
+val* var38 /* : MProperty */;
+short int var39 /* : Bool */;
+static val* varonce;
+val* var40 /* : String */;
+char* var41 /* : NativeString */;
+long var42 /* : Int */;
+val* var43 /* : String */;
+static val* varonce44;
+val* var45 /* : String */;
+char* var46 /* : NativeString */;
+long var47 /* : Int */;
+val* var48 /* : String */;
+val* var49 /* : String */;
+static val* varonce50;
+val* var51 /* : String */;
+char* var52 /* : NativeString */;
+long var53 /* : Int */;
+val* var54 /* : String */;
+val* var55 /* : MProperty */;
+val* var56 /* : String */;
+val* var57 /* : Array[Object] */;
+long var58 /* : Int */;
+val* var59 /* : NativeArray[Object] */;
+val* var60 /* : String */;
+val* var61 /* : MModule */;
+val* var62 /* : Array[MPropDef] */;
+val* var_candidatedefs /* var candidatedefs: Array[MMethodDef] */;
+val* var63 /* : null */;
+short int var64 /* : Bool */;
+val* var65 /* : nullable Object */;
+short int var66 /* : Bool */;
+long var67 /* : Int */;
+long var68 /* : Int */;
+short int var69 /* : Bool */;
+short int var71 /* : Bool */;
+int cltype72;
+int idtype73;
+const char* var_class_name74;
+short int var75 /* : Bool */;
+static val* varonce76;
+val* var77 /* : String */;
+char* var78 /* : NativeString */;
+long var79 /* : Int */;
+val* var80 /* : String */;
+static val* varonce81;
+val* var82 /* : String */;
+char* var83 /* : NativeString */;
+long var84 /* : Int */;
+val* var85 /* : String */;
+static val* varonce86;
+val* var87 /* : String */;
+char* var88 /* : NativeString */;
+long var89 /* : Int */;
+val* var90 /* : String */;
+static val* varonce91;
+val* var92 /* : String */;
+char* var93 /* : NativeString */;
+long var94 /* : Int */;
+val* var95 /* : String */;
+val* var96 /* : String */;
+val* var97 /* : Array[Object] */;
+long var98 /* : Int */;
+val* var99 /* : NativeArray[Object] */;
+val* var100 /* : String */;
+val* var101 /* : nullable Object */;
+val* var102 /* : null */;
+short int var103 /* : Bool */;
+static val* varonce104;
+val* var105 /* : String */;
+char* var106 /* : NativeString */;
+long var107 /* : Int */;
+val* var108 /* : String */;
+static val* varonce109;
+val* var110 /* : String */;
+char* var111 /* : NativeString */;
+long var112 /* : Int */;
+val* var113 /* : String */;
+val* var114 /* : Array[Object] */;
+long var115 /* : Int */;
+val* var116 /* : NativeArray[Object] */;
+val* var117 /* : String */;
+short int var118 /* : Bool */;
+val* var119 /* : MSignature */;
+val* var_msignature /* var msignature: MSignature */;
+val* var120 /* : CallSite */;
+short int var121 /* : Bool */;
+val* var122 /* : MProperty */;
+short int var123 /* : Bool */;
+val* var_callsite /* var callsite: CallSite */;
+val* var124 /* : AExprs */;
+val* var125 /* : Array[AExpr] */;
+val* var_args /* var args: Array[AExpr] */;
+long var126 /* : Int */;
+long var127 /* : Int */;
+short int var128 /* : Bool */;
+short int var130 /* : Bool */;
+int cltype131;
+int idtype132;
+const char* var_class_name133;
+short int var134 /* : Bool */;
+short int var135 /* : Bool */;
+val* var136 /* : nullable MSignature */;
+long var137 /* : Int */;
+long var138 /* : Int */;
+short int var139 /* : Bool */;
+short int var141 /* : Bool */;
+int cltype142;
+int idtype143;
+const char* var_class_name144;
+short int var145 /* : Bool */;
+static val* varonce146;
+val* var147 /* : String */;
+char* var148 /* : NativeString */;
+long var149 /* : Int */;
+val* var150 /* : String */;
+val* var151 /* : nullable MSignature */;
+long var152 /* : Int */;
+static val* varonce153;
+val* var154 /* : String */;
+char* var155 /* : NativeString */;
+long var156 /* : Int */;
+val* var157 /* : String */;
+long var158 /* : Int */;
+static val* varonce159;
+val* var160 /* : String */;
+char* var161 /* : NativeString */;
+long var162 /* : Int */;
+val* var163 /* : String */;
+val* var164 /* : Array[Object] */;
+long var165 /* : Int */;
+val* var166 /* : NativeArray[Object] */;
+val* var167 /* : Object */;
+val* var168 /* : Object */;
+val* var169 /* : String */;
+long var170 /* : Int */;
+long var_i /* var i: Int */;
+val* var171 /* : Array[MParameter] */;
+val* var172 /* : Iterator[nullable Object] */;
+short int var173 /* : Bool */;
+val* var174 /* : nullable Object */;
+val* var_sp /* var sp: MParameter */;
+val* var175 /* : nullable MSignature */;
+val* var176 /* : Array[MParameter] */;
+val* var177 /* : nullable Object */;
+val* var_p /* var p: MParameter */;
+val* var178 /* : MType */;
+val* var179 /* : MType */;
+short int var180 /* : Bool */;
+short int var181 /* : Bool */;
+static val* varonce182;
+val* var183 /* : String */;
+char* var184 /* : NativeString */;
+long var185 /* : Int */;
+val* var186 /* : String */;
+static val* varonce187;
+val* var188 /* : String */;
+char* var189 /* : NativeString */;
+long var190 /* : Int */;
+val* var191 /* : String */;
+val* var192 /* : MType */;
+static val* varonce193;
+val* var194 /* : String */;
+char* var195 /* : NativeString */;
+long var196 /* : Int */;
+val* var197 /* : String */;
+val* var198 /* : String */;
+static val* varonce199;
+val* var200 /* : String */;
+char* var201 /* : NativeString */;
+long var202 /* : Int */;
+val* var203 /* : String */;
+val* var204 /* : MType */;
+static val* varonce205;
+val* var206 /* : String */;
+char* var207 /* : NativeString */;
+long var208 /* : Int */;
+val* var209 /* : String */;
+val* var210 /* : Array[Object] */;
+long var211 /* : Int */;
+val* var212 /* : NativeArray[Object] */;
+val* var213 /* : Object */;
+val* var214 /* : String */;
+long var215 /* : Int */;
+long var216 /* : Int */;
+long var218 /* : Int */;
+short int var220 /* : Bool */;
+var_v = p0;
+var = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__nclassdef]))(var_v) /* nclassdef on <var_v:TypeVisitor>*/;
+var1 = ((val* (*)(val*))(var->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var) /* mclassdef on <var:AClassdef>*/;
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1460);
+show_backtrace(1);
+} else {
+var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MClassDef__bound_mtype]))(var1) /* bound_mtype on <var1:nullable MClassDef>*/;
+}
+var_recvtype = var2;
+var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__mpropdef]))(var_v) /* mpropdef on <var_v:TypeVisitor>*/;
+var_mpropdef = var3;
+/* <var_mpropdef:MPropDef> isa MMethodDef */
+cltype = type_model__MMethodDef.color;
+idtype = type_model__MMethodDef.id;
+if(cltype >= var_mpropdef->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_mpropdef->type->type_table[cltype] == idtype;
+}
+if (!var4) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1462);
+show_backtrace(1);
+}
+var5 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mpropdef) /* mproperty on <var_mpropdef:MPropDef(MMethodDef)>*/;
+var_mproperty = var5;
+var6 = NULL;
+var_superprop = var6;
+var7 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__nclassdef]))(var_v) /* nclassdef on <var_v:TypeVisitor>*/;
+var8 = ((val* (*)(val*))(var7->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var7) /* mclassdef on <var7:AClassdef>*/;
+if (var8 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1465);
+show_backtrace(1);
+} else {
+var9 = ((val* (*)(val*))(var8->class->vft[COLOR_model__MClassDef__supertypes]))(var8) /* supertypes on <var8:nullable MClassDef>*/;
+}
+var10 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Collection__iterator]))(var9) /* iterator on <var9:Array[MClassType]>*/;
+for(;;) {
+var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var10) /* is_ok on <var10:Iterator[nullable Object]>*/;
+if(!var11) break;
+var12 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__item]))(var10) /* item on <var10:Iterator[nullable Object]>*/;
+var_msupertype = var12;
+var13 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__mmodule]))(var_v) /* mmodule on <var_v:TypeVisitor>*/;
+var14 = ((val* (*)(val*, val*, val*))(var_msupertype->class->vft[COLOR_model__MType__anchor_to]))(var_msupertype, var13, var_recvtype) /* anchor_to on <var_msupertype:MClassType>*/;
+var_msupertype = var14;
+var15 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__modelbuilder]))(var_v) /* modelbuilder on <var_v:TypeVisitor>*/;
+var16 = ((val* (*)(val*))(var15->class->vft[COLOR_modelbuilder__ModelBuilder__toolcontext]))(var15) /* toolcontext on <var15:ModelBuilder>*/;
+var17 = ((long (*)(val*))(var16->class->vft[COLOR_toolcontext__ToolContext__error_count]))(var16) /* error_count on <var16:ToolContext>*/;
+var_errcount = var17;
+var18 = ((val* (*)(val*))(var_mproperty->class->vft[COLOR_model__MProperty__name]))(var_mproperty) /* name on <var_mproperty:MMethod>*/;
+var19 = ((val* (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__try_get_mproperty_by_name2]))(var_v, self, var_msupertype, var18) /* try_get_mproperty_by_name2 on <var_v:TypeVisitor>*/;
+/* <var19:nullable MProperty> isa nullable MMethod */
+cltype21 = type_nullable_model__MMethod.color;
+idtype22 = type_nullable_model__MMethod.id;
+if(var19 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var19->type->table_size) {
+var20 = 0;
+} else {
+var20 = var19->type->type_table[cltype21] == idtype22;
+}
+}
+if (!var20) {
+var_class_name = var19 == NULL ? "null" : var19->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable MMethod", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1468);
+show_backtrace(1);
+}
+var_candidate = var19;
+var23 = NULL;
+if (var_candidate == NULL) {
+var24 = 1; /* is null */
+} else {
+var24 = 0; /* arg is null but recv is not */
+}
+if (var24){
+var25 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__modelbuilder]))(var_v) /* modelbuilder on <var_v:TypeVisitor>*/;
+var26 = ((val* (*)(val*))(var25->class->vft[COLOR_modelbuilder__ModelBuilder__toolcontext]))(var25) /* toolcontext on <var25:ModelBuilder>*/;
+var27 = ((long (*)(val*))(var26->class->vft[COLOR_toolcontext__ToolContext__error_count]))(var26) /* error_count on <var26:ToolContext>*/;
+{ /* Inline kernel#Int#> (var27,var_errcount) */
+/* Covariant cast for argument 0 (i) <var_errcount:Int> isa OTHER */
+/* <var_errcount:Int> isa OTHER */
+var30 = 1; /* easy <var_errcount:Int> isa OTHER*/
+if (!var30) {
+var_class_name33 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+show_backtrace(1);
+}
+var34 = var27 > var_errcount;
+var28 = var34;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
+}
+if (var28){
+goto RET_LABEL;
+} else {
+}
+goto CONTINUE_label;
+} else {
+}
+var36 = NULL;
+if (var_superprop == NULL) {
+var37 = 0; /* is null */
+} else {
+var37 = 1; /* arg is null and recv is not */
+}
+var_ = var37;
+if (var37){
+var38 = ((val* (*)(val*))(var_superprop->class->vft[COLOR_model__MPropDef__mproperty]))(var_superprop) /* mproperty on <var_superprop:nullable MMethodDef(MMethodDef)>*/;
+var39 = ((short int (*)(val*, val*))(var38->class->vft[COLOR_kernel__Object___33d_61d]))(var38, var_candidate) /* != on <var38:MProperty(MMethod)>*/;
+var35 = var39;
+} else {
+var35 = var_;
+}
+if (var35){
+if (varonce) {
+var40 = varonce;
+} else {
+var41 = "Error: conflicting super constructor to call for ";
+var42 = 49;
+var43 = string__NativeString__to_s_with_length(var41, var42);
+var40 = var43;
+varonce = var40;
+}
+if (varonce44) {
+var45 = varonce44;
+} else {
+var46 = ": ";
+var47 = 2;
+var48 = string__NativeString__to_s_with_length(var46, var47);
+var45 = var48;
+varonce44 = var45;
+}
+var49 = ((val* (*)(val*))(var_candidate->class->vft[COLOR_model__MProperty__full_name]))(var_candidate) /* full_name on <var_candidate:nullable MMethod(MMethod)>*/;
+if (varonce50) {
+var51 = varonce50;
+} else {
+var52 = ", ";
+var53 = 2;
+var54 = string__NativeString__to_s_with_length(var52, var53);
+var51 = var54;
+varonce50 = var51;
+}
+var55 = ((val* (*)(val*))(var_superprop->class->vft[COLOR_model__MPropDef__mproperty]))(var_superprop) /* mproperty on <var_superprop:nullable MMethodDef(MMethodDef)>*/;
+var56 = ((val* (*)(val*))(var55->class->vft[COLOR_model__MProperty__full_name]))(var55) /* full_name on <var55:MProperty(MMethod)>*/;
+var57 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var57 = array_instance Array[Object] */
+var58 = 6;
+var59 = NEW_array__NativeArray(var58, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var59)->values[0] = (val*) var40;
+((struct instance_array__NativeArray*)var59)->values[1] = (val*) var_mproperty;
+((struct instance_array__NativeArray*)var59)->values[2] = (val*) var45;
+((struct instance_array__NativeArray*)var59)->values[3] = (val*) var49;
+((struct instance_array__NativeArray*)var59)->values[4] = (val*) var51;
+((struct instance_array__NativeArray*)var59)->values[5] = (val*) var56;
+((void (*)(val*, val*, long))(var57->class->vft[COLOR_array__Array__with_native]))(var57, var59, var58) /* with_native on <var57:Array[Object]>*/;
+}
+var60 = ((val* (*)(val*))(var57->class->vft[COLOR_string__Object__to_s]))(var57) /* to_s on <var57:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var60) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var61 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__mmodule]))(var_v) /* mmodule on <var_v:TypeVisitor>*/;
+var62 = ((val* (*)(val*, val*, val*))(var_candidate->class->vft[COLOR_model__MProperty__lookup_definitions]))(var_candidate, var61, var_recvtype) /* lookup_definitions on <var_candidate:nullable MMethod(MMethod)>*/;
+var_candidatedefs = var62;
+var63 = NULL;
+if (var_superprop == NULL) {
+var64 = 0; /* is null */
+} else {
+var64 = 1; /* arg is null and recv is not */
+}
+if (var64){
+var65 = ((val* (*)(val*))(var_candidatedefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_candidatedefs) /* first on <var_candidatedefs:Array[MMethodDef]>*/;
+var66 = ((short int (*)(val*, val*))(var_superprop->class->vft[COLOR_kernel__Object___61d_61d]))(var_superprop, var65) /* == on <var_superprop:nullable MMethodDef(MMethodDef)>*/;
+if (var66){
+goto CONTINUE_label;
+} else {
+}
+((void (*)(val*, val*))(var_candidatedefs->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_candidatedefs, var_superprop) /* add on <var_candidatedefs:Array[MMethodDef]>*/;
+} else {
+}
+var67 = ((long (*)(val*))(var_candidatedefs->class->vft[COLOR_abstract_collection__Collection__length]))(var_candidatedefs) /* length on <var_candidatedefs:Array[MMethodDef]>*/;
+var68 = 1;
+{ /* Inline kernel#Int#> (var67,var68) */
+/* Covariant cast for argument 0 (i) <var68:Int> isa OTHER */
+/* <var68:Int> isa OTHER */
+var71 = 1; /* easy <var68:Int> isa OTHER*/
+if (!var71) {
+var_class_name74 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name74);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+show_backtrace(1);
+}
+var75 = var67 > var68;
+var69 = var75;
+goto RET_LABEL70;
+RET_LABEL70:(void)0;
+}
+if (var69){
+if (varonce76) {
+var77 = varonce76;
+} else {
+var78 = "Error: confliting property definitions for property ";
+var79 = 52;
+var80 = string__NativeString__to_s_with_length(var78, var79);
+var77 = var80;
+varonce76 = var77;
+}
+if (varonce81) {
+var82 = varonce81;
+} else {
+var83 = " in ";
+var84 = 4;
+var85 = string__NativeString__to_s_with_length(var83, var84);
+var82 = var85;
+varonce81 = var82;
+}
+if (varonce86) {
+var87 = varonce86;
+} else {
+var88 = ": ";
+var89 = 2;
+var90 = string__NativeString__to_s_with_length(var88, var89);
+var87 = var90;
+varonce86 = var87;
+}
+if (varonce91) {
+var92 = varonce91;
+} else {
+var93 = ", ";
+var94 = 2;
+var95 = string__NativeString__to_s_with_length(var93, var94);
+var92 = var95;
+varonce91 = var92;
+}
+var96 = ((val* (*)(val*, val*))(var_candidatedefs->class->vft[COLOR_string__Collection__join]))(var_candidatedefs, var92) /* join on <var_candidatedefs:Array[MMethodDef]>*/;
+var97 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var97 = array_instance Array[Object] */
+var98 = 6;
+var99 = NEW_array__NativeArray(var98, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var99)->values[0] = (val*) var77;
+((struct instance_array__NativeArray*)var99)->values[1] = (val*) var_mproperty;
+((struct instance_array__NativeArray*)var99)->values[2] = (val*) var82;
+((struct instance_array__NativeArray*)var99)->values[3] = (val*) var_recvtype;
+((struct instance_array__NativeArray*)var99)->values[4] = (val*) var87;
+((struct instance_array__NativeArray*)var99)->values[5] = (val*) var96;
+((void (*)(val*, val*, long))(var97->class->vft[COLOR_array__Array__with_native]))(var97, var99, var98) /* with_native on <var97:Array[Object]>*/;
+}
+var100 = ((val* (*)(val*))(var97->class->vft[COLOR_string__Object__to_s]))(var97) /* to_s on <var97:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var100) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var101 = ((val* (*)(val*))(var_candidatedefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_candidatedefs) /* first on <var_candidatedefs:Array[MMethodDef]>*/;
+var_superprop = var101;
+CONTINUE_label: (void)0;
+((void (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__next]))(var10) /* next on <var10:Iterator[nullable Object]>*/;
+}
+BREAK_label: (void)0;
+var102 = NULL;
+if (var_superprop == NULL) {
+var103 = 1; /* is null */
+} else {
+var103 = 0; /* arg is null but recv is not */
+}
+if (var103){
+if (varonce104) {
+var105 = varonce104;
+} else {
+var106 = "Error: No super method to call for ";
+var107 = 35;
+var108 = string__NativeString__to_s_with_length(var106, var107);
+var105 = var108;
+varonce104 = var105;
+}
+if (varonce109) {
+var110 = varonce109;
+} else {
+var111 = ".";
+var112 = 1;
+var113 = string__NativeString__to_s_with_length(var111, var112);
+var110 = var113;
+varonce109 = var110;
+}
+var114 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var114 = array_instance Array[Object] */
+var115 = 3;
+var116 = NEW_array__NativeArray(var115, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var116)->values[0] = (val*) var105;
+((struct instance_array__NativeArray*)var116)->values[1] = (val*) var_mproperty;
+((struct instance_array__NativeArray*)var116)->values[2] = (val*) var110;
+((void (*)(val*, val*, long))(var114->class->vft[COLOR_array__Array__with_native]))(var114, var116, var115) /* with_native on <var114:Array[Object]>*/;
+}
+var117 = ((val* (*)(val*))(var114->class->vft[COLOR_string__Object__to_s]))(var114) /* to_s on <var114:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var117) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var118 = 1;
+var119 = ((val* (*)(val*, val*, val*, short int))(var_v->class->vft[COLOR_typing__TypeVisitor__resolve_signature_for]))(var_v, var_superprop, var_recvtype, var118) /* resolve_signature_for on <var_v:TypeVisitor>*/;
+var_msignature = var119;
+var120 = NEW_typing__CallSite(&type_typing__CallSite);
+var121 = 1;
+var122 = ((val* (*)(val*))(var_superprop->class->vft[COLOR_model__MPropDef__mproperty]))(var_superprop) /* mproperty on <var_superprop:nullable MMethodDef(MMethodDef)>*/;
+var123 = 0;
+((void (*)(val*, val*, val*, short int, val*, val*, val*, short int))(var120->class->vft[COLOR_typing__CallSite__init]))(var120, self, var_recvtype, var121, var122, var_superprop, var_msignature, var123) /* init on <var120:CallSite>*/;
+var_callsite = var120;
+((void (*)(val*, val*))(self->class->vft[COLOR_typing__ASuperExpr__callsite_61d]))(self, var_callsite) /* callsite= on <self:ASuperExpr>*/;
+var124 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASuperExpr__n_args]))(self) /* n_args on <self:ASuperExpr>*/;
+var125 = ((val* (*)(val*))(var124->class->vft[COLOR_typing__AExprs__to_a]))(var124) /* to_a on <var124:AExprs>*/;
+var_args = var125;
+var126 = ((long (*)(val*))(var_args->class->vft[COLOR_abstract_collection__Collection__length]))(var_args) /* length on <var_args:Array[AExpr]>*/;
+var127 = 0;
+{ /* Inline kernel#Int#> (var126,var127) */
+/* Covariant cast for argument 0 (i) <var127:Int> isa OTHER */
+/* <var127:Int> isa OTHER */
+var130 = 1; /* easy <var127:Int> isa OTHER*/
+if (!var130) {
+var_class_name133 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name133);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+show_backtrace(1);
+}
+var134 = var126 > var127;
+var128 = var134;
+goto RET_LABEL129;
+RET_LABEL129:(void)0;
+}
+if (var128){
+var135 = ((short int (*)(val*, val*, val*))(var_callsite->class->vft[COLOR_typing__CallSite__check_signature]))(var_callsite, var_v, var_args) /* check_signature on <var_callsite:CallSite>*/;
+var135;
+} else {
+var136 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MPropDef(MMethodDef)>*/;
+if (var136 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1502);
+show_backtrace(1);
+} else {
+var137 = ((long (*)(val*))(var136->class->vft[COLOR_model__MSignature__arity]))(var136) /* arity on <var136:nullable MSignature>*/;
+}
+var138 = ((long (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__arity]))(var_msignature) /* arity on <var_msignature:MSignature>*/;
+{ /* Inline kernel#Int#< (var137,var138) */
+/* Covariant cast for argument 0 (i) <var138:Int> isa OTHER */
+/* <var138:Int> isa OTHER */
+var141 = 1; /* easy <var138:Int> isa OTHER*/
+if (!var141) {
+var_class_name144 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name144);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+show_backtrace(1);
+}
+var145 = var137 < var138;
+var139 = var145;
+goto RET_LABEL140;
+RET_LABEL140:(void)0;
+}
+if (var139){
+if (varonce146) {
+var147 = varonce146;
+} else {
+var148 = "Error: Not enough implicit arguments to pass. Got ";
+var149 = 50;
+var150 = string__NativeString__to_s_with_length(var148, var149);
+var147 = var150;
+varonce146 = var147;
+}
+var151 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MPropDef(MMethodDef)>*/;
+if (var151 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1503);
+show_backtrace(1);
+} else {
+var152 = ((long (*)(val*))(var151->class->vft[COLOR_model__MSignature__arity]))(var151) /* arity on <var151:nullable MSignature>*/;
+}
+if (varonce153) {
+var154 = varonce153;
+} else {
+var155 = ", expected at least ";
+var156 = 20;
+var157 = string__NativeString__to_s_with_length(var155, var156);
+var154 = var157;
+varonce153 = var154;
+}
+var158 = ((long (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__arity]))(var_msignature) /* arity on <var_msignature:MSignature>*/;
+if (varonce159) {
+var160 = varonce159;
+} else {
+var161 = ". Signature is ";
+var162 = 15;
+var163 = string__NativeString__to_s_with_length(var161, var162);
+var160 = var163;
+varonce159 = var160;
+}
+var164 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var164 = array_instance Array[Object] */
+var165 = 6;
+var166 = NEW_array__NativeArray(var165, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var166)->values[0] = (val*) var147;
+var167 = BOX_kernel__Int(var152); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var166)->values[1] = (val*) var167;
+((struct instance_array__NativeArray*)var166)->values[2] = (val*) var154;
+var168 = BOX_kernel__Int(var158); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var166)->values[3] = (val*) var168;
+((struct instance_array__NativeArray*)var166)->values[4] = (val*) var160;
+((struct instance_array__NativeArray*)var166)->values[5] = (val*) var_msignature;
+((void (*)(val*, val*, long))(var164->class->vft[COLOR_array__Array__with_native]))(var164, var166, var165) /* with_native on <var164:Array[Object]>*/;
+}
+var169 = ((val* (*)(val*))(var164->class->vft[COLOR_string__Object__to_s]))(var164) /* to_s on <var164:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var169) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var170 = 0;
+var_i = var170;
+var171 = ((val* (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__mparameters]))(var_msignature) /* mparameters on <var_msignature:MSignature>*/;
+var172 = ((val* (*)(val*))(var171->class->vft[COLOR_abstract_collection__Collection__iterator]))(var171) /* iterator on <var171:Array[MParameter]>*/;
+for(;;) {
+var173 = ((short int (*)(val*))(var172->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var172) /* is_ok on <var172:Iterator[nullable Object]>*/;
+if(!var173) break;
+var174 = ((val* (*)(val*))(var172->class->vft[COLOR_abstract_collection__Iterator__item]))(var172) /* item on <var172:Iterator[nullable Object]>*/;
+var_sp = var174;
+var175 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MPropDef(MMethodDef)>*/;
+if (var175 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1509);
+show_backtrace(1);
+} else {
+var176 = ((val* (*)(val*))(var175->class->vft[COLOR_model__MSignature__mparameters]))(var175) /* mparameters on <var175:nullable MSignature>*/;
+}
+var177 = ((val* (*)(val*, long))(var176->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var176, var_i) /* [] on <var176:Array[MParameter]>*/;
+var_p = var177;
+var178 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__mtype]))(var_p) /* mtype on <var_p:MParameter>*/;
+var179 = ((val* (*)(val*))(var_sp->class->vft[COLOR_model__MParameter__mtype]))(var_sp) /* mtype on <var_sp:MParameter>*/;
+var180 = ((short int (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__is_subtype]))(var_v, var178, var179) /* is_subtype on <var_v:TypeVisitor>*/;
+var181 = !var180;
+if (var181){
+if (varonce182) {
+var183 = varonce182;
+} else {
+var184 = "Type error: expected argument #";
+var185 = 31;
+var186 = string__NativeString__to_s_with_length(var184, var185);
+var183 = var186;
+varonce182 = var183;
+}
+if (varonce187) {
+var188 = varonce187;
+} else {
+var189 = " of type ";
+var190 = 9;
+var191 = string__NativeString__to_s_with_length(var189, var190);
+var188 = var191;
+varonce187 = var188;
+}
+var192 = ((val* (*)(val*))(var_sp->class->vft[COLOR_model__MParameter__mtype]))(var_sp) /* mtype on <var_sp:MParameter>*/;
+if (varonce193) {
+var194 = varonce193;
+} else {
+var195 = ", got implicit argument ";
+var196 = 24;
+var197 = string__NativeString__to_s_with_length(var195, var196);
+var194 = var197;
+varonce193 = var194;
+}
+var198 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__name]))(var_p) /* name on <var_p:MParameter>*/;
+if (varonce199) {
+var200 = varonce199;
+} else {
+var201 = " of type ";
+var202 = 9;
+var203 = string__NativeString__to_s_with_length(var201, var202);
+var200 = var203;
+varonce199 = var200;
+}
+var204 = ((val* (*)(val*))(var_p->class->vft[COLOR_model__MParameter__mtype]))(var_p) /* mtype on <var_p:MParameter>*/;
+if (varonce205) {
+var206 = varonce205;
+} else {
+var207 = ". Signature is ";
+var208 = 15;
+var209 = string__NativeString__to_s_with_length(var207, var208);
+var206 = var209;
+varonce205 = var206;
+}
+var210 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var210 = array_instance Array[Object] */
+var211 = 10;
+var212 = NEW_array__NativeArray(var211, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var212)->values[0] = (val*) var183;
+var213 = BOX_kernel__Int(var_i); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var212)->values[1] = (val*) var213;
+((struct instance_array__NativeArray*)var212)->values[2] = (val*) var188;
+((struct instance_array__NativeArray*)var212)->values[3] = (val*) var192;
+((struct instance_array__NativeArray*)var212)->values[4] = (val*) var194;
+((struct instance_array__NativeArray*)var212)->values[5] = (val*) var198;
+((struct instance_array__NativeArray*)var212)->values[6] = (val*) var200;
+((struct instance_array__NativeArray*)var212)->values[7] = (val*) var204;
+((struct instance_array__NativeArray*)var212)->values[8] = (val*) var206;
+((struct instance_array__NativeArray*)var212)->values[9] = (val*) var_msignature;
+((void (*)(val*, val*, long))(var210->class->vft[COLOR_array__Array__with_native]))(var210, var212, var211) /* with_native on <var210:Array[Object]>*/;
+}
+var214 = ((val* (*)(val*))(var210->class->vft[COLOR_string__Object__to_s]))(var210) /* to_s on <var210:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var214) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var215 = 1;
+{ /* Inline kernel#Int#+ (var_i,var215) */
+var218 = var_i + var215;
+var216 = var218;
+goto RET_LABEL217;
+RET_LABEL217:(void)0;
+}
+var_i = var216;
+CONTINUE_label219: (void)0;
+((void (*)(val*))(var172->class->vft[COLOR_abstract_collection__Iterator__next]))(var172) /* next on <var172:Iterator[nullable Object]>*/;
+}
+BREAK_label219: (void)0;
+}
+var220 = 1;
+((void (*)(val*, short int))(self->class->vft[COLOR_typing__AExpr__is_typed_61d]))(self, var220) /* is_typed= on <self:ASuperExpr>*/;
+RET_LABEL:;
+}
+/* method typing#ASuperExpr#process_superinit for (self: Object, TypeVisitor) */
+void VIRTUAL_typing__ASuperExpr__process_superinit(val* self, val* p0) {
+typing__ASuperExpr__process_superinit(self, p0);
+RET_LABEL:;
+}
+/* method typing#ANewExpr#callsite for (self: ANewExpr): nullable CallSite */
+val* typing__ANewExpr__callsite(val* self) {
+val* var /* : nullable CallSite */;
+val* var1 /* : nullable CallSite */;
+var1 = self->attrs[COLOR_typing__ANewExpr___64dcallsite].val; /* @callsite on <self:ANewExpr> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method typing#ANewExpr#callsite for (self: Object): nullable CallSite */
+val* VIRTUAL_typing__ANewExpr__callsite(val* self) {
+val* var /* : nullable CallSite */;
+val* var1 /* : nullable CallSite */;
+var1 = typing__ANewExpr__callsite(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method typing#ANewExpr#callsite= for (self: ANewExpr, nullable CallSite) */
+void typing__ANewExpr__callsite_61d(val* self, val* p0) {
+self->attrs[COLOR_typing__ANewExpr___64dcallsite].val = p0; /* @callsite on <self:ANewExpr> */
+RET_LABEL:;
+}
+/* method typing#ANewExpr#callsite= for (self: Object, nullable CallSite) */
+void VIRTUAL_typing__ANewExpr__callsite_61d(val* self, val* p0) {
+typing__ANewExpr__callsite_61d(self, p0);
+RET_LABEL:;
+}
 /* method typing#ANewExpr#accept_typing for (self: ANewExpr, TypeVisitor) */
 void typing__ANewExpr__accept_typing(val* self, val* p0) {
 val* var_v /* var v: TypeVisitor */;
@@ -626,7 +1424,7 @@ var44 = var_mproperty->type->type_table[cltype45] == idtype46;
 }
 if (!var44) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1589);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1600);
 show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty_61d]))(self, var_mproperty) /* mproperty= on <self:AAttrFormExpr>*/;
@@ -643,7 +1441,7 @@ RET_LABEL52:(void)0;
 }
 if (!var51) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1593);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1604);
 show_backtrace(1);
 }
 var54 = ((val* (*)(val*))(var_mpropdefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_mpropdefs) /* first on <var_mpropdefs:Array[MAttributeDef]>*/;
@@ -651,7 +1449,7 @@ var_mpropdef = var54;
 var55 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var_mpropdef) /* static_mtype on <var_mpropdef:MAttributeDef>*/;
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1595);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1606);
 show_backtrace(1);
 }
 var_attr_type = var55;
@@ -787,7 +1585,7 @@ var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_e
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_typing__AExpr__mtype]))(var3) /* mtype on <var3:AExpr>*/;
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1641);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1652);
 show_backtrace(1);
 }
 var_recvtype = var4;

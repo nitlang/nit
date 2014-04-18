@@ -42,6 +42,7 @@ extern const int COLOR_abstract_collection__MapRead__has_key;
 extern const int COLOR_abstract_collection__MapRead___91d_93d;
 extern const int COLOR_parser_nodes__ANode__location;
 extern const int COLOR_location__Location__line_start;
+val* BOX_kernel__Int(long);
 extern const int COLOR_model__MClass__arity;
 extern const int COLOR_kernel__Object___33d_61d;
 extern const int COLOR_model__MClass__kind;

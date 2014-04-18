@@ -20,15 +20,15 @@ class G[E]
 	type F: E
 	type F2: F
 
-	readable writable var _e: E
-	readable writable var _f: F
-	readable writable var _f2: F2
+	var e: E writable
+	var f: F writable
+	var f2: F2 writable
 
 	init(e: E, f: F, f2: F2)
 	do
-		_e = e
-		_f = f
-		_f2 = f2
+		self.e = e
+		self.f = f
+		self.f2 = f2
 	end
 end
 

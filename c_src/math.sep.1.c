@@ -86,8 +86,10 @@ return var;
 /* method math#Int#sqrt for (self: Int): Int */
 long math__Int__sqrt(long self) {
 long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sqrt at lib/standard/math.nit:28,2--51\n");
-show_backtrace(1);
+long var1 /* : Int */;
+var1 = math___Int_sqrt___impl(self);
+var = var1;
+goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
@@ -98,44 +100,6 @@ long var1 /* : Int */;
 long var2 /* : Int */;
 var2 = ((struct instance_kernel__Int*)self)->value; /* autounbox from Object to Int */;
 var1 = math__Int__sqrt(var2);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method math#Int#sin for (self: Int): Int */
-long math__Int__sin(long self) {
-long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sin at lib/standard/math.nit:29,2--49\n");
-show_backtrace(1);
-RET_LABEL:;
-return var;
-}
-/* method math#Int#sin for (self: Object): Int */
-long VIRTUAL_math__Int__sin(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-long var2 /* : Int */;
-var2 = ((struct instance_kernel__Int*)self)->value; /* autounbox from Object to Int */;
-var1 = math__Int__sin(var2);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method math#Int#cos for (self: Int): Int */
-long math__Int__cos(long self) {
-long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#cos at lib/standard/math.nit:30,2--49\n");
-show_backtrace(1);
-RET_LABEL:;
-return var;
-}
-/* method math#Int#cos for (self: Object): Int */
-long VIRTUAL_math__Int__cos(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-long var2 /* : Int */;
-var2 = ((struct instance_kernel__Int*)self)->value; /* autounbox from Object to Int */;
-var1 = math__Int__cos(var2);
 var = var1;
 RET_LABEL:;
 return var;
@@ -287,6 +251,27 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method math#Float#abs for (self: Float): Float */
+double math__Float__abs(double self) {
+double var /* : Float */;
+double var1 /* : Float */;
+var1 = math___Float_abs___impl(self);
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#abs for (self: Object): Float */
+double VIRTUAL_math__Float__abs(val* self) {
+double var /* : Float */;
+double var1 /* : Float */;
+double var2 /* : Float */;
+var2 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
+var1 = math__Float__abs(var2);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method math#Float#pow for (self: Float, Float): Float */
 double math__Float__pow(double self, double p0) {
 double var /* : Float */;
@@ -392,6 +377,116 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method math#Float#is_nan for (self: Float): Bool */
+short int math__Float__is_nan(double self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = isnan(self);
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#is_nan for (self: Object): Bool */
+short int VIRTUAL_math__Float__is_nan(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+double var2 /* : Float */;
+var2 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
+var1 = math__Float__is_nan(var2);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#is_inf for (self: Float): Int */
+long math__Float__is_inf(double self) {
+long var /* : Int */;
+short int var1 /* : Bool */;
+double var2 /* : Float */;
+short int var3 /* : Bool */;
+short int var5 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+short int var6 /* : Bool */;
+long var7 /* : Int */;
+long var8 /* : Int */;
+long var10 /* : Int */;
+long var11 /* : Int */;
+long var12 /* : Int */;
+var1 = math__Float__is_inf_extern(self);
+if (var1){
+var2 = 0.0;
+{ /* Inline kernel#Float#< (self,var2) */
+/* Covariant cast for argument 0 (i) <var2:Float> isa OTHER */
+/* <var2:Float> isa OTHER */
+var5 = 1; /* easy <var2:Float> isa OTHER*/
+if (!var5) {
+var_class_name = type_kernel__Float.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 233);
+show_backtrace(1);
+}
+var6 = self < var2;
+var3 = var6;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
+}
+if (var3){
+var7 = 1;
+{ /* Inline kernel#Int#unary - (var7) */
+var10 = -var7;
+var8 = var10;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
+}
+var = var8;
+goto RET_LABEL;
+} else {
+}
+var11 = 1;
+var = var11;
+goto RET_LABEL;
+} else {
+}
+var12 = 0;
+var = var12;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#is_inf for (self: Object): Int */
+long VIRTUAL_math__Float__is_inf(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+double var2 /* : Float */;
+var2 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
+var1 = math__Float__is_inf(var2);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#is_inf_extern for (self: Float): Bool */
+short int math__Float__is_inf_extern(double self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = isinf(self);
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method math#Float#is_inf_extern for (self: Object): Bool */
+short int VIRTUAL_math__Float__is_inf_extern(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+double var2 /* : Float */;
+var2 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
+var1 = math__Float__is_inf_extern(var2);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method math#Collection#rand for (self: Collection[nullable Object]): nullable Object */
 val* math__Collection__rand(val* self) {
 val* var /* : nullable Object */;
@@ -412,7 +507,7 @@ long var14 /* : Int */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__is_empty]))(self) /* is_empty on <self:Collection[nullable Object]>*/;
 if (var1){
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 55);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 74);
 show_backtrace(1);
 } else {
 }
@@ -450,7 +545,7 @@ CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 62);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 81);
 show_backtrace(1);
 RET_LABEL:;
 return var;

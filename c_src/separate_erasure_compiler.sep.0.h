@@ -44,6 +44,7 @@ extern const int COLOR_separate_compiler__SeparateCompiler__compile_color_consts
 extern const int COLOR_abstract_compiler__AbstractCompiler__compile_main_function;
 extern const int COLOR_separate_compiler__SeparateCompiler__compile_module_to_c;
 extern const int COLOR_abstract_compiler__AbstractCompiler__display_stats;
+val* BOX_kernel__Int(long);
 extern const int COLOR_abstract_compiler__ModelBuilder__write_and_make;
 void separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler(val* self, val* p0, val* p1);
 extern const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dclass_layout;
@@ -135,6 +136,7 @@ void separate_erasure_compiler__SeparateErasureCompiler__compile_header_structs(
 extern const int COLOR_model__MClass__intro;
 extern const int COLOR_model__MClassDef__bound_mtype;
 extern const int COLOR_abstract_compiler__MClass__c_name;
+extern const int COLOR_separate_compiler__MClass__c_instance_name;
 extern const int COLOR_separate_compiler__SeparateCompiler__method_tables;
 extern const int COLOR_separate_compiler__SeparateCompiler__attr_tables;
 extern const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_tables;
@@ -152,6 +154,9 @@ extern const int COLOR_abstract_compiler__MType__ctype;
 extern const int COLOR_kernel__Object___33d_61d;
 extern const int COLOR_abstract_compiler__MPropDef__c_name;
 extern const int COLOR_model__MClass__intro_mmodule;
+extern const int COLOR_model__MClassType__mclass;
+extern const int COLOR_model__MClass__kind;
+extern const int COLOR_model__Object__extern_kind;
 extern const int COLOR_abstract_compiler__MType__c_name;
 extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__add;
 extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__new_named_var;
@@ -168,7 +173,6 @@ extern const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__retri
 extern const struct type type_model__MNullableType;
 extern const int COLOR_model__MNullableType__mtype;
 extern const struct type type_model__MClassType;
-extern const int COLOR_model__MClassType__mclass;
 short int separate_erasure_compiler__SeparateErasureCompiler__build_class_vts_table(val* self, val* p0);
 extern const int COLOR_file__Object__print;
 extern const struct type type_model__MVirtualType;

@@ -14,35 +14,25 @@
 class FilterIStream
 	super IStream
 	# Filter readed elements
-	readable var _stream: nullable IStream = null
+	var stream: nullable IStream = null
 
 	redef fun eof: Bool
 	do
 		assert stream != null
 		return stream.eof
 	end
-
-	private fun stream=(i: nullable IStream)
-	do
-		_stream = i
-	end
 end
 
 class FilterOStream
 	super OStream
 	# Filter outputed elements
-	readable var _stream: nullable OStream = null
+	var stream: nullable OStream = null
 
 	# Can the stream be used to write
 	redef fun is_writable: Bool
 	do
 		assert stream != null
 		return stream.is_writable
-	end
-
-	private fun stream=(i: OStream)
-	do
-		_stream = i
 	end
 end
 
@@ -65,12 +55,14 @@ class StreamCat
 
 	redef fun stream: nullable IStream
 	do
-		if _stream == null and _streams.is_ok then
-			stream = _streams.item
-			assert _stream != null
+		var res = super
+		if res == null and _streams.is_ok then
+			res = _streams.item
+			stream = res
+			assert stream != null
 			_streams.next
 		end
-		return _stream
+		return res
 	end
 
 	redef fun read_char: Int
@@ -116,7 +108,7 @@ class StreamDemux
 		end
 	end
 
-	redef fun write(s: String)
+	redef fun write(s: Text)
 	do
 		for i in _streams
 		do

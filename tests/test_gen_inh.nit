@@ -18,12 +18,12 @@ import kernel
 
 class Gen1[E, F]
 
-   readable writable var _e: E
-   var _f_: F
-   fun f: F do return _f_ end 
-   fun f=(x: F) do _f_ = x end
+   var e: E
+   var f_: F
+   fun f: F do return f_ end
+   fun f=(x: F) do f_ = x end
 
-   init(e:E) do _e = e
+   init(e:E) do self.e = e
 end
 
 class Gen2[G: Int]
@@ -33,10 +33,10 @@ end
 
 class Gen3[H: Int]
 	super Gen1[H, Char]
-   redef readable redef writable redef var _e: H
-   redef var _f_: Char = 'N'
-   redef fun f: Char do return _f_ end 
-   redef fun f=(x: Char) do _f_ = x end
+   redef var e: H redef writable
+   redef var f_: Char redef writable = 'N'
+   redef fun f: Char do return f_ end
+   redef fun f=(x: Char) do f_ = x end
 
    init(e:H) do super(e)
 end

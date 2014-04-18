@@ -953,7 +953,7 @@ var32 = 1;
 } else {
 }
 if (var_cla == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 225);
 show_backtrace(1);
 } else {
@@ -977,7 +977,7 @@ var39 = var42;
 varonce38 = var39;
 }
 if (var_cla == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 225);
 show_backtrace(1);
 } else {
@@ -989,7 +989,7 @@ fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 225);
 show_backtrace(1);
 }
 if (var_cla == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 226);
 show_backtrace(1);
 } else {
@@ -1127,7 +1127,7 @@ goto CONTINUE_label;
 }
 var21 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef) /* in_hierarchy on <var_mclassdef:MClassDef>*/;
 if (var21 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 240);
 show_backtrace(1);
 } else {
@@ -1768,7 +1768,7 @@ var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (!var7) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var8 = var_arity > var4;
@@ -4658,7 +4658,7 @@ var9 = 1; /* easy <var_dmax:Int> isa OTHER*/
 if (!var9) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var10 = var_d > var_dmax;
@@ -5581,7 +5581,7 @@ var21 = var_resolved_receiver->type->type_table[cltype22] == idtype23;
 if (var21){
 var24 = ((val* (*)(val*))(var_resolved_receiver->class->vft[COLOR_model__MParameterType__mclass]))(var_resolved_receiver) /* mclass on <var_resolved_receiver:nullable Object(MParameterType)>*/;
 if (var_anchor == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1236);
 show_backtrace(1);
 } else {
@@ -5594,7 +5594,7 @@ fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1236);
 show_backtrace(1);
 }
 if (var_anchor == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1237);
 show_backtrace(1);
 } else {
@@ -6461,7 +6461,7 @@ var14 = 1; /* easy <var_dmax:Int> isa OTHER*/
 if (!var14) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var15 = var_d > var_dmax;
@@ -6823,7 +6823,7 @@ var24 = 1; /* easy <var21:Int> isa OTHER*/
 if (!var24) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var25 = var_i > var21;
@@ -7528,56 +7528,6 @@ const char* var_class_name;
 short int var31 /* : Bool */;
 val* var32 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 val* var33 /* : Array[MPropDef] */;
-val* var_res /* var res: Array[MPropDef] */;
-val* var34 /* : Iterator[nullable Object] */;
-short int var35 /* : Bool */;
-val* var36 /* : nullable Object */;
-val* var_pd1 /* var pd1: MPropDef */;
-val* var37 /* : MClassDef */;
-val* var_cd1 /* var cd1: MClassDef */;
-val* var38 /* : MClass */;
-val* var_c1 /* var c1: MClass */;
-short int var39 /* : Bool */;
-short int var_keep /* var keep: Bool */;
-val* var40 /* : Iterator[nullable Object] */;
-short int var41 /* : Bool */;
-val* var42 /* : nullable Object */;
-val* var_pd2 /* var pd2: MPropDef */;
-short int var43 /* : Bool */;
-val* var45 /* : MClassDef */;
-val* var_cd2 /* var cd2: MClassDef */;
-val* var46 /* : MClass */;
-val* var_c2 /* var c2: MClass */;
-val* var47 /* : MClassType */;
-val* var48 /* : MClassType */;
-short int var49 /* : Bool */;
-val* var50 /* : MModule */;
-val* var51 /* : POSetElement[MModule] */;
-val* var52 /* : MModule */;
-short int var53 /* : Bool */;
-short int var54 /* : Bool */;
-val* var55 /* : MClassType */;
-val* var56 /* : null */;
-val* var57 /* : MClassType */;
-short int var58 /* : Bool */;
-short int var59 /* : Bool */;
-short int var61 /* : Bool */;
-static val* varonce;
-val* var62 /* : String */;
-char* var63 /* : NativeString */;
-long var64 /* : Int */;
-val* var65 /* : String */;
-static val* varonce66;
-val* var67 /* : String */;
-char* var68 /* : NativeString */;
-long var69 /* : Int */;
-val* var70 /* : String */;
-val* var71 /* : String */;
-val* var72 /* : Array[Object] */;
-long var73 /* : Int */;
-val* var74 /* : NativeArray[Object] */;
-val* var75 /* : String */;
-val* var76 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var_mmodule = p0;
 var_mtype = p1;
 var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MType>*/;
@@ -7656,7 +7606,7 @@ var28 = 1; /* easy <var25:Int> isa OTHER*/
 if (!var28) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var31 = var24 <= var25;
@@ -7671,110 +7621,8 @@ var = var_candidates;
 goto RET_LABEL;
 } else {
 }
-var33 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
-((void (*)(val*))(var33->class->vft[COLOR_array__Array__init]))(var33) /* init on <var33:Array[MPropDef]>*/;
-var_res = var33;
-var34 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
-for(;;) {
-var35 = ((short int (*)(val*))(var34->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var34) /* is_ok on <var34:Iterator[nullable Object]>*/;
-if(!var35) break;
-var36 = ((val* (*)(val*))(var34->class->vft[COLOR_abstract_collection__Iterator__item]))(var34) /* item on <var34:Iterator[nullable Object]>*/;
-var_pd1 = var36;
-var37 = ((val* (*)(val*))(var_pd1->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd1) /* mclassdef on <var_pd1:MPropDef>*/;
-var_cd1 = var37;
-var38 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mclass]))(var_cd1) /* mclass on <var_cd1:MClassDef>*/;
-var_c1 = var38;
-var39 = 1;
-var_keep = var39;
-var40 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
-for(;;) {
-var41 = ((short int (*)(val*))(var40->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var40) /* is_ok on <var40:Iterator[nullable Object]>*/;
-if(!var41) break;
-var42 = ((val* (*)(val*))(var40->class->vft[COLOR_abstract_collection__Iterator__item]))(var40) /* item on <var40:Iterator[nullable Object]>*/;
-var_pd2 = var42;
-var43 = ((short int (*)(val*, val*))(var_pd2->class->vft[COLOR_kernel__Object___61d_61d]))(var_pd2, var_pd1) /* == on <var_pd2:MPropDef>*/;
-if (var43){
-goto CONTINUE_label44;
-} else {
-}
-var45 = ((val* (*)(val*))(var_pd2->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd2) /* mclassdef on <var_pd2:MPropDef>*/;
-var_cd2 = var45;
-var46 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mclass]))(var_cd2) /* mclass on <var_cd2:MClassDef>*/;
-var_c2 = var46;
-var47 = ((val* (*)(val*))(var_c2->class->vft[COLOR_model__MClass__mclass_type]))(var_c2) /* mclass_type on <var_c2:MClass>*/;
-var48 = ((val* (*)(val*))(var_c1->class->vft[COLOR_model__MClass__mclass_type]))(var_c1) /* mclass_type on <var_c1:MClass>*/;
-var49 = ((short int (*)(val*, val*))(var47->class->vft[COLOR_kernel__Object___61d_61d]))(var47, var48) /* == on <var47:MClassType>*/;
-if (var49){
-var50 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd2) /* mmodule on <var_cd2:MClassDef>*/;
-var51 = ((val* (*)(val*))(var50->class->vft[COLOR_mmodule__MModule__in_importation]))(var50) /* in_importation on <var50:MModule>*/;
-var52 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd1) /* mmodule on <var_cd1:MClassDef>*/;
-var53 = ((short int (*)(val*, val*))(var51->class->vft[COLOR_poset__POSetElement___60d_61d]))(var51, var52) /* <= on <var51:POSetElement[MModule]>*/;
-if (var53){
-var54 = 0;
-var_keep = var54;
-goto BREAK_label44;
-} else {
-}
-} else {
-var55 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd2) /* bound_mtype on <var_cd2:MClassDef>*/;
-var56 = NULL;
-var57 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd1) /* bound_mtype on <var_cd1:MClassDef>*/;
-var58 = ((short int (*)(val*, val*, val*, val*))(var55->class->vft[COLOR_model__MType__is_subtype]))(var55, var_mmodule, var56, var57) /* is_subtype on <var55:MClassType>*/;
-if (var58){
-var59 = 0;
-var_keep = var59;
-goto BREAK_label44;
-} else {
-}
-}
-CONTINUE_label44: (void)0;
-((void (*)(val*))(var40->class->vft[COLOR_abstract_collection__Iterator__next]))(var40) /* next on <var40:Iterator[nullable Object]>*/;
-}
-BREAK_label44: (void)0;
-if (var_keep){
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var_pd1) /* add on <var_res:Array[MPropDef]>*/;
-} else {
-}
-CONTINUE_label60: (void)0;
-((void (*)(val*))(var34->class->vft[COLOR_abstract_collection__Iterator__next]))(var34) /* next on <var34:Iterator[nullable Object]>*/;
-}
-BREAK_label60: (void)0;
-var61 = ((short int (*)(val*))(var_res->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_res) /* is_empty on <var_res:Array[MPropDef]>*/;
-if (var61){
-if (varonce) {
-var62 = varonce;
-} else {
-var63 = "All lost! ";
-var64 = 10;
-var65 = string__NativeString__to_s_with_length(var63, var64);
-var62 = var65;
-varonce = var62;
-}
-if (varonce66) {
-var67 = varonce66;
-} else {
-var68 = ", ";
-var69 = 2;
-var70 = string__NativeString__to_s_with_length(var68, var69);
-var67 = var70;
-varonce66 = var67;
-}
-var71 = ((val* (*)(val*, val*))(var_candidates->class->vft[COLOR_string__Collection__join]))(var_candidates, var67) /* join on <var_candidates:Array[MPropDef]>*/;
-var72 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var72 = array_instance Array[Object] */
-var73 = 2;
-var74 = NEW_array__NativeArray(var73, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var74)->values[0] = (val*) var62;
-((struct instance_array__NativeArray*)var74)->values[1] = (val*) var71;
-((void (*)(val*, val*, long))(var72->class->vft[COLOR_array__Array__with_native]))(var72, var74, var73) /* with_native on <var72:Array[Object]>*/;
-}
-var75 = ((val* (*)(val*))(var72->class->vft[COLOR_string__Object__to_s]))(var72) /* to_s on <var72:Array[Object]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var75) /* print on <self:MProperty>*/;
-} else {
-}
-var76 = ((val* (*)(val*))(self->class->vft[COLOR_model__MProperty__lookup_definitions_cache]))(self) /* lookup_definitions_cache on <self:MProperty>*/;
-((void (*)(val*, val*, val*, val*))(var76->class->vft[COLOR_more_collections__HashMap2___91d_93d_61d]))(var76, var_mmodule, var_mtype, var_res) /* []= on <var76:HashMap2[MModule, MType, Array[MPropDef]]>*/;
-var = var_res;
+var33 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_model__MProperty__select_most_specific]))(self, var_mmodule, var_candidates) /* select_most_specific on <self:MProperty>*/;
+var = var33;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -7795,7 +7643,7 @@ val* var1 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var1 = self->attrs[COLOR_model__MProperty___64dlookup_definitions_cache].val; /* @lookup_definitions_cache on <self:MProperty> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @lookup_definitions_cache");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1597);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1567);
 show_backtrace(1);
 }
 var = var1;
@@ -7831,7 +7679,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2[MModule, MType, Array[MPROPDEF]]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1597);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1567);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MProperty___64dlookup_definitions_cache].val = p0; /* @lookup_definitions_cache on <self:MProperty> */
@@ -7887,62 +7735,13 @@ int idtype33;
 const char* var_class_name;
 short int var34 /* : Bool */;
 val* var35 /* : Array[MPropDef] */;
-val* var_res /* var res: Array[MPropDef] */;
-val* var36 /* : Iterator[nullable Object] */;
-short int var37 /* : Bool */;
-val* var38 /* : nullable Object */;
-val* var_pd1 /* var pd1: MPropDef */;
-val* var39 /* : MClassDef */;
-val* var_cd1 /* var cd1: MClassDef */;
-val* var40 /* : MClass */;
-val* var_c1 /* var c1: MClass */;
-short int var41 /* : Bool */;
-short int var_keep /* var keep: Bool */;
-val* var42 /* : Iterator[nullable Object] */;
-short int var43 /* : Bool */;
-val* var44 /* : nullable Object */;
-val* var_pd2 /* var pd2: MPropDef */;
-short int var45 /* : Bool */;
-val* var47 /* : MClassDef */;
-val* var_cd2 /* var cd2: MClassDef */;
-val* var48 /* : MClass */;
-val* var_c2 /* var c2: MClass */;
-val* var49 /* : MClassType */;
-val* var50 /* : MClassType */;
-short int var51 /* : Bool */;
-val* var52 /* : MModule */;
-val* var53 /* : POSetElement[MModule] */;
-val* var54 /* : MModule */;
-short int var55 /* : Bool */;
-short int var56 /* : Bool */;
-val* var57 /* : MClassType */;
-val* var58 /* : null */;
-val* var59 /* : MClassType */;
-short int var60 /* : Bool */;
-short int var61 /* : Bool */;
-short int var63 /* : Bool */;
-static val* varonce;
-val* var64 /* : String */;
-char* var65 /* : NativeString */;
-long var66 /* : Int */;
-val* var67 /* : String */;
-static val* varonce68;
-val* var69 /* : String */;
-char* var70 /* : NativeString */;
-long var71 /* : Int */;
-val* var72 /* : String */;
-val* var73 /* : String */;
-val* var74 /* : Array[Object] */;
-long var75 /* : Int */;
-val* var76 /* : NativeArray[Object] */;
-val* var77 /* : String */;
 var_mmodule = p0;
 var_mtype = p1;
 var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MType>*/;
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1609);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1579);
 show_backtrace(1);
 }
 /* <var_mtype:MType> isa MNullableType */
@@ -7958,7 +7757,7 @@ var4 = ((val* (*)(val*))(var_mtype->class->vft[COLOR_model__MNullableType__mtype
 var_mtype = var4;
 } else {
 }
-var5 = NEW_array__Array(&type_array__Arraymodel__MPropDef);
+var5 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
 ((void (*)(val*))(var5->class->vft[COLOR_array__Array__init]))(var5) /* init on <var5:Array[MPropDef]>*/;
 var_candidates = var5;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_model__MProperty__mpropdefs]))(self) /* mpropdefs on <self:MProperty>*/;
@@ -8016,7 +7815,7 @@ var31 = 1; /* easy <var28:Int> isa OTHER*/
 if (!var31) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var34 = var27 <= var28;
@@ -8029,108 +7828,8 @@ var = var_candidates;
 goto RET_LABEL;
 } else {
 }
-var35 = NEW_array__Array(&type_array__Arraymodel__MPropDef);
-((void (*)(val*))(var35->class->vft[COLOR_array__Array__init]))(var35) /* init on <var35:Array[MPropDef]>*/;
-var_res = var35;
-var36 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
-for(;;) {
-var37 = ((short int (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var36) /* is_ok on <var36:Iterator[nullable Object]>*/;
-if(!var37) break;
-var38 = ((val* (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__item]))(var36) /* item on <var36:Iterator[nullable Object]>*/;
-var_pd1 = var38;
-var39 = ((val* (*)(val*))(var_pd1->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd1) /* mclassdef on <var_pd1:MPropDef>*/;
-var_cd1 = var39;
-var40 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mclass]))(var_cd1) /* mclass on <var_cd1:MClassDef>*/;
-var_c1 = var40;
-var41 = 1;
-var_keep = var41;
-var42 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
-for(;;) {
-var43 = ((short int (*)(val*))(var42->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var42) /* is_ok on <var42:Iterator[nullable Object]>*/;
-if(!var43) break;
-var44 = ((val* (*)(val*))(var42->class->vft[COLOR_abstract_collection__Iterator__item]))(var42) /* item on <var42:Iterator[nullable Object]>*/;
-var_pd2 = var44;
-var45 = ((short int (*)(val*, val*))(var_pd2->class->vft[COLOR_kernel__Object___61d_61d]))(var_pd2, var_pd1) /* == on <var_pd2:MPropDef>*/;
-if (var45){
-goto CONTINUE_label46;
-} else {
-}
-var47 = ((val* (*)(val*))(var_pd2->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd2) /* mclassdef on <var_pd2:MPropDef>*/;
-var_cd2 = var47;
-var48 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mclass]))(var_cd2) /* mclass on <var_cd2:MClassDef>*/;
-var_c2 = var48;
-var49 = ((val* (*)(val*))(var_c2->class->vft[COLOR_model__MClass__mclass_type]))(var_c2) /* mclass_type on <var_c2:MClass>*/;
-var50 = ((val* (*)(val*))(var_c1->class->vft[COLOR_model__MClass__mclass_type]))(var_c1) /* mclass_type on <var_c1:MClass>*/;
-var51 = ((short int (*)(val*, val*))(var49->class->vft[COLOR_kernel__Object___61d_61d]))(var49, var50) /* == on <var49:MClassType>*/;
-if (var51){
-var52 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd2) /* mmodule on <var_cd2:MClassDef>*/;
-var53 = ((val* (*)(val*))(var52->class->vft[COLOR_mmodule__MModule__in_importation]))(var52) /* in_importation on <var52:MModule>*/;
-var54 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd1) /* mmodule on <var_cd1:MClassDef>*/;
-var55 = ((short int (*)(val*, val*))(var53->class->vft[COLOR_poset__POSetElement___60d_61d]))(var53, var54) /* <= on <var53:POSetElement[MModule]>*/;
-if (var55){
-var56 = 0;
-var_keep = var56;
-goto BREAK_label46;
-} else {
-}
-} else {
-var57 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd2) /* bound_mtype on <var_cd2:MClassDef>*/;
-var58 = NULL;
-var59 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd1) /* bound_mtype on <var_cd1:MClassDef>*/;
-var60 = ((short int (*)(val*, val*, val*, val*))(var57->class->vft[COLOR_model__MType__is_subtype]))(var57, var_mmodule, var58, var59) /* is_subtype on <var57:MClassType>*/;
-if (var60){
-var61 = 0;
-var_keep = var61;
-goto BREAK_label46;
-} else {
-}
-}
-CONTINUE_label46: (void)0;
-((void (*)(val*))(var42->class->vft[COLOR_abstract_collection__Iterator__next]))(var42) /* next on <var42:Iterator[nullable Object]>*/;
-}
-BREAK_label46: (void)0;
-if (var_keep){
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var_pd1) /* add on <var_res:Array[MPropDef]>*/;
-} else {
-}
-CONTINUE_label62: (void)0;
-((void (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__next]))(var36) /* next on <var36:Iterator[nullable Object]>*/;
-}
-BREAK_label62: (void)0;
-var63 = ((short int (*)(val*))(var_res->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_res) /* is_empty on <var_res:Array[MPropDef]>*/;
-if (var63){
-if (varonce) {
-var64 = varonce;
-} else {
-var65 = "All lost! ";
-var66 = 10;
-var67 = string__NativeString__to_s_with_length(var65, var66);
-var64 = var67;
-varonce = var64;
-}
-if (varonce68) {
-var69 = varonce68;
-} else {
-var70 = ", ";
-var71 = 2;
-var72 = string__NativeString__to_s_with_length(var70, var71);
-var69 = var72;
-varonce68 = var69;
-}
-var73 = ((val* (*)(val*, val*))(var_candidates->class->vft[COLOR_string__Collection__join]))(var_candidates, var69) /* join on <var_candidates:Array[MPropDef]>*/;
-var74 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var74 = array_instance Array[Object] */
-var75 = 2;
-var76 = NEW_array__NativeArray(var75, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var76)->values[0] = (val*) var64;
-((struct instance_array__NativeArray*)var76)->values[1] = (val*) var73;
-((void (*)(val*, val*, long))(var74->class->vft[COLOR_array__Array__with_native]))(var74, var76, var75) /* with_native on <var74:Array[Object]>*/;
-}
-var77 = ((val* (*)(val*))(var74->class->vft[COLOR_string__Object__to_s]))(var74) /* to_s on <var74:Array[Object]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var77) /* print on <self:MProperty>*/;
-} else {
-}
-var = var_res;
+var35 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_model__MProperty__select_most_specific]))(self, var_mmodule, var_candidates) /* select_most_specific on <self:MProperty>*/;
+var = var35;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -8140,6 +7839,213 @@ val* VIRTUAL_model__MProperty__lookup_super_definitions(val* self, val* p0, val*
 val* var /* : Array[MPropDef] */;
 val* var1 /* : Array[MPropDef] */;
 var1 = model__MProperty__lookup_super_definitions(self, p0, p1);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MProperty#select_most_specific for (self: MProperty, MModule, Array[MPropDef]): Array[MPropDef] */
+val* model__MProperty__select_most_specific(val* self, val* p0, val* p1) {
+val* var /* : Array[MPropDef] */;
+short int var1 /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+val* var_mmodule /* var mmodule: MModule */;
+val* var_candidates /* var candidates: Array[MPropDef] */;
+val* var2 /* : Array[MPropDef] */;
+val* var_res /* var res: Array[MPropDef] */;
+val* var3 /* : Iterator[nullable Object] */;
+short int var4 /* : Bool */;
+val* var5 /* : nullable Object */;
+val* var_pd1 /* var pd1: MPropDef */;
+val* var6 /* : MClassDef */;
+val* var_cd1 /* var cd1: MClassDef */;
+val* var7 /* : MClass */;
+val* var_c1 /* var c1: MClass */;
+short int var8 /* : Bool */;
+short int var_keep /* var keep: Bool */;
+val* var9 /* : Iterator[nullable Object] */;
+short int var10 /* : Bool */;
+val* var11 /* : nullable Object */;
+val* var_pd2 /* var pd2: MPropDef */;
+short int var12 /* : Bool */;
+val* var13 /* : MClassDef */;
+val* var_cd2 /* var cd2: MClassDef */;
+val* var14 /* : MClass */;
+val* var_c2 /* var c2: MClass */;
+val* var15 /* : MClassType */;
+val* var16 /* : MClassType */;
+short int var17 /* : Bool */;
+val* var18 /* : MModule */;
+val* var19 /* : POSetElement[MModule] */;
+val* var20 /* : MModule */;
+short int var21 /* : Bool */;
+short int var22 /* : Bool */;
+short int var23 /* : Bool */;
+val* var24 /* : MClassType */;
+val* var25 /* : null */;
+val* var26 /* : MClassType */;
+short int var27 /* : Bool */;
+short int var_ /* var : Bool */;
+val* var28 /* : MClassType */;
+val* var29 /* : MClassType */;
+short int var30 /* : Bool */;
+short int var31 /* : Bool */;
+short int var33 /* : Bool */;
+static val* varonce;
+val* var34 /* : String */;
+char* var35 /* : NativeString */;
+long var36 /* : Int */;
+val* var37 /* : String */;
+static val* varonce38;
+val* var39 /* : String */;
+char* var40 /* : NativeString */;
+long var41 /* : Int */;
+val* var42 /* : String */;
+val* var43 /* : String */;
+val* var44 /* : Array[Object] */;
+long var45 /* : Int */;
+val* var46 /* : NativeArray[Object] */;
+val* var47 /* : String */;
+/* Covariant cast for argument 1 (candidates) <p1:Array[MPropDef]> isa Array[MPROPDEF] */
+/* <p1:Array[MPropDef]> isa Array[MPROPDEF] */
+type_struct = self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p1->type->table_size) {
+var1 = 0;
+} else {
+var1 = p1->type->type_table[cltype] == idtype;
+}
+if (!var1) {
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[MPROPDEF]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1601);
+show_backtrace(1);
+}
+var_mmodule = p0;
+var_candidates = p1;
+var2 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
+((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[MPropDef]>*/;
+var_res = var2;
+var3 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
+for(;;) {
+var4 = ((short int (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var3) /* is_ok on <var3:Iterator[nullable Object]>*/;
+if(!var4) break;
+var5 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__item]))(var3) /* item on <var3:Iterator[nullable Object]>*/;
+var_pd1 = var5;
+var6 = ((val* (*)(val*))(var_pd1->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd1) /* mclassdef on <var_pd1:MPropDef>*/;
+var_cd1 = var6;
+var7 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mclass]))(var_cd1) /* mclass on <var_cd1:MClassDef>*/;
+var_c1 = var7;
+var8 = 1;
+var_keep = var8;
+var9 = ((val* (*)(val*))(var_candidates->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_candidates) /* iterator on <var_candidates:Array[MPropDef]>*/;
+for(;;) {
+var10 = ((short int (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var9) /* is_ok on <var9:Iterator[nullable Object]>*/;
+if(!var10) break;
+var11 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__item]))(var9) /* item on <var9:Iterator[nullable Object]>*/;
+var_pd2 = var11;
+var12 = ((short int (*)(val*, val*))(var_pd2->class->vft[COLOR_kernel__Object___61d_61d]))(var_pd2, var_pd1) /* == on <var_pd2:MPropDef>*/;
+if (var12){
+goto CONTINUE_label;
+} else {
+}
+var13 = ((val* (*)(val*))(var_pd2->class->vft[COLOR_model__MPropDef__mclassdef]))(var_pd2) /* mclassdef on <var_pd2:MPropDef>*/;
+var_cd2 = var13;
+var14 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mclass]))(var_cd2) /* mclass on <var_cd2:MClassDef>*/;
+var_c2 = var14;
+var15 = ((val* (*)(val*))(var_c2->class->vft[COLOR_model__MClass__mclass_type]))(var_c2) /* mclass_type on <var_c2:MClass>*/;
+var16 = ((val* (*)(val*))(var_c1->class->vft[COLOR_model__MClass__mclass_type]))(var_c1) /* mclass_type on <var_c1:MClass>*/;
+var17 = ((short int (*)(val*, val*))(var15->class->vft[COLOR_kernel__Object___61d_61d]))(var15, var16) /* == on <var15:MClassType>*/;
+if (var17){
+var18 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd2) /* mmodule on <var_cd2:MClassDef>*/;
+var19 = ((val* (*)(val*))(var18->class->vft[COLOR_mmodule__MModule__in_importation]))(var18) /* in_importation on <var18:MModule>*/;
+var20 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__mmodule]))(var_cd1) /* mmodule on <var_cd1:MClassDef>*/;
+var21 = ((short int (*)(val*, val*))(var19->class->vft[COLOR_poset__POSetElement___60d]))(var19, var20) /* < on <var19:POSetElement[MModule]>*/;
+if (var21){
+var22 = 0;
+var_keep = var22;
+goto BREAK_label;
+} else {
+}
+} else {
+var24 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd2) /* bound_mtype on <var_cd2:MClassDef>*/;
+var25 = NULL;
+var26 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd1) /* bound_mtype on <var_cd1:MClassDef>*/;
+var27 = ((short int (*)(val*, val*, val*, val*))(var24->class->vft[COLOR_model__MType__is_subtype]))(var24, var_mmodule, var25, var26) /* is_subtype on <var24:MClassType>*/;
+var_ = var27;
+if (var27){
+var28 = ((val* (*)(val*))(var_cd2->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd2) /* bound_mtype on <var_cd2:MClassDef>*/;
+var29 = ((val* (*)(val*))(var_cd1->class->vft[COLOR_model__MClassDef__bound_mtype]))(var_cd1) /* bound_mtype on <var_cd1:MClassDef>*/;
+var30 = ((short int (*)(val*, val*))(var28->class->vft[COLOR_kernel__Object___33d_61d]))(var28, var29) /* != on <var28:MClassType>*/;
+var23 = var30;
+} else {
+var23 = var_;
+}
+if (var23){
+var31 = 0;
+var_keep = var31;
+goto BREAK_label;
+} else {
+}
+}
+CONTINUE_label: (void)0;
+((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__next]))(var9) /* next on <var9:Iterator[nullable Object]>*/;
+}
+BREAK_label: (void)0;
+if (var_keep){
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var_pd1) /* add on <var_res:Array[MPropDef]>*/;
+} else {
+}
+CONTINUE_label32: (void)0;
+((void (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__next]))(var3) /* next on <var3:Iterator[nullable Object]>*/;
+}
+BREAK_label32: (void)0;
+var33 = ((short int (*)(val*))(var_res->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_res) /* is_empty on <var_res:Array[MPropDef]>*/;
+if (var33){
+if (varonce) {
+var34 = varonce;
+} else {
+var35 = "All lost! ";
+var36 = 10;
+var37 = string__NativeString__to_s_with_length(var35, var36);
+var34 = var37;
+varonce = var34;
+}
+if (varonce38) {
+var39 = varonce38;
+} else {
+var40 = ", ";
+var41 = 2;
+var42 = string__NativeString__to_s_with_length(var40, var41);
+var39 = var42;
+varonce38 = var39;
+}
+var43 = ((val* (*)(val*, val*))(var_candidates->class->vft[COLOR_string__Collection__join]))(var_candidates, var39) /* join on <var_candidates:Array[MPropDef]>*/;
+var44 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var44 = array_instance Array[Object] */
+var45 = 2;
+var46 = NEW_array__NativeArray(var45, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var46)->values[0] = (val*) var34;
+((struct instance_array__NativeArray*)var46)->values[1] = (val*) var43;
+((void (*)(val*, val*, long))(var44->class->vft[COLOR_array__Array__with_native]))(var44, var46, var45) /* with_native on <var44:Array[Object]>*/;
+}
+var47 = ((val* (*)(val*))(var44->class->vft[COLOR_string__Object__to_s]))(var44) /* to_s on <var44:Array[Object]>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var47) /* print on <self:MProperty>*/;
+} else {
+}
+var = var_res;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MProperty#select_most_specific for (self: Object, MModule, Array[MPropDef]): Array[MPropDef] */
+val* VIRTUAL_model__MProperty__select_most_specific(val* self, val* p0, val* p1) {
+val* var /* : Array[MPropDef] */;
+val* var1 /* : Array[MPropDef] */;
+var1 = model__MProperty__select_most_specific(self, p0, p1);
 var = var1;
 RET_LABEL:;
 return var;
@@ -8157,7 +8063,7 @@ var_mtype = p1;
 var1 = ((short int (*)(val*, val*, val*))(var_mtype->class->vft[COLOR_model__MType__has_mproperty]))(var_mtype, var_mmodule, self) /* has_mproperty on <var_mtype:MType>*/;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1671);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1648);
 show_backtrace(1);
 }
 var2 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_model__MProperty__lookup_all_definitions]))(self, var_mmodule, var_mtype) /* lookup_all_definitions on <self:MProperty>*/;
@@ -8226,7 +8132,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1679);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1656);
 show_backtrace(1);
 }
 /* <var_mtype:MType> isa MNullableType */
@@ -8298,7 +8204,7 @@ var28 = 1; /* easy <var25:Int> isa OTHER*/
 if (!var28) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
 var31 = var24 <= var25;
@@ -8339,7 +8245,7 @@ val* var1 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var1 = self->attrs[COLOR_model__MProperty___64dlookup_all_definitions_cache].val; /* @lookup_all_definitions_cache on <self:MProperty> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @lookup_all_definitions_cache");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1708);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1685);
 show_backtrace(1);
 }
 var = var1;
@@ -8375,7 +8281,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2[MModule, MType, Array[MPROPDEF]]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1708);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1685);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MProperty___64dlookup_all_definitions_cache].val = p0; /* @lookup_all_definitions_cache on <self:MProperty> */
@@ -8518,7 +8424,7 @@ val* var1 /* : MVirtualType */;
 var1 = self->attrs[COLOR_model__MVirtualTypeProp___64dmvirtualtype].val; /* @mvirtualtype on <self:MVirtualTypeProp> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mvirtualtype");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1762);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1739);
 show_backtrace(1);
 }
 var = var1;
@@ -8551,7 +8457,7 @@ val* var1 /* : Location */;
 var1 = self->attrs[COLOR_model__MPropDef___64dlocation].val; /* @location on <self:MPropDef> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @location");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1779);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1756);
 show_backtrace(1);
 }
 var = var1;
@@ -8584,7 +8490,7 @@ val* var1 /* : MClassDef */;
 var1 = self->attrs[COLOR_model__MPropDef___64dmclassdef].val; /* @mclassdef on <self:MPropDef> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mclassdef");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1782);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1759);
 show_backtrace(1);
 }
 var = var1;
@@ -8617,7 +8523,7 @@ val* var1 /* : MProperty */;
 var1 = self->attrs[COLOR_model__MPropDef___64dmproperty].val; /* @mproperty on <self:MPropDef> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mproperty");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1785);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1762);
 show_backtrace(1);
 }
 var = var1;
@@ -8653,7 +8559,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1785);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1762);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MPropDef___64dmproperty].val = p0; /* @mproperty on <self:MPropDef> */
@@ -8698,7 +8604,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1788);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1765);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -8745,7 +8651,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MPropDef___64dto_s].val; /* @to_s on <self:MPropDef> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @to_s");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1798);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1775);
 show_backtrace(1);
 }
 var = var1;
@@ -8825,7 +8731,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1812);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1789);
 show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_model__MPropDef__mproperty]))(self) /* mproperty on <self:MPropDef>*/;
@@ -8851,14 +8757,14 @@ BREAK_label: (void)0;
 var10 = ((short int (*)(val*))(var_i->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_i) /* is_ok on <var_i:ArrayIterator[MPropDef]>*/;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert \'has_property\' failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1817);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1794);
 show_backtrace(1);
 }
 ((void (*)(val*))(var_i->class->vft[COLOR_abstract_collection__Iterator__next]))(var_i) /* next on <var_i:ArrayIterator[MPropDef]>*/;
 var11 = ((short int (*)(val*))(var_i->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_i) /* is_ok on <var_i:ArrayIterator[MPropDef]>*/;
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert \'has_next_property\' failed");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1819);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1796);
 show_backtrace(1);
 }
 var12 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__Iterator__item]))(var_i) /* item on <var_i:ArrayIterator[MPropDef]>*/;
@@ -8874,7 +8780,7 @@ var13 = var12->type->type_table[cltype] == idtype;
 if (!var13) {
 var_class_name = var12 == NULL ? "null" : var12->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPDEF", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1820);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1797);
 show_backtrace(1);
 }
 var = var12;
@@ -8914,7 +8820,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1831);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1808);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -9007,7 +8913,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1850);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1827);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -9072,7 +8978,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1866);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1843);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -9121,7 +9027,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MClassKind___64dto_s].val; /* @to_s on <self:MClassKind> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @to_s");
-fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1886);
+fprintf(stderr, " (%s:%d)\n", "src/model/model.nit", 1863);
 show_backtrace(1);
 }
 var = var1;

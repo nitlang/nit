@@ -350,7 +350,7 @@ var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var6 = var1 > var2;
@@ -1457,6 +1457,57 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method abstract_collection#MapRead#get_or_null for (self: MapRead[Object, nullable Object], Object): nullable Object */
+val* abstract_collection__MapRead__get_or_null(val* self, val* p0) {
+val* var /* : nullable Object */;
+short int var1 /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+val* var_key /* var key: Object */;
+short int var2 /* : Bool */;
+val* var3 /* : nullable Object */;
+val* var4 /* : null */;
+/* Covariant cast for argument 0 (key) <p0:Object> isa MapRead#0 */
+/* <p0:Object> isa MapRead#0 */
+type_struct = self->type->resolution_table->types[COLOR_abstract_collection__MapRead_FT0];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p0->type->table_size) {
+var1 = 0;
+} else {
+var1 = p0->type->type_table[cltype] == idtype;
+}
+if (!var1) {
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 283);
+show_backtrace(1);
+}
+var_key = p0;
+var2 = ((short int (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead__has_key]))(self, var_key) /* has_key on <self:MapRead[Object, nullable Object]>*/;
+if (var2){
+var3 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(self, var_key) /* [] on <self:MapRead[Object, nullable Object]>*/;
+var = var3;
+goto RET_LABEL;
+} else {
+}
+var4 = NULL;
+var = var4;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#MapRead#get_or_null for (self: Object, Object): nullable Object */
+val* VIRTUAL_abstract_collection__MapRead__get_or_null(val* self, val* p0) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable Object */;
+var1 = abstract_collection__MapRead__get_or_null(self, p0);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method abstract_collection#MapRead#get_or_default for (self: MapRead[Object, nullable Object], Object, nullable Object): nullable Object */
 val* abstract_collection__MapRead__get_or_default(val* self, val* p0, val* p1) {
 val* var /* : nullable Object */;
@@ -1488,7 +1539,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 283);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 297);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (default) <p1:nullable Object> isa MapRead#1 */
@@ -1509,7 +1560,7 @@ var2 = p1->type->type_table[cltype3] == idtype4;
 if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#1", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 283);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 297);
 show_backtrace(1);
 }
 var_key = p0;
@@ -1559,7 +1610,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 290);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 304);
 show_backtrace(1);
 }
 var_key = p0;
@@ -1585,7 +1636,7 @@ val* var /* : MapIterator[Object, nullable Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "iterator", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 293);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 307);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1605,7 +1656,7 @@ val* var /* : Collection[nullable Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "values", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 296);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 310);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1625,7 +1676,7 @@ val* var /* : Collection[Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "keys", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 301);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 315);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1645,7 +1696,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "is_empty", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 306);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 320);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1665,7 +1716,7 @@ long var /* : Int */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "length", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 309);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 323);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1675,6 +1726,47 @@ long VIRTUAL_abstract_collection__MapRead__length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 var1 = abstract_collection__MapRead__length(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#MapRead#provide_default_value for (self: MapRead[Object, nullable Object], Object): nullable Object */
+val* abstract_collection__MapRead__provide_default_value(val* self, val* p0) {
+val* var /* : nullable Object */;
+short int var1 /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+val* var_key /* var key: Object */;
+/* Covariant cast for argument 0 (key) <p0:Object> isa MapRead#0 */
+/* <p0:Object> isa MapRead#0 */
+type_struct = self->type->resolution_table->types[COLOR_abstract_collection__MapRead_FT0];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p0->type->table_size) {
+var1 = 0;
+} else {
+var1 = p0->type->type_table[cltype] == idtype;
+}
+if (!var1) {
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 326);
+show_backtrace(1);
+}
+var_key = p0;
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 331);
+show_backtrace(1);
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#MapRead#provide_default_value for (self: Object, Object): nullable Object */
+val* VIRTUAL_abstract_collection__MapRead__provide_default_value(val* self, val* p0) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable Object */;
+var1 = abstract_collection__MapRead__provide_default_value(self, p0);
 var = var1;
 RET_LABEL:;
 return var;
@@ -1706,7 +1798,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 339);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 360);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (item) <p1:nullable Object> isa Map#1 */
@@ -1727,12 +1819,12 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#1", var_class_name5);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 339);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 360);
 show_backtrace(1);
 }
 var_class_name6 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "[]=", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 339);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 360);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -1767,7 +1859,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[Map#0, Map#1]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 342);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 363);
 show_backtrace(1);
 }
 var_map = p0;
@@ -1795,7 +1887,7 @@ void abstract_collection__Map__clear(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "clear", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 353);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 374);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -1810,7 +1902,7 @@ val* var /* : RemovableCollection[nullable Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "values", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 356);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 377);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1830,7 +1922,7 @@ val* var /* : RemovableCollection[Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "keys", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 358);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 379);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1850,7 +1942,7 @@ val* var /* : nullable Object */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "item", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 363);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 384);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1870,7 +1962,7 @@ val* var /* : Object */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "key", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 367);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 388);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1889,7 +1981,7 @@ void abstract_collection__MapIterator__next(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "next", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 371);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 392);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -1904,7 +1996,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "is_ok", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 375);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 396);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1925,7 +2017,7 @@ val* var1 /* : MapIterator[Object, nullable Object] */;
 var1 = self->attrs[COLOR_abstract_collection__MapKeysIterator___64diterator].val; /* @iterator on <self:MapKeysIterator[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @iterator");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 385);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 406);
 show_backtrace(1);
 }
 var = var1;
@@ -1961,7 +2053,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[MapKeysIterator#0, MapKeysIterator#1]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 385);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 406);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__MapKeysIterator___64diterator].val = p0; /* @iterator on <self:MapKeysIterator[Object, nullable Object]> */
@@ -2046,7 +2138,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[MapKeysIterator#0, MapKeysIterator#1]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 382);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 403);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__MapKeysIterator___64diterator].val = p0; /* @iterator on <self:MapKeysIterator[Object, nullable Object]> */
@@ -2064,7 +2156,7 @@ val* var1 /* : MapIterator[Object, nullable Object] */;
 var1 = self->attrs[COLOR_abstract_collection__MapValuesIterator___64diterator].val; /* @iterator on <self:MapValuesIterator[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @iterator");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 396);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 417);
 show_backtrace(1);
 }
 var = var1;
@@ -2100,7 +2192,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[MapValuesIterator#0, MapValuesIterator#1]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 396);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 417);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__MapValuesIterator___64diterator].val = p0; /* @iterator on <self:MapValuesIterator[Object, nullable Object]> */
@@ -2185,7 +2277,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[MapValuesIterator#0, MapValuesIterator#1]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 393);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 414);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__MapValuesIterator___64diterator].val = p0; /* @iterator on <self:MapValuesIterator[Object, nullable Object]> */
@@ -2207,7 +2299,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Collec
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'not_empty\' failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 412);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 433);
 show_backtrace(1);
 }
 var3 = 0;
@@ -2232,7 +2324,7 @@ val* var /* : nullable Object */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "[]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 416);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 437);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -2260,7 +2352,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Collec
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'not_empty\' failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 425);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 446);
 show_backtrace(1);
 }
 var3 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:SequenceRead[nullable Object]>*/;
@@ -2323,7 +2415,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SequenceRead#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 429);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 450);
 show_backtrace(1);
 }
 var_item = p0;
@@ -2375,7 +2467,7 @@ val* var /* : IndexedIterator[nullable Object] */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "iterator", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 442);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 463);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -2467,7 +2559,7 @@ var14 = 1; /* easy <var_l:Int> isa OTHER*/
 if (!var14) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var17 = var_i < var_l;
@@ -2589,7 +2681,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 473);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 494);
 show_backtrace(1);
 }
 var_item = p0;
@@ -2642,7 +2734,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 478);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 499);
 show_backtrace(1);
 }
 var_item = p0;
@@ -2656,7 +2748,7 @@ var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var9 = var_l > var2;
@@ -2711,7 +2803,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 490);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 511);
 show_backtrace(1);
 }
 var_e = p0;
@@ -2750,12 +2842,12 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 493);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 514);
 show_backtrace(1);
 }
 var_class_name1 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "push", var_class_name1);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 493);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 514);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -2789,7 +2881,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[Sequence#0]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 496);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 517);
 show_backtrace(1);
 }
 var_coll = p0;
@@ -2817,7 +2909,7 @@ val* var /* : nullable Object */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "pop", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 499);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 520);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -2858,12 +2950,12 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 502);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 523);
 show_backtrace(1);
 }
 var_class_name1 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "unshift", var_class_name1);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 502);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 523);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -2878,7 +2970,7 @@ val* var /* : nullable Object */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "shift", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 505);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 526);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -2919,12 +3011,12 @@ var = p1->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 509);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 530);
 show_backtrace(1);
 }
 var_class_name1 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "[]=", var_class_name1);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 509);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 530);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -2938,7 +3030,7 @@ void abstract_collection__Sequence__remove_at(val* self, long p0) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "remove_at", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 512);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 533);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -2953,7 +3045,7 @@ long var /* : Int */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "index", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 519);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 540);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -2989,12 +3081,12 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "CoupleMap#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 526);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 547);
 show_backtrace(1);
 }
 var_class_name2 = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "couple_at", var_class_name2);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 526);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 547);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -3022,6 +3114,7 @@ val* var_c /* var c: nullable Couple[Object, nullable Object] */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : nullable Object */;
+val* var6 /* : nullable Object */;
 /* Covariant cast for argument 0 (key) <p0:Object> isa MapRead#0 */
 /* <p0:Object> isa MapRead#0 */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__MapRead_FT0];
@@ -3035,7 +3128,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 530);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 551);
 show_backtrace(1);
 }
 var_key = p0;
@@ -3048,12 +3141,12 @@ var4 = 1; /* is null */
 var4 = 0; /* arg is null but recv is not */
 }
 if (var4){
-fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 534);
-show_backtrace(1);
-} else {
-var5 = ((val* (*)(val*))(var_c->class->vft[COLOR_abstract_collection__Couple__second]))(var_c) /* second on <var_c:nullable Couple[Object, nullable Object](Couple[Object, nullable Object])>*/;
+var5 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead__provide_default_value]))(self, var_key) /* provide_default_value on <self:CoupleMap[Object, nullable Object]>*/;
 var = var5;
+goto RET_LABEL;
+} else {
+var6 = ((val* (*)(val*))(var_c->class->vft[COLOR_abstract_collection__Couple__second]))(var_c) /* second on <var_c:nullable Couple[Object, nullable Object](Couple[Object, nullable Object])>*/;
+var = var6;
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -3077,7 +3170,7 @@ val* var3 /* : nullable Object */;
 var1 = self->attrs[COLOR_abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 546);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 567);
 show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__item]))(var1) /* item on <var1:Iterator[Couple[Object, nullable Object]]>*/;
@@ -3105,7 +3198,7 @@ val* var3 /* : nullable Object */;
 var1 = self->attrs[COLOR_abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 550);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 571);
 show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__item]))(var1) /* item on <var1:Iterator[Couple[Object, nullable Object]]>*/;
@@ -3132,7 +3225,7 @@ short int var2 /* : Bool */;
 var1 = self->attrs[COLOR_abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 552);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 573);
 show_backtrace(1);
 }
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var1) /* is_ok on <var1:Iterator[Couple[Object, nullable Object]]>*/;
@@ -3156,7 +3249,7 @@ val* var /* : Iterator[Couple[Object, nullable Object]] */;
 var = self->attrs[COLOR_abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[Object, nullable Object]> */
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 556);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 577);
 show_backtrace(1);
 }
 ((void (*)(val*))(var->class->vft[COLOR_abstract_collection__Iterator__next]))(var) /* next on <var:Iterator[Couple[Object, nullable Object]]>*/;
@@ -3188,7 +3281,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Iterator[Couple[CoupleMapIterator#0, CoupleMapIterator#1]]", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 561);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 582);
 show_backtrace(1);
 }
 var_i = p0;
@@ -3244,7 +3337,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Couple#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 569);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 590);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__Couple___first].val = p0; /* _first on <self:Couple[nullable Object, nullable Object]> */
@@ -3299,7 +3392,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Couple#1", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 572);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 593);
 show_backtrace(1);
 }
 self->attrs[COLOR_abstract_collection__Couple___second].val = p0; /* _second on <self:Couple[nullable Object, nullable Object]> */
@@ -3344,7 +3437,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Couple#0", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 575);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 596);
 show_backtrace(1);
 }
 /* Covariant cast for argument 1 (s) <p1:nullable Object> isa Couple#1 */
@@ -3365,7 +3458,7 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (!var1) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Couple#1", var_class_name6);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 575);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 596);
 show_backtrace(1);
 }
 var_f = p0;

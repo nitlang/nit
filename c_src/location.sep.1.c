@@ -331,7 +331,7 @@ long var15 /* : Int */;
 long var17 /* : Int */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 68);
 show_backtrace(1);
 } else {
@@ -394,7 +394,7 @@ long var15 /* : Int */;
 long var17 /* : Int */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 71);
 show_backtrace(1);
 } else {
@@ -478,7 +478,7 @@ var5 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__pend]))(self
 var_pend = var5;
 var6 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 81);
 show_backtrace(1);
 } else {
@@ -813,7 +813,7 @@ var8 = 1; /* easy <var5:Int> isa OTHER*/
 if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var9 = var4 < var5;
@@ -836,7 +836,7 @@ var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (!var15) {
 var_class_name18 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var19 = var11 > var12;
@@ -859,7 +859,7 @@ var25 = 1; /* easy <var22:Int> isa OTHER*/
 if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var29 = var21 > var22;
@@ -891,7 +891,7 @@ var40 = 1; /* easy <var37:Int> isa OTHER*/
 if (!var40) {
 var_class_name43 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var44 = var36 < var37;
@@ -914,7 +914,7 @@ var50 = 1; /* easy <var47:Int> isa OTHER*/
 if (!var50) {
 var_class_name53 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name53);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var54 = var46 > var47;
@@ -949,7 +949,7 @@ var66 = 1; /* easy <var63:Int> isa OTHER*/
 if (!var66) {
 var_class_name69 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var70 = var62 > var63;
@@ -1145,7 +1145,7 @@ var7 = 1; /* arg is null and recv is not */
 if (var7){
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 124);
 show_backtrace(1);
 } else {
@@ -1154,7 +1154,7 @@ var9 = ((val* (*)(val*))(var8->class->vft[COLOR_location__SourceFile__filename])
 var_file_part = var9;
 var10 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 125);
 show_backtrace(1);
 } else {
@@ -1169,7 +1169,7 @@ var16 = 1; /* easy <var13:Int> isa OTHER*/
 if (!var16) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var17 = var12 > var13;
@@ -1624,7 +1624,7 @@ var18 = 1; /* easy <var15:Int> isa OTHER*/
 if (!var18) {
 var_class_name21 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var22 = var14 < var15;
@@ -1655,7 +1655,7 @@ var33 = 1; /* easy <var30:Int> isa OTHER*/
 if (!var33) {
 var_class_name36 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var37 = var29 < var30;
@@ -1686,7 +1686,7 @@ var48 = 1; /* easy <var45:Int> isa OTHER*/
 if (!var48) {
 var_class_name51 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name51);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var52 = var44 < var45;
@@ -1707,7 +1707,7 @@ var57 = 1; /* easy <var54:Int> isa OTHER*/
 if (!var57) {
 var_class_name60 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var61 = var53 < var54;
@@ -1802,159 +1802,162 @@ int idtype;
 const char* var_class_name;
 short int var59 /* : Bool */;
 short int var_60 /* var : Bool */;
-long var61 /* : Int */;
+val* var61 /* : StringCharView */;
 long var62 /* : Int */;
-long var64 /* : Int */;
-val* var65 /* : nullable Object */;
-char var66 /* : Char */;
-short int var67 /* : Bool */;
-short int var69 /* : Bool */;
-char var70 /* : Char */;
-short int var71 /* : Bool */;
-short int var_72 /* var : Bool */;
-long var73 /* : Int */;
-long var74 /* : Int */;
+long var63 /* : Int */;
+long var65 /* : Int */;
+val* var66 /* : nullable Object */;
+char var67 /* : Char */;
+short int var68 /* : Bool */;
+short int var70 /* : Bool */;
+char var71 /* : Char */;
+short int var72 /* : Bool */;
+short int var_73 /* var : Bool */;
+val* var74 /* : StringCharView */;
+long var75 /* : Int */;
 long var76 /* : Int */;
-val* var77 /* : nullable Object */;
-char var78 /* : Char */;
-short int var79 /* : Bool */;
+long var78 /* : Int */;
+val* var79 /* : nullable Object */;
+char var80 /* : Char */;
 short int var81 /* : Bool */;
-char var82 /* : Char */;
 short int var83 /* : Bool */;
-long var84 /* : Int */;
-long var85 /* : Int */;
+char var84 /* : Char */;
+short int var85 /* : Bool */;
+long var86 /* : Int */;
 long var87 /* : Int */;
-long var88 /* : Int */;
 long var89 /* : Int */;
 long var90 /* : Int */;
+long var91 /* : Int */;
 long var92 /* : Int */;
-val* var93 /* : String */;
-val* var_lstart /* var lstart: String */;
 long var94 /* : Int */;
-short int var95 /* : Bool */;
+val* var95 /* : String */;
+val* var_lstart /* var lstart: String */;
+long var96 /* : Int */;
 short int var97 /* : Bool */;
-short int var98 /* : Bool */;
-long var99 /* : Int */;
+short int var99 /* : Bool */;
+short int var100 /* : Bool */;
 long var101 /* : Int */;
-long var102 /* : Int */;
 long var103 /* : Int */;
+long var104 /* : Int */;
 long var105 /* : Int */;
-val* var106 /* : nullable Object */;
-val* var_cend /* var cend: nullable Object */;
 long var107 /* : Int */;
 val* var108 /* : nullable Object */;
+val* var_cend /* var cend: nullable Object */;
 long var109 /* : Int */;
+val* var110 /* : nullable Object */;
 long var111 /* : Int */;
-long var112 /* : Int */;
 long var113 /* : Int */;
-short int var114 /* : Bool */;
+long var114 /* : Int */;
+long var115 /* : Int */;
 short int var116 /* : Bool */;
-int cltype117;
-int idtype118;
-const char* var_class_name119;
-short int var120 /* : Bool */;
-long var121 /* : Int */;
-long var122 /* : Int */;
+short int var118 /* : Bool */;
+int cltype119;
+int idtype120;
+const char* var_class_name121;
+short int var122 /* : Bool */;
+long var123 /* : Int */;
 long var124 /* : Int */;
-long var125 /* : Int */;
 long var126 /* : Int */;
+long var127 /* : Int */;
 long var128 /* : Int */;
-long var129 /* : Int */;
 long var130 /* : Int */;
+long var131 /* : Int */;
 long var132 /* : Int */;
-long var133 /* : Int */;
 long var134 /* : Int */;
 long var135 /* : Int */;
+long var136 /* : Int */;
 long var137 /* : Int */;
-val* var138 /* : String */;
-val* var_lmid /* var lmid: nullable Object */;
 long var139 /* : Int */;
+val* var140 /* : String */;
+val* var_lmid /* var lmid: nullable Object */;
 long var141 /* : Int */;
-long var142 /* : Int */;
 long var143 /* : Int */;
+long var144 /* : Int */;
 long var145 /* : Int */;
-long var146 /* : Int */;
+long var147 /* : Int */;
 long var148 /* : Int */;
-long var149 /* : Int */;
 long var150 /* : Int */;
 long var151 /* : Int */;
+long var152 /* : Int */;
 long var153 /* : Int */;
-val* var154 /* : String */;
-val* var_lend /* var lend: nullable Object */;
-static val* varonce155;
+long var155 /* : Int */;
 val* var156 /* : String */;
-char* var157 /* : NativeString */;
-long var158 /* : Int */;
-val* var159 /* : String */;
-static val* varonce160;
+val* var_lend /* var lend: nullable Object */;
+static val* varonce157;
+val* var158 /* : String */;
+char* var159 /* : NativeString */;
+long var160 /* : Int */;
 val* var161 /* : String */;
-char* var162 /* : NativeString */;
-long var163 /* : Int */;
-val* var164 /* : String */;
-val* var165 /* : Buffer */;
+static val* varonce162;
+val* var163 /* : String */;
+char* var164 /* : NativeString */;
+long var165 /* : Int */;
+val* var166 /* : String */;
+val* var167 /* : Buffer */;
 val* var_indent /* var indent: Buffer */;
-val* var166 /* : Range[Int] */;
-long var167 /* : Int */;
-long var168 /* : Int */;
+val* var168 /* : Range[Int] */;
+long var169 /* : Int */;
 long var170 /* : Int */;
-long var171 /* : Int */;
 long var172 /* : Int */;
+long var173 /* : Int */;
 long var174 /* : Int */;
-val* var175 /* : Discrete */;
-val* var176 /* : Discrete */;
-val* var177 /* : Iterator[nullable Object] */;
-short int var178 /* : Bool */;
-val* var179 /* : nullable Object */;
-long var_j /* var j: Int */;
-long var180 /* : Int */;
+long var176 /* : Int */;
+val* var177 /* : Discrete */;
+val* var178 /* : Discrete */;
+val* var179 /* : Iterator[nullable Object] */;
+short int var180 /* : Bool */;
 val* var181 /* : nullable Object */;
-char var182 /* : Char */;
-short int var183 /* : Bool */;
-short int var185 /* : Bool */;
-char var186 /* : Char */;
-char var187 /* : Char */;
-val* var188 /* : nullable Object */;
+long var_j /* var j: Int */;
+long var182 /* : Int */;
+val* var183 /* : StringCharView */;
+val* var184 /* : nullable Object */;
+char var185 /* : Char */;
+short int var186 /* : Bool */;
+short int var188 /* : Bool */;
 char var189 /* : Char */;
-val* var190 /* : nullable Object */;
-val* var192 /* : Array[Object] */;
-long var193 /* : Int */;
-val* var_194 /* var : Array[Object] */;
-static val* varonce195;
-val* var196 /* : String */;
-char* var197 /* : NativeString */;
-long var198 /* : Int */;
+char var190 /* : Char */;
+val* var191 /* : nullable Object */;
+char var192 /* : Char */;
+val* var193 /* : nullable Object */;
+val* var195 /* : Array[Object] */;
+long var196 /* : Int */;
+val* var_197 /* var : Array[Object] */;
+static val* varonce198;
 val* var199 /* : String */;
-static val* varonce200;
-val* var201 /* : String */;
-char* var202 /* : NativeString */;
-long var203 /* : Int */;
+char* var200 /* : NativeString */;
+long var201 /* : Int */;
+val* var202 /* : String */;
+static val* varonce203;
 val* var204 /* : String */;
-static val* varonce205;
-val* var206 /* : String */;
-char* var207 /* : NativeString */;
-long var208 /* : Int */;
+char* var205 /* : NativeString */;
+long var206 /* : Int */;
+val* var207 /* : String */;
+static val* varonce208;
 val* var209 /* : String */;
-static val* varonce210;
-val* var211 /* : String */;
-char* var212 /* : NativeString */;
-long var213 /* : Int */;
+char* var210 /* : NativeString */;
+long var211 /* : Int */;
+val* var212 /* : String */;
+static val* varonce213;
 val* var214 /* : String */;
-static val* varonce215;
-val* var216 /* : String */;
-char* var217 /* : NativeString */;
-long var218 /* : Int */;
+char* var215 /* : NativeString */;
+long var216 /* : Int */;
+val* var217 /* : String */;
+static val* varonce218;
 val* var219 /* : String */;
-static val* varonce220;
-val* var221 /* : String */;
-char* var222 /* : NativeString */;
-long var223 /* : Int */;
+char* var220 /* : NativeString */;
+long var221 /* : Int */;
+val* var222 /* : String */;
+static val* varonce223;
 val* var224 /* : String */;
-static val* varonce225;
-val* var226 /* : String */;
-char* var227 /* : NativeString */;
-long var228 /* : Int */;
+char* var225 /* : NativeString */;
+long var226 /* : Int */;
+val* var227 /* : String */;
+static val* varonce228;
 val* var229 /* : String */;
-val* var230 /* : String */;
+char* var230 /* : NativeString */;
+long var231 /* : Int */;
+val* var232 /* : String */;
+val* var233 /* : String */;
 var_color = p0;
 var1 = 27;
 { /* Inline kernel#Int#ascii (var1) */
@@ -2036,7 +2039,7 @@ var38 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__line_start
 var_i = var38;
 var39 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
 if (var39 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 174);
 show_backtrace(1);
 } else {
@@ -2055,7 +2058,7 @@ var_line_start = var46;
 var_line_end = var_line_start;
 var47 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
 if (var47 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 176);
 show_backtrace(1);
 } else {
@@ -2078,7 +2081,7 @@ var58 = 1; /* easy <var55:Int> isa OTHER*/
 if (!var58) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var59 = var52 < var55;
@@ -2088,348 +2091,351 @@ RET_LABEL57:(void)0;
 }
 var_60 = var56;
 if (var56){
-var61 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var61) */
-var64 = var_line_end + var61;
-var62 = var64;
-goto RET_LABEL63;
-RET_LABEL63:(void)0;
+var61 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
+var62 = 1;
+{ /* Inline kernel#Int#+ (var_line_end,var62) */
+var65 = var_line_end + var62;
+var63 = var65;
+goto RET_LABEL64;
+RET_LABEL64:(void)0;
 }
-var65 = ((val* (*)(val*, long))(var_string->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_string, var62) /* [] on <var_string:String>*/;
-var66 = '\n';
-{ /* Inline kernel#Char#!= (var65,var66) */
-var69 = (var65 != NULL) && (var65->class == &class_kernel__Char);
-if (var69) {
-var70 = ((struct instance_kernel__Char*)var65)->value; /* autounbox from nullable Object to Char */;
-var69 = (var70 == var66);
+var66 = ((val* (*)(val*, long))(var61->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var61, var63) /* [] on <var61:StringCharView>*/;
+var67 = '\n';
+{ /* Inline kernel#Char#!= (var66,var67) */
+var70 = (var66 != NULL) && (var66->class == &class_kernel__Char);
+if (var70) {
+var71 = ((struct instance_kernel__Char*)var66)->value; /* autounbox from nullable Object to Char */;
+var70 = (var71 == var67);
 }
-var71 = !var69;
-var67 = var71;
-goto RET_LABEL68;
-RET_LABEL68:(void)0;
+var72 = !var70;
+var68 = var72;
+goto RET_LABEL69;
+RET_LABEL69:(void)0;
 }
-var50 = var67;
+var50 = var68;
 } else {
 var50 = var_60;
 }
-var_72 = var50;
+var_73 = var50;
 if (var50){
-var73 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var73) */
-var76 = var_line_end + var73;
-var74 = var76;
-goto RET_LABEL75;
-RET_LABEL75:(void)0;
+var74 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
+var75 = 1;
+{ /* Inline kernel#Int#+ (var_line_end,var75) */
+var78 = var_line_end + var75;
+var76 = var78;
+goto RET_LABEL77;
+RET_LABEL77:(void)0;
 }
-var77 = ((val* (*)(val*, long))(var_string->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_string, var74) /* [] on <var_string:String>*/;
-var78 = '\15';
-{ /* Inline kernel#Char#!= (var77,var78) */
-var81 = (var77 != NULL) && (var77->class == &class_kernel__Char);
-if (var81) {
-var82 = ((struct instance_kernel__Char*)var77)->value; /* autounbox from nullable Object to Char */;
-var81 = (var82 == var78);
+var79 = ((val* (*)(val*, long))(var74->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var74, var76) /* [] on <var74:StringCharView>*/;
+var80 = '\15';
+{ /* Inline kernel#Char#!= (var79,var80) */
+var83 = (var79 != NULL) && (var79->class == &class_kernel__Char);
+if (var83) {
+var84 = ((struct instance_kernel__Char*)var79)->value; /* autounbox from nullable Object to Char */;
+var83 = (var84 == var80);
 }
-var83 = !var81;
-var79 = var83;
-goto RET_LABEL80;
-RET_LABEL80:(void)0;
+var85 = !var83;
+var81 = var85;
+goto RET_LABEL82;
+RET_LABEL82:(void)0;
 }
-var49 = var79;
+var49 = var81;
 } else {
-var49 = var_72;
+var49 = var_73;
 }
 if (!var49) break;
-var84 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var84) */
-var87 = var_line_end + var84;
-var85 = var87;
-goto RET_LABEL86;
-RET_LABEL86:(void)0;
+var86 = 1;
+{ /* Inline kernel#Int#+ (var_line_end,var86) */
+var89 = var_line_end + var86;
+var87 = var89;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
 }
-var_line_end = var85;
+var_line_end = var87;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var88 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-var89 = 1;
-{ /* Inline kernel#Int#- (var88,var89) */
-var92 = var88 - var89;
-var90 = var92;
-goto RET_LABEL91;
-RET_LABEL91:(void)0;
+var90 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
+var91 = 1;
+{ /* Inline kernel#Int#- (var90,var91) */
+var94 = var90 - var91;
+var92 = var94;
+goto RET_LABEL93;
+RET_LABEL93:(void)0;
 }
-var93 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var_line_start, var90) /* substring on <var_string:String>*/;
-var_lstart = var93;
-var94 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__line_end]))(var_l) /* line_end on <var_l:Location>*/;
-{ /* Inline kernel#Int#!= (var_i,var94) */
-var97 = var_i == var94;
-var98 = !var97;
-var95 = var98;
-goto RET_LABEL96;
-RET_LABEL96:(void)0;
+var95 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var_line_start, var92) /* substring on <var_string:String>*/;
+var_lstart = var95;
+var96 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__line_end]))(var_l) /* line_end on <var_l:Location>*/;
+{ /* Inline kernel#Int#!= (var_i,var96) */
+var99 = var_i == var96;
+var100 = !var99;
+var97 = var100;
+goto RET_LABEL98;
+RET_LABEL98:(void)0;
 }
-if (var95){
+if (var97){
 { /* Inline kernel#Int#- (var_line_end,var_line_start) */
-var101 = var_line_end - var_line_start;
-var99 = var101;
-goto RET_LABEL100;
-RET_LABEL100:(void)0;
+var103 = var_line_end - var_line_start;
+var101 = var103;
+goto RET_LABEL102;
+RET_LABEL102:(void)0;
 }
-var102 = 1;
-{ /* Inline kernel#Int#+ (var99,var102) */
-var105 = var99 + var102;
-var103 = var105;
-goto RET_LABEL104;
-RET_LABEL104:(void)0;
+var104 = 1;
+{ /* Inline kernel#Int#+ (var101,var104) */
+var107 = var101 + var104;
+var105 = var107;
+goto RET_LABEL106;
+RET_LABEL106:(void)0;
 }
-var106 = BOX_kernel__Int(var103); /* autobox from Int to nullable Object */
-var_cend = var106;
-} else {
-var107 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_end]))(var_l) /* column_end on <var_l:Location>*/;
-var108 = BOX_kernel__Int(var107); /* autobox from Int to nullable Object */
+var108 = BOX_kernel__Int(var105); /* autobox from Int to nullable Object */
 var_cend = var108;
+} else {
+var109 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_end]))(var_l) /* column_end on <var_l:Location>*/;
+var110 = BOX_kernel__Int(var109); /* autobox from Int to nullable Object */
+var_cend = var110;
 }
 { /* Inline kernel#Int#+ (var_line_start,var_cend) */
-var111 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var112 = var_line_start + var111;
-var109 = var112;
-goto RET_LABEL110;
-RET_LABEL110:(void)0;
+var113 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var114 = var_line_start + var113;
+var111 = var114;
+goto RET_LABEL112;
+RET_LABEL112:(void)0;
 }
-var113 = ((long (*)(val*))(var_string->class->vft[COLOR_abstract_collection__Collection__length]))(var_string) /* length on <var_string:String>*/;
-{ /* Inline kernel#Int#<= (var109,var113) */
-/* Covariant cast for argument 0 (i) <var113:Int> isa OTHER */
-/* <var113:Int> isa OTHER */
-var116 = 1; /* easy <var113:Int> isa OTHER*/
-if (!var116) {
-var_class_name119 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name119);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
+var115 = ((long (*)(val*))(var_string->class->vft[COLOR_abstract_collection__Collection__length]))(var_string) /* length on <var_string:String>*/;
+{ /* Inline kernel#Int#<= (var111,var115) */
+/* Covariant cast for argument 0 (i) <var115:Int> isa OTHER */
+/* <var115:Int> isa OTHER */
+var118 = 1; /* easy <var115:Int> isa OTHER*/
+if (!var118) {
+var_class_name121 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name121);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
 show_backtrace(1);
 }
-var120 = var109 <= var113;
-var114 = var120;
-goto RET_LABEL115;
-RET_LABEL115:(void)0;
+var122 = var111 <= var115;
+var116 = var122;
+goto RET_LABEL117;
+RET_LABEL117:(void)0;
 }
-if (var114){
-var121 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#+ (var_line_start,var121) */
-var124 = var_line_start + var121;
-var122 = var124;
-goto RET_LABEL123;
-RET_LABEL123:(void)0;
+if (var116){
+var123 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
+{ /* Inline kernel#Int#+ (var_line_start,var123) */
+var126 = var_line_start + var123;
+var124 = var126;
+goto RET_LABEL125;
+RET_LABEL125:(void)0;
 }
-var125 = 1;
-{ /* Inline kernel#Int#- (var122,var125) */
-var128 = var122 - var125;
-var126 = var128;
-goto RET_LABEL127;
-RET_LABEL127:(void)0;
+var127 = 1;
+{ /* Inline kernel#Int#- (var124,var127) */
+var130 = var124 - var127;
+var128 = var130;
+goto RET_LABEL129;
+RET_LABEL129:(void)0;
 }
-var129 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#- (var_cend,var129) */
-var132 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var133 = var132 - var129;
-var130 = var133;
-goto RET_LABEL131;
-RET_LABEL131:(void)0;
+var131 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
+{ /* Inline kernel#Int#- (var_cend,var131) */
+var134 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var135 = var134 - var131;
+var132 = var135;
+goto RET_LABEL133;
+RET_LABEL133:(void)0;
 }
-var134 = 1;
-{ /* Inline kernel#Int#+ (var130,var134) */
-var137 = var130 + var134;
-var135 = var137;
-goto RET_LABEL136;
-RET_LABEL136:(void)0;
+var136 = 1;
+{ /* Inline kernel#Int#+ (var132,var136) */
+var139 = var132 + var136;
+var137 = var139;
+goto RET_LABEL138;
+RET_LABEL138:(void)0;
 }
-var138 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var126, var135) /* substring on <var_string:String>*/;
-var_lmid = var138;
+var140 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var128, var137) /* substring on <var_string:String>*/;
+var_lmid = var140;
 { /* Inline kernel#Int#+ (var_line_start,var_cend) */
-var141 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var142 = var_line_start + var141;
-var139 = var142;
-goto RET_LABEL140;
-RET_LABEL140:(void)0;
+var143 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var144 = var_line_start + var143;
+var141 = var144;
+goto RET_LABEL142;
+RET_LABEL142:(void)0;
 }
 { /* Inline kernel#Int#- (var_line_end,var_line_start) */
-var145 = var_line_end - var_line_start;
-var143 = var145;
-goto RET_LABEL144;
-RET_LABEL144:(void)0;
+var147 = var_line_end - var_line_start;
+var145 = var147;
+goto RET_LABEL146;
+RET_LABEL146:(void)0;
 }
-{ /* Inline kernel#Int#- (var143,var_cend) */
-var148 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var149 = var143 - var148;
-var146 = var149;
-goto RET_LABEL147;
-RET_LABEL147:(void)0;
+{ /* Inline kernel#Int#- (var145,var_cend) */
+var150 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var151 = var145 - var150;
+var148 = var151;
+goto RET_LABEL149;
+RET_LABEL149:(void)0;
 }
-var150 = 1;
-{ /* Inline kernel#Int#+ (var146,var150) */
-var153 = var146 + var150;
-var151 = var153;
-goto RET_LABEL152;
-RET_LABEL152:(void)0;
+var152 = 1;
+{ /* Inline kernel#Int#+ (var148,var152) */
+var155 = var148 + var152;
+var153 = var155;
+goto RET_LABEL154;
+RET_LABEL154:(void)0;
 }
-var154 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var139, var151) /* substring on <var_string:String>*/;
-var_lend = var154;
+var156 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var141, var153) /* substring on <var_string:String>*/;
+var_lend = var156;
 } else {
-if (varonce155) {
-var156 = varonce155;
+if (varonce157) {
+var158 = varonce157;
 } else {
-var157 = "";
-var158 = 0;
-var159 = string__NativeString__to_s_with_length(var157, var158);
-var156 = var159;
-varonce155 = var156;
+var159 = "";
+var160 = 0;
+var161 = string__NativeString__to_s_with_length(var159, var160);
+var158 = var161;
+varonce157 = var158;
 }
-var_lmid = var156;
-if (varonce160) {
-var161 = varonce160;
+var_lmid = var158;
+if (varonce162) {
+var163 = varonce162;
 } else {
-var162 = "";
-var163 = 0;
-var164 = string__NativeString__to_s_with_length(var162, var163);
-var161 = var164;
-varonce160 = var161;
+var164 = "";
+var165 = 0;
+var166 = string__NativeString__to_s_with_length(var164, var165);
+var163 = var166;
+varonce162 = var163;
 }
-var_lend = var161;
+var_lend = var163;
 }
-var165 = NEW_string__Buffer(&type_string__Buffer);
-((void (*)(val*))(var165->class->vft[COLOR_string__Buffer__init]))(var165) /* init on <var165:Buffer>*/;
-var_indent = var165;
-var166 = NEW_range__Range(&type_range__Rangekernel__Int);
-var167 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#+ (var_line_start,var167) */
-var170 = var_line_start + var167;
-var168 = var170;
-goto RET_LABEL169;
-RET_LABEL169:(void)0;
+var167 = NEW_string__Buffer(&type_string__Buffer);
+((void (*)(val*))(var167->class->vft[COLOR_string__Buffer__init]))(var167) /* init on <var167:Buffer>*/;
+var_indent = var167;
+var168 = NEW_range__Range(&type_range__Rangekernel__Int);
+var169 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
+{ /* Inline kernel#Int#+ (var_line_start,var169) */
+var172 = var_line_start + var169;
+var170 = var172;
+goto RET_LABEL171;
+RET_LABEL171:(void)0;
 }
-var171 = 1;
-{ /* Inline kernel#Int#- (var168,var171) */
-var174 = var168 - var171;
-var172 = var174;
-goto RET_LABEL173;
-RET_LABEL173:(void)0;
+var173 = 1;
+{ /* Inline kernel#Int#- (var170,var173) */
+var176 = var170 - var173;
+var174 = var176;
+goto RET_LABEL175;
+RET_LABEL175:(void)0;
 }
-var175 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
-var176 = BOX_kernel__Int(var172); /* autobox from Int to Discrete */
-((void (*)(val*, val*, val*))(var166->class->vft[COLOR_range__Range__without_last]))(var166, var175, var176) /* without_last on <var166:Range[Int]>*/;
-var177 = ((val* (*)(val*))(var166->class->vft[COLOR_abstract_collection__Collection__iterator]))(var166) /* iterator on <var166:Range[Int]>*/;
+var177 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
+var178 = BOX_kernel__Int(var174); /* autobox from Int to Discrete */
+((void (*)(val*, val*, val*))(var168->class->vft[COLOR_range__Range__without_last]))(var168, var177, var178) /* without_last on <var168:Range[Int]>*/;
+var179 = ((val* (*)(val*))(var168->class->vft[COLOR_abstract_collection__Collection__iterator]))(var168) /* iterator on <var168:Range[Int]>*/;
 for(;;) {
-var178 = ((short int (*)(val*))(var177->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var177) /* is_ok on <var177:Iterator[nullable Object]>*/;
-if(!var178) break;
-var179 = ((val* (*)(val*))(var177->class->vft[COLOR_abstract_collection__Iterator__item]))(var177) /* item on <var177:Iterator[nullable Object]>*/;
-var180 = ((struct instance_kernel__Int*)var179)->value; /* autounbox from nullable Object to Int */;
-var_j = var180;
-var181 = ((val* (*)(val*, long))(var_string->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_string, var_j) /* [] on <var_string:String>*/;
-var182 = '\11';
-{ /* Inline kernel#Char#== (var181,var182) */
-var185 = (var181 != NULL) && (var181->class == &class_kernel__Char);
-if (var185) {
-var186 = ((struct instance_kernel__Char*)var181)->value; /* autounbox from nullable Object to Char */;
-var185 = (var186 == var182);
+var180 = ((short int (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var179) /* is_ok on <var179:Iterator[nullable Object]>*/;
+if(!var180) break;
+var181 = ((val* (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__item]))(var179) /* item on <var179:Iterator[nullable Object]>*/;
+var182 = ((struct instance_kernel__Int*)var181)->value; /* autounbox from nullable Object to Int */;
+var_j = var182;
+var183 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
+var184 = ((val* (*)(val*, long))(var183->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var183, var_j) /* [] on <var183:StringCharView>*/;
+var185 = '\11';
+{ /* Inline kernel#Char#== (var184,var185) */
+var188 = (var184 != NULL) && (var184->class == &class_kernel__Char);
+if (var188) {
+var189 = ((struct instance_kernel__Char*)var184)->value; /* autounbox from nullable Object to Char */;
+var188 = (var189 == var185);
 }
-var183 = var185;
-goto RET_LABEL184;
-RET_LABEL184:(void)0;
+var186 = var188;
+goto RET_LABEL187;
+RET_LABEL187:(void)0;
 }
-if (var183){
-var187 = '\11';
-var188 = BOX_kernel__Char(var187); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var188) /* add on <var_indent:Buffer>*/;
+if (var186){
+var190 = '\11';
+var191 = BOX_kernel__Char(var190); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var191) /* add on <var_indent:Buffer>*/;
 } else {
-var189 = ' ';
-var190 = BOX_kernel__Char(var189); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var190) /* add on <var_indent:Buffer>*/;
+var192 = ' ';
+var193 = BOX_kernel__Char(var192); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var193) /* add on <var_indent:Buffer>*/;
 }
-CONTINUE_label191: (void)0;
-((void (*)(val*))(var177->class->vft[COLOR_abstract_collection__Iterator__next]))(var177) /* next on <var177:Iterator[nullable Object]>*/;
+CONTINUE_label194: (void)0;
+((void (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__next]))(var179) /* next on <var179:Iterator[nullable Object]>*/;
 }
-BREAK_label191: (void)0;
-var192 = NEW_array__Array(&type_array__Arraykernel__Object);
-var193 = 13;
-((void (*)(val*, long))(var192->class->vft[COLOR_array__Array__with_capacity]))(var192, var193) /* with_capacity on <var192:Array[Object]>*/;
-var_194 = var192;
-if (varonce195) {
-var196 = varonce195;
+BREAK_label194: (void)0;
+var195 = NEW_array__Array(&type_array__Arraykernel__Object);
+var196 = 13;
+((void (*)(val*, long))(var195->class->vft[COLOR_array__Array__with_capacity]))(var195, var196) /* with_capacity on <var195:Array[Object]>*/;
+var_197 = var195;
+if (varonce198) {
+var199 = varonce198;
 } else {
-var197 = "\11";
-var198 = 1;
-var199 = string__NativeString__to_s_with_length(var197, var198);
-var196 = var199;
-varonce195 = var196;
+var200 = "\11";
+var201 = 1;
+var202 = string__NativeString__to_s_with_length(var200, var201);
+var199 = var202;
+varonce198 = var199;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var196) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_lstart) /* add on <var_194:Array[Object]>*/;
-if (varonce200) {
-var201 = varonce200;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var199) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lstart) /* add on <var_197:Array[Object]>*/;
+if (varonce203) {
+var204 = varonce203;
 } else {
-var202 = "";
-var203 = 0;
-var204 = string__NativeString__to_s_with_length(var202, var203);
-var201 = var204;
-varonce200 = var201;
+var205 = "";
+var206 = 0;
+var207 = string__NativeString__to_s_with_length(var205, var206);
+var204 = var207;
+varonce203 = var204;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var201) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_col) /* add on <var_194:Array[Object]>*/;
-if (varonce205) {
-var206 = varonce205;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var204) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_col) /* add on <var_197:Array[Object]>*/;
+if (varonce208) {
+var209 = varonce208;
 } else {
-var207 = "";
-var208 = 0;
-var209 = string__NativeString__to_s_with_length(var207, var208);
-var206 = var209;
-varonce205 = var206;
+var210 = "";
+var211 = 0;
+var212 = string__NativeString__to_s_with_length(var210, var211);
+var209 = var212;
+varonce208 = var209;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var206) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_lmid) /* add on <var_194:Array[Object]>*/;
-if (varonce210) {
-var211 = varonce210;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var209) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lmid) /* add on <var_197:Array[Object]>*/;
+if (varonce213) {
+var214 = varonce213;
 } else {
-var212 = "";
-var213 = 0;
-var214 = string__NativeString__to_s_with_length(var212, var213);
-var211 = var214;
-varonce210 = var211;
+var215 = "";
+var216 = 0;
+var217 = string__NativeString__to_s_with_length(var215, var216);
+var214 = var217;
+varonce213 = var214;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var211) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_def) /* add on <var_194:Array[Object]>*/;
-if (varonce215) {
-var216 = varonce215;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var214) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_def) /* add on <var_197:Array[Object]>*/;
+if (varonce218) {
+var219 = varonce218;
 } else {
-var217 = "";
-var218 = 0;
-var219 = string__NativeString__to_s_with_length(var217, var218);
-var216 = var219;
-varonce215 = var216;
+var220 = "";
+var221 = 0;
+var222 = string__NativeString__to_s_with_length(var220, var221);
+var219 = var222;
+varonce218 = var219;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var216) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_lend) /* add on <var_194:Array[Object]>*/;
-if (varonce220) {
-var221 = varonce220;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var219) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lend) /* add on <var_197:Array[Object]>*/;
+if (varonce223) {
+var224 = varonce223;
 } else {
-var222 = "\n\11";
-var223 = 2;
-var224 = string__NativeString__to_s_with_length(var222, var223);
-var221 = var224;
-varonce220 = var221;
+var225 = "\n\11";
+var226 = 2;
+var227 = string__NativeString__to_s_with_length(var225, var226);
+var224 = var227;
+varonce223 = var224;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var221) /* add on <var_194:Array[Object]>*/;
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var_indent) /* add on <var_194:Array[Object]>*/;
-if (varonce225) {
-var226 = varonce225;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var224) /* add on <var_197:Array[Object]>*/;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_indent) /* add on <var_197:Array[Object]>*/;
+if (varonce228) {
+var229 = varonce228;
 } else {
-var227 = "^";
-var228 = 1;
-var229 = string__NativeString__to_s_with_length(var227, var228);
-var226 = var229;
-varonce225 = var226;
+var230 = "^";
+var231 = 1;
+var232 = string__NativeString__to_s_with_length(var230, var231);
+var229 = var232;
+varonce228 = var229;
 }
-((void (*)(val*, val*))(var_194->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_194, var226) /* add on <var_194:Array[Object]>*/;
-var230 = ((val* (*)(val*))(var_194->class->vft[COLOR_string__Object__to_s]))(var_194) /* to_s on <var_194:Array[Object]>*/;
-var = var230;
+((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var229) /* add on <var_197:Array[Object]>*/;
+var233 = ((val* (*)(val*))(var_197->class->vft[COLOR_string__Object__to_s]))(var_197) /* to_s on <var_197:Array[Object]>*/;
+var = var233;
 goto RET_LABEL;
 RET_LABEL:;
 return var;

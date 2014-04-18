@@ -4,7 +4,7 @@ void stream__IOS__close(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "close", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 20);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 27);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -19,7 +19,7 @@ long var /* : Int */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "read_char", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 27);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 34);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -79,7 +79,7 @@ var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var7 = var_i > var3;
@@ -106,7 +106,7 @@ var14 = 1; /* easy <var11:Int> isa OTHER*/
 if (!var14) {
 var_class_name17 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var18 = var_c >= var11;
@@ -163,7 +163,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_stream__IStream__eof]))(sel
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 47);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 54);
 show_backtrace(1);
 }
 var3 = NEW_string__Buffer(&type_string__Buffer);
@@ -222,7 +222,7 @@ var8 = 1; /* easy <var5:Int> isa OTHER*/
 if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var9 = var_c >= var5;
@@ -273,10 +273,11 @@ short int var8 /* : Bool */;
 char var9 /* : Char */;
 char var11 /* : Char */;
 char var_c /* var c: Char */;
-val* var12 /* : nullable Object */;
-char var13 /* : Char */;
-short int var14 /* : Bool */;
-short int var16 /* : Bool */;
+val* var12 /* : StringCharView */;
+val* var13 /* : nullable Object */;
+char var14 /* : Char */;
+short int var15 /* : Bool */;
+short int var17 /* : Bool */;
 var_s = p0;
 for(;;) {
 var = ((long (*)(val*))(self->class->vft[COLOR_stream__IStream__read_char]))(self) /* read_char on <self:IStream>*/;
@@ -308,16 +309,17 @@ goto RET_LABEL10;
 RET_LABEL10:(void)0;
 }
 var_c = var9;
-var12 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__push]))(var_s, var12) /* push on <var_s:Buffer>*/;
-var13 = '\n';
-{ /* Inline kernel#Char#== (var_c,var13) */
-var16 = var_c == var13;
-var14 = var16;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
+var12 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__AbstractString__chars]))(var_s) /* chars on <var_s:Buffer>*/;
+var13 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var12->class->vft[COLOR_abstract_collection__Sequence__push]))(var12, var13) /* push on <var12:StringCharView(BufferCharView)>*/;
+var14 = '\n';
+{ /* Inline kernel#Char#== (var_c,var14) */
+var17 = var_c == var14;
+var15 = var17;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
 }
-if (var14){
+if (var15){
 goto RET_LABEL;
 } else {
 }
@@ -338,7 +340,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "eof", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 79);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 86);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -357,7 +359,7 @@ void stream__OStream__write(val* self, val* p0) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "write", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 87);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 94);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -372,7 +374,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "is_writable", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 90);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 97);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -385,6 +387,32 @@ var1 = stream__OStream__is_writable(self);
 var = var1;
 RET_LABEL:;
 return var;
+}
+/* method stream#Streamable#write_to for (self: Streamable, OStream) */
+void stream__Streamable__write_to(val* self, val* p0) {
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "write_to", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 106);
+show_backtrace(1);
+RET_LABEL:;
+}
+/* method stream#Streamable#write_to for (self: Object, OStream) */
+void VIRTUAL_stream__Streamable__write_to(val* self, val* p0) {
+stream__Streamable__write_to(self, p0);
+RET_LABEL:;
+}
+/* method stream#String#write_to for (self: String, OStream) */
+void stream__String__write_to(val* self, val* p0) {
+val* var_stream /* var stream: OStream */;
+var_stream = p0;
+((void (*)(val*, val*))(var_stream->class->vft[COLOR_stream__OStream__write]))(var_stream, self) /* write on <var_stream:OStream>*/;
+RET_LABEL:;
+}
+/* method stream#String#write_to for (self: Object, OStream) */
+void VIRTUAL_stream__String__write_to(val* self, val* p0) {
+stream__String__write_to(self, p0);
+RET_LABEL:;
 }
 /* method stream#BufferedIStream#read_char for (self: BufferedIStream): Int */
 long stream__BufferedIStream__read_char(val* self) {
@@ -413,29 +441,30 @@ long var20 /* : Int */;
 long var21 /* : Int */;
 long var23 /* : Int */;
 val* var24 /* : nullable Buffer */;
-long var25 /* : Int */;
-val* var26 /* : nullable Object */;
-char var27 /* : Char */;
+val* var25 /* : StringCharView */;
+long var26 /* : Int */;
+val* var27 /* : nullable Object */;
+char var28 /* : Char */;
 char var_c /* var c: Char */;
 val* var_ /* var : BufferedIStream */;
-long var28 /* : Int */;
 long var29 /* : Int */;
 long var30 /* : Int */;
-long var32 /* : Int */;
+long var31 /* : Int */;
 long var33 /* : Int */;
-long var35 /* : Int */;
+long var34 /* : Int */;
+long var36 /* : Int */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_stream__IStream__eof]))(self) /* eof on <self:BufferedIStream>*/;
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 99);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 121);
 show_backtrace(1);
 }
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 var4 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 100);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 122);
 show_backtrace(1);
 } else {
 var5 = ((long (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__length]))(var4) /* length on <var4:nullable Buffer>*/;
@@ -447,7 +476,7 @@ var8 = 1; /* easy <var5:Int> isa OTHER*/
 if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var9 = var3 >= var5;
@@ -462,8 +491,8 @@ if (var6){
 var10 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 var11 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 103);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 125);
 show_backtrace(1);
 } else {
 var12 = ((long (*)(val*))(var11->class->vft[COLOR_abstract_collection__Collection__length]))(var11) /* length on <var11:nullable Buffer>*/;
@@ -475,7 +504,7 @@ var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (!var15) {
 var_class_name18 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var19 = var10 >= var12;
@@ -496,33 +525,34 @@ goto RET_LABEL;
 } else {
 }
 var24 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
-var25 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 106);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 128);
 show_backtrace(1);
 } else {
-var26 = ((val* (*)(val*, long))(var24->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var24, var25) /* [] on <var24:nullable Buffer>*/;
+var25 = ((val* (*)(val*))(var24->class->vft[COLOR_string__AbstractString__chars]))(var24) /* chars on <var24:nullable Buffer>*/;
 }
-var27 = ((struct instance_kernel__Char*)var26)->value; /* autounbox from nullable Object to Char */;
-var_c = var27;
+var26 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
+var27 = ((val* (*)(val*, long))(var25->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var25, var26) /* [] on <var25:StringCharView(BufferCharView)>*/;
+var28 = ((struct instance_kernel__Char*)var27)->value; /* autounbox from nullable Object to Char */;
+var_c = var28;
 var_ = self;
-var28 = var_->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <var_:BufferedIStream> */
-var29 = 1;
-{ /* Inline kernel#Int#+ (var28,var29) */
-var32 = var28 + var29;
-var30 = var32;
-goto RET_LABEL31;
-RET_LABEL31:(void)0;
+var29 = var_->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <var_:BufferedIStream> */
+var30 = 1;
+{ /* Inline kernel#Int#+ (var29,var30) */
+var33 = var29 + var30;
+var31 = var33;
+goto RET_LABEL32;
+RET_LABEL32:(void)0;
 }
-var_->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var30; /* _buffer_pos on <var_:BufferedIStream> */
+var_->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var31; /* _buffer_pos on <var_:BufferedIStream> */
 { /* Inline kernel#Char#ascii (var_c) */
-var35 = (unsigned char)var_c;
-var33 = var35;
-goto RET_LABEL34;
-RET_LABEL34:(void)0;
+var36 = (unsigned char)var_c;
+var34 = var36;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
-var = var33;
+var = var34;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -581,14 +611,15 @@ int idtype35;
 const char* var_class_name36;
 short int var37 /* : Bool */;
 val* var38 /* : nullable Buffer */;
-val* var39 /* : nullable Object */;
-long var40 /* : Int */;
+val* var39 /* : StringCharView */;
+val* var40 /* : nullable Object */;
 long var41 /* : Int */;
-long var43 /* : Int */;
+long var42 /* : Int */;
 long var44 /* : Int */;
 long var45 /* : Int */;
-long var47 /* : Int */;
-val* var49 /* : String */;
+long var46 /* : Int */;
+long var48 /* : Int */;
+val* var50 /* : String */;
 var_i = p0;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*, long))(var1->class->vft[COLOR_string__Buffer__with_capacity]))(var1, var_i) /* with_capacity on <var1:Buffer>*/;
@@ -597,8 +628,8 @@ var2 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos
 var_j = var2;
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 115);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 137);
 show_backtrace(1);
 } else {
 var4 = ((long (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__length]))(var3) /* length on <var3:nullable Buffer>*/;
@@ -613,7 +644,7 @@ var8 = 1; /* easy <var5:Int> isa OTHER*/
 if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var9 = var_i > var5;
@@ -629,7 +660,7 @@ var12 = 1; /* easy <var_k:Int> isa OTHER*/
 if (!var12) {
 var_class_name15 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var16 = var_j >= var_k;
@@ -650,8 +681,8 @@ var19 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_po
 var_j = var19;
 var20 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var20 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 121);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 143);
 show_backtrace(1);
 } else {
 var21 = ((long (*)(val*))(var20->class->vft[COLOR_abstract_collection__Collection__length]))(var20) /* length on <var20:nullable Buffer>*/;
@@ -667,7 +698,7 @@ var25 = 1; /* easy <var_k:Int> isa OTHER*/
 if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var29 = var_j < var_k;
@@ -685,7 +716,7 @@ var33 = 1; /* easy <var30:Int> isa OTHER*/
 if (!var33) {
 var_class_name36 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var37 = var_i > var30;
@@ -700,38 +731,39 @@ var22 = var_;
 if (!var22) break;
 var38 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var38 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 124);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 146);
 show_backtrace(1);
 } else {
-var39 = ((val* (*)(val*, long))(var38->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var38, var_j) /* [] on <var38:nullable Buffer>*/;
+var39 = ((val* (*)(val*))(var38->class->vft[COLOR_string__AbstractString__chars]))(var38) /* chars on <var38:nullable Buffer>*/;
 }
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var39) /* add on <var_s:Buffer>*/;
-var40 = 1;
-{ /* Inline kernel#Int#+ (var_j,var40) */
-var43 = var_j + var40;
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var40 = ((val* (*)(val*, long))(var39->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var39, var_j) /* [] on <var39:StringCharView(BufferCharView)>*/;
+((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var40) /* add on <var_s:Buffer>*/;
+var41 = 1;
+{ /* Inline kernel#Int#+ (var_j,var41) */
+var44 = var_j + var41;
+var42 = var44;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
 }
-var_j = var41;
-var44 = 1;
-{ /* Inline kernel#Int#- (var_i,var44) */
-var47 = var_i - var44;
-var45 = var47;
-goto RET_LABEL46;
-RET_LABEL46:(void)0;
+var_j = var42;
+var45 = 1;
+{ /* Inline kernel#Int#- (var_i,var45) */
+var48 = var_i - var45;
+var46 = var48;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-var_i = var45;
+var_i = var46;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-CONTINUE_label48: (void)0;
+CONTINUE_label49: (void)0;
 }
-BREAK_label48: (void)0;
+BREAK_label49: (void)0;
 self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var_j; /* _buffer_pos on <self:BufferedIStream> */
-var49 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
-var = var49;
+var50 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
+var = var50;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -764,11 +796,12 @@ int idtype;
 const char* var_class_name;
 short int var10 /* : Bool */;
 val* var11 /* : nullable Buffer */;
-val* var12 /* : nullable Object */;
-long var13 /* : Int */;
+val* var12 /* : StringCharView */;
+val* var13 /* : nullable Object */;
 long var14 /* : Int */;
-long var16 /* : Int */;
-val* var18 /* : String */;
+long var15 /* : Int */;
+long var17 /* : Int */;
+val* var19 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
 var_s = var1;
@@ -780,8 +813,8 @@ var4 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos
 var_j = var4;
 var5 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 138);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 160);
 show_backtrace(1);
 } else {
 var6 = ((long (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__length]))(var5) /* length on <var5:nullable Buffer>*/;
@@ -795,7 +828,7 @@ var9 = 1; /* easy <var_k:Int> isa OTHER*/
 if (!var9) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var10 = var_j < var_k;
@@ -806,31 +839,32 @@ RET_LABEL8:(void)0;
 if (!var7) break;
 var11 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 140);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 162);
 show_backtrace(1);
 } else {
-var12 = ((val* (*)(val*, long))(var11->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var11, var_j) /* [] on <var11:nullable Buffer>*/;
+var12 = ((val* (*)(val*))(var11->class->vft[COLOR_string__AbstractString__chars]))(var11) /* chars on <var11:nullable Buffer>*/;
 }
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var12) /* add on <var_s:Buffer>*/;
-var13 = 1;
-{ /* Inline kernel#Int#+ (var_j,var13) */
-var16 = var_j + var13;
-var14 = var16;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
+var13 = ((val* (*)(val*, long))(var12->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var12, var_j) /* [] on <var12:StringCharView(BufferCharView)>*/;
+((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var13) /* add on <var_s:Buffer>*/;
+var14 = 1;
+{ /* Inline kernel#Int#+ (var_j,var14) */
+var17 = var_j + var14;
+var15 = var17;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
 }
-var_j = var14;
+var_j = var15;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
 self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var_j; /* _buffer_pos on <self:BufferedIStream> */
 ((void (*)(val*))(self->class->vft[COLOR_stream__BufferedIStream__fill_buffer]))(self) /* fill_buffer on <self:BufferedIStream>*/;
-CONTINUE_label17: (void)0;
+CONTINUE_label18: (void)0;
 }
-BREAK_label17: (void)0;
-var18 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
-var = var18;
+BREAK_label18: (void)0;
+var19 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
+var = var19;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -860,53 +894,55 @@ const char* var_class_name;
 short int var7 /* : Bool */;
 short int var_ /* var : Bool */;
 val* var8 /* : nullable Buffer */;
-val* var9 /* : nullable Object */;
-char var10 /* : Char */;
-short int var11 /* : Bool */;
-short int var13 /* : Bool */;
-char var14 /* : Char */;
-short int var15 /* : Bool */;
-long var16 /* : Int */;
+val* var9 /* : StringCharView */;
+val* var10 /* : nullable Object */;
+char var11 /* : Char */;
+short int var12 /* : Bool */;
+short int var14 /* : Bool */;
+char var15 /* : Char */;
+short int var16 /* : Bool */;
 long var17 /* : Int */;
-long var19 /* : Int */;
+long var18 /* : Int */;
 long var20 /* : Int */;
-short int var21 /* : Bool */;
-short int var23 /* : Bool */;
-int cltype24;
-int idtype25;
-const char* var_class_name26;
-short int var27 /* : Bool */;
-long var28 /* : Int */;
+long var21 /* : Int */;
+short int var22 /* : Bool */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+const char* var_class_name27;
+short int var28 /* : Bool */;
 long var29 /* : Int */;
-long var31 /* : Int */;
+long var30 /* : Int */;
 long var32 /* : Int */;
 long var33 /* : Int */;
-long var35 /* : Int */;
+long var34 /* : Int */;
 long var36 /* : Int */;
+long var37 /* : Int */;
 long var_j /* var j: Int */;
-short int var37 /* : Bool */;
-short int var39 /* : Bool */;
-int cltype40;
-int idtype41;
-const char* var_class_name42;
-short int var43 /* : Bool */;
-val* var44 /* : nullable Buffer */;
-val* var45 /* : nullable Object */;
-long var46 /* : Int */;
-long var47 /* : Int */;
+short int var38 /* : Bool */;
+short int var40 /* : Bool */;
+int cltype41;
+int idtype42;
+const char* var_class_name43;
+short int var44 /* : Bool */;
+val* var45 /* : nullable Buffer */;
+val* var46 /* : StringCharView */;
+val* var47 /* : nullable Object */;
+long var48 /* : Int */;
 long var49 /* : Int */;
-val* var51 /* : nullable Buffer */;
-long var52 /* : Int */;
-short int var53 /* : Bool */;
+long var51 /* : Int */;
+val* var53 /* : nullable Buffer */;
+long var54 /* : Int */;
 short int var55 /* : Bool */;
-int cltype56;
-int idtype57;
-const char* var_class_name58;
-short int var59 /* : Bool */;
-long var60 /* : Int */;
-long var61 /* : Int */;
+short int var57 /* : Bool */;
+int cltype58;
+int idtype59;
+const char* var_class_name60;
+short int var61 /* : Bool */;
+long var62 /* : Int */;
 long var63 /* : Int */;
-short int var64 /* : Bool */;
+long var65 /* : Int */;
+short int var66 /* : Bool */;
 var_s = p0;
 for(;;) {
 var = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
@@ -914,8 +950,8 @@ var_i = var;
 for(;;) {
 var2 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 154);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 176);
 show_backtrace(1);
 } else {
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:nullable Buffer>*/;
@@ -927,7 +963,7 @@ var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var7 = var_i < var3;
@@ -939,158 +975,160 @@ var_ = var4;
 if (var4){
 var8 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 154);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 176);
 show_backtrace(1);
 } else {
-var9 = ((val* (*)(val*, long))(var8->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var8, var_i) /* [] on <var8:nullable Buffer>*/;
+var9 = ((val* (*)(val*))(var8->class->vft[COLOR_string__AbstractString__chars]))(var8) /* chars on <var8:nullable Buffer>*/;
 }
-var10 = '\n';
-{ /* Inline kernel#Char#!= (var9,var10) */
-var13 = (var9 != NULL) && (var9->class == &class_kernel__Char);
-if (var13) {
-var14 = ((struct instance_kernel__Char*)var9)->value; /* autounbox from nullable Object to Char */;
-var13 = (var14 == var10);
+var10 = ((val* (*)(val*, long))(var9->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var9, var_i) /* [] on <var9:StringCharView(BufferCharView)>*/;
+var11 = '\n';
+{ /* Inline kernel#Char#!= (var10,var11) */
+var14 = (var10 != NULL) && (var10->class == &class_kernel__Char);
+if (var14) {
+var15 = ((struct instance_kernel__Char*)var10)->value; /* autounbox from nullable Object to Char */;
+var14 = (var15 == var11);
 }
-var15 = !var13;
-var11 = var15;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
+var16 = !var14;
+var12 = var16;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-var1 = var11;
+var1 = var12;
 } else {
 var1 = var_;
 }
 if (!var1) break;
-var16 = 1;
-{ /* Inline kernel#Int#+ (var_i,var16) */
-var19 = var_i + var16;
-var17 = var19;
-goto RET_LABEL18;
-RET_LABEL18:(void)0;
+var17 = 1;
+{ /* Inline kernel#Int#+ (var_i,var17) */
+var20 = var_i + var17;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
-var_i = var17;
+var_i = var18;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var20 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
-{ /* Inline kernel#Int#> (var_i,var20) */
-/* Covariant cast for argument 0 (i) <var20:Int> isa OTHER */
-/* <var20:Int> isa OTHER */
-var23 = 1; /* easy <var20:Int> isa OTHER*/
-if (!var23) {
-var_class_name26 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+var21 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
+{ /* Inline kernel#Int#> (var_i,var21) */
+/* Covariant cast for argument 0 (i) <var21:Int> isa OTHER */
+/* <var21:Int> isa OTHER */
+var24 = 1; /* easy <var21:Int> isa OTHER*/
+if (!var24) {
+var_class_name27 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
-var27 = var_i > var20;
-var21 = var27;
-goto RET_LABEL22;
-RET_LABEL22:(void)0;
+var28 = var_i > var21;
+var22 = var28;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
 }
-if (var21){
-var28 = ((long (*)(val*))(var_s->class->vft[COLOR_abstract_collection__Collection__length]))(var_s) /* length on <var_s:Buffer>*/;
-{ /* Inline kernel#Int#+ (var28,var_i) */
-var31 = var28 + var_i;
-var29 = var31;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+if (var22){
+var29 = ((long (*)(val*))(var_s->class->vft[COLOR_abstract_collection__Collection__length]))(var_s) /* length on <var_s:Buffer>*/;
+{ /* Inline kernel#Int#+ (var29,var_i) */
+var32 = var29 + var_i;
+var30 = var32;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-var32 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
-{ /* Inline kernel#Int#- (var29,var32) */
-var35 = var29 - var32;
-var33 = var35;
-goto RET_LABEL34;
-RET_LABEL34:(void)0;
+var33 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
+{ /* Inline kernel#Int#- (var30,var33) */
+var36 = var30 - var33;
+var34 = var36;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
-((void (*)(val*, long))(var_s->class->vft[COLOR_array__AbstractArray__enlarge]))(var_s, var33) /* enlarge on <var_s:Buffer>*/;
-var36 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
-var_j = var36;
+((void (*)(val*, long))(var_s->class->vft[COLOR_array__AbstractArray__enlarge]))(var_s, var34) /* enlarge on <var_s:Buffer>*/;
+var37 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
+var_j = var37;
 for(;;) {
 { /* Inline kernel#Int#< (var_j,var_i) */
 /* Covariant cast for argument 0 (i) <var_i:Int> isa OTHER */
 /* <var_i:Int> isa OTHER */
-var39 = 1; /* easy <var_i:Int> isa OTHER*/
-if (!var39) {
-var_class_name42 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name42);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+var40 = 1; /* easy <var_i:Int> isa OTHER*/
+if (!var40) {
+var_class_name43 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
-var43 = var_j < var_i;
-var37 = var43;
-goto RET_LABEL38;
-RET_LABEL38:(void)0;
+var44 = var_j < var_i;
+var38 = var44;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
 }
-if (!var37) break;
-var44 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
-if (var44 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 164);
-show_backtrace(1);
-} else {
-var45 = ((val* (*)(val*, long))(var44->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var44, var_j) /* [] on <var44:nullable Buffer>*/;
-}
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var45) /* add on <var_s:Buffer>*/;
-var46 = 1;
-{ /* Inline kernel#Int#+ (var_j,var46) */
-var49 = var_j + var46;
-var47 = var49;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
-}
-var_j = var47;
-CONTINUE_label50: (void)0;
-}
-BREAK_label50: (void)0;
-} else {
-}
-var51 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
-if (var51 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 169);
+if (!var38) break;
+var45 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
+if (var45 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 186);
 show_backtrace(1);
 } else {
-var52 = ((long (*)(val*))(var51->class->vft[COLOR_abstract_collection__Collection__length]))(var51) /* length on <var51:nullable Buffer>*/;
+var46 = ((val* (*)(val*))(var45->class->vft[COLOR_string__AbstractString__chars]))(var45) /* chars on <var45:nullable Buffer>*/;
 }
-{ /* Inline kernel#Int#< (var_i,var52) */
-/* Covariant cast for argument 0 (i) <var52:Int> isa OTHER */
-/* <var52:Int> isa OTHER */
-var55 = 1; /* easy <var52:Int> isa OTHER*/
-if (!var55) {
-var_class_name58 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name58);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+var47 = ((val* (*)(val*, long))(var46->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var46, var_j) /* [] on <var46:StringCharView(BufferCharView)>*/;
+((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var47) /* add on <var_s:Buffer>*/;
+var48 = 1;
+{ /* Inline kernel#Int#+ (var_j,var48) */
+var51 = var_j + var48;
+var49 = var51;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
+}
+var_j = var49;
+CONTINUE_label52: (void)0;
+}
+BREAK_label52: (void)0;
+} else {
+}
+var53 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
+if (var53 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 191);
+show_backtrace(1);
+} else {
+var54 = ((long (*)(val*))(var53->class->vft[COLOR_abstract_collection__Collection__length]))(var53) /* length on <var53:nullable Buffer>*/;
+}
+{ /* Inline kernel#Int#< (var_i,var54) */
+/* Covariant cast for argument 0 (i) <var54:Int> isa OTHER */
+/* <var54:Int> isa OTHER */
+var57 = 1; /* easy <var54:Int> isa OTHER*/
+if (!var57) {
+var_class_name60 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
-var59 = var_i < var52;
-var53 = var59;
-goto RET_LABEL54;
-RET_LABEL54:(void)0;
+var61 = var_i < var54;
+var55 = var61;
+goto RET_LABEL56;
+RET_LABEL56:(void)0;
 }
-if (var53){
-var60 = 1;
-{ /* Inline kernel#Int#+ (var_i,var60) */
-var63 = var_i + var60;
-var61 = var63;
-goto RET_LABEL62;
-RET_LABEL62:(void)0;
+if (var55){
+var62 = 1;
+{ /* Inline kernel#Int#+ (var_i,var62) */
+var65 = var_i + var62;
+var63 = var65;
+goto RET_LABEL64;
+RET_LABEL64:(void)0;
 }
-self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var61; /* _buffer_pos on <self:BufferedIStream> */
+self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var63; /* _buffer_pos on <self:BufferedIStream> */
 goto RET_LABEL;
 } else {
 self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var_i; /* _buffer_pos on <self:BufferedIStream> */
-var64 = ((short int (*)(val*))(self->class->vft[COLOR_stream__BufferedIStream__end_reached]))(self) /* end_reached on <self:BufferedIStream>*/;
-if (var64){
+var66 = ((short int (*)(val*))(self->class->vft[COLOR_stream__BufferedIStream__end_reached]))(self) /* end_reached on <self:BufferedIStream>*/;
+if (var66){
 goto RET_LABEL;
 } else {
 ((void (*)(val*))(self->class->vft[COLOR_stream__BufferedIStream__fill_buffer]))(self) /* fill_buffer on <self:BufferedIStream>*/;
 }
 }
-CONTINUE_label65: (void)0;
+CONTINUE_label67: (void)0;
 }
-BREAK_label65: (void)0;
+BREAK_label67: (void)0;
 RET_LABEL:;
 }
 /* method stream#BufferedIStream#append_line_to for (self: Object, Buffer) */
@@ -1116,8 +1154,8 @@ short int var9 /* : Bool */;
 var2 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 185);
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 207);
 show_backtrace(1);
 } else {
 var4 = ((long (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__length]))(var3) /* length on <var3:nullable Buffer>*/;
@@ -1129,7 +1167,7 @@ var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (!var7) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 266);
 show_backtrace(1);
 }
 var8 = var2 >= var4;
@@ -1163,7 +1201,7 @@ void stream__BufferedIStream__fill_buffer(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "fill_buffer", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 193);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 215);
 show_backtrace(1);
 RET_LABEL:;
 }
@@ -1178,7 +1216,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "end_reached", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 196);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 218);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -1513,7 +1551,7 @@ var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (!var7) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var8 = var_nb < var4;
@@ -1678,10 +1716,83 @@ return var;
 /* method stream#Object#intern_poll for (self: Object, Array[Int], Array[Int]): nullable Int */
 val* stream__Object__intern_poll(val* self, val* p0, val* p1) {
 val* var /* : nullable Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for stream#Object#intern_poll at lib/standard/stream.nit:298,2--171\n");
-show_backtrace(1);
+val* var1 /* : nullable Int */;
+struct nitni_instance* var_for_c_0;
+var_for_c_0 = malloc(sizeof(struct nitni_instance));
+var_for_c_0->value = self;
+struct nitni_instance* var_for_c_1;
+var_for_c_1 = malloc(sizeof(struct nitni_instance));
+var_for_c_1->value = p0;
+struct nitni_instance* var_for_c_2;
+var_for_c_2 = malloc(sizeof(struct nitni_instance));
+var_for_c_2->value = p1;
+struct nitni_instance* ret_var;
+ret_var = stream___Object_intern_poll___impl(var_for_c_0, var_for_c_1, var_for_c_2);
+var1 = ret_var->value;
+var = var1;
+goto RET_LABEL;
 RET_LABEL:;
 return var;
+}
+#ifndef NIT_NULL_null_Int
+#define NIT_NULL_null_Int
+struct nitni_instance * stream___null_Int() {
+struct nitni_instance* ret_for_c;
+ret_for_c = malloc(sizeof(struct nitni_instance));
+ret_for_c->value = NULL;
+return ret_for_c;
+}
+#endif
+#ifndef NIT_NULL_null_Object
+#define NIT_NULL_null_Object
+struct nitni_instance * stream___null_Object() {
+struct nitni_instance* ret_for_c;
+ret_for_c = malloc(sizeof(struct nitni_instance));
+ret_for_c->value = NULL;
+return ret_for_c;
+}
+#endif
+/* nitni callback for standard::abstract_collection::Collection::length */
+int stream___Array_of_Int_length( struct nitni_instance * recv ) {
+long var /* : Int */;
+var = ((long (*)(val*))(recv->value->class->vft[COLOR_abstract_collection__Collection__length]))(recv->value) /* length on <recv->value:Array[Int]>*/;
+return var;
+}
+/* nitni callback for standard::abstract_collection::SequenceRead::[] */
+int stream___Array_of_Int__index( struct nitni_instance * recv, int index ) {
+val* var /* : nullable Object */;
+long var1 /* : Int */;
+var = ((val* (*)(val*, long))(recv->value->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(recv->value, index) /* [] on <recv->value:Array[Int]>*/;
+var1 = ((struct instance_kernel__Int*)var)->value; /* autounbox from nullable Object to Int */;
+return var1;
+}
+/* nitni check for Int to nullable Int */
+int stream___Int_is_a_nullable_Int(int from) {
+short int var /* : Bool */;
+int cltype;
+int idtype;
+/* <from->value:Int> isa nullable Int */
+var = 1; /* easy <from->value:Int> isa nullable Int*/
+return var;
+}
+/* nitni cast for Int to nullable Int */
+struct nitni_instance * stream___Int_as_nullable_Int(int from) {
+short int var /* : Bool */;
+int cltype;
+int idtype;
+val* var1 /* : nullable Int */;
+/* <from:Int> isa nullable Int */
+var = 1; /* easy <from:Int> isa nullable Int*/
+if (!var) {
+fprintf(stderr, "Runtime error: %s", "FFI cast failed");
+fprintf(stderr, "\n");
+show_backtrace(1);
+}
+var1 = BOX_kernel__Int(from); /* autobox from Int to nullable Int */
+struct nitni_instance* ret_for_c;
+ret_for_c = malloc(sizeof(struct nitni_instance));
+ret_for_c->value = var1;
+return ret_for_c;
 }
 /* method stream#Object#intern_poll for (self: Object, Array[Int], Array[Int]): nullable Int */
 val* VIRTUAL_stream__Object__intern_poll(val* self, val* p0, val* p1) {
@@ -1699,7 +1810,7 @@ val* var1 /* : Array[String] */;
 var1 = self->attrs[COLOR_stream__StringOStream___64dcontent].val; /* @content on <self:StringOStream> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @content");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 305);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 377);
 show_backtrace(1);
 }
 var = var1;

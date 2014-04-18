@@ -675,10 +675,6 @@ redef class AInternMethPropdef
 		else if cname == "Int" then
 			if pname == "unary -" then
 				return v.int_instance(-args[0].to_i)
-			else if pname == "succ" then
-				return v.int_instance(args[0].to_i + 1)
-			else if pname == "prec" then
-				return v.int_instance(args[0].to_i - 1)
 			else if pname == "+" then
 				return v.int_instance(args[0].to_i + args[1].to_i)
 			else if pname == "-" then
@@ -712,14 +708,10 @@ redef class AInternMethPropdef
 			var recv = args[0].val.as(Char)
 			if pname == "ascii" then
 				return v.int_instance(recv.ascii)
-			else if pname == "succ" then
-				return v.char_instance(recv.succ)
-			else if pname == "prec" then
-				return v.char_instance(recv.prec)
-			else if pname == "+" then
-				return v.char_instance(recv + args[1].to_i)
-			else if pname == "-" then
-				return v.char_instance(recv - args[1].to_i)
+			else if pname == "successor" then
+				return v.char_instance(recv.successor(args[1].to_i))
+			else if pname == "predecessor" then
+				return v.char_instance(recv.predecessor(args[1].to_i))
 			else if pname == "<" then
 				return v.bool_instance(recv < args[1].val.as(Char))
 			else if pname == ">" then
@@ -869,6 +861,8 @@ redef class AExternMethPropdef
 				return v.int_instance(res)
 			else if pname == "native_int_to_s" then
 				return v.native_string_instance(recvval.to_s)
+			else if pname == "strerror_ext" then
+				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "NativeFile" then
 			var recvval = args.first.val
@@ -905,10 +899,6 @@ redef class AExternMethPropdef
 				return v.int_instance(res)
 			else if pname == "atof" then
 				return v.float_instance(recvval.to_f)
-			end
-		else if cname == "Int" then
-			if pname == "rand" then
-				return v.int_instance(args[0].to_i.rand)
 			end
 		else if cname == "Float" then
 			if pname == "cos" then
@@ -966,6 +956,8 @@ redef class AExternMethPropdef
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
 		else if pname == "file_getcwd" then
 			return v.native_string_instance(getcwd)
+		else if pname == "errno" then
+			return v.int_instance(sys.errno)
 		end
 		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort

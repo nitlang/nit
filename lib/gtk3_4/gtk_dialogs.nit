@@ -25,7 +25,7 @@ in "C Header" `{
 
 #Create popup windows
 #@https://developer.gnome.org/gtk3/stable/GtkDialog.html
-extern GtkDialog `{GtkDialog *`}
+extern class GtkDialog `{GtkDialog *`}
 	super GtkWindow
 
 	new is extern `{
@@ -44,7 +44,7 @@ end
 
 #Display information about an application
 #@https://developer.gnome.org/gtk3/stable/GtkAboutDialog.html
-extern GtkAboutDialog `{GtkAboutDialog *`}
+extern class GtkAboutDialog `{GtkAboutDialog *`}
 	super GtkDialog
 
 	new is extern `{
@@ -126,7 +126,7 @@ end
 
 #An application chooser dialog
 #@https://developer.gnome.org/gtk3/stable/GtkAppChooserDialog.html
-extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
+extern class GtkAppChooserDialog `{GtkAppChooserDialog *`}
 	super GtkDialog
 
 	#TODO - GFile
@@ -152,7 +152,7 @@ end
 
 #A dialog for choosing colors
 #@https://developer.gnome.org/gtk3/stable/GtkColorChooserDialog.html
-extern GtkColorChooserDialog `{GtkColorChooserDialog *`}
+extern class GtkColorChooserDialog `{GtkColorChooserDialog *`}
 	super GtkDialog
 
 	new ( title : String, parent : GtkWindow ) is extern import String.to_cstring `{
@@ -162,7 +162,7 @@ end
 
 #A file chooser dialog, suitable for "File/Open" or "File/Save" commands
 #@https://developer.gnome.org/gtk3/stable/GtkFileChooserDialog.html
-extern GtkFileChooserDialog `{GtkFileChooserDialog *`}
+extern class GtkFileChooserDialog `{GtkFileChooserDialog *`}
 	super GtkDialog
 
 	new ( title : String, parent : GtkWindow, action : GtkFileChooserAction ) is extern import String.to_cstring `{
@@ -173,7 +173,7 @@ end
 #enum GtkFileChooserAction
 #Describes whether a GtkFileChooser is being used to open existing files or to save to a possibly new file.
 #@https://developer.gnome.org/gtk3/stable/GtkFileChooser.html#GtkFileChooserAction
-extern GtkFileChooserAction `{GtkFileChooserAction`}
+extern class GtkFileChooserAction `{GtkFileChooserAction`}
 	#Indicates open mode. The file chooser will only let the user pick an existing file.
 	new open `{ return GTK_FILE_CHOOSER_ACTION_OPEN; `}
 
@@ -189,7 +189,7 @@ end
 
 #A dialog for selecting fonts
 #@https://developer.gnome.org/gtk3/stable/GtkFontChooserDialog.html
-extern GtkFontChooserDialog `{GtkFontChooserDialog *`}
+extern class GtkFontChooserDialog `{GtkFontChooserDialog *`}
 	super GtkDialog
 
 	new ( title : String, parent : GtkWindow ) is extern `{
@@ -199,7 +199,7 @@ end
 
 #A convenient message window
 #@https://developer.gnome.org/gtk3/stable/GtkMessageDialog.html
-extern GtkMessageDialog `{GtkMessageDialog *`}
+extern class GtkMessageDialog `{GtkMessageDialog *`}
 	super GtkDialog
 
 	new ( parent : GtkWindow, flags : GtkDialogFlags, msg_type : GtkMessageType, btn_type : GtkButtonsType, format : String ) is extern import String.to_cstring `{
@@ -210,7 +210,7 @@ end
 #enum GtkButtonsType
 #Prebuilt sets of buttons for the dialog. If none of these choices are appropriate, simply use GTK_BUTTONS_NONE then call gtk_dialog_add_buttons().
 #@https://developer.gnome.org/gtk3/stable/GtkMessageDialog.html#GtkButtonsType
-extern GtkButtonsType `{GtkButtonsType`}
+extern class GtkButtonsType `{GtkButtonsType`}
 	#No buttons at all
 	new none `{ return GTK_BUTTONS_NONE; `}
 
@@ -233,7 +233,7 @@ end
 #enum GtkMessageType
 #The type of message being displayed in the dialog.
 #@https://developer.gnome.org/gtk3/stable/GtkMessageDialog.html#GtkMessageType
-extern GtkMessageType `{GtkMessageType`}
+extern class GtkMessageType `{GtkMessageType`}
 	#Informational message
 	new info `{ return GTK_MESSAGE_INFO; `}
 
@@ -252,21 +252,21 @@ end
 
 #A page setup dialog
 #@https://developer.gnome.org/gtk3/stable/GtkPageSetupUnixDialog.html
-#extern GtkPageSetupUnixDialog `{GtkPageSetupUnixDialog *`}
+#extern class GtkPageSetupUnixDialog `{GtkPageSetupUnixDialog *`}
 #	super GtkDialog
 #
 #end
 
 #A print dialog
 #@https://developer.gnome.org/gtk3/stable/GtkPrintUnixDialog.html
-#extern GtkPrintUnixDialog `{GtkPrintUnixDialog *`}
+#extern class GtkPrintUnixDialog `{GtkPrintUnixDialog *`}
 #	super GtkDialog
 #
 #end
 
 #Displays recently used files in a dialog
 #@https://developer.gnome.org/gtk3/stable/GtkRecentChooserDialog.html
-extern GtkRecentChooserDialog `{GtkRecentChooserDialog *`}
+extern class GtkRecentChooserDialog `{GtkRecentChooserDialog *`}
 	super GtkDialog
 
 end
@@ -275,7 +275,7 @@ end
 #enum GtkDialogFlags
 #Flags used to influence dialog construction.
 #@https://developer.gnome.org/gtk3/stable/GtkDialog.html#GtkDialogFlags
-extern GtkDialogFlags `{GtkDialogFlags`}
+extern class GtkDialogFlags `{GtkDialogFlags`}
 	#Make the constructed dialog modal.
 	new modal `{ return GTK_DIALOG_MODAL; `}
 
@@ -286,7 +286,7 @@ end
 #enum GtkResponseType
 #Predefined values for use as response ids in gtk_dialog_add_button().
 #@https://developer.gnome.org/gtk3/stable/GtkDialog.html#GtkResponseType
-extern GtkResponseType `{GtkResponseType`}
+extern class GtkResponseType `{GtkResponseType`}
 	#Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
 	new none `{ return GTK_RESPONSE_NONE; `}
 

@@ -14,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_opengles1 is
-	pkgconfig("glesv1_cm", "x11", "egl")
-	c_compiler_option(exec("sdl-config", "--cflags"))
-	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
-end
+module linux_opengles1
 
 import mnit # for
 # import opengles1
@@ -81,7 +77,7 @@ redef class Opengles1Display
 	end
 end
 
-redef extern Opengles1Image
+redef extern class Opengles1Image
 	new from_sdl_image( sdl_image: SDLImage ) is extern `{
 		return mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );
 	`}

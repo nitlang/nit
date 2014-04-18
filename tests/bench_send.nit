@@ -16,7 +16,7 @@
 
 
 class A
-	readable writable var _val: Int = 0
+	var val: Int = 0
 	fun hop(a: A, b: A, c: A)
 	do
 		if a.val > val then

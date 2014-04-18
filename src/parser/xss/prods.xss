@@ -58,115 +58,82 @@ $ template make_prods()
 $ set baseprod = {//prod/@ename}
 $ foreach {//alt}
 redef class @ename
-    private init empty_init do end
+	private init empty_init do end
 
 $ if {count(elem)!=0}
-    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
+	init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
 $ foreach {elem}
 $   if {@is_list}
-            n_@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
+		n_@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
 $   else
-            n_@{name}: nullable @etype[-sep ','-]
+		n_@{name}: nullable @etype[-sep ','-]
 $   end
 $ end
-    )
+	)
 $ else
-    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
+	init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
 $ end
-    do
-        empty_init
+	do
+		empty_init
 $ foreach {elem}
 $   if @is_list
-	for n in n_@{name} do
-		assert n isa @{etype}
-		_n_@{name}.add(n)
-		n.parent = self
-	end
+		_n_@{name}.unsafe_add_all(n_@{name})
 $   else
 $   if {@modifier}
-        _n_@name = n_@{name}
-	if n_@{name} != null then
-		n_@{name}.parent = self
-	end
+		_n_@name = n_@{name}
+		if n_@{name} != null then n_@{name}.parent = self
 $   else
-        _n_@name = n_@{name}.as(not null)
-	n_@{name}.parent = self
+		_n_@name = n_@{name}.as(not null)
+		n_@{name}.parent = self
 $   end
 $   end
 $ end
-    end
+	end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
-    do
+	redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+	do
 $ foreach {elem}
 $   if @is_list
-        for i in [0.._n_@{name}.length[ do
-            if _n_@{name}[i] == old_child then
-                if new_child != null then
-		    assert new_child isa @etype
-                    _n_@{name}[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_@{name}.remove_at(i)
-                end
-                return
-            end
-        end
+		if _n_@{name}.replace_child(old_child, new_child) then return
 $   else
-        if _n_@{name} == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa @etype
-                _n_@{name} = new_child
-	    else
+		if _n_@{name} == old_child then
 $   if @modifier
-		_n_@{name} = null
+			n_@{name} = new_child.as(nullable @etype)
 $   else
-		abort
+			n_@{name} = new_child.as(@etype)
 $   end
-            end
-            return
-	end
+			return
+		end
 $   end
 $ end foreach
-    end
+	end
 
 $   foreach {elem}
 $     if @is_list
 $     else
-		redef fun n_@{name}=(node)
-		do
-			_n_@{name} = node
+	redef fun n_@{name}=(node)
+	do
+		_n_@{name} = node
 $       if @modifier
-			if node != null then
-				node.parent = self
-			end
+		if node != null then node.parent = self
 $       else
-			node.parent = self
+		node.parent = self
 $       end
-		end
+	end
 $     end
 $   end foreach
 
 
-    redef fun visit_all(v: Visitor)
-    do
+	redef fun visit_all(v: Visitor)
+	do
 $   foreach {elem}
 $     if @is_list
-            for n in _n_@{name} do
-                v.enter_visit(n)
-	    end
+		_n_@{name}.visit_all(v)
 $     else
-$       if @modifier
-        if _n_@{name} != null then
-            v.enter_visit(_n_@{name}.as(not null))
-        end
-$       else
-        v.enter_visit(_n_@{name})
-$       end
+		v.enter_visit(_n_@{name})
 $     end
 $   end foreach
-    end
+	end
 end
 $ end foreach
 

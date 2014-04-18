@@ -19,7 +19,7 @@ import base_virtual_type2
 
 class C
 	super A
-	readable writable var _tab: nullable Array[E]
+	var tab: nullable Array[E] writable
 	init do end
 end
 

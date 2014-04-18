@@ -21,7 +21,7 @@ in "C header" `{
 #include <time.h>
 `}
 
-extern Timespec `{struct timespec*`}
+extern class Timespec `{struct timespec*`}
 	new ( s, ns : Int ) `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 		tv->tv_sec = s; tv->tv_nsec = ns;

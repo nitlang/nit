@@ -30,7 +30,7 @@ in "C" `{
 	}
 `}
 
-extern A
+extern class A
 	new is extern `{ return malloc(1); `}
 	new new_implicit `{ return malloc(1); `}
 	new new_in_language is extern in "C" `{ return malloc(1); `}
@@ -62,18 +62,18 @@ extern A
 	fun inline_implicit : Int `{ return  7; `}
 end
 
-extern B
+extern class B
 super A
 end
 
-extern C `{int*`}
+extern class C `{int*`}
 end
 
-extern D
+extern class D
 super C
 end
 
-extern E
+extern class E
 super C
 end
 

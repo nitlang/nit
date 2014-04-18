@@ -740,7 +740,7 @@ long VIRTUAL_exec__NativeProcess__id(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__id(var2);
 var = var1;
 RET_LABEL:;
@@ -761,7 +761,7 @@ short int VIRTUAL_exec__NativeProcess__is_finished(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__is_finished(var2);
 var = var1;
 RET_LABEL:;
@@ -782,7 +782,7 @@ long VIRTUAL_exec__NativeProcess__status(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__status(var2);
 var = var1;
 RET_LABEL:;
@@ -796,7 +796,7 @@ RET_LABEL:;
 /* method exec#NativeProcess#wait for (self: Object) */
 void VIRTUAL_exec__NativeProcess__wait(val* self) {
 void* var /* : NativeProcess */;
-var = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 exec__NativeProcess__wait(var);
 RET_LABEL:;
 }
@@ -815,7 +815,7 @@ long VIRTUAL_exec__NativeProcess__in_fd(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__in_fd(var2);
 var = var1;
 RET_LABEL:;
@@ -836,7 +836,7 @@ long VIRTUAL_exec__NativeProcess__out_fd(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__out_fd(var2);
 var = var1;
 RET_LABEL:;
@@ -857,7 +857,7 @@ long VIRTUAL_exec__NativeProcess__err_fd(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 void* var2 /* : NativeProcess */;
-var2 = ((struct instance_exec__NativeProcess*)self)->value; /* autounbox from Object to NativeProcess */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeProcess */;
 var1 = exec__NativeProcess__err_fd(var2);
 var = var1;
 RET_LABEL:;

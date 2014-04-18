@@ -240,7 +240,7 @@ in "C" `{
 `}
 
 
-extern InnerAndroidMotionEvent in "C" `{AInputEvent *`}
+extern class InnerAndroidMotionEvent in "C" `{AInputEvent *`}
 	super Pointer
 	private fun pointers_count: Int is extern `{
 	return AMotionEvent_getPointerCount(recv);
@@ -345,7 +345,7 @@ class AndroidPointerEvent
 	redef fun depressed do return not pressed
 end
 
-extern AndroidKeyEvent in "C" `{AInputEvent *`}
+extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 	super KeyEvent
 	super AndroidInputEvent
 

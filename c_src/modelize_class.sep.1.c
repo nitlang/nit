@@ -289,7 +289,7 @@ var2 = var_nclassdef->type->type_table[cltype] == idtype;
 if (var2){
 var3 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__AStdClassdef__n_id]))(var_nclassdef) /* n_id on <var_nclassdef:AClassdef(AStdClassdef)>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 48);
 show_backtrace(1);
 } else {
@@ -1016,7 +1016,7 @@ var17 = 1; /* easy <var14:Int> isa OTHER*/
 if (!var17) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
 show_backtrace(1);
 }
 var20 = var13 > var14;
@@ -1097,7 +1097,7 @@ var57 = 1; /* easy <var54:Char> isa OTHER*/
 if (!var57) {
 var_class_name60 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 442);
 show_backtrace(1);
 }
 var61 = var_c >= var54;
@@ -1115,7 +1115,7 @@ var66 = 1; /* easy <var63:Char> isa OTHER*/
 if (!var66) {
 var_class_name69 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 440);
 show_backtrace(1);
 }
 var70 = var_c <= var63;
@@ -1256,7 +1256,7 @@ var124 = ((val* (*)(val*))(var_mclass->class->vft[COLOR_model__MClass__mclassdef
 var125 = ((short int (*)(val*))(var124->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var124) /* is_empty on <var124:Array[MClassDef]>*/;
 if (var125){
 if (var_objectclass == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 147);
 show_backtrace(1);
 } else {
@@ -1609,7 +1609,7 @@ varonce42 = var43;
 var47 = ((short int (*)(val*, val*))(var41->class->vft[COLOR_kernel__Object___61d_61d]))(var41, var43) /* == on <var41:String>*/;
 if (var47){
 if (var_objectclass == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 199);
 show_backtrace(1);
 } else {
@@ -1618,7 +1618,7 @@ var48 = ((val* (*)(val*))(var_objectclass->class->vft[COLOR_model__MClass__mclas
 ((void (*)(val*, val*))(var_supertypes->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_supertypes, var48) /* add on <var_supertypes:Array[MClassType]>*/;
 } else {
 if (var_pointerclass == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 201);
 show_backtrace(1);
 } else {
@@ -2423,7 +2423,7 @@ var125 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel__MClas
 var_superclasses = var125;
 var126 = ((val* (*)(val*))(var_mclassdef124->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef124) /* in_hierarchy on <var_mclassdef124:MClassDef>*/;
 if (var126 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 307);
 show_backtrace(1);
 } else {
@@ -2573,7 +2573,7 @@ var195 = NEW_array__Array(&type_array__Arraymodel__MClass);
 var_parents = var195;
 var196 = ((val* (*)(val*))(var_mclassdef194->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef194) /* in_hierarchy on <var_mclassdef194:MClassDef>*/;
 if (var196 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 334);
 show_backtrace(1);
 } else {
@@ -3702,7 +3702,7 @@ goto RET_LABEL;
 } else {
 }
 if (var_mclassdef == NULL) {
-fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, "Runtime error: %s", "Receiver is null");
 fprintf(stderr, " (%s:%d)\n", "src/modelize_class.nit", 467);
 show_backtrace(1);
 } else {

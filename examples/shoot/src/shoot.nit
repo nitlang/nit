@@ -28,13 +28,13 @@ redef class Sprite
 	# Helper function to draw an image centered on the current sprite position
 	fun draw_image(app: ShootApp, img: Image)
 	do
-		app.display.blit_centered(img, self.x/100, self.y/100)
+		app.display.blit_centered(img, (self.x.to_f/app.scale).to_i, (self.y.to_f/app.scale).to_i)
 	end
 
 	# Helper function to draw an image translated and rotated on the current sprite position
 	fun draw_rotated_image(app: ShootApp, img: Image, dx, dy: Int, angle: Float)
 	do
-		app.display.blit_rotated(img, self.x.to_f/100.0, self.y.to_f/100.0, angle)
+		app.display.blit_rotated(img, self.x.to_f/app.scale, self.y.to_f/app.scale, angle)
 	end
 end
 
@@ -167,7 +167,7 @@ end
 
 redef class Scene
 	fun draw_on_display(app: ShootApp) do end
-	fun input(input_event: InputEvent): Bool do return false
+	fun input(app: ShootApp, input_event: InputEvent): Bool do return false
 end
 
 redef class PlayScene
@@ -177,19 +177,19 @@ redef class PlayScene
 		self.sprites.draw(app)
 		for i in [0..player.money[
 		do
-			app.display.blit(app.img_money, 10, 590-i)
+			app.display.blit(app.img_money, 10, app.display.height-10-i)
 		end
 		for i in [1..player.nbshoots]
 		do
-			app.display.blit(app.img_player_shoot, 30, 590 - i*10)
+			app.display.blit(app.img_player_shoot, 30, app.display.height-10 - i*10)
 		end
 		for i in [1..player.nbmissiles]
 		do
-			app.display.blit(app.img_player_missile, 40, 590 - i*20)
+			app.display.blit(app.img_player_missile, 40, app.display.height-10 - i*20)
 		end
 	end
 
-	redef fun input( input_event )
+	redef fun input(app, input_event)
 	do
 		var speed = 400
 		if input_event isa KeyEvent then
@@ -218,6 +218,12 @@ redef class PlayScene
 					player.vx = 0
 				end
 			end
+			return true
+		else if input_event isa PointerEvent then
+			var x = (input_event.x * app.scale).to_i
+			var y = (input_event.y * app.scale).to_i
+			player.goes_to(x, y, speed)
+			return true
 		end
 		return false # unknown event, can be handled by something else
 	end
@@ -228,16 +234,28 @@ end
 redef class MenuScene
 	redef fun draw_on_display(app)
 	do
-		app.display.blit(app.img_splash, 0, 0)
+		var display = app.display
+		assert display != null
+		blit_fs(display, app.img_splash)
 		sprites.draw(app)
 		if not play or ttl%10 > 5 then
-			app.display.blit(app.img_splash_play, 0, 0)
+			blit_fs(display, app.img_splash_play)
 		end
 	end
 
-	redef fun input(input_event)
+	fun blit_fs(d: Display, img: Image)
+	do
+		var w = d.width.to_f
+		var h = d.height.to_f
+		d.blit_stretched(img, 0.0,0.0, 0.0,h, w,h, w,0.0)
+	end
+
+	redef fun input(app, input_event)
 	do
 		if input_event isa KeyEvent then
+			play = true
+			return true
+		else if input_event isa PointerEvent then
 			play = true
 			return true
 		end
@@ -257,17 +275,17 @@ class ShootApp
 	do
 		s.draw_on_display(self)
 		if debug and s.width != 0 and s.height != 0 then
-			var left = s.left.to_f/100.0
-			var right = s.right.to_f/100.0
-			var top = s.top.to_f/100.0
-			var bot = s.bottom.to_f/100.0
+			var left = s.left.to_f/scale
+			var right = s.right.to_f/scale
+			var top = s.top.to_f/scale
+			var bot = s.bottom.to_f/scale
 			display.blit_stretched(img_hitbox, right, top, right, bot, left, bot, left, top)
 		end
 	end
 
 	init do super
 
-	var scene: Scene
+	var scene: ShotScene
 
 	var img_hitbox: Image
 
@@ -301,6 +319,8 @@ class ShootApp
 	do
 		super
 
+		scale = (800.0 * 600.0 / display.width.to_f / display.height.to_f).sqrt * 100.0
+
 		# TODO load assets here
 		# ex: img = load_image( "img.png" )
 		#     to get file located at assets/img.png before deployement
@@ -331,7 +351,19 @@ class ShootApp
 		self.img_boss_left = load_image("boss_left.png")
 		self.img_boss_right = load_image("boss_right.png")
 
-		self.scene = new MenuScene
+		var w = (display.width.to_f * scale).to_i
+		var h = (display.height.to_f * scale).to_i
+		self.scene = new MenuScene(w, h)
+	end
+
+	# Whole scaling to convert display pixels to game pixels
+	var scale: Float = 200.0
+
+	redef fun load_image(filename)
+	do
+		var res = super
+		res.scale = 100.0 / self.scale
+		return res
 	end
 
 	redef fun frame_core( display )
@@ -369,7 +401,7 @@ class ShootApp
 		end
 
 		# Maybe the event is specific to the scene
-		return self.scene.input(input_event)
+		return self.scene.input(self, input_event)
 	end
 end
 

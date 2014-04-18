@@ -127,7 +127,7 @@ var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
 show_backtrace(1);
 }
 var10 = var2 < var3;

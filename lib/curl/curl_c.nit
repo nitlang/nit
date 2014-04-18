@@ -72,7 +72,7 @@ in "C body" `{
 `}
 
 # CURL Extern Type, reproduce CURL low level behaviors
-extern CCurl `{ CURL * `}
+extern class CCurl `{ CURL * `}
 	# Constructor, CURL low level initializer
 	new easy_init `{ return curl_easy_init(); `}
 	# Check for correct initialization
@@ -200,18 +200,18 @@ extern CCurl `{ CURL * `}
 		CURLcode e;
 		switch(cbtype){
 			case CURLcallbackTypeHeader:
-				e = curl_easy_setopt( recv, CURLOPT_HEADERFUNCTION, &nit_curl_callback_func);
+				e = curl_easy_setopt( recv, CURLOPT_HEADERFUNCTION, (curl_write_callback)&nit_curl_callback_func);
 				if(e != CURLE_OK) return e;
 				e = curl_easy_setopt( recv, CURLOPT_WRITEHEADER, d);
 			break;
 			case CURLcallbackTypeBody:
 			case CURLcallbackTypeStream:
-				e = curl_easy_setopt( recv, CURLOPT_WRITEFUNCTION, &nit_curl_callback_func);
+				e = curl_easy_setopt( recv, CURLOPT_WRITEFUNCTION, (curl_write_callback)&nit_curl_callback_func);
 				if(e != CURLE_OK) return e;
 				e = curl_easy_setopt( recv, CURLOPT_WRITEDATA, d);
 			break;
 			case CURLcallbackTypeRead:
-				e = curl_easy_setopt( recv, CURLOPT_READFUNCTION, &nit_curl_callback_read_func);
+				e = curl_easy_setopt( recv, CURLOPT_READFUNCTION, (curl_write_callback)&nit_curl_callback_read_func);
 			default:
 			break;
 		}
@@ -229,7 +229,7 @@ extern CCurl `{ CURL * `}
 end
 
 # FILE Extern type, reproduce basic FILE I/O
-extern OFile `{ FILE* `}
+extern class OFile `{ FILE* `}
 	# Open / Create a file from given name
 	new open(str: NativeString) `{ return fopen(str, "wb"); `}
 	# Check for File validity
@@ -260,7 +260,7 @@ interface CCurlCallbacks
 end
 
 # Extern Type to reproduce Enum of available Callback type
-extern CURLCallbackType `{ CURLcallbackType `}
+extern class CURLCallbackType `{ CURLcallbackType `}
 	new header `{ return CURLcallbackTypeHeader; `}
 	new body `{ return CURLcallbackTypeBody; `}
 	new stream `{ return CURLcallbackTypeStream; `}
@@ -269,7 +269,7 @@ extern CURLCallbackType `{ CURLcallbackType `}
 end
 
 # CURL Code binding and helpers
-extern CURLCode `{ CURLcode `}
+extern class CURLCode `{ CURLcode `}
 	new unknown_option `{ return CURLE_UNKNOWN_OPTION; `}
 	new unsupported_protocol `{ return CURLE_UNSUPPORTED_PROTOCOL; `}
 	new ok `{ return CURLE_OK; `}
@@ -286,7 +286,7 @@ extern CURLCode `{ CURLcode `}
 end
 
 # Extern Type of the Linked list type of CURL
-extern CURLSList `{ struct curl_slist * `}
+extern class CURLSList `{ struct curl_slist * `}
 	# Empty constructor which allow us to avoid the use of Nit NULLABLE type
 	private new `{ return NULL; `}
 	# Constructor allow us to get list instancied by appending an element inside.
@@ -365,13 +365,13 @@ class CURLInfoResponseString
 end
 
 # Reproduce Enum of available CURL SList information, used for CCurl.easy_getinfo
-extern CURLInfoSList `{ CURLINFO `}
+extern class CURLInfoSList `{ CURLINFO `}
 	new ssl_engines `{ return CURLINFO_SSL_ENGINES; `}
 	new cookielist `{ return CURLINFO_COOKIELIST; `}
 end
 
 # Reproduce Enum of available CURL Long information, used for CCurl.easy_getinfo
-extern CURLInfoLong `{ CURLINFO `}
+extern class CURLInfoLong `{ CURLINFO `}
 	new response_code `{ return CURLINFO_RESPONSE_CODE; `}
 	new header_size `{ return CURLINFO_HEADER_SIZE; `}
 	new http_connectcode `{ return CURLINFO_HTTP_CONNECTCODE; `}
@@ -393,7 +393,7 @@ extern CURLInfoLong `{ CURLINFO `}
 end
 
 # Reproduce Enum of available CURL Double information, used for CCurl.easy_getinfo
-extern CURLInfoDouble `{ CURLINFO `}
+extern class CURLInfoDouble `{ CURLINFO `}
 	new total_time `{ return CURLINFO_TOTAL_TIME; `}
 	new namelookup_time `{ return CURLINFO_NAMELOOKUP_TIME; `}
 	new connect_time `{ return CURLINFO_CONNECT_TIME; `}
@@ -410,7 +410,7 @@ extern CURLInfoDouble `{ CURLINFO `}
 end
 
 # Reproduce Enum of available CURL Chars information, used for CCurl.easy_getinfo
-extern CURLInfoChars `{ CURLINFO `}
+extern class CURLInfoChars `{ CURLINFO `}
 	new content_type `{ return CURLINFO_CONTENT_TYPE; `}
 	new effective_url `{ return CURLINFO_EFFECTIVE_URL; `}
 	new redirect_url `{ return CURLINFO_REDIRECT_URL; `}
@@ -422,7 +422,7 @@ extern CURLInfoChars `{ CURLINFO `}
 end
 
 # Reproduce Enum of HTTP Status Code
-extern CURLStatusCode `{ int `}
+extern class CURLStatusCode `{ int `}
 	new proceed `{ return 100; `}
 	new switching_protocols `{ return 101; `}
 	new ok `{ return 200; `}
@@ -464,7 +464,7 @@ extern CURLStatusCode `{ int `}
 end
 
 # Reproduce Enum of CURL Options usable, used for CCurl.easy_setopt
-extern CURLOption `{ CURLoption `}
+extern class CURLOption `{ CURLoption `}
 	new write_function `{ return CURLOPT_WRITEFUNCTION; `}
 	new write_data `{ return CURLOPT_WRITEDATA; `}
 #	new	`{ return CURLOPT_FILE; `}
@@ -483,7 +483,7 @@ extern CURLOption `{ CURLoption `}
 	new postfields `{ return CURLOPT_POSTFIELDS; `}
 #	new	`{ return CURLOPT_REFERER; `}
 #	new	`{ return CURLOPT_FTPPORT; `}
-#	new	`{ return CURLOPT_USERAGENT; `}
+	new user_agent	`{ return CURLOPT_USERAGENT; `}
 #	new	`{ return CURLOPT_LOW_SPEED_LIMIT; `}
 #	new	`{ return CURLOPT_LOW_SPEED_TIME; `}
 #	new	`{ return CURLOPT_RESUME_FROM; `}

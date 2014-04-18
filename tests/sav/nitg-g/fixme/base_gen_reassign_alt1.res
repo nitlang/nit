@@ -4,4 +4,4 @@
 12
 22
 32
-Cast error: Cannot cast Int to Char.
+Cast error: Cannot cast Int to Float.

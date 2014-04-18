@@ -114,6 +114,7 @@ extern const struct type type_parser_nodes__TClassid;
 extern const int COLOR_parser_nodes__TClassid__init;
 extern const int COLOR_parser_nodes__AType___n_id;
 void astbuilder__AType__make(val* self);
+val* BOX_kernel__Int(long);
 extern const int COLOR_literal__AIntExpr__value_61d;
 val* NEW_parser_nodes__TNumber(const struct type* type);
 extern const struct type type_parser_nodes__TNumber;

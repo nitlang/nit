@@ -128,7 +128,14 @@ redef class String
 		var parser = new Parser_json
 		var tokens = lexer.lex
 		parser.tokens.add_all(tokens)
-		var root_node = parser.parse.as(NStart)
-		return root_node.n_0.to_nit_object
+		var root_node = parser.parse
+		if root_node isa NStart then
+			return root_node.n_0.to_nit_object
+		else
+			assert root_node isa NLexerError
+			var pos = root_node.position
+			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return null
+		end
 	end
 end

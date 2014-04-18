@@ -21,7 +21,7 @@ import gtk3_4
 
 #An entry which shows a search icon
 #@https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
-extern GtkSearchEntry `{GtkSearchEntry *`}
+extern class GtkSearchEntry `{GtkSearchEntry *`}
 	super GtkEntry
 
 	new is extern `{

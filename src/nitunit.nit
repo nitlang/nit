@@ -162,7 +162,7 @@ redef class ModelBuilder
 		var o = mmodule
 		var g = o.mgroup
 		if g != null then
-			o = get_mmodule_by_name(nmodule, mmodule, g.mproject.name).as(not null)
+			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
 		end
 
 		ts.attr("package", mmodule.full_name)

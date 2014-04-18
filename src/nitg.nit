@@ -72,8 +72,7 @@ end
 
 var platform = mainmodule.target_platform
 if platform != null and not platform.supports_libunwind then
-	toolcontext.opt_no_stacktrace.value = true
-	toolcontext.opt_stacktrace.value = false
+	if toolcontext.opt_stacktrace.value == null then toolcontext.opt_stacktrace.value = "none" # default is none
 end
 
 if toolcontext.opt_erasure.value then

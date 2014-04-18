@@ -58,7 +58,7 @@ interface MonkeyActionCallable
 end
 
 # Defining my object type Monkey, which is, in a low level, a pointer to a C struct (CMonkey)
-extern Monkey `{ CMonkey * `}
+extern class Monkey `{ CMonkey * `}
 	
 	new `{
 		CMonkey *monkey = malloc( sizeof(CMonkey) );
