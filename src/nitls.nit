@@ -54,14 +54,14 @@ var opt_recursive = new OptionBool("Process directories recussively", "-r", "--r
 var opt_tree = new OptionBool("List source files in their groups and projects", "-t", "--tree")
 var opt_source = new OptionBool("List source files", "-s", "--source")
 var opt_project = new OptionBool("List projects paths (default)", "-p", "--project")
-var opt_depends = new OptionBool("List dependencies of given modules", "-M", "--depends")
+var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
 var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
 tc.process_options(args)
 
-var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i + opt_depends.value.to_i
+var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
 if sum > 1 then
 	print "Error: options --tree, --source, and --project are exclusives."
 	print tc.tooldescription
@@ -75,38 +75,35 @@ if opt_depends.value then
 	end
 
 	mb.parse(tc.option_context.rest)
-	for x in model.mmodules do
-		print x.location.file.filename
+else
+	var files
+	if opt_recursive.value then
+		files = new Array[String]
+		for d in tc.option_context.rest do
+			var pipe = new IProcess("find", d, "-name", "*.nit")
+			while not pipe.eof do
+				var l = pipe.read_line
+				if l == "" then break # last line
+				l = l.substring(0,l.length-1) # strip last oef
+				files.add l
+			end
+			pipe.close
+			pipe.wait
+			if pipe.status != 0 and not opt_keep.value then exit 1
+		end
+	else
+		files = tc.option_context.rest
+	end
+
+	for a in files do
+		var mp = mb.identify_file(a)
+		if mp == null then
+			if not opt_keep.value then tc.check_errors
+		end
 	end
 end
 
 if sum == 0 then opt_project.value = true
-
-var files
-if opt_recursive.value then
-	files = new Array[String]
-	for d in tc.option_context.rest do
-		var pipe = new IProcess("find", d, "-name", "*.nit")
-		while not pipe.eof do
-			var l = pipe.read_line
-			if l == "" then break # last line
-			l = l.substring(0,l.length-1) # strip last oef
-			files.add l
-		end
-		pipe.close
-		pipe.wait
-		if pipe.status != 0 and not opt_keep.value then exit 1
-	end
-else
-	files = tc.option_context.rest
-end
-
-for a in files do
-	var mp = mb.identify_file(a)
-	if mp == null then
-		if not opt_keep.value then tc.check_errors
-	end
-end
 
 if opt_tree.value then
 	var ot = new ProjTree
