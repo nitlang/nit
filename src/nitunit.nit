@@ -32,13 +32,17 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
+	# Directory of the original source module
+	var source_dir: nullable String
+
 	# Initialize a new e
-	init(toolcontext: ToolContext, prefix: String, modname: String, testsuite: HTMLTag)
+	init(toolcontext: ToolContext, prefix: String, modname: String, testsuite: HTMLTag, source_dir: nullable String)
 	do
 		super(toolcontext)
 		self.prefix = prefix
 		self.modname = modname
 		self.testsuite = testsuite
+		self.source_dir = source_dir
 	end
 
 	# All blocks of code from a same `ADoc`
@@ -95,7 +99,9 @@ class NitUnitExecutor
 
 		var tools_dir = sys.program_name.dirname
 		if not tools_dir.is_empty then tools_dir += "/"
-		var cmd = "{tools_dir}nitg --ignore-visibility --no-color '{file}' -I .  >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var source_dir = self.source_dir
+		if source_dir == null then source_dir = "."
+		var cmd = "{tools_dir}nitg --ignore-visibility --no-color '{file}' -I '{source_dir}'  >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
@@ -172,7 +178,8 @@ redef class ModelBuilder
 		var prefix = toolcontext.opt_dir.value
 		if prefix == null then prefix = ".nitunit"
 		prefix = prefix.join_path(mmodule.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o.name, ts)
+		var source_dir = mmodule.mgroup.filepath.dirname
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o.name, ts, source_dir)
 
 		var tc
 
