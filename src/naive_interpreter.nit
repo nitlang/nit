@@ -878,6 +878,8 @@ redef class AExternMethPropdef
 			else if pname == "io_close" then
 				recvval.as(IOS).close
 				return v.int_instance(0)
+			else if pname == "address_is_null" then
+				return v.false_instance
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
