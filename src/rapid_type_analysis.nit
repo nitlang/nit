@@ -161,8 +161,12 @@ class RapidTypeAnalysis
 		return tree
 	end
 
-	# Methods that are are still candidate to the try_send
+	# Methods that are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
+
+	# Methods that are or were candidate to the try_send
+	# Used to ensure that try_send is only used once
+	private var try_methods = new HashSet[MMethod]
 
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
@@ -379,9 +383,10 @@ class RapidTypeAnalysis
 
 	fun add_send(recv: MType, mproperty: MMethod)
 	do
-		if live_methods.has(mproperty) then return
+		if try_methods.has(mproperty) then return
 		#print "new prop: {mproperty}"
 		live_methods.add(mproperty)
+		try_methods.add(mproperty)
 		if mproperty.mpropdefs.length == 1 then
 			# If there is only one definition, just add the definition and do not try again the property
 			var d = mproperty.mpropdefs.first
