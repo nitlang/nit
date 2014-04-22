@@ -22,16 +22,6 @@ module sca
 class Parameter
 	var name: String
 	var value: Object
-	
-	# Parameter name
-	fun getName: String do
-		return name
-	end
-	
-	# Parameter value
-	fun getValue: Object do
-		return value
-	end
 end
 
 # Use to have reference to a service
@@ -43,10 +33,6 @@ class SCAReference
 	fun invoke(operation: String, parameters: nullable List[Parameter]): nullable Object
 	do
 		return service.invoke(operation, parameters)
-	end
-	
-	fun getDestination: String do
-		return destination
 	end
 end
 
@@ -60,10 +46,6 @@ class SCAService
 	do
 		return composite.receive(operation, parameters)
 	end
-	
-	fun getName: String do
-		return name
-	end
 end
 
 # Parent componant use to have the Design Pattern Composite
@@ -72,10 +54,6 @@ class SCAComponent
 	var services: List[SCAService] = new List[SCAService]
 	var references: List[SCAReference] = new List[SCAReference]
 	var name: String
-
-	fun getName: String do
-		return name
-	end
 	
 	# Add a new service
 	fun addService(service:SCAService) do
@@ -85,7 +63,7 @@ class SCAComponent
 	# Get specifique service
 	fun getService(name:String): nullable SCAService do
 		for service in services do
-			if service.getName == name then
+			if service.name == name then
 				return service
 			end
 		end
@@ -100,7 +78,7 @@ class SCAComponent
 	# Get specifique reference
 	fun getReference(destination:String): nullable  SCAReference do
 		for reference in references do
-			if reference.getDestination == destination then
+			if reference.destination == destination then
 				return reference
 			end
 		end
@@ -128,7 +106,7 @@ class SCAComposite
 	# Get specifique child
 	fun get(name: String): nullable SCAComponent do
 		for component in childs do
-			if component.getName == name then
+			if component.name == name then
 				return component
 			end
 		end

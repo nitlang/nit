@@ -22,7 +22,7 @@ class Multiplication
 	# Définition des méthodes pouvant être appelées par référence
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "fois" then
-			return self.fois(parameters[0].getValue.to_s.to_i, parameters[1].getValue.to_s.to_i)
+			return self.fois(parameters[0].value.to_s.to_i, parameters[1].value.to_s.to_i)
 		end
 		
 		return null
