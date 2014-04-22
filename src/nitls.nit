@@ -55,11 +55,18 @@ var opt_tree = new OptionBool("List source files in their groups and projects", 
 var opt_source = new OptionBool("List source files", "-s", "--source")
 var opt_project = new OptionBool("List projects paths (default)", "-p", "--project")
 var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
+var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s", "-M")
 var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
 
-tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths)
+tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths, opt_make)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
 tc.process_options(args)
+
+if opt_make.value then
+	opt_depends.value = true
+	opt_paths.value = true
+	opt_source.value = true
+end
 
 var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
 if sum > 1 then
