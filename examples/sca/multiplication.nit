@@ -1,0 +1,27 @@
+module multiplication
+
+import sca
+
+class Multiplication
+	super SCAComponentImp
+	
+	init(composite:SCAComposite) do
+		super "multiplication"
+		
+		# ajout du service
+		var multiplication_service = new SCAService("multiplication_service", self)
+		self.addService multiplication_service
+	end
+
+	fun fois(a:Int, b:Int): Int do
+		return a * b
+	end
+	
+	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
+		if operation == "fois" then
+			return self.fois(parameters[0].getValue.to_s.to_i, parameters[1].getValue.to_s.to_i)
+		end
+		
+		return null
+	end
+end
