@@ -17,8 +17,7 @@
 # Script to scan Github for repositories possibly using JNI.
 module github_search_for_jni
 
-import curl
-import simple_json_reader
+import github_api
 
 # The proprieties introduced by this redef are to be used only on HashMap
 # representing a Github repository.
@@ -53,59 +52,11 @@ redef class HashMap[K, V]
 	end
 end
 
-redef class Curl
-	# Headers to use on all requests
-	var header: HeaderMap
-
-	# OAuth token
-	fun auth: String do return "OAUTH TOKEN (replace with your own)"
-
-	# User agent (is used by github to contact devs in case of problems)
-	var user_agent = "JNI project finder (nitlanguage.org)"
-
-	redef init
-	do
-		super
-
-		header = new HeaderMap
-		header["Authorization"] = "token {auth}"
-	end
-
-	# Get the requested URI, and check the HTTP response. Then convert to JSON
-	# and check for Github errors.
-	fun get_and_check(uri: String): HashMap[String, nullable Object]
-	do
-		var request = new CurlHTTPRequest(uri, self)
-		request.user_agent = user_agent
-		request.headers = header
-		var response = request.execute
-
-		if response isa CurlResponseSuccess then
-			var obj = response.body_str.json_to_nit_object
-			assert obj isa HashMap[String, nullable Object]
-
-			if obj.keys.has("message") then
-				print "Message from Github API: {obj["message"]}"
-				print "Requested URI: {uri}"
-				abort
-			end
-
-			return obj
-		else if response isa CurlResponseFailed then
-			print "Request to Github API failed"
-			print "Requested URI: {uri}"
-			print "Error code: {response.error_code}"
-			print "Error msg: {response.error_msg}"
-			abort
-		else abort
-	end
-end
-
 # Query sent to Github
 var main_query = "language:java"
 
 # Curl instance use for all requests
-var curl = new Curl
+var curl = new GithubCurl("OAUTH TOKEN (replace with your own)", "JNI project finder (nitlanguage.org)")
 
 if "NIT_TESTING".environ == "true" then exit 0
 
@@ -115,7 +66,7 @@ var per_page = 100
 loop
 	# Get a page of the main query
 	var uri = "https://api.github.com/search/repositories?q={main_query}&page={page}&per_page={per_page}&sort=stars"
-	var obj = curl.get_and_check(uri)
+	var obj = curl.get_and_check(uri).as(HashMap[String, nullable Object])
 
 	# Main object has "total_count" and "items"
 	var items = obj["items"].as(Array[nullable Object])
@@ -130,7 +81,7 @@ loop
 
 		# Download the language list
 		var lang_url = item["languages_url"].as(String)
-		var langs = curl.get_and_check(lang_url)
+		var langs = curl.get_and_check(lang_url).as(HashMap[String, nullable Object])
 
 		# The project is of interest if it has lots of Java and at least some C
 		var may_be_of_interest = langs.has_lots_of_java and langs.has_some_c
