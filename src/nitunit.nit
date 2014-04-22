@@ -93,7 +93,9 @@ class NitUnitExecutor
 		end
 		f.close
 
-		var cmd = "../bin/nitg --ignore-visibility --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var tools_dir = sys.program_name.dirname
+		if not tools_dir.is_empty then tools_dir += "/"
+		var cmd = "{tools_dir}nitg --ignore-visibility --no-color '{file}' -I .  >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
