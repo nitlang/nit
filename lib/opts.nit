@@ -205,6 +205,15 @@ class OptionInt
 	redef fun convert(str) do return str.to_i
 end
 
+class OptionFloat
+	super OptionParameter
+	redef type VALUE: Float
+
+	init(help: String, default: Float, names: String...) do init_opt(help, default, names)
+	
+	redef fun convert(str) do return str.to_f
+end
+
 class OptionArray
 	super OptionParameter
 	redef type VALUE: Array[String]
