@@ -20,6 +20,31 @@ module nitls
 intrude import modelbuilder
 import ordered_tree
 
+class ProjTree
+	super OrderedTree[Object]
+
+	var opt_paths = false
+
+	redef fun display(o)
+	do
+		if o isa MGroup then
+			if opt_paths then
+				return o.filepath.as(not null)
+			else
+				return "{o.name} ({o.filepath})"
+			end
+		else if o isa ModulePath then
+			if opt_paths then
+				return o.filepath
+			else
+				return "{o.name} ({o.filepath})"
+			end
+		else
+			abort
+		end
+	end
+end
+
 var tc = new ToolContext
 var model = new Model
 var mb = new ModelBuilder(model, tc)
@@ -30,8 +55,9 @@ var opt_tree = new OptionBool("List source files in their groups and projects", 
 var opt_source = new OptionBool("List source files", "-s", "--source")
 var opt_project = new OptionBool("List projects paths (default)", "-p", "--project")
 var opt_depends = new OptionBool("List dependencies of given modules", "-M", "--depends")
+var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
 
-tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends)
+tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
 tc.process_options(args)
 
@@ -83,7 +109,8 @@ for a in files do
 end
 
 if opt_tree.value then
-	var ot = new OrderedTree[Object]
+	var ot = new ProjTree
+	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
 		for g in p.mgroups do
 			ot.add(g.parent, g)
@@ -101,7 +128,11 @@ if opt_source.value then
 	for p in model.mprojects do
 		for g in p.mgroups do
 			for mp in g.module_paths do
-				list.add(mp.filepath)
+				if opt_paths.value then
+					list.add(mp.filepath)
+				else
+					list.add("{g.full_name}/{mp.name} ({mp.filepath})")
+				end
 			end
 		end
 	end
@@ -112,7 +143,12 @@ end
 if opt_project.value then
 	var list = new Array[String]
 	for p in model.mprojects do
-		list.add(p.root.filepath.as(not null))
+		var path = p.root.filepath.as(not null)
+		if opt_paths.value then
+			list.add(path)
+		else
+			list.add("{p.name} ({path})")
+		end
 	end
 	alpha_comparator.sort(list)
 	for l in list do print l
