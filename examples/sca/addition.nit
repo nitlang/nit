@@ -2,6 +2,7 @@ module addition
 
 import sca 
 
+# Composant addition
 class Addition 
 	super SCAComponentImp 
 	
@@ -13,10 +14,12 @@ class Addition
 		self.addService addition_service
 	end
 	
+	# Méthode d'addition
 	fun plus(a:Int, b:Int): Int do
 		return a + b
 	end
 	
+	# Définition des méthodes pouvant être appelées par référence
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "plus" then
 			return self.plus(parameters[0].getValue.to_s.to_i, parameters[1].getValue.to_s.to_i)

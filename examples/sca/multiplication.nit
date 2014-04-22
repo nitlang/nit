@@ -2,6 +2,7 @@ module multiplication
 
 import sca
 
+# Composant multiplication
 class Multiplication
 	super SCAComponentImp
 	
@@ -13,10 +14,12 @@ class Multiplication
 		self.addService multiplication_service
 	end
 
+	# Méthode de multiplication
 	fun fois(a:Int, b:Int): Int do
 		return a * b
 	end
 	
+	# Définition des méthodes pouvant être appelées par référence
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "fois" then
 			return self.fois(parameters[0].getValue.to_s.to_i, parameters[1].getValue.to_s.to_i)
