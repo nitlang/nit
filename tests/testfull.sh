@@ -17,6 +17,7 @@ done
 	../src/test_*.nit \
 	../contrib/sort_downloads/src/sort_downloads.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
+	../contrib/github_merge.nit \
 	../contrib/github_search_for_jni/src/github_search_for_jni.nit \
 	../contrib/inkscape_tools/src/svg_to_png_and_nit.nit \
 	../contrib/inkscape_tools/src/svg_to_icons.nit
