@@ -128,21 +128,18 @@ class MakefileToolchain
 	# The list is initially set with :
 	#   * the toolcontext --cc-path option
 	#   * the NIT_CC_PATH environment variable
-	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	#   * `toolcontext.nit_dir`
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
 	protected fun gather_cc_paths
 	do
 		# Look for the the Nit clib path
-		var path_env = "NIT_DIR".environ
-		if not path_env.is_empty then
+		var path_env = toolcontext.nit_dir
+		if path_env != null then
 			var libname = "{path_env}/clib"
 			if libname.file_exists then cc_paths.add(libname)
 		end
-
-		var libname = "{sys.program_name.dirname}/../clib"
-		if libname.file_exists then cc_paths.add(libname.simplify_path)
 
 		if cc_paths.is_empty then
 			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
