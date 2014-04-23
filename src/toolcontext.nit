@@ -238,5 +238,31 @@ class ToolContext
 			# Make sure the output directory exists
 			log_directory.mkdir
 		end
+
+		nit_dir = compute_nit_dir
+	end
+
+	# The identified root directory of the Nit project
+	var nit_dir: nullable String
+
+	private fun compute_nit_dir: nullable String
+	do
+		# a environ variable has precedence
+		var res = "NIT_DIR".environ
+		if not res.is_empty then return res
+
+		# find the runpath of the program from argv[0]
+		res = "{sys.program_name.dirname}/.."
+		if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
+
+		# find the runpath of the process from /proc
+		var exe = "/proc/self/exe"
+		if exe.file_exists then
+			res = exe.realpath
+			res = res.dirname.join_path("..")
+			if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
+		end
+
+		return null
 	end
 end

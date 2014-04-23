@@ -105,14 +105,9 @@ class NitdocContext
 		if opt_sharedir.value != null then
 			share_dir = opt_sharedir.value
 		else
-			var dir = "NIT_DIR".environ
-			if dir.is_empty then
-				dir = "{sys.program_name.dirname}/../share/nitdoc"
-			else
-				dir = "{dir}/share/nitdoc"
-			end
-			share_dir = dir
-			if share_dir == null then
+			var dir = toolcontext.nit_dir
+			share_dir = "{dir}/share/nitdoc"
+			if dir == null or not share_dir.file_exists then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
