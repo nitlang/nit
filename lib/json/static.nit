@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module simple_json_reader
+module static
 
 import json_parser
 import json_lexer
