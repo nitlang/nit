@@ -13,18 +13,12 @@ var composite = new SCAComposite.with_name("calculatrice")
 
 # le composant addition
 var c_addition = new Addition(composite)
-# on ajoute au composite
-composite.add c_addition
 
 # le composant mulitiplication
 var c_multiplication = new Multiplication(composite)
-# on ajoute au composite
-composite.add c_multiplication
 
 # le composant calculatrice qui va utiliser les deux autres
 var c_calculatrice = new Calculatrice(composite)
-# on ajoute au composite
-composite.add c_calculatrice
 
 
 # Utilisation de la calculatrice

@@ -18,6 +18,8 @@ class Calculatrice
 		var multiplication_service = composite.get("multiplication").get_service("multiplication_service")
 		var ref_multiplication = new SCAReference("multiplication", multiplication_service)
 		self.add_reference ref_multiplication
+		
+		composite.add self
 	end
 
 	# Appel de la méthode du composant addition

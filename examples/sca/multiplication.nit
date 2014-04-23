@@ -12,6 +12,8 @@ class Multiplication
 		# ajout du service
 		var multiplication_service = new SCAService("multiplication_service", self)
 		self.add_service multiplication_service
+		
+		composite.add self
 	end
 
 	# Méthode de multiplication

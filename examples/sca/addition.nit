@@ -12,6 +12,8 @@ class Addition
 		# ajout du service
 		var addition_service = new SCAService("addition_service", self)
 		self.add_service addition_service
+		
+		composite.add self
 	end
 	
 	# Méthode d'addition
