@@ -16,8 +16,8 @@
 
 module static
 
-import json_parser
-import json_lexer
+private import json_parser
+private import json_lexer
 
 redef class Nvalue
 	fun to_nit_object: nullable Object is abstract
