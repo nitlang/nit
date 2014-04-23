@@ -6,12 +6,12 @@ import sca
 class Addition 
 	super SCAComponentImp 
 	
-	init(composite:SCAComposite) do
-		super "addition"
+	init(composite:SCAComposite) do 
+		with_name "addition"
 		
 		# ajout du service
 		var addition_service = new SCAService("addition_service", self)
-		self.addService addition_service
+		self.add_service addition_service
 	end
 	
 	# Méthode d'addition

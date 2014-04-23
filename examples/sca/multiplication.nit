@@ -7,11 +7,11 @@ class Multiplication
 	super SCAComponentImp
 	
 	init(composite:SCAComposite) do
-		super "multiplication"
+		with_name "multiplication"
 		
 		# ajout du service
 		var multiplication_service = new SCAService("multiplication_service", self)
-		self.addService multiplication_service
+		self.add_service multiplication_service
 	end
 
 	# Méthode de multiplication

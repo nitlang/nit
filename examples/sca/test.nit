@@ -9,7 +9,7 @@ import calculatrice
 
 
 # on créé le composite
-var composite = new SCAComposite("calculatrice")
+var composite = new SCAComposite.with_name("calculatrice")
 
 # le composant addition
 var c_addition = new Addition(composite)

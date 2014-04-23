@@ -55,13 +55,17 @@ class SCAComponent
 	var references: List[SCAReference] = new List[SCAReference]
 	var name: String
 	
+	init with_name(name:String) do 
+		self.name = name
+	end
+	
 	# Add a new service
-	fun addService(service:SCAService) do
+	fun add_service(service:SCAService) do
 		self.services.add service
 	end
 	
 	# Get specifique service
-	fun getService(name:String): nullable SCAService do
+	fun get_service(name:String): nullable SCAService do
 		for service in services do
 			if service.name == name then
 				return service
@@ -71,12 +75,12 @@ class SCAComponent
 	end
 	
 	# Add a new reference
-	fun addReference(reference:SCAReference) do
+	fun add_reference(reference:SCAReference) do
 		self.references.add reference
 	end
 	
 	# Get specifique reference
-	fun getReference(destination:String): nullable  SCAReference do
+	fun get_reference(destination:String): nullable  SCAReference do
 		for reference in references do
 			if reference.destination == destination then
 				return reference
