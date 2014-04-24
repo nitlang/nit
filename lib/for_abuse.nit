@@ -141,8 +141,8 @@ redef class Array[E]
 	# The user uses the provided query (item) to implements its own comparison
 	#
 	#     var a = [1, 3, 2]
-	#     for q in a do q.res = q.a <=> q.b
-	#     assert print a      ==  123
+	#     for q in a.sort_fa do q.res = q.a <=> q.b
+	#     assert a ==  [1, 2, 3]
 	#
 	# Implements a sort by permutation.
 	fun sort_fa: ForAbuser[CompareQuery[E]]
@@ -157,7 +157,9 @@ end
 # The abuse just ensures that the file is closed after the reading.
 #
 #     for f in file_open("/etc/issue") do
-#       print f.read_line
+#         var l = f.read_line
+#         print l
+#         assert not l.is_empty
 #     end # f is automatically closed here
 fun file_open(path: String): ForAbuser[IFStream]
 do
