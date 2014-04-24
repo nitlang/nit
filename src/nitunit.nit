@@ -42,7 +42,7 @@ class NitUnitExecutor
 	end
 
 	# All blocks of code from a same `ADoc`
-	var block = new Array[String]
+	var blocks = new Array[Array[String]]
 
 	redef fun process_code(n: HTMLTag, text: String)
 	do
@@ -57,8 +57,14 @@ class NitUnitExecutor
 		v.enter_visit(ast)
 		if not v.foundit then return
 
+		# Create a first block
+		# Or create a new block for modules that are more than a main part
+		if blocks.is_empty or ast isa AModule then
+			blocks.add(new Array[String])
+		end
+
 		# Add it to the file
-		block.add(text)
+		blocks.last.add(text)
 	end
 
 	# used to generate distinct names
@@ -68,12 +74,18 @@ class NitUnitExecutor
 	# Fill the prepated `tc` (testcase) XTM node
 	fun extract(ndoc: ADoc, tc: HTMLTag)
 	do
-		block.clear
+		blocks.clear
 
 		work(ndoc.to_mdoc)
 
-		if block.is_empty then return
+		if blocks.is_empty then return
 
+		for block in blocks do test_block(ndoc, tc, block)
+	end
+
+	# Execute a block
+	fun test_block(ndoc: ADoc, tc: HTMLTag, block: Array[String])
+	do
 		toolcontext.modelbuilder.unit_entities += 1
 
 		cpt += 1
