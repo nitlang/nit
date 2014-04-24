@@ -50,12 +50,25 @@ class NitUnitExecutor
 		var ast = toolcontext.parse_something(text)
 
 		# We want executable code
-		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then return
+		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
+			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
+				toolcontext.warning(ndoc.location, "Warning: There is a block of code that is not valid Nit, thus not considered a nitunit")
+				if ast isa AError then toolcontext.warning(ast.location, ast.message)
+				ndoc = null # To avoid multiple warning in the same node
+			end
+			return
+		end
 
 		# Search `assert` in the AST
 		var v = new SearchAssertVisitor
 		v.enter_visit(ast)
-		if not v.foundit then return
+		if not v.foundit then
+			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
+				toolcontext.warning(ndoc.location, "Warning: There is a block of Nit code without `assert`, thus not considered a nitunit")
+				ndoc = null # To avoid multiple warning in the same node
+			end
+			return
+		end
 
 		# Create a first block
 		# Or create a new block for modules that are more than a main part
@@ -67,6 +80,9 @@ class NitUnitExecutor
 		blocks.last.add(text)
 	end
 
+	# The associated node to localize warnings
+	var ndoc: nullable ADoc
+
 	# used to generate distinct names
 	var cpt = 0
 
@@ -76,7 +92,10 @@ class NitUnitExecutor
 	do
 		blocks.clear
 
+		self.ndoc = ndoc
+
 		work(ndoc.to_mdoc)
+		toolcontext.check_errors
 
 		if blocks.is_empty then return
 
