@@ -95,6 +95,8 @@ class NitUnitExecutor
 		end
 		f.close
 
+		if toolcontext.opt_noact.value then return
+
 		var nit_dir = toolcontext.nit_dir
 		var nitg = "{nit_dir}/bin/nitg"
 		if nit_dir == null or not nitg.file_exists then
@@ -237,11 +239,12 @@ redef class ToolContext
 	var opt_full = new OptionBool("Process also imported modules", "--full")
 	var opt_output = new OptionString("Output name (default is 'nitunit.xml')", "-o", "--output")
 	var opt_dir = new OptionString("Working directory (default is '.nitunit')", "--dir")
+	var opt_noact = new OptionBool("Does not compile and run tests", "--no-act")
 end
 
 var toolcontext = new ToolContext
 
-toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir)
+toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
 toolcontext.process_options(args)
@@ -268,7 +271,7 @@ print "Results saved in {file}"
 
 if modelbuilder.unit_entities == 0 then
 	print "No nitunits found"
-else if modelbuilder.failed_entities == 0 then
+else if modelbuilder.failed_entities == 0 and not toolcontext.opt_noact.value then
 	print "Success"
 end
 print "Entities: {modelbuilder.total_entities}; Documented ones: {modelbuilder.doc_entities}; With nitunits: {modelbuilder.unit_entities}; Failures: {modelbuilder.failed_entities}"
