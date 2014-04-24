@@ -74,6 +74,8 @@ class NitUnitExecutor
 
 		if block.is_empty then return
 
+		toolcontext.modelbuilder.unit_entities += 1
+
 		cpt += 1
 		var file = "{prefix}{cpt}.nit"
 
@@ -124,11 +126,13 @@ class NitUnitExecutor
 			ne.attr("message", msg)
 			tc.add ne
 			toolcontext.warning(ndoc.location, "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
 			toolcontext.warning(ndoc.location, "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
 
@@ -153,6 +157,11 @@ class SearchAssertVisitor
 end
 
 redef class ModelBuilder
+	var total_entities = 0
+	var doc_entities = 0
+	var unit_entities = 0
+	var failed_entities = 0
+
 	fun test_markdown(mmodule: MModule): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
@@ -181,10 +190,12 @@ redef class ModelBuilder
 		var tc
 
 		do
+			total_entities += 1
 			var nmoduledecl = nmodule.n_moduledecl
 			if nmoduledecl == null then break label x
 			var ndoc = nmoduledecl.n_doc
 			if ndoc == null then break label x
+			doc_entities += 1
 			tc = new HTMLTag("testcase")
 			# NOTE: jenkins expects a '.' in the classname attr
 			tc.attr("classname", mmodule.full_name + ".<module>")
@@ -194,8 +205,10 @@ redef class ModelBuilder
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef.as(not null)
 			if nclassdef isa AStdClassdef then
+				total_entities += 1
 				var ndoc = nclassdef.n_doc
 				if ndoc != null then
+					doc_entities += 1
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", "<class>")
@@ -204,8 +217,10 @@ redef class ModelBuilder
 			end
 			for npropdef in nclassdef.n_propdefs do
 				var mpropdef = npropdef.mpropdef.as(not null)
+				total_entities += 1
 				var ndoc = npropdef.n_doc
 				if ndoc != null then
+					doc_entities += 1
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", mpropdef.mproperty.full_name)
@@ -249,3 +264,11 @@ end
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
 page.write_to_file(file)
+print "Results saved in {file}"
+
+if modelbuilder.unit_entities == 0 then
+	print "No nitunits found"
+else if modelbuilder.failed_entities == 0 then
+	print "Success"
+end
+print "Entities: {modelbuilder.total_entities}; Documented ones: {modelbuilder.doc_entities}; With nitunits: {modelbuilder.unit_entities}; Failures: {modelbuilder.failed_entities}"
