@@ -79,7 +79,7 @@ class NitUnitExecutor
 		cpt += 1
 		var file = "{prefix}{cpt}.nit"
 
-		toolcontext.info("Execute {tc.attrs["classname"]}.{tc.attrs["name"]} in {file}", 2)
+		toolcontext.info("Execute {tc.attrs["classname"]}.{tc.attrs["name"]} in {file}", 1)
 
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
