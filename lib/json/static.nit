@@ -14,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Static interface to get Nit objects from a Json string.
+#
+# `String::json_to_nit_object` returns an equivalent Nit object from
+# the Json source. This object can then be type checked by the usual
+# languages features (`isa` and `as`).
 module static
 
 private import json_parser
