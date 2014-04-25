@@ -468,11 +468,20 @@ class ModelBuilder
 			return mgroups[rdp]
 		end
 
-		# Hack, a dir is determined by the presence of a honomymous nit file
+		# Hack, a group is determined by:
+		# * the presence of a honomymous nit file
+		# * the fact that the directory is named `src`
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
-		if not mp.file_exists then return null
+		if not mp.file_exists then
+			if pn == "src" then
+				# With a src directory, the group name is the name of the parent directory
+				pn = rdp.dirname.basename("")
+			else
+				return null
+			end
+		end
 
 		# check parent directory
 		var parentpath = dirpath.join_path("..").simplify_path
