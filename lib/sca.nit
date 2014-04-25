@@ -24,6 +24,7 @@ class Parameter
 end
 
 # Use to have reference to a service
+# Reference must have SCAService from another component to send requests
 class SCAReference
 	var destination: String
 	var service: nullable SCAService
@@ -36,6 +37,8 @@ class SCAReference
 end
 
 # Use to open the componant on a service
+# SCAService corresponds to the endpoint of a composant, other composant can use this service to send message
+# It contains SCAComponentImp (implementation of componant) to invoke this methods
 class SCAService
 	var name: String
 	var composite: SCAComponentImp
@@ -49,7 +52,7 @@ end
 
 # Parent componant use to have the Design Pattern Composite
 # Can be Composite or Component
-class SCAComponent
+abstract class SCAComponent
 	var services: List[SCAService] = new List[SCAService]
 	var references: List[SCAReference] = new List[SCAReference]
 	var name: String
@@ -125,6 +128,7 @@ class SCAComposite
 end
 
 # Component class
+# Class to inherits to implement a composant
 class SCAComponentImp
 	super SCAComponent
 
