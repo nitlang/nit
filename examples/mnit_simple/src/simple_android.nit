@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module simple_android
+module simple_android is
+	java_package("org.nitlanguage.simple")
+end
 
 import simple
 import mnit_android
