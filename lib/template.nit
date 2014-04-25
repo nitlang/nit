@@ -67,18 +67,22 @@ module template
 #
 #     class LnkTmpl
 #         super Template
-#         var text: Template
+#         var text: Streamable
 #         var title: nullable String
 #         var href: String
 #         redef fun rendering do
-#             add """<a href="{{{href.html_escape}}}" """
-#             if title != null then add """title="{{{title.html_escape}}}" """
+#             add """<a href="{{{href.html_escape}}}""""
+#             if title != null then add """ title="{{{title.html_escape}}}""""
 #             add ">"
 #             add text
 #             add "</a>"
 #         end
 #         # ...
 #     end
+#     var l = new LnkTmpl
+#     l.text = "hello world"
+#     l.href = "hello.png"
+#     assert l.write_to_string == """<a href="hello.png">hello world</a>"""
 #
 class Template
 	super Streamable
