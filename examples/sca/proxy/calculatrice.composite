@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+	name="calculatrice">
+
+	<component name="addition" >
+		<implementation.nit class="Addition" /> <!--classe métier-->
+		<service name="addition_service" />
+	</component>
+
+	<component name="multiplication" >
+		<implementation.nit class="Multiplication" /> <!--classe métier-->
+		<service name="multiplication_service" />
+	</component>
+
+	<component name="calculatrice" >
+		<implementation.nit class="Calculatrice" /> <!--classe métier-->
+		<reference name="addition_reference" remote="addition_service" />
+		<reference name="multiplication_reference" remote="multiplication_service" />
+	</component>
+
+</composite>
