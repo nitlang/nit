@@ -14,24 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module du composant "calculatrice"
-module calculatrice
+# Module of componant "calculator"
+module calculator
 
 import sca
 
-# Composant calculatrice
-class Calculatrice 
+# Component calculator
+class Calculator 
 	super SCAComponentImp
 	
 	init(composite:SCAComposite) do
-		with_name "calculatrice"
+		with_name "calculator"
 		
-		# reference vers addition
+		# Reference to addition
 		var addition_service = composite.get("addition").get_service("addition_service")
 		var ref_addition = new SCAReference("addition", addition_service)
 		self.add_reference ref_addition
 		
-		# reference vers multiplication
+		# Reference to multiplication
 		var multiplication_service = composite.get("multiplication").get_service("multiplication_service")
 		var ref_multiplication = new SCAReference("multiplication", multiplication_service)
 		self.add_reference ref_multiplication
@@ -39,31 +39,31 @@ class Calculatrice
 		composite.add self
 	end
 
-	# Appel de la méthode du composant addition
+	# Calling the method of Addition component
 	fun addition(a:Int, b:Int): Int do
-		# initialisation des paramètres à envoyer
+		# initialization parameters to send
 		var params = new List[Parameter]
 		var p1 = new Parameter("a", a)
 		var p2 = new Parameter("b", b)
 		params.add p1
 		params.add p2
 
-		# on fait appel à la référence "addition" pour envoyer le message à la méthode "plus"
+		# call to "addition" reference to send the message to the method "plus"
 		var r = self.get_reference("addition").invoke("plus", params)
 
 		return r.to_s.to_i
 	end
 
-	# Appel de la méthode du composant multiplication
+	# Calling the method of Multiplication component
 	fun multiplication(a:Int, b:Int): Int do
-		# initialisation des paramètres à envoyer
+		# initialization parameters to send
 		var params = new List[Parameter]
 		var p1 = new Parameter("a", a)
 		var p2 = new Parameter("b", b)
 		params.add p1
 		params.add p2
 
-		# on fait appel à la référence "multiplication" pour envoyer le message à la méthode "fois"
+		# call to "multiplication" reference to send the message to the method "fois"
 		var r = self.get_reference("multiplication").invoke("fois", params)
 
 		return r.to_s.to_i

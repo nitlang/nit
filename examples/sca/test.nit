@@ -14,40 +14,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Exemple de fonctionnement du module SCA
+# Functional example of SCA module
 module test
 
 import sca
 import addition
 import multiplication
-import calculatrice
+import calculator
 
-# Exemple d'une calculatrice en SCA
-# Avec utilisation de deux composants : addition et multiplication
-# Le composant calculatrice fait appel aux deux autres pour réaliser les opérations
+# Example of a calculator in SCA 
+# With use of two components: addition and multiplication 
+# The calculator component uses the other two to perform the operations
 
 
-# on créé le composite
+# Create the composite
 var composite = new SCAComposite.with_name("calculatrice")
 
-# le composant addition
+# the addition component
 var c_addition = new Addition(composite)
 
-# le composant mulitiplication
+# the multiplication component
 var c_multiplication = new Multiplication(composite)
 
-# le composant calculatrice qui va utiliser les deux autres
-var c_calculatrice = new Calculatrice(composite)
+# the calculator component who will use the other two
+var c_calculator = new Calculator(composite)
 
 
-# Utilisation de la calculatrice
-# on récupère le composant calculatrice
-var calculatrice = composite.get("calculatrice").as(Calculatrice)
-# on effectue une somme ...
-var somme = calculatrice.addition(10, 10) 
-# ... une multiplication
-var resultat = calculatrice.multiplication(somme, 2)
+# Using the Calculator 
+# The calculator component is recovered
+var calculator = composite.get("calculator").as(Calculator)
+# Sum is performed ...
+var sum = calculator.addition(10, 10) 
+# ... and multiplication
+var result = calculator.multiplication(sum, 2)
 
-# on affiche les résultats
-print "calculatrice.addition(10, 10) : {somme}"
-print "calculatrice.multiplication({somme}, 2) : {resultat}"
+# print the results
+print "calculator.addition(10, 10) : {sum}"
+print "calculator.multiplication({sum}, 2) : {result}"

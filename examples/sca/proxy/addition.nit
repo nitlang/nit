@@ -14,15 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Code métier du composant "addition"
+# Business code of the component "addition"
 module addition
 
 import sca 
 
-# Composant addition
+# Addition component
 class Addition 
 	
-	# Méthode d'addition
+	# Method of addition
 	fun plus(a:Int, b:Int): nullable Int do
 		return a + b
 	end

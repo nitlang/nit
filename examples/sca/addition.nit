@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module du composant "addition"
+# Module of Component "addition"
 module addition
 
 import sca 
 
-# Composant addition
+# Component addition
 class Addition 
 	super SCAComponentImp 
 	
@@ -33,12 +33,12 @@ class Addition
 		composite.add self
 	end
 	
-	# Méthode d'addition
+	# Addition method
 	fun plus(a:Int, b:Int): Int do
 		return a + b
 	end
 	
-	# Définition des méthodes pouvant être appelées par référence
+	# Definition of methods that can be called by reference
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "plus" then
 			return self.plus(parameters[0].value.to_s.to_i, parameters[1].value.to_s.to_i)

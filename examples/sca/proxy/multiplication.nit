@@ -14,15 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Code métier du composant "multiplication"
+# Business code of the component "multiplication"
 module multiplication
 
 import sca
 
-# Composant multiplication
+# Multiplication component
 class Multiplication
 
-	# Méthode de multiplication
+	# Method of multiplication
 	fun fois(a:Int, b:Int): Int do
 		return a * b
 	end

@@ -14,15 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Code métier du composant "calculatrice"
-module calculatrice
+# Business code of component "calculatrice"
+module calculator
 
 import sca
 import additionProxy
 import multiplicationProxy
 
-# Composant calculatrice
-class Calculatrice 
+# Calculator component
+class Calculator 
 
 	# references
 	var additionProxy: AdditionProxy
@@ -33,12 +33,12 @@ class Calculatrice
 		self.multiplicationProxy = new MultiplicationProxy (composite)
 	end
 
-	# Appel de la méthode du composant addition
+	# Calling the method of Addition component
 	fun addition(a:Int, b:Int): Int do
 		return additionProxy.plus(a,b)
 	end
 
-	# Appel de la méthode du composant multiplication
+	# Calling the method of Multiplication component
 	fun multiplication(a:Int, b:Int): Int do
 		return multiplicationProxy.fois(a,b)
 	end

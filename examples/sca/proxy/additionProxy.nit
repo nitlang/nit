@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module du proxy du composant "addition" qui contient les spécification SCA
-# Celui ci est utilisé quand un composant veut faire une référence vers un autre, il utilise alors le proxy
+# Module of commponent proxy "addition" that contains the SCA specification
+# This is used when a component wants to make a reference to another, so it uses the proxy
 module additionProxy
 
 import sca 
@@ -27,21 +27,21 @@ class AdditionProxy
 	init(composite:SCAComposite) do
 		with_name "additionProxy"
 		
-		# reference vers addition
+		# Add reference to addition
 		var addition_service = composite.get("additionContext").get_service("addition_service")
 		var ref_addition = new SCAReference("addition_reference", addition_service)
 		self.add_reference ref_addition
 	end
 	
 	fun plus(a:Int, b:Int): Int do
-		# initialisation des paramètres à envoyer
+		# initialization parameters to send
 		var params = new List[Parameter]
 		var p1 = new Parameter("a", a)
 		var p2 = new Parameter("b", b)
 		params.add p1
 		params.add p2
 
-		# on fait appel à la référence "addition" pour envoyer le message à la méthode "plus"
+		# call to "addition" reference to send the message to the method "plus"
 		var r = self.get_reference("addition_reference").invoke("plus", params)
 
 		return r.to_s.to_i

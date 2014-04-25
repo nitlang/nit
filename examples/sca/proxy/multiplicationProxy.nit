@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Module of commponent proxy "multiplication" that contains the SCA specification
+# This is used when a component wants to make a reference to another, so it uses the proxy
 module multiplicationProxy
 
 import sca 
 import multiplication
-
 
 class MultiplicationProxy
 	super SCAComponentImp 
@@ -26,21 +27,21 @@ class MultiplicationProxy
 	init(composite:SCAComposite) do
 		with_name "multiplicationProxy"
 		
-		# reference vers multiplication
+		# Add reference to multiplication
 		var multiplication_service = composite.get("multiplicationContext").get_service("multiplication_service")
 		var ref_multiplication = new SCAReference("multiplication_reference", multiplication_service)
 		self.add_reference ref_multiplication
 	end
 	
 	fun fois(a:Int, b:Int): Int do
-		# initialisation des paramètres à envoyer
+		# initialization parameters to send
 		var params = new List[Parameter]
 		var p1 = new Parameter("a", a)
 		var p2 = new Parameter("b", b)
 		params.add p1
 		params.add p2
 
-		# on fait appel à la référence "multiplication" pour envoyer le message à la méthode "fois"
+		# call to "multiplication" reference to send the message to the method "fois"
 		var r = self.get_reference("multiplication_reference").invoke("fois", params)
 
 		return r.to_s.to_i

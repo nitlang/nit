@@ -14,31 +14,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module du composant "multiplication"
+# Module of component "multiplication"
 module multiplication
 
 import sca
 
-# Composant multiplication
+# Component multiplication
 class Multiplication
 	super SCAComponentImp
 	
 	init(composite:SCAComposite) do
 		with_name "multiplication"
 		
-		# ajout du service
+		# Add service
 		var multiplication_service = new SCAService("multiplication_service", self)
 		self.add_service multiplication_service
 		
 		composite.add self
 	end
 
-	# Méthode de multiplication
+	# Method of multiplication
 	fun fois(a:Int, b:Int): Int do
 		return a * b
 	end
 	
-	# Définition des méthodes pouvant être appelées par référence
+	# Definition of methods that can be called by reference
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "fois" then
 			return self.fois(parameters[0].value.to_s.to_i, parameters[1].value.to_s.to_i)

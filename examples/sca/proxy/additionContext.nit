@@ -14,25 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module du context du composant "addition" qui contient les spécification SCA
-# Celui ci est appelé lors de la réception d'une requête
+# Module of commponent context "addition" that contains the SCA specification
+# This one is called when receiving a request
 module additionContext
 
 import sca
 import addition
 
-# Composant addition
+# Addition component
 class AdditionContext
 	super SCAComponentImp 
 	super Addition
 	
 	init with_name(name:String) do
-		# ajout du service
+		# Add service
 		var addition_service = new SCAService("addition_service", self)
 		self.add_service addition_service
 	end
 	
-	# Définition des méthodes pouvant être appelées par référence
+	# Definition of methods that can be called by reference
 	redef fun receive(operation: String, parameters: nullable List[Parameter]): nullable Object do
 		if operation == "plus" then
 			return self.plus(parameters[0].value.to_s.to_i, parameters[1].value.to_s.to_i)
