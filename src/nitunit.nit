@@ -23,8 +23,8 @@ import parser_util
 class NitUnitExecutor
 	super Doc2Mdwn
 
-	# The name of the module to import
-	var modname: String
+	# The module to import
+	var mmodule: MModule
 
 	# The prefix of the generated Nit source-file
 	var prefix: String
@@ -33,11 +33,11 @@ class NitUnitExecutor
 	var testsuite: HTMLTag
 
 	# Initialize a new e
-	init(toolcontext: ToolContext, prefix: String, modname: String, testsuite: HTMLTag)
+	init(toolcontext: ToolContext, prefix: String, mmodule: MModule, testsuite: HTMLTag)
 	do
 		super(toolcontext)
 		self.prefix = prefix
-		self.modname = modname
+		self.mmodule = mmodule
 		self.testsuite = testsuite
 	end
 
@@ -118,8 +118,7 @@ class NitUnitExecutor
 		f = new OFStream.open(file)
 		f.write("# GENERATED FILE\n")
 		f.write("# Example extracted from a documentation\n")
-		var modname = self.modname
-		f.write("import {modname}\n")
+		f.write("import {mmodule.name}\n")
 		f.write("\n")
 		for text in block do
 			f.write(text)
@@ -134,7 +133,7 @@ class NitUnitExecutor
 			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
 			toolcontext.check_errors
 		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I . >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
@@ -209,7 +208,7 @@ redef class ModelBuilder
 		# TODO do things correctly once the importation of arbitraty nested module is legal
 		var o = mmodule
 		var g = o.mgroup
-		if g != null then
+		if g != null and g.mproject.name == "standard" then
 			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
 		end
 
@@ -218,7 +217,7 @@ redef class ModelBuilder
 		var prefix = toolcontext.opt_dir.value
 		if prefix == null then prefix = ".nitunit"
 		prefix = prefix.join_path(mmodule.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o.name, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
 
 		var tc
 
