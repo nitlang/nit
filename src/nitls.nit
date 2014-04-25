@@ -46,8 +46,6 @@ class ProjTree
 end
 
 var tc = new ToolContext
-var model = new Model
-var mb = new ModelBuilder(model, tc)
 
 var opt_keep = new OptionBool("Ignore errors and files that are not a Nit source file", "-k", "--keep")
 var opt_recursive = new OptionBool("Process directories recussively", "-r", "--recursive")
@@ -74,6 +72,9 @@ if sum > 1 then
 	print tc.tooldescription
 	exit 1
 end
+
+var model = new Model
+var mb = new ModelBuilder(model, tc)
 
 if opt_depends.value then
 	if opt_recursive.value then
