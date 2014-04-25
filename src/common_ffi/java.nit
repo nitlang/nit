@@ -418,27 +418,27 @@ redef class MType
 	#
 	# * Primitives common to both languages use their Java primitive type
 	# * Nit extern Java classes are reprensented by their full Java type
-	# * Other Nit objects are represented by `long` in Java. It holds the
+	# * Other Nit objects are represented by `int` in Java. It holds the
 	#	pointer to the underlying C structure.
 	#	TODO create static Java types to store and hide the pointer
-	private fun java_type: String do return "long"
+	private fun java_type: String do return "int"
 
 	# JNI type name (in C)
 	#
 	# So this is a C type, usually defined in `jni.h`
-	private fun jni_type: String do return "jlong"
+	private fun jni_type: String do return "jint"
 
 	# JNI short type name (for signatures)
 	# 
 	# Is used by `MMethod::build_jni_format` to pass a Java method signature
 	# to the JNI function `GetStaticMetodId`.
-	private fun jni_format: String do return "J"
+	private fun jni_format: String do return "I"
 
 	# Type name appearing within JNI function names.
 	#
 	# Used by `JavaLanguage::compile_extern_method` when calling JNI's `CallStatic*Method`.
 	# This strategy is used by JNI to type the return of callbacks to Java.
-	private fun jni_signature_alt: String do return "Long"
+	private fun jni_signature_alt: String do return "Int"
 end
 
 redef class MClassType
