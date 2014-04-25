@@ -200,6 +200,8 @@ redef class ASuperstringExpr
 	#     t.to_s
 	redef fun accept_transform_visitor(v)
 	do
+		if true then return # FIXME: transformation disabled for the moment
+
 		var nblock = v.builder.make_block
 
 		var arraytype = v.get_class(self, "Array").get_mtype([v.get_class(self, "Object").mclass_type])
