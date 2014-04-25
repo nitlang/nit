@@ -29,7 +29,7 @@
 # #  /     /
 # # c -3- d -8- e
 # #
-# var graph = new Graph[Node,WeigthedLink[Node]]
+# var graph = new Graph[Node,WeightedLink]
 #
 # var na = new Node(graph)
 # var nb = new Node(graph)
