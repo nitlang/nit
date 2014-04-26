@@ -239,6 +239,16 @@ need_skip()
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
+	if test $engine = niti && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
+		((tapcount=tapcount+1))
+		if [ -n "$tap" ]; then
+			echo "ok - $2 # skip"
+		else
+			echo "=> $2: [skip exec]"
+		fi
+		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
+		return 0
+	fi
 	return 1
 }
 
