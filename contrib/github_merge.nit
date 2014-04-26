@@ -107,6 +107,7 @@ else
 		return
 	end
 	if system("git merge --no-commit {sha}") != 0 then
+		system("cp mergemsg `git rev-parse --git-dir`/MERGE_MSG")
 		print "Problem during merge... Let's do the commit manually."
 		return
 	end
