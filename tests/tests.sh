@@ -262,6 +262,15 @@ skip_exec()
 	return 1
 }
 
+skip_cc()
+{
+	test "$noskip" = true && return 1
+	if echo "$1" | grep -f "cc.skip" >/dev/null 2>&1; then
+		return 0
+	fi
+	return 1
+}
+
 find_nitc()
 {
 	((tapcount=tapcount+1))
@@ -431,13 +440,18 @@ END
 			> "$ff.compile.log"
 			ERR=0
 		else
+			if skip_cc "$bf"; then
+				nocc="--no-cc"
+			else
+				nocc=
+			fi
 			# Compile
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -450,6 +464,11 @@ END
 			process_result $bf $bf $pack
 		elif skip_exec "$bf"; then
 			# No exec
+			> "$ff.res"
+			process_result $bf $bf $pack
+		elif [ -n "$nocc" ]; then
+			# not compiled
+			test -z "$tap" && echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
