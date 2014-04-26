@@ -53,6 +53,7 @@ private class MModulesMetricsPhase
 				# Scalar metrics
 				print  toolcontext.format_h3("  `- group {mgroup.full_name}")
 				mmodules.add_all(mgroup.mmodules)
+				metrics.clear
 				metrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				metrics.to_console(1, not toolcontext.opt_nocolors.value)
 				if csv then metrics.to_csv.save("{out}/{mgroup}.csv")

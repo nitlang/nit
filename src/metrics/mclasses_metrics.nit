@@ -46,11 +46,12 @@ private class MClassesMetricsPhase
 		metrics.register(new CNOC(mainmodule))
 		metrics.register(new CNOD(mainmodule))
 		metrics.register(new CDIT(mainmodule))
+		metrics.register(new CNBP(mainmodule, min_vis))
+		metrics.register(new CNBA(mainmodule, min_vis))
 		metrics.register(new CNBIP(mainmodule, min_vis))
 		metrics.register(new CNBRP(mainmodule, min_vis))
 		metrics.register(new CNBHP(mainmodule, min_vis))
 		#TODO metrics.register(new CNBI) # nb init
-		#TODO metrics.register(new CNBA) # nb attrs
 		#TODO metrics.register(new CNBM) # nb methods
 		#TODO metrics.register(new CNBV) # nb vtypes
 
@@ -62,6 +63,7 @@ private class MClassesMetricsPhase
 
 			for mgroup in mproject.mgroups do
 				if mgroup.mmodules.is_empty then continue
+				metrics.clear
 
 				# Scalar metrics
 				print toolcontext.format_h3("  `- group {mgroup.full_name}")
@@ -75,6 +77,7 @@ private class MClassesMetricsPhase
 			end
 		end
 		if not mclasses.is_empty then
+			metrics.clear
 			# Global metrics
 			print toolcontext.format_h2("\n ## global metrics")
 			metrics.collect(mclasses)
@@ -171,6 +174,50 @@ class CDIT
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.in_hierarchy(mainmodule).depth
+		end
+	end
+end
+
+# Class Metric: Number of MProperties
+class CNBP
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnbp"
+	redef fun desc do return "number of accessible properties (inherited + local)"
+
+	var mainmodule: MModule
+	var min_visibility: MVisibility
+
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.all_mproperties(mainmodule, min_visibility).length
+		end
+	end
+end
+
+# Class Metric: Number of MAttributes
+class CNBA
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnba"
+	redef fun desc do return "number of accessible attributes (inherited + local)"
+
+	var mainmodule: MModule
+	var min_visibility: MVisibility
+
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.all_mattributes(mainmodule, min_visibility).length
 		end
 	end
 end
