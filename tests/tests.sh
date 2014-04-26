@@ -206,17 +206,25 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	else
+	elif [ -s out/$pattern.res ]; then
 		if [ -n "$tap" ]; then
-			echo "ok - $description # skip no sav"
+			echo "no ok - $description"
 		else
-			echo "[=== no sav ===] out/$pattern.res"
+			echo "[=== no sav ===] out/$pattern.res is not empty"
 		fi
-		echo >>$xml "<skipped/>"
+		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
+	else
+		# no sav but empty res
+		if [ -n "$tap" ]; then
+			echo "ok - $description"
+		else
+			echo "[0k] out/$pattern.res is empty"
+		fi
+		ok="$ok $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
