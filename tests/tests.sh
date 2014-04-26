@@ -242,6 +242,16 @@ need_skip()
 	return 1
 }
 
+skip_exec()
+{
+	test "$noskip" = true && return 1
+	if echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
+		echo -n "_ "
+		return 0
+	fi
+	return 1
+}
+
 find_nitc()
 {
 	((tapcount=tapcount+1))
@@ -427,6 +437,10 @@ END
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
+			process_result $bf $bf $pack
+		elif skip_exec "$bf"; then
+			# No exec
+			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
 			test -z "$tap" && echo -n ". "
