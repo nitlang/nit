@@ -177,7 +177,7 @@ end
 redef class ADoExpr
 	private init make
 	do
-		_n_kwdo = new TKwdo
+		n_kwdo = new TKwdo
 		escapemark = new EscapeMark(null, false)
 	end
 
@@ -203,11 +203,11 @@ end
 redef class AIfExpr
 	private init make(condition: AExpr, mtype: nullable MType)
 	do
-		_n_kwif = new TKwif
-		_n_expr = condition
-		_n_expr.parent = self
-		_n_then = new ABlockExpr.make
-		_n_else = new ABlockExpr.make
+		n_kwif = new TKwif
+		n_expr = condition
+		n_expr.parent = self
+		n_then = new ABlockExpr.make
+		n_else = new ABlockExpr.make
 		self.mtype = mtype
 		self.is_typed = true
 	end
@@ -216,7 +216,7 @@ end
 redef class AType
 	private init make
 	do
-		_n_id = new TClassid
+		n_id = new TClassid
 	end
 end
 
@@ -224,7 +224,7 @@ redef class ADecIntExpr
 	private init make(value: Int, t: MType)
 	do
 		self.value = value
-		self._n_number = new TNumber # dummy
+		self.n_number = new TNumber # dummy
 		self.mtype = t
 	end
 end
@@ -232,9 +232,9 @@ end
 redef class ANewExpr
 	private init make(mtype: MClassType, mmethod: MMethod, args: nullable Array[AExpr])
 	do
-		_n_kwnew = new TKwnew
-		_n_type = new AType.make
-		_n_args = new AListExprs
+		n_kwnew = new TKwnew
+		n_type = new AType.make
+		n_args = new AListExprs
 		if args != null then
 			n_args.n_exprs.add_all(args)
 		end
@@ -246,11 +246,11 @@ end
 redef class ACallExpr
 	private init make(recv: AExpr, mmethod: MMethod, args: nullable Array[AExpr], t: nullable MType)
 	do
-		self._n_expr = recv
+		self.n_expr = recv
 		recv.parent = self
 		self.raw_arguments = args or else new Array[AExpr]
-		_n_args = new AListExprs
-		_n_id = new TId
+		n_args = new AListExprs
+		n_id = new TId
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end
@@ -264,9 +264,9 @@ end
 redef class AAttrExpr
 	private init make(recv: AExpr, attribute: MAttribute, t: MType)
 	do
-		_n_expr = recv
+		n_expr = recv
 		recv.parent = self
-		_n_id = new TAttrid
+		n_id = new TAttrid
 		mproperty = attribute
 		mtype = t
 	end
@@ -275,12 +275,12 @@ end
 redef class AAttrAssignExpr
 	private init make(recv: AExpr, attribute: MAttribute, value: AExpr)
 	do
-		_n_expr = recv
+		n_expr = recv
 		recv.parent = self
-		_n_id = new TAttrid
-		_n_value = value
+		n_id = new TAttrid
+		n_value = value
 		value.parent = self
-		_n_assign = new TAssign
+		n_assign = new TAssign
 		mproperty = attribute
 		mtype = value.mtype
 	end
@@ -289,7 +289,7 @@ end
 redef class AVarExpr
 	private init make(v: Variable, mtype: MType)
 	do
-		_n_id = new TId
+		n_id = new TId
 		variable = v
 		self.mtype = mtype
 	end
@@ -298,10 +298,10 @@ end
 redef class AVarAssignExpr
 	private init make(v: Variable, value: AExpr)
 	do
-		_n_id = new TId
-		_n_value = value
+		n_id = new TId
+		n_value = value
 		value.parent = self
-		_n_assign = new TAssign
+		n_assign = new TAssign
 		variable = v
 		mtype = value.mtype
 	end

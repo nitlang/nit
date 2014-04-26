@@ -340,904 +340,904 @@ class AAtid super Prod end
 
 class AModule
 	super AModule
-    readable var _n_moduledecl: nullable AModuledecl = null
-    readable var _n_imports: List[AImport] = new List[AImport]
-    readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
-    readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
+    var n_moduledecl: nullable AModuledecl = null
+    var n_imports: List[AImport] = new List[AImport]
+    var n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
+    var n_classdefs: List[AClassdef] = new List[AClassdef]
 end
 class AModuledecl
 	super AModuledecl
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwmodule: TKwmodule
-    readable var _n_name: AModuleName
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_doc: nullable ADoc = null
+    var n_kwmodule: TKwmodule
+    var n_name: AModuleName
+    var n_annotations: nullable AAnnotations = null
 end
 class AStdImport
 	super AImport
-    readable var _n_visibility: AVisibility
-    readable var _n_kwimport: TKwimport
-    readable var _n_name: AModuleName
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_visibility: AVisibility
+    var n_kwimport: TKwimport
+    var n_name: AModuleName
+    var n_annotations: nullable AAnnotations = null
 end
 class ANoImport
 	super AImport
-    readable var _n_visibility: AVisibility
-    readable var _n_kwimport: TKwimport
-    readable var _n_kwend: TKwend
+    var n_visibility: AVisibility
+    var n_kwimport: TKwimport
+    var n_kwend: TKwend
 end
 class APublicVisibility
 	super AVisibility
 end
 class APrivateVisibility
 	super AVisibility
-    readable var _n_kwprivate: TKwprivate
+    var n_kwprivate: TKwprivate
 end
 class AProtectedVisibility
 	super AVisibility
-    readable var _n_kwprotected: TKwprotected
+    var n_kwprotected: TKwprotected
 end
 class AIntrudeVisibility
 	super AVisibility
-    readable var _n_kwintrude: TKwintrude
+    var n_kwintrude: TKwintrude
 end
 class AStdClassdef
 	super AClassdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_classkind: AClasskind
-    readable var _n_id: nullable TClassid = null
-    readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
-    readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
-    readable var _n_kwend: TKwend
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_classkind: AClasskind
+    var n_id: nullable TClassid = null
+    var n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+    var n_annotations: nullable AAnnotations = null
+    var n_extern_code_block: nullable AExternCodeBlock = null
+    var n_superclasses: List[ASuperclass] = new List[ASuperclass]
+    var n_propdefs: List[APropdef] = new List[APropdef]
+    var n_kwend: TKwend
 end
 class ATopClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
+    var n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AMainClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
+    var n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AConcreteClasskind
 	super AClasskind
-    readable var _n_kwclass: TKwclass
+    var n_kwclass: TKwclass
 end
 class AAbstractClasskind
 	super AClasskind
-    readable var _n_kwabstract: TKwabstract
-    readable var _n_kwclass: TKwclass
+    var n_kwabstract: TKwabstract
+    var n_kwclass: TKwclass
 end
 class AInterfaceClasskind
 	super AClasskind
-    readable var _n_kwinterface: TKwinterface
+    var n_kwinterface: TKwinterface
 end
 class AEnumClasskind
 	super AClasskind
-    readable var _n_kwenum: TKwenum
+    var n_kwenum: TKwenum
 end
 class AExternClasskind
 	super AClasskind
-    readable var _n_kwextern: TKwextern
-    readable var _n_kwclass: nullable TKwclass = null
+    var n_kwextern: TKwextern
+    var n_kwclass: nullable TKwclass = null
 end
 class AFormaldef
 	super AFormaldef
-    readable var _n_id: TClassid
-    readable var _n_type: nullable AType = null
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_id: TClassid
+    var n_type: nullable AType = null
+    var n_annotations: nullable AAnnotations = null
 end
 class ASuperclass
 	super ASuperclass
-    readable var _n_kwsuper: TKwsuper
-    readable var _n_type: AType
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwsuper: TKwsuper
+    var n_type: AType
+    var n_annotations: nullable AAnnotations = null
 end
 class AAttrPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_readable: nullable AAble = null
-    readable var _n_writable: nullable AAble = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwvar: TKwvar
-    readable var _n_id: nullable TAttrid = null
-    readable var _n_id2: nullable TId = null
-    readable var _n_type: nullable AType = null
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_expr: nullable AExpr = null
+    var n_doc: nullable ADoc = null
+    var n_readable: nullable AAble = null
+    var n_writable: nullable AAble = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwvar: TKwvar
+    var n_id: nullable TAttrid = null
+    var n_id2: nullable TId = null
+    var n_type: nullable AType = null
+    var n_annotations: nullable AAnnotations = null
+    var n_expr: nullable AExpr = null
 end
 class AMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_methid: nullable AMethid = null
+    var n_signature: ASignature
 end
 class ADeferredMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwmeth: TKwmeth
+    var n_methid: AMethid
+    var n_signature: ASignature
+    var n_annotations: nullable AAnnotations = null
 end
 class AInternMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwmeth: TKwmeth
+    var n_methid: AMethid
+    var n_signature: ASignature
 end
 class AExternMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_extern: nullable TString = null
-    readable var _n_extern_calls: nullable AExternCalls = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwmeth: TKwmeth
+    var n_methid: AMethid
+    var n_signature: ASignature
+    var n_extern: nullable TString = null
+    var n_extern_calls: nullable AExternCalls = null
+    var n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AConcreteMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_block: nullable AExpr = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwmeth: TKwmeth
+    var n_methid: nullable AMethid = null
+    var n_signature: ASignature
+    var n_annotations: nullable AAnnotations = null
+    var n_block: nullable AExpr = null
 end
 class AConcreteInitPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwinit: TKwinit
-    readable var _n_methid: nullable AMethid = null
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_block: nullable AExpr = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwinit: TKwinit
+    var n_methid: nullable AMethid = null
+    var n_signature: ASignature
+    var n_annotations: nullable AAnnotations = null
+    var n_block: nullable AExpr = null
 end
 class AExternInitPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwnew: TKwnew
-    readable var _n_methid: nullable AMethid = null
-    readable var _n_signature: ASignature
-    readable var _n_extern: nullable TString = null
-    readable var _n_extern_calls: nullable AExternCalls = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwnew: TKwnew
+    var n_methid: nullable AMethid = null
+    var n_signature: ASignature
+    var n_extern: nullable TString = null
+    var n_extern_calls: nullable AExternCalls = null
+    var n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AMainMethPropdef
 	super APropdef
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_block: nullable AExpr = null
+    var n_kwredef: nullable TKwredef = null
+    var n_block: nullable AExpr = null
 end
 class ATypePropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwtype: TKwtype
-    readable var _n_id: TClassid
-    readable var _n_type: AType
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_doc: nullable ADoc = null
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: AVisibility
+    var n_kwtype: TKwtype
+    var n_id: TClassid
+    var n_type: AType
+    var n_annotations: nullable AAnnotations = null
 end
 class AReadAble
 	super AAble
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_kwreadable: TKwreadable
+    var n_kwredef: nullable TKwredef = null
+    var n_kwreadable: TKwreadable
 end
 class AWriteAble
 	super AAble
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: nullable AVisibility = null
-    readable var _n_kwwritable: TKwwritable
+    var n_kwredef: nullable TKwredef = null
+    var n_visibility: nullable AVisibility = null
+    var n_kwwritable: TKwwritable
 end
 class AIdMethid
 	super AMethid
-    readable var _n_id: TId
+    var n_id: TId
 end
 class APlusMethid
 	super AMethid
-    readable var _n_plus: TPlus
+    var n_plus: TPlus
 end
 class AMinusMethid
 	super AMethid
-    readable var _n_minus: TMinus
+    var n_minus: TMinus
 end
 class AStarMethid
 	super AMethid
-    readable var _n_star: TStar
+    var n_star: TStar
 end
 class ASlashMethid
 	super AMethid
-    readable var _n_slash: TSlash
+    var n_slash: TSlash
 end
 class APercentMethid
 	super AMethid
-    readable var _n_percent: TPercent
+    var n_percent: TPercent
 end
 class AEqMethid
 	super AMethid
-    readable var _n_eq: TEq
+    var n_eq: TEq
 end
 class ANeMethid
 	super AMethid
-    readable var _n_ne: TNe
+    var n_ne: TNe
 end
 class ALeMethid
 	super AMethid
-    readable var _n_le: TLe
+    var n_le: TLe
 end
 class AGeMethid
 	super AMethid
-    readable var _n_ge: TGe
+    var n_ge: TGe
 end
 class ALtMethid
 	super AMethid
-    readable var _n_lt: TLt
+    var n_lt: TLt
 end
 class AGtMethid
 	super AMethid
-    readable var _n_gt: TGt
+    var n_gt: TGt
 end
 class ALlMethid
 	super AMethid
-    readable var _n_ll: TLl
+    var n_ll: TLl
 end
 class AGgMethid
 	super AMethid
-    readable var _n_gg: TGg
+    var n_gg: TGg
 end
 class ABraMethid
 	super AMethid
-    readable var _n_obra: TObra
-    readable var _n_cbra: TCbra
+    var n_obra: TObra
+    var n_cbra: TCbra
 end
 class AStarshipMethid
 	super AMethid
-    readable var _n_starship: TStarship
+    var n_starship: TStarship
 end
 class AAssignMethid
 	super AMethid
-    readable var _n_id: TId
-    readable var _n_assign: TAssign
+    var n_id: TId
+    var n_assign: TAssign
 end
 class ABraassignMethid
 	super AMethid
-    readable var _n_obra: TObra
-    readable var _n_cbra: TCbra
-    readable var _n_assign: TAssign
+    var n_obra: TObra
+    var n_cbra: TCbra
+    var n_assign: TAssign
 end
 class ASignature
 	super ASignature
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_params: List[AParam] = new List[AParam]
-    readable var _n_cpar: nullable TCpar = null
-    readable var _n_type: nullable AType = null
+    var n_opar: nullable TOpar = null
+    var n_params: List[AParam] = new List[AParam]
+    var n_cpar: nullable TCpar = null
+    var n_type: nullable AType = null
 end
 class AParam
 	super AParam
-    readable var _n_id: TId
-    readable var _n_type: nullable AType = null
-    readable var _n_dotdotdot: nullable TDotdotdot = null
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_id: TId
+    var n_type: nullable AType = null
+    var n_dotdotdot: nullable TDotdotdot = null
+    var n_annotations: nullable AAnnotations = null
 end
 class AType
 	super AType
-    readable var _n_kwnullable: nullable TKwnullable = null
-    readable var _n_id: TClassid
-    readable var _n_types: List[AType] = new List[AType]
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwnullable: nullable TKwnullable = null
+    var n_id: TClassid
+    var n_types: List[AType] = new List[AType]
+    var n_annotations: nullable AAnnotations = null
 end
 class ALabel
 	super ALabel
-    readable var _n_kwlabel: TKwlabel
-    readable var _n_id: TId
+    var n_kwlabel: TKwlabel
+    var n_id: TId
 end
 class ABlockExpr
 	super AExpr
-    readable var _n_expr: List[AExpr] = new List[AExpr]
-    readable var _n_kwend: nullable TKwend = null
+    var n_expr: List[AExpr] = new List[AExpr]
+    var n_kwend: nullable TKwend = null
 end
 class AVardeclExpr
 	super AExpr
-    readable var _n_kwvar: TKwvar
-    readable var _n_id: TId
-    readable var _n_type: nullable AType = null
-    readable var _n_assign: nullable TAssign = null
-    readable var _n_expr: nullable AExpr = null
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwvar: TKwvar
+    var n_id: TId
+    var n_type: nullable AType = null
+    var n_assign: nullable TAssign = null
+    var n_expr: nullable AExpr = null
+    var n_annotations: nullable AAnnotations = null
 end
 class AReturnExpr
 	super AExpr
-    readable var _n_kwreturn: nullable TKwreturn = null
-    readable var _n_expr: nullable AExpr = null
+    var n_kwreturn: nullable TKwreturn = null
+    var n_expr: nullable AExpr = null
 end
 class ABreakExpr
 	super AExpr
-    readable var _n_kwbreak: TKwbreak
-    readable var _n_label: nullable ALabel = null
-    readable var _n_expr: nullable AExpr = null
+    var n_kwbreak: TKwbreak
+    var n_label: nullable ALabel = null
+    var n_expr: nullable AExpr = null
 end
 class AAbortExpr
 	super AExpr
-    readable var _n_kwabort: TKwabort
+    var n_kwabort: TKwabort
 end
 class AContinueExpr
 	super AExpr
-    readable var _n_kwcontinue: nullable TKwcontinue = null
-    readable var _n_label: nullable ALabel = null
-    readable var _n_expr: nullable AExpr = null
+    var n_kwcontinue: nullable TKwcontinue = null
+    var n_label: nullable ALabel = null
+    var n_expr: nullable AExpr = null
 end
 class ADoExpr
 	super AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+    var n_kwdo: TKwdo
+    var n_block: nullable AExpr = null
+    var n_label: nullable ALabel = null
 end
 class AIfExpr
 	super AExpr
-    readable var _n_kwif: TKwif
-    readable var _n_expr: AExpr
-    readable var _n_then: nullable AExpr = null
-    readable var _n_else: nullable AExpr = null
+    var n_kwif: TKwif
+    var n_expr: AExpr
+    var n_then: nullable AExpr = null
+    var n_else: nullable AExpr = null
 end
 class AIfexprExpr
 	super AExpr
-    readable var _n_kwif: TKwif
-    readable var _n_expr: AExpr
-    readable var _n_kwthen: TKwthen
-    readable var _n_then: AExpr
-    readable var _n_kwelse: TKwelse
-    readable var _n_else: AExpr
+    var n_kwif: TKwif
+    var n_expr: AExpr
+    var n_kwthen: TKwthen
+    var n_then: AExpr
+    var n_kwelse: TKwelse
+    var n_else: AExpr
 end
 class AWhileExpr
 	super AExpr
-    readable var _n_kwwhile: TKwwhile
-    readable var _n_expr: AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+    var n_kwwhile: TKwwhile
+    var n_expr: AExpr
+    var n_kwdo: TKwdo
+    var n_block: nullable AExpr = null
+    var n_label: nullable ALabel = null
 end
 class ALoopExpr
 	super AExpr
-    readable var _n_kwloop: TKwloop
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+    var n_kwloop: TKwloop
+    var n_block: nullable AExpr = null
+    var n_label: nullable ALabel = null
 end
 class AForExpr
 	super AExpr
-    readable var _n_kwfor: TKwfor
-    readable var _n_ids: List[TId] = new List[TId]
-    readable var _n_expr: AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+    var n_kwfor: TKwfor
+    var n_ids: List[TId] = new List[TId]
+    var n_expr: AExpr
+    var n_kwdo: TKwdo
+    var n_block: nullable AExpr = null
+    var n_label: nullable ALabel = null
 end
 class AAssertExpr
 	super AExpr
-    readable var _n_kwassert: TKwassert
-    readable var _n_id: nullable TId = null
-    readable var _n_expr: AExpr
-    readable var _n_else: nullable AExpr = null
+    var n_kwassert: TKwassert
+    var n_id: nullable TId = null
+    var n_expr: AExpr
+    var n_else: nullable AExpr = null
 end
 class AOnceExpr
 	super AExpr
-    readable var _n_kwonce: TKwonce
-    readable var _n_expr: AExpr
+    var n_kwonce: TKwonce
+    var n_expr: AExpr
 end
 class ASendExpr
 	super AExpr
-    readable var _n_expr: AExpr
+    var n_expr: AExpr
 end
 class ABinopExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AOrExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AAndExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AOrElseExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AImpliesExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ANotExpr
 	super AExpr
-    readable var _n_kwnot: TKwnot
-    readable var _n_expr: AExpr
+    var n_kwnot: TKwnot
+    var n_expr: AExpr
 end
 class AEqExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ANeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ALtExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ALeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ALlExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AGtExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AGeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AGgExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AIsaExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_type: AType
+    var n_expr: AExpr
+    var n_type: AType
 end
 class APlusExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AMinusExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AStarshipExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AStarExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class ASlashExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class APercentExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+    var n_expr: AExpr
+    var n_expr2: AExpr
 end
 class AUminusExpr
 	super AExpr
-    readable var _n_minus: TMinus
-    readable var _n_expr: AExpr
+    var n_minus: TMinus
+    var n_expr: AExpr
 end
 class ANewExpr
 	super AExpr
-    readable var _n_kwnew: TKwnew
-    readable var _n_type: AType
-    readable var _n_id: nullable TId = null
-    readable var _n_args: AExprs
+    var n_kwnew: TKwnew
+    var n_type: AType
+    var n_id: nullable TId = null
+    var n_args: AExprs
 end
 class AAttrExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
+    var n_expr: AExpr
+    var n_id: TAttrid
 end
 class AAttrAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_id: TAttrid
+    var n_assign: TAssign
+    var n_value: AExpr
 end
 class AAttrReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_id: TAttrid
+    var n_assign_op: AAssignOp
+    var n_value: AExpr
 end
 class ACallExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
+    var n_expr: AExpr
+    var n_id: TId
+    var n_args: AExprs
 end
 class ACallAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_id: TId
+    var n_args: AExprs
+    var n_assign: TAssign
+    var n_value: AExpr
 end
 class ACallReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_id: TId
+    var n_args: AExprs
+    var n_assign_op: AAssignOp
+    var n_value: AExpr
 end
 class ASuperExpr
 	super AExpr
-    readable var _n_qualified: nullable AQualified = null
-    readable var _n_kwsuper: TKwsuper
-    readable var _n_args: AExprs
+    var n_qualified: nullable AQualified = null
+    var n_kwsuper: TKwsuper
+    var n_args: AExprs
 end
 class AInitExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwinit: TKwinit
-    readable var _n_args: AExprs
+    var n_expr: AExpr
+    var n_kwinit: TKwinit
+    var n_args: AExprs
 end
 class ABraExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
+    var n_expr: AExpr
+    var n_args: AExprs
 end
 class ABraAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_args: AExprs
+    var n_assign: TAssign
+    var n_value: AExpr
 end
 class ABraReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+    var n_expr: AExpr
+    var n_args: AExprs
+    var n_assign_op: AAssignOp
+    var n_value: AExpr
 end
 class AVarExpr
 	super AExpr
-    readable var _n_id: TId
+    var n_id: TId
 end
 class AVarAssignExpr
 	super AExpr
-    readable var _n_id: TId
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+    var n_id: TId
+    var n_assign: TAssign
+    var n_value: AExpr
 end
 class AVarReassignExpr
 	super AExpr
-    readable var _n_id: TId
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+    var n_id: TId
+    var n_assign_op: AAssignOp
+    var n_value: AExpr
 end
 class ARangeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_expr: AExpr
+    var n_expr2: AExpr
+    var n_annotations: nullable AAnnotations = null
 end
 class ACrangeExpr
 	super AExpr
-    readable var _n_obra: TObra
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_cbra: TCbra
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_obra: TObra
+    var n_expr: AExpr
+    var n_expr2: AExpr
+    var n_cbra: TCbra
+    var n_annotations: nullable AAnnotations = null
 end
 class AOrangeExpr
 	super AExpr
-    readable var _n_obra: TObra
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_cbra: TObra
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_obra: TObra
+    var n_expr: AExpr
+    var n_expr2: AExpr
+    var n_cbra: TObra
+    var n_annotations: nullable AAnnotations = null
 end
 class AArrayExpr
 	super AExpr
-    readable var _n_exprs: AExprs
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_exprs: AExprs
+    var n_annotations: nullable AAnnotations = null
 end
 class ASelfExpr
 	super AExpr
-    readable var _n_kwself: TKwself
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwself: TKwself
+    var n_annotations: nullable AAnnotations = null
 end
 class AImplicitSelfExpr
 	super AExpr
 end
 class ATrueExpr
 	super AExpr
-    readable var _n_kwtrue: TKwtrue
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwtrue: TKwtrue
+    var n_annotations: nullable AAnnotations = null
 end
 class AFalseExpr
 	super AExpr
-    readable var _n_kwfalse: TKwfalse
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwfalse: TKwfalse
+    var n_annotations: nullable AAnnotations = null
 end
 class ANullExpr
 	super AExpr
-    readable var _n_kwnull: TKwnull
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_kwnull: TKwnull
+    var n_annotations: nullable AAnnotations = null
 end
 class ADecIntExpr
 	super AExpr
-    readable var _n_number: TNumber
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_number: TNumber
+    var n_annotations: nullable AAnnotations = null
 end
 class AHexIntExpr
 	super AExpr
-    readable var _n_hex_number: THexNumber
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_hex_number: THexNumber
+    var n_annotations: nullable AAnnotations = null
 end
 class AFloatExpr
 	super AExpr
-    readable var _n_float: TFloat
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_float: TFloat
+    var n_annotations: nullable AAnnotations = null
 end
 class ACharExpr
 	super AExpr
-    readable var _n_char: TChar
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_char: TChar
+    var n_annotations: nullable AAnnotations = null
 end
 class AStringExpr
 	super AExpr
-    readable var _n_string: TString
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_string: TString
+    var n_annotations: nullable AAnnotations = null
 end
 class AStartStringExpr
 	super AExpr
-    readable var _n_string: TStartString
+    var n_string: TStartString
 end
 class AMidStringExpr
 	super AExpr
-    readable var _n_string: TMidString
+    var n_string: TMidString
 end
 class AEndStringExpr
 	super AExpr
-    readable var _n_string: TEndString
+    var n_string: TEndString
 end
 class ASuperstringExpr
 	super AExpr
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_exprs: List[AExpr] = new List[AExpr]
+    var n_annotations: nullable AAnnotations = null
 end
 class AParExpr
 	super AExpr
-    readable var _n_opar: TOpar
-    readable var _n_expr: AExpr
-    readable var _n_cpar: TCpar
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_opar: TOpar
+    var n_expr: AExpr
+    var n_cpar: TCpar
+    var n_annotations: nullable AAnnotations = null
 end
 class AAsCastExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwas: TKwas
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_type: AType
-    readable var _n_cpar: nullable TCpar = null
+    var n_expr: AExpr
+    var n_kwas: TKwas
+    var n_opar: nullable TOpar = null
+    var n_type: AType
+    var n_cpar: nullable TCpar = null
 end
 class AAsNotnullExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwas: TKwas
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_kwnot: TKwnot
-    readable var _n_kwnull: TKwnull
-    readable var _n_cpar: nullable TCpar = null
+    var n_expr: AExpr
+    var n_kwas: TKwas
+    var n_opar: nullable TOpar = null
+    var n_kwnot: TKwnot
+    var n_kwnull: TKwnull
+    var n_cpar: nullable TCpar = null
 end
 class AIssetAttrExpr
 	super AExpr
-    readable var _n_kwisset: TKwisset
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
+    var n_kwisset: TKwisset
+    var n_expr: AExpr
+    var n_id: TAttrid
 end
 class ADebugTypeExpr
 	super AExpr
-    readable var _n_kwdebug: TKwdebug
-    readable var _n_kwtype: TKwtype
-    readable var _n_expr: AExpr
-    readable var _n_type: AType
+    var n_kwdebug: TKwdebug
+    var n_kwtype: TKwtype
+    var n_expr: AExpr
+    var n_type: AType
 end
 class AListExprs
 	super AExprs
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
+    var n_exprs: List[AExpr] = new List[AExpr]
 end
 class AParExprs
 	super AExprs
-    readable var _n_opar: TOpar
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_cpar: TCpar
+    var n_opar: TOpar
+    var n_exprs: List[AExpr] = new List[AExpr]
+    var n_cpar: TCpar
 end
 class ABraExprs
 	super AExprs
-    readable var _n_obra: TObra
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_cbra: TCbra
+    var n_obra: TObra
+    var n_exprs: List[AExpr] = new List[AExpr]
+    var n_cbra: TCbra
 end
 class APlusAssignOp
 	super AAssignOp
-    readable var _n_pluseq: TPluseq
+    var n_pluseq: TPluseq
 end
 class AMinusAssignOp
 	super AAssignOp
-    readable var _n_minuseq: TMinuseq
+    var n_minuseq: TMinuseq
 end
 class AModuleName
 	super AModuleName
-    readable var _n_quad: nullable TQuad = null
-    readable var _n_path: List[TId] = new List[TId]
-    readable var _n_id: TId
+    var n_quad: nullable TQuad = null
+    var n_path: List[TId] = new List[TId]
+    var n_id: TId
 end
 class AExternCalls
 	super AExternCalls
-    readable var _n_kwimport: TKwimport
-    readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+    var n_kwimport: TKwimport
+    var n_extern_calls: List[AExternCall] = new List[AExternCall]
 end
 class AExternCall
 	super AExternCall
 end
 class ASuperExternCall
 	super AExternCall
-    readable var _n_kwsuper: TKwsuper
+    var n_kwsuper: TKwsuper
 end
 class ALocalPropExternCall
 	super AExternCall
-    readable var _n_methid: AMethid
+    var n_methid: AMethid
 end
 class AFullPropExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_dot: nullable TDot = null
-    readable var _n_methid: AMethid
+    var n_type: AType
+    var n_dot: nullable TDot = null
+    var n_methid: AMethid
 end
 class AInitPropExternCall
 	super AExternCall
-    readable var _n_type: AType
+    var n_type: AType
 end
 class ACastAsExternCall
 	super AExternCall
-    readable var _n_from_type: AType
-    readable var _n_dot: nullable TDot = null
-    readable var _n_kwas: TKwas
-    readable var _n_to_type: AType
+    var n_from_type: AType
+    var n_dot: nullable TDot = null
+    var n_kwas: TKwas
+    var n_to_type: AType
 end
 class AAsNullableExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_kwas: TKwas
-    readable var _n_kwnullable: TKwnullable
+    var n_type: AType
+    var n_kwas: TKwas
+    var n_kwnullable: TKwnullable
 end
 class AAsNotNullableExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_kwas: TKwas
-    readable var _n_kwnot: TKwnot
-    readable var _n_kwnullable: TKwnullable
+    var n_type: AType
+    var n_kwas: TKwas
+    var n_kwnot: TKwnot
+    var n_kwnullable: TKwnullable
 end
 class AInLanguage
 	super AInLanguage
-    readable var _n_kwin: TKwin
-    readable var _n_string: TString
+    var n_kwin: TKwin
+    var n_string: TString
 end
 class AExternCodeBlock
 	super AExternCodeBlock
-    readable var _n_in_language: nullable AInLanguage = null
-    readable var _n_extern_code_segment: TExternCodeSegment
+    var n_in_language: nullable AInLanguage = null
+    var n_extern_code_segment: TExternCodeSegment
 end
 class AQualified
 	super AQualified
-    readable var _n_id: List[TId] = new List[TId]
-    readable var _n_classid: nullable TClassid = null
+    var n_id: List[TId] = new List[TId]
+    var n_classid: nullable TClassid = null
 end
 class ADoc
 	super ADoc
-    readable var _n_comment: List[TComment] = new List[TComment]
+    var n_comment: List[TComment] = new List[TComment]
 end
 class AAnnotations
 	super AAnnotations
-    readable var _n_at: nullable TAt = null
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_items: List[AAnnotation] = new List[AAnnotation]
-    readable var _n_cpar: nullable TCpar = null
+    var n_at: nullable TAt = null
+    var n_opar: nullable TOpar = null
+    var n_items: List[AAnnotation] = new List[AAnnotation]
+    var n_cpar: nullable TCpar = null
 end
 class AAnnotation
 	super AAnnotation
-    readable var _n_atid: AAtid
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_args: List[AAtArg] = new List[AAtArg]
-    readable var _n_cpar: nullable TCpar = null
-    readable var _n_annotations: nullable AAnnotations = null
+    var n_atid: AAtid
+    var n_opar: nullable TOpar = null
+    var n_args: List[AAtArg] = new List[AAtArg]
+    var n_cpar: nullable TCpar = null
+    var n_annotations: nullable AAnnotations = null
 end
 class ATypeAtArg
 	super AAtArg
-    readable var _n_type: AType
+    var n_type: AType
 end
 class AExprAtArg
 	super AAtArg
-    readable var _n_expr: AExpr
+    var n_expr: AExpr
 end
 class AAtAtArg
 	super AAtArg
-    readable var _n_annotations: AAnnotations
+    var n_annotations: AAnnotations
 end
 class AIdAtid
 	super AAtid
-    readable var _n_id: TId
+    var n_id: TId
 end
 class AKwexternAtid
 	super AAtid
-    readable var _n_id: TKwextern
+    var n_id: TKwextern
 end
 class AKwinternAtid
 	super AAtid
-    readable var _n_id: TKwintern
+    var n_id: TKwintern
 end
 class AKwreadableAtid
 	super AAtid
-    readable var _n_id: TKwreadable
+    var n_id: TKwreadable
 end
 class AKwwritableAtid
 	super AAtid
-    readable var _n_id: TKwwritable
+    var n_id: TKwwritable
 end
 class AKwimportAtid
 	super AAtid
-    readable var _n_id: TKwimport
+    var n_id: TKwimport
 end
 
 class Start
 	super Prod
-    readable var _n_base: nullable AModule
-    readable var _n_eof: EOF
+    var n_base: nullable AModule
+    var n_eof: EOF
     init(
-        n_base: nullable AModule,
-        n_eof: EOF)
+        nbase: nullable AModule,
+        neof: EOF)
     do
-        _n_base = n_base
-        _n_eof = n_eof
+        n_base = nbase
+        n_eof = neof
     end
 
 end

@@ -48,7 +48,7 @@ private class ASTPrinterVisitor
 	do
 		if last_current != current_node then
 			last_current = current_node
-			var l = current_node._location
+			var l = current_node.real_location
 			if l != null then
 				eol
 				out.add(s)

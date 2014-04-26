@@ -40,20 +40,20 @@ $ end template
 $ template make_tokens()
 
 redef class Token
-    var _text: nullable String
+    private var text_cache: nullable String
 
     redef fun text
     do
-        var res = _text
+        var res = text_cache
         if res != null then return res
         res = location.text
-	_text = res
+	text_cache = res
 	return res
     end
 
     redef fun text=(text)
     do
-        _text = text
+        text_cache = text
     end
 
     fun parser_index: Int is abstract
@@ -69,7 +69,7 @@ redef class @ename
 
     init init_tk(loc: Location)
     do
-		_location = loc
+		real_location = loc
     end
 end
 
@@ -84,38 +84,38 @@ redef class EOF
 
     init init_tk(loc: Location)
     do
-        _text = ""
-		_location = loc
+        text_cache = ""
+		real_location = loc
     end
 end
 
 redef class PError
-    readable var _message: String
+    var message: String
 
     init init_error(message: String, loc: Location)
     do
 		init_tk(loc)
-		_message = message
+		self.message = message
     end
 end
 
 redef class PLexerError
-    readable var _string: String
+    var string: String
 
     init init_lexer_error(message: String, loc: Location, string: String)
     do
 		init_error(message, loc)
-		_string = string
+		self.string = string
     end
 end
 
 redef class PParserError
-    readable var _token: Token
+    var token: Token
 
     init init_parser_error(message: String, loc: Location, token: Token)
     do
 		init_error(message, loc)
-		_token = token
+		self.token = token
     end
 end
 $ end template
