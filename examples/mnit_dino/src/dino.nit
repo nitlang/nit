@@ -15,7 +15,10 @@
 # limitations under the License.
 
 # App for the Dino game, manages App lifecyle and inputs
-module dino
+module dino is
+	app_version(0, 2, git_revision)
+	app_name("mnit Dino")
+end
 
 import mnit
 import realtime

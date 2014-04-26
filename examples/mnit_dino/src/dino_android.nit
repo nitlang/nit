@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module dino_android
+module dino_android is
+	java_package("org.nitlanguage.dino")
+end
 
 import dino
 
