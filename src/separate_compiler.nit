@@ -39,6 +39,8 @@ redef class ToolContext
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
 	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
+	# --no-colo-dead-methods
+	var opt_no_colo_dead_methods = new OptionBool("Do not colorize dead methods", "--no-colo-dead-methods")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -56,6 +58,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
+		self.option_context.add_option(self.opt_no_colo_dead_methods)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
@@ -299,7 +302,7 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
-					if rta != null and not rta.live_methods.has(mprop) then
+					if modelbuilder.toolcontext.opt_no_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
 						dead_methods.add(mprop)
 						continue
 					end
