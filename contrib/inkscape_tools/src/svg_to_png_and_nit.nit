@@ -68,14 +68,6 @@ end
 	end
 end
 
-redef class String
-	fun to_i_strip_e: Int
-	do
-		if has_substring("e-", 0) then return 0
-		return to_i
-	end
-end
-
 redef class Int
 	fun adapt(d: Int, scale: Float): Int
 	do
@@ -152,12 +144,12 @@ for drawing in drawings do
 			var words = line.split("=")
 			var n = words[1]
 			n = n.substring(1, n.length-2) # remove ""
-			page_width = n.to_i_strip_e
+			page_width = n.to_f.ceil.to_i
 		else if page_height == -1 and line.search("height") != null then
 			var words = line.split("=")
 			var n = words[1]
 			n = n.substring(1, n.length-2) # remove ""
-			page_height = n.to_i_strip_e
+			page_height = n.to_f.ceil.to_i
 		end
 	end
 	svg_file.close
