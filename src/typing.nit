@@ -1221,7 +1221,6 @@ redef class ASendExpr
 		var msignature = callsite.msignature
 
 		var args = compute_raw_arguments
-		self.raw_arguments = args
 
 		callsite.check_signature(v, args)
 
@@ -1245,7 +1244,7 @@ redef class ASendExpr
 	private fun property_name: String is abstract
 
 	# An array of all arguments (excluding self)
-	var raw_arguments: nullable Array[AExpr]
+	fun raw_arguments: Array[AExpr] do return compute_raw_arguments
 
 	private fun compute_raw_arguments: Array[AExpr] is abstract
 end
@@ -1382,7 +1381,6 @@ redef class ASendReassignFormExpr
 		self.callsite = callsite
 
 		var args = compute_raw_arguments
-		self.raw_arguments = args
 
 		callsite.check_signature(v, args)
 
