@@ -76,13 +76,26 @@ class AndroidToolchain
 
 	redef fun write_files(compiler, compile_dir, cfiles)
 	do
-		var app_name = compiler.mainmodule.name
-		var app_package = "org.nitlanguage.{app_name}"
-		var app_version = "0.1"
+		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
+		var short_project_name = compiler.mainmodule.name
 
-		var args = ["android", "-s", "create", "project", "--name", app_name,
-			"--target", "android-10", "--path", android_project_root,
-			"--package", app_package, "--activity", app_name]
+		var app_name = project.name
+		if app_name == null then app_name = compiler.mainmodule.name
+		print app_name
+
+		var app_package = project.java_package
+		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
+
+		var app_version = project.version
+		if app_version == null then app_version = "1.0"
+
+		var args = ["android", "-s",
+			"create", "project",
+			"--name", short_project_name,
+			"--target", "android-10",
+			"--path", android_project_root,
+			"--package", app_package,
+			"--activity", short_project_name]
 		toolcontext.exec_and_check(args)
 
 		# create compile_dir
