@@ -175,7 +175,12 @@ $(call import-module,android/native_app_glue)
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+{{{project.manifest_application_lines.join("\n")}}}
+
     </application>
+
+{{{project.manifest_lines.join("\n")}}}
 
 </manifest> 
 <!-- END_INCLUDE(manifest) -->
