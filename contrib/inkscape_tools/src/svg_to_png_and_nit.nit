@@ -184,10 +184,10 @@ for drawing in drawings do
 		if words.length == 5 then
 			var id = words[0]
 
-			var x = words[1].to_i_strip_e
-			var y = words[2].to_i_strip_e
-			var w = words[3].to_i_strip_e
-			var h = words[4].to_i_strip_e
+			var x = words[1].to_f.floor.to_i
+			var y = words[2].to_f.floor.to_i
+			var w = words[3].to_f.ceil.to_i
+			var h = words[4].to_f.ceil.to_i
 
 			if id.has_prefix("0") then
 				var nit_name = id.substring_from(1)
