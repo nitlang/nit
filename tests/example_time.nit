@@ -20,20 +20,20 @@
 # The Time class represents a quantity of time
 class Time
 	# Internally, the quantity of time is stored in minutes
-	readable writable var _min: Int = 0
+	var min: Int = 0
 
 	# The quantity ot time (in hours)
 	fun hour: Int
 	do
 		# Need to transform minutes in hours
-		return _min / 60
+		return min / 60
 	end
 
 	# Set the quantity of time (in hour)
 	fun hour=(i: Int)
 	do
 		# Need to transform hours in minutes
-		_min = i * 60
+		min = i * 60
 	end
 
 	# The quantity of tyme in human readable form (h:m)

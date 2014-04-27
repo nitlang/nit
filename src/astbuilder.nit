@@ -32,7 +32,7 @@ class ASTBuilder
 	# Make a new Int literal
 	fun make_int(value: Int): AIntExpr
 	do
-		return new AIntExpr.make(value, mmodule.get_primitive_class("Int").mclass_type)
+		return new ADecIntExpr.make(value, mmodule.get_primitive_class("Int").mclass_type)
 	end
 
 	# Make a new instatiation
@@ -220,7 +220,7 @@ redef class AType
 	end
 end
 
-redef class AIntExpr
+redef class ADecIntExpr
 	private init make(value: Int, t: MType)
 	do
 		self.value = value
@@ -248,7 +248,6 @@ redef class ACallExpr
 	do
 		self._n_expr = recv
 		recv.parent = self
-		self.raw_arguments = args or else new Array[AExpr]
 		_n_args = new AListExprs
 		_n_id = new TId
 		if args != null then

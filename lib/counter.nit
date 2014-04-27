@@ -52,7 +52,10 @@ class Counter[E: Object]
 
 	redef fun is_empty do return map.is_empty
 
-	redef fun clear do map.clear
+	redef fun clear do
+		sum = 0
+		map.clear
+	end
 
 	# Count one more occurrence of `e`
 	fun inc(e: E)

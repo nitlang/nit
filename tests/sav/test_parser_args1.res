@@ -20,12 +20,13 @@ Start ../src/test_parser.nit:17,1--110,1
         TKwsuper "super" ../src/test_parser.nit:23,2--6
         AType ../src/test_parser.nit:23,8--14
           TClassid "Visitor" ../src/test_parser.nit:23,8--14
-      AAttrPropdef ../src/test_parser.nit:24,2--15
-        APublicVisibility ../src/test_parser.nit:24,2
-        TKwvar "var" ../src/test_parser.nit:24,2--4
-        TAttrid "_rank" ../src/test_parser.nit:24,6--10
-        AType ../src/test_parser.nit:24,13--15
-          TClassid "Int" ../src/test_parser.nit:24,13--15
+      AAttrPropdef ../src/test_parser.nit:24,2--22
+        APrivateVisibility ../src/test_parser.nit:24,2--8
+          TKwprivate "private" ../src/test_parser.nit:24,2--8
+        TKwvar "var" ../src/test_parser.nit:24,10--12
+        TId "rank" ../src/test_parser.nit:24,14--17
+        AType ../src/test_parser.nit:24,20--22
+          TClassid "Int" ../src/test_parser.nit:24,20--22
       AConcreteMethPropdef ../src/test_parser.nit:25,2--35,4
         TKwredef "redef" ../src/test_parser.nit:25,2--6
         APublicVisibility ../src/test_parser.nit:25,8
@@ -47,91 +48,95 @@ Start ../src/test_parser.nit:17,1--110,1
                 AListExprs ../src/test_parser.nit:27,6
               AType ../src/test_parser.nit:27,12--16
                 TClassid "Token" ../src/test_parser.nit:27,12--16
-            ABlockExpr ../src/test_parser.nit:28,4--89
-              ACallExpr ../src/test_parser.nit:28,4--89
+            ABlockExpr ../src/test_parser.nit:28,4--88
+              ACallExpr ../src/test_parser.nit:28,4--88
                 AImplicitSelfExpr ../src/test_parser.nit:28,4
                 TId "printn" ../src/test_parser.nit:28,4--9
-                AParExprs ../src/test_parser.nit:28,10--89
+                AParExprs ../src/test_parser.nit:28,10--88
                   TOpar "(" ../src/test_parser.nit:28,10
-                  AStarExpr ../src/test_parser.nit:28,11--22
+                  AStarExpr ../src/test_parser.nit:28,11--21
                     AStringExpr ../src/test_parser.nit:28,11--14
                       TString "\"  \"" ../src/test_parser.nit:28,11--14
-                    AAttrExpr ../src/test_parser.nit:28,18--22
+                    ACallExpr ../src/test_parser.nit:28,18--21
                       AImplicitSelfExpr ../src/test_parser.nit:28,18
-                      TAttrid "_rank" ../src/test_parser.nit:28,18--22
-                  ACallExpr ../src/test_parser.nit:28,25--36
-                    ACallExpr ../src/test_parser.nit:28,25
-                      AImplicitSelfExpr ../src/test_parser.nit:28,25
-                      TId "n" ../src/test_parser.nit:28,25
-                      AListExprs ../src/test_parser.nit:28,25
-                    TId "class_name" ../src/test_parser.nit:28,27--36
-                    AListExprs ../src/test_parser.nit:28,36
-                  AStringExpr ../src/test_parser.nit:28,39--43
-                    TString "\" \\\"\"" ../src/test_parser.nit:28,39--43
-                  ACallExpr ../src/test_parser.nit:28,46--63
-                    ACallExpr ../src/test_parser.nit:28,46--51
-                      ACallExpr ../src/test_parser.nit:28,46
-                        AImplicitSelfExpr ../src/test_parser.nit:28,46
-                        TId "n" ../src/test_parser.nit:28,46
-                        AListExprs ../src/test_parser.nit:28,46
-                      TId "text" ../src/test_parser.nit:28,48--51
-                      AListExprs ../src/test_parser.nit:28,51
-                    TId "escape_to_c" ../src/test_parser.nit:28,53--63
-                    AListExprs ../src/test_parser.nit:28,63
-                  AStringExpr ../src/test_parser.nit:28,66--70
-                    TString "\"\\\" \"" ../src/test_parser.nit:28,66--70
-                  ACallExpr ../src/test_parser.nit:28,73--82
-                    ACallExpr ../src/test_parser.nit:28,73
-                      AImplicitSelfExpr ../src/test_parser.nit:28,73
-                      TId "n" ../src/test_parser.nit:28,73
-                      AListExprs ../src/test_parser.nit:28,73
-                    TId "location" ../src/test_parser.nit:28,75--82
-                    AListExprs ../src/test_parser.nit:28,82
-                  AStringExpr ../src/test_parser.nit:28,85--88
-                    TString "\"\\n\"" ../src/test_parser.nit:28,85--88
-                  TCpar ")" ../src/test_parser.nit:28,89
+                      TId "rank" ../src/test_parser.nit:28,18--21
+                      AListExprs ../src/test_parser.nit:28,21
+                  ACallExpr ../src/test_parser.nit:28,24--35
+                    ACallExpr ../src/test_parser.nit:28,24
+                      AImplicitSelfExpr ../src/test_parser.nit:28,24
+                      TId "n" ../src/test_parser.nit:28,24
+                      AListExprs ../src/test_parser.nit:28,24
+                    TId "class_name" ../src/test_parser.nit:28,26--35
+                    AListExprs ../src/test_parser.nit:28,35
+                  AStringExpr ../src/test_parser.nit:28,38--42
+                    TString "\" \\\"\"" ../src/test_parser.nit:28,38--42
+                  ACallExpr ../src/test_parser.nit:28,45--62
+                    ACallExpr ../src/test_parser.nit:28,45--50
+                      ACallExpr ../src/test_parser.nit:28,45
+                        AImplicitSelfExpr ../src/test_parser.nit:28,45
+                        TId "n" ../src/test_parser.nit:28,45
+                        AListExprs ../src/test_parser.nit:28,45
+                      TId "text" ../src/test_parser.nit:28,47--50
+                      AListExprs ../src/test_parser.nit:28,50
+                    TId "escape_to_c" ../src/test_parser.nit:28,52--62
+                    AListExprs ../src/test_parser.nit:28,62
+                  AStringExpr ../src/test_parser.nit:28,65--69
+                    TString "\"\\\" \"" ../src/test_parser.nit:28,65--69
+                  ACallExpr ../src/test_parser.nit:28,72--81
+                    ACallExpr ../src/test_parser.nit:28,72
+                      AImplicitSelfExpr ../src/test_parser.nit:28,72
+                      TId "n" ../src/test_parser.nit:28,72
+                      AListExprs ../src/test_parser.nit:28,72
+                    TId "location" ../src/test_parser.nit:28,74--81
+                    AListExprs ../src/test_parser.nit:28,81
+                  AStringExpr ../src/test_parser.nit:28,84--87
+                    TString "\"\\n\"" ../src/test_parser.nit:28,84--87
+                  TCpar ")" ../src/test_parser.nit:28,88
             ABlockExpr ../src/test_parser.nit:30,4--31,5
-              ACallExpr ../src/test_parser.nit:30,4--60
+              ACallExpr ../src/test_parser.nit:30,4--59
                 AImplicitSelfExpr ../src/test_parser.nit:30,4
                 TId "printn" ../src/test_parser.nit:30,4--9
-                AParExprs ../src/test_parser.nit:30,10--60
+                AParExprs ../src/test_parser.nit:30,10--59
                   TOpar "(" ../src/test_parser.nit:30,10
-                  AStarExpr ../src/test_parser.nit:30,11--22
+                  AStarExpr ../src/test_parser.nit:30,11--21
                     AStringExpr ../src/test_parser.nit:30,11--14
                       TString "\"  \"" ../src/test_parser.nit:30,11--14
-                    AAttrExpr ../src/test_parser.nit:30,18--22
+                    ACallExpr ../src/test_parser.nit:30,18--21
                       AImplicitSelfExpr ../src/test_parser.nit:30,18
-                      TAttrid "_rank" ../src/test_parser.nit:30,18--22
-                  ACallExpr ../src/test_parser.nit:30,25--36
-                    ACallExpr ../src/test_parser.nit:30,25
-                      AImplicitSelfExpr ../src/test_parser.nit:30,25
-                      TId "n" ../src/test_parser.nit:30,25
-                      AListExprs ../src/test_parser.nit:30,25
-                    TId "class_name" ../src/test_parser.nit:30,27--36
-                    AListExprs ../src/test_parser.nit:30,36
-                  AStringExpr ../src/test_parser.nit:30,39--41
-                    TString "\" \"" ../src/test_parser.nit:30,39--41
-                  ACallExpr ../src/test_parser.nit:30,44--53
-                    ACallExpr ../src/test_parser.nit:30,44
-                      AImplicitSelfExpr ../src/test_parser.nit:30,44
-                      TId "n" ../src/test_parser.nit:30,44
-                      AListExprs ../src/test_parser.nit:30,44
-                    TId "location" ../src/test_parser.nit:30,46--53
-                    AListExprs ../src/test_parser.nit:30,53
-                  AStringExpr ../src/test_parser.nit:30,56--59
-                    TString "\"\\n\"" ../src/test_parser.nit:30,56--59
-                  TCpar ")" ../src/test_parser.nit:30,60
+                      TId "rank" ../src/test_parser.nit:30,18--21
+                      AListExprs ../src/test_parser.nit:30,21
+                  ACallExpr ../src/test_parser.nit:30,24--35
+                    ACallExpr ../src/test_parser.nit:30,24
+                      AImplicitSelfExpr ../src/test_parser.nit:30,24
+                      TId "n" ../src/test_parser.nit:30,24
+                      AListExprs ../src/test_parser.nit:30,24
+                    TId "class_name" ../src/test_parser.nit:30,26--35
+                    AListExprs ../src/test_parser.nit:30,35
+                  AStringExpr ../src/test_parser.nit:30,38--40
+                    TString "\" \"" ../src/test_parser.nit:30,38--40
+                  ACallExpr ../src/test_parser.nit:30,43--52
+                    ACallExpr ../src/test_parser.nit:30,43
+                      AImplicitSelfExpr ../src/test_parser.nit:30,43
+                      TId "n" ../src/test_parser.nit:30,43
+                      AListExprs ../src/test_parser.nit:30,43
+                    TId "location" ../src/test_parser.nit:30,45--52
+                    AListExprs ../src/test_parser.nit:30,52
+                  AStringExpr ../src/test_parser.nit:30,55--58
+                    TString "\"\\n\"" ../src/test_parser.nit:30,55--58
+                  TCpar ")" ../src/test_parser.nit:30,59
               TKwend "end" ../src/test_parser.nit:31,3--5
-          AAttrAssignExpr ../src/test_parser.nit:32,3--19
+          ACallAssignExpr ../src/test_parser.nit:32,3--17
             AImplicitSelfExpr ../src/test_parser.nit:32,3
-            TAttrid "_rank" ../src/test_parser.nit:32,3--7
-            TAssign "=" ../src/test_parser.nit:32,9
-            APlusExpr ../src/test_parser.nit:32,11--19
-              AAttrExpr ../src/test_parser.nit:32,11--15
-                AImplicitSelfExpr ../src/test_parser.nit:32,11
-                TAttrid "_rank" ../src/test_parser.nit:32,11--15
-              AIntExpr ../src/test_parser.nit:32,19
-                TNumber "1" ../src/test_parser.nit:32,19
+            TId "rank" ../src/test_parser.nit:32,3--6
+            AListExprs ../src/test_parser.nit:32,8
+            TAssign "=" ../src/test_parser.nit:32,8
+            APlusExpr ../src/test_parser.nit:32,10--17
+              ACallExpr ../src/test_parser.nit:32,10--13
+                AImplicitSelfExpr ../src/test_parser.nit:32,10
+                TId "rank" ../src/test_parser.nit:32,10--13
+                AListExprs ../src/test_parser.nit:32,13
+              ADecIntExpr ../src/test_parser.nit:32,17
+                TNumber "1" ../src/test_parser.nit:32,17
           ACallExpr ../src/test_parser.nit:33,3--19
             ACallExpr ../src/test_parser.nit:33,3
               AImplicitSelfExpr ../src/test_parser.nit:33,3
@@ -143,28 +148,31 @@ Start ../src/test_parser.nit:17,1--110,1
               ASelfExpr ../src/test_parser.nit:33,15--18
                 TKwself "self" ../src/test_parser.nit:33,15--18
               TCpar ")" ../src/test_parser.nit:33,19
-          AAttrAssignExpr ../src/test_parser.nit:34,3--19
+          ACallAssignExpr ../src/test_parser.nit:34,3--17
             AImplicitSelfExpr ../src/test_parser.nit:34,3
-            TAttrid "_rank" ../src/test_parser.nit:34,3--7
-            TAssign "=" ../src/test_parser.nit:34,9
-            AMinusExpr ../src/test_parser.nit:34,11--19
-              AAttrExpr ../src/test_parser.nit:34,11--15
-                AImplicitSelfExpr ../src/test_parser.nit:34,11
-                TAttrid "_rank" ../src/test_parser.nit:34,11--15
-              AIntExpr ../src/test_parser.nit:34,19
-                TNumber "1" ../src/test_parser.nit:34,19
+            TId "rank" ../src/test_parser.nit:34,3--6
+            AListExprs ../src/test_parser.nit:34,8
+            TAssign "=" ../src/test_parser.nit:34,8
+            AMinusExpr ../src/test_parser.nit:34,10--17
+              ACallExpr ../src/test_parser.nit:34,10--13
+                AImplicitSelfExpr ../src/test_parser.nit:34,10
+                TId "rank" ../src/test_parser.nit:34,10--13
+                AListExprs ../src/test_parser.nit:34,13
+              ADecIntExpr ../src/test_parser.nit:34,17
+                TNumber "1" ../src/test_parser.nit:34,17
           TKwend "end" ../src/test_parser.nit:35,2--4
       AConcreteInitPropdef ../src/test_parser.nit:37,2--40,4
         APublicVisibility ../src/test_parser.nit:37,2
         TKwinit "init" ../src/test_parser.nit:37,2--5
         ASignature ../src/test_parser.nit:39,3
         ABlockExpr ../src/test_parser.nit:39,3--40,4
-          AAttrAssignExpr ../src/test_parser.nit:39,3--11
+          ACallAssignExpr ../src/test_parser.nit:39,3--10
             AImplicitSelfExpr ../src/test_parser.nit:39,3
-            TAttrid "_rank" ../src/test_parser.nit:39,3--7
-            TAssign "=" ../src/test_parser.nit:39,9
-            AIntExpr ../src/test_parser.nit:39,11
-              TNumber "0" ../src/test_parser.nit:39,11
+            TId "rank" ../src/test_parser.nit:39,3--6
+            AListExprs ../src/test_parser.nit:39,8
+            TAssign "=" ../src/test_parser.nit:39,8
+            ADecIntExpr ../src/test_parser.nit:39,10
+              TNumber "0" ../src/test_parser.nit:39,10
           TKwend "end" ../src/test_parser.nit:40,2--4
       TKwend "end" ../src/test_parser.nit:41,1--3
     AMainClassdef ../src/test_parser.nit:43,1--109,3
@@ -362,7 +370,7 @@ Start ../src/test_parser.nit:17,1--110,1
                             TId "exit" ../src/test_parser.nit:61,3--6
                             AParExprs ../src/test_parser.nit:61,7--9
                               TOpar "(" ../src/test_parser.nit:61,7
-                              AIntExpr ../src/test_parser.nit:61,8
+                              ADecIntExpr ../src/test_parser.nit:61,8
                                 TNumber "0" ../src/test_parser.nit:61,8
                               TCpar ")" ../src/test_parser.nit:61,9
                           TKwend "end" ../src/test_parser.nit:62,2--4

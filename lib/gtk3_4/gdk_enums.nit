@@ -24,7 +24,7 @@ in "C Header" `{
 #enum GdkGravity
 #Defines the reference point of a window and the meaning of coordinates passed to gtk_window_move().
 #@https://developer.gnome.org/gdk3/stable/gdk3-Windows.html#GdkGravity
-extern GdkGravity `{GdkGravity`}
+extern class GdkGravity `{GdkGravity`}
 	#The reference point is at the top left corner.
 	new north_west `{ return GDK_GRAVITY_NORTH_WEST; `} 
 
@@ -59,7 +59,7 @@ end
 #enum GdkGWindowEdge
 #Determines a window edge or corner.
 #@https://developer.gnome.org/gdk3/stable/gdk3-Windows.html#GdkWindowEdge
-extern GdkWindowEdge `{GdkWindowEdge`}
+extern class GdkWindowEdge `{GdkWindowEdge`}
 	#The top left corner.
 	new north_west `{ return GDK_WINDOW_EDGE_NORTH_WEST; `} 
 

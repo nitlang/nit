@@ -165,6 +165,7 @@ class GlobalCompiler
 
 		if mtype.mclass.name == "NativeArray" then
 			# NativeArrays are just a instance header followed by an array of values
+			v.add_decl("int length;")
 			v.add_decl("{mtype.arguments.first.ctype} values[1];")
 		end
 
@@ -212,6 +213,7 @@ class GlobalCompiler
 		if is_native_array then
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("((struct {mtype.c_name}*){res})->length = length;")
 		else
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
 		end
@@ -317,6 +319,9 @@ class GlobalCompilerVisitor
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "length" then
+			self.ret(self.new_expr("((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"

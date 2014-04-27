@@ -37,7 +37,7 @@ redef class String
 	`}
 end
 
-redef extern JsonObject
+redef extern class JsonObject
 	# Get this json object as a Map
 	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString.to_s, String.to_cstring, HashMap[String,nullable Jsonable], HashMap[String,nullable Jsonable].[]=, json_cross, HashMap[String, nullable Jsonable].as(nullable Map[String, nullable Jsonable]) `{
 		HashMap_of_String_nullable_Jsonable map;

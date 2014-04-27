@@ -19,7 +19,8 @@ module nullables_metrics
 
 import modelbuilder
 private import typing
-private import metrics_base
+import model_utils
+import mclasses_metrics
 import frontend
 
 redef class ToolContext
@@ -31,9 +32,77 @@ private class NullablesMetricsPhase
 	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_nullables.value and not toolcontext.opt_all.value then return
+
+		var csv = toolcontext.opt_csv.value
+		var out = "{toolcontext.opt_dir.value or else "metrics"}/nullables"
+		out.mkdir
+
+		print toolcontext.format_h1("\n# Nullable metrics")
+
+		var metrics = new MetricSet
+		var min_vis = private_visibility
+		metrics.register(new CNBA(mainmodule, min_vis))
+		metrics.register(new CNBNA(mainmodule, min_vis))
+
+		var model = toolcontext.modelbuilder.model
+		var mclasses = new HashSet[MClass]
+		for mproject in model.mprojects do
+
+			print toolcontext.format_h2("\n ## project {mproject}")
+
+			for mgroup in mproject.mgroups do
+				if mgroup.mmodules.is_empty then continue
+				metrics.clear
+
+				# Scalar metrics
+				print toolcontext.format_h3("  `- group {mgroup.full_name}")
+				var mod_mclasses = new HashSet[MClass]
+				for mmodule in mgroup.mmodules do mod_mclasses.add_all(mmodule.intro_mclasses)
+				if mod_mclasses.is_empty then continue
+				mclasses.add_all(mod_mclasses)
+				metrics.collect(new HashSet[MClass].from(mod_mclasses))
+				metrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then metrics.to_csv.save("{out}/{mgroup}.csv")
+			end
+		end
+		if not mclasses.is_empty then
+			metrics.clear
+			# Global metrics
+			print toolcontext.format_h2("\n ## global metrics")
+			metrics.collect(mclasses)
+			metrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then metrics.to_csv.save("{out}/summary.csv")
+		end
+
 		compute_nullables_metrics(toolcontext.modelbuilder)
 	end
 end
+
+# Class Metric: Number of nullables MAttributes
+class CNBNA
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnbna"
+	redef fun desc do return "number of accessible nullable attributes (inherited + local)"
+
+	var mainmodule: MModule
+	var min_visibility: MVisibility
+
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var all = mclass.all_mattributes(mainmodule, min_visibility)
+			for mattr in all do
+				if mattr.is_nullable then values.inc(mclass)
+			end
+		end
+	end
+end
+
 
 private class NullableSends
 	super Visitor

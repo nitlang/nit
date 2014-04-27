@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: T
 	
-	readable writable var _e: nullable E = null
+	var e: nullable E writable = null
 end
 
 class B

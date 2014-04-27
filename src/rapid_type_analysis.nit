@@ -161,8 +161,15 @@ class RapidTypeAnalysis
 		return tree
 	end
 
-	# Methods that are are still candidate to the try_send
+	# Methods that are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
+
+	# Methods that are are no more candidate to the try_send
+	private var totry_methods_to_remove = new Array[MMethod]
+
+	# Methods that are or were candidate to the try_send
+	# Used to ensure that try_send is only used once
+	private var try_methods = new HashSet[MMethod]
 
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
@@ -326,6 +333,10 @@ class RapidTypeAnalysis
 		for p in totry_methods do try_send(mtype, p)
 		for p in live_super_sends do try_super_send(mtype, p)
 
+		# Remove cleared ones
+		for p in totry_methods_to_remove do totry_methods.remove(p)
+		totry_methods_to_remove.clear
+
 		var bound_mtype = mtype.anchor_to(mainmodule, recv)
 		for cd in bound_mtype.collect_mclassdefs(mainmodule)
 		do
@@ -374,14 +385,15 @@ class RapidTypeAnalysis
 			if not live_methoddefs.has(d) then return
 		end
 		#print "full property: {mpropdef.mproperty} for {mpropdef.mproperty.mpropdefs.length} definitions"
-		totry_methods.remove(mpropdef.mproperty)
+		totry_methods_to_remove.add(mpropdef.mproperty)
 	end
 
 	fun add_send(recv: MType, mproperty: MMethod)
 	do
-		if live_methods.has(mproperty) then return
+		if try_methods.has(mproperty) then return
 		#print "new prop: {mproperty}"
 		live_methods.add(mproperty)
+		try_methods.add(mproperty)
 		if mproperty.mpropdefs.length == 1 then
 			# If there is only one definition, just add the definition and do not try again the property
 			var d = mproperty.mpropdefs.first
@@ -468,7 +480,11 @@ class RapidTypeVisitor
 
 	fun add_type(mtype: MClassType) do analysis.add_new(receiver, mtype)
 
-	fun add_monomorphic_send(mtype: MType, mproperty: MMethod) do analysis.try_send(mtype.as(MClassType), mproperty)
+	fun add_monomorphic_send(mtype: MType, mproperty: MMethod)
+	do
+		analysis.live_methods.add(mproperty)
+		analysis.try_send(mtype.as(MClassType), mproperty)
+	end
 
 	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
 

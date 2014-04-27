@@ -17,13 +17,13 @@
 import kernel
 
 class A
-	readable var _i: Int = foo
+	var i: Int = foo
 	fun foo: Int do return 1
 	init do end
 end
 
 class B
-	readable var _a: A = bar
+	var a: A = bar
 	fun bar: A do return new A
 	init do end
 end

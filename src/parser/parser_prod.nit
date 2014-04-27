@@ -6268,10 +6268,10 @@ redef class ANullExpr
 		v.enter_visit(_n_annotations)
 	end
 end
-redef class AIntExpr
+redef class ADecIntExpr
 	private init empty_init do end
 
-	init init_aintexpr (
+	init init_adecintexpr (
 		n_number: nullable TNumber,
 		n_annotations: nullable AAnnotations
 	)
@@ -6310,6 +6310,51 @@ redef class AIntExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_number)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AHexIntExpr
+	private init empty_init do end
+
+	init init_ahexintexpr (
+		n_hex_number: nullable THexNumber,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		empty_init
+		_n_hex_number = n_hex_number.as(not null)
+		n_hex_number.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_hex_number == old_child then
+			n_hex_number = new_child.as(THexNumber)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_hex_number=(node)
+	do
+		_n_hex_number = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_hex_number)
 		v.enter_visit(_n_annotations)
 	end
 end
@@ -6667,12 +6712,12 @@ redef class AAsCastExpr
 		n_expr.parent = self
 		_n_kwas = n_kwas.as(not null)
 		n_kwas.parent = self
-		_n_opar = n_opar.as(not null)
-		n_opar.parent = self
+		_n_opar = n_opar
+		if n_opar != null then n_opar.parent = self
 		_n_type = n_type.as(not null)
 		n_type.parent = self
-		_n_cpar = n_cpar.as(not null)
-		n_cpar.parent = self
+		_n_cpar = n_cpar
+		if n_cpar != null then n_cpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6686,7 +6731,7 @@ redef class AAsCastExpr
 			return
 		end
 		if _n_opar == old_child then
-			n_opar = new_child.as(TOpar)
+			n_opar = new_child.as(nullable TOpar)
 			return
 		end
 		if _n_type == old_child then
@@ -6694,7 +6739,7 @@ redef class AAsCastExpr
 			return
 		end
 		if _n_cpar == old_child then
-			n_cpar = new_child.as(TCpar)
+			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
 	end
@@ -6712,7 +6757,7 @@ redef class AAsCastExpr
 	redef fun n_opar=(node)
 	do
 		_n_opar = node
-		node.parent = self
+		if node != null then node.parent = self
 	end
 	redef fun n_type=(node)
 	do
@@ -6722,7 +6767,7 @@ redef class AAsCastExpr
 	redef fun n_cpar=(node)
 	do
 		_n_cpar = node
-		node.parent = self
+		if node != null then node.parent = self
 	end
 
 
@@ -6752,14 +6797,14 @@ redef class AAsNotnullExpr
 		n_expr.parent = self
 		_n_kwas = n_kwas.as(not null)
 		n_kwas.parent = self
-		_n_opar = n_opar.as(not null)
-		n_opar.parent = self
+		_n_opar = n_opar
+		if n_opar != null then n_opar.parent = self
 		_n_kwnot = n_kwnot.as(not null)
 		n_kwnot.parent = self
 		_n_kwnull = n_kwnull.as(not null)
 		n_kwnull.parent = self
-		_n_cpar = n_cpar.as(not null)
-		n_cpar.parent = self
+		_n_cpar = n_cpar
+		if n_cpar != null then n_cpar.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6773,7 +6818,7 @@ redef class AAsNotnullExpr
 			return
 		end
 		if _n_opar == old_child then
-			n_opar = new_child.as(TOpar)
+			n_opar = new_child.as(nullable TOpar)
 			return
 		end
 		if _n_kwnot == old_child then
@@ -6785,7 +6830,7 @@ redef class AAsNotnullExpr
 			return
 		end
 		if _n_cpar == old_child then
-			n_cpar = new_child.as(TCpar)
+			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
 	end
@@ -6803,7 +6848,7 @@ redef class AAsNotnullExpr
 	redef fun n_opar=(node)
 	do
 		_n_opar = node
-		node.parent = self
+		if node != null then node.parent = self
 	end
 	redef fun n_kwnot=(node)
 	do
@@ -6818,7 +6863,7 @@ redef class AAsNotnullExpr
 	redef fun n_cpar=(node)
 	do
 		_n_cpar = node
-		node.parent = self
+		if node != null then node.parent = self
 	end
 
 

@@ -218,7 +218,7 @@ extern class SDLImage
 	`}
 
 	# Save the image into the specified file
-	fun save_to_file(path: String) import String::to_cstring `{ `}
+	fun save_to_file(path: String) import String.to_cstring `{ `}
 
 	# Destroy the image and free the memory
 	redef fun destroy `{ SDL_FreeSurface(recv); `}
@@ -441,7 +441,7 @@ extern class SDLFont `{TTF_Font *`}
 	`}
 
 	# Return the family name of the font
-	fun family_name: nullable String import String.to_cstring, String as nullable `{
+	fun family_name: nullable String import String.to_cstring, String.as nullable  `{
 		char *fn = TTF_FontFaceFamilyName(recv);
 
 		if (fn == NULL)
@@ -451,7 +451,7 @@ extern class SDLFont `{TTF_Font *`}
 	`}
 
 	# Return the style name of the font
-	fun style_name: nullable String import String.to_cstring, String as nullable `{
+	fun style_name: nullable String import String.to_cstring, String.as nullable  `{
 		char *sn = TTF_FontFaceStyleName(recv);
 
 		if (sn == NULL)

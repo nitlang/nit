@@ -32,11 +32,11 @@ redef class Int
 end
 
 class Integer
-	readable writable var _value: Int 
+	var value: Int
 
 	init
 	do
-		_value = 42
+		value = 42
 	end
 end
 

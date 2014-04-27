@@ -43,7 +43,7 @@ in "C" `{
 	extern struct android_app *mnit_java_app;
 `}
 
-extern ASensorType `{int`}
+extern class ASensorType `{int`}
 	new accelerometer: ASensorType `{return ASENSOR_TYPE_ACCELEROMETER;`}
 	fun is_accelerometer: Bool `{return recv == ASENSOR_TYPE_ACCELEROMETER;`}
 	new magnetic_field: ASensorType `{return ASENSOR_TYPE_MAGNETIC_FIELD;`}

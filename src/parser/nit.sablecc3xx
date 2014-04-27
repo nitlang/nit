@@ -27,6 +27,7 @@ all = [0 .. 0xFF];
 lowercase = ['a' .. 'z'];
 uppercase = ['A' .. 'Z'];
 digit = ['0' .. '9'];
+hexdigit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'];
 letter = lowercase | uppercase | digit | '_';
 
 tab = 9;
@@ -114,6 +115,7 @@ kwwritable = 'writable';
 kwvar = 'var';
 kwintern = 'intern';
 kwextern = 'extern';
+kwpublic = 'public';
 kwprotected = 'protected';
 kwprivate = 'private';
 kwintrude = 'intrude';
@@ -182,6 +184,7 @@ id = lowercase letter*;
 attrid = '_' lowercase letter*;
 
 number = digit+;
+hex_number = ('0x' | '0X') hexdigit+;
 float = digit* '.' digit+;
 string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
 start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
@@ -205,7 +208,7 @@ Productions
 
 /* MODULES *******************************************************************/
 module
-	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:classdef* implicit_top_class? implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
+	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:topdef* implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_main_class.classdef])};
 
 moduledecl
 	= [doc]:no kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name, annotation_withend.annotations)};
@@ -215,8 +218,10 @@ import
 	| {no} [doc]:no redef visibility kwimport no kwend [n2]:n1 {-> New import.no(visibility, kwimport, kwend)}
 	;
 
-implicit_top_class {-> classdef}
-	= propdefs_toplevel+ {-> New classdef.top([propdefs_toplevel.propdef])};
+topdef {-> classdef}
+	= {classdef} classdef {-> classdef}
+	| propdefs_toplevel {-> New classdef.top([propdefs_toplevel.propdef])}
+	;
 
 implicit_main_class {-> classdef?}
 	= implicit_main_meth {-> New classdef.main([implicit_main_meth.propdef])}
@@ -237,7 +242,7 @@ classkind
 	| {abstract} kwabstract kwclass
 	| {interface} kwinterface
 	| {enum} kwenum
-	| {extern} kwextern kwclass?
+	| {extern} kwextern kwclass
 	;
 
 formaldefs {-> formaldef*}
@@ -258,7 +263,6 @@ propdefs~toplevel {-> propdef}
 	;
 propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth methid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, annotation_noend.annotations, stmtso.expr)}
-	| {assign_return} [doc]:no redef visibility kwmeth methid signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature_withret.signature, Null, assign_return.expr)}
 	| {nobody} [doc]:no redef visibility kwmeth methid signature annotation_withend_nonull {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, annotation_withend_nonull.annotations)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null)}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
@@ -317,11 +321,11 @@ methid {-> methid}
 	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
 	;
 
-signature~withret {-> signature}
+signature {-> signature}
 	= opar no params cpar typing [no2]:no {-> New signature(opar, [params.param], cpar, typing.type)}
-!withret| {noret} opar no params cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
+	| {noret} opar no params cpar [no2]:no {-> New signature(opar, [params.param], cpar, Null)}
 	| {nopar} typing no {-> New signature(Null, [], Null, typing.type)}
-!withret| {noparnoret} no {-> New signature(Null, [], Null, Null)}
+	| {noparnoret} no {-> New signature(Null, [], Null, Null)}
 	;
 
 params {-> param*} 
@@ -335,10 +339,6 @@ param
 	| id annotations? typing dotdotdot? {-> New param(id, typing.type, dotdotdot, annotations)}
 	;
 
-assign_return{-> expr}
-	= expr_final {-> New expr.return(Null, expr_final.expr)}
-	;
-
 extern_calls {-> extern_calls?}
 	= kwimport no extern_call extern_call_tail* {-> New extern_calls( kwimport, [extern_call, extern_call_tail.extern_call] )}
 	| {null} {-> Null}
@@ -346,20 +346,22 @@ extern_calls {-> extern_calls?}
 extern_call_tail {-> extern_call}
 	= comma no extern_call {-> extern_call};
 extern_call {-> extern_call}
-    = {prop} extern_call_prop {-> extern_call_prop.extern_call}
-    | {cast} extern_call_cast {-> extern_call_cast.extern_call}
+	= {prop} extern_call_prop {-> extern_call_prop.extern_call}
+	| {cast} extern_call_cast {-> extern_call_cast.extern_call}
 	| {super} kwsuper {-> New extern_call.super( kwsuper )}
-    ;
+	;
 extern_call_prop {-> extern_call}
-    = {local} methid {-> New extern_call.local_prop( methid )}
-	| {full} type quad methid {-> New extern_call.full_prop( type, Null, methid )}
-	| {full2} type dot methid {-> New extern_call.full_prop( type, dot, methid )}
+	= {local} methid {-> New extern_call.local_prop( methid )}
+	| {full} type dot methid {-> New extern_call.full_prop( type, dot, methid )}
 	| {init} type {-> New extern_call.init_prop( type )}
 	;
 extern_call_cast {-> extern_call}
-    = {as_cast} [from_type]:type dot? kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
-	| {as_nullable} type dot? kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
-	| {as_not_nullable} type dot? kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
+	= {as_cast} [from_type]:type dot kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
+	| {as_cast2}[from_type]:type dot kwas [n2]:no [to_type]:type {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
+	| {as_nullable} type dot kwas [n2]:no opar [n3]:no kwnullable [n4]:no cpar {-> New extern_call.as_nullable( type, kwas, kwnullable)}
+	| {as_nullable2}type dot kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
+	| {as_not_nullable} type dot kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnullable [n5]:no cpar {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
+	| {as_not_nullable2}type dot kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
 	;
 
 string_o {->string?} = string? {-> string};
@@ -561,7 +563,8 @@ expr_atom~nopar~nobra {-> expr}
 	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
 	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
 	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
-	| {int} number annotations_o {-> New expr.int(number, annotations_o.annotations)}
+	| {int} number annotations_o {-> New expr.dec_int(number, annotations_o.annotations)}
+	| {hex_int} hex_number annotations_o {-> New expr.hex_int(hex_number, annotations_o.annotations)}
 	| {float} float annotations_o {-> New expr.float(float, annotations_o.annotations)}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
@@ -569,6 +572,7 @@ expr_atom~nopar~nobra {-> expr}
 !nopar	| {par} opar no expr [n2]:no cpar annotations_o {-> New expr.par(opar, expr, cpar, annotations_o.annotations)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
+        | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
 	;
 
 superstring {-> expr} 
@@ -850,7 +854,8 @@ expr	= {block} expr* kwend?
 	| {true} kwtrue annotations?
 	| {false} kwfalse annotations?
 	| {null} kwnull annotations?
-	| {int} number annotations?
+	| {dec_int} number annotations?
+	| {hex_int} hex_number annotations?
 	| {float} float annotations?
 	| {char} char annotations?
 	| {string} string annotations?
@@ -859,8 +864,8 @@ expr	= {block} expr* kwend?
 	| {end_string} [string]:end_string 
 	| {superstring} [exprs]:expr* annotations?
 	| {par} opar expr cpar annotations?
-        | {as_cast} expr kwas opar type cpar
-        | {as_notnull} expr kwas opar kwnot kwnull cpar
+        | {as_cast} expr kwas opar? type cpar?
+        | {as_notnull} expr kwas opar? kwnot kwnull cpar?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	;

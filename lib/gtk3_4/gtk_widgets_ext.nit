@@ -21,7 +21,7 @@ import gtk_core
 
 #Displays a calendar and allows the user to select a date
 #@https://developer.gnome.org/gtk3/3.2/GtkCalendar.html
-extern GtkCalendar `{GtkCalendar *`}
+extern class GtkCalendar `{GtkCalendar *`}
 	super GtkWidget
 
 	new is extern `{
@@ -67,7 +67,7 @@ end
 
 #enum GtkCalendarDisplayOptions
 #@https://developer.gnome.org/gtk3/3.2/GtkCalendar.html#GtkCalendarDisplayOptions
-extern GtkCalendarDisplayOptions `{GtkCalendarDisplayOptions`}
+extern class GtkCalendarDisplayOptions `{GtkCalendarDisplayOptions`}
 	new show_heading `{ return GTK_CALENDAR_SHOW_HEADING; `}
 	new show_day_names `{ return GTK_CALENDAR_SHOW_DAY_NAMES; `}
 	new no_month_change `{ return GTK_CALENDAR_NO_MONTH_CHANGE; `}
@@ -77,7 +77,7 @@ end
 
 #A separator widget
 #@https://developer.gnome.org/gtk3/stable/GtkSeparator.html
-extern GtkSeparator `{GtkSeparator *`}
+extern class GtkSeparator `{GtkSeparator *`}
 	super GtkWidget
 
 	new ( orientation : GtkOrientation ) is extern `{
@@ -88,7 +88,7 @@ end
 
 #A widget which indicates progress visually
 #@https://developer.gnome.org/gtk3/3.2/GtkProgressBar.html
-extern GtkProgressBar `{GtkProgressBar *`}
+extern class GtkProgressBar `{GtkProgressBar *`}
 	super GtkWidget
 
 	new is extern `{
@@ -143,7 +143,7 @@ extern GtkProgressBar `{GtkProgressBar *`}
 
 end
 
-extern GtkColorSelectionDialog
+extern class GtkColorSelectionDialog
 	super GtkWidget
 	new ( title : String, parent : GtkWindow ) is extern  import String.to_cstring `{
 		 return gtk_color_chooser_dialog_new( String_to_cstring( title ), parent );
@@ -160,7 +160,7 @@ end
 
 #Retrieve an integer or floating-point number from the user
 #@https://developer.gnome.org/gtk3/3.2/GtkSpinButton.html
-extern GtkSpinButton `{GtkSpinButton *`}
+extern class GtkSpinButton `{GtkSpinButton *`}
 	super GtkEntry
 
 	new ( adjustment : GtkAdjustment, climb_rate : Float, digits : Int )is extern `{
@@ -207,7 +207,7 @@ end
 #enum GtkSpinType
 #The values of the GtkSpinType enumeration are used to specify the change to make in gtk_spin_button_spin().
 #@https://developer.gnome.org/gtk3/stable/GtkSpinButton.html#GtkSpinType
-extern GtkSpinType `{GtkSpinType`}
+extern class GtkSpinType `{GtkSpinType`}
 	#Increment by the adjustments step increment.
 	new step_forward `{ return GTK_SPIN_STEP_FORWARD; `}
 
@@ -232,13 +232,13 @@ end
 
 #A widget to unlock or lock privileged operations
 #@https://developer.gnome.org/gtk3/stable/GtkLockButton.html
-extern GtkLockButton
+extern class GtkLockButton
 	super GtkButton
 end
 
 #A button to launch a color selection dialog
 #@https://developer.gnome.org/gtk3/stable/GtkColorButton.html
-extern GtkColorButton `{GtkColorButton *`}
+extern class GtkColorButton `{GtkColorButton *`}
 	super GtkButton
 
 	new is extern `{

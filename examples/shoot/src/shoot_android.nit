@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2009 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,12 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+# Android version of the shoot program
+module shoot_android
 
-fun foo: Int = 1
-fun bar(i: Int): Int = i
-#alt1#fun baz: Int = 'a'
-#alt2#fun baz = 3
-#alt3#fun baz(i: Int) = 3
-foo.output
-bar(2).output
+import shoot
+import mnit_android
+
+super

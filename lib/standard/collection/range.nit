@@ -19,17 +19,17 @@ import abstract_collection
 class Range[E: Discrete]
 	super Collection[E]
 
-	redef readable var _first: E
+	redef var first: E
 
 	# Get the last element.
-	readable var _last: E
+	var last: E
 
 	# Get the element after the last one.
-	readable var _after: E
+	var after: E
 
-	redef fun has(item) do return item >= _first and item <= _last
+	redef fun has(item) do return item >= first and item <= last
 
-	redef fun has_only(item) do return _first == item and item == _last or is_empty
+	redef fun has_only(item) do return first == item and item == last or is_empty
 
 	redef fun count(item)
 	do
@@ -44,7 +44,7 @@ class Range[E: Discrete]
 
 	redef fun length
 	do
-		var nb = _first.distance(_after)
+		var nb = first.distance(after)
 		if nb > 0 then
 			return nb
 		else
@@ -52,24 +52,24 @@ class Range[E: Discrete]
 		end
 	end
 
-	redef fun is_empty do return _first >= _after
+	redef fun is_empty do return first >= after
 
 	# Create a range [`from`, `to`].
 	# The syntax `[from..to[` is equivalent.
 	init(from: E, to: E)
 	do
-		_first = from
-		_last = to
-		_after = to.successor(1)
+		first = from
+		last = to
+		after = to.successor(1)
 	end
 
 	# Create a range [`from`, `to`[.
 	# The syntax `[from..to[` is equivalent.
 	init without_last(from: E, to: E)
 	do
-		_first = from
-		_last = to.predecessor(1)
-		_after = to
+		first = from
+		last = to.predecessor(1)
+		after = to
 	end
 end
 
@@ -77,7 +77,8 @@ private class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
 	var _range: Range[E]
-	redef readable var _item: E
+	var _item: E
+	redef fun item do return _item
 
 	redef fun is_ok do return _item < _range.after
 	

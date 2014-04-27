@@ -9,104 +9,124 @@
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnop: number of parent modules
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnoc: number of child modules
 	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
 	  std: 0.0
+	  sum: 1
 	mnod: number of descendant modules
 	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
 	  std: 0.0
+	  sum: 1
 	mdit: depth in module tree
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnbi: number of introduction in module
 	  avg: 7.0
 	  max: base_simple3 (7)
 	  min: base_simple3 (7)
 	  std: 0.0
+	  sum: 7
 	mnbr: number of refinement in module
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
+	  avg: 3.0
+	  max: base_simple3 (3)
+	  min: base_simple3 (3)
 	  std: 0.0
+	  sum: 3
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 4.0
 	  max: base_simple3 (4)
 	  min: base_simple3 (4)
 	  std: 0.0
+	  sum: 4
 	mnbac: number of abstract class in module (intro + redef)
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 2.0
-	  max: base_simple3 (2)
-	  min: base_simple3 (2)
+	  avg: 4.0
+	  max: base_simple3 (4)
+	  min: base_simple3 (4)
 	  std: 0.0
+	  sum: 4
 
  ## project base_empty_module
   `- group base_empty_module
 	mnoa: number of ancestor modules
 	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  max: base_empty_module (0)
+	  min: base_empty_module (0)
 	  std: 0.0
+	  sum: 0
 	mnop: number of parent modules
 	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  max: base_empty_module (0)
+	  min: base_empty_module (0)
 	  std: 0.0
+	  sum: 0
 	mnoc: number of child modules
 	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
+	  max: base_empty_module (1)
+	  min: base_empty_module (1)
 	  std: 0.0
+	  sum: 1
 	mnod: number of descendant modules
 	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
+	  max: base_empty_module (1)
+	  min: base_empty_module (1)
 	  std: 0.0
+	  sum: 1
 	mdit: depth in module tree
 	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  max: base_empty_module (0)
+	  min: base_empty_module (0)
 	  std: 0.0
+	  sum: 0
 	mnbi: number of introduction in module
-	  avg: 4.0
-	  max: base_simple3 (7)
+	  avg: 1.0
+	  max: base_empty_module (1)
 	  min: base_empty_module (1)
-	  std: 3.0
+	  std: 0.0
+	  sum: 1
 	mnbr: number of refinement in module
 	  avg: 0.0
-	  max: base_simple3 (1)
+	  max: base_empty_module (0)
 	  min: base_empty_module (0)
-	  std: 0.707
+	  std: 0.0
+	  sum: 0
 	mnbcc: number of concrete class in module (intro + redef)
-	  avg: 2.0
-	  max: base_simple3 (4)
+	  avg: 1.0
+	  max: base_empty_module (1)
 	  min: base_empty_module (1)
-	  std: 1.581
+	  std: 0.0
+	  sum: 1
 	mnbac: number of abstract class in module (intro + redef)
 	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	mnbic: number of interface in module (intro + redef)
-	  avg: 1.0
-	  max: base_simple3 (2)
+	  max: base_empty_module (0)
 	  min: base_empty_module (0)
-	  std: 1.0
+	  std: 0.0
+	  sum: 0
+	mnbic: number of interface in module (intro + redef)
+	  avg: 0.0
+	  max: base_empty_module (0)
+	  min: base_empty_module (0)
+	  std: 0.0
+	  sum: 0
 
  ## global metrics
 	mnoa: number of ancestor modules
@@ -114,51 +134,61 @@
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnop: number of parent modules
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnoc: number of child modules
-	  avg: 2.0
+	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
-	  std: 1.0
+	  std: 0.0
+	  sum: 2
 	mnod: number of descendant modules
-	  avg: 2.0
+	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
-	  std: 1.0
+	  std: 0.0
+	  sum: 2
 	mdit: depth in module tree
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnbi: number of introduction in module
-	  avg: 8.0
+	  avg: 4.0
 	  max: base_simple3 (7)
 	  min: base_empty_module (1)
-	  std: 5.0
+	  std: 3.0
+	  sum: 8
 	mnbr: number of refinement in module
 	  avg: 1.0
-	  max: base_simple3 (1)
+	  max: base_simple3 (3)
 	  min: base_empty_module (0)
-	  std: 0.707
+	  std: 1.581
+	  sum: 3
 	mnbcc: number of concrete class in module (intro + redef)
-	  avg: 5.0
+	  avg: 2.0
 	  max: base_simple3 (4)
 	  min: base_empty_module (1)
-	  std: 2.915
+	  std: 1.581
+	  sum: 5
 	mnbac: number of abstract class in module (intro + redef)
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
+	  sum: 0
 	mnbic: number of interface in module (intro + redef)
 	  avg: 2.0
-	  max: base_simple3 (2)
+	  max: base_simple3 (4)
 	  min: base_empty_module (0)
-	  std: 1.414
+	  std: 2.0
+	  sum: 4
 
 # MClasses metrics
 
@@ -169,84 +199,124 @@
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
+	  sum: 6
 	cnop: number of parent classes
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
+	  sum: 6
 	cnoc: number of child classes
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
+	  sum: 6
 	cnod: number of descendant classes
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
+	  sum: 6
 	cdit: depth in class tree
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 4.0
+	  max: C (8)
+	  min: Object (3)
+	  std: 2.0
+	  sum: 34
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnbip: number of introduced properties
 	  avg: 2.0
 	  max: C (5)
 	  min: Bool (0)
 	  std: 1.69
+	  sum: 16
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnbhp: number of inherited properties
 	  avg: 2.0
 	  max: Bool (3)
 	  min: Object (0)
 	  std: 1.195
+	  sum: 18
 
  ## project base_empty_module
   `- group base_empty_module
 	cnoa: number of ancestor classes
 	  avg: 0.0
-	  max: Bool (1)
+	  max: Object (0)
 	  min: Object (0)
-	  std: 0.866
+	  std: 0.0
+	  sum: 0
 	cnop: number of parent classes
 	  avg: 0.0
-	  max: Bool (1)
+	  max: Object (0)
 	  min: Object (0)
-	  std: 0.866
+	  std: 0.0
+	  sum: 0
 	cnoc: number of child classes
 	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.121
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnod: number of descendant classes
 	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.121
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cdit: depth in class tree
 	  avg: 0.0
-	  max: Bool (1)
+	  max: Object (0)
 	  min: Object (0)
-	  std: 0.866
+	  std: 0.0
+	  sum: 0
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 1.0
+	  max: Object (1)
+	  min: Object (1)
+	  std: 0.0
+	  sum: 1
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (5)
-	  min: Bool (0)
-	  std: 1.62
+	  avg: 1.0
+	  max: Object (1)
+	  min: Object (1)
+	  std: 0.0
+	  sum: 1
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnbhp: number of inherited properties
-	  avg: 2.0
-	  max: Bool (3)
+	  avg: 0.0
+	  max: Object (0)
 	  min: Object (0)
-	  std: 1.323
+	  std: 0.0
+	  sum: 0
 
  ## global metrics
 	cnoa: number of ancestor classes
@@ -254,41 +324,61 @@
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.866
+	  sum: 6
 	cnop: number of parent classes
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.866
+	  sum: 6
 	cnoc: number of child classes
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.121
+	  sum: 6
 	cnod: number of descendant classes
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.121
+	  sum: 6
 	cdit: depth in class tree
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.866
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 4.0
+	  max: C (8)
+	  min: Object (1)
+	  std: 2.151
+	  sum: 35
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnbip: number of introduced properties
 	  avg: 2.0
 	  max: C (5)
 	  min: Bool (0)
 	  std: 1.62
+	  sum: 17
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnbhp: number of inherited properties
 	  avg: 2.0
 	  max: Bool (3)
 	  min: Object (0)
 	  std: 1.323
+	  sum: 18
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 3
@@ -331,47 +421,48 @@ Distribution of direct smallers
   <=0: sub-population=1 (33.33%); cumulated value=0 (0.0%)
   <=1: sub-population=2 (66.66%); cumulated value=2 (100.00%)
 ## Classdef hierarchy
-Number of nodes: 9
-Number of edges: 23 (2.55 per node)
-Number of direct edges: 7 (0.77 per node)
+Number of nodes: 11
+Number of edges: 47 (4.27 per node)
+Number of direct edges: 9 (0.81 per node)
 Distribution of greaters
- population: 9
+ population: 11
  minimum value: 1
- maximum value: 3
- total value: 23
- average value: 2.55
+ maximum value: 5
+ total value: 47
+ average value: 4.27
  distribution:
-  <=1: sub-population=1 (11.11%); cumulated value=1 (4.34%)
-  <=2: sub-population=2 (22.22%); cumulated value=4 (17.39%)
-  <=4: sub-population=6 (66.66%); cumulated value=18 (78.26%)
+  <=1: sub-population=1 (9.09%); cumulated value=1 (2.12%)
+  <=4: sub-population=4 (36.36%); cumulated value=16 (34.04%)
+  <=8: sub-population=6 (54.54%); cumulated value=30 (63.82%)
 Distribution of direct greaters
- population: 9
+ population: 11
  minimum value: 0
- maximum value: 1
- total value: 7
- average value: 0.77
+ maximum value: 3
+ total value: 9
+ average value: 0.81
  distribution:
-  <=0: sub-population=2 (22.22%); cumulated value=0 (0.0%)
-  <=1: sub-population=7 (77.77%); cumulated value=7 (100.00%)
+  <=0: sub-population=4 (36.36%); cumulated value=0 (0.0%)
+  <=1: sub-population=6 (54.54%); cumulated value=6 (66.66%)
+  <=4: sub-population=1 (9.09%); cumulated value=3 (33.33%)
 Distribution of smallers
- population: 9
+ population: 11
  minimum value: 1
- maximum value: 8
- total value: 23
- average value: 2.55
+ maximum value: 10
+ total value: 47
+ average value: 4.27
  distribution:
-  <=1: sub-population=7 (77.77%); cumulated value=7 (30.43%)
-  <=8: sub-population=2 (22.22%); cumulated value=16 (69.56%)
+  <=1: sub-population=7 (63.63%); cumulated value=7 (14.89%)
+  <=16: sub-population=4 (36.36%); cumulated value=40 (85.10%)
 Distribution of direct smallers
- population: 9
+ population: 11
  minimum value: 0
  maximum value: 6
- total value: 7
- average value: 0.77
+ total value: 9
+ average value: 0.81
  distribution:
-  <=0: sub-population=7 (77.77%); cumulated value=0 (0.0%)
-  <=1: sub-population=1 (11.11%); cumulated value=1 (14.28%)
-  <=8: sub-population=1 (11.11%); cumulated value=6 (85.71%)
+  <=0: sub-population=7 (63.63%); cumulated value=0 (0.0%)
+  <=1: sub-population=3 (27.27%); cumulated value=3 (33.33%)
+  <=8: sub-population=1 (9.09%); cumulated value=6 (66.66%)
 ## Class hierarchy
 Number of nodes: 8
 Number of edges: 14 (1.75 per node)
@@ -417,36 +508,36 @@ Distribution of direct smallers
  population: 47
  minimum value: 1
  maximum value: 39
- total value: 265
- average value: 5.63
+ total value: 267
+ average value: 5.68
  distribution:
-  <=1: sub-population=11 (23.40%); cumulated value=11 (4.15%)
-  <=2: sub-population=9 (19.14%); cumulated value=18 (6.79%)
-  <=4: sub-population=9 (19.14%); cumulated value=31 (11.69%)
-  <=8: sub-population=9 (19.14%); cumulated value=54 (20.37%)
-  <=16: sub-population=5 (10.63%); cumulated value=55 (20.75%)
-  <=32: sub-population=3 (6.38%); cumulated value=57 (21.50%)
-  <=64: sub-population=1 (2.12%); cumulated value=39 (14.71%)
+  <=1: sub-population=10 (21.27%); cumulated value=10 (3.74%)
+  <=2: sub-population=9 (19.14%); cumulated value=18 (6.74%)
+  <=4: sub-population=10 (21.27%); cumulated value=34 (12.73%)
+  <=8: sub-population=9 (19.14%); cumulated value=54 (20.22%)
+  <=16: sub-population=5 (10.63%); cumulated value=55 (20.59%)
+  <=32: sub-population=3 (6.38%); cumulated value=57 (21.34%)
+  <=64: sub-population=1 (2.12%); cumulated value=39 (14.60%)
  list:
-  TId: 39 (14.71%)
-  APublicVisibility: 20 (7.54%)
-  AListExprs: 19 (7.16%)
-  ACallExpr: 18 (6.79%)
-  TClassid: 16 (6.03%)
-  TKwend: 10 (3.77%)
-  TNumber: 10 (3.77%)
-  AIntExpr: 10 (3.77%)
-  AType: 9 (3.39%)
-  ASignature: 8 (3.01%)
+  TId: 39 (14.60%)
+  APublicVisibility: 20 (7.49%)
+  AListExprs: 19 (7.11%)
+  ACallExpr: 18 (6.74%)
+  TClassid: 16 (5.99%)
+  TKwend: 10 (3.74%)
+  TNumber: 10 (3.74%)
+  ADecIntExpr: 10 (3.74%)
+  AType: 9 (3.37%)
+  ASignature: 8 (2.99%)
   ...
+  ASelfExpr: 1 (0.37%)
   ACallAssignExpr: 1 (0.37%)
-  TKwreturn: 1 (0.37%)
-  AInternMethPropdef: 1 (0.37%)
-  ATopClassdef: 1 (0.37%)
+  TKwself: 1 (0.37%)
+  AReturnExpr: 1 (0.37%)
   AInterfaceClasskind: 1 (0.37%)
   TKwinterface: 1 (0.37%)
-  AReturnExpr: 1 (0.37%)
-  TKwself: 1 (0.37%)
+  TKwreturn: 1 (0.37%)
+  AInternMethPropdef: 1 (0.37%)
   AMainMethPropdef: 1 (0.37%)
   AMainClassdef: 1 (0.37%)
 ## All identifiers of the AST
@@ -489,10 +580,10 @@ Number of classes: 8
   Number of enum kind: 2 (25.00%)
   Number of class kind: 5 (62.50%)
 
-Number of class definitions: 9
+Number of class definitions: 11
 Number of refined classes: 1 (12.50%)
-Average number of class refinments by classes: 0.12
-Average number of class refinments by refined classes: 1.00
+Average number of class refinments by classes: 0.37
+Average number of class refinments by refined classes: 3.00
 
 Number of properties: 20
   Number of MAttribute: 3 (15.00%)
@@ -518,16 +609,12 @@ Statistics of type usage:
   C: 1 (11.11%)
   B: 1 (11.11%)
   A: 1 (11.11%)
---- Sends on Nullable Receiver ---
-Total number of sends: 19
-Number of sends on a nullable receiver: 0 (0.0%)
-Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 --- Explicit vs. Implicit Self ---
 Total number of self: 5
 Total number of implicit self: 4 (80.00%)
 --- Construction of tables ---
 Number of runtime classes: 7 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 2.71
+Average number of composing class definition by runtime class: 4.42
 Total size of tables (classes and instances): 35 (not including stuff like info for subtyping or call-next-method)
 Average size of table by runtime class: 5.00
 Values never redefined: 35 (100.00%)
@@ -545,8 +632,44 @@ Values never redefined: 35 (100.00%)
 	blooming mclasses (threshold: 2.388)
 	   B: 3.0
 	   C: 3.0
-generating out/nitmetrics_args1.write/project_hierarchy.dot
-generating out/nitmetrics_args1.write/module_hierarchy.dot
+
+# Nullable metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
+	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
+	  sum: 0
+
+ ## project base_empty_module
+  `- group base_empty_module
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
+	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
+	  sum: 0
+
+ ## global metrics
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
+	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
+	  sum: 0
+--- Sends on Nullable Receiver ---
+Total number of sends: 19
+Number of sends on a nullable receiver: 0 (0.0%)
+Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 
 # Inheritance metrics
 
@@ -557,76 +680,91 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnopc: number of class_kind parent
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnocc: number of class_kind children
 	  avg: 0.0
 	  max: Object (4)
 	  min: Bool (0)
 	  std: 1.512
+	  sum: 4
 	cnodc: number of class_kind descendants
 	  avg: 0.0
 	  max: Object (4)
 	  min: Bool (0)
 	  std: 1.512
+	  sum: 4
 	cnopi: number of interface_kind parent
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
+	  sum: 6
 	cnoci: number of interface_kind children
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnodi: number of interface_kind descendants
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditc: depth in class tree following only class, abstract, extern kind
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditi: depth in class tree following only interface_kind
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
+	  sum: 6
 	mdui: proportion of mclass defined using inheritance (has other parent than Object)
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduic: proportion of class_kind defined using inheritance
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduii: proportion of interface_kind defined using inheritance
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mif: proportion of mclass inherited from
 	  avg: 0.143
 	  max: base_simple3 (0.143)
 	  min: base_simple3 (0.143)
 	  std: 0.0
+	  sum: 0.143
 	mifc: proportion of class_kind inherited from
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mifi: proportion of interface_kind inherited from
 	  avg: 0.143
 	  max: base_simple3 (0.143)
 	  min: base_simple3 (0.143)
 	  std: 0.0
+	  sum: 0.143
 
  ## project base_empty_module
   `- group base_empty_module
@@ -635,76 +773,91 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnopc: number of class_kind parent
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnocc: number of class_kind children
 	  avg: 0.0
-	  max: Object (4)
-	  min: Bool (0)
-	  std: 1.414
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnodc: number of class_kind descendants
 	  avg: 0.0
-	  max: Object (4)
-	  min: Bool (0)
-	  std: 1.414
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnopi: number of interface_kind parent
 	  avg: 0.0
-	  max: Bool (1)
+	  max: Object (0)
 	  min: Object (0)
-	  std: 0.866
+	  std: 0.0
+	  sum: 0
 	cnoci: number of interface_kind children
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnodi: number of interface_kind descendants
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditc: depth in class tree following only class, abstract, extern kind
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditi: depth in class tree following only interface_kind
 	  avg: 0.0
-	  max: Bool (1)
+	  max: Object (0)
 	  min: Object (0)
-	  std: 0.866
+	  std: 0.0
+	  sum: 0
 	mdui: proportion of mclass defined using inheritance (has other parent than Object)
 	  avg: 0.0
-	  max: base_simple3 (0.0)
-	  min: base_simple3 (0.0)
+	  max: base_empty_module (0.0)
+	  min: base_empty_module (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduic: proportion of class_kind defined using inheritance
 	  avg: 0.0
-	  max: base_simple3 (0.0)
-	  min: base_simple3 (0.0)
+	  max: base_empty_module (0.0)
+	  min: base_empty_module (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduii: proportion of interface_kind defined using inheritance
 	  avg: 0.0
-	  max: base_simple3 (0.0)
-	  min: base_simple3 (0.0)
-	  std: 0.0
-	mif: proportion of mclass inherited from
-	  avg: 0.071
-	  max: base_simple3 (0.143)
+	  max: base_empty_module (0.0)
 	  min: base_empty_module (0.0)
-	  std: 0.071
+	  std: 0.0
+	  sum: 0.0
+	mif: proportion of mclass inherited from
+	  avg: 0.0
+	  max: base_empty_module (0.0)
+	  min: base_empty_module (0.0)
+	  std: 0.0
+	  sum: 0.0
 	mifc: proportion of class_kind inherited from
 	  avg: 0.0
-	  max: base_simple3 (0.0)
-	  min: base_simple3 (0.0)
-	  std: 0.0
-	mifi: proportion of interface_kind inherited from
-	  avg: 0.071
-	  max: base_simple3 (0.143)
+	  max: base_empty_module (0.0)
 	  min: base_empty_module (0.0)
-	  std: 0.071
+	  std: 0.0
+	  sum: 0.0
+	mifi: proportion of interface_kind inherited from
+	  avg: 0.0
+	  max: base_empty_module (0.0)
+	  min: base_empty_module (0.0)
+	  std: 0.0
+	  sum: 0.0
 
  ## global metrics
 	cnoac: number of class_kind ancestor
@@ -712,76 +865,91 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnopc: number of class_kind parent
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnocc: number of class_kind children
-	  avg: 1.0
+	  avg: 0.0
 	  max: Object (4)
 	  min: Bool (0)
 	  std: 1.414
+	  sum: 4
 	cnodc: number of class_kind descendants
-	  avg: 1.0
+	  avg: 0.0
 	  max: Object (4)
 	  min: Bool (0)
 	  std: 1.414
+	  sum: 4
 	cnopi: number of interface_kind parent
-	  avg: 1.0
+	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
-	  std: 0.5
+	  std: 0.866
+	  sum: 6
 	cnoci: number of interface_kind children
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cnodi: number of interface_kind descendants
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditc: depth in class tree following only class, abstract, extern kind
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
+	  sum: 0
 	cditi: depth in class tree following only interface_kind
-	  avg: 1.0
+	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
-	  std: 0.5
+	  std: 0.866
+	  sum: 6
 	mdui: proportion of mclass defined using inheritance (has other parent than Object)
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduic: proportion of class_kind defined using inheritance
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mduii: proportion of interface_kind defined using inheritance
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mif: proportion of mclass inherited from
 	  avg: 0.071
 	  max: base_simple3 (0.143)
 	  min: base_empty_module (0.0)
 	  std: 0.071
+	  sum: 0.143
 	mifc: proportion of class_kind inherited from
 	  avg: 0.0
 	  max: base_simple3 (0.0)
 	  min: base_simple3 (0.0)
 	  std: 0.0
+	  sum: 0.0
 	mifi: proportion of interface_kind inherited from
 	  avg: 0.071
 	  max: base_simple3 (0.143)
 	  min: base_empty_module (0.0)
 	  std: 0.071
+	  sum: 0.143
 
 # RTA metrics
 
@@ -791,36 +959,43 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: <main> (6)
 	  min: <main> (6)
 	  std: 0.0
+	  sum: 6
 	mnlt: number of live mtypes in a mmodule
 	  avg: 6.0
 	  max: <main> (6)
 	  min: <main> (6)
 	  std: 0.0
+	  sum: 6
 	mnct: number of live cast mtypes in a mmodule
 	  avg: 0.0
 	  max: <main> (0)
 	  min: <main> (0)
 	  std: 0.0
+	  sum: 0
 	mnli: number of live instances in a mmodule
 	  avg: 17.0
 	  max: <main> (17)
 	  min: <main> (17)
 	  std: 0.0
+	  sum: 17
 	mnlm: number of live methods in a mmodule
 	  avg: 14.0
 	  max: <main> (14)
 	  min: <main> (14)
 	  std: 0.0
+	  sum: 14
 	mnlmd: number of live method definitions in a mmodule
 	  avg: 14.0
 	  max: <main> (14)
 	  min: <main> (14)
 	  std: 0.0
+	  sum: 14
 	mnldd: number of dead method definitions in a mmodule
 	  avg: 0.0
 	  max: <main> (0)
 	  min: <main> (0)
 	  std: 0.0
+	  sum: 0
 
  ## Total live instances by mclasses
 	cnli: number of live instances for a mclass
@@ -828,7 +1003,9 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Int (12)
 	  min: Sys (1)
 	  std: 4.183
+	  sum: 17
 	cnlc: number of live cast for a mclass type -- nothing
+	  sum: 0
 
  ## Total live instances by mtypes
 	tnli: number of live instances for a mtype
@@ -836,7 +1013,9 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Int (12)
 	  min: Sys (1)
 	  std: 4.183
+	  sum: 17
 	tnlc: number of live casts to a mtype -- nothing
+	  sum: 0
 
  ## MType complexity
 	tags: arity of generic signature
@@ -844,11 +1023,13 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
 	  max: Sys (0)
 	  min: Sys (0)
 	  std: 0.0
+	  sum: 0
 	tdos: depth of generic signature
 	  avg: 0.0
 	  max: Sys (0)
 	  min: Sys (0)
 	  std: 0.0
+	  sum: 0
 
  ## Callsites
 * 22 live callsites
@@ -894,6 +1075,8 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3#Object#bar: 1 (4.54%)
   base_simple3#Object#foo: 1 (4.54%)
   base_simple3#C#init: 1 (4.54%)
+generating out/nitmetrics_args1.write/project_hierarchy.dot
+generating out/nitmetrics_args1.write/module_hierarchy.dot
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/
@@ -902,5 +1085,6 @@ mendel/
 mmodules/
 model.html
 module_hierarchy.dot
+nullables/
 project_hierarchy.dot
 rta/

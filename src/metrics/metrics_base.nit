@@ -251,6 +251,15 @@ class IntMetric
 		end
 		return above
 	end
+
+	redef fun to_console(indent, colors) do
+		super
+		if colors then
+			print "{"\t" * indent}  sum: {sum}".light_gray
+		else
+			print "{"\t" * indent}  sum: {sum}"
+		end
+	end
 end
 
 # A Metric that collects float datas
@@ -319,6 +328,16 @@ class FloatMetric
 		end
 		return above
 	end
+
+	redef fun to_console(indent, colors) do
+		super
+		if colors then
+			print "{"\t" * indent}  sum: {sum}".light_gray
+		else
+			print "{"\t" * indent}  sum: {sum}"
+		end
+	end
+
 end
 
 # A MetricSet is a metric holder

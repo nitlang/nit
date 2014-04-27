@@ -183,14 +183,9 @@ $(call import-module,android/native_app_glue)
 		### Link to png sources
 		# libpng is not available on Android NDK
 		# FIXME make obtionnal when we have alternatives to mnit
-		var nit_dir = "NIT_DIR".environ
-		var share_dir
-		if not nit_dir.is_empty then
-			share_dir = "{nit_dir}/share/"
-		else
-			share_dir = "{sys.program_name.dirname}/../share/"
-		end
-		if not share_dir.file_exists then 
+		var nit_dir = toolcontext.nit_dir
+		var share_dir =  "{nit_dir}/share/"
+		if nit_dir == null or not share_dir.file_exists then
 			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
 			exit 1
 		end

@@ -21,7 +21,8 @@ import abstract_collection
 abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
-	redef readable var _length: Int = 0
+	var _length: Int = 0
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
 
@@ -361,7 +362,8 @@ private class ArrayIterator[E]
 		_index = 0
 	end
 
-	redef readable var _index: Int = 0
+	var _index: Int = 0
+	redef fun index do return _index
 	var _array: AbstractArrayRead[E]
 end
 
@@ -648,8 +650,14 @@ interface ArrayCapable[E]
 	protected fun calloc_array(size: Int): NativeArray[E] is intern
 end
 
-# Native C array (void ...).
+# Native Nit array
+# Access are unchecked and it has a fixed size
+# Not for public use: may become private.
 universal NativeArray[E]
+	# The length of the array
+	fun length: Int is intern
+	# Use `self` to initialize a standard Nit Array.
+	fun to_a: Array[E] do return new Array[E].with_native(self, length)
 	fun [](index: Int): E is intern
 	fun []=(index: Int, item: E) is intern
 	fun copy_to(dest: NativeArray[E], length: Int) is intern
