@@ -49,7 +49,6 @@ redef class Sys
 	fun jvm=(jvm: JavaVM) do jvm_cache = jvm
 
 	# Current main `JniEnv`
-	# FIXME support threaded Java
 	fun jni_env: JniEnv
 	do
 		if jni_env_cache == null then create_default_jvm
@@ -74,6 +73,21 @@ redef class Sys
 		self.jvm = jvm
 		self.jni_env = builder.jni_env.as(not null)
 	end
+
+	# Get a Java class by its name from the current `jni_env`
+	fun load_jclass(name: NativeString): JClass import jni_env `{
+		JNIEnv *nit_ffi_jni_env = Sys_jni_env(recv);
+
+		// retreive the implementation Java class
+		jclass java_class = (*nit_ffi_jni_env)->FindClass(nit_ffi_jni_env, name);
+		if (java_class == NULL) {
+			fprintf(stderr, "Nit FFI with Java error: failed to load class.\\n");
+			(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
+			exit(1);
+		}
+
+		return java_class;
+	`}
 end
 
 # A standard Java string `java.lang.String`

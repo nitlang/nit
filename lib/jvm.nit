@@ -73,7 +73,13 @@ extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
 
 	# Set the defaut config for a VM
 	# Can be called after setting the version
-	fun set_default `{ JNI_GetDefaultJavaVMInitArgs(recv); `}
+	#
+	# Unavailable on Android, where you cannot instanciate a new JVM.
+	fun set_default `{
+	#ifndef ANDROID
+		JNI_GetDefaultJavaVMInitArgs(recv);
+	#endif
+	`}
 
 	fun version: Int `{ return recv->version; `}
 	fun version=(v: Int) `{ recv->version = v; `}
@@ -87,14 +93,14 @@ end
 
 extern class JavaVMOption `{ JavaVMOption* `}
 	fun string: String import NativeString.to_s `{
-		return NativeString_to_s(recv->optionString);
+		return NativeString_to_s((char*)recv->optionString);
 	`}
 	fun string=(v: String) import String.to_cstring `{
 		recv->optionString = String_to_cstring(v);
 	`}
 
 	fun extra_info: String import NativeString.to_s `{
-		return NativeString_to_s(recv->extraInfo);
+		return NativeString_to_s((char*)recv->extraInfo);
 	`}
 	fun extra_info=(v: String) import String.to_cstring `{
 		recv->extraInfo = String_to_cstring(v);
@@ -110,7 +116,15 @@ end
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
 	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
+	#
+	# Unavailable on Android, where you cannot instanciate a new JVM.
 	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
+
+	#ifdef ANDROID
+		JavaVM_jni_error(NULL, "JVM creation not supported on Android", 0);
+		return NULL;
+	#endif
+
 		JavaVM *jvm;
 		JNIEnv *env;
 		jint res;
@@ -149,7 +163,12 @@ extern class JavaVM `{JavaVM *`}
 
 	fun attach_current_thread: JniEnv `{
 		JNIEnv *env;
+	#ifdef ANDROID
+		// the signature is different (better actually) on Android
+		int res = (*recv)->AttachCurrentThread(recv, &env, NULL);
+	#else
 		int res = (*recv)->AttachCurrentThread(recv, (void**)&env, NULL);
+	#endif
 		if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not attach current thread to Java VM", res);
 			return NULL;
@@ -377,7 +396,7 @@ end
 # Represents a jni JNINNativeMethod
 extern class JNINativeMethod `{ JNINativeMethod* `}
 	fun name: String import NativeString.to_s `{
-		return NativeString_to_s(recv->name);
+		return NativeString_to_s((void*)recv->name);
 	`}
 
 	fun name=(name: String) import String.to_cstring `{
@@ -385,7 +404,7 @@ extern class JNINativeMethod `{ JNINativeMethod* `}
 	`}
 
 	fun signature: String import NativeString.to_s `{
-		return NativeString_to_s(recv->signature);
+		return NativeString_to_s((void*)recv->signature);
 	`}
 
 	fun signature=(signature: String) import String.to_cstring `{

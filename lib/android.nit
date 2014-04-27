@@ -20,3 +20,5 @@
 #
 # Will, in the near future, provide services specific to Android.
 module android is platform
+
+import java
