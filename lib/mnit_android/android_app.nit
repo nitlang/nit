@@ -634,7 +634,7 @@ redef class Sys
 		return load_jclass_intern(class_loader, class_loader_method, name)
 	end
 
-	private fun find_class_loader import jni_env, class_loader=, JavaObject as nullable, class_loader_method=, JMethodID as nullable `{
+	private fun find_class_loader import jni_env, class_loader=, JavaObject.as nullable, class_loader_method=, JMethodID.as nullable `{
 		JNIEnv *env = Sys_jni_env(recv);
 
 		jobject instance_activity = mnit_java_app->activity->clazz;
