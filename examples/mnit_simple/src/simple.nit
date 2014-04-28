@@ -15,7 +15,10 @@
 # limitations under the License.
 
 # Very simple application
-module simple
+module simple is
+	app_name("mnit Simple example")
+	app_version(0, 2, git_revision)
+end
 
 import mnit
 

@@ -14,7 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module simple_android
+module simple_android is
+	java_package("org.nitlanguage.simple")
+	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
+end
 
 import simple
 import mnit_android
@@ -39,6 +42,11 @@ redef class MyApp
 		// - Context needed from now on
 		// NativeActivity is a Java sub-class of Context
 		final android.app.NativeActivity context = MyApp_native_activity(recv);
+
+		// Vibration
+		android.os.Vibrator v = (android.os.Vibrator)
+			context.getSystemService(android.content.Context.VIBRATOR_SERVICE);
+		v.vibrate(500);
 
 		// - UI thread needed from now on
 		context.runOnUiThread(new Runnable() {
