@@ -540,7 +540,12 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 
 		if ost == null then
-			ost = "nitstack"
+			var platform = mainmodule.target_platform
+			if platform != null and not platform.supports_libunwind then
+				ost = "none"
+			else
+				ost = "nitstack"
+			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
@@ -2727,11 +2732,6 @@ if mmodules.length == 1 then
 else
 	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
 	mainmodule.set_imported_mmodules(mmodules)
-end
-
-var platform = mainmodule.target_platform
-if platform != null and not platform.supports_libunwind then
-	if toolcontext.opt_stacktrace.value == null then toolcontext.opt_stacktrace.value = "none" # default is none
 end
 
 toolcontext.run_global_phases(mmodules)
