@@ -15,3 +15,4 @@ test_markdown_args1
 pep8analysis
 test_android_platform
 android
+nitcc_parser_gen
