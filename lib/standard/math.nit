@@ -42,6 +42,18 @@ redef class Float
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 	fun log: Float is extern "kernel_Float_Float_log_0"
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
+
+	#     assert 1.1.ceil == 2.0
+	#     assert 1.9.ceil == 2.0
+	#     assert 2.0.ceil == 2.0
+	#     assert (-1.5).ceil == -1.0
+	fun ceil: Float `{ return ceil(recv); `}
+
+	#     assert 1.1.floor == 1.0
+	#     assert 1.9.floor == 1.0
+	#     assert 2.0.floor == 2.0
+	#     assert (-1.5).floor == -2.0
+	fun floor: Float `{ return floor(recv); `}
 	
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
