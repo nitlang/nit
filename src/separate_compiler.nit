@@ -35,6 +35,12 @@ redef class ToolContext
 	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
 	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	# --skip-dead-methods
+	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
+	# --semi-global
+	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
+	# --no-colo-dead-methods
+	var opt_no_colo_dead_methods = new OptionBool("Do not colorize dead methods", "--no-colo-dead-methods")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -51,11 +57,25 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
+		self.option_context.add_option(self.opt_no_colo_dead_methods)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
 		self.option_context.add_option(self.opt_tables_metrics)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		var tc = self
+		if tc.opt_semi_global.value then
+			tc.opt_inline_coloring_numbers.value = true
+			tc.opt_inline_some_methods.value = true
+			tc.opt_direct_call_monomorph.value = true
+			tc.opt_skip_dead_methods.value = true
+		end
 	end
 end
 
@@ -248,6 +268,8 @@ class SeparateCompiler
 	fun do_property_coloring do
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
+		var rta = runtime_type_analysis
+
 		# Layouts
 		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
@@ -269,6 +291,9 @@ class SeparateCompiler
 		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
 		#end
 
+		# The dead methods, still need to provide a dead color symbol
+		var dead_methods = new Array[MMethod]
+
 		# lookup properties to build layout with
 		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
 		var mattributes = new HashMap[MClass, Set[MAttribute]]
@@ -277,6 +302,10 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
+					if modelbuilder.toolcontext.opt_no_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
+						dead_methods.add(mprop)
+						continue
+					end
 					mmethods[mclass].add(mprop)
 				else if mprop isa MAttribute then
 					mattributes[mclass].add(mprop)
@@ -299,8 +328,8 @@ class SeparateCompiler
 
 		# lookup super calls and add it to the list of mmethods to build layout with
 		var super_calls
-		if runtime_type_analysis != null then
-			super_calls = runtime_type_analysis.live_super_sends
+		if rta != null then
+			super_calls = rta.live_super_sends
 		else
 			super_calls = all_super_calls
 		end
@@ -318,7 +347,10 @@ class SeparateCompiler
 		self.method_tables = build_method_tables(mclasses, super_calls)
 		self.compile_color_consts(method_layout.pos)
 
-		# attribute null color to dead supercalls
+		# attribute null color to dead methods and supercalls
+		for mproperty in dead_methods do
+			compile_color_const(new_visitor, mproperty, -1)
+		end
 		for mpropdef in all_super_calls do
 			if super_calls.has(mpropdef) then continue
 			compile_color_const(new_visitor, mpropdef, -1)
@@ -348,6 +380,7 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
+					if not layout.pos.has_key(mproperty) then continue
 					var color = layout.pos[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
@@ -374,6 +407,7 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MMethod then continue
+				if not layout.pos.has_key(mproperty) then continue
 				var color = layout.pos[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
@@ -605,6 +639,8 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				var rta = runtime_type_analysis
+				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
@@ -751,7 +787,8 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var rta = runtime_type_analysis
+		var is_dead = rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -767,6 +804,10 @@ class SeparateCompiler
 					v.add_decl("NULL, /* empty */")
 				else
 					assert mpropdef isa MMethodDef
+					if rta != null and not rta.live_methoddefs.has(mpropdef) then
+						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					end
 					var rf = mpropdef.virtual_runtime_function
 					v.require_declaration(rf.c_name)
 					v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
@@ -786,7 +827,7 @@ class SeparateCompiler
 				self.header.add_decl("\};")
 			end
 
-			if not self.runtime_type_analysis.live_types.has(mtype) then return
+			if not rta.live_types.has(mtype) then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
