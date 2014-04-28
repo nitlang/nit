@@ -35,6 +35,12 @@ class AndroidProject
 	# Version of the Android application and APK
 	var version: nullable String = null
 
+	# Custom lines to add to the AndroidManifest.xml in the <manifest> node
+	var manifest_lines = new Array[String]
+
+	# Custom lines to add to the AndroidManifest.xml in the <application> node
+	var manifest_application_lines = new Array[String]
+
 	redef fun to_s do return """
 name: {{{name or else "null"}}}
 namespace: {{{java_package or else "null"}}}
@@ -56,9 +62,30 @@ redef class ModelBuilder
 		annot = priority_annotation_on_modules("java_package", mmodule)
 		if annot != null then project.java_package = annot.arg_as_string(self)
 
+		var annots = collect_annotations_on_modules("android_manifest", mmodule)
+		for an in annots do project.manifest_lines.add an.arg_as_string(self)
+
+		annots = collect_annotations_on_modules("android_manifest_application", mmodule)
+		for an in annots do project.manifest_application_lines.add an.arg_as_string(self)
+
 		toolcontext.check_errors
 
 		return project
+	end
+
+	# Recursively collect all annotations by name in `mmodule` and its importations (direct and indirect)
+	private fun collect_annotations_on_modules(name: String, mmodule: MModule): Array[AAnnotation]
+	do
+		var annotations = new Array[AAnnotation]
+		for mmod in mmodule.in_importation.greaters do
+			if not mmodule2nmodule.keys.has(mmod) then continue
+			var amod = mmodule2nmodule[mmod]
+			var module_decl = amod.n_moduledecl
+			if module_decl == null then continue
+			var aas = module_decl.collect_annotations_by_name(name)
+			annotations.add_all aas
+		end
+		return annotations
 	end
 
 	# Get an annotation by name from `mmodule` and its super modules. Will recursively search
