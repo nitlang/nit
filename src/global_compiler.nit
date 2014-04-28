@@ -26,6 +26,29 @@ module global_compiler
 import abstract_compiler
 import rapid_type_analysis
 
+redef class ToolContext
+	# option --global
+	var opt_global = new OptionBool("Use global compilation", "--global")
+
+	var global_compiler_phase = new GlobalCompilerPhase(self, null)
+
+	redef init do
+		super
+		option_context.add_option(opt_global)
+	end
+end
+
+class GlobalCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_global.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		modelbuilder.run_global_compiler(mainmodule, analysis)
+	end
+end
+
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
 	# `mainmodule` is the main module of the program
