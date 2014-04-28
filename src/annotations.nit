@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Management of annotations written in comments
+# Management of annotations written in comments.
+# It looks for a defined annotation at the start of each comment's line of current entity
+# and adds it to the list of used annotations for this entity if such an annotation is found.
 module annotations
 
 import model
@@ -22,30 +24,23 @@ redef class MDoc
 	private var annots: nullable List[Annotation]
 
 	# Looks for existing annotations and fill 'annots' attribute of 'MDoc'.
+	# FIXME should be done with nitcc
 	private fun extract_annotations do 
 		annots = new List[Annotation]
 		for line in content do
-			if not line.is_empty and line.first == '@' then
-				var annotation_label: String
-				var has_space = line.chars.index_of(' ') != -1
-				if has_space then
-					var label_length = line.substring_from(1).chars.index_of(' ')
-					annotation_label = line.substring(1, label_length)
-				else
-					annotation_label = line.substring_from(1)
-				end
-				
-				# Differentiates standalone and no standalone annotations
+			if not line.is_empty and (line.has_prefix("author:") or line.has_prefix("deprecated:") or line.has_prefix("ensure:")
+						or line.has_prefix("note:") or line.has_prefix("param:") or line.has_prefix("require:")
+						or line.has_prefix("returns:") or line.has_prefix("version:")) then
+
+				var suffix_pos = line.chars.index_of(':')
+				var annotation_label = line.substring(0, suffix_pos - 1)
+
 				if annotation_label == "deprecated" then
 					annots.add(new BoolAnnotation(annotation_label))
-				
-				else if has_space and (annotation_label == "author" or annotation_label == "ensure" or
-							annotation_label == "note" or annotation_label == "param" or
-							annotation_label == "require" or annotation_label == "returns" or
-							annotation_label == "version") then
-					var value = line.substring_from(annotation_label.length + 2)
+				else
+					var value = line.substring_from(suffix_pos + 2)
 					annots.add(new StringAnnotation(annotation_label, value))
-				end							
+				end
 			end
 		end
 	end
@@ -61,7 +56,8 @@ end
 
 # Super class for all types of annotations.
 abstract class Annotation
-	# Name of the annotation
+	# Name of the annotation (without the colon ':')
+	# (ie. for the annotation 'returns: a foo message', the name will be 'returns'
 	var name: String
 
 	# Type of the value of the annotation
@@ -73,6 +69,9 @@ abstract class Annotation
 end
 
 # Annotation dealing with a String value.
+# Example of use :
+# 	# param: message to be printed
+# 	fun foo(msg: String)
 class StringAnnotation
 	super Annotation
 
@@ -89,7 +88,9 @@ class StringAnnotation
 end
 
 # Annotation dealing with a Boolean value.
-# Typically used to represent standalone annotations (ie. deprecated)
+# Typically used to represent standalone annotations ie. deprecated :
+# 	deprecated: use 'get_date()' instead
+# 	fun print_date()
 class BoolAnnotation
 	super Annotation
 	
