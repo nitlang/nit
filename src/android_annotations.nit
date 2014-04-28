@@ -32,9 +32,13 @@ class AndroidProject
 	# Java package used to identify the APK
 	var java_package: nullable String = null
 
+	# Version of the Android application and APK
+	var version: nullable String = null
+
 	redef fun to_s do return """
 name: {{{name or else "null"}}}
-namespace: {{{java_package or else "null"}}}"""
+namespace: {{{java_package or else "null"}}}
+version: {{{version or else "null"}}}"""
 end
 
 redef class ModelBuilder
@@ -45,6 +49,9 @@ redef class ModelBuilder
 
 		var annot = priority_annotation_on_modules("app_name", mmodule)
 		if annot != null then project.name = annot.arg_as_string(self)
+
+		annot =  priority_annotation_on_modules("app_version", mmodule)
+		if annot != null then project.version =  annot.as_version(self)
 
 		annot = priority_annotation_on_modules("java_package", mmodule)
 		if annot != null then project.java_package = annot.arg_as_string(self)
@@ -117,5 +124,69 @@ redef class AAnnotation
 			end
 			return expr.value.as(not null)
 		end
+	end
+
+	# Returns a version string (example: "1.5.6b42a7c") from an annotation `version(1, 5, git_revision)`.
+	#
+	# The user can enter as many fields as needed. The call to `git_revision` will be replaced by the short
+	# revision number. If the working tree is dirty, it will append another field with "d" for dirty.
+	private fun as_version(modelbuilder: ModelBuilder): String
+	do
+		var annotation_name = n_atid.n_id.text
+		var version_fields = new Array[Object]
+
+		var args = n_args
+		var platform_name
+		if args.length < 1 then
+			modelbuilder.error(self, "Annotation error: \"{annotation_name}\" expects at least a single argument.")
+			return ""
+		else
+			for arg in args do
+				var format_error = "Annotation error: \"{annotation_name}\" expects its arguments to be of type Int or a call to `git_revision`"
+				
+				if not arg isa AExprAtArg then
+					modelbuilder.error(self, format_error)
+					return ""
+				end
+
+				var expr = arg.n_expr
+				if expr isa AIntExpr then
+					var value = expr.value
+					assert value != null
+					version_fields.add value
+				else if expr isa AStringFormExpr then
+					version_fields.add expr.value.as(not null)
+				else if expr isa ACallExpr then
+					# We support calls to "git" only
+					var exec_args = expr.n_args.to_a
+					if expr.n_id.text != "git_revision" or not exec_args.is_empty then
+						modelbuilder.error(self,
+							"Annotation error: \"{annotation_name}\" accepts only calls to `git_revision` with the command as arguments.")
+						return ""
+					end
+
+					# Get Git short revision
+					var proc = new IProcess("git", "rev-parse", "--short", "HEAD")
+					proc.wait
+					assert proc.status == 0
+					var lines = proc.read_all
+					var revision = lines.split("\n").first
+
+					# Is it dirty?
+					# If not, the return of `git diff --shortstat` is an empty line
+					proc = new IProcess("git", "diff-index", "--quiet", "HEAD")
+					proc.wait
+					var dirty = proc.status != 0
+					if dirty then revision += ".d"
+
+					version_fields.add revision
+				else
+					modelbuilder.error(self, format_error)
+					return ""
+				end
+			end
+		end
+
+		return version_fields.join(".")
 	end
 end
