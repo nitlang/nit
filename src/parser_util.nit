@@ -171,6 +171,37 @@ redef class ToolContext
 
 		return error
 	end
+
+	# Parse the input of the user as something
+	fun interactive_parse(prompt: String): ANode
+	do
+		var oldtext = ""
+
+		loop
+			printn prompt
+			printn " "
+			var s = stdin.read_line
+			if s == "" then continue
+			if s.chars.first == ':' then
+				var res = new TString
+				res.text = s
+				return res
+			end
+
+			var text = oldtext + s + "\n"
+			oldtext = ""
+			var n = parse_something(text)
+
+			if n isa AParserError and n.token isa EOF then
+				# Unexpected end of file, thus continuing
+				if oldtext == "" then prompt = "." * prompt.length
+				oldtext = text
+				continue
+			end
+
+			return n
+		end
+	end
 end
 
 class InjectedLexer
