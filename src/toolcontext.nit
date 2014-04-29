@@ -133,7 +133,10 @@ class ToolContext
 			print "{s}"
 		end
 	end
-	
+
+	# Executes a program while checking if it's available and if the execution ended correctly
+	#
+	# Stops execution and prints errors if the program isn't available or didn't end correctly
 	fun exec_and_check(args: Array[String], error: String)
         do
                 var prog = args.first
