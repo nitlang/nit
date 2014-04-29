@@ -26,30 +26,6 @@ redef class ToolContext
 		if name == "android" then return new AndroidPlatform
 		return super
 	end
-
-	fun exec_and_check(args: Array[String])
-	do
-		var prog = args.first
-		args.remove_at 0
-
-		# Is the wanted program available?
-		var proc_which = new IProcess.from_a("which", [prog])
-		proc_which.wait
-		var res = proc_which.status
-		if res != 0 then
-			print "Android project error: executable \"{prog}\" not found"
-			exit 1
-		end
-
-		# Execute the wanted program
-		var proc = new Process.from_a(prog, args)
-		proc.wait
-		res = proc.status
-		if res != 0 then
-			print "Android project error: execution of \"{prog} {args.join(" ")}\" failed"
-			exit 1
-		end
-	end
 end
 
 class AndroidPlatform
@@ -81,7 +57,7 @@ class AndroidToolchain
 		var args = ["android", "-s", "create", "project", "--name", app_name,
 			"--target", "android-10", "--path", android_project_root,
 			"--package", app_package, "--activity", app_name]
-		toolcontext.exec_and_check(args)
+		toolcontext.exec_and_check(args, "Android project error")
 
 		# create compile_dir
 		var dir = "{android_project_root}/jni/"
@@ -192,7 +168,7 @@ $(call import-module,android/native_app_glue)
 		share_dir = share_dir.realpath
 		var target_png_dir = "{android_project_root}/jni/png"
 		if not target_png_dir.file_exists then
-			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
+			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir], "Android project error")
 		end
 
 		### Link to assets (for mnit and others)
@@ -204,7 +180,7 @@ $(call import-module,android/native_app_glue)
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
 			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
 			end
 		end
 	end
@@ -217,14 +193,14 @@ $(call import-module,android/native_app_glue)
 	redef fun compile_c_code(compiler, compile_dir)
 	do
 		# Compile C code (and thus Nit)
-		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root])
+		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
-		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"])
+		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"], "Android project error")
 
 		# Move the apk to the target
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}.apk"
-		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname], "Android project error")
 	end
 end
