@@ -18,4 +18,4 @@
 module gtk
 
 # By default, use gtk 3.4
-import gtk3_4
+import v3_4
