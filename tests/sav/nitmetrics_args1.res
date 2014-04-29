@@ -956,44 +956,44 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
  ## Live instances by mainmodules
 	mnlc: number of live mclasses in a mmodule
 	  avg: 6.0
-	  max: <main> (6)
-	  min: <main> (6)
+	  max: base_simple3 (6)
+	  min: base_simple3 (6)
 	  std: 0.0
 	  sum: 6
 	mnlt: number of live mtypes in a mmodule
 	  avg: 6.0
-	  max: <main> (6)
-	  min: <main> (6)
+	  max: base_simple3 (6)
+	  min: base_simple3 (6)
 	  std: 0.0
 	  sum: 6
 	mnct: number of live cast mtypes in a mmodule
 	  avg: 0.0
-	  max: <main> (0)
-	  min: <main> (0)
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
 	mnli: number of live instances in a mmodule
 	  avg: 17.0
-	  max: <main> (17)
-	  min: <main> (17)
+	  max: base_simple3 (17)
+	  min: base_simple3 (17)
 	  std: 0.0
 	  sum: 17
 	mnlm: number of live methods in a mmodule
 	  avg: 14.0
-	  max: <main> (14)
-	  min: <main> (14)
+	  max: base_simple3 (14)
+	  min: base_simple3 (14)
 	  std: 0.0
 	  sum: 14
 	mnlmd: number of live method definitions in a mmodule
 	  avg: 14.0
-	  max: <main> (14)
-	  min: <main> (14)
+	  max: base_simple3 (14)
+	  min: base_simple3 (14)
 	  std: 0.0
 	  sum: 14
 	mnldd: number of dead method definitions in a mmodule
 	  avg: 0.0
-	  max: <main> (0)
-	  min: <main> (0)
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
 
