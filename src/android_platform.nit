@@ -76,16 +76,13 @@ class AndroidToolchain
 
 		## Generate delagating makefile
 		dir = "{android_project_root}/jni/"
-		var file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 include $(call all-subdir-makefiles)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate makefile into "{compile_dir}/Android.mk"
 		dir = compile_dir
-		file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -99,13 +96,11 @@ LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/native_app_glue)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate AndroidManifest.xml
 		dir = android_project_root
-		file = new OFStream.open("{dir}/AndroidManifest.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
@@ -141,20 +136,18 @@ $(call import-module,android/native_app_glue)
 
 </manifest> 
 <!-- END_INCLUDE(manifest) -->
-"""
-		file.close
+		""".write_to_file("{dir}/AndroidManifest.xml")
 
 		### generate res/values/strings.xml
 		dir = "{android_project_root}/res/"
 		if not dir.file_exists then dir.mkdir
 		dir = "{dir}/values/"
 		if not dir.file_exists then dir.mkdir
-		file = new OFStream.open("{dir}/strings.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">{{{app_name}}}</string>
-</resources>"""
-		file.close
+</resources>
+		""".write_to_file("{dir}/strings.xml")
 
 		### Link to png sources
 		# libpng is not available on Android NDK
