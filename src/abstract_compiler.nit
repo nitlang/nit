@@ -540,7 +540,12 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 
 		if ost == null then
-			ost = "nitstack"
+			var platform = mainmodule.target_platform
+			if platform != null and not platform.supports_libunwind then
+				ost = "none"
+			else
+				ost = "nitstack"
+			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
@@ -2689,3 +2694,44 @@ redef class MModule
 	# Note: can return null instead of an empty set
 	fun collect_linker_libs: nullable Set[String] do return null
 end
+
+# Create a tool context to handle options and paths
+var toolcontext = new ToolContext
+
+var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+toolcontext.option_context.add_option(opt_mixins)
+
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+
+# We do not add other options, so process them now!
+toolcontext.process_options(args)
+
+# We need a model to collect stufs
+var model = new Model
+# An a model builder to parse files
+var modelbuilder = new ModelBuilder(model, toolcontext)
+
+var arguments = toolcontext.option_context.rest
+if arguments.length > 1 then
+	print "Too much arguments: {arguments.join(" ")}"
+	print toolcontext.tooldescription
+	exit 1
+end
+var progname = arguments.first
+
+# Here we load an process all modules passed on the command line
+var mmodules = modelbuilder.parse([progname])
+mmodules.add_all modelbuilder.parse(opt_mixins.value)
+
+if mmodules.is_empty then return
+modelbuilder.run_phases
+
+var mainmodule
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+	mainmodule.set_imported_mmodules(mmodules)
+end
+
+toolcontext.run_global_phases(mmodules)

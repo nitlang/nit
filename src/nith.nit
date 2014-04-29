@@ -14,27 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A global Nit compiler
-module nitg
+# A ligHt Nit compiler
+module nith
 
+import phase
+import literal
+import scope
+import flow
+import local_var_init
+import typing
+import auto_super_init
 import modelbuilder
-import frontend
-import transform
 import rapid_type_analysis
-import global_compiler
 import separate_erasure_compiler
-import separate_compiler
-import android_platform
-import compiler_ffi
+import transform
 
 redef class ToolContext
 	redef fun process_options(args)
 	do
 		super
 
-		var sum = opt_global.value.to_i + opt_separate.value.to_i + opt_erasure.value.to_i
+		var sum = opt_separate.value.to_i + opt_erasure.value.to_i
 		if sum > 1 then
-			print "Options --global, --separate and --erasure are exclusive"
+			print "Options --separate and --erasure are exclusive"
 			exit(1)
 		else if sum == 0 then
 			# --separate by default

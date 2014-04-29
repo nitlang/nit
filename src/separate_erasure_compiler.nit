@@ -21,13 +21,31 @@ intrude import separate_compiler
 redef class ToolContext
 	# --erasure
 	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
+	# --rta
+	var opt_rta = new OptionBool("Activate RTA (implicit with --global and --separate)", "--rta")
 	# --no-check-erasure-cast
 	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
 
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast)
+		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast, opt_rta)
+	end
+
+	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
+end
+
+class ErasureCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_erasure.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = null
+		if toolcontext.opt_rta.value then
+			analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		end
+		modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
 	end
 end
 

@@ -77,6 +77,19 @@ redef class ToolContext
 			tc.opt_skip_dead_methods.value = true
 		end
 	end
+
+	var separate_compiler_phase = new SeparateCompilerPhase(self, null)
+end
+
+class SeparateCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_separate.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		modelbuilder.run_separate_compiler(mainmodule, analysis)
+	end
 end
 
 redef class ModelBuilder
