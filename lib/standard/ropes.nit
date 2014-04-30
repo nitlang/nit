@@ -907,67 +907,44 @@ end
 # A node for a Rope
 private abstract class RopeNode
 
-	private var _length = 0
+	var length = 0
 
-	private var parent: nullable ConcatNode = null
+	var parent: nullable ConcatNode = null
 
-	private var height = 0
+	var height = 0
 
 	# The balance factor of a node, if it is a Leaf, it equals its length
 	# Else, it will be equal to the difference between the height on the left and on the right
-	private fun balance_factor: Int do return height end
-
-	fun length: Int do return _length
-
-	private fun length=(len: Int)
-	do
-		_length = len
-	end
+	fun balance_factor: Int is abstract
 end
 
 # Node that represents a concatenation between two nodes (of any RopeNode type)
 private class ConcatNode
 	super RopeNode
 
-	private var _left_child: nullable RopeNode
-	private var _right_child: nullable RopeNode
+	var _left_child: nullable RopeNode
+	var _right_child: nullable RopeNode
 
-	private fun left_child: nullable RopeNode
-	do
-		if _left_child != null then
-			return _left_child
-		else
-			return null
-		end
-	end
+	fun left_child: nullable RopeNode do return _left_child
 
-	private fun right_child: nullable RopeNode
-	do
-		if _right_child != null then
-			return _right_child
-		else
-			return null
-		end
-	end
+	fun right_child: nullable RopeNode do return _right_child
 
-	private fun left_child=(new_node: nullable RopeNode)
+	fun left_child=(new_node: nullable RopeNode)
 	do
 		self._left_child = new_node
 		new_node.parent = self
 		update_data
 	end
 
-	private fun right_child=(new_node: nullable RopeNode)
+	fun right_child=(new_node: nullable RopeNode)
 	do
 		self._right_child = new_node
 		new_node.parent = self
 		update_data
 	end
 
-	# Updates the internal data of the current node
-	#
-	# Concretely, updates the length and the height of the node
-	private fun update_data
+	# Updates the length and the height of the node
+	fun update_data
 	do
 		self.length = 0
 		self.height = 1
@@ -984,7 +961,7 @@ private class ConcatNode
 	# Computes and returns the balance factor (used for AVL trees)
 	#
 	# Formula : left.height - right.height
-	redef private fun balance_factor
+	redef fun balance_factor
 	do
 		var left_height = 0
 		var right_height = 0
@@ -999,19 +976,15 @@ private class LeafNode
 	super RopeNode
 
 	# Encapsulated string in the leaf node
-	private var _value: String
+	var value: String
 
 	init(val: String)
 	do
-		self._value = val.to_s
+		self.value = val
 		self.length = val.length
 	end
 
-	private fun value: String do return self._value
+	redef fun balance_factor do return self.length
 
-	private fun value= (val: String)
-	do
-		_value = val
-	end
 end
 
