@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_8
+# GTK+ services added at version 3.8
+module v3_8 is pkgconfig("gtk+-3.0")
 
-import gtk3_6
+import v3_6
 
 redef class GtkWidget
 	# Get the visibility of the widget, check if it's parents are visible too
