@@ -117,12 +117,10 @@ class SeparateErasureCompiler
 		end
 
 		# vt coloration
-		var class_colorer = new MClassColorer(mainmodule)
-		class_colorer.build_layout(mclasses)
-		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, class_colorer)
-		var vt_layout = vt_coloring.build_layout(vts)
-		self.vt_tables = build_vt_tables(mclasses, vt_layout)
-		self.vt_layout = vt_layout
+		var vt_colorer = new POSetBucketsColorer[MClass, MVirtualTypeProp](poset, colorer.conflicts)
+		self.vt_layout = new Layout[MVirtualTypeProp]
+		self.vt_layout.pos = vt_colorer.colorize(vts)
+		self.vt_tables = build_vt_tables(mclasses, vt_layout.as(not null))
 	end
 
 	fun build_vt_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
