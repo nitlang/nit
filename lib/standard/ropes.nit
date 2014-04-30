@@ -870,6 +870,32 @@ private class DFSLeafForwardIterator
 
 end
 
+private class RopeCharBackwardsIterator
+	super RopeCharIterator
+
+	init(tgt: Rope) do from(tgt, tgt.length-1)
+
+	init from(tgt: Rope, from: Int)
+	do
+		sub_str_iter = new DFSLeafBackwardsIterator.with_index(tgt,from)
+		curr_sub_iter = sub_str_iter.item.value.chars.reverse_iterator_from(-(sub_str_iter.pos - from))
+		abs_pos = from
+	end
+
+	redef fun next
+	do
+		abs_pos -= 1
+		assert is_ok
+		if curr_sub_iter.is_ok then
+			curr_sub_iter.next
+		end
+		if not curr_sub_iter.is_ok then
+			sub_str_iter.next
+			if sub_str_iter.is_ok then curr_sub_iter = sub_str_iter.item.value.chars.reverse_iterator
+		end
+	end
+end
+
 private class DFSLeafBackwardsIterator
 	super DFSLeafIterator
 
