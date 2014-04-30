@@ -316,6 +316,8 @@ class BufferRope
 	super Rope
 	super Buffer
 
+	redef type SELFTYPE: RopeBuffer
+
 	init
 	do
 		super
@@ -608,6 +610,8 @@ end
 class ImmutableRope
 	super Rope
 	super String
+
+	redef type SELFTYPE: RopeString
 
 	init with_string(str)
 	do
