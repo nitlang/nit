@@ -156,7 +156,7 @@ class SeparateCompiler
 
 	private var type_ids: Map[MType, Int]
 	private var type_colors: Map[MType, Int]
-	private var resolution_layout: nullable Layout[MType]
+	private var opentype_colors: Map[MType, Int]
 	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
 
@@ -555,9 +555,8 @@ class SeparateCompiler
 
 		# Compute the table layout with the prefered method
 		var colorer = new BucketsColorer[MType, MType]
-		resolution_layout = new Layout[MType]
-		resolution_layout.pos = colorer.colorize(mtype2unresolved)
-		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)
+		opentype_colors = colorer.colorize(mtype2unresolved)
+		resolution_tables = self.build_resolution_tables(mtype2unresolved)
 
 		# Compile a C constant for each collected unresolved type.
 		# Either to a color, or to -1 if the unresolved type is dead (no live receiver can require it)
@@ -567,8 +566,8 @@ class SeparateCompiler
 		end
 		var all_unresolved_types_colors = new HashMap[MType, Int]
 		for t in all_unresolved do
-			if self.resolution_layout.pos.has_key(t) then
-				all_unresolved_types_colors[t] = self.resolution_layout.pos[t]
+			if opentype_colors.has_key(t) then
+				all_unresolved_types_colors[t] = opentype_colors[t]
 			else
 				all_unresolved_types_colors[t] = -1
 			end
@@ -584,16 +583,10 @@ class SeparateCompiler
 
 	fun build_resolution_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
 		var tables = new HashMap[MClassType, Array[nullable MType]]
-		var layout = self.resolution_layout
 		for mclasstype, mtypes in elements do
 			var table = new Array[nullable MType]
 			for mtype in mtypes do
-				var color: Int
-				if layout isa PHLayout[MClassType, MType] then
-					color = layout.hashes[mclasstype][mtype]
-				else
-					color = layout.pos[mtype]
-				end
+				var color = opentype_colors[mtype]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -709,19 +702,13 @@ class SeparateCompiler
 			mclass_type = mtype.as(MClassType)
 		end
 
-		var layout = self.resolution_layout
-
 		# extern const struct resolution_table_X resolution_table_X
 		self.provide_declaration("resolution_table_{mtype.c_name}", "extern const struct types resolution_table_{mtype.c_name};")
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
 		v.add_decl("const struct types resolution_table_{mtype.c_name} = \{")
-		if layout isa PHLayout[MClassType, MType] then
-			v.add_decl("{layout.masks[mclass_type]},")
-		else
-			v.add_decl("0, /* dummy */")
-		end
+		v.add_decl("0, /* dummy */")
 		v.add_decl("\{")
 		for t in self.resolution_tables[mclass_type] do
 			if t == null then
