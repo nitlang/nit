@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 # Copyright 2013 Nathan Heu <heu.nathan@courrier.uqam.ca>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_4 is pkgconfig("gtk+-3.0")
+# GTK+ services added at version 3.6
+module v3_6 is pkgconfig("gtk+-3.0")
 
-import gtk_widgets_ext
-import gtk_dialogs
-import gtk_assistant
+import v3_4
+
+#An entry which shows a search icon
+#@https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
+extern class GtkSearchEntry `{GtkSearchEntry *`}
+	super GtkEntry
+
+	new is extern `{
+		return (GtkSearchEntry *)gtk_search_entry_new( );	
+	`}
+end
