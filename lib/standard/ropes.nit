@@ -731,6 +731,55 @@ private class TupleVisitNode
 
 end
 
+# Iterator returning the content of a rope one char at a time
+private abstract class RopeCharIterator
+	super IndexedIterator[Char]
+
+	# The iterator used to visit the rope
+	private var sub_str_iter: DFSLeafIterator
+
+	# The current position in the rope
+	private var abs_pos: Int
+
+	# The iterator on the substring contained in the current node visited by `sub_str_iter`
+	private var curr_sub_iter: nullable IndexedIterator[Char]
+
+	init from(tgt: Rope, from: Int) do end
+
+	redef fun item do return curr_sub_iter.item
+
+	redef fun index do return abs_pos
+
+	redef fun is_ok do return curr_sub_iter != null and curr_sub_iter.is_ok or sub_str_iter.is_ok
+end
+
+# Forward visit of the chars of the rope
+private class RopeCharForwardIterator
+	super RopeCharIterator
+
+	init(tgt: Rope) do from(tgt, 0)
+
+	init from(tgt: Rope, from: Int)
+	do
+		sub_str_iter = new DFSLeafForwardIterator.with_index(tgt,from)
+		curr_sub_iter = sub_str_iter.item.value.chars.iterator_from(sub_str_iter.pos + from)
+		abs_pos = from
+	end
+
+	redef fun next
+	do
+		abs_pos += 1
+		assert is_ok
+		if curr_sub_iter.is_ok then
+			curr_sub_iter.next
+		end
+		if not curr_sub_iter.is_ok then
+			sub_str_iter.next
+			if sub_str_iter.is_ok then curr_sub_iter = sub_str_iter.item.value.chars.iterator
+		end
+	end
+end
+
 # Special kind of iterator
 #
 # Performs a Depth-First Search on RopeLeaf items
@@ -774,58 +823,6 @@ private abstract class DFSLeafIterator
 		assert is_ok
 		return curr_leaf.as(not null)
 	end
-
-end
-
-# Iterator returning the content of a rope one char at a time
-class RopeCharIterator
-	super IndexedIterator[Char]
-
-	# The iterator used to visit the rope
-	private var sub_str_iter: DFSRopeLeafIterator
-
-	# The current position in the rope
-	private var abs_pos = 0
-
-	# The position in the current substring
-	private var sub_pos: Int = 0
-
-	# The substring contained in the current node visited by `sub_str_iter`
-	private var curr_substring: nullable String
-
-	init(tgt: Rope)
-	do
-		sub_str_iter = new DFSRopeLeafIterator(tgt)
-		if sub_str_iter.is_ok then curr_substring = sub_str_iter.item.value
-	end
-
-	redef fun item do return curr_substring[sub_pos]
-
-	redef fun is_ok
-	do
-		if sub_str_iter.is_ok then return true
-		if not sub_str_iter.is_ok and curr_substring != null and sub_pos < curr_substring.length then return true
-		return false
-	end
-
-	redef fun next
-	do
-		assert is_ok
-		if sub_pos < curr_substring.length - 1 then
-			sub_pos += 1
-		else
-			sub_str_iter.next
-			if sub_str_iter.is_ok then
-				curr_substring = sub_str_iter.item.value
-				sub_pos = 0
-			else
-				sub_pos = curr_substring.length
-			end
-		end
-		abs_pos += 1
-	end
-
-	redef fun index do return abs_pos
 
 end
 
