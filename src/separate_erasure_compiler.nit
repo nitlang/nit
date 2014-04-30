@@ -97,11 +97,13 @@ class SeparateErasureCompiler
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super
 
+		# Class coloring
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
-
-		var layout_builder = new MClassColorer(mainmodule)
-		self.class_layout = layout_builder.build_layout(mclasses)
-		self.class_tables = self.build_class_typing_tables(mclasses)
+		var poset = mainmodule.flatten_mclass_hierarchy
+		var colorer = new POSetColorer[MClass]
+		colorer.colorize(poset)
+		class_layout = colorer.to_layout
+		class_tables = self.build_class_typing_tables(mclasses)
 
 		# lookup vt to build layout with
 		var vts = new HashMap[MClass, Set[MVirtualTypeProp]]
@@ -115,7 +117,9 @@ class SeparateErasureCompiler
 		end
 
 		# vt coloration
-		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, layout_builder)
+		var class_colorer = new MClassColorer(mainmodule)
+		class_colorer.build_layout(mclasses)
+		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, class_colorer)
 		var vt_layout = vt_coloring.build_layout(vts)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.vt_layout = vt_layout
