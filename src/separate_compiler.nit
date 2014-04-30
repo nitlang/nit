@@ -157,8 +157,8 @@ class SeparateCompiler
 	private var type_ids: Map[MType, Int]
 	private var type_colors: Map[MType, Int]
 	private var opentype_colors: Map[MType, Int]
-	protected var method_layout: nullable Layout[PropertyLayoutElement]
-	protected var attr_layout: nullable Layout[MAttribute]
+	protected var method_colors: Map[PropertyLayoutElement, Int]
+	protected var attr_colors: Map[MAttribute, Int]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
@@ -321,10 +321,9 @@ class SeparateCompiler
 
 		# methods coloration
 		var meth_colorer = new POSetBucketsColorer[MClass, PropertyLayoutElement](poset, colorer.conflicts)
-		self.method_layout = new Layout[PropertyLayoutElement]
-		self.method_layout.pos = meth_colorer.colorize(mmethods)
-		self.method_tables = build_method_tables(mclasses, super_calls)
-		self.compile_color_consts(method_layout.pos)
+		method_colors = meth_colorer.colorize(mmethods)
+		method_tables = build_method_tables(mclasses, super_calls)
+		compile_color_consts(method_colors)
 
 		# attribute null color to dead methods and supercalls
 		for mproperty in dead_methods do
@@ -337,14 +336,12 @@ class SeparateCompiler
 
 		# attributes coloration
 		var attr_colorer = new POSetBucketsColorer[MClass, MAttribute](poset, colorer.conflicts)
-		self.attr_layout = new Layout[MAttribute]
-		self.attr_layout.pos = attr_colorer.colorize(mattributes)
-		self.attr_tables = build_attr_tables(mclasses)
-		self.compile_color_consts(attr_layout.pos)
+		attr_colors = attr_colorer.colorize(mattributes)
+		attr_tables = build_attr_tables(mclasses)
+		compile_color_consts(attr_colors)
 	end
 
 	fun build_method_tables(mclasses: Set[MClass], super_calls: Set[MMethodDef]): Map[MClass, Array[nullable MPropDef]] do
-		var layout = self.method_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -361,8 +358,8 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
-					if not layout.pos.has_key(mproperty) then continue
-					var color = layout.pos[mproperty]
+					if not method_colors.has_key(mproperty) then continue
+					var color = method_colors[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -388,8 +385,8 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MMethod then continue
-				if not layout.pos.has_key(mproperty) then continue
-				var color = layout.pos[mproperty]
+				if not method_colors.has_key(mproperty) then continue
+				var color = method_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -412,7 +409,7 @@ class SeparateCompiler
 			end
 			# insert super calls in table according to receiver
 			for supercall in supercalls do
-				var color = layout.pos[supercall]
+				var color = method_colors[supercall]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -427,7 +424,6 @@ class SeparateCompiler
 	end
 
 	fun build_attr_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MPropDef]] do
-		var layout = self.attr_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -441,7 +437,7 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MAttribute then continue
-					var color = layout.pos[mproperty]
+					var color = attr_colors[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -458,7 +454,7 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MAttribute then continue
-				var color = layout.pos[mproperty]
+				var color = attr_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
