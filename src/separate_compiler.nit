@@ -558,8 +558,9 @@ class SeparateCompiler
 		end
 
 		# Compute the table layout with the prefered method
-		var resolution_builder = new ResolutionColorer
-		self.resolution_layout = resolution_builder.build_layout(mtype2unresolved)
+		var colorer = new BucketsColorer[MType, MType]
+		resolution_layout = new Layout[MType]
+		resolution_layout.pos = colorer.colorize(mtype2unresolved)
 		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)
 
 		# Compile a C constant for each collected unresolved type.
