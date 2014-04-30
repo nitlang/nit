@@ -873,6 +873,55 @@ private class DFSLeafForwardIterator
 
 end
 
+private class DFSLeafBackwardsIterator
+	super DFSLeafIterator
+
+	redef fun next do
+		assert is_ok
+		pos -= curr_leaf.value.length
+		next_body
+	end
+
+	# Creates a new iterator on `tgt` starting at `index`
+	init with_index(tgt: Rope, index: Int)
+	do
+		super
+
+		for i in visit_stack do
+			if i.left_visited then i.left_visited = false
+		end
+	end
+
+	redef fun next_body
+	do
+		if visit_stack.is_empty then
+			curr_leaf = null
+			return
+		end
+
+		var lst = visit_stack.last
+		var nxt: nullable RopeNode = null
+
+		if not lst.right_visited then
+			nxt = lst.node.right_child
+			lst.right_visited = true
+		else if not lst.left_visited then
+			nxt = lst.node.left_child
+			lst.left_visited = true
+		end
+
+		if nxt == null then
+			visit_stack.pop
+		else if nxt isa LeafNode then
+			curr_leaf = nxt
+			return
+		else if nxt isa ConcatNode then
+			visit_stack.push(new TupleVisitNode(nxt))
+		end
+		next_body
+	end
+end
+
 ###########################################
 #              Node classes               #
 ###########################################
