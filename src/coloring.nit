@@ -270,3 +270,55 @@ class POSetBucketsColorer[H: Object, E: Object]
 	end
 end
 
+# Colorize a collection of buckets
+#
+# Conflict graph is computed automatically
+class BucketsColorer[H: Object, E: Object]
+	private var colors = new HashMap[E, Int]
+	private var conflicts = new HashMap[E, Set[E]]
+
+	init do end
+
+	# Start bucket coloring
+	fun colorize(buckets: Map[H, Set[E]]): Map[E, Int] do
+		compute_conflicts(buckets)
+		var min_color = 0
+		for holder, hbuckets in buckets do
+			for bucket in hbuckets do
+				if colors.has_key(bucket) then continue
+				var color = min_color
+				while not is_color_free(bucket, color) do
+					color += 1
+				end
+				colors[bucket] = color
+				color = min_color
+			end
+		end
+		return colors
+	end
+
+	private fun is_color_free(bucket: E, color: Int): Bool do
+		if conflicts.has_key(bucket) then
+			for other in conflicts[bucket] do
+				if colors.has_key(other) and colors[other] == color then return false
+			end
+		end
+		return true
+	end
+
+	private fun compute_conflicts(buckets: Map[H, Set[E]]) do
+		conflicts.clear
+		for holder, hbuckets in buckets do
+			for bucket in hbuckets do
+				if not conflicts.has_key(bucket) then conflicts[bucket] = new HashSet[E]
+				for obucket in hbuckets do
+					if obucket == bucket then continue
+					if not conflicts.has_key(obucket) then conflicts[obucket] = new HashSet[E]
+					conflicts[bucket].add(obucket)
+					conflicts[obucket].add(bucket)
+				end
+			end
+		end
+	end
+end
+
