@@ -312,7 +312,7 @@ end
 #
 # /!\ Non Thread-safe /!\
 #
-class BufferRope
+class RopeBuffer
 	super Rope
 	super Buffer
 
@@ -607,7 +607,7 @@ class BufferRope
 end
 
 # Rope that cannot be modified
-class ImmutableRope
+class RopeString
 	super Rope
 	super String
 
