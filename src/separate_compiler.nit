@@ -16,7 +16,7 @@
 module separate_compiler
 
 import abstract_compiler
-import layout_builders
+import coloring
 import rapid_type_analysis
 
 # Add separate compiler specific options
@@ -1931,10 +1931,14 @@ redef class MClass
 	end
 end
 
+interface PropertyLayoutElement end
+
 redef class MProperty
+	super PropertyLayoutElement
 	fun const_color: String do return "COLOR_{c_name}"
 end
 
 redef class MPropDef
+	super PropertyLayoutElement
 	fun const_color: String do return "COLOR_{c_name}"
 end
