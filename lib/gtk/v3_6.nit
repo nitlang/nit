@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module v3_6
+module v3_6 is pkgconfig("gtk+-3.0")
 
 import v3_4
 
