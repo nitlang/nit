@@ -731,8 +731,11 @@ private class TupleVisitNode
 
 end
 
-# Any kind of iterator parsing a Rope for LeafNodes
-private abstract class RopeIterator
+# Special kind of iterator
+#
+# Performs a Depth-First Search on RopeLeaf items
+#
+private abstract class DFSLeafIterator
 	super IndexedIterator[LeafNode]
 
 	# Rope meant to be visited
@@ -811,8 +814,8 @@ end
 #
 # Performs a Depth-First Search on RopeLeaf items
 #
-private class DFSRopeLeafIterator
-	super RopeIterator
+private class DFSLeafForwardIterator
+	super DFSLeafIterator
 
 	# Stack of the visited nodes in the rope
 	private var visit_stack = new List[TupleVisitNode]
