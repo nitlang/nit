@@ -209,3 +209,64 @@ redef class POSet[E]
 	end
 end
 
+# Colorize a collection of buckets using a poset and a conflict graph
+class POSetBucketsColorer[H: Object, E: Object]
+	private var colors = new HashMap[E, Int]
+	private var poset: POSet[H]
+	private var conflicts: Map[H, Set[H]]
+
+	init(poset: POSet[H], conflicts: Map[H, Set[H]]) do
+		self.poset = poset
+		self.conflicts = conflicts
+	end
+
+	# Colorize buckets using the POSet and conflict graph
+	fun colorize(buckets: Map[H, Set[E]]): Map[E, Int] do
+		colors.clear
+		var holders = new HashSet[H].from(buckets.keys)
+		for h in poset.linearize(holders) do
+			var color = min_color(poset[h].direct_greaters, buckets)
+			for bucket in buckets[h] do
+				if colors.has_key(bucket) then continue
+				while not is_color_free(color, h, buckets) do color += 1
+				colors[bucket] = color
+				color += 1
+			end
+		end
+		return colors
+	end
+
+	# Get the next available color considering used colors by other buckets
+	private fun min_color(others: Collection[H], buckets: Map[H, Set[E]]): Int do
+		var min = -1
+		for holder in others do
+			var color = max_color(holder, buckets)
+			if color > min then min = color
+		end
+		return min + 1
+	end
+
+	# Return the max color used by a class
+	private fun max_color(holder: H, buckets: Map[H, Set[E]]): Int do
+		var max = -1
+		for bucket in buckets[holder] do
+			if not colors.has_key(bucket) then continue
+			var color = colors[bucket]
+			if color > max then max = color
+		end
+		return max
+	end
+
+	# Check if the color is free for this holder
+	private fun is_color_free(color: Int, holder: H, buckets: Map[H, Set[E]]): Bool do
+		if not conflicts.has_key(holder) then return true
+		for conflict in conflicts[holder] do
+			for bucket in buckets[conflict] do
+				if not colors.has_key(bucket) then continue
+				if colors[bucket] == color then return false
+			end
+		end
+		return true
+	end
+end
+
