@@ -258,30 +258,14 @@ class SeparateCompiler
 
 	# colorize classe properties
 	fun do_property_coloring do
-		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
 		var rta = runtime_type_analysis
 
 		# Layouts
-		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
-		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
-		#FIXME PH and BM layouts too slow for large programs
-		#if modelbuilder.toolcontext.opt_bm_typing.value then
-		#	method_layout_builder = new MMethodBMizer(self.mainmodule)
-		#	attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
-		#else if modelbuilder.toolcontext.opt_phmod_typing.value then
-		#	method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
-		#	attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
-		#else if modelbuilder.toolcontext.opt_phand_typing.value then
-		#	method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
-		#	attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
-		#else
-
-		var class_layout_builder = new MClassColorer(self.mainmodule)
-		class_layout_builder.build_layout(mclasses)
-		method_layout_builder = new MPropertyColorer[PropertyLayoutElement](self.mainmodule, class_layout_builder)
-		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
-		#end
+		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
+		var poset = mainmodule.flatten_mclass_hierarchy
+		var colorer = new POSetColorer[MClass]
+		colorer.colorize(poset)
 
 		# The dead methods, still need to provide a dead color symbol
 		var dead_methods = new Array[MMethod]
@@ -335,7 +319,9 @@ class SeparateCompiler
 		end
 
 		# methods coloration
-		self.method_layout = method_layout_builder.build_layout(mmethods)
+		var meth_colorer = new POSetBucketsColorer[MClass, PropertyLayoutElement](poset, colorer.conflicts)
+		self.method_layout = new Layout[PropertyLayoutElement]
+		self.method_layout.pos = meth_colorer.colorize(mmethods)
 		self.method_tables = build_method_tables(mclasses, super_calls)
 		self.compile_color_consts(method_layout.pos)
 
@@ -349,7 +335,9 @@ class SeparateCompiler
 		end
 
 		# attributes coloration
-		self.attr_layout = attribute_layout_builder.build_layout(mattributes)
+		var attr_colorer = new POSetBucketsColorer[MClass, MAttribute](poset, colorer.conflicts)
+		self.attr_layout = new Layout[MAttribute]
+		self.attr_layout.pos = attr_colorer.colorize(mattributes)
 		self.attr_tables = build_attr_tables(mclasses)
 		self.compile_color_consts(attr_layout.pos)
 	end
