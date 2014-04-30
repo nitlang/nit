@@ -488,23 +488,40 @@ class SeparateCompiler
 
 	# colorize live types of the program
 	private fun do_type_coloring: POSet[MType] do
+		# Collect types to colorize
+		var live_types = runtime_type_analysis.live_types
+		var live_cast_types = runtime_type_analysis.live_cast_types
 		var mtypes = new HashSet[MType]
-		mtypes.add_all(self.runtime_type_analysis.live_types)
-		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
+		mtypes.add_all(live_types)
+		mtypes.add_all(live_cast_types)
 		for c in self.box_kinds.keys do
 			mtypes.add(c.mclass_type)
 		end
 
-		# Typing Layout
-		var layout_builder = new MTypeColorer(self.mainmodule)
-		# colorize types
-		self.type_layout = layout_builder.build_layout(mtypes)
-		var poset = layout_builder.poset.as(not null)
+		# Compute colors
+		var poset = poset_from_mtypes(mtypes)
+		var colorer = new POSetColorer[MType]
+		colorer.colorize(poset)
+		self.type_layout = colorer.to_layout
 		self.type_tables = self.build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
 		self.compile_resolution_tables(mtypes)
 
+		return poset
+	end
+
+	private fun poset_from_mtypes(mtypes: Set[MType]): POSet[MType] do
+		var poset = new POSet[MType]
+		for e in mtypes do
+			poset.add_node(e)
+			for o in mtypes do
+				if e == o then continue
+				if e.is_subtype(mainmodule, null, o) then
+					poset.add_edge(e, o)
+				end
+			end
+		end
 		return poset
 	end
 
