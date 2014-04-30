@@ -165,31 +165,6 @@ abstract class Rope
 		return new_rope
 	end
 
-	# Compares the current Rope to another object (either another rope or a String)
-	redef fun == (other)
-	do
-		if other == null or not (other isa Rope or other isa FlatText) then return false
-		var self_iter = new RopeCharIterator(self)
-		if other isa Rope then
-			if self.length != other.length then return false
-			var other_iterator = new RopeCharIterator(other)
-			while self_iter.is_ok do
-				if self_iter.item != other_iterator.item then return false
-				self_iter.next
-				other_iterator.next
-			end
-		else if other isa FlatText then
-			var pos = 0
-			if self.length != other.length then return false
-			while self_iter.is_ok do
-				if self_iter.item != other[pos] then return false
-				pos += 1
-				self_iter.next
-			end
-		end
-		return true
-	end
-
 	# Checks if self is lesser than other
 	#
 	# Comparison done in lexicographical order
