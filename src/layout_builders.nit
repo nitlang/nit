@@ -33,9 +33,9 @@ import coloring
 # it contains necessary informations for basic table creation
 class Layout[E: Object]
 	# Ids or each element
-	var ids: Map[E, Int] = new HashMap[E, Int]
+	var ids: Map[E, Int] writable = new HashMap[E, Int]
 	# Fixed positions of each element in all tables
-	var pos: Map[E, Int] = new HashMap[E, Int]
+	var pos: Map[E, Int] writable = new HashMap[E, Int]
 end
 
 # A PHLayout is used everywere the builder used perfect hashing
