@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_6
+module v3_6
 
-import gtk3_4
+import v3_4
 
 #An entry which shows a search icon
 #@https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
