@@ -154,7 +154,8 @@ class SeparateCompiler
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
-	private var type_layout: nullable Layout[MType]
+	private var type_ids: Map[MType, Int]
+	private var type_colors: Map[MType, Int]
 	private var resolution_layout: nullable Layout[MType]
 	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
@@ -490,8 +491,9 @@ class SeparateCompiler
 		var poset = poset_from_mtypes(mtypes)
 		var colorer = new POSetColorer[MType]
 		colorer.colorize(poset)
-		self.type_layout = colorer.to_layout
-		self.type_tables = self.build_type_tables(poset)
+		type_ids = colorer.ids
+		type_colors = colorer.colors
+		type_tables = build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
 		self.compile_resolution_tables(mtypes)
@@ -516,16 +518,10 @@ class SeparateCompiler
 	# Build type tables
 	fun build_type_tables(mtypes: POSet[MType]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
-		var layout = self.type_layout
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
 			for sup in mtypes[mtype].greaters do
-				var color: Int
-				if layout isa PHLayout[MType, MType] then
-					color = layout.hashes[mtype][sup]
-				else
-					color = layout.pos[sup]
-				end
+				var color = type_colors[sup]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -634,7 +630,6 @@ class SeparateCompiler
 	fun compile_type_to_c(mtype: MType)
 	do
 		assert not mtype.need_anchor
-		var layout = self.type_layout
 		var is_live = mtype isa MClassType and runtime_type_analysis.live_types.has(mtype)
 		var is_cast_live = runtime_type_analysis.live_cast_types.has(mtype)
 		var c_name = mtype.c_name
@@ -649,7 +644,7 @@ class SeparateCompiler
 
 		# type id (for cast target)
 		if is_cast_live then
-			v.add_decl("{layout.ids[mtype]},")
+			v.add_decl("{type_ids[mtype]},")
 		else
 			v.add_decl("-1, /*CAST DEAD*/")
 		end
@@ -659,11 +654,7 @@ class SeparateCompiler
 
 		# type color (for cast target)
 		if is_cast_live then
-			if layout isa PHLayout[MType, MType] then
-				v.add_decl("{layout.masks[mtype]},")
-			else
-				v.add_decl("{layout.pos[mtype]},")
-			end
+			v.add_decl("{type_colors[mtype]},")
 		else
 			v.add_decl("-1, /*CAST DEAD*/")
 		end
@@ -699,7 +690,7 @@ class SeparateCompiler
 				if stype == null then
 					v.add_decl("-1, /* empty */")
 				else
-					v.add_decl("{layout.ids[stype]}, /* {stype} */")
+					v.add_decl("{type_ids[stype]}, /* {stype} */")
 				end
 			end
 			v.add_decl("\},")
@@ -741,7 +732,7 @@ class SeparateCompiler
 				# the value stored is tv.
 				var tv = t.resolve_for(mclass_type, mclass_type, self.mainmodule, true)
 				# FIXME: What typeids means here? How can a tv not be live?
-				if self.type_layout.ids.has_key(tv) then
+				if type_ids.has_key(tv) then
 					v.require_declaration("type_{tv.c_name}")
 					v.add_decl("&type_{tv.c_name}, /* {t}: {tv} */")
 				else
