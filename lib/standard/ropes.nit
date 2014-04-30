@@ -739,21 +739,40 @@ private abstract class DFSLeafIterator
 	super IndexedIterator[LeafNode]
 
 	# Rope meant to be visited
-	private var _target: Rope
-
-	private fun target: Rope do return self._target
+	var target: Rope
 
 	# Position in target
-	private var pos = 0
+	var pos = 0
+
+	# Stack of the visited nodes in the rope
+	private var visit_stack = new List[TupleVisitNode]
+
+	# The leaf node being visited by the iterator
+	private var curr_leaf: nullable LeafNode
 
 	init(tgt: Rope)
 	do
-		self._target = tgt
+		with_index(tgt, 0)
 	end
 
+	# Creates a new iterator on `tgt` starting at `index`
 	init with_index(tgt: Rope, index: Int)
 	do
-		self._target = tgt
+		self.target = tgt
+		var returned_tuple = target.get_node_for_pos(index)
+		curr_leaf = returned_tuple.curr_node
+		visit_stack = returned_tuple.visit_stack
+		pos = index - returned_tuple.corrected_pos
+	end
+
+	redef fun is_ok do return curr_leaf != null
+
+	fun next_body is abstract
+
+	redef fun item
+	do
+		assert is_ok
+		return curr_leaf.as(not null)
 	end
 
 end
@@ -817,94 +836,39 @@ end
 private class DFSLeafForwardIterator
 	super DFSLeafIterator
 
-	# Stack of the visited nodes in the rope
-	private var visit_stack = new List[TupleVisitNode]
-
-	# The leaf node being visited by the iterator
-	private var curr_leaf: nullable LeafNode
-
-	init(tgt: Rope)
-	do
-		super
-
-		var first_node = target.parent_node
-
-		if first_node isa ConcatNode then
-			visit_stack.push(new TupleVisitNode(first_node))
-		else if first_node isa LeafNode then
-			curr_leaf = first_node
-			return
-		end
-
-		next_body
-	end
-
-	# Creates a new iterator on `tgt` starting at `index`
-	init with_index(tgt: Rope, index: Int)
-	do
-		super
-
-		var returned_tuple = target.get_node_for_pos(index)
-		curr_leaf = returned_tuple.curr_node
-		visit_stack = returned_tuple.visit_stack
-		pos = index - returned_tuple.corrected_pos
-	end
-
-	redef fun is_ok do return curr_leaf != null
-
-	redef fun next
-	do
+	redef fun next do
 		assert is_ok
 		pos += curr_leaf.value.length
 		next_body
 	end
 
-	private fun next_body
+	redef fun next_body
 	do
-		var next_node: nullable RopeNode
-		while not visit_stack.is_empty do
-			var curr_concat_tuple = visit_stack.last
-			if not curr_concat_tuple.left_visited then
-
-				curr_concat_tuple.left_visited = true
-
-				next_node = curr_concat_tuple.node.left_child
-
-				if next_node == null then continue
-
-				if next_node isa ConcatNode then
-					visit_stack.push(new TupleVisitNode(next_node))
-				else if next_node isa LeafNode then
-					curr_leaf = next_node
-					return
-				end
-
-			else if not curr_concat_tuple.right_visited then
-
-				curr_concat_tuple.right_visited = true
-
-				next_node = curr_concat_tuple.node.right_child
-
-				if next_node == null then continue
-
-				if next_node isa ConcatNode then
-					visit_stack.push(new TupleVisitNode(next_node))
-				else if next_node isa LeafNode then
-					curr_leaf = next_node
-					return
-				end
-
-			else
-				visit_stack.pop
-			end
+		if visit_stack.is_empty then
+			curr_leaf = null
+			return
 		end
-		self.curr_leaf = null
-	end
 
-	redef fun item
-	do
-		assert is_ok
-		return curr_leaf.as(not null)
+		var lst = visit_stack.last
+		var nxt: nullable RopeNode = null
+
+		if not lst.left_visited then
+			nxt = lst.node.left_child
+			lst.left_visited = true
+		else if not lst.right_visited then
+			nxt = lst.node.right_child
+			lst.right_visited = true
+		end
+
+		if nxt == null then
+			visit_stack.pop
+		else if nxt isa LeafNode then
+			curr_leaf = nxt
+			return
+		else if nxt isa ConcatNode then
+			visit_stack.push(new TupleVisitNode(nxt))
+		end
+		next_body
 	end
 
 end
