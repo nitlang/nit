@@ -164,25 +164,6 @@ abstract class Rope
 		end
 		return new_rope
 	end
-
-	# Checks if self is lesser than other
-	#
-	# Comparison done in lexicographical order
-	# i.e. 'aa' < 'b'
-	#
-	redef fun <(other)
-	do
-		var other_iter = other.chars.iterator
-		for i in self.chars do
-			if not other_iter.is_ok then return false
-			if i < other_iter.item then return true
-			if i > other_iter.item then return false
-			other_iter.next
-		end
-		if other_iter.is_ok then return true
-		return false
-	end
-
 end
 
 # Rope that can be modified
