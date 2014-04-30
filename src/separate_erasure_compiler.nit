@@ -99,20 +99,7 @@ class SeparateErasureCompiler
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
-		var layout_builder: TypingLayoutBuilder[MClass]
-		var class_colorer = new MClassColorer(mainmodule)
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
-			class_colorer.build_layout(mclasses)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
-			class_colorer.build_layout(mclasses)
-		else if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MClassBMizer(mainmodule)
-			class_colorer.build_layout(mclasses)
-		else
-			layout_builder = class_colorer
-		end
+		var layout_builder = new MClassColorer(mainmodule)
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
 
@@ -128,7 +115,7 @@ class SeparateErasureCompiler
 		end
 
 		# vt coloration
-		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, class_colorer)
+		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, layout_builder)
 		var vt_layout = vt_coloring.build_layout(vts)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.vt_layout = vt_layout
@@ -222,12 +209,6 @@ class SeparateErasureCompiler
 			self.header.add_decl("struct vts_table \{ int mask; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
 		else
 			self.header.add_decl("struct vts_table \{ int dummy; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
-		end
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
 		self.header.add_decl("typedef struct instance \{ const struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")

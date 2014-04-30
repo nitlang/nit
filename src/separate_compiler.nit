@@ -41,12 +41,6 @@ redef class ToolContext
 	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
 	# --no-colo-dead-methods
 	var opt_no_colo_dead_methods = new OptionBool("Do not colorize dead methods", "--no-colo-dead-methods")
-	# --use-naive-coloring
-	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
-	# --use-mod-perfect-hashing
-	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
-	# --use-and-perfect-hashing
-	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
@@ -59,9 +53,6 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_no_colo_dead_methods)
-		self.option_context.add_option(self.opt_bm_typing)
-		self.option_context.add_option(self.opt_phmod_typing)
-		self.option_context.add_option(self.opt_phand_typing)
 		self.option_context.add_option(self.opt_tables_metrics)
 	end
 
@@ -184,19 +175,7 @@ class SeparateCompiler
 		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
 		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; \}; /* general C type representing a Nit type. */")
 		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("struct types \{ int mask; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
-		else
-			self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
-		end
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
-		end
-
+		self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		self.header.add_decl("typedef struct instance val; /* general C type representing a Nit instance. */")
 	end
 
@@ -517,17 +496,7 @@ class SeparateCompiler
 		end
 
 		# Typing Layout
-		var layout_builder: TypingLayoutBuilder[MType]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MTypeBMizer(self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
-		else
-			layout_builder = new MTypeColorer(self.mainmodule)
-		end
-
+		var layout_builder = new MTypeColorer(self.mainmodule)
 		# colorize types
 		self.type_layout = layout_builder.build_layout(mtypes)
 		var poset = layout_builder.poset.as(not null)
@@ -584,16 +553,7 @@ class SeparateCompiler
 		end
 
 		# Compute the table layout with the prefered method
-		var resolution_builder: ResolutionLayoutBuilder
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			resolution_builder = new ResolutionBMizer
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			resolution_builder = new ResolutionHasher(new PHModOperator)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			resolution_builder = new ResolutionHasher(new PHAndOperator)
-		else
-			resolution_builder = new ResolutionColorer
-		end
+		var resolution_builder = new ResolutionColorer
 		self.resolution_layout = resolution_builder.build_layout(mtype2unresolved)
 		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)
 
@@ -1476,11 +1436,7 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
-			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
-			end
+			return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
@@ -1527,11 +1483,7 @@ class SeparateCompilerVisitor
 			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})];")
-			else
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
-			end
+			self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
 				self.add("count_type_test_unresolved_{tag}++;")
@@ -1566,9 +1518,6 @@ class SeparateCompilerVisitor
 			self.add("\} else \{")
 		end
 		var value_type_info = self.type_info(value)
-		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-			self.add("{cltype} = HASH({value_type_info}->color, {idtype});")
-		end
 		self.add("if({cltype} >= {value_type_info}->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
@@ -1756,11 +1705,7 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
-			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
-			end
+			return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
