@@ -82,32 +82,28 @@ abstract class Rope
 	private fun get_node_for_pos(position: Int): TupleLeafNodePos
 	do
 		assert position >= 0 and position < self.length
+		return get_node_from(parent_node.as(not null) ,0 ,position, new List[TupleVisitNode])
+	end
 
-		var curr_node: nullable RopeNode = parent_node
+	# Intern method called by get_node_for_pos
+	private fun get_node_from(node: RopeNode, curr_pos: Int, seeked_position: Int, stack: List[TupleVisitNode]):TupleLeafNodePos
+	do
+		if node isa LeafNode then return new TupleLeafNodePos(node, seeked_position - curr_pos,stack)
+		node = node.as(ConcatNode)
 
-		var visit_stack = new List[TupleVisitNode]
-
-		var curr_visit_tuple: TupleVisitNode
-
-		loop
-			if curr_node isa ConcatNode then
-				curr_visit_tuple = new TupleVisitNode(curr_node)
-				if curr_node.left_child != null and position < curr_node.left_child.length then
-					curr_visit_tuple.left_visited = true
-					curr_node = curr_node.left_child
-				else if curr_node.right_child != null then
-					curr_visit_tuple.left_visited = true
-					curr_visit_tuple.right_visited = true
-					if curr_node.left_child != null then position -= curr_node.left_child.length
-					curr_node = curr_node.right_child
-				else
-					print "Fatal Error"
-					abort
-				end
-				visit_stack.push(curr_visit_tuple)
-			else if curr_node isa LeafNode then
-				return new TupleLeafNodePos(curr_node, position, visit_stack)
-			end
+		if node.left_child != null then
+			var seek_pos = curr_pos + node.left_child.length
+			stack.add(new TupleVisitNode(node))
+			stack.last.left_visited = true
+			if seek_pos > seeked_position then return get_node_from(node.left_child.as(not null), curr_pos, seeked_position, stack)
+			stack.last.right_visited = true
+			return get_node_from(node.right_child.as(not null), seek_pos, seeked_position, stack)
+		else
+			var vis = new TupleVisitNode(node)
+			vis.left_visited = true
+			vis.right_visited = true
+			stack.add(vis)
+			return get_node_from(node.right_child.as(not null), curr_pos, seeked_position, stack)
 		end
 	end
 
