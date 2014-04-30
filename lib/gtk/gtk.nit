@@ -14,8 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides GTK widgets and functionalities
+# Provides GTK+ widgets and functionalities
+#
+# By default it provides services from GTK+ v3.4. You can get newer
+# features by importing submodules v3_6 or v3_8 with `import gtk::v3_6`.
 module gtk
 
-# By default, use gtk 3.4
 import v3_4

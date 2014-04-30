@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# GTK+ services added at version 3.8
 module v3_8 is pkgconfig("gtk+-3.0")
 
 import v3_6
