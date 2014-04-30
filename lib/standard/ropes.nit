@@ -627,13 +627,16 @@ end
 #            Rope view classes             #
 ############################################
 
-class CharRopeView
+private class RopeStringCharView
 	super SequenceRead[Char]
 
-	# Targeted Rope for the view
-	private var target: Rope
+	# Type of the target
+	private type VIEWTARGET: RopeString
 
-	init(tgt: Rope)
+	# Targeted Rope for the view
+	private var target: VIEWTARGET
+
+	init(tgt: VIEWTARGET)
 	do
 		self.target = tgt
 	end
@@ -644,70 +647,53 @@ class CharRopeView
 		return tuple.curr_node.value[tuple.corrected_pos]
 	end
 
-	redef fun first do return self[0]
-
-	redef fun index_of(char)
-	do
-		var intern_iter = new RopeCharIterator(target)
-		while intern_iter.is_ok do
-			if intern_iter.item == char then return intern_iter.index
-			intern_iter.next
-		end
-		return -1
-	end
-
 	redef fun iterator do
-		return new RopeCharIterator(target)
+		return new RopeCharForwardIterator(target)
 	end
 
-	redef fun last do return self[self.length-1]
-
-	redef fun length do return target.length
-
-	redef fun count(item)
+	redef fun iterator_from(pos)
 	do
-		var count = 0
-		var iter = self.iterator
-
-		for i in self do
-			if i == item then count += 1
-		end
-
-		return count
+		return new RopeCharForwardIterator.from(target,pos)
 	end
 
-	redef fun has_only(item)
+	redef fun reverse_iterator do
+		return new RopeCharBackwardsIterator(target)
+	end
+
+	redef fun reverse_iterator_from(pos) do
+		return new RopeCharBackwardsIterator.from(target,pos)
+	end
+
+end
+
+private class RopeBufferCharView
+	super RopeStringCharView
+	super Sequence[Char]
+
+	redef type VIEWTARGET: RopeBuffer
+
+	redef fun []=(index, item)
 	do
-		for i in self do
-			if i != item then return false
-		end
-		return true
+		var node = target.get_node_for_pos(index)
+		var str = node.curr_node.value
+		var buf = new FlatBuffer.from(str)
+		buf.chars[index] = item
+		node.curr_node.value = buf.to_s
 	end
 
-	redef fun is_empty do return length == 0
-
-	redef fun to_a do
-		return to_s.to_a
-	end
-
-	redef fun to_s do
-		return target.to_s
-	end
-
-	redef fun ==(other)
+	redef fun push(c)
 	do
-		if not other isa SequenceRead[Char] then return false
+		add(c)
+	end
 
-		if self.length != other then return false
+	redef fun add(c)
+	do
+		target.append(c.to_s)
+	end
 
-		var iter = other.iterator
-
-		for i in self do
-			if i != iter.item then return false
-			iter.next
-		end
-
-		return true
+	redef fun append(s)
+	do
+		target.append(s.to_s)
 	end
 
 end
