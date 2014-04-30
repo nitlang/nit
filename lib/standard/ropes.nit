@@ -1015,24 +1015,3 @@ private class LeafNode
 	end
 end
 
-redef class String
-	redef fun ==(other)
-	do
-		if other isa Rope then
-			return other == self
-		else
-			return super
-		end
-	end
-end
-
-redef class Buffer
-	redef fun ==(other)
-	do
-		if other isa Rope then
-			return other == self
-		else
-			return super
-		end
-	end
-end
