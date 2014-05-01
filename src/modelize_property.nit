@@ -410,10 +410,10 @@ redef class AMethPropdef
 				name_node = self
 			else if self isa AConcreteInitPropdef then
 				name = "init"
-				name_node = self.n_kwinit
+				name_node = self.n_kwinit.as(not null)
 			else if self isa AExternInitPropdef then
 				name = "init"
-				name_node = self.n_kwnew
+				name_node = self.n_kwnew.as(not null)
 			else
 				abort
 			end
