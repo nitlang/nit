@@ -253,10 +253,6 @@ abstract class Rope
 		return new_rope
 	end
 
-	############################################################################
-	#                       Comparable Refined Methods                         #
-	############################################################################
-
 	# Compares the current Rope to another object (either another rope or a String)
 	redef fun == (other)
 	do
@@ -303,18 +299,11 @@ abstract class Rope
 end
 
 # Rope that can be modified
-#
-# /!\ Non Thread-safe /!\
-#
 class RopeBuffer
 	super Rope
 	super Buffer
 
 	redef type SELFTYPE: RopeBuffer
-
-	############################################################################
-	#                         Tree Balancing Methods                           #
-	############################################################################
 
 	redef var chars: Sequence[Char] = new RopeBufferCharView(self)
 
@@ -420,10 +409,6 @@ class RopeBuffer
 			end
 		end
 	end
-
-	############################################################################
-	#                      BufferRope exclusive Methods                        #
-	############################################################################
 
 	# Appends a new Collection[Char] at the end of the current rope
 	fun append(str: String): BufferRope
@@ -555,10 +540,6 @@ class RopeBuffer
 		return immutable_self
 	end
 
-	############################################################################
-	#                          Rope refined Methods                            #
-	############################################################################
-
 	redef fun subrope(index_from: Int, count: Int): BufferRope
 	do
 		return super.as(BufferRope)
@@ -599,11 +580,6 @@ class RopeString
 
 	redef type SELFTYPE: RopeString
 
-	############################################################################
-	#                          Rope refined Methods                            #
-	############################################################################
-
-
 	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
 
 	redef fun subrope(index_from: Int, count: Int): ImmutableRope
@@ -627,10 +603,6 @@ class RopeString
 	end
 
 end
-
-############################################
-#            Rope view classes             #
-############################################
 
 private class RopeStringCharView
 	super SequenceRead[Char]
@@ -702,10 +674,6 @@ private class RopeBufferCharView
 	end
 
 end
-
-###########################################
-#            Iterator classes             #
-###########################################
 
 # A tuple representing the state of a node for a tree parsing algorithm
 private class TupleVisitNode
@@ -936,10 +904,6 @@ private class DFSLeafBackwardsIterator
 	end
 end
 
-###########################################
-#              Node classes               #
-###########################################
-
 # A node for a Rope
 private abstract class RopeNode
 
@@ -1050,10 +1014,6 @@ private class LeafNode
 		_value = val
 	end
 end
-
-#####################################################
-#            Foreign classes refinement             #
-#####################################################
 
 redef class String
 	redef fun ==(other)
