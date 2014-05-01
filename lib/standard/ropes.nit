@@ -183,6 +183,17 @@ abstract class Rope
 		end
 		return new_rope
 	end
+
+	private fun reversed_impl: RopeBuffer
+	do
+		var it = new DFSLeafBackwardsIterator(self)
+		var buf = new RopeBuffer
+		while it.is_ok do
+			buf.append(it.item.value.reversed)
+			it.next
+		end
+		return buf
+	end
 end
 
 # Rope that can be modified
@@ -422,6 +433,7 @@ class RopeBuffer
 		return new_rope
 	end
 
+	redef fun reversed do return reversed_impl
 end
 
 # Rope that cannot be modified
@@ -446,6 +458,14 @@ class RopeString
 		var buf = substring_impl(from,cnt)
 		var ret = new RopeString
 		ret.parent_node = buf.parent_node
+		return ret
+	end
+
+	redef fun reversed
+	do
+		var rev = reversed_impl
+		var ret = new RopeString
+		ret.parent_node = rev.parent_node
 		return ret
 	end
 
