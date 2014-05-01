@@ -591,23 +591,24 @@ redef class APropdef
 	end
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
+	super TablesCapable
 
 	redef fun call(v, mpropdef, args)
 	do
 		var f = new Frame(self, self.mpropdef.as(not null), args)
-		call_commons(v, mpropdef, args, f)
+		var res = call_commons(v, mpropdef, args, f)
 		v.frames.shift
 		if v.returnmark == f then
 			v.returnmark = null
-			var res = v.escapevalue
+			res = v.escapevalue
 			v.escapevalue = null
 			return res
 		end
-		return null
+		return res
 	end
 
-	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame)
+	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
@@ -616,6 +617,11 @@ redef class AConcreteMethPropdef
 		end
 
 		v.frames.unshift(f)
+
+		if mpropdef.is_abstract then
+			v.fatal("Abstract method `{mpropdef.mproperty.name}` called on `{arguments.first.mtype}`")
+			abort
+		end
 
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
@@ -630,12 +636,15 @@ redef class AConcreteMethPropdef
 			end
 		end
 
-		v.stmt(self.n_block)
+		if n_block != null then
+			v.stmt(self.n_block)
+			return null
+		else
+			return intern_call(v, mpropdef, arguments)
+		end
 	end
-end
 
-redef class AInternMethPropdef
-	redef fun call(v, mpropdef, args)
+	private fun intern_call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
@@ -673,6 +682,7 @@ redef class AInternMethPropdef
 		else if pname == "sys" then
 			return v.mainobj
 		else if cname == "Int" then
+			var recvval = args[0].to_i
 			if pname == "unary -" then
 				return v.int_instance(-args[0].to_i)
 			else if pname == "+" then
@@ -703,6 +713,13 @@ redef class AInternMethPropdef
 				return v.int_instance(args[0].to_i.lshift(args[1].to_i))
 			else if pname == "rshift" then
 				return v.int_instance(args[0].to_i.rshift(args[1].to_i))
+			else if pname == "rand" then
+				var res = recvval.rand
+				return v.int_instance(res)
+			else if pname == "native_int_to_s" then
+				return v.native_string_instance(recvval.to_s)
+			else if pname == "strerror_ext" then
+				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
@@ -745,6 +762,36 @@ redef class AInternMethPropdef
 				return v.bool_instance(recv >= args[1].to_f)
 			else if pname == "to_i" then
 				return v.int_instance(recv.to_i)
+			else if pname == "cos" then
+				return v.float_instance(args[0].to_f.cos)
+			else if pname == "sin" then
+				return v.float_instance(args[0].to_f.sin)
+			else if pname == "tan" then
+				return v.float_instance(args[0].to_f.tan)
+			else if pname == "acos" then
+				return v.float_instance(args[0].to_f.acos)
+			else if pname == "asin" then
+				return v.float_instance(args[0].to_f.asin)
+			else if pname == "atan" then
+				return v.float_instance(args[0].to_f.atan)
+			else if pname == "sqrt" then
+				return v.float_instance(args[0].to_f.sqrt)
+			else if pname == "exp" then
+				return v.float_instance(args[0].to_f.exp)
+			else if pname == "log" then
+				return v.float_instance(args[0].to_f.log)
+			else if pname == "pow" then
+				return v.float_instance(args[0].to_f.pow(args[1].to_f))
+			else if pname == "rand" then
+				return v.float_instance(args[0].to_f.rand)
+			else if pname == "abs" then
+				return v.float_instance(args[0].to_f.abs)
+			else if pname == "hypot_with" then
+				return v.float_instance(args[0].to_f.hypot_with(args[1].to_f))
+			else if pname == "is_nan" then
+				return v.bool_instance(args[0].to_f.is_nan)
+			else if pname == "is_inf_extern" then
+				return v.bool_instance(args[0].to_f.is_inf != 0)
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
@@ -783,6 +830,24 @@ redef class AInternMethPropdef
 				return null
 			else if pname == "atoi" then
 				return v.int_instance(recvval.to_i)
+			else if pname == "file_exists" then
+				return v.bool_instance(recvval.to_s.file_exists)
+			else if pname == "file_mkdir" then
+				recvval.to_s.mkdir
+				return null
+			else if pname == "file_chdir" then
+				recvval.to_s.chdir
+				return null
+			else if pname == "file_realpath" then
+				return v.native_string_instance(recvval.to_s.realpath)
+			else if pname == "get_environ" then
+				var txt = recvval.to_s.environ
+				return v.native_string_instance(txt)
+			else if pname == "system" then
+				var res = sys.system(recvval.to_s)
+				return v.int_instance(res)
+			else if pname == "atof" then
+				return v.float_instance(recvval.to_f)
 			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance("!" * args[1].to_i)
@@ -802,71 +867,20 @@ redef class AInternMethPropdef
 				recvval.copy(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
-		else if pname == "calloc_array" then
-			var recvtype = args.first.mtype.as(MClassType)
-			var mtype: MType
-			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
-			mtype = mtype.arguments.first
-			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
-			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
-		else if pname == "native_argc" then
-			return v.int_instance(v.arguments.length)
-		else if pname == "native_argv" then
-			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
-		end
-		fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
-		abort
-	end
-end
-
-redef class AbstractArray[E]
-	fun copy(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
-	do
-		self.copy_to(start, len, dest, new_start)
-	end
-end
-
-redef class AExternInitPropdef
-	redef fun call(v, mpropdef, args)
-	do
-		var pname = mpropdef.mproperty.name
-		var cname = mpropdef.mclassdef.mclass.name
-		if pname == "native_stdout" then
-			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stdout)
-		else if pname == "native_stdin" then
-			return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, stdin)
-		else if pname == "native_stderr" then
-			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stderr)
-		else if pname == "io_open_read" then
-			var a1 = args[1].val.as(Buffer)
-			return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))
-		else if pname == "io_open_write" then
-			var a1 = args[1].val.as(Buffer)
-			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
-		end
-		fatal(v, "NOT YET IMPLEMENTED extern init {mpropdef}")
-		abort
-	end
-end
-
-redef class AExternMethPropdef
-	super TablesCapable
-	redef fun call(v, mpropdef, args)
-	do
-		var pname = mpropdef.mproperty.name
-		var cname = mpropdef.mclassdef.mclass.name
-		if cname == "Int" then
-			var recvval = args.first.val.as(Int)
-			if pname == "rand" then
-				var res = recvval.rand
-				return v.int_instance(res)
-			else if pname == "native_int_to_s" then
-				return v.native_string_instance(recvval.to_s)
-			else if pname == "strerror_ext" then
-				return v.native_string_instance(recvval.strerror)
-			end
 		else if cname == "NativeFile" then
+			if pname == "native_stdout" then
+				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stdout)
+			else if pname == "native_stdin" then
+				return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, stdin)
+			else if pname == "native_stderr" then
+				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stderr)
+			else if pname == "io_open_read" then
+				var a1 = args[1].val.as(Buffer)
+				return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))
+			else if pname == "io_open_write" then
+				var a1 = args[1].val.as(Buffer)
+				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
+			end
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
@@ -883,59 +897,18 @@ redef class AExternMethPropdef
 			else if pname == "address_is_null" then
 				return v.false_instance
 			end
-		else if cname == "NativeString" then
-			var recvval = args.first.val.as(Buffer)
-			if pname == "file_exists" then
-				return v.bool_instance(recvval.to_s.file_exists)
-			else if pname == "file_mkdir" then
-				recvval.to_s.mkdir
-				return null
-			else if pname == "file_chdir" then
-				recvval.to_s.chdir
-				return null
-			else if pname == "file_realpath" then
-				return v.native_string_instance(recvval.to_s.realpath)
-			else if pname == "get_environ" then
-				var txt = recvval.to_s.environ
-				return v.native_string_instance(txt)
-			else if pname == "system" then
-				var res = sys.system(recvval.to_s)
-				return v.int_instance(res)
-			else if pname == "atof" then
-				return v.float_instance(recvval.to_f)
-			end
-		else if cname == "Float" then
-			if pname == "cos" then
-				return v.float_instance(args[0].to_f.cos)
-			else if pname == "sin" then
-				return v.float_instance(args[0].to_f.sin)
-			else if pname == "tan" then
-				return v.float_instance(args[0].to_f.tan)
-			else if pname == "acos" then
-				return v.float_instance(args[0].to_f.acos)
-			else if pname == "asin" then
-				return v.float_instance(args[0].to_f.asin)
-			else if pname == "atan" then
-				return v.float_instance(args[0].to_f.atan)
-			else if pname == "sqrt" then
-				return v.float_instance(args[0].to_f.sqrt)
-			else if pname == "exp" then
-				return v.float_instance(args[0].to_f.exp)
-			else if pname == "log" then
-				return v.float_instance(args[0].to_f.log)
-			else if pname == "pow" then
-				return v.float_instance(args[0].to_f.pow(args[1].to_f))
-			else if pname == "rand" then
-				return v.float_instance(args[0].to_f.rand)
-			else if pname == "abs" then
-				return v.float_instance(args[0].to_f.abs)
-			else if pname == "hypot_with" then
-				return v.float_instance(args[0].to_f.hypot_with(args[1].to_f))
-			else if pname == "is_nan" then
-				return v.bool_instance(args[0].to_f.is_nan)
-			else if pname == "is_inf_extern" then
-				return v.bool_instance(args[0].to_f.is_inf != 0)
-			end
+		else if pname == "calloc_array" then
+			var recvtype = args.first.mtype.as(MClassType)
+			var mtype: MType
+			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
+			mtype = mtype.arguments.first
+			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
+			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
+		else if pname == "native_argc" then
+			return v.int_instance(v.arguments.length)
+		else if pname == "native_argv" then
+			var txt = v.arguments[args[1].to_i]
+			return v.native_string_instance(txt)
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
@@ -965,8 +938,21 @@ redef class AExternMethPropdef
 		else if pname == "address_is_null" then
 			return v.false_instance
 		end
-		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+		if mpropdef.is_intern then
+			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
+		else if mpropdef.is_extern then
+			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+		else
+			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
+		end
 		abort
+	end
+end
+
+redef class AbstractArray[E]
+	fun copy(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
+	do
+		self.copy_to(start, len, dest, new_start)
 	end
 end
 
@@ -1005,14 +991,6 @@ redef class AAttrPropdef
 		if mtype isa MNullableType then
 			recv.attributes[self.mpropdef.mproperty] = v.null_instance
 		end
-	end
-end
-
-redef class ADeferredMethPropdef
-	redef fun call(v, mpropdef, args)
-	do
-		fatal(v, "Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
-		abort
 	end
 end
 

@@ -203,6 +203,7 @@ class RapidTypeAnalysis
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
+			var mmeth = mmethoddef.mproperty
 			#print "# visit {mmethoddef}"
 			var v = new RapidTypeVisitor(self, mmethoddef.mclassdef.bound_mtype, mmethoddef)
 
@@ -220,7 +221,7 @@ class RapidTypeAnalysis
 
 
 			for i in [0..mmethoddef.msignature.arity[ do
-				var origtype = mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
+				var origtype = mmeth.intro.msignature.mparameters[i].mtype
 				if not origtype.need_anchor then continue # skip non covariant stuff
 				var paramtype = mmethoddef.msignature.mparameters[i].mtype
 				#paramtype = v.cleanup_type(paramtype).as(not null)
@@ -229,7 +230,7 @@ class RapidTypeAnalysis
 
 			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
 				# It is an init for a class?
-				if mmethoddef.mproperty.name == "init" then
+				if mmeth.name == "init" then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					var super_inits = nclassdef.super_inits
 					if super_inits != null then
@@ -247,27 +248,23 @@ class RapidTypeAnalysis
 
 			var npropdef = modelbuilder.mpropdef2npropdef[mmethoddef]
 
-			if npropdef isa AConcreteMethPropdef then
+			if npropdef isa AMethPropdef  then
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
 						v.add_callsite(auto_super_init)
 					end
 				end
-			else if npropdef isa AInternMethPropdef or
-			  (npropdef isa AExternMethPropdef and npropdef.n_extern != null) then
+			end
+
+			if mmeth.is_new then
+				v.add_type(v.receiver)
+			else if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
-			else if npropdef isa AExternMethPropdef then
-				var nclassdef = npropdef.parent.as(AClassdef)
-				v.enter_visit(npropdef)
-			else if npropdef isa AExternInitPropdef then
-				v.add_type(v.receiver)
-			else
-
 			end
 
 			v.enter_visit(npropdef)
