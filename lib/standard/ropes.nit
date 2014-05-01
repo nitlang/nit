@@ -316,6 +316,8 @@ class RopeBuffer
 	#                         Tree Balancing Methods                           #
 	############################################################################
 
+	redef var chars: Sequence[Char] = new RopeBufferCharView(self)
+
 	# Performs a right rotation on a node of the Rope
 	#
 	#              Root                Pivot
@@ -600,6 +602,9 @@ class RopeString
 	############################################################################
 	#                          Rope refined Methods                            #
 	############################################################################
+
+
+	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
 
 	redef fun subrope(index_from: Int, count: Int): ImmutableRope
 	do
