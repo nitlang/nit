@@ -37,12 +37,10 @@ abstract class Rope
 	private var parent_node: RopeNode
 
 	# Needed by the compiler to avoid producing an error with constructors in subclasses
-	init do
-		self.parent_node = new ConcatNode
-	end
+	init do self.parent_node = new ConcatNode
 
 	# Initializes a new Rope with a text embedded in directly
-	init with_string(str: String) do
+	init from(str: String) do
 		self.parent_node = new ConcatNode
 		parent_node.as(ConcatNode).right_child = new LeafNode(str)
 		parent_node.as(ConcatNode).update_data
@@ -317,16 +315,6 @@ class RopeBuffer
 	super Buffer
 
 	redef type SELFTYPE: RopeBuffer
-
-	init
-	do
-		super
-	end
-
-	init with_string(str)
-	do
-		super
-	end
 
 	############################################################################
 	#                         Tree Balancing Methods                           #
@@ -612,11 +600,6 @@ class RopeString
 	super String
 
 	redef type SELFTYPE: RopeString
-
-	init with_string(str)
-	do
-		super
-	end
 
 	############################################################################
 	#                          Rope refined Methods                            #
