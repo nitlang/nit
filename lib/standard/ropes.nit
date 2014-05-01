@@ -244,8 +244,7 @@ class RopeBuffer
 		end
 	end
 
-	# Appends a new Collection[Char] at the end of the current rope
-	fun append(str: String): BufferRope
+	redef fun append(str)
 	do
 		var last_node = parent_node
 
@@ -262,20 +261,15 @@ class RopeBuffer
 			new_concat.left_child = last_node
 			new_concat.right_child = new LeafNode(str.to_s)
 			last_node = new_concat
-		else
-			print "Fatal Error, please report to the developers for more insight."
-			abort
 		end
 
-		balance_from_node(last_node)
+		balance_from_node(last_node.as(ConcatNode))
 
 		is_dirty = true
-
-		return self
 	end
 
-	# Adds a new Collection[Char] at the beginning of the rope
-	fun prepend(str: String): BufferRope
+	# Adds a String at the beginning of the rope
+	fun prepend(str: String)
 	do
 		var curr_node = parent_node
 
@@ -293,15 +287,11 @@ class RopeBuffer
 			new_concat.right_child = curr_node
 			parent.left_child = new_concat
 			curr_node = new_concat
-		else
-			print "Fatal Error"
-			abort
 		end
 
-		balance_from_node(curr_node)
+		balance_from_node(curr_node.as(ConcatNode))
 
 		is_dirty = true
-		return self
 	end
 
 
