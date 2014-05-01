@@ -51,13 +51,6 @@ abstract class Rope
 		return parent_node.length
 	end
 
-	# Returns a flat version of self
-	redef fun to_s
-	do
-		if self.str_representation == null then flatten
-		return str_representation.as(not null)
-	end
-
 	# Stores a flat version of self in cache
 	redef fun to_cstring
 	do
@@ -354,15 +347,25 @@ class RopeBuffer
 		return new_buf
 	end
 
-	# Refines to add a cache method, calculates only once for every modification
-	# the string representation for self
 	redef fun to_s
 	do
-		if self.str_representation == null or is_dirty then
-			self.str_representation = flatten
-			is_dirty = false
+		if not is_dirty and str_representation != null then return str_representation.to_s_with_length(self.length)
+
+		var buffer_rope = new RopeBuffer
+		var new_rope = new RopeString
+
+		var iter = new DFSLeafForwardIterator(self)
+
+		while iter.is_ok do
+			buffer_rope.append(iter.item.value)
+			iter.next
 		end
-		return self.str_representation.as(not null)
+
+		new_rope.parent_node = buffer_rope.parent_node
+
+		if not is_dirty then new_rope.str_representation = self.str_representation
+
+		return new_rope
 	end
 
 end
@@ -400,6 +403,7 @@ class RopeString
 		return new_rope
 	end
 
+	redef fun to_s do return self
 end
 
 private class RopeStringCharView
