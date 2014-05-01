@@ -17,13 +17,14 @@
 # General Mnit application structure
 module mnit_app
 
+import ::app
 import mnit_display
 
 # An App instance serves as base to every Mnit projects.
 #
 # This class is redefed by plateforme modules and so
 # App can be specialized directly in the user app.
-abstract class App
+redef class App
 	type IE: InputEvent
 	type D: Display
 	type I: Image
@@ -82,15 +83,6 @@ abstract class App
 
 	# Called before destroying the window
 	fun term_window do end
-
-	# Helper function for logging
-	fun log_error( msg: String ) do print "#nit error: {msg}"
-
-	# Helper function for logging
-	fun log_warning( msg: String ) do print "#nit warn: {msg}"
-
-	# Helper function for logging
-	fun log_info( msg: String ) do print "#nit info: {msg}"
 
 	# Receive and deal with all inputs
 	fun input( event: InputEvent ): Bool
