@@ -107,28 +107,6 @@ abstract class Rope
 		end
 	end
 
-	# Concats two ropes and returns a new one
-	fun +(other: Rope): Rope do
-		var new_rope = new BufferRope
-
-		var first_iter = new DFSRopeLeafIterator(self)
-
-		while first_iter.is_ok do
-			new_rope.append(first_iter.item.value)
-			first_iter.next
-		end
-
-		var second_iter = new DFSRopeLeafIterator(other)
-
-		while second_iter.is_ok do
-			new_rope.append(second_iter.item.value)
-			second_iter.next
-		end
-
-		return new_rope
-	end
-
-
 	# Appends the content of self multiple times in a new Rope object
 	fun *(repeats: Int): Rope do
 
@@ -344,9 +322,37 @@ class RopeBuffer
 		return super.as(BufferRope)
 	end
 
-	redef fun +(other: Rope): BufferRope
+	redef fun +(other)
 	do
-		return super.as(BufferRope)
+		var new_buf = new RopeBuffer
+
+		var leafiter = new DFSLeafForwardIterator(self)
+
+		while leafiter.is_ok do
+			new_buf.append(leafiter.item.value)
+			leafiter.next
+		end
+
+		if other isa String then
+			new_buf.append(other)
+			return new_buf
+		end
+
+		if other isa FlatBuffer then
+			new_buf.append(other.to_s)
+			return new_buf
+		end
+
+		if other isa RopeBuffer then
+			var oiter = new DFSLeafForwardIterator(other)
+			while oiter.is_ok do
+				new_buf.append(oiter.item.value)
+				oiter.next
+			end
+			return new_buf
+		end
+
+		return new_buf
 	end
 
 	# Refines to add a cache method, calculates only once for every modification
@@ -376,9 +382,13 @@ class RopeString
 		return (super.as(BufferRope)).to_immutable
 	end
 
-	redef fun +(other: Rope): ImmutableRope
+	redef fun +(other)
 	do
-		return (super.as(BufferRope)).to_immutable
+		var new_rope = new RopeString
+		var parent = new_rope.parent_node
+		parent.as(ConcatNode).left_child = new LeafNode(self)
+		parent.as(ConcatNode).right_child = new LeafNode(other.to_s)
+		return new_rope
 	end
 
 end
