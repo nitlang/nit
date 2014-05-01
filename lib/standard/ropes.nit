@@ -160,11 +160,11 @@ abstract class Rope
 		return buffer
 	end
 
-	# Returns an upper (capitalized) version of self
-	fun to_upper: Rope
+	# Factorization for to_upper
+	private fun to_upper_impl: RopeBuffer
 	do
-		var new_rope = new BufferRope
-		var iter = new DFSRopeLeafIterator(self)
+		var new_rope = new RopeBuffer
+		var iter = new DFSLeafForwardIterator(self)
 		while iter.is_ok do
 			new_rope.append(iter.item.value.to_upper)
 			iter.next
@@ -172,11 +172,11 @@ abstract class Rope
 		return new_rope
 	end
 
-	# Returns a lower (minuscule) version of self
-	fun to_lower: Rope
+	# Factorization for to_lower
+	private fun to_lower_impl: RopeBuffer
 	do
-		var new_rope = new BufferRope
-		var iter = new DFSRopeLeafIterator(self)
+		var new_rope = new RopeBuffer
+		var iter = new DFSLeafForwardIterator(self)
 		while iter.is_ok do
 			new_rope.append(iter.item.value.to_lower)
 			iter.next
@@ -434,6 +434,10 @@ class RopeBuffer
 	end
 
 	redef fun reversed do return reversed_impl
+
+	redef fun to_upper do return to_upper_impl
+
+	redef fun to_lower do return to_lower_impl
 end
 
 # Rope that cannot be modified
@@ -483,6 +487,22 @@ class RopeString
 		parent.as(ConcatNode).left_child = new LeafNode(self)
 		parent.as(ConcatNode).right_child = new LeafNode(other.to_s)
 		return new_rope
+	end
+
+	redef fun to_upper
+	do
+		var res = to_upper_impl
+		var ret = new RopeString
+		ret.parent_node = res.parent_node
+		return ret
+	end
+
+	redef fun to_lower
+	do
+		var res = to_lower_impl
+		var ret = new RopeString
+		ret.parent_node = res.parent_node
+		return ret
 	end
 
 	redef fun to_s do return self
