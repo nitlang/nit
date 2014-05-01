@@ -128,30 +128,6 @@ abstract class Rope
 		return new_rope
 	end
 
-	# Returns a copy of several ropes concatenated
-	#
-	# Is equivalent to a chain of + operations
-	# Except this one is optimized for performance
-	fun multi_concat(ropes: Rope...): Rope
-	do
-		var new_rope = new BufferRope
-
-		var self_iter = self.iterator
-		while self_iter.is_ok do
-			new_rope.append(self_iter.item.value)
-			self_iter.next
-		end
-
-		for i in ropes do
-			var iter = i.iterator
-			while iter.is_ok do
-				new_rope.append(iter.item.value)
-				iter.next
-			end
-		end
-
-		return new_rope
-	end
 
 	# Appends the content of self multiple times in a new Rope object
 	fun *(repeats: Int): Rope do
@@ -163,70 +139,6 @@ abstract class Rope
 		for i in [1 .. repeats] do new_rope.append(str)
 
 		return new_rope
-	end
-
-	# Returns an iterator on self
-	#
-	# Unsafe modifications on a MutableRope
-	#
-	private fun iterator: Iterator[LeafNode] do return new DFSRopeLeafIterator(self)
-
-	# Creates a subrope.
-	#
-	# var rope = (new BufferRope).append("abcd")
-	#
-	#	assert rope.subrope(1, 2)         ==  "bc"
-	#	assert rope.subrope(-1, )         ==  "a"
-	#	assert rope.subrope(1, 0)         ==  ""
-	#	assert rope.subrope(2, 5)         ==  "cd"
-	#
-	# A `index_from` index < 0 will be replaced by 0.
-	# Unless a `count` value is > 0 at the same time.
-	# In this case, `index_from += count` and `count -= index_from`.
-	#
-	fun subrope(index_from: Int, count: Int): Rope
-	do
-		assert count >= 0
-
-		if index_from < 0 then
-			count += index_from
-			if count < 0 then count = 0
-			index_from = 0
-		end
-
-		if count - index_from >= self.length then count = length - index_from
-
-		var buffer = new BufferRope
-
-		var iter = new DFSRopeLeafIterator.with_index(self, index_from)
-
-		var curr_subrope_index = index_from - iter.pos
-
-		while iter.is_ok do
-			if count == 0 then break
-			if curr_subrope_index > 0 then
-				if count >= iter.item.value.length then
-					buffer.append(iter.item.value.substring(curr_subrope_index, count))
-					count -= iter.item.value.length - curr_subrope_index
-					curr_subrope_index = 0
-				else
-					buffer.append(iter.item.value.substring(curr_subrope_index, count))
-					break
-				end
-			else
-				if count >= iter.item.value.length then
-					buffer.append(iter.item.value)
-					count -= iter.item.value.length
-				else
-					buffer.append(iter.item.value.substring(0, count))
-					break
-				end
-			end
-
-			iter.next
-		end
-
-		return buffer
 	end
 
 	# Returns an upper (capitalized) version of self
@@ -440,15 +352,6 @@ class RopeBuffer
 		return self
 	end
 
-	# Variatic function to append several collections of Chars
-	fun append_multi(strs: String...): BufferRope
-	do
-		for i in strs do
-			append(i)
-		end
-		return self
-	end
-
 	# Adds a new Collection[Char] at the beginning of the rope
 	fun prepend(str: String): BufferRope
 	do
@@ -476,74 +379,9 @@ class RopeBuffer
 		balance_from_node(curr_node)
 
 		is_dirty = true
-
 		return self
 	end
 
-	# Variatic function to prepend several collections of Chars
-	fun prepend_multi(strs: String...): BufferRope
-	do
-		for i in strs do
-			prepend(i)
-		end
-		return self
-	end
-
-	# Adds the content of `str` after self, does not create a new rope object
-	fun concat(str: Rope): Rope
-	do
-		var other_iter = new DFSRopeLeafIterator(str)
-
-		var modif_list = new List[String]
-
-		while other_iter.is_ok do
-			modif_list.push(other_iter.item.value)
-			other_iter.next
-		end
-
-		while modif_list.length > 0 do
-			self.append(modif_list.shift)
-		end
-
-		if not is_dirty then is_dirty = true
-
-		return self
-	end
-
-	# Returns the content of the current BufferRope object as an ImmutableRope
-	fun freeze: ImmutableRope
-	do
-		var buffer_rope = new BufferRope
-		var new_rope = new ImmutableRope
-
-		var iter = new DFSRopeLeafIterator(self)
-
-		while iter.is_ok do
-			buffer_rope.append(iter.item.value)
-			iter.next
-		end
-
-		new_rope.parent_node = buffer_rope.parent_node
-
-		if not is_dirty then new_rope.str_representation = self.str_representation
-
-		return new_rope
-	end
-
-	# Unsafe method to convert self as an ImmutableRope
-	#
-	# To be used internally only
-	private fun to_immutable: ImmutableRope
-	do
-		var immutable_self = new ImmutableRope
-		immutable_self.parent_node = self.parent_node
-		return immutable_self
-	end
-
-	redef fun subrope(index_from: Int, count: Int): BufferRope
-	do
-		return super.as(BufferRope)
-	end
 
 	redef fun *(repeats: Int): BufferRope
 	do
@@ -551,11 +389,6 @@ class RopeBuffer
 	end
 
 	redef fun +(other: Rope): BufferRope
-	do
-		return super.as(BufferRope)
-	end
-
-	redef fun multi_concat(ropes: Rope...): BufferRope
 	do
 		return super.as(BufferRope)
 	end
@@ -582,22 +415,12 @@ class RopeString
 
 	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
 
-	redef fun subrope(index_from: Int, count: Int): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
 	redef fun *(repeats: Int): ImmutableRope
 	do
 		return (super.as(BufferRope)).to_immutable
 	end
 
 	redef fun +(other: Rope): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
-	redef fun multi_concat(ropes: Rope...): ImmutableRope
 	do
 		return (super.as(BufferRope)).to_immutable
 	end
