@@ -121,6 +121,7 @@ abstract class Text
 		var iter = self.chars.iterator_from(pos)
 		while iter.is_ok do
 			if iter.item == c then return iter.index
+			iter.next
 		end
 		return -1
 	end
