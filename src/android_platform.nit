@@ -148,7 +148,7 @@ $(call import-module,android/native_app_glue)
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
-        android:versionCode="1"
+        android:versionCode="{{{project.version_code}}}"
         android:versionName="{{{app_version}}}"
         android:debuggable="true">
 

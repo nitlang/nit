@@ -35,6 +35,9 @@ class AndroidProject
 	# Version of the Android application and APK
 	var version: nullable String = null
 
+	# Numerical version code of the Android application and APK
+	var version_code: Int = 0
+
 	# Custom lines to add to the AndroidManifest.xml in the <manifest> node
 	var manifest_lines = new Array[String]
 
@@ -67,6 +70,11 @@ redef class ModelBuilder
 
 		annots = collect_annotations_on_modules("android_manifest_application", mmodule)
 		for an in annots do project.manifest_application_lines.add an.arg_as_string(self)
+
+		# Get the date and time (down to the minute) as string
+		var local_time = new Tm.localtime
+		var local_time_s = local_time.strftime("%y%m%d%H%M")
+		project.version_code = local_time_s.to_i
 
 		toolcontext.check_errors
 
