@@ -107,18 +107,6 @@ abstract class Rope
 		end
 	end
 
-	# Appends the content of self multiple times in a new Rope object
-	fun *(repeats: Int): Rope do
-
-		var new_rope = new BufferRope
-
-		var str = self.to_s
-
-		for i in [1 .. repeats] do new_rope.append(str)
-
-		return new_rope
-	end
-
 	# Returns an upper (capitalized) version of self
 	fun to_upper: Rope
 	do
@@ -317,9 +305,12 @@ class RopeBuffer
 	end
 
 
-	redef fun *(repeats: Int): BufferRope
+	redef fun *(i)
 	do
-		return super.as(BufferRope)
+		var buf = new RopeBuffer
+		var str = self.to_s
+		for j in [0..i[ do buf.append(str)
+		return buf
 	end
 
 	redef fun +(other)
@@ -377,9 +368,11 @@ class RopeString
 
 	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
 
-	redef fun *(repeats: Int): ImmutableRope
+	redef fun *(i)
 	do
-		return (super.as(BufferRope)).to_immutable
+		var new_rope = new RopeString.from(self)
+		for j in [1..i[ do new_rope += self
+		return new_rope
 	end
 
 	redef fun +(other)
