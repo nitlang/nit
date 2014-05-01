@@ -141,6 +141,8 @@ class RopeBuffer
 
 	redef var chars: Sequence[Char] = new RopeBufferCharView(self)
 
+	redef fun empty do return new RopeBuffer
+
 	# Performs a right rotation on a node of the Rope
 	#
 	#              Root                Pivot
@@ -357,6 +359,8 @@ class RopeString
 	redef type SELFTYPE: RopeString
 
 	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
+
+	redef fun empty do return new RopeString
 
 	redef fun *(i)
 	do
