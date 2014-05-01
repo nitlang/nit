@@ -479,16 +479,16 @@ redef class APropdef
 	var selfvariable: nullable Variable
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
+		var nblock = self.n_block
+		if nblock == null then return
+
 		var nclassdef = self.parent.as(AClassdef)
 		var mpropdef = self.mpropdef.as(not null)
 		var v = new TypeVisitor(modelbuilder, nclassdef, mpropdef)
 		self.selfvariable = v.selfvariable
-
-		var nblock = self.n_block
-		if nblock == null then return
 
 		var mmethoddef = self.mpropdef.as(not null)
 		for i in [0..mmethoddef.msignature.arity[ do
