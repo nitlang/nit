@@ -28,13 +28,10 @@ end
 
 # Abstract class, represents all the services offered by both mutable and immutable ropes
 abstract class Rope
-	super Comparable
-	super StringCapable
+	super Text
 
 	# Cached version of self as a flat String
 	private var str_representation: nullable String = null
-
-	redef type OTHER: Rope
 
 	# The first node of the hierarchy
 	private var parent_node: RopeNode
@@ -51,14 +48,7 @@ abstract class Rope
 		parent_node.as(ConcatNode).update_data
 	end
 
-	# Returns a view on the rope
-	fun chars: SequenceRead[Char]
-	do
-		return new CharRopeView(self)
-	end
-
-	# Gets the total length of the Rope
-	fun length: Int
+	redef fun length: Int
 	do
 		return parent_node.length
 	end
@@ -324,8 +314,7 @@ end
 #
 class BufferRope
 	super Rope
-
-	var is_dirty: Bool = false
+	super Buffer
 
 	init
 	do
@@ -618,11 +607,7 @@ end
 # Rope that cannot be modified
 class ImmutableRope
 	super Rope
-
-	init
-	do
-		super
-	end
+	super String
 
 	init with_string(str)
 	do
