@@ -22,3 +22,4 @@
 module android is platform
 
 import java
+import app
