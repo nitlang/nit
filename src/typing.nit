@@ -479,7 +479,7 @@ redef class APropdef
 	var selfvariable: nullable Variable
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
 		var nclassdef = self.parent.as(AClassdef)

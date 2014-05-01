@@ -33,7 +33,7 @@ class VerifyNitniCallbacksPhase
 
 	redef fun process_npropdef(npropdef)
 	do
-		if not npropdef isa AExternPropdef then return
+		if not npropdef isa AMethPropdef then return
 
 		npropdef.verify_nitni_callbacks(toolcontext)
 	end
@@ -80,7 +80,7 @@ class ForeignCallbackSet
 	end
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	private var foreign_callbacks_cache: nullable ForeignCallbackSet = null
 
 	# All foreign callbacks from this method
@@ -268,7 +268,7 @@ end
 
 redef class AExternCall
 	# Verify this explicit declaration of call from C and collect all relevant callbacks
-	fun verify_and_collect(npropdef: AExternPropdef, callback_set: ForeignCallbackSet,
+	fun verify_and_collect(npropdef: AMethPropdef, callback_set: ForeignCallbackSet,
 		toolcontext: ToolContext) is abstract
 end
 
