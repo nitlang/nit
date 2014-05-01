@@ -17,7 +17,7 @@
 # General module for cross-compatibility between multiple platforms
 module mnit
 
-import app
+import mnit_app
 import opengles1
 import assets
 import numbers

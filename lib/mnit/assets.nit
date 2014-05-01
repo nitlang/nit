@@ -17,7 +17,7 @@
 # Manages all assets usable by an Mnit app
 module assets
 
-import app
+import mnit_app
 import mnit_display
 
 # General asset

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # General Mnit application structure
-module app
+module mnit_app
 
 import mnit_display
 
