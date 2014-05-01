@@ -754,14 +754,14 @@ end
 abstract class APropdef
 	super Prod
 	readable writable var _n_doc: nullable ADoc = null
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: nullable AVisibility = null
 end
 
 # A definition of an attribute
 # For historical reason, old-syle and new-style attributes use the same `ANode` sub-class
 class AAttrPropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwvar: TKwvar
 
 	# The identifier for an old-style attribute (null if new-style)
@@ -785,8 +785,6 @@ end
 # A definition of all kind of method (including constructors)
 abstract class AMethPropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: nullable AVisibility
 	readable writable var _n_methid: nullable AMethid = null
 	readable writable var _n_signature: nullable ASignature
 	redef fun hot_location
@@ -915,8 +913,6 @@ end
 # A definition of a virtual type
 class ATypePropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwtype: TKwtype
 	readable writable var _n_id: TClassid
 	readable writable var _n_type: AType
