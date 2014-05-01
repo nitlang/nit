@@ -555,6 +555,7 @@ redef class AMethPropdef
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
 		mpropdef.is_intern = self isa AInternMethPropdef
+		mpropdef.is_extern = self isa AExternPropdef
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
