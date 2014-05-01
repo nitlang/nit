@@ -108,6 +108,58 @@ abstract class Rope
 		end
 	end
 
+	#     var rope = (new RopeBuffer).append("abcd")
+	#
+	#     assert rope.substring(1, 2)         ==  "bc"
+	#     assert rope.substring(-1, )         ==  "a"
+	#     assert rope.substring(1, 0)         ==  ""
+	#     assert rope.substring(2, 5)         ==  "cd"
+	#
+	private fun substring_impl(index_from: Int, count: Int): RopeBuffer
+	do
+		assert count >= 0
+
+		if index_from < 0 then
+			count += index_from
+			if count < 0 then count = 0
+			index_from = 0
+		end
+
+		if count - index_from >= self.length then count = length - index_from
+
+		var buffer = new RopeBuffer
+
+		var iter = new DFSLeafForwardIterator.with_index(self, index_from)
+
+		var curr_substring_index = index_from - iter.pos
+
+		while iter.is_ok do
+			if count == 0 then break
+			if curr_substring_index > 0 then
+				if count >= iter.item.value.length then
+					buffer.append(iter.item.value.substring(curr_substring_index, count))
+					count -= iter.item.value.length - curr_substring_index
+					curr_substring_index = 0
+				else
+					buffer.append(iter.item.value.substring(curr_substring_index, count))
+					break
+				end
+			else
+				if count >= iter.item.value.length then
+					buffer.append(iter.item.value)
+					count -= iter.item.value.length
+				else
+					buffer.append(iter.item.value.substring(0, count))
+					break
+				end
+			end
+
+			iter.next
+		end
+
+		return buffer
+	end
+
 	# Returns an upper (capitalized) version of self
 	fun to_upper: Rope
 	do
@@ -347,6 +399,8 @@ class RopeBuffer
 		return new_buf
 	end
 
+	redef fun substring(from, count) do return substring_impl(from, count)
+
 	redef fun to_s
 	do
 		if not is_dirty and str_representation != null then return str_representation.to_s_with_length(self.length)
@@ -385,6 +439,14 @@ class RopeString
 	do
 		if self.str_representation != null then return self.str_representation.as(not null)
 		return super
+	end
+
+	redef fun substring(from, cnt)
+	do
+		var buf = substring_impl(from,cnt)
+		var ret = new RopeString
+		ret.parent_node = buf.parent_node
+		return ret
 	end
 
 	redef fun *(i)
