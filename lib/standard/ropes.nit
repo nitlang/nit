@@ -31,7 +31,7 @@ abstract class Rope
 	super Text
 
 	# Cached version of self as a flat String
-	private var str_representation: nullable String = null
+	private var str_representation: nullable NativeString = null
 
 	# The first node of the hierarchy
 	private var parent_node: RopeNode
@@ -59,7 +59,7 @@ abstract class Rope
 	end
 
 	# Stores a flat version of self in cache
-	private fun flatten: FlatString
+	redef fun to_cstring
 	do
 		var native_final_str = calloc_string(length + 1)
 
@@ -67,15 +67,23 @@ abstract class Rope
 
 		var offset = 0
 
-		var iter = new DFSRopeLeafIterator(self)
+		var iter = new DFSLeafForwardIterator(self)
 
 		while iter.is_ok do
-			iter.item.value.as(FlatString).items.copy_to(native_final_str, iter.item.value.length, 0, offset)
+			var str = iter.item.value
+			if str isa FlatString then
+				str.items.copy_to(native_final_str, iter.item.value.length, str.index_from, offset)
+			else
+				var fl = str.to_cstring
+				fl.copy_to(native_final_str, str.length, 0, offset)
+			end
 			offset += iter.item.value.length
 			iter.next
 		end
 
-		return native_final_str.to_s_with_length(length)
+		str_representation = native_final_str
+
+		return str_representation.as(not null)
 	end
 
 	# Gets a node containing the substring to seek the char at the require position
@@ -142,6 +150,14 @@ class RopeBuffer
 	redef var chars: Sequence[Char] = new RopeBufferCharView(self)
 
 	redef fun empty do return new RopeBuffer
+
+	redef fun to_cstring
+	do
+		if is_dirty then str_representation = null
+		var res = super
+		is_dirty = false
+		return res
+	end
 
 	# Performs a right rotation on a node of the Rope
 	#
@@ -361,6 +377,12 @@ class RopeString
 	redef var chars: SequenceRead[Char] = new RopeStringCharView(self)
 
 	redef fun empty do return new RopeString
+
+	redef fun to_cstring
+	do
+		if self.str_representation != null then return self.str_representation.as(not null)
+		return super
+	end
 
 	redef fun *(i)
 	do
