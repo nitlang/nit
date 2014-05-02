@@ -121,6 +121,7 @@ abstract class Text
 		var iter = self.chars.iterator_from(pos)
 		while iter.is_ok do
 			if iter.item == c then return iter.index
+			iter.next
 		end
 		return -1
 	end
@@ -1173,6 +1174,24 @@ class FlatBuffer
 		var new_buf = new FlatBuffer.with_capacity(self.length * repeats)
 		for i in [0..repeats[ do
 			new_buf.append(self)
+		end
+		return new_buf
+	end
+
+	redef fun to_upper
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length)
+		for i in self.chars do
+			new_buf.add(i.to_upper)
+		end
+		return new_buf
+	end
+
+	redef fun to_lower
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length)
+		for i in self.chars do
+			new_buf.add(i.to_lower)
 		end
 		return new_buf
 	end
