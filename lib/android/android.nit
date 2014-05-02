@@ -14,13 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Targets the Android platform
+# Android services and implementation of app.nit
 #
 # To use this module and compile for Android, you must install the
 # Android SDK (with API level 10) and NDK (with the API level 9).
 # The tools `android`, `ndk-build` and `ant` must be in your PATH.
 #
-# Will, in the near future, provide services specific to Android.
+# This module provides basic logging facilities, advanced logging can be
+# achieved by importing `android::log`.
 module android
 
 import platform
+private import log
+
+# Uses Android logs to print everything
+redef fun print(text) do log_write(priority_info, app.log_prefix.to_cstring, text.to_s.to_cstring)
+
+redef class App
+	redef fun log_error(msg) do log_write(priority_error, log_prefix.to_cstring, msg.to_cstring)
+
+	redef fun log_warning(msg) do log_write(priority_warn, log_prefix.to_cstring, msg.to_cstring)
+end

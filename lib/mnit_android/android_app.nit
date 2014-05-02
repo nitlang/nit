@@ -373,13 +373,6 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 	fun is_search_key: Bool do return key_code == 84
 end
 
-redef class Object
-	# Uses Android logs for every print
-	redef fun print(text: Object) is extern import Object.to_s, String.to_cstring `{
-		__android_log_print(ANDROID_LOG_INFO, "mnit print", "%s", String_to_cstring(Object_to_s(text)));
-	`}
-end
-
 redef class App
 	redef type IE: AndroidInputEvent
 	redef type D: Opengles1Display
@@ -392,13 +385,6 @@ redef class App
 	var sensormanager: ASensorManager
 	var eventqueue: ASensorEventQueue
 	var sensors_support_enabled writable = false
-
-	redef fun log_warning(msg) is extern import String.to_cstring `{
-		LOGW("%s", String_to_cstring(msg));
-	`}
-	redef fun log_info(msg) is extern import String.to_cstring `{
-		LOGI("%s", String_to_cstring(msg));
-	`}
 
 	redef fun init_window
 	do
