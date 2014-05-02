@@ -24,6 +24,9 @@ import base64
 
 # Websocket compatible server, works as an extra layer to the original Sockets
 class WebSocket
+	super BufferedIStream
+	super OStream
+	super PollableIStream
 
 	# Client connection to the server
 	var client: Socket
@@ -34,21 +37,15 @@ class WebSocket
 	# Creates a new Websocket server listening on given port with `max_clients` slots available
 	init(port: Int, max_clients: Int)
 	do
-		listener = new Socket.stream_with_port(port)
-
-		if not listener.bind then
-			return
-		end
-
-		if not listener.listen(1) then
-			return
-		end
+		_buffer = new FlatBuffer
+		_buffer_pos = 0
+		listener = new Socket.server(port, max_clients)
 	end
 
 	# Accept an incoming connection and initializes the handshake
 	fun accept
 	do
-		assert listener.still_alive
+		assert not listener.eof
 
 		client = listener.accept
 
@@ -66,7 +63,7 @@ class WebSocket
 
 	# Disconnects the client if one is connected
 	# And stops the server
-	fun stop_server
+	redef fun close
 	do
 		client.close
 		listener.close
@@ -76,7 +73,7 @@ class WebSocket
 	# See RFC 6455 for information
 	private fun parse_handshake: Map[String,String]
 	do
-		var recved = client.read
+		var recved = read_http_frame(new FlatBuffer)
 		var headers = recved.split("\r\n")
 		var headmap = new HashMap[String,String]
 		for i in headers do
@@ -127,14 +124,21 @@ class WebSocket
 		return ans_buffer.to_s
 	end
 
+	# Reads an HTTP frame
+	protected fun read_http_frame(buf: Buffer): String
+	do
+		client.append_line_to(buf)
+		buf.chars.add('\n')
+		if buf.has_substring("\r\n\r\n", buf.length - 4) then return buf.to_s
+		return read_http_frame(buf)
+	end
+
 	# Gets the message from the client, unpads it and reconstitutes the message
-	private fun unpad_message: String do
+	private fun unpad_message do
 		var fin = false
-		var ret_buffer = new FlatBuffer
 		while not fin do
-			var msg = client.read
-			if msg.length == 0 then return ""
-			var iter = msg.chars.iterator
+			var fst_char = client.read_char
+			var snd_char = client.read_char
 			# First byte in msg is formatted this way :
 			# |(fin - 1bit)|(RSV1 - 1bit)|(RSV2 - 1bit)|(RSV3 - 1bit)|(opcode - 4bits)
 			# fin = Flag indicating if current frame is the last one
@@ -148,60 +152,54 @@ class WebSocket
 			#	%x9 denotes a ping
 			#	%xA denotes a pong
 			#	%xB-F are reserved for further control frames
-			var fin_flag = iter.item.ascii.bin_and(128)
+			var fin_flag = fst_char.bin_and(128)
 			if fin_flag != 0 then fin = true
-			var opcode = iter.item.ascii.bin_and(15)
+			var opcode = fst_char.bin_and(15)
 			if opcode == 9 then
-				ret_buffer.add(138.ascii)
-				ret_buffer.add(0.ascii)
-				client.write(ret_buffer.to_s)
-				return ""
+				_buffer.add(138.ascii)
+				_buffer.add('\0')
+				client.write(_buffer.to_s)
+				_buffer_pos += 2
+				return
 			end
 			if opcode == 8 then
 				self.client.close
-				return ""
+				return
 			end
-			iter.next
 			# Second byte is formatted this way :
 			# |(mask - 1bit)|(payload length - 7 bits)
 			# As specified, if the payload length is 126 or 127
 			# The next 16 or 64 bits contain an extended payload length
-			var mask_flag = iter.item.ascii.bin_and(128)
-			var mask: String
-			var len = iter.item.ascii.bin_and(127)
+			var mask_flag = snd_char.bin_and(128)
+			var len = snd_char.bin_and(127)
 			var payload_ext_len = 0
 			if len == 126 then
-				iter.next
-				payload_ext_len = iter.item.ascii.lshift(8)
-				iter.next
-				payload_ext_len += iter.item.ascii
+				payload_ext_len = client.read_char.lshift(8)
+				payload_ext_len += client.read_char
 			else if len == 127 then
 				# 64 bits for length are not supported,
 				# only the last 32 will be interpreted as a Nit Integer
-				for i in [0..4[ do iter.next
-				payload_ext_len = iter.item.ascii.lshift(24)
-				iter.next
-				payload_ext_len += iter.item.ascii.lshift(16)
-				iter.next
-				payload_ext_len += iter.item.ascii.lshift(8)
-				iter.next
-				payload_ext_len += iter.item.ascii
+				for i in [0..4[ do client.read_char
+				payload_ext_len = client.read_char.lshift(24)
+				payload_ext_len += client.read_char.lshift(16)
+				payload_ext_len += client.read_char.lshift(8)
+				payload_ext_len += client.read_char
 			end
 			if mask_flag != 0 then
-				iter.next
-				var startindex = iter.index
-				mask = msg.substring(startindex,4)
 				if payload_ext_len != 0 then
-					ret_buffer.append(unmask_message(mask, msg.substring(startindex+4, payload_ext_len)))
+					var msg = client.read(payload_ext_len+4)
+					var mask = msg.substring(0,4)
+					_buffer.append(unmask_message(mask, msg.substring(4, payload_ext_len)))
 				else
 					if len == 0 then
-						return ret_buffer.to_s
+						return
 					end
-					ret_buffer.append(unmask_message(mask, msg.substring(startindex+4, len)))
+					var msg = client.read(len+4)
+					var mask = msg.substring(0,4)
+					_buffer.append(unmask_message(mask, msg.substring(4, len)))
 				end
 			end
 		end
-		return ret_buffer.to_s
 	end
 
 	# Unmasks a message sent by a client
@@ -221,20 +219,26 @@ class WebSocket
 	# Checks if a connection to a client is available
 	fun connected: Bool do return client.connected
 
-	# Writes a text message to a client
-	fun write(msg: String)
+	redef fun write(msg: Text)
 	do
-		client.write(frame_message(msg))
+		client.write(frame_message(msg.to_s))
 	end
 
-	# Reads data from a Websocket client
-	fun read: String
+	redef fun is_writable do return client.connected
+
+	redef fun fill_buffer
 	do
-		return unpad_message
+		_buffer.clear
+		_buffer_pos = 0
+		unpad_message
 	end
+
+	redef fun end_reached do return _buffer_pos >= _buffer.length and client.eof
 
 	# Is there some data available to be read ?
-	fun can_read(timeout: Int): Bool do return client.connected and client.ready_to_read(timeout)
+	fun can_read(timeout: Int): Bool do return client.ready_to_read(timeout)
+
+	redef fun poll_in do return client.poll_in
 
 end
 
