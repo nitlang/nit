@@ -101,7 +101,7 @@ class NitIndex
 
 	fun prompt do
 		printn ">> "
-		search(stdin.read_line)
+		search(sys.stdin.read_line)
 	end
 
 	fun search(entry: String) do

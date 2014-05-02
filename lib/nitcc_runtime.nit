@@ -550,7 +550,7 @@ abstract class TestParser
 		var filepath = args.shift
 		var text
 		if filepath == "-" then
-			text = stdin.read_all
+			text = sys.stdin.read_all
 		else if filepath == "-e" then
 			if args.is_empty then
 				print "Error: -e need a text"

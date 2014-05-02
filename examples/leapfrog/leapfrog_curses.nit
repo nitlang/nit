@@ -121,9 +121,9 @@ redef class PlayScene
 		sys.nanosleep(0, 48000000)
 
 		# Keyboard input
-		while stdin.poll_in do
-			if stdin.eof then return
-			var c = stdin.read_char
+		while sys.stdin.poll_in do
+			if sys.stdin.eof then return
+			var c = sys.stdin.read_char
 			if c == 'q'.ascii then
 				self.exists = false
 				return
