@@ -34,8 +34,7 @@ class MPDConnection
 	do
 		var p: nullable Socket = null
 
-		p = new Socket.stream_with_host(host, port)
-		p.connect
+		p = new Socket.client(host, port)
 
 		sys.nanosleep(0,5000)
 

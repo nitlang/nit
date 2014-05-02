@@ -24,7 +24,7 @@ if args.length < 2 then
 	return
 end
 
-var s = new Socket.stream_with_host(args[0], args[1].to_i)
+var s = new Socket.client(args[0], args[1].to_i)
 print "[HOST ADDRESS] : {s.address}"
 print "[HOST] : {s.host}"
 print "[PORT] : {s.port}"

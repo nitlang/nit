@@ -44,7 +44,7 @@ class Socket
 	redef var end_reached = false
 
 	# Creates a socket connection to host `thost` on port `port`
-	init stream_with_host(thost: String, tport: Int)
+	init client(thost: String, tport: Int)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
@@ -62,8 +62,8 @@ class Socket
 		if not end_reached then end_reached = not connect
 	end
 
-	# Creates a server socket on port `tport`
-	init stream_with_port(tport: Int)
+	# Creates a server socket on port `tport`, with a connection queue of size `max`
+	init server(tport: Int, max: Int)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0

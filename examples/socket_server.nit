@@ -24,7 +24,7 @@ if args.is_empty then
 	return
 end
 
-var socket = new Socket.stream_with_port(args[0].to_i)
+var socket = new Socket.server(args[0].to_i, 1)
 print "[PORT] : {socket.port.to_s}"
 
 var clients = new Array[Socket]
