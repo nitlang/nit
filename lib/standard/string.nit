@@ -1177,6 +1177,24 @@ class FlatBuffer
 		end
 		return new_buf
 	end
+
+	redef fun to_upper
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length)
+		for i in self.chars do
+			new_buf.add(i.to_upper)
+		end
+		return new_buf
+	end
+
+	redef fun to_lower
+	do
+		var new_buf = new FlatBuffer.with_capacity(self.length)
+		for i in self.chars do
+			new_buf.add(i.to_lower)
+		end
+		return new_buf
+	end
 end
 
 private class FlatBufferReverseIterator
