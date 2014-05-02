@@ -1,2 +1,2 @@
 default: 
-	../../../bin/nitg --global --stacktrace none --no-main converter.nit
+	../../../bin/nitg --global converter.nit
