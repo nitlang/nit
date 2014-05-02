@@ -14,13 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Targets the Android platform
-#
-# To use this module and compile for Android, you must install the
-# Android SDK (with API level 10) and NDK (with the API level 9).
-# The tools `android`, `ndk-build` and `ant` must be in your PATH.
-#
-# Will, in the near future, provide services specific to Android.
-module android
+module platform is platform("android")
 
-import platform
+import java
+import app
