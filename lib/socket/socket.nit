@@ -23,6 +23,7 @@ import socket_c
 class Socket
 	super BufferedIStream
 	super OStream
+	super PollableIStream
 
 	# IPv4 address the socket is connected to
 	# Formatted as xxx.xxx.xxx.xxx
@@ -93,18 +94,20 @@ class Socket
 		host = null
 	end
 
+	redef fun poll_in do return ready_to_read(0)
+
 	# Returns an array containing an enum of the events ready to be read
 	#
 	# event_types : Combination of several event types to watch
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	#
-	private fun poll_in(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
-		if not still_alive then return new Array[FFSocketPollValues]
+	private fun pollin(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
+		if end_reached then return new Array[FFSocketPollValues]
 		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
 	end
 
-	# Easier use of poll_in to check for something to read on all channels of any priority
+	# Easier use of pollin to check for something to read on all channels of any priority
 	#
 	# timeout : Time in milliseconds before stopping to wait for events
 	#
@@ -114,7 +117,7 @@ class Socket
 		if eof then return false
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollin)
-		return poll_in(events, timeout).length != 0
+		return pollin(events, timeout).length != 0
 	end
 
 	# Checks if the socket still is connected
@@ -125,7 +128,12 @@ class Socket
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollhup)
 		events.push(new FFSocketPollValues.pollerr)
-		return poll_in(events, 0).length == 0
+		if pollin(events, 0).length == 0 then
+			return true
+		else
+			end_reached = true
+			return false
+		end
 	end
 
 	redef fun is_writable do return not end_reached
