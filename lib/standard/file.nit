@@ -178,15 +178,15 @@ end
 
 class Stdin
 	super IFStream
+	super PollableIStream
+
 	private init do
 		_file = new NativeFile.native_stdin
 		path = "/dev/stdin"
 		prepare_buffer(1)
 	end
 
-	# Is these something to read? (non blocking)
-	# FIXME: should be generalized
-	fun poll_in: Bool is extern "file_stdin_poll_in"
+	redef fun poll_in: Bool is extern "file_stdin_poll_in"
 end
 
 class Stdout

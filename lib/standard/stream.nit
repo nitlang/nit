@@ -88,6 +88,15 @@ interface IStream
 	fun eof: Bool is abstract
 end
 
+# IStream capable of declaring if readable without blocking
+interface PollableIStream
+	super IStream
+
+	# Is there something to read? (without blocking)
+	fun poll_in: Bool is abstract
+
+end
+
 # Abstract output stream
 interface OStream
 	super IOS
