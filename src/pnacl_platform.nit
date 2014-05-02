@@ -90,7 +90,6 @@ CXXFLAGS := -pthread -std=gnu++98 $(WARNINGS)
 GETOS := python $(NACL_SDK_ROOT)/tools/getos.py
 OSHELPERS = python $(NACL_SDK_ROOT)/tools/oshelpers.py
 OSNAME := $(shell $(GETOS))
-RM := $(OSHELPERS) rm
 
 PNACL_TC_PATH := $(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl)
 PNACL_CXX := $(PNACL_TC_PATH)/bin/pnacl-clang
@@ -104,12 +103,8 @@ LDFLAGS := -L$(NACL_SDK_ROOT)/lib/pnacl/Release -lppapi_cpp -lppapi
 CYGWIN ?= nodosfilewarning
 export CYGWIN
 
-
 # Declare the ALL target first, to make the 'all' target the default build
 all: ../../{{{outname}}}/{{{app_name}}}.pexe
-
-clean:
-	$(RM) {{{app_name}}}.pexe
 
 {{{app_name}}}.pexe: src/{{{cfiles.join(" src/")}}}
 	$(PNACL_CXX) -o $@ $^ -g -O0 $(CXXFLAGS) $(LDFLAGS) # For Debug
@@ -117,15 +112,6 @@ clean:
 
 ../../{{{outname}}}/{{{app_name}}}.pexe: {{{app_name}}}.pexe
 	$(PNACL_FINALIZE) -o $@ $<
-
-#
-# Makefile target to run the SDK's simple HTTP server and serve this example.
-#
-HTTPD_PY := python $(NACL_SDK_ROOT)/tools/httpd.py
-
-.PHONY: serve
-serve: all
-	$(HTTPD_PY) -C $(CURDIR)
 		""".write_to_file(file)
 
 		### generate the minimal index.html
