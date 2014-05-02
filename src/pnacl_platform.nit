@@ -51,10 +51,7 @@ class PnaclToolchain
 		var app_name = compiler.mainmodule.name
 
 		# create compile_dir
-		var dir = pnacl_project_root
-		if not dir.file_exists then dir.mkdir
-
-		dir = compile_dir
+		var dir = compile_dir
 		if not dir.file_exists then dir.mkdir
 
 		# compile normal C files
