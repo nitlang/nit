@@ -39,7 +39,7 @@ class MPDConnection
 
 		sys.nanosleep(0,5000)
 
-		var rep = p.read
+		var rep = p.read(1024)
 		assert not rep.is_empty
 		if not rep.has_prefix("OK") then
 			print "MPD responded {rep}"
@@ -61,7 +61,7 @@ class MPDConnection
 
 		socket.write(msg)
 		sys.nanosleep(0,5000)
-		var rep = socket.read
+		var rep = socket.read(1024)
 		if not rep.has_prefix("OK") then
 			print "Error: MPD responded {rep}"
 			socket.close
@@ -82,7 +82,7 @@ class MPDConnection
 
 		# get current status
 		socket.write("status\n")
-		var rep = socket.read
+		var rep = socket.read(1024)
 		for l in rep.split_with("\n") do
 			var words = l.split_with(" ")
 			if words.length > 1 then
@@ -153,7 +153,7 @@ class MPDConnection
 		var time: nullable Int = null
 
 		socket.write("currentsong\n")
-		var rep = socket.read
+		var rep = socket.read(1024)
 		for l in rep.split_with("\n") do
 			var words = l.split_with(" ")
 			if words.length > 1 then
