@@ -16,13 +16,13 @@ do
 	function.benchConcatShortString(count)
 
 	var firstTime = clock/clock_resolution
-	print "Time : " + firstTime.to_s + " s"
+	print "Time : {firstTime} s"
 	
 	function.benchConcatLongString(count)
 	
 	var secondTime = clock/clock_resolution
 	var diff = (secondTime - firstTime)
-	print "Time : " + diff.to_s + " s"
+	print "Time : {diff} s"
 end
 
 fun benchFlatBuffer(count: Int)
@@ -31,13 +31,13 @@ do
 	function.benchConcatBufferShortString(count)
 
 	var firstTime = clock/clock_resolution
-	print "Time : " + firstTime.to_s + " s"
+	print "Time : {firstTime} s"
 	
 	function.benchConcatBufferLongString(count)
 	
 	var secondTime = clock/clock_resolution
 	var diff = (secondTime - firstTime)
-	print "Time : " + diff.to_s + " s"
+	print "Time : {diff} s"
 end
 
 fun benchBufferRope(count: Int)
@@ -46,13 +46,13 @@ do
 	function.benchConcatBufferRopeShortString(count)
 
 	var firstTime = clock/clock_resolution
-	print "Time : " + firstTime.to_s + " s"
+	print "Time : {firstTime} s"
 	
 	function.benchConcatBufferRopeLongString(count)
 	
 	var secondTime = clock/clock_resolution
 	var diff = (secondTime - firstTime)
-	print "Time : " + diff.to_s + " s"
+	print "Time : {diff} s"
 end
 
 fun benchImmutableRope(count: Int)
@@ -61,13 +61,13 @@ do
 	function.benchConcatImmutableRopeShortString(count)
 
 	var firstTime = clock/clock_resolution
-	print "Time : " + firstTime.to_s + " s"
+	print "Time : {firstTime} s"
 	
 	function.benchConcatImmutableRopeLongString(count)
 	
 	var secondTime = clock/clock_resolution
 	var diff = (secondTime - firstTime)
-	print "Time : " + diff.to_s + " s"
+	print "Time : {diff} s"
 end
 
 # Main of the script
