@@ -1,12 +1,12 @@
-amodule function
+module function
 
 import ropes
 
-#Class Function which you can implement all micro-bench you need
+# Class Function which you can implement all micro-bench you need
 class Function 
 	fun benchConcatBufferLongString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec FlatBuffer long : length = 72"
+		print "\nBeginning of the concatenation method with FlatBuffer : length = 72"
 	
 		var firstString = new FlatBuffer
 	
@@ -17,7 +17,7 @@ class Function
 	
 	fun benchConcatBufferShortString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec FlatBuffer court : length = 1"
+		print "\nBeginning of the concatenation method with FlatBuffer : length = 1"
 	
 		var firstString = new FlatBuffer
 	
@@ -28,7 +28,7 @@ class Function
 	
 	fun benchConcatShortString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec FlatString court : length = 1"
+		print "\nBeginning of the concatenation method with FlatString : length = 1"
 	
 		var firstString = "a"
 		var secondString = "a"
@@ -40,7 +40,7 @@ class Function
 	
 	fun benchConcatLongString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec FlatString long : length = 72"
+		print "\nBeginning of the concatenation method with FlatString : length = 72"
 	
 		var firstString = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"
 		var secondString = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"
@@ -52,7 +52,7 @@ class Function
 	
 	fun benchConcatBufferRopeShortString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec BufferRope court : length = 1"
+		print "\nBeginning of the concatenation method with BufferRope : length = 1"
 	
 		var firstString = new BufferRope
 	
@@ -63,7 +63,7 @@ class Function
 	
 	fun benchConcatBufferRopeLongString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec BufferRope long : length = 72"
+		print "\nBeginning of the concatenation method with BufferRope : length = 72"
 	
 		var firstString = new BufferRope
 	
@@ -74,7 +74,7 @@ class Function
 	
 	fun benchConcatImmutableRopeShortString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec ImmutableRope court : length = 1"
+		print "\nBeginning of the concatenation method with ImmutableRope : length = 1"
 	
 		var firstString = new ImmutableRope.with_string("a")
 		var secondString = new ImmutableRope.with_string("a")
@@ -86,7 +86,7 @@ class Function
 	
 	fun benchConcatImmutableRopeLongString(count: Int)
 	do
-		print "\nDebut de la méthode de concaténation avec ImmutableRope long : length = 72"
+		print "\nBeginning of the concatenation method with ImmutableRope : length = 72"
 	
 		var firstString = new ImmutableRope.with_string("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
 		var secondString = new ImmutableRope.with_string("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
