@@ -3,3 +3,5 @@ init_linext
 inline
 test_json
 pep8analysis_args
+converter
+pnacl
