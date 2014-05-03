@@ -4,11 +4,11 @@ import function
 	#include <time.h> 
 `}
 
-#Clock function for execution time
+# Clock function for execution time
 fun clock: Int `{ return clock(); `}
 fun clock_resolution: Int `{ return CLOCKS_PER_SEC; `}
 
-#Function for grouping micro-bench which run together
+# Function for grouping micro-bench which run together
 
 fun benchFlatString(count: Int)
 do
@@ -70,14 +70,14 @@ do
 	print "Temps : " + diff.to_s + " s"
 end
 
-#Main of the script
+# Main of the script
 
-print "\nDebut du bench\n"
+print "\nBeginning of the bench\n"
 
 var count = args[0].to_i
 if args[1] == "FlatString" 		then	benchFlatString(count)
 if args[1] == "FlatBuffer" 		then	benchFlatBuffer(count)
 if args[1] == "BufferRope" 		then	benchBufferRope(count)
-if args[1] == "ImmutableRope" 	then	benchImmutableRope(count)
+if args[1] == "ImmutableRope" 		then	benchImmutableRope(count)
 
-print "\nFin du bench\n"
+print "\nend of the bench\n"
