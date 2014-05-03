@@ -85,8 +85,8 @@ THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 NACL_SDK_ROOT ?= $(abspath $(dir $(THIS_MAKEFILE))../../../..)
 
 # Project Build flags
-WARNINGS := -Wno-long-long -Wall -Wswitch-enum -pedantic -Werror
-CXXFLAGS := -pthread -std=gnu++98 $(WARNINGS)
+WARNINGS := -Wall -pedantic -Werror -Wno-long-long -Wno-unused-value -Wno-unused-label -Wno-duplicate-decl-specifier -Wno-switch -Wno-embedded-directive
+CXXFLAGS := -pthread $(WARNINGS)
 
 #
 # Compute tool paths
@@ -98,7 +98,7 @@ OSNAME := $(shell $(GETOS))
 PNACL_TC_PATH := $(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl)
 PNACL_CXX := $(PNACL_TC_PATH)/bin/pnacl-clang
 PNACL_FINALIZE := $(PNACL_TC_PATH)/bin/pnacl-finalize
-CXXFLAGS := -I$(NACL_SDK_ROOT)/include
+CXXFLAGS += -I$(NACL_SDK_ROOT)/include
 LDFLAGS := -L$(NACL_SDK_ROOT)/lib/pnacl/Release -lppapi_cpp -lppapi
 
 #
