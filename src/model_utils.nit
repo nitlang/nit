@@ -290,6 +290,20 @@ redef class MAttribute
 	fun is_nullable: Bool do return intro.static_mtype isa MNullableType
 end
 
+redef class MClassDef
+	# modifiers are keywords like redef, private etc.
+	fun modifiers: Array[String] do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mclass.visibility.to_s
+		end
+		res.add mclass.kind.to_s
+		return res
+	end
+end
+
 # Sorters
 
 # Sort mmodules by their name
