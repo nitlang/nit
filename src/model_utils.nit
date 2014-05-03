@@ -20,6 +20,31 @@ module model_utils
 import modelbuilder
 
 redef class MModule
+
+	# The list of intro mclassdef in the module.
+	# with visibility >= to min_visibility
+	fun intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mclassdef in mclassdefs do
+			if not mclassdef.is_intro then continue
+			if mclassdef.mclass.visibility < min_visibility then continue
+			res.add mclassdef
+		end
+		return res
+	end
+
+	# The list of redef mclassdef in the module.
+	# with visibility >= to min_visibility
+	fun redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mclassdef in mclassdefs do
+			if mclassdef.is_intro then continue
+			if mclassdef.mclass.visibility < min_visibility then continue
+			res.add mclassdef
+		end
+		return res
+	end
+
 	# Get the list of mclasses refined in 'self'.
 	fun redef_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
