@@ -304,6 +304,35 @@ redef class MClassDef
 	end
 end
 
+redef class MPropDef
+	# modifiers are keywords like redef, private etc.
+	fun modifiers: Array[String] do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mproperty.visibility.to_s
+		end
+		var mprop = self
+		if mprop isa MVirtualTypeDef then
+			res.add "type"
+		else if mprop isa MMethodDef then
+			if mprop.is_abstract then
+				res.add "abstract"
+			else if mprop.is_intern then
+				res.add "intern"
+			end
+			if mprop.mproperty.is_init then
+				res.add "init"
+			else
+				res.add "fun"
+			end
+		end
+		return res
+	end
+end
+
+
 # Sorters
 
 # Sort mmodules by their name
