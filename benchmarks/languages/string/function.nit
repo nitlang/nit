@@ -10,7 +10,7 @@ class Function
 	
 		var firstString = new FlatBuffer
 	
-	    for i in [0..count] do
+    		for i in [0..count] do
 			firstString.append("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
 		end
 	end
@@ -21,7 +21,7 @@ class Function
 	
 		var firstString = new FlatBuffer
 	
-	    for i in [0..count] do
+    		for i in [0..count] do
 		  firstString.append("a")
 		end
 	end
@@ -33,7 +33,7 @@ class Function
 		var firstString = "a"
 		var secondString = "a"
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 		  var test = firstString + secondString
 		end
 	end
@@ -45,7 +45,7 @@ class Function
 		var firstString = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"
 		var secondString = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 			var test = firstString + secondString
 		end
 	end
@@ -56,7 +56,7 @@ class Function
 	
 		var firstString = new BufferRope
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 		  firstString.append("a")
 		end
 	end
@@ -67,7 +67,7 @@ class Function
 	
 		var firstString = new BufferRope
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 			firstString.append("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
 		end
 	end
@@ -79,7 +79,7 @@ class Function
 		var firstString = new ImmutableRope.with_string("a")
 		var secondString = new ImmutableRope.with_string("a")
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 		  var test = firstString + secondString
 		end
 	end
@@ -91,7 +91,7 @@ class Function
 		var firstString = new ImmutableRope.with_string("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
 		var secondString = new ImmutableRope.with_string("abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789")
 	
-	    for i in [0..count] do
+	    	for i in [0..count] do
 			var test = firstString + secondString
 		end
 	end
