@@ -61,6 +61,9 @@ class PnaclToolchain
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}"
 
+		var ofiles = new Array[String]
+		for cfile in cfiles do ofiles.add(cfile.substring(0, cfile.length-2) + ".o")
+
 		## Generate makefile
 		var file = "{dir}/Makefile"
 		"""
@@ -76,6 +79,9 @@ NACL_SDK_ROOT ?= $(abspath $(dir $(THIS_MAKEFILE))../../../..)
 # Project Build flags
 WARNINGS := -Wall -pedantic -Werror -Wno-long-long -Wno-unused-value -Wno-unused-label -Wno-duplicate-decl-specifier -Wno-switch -Wno-embedded-directive
 CXXFLAGS := -pthread $(WARNINGS)
+
+CXXFLAGS += -g -O0 # Debug
+# CXXFLAGS += -O3  # Release
 
 #
 # Compute tool paths
@@ -99,9 +105,11 @@ export CYGWIN
 # Declare the ALL target first, to make the 'all' target the default build
 all: ../{{{outname}}}/{{{app_name}}}.pexe
 
-{{{app_name}}}.pexe: src/{{{cfiles.join(" src/")}}}
-	$(PNACL_CXX) -o $@ $^ -g -O0 $(CXXFLAGS) $(LDFLAGS) # For Debug
-	# $(PNACL_CXX) -o $@ $^ -O3 $(CXXFLAGS) $(LDFLAGS) # For Release
+.c.o:
+	$(PNACL_CXX) -c $< -g -O0 $(CXXFLAGS)
+
+{{{app_name}}}.pexe: {{{ofiles.join(" ")}}}
+	$(PNACL_CXX) -o $@ $^ $(LDFLAGS)
 
 ../{{{outname}}}/{{{app_name}}}.pexe: {{{app_name}}}.pexe
 	$(PNACL_FINALIZE) -o $@ $<
