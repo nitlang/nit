@@ -78,10 +78,10 @@ class AndroidToolchain
 	do
 		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
 		var short_project_name = compiler.mainmodule.name
+		var release = toolcontext.opt_release.value
 
 		var app_name = project.name
 		if app_name == null then app_name = compiler.mainmodule.name
-		print app_name
 
 		var app_package = project.java_package
 		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
@@ -149,8 +149,7 @@ $(call import-module,android/native_app_glue)
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
         android:versionCode="{{{project.version_code}}}"
-        android:versionName="{{{app_version}}}"
-        android:debuggable="true">
+        android:versionName="{{{app_version}}}">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk android:minSdkVersion="9" />
@@ -158,7 +157,7 @@ $(call import-module,android/native_app_glue)
     <application
 		android:label="@string/app_name"
 		android:hasCode="true"
-		android:debuggable="true">
+		android:debuggable="{{{not release}}}">
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
@@ -235,16 +234,28 @@ $(call import-module,android/native_app_glue)
 
 	redef fun compile_c_code(compiler, compile_dir)
 	do
+		var release = toolcontext.opt_release.value
+
 		# Compile C code (and thus Nit)
 		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root])
 
 		# Generate the apk
-		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"])
+		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
+		if release then
+			args.add "release"
+		else args.add "debug"
+		toolcontext.exec_and_check(args)
 
 		# Move the apk to the target
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}.apk"
-		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
+
+		var src_apk_suffix
+		if release then
+			src_apk_suffix = "release-unsigned"
+		else src_apk_suffix = "debug"
+
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-{src_apk_suffix}.apk", outname])
 	end
 end
 
