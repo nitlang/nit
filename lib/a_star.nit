@@ -96,6 +96,13 @@ class Node
 	# Main functionnality, returns path from `self` to `dest`
 	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable Path[N]
 	do
+		return path_to_alts(dest, max_cost, context, null)
+	end
+
+	# Find a path to a possible `destination` or a node accepted by `alt_targets`
+	fun path_to_alts(destination: nullable N, max_cost: Int, context: PathContext,
+		alt_targets: nullable TargetCondition[N]): nullable Path[N]
+	do
 		var cost = 0
 
 		var nbr_buckets = context.worst_cost + context.worst_heuristic_cost + 1
@@ -142,7 +149,8 @@ class Node
 				return null
 
 			# at destination
-			else if frontier_node == dest then
+			else if frontier_node == destination or
+			     (alt_targets != null and alt_targets.accept(frontier_node)) then
 				debug "picked {frontier_node}, is destination"
 
 				var path = new Path[N](cost)
@@ -168,13 +176,18 @@ class Node
 					   (peek_node.open and
 					     peek_node.best_cost_up_to > cost + context.cost(link)))
 					then
-
 						peek_node.open = true
 						peek_node.last_pathfinding_evocation = graph.pathfinding_current_evocation
 						peek_node.best_cost_up_to = cost + context.cost(link)
 						peek_node.best_source = frontier_node
 
-						var est_cost = peek_node.best_cost_up_to+context.heuristic_cost(link.from, peek_node)
+						var est_cost
+						if destination != null then
+							est_cost = peek_node.best_cost_up_to + context.heuristic_cost(peek_node, destination)
+						else if alt_targets != null then
+							est_cost = peek_node.best_cost_up_to + alt_targets.heuristic_cost(peek_node, link)
+						else est_cost = 0
+
 						var at_bucket = buckets[est_cost % nbr_buckets]
 						at_bucket.add(peek_node)
 
@@ -332,4 +345,13 @@ class WeightedLink
 
 		self.weight = weight
 	end
+end
+
+# Advanced path conditions with customizable accept states
+class TargetCondition[N: Node]
+	# Should the pathfinding accept `node` as a goal?
+	fun accept(node: N): Bool is abstract
+
+	# Approximate cost from `node` to an accept state
+	fun heuristic_cost(node: N, link: Link): Int is abstract
 end
