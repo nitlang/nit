@@ -255,7 +255,7 @@ redef class AExternPropdef
 
 		var block = n_extern_code_block
 		if block != null and block.is_java then
-			insert_articifial_callbacks(toolcontext)
+			insert_artificial_callbacks(toolcontext)
 		end
 	end
 
@@ -265,7 +265,7 @@ redef class AExternPropdef
 	# but will be used mainly by the FFI itself.
 	#
 	# The developper can aso customize the JNIEnv used by the FFI by redefing `Sys::jni_env`.
-	private fun insert_articifial_callbacks(toolcontext: ToolContext)
+	private fun insert_artificial_callbacks(toolcontext: ToolContext)
 	do
 		var fcc = foreign_callbacks
 		assert fcc != null
