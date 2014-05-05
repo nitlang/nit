@@ -60,11 +60,11 @@ class JavaLanguage
 	jmethodID java_meth_id;
 
 	// retrieve the current JVM
-	Sys sys = {{{mmodule.name}}}___Pointer_sys(NULL);
-	JNIEnv *nit_ffi_jni_env = {{{mmodule.name}}}___Sys_jni_env(sys);
+	Sys sys = Pointer_sys(NULL);
+	JNIEnv *nit_ffi_jni_env = Sys_jni_env(sys);
 
 	// retrieve the implementation Java class
-	java_class = {{{mmodule.name}}}___Sys_load_jclass(sys, "{{{mmodule.impl_java_class_name}}}");
+	java_class = Sys_load_jclass(sys, "{{{mmodule.impl_java_class_name}}}");
 	if (java_class == NULL) {
 		fprintf(stderr, "Nit FFI with Java error: failed to load class.\\n");
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
@@ -270,6 +270,12 @@ redef class AExternPropdef
 		var modelbuilder = toolcontext.modelbuilder
 		var mmodule = mpropdef.mclassdef.mmodule
 
+		# We use callbacks from the C FFI since they will be called from generated C
+		var c_language_visitor = toolcontext.ffi_language_assignation_phase.as(FFILanguageAssignationPhase).c_language
+		if not mmodule.ffi_callbacks.keys.has(c_language_visitor) then
+			mmodule.ffi_callbacks[c_language_visitor] = new HashSet[NitniCallback]
+		end
+
 		# Pointer::sys
 		var pointer_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Pointer")
 		assert pointer_class != null
@@ -278,7 +284,7 @@ redef class AExternPropdef
 
 		var explicit_call = new MExplicitCall(pointer_class.mclass_type, pointer_sys_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
-		explicit_call.fill_type_for(fcc, mmodule)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
 
 		# Sys::jni_env
 		var sys_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Sys")
@@ -289,7 +295,7 @@ redef class AExternPropdef
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_env_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
-		explicit_call.fill_type_for(fcc, mmodule)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
 
 		# Sys::load_jclass
 		var sys_jni_load_jclass_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "load_jclass")
@@ -298,6 +304,7 @@ redef class AExternPropdef
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_load_jclass_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
 		explicit_call.fill_type_for(fcc, mmodule)
 	end
 end
