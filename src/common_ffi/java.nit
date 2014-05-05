@@ -182,7 +182,7 @@ class JavaLanguage
 	redef fun compile_callback(callback, mmodule, mainmodule, ccu)
 	do
 		ffi_ccu = ccu
-		callback.compile_callback_to_java(mmodule, ccu)
+		callback.compile_callback_to_java(mmodule, mainmodule, ccu)
 	end
 end
 
@@ -381,7 +381,7 @@ end
 
 redef class NitniCallback
 	# Compile C and Java code to implement this callback
-	fun compile_callback_to_java(mmodule: MModule, ccu: CCompilationUnit) do end
+	fun compile_callback_to_java(mmodule: MModule, mainmodule: MModule, ccu: CCompilationUnit) do end
 
 	# Returns the list of C functions to link with extern Java methods, as required
 	# to enable this callback from Java code.
@@ -393,7 +393,7 @@ redef class NitniCallback
 end
 
 redef class MExplicitCall
-	redef fun compile_callback_to_java(mmodule, ccu)
+	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
@@ -401,11 +401,11 @@ redef class MExplicitCall
 		# In C, indirection implementing the Java extern methods
 		var csignature = mproperty.build_c_implementation_signature(recv_mtype, mmodule, "___indirect", long_signature, from_java_call_context)
 		var cf = new CFunction("JNIEXPORT {csignature}")
-		cf.exprs.add "\t{mproperty.build_ccall(recv_mtype, mmodule, null, long_signature, from_java_call_context, null)}\n"
+		cf.exprs.add "\t{mproperty.build_ccall(recv_mtype, mainmodule, null, long_signature, from_java_call_context, null)}\n"
 		ccu.add_local_function cf
 
 		# In Java, declare the extern method as a private static local method
-		var java_signature = mproperty.build_csignature(recv_mtype, mmodule, null, short_signature, java_call_context)
+		var java_signature = mproperty.build_csignature(recv_mtype, mainmodule, null, short_signature, java_call_context)
 		mmodule.java_file.class_content.add "private native static {java_signature};\n"
 	end
 
