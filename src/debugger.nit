@@ -278,7 +278,7 @@ class Debugger
 		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
 			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
 			self.parameter_check(npropdef, mpropdef, args)
-			if npropdef isa AConcreteMethPropdef then
+			if npropdef isa AMethPropdef then
 				return npropdef.rt_call(self, mpropdef, args)
 			else
 				print "Error, invalid propdef to call at runtime !"
@@ -1364,7 +1364,7 @@ class Debugger
 
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 
 	# Same as call except it will copy local variables of the parent frame to the frame defined in this call.
 	# Not supposed to be used by anyone else than the Debugger.

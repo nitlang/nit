@@ -399,21 +399,23 @@ redef class AMethPropdef
 
 	redef fun build_property(modelbuilder, nclassdef)
 	do
-		var is_init = self isa AInitPropdef
+		var n_kwinit = n_kwinit
+		var n_kwnew = n_kwnew
+		var is_init = n_kwinit != null or n_kwnew != null
 		var mclassdef = nclassdef.mclassdef.as(not null)
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
 		if amethodid == null then
-			if self isa AMainMethPropdef then
+			if not is_init then
 				name = "main"
 				name_node = self
-			else if self isa AConcreteInitPropdef then
+			else if n_kwinit != null then
 				name = "init"
-				name_node = self.n_kwinit
-			else if self isa AExternInitPropdef then
+				name_node = n_kwinit
+			else if n_kwnew != null then
 				name = "init"
-				name_node = self.n_kwnew
+				name_node = n_kwnew
 			else
 				abort
 			end
@@ -436,7 +438,7 @@ redef class AMethPropdef
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
-			mprop.is_new = self isa AExternInitPropdef
+			mprop.is_new = n_kwnew != null
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
 			if n_kwredef == null then
@@ -555,6 +557,7 @@ redef class AMethPropdef
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
 		mpropdef.is_intern = self isa AInternMethPropdef
+		mpropdef.is_extern = self isa AExternPropdef
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)

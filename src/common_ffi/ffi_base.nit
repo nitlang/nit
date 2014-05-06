@@ -41,7 +41,7 @@ class FFILanguageAssignationPhase
 
 	redef fun process_npropdef(npropdef)
 	do
-		if npropdef isa AExternPropdef then
+		if npropdef isa AMethPropdef then
 			var code_block = npropdef.n_extern_code_block
 			if code_block != null then
 				verify_foreign_code_on_node( code_block )
@@ -111,7 +111,7 @@ class FFILanguage
 	fun compile_module_block(block: AExternCodeBlock, ecc: CCompilationUnit, nmodule: AModule) is abstract
 
 	# Generate wrapper code for this extern method
-	fun compile_extern_method(block: AExternCodeBlock, m: AExternPropdef,
+	fun compile_extern_method(block: AExternCodeBlock, m: AMethPropdef,
 		ecc: CCompilationUnit, nmodule: AModule) is abstract
 
 	# Generate wrapper code for this extern class

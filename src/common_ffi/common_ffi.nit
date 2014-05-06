@@ -101,7 +101,7 @@ redef class AModule
 	end
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	private var ffi_has_been_compiled = false
 
 	# Compile the necessary wrapper around this extern method or constructor
@@ -127,7 +127,7 @@ redef class VerifyNitniCallbacksPhase
 	do
 		super
 
-		if not npropdef isa AExternPropdef then return
+		if not npropdef isa AMethPropdef then return
 
 		var code_block = npropdef.n_extern_code_block
 		if code_block == null then return
