@@ -493,7 +493,7 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return "Object"
-		if mclass.name == "Bool" then return "Bool"
+		if mclass.name == "Bool" then return "Boolean"
 		if mclass.name == "Char" then return "Char"
 		if mclass.name == "Int" then return "Int"
 		if mclass.name == "Float" then return "Double"
