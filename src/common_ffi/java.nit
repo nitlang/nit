@@ -528,6 +528,7 @@ redef class MMethod
 		else
 			var return_mtype = msignature.return_mtype
 			if return_mtype != null then
+				return_mtype = return_mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
 				format.add return_mtype.jni_format
 			else format.add "V"
 		end
