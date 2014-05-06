@@ -245,7 +245,7 @@ end
 redef class MModule
 	# Name of the generated Java class where to store all implementation methods of this module
 	# as well as generated callbacks.
-	private fun impl_java_class_name: String do return "NitFFIWithJava_{name}"
+	private fun impl_java_class_name: String do return "Nit_{name}"
 end
 
 redef class AExternPropdef
