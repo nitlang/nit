@@ -136,6 +136,8 @@ class JavaLanguage
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
+
+	(*nit_ffi_jni_env)->DeleteLocalRef(nit_ffi_jni_env, java_class);
 """
 
 		if return_type != null then
