@@ -136,6 +136,8 @@ class JavaLanguage
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
+
+	(*nit_ffi_jni_env)->DeleteLocalRef(nit_ffi_jni_env, java_class);
 """
 
 		if return_type != null then
@@ -167,7 +169,7 @@ class JavaLanguage
 		nmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		nmodule.ensure_linking_callback_methods(ffi_ccu, self.callbacks)
+		nmodule.ensure_linking_callback_methods(ffi_ccu, nmodule.ffi_callbacks[self])
 
 		# Java implementation code
 		var java_file = nmodule.java_file
@@ -176,13 +178,11 @@ class JavaLanguage
 		nmodule.ffi_files.add(extern_java_file)
 	end
 
-	var callbacks = new HashSet[NitniCallback] # HACK
 	var ffi_ccu: CCompilationUnit # HACK
 
 	redef fun compile_callback(callback, nmodule, mainmodule, ccu)
 	do
 		ffi_ccu = ccu
-		callbacks.add callback
 		callback.compile_callback_to_java(nmodule, ccu)
 	end
 end
@@ -245,7 +245,7 @@ end
 redef class MModule
 	# Name of the generated Java class where to store all implementation methods of this module
 	# as well as generated callbacks.
-	private fun impl_java_class_name: String do return "NitFFIWithJava_{name}"
+	private fun impl_java_class_name: String do return "Nit_{name}"
 end
 
 redef class AExternPropdef
@@ -255,7 +255,7 @@ redef class AExternPropdef
 
 		var block = n_extern_code_block
 		if block != null and block.is_java then
-			insert_articifial_callbacks(toolcontext)
+			insert_artificial_callbacks(toolcontext)
 		end
 	end
 
@@ -265,7 +265,7 @@ redef class AExternPropdef
 	# but will be used mainly by the FFI itself.
 	#
 	# The developper can aso customize the JNIEnv used by the FFI by redefing `Sys::jni_env`.
-	private fun insert_articifial_callbacks(toolcontext: ToolContext)
+	private fun insert_artificial_callbacks(toolcontext: ToolContext)
 	do
 		var fcc = foreign_callbacks
 		assert fcc != null
@@ -493,7 +493,7 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return "Object"
-		if mclass.name == "Bool" then return "Bool"
+		if mclass.name == "Bool" then return "Boolean"
 		if mclass.name == "Char" then return "Char"
 		if mclass.name == "Int" then return "Int"
 		if mclass.name == "Float" then return "Double"
@@ -530,6 +530,7 @@ redef class MMethod
 		else
 			var return_mtype = msignature.return_mtype
 			if return_mtype != null then
+				return_mtype = return_mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
 				format.add return_mtype.jni_format
 			else format.add "V"
 		end

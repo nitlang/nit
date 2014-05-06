@@ -680,17 +680,25 @@ redef class Sys
 		// Return the values to Nit
 		Sys_class_loader__assign(recv, JavaObject_as_nullable((*env)->NewGlobalRef(env, instance_class_loader)));
 		Sys_class_loader_method__assign(recv, JMethodID_as_nullable(class_class_loader_findClass));
+
+		// Clean up
+		(*env)->DeleteLocalRef(env, class_activity);
+		(*env)->DeleteLocalRef(env, instance_class_loader);
+		(*env)->DeleteLocalRef(env, class_class_loader);
 	`}
 
 	private fun load_jclass_intern(instance_class_loader: JavaObject, class_loader_findClass: JMethodID, name: NativeString): JClass import jni_env `{
 		JNIEnv *env = Sys_jni_env(recv);
-		
-		jclass java_class = (*env)->CallObjectMethod(env, instance_class_loader, class_loader_findClass, (*env)->NewStringUTF(env, name));
+		jobject class_name = (*env)->NewStringUTF(env, name);
+
+		jclass java_class = (*env)->CallObjectMethod(env, instance_class_loader, class_loader_findClass, class_name);
 		if (java_class == NULL) {
 			__android_log_print(ANDROID_LOG_ERROR, "Nit", "loading targetted class");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
+
+		(*env)->DeleteLocalRef(env, class_name);
 
 		return java_class;
 	`}

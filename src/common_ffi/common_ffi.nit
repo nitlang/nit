@@ -45,9 +45,6 @@ redef class AModule
 	# Foreign language used in this AModule
 	private var present_languages = new HashSet[FFILanguage]
 
-	# Callbacks used locally
-	var ffi_callbacks = new HashMap[FFILanguage, Set[NitniCallback]]
-
 	# Ensures all of the general foreign code of the module has been analyzed.
 	# Manages header blocks, extern class types and foreign dependancies between modules
 	fun ensure_compile_ffi_wrapper
