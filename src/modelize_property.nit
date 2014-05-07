@@ -948,6 +948,7 @@ redef class ATypePropdef
 
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		set_doc(mpropdef)
 	end
 
