@@ -301,8 +301,12 @@ class Debugger
 		var local_toolctx = modelbuilder.toolcontext
 		local_toolctx.dbg = self
 		var e = local_toolctx.parse_something(nit_code)
+		if e isa ABlockExpr then
+			nit_code = "module rt_module\n" + nit_code
+			e = local_toolctx.parse_something(nit_code)
+		end
 		if e isa AExpr then
-			nit_code = "print " + nit_code
+			nit_code = "module rt_module\nprint " + nit_code
 			e = local_toolctx.parse_something(nit_code)
 		end
 		if e isa AModule then

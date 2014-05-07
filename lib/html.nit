@@ -96,8 +96,8 @@ class HTMLTag
 
 	# Is the HTML element a void element?
 	#
-	#     assert new HTMLTag("img").is_void    == true
-	#     assert new HTMLTag("p").is_void      == false
+	#     assert (new HTMLTag("img")).is_void    == true
+	#     assert (new HTMLTag("p")).is_void      == false
 	var is_void: Bool
 
 	init with_attrs(tag: String, attrs: Map[String, String]) do
@@ -224,11 +224,13 @@ class HTMLTag
 	end
 
 	# Append raw HTML to element
+	#
 	#     var p = new HTMLTag("p")
 	#     p.append("Hello")
-	#     p.add_raw_html("<bla/>")
-	#     p.html #- "<p>Hello<bla/></p>"
-	# Note: the HTML in insered as it, no verification is done
+	#     p.add_raw_html("<bla/>foo")
+	#     assert p.write_to_string   == "<p>Hello<bla/>foo</p>"
+	#
+	# Note: the HTML in insered as it, no verification is done.
 	fun add_raw_html(txt: String): HTMLTag do
 		add(new HTMLRaw(txt))
 		return self

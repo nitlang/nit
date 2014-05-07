@@ -64,7 +64,7 @@ redef class ToolContext
 			mainmodule = mmodules.first
 		else
 			# We need a main module, so we build it by importing all modules
-			mainmodule = new MModule(modelbuilder.model, null, "<main>", new Location(null, 0, 0, 0, 0))
+			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name, new Location(null, 0, 0, 0, 0))
 			mainmodule.set_imported_mmodules(mmodules)
 		end
 		for phase in phases_list do
@@ -79,7 +79,7 @@ redef class Phase
 	# Called by the `ToolContext::run_global_phases`.
 	#
 	# `mainmodule` is the main module of the program.
-	# It could be an implicit module (called "<main>").
+	# It could be an implicit module (called like the first given_mmodules).
 	#
 	# `given_modules` is the list of explicitely requested modules.
 	# from the command-line for instance.
@@ -468,11 +468,20 @@ class ModelBuilder
 			return mgroups[rdp]
 		end
 
-		# Hack, a dir is determined by the presence of a honomymous nit file
+		# Hack, a group is determined by:
+		# * the presence of a honomymous nit file
+		# * the fact that the directory is named `src`
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
-		if not mp.file_exists then return null
+		if not mp.file_exists then
+			if pn == "src" then
+				# With a src directory, the group name is the name of the parent directory
+				pn = rdp.dirname.basename("")
+			else
+				return null
+			end
+		end
 
 		# check parent directory
 		var parentpath = dirpath.join_path("..").simplify_path

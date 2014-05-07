@@ -76,6 +76,9 @@ end
 
 redef class AModule
 	var ffi_files = new Array[ExternFile]
+
+	# Callbacks used by this module, classified by language
+	var ffi_callbacks = new HashMap[FFILanguage, Set[NitniCallback]]
 end
 
 redef class AExternCodeBlock

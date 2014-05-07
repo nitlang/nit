@@ -93,6 +93,15 @@ redef class ToolContext
 	# - a block of statements `ABlockExpr`
 	# - a full module `AModule`
 	# - a `AError` if nothing else matches
+	#
+	#     var tc = new ToolContext
+	#     assert tc.parse_something("foo") isa TId
+	#     assert tc.parse_something("foo[bar]") isa AExpr
+	#     assert tc.parse_something("Foo[Bar]") isa AType
+	#     assert tc.parse_something("foo\nbar") isa ABlockExpr
+	#     assert tc.parse_something("fun foo do bar\nfoo") isa AModule
+	#     assert tc.parse_something("fun fun") isa AParserError
+	#     assert tc.parse_something("?%^&") isa ALexerError
 	fun parse_something(string: String): ANode
 	do
 		var source = new SourceFile.from_string("", string)
@@ -141,6 +150,8 @@ redef class ToolContext
 
 		lexer = new InjectedLexer(source)
 		lexer.injected_before.add new TKwdo
+		lexer.injected_before.add new TEol
+		lexer.injected_after.add new TEol
 		lexer.injected_after.add new TKwend
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
@@ -159,6 +170,37 @@ redef class ToolContext
 		if eof.location > error.location then error = eof
 
 		return error
+	end
+
+	# Parse the input of the user as something
+	fun interactive_parse(prompt: String): ANode
+	do
+		var oldtext = ""
+
+		loop
+			printn prompt
+			printn " "
+			var s = stdin.read_line
+			if s == "" then continue
+			if s.chars.first == ':' then
+				var res = new TString
+				res.text = s
+				return res
+			end
+
+			var text = oldtext + s + "\n"
+			oldtext = ""
+			var n = parse_something(text)
+
+			if n isa AParserError and n.token isa EOF then
+				# Unexpected end of file, thus continuing
+				if oldtext == "" then prompt = "." * prompt.length
+				oldtext = text
+				continue
+			end
+
+			return n
+		end
 	end
 end
 

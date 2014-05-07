@@ -206,17 +206,25 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	else
+	elif [ -s out/$pattern.res ]; then
 		if [ -n "$tap" ]; then
-			echo "ok - $description # skip no sav"
+			echo "no ok - $description"
 		else
-			echo "[=== no sav ===] out/$pattern.res"
+			echo "[=== no sav ===] out/$pattern.res is not empty"
 		fi
-		echo >>$xml "<skipped/>"
+		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
+	else
+		# no sav but empty res
+		if [ -n "$tap" ]; then
+			echo "ok - $description"
+		else
+			echo "[0k] out/$pattern.res is empty"
+		fi
+		ok="$ok $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
@@ -237,6 +245,35 @@ need_skip()
 			echo "=> $2: [skip]"
 		fi
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
+		return 0
+	fi
+	if test $engine = niti && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
+		((tapcount=tapcount+1))
+		if [ -n "$tap" ]; then
+			echo "ok - $2 # skip"
+		else
+			echo "=> $2: [skip exec]"
+		fi
+		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
+		return 0
+	fi
+	return 1
+}
+
+skip_exec()
+{
+	test "$noskip" = true && return 1
+	if echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
+		echo -n "_ "
+		return 0
+	fi
+	return 1
+}
+
+skip_cc()
+{
+	test "$noskip" = true && return 1
+	if echo "$1" | grep -f "cc.skip" >/dev/null 2>&1; then
 		return 0
 	fi
 	return 1
@@ -411,13 +448,18 @@ END
 			> "$ff.compile.log"
 			ERR=0
 		else
+			if skip_cc "$bf"; then
+				nocc="--no-cc"
+			else
+				nocc=
+			fi
 			# Compile
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -427,6 +469,15 @@ END
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
+			process_result $bf $bf $pack
+		elif skip_exec "$bf"; then
+			# No exec
+			> "$ff.res"
+			process_result $bf $bf $pack
+		elif [ -n "$nocc" ]; then
+			# not compiled
+			test -z "$tap" && echo -n "nocc "
+			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
 			test -z "$tap" && echo -n ". "
