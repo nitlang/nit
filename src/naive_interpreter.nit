@@ -572,11 +572,11 @@ redef class ANode
 	private fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
-			stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
+			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
-			stderr.write("{location}: Runtime error: {message}\n{location.colored_line("0;31")}\n")
-			stderr.write(v.stack_trace)
-			stderr.write("\n")
+			sys.stderr.write("{location}: Runtime error: {message}\n{location.colored_line("0;31")}\n")
+			sys.stderr.write(v.stack_trace)
+			sys.stderr.write("\n")
 		end
 		exit(1)
 	end
@@ -833,11 +833,11 @@ redef class AExternInitPropdef
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
 		if pname == "native_stdout" then
-			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stdout)
+			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdout)
 		else if pname == "native_stdin" then
-			return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, stdin)
+			return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdin)
 		else if pname == "native_stderr" then
-			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, stderr)
+			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stderr)
 		else if pname == "io_open_read" then
 			var a1 = args[1].val.as(Buffer)
 			return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))

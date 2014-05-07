@@ -88,6 +88,15 @@ interface IStream
 	fun eof: Bool is abstract
 end
 
+# IStream capable of declaring if readable without blocking
+interface PollableIStream
+	super IStream
+
+	# Is there something to read? (without blocking)
+	fun poll_in: Bool is abstract
+
+end
+
 # Abstract output stream
 interface OStream
 	super IOS
@@ -146,24 +155,20 @@ abstract class BufferedIStream
 
 	redef fun read(i)
 	do
-		var s = new FlatBuffer.with_capacity(i)
-		var j = _buffer_pos
-		var k = _buffer.length
-		while i > 0 do
-			if j >= k then
+		if _buffer.length == _buffer_pos then
+			if not eof then
 				fill_buffer
-				if eof then return s.to_s
-				j = _buffer_pos
-				k = _buffer.length
+				return read(i)
 			end
-			while j < k and i > 0 do
-				s.add(_buffer.chars[j])
-				j +=  1
-				i -= 1
-			end
+			return ""
 		end
-		_buffer_pos = j
-		return s.to_s
+		if _buffer_pos + i >= _buffer.length then
+			var from = _buffer_pos
+			_buffer_pos = _buffer.length
+			return _buffer.substring_from(from).to_s
+		end
+		_buffer_pos += i
+		return _buffer.substring(_buffer_pos - i, i).to_s
 	end
 
 	redef fun read_all
