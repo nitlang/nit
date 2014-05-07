@@ -58,7 +58,7 @@ module a_star
 redef class Object
 	protected fun debug_a_star: Bool do return false
 	private fun debug(msg: String) do if debug_a_star then
-		stderr.write "a_star debug: {msg}\n"
+		sys.stderr.write "a_star debug: {msg}\n"
 	end
 end
 

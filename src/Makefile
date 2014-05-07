@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_server ../bin/nitdbg_client
+all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_client
 
 ../bin/nitg: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
@@ -34,7 +34,7 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 
 ../bin/nitmetrics: ../bin/nitg
 	@echo '***************************************************************'
-	@echo '* Compile nitmetrics from NIT source files                      *'
+	@echo '* Compile nitmetrics from NIT source files                     *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
@@ -48,17 +48,10 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 
 ../bin/nitdbg_client : ../bin/nitg
 	@echo '***************************************************************'
-	@echo '* Compile nitdbg_client from NIT source files                      *'
+	@echo '* Compile nitdbg_client from NIT source files                 *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_client -v nitdbg_client.nit
-
-../bin/nitdbg_server : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdbg_server from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_server -v nitdbg_server.nit
 
 ../bin/nitx: ../bin/nitg
 	@echo '***************************************************************'

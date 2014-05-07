@@ -19,24 +19,51 @@ module nit
 
 import naive_interpreter
 import debugger
-import debugger_commons
 
-redef class InterpretCommons
+# Create a tool context to handle options and paths
+var toolcontext = new ToolContext
+toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets and debbugs Nit programs."
+# Add an option "-o" to enable compatibilit with the tests.sh script
+var opt = new OptionString("compatibility (does noting)", "-o")
+toolcontext.option_context.add_option(opt)
+var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+toolcontext.option_context.add_option(opt_mixins)
+# We do not add other options, so process them now!
+toolcontext.process_options(args)
 
-	redef fun launch
-	do
-		super
-		var self_mm = mainmodule.as(not null)
-		var self_args = arguments.as(not null)
-		if toolcontext.opt_debugger_autorun.value then
-			modelbuilder.run_debugger_autorun(self_mm, self_args)
-		else if toolcontext.opt_debugger_mode.value then
-			modelbuilder.run_debugger(self_mm, self_args)
-		else
-			modelbuilder.run_naive_interpreter(self_mm, self_args)
-		end
-	end
+# We need a model to collect stufs
+var model = new Model
+# An a model builder to parse files
+var modelbuilder = new ModelBuilder(model, toolcontext.as(not null))
 
+var arguments = toolcontext.option_context.rest
+var progname = arguments.first
+
+# Here we load an process all modules passed on the command line
+var mmodules = modelbuilder.parse([progname])
+mmodules.add_all modelbuilder.parse(opt_mixins.value)
+modelbuilder.run_phases
+
+if toolcontext.opt_only_metamodel.value then exit(0)
+
+var mainmodule: nullable MModule
+
+# Here we launch the interpreter on the main module
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+	mainmodule.set_imported_mmodules(mmodules)
 end
 
-(new InterpretCommons).launch
+var self_mm = mainmodule.as(not null)
+var self_args = arguments.as(not null)
+
+if toolcontext.opt_debugger_autorun.value then
+	modelbuilder.run_debugger_autorun(self_mm, self_args)
+else if toolcontext.opt_debugger_mode.value then
+	modelbuilder.run_debugger(self_mm, self_args)
+else
+	modelbuilder.run_naive_interpreter(self_mm, self_args)
+end
+

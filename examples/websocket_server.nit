@@ -23,22 +23,23 @@ var sock = new WebSocket(8088, 1)
 
 var msg: String
 
-if not sock.listener.still_alive then
+if sock.listener.eof then
 	print sys.errno.strerror
 end
 
 sock.accept
 
-while sock.listener.still_alive do
+while not sock.listener.eof do
 	if not sock.connected then sock.accept
-	if stdin.poll_in then
+	if sys.stdin.poll_in then
 		msg = gets
-		if msg == "exit" then sock.stop_server
+		printn "Received message : {msg}"
+		if msg == "exit" then sock.close
 		if msg == "disconnect" then sock.disconnect_client
 		sock.write(msg)
 	end
 	if sock.can_read(10) then
-		msg = sock.read
+		msg = sock.read_line
 		if msg != "" then print msg
 	end
 end

@@ -180,7 +180,7 @@ redef class ToolContext
 		loop
 			printn prompt
 			printn " "
-			var s = stdin.read_line
+			var s = sys.stdin.read_line
 			if s == "" then continue
 			if s.chars.first == ':' then
 				var res = new TString

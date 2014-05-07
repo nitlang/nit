@@ -90,9 +90,9 @@ class ToolContext
 
 			for m in messages do
 				if opt_no_color.value then
-					stderr.write("{m}\n")
+					sys.stderr.write("{m}\n")
 				else
-					stderr.write("{m.to_color_string}\n")
+					sys.stderr.write("{m.to_color_string}\n")
 				end
 			end
 
