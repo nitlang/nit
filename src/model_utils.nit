@@ -20,6 +20,31 @@ module model_utils
 import modelbuilder
 
 redef class MModule
+
+	# The list of intro mclassdef in the module.
+	# with visibility >= to min_visibility
+	fun intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mclassdef in mclassdefs do
+			if not mclassdef.is_intro then continue
+			if mclassdef.mclass.visibility < min_visibility then continue
+			res.add mclassdef
+		end
+		return res
+	end
+
+	# The list of redef mclassdef in the module.
+	# with visibility >= to min_visibility
+	fun redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mclassdef in mclassdefs do
+			if mclassdef.is_intro then continue
+			if mclassdef.mclass.visibility < min_visibility then continue
+			res.add mclassdef
+		end
+		return res
+	end
+
 	# Get the list of mclasses refined in 'self'.
 	fun redef_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
@@ -264,6 +289,49 @@ redef class MAttribute
 	# because this type can be redefined in subclasses
 	fun is_nullable: Bool do return intro.static_mtype isa MNullableType
 end
+
+redef class MClassDef
+	# modifiers are keywords like redef, private etc.
+	fun modifiers: Array[String] do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mclass.visibility.to_s
+		end
+		res.add mclass.kind.to_s
+		return res
+	end
+end
+
+redef class MPropDef
+	# modifiers are keywords like redef, private etc.
+	fun modifiers: Array[String] do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mproperty.visibility.to_s
+		end
+		var mprop = self
+		if mprop isa MVirtualTypeDef then
+			res.add "type"
+		else if mprop isa MMethodDef then
+			if mprop.is_abstract then
+				res.add "abstract"
+			else if mprop.is_intern then
+				res.add "intern"
+			end
+			if mprop.mproperty.is_init then
+				res.add "init"
+			else
+				res.add "fun"
+			end
+		end
+		return res
+	end
+end
+
 
 # Sorters
 
