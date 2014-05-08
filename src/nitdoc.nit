@@ -984,22 +984,23 @@ class NitdocClass
 			var stpl = new TplConcernList
 			for mmodule in mmodules do
 				# concerns list
-				var mctpl = new TplConcernListElt
-				mctpl.anchor = "#{mmodule.nitdoc_anchor}"
-				mctpl.name = mmodule.nitdoc_name
-				if mmodule.mdoc != null then
-					mctpl.comment = mmodule.mdoc.short_comment
+				if mmodule != owner then
+					var mctpl = new TplConcernListElt
+					mctpl.anchor = "#{mmodule.nitdoc_anchor}"
+					mctpl.name = mmodule.nitdoc_name
+					if mmodule.mdoc != null then
+						mctpl.comment = mmodule.mdoc.short_comment
+					end
+					stpl.elts.add mctpl
+					# concern section
+					var cctpl = new TplConcern
+					cctpl.anchor = mmodule.nitdoc_anchor
+					cctpl.concern = mmodule.tpl_link
+					if mmodule.mdoc != null then
+						cctpl.comment = mmodule.mdoc.short_comment
+					end
+					mtpl.add cctpl
 				end
-				stpl.elts.add mctpl
-				# concern sectionm
-				var cctpl = new TplConcern
-				cctpl.anchor = mmodule.nitdoc_anchor
-				cctpl.concern = mmodule.tpl_link
-				if mmodule.mdoc != null then
-					cctpl.comment = mmodule.mdoc.short_comment
-				end
-				mtpl.add cctpl
-
 				var mprops = module_map[mmodule].to_a
 				prop_sorter.sort mprops
 				for mprop in mprops do mtpl.add tpl_mpropdef_article(mprop)

@@ -643,6 +643,7 @@ class TplConcernList
 	var elts = new Array[TplConcernElt]
 
 	redef fun rendering do
+		if elts.is_empty then return
 		add "<ul>"
 		for elt in elts do
 			add elt
