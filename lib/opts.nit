@@ -31,6 +31,9 @@ abstract class Option
 	# Is this option mandatory?
 	var mandatory: Bool writable
 
+	# Is this option hidden?
+	var hidden: Bool writable
+
 	# Has this option been read?
 	var read: Bool writable
 
@@ -50,6 +53,7 @@ abstract class Option
 		end
 		helptext = help
 		mandatory = false
+		hidden = false
 		read = false
 		default_value = default
 		value = default
@@ -261,8 +265,8 @@ class OptionContext
 			if lmax < l then lmax = l
 		end
 
-		for i in options do
-			print(i.pretty(lmax))
+		for opt in options do
+			if not opt.hidden then print(opt.pretty(lmax))
 		end
 	end
 
