@@ -163,6 +163,13 @@ class POSet[E: Object]
 		if res != 0 then return res
 		return elements[a].count <=> elements[b].count
 	end
+
+	# Sort a sorted array of poset elements using linearization order
+	fun linearize(elements: Collection[E]): Array[E] do
+		var lin = elements.to_a
+		sort(lin)
+		return lin
+	end
 end
 
 # View of an objet in a poset
