@@ -25,6 +25,7 @@
 module layout_builders
 
 import abstract_compiler
+import coloring
 
 # Layouts
 
@@ -747,5 +748,14 @@ class ResolutionHasher
 		result.masks = self.compute_masks(elements, ids)
 		result.hashes = self.compute_hashes(elements, ids, result.masks)
 		return result
+	end
+end
+
+redef class POSetColorer[E]
+	fun to_layout: Layout[E] do
+		var layout = new Layout[E]
+		layout.ids = self.ids
+		layout.pos = self.colors
+		return layout
 	end
 end
