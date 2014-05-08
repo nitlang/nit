@@ -38,14 +38,15 @@ redef class MModule
 		var v = compiler.new_visitor
 		var n = nmodule(v)
 		if n == null then return
-		n.finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
-		for file in n.ffi_files do v.compiler.extern_bodies.add(file)
+		n.ensure_compile_ffi_wrapper
+		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
+		for file in ffi_files do v.compiler.extern_bodies.add(file)
 
 		ensure_compile_nitni_base(v)
 
 		nitni_ccu.header_c_types.add("#include \"{name}._ffi.h\"\n")
 
-		nitni_ccu.write_as_nitni(n, v.compiler.modelbuilder.compile_dir)
+		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
 		for file in nitni_ccu.files do
 			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
@@ -93,7 +94,8 @@ redef class AExternPropdef
 		v.declare_once("{csignature};")
 
 		# FFI part
-		compile_ffi_method(amodule)
+		amodule.ensure_compile_ffi_wrapper
+		compile_ffi_method(mmodule)
 
 		# nitni - Compile missing callbacks
 		mmodule.ensure_compile_nitni_base(v)
@@ -130,7 +132,6 @@ redef class AExternMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
@@ -139,7 +140,7 @@ redef class AExternMethPropdef
 			return
 		end
 
-		amodule.mmodule.uses_ffi = true
+		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -196,7 +197,6 @@ redef class AExternInitPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
@@ -205,7 +205,7 @@ redef class AExternInitPropdef
 			return
 		end
 
-		amodule.mmodule.uses_ffi = true
+		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -248,16 +248,16 @@ redef class AExternInitPropdef
 end
 
 redef class CCompilationUnit
-	fun write_as_nitni(amodule: AModule, compdir: String)
+	fun write_as_nitni(mmodule: MModule, compdir: String)
 	do
-		var base_name = "{amodule.mmodule.name}._nitni"
+		var base_name = "{mmodule.name}._nitni"
 
 		var h_file = "{base_name}.h"
-		write_header_to_file( amodule, "{compdir}/{h_file}", new Array[String],
-			"{amodule.cname.to_s.to_upper}_NITG_NITNI_H")
+		write_header_to_file( mmodule, "{compdir}/{h_file}", new Array[String],
+			"{mmodule.cname.to_s.to_upper}_NITG_NITNI_H")
 
 		var c_file = "{base_name}.c"
-		write_body_to_file( amodule, "{compdir}/{c_file}", ["\"{h_file}\""] )
+		write_body_to_file( mmodule, "{compdir}/{c_file}", ["\"{h_file}\""] )
 
 		files.add( "{compdir}/{c_file}" )
 	end
