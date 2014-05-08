@@ -67,7 +67,7 @@ redef class ModelBuilder
 				compiler.compile_class_to_c(mclass)
 			end
 		end
-		compiler.compile_color_consts(compiler.vt_layout.pos)
+		compiler.compile_color_consts(compiler.vt_colors)
 
 		# The main function of the C
 		compiler.new_file("{mainmodule.name}.main")
@@ -91,30 +91,21 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_layout: nullable Layout[MClass]
-	protected var vt_layout: nullable Layout[MVirtualTypeProp]
+	private var class_ids: Map[MClass, Int]
+	private var class_colors: Map[MClass, Int]
+	protected var vt_colors: Map[MVirtualTypeProp, Int]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super
 
+		# Class coloring
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
-
-		var layout_builder: TypingLayoutBuilder[MClass]
-		var class_colorer = new MClassColorer(mainmodule)
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
-			class_colorer.build_layout(mclasses)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
-			class_colorer.build_layout(mclasses)
-		else if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MClassBMizer(mainmodule)
-			class_colorer.build_layout(mclasses)
-		else
-			layout_builder = class_colorer
-		end
-		self.class_layout = layout_builder.build_layout(mclasses)
-		self.class_tables = self.build_class_typing_tables(mclasses)
+		var poset = mainmodule.flatten_mclass_hierarchy
+		var colorer = new POSetColorer[MClass]
+		colorer.colorize(poset)
+		class_ids = colorer.ids
+		class_colors = colorer.colors
+		class_tables = self.build_class_typing_tables(mclasses)
 
 		# lookup vt to build layout with
 		var vts = new HashMap[MClass, Set[MVirtualTypeProp]]
@@ -128,13 +119,12 @@ class SeparateErasureCompiler
 		end
 
 		# vt coloration
-		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, class_colorer)
-		var vt_layout = vt_coloring.build_layout(vts)
-		self.vt_tables = build_vt_tables(mclasses, vt_layout)
-		self.vt_layout = vt_layout
+		var vt_colorer = new POSetBucketsColorer[MClass, MVirtualTypeProp](poset, colorer.conflicts)
+		vt_colors = vt_colorer.colorize(vts)
+		vt_tables = build_vt_tables(mclasses)
 	end
 
-	fun build_vt_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_vt_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MPropDef]] do
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -148,7 +138,7 @@ class SeparateErasureCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MVirtualTypeProp then continue
-					var color = layout.pos[mproperty]
+					var color = vt_colors[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -165,7 +155,7 @@ class SeparateErasureCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MVirtualTypeProp then continue
-				var color = layout.pos[mproperty]
+				var color = vt_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -185,7 +175,6 @@ class SeparateErasureCompiler
 	# Build class tables
 	fun build_class_typing_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MClass]] do
 		var tables = new HashMap[MClass, Array[nullable MClass]]
-		var layout = self.class_layout
 		for mclass in mclasses do
 			var table = new Array[nullable MClass]
 			var supers = new Array[MClass]
@@ -193,12 +182,7 @@ class SeparateErasureCompiler
 				supers = mclass.in_hierarchy(mainmodule).greaters.to_a
 			end
 			for sup in supers do
-				var color: Int
-				if layout isa PHLayout[MClass, MClass] then
-					color = layout.hashes[mclass][sup]
-				else
-					color = layout.pos[sup]
-				end
+				var color = class_colors[sup]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -217,19 +201,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("struct class \{ int id; const char *name; int box_kind; int color; const struct vts_table *vts_table; const struct type_table *type_table; nitmethod_t vft[]; \}; /* general C type representing a Nit class. */")
 		self.header.add_decl("struct type_table \{ int size; int table[]; \}; /* colorized type table. */")
 		self.header.add_decl("struct vts_entry \{ short int is_nullable; const struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
-
-		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
-			self.header.add_decl("struct vts_table \{ int mask; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
-		else
-			self.header.add_decl("struct vts_table \{ int dummy; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
-		end
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
-		end
-
+		self.header.add_decl("struct vts_table \{ int dummy; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
 		self.header.add_decl("typedef struct instance \{ const struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
@@ -257,15 +229,10 @@ class SeparateErasureCompiler
 
 		# Build class vft
 		v.add_decl("const struct class class_{c_name} = \{")
-		v.add_decl("{self.class_layout.ids[mclass]},")
+		v.add_decl("{class_ids[mclass]},")
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
-		var layout = self.class_layout
-		if layout isa PHLayout[MClass, MClass] then
-			v.add_decl("{layout.masks[mclass]},")
-		else
-			v.add_decl("{layout.pos[mclass]},")
-		end
+		v.add_decl("{class_colors[mclass]},")
 		if not is_dead then
 			if build_class_vts_table(mclass) then
 				v.require_declaration("vts_table_{c_name}")
@@ -307,7 +274,7 @@ class SeparateErasureCompiler
 			if msuper == null then
 				v.add_decl("-1, /* empty */")
 			else
-				v.add_decl("{self.class_layout.ids[msuper]}, /* {msuper} */")
+				v.add_decl("{self.class_ids[msuper]}, /* {msuper} */")
 			end
 		end
 		v.add_decl("\}")
@@ -383,12 +350,7 @@ class SeparateErasureCompiler
 
 		var v = new_visitor
 		v.add_decl("const struct vts_table vts_table_{mclass.c_name} = \{")
-		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
-			#TODO redo this when PHPropertyLayoutBuilder will be implemented
-			#v.add_decl("{vt_masks[mclass]},")
-		else
-			v.add_decl("0, /* dummy */")
-		end
+		v.add_decl("0, /* dummy */")
 		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass] do
@@ -570,11 +532,7 @@ class SeparateErasureCompilerVisitor
 			var entry = self.get_name("entry")
 			self.add("struct vts_entry {entry};")
 			self.require_declaration(mtype.mproperty.const_color)
-			if self.compiler.as(SeparateErasureCompiler).vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
-				self.add("{entry} = {recv_ptr}vts_table->vts[HASH({recv_ptr}vts_table->mask, {mtype.mproperty.const_color})];")
-			else
-				self.add("{entry} = {recv_ptr}vts_table->vts[{mtype.mproperty.const_color}];")
-			end
+			self.add("{entry} = {recv_ptr}vts_table->vts[{mtype.mproperty.const_color}];")
 			self.add("{cltype} = {entry}.class->color;")
 			self.add("{idtype} = {entry}.class->id;")
 			if maybe_null and accept_null == "0" then
@@ -597,9 +555,6 @@ class SeparateErasureCompilerVisitor
 			self.add("if({value} == NULL) \{")
 			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
-		end
-		if self.compiler.as(SeparateErasureCompiler).class_layout isa PHLayout[MClass, MClass] then
-			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
 		self.add("{res} = 0;")
