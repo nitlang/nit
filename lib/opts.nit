@@ -32,7 +32,7 @@ abstract class Option
 	var mandatory: Bool writable
 
 	# Has this option been read?
-	var read:Bool writable
+	var read: Bool writable
 
 	# Current value of this option
 	var value: VALUE writable
@@ -58,10 +58,10 @@ abstract class Option
 
 	# Add new aliases for this option
 	fun add_aliases(names: String...) do names.add_all(names)
-	
+
 	# An help text for this option with default settings
 	redef fun to_s do return pretty(2)
-	
+
 	# A pretty print for this help
 	fun pretty(off: Int): String
 	do
@@ -89,6 +89,7 @@ abstract class Option
 	end
 end
 
+# Not Really an option. Just add a line of text when displaying the usage
 class OptionText
 	super Option
 	init(text: String) do init_opt(text, null, null)
@@ -98,6 +99,7 @@ class OptionText
 	redef fun to_s do return helptext
 end
 
+# A boolean option, true when present, false if not
 class OptionBool
 	super Option
 	redef type VALUE: Bool
@@ -111,6 +113,7 @@ class OptionBool
 	end
 end
 
+# A count option. Count the number of time this option is present
 class OptionCount
 	super Option
 	redef type VALUE: Int
@@ -152,6 +155,7 @@ abstract class OptionParameter
 	end
 end
 
+# An option with a String as parameter
 class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
@@ -193,27 +197,32 @@ class OptionEnum
 		else
 			return ""
 		end
-	end	
+	end
 end
 
+# An option with an Int as parameter
 class OptionInt
 	super OptionParameter
 	redef type VALUE: Int
 
 	init(help: String, default: Int, names: String...) do init_opt(help, default, names)
-	
+
 	redef fun convert(str) do return str.to_i
 end
 
+# An option with a Float as parameter
 class OptionFloat
 	super OptionParameter
 	redef type VALUE: Float
 
 	init(help: String, default: Float, names: String...) do init_opt(help, default, names)
-	
+
 	redef fun convert(str) do return str.to_f
 end
 
+# An option with an array as parameter
+# `myprog -optA arg1 -optA arg2`
+# will give you Array[arg1, arg2]
 class OptionArray
 	super OptionParameter
 	redef type VALUE: Array[String]
@@ -232,13 +241,15 @@ class OptionArray
 	end
 end
 
+# Context of the options
 class OptionContext
 	var options: Array[Option]
 	var rest: Array[String]
 	var errors: Array[String]
 
 	private var optmap: Map[String, Option]
-	
+
+	# display all the options available
 	fun usage
 	do
 		var lmax = 1
@@ -249,13 +260,13 @@ class OptionContext
 			end
 			if lmax < l then lmax = l
 		end
-		
+
 		for i in options do
 			print(i.pretty(lmax))
 		end
 	end
 
-	# Parse ans assign options everywhere is the argument list
+	# Parse and assign options everywhere in the argument list
 	fun parse(argv: Collection[String])
 	do
 		var it = argv.iterator
@@ -310,6 +321,7 @@ class OptionContext
 		end
 	end
 
+	# Add some options to the context
 	fun add_option(opts: Option...)
 	do
 		for opt in opts do
@@ -334,6 +346,7 @@ class OptionContext
 		end
 	end
 
+	# Return errors found during the parsing
 	fun get_errors: Array[String]
 	do
 		var errors: Array[String] = new Array[String]
@@ -345,7 +358,6 @@ class OptionContext
 				errors.add(e)
 			end
 		end
-
 		return errors
 	end
 end
