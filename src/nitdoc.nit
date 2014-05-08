@@ -792,8 +792,9 @@ class NitdocClass
 	private fun mclass_intro_mpropdefs: Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mclassdef in mclass.mclassdefs do
-			if mclassdef != mclass.intro then continue
 			for mpropdef in mclassdef.mpropdefs do
+				if not mpropdef.is_intro then continue
+				if mclassdef.mmodule.public_owner != mclass.public_owner then continue
 				var mprop = mpropdef.mproperty
 				if mprop isa MMethod and mprop.is_init and mclass.is_abstract then continue
 				if mprop.visibility < ctx.min_visibility then continue
@@ -983,22 +984,23 @@ class NitdocClass
 			var stpl = new TplConcernList
 			for mmodule in mmodules do
 				# concerns list
-				var mctpl = new TplConcernListElt
-				mctpl.anchor = "#{mmodule.nitdoc_anchor}"
-				mctpl.name = mmodule.nitdoc_name
-				if mmodule.mdoc != null then
-					mctpl.comment = mmodule.mdoc.short_comment
+				if mmodule != owner then
+					var mctpl = new TplConcernListElt
+					mctpl.anchor = "#{mmodule.nitdoc_anchor}"
+					mctpl.name = mmodule.nitdoc_name
+					if mmodule.mdoc != null then
+						mctpl.comment = mmodule.mdoc.short_comment
+					end
+					stpl.elts.add mctpl
+					# concern section
+					var cctpl = new TplConcern
+					cctpl.anchor = mmodule.nitdoc_anchor
+					cctpl.concern = mmodule.tpl_link
+					if mmodule.mdoc != null then
+						cctpl.comment = mmodule.mdoc.short_comment
+					end
+					mtpl.add cctpl
 				end
-				stpl.elts.add mctpl
-				# concern sectionm
-				var cctpl = new TplConcern
-				cctpl.anchor = mmodule.nitdoc_anchor
-				cctpl.concern = mmodule.tpl_link
-				if mmodule.mdoc != null then
-					cctpl.comment = mmodule.mdoc.short_comment
-				end
-				mtpl.add cctpl
-
 				var mprops = module_map[mmodule].to_a
 				prop_sorter.sort mprops
 				for mprop in mprops do mtpl.add tpl_mpropdef_article(mprop)

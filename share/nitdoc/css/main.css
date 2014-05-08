@@ -374,14 +374,14 @@ article .info .code {
 }
 
 .content section.concerns li {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .content section.concerns ul ul {
     padding-left: 20px;
 }
 
-.content section.concerns li li {
+.content section.concerns ul ul li {
     margin-top: 0;
 }
 
