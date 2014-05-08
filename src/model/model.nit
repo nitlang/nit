@@ -223,7 +223,12 @@ redef class MModule
 			print("Fatal Error: no primitive class {name}")
 			exit(1)
 		end
-		assert cla.length == 1 else print cla.join(", ")
+		if cla.length != 1 then
+			var msg = "Fatal Error: more than one primitive class {name}:"
+			for c in cla do msg += " {c.full_name}"
+			print msg
+			exit(1)
+		end
 		return cla.first
 	end
 

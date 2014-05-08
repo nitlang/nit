@@ -18,6 +18,7 @@
 module test_parser
 
 import parser
+import parser_util
 
 class PrintTreeVisitor
 	super Visitor
@@ -44,6 +45,7 @@ var no_print = false
 var only_lexer = false
 var need_help = false
 var no_file = false
+var interactive = false
 
 while not args.is_empty and args.first.chars.first == '-' do
 	if args.first == "-n" then
@@ -54,6 +56,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 		only_lexer = false
 	else if args.first == "-e" then
 		no_file = true
+	else if args.first == "-i" then
+		interactive = true
 	else if args.first == "-h" or args.first == "-?" then
 		need_help = true
 	else
@@ -63,15 +67,53 @@ while not args.is_empty and args.first.chars.first == '-' do
 	args.shift
 end
 
-if args.is_empty or need_help then
+if (args.is_empty and not interactive) or need_help then
 	print("usage:")
 	print("  test_parser [options]... <filename.nit>...")
+	print("  test_parser -e [options]... <text>...")
+	print("  test_parser -i [options]...")
 	print("options:")
 	print("  -n	do not print anything")
 	print("  -l	only lexer")
 	print("  -p	lexer and parser (default)")
 	print("  -e	instead on files, each argument is a content to parse")
+	print("  -i	tree to parse are read interactively")
 	print("  -h	print this help")
+else if interactive then
+	if only_lexer then
+		print "Error: -l and -i are incompatibles"
+		exit 1
+	else if no_file then
+		print "Error: -e and -i are incompatibles"
+		exit 1
+	else if not args.is_empty then
+		print "Error: -i works without arguments"
+		exit 1
+	end
+
+	var tc = new ToolContext
+
+	loop
+		var n = tc.interactive_parse("-->")
+		if n isa TString then
+			var s = n.text
+			if s == ":q" then
+				break
+			else
+				print "`:q` to quit"
+			end
+			continue
+		end
+
+		if n isa AError then
+			print "{n.location.colored_line("0;31")}: {n.message}"
+			continue
+		end
+
+		if not no_print then
+			(new PrintTreeVisitor).enter_visit(n)
+		end
+	end
 else
 	for a in args do
 		var source

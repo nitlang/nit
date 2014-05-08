@@ -796,6 +796,8 @@ redef class AInternMethPropdef
 			else if pname == "[]=" then
 				recvval[args[1].to_i] = args[2]
 				return null
+			else if pname == "length" then
+				return v.int_instance(recvval.length)
 			else if pname == "copy_to" then
 				recvval.copy(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
@@ -878,6 +880,8 @@ redef class AExternMethPropdef
 			else if pname == "io_close" then
 				recvval.as(IOS).close
 				return v.int_instance(0)
+			else if pname == "address_is_null" then
+				return v.false_instance
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
@@ -958,6 +962,8 @@ redef class AExternMethPropdef
 			return v.native_string_instance(getcwd)
 		else if pname == "errno" then
 			return v.int_instance(sys.errno)
+		else if pname == "address_is_null" then
+			return v.false_instance
 		end
 		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort

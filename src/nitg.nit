@@ -27,60 +27,18 @@ import separate_compiler
 import android_platform
 import compiler_ffi
 
-# Create a tool context to handle options and paths
-var toolcontext = new ToolContext
+redef class ToolContext
+	redef fun process_options(args)
+	do
+		super
 
-# Create a new option for --global
-var opt_global = new OptionBool("Use global compilation", "--global")
-toolcontext.option_context.add_option(opt_global)
-
-var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
-toolcontext.option_context.add_option(opt_mixins)
-
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
-
-# We do not add other options, so process them now!
-toolcontext.process_options(args)
-
-# We need a model to collect stufs
-var model = new Model
-# An a model builder to parse files
-var modelbuilder = new ModelBuilder(model, toolcontext)
-
-var arguments = toolcontext.option_context.rest
-if arguments.length > 1 then
-	print "Too much arguments: {arguments.join(" ")}"
-	print toolcontext.tooldescription
-	exit 1
-end
-var progname = arguments.first
-
-# Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse([progname])
-mmodules.add_all modelbuilder.parse(opt_mixins.value)
-
-if mmodules.is_empty then return
-modelbuilder.run_phases
-
-var mainmodule
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
-	mainmodule.set_imported_mmodules(mmodules)
-end
-
-var platform = mainmodule.target_platform
-if platform != null and not platform.supports_libunwind then
-	if toolcontext.opt_stacktrace.value == null then toolcontext.opt_stacktrace.value = "none" # default is none
-end
-
-if toolcontext.opt_erasure.value then
-	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
-else if opt_global.value then
-	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-	modelbuilder.run_global_compiler(mainmodule, analysis)
-else
-	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-	modelbuilder.run_separate_compiler(mainmodule, analysis)
+		var sum = opt_global.value.to_i + opt_separate.value.to_i + opt_erasure.value.to_i
+		if sum > 1 then
+			print "Options --global, --separate and --erasure are exclusive"
+			exit(1)
+		else if sum == 0 then
+			# --separate by default
+			opt_separate.value = true
+		end
+	end
 end

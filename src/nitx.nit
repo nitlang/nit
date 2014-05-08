@@ -55,9 +55,6 @@ class NitIndex
 		model = new Model
 		mbuilder = new ModelBuilder(model, toolcontext)
 
-		# Here we load an process std modules
-		#var dir = "NIT_DIR".environ
-		#var mmodules = modelbuilder.parse_and_build(["{dir}/lib/standard/standard.nit"])
 		var mmodules = mbuilder.parse([arguments.first])
 		if mmodules.is_empty then return
 		mbuilder.run_phases

@@ -20,7 +20,6 @@ module abstract_compiler
 import literal
 import typing
 import auto_super_init
-import frontend
 import platform
 import c_tools
 
@@ -42,8 +41,8 @@ redef class ToolContext
 	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
 	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
-	# --no-check-initialization
-	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+	# --no-check-attr-isset
+	var opt_no_check_attr_isset: OptionBool = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
 	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 	# --no-check-autocast
@@ -54,6 +53,8 @@ redef class ToolContext
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
 	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
+	# --isset-checks-metrics
+	var opt_isset_checks_metrics: OptionBool = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
 	# --stacktrace
 	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
@@ -63,8 +64,8 @@ redef class ToolContext
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
-		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
-		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 	end
@@ -128,21 +129,18 @@ class MakefileToolchain
 	# The list is initially set with :
 	#   * the toolcontext --cc-path option
 	#   * the NIT_CC_PATH environment variable
-	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	#   * `toolcontext.nit_dir`
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
 	protected fun gather_cc_paths
 	do
 		# Look for the the Nit clib path
-		var path_env = "NIT_DIR".environ
-		if not path_env.is_empty then
+		var path_env = toolcontext.nit_dir
+		if path_env != null then
 			var libname = "{path_env}/clib"
 			if libname.file_exists then cc_paths.add(libname)
 		end
-
-		var libname = "{sys.program_name.dirname}/../clib"
-		if libname.file_exists then cc_paths.add(libname.simplify_path)
 
 		if cc_paths.is_empty then
 			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
@@ -542,7 +540,12 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 
 		if ost == null then
-			ost = "nitstack"
+			var platform = mainmodule.target_platform
+			if platform != null and not platform.supports_libunwind then
+				ost = "none"
+			else
+				ost = "nitstack"
+			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
@@ -575,6 +578,13 @@ abstract class AbstractCompiler
 			v.compiler.header.add_decl("extern long count_invoke_by_tables;")
 			v.compiler.header.add_decl("extern long count_invoke_by_direct;")
 			v.compiler.header.add_decl("extern long count_invoke_by_inline;")
+		end
+
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add_decl("long count_attr_reads = 0;")
+			v.add_decl("long count_isset_checks = 0;")
+			v.compiler.header.add_decl("extern long count_attr_reads;")
+			v.compiler.header.add_decl("extern long count_isset_checks;")
 		end
 
 		v.add_decl("void sig_handler(int signo)\{")
@@ -676,6 +686,12 @@ abstract class AbstractCompiler
 			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
 			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
 		end
+
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add("printf(\"# dynamic attribute reads: %ld\\n\", count_attr_reads);")
+			v.add("printf(\"# dynamic isset checks: %ld\\n\", count_isset_checks);")
+		end
+
 		v.add("return 0;")
 		v.add("\}")
 	end
@@ -2678,3 +2694,44 @@ redef class MModule
 	# Note: can return null instead of an empty set
 	fun collect_linker_libs: nullable Set[String] do return null
 end
+
+# Create a tool context to handle options and paths
+var toolcontext = new ToolContext
+
+var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+toolcontext.option_context.add_option(opt_mixins)
+
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+
+# We do not add other options, so process them now!
+toolcontext.process_options(args)
+
+# We need a model to collect stufs
+var model = new Model
+# An a model builder to parse files
+var modelbuilder = new ModelBuilder(model, toolcontext)
+
+var arguments = toolcontext.option_context.rest
+if arguments.length > 1 then
+	print "Too much arguments: {arguments.join(" ")}"
+	print toolcontext.tooldescription
+	exit 1
+end
+var progname = arguments.first
+
+# Here we load an process all modules passed on the command line
+var mmodules = modelbuilder.parse([progname])
+mmodules.add_all modelbuilder.parse(opt_mixins.value)
+
+if mmodules.is_empty then return
+modelbuilder.run_phases
+
+var mainmodule
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+	mainmodule.set_imported_mmodules(mmodules)
+end
+
+toolcontext.run_global_phases(mmodules)

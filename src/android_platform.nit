@@ -19,6 +19,8 @@ module android_platform
 
 import platform
 import abstract_compiler
+import common_ffi
+import android_annotations
 
 redef class ToolContext
 	redef fun platform_from_name(name)
@@ -74,13 +76,26 @@ class AndroidToolchain
 
 	redef fun write_files(compiler, compile_dir, cfiles)
 	do
-		var app_name = compiler.mainmodule.name
-		var app_package = "org.nitlanguage.{app_name}"
-		var app_version = "0.1"
+		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
+		var short_project_name = compiler.mainmodule.name
 
-		var args = ["android", "-s", "create", "project", "--name", app_name,
-			"--target", "android-10", "--path", android_project_root,
-			"--package", app_package, "--activity", app_name]
+		var app_name = project.name
+		if app_name == null then app_name = compiler.mainmodule.name
+		print app_name
+
+		var app_package = project.java_package
+		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
+
+		var app_version = project.version
+		if app_version == null then app_version = "1.0"
+
+		var args = ["android", "-s",
+			"create", "project",
+			"--name", short_project_name,
+			"--target", "android-10",
+			"--path", android_project_root,
+			"--package", app_package,
+			"--activity", short_project_name]
 		toolcontext.exec_and_check(args)
 
 		# create compile_dir
@@ -133,17 +148,16 @@ $(call import-module,android/native_app_glue)
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
-        android:versionCode="1"
+        android:versionCode="{{{project.version_code}}}"
         android:versionName="{{{app_version}}}"
         android:debuggable="true">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk android:minSdkVersion="9" />
 
-    <!-- This .apk has no Java code itself, so set hasCode to false. -->
     <application
 		android:label="@string/app_name"
-		android:hasCode="false"
+		android:hasCode="true"
 		android:debuggable="true">
 
         <!-- Our activity is the built-in NativeActivity framework class.
@@ -161,7 +175,12 @@ $(call import-module,android/native_app_glue)
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+{{{project.manifest_application_lines.join("\n")}}}
+
     </application>
+
+{{{project.manifest_lines.join("\n")}}}
 
 </manifest> 
 <!-- END_INCLUDE(manifest) -->
@@ -183,14 +202,9 @@ $(call import-module,android/native_app_glue)
 		### Link to png sources
 		# libpng is not available on Android NDK
 		# FIXME make obtionnal when we have alternatives to mnit
-		var nit_dir = "NIT_DIR".environ
-		var share_dir
-		if not nit_dir.is_empty then
-			share_dir = "{nit_dir}/share/"
-		else
-			share_dir = "{sys.program_name.dirname}/../share/"
-		end
-		if not share_dir.file_exists then 
+		var nit_dir = toolcontext.nit_dir
+		var share_dir =  "{nit_dir}/share/"
+		if nit_dir == null or not share_dir.file_exists then
 			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
 			exit 1
 		end
@@ -231,5 +245,16 @@ $(call import-module,android/native_app_glue)
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}.apk"
 		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
+	end
+end
+
+redef class JavaClassTemplate
+	redef fun write_to_files(compdir)
+	do
+		var jni_path = "jni/nit_compile/"
+		if compdir.has_suffix(jni_path) then
+			var path = "{compdir.substring(0, compdir.length-jni_path.length)}/src/"
+			return super(path)
+		else return super
 	end
 end

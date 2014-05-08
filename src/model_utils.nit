@@ -175,6 +175,14 @@ redef class MClass
 		return set
 	end
 
+	# the set of all accessible mattributes for this class
+	fun all_mattributes(mainmodule: MModule, min_visibility: MVisibility): Set[MAttribute] do
+		var set = new HashSet[MAttribute]
+		for mprop in all_mproperties(mainmodule, min_visibility) do
+			if mprop isa MAttribute then set.add(mprop)
+		end
+		return set
+	end
 
 	# Get the list of locally refined methods in 'self'.
 	fun redef_methods: Set[MMethod] do
@@ -245,6 +253,16 @@ redef class MClass
 	fun is_abstract: Bool do
 		return self.kind == abstract_kind
 	end
+end
+
+redef class MAttribute
+	# Is this attribute nullable for sure?
+	#
+	# This mean that its introduction is declarred with a nullable static type
+	# since attributes are invariant this will work on most cases
+	# attributes with static type anchored with a virtual type are not "nullable for-sure"
+	# because this type can be redefined in subclasses
+	fun is_nullable: Bool do return intro.static_mtype isa MNullableType
 end
 
 # Sorters

@@ -35,6 +35,12 @@ redef class ToolContext
 	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
 	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	# --skip-dead-methods
+	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
+	# --semi-global
+	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
+	# --no-colo-dead-methods
+	var opt_no_colo_dead_methods = new OptionBool("Do not colorize dead methods", "--no-colo-dead-methods")
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
@@ -51,11 +57,38 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
+		self.option_context.add_option(self.opt_no_colo_dead_methods)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
 		self.option_context.add_option(self.opt_tables_metrics)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		var tc = self
+		if tc.opt_semi_global.value then
+			tc.opt_inline_coloring_numbers.value = true
+			tc.opt_inline_some_methods.value = true
+			tc.opt_direct_call_monomorph.value = true
+			tc.opt_skip_dead_methods.value = true
+		end
+	end
+
+	var separate_compiler_phase = new SeparateCompilerPhase(self, null)
+end
+
+class SeparateCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_separate.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		modelbuilder.run_separate_compiler(mainmodule, analysis)
 	end
 end
 
@@ -248,6 +281,8 @@ class SeparateCompiler
 	fun do_property_coloring do
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
+		var rta = runtime_type_analysis
+
 		# Layouts
 		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
@@ -269,6 +304,9 @@ class SeparateCompiler
 		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
 		#end
 
+		# The dead methods, still need to provide a dead color symbol
+		var dead_methods = new Array[MMethod]
+
 		# lookup properties to build layout with
 		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
 		var mattributes = new HashMap[MClass, Set[MAttribute]]
@@ -277,6 +315,10 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
+					if modelbuilder.toolcontext.opt_no_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
+						dead_methods.add(mprop)
+						continue
+					end
 					mmethods[mclass].add(mprop)
 				else if mprop isa MAttribute then
 					mattributes[mclass].add(mprop)
@@ -299,8 +341,8 @@ class SeparateCompiler
 
 		# lookup super calls and add it to the list of mmethods to build layout with
 		var super_calls
-		if runtime_type_analysis != null then
-			super_calls = runtime_type_analysis.live_super_sends
+		if rta != null then
+			super_calls = rta.live_super_sends
 		else
 			super_calls = all_super_calls
 		end
@@ -318,7 +360,10 @@ class SeparateCompiler
 		self.method_tables = build_method_tables(mclasses, super_calls)
 		self.compile_color_consts(method_layout.pos)
 
-		# attribute null color to dead supercalls
+		# attribute null color to dead methods and supercalls
+		for mproperty in dead_methods do
+			compile_color_const(new_visitor, mproperty, -1)
+		end
 		for mpropdef in all_super_calls do
 			if super_calls.has(mpropdef) then continue
 			compile_color_const(new_visitor, mpropdef, -1)
@@ -348,6 +393,7 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
+					if not layout.pos.has_key(mproperty) then continue
 					var color = layout.pos[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
@@ -374,6 +420,7 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MMethod then continue
+				if not layout.pos.has_key(mproperty) then continue
 				var color = layout.pos[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
@@ -605,6 +652,8 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				var rta = runtime_type_analysis
+				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
@@ -751,7 +800,8 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var rta = runtime_type_analysis
+		var is_dead = rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -767,6 +817,10 @@ class SeparateCompiler
 					v.add_decl("NULL, /* empty */")
 				else
 					assert mpropdef isa MMethodDef
+					if rta != null and not rta.live_methoddefs.has(mpropdef) then
+						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					end
 					var rf = mpropdef.virtual_runtime_function
 					v.require_declaration(rf.c_name)
 					v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
@@ -786,7 +840,7 @@ class SeparateCompiler
 				self.header.add_decl("\};")
 			end
 
-			if not self.runtime_type_analysis.live_types.has(mtype) then return
+			if not rta.live_types.has(mtype) then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
@@ -806,7 +860,8 @@ class SeparateCompiler
 			self.header.add_decl("struct instance_{c_instance_name} \{")
 			self.header.add_decl("const struct type *type;")
 			self.header.add_decl("const struct class *class;")
-			# NativeArrays are just a instance header followed by an array of values
+			# NativeArrays are just a instance header followed by a length and an array of values
+			self.header.add_decl("int length;")
 			self.header.add_decl("val* values[0];")
 			self.header.add_decl("\};")
 
@@ -814,15 +869,16 @@ class SeparateCompiler
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length, const struct type* type);")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length, const struct type* type) \{")
-			var res = v.new_named_var(mtype, "self")
-			res.is_exact = true
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_instance_name} *{res};")
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct instance_{c_instance_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			v.add("return {res};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
 			v.add("\}")
 			return
 		end
@@ -875,7 +931,9 @@ class SeparateCompiler
 		if self.modelbuilder.toolcontext.opt_tables_metrics.value then
 			display_sizes
 		end
-
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			display_isset_checks
+		end
 		var tc = self.modelbuilder.toolcontext
 		tc.info("# implementation of method invocation",2)
 		var nb_invok_total = modelbuilder.nb_invok_by_tables + modelbuilder.nb_invok_by_direct + modelbuilder.nb_invok_by_inline
@@ -926,6 +984,16 @@ class SeparateCompiler
 			for e in table do if e == null then holes += 1
 		end
 		print "\t{total}\t{holes}"
+	end
+
+	protected var isset_checks_count = 0
+	protected var attr_read_count = 0
+
+	fun display_isset_checks do
+		print "# total number of compiled attribute reads"
+		print "\t{attr_read_count}"
+		print "# total number of compiled isset-checks"
+		print "\t{isset_checks_count}"
 	end
 
 	redef fun compile_nitni_structs
@@ -1291,6 +1359,11 @@ class SeparateCompilerVisitor
 		var intromclassdef = a.intro.mclassdef
 		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 
+		if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			self.compiler.attr_read_count += 1
+			self.add("count_attr_reads++;")
+		end
+
 		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			# Get the attribute or a box (ie. always a val*)
@@ -1301,10 +1374,15 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}]; /* {a} on {recv.inspect} */")
 
 			# Check for Uninitialized attribute
-			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
 				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
+
+				if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+					self.compiler.isset_checks_count += 1
+					self.add("count_isset_checks++;")
+				end
 			end
 
 			# Return the attribute or its unboxed version
@@ -1315,10 +1393,14 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}].{ret.ctypename}; /* {a} on {recv.inspect} */")
 
 			# Check for Uninitialized attribute
-			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
 				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
+				if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+					self.compiler.isset_checks_count += 1
+					self.add("count_isset_checks++;")
+				end
 			end
 
 			return res
@@ -1695,6 +1777,9 @@ class SeparateCompilerVisitor
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "length" then
+			self.ret(self.new_expr("((struct instance_{nclass.c_instance_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct instance_{nclass.c_instance_name}*){arguments[1]})->values"

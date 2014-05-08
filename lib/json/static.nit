@@ -21,6 +21,7 @@
 # languages features (`isa` and `as`).
 module static
 
+import standard
 private import json_parser
 private import json_lexer
 

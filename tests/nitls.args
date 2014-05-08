@@ -1,2 +1,5 @@
-base_simple3.nit
--t base_simple3.nit
+base_simple3.nit project1
+-t base_simple3.nit project1
+-t -r base_simple3.nit project1
+-s base_simple3.nit project1
+-M base_simple3.nit base_simple_import.nit

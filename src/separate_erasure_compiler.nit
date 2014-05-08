@@ -21,13 +21,31 @@ intrude import separate_compiler
 redef class ToolContext
 	# --erasure
 	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
+	# --rta
+	var opt_rta = new OptionBool("Activate RTA (implicit with --global and --separate)", "--rta")
 	# --no-check-erasure-cast
 	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
 
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast)
+		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast, opt_rta)
+	end
+
+	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
+end
+
+class ErasureCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_erasure.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = null
+		if toolcontext.opt_rta.value then
+			analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		end
+		modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
 	end
 end
 
@@ -226,6 +244,12 @@ class SeparateErasureCompiler
 		var class_table = self.class_tables[mclass]
 		var v = self.new_visitor
 
+		var rta = runtime_type_analysis
+		var is_dead = mclass.kind == abstract_kind or mclass.kind == interface_kind
+		if not is_dead and rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray" then
+			is_dead = true
+		end
+
 		v.add_decl("/* runtime class {c_name} */")
 
 		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
@@ -242,29 +266,36 @@ class SeparateErasureCompiler
 		else
 			v.add_decl("{layout.pos[mclass]},")
 		end
-		if build_class_vts_table(mclass) then
-			v.require_declaration("vts_table_{c_name}")
-			v.add_decl("&vts_table_{c_name},")
-		else
-			v.add_decl("NULL,")
-		end
-		v.add_decl("&type_table_{c_name},")
-		v.add_decl("\{")
-		for i in [0 .. vft.length[ do
-			var mpropdef = vft[i]
-			if mpropdef == null then
-				v.add_decl("NULL, /* empty */")
+		if not is_dead then
+			if build_class_vts_table(mclass) then
+				v.require_declaration("vts_table_{c_name}")
+				v.add_decl("&vts_table_{c_name},")
 			else
-				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
-					v.require_declaration("VIRTUAL_{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				v.add_decl("NULL,")
+			end
+			v.add_decl("&type_table_{c_name},")
+			v.add_decl("\{")
+			for i in [0 .. vft.length[ do
+				var mpropdef = vft[i]
+				if mpropdef == null then
+					v.add_decl("NULL, /* empty */")
 				else
-					v.require_declaration("{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					assert mpropdef isa MMethodDef
+					if rta != null and not rta.live_methoddefs.has(mpropdef) then
+						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					end
+					if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+						v.require_declaration("VIRTUAL_{mpropdef.c_name}")
+						v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					else
+						v.require_declaration("{mpropdef.c_name}")
+						v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+					end
 				end
 			end
+			v.add_decl("\}")
 		end
-		v.add_decl("\}")
 		v.add_decl("\};")
 
 		# Build class type table
@@ -306,6 +337,7 @@ class SeparateErasureCompiler
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("int length;")
 			self.header.add_decl("val* values[];")
 			self.header.add_decl("\};")
 
@@ -313,13 +345,14 @@ class SeparateErasureCompiler
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length);")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length) \{")
-			var res = v.new_named_var(mtype, "self")
-			res.is_exact = true
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_name} *{res};")
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			v.add("return {res};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
 			v.add("\}")
 			return
 		end
@@ -328,13 +361,18 @@ class SeparateErasureCompiler
 		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(void);")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
-		v.require_declaration("class_{c_name}")
-		v.add("{res}->class = &class_{c_name};")
-		self.generate_init_attr(v, res, mtype)
-		v.add("return {res};")
+		if is_dead then
+			v.add_abort("{mclass} is DEAD")
+		else
+
+			var res = v.new_named_var(mtype, "self")
+			res.is_exact = true
+			v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+			v.require_declaration("class_{c_name}")
+			v.add("{res}->class = &class_{c_name};")
+			self.generate_init_attr(v, res, mtype)
+			v.add("return {res};")
+		end
 		v.add("\}")
 	end
 
