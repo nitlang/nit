@@ -84,6 +84,28 @@ interface Comparator[E]
 			i += 1
 		end
 	end
+
+	# Insert an element in an already sorted array using a binary search
+	fun insert_sorted(array: Array[E], val: E)
+	do
+		var i = 0
+		var j = array.length-1
+
+		while i <= j do
+			var p = (i+j)/2
+			var c = compare(array[p], val)
+			if c > 0 then
+				j = p - 1
+			else if c < 0 then
+				i = p + 1
+			else 
+				i = p
+				break
+			end
+		end
+
+		array.insert(val, i)
+	end
 end
 
 # Deprecated class, use `Comparator` instead
