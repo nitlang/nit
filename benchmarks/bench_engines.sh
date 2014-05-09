@@ -262,7 +262,6 @@ function bench_nitg-s_options()
 bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range "--no-gcc-directive likely" "--no-gcc-directive noreturn"
 bench_nitg-s_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other
 bench_nitg-s_options "faster" --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
-bench_nitg-s_options "typing" NOALL --bm-typing --phand-typing
 
 function bench_nitg-e_options()
 {
@@ -291,7 +290,6 @@ function bench_nitg-e_options()
 bench_nitg-e_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
 bench_nitg-e_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
 bench_nitg-e_options "faster" --inline-coloring-numbers
-bench_nitg-e_options "typing" NOALL --bm-typing # --phand-typing
 
 function bench_engines()
 {
