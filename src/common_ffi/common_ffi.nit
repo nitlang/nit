@@ -46,7 +46,7 @@ redef class MModule
 	# Complete the compilation of the FFI code
 	fun finalize_ffi_wrapper(compdir: String, mainmodule: MModule)
 	do
-		for language in present_languages do if ffi_callbacks.keys.has(language) then
+		for language in ffi_callbacks.keys do
 			for callback in ffi_callbacks[language] do
 				language.compile_callback(callback, self, mainmodule, ffi_ccu.as(not null))
 			end
