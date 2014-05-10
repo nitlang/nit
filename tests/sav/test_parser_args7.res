@@ -9,7 +9,6 @@
         AImplicitSelfExpr 1,7
         TId "world" 1,7--11
         AListExprs 1,11
-  TKwend "" 1,1--0
 --> AStringExpr 1,1--13
   TString "\"hello world\"" 1,1--13
 --> ABlockExpr 1,1--0
@@ -25,7 +24,6 @@
       AImplicitSelfExpr 1,15
       TId "p" 1,15
       AListExprs 1,15
-  TKwend "" 1,1--0
 --> AModule 1,1--12
   ATopClassdef 1,1--12
     AConcreteMethPropdef 1,1--12
@@ -53,7 +51,6 @@
         TId "p" 2,1
         AListExprs 2,1
       TKwend "end" 3,1--3
-  TKwend "" 1,1--0
 --> ... ... ... ... AModule 1,1--5,3
   ATopClassdef 1,1--5,3
     AConcreteMethPropdef 1,1--5,3
