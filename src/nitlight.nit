@@ -27,11 +27,11 @@ var opt_full = new OptionBool("Process also imported modules", "--full")
 var opt_ast = new OptionBool("Generate specific HTML elements for each Node of the AST", "--ast")
 toolcontext.option_context.add_option(opt_fragment, opt_first_line, opt_last_line, opt_dir, opt_full)
 toolcontext.tooldescription = "Usage: nitlight [OPTION]... <file.nit>...\nGenerates HTML of highlited code from Nit source files."
+toolcontext.process_options(args)
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
-toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
 
 var mmodules = modelbuilder.parse(args)
