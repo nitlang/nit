@@ -31,6 +31,10 @@ end
 class PnaclPlatform
 	super Platform
 
+	redef fun supports_libunwind do return false
+
+	redef fun no_main do return true
+
 	redef fun toolchain(toolcontext) do return new PnaclToolchain(toolcontext)
 end
 

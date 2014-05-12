@@ -540,9 +540,9 @@ abstract class AbstractCompiler
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
+		var platform = mainmodule.target_platform
 
 		if ost == null then
-			var platform = mainmodule.target_platform
 			if platform != null and not platform.supports_libunwind then
 				ost = "none"
 			else
@@ -550,6 +550,8 @@ abstract class AbstractCompiler
 			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
+
+		if platform != null and platform.no_main then modelbuilder.toolcontext.opt_no_main.value = true
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
