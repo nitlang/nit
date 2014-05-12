@@ -53,7 +53,7 @@ redef class MModule
 		end
 	end
 
-	fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
+	private fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
 	do
 		if nitni_ccu != null then return
 
@@ -69,10 +69,10 @@ redef class MModule
 		return res
 	end
 
-	var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
+	private var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
 
 	# Returns true if callbacks has yet to be generated and register it as being generated
-	fun check_callback_compilation(cb: NitniCallback): Bool
+	private fun check_callback_compilation(cb: NitniCallback): Bool
 	do
 		var compiled = compiled_callbacks.has(cb)
 		if not compiled then compiled_callbacks.add(cb)
@@ -81,7 +81,7 @@ redef class MModule
 end
 
 redef class AExternPropdef
-	fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
+	private fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var mainmodule = v.compiler.mainmodule
@@ -289,7 +289,7 @@ redef class AbstractCompilerVisitor
 end
 
 redef class MType
-	fun compile_extern_type(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_type(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		assert not is_cprimitive
 
@@ -300,7 +300,7 @@ redef class MType
 		ccu.header_c_types.add("#endif\n")
 	end
 
-	fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		# actually, we do not need to do anything when using the bohem garbage collector
 
@@ -351,7 +351,7 @@ redef class MNullableType
 end
 
 redef class MExplicitCall
-	fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
@@ -412,7 +412,7 @@ redef class MExplicitCall
 end
 
 redef class MExplicitSuper
-	fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var mproperty = from.mproperty
 		assert mproperty isa MMethod
@@ -462,7 +462,7 @@ redef class MExplicitSuper
 end
 
 redef class MExplicitCast
-	fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var from = from
 		var to = to
