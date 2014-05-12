@@ -40,7 +40,7 @@ redef class ToolContext
 	# --semi-global
 	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
 	# --no-colo-dead-methods
-	var opt_no_colo_dead_methods = new OptionBool("Do not colorize dead methods", "--no-colo-dead-methods")
+	var opt_colo_dead_methods = new OptionBool("Force colorization of dead methods", "--colo-dead-methods")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
@@ -52,7 +52,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
-		self.option_context.add_option(self.opt_no_colo_dead_methods)
+		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
 	end
 
@@ -279,7 +279,7 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
-					if modelbuilder.toolcontext.opt_no_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
+					if not modelbuilder.toolcontext.opt_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
 						dead_methods.add(mprop)
 						continue
 					end
