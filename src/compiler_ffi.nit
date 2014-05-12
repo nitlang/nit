@@ -38,21 +38,22 @@ redef class MModule
 		var v = compiler.new_visitor
 		var n = nmodule(v)
 		if n == null then return
-		n.finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
-		for file in n.ffi_files do v.compiler.extern_bodies.add(file)
+		n.ensure_compile_ffi_wrapper
+		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
+		for file in ffi_files do v.compiler.extern_bodies.add(file)
 
 		ensure_compile_nitni_base(v)
 
 		nitni_ccu.header_c_types.add("#include \"{name}._ffi.h\"\n")
 
-		nitni_ccu.write_as_nitni(n, v.compiler.modelbuilder.compile_dir)
+		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
 		for file in nitni_ccu.files do
 			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
 		end
 	end
 
-	fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
+	private fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)
 	do
 		if nitni_ccu != null then return
 
@@ -68,10 +69,10 @@ redef class MModule
 		return res
 	end
 
-	var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
+	private var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
 
 	# Returns true if callbacks has yet to be generated and register it as being generated
-	fun check_callback_compilation(cb: NitniCallback): Bool
+	private fun check_callback_compilation(cb: NitniCallback): Bool
 	do
 		var compiled = compiled_callbacks.has(cb)
 		if not compiled then compiled_callbacks.add(cb)
@@ -80,7 +81,7 @@ redef class MModule
 end
 
 redef class AExternPropdef
-	fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
+	private fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var mainmodule = v.compiler.mainmodule
@@ -93,7 +94,8 @@ redef class AExternPropdef
 		v.declare_once("{csignature};")
 
 		# FFI part
-		compile_ffi_method(amodule)
+		amodule.ensure_compile_ffi_wrapper
+		compile_ffi_method(mmodule)
 
 		# nitni - Compile missing callbacks
 		mmodule.ensure_compile_nitni_base(v)
@@ -130,7 +132,6 @@ redef class AExternMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
@@ -139,7 +140,7 @@ redef class AExternMethPropdef
 			return
 		end
 
-		amodule.mmodule.uses_ffi = true
+		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -196,7 +197,6 @@ redef class AExternInitPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 
 		# if using the old native interface fallback on previous implementation
 		var nextern = self.n_extern
@@ -205,7 +205,7 @@ redef class AExternInitPropdef
 			return
 		end
 
-		amodule.mmodule.uses_ffi = true
+		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -248,16 +248,16 @@ redef class AExternInitPropdef
 end
 
 redef class CCompilationUnit
-	fun write_as_nitni(amodule: AModule, compdir: String)
+	fun write_as_nitni(mmodule: MModule, compdir: String)
 	do
-		var base_name = "{amodule.mmodule.name}._nitni"
+		var base_name = "{mmodule.name}._nitni"
 
 		var h_file = "{base_name}.h"
-		write_header_to_file( amodule, "{compdir}/{h_file}", new Array[String],
-			"{amodule.cname.to_s.to_upper}_NITG_NITNI_H")
+		write_header_to_file( mmodule, "{compdir}/{h_file}", new Array[String],
+			"{mmodule.cname.to_s.to_upper}_NITG_NITNI_H")
 
 		var c_file = "{base_name}.c"
-		write_body_to_file( amodule, "{compdir}/{c_file}", ["\"{h_file}\""] )
+		write_body_to_file( mmodule, "{compdir}/{c_file}", ["\"{h_file}\""] )
 
 		files.add( "{compdir}/{c_file}" )
 	end
@@ -289,7 +289,7 @@ redef class AbstractCompilerVisitor
 end
 
 redef class MType
-	fun compile_extern_type(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_type(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		assert not is_cprimitive
 
@@ -300,7 +300,7 @@ redef class MType
 		ccu.header_c_types.add("#endif\n")
 	end
 
-	fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		# actually, we do not need to do anything when using the bohem garbage collector
 
@@ -351,7 +351,7 @@ redef class MNullableType
 end
 
 redef class MExplicitCall
-	fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
@@ -412,7 +412,7 @@ redef class MExplicitCall
 end
 
 redef class MExplicitSuper
-	fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var mproperty = from.mproperty
 		assert mproperty isa MMethod
@@ -462,7 +462,7 @@ redef class MExplicitSuper
 end
 
 redef class MExplicitCast
-	fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		var from = from
 		var to = to
