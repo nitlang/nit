@@ -101,7 +101,7 @@ redef class AModule
 	end
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	private var ffi_has_been_compiled = false
 
 	# Compile the necessary wrapper around this extern method or constructor

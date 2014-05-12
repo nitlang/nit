@@ -754,14 +754,14 @@ end
 abstract class APropdef
 	super Prod
 	readable writable var _n_doc: nullable ADoc = null
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: nullable AVisibility = null
 end
 
 # A definition of an attribute
 # For historical reason, old-syle and new-style attributes use the same `ANode` sub-class
 class AAttrPropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwvar: TKwvar
 
 	# The identifier for an old-style attribute (null if new-style)
@@ -785,14 +785,23 @@ end
 # A definition of all kind of method (including constructors)
 abstract class AMethPropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: nullable AVisibility
+	readable writable var _n_kwmeth: nullable TKwmeth
+	readable writable var _n_kwinit: nullable TKwinit
+	readable writable var _n_kwnew: nullable TKwnew
 	readable writable var _n_methid: nullable AMethid = null
 	readable writable var _n_signature: nullable ASignature
+	readable writable var _n_block: nullable AExpr = null
+	readable writable var _n_extern: nullable TString = null
+	readable writable var _n_extern_calls: nullable AExternCalls = null
+	readable writable var _n_extern_code_block: nullable AExternCodeBlock = null
 	redef fun hot_location
 	do
 		if n_methid != null then
 			return n_methid.location
+		else if n_kwinit != null then
+			return n_kwinit.location
+		else if n_kwnew != null then
+			return n_kwnew.location
 		else
 			return location
 		end
@@ -803,34 +812,26 @@ end
 # *deferred* is a old synonynmous of *abstract* that comes from PRM, that comes from Eiffel.
 class ADeferredMethPropdef
 	super AMethPropdef
-	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method marked intern
 class AInternMethPropdef
 	super AMethPropdef
-	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method of a constructor marked extern
 abstract class AExternPropdef
 	super AMethPropdef
-	readable writable var _n_extern: nullable TString = null
-	readable writable var _n_extern_calls: nullable AExternCalls = null
-	readable writable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 
 # A method marked extern
 class AExternMethPropdef
 	super AExternPropdef
-	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method with a body
 class AConcreteMethPropdef
 	super AMethPropdef
-	readable writable var _n_kwmeth: nullable TKwmeth
-	readable writable var _n_block: nullable AExpr = null
 end
 
 # A constructor
@@ -842,15 +843,12 @@ end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
 	super AInitPropdef
-	readable writable var _n_kwinit: TKwinit
-	redef fun hot_location do return n_kwinit.location
 end
 
 # A constructor marked extern (defined with the `new` keyword)
 class AExternInitPropdef
 	super AExternPropdef
 	super AInitPropdef
-	readable writable var _n_kwnew: TKwnew
 end
 
 # The implicit main method
@@ -915,8 +913,6 @@ end
 # A definition of a virtual type
 class ATypePropdef
 	super APropdef
-	readable writable var _n_kwredef: nullable TKwredef = null
-	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwtype: TKwtype
 	readable writable var _n_id: TClassid
 	readable writable var _n_type: AType

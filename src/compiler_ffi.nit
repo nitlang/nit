@@ -79,7 +79,7 @@ redef class MModule
 	end
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
@@ -94,6 +94,8 @@ redef class AExternPropdef
 
 		# FFI part
 		compile_ffi_method(amodule)
+
+		assert self isa AExternPropdef
 
 		# nitni - Compile missing callbacks
 		mmodule.ensure_compile_nitni_base(v)
@@ -124,10 +126,8 @@ redef class AExternPropdef
 		# manage nitni callback set
 		mmodule.foreign_callbacks.join(foreign_callbacks)
 	end
-end
 
-redef class AExternMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	redef fun compile_externmeth_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
@@ -190,10 +190,8 @@ redef class AExternMethPropdef
 
 		compile_ffi_support_to_c(v)
 	end
-end
 
-redef class AExternInitPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	redef fun compile_externinit_to_c(v, mpropdef, arguments)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
@@ -206,7 +204,6 @@ redef class AExternInitPropdef
 		end
 
 		amodule.mmodule.uses_ffi = true
-
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
 		var externname = mpropdef.mproperty.build_cname(mpropdef.mclassdef.bound_mtype, mmodule, "___impl", long_signature)

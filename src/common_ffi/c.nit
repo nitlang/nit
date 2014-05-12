@@ -135,9 +135,9 @@ end
 class ExternCFunction
 	super CFunction
 
-	var method: AExternPropdef
+	var method: AMethPropdef
 
-	init (method: AExternPropdef, mmodule: MModule)
+	init (method: AMethPropdef, mmodule: MModule)
 	do
 		self.method = method
 

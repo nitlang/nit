@@ -1832,6 +1832,9 @@ class MMethodDef
 
 	# Is the method definition intern?
 	var is_intern writable = false
+
+	# Is the method definition extern?
+	var is_extern writable = false
 end
 
 # A local definition of an attribute

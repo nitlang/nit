@@ -1550,6 +1550,7 @@ redef class MMethodDef
 	# Can the body be inlined?
 	fun can_inline(v: VISITOR): Bool
 	do
+		if is_abstract then return true
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
@@ -1622,13 +1623,16 @@ redef class APropdef
 	fun can_inline: Bool do return true
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		for i in [0..mpropdef.msignature.arity[ do
-			var variable = self.n_signature.n_params[i].variable.as(not null)
-			v.assign(v.variable(variable), arguments[i+1])
+		if mpropdef.is_abstract then
+			var cn = v.class_name_string(arguments.first)
+			v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+			v.add_raw_abort
+			return
 		end
+
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
@@ -1641,7 +1645,23 @@ redef class AConcreteMethPropdef
 				v.compile_callsite(auto_super_init, args)
 			end
 		end
-		v.stmt(self.n_block)
+
+		var n_block = n_block
+		if n_block != null then
+			for i in [0..mpropdef.msignature.arity[ do
+				var variable = self.n_signature.n_params[i].variable.as(not null)
+				v.assign(v.variable(variable), arguments[i+1])
+			end
+			v.stmt(n_block)
+		else if mpropdef.is_intern then
+			compile_intern_to_c(v, mpropdef, arguments)
+		else if mpropdef.is_extern then
+			if mpropdef.mproperty.is_init then
+				compile_externinit_to_c(v, mpropdef, arguments)
+			else
+				compile_externmeth_to_c(v, mpropdef, arguments)
+			end
+		end
 	end
 
 	redef fun can_inline
@@ -1653,10 +1673,8 @@ redef class AConcreteMethPropdef
 		if nblock isa ABlockExpr and nblock.n_expr.length == 0 then return true
 		return false
 	end
-end
 
-redef class AInternMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_intern_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
@@ -1889,10 +1907,8 @@ redef class AInternMethPropdef
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
-end
 
-redef class AExternMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_externmeth_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var externname
 		var nextern = self.n_extern
@@ -1921,10 +1937,8 @@ redef class AExternMethPropdef
 			v.ret(res)
 		end
 	end
-end
 
-redef class AExternInitPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_externinit_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var externname
 		var nextern = self.n_extern
@@ -2018,15 +2032,6 @@ redef class AClassdef
 			abort
 		end
 	end
-end
-
-redef class ADeferredMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments) do
-		var cn = v.class_name_string(arguments.first)
-		v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
-		v.add_raw_abort
-	end
-	redef fun can_inline do return true
 end
 
 redef class AExpr

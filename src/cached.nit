@@ -46,7 +46,7 @@ private class CachedPhase
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
 
-		if not npropdef isa AConcreteMethPropdef then
+		if not npropdef isa AMethPropdef then
 			modelbuilder.error(npropdef, "Syntax error: only a function can be cached.")
 			return
 		end
@@ -87,7 +87,7 @@ private class CachedPhase
 		var real_mpropdef = new MMethodDef(mclassdef, new MMethod(mclassdef, "{name}<real>", private_visibility), location)
 		real_mpropdef.msignature = mpropdef.msignature
 		# FIXME: Again, if the engine require a real propdef even if it is empty
-		var real_npropdef = toolcontext.parse_propdef("fun real do end").as(AConcreteMethPropdef)
+		var real_npropdef = toolcontext.parse_propdef("fun real do end").as(AMethPropdef)
 		associate_propdef(real_mpropdef, real_npropdef)
 		# Note: the body is set at the last line of this function
 
