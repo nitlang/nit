@@ -2565,7 +2565,7 @@ redef class ASuperExpr
 		if callsite != null then
 			# Add additionnals arguments for the super init call
 			if args.length == 1 then
-				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+				for i in [0..callsite.msignature.arity[ do
 					args.add(v.frame.arguments[i+1])
 				end
 			end
