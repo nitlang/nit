@@ -624,7 +624,7 @@ interface SequenceRead[E]
 		var p = 0
 		var i = iterator
 		while i.is_ok do
-			if p>pos and i.item == item then return i.index
+			if p>=pos and i.item == item then return i.index
 			i.next
 			p += 1
 		end
