@@ -90,7 +90,7 @@ redef class MClassType
 		if name == "Bool" then return "int"
 		if name == "Char" then return "char"
 		if name == "Float" then return "double"
-		if name == "Int" then return "int"
+		if name == "Int" then return "long"
 		if name == "NativeString" then return "char*"
 		if mclass.kind == extern_kind then
 			var ctype = mclass.ctype
@@ -105,7 +105,7 @@ redef class MClassType
 		if name == "Bool" then return "int"
 		if name == "Char" then return "char"
 		if name == "Float" then return "double"
-		if name == "Int" then return "int"
+		if name == "Int" then return "long"
 		if name == "NativeString" then return "char*"
 		if mclass.kind == extern_kind then return "void*"
 		return "struct nitni_instance *"
