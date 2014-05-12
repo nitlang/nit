@@ -219,12 +219,12 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
-
-			for i in [0..mmethoddef.msignature.arity[ do
-				var origtype = mmeth.intro.msignature.mparameters[i].mtype
+			var sig = mmethoddef.msignature.as(not null)
+			var osig = mmeth.intro.msignature.as(not null)
+			for i in [0..sig.arity[ do
+				var origtype = osig.mparameters[i].mtype
 				if not origtype.need_anchor then continue # skip non covariant stuff
-				var paramtype = mmethoddef.msignature.mparameters[i].mtype
-				#paramtype = v.cleanup_type(paramtype).as(not null)
+				var paramtype = sig.mparameters[i].mtype
 				add_cast(paramtype)
 			end
 
