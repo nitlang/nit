@@ -79,16 +79,6 @@ private class TypeVisitor
 		return res
 	end
 
-	# Retrieve the signature of a `MMethodDef` resolved for a specific call.
-	# This method is an helper to symplify the query on the model.
-	#
-	# Note: `for_self` indicates if the reciever is self or not.
-	# If yes, virtual types are not resolved.
-	fun resolve_signature_for(mmethoddef: MMethodDef, recv: MType, for_self: Bool): MSignature
-	do
-		return self.resolve_for(mmethoddef.msignature.as(not null), recv, for_self).as(MSignature)
-	end
-
 	# Check that `sub` is a subtype of `sup`.
 	# If `sub` is not a valud suptype, then display an error on `node` an return null.
 	# If `sub` is a safe subtype of `sup` then return `sub`.
@@ -260,7 +250,8 @@ private class TypeVisitor
 		end
 
 
-		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
+		var msignature = mpropdef.msignature.as(not null)
+		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
 		var erasure_cast = false
 		var rettype = mpropdef.msignature.return_mtype
@@ -1455,7 +1446,8 @@ redef class ASuperExpr
 		# FIXME: covariance of return type in linear extension?
 		var superprop = superprops.first
 
-		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var msignature = superprop.msignature.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 		var args = self.n_args.to_a
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
@@ -1501,7 +1493,9 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var msignature = superprop.msignature.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
+
 		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 
