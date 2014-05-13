@@ -532,11 +532,9 @@ abstract class Text
 		if hash_cache == null then
 			# djb2 hash algorithm
 			var h = 5381
-			var i = length - 1
 
 			for char in self.chars do
-				h = (h * 32) + h + char.ascii
-				i -= 1
+				h = h.lshift(5) + h + char.ascii
 			end
 
 			hash_cache = h
@@ -862,18 +860,15 @@ class FlatString
 	redef fun hash
 	do
 		if hash_cache == null then
-			# djb2 hash algorythm
+			# djb2 hash algorithm
 			var h = 5381
-			var i = length - 1
+			var i = index_from
 
 			var myitems = items
-			var strStart = index_from
 
-			i += strStart
-
-			while i >= strStart do
-				h = (h * 32) + h + self.items[i].ascii
-				i -= 1
+			while i <= index_to do
+				h = h.lshift(5) + h + myitems[i].ascii
+				i += 1
 			end
 
 			hash_cache = h
