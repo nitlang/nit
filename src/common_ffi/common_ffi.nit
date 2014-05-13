@@ -36,31 +36,53 @@ import java
 redef class MModule
 	# Does this module uses the FFI?
 	var uses_ffi: Bool = false
-end
 
-redef class AModule
 	# C compilation unit for the FFI files
 	private var ffi_ccu: nullable CCompilationUnit = null
 
 	# Foreign language used in this AModule
 	private var present_languages = new HashSet[FFILanguage]
 
+	# Complete the compilation of the FFI code
+	fun finalize_ffi_wrapper(compdir: String, mainmodule: MModule)
+	do
+		for language in ffi_callbacks.keys do
+			for callback in ffi_callbacks[language] do
+				language.compile_callback(callback, self, mainmodule, ffi_ccu.as(not null))
+			end
+
+			language.compile_to_files(self, compdir)
+		end
+
+		# include dependancies FFI
+		for mod in header_dependencies do
+			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.name}._ffi.h\"\n")
+		end
+
+		ffi_ccu.write_as_impl(self, compdir)
+		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, c_compiler_options))
+	end
+end
+
+redef class AModule
+
 	# Ensures all of the general foreign code of the module has been analyzed.
 	# Manages header blocks, extern class types and foreign dependancies between modules
 	fun ensure_compile_ffi_wrapper
 	do
-		if ffi_ccu != null then return
+		var mmodule = mmodule
+		if mmodule == null or mmodule.ffi_ccu != null then return
 
 		# ready extern code compiler
 		var ffi_ccu = new CCompilationUnit
-		self.ffi_ccu = ffi_ccu
+		mmodule.ffi_ccu = ffi_ccu
 
 		# generate code
 		for block in n_extern_code_blocks do
 			var language = block.language
 			assert language != null
-			present_languages.add(language)
-			language.compile_module_block(block, ffi_ccu, self)
+			mmodule.present_languages.add(language)
+			language.compile_module_block(block, ffi_ccu, mmodule)
 		end
 
 		ffi_ccu.header_c_base.add( "#include \"{mmodule.name}._nitni.h\"\n" )
@@ -71,33 +93,11 @@ redef class AModule
 				mmodule.uses_ffi = true
 				var language = nclassdef.n_extern_code_block.language
 				assert language != null
-				present_languages.add(language)
+				mmodule.present_languages.add(language)
 				nclassdef.n_extern_code_block.language.compile_extern_class(
-					nclassdef.n_extern_code_block.as(not null), nclassdef, ffi_ccu, self)
+					nclassdef.n_extern_code_block.as(not null), nclassdef, ffi_ccu, mmodule)
 			end
 		end
-	end
-
-	# Complete the compilation of the FFI code
-	fun finalize_ffi_wrapper(compdir: String, mainmodule: MModule)
-	do
-		ensure_compile_ffi_wrapper
-
-		for language in present_languages do if ffi_callbacks.keys.has(language) then
-			for callback in ffi_callbacks[language] do
-				language.compile_callback(callback, self, mainmodule, ffi_ccu.as(not null))
-			end
-
-			language.compile_to_files(self, compdir)
-		end
-
-		# include dependancies FFI
-		for mod in mmodule.header_dependencies do
-			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.name}._ffi.h\"\n")
-		end
-
-		ffi_ccu.write_as_impl(self, compdir)
-		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, mmodule.c_compiler_options))
 	end
 end
 
@@ -105,20 +105,18 @@ redef class AMethPropdef
 	private var ffi_has_been_compiled = false
 
 	# Compile the necessary wrapper around this extern method or constructor
-	fun compile_ffi_method(amodule: AModule)
+	fun compile_ffi_method(mmodule: MModule)
 	do
 		assert n_extern_code_block != null
 
 		if ffi_has_been_compiled then return
 		ffi_has_been_compiled = true
 
-		amodule.ensure_compile_ffi_wrapper
-
 		var language = n_extern_code_block.language
 		assert language != null
-		amodule.present_languages.add(language)
+		mmodule.present_languages.add(language)
 		n_extern_code_block.language.compile_extern_method(
-			n_extern_code_block.as(not null), self, amodule.ffi_ccu.as(not null), amodule)
+			n_extern_code_block.as(not null), self, mmodule.ffi_ccu.as(not null), mmodule)
 	end
 end
 
@@ -137,7 +135,7 @@ redef class VerifyNitniCallbacksPhase
 
 		# Associate callbacks used by an extern method to its foreign language
 		for callback in npropdef.foreign_callbacks.all do
-			var map = npropdef.parent.parent.as(AModule).ffi_callbacks
+			var map = npropdef.mpropdef.mclassdef.mmodule.ffi_callbacks
 			if not map.keys.has(lang) then map[lang] = new HashSet[NitniCallback]
 			map[lang].add(callback)
 		end

@@ -28,7 +28,7 @@ class CLanguage
 
 	redef fun identify_language(n) do return n.is_c
 
-	redef fun compile_module_block(block, ecc, nmodule)
+	redef fun compile_module_block(block, ecc, mmodule)
 	do
 		if block.is_c_header then
 			ecc.header_custom.add( block.location.as_line_pragma )
@@ -39,21 +39,21 @@ class CLanguage
 		end
 	end
 
-	redef fun compile_extern_method(block, m, ecc, nmodule)
+	redef fun compile_extern_method(block, m, ecc, mmodule)
 	do
-		var fc = new ExternCFunction(m, nmodule.mmodule.as(not null))
+		var fc = new ExternCFunction(m, mmodule.as(not null))
 		fc.decls.add( block.location.as_line_pragma )
 		fc.exprs.add( block.code )
 		ecc.add_exported_function( fc )
 	end
 
-	redef fun compile_extern_class(block, m, ecc, nmodule) do end
+	redef fun compile_extern_class(block, m, ecc, mmodule) do end
 
 	redef fun get_ftype(block, m) do return new ForeignCType(block.code)
 
-	redef fun compile_callback(callback, nmodule, mmodule, ecc)
+	redef fun compile_callback(callback, mmodule, mainmodule, ecc)
 	do
-		callback.compile_callback_to_c(mmodule, ecc)
+		callback.compile_callback_to_c(mainmodule, ecc)
 	end
 end
 
@@ -88,7 +88,7 @@ class ForeignCType
 end
 
 redef class NitniCallback
-	fun compile_callback_to_c(nmodule: MModule, ffi_ccu: CCompilationUnit) do end
+	fun compile_callback_to_c(mmodule: MModule, ffi_ccu: CCompilationUnit) do end
 end
 
 redef class Object

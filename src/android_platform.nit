@@ -217,9 +217,14 @@ $(call import-module,android/native_app_glue)
 
 		### Link to assets (for mnit and others)
 		# This will be accessed from `android_project_root`
-		var mainmodule_dir = compiler.mainmodule.location.file.filename.dirname
-		var assets_dir = "{mainmodule_dir}/../assets"
-		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
+		var assets_dir
+		if compiler.mainmodule.location.file != null then
+			# it is a real file, use "{file}/../assets"
+			assets_dir = "{compiler.mainmodule.location.file.filename.dirname}/../assets"
+		else
+			# probably used -m, use "."
+			assets_dir = "assets"
+		end
 		if assets_dir.file_exists then
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
