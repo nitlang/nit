@@ -15,9 +15,9 @@
 # limitations under the License.
 
 class A
-	var _a: Int
+	var _a: Int = 1
 end
 class B
 	super A
-	redef var _a: Object
+	redef var _a: Object = 2
 end

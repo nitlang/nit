@@ -209,7 +209,7 @@ class Missile
 	super Shoot
 
 	# The target aquired by the missile
-	var target: nullable Sprite
+	var target: nullable Sprite = null
 
 	# When ttl is 0 then the angle stay fixed
 	# The angle is updated toward the target if ttl>0
