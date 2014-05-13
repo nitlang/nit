@@ -108,6 +108,7 @@ redef class ModelBuilder
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
+		var anode: nullable ANode = null
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
 				if npropdef.mpropdef == null then return # Skip broken attribute
@@ -116,10 +117,17 @@ redef class ModelBuilder
 				if ret_type == null then return
 				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
+				if anode == null then anode = npropdef
 			end
 		end
+		if anode == null then anode = nclassdef
 
 		if combine.is_empty and inhc != null then
+			if not mparameters.is_empty then
+				self.error(anode,"Error: {mclassdef} cannot inherit constructors from {inhc} because there is attributes without initial values: {mparameters.join(", ")}")
+				return
+			end
+
 			# TODO: actively inherit the consturctor
 			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
 			mclassdef.mclass.inherit_init_from = inhc
