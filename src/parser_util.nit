@@ -156,7 +156,8 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(ABlockExpr)
+			nblock.n_kwend = null # drop injected token
 			return nblock
 		end
 		if eof.location > error.location then error = eof

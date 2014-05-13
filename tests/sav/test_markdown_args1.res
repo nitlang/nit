@@ -55,12 +55,7 @@ same paragraph</p><p>Other paragraph with <code class="nitcode"><span class="nit
 but long
 bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_i">some</span>
 <span class="nc_i">block</span>
-<span class="nc_k"></span>some
-block
 </span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
-<span class="nc_k"></span>assert 1 + 1 == 2
 </span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="nc_i">to_s</span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_v nc_i"></span><span class="nc_t"></span><span class="nc_t">A</span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">var</span> <span class="nc_v nc_i">a</span> = <span class="nc_k">new</span> <span class="nc_t">A</span>
 <span class="nc_k">assert</span> <span class="nc_i">a</span><span class="nc_o">.</span><span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
-<span class="nc_k"></span>var a = new A
-assert a.to_s == &quot;A&quot;
 </span></pre></div></body></html>
