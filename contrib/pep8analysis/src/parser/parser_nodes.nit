@@ -6,7 +6,7 @@ import location
 
 # Root of the AST hierarchy
 abstract class ANode
-	var _location: nullable Location
+	var _location: nullable Location = null
 
 	# Location is set during AST building. Once built, location cannon be null
 	# However, manual instanciated nodes may need mode care
@@ -96,10 +96,12 @@ end
 class AInstruction
 	super Prod
     readable writable var _n_id: TId
+	init do end
 end
 class AOperand
 	super Prod
     readable var _n_value: AValue
+	init do end
 end
 class AValue super Prod end
 class ADirective super Prod end
@@ -109,10 +111,12 @@ class AListing
     readable var _n_lines: List[ALine] = new List[ALine]
     readable var _n_label_decl: nullable ALabelDecl = null
     readable var _n_end_block: TEndBlock
+	init do end
 end
 class AEmptyLine
 	super ALine
     readable var _n_eol: TEol
+	init do end
 end
 abstract class ANonEmptyLine
 	super ALine
@@ -121,16 +125,19 @@ class AInstructionLine
 	super ANonEmptyLine
     readable var _n_instruction: AInstruction
     readable var _n_eol: TEol
+	init do end
 end
 class ADirectiveLine
 	super ANonEmptyLine
     readable var _n_directive: ADirective
     readable var _n_eol: TEol
+	init do end
 end
 class ALabelDecl
 	super Prod
     readable var _n_id: TId
     readable var _n_colon: TColon
+	init do end
 end
 class AUnaryInstruction
 	super AInstruction
@@ -138,6 +145,7 @@ end
 class ABinaryInstruction
 	super AInstruction
     readable var _n_operand: AOperand
+	init do end
 end
 class AImmediateOperand
 	super AOperand
@@ -146,61 +154,74 @@ class AAnyOperand
 	super AOperand
     readable var _n_comma: TComma
     readable var _n_id: TId
+	init do end
 end
 class ALabelValue
 	super AValue
     readable var _n_id: TId
+	init do end
 end
 class ANumberValue
 	super AValue
     readable var _n_number: TNumber
+	init do end
 end
 class ACharValue
 	super AValue
     readable var _n_char: TChar
+	init do end
 end
 class AStringValue
 	super AValue
     readable var _n_string: TString
+	init do end
 end
 class AHexValue
 	super AValue
     readable var _n_hex: THex
+	init do end
 end
 class AByteDirective
 	super ADirective
     readable var _n_tk_byte: TTkByte
     readable var _n_value: AValue
+	init do end
 end
 class AWordDirective
 	super ADirective
     readable var _n_tk_word: TTkWord
     readable var _n_value: AValue
+	init do end
 end
 class ABlockDirective
 	super ADirective
     readable var _n_tk_block: TTkBlock
     readable var _n_value: AValue
+	init do end
 end
 class AAsciiDirective
 	super ADirective
     readable var _n_tk_ascii: TTkAscii
     readable var _n_value: AValue
+	init do end
 end
 class AAddrssDirective
 	super ADirective
     readable var _n_tk_addrss: TTkAddrss
     readable var _n_value: AValue
+	init do end
 end
 class AEquateDirective
 	super ADirective
     readable var _n_tk_equate: TTkEquate
     readable var _n_value: AValue
+	init do end
 end
 class ABurnDirective
 	super ADirective
     readable var _n_tk_burn: TTkBurn
     readable var _n_value: AValue
+	init do end
 end
 
 class Start
@@ -209,7 +230,7 @@ class Start
     readable var _n_eof: EOF
 	init(n_base: nullable AListing, n_eof: EOF)
 	do
-		super(null)
+		super
 		_n_base = n_base
 		_n_eof = n_eof
 	end

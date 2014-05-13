@@ -145,7 +145,8 @@ abstract class ARichBinaryInstruction
 		_n_id = src.n_id
 		parent = src.parent
 
-		init(src.location)
+		init
+		_location = src.location
 	end
 end
 
@@ -156,7 +157,8 @@ abstract class ARichUnaryInstruction
 		_n_id = src.n_id
 		parent = src.parent
 
-		init(src.location)
+		init
+		_location = src.location
 	end
 end
 

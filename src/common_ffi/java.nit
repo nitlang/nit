@@ -169,7 +169,7 @@ class JavaLanguage
 		nmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		nmodule.ensure_linking_callback_methods(ffi_ccu, nmodule.ffi_callbacks[self])
+		nmodule.ensure_linking_callback_methods(ffi_ccu.as(not null), nmodule.ffi_callbacks[self])
 
 		# Java implementation code
 		var java_file = nmodule.java_file
@@ -178,7 +178,7 @@ class JavaLanguage
 		nmodule.ffi_files.add(extern_java_file)
 	end
 
-	var ffi_ccu: CCompilationUnit # HACK
+	var ffi_ccu: nullable CCompilationUnit = null # HACK
 
 	redef fun compile_callback(callback, nmodule, mainmodule, ccu)
 	do

@@ -105,32 +105,10 @@ redef class ModelBuilder
 				inhc = inhc2
 			end
 		end
-		if combine.is_empty and inhc != null then
-			# TODO: actively inherit the consturctor
-			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
-			mclassdef.mclass.inherit_init_from = inhc
-			return
-		end
-		if not combine.is_empty and inhc != null then
-			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
-			return
-		end
-
-		if not combine.is_empty then
-			nclassdef.super_inits = combine
-			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
-			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-			var mparameters = new Array[MParameter]
-			var msignature = new MSignature(mparameters, null)
-			mpropdef.msignature = msignature
-			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
-			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
-			return
-		end
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
+		var anode: nullable ANode = null
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
 				if npropdef.mpropdef == null then return # Skip broken attribute
@@ -139,7 +117,37 @@ redef class ModelBuilder
 				if ret_type == null then return
 				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
+				if anode == null then anode = npropdef
 			end
+		end
+		if anode == null then anode = nclassdef
+
+		if combine.is_empty and inhc != null then
+			if not mparameters.is_empty then
+				self.error(anode,"Error: {mclassdef} cannot inherit constructors from {inhc} because there is attributes without initial values: {mparameters.join(", ")}")
+				return
+			end
+
+			# TODO: actively inherit the consturctor
+			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+			mclassdef.mclass.inherit_init_from = inhc
+			return
+		end
+
+		if not combine.is_empty and inhc != null then
+			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
+			return
+		end
+
+		if not combine.is_empty then
+			if mparameters.is_empty and combine.length == 1 then
+				# No need to create a local init, the inherited one is enough
+				inhc = combine.first.intro_mclassdef.mclass
+				mclassdef.mclass.inherit_init_from = inhc
+				self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+				return
+			end
+			nclassdef.super_inits = combine
 		end
 
 		var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
