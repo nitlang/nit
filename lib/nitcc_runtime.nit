@@ -473,8 +473,9 @@ end
 # A parser error linked to a unexpected token
 class NParserError
 	super NError
+
 	# The unexpected token
-	var token: nullable NToken
+	var token: nullable NToken = null
 
 	redef fun unexpected
 	do
