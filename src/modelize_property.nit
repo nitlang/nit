@@ -132,6 +132,13 @@ redef class ModelBuilder
 		end
 
 		if not combine.is_empty then
+			if mparameters.is_empty and combine.length == 1 then
+				# No need to create a local init, the inherited one is enough
+				inhc = combine.first.intro_mclassdef.mclass
+				mclassdef.mclass.inherit_init_from = inhc
+				self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+				return
+			end
 			nclassdef.super_inits = combine
 		end
 
