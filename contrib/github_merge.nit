@@ -36,7 +36,12 @@ redef class GithubCurl
 		prm["statuses"] = statuses
 		print "{prm["title"]}: by {prm["user"].json_as_map["login"]} (# {prm["number"]})"
 		print "\tmergable: {prm["mergeable"]}"
-		print "\tstatus: {prm["statuses"].json_as_a[0].json_as_map["state"]}"
+		var st = prm["statuses"].json_as_a
+		if not st.is_empty then
+			print "\tstatus: {st[0].json_as_map["state"]}"
+		else
+			print "\tstatus: not tested"
+		end
 		return prm
 	end
 
