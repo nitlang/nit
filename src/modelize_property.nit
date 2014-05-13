@@ -105,29 +105,6 @@ redef class ModelBuilder
 				inhc = inhc2
 			end
 		end
-		if combine.is_empty and inhc != null then
-			# TODO: actively inherit the consturctor
-			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
-			mclassdef.mclass.inherit_init_from = inhc
-			return
-		end
-		if not combine.is_empty and inhc != null then
-			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
-			return
-		end
-
-		if not combine.is_empty then
-			nclassdef.super_inits = combine
-			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
-			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-			var mparameters = new Array[MParameter]
-			var msignature = new MSignature(mparameters, null)
-			mpropdef.msignature = msignature
-			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
-			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
-			return
-		end
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
@@ -140,6 +117,22 @@ redef class ModelBuilder
 				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
 			end
+		end
+
+		if combine.is_empty and inhc != null then
+			# TODO: actively inherit the consturctor
+			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+			mclassdef.mclass.inherit_init_from = inhc
+			return
+		end
+
+		if not combine.is_empty and inhc != null then
+			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
+			return
+		end
+
+		if not combine.is_empty then
+			nclassdef.super_inits = combine
 		end
 
 		var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
