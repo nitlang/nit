@@ -374,6 +374,16 @@ extern class JniEnv `{JNIEnv *`}
 	fun string_to_jobject(string: String): JavaObject `{
 		return (*recv)->NewStringUTF(recv, String_to_cstring(string));
 	`}
+
+	# Pushes a local reference frame on the JNI stack
+	fun push_local_frame(capacity: Int): Bool `{
+		return (*recv)->PushLocalFrame(recv, capacity);
+	`}
+
+	# Pops the current local reference frame on the JNI stack
+	fun pop_local_frame `{
+		(*recv)->PopLocalFrame(recv, NULL);
+	`}
 end
 
 # used to initialize a JavaVM 
