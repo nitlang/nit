@@ -113,7 +113,8 @@ redef class MMethod
 		end
 
 		for p in signature.mparameters do
-			cparams.add(call_context.cast_to(p.mtype, "{p.name}{param_suffix}"))
+			var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
+			cparams.add(call_context.cast_to(param_mtype, "{p.name}{param_suffix}"))
 		end
 
 		var joined_cparams = cparams.join(", ")
