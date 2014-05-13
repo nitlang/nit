@@ -58,6 +58,10 @@ redef class GithubCurl
 		var res = new Array[String]
 		for l in logins do
 			var u = get_and_check("https://api.github.com/users/{l}").json_as_map
+			if not u.has_key("name") then
+				print "No public name for user {l}"
+				continue
+			end
 			var r = "{u["name"]} <{u["email"]}>"
 			res.add r
 
