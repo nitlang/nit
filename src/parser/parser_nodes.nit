@@ -179,11 +179,11 @@ abstract class Token
 
 	# The previous token in the Lexer.
 	# May have disapeared in the AST
-	var prev_token: nullable Token
+	var prev_token: nullable Token = null
 
 	# The next token in the Lexer.
 	# May have disapeared in the AST
-	var next_token: nullable Token
+	var next_token: nullable Token = null
 
 	redef fun to_s: String do
 		return "'{text}'"
@@ -620,6 +620,7 @@ class AModule
 	readable var _n_imports: ANodes[AImport] = new ANodes[AImport](self)
 	readable var _n_extern_code_blocks: ANodes[AExternCodeBlock] = new ANodes[AExternCodeBlock](self)
 	readable var _n_classdefs: ANodes[AClassdef] = new ANodes[AClassdef](self)
+	init do end
 end
 
 # The declaration of the module with the documentation, name, and annotations
@@ -628,6 +629,7 @@ class AModuledecl
 	readable writable var _n_doc: nullable ADoc = null
 	readable writable var _n_kwmodule: TKwmodule
 	readable writable var _n_name: AModuleName
+	init do end
 end
 
 # A import clause of a module
@@ -641,6 +643,7 @@ class AStdImport
 	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwimport: TKwimport
 	readable writable var _n_name: AModuleName
+	init do end
 end
 
 # The special import clause of the kernel module. eg `import end`
@@ -649,6 +652,7 @@ class ANoImport
 	readable writable var _n_visibility: AVisibility
 	readable writable var _n_kwimport: TKwimport
 	readable writable var _n_kwend: TKwend
+	init do end
 end
 
 # A visibility modifier
@@ -666,21 +670,26 @@ end
 class APrivateVisibility
 	super AVisibility
 	readable writable var _n_kwprivate: TKwprivate
+	init do end
 end
 class AProtectedVisibility
 	super AVisibility
 	readable writable var _n_kwprotected: TKwprotected
+	init do end
 end
 class AIntrudeVisibility
 	super AVisibility
 	readable writable var _n_kwintrude: TKwintrude
+	init do end
 end
 
 # A class definition
 # While most definition are `AStdClassdef`
 # There is tow special case of class definition
-abstract class AClassdef super Prod
+abstract class AClassdef
+	super Prod
 	readable var _n_propdefs: ANodes[APropdef] = new ANodes[APropdef](self)
+	init do end
 end
 
 # A standard class definition with a name, superclasses and properties
@@ -696,6 +705,7 @@ class AStdClassdef
 	readable var _n_superclasses: ANodes[ASuperclass] = new ANodes[ASuperclass](self)
 	readable writable var _n_kwend: TKwend
 	redef fun hot_location do return n_id.location
+	init do end
 end
 
 # The implicit class definition of the implicit main method
@@ -715,24 +725,29 @@ end
 class AConcreteClasskind
 	super AClasskind
 	readable writable var _n_kwclass: TKwclass
+	init do end
 end
 class AAbstractClasskind
 	super AClasskind
 	readable writable var _n_kwabstract: TKwabstract
 	readable writable var _n_kwclass: TKwclass
+	init do end
 end
 class AInterfaceClasskind
 	super AClasskind
 	readable writable var _n_kwinterface: TKwinterface
+	init do end
 end
 class AEnumClasskind
 	super AClasskind
 	readable writable var _n_kwenum: TKwenum
+	init do end
 end
 class AExternClasskind
 	super AClasskind
 	readable writable var _n_kwextern: TKwextern
 	readable writable var _n_kwclass: nullable TKwclass = null
+	init do end
 end
 
 # The definition of a formal generic parameter type. eg `X: Y`
@@ -741,6 +756,7 @@ class AFormaldef
 	readable writable var _n_id: TClassid
 	# The bound of the parameter type
 	readable writable var _n_type: nullable AType = null
+	init do end
 end
 
 # A super-class. eg `super X`
@@ -748,6 +764,7 @@ class ASuperclass
 	super Prod
 	readable writable var _n_kwsuper: TKwsuper
 	readable writable var _n_type: AType
+	init do end
 end
 
 # The definition of a property
@@ -780,16 +797,17 @@ class AAttrPropdef
 	do
 		if n_id != null then return n_id.location else return n_id2.location
 	end
+	init do end
 end
 
 # A definition of all kind of method (including constructors)
 abstract class AMethPropdef
 	super APropdef
-	readable writable var _n_kwmeth: nullable TKwmeth
-	readable writable var _n_kwinit: nullable TKwinit
-	readable writable var _n_kwnew: nullable TKwnew
+	readable writable var _n_kwmeth: nullable TKwmeth = null
+	readable writable var _n_kwinit: nullable TKwinit = null
+	readable writable var _n_kwnew: nullable TKwnew = null
 	readable writable var _n_methid: nullable AMethid = null
-	readable writable var _n_signature: nullable ASignature
+	readable writable var _n_signature: nullable ASignature = null
 	readable writable var _n_block: nullable AExpr = null
 	readable writable var _n_extern: nullable TString = null
 	readable writable var _n_extern_calls: nullable AExternCalls = null
@@ -861,6 +879,7 @@ class AExternCalls
 	super Prod
 	readable writable var _n_kwimport: TKwimport
 	readable var _n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
+	init do end
 end
 abstract class AExternCall
 	super Prod
@@ -871,20 +890,24 @@ end
 class ALocalPropExternCall
 	super APropExternCall
 	readable writable var _n_methid: AMethid
+	init do end
 end
 class AFullPropExternCall
 	super APropExternCall
 	readable writable var _n_type: AType
 	readable writable var _n_dot: nullable TDot = null
 	readable writable var _n_methid: AMethid
+	init do end
 end
 class AInitPropExternCall
 	super APropExternCall
 	readable writable var _n_type: AType
+	init do end
 end
 class ASuperExternCall
 	super AExternCall
 	readable writable var _n_kwsuper: TKwsuper
+	init do end
 end
 abstract class ACastExternCall
 	super AExternCall
@@ -895,12 +918,14 @@ class ACastAsExternCall
 	readable writable var _n_dot: nullable TDot = null
 	readable writable var _n_kwas: TKwas
 	readable writable var _n_to_type: AType
+	init do end
 end
 class AAsNullableExternCall
 	super ACastExternCall
 	readable writable var _n_type: AType
 	readable writable var _n_kwas: TKwas
 	readable writable var _n_kwnullable: TKwnullable
+	init do end
 end
 class AAsNotNullableExternCall
 	super ACastExternCall
@@ -908,6 +933,7 @@ class AAsNotNullableExternCall
 	readable writable var _n_kwas: TKwas
 	readable writable var _n_kwnot: TKwnot
 	readable writable var _n_kwnullable: TKwnullable
+	init do end
 end
 
 # A definition of a virtual type
@@ -916,6 +942,7 @@ class ATypePropdef
 	readable writable var _n_kwtype: TKwtype
 	readable writable var _n_id: TClassid
 	readable writable var _n_type: AType
+	init do end
 end
 
 # A `writable` or `readable` modifier
@@ -923,18 +950,21 @@ abstract class AAble
 	super Prod
 	readable writable var _n_visibility: nullable AVisibility = null
 	readable writable var _n_kwredef: nullable TKwredef = null
+	init do end
 end
 
 # A `readable` modifier
 class AReadAble
 	super AAble
 	readable writable var _n_kwreadable: TKwreadable
+	init do end
 end
 
 # A `writable` modifier
 class AWriteAble
 	super AAble
 	readable writable var _n_kwwritable: TKwwritable
+	init do end
 end
 
 # The identifier of a method in a method declaration.
@@ -945,78 +975,96 @@ end
 class AIdMethid
 	super AMethid
 	readable writable var _n_id: TId
+	init do end
 end
 class APlusMethid
 	super AMethid
 	readable writable var _n_plus: TPlus
+	init do end
 end
 class AMinusMethid
 	super AMethid
 	readable writable var _n_minus: TMinus
+	init do end
 end
 class AStarMethid
 	super AMethid
 	readable writable var _n_star: TStar
+	init do end
 end
 class ASlashMethid
 	super AMethid
 	readable writable var _n_slash: TSlash
+	init do end
 end
 class APercentMethid
 	super AMethid
 	readable writable var _n_percent: TPercent
+	init do end
 end
 class AEqMethid
 	super AMethid
 	readable writable var _n_eq: TEq
+	init do end
 end
 class ANeMethid
 	super AMethid
 	readable writable var _n_ne: TNe
+	init do end
 end
 class ALeMethid
 	super AMethid
 	readable writable var _n_le: TLe
+	init do end
 end
 class AGeMethid
 	super AMethid
 	readable writable var _n_ge: TGe
+	init do end
 end
 class ALtMethid
 	super AMethid
 	readable writable var _n_lt: TLt
+	init do end
 end
 class AGtMethid
 	super AMethid
 	readable writable var _n_gt: TGt
+	init do end
 end
 class ALlMethid
 	super AMethid
 	readable writable var _n_ll: TLl
+	init do end
 end
 class AGgMethid
 	super AMethid
 	readable writable var _n_gg: TGg
+	init do end
 end
 class ABraMethid
 	super AMethid
 	readable writable var _n_obra: TObra
 	readable writable var _n_cbra: TCbra
+	init do end
 end
 class AStarshipMethid
 	super AMethid
 	readable writable var _n_starship: TStarship
+	init do end
 end
 class AAssignMethid
 	super AMethid
 	readable writable var _n_id: TId
 	readable writable var _n_assign: TAssign
+	init do end
 end
 class ABraassignMethid
 	super AMethid
 	readable writable var _n_obra: TObra
 	readable writable var _n_cbra: TCbra
 	readable writable var _n_assign: TAssign
+	init do end
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
@@ -1026,6 +1074,7 @@ class ASignature
 	readable var _n_params: ANodes[AParam] = new ANodes[AParam](self)
 	readable writable var _n_cpar: nullable TCpar = null
 	readable writable var _n_type: nullable AType = null
+	init do end
 end
 
 # A parameter definition in a signature. eg `x:X`
@@ -1034,6 +1083,7 @@ class AParam
 	readable writable var _n_id: TId
 	readable writable var _n_type: nullable AType = null
 	readable writable var _n_dotdotdot: nullable TDotdotdot = null
+	init do end
 end
 
 # A static type. eg `nullable X[Y]`
@@ -1046,6 +1096,7 @@ class AType
 
 	# Type arguments for a generic type
 	readable var _n_types: ANodes[AType] = new ANodes[AType](self)
+	init do end
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
@@ -1053,6 +1104,7 @@ class ALabel
 	super Prod
 	readable writable var _n_kwlabel: TKwlabel
 	readable writable var _n_id: TId
+	init do end
 end
 
 # Expression and statements
@@ -1067,6 +1119,7 @@ class ABlockExpr
 	super AExpr
 	readable var _n_expr: ANodes[AExpr] = new ANodes[AExpr](self)
 	readable writable var _n_kwend: nullable TKwend = null
+	init do end
 end
 
 # A declaration of a local variable. eg `var x: X = y`
@@ -1079,6 +1132,7 @@ class AVardeclExpr
 
 	# The initial value, if any
 	readable writable var _n_expr: nullable AExpr = null
+	init do end
 end
 
 # A `return` statement. eg `return x`
@@ -1086,12 +1140,14 @@ class AReturnExpr
 	super AExpr
 	readable writable var _n_kwreturn: nullable TKwreturn = null
 	readable writable var _n_expr: nullable AExpr = null
+	init do end
 end
 
 # Something that has a label.
 abstract class ALabelable
 	super Prod
 	readable writable var _n_label: nullable ALabel = null
+	init do end
 end
 
 # A `break` statement.
@@ -1100,12 +1156,14 @@ class ABreakExpr
 	super ALabelable
 	readable writable var _n_kwbreak: TKwbreak
 	readable writable var _n_expr: nullable AExpr = null
+	init do end
 end
 
 # An `abort` statement
 class AAbortExpr
 	super AExpr
 	readable writable var _n_kwabort: TKwabort
+	init do end
 end
 
 # A `continue` statement
@@ -1114,6 +1172,7 @@ class AContinueExpr
 	super ALabelable
 	readable writable var _n_kwcontinue: nullable TKwcontinue = null
 	readable writable var _n_expr: nullable AExpr = null
+	init do end
 end
 
 # A `do` statement
@@ -1122,6 +1181,7 @@ class ADoExpr
 	super ALabelable
 	readable writable var _n_kwdo: TKwdo
 	readable writable var _n_block: nullable AExpr = null
+	init do end
 end
 
 # A `if` statement
@@ -1131,6 +1191,7 @@ class AIfExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_then: nullable AExpr = null
 	readable writable var _n_else: nullable AExpr = null
+	init do end
 end
 
 # A `if` expression
@@ -1142,6 +1203,7 @@ class AIfexprExpr
 	readable writable var _n_then: AExpr
 	readable writable var _n_kwelse: TKwelse
 	readable writable var _n_else: AExpr
+	init do end
 end
 
 # A `while` statement
@@ -1152,6 +1214,7 @@ class AWhileExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_kwdo: TKwdo
 	readable writable var _n_block: nullable AExpr = null
+	init do end
 end
 
 # A `loop` statement
@@ -1160,6 +1223,7 @@ class ALoopExpr
 	super ALabelable
 	readable writable var _n_kwloop: TKwloop
 	readable writable var _n_block: nullable AExpr = null
+	init do end
 end
 
 # A `for` statement
@@ -1171,6 +1235,7 @@ class AForExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_kwdo: TKwdo
 	readable writable var _n_block: nullable AExpr = null
+	init do end
 end
 
 # An `assert` statement
@@ -1180,6 +1245,7 @@ class AAssertExpr
 	readable writable var _n_id: nullable TId = null
 	readable writable var _n_expr: AExpr
 	readable writable var _n_else: nullable AExpr = null
+	init do end
 end
 
 # Whatever is a simple assignment. eg `= something`
@@ -1187,6 +1253,7 @@ abstract class AAssignFormExpr
 	super AExpr
 	readable writable var _n_assign: TAssign
 	readable writable var _n_value: AExpr
+	init do end
 end
 
 # Whatever is a combined assignment. eg `+= something`
@@ -1194,12 +1261,14 @@ abstract class AReassignFormExpr
 	super AExpr
 	readable writable var _n_assign_op: AAssignOp
 	readable writable var _n_value: AExpr
+	init do end
 end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
 	super AProxyExpr
 	readable writable var _n_kwonce: TKwonce
+	init do end
 end
 
 # A polymorphic invocation of a method
@@ -1208,6 +1277,7 @@ abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
 	readable writable var _n_expr: AExpr
+	init do end
 end
 
 # A binary operation on a method
@@ -1216,6 +1286,7 @@ abstract class ABinopExpr
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # Something that is boolean expression
@@ -1228,6 +1299,7 @@ class AOrExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # A `and` expression
@@ -1235,6 +1307,7 @@ class AAndExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # A `or else` expression
@@ -1242,6 +1315,7 @@ class AOrElseExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # A `implies` expression
@@ -1249,6 +1323,7 @@ class AImpliesExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # A `not` expression
@@ -1256,6 +1331,7 @@ class ANotExpr
 	super ABoolExpr
 	readable writable var _n_kwnot: TKwnot
 	readable writable var _n_expr: AExpr
+	init do end
 end
 
 # A `==` expression
@@ -1303,6 +1379,7 @@ class AIsaExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_type: AType
+	init do end
 end
 
 # A `+` expression
@@ -1339,6 +1416,7 @@ end
 class AUminusExpr
 	super ASendExpr
 	readable writable var _n_minus: TMinus
+	init do end
 end
 
 # An explicit instantiation. eg `new T`
@@ -1350,6 +1428,7 @@ class ANewExpr
 	# The name of the named-constructor, if any
 	readable writable var _n_id: nullable TId = null
 	readable writable var _n_args: AExprs
+	init do end
 end
 
 # Whatever is a old-style attribute access
@@ -1361,6 +1440,8 @@ abstract class AAttrFormExpr
 
 	# The name of the attribute
 	readable writable var _n_id: TAttrid
+
+	init do end
 end
 
 # The read of an attribute. eg `x._a`
@@ -1383,6 +1464,7 @@ abstract class ACallFormExpr
 
 	# The arguments of the call
 	readable writable var _n_args: AExprs
+	init do end
 end
 
 # A complex setter call (standard or brackets)
@@ -1426,6 +1508,7 @@ class ASuperExpr
 	readable writable var _n_qualified: nullable AQualified = null
 	readable writable var _n_kwsuper: TKwsuper
 	readable writable var _n_args: AExprs
+	init do end
 end
 
 # A call to the `init` constructor.
@@ -1434,12 +1517,14 @@ class AInitExpr
 	super ASendExpr
 	readable writable var _n_kwinit: TKwinit
 	readable writable var _n_args: AExprs
+	init do end
 end
 
 # Whatever looks-like a call of the brackets `[]` operator.
 abstract class ABraFormExpr
 	super ASendExpr
 	readable writable var _n_args: AExprs
+	init do end
 end
 
 # A call of the brackets operator. eg `x[y,z]`
@@ -1457,6 +1542,7 @@ end
 abstract class AVarFormExpr
 	super AExpr
 	readable writable var _n_id: TId
+	init do end
 end
 
 # A complex setter call of the bracket operator. eg `x[y,z]+=t`
@@ -1490,6 +1576,7 @@ abstract class ARangeExpr
 	super AExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
+	init do end
 end
 
 # A closed literal range. eg `[x..y]`
@@ -1497,6 +1584,7 @@ class ACrangeExpr
 	super ARangeExpr
 	readable writable var _n_obra: TObra
 	readable writable var _n_cbra: TCbra
+	init do end
 end
 
 # An open literal range. eg `[x..y[`
@@ -1504,18 +1592,21 @@ class AOrangeExpr
 	super ARangeExpr
 	readable writable var _n_obra: TObra
 	readable writable var _n_cbra: TObra
+	init do end
 end
 
 # A literal array. eg. `[x,y,z]`
 class AArrayExpr
 	super AExpr
 	readable writable var _n_exprs: AExprs
+	init do end
 end
 
 # A read of `self` 
 class ASelfExpr
 	super AExpr
 	readable writable var _n_kwself: nullable TKwself
+	init do end
 end
 
 # When there is no explicit receiver, `self` is implicit
@@ -1527,16 +1618,19 @@ end
 class ATrueExpr
 	super ABoolExpr
 	readable writable var _n_kwtrue: TKwtrue
+	init do end
 end
 # A `false` boolean literal constant
 class AFalseExpr
 	super ABoolExpr
 	readable writable var _n_kwfalse: TKwfalse
+	init do end
 end
 # A `null` literal constant
 class ANullExpr
 	super AExpr
 	readable writable var _n_kwnull: TKwnull
+	init do end
 end
 # An integer literal
 class AIntExpr
@@ -1546,26 +1640,31 @@ end
 class ADecIntExpr
 	super AIntExpr
 	readable writable var _n_number: TNumber
+	init do end
 end
 # An integer literal in hexadecimal format
 class AHexIntExpr
 	super AIntExpr
 	readable writable var _n_hex_number: THexNumber
+	init do end
 end
 # A float literal
 class AFloatExpr
 	super AExpr
 	readable writable var _n_float: TFloat
+	init do end
 end
 # A character literal
 class ACharExpr
 	super AExpr
 	readable writable var _n_char: TChar
+	init do end
 end
 # A string literal
 abstract class AStringFormExpr
 	super AExpr
 	readable writable var _n_string: Token
+	init do end
 end
 
 # A simple string. eg. `"abc"`
@@ -1593,6 +1692,7 @@ end
 class ASuperstringExpr
 	super AExpr
 	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
+	init do end
 end
 
 # A simple parenthesis. eg `(x)`
@@ -1600,12 +1700,14 @@ class AParExpr
 	super AProxyExpr
 	readable writable var _n_opar: TOpar
 	readable writable var _n_cpar: TCpar
+	init do end
 end
 
 # Whatevej just contains (and mimic) an other expression
 abstract class AProxyExpr
 	super AExpr
 	readable writable var _n_expr: AExpr
+	init do end
 end
 
 # A type cast. eg `x.as(T)`
@@ -1616,6 +1718,7 @@ class AAsCastExpr
 	readable writable var _n_opar: nullable TOpar = null
 	readable writable var _n_type: AType
 	readable writable var _n_cpar: nullable TCpar = null
+	init do end
 end
 
 # A as-not-null cast. eg `x.as(not null)`
@@ -1627,18 +1730,21 @@ class AAsNotnullExpr
 	readable writable var _n_kwnot: TKwnot
 	readable writable var _n_kwnull: TKwnull
 	readable writable var _n_cpar: nullable TCpar = null
+	init do end
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
 class AIssetAttrExpr
 	super AAttrFormExpr
 	readable writable var _n_kwisset: TKwisset
+	init do end
 end
 
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
 	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
+	init do end
 end
 
 class ADebugTypeExpr
@@ -1647,6 +1753,7 @@ class ADebugTypeExpr
 	readable writable var _n_kwtype: TKwtype
 	readable writable var _n_expr: AExpr
 	readable writable var _n_type: AType
+	init do end
 end
 
 # A simple list of expressions
@@ -1659,6 +1766,7 @@ class AParExprs
 	super AExprs
 	readable writable var _n_opar: TOpar
 	readable writable var _n_cpar: TCpar
+	init do end
 end
 
 # A list of expressions enclosed in brackets
@@ -1666,6 +1774,7 @@ class ABraExprs
 	super AExprs
 	readable writable var _n_obra: TObra
 	readable writable var _n_cbra: TCbra
+	init do end
 end
 
 # A complex assignment operator. eg `+=`
@@ -1675,10 +1784,12 @@ end
 class APlusAssignOp
 	super AAssignOp
 	readable writable var _n_pluseq: TPluseq
+	init do end
 end
 class AMinusAssignOp
 	super AAssignOp
 	readable writable var _n_minuseq: TMinuseq
+	init do end
 end
 
 class AModuleName
@@ -1686,22 +1797,26 @@ class AModuleName
 	readable writable var _n_quad: nullable TQuad = null
 	readable var _n_path: ANodes[TId] = new ANodes[TId](self)
 	readable writable var _n_id: TId
+	init do end
 end
 class AInLanguage
 	super Prod
 	readable writable var _n_kwin: TKwin
 	readable writable var _n_string: TString
+	init do end
 end
 class AExternCodeBlock
 	super Prod
 	readable writable var _n_in_language: nullable AInLanguage = null
 	readable writable var _n_extern_code_segment: TExternCodeSegment
+	init do end
 end
 class AQualified
 	super Prod
 	readable writable var _n_quad: nullable TQuad = null
 	readable var _n_id: ANodes[TId] = new ANodes[TId](self)
 	readable writable var _n_classid: nullable TClassid = null
+	init do end
 end
 
 # A documentation of a definition
@@ -1709,6 +1824,7 @@ end
 class ADoc
 	super Prod
 	readable var _n_comment: ANodes[TComment] = new ANodes[TComment](self)
+	init do end
 end
 
 class AAnnotations
@@ -1717,6 +1833,7 @@ class AAnnotations
 	readable writable var _n_opar: nullable TOpar = null
 	readable var _n_items: ANodes[AAnnotation] = new ANodes[AAnnotation](self)
 	readable writable var _n_cpar: nullable TCpar = null
+	init do end
 end
 class AAnnotation
 	super Prod
@@ -1724,6 +1841,7 @@ class AAnnotation
 	readable writable var _n_opar: nullable TOpar = null
 	readable var _n_args: ANodes[AAtArg] = new ANodes[AAtArg](self)
 	readable writable var _n_cpar: nullable TCpar = null
+	init do end
 end
 abstract class AAtArg
 	super Prod
@@ -1731,10 +1849,12 @@ end
 class ATypeAtArg
 	super AAtArg
 	readable writable var _n_type: AType
+	init do end
 end
 class AExprAtArg
 	super AAtArg
 	readable writable var _n_expr: AExpr
+	init do end
 end
 class AAtAtArg
 	super AAtArg
@@ -1742,6 +1862,7 @@ end
 abstract class AAtid
 	super Prod
 	readable writable var _n_id: Token
+	init do end
 end
 class AIdAtid
 	super AAtid

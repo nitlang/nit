@@ -29,6 +29,7 @@ class TplNitdocPage
 	var content: Streamable writable
 	var footer: nullable TplFooter writable
 	var scripts = new Array[TplScript] # js scripts appended to body
+	init do end
 
 	redef fun rendering do
 		add "<!DOCTYPE html>"
@@ -226,6 +227,7 @@ class TplOverviewPage
 	var text: nullable Streamable writable
 	var graph: nullable TplGraph writable
 	var modules = new Array[Streamable]
+	init do end
 
 	redef fun rendering do
 		add "<div class='content fullpage'>"
@@ -257,6 +259,7 @@ class TplSearchPage
 	var modules = new Array[Streamable]
 	var classes = new Array[Streamable]
 	var props = new Array[Streamable]
+	init do end
 
 	redef fun rendering do
 		add "<div class='content fullpage'>"
@@ -311,6 +314,7 @@ class TplModulePage
 	var graph: nullable TplGraph writable
 	var intros = new Array[TplArticle]
 	var redefs = new Array[TplArticle]
+	init do end
 
 	redef fun rendering do
 		add "<div class='content'>"
@@ -354,6 +358,8 @@ class TplClassPage
 	var types = new Array[TplArticle]
 	var inits = new Array[TplArticle]
 	var methods = new Array[Streamable]
+
+	init do end
 
 	redef fun rendering do
 		add "<div class='content'>"
@@ -505,6 +511,8 @@ class TplArticle
 	var subtitle: Template writable
 	var content: nullable Template writable
 
+	init do end
+
 	redef fun rendering do
 		add "<article class='{classes.join(" ")}' id='{id}'>"
 		add "<h3 class='signature'>"
@@ -532,6 +540,8 @@ class TplDefinition
 	var namespace: Streamable writable
 	var location: nullable Streamable writable
 	var github_area: nullable TplGithubArea writable
+
+	init do end
 
 	redef fun rendering do
 		add "<div class='description'>"
@@ -616,6 +626,8 @@ class TplLink
 	var text: String writable
 	var title: nullable String writable
 
+	init do end
+
 	redef fun rendering do
 		add "<a href=\""
 		add href
@@ -660,6 +672,8 @@ class TplConcernListElt
 	var name: String writable
 	var comment: nullable String writable
 
+	init do end
+
 	redef fun rendering do
 		add "<li>"
 		add "<a href=\"{anchor}\">{name}</a>"
@@ -677,6 +691,8 @@ class TplTopConcern
 	var anchor: String writable
 	var concern: TplLink writable
 
+	init do end
+
 	redef fun rendering do
 		add "<a id=\"{anchor}\"></a>"
 		add "<h3 class=\"concern-toplevel\">Methods refined in "
@@ -692,6 +708,8 @@ class TplConcern
 	var anchor: String writable
 	var concern: TplLink writable
 	var comment: nullable String writable
+
+	init do end
 
 	redef fun rendering do
 		add "<a id=\"{anchor}\"></a>"

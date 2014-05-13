@@ -79,9 +79,7 @@ module template
 #         end
 #         # ...
 #     end
-#     var l = new LnkTmpl
-#     l.text = "hello world"
-#     l.href = "hello.png"
+#     var l = new LnkTmpl("hello world", null, "hello.png")
 #     assert l.write_to_string == """<a href="hello.png">hello world</a>"""
 #
 class Template
