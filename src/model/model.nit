@@ -1472,6 +1472,15 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
+	redef fun to_s
+	do
+		if is_vararg then
+			return "{name}: {mtype}..."
+		else
+			return "{name}: {mtype}"
+		end
+	end
+
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
 	do
 		if not self.mtype.need_anchor then return self
