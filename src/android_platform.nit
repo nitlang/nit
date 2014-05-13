@@ -65,7 +65,7 @@ end
 class AndroidToolchain
 	super MakefileToolchain
 
-	var android_project_root: String
+	var android_project_root: nullable String = null
 
 	redef fun compile_dir
 	do
@@ -76,6 +76,7 @@ class AndroidToolchain
 
 	redef fun write_files(compiler, compile_dir, cfiles)
 	do
+		var android_project_root = android_project_root.as(not null)
 		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
 		var short_project_name = compiler.mainmodule.name
 
@@ -235,6 +236,7 @@ $(call import-module,android/native_app_glue)
 
 	redef fun compile_c_code(compiler, compile_dir)
 	do
+		var android_project_root = android_project_root.as(not null)
 		# Compile C code (and thus Nit)
 		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root])
 
