@@ -2013,11 +2013,11 @@ redef class AClassdef
 		if mpropdef == self.mfree_init then
 			var super_inits = self.super_inits
 			if super_inits != null then
-				assert arguments.length == 1
+				var args_of_super = arguments
+				if arguments.length > 1 then args_of_super = [arguments.first]
 				for su in super_inits do
-					v.send(su, arguments)
+					v.send(su, args_of_super)
 				end
-				return
 			end
 			var recv = arguments.first
 			var i = 1
