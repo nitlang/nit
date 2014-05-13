@@ -1000,11 +1000,11 @@ redef class AClassdef
 	do
 		var super_inits = self.super_inits
 		if super_inits != null then
-			assert args.length == 1
+			var args_of_super = args
+			if args.length > 1 then args_of_super = [args.first]
 			for su in super_inits do
-				v.send(su, args)
+				v.send(su, args_of_super)
 			end
-			return null
 		end
 		var recv = args.first
 		assert recv isa MutableInstance
