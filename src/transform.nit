@@ -190,39 +190,6 @@ redef class AArrayExpr
 	end
 end
 
-redef class ASuperstringExpr
-	# `"x{y}z"` is replaced with
-	#
-	#     var t = new Array[Object].with_capacity(3)
-	#     t.add("x")
-	#     t.add(y)
-	#     t.add("z")
-	#     t.to_s
-	redef fun accept_transform_visitor(v)
-	do
-		if true then return # FIXME: transformation disabled for the moment
-
-		var nblock = v.builder.make_block
-
-		var arraytype = v.get_class(self, "Array").get_mtype([v.get_class(self, "Object").mclass_type])
-		var meth = v.get_method(self, "with_capacity", arraytype.mclass)
-		var nnew = v.builder.make_new(arraytype, meth, [v.builder.make_int(n_exprs.length)])
-		nblock.add nnew
-
-		var madd = v.get_method(self, "add", arraytype.mclass)
-		for nexpr in self.n_exprs do
-			var nadd = v.builder.make_call(nnew.make_var_read, madd, [nexpr])
-			nblock.add nadd
-		end
-
-		var mtos = v.get_method(self, "to_s", arraytype.mclass)
-		var ntos = v.builder.make_call(nnew.make_var_read, mtos, null)
-		nblock.add ntos
-
-		replace_with(nblock)
-	end
-end
-
 redef class ACrangeExpr
 	# `[x..y]` is replaced with `new Range[X](x,y)`
 	redef fun accept_transform_visitor(v)
