@@ -36,7 +36,12 @@ redef class GithubCurl
 		prm["statuses"] = statuses
 		print "{prm["title"]}: by {prm["user"].json_as_map["login"]} (# {prm["number"]})"
 		print "\tmergable: {prm["mergeable"]}"
-		print "\tstatus: {prm["statuses"].json_as_a[0].json_as_map["state"]}"
+		var st = prm["statuses"].json_as_a
+		if not st.is_empty then
+			print "\tstatus: {st[0].json_as_map["state"]}"
+		else
+			print "\tstatus: not tested"
+		end
 		return prm
 	end
 
@@ -58,6 +63,10 @@ redef class GithubCurl
 		var res = new Array[String]
 		for l in logins do
 			var u = get_and_check("https://api.github.com/users/{l}").json_as_map
+			if not u.has_key("name") then
+				print "No public name for user {l}"
+				continue
+			end
 			var r = "{u["name"]} <{u["email"]}>"
 			res.add r
 
