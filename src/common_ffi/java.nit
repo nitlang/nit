@@ -168,7 +168,7 @@ class JavaLanguage
 		mmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		mmodule.ensure_linking_callback_methods(ffi_ccu, mmodule.ffi_callbacks[self])
+		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null), mmodule.ffi_callbacks[self])
 
 		# Java implementation code
 		var java_file = mmodule.java_file
@@ -177,7 +177,7 @@ class JavaLanguage
 		mmodule.ffi_files.add(extern_java_file)
 	end
 
-	var ffi_ccu: CCompilationUnit # HACK
+	var ffi_ccu: nullable CCompilationUnit = null # HACK
 
 	redef fun compile_callback(callback, mmodule, mainmodule, ccu)
 	do
@@ -462,7 +462,8 @@ redef class MClassType
 	redef fun java_type
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return ftype.java_type
+		if ftype isa ForeignJavaType then return ftype.java_type.
+			replace('/', ".").replace('$', ".").replace(' ', "")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "int"

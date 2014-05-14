@@ -694,10 +694,9 @@ redef class MMethodDef
 		if not mproperty.is_init then res.append("fun ")
 		res.append(mproperty.to_console.bold)
 		if msignature != null then res.append(msignature.to_console)
-		# FIXME: modifiers should be accessible via the model
-		#if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
-		#if self isa AInternMethPropdef then ret = "{ret} is intern"
-		#if self isa AExternMethPropdef then ret = "{ret} is extern"
+		if is_abstract then res.append " is abstract"
+		if is_intern then res.append " is intern"
+		if is_extern then res.append " is extern"
 		return res.to_s
 	end
 end

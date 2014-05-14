@@ -14,7 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module simple_json_reader
+# Static interface to get Nit objects from a Json string.
+#
+# `String::json_to_nit_object` returns an equivalent Nit object from
+# the Json source. This object can then be type checked by the usual
+# languages features (`isa` and `as`).
+module static
 
 import standard
 private import json_parser
@@ -132,11 +137,14 @@ redef class String
 		var root_node = parser.parse
 		if root_node isa NStart then
 			return root_node.n_0.to_nit_object
-		else
-			assert root_node isa NLexerError
+		else if root_node isa NLexerError then
+			var pos = root_node.position
+			print "Json lexer error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return null
+		else if root_node isa NParserError then
 			var pos = root_node.position
 			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
 			return null
-		end
+		else abort
 	end
 end

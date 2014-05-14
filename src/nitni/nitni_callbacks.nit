@@ -268,7 +268,7 @@ end
 
 redef class AExternCall
 	# Verify this explicit declaration of call from C and collect all relevant callbacks
-	fun verify_and_collect(npropdef: AExternPropdef, callback_set: ForeignCallbackSet,
+	fun verify_and_collect(npropdef: AMethPropdef, callback_set: ForeignCallbackSet,
 		toolcontext: ToolContext) is abstract
 end
 

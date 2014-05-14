@@ -31,7 +31,6 @@ setlocal nocindent
 setlocal autoindent
 setlocal comments=:#
 setlocal indentkeys+==end,=else,=do,=var,0!,=then,=loop,=special,=class,=interface,=universal
-setlocal sw=8
 
 " Only define the function once.
 if exists("*GetNITIndent")
@@ -45,7 +44,7 @@ let s:outdent = '^\s*\(else\|then\|end\)\>'
 " At 0
 let s:no_indent = '^\s*\(class\|import\|special\)\>'
 
-let s:syng_strcom = '\<nit\%(String\|StringDelimiter\|Escape\|Comment\|Documentation\)\>'
+let s:syng_strcom = '\<NIT\(String\|StringDelimiter\|Escape\|Comment\|Documentation\)\>'
 
 " Check if the character at lnum:col is inside a string, comment, or is ascii.
 function s:IsInStringOrComment(lnum, col)

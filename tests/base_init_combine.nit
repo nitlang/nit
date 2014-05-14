@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,15 +12,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Offers two APIs to manipulate read Json strings.
-#
-# The `dynamic` module provides a simple interface to get information
-# from a Json document. You must be careful as all services are provided on
-# each nodes and a wrongful use can `abort`.
-#
-# The `static` module converts a Json string to a nullable Nit object. The object
-# must then be type checked before it can be used.
-module json
+import kernel
 
-import static
-import dynamic
+class A
+	init do 1.output
+end
+
+class B
+	init do 2.output
+end
+
+class C
+	super A
+	super B
+
+	init do 3.output
+end
+
+class D
+	super A
+	super B
+
+	var i: Int
+end
+
+class E
+	super A
+	super B
+
+	var i: Int
+	init(i: Int) do
+		self.i = i
+		i.output
+	end
+end
+
+class F
+	super E
+	#alt1# var z: Int
+end
+
+var a = new A
+var b = new B
+var c = new C
+var d = new D(4)
+var e = new E(5)
+var f = new F(6)

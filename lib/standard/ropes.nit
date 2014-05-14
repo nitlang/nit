@@ -967,8 +967,8 @@ end
 private class ConcatNode
 	super RopeNode
 
-	private var _left_child: nullable RopeNode
-	private var _right_child: nullable RopeNode
+	private var _left_child: nullable RopeNode = null
+	private var _right_child: nullable RopeNode = null
 
 	private fun left_child: nullable RopeNode
 	do

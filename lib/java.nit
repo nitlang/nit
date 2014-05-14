@@ -156,4 +156,11 @@ redef extern class JavaObject
 		JNIEnv *env = Sys_jni_env(sys);
 		(*env)->DeleteGlobalRef(env, recv);
 	`}
+
+	# Delete this local reference
+	fun delete_local_ref import sys, Sys.jni_env `{
+		Sys sys = JavaObject_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		(*env)->DeleteLocalRef(env, recv);
+	`}
 end

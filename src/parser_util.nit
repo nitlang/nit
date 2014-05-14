@@ -69,7 +69,7 @@ redef class ToolContext
 	do
 		var mod_string = "do\n{string}\nend"
 		var nmodule = parse_module(mod_string)
-		var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+		var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
 		return nblock
 	end
 
@@ -79,7 +79,7 @@ redef class ToolContext
 	do
 		var mod_string = "var dummy = \n{string}"
 		var nmodule = parse_module(mod_string)
-		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
+		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
 		return nexpr
 	end
 
@@ -120,7 +120,7 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
+			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
 			return ntype
 		end
 		error = eof
@@ -143,7 +143,7 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
+			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
 			return nexpr
 		end
 		if eof.location > error.location then error = eof
@@ -156,7 +156,8 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(ABlockExpr)
+			nblock.n_kwend = null # drop injected token
 			return nblock
 		end
 		if eof.location > error.location then error = eof

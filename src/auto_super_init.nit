@@ -28,7 +28,7 @@ end
 
 private class AutoSuperInitPhase
 	super Phase
-	redef fun process_npropdef(npropdef) do if npropdef isa AConcreteMethPropdef then npropdef.do_auto_super_init(toolcontext.modelbuilder)
+	redef fun process_npropdef(npropdef) do if npropdef isa AMethPropdef then npropdef.do_auto_super_init(toolcontext.modelbuilder)
 end
 
 private class AutoSuperInitVisitor
@@ -47,7 +47,7 @@ private class AutoSuperInitVisitor
 end
 
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	# In case of constructor, the list of implicit auto super init constructors invoked (if needed)
 	var auto_super_inits: nullable Array[CallSite] = null
 
