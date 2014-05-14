@@ -144,6 +144,17 @@ redef interface Object
 	protected fun set_alarm(sec: Int) `{ alarm(sec); `}
 end
 
+redef class Process
+	# Send a signal to the process
+	fun signal(signal: Int) do native_kill(id, signal)
+
+	# Send the kill signal to the process
+	fun kill do signal(sigkill)
+	
+	# Native implementation of `signal`
+	private fun native_kill(pid, signal: Int) `{ kill(pid, signal); `}
+end
+
 # Hang up detected on controlling terminal or death of controlling process
 protected fun sighup: Int do return 1
 
