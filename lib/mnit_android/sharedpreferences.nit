@@ -1,11 +1,11 @@
 module sharedpreferences
 
 import android_app
-import mnit_android
+# import mnit_android
 
 in "Java" `{
 	import android.content.SharedPreferences;
-	import android.content.Context; // Context.MODE_PRIVATE
+	import android.content.Context; // File access mode
 	import android.app.NativeActivity;
 	import android.app.Activity;
 	import java.util.Set;
@@ -28,26 +28,27 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 
 		return nit_hashmap;
 	`}
-	fun get_boolean(key: JavaString, defValue: Bool): Bool in "Java" `{ return recv.getBoolean(key, defValue); `}
-	fun get_float(key: JavaString, defValue: Float): Float in "Java" `{ return recv.getFloat(key, (float) defValue); `}
-	fun get_int(key: JavaString, defValue: Int): Int in "Java" `{ return recv.getInt(key, defValue); `}
-	fun get_long(key: JavaString, defValue: Int): Int in "Java" `{ return (int) recv.getLong(key, defValue); `}
-	fun get_string(key: JavaString, defValue: JavaString): JavaString in "Java" `{ return recv.getString(key, defValue); `}
+	fun get_boolean(key: JavaString, def_value: Bool): Bool in "Java" `{ return recv.getBoolean(key, def_value); `}
+	fun get_float(key: JavaString, def_value: Float): Float in "Java" `{ return recv.getFloat(key, (float) def_value); `}
+	fun get_int(key: JavaString, def_value: Int): Int in "Java" `{ return recv.getInt(key, def_value); `}
+	fun get_long(key: JavaString, def_value: Int): Int in "Java" `{ return (int) recv.getLong(key, def_value); `}
+	fun get_string(key: JavaString, def_value: JavaString): JavaString in "Java" `{ return recv.getString(key, def_value); `}
 
 	# Default value to null instead of Set<String>
-	fun get_string_set(key: JavaString): HashSet[JavaString] import HashSet[JavaString], HashSet[JavaString].add in "Java" `{ 
-		final Set<String> defValue = new HashSet<String>();
-		final Set<String> java_set = recv.getStringSet(key, defValue);
-		int nit_hashset = new_HashSet_of_JavaString();
-
-		for (String element: java_set)
-			HashSet_of_JavaString_add(nit_hashset, element);
-
-		return nit_hashset;
-	`}
+	# FIXME: API 11
+# 	fun get_string_set(key: JavaString): HashSet[JavaString] import HashSet[JavaString], HashSet[JavaString].add in "Java" `{ 
+# 		final Set<String> def_value = new HashSet<String>();
+# 		final Set<String> java_set = recv.getStringSet(key, def_value);
+# 		int nit_hashset = new_HashSet_of_JavaString();
+# 
+# 		for (String element: java_set)
+# 			HashSet_of_JavaString_add(nit_hashset, element);
+# 
+# 		return nit_hashset;
+# 	`}
 end
 
-extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences.Editor `}
+extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences$Editor `}
 	super JavaObject
 	redef type SELF: NativeSharedPreferencesEditor
 
@@ -58,51 +59,56 @@ extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPr
 	fun put_int(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{ return recv.putInt(key, value); `}
 	fun put_long(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{ return recv.putLong(key, value); `}
 	fun put_string(key: JavaString, value: JavaString): NativeSharedPreferencesEditor in "Java" `{ return recv.putString(key, value); `}
-	fun put_string_set(key: JavaString, value: HashSet[JavaString]): NativeSharedPreferencesEditor import HashSet[JavaString], HashSet[JavaString].iterator, 
-	  Iterator[JavaString].is_ok, Iterator[JavaString].item, Iterator[JavaString].next in "Java" `{ 
-		Set<String> java_set = new HashSet<String>();
-		int itr = HashSet_of_JavaString_iterator(value);
-		
-		while (Iterator_of_JavaString_is_ok(itr)) {
-			java_set.add(Iterator_of_JavaString_item(itr));
-			Iterator_of_JavaString_next(itr);
-		}
-
-		return recv.putStringSet(key, java_set); 
-	`}
+# 	fun put_string_set(key: JavaString, value: HashSet[JavaString]): NativeSharedPreferencesEditor import HashSet[JavaString], HashSet[JavaString].iterator, 
+# 	  Iterator[JavaString].is_ok, Iterator[JavaString].item, Iterator[JavaString].next in "Java" `{ 
+# 		Set<String> java_set = new HashSet<String>();
+# 		int itr = HashSet_of_JavaString_iterator(value);
+# 		
+# 		while (Iterator_of_JavaString_is_ok(itr)) {
+# 			java_set.add(Iterator_of_JavaString_item(itr));
+# 			Iterator_of_JavaString_next(itr);
+# 		}
+# 
+# 		return recv.putStringSet(key, java_set); 
+# 	`}
 	fun remove(key: JavaString): NativeSharedPreferencesEditor in "Java" `{ return recv.remove(key); `}
 end
-
-extern class Context in "Java" `{ android.content.Context `}
-	super JavaObject
-	redef type SELF: Context
-
-	fun mode_private: Int in "Java" `{ return Context.MODE_PRIVATE; `}
-	fun mode_world_readable: Int in "Java" `{ return Context.MODE_WORLD_READABLE; `}
-	fun mode_world_writeable: Int in "Java" `{ return Context.MODE_WORLD_WRITEABLE; `}
-
-	# API 11
-	# fun mode_multi_process: Int in "Java" `{ return recv.MODE_MULTI_PROCESS; `}
-end
-
 
 class SharedPreferences
 	var context: NativeActivity
 	var shared_preferences: NativeSharedPreferences
 	var editor: NativeSharedPreferencesEditor
-
-	var xml_file_name: String
-	var mode: Int
-
 	
-	init(app: App, file_name: String, mode: Int) 
+	private init(app: App, file_name: String, mode: Int) 
 	do
 		self.context = app.native_activity
-		self.xml_file_name = file_name
-		self.mode = mode
+		
+		sys.jni_env.push_local_frame(2)
 		setup(file_name.to_java_string, mode)
+		sys.jni_env.pop_local_frame
+	end
+
+	init mode_private(app: App, file_name: String) 
+	do
+		self.init(app, file_name, private_mode)
+	end
+
+	init mode_world_readable(app: App, file_name: String)
+	do
+		self.init(app, file_name, world_readable_mode)
+	end
+
+	init mode_world_writeable(app: App, file_name: String)
+	do
+		self.init(app, file_name, world_writeable_mode)
 	end
 	
+	# FIXME: API 11
+# 	init mode_multi_access(app: App, file_name: String)
+# 	do
+# 		self.init(app, file_name, multi_process_mode)
+# 	end
+
 	private fun set_vars(shared_pref: NativeSharedPreferences, editor: NativeSharedPreferencesEditor)
 	do
 		self.shared_preferences = shared_pref.new_global_ref
@@ -110,35 +116,163 @@ class SharedPreferences
 	end
 
 	private fun setup(xml_file_name: JavaString, mode: Int) import context, set_vars in "Java" `{
-		final Activity context = (Activity) SharedPreferences_context(recv);
-		final SharedPreferences sp = context.getSharedPreferences(xml_file_name, mode);
-		final SharedPreferences.Editor editor = sp.edit();
+		Activity context = (Activity) SharedPreferences_context(recv);
+		SharedPreferences sp;
+		if (xml_file_name.equals("")) {
+			sp = context.getPreferences( mode);
+		} else { 
+			sp = context.getSharedPreferences(xml_file_name, mode);
+		}
+
+		SharedPreferences.Editor editor = sp.edit();
 		
 		SharedPreferences_set_vars(recv, sp, editor);
 	`}
 		
+	# File access mode
+	private fun private_mode: Int in "Java" `{ return Context.MODE_PRIVATE; `}
+	private fun world_readable_mode: Int in "Java" `{ return Context.MODE_WORLD_READABLE; `}
+	private fun world_writeable_mode: Int in "Java" `{ return Context.MODE_WORLD_WRITEABLE; `}
+
+	# FIXME: API 11
+	# fun multi_process_mode: Int in "Java" `{ return recv.MODE_MULTI_PROCESS; `}
+
 	# Access methods
-	fun contains(key: JavaString): Bool do return shared_preferences.contains(key)
-# 	fun get_all: HashMap[JavaString, JavaObject] do return shared_preferences.get_all 
-	fun get_boolean(key: JavaString, defValue: Bool): Bool do return shared_preferences.get_boolean(key, defValue)
-	fun get_float(key: JavaString, defValue: Float): Float do return shared_preferences.get_float(key, defValue)
-	fun get_int(key: JavaString, defValue: Int): Int do return shared_preferences.get_int(key, defValue)
-	fun get_long(key: JavaString, defValue: Int): Int do return shared_preferences.get_long(key, defValue)
-	fun get_string(key: JavaString, defValue: JavaString): JavaString do return shared_preferences.get_string(key, defValue)
+	fun contains(key: String): Bool 
+	do
+		sys.jni_env.push_local_frame(2)
+		var return_value =shared_preferences.contains(key.to_java_string) 
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	# User has to manage local stack deallocation himself
+	fun all: HashMap[JavaString, JavaObject] do return shared_preferences.get_all
+
+	fun boolean(key: String, def_value: Bool): Bool 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = shared_preferences.get_boolean(key.to_java_string, def_value)
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun float(key: String, def_value: Float): Float 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = shared_preferences.get_float(key.to_java_string, def_value)
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun int(key: String, def_value: Int): Int 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = shared_preferences.get_int(key.to_java_string, def_value)
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun long(key: String, def_value: Int): Int 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = shared_preferences.get_long(key.to_java_string, def_value)
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun string(key: String, def_value: String): JavaString 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = shared_preferences.get_string(key.to_java_string, def_value.to_java_string)
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
 
 	# Default value to null instead of Set<String>
-# 	fun get_string_set(key: JavaString): HashSet[JavaString] do return shared_preferences.get_string_set(key)
+	# FIXME: API 11
+	# User has to manage local stack deallocation himself
+# 	fun string_set(key: String): HashSet[JavaString] 
+# 	do 
+# 		sys.jni_env.push_local_frame(3)
+# 		var return_value = shared_preferences.get_string_set(key)
+# 		sys.jni_env.pop_local_frame
+# 		return return_value
+# 	end
 
 	# Editor methods
-	fun clear: NativeSharedPreferencesEditor do return editor.clear
-	fun commit: Bool do return editor.commit
-	fun put_boolean(key: JavaString, value: Bool ): NativeSharedPreferencesEditor do return editor.put_boolean(key, value)
-	fun put_float(key: JavaString, value: Float): NativeSharedPreferencesEditor do return editor.put_float(key, value)
-	fun put_int(key: JavaString, value: Int): NativeSharedPreferencesEditor do return editor.put_int(key, value)
-	fun put_long(key: JavaString, value: Int): NativeSharedPreferencesEditor do return editor.put_long(key, value)
-	fun put_string(key: JavaString, value: JavaString): NativeSharedPreferencesEditor do return editor.put_string(key, value)
-# 	fun put_string_set(key: JavaString, value: HashSet[JavaString]): NativeSharedPreferencesEditor do return editor.put_string_set(key, value)
-	fun remove(key: JavaString): NativeSharedPreferencesEditor do return editor.remove(key)
+	fun clear: NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(1)
+		var return_value = editor.clear.new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
 	
+	fun commit: Bool 
+	do 
+		sys.jni_env.push_local_frame(1)
+		var return_value = editor.commit
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun boolean=(key: String, value: Bool ): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = editor.put_boolean(key.to_java_string, value).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+		
+	fun float=(key: String, value: Float): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = editor.put_float(key.to_java_string, value).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+		
+	fun int=(key: String, value: Int): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = editor.put_int(key.to_java_string, value).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+		
+	fun long=(key: String, value: Int): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = editor.put_long(key.to_java_string, value).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+		
+	fun string=(key: String, value: String): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(3)
+		var return_value = editor.put_string(key.to_java_string, value.to_java_string).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+		
+	# FIXME: API 11
+	# User has to manage local stack deallocation himself
+# 	fun string_set=(key: String, value: HashSet[JavaString]): NativeSharedPreferencesEditor do return editor.put_string_set(key.to_java_string, value)
+
+	fun remove(key: String): NativeSharedPreferencesEditor 
+	do 
+		sys.jni_env.push_local_frame(2)
+		var return_value = editor.remove(key.to_java_string).new_global_ref
+		sys.jni_env.pop_local_frame
+		return return_value
+	end
+
+	fun destroy 
+	do
+		self.shared_preferences.delete_global_ref
+		self.editor.delete_global_ref
+	end
 end
 
