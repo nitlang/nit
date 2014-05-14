@@ -400,7 +400,7 @@ extern class JMethodID `{jmethodID`}
 end
 
 # Represens a jni jobject
-extern class JavaObject `{jobject`}
+extern class JavaObject in "Java" `{ java.lang.Object `}
 end
 
 # Represents a jni JNINNativeMethod
