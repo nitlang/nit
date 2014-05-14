@@ -53,18 +53,49 @@ module signals
 
 # Receives the callback from system when a given signal arise
 interface SignalHandler
-	# Called on any signal received
+	# Invoked after a call to `check_signals` if a signal has been raised
+	# (should be redefed by subclasses)
+	#
+	# Should be used by most signals except `sigkill` and `sigstop` since they
+	# cannot be caught, blocked or ignored.
+	#
+	#     class MyReceiver
+	#         super SignalHandler
+	#     
+	#         redef fun receive_signal(signal) do print "received safely {signal}"
+	#     end
+	#     
+	#     var r = new MyReceiver
+	#     r.handle_signal(sigint, true) # will call back when "check_signals" is called
+	#     # ...
+	#     check_signals # if a signal was received, it will invoke `r.receive_signal`
 	fun receive_signal(signal: Int) `{
 	`}
 
-	# Called on any unsafe signal received
+	# Called immediatly on receiving an unsafe signal (should be redefed by subclasses)
+	#
+	# Should be used for `sigkill` and `sigstop` since they cannot be caught,
+	# blocked or ignored.
+	#
+	# You should consider this methods as being fragile. It should be implemented in C
+	# and you should not do too much callbacks to Nit.
+	#
+	#     class MyReceiver
+	#         super SignalHandler
+	#     
+	#         redef fun receive_signal_unsafe(signal) do print "received unsafely {signal}"
+	#     end
+	#     
+	#     var r = new MyReceiver
+	#     r.handle_signal(sigsegv, false) # `r.receive_signal_unsafe` will be invoked on sigsegv
 	fun receive_signal_unsafe(signal: Int) `{
 	`}
 
 	# Set the receiver as the handler of the signal
-	# If safely, receiver will be called when check_signals in invoked
-	#    otherwise the receiver is invoked when the signal is raised, it may
-	#    crash the Nit system but is unavoidable for unstoppable signals
+	#
+	# If `safely`, receiver will be called when `check_signals` in invoked
+	# otherwise the receiver is invoked when the signal is raised, it may
+	# crash the Nit system but is unavoidable for unstoppable signals.
 	fun handle_signal(signal: Int, safely: Bool) import
 		receive_signal `{
 		SignalHandler last_handler;
