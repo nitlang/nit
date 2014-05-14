@@ -1060,6 +1060,9 @@ redef class ASuperstringExpr
 end
 
 redef class AArrayExpr
+	var with_capacity_callsite: nullable CallSite
+	var push_callsite: nullable CallSite
+
 	redef fun accept_typing(v)
 	do
 		var mtypes = new Array[nullable MType]
@@ -1077,7 +1080,12 @@ redef class AArrayExpr
 		end
 		var mclass = v.get_mclass(self, "Array")
 		if mclass == null then return # Forward error
-		self.mtype = mclass.get_mtype([mtype])
+		var array_mtype = mclass.get_mtype([mtype])
+
+		with_capacity_callsite = v.get_method(self, array_mtype, "with_capacity", false)
+		push_callsite = v.get_method(self, array_mtype, "push", false)
+
+		self.mtype = array_mtype
 	end
 end
 
