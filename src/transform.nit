@@ -171,16 +171,13 @@ redef class AArrayExpr
 	#     t
 	redef fun accept_transform_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
 		var nblock = v.builder.make_block
 
-		var meth = v.get_method(self, "with_capacity", mtype.mclass)
-		var nnew = v.builder.make_new(mtype, meth, [v.builder.make_int(n_exprs.n_exprs.length)])
+		var nnew = v.builder.make_new(with_capacity_callsite.as(not null), [v.builder.make_int(n_exprs.n_exprs.length)])
 		nblock.add nnew
 
-		var madd = v.get_method(self, "push", mtype.mclass)
 		for nexpr in self.n_exprs.n_exprs do
-			var nadd = v.builder.make_call(nnew.make_var_read, madd, [nexpr])
+			var nadd = v.builder.make_call(nnew.make_var_read, push_callsite.as(not null), [nexpr])
 			nblock.add nadd
 		end
 		var nres = nnew.make_var_read
@@ -194,8 +191,7 @@ redef class ACrangeExpr
 	# `[x..y]` is replaced with `new Range[X](x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
-		replace_with(v.builder.make_new(mtype, init_callsite.mproperty, [n_expr, n_expr2]))
+		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end
 
@@ -203,8 +199,7 @@ redef class AOrangeExpr
 	# `[x..y[` is replaced with `new Range[X].without_last(x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
-		replace_with(v.builder.make_new(mtype, init_callsite.mproperty, [n_expr, n_expr2]))
+		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end
 
@@ -237,12 +232,12 @@ redef class ASendReassignFormExpr
 			write_args.add(a.make_var_read)
 		end
 
-		var nread = v.builder.make_call(n_expr.make_var_read, callsite.mproperty, read_args)
+		var nread = v.builder.make_call(n_expr.make_var_read, callsite.as(not null), read_args)
 
-		var nnewvalue = v.builder.make_call(nread, reassign_callsite.mproperty, [n_value])
+		var nnewvalue = v.builder.make_call(nread, reassign_callsite.as(not null), [n_value])
 
 		write_args.add(nnewvalue)
-		var nwrite = v.builder.make_call(n_expr.make_var_read, write_callsite.mproperty, write_args)
+		var nwrite = v.builder.make_call(n_expr.make_var_read, write_callsite.as(not null), write_args)
 		nblock.add(nwrite)
 
 		replace_with(nblock)
@@ -257,7 +252,7 @@ redef class AVarReassignExpr
 
 		var nread = v.builder.make_var_read(variable, read_type.as(not null))
 
-		var nnewvalue = v.builder.make_call(nread, reassign_callsite.mproperty, [n_value])
+		var nnewvalue = v.builder.make_call(nread, reassign_callsite.as(not null), [n_value])
 		var nwrite = v.builder.make_var_assign(variable, nnewvalue)
 
 		replace_with(nwrite)
@@ -273,7 +268,7 @@ redef class AAttrReassignExpr
 		var attribute = self.mproperty.as(not null)
 
 		var nread = v.builder.make_attr_read(n_expr.make_var_read, attribute)
-		var nnewvalue = v.builder.make_call(nread, reassign_callsite.mproperty, [n_value])
+		var nnewvalue = v.builder.make_call(nread, reassign_callsite.as(not null), [n_value])
 		var nwrite = v.builder.make_attr_assign(n_expr.make_var_read, attribute, nnewvalue)
 		nblock.add(nwrite)
 
