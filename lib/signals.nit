@@ -69,8 +69,7 @@ interface SignalHandler
 	#     r.handle_signal(sigint, true) # will call back when "check_signals" is called
 	#     # ...
 	#     check_signals # if a signal was received, it will invoke `r.receive_signal`
-	fun receive_signal(signal: Int) `{
-	`}
+	fun receive_signal(signal: Int) do end
 
 	# Called immediatly on receiving an unsafe signal (should be redefed by subclasses)
 	#
@@ -88,8 +87,7 @@ interface SignalHandler
 	#     
 	#     var r = new MyReceiver
 	#     r.handle_signal(sigsegv, false) # `r.receive_signal_unsafe` will be invoked on sigsegv
-	fun receive_signal_unsafe(signal: Int) `{
-	`}
+	fun receive_signal_unsafe(signal: Int) do end
 
 	# Set the receiver as the handler of the signal
 	#
