@@ -462,7 +462,8 @@ redef class MClassType
 	redef fun java_type
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return ftype.java_type
+		if ftype isa ForeignJavaType then return ftype.java_type.
+			replace('/', ".").replace('$', ".").replace(' ', "")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "int"
