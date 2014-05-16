@@ -59,6 +59,8 @@ redef class ToolContext
 	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
+	# --release
+	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 
 	redef init
 	do
@@ -68,6 +70,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
+		self.option_context.add_option(self.opt_release)
 	end
 
 	redef fun process_options(args)
