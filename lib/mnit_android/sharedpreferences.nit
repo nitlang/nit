@@ -88,20 +88,9 @@ class SharedPreferences
 		sys.jni_env.pop_local_frame
 	end
 
-	init mode_private(app: App, file_name: String) 
-	do
-		self.init(app, file_name, private_mode)
-	end
-
-	init mode_world_readable(app: App, file_name: String)
-	do
-		self.init(app, file_name, world_readable_mode)
-	end
-
-	init mode_world_writeable(app: App, file_name: String)
-	do
-		self.init(app, file_name, world_writeable_mode)
-	end
+	init mode_private(app: App, file_name: String) do self.init(app, file_name, private_mode)
+	init mode_world_readable(app: App, file_name: String) do self.init(app, file_name, world_readable_mode)
+	init mode_world_writeable(app: App, file_name: String) do self.init(app, file_name, world_writeable_mode)
 	
 	# FIXME: API 11
 # 	init mode_multi_access(app: App, file_name: String)

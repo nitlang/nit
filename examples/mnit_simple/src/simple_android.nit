@@ -21,6 +21,8 @@ end
 
 import simple
 import mnit_android
+import serialization
+import json_serialization
 
 in "Java" `{
 	import android.content.Context;
@@ -32,15 +34,13 @@ redef class MyApp
 	do
 		if ie isa PointerEvent and ie.depressed then
 			do_java_stuff
-			loop
-				test_shared_preferences
-				sys.nanosleep(0, 500000)
-			end
-		end
+			test_shared_preferences2 
+# 			sys.nanosleep(0, 500000)
+		end	
 		return super
 	end
 
-	fun test_shared_preferences 
+	fun test_shared_preferences1
 	do
 		# Private mode tests
 		var sp = new SharedPreferences.mode_private(self, "test1")
@@ -142,6 +142,50 @@ redef class MyApp
 		sp4.destroy
 	end
 
+	fun test_shared_preferences2
+	do
+# 		SharedPreferences sp = new SharedPreferences.mode_private("serialized_object")
+		var serializable_object = new SerializableClass
+		print serializable_object.anInteger.to_s
+		print serializable_object.aFloat.to_s
+		print serializable_object.aString
+		var out_stream = new OFStream.open("/data/data/org.nitlanguage.simple/shared_prefs/serialized_object.json")
+		var serializer = new JsonSerializer(out_stream)
+		
+		serializer.serialize(serializable_object)
+# 		serializer.serialize_attribute("anInteger", serializable_object)
+# 		serializer.serialize_attribute("aFloat", serializable_object)
+# 		serializer.serialize_attribute("aString", serializable_object)
+		out_stream.close
+		print "Serialization done"
+
+		print "Get IFStream"
+		var in_stream = new IFStream.open("/data/data/org.nitlanguage.simple/shared_prefs/serialized_object.json")
+		print "Instanciate JsonDeserializer"
+		var content = in_stream.read_line.trim
+		print content
+		var deserializer = new JsonDeserializer(content)
+		print "Deserializing ..."
+		var objs = deserializer.deserialize
+		in_stream.close
+		
+		if objs isa SerializableClass then
+			print "anInteger : {objs.anInteger}"
+			print "aString : {objs.aString}"
+			print "aFloat : {objs.aFloat}"
+		end
+		print "Deserialization done"
+		print "Trying to extract attributes..."
+		
+# 		if obj isa SerializableClass then
+# 			print obj.anInteger.to_s
+# 			print obj.aString
+# 			print obj.aFloat.to_s
+# 		else 
+# 			print "Extraction failed... Object not of type SerializableClass"
+# 		end
+	end
+
 	fun do_java_stuff import native_activity in "Java" `{
 		// + Log (no context needed)
 		android.util.Log.d("mnit_simple", "Java within NIT!!!");
@@ -167,4 +211,20 @@ redef class MyApp
 			}
 		});
 	`}
+end
+
+class SerializableClass
+	auto_serializable
+	super Serializable
+
+	var anInteger: Int
+	var aFloat: Float
+	var aString: String
+
+	init
+	do
+		anInteger = 5
+		aFloat    = 5.6
+		aString   = "I'm a String. Have you heard of me ?"
+	end
 end
