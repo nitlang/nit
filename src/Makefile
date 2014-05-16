@@ -18,12 +18,19 @@ NITCOPT=
 
 all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_client
 
-../bin/nitg: ../c_src/nitg parser/parser.nit
+nitg_0: ../c_src/nitg parser/parser.nit
+	@echo '***************************************************************'
+	@echo '* Compile nitg_0 from NIT source files                          *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../c_src/nitg ${NITCOPT} -o nitg_0 -v nitg.nit
+
+../bin/nitg: nitg_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitg from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${NITCOPT} -o ../bin/nitg -v nitg.nit
+	./nitg_0 ${NITCOPT} -o ../bin/nitg -v nitg.nit
 
 ../bin/nitdoc: ../bin/nitg
 	@echo '***************************************************************'

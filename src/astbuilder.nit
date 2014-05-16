@@ -36,17 +36,15 @@ class ASTBuilder
 	end
 
 	# Make a new instatiation
-	fun make_new(mtype: MClassType, constructor: MMethod, args: nullable Array[AExpr]): ANewExpr
+	fun make_new(callsite: CallSite, args: nullable Array[AExpr]): ANewExpr
 	do
-		return new ANewExpr.make(mtype, constructor, args)
+		return new ANewExpr.make(callsite, args)
 	end
 
 	# Make a new message send
-	fun make_call(recv: AExpr, mmethod: MMethod, args: nullable Array[AExpr]): ACallExpr
+	fun make_call(recv: AExpr, callsite: CallSite, args: nullable Array[AExpr]): ACallExpr
 	do
-		var mtype = mmethod.intro.msignature.return_mtype
-		if mtype != null then mtype = mtype.resolve_for(recv.mtype.as(not null), anchor, mmodule, true)
-		return new ACallExpr.make(recv, mmethod, args, mtype)
+		return new ACallExpr.make(recv, callsite, args)
 	end
 
 	# Make a new, empty, sequence of statements
@@ -230,7 +228,7 @@ redef class ADecIntExpr
 end
 
 redef class ANewExpr
-	private init make(mtype: MClassType, mmethod: MMethod, args: nullable Array[AExpr])
+	private init make(callsite: CallSite, args: nullable Array[AExpr])
 	do
 		_n_kwnew = new TKwnew
 		_n_type = new AType.make
@@ -238,24 +236,24 @@ redef class ANewExpr
 		if args != null then
 			n_args.n_exprs.add_all(args)
 		end
-		callsite = new CallSite(self, mtype, mmethod.intro.mclassdef.mmodule, mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
-		self.mtype = mtype
+		self.callsite = callsite
+		self.mtype = callsite.recv
+		self.is_typed = true
 	end
 end
 
 redef class ACallExpr
-	private init make(recv: AExpr, mmethod: MMethod, args: nullable Array[AExpr], t: nullable MType)
+	private init make(recv: AExpr, callsite: CallSite, args: nullable Array[AExpr])
 	do
 		self._n_expr = recv
-		recv.parent = self
 		_n_args = new AListExprs
 		_n_id = new TId
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end
 		var mtype = recv.mtype.as(not null)
-		callsite = new CallSite(self, mtype, mmethod.intro.mclassdef.mmodule, mmethod.intro.mclassdef.bound_mtype, true, mmethod, mmethod.intro, mmethod.intro.msignature.as(not null), false)
-		self.mtype = t
+		self.callsite = callsite
+		self.mtype = callsite.msignature.return_mtype
 		self.is_typed = true
 	end
 end
