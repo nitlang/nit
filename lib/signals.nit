@@ -24,6 +24,21 @@ module signals
 	#include <stdio.h>
 
 	/*
+		This guard prevents errors by the C compiler when the Nit code imports this
+		module but do not use handle_signal. When it is _not_ used, the C type
+		SignalHandler and C function SignalHandler_receive_signal are not generated.
+		Which does not please the C compiler. This guard ensure that we compile this
+		code only if the type SignalHandler has been defined.
+
+		This is a HACK, FIXME by:
+		* Adding the macro to the FFI spec, or
+		* Attach the callbacks to this code block (or the module itself)
+		* Avoid using Nit types and callbacks or use them only in the C implementation
+		  of Nit method.
+	*/
+	#ifdef NIT_TYPE_SignalHandler
+
+	/*
 		Structure to manage each possible signals
 		are used in an array of 32 maximum signals.
 		This array is global to the software.
@@ -49,6 +64,8 @@ module signals
 			}
 		}
 	}
+
+	#endif
 `}
 
 # Receives the callback from system when a given signal arise
