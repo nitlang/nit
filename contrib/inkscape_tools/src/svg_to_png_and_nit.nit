@@ -183,8 +183,8 @@ for drawing in drawings do
 
 			var x = words[1].to_f.floor.to_i
 			var y = words[2].to_f.floor.to_i
-			var w = words[3].to_f.ceil.to_i
-			var h = words[4].to_f.ceil.to_i
+			var w = words[3].to_f.ceil.to_i+1
+			var h = words[4].to_f.ceil.to_i+1
 
 			if id.has_prefix("0") then
 				var nit_name = id.substring_from(1)
