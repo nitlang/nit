@@ -553,7 +553,7 @@ abstract class FlatText
 	# Real items, used as cache for to_cstring is called
 	private var real_items: nullable NativeString = null
 
-	redef var length: Int
+	redef var length: Int = 0
 
 	init do end
 
@@ -1009,7 +1009,7 @@ class FlatBuffer
 
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self)
 
-	private var capacity: Int
+	private var capacity: Int = 0
 
 	redef fun []=(index, item)
 	do
@@ -1039,15 +1039,13 @@ class FlatBuffer
 
 	redef fun enlarge(cap)
 	do
-		is_dirty = true
 		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
 		var a = calloc_string(c+1)
-		items.copy_to(a, length, 0, 0)
+		if length > 0 then items.copy_to(a, length, 0, 0)
 		items = a
 		capacity = c
-		items.copy_to(a, length, 0, 0)
 	end
 
 	redef fun to_s: String
@@ -1060,7 +1058,7 @@ class FlatBuffer
 		if is_dirty then
 			var new_native = calloc_string(length + 1)
 			new_native[length] = '\0'
-			items.copy_to(new_native, length, 0, 0)
+			if length > 0 then items.copy_to(new_native, length, 0, 0)
 			real_items = new_native
 			is_dirty = false
 		end
@@ -1068,7 +1066,7 @@ class FlatBuffer
 	end
 
 	# Create a new empty string.
-	init do with_capacity(5)
+	init do end
 
 	init from(s: Text)
 	do
@@ -1100,6 +1098,7 @@ class FlatBuffer
 
 	redef fun append(s)
 	do
+		if s.is_empty then return
 		is_dirty = true
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
@@ -1204,7 +1203,7 @@ private class FlatBufferReverseIterator
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
 		target = tgt
-		target_items = tgt.items
+		if tgt.length > 0 then target_items = tgt.items
 		curr_pos = pos
 	end
 
@@ -1276,7 +1275,7 @@ private class FlatBufferIterator
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
 		target = tgt
-		target_items = tgt.items
+		if tgt.length > 0 then target_items = tgt.items
 		curr_pos = pos
 	end
 
