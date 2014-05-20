@@ -93,8 +93,8 @@ OSNAME := $(shell $(GETOS))
 PNACL_TC_PATH := $(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl)
 PNACL_CXX := $(PNACL_TC_PATH)/bin/pnacl-clang
 PNACL_FINALIZE := $(PNACL_TC_PATH)/bin/pnacl-finalize
-CXXFLAGS += -I$(NACL_SDK_ROOT)/include
-LDFLAGS := -L$(NACL_SDK_ROOT)/lib/pnacl/Release -lppapi_cpp -lppapi
+CXXFLAGS += -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/include/pnacl
+LDFLAGS := -L$(NACL_SDK_ROOT)/lib/pnacl/Release -lppapi_cpp -lppapi -lm
 
 #
 # Disable DOS PATH warning when using Cygwin based tools Windows

@@ -151,6 +151,9 @@ module pnacl is platform
 	    }
 	    return NULL;
 	}
+
+	// Hack poll
+	int poll(void *fds, int nfds, int timeout) { return 0; }
 `}
 
 # Nit class representing a Pepper C API PP_Var typed as a Dictionary.
