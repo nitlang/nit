@@ -39,32 +39,44 @@ class Process
 		return data.status
 	end
 
+	# The executable run
+	# Is a filepath, or a executable found in PATH
+	var command: String
+
+	# The arguments of the command
+	# Starts with the first real arguments---ie. does not include the progname (`argv[0]`, in C)
+	var arguments: nullable Array[String]
+
 	# Launch a command with some arguments
 	init(command: String, arguments: String...)
 	do
-		execute(command, arguments, 0)
+		self.command = command
+		self.arguments = arguments
+		execute
 	end
 
-	# Launch a simple command without arguments
-	init init_(command: String)
+	# Launch a simple command with arguments passed as an array
+	init from_a(command: String, arguments: nullable Array[String])
 	do
-		execute(command, null, 0)
+		self.command = command
+		self.arguments = arguments
+		execute
 	end
 
-	init from_a(command: String, arguments: Array[String])
-	do
-		execute(command, arguments, 0)
-	end
+	# flags used internally to know whith pipe to open
+	private fun pipeflags: Int do return 0
 
 	# Internal code to handle execution
-	protected init execute(command: String, arguments: nullable Array[String], pipeflags: Int)
+	protected fun execute
 	do
+		# The pass the arguments as a big C string where elements are separated with '\0'
 		var args = new FlatBuffer
 		var l = 1 # Number of elements in args
 		args.append(command)
 		if arguments != null then
 			for a in arguments do
 				args.add('\0')
+				#a.output_class_name
 				args.append(a)
 			end
 			l += arguments.length
@@ -88,21 +100,13 @@ class IProcess
 
 	redef fun eof do return stream_in.eof
 
-	init(command: String, arguments: String...)
-	do
-		execute(command, arguments, 2)
-		stream_in = new FDIStream(data.out_fd)
-	end
+	redef fun pipeflags do return 2
 
-	init init_(command: String)
-	do
-		execute(command, null, 2)
-		stream_in = new FDIStream(data.out_fd)
-	end
+	redef init(command: String, arguments: String...) do super
 
-	init from_a(command: String, arguments: Array[String])
+	redef fun execute
 	do
-		execute(command, arguments, 2)
+		super
 		stream_in = new FDIStream(data.out_fd)
 	end
 end
@@ -119,21 +123,13 @@ class OProcess
 
 	redef fun write(s) do stream_out.write(s)
 
-	init(command: String, arguments: String...)
-	do
-		execute(command, arguments, 1)
-		stream_out = new FDOStream(data.in_fd)
-	end
+	redef fun pipeflags do return 1
 
-	init init_(command: String)
-	do
-		execute(command, null, 1)
-		stream_out = new FDOStream(data.in_fd)
-	end
+	redef init(command: String, arguments: String...) do super
 
-	init from_a(command: String, arguments: Array[String])
+	redef fun execute
 	do
-		execute(command, arguments, 1)
+		super
 		stream_out = new FDOStream(data.in_fd)
 	end
 end
@@ -150,25 +146,13 @@ class IOProcess
 		stream_out.close
 	end
 
-	init(command: String, arguments: String...)
-	do
-		execute(command, arguments, 3)
-		stream_in = new FDIStream(data.out_fd)
-		stream_out = new FDOStream(data.in_fd)
-	end
+	redef fun pipeflags do return 3
 
-	init init_(command: String)
-	do
-		execute(command, null, 3)
-		stream_in = new FDIStream(data.out_fd)
-		stream_out = new FDOStream(data.in_fd)
-	end
+	redef init(command: String, arguments: String...) do super
 
-	init from_a(command: String, arguments: Array[String])
+	redef fun execute
 	do
-		execute(command, arguments, 3)
-		stream_in = new FDIStream(data.out_fd)
-		stream_out = new FDOStream(data.in_fd)
+		super
 	end
 end
 
