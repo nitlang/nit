@@ -50,21 +50,13 @@ class UserGroup
 end
 
 # Option to ask for a username and group
-class OptionDropPrivileges
-	super OptionUserAndGroup
-
-	init do init_user_and_group("Drop privileges to user:group or simply user", "-u", "--usergroup")
-end
-
-# Option to ask for a username and group
 class OptionUserAndGroup
 	super OptionParameter
 
 	redef type VALUE: nullable UserGroup
 
-	#init for_droping_privileges() do init("Drop privileges to user:group or simply user", "-u", "--usergroup")
-	init(help: String, names: String...) do init_opt(help, null, names)
-	private init init_user_and_group(help: String, names: String...) do init_opt(help, null, names)
+	init for_dropping_privileges do init("Drop privileges to user:group or simply user", "-u", "--usergroup")
+	init(help: String, names: String...) do super(help, null, names)
 
 	redef fun convert(str)
 	do
