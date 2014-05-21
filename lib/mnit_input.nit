@@ -37,7 +37,9 @@ interface PointerEvent
 	fun depressed: Bool is abstract
 end
 
-# Pointer motion event, mais concern many events
+# A motion event on screen composed of many `PointerEvent`
+#
+# Example of a `MotionEvent` a gesture such as pinching using two fingers.
 interface MotionEvent
 	super InputEvent
 

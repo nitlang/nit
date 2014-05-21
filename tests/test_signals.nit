@@ -37,8 +37,8 @@ class MyAlarmReceiver
 end
 
 var r = new MyReceiver
-r.handle_signal( r.sigint, true ) # will call back when "check_signals" is called
-r.handle_signal( r.sigsegv, false ) # the only way to receive a sigsegv
+r.handle_signal(sigint, true) # will call back when "check_signals" is called
+r.handle_signal(sigsegv, false) # the only way to receive a sigsegv
 
 var ar = new MyAlarmReceiver
 set_alarm( 1 ) # calls C "alarm()"

@@ -27,19 +27,32 @@ import string
 `}
 
 redef class Sys
+	# Set the real current user id of this process
 	fun uid=(uid: Int): Bool `{ return setuid(uid); `}
+
+	# Current real user id of this process
 	fun uid: Int `{ return getuid(); `}
 
+	# Set the current real group id of this process
 	fun gid=(gid: Int): Bool `{ return setgid(gid); `}
+
+	# Current real group id of this process
 	fun gid: Int `{ return getgid(); `}
 
+	# Set the effective user id of this process
 	fun euid=(uid: Int): Bool `{ return seteuid(uid); `}
+
+	# The effective user id of this process
 	fun euid: Int `{ return geteuid(); `}
 
+	# Set the effective group id of this process
 	fun egid=(gid: Int): Bool `{ return setegid(gid); `}
+
+	# The effective group id of this process
 	fun egid: Int `{ return getegid(); `}
 end
 
+# Information on a user account
 extern class Passwd `{struct passwd*`}
 	# Get the `Passwd` of the user with the `uid`
 	new from_uid(uid: Int) `{ return getpwuid(uid); `}
@@ -66,13 +79,24 @@ extern class Passwd `{struct passwd*`}
 	fun shell: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_shell); `}
 end
 
+# Information on a user group
 extern class Group `{struct group*`}
+	# Get a group from its id
 	new from_gid(gid: Int) `{ return getgrgid(gid); `}
+
+	# Get a group from its name
 	new from_name(name: String) import String.to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
 
+	# Name of this ground
 	fun name: String import NativeString.to_s `{ return NativeString_to_s(recv->gr_name); `}
+
+	# Encrypted password of this group
 	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(recv->gr_passwd); `}
+
+	# Id of this group
 	fun gid: Int `{ return recv->gr_gid; `}
+
+	# List of the members of the group
 	fun mem: Array[String] import Array[String], Array[String].add, NativeString.to_s `{
 		char **mem;
 		int m;
