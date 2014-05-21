@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# General module for cross-compatibility between multiple platforms
-module mnit
+module platform is platform("android")
 
-import mnit_app
-import opengles1
-import assets
-import numbers
+import java
+import app
