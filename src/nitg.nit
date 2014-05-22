@@ -26,6 +26,7 @@ import separate_erasure_compiler
 import separate_compiler
 import android_platform
 import compiler_ffi
+import pnacl_platform
 
 redef class ToolContext
 	redef fun process_options(args)

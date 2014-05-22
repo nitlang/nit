@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org )t
+# This file is part of NIT ( http://www.nitlanguage.org )
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
@@ -27,30 +27,6 @@ redef class ToolContext
 	do
 		if name == "android" then return new AndroidPlatform
 		return super
-	end
-
-	fun exec_and_check(args: Array[String])
-	do
-		var prog = args.first
-		args.remove_at 0
-
-		# Is the wanted program available?
-		var proc_which = new IProcess.from_a("which", [prog])
-		proc_which.wait
-		var res = proc_which.status
-		if res != 0 then
-			print "Android project error: executable \"{prog}\" not found"
-			exit 1
-		end
-
-		# Execute the wanted program
-		var proc = new Process.from_a(prog, args)
-		proc.wait
-		res = proc.status
-		if res != 0 then
-			print "Android project error: execution of \"{prog} {args.join(" ")}\" failed"
-			exit 1
-		end
 	end
 end
 
@@ -97,7 +73,7 @@ class AndroidToolchain
 			"--path", android_project_root,
 			"--package", app_package,
 			"--activity", short_project_name]
-		toolcontext.exec_and_check(args)
+		toolcontext.exec_and_check(args, "Android project error")
 
 		# create compile_dir
 		var dir = "{android_project_root}/jni/"
@@ -116,16 +92,13 @@ class AndroidToolchain
 
 		## Generate delagating makefile
 		dir = "{android_project_root}/jni/"
-		var file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 include $(call all-subdir-makefiles)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate makefile into "{compile_dir}/Android.mk"
 		dir = compile_dir
-		file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -139,13 +112,11 @@ LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/native_app_glue)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate AndroidManifest.xml
 		dir = android_project_root
-		file = new OFStream.open("{dir}/AndroidManifest.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
@@ -184,20 +155,18 @@ $(call import-module,android/native_app_glue)
 
 </manifest> 
 <!-- END_INCLUDE(manifest) -->
-"""
-		file.close
+		""".write_to_file("{dir}/AndroidManifest.xml")
 
 		### generate res/values/strings.xml
 		dir = "{android_project_root}/res/"
 		if not dir.file_exists then dir.mkdir
 		dir = "{dir}/values/"
 		if not dir.file_exists then dir.mkdir
-		file = new OFStream.open("{dir}/strings.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">{{{app_name}}}</string>
-</resources>"""
-		file.close
+</resources>
+		""".write_to_file("{dir}/strings.xml")
 
 		### Link to png sources
 		# libpng is not available on Android NDK
@@ -211,7 +180,7 @@ $(call import-module,android/native_app_glue)
 		share_dir = share_dir.realpath
 		var target_png_dir = "{android_project_root}/jni/png"
 		if not target_png_dir.file_exists then
-			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
+			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir], "Android project error")
 		end
 
 		### Link to assets (for mnit and others)
@@ -228,7 +197,7 @@ $(call import-module,android/native_app_glue)
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
 			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
 			end
 		end
 	end
@@ -244,14 +213,14 @@ $(call import-module,android/native_app_glue)
 		var release = toolcontext.opt_release.value
 
 		# Compile C code (and thus Nit)
-		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root])
+		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
 		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
 		if release then
 			args.add "release"
 		else args.add "debug"
-		toolcontext.exec_and_check(args)
+		toolcontext.exec_and_check(args, "Android project error")
 
 		# Move the apk to the target
 		var outname = toolcontext.opt_output.value
@@ -262,7 +231,7 @@ $(call import-module,android/native_app_glue)
 			src_apk_suffix = "release-unsigned"
 		else src_apk_suffix = "debug"
 
-		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-{src_apk_suffix}.apk", outname])
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-{src_apk_suffix}.apk", outname], "Android project error")
 	end
 end
 

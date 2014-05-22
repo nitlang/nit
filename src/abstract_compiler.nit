@@ -29,6 +29,8 @@ redef class ToolContext
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	# --no-main
+	var opt_no_main: OptionBool = new OptionBool("Do not generate main entry point", "--no-main")
 	# --cc-paths
 	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
@@ -65,7 +67,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
@@ -541,9 +543,9 @@ abstract class AbstractCompiler
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
+		var platform = mainmodule.target_platform
 
 		if ost == null then
-			var platform = mainmodule.target_platform
 			if platform != null and not platform.supports_libunwind then
 				ost = "none"
 			else
@@ -551,6 +553,8 @@ abstract class AbstractCompiler
 			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
+
+		if platform != null and platform.no_main then modelbuilder.toolcontext.opt_no_main.value = true
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
@@ -628,7 +632,11 @@ abstract class AbstractCompiler
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
-		v.add_decl("int main(int argc, char** argv) \{")
+		if modelbuilder.toolcontext.opt_no_main.value then
+			v.add_decl("int nit_main(int argc, char** argv) \{")
+		else
+			v.add_decl("int main(int argc, char** argv) \{")
+		end
 
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
