@@ -241,6 +241,11 @@ interface Numeric
 	fun zero: OTHER is abstract
 
 	# The value of `val` in the domain of `self`
+	#
+	#     assert 1.0.value_of(2) == 2.0
+	#     assert 1.0.value_of(2.0) == 2.0
+	#     assert 1.value_of(2) == 2
+	#     assert 1.value_of(2.0) == 2
 	fun value_of(val: Numeric): OTHER is abstract
 end
 
