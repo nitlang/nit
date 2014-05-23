@@ -23,12 +23,12 @@ var ip = new IProcess("echo", "B hello world!")
 ip.read_line.output
 ip.wait
 
-var op = new OProcess.init_("cat")
+var op = new OProcess.from_a("cat", null)
 op.write("C hello world!\n")
 op.close
 op.wait
 
-var iop = new IOProcess.init_("cat")
+var iop = new IOProcess.from_a("cat", null)
 iop.write("D hello world!\n")
 iop.read_line.output
 iop.close

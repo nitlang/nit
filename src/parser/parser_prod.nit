@@ -7,8 +7,6 @@ intrude import parser_nodes
 private import tables
 
 redef class AModule
-	private init empty_init do end
-
 	init init_amodule (
 		n_moduledecl: nullable AModuledecl,
 		n_imports: Collection[Object], # Should be Collection[AImport]
@@ -16,7 +14,6 @@ redef class AModule
 		n_classdefs: Collection[Object] # Should be Collection[AClassdef]
 	)
 	do
-		empty_init
 		_n_moduledecl = n_moduledecl
 		if n_moduledecl != null then n_moduledecl.parent = self
 		_n_imports.unsafe_add_all(n_imports)
@@ -51,8 +48,6 @@ redef class AModule
 	end
 end
 redef class AModuledecl
-	private init empty_init do end
-
 	init init_amoduledecl (
 		n_doc: nullable ADoc,
 		n_kwmodule: nullable TKwmodule,
@@ -60,7 +55,6 @@ redef class AModuledecl
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwmodule = n_kwmodule.as(not null)
@@ -122,8 +116,6 @@ redef class AModuledecl
 	end
 end
 redef class AStdImport
-	private init empty_init do end
-
 	init init_astdimport (
 		n_visibility: nullable AVisibility,
 		n_kwimport: nullable TKwimport,
@@ -131,7 +123,6 @@ redef class AStdImport
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_visibility = n_visibility.as(not null)
 		n_visibility.parent = self
 		_n_kwimport = n_kwimport.as(not null)
@@ -193,15 +184,12 @@ redef class AStdImport
 	end
 end
 redef class ANoImport
-	private init empty_init do end
-
 	init init_anoimport (
 		n_visibility: nullable AVisibility,
 		n_kwimport: nullable TKwimport,
 		n_kwend: nullable TKwend
 	)
 	do
-		empty_init
 		_n_visibility = n_visibility.as(not null)
 		n_visibility.parent = self
 		_n_kwimport = n_kwimport.as(not null)
@@ -251,11 +239,8 @@ redef class ANoImport
 	end
 end
 redef class APublicVisibility
-	private init empty_init do end
-
 	init init_apublicvisibility
 	do
-		empty_init
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -269,13 +254,10 @@ redef class APublicVisibility
 	end
 end
 redef class APrivateVisibility
-	private init empty_init do end
-
 	init init_aprivatevisibility (
 		n_kwprivate: nullable TKwprivate
 	)
 	do
-		empty_init
 		_n_kwprivate = n_kwprivate.as(not null)
 		n_kwprivate.parent = self
 	end
@@ -301,13 +283,10 @@ redef class APrivateVisibility
 	end
 end
 redef class AProtectedVisibility
-	private init empty_init do end
-
 	init init_aprotectedvisibility (
 		n_kwprotected: nullable TKwprotected
 	)
 	do
-		empty_init
 		_n_kwprotected = n_kwprotected.as(not null)
 		n_kwprotected.parent = self
 	end
@@ -333,13 +312,10 @@ redef class AProtectedVisibility
 	end
 end
 redef class AIntrudeVisibility
-	private init empty_init do end
-
 	init init_aintrudevisibility (
 		n_kwintrude: nullable TKwintrude
 	)
 	do
-		empty_init
 		_n_kwintrude = n_kwintrude.as(not null)
 		n_kwintrude.parent = self
 	end
@@ -365,8 +341,6 @@ redef class AIntrudeVisibility
 	end
 end
 redef class AStdClassdef
-	private init empty_init do end
-
 	init init_astdclassdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -381,7 +355,6 @@ redef class AStdClassdef
 		n_kwend: nullable TKwend
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -500,13 +473,10 @@ redef class AStdClassdef
 	end
 end
 redef class ATopClassdef
-	private init empty_init do end
-
 	init init_atopclassdef (
 		n_propdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
-		empty_init
 		_n_propdefs.unsafe_add_all(n_propdefs)
 	end
 
@@ -523,13 +493,10 @@ redef class ATopClassdef
 	end
 end
 redef class AMainClassdef
-	private init empty_init do end
-
 	init init_amainclassdef (
 		n_propdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
-		empty_init
 		_n_propdefs.unsafe_add_all(n_propdefs)
 	end
 
@@ -546,13 +513,10 @@ redef class AMainClassdef
 	end
 end
 redef class AConcreteClasskind
-	private init empty_init do end
-
 	init init_aconcreteclasskind (
 		n_kwclass: nullable TKwclass
 	)
 	do
-		empty_init
 		_n_kwclass = n_kwclass.as(not null)
 		n_kwclass.parent = self
 	end
@@ -578,14 +542,11 @@ redef class AConcreteClasskind
 	end
 end
 redef class AAbstractClasskind
-	private init empty_init do end
-
 	init init_aabstractclasskind (
 		n_kwabstract: nullable TKwabstract,
 		n_kwclass: nullable TKwclass
 	)
 	do
-		empty_init
 		_n_kwabstract = n_kwabstract.as(not null)
 		n_kwabstract.parent = self
 		_n_kwclass = n_kwclass.as(not null)
@@ -623,13 +584,10 @@ redef class AAbstractClasskind
 	end
 end
 redef class AInterfaceClasskind
-	private init empty_init do end
-
 	init init_ainterfaceclasskind (
 		n_kwinterface: nullable TKwinterface
 	)
 	do
-		empty_init
 		_n_kwinterface = n_kwinterface.as(not null)
 		n_kwinterface.parent = self
 	end
@@ -655,13 +613,10 @@ redef class AInterfaceClasskind
 	end
 end
 redef class AEnumClasskind
-	private init empty_init do end
-
 	init init_aenumclasskind (
 		n_kwenum: nullable TKwenum
 	)
 	do
-		empty_init
 		_n_kwenum = n_kwenum.as(not null)
 		n_kwenum.parent = self
 	end
@@ -687,14 +642,11 @@ redef class AEnumClasskind
 	end
 end
 redef class AExternClasskind
-	private init empty_init do end
-
 	init init_aexternclasskind (
 		n_kwextern: nullable TKwextern,
 		n_kwclass: nullable TKwclass
 	)
 	do
-		empty_init
 		_n_kwextern = n_kwextern.as(not null)
 		n_kwextern.parent = self
 		_n_kwclass = n_kwclass
@@ -732,15 +684,12 @@ redef class AExternClasskind
 	end
 end
 redef class AFormaldef
-	private init empty_init do end
-
 	init init_aformaldef (
 		n_id: nullable TClassid,
 		n_type: nullable AType,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_type = n_type
@@ -790,15 +739,12 @@ redef class AFormaldef
 	end
 end
 redef class ASuperclass
-	private init empty_init do end
-
 	init init_asuperclass (
 		n_kwsuper: nullable TKwsuper,
 		n_type: nullable AType,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwsuper = n_kwsuper.as(not null)
 		n_kwsuper.parent = self
 		_n_type = n_type.as(not null)
@@ -848,8 +794,6 @@ redef class ASuperclass
 	end
 end
 redef class AAttrPropdef
-	private init empty_init do end
-
 	init init_aattrpropdef (
 		n_doc: nullable ADoc,
 		n_readable: nullable AAble,
@@ -864,7 +808,6 @@ redef class AAttrPropdef
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_readable = n_readable
@@ -1010,8 +953,6 @@ redef class AAttrPropdef
 	end
 end
 redef class AMethPropdef
-	private init empty_init do end
-
 	init init_amethpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1020,7 +961,6 @@ redef class AMethPropdef
 		n_signature: nullable ASignature
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1094,8 +1034,6 @@ redef class AMethPropdef
 	end
 end
 redef class ADeferredMethPropdef
-	private init empty_init do end
-
 	init init_adeferredmethpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1106,7 +1044,6 @@ redef class ADeferredMethPropdef
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1204,8 +1141,6 @@ redef class ADeferredMethPropdef
 	end
 end
 redef class AInternMethPropdef
-	private init empty_init do end
-
 	init init_ainternmethpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1215,7 +1150,6 @@ redef class AInternMethPropdef
 		n_signature: nullable ASignature
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1301,8 +1235,6 @@ redef class AInternMethPropdef
 	end
 end
 redef class AExternMethPropdef
-	private init empty_init do end
-
 	init init_aexternmethpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1315,7 +1247,6 @@ redef class AExternMethPropdef
 		n_extern_code_block: nullable AExternCodeBlock
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1437,8 +1368,6 @@ redef class AExternMethPropdef
 	end
 end
 redef class AConcreteMethPropdef
-	private init empty_init do end
-
 	init init_aconcretemethpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1450,7 +1379,6 @@ redef class AConcreteMethPropdef
 		n_block: nullable AExpr
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1560,8 +1488,6 @@ redef class AConcreteMethPropdef
 	end
 end
 redef class AConcreteInitPropdef
-	private init empty_init do end
-
 	init init_aconcreteinitpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1573,7 +1499,6 @@ redef class AConcreteInitPropdef
 		n_block: nullable AExpr
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1683,8 +1608,6 @@ redef class AConcreteInitPropdef
 	end
 end
 redef class AExternInitPropdef
-	private init empty_init do end
-
 	init init_aexterninitpropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1697,7 +1620,6 @@ redef class AExternInitPropdef
 		n_extern_code_block: nullable AExternCodeBlock
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1819,14 +1741,11 @@ redef class AExternInitPropdef
 	end
 end
 redef class AMainMethPropdef
-	private init empty_init do end
-
 	init init_amainmethpropdef (
 		n_kwredef: nullable TKwredef,
 		n_block: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwredef = n_kwredef
 		if n_kwredef != null then n_kwredef.parent = self
 		_n_block = n_block
@@ -1864,8 +1783,6 @@ redef class AMainMethPropdef
 	end
 end
 redef class ATypePropdef
-	private init empty_init do end
-
 	init init_atypepropdef (
 		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
@@ -1876,7 +1793,6 @@ redef class ATypePropdef
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
@@ -1974,14 +1890,11 @@ redef class ATypePropdef
 	end
 end
 redef class AReadAble
-	private init empty_init do end
-
 	init init_areadable (
 		n_kwredef: nullable TKwredef,
 		n_kwreadable: nullable TKwreadable
 	)
 	do
-		empty_init
 		_n_kwredef = n_kwredef
 		if n_kwredef != null then n_kwredef.parent = self
 		_n_kwreadable = n_kwreadable.as(not null)
@@ -2019,15 +1932,12 @@ redef class AReadAble
 	end
 end
 redef class AWriteAble
-	private init empty_init do end
-
 	init init_awriteable (
 		n_kwredef: nullable TKwredef,
 		n_visibility: nullable AVisibility,
 		n_kwwritable: nullable TKwwritable
 	)
 	do
-		empty_init
 		_n_kwredef = n_kwredef
 		if n_kwredef != null then n_kwredef.parent = self
 		_n_visibility = n_visibility
@@ -2077,13 +1987,10 @@ redef class AWriteAble
 	end
 end
 redef class AIdMethid
-	private init empty_init do end
-
 	init init_aidmethid (
 		n_id: nullable TId
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -2109,13 +2016,10 @@ redef class AIdMethid
 	end
 end
 redef class APlusMethid
-	private init empty_init do end
-
 	init init_aplusmethid (
 		n_plus: nullable TPlus
 	)
 	do
-		empty_init
 		_n_plus = n_plus.as(not null)
 		n_plus.parent = self
 	end
@@ -2141,13 +2045,10 @@ redef class APlusMethid
 	end
 end
 redef class AMinusMethid
-	private init empty_init do end
-
 	init init_aminusmethid (
 		n_minus: nullable TMinus
 	)
 	do
-		empty_init
 		_n_minus = n_minus.as(not null)
 		n_minus.parent = self
 	end
@@ -2173,13 +2074,10 @@ redef class AMinusMethid
 	end
 end
 redef class AStarMethid
-	private init empty_init do end
-
 	init init_astarmethid (
 		n_star: nullable TStar
 	)
 	do
-		empty_init
 		_n_star = n_star.as(not null)
 		n_star.parent = self
 	end
@@ -2205,13 +2103,10 @@ redef class AStarMethid
 	end
 end
 redef class ASlashMethid
-	private init empty_init do end
-
 	init init_aslashmethid (
 		n_slash: nullable TSlash
 	)
 	do
-		empty_init
 		_n_slash = n_slash.as(not null)
 		n_slash.parent = self
 	end
@@ -2237,13 +2132,10 @@ redef class ASlashMethid
 	end
 end
 redef class APercentMethid
-	private init empty_init do end
-
 	init init_apercentmethid (
 		n_percent: nullable TPercent
 	)
 	do
-		empty_init
 		_n_percent = n_percent.as(not null)
 		n_percent.parent = self
 	end
@@ -2269,13 +2161,10 @@ redef class APercentMethid
 	end
 end
 redef class AEqMethid
-	private init empty_init do end
-
 	init init_aeqmethid (
 		n_eq: nullable TEq
 	)
 	do
-		empty_init
 		_n_eq = n_eq.as(not null)
 		n_eq.parent = self
 	end
@@ -2301,13 +2190,10 @@ redef class AEqMethid
 	end
 end
 redef class ANeMethid
-	private init empty_init do end
-
 	init init_anemethid (
 		n_ne: nullable TNe
 	)
 	do
-		empty_init
 		_n_ne = n_ne.as(not null)
 		n_ne.parent = self
 	end
@@ -2333,13 +2219,10 @@ redef class ANeMethid
 	end
 end
 redef class ALeMethid
-	private init empty_init do end
-
 	init init_alemethid (
 		n_le: nullable TLe
 	)
 	do
-		empty_init
 		_n_le = n_le.as(not null)
 		n_le.parent = self
 	end
@@ -2365,13 +2248,10 @@ redef class ALeMethid
 	end
 end
 redef class AGeMethid
-	private init empty_init do end
-
 	init init_agemethid (
 		n_ge: nullable TGe
 	)
 	do
-		empty_init
 		_n_ge = n_ge.as(not null)
 		n_ge.parent = self
 	end
@@ -2397,13 +2277,10 @@ redef class AGeMethid
 	end
 end
 redef class ALtMethid
-	private init empty_init do end
-
 	init init_altmethid (
 		n_lt: nullable TLt
 	)
 	do
-		empty_init
 		_n_lt = n_lt.as(not null)
 		n_lt.parent = self
 	end
@@ -2429,13 +2306,10 @@ redef class ALtMethid
 	end
 end
 redef class AGtMethid
-	private init empty_init do end
-
 	init init_agtmethid (
 		n_gt: nullable TGt
 	)
 	do
-		empty_init
 		_n_gt = n_gt.as(not null)
 		n_gt.parent = self
 	end
@@ -2461,13 +2335,10 @@ redef class AGtMethid
 	end
 end
 redef class ALlMethid
-	private init empty_init do end
-
 	init init_allmethid (
 		n_ll: nullable TLl
 	)
 	do
-		empty_init
 		_n_ll = n_ll.as(not null)
 		n_ll.parent = self
 	end
@@ -2493,13 +2364,10 @@ redef class ALlMethid
 	end
 end
 redef class AGgMethid
-	private init empty_init do end
-
 	init init_aggmethid (
 		n_gg: nullable TGg
 	)
 	do
-		empty_init
 		_n_gg = n_gg.as(not null)
 		n_gg.parent = self
 	end
@@ -2525,14 +2393,11 @@ redef class AGgMethid
 	end
 end
 redef class ABraMethid
-	private init empty_init do end
-
 	init init_abramethid (
 		n_obra: nullable TObra,
 		n_cbra: nullable TCbra
 	)
 	do
-		empty_init
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
 		_n_cbra = n_cbra.as(not null)
@@ -2570,13 +2435,10 @@ redef class ABraMethid
 	end
 end
 redef class AStarshipMethid
-	private init empty_init do end
-
 	init init_astarshipmethid (
 		n_starship: nullable TStarship
 	)
 	do
-		empty_init
 		_n_starship = n_starship.as(not null)
 		n_starship.parent = self
 	end
@@ -2602,14 +2464,11 @@ redef class AStarshipMethid
 	end
 end
 redef class AAssignMethid
-	private init empty_init do end
-
 	init init_aassignmethid (
 		n_id: nullable TId,
 		n_assign: nullable TAssign
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_assign = n_assign.as(not null)
@@ -2647,15 +2506,12 @@ redef class AAssignMethid
 	end
 end
 redef class ABraassignMethid
-	private init empty_init do end
-
 	init init_abraassignmethid (
 		n_obra: nullable TObra,
 		n_cbra: nullable TCbra,
 		n_assign: nullable TAssign
 	)
 	do
-		empty_init
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
 		_n_cbra = n_cbra.as(not null)
@@ -2705,8 +2561,6 @@ redef class ABraassignMethid
 	end
 end
 redef class ASignature
-	private init empty_init do end
-
 	init init_asignature (
 		n_opar: nullable TOpar,
 		n_params: Collection[Object], # Should be Collection[AParam]
@@ -2714,7 +2568,6 @@ redef class ASignature
 		n_type: nullable AType
 	)
 	do
-		empty_init
 		_n_opar = n_opar
 		if n_opar != null then n_opar.parent = self
 		_n_params.unsafe_add_all(n_params)
@@ -2767,8 +2620,6 @@ redef class ASignature
 	end
 end
 redef class AParam
-	private init empty_init do end
-
 	init init_aparam (
 		n_id: nullable TId,
 		n_type: nullable AType,
@@ -2776,7 +2627,6 @@ redef class AParam
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_type = n_type
@@ -2838,8 +2688,6 @@ redef class AParam
 	end
 end
 redef class AType
-	private init empty_init do end
-
 	init init_atype (
 		n_kwnullable: nullable TKwnullable,
 		n_id: nullable TClassid,
@@ -2847,7 +2695,6 @@ redef class AType
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwnullable = n_kwnullable
 		if n_kwnullable != null then n_kwnullable.parent = self
 		_n_id = n_id.as(not null)
@@ -2900,14 +2747,11 @@ redef class AType
 	end
 end
 redef class ALabel
-	private init empty_init do end
-
 	init init_alabel (
 		n_kwlabel: nullable TKwlabel,
 		n_id: nullable TId
 	)
 	do
-		empty_init
 		_n_kwlabel = n_kwlabel.as(not null)
 		n_kwlabel.parent = self
 		_n_id = n_id.as(not null)
@@ -2945,14 +2789,11 @@ redef class ALabel
 	end
 end
 redef class ABlockExpr
-	private init empty_init do end
-
 	init init_ablockexpr (
 		n_expr: Collection[Object], # Should be Collection[AExpr]
 		n_kwend: nullable TKwend
 	)
 	do
-		empty_init
 		_n_expr.unsafe_add_all(n_expr)
 		_n_kwend = n_kwend
 		if n_kwend != null then n_kwend.parent = self
@@ -2981,8 +2822,6 @@ redef class ABlockExpr
 	end
 end
 redef class AVardeclExpr
-	private init empty_init do end
-
 	init init_avardeclexpr (
 		n_kwvar: nullable TKwvar,
 		n_id: nullable TId,
@@ -2992,7 +2831,6 @@ redef class AVardeclExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwvar = n_kwvar.as(not null)
 		n_kwvar.parent = self
 		_n_id = n_id.as(not null)
@@ -3078,14 +2916,11 @@ redef class AVardeclExpr
 	end
 end
 redef class AReturnExpr
-	private init empty_init do end
-
 	init init_areturnexpr (
 		n_kwreturn: nullable TKwreturn,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwreturn = n_kwreturn
 		if n_kwreturn != null then n_kwreturn.parent = self
 		_n_expr = n_expr
@@ -3123,15 +2958,12 @@ redef class AReturnExpr
 	end
 end
 redef class ABreakExpr
-	private init empty_init do end
-
 	init init_abreakexpr (
 		n_kwbreak: nullable TKwbreak,
 		n_label: nullable ALabel,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwbreak = n_kwbreak.as(not null)
 		n_kwbreak.parent = self
 		_n_label = n_label
@@ -3181,13 +3013,10 @@ redef class ABreakExpr
 	end
 end
 redef class AAbortExpr
-	private init empty_init do end
-
 	init init_aabortexpr (
 		n_kwabort: nullable TKwabort
 	)
 	do
-		empty_init
 		_n_kwabort = n_kwabort.as(not null)
 		n_kwabort.parent = self
 	end
@@ -3213,15 +3042,12 @@ redef class AAbortExpr
 	end
 end
 redef class AContinueExpr
-	private init empty_init do end
-
 	init init_acontinueexpr (
 		n_kwcontinue: nullable TKwcontinue,
 		n_label: nullable ALabel,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwcontinue = n_kwcontinue
 		if n_kwcontinue != null then n_kwcontinue.parent = self
 		_n_label = n_label
@@ -3271,15 +3097,12 @@ redef class AContinueExpr
 	end
 end
 redef class ADoExpr
-	private init empty_init do end
-
 	init init_adoexpr (
 		n_kwdo: nullable TKwdo,
 		n_block: nullable AExpr,
 		n_label: nullable ALabel
 	)
 	do
-		empty_init
 		_n_kwdo = n_kwdo.as(not null)
 		n_kwdo.parent = self
 		_n_block = n_block
@@ -3329,8 +3152,6 @@ redef class ADoExpr
 	end
 end
 redef class AIfExpr
-	private init empty_init do end
-
 	init init_aifexpr (
 		n_kwif: nullable TKwif,
 		n_expr: nullable AExpr,
@@ -3338,7 +3159,6 @@ redef class AIfExpr
 		n_else: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwif = n_kwif.as(not null)
 		n_kwif.parent = self
 		_n_expr = n_expr.as(not null)
@@ -3400,8 +3220,6 @@ redef class AIfExpr
 	end
 end
 redef class AIfexprExpr
-	private init empty_init do end
-
 	init init_aifexprexpr (
 		n_kwif: nullable TKwif,
 		n_expr: nullable AExpr,
@@ -3411,7 +3229,6 @@ redef class AIfexprExpr
 		n_else: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwif = n_kwif.as(not null)
 		n_kwif.parent = self
 		_n_expr = n_expr.as(not null)
@@ -3497,8 +3314,6 @@ redef class AIfexprExpr
 	end
 end
 redef class AWhileExpr
-	private init empty_init do end
-
 	init init_awhileexpr (
 		n_kwwhile: nullable TKwwhile,
 		n_expr: nullable AExpr,
@@ -3507,7 +3322,6 @@ redef class AWhileExpr
 		n_label: nullable ALabel
 	)
 	do
-		empty_init
 		_n_kwwhile = n_kwwhile.as(not null)
 		n_kwwhile.parent = self
 		_n_expr = n_expr.as(not null)
@@ -3581,15 +3395,12 @@ redef class AWhileExpr
 	end
 end
 redef class ALoopExpr
-	private init empty_init do end
-
 	init init_aloopexpr (
 		n_kwloop: nullable TKwloop,
 		n_block: nullable AExpr,
 		n_label: nullable ALabel
 	)
 	do
-		empty_init
 		_n_kwloop = n_kwloop.as(not null)
 		n_kwloop.parent = self
 		_n_block = n_block
@@ -3639,8 +3450,6 @@ redef class ALoopExpr
 	end
 end
 redef class AForExpr
-	private init empty_init do end
-
 	init init_aforexpr (
 		n_kwfor: nullable TKwfor,
 		n_ids: Collection[Object], # Should be Collection[TId]
@@ -3650,7 +3459,6 @@ redef class AForExpr
 		n_label: nullable ALabel
 	)
 	do
-		empty_init
 		_n_kwfor = n_kwfor.as(not null)
 		n_kwfor.parent = self
 		_n_ids.unsafe_add_all(n_ids)
@@ -3727,8 +3535,6 @@ redef class AForExpr
 	end
 end
 redef class AAssertExpr
-	private init empty_init do end
-
 	init init_aassertexpr (
 		n_kwassert: nullable TKwassert,
 		n_id: nullable TId,
@@ -3736,7 +3542,6 @@ redef class AAssertExpr
 		n_else: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwassert = n_kwassert.as(not null)
 		n_kwassert.parent = self
 		_n_id = n_id
@@ -3798,14 +3603,11 @@ redef class AAssertExpr
 	end
 end
 redef class AOnceExpr
-	private init empty_init do end
-
 	init init_aonceexpr (
 		n_kwonce: nullable TKwonce,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwonce = n_kwonce.as(not null)
 		n_kwonce.parent = self
 		_n_expr = n_expr.as(not null)
@@ -3843,13 +3645,10 @@ redef class AOnceExpr
 	end
 end
 redef class ASendExpr
-	private init empty_init do end
-
 	init init_asendexpr (
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 	end
@@ -3875,14 +3674,11 @@ redef class ASendExpr
 	end
 end
 redef class ABinopExpr
-	private init empty_init do end
-
 	init init_abinopexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -3920,14 +3716,11 @@ redef class ABinopExpr
 	end
 end
 redef class AOrExpr
-	private init empty_init do end
-
 	init init_aorexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -3965,14 +3758,11 @@ redef class AOrExpr
 	end
 end
 redef class AAndExpr
-	private init empty_init do end
-
 	init init_aandexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4010,14 +3800,11 @@ redef class AAndExpr
 	end
 end
 redef class AOrElseExpr
-	private init empty_init do end
-
 	init init_aorelseexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4055,14 +3842,11 @@ redef class AOrElseExpr
 	end
 end
 redef class AImpliesExpr
-	private init empty_init do end
-
 	init init_aimpliesexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4100,14 +3884,11 @@ redef class AImpliesExpr
 	end
 end
 redef class ANotExpr
-	private init empty_init do end
-
 	init init_anotexpr (
 		n_kwnot: nullable TKwnot,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_kwnot = n_kwnot.as(not null)
 		n_kwnot.parent = self
 		_n_expr = n_expr.as(not null)
@@ -4145,14 +3926,11 @@ redef class ANotExpr
 	end
 end
 redef class AEqExpr
-	private init empty_init do end
-
 	init init_aeqexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4190,14 +3968,11 @@ redef class AEqExpr
 	end
 end
 redef class ANeExpr
-	private init empty_init do end
-
 	init init_aneexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4235,14 +4010,11 @@ redef class ANeExpr
 	end
 end
 redef class ALtExpr
-	private init empty_init do end
-
 	init init_altexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4280,14 +4052,11 @@ redef class ALtExpr
 	end
 end
 redef class ALeExpr
-	private init empty_init do end
-
 	init init_aleexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4325,14 +4094,11 @@ redef class ALeExpr
 	end
 end
 redef class ALlExpr
-	private init empty_init do end
-
 	init init_allexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4370,14 +4136,11 @@ redef class ALlExpr
 	end
 end
 redef class AGtExpr
-	private init empty_init do end
-
 	init init_agtexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4415,14 +4178,11 @@ redef class AGtExpr
 	end
 end
 redef class AGeExpr
-	private init empty_init do end
-
 	init init_ageexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4460,14 +4220,11 @@ redef class AGeExpr
 	end
 end
 redef class AGgExpr
-	private init empty_init do end
-
 	init init_aggexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4505,14 +4262,11 @@ redef class AGgExpr
 	end
 end
 redef class AIsaExpr
-	private init empty_init do end
-
 	init init_aisaexpr (
 		n_expr: nullable AExpr,
 		n_type: nullable AType
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_type = n_type.as(not null)
@@ -4550,14 +4304,11 @@ redef class AIsaExpr
 	end
 end
 redef class APlusExpr
-	private init empty_init do end
-
 	init init_aplusexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4595,14 +4346,11 @@ redef class APlusExpr
 	end
 end
 redef class AMinusExpr
-	private init empty_init do end
-
 	init init_aminusexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4640,14 +4388,11 @@ redef class AMinusExpr
 	end
 end
 redef class AStarshipExpr
-	private init empty_init do end
-
 	init init_astarshipexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4685,14 +4430,11 @@ redef class AStarshipExpr
 	end
 end
 redef class AStarExpr
-	private init empty_init do end
-
 	init init_astarexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4730,14 +4472,11 @@ redef class AStarExpr
 	end
 end
 redef class ASlashExpr
-	private init empty_init do end
-
 	init init_aslashexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4775,14 +4514,11 @@ redef class ASlashExpr
 	end
 end
 redef class APercentExpr
-	private init empty_init do end
-
 	init init_apercentexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -4820,14 +4556,11 @@ redef class APercentExpr
 	end
 end
 redef class AUminusExpr
-	private init empty_init do end
-
 	init init_auminusexpr (
 		n_minus: nullable TMinus,
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_minus = n_minus.as(not null)
 		n_minus.parent = self
 		_n_expr = n_expr.as(not null)
@@ -4865,8 +4598,6 @@ redef class AUminusExpr
 	end
 end
 redef class ANewExpr
-	private init empty_init do end
-
 	init init_anewexpr (
 		n_kwnew: nullable TKwnew,
 		n_type: nullable AType,
@@ -4874,7 +4605,6 @@ redef class ANewExpr
 		n_args: nullable AExprs
 	)
 	do
-		empty_init
 		_n_kwnew = n_kwnew.as(not null)
 		n_kwnew.parent = self
 		_n_type = n_type.as(not null)
@@ -4936,14 +4666,11 @@ redef class ANewExpr
 	end
 end
 redef class AAttrExpr
-	private init empty_init do end
-
 	init init_aattrexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TAttrid
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -4981,8 +4708,6 @@ redef class AAttrExpr
 	end
 end
 redef class AAttrAssignExpr
-	private init empty_init do end
-
 	init init_aattrassignexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TAttrid,
@@ -4990,7 +4715,6 @@ redef class AAttrAssignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -5052,8 +4776,6 @@ redef class AAttrAssignExpr
 	end
 end
 redef class AAttrReassignExpr
-	private init empty_init do end
-
 	init init_aattrreassignexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TAttrid,
@@ -5061,7 +4783,6 @@ redef class AAttrReassignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -5123,15 +4844,12 @@ redef class AAttrReassignExpr
 	end
 end
 redef class ACallExpr
-	private init empty_init do end
-
 	init init_acallexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TId,
 		n_args: nullable AExprs
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -5181,8 +4899,6 @@ redef class ACallExpr
 	end
 end
 redef class ACallAssignExpr
-	private init empty_init do end
-
 	init init_acallassignexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TId,
@@ -5191,7 +4907,6 @@ redef class ACallAssignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -5265,8 +4980,6 @@ redef class ACallAssignExpr
 	end
 end
 redef class ACallReassignExpr
-	private init empty_init do end
-
 	init init_acallreassignexpr (
 		n_expr: nullable AExpr,
 		n_id: nullable TId,
@@ -5275,7 +4988,6 @@ redef class ACallReassignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_id = n_id.as(not null)
@@ -5349,15 +5061,12 @@ redef class ACallReassignExpr
 	end
 end
 redef class ASuperExpr
-	private init empty_init do end
-
 	init init_asuperexpr (
 		n_qualified: nullable AQualified,
 		n_kwsuper: nullable TKwsuper,
 		n_args: nullable AExprs
 	)
 	do
-		empty_init
 		_n_qualified = n_qualified
 		if n_qualified != null then n_qualified.parent = self
 		_n_kwsuper = n_kwsuper.as(not null)
@@ -5407,15 +5116,12 @@ redef class ASuperExpr
 	end
 end
 redef class AInitExpr
-	private init empty_init do end
-
 	init init_ainitexpr (
 		n_expr: nullable AExpr,
 		n_kwinit: nullable TKwinit,
 		n_args: nullable AExprs
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_kwinit = n_kwinit.as(not null)
@@ -5465,14 +5171,11 @@ redef class AInitExpr
 	end
 end
 redef class ABraExpr
-	private init empty_init do end
-
 	init init_abraexpr (
 		n_expr: nullable AExpr,
 		n_args: nullable AExprs
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_args = n_args.as(not null)
@@ -5510,8 +5213,6 @@ redef class ABraExpr
 	end
 end
 redef class ABraAssignExpr
-	private init empty_init do end
-
 	init init_abraassignexpr (
 		n_expr: nullable AExpr,
 		n_args: nullable AExprs,
@@ -5519,7 +5220,6 @@ redef class ABraAssignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_args = n_args.as(not null)
@@ -5581,8 +5281,6 @@ redef class ABraAssignExpr
 	end
 end
 redef class ABraReassignExpr
-	private init empty_init do end
-
 	init init_abrareassignexpr (
 		n_expr: nullable AExpr,
 		n_args: nullable AExprs,
@@ -5590,7 +5288,6 @@ redef class ABraReassignExpr
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_args = n_args.as(not null)
@@ -5652,13 +5349,10 @@ redef class ABraReassignExpr
 	end
 end
 redef class AVarExpr
-	private init empty_init do end
-
 	init init_avarexpr (
 		n_id: nullable TId
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -5684,15 +5378,12 @@ redef class AVarExpr
 	end
 end
 redef class AVarAssignExpr
-	private init empty_init do end
-
 	init init_avarassignexpr (
 		n_id: nullable TId,
 		n_assign: nullable TAssign,
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_assign = n_assign.as(not null)
@@ -5742,15 +5433,12 @@ redef class AVarAssignExpr
 	end
 end
 redef class AVarReassignExpr
-	private init empty_init do end
-
 	init init_avarreassignexpr (
 		n_id: nullable TId,
 		n_assign_op: nullable AAssignOp,
 		n_value: nullable AExpr
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_assign_op = n_assign_op.as(not null)
@@ -5800,15 +5488,12 @@ redef class AVarReassignExpr
 	end
 end
 redef class ARangeExpr
-	private init empty_init do end
-
 	init init_arangeexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_expr2 = n_expr2.as(not null)
@@ -5858,8 +5543,6 @@ redef class ARangeExpr
 	end
 end
 redef class ACrangeExpr
-	private init empty_init do end
-
 	init init_acrangeexpr (
 		n_obra: nullable TObra,
 		n_expr: nullable AExpr,
@@ -5868,7 +5551,6 @@ redef class ACrangeExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
 		_n_expr = n_expr.as(not null)
@@ -5942,8 +5624,6 @@ redef class ACrangeExpr
 	end
 end
 redef class AOrangeExpr
-	private init empty_init do end
-
 	init init_aorangeexpr (
 		n_obra: nullable TObra,
 		n_expr: nullable AExpr,
@@ -5952,7 +5632,6 @@ redef class AOrangeExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
 		_n_expr = n_expr.as(not null)
@@ -6026,14 +5705,11 @@ redef class AOrangeExpr
 	end
 end
 redef class AArrayExpr
-	private init empty_init do end
-
 	init init_aarrayexpr (
 		n_exprs: nullable AExprs,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_exprs = n_exprs.as(not null)
 		n_exprs.parent = self
 		_n_annotations = n_annotations
@@ -6071,14 +5747,11 @@ redef class AArrayExpr
 	end
 end
 redef class ASelfExpr
-	private init empty_init do end
-
 	init init_aselfexpr (
 		n_kwself: nullable TKwself,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwself = n_kwself.as(not null)
 		n_kwself.parent = self
 		_n_annotations = n_annotations
@@ -6116,11 +5789,8 @@ redef class ASelfExpr
 	end
 end
 redef class AImplicitSelfExpr
-	private init empty_init do end
-
 	init init_aimplicitselfexpr
 	do
-		empty_init
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6134,14 +5804,11 @@ redef class AImplicitSelfExpr
 	end
 end
 redef class ATrueExpr
-	private init empty_init do end
-
 	init init_atrueexpr (
 		n_kwtrue: nullable TKwtrue,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwtrue = n_kwtrue.as(not null)
 		n_kwtrue.parent = self
 		_n_annotations = n_annotations
@@ -6179,14 +5846,11 @@ redef class ATrueExpr
 	end
 end
 redef class AFalseExpr
-	private init empty_init do end
-
 	init init_afalseexpr (
 		n_kwfalse: nullable TKwfalse,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwfalse = n_kwfalse.as(not null)
 		n_kwfalse.parent = self
 		_n_annotations = n_annotations
@@ -6224,14 +5888,11 @@ redef class AFalseExpr
 	end
 end
 redef class ANullExpr
-	private init empty_init do end
-
 	init init_anullexpr (
 		n_kwnull: nullable TKwnull,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_kwnull = n_kwnull.as(not null)
 		n_kwnull.parent = self
 		_n_annotations = n_annotations
@@ -6269,14 +5930,11 @@ redef class ANullExpr
 	end
 end
 redef class ADecIntExpr
-	private init empty_init do end
-
 	init init_adecintexpr (
 		n_number: nullable TNumber,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_number = n_number.as(not null)
 		n_number.parent = self
 		_n_annotations = n_annotations
@@ -6314,14 +5972,11 @@ redef class ADecIntExpr
 	end
 end
 redef class AHexIntExpr
-	private init empty_init do end
-
 	init init_ahexintexpr (
 		n_hex_number: nullable THexNumber,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_hex_number = n_hex_number.as(not null)
 		n_hex_number.parent = self
 		_n_annotations = n_annotations
@@ -6359,14 +6014,11 @@ redef class AHexIntExpr
 	end
 end
 redef class AFloatExpr
-	private init empty_init do end
-
 	init init_afloatexpr (
 		n_float: nullable TFloat,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_float = n_float.as(not null)
 		n_float.parent = self
 		_n_annotations = n_annotations
@@ -6404,14 +6056,11 @@ redef class AFloatExpr
 	end
 end
 redef class ACharExpr
-	private init empty_init do end
-
 	init init_acharexpr (
 		n_char: nullable TChar,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_char = n_char.as(not null)
 		n_char.parent = self
 		_n_annotations = n_annotations
@@ -6449,14 +6098,11 @@ redef class ACharExpr
 	end
 end
 redef class AStringExpr
-	private init empty_init do end
-
 	init init_astringexpr (
 		n_string: nullable TString,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_string = n_string.as(not null)
 		n_string.parent = self
 		_n_annotations = n_annotations
@@ -6494,13 +6140,10 @@ redef class AStringExpr
 	end
 end
 redef class AStartStringExpr
-	private init empty_init do end
-
 	init init_astartstringexpr (
 		n_string: nullable TStartString
 	)
 	do
-		empty_init
 		_n_string = n_string.as(not null)
 		n_string.parent = self
 	end
@@ -6526,13 +6169,10 @@ redef class AStartStringExpr
 	end
 end
 redef class AMidStringExpr
-	private init empty_init do end
-
 	init init_amidstringexpr (
 		n_string: nullable TMidString
 	)
 	do
-		empty_init
 		_n_string = n_string.as(not null)
 		n_string.parent = self
 	end
@@ -6558,13 +6198,10 @@ redef class AMidStringExpr
 	end
 end
 redef class AEndStringExpr
-	private init empty_init do end
-
 	init init_aendstringexpr (
 		n_string: nullable TEndString
 	)
 	do
-		empty_init
 		_n_string = n_string.as(not null)
 		n_string.parent = self
 	end
@@ -6590,14 +6227,11 @@ redef class AEndStringExpr
 	end
 end
 redef class ASuperstringExpr
-	private init empty_init do end
-
 	init init_asuperstringexpr (
 		n_exprs: Collection[Object], # Should be Collection[AExpr]
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_exprs.unsafe_add_all(n_exprs)
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
@@ -6626,8 +6260,6 @@ redef class ASuperstringExpr
 	end
 end
 redef class AParExpr
-	private init empty_init do end
-
 	init init_aparexpr (
 		n_opar: nullable TOpar,
 		n_expr: nullable AExpr,
@@ -6635,7 +6267,6 @@ redef class AParExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_opar = n_opar.as(not null)
 		n_opar.parent = self
 		_n_expr = n_expr.as(not null)
@@ -6697,8 +6328,6 @@ redef class AParExpr
 	end
 end
 redef class AAsCastExpr
-	private init empty_init do end
-
 	init init_aascastexpr (
 		n_expr: nullable AExpr,
 		n_kwas: nullable TKwas,
@@ -6707,7 +6336,6 @@ redef class AAsCastExpr
 		n_cpar: nullable TCpar
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_kwas = n_kwas.as(not null)
@@ -6781,8 +6409,6 @@ redef class AAsCastExpr
 	end
 end
 redef class AAsNotnullExpr
-	private init empty_init do end
-
 	init init_aasnotnullexpr (
 		n_expr: nullable AExpr,
 		n_kwas: nullable TKwas,
@@ -6792,7 +6418,6 @@ redef class AAsNotnullExpr
 		n_cpar: nullable TCpar
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_kwas = n_kwas.as(not null)
@@ -6878,15 +6503,12 @@ redef class AAsNotnullExpr
 	end
 end
 redef class AIssetAttrExpr
-	private init empty_init do end
-
 	init init_aissetattrexpr (
 		n_kwisset: nullable TKwisset,
 		n_expr: nullable AExpr,
 		n_id: nullable TAttrid
 	)
 	do
-		empty_init
 		_n_kwisset = n_kwisset.as(not null)
 		n_kwisset.parent = self
 		_n_expr = n_expr.as(not null)
@@ -6936,8 +6558,6 @@ redef class AIssetAttrExpr
 	end
 end
 redef class ADebugTypeExpr
-	private init empty_init do end
-
 	init init_adebugtypeexpr (
 		n_kwdebug: nullable TKwdebug,
 		n_kwtype: nullable TKwtype,
@@ -6945,7 +6565,6 @@ redef class ADebugTypeExpr
 		n_type: nullable AType
 	)
 	do
-		empty_init
 		_n_kwdebug = n_kwdebug.as(not null)
 		n_kwdebug.parent = self
 		_n_kwtype = n_kwtype.as(not null)
@@ -7007,13 +6626,10 @@ redef class ADebugTypeExpr
 	end
 end
 redef class AListExprs
-	private init empty_init do end
-
 	init init_alistexprs (
 		n_exprs: Collection[Object] # Should be Collection[AExpr]
 	)
 	do
-		empty_init
 		_n_exprs.unsafe_add_all(n_exprs)
 	end
 
@@ -7030,15 +6646,12 @@ redef class AListExprs
 	end
 end
 redef class AParExprs
-	private init empty_init do end
-
 	init init_aparexprs (
 		n_opar: nullable TOpar,
 		n_exprs: Collection[Object], # Should be Collection[AExpr]
 		n_cpar: nullable TCpar
 	)
 	do
-		empty_init
 		_n_opar = n_opar.as(not null)
 		n_opar.parent = self
 		_n_exprs.unsafe_add_all(n_exprs)
@@ -7079,15 +6692,12 @@ redef class AParExprs
 	end
 end
 redef class ABraExprs
-	private init empty_init do end
-
 	init init_abraexprs (
 		n_obra: nullable TObra,
 		n_exprs: Collection[Object], # Should be Collection[AExpr]
 		n_cbra: nullable TCbra
 	)
 	do
-		empty_init
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
 		_n_exprs.unsafe_add_all(n_exprs)
@@ -7128,13 +6738,10 @@ redef class ABraExprs
 	end
 end
 redef class APlusAssignOp
-	private init empty_init do end
-
 	init init_aplusassignop (
 		n_pluseq: nullable TPluseq
 	)
 	do
-		empty_init
 		_n_pluseq = n_pluseq.as(not null)
 		n_pluseq.parent = self
 	end
@@ -7160,13 +6767,10 @@ redef class APlusAssignOp
 	end
 end
 redef class AMinusAssignOp
-	private init empty_init do end
-
 	init init_aminusassignop (
 		n_minuseq: nullable TMinuseq
 	)
 	do
-		empty_init
 		_n_minuseq = n_minuseq.as(not null)
 		n_minuseq.parent = self
 	end
@@ -7192,15 +6796,12 @@ redef class AMinusAssignOp
 	end
 end
 redef class AModuleName
-	private init empty_init do end
-
 	init init_amodulename (
 		n_quad: nullable TQuad,
 		n_path: Collection[Object], # Should be Collection[TId]
 		n_id: nullable TId
 	)
 	do
-		empty_init
 		_n_quad = n_quad
 		if n_quad != null then n_quad.parent = self
 		_n_path.unsafe_add_all(n_path)
@@ -7241,14 +6842,11 @@ redef class AModuleName
 	end
 end
 redef class AExternCalls
-	private init empty_init do end
-
 	init init_aexterncalls (
 		n_kwimport: nullable TKwimport,
 		n_extern_calls: Collection[Object] # Should be Collection[AExternCall]
 	)
 	do
-		empty_init
 		_n_kwimport = n_kwimport.as(not null)
 		n_kwimport.parent = self
 		_n_extern_calls.unsafe_add_all(n_extern_calls)
@@ -7277,11 +6875,8 @@ redef class AExternCalls
 	end
 end
 redef class AExternCall
-	private init empty_init do end
-
 	init init_aexterncall
 	do
-		empty_init
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7295,13 +6890,10 @@ redef class AExternCall
 	end
 end
 redef class ASuperExternCall
-	private init empty_init do end
-
 	init init_asuperexterncall (
 		n_kwsuper: nullable TKwsuper
 	)
 	do
-		empty_init
 		_n_kwsuper = n_kwsuper.as(not null)
 		n_kwsuper.parent = self
 	end
@@ -7327,13 +6919,10 @@ redef class ASuperExternCall
 	end
 end
 redef class ALocalPropExternCall
-	private init empty_init do end
-
 	init init_alocalpropexterncall (
 		n_methid: nullable AMethid
 	)
 	do
-		empty_init
 		_n_methid = n_methid.as(not null)
 		n_methid.parent = self
 	end
@@ -7359,15 +6948,12 @@ redef class ALocalPropExternCall
 	end
 end
 redef class AFullPropExternCall
-	private init empty_init do end
-
 	init init_afullpropexterncall (
 		n_type: nullable AType,
 		n_dot: nullable TDot,
 		n_methid: nullable AMethid
 	)
 	do
-		empty_init
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 		_n_dot = n_dot
@@ -7417,13 +7003,10 @@ redef class AFullPropExternCall
 	end
 end
 redef class AInitPropExternCall
-	private init empty_init do end
-
 	init init_ainitpropexterncall (
 		n_type: nullable AType
 	)
 	do
-		empty_init
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 	end
@@ -7449,8 +7032,6 @@ redef class AInitPropExternCall
 	end
 end
 redef class ACastAsExternCall
-	private init empty_init do end
-
 	init init_acastasexterncall (
 		n_from_type: nullable AType,
 		n_dot: nullable TDot,
@@ -7458,7 +7039,6 @@ redef class ACastAsExternCall
 		n_to_type: nullable AType
 	)
 	do
-		empty_init
 		_n_from_type = n_from_type.as(not null)
 		n_from_type.parent = self
 		_n_dot = n_dot
@@ -7520,15 +7100,12 @@ redef class ACastAsExternCall
 	end
 end
 redef class AAsNullableExternCall
-	private init empty_init do end
-
 	init init_aasnullableexterncall (
 		n_type: nullable AType,
 		n_kwas: nullable TKwas,
 		n_kwnullable: nullable TKwnullable
 	)
 	do
-		empty_init
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 		_n_kwas = n_kwas.as(not null)
@@ -7578,8 +7155,6 @@ redef class AAsNullableExternCall
 	end
 end
 redef class AAsNotNullableExternCall
-	private init empty_init do end
-
 	init init_aasnotnullableexterncall (
 		n_type: nullable AType,
 		n_kwas: nullable TKwas,
@@ -7587,7 +7162,6 @@ redef class AAsNotNullableExternCall
 		n_kwnullable: nullable TKwnullable
 	)
 	do
-		empty_init
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 		_n_kwas = n_kwas.as(not null)
@@ -7649,14 +7223,11 @@ redef class AAsNotNullableExternCall
 	end
 end
 redef class AInLanguage
-	private init empty_init do end
-
 	init init_ainlanguage (
 		n_kwin: nullable TKwin,
 		n_string: nullable TString
 	)
 	do
-		empty_init
 		_n_kwin = n_kwin.as(not null)
 		n_kwin.parent = self
 		_n_string = n_string.as(not null)
@@ -7694,14 +7265,11 @@ redef class AInLanguage
 	end
 end
 redef class AExternCodeBlock
-	private init empty_init do end
-
 	init init_aexterncodeblock (
 		n_in_language: nullable AInLanguage,
 		n_extern_code_segment: nullable TExternCodeSegment
 	)
 	do
-		empty_init
 		_n_in_language = n_in_language
 		if n_in_language != null then n_in_language.parent = self
 		_n_extern_code_segment = n_extern_code_segment.as(not null)
@@ -7739,14 +7307,11 @@ redef class AExternCodeBlock
 	end
 end
 redef class AQualified
-	private init empty_init do end
-
 	init init_aqualified (
 		n_id: Collection[Object], # Should be Collection[TId]
 		n_classid: nullable TClassid
 	)
 	do
-		empty_init
 		_n_id.unsafe_add_all(n_id)
 		_n_classid = n_classid
 		if n_classid != null then n_classid.parent = self
@@ -7775,13 +7340,10 @@ redef class AQualified
 	end
 end
 redef class ADoc
-	private init empty_init do end
-
 	init init_adoc (
 		n_comment: Collection[Object] # Should be Collection[TComment]
 	)
 	do
-		empty_init
 		_n_comment.unsafe_add_all(n_comment)
 	end
 
@@ -7798,8 +7360,6 @@ redef class ADoc
 	end
 end
 redef class AAnnotations
-	private init empty_init do end
-
 	init init_aannotations (
 		n_at: nullable TAt,
 		n_opar: nullable TOpar,
@@ -7807,7 +7367,6 @@ redef class AAnnotations
 		n_cpar: nullable TCpar
 	)
 	do
-		empty_init
 		_n_at = n_at
 		if n_at != null then n_at.parent = self
 		_n_opar = n_opar
@@ -7860,8 +7419,6 @@ redef class AAnnotations
 	end
 end
 redef class AAnnotation
-	private init empty_init do end
-
 	init init_aannotation (
 		n_atid: nullable AAtid,
 		n_opar: nullable TOpar,
@@ -7870,7 +7427,6 @@ redef class AAnnotation
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_atid = n_atid.as(not null)
 		n_atid.parent = self
 		_n_opar = n_opar
@@ -7935,13 +7491,10 @@ redef class AAnnotation
 	end
 end
 redef class ATypeAtArg
-	private init empty_init do end
-
 	init init_atypeatarg (
 		n_type: nullable AType
 	)
 	do
-		empty_init
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 	end
@@ -7967,13 +7520,10 @@ redef class ATypeAtArg
 	end
 end
 redef class AExprAtArg
-	private init empty_init do end
-
 	init init_aexpratarg (
 		n_expr: nullable AExpr
 	)
 	do
-		empty_init
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 	end
@@ -7999,13 +7549,10 @@ redef class AExprAtArg
 	end
 end
 redef class AAtAtArg
-	private init empty_init do end
-
 	init init_aatatarg (
 		n_annotations: nullable AAnnotations
 	)
 	do
-		empty_init
 		_n_annotations = n_annotations.as(not null)
 		n_annotations.parent = self
 	end
@@ -8031,13 +7578,10 @@ redef class AAtAtArg
 	end
 end
 redef class AIdAtid
-	private init empty_init do end
-
 	init init_aidatid (
 		n_id: nullable TId
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -8063,13 +7607,10 @@ redef class AIdAtid
 	end
 end
 redef class AKwexternAtid
-	private init empty_init do end
-
 	init init_akwexternatid (
 		n_id: nullable TKwextern
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -8095,13 +7636,10 @@ redef class AKwexternAtid
 	end
 end
 redef class AKwinternAtid
-	private init empty_init do end
-
 	init init_akwinternatid (
 		n_id: nullable TKwintern
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -8127,13 +7665,10 @@ redef class AKwinternAtid
 	end
 end
 redef class AKwreadableAtid
-	private init empty_init do end
-
 	init init_akwreadableatid (
 		n_id: nullable TKwreadable
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -8159,13 +7694,10 @@ redef class AKwreadableAtid
 	end
 end
 redef class AKwwritableAtid
-	private init empty_init do end
-
 	init init_akwwritableatid (
 		n_id: nullable TKwwritable
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -8191,13 +7723,10 @@ redef class AKwwritableAtid
 	end
 end
 redef class AKwimportAtid
-	private init empty_init do end
-
 	init init_akwimportatid (
 		n_id: nullable TKwimport
 	)
 	do
-		empty_init
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end

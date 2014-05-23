@@ -16,6 +16,6 @@
 
 import standard
 
-var p = new Process.init_("ls")
+var p = new Process("ls", "-l")
 p.wait
 print(p.status)

@@ -332,7 +332,7 @@ class BufferRope
 		super
 	end
 
-	init with_string(str)
+	redef init with_string(str)
 	do
 		super
 	end
@@ -624,7 +624,7 @@ class ImmutableRope
 		super
 	end
 
-	init with_string(str)
+	redef init with_string(str)
 	do
 		super
 	end
@@ -869,7 +869,7 @@ private class DFSRopeLeafIterator
 	end
 
 	# Creates a new iterator on `tgt` starting at `index`
-	init with_index(tgt: Rope, index: Int)
+	redef init with_index(tgt: Rope, index: Int)
 	do
 		super
 
