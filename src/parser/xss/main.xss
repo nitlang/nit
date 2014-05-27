@@ -68,6 +68,7 @@ $ output 'parser.nit'
 module parser
 
 intrude import parser_prod
+intrude import parser_work
 import tables
 $ call make_parser()
 $ end output
