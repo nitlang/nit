@@ -33,5 +33,3 @@ end
 redef class Display
 	redef fun top_offset do return 92
 end
-
-super

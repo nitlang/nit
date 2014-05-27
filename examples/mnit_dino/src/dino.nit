@@ -27,9 +27,7 @@ import graphism
 import fancy_dino
 import splash
 
-class DinoApp
-	super App
-
+redef class App
 	var cavemen_at_first_level = 6
 	var cavemen_incr = 4
 
@@ -39,8 +37,6 @@ class DinoApp
 	var score = new Container[Int](0)
 	var imgs : nullable ImageSet = null
 	var splash : nullable SplashScreen = null
-
-	init do super
 
 	redef fun init_window
 	do
@@ -111,7 +107,3 @@ class DinoApp
 		return false # unknown event, can be handled by something else
 	end
 end
-
-fun app: DinoApp do return once new DinoApp
-
-app.main_loop
