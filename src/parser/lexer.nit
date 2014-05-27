@@ -3,27 +3,8 @@
 module lexer
 
 intrude import parser_nodes
+intrude import lexer_work
 private import tables
-
-redef class Token
-    var _text: nullable String
-
-    redef fun text
-    do
-        var res = _text
-        if res != null then return res
-        res = location.text
-	_text = res
-	return res
-    end
-
-    redef fun text=(text)
-    do
-        _text = text
-    end
-
-    fun parser_index: Int is abstract
-end
 
 redef class TEol
     redef fun parser_index: Int
@@ -1189,520 +1170,301 @@ redef class TExternCodeSegment
     end
 end
 
-
-redef class EOF
-    redef fun parser_index: Int
-    do
-	return 97
-    end
-
-    init init_tk(loc: Location)
-    do
-        _text = ""
-		_location = loc
-    end
-end
-
-redef class AError
-    readable var _message: String
-
-    init init_error(message: String, loc: Location)
-    do
-		init_tk(loc)
-		_message = message
-    end
-end
-
-redef class ALexerError
-    readable var _string: String
-
-    init init_lexer_error(message: String, loc: Location, string: String)
-    do
-		init_error(message, loc)
-		_string = string
-    end
-end
-
-redef class AParserError
-    readable var _token: Token
-
-    init init_parser_error(message: String, loc: Location, token: Token)
-    do
-		init_error(message, loc)
-		_token = token
-    end
-end
-
-# The lexer extract NIT tokens from an input stream.
-# It is better user with the Parser
-class Lexer
-	super TablesCapable
-	# Last peeked token
-	var _token: nullable Token
-
-	# Lexer current state
-	var _state: Int = 0
-
-	# The source file
-	readable var _file: SourceFile
-
-	# Current character in the stream
-	var _stream_pos: Int = 0
-
-	# Current line number in the input stream
-	var _line: Int = 0
-
-	# Current column in the input stream
-	var _pos: Int = 0
-
-	# Was the last character a cariage-return?
-	var _cr: Bool = false
-
-	# Constante state values
-	private fun state_initial: Int do return 0 end
-
-	# Create a new lexer for a stream (and a name)
-	init(file: SourceFile)
+redef class Lexer
+	redef fun make_token(accept_token, location)
 	do
-		_file = file
-	end
-
-	# The last peeked token to chain them
-	private var last_token: nullable Token = null
-
-	# Give the next token (but do not consume it)
-	fun peek: Token
-	do
-		var t = _token
-		if t != null then return t
-
-		t = get_token
-		while t == null do t = get_token
-
-		var l = last_token
-		if l != null then
-			l.next_token = t
-			t.prev_token = l
+		if accept_token == 1 then
+			return new TEol.init_tk(location)
 		end
-
-		last_token = t
-		_token = t
-		return t
-	end
-
-	# Give and consume the next token
-	fun next: Token
-	do
-		var result = peek
-		_token = null
-		return result
-	end
-
-	# Primitive method to return a token, or return null if it is discarded
-	# Is used to implement `peek` and `next`
-	protected fun get_token: nullable Token
-	do
-		var dfa_state = 0
-
-		var sp = _stream_pos
-		var start_stream_pos = sp
-		var start_pos = _pos
-		var start_line = _line
-		var string = _file.string
-		var string_len = string.length
-
-		var accept_state = -1
-		var accept_token = -1
-		var accept_length = -1
-		var accept_pos = -1
-		var accept_line = -1
-
-		loop
-			if sp >= string_len then
-				dfa_state = -1
-			else
-				var c = string.chars[sp].ascii
-				sp += 1
-
-				var cr = _cr
-				var line = _line
-				var pos = _pos
-				if c == 10 then
-					if cr then
-						cr = false
-					        _file.line_starts[line] = sp
-					else
-						line = line + 1
-						pos = 0
-					        _file.line_starts[line] = sp
-					end
-				else if c == 13 then
-					line = line + 1
-					pos = 0
-					cr = true
-					_file.line_starts[line] = sp
-				else
-					pos = pos + 1
-					cr = false
-				end
-
-				loop
-					var old_state = dfa_state
-					if dfa_state < -1 then
-						old_state = -2 - dfa_state
-					end
-
-					dfa_state = -1
-
-					var low = 0
-					var high = lexer_goto(old_state, 0) - 1
-
-					if high >= 0 then
-						while low <= high do
-							var middle = (low + high) / 2
-							var offset = middle * 3 + 1 # +1 because length is at 0
-
-							if c < lexer_goto(old_state, offset) then
-								high = middle - 1
-							else if c > lexer_goto(old_state, offset+1) then
-								low = middle + 1
-							else
-								dfa_state = lexer_goto(old_state, offset+2)
-								break
-							end
-						end
-					end
-					if dfa_state > -2 then break
-				end
-
-				_cr = cr
-				_line = line
-				_pos = pos
-			end
-
-			if dfa_state >= 0 then
-				var tok = lexer_accept(dfa_state)
-				if tok != -1 then
-					accept_state = dfa_state
-					accept_token = tok
-					accept_length = sp - start_stream_pos
-					accept_pos = _pos
-					accept_line = _line
-				end
-			else
-				if accept_state != -1 then
-					var location = new Location(_file, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-					_pos = accept_pos
-					_line = accept_line
-					_stream_pos = start_stream_pos + accept_length
-					if accept_token == 0 then
-						return null
-					end
-					if accept_token == 1 then
-						return new TEol.init_tk(location)
-					end
-					if accept_token == 2 then
-						return new TComment.init_tk(location)
-					end
-					if accept_token == 3 then
-						return new TKwpackage.init_tk(location)
-					end
-					if accept_token == 4 then
-						return new TKwmodule.init_tk(location)
-					end
-					if accept_token == 5 then
-						return new TKwimport.init_tk(location)
-					end
-					if accept_token == 6 then
-						return new TKwclass.init_tk(location)
-					end
-					if accept_token == 7 then
-						return new TKwabstract.init_tk(location)
-					end
-					if accept_token == 8 then
-						return new TKwinterface.init_tk(location)
-					end
-					if accept_token == 9 then
-						return new TKwenum.init_tk(location)
-					end
-					if accept_token == 10 then
-						return new TKwend.init_tk(location)
-					end
-					if accept_token == 11 then
-						return new TKwmeth.init_tk(location)
-					end
-					if accept_token == 12 then
-						return new TKwtype.init_tk(location)
-					end
-					if accept_token == 13 then
-						return new TKwinit.init_tk(location)
-					end
-					if accept_token == 14 then
-						return new TKwredef.init_tk(location)
-					end
-					if accept_token == 15 then
-						return new TKwis.init_tk(location)
-					end
-					if accept_token == 16 then
-						return new TKwdo.init_tk(location)
-					end
-					if accept_token == 17 then
-						return new TKwreadable.init_tk(location)
-					end
-					if accept_token == 18 then
-						return new TKwwritable.init_tk(location)
-					end
-					if accept_token == 19 then
-						return new TKwvar.init_tk(location)
-					end
-					if accept_token == 20 then
-						return new TKwintern.init_tk(location)
-					end
-					if accept_token == 21 then
-						return new TKwextern.init_tk(location)
-					end
-					if accept_token == 22 then
-						return new TKwpublic.init_tk(location)
-					end
-					if accept_token == 23 then
-						return new TKwprotected.init_tk(location)
-					end
-					if accept_token == 24 then
-						return new TKwprivate.init_tk(location)
-					end
-					if accept_token == 25 then
-						return new TKwintrude.init_tk(location)
-					end
-					if accept_token == 26 then
-						return new TKwif.init_tk(location)
-					end
-					if accept_token == 27 then
-						return new TKwthen.init_tk(location)
-					end
-					if accept_token == 28 then
-						return new TKwelse.init_tk(location)
-					end
-					if accept_token == 29 then
-						return new TKwwhile.init_tk(location)
-					end
-					if accept_token == 30 then
-						return new TKwloop.init_tk(location)
-					end
-					if accept_token == 31 then
-						return new TKwfor.init_tk(location)
-					end
-					if accept_token == 32 then
-						return new TKwin.init_tk(location)
-					end
-					if accept_token == 33 then
-						return new TKwand.init_tk(location)
-					end
-					if accept_token == 34 then
-						return new TKwor.init_tk(location)
-					end
-					if accept_token == 35 then
-						return new TKwnot.init_tk(location)
-					end
-					if accept_token == 36 then
-						return new TKwimplies.init_tk(location)
-					end
-					if accept_token == 37 then
-						return new TKwreturn.init_tk(location)
-					end
-					if accept_token == 38 then
-						return new TKwcontinue.init_tk(location)
-					end
-					if accept_token == 39 then
-						return new TKwbreak.init_tk(location)
-					end
-					if accept_token == 40 then
-						return new TKwabort.init_tk(location)
-					end
-					if accept_token == 41 then
-						return new TKwassert.init_tk(location)
-					end
-					if accept_token == 42 then
-						return new TKwnew.init_tk(location)
-					end
-					if accept_token == 43 then
-						return new TKwisa.init_tk(location)
-					end
-					if accept_token == 44 then
-						return new TKwonce.init_tk(location)
-					end
-					if accept_token == 45 then
-						return new TKwsuper.init_tk(location)
-					end
-					if accept_token == 46 then
-						return new TKwself.init_tk(location)
-					end
-					if accept_token == 47 then
-						return new TKwtrue.init_tk(location)
-					end
-					if accept_token == 48 then
-						return new TKwfalse.init_tk(location)
-					end
-					if accept_token == 49 then
-						return new TKwnull.init_tk(location)
-					end
-					if accept_token == 50 then
-						return new TKwas.init_tk(location)
-					end
-					if accept_token == 51 then
-						return new TKwnullable.init_tk(location)
-					end
-					if accept_token == 52 then
-						return new TKwisset.init_tk(location)
-					end
-					if accept_token == 53 then
-						return new TKwlabel.init_tk(location)
-					end
-					if accept_token == 54 then
-						return new TKwdebug.init_tk(location)
-					end
-					if accept_token == 55 then
-						return new TOpar.init_tk(location)
-					end
-					if accept_token == 56 then
-						return new TCpar.init_tk(location)
-					end
-					if accept_token == 57 then
-						return new TObra.init_tk(location)
-					end
-					if accept_token == 58 then
-						return new TCbra.init_tk(location)
-					end
-					if accept_token == 59 then
-						return new TComma.init_tk(location)
-					end
-					if accept_token == 60 then
-						return new TColumn.init_tk(location)
-					end
-					if accept_token == 61 then
-						return new TQuad.init_tk(location)
-					end
-					if accept_token == 62 then
-						return new TAssign.init_tk(location)
-					end
-					if accept_token == 63 then
-						return new TPluseq.init_tk(location)
-					end
-					if accept_token == 64 then
-						return new TMinuseq.init_tk(location)
-					end
-					if accept_token == 65 then
-						return new TDotdotdot.init_tk(location)
-					end
-					if accept_token == 66 then
-						return new TDotdot.init_tk(location)
-					end
-					if accept_token == 67 then
-						return new TDot.init_tk(location)
-					end
-					if accept_token == 68 then
-						return new TPlus.init_tk(location)
-					end
-					if accept_token == 69 then
-						return new TMinus.init_tk(location)
-					end
-					if accept_token == 70 then
-						return new TStar.init_tk(location)
-					end
-					if accept_token == 71 then
-						return new TSlash.init_tk(location)
-					end
-					if accept_token == 72 then
-						return new TPercent.init_tk(location)
-					end
-					if accept_token == 73 then
-						return new TEq.init_tk(location)
-					end
-					if accept_token == 74 then
-						return new TNe.init_tk(location)
-					end
-					if accept_token == 75 then
-						return new TLt.init_tk(location)
-					end
-					if accept_token == 76 then
-						return new TLe.init_tk(location)
-					end
-					if accept_token == 77 then
-						return new TLl.init_tk(location)
-					end
-					if accept_token == 78 then
-						return new TGt.init_tk(location)
-					end
-					if accept_token == 79 then
-						return new TGe.init_tk(location)
-					end
-					if accept_token == 80 then
-						return new TGg.init_tk(location)
-					end
-					if accept_token == 81 then
-						return new TStarship.init_tk(location)
-					end
-					if accept_token == 82 then
-						return new TBang.init_tk(location)
-					end
-					if accept_token == 83 then
-						return new TAt.init_tk(location)
-					end
-					if accept_token == 84 then
-						return new TClassid.init_tk(location)
-					end
-					if accept_token == 85 then
-						return new TId.init_tk(location)
-					end
-					if accept_token == 86 then
-						return new TAttrid.init_tk(location)
-					end
-					if accept_token == 87 then
-						return new TNumber.init_tk(location)
-					end
-					if accept_token == 88 then
-						return new THexNumber.init_tk(location)
-					end
-					if accept_token == 89 then
-						return new TFloat.init_tk(location)
-					end
-					if accept_token == 90 then
-						return new TString.init_tk(location)
-					end
-					if accept_token == 91 then
-						return new TStartString.init_tk(location)
-					end
-					if accept_token == 92 then
-						return new TMidString.init_tk(location)
-					end
-					if accept_token == 93 then
-						return new TEndString.init_tk(location)
-					end
-					if accept_token == 94 then
-						return new TChar.init_tk(location)
-					end
-					if accept_token == 95 then
-						return new TBadString.init_tk(location)
-					end
-					if accept_token == 96 then
-						return new TBadChar.init_tk(location)
-					end
-					if accept_token == 97 then
-						return new TExternCodeSegment.init_tk(location)
-					end
-				else
-					_stream_pos = sp
-					var location = new Location(_file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
-					if sp > start_stream_pos then
-						var text = string.substring(start_stream_pos, sp-start_stream_pos)
-						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
-						return token
-					else
-						var token = new EOF.init_tk(location)
-						return token
-					end
-				end
-			end
+		if accept_token == 2 then
+			return new TComment.init_tk(location)
 		end
+		if accept_token == 3 then
+			return new TKwpackage.init_tk(location)
+		end
+		if accept_token == 4 then
+			return new TKwmodule.init_tk(location)
+		end
+		if accept_token == 5 then
+			return new TKwimport.init_tk(location)
+		end
+		if accept_token == 6 then
+			return new TKwclass.init_tk(location)
+		end
+		if accept_token == 7 then
+			return new TKwabstract.init_tk(location)
+		end
+		if accept_token == 8 then
+			return new TKwinterface.init_tk(location)
+		end
+		if accept_token == 9 then
+			return new TKwenum.init_tk(location)
+		end
+		if accept_token == 10 then
+			return new TKwend.init_tk(location)
+		end
+		if accept_token == 11 then
+			return new TKwmeth.init_tk(location)
+		end
+		if accept_token == 12 then
+			return new TKwtype.init_tk(location)
+		end
+		if accept_token == 13 then
+			return new TKwinit.init_tk(location)
+		end
+		if accept_token == 14 then
+			return new TKwredef.init_tk(location)
+		end
+		if accept_token == 15 then
+			return new TKwis.init_tk(location)
+		end
+		if accept_token == 16 then
+			return new TKwdo.init_tk(location)
+		end
+		if accept_token == 17 then
+			return new TKwreadable.init_tk(location)
+		end
+		if accept_token == 18 then
+			return new TKwwritable.init_tk(location)
+		end
+		if accept_token == 19 then
+			return new TKwvar.init_tk(location)
+		end
+		if accept_token == 20 then
+			return new TKwintern.init_tk(location)
+		end
+		if accept_token == 21 then
+			return new TKwextern.init_tk(location)
+		end
+		if accept_token == 22 then
+			return new TKwpublic.init_tk(location)
+		end
+		if accept_token == 23 then
+			return new TKwprotected.init_tk(location)
+		end
+		if accept_token == 24 then
+			return new TKwprivate.init_tk(location)
+		end
+		if accept_token == 25 then
+			return new TKwintrude.init_tk(location)
+		end
+		if accept_token == 26 then
+			return new TKwif.init_tk(location)
+		end
+		if accept_token == 27 then
+			return new TKwthen.init_tk(location)
+		end
+		if accept_token == 28 then
+			return new TKwelse.init_tk(location)
+		end
+		if accept_token == 29 then
+			return new TKwwhile.init_tk(location)
+		end
+		if accept_token == 30 then
+			return new TKwloop.init_tk(location)
+		end
+		if accept_token == 31 then
+			return new TKwfor.init_tk(location)
+		end
+		if accept_token == 32 then
+			return new TKwin.init_tk(location)
+		end
+		if accept_token == 33 then
+			return new TKwand.init_tk(location)
+		end
+		if accept_token == 34 then
+			return new TKwor.init_tk(location)
+		end
+		if accept_token == 35 then
+			return new TKwnot.init_tk(location)
+		end
+		if accept_token == 36 then
+			return new TKwimplies.init_tk(location)
+		end
+		if accept_token == 37 then
+			return new TKwreturn.init_tk(location)
+		end
+		if accept_token == 38 then
+			return new TKwcontinue.init_tk(location)
+		end
+		if accept_token == 39 then
+			return new TKwbreak.init_tk(location)
+		end
+		if accept_token == 40 then
+			return new TKwabort.init_tk(location)
+		end
+		if accept_token == 41 then
+			return new TKwassert.init_tk(location)
+		end
+		if accept_token == 42 then
+			return new TKwnew.init_tk(location)
+		end
+		if accept_token == 43 then
+			return new TKwisa.init_tk(location)
+		end
+		if accept_token == 44 then
+			return new TKwonce.init_tk(location)
+		end
+		if accept_token == 45 then
+			return new TKwsuper.init_tk(location)
+		end
+		if accept_token == 46 then
+			return new TKwself.init_tk(location)
+		end
+		if accept_token == 47 then
+			return new TKwtrue.init_tk(location)
+		end
+		if accept_token == 48 then
+			return new TKwfalse.init_tk(location)
+		end
+		if accept_token == 49 then
+			return new TKwnull.init_tk(location)
+		end
+		if accept_token == 50 then
+			return new TKwas.init_tk(location)
+		end
+		if accept_token == 51 then
+			return new TKwnullable.init_tk(location)
+		end
+		if accept_token == 52 then
+			return new TKwisset.init_tk(location)
+		end
+		if accept_token == 53 then
+			return new TKwlabel.init_tk(location)
+		end
+		if accept_token == 54 then
+			return new TKwdebug.init_tk(location)
+		end
+		if accept_token == 55 then
+			return new TOpar.init_tk(location)
+		end
+		if accept_token == 56 then
+			return new TCpar.init_tk(location)
+		end
+		if accept_token == 57 then
+			return new TObra.init_tk(location)
+		end
+		if accept_token == 58 then
+			return new TCbra.init_tk(location)
+		end
+		if accept_token == 59 then
+			return new TComma.init_tk(location)
+		end
+		if accept_token == 60 then
+			return new TColumn.init_tk(location)
+		end
+		if accept_token == 61 then
+			return new TQuad.init_tk(location)
+		end
+		if accept_token == 62 then
+			return new TAssign.init_tk(location)
+		end
+		if accept_token == 63 then
+			return new TPluseq.init_tk(location)
+		end
+		if accept_token == 64 then
+			return new TMinuseq.init_tk(location)
+		end
+		if accept_token == 65 then
+			return new TDotdotdot.init_tk(location)
+		end
+		if accept_token == 66 then
+			return new TDotdot.init_tk(location)
+		end
+		if accept_token == 67 then
+			return new TDot.init_tk(location)
+		end
+		if accept_token == 68 then
+			return new TPlus.init_tk(location)
+		end
+		if accept_token == 69 then
+			return new TMinus.init_tk(location)
+		end
+		if accept_token == 70 then
+			return new TStar.init_tk(location)
+		end
+		if accept_token == 71 then
+			return new TSlash.init_tk(location)
+		end
+		if accept_token == 72 then
+			return new TPercent.init_tk(location)
+		end
+		if accept_token == 73 then
+			return new TEq.init_tk(location)
+		end
+		if accept_token == 74 then
+			return new TNe.init_tk(location)
+		end
+		if accept_token == 75 then
+			return new TLt.init_tk(location)
+		end
+		if accept_token == 76 then
+			return new TLe.init_tk(location)
+		end
+		if accept_token == 77 then
+			return new TLl.init_tk(location)
+		end
+		if accept_token == 78 then
+			return new TGt.init_tk(location)
+		end
+		if accept_token == 79 then
+			return new TGe.init_tk(location)
+		end
+		if accept_token == 80 then
+			return new TGg.init_tk(location)
+		end
+		if accept_token == 81 then
+			return new TStarship.init_tk(location)
+		end
+		if accept_token == 82 then
+			return new TBang.init_tk(location)
+		end
+		if accept_token == 83 then
+			return new TAt.init_tk(location)
+		end
+		if accept_token == 84 then
+			return new TClassid.init_tk(location)
+		end
+		if accept_token == 85 then
+			return new TId.init_tk(location)
+		end
+		if accept_token == 86 then
+			return new TAttrid.init_tk(location)
+		end
+		if accept_token == 87 then
+			return new TNumber.init_tk(location)
+		end
+		if accept_token == 88 then
+			return new THexNumber.init_tk(location)
+		end
+		if accept_token == 89 then
+			return new TFloat.init_tk(location)
+		end
+		if accept_token == 90 then
+			return new TString.init_tk(location)
+		end
+		if accept_token == 91 then
+			return new TStartString.init_tk(location)
+		end
+		if accept_token == 92 then
+			return new TMidString.init_tk(location)
+		end
+		if accept_token == 93 then
+			return new TEndString.init_tk(location)
+		end
+		if accept_token == 94 then
+			return new TChar.init_tk(location)
+		end
+		if accept_token == 95 then
+			return new TBadString.init_tk(location)
+		end
+		if accept_token == 96 then
+			return new TBadChar.init_tk(location)
+		end
+		if accept_token == 97 then
+			return new TExternCodeSegment.init_tk(location)
+		end
+		abort # unknown token index `accept_token`
 	end
 end
 

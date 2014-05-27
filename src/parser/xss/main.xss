@@ -41,7 +41,9 @@ intrude import $usermodule
 $ else
 intrude import parser_abs
 $ end
+intrude import lexer_work
 private import tables
+
 $ call make_tokens()
 $ call make_lexer()
 $ end output
