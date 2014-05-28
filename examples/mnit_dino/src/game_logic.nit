@@ -159,12 +159,23 @@ end
 class Entity
 	super Turnable
 
-	fun run_over_distance: Int do return 500
+	fun run_over_distance_x: Int do return 50
+	fun run_over_distance_y: Int do return 16
+
 	var pos = new GamePos( 0, 0 )
 
 	fun squared_dist_with_dino( game : Game ) : Int
 	do
 		return pos.squared_dist_with( game.dino.pos )
+	end
+
+	fun under_dino(game: Game): Bool
+	do
+		var dy = pos.y - game.dino.pos.y
+		if dy.abs > run_over_distance_y then return false
+
+		var dx = pos.x - game.dino.pos.x
+		return dx.abs <= run_over_distance_x
 	end
 end
 
@@ -233,8 +244,7 @@ class Dino
 		end
 
 		for i in t.game.items_on_ground do
-			var dwd = i.squared_dist_with_dino(t.game)
-			if dwd < i.run_over_distance then
+			if i.under_dino(t.game) then
 				t.game.items_on_ground.remove i
 				t.game.entities.remove i
 			end
@@ -267,20 +277,20 @@ class Caveman
 
 	fun is_afraid( turn : Turn ) : Bool do return turn.nbr < afraid_until
 	fun can_throw( turn : Turn ) : Bool do return cannot_throw_until < turn.nbr
+	fun die(turn: Turn) do is_alive = false
 
 	redef fun do_turn( t )
 	do
 		if is_alive then
-			var dwd = squared_dist_with_dino( t.game )
-
-			if dwd < run_over_distance then
-				if t.game.dino.is_alive then is_alive = false
+			if under_dino(t.game) then
+				if t.game.dino.is_alive then die(t)
 				return
 			else if is_afraid( t ) then
 				# going to destination
 			else if t.game.dino.life <= 0 then
 				# dino is dead, chill
 			else
+				var dwd = squared_dist_with_dino( t.game )
 				if dwd < fear_distance then
 					afraid_until = t.nbr + fear_duration
 

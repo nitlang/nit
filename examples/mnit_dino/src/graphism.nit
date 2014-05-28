@@ -48,6 +48,9 @@ redef class Entity
 end
 
 redef class Dino
+	# Notice: This method only implements the basic drawing feature, it is
+	# redefed in `fancy_dino`. If the `fancy_dino` module is imported by
+	# user methods, this code is dead and will never be executed.
 	redef fun draw( display, imgs, turn )
 	do
 		var spos = pos.to_screen( display )
@@ -104,6 +107,7 @@ class ImageSet
 
 	var dino_img : Image
 	var dino_dead_img : Image
+	var dino_shadow : Image
 
 	var caveman_img : Image
 	var caveman_afraid_img : Image
@@ -127,6 +131,7 @@ class ImageSet
 
 		dino_img = app.load_image( "images/dino.png" )
 		dino_dead_img = app.load_image( "images/dino_dead.png" )
+		dino_shadow = app.load_image( "images/shadow.png" )
 
 		caveman_img = app.load_image( "images/caveman.png" )
 		caveman_afraid_img = app.load_image( "images/caveman_afraid.png" )

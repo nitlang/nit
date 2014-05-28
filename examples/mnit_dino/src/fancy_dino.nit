@@ -56,6 +56,8 @@ redef class Dino
 		end
 		var img_radius = (img.width/2).to_f
 
+		display.blit_centered( imgs.dino_shadow, spos.x.to_i, spos.y.to_i )
+
 		if turning then
 			if going_left then
 				turning_angle += turning_step
