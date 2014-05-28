@@ -1645,7 +1645,7 @@ redef class AMethPropdef
 	do
 		if mpropdef.is_abstract then
 			var cn = v.class_name_string(arguments.first)
-			v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
 			v.add_raw_abort
 			return
 		end
