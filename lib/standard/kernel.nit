@@ -239,6 +239,14 @@ interface Numeric
 
 	# The value of zero in the domain of `self`
 	fun zero: OTHER is abstract
+
+	# The value of `val` in the domain of `self`
+	#
+	#     assert 1.0.value_of(2) == 2.0
+	#     assert 1.0.value_of(2.0) == 2.0
+	#     assert 1.value_of(2) == 2
+	#     assert 1.value_of(2.0) == 2
+	fun value_of(val: Numeric): OTHER is abstract
 end
 
 ###############################################################################
@@ -293,6 +301,7 @@ universal Float
 	redef fun to_f do return self
 
 	redef fun zero do return 0.0
+	redef fun value_of(val) do return val.to_f
 end
 
 # Native integer numbers.
@@ -325,6 +334,7 @@ universal Int
 	fun %(i: Int): Int is intern
 
 	redef fun zero do return 0
+	redef fun value_of(val) do return val.to_i
 
 	# `i` bits shift fo the left (aka <<)
 	#
