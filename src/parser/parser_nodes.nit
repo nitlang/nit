@@ -237,6 +237,15 @@ abstract class Token
 	# May have disapeared in the AST
 	var next_token: nullable Token = null
 
+	# The verbatim blank text between `prev_token` and `self`
+	fun blank_before: String
+	do
+		if prev_token == null then return ""
+		var from = prev_token.location.pend+1
+		var to = location.pstart
+		return location.file.string.substring(from,to-from)
+	end
+
 	redef fun to_s: String do
 		return "'{text}'"
 	end
