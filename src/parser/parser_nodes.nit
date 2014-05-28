@@ -32,7 +32,7 @@ abstract class ANode
 	# Display a message for the colored location of the node
 	fun debug(message: String)
 	do
-		print "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}"
+		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
 	end
 
 	# Parent of the node in the AST
