@@ -193,6 +193,16 @@ abstract class Token
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
 end
 
+redef class SourceFile
+	# The first token parser by the lexer
+	# May have disapeared in the final AST
+	var first_token: nullable Token = null
+
+	# The first token parser by the lexer
+	# May have disapeared in the final AST
+	var last_token: nullable Token = null
+end
+
 # Ancestor of all productions
 # A production is a node without text but that usually has children.
 abstract class Prod

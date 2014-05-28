@@ -131,6 +131,8 @@ class Lexer
 		if l != null then
 			l.next_token = t
 			t.prev_token = l
+		else
+			_file.first_token = t
 		end
 
 		last_token = t
@@ -253,9 +255,11 @@ class Lexer
 					if sp > start_stream_pos then
 						var text = string.substring(start_stream_pos, sp-start_stream_pos)
 						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
+						_file.last_token = token
 						return token
 					else
 						var token = new EOF.init_tk(location)
+						_file.last_token = token
 						return token
 					end
 				end
