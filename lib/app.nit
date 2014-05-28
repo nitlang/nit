@@ -25,7 +25,7 @@ module app
 # This class is redefed by plateform modules and so
 # App can be specialized directly in the user app.
 class App
-	private init do end
+	protected init do end
 
 	# Main entry point of your application
 	fun run do end
