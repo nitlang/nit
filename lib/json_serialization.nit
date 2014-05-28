@@ -17,7 +17,7 @@
 module json_serialization
 
 import serialization
-import simple_json_reader
+import json::static
 
 class JsonSerializer
 	super Serializer

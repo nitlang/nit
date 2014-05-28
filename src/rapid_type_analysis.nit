@@ -161,8 +161,15 @@ class RapidTypeAnalysis
 		return tree
 	end
 
-	# Methods that are are still candidate to the try_send
+	# Methods that are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
+
+	# Methods that are are no more candidate to the try_send
+	private var totry_methods_to_remove = new Array[MMethod]
+
+	# Methods that are or were candidate to the try_send
+	# Used to ensure that try_send is only used once
+	private var try_methods = new HashSet[MMethod]
 
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
@@ -196,6 +203,7 @@ class RapidTypeAnalysis
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
+			var mmeth = mmethoddef.mproperty
 			#print "# visit {mmethoddef}"
 			var v = new RapidTypeVisitor(self, mmethoddef.mclassdef.bound_mtype, mmethoddef)
 
@@ -211,18 +219,18 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
-
-			for i in [0..mmethoddef.msignature.arity[ do
-				var origtype = mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
+			var sig = mmethoddef.msignature.as(not null)
+			var osig = mmeth.intro.msignature.as(not null)
+			for i in [0..sig.arity[ do
+				var origtype = osig.mparameters[i].mtype
 				if not origtype.need_anchor then continue # skip non covariant stuff
-				var paramtype = mmethoddef.msignature.mparameters[i].mtype
-				#paramtype = v.cleanup_type(paramtype).as(not null)
+				var paramtype = sig.mparameters[i].mtype
 				add_cast(paramtype)
 			end
 
 			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
 				# It is an init for a class?
-				if mmethoddef.mproperty.name == "init" then
+				if mmeth.name == "init" then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					var super_inits = nclassdef.super_inits
 					if super_inits != null then
@@ -240,27 +248,23 @@ class RapidTypeAnalysis
 
 			var npropdef = modelbuilder.mpropdef2npropdef[mmethoddef]
 
-			if npropdef isa AConcreteMethPropdef then
+			if npropdef isa AMethPropdef  then
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
 						v.add_callsite(auto_super_init)
 					end
 				end
-			else if npropdef isa AInternMethPropdef or
-			  (npropdef isa AExternMethPropdef and npropdef.n_extern != null) then
+			end
+
+			if mmeth.is_new then
+				v.add_type(v.receiver)
+			else if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
-			else if npropdef isa AExternMethPropdef then
-				var nclassdef = npropdef.parent.as(AClassdef)
-				v.enter_visit(npropdef)
-			else if npropdef isa AExternInitPropdef then
-				v.add_type(v.receiver)
-			else
-
 			end
 
 			v.enter_visit(npropdef)
@@ -326,6 +330,10 @@ class RapidTypeAnalysis
 		for p in totry_methods do try_send(mtype, p)
 		for p in live_super_sends do try_super_send(mtype, p)
 
+		# Remove cleared ones
+		for p in totry_methods_to_remove do totry_methods.remove(p)
+		totry_methods_to_remove.clear
+
 		var bound_mtype = mtype.anchor_to(mainmodule, recv)
 		for cd in bound_mtype.collect_mclassdefs(mainmodule)
 		do
@@ -374,14 +382,15 @@ class RapidTypeAnalysis
 			if not live_methoddefs.has(d) then return
 		end
 		#print "full property: {mpropdef.mproperty} for {mpropdef.mproperty.mpropdefs.length} definitions"
-		totry_methods.remove(mpropdef.mproperty)
+		totry_methods_to_remove.add(mpropdef.mproperty)
 	end
 
 	fun add_send(recv: MType, mproperty: MMethod)
 	do
-		if live_methods.has(mproperty) then return
+		if try_methods.has(mproperty) then return
 		#print "new prop: {mproperty}"
 		live_methods.add(mproperty)
+		try_methods.add(mproperty)
 		if mproperty.mpropdefs.length == 1 then
 			# If there is only one definition, just add the definition and do not try again the property
 			var d = mproperty.mpropdefs.first
@@ -468,7 +477,11 @@ class RapidTypeVisitor
 
 	fun add_type(mtype: MClassType) do analysis.add_new(receiver, mtype)
 
-	fun add_monomorphic_send(mtype: MType, mproperty: MMethod) do analysis.try_send(mtype.as(MClassType), mproperty)
+	fun add_monomorphic_send(mtype: MType, mproperty: MMethod)
+	do
+		analysis.live_methods.add(mproperty)
+		analysis.try_send(mtype.as(MClassType), mproperty)
+	end
 
 	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
 

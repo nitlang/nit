@@ -26,6 +26,29 @@ module global_compiler
 import abstract_compiler
 import rapid_type_analysis
 
+redef class ToolContext
+	# option --global
+	var opt_global = new OptionBool("Use global compilation", "--global")
+
+	var global_compiler_phase = new GlobalCompilerPhase(self, null)
+
+	redef init do
+		super
+		option_context.add_option(opt_global)
+	end
+end
+
+class GlobalCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_global.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		modelbuilder.run_global_compiler(mainmodule, analysis)
+	end
+end
+
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
 	# `mainmodule` is the main module of the program
@@ -165,6 +188,7 @@ class GlobalCompiler
 
 		if mtype.mclass.name == "NativeArray" then
 			# NativeArrays are just a instance header followed by an array of values
+			v.add_decl("int length;")
 			v.add_decl("{mtype.arguments.first.ctype} values[1];")
 		end
 
@@ -212,6 +236,7 @@ class GlobalCompiler
 		if is_native_array then
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("((struct {mtype.c_name}*){res})->length = length;")
 		else
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
 		end
@@ -317,6 +342,9 @@ class GlobalCompilerVisitor
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "length" then
+			self.ret(self.new_expr("((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"

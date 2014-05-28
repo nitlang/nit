@@ -249,7 +249,7 @@ interface SimpleCollection[E]
 
 	# Add each item of `coll`.
 	#     var a = [1,2]
-	#     a.add_all [3..5]
+	#     a.add_all([3..5])
 	#     assert a.has(4)  == true
 	#     assert a.has(10) == false
 	fun add_all(coll: Collection[E]) do for i in coll do add(i)
@@ -494,7 +494,7 @@ interface Map[K: Object, E]
 	#     var x = new HashMap[String, Int]
 	#     x["four"] = 4
 	#     x.clear
-	#     x.keys.has("four") == false
+	#     assert x.keys.has("four") == false
 	#
 	# ENSURE `is_empty`
 	fun clear is abstract
@@ -624,7 +624,7 @@ interface SequenceRead[E]
 		var p = 0
 		var i = iterator
 		while i.is_ok do
-			if p>pos and i.item == item then return i.index
+			if p>=pos and i.item == item then return i.index
 			i.next
 			p += 1
 		end

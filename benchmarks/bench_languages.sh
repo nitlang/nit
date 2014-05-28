@@ -232,27 +232,6 @@ function bench_language()
 	done
 
 <<XXX
-	tg="nitg-s-bm"
-	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --bm-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
-	done
-
-	tg="nitg-s-pha"
-	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --phand-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
-	done
-
-	tg="nitg-s-phm"
-	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --phmod-typing -o "$nitdir/${t}_$b.$tg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.$tg.bin" $s
-	done
-
 	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
 	for b in $seq; do
 		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""

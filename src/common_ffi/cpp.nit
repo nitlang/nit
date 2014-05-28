@@ -24,11 +24,9 @@ redef class FFILanguageAssignationPhase
 	var cpp_language: FFILanguage = new CPPLanguage(self)
 end
 
-redef class AModule
-	private var cpp_file: nullable CPPCompilationUnit = null
-end
-
 redef class MModule
+	private var cpp_file: nullable CPPCompilationUnit = null
+
 	var cpp_compiler_options writable = ""
 end
 
@@ -37,16 +35,16 @@ class CPPLanguage
 
 	redef fun identify_language(n) do return n.is_cpp
 
-	redef fun compile_module_block(block, ecc, nmodule)
+	redef fun compile_module_block(block, ecc, mmodule)
 	do
-		if nmodule.cpp_file == null then nmodule.cpp_file = new CPPCompilationUnit
+		if mmodule.cpp_file == null then mmodule.cpp_file = new CPPCompilationUnit
 
 		if block.is_cpp_header then
-			nmodule.cpp_file.header_custom.add(block.location.as_line_pragma)
-			nmodule.cpp_file.header_custom.add(block.code)
+			mmodule.cpp_file.header_custom.add(block.location.as_line_pragma)
+			mmodule.cpp_file.header_custom.add(block.code)
 		else if block.is_cpp_body then
-			nmodule.cpp_file.body_custom.add( block.location.as_line_pragma )
-			nmodule.cpp_file.body_custom.add( block.code )
+			mmodule.cpp_file.body_custom.add( block.location.as_line_pragma )
+			mmodule.cpp_file.body_custom.add( block.code )
 		end
 	end
 
@@ -54,11 +52,10 @@ class CPPLanguage
 	# 1. The standard C implementation function (___impl) expected by the common FFI
 	# 2. The indirection function (___cpp_impl_mid) is a C function, called from C but implemented as `extern "C"` in C++
 	# 3. The actual C++ implementation function (___cpp_impl)
-	redef fun compile_extern_method(block, m, ecc, nmodule)
+	redef fun compile_extern_method(block, m, ecc, mmodule)
 	do
-		if nmodule.cpp_file == null then nmodule.cpp_file = new CPPCompilationUnit
+		if mmodule.cpp_file == null then mmodule.cpp_file = new CPPCompilationUnit
 
-		var mmodule = nmodule.mmodule.as(not null)
 		var mclass_type = m.parent.as(AClassdef).mclass.mclass_type
 		var mproperty = m.mpropdef.mproperty
 
@@ -79,9 +76,9 @@ class CPPLanguage
 		## In C++ file (__ffi.cpp)
 
 		# Declare the indirection function in C++
-		nmodule.cpp_file.header_decl.add("extern \"C\" \{\n")
-		nmodule.cpp_file.header_decl.add("{indirection_sig};\n")
-		nmodule.cpp_file.header_decl.add("\}\n")
+		mmodule.cpp_file.header_decl.add("extern \"C\" \{\n")
+		mmodule.cpp_file.header_decl.add("{indirection_sig};\n")
+		mmodule.cpp_file.header_decl.add("\}\n")
 
 		# Implement the indirection function as extern in C++
 		# Will convert C arguments to C++ and call the C++ implementation function.
@@ -106,42 +103,42 @@ class CPPLanguage
 		end
 		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context, "_for_cpp"))
 		fc.exprs.add("\n")
-		nmodule.cpp_file.add_local_function(fc)
+		mmodule.cpp_file.add_local_function(fc)
 
 		# Custom C++, the body of the Nit C++ method is copied to its own C++ function
 		var cpp_signature = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context)
 		fc = new CFunction(cpp_signature)
 		fc.decls.add( block.location.as_line_pragma )
 		fc.exprs.add( block.code )
-		nmodule.cpp_file.add_local_function( fc )
+		mmodule.cpp_file.add_local_function( fc )
 	end
 
-	redef fun compile_extern_class(block, m, ecc, nmodule) do end
+	redef fun compile_extern_class(block, m, ecc, mmodule) do end
 
 	redef fun get_ftype(block, m) do return new ForeignCppType(block.code)
 
-	redef fun compile_to_files(nmodule, compdir)
+	redef fun compile_to_files(mmodule, compdir)
 	do
-		var cpp_file = nmodule.cpp_file
+		var cpp_file = mmodule.cpp_file
 		assert cpp_file != null
 
 		# write .cpp and .hpp file
 		cpp_file.header_custom.add("extern \"C\" \{\n")
-		cpp_file.header_custom.add("#include \"{nmodule.mmodule.name}._ffi.h\"\n")
+		cpp_file.header_custom.add("#include \"{mmodule.name}._ffi.h\"\n")
 		cpp_file.header_custom.add("\}\n")
 
-		var file = cpp_file.write_to_files(nmodule, compdir)
+		var file = cpp_file.write_to_files(mmodule, compdir)
 
 		# add complation to makefile
-		nmodule.ffi_files.add(file)
+		mmodule.ffi_files.add(file)
 
 		# add linked option to support C++
-		nmodule.mmodule.c_linker_options = "{nmodule.mmodule.c_linker_options} -lstdc++"
+		mmodule.c_linker_options = "{mmodule.c_linker_options} -lstdc++"
 	end
 
-	redef fun compile_callback(callback, nmodule, mmodule, ecc)
+	redef fun compile_callback(callback, mmodule, mainmodule, ecc)
 	do
-		callback.compile_callback_to_cpp(nmodule, mmodule)
+		callback.compile_callback_to_cpp(mmodule, mainmodule)
 	end
 end
 
@@ -159,18 +156,17 @@ end
 class CPPCompilationUnit
 	super CCompilationUnit
 
-	fun write_to_files(amodule: AModule, compdir: String): ExternCppFile
+	fun write_to_files(mmodule: MModule, compdir: String): ExternCppFile
 	do
-		var mmodule = amodule.mmodule.as(not null)
 		var base_name = "{mmodule.name}._ffi"
 
 		var h_file = "{base_name}.hpp"
-		var guard = "{amodule.cname.to_s.to_upper}_NIT_HPP"
+		var guard = "{mmodule.cname.to_s.to_upper}_NIT_HPP"
 
-		write_header_to_file(amodule, "{compdir}/{h_file}", new Array[String], guard)
+		write_header_to_file(mmodule, "{compdir}/{h_file}", new Array[String], guard)
 
 		var c_file = "{base_name}.cpp"
-		write_body_to_file(amodule, "{compdir}/{c_file}", ["<string>", "<iostream>", "\"{h_file}\""])
+		write_body_to_file(mmodule, "{compdir}/{c_file}", ["<string>", "<iostream>", "\"{h_file}\""])
 
 		files.add("{compdir}/{c_file}")
 
@@ -205,7 +201,7 @@ class ForeignCppType
 end
 
 redef class NitniCallback
-	fun compile_callback_to_cpp(nmodule: AModule, mmodule: MModule) do end
+	fun compile_callback_to_cpp(mmodule: MModule, mainmodule: MModule) do end
 end
 
 redef class Object
@@ -215,16 +211,16 @@ redef class Object
 end
 
 redef class MExplicitCall
-	redef fun compile_callback_to_cpp(nmodule, mmodule)
+	redef fun compile_callback_to_cpp(mmodule, mainmodule)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
 
-		var cpp_signature = mproperty.build_csignature(recv_mtype, mmodule, null, short_signature, from_cpp_call_context)
-		var ccall = mproperty.build_ccall(recv_mtype, mmodule, null, long_signature, from_cpp_call_context, null)
+		var cpp_signature = mproperty.build_csignature(recv_mtype, mainmodule, null, short_signature, from_cpp_call_context)
+		var ccall = mproperty.build_ccall(recv_mtype, mainmodule, null, long_signature, from_cpp_call_context, null)
 		var fc = new CFunction(cpp_signature)
 		fc.exprs.add(ccall)
-		nmodule.cpp_file.add_local_function( fc )
+		mmodule.cpp_file.add_local_function( fc )
 	end
 end
 

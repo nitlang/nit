@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org )t
+# This file is part of NIT ( http://www.nitlanguage.org )
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
@@ -19,36 +19,14 @@ module android_platform
 
 import platform
 import abstract_compiler
+import common_ffi
+import android_annotations
 
 redef class ToolContext
 	redef fun platform_from_name(name)
 	do
 		if name == "android" then return new AndroidPlatform
 		return super
-	end
-
-	fun exec_and_check(args: Array[String])
-	do
-		var prog = args.first
-		args.remove_at 0
-
-		# Is the wanted program available?
-		var proc_which = new IProcess.from_a("which", [prog])
-		proc_which.wait
-		var res = proc_which.status
-		if res != 0 then
-			print "Android project error: executable \"{prog}\" not found"
-			exit 1
-		end
-
-		# Execute the wanted program
-		var proc = new Process.from_a(prog, args)
-		proc.wait
-		res = proc.status
-		if res != 0 then
-			print "Android project error: execution of \"{prog} {args.join(" ")}\" failed"
-			exit 1
-		end
 	end
 end
 
@@ -63,7 +41,7 @@ end
 class AndroidToolchain
 	super MakefileToolchain
 
-	var android_project_root: String
+	var android_project_root: nullable String = null
 
 	redef fun compile_dir
 	do
@@ -74,14 +52,28 @@ class AndroidToolchain
 
 	redef fun write_files(compiler, compile_dir, cfiles)
 	do
-		var app_name = compiler.mainmodule.name
-		var app_package = "org.nitlanguage.{app_name}"
-		var app_version = "0.1"
+		var android_project_root = android_project_root.as(not null)
+		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
+		var short_project_name = compiler.mainmodule.name
+		var release = toolcontext.opt_release.value
 
-		var args = ["android", "-s", "create", "project", "--name", app_name,
-			"--target", "android-10", "--path", android_project_root,
-			"--package", app_package, "--activity", app_name]
-		toolcontext.exec_and_check(args)
+		var app_name = project.name
+		if app_name == null then app_name = compiler.mainmodule.name
+
+		var app_package = project.java_package
+		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
+
+		var app_version = project.version
+		if app_version == null then app_version = "1.0"
+
+		var args = ["android", "-s",
+			"create", "project",
+			"--name", short_project_name,
+			"--target", "android-10",
+			"--path", android_project_root,
+			"--package", app_package,
+			"--activity", short_project_name]
+		toolcontext.exec_and_check(args, "Android project error")
 
 		# create compile_dir
 		var dir = "{android_project_root}/jni/"
@@ -100,16 +92,13 @@ class AndroidToolchain
 
 		## Generate delagating makefile
 		dir = "{android_project_root}/jni/"
-		var file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 include $(call all-subdir-makefiles)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate makefile into "{compile_dir}/Android.mk"
 		dir = compile_dir
-		file = new OFStream.open("{dir}/Android.mk")
-		file.write """
+		"""
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -123,28 +112,24 @@ LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/native_app_glue)
-"""
-		file.close
+		""".write_to_file("{dir}/Android.mk")
 
 		### generate AndroidManifest.xml
 		dir = android_project_root
-		file = new OFStream.open("{dir}/AndroidManifest.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
-        android:versionCode="1"
-        android:versionName="{{{app_version}}}"
-        android:debuggable="true">
+        android:versionCode="{{{project.version_code}}}"
+        android:versionName="{{{app_version}}}">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk android:minSdkVersion="9" />
 
-    <!-- This .apk has no Java code itself, so set hasCode to false. -->
     <application
 		android:label="@string/app_name"
-		android:hasCode="false"
-		android:debuggable="true">
+		android:hasCode="true"
+		android:debuggable="{{{not release}}}">
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
@@ -161,55 +146,58 @@ $(call import-module,android/native_app_glue)
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+{{{project.manifest_application_lines.join("\n")}}}
+
     </application>
+
+{{{project.manifest_lines.join("\n")}}}
 
 </manifest> 
 <!-- END_INCLUDE(manifest) -->
-"""
-		file.close
+		""".write_to_file("{dir}/AndroidManifest.xml")
 
 		### generate res/values/strings.xml
 		dir = "{android_project_root}/res/"
 		if not dir.file_exists then dir.mkdir
 		dir = "{dir}/values/"
 		if not dir.file_exists then dir.mkdir
-		file = new OFStream.open("{dir}/strings.xml")
-		file.write """<?xml version="1.0" encoding="utf-8"?>
+		"""<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">{{{app_name}}}</string>
-</resources>"""
-		file.close
+</resources>
+		""".write_to_file("{dir}/strings.xml")
 
 		### Link to png sources
 		# libpng is not available on Android NDK
 		# FIXME make obtionnal when we have alternatives to mnit
-		var nit_dir = "NIT_DIR".environ
-		var share_dir
-		if not nit_dir.is_empty then
-			share_dir = "{nit_dir}/share/"
-		else
-			share_dir = "{sys.program_name.dirname}/../share/"
-		end
-		if not share_dir.file_exists then 
+		var nit_dir = toolcontext.nit_dir
+		var share_dir =  "{nit_dir}/share/"
+		if nit_dir == null or not share_dir.file_exists then
 			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
 			exit 1
 		end
 		share_dir = share_dir.realpath
 		var target_png_dir = "{android_project_root}/jni/png"
 		if not target_png_dir.file_exists then
-			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
+			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir], "Android project error")
 		end
 
 		### Link to assets (for mnit and others)
 		# This will be accessed from `android_project_root`
-		var mainmodule_dir = compiler.mainmodule.location.file.filename.dirname
-		var assets_dir = "{mainmodule_dir}/../assets"
-		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
+		var assets_dir
+		if compiler.mainmodule.location.file != null then
+			# it is a real file, use "{file}/../assets"
+			assets_dir = "{compiler.mainmodule.location.file.filename.dirname}/../assets"
+		else
+			# probably used -m, use "."
+			assets_dir = "assets"
+		end
 		if assets_dir.file_exists then
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
 			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
 			end
 		end
 	end
@@ -221,15 +209,39 @@ $(call import-module,android/native_app_glue)
 
 	redef fun compile_c_code(compiler, compile_dir)
 	do
+		var android_project_root = android_project_root.as(not null)
+		var release = toolcontext.opt_release.value
+
 		# Compile C code (and thus Nit)
-		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root])
+		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
-		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"])
+		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
+		if release then
+			args.add "release"
+		else args.add "debug"
+		toolcontext.exec_and_check(args, "Android project error")
 
 		# Move the apk to the target
 		var outname = toolcontext.opt_output.value
 		if outname == null then outname = "{compiler.mainmodule.name}.apk"
-		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
+
+		var src_apk_suffix
+		if release then
+			src_apk_suffix = "release-unsigned"
+		else src_apk_suffix = "debug"
+
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-{src_apk_suffix}.apk", outname], "Android project error")
+	end
+end
+
+redef class JavaClassTemplate
+	redef fun write_to_files(compdir)
+	do
+		var jni_path = "jni/nit_compile/"
+		if compdir.has_suffix(jni_path) then
+			var path = "{compdir.substring(0, compdir.length-jni_path.length)}/src/"
+			return super(path)
+		else return super
 	end
 end

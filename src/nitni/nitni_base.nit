@@ -50,9 +50,9 @@ redef class MMethod
 	end
 end
 
-redef class AModule
+redef class MModule
 	# Mangled name of this module in C
-	fun cname: String do return mmodule.name
+	fun cname: String do return name
 end
 
 redef class MMethodDef

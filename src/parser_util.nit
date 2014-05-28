@@ -69,7 +69,7 @@ redef class ToolContext
 	do
 		var mod_string = "do\n{string}\nend"
 		var nmodule = parse_module(mod_string)
-		var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+		var nblock = nmodule.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
 		return nblock
 	end
 
@@ -79,7 +79,7 @@ redef class ToolContext
 	do
 		var mod_string = "var dummy = \n{string}"
 		var nmodule = parse_module(mod_string)
-		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
+		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
 		return nexpr
 	end
 
@@ -93,6 +93,15 @@ redef class ToolContext
 	# - a block of statements `ABlockExpr`
 	# - a full module `AModule`
 	# - a `AError` if nothing else matches
+	#
+	#     var tc = new ToolContext
+	#     assert tc.parse_something("foo") isa TId
+	#     assert tc.parse_something("foo[bar]") isa AExpr
+	#     assert tc.parse_something("Foo[Bar]") isa AType
+	#     assert tc.parse_something("foo\nbar") isa ABlockExpr
+	#     assert tc.parse_something("fun foo do bar\nfoo") isa AModule
+	#     assert tc.parse_something("fun fun") isa AParserError
+	#     assert tc.parse_something("?%^&") isa ALexerError
 	fun parse_something(string: String): ANode
 	do
 		var source = new SourceFile.from_string("", string)
@@ -111,7 +120,7 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
+			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
 			return ntype
 		end
 		error = eof
@@ -134,18 +143,21 @@ redef class ToolContext
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
+			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
 			return nexpr
 		end
 		if eof.location > error.location then error = eof
 
 		lexer = new InjectedLexer(source)
 		lexer.injected_before.add new TKwdo
+		lexer.injected_before.add new TEol
+		lexer.injected_after.add new TEol
 		lexer.injected_after.add new TKwend
 		tree = (new Parser(lexer)).parse
 		eof = tree.n_eof
 		if not eof isa AError then
-			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(ABlockExpr)
+			nblock.n_kwend = null # drop injected token
 			return nblock
 		end
 		if eof.location > error.location then error = eof
@@ -159,6 +171,37 @@ redef class ToolContext
 		if eof.location > error.location then error = eof
 
 		return error
+	end
+
+	# Parse the input of the user as something
+	fun interactive_parse(prompt: String): ANode
+	do
+		var oldtext = ""
+
+		loop
+			printn prompt
+			printn " "
+			var s = sys.stdin.read_line
+			if s == "" then continue
+			if s.chars.first == ':' then
+				var res = new TString
+				res.text = s
+				return res
+			end
+
+			var text = oldtext + s + "\n"
+			oldtext = ""
+			var n = parse_something(text)
+
+			if n isa AParserError and n.token isa EOF then
+				# Unexpected end of file, thus continuing
+				if oldtext == "" then prompt = "." * prompt.length
+				oldtext = text
+				continue
+			end
+
+			return n
+		end
 	end
 end
 

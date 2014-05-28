@@ -18,7 +18,6 @@ module platform
 
 import modelize_property
 import parser_util
-import simple_misc_analysis
 import modelbuilder
 
 redef class ToolContext
@@ -113,4 +112,7 @@ end
 # Services will be added to this class in other modules.
 abstract class Platform
 	fun supports_libunwind: Bool do return true
+
+	# Does this platform declare its own main function? If so, we won't generate one in Nit.
+	fun no_main: Bool do return false
 end

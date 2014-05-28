@@ -58,8 +58,6 @@ $ template make_prods()
 $ set baseprod = {//prod/@ename}
 $ foreach {//alt}
 redef class @ename
-	private init empty_init do end
-
 $ if {count(elem)!=0}
 	init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
 $ foreach {elem}
@@ -74,7 +72,6 @@ $ else
 	init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
 $ end
 	do
-		empty_init
 $ foreach {elem}
 $   if @is_list
 		_n_@{name}.unsafe_add_all(n_@{name})

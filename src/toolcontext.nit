@@ -90,9 +90,9 @@ class ToolContext
 
 			for m in messages do
 				if opt_no_color.value then
-					stderr.write("{m}\n")
+					sys.stderr.write("{m}\n")
 				else
-					stderr.write("{m.to_color_string}\n")
+					sys.stderr.write("{m.to_color_string}\n")
 				end
 			end
 
@@ -133,6 +133,33 @@ class ToolContext
 			print "{s}"
 		end
 	end
+
+	# Executes a program while checking if it's available and if the execution ended correctly
+	#
+	# Stops execution and prints errors if the program isn't available or didn't end correctly
+	fun exec_and_check(args: Array[String], error: String)
+        do
+                var prog = args.first
+                args.remove_at 0
+
+                # Is the wanted program available?
+                var proc_which = new IProcess.from_a("which", [prog])
+                proc_which.wait
+                var res = proc_which.status
+                if res != 0 then
+                        print "{error}: executable \"{prog}\" not found"
+                        exit 1
+                end
+
+                # Execute the wanted program
+                var proc = new Process.from_a(prog, args)
+                proc.wait
+                res = proc.status
+                if res != 0 then
+                        print "{error}: execution of \"{prog} {args.join(" ")}\" failed"
+                        exit 1
+                end
+        end
 
 	# Global OptionContext
 	var option_context: OptionContext = new OptionContext
@@ -238,5 +265,31 @@ class ToolContext
 			# Make sure the output directory exists
 			log_directory.mkdir
 		end
+
+		nit_dir = compute_nit_dir
+	end
+
+	# The identified root directory of the Nit project
+	var nit_dir: nullable String
+
+	private fun compute_nit_dir: nullable String
+	do
+		# a environ variable has precedence
+		var res = "NIT_DIR".environ
+		if not res.is_empty then return res
+
+		# find the runpath of the program from argv[0]
+		res = "{sys.program_name.dirname}/.."
+		if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
+
+		# find the runpath of the process from /proc
+		var exe = "/proc/self/exe"
+		if exe.file_exists then
+			res = exe.realpath
+			res = res.dirname.join_path("..")
+			if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
+		end
+
+		return null
 	end
 end

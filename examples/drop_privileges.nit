@@ -21,7 +21,7 @@ import privileges
 
 # basic command line options
 var opts = new OptionContext
-var opt_ug = new OptionDropPrivileges
+var opt_ug = new OptionUserAndGroup.for_dropping_privileges
 opt_ug.mandatory = true
 opts.add_option(opt_ug)
 

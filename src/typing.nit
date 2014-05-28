@@ -79,16 +79,6 @@ private class TypeVisitor
 		return res
 	end
 
-	# Retrieve the signature of a `MMethodDef` resolved for a specific call.
-	# This method is an helper to symplify the query on the model.
-	#
-	# Note: `for_self` indicates if the reciever is self or not.
-	# If yes, virtual types are not resolved.
-	fun resolve_signature_for(mmethoddef: MMethodDef, recv: MType, for_self: Bool): MSignature
-	do
-		return self.resolve_for(mmethoddef.msignature.as(not null), recv, for_self).as(MSignature)
-	end
-
 	# Check that `sub` is a subtype of `sup`.
 	# If `sub` is not a valud suptype, then display an error on `node` an return null.
 	# If `sub` is a safe subtype of `sup` then return `sub`.
@@ -260,7 +250,8 @@ private class TypeVisitor
 		end
 
 
-		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
+		var msignature = mpropdef.msignature.as(not null)
+		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
 		var erasure_cast = false
 		var rettype = mpropdef.msignature.return_mtype
@@ -479,16 +470,16 @@ redef class APropdef
 	var selfvariable: nullable Variable
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
+		var nblock = self.n_block
+		if nblock == null then return
+
 		var nclassdef = self.parent.as(AClassdef)
 		var mpropdef = self.mpropdef.as(not null)
 		var v = new TypeVisitor(modelbuilder, nclassdef, mpropdef)
 		self.selfvariable = v.selfvariable
-
-		var nblock = self.n_block
-		if nblock == null then return
 
 		var mmethoddef = self.mpropdef.as(not null)
 		for i in [0..mmethoddef.msignature.arity[ do
@@ -1069,6 +1060,9 @@ redef class ASuperstringExpr
 end
 
 redef class AArrayExpr
+	var with_capacity_callsite: nullable CallSite
+	var push_callsite: nullable CallSite
+
 	redef fun accept_typing(v)
 	do
 		var mtypes = new Array[nullable MType]
@@ -1086,7 +1080,12 @@ redef class AArrayExpr
 		end
 		var mclass = v.get_mclass(self, "Array")
 		if mclass == null then return # Forward error
-		self.mtype = mclass.get_mtype([mtype])
+		var array_mtype = mclass.get_mtype([mtype])
+
+		with_capacity_callsite = v.get_method(self, array_mtype, "with_capacity", false)
+		push_callsite = v.get_method(self, array_mtype, "push", false)
+
+		self.mtype = array_mtype
 	end
 end
 
@@ -1221,7 +1220,6 @@ redef class ASendExpr
 		var msignature = callsite.msignature
 
 		var args = compute_raw_arguments
-		self.raw_arguments = args
 
 		callsite.check_signature(v, args)
 
@@ -1245,7 +1243,7 @@ redef class ASendExpr
 	private fun property_name: String is abstract
 
 	# An array of all arguments (excluding self)
-	var raw_arguments: nullable Array[AExpr]
+	fun raw_arguments: Array[AExpr] do return compute_raw_arguments
 
 	private fun compute_raw_arguments: Array[AExpr] is abstract
 end
@@ -1382,7 +1380,6 @@ redef class ASendReassignFormExpr
 		self.callsite = callsite
 
 		var args = compute_raw_arguments
-		self.raw_arguments = args
 
 		callsite.check_signature(v, args)
 
@@ -1457,7 +1454,8 @@ redef class ASuperExpr
 		# FIXME: covariance of return type in linear extension?
 		var superprop = superprops.first
 
-		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var msignature = superprop.msignature.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 		var args = self.n_args.to_a
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
@@ -1503,7 +1501,9 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var msignature = superprop.msignature.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
+
 		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 

@@ -602,7 +602,7 @@ end
 # Pointer classes are used to manipulate extern C structures.
 extern class Pointer
 	# Is the address behind this Object at NULL?
-	fun address_is_null: Bool `{ return recv == NULL; `}
+	fun address_is_null: Bool is extern "address_is_null"
 
 	# Free the memory pointed by this pointer
 	fun free `{ free(recv); `}

@@ -41,7 +41,7 @@ class FFILanguageAssignationPhase
 
 	redef fun process_npropdef(npropdef)
 	do
-		if npropdef isa AExternPropdef then
+		if npropdef isa AMethPropdef then
 			var code_block = npropdef.n_extern_code_block
 			if code_block != null then
 				verify_foreign_code_on_node( code_block )
@@ -74,8 +74,11 @@ class FFILanguageAssignationPhase
 	end
 end
 
-redef class AModule
+redef class MModule
 	var ffi_files = new Array[ExternFile]
+
+	# Callbacks used by this module, classified by language
+	var ffi_callbacks = new HashMap[FFILanguage, Set[NitniCallback]]
 end
 
 redef class AExternCodeBlock
@@ -105,25 +108,25 @@ class FFILanguage
 	fun identify_language(block: AExternCodeBlock ): Bool is abstract
 
 	# Generate wrapper code for this module/header code block
-	fun compile_module_block(block: AExternCodeBlock, ecc: CCompilationUnit, nmodule: AModule) is abstract
+	fun compile_module_block(block: AExternCodeBlock, ecc: CCompilationUnit, mmodule: MModule) is abstract
 
 	# Generate wrapper code for this extern method
-	fun compile_extern_method(block: AExternCodeBlock, m: AExternPropdef,
-		ecc: CCompilationUnit, nmodule: AModule) is abstract
+	fun compile_extern_method(block: AExternCodeBlock, m: AMethPropdef,
+		ecc: CCompilationUnit, nmodule: MModule) is abstract
 
 	# Generate wrapper code for this extern class
 	fun compile_extern_class(block: AExternCodeBlock, m: AClassdef,
-		ecc: CCompilationUnit, nmodule: AModule) is abstract
+		ecc: CCompilationUnit, mmodule: MModule) is abstract
 
 	# Get the foreign type of this extern class definition
 	fun get_ftype(block: AExternCodeBlock, m: AClassdef): ForeignType is abstract
 
 	# Generate the code to offer this callback if foreign code
-	fun compile_callback(callback: NitniCallback, nmodule: AModule,
+	fun compile_callback(callback: NitniCallback, mmodule: MModule,
 		mainmmodule: MModule, ecc: CCompilationUnit) is abstract
 
 	# Complete compilation of generated code
-	fun compile_to_files(amodule: AModule, directory: String) do end
+	fun compile_to_files(mmodule: MModule, directory: String) do end
 end
 
 redef class TString
@@ -145,26 +148,26 @@ redef class TExternCodeSegment
 end
 
 redef class CCompilationUnit
-	fun write_as_impl( amodule: AModule, compdir: String )
+	fun write_as_impl(mmodule: MModule, compdir: String)
 	do
-		var base_name = "{amodule.mmodule.name}._ffi"
+		var base_name = "{mmodule.name}._ffi"
 
 		var h_file = "{base_name}.h"
-		var guard = "{amodule.cname.to_s.to_upper}_NIT_H"
-		write_header_to_file( amodule, "{compdir}/{h_file}", new Array[String], guard)
+		var guard = "{mmodule.cname.to_s.to_upper}_NIT_H"
+		write_header_to_file(mmodule, "{compdir}/{h_file}", new Array[String], guard)
 
 		var c_file = "{base_name}.c"
-		write_body_to_file( amodule, "{compdir}/{c_file}", ["<stdlib.h>", "<stdio.h>", "\"{h_file}\""] )
+		write_body_to_file(mmodule, "{compdir}/{c_file}", ["<stdlib.h>", "<stdio.h>", "\"{h_file}\""])
 
 		files.add( "{compdir}/{c_file}" )
 	end
 
-	fun write_header_to_file(amodule: AModule, file: String, includes: Array[String], guard: String)
+	fun write_header_to_file(mmodule: MModule, file: String, includes: Array[String], guard: String)
 	do
 		var stream = new OFStream.open( file )
 
 		# header comments
-		var module_info = "/*\n\tExtern implementation of Nit module {amodule.mmodule.name}\n*/\n"
+		var module_info = "/*\n\tExtern implementation of Nit module {mmodule.name}\n*/\n"
 
 		stream.write( module_info )
 
@@ -180,11 +183,11 @@ redef class CCompilationUnit
 		stream.close
 	end
 
-	fun write_body_to_file(amodule: AModule, file: String, includes: Array[String])
+	fun write_body_to_file(mmodule: MModule, file: String, includes: Array[String])
 	do
 		var stream = new OFStream.open(file)
 
-		var module_info = "/*\n\tExtern implementation of Nit module {amodule.mmodule.name}\n*/\n"
+		var module_info = "/*\n\tExtern implementation of Nit module {mmodule.name}\n*/\n"
 
 		stream.write( module_info )
 		for incl in includes do stream.write( "#include {incl}\n" )

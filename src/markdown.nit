@@ -37,6 +37,9 @@ private class Doc2Mdwn
 		# Indent level of the current line
 		var indent = 0
 
+		# Expected fencing closing tag (if any)
+		var in_fence: nullable String = null
+
 		# The current element (p, li, etc.) if any
 		var n: nullable HTMLTag = null
 
@@ -51,6 +54,20 @@ private class Doc2Mdwn
 			indent = 0
 			while text.length > indent and text.chars[indent] == ' ' do indent += 1
 
+			# In a fence
+			if in_fence != null then
+				# fence closing
+				if text.substring(0,in_fence.length) == in_fence then
+					close_codeblock(n or else root)
+					in_fence = null
+					continue
+				end
+				# else fence content
+				curblock.add(text)
+				curblock.add("\n")
+				continue
+			end
+
 			# Is codeblock? Then just collect them
 			if indent >= 4 then
 				var part = text.substring_from(4)
@@ -61,6 +78,14 @@ private class Doc2Mdwn
 
 			# Was a codblock just before the current line ?
 			close_codeblock(n or else root)
+
+			# fence opening
+			if text.substring(0,3) == "~~~" then
+				var l = 3
+				while l < text.length and text.chars[l] == '~' do l += 1
+				in_fence = text.substring(0, l)
+				continue
+			end
 
 			# Cleanup the string
 			text = text.trim

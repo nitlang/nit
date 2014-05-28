@@ -34,26 +34,26 @@ redef class Object
 	# Print `objects` on the standard output (`stdout`).
 	protected fun printn(objects: Object...)
 	do
-		stdout.write(objects.to_s)
+		sys.stdout.write(objects.to_s)
 	end
 
 	# Print an `object` on the standard output (`stdout`) and add a newline.
 	protected fun print(object: Object)
 	do
-		stdout.write(object.to_s)
-		stdout.write("\n")
+		sys.stdout.write(object.to_s)
+		sys.stdout.write("\n")
 	end
 
 	# Read a character from the standard input (`stdin`).
 	protected fun getc: Char
 	do
-		return stdin.read_char.ascii
+		return sys.stdin.read_char.ascii
 	end
 
 	# Read a line from the standard input (`stdin`).
 	protected fun gets: String
 	do
-		return stdin.read_line
+		return sys.stdin.read_line
 	end
 
 	# Return the working (current) directory
@@ -117,7 +117,9 @@ class IFStream
 		self.path = path
 		prepare_buffer(10)
 		_file = new NativeFile.io_open_read(path.to_cstring)
-		assert cant_open_file: _file != null
+		assert not _file.address_is_null else
+			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
+		end
 	end
 
 	private init do end
@@ -161,7 +163,9 @@ class OFStream
 	init open(path: String)
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
-		assert cant_open_file: _file != null
+		assert not _file.address_is_null else
+			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
+		end
 		self.path = path
 		_writable = true
 	end
@@ -174,15 +178,15 @@ end
 
 class Stdin
 	super IFStream
+	super PollableIStream
+
 	private init do
 		_file = new NativeFile.native_stdin
 		path = "/dev/stdin"
 		prepare_buffer(1)
 	end
 
-	# Is these something to read? (non blocking)
-	# FIXME: should be generalized
-	fun poll_in: Bool is extern "file_stdin_poll_in"
+	redef fun poll_in: Bool is extern "file_stdin_poll_in"
 end
 
 class Stdout
@@ -520,11 +524,15 @@ private extern class NativeFile `{ FILE* `}
 	new native_stderr is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
 end
 
-# Standard input.
-fun stdin: Stdin do return once new Stdin
+redef class Sys
 
-# Standard output.
-fun stdout: OFStream do return once new Stdout
+	# Standard input
+	var stdin: PollableIStream protected writable = new Stdin
 
-# Standard output for error.
-fun stderr: OFStream do return once new Stderr
+	# Standard output
+	var stdout: OStream protected writable = new Stdout
+
+	# Standard output for errors
+	var stderr: OStream protected writable = new Stderr
+
+end

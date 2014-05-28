@@ -26,22 +26,27 @@ abstract class Option
 	var helptext: String
 
 	# Gathering errors during parsing
-	var errors: Array[String]
+	var errors: Array[String] = new Array[String]
 
 	# Is this option mandatory?
-	var mandatory: Bool writable
+	var mandatory: Bool writable = false
 
 	# Has this option been read?
-	var read:Bool writable
+	var read: Bool writable = false
 
 	# Current value of this option
 	var value: VALUE writable
 
 	# Default value of this option
-	var default_value: nullable VALUE writable
+	var default_value: VALUE writable
 
 	# Create a new option
-	init init_opt(help: String, default: nullable VALUE, names: nullable Array[String])
+	init(help: String, default: VALUE, names: nullable Array[String])
+	do
+		init_opt(help, default, names)
+	end
+
+	fun init_opt(help: String, default: VALUE, names: nullable Array[String])
 	do
 		if names == null then
 			self.names = new Array[String]
@@ -49,11 +54,8 @@ abstract class Option
 			self.names = names.to_a
 		end
 		helptext = help
-		mandatory = false
-		read = false
 		default_value = default
 		value = default
-		errors = new Array[String]
 	end
 
 	# Add new aliases for this option
@@ -91,7 +93,7 @@ end
 
 class OptionText
 	super Option
-	init(text: String) do init_opt(text, null, null)
+	init(text: String) do super(text, null, null)
 
 	redef fun pretty(off) do return to_s
 
@@ -102,7 +104,7 @@ class OptionBool
 	super Option
 	redef type VALUE: Bool
 
-	init(help: String, names: String...) do init_opt(help, false, names)
+	init(help: String, names: String...) do super(help, false, names)
 
 	redef fun read_param(it)
 	do
@@ -115,7 +117,7 @@ class OptionCount
 	super Option
 	redef type VALUE: Int
 
-	init(help: String, names: String...) do init_opt(help, 0, names)
+	init(help: String, names: String...) do super(help, 0, names)
 
 	redef fun read_param(it)
 	do
@@ -130,7 +132,7 @@ abstract class OptionParameter
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
-	var parameter_mandatory: Bool writable
+	var parameter_mandatory: Bool writable = true
 
 	redef fun read_param(it)
 	do
@@ -144,19 +146,13 @@ abstract class OptionParameter
 			end
 		end
 	end
-
-	init init_opt(h, d, n)
-	do
-		super
-		parameter_mandatory = true
-	end
 end
 
 class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
 
-	init(help: String, names: String...) do init_opt(help, null, names)
+	init(help: String, names: String...) do super(help, null, names)
 
 	redef fun convert(str) do return str
 end
@@ -170,7 +166,7 @@ class OptionEnum
 	do
 		assert values.length > 0
 		self.values = values.to_a
-		init_opt("{help} <{values.join(", ")}>", default, names)
+		super("{help} <{values.join(", ")}>", default, names)
 	end
 
 	redef fun convert(str)
@@ -200,9 +196,18 @@ class OptionInt
 	super OptionParameter
 	redef type VALUE: Int
 
-	init(help: String, default: Int, names: String...) do init_opt(help, default, names)
+	init(help: String, default: Int, names: String...) do super(help, default, names)
 	
 	redef fun convert(str) do return str.to_i
+end
+
+class OptionFloat
+	super OptionParameter
+	redef type VALUE: Float
+
+	init(help: String, default: Float, names: String...) do super(help, default, names)
+	
+	redef fun convert(str) do return str.to_f
 end
 
 class OptionArray
@@ -212,7 +217,7 @@ class OptionArray
 	init(help: String, names: String...)
 	do
 		values = new Array[String]
-		init_opt(help, values, names)
+		super(help, values, names)
 	end
 
 	private var values: Array[String]

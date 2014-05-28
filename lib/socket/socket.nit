@@ -21,6 +21,10 @@ import socket_c
 
 # Portal for communication between two machines
 class Socket
+	super BufferedIStream
+	super OStream
+	super PollableIStream
+
 	# IPv4 address the socket is connected to
 	# Formatted as xxx.xxx.xxx.xxx
 	var address: String
@@ -38,18 +42,16 @@ class Socket
 	# Underlying C socket
 	private var addrin: FFSocketAddrIn
 
-	# Guard for errors
-	# If the socket could not be created or if the socket was destroyed
-	# before a call needing the socket was made
-	# this flag will be set to false.
-	var still_alive = true # Note : HUGE SUCCESS
+	redef var end_reached = false
 
 	# Creates a socket connection to host `thost` on port `port`
-	init stream_with_host(thost: String, tport: Int)
+	init client(thost: String, tport: Int)
 	do
+		_buffer = new FlatBuffer
+		_buffer_pos = 0
 		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
 		if socket.address_is_null then
-			still_alive = false
+			end_reached = true
 			return
 		end
 		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
@@ -58,14 +60,17 @@ class Socket
 		address = addrin.address
 		host = hostname.h_name
 		port = addrin.port
+		if not end_reached then end_reached = not connect
 	end
 
-	# Creates a server socket on port `tport`
-	init stream_with_port(tport: Int)
+	# Creates a server socket on port `tport`, with a connection queue of size `max`
+	init server(tport: Int, max: Int)
 	do
+		_buffer = new FlatBuffer
+		_buffer_pos = 0
 		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
 		if socket.address_is_null then
-			still_alive = false
+			end_reached = true
 			return
 		end
 		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
@@ -73,11 +78,15 @@ class Socket
 		address = addrin.address
 		port = addrin.port
 		host = null
+		bind
+		listen(max)
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
 	private init primitive_init(h: FFSocketAcceptResult)
 	do
+		_buffer = new FlatBuffer
+		_buffer_pos = 0
 		socket = h.socket
 		addrin = h.addrIn
 		address = addrin.address
@@ -85,94 +94,106 @@ class Socket
 		host = null
 	end
 
+	redef fun poll_in do return ready_to_read(0)
+
 	# Returns an array containing an enum of the events ready to be read
 	#
 	# event_types : Combination of several event types to watch
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	#
-	private fun poll_in(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
-		if not still_alive then return new Array[FFSocketPollValues]
+	private fun pollin(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
+		if end_reached then return new Array[FFSocketPollValues]
 		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
 	end
 
-	# Easier use of poll_in to check for something to read on all channels of any priority
+	# Easier use of pollin to check for something to read on all channels of any priority
 	#
 	# timeout : Time in milliseconds before stopping to wait for events
 	#
 	fun ready_to_read(timeout: Int): Bool
 	do
-		if not still_alive then return false
+		if _buffer_pos < _buffer.length then return true
+		if eof then return false
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollin)
-		events.push(new FFSocketPollValues.pollrdnorm)
-		events.push(new FFSocketPollValues.pollpri)
-		events.push(new FFSocketPollValues.pollrdband)
-		return poll_in(events, timeout).length != 0
+		return pollin(events, timeout).length != 0
 	end
 
 	# Checks if the socket still is connected
 	#
 	fun connected: Bool
 	do
-		if not still_alive then return false
+		if eof then return false
 		var events = new Array[FFSocketPollValues]
 		events.push(new FFSocketPollValues.pollhup)
 		events.push(new FFSocketPollValues.pollerr)
-		return poll_in(events, 0).length == 0
+		if pollin(events, 0).length == 0 then
+			return true
+		else
+			end_reached = true
+			return false
+		end
 	end
+
+	redef fun is_writable do return not end_reached
 
 	# Establishes a connection to socket addrin
 	#
-	# REQUIRES : self.still_alive
-	fun connect: Bool do
-		assert still_alive
+	# REQUIRES : not self.end_reached
+	private fun connect: Bool
+	do
+		assert not end_reached
 		return socket.connect(addrin) >= 0
 	end
 
-	# Write a message to connected socket
-	#
-	# Returns `true` if the `msg` was sent, `false` otherwise
-	#
-	# If not socket.sill_alive, false will be returned
-	fun write(msg: String): Bool do
-		if not still_alive then return false
-		return socket.write(msg) >= 0
+	# If socket.end_reached, nothing will happen
+	redef fun write(msg: Text)
+	do
+		if end_reached then return
+		socket.write(msg.to_s)
 	end
 
-	# Read from connected socket
-	#
-	# If the socket is disconnected, an empty string will be returned
-	fun read: String do
-		if not still_alive then return ""
-		return socket.read
+	fun write_ln(msg: Text)
+	do
+		if end_reached then return
+		write(msg.to_s)
+		write("\n")
 	end
 
-	# Close connection
-	#
-	# Returns : `true` if the close was successful, `false` otherwise
-	fun close: Bool do
-		if not still_alive then return true
-		if socket.close >= 0 then
-			still_alive = false
-			return true
+	redef fun fill_buffer
+	do
+		_buffer.clear
+		_buffer_pos = 0
+		if not connected then return
+		var read = socket.read
+		if read.length == 0 then
+			close
+			end_reached = true
 		end
-		return false
+		_buffer.append(read)
+	end
+
+	redef fun close do
+		if end_reached then return
+		if socket.close >= 0 then
+			end_reached = true
+		end
 	end
 
 	# Associates the socket to a local address and port
 	#
 	# Returns : `true` if the socket could be bound, `false` otherwise
-	fun bind: Bool do
-		if not still_alive then return false
+	private fun bind: Bool do
+		if end_reached then return false
 		return socket.bind(addrin) >= 0
 	end
 
 	# Sets the socket as ready to accept incoming connections, `size` is the maximum number of queued clients
 	#
 	# Returns : `true` if the socket could be set, `false` otherwise
-	fun listen(size: Int): Bool do
-		if not still_alive then return false
+	private fun listen(size: Int): Bool do
+		if end_reached then return false
 		return socket.listen(size) >= 0
 	end
 
@@ -181,9 +202,9 @@ class Socket
 	#
 	# Returns : the socket for communication with the client
 	#
-	# REQUIRES : self.still_alive
+	# REQUIRES : not self.end_reached
 	fun accept: Socket do
-		assert still_alive
+		assert not end_reached
 		return new Socket.primitive_init(socket.accept)
 	end
 

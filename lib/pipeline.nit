@@ -99,7 +99,7 @@ redef interface Iterator[E]
 	#
 	#     var i = [1,2,3,4,5].iterator
 	#     assert i.head(2).to_a   == [1,2]
-	#     i.to_a		      == [3,4,5]
+	#     assert i.to_a           == [3,4,5]
 	fun head(length: Int): Iterator[E]
 	do
 		return new PipeHead[E](self, length)

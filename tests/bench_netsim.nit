@@ -32,6 +32,7 @@ class WakeUpNode
 		_scheduler.add_event(self, d)
 	end
 	var _scheduler: Scheduler
+	init do end
 end
 
 class NodeSource

@@ -52,62 +52,11 @@ redef class String
 
 end
 
-# Persistant connection to the debugger
-# Default port = 22125
-#
-class DebugClient
-
-	var debugger_connection: Socket
-
-	init (host: String, port: Int)
-	do
-		self.debugger_connection = new Socket.stream_with_host(host, port)
-		print "[HOST ADDRESS] : "+debugger_connection.address
-		print "[HOST] : "+debugger_connection.host.as(not null)
-		print "[PORT] : "+debugger_connection.port.to_s
-	end
-
-	init with_port (host: String, port: Int)
-	do
-		debugger_connection = new Socket.stream_with_host(host, port)
-	end
-
-	fun send_command(command: String)
-	do
-		debugger_connection.write(command+"\n")
-	end
-
-	fun connected: Bool
-	do
-		return self.debugger_connection.connected
-	end
-
-	fun ready: Bool
-	do
-		return debugger_connection.ready_to_read(40)
-	end
-
-	fun read_command: String
-	do
-		var buff = new FlatBuffer
-		while debugger_connection.ready_to_read(40) do buff.append(debugger_connection.read)
-		return buff.to_s
-	end
-
-	fun disconnect
-	do
-		debugger_connection.close
-	end
-
-end
-
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.tooldescription = "Usage: nitdbg_client [OPTION]...\nConnects to a nitdbg_server and controls it."
 toolcontext.accept_no_arguments = true
 toolcontext.process_options(args)
-
-var debug: DebugClient
 
 # If the port value is not an Int between 0 and 65535 (Mandatory according to the norm)
 # Print the usage
@@ -116,49 +65,28 @@ if toolcontext.opt_debug_port.value < 0 or toolcontext.opt_debug_port.value > 65
 	return
 end
 
+var debug: Socket
+
 # An IPV4 address does always complies to this form : x.x.x.x
 # Where x is an integer whose value is >=0 and <= 255
 if toolcontext.opt_host_address.value != null then
 	if toolcontext.opt_host_address.value.is_valid_ipv4_address then
-		debug = new DebugClient(toolcontext.opt_host_address.value.as(not null), toolcontext.opt_debug_port.value)
+		debug = new Socket.client(toolcontext.opt_host_address.value.as(not null), toolcontext.opt_debug_port.value)
 	else
 		toolcontext.option_context.usage
 		return
 	end
 else
-	debug = new DebugClient("127.0.0.1", toolcontext.opt_debug_port.value)
+	debug = new Socket.client("127.0.0.1", toolcontext.opt_debug_port.value)
 end
 
-var res = debug.debugger_connection.connect
-print "Connecting ... " + res.to_s
-if not res then exit 1
+print "[HOST ADDRESS] : {debug.address}"
+print "[HOST] : {debug.host}"
+print "[PORT] : {debug.port}"
+print "Connecting ... {debug.connected}"
 
-var recv_cmd: String
-
-var written_cmd: String
-
-var over = false
-
-while not over do
-	if stdin.poll_in then
-		written_cmd = gets
-		debug.send_command(written_cmd)
-		if written_cmd == "kill" then
-			over = true
-		end
-	end
-
-	if not over and debug.ready then
-		recv_cmd = debug.read_command
-		var command_parts = recv_cmd.split("\n")
-		for i in command_parts do
-			if i == "DBG DONE WORK ON SELF" then
-				debug.send_command("CLIENT DBG DONE ACK")
-				over = true
-			end
-			print i
-		end
-	end
+while debug.connected do
+	if stdin.poll_in then debug.write_ln(gets)
+	while debug.ready_to_read(50) do printn debug.read(200)
 end
 
-debug.disconnect

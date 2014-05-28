@@ -24,12 +24,15 @@ if args.length < 2 then
 	return
 end
 
-var s = new Socket.stream_with_host(args[0], args[1].to_i)
+var s = new Socket.client(args[0], args[1].to_i)
 print "[HOST ADDRESS] : {s.address}"
-print "[HOST] : {s.host.as(not null)}"
-print "[PORT] : {s.port.to_s}"
-print "Connecting ... {s.connect.to_s}"
-print "Writing ... {s.write("Hello server !").to_s}"
-print "[Response from server] : {s.read.to_s}"
-print "Closing ... {s.close.to_s}"
-
+print "[HOST] : {s.host}"
+print "[PORT] : {s.port}"
+print "Connecting ... {s.connected}"
+if s.connected then
+	print "Writing ... Hello server !"
+	s.write("Hello server !")
+	print "[Response from server] : {s.read(100)}"
+	print "Closing ..."
+	s.close
+end

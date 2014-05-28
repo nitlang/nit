@@ -473,8 +473,9 @@ end
 # A parser error linked to a unexpected token
 class NParserError
 	super NError
+
 	# The unexpected token
-	var token: nullable NToken
+	var token: nullable NToken = null
 
 	redef fun unexpected
 	do
@@ -550,7 +551,7 @@ abstract class TestParser
 		var filepath = args.shift
 		var text
 		if filepath == "-" then
-			text = stdin.read_all
+			text = sys.stdin.read_all
 		else if filepath == "-e" then
 			if args.is_empty then
 				print "Error: -e need a text"

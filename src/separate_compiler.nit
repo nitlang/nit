@@ -16,7 +16,7 @@
 module separate_compiler
 
 import abstract_compiler
-import layout_builders
+import coloring
 import rapid_type_analysis
 
 # Add separate compiler specific options
@@ -35,12 +35,12 @@ redef class ToolContext
 	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
 	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
-	# --use-naive-coloring
-	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
-	# --use-mod-perfect-hashing
-	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
-	# --use-and-perfect-hashing
-	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
+	# --skip-dead-methods
+	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
+	# --semi-global
+	var opt_semi_global = new OptionBool("Enable all semi-global optimizations", "--semi-global")
+	# --no-colo-dead-methods
+	var opt_colo_dead_methods = new OptionBool("Force colorization of dead methods", "--colo-dead-methods")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
@@ -51,11 +51,35 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph)
-		self.option_context.add_option(self.opt_bm_typing)
-		self.option_context.add_option(self.opt_phmod_typing)
-		self.option_context.add_option(self.opt_phand_typing)
+		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
+		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
+	end
+
+	redef fun process_options(args)
+	do
+		super
+
+		var tc = self
+		if tc.opt_semi_global.value then
+			tc.opt_inline_coloring_numbers.value = true
+			tc.opt_inline_some_methods.value = true
+			tc.opt_direct_call_monomorph.value = true
+			tc.opt_skip_dead_methods.value = true
+		end
+	end
+
+	var separate_compiler_phase = new SeparateCompilerPhase(self, null)
+end
+
+class SeparateCompilerPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, given_mmodules) do
+		if not toolcontext.opt_separate.value then return
+
+		var modelbuilder = toolcontext.modelbuilder
+		var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
+		modelbuilder.run_separate_compiler(mainmodule, analysis)
 	end
 end
 
@@ -130,10 +154,11 @@ class SeparateCompiler
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
-	private var type_layout: nullable Layout[MType]
-	private var resolution_layout: nullable Layout[MType]
-	protected var method_layout: nullable Layout[PropertyLayoutElement]
-	protected var attr_layout: nullable Layout[MAttribute]
+	private var type_ids: Map[MType, Int]
+	private var type_colors: Map[MType, Int]
+	private var opentype_colors: Map[MType, Int]
+	protected var method_colors: Map[PropertyLayoutElement, Int]
+	protected var attr_colors: Map[MAttribute, Int]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
@@ -151,19 +176,7 @@ class SeparateCompiler
 		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
 		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; \}; /* general C type representing a Nit type. */")
 		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("struct types \{ int mask; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
-		else
-			self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
-		end
-
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
-		end
-
+		self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		self.header.add_decl("typedef struct instance val; /* general C type representing a Nit instance. */")
 	end
 
@@ -246,28 +259,17 @@ class SeparateCompiler
 
 	# colorize classe properties
 	fun do_property_coloring do
-		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
+
+		var rta = runtime_type_analysis
 
 		# Layouts
-		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
-		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
-		#FIXME PH and BM layouts too slow for large programs
-		#if modelbuilder.toolcontext.opt_bm_typing.value then
-		#	method_layout_builder = new MMethodBMizer(self.mainmodule)
-		#	attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
-		#else if modelbuilder.toolcontext.opt_phmod_typing.value then
-		#	method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
-		#	attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
-		#else if modelbuilder.toolcontext.opt_phand_typing.value then
-		#	method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
-		#	attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
-		#else
+		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
+		var poset = mainmodule.flatten_mclass_hierarchy
+		var colorer = new POSetColorer[MClass]
+		colorer.colorize(poset)
 
-		var class_layout_builder = new MClassColorer(self.mainmodule)
-		class_layout_builder.build_layout(mclasses)
-		method_layout_builder = new MPropertyColorer[PropertyLayoutElement](self.mainmodule, class_layout_builder)
-		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
-		#end
+		# The dead methods, still need to provide a dead color symbol
+		var dead_methods = new Array[MMethod]
 
 		# lookup properties to build layout with
 		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
@@ -277,6 +279,10 @@ class SeparateCompiler
 			mattributes[mclass] = new HashSet[MAttribute]
 			for mprop in self.mainmodule.properties(mclass) do
 				if mprop isa MMethod then
+					if not modelbuilder.toolcontext.opt_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
+						dead_methods.add(mprop)
+						continue
+					end
 					mmethods[mclass].add(mprop)
 				else if mprop isa MAttribute then
 					mattributes[mclass].add(mprop)
@@ -299,8 +305,8 @@ class SeparateCompiler
 
 		# lookup super calls and add it to the list of mmethods to build layout with
 		var super_calls
-		if runtime_type_analysis != null then
-			super_calls = runtime_type_analysis.live_super_sends
+		if rta != null then
+			super_calls = rta.live_super_sends
 		else
 			super_calls = all_super_calls
 		end
@@ -314,24 +320,28 @@ class SeparateCompiler
 		end
 
 		# methods coloration
-		self.method_layout = method_layout_builder.build_layout(mmethods)
-		self.method_tables = build_method_tables(mclasses, super_calls)
-		self.compile_color_consts(method_layout.pos)
+		var meth_colorer = new POSetBucketsColorer[MClass, PropertyLayoutElement](poset, colorer.conflicts)
+		method_colors = meth_colorer.colorize(mmethods)
+		method_tables = build_method_tables(mclasses, super_calls)
+		compile_color_consts(method_colors)
 
-		# attribute null color to dead supercalls
+		# attribute null color to dead methods and supercalls
+		for mproperty in dead_methods do
+			compile_color_const(new_visitor, mproperty, -1)
+		end
 		for mpropdef in all_super_calls do
 			if super_calls.has(mpropdef) then continue
 			compile_color_const(new_visitor, mpropdef, -1)
 		end
 
 		# attributes coloration
-		self.attr_layout = attribute_layout_builder.build_layout(mattributes)
-		self.attr_tables = build_attr_tables(mclasses)
-		self.compile_color_consts(attr_layout.pos)
+		var attr_colorer = new POSetBucketsColorer[MClass, MAttribute](poset, colorer.conflicts)
+		attr_colors = attr_colorer.colorize(mattributes)
+		attr_tables = build_attr_tables(mclasses)
+		compile_color_consts(attr_colors)
 	end
 
 	fun build_method_tables(mclasses: Set[MClass], super_calls: Set[MMethodDef]): Map[MClass, Array[nullable MPropDef]] do
-		var layout = self.method_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -348,7 +358,8 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
-					var color = layout.pos[mproperty]
+					if not method_colors.has_key(mproperty) then continue
+					var color = method_colors[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -374,7 +385,8 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MMethod then continue
-				var color = layout.pos[mproperty]
+				if not method_colors.has_key(mproperty) then continue
+				var color = method_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -397,7 +409,7 @@ class SeparateCompiler
 			end
 			# insert super calls in table according to receiver
 			for supercall in supercalls do
-				var color = layout.pos[supercall]
+				var color = method_colors[supercall]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -412,7 +424,6 @@ class SeparateCompiler
 	end
 
 	fun build_attr_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MPropDef]] do
-		var layout = self.attr_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -426,7 +437,7 @@ class SeparateCompiler
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MAttribute then continue
-					var color = layout.pos[mproperty]
+					var color = attr_colors[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -443,7 +454,7 @@ class SeparateCompiler
 			# then override with local properties
 			for mproperty in self.mainmodule.properties(mclass) do
 				if not mproperty isa MAttribute then continue
-				var color = layout.pos[mproperty]
+				var color = attr_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -462,29 +473,23 @@ class SeparateCompiler
 
 	# colorize live types of the program
 	private fun do_type_coloring: POSet[MType] do
+		# Collect types to colorize
+		var live_types = runtime_type_analysis.live_types
+		var live_cast_types = runtime_type_analysis.live_cast_types
 		var mtypes = new HashSet[MType]
-		mtypes.add_all(self.runtime_type_analysis.live_types)
-		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
+		mtypes.add_all(live_types)
+		mtypes.add_all(live_cast_types)
 		for c in self.box_kinds.keys do
 			mtypes.add(c.mclass_type)
 		end
 
-		# Typing Layout
-		var layout_builder: TypingLayoutBuilder[MType]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MTypeBMizer(self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
-		else
-			layout_builder = new MTypeColorer(self.mainmodule)
-		end
-
-		# colorize types
-		self.type_layout = layout_builder.build_layout(mtypes)
-		var poset = layout_builder.poset.as(not null)
-		self.type_tables = self.build_type_tables(poset)
+		# Compute colors
+		var poset = poset_from_mtypes(mtypes)
+		var colorer = new POSetColorer[MType]
+		colorer.colorize(poset)
+		type_ids = colorer.ids
+		type_colors = colorer.colors
+		type_tables = build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
 		self.compile_resolution_tables(mtypes)
@@ -492,19 +497,27 @@ class SeparateCompiler
 		return poset
 	end
 
+	private fun poset_from_mtypes(mtypes: Set[MType]): POSet[MType] do
+		var poset = new POSet[MType]
+		for e in mtypes do
+			poset.add_node(e)
+			for o in mtypes do
+				if e == o then continue
+				if e.is_subtype(mainmodule, null, o) then
+					poset.add_edge(e, o)
+				end
+			end
+		end
+		return poset
+	end
+
 	# Build type tables
 	fun build_type_tables(mtypes: POSet[MType]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
-		var layout = self.type_layout
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
 			for sup in mtypes[mtype].greaters do
-				var color: Int
-				if layout isa PHLayout[MType, MType] then
-					color = layout.hashes[mtype][sup]
-				else
-					color = layout.pos[sup]
-				end
+				var color = type_colors[sup]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -537,18 +550,9 @@ class SeparateCompiler
 		end
 
 		# Compute the table layout with the prefered method
-		var resolution_builder: ResolutionLayoutBuilder
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			resolution_builder = new ResolutionBMizer
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			resolution_builder = new ResolutionHasher(new PHModOperator)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			resolution_builder = new ResolutionHasher(new PHAndOperator)
-		else
-			resolution_builder = new ResolutionColorer
-		end
-		self.resolution_layout = resolution_builder.build_layout(mtype2unresolved)
-		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)
+		var colorer = new BucketsColorer[MType, MType]
+		opentype_colors = colorer.colorize(mtype2unresolved)
+		resolution_tables = self.build_resolution_tables(mtype2unresolved)
 
 		# Compile a C constant for each collected unresolved type.
 		# Either to a color, or to -1 if the unresolved type is dead (no live receiver can require it)
@@ -558,8 +562,8 @@ class SeparateCompiler
 		end
 		var all_unresolved_types_colors = new HashMap[MType, Int]
 		for t in all_unresolved do
-			if self.resolution_layout.pos.has_key(t) then
-				all_unresolved_types_colors[t] = self.resolution_layout.pos[t]
+			if opentype_colors.has_key(t) then
+				all_unresolved_types_colors[t] = opentype_colors[t]
 			else
 				all_unresolved_types_colors[t] = -1
 			end
@@ -575,16 +579,10 @@ class SeparateCompiler
 
 	fun build_resolution_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
 		var tables = new HashMap[MClassType, Array[nullable MType]]
-		var layout = self.resolution_layout
 		for mclasstype, mtypes in elements do
 			var table = new Array[nullable MType]
 			for mtype in mtypes do
-				var color: Int
-				if layout isa PHLayout[MClassType, MType] then
-					color = layout.hashes[mclasstype][mtype]
-				else
-					color = layout.pos[mtype]
-				end
+				var color = opentype_colors[mtype]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -605,6 +603,8 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				var rta = runtime_type_analysis
+				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
@@ -619,7 +619,6 @@ class SeparateCompiler
 	fun compile_type_to_c(mtype: MType)
 	do
 		assert not mtype.need_anchor
-		var layout = self.type_layout
 		var is_live = mtype isa MClassType and runtime_type_analysis.live_types.has(mtype)
 		var is_cast_live = runtime_type_analysis.live_cast_types.has(mtype)
 		var c_name = mtype.c_name
@@ -634,7 +633,7 @@ class SeparateCompiler
 
 		# type id (for cast target)
 		if is_cast_live then
-			v.add_decl("{layout.ids[mtype]},")
+			v.add_decl("{type_ids[mtype]},")
 		else
 			v.add_decl("-1, /*CAST DEAD*/")
 		end
@@ -644,11 +643,7 @@ class SeparateCompiler
 
 		# type color (for cast target)
 		if is_cast_live then
-			if layout isa PHLayout[MType, MType] then
-				v.add_decl("{layout.masks[mtype]},")
-			else
-				v.add_decl("{layout.pos[mtype]},")
-			end
+			v.add_decl("{type_colors[mtype]},")
 		else
 			v.add_decl("-1, /*CAST DEAD*/")
 		end
@@ -684,7 +679,7 @@ class SeparateCompiler
 				if stype == null then
 					v.add_decl("-1, /* empty */")
 				else
-					v.add_decl("{layout.ids[stype]}, /* {stype} */")
+					v.add_decl("{type_ids[stype]}, /* {stype} */")
 				end
 			end
 			v.add_decl("\},")
@@ -703,19 +698,13 @@ class SeparateCompiler
 			mclass_type = mtype.as(MClassType)
 		end
 
-		var layout = self.resolution_layout
-
 		# extern const struct resolution_table_X resolution_table_X
 		self.provide_declaration("resolution_table_{mtype.c_name}", "extern const struct types resolution_table_{mtype.c_name};")
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
 		v.add_decl("const struct types resolution_table_{mtype.c_name} = \{")
-		if layout isa PHLayout[MClassType, MType] then
-			v.add_decl("{layout.masks[mclass_type]},")
-		else
-			v.add_decl("0, /* dummy */")
-		end
+		v.add_decl("0, /* dummy */")
 		v.add_decl("\{")
 		for t in self.resolution_tables[mclass_type] do
 			if t == null then
@@ -726,7 +715,7 @@ class SeparateCompiler
 				# the value stored is tv.
 				var tv = t.resolve_for(mclass_type, mclass_type, self.mainmodule, true)
 				# FIXME: What typeids means here? How can a tv not be live?
-				if self.type_layout.ids.has_key(tv) then
+				if type_ids.has_key(tv) then
 					v.require_declaration("type_{tv.c_name}")
 					v.add_decl("&type_{tv.c_name}, /* {t}: {tv} */")
 				else
@@ -751,7 +740,8 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var rta = runtime_type_analysis
+		var is_dead = rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -767,6 +757,10 @@ class SeparateCompiler
 					v.add_decl("NULL, /* empty */")
 				else
 					assert mpropdef isa MMethodDef
+					if rta != null and not rta.live_methoddefs.has(mpropdef) then
+						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					end
 					var rf = mpropdef.virtual_runtime_function
 					v.require_declaration(rf.c_name)
 					v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
@@ -786,7 +780,7 @@ class SeparateCompiler
 				self.header.add_decl("\};")
 			end
 
-			if not self.runtime_type_analysis.live_types.has(mtype) then return
+			if not rta.live_types.has(mtype) then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
@@ -806,7 +800,8 @@ class SeparateCompiler
 			self.header.add_decl("struct instance_{c_instance_name} \{")
 			self.header.add_decl("const struct type *type;")
 			self.header.add_decl("const struct class *class;")
-			# NativeArrays are just a instance header followed by an array of values
+			# NativeArrays are just a instance header followed by a length and an array of values
+			self.header.add_decl("int length;")
 			self.header.add_decl("val* values[0];")
 			self.header.add_decl("\};")
 
@@ -814,15 +809,16 @@ class SeparateCompiler
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length, const struct type* type);")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length, const struct type* type) \{")
-			var res = v.new_named_var(mtype, "self")
-			res.is_exact = true
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_instance_name} *{res};")
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct instance_{c_instance_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			v.add("return {res};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
 			v.add("\}")
 			return
 		end
@@ -875,7 +871,9 @@ class SeparateCompiler
 		if self.modelbuilder.toolcontext.opt_tables_metrics.value then
 			display_sizes
 		end
-
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			display_isset_checks
+		end
 		var tc = self.modelbuilder.toolcontext
 		tc.info("# implementation of method invocation",2)
 		var nb_invok_total = modelbuilder.nb_invok_by_tables + modelbuilder.nb_invok_by_direct + modelbuilder.nb_invok_by_inline
@@ -926,6 +924,16 @@ class SeparateCompiler
 			for e in table do if e == null then holes += 1
 		end
 		print "\t{total}\t{holes}"
+	end
+
+	protected var isset_checks_count = 0
+	protected var attr_read_count = 0
+
+	fun display_isset_checks do
+		print "# total number of compiled attribute reads"
+		print "\t{attr_read_count}"
+		print "# total number of compiled isset-checks"
+		print "\t{isset_checks_count}"
 	end
 
 	redef fun compile_nitni_structs
@@ -1291,6 +1299,11 @@ class SeparateCompilerVisitor
 		var intromclassdef = a.intro.mclassdef
 		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 
+		if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			self.compiler.attr_read_count += 1
+			self.add("count_attr_reads++;")
+		end
+
 		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			# Get the attribute or a box (ie. always a val*)
@@ -1301,10 +1314,15 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}]; /* {a} on {recv.inspect} */")
 
 			# Check for Uninitialized attribute
-			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
 				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
+
+				if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+					self.compiler.isset_checks_count += 1
+					self.add("count_isset_checks++;")
+				end
 			end
 
 			# Return the attribute or its unboxed version
@@ -1315,10 +1333,14 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}].{ret.ctypename}; /* {a} on {recv.inspect} */")
 
 			# Check for Uninitialized attribute
-			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
 				self.add("if (unlikely({res} == NULL)) \{")
 				self.add_abort("Uninitialized attribute {a.name}")
 				self.add("\}")
+				if self.compiler.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+					self.compiler.isset_checks_count += 1
+					self.add("count_isset_checks++;")
+				end
 			end
 
 			return res
@@ -1394,11 +1416,7 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
-			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
-			end
+			return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
@@ -1445,11 +1463,7 @@ class SeparateCompilerVisitor
 			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})];")
-			else
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
-			end
+			self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
 				self.add("count_type_test_unresolved_{tag}++;")
@@ -1484,9 +1498,6 @@ class SeparateCompilerVisitor
 			self.add("\} else \{")
 		end
 		var value_type_info = self.type_info(value)
-		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-			self.add("{cltype} = HASH({value_type_info}->color, {idtype});")
-		end
 		self.add("if({cltype} >= {value_type_info}->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
@@ -1674,11 +1685,7 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
-			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
-			end
+			return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
@@ -1695,6 +1702,9 @@ class SeparateCompilerVisitor
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "length" then
+			self.ret(self.new_expr("((struct instance_{nclass.c_instance_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct instance_{nclass.c_instance_name}*){arguments[1]})->values"
@@ -1921,10 +1931,14 @@ redef class MClass
 	end
 end
 
+interface PropertyLayoutElement end
+
 redef class MProperty
+	super PropertyLayoutElement
 	fun const_color: String do return "COLOR_{c_name}"
 end
 
 redef class MPropDef
+	super PropertyLayoutElement
 	fun const_color: String do return "COLOR_{c_name}"
 end

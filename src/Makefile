@@ -16,14 +16,21 @@
 
 NITCOPT=
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_server ../bin/nitdbg_client
+all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_client
 
-../bin/nitg: ../c_src/nitg parser/parser.nit
+nitg_0: ../c_src/nitg parser/parser.nit
+	@echo '***************************************************************'
+	@echo '* Compile nitg_0 from NIT source files                          *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../c_src/nitg ${NITCOPT} -o nitg_0 -v nitg.nit
+
+../bin/nitg: nitg_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitg from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${NITCOPT} -o ../bin/nitg -v nitg.nit
+	./nitg_0 ${NITCOPT} -o ../bin/nitg -v nitg.nit
 
 ../bin/nitdoc: ../bin/nitg
 	@echo '***************************************************************'
@@ -34,7 +41,7 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 
 ../bin/nitmetrics: ../bin/nitg
 	@echo '***************************************************************'
-	@echo '* Compile nitmetrics from NIT source files                      *'
+	@echo '* Compile nitmetrics from NIT source files                     *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
@@ -48,17 +55,10 @@ all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/n
 
 ../bin/nitdbg_client : ../bin/nitg
 	@echo '***************************************************************'
-	@echo '* Compile nitdbg_client from NIT source files                      *'
+	@echo '* Compile nitdbg_client from NIT source files                 *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_client -v nitdbg_client.nit
-
-../bin/nitdbg_server : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdbg_server from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_server -v nitdbg_server.nit
 
 ../bin/nitx: ../bin/nitg
 	@echo '***************************************************************'

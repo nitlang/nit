@@ -56,23 +56,25 @@ syn match NITClosure "!\h\w*"
 
 " Fallback highlight keywords
 syn match NITNull "\<\(null\)\>"
-syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|loop\)\>"
+syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|loop\|is\)\>"
 syn match NITKeyword "\<\(super\)\>"
 " Unmatchning error
 syn match Error "\<end\>"
 
 " Declarations, definitions and blocks
 syn region NITModuleDecl matchgroup=NITDefine start="\<\(import\|module\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
-syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\|extern\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
+syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\|extern\)\>" matchgroup=NITDefine end="\<end\>" contains=ALLBUT,NITAnnotLine fold
 syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
-syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
+syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITInitDecl matchgroup=NITDefine start="\<init\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn match NITDefine "\<\(super\)\ze\s\+[A-Z]" contained containedin=NITClassBlock
 
-syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|\ze!\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl
-syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>" matchgroup=NITControl end="\<end\>" oneline
+syn region NITAnnotBlock matchgroup=NITControl start="\<is\>\ze\s*\(#\|$\)" matchgroup=NITControl end="\(\ze\<do\>\|\<end\>\)" transparent contains=ALL
+syn match NITAnnotLine "^\s*\zs\w\+" contained containedin=NITAnnotBlock
 
+syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|\ze!\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl,NITAnnotLine
+syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>" matchgroup=NITControl end="\<end\>" oneline
 if !exists("NIT_minlines")
 	let NIT_minlines = 50
 endif
@@ -83,7 +85,7 @@ syn match  NITSharpBang	"\%^#!.*"
 syn match  NITComment	"#.*" contains=NITTodo
 
 " Keywords
-syn keyword NITKeyword	 is abstract intern new
+syn keyword NITKeyword	 abstract intern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
 syn keyword NITControl   if while for assert and or in as isa once break continue return abort
 syn keyword NITClass     nullable
@@ -100,6 +102,7 @@ hi def link NITTypeDecl			Function
 hi def link NITAttrDecl			Function
 hi def link NITInitDecl			Function
 hi def link NITControl			Statement
+hi def link NITAnnotLine		Statement
 hi def link NITLabel			PreProc
 hi def link NITInclude			Include
 hi def link NITNumber			Number

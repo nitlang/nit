@@ -32,23 +32,22 @@ class JavaLanguage
 
 	redef fun identify_language(n) do return n.is_java
 
-	redef fun compile_module_block(block, ccu, nmodule)
+	redef fun compile_module_block(block, ccu, mmodule)
 	do
-		nmodule.ensure_java_files
-		var java_file = nmodule.java_file
+		mmodule.ensure_java_files
+		var java_file = mmodule.java_file
 		assert java_file != null
 
 		java_file.header.add(block.code)
 	end
 
-	redef fun compile_extern_method(block, m, ccu, nmodule)
+	redef fun compile_extern_method(block, m, ccu, mmodule)
 	do
 		ffi_ccu = ccu
-		nmodule.ensure_java_files
-		var java_file = nmodule.java_file
+		mmodule.ensure_java_files
+		var java_file = mmodule.java_file
 		assert java_file != null
 
-		var mmodule = nmodule.mmodule.as(not null)
 		var mclass_type = m.parent.as(AClassdef).mclass.mclass_type
 		var mmethodef = m.mpropdef
 		var mproperty = m.mpropdef.mproperty
@@ -61,11 +60,11 @@ class JavaLanguage
 	jmethodID java_meth_id;
 
 	// retrieve the current JVM
-	Sys sys = {{{mmodule.name}}}___Pointer_sys(NULL);
-	JNIEnv *nit_ffi_jni_env = {{{mmodule.name}}}___Sys_jni_env(sys);
+	Sys sys = Pointer_sys(NULL);
+	JNIEnv *nit_ffi_jni_env = Sys_jni_env(sys);
 
 	// retrieve the implementation Java class
-	java_class = (*nit_ffi_jni_env)->FindClass(nit_ffi_jni_env, "{{{mmodule.impl_java_class_name}}}");
+	java_class = Sys_load_jclass(sys, "{{{mmodule.impl_java_class_name}}}");
 	if (java_class == NULL) {
 		PRINT_ERROR("Nit FFI with Java error: failed to load class.\\n");
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
@@ -136,6 +135,8 @@ class JavaLanguage
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
+
+	(*nit_ffi_jni_env)->DeleteLocalRef(nit_ffi_jni_env, java_class);
 """
 
 		if return_type != null then
@@ -146,7 +147,7 @@ class JavaLanguage
 
 		# Java implementation function in Java
 		var java_csig = mproperty.build_csignature(mclass_type, mmodule, "___java_impl", long_signature, java_call_context)
-		nmodule.java_file.class_content.add """
+		mmodule.java_file.class_content.add """
 	public static {{{java_csig}}} {
 		// from Nit FII at: {{{block.location}}}
 		{{{block.code}}}
@@ -154,40 +155,38 @@ class JavaLanguage
 """
 	end
 
-	redef fun compile_extern_class(block, m, ccu, nmodule) do end
+	redef fun compile_extern_class(block, m, ccu, mmodule) do end
 
 	redef fun get_ftype(block, m) do return new ForeignJavaType(block.code)
 
-	redef fun compile_to_files(nmodule, compdir)
+	redef fun compile_to_files(mmodule, compdir)
 	do
 		# Make sure we have a .java file
-		nmodule.ensure_java_files
+		mmodule.ensure_java_files
 
 		# Needed compiler and linker options
-		nmodule.insert_compiler_options
+		mmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		nmodule.ensure_linking_callback_methods(ffi_ccu, self.callbacks)
+		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null), mmodule.ffi_callbacks[self])
 
 		# Java implementation code
-		var java_file = nmodule.java_file
+		var java_file = mmodule.java_file
 		assert java_file != null
 		var extern_java_file = java_file.write_to_files(compdir)
-		nmodule.ffi_files.add(extern_java_file)
+		mmodule.ffi_files.add(extern_java_file)
 	end
 
-	var callbacks = new HashSet[NitniCallback] # HACK
-	var ffi_ccu: CCompilationUnit # HACK
+	var ffi_ccu: nullable CCompilationUnit = null # HACK
 
-	redef fun compile_callback(callback, nmodule, mainmodule, ccu)
+	redef fun compile_callback(callback, mmodule, mainmodule, ccu)
 	do
 		ffi_ccu = ccu
-		callbacks.add callback
-		callback.compile_callback_to_java(nmodule, ccu)
+		callback.compile_callback_to_java(mmodule, mainmodule, ccu)
 	end
 end
 
-redef class AModule
+redef class MModule
 
 	# Pure java class source file
 	private var java_file: nullable JavaClassTemplate = null
@@ -198,7 +197,7 @@ redef class AModule
 		if java_file != null then return
 
 		# Java implementation code
-		java_file = new JavaClassTemplate(mmodule.impl_java_class_name)
+		java_file = new JavaClassTemplate(impl_java_class_name)
 	end
 
 	# Compile C code to call JNI and link C callbacks implementations to Java extern methods
@@ -213,7 +212,7 @@ redef class AModule
 
 		var jni_methods = new Array[String]
 		for cb in callbacks do
-			jni_methods.add_all(cb.jni_methods_declaration(mmodule.as(not null)))
+			jni_methods.add_all(cb.jni_methods_declaration(self))
 		end
 
 		var cf = new CFunction("static void nit_ffi_with_java_register_natives(JNIEnv* env, jclass jclazz)")
@@ -237,15 +236,13 @@ redef class AModule
 	# Tell the C compiler where to find jni.h and how to link with libjvm
 	private fun insert_compiler_options
 	do
-		mmodule.c_compiler_options = "{mmodule.c_compiler_options} -I $(JAVA_HOME)/include/"
-		mmodule.c_linker_options = "{mmodule.c_linker_options} -L $(JNI_LIB_PATH) -ljvm"
+		c_compiler_options = "{c_compiler_options} -I $(JAVA_HOME)/include/"
+		c_linker_options = "{c_linker_options} -L $(JNI_LIB_PATH) -ljvm"
 	end
-end
 
-redef class MModule
 	# Name of the generated Java class where to store all implementation methods of this module
 	# as well as generated callbacks.
-	private fun impl_java_class_name: String do return "NitFFIWithJava_{name}"
+	private fun impl_java_class_name: String do return "Nit_{name}"
 end
 
 redef class AExternPropdef
@@ -255,7 +252,7 @@ redef class AExternPropdef
 
 		var block = n_extern_code_block
 		if block != null and block.is_java then
-			insert_articifial_callbacks(toolcontext)
+			insert_artificial_callbacks(toolcontext)
 		end
 	end
 
@@ -265,13 +262,19 @@ redef class AExternPropdef
 	# but will be used mainly by the FFI itself.
 	#
 	# The developper can aso customize the JNIEnv used by the FFI by redefing `Sys::jni_env`.
-	private fun insert_articifial_callbacks(toolcontext: ToolContext)
+	private fun insert_artificial_callbacks(toolcontext: ToolContext)
 	do
 		var fcc = foreign_callbacks
 		assert fcc != null
 
 		var modelbuilder = toolcontext.modelbuilder
 		var mmodule = mpropdef.mclassdef.mmodule
+
+		# We use callbacks from the C FFI since they will be called from generated C
+		var c_language_visitor = toolcontext.ffi_language_assignation_phase.as(FFILanguageAssignationPhase).c_language
+		if not mmodule.ffi_callbacks.keys.has(c_language_visitor) then
+			mmodule.ffi_callbacks[c_language_visitor] = new HashSet[NitniCallback]
+		end
 
 		# Pointer::sys
 		var pointer_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Pointer")
@@ -281,7 +284,7 @@ redef class AExternPropdef
 
 		var explicit_call = new MExplicitCall(pointer_class.mclass_type, pointer_sys_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
-		explicit_call.fill_type_for(fcc, mmodule)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
 
 		# Sys::jni_env
 		var sys_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Sys")
@@ -292,6 +295,16 @@ redef class AExternPropdef
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_env_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
+
+		# Sys::load_jclass
+		var sys_jni_load_jclass_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "load_jclass")
+		assert sys_jni_load_jclass_meth != null
+		assert sys_jni_load_jclass_meth isa MMethod
+
+		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_load_jclass_meth, mmodule)
+		fcc.callbacks.add(explicit_call)
+		mmodule.ffi_callbacks[c_language_visitor].add(explicit_call)
 		explicit_call.fill_type_for(fcc, mmodule)
 	end
 end
@@ -375,33 +388,32 @@ end
 
 redef class NitniCallback
 	# Compile C and Java code to implement this callback
-	fun compile_callback_to_java(nmodule: AModule, ccu: CCompilationUnit) do end
+	fun compile_callback_to_java(mmodule: MModule, mainmodule: MModule, ccu: CCompilationUnit) do end
 
 	# Returns the list of C functions to link with extern Java methods, as required
 	# to enable this callback from Java code.
 	# 
-	# Return used by `AModule::ensure_linking_callback_methods`
+	# Return used by `MModule::ensure_linking_callback_methods`
 	#
 	# TODO we return an Array to support cast and other features like that
 	fun jni_methods_declaration(from_module: MModule): Array[String] do return new Array[String]
 end
 
 redef class MExplicitCall
-	redef fun compile_callback_to_java(nmodule, ccu)
+	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
-		var mmodule = nmodule.mmodule.as(not null)
 
 		# In C, indirection implementing the Java extern methods
 		var csignature = mproperty.build_c_implementation_signature(recv_mtype, mmodule, "___indirect", long_signature, from_java_call_context)
 		var cf = new CFunction("JNIEXPORT {csignature}")
-		cf.exprs.add "\t{mproperty.build_ccall(recv_mtype, mmodule, null, long_signature, from_java_call_context, null)}\n"
+		cf.exprs.add "\t{mproperty.build_ccall(recv_mtype, mainmodule, null, long_signature, from_java_call_context, null)}\n"
 		ccu.add_local_function cf
 
 		# In Java, declare the extern method as a private static local method
-		var java_signature = mproperty.build_csignature(recv_mtype, mmodule, null, short_signature, java_call_context)
-		nmodule.java_file.class_content.add "private native static {java_signature};\n"
+		var java_signature = mproperty.build_csignature(recv_mtype, mainmodule, null, short_signature, java_call_context)
+		mmodule.java_file.class_content.add "private native static {java_signature};\n"
 	end
 
 	redef fun jni_methods_declaration(from_mmodule)
@@ -423,34 +435,35 @@ redef class MType
 	#
 	# * Primitives common to both languages use their Java primitive type
 	# * Nit extern Java classes are reprensented by their full Java type
-	# * Other Nit objects are represented by `long` in Java. It holds the
+	# * Other Nit objects are represented by `int` in Java. It holds the
 	#	pointer to the underlying C structure.
 	#	TODO create static Java types to store and hide the pointer
-	private fun java_type: String do return "long"
+	private fun java_type: String do return "int"
 
 	# JNI type name (in C)
 	#
 	# So this is a C type, usually defined in `jni.h`
-	private fun jni_type: String do return "jlong"
+	private fun jni_type: String do return "jint"
 
 	# JNI short type name (for signatures)
 	# 
 	# Is used by `MMethod::build_jni_format` to pass a Java method signature
 	# to the JNI function `GetStaticMetodId`.
-	private fun jni_format: String do return "J"
+	private fun jni_format: String do return "I"
 
 	# Type name appearing within JNI function names.
 	#
 	# Used by `JavaLanguage::compile_extern_method` when calling JNI's `CallStatic*Method`.
 	# This strategy is used by JNI to type the return of callbacks to Java.
-	private fun jni_signature_alt: String do return "Long"
+	private fun jni_signature_alt: String do return "Int"
 end
 
 redef class MClassType
 	redef fun java_type
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return ftype.java_type
+		if ftype isa ForeignJavaType then return ftype.java_type.
+			replace('/', ".").replace('$', ".").replace(' ', "")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "int"
@@ -484,7 +497,7 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return "Object"
-		if mclass.name == "Bool" then return "Bool"
+		if mclass.name == "Bool" then return "Boolean"
 		if mclass.name == "Char" then return "Char"
 		if mclass.name == "Int" then return "Int"
 		if mclass.name == "Float" then return "Double"
@@ -521,6 +534,7 @@ redef class MMethod
 		else
 			var return_mtype = msignature.return_mtype
 			if return_mtype != null then
+				return_mtype = return_mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
 				format.add return_mtype.jni_format
 			else format.add "V"
 		end

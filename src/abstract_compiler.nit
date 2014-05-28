@@ -20,7 +20,6 @@ module abstract_compiler
 import literal
 import typing
 import auto_super_init
-import frontend
 import platform
 import c_tools
 
@@ -30,6 +29,8 @@ redef class ToolContext
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	# --no-main
+	var opt_no_main: OptionBool = new OptionBool("Do not generate main entry point", "--no-main")
 	# --cc-paths
 	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
@@ -42,8 +43,8 @@ redef class ToolContext
 	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
 	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
-	# --no-check-initialization
-	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+	# --no-check-attr-isset
+	var opt_no_check_attr_isset: OptionBool = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
 	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 	# --no-check-autocast
@@ -54,19 +55,24 @@ redef class ToolContext
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
 	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
+	# --isset-checks-metrics
+	var opt_isset_checks_metrics: OptionBool = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
 	# --stacktrace
 	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
+	# --release
+	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
-		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
-		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
+		self.option_context.add_option(self.opt_release)
 	end
 
 	redef fun process_options(args)
@@ -128,21 +134,18 @@ class MakefileToolchain
 	# The list is initially set with :
 	#   * the toolcontext --cc-path option
 	#   * the NIT_CC_PATH environment variable
-	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	#   * `toolcontext.nit_dir`
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
 	protected fun gather_cc_paths
 	do
 		# Look for the the Nit clib path
-		var path_env = "NIT_DIR".environ
-		if not path_env.is_empty then
+		var path_env = toolcontext.nit_dir
+		if path_env != null then
 			var libname = "{path_env}/clib"
 			if libname.file_exists then cc_paths.add(libname)
 		end
-
-		var libname = "{sys.program_name.dirname}/../clib"
-		if libname.file_exists then cc_paths.add(libname.simplify_path)
 
 		if cc_paths.is_empty then
 			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
@@ -546,11 +549,18 @@ abstract class AbstractCompiler
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
+		var platform = mainmodule.target_platform
 
 		if ost == null then
-			ost = "nitstack"
+			if platform != null and not platform.supports_libunwind then
+				ost = "none"
+			else
+				ost = "nitstack"
+			end
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
+
+		if platform != null and platform.no_main then modelbuilder.toolcontext.opt_no_main.value = true
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
@@ -581,6 +591,13 @@ abstract class AbstractCompiler
 			v.compiler.header.add_decl("extern long count_invoke_by_tables;")
 			v.compiler.header.add_decl("extern long count_invoke_by_direct;")
 			v.compiler.header.add_decl("extern long count_invoke_by_inline;")
+		end
+
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add_decl("long count_attr_reads = 0;")
+			v.add_decl("long count_isset_checks = 0;")
+			v.compiler.header.add_decl("extern long count_attr_reads;")
+			v.compiler.header.add_decl("extern long count_isset_checks;")
 		end
 
 		v.add_decl("void sig_handler(int signo)\{")
@@ -621,7 +638,11 @@ abstract class AbstractCompiler
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
-		v.add_decl("int main(int argc, char** argv) \{")
+		if modelbuilder.toolcontext.opt_no_main.value then
+			v.add_decl("int nit_main(int argc, char** argv) \{")
+		else
+			v.add_decl("int main(int argc, char** argv) \{")
+		end
 
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
@@ -682,6 +703,12 @@ abstract class AbstractCompiler
 			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
 			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
 		end
+
+		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
+			v.add("printf(\"# dynamic attribute reads: %ld\\n\", count_attr_reads);")
+			v.add("printf(\"# dynamic isset checks: %ld\\n\", count_isset_checks);")
+		end
+
 		v.add("return 0;")
 		v.add("\}")
 	end
@@ -1540,6 +1567,7 @@ redef class MMethodDef
 	# Can the body be inlined?
 	fun can_inline(v: VISITOR): Bool
 	do
+		if is_abstract then return true
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
@@ -1612,13 +1640,16 @@ redef class APropdef
 	fun can_inline: Bool do return true
 end
 
-redef class AConcreteMethPropdef
+redef class AMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		for i in [0..mpropdef.msignature.arity[ do
-			var variable = self.n_signature.n_params[i].variable.as(not null)
-			v.assign(v.variable(variable), arguments[i+1])
+		if mpropdef.is_abstract then
+			var cn = v.class_name_string(arguments.first)
+			v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+			v.add_raw_abort
+			return
 		end
+
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
@@ -1631,7 +1662,23 @@ redef class AConcreteMethPropdef
 				v.compile_callsite(auto_super_init, args)
 			end
 		end
-		v.stmt(self.n_block)
+
+		var n_block = n_block
+		if n_block != null then
+			for i in [0..mpropdef.msignature.arity[ do
+				var variable = self.n_signature.n_params[i].variable.as(not null)
+				v.assign(v.variable(variable), arguments[i+1])
+			end
+			v.stmt(n_block)
+		else if mpropdef.is_intern then
+			compile_intern_to_c(v, mpropdef, arguments)
+		else if mpropdef.is_extern then
+			if mpropdef.mproperty.is_init then
+				compile_externinit_to_c(v, mpropdef, arguments)
+			else
+				compile_externmeth_to_c(v, mpropdef, arguments)
+			end
+		end
 	end
 
 	redef fun can_inline
@@ -1643,10 +1690,8 @@ redef class AConcreteMethPropdef
 		if nblock isa ABlockExpr and nblock.n_expr.length == 0 then return true
 		return false
 	end
-end
 
-redef class AInternMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_intern_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
@@ -1879,10 +1924,8 @@ redef class AInternMethPropdef
 		v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
-end
 
-redef class AExternMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_externmeth_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var externname
 		var nextern = self.n_extern
@@ -1911,10 +1954,8 @@ redef class AExternMethPropdef
 			v.ret(res)
 		end
 	end
-end
 
-redef class AExternInitPropdef
-	redef fun compile_to_c(v, mpropdef, arguments)
+	fun compile_externinit_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		var externname
 		var nextern = self.n_extern
@@ -1989,11 +2030,11 @@ redef class AClassdef
 		if mpropdef == self.mfree_init then
 			var super_inits = self.super_inits
 			if super_inits != null then
-				assert arguments.length == 1
+				var args_of_super = arguments
+				if arguments.length > 1 then args_of_super = [arguments.first]
 				for su in super_inits do
-					v.send(su, arguments)
+					v.send(su, args_of_super)
 				end
-				return
 			end
 			var recv = arguments.first
 			var i = 1
@@ -2008,15 +2049,6 @@ redef class AClassdef
 			abort
 		end
 	end
-end
-
-redef class ADeferredMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments) do
-		var cn = v.class_name_string(arguments.first)
-		v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
-		v.add_raw_abort
-	end
-	redef fun can_inline do return true
 end
 
 redef class AExpr
@@ -2550,7 +2582,7 @@ redef class ASuperExpr
 		if callsite != null then
 			# Add additionnals arguments for the super init call
 			if args.length == 1 then
-				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+				for i in [0..callsite.msignature.arity[ do
 					args.add(v.frame.arguments[i+1])
 				end
 			end
@@ -2684,3 +2716,44 @@ redef class MModule
 	# Note: can return null instead of an empty set
 	fun collect_linker_libs: nullable Set[String] do return null
 end
+
+# Create a tool context to handle options and paths
+var toolcontext = new ToolContext
+
+var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+toolcontext.option_context.add_option(opt_mixins)
+
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+
+# We do not add other options, so process them now!
+toolcontext.process_options(args)
+
+# We need a model to collect stufs
+var model = new Model
+# An a model builder to parse files
+var modelbuilder = new ModelBuilder(model, toolcontext)
+
+var arguments = toolcontext.option_context.rest
+if arguments.length > 1 then
+	print "Too much arguments: {arguments.join(" ")}"
+	print toolcontext.tooldescription
+	exit 1
+end
+var progname = arguments.first
+
+# Here we load an process all modules passed on the command line
+var mmodules = modelbuilder.parse([progname])
+mmodules.add_all modelbuilder.parse(opt_mixins.value)
+
+if mmodules.is_empty then return
+modelbuilder.run_phases
+
+var mainmodule
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+	mainmodule.set_imported_mmodules(mmodules)
+end
+
+toolcontext.run_global_phases(mmodules)

@@ -55,9 +55,6 @@ class NitIndex
 		model = new Model
 		mbuilder = new ModelBuilder(model, toolcontext)
 
-		# Here we load an process std modules
-		#var dir = "NIT_DIR".environ
-		#var mmodules = modelbuilder.parse_and_build(["{dir}/lib/standard/standard.nit"])
 		var mmodules = mbuilder.parse([arguments.first])
 		if mmodules.is_empty then return
 		mbuilder.run_phases
@@ -104,7 +101,7 @@ class NitIndex
 
 	fun prompt do
 		printn ">> "
-		search(stdin.read_line)
+		search(sys.stdin.read_line)
 	end
 
 	fun search(entry: String) do
@@ -697,10 +694,9 @@ redef class MMethodDef
 		if not mproperty.is_init then res.append("fun ")
 		res.append(mproperty.to_console.bold)
 		if msignature != null then res.append(msignature.to_console)
-		# FIXME: modifiers should be accessible via the model
-		#if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
-		#if self isa AInternMethPropdef then ret = "{ret} is intern"
-		#if self isa AExternMethPropdef then ret = "{ret} is extern"
+		if is_abstract then res.append " is abstract"
+		if is_intern then res.append " is intern"
+		if is_extern then res.append " is extern"
 		return res.to_s
 	end
 end

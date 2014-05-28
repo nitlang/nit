@@ -105,32 +105,10 @@ redef class ModelBuilder
 				inhc = inhc2
 			end
 		end
-		if combine.is_empty and inhc != null then
-			# TODO: actively inherit the consturctor
-			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
-			mclassdef.mclass.inherit_init_from = inhc
-			return
-		end
-		if not combine.is_empty and inhc != null then
-			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
-			return
-		end
-
-		if not combine.is_empty then
-			nclassdef.super_inits = combine
-			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
-			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-			var mparameters = new Array[MParameter]
-			var msignature = new MSignature(mparameters, null)
-			mpropdef.msignature = msignature
-			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
-			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
-			return
-		end
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
+		var anode: nullable ANode = null
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
 				if npropdef.mpropdef == null then return # Skip broken attribute
@@ -139,7 +117,37 @@ redef class ModelBuilder
 				if ret_type == null then return
 				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
+				if anode == null then anode = npropdef
 			end
+		end
+		if anode == null then anode = nclassdef
+
+		if combine.is_empty and inhc != null then
+			if not mparameters.is_empty then
+				self.error(anode,"Error: {mclassdef} cannot inherit constructors from {inhc} because there is attributes without initial values: {mparameters.join(", ")}")
+				return
+			end
+
+			# TODO: actively inherit the consturctor
+			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+			mclassdef.mclass.inherit_init_from = inhc
+			return
+		end
+
+		if not combine.is_empty and inhc != null then
+			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
+			return
+		end
+
+		if not combine.is_empty then
+			if mparameters.is_empty and combine.length == 1 then
+				# No need to create a local init, the inherited one is enough
+				inhc = combine.first.intro_mclassdef.mclass
+				mclassdef.mclass.inherit_init_from = inhc
+				self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
+				return
+			end
+			nclassdef.super_inits = combine
 		end
 
 		var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
@@ -399,21 +407,23 @@ redef class AMethPropdef
 
 	redef fun build_property(modelbuilder, nclassdef)
 	do
-		var is_init = self isa AInitPropdef
+		var n_kwinit = n_kwinit
+		var n_kwnew = n_kwnew
+		var is_init = n_kwinit != null or n_kwnew != null
 		var mclassdef = nclassdef.mclassdef.as(not null)
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
 		if amethodid == null then
-			if self isa AMainMethPropdef then
+			if not is_init then
 				name = "main"
 				name_node = self
-			else if self isa AConcreteInitPropdef then
+			else if n_kwinit != null then
 				name = "init"
-				name_node = self.n_kwinit
-			else if self isa AExternInitPropdef then
+				name_node = n_kwinit
+			else if n_kwnew != null then
 				name = "init"
-				name_node = self.n_kwnew
+				name_node = n_kwnew
 			else
 				abort
 			end
@@ -436,7 +446,7 @@ redef class AMethPropdef
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
-			mprop.is_new = self isa AExternInitPropdef
+			mprop.is_new = n_kwnew != null
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
 			if n_kwredef == null then
@@ -555,6 +565,7 @@ redef class AMethPropdef
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
 		mpropdef.is_intern = self isa AInternMethPropdef
+		mpropdef.is_extern = self isa AExternPropdef
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
@@ -948,6 +959,7 @@ redef class ATypePropdef
 
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		set_doc(mpropdef)
 	end
 
