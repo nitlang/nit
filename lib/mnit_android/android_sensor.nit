@@ -31,16 +31,13 @@
 # The result is you get all type of SensorEvent (ASensorAccelerometer, ASensorMagneticField ...) in the input method of your app
 module android_sensor
 
+import android
 import mnit
 
 in "C header" `{
 	#include <jni.h>
 	#include <android/sensor.h>
 	#include <android_native_app_glue.h>
-`}
-
-in "C" `{
-	extern struct android_app *mnit_java_app;
 `}
 
 extern class ASensorType `{int`}
@@ -69,7 +66,7 @@ extern class ASensorManager `{ASensorManager*`}
 	`}
 
 	# Create a new sensor event queue and associate it with a looper
-	fun create_event_queue(app: NdkAndroidApp): ASensorEventQueue `{
+	fun create_event_queue(app: NativeAppGlue): ASensorEventQueue `{
 		return ASensorManager_createEventQueue(recv, app->looper, LOOPER_ID_USER, NULL, NULL);
 	`}
 
@@ -224,13 +221,5 @@ extern class ASensorEvents `{ASensorEvent*`}
 
 	fun [](index: Int): ASensorEvent `{
 		return recv+index;
-	`}
-end
-
-extern class NdkAndroidApp `{struct android_app*`}
-
-	# FIXME: remove when android_app fixed
-	new `{
-		return mnit_java_app;
 	`}
 end
