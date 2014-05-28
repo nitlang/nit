@@ -38,7 +38,59 @@ abstract class ANode
 	# Parent of the node in the AST
 	var parent: nullable ANode = null
 
-	# Protect form invalid instantiation of nodes
+	# The topmost ancestor of the element
+	# This just apply `parent` until the first one
+	fun root: ANode
+	do
+		var res = self
+		loop
+			var p = res.parent
+			if p == null then return res
+			res = p
+		end
+	end
+
+	# The most specific common parent between `self` and `other`
+	# Return null if the two node are unrelated (distinct root)
+	fun common_parent(other: ANode): nullable ANode
+	do
+		# First, get the same depth
+		var s: nullable ANode = self
+		var o: nullable ANode = other
+		var d = s.depth - o.depth
+		while d > 0 do
+			s = s.parent
+			d -= 1
+		end
+		while d < 0 do
+			o = o.parent
+			d += 1
+		end
+		assert o.depth == s.depth
+		# Second, go up until same in found
+		while s != o do
+			s = s.parent
+			o = o.parent
+		end
+		return s
+	end
+
+	# Number of nodes between `self` and the `root` of the AST
+	# ENSURE `self == self.root implies result == 0 `
+	# ENSURE `self != self.root implies result == self.parent.depth + 1`
+	fun depth: Int
+	do
+		var n = self
+		var res = 0
+		loop
+			var p = n.parent
+			if p == null then return res
+			n = p
+			res += 1
+		end
+	end
+
+	# Protect from invalid instantiation of nodes
 	private init do end
 
 	# Replace a child with an other node in the AST
