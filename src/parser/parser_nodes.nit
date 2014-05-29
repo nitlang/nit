@@ -524,13 +524,13 @@ class TMinuseq
 	super TokenOperator
 end
 class TDotdotdot
-	super TokenOperator
+	super Token
 end
 class TDotdot
-	super TokenOperator
+	super Token
 end
 class TDot
-	super TokenOperator
+	super Token
 end
 class TPlus
 	super TokenOperator
