@@ -453,7 +453,7 @@ class SeparateErasureCompilerVisitor
 			self.add("if (!{cond}) \{")
 			#var x = self.class_name_string(res)
 			#var y = self.class_name_string(arguments.first)
-			#self.add("fprintf(stderr, \"Erasure cast: expected {mtype} (self is %s), got %s for {res}\\n\", {y}, {x});")
+			#self.add("PRINT_ERROR(\"Erasure cast: expected {mtype} (self is %s), got %s for {res}\\n\", {y}, {x});")
 			self.add_abort("Cast failed")
 			self.add("\}")
 		end

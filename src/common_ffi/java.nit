@@ -66,7 +66,7 @@ class JavaLanguage
 	// retrieve the implementation Java class
 	java_class = Sys_load_jclass(sys, "{{{mmodule.impl_java_class_name}}}");
 	if (java_class == NULL) {
-		fprintf(stderr, "Nit FFI with Java error: failed to load class.\\n");
+		PRINT_ERROR("Nit FFI with Java error: failed to load class.\\n");
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
@@ -82,7 +82,7 @@ class JavaLanguage
 	// retreive the implementation static function
 	java_meth_id = (*nit_ffi_jni_env)->GetStaticMethodID(nit_ffi_jni_env, java_class, "{{{java_fun_name}}}", "{{{jni_format}}}");
 	if (java_meth_id == NULL) {
-		fprintf(stderr, "Nit FFI with Java error: Java implementation not found.\\n");
+		PRINT_ERROR("Nit FFI with Java error: Java implementation not found.\\n");
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
@@ -131,7 +131,7 @@ class JavaLanguage
 	// execute implementation code
 	{{{ccall}}}
 	if ((*nit_ffi_jni_env)->ExceptionCheck(nit_ffi_jni_env)) {
-		fprintf(stderr, "Nit FFI with Java error: Exception after call.\\n");
+		PRINT_ERROR("Nit FFI with Java error: Exception after call.\\n");
 		(*nit_ffi_jni_env)->ExceptionDescribe(nit_ffi_jni_env);
 		exit(1);
 	}
@@ -225,7 +225,7 @@ redef class MModule
 	};
 	jint res = (*env)->RegisterNatives(env, jclazz, methods, n_methods);
 	if (res != JNI_OK) {
-		fprintf(stderr, "RegisterNatives failed\\n");
+		PRINT_ERROR("RegisterNatives failed\\n");
 		(*env)->ExceptionDescribe(env);
 		exit(1);
 	}

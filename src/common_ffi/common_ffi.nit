@@ -87,6 +87,13 @@ redef class AModule
 
 		ffi_ccu.header_c_base.add( "#include \"{mmodule.name}._nitni.h\"\n" )
 
+		ffi_ccu.body_decl.add("#ifdef ANDROID\n")
+		ffi_ccu.body_decl.add("	#include <android/log.h>\n")
+		ffi_ccu.body_decl.add("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)\n")
+		ffi_ccu.body_decl.add("#else\n")
+		ffi_ccu.body_decl.add("	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)\n")
+		ffi_ccu.body_decl.add("#endif\n")
+
 		for nclassdef in n_classdefs do
 			# Does it declares an extern type?
 			if nclassdef isa AStdClassdef and nclassdef.n_extern_code_block != null then

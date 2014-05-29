@@ -496,6 +496,12 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
 		self.header.add_decl("#include \"gc_chooser.h\"")
+		self.header.add_decl("#ifdef ANDROID")
+		self.header.add_decl("	#include <android/log.h>")
+		self.header.add_decl("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)")
+		self.header.add_decl("#else")
+		self.header.add_decl("	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)")
+		self.header.add_decl("#endif")
 
 		compile_header_structs
 		compile_nitni_structs
@@ -595,7 +601,7 @@ abstract class AbstractCompiler
 		end
 
 		v.add_decl("void sig_handler(int signo)\{")
-		v.add_decl("printf(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl("PRINT_ERROR(\"Caught signal : %s\\n\", strsignal(signo));")
 		v.add_decl("show_backtrace(signo);")
 		v.add_decl("\}")
 
@@ -609,23 +615,23 @@ abstract class AbstractCompiler
 			v.add_decl("char* procname = malloc(sizeof(char) * 100);")
 			v.add_decl("unw_getcontext(&uc);")
 			v.add_decl("unw_init_local(&cursor, &uc);")
-			v.add_decl("printf(\"-------------------------------------------------\\n\");")
-			v.add_decl("printf(\"--   Stack Trace   ------------------------------\\n\");")
-			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
+			v.add_decl("PRINT_ERROR(\"--   Stack Trace   ------------------------------\\n\");")
+			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
 			if ost == "nitstack" then
 			v.add_decl("	const char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
-			v.add_decl("		printf(\"` %s\\n\", recv);")
+			v.add_decl("		PRINT_ERROR(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
-			v.add_decl("		printf(\"` %s\\n\", procname);")
+			v.add_decl("		PRINT_ERROR(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
 			else
-			v.add_decl("	printf(\"` %s \\n\",procname);")
+			v.add_decl("	PRINT_ERROR(\"` %s \\n\",procname);")
 			end
 			v.add_decl("\}")
-			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
 		end
@@ -1220,16 +1226,16 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
-		self.add("fprintf(stderr, \"Runtime error: %s\", \"{message.escape_to_c}\");")
+		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
 		add_raw_abort
 	end
 
 	fun add_raw_abort
 	do
 		if self.current_node != null and self.current_node.location.file != null then
-			self.add("fprintf(stderr, \" (%s:%d)\\n\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+			self.add("PRINT_ERROR(\" (%s:%d)\\n\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
 		else
-			self.add("fprintf(stderr, \"\\n\");")
+			self.add("PRINT_ERROR(\"\\n\");")
 		end
 		self.add("show_backtrace(1);")
 	end
@@ -1240,7 +1246,7 @@ abstract class AbstractCompilerVisitor
 		var res = self.type_test(value, mtype, tag)
 		self.add("if (unlikely(!{res})) \{")
 		var cn = self.class_name_string(value)
-		self.add("fprintf(stderr, \"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
+		self.add("PRINT_ERROR(\"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
 		self.add_raw_abort
 		self.add("\}")
 	end
@@ -1627,7 +1633,7 @@ end
 redef class APropdef
 	fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
-		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
+		v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
 	end
 
@@ -1639,7 +1645,7 @@ redef class AMethPropdef
 	do
 		if mpropdef.is_abstract then
 			var cn = v.class_name_string(arguments.first)
-			v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
 			v.add_raw_abort
 			return
 		end
@@ -1915,7 +1921,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_argv[{arguments[1]}]", ret.as(not null)))
 			return
 		end
-		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
+		v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
 
@@ -1924,7 +1930,7 @@ redef class AMethPropdef
 		var externname
 		var nextern = self.n_extern
 		if nextern == null then
-			v.add("fprintf(stderr, \"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
+			v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
 			v.add("show_backtrace(1);")
 			return
 		end
@@ -1954,7 +1960,7 @@ redef class AMethPropdef
 		var externname
 		var nextern = self.n_extern
 		if nextern == null then
-			v.add("printf(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
+			v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
 			v.add("show_backtrace(1);")
 			return
 		end
@@ -2050,7 +2056,7 @@ redef class AExpr
 	# Do not call this method directly, use `v.expr` instead
 	private fun expr(v: AbstractCompilerVisitor): nullable RuntimeVariable
 	do
-		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
+		v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
 		var mtype = self.mtype
 		if mtype == null then
 			return null
