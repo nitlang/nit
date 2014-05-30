@@ -57,5 +57,5 @@ bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="nc_k"></
 <span class="nc_i">block</span>
 </span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
 </span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="nc_i">to_s</span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_v nc_i"></span><span class="nc_t"></span><span class="nc_t">A</span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">var</span> <span class="nc_v nc_i">a</span> = <span class="nc_k">new</span> <span class="nc_t">A</span>
-<span class="nc_k">assert</span> <span class="nc_i">a</span><span class="nc_o">.</span><span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
+<span class="nc_k">assert</span> <span class="nc_i">a</span>.<span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
 </span></pre></div></body></html>
