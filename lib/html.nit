@@ -194,7 +194,12 @@ class HTMLTag
 	#     var ul = new HTMLTag("ul")
 	#     ul.add(new HTMLTag("li"))
 	#     assert ul.write_to_string    == "<ul><li></li></ul>"
-	fun add(child: HTMLTag) do children.add(child)
+	# returns `self` for fluent programming
+	fun add(child: HTMLTag): HTMLTag
+	do
+		children.add(child)
+		return self
+	end
 
 	# Create a new HTMLTag child and return it
 	#
