@@ -196,6 +196,19 @@ class HTMLTag
 	#     assert ul.write_to_string    == "<ul><li></li></ul>"
 	fun add(child: HTMLTag) do children.add(child)
 
+	# Create a new HTMLTag child and return it
+	#
+	#     var ul = new HTMLTag("ul")
+	#     ul.open("li").append("1").append("2")
+	#     ul.open("li").append("3").append("4")
+	#     assert ul.write_to_string    == "<ul><li>12</li><li>34</li></ul>"
+	fun open(tag: String): HTMLTag
+	do
+		var res = new HTMLTag(tag)
+		add(res)
+		return res
+	end
+
 	# List of children HTML elements
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
 
