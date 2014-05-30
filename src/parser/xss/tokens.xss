@@ -38,27 +38,6 @@ end
 $ end template
 
 $ template make_tokens()
-
-redef class Token
-    var _text: nullable String
-
-    redef fun text
-    do
-        var res = _text
-        if res != null then return res
-        res = location.text
-	_text = res
-	return res
-    end
-
-    redef fun text=(text)
-    do
-        _text = text
-    end
-
-    fun parser_index: Int is abstract
-end
-
 $ foreach {//token}
 $ if {@parser_index}
 redef class @ename
@@ -75,47 +54,4 @@ end
 
 $ end if
 $ end foreach
-
-redef class EOF
-    redef fun parser_index: Int
-    do
-	return ${tokens/eof/@parser_index}
-    end
-
-    init init_tk(loc: Location)
-    do
-        _text = ""
-		_location = loc
-    end
-end
-
-redef class PError
-    readable var _message: String
-
-    init init_error(message: String, loc: Location)
-    do
-		init_tk(loc)
-		_message = message
-    end
-end
-
-redef class PLexerError
-    readable var _string: String
-
-    init init_lexer_error(message: String, loc: Location, string: String)
-    do
-		init_error(message, loc)
-		_string = string
-    end
-end
-
-redef class PParserError
-    readable var _token: Token
-
-    init init_parser_error(message: String, loc: Location, token: Token)
-    do
-		init_error(message, loc)
-		_token = token
-    end
-end
 $ end template

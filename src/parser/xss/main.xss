@@ -41,7 +41,9 @@ intrude import $usermodule
 $ else
 intrude import parser_abs
 $ end
+intrude import lexer_work
 private import tables
+
 $ call make_tokens()
 $ call make_lexer()
 $ end output
@@ -68,6 +70,7 @@ $ output 'parser.nit'
 module parser
 
 intrude import parser_prod
+intrude import parser_work
 import tables
 $ call make_parser()
 $ end output

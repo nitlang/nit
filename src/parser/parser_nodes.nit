@@ -32,13 +32,65 @@ abstract class ANode
 	# Display a message for the colored location of the node
 	fun debug(message: String)
 	do
-		print "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}"
+		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
 	end
 
 	# Parent of the node in the AST
 	var parent: nullable ANode = null
 
-	# Protect form invalid instantiation of nodes
+	# The topmost ancestor of the element
+	# This just apply `parent` until the first one
+	fun root: ANode
+	do
+		var res = self
+		loop
+			var p = res.parent
+			if p == null then return res
+			res = p
+		end
+	end
+
+	# The most specific common parent between `self` and `other`
+	# Return null if the two node are unrelated (distinct root)
+	fun common_parent(other: ANode): nullable ANode
+	do
+		# First, get the same depth
+		var s: nullable ANode = self
+		var o: nullable ANode = other
+		var d = s.depth - o.depth
+		while d > 0 do
+			s = s.parent
+			d -= 1
+		end
+		while d < 0 do
+			o = o.parent
+			d += 1
+		end
+		assert o.depth == s.depth
+		# Second, go up until same in found
+		while s != o do
+			s = s.parent
+			o = o.parent
+		end
+		return s
+	end
+
+	# Number of nodes between `self` and the `root` of the AST
+	# ENSURE `self == self.root implies result == 0 `
+	# ENSURE `self != self.root implies result == self.parent.depth + 1`
+	fun depth: Int
+	do
+		var n = self
+		var res = 0
+		loop
+			var p = n.parent
+			if p == null then return res
+			n = p
+			res += 1
+		end
+	end
+
+	# Protect from invalid instantiation of nodes
 	private init do end
 
 	# Replace a child with an other node in the AST
@@ -185,12 +237,31 @@ abstract class Token
 	# May have disapeared in the AST
 	var next_token: nullable Token = null
 
+	# The verbatim blank text between `prev_token` and `self`
+	fun blank_before: String
+	do
+		if prev_token == null then return ""
+		var from = prev_token.location.pend+1
+		var to = location.pstart
+		return location.file.string.substring(from,to-from)
+	end
+
 	redef fun to_s: String do
 		return "'{text}'"
 	end
 
 	redef fun visit_all(v: Visitor) do end
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
+end
+
+redef class SourceFile
+	# The first token parser by the lexer
+	# May have disapeared in the final AST
+	var first_token: nullable Token = null
+
+	# The first token parser by the lexer
+	# May have disapeared in the final AST
+	var last_token: nullable Token = null
 end
 
 # Ancestor of all productions
@@ -453,13 +524,13 @@ class TMinuseq
 	super TokenOperator
 end
 class TDotdotdot
-	super TokenOperator
+	super Token
 end
 class TDotdot
-	super TokenOperator
+	super Token
 end
 class TDot
-	super TokenOperator
+	super Token
 end
 class TPlus
 	super TokenOperator
