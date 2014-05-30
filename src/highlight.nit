@@ -17,45 +17,18 @@ module highlight
 
 import modelize_property
 import frontend
-import parser_util
 import html
+import pipeline
+import astutil
 
 # Visitor used to produce a HTML tree based on a AST on a `Source`
 class HighlightVisitor
-	super Visitor
-
 	# The root of the HTML hierarchy
 	var html = new HTMLTag("span")
-
-	private var token_head: HTMLTag
-
-	private var prod_head: HTMLTag
-
-	private var prod_root: nullable HTMLTag
 
 	# Is the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
 	# Used to have a really huge and verbose HTML (mainly for debug)
 	var with_ast writable = false
-
-	# Enter in a new node
-	# Exit is automatic
-	fun enter(n: HTMLTag)
-	do
-		if prod_root != null then
-			prod_head.add(n)
-			prod_head = n
-		else
-			prod_root = n
-			prod_head = n
-		end
-	end
-
-	# The position in the source file.
-	# Used to print parts of the source betwen tokens of the AST
-	private var pos = 0
-
-	# The line position in the source file.
-	private var line_pos = 0
 
 	# The first line to generate, null if start at the first line
 	var first_line: nullable Int writable = null
@@ -66,88 +39,125 @@ class HighlightVisitor
 	init
 	do
 		html.add_class("nitcode")
-		token_head = html
-		prod_head = html
 	end
 
-	# Used to remember the first node, thus knowing when the whole visit is over
-	private var first_node: nullable ANode
-
-	private var seen_token = new HashSet[Token]
-
-	private fun process_upto_token(node: Token)
+	fun enter_visit(n: ANode)
 	do
-		# recursively process previous tokens
-		var prev = node.prev_token
-		if prev != null and not seen_token.has(prev) then
-			process_upto_token(prev)
-			prev.accept_highlight_visitor(self)
-		end
-
-		# Add text between `last_token` and `node`
-		var pstart = node.location.pstart
-		var line_start = node.location.line_start
-		var line_end = node.location.line_end
-		if pos < pstart and (first_line == null or first_line <= line_start) and (last_line == null or last_line >= line_end) then
-			var text = node.location.file.string.substring(pos, pstart-pos)
-			token_head.append(text)
-			#node.debug("WRT: {token_head.classes} << '{text.escape_to_c}' ")
-		end
-		pos = node.location.pend + 1
-		if pos < pstart then
-			node.debug("pos={pos}, pstart={pstart}, pend={node.location.pend}")
-		end
-
-		seen_token.add node
+		n.parentize_tokens
+		var s = n.location.file
+		htmlize(s.first_token.as(not null), s.last_token.as(not null))
 	end
 
-	# Dubuging method
-	private fun where(node: ANode, tag: String)
+	# Produce HTML between two tokens
+	protected fun htmlize(first_token, last_token: Token)
 	do
-		var pr = prod_root
-		if pr == null then
-			node.debug "{tag}-> {token_head.classes} : {prod_head.classes}"
-		else
-			node.debug "{tag}-> {token_head.classes} : {pr.classes}..{prod_head.classes}"
-		end
-	end
+		var stack2 = new Array[HTMLTag]
+		var stack = new Array[Prod]
+		var closes = new Array[Prod]
+		var line = 0
+		var c: nullable Token = first_token
+		var hv = new HighlightVisitor
+		while c != null do
+			var starting
 
-	redef fun visit(node)
-	do
-		if first_node == null then first_node = node
+			# Handle start of line
+			var cline = c.location.line_start
+			if cline != line then
+				# Handle starting block productions,
+				# Because c could be a detached token, get prods in
+				# the first AST token
+				var c0 = c.first_token_in_line
+				starting = null
+				if c0 != null then starting = c0.starting_prods
+				if starting != null then for p in starting do
+					if not p.is_block then continue
+					var tag = p.make_tag(hv)
+					if tag == null then continue
+					tag.add_class("foldable")
+					var infobox = p.infobox(hv)
+					if infobox != null then tag.attach_infobox(infobox)
+					stack2.add(html)
+					html.add tag
+					html = tag
+					stack.add(p)
+				end
 
-		if node isa Token then
-			process_upto_token(node)
-
-			#where(node, "TOK")
-			var pr = prod_root
-			if pr != null then
-				#node.debug("ADD: {token_head.classes} << {pr.classes} ")
-				token_head.add(pr)
-				token_head = prod_head
-				prod_root = null
+				# Add a div for the whole line
+				var tag = new HTMLTag("span")
+				tag.attrs["id"] = "L{cline}"
+				tag.classes.add "line"
+				stack2.add(html)
+				html.add tag
+				html = tag
+				line = cline
 			end
-		end
 
-		var oldph = prod_head
-		#where(node, " IN")
-		node.accept_highlight_visitor(self)
-		#where(node, "OUT")
-		var pr = prod_root
-		if pr == null then
-			assert token_head == prod_head
-		else
-			assert token_head != prod_head
-			token_head.add(pr)
-			prod_root = null
-		end
-		prod_head = oldph
-		token_head = oldph
-		#where(node, " IS")
+			# Add the blank, verbatim
+			html.add_raw_html c.blank_before
 
-		if node == first_node then
-			html.append(node.location.file.string.substring_from(pos))
+			# Handle starting span production
+			starting = c.starting_prods
+			if starting != null then for p in starting do
+				if not p.is_span then continue
+				var tag = p.make_tag(hv)
+				if tag == null then continue
+				var infobox = p.infobox(hv)
+				if infobox != null then tag.attach_infobox(infobox)
+				stack2.add(html)
+				html.add tag
+				html = tag
+				stack.add(p)
+			end
+
+			# Add the token
+			if c isa TEol then 
+				html.append "\n"
+			else
+				var tag = c.make_tag(hv)
+				var pa = c.parent
+				var infobox = null
+				if c isa TId or c isa TClassid or c isa TAttrid or c isa TokenLiteral or c isa TokenOperator then
+					assert c != null
+					if pa != null then infobox = pa.decorate_tag(hv, tag, c)
+				else if c isa TComment and pa isa ADoc then
+					infobox = pa.decorate_tag(hv, tag, c)
+				end
+				if infobox != null then tag.attach_infobox(infobox)
+				html.add tag
+			end
+
+			# Handle ending span productions
+			var ending = c.ending_prods
+			if ending != null then for p in ending do
+				if not p.is_span then continue
+				if stack.is_empty or p != stack.last then continue
+				stack.pop
+				html = stack2.pop
+			end
+
+			# Handle end of line and end of file
+			var n = c.next_token
+			if c == last_token then n = null
+			if n == null or n.location.line_start != line  then
+				# closes the line div
+				html = stack2.pop
+
+				# close the block production divs
+				var c0 = c.last_token_in_line
+				ending = null
+				if c0 != null then ending = c0.ending_prods
+				if ending != null then for p in ending do
+					if not p.is_block then continue
+					if stack.is_empty or p != stack.last then continue
+					stack.pop
+					html = stack2.pop
+				end
+			end
+
+			c = n
 		end
+		assert stack.is_empty
+		assert stack2.is_empty
 	end
 
 	# Return a default CSS content related to CSS classes used in the `html` tree.
@@ -155,9 +165,12 @@ class HighlightVisitor
 	fun css_content: String
 	do
 		return """
-.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
-.nitcode a:hover { text-decoration: underline; } /* underline links */
-.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+.nitcode a { color: inherit; cursor:pointer; }
+.nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
+.nitcode .foldable { display: block } /* for block productions*/
+.nitcode .line{ display: block } /* for lines */
+.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
+.nitcode :target { background-color: #FFF3C2 } /* target highlight*/
 /* lexical raw tokens. independent of usage or semantic: */
 .nitcode .nc_c { color: gray; font-style: italic; } /* comment */
 .nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
@@ -184,71 +197,416 @@ class HighlightVisitor
 .nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
 
 .nitcode .nc_error { border: 1px red solid;} /* not used */
+.popover { max-width: 800px !important; }
 """
 	end
 end
 
-redef class ANode
-	private fun accept_highlight_visitor(v: HighlightVisitor)
+redef class HTMLTag
+	# Attach the infobox to the node by using BootStrap popover
+	fun attach_infobox(infobox: HInfoBox)
 	do
-		if v.with_ast then
-			var res = new HTMLTag("span")
-			res.add_class(class_name)
-			v.enter res
+		classes.add("popupable")
+		attrs["title"] = infobox.title
+		var href = infobox.href
+		if href != null then
+			attrs["data-title"] = """<a href="{{{href}}}">{{{infobox.title}}}</a>"""
 		end
-		visit_all(v)
-	end
-	private fun decorate_tag(res: HTMLTag, token: Token)
-	do
-		#debug("no decoration for {token.inspect}")
-		#res.add_class("nc_error")
+		attrs["data-content"] = infobox.content.write_to_string
+		attrs["data-toggle"] = "popover"
 	end
 end
 
+
+# A generic information container that can be used to decorate AST entities
+class HInfoBox
+	# The visitor used for contextualisation, if needed 
+	var visitor: HighlightVisitor
+
+	# A short title for the AST element
+	var title: String
+
+	# The primary link where the entity points
+	# null if no link
+	var href: nullable String = null
+
+	# The content of the popuped infobox
+	var content = new HTMLTag("div")
+
+	# Append a new field in the popuped infobox
+	fun new_field(title: String): HTMLTag
+	do
+		content.open("b").text(title)
+		content.append(" ")
+		var res = content.open("span")
+		content.open("br")
+		return res
+	end
+
+	# Append a new dropdown in the popuped content
+	fun new_dropdown(title, text: String): HTMLTag
+	do
+		content.add_raw_html """<div class="dropdown"> <a data-toggle="dropdown" href="#"><b>"""
+		content.append(title)
+		content.add_raw_html "</b> "
+		content.append(text)
+		content.add_raw_html """<span class="caret"></span></a>"""
+		var res = content.open("ul").add_class("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "dLabel")
+		content.add_raw_html "</div>"
+		return res
+	end
+end
+
+##
+
+# Model entity or whatever that can produce an infobox
+interface HInfoBoxable
+	# An new infobox documenting the entity
+	fun infobox(v: HighlightVisitor): HInfoBox is abstract
+
+	# A human-readable hyper-text for the entity
+	fun linkto: HTMLTag is abstract
+end
+
+redef class MDoc
+	# Append an entry for the doc in the given infobox
+	fun fill_infobox(res: HInfoBox)
+	do
+		if content.length < 2 then
+			res.new_field("doc").text(content.first)
+			return
+		end
+		var c = res.new_dropdown("doc", content.first)
+		for x in content.iterator.skip_head(1) do
+			c.append x
+			c.add_raw_html "<br>"
+		end
+	end
+end
+
+redef class MEntity
+	super HInfoBoxable
+end
+
+redef class MModule
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, "module {name}")
+		res.href = href
+		res.new_field("module").add(linkto)
+		var mdoc = self.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+		if in_importation.greaters.length > 1 then
+			var c = res.new_dropdown("imports", "{in_importation.greaters.length-1} modules")
+			for x in in_importation.greaters do
+				if x == self then continue
+				c.open("li").add x.linkto
+			end
+		end
+		return res
+	end
+
+	fun href: String
+	do
+		return name + ".html"
+	end
+
+	redef fun linkto do return linkto_text(name)
+
+	# Link to the entitiy with a specific text
+	fun linkto_text(text: String): HTMLTag
+	do
+		return (new HTMLTag("a")).attr("href", href).text(text)
+	end
+end
+
+redef class MClassDef
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, "class {mclass.name}")
+		res.href = href
+		if is_intro then
+			res.new_field("class").text(mclass.name)
+		else
+			res.new_field("redef class").text(mclass.name)
+			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro.mmodule.to_s}")
+		end
+		var mdoc = self.mdoc
+		if mdoc == null then mdoc = mclass.intro.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+
+		if in_hierarchy.greaters.length > 1 then
+			var c = res.new_dropdown("hier", "super-classes")
+			for x in in_hierarchy.greaters do
+				if x == self then continue
+				if not x.is_intro then continue
+				c.open("li").add x.linkto
+			end
+		end
+		if in_hierarchy.smallers.length > 1 then
+			var c = res.new_dropdown("hier", "sub-classes")
+			for x in in_hierarchy.smallers do
+				if x == self then continue
+				if not x.is_intro then continue
+				c.open("li").add x.linkto
+			end
+		end
+		if mclass.mclassdefs.length > 1 then
+			var c = res.new_dropdown("redefs", "refinements")
+			for x in mclass.mclassdefs do
+				if x == self then continue
+				c.open("li").add x.linkto_text("in {x.mmodule}")
+			end
+		end
+		return res
+	end
+
+	fun href: String
+	do
+		return mmodule.href + "#" + to_s
+	end
+
+	redef fun linkto do return linkto_text(mclass.name)
+
+	# Link to the entitiy with a specific text
+	fun linkto_text(text: String): HTMLTag
+	do
+		return (new HTMLTag("a")).attr("href", href).text(text)
+	end
+end
+
+redef class MPropDef
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, to_s)
+		res.href = href
+		if self isa MMethodDef then
+			res.new_field("fun").append(mproperty.name).add msignature.linkto
+		else if self isa MAttributeDef then
+			res.new_field("fun").append(mproperty.name).add static_mtype.linkto
+		else if self isa MVirtualTypeDef then
+			res.new_field("add").append(mproperty.name).add bound.linkto
+		else
+			res.new_field("wat?").append(mproperty.name)
+		end
+
+		if is_intro then
+		else
+			res.new_field("intro").add mproperty.intro.linkto_text("in {mproperty.intro.mclassdef}")
+		end
+		var mdoc = self.mdoc
+		if mdoc == null then mdoc = mproperty.intro.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+		if mproperty.mpropdefs.length > 1 then
+			var c = res.new_dropdown("redef", "redefinitions")
+			for x in mproperty.mpropdefs do
+				c.open("li").add x.linkto_text("in {x.mclassdef}")
+			end
+		end
+
+		return res
+	end
+
+	fun href: String
+	do
+		return self.mclassdef.mmodule.href + "#" + self.to_s
+	end
+
+	redef fun linkto do return linkto_text(mproperty.name)
+
+	# Link to the entitiy with a specific text
+	fun linkto_text(text: String): HTMLTag
+	do
+		return (new HTMLTag("a")).attr("href", href).text(text)
+	end
+end
+
+redef class MClassType
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, to_s)
+		res.href = mclass.intro.href
+		res.new_field("class").add mclass.intro.linkto
+		var mdoc = mclass.mdoc
+		if mdoc == null then mdoc = mclass.intro.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+		return res
+	end
+	redef fun linkto
+	do
+		return mclass.intro.linkto
+	end
+end
+redef class MVirtualType
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, to_s)
+		res.href = mproperty.intro.href
+		var p = mproperty
+		var pd = p.intro
+		res.new_field("virtual type").add pd.linkto
+		var mdoc = pd.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+		return res
+	end
+	redef fun linkto
+	do
+		return mproperty.intro.linkto
+	end
+end
+redef class MParameterType
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, to_s)
+		var name = mclass.intro.parameter_names[rank]
+		res.new_field("parameter type").append("{name} from class ").add mclass.intro.linkto
+		return res
+	end
+	redef fun linkto
+	do
+		var name = mclass.intro.parameter_names[rank]
+		return (new HTMLTag("span")).text(name)
+	end
+end
+
+redef class MNullableType
+	redef fun infobox(v)
+	do
+		return mtype.infobox(v)
+	end
+	redef fun linkto
+	do
+		var res = new HTMLTag("span")
+		res.append("nullable ").add(mtype.linkto)
+		return res
+	end
+end
+
+redef class MSignature
+	redef fun linkto
+	do
+		var res = new HTMLTag("span")
+		var first = true
+		if not mparameters.is_empty then
+			res.append "("
+			for p in mparameters do
+				if first then
+					first = false
+				else
+					res.append ", "
+				end
+				res.append p.name
+				res.append ": "
+				res.add p.mtype.linkto
+			end
+			res.append ")"
+		end
+		var ret = return_mtype
+		if ret != null then
+			res.append ": "
+			res.add ret.linkto
+		end
+		return res
+	end
+end
+
+redef class CallSite
+	super HInfoBoxable
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, "call {mpropdef}")
+		res.href = mpropdef.href
+		res.new_field("call").add(mpropdef.linkto).add(msignature.linkto)
+		if mpropdef.is_intro then
+		else
+			res.new_field("intro").add mproperty.intro.linkto_text("in {mproperty.intro.mclassdef}")
+		end
+		var mdoc = mpropdef.mdoc
+		if mdoc == null then mdoc = mproperty.intro.mdoc
+		if mdoc != null then mdoc.fill_infobox(res)
+
+		return res
+	end
+	redef fun linkto
+	do
+		return mpropdef.linkto
+	end
+end
+
+redef class Variable
+	super HInfoBoxable
+	redef fun infobox(v)
+	do
+		if declared_type == null then
+			var res = new HInfoBox(v, "{name}")
+			res.new_field("local var").append("{name}")
+			return res
+		end
+		var res = new HInfoBox(v, "{name}: {declared_type}")
+		res.new_field("local var").append("{name}:").add(declared_type.linkto)
+		return res
+	end
+	redef fun linkto
+	do
+		return (new HTMLTag("span")).text(name)
+	end
+end
+
+
+##
+
+redef class ANode
+	# Optionally creates a tag that encapsulate the AST element on HTML rendering
+	protected fun make_tag(v: HighlightVisitor): nullable HTMLTag do return null
+
+	# Add aditionnal information on a child-token and return an additionnal HInfoBox on it
+	protected fun decorate_tag(v: HighlightVisitor, res: HTMLTag, token: Token): nullable HInfoBox
+	do
+		#debug("no decoration for {token.inspect}")
+		#res.add_class("nc_error")
+		return null
+	end
+
+	# Return a optional infobox
+	fun infobox(v: HighlightVisitor): nullable HInfoBox do return null
+end
+
 redef class AStdClassdef
-	redef fun accept_highlight_visitor(v)
+	redef fun make_tag(v)
 	do
 		var res = new HTMLTag("span")
 		res.add_class("nc_cdef")
 		var md = mclassdef
-		if md != null then
-			var a = new HTMLTag("a")
-			a.attr("id", md.to_s)
-			res.add(a)
-		end
-		v.enter res
-		super
+		if md != null then res.attr("id", md.to_s)
+		return res
 	end
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_def")
 
 		var md = mclassdef
-		if md == null then return
-		var mc = md.mclass
-		res.attrs["title"] = mc.full_name
-		var mi = mc.intro
-		if md != mi then
-			res.attrs["link"] = mi.mmodule.name + ".html#" + mi.to_s
-		end
+		if md == null then return null
+		return md.infobox(v)
 	end
 end
 redef class APropdef
-	redef fun accept_highlight_visitor(v)
+	redef fun make_tag(v)
 	do
 		var res = new HTMLTag("span")
 		res.add_class("nc_pdef")
 		var mpd
 		mpd = mpropdef
-		if mpd != null then res.add(tag(mpd))
+		if mpd != null then
+			#res.add(tag(mpd))
+			res.attr("id", mpd.to_s)
+		end
 		if self isa AAttrPropdef then
 			mpd = mreadpropdef
 			if mpd != null then res.add(tag(mpd))
 			mpd = mwritepropdef
 			if mpd != null then res.add(tag(mpd))
 		end
-		v.enter res
-		super
+		return res
 	end
 
 	private fun tag(mpd: MPropDef): HTMLTag
@@ -262,39 +620,14 @@ end
 redef class Token
 	# Produce an HTMLTag with the correct contents and CSS classes
 	# Subclasses can redefine it to decorate the tag
-	protected fun make_tag(v: HighlightVisitor): HTMLTag
+	redef fun make_tag(v: HighlightVisitor): HTMLTag
 	do
 		var res = new HTMLTag("span")
 		res.text(text)
 		return res
 	end
-
-	# Use `empty_tag` to create the tag ; then fill it and add it to the html
-	redef fun accept_highlight_visitor(v)
-	do
-		var fl = v.first_line
-		if fl != null and fl > location.line_start then return
-
-		var ll = v.last_line
-		if ll != null and ll < location.line_end then return
-
-		var n = make_tag(v)
-		if n.attrs.is_empty and n.classes.is_empty then
-			for c in n.children do
-				v.token_head.add(c)
-			end
-		else if n.attrs.has_key("link") then
-			var a = new HTMLTag("a")
-			a.attrs["href"] = n.attrs["link"]
-			n.attrs.keys.remove("link")
-			a.add(n)
-			v.token_head.add(a)
-		else
-			v.token_head.add(n)
-		end
-		#debug("WRT: {v.token_head.classes} << '{text.escape_to_c}' ")
-	end
 end
+
 redef class TokenKeyword
 	redef fun make_tag(v)
 	do
@@ -308,155 +641,139 @@ redef class TokenOperator
 	do
 		var res = super
 		var p = parent
-		if p != null then p.decorate_tag(res, self)
+		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_o")
 		return res
 	end
 end
 
-redef class Variable
-	private fun decorate_tag(res: HTMLTag, token: Token)
-	do
-		if declared_type == null then return
-		res.attrs["title"] = name + ": " + declared_type.to_s
-	end
-end
-
 redef class AVarFormExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_v")
 		var variable = self.variable
-		if variable == null then return
-		variable.decorate_tag(res, token)
+		if variable == null then return null
+		return variable.infobox(v)
 	end
 end
 
 redef class AVardeclExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_v")
 		var variable = self.variable
-		if variable == null then return
-		variable.decorate_tag(res, token)
+		if variable == null then return null
+		return variable.infobox(v)
 	end
 end
 
 redef class AForExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_v")
 		var vs = variables
-		if vs == null then return
-		var idx = n_ids.index_of(token.as(TId))
+		if vs == null then return null
+		var idx = n_ids.index_of(token)
 		var variable = vs[idx]
-		variable.decorate_tag(res, token)
+		return variable.infobox(v)
 	end
 end
 
 redef class AParam
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_v")
 		var mp = mparameter
-		if mp == null then return
-		res.attrs["title"] = mp.name + ": " + mp.mtype.to_s
+		if mp == null then return null
+		var variable = self.variable
+		if variable == null then return null
+		return variable.infobox(v)
 	end
 end
 
 redef class AAssertExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_ast")
+		return null
 	end
 end
 
 redef class ALabel
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_la")
+		return null
 	end
 end
 
 redef class ASendExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
-		if callsite == null then return
-		var mpropdef = callsite.mpropdef
-		res.attrs["title"] = mpropdef.to_s + callsite.msignature.to_s
-		res.attrs["link"] = mpropdef.mclassdef.mmodule.name + ".html#" + mpropdef.to_s
+		if callsite == null then return null
+		return callsite.infobox(v)
 	end
 end
 
 redef class ANewExpr
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
-		if callsite == null then return
-		var mpropdef = callsite.mpropdef
-		res.attrs["title"] = mpropdef.to_s + callsite.msignature.to_s
-		res.attrs["link"] = mpropdef.mclassdef.mmodule.name + ".html#" + mpropdef.to_s
+		if callsite == null then return null
+		return callsite.infobox(v)
 	end
 end
 
 redef class AAssignOp
-	redef fun decorate_tag(res, v)
+	redef fun decorate_tag(v, res, token)
 	do
 		var p = parent
 		assert p isa AReassignFormExpr
 
 		var callsite = p.reassign_callsite
-		if callsite == null then return
-		var mpropdef = callsite.mpropdef
-		res.attrs["title"] = mpropdef.to_s + callsite.msignature.to_s
-		res.attrs["link"] = mpropdef.mclassdef.mmodule.name + ".html#" + mpropdef.to_s
+		if callsite == null then return null
+		return callsite.infobox(v)
 	end
 end
 
 redef class AModuleName
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
-		parent.decorate_tag(res, token)
+		return parent.decorate_tag(v, res, token)
 	end
 end
 
 redef class AModuledecl
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_def")
 		res.add_class("nc_m")
 		var p = parent
 		assert p isa AModule
 		var mm = p.mmodule
-		if mm == null then return
-		res.attrs["title"] = mm.full_name
+		if mm == null then return null
+		return mm.infobox(v)
 	end
 end
 
 redef class AStdImport
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_m")
 		var mm = mmodule
-		if mm == null then return
-		res.attrs["title"] = mm.full_name
-		res.attrs["link"] = mm.name + ".html"
+		if mm == null then return null
+		return mm.infobox(v)
 	end
 end
-
 redef class AAttrPropdef
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_def")
 		var mpd: nullable MPropDef
 		mpd = mreadpropdef
 		if mpd == null then mpd = mpropdef
-		if mpd == null then return
-		var mp = mpd.mproperty
-		res.attrs["title"] = mp.full_name
-		if mp.intro != mpd then
-			mpd = mp.intro
-			res.attrs["link"] = mpd.mclassdef.mmodule.name + ".html#" + mpd.to_s
-		end
+		if mpd == null then return null
+		return mpd.infobox(v)
 	end
 end
 
@@ -465,37 +782,30 @@ redef class TId
 	do
 		var res = super
 		var p = parent
-		if p != null then p.decorate_tag(res, self)
+		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_i")
 		return res
 	end
 end
 redef class AMethid
-	redef fun accept_highlight_visitor(v)
+	redef fun make_tag(v)
 	do
 		var res = new HTMLTag("span")
 		res.add_class("nc_def")
-		var p = parent
-		if p isa AMethPropdef then
-			var mpd = p.mpropdef
-			if mpd != null then
-				var mp = mpd.mproperty
-				res.attr("title", mp.full_name)
-				if mp.intro != mpd then
-					mpd = mp.intro
-					var link = mpd.mclassdef.mmodule.name + ".html#" + mpd.to_s
-					var l = new HTMLTag("a")
-					l.attr("href", link)
-					v.enter l
-				end
-			end
-		end
-		v.enter res
-		super
+		return res
 	end
-	redef fun decorate_tag(res, v)
+	redef fun decorate_tag(v, res, token)
 	do
+		return null
 		# nothing to decorate
+	end
+	redef fun infobox(v)
+	do
+		var p = parent
+		if not p isa AMethPropdef then return null
+		var mpd = p.mpropdef
+		if mpd == null then return null
+		return mpd.infobox(v)
 	end
 end
 redef class TAttrid
@@ -503,19 +813,17 @@ redef class TAttrid
 	do
 		var res = super
 		var p = parent
-		if p != null then p.decorate_tag(res, self)
+		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_a")
 		return res
 	end
 end
 redef class AAttrFormExpr
-	redef fun decorate_tag(res, v)
+	redef fun decorate_tag(v, res, token)
 	do
 		var p = mproperty
-		if p == null then return
-		res.attrs["title"] = p.full_name
-		var pi = p.intro
-		res.attrs["link"] = pi.mclassdef.mmodule.name + ".html#" + pi.to_s
+		if p == null then return null
+		return p.intro.infobox(v)
 	end
 end
 redef class TClassid
@@ -523,68 +831,56 @@ redef class TClassid
 	do
 		var res = super
 		var p = parent
-		if p != null then p.decorate_tag(res, self)
+		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_t")
 		return res
 	end
 end
 redef class AType
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		var mt = mtype
-		if mt == null then return
-		var title = mt.to_s
+		if mt == null then return null
 		if mt isa MNullableType then mt = mt.mtype
 		if mt isa MVirtualType or mt isa MParameterType then
 			res.add_class("nc_vt")
-		else if mt isa MClassType then
-			title = mt.mclass.full_name
-			res.attrs["link"] = mt.mclass.intro.mmodule.name + ".html#" + mt.mclass.intro.to_s
 		end
-		res.attrs["title"] = title
+		return mt.infobox(v)
 	end
 end
 redef class AFormaldef
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_vt")
-		if mtype == null then return
-		res.attrs["title"] = "{mtype.to_s}: {bound.to_s}"
+		if mtype == null then return null
+		return mtype.infobox(v)
 	end
 end
 redef class ATypePropdef
-	redef fun decorate_tag(res, token)
+	redef fun decorate_tag(v, res, token)
 	do
 		res.add_class("nc_def")
 		var md = mpropdef
-		if md == null then return
-		var mp = mpropdef.mproperty
-		res.attrs["title"] = mp.full_name
-		var mi = mp.intro
-		if md != mi then
-			res.attrs["link"] = mi.mclassdef.mmodule.name + ".html#" + mi.to_s
-		end
+		if md == null then return null
+		return md.infobox(v)
 	end
 end
 redef class TComment
 	redef fun make_tag(v)
 	do
 		var res = super
-		if parent == null then
+		if not parent isa ADoc then
 			res.add_class("nc_c")
-		else
-			assert parent isa ADoc
 		end
 		return res
 	end
 end
 redef class ADoc
-	redef fun accept_highlight_visitor(v)
+	redef fun make_tag(v)
 	do
 		var res = new HTMLTag("span")
 		res.add_class("nc_d")
-		v.enter res
-		super
+		return res
 	end
 end
 redef class TokenLiteral
@@ -593,25 +889,33 @@ redef class TokenLiteral
 		var res = super
 		res.add_class("nc_l")
 		var p = parent
-		if p isa AStringFormExpr then p.decorate_tag(res, self)
+		if p != null then p.decorate_tag(v, res, self)
 		return res
 	end
 end
 redef class ASuperstringExpr
-	redef fun accept_highlight_visitor(v)
+	redef fun make_tag(v)
 	do
 		var res = new HTMLTag("span")
 		res.add_class("nc_ss")
-		v.enter res
-		super
+		return res
 	end
 end
 redef class AStringFormExpr
-	redef fun decorate_tag(res, v)
+	redef fun decorate_tag(v, res, token)
 	do
-		# Workarount to tag strings
+		# Workaround to tag strings
 		res.classes.remove("nc_l")
 		res.add_class("nc_s")
+		return null
+	end
+end
+redef class AExpr
+	redef fun decorate_tag(v, res, token)
+	do
+		var t = mtype
+		if t == null then return null
+		return t.infobox(v)
 	end
 end
 
