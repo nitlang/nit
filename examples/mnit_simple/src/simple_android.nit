@@ -27,7 +27,7 @@ in "Java" `{
 	import android.widget.Toast;
 `}
 
-redef class MyApp
+redef class App
 	redef fun input( ie )
 	do
 		if ie isa PointerEvent and ie.depressed then do_java_stuff
@@ -41,7 +41,7 @@ redef class MyApp
 
 		// - Context needed from now on
 		// NativeActivity is a Java sub-class of Context
-		final android.app.NativeActivity context = MyApp_native_activity(recv);
+		final android.app.NativeActivity context = App_native_activity(recv);
 
 		// Vibration
 		android.os.Vibrator v = (android.os.Vibrator)

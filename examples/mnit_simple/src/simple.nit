@@ -22,14 +22,11 @@ end
 
 import mnit
 
-class MyApp
-	super App
+redef class App
 
 	var img : nullable I = null
 
-	init do super
-
-	redef fun init_window
+	redef fun window_created
 	do
 		super
 
@@ -73,7 +70,3 @@ class MyApp
 		end
 	end
 end
-
-var app = new MyApp
-app.main_loop
-
