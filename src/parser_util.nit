@@ -128,12 +128,11 @@ redef class ToolContext
 
 		lexer = new Lexer(source)
 		var first = lexer.next
-		if not first isa EOF then
-			var second = lexer.next
-			if second isa EOF and not second isa AError then
-				first.parent = null
-				return first
-			end
+		if first isa EOF then return first
+		var second = lexer.next
+		if second isa EOF and not second isa AError then
+			first.parent = null
+			return first
 		end
 
 		lexer = new InjectedLexer(source)
