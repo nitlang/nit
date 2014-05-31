@@ -18,9 +18,12 @@ border-radius: 3px;
 .rawcode[title] {
 border-color: red;
 }
-.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
-.nitcode a:hover { text-decoration: underline; } /* underline links */
-.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+.nitcode a { color: inherit; cursor:pointer; }
+.nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
+.nitcode .foldable { display: block } /* for block productions*/
+.nitcode .line{ display: block } /* for lines */
+.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
+.nitcode :target { background-color: #FFF3C2 } /* target highlight*/
 /* lexical raw tokens. independent of usage or semantic: */
 .nitcode .nc_c { color: gray; font-style: italic; } /* comment */
 .nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
@@ -47,15 +50,16 @@ border-color: red;
 .nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
 
 .nitcode .nc_error { border: 1px red solid;} /* not used */
+.popover { max-width: 800px !important; }
 
 </style>
 </head><body>
 <a id='test_doc'></a><h1>module test_doc</h1><a id='test_doc::A'></a><h2>class test_doc#A</h2><div class="nitdoc"><p class="synopsys">Synopsys</p><p>Paragraph
-same paragraph</p><p>Other paragraph with <code class="nitcode"><span class="nitcode"><span class="nc_i">code</span></span></code></p><ul><li>bullet</li><li>other buller</li><li>last
+same paragraph</p><p>Other paragraph with <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">code</span><span></span></span></span></code></p><ul><li>bullet</li><li>other buller</li><li>last
 but long
-bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_i">some</span>
-<span class="nc_i">block</span>
-</span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
-</span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="nc_i">to_s</span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_v nc_i"></span><span class="nc_t"></span><span class="nc_t">A</span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="nc_k"></span><span class="nc_k">var</span> <span class="nc_v nc_i">a</span> = <span class="nc_k">new</span> <span class="nc_t">A</span>
-<span class="nc_k">assert</span> <span class="nc_i">a</span>.<span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
-</span></pre></div></body></html>
+bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">some</span>
+</span><span class="line" id="L2"><span class="nc_i">block</span>
+</span><span class="line" id="L3"><span></span></span></span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
+</span><span class="line" id="L2"><span></span></span></span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">to_s</span><span></span></span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_t">A</span><span></span></span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">var</span> <span class="nc_v nc_i">a</span> <span>=</span> <span class="nc_k">new</span> <span class="nc_t">A</span>
+</span><span class="line" id="L2"><span class="nc_k">assert</span> <span class="nc_i">a</span><span>.</span><span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
+</span><span class="line" id="L3"><span></span></span></span></pre></div></body></html>
