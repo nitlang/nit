@@ -32,8 +32,6 @@ in "C header" `{
 `}
 
 in "C" `{
-	extern struct android_app *mnit_java_app;
-
 	void mnit_android_png_read_data(png_structp png_ptr,
 			png_bytep data, png_size_t length)
 	{
@@ -103,8 +101,9 @@ redef class App
 		return null
 	end
 
-	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset.as nullable `{
-		struct AAsset* a = AAssetManager_open(mnit_java_app->activity->assetManager, String_to_cstring(path), AASSET_MODE_BUFFER);
+	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset.as nullable, native_app_glue  `{
+		struct android_app *native_app_glue = App_native_app_glue(recv);
+		struct AAsset* a = AAssetManager_open(native_app_glue->activity->assetManager, String_to_cstring(path), AASSET_MODE_BUFFER);
 		if (a == NULL)
 		{
 			LOGW("nit d g a");
