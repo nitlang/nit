@@ -35,7 +35,17 @@ end
 private class TypeVisitor
 	var modelbuilder:  ModelBuilder
 	var nclassdef: AClassdef
-	var mpropdef: MPropDef
+
+	# The module of the analysis
+	# Used to correctly query the model
+	var mmodule: MModule
+
+	# The static type of the receiver
+	# Mainly used for type tests and type resolutions
+	var anchor: nullable MClassType
+
+	# The analyzed property
+	var mpropdef: nullable MPropDef
 
 	var selfvariable: Variable = new Variable("self")
 
@@ -44,36 +54,35 @@ private class TypeVisitor
 		self.modelbuilder = modelbuilder
 		self.nclassdef = nclassdef
 		self.mpropdef = mpropdef
+		var mclassdef = mpropdef.mclassdef
 
-		var mclass = nclassdef.mclassdef.mclass
+		self.mmodule = mclassdef.mmodule
+		self.anchor = mclassdef.bound_mtype
+
+		var mclass = mclassdef.mclass
 
 		var selfvariable = new Variable("self")
 		self.selfvariable = selfvariable
 		selfvariable.declared_type = mclass.mclass_type
 	end
 
-	fun mmodule: MModule do return self.nclassdef.mclassdef.mmodule
-
-	fun anchor: MClassType do return self.nclassdef.mclassdef.bound_mtype
-
 	fun anchor_to(mtype: MType): MType
 	do
-		var mmodule = self.nclassdef.mclassdef.mmodule
-		var anchor = self.nclassdef.mclassdef.bound_mtype
+		var anchor = anchor
+		if anchor == null then
+			assert not mtype.need_anchor
+			return mtype
+		end
 		return mtype.anchor_to(mmodule, anchor)
 	end
 
 	fun is_subtype(sub, sup: MType): Bool
 	do
-		var mmodule = self.nclassdef.mclassdef.mmodule
-		var anchor = self.nclassdef.mclassdef.bound_mtype
 		return sub.is_subtype(mmodule, anchor, sup)
 	end
 
 	fun resolve_for(mtype, subtype: MType, for_self: Bool): MType
 	do
-		var mmodule = self.nclassdef.mclassdef.mmodule
-		var anchor = self.nclassdef.mclassdef.bound_mtype
 		#print "resolve_for {mtype} sub={subtype} forself={for_self} mmodule={mmodule} anchor={anchor}"
 		var res = mtype.resolve_for(subtype, anchor, mmodule, not for_self)
 		return res
@@ -166,8 +175,6 @@ private class TypeVisitor
 		var sup = self.resolve_mtype(ntype)
 		if sup == null then return null # Forward error
 
-		var mmodule = self.nclassdef.mclassdef.mmodule
-		var anchor = self.nclassdef.mclassdef.bound_mtype
 		if sup == sub then
 			self.modelbuilder.warning(node, "Warning: Expression is already a {sup}.")
 		else if self.is_subtype(sub, sup) and not sup.need_anchor then
@@ -178,7 +185,7 @@ private class TypeVisitor
 
 	fun try_get_mproperty_by_name2(anode: ANode, mtype: MType, name: String): nullable MProperty
 	do
-		return self.modelbuilder.try_get_mproperty_by_name2(anode, self.nclassdef.mclassdef.mmodule, mtype, name)
+		return self.modelbuilder.try_get_mproperty_by_name2(anode, mmodule, mtype, name)
 	end
 
 	fun resolve_mtype(node: AType): nullable MType
@@ -188,14 +195,12 @@ private class TypeVisitor
 
 	fun try_get_mclass(node: ANode, name: String): nullable MClass
 	do
-		var mmodule = self.nclassdef.mclassdef.mmodule
 		var mclass = modelbuilder.try_get_mclass_by_name(node, mmodule, name)
 		return mclass
 	end
 
 	fun get_mclass(node: ANode, name: String): nullable MClass
 	do
-		var mmodule = self.nclassdef.mclassdef.mmodule
 		var mclass = modelbuilder.try_get_mclass_by_name(node, mmodule, name)
 		if mclass == null then
 			self.modelbuilder.error(node, "Type Error: missing primitive class `{name}'.")
@@ -1436,7 +1441,8 @@ redef class ASuperExpr
 
 	redef fun accept_typing(v)
 	do
-		var recvtype = v.nclassdef.mclassdef.bound_mtype
+		var recvtype = v.anchor
+		assert recvtype != null
 		var mproperty = v.mpropdef.mproperty
 		if not mproperty isa MMethod then
 			v.error(self, "Error: super only usable in a method")
@@ -1468,12 +1474,13 @@ redef class ASuperExpr
 
 	private fun process_superinit(v: TypeVisitor)
 	do
-		var recvtype = v.nclassdef.mclassdef.bound_mtype
+		var recvtype = v.anchor
+		assert recvtype != null
 		var mpropdef = v.mpropdef
 		assert mpropdef isa MMethodDef
 		var mproperty = mpropdef.mproperty
 		var superprop: nullable MMethodDef = null
-		for msupertype in v.nclassdef.mclassdef.supertypes do
+		for msupertype in mpropdef.mclassdef.supertypes do
 			msupertype = msupertype.anchor_to(v.mmodule, recvtype)
 			var errcount = v.modelbuilder.toolcontext.error_count
 			var candidate = v.try_get_mproperty_by_name2(self, msupertype, mproperty.name).as(nullable MMethod)
