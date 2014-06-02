@@ -190,7 +190,7 @@ private class TypeVisitor
 
 	fun resolve_mtype(node: AType): nullable MType
 	do
-		return self.modelbuilder.resolve_mtype(self.nclassdef, node)
+		return self.modelbuilder.resolve_mtype(mmodule, mpropdef.mclassdef, node)
 	end
 
 	fun try_get_mclass(node: ANode, name: String): nullable MClass

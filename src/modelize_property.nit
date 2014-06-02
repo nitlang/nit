@@ -343,15 +343,16 @@ redef class ASignature
 	var ret_type: nullable MType = null
 
 	# Visit and fill information about a signature
-	private fun visit_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef): Bool
+	private fun visit_signature(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
 	do
+		var mmodule = mclassdef.mmodule
 		var param_names = self.param_names
 		var param_types = self.param_types
 		for np in self.n_params do
 			param_names.add(np.n_id.text)
 			var ntype = np.n_type
 			if ntype != null then
-				var mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
+				var mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 				if mtype == null then return false # Skip error
 				for i in [0..param_names.length-param_types.length[ do
 					param_types.add(mtype)
@@ -368,7 +369,7 @@ redef class ASignature
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			self.ret_type = modelbuilder.resolve_mtype(nclassdef, ntype)
+			self.ret_type = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 			if self.ret_type == null then return false # Skip errir
 		end
 
@@ -491,7 +492,8 @@ redef class AMethPropdef
 	do
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skiped
-		var mmodule = mpropdef.mclassdef.mmodule
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
 
 		# Retrieve info from the signature AST
@@ -500,7 +502,7 @@ redef class AMethPropdef
 		var vararg_rank = -1
 		var ret_type: nullable MType = null # Return type from the AST
 		if nsig != null then
-			if not nsig.visit_signature(modelbuilder, nclassdef) then return
+			if not nsig.visit_signature(modelbuilder, mclassdef) then return
 			param_names = nsig.param_names
 			param_types = nsig.param_types
 			vararg_rank = nsig.vararg_rank
@@ -768,12 +770,13 @@ redef class AAttrPropdef
 	do
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skiped
-		var mmodule = mpropdef.mclassdef.mmodule
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
 		if ntype != null then
-			mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
+			mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 			if mtype == null then return
 		end
 
@@ -781,7 +784,7 @@ redef class AAttrPropdef
 		if mtype == null then
 			if nexpr != null then
 				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+					mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				else if nexpr isa AIntExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
 					if cla != null then mtype = cla.mclass_type
@@ -810,7 +813,7 @@ redef class AAttrPropdef
 		else
 			assert ntype != null
 			if nexpr isa ANewExpr then
-				var xmtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
 					modelbuilder.warning(ntype, "Warning: useless type definition")
 				end
@@ -967,11 +970,12 @@ redef class ATypePropdef
 	do
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skiped
-		var mmodule = mpropdef.mclassdef.mmodule
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
-		mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
+		mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 		if mtype == null then return
 
 		mpropdef.bound = mtype

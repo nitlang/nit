@@ -54,7 +54,8 @@ private class ATypeCounterVisitor
 	redef fun visit(n)
 	do
 		if n isa AType then
-			var mtype = modelbuilder.resolve_mtype(self.nclassdef, n)
+			var mclassdef = self.nclassdef.mclassdef
+			var mtype = modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, n)
 			if mtype != null then
 				self.typecount.inc(mtype)
 			end
