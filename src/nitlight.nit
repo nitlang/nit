@@ -56,10 +56,12 @@ for mm in mmodules do
 	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
 	if opt_ast.value then v.with_ast = true
 	var page = null
+	var m = modelbuilder.mmodule2nmodule[mm]
 	if not opt_fragment.value then
 		page = new HTMLTag("html")
 		page.add_raw_html """<head>
-		<meta charset="utf-8">"""
+		<meta charset="utf-8">
+		<title>file {{{m.location.file.filename}}}</title>"""
 		if dir == null then
 			page.add_raw_html """
 			<style type="text/css">
@@ -69,13 +71,17 @@ for mm in mmodules do
 		else
 			page.add_raw_html """<link rel="stylesheet" type="text/css" href="style.css" />"""
 		end
+		page.add_raw_html """<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n"""
 		page.add_raw_html "</head><body><pre>"
 	end
-	var m = modelbuilder.mmodule2nmodule[mm]
 	v.enter_visit(m)
 	if not opt_fragment.value then
 		page.add(v.html)
-		page.add_raw_html "</pre></body>"
+		page.add_raw_html "</pre>"
+		page.add_raw_html """<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>\n"""
+		page.add_raw_html """<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>\n"""
+		page.add_raw_html """<script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script>\n"""
+		page.add_raw_html "</body>"
 	else
 		page = v.html
 	end

@@ -278,13 +278,13 @@ private class PTokenVisitor
 		else
 			p = last_token.common_parent(n)
 		end
-		assert p isa Prod
-
-		# And apply it to detached tokens between `last_token` and `n`
-		var c = n.prev_token
-		while c != null and c.parent == null do
-			c.parent = p
-			c = c.prev_token
+		if p isa Prod then
+			# And apply it to detached tokens between `last_token` and `n`
+			var c = n.prev_token
+			while c != null and c.parent == null do
+				c.parent = p
+				c = c.prev_token
+			end
 		end
 
 		self.last_token = n

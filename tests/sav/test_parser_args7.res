@@ -1,6 +1,6 @@
 --> ADecIntExpr 1,1
   TNumber "1" 1,1
---> ABlockExpr 1,1--0
+--> ABlockExpr 1,1--11
   ACallExpr 1,1--11
     AImplicitSelfExpr 1,1
     TId "hello" 1,1--5
@@ -11,7 +11,7 @@
         AListExprs 1,11
 --> AStringExpr 1,1--13
   TString "\"hello world\"" 1,1--13
---> ABlockExpr 1,1--0
+--> ABlockExpr 1,1--15
   AForExpr 1,1--15
     TKwfor "for" 1,1--3
     TId "i" 1,5
@@ -36,7 +36,7 @@
         AImplicitSelfExpr 1,12
         TId "z" 1,12
         AListExprs 1,12
---> ... ... ABlockExpr 1,1--0
+--> ... ... ABlockExpr 1,1--3,3
   AForExpr 1,1--3,3
     TKwfor "for" 1,1--3
     TId "i" 1,5

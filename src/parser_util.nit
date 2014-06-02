@@ -121,17 +121,18 @@ redef class ToolContext
 		eof = tree.n_eof
 		if not eof isa AError then
 			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
+			ntype.parent = null
 			return ntype
 		end
 		error = eof
 
 		lexer = new Lexer(source)
 		var first = lexer.next
-		if not first isa EOF then
-			var second = lexer.next
-			if second isa EOF and not second isa AError then
-				return first
-			end
+		if first isa EOF then return first
+		var second = lexer.next
+		if second isa EOF and not second isa AError then
+			first.parent = null
+			return first
 		end
 
 		lexer = new InjectedLexer(source)
@@ -144,6 +145,7 @@ redef class ToolContext
 		eof = tree.n_eof
 		if not eof isa AError then
 			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
+			nexpr.parent = null
 			return nexpr
 		end
 		if eof.location > error.location then error = eof
@@ -158,6 +160,7 @@ redef class ToolContext
 		if not eof isa AError then
 			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(ABlockExpr)
 			nblock.n_kwend = null # drop injected token
+			nblock.parent = null
 			return nblock
 		end
 		if eof.location > error.location then error = eof
@@ -216,7 +219,6 @@ class InjectedLexer
 	do
 		if not injected_before.is_empty then
 			var tok = injected_before.shift
-			if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
 			return tok
 		end
 		if not is_finished then
@@ -227,7 +229,6 @@ class InjectedLexer
 		end
 
 		var tok = injected_after.shift
-		if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
 		return tok
 	end
 end

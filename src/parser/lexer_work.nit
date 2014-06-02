@@ -127,15 +127,17 @@ class Lexer
 		t = get_token
 		while t == null do t = get_token
 
-		var l = last_token
-		if l != null then
-			l.next_token = t
-			t.prev_token = l
-		else
-			_file.first_token = t
+		if t._location != null then
+			var l = last_token
+			if l != null then
+				l.next_token = t
+				t.prev_token = l
+			else
+				_file.first_token = t
+			end
+			last_token = t
 		end
 
-		last_token = t
 		_token = t
 		return t
 	end
