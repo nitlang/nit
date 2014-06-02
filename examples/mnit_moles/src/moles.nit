@@ -227,16 +227,13 @@ class Screen
 	end
 end
 
-class MyApp
-	super App
+redef class App
 
 	var screen: nullable Screen = null
 
 	var target_dt = 20000000
 
-	init do super
-
-	redef fun init_window
+	redef fun window_created
 	do
 		super
 
@@ -285,6 +282,3 @@ fun display_offset_x: Int do return (512.0*display_scale).to_i
 
 # Depends on the width of the holes
 fun display_offset_y: Int do return (800.0*display_scale).to_i
-
-var app = new MyApp
-app.main_loop

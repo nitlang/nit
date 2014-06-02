@@ -24,7 +24,7 @@ redef class Game
 	redef fun rows do return 5
 end
 
-redef class MyApp
+redef class App
 	redef fun init_screen_and_game
 	do
 		# We use as a reference the Moto X
