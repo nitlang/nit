@@ -200,6 +200,9 @@ redef class ModelBuilder
 					error(ntype, "Error: supertypes cannot be a formal type")
 					return
 				end
+				if not mclass.kind.can_specialize(mtype.mclass.kind) then
+					error(ntype, "Error: {mclass.kind} {mclass} cannot specialize {mtype.mclass.kind} {mtype.mclass}")
+				end
 				supertypes.add mtype
 				#print "new super : {mclass} < {mtype}"
 				if mtype.mclass.kind == extern_kind then specpointer = false

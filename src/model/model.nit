@@ -1898,6 +1898,24 @@ class MClassKind
 		self.to_s = s
 		self.need_init = need_init
 	end
+
+	# Can a class of kind `self` specializes a class of kine `other`?
+	fun can_specialize(other: MClassKind): Bool
+	do
+		if other == interface_kind then return true # everybody can specialize interfaces
+		if self == interface_kind or self == enum_kind then
+			# no other case for interfaces
+			return false
+		else if self == extern_kind then
+			# only compatible with themselve
+			return self == other
+		else if other == enum_kind or other == extern_kind then
+			# abstract_kind and concrete_kind are incompatible
+			return false
+		end
+		# remain only abstract_kind and concrete_kind
+		return true
+	end
 end
 
 fun abstract_kind: MClassKind do return once new MClassKind("abstract class", true)
