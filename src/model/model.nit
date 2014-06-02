@@ -1904,4 +1904,4 @@ fun abstract_kind: MClassKind do return once new MClassKind("abstract class", tr
 fun concrete_kind: MClassKind do return once new MClassKind("class", true)
 fun interface_kind: MClassKind do return once new MClassKind("interface", false)
 fun enum_kind: MClassKind do return once new MClassKind("enum", false)
-fun extern_kind: MClassKind do return once new MClassKind("extern", false)
+fun extern_kind: MClassKind do return once new MClassKind("extern class", false)
