@@ -21,31 +21,22 @@ import markdown
 redef class ModelBuilder
 	fun test_markdown(page: HTMLTag, mmodule: MModule)
 	do
-		page.add_raw_html "<a id='{mmodule.full_name}'></a>"
-		page.add_raw_html "<h1>module {mmodule}</h1>"
-		if mmodule2nmodule.has_key(mmodule) then
-			do
-				var mdoc = mmodule.mdoc
-				if mdoc == null then break label x
+		page.add_raw_html "<h3 id='{mmodule}'>module {mmodule}</h1>"
+		var mdoc = mmodule.mdoc
+		if mdoc != null then
+			page.add mdoc.full_markdown
+		end
+		for mclassdef in mmodule.mclassdefs do
+			mdoc = mclassdef.mdoc
+			if mdoc != null then
+				page.add_raw_html "<h4 id='{mclassdef}'>class {mclassdef}</h2>"
 				page.add mdoc.full_markdown
-			end label x
-			for mclassdef in mmodule.mclassdefs do
-				do
-					var mdoc = mclassdef.mdoc
-					if mdoc != null then
-						if mclassdef.mclass.intro == mclassdef then page.add_raw_html "<a id='{mclassdef.mclass.full_name}'></a>"
-						page.add_raw_html "<h2>class {mclassdef}</h2>"
-						page.add mdoc.full_markdown
-					end
-				end
-				for mpropdef in mclassdef.mpropdefs do
-					var mdoc = mpropdef.mdoc
-					if mdoc != null then
-						if mpropdef.mproperty.intro == mpropdef then page.add_raw_html "<a id='{mpropdef.mproperty.full_name}'></a>"
-
-						page.add_raw_html "<h3>prop {mpropdef}</h3>"
-						page.add mdoc.full_markdown
-					end
+			end
+			for mpropdef in mclassdef.mpropdefs do
+				mdoc = mpropdef.mdoc
+				if mdoc != null then
+					page.add_raw_html "<h5 id='{mpropdef}'>prop {mpropdef}</h3>"
+					page.add mdoc.full_markdown
 				end
 			end
 		end
@@ -94,6 +85,7 @@ border-radius: 3px;
 .rawcode[title] {
 border-color: red;
 }
+h5 {font-weight:bold;}
 {{{hv.css_content}}}
 </style>
 </head><body>"""
