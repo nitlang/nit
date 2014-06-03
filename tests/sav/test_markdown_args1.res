@@ -1,5 +1,6 @@
 <html><head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <style type="text/css">
 code {margin: 0 2px;
 padding: 0px 5px;
@@ -18,11 +19,12 @@ border-radius: 3px;
 .rawcode[title] {
 border-color: red;
 }
+h5 {font-weight:bold;}
 .nitcode a { color: inherit; cursor:pointer; }
 .nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
-.nitcode .foldable { display: block } /* for block productions*/
-.nitcode .line{ display: block } /* for lines */
-.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
+pre.nitcode .foldable { display: block } /* for block productions*/
+pre.nitcode .line{ display: block } /* for lines */
+pre.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
 .nitcode :target { background-color: #FFF3C2 } /* target highlight*/
 /* lexical raw tokens. independent of usage or semantic: */
 .nitcode .nc_c { color: gray; font-style: italic; } /* comment */
@@ -53,13 +55,14 @@ border-color: red;
 .popover { max-width: 800px !important; }
 
 </style>
-</head><body>
-<a id='test_doc'></a><h1>module test_doc</h1><a id='test_doc::A'></a><h2>class test_doc#A</h2><div class="nitdoc"><p class="synopsys">Synopsys</p><p>Paragraph
+</head><body><h3 id='test_doc'>module test_doc</h1><h4 id='test_doc#A'>class test_doc#A</h2><div class="nitdoc"><p class="synopsys">Synopsys</p><p>Paragraph
 same paragraph</p><p>Other paragraph with <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">code</span><span></span></span></span></code></p><ul><li>bullet</li><li>other buller</li><li>last
 but long
 bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">some</span>
 </span><span class="line" id="L2"><span class="nc_i">block</span>
 </span><span class="line" id="L3"><span></span></span></span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
-</span><span class="line" id="L2"><span></span></span></span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">to_s</span><span></span></span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_t">A</span><span></span></span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">var</span> <span class="nc_v nc_i">a</span> <span>=</span> <span class="nc_k">new</span> <span class="nc_t">A</span>
+</span><span class="line" id="L2"><span></span></span></span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">to_s</span><span></span></span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_t">A</span><span></span></span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">var</span> <span class="nc_i">a</span> <span>=</span> <span class="nc_k">new</span> <span class="nc_t">A</span>
 </span><span class="line" id="L2"><span class="nc_k">assert</span> <span class="nc_i">a</span><span>.</span><span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
-</span><span class="line" id="L3"><span></span></span></span></pre></div></body></html>
+</span><span class="line" id="L3"><span></span></span></span></pre></div><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script></body></html>
