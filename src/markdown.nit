@@ -68,7 +68,8 @@ private class Doc2Mdwn
 			end
 
 			# Is codeblock? Then just collect them
-			if indent >= 4 then
+			if indent >= 3 then
+				# to allows 4 spaces including the one that follows the #
 				curblock.add(text)
 				continue
 			end
