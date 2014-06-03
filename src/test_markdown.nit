@@ -91,8 +91,22 @@ h5 {font-weight:bold;}
 </head><body>"""
 
 if opt_full.value then
-	for m in model.mmodules do
-		modelbuilder.test_markdown(page, m)
+	for p in model.mprojects do
+		page.add_raw_html "<h1 id='P{p.name}'>project {p.name}</h2>"
+		var mdoc = p.mdoc
+		if mdoc != null then
+			page.add mdoc.full_markdown
+		end
+		for g in p.mgroups do
+			mdoc = g.mdoc
+			if mdoc != null then
+				page.add_raw_html "<h2 id='G{g.full_name}'>group {g.full_name}</h2>"
+				page.add mdoc.full_markdown
+			end
+			for m in g.mmodules do
+				modelbuilder.test_markdown(page, m)
+			end
+		end
 	end
 else
 	for m in mmodules do
