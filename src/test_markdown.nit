@@ -21,35 +21,36 @@ import markdown
 redef class ModelBuilder
 	fun test_markdown(page: HTMLTag, mmodule: MModule)
 	do
-		page.add_raw_html "<a id='{mmodule.full_name}'></a>"
-		page.add_raw_html "<h1>module {mmodule}</h1>"
-		if mmodule2nmodule.has_key(mmodule) then
-			do
-				var mdoc = mmodule.mdoc
-				if mdoc == null then break label x
+		page.add_raw_html "<h3 id='{mmodule}'>module {mmodule}</h1>"
+		var mdoc = mmodule.mdoc
+		if mdoc != null then
+			page.add mdoc.full_markdown
+		end
+		for mclassdef in mmodule.mclassdefs do
+			mdoc = mclassdef.mdoc
+			if mdoc != null then
+				page.add_raw_html "<h4 id='{mclassdef}'>class {mclassdef}</h2>"
 				page.add mdoc.full_markdown
-			end label x
-			for mclassdef in mmodule.mclassdefs do
-				do
-					var mdoc = mclassdef.mdoc
-					if mdoc != null then
-						if mclassdef.mclass.intro == mclassdef then page.add_raw_html "<a id='{mclassdef.mclass.full_name}'></a>"
-						page.add_raw_html "<h2>class {mclassdef}</h2>"
-						page.add mdoc.full_markdown
-					end
-				end
-				for mpropdef in mclassdef.mpropdefs do
-					var mdoc = mpropdef.mdoc
-					if mdoc != null then
-						if mpropdef.mproperty.intro == mpropdef then page.add_raw_html "<a id='{mpropdef.mproperty.full_name}'></a>"
-
-						page.add_raw_html "<h3>prop {mpropdef}</h3>"
-						page.add mdoc.full_markdown
-					end
+			end
+			for mpropdef in mclassdef.mpropdefs do
+				mdoc = mpropdef.mdoc
+				if mdoc != null then
+					page.add_raw_html "<h5 id='{mpropdef}'>prop {mpropdef}</h3>"
+					page.add mdoc.full_markdown
 				end
 			end
 		end
 	end
+end
+
+redef class MModule
+	redef fun href do return "#{to_s}"
+end
+redef class MClassDef
+	redef fun href do return "#{to_s}"
+end
+redef class MPropDef
+	redef fun href do return "#{to_s}"
 end
 
 var toolcontext = new ToolContext
@@ -73,6 +74,9 @@ var page = new HTMLTag("html")
 page.add_raw_html """
 <head>
 <meta charset="utf-8">
+"""
+page.add_raw_html hv.head_content
+page.add_raw_html """
 <style type="text/css">
 code {margin: 0 2px;
 padding: 0px 5px;
@@ -91,14 +95,28 @@ border-radius: 3px;
 .rawcode[title] {
 border-color: red;
 }
+h5 {font-weight:bold;}
 {{{hv.css_content}}}
 </style>
-</head><body>
-"""
+</head><body>"""
 
 if opt_full.value then
-	for m in model.mmodules do
-		modelbuilder.test_markdown(page, m)
+	for p in model.mprojects do
+		page.add_raw_html "<h1 id='P{p.name}'>project {p.name}</h2>"
+		var mdoc = p.mdoc
+		if mdoc != null then
+			page.add mdoc.full_markdown
+		end
+		for g in p.mgroups do
+			mdoc = g.mdoc
+			if mdoc != null then
+				page.add_raw_html "<h2 id='G{g.full_name}'>group {g.full_name}</h2>"
+				page.add mdoc.full_markdown
+			end
+			for m in g.mmodules do
+				modelbuilder.test_markdown(page, m)
+			end
+		end
 	end
 else
 	for m in mmodules do
@@ -106,5 +124,6 @@ else
 	end
 end
 
+page.add_raw_html hv.foot_content
 page.add_raw_html "</body>"
 page.write_to(stdout)

@@ -163,7 +163,11 @@ redef class ModelBuilder
 
 		if nclassdef isa AStdClassdef then
 			var ndoc = nclassdef.n_doc
-			if ndoc != null then mclassdef.mdoc = ndoc.to_mdoc
+			if ndoc != null then
+				var mdoc = ndoc.to_mdoc
+				mclassdef.mdoc = mdoc
+				mdoc.original_mentity = mclassdef
+			end
 		end
 
 		if mclassdef.is_intro then

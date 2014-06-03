@@ -23,6 +23,10 @@ class MDoc
 	# The starting `#` and first space are stripped.
 	# The trailing `\n` are chomped.
 	var content = new Array[String]
+
+	# The entity where the documentation is originally attached to.
+	# This gives some context to resolve identifiers or to run examples.
+	var original_mentity: nullable MEntity writable = null
 end
 
 redef class MEntity

@@ -64,15 +64,13 @@ private class Doc2Mdwn
 				end
 				# else fence content
 				curblock.add(text)
-				curblock.add("\n")
 				continue
 			end
 
 			# Is codeblock? Then just collect them
-			if indent >= 4 then
-				var part = text.substring_from(4)
-				curblock.add(part)
-				curblock.add("\n")
+			if indent >= 3 then
+				# to allows 4 spaces including the one that follows the #
+				curblock.add(text)
 				continue
 			end
 
@@ -187,10 +185,27 @@ private class Doc2Mdwn
 	do
 		# Is there a codeblock to manage?
 		if not curblock.is_empty then
+			# determine the smalest indent
+			var minindent = -1
+			for text in curblock do
+				var indent = 0
+				while indent < text.length and text.chars[indent] == ' ' do indent += 1
+				if minindent == -1 or indent < minindent then
+					minindent = indent
+				end
+			end
+
+			# Generate the text
+			var btext = new FlatBuffer
+			for text in curblock do
+				btext.append text.substring_from(minindent)
+				btext.add '\n'
+			end
+
+			# add the node
 			var n = new HTMLTag("pre")
 			root.add(n)
-			var btext = curblock.to_s
-			process_code(n, btext)
+			process_code(n, btext.to_s)
 			curblock.clear
 		end
 	end

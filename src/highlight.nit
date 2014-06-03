@@ -167,9 +167,9 @@ class HighlightVisitor
 		return """
 .nitcode a { color: inherit; cursor:pointer; }
 .nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
-.nitcode .foldable { display: block } /* for block productions*/
-.nitcode .line{ display: block } /* for lines */
-.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
+pre.nitcode .foldable { display: block } /* for block productions*/
+pre.nitcode .line{ display: block } /* for lines */
+pre.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
 .nitcode :target { background-color: #FFF3C2 } /* target highlight*/
 /* lexical raw tokens. independent of usage or semantic: */
 .nitcode .nc_c { color: gray; font-style: italic; } /* comment */
@@ -199,6 +199,22 @@ class HighlightVisitor
 .nitcode .nc_error { border: 1px red solid;} /* not used */
 .popover { max-width: 800px !important; }
 """
+	end
+
+	# Additional content to inject in the <head> tag
+	# Note: does not include `css_content`; handle it yourself.
+	fun head_content: String
+	do
+		return """<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n"""
+	end
+
+	# Additional content to inject just before the closing </body> tag
+	fun foot_content: String
+	do
+		return """
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script>"""
 	end
 end
 
@@ -650,9 +666,9 @@ end
 redef class AVarFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end
@@ -660,9 +676,9 @@ end
 redef class AVardeclExpr
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end
@@ -671,9 +687,9 @@ redef class AForExpr
 	redef fun decorate_tag(v, res, token)
 	do
 		if not token isa TId then return null
-		res.add_class("nc_v")
 		var vs = variables
 		if vs == null then return null
+		res.add_class("nc_v")
 		var idx = n_ids.index_of(token)
 		var variable = vs[idx]
 		return variable.infobox(v)
@@ -683,11 +699,11 @@ end
 redef class AParam
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var mp = mparameter
 		if mp == null then return null
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end

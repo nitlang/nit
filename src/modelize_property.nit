@@ -294,7 +294,11 @@ redef class APropdef
 	private fun set_doc(mpropdef: MPropDef)
 	do
 		var ndoc = self.n_doc
-		if ndoc != null then mpropdef.mdoc = ndoc.to_mdoc
+		if ndoc != null then
+			var mdoc = ndoc.to_mdoc
+			mpropdef.mdoc = mdoc
+			mdoc.original_mentity = mpropdef
+		end
 	end
 
 	private fun check_redef_property_visibility(modelbuilder: ModelBuilder, nvisibility: nullable AVisibility, mprop: MProperty)
