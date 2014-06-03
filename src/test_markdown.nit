@@ -73,6 +73,9 @@ var page = new HTMLTag("html")
 page.add_raw_html """
 <head>
 <meta charset="utf-8">
+"""
+page.add_raw_html hv.head_content
+page.add_raw_html """
 <style type="text/css">
 code {margin: 0 2px;
 padding: 0px 5px;
@@ -93,8 +96,7 @@ border-color: red;
 }
 {{{hv.css_content}}}
 </style>
-</head><body>
-"""
+</head><body>"""
 
 if opt_full.value then
 	for m in model.mmodules do
@@ -106,5 +108,6 @@ else
 	end
 end
 
+page.add_raw_html hv.foot_content
 page.add_raw_html "</body>"
 page.write_to(stdout)
