@@ -616,7 +616,11 @@ class ModelBuilder
 
 		if decl != null then
 			var ndoc = decl.n_doc
-			if ndoc != null then mmodule.mdoc = ndoc.to_mdoc
+			if ndoc != null then
+				var mdoc = ndoc.to_mdoc
+				mmodule.mdoc = mdoc
+				mdoc.original_mentity = mmodule
+			end
 		end
 
 		return mmodule
