@@ -48,6 +48,7 @@ redef class ModelBuilder
 		var mclassdef = nclassdef.mclassdef.as(not null)
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
+			if not mclassdef2nclassdef.has_key(superclassdef) then continue
 			build_properties(mclassdef2nclassdef[superclassdef])
 		end
 
