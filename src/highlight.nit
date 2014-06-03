@@ -666,9 +666,9 @@ end
 redef class AVarFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end
@@ -676,9 +676,9 @@ end
 redef class AVardeclExpr
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end
@@ -687,9 +687,9 @@ redef class AForExpr
 	redef fun decorate_tag(v, res, token)
 	do
 		if not token isa TId then return null
-		res.add_class("nc_v")
 		var vs = variables
 		if vs == null then return null
+		res.add_class("nc_v")
 		var idx = n_ids.index_of(token)
 		var variable = vs[idx]
 		return variable.infobox(v)
@@ -699,11 +699,11 @@ end
 redef class AParam
 	redef fun decorate_tag(v, res, token)
 	do
-		res.add_class("nc_v")
 		var mp = mparameter
 		if mp == null then return null
 		var variable = self.variable
 		if variable == null then return null
+		res.add_class("nc_v")
 		return variable.infobox(v)
 	end
 end
