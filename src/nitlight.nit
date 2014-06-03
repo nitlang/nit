@@ -69,7 +69,7 @@ for mm in mmodules do
 			</style>
 			"""
 		else
-			page.add_raw_html """<link rel="stylesheet" type="text/css" href="style.css" />"""
+			page.add_raw_html v.head_content
 		end
 		page.add_raw_html """<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n"""
 		page.add_raw_html "</head><body><pre class='nit_code'>"
@@ -78,9 +78,7 @@ for mm in mmodules do
 	if not opt_fragment.value then
 		page.add(v.html)
 		page.add_raw_html "</pre>"
-		page.add_raw_html """<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>\n"""
-		page.add_raw_html """<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>\n"""
-		page.add_raw_html """<script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script>\n"""
+		page.add_raw_html v.foot_content
 		page.add_raw_html "</body>"
 	else
 		page = v.html

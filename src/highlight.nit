@@ -200,6 +200,22 @@ pre.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
 .popover { max-width: 800px !important; }
 """
 	end
+
+	# Additional content to inject in the <head> tag
+	# Note: does not include `css_content`; handle it yourself.
+	fun head_content: String
+	do
+		return """<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n"""
+	end
+
+	# Additional content to inject just before the closing </body> tag
+	fun foot_content: String
+	do
+		return """
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script>"""
+	end
 end
 
 redef class HTMLTag
