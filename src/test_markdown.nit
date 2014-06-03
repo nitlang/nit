@@ -43,6 +43,16 @@ redef class ModelBuilder
 	end
 end
 
+redef class MModule
+	redef fun href do return "#{to_s}"
+end
+redef class MClassDef
+	redef fun href do return "#{to_s}"
+end
+redef class MPropDef
+	redef fun href do return "#{to_s}"
+end
+
 var toolcontext = new ToolContext
 
 var opt_full = new OptionBool("Process also imported modules", "--full")
