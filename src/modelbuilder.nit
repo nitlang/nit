@@ -498,6 +498,16 @@ class ModelBuilder
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
+		var readme = dirpath.join_path("README")
+		if readme.file_exists then
+			var mdoc = new MDoc
+			var s = new IFStream.open(readme)
+			while not s.eof do
+				mdoc.content.add(s.read_line)
+			end
+			mgroup.mdoc = mdoc
+			mdoc.original_mentity = mgroup
+		end
 		mgroup.filepath = dirpath
 		mgroups[rdp] = mgroup
 		return mgroup
