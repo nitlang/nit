@@ -133,7 +133,7 @@ redef class ModelBuilder
 				var nfd = nclassdef.n_formaldefs[i]
 				var nfdt = nfd.n_type
 				if nfdt != null then
-					var bound = resolve_mtype_unchecked(nclassdef, nfdt, false)
+					var bound = resolve_mtype_unchecked(mmodule, null, nfdt, false)
 					if bound == null then return # Forward error
 					if bound.need_anchor then
 						# No F-bounds!
@@ -194,7 +194,7 @@ redef class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				specobject = false
 				var ntype = nsc.n_type
-				var mtype = resolve_mtype_unchecked(nclassdef, ntype, false)
+				var mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
 					error(ntype, "Error: supertypes cannot be a formal type")
@@ -249,6 +249,7 @@ redef class ModelBuilder
 		var mmodule = nmodule.mmodule.as(not null)
 		for imp in mmodule.in_importation.direct_greaters do
 
+			if not mmodule2nmodule.has_key(imp) then continue
 			build_classes(mmodule2nmodule[imp])
 		end
 
@@ -293,11 +294,12 @@ redef class ModelBuilder
 		# Check unchecked ntypes
 		for nclassdef in nmodule.n_classdefs do
 			if nclassdef isa AStdClassdef then
+				var mclassdef = nclassdef.mclassdef
 				# check bound of formal parameter
 				for nfd in  nclassdef.n_formaldefs do
 					var nfdt = nfd.n_type
 					if nfdt != null and nfdt.mtype != null then
-						var bound = resolve_mtype(nclassdef, nfdt)
+						var bound = resolve_mtype(mmodule, mclassdef, nfdt)
 						if bound == null then return # Forward error
 					end
 				end
@@ -305,7 +307,7 @@ redef class ModelBuilder
 				for nsc in nclassdef.n_superclasses do
 					var ntype = nsc.n_type
 					if ntype.mtype != null then
-						var mtype = resolve_mtype(nclassdef, ntype)
+						var mtype = resolve_mtype(mmodule, mclassdef, ntype)
 						if mtype == null then return # Forward error
 					end
 				end
@@ -378,15 +380,12 @@ redef class ModelBuilder
 	var mclassdef2nclassdef: HashMap[MClassDef, AClassdef] = new HashMap[MClassDef, AClassdef]
 
 	# Return the static type associated to the node `ntype`.
-	# `nclassdef` is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule`
+	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
 	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType, with_virtual: Bool): nullable MType
+	fun resolve_mtype_unchecked(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType, with_virtual: Bool): nullable MType
 	do
 		var name = ntype.n_id.text
-		var mclassdef = nclassdef.mclassdef
-		var mmodule = nclassdef.parent.as(AModule).mmodule.as(not null)
 		var res: MType
 
 		# Check virtual type
@@ -441,7 +440,7 @@ redef class ModelBuilder
 			else
 				var mtypes = new Array[MType]
 				for nt in ntype.n_types do
-					var mt = resolve_mtype_unchecked(nclassdef, nt, with_virtual)
+					var mt = resolve_mtype_unchecked(mmodule, mclassdef, nt, with_virtual)
 					if mt == null then return null # Forward error
 					mtypes.add(mt)
 				end
@@ -458,27 +457,26 @@ redef class ModelBuilder
 	end
 
 	# Return the static type associated to the node `ntype`.
-	# `nclassdef` is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule`
+	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
 	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
+	fun resolve_mtype(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType): nullable MType
 	do
 		var mtype = ntype.mtype
-		if mtype == null then mtype = resolve_mtype_unchecked(nclassdef, ntype, true)
+		if mtype == null then mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 		if mtype == null then return null # Forward error
 
 		if ntype.checked_mtype then return mtype
 		if mtype isa MGenericType then
-			var mmodule = nclassdef.parent.as(AModule).mmodule.as(not null)
-			var mclassdef = nclassdef.mclassdef
 			var mclass = mtype.mclass
 			for i in [0..mclass.arity[ do
 				var bound = mclass.intro.bound_mtype.arguments[i]
 				var nt = ntype.n_types[i]
-				var mt = resolve_mtype(nclassdef, nt)
+				var mt = resolve_mtype(mmodule, mclassdef, nt)
 				if mt == null then return null # forward error
-				if not mt.is_subtype(mmodule, mclassdef.bound_mtype, bound) then
+				var anchor
+				if mclassdef != null then anchor = mclassdef.bound_mtype else anchor = null
+				if not mt.is_subtype(mmodule, anchor, bound) then
 					error(nt, "Type error: expected {bound}, got {mt}")
 					return null
 				end
