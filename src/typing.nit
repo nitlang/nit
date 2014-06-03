@@ -34,7 +34,6 @@ end
 
 private class TypeVisitor
 	var modelbuilder:  ModelBuilder
-	var nclassdef: AClassdef
 
 	# The module of the analysis
 	# Used to correctly query the model
@@ -44,26 +43,31 @@ private class TypeVisitor
 	# Mainly used for type tests and type resolutions
 	var anchor: nullable MClassType
 
+	# The analyzed mclassdef
+	var mclassdef: nullable MClassDef
+
 	# The analyzed property
 	var mpropdef: nullable MPropDef
 
 	var selfvariable: Variable = new Variable("self")
 
-	init(modelbuilder: ModelBuilder, nclassdef: AClassdef, mpropdef: MPropDef)
+	init(modelbuilder: ModelBuilder, mmodule: MModule, mpropdef: nullable MPropDef)
 	do
 		self.modelbuilder = modelbuilder
-		self.nclassdef = nclassdef
-		self.mpropdef = mpropdef
-		var mclassdef = mpropdef.mclassdef
+		self.mmodule = mmodule
 
-		self.mmodule = mclassdef.mmodule
-		self.anchor = mclassdef.bound_mtype
+		if mpropdef != null then
+			self.mpropdef = mpropdef
+			var mclassdef = mpropdef.mclassdef
+			self.mclassdef = mclassdef
+			self.anchor = mclassdef.bound_mtype
 
-		var mclass = mclassdef.mclass
+			var mclass = mclassdef.mclass
 
-		var selfvariable = new Variable("self")
-		self.selfvariable = selfvariable
-		selfvariable.declared_type = mclass.mclass_type
+			var selfvariable = new Variable("self")
+			self.selfvariable = selfvariable
+			selfvariable.declared_type = mclass.mclass_type
+		end
 	end
 
 	fun anchor_to(mtype: MType): MType
@@ -190,7 +194,7 @@ private class TypeVisitor
 
 	fun resolve_mtype(node: AType): nullable MType
 	do
-		return self.modelbuilder.resolve_mtype(mmodule, mpropdef.mclassdef, node)
+		return self.modelbuilder.resolve_mtype(mmodule, mclassdef, node)
 	end
 
 	fun try_get_mclass(node: ANode, name: String): nullable MClass
@@ -481,9 +485,8 @@ redef class AMethPropdef
 		var nblock = self.n_block
 		if nblock == null then return
 
-		var nclassdef = self.parent.as(AClassdef)
 		var mpropdef = self.mpropdef.as(not null)
-		var v = new TypeVisitor(modelbuilder, nclassdef, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var mmethoddef = self.mpropdef.as(not null)
@@ -510,8 +513,8 @@ end
 redef class AAttrPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
-		var nclassdef = self.parent.as(AClassdef)
-		var v = new TypeVisitor(modelbuilder, nclassdef, self.mpropdef.as(not null))
+		var mpropdef = self.mpropdef.as(not null)
+		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
