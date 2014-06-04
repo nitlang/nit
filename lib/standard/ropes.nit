@@ -17,3 +17,50 @@ module ropes
 
 intrude import string
 
+# A node for a Rope
+private abstract class RopeNode
+	# Length of the node
+	var length = 0
+end
+
+# Node that represents a concatenation between two nodes (of any RopeNode type)
+private class Concat
+	super RopeNode
+
+	# Left child of the node
+	var _left: nullable RopeNode = null
+	# Right child of the node
+	var _right: nullable RopeNode = null
+
+	fun left: nullable RopeNode do return _left
+	fun right: nullable RopeNode do return _right
+
+	fun left=(l: RopeNode)
+	do
+		_left = l
+		length = l.length
+		if _right != null then length += _right.length
+	end
+
+	fun right=(r: RopeNode)
+	do
+		_right = r
+		length = r.length
+		if _left != null then length += _left.length
+	end
+end
+
+# Leaf of a Rope, contains a FlatString
+private class Leaf
+	super RopeNode
+
+	# Encapsulated FlatString in the leaf node
+	var str: FlatString
+
+	init(val: FlatString) do
+		self.str = val
+		length = str.length
+	end
+
+end
+
