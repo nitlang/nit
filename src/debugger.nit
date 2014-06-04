@@ -992,20 +992,18 @@ class Debugger
 	# If it is a primitive type, its value is directly printed
 	fun print_instance(instance: Instance)
 	do
-		print "Printing innards of a variable"
-
 		if instance isa MutableInstance then
-			var attributes = instance.attributes
-			print "Object : {instance}"
+			print "\{"
+			print "\ttype : {instance},"
 
-			for current_attribute in attributes.keys do
-				print "Attribute : {current_attribute.to_s} \nValeur : {attributes[current_attribute].to_s}"
-			end
+			printn("\t")
+
+			print instance.attributes.join(",\n\t"," : ")
+
+			print "\}"
 		else
-			print "Found variable {instance}"
+			print "{instance}"
 		end
-
-		print "Stopping printing innards of a variable"
 	end
 
 	# Prints the attributes demanded in a SequenceRead
