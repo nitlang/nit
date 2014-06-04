@@ -76,3 +76,12 @@ abstract class Rope
 	redef fun length do return root.length
 end
 
+# Rope that cannot be modified
+class RopeString
+	super Rope
+	super String
+
+	redef fun to_s do return self
+
+end
+
