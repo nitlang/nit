@@ -73,6 +73,19 @@ abstract class Rope
 	# Root node, entry point of a Rope.
 	private var root: RopeNode
 
+	# Empty Rope
+	init do from("")
+
+	# Creates a new Rope with `s` as root
+	init from(s: String) do
+		if s isa RopeString then root = s.root else root = new Leaf(s.as(FlatString))
+	end
+
+	private init from_root(r: RopeNode)
+	do
+		root = r
+	end
+
 	redef fun length do return root.length
 end
 
