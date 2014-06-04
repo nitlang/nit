@@ -151,5 +151,31 @@ class RopeString
 
 	redef fun to_s do return self
 
+	# Adds `s` at the end of self
+	fun append(s: String): String
+	do
+		if self.is_empty then return s
+		return new RopeString.from_root(append_to_path(root,s))
+	end
+
+	# Builds a new path from root to the rightmost node with s appended
+	private fun append_to_path(node: RopeNode, s: String): RopeNode
+	do
+		var cct = new Concat
+		if node isa Leaf then
+			cct.left = node
+			if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
+		else if node isa Concat then
+			var right = node.right
+			if node.left != null then cct.left = node.left.as(not null)
+			if right == null then
+				if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
+			else
+				cct.right = append_to_path(right, s)
+			end
+		end
+		return cct
+	end
+
 end
 
