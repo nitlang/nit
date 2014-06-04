@@ -151,6 +151,53 @@ class RopeString
 
 	redef fun to_s do return self
 
+	# Inserts a String `str` at position `pos`
+	fun insert_at(str: String, pos: Int): RopeString
+	do
+		if str.length == 0 then return self
+		if self.length == 0 then return new RopeString.from(str)
+
+		assert pos >= 0 and pos <= length
+
+		if pos == length then return append(str).as(RopeString)
+
+		var path = node_at(pos)
+
+		var last_concat = new Concat
+
+		if path.offset == 0 then
+			last_concat.right = path.leaf
+			if str isa FlatString then last_concat.left = new Leaf(str) else last_concat.left = str.as(RopeString).root
+		else if path.offset == path.leaf.length then
+			if str isa FlatString then last_concat.right = new Leaf(str) else last_concat.right = str.as(RopeString).root
+			last_concat.left = path.leaf
+		else
+			var s = path.leaf.str
+			var l_half = s.substring(0, s.length - path.offset)
+			var r_half = s.substring_from(s.length - path.offset)
+			var cct = new Concat
+			cct.right = new Leaf(r_half)
+			last_concat.left = new Leaf(l_half)
+			if str isa FlatString then last_concat.right = new Leaf(str) else last_concat.right = str.as(RopeString).root
+			cct.left = last_concat
+			last_concat = cct
+		end
+
+		for i in path.stack.reverse_iterator do
+			var nod = new Concat
+			if i.left then
+				nod.right = i.node.right.as(not null)
+				nod.left = last_concat
+			else
+				nod.left = i.node.left.as(not null)
+				nod.right = last_concat
+			end
+			last_concat = nod
+		end
+
+		return new RopeString.from_root(last_concat)
+	end
+
 	# Adds `s` at the end of self
 	fun append(s: String): String
 	do
