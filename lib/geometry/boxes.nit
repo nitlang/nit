@@ -328,3 +328,31 @@ redef class ILine3d[N]
 	redef fun front do return point_left.z.min(point_right.z)
 	redef fun back do return point_left.z.max(point_right.z)
 end
+
+# Base for all data structures containing multiple Boxed Objects
+interface BoxedCollection[E: Boxed[Numeric]]
+	super SimpleCollection[E]
+
+	# returns all the items overlapping with `region`
+	fun items_overlapping(region :Boxed[Numeric]): SimpleCollection[E] is abstract
+end
+
+# A BoxedCollection implemented with an array, linear performances for searching but really
+# fast for creation and filling
+class BoxedArray[E: Boxed[Numeric]]
+	super BoxedCollection[E]
+
+	private var data: Array[E] = new Array[E]
+
+	redef fun add(item: E) do data.add(item)
+	redef fun items_overlapping(item: Boxed[Numeric]): SimpleCollection[E]
+	do
+		var arr = new Array[E]
+		for i in data do
+			if i.intersects(item) then arr.add(i)
+		end
+		return arr
+	end
+
+	redef fun iterator do return data.iterator
+end
