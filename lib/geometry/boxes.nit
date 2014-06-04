@@ -74,6 +74,15 @@ interface Boxed[N: Numeric]
 		return self.left <= other.right and other.left <= self.right and
 			self.top >= other.bottom and other.top >= self.bottom
 	end
+
+	# Create a bounding box that englobes the actual bounding box.
+	# `dist` is the distance between the inner boundaries and the outer boundaries.
+	# ~~~
+	# var p = new Point[Int](5,10)
+	# var b = p.padded(3)
+	# assert b.top == 2 and b.bot = 8 and b.left == 7 and b.right == 13
+	# ~~~
+	fun padded(dist: N): Box[N] do return new Box[N].lrtb(left - dist, right + dist, top + dist, bottom - dist)
 end
 
 # A 2d bounded object and an implementation of `Boxed`
@@ -201,6 +210,8 @@ interface Boxed3d[N: Numeric]
 		return super and (not other isa Boxed3d[N] or
 			(self.back <= other.front and other.back <= self.front))
 	end
+
+	redef fun padded(dist: N): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
 end
 
 # A 3d bounded object and an implementation of Boxed
