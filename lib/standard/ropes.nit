@@ -64,3 +64,15 @@ private class Leaf
 
 end
 
+# Basic structure, binary tree with a root node.
+#
+# Also shared services by subsequent implementations.
+abstract class Rope
+	super Text
+
+	# Root node, entry point of a Rope.
+	private var root: RopeNode
+
+	redef fun length do return root.length
+end
+
