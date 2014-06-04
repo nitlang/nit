@@ -647,13 +647,12 @@ class Debugger
 
 			var keys = map_of_instances.iterator
 
-			print "Variables collection : \n"
+			var self_var = seek_variable("self", frame)
+			print "self: {self_var.to_s}"
 
 			for instance in map_of_instances.keys do
-				print "Variable {instance.to_s}, Instance {map_of_instances[instance].to_s}"
+				print "{instance.to_s}: {map_of_instances[instance].to_s}"
 			end
-
-			print "\nEnd of current instruction \n"
 		else if parts_of_command[1] == "stack" then
 			print self.stack_trace
 		else if parts_of_command[1].chars.has('[') and parts_of_command[1].chars.has(']') then
