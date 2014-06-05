@@ -117,6 +117,12 @@ abstract class Rope
 	# Iterator on the leaves of the rope, forward order
 	private fun leaves(from: Int): LeavesIterator do return new LeavesIterator(self, from)
 
+	# Iterator on the substrings from 0, in forward order
+	fun substrings: IndexedIterator[Text] do return new SubstringsIterator(self, 0)
+
+	# Iterator on the substrings, starting at position `from`, in forward order
+	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
+
 	# Path to the Leaf for `position`
 	private fun node_at(position: Int): Path
 	do
@@ -418,5 +424,56 @@ class LeavesIterator
 			if nodes.is_ok and nodes.item isa Leaf then break
 		end
 	end
+end
+
+# Uses the leaves and calculates a new substring on each iteration
+class SubstringsIterator
+	super IndexedIterator[Text]
+
+	private var nodes: IndexedIterator[Leaf]
+
+	# Current position in Rope
+	var pos: Int
+
+	# Current substring, computed from the current Leaf and indexes
+	var substring: Text
+
+	init(tgt: Rope, pos: Int)
+	do
+		nodes = tgt.leaves(pos)
+		self.pos = pos
+		if pos < 0 or pos >= tgt.length then return
+		make_substring
+	end
+
+	# Compute the bounds of the current substring and makes the substring
+	private fun make_substring
+	do
+		substring = nodes.item.str
+		var min = 0
+		var length = substring.length
+		if nodes.index < pos then
+			min = pos - nodes.index
+		end
+		substring = substring.substring(min, length)
+	end
+
+	redef fun is_ok do return nodes.is_ok
+
+	redef fun item
+	do
+		assert is_ok
+		return substring
+	end
+
+	redef fun index do return pos
+
+	redef fun next
+	do
+		pos += substring.length
+		nodes.next
+		if nodes.is_ok then make_substring
+	end
+
 end
 
