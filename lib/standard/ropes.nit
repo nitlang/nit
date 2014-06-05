@@ -126,6 +126,13 @@ abstract class Rope
 	# Iterator on the substrings, starting at position `from`, in forward order
 	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
 
+	redef fun output
+	do
+		for i in substrings do
+			i.output
+		end
+	end
+
 	redef fun to_cstring
 	do
 		if str_representation != null then return str_representation.as(not null)
