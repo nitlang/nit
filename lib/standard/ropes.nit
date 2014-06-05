@@ -210,6 +210,9 @@ class RopeString
 		return new RopeString.from_root(last_concat)
 	end
 
+	# Adds `s` at the beginning of self
+	fun prepend(s: String): String do return insert_at(s, 0)
+
 	# Adds `s` at the end of self
 	fun append(s: String): String
 	do
