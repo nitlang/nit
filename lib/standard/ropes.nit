@@ -284,3 +284,25 @@ class RopeString
 	end
 end
 
+# Used to iterate on a Rope
+private class IteratorElement
+
+	init(e: RopeNode)
+	do
+		if e isa Leaf then
+			left = true
+			right = true
+		end
+		node = e
+	end
+
+	# The node being visited
+	var node: RopeNode
+	# If the node has a left child, was it visited ?
+	var left = false
+	# If the node has a right child, was it visited ?
+	var right = false
+	# Was the current node visited ?
+	var done = false
+end
+
