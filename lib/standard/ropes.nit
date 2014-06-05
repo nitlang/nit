@@ -114,6 +114,9 @@ abstract class Rope
 	# Iterator on the nodes of the rope, in forward postfix order
 	private fun postfix(from: Int): Postfix do return new Postfix.from(self, from)
 
+	# Iterator on the leaves of the rope, forward order
+	private fun leaves(from: Int): LeavesIterator do return new LeavesIterator(self, from)
+
 	# Path to the Leaf for `position`
 	private fun node_at(position: Int): Path
 	do
@@ -384,6 +387,36 @@ private class Postfix
 			end
 		end
 		lst.done = true
+	end
+end
+
+# Iterates on the leaves (substrings) of the Rope
+class LeavesIterator
+	super IndexedIterator[Leaf]
+
+	private var nodes: Postfix
+
+	init(tgt: Rope, pos: Int)
+	do
+		nodes = tgt.postfix(pos)
+	end
+
+	redef fun is_ok do return nodes.is_ok
+
+	redef fun item
+	do
+		assert is_ok
+		return nodes.item.as(Leaf)
+	end
+
+	redef fun index do return nodes.index
+
+	redef fun next
+	do
+		while nodes.is_ok do
+			nodes.next
+			if nodes.is_ok and nodes.item isa Leaf then break
+		end
 	end
 end
 
