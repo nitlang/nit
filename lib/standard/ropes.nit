@@ -126,6 +126,18 @@ abstract class Rope
 	# Iterator on the substrings, starting at position `from`, in forward order
 	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
 
+	# Iterator on the nodes of the rope, in backwards postfix order
+	private fun reverse_postfix(from: Int): ReversePostfix do return new ReversePostfix.from(self, from)
+
+	# Iterator on the leaves of the rope, backwards order
+	private fun reverse_leaves(from: Int): ReverseLeavesIterator do return new ReverseLeavesIterator(self,from)
+
+	# Iterator on the substrings, in reverse order
+	fun reverse_substrings: IndexedIterator[Text] do return new ReverseSubstringsIterator(self, length-1)
+
+	# Iterator on the substrings, in reverse order, starting iteration at position `from`
+	fun reverse_substrings_from(from: Int): IndexedIterator[Text] do return new ReverseSubstringsIterator(self, from)
+
 	redef fun output
 	do
 		for i in substrings do
@@ -607,6 +619,192 @@ class RopeCharIterator
 			if substrings.is_ok then
 				substr_iter = substrings.item.chars.iterator
 			end
+		end
+	end
+end
+
+private class ReversePostfix
+	super IndexedIterator[RopeNode]
+
+	var target: Rope
+
+	var pos: Int
+
+	var min = 0
+
+	var stack = new List[IteratorElement]
+
+	init from(tgt: Rope, pos: Int)
+	do
+		self.pos = pos
+		target = tgt
+		if pos < 0 or pos >= tgt.length then return
+		var path = tgt.node_at(pos)
+		self.pos -= path.offset
+		for i in path.stack do
+			var elemt = new IteratorElement(i.node)
+			elemt.right = true
+			if i.left then
+				elemt.left = true
+			end
+			stack.push elemt
+		end
+		stack.push(new IteratorElement(path.leaf))
+		stack.last.done = true
+	end
+
+	redef fun item do
+		assert is_ok
+		return stack.last.node
+	end
+
+	redef fun is_ok do return not stack.is_empty
+
+	redef fun index do return pos
+
+	redef fun next
+	do
+		if stack.is_empty then return
+		if pos < min then
+			stack.clear
+			return
+		end
+		var lst = stack.last
+		if lst.done then
+			stack.pop
+			next
+			return
+		end
+		if not lst.right then
+			var nod = lst.node.as(Concat)
+			var rgt = nod.right
+			lst.right = true
+			if rgt != null then
+				stack.push(new IteratorElement(rgt))
+				next
+				return
+			end
+		end
+		if not lst.left then
+			var nod = lst.node.as(Concat)
+			var lft = nod.left
+			lst.left = true
+			if lft != null then
+				stack.push(new IteratorElement(lft))
+				next
+				return
+			end
+		end
+		if lst.node isa Leaf then pos -= lst.node.length
+		lst.done = true
+	end
+end
+
+private class ReverseLeavesIterator
+	super IndexedIterator[Leaf]
+
+	var nodes: ReversePostfix
+
+	init(tgt: Rope, from: Int)
+	do
+		nodes = tgt.reverse_postfix(from)
+	end
+
+	redef fun is_ok do return nodes.is_ok
+
+	redef fun item do
+		assert is_ok
+		return nodes.item.as(Leaf)
+	end
+
+	redef fun next do
+		while nodes.is_ok do
+			nodes.next
+			if nodes.is_ok then if nodes.item isa Leaf then break
+		end
+	end
+
+	redef fun index do return nodes.index
+
+end
+
+private class ReverseSubstringsIterator
+	super IndexedIterator[Text]
+
+	var leaves: ReverseLeavesIterator
+
+	var pos: Int
+
+	var str: Text
+
+	init(tgt: Rope, from: Int)
+	do
+		leaves = tgt.reverse_leaves(from)
+		pos = from
+		if not leaves.is_ok then return
+		str = leaves.item.str
+		make_substring
+	end
+
+	fun make_substring
+	do
+		if pos >= (leaves.index + str.length - 1) then return
+		str = str.substring(0, (pos - leaves.index + 1))
+	end
+
+	redef fun is_ok do return leaves.is_ok
+
+	redef fun item do
+		assert is_ok
+		return str
+	end
+
+	redef fun index do return pos
+
+	redef fun next do
+		pos -= str.length
+		leaves.next
+		if not leaves.is_ok then return
+		str = leaves.item.str
+		make_substring
+	end
+end
+
+private class ReverseRopeCharIterator
+	super IndexedIterator[Char]
+
+	var substrs: IndexedIterator[Text]
+
+	var pos: Int
+
+	var subiter: IndexedIterator[Char]
+
+	init(tgt: Rope, from: Int)
+	do
+		substrs = tgt.reverse_substrings_from(from)
+		if not substrs.is_ok then
+			pos = -1
+			return
+		end
+		subiter = substrs.item.chars.reverse_iterator
+		pos = from
+	end
+
+	redef fun is_ok do return pos >= 0
+
+	redef fun item do
+		assert is_ok
+		return subiter.item
+	end
+
+	redef fun index do return pos
+
+	redef fun next do
+		pos -= 1
+		if subiter.is_ok then subiter.next
+		if not subiter.is_ok then
+			if substrs.is_ok then substrs.next
+			if substrs.is_ok then subiter = substrs.item.chars.reverse_iterator
 		end
 	end
 end
