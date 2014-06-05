@@ -224,5 +224,63 @@ class RopeString
 		return cct
 	end
 
+	# O(log(n))
+	#
+	#     var rope = new RopeString.from("abcd")
+	#     assert rope.substring(1, 2)         ==  "bc"
+	#     assert rope.substring(-1, 2)         ==  "a"
+	#     assert rope.substring(1, 0)         ==  ""
+	#     assert rope.substring(2, 5)         ==  "cd"
+	#
+	redef fun substring(pos, len)
+	do
+		if pos < 0 then
+			len += pos
+			pos = 0
+		end
+
+		if pos + len > length then len = length - pos
+
+		if len <= 0 then return new RopeString.from("")
+
+		var path = node_at(pos)
+
+		var lf = path.leaf
+		var offset = path.offset
+
+		if path.leaf.str.length - offset > len then lf = new Leaf(lf.str.substring(offset,len)) else lf = new Leaf(lf.str.substring_from(offset))
+
+		var nod: RopeNode = lf
+
+		for i in path.stack.reverse_iterator do
+			if i.right then continue
+			var tmp = new Concat
+			tmp.left = nod
+			var r = i.node.right
+			if r != null then tmp.right = r
+			nod = tmp
+		end
+
+		var ret = new RopeString
+		ret.root = nod
+
+		path = ret.node_at(len-1)
+
+		offset = path.offset
+		nod = new Leaf(path.leaf.str.substring(0, offset+1))
+
+		for i in path.stack.reverse_iterator do
+			if i.left then continue
+			var tmp = new Concat
+			tmp.right = nod
+			var l = i.node.left
+			if l != null then tmp.left = l
+			nod = tmp
+		end
+
+		ret.root = nod
+
+		return ret
+	end
 end
 
