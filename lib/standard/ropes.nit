@@ -163,6 +163,46 @@ class RopeString
 
 	redef fun to_s do return self
 
+	redef fun empty do return once new RopeString.from("")
+
+	redef fun reversed
+	do
+		var ret = empty.as(RopeString)
+		for i in substrings do
+			ret = ret.prepend(i.reversed.to_s).as(RopeString)
+		end
+		return ret
+	end
+
+	redef fun to_upper
+	do
+		var ret = empty
+		for i in substrings do
+			ret += i.to_upper
+		end
+		return ret
+	end
+
+	redef fun to_lower
+	do
+		var ret = empty
+		for i in substrings do
+			ret += i.to_lower
+		end
+		return ret
+	end
+
+	redef fun +(o) do return insert_at(o.to_s, length)
+
+	redef fun *(n)
+	do
+		var ret = new RopeString.from("")
+		for i in [0..n[ do
+			ret = (ret + self).as(RopeString)
+		end
+		return ret
+	end
+
 	# Inserts a String `str` at position `pos`
 	fun insert_at(str: String, pos: Int): RopeString
 	do
