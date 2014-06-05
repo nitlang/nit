@@ -96,6 +96,9 @@ abstract class Rope
 	# Root node, entry point of a Rope.
 	private var root: RopeNode
 
+	# Cached version of self as a flat String
+	private var str_representation: nullable NativeString = null
+
 	# Empty Rope
 	init do from("")
 
@@ -122,6 +125,32 @@ abstract class Rope
 
 	# Iterator on the substrings, starting at position `from`, in forward order
 	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
+
+	redef fun to_cstring
+	do
+		if str_representation != null then return str_representation.as(not null)
+
+		var native_final_str = calloc_string(length + 1)
+
+		native_final_str[length] = '\0'
+
+		if self.length == 0 then
+			str_representation = native_final_str
+			return native_final_str
+		end
+
+		var offset = 0
+
+		for i in substrings do
+			var str = i.flatten
+			if str isa FlatString then str.items.copy_to(native_final_str, str.length, str.index_from, offset)
+			offset += i.length
+		end
+
+		str_representation = native_final_str
+
+		return native_final_str
+	end
 
 	# Path to the Leaf for `position`
 	private fun node_at(position: Int): Path
