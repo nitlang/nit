@@ -224,6 +224,8 @@ class RopeString
 
 	redef fun empty do return once new RopeString.from("")
 
+	redef var chars: SequenceRead[Char] = new RopeStringChars(self)
+
 	redef fun reversed
 	do
 		var ret = empty.as(RopeString)
@@ -396,6 +398,27 @@ class RopeString
 
 		return ret
 	end
+end
+
+private class RopeStringChars
+	super SequenceRead[Char]
+
+	var tgt: Rope
+
+	redef fun [](pos)
+	do
+		assert pos < tgt.length
+		var path = tgt.node_at(pos)
+		return path.leaf.str.chars[path.offset]
+	end
+
+	redef fun iterator do return iterator_from(0)
+
+	redef fun iterator_from(pos) do return new RopeCharIterator(tgt, pos)
+
+	redef fun reverse_iterator do return reverse_iterator_from(tgt.length-1)
+
+	redef fun reverse_iterator_from(pos) do return new ReverseRopeCharIterator(tgt, pos)
 end
 
 # Used to iterate on a Rope
