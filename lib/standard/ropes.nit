@@ -111,6 +111,9 @@ abstract class Rope
 
 	redef fun length do return root.length
 
+	# Iterator on the nodes of the rope, in forward postfix order
+	private fun postfix(from: Int): Postfix do return new Postfix.from(self, from)
+
 	# Path to the Leaf for `position`
 	private fun node_at(position: Int): Path
 	do
@@ -304,5 +307,83 @@ private class IteratorElement
 	var right = false
 	# Was the current node visited ?
 	var done = false
+end
+
+# Simple Postfix iterator on the nodes of a Rope
+private class Postfix
+	super IndexedIterator[RopeNode]
+
+	# Target Rope to iterate on
+	var target: Rope
+
+	# Current position in Rope
+	var pos: Int
+
+	# Visited nodes
+	var stack = new List[IteratorElement]
+
+	init from(tgt: Rope, pos: Int)
+	do
+		self.target = tgt
+		self.pos = pos
+		if pos < 0 or pos >= tgt.length then return
+		var path = tgt.node_at(pos)
+		self.pos -= path.offset
+		for i in path.stack do
+			var item = new IteratorElement(i.node)
+			item.left = true
+			if i.right then item.right = true
+			stack.push item
+		end
+		var item = new IteratorElement(path.leaf)
+		item.done = true
+		stack.push item
+	end
+
+	redef fun item
+	do
+		assert is_ok
+		return stack.last.node
+	end
+
+	redef fun is_ok do return not stack.is_empty
+
+	redef fun index do return pos
+
+	redef fun next do
+		if stack.is_empty then return
+		if pos > target.length-1 then
+			stack.clear
+			return
+		end
+		var lst = stack.last
+		if lst.done then
+			if lst.node isa Leaf then
+				pos += lst.node.length
+			end
+			stack.pop
+			next
+			return
+		end
+		if not lst.left then
+			lst.left = true
+			var nod = lst.node
+			if nod isa Concat and nod.left != null then
+				stack.push(new IteratorElement(nod.left.as(not null)))
+				next
+				return
+			end
+		end
+		if not lst.right then
+			lst.right = true
+			var nod = lst.node
+			if nod isa Concat and nod.right != null then
+				stack.push(new IteratorElement(nod.right.as(not null)))
+				next
+				return
+			end
+		end
+		lst.done = true
+	end
 end
 
