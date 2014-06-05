@@ -635,8 +635,6 @@ class FlatString
 	super FlatText
 	super String
 
-	redef type SELFTYPE: FlatString
-
 	# Index in _items of the start of the string
 	private var index_from: Int
 

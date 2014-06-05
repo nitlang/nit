@@ -289,8 +289,8 @@ class RopeString
 			var l_half = s.substring(0, s.length - path.offset)
 			var r_half = s.substring_from(s.length - path.offset)
 			var cct = new Concat
-			cct.right = new Leaf(r_half)
-			last_concat.left = new Leaf(l_half)
+			cct.right = new Leaf(r_half.as(FlatString))
+			last_concat.left = new Leaf(l_half.as(FlatString))
 			if str isa FlatString then last_concat.right = new Leaf(str) else last_concat.right = str.as(RopeString).root
 			cct.left = last_concat
 			last_concat = cct
@@ -364,7 +364,7 @@ class RopeString
 		var lf = path.leaf
 		var offset = path.offset
 
-		if path.leaf.str.length - offset > len then lf = new Leaf(lf.str.substring(offset,len)) else lf = new Leaf(lf.str.substring_from(offset))
+		if path.leaf.str.length - offset > len then lf = new Leaf(lf.str.substring(offset,len).as(FlatString)) else lf = new Leaf(lf.str.substring_from(offset).as(FlatString))
 
 		var nod: RopeNode = lf
 
@@ -383,7 +383,7 @@ class RopeString
 		path = ret.node_at(len-1)
 
 		offset = path.offset
-		nod = new Leaf(path.leaf.str.substring(0, offset+1))
+		nod = new Leaf(path.leaf.str.substring(0, offset+1).as(FlatString))
 
 		for i in path.stack.reverse_iterator do
 			if i.left then continue
