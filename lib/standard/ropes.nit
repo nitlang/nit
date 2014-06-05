@@ -477,3 +477,47 @@ class SubstringsIterator
 
 end
 
+class RopeCharIterator
+	super IndexedIterator[Char]
+
+	var substrings: IndexedIterator[Text]
+
+	var pos: Int
+
+	var max: Int
+
+	var substr_iter: IndexedIterator[Char]
+
+	init(tgt: Rope, from: Int)
+	do
+		substrings = tgt.substrings_from(from)
+		max = tgt.length - 1
+		if not substrings.is_ok then
+			pos = tgt.length
+			return
+		end
+		pos = from
+		substr_iter = substrings.item.chars.iterator
+	end
+
+	redef fun item do return substr_iter.item
+
+	redef fun is_ok do return pos <= max
+
+	redef fun index do return pos
+
+	redef fun next
+	do
+		pos += 1
+		if substr_iter.is_ok then
+			substr_iter.next
+		end
+		if not substr_iter.is_ok then
+			substrings.next
+			if substrings.is_ok then
+				substr_iter = substrings.item.chars.iterator
+			end
+		end
+	end
+end
+
