@@ -47,4 +47,31 @@ redef class App
 		super
 		window_closing
 	end
+
+	# Is the application currently paused?
+	var paused = true
+
+	redef fun window_created
+	do
+		super
+		paused = false
+	end
+
+	redef fun window_closing
+	do
+		paused = true
+		super
+	end
+
+	redef fun pause
+	do
+		paused = true
+		super
+	end
+
+	redef fun resume
+	do
+		paused = false
+		super
+	end
 end

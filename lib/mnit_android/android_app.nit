@@ -274,6 +274,8 @@ redef class App
 		app_glue->onInputEvent = mnit_handle_input;
 	`}
 
+	redef fun full_frame do if not paused then super
+
 	# these are used as a callback from native to type incoming events
 	private fun extern_input_key(event: AndroidKeyEvent): Bool
 	do
