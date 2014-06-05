@@ -53,7 +53,7 @@ redef class App
 
 	# Main frame method to redef
 	# Is called between readying display and flipping it
-	fun frame_core( display: D ) is abstract
+	fun frame_core( display: D ) do end
 
 	# Receive and deal with all inputs
 	fun input( event: InputEvent ): Bool
