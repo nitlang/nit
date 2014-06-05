@@ -154,6 +154,17 @@ abstract class Rope
 		end
 	end
 
+	redef fun ==(o)
+	do
+		if not o isa Text then return false
+		if o.length != self.length then return false
+		var oit = o.chars.iterator
+		for i in self.chars.iterator do
+			if i != oit.item then return false
+			oit.next
+		end
+		return true
+	end
 end
 
 # Rope that cannot be modified
