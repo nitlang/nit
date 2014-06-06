@@ -25,7 +25,6 @@ src/version.nit
 src/callgrind.*
 src/*.log
 src/*.dot
-src/doc
 src/*.dat
 src/*.gnu
 src/*.bin
