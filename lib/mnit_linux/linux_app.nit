@@ -35,7 +35,7 @@ redef class App
 
 		super
 
-		init_window
+		window_created
 	end
 
 	redef fun generate_input

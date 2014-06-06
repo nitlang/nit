@@ -38,7 +38,7 @@ redef class App
 	var imgs : nullable ImageSet = null
 	var splash : nullable SplashScreen = null
 
-	redef fun init_window
+	redef fun window_created
 	do
 		super
 

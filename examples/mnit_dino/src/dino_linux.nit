@@ -27,5 +27,3 @@ end
 redef class SplashScreen
 	redef fun splash_play_path do return "images/splash_play.png"
 end
-
-super

@@ -20,21 +20,29 @@ import realtime
 import mnit_android
 import game_logic
 
-class MyApp
-	super App
+redef class App
 
 	var screen: nullable Screen
 
 	var target_dt = 20000000
 
-	init do super
+	redef fun run
+	do
+		sensors_support_enabled = true
+		accelerometer.enabled = true
+		accelerometer.event_rate = 10000
+		magnetic_field.enabled = true
+		gyroscope.enabled = true
+		light.enabled = true
+		proximity.enabled = true
 
+		super
+	end
 
-	redef fun init_window 
+	redef fun window_created
 	do
 		super
 		screen = new Screen(self, display.as(Display))
-		
 	end
 
 	redef fun frame_core(display)
@@ -66,13 +74,3 @@ class MyApp
 		return false
 	end
 end
-
-var app = new MyApp
-app.sensors_support_enabled = true
-app.accelerometer.enabled = true
-app.accelerometer.event_rate = 10000
-app.magnetic_field.enabled = true
-app.gyroscope.enabled = true
-app.light.enabled = true
-app.proximity.enabled = true
-app.main_loop

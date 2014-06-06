@@ -36,8 +36,6 @@ redef class App
 	# Received quit order
 	var quit: Bool writable = false
 
-	init do end
-
 	# App is visible? (vs minimized or in background)
 	fun visible: Bool is abstract
 
@@ -55,34 +53,7 @@ redef class App
 
 	# Main frame method to redef
 	# Is called between readying display and flipping it
-	fun frame_core( display: D ) is abstract
-
-	#fun start do end
-	#fun stop do end
-	#fun destroy do end
-
-	# Called when asked by the system (mainly for Android)
-	fun save do end
-
-	# Called when asked by the system (mainly for Android)
-	fun pause do end
-
-	# Called when asked by the system (mainly for Android)
-	fun resume do end
-
-	# System notification
-	fun gained_focus do end
-
-	# System notification
-	fun lost_focus do end
-
-	# Main init method for graphical stuff
-	# Is called when display is ready so graphical assets
-	# can be loaded at this time.
-	fun init_window do end
-
-	# Called before destroying the window
-	fun term_window do end
+	fun frame_core( display: D ) do end
 
 	# Receive and deal with all inputs
 	fun input( event: InputEvent ): Bool
@@ -94,8 +65,8 @@ redef class App
 	protected fun generate_input is abstract
 
 	# Main app loop
-	# Usually you want to redef framw_core instead of this
-	fun main_loop
+	# Usually you want to redef frame_core instead of this
+	redef fun run
 	do
 		while not quit do
 			generate_input

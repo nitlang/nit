@@ -25,7 +25,7 @@ module app
 # This class is redefed by plateform modules and so
 # App can be specialized directly in the user app.
 class App
-	private init do end
+	protected init do end
 
 	# Main entry point of your application
 	fun run do end
@@ -38,6 +38,14 @@ class App
 
 	# Helper function for logging warnings
 	fun log_warning(msg: String) do sys.stderr.write "{log_prefix} warn: {msg}\n"
+
+	# Main init method for graphical stuff
+	# Is called when display is ready so graphical assets
+	# can be loaded at this time.
+	fun window_created do end
+
+	# Called before destroying the window
+	fun window_closing do end
 end
 
 protected fun app: App do return once new App

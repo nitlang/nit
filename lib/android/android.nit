@@ -25,6 +25,7 @@
 module android
 
 import platform
+import native_app_glue
 private import log
 
 # Uses Android logs to print everything
@@ -34,4 +35,43 @@ redef class App
 	redef fun log_error(msg) do log_write(priority_error, log_prefix.to_cstring, msg.to_cstring)
 
 	redef fun log_warning(msg) do log_write(priority_warn, log_prefix.to_cstring, msg.to_cstring)
+
+	redef fun init_window
+	do
+		super
+		window_created
+	end
+
+	redef fun term_window
+	do
+		super
+		window_closing
+	end
+
+	# Is the application currently paused?
+	var paused = true
+
+	redef fun window_created
+	do
+		super
+		paused = false
+	end
+
+	redef fun window_closing
+	do
+		paused = true
+		super
+	end
+
+	redef fun pause
+	do
+		paused = true
+		super
+	end
+
+	redef fun resume
+	do
+		paused = false
+		super
+	end
 end

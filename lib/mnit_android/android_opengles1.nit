@@ -20,20 +20,22 @@ module android_opengles1
 
 import mnit
 import android_app
+import android
 
 in "C" `{
 	#include <android_native_app_glue.h>
 
 	NativeWindowType mnit_window;
-	struct android_app *mnit_java_app;
 	EGLNativeDisplayType mnit_native_display = EGL_DEFAULT_DISPLAY;
 `}
 
 redef class Opengles1Display
-	redef fun midway_init(format) is extern `{
-		mnit_window = mnit_java_app->window;
+	redef fun midway_init(format) import app_native_window `{
+		mnit_window = Opengles1Display_app_native_window(recv);
 		if (ANativeWindow_setBuffersGeometry(mnit_window, 0, 0, (EGLint)format) != 0) {
 			LOGW("Unable to ANativeWindow_setBuffersGeometry");
 		}
 	`}
+
+	private fun app_native_window: ANativeWindow do return app.native_app_glue.window
 end

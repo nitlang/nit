@@ -51,31 +51,13 @@ in "C" `{
 	extern int32_t mnit_height;
 	extern float mnit_zoom;
 
-	int mnit_orientation_changed;
+	//int mnit_orientation_changed;
 	float mnit_zoom;
-	int mnit_animating = 0;
-
-	/* This is confusing; the type come from android_native_app_glue.h
-	   and so identifies the java part of the app */
-	struct android_app *mnit_java_app;
-
-	/* This is the pure Nit App */
-	App nit_app;
-
-	/* The main of the Nit application, compiled somewhere else */
-	extern int main(int, char**);
-
-	/* Wraps App_full_frame() and check for orientation. */
-	void mnit_frame();
-
-	void mnit_term_display()
-	{
-		// At this point we have nothing to do
-	}
 
 	/* Handle inputs from the Android platform and sort them before
 	   sending them in the Nit App */
 	static int32_t mnit_handle_input(struct android_app* app, AInputEvent* event) {
+		App nit_app = app->userData;
 		LOGI("handle input %i", (int)pthread_self());
 		if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_KEY) {
 			LOGI("key");
@@ -89,121 +71,14 @@ in "C" `{
 		return 0;
 	}
 
-	static void mnit_handle_cmd(struct android_app* app, int32_t cmd) {
-
-		mnit_java_app = app;
-			AConfiguration_setOrientation(mnit_java_app->config, ACONFIGURATION_ORIENTATION_LAND);
-				LOGI("cmd %i", (int)pthread_self());
-
-		switch (cmd) {
-			case APP_CMD_SAVE_STATE:
-				LOGI ("save state");
-				mnit_java_app->savedStateSize = 1;
-				mnit_java_app->savedState = malloc(1);
-				App_save(nit_app);
-				break;
-
-			case APP_CMD_INIT_WINDOW:
-				LOGI ("init window");
-				if (mnit_java_app->window != NULL) {
-					LOGI("init window in");
-					App_init_window(nit_app);
-					mnit_frame();
-					mnit_animating = 1;
-				}
-				break;
-
-			case APP_CMD_TERM_WINDOW:
-				LOGI ("term window");
-				mnit_term_display();
-				App_term_window(nit_app);
-				break;
-
-			case APP_CMD_GAINED_FOCUS:
-				LOGI ("gain foc");
-				mnit_animating = 1;
-				App_gained_focus(nit_app);
-				LOGI ("gain foc 1");
-				break;
-
-			case APP_CMD_LOST_FOCUS:
-				LOGI ("lost foc");
-				mnit_animating = 0;
-				App_lost_focus(nit_app);
-				mnit_frame();
-				break;
-
-			case APP_CMD_PAUSE:
-				LOGI ("app pause");
-				App_pause(nit_app);
-				break;
-
-				/*
-			case APP_CMD_STOP:
-				LOGI ("app stop");
-				App_stop(nit_app);
-				break;
-
-			case APP_CMD_DESTROY:
-				LOGI ("app destrop");
-				App_destroy(nit_app);
-				break;
-
-			case APP_CMD_START:
-				LOGI ("app start");
-				App_start(nit_app);
-				break;
-				*/
-
-			case APP_CMD_RESUME:
-				LOGI ("app resume");
-				App_resume(nit_app);
-				break;
-
-			case APP_CMD_LOW_MEMORY:
-				LOGI ("app low mem");
-				break;
-
-			case APP_CMD_CONFIG_CHANGED:
-				LOGI ("app cmd conf ch");
-				break;
-
-			case APP_CMD_INPUT_CHANGED:
-				LOGI ("app cmd in ch");
-				break;
-
-			case APP_CMD_WINDOW_RESIZED:
-				mnit_orientation_changed = 1;
-				LOGI ("app win res");
-				break;
-
-			case APP_CMD_WINDOW_REDRAW_NEEDED:
-				LOGI ("app win redraw needed");
-				break;
-
-			case APP_CMD_CONTENT_RECT_CHANGED:
-				LOGI ("app content rect ch");
-				break;
-		}
-	}
-
-	void android_main(struct android_app* app)
-	{
-		mnit_java_app = app;
-
-		app_dummy();
-
-		main(0, NULL);
-	}
-
-	void mnit_frame()
+	void mnit_frame(App nit_app)
 	{
 		if (mnit_display == EGL_NO_DISPLAY) {
 			LOGI("no frame");
 			return;
 		}
 
-		if (mnit_orientation_changed)
+		/*if (mnit_orientation_changed)
 		{
 			mnit_orientation_changed = 0;
 
@@ -227,6 +102,7 @@ in "C" `{
 			glOrthof(0.0f, mnit_width, mnit_height, 0.0f, 0.0f, 1.0f);
 			glMatrixMode(GL_MODELVIEW);
 		}
+		*/
 
 		LOGI("frame");
 
@@ -388,10 +264,17 @@ redef class App
 
 	redef fun init_window
 	do
-		super
-
+		set_as_input_handler native_app_glue
 		display = new Opengles1Display
+
+		super
 	end
+
+	private fun set_as_input_handler(app_glue: NativeAppGlue) `{
+		app_glue->onInputEvent = mnit_handle_input;
+	`}
+
+	redef fun full_frame do if not paused then super
 
 	# these are used as a callback from native to type incoming events
 	private fun extern_input_key(event: AndroidKeyEvent): Bool
@@ -434,12 +317,12 @@ redef class App
 	do
 		sensormanager = new ASensorManager.get_instance
 		#eventqueue = sensormanager.create_event_queue(new NdkAndroidApp)
-		eventqueue = initialize_event_queue(sensormanager)
+		eventqueue = initialize_event_queue(sensormanager, native_app_glue.looper)
 	end
 
 	# HACK: need a nit method to get mnit_java_app, then we can use the appropriate sensormanager.create_event_queue method to initialize the event queue
-	private fun initialize_event_queue(sensormanager: ASensorManager): ASensorEventQueue `{
-		return ASensorManager_createEventQueue(sensormanager, mnit_java_app->looper, LOOPER_ID_USER, NULL, NULL);
+	private fun initialize_event_queue(sensormanager: ASensorManager, looper: ALooper): ASensorEventQueue `{
+		return ASensorManager_createEventQueue(sensormanager, looper, LOOPER_ID_USER, NULL, NULL);
 	`}
 
 	private fun enable_accelerometer
@@ -497,69 +380,62 @@ redef class App
 		end
 	end
 
-	redef fun main_loop is extern import full_frame, generate_input, enable_sensors `{
+	redef fun run is extern import full_frame, generate_input, enable_sensors, native_app_glue `{
+		struct android_app* app_glue = App_native_app_glue(recv);
 		LOGI("nitni loop");
 
-		nit_app = recv;
-
-		mnit_java_app->userData = &nit_app;
-		mnit_java_app->onAppCmd = mnit_handle_cmd;
-		mnit_java_app->onInputEvent = mnit_handle_input;
-
 		//Enbales sensors if needed
-		App_enable_sensors(nit_app);
+		App_enable_sensors(recv);
 
 		while (1) {
 			App_generate_input(recv);
 
-			if (mnit_java_app->destroyRequested != 0) return;
+			if (app_glue->destroyRequested != 0) return;
 
-			if (mnit_animating == 1) {
-				mnit_frame();
-				LOGI("frame at loop end 1");
-			}
+			mnit_frame(recv);
 		}
 		/* App_exit(); // this is unreachable anyway*/
 	`}
 
-	redef fun generate_input import save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion, extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue `{
+	redef fun generate_input import save_state, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion, extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue, native_app_glue `{
 		int ident;
 		int events;
 		static int block = 0;
 		struct android_poll_source* source;
+		struct android_app *app_glue = App_native_app_glue(recv);
 
 		while ((ident=ALooper_pollAll(0, NULL, &events,
 				(void**)&source)) >= 0) { /* first 0 is for non-blocking */
 
 			// Process this event.
 			if (source != NULL)
-				source->process(mnit_java_app, source);
+				source->process(app_glue, source);
 
 			//If a sensor has data, process it
 			if(ident == LOOPER_ID_USER) {
 				//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
 				ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
 				int nbevents;
-				ASensorEventQueue* queue = App_eventqueue(nit_app);
+				ASensorEventQueue* queue = App_eventqueue(recv);
 				while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
 					int i;
 					for(i = 0; i < nbevents; i++){
 						ASensorEvent event = events[i];
 						switch (event.type) {
 							case ASENSOR_TYPE_ACCELEROMETER:
-								App_extern_input_sensor_accelerometer(nit_app, &event);
+								App_extern_input_sensor_accelerometer(recv, &event);
 								break;
 							case ASENSOR_TYPE_MAGNETIC_FIELD:
-								App_extern_input_sensor_magnetic_field(nit_app, &event);
+								App_extern_input_sensor_magnetic_field(recv, &event);
 								break;
 							case ASENSOR_TYPE_GYROSCOPE:
-								App_extern_input_sensor_gyroscope(nit_app, &event);
+								App_extern_input_sensor_gyroscope(recv, &event);
 								break;
 							case ASENSOR_TYPE_LIGHT:
-								App_extern_input_sensor_light(nit_app, &event);
+								App_extern_input_sensor_light(recv, &event);
 								break;
 							case ASENSOR_TYPE_PROXIMITY:
-								App_extern_input_sensor_proximity(nit_app, &event);
+								App_extern_input_sensor_proximity(recv, &event);
 								break;
 						}
 					}
@@ -567,22 +443,9 @@ redef class App
 			}
 
 			// Check if we are exiting.
-			if (mnit_java_app->destroyRequested != 0) {
-				mnit_term_display();
-				return;
-			}
+			if (app_glue->destroyRequested != 0) return;
 		}
 	`}
-
-	# Main Android native activity
-	fun native_activity: NativeActivity `{
-		// the name 'clazz' is misleading, it's actually a 'jobject'
-		return mnit_java_app->activity->clazz;
-	`}
-end
-
-# Android Java activity from the NDK
-extern class NativeActivity in "Java" `{android.app.NativeActivity`}
 end
 
 extern class JavaClassLoader in "Java" `{java.lang.ClassLoader`}
@@ -593,7 +456,7 @@ redef class Sys
 	# Get the running JVM
 	redef fun create_default_jvm
 	do
-		var jvm = ndk_jvm
+		var jvm = app.native_app_glue.ndk_native_activity.vm
 		var jni_env = jvm.attach_current_thread
 		if jni_env.address_is_null then jni_env = jvm.env
 
@@ -601,7 +464,7 @@ redef class Sys
 		self.jni_env = jni_env
 	end
 
-	protected fun ndk_jvm: JavaVM `{ return mnit_java_app->activity->vm; `}
+	#protected fun ndk_jvm: JavaVM do`{ return mnit_java_app->activity->vm; `}
 
 	private var class_loader: nullable JavaObject = null
 	private var class_loader_method: nullable JMethodID = null
@@ -609,7 +472,7 @@ redef class Sys
 	do
 		var class_loader = self.class_loader
 		if class_loader == null then
-			find_class_loader
+			find_class_loader(app.native_app_glue.ndk_native_activity.java_native_activity)
 			class_loader = self.class_loader
 			assert class_loader != null
 		end
@@ -620,13 +483,11 @@ redef class Sys
 		return load_jclass_intern(class_loader, class_loader_method, name)
 	end
 
-	private fun find_class_loader import jni_env, class_loader=, JavaObject.as nullable, class_loader_method=, JMethodID.as nullable `{
+	private fun find_class_loader(native_activity: NativeActivity) import jni_env, class_loader=, JavaObject.as nullable, class_loader_method=, JMethodID.as nullable `{
 		JNIEnv *env = Sys_jni_env(recv);
 
-		jobject instance_activity = mnit_java_app->activity->clazz;
-
 		// Retrieve main activity
-		jclass class_activity = (*env)->GetObjectClass(env, instance_activity);
+		jclass class_activity = (*env)->GetObjectClass(env, native_activity);
 		if (class_activity == NULL) {
 			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving activity class");
 			(*env)->ExceptionDescribe(env);
@@ -641,7 +502,7 @@ redef class Sys
 		}
 
 		// Call activity.getClassLoader
-		jobject instance_class_loader = (*env)->CallObjectMethod(env, instance_activity, class_activity_getClassLoader);
+		jobject instance_class_loader = (*env)->CallObjectMethod(env, native_activity, class_activity_getClassLoader);
 		if (instance_class_loader == NULL) {
 			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving class loader instance");
 			(*env)->ExceptionDescribe(env);

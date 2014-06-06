@@ -315,7 +315,7 @@ class ShootApp
 	var img_boss_left: Image
 	var img_boss_right: Image
 
-	redef fun init_window
+	redef fun window_created
 	do
 		super
 
@@ -412,4 +412,4 @@ end
 
 var app = new ShootApp
 app.debug = args.length > 0 and args.first == "--debug"
-app.main_loop
+app.run
