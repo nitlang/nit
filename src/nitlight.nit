@@ -69,9 +69,9 @@ for mm in mmodules do
 			</style>
 			"""
 		else
-			page.add_raw_html v.head_content
+			page.add_raw_html """<link rel="stylesheet" type="text/css" href="style.css" />"""
 		end
-		page.add_raw_html """<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n"""
+		page.add_raw_html v.head_content
 		page.add_raw_html "</head><body><pre class='nit_code'>"
 	end
 	v.enter_visit(m)
