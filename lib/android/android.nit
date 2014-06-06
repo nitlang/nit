@@ -26,6 +26,7 @@ module android
 
 import platform
 import native_app_glue
+import dalvik
 private import log
 
 # Uses Android logs to print everything
