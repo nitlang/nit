@@ -207,6 +207,29 @@ redef class App
 	# 
 	# Raised when the soft input window being shown or hidden, and similar events.
 	fun content_rect_changed do end
+
+	# Call the `ALooper` to retrieve events and callback the application
+	fun poll_looper(timeout_ms: Int) import handle_looper_event `{
+		int ident;
+		int event;
+		void* source;
+		while ((ident=ALooper_pollAll(timeout_ms, NULL, &event, &source)) >= 0) {
+			App_handle_looper_event(recv, ident, event, source);
+		}
+	`}
+
+	# Handle an event retrieved by the `ALooper` and `poll_looper` without a callback
+	protected fun handle_looper_event(ident, event: Int, data: Pointer) import native_app_glue,
+		save_state, init_window, term_window, gained_focus, lost_focus, pause, stop,
+		destroy, start, resume, low_memory, config_changed, input_changed,
+		window_resized, window_redraw_needed, content_rect_changed `{
+
+		struct android_app *app_glue = App_native_app_glue(recv);
+		struct android_poll_source* source = (struct android_poll_source*)data;
+		
+		// Process this event.
+		if (source != NULL) source->process(app_glue, source);
+	`}
 end
 
 # An Android activity implemented in C. This is the C part of `NativeActivity`
@@ -325,6 +348,7 @@ end
 
 # Android NDK's structure to handle events synchronously
 extern class ALooper `{ ALooper* `}
+	# Returns the looper associated with the calling thread, or NULL if there is not one
 	new for_thread `{ return ALooper_forThread(); `}
 end
 

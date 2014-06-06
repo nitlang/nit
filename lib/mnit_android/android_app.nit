@@ -270,7 +270,7 @@ redef class App
 		super
 	end
 
-	private fun set_as_input_handler(app_glue: NativeAppGlue) `{
+	private fun set_as_input_handler(app_glue: NativeAppGlue) import extern_input_key, extern_input_motion `{
 		app_glue->onInputEvent = mnit_handle_input;
 	`}
 
@@ -397,53 +397,44 @@ redef class App
 		/* App_exit(); // this is unreachable anyway*/
 	`}
 
-	redef fun generate_input import save_state, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion, extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue, native_app_glue `{
-		int ident;
-		int events;
-		static int block = 0;
-		struct android_poll_source* source;
-		struct android_app *app_glue = App_native_app_glue(recv);
+	redef fun generate_input do poll_looper 0
 
-		while ((ident=ALooper_pollAll(0, NULL, &events,
-				(void**)&source)) >= 0) { /* first 0 is for non-blocking */
+	redef fun handle_looper_event(ident, event, data)
+	do
+		super
+		handle_sensor_events(ident)
+	end
 
-			// Process this event.
-			if (source != NULL)
-				source->process(app_glue, source);
-
-			//If a sensor has data, process it
-			if(ident == LOOPER_ID_USER) {
-				//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
-				ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
-				int nbevents;
-				ASensorEventQueue* queue = App_eventqueue(recv);
-				while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
-					int i;
-					for(i = 0; i < nbevents; i++){
-						ASensorEvent event = events[i];
-						switch (event.type) {
-							case ASENSOR_TYPE_ACCELEROMETER:
-								App_extern_input_sensor_accelerometer(recv, &event);
-								break;
-							case ASENSOR_TYPE_MAGNETIC_FIELD:
-								App_extern_input_sensor_magnetic_field(recv, &event);
-								break;
-							case ASENSOR_TYPE_GYROSCOPE:
-								App_extern_input_sensor_gyroscope(recv, &event);
-								break;
-							case ASENSOR_TYPE_LIGHT:
-								App_extern_input_sensor_light(recv, &event);
-								break;
-							case ASENSOR_TYPE_PROXIMITY:
-								App_extern_input_sensor_proximity(recv, &event);
-								break;
-						}
+	private fun handle_sensor_events(ident: Int) import extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue `{
+		//If a sensor has data, process it
+		if(ident == LOOPER_ID_USER) {
+			//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
+			ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
+			int nbevents;
+			ASensorEventQueue* queue = App_eventqueue(recv);
+			while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
+				int i;
+				for(i = 0; i < nbevents; i++){
+					ASensorEvent event = events[i];
+					switch (event.type) {
+						case ASENSOR_TYPE_ACCELEROMETER:
+							App_extern_input_sensor_accelerometer(recv, &event);
+							break;
+						case ASENSOR_TYPE_MAGNETIC_FIELD:
+							App_extern_input_sensor_magnetic_field(recv, &event);
+							break;
+						case ASENSOR_TYPE_GYROSCOPE:
+							App_extern_input_sensor_gyroscope(recv, &event);
+							break;
+						case ASENSOR_TYPE_LIGHT:
+							App_extern_input_sensor_light(recv, &event);
+							break;
+						case ASENSOR_TYPE_PROXIMITY:
+							App_extern_input_sensor_proximity(recv, &event);
+							break;
 					}
 				}
 			}
-
-			// Check if we are exiting.
-			if (app_glue->destroyRequested != 0) return;
 		}
 	`}
 end
