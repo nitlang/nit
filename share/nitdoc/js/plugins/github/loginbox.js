@@ -40,16 +40,16 @@ define([
 
 		_create: function() {
 			this.element.append(
-				$("<a/>")
-				.append(
-					$("<img/>")
-					.attr({
-						src: this.options.icon,
-						alt: this.options.iconAlt
-					})
-					.addClass("nitdoc-github-li-img")
-				)
-				.click($.proxy(this.toggle, this))
+				$("<span/>")
+				.addClass("glyphicon glyphicon-off")
+				//.click($.proxy(this.toggle, this))
+				.attr({
+					"data-container": "body",
+					"data-toggle": "popover",
+					"data-placement": "bottom",
+					"data-content": "bottom",
+					"data-html": "true",
+				})
 			);
 
 			this.content = $("<div/>");
@@ -133,56 +133,77 @@ define([
 				$("<form/>")
 				.keyup($.proxy(this._doFormChange, this))
 				.append(
-					$("<label/>")
-					.attr("for", "nitdoc-github-login-field")
-					.append(this.options.usernameTxt)
+					$("<div/>")
+					.addClass("form-group")
+					.append(
+						$("<label/>")
+						.attr("for", "nitdoc-github-login-field")
+						.append(this.options.usernameTxt)
+					)
+					.addClass("form-group")
+					.append(
+						$("<input/>")
+						.attr({
+							id: "nitdoc-github-login-field",
+							type: "text",
+							"class": "form-control"
+						})
+					)
 				)
 				.append(
-					$("<input/>")
-					.attr({
-						id: "nitdoc-github-login-field",
-						type: "text"
-					})
+					$("<div/>")
+					.addClass("form-group")
+					.append(
+						$("<label/>")
+						.attr("for", "nitdoc-github-password-field")
+						.append(this.options.passwordTxt)
+					)
+					.append(
+						$("<input/>")
+						.attr({
+							id: "nitdoc-github-password-field",
+							type: "password",
+							"class": "form-control"
+						})
+					)
 				)
 				.append(
-					$("<label/>")
-					.attr("for", "nitdoc-github-password-field")
-					.append(this.options.passwordTxt)
+					$("<div/>")
+					.addClass("form-group")
+					.append(
+						$("<label/>")
+						.attr("for", "nitdoc-github-repo-field")
+						.append(this.options.repoTxt)
+					)
+					.append(
+						$("<input/>")
+						.attr({
+							id: "nitdoc-github-repo-field",
+							type: "text",
+							"class": "form-control"
+						})
+					)
 				)
 				.append(
-					$("<input/>")
-					.attr({
-						id: "nitdoc-github-password-field",
-						type: "password"
-					})
-				)
-				.append(
-					$("<label/>")
-					.attr("for", "nitdoc-github-repo-field")
-					.append(this.options.repoTxt)
-				)
-				.append(
-					$("<input/>")
-					.attr({
-						id: "nitdoc-github-repo-field",
-						type: "text"
-					})
-				)
-				.append(
-					$("<label/>")
-					.attr("for", "nitdoc-github-branch-field")
-					.append(this.options.branchTxt)
-				)
-				.append(
-					$("<input/>")
-					.attr({
-						id: "nitdoc-github-branch-field",
-						type: "text"
-					})
+					$("<div/>")
+					.addClass("form-group")
+					.append(
+						$("<label/>")
+						.attr("for", "nitdoc-github-branch-field")
+						.append(this.options.branchTxt)
+					)
+					.append(
+						$("<input/>")
+						.attr({
+							id: "nitdoc-github-branch-field",
+							type: "text",
+							"class": "form-control"
+						})
+					)
 				)
 				.append(
 					$("<button/>")
-					.addClass("nitdoc-github-button")
+					.addClass("nitdoc-github-button btn btn-primary btn-lg pull-right")
 					.attr("disabled", "disabled")
 					.append(
 						$("<img/>")

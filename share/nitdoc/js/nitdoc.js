@@ -9,18 +9,17 @@ require.config({
 		quicksearchList: searchList,
 		jQueryUI: "jquery-ui",
     },
-	shim: {
+	/*shim: {
 		"jQueryUI": {
 		    export: "$",
 		    deps: ['jquery']
 		}
-	}
+	}*/
 });
 
 // nitdoc main module
 define([
-	"plugins/folding",
-	"plugins/filtering",
+	//"plugins/filtering",
 	"plugins/quicksearch",
 	"plugins/github",
 ], function() {});

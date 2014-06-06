@@ -63,6 +63,44 @@ redef class MModule
 		end
 		return mclasses
 	end
+
+	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		for mmodule in in_nesting.greaters do
+			for mclass in mmodule.intro_mclasses do
+				if mclass.visibility < min_visibility then continue
+				res.add mclass
+			end
+		end
+		return res
+	end
+
+	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		for mmodule in self.in_nesting.greaters do
+			for mclass in mmodule.redef_mclasses do
+				if mclass.visibility < min_visibility then continue
+				res.add mclass
+			end
+		end
+		return res
+	end
+
+	fun in_nesting_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mmodule in in_nesting.greaters do
+			res.add_all mmodule.intro_mclassdefs(min_visibility)
+		end
+		return res
+	end
+
+	fun in_nesting_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		for mmodule in self.in_nesting.greaters do
+			res.add_all mmodule.redef_mclassdefs(min_visibility)
+		end
+		return res
+	end
 end
 
 redef class MClass
@@ -162,6 +200,18 @@ redef class MClass
 		return set
 	end
 
+	fun intro_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
+		var set = new HashSet[MPropDef]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if not mpropdef.is_intro then continue
+				if mpropdef.mproperty.visibility < min_visibility then continue
+				set.add(mpropdef)
+			end
+		end
+		return set
+	end
+
 	# the set of locally refined properties in 'self'.
 	fun redef_mproperties(min_visibility: MVisibility): Set[MProperty] do
 		var set = new HashSet[MProperty]
@@ -169,6 +219,18 @@ redef class MClass
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef.mproperty.visibility < min_visibility then continue
 				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
+			end
+		end
+		return set
+	end
+
+	fun redef_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
+		var set = new HashSet[MPropDef]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.is_intro then continue
+				if mpropdef.mproperty.visibility < min_visibility then continue
+				set.add(mpropdef)
 			end
 		end
 		return set

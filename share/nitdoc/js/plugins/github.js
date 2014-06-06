@@ -46,11 +46,21 @@ define([
 			this.origin = this._parseUpstream(upstream);
 			this._initMarked();
 			// Add github menu
-			$("nav.main ul").append(
-				$("<li/>")
-				.attr("id", "nitdoc-github-li")
+			$("#topmenu>.container-fluid").append(
+				$("<a/>")
+				.attr({
+					"id": "nitdoc-github-li",
+					"type": "button",
+					"class": "navbar-btn navbar-right btn-link",
+					"href": "#",
+					"data-container": "body",
+					"data-toggle": "popover",
+					"data-placement": "bottom",
+					"data-content": "bottom",
+					"data-html": "true",
+				})
 				.loginbox()
-				.loginbox("displayLogin")
+				//.loginbox("displayLogin")
 				.bind("loginbox_logoff", function() {
 					GithubUI.disactivate();
 				})
@@ -124,7 +134,7 @@ define([
 						.modalbox("open");
 					} else if(isok == "error:sha") {
 						$("<p/>")
-						.text("The provided Github repository must contain the base commit '" + UI.origin.sha + "'.")
+						.text("The provided Github repository must contain the base commit '" + this.origin.sha + "'.")
 						.modalbox({
 							title: "Github base commit error",
 							isError: true

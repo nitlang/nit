@@ -1,0 +1,266 @@
+body {
+	text-align: justify;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+ul li .label {
+	padding: 1px 4px;
+	font-size: 70%;
+	vertical-align: middle;
+	border-radius: .25em;
+	margin: 3px;
+	font-family: monospace;
+}
+
+#sidebar .panel {
+	margin-bottom: 10px;
+	color: #666;
+	box-shadow: none;
+}
+
+#sidebar .panel a {
+	color: #666;
+}
+
+#sidebar .panel a:hover {
+	color: #333;
+}
+
+#sidebar .panel-heading {
+	padding: 3px 0 0 0;
+	font-size: 16px;
+}
+
+#sidebar .panel-body {
+	padding: 0;
+}
+
+#sidebar .panel-body ul>li>a {
+	padding: 0;
+}
+
+#sidebar .panel-body ul>li {
+	padding: 0 0 0 15px;
+	font-size: 15px;
+}
+
+#sidebar .panel-body ul ul>li {
+	padding: 0 0 0 30px;
+	font-size: 14px;
+}
+
+#sidebar .panel-body ul .list-labeled>li {
+	padding: 0 0 0 10px;
+	font-size: 14px;
+}
+
+#sidebar .panel-body ul ul ul>li {
+	padding: 0 0 0 45px;
+	font-size: 13px;
+}
+
+#sidebar .panel-heading a:hover, #sidebar .panel ul a:hover {
+	color: #0d8921;
+	background-color: transparent;
+}
+
+#content {
+	position: fixed;
+	top: 30px;
+	bottom: 0;
+	left: 10px;
+	right: 15px;
+}
+
+#content>.col {
+	height: 100%;
+	overflow: hidden;
+}
+
+#content>.col:hover {
+	overflow-y: scroll;
+}
+
+#content>.col::-webkit-scrollbar {
+    width: 7px;
+	height: 7px;
+}
+
+#content>.col::-webkit-scrollbar-thumb {
+	background: #CCC;
+	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
+}
+
+#content>.col::-webkit-scrollbar-thumb:hover {
+	background: #999;
+}
+
+#content>.col::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+#content>.col::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none;
+}
+
+#content article {
+	padding: 10px 0px;
+}
+
+#content article:target {
+	padding-left: 10px;
+	margin-left: -10px;
+	border-left: 2px solid #0d8921;
+}
+
+.footer {
+	padding: 10px;
+	margin: 20px 0;
+}
+
+.subtitle {
+	margin-bottom: 25px;
+}
+
+.signature span.glyphicon {
+	margin: 0 10px 5px 0;
+	font-size: 55%;
+	vertical-align: middle;
+}
+
+.signature a, .list-definition a {
+	color: #0d8921;
+}
+
+.info {
+	color: #888;
+}
+
+.info a {
+	color: #666;
+}
+
+.info a:hover {
+	color: #333;
+}
+
+.graph {
+	text-align: center;
+}
+
+.synopsys {
+	margin: 5px 0;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.public {
+	color: #5cb85c;
+}
+
+.protected {
+	color: #f0ad4e;
+}
+
+.private {
+	color: #a94442;
+}
+
+.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
+.nitcode a:hover { text-decoration: underline; } /* underline links */
+.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+/* lexical raw tokens. independent of usage or semantic: */
+.nitcode .nc_c { color: gray; font-style: italic; } /* comment */
+.nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
+.nitcode .nc_k { font-weight: bold; } /* keyword */
+.nitcode .nc_o {} /* operator */
+.nitcode .nc_i {} /* standard identifier */
+.nitcode .nc_t { color: #445588; font-weight: bold; } /* type/class identifier */
+.nitcode .nc_a { color: #445588; font-style: italic; } /* old style attribute identifier */
+.nitcode .nc_l { color: #009999; } /* char and number literal */
+.nitcode .nc_s { color: #8F1546; } /* string literal */
+/* syntactic token usage. added because of their position in the AST */
+.nitcode .nc_ast { color: blue; } /* assert label */
+.nitcode .nc_la { color: blue; } /* break/continue label */
+.nitcode .nc_m { color: #445588; } /* module name */
+/* syntactic groups */
+.nitcode .nc_def { font-weight: bold; color: blue; } /* name used in a definition */
+.nitcode .nc_def.nc_a { color: blue; } /* name used in a attribute definition */
+.nitcode .nc_def.nc_t { color: blue; } /* name used in a class or vt definition */
+.nitcode .nc_ss { color: #9E6BEB; } /* superstrings */
+.nitcode .nc_cdef {} /* A whole class definition */
+.nitcode .nc_pdef {} /* A whole property definition */
+/* semantic token usage */
+.nitcode .nc_v { font-style: italic; } /* local variable or parameter */
+.nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
+
+.nitcode .nc_error { border: 1px red solid;} /* not used */
+
+
+#sidebar .summary .nav>li>a {
+	padding: 2px 0 0 15px;
+	font-size: 15px;
+	border-left: 2px solid transparent;
+}
+
+#sidebar .summary .nav .nav>li>a {
+	padding: 2px 0 0 30px;
+	font-size: 14px;
+	border-left: 2px solid transparent;
+}
+
+#sidebar .summary .nav .nav .nav>li>a {
+	padding: 1px 0 0 45px;
+	font-size: 13px;
+}
+
+#sidebar .summary .nav .nav .nav .nav>li>a {
+	padding: 1px 0 0 60px;
+	font-size: 12px;
+}
+
+#sidebar .summary .nav>.active>a,
+#sidebar .summary .nav>.active>a:hover,
+#sidebar .summary .nav>li>a:hover {
+	color: #0d8921;
+	background-color: transparent;
+}
+
+#sidebar .summary .nav>.active>a,
+#sidebar .summary .nav .nav>.active>a,
+#sidebar .summary .nav .nav>.active>a:hover {
+	color: #0d8921;
+	border-left: 2px solid #0d8921;
+	margin-left: 0px;
+}
+
+#sidebar .summary .nav .nav>li>a:hover {
+	color: #0d8921;
+	border-left: 1px solid #0d8921;
+	margin-left: 1px;
+	background-color: transparent;
+}
+
+.label:empty {
+	display:inline;
+}
+
+.label.intro:before {
+	content: "I";
+}
+.label.redef:before {
+	content: "R";
+}
+.label.inherit:before {
+	content: "H";
+}
+
+.list-definition .list-definition {
+	margin-left: 30px;
+}

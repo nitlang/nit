@@ -12,12 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Documentation generator for the nit language.
-# Generate API documentation in HTML format from nit source code.
-module nitdoc
+# Nitdoc page generation
+module doc
 
-import doc
-
-var nitdoc = new NitdocContext
-nitdoc.generate_nitdoc
+import doc_pages
 
