@@ -17,7 +17,6 @@
 module ballz_android
 
 import realtime
-import mnit_android
 import game_logic
 
 redef class App

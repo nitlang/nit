@@ -17,6 +17,7 @@
 module game_logic
 
 import mnit_android
+import android::sensors
 
 class Ball
 	var x: Float
