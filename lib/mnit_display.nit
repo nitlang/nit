@@ -61,6 +61,17 @@ interface Drawable
 	# Draw image on self, for top left position
 	fun blit( image: I, x, y: Int ) is abstract
 
+	# Draw image on self, for top left position but scaled
+	# the width and height of the target rectangle is specified
+	fun blit_scaled(image: Image, x, y, w, h: Int)
+	do
+		var fx = x.to_f
+		var fy = y.to_f
+		var fx2 = fx + w.to_f
+		var fy2 = fy + h.to_f
+		blit_stretched(image, fx, fy, fx, fy2, fx2, fy2, fx2, fy)
+	end
+
 	# Draw image, centered at position
 	fun blit_centered( image: I, x, y: Int ) is abstract
 
