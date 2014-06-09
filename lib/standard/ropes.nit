@@ -265,7 +265,7 @@ class RopeString
 	end
 
 	# Inserts a String `str` at position `pos`
-	fun insert_at(str: String, pos: Int): RopeString
+	redef fun insert_at(str, pos)
 	do
 		if str.length == 0 then return self
 		if self.length == 0 then return new RopeString.from(str)
@@ -312,10 +312,10 @@ class RopeString
 	end
 
 	# Adds `s` at the beginning of self
-	fun prepend(s: String): String do return insert_at(s, 0)
+	redef fun prepend(s) do return insert_at(s, 0)
 
 	# Adds `s` at the end of self
-	fun append(s: String): String
+	redef fun append(s)
 	do
 		if self.is_empty then return s
 		return new RopeString.from_root(append_to_path(root,s))
@@ -398,6 +398,26 @@ class RopeString
 
 		return ret
 	end
+end
+
+redef class FlatString
+
+	redef fun append(s) do return (new RopeString.from(self)) + s
+
+	redef fun prepend(s) do return (new RopeString.from(self)).prepend(s)
+
+	redef fun insert_at(s, pos)
+	do
+		if pos == 0 then return prepend(s)
+		if pos == length then return append(s)
+
+		var l = substring(0,pos)
+		var r = substring_from(pos)
+		var ret: String = new RopeString.from(l)
+		ret += s
+		return ret + r
+	end
+
 end
 
 private class RopeStringChars

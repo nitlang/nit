@@ -611,6 +611,12 @@ abstract class String
 	redef type SELFTYPE: String
 
 	redef fun to_s do return self
+
+	fun append(s: String): SELFTYPE is abstract
+
+	fun prepend(s: String): SELFTYPE is abstract
+
+	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 end
 
 private class FlatSubstringsIter
