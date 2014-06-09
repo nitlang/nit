@@ -29,7 +29,7 @@ redef class App
 	redef type D: Opengles1Display
 	redef type I: Opengles1Image
 
-	redef init
+	redef fun setup
 	do
 		display = new Opengles1Display
 
