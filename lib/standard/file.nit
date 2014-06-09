@@ -16,7 +16,7 @@
 module file
 
 intrude import stream
-intrude import string
+intrude import ropes
 import string_search
 import time
 
@@ -134,7 +134,11 @@ class OFStream
 	redef fun write(s)
 	do
 		assert _writable
-		write_native(s.to_cstring, s.length)
+		if s isa FlatText then
+			write_native(s.to_cstring, s.length)
+		else
+			for i in s.substrings do write_native(i.to_cstring, i.length)
+		end
 	end
 
 	redef fun is_writable do return _writable
