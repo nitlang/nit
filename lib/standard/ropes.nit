@@ -121,7 +121,7 @@ abstract class Rope
 	private fun leaves(from: Int): LeavesIterator do return new LeavesIterator(self, from)
 
 	# Iterator on the substrings from 0, in forward order
-	fun substrings: IndexedIterator[Text] do return new SubstringsIterator(self, 0)
+	redef fun substrings do return new SubstringsIterator(self, 0)
 
 	# Iterator on the substrings, starting at position `from`, in forward order
 	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
