@@ -75,4 +75,16 @@ redef class App
 		paused = false
 		super
 	end
+
+	redef fun lost_focus
+	do
+		paused = true
+		super
+	end
+
+	redef fun gained_focus
+	do
+		paused = false
+		super
+	end
 end
