@@ -309,7 +309,7 @@ redef class APropdef
 	private fun check_redef_keyword(modelbuilder: ModelBuilder, nclassdef: AClassdef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
 		if nclassdef.mprop2npropdef.has_key(mprop) then
-			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass}.")
+			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass} at line {nclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
 		end
 		if kwredef == null then
