@@ -449,6 +449,7 @@ redef class AMethPropdef
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
+			if nclassdef isa ATopClassdef then mprop.is_toplevel = true
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return

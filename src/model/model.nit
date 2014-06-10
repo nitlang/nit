@@ -1718,6 +1718,10 @@ class MMethod
 		super
 	end
 
+	# Is the property defined at the top_level of the module?
+	# Currently such a property are stored in `Object`
+	var is_toplevel: Bool writable = false
+
 	# Is the property a constructor?
 	# Warning, this property can be inherited by subclasses with or without being a constructor
 	# therefore, you should use `is_init_for` the verify if the property is a legal constructor for a given class
