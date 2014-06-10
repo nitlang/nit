@@ -421,6 +421,14 @@ class Opengles1Display
 		glClearColor( r, g, b, a );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	`}
+
+	# Set the current color applied to all drawing
+	#
+	# require: r, g, b, a in [0.0 .. 1.0]
+	fun color(r, g, b, a: Float) `{ glColor4f(r, g, b, a); `}
+
+	# Reset the current color to opaque white
+	fun reset_color `{ glColor4f(1.0f, 1.0f, 1.0f, 1.0f); `}
 end
 
 extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
