@@ -13,7 +13,7 @@
 # Input and output streams of characters
 module stream
 
-import string
+intrude import ropes
 
 in "C" `{
 	#include <unistd.h>
@@ -134,6 +134,29 @@ end
 redef class Text
 	super Streamable
 	redef fun write_to(stream) do stream.write(self)
+end
+
+redef class RopeNode
+	super Streamable
+end
+
+redef class Leaf
+
+	redef fun write_to(s) do s.write(str)
+end
+
+redef class Concat
+
+	redef fun write_to(s)
+	do
+		if left != null then left.write_to(s)
+		if right != null then right.write_to(s)
+	end
+end
+
+redef class RopeString
+
+	redef fun write_to(s) do root.write_to(s)
 end
 
 # Input streams with a buffer

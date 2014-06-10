@@ -59,6 +59,9 @@ abstract class Text
 	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
+	# Iterates on the substrings of self if any
+	fun substrings: Iterator[Text] is abstract
+
 	# Concatenates `o` to `self`
 	#
 	#     assert "hello" + "world"  == "helloworld"
@@ -609,14 +612,34 @@ abstract class String
 
 	redef fun to_s do return self
 
+	fun append(s: String): SELFTYPE is abstract
+
+	fun prepend(s: String): SELFTYPE is abstract
+
+	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
+end
+
+private class FlatSubstringsIter
+	super Iterator[FlatText]
+
+	var tgt: nullable FlatText
+
+	init(tgt: FlatText) do self.tgt = tgt
+
+	redef fun item do
+		assert is_ok
+		return tgt.as(not null)
+	end
+
+	redef fun is_ok do return tgt != null
+
+	redef fun next do tgt = null
 end
 
 # Immutable strings of characters.
 class FlatString
 	super FlatText
 	super String
-
-	redef type SELFTYPE: FlatString
 
 	# Index in _items of the start of the string
 	private var index_from: Int
@@ -876,6 +899,8 @@ class FlatString
 
 		return hash_cache.as(not null)
 	end
+
+	redef fun substrings do return new FlatSubstringsIter(self)
 end
 
 private class FlatStringReverseIterator
@@ -1010,6 +1035,8 @@ class FlatBuffer
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self)
 
 	private var capacity: Int = 0
+
+	redef fun substrings do return new FlatSubstringsIter(self)
 
 	redef fun []=(index, item)
 	do
