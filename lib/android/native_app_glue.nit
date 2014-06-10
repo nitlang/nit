@@ -123,7 +123,7 @@ extern class NativeActivity in "Java" `{ android.app.NativeActivity `}
 end
 
 redef class App
-	redef init
+	redef fun setup
 	do
 		var native_app_glue = native_app_glue
 		native_app_glue.user_data = self

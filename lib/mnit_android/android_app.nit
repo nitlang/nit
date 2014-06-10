@@ -244,7 +244,7 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 		return 0;
 	`}
 
-	fun is_back_key: Bool do return key_code == 2
+	fun is_back_key: Bool do return key_code == 4
 	fun is_menu_key: Bool do return key_code == 82
 	fun is_search_key: Bool do return key_code == 84
 end

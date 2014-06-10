@@ -22,7 +22,7 @@ import linux_app
 redef class App
 	var assets_dir: String
 
-	redef init
+	redef fun setup
 	do
 		assets_dir = sys.program_name.dirname + "/../assets/"
 
