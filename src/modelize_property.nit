@@ -455,13 +455,7 @@ redef class AMethPropdef
 			mprop.is_new = n_kwnew != null
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
-			if n_kwredef == null then
-				if self isa AMainMethPropdef then
-					# no warning
-				else
-					if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mprop) then return
-				end
-			end
+			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
 		nclassdef.mprop2npropdef[mprop] = self
