@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2011-2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,11 @@ class A
 		int o = A_value( other );
 
 		return new_A( s - o );
+	`}
+
+	fun -: A import value, A `{
+		int s = A_value(recv);
+		return new_A(-s);
 	`}
 
 	fun *( by : Int ) : A import value, A `{
@@ -158,3 +163,4 @@ print a[ 52 ] # 52
 a[ 74 ] = new A( 96 )
 print a # 96
 
+print(-(new A(123)))
