@@ -19,14 +19,12 @@ module android_app
 
 import mnit
 import android
-import android_sensor
 
 in "C header" `{
 	#include <jni.h>
 	#include <errno.h>
 	#include <android/log.h>
 	#include <android_native_app_glue.h>
-	#include <android/sensor.h>
 
 	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
 	#ifdef DEBUG
@@ -69,49 +67,6 @@ in "C" `{
 		}
 
 		return 0;
-	}
-
-	void mnit_frame(App nit_app)
-	{
-		if (mnit_display == EGL_NO_DISPLAY) {
-			LOGI("no frame");
-			return;
-		}
-
-		/*if (mnit_orientation_changed)
-		{
-			mnit_orientation_changed = 0;
-
-			if (mnit_surface != EGL_NO_SURFACE) {
-				eglDestroySurface(mnit_display,  mnit_surface);
-			}
-			EGLSurface surface = eglCreateWindowSurface(mnit_display, mnit_config, mnit_java_app->window, NULL);
-
-			if (eglMakeCurrent(mnit_display, surface, surface, mnit_context) == EGL_FALSE) {
-				LOGW("Unable to eglMakeCurrent");
-			}
-
-			eglQuerySurface(mnit_display, surface, EGL_WIDTH, &mnit_width);
-			eglQuerySurface(mnit_display, surface, EGL_HEIGHT, &mnit_height);
-
-			mnit_surface = surface;
-
-			glViewport(0, 0, mnit_width, mnit_height);
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrthof(0.0f, mnit_width, mnit_height, 0.0f, 0.0f, 1.0f);
-			glMatrixMode(GL_MODELVIEW);
-		}
-		*/
-
-		LOGI("frame");
-
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT); // | GL_DEPTH_BUFFER_BIT);
-
-		App_full_frame(nit_app);
-
-		LOGI("frame b");
 	}
 `}
 
@@ -253,15 +208,6 @@ redef class App
 	redef type IE: AndroidInputEvent
 	redef type D: Opengles1Display
 
-	var accelerometer = new AndroidSensor
-	var magnetic_field = new AndroidSensor
-	var gyroscope = new AndroidSensor
-	var light = new AndroidSensor
-	var proximity = new AndroidSensor
-	var sensormanager: ASensorManager
-	var eventqueue: ASensorEventQueue
-	var sensors_support_enabled writable = false
-
 	redef fun init_window
 	do
 		set_as_input_handler native_app_glue
@@ -270,7 +216,7 @@ redef class App
 		super
 	end
 
-	private fun set_as_input_handler(app_glue: NativeAppGlue) `{
+	private fun set_as_input_handler(app_glue: NativeAppGlue) import extern_input_key, extern_input_motion `{
 		app_glue->onInputEvent = mnit_handle_input;
 	`}
 
@@ -295,258 +241,5 @@ redef class App
 		return handled
 	end
 
-	private fun extern_input_sensor_accelerometer(event: ASensorAccelerometer) do input(event)
-	private fun extern_input_sensor_magnetic_field(event: ASensorMagneticField) do input(event)
-	private fun extern_input_sensor_gyroscope(event: ASensorGyroscope) do input(event)
-	private fun extern_input_sensor_light(event: ASensorLight) do input(event)
-	private fun extern_input_sensor_proximity(event: ASensorProximity) do input(event)
-
-	# Sensors support
-	# The user decides which sensors he wants to use by setting them enabled
-	private fun enable_sensors
-	do
-		if sensors_support_enabled then enable_sensors_management else return
-		if accelerometer.enabled then enable_accelerometer
-		if magnetic_field.enabled then enable_magnetic_field
-		if gyroscope.enabled then enable_gyroscope
-		if light.enabled then enable_light
-		if proximity.enabled then enable_proximity
-	end
-
-	private fun enable_sensors_management
-	do
-		sensormanager = new ASensorManager.get_instance
-		#eventqueue = sensormanager.create_event_queue(new NdkAndroidApp)
-		eventqueue = initialize_event_queue(sensormanager, native_app_glue.looper)
-	end
-
-	# HACK: need a nit method to get mnit_java_app, then we can use the appropriate sensormanager.create_event_queue method to initialize the event queue
-	private fun initialize_event_queue(sensormanager: ASensorManager, looper: ALooper): ASensorEventQueue `{
-		return ASensorManager_createEventQueue(sensormanager, looper, LOOPER_ID_USER, NULL, NULL);
-	`}
-
-	private fun enable_accelerometer
-	do
-		accelerometer.asensor = sensormanager.get_default_sensor(new ASensorType.accelerometer)
-		if accelerometer.asensor.address_is_null then 
-				print "Accelerometer sensor unavailable" 
-		else
-				if eventqueue.enable_sensor(accelerometer.asensor) < 0 then print "Accelerometer enabling failed"
-			eventqueue.set_event_rate(accelerometer.asensor, accelerometer.event_rate)
-		end
-	end
-
-	private fun enable_magnetic_field
-	do
-		magnetic_field.asensor = sensormanager.get_default_sensor(new ASensorType.magnetic_field)
-		if magnetic_field.asensor.address_is_null then
-				print "Magnetic Field unavailable"
-		else
-			if eventqueue.enable_sensor(magnetic_field.asensor) < 0 then print "Magnetic Field enabling failed"
-			eventqueue.set_event_rate(magnetic_field.asensor, magnetic_field.event_rate)
-		end
-	end
-
-	private fun enable_gyroscope
-	do
-		gyroscope.asensor = sensormanager.get_default_sensor(new ASensorType.gyroscope)
-		if gyroscope.asensor.address_is_null then
-				print "Gyroscope sensor unavailable"
-		else
-			if eventqueue.enable_sensor(gyroscope.asensor) < 0 then print "Gyroscope enabling failed"
-			eventqueue.set_event_rate(gyroscope.asensor, gyroscope.event_rate)
-		end
-	end
-
-	private fun enable_light
-	do
-		light.asensor = sensormanager.get_default_sensor(new ASensorType.light)
-		if light.asensor.address_is_null then
-				print "Light sensor unavailable"
-		else
-			if eventqueue.enable_sensor(light.asensor) < 0 then print "Light enabling failed"
-			eventqueue.set_event_rate(light.asensor, light.event_rate)
-		end
-	end
-
-	private fun enable_proximity
-	do
-		proximity.asensor = sensormanager.get_default_sensor(new ASensorType.proximity)
-		if proximity.asensor.address_is_null then 
-				print "Proximity sensor unavailable"
-		else
-			if eventqueue.enable_sensor(proximity.asensor) < 0 then print "Proximity enabling failed"
-			eventqueue.set_event_rate(light.asensor, light.event_rate)
-		end
-	end
-
-	redef fun run is extern import full_frame, generate_input, enable_sensors, native_app_glue `{
-		struct android_app* app_glue = App_native_app_glue(recv);
-		LOGI("nitni loop");
-
-		//Enbales sensors if needed
-		App_enable_sensors(recv);
-
-		while (1) {
-			App_generate_input(recv);
-
-			if (app_glue->destroyRequested != 0) return;
-
-			mnit_frame(recv);
-		}
-		/* App_exit(); // this is unreachable anyway*/
-	`}
-
-	redef fun generate_input import save_state, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion, extern_input_sensor_accelerometer, extern_input_sensor_magnetic_field, extern_input_sensor_gyroscope, extern_input_sensor_light, extern_input_sensor_proximity, eventqueue, native_app_glue `{
-		int ident;
-		int events;
-		static int block = 0;
-		struct android_poll_source* source;
-		struct android_app *app_glue = App_native_app_glue(recv);
-
-		while ((ident=ALooper_pollAll(0, NULL, &events,
-				(void**)&source)) >= 0) { /* first 0 is for non-blocking */
-
-			// Process this event.
-			if (source != NULL)
-				source->process(app_glue, source);
-
-			//If a sensor has data, process it
-			if(ident == LOOPER_ID_USER) {
-				//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
-				ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
-				int nbevents;
-				ASensorEventQueue* queue = App_eventqueue(recv);
-				while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
-					int i;
-					for(i = 0; i < nbevents; i++){
-						ASensorEvent event = events[i];
-						switch (event.type) {
-							case ASENSOR_TYPE_ACCELEROMETER:
-								App_extern_input_sensor_accelerometer(recv, &event);
-								break;
-							case ASENSOR_TYPE_MAGNETIC_FIELD:
-								App_extern_input_sensor_magnetic_field(recv, &event);
-								break;
-							case ASENSOR_TYPE_GYROSCOPE:
-								App_extern_input_sensor_gyroscope(recv, &event);
-								break;
-							case ASENSOR_TYPE_LIGHT:
-								App_extern_input_sensor_light(recv, &event);
-								break;
-							case ASENSOR_TYPE_PROXIMITY:
-								App_extern_input_sensor_proximity(recv, &event);
-								break;
-						}
-					}
-				}
-			}
-
-			// Check if we are exiting.
-			if (app_glue->destroyRequested != 0) return;
-		}
-	`}
-end
-
-extern class JavaClassLoader in "Java" `{java.lang.ClassLoader`}
-	super JavaObject
-end
-
-redef class Sys
-	# Get the running JVM
-	redef fun create_default_jvm
-	do
-		var jvm = app.native_app_glue.ndk_native_activity.vm
-		var jni_env = jvm.attach_current_thread
-		if jni_env.address_is_null then jni_env = jvm.env
-
-		self.jvm = jvm
-		self.jni_env = jni_env
-	end
-
-	#protected fun ndk_jvm: JavaVM do`{ return mnit_java_app->activity->vm; `}
-
-	private var class_loader: nullable JavaObject = null
-	private var class_loader_method: nullable JMethodID = null
-	redef fun load_jclass(name)
-	do
-		var class_loader = self.class_loader
-		if class_loader == null then
-			find_class_loader(app.native_app_glue.ndk_native_activity.java_native_activity)
-			class_loader = self.class_loader
-			assert class_loader != null
-		end
-
-		var class_loader_method = self.class_loader_method
-		assert class_loader_method != null
-
-		return load_jclass_intern(class_loader, class_loader_method, name)
-	end
-
-	private fun find_class_loader(native_activity: NativeActivity) import jni_env, class_loader=, JavaObject.as nullable, class_loader_method=, JMethodID.as nullable `{
-		JNIEnv *env = Sys_jni_env(recv);
-
-		// Retrieve main activity
-		jclass class_activity = (*env)->GetObjectClass(env, native_activity);
-		if (class_activity == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving activity class");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		jmethodID class_activity_getClassLoader = (*env)->GetMethodID(env, class_activity, "getClassLoader", "()Ljava/lang/ClassLoader;");
-		if (class_activity_getClassLoader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving 'getClassLoader' method");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		// Call activity.getClassLoader
-		jobject instance_class_loader = (*env)->CallObjectMethod(env, native_activity, class_activity_getClassLoader);
-		if (instance_class_loader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving class loader instance");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		jclass class_class_loader = (*env)->GetObjectClass(env, instance_class_loader);
-		if (class_class_loader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving class of class loader");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		// Get the method ClassLoader.findClass
-		jmethodID class_class_loader_findClass = (*env)->GetMethodID(env, class_class_loader, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;");
-		if (class_class_loader_findClass == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "retreiving 'findClass' method");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		// Return the values to Nit
-		Sys_class_loader__assign(recv, JavaObject_as_nullable((*env)->NewGlobalRef(env, instance_class_loader)));
-		Sys_class_loader_method__assign(recv, JMethodID_as_nullable(class_class_loader_findClass));
-
-		// Clean up
-		(*env)->DeleteLocalRef(env, class_activity);
-		(*env)->DeleteLocalRef(env, instance_class_loader);
-		(*env)->DeleteLocalRef(env, class_class_loader);
-	`}
-
-	private fun load_jclass_intern(instance_class_loader: JavaObject, class_loader_findClass: JMethodID, name: NativeString): JClass import jni_env `{
-		JNIEnv *env = Sys_jni_env(recv);
-		jobject class_name = (*env)->NewStringUTF(env, name);
-
-		jclass java_class = (*env)->CallObjectMethod(env, instance_class_loader, class_loader_findClass, class_name);
-		if (java_class == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "loading targetted class");
-			(*env)->ExceptionDescribe(env);
-			exit(1);
-		}
-
-		(*env)->DeleteLocalRef(env, class_name);
-
-		return java_class;
-	`}
+	redef fun generate_input do poll_looper 0
 end

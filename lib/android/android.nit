@@ -26,6 +26,7 @@ module android
 
 import platform
 import native_app_glue
+import dalvik
 private import log
 
 # Uses Android logs to print everything
@@ -74,4 +75,18 @@ redef class App
 		paused = false
 		super
 	end
+
+	redef fun lost_focus
+	do
+		paused = true
+		super
+	end
+
+	redef fun gained_focus
+	do
+		paused = false
+		super
+	end
+
+	redef fun destroy do exit 0
 end
