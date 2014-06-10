@@ -312,6 +312,15 @@ redef class APropdef
 			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass} at line {nclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
 		end
+		if mprop isa MMethod and mprop.is_toplevel != (nclassdef isa ATopClassdef) then
+			if mprop.is_toplevel then
+				modelbuilder.error(self, "Error: {mprop} is a top level method.")
+			else
+				modelbuilder.error(self, "Error: {mprop} is not a top level method.")
+			end
+			return false
+
+		end
 		if kwredef == null then
 			if need_redef then
 				modelbuilder.error(self, "Redef error: {nclassdef.mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
