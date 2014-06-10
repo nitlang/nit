@@ -87,4 +87,6 @@ redef class App
 		paused = false
 		super
 	end
+
+	redef fun destroy do exit 0
 end
