@@ -35,7 +35,7 @@ class Perfecthashing
 	do
 		# By default, all identifiers are available
 		interval = new List[Couple[nullable Int, nullable Int]]
-		interval.push(new Couple[nullable Int, nullable Int](0, null))
+		interval.push(new Couple[nullable Int, nullable Int](1, null))
 		tempht = new Array[nullable Int]
 	end
 	
