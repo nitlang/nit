@@ -27,6 +27,30 @@ redef class Int
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
 	fun sqrt: Int `{ return sqrt(recv); `}
+	# Returns the greatest common divisor of `self` and `o`
+	#
+	#     assert 54.gcd(24)   == 6
+	#     assert -54.gcd(-24) == 6
+	#     assert 54.gcd(-24)  == -6
+	#     assert -54.gcd(24)  == -6
+	#     assert 12.gcd(6)    == 6
+	fun gcd(o: Int): Int
+	do
+		if self < 0 then return -(-self).gcd(o)
+		if o < 0 then return -(self.gcd(-o))
+		if self == 0 or o == self then return o
+		if o == 0 then return self
+		if self.bin_and(1) == 0 then
+			if o.bin_and(1) == 1 then
+				return self.rshift(1).gcd(o)
+			else
+				return self.rshift(1).gcd(o.rshift(1)).lshift(1)
+			end
+		end
+		if o.bin_and(1) == 0 then return self.gcd(o.rshift(1))
+		if self > o then return (self - o).rshift(1).gcd(o)
+		return (o - self).rshift(1).gcd(self)
+	end
 end
 
 redef class Float
