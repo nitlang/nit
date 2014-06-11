@@ -833,7 +833,7 @@ redef class AForExpr
 		if objcla == null then return
 
 		# check iterator method
-		var itdef = v.get_method(self, mtype, "iterator", true)
+		var itdef = v.get_method(self, mtype, "iterator", n_expr isa ASelfExpr)
 		if itdef == null then
 			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			return
