@@ -290,8 +290,10 @@ redef class AExternPropdef
 		var sys_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Sys")
 		assert sys_class != null
 		var sys_jni_env_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "jni_env")
-		assert sys_jni_env_meth != null
-		assert sys_jni_env_meth isa MMethod
+		if sys_jni_env_meth == null or not sys_jni_env_meth isa MMethod then
+			toolcontext.error(self.location, "Java FFI error: you must import the `java` module when using the FFI with Java")
+			return
+		end
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_env_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
