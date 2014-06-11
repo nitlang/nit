@@ -211,10 +211,6 @@ redef class MClass
 	var inherit_init_from: nullable MClass = null
 end
 
-redef class MClassDef
-	private var propdef_names = new HashSet[String]
-end
-
 redef class MPropDef
 	# Does the MPropDef contains a call to super or a call of a super-constructor?
 	# Subsequent phases of the frontend (esp. typing) set it if required
@@ -313,8 +309,17 @@ redef class APropdef
 	private fun check_redef_keyword(modelbuilder: ModelBuilder, nclassdef: AClassdef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
 		if nclassdef.mprop2npropdef.has_key(mprop) then
-			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass}.")
+			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass} at line {nclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
+		end
+		if mprop isa MMethod and mprop.is_toplevel != (nclassdef isa ATopClassdef) then
+			if mprop.is_toplevel then
+				modelbuilder.error(self, "Error: {mprop} is a top level method.")
+			else
+				modelbuilder.error(self, "Error: {mprop} is not a top level method.")
+			end
+			return false
+
 		end
 		if kwredef == null then
 			if need_redef then
@@ -453,34 +458,15 @@ redef class AMethPropdef
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
+			if nclassdef isa ATopClassdef then mprop.is_toplevel = true
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
-			if n_kwredef == null then
-				if self isa AMainMethPropdef then
-					# no warning
-				else
-					if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mprop) then return
-				end
-			end
+			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
 		nclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
-
-		if mclassdef.propdef_names.has(mprop.name) then
-			var loc: nullable Location = null
-			for i in mclassdef.mpropdefs do
-				if i.mproperty.name == mprop.name then
-					loc = i.location
-					break
-				end
-			end
-			if loc == null then abort
-			modelbuilder.error(self, "Error: a property {mprop} is already defined in class {mclassdef.mclass} at {loc}")
-		end
-
-		mclassdef.propdef_names.add(mpropdef.mproperty.name)
 
 		set_doc(mpropdef)
 
