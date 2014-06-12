@@ -159,7 +159,7 @@ class AndroidPointerEvent
 
 	redef fun y: Float do return extern_y(motion_event.inner_event, pointer_id)
 	private fun extern_y(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
-		return ((int) AMotionEvent_getY(motion_event, pointer_id) * mnit_zoom) + 32;
+		return ((int) AMotionEvent_getY(motion_event, pointer_id) * mnit_zoom);
 	`}
 
 	fun pressure: Float do return extern_pressure(motion_event.inner_event, pointer_id)
