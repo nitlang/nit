@@ -1700,6 +1700,8 @@ redef class AMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
+		else if mpropdef.mproperty.is_new then
+			ret = arguments.first.mcasttype
 		end
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
