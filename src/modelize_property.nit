@@ -312,7 +312,7 @@ redef class APropdef
 			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass} at line {nclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
 		end
-		if mprop isa MMethod and mprop.is_toplevel != (nclassdef isa ATopClassdef) then
+		if mprop isa MMethod and mprop.is_toplevel != (parent isa ATopClassdef) then
 			if mprop.is_toplevel then
 				modelbuilder.error(self, "Error: {mprop} is a top level method.")
 			else
@@ -458,7 +458,7 @@ redef class AMethPropdef
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
-			if nclassdef isa ATopClassdef then mprop.is_toplevel = true
+			if parent isa ATopClassdef then mprop.is_toplevel = true
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
 			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
