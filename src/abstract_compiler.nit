@@ -2621,8 +2621,7 @@ redef class ANewExpr
 		else if ctype == "void*" then
 			recv = v.new_expr("NULL/*special!*/", mtype)
 		else
-			debug("cannot new {mtype}")
-			abort
+			recv = v.new_expr("({ctype})0/*special!*/", mtype)
 		end
 		var args = [recv]
 		for a in self.n_args.n_exprs do
