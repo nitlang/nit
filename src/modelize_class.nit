@@ -99,6 +99,9 @@ redef class ModelBuilder
 		nclassdef.mclass = mclass
 		if not nmodule.mclass2nclassdef.has_key(mclass) then
 			nmodule.mclass2nclassdef[mclass] = nclassdef
+			nclassdef.all_defs = [nclassdef]
+		else
+			nmodule.mclass2nclassdef[mclass].all_defs.add(nclassdef)
 		end
 	end
 
@@ -513,6 +516,8 @@ redef class AClassdef
 	var mclass: nullable MClass
 	# The associated MClassDef once build by a `ModelBuilder`
 	var mclassdef: nullable MClassDef
+	# All (self and other) definitions for the same mclassdef
+	var all_defs: nullable Array[AClassdef]
 end
 
 redef class AClasskind
