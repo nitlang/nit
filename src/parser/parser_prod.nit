@@ -1234,6 +1234,100 @@ redef class AInternMethPropdef
 		v.enter_visit(_n_signature)
 	end
 end
+redef class AInternNewPropdef
+	init init_ainternnewpropdef (
+		n_doc: nullable ADoc,
+		n_kwredef: nullable TKwredef,
+		n_visibility: nullable AVisibility,
+		n_kwnew: nullable TKwnew,
+		n_methid: nullable AMethid,
+		n_signature: nullable ASignature
+	)
+	do
+		_n_doc = n_doc
+		if n_doc != null then n_doc.parent = self
+		_n_kwredef = n_kwredef
+		if n_kwredef != null then n_kwredef.parent = self
+		_n_visibility = n_visibility.as(not null)
+		n_visibility.parent = self
+		_n_kwnew = n_kwnew.as(not null)
+		n_kwnew.parent = self
+		_n_methid = n_methid
+		if n_methid != null then n_methid.parent = self
+		_n_signature = n_signature.as(not null)
+		n_signature.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_doc == old_child then
+			n_doc = new_child.as(nullable ADoc)
+			return
+		end
+		if _n_kwredef == old_child then
+			n_kwredef = new_child.as(nullable TKwredef)
+			return
+		end
+		if _n_visibility == old_child then
+			n_visibility = new_child.as(AVisibility)
+			return
+		end
+		if _n_kwnew == old_child then
+			n_kwnew = new_child.as(TKwnew)
+			return
+		end
+		if _n_methid == old_child then
+			n_methid = new_child.as(nullable AMethid)
+			return
+		end
+		if _n_signature == old_child then
+			n_signature = new_child.as(ASignature)
+			return
+		end
+	end
+
+	redef fun n_doc=(node)
+	do
+		_n_doc = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwredef=(node)
+	do
+		_n_kwredef = node
+		if node != null then node.parent = self
+	end
+	redef fun n_visibility=(node)
+	do
+		_n_visibility = node
+		node.parent = self
+	end
+	redef fun n_kwnew=(node)
+	do
+		_n_kwnew = node
+		node.parent = self
+	end
+	redef fun n_methid=(node)
+	do
+		_n_methid = node
+		if node != null then node.parent = self
+	end
+	redef fun n_signature=(node)
+	do
+		_n_signature = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_doc)
+		v.enter_visit(_n_kwredef)
+		v.enter_visit(_n_visibility)
+		v.enter_visit(_n_kwnew)
+		v.enter_visit(_n_methid)
+		v.enter_visit(_n_signature)
+	end
+end
 redef class AExternMethPropdef
 	init init_aexternmethpropdef (
 		n_doc: nullable ADoc,
