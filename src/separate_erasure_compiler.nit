@@ -581,6 +581,17 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
+	redef fun native_array_instance(elttype, length)
+	do
+		var nclass = self.get_class("NativeArray")
+		var mtype = nclass.get_mtype([elttype])
+		var res = self.new_var(mtype)
+		res.is_exact = true
+		self.require_declaration("NEW_{nclass.c_name}")
+		self.add("{res} = NEW_{nclass.c_name}({length});")
+		return res
+	end
+
 	redef fun array_instance(array, elttype)
 	do
 		var nclass = self.get_class("NativeArray")

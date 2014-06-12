@@ -353,6 +353,12 @@ class GlobalCompilerVisitor
 		end
 	end
 
+	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	do
+		var ret_type = self.get_class("NativeArray").get_mtype([elttype])
+		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
+	end
+
 	redef fun calloc_array(ret_type, arguments)
 	do
 		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))

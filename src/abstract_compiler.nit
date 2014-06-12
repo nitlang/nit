@@ -888,6 +888,8 @@ abstract class AbstractCompilerVisitor
 		return self.send(callsite.mproperty, args)
 	end
 
+	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
+
 	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
