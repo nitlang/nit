@@ -28,6 +28,7 @@ private class ModelizePropertyPhase
 	redef fun process_nmodule(nmodule)
 	do
 		for nclassdef in nmodule.n_classdefs do
+			if nclassdef.all_defs == null then continue # skip non principal classdef
 			toolcontext.modelbuilder.build_properties(nclassdef)
 		end
 	end
@@ -52,14 +53,16 @@ redef class ModelBuilder
 			build_properties(mclassdef2nclassdef[superclassdef])
 		end
 
-		for npropdef in nclassdef.n_propdefs do
-			npropdef.build_property(self, nclassdef)
-		end
-		for npropdef in nclassdef.n_propdefs do
-			npropdef.build_signature(self)
-		end
-		for npropdef in nclassdef.n_propdefs do
-			npropdef.check_signature(self)
+		for nclassdef2 in nclassdef.all_defs do
+			for npropdef in nclassdef2.n_propdefs do
+				npropdef.build_property(self, nclassdef)
+			end
+			for npropdef in nclassdef2.n_propdefs do
+				npropdef.build_signature(self)
+			end
+			for npropdef in nclassdef2.n_propdefs do
+				npropdef.check_signature(self)
+			end
 		end
 		process_default_constructors(nclassdef)
 	end
