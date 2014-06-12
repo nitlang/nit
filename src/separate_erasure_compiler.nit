@@ -592,27 +592,6 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-	redef fun array_instance(array, elttype)
-	do
-		var nclass = self.get_class("NativeArray")
-		elttype = self.anchor(elttype)
-		var arraytype = self.get_class("Array").get_mtype([elttype])
-		var res = self.init_instance(arraytype)
-		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
-		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
-		nat.is_exact = true
-		self.require_declaration("NEW_{nclass.c_name}")
-		self.add("{nat} = NEW_{nclass.c_name}({array.length});")
-		for i in [0..array.length[ do
-			var r = self.autobox(array[i], self.object_type)
-			self.add("((struct instance_{nclass.c_instance_name}*){nat})->values[{i}] = (val*) {r};")
-		end
-		var length = self.int_instance(array.length)
-		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.add("\}")
-		return res
-	end
-
 	redef fun calloc_array(ret_type, arguments)
 	do
 		var ret = ret_type.as(MClassType)
