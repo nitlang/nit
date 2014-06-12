@@ -717,4 +717,21 @@ class PnaclApp
 		}
 	`}
 end
+
+redef interface Object
+	# Calls 'pthread_exit on current thread
+        fun exit_thread(exit_value: Int) `{
+		pthread_exit((void*) exit_value);
+	`}
+
+	# Redef of exit in order to avoid the module to crash by terminating only the Nit thread.
+	redef fun exit(exit_value: Int)
+	do
+		var dictionary = new PepperDictionary
+		dictionary["exit"] = exit_value
+		app.post_dictionary dictionary
+		exit_thread exit_value
+	end
+end
+
 fun app: PnaclApp do return once new PnaclApp
