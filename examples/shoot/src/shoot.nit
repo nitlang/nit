@@ -23,16 +23,16 @@ redef class Sprite
 	# mnit specific method to draw a sprite
 	# app is used to optain the assets and the display
 	# Each sprite should implements this method
-	fun draw_on_display(app: ShootApp) do end
+	fun draw_on_display(app: App) do end
 
 	# Helper function to draw an image centered on the current sprite position
-	fun draw_image(app: ShootApp, img: Image)
+	fun draw_image(app: App, img: Image)
 	do
 		app.display.blit_centered(img, (self.x.to_f/app.scale).to_i, (self.y.to_f/app.scale).to_i)
 	end
 
 	# Helper function to draw an image translated and rotated on the current sprite position
-	fun draw_rotated_image(app: ShootApp, img: Image, dx, dy: Int, angle: Float)
+	fun draw_rotated_image(app: App, img: Image, dx, dy: Int, angle: Float)
 	do
 		app.display.blit_rotated(img, self.x.to_f/app.scale, self.y.to_f/app.scale, angle)
 	end
@@ -166,8 +166,8 @@ redef class Star
 end
 
 redef class Scene
-	fun draw_on_display(app: ShootApp) do end
-	fun input(app: ShootApp, input_event: InputEvent): Bool do return false
+	fun draw_on_display(app: App) do end
+	fun input(app: App, input_event: InputEvent): Bool do return false
 end
 
 redef class PlayScene
@@ -265,8 +265,7 @@ end
 
 ###
 
-class ShootApp
-	super App
+redef class App
 	super View
 
 	var debug: Bool = false
@@ -282,8 +281,6 @@ class ShootApp
 			display.blit_stretched(img_hitbox, right, top, right, bot, left, bot, left, top)
 		end
 	end
-
-	init do super
 
 	var scene: ShotScene
 
@@ -320,6 +317,8 @@ class ShootApp
 		super
 
 		scale = (800.0 * 600.0 / display.width.to_f / display.height.to_f).sqrt * 100.0
+
+		debug = args.length > 0 and args.first == "--debug"
 
 		# TODO load assets here
 		# ex: img = load_image( "img.png" )
@@ -410,6 +409,5 @@ if args.length > 0 and args.first == "--headless" then
 	return
 end
 
-var app = new ShootApp
-app.debug = args.length > 0 and args.first == "--debug"
+app.setup
 app.run
