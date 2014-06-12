@@ -474,10 +474,12 @@ class ModelBuilder
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
+		var dirpath2 = dirpath
 		if not mp.file_exists then
 			if pn == "src" then
 				# With a src directory, the group name is the name of the parent directory
-				pn = rdp.dirname.basename("")
+				dirpath2 = rdp.dirname
+				pn = dirpath2.basename("")
 			else
 				return null
 			end
@@ -498,7 +500,8 @@ class ModelBuilder
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
-		var readme = dirpath.join_path("README")
+		var readme = dirpath2.join_path("README.md")
+		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = new MDoc
 			var s = new IFStream.open(readme)
