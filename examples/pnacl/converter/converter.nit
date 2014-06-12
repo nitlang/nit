@@ -126,4 +126,4 @@ end
 
 redef fun app do return once new Converter
 app.initialize # Needed to correctly set up Nit control over the Pepper API
-app.check_dictionary # Wait for dictionaries
+app.run # Launches an infinite loop in order to check for dictionaries
