@@ -307,17 +307,14 @@ module pnacl is platform
 	/* This function is called by Nit when using check_dictionary,
 	returns the dictionary at the head of the queue. */
 	void* NitHandleDictionary() {
-		while(1) {
-			struct PP_Var dictionary = DequeueDictionary();
-			PnaclApp_handle_dictionary(app, &dictionary);
-		}
+		struct PP_Var dictionary = DequeueDictionary();
+		PnaclApp_handle_dictionary(app, &dictionary);
+		return 0;
 	}
 
 	/* This function is called By Nit when waiting for a user input. */
 	char* NitHandleMessage() {
-		while(1) {
-			return DequeueMessage();
-		}
+		return DequeueMessage();
 	}
 
 	/* Entry point */
@@ -637,11 +634,8 @@ class PnaclStream
 
 	redef fun eof do return end_reached
 
-	# write method sends now a message to JS.
-	redef fun write(s: Text)
-	do
-		app.post_message s.to_s
-	end
+	# Redefintion of 'write' to send messages to the browser.
+	redef fun write(s: Text) do app.post_message s.to_s
 
 	redef fun is_writable: Bool do return true
 
