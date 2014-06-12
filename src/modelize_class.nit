@@ -109,7 +109,14 @@ redef class ModelBuilder
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var mclass = nclassdef.mclass
 		if mclass == null then return # Skip error
-		#var mclassdef = nclassdef.mclassdef.as(not null)
+
+		# In case of non-standard AClassdef, try to attach to an already existing mclassdef
+		var other_nclassdef = nmodule.mclass2nclassdef[mclass]
+		if other_nclassdef != nclassdef then
+			assert not nclassdef isa AStdClassdef
+			nclassdef.mclassdef = other_nclassdef.mclassdef
+			return
+		end
 
 		var names = new Array[String]
 		var bounds = new Array[MType]
