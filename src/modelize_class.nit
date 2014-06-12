@@ -97,7 +97,9 @@ redef class ModelBuilder
 			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
 		end
 		nclassdef.mclass = mclass
-		nmodule.mclass2nclassdef[mclass] = nclassdef
+		if not nmodule.mclass2nclassdef.has_key(mclass) then
+			nmodule.mclass2nclassdef[mclass] = nclassdef
+		end
 	end
 
 	# Visit the AST and create the `MClassDef` objects
