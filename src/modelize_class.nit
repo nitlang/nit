@@ -281,8 +281,7 @@ redef class ModelBuilder
 		if errcount != toolcontext.error_count then return
 
 		# Create the mclassdef hierarchy
-		for nclassdef in nmodule.n_classdefs do
-			var mclassdef = nclassdef.mclassdef.as(not null)
+		for mclassdef in mmodule.mclassdefs do
 			mclassdef.add_in_hierarchy
 		end
 
