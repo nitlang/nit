@@ -18,7 +18,8 @@
 #
 # First imports the pnacl module
 # Then redefines the 'handle_dictionary' method
-# Finally creates a converter and initializes it
+# Creates a converter and initializes it
+# Finally checks for dictionaries
 
 import pnacl
 
@@ -123,5 +124,6 @@ class Converter
 	end
 end
 
-var converter = new Converter
-converter.initialize # Needed to correctly set up Nit control over the Pepper API
+redef fun app do return once new Converter
+app.initialize # Needed to correctly set up Nit control over the Pepper API
+app.run # Launches an infinite loop in order to check for dictionaries
