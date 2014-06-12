@@ -2608,7 +2608,13 @@ redef class ANewExpr
 		var mtype = self.mtype.as(MClassType)
 		var recv
 		var ctype = mtype.ctype
-		if ctype == "val*" then
+		if mtype.mclass.name == "NativeArray" then
+			assert self.n_args.n_exprs.length == 1
+			var l = v.expr(self.n_args.n_exprs.first, null)
+			assert mtype isa MGenericType
+			var elttype = mtype.arguments.first
+			return v.native_array_instance(elttype, l)
+		else if ctype == "val*" then
 			recv = v.init_instance(mtype)
 		else if ctype == "void*" then
 			recv = v.new_expr("NULL/*special!*/", mtype)
