@@ -1881,6 +1881,9 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
 				return
+			else if pname == "init" then
+				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				return
 			end
 		else if cname == "NativeArray" then
 			v.native_array_def(pname, ret, arguments)
