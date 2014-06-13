@@ -463,7 +463,7 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return ftype.java_type.
-			replace('/', ".").replace('$', ".").replace(' ', "")
+			replace('/', ".").replace('$', ".").replace(' ', "").replace('\n',"")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "int"
@@ -485,7 +485,7 @@ redef class MClassType
 	redef fun jni_format
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return "L{ftype.java_type.replace('.', "/").replace(' ', "")};"
+		if ftype isa ForeignJavaType then return "L{ftype.java_type.replace('.', "/").replace(' ', "").replace('\n', "")};"
 		if mclass.name == "Bool" then return "Z"
 		if mclass.name == "Char" then return "C"
 		if mclass.name == "Int" then return "I"
