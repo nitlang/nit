@@ -18,7 +18,6 @@
 module mnit
 
 import mnit_app
-import opengles1
 import assets
 import numbers
 import mnit_fps

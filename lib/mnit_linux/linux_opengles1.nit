@@ -16,8 +16,7 @@
 
 module linux_opengles1
 
-import mnit # for
-# import opengles1
+import mnit::opengles1
 
 import sdl
 

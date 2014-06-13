@@ -19,6 +19,7 @@ module android_app
 
 import mnit
 import android
+import mnit::opengles1
 
 in "C header" `{
 	#include <jni.h>
