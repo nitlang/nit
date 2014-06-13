@@ -5007,11 +5007,13 @@ private class ReduceAction145
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwinnode2 = nodearraylist1
 					assert tkwinnode2 isa nullable TKwin
-					var tstringnode3 = nodearraylist2
+					var tstringnode3 = nodearraylist3
 					assert tstringnode3 isa nullable TString
 					var pinlanguagenode1: nullable AInLanguage = new AInLanguage.init_ainlanguage(
 						tkwinnode2,

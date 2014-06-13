@@ -366,7 +366,7 @@ extern_call_cast {-> extern_call}
 
 string_o {->string?} = string? {-> string};
 
-in_language = kwin string;
+in_language = kwin no string [n1]:no {-> New in_language(kwin, string)};
 extern_code_block = in_language? extern_code_segment;
 extern_code_block_o {-> extern_code_block?}
 	= extern_code_block {-> extern_code_block}
