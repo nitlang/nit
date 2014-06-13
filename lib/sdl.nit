@@ -92,10 +92,10 @@ extern class SDLDisplay `{SDL_Surface *`}
 		SDL_FillRect(recv, NULL, SDL_MapRGB(recv->format,ri,gi,bi));
 	`}
 
-	fun events: Sequence[IE]
+	fun events: Sequence[SDLInputEvent]
 	do
 		var new_event: nullable Object = null
-		var events = new List[IE]
+		var events = new List[SDLInputEvent]
 		loop
 			new_event = poll_event
 			if new_event != null then # new_event isa Event then #
@@ -107,7 +107,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 		return events
 	end
 
-	private fun poll_event: nullable IE import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString.to_s, SDLMouseButtonEvent.as(nullable IE), SDLMouseMotionEvent.as(nullable IE), SDLKeyEvent.as(nullable IE), SDLQuitEvent.as(nullable IE) `{
+	private fun poll_event: nullable SDLInputEvent import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString.to_s, SDLMouseButtonEvent.as(nullable SDLInputEvent), SDLMouseMotionEvent.as(nullable SDLInputEvent), SDLKeyEvent.as(nullable SDLInputEvent), SDLQuitEvent.as(nullable SDLInputEvent) `{
 		SDL_Event event;
 
 		SDL_PumpEvents();
@@ -122,7 +122,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 						   SDL_GetKeyName(event.key.keysym.sym));
 	#endif
 
-					return SDLKeyEvent_as_nullable_IE(
+					return SDLKeyEvent_as_nullable_SDLInputEvent(
 							new_SDLKeyEvent(NativeString_to_s(
 								SDL_GetKeyName(event.key.keysym.sym)),
 								event.type==SDL_KEYDOWN));
@@ -134,7 +134,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 						   event.motion.x, event.motion.y);
 	#endif
 
-					return SDLMouseMotionEvent_as_nullable_IE(
+					return SDLMouseMotionEvent_as_nullable_SDLInputEvent(
 							new_SDLMouseMotionEvent(event.motion.x, event.motion.y,
 								event.motion.xrel, event.motion.yrel, SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)));
 
@@ -144,7 +144,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 					printf("Mouse button \"%d\" pressed at (%d,%d)\n",
 						   event.button.button, event.button.x, event.button.y);
 	#endif
-					return SDLMouseButtonEvent_as_nullable_IE(
+					return SDLMouseButtonEvent_as_nullable_SDLInputEvent(
 							new_SDLMouseButtonEvent(event.button.x, event.button.y,
 								event.button.button, event.type == SDL_MOUSEBUTTONDOWN));
 
@@ -152,11 +152,11 @@ extern class SDLDisplay `{SDL_Surface *`}
 	#ifdef DEBUG
 					printf("Quit event\n");
 	#endif
-					return SDLQuitEvent_as_nullable_IE(new_SDLQuitEvent());
+					return SDLQuitEvent_as_nullable_SDLInputEvent(new_SDLQuitEvent());
 			}
 		}
 
-		return null_InputEvent();
+		return null_SDLInputEvent();
 	`}
 
 	# Set the position of the cursor to x,y

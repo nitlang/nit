@@ -206,7 +206,6 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 end
 
 redef class App
-	redef type IE: AndroidInputEvent
 	redef type D: Opengles1Display
 
 	redef fun init_window

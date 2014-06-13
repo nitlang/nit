@@ -25,7 +25,6 @@ import mnit_display
 # This class is redefed by plateforme modules and so
 # App can be specialized directly in the user app.
 redef class App
-	type IE: InputEvent
 	type D: Display
 	type I: Image
 

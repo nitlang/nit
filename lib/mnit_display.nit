@@ -100,9 +100,6 @@ end
 interface Display
 	super Sized
 	super Drawable
-
-	# InputEvent type associated to this display type
-	type IE: InputEvent
 end
 
 # General drawable display image
