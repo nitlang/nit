@@ -29,7 +29,7 @@ class App
 
 	# Starts the internal setup of graphical and other stuff
 	# Is called just before run
-	protected fun setup do end
+	fun setup do end
 
 	# Main entry point of your application
 	fun run do end
