@@ -26,6 +26,10 @@ redef class App
 	# Applications can modify this value even during the main-loop.
 	var maximum_fps writable = 60
 
+	# Current frame-rate
+	# Updated each 5 seconds.
+	var current_fps = 0.0
+
 	redef fun full_frame
 	do
 		super
@@ -35,10 +39,27 @@ redef class App
 	# The clock for limit_fps
 	private var clock = new Clock
 
+	# Number of frames since the last deadline
+	# Used tocompute `current_fps`.
+	private var frame_count = 0
+
+	# Deadline used to compute `current_fps`
+	private var frame_count_deadline = 0
+
 	# Check and sleep to maitain a frame-rate bellow `maximum_fps`
+	# Also periodically uptate `current_fps`
 	# Is automatically called at the end of `full_frame`.
 	fun limit_fps
 	do
+		var t = clock.total.sec
+		if t >= frame_count_deadline then
+			var cfps = frame_count_deadline.to_f / 5.0
+			self.current_fps = cfps
+			frame_count = 0
+			frame_count_deadline = t + 5
+		end
+		frame_count += 1
+
 		var mfps = maximum_fps
 		if mfps <= 0 then return
 		var dt = clock.lapse
