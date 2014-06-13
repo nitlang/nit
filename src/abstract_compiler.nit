@@ -202,8 +202,12 @@ class MakefileToolchain
 	do
 		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
 
+		var platform = compiler.mainmodule.target_platform
+		var cc_opt_with_libgc = "-DWITH_LIBGC"
+		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
+
 		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
+		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
