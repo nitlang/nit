@@ -294,14 +294,13 @@ class MakefileToolchain
 
 	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
 
+	fun default_outname(mainmodule: MModule): String do return mainmodule.name
+
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
 
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
-		end
+		var outname = self.toolcontext.opt_output.value or else default_outname(mainmodule)
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
