@@ -292,6 +292,8 @@ class MakefileToolchain
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 	end
 
+	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
+
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
@@ -303,7 +305,7 @@ class MakefileToolchain
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
-		var makename = "{mainmodule.name}.mk"
+		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
@@ -371,7 +373,7 @@ class MakefileToolchain
 
 	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
 	do
-		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
+		var makename = makefile_name(compiler.mainmodule)
 
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
