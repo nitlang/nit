@@ -15,3 +15,16 @@
 # limitations under the License.
 
 module emscripten is platform
+
+`{
+	#include <emscripten.h>
+`}
+
+redef class String
+	fun run_js do run_js_native(self.escape_to_js.to_cstring)
+	private fun run_js_native(script: NativeString) `{ emscripten_run_script(script); `}
+
+	fun escape_to_js: String do return self.replace('\n', "\\n")
+
+	fun alert do "alert('{self.escape_to_js}')".run_js
+end
