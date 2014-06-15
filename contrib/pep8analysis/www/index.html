@@ -88,11 +88,21 @@
 </nav>
 
 <div class="container-fluid">
-
 	<div class="alert alert-warning" id="loading">Loading the tool... This may take some time.</div>
 
 	<div class="row">
 	  <div class="col-sm-12 col-lg-6">
+		<div class="panel panel-default" id="panelIntro">
+			<div class="panel-heading">Description and Usage
+				<button type="button" class="close" onClick="$('#panelIntro').hide()" aria-hidden="true">&times;</button>
+			</div>
+			<div class="panel-body" id="code-panel">
+				<p>This tools finds strange behavior in Pep/8 programs by exploring all detectable execution paths.</p>
+				<p>Upon analyzing a program, this tool reports dead code blocks and data within the execution path. It also detects wrongful use of data such as accessing uninitialized memory, printing a word and reading code.</p>
+				<p><strong>To use:</strong> copy-paste your code in the source code block and launch the analysis using the <em>Analyze</em> button.</p>
+			</div>
+		</div>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">Pep/8 Source Code</div>
 			<div class="panel-body" id="code-panel">
@@ -129,6 +139,66 @@
 			<div class="panel-heading">Analysis Result</div>
 			<div class="panel-body">
 				<samp id="console"></samp>
+			</div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel panel-default" id="panelRef">
+			<div class="panel-heading">Output Documentation
+				<button type="button" class="close" onClick="$('#panelRef').hide()" aria-hidden="true">&times;</button>
+			</div>
+			<div class="panel-body" id="code-panel">
+				<h4>Line and memory references</h4>
+				<p>Shorthand are used in the error messages, some refer directly to the line numbers others to the address in the memory of the running program.</p>
+				<table class="table table-striped">
+				<tr>
+					<th>Shorthand</th>
+					<th>Description</th>
+				</tr><tr>
+					<td>web:5</td>
+					<td>Source line 5</td>
+				</tr><tr>
+					<td>L8</td>
+					<td>Source line 8</td>
+				</tr><tr>
+					<td>rA, rX</td>
+					<td>Registers A, X</td>
+				</tr><tr>
+					<td>m24</td>
+					<td>Memory at address 24 (bytes)</td>
+				</tr><tr>
+					<td>instr@m24</td>
+					<td>Intruction at address 24 (bytes). Usually, this would be the (24/4+1=) 7th instruction, if there is no data blocks. And the 7th line if there is no data blocks or comments.</td>
+				</tr>
+				</table>
+
+				<h4>Common errors and warnings</h4>
+
+				<p>Note that the tool reports <em>possible</em> errors and strange behaviors. For an advanced or expert user, it may raise errors on correct code.</p>
+
+				<table class="table table-striped">
+				<tr>
+					<th>Error</th>
+					<th>Meaning</th>
+				</tr><tr>
+					<td>... the CFG may be wrong</td>
+					<td>The program structure is too complex to analyze. This happens when jumping to dynamic addresses and when using switch statements.</td>
+				</tr><tr>
+					<td>unreachable instructions</td>
+					<td>There's dead code.</td>
+				</tr><tr>
+					<td>data in program flow</td>
+					<td>The program may execute raw data. There's probably a <code>BR</code> missing.</td>
+				</tr><tr>
+					<td>overwriting code at...</td>
+					<td>An instruction writes over an existing instruction (probably your code).</td>
+				</tr><tr>
+					<td>expected "type" in "address", got "something"</td>
+					<td>An instruction uses data with an unexepected type. It may be a <code>CHARO</code> using something other than a char. Or a copy of uninitialized data over an initialized word.<br>
+					</td>
+				</tr>
+				</table>
 			</div>
 		</div>
 	  </div>
