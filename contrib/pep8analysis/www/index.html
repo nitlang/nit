@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pep/8 Analysis</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/z80/z80.js"></script>
+	<script>
+		// Redirect print to HTML
+		var Module = {
+			'print': function(text) {
+				$("#console").append(text + "<br>")
+			},
+			'noInitialRun': true,
+		}
+
+		$(document).ready(function() {
+			// Report full loading
+			$("#loading").hide()
+			$("#analyze").prop('disabled', false)
+		});
+
+		function exec() {
+			// Clean output console
+			$("#console").text("")
+
+			// Get code
+			var input = editor.getValue()
+
+			// Invoke the full Nit program
+      		ret = Module['callMain']([input])
+
+			// Shot and set color of output console
+			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
+			$("#consolePanel").show()
+			var analysis = $("#consolePanel").text();
+			if (analysis.indexOf("Error") >= 0)
+				$("#consolePanel").addClass("panel-danger")
+			else if (analysis.indexOf("Warning") >= 0)
+				$("#consolePanel").addClass("panel-warning")
+			else
+				$("#consolePanel").addClass("panel-success")
+		}
+
+		function load(file) {
+			// Load a sample program
+			$.get('samples/' + file, function(data){
+				editor.setValue(data)
+			})
+		}
+		}
+	</script>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Pep/8 Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a>Web interface</a></li>
+        <li><a href="https://github.com/privat/nit/tree/master/contrib/pep8analysis/">Tool source and manual</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://nitlanguage.org/">nitlanguage.org</a></li>
+        <li><a href="https://code.google.com/p/pep8-1/">Pep/8 project</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+	<div class="alert alert-warning" id="loading">Loading the tool... This may take some time.</div>
+
+	<div class="row">
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Pep/8 Source Code</div>
+			<div class="panel-body" id="code-panel">
+				<textarea id="listing"></textarea>
+				<script>
+					var editor = CodeMirror.fromTextArea(listing, {
+						lineNumbers: true,
+						mode: "z80"
+					});
+					editor.setSize("100%", 500);
+				</script>
+
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default" id="analyze" onclick="exec();" disabled>Analyze program</button>
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					 <span class="glyphicon glyphicon-folder-open"></span>
+					Load sample program
+					<span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a onclick="load('02-fibo.pep')">fibo.pep - clean program </a></li>
+					<li><a onclick="load('06-calc-non-pur.pep');">calc-non-pur.pep - self rewriting program </a></li>
+					<li><a onclick="load('types.pep');"/>types.pep - strange data manipulation </a></li>
+					<li><a onclick="load('directive-in-code.pep');">directive-in-code.pep - mixed directives and instructions</a></li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	  </div>
+
+	  <div class="clearfix visible-xs"></div>
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel" id="consolePanel" style="display: none;">
+			<div class="panel-heading">Analysis Result</div>
+			<div class="panel-body">
+				<samp id="console"></samp>
+			</div>
+		</div>
+	  </div>
+	</div>
+	
+	<script src="pep8analysis.js"></script>
+</div>
+
+</body>
+</html>
