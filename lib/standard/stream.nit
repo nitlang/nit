@@ -419,6 +419,13 @@ class StringOStream
 
 	private var content = new Array[String]
 	redef fun to_s do return content.to_s
-	redef fun is_writable do return true
-	redef fun write(str) do content.add(str.to_s)
+	redef fun is_writable do return not closed
+	redef fun write(str)
+	do
+		assert not closed
+		content.add(str.to_s)
+	end
+
+	protected var closed = false
+	redef fun close do closed = true
 end
