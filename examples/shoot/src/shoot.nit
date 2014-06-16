@@ -380,9 +380,6 @@ redef class App
 			if not self.scene.exists then quit = true
 		end
 		self.scene.draw_on_display(self)
-
-		# Wait the next frame
-		sys.nanosleep(0, 16000000)
 	end
 
 	var paused: Bool = false
