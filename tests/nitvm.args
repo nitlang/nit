@@ -1,0 +1,3 @@
+--log --log-dir out/test_nitc_logs ../examples/hello_world.nit
+base_simple3.nit
+-m test_mixin.nit ../examples/hello_world.nit
