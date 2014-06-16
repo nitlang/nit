@@ -20,6 +20,7 @@
 # Set lang do default to avoid failed tests because of locale
 export LANG=C
 export NIT_TESTING=true
+export MNIT_SRAND=0
 
 unset NIT_DIR
 
@@ -435,8 +436,10 @@ for ii in "$@"; do
 
 		if [ -f "$f.inputs" ]; then
 			inputs="$f.inputs"
+			export MNIT_READ_INPUT="$f.inputs"
 		else
 			inputs=/dev/null
+			export MNIT_READ_INPUT=/dev/null
 		fi
 
 		if [ "$engine" = "niti" ]; then
