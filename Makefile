@@ -48,7 +48,7 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--shareurl "../../share/nitdoc"
 
 doc/nitc/index.html: bin/nitdoc
-	bin/nitdoc src/nit*.nit src/test_*.nit -d doc/nitc \
+	bin/nitdoc $$(bin/nitls lib -r --path) src/nit*.nit src/test_*.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
