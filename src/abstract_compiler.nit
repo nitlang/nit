@@ -202,8 +202,12 @@ class MakefileToolchain
 	do
 		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
 
+		var platform = compiler.mainmodule.target_platform
+		var cc_opt_with_libgc = "-DWITH_LIBGC"
+		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
+
 		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
+		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
@@ -288,18 +292,19 @@ class MakefileToolchain
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 	end
 
+	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
+
+	fun default_outname(mainmodule: MModule): String do return mainmodule.name
+
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
 
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
-		end
+		var outname = self.toolcontext.opt_output.value or else default_outname(mainmodule)
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
-		var makename = "{mainmodule.name}.mk"
+		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
@@ -367,7 +372,7 @@ class MakefileToolchain
 
 	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
 	do
-		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
+		var makename = makefile_name(compiler.mainmodule)
 
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""

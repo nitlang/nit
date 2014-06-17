@@ -19,3 +19,4 @@ test_android_platform
 android
 nitcc_parser_gen
 mnit
+emscripten

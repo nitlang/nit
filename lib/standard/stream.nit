@@ -20,6 +20,7 @@ in "C" `{
 	#include <poll.h>
 	#include <errno.h>
 	#include <string.h>
+	#include <signal.h>
 `}
 
 # Abstract stream class

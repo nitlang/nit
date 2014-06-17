@@ -27,6 +27,7 @@ import separate_compiler
 import android_platform
 import compiler_ffi
 import pnacl_platform
+import emscripten_platform
 
 redef class ToolContext
 	redef fun process_options(args)
