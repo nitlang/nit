@@ -144,18 +144,18 @@ redef class BasicBlock
 	do
 		if lines.is_empty then
 			if backup_reaching_defs_in != null then
-				return "{super}-- r defs in = \{{backup_reaching_defs_in.to_s}\}\\l"
+				return "{super}-- reaching defs in = \{{backup_reaching_defs_in.to_s}\}\\l"
 			end
-		else if lines.first.reaching_defs_in != null then return  "{super}-- r defs in = \{{lines.first.reaching_defs_in.to_s}\}\\l"
+		else if lines.first.reaching_defs_in != null then return  "{super}-- reaching defs in = \{{lines.first.reaching_defs_in.to_s}\}\\l"
 		return super
 	end
 	redef fun dot_node_footer
 	do
 		if lines.is_empty then
 			if backup_reaching_defs_out != null then
-				return "{super}-- r defs out = \{{backup_reaching_defs_out.to_s}\}\\l"
+				return "{super}-- reaching defs out = \{{backup_reaching_defs_out.to_s}\}\\l"
 			end
-		else if lines.first.reaching_defs_out != null then return  "{super}-- r defs out = \{{lines.last.reaching_defs_out.to_s}\}\\l"
+		else if lines.first.reaching_defs_out != null then return  "{super}-- reaching defs out = \{{lines.last.reaching_defs_out.to_s}\}\\l"
 		return super
 	end
 end

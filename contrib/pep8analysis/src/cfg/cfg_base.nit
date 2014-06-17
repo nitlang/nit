@@ -45,7 +45,7 @@ class CFG
 					if instr.is_indirect then
 						#indirect_jump_sites.add(line.address)
 						has_indirect_jump_sites = true
-						manager.notes.add(new Warn(instr.location, "use of indirect jumps, the CFG may be wrong"))
+						manager.notes.add(new Warn(instr.location, "jumps to a dynamic address, this may be OK but the CFG may be wrong"))
 					else
 						var op = instr.n_operand
 						var dest = op.n_value.to_i
@@ -172,7 +172,8 @@ class CFG
 						b.successors.add(db)
 						db.predecessors.add(b)
 					else
-						manager.notes.add(new Error(line.location, "invalid line following instruction"))
+						manager.notes.add(new Error(line.location,
+							"this instruction is not followed by valid code as it should (misplaced data or missing BR?)"))
 					end
 				end
 
@@ -180,7 +181,8 @@ class CFG
 					has_function_calls = true
 					var next_addr = line.address+4
 					if not addr_to_blocks.has_key(next_addr) then
-						print "error, no instruction following call {b.name}"
+						manager.notes.add(new Error(line.location,
+							"this CALL is not followed by valide code as it should"))
 					else
 						b.after_call = addr_to_blocks[next_addr]
 					end
@@ -343,7 +345,7 @@ class CFG
 
 				else if instr isa ARetInstruction then
 						if to_link.is_empty then
-							manager.notes.add( new Error(instr.location,"no CALL can be linked to return") )
+							manager.notes.add( new Error(instr.location,"no CALL can be linked to this RET") )
 							return false
 						else
 							var caller = to_link.pop

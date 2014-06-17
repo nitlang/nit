@@ -341,22 +341,22 @@ redef class AInstruction
 			# uninitialized data
 			#manager.notes.add(new Error(location, "use of uninitialized values in {mem_str}, got {long_content_name(content)}"))
 		if content[0] == 'W' or content[1] == 'w' then
-			manager.notes.add(new Warn(location, "use of deorganized word in {mem_str}, got {long_content_name(content)}"))
+			manager.notes.add(new Warn(location, "using a deorganized word in {mem_str}, expected a word (got {long_content_name(content)})"))
 		#else if (content[0] == 'w' and content[1] != 'W') or (content[1] == 'W' and content[0] != 'w') then
 		else if (content[0] == 'w') != (content[1] == 'W') then
-			manager.notes.add(new Warn(location, "use of partial word in {mem_str}, got {long_content_name(content)}"))
+			manager.notes.add(new Warn(location, "using a partial word in {mem_str}, expected a full word (got {long_content_name(content)})"))
 		#else if content.count('u') == 1 then # partially unitialized, a bad sign
 			#manager.notes.add(new Warn(location, "use of partially uninitialized values in {mem_str}, got {long_content_name(content)}"))
 		else if content.count('t') == 2 then # uninitialized data
 			if manager.report_unknown_types then
-				manager.notes.add(new Warn(location, "use of values from unknown source in {mem_str}, got {long_content_name(content)}"))
+				manager.notes.add(new Warn(location, "using data from unknown source in {mem_str}, expected a word, this may be OK but cannot be analyzed"))
 			end
 		else if content[0] == '0' and content[1] == 'b' then # byte only OK!
 		else if content[0] == '0' and content[1] == 'l' then # ASCII only OK?
 		else if content[0] == '0' and content[1] == '0' then # all zero OK!
 		else if content[0] == 'a' and content[1] == 'A' then # address OK!
 		else if content[0] != 'w' and content[1] != 'W' then
-			manager.notes.add(new Warn(location, "expected word in {mem_str}, got {long_content_name(content)}"))
+			manager.notes.add(new Warn(location, "using data of unsupported type in {mem_str}, expected word (got {long_content_name(content)})"))
 		end
 	end
 
@@ -371,26 +371,26 @@ redef class AInstruction
 	#  'A' address end
 	fun long_data_name(d: Char): String
 	do
-		if d == 'u' then return "uninitialized"
-		if d == '0' then return "zero"
+		if d == 'u' then return "uninitialized byte"
+		if d == '0' then return "byte at zero"
 		if d == 'b' then return "byte"
 		if d == 'w' then return "1st byte of word"
 		if d == 'W' then return "2nd byte of word"
-		if d == 'c' then return "code"
-		if d == 'l' then return "ASCII"
+		if d == 'c' then return "byte of code"
+		if d == 'l' then return "byte of ASCII"
 		if d == 'a' then return "1st byte of address"
 		if d == 'A' then return "2nd byte of address"
-		if d == 't' then return "top"
+		if d == 't' then return "byte of unknown data"
 		print "Unknown data type '{d}'"
 		abort
 	end
 
 	fun long_content_name(c: Array[Char]): String
 	do
-		if (c[0]=='w' or c[0]=='0') and c[1]=='W' then return "word"
-		if c[0]=='a' and c[1]=='A' then return "address"
-		if c[0]==c[1] then return "2x {long_data_name(c[0])}"
-		return "{long_data_name(c[0])} then {long_data_name(c[1])}"
+		if (c[0]=='w' or c[0]=='0') and c[1]=='W' then return "a word"
+		if c[0]=='a' and c[1]=='A' then return "an address"
+		if c[0]==c[1] then return "two {long_data_name(c[0])}"
+		return "a {long_data_name(c[0])} followed by {long_data_name(c[1])}"
 	end
 end
 
@@ -496,7 +496,7 @@ redef class AStInstruction
 			var content = ins.rs[register]
 			if ins.memory(n_operand.n_value.to_i) == 'c' or
 			  	ins.memory(n_operand.n_value.to_i) == 'c' then
-				manager.notes.add(new Warn(location, "overwriting code at {mem} with {long_content_name(content)}"))
+				manager.notes.add(new Warn(location, "overwriting code at {mem} with {long_content_name(content)} (code rewriting?)"))
 			end
 		end
 	end
@@ -521,7 +521,7 @@ redef class AStbyteInstruction
 		if mem isa MemVar and ins != null then
 			var content = ins.rs[register]
 			if ins.memory(n_operand.n_value.to_i) == 'c' then
-				manager.notes.add(new Warn(location, "overwriting code at {mem} with {long_data_name(content[1])}"))
+				manager.notes.add(new Warn(location, "overwriting code at {mem} with {long_data_name(content[1])} (code rewriting?)"))
 			end
 		end
 	end
@@ -549,13 +549,13 @@ redef class AArithmeticInstruction
 
 		# register
 		var content = ins.rs[register]
-		verify_word(content, "r{register}")
+		verify_word(content, "register {register}")
 
 		# memory source
 		var mem = mem_var
 		if mem isa MemVar then
 			content = [ins.memory(mem.index), ins.memory(mem.index+1)]
-			verify_word(content, "m{mem.index}")
+			verify_word(content, "memory address {mem.index}")
 		end
 	end
 end
@@ -569,7 +569,7 @@ redef class ADecoInstruction
 		var mem = mem_var
 		if mem isa MemVar then
 			var content = [ins.memory(mem.index), ins.memory(mem.index+1)]
-			verify_word(content, "m{mem.index}")
+			verify_word(content, "memory address {mem.index}")
 		end
 	end
 end
@@ -590,10 +590,10 @@ redef class AOutputInstruction
 	fun verify_ascii(content: Char)
 	do
 		if content == 'u' then
-			manager.notes.add(new Warn(location, "use of uninitialized values"))
+			manager.notes.add(new Warn(location, "printing uninitialized data, exepected ASCII"))
 		else if content != 'l' then
 			if content != 't' or manager.opt_report_unknown_types.value then
-				manager.notes.add(new Warn(location, "use of non-ascii types ({content})"))
+				manager.notes.add(new Warn(location, "printing non-ASCII data, got {content}"))
 			end
 		end
 	end
@@ -645,7 +645,7 @@ redef class ABranchInstruction
 		if mem isa MemVar then
 			var content = [ins.memory(mem.index), ins.memory(mem.index+1)]
 			if content[0] != 'a' or content[1] != 'A' then
-				manager.notes.add(new Warn(location, "use of non-address data for branching, got {long_content_name(content)}"))
+				manager.notes.add(new Warn(location, "branching to someting other than an address, got {long_content_name(content)}"))
 			end
 		end
 	end
