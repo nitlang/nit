@@ -49,9 +49,8 @@ class EnscriptenToolchain
 
 		var emcc_make_flags = "CC=emcc CFLAGS='-g -Wno-unused-value -Wno-switch -Qunused-arguments'"
 
-		var make_flags = self.toolcontext.opt_make_flags.value	
-		if make_flags == null then
-			self.toolcontext.opt_make_flags.value = emcc_make_flags
-		else make_flags.append emcc_make_flags
+		var make_flags = self.toolcontext.opt_make_flags.value or else ""
+		make_flags += emcc_make_flags
+		self.toolcontext.opt_make_flags.value = make_flags
 	end
 end
