@@ -19,6 +19,11 @@ ul li .label {
 	font-family: monospace;
 }
 
+.navbar-default .navbar-toggle {
+	margin-top: 2px;
+	padding: 5px 10px;
+}
+
 /*
  * Sidebar
  */

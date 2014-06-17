@@ -149,18 +149,22 @@ end
 class TplTopMenu
 	super Template
 
+	# Brand link to display in first position of the top menu
+	private var brand: nullable Streamable writable
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
-	# Add a new link to the menu
-	fun add_link(href, name: String, is_active: Bool) do
+	init do end
+
+	# Add a content between `<li>` tags
+	fun add_item(content: Streamable, is_active: Bool) do
 		var tpl = new Template
 		tpl.add "<li"
 		if is_active then
 			tpl.add " class='active'"
 		end
 		tpl.add ">"
-		tpl.add new TplLink(href, name)
+		tpl.add content
 		tpl.add "</li>"
 		add_raw(tpl)
 	end
@@ -171,13 +175,26 @@ class TplTopMenu
 	end
 
 	redef fun rendering do
+		if brand == null and elts.is_empty then return
 		add "<nav id='topmenu' class='navbar navbar-default navbar-fixed-top' role='navigation'>"
 		add " <div class='container-fluid'>"
+		add "  <div class='navbar-header'>"
+		add "   <button type='button' class='navbar-toggle' "
+		add "       data-toggle='collapse' data-target='#topmenu-collapse'>"
+		add "	 <span class='sr-only'>Toggle menu</span>"
+		add "    <span class='icon-bar'></span>"
+		add "    <span class='icon-bar'></span>"
+		add "    <span class='icon-bar'></span>"
+		add "   </button>"
+		if brand != null then add brand.as(not null)
+		add "  </div>"
+		add "  <div class='collapse navbar-collapse' id='topmenu-collapse'>"
 		if not elts.is_empty then
 			add "<ul class='nav navbar-nav'>"
-			for elt in elts do add(elt)
+			for elt in elts do add elt
 			add "</ul>"
 		end
+		add "  </div>"
 		add " </div>"
 		add "</nav>"
 	end

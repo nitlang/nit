@@ -366,7 +366,7 @@ define([
 		placeholder: "Search..."
 	})
 
-	$("#topmenu>.container-fluid").append(
+	$("#topmenu-collapse").append(
 		$("<div>")
 		.addClass("navbar-form navbar-right")
        	.append(

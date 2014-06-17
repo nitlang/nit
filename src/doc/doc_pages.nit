@@ -27,7 +27,7 @@ class NitdocContext
 	private var opt_private = new OptionBool("also generate private API", "--private")
 
 	private var opt_custom_title = new OptionString("custom title for homepage", "--custom-title")
-	private var opt_custom_menu = new OptionString("custom items added in top menu (each item must be enclosed in 'li' tags)", "--custom-menu-items")
+	private var opt_custom_brand = new OptionString("custom link to external site", "--custom-brand")
 	private var opt_custom_intro = new OptionString("custom intro text for homepage", "--custom-overview-text")
 	private var opt_custom_footer = new OptionString("custom footer text", "--custom-footer-text")
 
@@ -47,7 +47,7 @@ class NitdocContext
 	init do
 		var opts = toolcontext.option_context
 		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl, opt_nodot, opt_private)
-		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_menu)
+		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
 		opts.add_option(opt_piwik_tracker, opt_piwik_site_id)
 
@@ -280,8 +280,14 @@ abstract class NitdocPage
 	# Build top menu template
 	fun tpl_topmenu: TplTopMenu do
 		var topmenu = new TplTopMenu
-		var custom_elt = ctx.opt_custom_menu.value
-		if custom_elt != null then topmenu.add_raw(custom_elt)
+		var brand = ctx.opt_custom_brand.value
+		if brand != null then
+			var tpl = new Template
+			tpl.add "<span class='navbar-brand'>"
+			tpl.add brand
+			tpl.add "</span>"
+			topmenu.brand = tpl
+		end
 		return topmenu
 	end
 
@@ -449,8 +455,8 @@ class NitdocOverview
 
 	redef fun tpl_topmenu do
 		var topmenu = super
-		topmenu.add_link("#", "Overview", true)
-		topmenu.add_link("search.html", "Index", false)
+		topmenu.add_item(new TplLink("#", "Overview"), true)
+		topmenu.add_item(new TplLink("search.html", "Index"), false)
 		return topmenu
 	end
 
@@ -496,8 +502,8 @@ class NitdocSearch
 
 	redef fun tpl_topmenu do
 		var topmenu = super
-		topmenu.add_link("index.html", "Overview", false)
-		topmenu.add_link("#", "Index", true)
+		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		topmenu.add_item(new TplLink("#", "Index"), true)
 		return topmenu
 	end
 
@@ -584,9 +590,9 @@ class NitdocModule
 
 	redef fun tpl_topmenu do
 		var topmenu = super
-		topmenu.add_link("index.html", "Overview", false)
-		topmenu.add_link("#", "{mmodule.nitdoc_name}", true)
-		topmenu.add_link("search.html", "Index", false)
+		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		topmenu.add_item(new TplLink("#", "{mmodule.nitdoc_name}"), true)
+		topmenu.add_item(new TplLink("search.html", "Index"), false)
 		return topmenu
 	end
 
@@ -781,10 +787,10 @@ class NitdocClass
 		else
 			mmodule = mclass.public_owner.as(not null)
 		end
-		topmenu.add_link("index.html", "Overview", false)
-		topmenu.add_link("{mmodule.nitdoc_url}", "{mmodule.nitdoc_name}", false)
-		topmenu.add_link("#", "{mclass.nitdoc_name}", true)
-		topmenu.add_link("search.html", "Index", false)
+		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		topmenu.add_item(new TplLink("{mmodule.nitdoc_url}", "{mmodule.nitdoc_name}"), false)
+		topmenu.add_item(new TplLink("#", "{mclass.nitdoc_name}"), true)
+		topmenu.add_item(new TplLink("search.html", "Index"), false)
 		return topmenu
 	end
 

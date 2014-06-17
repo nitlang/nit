@@ -36,7 +36,7 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
 	bin/nitdoc $$(bin/nitls lib -r --path) -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
-		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
+		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
 		--github-upstream "privat:nit:master" \
@@ -44,13 +44,14 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--github-gitdir "." \
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
-		--piwik-site-id "2"
+		--piwik-site-id "2" \
+		--shareurl "../../share/nitdoc"
 
 doc/nitc/index.html: bin/nitdoc
 	bin/nitdoc src/nit*.nit src/test_*.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
-		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
+		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit tools. Version $$(git describe)." \
 		--github-upstream "privat:nit:master" \
