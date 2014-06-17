@@ -42,3 +42,7 @@ Copyright: 1998-2014 Glenn Randers-Pehrson
            1996-1997 Andreas Dilger
            1995-1996 Guy Eric Schalnat, Group 42, Inc.
 License: libpng license (see share/png/LICENSE)
+
+Files: contrib/pep8analysis/www/viz.js
+Copyright: Copyright (c) 2012 Michael Daines
+Licence: see contrib/pep8analysis/COPYING-viz-js
