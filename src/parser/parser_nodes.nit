@@ -934,6 +934,11 @@ class AConcreteInitPropdef
 	super AInitPropdef
 end
 
+class AInternNewPropdef
+	super AInternMethPropdef
+	super AInitPropdef
+end
+
 # A constructor marked extern (defined with the `new` keyword)
 class AExternInitPropdef
 	super AExternPropdef

@@ -893,6 +893,8 @@ abstract class AbstractCompilerVisitor
 		return self.send(callsite.mproperty, args)
 	end
 
+	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
+
 	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
@@ -1703,6 +1705,8 @@ redef class AMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
+		else if mpropdef.mproperty.is_new then
+			ret = arguments.first.mcasttype
 		end
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
@@ -1881,6 +1885,9 @@ redef class AMethPropdef
 				return
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
+				return
+			else if pname == "init" then
+				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return
 			end
 		else if cname == "NativeArray" then
@@ -2611,13 +2618,18 @@ redef class ANewExpr
 		var mtype = self.mtype.as(MClassType)
 		var recv
 		var ctype = mtype.ctype
-		if ctype == "val*" then
+		if mtype.mclass.name == "NativeArray" then
+			assert self.n_args.n_exprs.length == 1
+			var l = v.expr(self.n_args.n_exprs.first, null)
+			assert mtype isa MGenericType
+			var elttype = mtype.arguments.first
+			return v.native_array_instance(elttype, l)
+		else if ctype == "val*" then
 			recv = v.init_instance(mtype)
 		else if ctype == "void*" then
 			recv = v.new_expr("NULL/*special!*/", mtype)
 		else
-			debug("cannot new {mtype}")
-			abort
+			recv = v.new_expr("({ctype})0/*special!*/", mtype)
 		end
 		var args = [recv]
 		for a in self.n_args.n_exprs do

@@ -1673,7 +1673,7 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
 	do
 		var mtype = self.get_class("NativeArray").get_mtype([elttype])
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
