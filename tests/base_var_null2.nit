@@ -21,6 +21,7 @@ do
 	if i == 2 then a = 2
 	#1alt3#if i == 3 then a = '3'
 	if a == null then 0.output else a.output
+	'\n'.output
 end
 
 test(1)
