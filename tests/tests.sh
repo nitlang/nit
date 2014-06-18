@@ -304,6 +304,10 @@ case $engine in
 		enginebinname=nitg;
 		OPT="--erasure $OPT"
 		;;
+	nitg-sg)
+		enginebinname=nitg;
+		OPT="--semi-global $OPT"
+		;;
 	nitg-g)
 		enginebinname=nitg;
 		OPT="--global $OPT"
