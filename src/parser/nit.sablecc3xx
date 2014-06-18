@@ -411,9 +411,9 @@ stmt~withelse~noexpr~nopar {-> expr}
 	= {vardecl} vardecl~withelse {-> vardecl~withelse.expr}
 	| {assign} assignment~withelse~nopar {-> assignment~withelse~nopar.expr}
 	| {return} kwreturn expr_final~withelse? {-> New expr.return(kwreturn, expr_final~withelse.expr)}
-	| {break} kwbreak label? expr_final~withelse? {-> New expr.break(kwbreak, label, expr_final~withelse.expr)}
+	| {break} kwbreak label? {-> New expr.break(kwbreak, label)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
-	| {continue} kwcontinue label? expr_final~withelse? {-> New expr.continue(kwcontinue, label, expr_final~withelse.expr)}
+	| {continue} kwcontinue label? {-> New expr.continue(kwcontinue, label)}
 	| {do} do~withelse {-> do~withelse.expr}
 !noexpr	| {if} if~withelse {-> if~withelse.expr}
 	| {while} while~withelse {-> while~withelse.expr}
@@ -426,11 +426,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
 	;
 
-label= kwlabel id;
-
-assign_continue~withelse{-> expr}
-	= expr_final~withelse {-> New expr.continue(Null, Null, expr_final~withelse.expr)}
-	;
+label= kwlabel id?;
 
 vardecl~withelse{-> expr}
 	= kwvar id annotations? typing_o {-> New expr.vardecl(kwvar, id, typing_o.type, Null, Null, annotations)}
@@ -794,14 +790,14 @@ param	= id type? dotdotdot? annotations?
 
 type	= kwnullable? [id]:classid [types]:type* annotations?;
 
-label = kwlabel id;
+label = kwlabel id?;
 
 expr	= {block} expr* kwend? 
 	| {vardecl} kwvar id type? assign? expr? annotations?
 	| {return} kwreturn? expr?
-	| {break} kwbreak label? expr?
+	| {break} kwbreak label?
 	| {abort} kwabort
-	| {continue} kwcontinue? label? expr?
+	| {continue} kwcontinue? label?
 	| {do} kwdo [block]:expr? label?
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr

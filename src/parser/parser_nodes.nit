@@ -1399,9 +1399,9 @@ class ALabel
 	var _n_kwlabel: TKwlabel
 	fun n_kwlabel: TKwlabel do return _n_kwlabel
 	fun n_kwlabel=(n_kwlabel: TKwlabel) do _n_kwlabel = n_kwlabel
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_id: nullable TId
+	fun n_id: nullable TId do return _n_id
+	fun n_id=(n_id: nullable TId) do _n_id = n_id
 	init do end
 end
 
