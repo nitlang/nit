@@ -596,6 +596,35 @@ class NitdocModule
 		return topmenu
 	end
 
+	# Class list to display in sidebar
+	fun tpl_sidebar_mclasses do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all mmodule.filter_intro_mclasses(ctx.min_visibility)
+		mclasses.add_all mmodule.filter_redef_mclasses(ctx.min_visibility)
+		if mclasses.is_empty then return
+		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
+
+		var sorted = mclasses.to_a
+		name_sorter.sort(sorted)
+		for mclass in sorted do
+			list.add_li tpl_sidebar_item(mclass)
+		end
+		tpl_sidebar.boxes.add new TplSideBox.with_content("All classes", list)
+	end
+
+	private fun tpl_sidebar_item(def: MClass): Template do
+		var classes = def.intro.tpl_css_classes.to_a
+		if def.intro_mmodule == mmodule then
+			classes.add "intro"
+		else
+			classes.add "redef"
+		end
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(classes)
+		lnk.add def.tpl_link
+		return lnk
+	end
+
 	# intro text
 	private fun tpl_intro: TplSection do
 		var section = new TplSection.with_title("top", tpl_title)
@@ -710,6 +739,7 @@ class NitdocModule
 	end
 
 	redef fun tpl_content do
+		tpl_sidebar_mclasses
 		var top = tpl_intro
 		tpl_inheritance(top)
 		tpl_mclasses(top)
