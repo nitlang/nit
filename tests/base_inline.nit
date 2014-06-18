@@ -18,7 +18,7 @@ import kernel
 
 interface Inline__
 	fun foo do 1.output
-	fun bar: Int = 2
+	fun bar: Int do return 2
 end
 
 class A
