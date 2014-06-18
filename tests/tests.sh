@@ -42,7 +42,6 @@ Usage: $e [options] modulenames
 -o option   Pass option to the engine
 -v          Verbose (show tests steps)
 -h          This help
---tap       Produce TAP output
 --engine    Use a specific engine (default=nitg)
 --noskip    Do not skip a test even if the .skip file matches
 --[no]soso  Force enable (or disable) SOSO
@@ -81,7 +80,6 @@ function compare_to_result()
 # As argument: the pattern used for the file
 function process_result()
 {
-	((tapcount=tapcount+1))
 	# Result
 	pattern=$1
 	description=$2
@@ -137,9 +135,7 @@ function process_result()
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
-		if [ -n "$tap" ]; then
-			echo "ok - $description"
-		elif [ -n "$OLD" ]; then
+		if [ -n "$OLD" ]; then
 			echo "[*ok*] out/$pattern.res $SAV - but $OLD remains!"
 			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
@@ -148,9 +144,7 @@ function process_result()
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$FIXME" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO expected failure"
-		elif [ -n "$OLD" ]; then
+		if [ -n "$OLD" ]; then
 			echo "[*fixme*] out/$pattern.res $FIXME - but $OLD remains!"
 			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
@@ -160,34 +154,18 @@ function process_result()
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
-		if [ -n "$tap" ]; then
-			echo "ok - $description # SOSO"
-		else
-			echo "[soso] out/$pattern.res $SOSO"
-		fi
+		echo "[soso] out/$pattern.res $SOSO"
 		ok="$ok $pattern"
 	elif [ "x$NYI" = "x0" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO not yet implemented"
-		else
-			echo "[todo] out/$pattern.res -> not yet implemented"
-			echo >>$xml "<skipped/>"
-		fi
+		echo "[todo] out/$pattern.res -> not yet implemented"
+		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
 	elif [ -n "$SOSOF" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO SOSO expected failure"
-		else
-			echo "[fixme soso] out/$pattern.res $SOSOF"
-			echo >>$xml "<skipped/>"
-		fi
+		echo "[fixme soso] out/$pattern.res $SOSOF"
+		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
 	elif [ -n "$NSAV" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description"
-		else
-			echo "[======= fail out/$pattern.res $NSAV =======]"
-		fi
+		echo "[======= fail out/$pattern.res $NSAV =======]"
 		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
@@ -195,11 +173,7 @@ function process_result()
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description"
-		else
-			echo "[======= changed out/$pattern.res $NFIXME ======]"
-		fi
+		echo "[======= changed out/$pattern.res $NFIXME ======]"
 		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
@@ -207,11 +181,7 @@ function process_result()
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -s out/$pattern.res ]; then
-		if [ -n "$tap" ]; then
-			echo "no ok - $description"
-		else
-			echo "[=== no sav ===] out/$pattern.res is not empty"
-		fi
+		echo "[=== no sav ===] out/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v >>$xml out/$pattern.res
@@ -219,11 +189,7 @@ function process_result()
 		nos="$nos $pattern"
 	else
 		# no sav but empty res
-		if [ -n "$tap" ]; then
-			echo "ok - $description"
-		else
-			echo "[0k] out/$pattern.res is empty"
-		fi
+		echo "[0k] out/$pattern.res is empty"
 		ok="$ok $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
@@ -238,22 +204,12 @@ need_skip()
 {
 	test "$noskip" = true && return 1
 	if echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
-		((tapcount=tapcount+1))
-		if [ -n "$tap" ]; then
-			echo "ok - $2 # skip"
-		else
-			echo "=> $2: [skip]"
-		fi
+		echo "=> $2: [skip]"
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
 	if test $engine = niti && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
-		((tapcount=tapcount+1))
-		if [ -n "$tap" ]; then
-			echo "ok - $2 # skip"
-		else
-			echo "=> $2: [skip exec]"
-		fi
+		echo "=> $2: [skip exec]"
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
@@ -281,29 +237,18 @@ skip_cc()
 
 find_nitc()
 {
-	((tapcount=tapcount+1))
 	name="$enginebinname"
 	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - find binary for $engine"
-			echo "Bail out! Could not find binary for engine $engine, aborting"
-		else
-			echo "Could not find binary for engine $engine, aborting"
-		fi
+		echo "Could not find binary for engine $engine, aborting"
 		exit 1
 	fi
-	if [ -n "$tap" ]; then
-		echo "ok - find binary for $engine: $recent $OPT"
-	else
-		echo "Find binary for engine $engine: $recent $OPT"
-	fi
+	echo "Find binary for engine $engine: $recent $OPT"
 	NITC=$recent
 }
 
 verbose=false
 stop=false
-tapcount=0
 engine=nitg
 noskip=
 while [ $stop = false ]; do
@@ -311,7 +256,6 @@ while [ $stop = false ]; do
 		-o) OPT="$OPT $2"; shift; shift;;
 		-v) verbose=true; shift;;
 		-h) usage; exit;;
-		--tap) tap=true; shift;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
 		--soso) soso=true; shift;;
@@ -431,7 +375,7 @@ for ii in "$@"; do
 		# Sould we skip the alternative for this engine?
 		need_skip $bf $bf $pack && continue
 
-		test -z "$tap" && echo -n "=> $bf: "
+		echo -n "=> $bf: "
 
 		if [ -f "$f.inputs" ]; then
 			inputs="$f.inputs"
@@ -467,7 +411,7 @@ END
 			fi
 		fi
 		if [ "$ERR" != 0 ]; then
-			test -z "$tap" && echo -n "! "
+			echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
 			process_result $bf $bf $pack
 		elif skip_exec "$bf"; then
@@ -476,11 +420,11 @@ END
 			process_result $bf $bf $pack
 		elif [ -n "$nocc" ]; then
 			# not compiled
-			test -z "$tap" && echo -n "nocc "
+			echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
-			test -z "$tap" && echo -n ". "
+			echo -n ". "
 			# Execute
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
@@ -527,7 +471,7 @@ END
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
-					test -z "$tap" && echo -n "==> $name "
+					echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
 					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
@@ -551,23 +495,13 @@ END
 			echo "Not executable (platform?)" > "$ff.res"
 			process_result $bf "$bf" $pack
 		else
-			test -z "$tap" && echo -n "! "
+			echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"
 			echo "Compilation error" > "$ff.res"
 			process_result $bf "$bf" $pack
 		fi
 	done
 done
-
-if [ -n "$tap" ]; then
-	echo "1..$tapcount"
-	echo "# ok:" `echo $ok | wc -w`
-	echo "# not ok:" `echo $nok | wc -w`
-	echo "# no sav:" `echo $nos | wc -w`
-	echo "# todo/fixme:" `echo $todos | wc -w`
-	echo "# of sav that remains:" `echo $remains | wc -w`
-	exit
-fi
 
 echo "engine: $engine ($enginebinname $OPT)"
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
