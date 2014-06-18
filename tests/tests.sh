@@ -59,6 +59,7 @@ function compare_to_result()
 	local pattern="$1"
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
+	test "`cat "$sav"`" = "UNDEFINED" && return 1
 	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
