@@ -318,6 +318,11 @@ case $engine in
 	niti)
 		enginebinname=nit
 		;;
+	emscripten)
+		enginebinname=nitg
+		OPT="-m emscripten_nodejs.nit --semi-global $OPT"
+		savdirs="sav/nitg-sg/"
+		;;
 	nitc)
 		echo "disabled engine $engine"
 		exit 0
@@ -410,6 +415,9 @@ for ii in "$@"; do
 		fi
 
 		ffout="$ff.bin"
+		if [ "$engine" = "emscripten" ]; then
+			ffout="$ff.bin.js"
+		fi
 
 		if [ "$engine" = "niti" ]; then
 			cat > "./$ff.bin" <<END
@@ -436,6 +444,15 @@ END
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
 				cat >&2 "$ff.cmp.err"
+			fi
+		fi
+		if [ "$engine" = "emscripten" ]; then
+			echo > "./$ff.bin" "nodejs $ffout \"\$@\""
+			chmod +x "$ff.bin"
+			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
+				echo " [skip] do no not imports kernel"
+				echo >>$xml "<testcase classname='$pack' name='$bf'><skipped/></testcase>"
+				continue
 			fi
 		fi
 		if [ "$ERR" != 0 ]; then
