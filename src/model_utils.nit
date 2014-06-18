@@ -23,7 +23,7 @@ redef class MGroup
 	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.intro_mclasses
+		for mmodule in mmodules do res.add_all mmodule.filter_intro_mclasses(min_visibility)
 		for mgrp in lst do res.add_all mgrp.in_nesting_intro_mclasses(min_visibility)
 		return res
 	end
@@ -31,7 +31,7 @@ redef class MGroup
 	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.redef_mclasses
+		for mmodule in mmodules do res.add_all mmodule.filter_redef_mclasses(min_visibility)
 		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclasses(min_visibility)
 		return res
 	end
@@ -89,10 +89,31 @@ redef class MModule
 		return res
 	end
 
+	# The list of intro mclass in the module.
+	# with visibility >= to min_visibility
+	fun filter_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		for mclass in intro_mclasses do
+			if mclass.visibility < min_visibility then continue
+			res.add mclass
+		end
+		return res
+	end
+
 	# Get the list of mclasses refined in 'self'.
 	fun redef_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for c in mclassdefs do
+			if not c.is_intro then mclasses.add(c.mclass)
+		end
+		return mclasses
+	end
+
+	# Get the list of mclasses refined in 'self'.
+	fun filter_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var mclasses = new HashSet[MClass]
+		for c in mclassdefs do
+			if c.mclass.visibility < min_visibility then continue
 			if not c.is_intro then mclasses.add(c.mclass)
 		end
 		return mclasses
@@ -111,7 +132,7 @@ redef class MModule
 	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mmodule in in_nesting.greaters do
-			for mclass in mmodule.intro_mclasses do
+			for mclass in mmodule.filter_intro_mclasses(min_visibility) do
 				if mclass.visibility < min_visibility then continue
 				res.add mclass
 			end
@@ -122,7 +143,7 @@ redef class MModule
 	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mmodule in self.in_nesting.greaters do
-			for mclass in mmodule.redef_mclasses do
+			for mclass in mmodule.filter_redef_mclasses(min_visibility) do
 				if mclass.visibility < min_visibility then continue
 				res.add mclass
 			end
