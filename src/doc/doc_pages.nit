@@ -598,7 +598,7 @@ class NitdocModule
 
 	# intro text
 	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title(mmodule.nitdoc_anchor, tpl_title)
+		var section = new TplSection.with_title("top", tpl_title)
 		section.subtitle = mmodule.tpl_declaration
 
 		var article = new TplArticle("intro")
@@ -613,30 +613,22 @@ class NitdocModule
 	# inheritance section
 	private fun tpl_inheritance(parent: TplSection) do
 		# Extract relevent modules
-		var nested = mmodule.in_nesting.direct_greaters.to_a
 		var imports = mmodule.in_importation.greaters
 		if imports.length > 10 then imports = mmodule.in_importation.direct_greaters
 		var clients = mmodule.in_importation.smallers
 		if clients.length > 10 then clients = mmodule.in_importation.direct_smallers
 
 		# Display lists
-		var section = new TplSection.with_title("inheritance", "Inheritance")
+		var section = new TplSection.with_title("dependencies", "Dependencies")
 
 		# Graph
 		var mmodules = new HashSet[MModule]
-		mmodules.add_all nested
+		mmodules.add_all mmodule.in_nesting.direct_greaters
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mmodule
 		var graph = tpl_dot(mmodules)
 		if graph != null then section.add_child graph
-
-		# nested modules
-		if not nested.is_empty then
-			var lst = nested.to_a
-			name_sorter.sort lst
-			section.add_child tpl_list("nesting", "Nested modules", lst)
-		end
 
 		# Imports
 		var lst = new Array[MModule]
@@ -675,33 +667,46 @@ class NitdocModule
 
 	private fun tpl_mclasses(parent: TplSection) do
 		var mclassdefs = new HashSet[MClassDef]
-		mclassdefs.add_all mmodule.in_nesting_intro_mclassdefs(ctx.min_visibility)
-		mclassdefs.add_all mmodule.in_nesting_redef_mclassdefs(ctx.min_visibility)
+		mclassdefs.add_all mmodule.intro_mclassdefs(ctx.min_visibility)
+		mclassdefs.add_all mmodule.redef_mclassdefs(ctx.min_visibility)
 		var mclasses2mdefs = sort_by_mclass(mclassdefs)
-		var sorted_mclasses = mclasses2mdefs.keys.to_a
-		name_sorter.sort sorted_mclasses
+		var mmodules2mclasses = group_by_mmodule(mclasses2mdefs.keys)
 
-		# intros
-		var section = new TplSection.with_title("intros", "Introductions")
-		var intros = mmodule.in_nesting_intro_mclasses(ctx.min_visibility)
-		var sorted_intros = intros.to_a
-		name_sorter.sort(sorted_intros)
-		for mclass in sorted_intros do
-			if not mclasses2mdefs.has_key(mclass) then continue
-			section.add_child tpl_mclass_article(mclass, mclasses2mdefs[mclass].to_a)
-		end
-		parent.add_child section
+		var sorted_mmodules = mmodules2mclasses.keys.to_a
+		model.mmodule_importation_hierarchy.linearize(sorted_mmodules)
 
-		# redefs
-		section = new TplSection.with_title("redefs", "Refinements")
-		var redefs = mmodule.in_nesting_redef_mclasses(ctx.min_visibility).to_a
-		name_sorter.sort(redefs)
-		for mclass in redefs do
-			if intros.has(mclass) then continue
-			if not mclasses2mdefs.has_key(mclass) then continue
-			section.add_child tpl_mclass_article(mclass, mclasses2mdefs[mclass].to_a)
+		for mmodule in sorted_mmodules do
+			var section = new TplSection(mmodule.nitdoc_anchor)
+			var title = new Template
+			if mmodule == sorted_mmodules.first then
+				title.add "Introductions in "
+				section.summary_title = "In {mmodule.nitdoc_name}"
+			else
+				title.add "Redefinitions from "
+				section.summary_title = "From {mmodule.nitdoc_name}"
+			end
+			title.add mmodule.tpl_link
+			section.title = title
+
+			var mclasses = mmodules2mclasses[mmodule].to_a
+			name_sorter.sort(mclasses)
+			for mclass in mclasses do
+				section.add_child tpl_mclass_article(mclass, mclasses2mdefs[mclass].to_a)
+			end
+			parent.add_child section
 		end
-		parent.add_child section
+	end
+
+	private fun group_by_mmodule(mclasses: Collection[MClass]): Map[MModule, Set[MClass]] do
+		var res = new HashMap[MModule, Set[MClass]]
+		for mclass in mclasses do
+			var mmodule = mclass.intro_mmodule
+			if not res.has_key(mmodule) then
+				res[mmodule] = new HashSet[MClass]
+			end
+			res[mmodule].add(mclass)
+		end
+		return res
 	end
 
 	redef fun tpl_content do
