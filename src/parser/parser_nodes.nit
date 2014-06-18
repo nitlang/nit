@@ -761,6 +761,10 @@ abstract class AVisibility
 end
 class APublicVisibility
 	super AVisibility
+	var _n_kwpublic: nullable TKwpublic
+	fun n_kwpublic: nullable TKwpublic do return _n_kwpublic
+	fun n_kwpublic=(n_kwpublic: nullable TKwpublic) do _n_kwpublic = n_kwpublic
+	init do end
 end
 class APrivateVisibility
 	super AVisibility

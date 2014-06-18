@@ -295,7 +295,8 @@ writable {-> able}
 	;
 
 visibility
-	= {public} {-> New visibility.public()}
+	= {public} {-> New visibility.public(Null)}
+	| {public2} kwpublic no {-> New visibility.public(kwpublic)}
 	| {private} kwprivate no {-> New visibility.private(kwprivate)}
 	| {protected} kwprotected no {-> New visibility.protected(kwprotected)}
 	| {intrude} kwintrude no {-> New visibility.intrude(kwintrude)}
@@ -745,7 +746,7 @@ import	= {std} visibility kwimport [name]:module_name annotations?
 	;
 
 visibility
-	= {public}
+	= {public} kwpublic?
 	| {private} kwprivate
 	| {protected} kwprotected
 	| {intrude} kwintrude
