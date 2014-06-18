@@ -2,11 +2,15 @@ import backbone
 import parser
 
 redef class AnalysisManager
-	fun build_ast( filename : String ) : nullable AListing
+	fun build_ast_from_file( filename : String ) : nullable AListing
 	do
 		var file = new IFStream.open( filename )
+		return build_ast(filename, file)
+	end
 
-		var source = new SourceFile(filename, file)
+	fun build_ast(filename: String, stream: IStream): nullable AListing
+	do
+		var source = new SourceFile(filename, stream)
 		var lexer = new Lexer(source)
 		var parser = new Parser(lexer)
 		var node_tree = parser.parse
