@@ -101,7 +101,7 @@ private class SerializationPhase
 			var type_name = attribute.type_name
 			code.add ""
 			code.add "\tvar {name} = v.deserialize_attribute(\"{name}\")"
-			code.add "\tassert {name} isa {type_name} else print \"Expected attribute '{name}' to be of type '{type_name}'\""
+			code.add "\tassert {name} isa {type_name} else print \"Expected attribute '{name}' to be of type '{type_name}', got '\{{name}.class_name\}'\""
 			code.add "\tself.{name} = {name}"
 		end
 
@@ -129,7 +129,7 @@ private class SerializationPhase
 			code.add "	redef fun deserialize_class(name)"
 			code.add "	do"
 		else
-			toolcontext.error(deserializer_npropdef.location, "Annotation error: you cannont define Deserializer::deserialize_class in a module where you use \"auto_serializable\".")
+			toolcontext.error(deserializer_npropdef.location, "Annotation error: you cannot define Deserializer::deserialize_class in a module where you use \"auto_serializable\".")
 			return
 		end
 

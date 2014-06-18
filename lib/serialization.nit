@@ -65,7 +65,10 @@ interface Deserializer
 
 	# Mainly generated method to return the next instance of the givent
 	# class by name
-	fun deserialize_class(class_name: String): Object do abort
+	fun deserialize_class(class_name: String): Object do
+		print "Error: doesn't know how to deserialize class \"{class_name}\""
+		abort
+	end
 end
 
 # Instances of this class can be passed to `Serializer::serialize`
