@@ -2250,12 +2250,25 @@ class AIssetAttrExpr
 	init do end
 end
 
+# A elyspis notation used to pass an expression as it in a vararg parameter
+class AVarargExpr
+	super AExpr
+	var _n_expr: AExpr
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_dotdotdot: TDotdotdot
+	fun n_dotdotdot: TDotdotdot do return _n_dotdotdot
+	fun n_dotdotdot=(n_dotdotdot: TDotdotdot) do _n_dotdotdot = n_dotdotdot
+	init do end
+end
+
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
 	var n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
 	init do end
 end
+
 
 class ADebugTypeExpr
 	super AExpr

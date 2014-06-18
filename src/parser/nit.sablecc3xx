@@ -571,6 +571,7 @@ expr_atom~nopar~nobra {-> expr}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
+	| {vararg} [expr]:expr_atom~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
 	;
 
 superstring {-> expr} 
@@ -867,6 +868,7 @@ expr	= {block} expr* kwend?
         | {as_notnull} expr kwas opar? kwnot kwnull cpar?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
+	| {vararg} expr dotdotdot
 	;
 exprs
 	= {list} [exprs]:expr*
