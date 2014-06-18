@@ -462,6 +462,13 @@ end
 
 # Sorters
 
+# Sort mentities by their name
+class MEntityNameSorter
+	super AbstractSorter[MEntity]
+	redef fun compare(a, b) do return a.name <=> b.name
+	init do end
+end
+
 # Sort mmodules by their name
 class MModuleNameSorter
 	super AbstractSorter[MModule]
