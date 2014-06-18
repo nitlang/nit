@@ -98,38 +98,51 @@ function process_result()
 	echo >>$xml "<testcase classname='$pack' name='$description'>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
-		sav=$savdir/$pattern.res
+		sav=$savdir/fixme/$pattern.res
 		compare_to_result "$pattern" "$sav"
-
-		case "$? $sav" in
-			0*)
-				continue;; # no file
-			1*/fixme/*)
+		case "$?" in
+			0)
+				;; # no file
+			1)
 				OLD="$LIST"
 				FIXME="$sav"
+				LIST="$LIST $sav"
 				;;
-			1*)
-				OLD="$LIST"
-				SAV="$sav"
+			2)
+				SOSOF="$sav"
+				LIST="$LIST $sav"
 				;;
-			2*/fixme/*)
-				SOSOF="$sav" ;;
-			2*)
-				SOSO="$sav" ;;
-			3*/fixme/*)
+			3)
 				if [ -z "$FIRST" ]; then
 					NFIXME="$sav"
 					FIRST="$sav"
 				fi
+				LIST="$LIST $sav"
 				;;
-			3*)
+		esac
+
+		sav=$savdir/$pattern.res
+		compare_to_result "$pattern" "$sav"
+		case "$?" in
+			0)
+				;; # no file
+			1)
+				OLD="$LIST"
+				SAV="$sav"
+				LIST="$LIST $sav"
+				;;
+			2)
+				SOSO="$sav"
+				LIST="$LIST $sav"
+				;;
+			3)
 				if [ -z "$FIRST" ]; then
 					NSAV="$sav"
 					FIRST="$sav"
 				fi
+				LIST="$LIST $sav"
 				;;
 		esac
-		LIST="$LIST $sav"
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
@@ -251,6 +264,7 @@ verbose=false
 stop=false
 engine=nitg
 noskip=
+savdirs=
 while [ $stop = false ]; do
 	case $1 in
 		-o) OPT="$OPT $2"; shift; shift;;
@@ -268,31 +282,25 @@ case $engine in
 	nitg)
 		engine=nitg-s;
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
 	nitg-s)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
 	nitg-e)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--erasure $OPT"
 		;;
 	nitg-g)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--global $OPT"
 		;;
 	nit)
 		engine=niti
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		;;
 	niti)
 		enginebinname=nit
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		;;
 	nitc)
 		echo "disabled engine $engine"
@@ -303,6 +311,8 @@ case $engine in
 		exit 1
 		;;
 esac
+
+savdirs="sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
