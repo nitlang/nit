@@ -44,7 +44,6 @@ Usage: $e [options] modulenames
 -h          This help
 --engine    Use a specific engine (default=nitg)
 --noskip    Do not skip a test even if the .skip file matches
---[no]soso  Force enable (or disable) SOSO
 END
 }
 
@@ -64,12 +63,11 @@ function compare_to_result()
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
-	[ -z "$soso" ] && return 3
 	sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log"
+	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -109,7 +107,10 @@ function process_result()
 				LIST="$LIST $sav"
 				;;
 			2)
-				SOSOF="$sav"
+				if [ -z "$FIRST" ]; then
+					SOSOF="$sav"
+					FIRST="$sav"
+				fi
 				LIST="$LIST $sav"
 				;;
 			3)
@@ -132,7 +133,10 @@ function process_result()
 				LIST="$LIST $sav"
 				;;
 			2)
-				SOSO="$sav"
+				if [ -z "$FIRST" ]; then
+					SOSO="$sav"
+					FIRST="$sav"
+				fi
 				LIST="$LIST $sav"
 				;;
 			3)
@@ -166,17 +170,26 @@ function process_result()
 			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
-	elif [ -n "$SOSO" ]; then
-		echo "[soso] out/$pattern.res $SOSO"
-		ok="$ok $pattern"
 	elif [ "x$NYI" = "x0" ]; then
 		echo "[todo] out/$pattern.res -> not yet implemented"
 		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
+	elif [ -n "$SOSO" ]; then
+		echo "[======= soso out/$pattern.res $SOSO =======]"
+		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		echo >>$xml "]]></system-out>"
+		nok="$nok $pattern"
+		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$SOSOF" ]; then
-		echo "[fixme soso] out/$pattern.res $SOSOF"
-		echo >>$xml "<skipped/>"
-		todos="$todos $pattern"
+		echo "[======= fixme soso out/$pattern.res $SOSOF =======]"
+		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		echo >>$xml "]]></system-out>"
+		nok="$nok $pattern"
+		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NSAV" ]; then
 		echo "[======= fail out/$pattern.res $NSAV =======]"
 		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
@@ -272,8 +285,6 @@ while [ $stop = false ]; do
 		-h) usage; exit;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
-		--soso) soso=true; shift;;
-		--nososo) nososo=true; shift;;
 		*) stop=true
 	esac
 done
