@@ -409,6 +409,8 @@ for ii in "$@"; do
 			inputs=/dev/null
 		fi
 
+		ffout="$ff.bin"
+
 		if [ "$engine" = "niti" ]; then
 			cat > "./$ff.bin" <<END
 exec $NITC --no-color $OPT "$i" $includes -- "\$@"
@@ -426,10 +428,10 @@ END
 			# Compile
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes" $nocc
+				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				$TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
