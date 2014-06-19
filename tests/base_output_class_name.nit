@@ -34,3 +34,4 @@ test1.output_class_name
 test2.output_class_name
 test3.output_class_name
 test4.output_class_name
+'\n'.output

@@ -27,4 +27,4 @@ do
 	end
 end
 
-printn(tak(37,12,6))
+print(tak(37,12,6))
