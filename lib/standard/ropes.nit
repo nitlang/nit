@@ -74,11 +74,16 @@ private class Concat
 end
 
 # Leaf of a Rope, contains a FlatString
-private class Leaf
+private abstract class Leaf
 	super RopeNode
 
 	# Encapsulated FlatString in the leaf node
-	var str: FlatString
+	var str: FlatText
+
+end
+
+private class StringLeaf
+	super Leaf
 
 	init(val: FlatString) do
 		self.str = val
@@ -104,7 +109,7 @@ abstract class Rope
 
 	# Creates a new Rope with `s` as root
 	init from(s: String) do
-		if s isa RopeString then root = s.root else root = new Leaf(s.as(FlatString))
+		if s isa RopeString then root = s.root else root = new StringLeaf(s.as(FlatString))
 	end
 
 	private init from_root(r: RopeNode)
@@ -280,18 +285,18 @@ class RopeString
 
 		if path.offset == 0 then
 			last_concat.right = path.leaf
-			if str isa FlatString then last_concat.left = new Leaf(str) else last_concat.left = str.as(RopeString).root
+			if str isa FlatString then last_concat.left = new StringLeaf(str) else last_concat.left = str.as(RopeString).root
 		else if path.offset == path.leaf.length then
-			if str isa FlatString then last_concat.right = new Leaf(str) else last_concat.right = str.as(RopeString).root
+			if str isa FlatString then last_concat.right = new StringLeaf(str) else last_concat.right = str.as(RopeString).root
 			last_concat.left = path.leaf
 		else
 			var s = path.leaf.str
 			var l_half = s.substring(0, s.length - path.offset)
 			var r_half = s.substring_from(s.length - path.offset)
 			var cct = new Concat
-			cct.right = new Leaf(r_half.as(FlatString))
-			last_concat.left = new Leaf(l_half.as(FlatString))
-			if str isa FlatString then last_concat.right = new Leaf(str) else last_concat.right = str.as(RopeString).root
+			cct.right = new StringLeaf(r_half.as(FlatString))
+			last_concat.left = new StringLeaf(l_half.as(FlatString))
+			if str isa FlatString then last_concat.right = new StringLeaf(str) else last_concat.right = str.as(RopeString).root
 			cct.left = last_concat
 			last_concat = cct
 		end
@@ -327,12 +332,12 @@ class RopeString
 		var cct = new Concat
 		if node isa Leaf then
 			cct.left = node
-			if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
+			if s isa FlatString then cct.right = new StringLeaf(s) else cct.right = s.as(RopeString).root
 		else if node isa Concat then
 			var right = node.right
 			if node.left != null then cct.left = node.left.as(not null)
 			if right == null then
-				if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
+				if s isa FlatString then cct.right = new StringLeaf(s) else cct.right = s.as(RopeString).root
 			else
 				cct.right = append_to_path(right, s)
 			end
@@ -364,7 +369,7 @@ class RopeString
 		var lf = path.leaf
 		var offset = path.offset
 
-		if path.leaf.str.length - offset > len then lf = new Leaf(lf.str.substring(offset,len).as(FlatString)) else lf = new Leaf(lf.str.substring_from(offset).as(FlatString))
+		if path.leaf.str.length - offset > len then lf = new StringLeaf(lf.str.substring(offset,len).as(FlatString)) else lf = new StringLeaf(lf.str.substring_from(offset).as(FlatString))
 
 		var nod: RopeNode = lf
 
@@ -383,7 +388,7 @@ class RopeString
 		path = ret.node_at(len-1)
 
 		offset = path.offset
-		nod = new Leaf(path.leaf.str.substring(0, offset+1).as(FlatString))
+		nod = new StringLeaf(path.leaf.str.substring(0, offset+1).as(FlatString))
 
 		for i in path.stack.reverse_iterator do
 			if i.left then continue
