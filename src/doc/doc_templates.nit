@@ -504,7 +504,7 @@ class TplDefinition
 	var comment: nullable Streamable writable
 
 	# Namespace for this definition
-	var namespace: Streamable writable
+	var namespace: nullable Streamable writable
 
 	# Location link to display
 	var location: nullable Streamable writable
@@ -513,10 +513,12 @@ class TplDefinition
 
 	private fun render_info do
 		add "<div class='info text-right'>"
-		if comment == null then
-			add "<span class=\"noComment\">no comment for </span>"
+		if namespace != null then
+			if comment == null then
+				add "<span class=\"noComment\">no comment for </span>"
+			end
+			add namespace.as(not null)
 		end
-		add namespace
 		if location != null then
 			add " "
 			add location.as(not null)
