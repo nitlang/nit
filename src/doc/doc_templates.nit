@@ -455,6 +455,11 @@ class TplArticle
 	# Content for this article
 	var content: nullable Streamable writable = null
 
+	init with_content(id: String, title: Streamable, content: Streamable) do
+		with_title(id, title)
+		self.content = content
+	end
+
 	# CSS classes to apply on the article title heading element
 	var title_classes = new Array[String]
 
