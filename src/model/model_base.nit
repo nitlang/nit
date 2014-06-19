@@ -29,6 +29,13 @@ abstract class MEntity
 	fun name: String is abstract
 end
 
+# Something that represents a concern
+abstract class MConcern
+	super MEntity
+	# The concern that contains `self` or null if `self` is the root of the concern hierarchy
+	fun parent_concern: nullable MConcern is abstract
+end
+
 # A visibility (for modules, class and properties)
 # Valid visibility are:
 #

@@ -33,6 +33,7 @@ import poset
 import location
 import mmodule
 import mdoc
+import ordered_tree
 private import more_collections
 
 redef class Model
@@ -106,6 +107,35 @@ redef class Model
 
 	# The only null type
 	var null_type: MNullType = new MNullType(self)
+
+	# Build an ordered tree with from `concerns`
+	fun concerns_tree(mconcerns: Collection[MConcern]): ConcernsTree do
+		var seen = new HashSet[MConcern]
+		var res = new ConcernsTree
+
+		var todo = new Array[MConcern]
+		todo.add_all mconcerns
+
+		while not todo.is_empty do
+			var c = todo.pop
+			if seen.has(c) then continue
+			var pc = c.parent_concern
+			if pc == null then
+				res.add(null, c)
+			else
+				res.add(pc, c)
+				todo.add(pc)
+			end
+			seen.add(c)
+		end
+
+		return res
+	end
+end
+
+# An OrderedTree that can be easily refined for display purposes
+class ConcernsTree
+	super OrderedTree[MConcern]
 end
 
 redef class MModule
