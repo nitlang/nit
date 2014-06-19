@@ -230,6 +230,7 @@ abstract class NitdocPage
 
 	private var ctx: NitdocContext
 	private var model: Model
+	private var name_sorter = new MEntityNameSorter
 
 	init(ctx: NitdocContext) do
 		self.ctx = ctx
@@ -533,8 +534,7 @@ class NitdocSearch
 			if mmodule.name == "<main>" then continue
 			sorted.add mmodule
 		end
-		var sorter = new MModuleNameSorter
-		sorter.sort(sorted)
+		name_sorter.sort(sorted)
 		return sorted
 	end
 
@@ -545,8 +545,7 @@ class NitdocSearch
 			if mclass.visibility < ctx.min_visibility then continue
 			sorted.add mclass
 		end
-		var sorter = new MClassNameSorter
-		sorter.sort(sorted)
+		name_sorter.sort(sorted)
 		return sorted
 	end
 
@@ -558,8 +557,7 @@ class NitdocSearch
 			if mproperty isa MAttribute then continue
 			sorted.add mproperty
 		end
-		var sorter = new MPropertyNameSorter
-		sorter.sort(sorted)
+		name_sorter.sort(sorted)
 		return sorted
 	end
 end
@@ -616,7 +614,6 @@ class NitdocModule
 		if clients.length > 10 then clients = mmodule.in_importation.direct_smallers
 
 		# Display lists
-		var sorter = new MModuleNameSorter
 		var section = new TplSection.with_title("inheritance", "Inheritance")
 
 		# Graph
@@ -631,7 +628,7 @@ class NitdocModule
 		# nested modules
 		if not nested.is_empty then
 			var lst = nested.to_a
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("nesting", "Nested modules", lst)
 		end
 
@@ -643,7 +640,7 @@ class NitdocModule
 			lst.add(dep)
 		end
 		if not lst.is_empty then
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("imports", "Imports", lst)
 		end
 
@@ -655,7 +652,7 @@ class NitdocModule
 			lst.add(dep)
 		end
 		if not lst.is_empty then
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("clients", "Clients", lst)
 		end
 
@@ -671,19 +668,18 @@ class NitdocModule
 	end
 
 	private fun tpl_mclasses(parent: TplSection) do
-		var sorter = new MClassNameSorter
 		var mclassdefs = new HashSet[MClassDef]
 		mclassdefs.add_all mmodule.in_nesting_intro_mclassdefs(ctx.min_visibility)
 		mclassdefs.add_all mmodule.in_nesting_redef_mclassdefs(ctx.min_visibility)
 		var mclasses2mdefs = sort_by_mclass(mclassdefs)
 		var sorted_mclasses = mclasses2mdefs.keys.to_a
-		sorter.sort sorted_mclasses
+		name_sorter.sort sorted_mclasses
 
 		# intros
 		var section = new TplSection.with_title("intros", "Introductions")
 		var intros = mmodule.in_nesting_intro_mclasses(ctx.min_visibility)
 		var sorted_intros = intros.to_a
-		sorter.sort(sorted_intros)
+		name_sorter.sort(sorted_intros)
 		for mclass in sorted_intros do
 			if not mclasses2mdefs.has_key(mclass) then continue
 			section.add_child tpl_mclass_article(mclass, mclasses2mdefs[mclass].to_a)
@@ -693,7 +689,7 @@ class NitdocModule
 		# redefs
 		section = new TplSection.with_title("redefs", "Refinements")
 		var redefs = mmodule.in_nesting_redef_mclasses(ctx.min_visibility).to_a
-		sorter.sort(redefs)
+		name_sorter.sort(redefs)
 		for mclass in redefs do
 			if intros.has(mclass) then continue
 			if not mclasses2mdefs.has_key(mclass) then continue
@@ -803,11 +799,9 @@ class NitdocClass
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
 	end
 
-	var mprop_sorter = new MPropertyNameSorter
-
 	private fun tpl_sidebar_list(name: String, mprops: Array[MProperty], summary: TplList) do
 		if mprops.is_empty then return
-		mprop_sorter.sort(mprops)
+		name_sorter.sort(mprops)
 		var entry = new TplListItem.with_content(name)
 		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
 		for mprop in mprops do
@@ -858,8 +852,7 @@ class NitdocClass
 
 		if not owners.is_empty then
 			var article = new TplArticle.with_title("concerns", "Concerns")
-			var module_sorter = new MModuleNameSorter
-			module_sorter.sort owners
+			name_sorter.sort owners
 			var list = new TplList.with_classes(["list-unstyled", "list-definition"])
 			for owner in owners do
 				var li = new Template
@@ -871,7 +864,7 @@ class NitdocClass
 				var smmodules = owner_map[owner].to_a
 				#if not smmodules.length >= 1 then
 					var slist = new TplList.with_classes(["list-unstyled", "list-definition"])
-					module_sorter.sort smmodules
+					name_sorter.sort smmodules
 					for mmodule in smmodules do
 						if mmodule == owner then continue
 						var sli = new Template
@@ -925,7 +918,6 @@ class NitdocClass
 		end
 
 		# Display lists
-		var sorter = new MClassNameSorter
 		var section = new TplSection.with_title("inheritance", "Inheritance")
 
 		# Graph
@@ -941,28 +933,28 @@ class NitdocClass
 		# parents
 		if not hparents.is_empty then
 			var lst = hparents.to_a
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("parents", "Parents", lst)
 		end
 
 		# ancestors
 		if not hancestors.is_empty then
 			var lst = hancestors.to_a
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("ancestors", "Ancestors", lst)
 		end
 
 		# children
 		if not hchildren.is_empty and hchildren.length < 15 then
 			var lst = hchildren.to_a
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("children", "Children", lst)
 		end
 
 		# descendants
 		if not hdescendants.is_empty and hchildren.length < 15 then
 			var lst = hdescendants.to_a
-			sorter.sort lst
+			name_sorter.sort lst
 			section.add_child tpl_list("descendants", "Descendants", lst)
 		end
 
@@ -992,12 +984,11 @@ class NitdocClass
 			for mmodule in owner_map[owner] do
 				# properties
 				var mprops = mod_map[mmodule]
-				var sorter = new MPropertyNameSorter
 				var kind_map = sort_by_kind(mprops)
 
 				# virtual types
 				var elts = kind_map["type"].to_a
-				sorter.sort(elts)
+				name_sorter.sort(elts)
 				for elt in elts do
 					var defs = mprops2mdefs[elt].to_a
 					section.add_child tpl_mprop_article(elt, defs)
@@ -1005,7 +996,7 @@ class NitdocClass
 
 				# constructors
 				elts = kind_map["init"].to_a
-				sorter.sort(elts)
+				name_sorter.sort(elts)
 				for elt in elts do
 					var defs = mprops2mdefs[elt].to_a
 					section.add_child tpl_mprop_article(elt, defs)
@@ -1013,7 +1004,7 @@ class NitdocClass
 
 				# methods
 				elts = kind_map["fun"].to_a
-				sorter.sort(elts)
+				name_sorter.sort(elts)
 				for elt in elts do
 					var defs = mprops2mdefs[elt].to_a
 					section.add_child tpl_mprop_article(elt, defs)
