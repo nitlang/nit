@@ -428,7 +428,6 @@ class TplSection
 	end
 
 	redef fun rendering do
-		if is_empty then return
 		add "<section id='{id}'>"
 		if title != null then
 			var lvl = hlvl
@@ -473,6 +472,7 @@ class TplArticle
 	end
 
 	redef fun rendering do
+		if is_empty then return
 		add "<article id='{id}'>"
 		if title != null then
 			var lvl = hlvl
@@ -491,7 +491,9 @@ class TplArticle
 		add """</article>"""
 	end
 
-	redef fun is_empty: Bool do return content == null
+	redef fun is_empty: Bool do
+		return title == null and subtitle == null and content == null
+	end
 end
 
 # A module / class / prop definition
