@@ -23,7 +23,7 @@ nitg_0: ../c_src/nitg parser/parser.nit
 	@echo '* Compile nitg_0 from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${NITCOPT} -o nitg_0 -v nitg.nit
+	../c_src/nitg ${NITCOPT} --no-stacktrace -o nitg_0 -v nitg.nit
 
 ../bin/nitg: nitg_0 parser/parser.nit
 	@echo '***************************************************************'
