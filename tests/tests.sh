@@ -19,6 +19,7 @@
 
 # Set lang do default to avoid failed tests because of locale
 export LANG=C
+export LC_ALL=C
 export NIT_TESTING=true
 
 unset NIT_DIR
