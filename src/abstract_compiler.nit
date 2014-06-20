@@ -324,6 +324,15 @@ class MakefileToolchain
 		if ost == "libunwind" or ost == "nitstack" then linker_options.add("-lunwind")
 
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
+
+		# Dynamic adaptations
+		# While `platform` enable complex toolchains, they are statically applied
+		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+
+		# Check and adapt for the compiler used
+		# clang need an additionnal `-Qunused-arguments`
+		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
+
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
