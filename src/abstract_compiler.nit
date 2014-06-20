@@ -323,7 +323,7 @@ class MakefileToolchain
 		var ost = toolcontext.opt_stacktrace.value
 		if ost == "libunwind" or ost == "nitstack" then linker_options.add("-lunwind")
 
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
