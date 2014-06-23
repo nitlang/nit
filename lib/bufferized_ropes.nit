@@ -25,4 +25,24 @@ private class BufferLeaf
 
 end
 
+redef class Rope
+
+	# Empty Rope
+	init do root = new BufferLeaf(new FlatBuffer.with_capacity(buf_len))
+
+end
+
+redef class RopeString
+
+	init from(s: String) do
+		if s.length < buf_len then
+			var b = new FlatBuffer.with_capacity(buf_len)
+			b.append(s)
+			root = new BufferLeaf(b)
+		else
+			if s isa RopeString then root = s.root else root = new StringLeaf(s.as(FlatString))
+		end
+	end
+
+end
 
