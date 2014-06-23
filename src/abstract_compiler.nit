@@ -320,10 +320,28 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		var ost = toolcontext.opt_stacktrace.value
-		if ost == "libunwind" or ost == "nitstack" then linker_options.add("-lunwind")
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
+		var ost = toolcontext.opt_stacktrace.value
+		if ost == "libunwind" or ost == "nitstack" then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+
+		# Dynamic adaptations
+		# While `platform` enable complex toolchains, they are statically applied
+		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+
+		# Check and adapt the targeted system
+		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
+		makefile.write("ifeq ($(uname_S),Darwin)\n")
+		# remove -lunwind since it is already included on macosx
+		makefile.write("\tNEED_LIBUNWIND :=\n")
+		makefile.write("endif\n\n")
+
+		# Check and adapt for the compiler used
+		# clang need an additionnal `-Qunused-arguments`
+		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
+
+		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]

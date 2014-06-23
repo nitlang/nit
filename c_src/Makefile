@@ -1,8 +1,22 @@
 CC = ccache cc
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -Wno-unused-value -Wno-switch
 CINCL =  -I "clib"
 LDFLAGS ?= 
-LDLIBS  ?= -lm -lgc  -lunwind
+LDLIBS  ?= -lm -lgc
+
+NEED_LIBUNWIND := YesPlease
+uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+ifeq ($(uname_S),Darwin)
+	NEED_LIBUNWIND :=
+endif
+
+clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')
+ifeq ($(clang_check), 0)
+	CFLAGS += -Qunused-arguments
+endif
+ifdef NEED_LIBUNWIND
+	LDLIBS += -lunwind
+endif
 
 all: nitg
 
