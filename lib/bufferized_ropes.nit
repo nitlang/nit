@@ -83,5 +83,106 @@ redef class RopeString
 		end
 	end
 
+	private fun build_node_zero_offset(path: Path, s: String): RopeNode
+	do
+		var finlen = path.leaf.length + s.length
+		if finlen <= buf_len then
+			var b = new FlatBuffer.with_capacity(buf_len)
+			b.append(s)
+			b.append(path.leaf.str)
+			if finlen == buf_len then return new StringLeaf(b.lazy_to_s(finlen))
+			return new BufferLeaf(b)
+		end
+		var rht = path.leaf
+		var lft: RopeNode
+		if s isa FlatString then
+			if s.length > buf_len then
+				lft = new StringLeaf(s)
+			else
+				var b = new FlatBuffer
+				b.append(s)
+				lft = new BufferLeaf(b)
+			end
+		else
+			lft = s.as(RopeString).root
+		end
+		return new Concat(lft, rht)
+	end
+
+	private fun build_node_len_offset(path: Path, s: String): RopeNode
+	do
+		var leaf = path.leaf
+		if leaf isa BufferLeaf then
+			if s.length > buf_len then
+				if s isa FlatString then
+					return new Concat(leaf, new StringLeaf(s))
+				else
+					return new Concat(leaf, s.as(Rope).root)
+				end
+			end
+			var finlen = leaf.length + s.length
+			var buf = leaf.str.as(FlatBuffer)
+			var cap = buf.capacity
+			# Meaning the buffer was modified elsewhere
+			# Therefore, we create a new one
+			if leaf.length != buf.length then
+				var b = new FlatBuffer.with_capacity(buf_len)
+				b.append(buf.lazy_to_s(leaf.length))
+				buf = b
+			end
+			if finlen <= cap then
+				buf.append(s)
+				if finlen == buf_len then return new StringLeaf(buf.lazy_to_s(finlen))
+				return new BufferLeaf(buf)
+			else
+				var l_len = finlen - cap
+				buf.append(s.substring(0,l_len))
+				var b2 = new FlatBuffer.with_capacity(buf_len)
+				b2.append(s.substring_from(l_len))
+				var left_leaf = new StringLeaf(buf.lazy_to_s(buf.length))
+				var right_leaf = new BufferLeaf(b2)
+				var cct = new Concat(left_leaf, right_leaf)
+				return cct
+			end
+		else
+			var lft = leaf
+			var rht: RopeNode
+			if s.length >= buf_len then
+				if s isa FlatString then rht = new StringLeaf(s) else rht = s.as(Rope).root
+			else
+				var buf = new FlatBuffer.with_capacity(buf_len)
+				buf.append(s)
+				rht = new BufferLeaf(buf)
+			end
+			return new Concat(lft,rht)
+		end
+	end
+
+	private fun build_node_other(path: Path,str: String): RopeNode
+	do
+		var lf = path.leaf
+		var s: FlatString
+		if lf isa BufferLeaf then
+			var b = lf.str.as(FlatBuffer)
+			s = b.lazy_to_s(lf.length)
+		else
+			s = lf.str.as(FlatString)
+		end
+		var l_str = s.lazy_substring(0, path.offset)
+		var r_str = s.lazy_substring_from(path.offset)
+		if s.length + str.length < buf_len then
+			var buf = new FlatBuffer.with_capacity(buf_len)
+			buf.append(l_str)
+			buf.append(str)
+			buf.append(r_str)
+			return new BufferLeaf(buf)
+		end
+		var child: RopeNode
+		if str isa FlatString then child = new StringLeaf(str) else child = str.as(Rope).root
+		var l_cct = new Concat(new StringLeaf(l_str), child)
+		var r_cct = new Concat(l_cct, new StringLeaf(r_str))
+		return r_cct
+	end
+
 end
 
