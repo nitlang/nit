@@ -62,19 +62,6 @@ abstract class Text
 	# Iterates on the substrings of self if any
 	fun substrings: Iterator[Text] is abstract
 
-	# Concatenates `o` to `self`
-	#
-	#     assert "hello" + "world"  == "helloworld"
-	#     assert "" + "hello" + ""  == "hello"
-	fun +(o: Text): SELFTYPE is abstract
-
-	# Auto-concatenates self `i` times
-	#
-	#     assert "abc" * 4 == "abcabcabcabc"
-	#     assert "abc" * 1 == "abc"
-	#     assert "abc" * 0 == ""
-	fun *(i: Int): SELFTYPE is abstract
-
 	# Is the current Text empty (== "")
 	#
 	#     assert "".is_empty
@@ -196,13 +183,6 @@ abstract class Text
 		return substring(from, length - from)
 	end
 
-	# Returns a reversed version of self
-	#
-	#     assert "hello".reversed  == "olleh"
-	#     assert "bob".reversed    == "bob"
-	#     assert "".reversed       == ""
-	fun reversed: SELFTYPE is abstract
-
 	# Does self have a substring `str` starting from position `pos`?
 	#
 	#     assert "abcd".has_substring("bc",1)	     ==  true
@@ -312,16 +292,6 @@ abstract class Text
 		end
 		return true
 	end
-
-	# A upper case version of `self`
-	#
-	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
-	fun to_upper: SELFTYPE is abstract
-
-	# A lower case version of `self`
-	#
-	#     assert "Hello World!".to_lower     == "hello world!"
-	fun to_lower : SELFTYPE is abstract
 
 	# Removes the whitespaces at the beginning of self
 	#
@@ -612,11 +582,37 @@ abstract class String
 
 	redef fun to_s do return self
 
-	fun append(s: String): SELFTYPE is abstract
+	# Concatenates `o` to `self`
+	#
+	#     assert "hello" + "world"  == "helloworld"
+	#     assert "" + "hello" + ""  == "hello"
+	fun +(o: Text): SELFTYPE is abstract
 
-	fun prepend(s: String): SELFTYPE is abstract
+	# Concatenates self `i` times
+	#
+	#     assert "abc" * 4 == "abcabcabcabc"
+	#     assert "abc" * 1 == "abc"
+	#     assert "abc" * 0 == ""
+	fun *(i: Int): SELFTYPE is abstract
 
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
+
+	# Returns a reversed version of self
+	#
+	#     assert "hello".reversed  == "olleh"
+	#     assert "bob".reversed    == "bob"
+	#     assert "".reversed       == ""
+	fun reversed: SELFTYPE is abstract
+
+	# A upper case version of `self`
+	#
+	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
+	fun to_upper: SELFTYPE is abstract
+
+	# A lower case version of `self`
+	#
+	#     assert "Hello World!".to_lower     == "hello world!"
+	fun to_lower : SELFTYPE is abstract
 end
 
 private class FlatSubstringsIter
@@ -1014,6 +1010,38 @@ abstract class Buffer
 	#     assert b == "helloworld"
 	fun append(s: Text) is abstract
 
+	# `self` is appended in such a way that `self` is repeated `r` times
+	#
+	#     var b = new FlatBuffer
+	#     b.append "hello"
+	#     b.times 3
+	#     assert b == "hellohellohello"
+	fun times(r: Int) is abstract
+
+	# Reverses itself in-place
+	#
+	#     var b = new FlatBuffer
+	#     b.append("hello")
+	#     b.reverse
+	#     assert b == "olleh"
+	fun reverse is abstract
+
+	# Changes each lower-case char in `self` by its upper-case variant
+	#
+	#     var b = new FlatBuffer
+	#     b.append("Hello World!")
+	#     b.upper
+	#     assert b == "HELLO WORLD!"
+	fun upper is abstract
+
+	# Changes each upper-case char in `self` by its lower-case variant
+	#
+	#     var b = new FlatBuffer
+	#     b.append("Hello World!")
+	#     b.lower
+	#     assert b == "hello world!"
+	fun lower is abstract
+
 	redef fun hash
 	do
 		if is_dirty then hash_cache = null
@@ -1171,50 +1199,46 @@ class FlatBuffer
 		end
 	end
 
-	redef fun reversed
+	redef fun reverse
 	do
-		var new_buf = new FlatBuffer.with_capacity(self.length)
-		var reviter = self.chars.reverse_iterator
-		while reviter.is_ok do
-			new_buf.add(reviter.item)
-			reviter.next
+		var ns = calloc_string(capacity)
+		var si = length - 1
+		var ni = 0
+		var it = items
+		while si >= 0 do
+			ns[ni] = it[si]
+			ni += 1
+			si -= 1
 		end
-		return new_buf
+		items = ns
 	end
 
-	redef fun +(other)
+	redef fun times(repeats)
 	do
-		var new_buf = new FlatBuffer.with_capacity(self.length + other.length)
-		new_buf.append(self)
-		new_buf.append(other)
-		return new_buf
+		var x = new FlatString.with_infos(items, length, 0, length - 1)
+		for i in [1..repeats[ do
+			append(x)
+		end
 	end
 
-	redef fun *(repeats)
+	redef fun upper
 	do
-		var new_buf = new FlatBuffer.with_capacity(self.length * repeats)
-		for i in [0..repeats[ do
-			new_buf.append(self)
+		var it = items
+		var id = length - 1
+		while id >= 0 do
+			it[id] = it[id].to_upper
+			id -= 1
 		end
-		return new_buf
 	end
 
-	redef fun to_upper
+	redef fun lower
 	do
-		var new_buf = new FlatBuffer.with_capacity(self.length)
-		for i in self.chars do
-			new_buf.add(i.to_upper)
+		var it = items
+		var id = length - 1
+		while id >= 0 do
+			it[id] = it[id].to_lower
+			id -= 1
 		end
-		return new_buf
-	end
-
-	redef fun to_lower
-	do
-		var new_buf = new FlatBuffer.with_capacity(self.length)
-		for i in self.chars do
-			new_buf.add(i.to_lower)
-		end
-		return new_buf
 	end
 end
 

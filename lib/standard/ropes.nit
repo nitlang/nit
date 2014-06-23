@@ -174,8 +174,39 @@ abstract class Rope
 	# Path to the Leaf for `position`
 	private fun node_at(position: Int): Path
 	do
-		assert position >= 0 and position < length
+		assert position >= 0 and position <= length
+		if position == length then
+			var st = new List[PathElement]
+			stack_to_end(root,st)
+			if not st.is_empty then
+				var lst = st.last
+				var lf = lst.node.right
+				if lf != null then
+					return new Path(lf.as(Leaf), lf.length, st)
+				else
+					lf = lst.node.left
+					return new Path(lf.as(Leaf), lf.length, st)
+				end
+			else
+				return new Path(root.as(Leaf), length, st)
+			end
+		end
 		return get_node_from(root.as(not null), 0, position, new List[PathElement])
+	end
+
+	# Special case for when the required pos is length
+	private fun stack_to_end(nod: RopeNode, st: List[PathElement])
+	do
+		if nod isa Leaf then return
+		var n = nod.as(Concat)
+		var r = n.right
+		var ele = new PathElement(n)
+		ele.right = true
+		st.push(ele)
+		if r != null then
+			stack_to_end(r, st)
+		end
+		return
 	end
 
 	# Builds the path to Leaf at position `seek_pos`
@@ -228,9 +259,9 @@ class RopeString
 
 	redef fun reversed
 	do
-		var ret = empty.as(RopeString)
+		var ret = empty
 		for i in substrings do
-			ret = ret.prepend(i.reversed.to_s).as(RopeString)
+			ret = i.as(String).reversed + ret
 		end
 		return ret
 	end
@@ -239,7 +270,7 @@ class RopeString
 	do
 		var ret = empty
 		for i in substrings do
-			ret += i.to_upper
+			ret += i.as(String).to_upper
 		end
 		return ret
 	end
@@ -248,7 +279,7 @@ class RopeString
 	do
 		var ret = empty
 		for i in substrings do
-			ret += i.to_lower
+			ret += i.as(String).to_lower
 		end
 		return ret
 	end
@@ -271,8 +302,6 @@ class RopeString
 		if self.length == 0 then return new RopeString.from(str)
 
 		assert pos >= 0 and pos <= length
-
-		if pos == length then return append(str).as(RopeString)
 
 		var path = node_at(pos)
 
@@ -309,35 +338,6 @@ class RopeString
 		end
 
 		return new RopeString.from_root(last_concat)
-	end
-
-	# Adds `s` at the beginning of self
-	redef fun prepend(s) do return insert_at(s, 0)
-
-	# Adds `s` at the end of self
-	redef fun append(s)
-	do
-		if self.is_empty then return s
-		return new RopeString.from_root(append_to_path(root,s))
-	end
-
-	# Builds a new path from root to the rightmost node with s appended
-	private fun append_to_path(node: RopeNode, s: String): RopeNode
-	do
-		var cct = new Concat
-		if node isa Leaf then
-			cct.left = node
-			if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
-		else if node isa Concat then
-			var right = node.right
-			if node.left != null then cct.left = node.left.as(not null)
-			if right == null then
-				if s isa FlatString then cct.right = new Leaf(s) else cct.right = s.as(RopeString).root
-			else
-				cct.right = append_to_path(right, s)
-			end
-		end
-		return cct
 	end
 
 	# O(log(n))
@@ -402,14 +402,17 @@ end
 
 redef class FlatString
 
-	redef fun append(s) do return (new RopeString.from(self)) + s
-
-	redef fun prepend(s) do return (new RopeString.from(self)).prepend(s)
-
 	redef fun insert_at(s, pos)
 	do
-		if pos == 0 then return prepend(s)
-		if pos == length then return append(s)
+
+		if pos == 0 then
+			var r = new RopeString.from(s)
+			return r + self
+		end
+		if pos == length then
+			var r = new RopeString.from(self)
+			return r + s
+		end
 
 		var l = substring(0,pos)
 		var r = substring_from(pos)
