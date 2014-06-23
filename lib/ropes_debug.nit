@@ -53,10 +53,21 @@ redef class Concat
 	end
 end
 
+redef class FlatText
+	fun to_dot(s: String): String is abstract
+end
+
 redef class FlatString
-	fun to_dot(s: String): String
+	redef fun to_dot(s: String): String
 	do
 		return s + "n{object_id} [label=\"FlatString\\nindex_from = {index_from}\\nindex_to = {index_to}\\nNativeString = {items.to_s_with_length(items.cstring_length)}\"];\n"
+	end
+end
+
+redef class FlatBuffer
+	redef fun to_dot(s: String): String
+	do
+		return s + "n{object_id} [label=\"FlatBuffer\\length = {length}\\ncapacity = {capacity}\\nitems = {items.to_s_with_length(items.cstring_length)}\"];\n"
 	end
 end
 
