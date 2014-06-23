@@ -44,6 +44,11 @@ end
 private abstract class RopeNode
 	# Length of the node
 	var length = 0
+
+	# Transforms the current node to a Leaf.
+	# This might be costly to invoke since this produces a FlatString concatenation.
+	# Can be used internally to limit the growth of the Rope when working with small leaves.
+	fun to_leaf: Leaf is abstract
 end
 
 # Node that represents a concatenation between two nodes (of any RopeNode type)
@@ -63,6 +68,15 @@ private class Concat
 		if r != null then length += r.length
 	end
 
+	redef fun to_leaf
+	do
+		if left == null then
+			if right == null then return new StringLeaf("".as(FlatString))
+			return right.to_leaf
+		end
+		if right == null then return left.as(not null).to_leaf
+		return new StringLeaf((left.to_leaf.str.as(FlatString) + right.to_leaf.str.as(FlatString)).as(FlatString))
+	end
 end
 
 # Leaf of a Rope, contains a FlatString
@@ -82,6 +96,7 @@ private class StringLeaf
 		length = str.length
 	end
 
+	redef fun to_leaf do return self
 end
 
 # Basic structure, binary tree with a root node.
