@@ -725,7 +725,12 @@ class PnaclApp
 end
 
 redef interface Object
-	# Calls 'pthread_exit on current thread
+	# Creates a new thread for Nit.
+	fun create_thread `{
+		pthread_create(&g_nit_thread, NULL, &WrapperNitMain, NULL);
+	`}
+
+	# Calls 'pthread_exit on current thread.
         fun exit_thread(exit_value: Int) `{
 		pthread_exit((void*) exit_value);
 	`}
