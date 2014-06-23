@@ -38,12 +38,8 @@ num = numstr
 
 # Test Text methods on all types of receivers
 
-print txt.to_upper
-print txt.to_lower
-assert txt * 2 == txt + txt
 print txt.substring(0, 105)
 print txt.substring_from(106)
-print txt.reversed
 print txt.length
 assert not txt.is_empty
 print txt.index_of('h')
@@ -65,7 +61,6 @@ assert txt.hash == trimable.trim.hash
 var chars = txt.chars
 
 assert chars != txt.substring_from(106).chars
-assert (txt.substring(0,105) + txt.substring_from(105)).chars == txt.chars
 assert chars[0] == 'W'
 assert chars.count('o') == 11
 assert chars.first == chars[0]

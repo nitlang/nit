@@ -1,8 +1,5 @@
-WOE TO YOU, OH EARTH AND SEA FOR THE DEVIL SENDS THE BEAST WITH WRATH BECAUSE HE KNOWS THE TIME IS SHORT. LET HIM WHO HATH UNDERSTANDING RECKON THE NUMBER OF THE BEAST, FOR IT IS A HUMAN NUMBER, ITS NUMBER IS SIX HUNDRED AND SIXTY-SIX.
-woe to you, oh earth and sea for the devil sends the beast with wrath because he knows the time is short. let him who hath understanding reckon the number of the beast, for it is a human number, its number is six hundred and sixty-six.
 Woe to you, oh earth and sea for the Devil sends the beast with wrath because he knows the time is short.
 Let him who hath understanding reckon the number of the beast, for it is a human number, its number is Six Hundred and Sixty-Six.
-.xiS-ytxiS dna derdnuH xiS si rebmun sti ,rebmun namuh a si ti rof ,tsaeb eht fo rebmun eht nokcer gnidnatsrednu htah ohw mih teL .trohs si emit eht swonk eh esuaceb htarw htiw tsaeb eht sdnes liveD eht rof aes dna htrae ho ,uoy ot eoW
 235
 13
 110

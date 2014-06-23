@@ -18,9 +18,6 @@ var y: Text
 x = "test"
 y = "TEST"
 
-#alt1 x = new FlatBuffer.from("test")
-#alt1 y = new FlatBuffer.from("TEST")
-
 assert x.to_upper == y
 assert y.to_lower == x
 
