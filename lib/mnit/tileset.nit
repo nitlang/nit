@@ -51,7 +51,7 @@ class TileSet
 	var nb_rows: Int
 
 	# Cache for images of tiles
-	private var subimages = new Array[Image]
+	var subimages = new Array[Image]
 
 	# The subimage of given tile
 	# Aborts if x or y are out of bound
