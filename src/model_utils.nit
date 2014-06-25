@@ -51,6 +51,16 @@ redef class MGroup
 		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclassdefs(min_visibility)
 		return res
 	end
+
+	# Collect nested modules
+	fun collect_mmodules: Set[MModule] do
+		var res = new HashSet[MModule]
+		res.add_all mmodules
+		for mgroup in in_nesting.direct_smallers do
+			res.add_all mgroup.collect_mmodules
+		end
+		return res
+	end
 end
 
 redef class MModule
