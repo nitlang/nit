@@ -97,6 +97,7 @@ class NitdocContext
 		init_output_dir
 		overview
 		search
+		groups
 		modules
 		classes
 		quicksearch_list
@@ -142,6 +143,15 @@ class NitdocContext
 	private fun search do
 		var searchpage = new NitdocSearch(self)
 		searchpage.render.write_to_file("{output_dir.to_s}/search.html")
+	end
+
+	private fun groups do
+		for mproject in mbuilder.model.mprojects do
+			for mgroup in mproject.mgroups.to_a do
+				var page = new NitdocGroup(mgroup, self)
+				page.render.write_to_file("{output_dir.to_s}/{mgroup.nitdoc_url}")
+			end
+		end
 	end
 
 	private fun modules do
@@ -594,6 +604,137 @@ class NitdocSearch
 		end
 		name_sorter.sort(sorted)
 		return sorted
+	end
+end
+
+# A group page
+# Display a flattened view of the group
+class NitdocGroup
+	super NitdocPage
+
+	private var mgroup: MGroup
+
+	private var concerns: ConcernsTree
+	private var intros: Set[MClass]
+	private var redefs: Set[MClass]
+
+	init(mgroup: MGroup, ctx: NitdocContext) do
+		self.mgroup = mgroup
+		super(ctx)
+
+		self.concerns = model.concerns_tree(mgroup.collect_mmodules)
+		self.concerns.sort_with(new MConcernRankSorter)
+		self.intros = mgroup.in_nesting_intro_mclasses(ctx.min_visibility)
+		var redefs = new HashSet[MClass]
+		for rdef in mgroup.in_nesting_redef_mclasses(ctx.min_visibility) do
+			if intros.has(rdef) then continue
+			redefs.add rdef
+		end
+		self.redefs = redefs
+	end
+
+	private var page = new TplPage
+	redef fun tpl_page do return page
+
+	private var sidebar = new TplSidebar
+	redef fun tpl_sidebar do return sidebar
+
+	redef fun tpl_title do return "{mgroup.nitdoc_name}"
+
+	redef fun tpl_topmenu do
+		var topmenu = super
+		var mproject = mgroup.mproject
+		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		if mgroup.is_root then
+			topmenu.add_item(new TplLink("#", "{mproject.nitdoc_name}"), true)
+		else
+			topmenu.add_item(new TplLink(mproject.nitdoc_url, "{mproject.nitdoc_name}"), false)
+			topmenu.add_item(new TplLink("#", "{mgroup.nitdoc_name}"), true)
+		end
+		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		return topmenu
+	end
+
+	# Class list to display in sidebar
+	fun tpl_sidebar_mclasses do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all intros
+		mclasses.add_all redefs
+		if mclasses.is_empty then return
+		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
+
+		var sorted = mclasses.to_a
+		name_sorter.sort(sorted)
+		for mclass in sorted do
+			list.add_li tpl_sidebar_item(mclass)
+		end
+		tpl_sidebar.boxes.add new TplSideBox.with_content("All classes", list)
+	end
+
+	private fun tpl_sidebar_item(def: MClass): Template do
+		var classes = def.intro.tpl_css_classes.to_a
+		if intros.has(def) then
+			classes.add "intro"
+		else
+			classes.add "redef"
+		end
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(classes)
+		lnk.add def.tpl_link
+		return lnk
+	end
+
+	# intro text
+	private fun tpl_intro: TplSection do
+		var section = new TplSection.with_title("top", tpl_title)
+		var article = new TplArticle("intro")
+
+		if mgroup.is_root then
+			section.subtitle = mgroup.mproject.tpl_declaration
+			article.content = mgroup.mproject.tpl_definition
+		else
+			section.subtitle = mgroup.tpl_declaration
+			article.content = mgroup.tpl_definition
+		end
+		section.add_child article
+		return section
+	end
+
+	private fun tpl_concerns(section: TplSection) do
+		if concerns.is_empty then return
+		section.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
+	end
+
+	private fun tpl_groups(parent: TplSection) do
+		var lst = concerns.to_a
+		var section = parent
+		for mentity in lst do
+			if mentity isa MProject then
+				section.add_child new TplSection(mentity.nitdoc_id)
+			else if mentity isa MGroup then
+				section.add_child new TplSection(mentity.nitdoc_id)
+			else if mentity isa MModule then
+				section.add_child tpl_mmodule_article(mentity)
+			end
+		end
+	end
+
+	redef fun tpl_content do
+		tpl_sidebar_mclasses
+		var top = tpl_intro
+		tpl_concerns(top)
+		tpl_groups(top)
+		tpl_page.add_section top
+	end
+
+	private fun sort_by_mclass(mclassdefs: Collection[MClassDef]): Map[MClass, Set[MClassDef]] do
+		var map = new HashMap[MClass, Set[MClassDef]]
+		for mclassdef in mclassdefs do
+			var mclass = mclassdef.mclass
+			if not map.has_key(mclass) then map[mclass] = new HashSet[MClassDef]
+			map[mclass].add mclassdef
+		end
+		return map
 	end
 end
 
