@@ -24,7 +24,7 @@ class MProject
 	super MEntity
 
 	# The name of the project
-	var name: String
+	redef var name: String
 
 	# The model of the project
 	var model: Model
@@ -52,7 +52,7 @@ class MGroup
 
 	# The name of the group
 	# empty name for a default group in a single-module project
-	var name: String
+	redef var name: String
 
 	# The englobing project
 	var mproject: MProject

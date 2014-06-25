@@ -84,7 +84,7 @@ class MModule
 	var mgroup: nullable MGroup
 
 	# The short name of the module
-	var name: String
+	redef var name: String
 
 	# The origin of the definition
 	var location: Location

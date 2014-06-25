@@ -302,7 +302,7 @@ class MClass
 
 	# The short name of the class
 	# In Nit, the name of a class cannot evolve in refinements
-	var name: String
+	redef var name: String
 
 	# The canonical name of the class
 	# Example: `"owner::module::MyClass"`
@@ -462,6 +462,9 @@ class MClassDef
 		self.parameter_names = parameter_names
 		self.to_s = "{mmodule}#{mclass}"
 	end
+
+	# Actually the name of the `mclass`
+	redef fun name do return mclass.name
 
 	# All declared super-types
 	# FIXME: quite ugly but not better idea yet
@@ -1514,7 +1517,7 @@ abstract class MProperty
 	var intro_mclassdef: MClassDef
 
 	# The (short) name of the property
-	var name: String
+	redef var name: String
 
 	# The canonical name of the property
 	# Example: "owner::my_module::MyClass::my_method"
@@ -1798,6 +1801,9 @@ abstract class MPropDef
 		mproperty.mpropdefs.add(self)
 		self.to_s = "{mclassdef}#{mproperty}"
 	end
+
+	# Actually the name of the `mproperty`
+	redef fun name do return mproperty.name
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"
