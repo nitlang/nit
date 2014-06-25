@@ -83,6 +83,132 @@ redef class RopeString
 		end
 	end
 
+	# Inserts a String `str` at position `pos`
+	redef fun insert_at(str, pos)
+	do
+		if str.length == 0 then return self
+
+		assert pos >= 0 and pos <= length
+
+		if pos == length then
+			var r = root
+			if r isa BufferLeaf then
+				var b = r.str.as(FlatBuffer)
+				if r.length + str.length < b.capacity then
+					b.append(str)
+					return new RopeString.from_root(new BufferLeaf(b))
+				end
+			end
+		end
+
+		var path = node_at(pos)
+
+		var cct: RopeNode
+
+		if path.offset == path.leaf.length then
+			cct = build_node_len_offset(path, str)
+		else if path.offset == 0 then
+			cct = build_node_zero_offset(path, str)
+		else
+			cct = build_node_other(path,str)
+		end
+
+		if path.stack.is_empty then return new RopeString.from_root(cct)
+
+		var tmp = path.stack.pop
+		var last_concat: Concat
+
+		if tmp.left then
+			last_concat = new Concat(cct,tmp.node.right.as(not null))
+		else
+			last_concat = new Concat(tmp.node.left.as(not null), cct)
+		end
+
+		for i in path.stack.reverse_iterator do
+			var nod: Concat
+			if i.left then
+				nod = new Concat(last_concat, i.node.right.as(not null))
+			else
+				nod = new Concat(i.node.left.as(not null), last_concat)
+			end
+			last_concat = nod
+		end
+
+		return new RopeString.from_root(last_concat)
+	end
+
+	redef fun substring(pos, len)
+	do
+		if pos < 0 then
+			len += pos
+			pos = 0
+		end
+
+		if pos + len > length then len = length - pos
+
+		if len <= 0 then return new RopeString
+
+		var path = node_at(pos)
+
+		var lf = path.leaf
+		var offset = path.offset
+
+		var s: FlatString
+		if lf isa StringLeaf then
+			s = lf.str.as(FlatString)
+		else
+			s = lf.str.as(FlatBuffer).lazy_to_s(lf.length)
+		end
+
+		if path.leaf.str.length - offset > len then
+			lf = new StringLeaf(s.substring(offset,len).as(FlatString))
+		else
+			lf = new StringLeaf(s.substring_from(offset).as(FlatString))
+		end
+
+		var nod: RopeNode = lf
+
+		if lf.length == len then return new RopeString.from_root(lf)
+
+		var lft: nullable RopeNode
+		var rht: nullable RopeNode
+
+		for i in path.stack.reverse_iterator do
+			if i.right then continue
+			lft = nod
+			rht = i.node.right
+			nod = new Concat(lft, rht)
+		end
+
+		var ret = new RopeString
+		ret.root = nod
+
+		path = ret.node_at(len-1)
+
+		offset = path.offset
+
+		lf = path.leaf
+
+		if lf isa StringLeaf then
+			s = lf.str.as(FlatString)
+		else
+			s = lf.str.as(FlatBuffer).lazy_to_s(lf.length)
+		end
+
+		nod = new StringLeaf(s.substring(0, offset+1).as(FlatString))
+
+		for i in path.stack.reverse_iterator do
+			if i.left then continue
+			rht = nod
+			lft = i.node.left
+			nod = new Concat(lft, rht)
+		end
+
+		ret.root = nod
+
+		return ret
+	end
+
 	private fun build_node_zero_offset(path: Path, s: String): RopeNode
 	do
 		var finlen = path.leaf.length + s.length
