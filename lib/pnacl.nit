@@ -726,6 +726,15 @@ end
 
 redef interface Object
 	# Creates a new thread for Nit.
+	#
+	# This function launches the Nit main on a new thread.
+	# Its purpose is to allow Nit to be still operational after an exit when needed,
+	# because reloading the page may not be an option.
+	#
+	# Should only be used within the 'exit' before stopping the current thread
+	# when the Nit execution causes a crash.
+	#
+	# REQUIRE: g_nit_thread and WrapperNitMain are set.
 	fun create_thread `{
 		pthread_create(&g_nit_thread, NULL, &WrapperNitMain, NULL);
 	`}
