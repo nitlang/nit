@@ -8,7 +8,9 @@ private import tables
 
 redef class ANode
 	# Parent of the node in the AST
-	readable writable var _parent: nullable ANode
+	var _parent: nullable ANode
+	fun parent: nullable ANode do return _parent
+	fun parent=(p: nullable ANode) do _parent = p
 
 	# Remove a child from the AST
 	fun remove_child(child: ANode)
@@ -57,14 +59,14 @@ abstract class Visitor
 	# This methos should not be redefined
         fun enter_visit(e: nullable ANode)
 	do
-		var old = _current_node
-		_current_node = e
+		var old = current_node
+		current_node = e
 		visit(e)
-		_current_node = old
+		current_node = old
 	end
 
 	# The current visited node
-	readable var _current_node: nullable ANode = null
+	var current_node: nullable ANode = null
 end
 
 redef class AListing

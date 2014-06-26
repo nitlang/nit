@@ -668,44 +668,9 @@ redef class AAttrPropdef
 			set_doc(mpropdef)
 
 			var nreadable = self.n_readable
-			if nreadable != null then
-				var readname = name.substring_from(1)
-				var mreadprop = modelbuilder.try_get_mproperty_by_name(nid, mclassdef, readname).as(nullable MMethod)
-				if mreadprop == null then
-					var mvisibility = new_property_visibility(modelbuilder, mclassdef, nreadable.n_visibility)
-					mreadprop = new MMethod(mclassdef, readname, mvisibility)
-					if not self.check_redef_keyword(modelbuilder, mclassdef, nreadable.n_kwredef, false, mreadprop) then return
-				else
-					if not self.check_redef_keyword(modelbuilder, mclassdef, nreadable.n_kwredef, true, mreadprop) then return
-					check_redef_property_visibility(modelbuilder, nreadable.n_visibility, mreadprop)
-				end
-				mclassdef.mprop2npropdef[mreadprop] = self
-
-				var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
-				self.mreadpropdef = mreadpropdef
-				modelbuilder.mpropdef2npropdef[mreadpropdef] = self
-				mreadpropdef.mdoc = mpropdef.mdoc
-			end
-
+			if nreadable != null then modelbuilder.error(nreadable, "Error: old-style getter no more supported")
 			var nwritable = self.n_writable
-			if nwritable != null then
-				var writename = name.substring_from(1) + "="
-				var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid, mclassdef, writename).as(nullable MMethod)
-				if mwriteprop == null then
-					var mvisibility = new_property_visibility(modelbuilder, mclassdef, nwritable.n_visibility)
-					mwriteprop = new MMethod(mclassdef, writename, mvisibility)
-					if not self.check_redef_keyword(modelbuilder, mclassdef, nwritable.n_kwredef, false, mwriteprop) then return
-				else
-					if not self.check_redef_keyword(modelbuilder, mclassdef, nwritable.n_kwredef, true, mwriteprop) then return
-					check_redef_property_visibility(modelbuilder, nwritable.n_visibility, mwriteprop)
-				end
-				mclassdef.mprop2npropdef[mwriteprop] = self
-
-				var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
-				self.mwritepropdef = mwritepropdef
-				modelbuilder.mpropdef2npropdef[mwritepropdef] = self
-				mwritepropdef.mdoc = mpropdef.mdoc
-			end
+			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
 		else
 			# New attribute style
 			var nid2 = self.n_id2.as(not null)
