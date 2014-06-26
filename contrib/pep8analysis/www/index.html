@@ -48,7 +48,8 @@
 			// Invoke the full Nit program
 			Module = Pep8Module
 			try {
-				ret = Module['callMain']([input])
+				run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
+				run_analysis(input)
 			} catch(e) {
 				console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + e )
 				ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
@@ -258,7 +259,6 @@
 			'print': function(text) {
 				$("#console").append(text + "<br>")
 			},
-			'noInitialRun': true,
 			'TOTAL_MEMORY': 512000000
 		}
 	</script>

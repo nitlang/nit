@@ -19,7 +19,10 @@
 # Takes the entire Pep/8 source code as argument and prints out the
 # analysis results. The result graph will be sent to the JavaScript function
 # `show_graph` with the source of the graph in Graphviz's dot.
-module pep8analysis_web
+module pep8analysis_web is
+	cpp_compiler_option("--std=c++11 --bind")
+	c_linker_option("--bind")
+end
 
 import emscripten
 
@@ -28,6 +31,16 @@ import ast
 import model
 import cfg
 import flow_analysis
+
+in "C++" `{
+	#include <bind.h>
+
+	using namespace emscripten;
+
+	EMSCRIPTEN_BINDINGS(my_module) {
+		function("run_analysis", &NativeString_run_analysis, allow_raw_pointers());
+	}
+`}
 
 redef class AnalysisManager
 
@@ -102,5 +115,11 @@ class StringIStream
 	redef var end_reached: Bool = false
 end
 
+redef class NativeString
+	fun run_analysis do manager.run to_s
+end
 
-manager.run args.first
+fun dummy_set_callbacks import NativeString.run_analysis in "C++" `{
+`}
+
+dummy_set_callbacks
