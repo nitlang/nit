@@ -35,7 +35,7 @@ redef class AnalysisManager
 	do
 		var stream = new StringIStream(src)
 		var ast = build_ast("web", stream)
-		assert ast != null
+		if ast == null then return
 
 		if failed then exit 1
 
@@ -45,7 +45,7 @@ redef class AnalysisManager
 
 		if model.lines.is_empty then
 			fatal_error( ast, "This programs appears empty" )
-			exit 1
+			return
 		end
 
 		# Create CFG
