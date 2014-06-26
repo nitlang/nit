@@ -26,13 +26,6 @@
 	</script>
 
 	<script>
-		// Redirect print to HTML
-		var Module = {
-			'print': function(text) {
-				$("#console").append(text + "<br>")
-			},
-			'noInitialRun': true,
-		}
 
 		// Both Viz and Pep8 use emscripten
 		// We put aside the module of each program and bring it back before each use
