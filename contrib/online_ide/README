@@ -1,0 +1,60 @@
+This file contains all the informations about the Nit online IDE.
+
+I. PREREQUISITES
+
+1. You must have Node.js installed on your computer.
+
+
+II. SETUP
+
+1. In the folder 'www', run :
+				->  npm install
+
+2. Go to 'https://github.com/ajaxorg/ace-builds/' and get the 'src' folder,
+put it in 'www/public'.
+
+NOTE: The application has been developped with a package from 03.02.2014,
+in case of any problem, you can find it here :
+'https://github.com/Djomanix/ace-build-for-nit'.
+-> If you get this one, you can skip 3. and 4.
+
+3. Copy 'mode-nit.js' from folder 'setup' to folder 'www/public/src'.
+
+4. Copy 'nit.js' from folder 'setup' to folder 'www/public/src/snippets'.
+
+
+III. GETTING STARTED
+
+1. In the folder 'www', run :
+				->  node server.js
+
+This will host the application on 'http://localhost:8080/'.
+
+NOTE: 
+1. The application only works in Google Chrome or Chromium.
+2. It is recommended to open the Chrome console while using the application
+(to see what's going on).
+3. The application is ready when the terminal appears in the page
+and when the message :
+'Nit library loaded (... files), ready to go.' is diplayed in the Chrome console.
+
+
+IV. FEATURES
+	- CTRL+E: this shortcut launches the interpretation of the code written in the editor.
+	- CTRL+S: this shortcut enables you to download the file you have been writting.
+	- By clicking on the file name you can change it.
+	- The editor has some auto-completion and research features.
+
+
+V. HOW TO EDIT
+
+1. The folder 'sources/nit' contains the file 'pnacl_nit.nit' wich is the source
+of the pnacl module. If you want to edit the module, copy 'pnacl_nit.nit' in
+the 'src' of your Nit repository, modify what you want and compile with :
+				->  nitg --global pnacl_nit.nit
+Then copy the generated 'pnacl_nit.pexe' file into 'www/public/pnacl'.
+
+2. The folder 'sources/nit_mode_for_ace' contains the source files necessary to
+generate the Ace mode for Nit.
+You can also edit them if you need to improve the Nit support, see :
+- 'http://ace.c9.io/#nav=higlighter'
