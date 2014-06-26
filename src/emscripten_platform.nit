@@ -47,7 +47,7 @@ class EnscriptenToolchain
 	do
 		super
 
-		var emcc_make_flags = "CC=emcc CFLAGS='-g -Wno-unused-value -Wno-switch -Qunused-arguments -s ALLOW_MEMORY_GROWTH=1'"
+		var emcc_make_flags = "CC=emcc CXX=em++ CFLAGS='-Wno-unused-value -Wno-switch -Qunused-arguments -s ALLOW_MEMORY_GROWTH=1"
 
 		var make_flags = self.toolcontext.opt_make_flags.value or else ""
 		make_flags += emcc_make_flags
