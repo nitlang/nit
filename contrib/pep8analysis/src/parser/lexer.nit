@@ -251,12 +251,12 @@ redef class EOF
 end
 
 redef class AError
-    readable var _message: String
+    var message: String
 
     init init_error(message: String, loc: Location)
     do
 		init(loc)
-		_message = message
+		self.message = message
     end
 end
 
@@ -272,7 +272,7 @@ class Lexer
 	var _state: Int = 0
 
 	# The source file
-	readable var _file: SourceFile
+	var _file: SourceFile
 
 	# Current character in the stream
 	var _stream_pos: Int = 0
