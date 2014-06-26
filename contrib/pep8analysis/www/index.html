@@ -47,7 +47,14 @@
 
 			// Invoke the full Nit program
 			Module = Pep8Module
-			ret = Module['callMain']([input])
+			try {
+				ret = Module['callMain']([input])
+			} catch(e) {
+				console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + e )
+				ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
+				$("#fatal-error").show()
+				$("#analyze").prop('disabled', true)
+			}
 
 			// Show and set color of output console
 			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
@@ -112,6 +119,10 @@
 
 <div class="container-fluid">
 	<div class="alert alert-warning" id="loading">Loading the tool... This may take some time.</div>
+	<div class="alert alert-danger" id="fatal-error" style="display: none;">
+		<h2>The JavaScript tool crashed</h2>
+		<p>Please refresh the page to try again, or use Firefox. An error report has been sent to the developer</p>
+	</div>
 
 	<div class="row">
 	  <div class="col-sm-12 col-lg-6">
