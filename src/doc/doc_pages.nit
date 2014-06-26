@@ -340,7 +340,7 @@ abstract class NitdocPage
 	do
 		if location == null then return null
 		var source = ctx.opt_source.value
-		if source == null then return "({location.file.filename.simplify_path})"
+		if source == null then return "{location.file.filename.simplify_path}"
 		# THIS IS JUST UGLY ! (but there is no replace yet)
 		var x = source.split_with("%f")
 		source = x.join(location.file.filename.simplify_path)
@@ -349,7 +349,7 @@ abstract class NitdocPage
 		x = source.split_with("%L")
 		source = x.join(location.line_end.to_s)
 		source = source.simplify_path
-		return " (<a target='_blank' title='Show source' href=\"{source.to_s}\">source</a>)"
+		return "<a target='_blank' title='Show source' href=\"{source.to_s}\">View Source</a>"
 	end
 
 	# MProject description template

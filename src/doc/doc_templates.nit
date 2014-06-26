@@ -475,6 +475,11 @@ class TplArticle
 	redef fun rendering do
 		if is_empty then return
 		add "<article id='{id}' class='{css_classes.join(" ")}'>"
+		if source_link != null then
+			add "<div class='source-link'>"
+			add source_link.as(not null)
+			add "</div>"
+		end
 		if title != null then
 			var lvl = hlvl
 			if lvl == 2 then title_classes.add "well well-sm"
@@ -489,9 +494,6 @@ class TplArticle
 		end
 		if content != null then
 			add content.as(not null)
-		end
-		if source_link != null then
-			add source_link.as(not null)
 		end
 		for child in children do
 			add child

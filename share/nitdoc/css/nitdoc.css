@@ -264,6 +264,20 @@ h3 {
 	margin-left: 30px;
 }
 
+.source-link {
+	display: none;
+	float: right;
+	margin-top: 10px;
+}
+
+.source-link a {
+	color: #0d8921;
+}
+
+article:hover .source-link, article:target .source-link {
+	display: block;
+}
+
 /*
  * Code Highlighting
  */
