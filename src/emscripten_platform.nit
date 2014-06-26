@@ -49,6 +49,11 @@ class EnscriptenToolchain
 
 		var emcc_make_flags = "CC=emcc CXX=em++ CFLAGS='-Wno-unused-value -Wno-switch -Qunused-arguments -s ALLOW_MEMORY_GROWTH=1"
 
+		var release = toolcontext.opt_release.value
+		if release then
+			emcc_make_flags += "' LDFLAGS='--minify 1'"
+		else emcc_make_flags += " -g'"
+
 		var make_flags = self.toolcontext.opt_make_flags.value or else ""
 		make_flags += emcc_make_flags
 		self.toolcontext.opt_make_flags.value = make_flags
