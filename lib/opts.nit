@@ -242,6 +242,23 @@ class OptionArray
 	end
 end
 
+# A group of options
+# Mainly used to categorize options
+class OptionGroup
+	private var group_name: String
+	private var options: Array[Option]
+
+	init(name: String) do
+		group_name = name
+		options = new Array[Option]
+	end
+
+	# Add one or more option(s) to a group
+	fun add_options(opts: Option...) do
+		options.add_all(opts)
+	end
+end
+
 # Context where the options process
 class OptionContext
 	# Option present in the context
@@ -258,12 +275,19 @@ class OptionContext
 		optmap = new HashMap[String, Option]
 		rest = new Array[String]
 		errors = new Array[String]
+		groups = new Array[OptionGroup]
 	end
 
 	# Add one or more options to the context
 	fun add_option(opts: Option...) do
 			options.add_all(opts)
 	end
+
+	# Add one or more OptionGroup to the context
+	fun add_groups(optsgroups: OptionGroup...) do
+		groups.add_all(optsgroups)
+	end
+
 	# display all the options available
 	fun usage
 	do
@@ -276,13 +300,23 @@ class OptionContext
 			if lmax < l then lmax = l
 		end
 
-		for i in options do
-			if not i.hidden then
-				print(i.pretty(lmax))
+		var opt_read = new Array[Option]
+		var i = 1
+		for g in groups do
+			print "Group {i} : {g.group_name}:"
+			for opt in g.options do
+				print (opt.pretty(lmax))
+				opt_read.add(opt)
+			end
+			i += 1
+		end
+		print "Group {i} : ungrouped options"
+		for opt in options do
+			if not opt.hidden and not opt_read.has(opt) then
+				print(opt.pretty(lmax))
 			end
 		end
 	end
-
 	# Parse and assign options everywhere in the argument list
 	fun parse(argv: Collection[String])
 	do
