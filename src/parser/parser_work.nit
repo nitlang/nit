@@ -20,10 +20,10 @@ intrude import parser_prod
 # State of the parser automata as stored in the parser stack.
 private class State
 	# The internal state number
-	readable writable var _state: Int
+	var _state: Int
 
 	# The node stored with the state in the stack
-	readable writable var _nodes: nullable Object
+	var _nodes: nullable Object
 
 	init(state: Int, nodes: nullable Object)
 	do
@@ -83,8 +83,8 @@ class Parser
 		_stack_pos = pos
 		if pos < _stack.length then
 			var state = _stack[pos]
-			state.state = numstate
-			state.nodes = list_node
+			state._state = numstate
+			state._nodes = list_node
 		else
 			_stack.push(new State(numstate, list_node))
 		end
@@ -93,13 +93,13 @@ class Parser
 	# The current state
 	private fun state: Int
 	do
-		return _stack[_stack_pos].state
+		return _stack[_stack_pos]._state
 	end
 
 	# Pop something from the stack state
 	private fun pop: nullable Object
 	do
-		var res = _stack[_stack_pos].nodes
+		var res = _stack[_stack_pos]._nodes
 		_stack_pos = _stack_pos -1
 		return res
 	end
