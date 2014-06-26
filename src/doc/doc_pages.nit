@@ -100,6 +100,7 @@ class NitdocContext
 		groups
 		modules
 		classes
+		properties
 		quicksearch_list
 	end
 
@@ -166,6 +167,13 @@ class NitdocContext
 		for mclass in mbuilder.model.mclasses do
 			var classpage = new NitdocClass(mclass, self)
 			classpage.render.write_to_file("{output_dir.to_s}/{mclass.nitdoc_url}")
+		end
+	end
+
+	private fun properties do
+		for mproperty in mbuilder.model.mproperties do
+			var page = new NitdocProperty(mproperty, self)
+			page.render.write_to_file("{output_dir.to_s}/{mproperty.nitdoc_url}")
 		end
 	end
 
@@ -1335,6 +1343,118 @@ class NitdocClass
 		end
 		op.append("\}\n")
 		return tpl_graph(op, name, null)
+	end
+end
+
+# A MProperty page
+class NitdocProperty
+	super NitdocPage
+
+	private var mproperty: MProperty
+	private var concerns: ConcernsTree
+	private var mmodules2mdefs: Map[MModule, Set[MPropDef]]
+
+	init(mproperty: MProperty, ctx: NitdocContext) do
+		self.mproperty = mproperty
+		super(ctx)
+		self.mmodules2mdefs = sort_by_mmodule(collect_mpropdefs)
+		self.concerns = model.concerns_tree(mmodules2mdefs.keys)
+		self.concerns.sort_with(new MConcernRankSorter)
+	end
+
+	private fun collect_mpropdefs: Set[MPropDef] do
+		var res = new HashSet[MPropDef]
+		for mpropdef in mproperty.mpropdefs do
+			if not mpropdef.is_intro then res.add mpropdef
+		end
+		return res
+	end
+
+	private var page = new TplPage
+	redef fun tpl_page do return page
+
+	private var sidebar = new TplSidebar
+	redef fun tpl_sidebar do return sidebar
+
+	redef fun tpl_title do
+		return "{mproperty.nitdoc_name}{mproperty.tpl_signature.write_to_string}"
+	end
+
+	redef fun tpl_topmenu do
+		var topmenu = super
+		var mmodule = mproperty.intro_mclassdef.mmodule
+		var mproject = mmodule.mgroup.mproject
+		var mclass = mproperty.intro_mclassdef.mclass
+		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
+		topmenu.add_item(new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}"), false)
+		topmenu.add_item(new TplLink("#", "{mproperty.nitdoc_name}"), true)
+		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		return topmenu
+	end
+
+	private fun tpl_intro: TplSection do
+		var section = new TplSection.with_title("top", tpl_title)
+		section.subtitle = mproperty.tpl_declaration
+		var article = new TplArticle("comment")
+		if mproperty.intro.mdoc != null then
+			article.content = mproperty.intro.mdoc.tpl_comment
+		end
+		section.add_child article
+		return section
+	end
+
+	private fun tpl_properties(parent: TplSection) do
+		# intro title
+		var section = new TplSection.with_title("intro", "Introduction")
+		section.summary_title = "Introduction"
+		section.add_child tpl_mpropdef_article(mproperty.intro)
+		parent.add_child section
+
+		# concerns
+		if concerns.is_empty then return
+		parent.add_child new TplArticle.with_content("Concerns", "Concerns", concerns.to_tpl)
+
+		# redef list
+		var lst = concerns.to_a
+		for mentity in lst do
+			if mentity isa MProject then
+				parent.add_child new TplSection(mentity.nitdoc_id)
+			else if mentity isa MGroup then
+				parent.add_child new TplSection(mentity.nitdoc_id)
+			else if mentity isa MModule then
+				var ssection = new TplSection(mentity.nitdoc_id)
+				var title = new Template
+				title.add "in "
+				title.add mentity.tpl_namespace
+				ssection.title = title
+				ssection.summary_title = "in {mentity.nitdoc_name}"
+
+				# properties
+				var mpropdefs = mmodules2mdefs[mentity].to_a
+				name_sorter.sort(mpropdefs)
+				for mpropdef in mpropdefs do
+					ssection.add_child tpl_mpropdef_article(mpropdef)
+				end
+				parent.add_child ssection
+			end
+		end
+	end
+
+	redef fun tpl_content do
+		var top = tpl_intro
+		tpl_properties(top)
+		tpl_page.add_section top
+	end
+
+	private fun sort_by_mmodule(mpropdefs: Collection[MPropDef]): Map[MModule, Set[MPropDef]] do
+		var map = new HashMap[MModule, Set[MPropDef]]
+		for mpropdef in mpropdefs do
+			var mmodule = mpropdef.mclassdef.mmodule
+			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MPropDef]
+			map[mmodule].add mpropdef
+		end
+		return map
 	end
 end
 
