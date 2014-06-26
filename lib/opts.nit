@@ -31,6 +31,9 @@ abstract class Option
 	# Is this option mandatory?
 	var mandatory: Bool writable = false
 
+	# Is this option hidden from usage?
+	var hidden: Bool writable = false
+
 	# Has this option been read?
 	var read: Bool writable = false
 
@@ -272,9 +275,11 @@ class OptionContext
 			end
 			if lmax < l then lmax = l
 		end
-		
+
 		for i in options do
-			print(i.pretty(lmax))
+			if not i.hidden then
+				print(i.pretty(lmax))
+			end
 		end
 	end
 
