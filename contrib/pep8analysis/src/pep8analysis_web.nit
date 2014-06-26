@@ -81,7 +81,7 @@ redef class AnalysisManager
 		if notes.is_empty then print "Success: Nothing wrong detected"
 
 		var of = new StringOStream
-		cfg.print_dot(of, true)
+		cfg.print_dot(of, false)
 		of.close
 		show_graph(of.to_s)
 
