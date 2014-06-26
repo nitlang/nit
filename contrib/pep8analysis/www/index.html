@@ -27,36 +27,13 @@
 		// Both Viz and Pep8 use emscripten
 		// We put aside the module of each program and bring it back before each use
 		var VizModule = null
-		$(document).ready(function() {
-			// Report full loading
+
+		function ready() {
 			$("#loading").hide()
 			$("#analyze").prop('disabled', false)
+		}
 
-		});
-
-		function exec() {
-			$("#working").show()
-			// Clean output console
-			$("#console").text("")
-
-			// Get code
-			var input = editor.getValue()
-
-			// Update GA stats
-			ga('trackEvent', 'Action', 'Analyze')
-
-			// Invoke the full Nit program
-			Module = Pep8Module
-			try {
-				run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
-				run_analysis(input)
-			} catch(e) {
-				console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + e )
-				ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
-				$("#fatal-error").show()
-				$("#analyze").prop('disabled', true)
-			}
-
+		function complete() {
 			// Show and set color of output console
 			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
 			var analysis = $("#console").text();
@@ -74,6 +51,51 @@
 			}
 			$("#working").hide()
 			$("#consolePanel").show()
+			$("#analyze").prop('disabled', false)
+		}
+
+		function exception(ex) {
+			console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + ex )
+			ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
+			$("#fatal-error").show()
+			$("#analyze").prop('disabled', true)
+		}
+
+		function stdout(text) {
+			$("#console").append(text + "<br>")
+		}
+
+		function exec() {
+			$("#working").show()
+			$("#consolePanel").hide()
+
+			// Clean output console
+			$("#console").text("")
+
+			// Get code
+			var input = editor.getValue()
+
+			// Update GA stats
+			ga('trackEvent', 'Action', 'Analyze')
+
+			// Invoke the full Nit program
+			if(typeof(Worker) !== "undefined") {
+				// Async version
+				$("#analyze").prop('disabled', true)
+				worker.postMessage(input)
+			} else {
+				// Sync version
+				ga('trackEvent', 'Crash', 'No Webworkers', $("#console").text())
+				Module = Pep8Module
+				try {
+					run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
+					run_analysis(input)
+
+					complete()
+				} catch(e) {
+					exception(e)
+				}
+			}
 		}
 
 		function load(file) {
@@ -255,15 +277,39 @@
 	  </div>
 	
 	<script>
-		var Module = {
-			'print': function(text) {
-				$("#console").append(text + "<br>")
-			},
-			'TOTAL_MEMORY': 512000000
+		if(typeof(Worker) !== "undefined") {
+			// Async version
+			var worker = new Worker("worker.js")
+			worker.onmessage = function(event) {
+				if (event.data.type == "ready") {
+					ready()
+				} else if (event.data.type == "complete") {
+					complete()
+				} else if (event.data.type == "exception") {
+					exception(event.data.data)
+				} else if (event.data.type == "stdout") {
+					stdout(event.data.data)
+				} else if (event.data.type == "show_graph") {
+					show_graph(event.data.data)
+				} else {
+					console.out(event.data)
+				}
+			}
+		} else {
+			// Synced version
+			$(document).ready(function() {
+				// Report full loading
+				$("#loading").hide()
+				$("#analyze").prop('disabled', false)
+			});
+			var Module = {
+				'print': stdout,
+				'TOTAL_MEMORY': 512000000
+			}
+			importScripts("pep8analysis.js")
+			var Pep8Module = Module
 		}
 	</script>
-	<script src="pep8analysis.js"></script>
-	<script>Pep8Module = Module</script>
 	<script src="viz.js"></script>
 </div>
 
