@@ -35,6 +35,7 @@
 		});
 
 		function exec() {
+			$("#working").show()
 			// Clean output console
 			$("#console").text("")
 
@@ -64,6 +65,7 @@
 				$("#consolePanel").addClass("panel-success")
 				ga('trackEvent', 'Result', 'Success')
 			}
+			$("#working").hide()
 		}
 
 		function load(file) {
@@ -156,6 +158,7 @@
 
 	  <div class="clearfix visible-xs"></div>
 	  <div class="col-sm-12 col-lg-6">
+		<div class="alert alert-warning" id="working" style="display: none;">The tool is evaluating all possible execution paths... This may take some time.</div>
 		<div class="panel" id="consolePanel" style="display: none;">
 			<div class="panel-heading">Analysis Result</div>
 			<div class="panel-body">
