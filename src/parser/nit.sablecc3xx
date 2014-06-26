@@ -211,7 +211,7 @@ module
 	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:topdef* implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_main_class.classdef])};
 
 moduledecl
-	= [doc]:no kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name, annotation_withend.annotations)};
+	= [doc]:no redef visibility kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, redef.kwredef, visibility, kwmodule, module_name, annotation_withend.annotations)};
 
 import
 	= {std} [doc]:no redef visibility kwimport no module_name annotation_withend [n2]:n1 {-> New import.std(visibility, kwimport, module_name, annotation_withend.annotations)}
@@ -736,7 +736,7 @@ Abstract Syntax Tree
 module	= moduledecl? [imports]:import* [extern_code_blocks]:extern_code_block* [classdefs]:classdef*;
 
 moduledecl
-	= doc? kwmodule [name]:module_name annotations?;
+	= doc? kwredef? visibility kwmodule [name]:module_name annotations?;
 
 import	= {std} visibility kwimport [name]:module_name annotations?
 	| {no} visibility kwimport kwend

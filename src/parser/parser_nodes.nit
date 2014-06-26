@@ -706,6 +706,12 @@ class AModuledecl
 	var _n_doc: nullable ADoc = null
 	fun n_doc: nullable ADoc do return _n_doc
 	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
 	var _n_kwmodule: TKwmodule
 	fun n_kwmodule: TKwmodule do return _n_kwmodule
 	fun n_kwmodule=(n_kwmodule: TKwmodule) do _n_kwmodule = n_kwmodule
