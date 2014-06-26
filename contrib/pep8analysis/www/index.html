@@ -49,10 +49,9 @@
 			Module = Pep8Module
 			ret = Module['callMain']([input])
 
-			// Shot and set color of output console
+			// Show and set color of output console
 			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
-			$("#consolePanel").show()
-			var analysis = $("#consolePanel").text();
+			var analysis = $("#console").text();
 			if (analysis.indexOf("Error") >= 0) {
 				$("#consolePanel").addClass("panel-danger")
 				ga('trackEvent', 'Result', 'Error')
@@ -66,6 +65,7 @@
 				ga('trackEvent', 'Result', 'Success')
 			}
 			$("#working").hide()
+			$("#consolePanel").show()
 		}
 
 		function load(file) {
