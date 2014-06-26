@@ -29,18 +29,18 @@ enum Bool
 end
 
 class Integer
-	readable writable var _val: Int
+	var _val: Int
 	init(val: Int) do _val = val
 	fun output do _val.output
 end
 
 class Foo
 	var _a1: Integer
-	readable var _a2: Integer
+	var _a2: Integer
 	fun run
 	do
 		_a1.output
-		a2.output
+		_a2.output
 	end
 
 	fun show(i: Int)
@@ -55,7 +55,7 @@ class Foo
 		show(1)
 		_a1 = new Integer(1)
 		show(2)
-		_a2 = new Integer(_a1.val + 1) #alt3# #alt4#
+		_a2 = new Integer(_a1._val + 1) #alt3# #alt4#
 		show(3)
 	end
 		#alt3#
