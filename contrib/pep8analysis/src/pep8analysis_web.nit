@@ -102,8 +102,5 @@ class StringIStream
 	redef var end_reached: Bool = false
 end
 
-redef class Object
-	redef fun manager do return once new AnalysisManager
-end
 
 manager.run args.first
