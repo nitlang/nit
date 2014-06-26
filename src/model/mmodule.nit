@@ -69,7 +69,7 @@ end
 
 # A Nit module is usually associated with a Nit source file.
 class MModule
-	super MEntity
+	super MConcern
 
 	# The model considered
 	var model: Model
@@ -84,7 +84,7 @@ class MModule
 	var mgroup: nullable MGroup
 
 	# The short name of the module
-	var name: String
+	redef var name: String
 
 	# The origin of the definition
 	var location: Location
@@ -221,4 +221,6 @@ class MModule
 			abort
 		end
 	end
+
+	redef fun parent_concern do return mgroup
 end
