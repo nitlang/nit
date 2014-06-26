@@ -462,37 +462,10 @@ end
 
 # Sorters
 
-# Sort mmodules by their name
-class MModuleNameSorter
-	super AbstractSorter[MModule]
+# Sort mentities by their name
+class MEntityNameSorter
+	super AbstractSorter[MEntity]
 	redef fun compare(a, b) do return a.name <=> b.name
 	init do end
 end
 
-# Sort mclasses by their name
-class MClassNameSorter
-	super AbstractSorter[MClass]
-	redef fun compare(a, b) do return a.name <=> b.name
-	init do end
-end
-
-# Sort mclassdefs by their name
-class MClassDefNameSorter
-	super AbstractSorter[MClassDef]
-	redef fun compare(a, b) do return a.mclass.name <=> b.mclass.name
-	init do end
-end
-
-# Sort mproperties by their name
-class MPropertyNameSorter
-	super AbstractSorter[MProperty]
-	redef fun compare(a, b) do return a.name <=> b.name
-	init do end
-end
-
-# Sort mpropdefs by their name
-class MPropDefNameSorter
-	super AbstractSorter[MPropDef]
-	redef fun compare(a, b) do return a.mproperty.name <=> b.mproperty.name
-	init do end
-end
