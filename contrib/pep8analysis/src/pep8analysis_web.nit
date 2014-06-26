@@ -33,9 +33,13 @@ redef class AnalysisManager
 
 	fun run(src: String)
 	do
+		sys.suggest_garbage_collection
+
 		var stream = new StringIStream(src)
 		var ast = build_ast("web", stream)
 		if ast == null then return
+
+		sys.suggest_garbage_collection
 
 		if failed then exit 1
 
@@ -48,20 +52,30 @@ redef class AnalysisManager
 			return
 		end
 
+		sys.suggest_garbage_collection
+
 		# Create CFG
 		var cfg = build_cfg(model)
 		if failed then exit 1
 
 		# Run analyses
 
+		sys.suggest_garbage_collection
+
 		## Reaching defs
 		do_reaching_defs_analysis(cfg)
+
+		sys.suggest_garbage_collection
 
 		## Range
 		do_range_analysis(ast, cfg)
 
+		sys.suggest_garbage_collection
+
 		## Types
 		do_types_analysis(ast, cfg)
+
+		sys.suggest_garbage_collection
 
 		print_notes
 		if notes.is_empty then print "Success: Nothing wrong detected"
