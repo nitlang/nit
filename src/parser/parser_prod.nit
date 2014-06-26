@@ -16,9 +16,9 @@ redef class AModule
 	do
 		_n_moduledecl = n_moduledecl
 		if n_moduledecl != null then n_moduledecl.parent = self
-		_n_imports.unsafe_add_all(n_imports)
-		_n_extern_code_blocks.unsafe_add_all(n_extern_code_blocks)
-		_n_classdefs.unsafe_add_all(n_classdefs)
+		self.n_imports.unsafe_add_all(n_imports)
+		self.n_extern_code_blocks.unsafe_add_all(n_extern_code_blocks)
+		self.n_classdefs.unsafe_add_all(n_classdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -27,9 +27,9 @@ redef class AModule
 			n_moduledecl = new_child.as(nullable AModuledecl)
 			return
 		end
-		if _n_imports.replace_child(old_child, new_child) then return
-		if _n_extern_code_blocks.replace_child(old_child, new_child) then return
-		if _n_classdefs.replace_child(old_child, new_child) then return
+		if n_imports.replace_child(old_child, new_child) then return
+		if n_extern_code_blocks.replace_child(old_child, new_child) then return
+		if n_classdefs.replace_child(old_child, new_child) then return
 	end
 
 	redef fun n_moduledecl=(node)
@@ -42,9 +42,9 @@ redef class AModule
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_moduledecl)
-		_n_imports.visit_all(v)
-		_n_extern_code_blocks.visit_all(v)
-		_n_classdefs.visit_all(v)
+		n_imports.visit_all(v)
+		n_extern_code_blocks.visit_all(v)
+		n_classdefs.visit_all(v)
 	end
 end
 redef class AModuledecl
@@ -365,13 +365,13 @@ redef class AStdClassdef
 		n_classkind.parent = self
 		_n_id = n_id
 		if n_id != null then n_id.parent = self
-		_n_formaldefs.unsafe_add_all(n_formaldefs)
+		self.n_formaldefs.unsafe_add_all(n_formaldefs)
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 		_n_extern_code_block = n_extern_code_block
 		if n_extern_code_block != null then n_extern_code_block.parent = self
-		_n_superclasses.unsafe_add_all(n_superclasses)
-		_n_propdefs.unsafe_add_all(n_propdefs)
+		self.n_superclasses.unsafe_add_all(n_superclasses)
+		self.n_propdefs.unsafe_add_all(n_propdefs)
 		_n_kwend = n_kwend.as(not null)
 		n_kwend.parent = self
 	end
@@ -398,7 +398,7 @@ redef class AStdClassdef
 			n_id = new_child.as(nullable TClassid)
 			return
 		end
-		if _n_formaldefs.replace_child(old_child, new_child) then return
+		if n_formaldefs.replace_child(old_child, new_child) then return
 		if _n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
@@ -407,8 +407,8 @@ redef class AStdClassdef
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
-		if _n_superclasses.replace_child(old_child, new_child) then return
-		if _n_propdefs.replace_child(old_child, new_child) then return
+		if n_superclasses.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
 		if _n_kwend == old_child then
 			n_kwend = new_child.as(TKwend)
 			return
@@ -464,11 +464,11 @@ redef class AStdClassdef
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_classkind)
 		v.enter_visit(_n_id)
-		_n_formaldefs.visit_all(v)
+		n_formaldefs.visit_all(v)
 		v.enter_visit(_n_annotations)
 		v.enter_visit(_n_extern_code_block)
-		_n_superclasses.visit_all(v)
-		_n_propdefs.visit_all(v)
+		n_superclasses.visit_all(v)
+		n_propdefs.visit_all(v)
 		v.enter_visit(_n_kwend)
 	end
 end
@@ -477,19 +477,19 @@ redef class ATopClassdef
 		n_propdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
-		_n_propdefs.unsafe_add_all(n_propdefs)
+		self.n_propdefs.unsafe_add_all(n_propdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_propdefs.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_propdefs.visit_all(v)
+		n_propdefs.visit_all(v)
 	end
 end
 redef class AMainClassdef
@@ -497,19 +497,19 @@ redef class AMainClassdef
 		n_propdefs: Collection[Object] # Should be Collection[APropdef]
 	)
 	do
-		_n_propdefs.unsafe_add_all(n_propdefs)
+		self.n_propdefs.unsafe_add_all(n_propdefs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_propdefs.replace_child(old_child, new_child) then return
+		if n_propdefs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_propdefs.visit_all(v)
+		n_propdefs.visit_all(v)
 	end
 end
 redef class AConcreteClasskind
@@ -2664,7 +2664,7 @@ redef class ASignature
 	do
 		_n_opar = n_opar
 		if n_opar != null then n_opar.parent = self
-		_n_params.unsafe_add_all(n_params)
+		self.n_params.unsafe_add_all(n_params)
 		_n_cpar = n_cpar
 		if n_cpar != null then n_cpar.parent = self
 		_n_type = n_type
@@ -2677,7 +2677,7 @@ redef class ASignature
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_params.replace_child(old_child, new_child) then return
+		if n_params.replace_child(old_child, new_child) then return
 		if _n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
@@ -2708,7 +2708,7 @@ redef class ASignature
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_opar)
-		_n_params.visit_all(v)
+		n_params.visit_all(v)
 		v.enter_visit(_n_cpar)
 		v.enter_visit(_n_type)
 	end
@@ -2793,7 +2793,7 @@ redef class AType
 		if n_kwnullable != null then n_kwnullable.parent = self
 		_n_id = n_id.as(not null)
 		n_id.parent = self
-		_n_types.unsafe_add_all(n_types)
+		self.n_types.unsafe_add_all(n_types)
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 	end
@@ -2808,7 +2808,7 @@ redef class AType
 			n_id = new_child.as(TClassid)
 			return
 		end
-		if _n_types.replace_child(old_child, new_child) then return
+		if n_types.replace_child(old_child, new_child) then return
 		if _n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
@@ -2836,7 +2836,7 @@ redef class AType
 	do
 		v.enter_visit(_n_kwnullable)
 		v.enter_visit(_n_id)
-		_n_types.visit_all(v)
+		n_types.visit_all(v)
 		v.enter_visit(_n_annotations)
 	end
 end
@@ -2888,14 +2888,14 @@ redef class ABlockExpr
 		n_kwend: nullable TKwend
 	)
 	do
-		_n_expr.unsafe_add_all(n_expr)
+		self.n_expr.unsafe_add_all(n_expr)
 		_n_kwend = n_kwend
 		if n_kwend != null then n_kwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_expr.replace_child(old_child, new_child) then return
+		if n_expr.replace_child(old_child, new_child) then return
 		if _n_kwend == old_child then
 			n_kwend = new_child.as(nullable TKwend)
 			return
@@ -2911,7 +2911,7 @@ redef class ABlockExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_expr.visit_all(v)
+		n_expr.visit_all(v)
 		v.enter_visit(_n_kwend)
 	end
 end
@@ -3555,7 +3555,7 @@ redef class AForExpr
 	do
 		_n_kwfor = n_kwfor.as(not null)
 		n_kwfor.parent = self
-		_n_ids.unsafe_add_all(n_ids)
+		self.n_ids.unsafe_add_all(n_ids)
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_kwdo = n_kwdo.as(not null)
@@ -3572,7 +3572,7 @@ redef class AForExpr
 			n_kwfor = new_child.as(TKwfor)
 			return
 		end
-		if _n_ids.replace_child(old_child, new_child) then return
+		if n_ids.replace_child(old_child, new_child) then return
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
@@ -3621,7 +3621,7 @@ redef class AForExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_kwfor)
-		_n_ids.visit_all(v)
+		n_ids.visit_all(v)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
@@ -6326,14 +6326,14 @@ redef class ASuperstringExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		_n_exprs.unsafe_add_all(n_exprs)
+		self.n_exprs.unsafe_add_all(n_exprs)
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_exprs.replace_child(old_child, new_child) then return
+		if n_exprs.replace_child(old_child, new_child) then return
 		if _n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
@@ -6349,7 +6349,7 @@ redef class ASuperstringExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_exprs.visit_all(v)
+		n_exprs.visit_all(v)
 		v.enter_visit(_n_annotations)
 	end
 end
@@ -6724,19 +6724,19 @@ redef class AListExprs
 		n_exprs: Collection[Object] # Should be Collection[AExpr]
 	)
 	do
-		_n_exprs.unsafe_add_all(n_exprs)
+		self.n_exprs.unsafe_add_all(n_exprs)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_exprs.replace_child(old_child, new_child) then return
+		if n_exprs.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_exprs.visit_all(v)
+		n_exprs.visit_all(v)
 	end
 end
 redef class AParExprs
@@ -6748,7 +6748,7 @@ redef class AParExprs
 	do
 		_n_opar = n_opar.as(not null)
 		n_opar.parent = self
-		_n_exprs.unsafe_add_all(n_exprs)
+		self.n_exprs.unsafe_add_all(n_exprs)
 		_n_cpar = n_cpar.as(not null)
 		n_cpar.parent = self
 	end
@@ -6759,7 +6759,7 @@ redef class AParExprs
 			n_opar = new_child.as(TOpar)
 			return
 		end
-		if _n_exprs.replace_child(old_child, new_child) then return
+		if n_exprs.replace_child(old_child, new_child) then return
 		if _n_cpar == old_child then
 			n_cpar = new_child.as(TCpar)
 			return
@@ -6781,7 +6781,7 @@ redef class AParExprs
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_opar)
-		_n_exprs.visit_all(v)
+		n_exprs.visit_all(v)
 		v.enter_visit(_n_cpar)
 	end
 end
@@ -6794,7 +6794,7 @@ redef class ABraExprs
 	do
 		_n_obra = n_obra.as(not null)
 		n_obra.parent = self
-		_n_exprs.unsafe_add_all(n_exprs)
+		self.n_exprs.unsafe_add_all(n_exprs)
 		_n_cbra = n_cbra.as(not null)
 		n_cbra.parent = self
 	end
@@ -6805,7 +6805,7 @@ redef class ABraExprs
 			n_obra = new_child.as(TObra)
 			return
 		end
-		if _n_exprs.replace_child(old_child, new_child) then return
+		if n_exprs.replace_child(old_child, new_child) then return
 		if _n_cbra == old_child then
 			n_cbra = new_child.as(TCbra)
 			return
@@ -6827,7 +6827,7 @@ redef class ABraExprs
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_obra)
-		_n_exprs.visit_all(v)
+		n_exprs.visit_all(v)
 		v.enter_visit(_n_cbra)
 	end
 end
@@ -6898,7 +6898,7 @@ redef class AModuleName
 	do
 		_n_quad = n_quad
 		if n_quad != null then n_quad.parent = self
-		_n_path.unsafe_add_all(n_path)
+		self.n_path.unsafe_add_all(n_path)
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 	end
@@ -6909,7 +6909,7 @@ redef class AModuleName
 			n_quad = new_child.as(nullable TQuad)
 			return
 		end
-		if _n_path.replace_child(old_child, new_child) then return
+		if n_path.replace_child(old_child, new_child) then return
 		if _n_id == old_child then
 			n_id = new_child.as(TId)
 			return
@@ -6931,7 +6931,7 @@ redef class AModuleName
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_quad)
-		_n_path.visit_all(v)
+		n_path.visit_all(v)
 		v.enter_visit(_n_id)
 	end
 end
@@ -6943,7 +6943,7 @@ redef class AExternCalls
 	do
 		_n_kwimport = n_kwimport.as(not null)
 		n_kwimport.parent = self
-		_n_extern_calls.unsafe_add_all(n_extern_calls)
+		self.n_extern_calls.unsafe_add_all(n_extern_calls)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -6952,7 +6952,7 @@ redef class AExternCalls
 			n_kwimport = new_child.as(TKwimport)
 			return
 		end
-		if _n_extern_calls.replace_child(old_child, new_child) then return
+		if n_extern_calls.replace_child(old_child, new_child) then return
 	end
 
 	redef fun n_kwimport=(node)
@@ -6965,7 +6965,7 @@ redef class AExternCalls
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_kwimport)
-		_n_extern_calls.visit_all(v)
+		n_extern_calls.visit_all(v)
 	end
 end
 redef class AExternCall
@@ -7406,14 +7406,14 @@ redef class AQualified
 		n_classid: nullable TClassid
 	)
 	do
-		_n_id.unsafe_add_all(n_id)
+		self.n_id.unsafe_add_all(n_id)
 		_n_classid = n_classid
 		if n_classid != null then n_classid.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_id.replace_child(old_child, new_child) then return
+		if n_id.replace_child(old_child, new_child) then return
 		if _n_classid == old_child then
 			n_classid = new_child.as(nullable TClassid)
 			return
@@ -7429,7 +7429,7 @@ redef class AQualified
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_id.visit_all(v)
+		n_id.visit_all(v)
 		v.enter_visit(_n_classid)
 	end
 end
@@ -7438,19 +7438,19 @@ redef class ADoc
 		n_comment: Collection[Object] # Should be Collection[TComment]
 	)
 	do
-		_n_comment.unsafe_add_all(n_comment)
+		self.n_comment.unsafe_add_all(n_comment)
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_comment.replace_child(old_child, new_child) then return
+		if n_comment.replace_child(old_child, new_child) then return
 	end
 
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		_n_comment.visit_all(v)
+		n_comment.visit_all(v)
 	end
 end
 redef class AAnnotations
@@ -7465,7 +7465,7 @@ redef class AAnnotations
 		if n_at != null then n_at.parent = self
 		_n_opar = n_opar
 		if n_opar != null then n_opar.parent = self
-		_n_items.unsafe_add_all(n_items)
+		self.n_items.unsafe_add_all(n_items)
 		_n_cpar = n_cpar
 		if n_cpar != null then n_cpar.parent = self
 	end
@@ -7480,7 +7480,7 @@ redef class AAnnotations
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_items.replace_child(old_child, new_child) then return
+		if n_items.replace_child(old_child, new_child) then return
 		if _n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
@@ -7508,7 +7508,7 @@ redef class AAnnotations
 	do
 		v.enter_visit(_n_at)
 		v.enter_visit(_n_opar)
-		_n_items.visit_all(v)
+		n_items.visit_all(v)
 		v.enter_visit(_n_cpar)
 	end
 end
@@ -7525,7 +7525,7 @@ redef class AAnnotation
 		n_atid.parent = self
 		_n_opar = n_opar
 		if n_opar != null then n_opar.parent = self
-		_n_args.unsafe_add_all(n_args)
+		self.n_args.unsafe_add_all(n_args)
 		_n_cpar = n_cpar
 		if n_cpar != null then n_cpar.parent = self
 		_n_annotations = n_annotations
@@ -7542,7 +7542,7 @@ redef class AAnnotation
 			n_opar = new_child.as(nullable TOpar)
 			return
 		end
-		if _n_args.replace_child(old_child, new_child) then return
+		if n_args.replace_child(old_child, new_child) then return
 		if _n_cpar == old_child then
 			n_cpar = new_child.as(nullable TCpar)
 			return
@@ -7579,7 +7579,7 @@ redef class AAnnotation
 	do
 		v.enter_visit(_n_atid)
 		v.enter_visit(_n_opar)
-		_n_args.visit_all(v)
+		n_args.visit_all(v)
 		v.enter_visit(_n_cpar)
 		v.enter_visit(_n_annotations)
 	end

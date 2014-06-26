@@ -340,913 +340,1720 @@ class AAtid super Prod end
 
 class AModule
 	super AModule
-    readable var _n_moduledecl: nullable AModuledecl = null
-    readable var _n_imports: List[AImport] = new List[AImport]
-    readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
-    readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
+	var _n_moduledecl: nullable AModuledecl = null
+	fun n_moduledecl: nullable AModuledecl do return _n_moduledecl
+	fun n_moduledecl=(n_moduledecl: nullable AModuledecl) do _n_moduledecl = n_moduledecl
+	var n_imports: List[AImport] = new List[AImport]
+	var n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
+	var n_classdefs: List[AClassdef] = new List[AClassdef]
 end
 class AModuledecl
 	super AModuledecl
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwmodule: TKwmodule
-    readable var _n_name: AModuleName
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwmodule: TKwmodule = null
+	fun n_kwmodule: TKwmodule do return _n_kwmodule
+	fun n_kwmodule=(n_kwmodule: TKwmodule) do _n_kwmodule = n_kwmodule
+	var _n_name: AModuleName = null
+	fun n_name: AModuleName do return _n_name
+	fun n_name=(n_name: AModuleName) do _n_name = n_name
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AStdImport
 	super AImport
-    readable var _n_visibility: AVisibility
-    readable var _n_kwimport: TKwimport
-    readable var _n_name: AModuleName
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwimport: TKwimport = null
+	fun n_kwimport: TKwimport do return _n_kwimport
+	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
+	var _n_name: AModuleName = null
+	fun n_name: AModuleName do return _n_name
+	fun n_name=(n_name: AModuleName) do _n_name = n_name
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ANoImport
 	super AImport
-    readable var _n_visibility: AVisibility
-    readable var _n_kwimport: TKwimport
-    readable var _n_kwend: TKwend
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwimport: TKwimport = null
+	fun n_kwimport: TKwimport do return _n_kwimport
+	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
+	var _n_kwend: TKwend = null
+	fun n_kwend: TKwend do return _n_kwend
+	fun n_kwend=(n_kwend: TKwend) do _n_kwend = n_kwend
 end
 class APublicVisibility
 	super AVisibility
 end
 class APrivateVisibility
 	super AVisibility
-    readable var _n_kwprivate: TKwprivate
+	var _n_kwprivate: TKwprivate = null
+	fun n_kwprivate: TKwprivate do return _n_kwprivate
+	fun n_kwprivate=(n_kwprivate: TKwprivate) do _n_kwprivate = n_kwprivate
 end
 class AProtectedVisibility
 	super AVisibility
-    readable var _n_kwprotected: TKwprotected
+	var _n_kwprotected: TKwprotected = null
+	fun n_kwprotected: TKwprotected do return _n_kwprotected
+	fun n_kwprotected=(n_kwprotected: TKwprotected) do _n_kwprotected = n_kwprotected
 end
 class AIntrudeVisibility
 	super AVisibility
-    readable var _n_kwintrude: TKwintrude
+	var _n_kwintrude: TKwintrude = null
+	fun n_kwintrude: TKwintrude do return _n_kwintrude
+	fun n_kwintrude=(n_kwintrude: TKwintrude) do _n_kwintrude = n_kwintrude
 end
 class AStdClassdef
 	super AClassdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_classkind: AClasskind
-    readable var _n_id: nullable TClassid = null
-    readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
-    readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
-    readable var _n_kwend: TKwend
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_classkind: AClasskind = null
+	fun n_classkind: AClasskind do return _n_classkind
+	fun n_classkind=(n_classkind: AClasskind) do _n_classkind = n_classkind
+	var _n_id: nullable TClassid = null
+	fun n_id: nullable TClassid do return _n_id
+	fun n_id=(n_id: nullable TClassid) do _n_id = n_id
+	var n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
+	var _n_extern_code_block: nullable AExternCodeBlock = null
+	fun n_extern_code_block: nullable AExternCodeBlock do return _n_extern_code_block
+	fun n_extern_code_block=(n_extern_code_block: nullable AExternCodeBlock) do _n_extern_code_block = n_extern_code_block
+	var n_superclasses: List[ASuperclass] = new List[ASuperclass]
+	var n_propdefs: List[APropdef] = new List[APropdef]
+	var _n_kwend: TKwend = null
+	fun n_kwend: TKwend do return _n_kwend
+	fun n_kwend=(n_kwend: TKwend) do _n_kwend = n_kwend
 end
 class ATopClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
+	var n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AMainClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
+	var n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AConcreteClasskind
 	super AClasskind
-    readable var _n_kwclass: TKwclass
+	var _n_kwclass: TKwclass = null
+	fun n_kwclass: TKwclass do return _n_kwclass
+	fun n_kwclass=(n_kwclass: TKwclass) do _n_kwclass = n_kwclass
 end
 class AAbstractClasskind
 	super AClasskind
-    readable var _n_kwabstract: TKwabstract
-    readable var _n_kwclass: TKwclass
+	var _n_kwabstract: TKwabstract = null
+	fun n_kwabstract: TKwabstract do return _n_kwabstract
+	fun n_kwabstract=(n_kwabstract: TKwabstract) do _n_kwabstract = n_kwabstract
+	var _n_kwclass: TKwclass = null
+	fun n_kwclass: TKwclass do return _n_kwclass
+	fun n_kwclass=(n_kwclass: TKwclass) do _n_kwclass = n_kwclass
 end
 class AInterfaceClasskind
 	super AClasskind
-    readable var _n_kwinterface: TKwinterface
+	var _n_kwinterface: TKwinterface = null
+	fun n_kwinterface: TKwinterface do return _n_kwinterface
+	fun n_kwinterface=(n_kwinterface: TKwinterface) do _n_kwinterface = n_kwinterface
 end
 class AEnumClasskind
 	super AClasskind
-    readable var _n_kwenum: TKwenum
+	var _n_kwenum: TKwenum = null
+	fun n_kwenum: TKwenum do return _n_kwenum
+	fun n_kwenum=(n_kwenum: TKwenum) do _n_kwenum = n_kwenum
 end
 class AExternClasskind
 	super AClasskind
-    readable var _n_kwextern: TKwextern
-    readable var _n_kwclass: nullable TKwclass = null
+	var _n_kwextern: TKwextern = null
+	fun n_kwextern: TKwextern do return _n_kwextern
+	fun n_kwextern=(n_kwextern: TKwextern) do _n_kwextern = n_kwextern
+	var _n_kwclass: nullable TKwclass = null
+	fun n_kwclass: nullable TKwclass do return _n_kwclass
+	fun n_kwclass=(n_kwclass: nullable TKwclass) do _n_kwclass = n_kwclass
 end
 class AFormaldef
 	super AFormaldef
-    readable var _n_id: TClassid
-    readable var _n_type: nullable AType = null
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_id: TClassid = null
+	fun n_id: TClassid do return _n_id
+	fun n_id=(n_id: TClassid) do _n_id = n_id
+	var _n_type: nullable AType = null
+	fun n_type: nullable AType do return _n_type
+	fun n_type=(n_type: nullable AType) do _n_type = n_type
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ASuperclass
 	super ASuperclass
-    readable var _n_kwsuper: TKwsuper
-    readable var _n_type: AType
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwsuper: TKwsuper = null
+	fun n_kwsuper: TKwsuper do return _n_kwsuper
+	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AAttrPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_readable: nullable AAble = null
-    readable var _n_writable: nullable AAble = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwvar: TKwvar
-    readable var _n_id: nullable TAttrid = null
-    readable var _n_id2: nullable TId = null
-    readable var _n_type: nullable AType = null
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_expr: nullable AExpr = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_readable: nullable AAble = null
+	fun n_readable: nullable AAble do return _n_readable
+	fun n_readable=(n_readable: nullable AAble) do _n_readable = n_readable
+	var _n_writable: nullable AAble = null
+	fun n_writable: nullable AAble do return _n_writable
+	fun n_writable=(n_writable: nullable AAble) do _n_writable = n_writable
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwvar: TKwvar = null
+	fun n_kwvar: TKwvar do return _n_kwvar
+	fun n_kwvar=(n_kwvar: TKwvar) do _n_kwvar = n_kwvar
+	var _n_id: nullable TAttrid = null
+	fun n_id: nullable TAttrid do return _n_id
+	fun n_id=(n_id: nullable TAttrid) do _n_id = n_id
+	var _n_id2: nullable TId = null
+	fun n_id2: nullable TId do return _n_id2
+	fun n_id2=(n_id2: nullable TId) do _n_id2 = n_id2
+	var _n_type: nullable AType = null
+	fun n_type: nullable AType do return _n_type
+	fun n_type=(n_type: nullable AType) do _n_type = n_type
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
+	var _n_expr: nullable AExpr = null
+	fun n_expr: nullable AExpr do return _n_expr
+	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class AMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
 end
 class ADeferredMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwmeth: TKwmeth = null
+	fun n_kwmeth: TKwmeth do return _n_kwmeth
+	fun n_kwmeth=(n_kwmeth: TKwmeth) do _n_kwmeth = n_kwmeth
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AInternMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwmeth: TKwmeth = null
+	fun n_kwmeth: TKwmeth do return _n_kwmeth
+	fun n_kwmeth=(n_kwmeth: TKwmeth) do _n_kwmeth = n_kwmeth
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
 end
 class AInternNewPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwnew: TKwnew
-    readable var _n_methid: nullable AMethid = null
-    readable var _n_signature: ASignature
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwnew: TKwnew = null
+	fun n_kwnew: TKwnew do return _n_kwnew
+	fun n_kwnew=(n_kwnew: TKwnew) do _n_kwnew = n_kwnew
+	var _n_methid: nullable AMethid = null
+	fun n_methid: nullable AMethid do return _n_methid
+	fun n_methid=(n_methid: nullable AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
 end
 class AExternMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_extern: nullable TString = null
-    readable var _n_extern_calls: nullable AExternCalls = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwmeth: TKwmeth = null
+	fun n_kwmeth: TKwmeth do return _n_kwmeth
+	fun n_kwmeth=(n_kwmeth: TKwmeth) do _n_kwmeth = n_kwmeth
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_extern: nullable TString = null
+	fun n_extern: nullable TString do return _n_extern
+	fun n_extern=(n_extern: nullable TString) do _n_extern = n_extern
+	var _n_extern_calls: nullable AExternCalls = null
+	fun n_extern_calls: nullable AExternCalls do return _n_extern_calls
+	fun n_extern_calls=(n_extern_calls: nullable AExternCalls) do _n_extern_calls = n_extern_calls
+	var _n_extern_code_block: nullable AExternCodeBlock = null
+	fun n_extern_code_block: nullable AExternCodeBlock do return _n_extern_code_block
+	fun n_extern_code_block=(n_extern_code_block: nullable AExternCodeBlock) do _n_extern_code_block = n_extern_code_block
 end
 class AConcreteMethPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwmeth: TKwmeth
-    readable var _n_methid: AMethid
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_block: nullable AExpr = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwmeth: TKwmeth = null
+	fun n_kwmeth: TKwmeth do return _n_kwmeth
+	fun n_kwmeth=(n_kwmeth: TKwmeth) do _n_kwmeth = n_kwmeth
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
 end
 class AConcreteInitPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwinit: TKwinit
-    readable var _n_methid: nullable AMethid = null
-    readable var _n_signature: ASignature
-    readable var _n_annotations: nullable AAnnotations = null
-    readable var _n_block: nullable AExpr = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwinit: TKwinit = null
+	fun n_kwinit: TKwinit do return _n_kwinit
+	fun n_kwinit=(n_kwinit: TKwinit) do _n_kwinit = n_kwinit
+	var _n_methid: nullable AMethid = null
+	fun n_methid: nullable AMethid do return _n_methid
+	fun n_methid=(n_methid: nullable AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
 end
 class AExternInitPropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwnew: TKwnew
-    readable var _n_methid: nullable AMethid = null
-    readable var _n_signature: ASignature
-    readable var _n_extern: nullable TString = null
-    readable var _n_extern_calls: nullable AExternCalls = null
-    readable var _n_extern_code_block: nullable AExternCodeBlock = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwnew: TKwnew = null
+	fun n_kwnew: TKwnew do return _n_kwnew
+	fun n_kwnew=(n_kwnew: TKwnew) do _n_kwnew = n_kwnew
+	var _n_methid: nullable AMethid = null
+	fun n_methid: nullable AMethid do return _n_methid
+	fun n_methid=(n_methid: nullable AMethid) do _n_methid = n_methid
+	var _n_signature: ASignature = null
+	fun n_signature: ASignature do return _n_signature
+	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_extern: nullable TString = null
+	fun n_extern: nullable TString do return _n_extern
+	fun n_extern=(n_extern: nullable TString) do _n_extern = n_extern
+	var _n_extern_calls: nullable AExternCalls = null
+	fun n_extern_calls: nullable AExternCalls do return _n_extern_calls
+	fun n_extern_calls=(n_extern_calls: nullable AExternCalls) do _n_extern_calls = n_extern_calls
+	var _n_extern_code_block: nullable AExternCodeBlock = null
+	fun n_extern_code_block: nullable AExternCodeBlock do return _n_extern_code_block
+	fun n_extern_code_block=(n_extern_code_block: nullable AExternCodeBlock) do _n_extern_code_block = n_extern_code_block
 end
 class AMainMethPropdef
 	super APropdef
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_block: nullable AExpr = null
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
 end
 class ATypePropdef
 	super APropdef
-    readable var _n_doc: nullable ADoc = null
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: AVisibility
-    readable var _n_kwtype: TKwtype
-    readable var _n_id: TClassid
-    readable var _n_type: AType
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
+	var _n_kwtype: TKwtype = null
+	fun n_kwtype: TKwtype do return _n_kwtype
+	fun n_kwtype=(n_kwtype: TKwtype) do _n_kwtype = n_kwtype
+	var _n_id: TClassid = null
+	fun n_id: TClassid do return _n_id
+	fun n_id=(n_id: TClassid) do _n_id = n_id
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AReadAble
 	super AAble
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_kwreadable: TKwreadable
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_kwreadable: TKwreadable = null
+	fun n_kwreadable: TKwreadable do return _n_kwreadable
+	fun n_kwreadable=(n_kwreadable: TKwreadable) do _n_kwreadable = n_kwreadable
 end
 class AWriteAble
 	super AAble
-    readable var _n_kwredef: nullable TKwredef = null
-    readable var _n_visibility: nullable AVisibility = null
-    readable var _n_kwwritable: TKwwritable
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: nullable AVisibility = null
+	fun n_visibility: nullable AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
+	var _n_kwwritable: TKwwritable = null
+	fun n_kwwritable: TKwwritable do return _n_kwwritable
+	fun n_kwwritable=(n_kwwritable: TKwwritable) do _n_kwwritable = n_kwwritable
 end
 class AIdMethid
 	super AMethid
-    readable var _n_id: TId
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
 end
 class APlusMethid
 	super AMethid
-    readable var _n_plus: TPlus
+	var _n_plus: TPlus = null
+	fun n_plus: TPlus do return _n_plus
+	fun n_plus=(n_plus: TPlus) do _n_plus = n_plus
 end
 class AMinusMethid
 	super AMethid
-    readable var _n_minus: TMinus
+	var _n_minus: TMinus = null
+	fun n_minus: TMinus do return _n_minus
+	fun n_minus=(n_minus: TMinus) do _n_minus = n_minus
 end
 class AStarMethid
 	super AMethid
-    readable var _n_star: TStar
+	var _n_star: TStar = null
+	fun n_star: TStar do return _n_star
+	fun n_star=(n_star: TStar) do _n_star = n_star
 end
 class ASlashMethid
 	super AMethid
-    readable var _n_slash: TSlash
+	var _n_slash: TSlash = null
+	fun n_slash: TSlash do return _n_slash
+	fun n_slash=(n_slash: TSlash) do _n_slash = n_slash
 end
 class APercentMethid
 	super AMethid
-    readable var _n_percent: TPercent
+	var _n_percent: TPercent = null
+	fun n_percent: TPercent do return _n_percent
+	fun n_percent=(n_percent: TPercent) do _n_percent = n_percent
 end
 class AEqMethid
 	super AMethid
-    readable var _n_eq: TEq
+	var _n_eq: TEq = null
+	fun n_eq: TEq do return _n_eq
+	fun n_eq=(n_eq: TEq) do _n_eq = n_eq
 end
 class ANeMethid
 	super AMethid
-    readable var _n_ne: TNe
+	var _n_ne: TNe = null
+	fun n_ne: TNe do return _n_ne
+	fun n_ne=(n_ne: TNe) do _n_ne = n_ne
 end
 class ALeMethid
 	super AMethid
-    readable var _n_le: TLe
+	var _n_le: TLe = null
+	fun n_le: TLe do return _n_le
+	fun n_le=(n_le: TLe) do _n_le = n_le
 end
 class AGeMethid
 	super AMethid
-    readable var _n_ge: TGe
+	var _n_ge: TGe = null
+	fun n_ge: TGe do return _n_ge
+	fun n_ge=(n_ge: TGe) do _n_ge = n_ge
 end
 class ALtMethid
 	super AMethid
-    readable var _n_lt: TLt
+	var _n_lt: TLt = null
+	fun n_lt: TLt do return _n_lt
+	fun n_lt=(n_lt: TLt) do _n_lt = n_lt
 end
 class AGtMethid
 	super AMethid
-    readable var _n_gt: TGt
+	var _n_gt: TGt = null
+	fun n_gt: TGt do return _n_gt
+	fun n_gt=(n_gt: TGt) do _n_gt = n_gt
 end
 class ALlMethid
 	super AMethid
-    readable var _n_ll: TLl
+	var _n_ll: TLl = null
+	fun n_ll: TLl do return _n_ll
+	fun n_ll=(n_ll: TLl) do _n_ll = n_ll
 end
 class AGgMethid
 	super AMethid
-    readable var _n_gg: TGg
+	var _n_gg: TGg = null
+	fun n_gg: TGg do return _n_gg
+	fun n_gg=(n_gg: TGg) do _n_gg = n_gg
 end
 class ABraMethid
 	super AMethid
-    readable var _n_obra: TObra
-    readable var _n_cbra: TCbra
+	var _n_obra: TObra = null
+	fun n_obra: TObra do return _n_obra
+	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
+	var _n_cbra: TCbra = null
+	fun n_cbra: TCbra do return _n_cbra
+	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
 end
 class AStarshipMethid
 	super AMethid
-    readable var _n_starship: TStarship
+	var _n_starship: TStarship = null
+	fun n_starship: TStarship do return _n_starship
+	fun n_starship=(n_starship: TStarship) do _n_starship = n_starship
 end
 class AAssignMethid
 	super AMethid
-    readable var _n_id: TId
-    readable var _n_assign: TAssign
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
 end
 class ABraassignMethid
 	super AMethid
-    readable var _n_obra: TObra
-    readable var _n_cbra: TCbra
-    readable var _n_assign: TAssign
+	var _n_obra: TObra = null
+	fun n_obra: TObra do return _n_obra
+	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
+	var _n_cbra: TCbra = null
+	fun n_cbra: TCbra do return _n_cbra
+	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
 end
 class ASignature
 	super ASignature
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_params: List[AParam] = new List[AParam]
-    readable var _n_cpar: nullable TCpar = null
-    readable var _n_type: nullable AType = null
+	var _n_opar: nullable TOpar = null
+	fun n_opar: nullable TOpar do return _n_opar
+	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_params: List[AParam] = new List[AParam]
+	var _n_cpar: nullable TCpar = null
+	fun n_cpar: nullable TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
+	var _n_type: nullable AType = null
+	fun n_type: nullable AType do return _n_type
+	fun n_type=(n_type: nullable AType) do _n_type = n_type
 end
 class AParam
 	super AParam
-    readable var _n_id: TId
-    readable var _n_type: nullable AType = null
-    readable var _n_dotdotdot: nullable TDotdotdot = null
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_type: nullable AType = null
+	fun n_type: nullable AType do return _n_type
+	fun n_type=(n_type: nullable AType) do _n_type = n_type
+	var _n_dotdotdot: nullable TDotdotdot = null
+	fun n_dotdotdot: nullable TDotdotdot do return _n_dotdotdot
+	fun n_dotdotdot=(n_dotdotdot: nullable TDotdotdot) do _n_dotdotdot = n_dotdotdot
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AType
 	super AType
-    readable var _n_kwnullable: nullable TKwnullable = null
-    readable var _n_id: TClassid
-    readable var _n_types: List[AType] = new List[AType]
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwnullable: nullable TKwnullable = null
+	fun n_kwnullable: nullable TKwnullable do return _n_kwnullable
+	fun n_kwnullable=(n_kwnullable: nullable TKwnullable) do _n_kwnullable = n_kwnullable
+	var _n_id: TClassid = null
+	fun n_id: TClassid do return _n_id
+	fun n_id=(n_id: TClassid) do _n_id = n_id
+	var n_types: List[AType] = new List[AType]
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ALabel
 	super ALabel
-    readable var _n_kwlabel: TKwlabel
-    readable var _n_id: TId
+	var _n_kwlabel: TKwlabel = null
+	fun n_kwlabel: TKwlabel do return _n_kwlabel
+	fun n_kwlabel=(n_kwlabel: TKwlabel) do _n_kwlabel = n_kwlabel
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
 end
 class ABlockExpr
 	super AExpr
-    readable var _n_expr: List[AExpr] = new List[AExpr]
-    readable var _n_kwend: nullable TKwend = null
+	var n_expr: List[AExpr] = new List[AExpr]
+	var _n_kwend: nullable TKwend = null
+	fun n_kwend: nullable TKwend do return _n_kwend
+	fun n_kwend=(n_kwend: nullable TKwend) do _n_kwend = n_kwend
 end
 class AVardeclExpr
 	super AExpr
-    readable var _n_kwvar: TKwvar
-    readable var _n_id: TId
-    readable var _n_type: nullable AType = null
-    readable var _n_assign: nullable TAssign = null
-    readable var _n_expr: nullable AExpr = null
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwvar: TKwvar = null
+	fun n_kwvar: TKwvar do return _n_kwvar
+	fun n_kwvar=(n_kwvar: TKwvar) do _n_kwvar = n_kwvar
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_type: nullable AType = null
+	fun n_type: nullable AType do return _n_type
+	fun n_type=(n_type: nullable AType) do _n_type = n_type
+	var _n_assign: nullable TAssign = null
+	fun n_assign: nullable TAssign do return _n_assign
+	fun n_assign=(n_assign: nullable TAssign) do _n_assign = n_assign
+	var _n_expr: nullable AExpr = null
+	fun n_expr: nullable AExpr do return _n_expr
+	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AReturnExpr
 	super AExpr
-    readable var _n_kwreturn: nullable TKwreturn = null
-    readable var _n_expr: nullable AExpr = null
+	var _n_kwreturn: nullable TKwreturn = null
+	fun n_kwreturn: nullable TKwreturn do return _n_kwreturn
+	fun n_kwreturn=(n_kwreturn: nullable TKwreturn) do _n_kwreturn = n_kwreturn
+	var _n_expr: nullable AExpr = null
+	fun n_expr: nullable AExpr do return _n_expr
+	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class ABreakExpr
 	super AExpr
-    readable var _n_kwbreak: TKwbreak
-    readable var _n_label: nullable ALabel = null
-    readable var _n_expr: nullable AExpr = null
+	var _n_kwbreak: TKwbreak = null
+	fun n_kwbreak: TKwbreak do return _n_kwbreak
+	fun n_kwbreak=(n_kwbreak: TKwbreak) do _n_kwbreak = n_kwbreak
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
+	var _n_expr: nullable AExpr = null
+	fun n_expr: nullable AExpr do return _n_expr
+	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class AAbortExpr
 	super AExpr
-    readable var _n_kwabort: TKwabort
+	var _n_kwabort: TKwabort = null
+	fun n_kwabort: TKwabort do return _n_kwabort
+	fun n_kwabort=(n_kwabort: TKwabort) do _n_kwabort = n_kwabort
 end
 class AContinueExpr
 	super AExpr
-    readable var _n_kwcontinue: nullable TKwcontinue = null
-    readable var _n_label: nullable ALabel = null
-    readable var _n_expr: nullable AExpr = null
+	var _n_kwcontinue: nullable TKwcontinue = null
+	fun n_kwcontinue: nullable TKwcontinue do return _n_kwcontinue
+	fun n_kwcontinue=(n_kwcontinue: nullable TKwcontinue) do _n_kwcontinue = n_kwcontinue
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
+	var _n_expr: nullable AExpr = null
+	fun n_expr: nullable AExpr do return _n_expr
+	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class ADoExpr
 	super AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+	var _n_kwdo: TKwdo = null
+	fun n_kwdo: TKwdo do return _n_kwdo
+	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
 end
 class AIfExpr
 	super AExpr
-    readable var _n_kwif: TKwif
-    readable var _n_expr: AExpr
-    readable var _n_then: nullable AExpr = null
-    readable var _n_else: nullable AExpr = null
+	var _n_kwif: TKwif = null
+	fun n_kwif: TKwif do return _n_kwif
+	fun n_kwif=(n_kwif: TKwif) do _n_kwif = n_kwif
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_then: nullable AExpr = null
+	fun n_then: nullable AExpr do return _n_then
+	fun n_then=(n_then: nullable AExpr) do _n_then = n_then
+	var _n_else: nullable AExpr = null
+	fun n_else: nullable AExpr do return _n_else
+	fun n_else=(n_else: nullable AExpr) do _n_else = n_else
 end
 class AIfexprExpr
 	super AExpr
-    readable var _n_kwif: TKwif
-    readable var _n_expr: AExpr
-    readable var _n_kwthen: TKwthen
-    readable var _n_then: AExpr
-    readable var _n_kwelse: TKwelse
-    readable var _n_else: AExpr
+	var _n_kwif: TKwif = null
+	fun n_kwif: TKwif do return _n_kwif
+	fun n_kwif=(n_kwif: TKwif) do _n_kwif = n_kwif
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwthen: TKwthen = null
+	fun n_kwthen: TKwthen do return _n_kwthen
+	fun n_kwthen=(n_kwthen: TKwthen) do _n_kwthen = n_kwthen
+	var _n_then: AExpr = null
+	fun n_then: AExpr do return _n_then
+	fun n_then=(n_then: AExpr) do _n_then = n_then
+	var _n_kwelse: TKwelse = null
+	fun n_kwelse: TKwelse do return _n_kwelse
+	fun n_kwelse=(n_kwelse: TKwelse) do _n_kwelse = n_kwelse
+	var _n_else: AExpr = null
+	fun n_else: AExpr do return _n_else
+	fun n_else=(n_else: AExpr) do _n_else = n_else
 end
 class AWhileExpr
 	super AExpr
-    readable var _n_kwwhile: TKwwhile
-    readable var _n_expr: AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+	var _n_kwwhile: TKwwhile = null
+	fun n_kwwhile: TKwwhile do return _n_kwwhile
+	fun n_kwwhile=(n_kwwhile: TKwwhile) do _n_kwwhile = n_kwwhile
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwdo: TKwdo = null
+	fun n_kwdo: TKwdo do return _n_kwdo
+	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
 end
 class ALoopExpr
 	super AExpr
-    readable var _n_kwloop: TKwloop
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+	var _n_kwloop: TKwloop = null
+	fun n_kwloop: TKwloop do return _n_kwloop
+	fun n_kwloop=(n_kwloop: TKwloop) do _n_kwloop = n_kwloop
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
 end
 class AForExpr
 	super AExpr
-    readable var _n_kwfor: TKwfor
-    readable var _n_ids: List[TId] = new List[TId]
-    readable var _n_expr: AExpr
-    readable var _n_kwdo: TKwdo
-    readable var _n_block: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
+	var _n_kwfor: TKwfor = null
+	fun n_kwfor: TKwfor do return _n_kwfor
+	fun n_kwfor=(n_kwfor: TKwfor) do _n_kwfor = n_kwfor
+	var n_ids: List[TId] = new List[TId]
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwdo: TKwdo = null
+	fun n_kwdo: TKwdo do return _n_kwdo
+	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
+	var _n_block: nullable AExpr = null
+	fun n_block: nullable AExpr do return _n_block
+	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
+	var _n_label: nullable ALabel = null
+	fun n_label: nullable ALabel do return _n_label
+	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
 end
 class AAssertExpr
 	super AExpr
-    readable var _n_kwassert: TKwassert
-    readable var _n_id: nullable TId = null
-    readable var _n_expr: AExpr
-    readable var _n_else: nullable AExpr = null
+	var _n_kwassert: TKwassert = null
+	fun n_kwassert: TKwassert do return _n_kwassert
+	fun n_kwassert=(n_kwassert: TKwassert) do _n_kwassert = n_kwassert
+	var _n_id: nullable TId = null
+	fun n_id: nullable TId do return _n_id
+	fun n_id=(n_id: nullable TId) do _n_id = n_id
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_else: nullable AExpr = null
+	fun n_else: nullable AExpr do return _n_else
+	fun n_else=(n_else: nullable AExpr) do _n_else = n_else
 end
 class AOnceExpr
 	super AExpr
-    readable var _n_kwonce: TKwonce
-    readable var _n_expr: AExpr
+	var _n_kwonce: TKwonce = null
+	fun n_kwonce: TKwonce do return _n_kwonce
+	fun n_kwonce=(n_kwonce: TKwonce) do _n_kwonce = n_kwonce
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
 end
 class ASendExpr
 	super AExpr
-    readable var _n_expr: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
 end
 class ABinopExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AOrExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AAndExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AOrElseExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AImpliesExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ANotExpr
 	super AExpr
-    readable var _n_kwnot: TKwnot
-    readable var _n_expr: AExpr
+	var _n_kwnot: TKwnot = null
+	fun n_kwnot: TKwnot do return _n_kwnot
+	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
 end
 class AEqExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ANeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ALtExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ALeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ALlExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AGtExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AGeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AGgExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AIsaExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_type: AType
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
 end
 class APlusExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AMinusExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AStarshipExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AStarExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class ASlashExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class APercentExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
 end
 class AUminusExpr
 	super AExpr
-    readable var _n_minus: TMinus
-    readable var _n_expr: AExpr
+	var _n_minus: TMinus = null
+	fun n_minus: TMinus do return _n_minus
+	fun n_minus=(n_minus: TMinus) do _n_minus = n_minus
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
 end
 class ANewExpr
 	super AExpr
-    readable var _n_kwnew: TKwnew
-    readable var _n_type: AType
-    readable var _n_id: nullable TId = null
-    readable var _n_args: AExprs
+	var _n_kwnew: TKwnew = null
+	fun n_kwnew: TKwnew do return _n_kwnew
+	fun n_kwnew=(n_kwnew: TKwnew) do _n_kwnew = n_kwnew
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_id: nullable TId = null
+	fun n_id: nullable TId do return _n_id
+	fun n_id=(n_id: nullable TId) do _n_id = n_id
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
 end
 class AAttrExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TAttrid = null
+	fun n_id: TAttrid do return _n_id
+	fun n_id=(n_id: TAttrid) do _n_id = n_id
 end
 class AAttrAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TAttrid = null
+	fun n_id: TAttrid do return _n_id
+	fun n_id=(n_id: TAttrid) do _n_id = n_id
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class AAttrReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TAttrid = null
+	fun n_id: TAttrid do return _n_id
+	fun n_id=(n_id: TAttrid) do _n_id = n_id
+	var _n_assign_op: AAssignOp = null
+	fun n_assign_op: AAssignOp do return _n_assign_op
+	fun n_assign_op=(n_assign_op: AAssignOp) do _n_assign_op = n_assign_op
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class ACallExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
 end
 class ACallAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class ACallReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
+	var _n_assign_op: AAssignOp = null
+	fun n_assign_op: AAssignOp do return _n_assign_op
+	fun n_assign_op=(n_assign_op: AAssignOp) do _n_assign_op = n_assign_op
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class ASuperExpr
 	super AExpr
-    readable var _n_qualified: nullable AQualified = null
-    readable var _n_kwsuper: TKwsuper
-    readable var _n_args: AExprs
+	var _n_qualified: nullable AQualified = null
+	fun n_qualified: nullable AQualified do return _n_qualified
+	fun n_qualified=(n_qualified: nullable AQualified) do _n_qualified = n_qualified
+	var _n_kwsuper: TKwsuper = null
+	fun n_kwsuper: TKwsuper do return _n_kwsuper
+	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
 end
 class AInitExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwinit: TKwinit
-    readable var _n_args: AExprs
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwinit: TKwinit = null
+	fun n_kwinit: TKwinit do return _n_kwinit
+	fun n_kwinit=(n_kwinit: TKwinit) do _n_kwinit = n_kwinit
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
 end
 class ABraExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
 end
 class ABraAssignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class ABraReassignExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_args: AExprs
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_args: AExprs = null
+	fun n_args: AExprs do return _n_args
+	fun n_args=(n_args: AExprs) do _n_args = n_args
+	var _n_assign_op: AAssignOp = null
+	fun n_assign_op: AAssignOp do return _n_assign_op
+	fun n_assign_op=(n_assign_op: AAssignOp) do _n_assign_op = n_assign_op
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class AVarExpr
 	super AExpr
-    readable var _n_id: TId
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
 end
 class AVarAssignExpr
 	super AExpr
-    readable var _n_id: TId
-    readable var _n_assign: TAssign
-    readable var _n_value: AExpr
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_assign: TAssign = null
+	fun n_assign: TAssign do return _n_assign
+	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class AVarReassignExpr
 	super AExpr
-    readable var _n_id: TId
-    readable var _n_assign_op: AAssignOp
-    readable var _n_value: AExpr
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_assign_op: AAssignOp = null
+	fun n_assign_op: AAssignOp do return _n_assign_op
+	fun n_assign_op=(n_assign_op: AAssignOp) do _n_assign_op = n_assign_op
+	var _n_value: AExpr = null
+	fun n_value: AExpr do return _n_value
+	fun n_value=(n_value: AExpr) do _n_value = n_value
 end
 class ARangeExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ACrangeExpr
 	super AExpr
-    readable var _n_obra: TObra
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_cbra: TCbra
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_obra: TObra = null
+	fun n_obra: TObra do return _n_obra
+	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
+	var _n_cbra: TCbra = null
+	fun n_cbra: TCbra do return _n_cbra
+	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AOrangeExpr
 	super AExpr
-    readable var _n_obra: TObra
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-    readable var _n_cbra: TObra
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_obra: TObra = null
+	fun n_obra: TObra do return _n_obra
+	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_expr2: AExpr = null
+	fun n_expr2: AExpr do return _n_expr2
+	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
+	var _n_cbra: TObra = null
+	fun n_cbra: TObra do return _n_cbra
+	fun n_cbra=(n_cbra: TObra) do _n_cbra = n_cbra
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AArrayExpr
 	super AExpr
-    readable var _n_exprs: AExprs
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_exprs: AExprs = null
+	fun n_exprs: AExprs do return _n_exprs
+	fun n_exprs=(n_exprs: AExprs) do _n_exprs = n_exprs
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ASelfExpr
 	super AExpr
-    readable var _n_kwself: TKwself
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwself: TKwself = null
+	fun n_kwself: TKwself do return _n_kwself
+	fun n_kwself=(n_kwself: TKwself) do _n_kwself = n_kwself
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AImplicitSelfExpr
 	super AExpr
 end
 class ATrueExpr
 	super AExpr
-    readable var _n_kwtrue: TKwtrue
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwtrue: TKwtrue = null
+	fun n_kwtrue: TKwtrue do return _n_kwtrue
+	fun n_kwtrue=(n_kwtrue: TKwtrue) do _n_kwtrue = n_kwtrue
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AFalseExpr
 	super AExpr
-    readable var _n_kwfalse: TKwfalse
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwfalse: TKwfalse = null
+	fun n_kwfalse: TKwfalse do return _n_kwfalse
+	fun n_kwfalse=(n_kwfalse: TKwfalse) do _n_kwfalse = n_kwfalse
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ANullExpr
 	super AExpr
-    readable var _n_kwnull: TKwnull
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_kwnull: TKwnull = null
+	fun n_kwnull: TKwnull do return _n_kwnull
+	fun n_kwnull=(n_kwnull: TKwnull) do _n_kwnull = n_kwnull
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ADecIntExpr
 	super AExpr
-    readable var _n_number: TNumber
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_number: TNumber = null
+	fun n_number: TNumber do return _n_number
+	fun n_number=(n_number: TNumber) do _n_number = n_number
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AHexIntExpr
 	super AExpr
-    readable var _n_hex_number: THexNumber
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_hex_number: THexNumber = null
+	fun n_hex_number: THexNumber do return _n_hex_number
+	fun n_hex_number=(n_hex_number: THexNumber) do _n_hex_number = n_hex_number
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AFloatExpr
 	super AExpr
-    readable var _n_float: TFloat
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_float: TFloat = null
+	fun n_float: TFloat do return _n_float
+	fun n_float=(n_float: TFloat) do _n_float = n_float
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ACharExpr
 	super AExpr
-    readable var _n_char: TChar
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_char: TChar = null
+	fun n_char: TChar do return _n_char
+	fun n_char=(n_char: TChar) do _n_char = n_char
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AStringExpr
 	super AExpr
-    readable var _n_string: TString
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_string: TString = null
+	fun n_string: TString do return _n_string
+	fun n_string=(n_string: TString) do _n_string = n_string
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AStartStringExpr
 	super AExpr
-    readable var _n_string: TStartString
+	var _n_string: TStartString = null
+	fun n_string: TStartString do return _n_string
+	fun n_string=(n_string: TStartString) do _n_string = n_string
 end
 class AMidStringExpr
 	super AExpr
-    readable var _n_string: TMidString
+	var _n_string: TMidString = null
+	fun n_string: TMidString do return _n_string
+	fun n_string=(n_string: TMidString) do _n_string = n_string
 end
 class AEndStringExpr
 	super AExpr
-    readable var _n_string: TEndString
+	var _n_string: TEndString = null
+	fun n_string: TEndString do return _n_string
+	fun n_string=(n_string: TEndString) do _n_string = n_string
 end
 class ASuperstringExpr
 	super AExpr
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_annotations: nullable AAnnotations = null
+	var n_exprs: List[AExpr] = new List[AExpr]
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AParExpr
 	super AExpr
-    readable var _n_opar: TOpar
-    readable var _n_expr: AExpr
-    readable var _n_cpar: TCpar
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_opar: TOpar = null
+	fun n_opar: TOpar do return _n_opar
+	fun n_opar=(n_opar: TOpar) do _n_opar = n_opar
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_cpar: TCpar = null
+	fun n_cpar: TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: TCpar) do _n_cpar = n_cpar
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class AAsCastExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwas: TKwas
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_type: AType
-    readable var _n_cpar: nullable TCpar = null
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwas: TKwas = null
+	fun n_kwas: TKwas do return _n_kwas
+	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
+	var _n_opar: nullable TOpar = null
+	fun n_opar: nullable TOpar do return _n_opar
+	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_cpar: nullable TCpar = null
+	fun n_cpar: nullable TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
 end
 class AAsNotnullExpr
 	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_kwas: TKwas
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_kwnot: TKwnot
-    readable var _n_kwnull: TKwnull
-    readable var _n_cpar: nullable TCpar = null
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_kwas: TKwas = null
+	fun n_kwas: TKwas do return _n_kwas
+	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
+	var _n_opar: nullable TOpar = null
+	fun n_opar: nullable TOpar do return _n_opar
+	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var _n_kwnot: TKwnot = null
+	fun n_kwnot: TKwnot do return _n_kwnot
+	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
+	var _n_kwnull: TKwnull = null
+	fun n_kwnull: TKwnull do return _n_kwnull
+	fun n_kwnull=(n_kwnull: TKwnull) do _n_kwnull = n_kwnull
+	var _n_cpar: nullable TCpar = null
+	fun n_cpar: nullable TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
 end
 class AIssetAttrExpr
 	super AExpr
-    readable var _n_kwisset: TKwisset
-    readable var _n_expr: AExpr
-    readable var _n_id: TAttrid
+	var _n_kwisset: TKwisset = null
+	fun n_kwisset: TKwisset do return _n_kwisset
+	fun n_kwisset=(n_kwisset: TKwisset) do _n_kwisset = n_kwisset
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_id: TAttrid = null
+	fun n_id: TAttrid do return _n_id
+	fun n_id=(n_id: TAttrid) do _n_id = n_id
 end
 class ADebugTypeExpr
 	super AExpr
-    readable var _n_kwdebug: TKwdebug
-    readable var _n_kwtype: TKwtype
-    readable var _n_expr: AExpr
-    readable var _n_type: AType
+	var _n_kwdebug: TKwdebug = null
+	fun n_kwdebug: TKwdebug do return _n_kwdebug
+	fun n_kwdebug=(n_kwdebug: TKwdebug) do _n_kwdebug = n_kwdebug
+	var _n_kwtype: TKwtype = null
+	fun n_kwtype: TKwtype do return _n_kwtype
+	fun n_kwtype=(n_kwtype: TKwtype) do _n_kwtype = n_kwtype
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
 end
 class AListExprs
 	super AExprs
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
+	var n_exprs: List[AExpr] = new List[AExpr]
 end
 class AParExprs
 	super AExprs
-    readable var _n_opar: TOpar
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_cpar: TCpar
+	var _n_opar: TOpar = null
+	fun n_opar: TOpar do return _n_opar
+	fun n_opar=(n_opar: TOpar) do _n_opar = n_opar
+	var n_exprs: List[AExpr] = new List[AExpr]
+	var _n_cpar: TCpar = null
+	fun n_cpar: TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: TCpar) do _n_cpar = n_cpar
 end
 class ABraExprs
 	super AExprs
-    readable var _n_obra: TObra
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
-    readable var _n_cbra: TCbra
+	var _n_obra: TObra = null
+	fun n_obra: TObra do return _n_obra
+	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
+	var n_exprs: List[AExpr] = new List[AExpr]
+	var _n_cbra: TCbra = null
+	fun n_cbra: TCbra do return _n_cbra
+	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
 end
 class APlusAssignOp
 	super AAssignOp
-    readable var _n_pluseq: TPluseq
+	var _n_pluseq: TPluseq = null
+	fun n_pluseq: TPluseq do return _n_pluseq
+	fun n_pluseq=(n_pluseq: TPluseq) do _n_pluseq = n_pluseq
 end
 class AMinusAssignOp
 	super AAssignOp
-    readable var _n_minuseq: TMinuseq
+	var _n_minuseq: TMinuseq = null
+	fun n_minuseq: TMinuseq do return _n_minuseq
+	fun n_minuseq=(n_minuseq: TMinuseq) do _n_minuseq = n_minuseq
 end
 class AModuleName
 	super AModuleName
-    readable var _n_quad: nullable TQuad = null
-    readable var _n_path: List[TId] = new List[TId]
-    readable var _n_id: TId
+	var _n_quad: nullable TQuad = null
+	fun n_quad: nullable TQuad do return _n_quad
+	fun n_quad=(n_quad: nullable TQuad) do _n_quad = n_quad
+	var n_path: List[TId] = new List[TId]
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
 end
 class AExternCalls
 	super AExternCalls
-    readable var _n_kwimport: TKwimport
-    readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+	var _n_kwimport: TKwimport = null
+	fun n_kwimport: TKwimport do return _n_kwimport
+	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
+	var n_extern_calls: List[AExternCall] = new List[AExternCall]
 end
 class AExternCall
 	super AExternCall
 end
 class ASuperExternCall
 	super AExternCall
-    readable var _n_kwsuper: TKwsuper
+	var _n_kwsuper: TKwsuper = null
+	fun n_kwsuper: TKwsuper do return _n_kwsuper
+	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
 end
 class ALocalPropExternCall
 	super AExternCall
-    readable var _n_methid: AMethid
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
 end
 class AFullPropExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_dot: nullable TDot = null
-    readable var _n_methid: AMethid
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_dot: nullable TDot = null
+	fun n_dot: nullable TDot do return _n_dot
+	fun n_dot=(n_dot: nullable TDot) do _n_dot = n_dot
+	var _n_methid: AMethid = null
+	fun n_methid: AMethid do return _n_methid
+	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
 end
 class AInitPropExternCall
 	super AExternCall
-    readable var _n_type: AType
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
 end
 class ACastAsExternCall
 	super AExternCall
-    readable var _n_from_type: AType
-    readable var _n_dot: nullable TDot = null
-    readable var _n_kwas: TKwas
-    readable var _n_to_type: AType
+	var _n_from_type: AType = null
+	fun n_from_type: AType do return _n_from_type
+	fun n_from_type=(n_from_type: AType) do _n_from_type = n_from_type
+	var _n_dot: nullable TDot = null
+	fun n_dot: nullable TDot do return _n_dot
+	fun n_dot=(n_dot: nullable TDot) do _n_dot = n_dot
+	var _n_kwas: TKwas = null
+	fun n_kwas: TKwas do return _n_kwas
+	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
+	var _n_to_type: AType = null
+	fun n_to_type: AType do return _n_to_type
+	fun n_to_type=(n_to_type: AType) do _n_to_type = n_to_type
 end
 class AAsNullableExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_kwas: TKwas
-    readable var _n_kwnullable: TKwnullable
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_kwas: TKwas = null
+	fun n_kwas: TKwas do return _n_kwas
+	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
+	var _n_kwnullable: TKwnullable = null
+	fun n_kwnullable: TKwnullable do return _n_kwnullable
+	fun n_kwnullable=(n_kwnullable: TKwnullable) do _n_kwnullable = n_kwnullable
 end
 class AAsNotNullableExternCall
 	super AExternCall
-    readable var _n_type: AType
-    readable var _n_kwas: TKwas
-    readable var _n_kwnot: TKwnot
-    readable var _n_kwnullable: TKwnullable
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
+	var _n_kwas: TKwas = null
+	fun n_kwas: TKwas do return _n_kwas
+	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
+	var _n_kwnot: TKwnot = null
+	fun n_kwnot: TKwnot do return _n_kwnot
+	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
+	var _n_kwnullable: TKwnullable = null
+	fun n_kwnullable: TKwnullable do return _n_kwnullable
+	fun n_kwnullable=(n_kwnullable: TKwnullable) do _n_kwnullable = n_kwnullable
 end
 class AInLanguage
 	super AInLanguage
-    readable var _n_kwin: TKwin
-    readable var _n_string: TString
+	var _n_kwin: TKwin = null
+	fun n_kwin: TKwin do return _n_kwin
+	fun n_kwin=(n_kwin: TKwin) do _n_kwin = n_kwin
+	var _n_string: TString = null
+	fun n_string: TString do return _n_string
+	fun n_string=(n_string: TString) do _n_string = n_string
 end
 class AExternCodeBlock
 	super AExternCodeBlock
-    readable var _n_in_language: nullable AInLanguage = null
-    readable var _n_extern_code_segment: TExternCodeSegment
+	var _n_in_language: nullable AInLanguage = null
+	fun n_in_language: nullable AInLanguage do return _n_in_language
+	fun n_in_language=(n_in_language: nullable AInLanguage) do _n_in_language = n_in_language
+	var _n_extern_code_segment: TExternCodeSegment = null
+	fun n_extern_code_segment: TExternCodeSegment do return _n_extern_code_segment
+	fun n_extern_code_segment=(n_extern_code_segment: TExternCodeSegment) do _n_extern_code_segment = n_extern_code_segment
 end
 class AQualified
 	super AQualified
-    readable var _n_id: List[TId] = new List[TId]
-    readable var _n_classid: nullable TClassid = null
+	var n_id: List[TId] = new List[TId]
+	var _n_classid: nullable TClassid = null
+	fun n_classid: nullable TClassid do return _n_classid
+	fun n_classid=(n_classid: nullable TClassid) do _n_classid = n_classid
 end
 class ADoc
 	super ADoc
-    readable var _n_comment: List[TComment] = new List[TComment]
+	var n_comment: List[TComment] = new List[TComment]
 end
 class AAnnotations
 	super AAnnotations
-    readable var _n_at: nullable TAt = null
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_items: List[AAnnotation] = new List[AAnnotation]
-    readable var _n_cpar: nullable TCpar = null
+	var _n_at: nullable TAt = null
+	fun n_at: nullable TAt do return _n_at
+	fun n_at=(n_at: nullable TAt) do _n_at = n_at
+	var _n_opar: nullable TOpar = null
+	fun n_opar: nullable TOpar do return _n_opar
+	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_items: List[AAnnotation] = new List[AAnnotation]
+	var _n_cpar: nullable TCpar = null
+	fun n_cpar: nullable TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
 end
 class AAnnotation
 	super AAnnotation
-    readable var _n_atid: AAtid
-    readable var _n_opar: nullable TOpar = null
-    readable var _n_args: List[AAtArg] = new List[AAtArg]
-    readable var _n_cpar: nullable TCpar = null
-    readable var _n_annotations: nullable AAnnotations = null
+	var _n_atid: AAtid = null
+	fun n_atid: AAtid do return _n_atid
+	fun n_atid=(n_atid: AAtid) do _n_atid = n_atid
+	var _n_opar: nullable TOpar = null
+	fun n_opar: nullable TOpar do return _n_opar
+	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_args: List[AAtArg] = new List[AAtArg]
+	var _n_cpar: nullable TCpar = null
+	fun n_cpar: nullable TCpar do return _n_cpar
+	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 end
 class ATypeAtArg
 	super AAtArg
-    readable var _n_type: AType
+	var _n_type: AType = null
+	fun n_type: AType do return _n_type
+	fun n_type=(n_type: AType) do _n_type = n_type
 end
 class AExprAtArg
 	super AAtArg
-    readable var _n_expr: AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
 end
 class AAtAtArg
 	super AAtArg
-    readable var _n_annotations: AAnnotations
+	var _n_annotations: AAnnotations = null
+	fun n_annotations: AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: AAnnotations) do _n_annotations = n_annotations
 end
 class AIdAtid
 	super AAtid
-    readable var _n_id: TId
+	var _n_id: TId = null
+	fun n_id: TId do return _n_id
+	fun n_id=(n_id: TId) do _n_id = n_id
 end
 class AKwexternAtid
 	super AAtid
-    readable var _n_id: TKwextern
+	var _n_id: TKwextern = null
+	fun n_id: TKwextern do return _n_id
+	fun n_id=(n_id: TKwextern) do _n_id = n_id
 end
 class AKwinternAtid
 	super AAtid
-    readable var _n_id: TKwintern
+	var _n_id: TKwintern = null
+	fun n_id: TKwintern do return _n_id
+	fun n_id=(n_id: TKwintern) do _n_id = n_id
 end
 class AKwreadableAtid
 	super AAtid
-    readable var _n_id: TKwreadable
+	var _n_id: TKwreadable = null
+	fun n_id: TKwreadable do return _n_id
+	fun n_id=(n_id: TKwreadable) do _n_id = n_id
 end
 class AKwwritableAtid
 	super AAtid
-    readable var _n_id: TKwwritable
+	var _n_id: TKwwritable = null
+	fun n_id: TKwwritable do return _n_id
+	fun n_id=(n_id: TKwwritable) do _n_id = n_id
 end
 class AKwimportAtid
 	super AAtid
-    readable var _n_id: TKwimport
+	var _n_id: TKwimport = null
+	fun n_id: TKwimport do return _n_id
+	fun n_id=(n_id: TKwimport) do _n_id = n_id
 end
 
 class Start
 	super Prod
-    readable var _n_base: nullable AModule
-    readable var _n_eof: EOF
-    init(
-        n_base: nullable AModule,
-        n_eof: EOF)
-    do
-        _n_base = n_base
-        _n_eof = n_eof
-    end
-
+	var _n_base: nullable AModule
+	fun n_base: nullable AModule do return _n_base
+	fun n_base=(n_base: nullable  do _n_base = n_base
+	var _n_eof: EOF
+	fun n_eof: EOF do return _n_eof
+	fun n_eof=(n_eof: EOF) do _n_eof = n_eof
+	init(
+		n_base: nullable AModule,
+		n_eof: EOF)
+	do
+		_n_base = n_base
+		_n_eof = n_eof
+	end
 end
