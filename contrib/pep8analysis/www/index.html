@@ -41,6 +41,9 @@
 			// Get code
 			var input = editor.getValue()
 
+			// Update GA stats
+			ga('trackEvent', 'Action', 'Analyze')
+
 			// Invoke the full Nit program
 			Module = Pep8Module
 			ret = Module['callMain']([input])
@@ -49,12 +52,18 @@
 			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
 			$("#consolePanel").show()
 			var analysis = $("#consolePanel").text();
-			if (analysis.indexOf("Error") >= 0)
+			if (analysis.indexOf("Error") >= 0) {
 				$("#consolePanel").addClass("panel-danger")
-			else if (analysis.indexOf("Warning") >= 0)
+				ga('trackEvent', 'Result', 'Error')
+			}
+			else if (analysis.indexOf("Warning") >= 0) {
 				$("#consolePanel").addClass("panel-warning")
-			else
+				ga('trackEvent', 'Result', 'Warning')
+			}
+			else {
 				$("#consolePanel").addClass("panel-success")
+				ga('trackEvent', 'Result', 'Success')
+			}
 		}
 
 		function load(file) {
