@@ -256,9 +256,9 @@ redef class AArithmeticInstruction
 
 			if r != null then
 				# this prevents infinite loops
-				# we assume that the max for a student program in 999
-				if r.max > 999 then r.max = 999
-				if r.min < -999 then r.min = -999
+				# we assume that the max for a student program in 50
+				if r.max > 50 then r.max = 50
+				if r.min < -50 then r.min = -50
 
 				outs[reg] = r
 			else

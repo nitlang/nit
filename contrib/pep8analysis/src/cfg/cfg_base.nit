@@ -308,7 +308,7 @@ class CFG
 	fun link_ret_to_calls(b: BasicBlock, to_link_ori: List[BasicBlock], seq: List[BasicBlock], depth: Int): Bool
 	do
 		watchdog += 1
-		if watchdog == 100000 then
+		if watchdog == 10000 then
 			print "Error: Umanagable cycle detected"
 			return false
 		end
