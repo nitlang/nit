@@ -22,6 +22,8 @@ end
 import simple
 import mnit_android
 import android::shared_preferences
+import android::assets_and_resources
+import android::audio
 
 in "Java" `{
 	import android.content.Context;
@@ -29,14 +31,47 @@ in "Java" `{
 `}
 
 redef class App
+	var soundsp: Sound
+	var soundmp: Sound
+
+	redef fun init_window
+	do
+		super
+		manage_audio_mode
+		# retrieve sound
+		soundsp = load_sound("sound.ogg")
+		soundmp = load_music("xylofon.ogg")
+		default_mediaplayer.looping = true
+		default_mediaplayer.prepare
+		soundmp.play
+	end
+
 	redef fun input( ie )
 	do
 		if ie isa PointerEvent and ie.depressed then
 			do_java_stuff
-			test_shared_preferences
-		end	
+			#test_shared_preferences
+			soundsp.play
+			test_assets
+			test_resources
+		end
 		return super
 	end
+
+	#testing the assets manager
+	fun test_assets
+	do
+		assert asset_manager.bitmap("fighter.png") != null
+	end
+
+	#testing the resources manager
+	fun test_resources do
+		assert resource_manager.string("string_test") == "string test"
+		assert resource_manager.boolean("test_bool") == true
+		assert resource_manager.dimension("test_dimen_1") != null
+		assert resource_manager.dimension("test_dimen_2") != null
+	end
+
 
 	fun test_shared_preferences
 	do
@@ -57,7 +92,7 @@ redef class App
 		sp["a_point"] = my_point
 		var my_deserialized_point = sp.deserialize("a_point")
 		assert my_point.to_s == my_deserialized_point.to_s
-		
+
 		assert sp.bool("a_boolean", false) == true
 		assert sp.bool("wrong_boolean", false) == false
 		assert sp.float("a_float", 0.0) != 0.0
