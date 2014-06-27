@@ -712,7 +712,9 @@ class PnaclApp
 
 	# Checks if there is a dictionary in the queue, and if so the dictionary is handled automatically.
 	fun check_dictionary `{
-		NitHandleDictionary();
+		while(1) {
+			NitHandleDictionary();
+		}
 	`}
 
 	# Infinite loop on check_dictionary
