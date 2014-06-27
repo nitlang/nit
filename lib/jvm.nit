@@ -381,6 +381,8 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 
 	# Pops the current local reference frame on the JNI stack
+	#
+	# Similiar to `JavaObject::pop_from_local_frame` which returns a value.
 	fun pop_local_frame `{
 		(*recv)->PopLocalFrame(recv, NULL);
 	`}
