@@ -46,3 +46,12 @@ License: libpng license (see share/png/LICENSE)
 Files: contrib/pep8analysis/www/viz.js
 Copyright: Copyright (c) 2012 Michael Daines
 Licence: see contrib/pep8analysis/COPYING-viz-js
+
+Files: contrib/online_ide/www/css/jquery.terminal.css
+       contrib/online_ide/www/js/jquery.terminal-0.8.7.js
+Copyright: Copyright (c) 2011-2014 Jakub Jankiewicz <http://jcubic.pl>
+Licence: GNU LGPL Version 3 license
+
+Files: contrib/online_ide/www/js/FileSaver.js
+Copyright: Eli Grey, http://eligrey.com
+Licence: X11/MIT (see https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md)
