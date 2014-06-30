@@ -376,8 +376,14 @@ class TplSectionElt
 	# if null use `title` instead
 	var summary_title: nullable String writable
 
-	# Parent section of this section if any
-	var parent: nullable TplSection
+	# CSS classes to apply on the section element
+	var css_classes = new Array[String]
+
+	# CSS classes to apply on the title heading element
+	var title_classes = new Array[String]
+
+	# Parent article/section if any
+	var parent: nullable TplSectionElt
 
 	init(id: String) do self.id = id
 
@@ -392,17 +398,6 @@ class TplSectionElt
 		return parent.hlvl + 1
 	end
 
-	# Render this section in the summary
-	protected fun render_summary(parent: TplSummaryElt) is abstract
-
-	# Is the section empty (no content at all)
-	fun is_empty: Bool is abstract
-end
-
-# A HTML <section> element
-class TplSection
-	super TplSectionElt
-
 	# Elements contained by this section
 	var children = new Array[TplSectionElt]
 
@@ -412,9 +407,11 @@ class TplSection
 		children.add child
 	end
 
-	redef fun is_empty: Bool do return children.is_empty
+	# Is the section empty (no content at all)
+	fun is_empty: Bool do return children.is_empty
 
-	redef fun render_summary(parent) do
+	# Render this section in the summary
+	fun render_summary(parent: TplSummaryElt) do
 		if is_empty then return
 		var title = summary_title
 		if title == null and self.title != null then title = self.title.write_to_string
@@ -426,6 +423,11 @@ class TplSection
 		end
 		parent.add_child entry
 	end
+end
+
+# A HTML <section> element
+class TplSection
+	super TplSectionElt
 
 	redef fun rendering do
 		add "<section id='{id}'>"
@@ -488,6 +490,12 @@ class TplArticle
 		end
 		if content != null then
 			add content.as(not null)
+		end
+		if source_link != null then
+			add source_link.as(not null)
+		end
+		for child in children do
+			add child
 		end
 		add """</article>"""
 	end
@@ -678,6 +686,8 @@ class TplList
 	init do end
 
 	init with_classes(classes: Array[String]) do self.css_classes = classes
+
+	fun is_empty: Bool do return elts.is_empty
 
 	redef fun rendering do
 		if elts.is_empty then return

@@ -19,6 +19,7 @@ import model_utils
 import modelize_property
 import markdown
 import doc_templates
+import ordered_tree
 
 redef class MDoc
 	# Comment synopsys HTML escaped
@@ -144,7 +145,6 @@ redef class MConcern
 end
 
 redef class MProject
-
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_id do return nitdoc_name
 	redef fun nitdoc_url do return "project_{name}.html"
@@ -690,3 +690,39 @@ redef class MParameter
 	end
 end
 
+redef class ConcernsTree
+
+	private var seen = new HashSet[MConcern]
+
+	redef fun add(p, e) do
+		if seen.has(e) then return
+		seen.add e
+		super(p, e)
+	end
+
+	fun to_tpl: TplList do
+		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
+		for r in roots do
+			var li = r.tpl_concern_item
+			lst.add_li li
+			build_list(r, li)
+		end
+		return lst
+	end
+
+	private fun build_list(e: MConcern, li: TplListItem) do
+		if not sub.has_key(e) then return
+		var subs = sub[e]
+		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
+		for e2 in subs do
+			if e2 isa MGroup and e2.is_root then
+				build_list(e2, li)
+			else
+				var sli = e2.tpl_concern_item
+				lst.add_li sli
+				build_list(e2, sli)
+			end
+		end
+		li.append lst
+	end
+end
