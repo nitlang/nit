@@ -30,7 +30,12 @@ function moduleDidLoad() {
 // (in C) or pp::Instance.PostMessage() (in C++).  This implementation
 // displays the result in the JS console, puts the result in the '#rez' input and make it visible.
 function handleMessage(message_event) {
-	console.log(message_event.data.value.valueOf());
-	$('#rez').val(message_event.data.value.valueOf().toFixed(2));
-	$('#rez').css('visibility', 'visible');
+	if (message_event.data.hasOwnProperty('exit')){
+		console.log('Nit code exited with value: ' + message_event.data.exit + '.');
+	}
+	else {
+		console.log(message_event.data.value.valueOf());
+		$('#rez').val(message_event.data.value.valueOf().toFixed(2));
+		$('#rez').css('visibility', 'visible');
+	}
 }

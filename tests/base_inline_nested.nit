@@ -18,7 +18,7 @@ import kernel
 
 interface Inline__
 	fun foo do bar.output
-	fun bar: Int = 2
+	fun bar: Int do return 2
 	fun baz is abstract
 end
 

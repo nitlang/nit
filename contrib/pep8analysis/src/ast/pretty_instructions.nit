@@ -12,7 +12,7 @@ redef class AnalysisManager
 		opts.add_option(opt_ast)
 	end
 
-	redef fun build_ast(filename)
+	redef fun build_ast(filename, stream)
 	do
 		var ast = super
 

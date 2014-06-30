@@ -22,6 +22,7 @@ end
 import simple
 import mnit_android
 import android::bundle
+import android::shared_preferences
 
 in "Java" `{
 	import android.content.Context;
@@ -34,6 +35,7 @@ redef class App
 		if ie isa PointerEvent and ie.depressed then 
 			do_java_stuff
 			test_bundle
+			test_shared_preferences
 		end
 
 		return super
@@ -118,6 +120,47 @@ redef class App
 		assert bundle.is_empty
 	end
 
+	fun test_shared_preferences
+	do
+		# Private mode tests
+		var sp = new SharedPreferences.privately(self, "test")
+		sp.add_bool("a_boolean",  true)
+		sp.add_float("a_float", 66.6)
+		sp.add_int("an_int", 666)
+		sp.add_int("a_second_int", 666777)
+		sp.add_long("a_long", 6666666666)
+		sp.add_string("a_string", "A string")
+		sp["another_int"] = 85
+		sp["yet_another_string"] = "Another string"
+		sp.remove("a_second_int")
+
+		# Serialized object test
+		var my_point = new Point(10, 10)
+		sp["a_point"] = my_point
+		var my_deserialized_point = sp.deserialize("a_point")
+		assert my_point.to_s == my_deserialized_point.to_s
+		
+		assert sp.bool("a_boolean", false) == true
+		assert sp.bool("wrong_boolean", false) == false
+		assert sp.float("a_float", 0.0) != 0.0
+		assert sp.float("wrong_float", 0.0) == 0.0
+		assert sp.int("an_int", 0) == 666
+		assert sp.int("a_second_int", 0) == 0
+		assert sp.long("a_long", 0) == 6666666666
+		assert sp.long("wrong_long", 0) == 0
+		assert sp.string("a_string", "ERROR!") == "A string"
+		assert sp.string("wrong_string", "ERROR!") == "ERROR!"
+		assert sp.long("another_int", 0) == 85
+		assert sp.string("yet_another_string", "ERROR!") == "Another string"
+		assert sp.has("an_int") == true
+		assert sp.has("a_second_int") == false
+
+		sp.clear
+		assert sp.all == null
+
+		sp.destroy
+	end
+
 	fun do_java_stuff import native_activity in "Java" `{
 		// + Log (no context needed)
 		android.util.Log.d("mnit_simple", "Java within NIT!!!");
@@ -152,7 +195,7 @@ class Point
 	var x: Int
 	var y: Int
 
-	init(x, y: Int) 
+	init(x, y: Int)
 	do
 		self.x = x
 		self.y = y

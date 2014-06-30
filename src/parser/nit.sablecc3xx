@@ -265,7 +265,8 @@ propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth methid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, annotation_noend.annotations, stmtso.expr)}
 	| {nobody} [doc]:no redef visibility kwmeth methid signature annotation_withend_nonull {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, annotation_withend_nonull.annotations)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null)}
-!toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
+	| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
+!toplevel| {intern_new} [doc]:no redef visibility kwnew methid? signature kwis kwintern {-> New propdef.intern_new(doc.doc, redef.kwredef, visibility, kwnew, methid, signature)}
 	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
 	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature extern_calls extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, extern_calls, extern_code_block)}
 !toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing_o {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, Null)}
@@ -366,7 +367,7 @@ extern_call_cast {-> extern_call}
 
 string_o {->string?} = string? {-> string};
 
-in_language = kwin string;
+in_language = kwin no string [n1]:no {-> New in_language(kwin, string)};
 extern_code_block = in_language? extern_code_segment;
 extern_code_block_o {-> extern_code_block?}
 	= extern_code_block {-> extern_code_block}
@@ -769,6 +770,7 @@ propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwva
 	| {meth} doc? kwredef? visibility methid signature
 	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature annotations?
 	| {intern_meth} doc? kwredef? visibility kwmeth methid signature
+	| {intern_new} doc? kwredef? visibility kwnew methid? signature
 	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls? extern_code_block?
 	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature annotations? [block]:expr?
 	| {concrete_init} doc? kwredef? visibility kwinit methid? signature annotations? [block]:expr?

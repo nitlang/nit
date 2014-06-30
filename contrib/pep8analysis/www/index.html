@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pep/8 Analysis</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/z80/z80.js"></script>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-574578-5', 'xymus.net');
+	  ga('send', 'pageview');
+	</script>
+
+	<script>
+		// Redirect print to HTML
+		var Module = {
+			'print': function(text) {
+				$("#console").append(text + "<br>")
+			},
+			'noInitialRun': true,
+		}
+
+		// Both Viz and Pep8 use emscripten
+		// We put aside the module of each program and bring it back before each use
+		var VizModule = null
+		$(document).ready(function() {
+			// Report full loading
+			$("#loading").hide()
+			$("#analyze").prop('disabled', false)
+
+		});
+
+		function exec() {
+			// Clean output console
+			$("#console").text("")
+
+			// Get code
+			var input = editor.getValue()
+
+			// Invoke the full Nit program
+			Module = Pep8Module
+      		ret = Module['callMain']([input])
+
+			// Shot and set color of output console
+			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
+			$("#consolePanel").show()
+			var analysis = $("#consolePanel").text();
+			if (analysis.indexOf("Error") >= 0)
+				$("#consolePanel").addClass("panel-danger")
+			else if (analysis.indexOf("Warning") >= 0)
+				$("#consolePanel").addClass("panel-warning")
+			else
+				$("#consolePanel").addClass("panel-success")
+		}
+
+		function load(file) {
+			// Load a sample program
+			$.get('samples/' + file, function(data){
+				editor.setValue(data)
+			})
+		}
+
+		function show_graph(source) {
+			Module = VizModule
+			var res = Viz(source, "svg", "dot")
+			VizModule = Module
+			$("#graph").html(res)
+		}
+	</script>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Pep/8 Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a>Web interface</a></li>
+        <li><a href="https://github.com/privat/nit/tree/master/contrib/pep8analysis/">Tool source and manual</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://nitlanguage.org/">nitlanguage.org</a></li>
+        <li><a href="https://code.google.com/p/pep8-1/">Pep/8 project</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+	<div class="alert alert-warning" id="loading">Loading the tool... This may take some time.</div>
+
+	<div class="row">
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel panel-default" id="panelIntro">
+			<div class="panel-heading">Description and Usage
+				<button type="button" class="close" onClick="$('#panelIntro').hide()" aria-hidden="true">&times;</button>
+			</div>
+			<div class="panel-body" id="code-panel">
+				<p>This tools finds strange behavior in Pep/8 programs by exploring all detectable execution paths.</p>
+				<p>Upon analyzing a program, this tool reports dead code blocks and data within the execution path. It also detects wrongful use of data such as accessing uninitialized memory, printing a word and reading code.</p>
+				<p><strong>To use:</strong> copy-paste your code in the source code block and launch the analysis using the <em>Analyze</em> button.</p>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Pep/8 Source Code</div>
+			<div class="panel-body" id="code-panel">
+				<textarea id="listing"></textarea>
+				<script>
+					var editor = CodeMirror.fromTextArea(listing, {
+						lineNumbers: true,
+						mode: "z80"
+					});
+					editor.setSize("100%", 500);
+				</script>
+
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default" id="analyze" onclick="exec();" disabled>Analyze program</button>
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					 <span class="glyphicon glyphicon-folder-open"></span>
+					Load sample program
+					<span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a onclick="load('02-fibo.pep')">fibo.pep - clean program </a></li>
+					<li><a onclick="load('06-calc-non-pur.pep');">calc-non-pur.pep - self rewriting program </a></li>
+					<li><a onclick="load('types.pep');"/>types.pep - strange data manipulation </a></li>
+					<li><a onclick="load('directive-in-code.pep');">directive-in-code.pep - mixed directives and instructions</a></li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	  </div>
+
+	  <div class="clearfix visible-xs"></div>
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel" id="consolePanel" style="display: none;">
+			<div class="panel-heading">Analysis Result</div>
+			<div class="panel-body">
+				<samp id="console"></samp>
+				<button type="button" class="btn btn-default" onclick="$('#panelGraph').show();$('#panelGraphExp').show();">
+					Show control flow graph</button>
+				<em class="pull-right" id="panelGraphExp" style="display: none;">The graph is at the bottom of the page...</em>
+			</div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-12 col-lg-6">
+		<div class="panel panel-default" id="panelRef">
+			<div class="panel-heading">Output Documentation
+				<button type="button" class="close" onClick="$('#panelRef').hide()" aria-hidden="true">&times;</button>
+			</div>
+			<div class="panel-body" id="code-panel">
+				<h4>Line and memory references</h4>
+				<p>Shorthand are used in the error messages, some refer directly to the line numbers others to the address in the memory of the running program.</p>
+				<table class="table table-striped">
+				<tr>
+					<th>Shorthand</th>
+					<th>Description</th>
+				</tr><tr>
+					<td>web:5</td>
+					<td>Source line 5</td>
+				</tr><tr>
+					<td>L8</td>
+					<td>Source line 8</td>
+				</tr><tr>
+					<td>rA, rX</td>
+					<td>Registers A, X</td>
+				</tr><tr>
+					<td>m24</td>
+					<td>Memory at address 24 (bytes)</td>
+				</tr><tr>
+					<td>instr@m24</td>
+					<td>Intruction at address 24 (bytes). Usually, this would be the (24/4+1=) 7th instruction, if there is no data blocks. And the 7th line if there is no data blocks or comments.</td>
+				</tr>
+				</table>
+
+				<h4>Common errors and warnings</h4>
+
+				<p>Note that the tool reports <em>possible</em> errors and strange behaviors. For an advanced or expert user, it may raise errors on correct code.</p>
+
+				<table class="table table-striped">
+				<tr>
+					<th>Error</th>
+					<th>Meaning</th>
+				</tr><tr>
+					<td>... the CFG may be wrong</td>
+					<td>The program structure is too complex to analyze. This happens when jumping to dynamic addresses and when using switch statements.</td>
+				</tr><tr>
+					<td>unreachable instructions</td>
+					<td>There's dead code.</td>
+				</tr><tr>
+					<td>data in program flow</td>
+					<td>The program may execute raw data. There's probably a <code>BR</code> missing.</td>
+				</tr><tr>
+					<td>overwriting code at...</td>
+					<td>An instruction writes over an existing instruction (probably your code).</td>
+				</tr><tr>
+					<td>expected "type" in "address", got "something"</td>
+					<td>An instruction uses data with an unexepected type. It may be a <code>CHARO</code> using something other than a char. Or a copy of uninitialized data over an initialized word.<br>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+	  <div class="col-sm-12 col-lg-12">
+		<div class="panel panel-default" id="panelGraph" style="display: none;">
+			<div class="panel-heading">Control Flow Graph (CFG)
+				<button type="button" class="close" onClick="$('#panelGraph').hide()" aria-hidden="true">&times;</button>
+			</div>
+			<div class="panel-body">
+				<div id="graph"></div>
+			</div>
+		</div>
+	  </div>
+	
+	<script>
+		var Module = {
+			'print': function(text) {
+				$("#console").append(text + "<br>")
+			},
+			'noInitialRun': true,
+		}
+	</script>
+	<script src="pep8analysis.js"></script>
+	<script>Pep8Module = Module</script>
+	<script src="viz.js"></script>
+</div>
+
+</body>
+</html>

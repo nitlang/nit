@@ -124,8 +124,8 @@ class GlobalCompiler
 	# Compile class names (for the class_name and output_class_name methods)
 	protected fun compile_class_names do
 		var v = new_visitor
-		self.header.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
+		self.header.add_decl("extern const char *class_names[];")
+		v.add("const char *class_names[] = \{")
 		for t in self.runtime_type_analysis.live_types do
 			v.add("\"{t}\", /* {self.classid(t)} */")
 		end
@@ -351,6 +351,12 @@ class GlobalCompilerVisitor
 			self.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
 			return
 		end
+	end
+
+	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	do
+		var ret_type = self.get_class("NativeArray").get_mtype([elttype])
+		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
 
 	redef fun calloc_array(ret_type, arguments)

@@ -21,10 +21,10 @@ import poset
 
 # A Nit project, thas encompass a product
 class MProject
-	super MEntity
+	super MConcern
 
 	# The name of the project
-	var name: String
+	redef var name: String
 
 	# The model of the project
 	var model: Model
@@ -44,15 +44,18 @@ class MProject
 		model.mprojects.add(self)
 		model.mproject_by_name.add_one(name, self)
 	end
+
+	# MProject are always roots of the concerns hierarchy
+	redef fun parent_concern do return null
 end
 
 # A group of modules in a project
 class MGroup
-	super MEntity
+	super MConcern
 
 	# The name of the group
 	# empty name for a default group in a single-module project
-	var name: String
+	redef var name: String
 
 	# The englobing project
 	var mproject: MProject
@@ -74,6 +77,9 @@ class MGroup
 	# nesting group (see `parent`) is bigger
 	var in_nesting: POSetElement[MGroup]
 
+	# Is `self` the root of its project?
+	fun is_root: Bool do return mproject.root == self
+
 	# The filepath (usualy a directory) of the group, if any
 	var filepath: nullable String writable
 
@@ -87,6 +93,11 @@ class MGroup
 		if parent != null then
 			tree.add_edge(self, parent)
 		end
+	end
+
+	redef fun parent_concern do
+		if not is_root then return parent
+		return mproject
 	end
 
 	redef fun to_s do return name

@@ -1,5 +1,5 @@
 ;    Trouve et imprime le premier terme de la suite de Fibonacci
-;    supérieur à 500.
+;    supÃ©rieur Ã  500.
 ;       Ph. Gabrini    septembre 2005
 ;
 		STA dernier,d

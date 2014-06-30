@@ -28,10 +28,11 @@ abstract class Noter
 		failed = true
 	end
 
-	fun reset
-	do
-		failed = false
-	end
+	# Reset failure status
+	fun reset do failed = false
+
+	# Clear list of notes
+	fun clear do notes = new Array[Note]
 end
 
 abstract class Note

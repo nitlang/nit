@@ -27,12 +27,16 @@ class @ename
 	super ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable var _n_@name: List[@etype] = new List[@etype]
+	var n_@name: List[@etype] = new List[@etype]
 $   else
 $   if @modifier
-    readable var _n_@name: nullable @etype = null
+	var _n_@name: nullable @etype = null
+	fun n_@name: nullable @etype do return _n_@name
+	fun n_@name=(n_@name: nullable @etype) do _n_@name = n_@name
 $   else
-    readable var _n_@name: @etype
+	var _n_@name: @etype = null
+	fun n_@name: @etype do return _n_@name
+	fun n_@name=(n_@name: @etype) do _n_@name = n_@name
 $   end
 $   end
 $ end
@@ -41,16 +45,19 @@ $ end
 
 class Start
 	super Prod
-    readable var _n_base: nullable $baseprod
-    readable var _n_eof: EOF
-    init(
-        n_base: nullable $baseprod,
-        n_eof: EOF)
-    do
-        _n_base = n_base
-        _n_eof = n_eof
-    end
-
+	var _n_base: nullable $baseprod
+	fun n_base: nullable $baseprod do return _n_base
+	fun n_base=(n_base: nullable $baseprod_ do _n_base = n_base
+	var _n_eof: EOF
+	fun n_eof: EOF do return _n_eof
+	fun n_eof=(n_eof: EOF) do _n_eof = n_eof
+	init(
+		n_base: nullable $baseprod,
+		n_eof: EOF)
+	do
+		_n_base = n_base
+		_n_eof = n_eof
+	end
 end
 $ end template
 
@@ -74,7 +81,7 @@ $ end
 	do
 $ foreach {elem}
 $   if @is_list
-		_n_@{name}.unsafe_add_all(n_@{name})
+		self.n_@{name}.unsafe_add_all(n_@{name})
 $   else
 $   if {@modifier}
 		_n_@name = n_@{name}
@@ -91,7 +98,7 @@ $ end
 	do
 $ foreach {elem}
 $   if @is_list
-		if _n_@{name}.replace_child(old_child, new_child) then return
+		if n_@{name}.replace_child(old_child, new_child) then return
 $   else
 		if _n_@{name} == old_child then
 $   if @modifier
@@ -125,7 +132,7 @@ $   end foreach
 	do
 $   foreach {elem}
 $     if @is_list
-		_n_@{name}.visit_all(v)
+		n_@{name}.visit_all(v)
 $     else
 		v.enter_visit(_n_@{name})
 $     end

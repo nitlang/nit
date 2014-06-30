@@ -1,6 +1,2 @@
 init_inherit
 init_linext
-inline
-test_json
-converter
-pnacl

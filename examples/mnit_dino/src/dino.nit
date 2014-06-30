@@ -21,7 +21,6 @@ module dino is
 end
 
 import mnit
-import realtime
 
 import graphism
 import fancy_dino
@@ -31,8 +30,6 @@ redef class App
 	var cavemen_at_first_level = 6
 	var cavemen_incr = 4
 
-	var target_dt = 12000000
-
 	var game : nullable Game = null
 	var score = new Container[Int](0)
 	var imgs : nullable ImageSet = null
@@ -41,6 +38,8 @@ redef class App
 	redef fun window_created
 	do
 		super
+
+		maximum_fps = 80
 
 		var display = display
 		assert display != null
@@ -59,16 +58,8 @@ redef class App
 	do
 		var game = game
 		if game != null then
-			var clock = new Clock
-
 			var turn = game.do_turn
 			game.draw( display, imgs.as(not null), turn )
-
-			var dt = clock.lapse
-			if dt.sec == 0 and dt.nanosec < target_dt then
-				var sleep_t = target_dt - dt.nanosec
-				sys.nanosleep(0, sleep_t)
-			end
 		else
 			splash.draw( display, true )
 		end

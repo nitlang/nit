@@ -16,14 +16,11 @@
 
 module ballz_android
 
-import realtime
 import game_logic
 
 redef class App
 
 	var screen: nullable Screen
-
-	var target_dt = 20000000
 
 	redef fun run
 	do
@@ -34,6 +31,7 @@ redef class App
 		gyroscope.enabled = true
 		light.enabled = true
 		proximity.enabled = true
+		maximum_fps = 50
 
 		super
 	end
@@ -48,16 +46,8 @@ redef class App
 	do
 		var screen = self.screen
 		if screen != null then
-			var clock = new Clock
-
 			screen.game.do_turn
 			screen.do_frame(display)
-			
-			var dt = clock.lapse
-			if dt.sec == 0 and dt.nanosec < target_dt then
-				var sleep_t = target_dt - dt.nanosec
-				sys.nanosleep(0, sleep_t)
-			end
 		end
 	end
 
