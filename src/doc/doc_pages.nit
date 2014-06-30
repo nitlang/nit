@@ -296,7 +296,7 @@ abstract class NitdocPage
 
 	# Clickable graphviz image using dot format
 	# return null if no graph for this page
-	fun tpl_graph(dot: FlatBuffer, name: String, title: String): nullable TplArticle do
+	fun tpl_graph(dot: FlatBuffer, name: String, title: nullable String): nullable TplArticle do
 		if ctx.opt_nodot.value then return null
 		var output_dir = ctx.output_dir
 		var file = new OFStream.open("{output_dir}/{name}.dot")
@@ -307,7 +307,9 @@ abstract class NitdocPage
 		var map = fmap.read_all
 		fmap.close
 
-		var article = new TplArticle.with_title("graph", title)
+		var article = new TplArticle("graph")
+		if title != null then article.title = title
+		article.css_classes.add "text-center"
 		var content = new Template
 		content.add "<img src='{name}.png' usemap='#{name}' style='margin:auto' alt='{title}'/>"
 		content.add map
@@ -790,8 +792,8 @@ class NitdocModule
 	redef fun tpl_content do
 		tpl_sidebar_mclasses
 		var top = tpl_intro
-		tpl_concerns(top)
 		tpl_inheritance(top)
+		tpl_concerns(top)
 		tpl_mclasses(top)
 		tpl_page.add_section top
 	end
@@ -825,7 +827,7 @@ class NitdocModule
 			end
 		end
 		op.append("\}\n")
-		return tpl_graph(op, name, "Dependency graph")
+		return tpl_graph(op, name, null)
 	end
 
 	private fun sort_by_mclass(mclassdefs: Collection[MClassDef]): Map[MClass, Set[MClassDef]] do
@@ -935,6 +937,12 @@ class NitdocClass
 	end
 
 	private fun tpl_concerns(parent: TplSection) do
+		# intro title
+		var section = new TplSection.with_title("intro", "Introduction")
+		section.summary_title = "Introduction"
+		section.add_child tpl_mclassdef_article(mclass.intro)
+		parent.add_child section
+		# concerns
 		if concerns.is_empty then return
 		parent.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
 	end
@@ -1037,7 +1045,7 @@ class NitdocClass
 				title.add "in "
 				title.add mentity.tpl_namespace
 				section.title = title
-				section.summary_title = "In {mentity.nitdoc_name}"
+				section.summary_title = "in {mentity.nitdoc_name}"
 
 				# properties
 				var mprops = mmodules2mprops[mentity]
@@ -1074,8 +1082,8 @@ class NitdocClass
 	redef fun tpl_content do
 		tpl_sidebar_properties
 		var top = tpl_intro
-		tpl_concerns(top)
 		tpl_inheritance(top)
+		tpl_concerns(top)
 		tpl_properties(top)
 		tpl_page.add_section top
 	end
@@ -1185,7 +1193,7 @@ class NitdocClass
 			end
 		end
 		op.append("\}\n")
-		return tpl_graph(op, name, "Inheritance graph")
+		return tpl_graph(op, name, null)
 	end
 end
 

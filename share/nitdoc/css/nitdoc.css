@@ -29,6 +29,10 @@ code {
 	padding: 5px 10px;
 }
 
+h3 {
+	margin: 10px 0;
+}
+
 /*
  * Sidebar
  */
@@ -194,7 +198,7 @@ code {
 }
 
 .subtitle {
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 }
 
 .label:empty {

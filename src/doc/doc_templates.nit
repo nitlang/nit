@@ -430,10 +430,11 @@ class TplSection
 	super TplSectionElt
 
 	redef fun rendering do
-		add "<section id='{id}'>"
+		add "<section id='{id}' class='{css_classes.join(" ")}'>"
 		if title != null then
 			var lvl = hlvl
-			add "<h{lvl}>"
+			if lvl == 2 then title_classes.add "well well-sm"
+			add "<h{lvl} class='{title_classes.join(" ")}'>"
 			add title.as(not null)
 			add "</h{lvl}>"
 		end
@@ -462,9 +463,6 @@ class TplArticle
 		self.content = content
 	end
 
-	# CSS classes to apply on the article title heading element
-	var title_classes = new Array[String]
-
 	redef fun render_summary(parent) do
 		if is_empty then return
 		var title = summary_title
@@ -476,9 +474,10 @@ class TplArticle
 
 	redef fun rendering do
 		if is_empty then return
-		add "<article id='{id}'>"
+		add "<article id='{id}' class='{css_classes.join(" ")}'>"
 		if title != null then
 			var lvl = hlvl
+			if lvl == 2 then title_classes.add "well well-sm"
 			add "<h{lvl} class='{title_classes.join(" ")}'>"
 			add title.as(not null)
 			add "</h{lvl}>"

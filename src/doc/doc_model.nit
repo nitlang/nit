@@ -147,7 +147,7 @@ end
 redef class MProject
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_id do return nitdoc_name
-	redef fun nitdoc_url do return "project_{name}.html"
+	redef fun nitdoc_url do return root.nitdoc_url
 
 	redef fun mdoc do
 		if root != null then
@@ -218,8 +218,6 @@ redef class MGroup
 		end
 		return tpl
 	end
-
-	redef fun tpl_css_classes do return ["public"]
 end
 
 redef class MModule
@@ -270,13 +268,6 @@ redef class MModule
 			tpl.comment = mdoc.tpl_comment
 		end
 		return tpl
-	end
-
-	redef fun tpl_title do
-		var title = new Template
-		title.add tpl_icon
-		title.add tpl_namespace
-		return title
 	end
 
 	redef fun tpl_css_classes do return ["public"]
