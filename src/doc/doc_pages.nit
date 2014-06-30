@@ -334,7 +334,7 @@ abstract class NitdocPage
 
 	# MClassDef description template
 	fun tpl_mclass_article(mclass: MClass, mclassdefs: Array[MClassDef]): TplArticle do
-		var article = new TplArticle(mclass.nitdoc_anchor)
+		var article = new TplArticle(mclass.nitdoc_id)
 		var title = new Template
 		var icon = new TplIcon.with_icon("tag")
 		icon.css_classes.add_all(mclass.intro.tpl_css_classes)
@@ -386,48 +386,41 @@ abstract class NitdocPage
 			end
 			content.add prop_def
 		end
-		article.content = content
+		return article
+	end
+
+	# MClassDef description template
+	fun tpl_mclassdef_article(mclassdef: MClassDef): TplArticle do
+		var article = mclassdef.tpl_article
+		if mclassdef.is_intro then article.content = null
+		article.source_link = tpl_showsource(mclassdef.location)
 		return article
 	end
 
 	# MProp description template
-	fun tpl_mprop_article(mprop: MProperty, mpropdefs: Array[MPropDef]): TplArticle do
-		var article = new TplArticle(mprop.intro.nitdoc_anchor)
-		var icon = new TplIcon.with_icon("tag")
-		icon.css_classes.add_all(mprop.intro.tpl_css_classes)
-		var title = new Template
-		title.add icon
-		title.add mprop.nitdoc_name
-		title.add mprop.intro.tpl_signature
-		article.title = title
-		article.title_classes.add "signature"
-		article.subtitle = mprop.tpl_declaration
-		article.summary_title = mprop.nitdoc_name
-		#article.subtitle = new Template
-		#article.subtitle.add mprop.intro.tpl_modifiers
-		#article.subtitle.add mprop.intro.tpl_namespace
-		var content = new Template
-
-		if not mpropdefs.has(mprop.intro) then
+	fun tpl_mprop_article(mproperty: MProperty, mpropdefs: Array[MPropDef]): TplArticle do
+		var article = mproperty.tpl_article
+		if not mpropdefs.has(mproperty.intro) then
 			# add intro synopsys
-			var intro = mprop.intro
-			var location = intro.location
-			var sourcelink = tpl_showsource(location)
-			var intro_def = intro.tpl_definition
-			intro_def.location = sourcelink
-			content.add intro_def
+			var intro_article = mproperty.intro.tpl_short_article
+			intro_article.source_link = tpl_showsource(mproperty.intro.location)
+			article.add_child intro_article
 		end
-
 		ctx.mainmodule.linearize_mpropdefs(mpropdefs)
 		for mpropdef in mpropdefs do
 			# add mpropdef description
-			var location = mpropdef.location
-			var sourcelink = tpl_showsource(location)
-			var prop_def = mpropdef.tpl_definition
-			prop_def.location = sourcelink
-			content.add prop_def
+			var redef_article = mpropdef.tpl_article
+			redef_article.source_link = tpl_showsource(mpropdef.location)
+			article.add_child redef_article
 		end
-		article.content = content
+		return article
+	end
+
+	# MProperty description template
+	fun tpl_mpropdef_article(mpropdef: MPropDef): TplArticle do
+		var article = mpropdef.tpl_article
+		if mpropdef.is_intro then article.content = null
+		article.source_link = tpl_showsource(mpropdef.location)
 		return article
 	end
 end
@@ -474,9 +467,12 @@ class NitdocOverview
 	# projects list
 	private fun tpl_projects(section: TplSection) do
 		# Projects list
+		var mprojects = model.mprojects.to_a
+		var sorter = new MConcernRankSorter
+		sorter.sort mprojects
 		var ssection = new TplSection.with_title("projects", "Projects")
-		for mproject in model.mprojects do
-			ssection.add_child mproject.tpl_article
+		for mproject in mprojects do
+			ssection.add_child tpl_mproject_article(mproject)
 		end
 		section.add_child ssection
 	end
@@ -590,7 +586,9 @@ class NitdocModule
 
 	redef fun tpl_topmenu do
 		var topmenu = super
+		var mproject = mmodule.mgroup.mproject
 		topmenu.add_item(new TplLink("index.html", "Overview"), false)
+		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
 		topmenu.add_item(new TplLink("#", "{mmodule.nitdoc_name}"), true)
 		topmenu.add_item(new TplLink("search.html", "Index"), false)
 		return topmenu
@@ -633,7 +631,7 @@ class NitdocModule
 		var article = new TplArticle("intro")
 		var def = mmodule.tpl_definition
 		var location = mmodule.location
-		def.location = tpl_showsource(location)
+		article.source_link = tpl_showsource(location)
 		article.content = def
 		section.add_child article
 		return section
@@ -816,14 +814,9 @@ class NitdocClass
 
 	redef fun tpl_topmenu do
 		var topmenu = super
-		var mmodule: MModule
-		if mclass.public_owner == null then
-			mmodule = mclass.intro_mmodule
-		else
-			mmodule = mclass.public_owner.as(not null)
-		end
+		var mproject = mclass.intro_mmodule.mgroup.mproject
 		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		topmenu.add_item(new TplLink("{mmodule.nitdoc_url}", "{mmodule.nitdoc_name}"), false)
+		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
 		topmenu.add_item(new TplLink("#", "{mclass.nitdoc_name}"), true)
 		topmenu.add_item(new TplLink("search.html", "Index"), false)
 		return topmenu
@@ -874,15 +867,12 @@ class NitdocClass
 	end
 
 	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title(mclass.nitdoc_anchor, tpl_title)
-		section.subtitle = mclass.tpl_declaration
-		var article = new TplArticle("intro")
-		var intro = mclass.intro
-		var def = intro.tpl_definition
-		var location = intro.location
-		def.location = tpl_showsource(location)
-		article.content = def
-		section.add_child article
+		var section = new TplSection.with_title("top", tpl_title)
+		var subtitle = new Template
+		subtitle.add "introduction in "
+		subtitle.add mclass.intro.mmodule.tpl_namespace
+		section.subtitle = subtitle
+		section.add_child tpl_mclassdef_article(mclass.intro)
 		return section
 	end
 

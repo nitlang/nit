@@ -453,6 +453,7 @@ class TplArticle
 
 	# Content for this article
 	var content: nullable Streamable writable = null
+	var source_link: nullable Streamable writable = null
 
 	init with_content(id: String, title: Streamable, content: Streamable) do
 		with_title(id, title)
