@@ -163,4 +163,17 @@ redef extern class JavaObject
 		JNIEnv *env = Sys_jni_env(sys);
 		(*env)->DeleteLocalRef(env, recv);
 	`}
+
+	# Pops the current local reference frame and return a valid reference to self
+	#
+	# Similiar to `JavaVM::pop_local_frame` but returns a value.
+	fun pop_from_local_frame: SELF
+	do
+		var jni_env = sys.jni_env
+		return pop_from_local_frame_with_env(jni_env)
+	end
+	
+	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
+		return (*jni_env)->PopLocalFrame(jni_env, recv);
+	`}
 end
