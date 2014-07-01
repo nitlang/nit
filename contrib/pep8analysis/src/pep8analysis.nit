@@ -105,8 +105,4 @@ redef class AnalysisManager
 	end
 end
 
-redef class Object
-	redef fun manager do return once new AnalysisManager
-end
-
 manager.run

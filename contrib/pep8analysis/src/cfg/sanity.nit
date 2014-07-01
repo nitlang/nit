@@ -39,8 +39,8 @@ redef class AnalysisManager
 			b.verify_cfg_sanity_data(self, dead_code)
 		end
 
-		group( dead_code, "unreachable instructions", false )
-		group( executed_data, "data in program flow", true )
+		group( dead_code, "unreachable instructions (dead code?)", false )
+		group( executed_data, "data in program flow (missing BR?)", true )
 	end
 
 	fun verify_cfg_sanity_recursively_code(b: BasicBlock, executed_data: Array[ALine])

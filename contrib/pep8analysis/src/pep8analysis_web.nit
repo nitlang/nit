@@ -19,7 +19,10 @@
 # Takes the entire Pep/8 source code as argument and prints out the
 # analysis results. The result graph will be sent to the JavaScript function
 # `show_graph` with the source of the graph in Graphviz's dot.
-module pep8analysis_web
+module pep8analysis_web is
+	cpp_compiler_option("--std=c++11 --bind")
+	c_linker_option("--bind")
+end
 
 import emscripten
 
@@ -29,13 +32,27 @@ import model
 import cfg
 import flow_analysis
 
+in "C++" `{
+	#include <bind.h>
+
+	using namespace emscripten;
+
+	EMSCRIPTEN_BINDINGS(my_module) {
+		function("run_analysis", &NativeString_run_analysis, allow_raw_pointers());
+	}
+`}
+
 redef class AnalysisManager
 
 	fun run(src: String)
 	do
+		sys.suggest_garbage_collection
+
 		var stream = new StringIStream(src)
 		var ast = build_ast("web", stream)
-		assert ast != null
+		if ast == null then return
+
+		sys.suggest_garbage_collection
 
 		if failed then exit 1
 
@@ -45,8 +62,10 @@ redef class AnalysisManager
 
 		if model.lines.is_empty then
 			fatal_error( ast, "This programs appears empty" )
-			exit 1
+			return
 		end
+
+		sys.suggest_garbage_collection
 
 		# Create CFG
 		var cfg = build_cfg(model)
@@ -54,20 +73,28 @@ redef class AnalysisManager
 
 		# Run analyses
 
+		sys.suggest_garbage_collection
+
 		## Reaching defs
 		do_reaching_defs_analysis(cfg)
+
+		sys.suggest_garbage_collection
 
 		## Range
 		do_range_analysis(ast, cfg)
 
+		sys.suggest_garbage_collection
+
 		## Types
 		do_types_analysis(ast, cfg)
+
+		sys.suggest_garbage_collection
 
 		print_notes
 		if notes.is_empty then print "Success: Nothing wrong detected"
 
 		var of = new StringOStream
-		cfg.print_dot(of, true)
+		cfg.print_dot(of, false)
 		of.close
 		show_graph(of.to_s)
 
@@ -88,8 +115,11 @@ class StringIStream
 	redef var end_reached: Bool = false
 end
 
-redef class Object
-	redef fun manager do return once new AnalysisManager
+redef class NativeString
+	fun run_analysis do manager.run to_s
 end
 
-manager.run args.first
+fun dummy_set_callbacks import NativeString.run_analysis in "C++" `{
+`}
+
+dummy_set_callbacks

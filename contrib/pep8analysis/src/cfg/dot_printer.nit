@@ -15,16 +15,11 @@ end
 redef class BasicBlock
 	fun print_dot_nodes( f: OStream, long: Bool )
 	do
-		var lbl
-		if long then
-			lbl = "\"{name}:\\n{dot_node_text}\""
-		else
-			lbl = name
-		end
+		var lbl = "\"{name}:\\n{dot_node_text(long)}\""
 		f.write( "{name} [label={lbl}]\n" )
 	end
 
-	fun dot_node_text : String
+	fun dot_node_text(long: Bool): String
 	do
 		var code_lines = new Array[String]
 		for line in lines do code_lines.add(line.text)
@@ -32,7 +27,10 @@ redef class BasicBlock
 
 		code = code.replace("\n","\\l").replace("\"","\\\"").replace("\\n","|n").replace("/","\\/").replace("\r","")
 		# the last one is a hack
-		return "{dot_node_header}{code}{dot_node_footer}"
+
+		if long then
+			return "{dot_node_header}{code}{dot_node_footer}"
+		else return code
 	end
 
 	fun dot_node_header: String do return ""

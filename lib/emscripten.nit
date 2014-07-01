@@ -18,6 +18,7 @@ module emscripten is platform
 
 `{
 	#include <emscripten.h>
+	#include <gc.h>
 `}
 
 redef class String
@@ -27,4 +28,11 @@ redef class String
 	fun escape_to_js: String do return self.replace('\n', "\\n")
 
 	fun alert do "alert('{self.escape_to_js}')".run_js
+end
+
+redef class Sys
+	redef fun force_garbage_collection `{ GC_FORCE_COLLECT(); `}
+
+	# The emscripten GC *must* be manually invoked, it will not act by itself
+	fun suggest_garbage_collection `{ GC_MAYBE_COLLECT(); `}
 end

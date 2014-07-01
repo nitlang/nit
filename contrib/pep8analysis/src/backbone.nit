@@ -87,10 +87,6 @@ class Fatal
 	redef fun prefix do return "Fatal:   "
 end
 
-redef class Object
-	protected fun manager: AnalysisManager is abstract
-end
-
 redef class Location
 	# "line 5"
 	fun to_line_s: String
@@ -103,3 +99,5 @@ redef class Location
 		return file.filename
 	end
 end
+
+protected fun manager: AnalysisManager do return once new AnalysisManager

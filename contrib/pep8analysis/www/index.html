@@ -16,55 +16,86 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/z80/z80.js"></script>
 
 	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-574578-5', 'xymus.net');
-	  ga('send', 'pageview');
-	</script>
-
-	<script>
-		// Redirect print to HTML
-		var Module = {
-			'print': function(text) {
-				$("#console").append(text + "<br>")
-			},
-			'noInitialRun': true,
-		}
+		ga('create', 'UA-574578-5', 'xymus.net');
+		ga('send', 'pageview');
 
 		// Both Viz and Pep8 use emscripten
 		// We put aside the module of each program and bring it back before each use
 		var VizModule = null
-		$(document).ready(function() {
-			// Report full loading
+
+		function ready() {
 			$("#loading").hide()
 			$("#analyze").prop('disabled', false)
+		}
 
-		});
+		function complete() {
+			// Show and set color of output console
+			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
+			var analysis = $("#console").text();
+			if (analysis.indexOf("Error") >= 0) {
+				$("#consolePanel").addClass("panel-danger")
+				ga('trackEvent', 'Result', 'Error')
+			}
+			else if (analysis.indexOf("Warning") >= 0) {
+				$("#consolePanel").addClass("panel-warning")
+				ga('trackEvent', 'Result', 'Warning')
+			}
+			else {
+				$("#consolePanel").addClass("panel-success")
+				ga('trackEvent', 'Result', 'Success')
+			}
+			$("#working").hide()
+			$("#consolePanel").show()
+			$("#analyze").prop('disabled', false)
+		}
+
+		function exception(ex) {
+			console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + ex )
+			ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
+			$("#fatal-error").show()
+			$("#analyze").prop('disabled', true)
+		}
+
+		function stdout(text) {
+			$("#console").append(text + "<br>")
+		}
 
 		function exec() {
+			$("#working").show()
+			$("#consolePanel").hide()
+
 			// Clean output console
 			$("#console").text("")
 
 			// Get code
 			var input = editor.getValue()
 
-			// Invoke the full Nit program
-			Module = Pep8Module
-      		ret = Module['callMain']([input])
+			// Update GA stats
+			ga('trackEvent', 'Action', 'Analyze')
 
-			// Shot and set color of output console
-			$("#consolePanel").removeClass("panel-success panel-warning panel-danger")
-			$("#consolePanel").show()
-			var analysis = $("#consolePanel").text();
-			if (analysis.indexOf("Error") >= 0)
-				$("#consolePanel").addClass("panel-danger")
-			else if (analysis.indexOf("Warning") >= 0)
-				$("#consolePanel").addClass("panel-warning")
-			else
-				$("#consolePanel").addClass("panel-success")
+			// Invoke the full Nit program
+			if(typeof(Worker) !== "undefined") {
+				// Async version
+				$("#analyze").prop('disabled', true)
+				worker.postMessage(input)
+			} else {
+				// Sync version
+				ga('trackEvent', 'Crash', 'No Webworkers', $("#console").text())
+				Module = Pep8Module
+				try {
+					run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
+					run_analysis(input)
+
+					complete()
+				} catch(e) {
+					exception(e)
+				}
+			}
 		}
 
 		function load(file) {
@@ -111,6 +142,10 @@
 
 <div class="container-fluid">
 	<div class="alert alert-warning" id="loading">Loading the tool... This may take some time.</div>
+	<div class="alert alert-danger" id="fatal-error" style="display: none;">
+		<h2>The JavaScript tool crashed</h2>
+		<p>Please refresh the page to try again, or use Firefox. An error report has been sent to the developer</p>
+	</div>
 
 	<div class="row">
 	  <div class="col-sm-12 col-lg-6">
@@ -121,7 +156,7 @@
 			<div class="panel-body" id="code-panel">
 				<p>This tools finds strange behavior in Pep/8 programs by exploring all detectable execution paths.</p>
 				<p>Upon analyzing a program, this tool reports dead code blocks and data within the execution path. It also detects wrongful use of data such as accessing uninitialized memory, printing a word and reading code.</p>
-				<p><strong>To use:</strong> copy-paste your code in the source code block and launch the analysis using the <em>Analyze</em> button.</p>
+				<p><strong>To use:</strong> copy-paste your code in the source code block and launch the analysis using the <em>Analyze program</em> button.</p>
 			</div>
 		</div>
 
@@ -157,6 +192,7 @@
 
 	  <div class="clearfix visible-xs"></div>
 	  <div class="col-sm-12 col-lg-6">
+		<div class="alert alert-warning" id="working" style="display: none;">The tool is evaluating all possible execution paths... This may take some time.</div>
 		<div class="panel" id="consolePanel" style="display: none;">
 			<div class="panel-heading">Analysis Result</div>
 			<div class="panel-body">
@@ -241,15 +277,39 @@
 	  </div>
 	
 	<script>
-		var Module = {
-			'print': function(text) {
-				$("#console").append(text + "<br>")
-			},
-			'noInitialRun': true,
+		if(typeof(Worker) !== "undefined") {
+			// Async version
+			var worker = new Worker("worker.js")
+			worker.onmessage = function(event) {
+				if (event.data.type == "ready") {
+					ready()
+				} else if (event.data.type == "complete") {
+					complete()
+				} else if (event.data.type == "exception") {
+					exception(event.data.data)
+				} else if (event.data.type == "stdout") {
+					stdout(event.data.data)
+				} else if (event.data.type == "show_graph") {
+					show_graph(event.data.data)
+				} else {
+					console.out(event.data)
+				}
+			}
+		} else {
+			// Synced version
+			$(document).ready(function() {
+				// Report full loading
+				$("#loading").hide()
+				$("#analyze").prop('disabled', false)
+			});
+			var Module = {
+				'print': stdout,
+				'TOTAL_MEMORY': 512000000
+			}
+			importScripts("pep8analysis.js")
+			var Pep8Module = Module
 		}
 	</script>
-	<script src="pep8analysis.js"></script>
-	<script>Pep8Module = Module</script>
 	<script src="viz.js"></script>
 </div>
 
