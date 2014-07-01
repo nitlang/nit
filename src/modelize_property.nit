@@ -96,9 +96,13 @@ redef class ModelBuilder
 			if not c.kind.need_init then continue
 			st = st.anchor_to(mmodule, mclassdef.bound_mtype)
 			var candidate = self.try_get_mproperty_by_name2(nclassdef, mmodule, st, "init").as(nullable MMethod)
-			if candidate != null and candidate.intro.msignature.arity == 0 then
-				combine.add(candidate)
-				continue
+			if candidate != null then
+				if candidate.intro.msignature != null then
+					if candidate.intro.msignature.arity == 0 then
+						combine.add(candidate)
+						continue
+					end
+				end
 			end
 			var inhc2 = c.inherit_init_from
 			if inhc2 == null then inhc2 = c
