@@ -45,6 +45,14 @@ class BinTreeMap[K: Comparable, E]
 	redef type N: BinTreeNode[K, E]
 
 	private var len = 0
+
+	# O(n) in worst case, average is O(h) with h: tree height
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert tree.is_empty
+	#     tree[1] = "n1"
+	#     assert not tree.is_empty
+	redef fun is_empty do return root == null
 	# Get the node value associated to `key`
 	# O(n) in worst case, average is O(h) with h: tree height
 	#
