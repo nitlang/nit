@@ -1643,7 +1643,7 @@ end
 ###############################################################################
 
 # Native strings are simple C char *
-class NativeString
+extern class NativeString `{ char* `}
 	super StringCapable
 
 	fun [](index: Int): Char is intern
@@ -1678,7 +1678,6 @@ class NativeString
 		copy_to(new_self, length, 0, 0)
 		return new FlatString.with_infos(new_self, length, 0, length - 1)
 	end
-
 end
 
 # StringCapable objects can create native strings
