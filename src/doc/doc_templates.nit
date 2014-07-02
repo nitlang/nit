@@ -149,18 +149,22 @@ end
 class TplTopMenu
 	super Template
 
+	# Brand link to display in first position of the top menu
+	private var brand: nullable Streamable writable
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
-	# Add a new link to the menu
-	fun add_link(href, name: String, is_active: Bool) do
+	init do end
+
+	# Add a content between `<li>` tags
+	fun add_item(content: Streamable, is_active: Bool) do
 		var tpl = new Template
 		tpl.add "<li"
 		if is_active then
 			tpl.add " class='active'"
 		end
 		tpl.add ">"
-		tpl.add new TplLink(href, name)
+		tpl.add content
 		tpl.add "</li>"
 		add_raw(tpl)
 	end
@@ -171,13 +175,26 @@ class TplTopMenu
 	end
 
 	redef fun rendering do
+		if brand == null and elts.is_empty then return
 		add "<nav id='topmenu' class='navbar navbar-default navbar-fixed-top' role='navigation'>"
 		add " <div class='container-fluid'>"
+		add "  <div class='navbar-header'>"
+		add "   <button type='button' class='navbar-toggle' "
+		add "       data-toggle='collapse' data-target='#topmenu-collapse'>"
+		add "	 <span class='sr-only'>Toggle menu</span>"
+		add "    <span class='icon-bar'></span>"
+		add "    <span class='icon-bar'></span>"
+		add "    <span class='icon-bar'></span>"
+		add "   </button>"
+		if brand != null then add brand.as(not null)
+		add "  </div>"
+		add "  <div class='collapse navbar-collapse' id='topmenu-collapse'>"
 		if not elts.is_empty then
 			add "<ul class='nav navbar-nav'>"
-			for elt in elts do add(elt)
+			for elt in elts do add elt
 			add "</ul>"
 		end
+		add "  </div>"
 		add " </div>"
 		add "</nav>"
 	end
@@ -359,8 +376,14 @@ class TplSectionElt
 	# if null use `title` instead
 	var summary_title: nullable String writable
 
-	# Parent section of this section if any
-	var parent: nullable TplSection
+	# CSS classes to apply on the section element
+	var css_classes = new Array[String]
+
+	# CSS classes to apply on the title heading element
+	var title_classes = new Array[String]
+
+	# Parent article/section if any
+	var parent: nullable TplSectionElt
 
 	init(id: String) do self.id = id
 
@@ -375,17 +398,6 @@ class TplSectionElt
 		return parent.hlvl + 1
 	end
 
-	# Render this section in the summary
-	protected fun render_summary(parent: TplSummaryElt) is abstract
-
-	# Is the section empty (no content at all)
-	fun is_empty: Bool is abstract
-end
-
-# A HTML <section> element
-class TplSection
-	super TplSectionElt
-
 	# Elements contained by this section
 	var children = new Array[TplSectionElt]
 
@@ -395,9 +407,11 @@ class TplSection
 		children.add child
 	end
 
-	redef fun is_empty: Bool do return children.is_empty
+	# Is the section empty (no content at all)
+	fun is_empty: Bool do return children.is_empty
 
-	redef fun render_summary(parent) do
+	# Render this section in the summary
+	fun render_summary(parent: TplSummaryElt) do
 		if is_empty then return
 		var title = summary_title
 		if title == null and self.title != null then title = self.title.write_to_string
@@ -409,13 +423,18 @@ class TplSection
 		end
 		parent.add_child entry
 	end
+end
+
+# A HTML <section> element
+class TplSection
+	super TplSectionElt
 
 	redef fun rendering do
-		if is_empty then return
-		add "<section id='{id}'>"
+		add "<section id='{id}' class='{css_classes.join(" ")}'>"
 		if title != null then
 			var lvl = hlvl
-			add "<h{lvl}>"
+			if lvl == 2 then title_classes.add "well well-sm"
+			add "<h{lvl} class='{title_classes.join(" ")}'>"
 			add title.as(not null)
 			add "</h{lvl}>"
 		end
@@ -437,9 +456,12 @@ class TplArticle
 
 	# Content for this article
 	var content: nullable Streamable writable = null
+	var source_link: nullable Streamable writable = null
 
-	# CSS classes to apply on the article title heading element
-	var title_classes = new Array[String]
+	init with_content(id: String, title: Streamable, content: Streamable) do
+		with_title(id, title)
+		self.content = content
+	end
 
 	redef fun render_summary(parent) do
 		if is_empty then return
@@ -451,9 +473,16 @@ class TplArticle
 	end
 
 	redef fun rendering do
-		add "<article id='{id}'>"
+		if is_empty then return
+		add "<article id='{id}' class='{css_classes.join(" ")}'>"
+		if source_link != null then
+			add "<div class='source-link'>"
+			add source_link.as(not null)
+			add "</div>"
+		end
 		if title != null then
 			var lvl = hlvl
+			if lvl == 2 then title_classes.add "well well-sm"
 			add "<h{lvl} class='{title_classes.join(" ")}'>"
 			add title.as(not null)
 			add "</h{lvl}>"
@@ -466,10 +495,15 @@ class TplArticle
 		if content != null then
 			add content.as(not null)
 		end
+		for child in children do
+			add child
+		end
 		add """</article>"""
 	end
 
-	redef fun is_empty: Bool do return content == null
+	redef fun is_empty: Bool do
+		return title == null and subtitle == null and content == null
+	end
 end
 
 # A module / class / prop definition
@@ -480,7 +514,7 @@ class TplDefinition
 	var comment: nullable Streamable writable
 
 	# Namespace for this definition
-	var namespace: Streamable writable
+	var namespace: nullable Streamable writable
 
 	# Location link to display
 	var location: nullable Streamable writable
@@ -489,10 +523,12 @@ class TplDefinition
 
 	private fun render_info do
 		add "<div class='info text-right'>"
-		if comment == null then
-			add "<span class=\"noComment\">no comment for </span>"
+		if namespace != null then
+			if comment == null then
+				add "<span class=\"noComment\">no comment for </span>"
+			end
+			add namespace.as(not null)
 		end
-		add namespace
 		if location != null then
 			add " "
 			add location.as(not null)
@@ -651,6 +687,8 @@ class TplList
 	init do end
 
 	init with_classes(classes: Array[String]) do self.css_classes = classes
+
+	fun is_empty: Bool do return elts.is_empty
 
 	redef fun rendering do
 		if elts.is_empty then return
