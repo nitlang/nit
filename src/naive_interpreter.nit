@@ -1393,7 +1393,7 @@ redef class ASuperstringExpr
 			if i == null then return null
 			array.add(i)
 		end
-		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
+		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type.as_nullable)
 		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
 		assert res != null
 		return res
