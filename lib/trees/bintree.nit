@@ -53,14 +53,39 @@ class BinTreeMap[K: Comparable, E]
 	#     tree[1] = "n1"
 	#     assert not tree.is_empty
 	redef fun is_empty do return root == null
+
+	# O(n) in worst case, average is O(h) with h: tree height
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert not tree.has_key(1)
+	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert not tree.has_key(0)
+	#     assert tree.has_key(2)
+	#     assert not tree.has_key(6)
+	redef fun has_key(key: K): Bool do
+		if is_empty then return false
+		var res = search_down(root.as(not null), key)
+		if res != null then
+			cache_node = res
+			return true
+		end
+		return false
+	end
+
+	private var cache_node: nullable N = null
+
 	# Get the node value associated to `key`
 	# O(n) in worst case, average is O(h) with h: tree height
 	#
 	#     var tree = new BinTreeMap[Int, String]
 	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert tree.has_key(1)
 	#     assert tree[1] == "n1"
+	#     assert tree.has_key(1)
+	#     assert tree[2] == "n2"
 	redef fun [](key: K): E do
-		assert not_empty: root != null
+		assert not_empty: not is_empty
+		if cache_node != null and cache_node.key == key then return cache_node.value
 		var res = search_down(root.as(not null), key)
 		assert has_key: res != null
 		return res.value
