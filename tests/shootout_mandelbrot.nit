@@ -25,7 +25,7 @@ var iter = 20
 var limit = 2.0
 
 if args.length != 1 then
-    printn("Usage: shootout_mandelbrot <size>\n")
+    print("Usage: shootout_mandelbrot <size>")
     return
 end
 
@@ -35,7 +35,7 @@ var h = w
 var byte_acc = 0
 var bit_num = 0
 
-printn("P4\n{w} {h}\n")
+print("P4\n{w} {h}")
 
 for y in [0..h[ do
     for x in [0..w[ do
@@ -73,3 +73,4 @@ for y in [0..h[ do
 	end
     end
 end
+print ""

@@ -60,20 +60,20 @@ Analyzing ../contrib/pep8analysis/tests/terrasa/somme_tableau.pep
 Analyzing ../contrib/pep8analysis/tests/terrasa/soustraction.pep
 Analyzing ../contrib/pep8analysis/tests/terrasa/tri_bulles.pep
 # Notes:
-Error:   ../contrib/pep8analysis/tests/micro/directive-in-code.pep:4; unreachable instructions
-Error:   ../contrib/pep8analysis/tests/micro/directive-in-code.pep:2; data in program flow
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:1; expected word in rA, got 2x uninitialized
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:1; expected word in m123, got 2x uninitialized
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:3; use of partial word in rA, got 1st byte of word then code
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:3; expected word in m123, got 2x uninitialized
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:6; expected word in rA, got 2x code
-Warning: ../contrib/pep8analysis/tests/micro/types.pep:6; expected word in m123, got 2x uninitialized
-Warning: ../contrib/pep8analysis/tests/privat/05-1a100.pep:10; expected word in m1, got 2x code
-Error:   ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:32; invalid line following instruction
-Error:   ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:32; unreachable instructions
-Warning: ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:14; overwriting code at instr@m76 with code
-Warning: ../contrib/pep8analysis/tests/privat/06-menu.pep:13; use of indirect jumps, the CFG may be wrong
-Warning: ../contrib/pep8analysis/tests/privat/07-stri.pep:7; use of uninitialized values
-Warning: ../contrib/pep8analysis/tests/privat/07-stri.pep:9; use of uninitialized values
-Error:   ../contrib/pep8analysis/tests/privat/07-stris.pep:39; unreachable instructions
-Warning: ../contrib/pep8analysis/tests/privat/08-abus.pep:8--10; unreachable instructions
+Error:   ../contrib/pep8analysis/tests/micro/directive-in-code.pep:4; unreachable instructions (dead code?)
+Error:   ../contrib/pep8analysis/tests/micro/directive-in-code.pep:2; data in program flow (missing BR?)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:1; using data of unsupported type in register A, expected word (got two uninitialized byte)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:1; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:3; using a partial word in register A, expected a full word (got a 1st byte of word followed by byte of code)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:3; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:6; using data of unsupported type in register A, expected word (got two byte of code)
+Warning: ../contrib/pep8analysis/tests/micro/types.pep:6; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
+Warning: ../contrib/pep8analysis/tests/privat/05-1a100.pep:10; using data of unsupported type in memory address 1, expected word (got two byte of code)
+Error:   ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:32; this instruction is not followed by valid code as it should (misplaced data or missing BR?)
+Error:   ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:32; unreachable instructions (dead code?)
+Warning: ../contrib/pep8analysis/tests/privat/06-calc-non-pur.pep:14; overwriting code at instr@m76 with byte of code (code rewriting?)
+Warning: ../contrib/pep8analysis/tests/privat/06-menu.pep:13; jumps to a dynamic address, this may be OK but the CFG may be wrong
+Warning: ../contrib/pep8analysis/tests/privat/07-stri.pep:7; printing uninitialized data, exepected ASCII
+Warning: ../contrib/pep8analysis/tests/privat/07-stri.pep:9; printing uninitialized data, exepected ASCII
+Error:   ../contrib/pep8analysis/tests/privat/07-stris.pep:39; unreachable instructions (dead code?)
+Warning: ../contrib/pep8analysis/tests/privat/08-abus.pep:8--10; unreachable instructions (dead code?)

@@ -32,6 +32,7 @@ import c_compiler_options
 import c
 import cpp
 import java
+import extra_java_files
 
 redef class MModule
 	# Does this module uses the FFI?

@@ -42,7 +42,7 @@ end
 #alt8#	redef fun foo: Int do return 300 + bar
 #alt8#end
 
-
+#alt9#fun baz do abort
 fun baz: Int do return 1
 
 baz.output

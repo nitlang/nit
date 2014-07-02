@@ -52,32 +52,32 @@ redef class EOF
 end
 
 redef class AError
-    readable var _message: String
+    var message: String
 
     init init_error(message: String, loc: Location)
     do
 		init_tk(loc)
-		_message = message
+		self.message = message
     end
 end
 
 redef class ALexerError
-    readable var _string: String
+    var string: String
 
     init init_lexer_error(message: String, loc: Location, string: String)
     do
 		init_error(message, loc)
-		_string = string
+		self.string = string
     end
 end
 
 redef class AParserError
-    readable var _token: Token
+    var token: Token
 
     init init_parser_error(message: String, loc: Location, token: Token)
     do
 		init_error(message, loc)
-		_token = token
+		self.token = token
     end
 end
 
@@ -92,7 +92,7 @@ class Lexer
 	var _state: Int = 0
 
 	# The source file
-	readable var _file: SourceFile
+	var file: SourceFile
 
 	# Current character in the stream
 	var _stream_pos: Int = 0
@@ -112,7 +112,7 @@ class Lexer
 	# Create a new lexer for a stream (and a name)
 	init(file: SourceFile)
 	do
-		_file = file
+		self.file = file
 	end
 
 	# The last peeked token to chain them
@@ -133,7 +133,7 @@ class Lexer
 				l.next_token = t
 				t.prev_token = l
 			else
-				_file.first_token = t
+				file.first_token = t
 			end
 			last_token = t
 		end
@@ -160,7 +160,8 @@ class Lexer
 		var start_stream_pos = sp
 		var start_pos = _pos
 		var start_line = _line
-		var string = _file.string
+		var file = self.file
+		var string = file.string
 		var string_len = string.length
 
 		var accept_state = -1
@@ -182,17 +183,17 @@ class Lexer
 				if c == 10 then
 					if cr then
 						cr = false
-					        _file.line_starts[line] = sp
+					        file.line_starts[line] = sp
 					else
 						line = line + 1
 						pos = 0
-					        _file.line_starts[line] = sp
+					        file.line_starts[line] = sp
 					end
 				else if c == 13 then
 					line = line + 1
 					pos = 0
 					cr = true
-					_file.line_starts[line] = sp
+					file.line_starts[line] = sp
 				else
 					pos = pos + 1
 					cr = false
@@ -243,7 +244,7 @@ class Lexer
 				end
 			else
 				if accept_state != -1 then
-					var location = new Location(_file, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+					var location = new Location(file, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					_pos = accept_pos
 					_line = accept_line
 					_stream_pos = start_stream_pos + accept_length
@@ -253,15 +254,15 @@ class Lexer
 					return make_token(accept_token, location)
 				else
 					_stream_pos = sp
-					var location = new Location(_file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
+					var location = new Location(file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
 					if sp > start_stream_pos then
 						var text = string.substring(start_stream_pos, sp-start_stream_pos)
 						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
-						_file.last_token = token
+						file.last_token = token
 						return token
 					else
 						var token = new EOF.init_tk(location)
-						_file.last_token = token
+						file.last_token = token
 						return token
 					end
 				end

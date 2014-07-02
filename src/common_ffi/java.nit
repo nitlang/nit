@@ -290,8 +290,10 @@ redef class AExternPropdef
 		var sys_class = modelbuilder.try_get_mclass_by_name(self, mmodule, "Sys")
 		assert sys_class != null
 		var sys_jni_env_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "jni_env")
-		assert sys_jni_env_meth != null
-		assert sys_jni_env_meth isa MMethod
+		if sys_jni_env_meth == null or not sys_jni_env_meth isa MMethod then
+			toolcontext.error(self.location, "Java FFI error: you must import the `java` module when using the FFI with Java")
+			return
+		end
 
 		explicit_call = new MExplicitCall(sys_class.mclass_type, sys_jni_env_meth, mmodule)
 		fcc.callbacks.add(explicit_call)
@@ -349,7 +351,7 @@ class JavaFile
 	super ExternFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename} -d ."
+	redef fun makefile_rule_content do return "javac {filename.basename("")} -d ."
 	redef fun add_to_jar do return true
 end
 
@@ -463,7 +465,7 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return ftype.java_type.
-			replace('/', ".").replace('$', ".").replace(' ', "")
+			replace('/', ".").replace('$', ".").replace(' ', "").replace('\n',"")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "int"
@@ -485,7 +487,7 @@ redef class MClassType
 	redef fun jni_format
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return "L{ftype.java_type.replace('.', "/").replace(' ', "")};"
+		if ftype isa ForeignJavaType then return "L{ftype.java_type.replace('.', "/").replace(' ', "").replace('\n', "")};"
 		if mclass.name == "Bool" then return "Z"
 		if mclass.name == "Char" then return "C"
 		if mclass.name == "Int" then return "I"

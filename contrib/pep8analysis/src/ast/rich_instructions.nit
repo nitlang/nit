@@ -13,7 +13,7 @@ intrude import parser
 import ast_base
 
 redef class AnalysisManager
-	redef fun build_ast(filename)
+	redef fun build_ast(filename, stream)
 	do
 		var ast = super
 		if ast != null then

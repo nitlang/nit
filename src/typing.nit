@@ -51,6 +51,11 @@ private class TypeVisitor
 
 	var selfvariable: Variable = new Variable("self")
 
+	# Is `self` use restricted?
+	# * no explicit `self`
+	# * method called on the implicit self must be top-level
+	var is_toplevel_context = false
+
 	init(modelbuilder: ModelBuilder, mmodule: MModule, mpropdef: nullable MPropDef)
 	do
 		self.modelbuilder = modelbuilder
@@ -67,6 +72,11 @@ private class TypeVisitor
 			var selfvariable = new Variable("self")
 			self.selfvariable = selfvariable
 			selfvariable.declared_type = mclass.mclass_type
+
+			var mprop = mpropdef.mproperty
+			if mprop isa MMethod and mprop.is_toplevel then
+				is_toplevel_context = true
+			end
 		end
 	end
 
@@ -241,6 +251,15 @@ private class TypeVisitor
 		end
 
 		assert mproperty isa MMethod
+
+		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel and name != "sys" and name != "exit" and name != "args" then
+			# FIXME named methods are here as a workaround
+			error(node, "Error: '{name}' is not a top-level method, thus need a receiver.")
+		end
+		if not recv_is_self and mproperty.is_toplevel then
+			error(node, "Error: cannot call '{name}', a top-level method, with a receiver.")
+		end
+
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
 			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self.")
 			return null
@@ -833,7 +852,7 @@ redef class AForExpr
 		if objcla == null then return
 
 		# check iterator method
-		var itdef = v.get_method(self, mtype, "iterator", true)
+		var itdef = v.get_method(self, mtype, "iterator", n_expr isa ASelfExpr)
 		if itdef == null then
 			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			return
@@ -1199,6 +1218,9 @@ redef class ASelfExpr
 	redef var its_variable: nullable Variable
 	redef fun accept_typing(v)
 	do
+		if v.is_toplevel_context and not self isa AImplicitSelfExpr then
+			v.error(self, "Error: self cannot be used in top-level method.")
+		end
 		var variable = v.selfvariable
 		self.its_variable = variable
 		self.mtype = v.get_variable(self, variable)

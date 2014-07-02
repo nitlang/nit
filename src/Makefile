@@ -15,6 +15,7 @@
 # limitations under the License.
 
 NITCOPT=
+OLDNITCOPT= --no-stacktrace
 
 all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_client
 
@@ -23,7 +24,7 @@ nitg_0: ../c_src/nitg parser/parser.nit
 	@echo '* Compile nitg_0 from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${NITCOPT} -o nitg_0 -v nitg.nit
+	../c_src/nitg ${OLDNITCOPT} -o nitg_0 -v nitg.nit
 
 ../bin/nitg: nitg_0 parser/parser.nit
 	@echo '***************************************************************'

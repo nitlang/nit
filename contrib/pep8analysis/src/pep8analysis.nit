@@ -48,7 +48,7 @@ redef class AnalysisManager
 					print "Target file \"{filename}\" does not exist."
 					exit 1
 			end
-			var ast = build_ast( filename )
+			var ast = build_ast_from_file( filename )
 			assert ast != null
 
 			if failed then continue
@@ -103,10 +103,6 @@ redef class AnalysisManager
 			print_notes
 		end
 	end
-end
-
-redef class Object
-	redef fun manager do return once new AnalysisManager
 end
 
 manager.run

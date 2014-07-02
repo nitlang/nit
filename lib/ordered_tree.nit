@@ -25,6 +25,7 @@ module ordered_tree
 # The class can also be specialized to provide more specific behavior.
 class OrderedTree[E: Object]
 	super Streamable
+	super Collection[E]
 
 	# Sequence
 	var roots = new Array[E]
@@ -92,4 +93,100 @@ class OrderedTree[E: Object]
 	#
 	# Subclasses should redefine this method to provide a specific output
 	fun display(e: E): String do return e.to_s
+
+	# Get an array of the contained elements
+	# Order is preserved
+	#
+	#     var tree = new OrderedTree[Int]
+	#     tree.add(null, 1)
+	#     tree.add(1, 11)
+	#     tree.add(11, 111)
+	#     tree.add(11, 112)
+	#     tree.add(1, 12)
+	#     tree.add(12, 121)
+	#     tree.add(12, 122)
+	#     tree.add(null, 2)
+	#     tree.add(2, 21)
+	#     tree.add(2, 22)
+	#     assert tree.to_a == [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
+	redef fun to_a: Array[E] do
+		var res = new Array[E]
+		for r in roots do sub_to_a(r, res)
+		return res
+	end
+
+	private fun sub_to_a(e: E, res: Array[E]) do
+		res.add e
+		if sub.has_key(e) then for e2 in sub[e] do sub_to_a(e2, res)
+	end
+
+	#     var tree = new OrderedTree[Int]
+	#     assert tree.is_empty
+	#     tree.add(null, 1)
+	#     assert not tree.is_empty
+	redef fun is_empty: Bool do return roots.is_empty
+
+	#     var tree = new OrderedTree[Int]
+	#     tree.add(null, 1)
+	#     tree.add(1, 11)
+	#     assert tree.first == 1
+	redef fun first do return roots.first
+
+	#     var tree = new OrderedTree[Int]
+	#     tree.add(null, 1)
+	#     tree.add(1, 11)
+	#     tree.add(11, 111)
+	#     tree.add(11, 112)
+	#     tree.add(1, 12)
+	#     tree.add(12, 121)
+	#     tree.add(12, 122)
+	#     tree.add(null, 2)
+	#     tree.add(2, 21)
+	#     tree.add(2, 22)
+	#     var order = [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
+	#     var res = new Array[Int]
+	#     for i in tree do res.add(i)
+	#     assert res == order
+	redef fun iterator do return new OrderedTreeIterator[E](self)
+end
+
+# An Iterator over an OrderedTree
+private class OrderedTreeIterator[E: Object]
+	super Iterator[E]
+
+	var tree: OrderedTree[E]
+
+	var iterators = new Array[Iterator[E]]
+
+	init(tree: OrderedTree[E]) do
+		self.tree = tree
+
+		if not tree.is_empty then
+			iterators.add tree.roots.iterator
+		end
+	end
+
+	redef fun is_ok do return not iterators.is_empty
+
+	redef fun item do
+		assert is_ok
+		return iterators.last.item
+	end
+
+	redef fun next do
+		assert is_ok
+		if tree.sub.has_key(item) then
+			iterators.add tree.sub[item].iterator
+		else
+			iterators.last.next
+			while is_ok and not iterators.last.is_ok do
+				iterators.pop
+				if is_ok and iterators.last.is_ok then
+					iterators.last.next
+				end
+			end
+		end
+	end
+
+	redef fun iterator do return new OrderedTreeIterator[E](tree)
 end

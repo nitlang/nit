@@ -23,7 +23,6 @@ import nitx
 intrude import local_var_init
 intrude import scope
 intrude import toolcontext
-import websocket
 
 redef class Model
 	# Cleans the model to remove a module and what it defines when semantic analysis fails on injected code
@@ -124,23 +123,11 @@ redef class ToolContext
 	# -c
 	var opt_debugger_autorun: OptionBool = new OptionBool("Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned", "-c")
 
-	# --socket
-	var opt_socket_mode = new OptionBool("Launches the target program with raw output on the network via sockets", "--socket")
-
-	# --websocket
-	var opt_websocket_mode = new OptionBool("Launches the target program with output on the network via websockets", "--websocket")
-
-	# --port
-	var opt_debug_port: OptionInt = new OptionInt("Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535", 22125, "--port")
-
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_debugger_mode)
 		self.option_context.add_option(self.opt_debugger_autorun)
-		self.option_context.add_option(self.opt_socket_mode)
-		self.option_context.add_option(self.opt_websocket_mode)
-		self.option_context.add_option(self.opt_debug_port)
 	end
 end
 
@@ -158,11 +145,7 @@ redef class ModelBuilder
 
 		var interpreter = new Debugger(self, mainmodule, arguments)
 
-		set_stdstreams
-
 		init_naive_interpreter(interpreter, mainmodule)
-
-		close_stdstreams
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
@@ -176,52 +159,10 @@ redef class ModelBuilder
 		var interpreter = new Debugger(self, mainmodule, arguments)
 		interpreter.autocontinue = true
 
-		set_stdstreams
-
 		init_naive_interpreter(interpreter, mainmodule)
-
-		close_stdstreams
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
-	end
-
-	redef fun run_naive_interpreter(mmod, args)
-	do
-		set_stdstreams
-		super
-	end
-
-	fun set_stdstreams
-	do
-		if self.toolcontext.opt_socket_mode.value then
-			var sock = new Socket.server(toolcontext.opt_debug_port.value, 1)
-			var ns = sock.accept
-			sock.close
-			sys.set_io(ns,ns,ns)
-		else if self.toolcontext.opt_websocket_mode.value then
-			var websock = new WebSocket(toolcontext.opt_debug_port.value, 1)
-			websock.accept
-			sys.set_io(websock,websock,websock)
-		end
-	end
-
-	fun close_stdstreams
-	do
-		if sys.stdin isa WebSocket or sys.stdin isa Socket then
-			sys.stdin.close
-			sys.stdout.close
-			sys.stderr.close
-		end
-	end
-end
-
-redef class Sys
-	private fun set_io(istream: PollableIStream, ostream: OStream, errstream: OStream)
-	do
-		self.stdin = istream
-		self.stdout = ostream
-		self.stderr = ostream
 	end
 end
 

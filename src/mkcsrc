@@ -21,3 +21,6 @@ done
 perl -i -npe 's#"\.\./.*?([^/]*.h)"#"\1"#' "$out"/*.[ch]
 perl -i -npe 's#\S*/([^/]*.[ch])#\1#' "$out/Makefile"
 perl -i -npe 's#\.\./clib#.#' "$out/Makefile"
+
+# Remove old compilation flags
+sed -i -e 's/OLDNITCOPT=.*/OLDNITCOPT=/' src/Makefile

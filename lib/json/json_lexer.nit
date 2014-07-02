@@ -40,7 +40,7 @@ end
 class MyNToken
 	super NToken
 end
-class DFAState0
+private class DFAState0
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -73,7 +73,7 @@ class DFAState0
 		return null
 	end
 end
-class DFAState1
+private class DFAState1
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -88,7 +88,7 @@ class DFAState1
 		return null
 	end
 end
-class DFAState2
+private class DFAState2
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -99,7 +99,7 @@ class DFAState2
 		return dfastate_2
 	end
 end
-class DFAState3
+private class DFAState3
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -109,7 +109,7 @@ class DFAState3
 		return t
 	end
 end
-class DFAState4
+private class DFAState4
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -118,7 +118,7 @@ class DFAState4
 		return null
 	end
 end
-class DFAState5
+private class DFAState5
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -140,7 +140,7 @@ class DFAState5
 		return null
 	end
 end
-class DFAState6
+private class DFAState6
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -150,7 +150,7 @@ class DFAState6
 		return t
 	end
 end
-class DFAState7
+private class DFAState7
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -160,7 +160,7 @@ class DFAState7
 		return t
 	end
 end
-class DFAState8
+private class DFAState8
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -170,7 +170,7 @@ class DFAState8
 		return t
 	end
 end
-class DFAState9
+private class DFAState9
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -179,7 +179,7 @@ class DFAState9
 		return null
 	end
 end
-class DFAState10
+private class DFAState10
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -188,7 +188,7 @@ class DFAState10
 		return null
 	end
 end
-class DFAState11
+private class DFAState11
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -197,7 +197,7 @@ class DFAState11
 		return null
 	end
 end
-class DFAState12
+private class DFAState12
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -207,7 +207,7 @@ class DFAState12
 		return t
 	end
 end
-class DFAState13
+private class DFAState13
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -217,7 +217,7 @@ class DFAState13
 		return t
 	end
 end
-class DFAState14
+private class DFAState14
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -226,7 +226,7 @@ class DFAState14
 		return null
 	end
 end
-class DFAState15
+private class DFAState15
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -235,7 +235,7 @@ class DFAState15
 		return null
 	end
 end
-class DFAState16
+private class DFAState16
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -245,7 +245,7 @@ class DFAState16
 		return t
 	end
 end
-class DFAState17
+private class DFAState17
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -254,7 +254,7 @@ class DFAState17
 		return null
 	end
 end
-class DFAState18
+private class DFAState18
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -263,7 +263,7 @@ class DFAState18
 		return null
 	end
 end
-class DFAState19
+private class DFAState19
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -273,7 +273,7 @@ class DFAState19
 		return t
 	end
 end
-class DFAState20
+private class DFAState20
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -282,7 +282,7 @@ class DFAState20
 		return null
 	end
 end
-class DFAState21
+private class DFAState21
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -291,7 +291,7 @@ class DFAState21
 		return null
 	end
 end
-class DFAState22
+private class DFAState22
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -300,7 +300,7 @@ class DFAState22
 		return null
 	end
 end
-class DFAState23
+private class DFAState23
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -310,7 +310,7 @@ class DFAState23
 		return t
 	end
 end
-class DFAState24
+private class DFAState24
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -319,7 +319,7 @@ class DFAState24
 		return null
 	end
 end
-class DFAState25
+private class DFAState25
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -332,7 +332,7 @@ class DFAState25
 		return null
 	end
 end
-class DFAState26
+private class DFAState26
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
@@ -341,7 +341,7 @@ class DFAState26
 		return null
 	end
 end
-class DFAState27
+private class DFAState27
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -357,7 +357,7 @@ class DFAState27
 		return null
 	end
 end
-class DFAState28
+private class DFAState28
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -377,7 +377,7 @@ class DFAState28
 		return null
 	end
 end
-class DFAState29
+private class DFAState29
 	super DFAState
 	redef fun is_accept do return true
 	redef fun make_token(position, text) do
@@ -387,7 +387,7 @@ class DFAState29
 		return t
 	end
 end
-class DFAState30
+private class DFAState30
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii

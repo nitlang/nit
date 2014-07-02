@@ -1,11 +1,12 @@
 init_inherit
 init_linext
-inline
 test_mem
 shoot_logic
 bench_
 nit_args1
 nit_args3
+nitvm_args1
+nitvm_args3
 nitc_args1
 nitg_args1
 nitg_args3
@@ -17,3 +18,4 @@ test_android_platform
 android
 nitcc_parser_gen
 mnit
+emscripten

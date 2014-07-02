@@ -79,7 +79,7 @@ class NitIndex
 		print "Loaded modules:"
 		var mmodules = new Array[MModule]
 		mmodules.add_all(model.mmodules)
-		var sorter = new MModuleNameSorter
+		var sorter = new MEntityNameSorter
 		sorter.sort(mmodules)
 		for m in mmodules do
 			print "\t{m.name}"
@@ -330,7 +330,7 @@ private class PagerMatchesRenderer
 			cats[key].add(mprop)
 		end
 		#sort groups
-		var sorter = new MModuleNameSorter
+		var sorter = new MEntityNameSorter
 		var sorted = new Array[MModule]
 		sorted.add_all(cats.keys)
 		sorter.sort(sorted)
@@ -338,8 +338,7 @@ private class PagerMatchesRenderer
 		for mmodule in sorted do
 			var mprops = cats[mmodule]
 			pager.add("# matches in module {mmodule.namespace.bold}")
-			var sorterp = new MPropertyNameSorter
-			sorterp.sort(mprops)
+			sorter.sort(mprops)
 			for mprop in mprops do
 
 			end
@@ -394,7 +393,7 @@ redef class MModule
 		pager.add(prototype)
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 		pager.indent = pager.indent + 1
-		var sorter = new MModuleNameSorter
+		var sorter = new MEntityNameSorter
 		# imported modules
 		var imports = new Array[MModule]
 		for mmodule in in_importation.direct_greaters.to_a do
@@ -412,7 +411,6 @@ redef class MModule
 			pager.indent = pager.indent - 1
 		end
 		# mclassdefs
-		var csorter = new MClassDefNameSorter
 		var intros = new Array[MClassDef]
 		var redefs = new Array[MClassDef]
 		for mclassdef in mclassdefs do
@@ -424,7 +422,7 @@ redef class MModule
 		end
 		# introductions
 		if not intros.is_empty then
-			csorter.sort(intros)
+			sorter.sort(intros)
 			pager.add("")
 			pager.add("== introduced classes".bold)
 			pager.indent = pager.indent + 1
@@ -436,7 +434,7 @@ redef class MModule
 		end
 		# refinements
 		if not redefs.is_empty then
-			csorter.sort(redefs)
+			sorter.sort(redefs)
 			pager.add("")
 			pager.add("== refined classes".bold)
 			pager.indent = pager.indent + 1
@@ -489,6 +487,7 @@ redef class MClass
 
 	redef fun content(index, pager) do
 		# intro comment
+		var sorter = new MEntityNameSorter
 		var mdoc = intro.mdoc
 		if mdoc != null then
 			for comment in mdoc.content do pager.add(comment.green)
@@ -499,8 +498,7 @@ redef class MClass
 		# parents
 		var supers = self.in_hierarchy(index.mainmodule).direct_greaters.to_a
 		if not supers.is_empty then
-			var csorter = new MClassNameSorter
-			csorter.sort(supers)
+			sorter.sort(supers)
 			pager.add("")
 			pager.add("== supers".bold)
 			pager.indent = pager.indent + 1
@@ -522,13 +520,12 @@ redef class MClass
 			pager.indent = pager.indent - 1
 		end
 		# intro mproperties
-		var psorter = new MPropDefNameSorter
 		var mpropdefs = intro.mpropdefs
 		index.mainmodule.linearize_mpropdefs(mpropdefs)
 		for cat in intro.cats2mpropdefs.keys do
 			var defs = intro.cats2mpropdefs[cat].to_a
 			if defs.is_empty then continue
-			psorter.sort(defs)
+			sorter.sort(defs)
 			pager.add("")
 			pager.add("== {cat}".bold)
 			pager.indent = pager.indent + 1
@@ -589,11 +586,11 @@ redef class MClassDef
 		pager.add("{namespace}".bold.gray + " (lines {location.lines})".gray)
 		pager.indent = pager.indent + 1
 		var mpropdefs = self.mpropdefs
-		var psorter = new MPropDefNameSorter
+		var sorter = new MEntityNameSorter
 		index.mainmodule.linearize_mpropdefs(mpropdefs)
 		for cat in cats2mpropdefs.keys do
 			var defs = cats2mpropdefs[cat].to_a
-			psorter.sort(defs)
+			sorter.sort(defs)
 			if defs.is_empty then continue
 			pager.add("")
 			pager.add("== {cat}".bold)

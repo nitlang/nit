@@ -41,11 +41,11 @@
 	  std: 0.0
 	  sum: 7
 	mnbr: number of refinement in module
-	  avg: 3.0
-	  max: base_simple3 (3)
-	  min: base_simple3 (3)
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
 	  std: 0.0
-	  sum: 3
+	  sum: 0
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 4.0
 	  max: base_simple3 (4)
@@ -59,11 +59,11 @@
 	  std: 0.0
 	  sum: 0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 4.0
-	  max: base_simple3 (4)
-	  min: base_simple3 (4)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
 	  std: 0.0
-	  sum: 4
+	  sum: 1
 
  ## project base_empty_module
   `- group base_empty_module
@@ -166,11 +166,11 @@
 	  std: 3.0
 	  sum: 8
 	mnbr: number of refinement in module
-	  avg: 1.0
-	  max: base_simple3 (3)
-	  min: base_empty_module (0)
-	  std: 1.581
-	  sum: 3
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
 	mnbcc: number of concrete class in module (intro + redef)
 	  avg: 2.0
 	  max: base_simple3 (4)
@@ -184,11 +184,11 @@
 	  std: 0.0
 	  sum: 0
 	mnbic: number of interface in module (intro + redef)
-	  avg: 2.0
-	  max: base_simple3 (4)
+	  avg: 0.0
+	  max: base_simple3 (1)
 	  min: base_empty_module (0)
-	  std: 2.0
-	  sum: 4
+	  std: 0.707
+	  sum: 1
 
 # MClasses metrics
 
@@ -421,48 +421,45 @@ Distribution of direct smallers
   <=0: sub-population=1 (33.33%); cumulated value=0 (0.0%)
   <=1: sub-population=2 (66.66%); cumulated value=2 (100.00%)
 ## Classdef hierarchy
-Number of nodes: 11
-Number of edges: 47 (4.27 per node)
-Number of direct edges: 9 (0.81 per node)
+Number of nodes: 8
+Number of edges: 14 (1.75 per node)
+Number of direct edges: 6 (0.75 per node)
 Distribution of greaters
- population: 11
+ population: 8
  minimum value: 1
- maximum value: 5
- total value: 47
- average value: 4.27
+ maximum value: 2
+ total value: 14
+ average value: 1.75
  distribution:
-  <=1: sub-population=1 (9.09%); cumulated value=1 (2.12%)
-  <=4: sub-population=4 (36.36%); cumulated value=16 (34.04%)
-  <=8: sub-population=6 (54.54%); cumulated value=30 (63.82%)
+  <=1: sub-population=2 (25.00%); cumulated value=2 (14.28%)
+  <=2: sub-population=6 (75.00%); cumulated value=12 (85.71%)
 Distribution of direct greaters
- population: 11
+ population: 8
  minimum value: 0
- maximum value: 3
- total value: 9
- average value: 0.81
+ maximum value: 1
+ total value: 6
+ average value: 0.75
  distribution:
-  <=0: sub-population=4 (36.36%); cumulated value=0 (0.0%)
-  <=1: sub-population=6 (54.54%); cumulated value=6 (66.66%)
-  <=4: sub-population=1 (9.09%); cumulated value=3 (33.33%)
+  <=0: sub-population=2 (25.00%); cumulated value=0 (0.0%)
+  <=1: sub-population=6 (75.00%); cumulated value=6 (100.00%)
 Distribution of smallers
- population: 11
+ population: 8
  minimum value: 1
- maximum value: 10
- total value: 47
- average value: 4.27
+ maximum value: 7
+ total value: 14
+ average value: 1.75
  distribution:
-  <=1: sub-population=7 (63.63%); cumulated value=7 (14.89%)
-  <=16: sub-population=4 (36.36%); cumulated value=40 (85.10%)
+  <=1: sub-population=7 (87.50%); cumulated value=7 (50.00%)
+  <=8: sub-population=1 (12.50%); cumulated value=7 (50.00%)
 Distribution of direct smallers
- population: 11
+ population: 8
  minimum value: 0
  maximum value: 6
- total value: 9
- average value: 0.81
+ total value: 6
+ average value: 0.75
  distribution:
-  <=0: sub-population=7 (63.63%); cumulated value=0 (0.0%)
-  <=1: sub-population=3 (27.27%); cumulated value=3 (33.33%)
-  <=8: sub-population=1 (9.09%); cumulated value=6 (66.66%)
+  <=0: sub-population=7 (87.50%); cumulated value=0 (0.0%)
+  <=8: sub-population=1 (12.50%); cumulated value=6 (100.00%)
 ## Class hierarchy
 Number of nodes: 8
 Number of edges: 14 (1.75 per node)
@@ -580,10 +577,10 @@ Number of classes: 8
   Number of enum kind: 2 (25.00%)
   Number of class kind: 5 (62.50%)
 
-Number of class definitions: 11
-Number of refined classes: 1 (12.50%)
-Average number of class refinments by classes: 0.37
-Average number of class refinments by refined classes: 3.00
+Number of class definitions: 8
+Number of refined classes: 0 (0.0%)
+Average number of class refinments by classes: 0.0
+Average number of class refinments by refined classes: na
 
 Number of properties: 20
   Number of MAttribute: 3 (15.00%)
@@ -614,7 +611,7 @@ Total number of self: 5
 Total number of implicit self: 4 (80.00%)
 --- Construction of tables ---
 Number of runtime classes: 7 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 4.42
+Average number of composing class definition by runtime class: 1.85
 Total size of tables (classes and instances): 35 (not including stuff like info for subtyping or call-next-method)
 Average size of table by runtime class: 5.00
 Values never redefined: 35 (100.00%)
@@ -632,6 +629,8 @@ Values never redefined: 35 (100.00%)
 	blooming mclasses (threshold: 2.388)
 	   B: 3.0
 	   C: 3.0
+generating out/nitmetrics_args1.write/project_hierarchy.dot
+generating out/nitmetrics_args1.write/module_hierarchy.dot
 
 # Nullable metrics
 
@@ -1075,8 +1074,6 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3#Object#bar: 1 (4.54%)
   base_simple3#Object#foo: 1 (4.54%)
   base_simple3#C#init: 1 (4.54%)
-generating out/nitmetrics_args1.write/project_hierarchy.dot
-generating out/nitmetrics_args1.write/module_hierarchy.dot
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/

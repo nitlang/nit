@@ -19,6 +19,7 @@
 
 # Set lang do default to avoid failed tests because of locale
 export LANG=C
+export LC_ALL=C
 export NIT_TESTING=true
 export MNIT_SRAND=0
 
@@ -43,10 +44,8 @@ Usage: $e [options] modulenames
 -o option   Pass option to the engine
 -v          Verbose (show tests steps)
 -h          This help
---tap       Produce TAP output
 --engine    Use a specific engine (default=nitg)
 --noskip    Do not skip a test even if the .skip file matches
---[no]soso  Force enable (or disable) SOSO
 END
 }
 
@@ -62,16 +61,16 @@ function compare_to_result()
 	local pattern="$1"
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
+	test "`cat "$sav"`" = "UNDEFINED" && return 1
 	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
-	[ -z "$soso" ] && return 3
 	sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log"
+	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -82,7 +81,6 @@ function compare_to_result()
 # As argument: the pattern used for the file
 function process_result()
 {
-	((tapcount=tapcount+1))
 	# Result
 	pattern=$1
 	description=$2
@@ -101,46 +99,63 @@ function process_result()
 	echo >>$xml "<testcase classname='$pack' name='$description'>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
-		sav=$savdir/$pattern.res
+		sav=$savdir/fixme/$pattern.res
 		compare_to_result "$pattern" "$sav"
-
-		case "$? $sav" in
-			0*)
-				continue;; # no file
-			1*/fixme/*)
+		case "$?" in
+			0)
+				;; # no file
+			1)
 				OLD="$LIST"
 				FIXME="$sav"
+				LIST="$LIST $sav"
 				;;
-			1*)
-				OLD="$LIST"
-				SAV="$sav"
+			2)
+				if [ -z "$FIRST" ]; then
+					SOSOF="$sav"
+					FIRST="$sav"
+				fi
+				LIST="$LIST $sav"
 				;;
-			2*/fixme/*)
-				SOSOF="$sav" ;;
-			2*)
-				SOSO="$sav" ;;
-			3*/fixme/*)
+			3)
 				if [ -z "$FIRST" ]; then
 					NFIXME="$sav"
 					FIRST="$sav"
 				fi
+				LIST="$LIST $sav"
 				;;
-			3*)
+		esac
+
+		sav=$savdir/$pattern.res
+		compare_to_result "$pattern" "$sav"
+		case "$?" in
+			0)
+				;; # no file
+			1)
+				OLD="$LIST"
+				SAV="$sav"
+				LIST="$LIST $sav"
+				;;
+			2)
+				if [ -z "$FIRST" ]; then
+					SOSO="$sav"
+					FIRST="$sav"
+				fi
+				LIST="$LIST $sav"
+				;;
+			3)
 				if [ -z "$FIRST" ]; then
 					NSAV="$sav"
 					FIRST="$sav"
 				fi
+				LIST="$LIST $sav"
 				;;
 		esac
-		LIST="$LIST $sav"
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
-		if [ -n "$tap" ]; then
-			echo "ok - $description"
-		elif [ -n "$OLD" ]; then
+		if [ -n "$OLD" ]; then
 			echo "[*ok*] out/$pattern.res $SAV - but $OLD remains!"
 			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
@@ -149,9 +164,7 @@ function process_result()
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$FIXME" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO expected failure"
-		elif [ -n "$OLD" ]; then
+		if [ -n "$OLD" ]; then
 			echo "[*fixme*] out/$pattern.res $FIXME - but $OLD remains!"
 			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
@@ -160,35 +173,28 @@ function process_result()
 			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
-	elif [ -n "$SOSO" ]; then
-		if [ -n "$tap" ]; then
-			echo "ok - $description # SOSO"
-		else
-			echo "[soso] out/$pattern.res $SOSO"
-		fi
-		ok="$ok $pattern"
 	elif [ "x$NYI" = "x0" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO not yet implemented"
-		else
-			echo "[todo] out/$pattern.res -> not yet implemented"
-			echo >>$xml "<skipped/>"
-		fi
+		echo "[todo] out/$pattern.res -> not yet implemented"
+		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
+	elif [ -n "$SOSO" ]; then
+		echo "[======= soso out/$pattern.res $SOSO =======]"
+		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		echo >>$xml "]]></system-out>"
+		nok="$nok $pattern"
+		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$SOSOF" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description # TODO SOSO expected failure"
-		else
-			echo "[fixme soso] out/$pattern.res $SOSOF"
-			echo >>$xml "<skipped/>"
-		fi
-		todos="$todos $pattern"
+		echo "[======= fixme soso out/$pattern.res $SOSOF =======]"
+		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		echo >>$xml "]]></system-out>"
+		nok="$nok $pattern"
+		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NSAV" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description"
-		else
-			echo "[======= fail out/$pattern.res $NSAV =======]"
-		fi
+		echo "[======= fail out/$pattern.res $NSAV =======]"
 		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
@@ -196,11 +202,7 @@ function process_result()
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - $description"
-		else
-			echo "[======= changed out/$pattern.res $NFIXME ======]"
-		fi
+		echo "[======= changed out/$pattern.res $NFIXME ======]"
 		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
@@ -208,11 +210,7 @@ function process_result()
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -s out/$pattern.res ]; then
-		if [ -n "$tap" ]; then
-			echo "no ok - $description"
-		else
-			echo "[=== no sav ===] out/$pattern.res is not empty"
-		fi
+		echo "[=== no sav ===] out/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v >>$xml out/$pattern.res
@@ -220,11 +218,7 @@ function process_result()
 		nos="$nos $pattern"
 	else
 		# no sav but empty res
-		if [ -n "$tap" ]; then
-			echo "ok - $description"
-		else
-			echo "[0k] out/$pattern.res is empty"
-		fi
+		echo "[0k] out/$pattern.res is empty"
 		ok="$ok $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
@@ -239,22 +233,12 @@ need_skip()
 {
 	test "$noskip" = true && return 1
 	if echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
-		((tapcount=tapcount+1))
-		if [ -n "$tap" ]; then
-			echo "ok - $2 # skip"
-		else
-			echo "=> $2: [skip]"
-		fi
+		echo "=> $2: [skip]"
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
 	if test $engine = niti && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
-		((tapcount=tapcount+1))
-		if [ -n "$tap" ]; then
-			echo "ok - $2 # skip"
-		else
-			echo "=> $2: [skip exec]"
-		fi
+		echo "=> $2: [skip exec]"
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
@@ -282,41 +266,28 @@ skip_cc()
 
 find_nitc()
 {
-	((tapcount=tapcount+1))
 	name="$enginebinname"
 	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
-		if [ -n "$tap" ]; then
-			echo "not ok - find binary for $engine"
-			echo "Bail out! Could not find binary for engine $engine, aborting"
-		else
-			echo "Could not find binary for engine $engine, aborting"
-		fi
+		echo "Could not find binary for engine $engine, aborting"
 		exit 1
 	fi
-	if [ -n "$tap" ]; then
-		echo "ok - find binary for $engine: $recent $OPT"
-	else
-		echo "Find binary for engine $engine: $recent $OPT"
-	fi
+	echo "Find binary for engine $engine: $recent $OPT"
 	NITC=$recent
 }
 
 verbose=false
 stop=false
-tapcount=0
 engine=nitg
 noskip=
+savdirs=
 while [ $stop = false ]; do
 	case $1 in
 		-o) OPT="$OPT $2"; shift; shift;;
 		-v) verbose=true; shift;;
 		-h) usage; exit;;
-		--tap) tap=true; shift;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
-		--soso) soso=true; shift;;
-		--nososo) nososo=true; shift;;
 		*) stop=true
 	esac
 done
@@ -325,31 +296,34 @@ case $engine in
 	nitg)
 		engine=nitg-s;
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
 	nitg-s)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--separate $OPT"
 		;;
 	nitg-e)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--erasure $OPT"
+		;;
+	nitg-sg)
+		enginebinname=nitg;
+		OPT="--semi-global $OPT"
 		;;
 	nitg-g)
 		enginebinname=nitg;
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		OPT="--global $OPT"
 		;;
 	nit)
 		engine=niti
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		;;
 	niti)
 		enginebinname=nit
-		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		;;
+	emscripten)
+		enginebinname=nitg
+		OPT="-m emscripten_nodejs.nit --semi-global $OPT"
+		savdirs="sav/nitg-sg/"
 		;;
 	nitc)
 		echo "disabled engine $engine"
@@ -360,6 +334,8 @@ case $engine in
 		exit 1
 		;;
 esac
+
+savdirs="sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -432,7 +408,7 @@ for ii in "$@"; do
 		# Sould we skip the alternative for this engine?
 		need_skip $bf $bf $pack && continue
 
-		test -z "$tap" && echo -n "=> $bf: "
+		echo -n "=> $bf: "
 
 		if [ -f "$f.inputs" ]; then
 			inputs="$f.inputs"
@@ -440,6 +416,11 @@ for ii in "$@"; do
 		else
 			inputs=/dev/null
 			export MNIT_READ_INPUT=/dev/null
+		fi
+
+		ffout="$ff.bin"
+		if [ "$engine" = "emscripten" ]; then
+			ffout="$ff.bin.js"
 		fi
 
 		if [ "$engine" = "niti" ]; then
@@ -459,18 +440,27 @@ END
 			# Compile
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes" $nocc
+				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				$TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				$TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
 				cat >&2 "$ff.cmp.err"
 			fi
 		fi
+		if [ "$engine" = "emscripten" ]; then
+			echo > "./$ff.bin" "nodejs $ffout \"\$@\""
+			chmod +x "$ff.bin"
+			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
+				echo " [skip] do no not imports kernel"
+				echo >>$xml "<testcase classname='$pack' name='$bf'><skipped/></testcase>"
+				continue
+			fi
+		fi
 		if [ "$ERR" != 0 ]; then
-			test -z "$tap" && echo -n "! "
+			echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
 			process_result $bf $bf $pack
 		elif skip_exec "$bf"; then
@@ -479,11 +469,11 @@ END
 			process_result $bf $bf $pack
 		elif [ -n "$nocc" ]; then
 			# not compiled
-			test -z "$tap" && echo -n "nocc "
+			echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
-			test -z "$tap" && echo -n ". "
+			echo -n ". "
 			# Execute
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
@@ -530,7 +520,7 @@ END
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
-					test -z "$tap" && echo -n "==> $name "
+					echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
 					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
@@ -554,23 +544,13 @@ END
 			echo "Not executable (platform?)" > "$ff.res"
 			process_result $bf "$bf" $pack
 		else
-			test -z "$tap" && echo -n "! "
+			echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"
 			echo "Compilation error" > "$ff.res"
 			process_result $bf "$bf" $pack
 		fi
 	done
 done
-
-if [ -n "$tap" ]; then
-	echo "1..$tapcount"
-	echo "# ok:" `echo $ok | wc -w`
-	echo "# not ok:" `echo $nok | wc -w`
-	echo "# no sav:" `echo $nos | wc -w`
-	echo "# todo/fixme:" `echo $todos | wc -w`
-	echo "# of sav that remains:" `echo $remains | wc -w`
-	exit
-fi
 
 echo "engine: $engine ($enginebinname $OPT)"
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`

@@ -19,6 +19,50 @@ module model_utils
 
 import modelbuilder
 
+redef class MGroup
+	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		var lst = in_nesting.direct_smallers
+		for mmodule in mmodules do res.add_all mmodule.filter_intro_mclasses(min_visibility)
+		for mgrp in lst do res.add_all mgrp.in_nesting_intro_mclasses(min_visibility)
+		return res
+	end
+
+	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		var lst = in_nesting.direct_smallers
+		for mmodule in mmodules do res.add_all mmodule.filter_redef_mclasses(min_visibility)
+		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclasses(min_visibility)
+		return res
+	end
+
+	fun in_nesting_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		var lst = in_nesting.direct_smallers
+		for mmodule in mmodules do res.add_all mmodule.intro_mclassdefs(min_visibility)
+		for mgrp in lst do res.add_all mgrp.in_nesting_intro_mclassdefs(min_visibility)
+		return res
+	end
+
+	fun in_nesting_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+		var res = new HashSet[MClassDef]
+		var lst = in_nesting.direct_smallers
+		for mmodule in mmodules do res.add_all mmodule.redef_mclassdefs(min_visibility)
+		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclassdefs(min_visibility)
+		return res
+	end
+
+	# Collect nested modules
+	fun collect_mmodules: Set[MModule] do
+		var res = new HashSet[MModule]
+		res.add_all mmodules
+		for mgroup in in_nesting.direct_smallers do
+			res.add_all mgroup.collect_mmodules
+		end
+		return res
+	end
+end
+
 redef class MModule
 
 	# The list of intro mclassdef in the module.
@@ -45,10 +89,31 @@ redef class MModule
 		return res
 	end
 
+	# The list of intro mclass in the module.
+	# with visibility >= to min_visibility
+	fun filter_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var res = new HashSet[MClass]
+		for mclass in intro_mclasses do
+			if mclass.visibility < min_visibility then continue
+			res.add mclass
+		end
+		return res
+	end
+
 	# Get the list of mclasses refined in 'self'.
 	fun redef_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for c in mclassdefs do
+			if not c.is_intro then mclasses.add(c.mclass)
+		end
+		return mclasses
+	end
+
+	# Get the list of mclasses refined in 'self'.
+	fun filter_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
+		var mclasses = new HashSet[MClass]
+		for c in mclassdefs do
+			if c.mclass.visibility < min_visibility then continue
 			if not c.is_intro then mclasses.add(c.mclass)
 		end
 		return mclasses
@@ -67,7 +132,7 @@ redef class MModule
 	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mmodule in in_nesting.greaters do
-			for mclass in mmodule.intro_mclasses do
+			for mclass in mmodule.filter_intro_mclasses(min_visibility) do
 				if mclass.visibility < min_visibility then continue
 				res.add mclass
 			end
@@ -78,7 +143,7 @@ redef class MModule
 	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mmodule in self.in_nesting.greaters do
-			for mclass in mmodule.redef_mclasses do
+			for mclass in mmodule.filter_redef_mclasses(min_visibility) do
 				if mclass.visibility < min_visibility then continue
 				res.add mclass
 			end
@@ -397,37 +462,10 @@ end
 
 # Sorters
 
-# Sort mmodules by their name
-class MModuleNameSorter
-	super AbstractSorter[MModule]
+# Sort mentities by their name
+class MEntityNameSorter
+	super AbstractSorter[MEntity]
 	redef fun compare(a, b) do return a.name <=> b.name
 	init do end
 end
 
-# Sort mclasses by their name
-class MClassNameSorter
-	super AbstractSorter[MClass]
-	redef fun compare(a, b) do return a.name <=> b.name
-	init do end
-end
-
-# Sort mclassdefs by their name
-class MClassDefNameSorter
-	super AbstractSorter[MClassDef]
-	redef fun compare(a, b) do return a.mclass.name <=> b.mclass.name
-	init do end
-end
-
-# Sort mproperties by their name
-class MPropertyNameSorter
-	super AbstractSorter[MProperty]
-	redef fun compare(a, b) do return a.name <=> b.name
-	init do end
-end
-
-# Sort mpropdefs by their name
-class MPropDefNameSorter
-	super AbstractSorter[MPropDef]
-	redef fun compare(a, b) do return a.mproperty.name <=> b.mproperty.name
-	init do end
-end

@@ -1,0 +1,3 @@
+Usage: nitvm [OPTION]... <file.nit>...
+Executes Nit programs with a virtual machine.
+Use --help for help

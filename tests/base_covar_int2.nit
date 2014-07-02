@@ -44,3 +44,4 @@ d1.foo(d2).output
 #alt4#1.foo(c2).output
 #alt5#d1.foo(c2).output
 c1.foo(c2).output
+'\n'.output

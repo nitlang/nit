@@ -26,11 +26,11 @@ end
 
 class Foo
 	var _a1: Int
-	readable var _a2: Int
+	var _a2: Int
 	fun run
 	do
 		_a1.output
-		a2.output
+		_a2.output
 	end
 
 	fun run_other(o: Foo)

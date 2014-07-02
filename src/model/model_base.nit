@@ -25,6 +25,15 @@ end
 # A named and possibly documented entity in the model.
 # This class is usefull to generalize presentation of entities to the human.
 abstract class MEntity
+	# The short (unqualified) name of this model entity
+	fun name: String is abstract
+end
+
+# Something that represents a concern
+abstract class MConcern
+	super MEntity
+	# The concern that contains `self` or null if `self` is the root of the concern hierarchy
+	fun parent_concern: nullable MConcern is abstract
 end
 
 # A visibility (for modules, class and properties)

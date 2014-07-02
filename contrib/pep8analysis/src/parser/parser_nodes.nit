@@ -90,17 +90,22 @@ end
 
 class ALine
 	super Prod
-	readable var _n_label_decl: nullable ALabelDecl = null
-    readable var _n_comment: nullable TComment = null
+	var _n_label_decl: nullable ALabelDecl = null
+	fun n_label_decl: nullable ALabelDecl do return _n_label_decl
+    var _n_comment: nullable TComment = null
+    fun n_comment: nullable TComment do return _n_comment
 end
 class AInstruction
 	super Prod
-    readable writable var _n_id: TId
+    var _n_id: TId
+    fun n_id: TId do return _n_id
+    fun n_id=(n_id: TId) do _n_id = n_id
 	init do end
 end
 class AOperand
 	super Prod
-    readable var _n_value: AValue
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class AValue super Prod end
@@ -108,14 +113,18 @@ class ADirective super Prod end
 
 class AListing
 	super Prod
-    readable var _n_lines: List[ALine] = new List[ALine]
-    readable var _n_label_decl: nullable ALabelDecl = null
-    readable var _n_end_block: TEndBlock
+    var _n_lines: List[ALine] = new List[ALine]
+    fun n_lines: List[ALine] do return _n_lines
+    var _n_label_decl: nullable ALabelDecl = null
+    fun n_label_decl: nullable ALabelDecl do return _n_label_decl
+    var _n_end_block: TEndBlock
+    fun n_end_block: TEndBlock do return _n_end_block
 	init do end
 end
 class AEmptyLine
 	super ALine
-    readable var _n_eol: TEol
+    var _n_eol: TEol
+    fun n_eol: TEol do return _n_eol
 	init do end
 end
 abstract class ANonEmptyLine
@@ -123,20 +132,26 @@ abstract class ANonEmptyLine
 end
 class AInstructionLine
 	super ANonEmptyLine
-    readable var _n_instruction: AInstruction
-    readable var _n_eol: TEol
+    var _n_instruction: AInstruction
+    fun n_instruction: AInstruction do return _n_instruction
+    var _n_eol: TEol
+    fun n_eol: TEol do return _n_eol
 	init do end
 end
 class ADirectiveLine
 	super ANonEmptyLine
-    readable var _n_directive: ADirective
-    readable var _n_eol: TEol
+    var _n_directive: ADirective
+    fun n_directive: ADirective do return _n_directive
+    var _n_eol: TEol
+    fun n_eol: TEol do return _n_eol
 	init do end
 end
 class ALabelDecl
 	super Prod
-    readable var _n_id: TId
-    readable var _n_colon: TColon
+    var _n_id: TId
+    fun n_id: TId do return _n_id
+    var _n_colon: TColon
+    fun n_colon: TColon do return _n_colon
 	init do end
 end
 class AUnaryInstruction
@@ -144,7 +159,8 @@ class AUnaryInstruction
 end
 class ABinaryInstruction
 	super AInstruction
-    readable var _n_operand: AOperand
+    var _n_operand: AOperand
+    fun n_operand: AOperand do return _n_operand
 	init do end
 end
 class AImmediateOperand
@@ -152,82 +168,105 @@ class AImmediateOperand
 end
 class AAnyOperand
 	super AOperand
-    readable var _n_comma: TComma
-    readable var _n_id: TId
+    var _n_comma: TComma
+    fun n_comma: TComma do return _n_comma
+    var _n_id: TId
+    fun n_id: TId do return _n_id
 	init do end
 end
 class ALabelValue
 	super AValue
-    readable var _n_id: TId
+    var _n_id: TId
+    fun n_id: TId do return _n_id
 	init do end
 end
 class ANumberValue
 	super AValue
-    readable var _n_number: TNumber
+    var _n_number: TNumber
+    fun n_number: TNumber do return _n_number
 	init do end
 end
 class ACharValue
 	super AValue
-    readable var _n_char: TChar
+    var _n_char: TChar
+    fun n_char: TChar do return _n_char
 	init do end
 end
 class AStringValue
 	super AValue
-    readable var _n_string: TString
+    var _n_string: TString
+    fun n_string: TString do return _n_string
 	init do end
 end
 class AHexValue
 	super AValue
-    readable var _n_hex: THex
+    var _n_hex: THex
+    fun n_hex: THex do return _n_hex
 	init do end
 end
 class AByteDirective
 	super ADirective
-    readable var _n_tk_byte: TTkByte
-    readable var _n_value: AValue
+    var _n_tk_byte: TTkByte
+    fun n_tk_byte: TTkByte do return _n_tk_byte
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class AWordDirective
 	super ADirective
-    readable var _n_tk_word: TTkWord
-    readable var _n_value: AValue
+    var _n_tk_word: TTkWord
+    fun n_tk_word: TTkWord do return _n_tk_word
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class ABlockDirective
 	super ADirective
-    readable var _n_tk_block: TTkBlock
-    readable var _n_value: AValue
+    var _n_tk_block: TTkBlock
+    fun n_tk_block: TTkBlock do return _n_tk_block
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class AAsciiDirective
 	super ADirective
-    readable var _n_tk_ascii: TTkAscii
-    readable var _n_value: AValue
+    var _n_tk_ascii: TTkAscii
+    fun n_tk_ascii: TTkAscii do return _n_tk_ascii
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class AAddrssDirective
 	super ADirective
-    readable var _n_tk_addrss: TTkAddrss
-    readable var _n_value: AValue
+    var _n_tk_addrss: TTkAddrss
+    fun n_tk_addrss: TTkAddrss do return _n_tk_addrss
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class AEquateDirective
 	super ADirective
-    readable var _n_tk_equate: TTkEquate
-    readable var _n_value: AValue
+    var _n_tk_equate: TTkEquate
+    fun n_tk_equate: TTkEquate do return _n_tk_equate
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 class ABurnDirective
 	super ADirective
-    readable var _n_tk_burn: TTkBurn
-    readable var _n_value: AValue
+    var _n_tk_burn: TTkBurn
+    fun n_tk_burn: TTkBurn do return _n_tk_burn
+    var _n_value: AValue
+    fun n_value: AValue do return _n_value
 	init do end
 end
 
 class Start
 	super Prod
-    readable var _n_base: nullable AListing
-    readable var _n_eof: EOF
+    var _n_base: nullable AListing
+    fun n_base: nullable AListing do return _n_base
+    var _n_eof: EOF
+    fun n_eof: EOF do return _n_eof
 	init(n_base: nullable AListing, n_eof: EOF)
 	do
 		super

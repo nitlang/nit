@@ -28,10 +28,11 @@ abstract class Noter
 		failed = true
 	end
 
-	fun reset
-	do
-		failed = false
-	end
+	# Reset failure status
+	fun reset do failed = false
+
+	# Clear list of notes
+	fun clear do notes = new Array[Note]
 end
 
 abstract class Note
@@ -86,10 +87,6 @@ class Fatal
 	redef fun prefix do return "Fatal:   "
 end
 
-redef class Object
-	protected fun manager: AnalysisManager is abstract
-end
-
 redef class Location
 	# "line 5"
 	fun to_line_s: String
@@ -102,3 +99,5 @@ redef class Location
 		return file.filename
 	end
 end
+
+protected fun manager: AnalysisManager do return once new AnalysisManager

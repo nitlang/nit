@@ -66,6 +66,6 @@ var m = new Matrice
 m[1,1] = 11
 m[2,1] = 21
 m[5,5] = 55
-printn(m[1,1])
-printn(m[2,1])
-printn(m[5,5])
+print(m[1,1])
+print(m[2,1])
+print(m[5,5])

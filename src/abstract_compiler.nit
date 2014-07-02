@@ -202,8 +202,12 @@ class MakefileToolchain
 	do
 		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
 
+		var platform = compiler.mainmodule.target_platform
+		var cc_opt_with_libgc = "-DWITH_LIBGC"
+		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
+
 		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
+		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
@@ -288,18 +292,19 @@ class MakefileToolchain
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 	end
 
+	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
+
+	fun default_outname(mainmodule: MModule): String do return mainmodule.name
+
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
 
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
-		end
+		var outname = self.toolcontext.opt_output.value or else default_outname(mainmodule)
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
-		var makename = "{mainmodule.name}.mk"
+		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
@@ -315,10 +320,28 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		var ost = toolcontext.opt_stacktrace.value
-		if ost == "libunwind" or ost == "nitstack" then linker_options.add("-lunwind")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
+		var ost = toolcontext.opt_stacktrace.value
+		if ost == "libunwind" or ost == "nitstack" then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+
+		# Dynamic adaptations
+		# While `platform` enable complex toolchains, they are statically applied
+		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+
+		# Check and adapt the targeted system
+		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
+		makefile.write("ifeq ($(uname_S),Darwin)\n")
+		# remove -lunwind since it is already included on macosx
+		makefile.write("\tNEED_LIBUNWIND :=\n")
+		makefile.write("endif\n\n")
+
+		# Check and adapt for the compiler used
+		# clang need an additionnal `-Qunused-arguments`
+		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
+
+		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
@@ -367,7 +390,7 @@ class MakefileToolchain
 
 	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
 	do
-		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
+		var makename = makefile_name(compiler.mainmodule)
 
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
@@ -887,6 +910,8 @@ abstract class AbstractCompilerVisitor
 	do
 		return self.send(callsite.mproperty, args)
 	end
+
+	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
 
 	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
 
@@ -1698,6 +1723,8 @@ redef class AMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
+		else if mpropdef.mproperty.is_new then
+			ret = arguments.first.mcasttype
 		end
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
@@ -1876,6 +1903,9 @@ redef class AMethPropdef
 				return
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
+				return
+			else if pname == "init" then
+				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return
 			end
 		else if cname == "NativeArray" then
@@ -2606,13 +2636,18 @@ redef class ANewExpr
 		var mtype = self.mtype.as(MClassType)
 		var recv
 		var ctype = mtype.ctype
-		if ctype == "val*" then
+		if mtype.mclass.name == "NativeArray" then
+			assert self.n_args.n_exprs.length == 1
+			var l = v.expr(self.n_args.n_exprs.first, null)
+			assert mtype isa MGenericType
+			var elttype = mtype.arguments.first
+			return v.native_array_instance(elttype, l)
+		else if ctype == "val*" then
 			recv = v.init_instance(mtype)
 		else if ctype == "void*" then
 			recv = v.new_expr("NULL/*special!*/", mtype)
 		else
-			debug("cannot new {mtype}")
-			abort
+			recv = v.new_expr("({ctype})0/*special!*/", mtype)
 		end
 		var args = [recv]
 		for a in self.n_args.n_exprs do

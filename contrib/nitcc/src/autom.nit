@@ -609,7 +609,7 @@ private class DFAGenerator
 
 		for s in automaton.states do
 			var  n = names[s]
-			add("class DFAState{n}\n")
+			add("private class DFAState{n}\n")
 			add("\tsuper DFAState\n")
 			if automaton.accept.has(s) then
 				var token

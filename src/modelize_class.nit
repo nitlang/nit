@@ -97,7 +97,12 @@ redef class ModelBuilder
 			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
 		end
 		nclassdef.mclass = mclass
-		nmodule.mclass2nclassdef[mclass] = nclassdef
+		if not nmodule.mclass2nclassdef.has_key(mclass) then
+			nmodule.mclass2nclassdef[mclass] = nclassdef
+			nclassdef.all_defs = [nclassdef]
+		else
+			nmodule.mclass2nclassdef[mclass].all_defs.add(nclassdef)
+		end
 	end
 
 	# Visit the AST and create the `MClassDef` objects
@@ -107,7 +112,14 @@ redef class ModelBuilder
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var mclass = nclassdef.mclass
 		if mclass == null then return # Skip error
-		#var mclassdef = nclassdef.mclassdef.as(not null)
+
+		# In case of non-standard AClassdef, try to attach to an already existing mclassdef
+		var other_nclassdef = nmodule.mclass2nclassdef[mclass]
+		if other_nclassdef != nclassdef then
+			assert not nclassdef isa AStdClassdef
+			nclassdef.mclassdef = other_nclassdef.mclassdef
+			return
+		end
 
 		var names = new Array[String]
 		var bounds = new Array[MType]
@@ -281,8 +293,7 @@ redef class ModelBuilder
 		if errcount != toolcontext.error_count then return
 
 		# Create the mclassdef hierarchy
-		for nclassdef in nmodule.n_classdefs do
-			var mclassdef = nclassdef.mclassdef.as(not null)
+		for mclassdef in mmodule.mclassdefs do
 			mclassdef.add_in_hierarchy
 		end
 
@@ -505,6 +516,8 @@ redef class AClassdef
 	var mclass: nullable MClass
 	# The associated MClassDef once build by a `ModelBuilder`
 	var mclassdef: nullable MClassDef
+	# All (self and other) definitions for the same mclassdef
+	var all_defs: nullable Array[AClassdef]
 end
 
 redef class AClasskind

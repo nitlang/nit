@@ -45,6 +45,7 @@ class B
 	fun foo
 	do
 		self.o.output
+		'\n'.output
 		self.a.output
 		self.b.output
 		#alt2#self.c.output
@@ -57,3 +58,4 @@ end
 
 var b = new B
 b.foo
+'\n'.output

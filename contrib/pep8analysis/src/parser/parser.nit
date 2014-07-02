@@ -8,15 +8,15 @@ import tables
 # State of the parser automata as stored in the parser stack.
 private class State
 	# The internal state number
-	readable writable var _state: Int
+	var state: Int
 
 	# The node stored with the state in the stack
-	readable writable var _nodes: nullable Object
+	var nodes: nullable Object
 
 	init(state: Int, nodes: nullable Object)
 	do
-		_state = state
-		_nodes = nodes
+		self.state = state
+		self.nodes = nodes
 	end
 end
 

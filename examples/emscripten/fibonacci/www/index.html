@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- This file is part of NIT ( http://www.nitlanguage.org )
+
+ Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License. 
+-->
+<html>
+<head>
+	<title>Fibonacci</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script>
+		// Redirect print to HTML
+		var Module = {
+			'print': function(text) {
+				$("#console").append(text + "<br>");
+			},
+			'noInitialRun': true,
+		};
+
+		$(document).ready(function() {
+			// Report full loading
+			$("#loading").text( "Loaded." );
+
+			// Callback
+			$("#in").keyup(function(){
+				if(event.keyCode == 13){
+					fib();
+				}
+			});
+		});
+
+		function fib() {
+			var input = $("#in").val();
+
+			// Invoke the full Nit program
+      		ret = Module['callMain']([input]);
+		}
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<h1>Fibonacci calculator</h1>
+	<a href="https://github.com/privat/nit/blob/master/examples/fibonacci.nit">Nit source</a><br>
+	<a href="https://github.com/privat/nit/blob/master/examples/emscripten/fibonacci/www/index.html">HTML source</a>
+
+	<h2>Status</h2>
+	<p id="loading">Loading...</p>
+
+	<h2>Program Input</h2>
+	<input id="in" type="text" placeholder="12 (or any integer)"/><input type="button" value="Execute" onclick="fib();"/>
+
+	<h2>Program Output</h2>
+	<samp id="console"></samp>
+	
+	<script src="fibonacci.js"></script>
+</div>
+
+</body>
+</html>

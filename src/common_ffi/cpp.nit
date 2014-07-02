@@ -185,7 +185,7 @@ class ExternCppFile
 	end
 
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "g++ {mmodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
 	redef fun compiles_to_o_file do return true
 end
 
