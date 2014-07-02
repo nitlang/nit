@@ -326,10 +326,14 @@ abstract class NitdocPage
 		fmap.close
 
 		var article = new TplArticle("graph")
-		if title != null then article.title = title
+		var alt = ""
+		if title != null then
+			article.title = title
+			alt = "alt='{title}'"
+		end
 		article.css_classes.add "text-center"
 		var content = new Template
-		content.add "<img src='{name}.png' usemap='#{name}' style='margin:auto' alt='{title}'/>"
+		content.add "<img src='{name}.png' usemap='#{name}' style='margin:auto' {alt}/>"
 		content.add map
 		article.content = content
 		return article
