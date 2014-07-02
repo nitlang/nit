@@ -12,20 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var st = "quick brown fox over the lazy dog"
+var x = new FlatBuffer.from("test")
+var y = new FlatBuffer.from("TEST")
 
-print st
+x.upper
+y.lower
 
-var pr = "The " + st
+assert x == "TEST"
+assert y == "test"
 
-print pr
-
-pr = st.insert_at(" jumps", 15)
-
-print pr
-
-pr = st + "."
-
-print pr
-
-print "The " + st.insert_at(" jumps", 15) + "."

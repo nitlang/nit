@@ -16,7 +16,11 @@ var x = "string__NativeString__to_s_with_length"
 
 var y = "string" + "__" + "NativeString" + "__" + "to_s_with_length"
 
-var z = new FlatBuffer.from("string") + "__" + "NativeString" + "__" + "to_s_with_length"
+var z = new FlatBuffer.from("string")
+z.append("__")
+z.append("NativeString")
+z.append("__")
+z.append("to_s_with_length")
 
 var a = ["string", "NativeString", "to_s_with_length"].join("__")
 
