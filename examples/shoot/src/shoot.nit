@@ -222,7 +222,7 @@ redef class PlayScene
 				end
 			end
 			return true
-		else if input_event isa PointerEvent then
+		else if input_event isa PointerEvent and input_event.pressed then
 			var x = (input_event.x * app.scale).to_i
 			var y = (input_event.y * app.scale).to_i
 			player.goes_to(x, y, speed)

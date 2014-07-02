@@ -25,7 +25,6 @@ in "C" `{
 `}
 
 redef class App
-	redef type IE: SDLInputEvent
 	redef type D: Opengles1Display
 	redef type I: Opengles1Image
 

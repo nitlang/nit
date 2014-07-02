@@ -19,6 +19,7 @@ module android_app
 
 import mnit
 import android
+import mnit::opengles1
 
 in "C header" `{
 	#include <jni.h>
@@ -205,7 +206,6 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 end
 
 redef class App
-	redef type IE: AndroidInputEvent
 	redef type D: Opengles1Display
 
 	redef fun init_window

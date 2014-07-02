@@ -18,7 +18,6 @@
 # a handler to the native display and window.
 module android_opengles1
 
-import mnit
 import android_app
 import android
 

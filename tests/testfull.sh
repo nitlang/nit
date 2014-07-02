@@ -12,6 +12,7 @@ done
 	../examples/shoot/src/shoot_logic.nit \
 	../examples/*/src/*_android.nit \
 	../examples/*/src/*_linux.nit \
+	../examples/*/src/*_null.nit \
 	../examples/pnacl/converter/converter.nit \
 	../lib/*.nit $list \
 	../src/nit*.nit \
