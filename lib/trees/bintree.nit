@@ -44,6 +44,7 @@ class BinTreeMap[K: Comparable, E]
 
 	redef type N: BinTreeNode[K, E]
 
+	private var len = 0
 	# Get the node value associated to `key`
 	# O(n) in worst case, average is O(h) with h: tree height
 	#
@@ -112,6 +113,7 @@ class BinTreeMap[K: Comparable, E]
 	end
 
 	protected fun insert_node(node: N) do
+		len += 1
 		if root == null then
 			root = node
 		else
@@ -150,6 +152,7 @@ class BinTreeMap[K: Comparable, E]
 	#     assert tree.max == "n1"
 	fun delete(key: K): nullable E do
 		assert is_empty: root != null
+		len -= 1
 		var node = search_down(root.as(not null), key)
 		if node == null then return null
 		if node.left == null then
@@ -283,6 +286,14 @@ class BinTreeMap[K: Comparable, E]
 		f.write node.to_dot
 		if node.right != null then dot_down(node.right.as(not null), f)
 	end
+
+	# O(n)
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert tree.length == 0
+	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert tree.length == 5
+	redef fun length do return len
 end
 
 # TreeNode used by BinTree
