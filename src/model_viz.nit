@@ -30,7 +30,7 @@ class MProjectTree
 
 	redef fun display(a) do
 		if a isa MGroup then
-			if a.parent == null then return "{a.mproject.name} ({a.filepath})"
+			if a.parent == null then return "{a.mproject.name} ({a.filepath.to_s})"
 			return a.name + " (group)"
 		else if a isa MModule then
 			return a.name
@@ -148,7 +148,7 @@ class MProjectDot
 	# Initially empty, modules can be added
 	var mmodules = new HashSet[MModule]
 
-	private fun node_for(mmodule: MModule): nullable String
+	private fun node_for(mmodule: MModule): String
 	do
 		return "m_{mmodule.object_id}"
 	end
@@ -166,7 +166,7 @@ class MProjectDot
 		if mgroup.parent == null then
 			# is is a root group, so display the project
 			if project_group then
-				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mproject.name}\\n({mgroup.filepath})\"\ncolor=black\nstyle=dotted\n")
+				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mproject.name}\\n({mgroup.filepath.to_s})\"\ncolor=black\nstyle=dotted\n")
 			end
 		else
 			if cluster_group then

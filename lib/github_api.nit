@@ -56,7 +56,7 @@ class GithubCurl
 			var obj = response.body_str.json_to_nit_object
 			if obj isa HashMap[String, nullable Object] then
 				if obj.keys.has("message") then
-					print "Message from Github API: {obj["message"]}"
+					print "Message from Github API: {obj["message"] or else ""}"
 					print "Requested URI: {uri}"
 					abort
 				end

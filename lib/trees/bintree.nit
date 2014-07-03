@@ -359,6 +359,6 @@ class BinTreeNode[K: Comparable, E]
 		end
 	end
 
-	redef fun to_s do return "\{{key}: {value}\}"
+	redef fun to_s do return "\{{key}: {value or else ""}\}"
 end
 

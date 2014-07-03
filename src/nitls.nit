@@ -31,7 +31,7 @@ class ProjTree
 			if opt_paths then
 				return o.filepath.as(not null)
 			else
-				return "{o.name} ({o.filepath})"
+				return "{o.name} ({o.filepath.to_s})"
 			end
 		else if o isa ModulePath then
 			if opt_paths then

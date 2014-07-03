@@ -157,7 +157,7 @@ class JsonDeserializer
 				return val.chars.first
 			end
 
-			print "Malformed Json string: unexpected Json Object kind '{kind}'"
+			print "Malformed Json string: unexpected Json Object kind '{kind or else "null"}'"
 			abort
 		end
 

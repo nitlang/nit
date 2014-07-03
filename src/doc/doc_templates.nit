@@ -548,6 +548,7 @@ class TplSearchPage
 	var props = new Array[Streamable]
 
 	redef fun rendering do
+		var title = self.title
 		if title != null then add "<h1>{title}</h1>"
 		add "<div class='container-fluid'>"
 		add " <div class='row'>"
@@ -749,6 +750,7 @@ class TagAttribute
 	end
 
 	redef fun rendering do
+		var value = self.value
 		if value == null then
 			add(" {name}")
 		else

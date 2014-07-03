@@ -81,7 +81,7 @@ else
 end
 
 print "[HOST ADDRESS] : {debug.address}"
-print "[HOST] : {debug.host}"
+print "[HOST] : {debug.host or else "unamed"}"
 print "[PORT] : {debug.port}"
 print "Connecting ... {debug.connected}"
 

@@ -553,6 +553,7 @@ redef class Variable
 	super HInfoBoxable
 	redef fun infobox(v)
 	do
+		var declared_type = self.declared_type
 		if declared_type == null then
 			var res = new HInfoBox(v, "{name}")
 			res.new_field("local var").append("{name}")

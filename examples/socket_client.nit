@@ -26,7 +26,7 @@ end
 
 var s = new Socket.client(args[0], args[1].to_i)
 print "[HOST ADDRESS] : {s.address}"
-print "[HOST] : {s.host}"
+print "[HOST] : {s.host or else "unamed"}"
 print "[PORT] : {s.port}"
 print "Connecting ... {s.connected}"
 if s.connected then
