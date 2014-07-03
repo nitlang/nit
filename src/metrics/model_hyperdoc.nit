@@ -62,7 +62,7 @@ do
 			buf.append("<dt>project</dt>\n")
 			buf.append("<dd>{linkto(mproject)}</dd>\n")
 			buf.append("<dt>filepath</dt>\n")
-			buf.append("<dd>{mgroup.filepath}</dd>\n")
+			buf.append("<dd>{mgroup.filepath.to_s}</dd>\n")
 			var p = mgroup.parent
 			if p != null then
 				buf.append("<dt>parent group</dt>\n")

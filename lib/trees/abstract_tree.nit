@@ -53,7 +53,7 @@ class TreeNode[K: Comparable, E]
 	# Direct parent of this node (null if the node is root)
 	var parent: nullable SELF writable = null
 
-	redef fun to_s do return "\{{value}\}"
+	redef fun to_s do return "\{{value or else ""}\}"
 
 	# Return dot representation of this node
 	# Used for debugging by `AbstractTree::show_dot`

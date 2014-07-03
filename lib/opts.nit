@@ -80,7 +80,7 @@ abstract class Option
 	fun pretty_default: String
 	do
 		var dv = default_value
-		if dv != null then return " ({dv})"
+		if dv != null then return " ({dv.to_s})"
 		return ""
 	end
 

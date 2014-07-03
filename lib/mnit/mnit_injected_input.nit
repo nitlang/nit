@@ -142,8 +142,9 @@ redef class App
 				print "UNKNOWN EVENT {fs[1]} (on {l})"
 				res = true
 				input(new DummyQuitEvent)
+				return true
 			end
-			print "WAIT {wait_next_input} for {next_input}"
+			print "WAIT {wait_next_input} for {next_input.to_s}"
 		end
 	end
 end

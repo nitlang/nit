@@ -96,7 +96,7 @@ var c = new C(a, b)
 var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
 d.d = d
 
-for o in new Array[nullable Serializable].with_items(a, b, c, d) do
+for o in new Array[Serializable].with_items(a, b, c, d) do
 	var stream = new StringOStream
 	var serializer = new JsonSerializer(stream)
 	serializer.serialize(o)

@@ -31,14 +31,14 @@ redef class GithubCurl
 	do
 		var pr = get_and_check("https://api.github.com/repos/privat/nit/pulls/{number}")
 		var prm = pr.json_as_map
-		var sha = prm["head"].json_as_map["sha"]
+		var sha = prm["head"].json_as_map["sha"].to_s
 		var statuses = get_and_check("https://api.github.com/repos/privat/nit/statuses/{sha}")
 		prm["statuses"] = statuses
-		print "{prm["title"]}: by {prm["user"].json_as_map["login"]} (# {prm["number"]})"
-		print "\tmergable: {prm["mergeable"]}"
+		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
+		print "\tmergable: {prm["mergeable"].to_s}"
 		var st = prm["statuses"].json_as_a
 		if not st.is_empty then
-			print "\tstatus: {st[0].json_as_map["state"]}"
+			print "\tstatus: {st[0].json_as_map["state"].to_s}"
 		else
 			print "\tstatus: not tested"
 		end
@@ -67,7 +67,7 @@ redef class GithubCurl
 				print "No public name for user {l}"
 				continue
 			end
-			var r = "{u["name"]} <{u["email"]}>"
+			var r = "{u["name"].to_s} <{u["email"].to_s}>"
 			res.add r
 
 		end
@@ -102,9 +102,9 @@ else
 	var revs = curl.getrev(pr)
 
 	var mergemsg = new Template
-	mergemsg.add "Merge: {pr["title"]}\n\n"
-	mergemsg.add "{pr["body"]}\n\n"
-	mergemsg.add "Pull-Request: #{pr["number"]}\n"
+	mergemsg.add "Merge: {pr["title"].to_s}\n\n"
+	mergemsg.add "{pr["body"].to_s}\n\n"
+	mergemsg.add "Pull-Request: #{pr["number"].to_s}\n"
 	for r in revs do
 		mergemsg.add "Reviewed-by: {r}\n"
 	end

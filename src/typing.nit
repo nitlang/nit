@@ -1081,7 +1081,7 @@ redef class ASuperstringExpr
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type
 		for nexpr in self.n_exprs do
-			var t = v.visit_expr(nexpr)
+			v.visit_expr_subtype(nexpr, v.mmodule.object_type)
 		end
 	end
 end
