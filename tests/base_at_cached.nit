@@ -18,6 +18,8 @@ class Base
 	var foo: Int = 10
 	fun -: Int do return foo + 20
 	fun bar: Int do return -self + 40
+	#alt1#fun fail is cached do end
+	#alt2#fun fail(i: Int): Int is cached do return i
 end
 
 class CMinus
@@ -31,6 +33,8 @@ class CBar
 
 	redef fun bar is cached do return -self + 2
 end
+
+#alt3#fun fail: Int is cached do return 0
 
 fun test(b: Base)
 do
