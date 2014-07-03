@@ -127,10 +127,10 @@ redef class Nelements_head
 	redef fun items do return [n_value]
 end
 
-redef class String
+redef class Text
 	fun json_to_nit_object: nullable Object
 	do
-		var lexer = new Lexer_json(self)
+		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
 		var tokens = lexer.lex
 		parser.tokens.add_all(tokens)
