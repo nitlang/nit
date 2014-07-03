@@ -2467,7 +2467,7 @@ redef class ASuperstringExpr
 			var i = v.expr(ne, null)
 			array.add(i)
 		end
-		var a = v.array_instance(array, v.object_type)
+		var a = v.array_instance(array, v.object_type.as_nullable)
 		var res = v.send(v.get_property("to_s", a.mtype), [a])
 		return res
 	end
