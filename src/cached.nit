@@ -68,8 +68,13 @@ private class CachedPhase
 
 		var location = npropdef.location
 		var name = mpropdef.mproperty.name
-		var nclassdef = npropdef.parent.as(AStdClassdef)
+		var nclassdef = npropdef.parent.as(AClassdef)
 		var mclassdef = nclassdef.mclassdef.as(not null)
+
+		if not mclassdef.mclass.kind.need_init then
+			modelbuilder.error(npropdef, "Error: only abstract and concrete classes can have cached functions.")
+			return
+		end
 
 		# Create a new private attribute to store the cache
 		var cache_mpropdef = new MAttributeDef(mclassdef, new MAttribute(mclassdef, "@{name}<cache>", private_visibility), location)
