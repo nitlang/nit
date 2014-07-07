@@ -716,6 +716,12 @@ redef class AMethPropdef
 			else if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
+			else if pname == "bin_and" then
+				return v.int_instance(args[0].to_i.bin_and(args[1].to_i))
+			else if pname == "bin_or" then
+				return v.int_instance(args[0].to_i.bin_or(args[1].to_i))
+			else if pname == "bin_xor" then
+				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
 			else if pname == "native_int_to_s" then
 				return v.native_string_instance(recvval.to_s)
 			else if pname == "strerror_ext" then
