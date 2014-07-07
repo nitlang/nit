@@ -66,6 +66,10 @@ class AndroidToolchain
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
 
+		# Clear the previous android project, so there is no "existing project warning"
+		# or conflict between Java files of different projects
+		if android_project_root.file_exists then android_project_root.rmdir
+
 		var args = ["android", "-s",
 			"create", "project",
 			"--name", short_project_name,
