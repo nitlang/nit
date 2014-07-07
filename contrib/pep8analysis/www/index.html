@@ -16,13 +16,16 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/z80/z80.js"></script>
 
 	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		ga('create', 'UA-574578-5', 'xymus.net');
-		ga('send', 'pageview');
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-574578-5']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
 
 		// Both Viz and Pep8 use emscripten
 		// We put aside the module of each program and bring it back before each use
@@ -39,15 +42,15 @@
 			var analysis = $("#console").text();
 			if (analysis.indexOf("Error") >= 0) {
 				$("#consolePanel").addClass("panel-danger")
-				ga('trackEvent', 'Result', 'Error')
+				_gaq.push(['_trackEvent', 'Result', 'Error'])
 			}
 			else if (analysis.indexOf("Warning") >= 0) {
 				$("#consolePanel").addClass("panel-warning")
-				ga('trackEvent', 'Result', 'Warning')
+				_gaq.push(['_trackEvent', 'Result', 'Warning'])
 			}
 			else {
 				$("#consolePanel").addClass("panel-success")
-				ga('trackEvent', 'Result', 'Success')
+				_gaq.push(['_trackEvent', 'Result', 'Success'])
 			}
 			$("#working").hide()
 			$("#consolePanel").show()
@@ -56,7 +59,7 @@
 
 		function exception(ex) {
 			console.debug("Tool invocation failed, with:\n" + $("#console").text() + "\n" + ex )
-			ga('trackEvent', 'Crash', 'Analysis', $("#console").text())
+			_gaq.push(['_trackEvent', 'Bug', 'Analysis', $("#console").text()])
 			$("#fatal-error").show()
 			$("#analyze").prop('disabled', true)
 		}
@@ -76,7 +79,7 @@
 			var input = editor.getValue()
 
 			// Update GA stats
-			ga('trackEvent', 'Action', 'Analyze')
+			_gaq.push(['_trackEvent', 'Action', 'Analyze'])
 
 			// Invoke the full Nit program
 			if(typeof(Worker) !== "undefined") {
@@ -85,7 +88,7 @@
 				worker.postMessage(input)
 			} else {
 				// Sync version
-				ga('trackEvent', 'Crash', 'No Webworkers', $("#console").text())
+				_gaq.push(['_trackEvent', 'Bug', 'No Webworkers', $("#console").text()])
 				Module = Pep8Module
 				try {
 					run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
