@@ -364,6 +364,30 @@ redef class String
 		end
 	end
 
+	# Delete a directory and all of its content, return `true` on success
+	#
+	# Does not go through symbolic links and may get stuck in a cycle if there
+	# is a cycle in the filesystem.
+	fun rmdir: Bool
+	do
+		var ok = true
+		for file in self.files do
+			var file_path = self.join_path(file)
+			var stat = file_path.file_lstat
+			if stat.is_dir then
+				ok = file_path.rmdir and ok
+			else
+				ok = file_path.file_delete and ok
+			end
+			stat.free
+		end
+
+		# Delete the directory itself
+		if ok then to_cstring.rmdir
+
+		return ok
+	end
+
 	# Change the current working directory
 	#
 	#     "/etc".chdir
@@ -447,6 +471,7 @@ redef class NativeString
 		return stat_element;
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
+	private fun rmdir: Bool `{ return rmdir(recv); `}
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
 	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
