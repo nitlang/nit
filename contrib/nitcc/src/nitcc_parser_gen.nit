@@ -79,6 +79,7 @@ var t_str = new Token("str")
 var t_id = new Token("id")
 var t_kw = new Token("kw")
 var t_any = new Token("any")
+var t_end = new Token("end")
 var t_and = new Token("and")
 var t_except = new Token("except")
 var t_shortest = new Token("shortest")
@@ -104,6 +105,7 @@ g.tokens.add_all([t_opar,
 	t_id,
 	t_kw,
 	t_any,
+	t_end,
 	t_and,
 	t_except,
 	t_shortest,
@@ -139,6 +141,7 @@ p_re3.new_alt("re_longest", t_longest, t_opar, p_re, t_cpar)
 p_re3.new_alt("re_par", t_opar, p_re, t_cpar)
 p_re3.new_alt("re_class", p_text, t_dot, t_dot, p_text)
 p_re3.new_alt("re_any", t_any)
+p_re3.new_alt("re_end", t_end)
 p_re3.new_alt("re_id", t_id)
 p_re3.new_alt("re_text", p_text)
 

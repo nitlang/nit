@@ -1,0 +1,11 @@
+Grammar x;
+
+Lexer
+
+	a = 'a' End | 'ab'; // this is buggy
+	c = 'a';
+
+Parser
+
+	p = q*;
+	q = a | c;

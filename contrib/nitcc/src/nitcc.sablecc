@@ -68,6 +68,7 @@ re3 {-> re} =
 	{par:} '(' re ')' |
 	{class:} text '.' '.' text |
 	{any:} 'Any' |
+	{end:} 'End' |
 	{text:} text ;
 
 text {-> re} =

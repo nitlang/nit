@@ -107,6 +107,14 @@ redef class Nre_minus
 	end
 end
 
+redef class Nre_end
+	redef fun make_rfa
+	do
+		print "{children.first.position.to_s}: NOT YET IMPLEMENTED: token `End`; replaced with an empty string"
+		return new Automaton.epsilon
+	end
+end
+
 redef class Nre_and
 	redef fun make_rfa
 	do
