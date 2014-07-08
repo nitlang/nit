@@ -84,6 +84,7 @@ var t_except = new Token("except")
 var t_shortest = new Token("shortest")
 var t_longest = new Token("longest")
 var t_ch_dec = new Token("ch_dec")
+var t_ch_hex = new Token("ch_hex")
 g.tokens.add_all([t_opar,
 	t_cpar,
 	t_ocur,
@@ -107,7 +108,8 @@ g.tokens.add_all([t_opar,
 	t_except,
 	t_shortest,
 	t_longest,
-	t_ch_dec])
+	t_ch_dec,
+	t_ch_hex])
 
 p_gr.new_alt("gr", t_kw, t_id, t_semi, p_lex, p_par)
 
@@ -142,6 +144,7 @@ p_re3.new_alt("re_text", p_text)
 
 p_text.new_alt("re_str", t_str)
 p_text.new_alt("re_ch_dec", t_ch_dec)
+p_text.new_alt("re_ch_hex", t_ch_hex)
 
 p_par.new_alt("par", t_kw, p_ign, p_rej, p_prods)
 

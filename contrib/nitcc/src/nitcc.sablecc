@@ -15,6 +15,9 @@ str = '\'' (ch-'\\'-'\''|'\\'ch)* '\'';
 // A char by decimal ascii
 ch_dec = '#' ('0'..'9')+ ;
 
+// A char by hexadecimal ascii
+ch_hex = '#' ('x'|'X') ('0'..'9'|'a'..'z'|'A'..'Z')+ ;
+
 // A single-line comment
 comment = '//' ch* '\n'?;
 
@@ -69,7 +72,8 @@ re3 {-> re} =
 
 text {-> re} =
 	{str:} str |
-	{ch_dec:} ch_dec ;
+	{ch_dec:} ch_dec |
+	{ch_hex:} ch_hex ;
 
 parser_part = 'Parser' ign? rej? prod*;
 

@@ -55,6 +55,15 @@ redef class Nch_dec
 	end
 end
 
+redef class Nch_hex
+	redef fun value: String do return text.substring_from(2).to_hex.ascii.to_s
+	redef fun make_rfa: Automaton
+	do
+		var a = new Automaton.atom(self.value.chars.first.ascii)
+		return a
+	end
+end
+
 redef class NProd
 	redef fun make_rfa: Automaton
 	do
