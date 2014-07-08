@@ -27,7 +27,7 @@ ccomment = '/*' not_star* ('*' (not_star_not_slash not_star*)?)* '*/';
 unknown_keyword = 'A'..'Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
 
 // Igndored stufs
-blank = '\n' | '\t' | ' ' | comment | ccomment;
+blank = '\r' | '\n' | '\t' | ' ' | comment | ccomment;
 
 Parser
 
