@@ -89,8 +89,17 @@ redef class Nre_minus
 		var b = children[2].make_rfa.to_dfa
 		for t in b.start.outs do
 			if not t.to.outs.is_empty then
-				print "Not Yet Implemented Error: '-' only works on single char"
-				exit(1)
+				# `b` is not a single char, so just use except
+				# "a - b == a Except (Any* b Any*)"
+				var any1 = new Automaton.cla(0, null)
+				any1.close
+				var any2 = new Automaton.cla(0, null)
+				any2.close
+				var b2 = any1
+				b2.concat(b)
+				b2.concat(any2)
+				var c = a.except(b2)
+				return c
 			end
 			a.minus_sym(t.symbol.as(not null))
 		end
