@@ -614,7 +614,7 @@ redef class String
 	# escape string used in labels for graphviz
 	fun escape_to_dot: String
 	do
-		return escape_more_to_c("|\{\}")
+		return escape_more_to_c("|\{\}<>")
 	end
 end
 
