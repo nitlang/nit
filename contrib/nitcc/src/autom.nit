@@ -372,11 +372,18 @@ class Automaton
 	# Produce a graphvis file for the automaton
 	fun to_dot(filepath: String)
 	do
+		var names = new HashMap[State, String]
+		var ni = 0
+		for s in states do
+			names[s] = ni.to_s
+			ni += 1
+		end
+
 		var f = new OFStream.open(filepath) 
                 f.write("digraph g \{\n")
 
 		for s in states do
-			f.write("s{s.object_id}[shape=oval")
+			f.write("s{names[s]}[shape=oval")
 			#f.write("label=\"\",")
 			if accept.has(s) then
 				f.write(",color=blue")
@@ -414,10 +421,10 @@ class Automaton
 						labe += c.to_s
 					end
 				end
-				f.write("s{s.object_id}->s{s2.object_id} [label=\"{labe.escape_to_c}\"];\n")
+				f.write("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 			end
 		end
-		f.write("empty->s{start.object_id}; empty[label=\"\",shape=none];\n")
+		f.write("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
 
                 f.write("\}\n")
 		f.close
