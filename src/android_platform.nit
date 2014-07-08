@@ -45,9 +45,9 @@ class AndroidToolchain
 
 	redef fun compile_dir
 	do
-		var normal_compile_dir = super
-		android_project_root = normal_compile_dir
-		return "{normal_compile_dir}/jni/nit_compile/"
+		var android_project_root = "{super}/android/"
+		self.android_project_root = android_project_root
+		return "{android_project_root}/jni/nit_compile/"
 	end
 
 	redef fun write_files(compiler, compile_dir, cfiles)
@@ -65,6 +65,10 @@ class AndroidToolchain
 
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
+
+		# Clear the previous android project, so there is no "existing project warning"
+		# or conflict between Java files of different projects
+		if android_project_root.file_exists then android_project_root.rmdir
 
 		var args = ["android", "-s",
 			"create", "project",
