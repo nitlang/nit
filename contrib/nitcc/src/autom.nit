@@ -184,6 +184,31 @@ class Automaton
 		states.add_all other.states
 	end
 
+	# Return a new automaton that recognize `self` but not `other`
+	# For a theorical POV, this is the substraction of languages.
+	# Note: the implementation use `to_dfa` internally, so the theorical complexity is not cheap.
+	fun except(other: Automaton): Automaton
+	do
+		var ta = new Token("1")
+		self.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(self)
+		c.absorb(other)
+		c = c.to_dfa
+		c.accept.clear
+		for s in c.retrotags[ta] do
+			if not c.tags[s].has(tb) then
+				c.accept.add(s)
+			end
+		end
+		c.clear_tag(ta)
+		c.clear_tag(tb)
+		return c
+	end
+
 	# `self` absorbs all states, transisions, tags, and acceptations of `other`
 	# An epsilon transition is added between `self.start` and `other.start`
 	fun absorb(other: Automaton)

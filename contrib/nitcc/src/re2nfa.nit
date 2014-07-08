@@ -128,25 +128,8 @@ redef class Nre_except
 	redef fun make_rfa
 	do
 		var a = children[0].make_rfa
-		var ta = new Token("1")
-		a.tag_accept(ta)
 		var b = children[2].make_rfa
-		var tb = new Token("2")
-		b.tag_accept(tb)
-
-		var c = new Automaton.empty
-		c.absorb(a)
-		c.absorb(b)
-		c = c.to_dfa
-		c.accept.clear
-		for s in c.retrotags[ta] do
-			if not c.tags[s].has(tb) then
-				c.accept.add(s)
-			end
-		end
-		c.clear_tag(ta)
-		c.clear_tag(tb)
-		return c
+		return a.except(b)
 	end
 end
 
