@@ -45,7 +45,6 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "2" \
-		--shareurl "../../share/nitdoc"
 
 doc/nitc/index.html: bin/nitdoc
 	bin/nitdoc $$(bin/nitls lib -r --path) src/nit*.nit src/test_*.nit -d doc/nitc \
