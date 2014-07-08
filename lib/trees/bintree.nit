@@ -44,14 +44,50 @@ class BinTreeMap[K: Comparable, E]
 
 	redef type N: BinTreeNode[K, E]
 
+	private var len = 0
+	private var first_node: nullable BinTreeNode[K, E] = null
+	private var last_node: nullable BinTreeNode[K, E] = null
+
+	# O(n) in worst case, average is O(h) with h: tree height
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert tree.is_empty
+	#     tree[1] = "n1"
+	#     assert not tree.is_empty
+	redef fun is_empty do return root == null
+
+	# O(n) in worst case, average is O(h) with h: tree height
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert not tree.has_key(1)
+	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert not tree.has_key(0)
+	#     assert tree.has_key(2)
+	#     assert not tree.has_key(6)
+	redef fun has_key(key: K): Bool do
+		if is_empty then return false
+		var res = search_down(root.as(not null), key)
+		if res != null then
+			cache_node = res
+			return true
+		end
+		return false
+	end
+
+	private var cache_node: nullable N = null
+
 	# Get the node value associated to `key`
 	# O(n) in worst case, average is O(h) with h: tree height
 	#
 	#     var tree = new BinTreeMap[Int, String]
 	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert tree.has_key(1)
 	#     assert tree[1] == "n1"
+	#     assert tree.has_key(1)
+	#     assert tree[2] == "n2"
 	redef fun [](key: K): E do
-		assert not_empty: root != null
+		assert not_empty: not is_empty
+		if cache_node != null and cache_node.key == key then return cache_node.value
 		var res = search_down(root.as(not null), key)
 		assert has_key: res != null
 		return res.value
@@ -112,11 +148,20 @@ class BinTreeMap[K: Comparable, E]
 	end
 
 	protected fun insert_node(node: N) do
+		len += 1
 		if root == null then
 			root = node
 		else
 			shift_down(root.as(not null), node)
 		end
+		if first_node == null then
+			first_node = node
+		end
+		if last_node != null then
+			last_node.next = node
+			node.prev = last_node
+		end
+		last_node = node
 	end
 
 	# Push down the `node` in tree from a specified `from` index
@@ -150,6 +195,7 @@ class BinTreeMap[K: Comparable, E]
 	#     assert tree.max == "n1"
 	fun delete(key: K): nullable E do
 		assert is_empty: root != null
+		len -= 1
 		var node = search_down(root.as(not null), key)
 		if node == null then return null
 		if node.left == null then
@@ -166,6 +212,16 @@ class BinTreeMap[K: Comparable, E]
 			transplant(node, min)
 			min.left = node.left
 			min.left.parent = min
+		end
+		if first_node == node then
+			first_node = null
+		end
+		if last_node == node then
+			last_node = node.prev
+			last_node.next = null
+		else
+			node.prev.next = node.next
+			node.next.prev = node.prev
 		end
 		return node.value
 	end
@@ -283,11 +339,34 @@ class BinTreeMap[K: Comparable, E]
 		f.write node.to_dot
 		if node.right != null then dot_down(node.right.as(not null), f)
 	end
+
+	# O(n)
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     assert tree.length == 0
+	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     assert tree.length == 5
+	redef fun length do return len
+
+	# Nodes are iterated in the same order in which they were added to the tree.
+	# O(n)
+	#
+	#     var tree = new BinTreeMap[Int, String]
+	#     for i in [4, 2, 1, 5, 3] do tree[i] = "n{i}"
+	#     var keys = new Array[Int]
+	#     for k, v in tree do
+	#         keys.add k
+	#     end
+	#     assert keys == [4, 2, 1, 5, 3]
+	redef fun iterator do return new BinTreeMapIterator[K, E](self)
 end
 
 # TreeNode used by BinTree
 class BinTreeNode[K: Comparable, E]
 	super TreeNode[K, E]
+
+	private var prev: nullable BinTreeNode[K, E]
+	private var next: nullable BinTreeNode[K, E]
 
 	redef type SELF: BinTreeNode[K, E]
 
@@ -362,3 +441,17 @@ class BinTreeNode[K: Comparable, E]
 	redef fun to_s do return "\{{key}: {value or else ""}\}"
 end
 
+private class BinTreeMapIterator[K: Comparable, E]
+	super MapIterator[K, E]
+
+	var current: nullable BinTreeNode[K, E]
+
+	init(tree: BinTreeMap[K, E]) do
+		current = tree.first_node
+	end
+
+	redef fun is_ok do return not current == null
+	redef fun next do current = current.next
+	redef fun item do return current.value
+	redef fun key do do return current.key
+end
