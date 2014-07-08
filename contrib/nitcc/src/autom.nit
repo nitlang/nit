@@ -307,10 +307,49 @@ class Automaton
 		accept.add(st)
 	end
 
+	# Remove states (and transitions) that does not reach an accept state
+	fun trim
+	do
+		# Good states are those we want to keep
+		var goods = new HashSet[State]
+		goods.add_all(accept)
+
+		var todo = accept.to_a
+
+		# Propagate goodness
+		while not todo.is_empty do
+			var s = todo.pop
+			for t in s.ins do
+				var s2 = t.from
+				if goods.has(s2) then continue
+				goods.add(s2)
+				todo.add(s2)
+			end
+		end
+
+		# What are the bad state then?
+		var bads = new Array[State]
+		for s in states do
+			if not goods.has(s) then bads.add(s)
+		end
+
+		# Remove their transitions
+		for s in bads do
+			for t in s.ins do t.delete
+			for t in s.outs do t.delete
+		end
+
+		# Keep only the good stuff
+		states.clear
+		states.add_all(goods)
+	end
+
 	# Generate a minimal DFA
 	# REQUIRE: self is a DFA
 	fun to_minimal_dfa: Automaton
 	do
+		trim
+
 		var distincts = new HashMap[State, Set[State]]
 		for s in states do
 			distincts[s] = new HashSet[State]
@@ -434,6 +473,8 @@ class Automaton
 	# note: the DFA is not miminized
 	fun to_dfa: Automaton
 	do
+		trim
+
 		var dfa = new Automaton.empty
 		var n2d = new ArrayMap[Set[State], State]
 		var seen = new ArraySet[Set[State]] 
