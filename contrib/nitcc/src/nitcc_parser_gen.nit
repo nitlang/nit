@@ -58,6 +58,7 @@ g.prods.add_all([p_gr, p_re, p_re1, p_re2, p_re3, p_text, p_lex, p_exprs, p_expr
 g.prods.add(new Production("atrans"))
 g.prods.add(new Production("elemid"))
 g.prods.add(new Production("nelem"))
+g.prods.add(new Production("tree_part"))
 
 var t_opar = new Token("opar")
 var t_cpar = new Token("cpar")

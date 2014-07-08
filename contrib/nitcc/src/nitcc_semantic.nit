@@ -569,3 +569,14 @@ redef class Nelem_plus
 		set_elem(v, null, elem)
 	end
 end
+
+redef class Ntree_part
+	redef fun accept_collect_prod(v) do
+		print "NOT YET IMPLEMENTED: `Tree` part; it is ignored"
+		# SKIP by doing nothing
+	end
+
+	redef fun accept_check_name_visitor(v) do
+		# SKIP by doing nothing
+	end
+end
