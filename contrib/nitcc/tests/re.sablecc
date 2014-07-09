@@ -1,0 +1,16 @@
+Grammar x;
+Lexer
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+re =
+	'a' |
+	'(' re ')'
+Unary
+	re '+' |
+	re '*' |
+	re '?'
+Left
+	re re
+Left
+	re '|' re ;
