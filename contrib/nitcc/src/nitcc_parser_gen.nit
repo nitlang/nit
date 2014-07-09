@@ -54,7 +54,8 @@ var p_altid = new Production("altident")
 var p_elems = new Production("elems")
 var p_elem_list = new Production("elem_list")
 var p_elem = new Production("elem")
-g.prods.add_all([p_gr, p_re, p_re1, p_re2, p_re3, p_text, p_lex, p_exprs, p_expr, p_par, p_ign, p_rej, p_prods, p_prod, p_ptrans_o, p_alts, p_alt, p_altid_o, p_altid, p_elems, p_elem_list, p_elem])
+var p_pri = new Production("priority")
+g.prods.add_all([p_gr, p_re, p_re1, p_re2, p_re3, p_text, p_lex, p_exprs, p_expr, p_par, p_ign, p_rej, p_prods, p_prod, p_ptrans_o, p_alts, p_alt, p_altid_o, p_altid, p_elems, p_elem_list, p_elem, p_pri])
 g.prods.add(new Production("atrans"))
 g.prods.add(new Production("elemid"))
 g.prods.add(new Production("nelem"))
@@ -185,6 +186,10 @@ p_elem.new_alt("elem_par", t_opar, p_alts, t_cpar)
 p_elem.new_alt("elem_star", p_elem, t_star)
 p_elem.new_alt("elem_ques", p_elem, t_ques)
 p_elem.new_alt("elem_plus", p_elem, t_plus)
+
+p_pri.new_alt0("priority_left").phony = true
+p_pri.new_alt0("priority_right").phony = true
+p_pri.new_alt0("priority_unary").phony = true
 
 var a = g.lr0
 
