@@ -9,14 +9,13 @@ blank = (' '|'\n')+;
 Parser
 Ignored blank;
 e =
-	{add:} e '+' f |
-	{sub:} e '-' f |
-	f {->};
-f {->e} =
-	{mul:} f '*' a |
-	{div:} f '/' a |
-	a {->};
-a {->e} =
 	{int:} int |
-	{par:} '(' e ')' |
-	{neg:} '-' a ;
+	{par:} '(' e ')'
+Unary
+	{neg:} '-' e
+Left
+	{mul:} e '*' e |
+	{div:} e '/' e
+Left
+	{add:} e '+' e |
+	{sub:} e '-' e ;

@@ -27,31 +27,29 @@ stmts = '{' s* '}' ;
 else = 'else' stmts;
 
 e = 
-	{add:} [left:]e '+' [right:]e2 |
-	{sub:} [left:]e '-' [right:]e2 |
-	e2 {->};
-e2 {->e} =
-	{mul:} [left:]e2 '*' [right:]e3 |
-	{div:} [left:]e2 '/' [right:]e3 |
-	e3 {->};
-e3 {->e} =
-	{neg:} '-' e3 |
 	{lit:} int |
 	{par:} '(' e ')' |
 	{var:} id |
-	{read:} 'read' '(' ')' ;
+	{read:} 'read' '(' ')'
+Unary
+	{neg:} '-' e
+Left
+	{mul:} [left:]e '*' [right:]e |
+	{div:} [left:]e '/' [right:]e
+Right
+	{add:} [left:]e '+' [right:]e |
+	{sub:} [left:]e '-' [right:]e ;
 
 c =
-	{or:} [left:]c '||' [right:]c2 |
-	c2 {->};
-c2 {->c} =
-	{and:} [left:]c2 '&&' [right:]c3 |
-	c3 {->};
-c3 {->c} =
-	{not:} 'not' [c:]c3 |
 	{eq:} [left:]e '=' [right:]e |
 	{ne:} [left:]e '!=' [right:]e |
 	{lt:} [left:]e '<' [right:]e |
 	{le:} [left:]e '<=' [right:]e |
 	{gt:} [left:]e '>' [right:]e |
-	{ge:} [left:]e '>=' [right:]e ;
+	{ge:} [left:]e '>=' [right:]e
+Unary
+	{not:} 'not' c
+Left
+	{and:} [left:]c '&&' [right:]c
+Left
+	{or:} [left:]c '||' [right:]c ;
