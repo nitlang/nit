@@ -34,7 +34,8 @@ class Gram
 			else
 				res.append("{p.name} =\n")
 			end
-			var last = p.alts.last
+			var last = null
+			if not p.alts.is_empty then p.alts.last
 			for a in p.alts do
 				res.append("\t\{{a.name}:\} {a.elems.join(" ")}")
 				if a.codes == null then a.make_codes
