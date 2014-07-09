@@ -1,0 +1,5 @@
+# Example host list to use with OpenMPI (and its Nit wrapper)
+
+riph slots=8
+zako slots=4
+vawa slots=2

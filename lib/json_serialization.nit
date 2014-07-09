@@ -77,7 +77,7 @@ class JsonDeserializer
 
 	var just_opened_id: nullable Int = null
 
-	init(text: String)
+	init(text: Text)
 	do
 		var root = text.json_to_nit_object
 		if root isa HashMap[String, nullable Object] then path.add(root)
