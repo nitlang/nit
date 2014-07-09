@@ -61,6 +61,7 @@ class Gram
 	do
 		for p in self.prods do
 			for a in p.alts.to_a do
+				if a.phony then continue
 				var to_inline = false
 				for e in a.elems do
 					if e isa Production and prods.has(e) then to_inline = true
@@ -88,6 +89,7 @@ class Gram
 					end
 					pool2.clear
 					for a2 in e.alts do
+						if a.phony then continue
 						if a2.codes == null then a2.make_codes
 						for x in pool do
 							var name = a.name + "_" + pool2.length.to_s
@@ -207,6 +209,7 @@ class Gram
 			for p in prods do
 				if p.is_nullable then continue
 				for a in p.alts do
+					if a.phony then continue
 					var nullabl = true
 					for e in a.elems do
 						if e isa Token then
@@ -233,6 +236,7 @@ class Gram
 			for p in prods do
 				var fs = p.firsts
 				for a in p.alts do
+					if a.phony then continue
 					var i = a.first_item
 					loop
 						var e = i.next
@@ -259,6 +263,7 @@ class Gram
 			var changed = false
 			for p1 in prods do
 				for a in p1.alts do
+					if a.phony then continue
 					var p0: nullable Production = null
 					var i = a.first_item
 					loop
@@ -375,6 +380,7 @@ class Production
 	do
 		var res = new Array[Item]
 		for a in alts do
+			if a.phony then continue
 			res.add a.first_item
 		end
 		return res
@@ -422,6 +428,9 @@ class Alternative
 
 	# Is the alternative transformed (ie not in the AST)
 	var trans writable = false
+
+	# Is the alternative unparsable? (ie not in the automaton)
+	var phony writable = false
 
 	# Imitialize codes with the elements
 	fun make_codes
