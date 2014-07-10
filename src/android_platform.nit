@@ -161,17 +161,6 @@ $(call import-module,android/native_app_glue)
 <!-- END_INCLUDE(manifest) -->
 		""".write_to_file("{dir}/AndroidManifest.xml")
 
-		### generate res/values/strings.xml
-		dir = "{android_project_root}/res/"
-		if not dir.file_exists then dir.mkdir
-		dir = "{dir}/values/"
-		if not dir.file_exists then dir.mkdir
-		"""<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">{{{app_name}}}</string>
-</resources>
-		""".write_to_file("{dir}/strings.xml")
-
 		### Link to png sources
 		# libpng is not available on Android NDK
 		# FIXME make obtionnal when we have alternatives to mnit
@@ -204,6 +193,26 @@ $(call import-module,android/native_app_glue)
 				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
 			end
 		end
+		
+		### copy resources  (for android)
+		# This will be accessed from `android_project_root`
+		var res_dir
+		if compiler.mainmodule.location.file != null then
+			# it is a real file, use "{file}/../res"
+			res_dir = "{compiler.mainmodule.location.file.filename.dirname}/../res"
+		else
+			# probably used -m, use "."
+			res_dir = "res"
+		end
+		if res_dir.file_exists then
+			res_dir = res_dir.realpath
+			var target_res_dir = "{android_project_root}"
+			if target_res_dir.file_exists then
+				# copy the res folder to .nit_compile
+				toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
+			end
+		end
+
 	end
 
 	redef fun write_makefile(compiler, compile_dir, cfiles)
