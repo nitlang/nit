@@ -15,6 +15,9 @@ str = '\'' (ch-'\\'-'\''|'\\'ch)* '\'';
 // A char by decimal ascii
 ch_dec = '#' ('0'..'9')+ ;
 
+// A char by hexadecimal ascii
+ch_hex = '#' ('x'|'X') ('0'..'9'|'a'..'z'|'A'..'Z')+ ;
+
 // A single-line comment
 comment = '//' ch* '\n'?;
 
@@ -27,14 +30,14 @@ ccomment = '/*' not_star* ('*' (not_star_not_slash not_star*)?)* '*/';
 unknown_keyword = 'A'..'Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
 
 // Igndored stufs
-blank = '\n' | '\t' | ' ' | comment | ccomment;
+blank = '\r' | '\n' | '\t' | ' ' | comment | ccomment;
 
 Parser
 
 Ignored blank;
 Rejected unknown_keyword;
 
-grammar = 'Grammar' id ';' lexer_part? parser_part?;
+grammar = 'Grammar' id ';' lexer_part? parser_part? tree_part?;
 
 lexer_part = 'Lexer' expr*;
 
@@ -65,11 +68,13 @@ re3 {-> re} =
 	{par:} '(' re ')' |
 	{class:} text '.' '.' text |
 	{any:} 'Any' |
+	{end:} 'End' |
 	{text:} text ;
 
 text {-> re} =
 	{str:} str |
-	{ch_dec:} ch_dec ;
+	{ch_dec:} ch_dec |
+	{ch_hex:} ch_hex ;
 
 parser_part = 'Parser' ign? rej? prod*;
 
@@ -77,7 +82,7 @@ ign = 'Ignored' elem_list ';' ;
 
 rej = 'Rejected' elem_list ';' ;
 
-prod = id ptrans? '=' alts ';';
+prod = id ptrans? '=' alts priority* ';';
 
 ptrans = '{' '->' id '}';
 atrans = '{' '->' '}';
@@ -105,3 +110,10 @@ elem =
 	{ques:} elem '?' |
 	{plus:} elem '+' |
 	{empty:} 'Empty' ;
+
+priority =
+	{left:} 'Left' alts |
+	{right:} 'Right' alts |
+	{unary:} 'Unary' alts ;
+
+tree_part = 'Tree' prod*;

@@ -55,6 +55,15 @@ redef class Nch_dec
 	end
 end
 
+redef class Nch_hex
+	redef fun value: String do return text.substring_from(2).to_hex.ascii.to_s
+	redef fun make_rfa: Automaton
+	do
+		var a = new Automaton.atom(self.value.chars.first.ascii)
+		return a
+	end
+end
+
 redef class NProd
 	redef fun make_rfa: Automaton
 	do
@@ -80,12 +89,29 @@ redef class Nre_minus
 		var b = children[2].make_rfa.to_dfa
 		for t in b.start.outs do
 			if not t.to.outs.is_empty then
-				print "Not Yet Implemented Error: '-' only works on single char"
-				exit(1)
+				# `b` is not a single char, so just use except
+				# "a - b == a Except (Any* b Any*)"
+				var any1 = new Automaton.cla(0, null)
+				any1.close
+				var any2 = new Automaton.cla(0, null)
+				any2.close
+				var b2 = any1
+				b2.concat(b)
+				b2.concat(any2)
+				var c = a.except(b2)
+				return c
 			end
 			a.minus_sym(t.symbol.as(not null))
 		end
 		return a
+	end
+end
+
+redef class Nre_end
+	redef fun make_rfa
+	do
+		print "{children.first.position.to_s}: NOT YET IMPLEMENTED: token `End`; replaced with an empty string"
+		return new Automaton.epsilon
 	end
 end
 
@@ -119,25 +145,8 @@ redef class Nre_except
 	redef fun make_rfa
 	do
 		var a = children[0].make_rfa
-		var ta = new Token("1")
-		a.tag_accept(ta)
 		var b = children[2].make_rfa
-		var tb = new Token("2")
-		b.tag_accept(tb)
-
-		var c = new Automaton.empty
-		c.absorb(a)
-		c.absorb(b)
-		c = c.to_dfa
-		c.accept.clear
-		for s in c.retrotags[ta] do
-			if not c.tags[s].has(tb) then
-				c.accept.add(s)
-			end
-		end
-		c.clear_tag(ta)
-		c.clear_tag(tb)
-		return c
+		return a.except(b)
 	end
 end
 

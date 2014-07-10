@@ -184,6 +184,31 @@ class Automaton
 		states.add_all other.states
 	end
 
+	# Return a new automaton that recognize `self` but not `other`
+	# For a theorical POV, this is the substraction of languages.
+	# Note: the implementation use `to_dfa` internally, so the theorical complexity is not cheap.
+	fun except(other: Automaton): Automaton
+	do
+		var ta = new Token("1")
+		self.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(self)
+		c.absorb(other)
+		c = c.to_dfa
+		c.accept.clear
+		for s in c.retrotags[ta] do
+			if not c.tags[s].has(tb) then
+				c.accept.add(s)
+			end
+		end
+		c.clear_tag(ta)
+		c.clear_tag(tb)
+		return c
+	end
+
 	# `self` absorbs all states, transisions, tags, and acceptations of `other`
 	# An epsilon transition is added between `self.start` and `other.start`
 	fun absorb(other: Automaton)
@@ -307,10 +332,49 @@ class Automaton
 		accept.add(st)
 	end
 
+	# Remove states (and transitions) that does not reach an accept state
+	fun trim
+	do
+		# Good states are those we want to keep
+		var goods = new HashSet[State]
+		goods.add_all(accept)
+
+		var todo = accept.to_a
+
+		# Propagate goodness
+		while not todo.is_empty do
+			var s = todo.pop
+			for t in s.ins do
+				var s2 = t.from
+				if goods.has(s2) then continue
+				goods.add(s2)
+				todo.add(s2)
+			end
+		end
+
+		# What are the bad state then?
+		var bads = new Array[State]
+		for s in states do
+			if not goods.has(s) then bads.add(s)
+		end
+
+		# Remove their transitions
+		for s in bads do
+			for t in s.ins do t.delete
+			for t in s.outs do t.delete
+		end
+
+		# Keep only the good stuff
+		states.clear
+		states.add_all(goods)
+	end
+
 	# Generate a minimal DFA
 	# REQUIRE: self is a DFA
 	fun to_minimal_dfa: Automaton
 	do
+		trim
+
 		var distincts = new HashMap[State, Set[State]]
 		for s in states do
 			distincts[s] = new HashSet[State]
@@ -372,11 +436,18 @@ class Automaton
 	# Produce a graphvis file for the automaton
 	fun to_dot(filepath: String)
 	do
+		var names = new HashMap[State, String]
+		var ni = 0
+		for s in states do
+			names[s] = ni.to_s
+			ni += 1
+		end
+
 		var f = new OFStream.open(filepath) 
                 f.write("digraph g \{\n")
 
 		for s in states do
-			f.write("s{s.object_id}[shape=oval")
+			f.write("s{names[s]}[shape=oval")
 			#f.write("label=\"\",")
 			if accept.has(s) then
 				f.write(",color=blue")
@@ -414,10 +485,10 @@ class Automaton
 						labe += c.to_s
 					end
 				end
-				f.write("s{s.object_id}->s{s2.object_id} [label=\"{labe.escape_to_c}\"];\n")
+				f.write("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 			end
 		end
-		f.write("empty->s{start.object_id}; empty[label=\"\",shape=none];\n")
+		f.write("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
 
                 f.write("\}\n")
 		f.close
@@ -427,6 +498,8 @@ class Automaton
 	# note: the DFA is not miminized
 	fun to_dfa: Automaton
 	do
+		trim
+
 		var dfa = new Automaton.empty
 		var n2d = new ArrayMap[Set[State], State]
 		var seen = new ArraySet[Set[State]] 

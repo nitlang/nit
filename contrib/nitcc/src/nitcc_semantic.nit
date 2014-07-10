@@ -41,6 +41,12 @@ class CollectNameVisitor
 	# Read the result of the visit here
 	var nfa = new Automaton.empty
 
+	# The current production, used to initialize priorities
+	var prod: nullable Production = null
+
+	# The current priority counter to name tranformed productions
+	var pricpt: Int = 0
+
 	# Run the semantic analysis of the grammar
 	fun start(n: Node)
 	do
@@ -101,6 +107,10 @@ private class CheckNameVisitor
 
 	# Is the alternative transformed, for the alternative
 	var trans = false
+
+	# The current priority class
+	# Used the check, and tranform the grammar
+	var pri: nullable Npriority = null
 
 	# Known ignored tokens
 	var ignoreds = new Array[Element]
@@ -288,8 +298,14 @@ redef class Nrej
 end
 
 redef class Nprod
-	# The associated production
+	# The associated main production
+	# ie the last priority class
 	var prod: nullable Production
+
+	# The associated most-priority production
+	# ie the first priority class
+	# If there is no priority then `sub_prod == prod`
+	var sub_prod: nullable Production
 
 	redef fun accept_collect_prod(v) do
 		var id = children.first.as(Nid)
@@ -300,11 +316,33 @@ redef class Nprod
 		end
 		v.names[name] = self
 		v.nprods.add(self)
-		prod = new Production(name)
-		v.gram.prods.add(prod.as(not null))
+		var prod = new Production(name)
+		self.prod = prod
+		v.gram.prods.add(prod)
+
+		# Check priority block
+		var pris = children[4]
+		if pris isa Nodes[Npriority] then
+			var lastpri = pris.children.last
+			lastpri.is_last = true
+
+			v.pricpt = pris.children.length
+
+			# Create a new production for the first priority class
+			# The main production will be used for the last priority class
+			var spe = prod
+			prod = new Production(name + "$0")
+			prod.spe = spe
+			v.gram.prods.add(prod)
+		end
+		self.sub_prod = prod
+
+		v.prod = prod
+		super
+		v.prod = null
 	end
 	redef fun accept_check_name_visitor(v) do
-		v.prod = prod
+		v.prod = sub_prod
 		super
 		v.prod = null
 	end
@@ -337,6 +375,92 @@ redef class Natrans
 	end
 end
 
+redef class Npriority
+	var is_last = false
+
+	# The associated production
+	var prod: nullable Production
+
+	# The production in the with the next less priority class
+	# null is there is no priority or if the first priority class
+	var next: nullable Production
+
+	redef fun accept_collect_prod(v) do
+		var old = v.prod
+		assert old != null
+		var spe = old.spe
+		assert spe != null
+		if is_last then
+			prod = spe
+		else
+			v.pricpt -= 1
+			prod = new Production(spe.name + "${v.pricpt}")
+			prod.spe = spe
+			v.gram.prods.add(prod.as(not null))
+		end
+		next = old
+		v.prod = prod
+		super
+
+	end
+	redef fun accept_check_name_visitor(v) do
+		var old = v.prod
+		v.prod = prod
+		v.pri = self
+		super
+
+		# Inject a new alternative that goes to the next less prioty class
+		var alt = prod.new_alt2(prod.name + "_" + prod.alts.length.to_s, [next.as(not null)])
+		alt.trans = true
+		alt.codes = [new CodePop]
+
+		v.pri = null
+		v.prod = old
+	end
+
+	# Check and transform `v.elems` for priority
+	private fun check_priority(v: CheckNameVisitor) is abstract
+end
+
+redef class Npriority_left
+	redef fun check_priority(v) do
+		var p = prod.spe or else prod
+		assert p != null
+		if v.elems.length < 2 or v.elems.first != p or v.elems.last != p then
+			print("Error: in a Left priority class, left and right must be the production")
+			exit(1)
+		end
+		v.elems.first = prod.as(not null)
+		v.elems.last = next.as(not null)
+	end
+end
+
+redef class Npriority_right
+	redef fun check_priority(v) do
+		var p = prod.spe or else prod
+		assert p != null
+		if v.elems.length < 2 or v.elems.first != p or v.elems.last != p then
+			print("Error: in a Right priority class, left and right must be the production")
+			exit(1)
+		end
+		v.elems.first = next.as(not null)
+		v.elems.last = prod.as(not null)
+	end
+end
+
+redef class Npriority_unary
+	redef fun check_priority(v) do
+		var p = prod.spe or else prod
+		assert p != null
+		if v.elems.length < 2 or (v.elems.first != p and v.elems.last != p) then
+			print("Error: in a Unary priority class, left or right must be the production")
+			exit(1)
+		end
+		if v.elems.first == p then v.elems.first = prod.as(not null)
+		if v.elems.last == p then v.elems.last = prod.as(not null)
+	end
+end
+
 redef class Alternative
 	var short_name: nullable String
 end
@@ -351,7 +475,12 @@ redef class Nalt
 		v.trans = false
 		v.elems = new Array[Element]
 		v.elems_names = new Array[nullable String]
+
 		super
+
+		var pri = v.pri
+		if pri != null then pri.check_priority(v)
+
 		var prod = v.prod.as(not null)
 		var prodabs = prod.spe
 		if prodabs == null then prodabs = prod
@@ -359,7 +488,7 @@ redef class Nalt
 		if name == null then
 			if v.trans then
 				name = prod.name + "_" + prod.alts.length.to_s
-			else if prod.spe == null and prod.alts.is_empty then
+			else if prod.spe == null and prod.alts.is_empty and pri == null then
 				name = prod.name
 				prod.altone = true
 			else
@@ -376,6 +505,7 @@ redef class Nalt
 			end
 			name = prodabs.name + "_" + name
 		end
+
 		var alt = prod.new_alt2(name, v.elems)
 		alt.short_name = v.altname
 		alt.elems_names.add_all(v.elems_names)
@@ -567,5 +697,16 @@ redef class Nelem_plus
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
 		set_elem(v, null, elem)
+	end
+end
+
+redef class Ntree_part
+	redef fun accept_collect_prod(v) do
+		print "NOT YET IMPLEMENTED: `Tree` part; it is ignored"
+		# SKIP by doing nothing
+	end
+
+	redef fun accept_check_name_visitor(v) do
+		# SKIP by doing nothing
 	end
 end

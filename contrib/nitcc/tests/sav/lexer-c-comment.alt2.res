@@ -1,1 +1,1 @@
-Not Yet Implemented Error: '-' only works on single char
+Error: Conflicting tokens: com1 com2

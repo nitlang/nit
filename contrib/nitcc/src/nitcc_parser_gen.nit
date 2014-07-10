@@ -54,10 +54,12 @@ var p_altid = new Production("altident")
 var p_elems = new Production("elems")
 var p_elem_list = new Production("elem_list")
 var p_elem = new Production("elem")
-g.prods.add_all([p_gr, p_re, p_re1, p_re2, p_re3, p_text, p_lex, p_exprs, p_expr, p_par, p_ign, p_rej, p_prods, p_prod, p_ptrans_o, p_alts, p_alt, p_altid_o, p_altid, p_elems, p_elem_list, p_elem])
+var p_pri = new Production("priority")
+g.prods.add_all([p_gr, p_re, p_re1, p_re2, p_re3, p_text, p_lex, p_exprs, p_expr, p_par, p_ign, p_rej, p_prods, p_prod, p_ptrans_o, p_alts, p_alt, p_altid_o, p_altid, p_elems, p_elem_list, p_elem, p_pri])
 g.prods.add(new Production("atrans"))
 g.prods.add(new Production("elemid"))
 g.prods.add(new Production("nelem"))
+g.prods.add(new Production("tree_part"))
 
 var t_opar = new Token("opar")
 var t_cpar = new Token("cpar")
@@ -78,11 +80,13 @@ var t_str = new Token("str")
 var t_id = new Token("id")
 var t_kw = new Token("kw")
 var t_any = new Token("any")
+var t_end = new Token("end")
 var t_and = new Token("and")
 var t_except = new Token("except")
 var t_shortest = new Token("shortest")
 var t_longest = new Token("longest")
 var t_ch_dec = new Token("ch_dec")
+var t_ch_hex = new Token("ch_hex")
 g.tokens.add_all([t_opar,
 	t_cpar,
 	t_ocur,
@@ -102,11 +106,13 @@ g.tokens.add_all([t_opar,
 	t_id,
 	t_kw,
 	t_any,
+	t_end,
 	t_and,
 	t_except,
 	t_shortest,
 	t_longest,
-	t_ch_dec])
+	t_ch_dec,
+	t_ch_hex])
 
 p_gr.new_alt("gr", t_kw, t_id, t_semi, p_lex, p_par)
 
@@ -136,11 +142,13 @@ p_re3.new_alt("re_longest", t_longest, t_opar, p_re, t_cpar)
 p_re3.new_alt("re_par", t_opar, p_re, t_cpar)
 p_re3.new_alt("re_class", p_text, t_dot, t_dot, p_text)
 p_re3.new_alt("re_any", t_any)
+p_re3.new_alt("re_end", t_end)
 p_re3.new_alt("re_id", t_id)
 p_re3.new_alt("re_text", p_text)
 
 p_text.new_alt("re_str", t_str)
 p_text.new_alt("re_ch_dec", t_ch_dec)
+p_text.new_alt("re_ch_hex", t_ch_hex)
 
 p_par.new_alt("par", t_kw, p_ign, p_rej, p_prods)
 
@@ -178,6 +186,10 @@ p_elem.new_alt("elem_par", t_opar, p_alts, t_cpar)
 p_elem.new_alt("elem_star", p_elem, t_star)
 p_elem.new_alt("elem_ques", p_elem, t_ques)
 p_elem.new_alt("elem_plus", p_elem, t_plus)
+
+p_pri.new_alt0("priority_left").phony = true
+p_pri.new_alt0("priority_right").phony = true
+p_pri.new_alt0("priority_unary").phony = true
 
 var a = g.lr0
 

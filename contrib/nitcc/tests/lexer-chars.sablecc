@@ -1,0 +1,11 @@
+Grammar x;
+
+Lexer
+
+lf =
+	'\n' //alt1 #10 //alt2 #x0a //alt3 #x0A
+	;
+
+Parser
+
+	x = 'a' lf;

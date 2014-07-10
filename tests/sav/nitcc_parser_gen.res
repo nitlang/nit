@@ -1,1 +1,1 @@
-LR automaton: 91 states (see nitcc0.lr.dot)
+LR automaton: 93 states (see nitcc0.lr.dot)

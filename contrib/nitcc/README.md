@@ -60,7 +60,7 @@ For the parser (and grammar and LR)
  - [x] Rejected
  - [x] Empty (but not mandatory)
  - [ ] Opportunistic
- - [ ] Precedence
+ - [x] Precedence
  - [ ] Separator
  - [x] Dangling (automatic, so mitigate the SLR limitations)
  - [x] simple transformation (unchecked)
