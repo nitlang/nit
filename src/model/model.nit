@@ -948,7 +948,7 @@ class MClassType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
-	private init(mclass: MClass)
+	init(mclass: MClass)
 	do
 		self.mclass = mclass
 	end
@@ -1041,7 +1041,7 @@ end
 class MGenericType
 	super MClassType
 
-	private init(mclass: MClass, arguments: Array[MType])
+	init(mclass: MClass, arguments: Array[MType])
 	do
 		super(mclass)
 		assert self.mclass.arity == arguments.length
