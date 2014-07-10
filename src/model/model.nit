@@ -587,6 +587,8 @@ end
 abstract class MType
 	super MEntity
 
+	redef fun name do return to_s
+
 	# The model of the type
 	fun model: Model is abstract
 
