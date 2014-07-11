@@ -19,6 +19,7 @@ import list
 intrude import array # FIXME because of string.nit
 import sorter
 import hash_collection
+import union_find
 
 redef class Sequence[E]
 	fun subarray(start, len: Int): Array[E]
