@@ -182,3 +182,101 @@ private class CircularQueueIterator[E]
 
 	redef fun item do return queue.items[current]
 end
+
+# Stack implemented with an array
+# A stack is a particular kind of collection
+# in which the principal operations are:
+#  * the addition of an entity to the collection, known as `push`
+#  * the removal of an entity, known as `pop`
+# This makes the queue a Last-In-First-Out (LIFO) data structure.
+# In a LIFO data structure, the last element added to the structure must be the first one
+# to be removed.
+# This is equivalent to the requirement that, considered as a linear collection,
+# the push and pop operations occur only at one end of the structure,
+# referred to as the top of the stack.
+#
+# Example:
+#
+#     var stack = new Stack[Int]
+#     stack.push 1
+#     stack.push 2
+#     assert stack.pop == 2
+#     assert stack.pop == 1
+class Stack[E]
+	super Collection[E]
+
+	private var items = new List[E]
+	private var itop = 0
+
+	# Is the stack empty?
+	#
+	#     var stack = new Stack[Int]
+	#     assert stack.is_empty
+	#     stack.push 1
+	#     assert not stack.is_empty
+	#     stack.pop
+	#     assert stack.is_empty
+	redef fun is_empty do return itop == 0
+
+	# Add an item on top of the stack
+	#
+	#     var stack = new Stack[Int]
+	#     stack.push 1
+	#     stack.push 2
+	#     assert stack.length == 2
+	fun push(item: E) do
+		itop += 1
+		items.add item
+	end
+
+	# Pop the item on the top of the stack
+	#
+	#     var stack = new Stack[Int]
+	#     stack.push 1
+	#     stack.push 2
+	#     assert stack.pop == 2
+	#     assert stack.pop == 1
+	#     assert stack.is_empty
+	fun pop: E do
+		assert empty: not is_empty
+		itop -= 1
+		return items[itop]
+	end
+
+	# Show the item on the top of the stack but do not remove it
+	#
+	#     var stack = new Stack[Int]
+	#     stack.push 1
+	#     stack.push 2
+	#     assert stack.top == 2
+	#     stack.pop
+	#     assert stack.top == 1
+	fun top: E do
+		assert empty: not is_empty
+		return items[itop - 1]
+	end
+
+	# Number of items contained in the stack
+	#
+	#     var stack = new Stack[Int]
+	#     assert stack.length == 0
+	#     stack.push 1
+	#     assert stack.length == 1
+	#     stack.push 2
+	#     assert stack.length == 2
+	#     assert stack.pop == 2
+	#     assert stack.length == 1
+	#     assert stack.pop == 1
+	#     assert stack.length == 0
+	redef fun length do return itop
+
+	# Get an iterator over the stack
+	#
+	#     var stack = new Stack[Int]
+	#     stack.push 1
+	#     stack.push 2
+	#     var sum = 0
+	#     for item in stack do sum += item
+	#     assert sum == 3
+	redef fun iterator do return items.iterator
+end
