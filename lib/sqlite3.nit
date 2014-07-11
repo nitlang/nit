@@ -118,6 +118,12 @@ extern class Statement `{sqlite3_stmt*`}
 	fun column_count: Int `{
 		return sqlite3_column_count(recv);
 	`}
+
+	# Reset this statement to its original state, to be reexecuted
+	fun reset: Sqlite3Code `{ return sqlite3_reset(recv); `}
+
+	# Delete this statement
+	fun finalize: Sqlite3Code `{ return sqlite3_finalize(recv); `}
 end
 
 # A database connection
