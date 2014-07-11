@@ -1,7 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2013 Guillaume Auger <jeho@resist.ca>
-# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2013-2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -110,9 +110,7 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_column_type(recv, i);
 	`}
 
-	#	fun column_blob(i : Int) : String `{
-	#		TODO
-	#	`}
+	fun column_blob(i: Int): Pointer `{ return (void*)sqlite3_column_blob(recv, i); `}
 
 	fun column_count: Int `{
 		return sqlite3_column_count(recv);
