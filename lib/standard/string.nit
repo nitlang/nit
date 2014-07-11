@@ -293,6 +293,33 @@ abstract class Text
 		return true
 	end
 
+	# Are all letters in `self` upper-case ?
+	#
+	#     assert "HELLO WORLD".is_upper == true
+	#     assert "%$&%!".is_upper       == true
+	#     assert "hello world".is_upper == false
+	#     assert "Hello World".is_upper == false
+	fun is_upper: Bool
+	do
+		for char in self.chars do 
+			if char.is_lower then return false
+		end
+		return true
+	end
+
+	# Are all letters in `self` lower-case ?
+	#
+	#     assert "hello world".is_lower == true
+	#     assert "%$&%!".is_lower       == true
+	#     assert "Hello World".is_lower == false
+	fun is_lower: Bool
+	do
+		for char in self.chars do 
+			if char.is_upper then return false
+		end
+		return true
+	end
+			
 	# Removes the whitespaces at the beginning of self
 	#
 	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
@@ -613,6 +640,79 @@ abstract class String
 	#
 	#     assert "Hello World!".to_lower     == "hello world!"
 	fun to_lower : SELFTYPE is abstract
+
+	# Takes a camel case `self` and converts it to snake case 
+	#
+	#     assert "randomMethodId".to_snake_case == "random_method_id"
+	#
+	# If `self` is upper, it is returned unchanged
+	#
+	#     assert "RANDOM_METHOD_ID".to_snake_case == "RANDOM_METHOD_ID"
+	#
+	# If the identifier is prefixed by an underscore, the underscore is ignored
+	#
+	#     assert "_privateField".to_snake_case == "_private_field"
+	fun to_snake_case: SELFTYPE
+	do
+		if self.is_upper then return self
+
+		var new_str = new FlatBuffer.with_capacity(self.length)
+		var is_first_char = true
+
+		for char in self.chars do
+			if is_first_char then 
+				new_str.add(char.to_lower)
+				is_first_char = false
+			else if char.is_upper then
+				new_str.add('_')
+				new_str.add(char.to_lower)
+			else
+				new_str.add(char)
+			end
+		end
+		
+		return new_str.to_s
+	end
+
+	# Takes a snake case `self` and converts it to camel case 
+	#
+	#     assert "random_method_id".to_camel_case == "randomMethodId"
+	#
+	# If the identifier is prefixed by an underscore, the underscore is ignored
+	#
+	#     assert "_private_field".to_camel_case == "_privateField"
+	#
+	# If `self` is upper, it is returned unchanged
+	#
+	#     assert "RANDOM_ID".to_camel_case == "RANDOM_ID"
+	#
+	# If there are several consecutive underscores, they are considered as a single one
+	#
+	#     assert "random__method_id".to_camel_case == "randomMethodId"
+	fun to_camel_case: SELFTYPE
+	do
+		if self.is_upper then return self
+
+		var new_str = new FlatBuffer
+		var is_first_char = true
+		var follows_us = false
+
+		for char in self.chars do
+			if is_first_char then
+				new_str.add(char)
+				is_first_char = false
+			else if char == '_' then
+				follows_us = true
+			else if follows_us then
+				new_str.add(char.to_upper)
+				follows_us = false
+			else
+				new_str.add(char)
+			end
+		end
+
+		return new_str.to_s
+	end
 end
 
 private class FlatSubstringsIter
