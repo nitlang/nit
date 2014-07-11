@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Low-level Sqlite3 features
 module sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
@@ -71,8 +72,10 @@ extern class Sqlite3Code `{int`}
 	`}
 end
 
+# A prepared statement
 extern class Statement `{sqlite3_stmt*`}
 
+	# Evaluate the statement
 	fun step: Sqlite3Code `{
 		return sqlite3_step(recv);
 	`}
@@ -117,7 +120,10 @@ extern class Statement `{sqlite3_stmt*`}
 	`}
 end
 
+# A database connection
 extern class Sqlite3 `{sqlite3 *`}
+
+	# Open a connection to a database in UTF-8
 	new open(filename: String) import String.to_cstring `{
 		sqlite3 *self;
 		sqlite3_open(String_to_cstring(filename), &self);
@@ -126,12 +132,15 @@ extern class Sqlite3 `{sqlite3 *`}
 
 	fun destroy do close
 
+	# Close this connection
 	fun close `{ sqlite3_close(recv); `}
 
-	fun exec(sql : String): Sqlite3Code import String.to_cstring `{
+	# Execute a SQL statement
+	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
 		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
 	`}
 
+	# Prepare a SQL statement
 	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement.as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
