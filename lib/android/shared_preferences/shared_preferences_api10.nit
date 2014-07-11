@@ -366,20 +366,23 @@ class SharedPreferences
 		self.editor.delete_global_ref
 	end
 
-	# Save data to file dynamically calling the appropriate method according to value type
-	# Non-primitive Object (`String` excluded) will be stored as a serialized json `String`
-	# Nit `Int` are stored as Java `long`, therefore you'll have to retrieve it with `long` method
-	fun []=(key: String, value: Serializable)
+	# Store `value` as a serialized Json string
+	fun []=(key: String, value: nullable Serializable)
 	do
-		value.add_to_preferences(self, key)
+		var serialized_string = new StringOStream
+		var serializer = new JsonSerializer(serialized_string)
+		serializer.serialize(value)
+
+		add_string(key, serialized_string.to_s)
 		commit_if_auto
 	end
 
-	# Retrieve an `Object` serialized via `[]=` function
+	# Retrieve an `Object` stored via `[]=` function
+	#
 	# Returns `null` if there's no serialized object corresponding to the given key
 	# Make sure that the serialized object is `auto_serializable` or that it redefines
 	# the appropriate methods. Refer to `Serializable` documentation for further details
-	fun deserialize(key: String): nullable Object
+	fun [](key: String): nullable Object
 	do
 		var serialized_string = self.string(key, "")
 
@@ -393,47 +396,5 @@ end
 redef class App
 	fun shared_preferences: SharedPreferences is cached do 
 		return new SharedPreferences.privately(self, "")
-	end
-end
-
-redef class Serializable
-	# Called by []= operator to dynamically call the appropriate add method 
-	# Non-primitive Object (`String` excluded) will be stored as a serialized json `String`
-	# Refine your class to customize this method behaviour
-	protected fun add_to_preferences(shared_preferences: SharedPreferences, key: String) 
-	do 
-		var serialized_string = new StringOStream
-		var serializer = new JsonSerializer(serialized_string)
-		serializer.serialize(self)
-
-		shared_preferences.add_string(key, serialized_string.to_s)
-	end
-end
-
-redef class Bool
-	redef fun add_to_preferences(shared_preferences, key)
-	do
-		shared_preferences.add_bool(key, self)
-	end
-end
-
-redef class Int
-	redef fun add_to_preferences(shared_preferences, key)
-	do
-		shared_preferences.add_long(key, self)
-	end
-end
-
-redef class Float
-	redef fun add_to_preferences(shared_preferences, key)
-	do
-		shared_preferences.add_float(key, self)
-	end
-end
-
-redef class String
-	redef fun add_to_preferences(shared_preferences, key)
-	do
-		shared_preferences.add_string(key, self)
 	end
 end
