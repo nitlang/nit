@@ -293,6 +293,33 @@ abstract class Text
 		return true
 	end
 
+	# Are all letters in `self` upper-case ?
+	#
+	#     assert "HELLO WORLD".is_upper == true
+	#     assert "%$&%!".is_upper       == true
+	#     assert "hello world".is_upper == false
+	#     assert "Hello World".is_upper == false
+	fun is_upper: Bool
+	do
+		for char in self.chars do 
+			if char.is_lower then return false
+		end
+		return true
+	end
+
+	# Are all letters in `self` lower-case ?
+	#
+	#     assert "hello world".is_lower == true
+	#     assert "%$&%!".is_lower       == true
+	#     assert "Hello World".is_lower == false
+	fun is_lower: Bool
+	do
+		for char in self.chars do 
+			if char.is_upper then return false
+		end
+		return true
+	end
+			
 	# Removes the whitespaces at the beginning of self
 	#
 	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
