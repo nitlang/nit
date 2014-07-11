@@ -19,7 +19,7 @@ module shared_preferences_api10
 
 import native_app_glue
 import serialization
-import json_serialization
+private import json_serialization
 
 in "Java" `{
 	import android.content.SharedPreferences;
