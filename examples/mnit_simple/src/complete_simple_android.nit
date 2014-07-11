@@ -23,3 +23,4 @@ import test_audio
 import test_shared_preferences
 import test_assets_and_resources
 import test_target_api
+import test_data_store

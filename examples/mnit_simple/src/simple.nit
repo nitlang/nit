@@ -39,9 +39,9 @@ redef class App
 		img = load_image( "fighter.png" )
 	end
 
-	var r: Float = 0.0
-	var g: Float = 0.0
-	var b: Float = 0.0
+	var r = 0.0 is writable
+	var g = 0.0 is writable
+	var b = 0.0 is writable
 	redef fun frame_core( display )
 	do
 		b = b + 0.01
