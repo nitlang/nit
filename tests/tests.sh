@@ -463,16 +463,18 @@ END
 			echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
 			process_result $bf $bf $pack
-		elif skip_exec "$bf"; then
-			# No exec
-			> "$ff.res"
-			process_result $bf $bf $pack
 		elif [ -n "$nocc" ]; then
 			# not compiled
 			echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
+			if skip_exec "$bf"; then
+				# No exec
+				> "$ff.res"
+				process_result $bf $bf $pack
+				break
+			fi
 			echo -n ". "
 			# Execute
 			args=""
