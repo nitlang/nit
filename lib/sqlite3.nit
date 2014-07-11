@@ -131,10 +131,15 @@ extern class Sqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
 	new open(filename: String) import String.to_cstring `{
-		sqlite3 *self;
+		sqlite3 *self = NULL;
 		sqlite3_open(String_to_cstring(filename), &self);
 		return self;
 	`}
+
+	# Has this DB been correctly opened?
+	#
+	# To know if it has been closed or interrupted, you must check for errors with `error`.
+	fun is_valid: Bool do return not address_is_null
 
 	fun destroy do close
 
