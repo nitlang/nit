@@ -14,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# app.nit is a framework to create cross-platform applications
-#
-# The features offered by this modules are common to all platforms, but
-# may not be available on all devices.
-module app is
+module app_base is
 	new_annotation app_name
 	new_annotation app_version
 end
