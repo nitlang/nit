@@ -142,10 +142,19 @@ private class ScopeVisitor
 	do
 		var name: nullable String
 		if nlabel != null then
-			name = nlabel.n_id.text
-			var found = self.search_label(name)
-			if found != null then
-				self.error(nlabel, "Syntax error: label {name} already defined.")
+			var nid = nlabel.n_id
+			if nid == null then
+				var res = search_label("")
+				if res != null then
+					self.error(nlabel, "Syntax error: anonymous label already defined.")
+				end
+				name = ""
+			else
+				name = nid.text
+				var found = self.search_label(name)
+				if found != null then
+					self.error(nlabel, "Syntax error: label {name} already defined.")
+				end
 			end
 		else
 			name = null
@@ -162,7 +171,16 @@ private class ScopeVisitor
 	private fun get_escapemark(node: ANode, nlabel: nullable ALabel): nullable EscapeMark
 	do
 		if nlabel != null then
-			var name = nlabel.n_id.text
+			var nid = nlabel.n_id
+			if nid == null then
+				var res = search_label("")
+				if res == null then
+					self.error(nlabel, "Syntax error: invalid anonymous label.")
+					return null
+				end
+				return res
+			end
+			var name = nid.text
 			var res = search_label(name)
 			if res == null then
 				self.error(nlabel, "Syntax error: invalid label {name}.")
