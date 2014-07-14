@@ -2408,6 +2408,15 @@ class AAnnotations
 end
 class AAnnotation
 	super Prod
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: nullable AVisibility
+	fun n_visibility: nullable AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
 	var _n_atid: AAtid
 	fun n_atid: AAtid do return _n_atid
 	fun n_atid=(n_atid: AAtid) do _n_atid = n_atid
