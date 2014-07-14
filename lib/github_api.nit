@@ -17,14 +17,10 @@
 module github_api
 
 import curl
-import json::static
 
 # Specific Curl that know hot to talk to the github API
 class GithubCurl
 	super Curl
-
-	# Headers to use on all requests
-	var header: HeaderMap
 
 	# OAuth token
 	var auth: String
@@ -38,18 +34,15 @@ class GithubCurl
 		super
 		self.auth = auth
 		self.user_agent = user_agent
-
-		header = new HeaderMap
-		header["Authorization"] = "token {auth}"
 	end
 
 	# Get the requested URI, and check the HTTP response. Then convert to JSON
 	# and check for Github errors.
-	fun get_and_check(uri: String): nullable Object
+	fun get_and_check(uri: String): nullable Jsonable
 	do
-		var request = new CurlHTTPRequest(uri, self)
+		var request = new JsonGET(uri, self)
+		request.auth = auth
 		request.user_agent = user_agent
-		request.headers = header
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
