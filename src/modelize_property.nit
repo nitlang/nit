@@ -716,7 +716,7 @@ redef class AAttrPropdef
 				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
 			else
-				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, true, mwriteprop) then return
+				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 				if nwritable != null then
 					check_redef_property_visibility(modelbuilder, nwritable.n_visibility, mwriteprop)
 				end
