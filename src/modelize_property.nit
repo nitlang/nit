@@ -742,10 +742,19 @@ redef class AAttrPropdef
 		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
+		var mreadpropdef = self.mreadpropdef
+
 		var ntype = self.n_type
 		if ntype != null then
 			mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 			if mtype == null then return
+		end
+
+		# Inherit the type from the getter (usually an abstact getter)
+		if mtype == null and mreadpropdef != null and not mreadpropdef.is_intro then
+			var msignature = mreadpropdef.mproperty.intro.msignature
+			if msignature == null then return # Error, thus skiped
+			mtype = msignature.return_mtype
 		end
 
 		var nexpr = self.n_expr
@@ -775,11 +784,9 @@ redef class AAttrPropdef
 					modelbuilder.error(self, "Error: Untyped attribute {mpropdef}. Implicit typing allowed only for literals and new.")
 				end
 
-			else
-				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+				if mtype == null then return
 			end
-		else
-			assert ntype != null
+		else if ntype != null then
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
@@ -788,11 +795,13 @@ redef class AAttrPropdef
 			end
 		end
 
-		if mtype == null then return
+		if mtype == null then
+			modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			return
+		end
 
 		mpropdef.static_mtype = mtype
 
-		var mreadpropdef = self.mreadpropdef
 		if mreadpropdef != null then
 			var msignature = new MSignature(new Array[MParameter], mtype)
 			mreadpropdef.msignature = msignature
