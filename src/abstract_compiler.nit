@@ -2770,7 +2770,7 @@ var toolcontext = new ToolContext
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
 
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
@@ -2781,26 +2781,24 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
-if arguments.length > 1 then
-	print "Too much arguments: {arguments.join(" ")}"
-	print toolcontext.tooldescription
+if arguments.length > 1 and toolcontext.opt_output.value != null then
+	print "Error: --output needs a single source file. Do you prefer --dir?"
 	exit 1
 end
-var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse([progname])
-mmodules.add_all modelbuilder.parse(opt_mixins.value)
+var mmodules = modelbuilder.parse(arguments)
+var mixins = modelbuilder.parse(opt_mixins.value)
 
 if mmodules.is_empty then return
 modelbuilder.run_phases
 
-var mainmodule
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
-	mainmodule.set_imported_mmodules(mmodules)
+for mmodule in mmodules do
+	toolcontext.info("*** PROCESS {mmodule} ***", 1)
+	var ms = [mmodule]
+	if not mixins.is_empty then
+		ms.add_all mixins
+	end
+	toolcontext.run_global_phases(ms)
 end
 
-toolcontext.run_global_phases(mmodules)
