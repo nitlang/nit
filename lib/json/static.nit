@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +22,12 @@
 # languages features (`isa` and `as`).
 module static
 
-import standard
+import json_base
 private import json_parser
 private import json_lexer
 
 redef class Nvalue
-	fun to_nit_object: nullable Object is abstract
+	private fun to_nit_object: nullable Jsonable is abstract
 end
 
 redef class Nvalue_number
@@ -65,7 +66,7 @@ end
 redef class Nvalue_object
 	redef fun to_nit_object
 	do
-		var obj = new HashMap[String, nullable Object]
+		var obj = new JsonObject
 		var members = n_members
 		if members != null then
 			var pairs = members.pairs
@@ -94,13 +95,13 @@ end
 
 redef class Npair
 	fun name: String do return n_string.to_nit_string
-	fun value: nullable Object do return n_value.to_nit_object
+	fun value: nullable Jsonable do return n_value.to_nit_object
 end
 
 redef class Nvalue_array
 	redef fun to_nit_object
 	do
-		var arr = new Array[nullable Object]
+		var arr = new JsonArray
 		var elements = n_elements
 		if elements != null then
 			var items = elements.items
@@ -128,7 +129,35 @@ redef class Nelements_head
 end
 
 redef class Text
-	fun json_to_nit_object: nullable Object
+	# Parse a JSON String as Jsonable entities
+	#
+	# Example with `JsonObject`"
+	#
+	#     var obj = "\{\"foo\": \{\"bar\": true, \"goo\": [1, 2, 3]\}\}".to_jsonable
+	#     assert obj isa JsonObject
+	#     assert obj["foo"] isa JsonObject
+	#     assert obj["foo"].as(JsonObject)["bar"] == true
+	#
+	# Example with `JsonArray`
+	#
+	#     var arr = "[1, 2, 3]".to_jsonable
+	#     assert arr isa JsonArray
+	#     assert arr.length == 3
+	#     assert arr.first == 1
+	#     assert arr.last == 3
+	#
+	# Example with `String`
+	#
+	#     var str = "\"foo, bar, baz\"".to_jsonable
+	#     assert str isa String
+	#     assert str == "foo, bar, baz"
+	#
+	# Malformed JSON input returns a `JsonError` object
+	#
+	#     var bad = "\{foo: \"bar\"\}".to_jsonable
+	#     assert bad isa JsonError
+	#     assert bad.error == "JsonLexerError"
+	fun to_jsonable: nullable Jsonable
 	do
 		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
@@ -139,12 +168,13 @@ redef class Text
 			return root_node.n_0.to_nit_object
 		else if root_node isa NLexerError then
 			var pos = root_node.position
-			print "Json lexer error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
+			var msg =  "{root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return new JsonError("JsonLexerError", msg)
 		else if root_node isa NParserError then
 			var pos = root_node.position
-			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
+			var msg = "{root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return new JsonError("JsonParsingError", msg)
 		else abort
 	end
 end
+
