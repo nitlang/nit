@@ -62,6 +62,11 @@ class NitdocContext
 	end
 
 	private fun process_options do
+		var output_dir = opt_dir.value
+		if output_dir == null then
+			output_dir = "doc"
+		end
+		self.output_dir = output_dir
 		if opt_private.value then
 			min_visibility = none_visibility
 		else
@@ -105,12 +110,6 @@ class NitdocContext
 	end
 
 	private fun init_output_dir do
-		# location output dir
-		var output_dir = opt_dir.value
-		if output_dir == null then
-			output_dir = "doc"
-		end
-		self.output_dir = output_dir
 		# create destination dir if it's necessary
 		if not output_dir.file_exists then output_dir.mkdir
 		# locate share dir
