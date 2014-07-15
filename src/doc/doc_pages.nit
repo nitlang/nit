@@ -38,13 +38,13 @@ class NitdocContext
 	private var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: nitlanguage.org/piwik/)", "--piwik-tracker")
 	private var opt_piwik_site_id = new OptionString("Piwik site ID", "--piwik-site-id")
 
-	private var toolcontext = new ToolContext
-	private var mbuilder: ModelBuilder
-	private var mainmodule: MModule
 	private var output_dir: String
 	private var min_visibility: MVisibility
+	var toolcontext: ToolContext
 
-	init do
+	init(toolcontext: ToolContext) do
+		self.toolcontext = toolcontext
+
 		var opts = toolcontext.option_context
 		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl, opt_nodot, opt_private)
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
@@ -55,23 +55,23 @@ class NitdocContext
 		tpl.add "Usage: nitdoc [OPTION]... <file.nit>...\n"
 		tpl.add "Generates HTML pages of API documentation from Nit source files."
 		toolcontext.tooldescription = tpl.write_to_string
-		toolcontext.process_options(args)
-
-		self.process_options
-		self.parse(toolcontext.option_context.rest)
 	end
 
-	private fun process_options do
+	fun process_options(args: Sequence[String]) do
+		toolcontext.process_options(args)
+		# output dir
 		var output_dir = opt_dir.value
 		if output_dir == null then
 			output_dir = "doc"
 		end
 		self.output_dir = output_dir
+		# min visibility
 		if opt_private.value then
 			min_visibility = none_visibility
 		else
 			min_visibility = protected_visibility
 		end
+		# github urls
 		var gh_upstream = opt_github_upstream.value
 		var gh_base_sha = opt_github_base_sha1.value
 		var gh_gitdir = opt_github_gitdir.value
@@ -82,23 +82,21 @@ class NitdocContext
 			end
 		end
 	end
+end
 
-	private fun parse(arguments: Array[String]) do
-		var model = new Model
-		mbuilder = new ModelBuilder(model, toolcontext)
-		var mmodules = mbuilder.parse(arguments)
-		if mmodules.is_empty then return
-		mbuilder.run_phases
-		if mmodules.length == 1 then
-			mainmodule = mmodules.first
-		else
-			mainmodule = new MModule(model, null, "<main>", new Location(null, 0, 0, 0, 0))
-			mainmodule.is_fictive = true
-			mainmodule.set_imported_mmodules(mmodules)
-		end
+# The Nitdoc class explores the model and generate pages for each mentities found
+class Nitdoc
+	var model: Model
+	var mainmodule: MModule
+	var ctx: NitdocContext
+
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule) do
+		self.ctx = ctx
+		self.model = model
+		self.mainmodule = mainmodule
 	end
 
-	fun generate_nitdoc do
+	fun generate do
 		init_output_dir
 		overview
 		search
@@ -111,11 +109,12 @@ class NitdocContext
 
 	private fun init_output_dir do
 		# create destination dir if it's necessary
+		var output_dir = ctx.output_dir
 		if not output_dir.file_exists then output_dir.mkdir
 		# locate share dir
-		var sharedir = opt_sharedir.value
+		var sharedir = ctx.opt_sharedir.value
 		if sharedir == null then
-			var dir = toolcontext.nit_dir
+			var dir = ctx.toolcontext.nit_dir
 			if dir == null then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
@@ -127,7 +126,7 @@ class NitdocContext
 			end
 		end
 		# copy shared files
-		if opt_shareurl.value == null then
+		if ctx.opt_shareurl.value == null then
 			sys.system("cp -r {sharedir.to_s}/* {output_dir.to_s}/")
 		else
 			sys.system("cp -r {sharedir.to_s}/resources/ {output_dir.to_s}/resources/")
@@ -136,49 +135,49 @@ class NitdocContext
 	end
 
 	private fun overview do
-		var overviewpage = new NitdocOverview(self)
-		overviewpage.render.write_to_file("{output_dir.to_s}/index.html")
+		var overviewpage = new NitdocOverview(ctx, model, mainmodule)
+		overviewpage.render.write_to_file("{ctx.output_dir.to_s}/index.html")
 	end
 
 	private fun search do
-		var searchpage = new NitdocSearch(self)
-		searchpage.render.write_to_file("{output_dir.to_s}/search.html")
+		var searchpage = new NitdocSearch(ctx, model, mainmodule)
+		searchpage.render.write_to_file("{ctx.output_dir.to_s}/search.html")
 	end
 
 	private fun groups do
-		for mproject in mbuilder.model.mprojects do
+		for mproject in model.mprojects do
 			for mgroup in mproject.mgroups.to_a do
-				var page = new NitdocGroup(mgroup, self)
-				page.render.write_to_file("{output_dir.to_s}/{mgroup.nitdoc_url}")
+				var page = new NitdocGroup(ctx, model, mainmodule, mgroup)
+				page.render.write_to_file("{ctx.output_dir.to_s}/{mgroup.nitdoc_url}")
 			end
 		end
 	end
 
 	private fun modules do
-		for mmodule in mbuilder.model.mmodules do
+		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
-			var modulepage = new NitdocModule(mmodule, self)
-			modulepage.render.write_to_file("{output_dir.to_s}/{mmodule.nitdoc_url}")
+			var modulepage = new NitdocModule(ctx, model, mainmodule, mmodule)
+			modulepage.render.write_to_file("{ctx.output_dir.to_s}/{mmodule.nitdoc_url}")
 		end
 	end
 
 	private fun classes do
-		for mclass in mbuilder.model.mclasses do
-			var classpage = new NitdocClass(mclass, self)
-			classpage.render.write_to_file("{output_dir.to_s}/{mclass.nitdoc_url}")
+		for mclass in model.mclasses do
+			var classpage = new NitdocClass(ctx, model, mainmodule, mclass)
+			classpage.render.write_to_file("{ctx.output_dir.to_s}/{mclass.nitdoc_url}")
 		end
 	end
 
 	private fun properties do
-		for mproperty in mbuilder.model.mproperties do
-			var page = new NitdocProperty(mproperty, self)
-			page.render.write_to_file("{output_dir.to_s}/{mproperty.nitdoc_url}")
+		for mproperty in model.mproperties do
+			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
+			page.render.write_to_file("{ctx.output_dir.to_s}/{mproperty.nitdoc_url}")
 		end
 	end
 
 	private fun quicksearch_list do
-		var quicksearch = new QuickSearch(self)
-		quicksearch.render.write_to_file("{output_dir.to_s}/quicksearch-list.js")
+		var quicksearch = new QuickSearch(ctx, model)
+		quicksearch.render.write_to_file("{ctx.output_dir.to_s}/quicksearch-list.js")
 	end
 end
 
@@ -195,16 +194,16 @@ class QuickSearch
 	private var mclasses = new HashSet[MClass]
 	private var mpropdefs = new HashMap[String, Set[MPropDef]]
 
-	init(ctx: NitdocContext) do
-		for mmodule in ctx.mbuilder.model.mmodules do
+	init(ctx: NitdocContext, model: Model) do
+		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
 			mmodules.add mmodule
 		end
-		for mclass in ctx.mbuilder.model.mclasses do
+		for mclass in model.mclasses do
 			if mclass.visibility < ctx.min_visibility then continue
 			mclasses.add mclass
 		end
-		for mproperty in ctx.mbuilder.model.mproperties do
+		for mproperty in model.mproperties do
 			if mproperty.visibility < ctx.min_visibility then continue
 			if mproperty isa MAttribute then continue
 			if not mpropdefs.has_key(mproperty.name) then
@@ -247,11 +246,13 @@ abstract class NitdocPage
 
 	private var ctx: NitdocContext
 	private var model: Model
+	private var mainmodule: MModule
 	private var name_sorter = new MEntityNameSorter
 
-	init(ctx: NitdocContext) do
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule) do
 		self.ctx = ctx
-		self.model = ctx.mbuilder.model
+		self.model = model
+		self.mainmodule = mainmodule
 	end
 
 	# Render the page as a html template
@@ -381,7 +382,7 @@ abstract class NitdocPage
 		article.content = mmodule.tpl_definition
 		# mclassdefs list
 		var intros = mmodule.intro_mclassdefs(ctx.min_visibility).to_a
-		ctx.mainmodule.linearize_mclassdefs(intros)
+		mainmodule.linearize_mclassdefs(intros)
 		var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}_intros", "Introduces")
 		var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 		for mclassdef in intros do
@@ -392,7 +393,7 @@ abstract class NitdocPage
 			article.add_child intros_art
 		end
 		var redefs = mmodule.redef_mclassdefs(ctx.min_visibility).to_a
-		ctx.mainmodule.linearize_mclassdefs(redefs)
+		mainmodule.linearize_mclassdefs(redefs)
 		var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}_redefs", "Redefines")
 		var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 		for mclassdef in redefs do
@@ -414,7 +415,7 @@ abstract class NitdocPage
 			intro_article.source_link = tpl_showsource(mclass.intro.location)
 			article.add_child intro_article
 		end
-		ctx.mainmodule.linearize_mclassdefs(mclassdefs)
+		mainmodule.linearize_mclassdefs(mclassdefs)
 		for mclassdef in mclassdefs do
 			# add mclassdef full description
 			var redef_article = mclassdef.tpl_article
@@ -460,7 +461,7 @@ abstract class NitdocPage
 			intro_article.source_link = tpl_showsource(mproperty.intro.location)
 			article.add_child intro_article
 		end
-		ctx.mainmodule.linearize_mpropdefs(mpropdefs)
+		mainmodule.linearize_mpropdefs(mpropdefs)
 		for mpropdef in mpropdefs do
 			# add mpropdef description
 			var redef_article = mpropdef.tpl_article
@@ -483,8 +484,6 @@ end
 # Display a list of modules contained in program
 class NitdocOverview
 	super NitdocPage
-
-	init(ctx: NitdocContext) do super(ctx)
 
 	private var page = new TplPage
 	redef fun tpl_page do return page
@@ -543,8 +542,6 @@ end
 class NitdocSearch
 	super NitdocPage
 
-	init(ctx: NitdocContext) do super(ctx)
-
 	private var page = new TplPage
 	redef fun tpl_page do return page
 
@@ -586,7 +583,7 @@ class NitdocSearch
 	# Extract mmodule list to display (sorted by name)
 	private fun modules_list: Array[MModule] do
 		var sorted = new Array[MModule]
-		for mmodule in ctx.mbuilder.model.mmodule_importation_hierarchy do
+		for mmodule in model.mmodule_importation_hierarchy do
 			if mmodule.name == "<main>" then continue
 			sorted.add mmodule
 		end
@@ -597,7 +594,7 @@ class NitdocSearch
 	# Extract mclass list to display (sorted by name)
 	private fun classes_list: Array[MClass] do
 		var sorted = new Array[MClass]
-		for mclass in ctx.mbuilder.model.mclasses do
+		for mclass in model.mclasses do
 			if mclass.visibility < ctx.min_visibility then continue
 			sorted.add mclass
 		end
@@ -608,7 +605,7 @@ class NitdocSearch
 	# Extract mproperty list to display (sorted by name)
 	private fun mprops_list: Array[MProperty] do
 		var sorted = new Array[MProperty]
-		for mproperty in ctx.mbuilder.model.mproperties do
+		for mproperty in model.mproperties do
 			if mproperty.visibility < ctx.min_visibility then continue
 			if mproperty isa MAttribute then continue
 			sorted.add mproperty
@@ -629,10 +626,9 @@ class NitdocGroup
 	private var intros: Set[MClass]
 	private var redefs: Set[MClass]
 
-	init(mgroup: MGroup, ctx: NitdocContext) do
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mgroup: MGroup) do
+		super
 		self.mgroup = mgroup
-		super(ctx)
-
 		self.concerns = model.concerns_tree(mgroup.collect_mmodules)
 		self.concerns.sort_with(new MConcernRankSorter)
 		self.intros = mgroup.in_nesting_intro_mclasses(ctx.min_visibility)
@@ -759,10 +755,10 @@ class NitdocModule
 	private var mclasses2mdefs: Map[MClass, Set[MClassDef]]
 	private var mmodules2mclasses: Map[MModule, Set[MClass]]
 
-	init(mmodule: MModule, ctx: NitdocContext) do
-		self.mmodule = mmodule
-		super(ctx)
 
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mmodule: MModule) do
+		super
+		self.mmodule = mmodule
 		var mclassdefs = new HashSet[MClassDef]
 		mclassdefs.add_all mmodule.intro_mclassdefs(ctx.min_visibility)
 		mclassdefs.add_all mmodule.redef_mclassdefs(ctx.min_visibility)
@@ -1003,9 +999,9 @@ class NitdocClass
 	private var mprops2mdefs: Map[MProperty, Set[MPropDef]]
 	private var mmodules2mprops: Map[MModule, Set[MProperty]]
 
-	init(mclass: MClass, ctx: NitdocContext) do
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mclass: MClass) do
+		super
 		self.mclass = mclass
-		super(ctx)
 		var mpropdefs = new HashSet[MPropDef]
 		mpropdefs.add_all mclass.intro_mpropdefs(ctx.min_visibility)
 		mpropdefs.add_all mclass.redef_mpropdefs(ctx.min_visibility)
@@ -1102,14 +1098,14 @@ class NitdocClass
 	private fun tpl_inheritance(parent: TplSection) do
 		# parents
 		var hparents = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).direct_greaters do
+		for c in mclass.in_hierarchy(mainmodule).direct_greaters do
 			if c.visibility < ctx.min_visibility then continue
 			hparents.add c
 		end
 
 		# ancestors
 		var hancestors = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).greaters do
+		for c in mclass.in_hierarchy(mainmodule).greaters do
 			if c == mclass then continue
 			if c.visibility < ctx.min_visibility then continue
 			if hparents.has(c) then continue
@@ -1118,14 +1114,14 @@ class NitdocClass
 
 		# children
 		var hchildren = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).direct_smallers do
+		for c in mclass.in_hierarchy(mainmodule).direct_smallers do
 			if c.visibility < ctx.min_visibility then continue
 			hchildren.add c
 		end
 
 		# descendants
 		var hdescendants = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).smallers do
+		for c in mclass.in_hierarchy(mainmodule).smallers do
 			if c == mclass then continue
 			if c.visibility < ctx.min_visibility then continue
 			if hchildren.has(c) then continue
@@ -1254,7 +1250,7 @@ class NitdocClass
 		var map = new HashMap[MModule, Set[MProperty]]
 		for mprop in mprops do
 			var mpropdefs = mprops2mdefs[mprop].to_a
-			ctx.mainmodule.linearize_mpropdefs(mpropdefs)
+			mainmodule.linearize_mpropdefs(mpropdefs)
 			var mmodule = mpropdefs.first.mclassdef.mmodule
 			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MProperty]
 			map[mmodule].add mprop
@@ -1284,7 +1280,7 @@ class NitdocClass
 	private fun mclass_inherited_mprops: Set[MProperty] do
 		var res = new HashSet[MProperty]
 		var local = mclass.local_mproperties(ctx.min_visibility)
-		for mprop in mclass.inherited_mproperties(ctx.mainmodule, ctx.min_visibility) do
+		for mprop in mclass.inherited_mproperties(mainmodule, ctx.min_visibility) do
 			if local.has(mprop) then continue
 			#if mprop isa MMethod and mprop.is_init then continue
 			if mprop.intro.mclassdef.mclass.name == "Object" and
@@ -1325,7 +1321,7 @@ class NitdocClass
 			poset.add_node mclass
 			for oclass in mclasses do
 				poset.add_node oclass
-				if mclass.in_hierarchy(ctx.mainmodule) < oclass then
+				if mclass.in_hierarchy(mainmodule) < oclass then
 					poset.add_edge(mclass, oclass)
 				end
 			end
@@ -1357,9 +1353,9 @@ class NitdocProperty
 	private var concerns: ConcernsTree
 	private var mmodules2mdefs: Map[MModule, Set[MPropDef]]
 
-	init(mproperty: MProperty, ctx: NitdocContext) do
+	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mproperty: MProperty) do
+		super
 		self.mproperty = mproperty
-		super(ctx)
 		self.mmodules2mdefs = sort_by_mmodule(collect_mpropdefs)
 		self.concerns = model.concerns_tree(mmodules2mdefs.keys)
 		self.concerns.sort_with(new MConcernRankSorter)
