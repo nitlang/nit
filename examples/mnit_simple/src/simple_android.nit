@@ -170,7 +170,7 @@ redef class App
 		# Serialized object test
 		var my_point = new Point(10, 10)
 		sp["a_point"] = my_point
-		var my_deserialized_point = sp.deserialize("a_point")
+		var my_deserialized_point = sp["a_point"]
 		assert my_point.to_s == my_deserialized_point.to_s
 
 		assert sp.bool("a_boolean", false) == true
