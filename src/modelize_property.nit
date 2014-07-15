@@ -881,7 +881,7 @@ redef class AAttrPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) and
+					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, mclassdef.bound_mtype, myt) then
 						var node: ANode
 						if nsig != null then node = nsig else node = self
