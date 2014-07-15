@@ -53,7 +53,7 @@ class GithubCurl
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
-			var obj = response.body_str.json_to_nit_object
+			var obj = response.body_str.to_jsonable
 			if obj isa HashMap[String, nullable Object] then
 				if obj.keys.has("message") then
 					print "Message from Github API: {obj["message"] or else ""}"
