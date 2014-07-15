@@ -27,6 +27,8 @@ import c_tools
 redef class ToolContext
 	# --output
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
+	# --dir
+	var opt_dir: OptionString = new OptionString("Output directory", "--dir")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 	# --no-main
@@ -67,7 +69,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
@@ -87,6 +89,11 @@ redef class ToolContext
 			opt_stacktrace.value = null
 		else
 			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
+			exit(1)
+		end
+
+		if opt_output.value != null and opt_dir.value != null then
+			print "Error: cannot use both --dir and --output"
 			exit(1)
 		end
 	end
@@ -302,6 +309,8 @@ class MakefileToolchain
 		var res = self.toolcontext.opt_output.value
 		if res != null then return res
 		res = default_outname(mainmodule)
+		var dir = self.toolcontext.opt_dir.value
+		if dir != null then return dir.join_path(res)
 		return res
 	end
 
