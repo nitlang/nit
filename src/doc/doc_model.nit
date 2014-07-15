@@ -16,7 +16,6 @@
 module doc_model
 
 import model_utils
-import modelize_property
 import markdown
 import doc_templates
 import ordered_tree
