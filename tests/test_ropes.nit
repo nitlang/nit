@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#alt1 import splay_ropes
+
 var x :String = new RopeString
 
 x = x + "NODE"
