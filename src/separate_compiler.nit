@@ -263,8 +263,8 @@ class SeparateCompiler
 		var rta = runtime_type_analysis
 
 		# Layouts
-		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 		var poset = mainmodule.flatten_mclass_hierarchy
+		var mclasses = new HashSet[MClass].from(poset)
 		var colorer = new POSetColorer[MClass]
 		colorer.colorize(poset)
 
