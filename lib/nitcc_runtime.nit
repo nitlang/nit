@@ -491,7 +491,7 @@ end
 # A hogeneous sequence of node, used to represent unbounded lists (and + modifier)
 class Nodes[T: Node]
 	super Node
-	redef var children = new Array[T]
+	redef var children: Array[T] = new Array[T]
 end
 
 # A production with a specific, named and statically typed children
