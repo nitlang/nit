@@ -487,7 +487,27 @@ redef class MClassType
 	redef fun jni_format
 	do
 		var ftype = mclass.ftype
-		if ftype isa ForeignJavaType then return "L{ftype.java_type.replace('.', "/").replace(' ', "").replace('\n', "")};"
+		if ftype isa ForeignJavaType then
+			var ori_jni_type = jni_type
+			var jni_type = ftype.java_type.
+				replace('.', "/").replace(' ', "").replace('\n', "")
+
+			# Remove parameters of generic types
+			loop
+				var i = jni_type.last_index_of('<')
+				if i >= 0 then
+					var j = jni_type.index_of_from('>', i)
+					if j == -1 then
+						print "Error: missing closing '>' in extern Java type of \"{mclass.name}\""
+						exit 1
+					end
+					jni_type = jni_type.substring(0, i) +
+						jni_type.substring(j+1, jni_type.length)
+				else break
+			end
+
+			return "L{jni_type};"
+		end
 		if mclass.name == "Bool" then return "Z"
 		if mclass.name == "Char" then return "C"
 		if mclass.name == "Int" then return "I"
