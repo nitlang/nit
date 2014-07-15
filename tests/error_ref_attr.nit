@@ -17,5 +17,5 @@
 import module_simple
 
 redef class C
-	redef var _a: Int
+	redef var a: Int
 end

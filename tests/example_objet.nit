@@ -62,8 +62,8 @@ private
 # receveur ("self")
 
 # Les attributs sont déclarés par le mot clé "fun" et commencent par un "@"
-	var _nom_: String 		# Un entrepôt a un nom (de type chaîne).
-	var _rayons: Array[Rayon] 	# Il est composé d'un ensemble de rayon.
+	var nom_: String 		# Un entrepôt a un nom (de type chaîne).
+	var rayons: Array[Rayon] 	# Il est composé d'un ensemble de rayon.
 	# "Array" est une classe paramétrée, les crochets en sont la marque.
 	# La classe "Rayon" est définie plus loin
 
@@ -156,8 +156,8 @@ end
 
 class Produit
 private
-	var _nom_: String 		# Désignation du produit
-	var _qte_: Int 			# Quantité en stock
+	var nom_: String 		# Désignation du produit
+	var qte_: Int 			# Quantité en stock
 
 
 
@@ -208,8 +208,8 @@ end
 
 class Rayon
 private
-	var _stock: Array[Produit]		# Des produits en stock
-	var _rubrique: String			# La catégorie des produits stockés
+	var stock: Array[Produit]		# Des produits en stock
+	var rubrique: String			# La catégorie des produits stockés
 
 	# Cette fonction est utilisé par to_s pour afficher un petit titre
 	fun to_s_head: String
@@ -326,7 +326,7 @@ class RayonFroid
 		return _temp_max_	# Attribut défini juste en dessous
 	end
 
-	var _temp_max_: Int 		# Une température maximale
+	var temp_max_: Int 		# Une température maximale
 	# Les autres attributs sont bien sûr hérités !
 
 	redef fun to_s_head: String 		# On redéfinit cette méthode

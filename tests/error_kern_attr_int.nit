@@ -15,5 +15,5 @@
 # limitations under the License.
 
 redef class Int
-	var _toto: Object
+	var toto: Object
 end

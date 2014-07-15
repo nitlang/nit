@@ -28,5 +28,5 @@ class C
 	super B
 	fun r(x: B) do end
 	fun s: B do return self end
-	var _a: B
+	var a: B
 end

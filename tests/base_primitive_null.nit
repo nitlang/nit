@@ -17,9 +17,9 @@
 import kernel
 
 class A
-	var _i: nullable Int = null
-	var _b: nullable Bool = null
-	var _c: nullable Char = null
+	var i: nullable Int = null
+	var b: nullable Bool = null
+	var c: nullable Char = null
 
 	init
 	do

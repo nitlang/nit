@@ -20,9 +20,9 @@
 # contributed by Jean Privat
 
 class TreeNode
-    var _left: nullable TreeNode
-    var _right: nullable TreeNode
-    var _item: Int
+    var left: nullable TreeNode
+    var right: nullable TreeNode
+    var item: Int
 
 
     init(left: nullable TreeNode, right: nullable TreeNode, item: Int)

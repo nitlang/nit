@@ -16,27 +16,8 @@
 
 class Point
 private
-	var _x: Int	# Abscisse
-	var _y: Int	# Ordonnée
-
-
-	fun x: Int
-	do
-		return _x
-	end
-	fun x=(i: Int)
-	do
-		_x = i
-	end
-
-	fun y: Int
-	do
-		return _y
-	end
-	fun y=(i: Int)
-	do
-		_y = i
-	end
+	var x: Int	# Abscisse
+	var y: Int	# Ordonnée
 
 	# Change la position d'un point
 	fun moveto(x: Int, y: Int)

@@ -17,7 +17,7 @@
 import kernel
 class A
 	var foo: Int = 1
-	var _foo: Int = 2
+	var bar: Int = 2
 end
 
 var a: nullable A = null
@@ -26,6 +26,6 @@ var a: nullable A = null
 #alt1#a.foo.output
 #alt2#a.foo = 1
 #alt3#a.foo += 1
-#alt4#a._foo.output
-#alt5#a._foo = 10
-#alt6#a._foo += 10
+#alt4#a._bar.output
+#alt5#a._bar = 10
+#alt6#a._bar += 10

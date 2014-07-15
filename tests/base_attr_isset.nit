@@ -29,14 +29,14 @@ enum Bool
 end
 
 class Integer
-	var _val: Int
+	var val: Int
 	init(val: Int) do _val = val
 	fun output do _val.output
 end
 
 class Foo
-	var _a1: Integer
-	var _a2: Integer
+	var a1: Integer
+	var a2: Integer
 	fun run
 	do
 		_a1.output
@@ -64,9 +64,9 @@ end
 
 class Bar
 	super Foo
-	var _a3: Integer#alt1# #alt2#
-	#alt1#var _a3: Integer = new Integer(9000)
-	#alt2#var _a3: nullable Integer
+	var a3: Integer#alt1# #alt2#
+	#alt1#var a3: Integer = new Integer(9000)
+	#alt2#var a3: nullable Integer
 	redef fun run
 	do
 		_a1.output

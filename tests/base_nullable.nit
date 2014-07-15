@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	var _i: Int
+	var i: Int
 	init (i: Int) do _i = i
 	redef fun output do _i.output
 end

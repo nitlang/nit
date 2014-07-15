@@ -22,7 +22,7 @@ end
 
 class A
 	super Elt
-	var _a: Int
+	var a: Int
 	redef fun val1: Int do return _a
 
 	init(i: Int) do _a = i
@@ -30,7 +30,7 @@ end
 
 class Elt2
 	super Elt
-	var _b: Int
+	var b: Int
 	redef fun val1: Int do return _b/2
 	redef fun val2: Int do return _b
 	init initelt2(i: Int) do _b = i
@@ -43,8 +43,8 @@ end
 
 class C
 	super Elt
-	var _c: Int
-	var _d: Int
+	var c: Int
+	var d: Int
 	redef fun val1: Int do return _c end
 	redef fun val2: Int do return _d end
 
@@ -89,7 +89,7 @@ class EltComparator
 		_is_val1 = not _is_val1
 	end
 	
-	var _is_val1: Bool = false
+	var is_val1: Bool = false
 
 	init do end
 end
