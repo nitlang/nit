@@ -20,11 +20,10 @@
 # to get the underlying Json data. It can also be used as any Json types.
 module dynamic
 
-private import static
-import standard
+import static
 
 class JsonValue
-	var value: nullable Object
+	var value: nullable Jsonable
 
 	# Is this value null?
 	#
@@ -123,14 +122,14 @@ class JsonValue
 	#
 	#     assert """{"a": 123}""".to_json_value.is_map
 	#     assert not "123".to_json_value.is_map
-	fun is_map: Bool do return value isa HashMap[String, nullable Object]
+	fun is_map: Bool do return value isa HashMap[String, nullable Jsonable]
 
 	# Get this value as a `Map[String, JsonValue]`
 	#
 	# require: `self.is_map`
 	fun to_map: Map[String, JsonValue] do
 		var value = value
-		assert value isa HashMap[String, nullable Object]
+		assert value isa HashMap[String, nullable Jsonable]
 
 		var map = new HashMap[String, JsonValue]
 		for k, v in value do map[k] = new JsonValue(v)
@@ -145,7 +144,7 @@ class JsonValue
 	#     assert "[1, 2, 3, 4, 5]".to_json_value.is_array
 	#     assert "[null, true, false, 0.0, 1, \"str\"]".to_json_value.is_array
 	#     assert """["a", "b", "c"]""".to_json_value.is_array
-	fun is_array: Bool do return value isa Array[nullable Object]
+	fun is_array: Bool do return value isa Array[nullable Jsonable]
 
 	# Get this value as an `Array[JsonValue]`
 	#
@@ -155,7 +154,7 @@ class JsonValue
 	fun to_a: Array[JsonValue]
 	do
 		var value = value
-		assert value isa Array[nullable Object]
+		assert value isa Array[nullable Jsonable]
 
 		var a = new Array[JsonValue]
 		for e in value do a.add(new JsonValue(e))
@@ -186,9 +185,9 @@ class JsonValue
 	fun [](key: Object): JsonValue
 	do
 		var value = value
-		if value isa HashMap[String, nullable Object] then
+		if value isa HashMap[String, nullable Jsonable] then
 			return new JsonValue(value[key.to_s])
-		else if value isa Array[nullable Object] then
+		else if value isa Array[nullable Jsonable] then
 			assert key isa Int
 			return new JsonValue(value[key])
 		else abort
@@ -209,7 +208,7 @@ class JsonValue
 		var keys = query.split(".")
 		var value = value
 		for key in keys do
-			assert value isa HashMap[String, nullable Object]
+			assert value isa HashMap[String, nullable Jsonable]
 			value = value[key]
 		end
 		return new JsonValue(value)
@@ -220,7 +219,7 @@ redef class String
 	# Parse `self` to obtain a `JsonValue`
 	fun to_json_value: JsonValue
 	do
-		var value = json_to_nit_object
+		var value = to_jsonable
 		return new JsonValue(value)
 	end
 end
