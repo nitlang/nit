@@ -50,6 +50,8 @@ class AndroidToolchain
 		return "{android_project_root}/jni/nit_compile/"
 	end
 
+	redef fun default_outname(mainmodule) do return "{mainmodule.name}.apk"
+
 	redef fun write_files(compiler, compile_dir, cfiles)
 	do
 		var android_project_root = android_project_root.as(not null)
@@ -236,8 +238,7 @@ $(call import-module,android/native_app_glue)
 		toolcontext.exec_and_check(args, "Android project error")
 
 		# Move the apk to the target
-		var outname = toolcontext.opt_output.value
-		if outname == null then outname = "{compiler.mainmodule.name}.apk"
+		var outname = outfile(compiler.mainmodule)
 
 		var src_apk_suffix
 		if release then
