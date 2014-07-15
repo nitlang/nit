@@ -280,3 +280,179 @@ class Stack[E]
 	#     assert sum == 3
 	redef fun iterator do return items.iterator
 end
+
+# A heap is a data structure that satisfies the heap property:
+# If A is a parent node of B then the key of node A is ordered with respect
+# to the key of node B with the same ordering applying across the heap.
+# Either the keys of parent nodes are always greater than or equal to those of the children
+# and the highest key is in the root node (this kind of heap is called max heap)
+# or the keys of parent nodes are less than or equal to those of the children
+# and the lowest key is in the root node (min heap).
+#
+# Heaps are crucial in several efficient graph algorithms such as Dijkstra's algorithm,
+# and in the sorting algorithm heapsort.
+interface Heap[E]
+	super Collection[E]
+
+	# Get the minimum element of the heap
+	fun min: E is abstract
+
+	# Remove and return the minimum
+	fun pop: E is abstract
+
+	# Add an element in the heap
+	fun add(e: E) is abstract
+
+	# Update the heap structure
+	fun build_heap is abstract
+end
+
+# Heap implemented over an array
+class ArrayHeap[E]
+	super Heap[E]
+
+	private var items: Array[E]
+	private var size: Int = -1
+	private var comparator: Comparator[E]
+
+	init(comparator: Comparator[E]) do
+		self.comparator = comparator
+		items = new Array[E]
+	end
+
+	# Init the heap using an existing array
+	init from(comparator: Comparator[E], array: Array[E]) do
+		self.comparator = comparator
+		size = array.length - 1
+		items = array
+		build_heap
+	end
+
+	redef fun build_heap do
+		var i = size / 2
+		while i >= 0 do
+			heapify(i)
+			i -= 1
+		end
+	end
+
+	private fun heapify(from: Int) do
+		var l = from * 2 + 1
+		var r = l + 1
+		var largest = from
+		if l <= size and comparator.compare(items[l], items[largest]) > 0 then
+			largest = l
+		else
+			largest = from
+		end
+		if r <= size and comparator.compare(items[r], items[largest]) > 0 then
+			largest = r
+		end
+		if largest != from then
+			items.swap_at(from, largest)
+			heapify(largest)
+		end
+	end
+
+	private fun swap_at(a, b: Int) do
+		var tmp = items[a]
+		items[a] = items[b]
+		items[b] = tmp
+	end
+
+	redef fun length do return size + 1
+	redef fun is_empty do return length == 0
+	redef fun iterator do return items.iterator
+
+	redef fun min do
+		assert not_empty: not is_empty
+		return items.first
+	end
+
+	redef fun pop do
+		assert not_empty: not is_empty
+		var e = min
+		swap_at(0, size)
+		size -= 1
+		build_heap
+		return e
+	end
+
+	redef fun add(e) do
+		size += 1
+		items[size] = e
+		build_heap
+	end
+
+	redef fun to_a do
+		var res = new Array[E]
+		for i in [0..size] do res.add items[i]
+		return res
+	end
+end
+
+# Priority Queue implemented over an ArrayHeap
+# A priority queue is an abstract data type which is like a regular queue,
+# but where additionally each element has a "priority" associated with it.
+# In a priority queue, an element with high priority is served before an element with low priority.
+# If two elements have the same priority, they are served according to their order in the queue.
+#
+# Example:
+#
+#     var comparator = new DefaultComparator[Int]
+#     var queue = new PriorityQueue[Int](comparator)
+#     queue.enqueue 11
+#     queue.enqueue 9
+#     queue.enqueue 30
+#     assert not queue.is_empty
+#     assert queue.dequeue == 30
+#     assert queue.dequeue == 11
+#     assert queue.dequeue == 9
+#
+# Init priority queue from array:
+#
+#     var queue2 = new PriorityQueue[Int].from(comparator, [2, 4, 1, 5, 3, 12, 0])
+#     assert queue2.length == 7
+#     assert queue2.top == 12
+class PriorityQueue[E]
+	super Queue[E]
+
+	var heap: Heap[E]
+
+	init(comparator: Comparator[E]) do
+		heap = new ArrayHeap[E](comparator)
+	end
+
+	init from(comparator: Comparator[E], items: Collection[E]) do
+		heap = new ArrayHeap[E].from(comparator, items.to_a)
+	end
+
+	#     var comparator = new DefaultComparator[Int]
+	#     var queue = new PriorityQueue[Int].from(comparator, [2, 4, 1, 5, 3, 12, 0])
+	#     assert queue.dequeue == 12
+	#     assert queue.dequeue == 5
+	#     assert queue.dequeue == 4
+	#     assert queue.length == 4
+	redef fun dequeue do return heap.pop
+
+	#     var comparator = new DefaultComparator[Int]
+	#     var queue = new PriorityQueue[Int](comparator)
+	#     queue.enqueue 18
+	#     queue.enqueue 12
+	#     queue.enqueue 32
+	#     assert queue.dequeue == 32
+	#     assert queue.dequeue == 18
+	#     assert queue.dequeue == 12
+	redef fun enqueue(e) do heap.add e
+
+	#     var comparator = new DefaultComparator[Int]
+	#     var queue = new PriorityQueue[Int].from(comparator, [2, 4, 1, 5, 3, 12, 0])
+	#     assert queue.top == 12
+	#     queue.dequeue
+	#     assert queue.top == 5
+	redef fun top do return heap.min
+
+	redef fun length do return heap.length
+	redef fun iterator do return heap.iterator
+end
+
