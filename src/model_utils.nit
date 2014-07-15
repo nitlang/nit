@@ -17,7 +17,7 @@
 # Model exploration and traversing facilities
 module model_utils
 
-import modelbuilder
+import model
 
 redef class MConcern
 
