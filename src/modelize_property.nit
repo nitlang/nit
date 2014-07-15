@@ -205,7 +205,11 @@ redef class ModelBuilder
 
 		# No error, try to go deeper in generic types
 		if node isa AType then
-			for a in node.n_types do check_visibility(a, a.mtype.as(not null), mpropdef)
+			for a in node.n_types do
+				var t = a.mtype
+				if t == null then continue # Error, thus skipped
+				check_visibility(a, t, mpropdef)
+			end
 		else if mtype isa MGenericType then
 			for t in mtype.arguments do check_visibility(node, t, mpropdef)
 		end
