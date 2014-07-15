@@ -17,7 +17,6 @@
 # A program that collects various metrics on nit programs and libraries
 module nitmetrics
 
-import modelbuilder
 import frontend
 import metrics
 

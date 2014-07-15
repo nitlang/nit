@@ -18,6 +18,29 @@ module nitdoc
 
 import doc
 
-var nitdoc = new NitdocContext
-nitdoc.generate_nitdoc
+# process options
+var toolcontext = new ToolContext
+var ctx = new NitdocContext(toolcontext)
+ctx.process_options(args)
+var arguments = ctx.toolcontext.option_context.rest
+
+# build model
+var model = new Model
+var mbuilder = new ModelBuilder(model, ctx.toolcontext)
+var mmodules = mbuilder.parse(arguments)
+
+if mmodules.is_empty then return
+mbuilder.run_phases
+var mainmodule: MModule
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, "<main>", new Location(null, 0, 0, 0, 0))
+	mainmodule.is_fictive = true
+	mainmodule.set_imported_mmodules(mmodules)
+end
+
+# generate doc
+var nitdoc = new Nitdoc(ctx, model, mainmodule)
+nitdoc.generate
 
