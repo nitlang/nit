@@ -51,6 +51,15 @@ redef class MModule
 		for file in nitni_ccu.files do
 			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
 		end
+
+		# reset FFI things so the next compilation job, if any, starts with a clean context
+		# FIXME clean and rationalize this
+		nitni_ccu = null
+		compiled_ffi_methods.clear
+		ffi_ccu = null
+		ffi_files.clear
+		compiled_callbacks.clear
+		#Do not reset `foreign_callbacks` and `ffi_callbacks` because they are computed in previous phases
 	end
 
 	private fun ensure_compile_nitni_base(v: AbstractCompilerVisitor)

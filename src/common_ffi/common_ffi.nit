@@ -24,7 +24,7 @@ import modelbuilder
 
 import nitni
 
-import ffi_base
+intrude import ffi_base
 import extern_classes
 import header_dependency
 import pkgconfig
