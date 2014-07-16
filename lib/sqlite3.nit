@@ -144,7 +144,7 @@ extern class Sqlite3 `{sqlite3 *`}
 	fun destroy do close
 
 	# Close this connection
-	fun close `{ sqlite3_close(recv); `}
+	fun close `{ sqlite3_close_v2(recv); `}
 
 	# Execute a SQL statement
 	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
