@@ -31,10 +31,10 @@ class C
 
 	init
 	do
-		1.output
+		10.output
 	end
 end
 
 var a = new C	# A complex construction
-a.foo(2)	# A monormphic call
-a.bar(3)	# A polymorphic call
+a.foo(20)	# A monormphic call
+a.bar(30)	# A polymorphic call
