@@ -16,78 +16,29 @@
 
 NITCOPT=
 OLDNITCOPT= --no-stacktrace
+OBJS=nitdoc nitmetrics nitg nit nitx nitunit nitlight nitls nitdbg_client
+SRCS=$(patsubst %,%.nit,$(OBJS))
+BINS=$(patsubst %,../bin/%,$(OBJS))
 
-all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight ../bin/nitls ../bin/nitdbg_client
+all: $(BINS)
 
 nitg_0: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
-	@echo '* Compile nitg_0 from NIT source files                          *'
+	@echo '* Compile nitg_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../c_src/nitg ${OLDNITCOPT} -o nitg_0 -v nitg.nit
 
-../bin/nitg: nitg_0 parser/parser.nit
+$(BINS): nitg_0 parser/parser.nit
 	@echo '***************************************************************'
-	@echo '* Compile nitg from NIT source files                          *'
+	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	./nitg_0 ${NITCOPT} -o ../bin/nitg -v nitg.nit
+	./nitg_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 
-../bin/nitdoc: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdoc from NIT source files                        *'
-	@echo '***************************************************************'
+$(OBJS): nitg_0 parser/parser.nit
 	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdoc -v nitdoc.nit
-
-../bin/nitmetrics: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitmetrics from NIT source files                     *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
-
-../bin/nit: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nit from NIT source files                           *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nit -v nit.nit
-
-../bin/nitdbg_client : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdbg_client from NIT source files                 *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdbg_client -v nitdbg_client.nit
-
-../bin/nitx: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitx from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitx -v nitx.nit
-
-../bin/nitunit : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitunit from NIT source files                       *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitunit -v nitunit.nit
-
-../bin/nitlight : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitlight from NIT source files                      *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitlight -v nitlight.nit
-
-../bin/nitls : ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitls from NIT source files                         *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitls -v nitls.nit
+	./nitg_0 ${NITCOPT} -v $@.nit
 
 ../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
