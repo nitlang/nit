@@ -102,12 +102,8 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return sqlite3_column_int(recv, i);
 	`}
 
-	fun column_text(i: Int) : String import NativeString.to_s `{
-		char * ret = (char *) sqlite3_column_text(recv, i);
-		if( ret == NULL ){
-			ret = "";
-		}
-		return NativeString_to_s(ret);
+	fun column_text(i: Int): NativeString `{
+		return (char *)sqlite3_column_text(recv, i);
 	`}
 
 	# Type of the entry at row `i`
