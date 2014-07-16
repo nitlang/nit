@@ -63,6 +63,11 @@ redef class MModule
 		ffi_ccu.write_as_impl(self, compdir)
 		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, c_compiler_options))
 	end
+
+	# Avoid the compile a ffi propdef more than once
+	# See `AMethPropdef::compile_ffi_method`
+	# FIXME find a better way
+	private var compiled_ffi_methods = new HashSet[AMethPropdef]
 end
 
 redef class AModule
@@ -110,15 +115,13 @@ redef class AModule
 end
 
 redef class AMethPropdef
-	private var ffi_has_been_compiled = false
-
 	# Compile the necessary wrapper around this extern method or constructor
 	fun compile_ffi_method(mmodule: MModule)
 	do
 		assert n_extern_code_block != null
 
-		if ffi_has_been_compiled then return
-		ffi_has_been_compiled = true
+		if mmodule.compiled_ffi_methods.has(self) then return
+		mmodule.compiled_ffi_methods.add self
 
 		var language = n_extern_code_block.language
 		assert language != null
