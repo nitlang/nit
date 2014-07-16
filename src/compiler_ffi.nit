@@ -261,6 +261,12 @@ redef class CCompilationUnit
 	end
 end
 
+redef class AbstractCompiler
+	# Cache to avoid multiple compilation of NULL values
+	# see FIXME in `MNullableType#compile_extern_helper_functions`
+	private var compiled_null_types = new Array[MNullableType]
+end
+
 redef class AbstractCompilerVisitor
 	# Create a `RuntimeVariable` for this C variable originating from C user code
 	private fun var_from_c(name: String, mtype: MType): RuntimeVariable
@@ -330,8 +336,8 @@ redef class MNullableType
 		# FIXME: This is ugly an broke the separate compilation principle
 		# The real function MUST be compiled only once, #define pragma only protect the compiler, not the loader
 		# However, I am not sure of the right approach here (eg. week refs are ugly)
-		if is_already_compiled then return
-		is_already_compiled = true
+		if v.compiler.compiled_null_types.has(self) then return
+		v.compiler.compiled_null_types.add self
 
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
@@ -344,8 +350,6 @@ redef class MNullableType
 		nitni_visitor.add("return ret_for_c;")
 		nitni_visitor.add("\}")
 	end
-
-	private var is_already_compiled = false # FIXME to remove, show above
 end
 
 redef class MExplicitCall
