@@ -205,7 +205,11 @@ redef class ModelBuilder
 
 		# No error, try to go deeper in generic types
 		if node isa AType then
-			for a in node.n_types do check_visibility(a, a.mtype.as(not null), mpropdef)
+			for a in node.n_types do
+				var t = a.mtype
+				if t == null then continue # Error, thus skipped
+				check_visibility(a, t, mpropdef)
+			end
 		else if mtype isa MGenericType then
 			for t in mtype.arguments do check_visibility(node, t, mpropdef)
 		end
@@ -716,7 +720,7 @@ redef class AAttrPropdef
 				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
 			else
-				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, true, mwriteprop) then return
+				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 				if nwritable != null then
 					check_redef_property_visibility(modelbuilder, nwritable.n_visibility, mwriteprop)
 				end
@@ -738,10 +742,19 @@ redef class AAttrPropdef
 		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
+		var mreadpropdef = self.mreadpropdef
+
 		var ntype = self.n_type
 		if ntype != null then
 			mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
 			if mtype == null then return
+		end
+
+		# Inherit the type from the getter (usually an abstact getter)
+		if mtype == null and mreadpropdef != null and not mreadpropdef.is_intro then
+			var msignature = mreadpropdef.mproperty.intro.msignature
+			if msignature == null then return # Error, thus skiped
+			mtype = msignature.return_mtype
 		end
 
 		var nexpr = self.n_expr
@@ -771,11 +784,9 @@ redef class AAttrPropdef
 					modelbuilder.error(self, "Error: Untyped attribute {mpropdef}. Implicit typing allowed only for literals and new.")
 				end
 
-			else
-				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+				if mtype == null then return
 			end
-		else
-			assert ntype != null
+		else if ntype != null then
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
@@ -784,11 +795,13 @@ redef class AAttrPropdef
 			end
 		end
 
-		if mtype == null then return
+		if mtype == null then
+			modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			return
+		end
 
 		mpropdef.static_mtype = mtype
 
-		var mreadpropdef = self.mreadpropdef
 		if mreadpropdef != null then
 			var msignature = new MSignature(new Array[MParameter], mtype)
 			mreadpropdef.msignature = msignature
@@ -881,7 +894,7 @@ redef class AAttrPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) and
+					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, mclassdef.bound_mtype, myt) then
 						var node: ANode
 						if nsig != null then node = nsig else node = self
