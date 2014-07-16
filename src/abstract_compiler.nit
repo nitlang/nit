@@ -601,7 +601,7 @@ abstract class AbstractCompiler
 			modelbuilder.toolcontext.opt_stacktrace.value = ost
 		end
 
-		if platform != null and platform.no_main then modelbuilder.toolcontext.opt_no_main.value = true
+		var no_main = (platform != null and platform.no_main) or modelbuilder.toolcontext.opt_no_main.value
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
@@ -679,7 +679,7 @@ abstract class AbstractCompiler
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
-		if modelbuilder.toolcontext.opt_no_main.value then
+		if no_main then
 			v.add_decl("int nit_main(int argc, char** argv) \{")
 		else
 			v.add_decl("int main(int argc, char** argv) \{")
