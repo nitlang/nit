@@ -22,6 +22,7 @@ import shared_preferences
 in "Java" `{ 
 	import java.util.HashSet;
  	import java.util.Set;
+	import android.content.Context; 
 `}
 
 redef extern class NativeSharedPreferences
@@ -66,7 +67,7 @@ redef class SharedPreferences
 	end
 
 	# File access mode
-	private fun multi_process_mode: Int in "Java" `{ return Content.MODE_MULTI_PROCESS; `}
+	private fun multi_process_mode: Int in "Java" `{ return Context.MODE_MULTI_PROCESS; `}
 
 	# Returns the `HashSet[JavaString]` value corresponding the given key or `null` if none
 	#
