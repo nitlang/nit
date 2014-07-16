@@ -167,17 +167,15 @@ redef class MClass
 		for parent in superclasses do
 			if parent.vtable == null then parent.make_vt(v)
 			
-			# Get the number of introduced methods for this class
-			var count = 0
-			var min_visibility = public_visibility
-			for p in parent.intro_mproperties(min_visibility) do
-				if p isa MMethod then
-					count += 1
-				end
+			# Get the number of introduced methods and attributes for this class
+			var methods = 0
+
+			for p in parent.intro_mproperties(none_visibility) do
+				if p isa MMethod then methods += 1
 			end
 			
 			ids.push(parent.vtable.id)
-			nb_methods.push(count)
+			nb_methods.push(methods)
 		end
 		
 		# When all super-classes have their identifiers and vtables, allocate current one
@@ -188,7 +186,7 @@ redef class MClass
 
 	# Allocate a single vtable
 	# 	ids : Array of superclasses identifiers
-	# 	nb_methods : Array which contain the number of methods for each class in ids
+	# 	nb_methods : Array which contain the number of introducted methods for each class in ids
 	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int])
 	do
 		vtable = new VTable
@@ -204,15 +202,12 @@ redef class MClass
 		ids_total.push(vtable.id)
 
 		var nb_methods_total = new Array[Int]
-		var count = 0
-		var min_visibility = public_visibility
-		for p in intro_mproperties(min_visibility) do
-			if p isa MMethod then
-				count += 1
-			end
+		var methods = 0
+		for p in intro_mproperties(none_visibility) do
+			if p isa MMethod then methods += 1
 		end
 		nb_methods_total.add_all(nb_methods)
-		nb_methods_total.push(count)
+		nb_methods_total.push(methods)
 		
 		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, vtable.mask)
 	end
@@ -237,18 +232,7 @@ class VTable
 end
 
 redef class Instance
-	
 	var vtable: nullable VTable
-
-	init(mt: MType)
-	do
-		mtype = mt
-
-		# An instance is associated to its class virtual table
-		if mt isa MClassType then
-			vtable = mt.mclass.vtable
-		end
-	end
 end
 
 # Handle memory, used for allocate virtual table and associated structures
@@ -273,14 +257,14 @@ class MemoryManager
 		int nb_classes = Array_of_Int_length(nb_methods);
 		for(i = 0; i<nb_classes; i++) {
 			/* - One for each method of this class
-			*  - One for the delta (pointer to attributes)
+			*  - One for the delta (offset of this group of attributes in objects)
 			*  - One for the id 
 			*/
 			total_size += Array_of_Int__index(nb_methods, i);
 			total_size += 2;
 		}
 
-		// And the size of the perfect hashtable
+		// Add the size of the perfect hashtable
 		total_size += mask+1;
 		long unsigned int* vtable = malloc(sizeof(long unsigned int)*total_size);
 		
@@ -298,7 +282,7 @@ class MemoryManager
 			/*
 				vtable[hv] contains a pointer to the group of introducted methods
 				For each superclasse we have in virtual table :
-					(id | delta (attributes) | introduced methods)
+					(id | delta | introduced methods)
 			*/
 			int hv = mask & Array_of_Int__index(ids, i);
 
