@@ -89,6 +89,7 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return NativeString_to_s(ret);
 	`}
 
+	# Number of bytes in the blob or string at row `i`
 	fun column_bytes(i: Int) : Int `{
 		return sqlite3_column_bytes(recv, i);
 	`}
@@ -109,7 +110,8 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return NativeString_to_s(ret);
 	`}
 
-	fun column_type(i: Int) : Int `{
+	# Type of the entry at row `i`
+	fun column_type(i: Int): DataType `{
 		return sqlite3_column_type(recv, i);
 	`}
 
@@ -168,4 +170,15 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	fun error: Sqlite3Code `{
 		return sqlite3_errcode(recv);
 	`}
+end
+
+# Sqlite data types
+extern class DataType `{ int `}
+	fun is_integer: Bool `{ return recv == SQLITE_INTEGER; `}
+	fun is_float: Bool `{ return recv == SQLITE_FLOAT; `}
+	fun is_blob: Bool `{ return recv == SQLITE_BLOB; `}
+	fun is_null: Bool `{ return recv == SQLITE_NULL; `}
+	fun is_text: Bool `{ return recv == SQLITE_TEXT; `}
+
+	fun to_i: Int `{ return recv; `}
 end
