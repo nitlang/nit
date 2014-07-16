@@ -82,11 +82,11 @@ redef class ToolContext
 		super
 
 		var st = opt_stacktrace.value
-		if st == null or st == "none" or st == "libunwind" or st == "nitstack" then
+		if st == "none" or st == "libunwind" or st == "nitstack" then
 			# Fine, do nothing
-		else if st == "auto" then
-			# Default just unset
-			opt_stacktrace.value = null
+		else if st == "auto" or st == null then
+			# Default is nitstack
+			opt_stacktrace.value = "nitstack"
 		else
 			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
 			exit(1)
@@ -207,9 +207,8 @@ class MakefileToolchain
 
 	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
-		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
-
 		var platform = compiler.mainmodule.target_platform
+		if self.toolcontext.opt_stacktrace.value == "nitstack" and (platform == null or platform.supports_libunwind) then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -317,6 +316,7 @@ class MakefileToolchain
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
+		var platform = compiler.mainmodule.target_platform
 
 		var outname = outfile(mainmodule)
 
@@ -341,7 +341,7 @@ class MakefileToolchain
 		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
-		if ost == "libunwind" or ost == "nitstack" then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
@@ -592,14 +592,7 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = mainmodule.target_platform
 
-		if ost == null then
-			if platform != null and not platform.supports_libunwind then
-				ost = "none"
-			else
-				ost = "nitstack"
-			end
-			modelbuilder.toolcontext.opt_stacktrace.value = ost
-		end
+		if platform != null and not platform.supports_libunwind then ost = "none"
 
 		var no_main = (platform != null and platform.no_main) or modelbuilder.toolcontext.opt_no_main.value
 
