@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_sqlite3
+module test_sqlite3_native
 
-import sqlite3
+import sqlite3::native_sqlite3
 
 var filename = "test.db"
 filename.file_delete
@@ -26,7 +26,7 @@ var insert_req_1 = "INSERT INTO users VALUES('Bob', 'zzz', 1)"
 var insert_req_2 = "INSERT INTO users VALUES('Guillaume', 'xxx', 1)"
 var select_req = "SELECT * FROM users"
 
-var db = new Sqlite3.open(filename)
+var db = new NativeSqlite3.open(filename)
 assert sqlite_open: db.error.is_ok
 
 db.exec(create_req)
@@ -53,11 +53,11 @@ end
 
 db.close
 
-db = new Sqlite3.open(filename)
+db = new NativeSqlite3.open(filename)
 assert sqlite_reopen: db.error.is_ok
 
 stmt = db.prepare(select_req)
 assert sqlite_reselect: db.error.is_ok
 assert stmt != null
 stmt.step
-assert sqlite_column_0_0_reopened: stmt.column_text(0) == "Bob"
+assert sqlite_column_0_0_reopened: stmt.column_text(0).to_s == "Bob"
