@@ -2752,6 +2752,7 @@ redef class MModule
 				properties.add_all(self.properties(parent))
 			end
 			for mclassdef in mclass.mclassdefs do
+				if not self.in_importation <= mclassdef.mmodule then continue
 				for mprop in mclassdef.intro_mproperties do
 					properties.add(mprop)
 				end
