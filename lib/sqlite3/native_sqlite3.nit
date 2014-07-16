@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Low-level Sqlite3 features
-module sqlite3 is pkgconfig("sqlite3")
+module native_sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
 	#include <sqlite3.h>
@@ -73,7 +73,7 @@ extern class Sqlite3Code `{int`}
 end
 
 # A prepared statement
-extern class Statement `{sqlite3_stmt*`}
+extern class NativeStatement `{sqlite3_stmt*`}
 
 	# Evaluate the statement
 	fun step: Sqlite3Code `{
@@ -127,7 +127,7 @@ extern class Statement `{sqlite3_stmt*`}
 end
 
 # A database connection
-extern class Sqlite3 `{sqlite3 *`}
+extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
 	new open(filename: String) import String.to_cstring `{
@@ -152,13 +152,13 @@ extern class Sqlite3 `{sqlite3 *`}
 	`}
 
 	# Prepare a SQL statement
-	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement.as nullable `{
+	fun prepare(sql: String): nullable NativeStatement import String.to_cstring, NativeStatement.as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)
-			return Statement_as_nullable(stmt);
+			return NativeStatement_as_nullable(stmt);
 		else
-			return null_Statement();
+			return null_NativeStatement();
 	`}
 
 	fun last_insert_rowid: Int `{
