@@ -44,6 +44,15 @@ class AndroidProject
 	# Custom lines to add to the AndroidManifest.xml in the <application> node
 	var manifest_application_lines = new Array[String]
 
+	# Minimum API level required for the application to run
+	var min_sdk: nullable Int = null
+
+	# Build target API level
+	var target_sdk: nullable Int = null
+
+	# Maximum API level on which the application will be allowed to run
+	var max_sdk: nullable Int = null
+
 	redef fun to_s do return """
 name: {{{name or else "null"}}}
 namespace: {{{java_package or else "null"}}}
@@ -65,7 +74,16 @@ redef class ModelBuilder
 		annot = priority_annotation_on_modules("java_package", mmodule)
 		if annot != null then project.java_package = annot.arg_as_string(self)
 
-		var annots = collect_annotations_on_modules("android_manifest", mmodule)
+		var annots = collect_annotations_on_modules("min_sdk_version", mmodule)
+		for an in annots do project.min_sdk = an.arg_as_int(self)
+
+		annots = collect_annotations_on_modules("max_sdk_version", mmodule)
+		for an in annots do project.max_sdk = an.arg_as_int(self)
+
+		annots = collect_annotations_on_modules("target_sdk_version", mmodule)
+		for an in annots do project.target_sdk = an.arg_as_int(self)
+
+		annots = collect_annotations_on_modules("android_manifest", mmodule)
 		for an in annots do project.manifest_lines.add an.arg_as_string(self)
 
 		annots = collect_annotations_on_modules("android_manifest_application", mmodule)
@@ -156,6 +174,34 @@ redef class AAnnotation
 			if not expr isa AStringFormExpr then
 				modelbuilder.error(self, format_error)
 				return ""
+			end
+			return expr.value.as(not null)
+		end
+	end
+
+	# Get the single argument of `self` as an `Int`. Raise error on any inconsistency.
+	private fun arg_as_int(modelbuilder: ModelBuilder): nullable Int
+	do
+		var annotation_name = n_atid.n_id.text
+		var format_error = "Annotation error: \"{annotation_name}\" expects a single Int as argument."
+
+		var args = n_args
+		var platform_name
+		if args.length != 1 then
+			modelbuilder.error(self, format_error)
+			return null
+		else
+			var arg = args.first
+			
+			if not arg isa AExprAtArg then
+				modelbuilder.error(self, format_error)
+				return null
+			end
+
+			var expr = arg.n_expr
+			if not expr isa AIntExpr then
+				modelbuilder.error(self, format_error)
+				return null
 			end
 			return expr.value.as(not null)
 		end

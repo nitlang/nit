@@ -1,4 +1,3 @@
-# This file is part of NIT ( http://www.nitlanguage.org )
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
@@ -66,6 +65,15 @@ class AndroidToolchain
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
 
+		var app_min_sdk = project.min_sdk
+		if app_min_sdk == null then app_min_sdk = 10
+
+		var app_target_sdk = project.target_sdk
+		if app_target_sdk == null then app_target_sdk = app_min_sdk
+
+		var app_max_sdk = ""
+		if project.max_sdk != null then app_max_sdk = "android:maxSdkVersion=\"{app_max_sdk}\""
+
 		# Clear the previous android project, so there is no "existing project warning"
 		# or conflict between Java files of different projects
 		if android_project_root.file_exists then android_project_root.rmdir
@@ -73,7 +81,7 @@ class AndroidToolchain
 		var args = ["android", "-s",
 			"create", "project",
 			"--name", short_project_name,
-			"--target", "android-10",
+			"--target", "android-{app_target_sdk}",
 			"--path", android_project_root,
 			"--package", app_package,
 			"--activity", short_project_name]
@@ -128,7 +136,10 @@ $(call import-module,android/native_app_glue)
         android:versionName="{{{app_version}}}">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
-    <uses-sdk android:minSdkVersion="9" />
+    <uses-sdk 
+        android:minSdkVersion="{{{app_min_sdk}}}" 
+        android:targetSdkVersion="{{{app_target_sdk}}}" 
+        {{{app_max_sdk}}} /> 
 
     <application
 		android:label="@string/app_name"
