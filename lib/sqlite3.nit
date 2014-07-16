@@ -1,7 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2013 Guillaume Auger <jeho@resist.ca>
-# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2013-2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Low-level Sqlite3 features
 module sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
@@ -71,8 +72,10 @@ extern class Sqlite3Code `{int`}
 	`}
 end
 
+# A prepared statement
 extern class Statement `{sqlite3_stmt*`}
 
+	# Evaluate the statement
 	fun step: Sqlite3Code `{
 		return sqlite3_step(recv);
 	`}
@@ -110,30 +113,45 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_column_type(recv, i);
 	`}
 
-	#	fun column_blob(i : Int) : String `{
-	#		TODO
-	#	`}
+	fun column_blob(i: Int): Pointer `{ return (void*)sqlite3_column_blob(recv, i); `}
 
 	fun column_count: Int `{
 		return sqlite3_column_count(recv);
 	`}
+
+	# Reset this statement to its original state, to be reexecuted
+	fun reset: Sqlite3Code `{ return sqlite3_reset(recv); `}
+
+	# Delete this statement
+	fun finalize: Sqlite3Code `{ return sqlite3_finalize(recv); `}
 end
 
+# A database connection
 extern class Sqlite3 `{sqlite3 *`}
+
+	# Open a connection to a database in UTF-8
 	new open(filename: String) import String.to_cstring `{
-		sqlite3 *self;
+		sqlite3 *self = NULL;
 		sqlite3_open(String_to_cstring(filename), &self);
 		return self;
 	`}
 
+	# Has this DB been correctly opened?
+	#
+	# To know if it has been closed or interrupted, you must check for errors with `error`.
+	fun is_valid: Bool do return not address_is_null
+
 	fun destroy do close
 
-	fun close `{ sqlite3_close(recv); `}
+	# Close this connection
+	fun close `{ sqlite3_close_v2(recv); `}
 
-	fun exec(sql : String): Sqlite3Code import String.to_cstring `{
+	# Execute a SQL statement
+	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
 		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
 	`}
 
+	# Prepare a SQL statement
 	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement.as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
