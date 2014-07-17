@@ -103,6 +103,7 @@ redef class MMethod
 			return_mtype = recv_mtype
 		else if signature.return_mtype != null then
 			return_mtype = signature.return_mtype
+			return_mtype = return_mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
 		end
 
 		var cname = build_cname(recv_mtype, from_mmodule, suffix, length)

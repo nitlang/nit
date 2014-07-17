@@ -221,7 +221,7 @@ class SoundPool
 	fun stop_stream(stream_id: Int) do nsoundpool.stop(stream_id)
 
 	# Unload a sound from a sound ID
-	fun unload(sound: SoundSP): Bool do return nsoundpool.unload(sound.soundpool_id.as(not null))
+	fun unload(sound: SoundSP): Bool do return nsoundpool.unload(sound.soundpool_id)
 end
 
 # Used to play sounds, designed to use with medium sized sounds or streams
