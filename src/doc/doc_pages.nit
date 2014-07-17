@@ -156,7 +156,7 @@ class Nitdoc
 
 	private fun modules do
 		for mmodule in model.mmodules do
-			if mmodule.name == "<main>" then continue
+			if mmodule.is_fictive then continue
 			var modulepage = new NitdocModule(ctx, model, mainmodule, mmodule)
 			modulepage.render.write_to_file("{ctx.output_dir.to_s}/{mmodule.nitdoc_url}")
 		end
@@ -197,7 +197,7 @@ class QuickSearch
 
 	init(ctx: NitdocContext, model: Model) do
 		for mmodule in model.mmodules do
-			if mmodule.name == "<main>" then continue
+			if mmodule.is_fictive then continue
 			mmodules.add mmodule
 		end
 		for mclass in model.mclasses do
@@ -585,7 +585,7 @@ class NitdocSearch
 	private fun modules_list: Array[MModule] do
 		var sorted = new Array[MModule]
 		for mmodule in model.mmodule_importation_hierarchy do
-			if mmodule.name == "<main>" then continue
+			if mmodule.is_fictive then continue
 			sorted.add mmodule
 		end
 		name_sorter.sort(sorted)
