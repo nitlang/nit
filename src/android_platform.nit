@@ -19,6 +19,7 @@ module android_platform
 import platform
 import abstract_compiler
 import common_ffi
+intrude import common_ffi::extra_java_files
 import android_annotations
 
 redef class ToolContext
@@ -119,6 +120,14 @@ class AndroidToolchain
 		if icon_available then
 			icon_declaration = "android:icon=\"@drawable/icon\""
 		else icon_declaration = ""
+
+		# Also copy over the java files
+		dir = "{android_project_root}/src/"
+		var extra_java_files = compiler.mainmodule.extra_java_files
+		if extra_java_files != null then for file in extra_java_files do
+			var path = file.filename
+			path.file_copy_to("{dir}/{path.basename("")}")
+		end
 
 		## Generate delagating makefile
 		dir = "{android_project_root}/jni/"
