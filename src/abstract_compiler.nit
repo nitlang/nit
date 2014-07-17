@@ -27,6 +27,8 @@ import c_tools
 redef class ToolContext
 	# --output
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
+	# --dir
+	var opt_dir: OptionString = new OptionString("Output directory", "--dir")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 	# --no-main
@@ -67,7 +69,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
@@ -80,13 +82,18 @@ redef class ToolContext
 		super
 
 		var st = opt_stacktrace.value
-		if st == null or st == "none" or st == "libunwind" or st == "nitstack" then
+		if st == "none" or st == "libunwind" or st == "nitstack" then
 			# Fine, do nothing
-		else if st == "auto" then
-			# Default just unset
-			opt_stacktrace.value = null
+		else if st == "auto" or st == null then
+			# Default is nitstack
+			opt_stacktrace.value = "nitstack"
 		else
 			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
+			exit(1)
+		end
+
+		if opt_output.value != null and opt_dir.value != null then
+			print "Error: cannot use both --dir and --output"
 			exit(1)
 		end
 	end
@@ -200,9 +207,8 @@ class MakefileToolchain
 
 	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
-		if self.toolcontext.opt_stacktrace.value == "nitstack" then compiler.build_c_to_nit_bindings
-
 		var platform = compiler.mainmodule.target_platform
+		if self.toolcontext.opt_stacktrace.value == "nitstack" and (platform == null or platform.supports_libunwind) then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -296,11 +302,23 @@ class MakefileToolchain
 
 	fun default_outname(mainmodule: MModule): String do return mainmodule.name
 
+	# Combine options and platform informations to get the final path of the outfile
+	fun outfile(mainmodule: MModule): String
+	do
+		var res = self.toolcontext.opt_output.value
+		if res != null then return res
+		res = default_outname(mainmodule)
+		var dir = self.toolcontext.opt_dir.value
+		if dir != null then return dir.join_path(res)
+		return res
+	end
+
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
+		var platform = compiler.mainmodule.target_platform
 
-		var outname = self.toolcontext.opt_output.value or else default_outname(mainmodule)
+		var outname = outfile(mainmodule)
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
@@ -323,7 +341,7 @@ class MakefileToolchain
 		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
-		if ost == "libunwind" or ost == "nitstack" then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
@@ -574,16 +592,9 @@ abstract class AbstractCompiler
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = mainmodule.target_platform
 
-		if ost == null then
-			if platform != null and not platform.supports_libunwind then
-				ost = "none"
-			else
-				ost = "nitstack"
-			end
-			modelbuilder.toolcontext.opt_stacktrace.value = ost
-		end
+		if platform != null and not platform.supports_libunwind then ost = "none"
 
-		if platform != null and platform.no_main then modelbuilder.toolcontext.opt_no_main.value = true
+		var no_main = (platform != null and platform.no_main) or modelbuilder.toolcontext.opt_no_main.value
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
@@ -661,7 +672,7 @@ abstract class AbstractCompiler
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
-		if modelbuilder.toolcontext.opt_no_main.value then
+		if no_main then
 			v.add_decl("int nit_main(int argc, char** argv) \{")
 		else
 			v.add_decl("int main(int argc, char** argv) \{")
@@ -2734,6 +2745,7 @@ redef class MModule
 				properties.add_all(self.properties(parent))
 			end
 			for mclassdef in mclass.mclassdefs do
+				if not self.in_importation <= mclassdef.mmodule then continue
 				for mprop in mclassdef.intro_mproperties do
 					properties.add(mprop)
 				end
@@ -2758,7 +2770,7 @@ var toolcontext = new ToolContext
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 toolcontext.option_context.add_option(opt_mixins)
 
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit\nCompiles Nit programs."
+toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
@@ -2769,26 +2781,24 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
-if arguments.length > 1 then
-	print "Too much arguments: {arguments.join(" ")}"
-	print toolcontext.tooldescription
+if arguments.length > 1 and toolcontext.opt_output.value != null then
+	print "Error: --output needs a single source file. Do you prefer --dir?"
 	exit 1
 end
-var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse([progname])
-mmodules.add_all modelbuilder.parse(opt_mixins.value)
+var mmodules = modelbuilder.parse(arguments)
+var mixins = modelbuilder.parse(opt_mixins.value)
 
 if mmodules.is_empty then return
 modelbuilder.run_phases
 
-var mainmodule
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
-	mainmodule.set_imported_mmodules(mmodules)
+for mmodule in mmodules do
+	toolcontext.info("*** PROCESS {mmodule} ***", 1)
+	var ms = [mmodule]
+	if not mixins.is_empty then
+		ms.add_all mixins
+	end
+	toolcontext.run_global_phases(ms)
 end
 
-toolcontext.run_global_phases(mmodules)

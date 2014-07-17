@@ -4,3 +4,4 @@
 --separate base_simple3.nit -o out/nitgs-base_simple3 ; out/nitgs-base_simple3
 --global ../examples/hello_world.nit -m test_mixin.nit -o out/nitg-hello_world_mixed ; out/nitg-hello_world_mixed
 --separate ../examples/hello_world.nit -m test_mixin.nit -o out/nitgs-hello_world_mixed ; out/nitgs-hello_world_mixed
+base_simple_import.nit base_simple.nit --dir out/ ; out/base_simple ; out/base_simple_import

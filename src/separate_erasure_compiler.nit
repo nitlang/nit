@@ -99,8 +99,8 @@ class SeparateErasureCompiler
 		super
 
 		# Class coloring
-		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 		var poset = mainmodule.flatten_mclass_hierarchy
+		var mclasses = new HashSet[MClass].from(poset)
 		var colorer = new POSetColorer[MClass]
 		colorer.colorize(poset)
 		class_ids = colorer.ids
