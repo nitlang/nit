@@ -18,8 +18,7 @@ module doc_pages
 import toolcontext
 import doc_model
 
-# The NitdocContext contains all the knowledge used for doc generation
-class NitdocContext
+redef class ToolContext
 	private var opt_dir = new OptionString("output directory", "-d", "--dir")
 	private var opt_source = new OptionString("link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
@@ -41,12 +40,11 @@ class NitdocContext
 
 	private var output_dir: String
 	private var min_visibility: MVisibility
-	var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext) do
-		self.toolcontext = toolcontext
+	redef init do
+		super
 
-		var opts = toolcontext.option_context
+		var opts = option_context
 		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl, opt_nodot, opt_private)
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
@@ -55,11 +53,12 @@ class NitdocContext
 		var tpl = new Template
 		tpl.add "Usage: nitdoc [OPTION]... <file.nit>...\n"
 		tpl.add "Generates HTML pages of API documentation from Nit source files."
-		toolcontext.tooldescription = tpl.write_to_string
+		tooldescription = tpl.write_to_string
 	end
 
-	fun process_options(args: Sequence[String]) do
-		toolcontext.process_options(args)
+	redef fun process_options(args) do
+		super
+
 		# output dir
 		var output_dir = opt_dir.value
 		if output_dir == null then
@@ -89,9 +88,9 @@ end
 class Nitdoc
 	var model: Model
 	var mainmodule: MModule
-	var ctx: NitdocContext
+	var ctx: ToolContext
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule) do
 		self.ctx = ctx
 		self.model = model
 		self.mainmodule = mainmodule
@@ -115,7 +114,7 @@ class Nitdoc
 		# locate share dir
 		var sharedir = ctx.opt_sharedir.value
 		if sharedir == null then
-			var dir = ctx.toolcontext.nit_dir
+			var dir = ctx.nit_dir
 			if dir == null then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
@@ -195,7 +194,7 @@ class QuickSearch
 	private var mclasses = new HashSet[MClass]
 	private var mpropdefs = new HashMap[String, Set[MPropDef]]
 
-	init(ctx: NitdocContext, model: Model) do
+	init(ctx: ToolContext, model: Model) do
 		for mmodule in model.mmodules do
 			if mmodule.is_fictive then continue
 			mmodules.add mmodule
@@ -245,12 +244,12 @@ end
 # Define page structure and properties
 abstract class NitdocPage
 
-	private var ctx: NitdocContext
+	private var ctx: ToolContext
 	private var model: Model
 	private var mainmodule: MModule
 	private var name_sorter = new MEntityNameSorter
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule) do
 		self.ctx = ctx
 		self.model = model
 		self.mainmodule = mainmodule
@@ -627,7 +626,7 @@ class NitdocGroup
 	private var intros: Set[MClass]
 	private var redefs: Set[MClass]
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mgroup: MGroup) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule, mgroup: MGroup) do
 		super
 		self.mgroup = mgroup
 		self.concerns = model.concerns_tree(mgroup.collect_mmodules)
@@ -757,7 +756,7 @@ class NitdocModule
 	private var mmodules2mclasses: Map[MModule, Set[MClass]]
 
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mmodule: MModule) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule, mmodule: MModule) do
 		super
 		self.mmodule = mmodule
 		var mclassdefs = new HashSet[MClassDef]
@@ -1000,7 +999,7 @@ class NitdocClass
 	private var mprops2mdefs: Map[MProperty, Set[MPropDef]]
 	private var mmodules2mprops: Map[MModule, Set[MProperty]]
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mclass: MClass) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule, mclass: MClass) do
 		super
 		self.mclass = mclass
 		var mpropdefs = new HashSet[MPropDef]
@@ -1354,7 +1353,7 @@ class NitdocProperty
 	private var concerns: ConcernsTree
 	private var mmodules2mdefs: Map[MModule, Set[MPropDef]]
 
-	init(ctx: NitdocContext, model: Model, mainmodule: MModule, mproperty: MProperty) do
+	init(ctx: ToolContext, model: Model, mainmodule: MModule, mproperty: MProperty) do
 		super
 		self.mproperty = mproperty
 		self.mmodules2mdefs = sort_by_mmodule(collect_mpropdefs)
