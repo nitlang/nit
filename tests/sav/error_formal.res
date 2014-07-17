@@ -1,1 +1,1 @@
-error_formal.nit:18,10--14: Type error: formal type T cannot have formal parameters.
+error_formal.nit:18,9--13: Type error: formal type T cannot have formal parameters.

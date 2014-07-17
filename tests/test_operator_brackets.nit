@@ -49,7 +49,7 @@ class Matrice
 	end
 
 private
-	var _tab: Array[Array[Int]] # An array of array to store items
+	var tab: Array[Array[Int]] # An array of array to store items
 
 
 	init

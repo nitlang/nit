@@ -16,7 +16,7 @@
 
 
 class Toto[E]
-   var _item: E
+   var item: E
    fun set(e: E)
       do _item = e end
    fun get: E

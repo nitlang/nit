@@ -15,8 +15,8 @@
 # limitations under the License.
 
 class A
-	var _attribute: nullable A
-	var _num: Char
+	var attribute: nullable A
+	var num: Char
 
 	fun foo=(a: nullable A)
 	do

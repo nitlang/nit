@@ -682,7 +682,7 @@ redef class AAttrPropdef
 		else
 			# New attribute style
 			var nid2 = self.n_id2.as(not null)
-			var mprop = new MAttribute(mclassdef, "@" + name, none_visibility)
+			var mprop = new MAttribute(mclassdef, "_" + name, private_visibility)
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self

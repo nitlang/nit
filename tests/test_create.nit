@@ -24,7 +24,7 @@ redef class Object
 end
 
 class Toto
-	var _a: Int
+	var a: Int
 	redef fun output
 	do
 		printn(_a)
@@ -47,7 +47,7 @@ class Toto
 end
 
 class Test
-	var _t: Toto
+	var t: Toto
 
 	init
 	do

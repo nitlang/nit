@@ -16,8 +16,8 @@
 
 
 class A
-	var _x: Object = fail
-	var _i: Int = 1
+	var x: Object = fail
+	var i: Int = 1
 	fun y do fail
 	fun z: Object do return fail
 	fun t do

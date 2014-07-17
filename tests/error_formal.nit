@@ -15,5 +15,5 @@
 # limitations under the License.
 
 class A[T]
-	var _k: T[Int]
+	var k: T[Int]
 end

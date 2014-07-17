@@ -19,7 +19,7 @@ class Node
 	do
 		return _name
 	end
-	var _name: String = "noname"
+	var name: String = "noname"
 end
 
 class WakeUpNode
@@ -31,13 +31,13 @@ class WakeUpNode
 	do
 		_scheduler.add_event(self, d)
 	end
-	var _scheduler: Scheduler
+	var scheduler: Scheduler
 	init do end
 end
 
 class NodeSource
 	super Node
-	var _nexts: nullable ArraySet[NodeSink] = null
+	var nexts: nullable ArraySet[NodeSink] = null
 	fun attach(n: NodeSink)
 	# Add the sink `n' the the connected nodes
 	# Do nothing if `n' is already connected
@@ -77,8 +77,8 @@ end
 #
 
 class Scheduler
-	var _time_list: Array[Couple[Int, WakeUpNode]] = new Array[Couple[Int, WakeUpNode]]
-	var _time: Int = 0 # What time is it ?
+	var time_list: Array[Couple[Int, WakeUpNode]] = new Array[Couple[Int, WakeUpNode]]
+	var time: Int = 0 # What time is it ?
 	fun add_event(n: WakeUpNode, d: Int)
 	# The node `n' whant to be weaked up in `d' time units
 	do
@@ -137,7 +137,7 @@ class BeepSource
 		send
 		wake_up_in(_delay)
 	end
-	var _delay: Int
+	var delay: Int
 	fun start
 	do
 		wake_up_in(_delay)
@@ -172,7 +172,7 @@ end
 class NodeAlternate
 	super NodeSink
 	super NodeSource
-	var _last: nullable NodeSource
+	var last: nullable NodeSource
 	redef fun recieve(n: NodeSource)
 	do
 		if n != _last then
@@ -190,7 +190,7 @@ end
 class NodeEat
 	super CountSink
 	super NodeSource
-	var _limit: Int
+	var limit: Int
 	redef fun recieve(n: NodeSource)
 	do
 		var c = count + 1
@@ -213,7 +213,7 @@ class NodeDelay
 	super NodeSource
 	super NodeSink
 	super WakeUpNode
-	var _delay: Int
+	var delay: Int
 	redef fun recieve(n: NodeSource)
 	do
 		wake_up_in(_delay)

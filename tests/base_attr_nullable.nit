@@ -25,14 +25,14 @@ enum Int
 end
 
 class Integer
-	var _val: Int
+	var val: Int
 	init(val: Int) do _val = val
 	fun output do _val.output
 end
 
 class Foo
-	var _a1: Integer
-	var _a2: Integer
+	var a1: Integer
+	var a2: Integer
 	fun run
 	do
 		_a1.output
@@ -58,7 +58,7 @@ end
 
 class Bar
 	super Foo
-	var _a3: Integer
+	var a3: Integer
 	redef fun run
 	do
 		_a1.output

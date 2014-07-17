@@ -17,7 +17,7 @@
 import kernel
 
 class Client
-	var _budjet: Int # 
+	var budjet: Int #
 	fun regarde(t: Tableau)
 	do
 		if t.joli and dans_mes_moyens(t.etiquette.prix) then

@@ -53,7 +53,7 @@ class Tower
 		end
 	end
 
-	var _t: Array[Int] # The stack of discus (only the diameter is stored).
+	var t: Array[Int] # The stack of discus (only the diameter is stored).
 
 	init full(n: Int)
 	# Build a new tower with `n' discus.
@@ -95,9 +95,9 @@ class Hanoi
 		return "{_tower1} {_tower2} {_tower3}"
 	end
 
-	var _tower1: Tower
-	var _tower2: Tower
-	var _tower3: Tower
+	var tower1: Tower
+	var tower2: Tower
+	var tower3: Tower
 
 	init(nb: Int)
 	do

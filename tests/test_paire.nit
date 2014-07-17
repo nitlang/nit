@@ -33,8 +33,8 @@ class Pair[F, S]
 			return "{first}:{_second}"
 		end
 private
-	var _first: F
-	var _second: S
+	var first: F
+	var second: S
 
 	init(f: F, s: S)
 		do

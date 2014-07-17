@@ -19,7 +19,7 @@
 import kernel
 
 class Client
-	var _credit: Int
+	var credit: Int
 	
 	fun regarde(t: Tableau)
 	do
