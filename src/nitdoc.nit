@@ -16,31 +16,33 @@
 # Generate API documentation in HTML format from nit source code.
 module nitdoc
 
+import modelbuilder
 import doc
+
+redef class ToolContext
+	var docphase: Phase = new NitdocPhase(self, null)
+end
+
+private class NitdocPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule, mmodules)
+	do
+		# generate doc
+		var nitdoc = new Nitdoc(toolcontext, mainmodule.model, mainmodule)
+		nitdoc.generate
+	end
+end
 
 # process options
 var toolcontext = new ToolContext
-var ctx = new NitdocContext(toolcontext)
-ctx.process_options(args)
-var arguments = ctx.toolcontext.option_context.rest
+toolcontext.process_options(args)
+var arguments = toolcontext.option_context.rest
 
 # build model
 var model = new Model
-var mbuilder = new ModelBuilder(model, ctx.toolcontext)
+var mbuilder = new ModelBuilder(model, toolcontext)
 var mmodules = mbuilder.parse(arguments)
 
 if mmodules.is_empty then return
 mbuilder.run_phases
-var mainmodule: MModule
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	mainmodule = new MModule(model, null, "<main>", new Location(null, 0, 0, 0, 0))
-	mainmodule.is_fictive = true
-	mainmodule.set_imported_mmodules(mmodules)
-end
-
-# generate doc
-var nitdoc = new Nitdoc(ctx, model, mainmodule)
-nitdoc.generate
-
+toolcontext.run_global_phases(mmodules)
