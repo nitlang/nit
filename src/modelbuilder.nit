@@ -65,6 +65,7 @@ redef class ToolContext
 		else
 			# We need a main module, so we build it by importing all modules
 			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name, new Location(mmodules.first.location.file, 0, 0, 0, 0))
+			mainmodule.is_fictive = true
 			mainmodule.set_imported_mmodules(mmodules)
 		end
 		for phase in phases_list do
