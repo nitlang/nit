@@ -15,6 +15,7 @@
 # Nitdoc page generation
 module doc_pages
 
+import toolcontext
 import doc_model
 
 # The NitdocContext contains all the knowledge used for doc generation

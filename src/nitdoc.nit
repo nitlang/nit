@@ -16,6 +16,7 @@
 # Generate API documentation in HTML format from nit source code.
 module nitdoc
 
+import modelbuilder
 import doc
 
 # process options
