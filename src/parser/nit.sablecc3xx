@@ -211,7 +211,7 @@ module
 	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:topdef* implicit_main_class {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_main_class.classdef])};
 
 moduledecl
-	= [doc]:no kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name, annotation_withend.annotations)};
+	= [doc]:no redef visibility kwmodule no module_name annotation_withend [n2]:n1 {-> New moduledecl(doc.doc, redef.kwredef, visibility, kwmodule, module_name, annotation_withend.annotations)};
 
 import
 	= {std} [doc]:no redef visibility kwimport no module_name annotation_withend [n2]:n1 {-> New import.std(visibility, kwimport, module_name, annotation_withend.annotations)}
@@ -267,16 +267,16 @@ propdef~toplevel {-> propdef}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null)}
 	| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 !toplevel| {intern_new} [doc]:no redef visibility kwnew methid? signature kwis kwintern {-> New propdef.intern_new(doc.doc, redef.kwredef, visibility, kwnew, methid, signature)}
-	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
-	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature extern_calls extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, extern_calls, extern_code_block)}
+	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
+	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature annotation_noend? extern_calls extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, annotation_noend.annotations, Null, extern_calls, extern_code_block)}
 !toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing_o {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, Null)}
 !toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing_o assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, expr)}
 !toplevel| {var3} [doc]:no redef visibility kwvar id typing_o writable? annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, Null)}
 !toplevel| {var4} [doc]:no redef visibility kwvar id typing_o writable? assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, expr.expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, annotation_noend.annotations, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
-!toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
-!toplevel| {extern_init_implicit} [doc]:no redef visibility kwnew methid? signature string_o extern_calls extern_code_block {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string_o.string, extern_calls, extern_code_block)}
+!toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, Null, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
+!toplevel| {extern_init_implicit} [doc]:no redef visibility kwnew methid? signature annotation_noend? extern_calls extern_code_block {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, annotation_noend.annotations, Null, extern_calls, extern_code_block)}
 	;
 annotation_withend~nonull {-> annotations?}
 	= {oneliner} kwis many_annotations {-> many_annotations.annotations}
@@ -295,7 +295,8 @@ writable {-> able}
 	;
 
 visibility
-	= {public} {-> New visibility.public()}
+	= {public} {-> New visibility.public(Null)}
+	| {public2} kwpublic no {-> New visibility.public(kwpublic)}
 	| {private} kwprivate no {-> New visibility.private(kwprivate)}
 	| {protected} kwprotected no {-> New visibility.protected(kwprotected)}
 	| {intrude} kwintrude no {-> New visibility.intrude(kwintrude)}
@@ -410,9 +411,9 @@ stmt~withelse~noexpr~nopar {-> expr}
 	= {vardecl} vardecl~withelse {-> vardecl~withelse.expr}
 	| {assign} assignment~withelse~nopar {-> assignment~withelse~nopar.expr}
 	| {return} kwreturn expr_final~withelse? {-> New expr.return(kwreturn, expr_final~withelse.expr)}
-	| {break} kwbreak label? expr_final~withelse? {-> New expr.break(kwbreak, label, expr_final~withelse.expr)}
+	| {break} kwbreak label? {-> New expr.break(kwbreak, label)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
-	| {continue} kwcontinue label? expr_final~withelse? {-> New expr.continue(kwcontinue, label, expr_final~withelse.expr)}
+	| {continue} kwcontinue label? {-> New expr.continue(kwcontinue, label)}
 	| {do} do~withelse {-> do~withelse.expr}
 !noexpr	| {if} if~withelse {-> if~withelse.expr}
 	| {while} while~withelse {-> while~withelse.expr}
@@ -425,11 +426,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
 	;
 
-label= kwlabel id;
-
-assign_continue~withelse{-> expr}
-	= expr_final~withelse {-> New expr.continue(Null, Null, expr_final~withelse.expr)}
-	;
+label= kwlabel id?;
 
 vardecl~withelse{-> expr}
 	= kwvar id annotations? typing_o {-> New expr.vardecl(kwvar, id, typing_o.type, Null, Null, annotations)}
@@ -574,6 +571,7 @@ expr_atom~nopar~nobra {-> expr}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
+	| {vararg} [expr]:expr_atom~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
 	;
 
 superstring {-> expr} 
@@ -605,9 +603,9 @@ annotations_o~nopar {-> annotations?}
 	;
 
 one_annotation~nopar {-> annotation}
-	= {alone} atid annotations_o~nopar {-> New annotation(atid, Null, [], Null, annotations_o~nopar.annotations)}
+	= {alone} redef visibility atid annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [], Null, annotations_o~nopar.annotations)}
 // !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
-!nopar	| {args} atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
+!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
 	;
 
 many_annotations {-> annotations}
@@ -618,13 +616,21 @@ annotation_list {-> annotation*}
 	= {many} one_annotation annotations_tail* {-> [one_annotation.annotation, annotations_tail.annotation] }
 	;
 
-line_annotations~forclass {-> annotations}
-	= line_annotation~forclass+ {-> New annotations(Null, Null, [line_annotation~forclass.annotation], Null) }
+line_annotations {-> annotations}
+	= line_annotation+ {-> New annotations(Null, Null, [line_annotation.annotation], Null) }
 	;
-line_annotation~forclass {-> annotation}
-	= [doc]:no atid~forclass annotations? n1 {-> New annotation(atid~forclass.atid, Null, [], Null, annotations)}
-	| {args} [doc]:no atid~forclass opar no at_args cpar annotations? n1 {-> New annotation(atid~forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
-	| {nopar} [doc]:no atid~forclass at_args_nopar n1 {-> New annotation(atid~forclass.atid, Null, [at_args_nopar.at_arg], Null, Null)}
+line_annotation {-> annotation}
+	= [doc]:no redef visibility atid annotations? n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, Null, [], Null, annotations)}
+	| {args} [doc]:no redef visibility atid opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, opar, [at_args.at_arg], cpar, annotations)}
+	| {nopar} [doc]:no redef visibility atid at_args_nopar n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, Null, [at_args_nopar.at_arg], Null, Null)}
+	;
+line_annotations_forclass {-> annotations}
+	= line_annotation_forclass+ {-> New annotations(Null, Null, [line_annotation_forclass.annotation], Null) }
+	;
+line_annotation_forclass {-> annotation}
+	= [doc]:no atid_forclass annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [], Null, annotations)}
+	| {args} [doc]:no atid_forclass opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
+	| {nopar} [doc]:no atid_forclass at_args_nopar n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [at_args_nopar.at_arg], Null, Null)}
 	;
 
 annotations_tail {-> annotation}
@@ -652,7 +658,7 @@ atid~forclass {-> atid}
 //!forclass	| {kwintern} kwintern {-> New atid.kwintern(kwintern)}
 !forclass	| {kwreadable} kwreadable {-> New atid.kwreadable(kwreadable)}
 !forclass	| {kwwritable} kwwritable {-> New atid.kwwritable(kwwritable)}
-	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
+//	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
 	;
 
 /* MISC **********************************************************************/
@@ -738,14 +744,14 @@ Abstract Syntax Tree
 module	= moduledecl? [imports]:import* [extern_code_blocks]:extern_code_block* [classdefs]:classdef*;
 
 moduledecl
-	= doc? kwmodule [name]:module_name annotations?;
+	= doc? kwredef? visibility kwmodule [name]:module_name annotations?;
 
 import	= {std} visibility kwimport [name]:module_name annotations?
 	| {no} visibility kwimport kwend
 	;
 
 visibility
-	= {public}
+	= {public} kwpublic?
 	| {private} kwprivate
 	| {protected} kwprotected
 	| {intrude} kwintrude
@@ -771,11 +777,11 @@ propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwva
 	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature annotations?
 	| {intern_meth} doc? kwredef? visibility kwmeth methid signature
 	| {intern_new} doc? kwredef? visibility kwnew methid? signature
-	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls? extern_code_block?
+	| {extern_meth} doc? kwredef? visibility kwmeth methid signature annotations? [extern]:string? extern_calls? extern_code_block?
 	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature annotations? [block]:expr?
 	| {concrete_init} doc? kwredef? visibility kwinit methid? signature annotations? [block]:expr?
 	//| {concrete_new} doc? kwredef? visibility kwnew methid? signature [block]:expr?
-	| {extern_init} doc? kwredef? visibility kwnew methid? signature [extern]:string? extern_calls? extern_code_block?
+	| {extern_init} doc? kwredef? visibility kwnew methid? signature annotations? [extern]:string? extern_calls? extern_code_block?
 	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [id]:classid type annotations?
 	;
@@ -793,14 +799,14 @@ param	= id type? dotdotdot? annotations?
 
 type	= kwnullable? [id]:classid [types]:type* annotations?;
 
-label = kwlabel id;
+label = kwlabel id?;
 
 expr	= {block} expr* kwend? 
 	| {vardecl} kwvar id type? assign? expr? annotations?
 	| {return} kwreturn? expr?
-	| {break} kwbreak label? expr?
+	| {break} kwbreak label?
 	| {abort} kwabort
-	| {continue} kwcontinue? label? expr?
+	| {continue} kwcontinue? label?
 	| {do} kwdo [block]:expr? label?
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
@@ -870,6 +876,7 @@ expr	= {block} expr* kwend?
         | {as_notnull} expr kwas opar? kwnot kwnull cpar?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
+	| {vararg} expr dotdotdot
 	;
 exprs
 	= {list} [exprs]:expr*
@@ -902,7 +909,7 @@ doc = comment+;
 
 annotations = at? opar? [items]:annotation* cpar?;
 
-annotation = atid opar? [args]:at_arg* cpar? annotations?;
+annotation = doc? kwredef? visibility? atid opar? [args]:at_arg* cpar? annotations?;
 
 at_arg
 	= {type} type

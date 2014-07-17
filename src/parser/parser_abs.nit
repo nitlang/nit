@@ -352,6 +352,12 @@ class AModuledecl
 	var _n_doc: nullable ADoc = null
 	fun n_doc: nullable ADoc do return _n_doc
 	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: AVisibility = null
+	fun n_visibility: AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
 	var _n_kwmodule: TKwmodule = null
 	fun n_kwmodule: TKwmodule do return _n_kwmodule
 	fun n_kwmodule=(n_kwmodule: TKwmodule) do _n_kwmodule = n_kwmodule
@@ -391,6 +397,9 @@ class ANoImport
 end
 class APublicVisibility
 	super AVisibility
+	var _n_kwpublic: nullable TKwpublic = null
+	fun n_kwpublic: nullable TKwpublic do return _n_kwpublic
+	fun n_kwpublic=(n_kwpublic: nullable TKwpublic) do _n_kwpublic = n_kwpublic
 end
 class APrivateVisibility
 	super AVisibility
@@ -648,6 +657,9 @@ class AExternMethPropdef
 	var _n_signature: ASignature = null
 	fun n_signature: ASignature do return _n_signature
 	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 	var _n_extern: nullable TString = null
 	fun n_extern: nullable TString do return _n_extern
 	fun n_extern=(n_extern: nullable TString) do _n_extern = n_extern
@@ -732,6 +744,9 @@ class AExternInitPropdef
 	var _n_signature: ASignature = null
 	fun n_signature: ASignature do return _n_signature
 	fun n_signature=(n_signature: ASignature) do _n_signature = n_signature
+	var _n_annotations: nullable AAnnotations = null
+	fun n_annotations: nullable AAnnotations do return _n_annotations
+	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
 	var _n_extern: nullable TString = null
 	fun n_extern: nullable TString do return _n_extern
 	fun n_extern=(n_extern: nullable TString) do _n_extern = n_extern
@@ -962,9 +977,9 @@ class ALabel
 	var _n_kwlabel: TKwlabel = null
 	fun n_kwlabel: TKwlabel do return _n_kwlabel
 	fun n_kwlabel=(n_kwlabel: TKwlabel) do _n_kwlabel = n_kwlabel
-	var _n_id: TId = null
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
+	var _n_id: nullable TId = null
+	fun n_id: nullable TId do return _n_id
+	fun n_id=(n_id: nullable TId) do _n_id = n_id
 end
 class ABlockExpr
 	super AExpr
@@ -1011,9 +1026,6 @@ class ABreakExpr
 	var _n_label: nullable ALabel = null
 	fun n_label: nullable ALabel do return _n_label
 	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class AAbortExpr
 	super AExpr
@@ -1029,9 +1041,6 @@ class AContinueExpr
 	var _n_label: nullable ALabel = null
 	fun n_label: nullable ALabel do return _n_label
 	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
 end
 class ADoExpr
 	super AExpr
@@ -1800,6 +1809,15 @@ class ADebugTypeExpr
 	fun n_type: AType do return _n_type
 	fun n_type=(n_type: AType) do _n_type = n_type
 end
+class AVarargExpr
+	super AExpr
+	var _n_expr: AExpr = null
+	fun n_expr: AExpr do return _n_expr
+	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var _n_dotdotdot: TDotdotdot = null
+	fun n_dotdotdot: TDotdotdot do return _n_dotdotdot
+	fun n_dotdotdot=(n_dotdotdot: TDotdotdot) do _n_dotdotdot = n_dotdotdot
+end
 class AListExprs
 	super AExprs
 	var n_exprs: List[AExpr] = new List[AExpr]
@@ -1972,6 +1990,15 @@ class AAnnotations
 end
 class AAnnotation
 	super AAnnotation
+	var _n_doc: nullable ADoc = null
+	fun n_doc: nullable ADoc do return _n_doc
+	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
+	var _n_kwredef: nullable TKwredef = null
+	fun n_kwredef: nullable TKwredef do return _n_kwredef
+	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
+	var _n_visibility: nullable AVisibility = null
+	fun n_visibility: nullable AVisibility do return _n_visibility
+	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
 	var _n_atid: AAtid = null
 	fun n_atid: AAtid do return _n_atid
 	fun n_atid=(n_atid: AAtid) do _n_atid = n_atid
