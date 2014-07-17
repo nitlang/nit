@@ -2534,6 +2534,8 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
+		if i.mtype.ctype != "val*" then return i
+
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
