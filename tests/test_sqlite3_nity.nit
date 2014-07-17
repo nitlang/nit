@@ -15,11 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_sqlite3_nity
-
 import sqlite3
 
 var path = "test_nity.db"
+#alt1#path = "/../invalid_path.db"
 if path.file_exists then path.file_delete
 
 var db = new Sqlite3DB.open(path)
@@ -36,6 +35,10 @@ end
 assert db.insert("INTO users VALUES('Guillaume', 'xxx', 1, 88.8)") else
 	print db.error or else "no error?"
 end
+
+#alt2#assert db.insert("INTO notable VALUES('Alexis', 'asdf', 2, 99.9)") else
+#alt2#	print db.error or else "no error?"
+#alt2#end
 
 for row in db.select("* FROM users") do
 	print "####"
