@@ -323,6 +323,9 @@ case $engine in
 		enginebinname=nit
 		isinterpret=true
 		;;
+	nitvm)
+		isinterpret=true
+		savdirs="sav/niti/"
 		;;
 	emscripten)
 		enginebinname=nitg
