@@ -41,7 +41,7 @@ class CLanguage
 
 	redef fun compile_extern_method(block, m, ecc, mmodule)
 	do
-		var fc = new ExternCFunction(m, mmodule.as(not null))
+		var fc = new ExternCFunction(m, mmodule)
 		fc.decls.add( block.location.as_line_pragma )
 		fc.exprs.add( block.code )
 		ecc.add_exported_function( fc )

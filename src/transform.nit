@@ -226,7 +226,7 @@ redef class ASendReassignFormExpr
 
 		var read_args = new Array[AExpr]
 		var write_args = new Array[AExpr]
-		for a in raw_arguments.as(not null) do
+		for a in raw_arguments do
 			nblock.add(a)
 			read_args.add(a.make_var_read)
 			write_args.add(a.make_var_read)
