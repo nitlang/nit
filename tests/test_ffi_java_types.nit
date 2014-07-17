@@ -31,7 +31,7 @@ extern class JavaArrayList in "Java" `{ java.util.ArrayList `}
 
 	redef fun output in "Java" `{
 		for (Object i: recv) {
-			System.out.println((int)i);
+			System.out.println((long)i);
 		}
 	`}
 
