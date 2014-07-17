@@ -22,6 +22,11 @@ in "C header" `{
 	#include <sqlite3.h>
 `}
 
+redef class Sys
+	# Last error raised when calling `Sqlite3::open`
+	var sqlite_open_error: nullable Sqlite3Code = null
+end
+
 extern class Sqlite3Code `{int`}
 	new ok `{ return SQLITE_OK; `} #         0   /* Successful result */
 	fun is_ok: Bool `{ return recv == SQLITE_OK; `}
@@ -128,11 +133,17 @@ end
 extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: String) import String.to_cstring `{
+	new open(filename: String) import String.to_cstring, set_sys_sqlite_open_error `{
 		sqlite3 *self = NULL;
-		sqlite3_open(String_to_cstring(filename), &self);
+		int err = sqlite3_open(String_to_cstring(filename), &self);
+		NativeSqlite3_set_sys_sqlite_open_error(self, (void*)(long)err);
+		// The previous cast is a hack, using non pointers in extern classes is not
+		// yet in the spec of the FFI.
 		return self;
 	`}
+
+	# Utility method to set `Sys.sqlite_open_error`
+	private fun set_sys_sqlite_open_error(err: Sqlite3Code) do sys.sqlite_open_error = err
 
 	# Has this DB been correctly opened?
 	#

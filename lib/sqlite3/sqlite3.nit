@@ -95,6 +95,12 @@ class Sqlite3DB
 	# The latest error message, or `null` if there is none
 	fun error: nullable String
 	do
+		if not native_connection.is_valid then
+			var err = sys.sqlite_open_error
+			if err == null then return null
+			return err.to_s
+		end
+
 		var err = native_connection.error
 		if err.is_ok then return null
 		return err.to_s
