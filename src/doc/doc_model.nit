@@ -220,9 +220,6 @@ redef class MGroup
 end
 
 redef class MModule
-	# Is the mmodule created by nitdoc for internal purpose?
-	var is_fictive: Bool writable = false
-
 	redef fun nitdoc_name do return name.html_escape
 
 	redef fun nitdoc_id do
