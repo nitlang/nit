@@ -237,7 +237,7 @@ need_skip()
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
-	if test $engine = niti && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
+	if test -n "$isinterpret" && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip exec]"
 		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
@@ -292,6 +292,7 @@ while [ $stop = false ]; do
 	esac
 done
 enginebinname=$engine
+isinterpret=
 case $engine in
 	nitg)
 		engine=nitg-s;
@@ -316,9 +317,15 @@ case $engine in
 		;;
 	nit)
 		engine=niti
+		isinterpret=true
 		;;
 	niti)
 		enginebinname=nit
+		isinterpret=true
+		;;
+	nitvm)
+		isinterpret=true
+		savdirs="sav/niti/"
 		;;
 	emscripten)
 		enginebinname=nitg
@@ -423,7 +430,7 @@ for ii in "$@"; do
 			ffout="$ff.bin.js"
 		fi
 
-		if [ "$engine" = "niti" ]; then
+		if [ -n "$isinterpret" ]; then
 			cat > "./$ff.bin" <<END
 exec $NITC --no-color $OPT "$i" $includes -- "\$@"
 END
