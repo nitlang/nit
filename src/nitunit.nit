@@ -203,12 +203,12 @@ redef class ModelBuilder
 		var nmodule = mmodule2nmodule[mmodule]
 		assert nmodule != null
 
-		# what module to import in the unit test.
-		# try to detect the main module of the project
-		# TODO do things correctly once the importation of arbitraty nested module is legal
+		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule
 		var g = o.mgroup
 		if g != null and g.mproject.name == "standard" then
+			# except for a unit test in a module of standard
+			# in this case, the whole standard must be imported
 			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
 		end
 
