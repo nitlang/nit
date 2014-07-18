@@ -593,7 +593,7 @@ class NeoNode
 		var edges = new List[NeoEdge]
 		var res = neo.get("{url.to_s}/relationships/in").as(JsonArray)
 		for obj in res do
-			edges.add(new NeoEdge.from_json(neo.as(not null), obj.as(JsonObject)))
+			edges.add(new NeoEdge.from_json(neo, obj.as(JsonObject)))
 		end
 		internal_in_edges = edges
 		return edges
@@ -673,7 +673,7 @@ class NeoEdge
 
 	redef init from_neo(neo, url) do
 		super
-		var obj = neo.get(url.as(not null)).as(JsonObject)
+		var obj = neo.get(url).as(JsonObject)
 		self.internal_type = obj["type"].to_s
 		self.internal_from_url = obj["start"].to_s
 		self.internal_to_url = obj["end"].to_s
