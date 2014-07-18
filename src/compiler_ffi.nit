@@ -178,7 +178,7 @@ redef class AMethPropdef
 				arguments_for_c.add(arg.name)
 			else
 				v.add("struct nitni_instance* var_for_c_{a};")
-				v.add("var_for_c_{a} = malloc(sizeof(struct nitni_instance));")
+				v.add("var_for_c_{a} = nit_alloc(sizeof(struct nitni_instance));")
 				v.add("var_for_c_{a}->value = {arg.name};")
 				arguments_for_c.add("var_for_c_{a}")
 			end
@@ -235,7 +235,7 @@ redef class AMethPropdef
 				arguments_for_c.add(arg.name)
 			else
 				v.add("struct nitni_instance* var_for_c_{a};")
-				v.add("var_for_c_{a} = malloc(sizeof(struct nitni_instance));")
+				v.add("var_for_c_{a} = nit_alloc(sizeof(struct nitni_instance));")
 				v.add("var_for_c_{a}->value = {arg.name};")
 				arguments_for_c.add("var_for_c_{a}")
 			end
@@ -294,7 +294,7 @@ redef class AbstractCompilerVisitor
 			add("return {src};")
 		else
 			add("struct nitni_instance* ret_for_c;")
-			add("ret_for_c = malloc(sizeof(struct nitni_instance));")
+			add("ret_for_c = nit_alloc(sizeof(struct nitni_instance));")
 			add("ret_for_c->value = {src};")
 			add("return ret_for_c;")
 		end
@@ -354,7 +354,7 @@ redef class MNullableType
 		var full_internal_csignature = "{cname_blind} {full_cname}()"
 		nitni_visitor.add("{full_internal_csignature} \{")
 		nitni_visitor.add("struct nitni_instance* ret_for_c;")
-		nitni_visitor.add("ret_for_c = malloc(sizeof(struct nitni_instance));")
+		nitni_visitor.add("ret_for_c = nit_alloc(sizeof(struct nitni_instance));")
 		nitni_visitor.add("ret_for_c->value = NULL;")
 		nitni_visitor.add("return ret_for_c;")
 		nitni_visitor.add("\}")
