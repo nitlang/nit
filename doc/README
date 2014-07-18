@@ -1,8 +1,6 @@
 This directory contains various documentation for Nit
 
 * advanced_options [TXT]: documentation for advanced options of the compiler and run-time execution.
-* developpez [LaTeX/PDF]: a French documentation "Développez en Nit". 
-* nitreference [LaTeX/PDF]: the Nit language reference.
 * stdlib [HTML]: Autodocumentation for the Nit standard library.
 
-
+For more documentation, visit http://nitlanguage.org/doc/

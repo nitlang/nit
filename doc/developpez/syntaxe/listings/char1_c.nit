@@ -1,1 +1,0 @@
-var char:Char = 'a'

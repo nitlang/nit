@@ -1,1 +1,0 @@
-var instance = new MaClasse
