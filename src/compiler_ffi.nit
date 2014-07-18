@@ -45,6 +45,10 @@ redef class MModule
 		ensure_compile_nitni_base(v)
 
 		nitni_ccu.header_c_types.add("#include \"{name}._ffi.h\"\n")
+		nitni_ccu.header_c_types.add """
+extern void nitni_global_ref_incr(void*);
+extern void nitni_global_ref_decr(void*);
+"""
 
 		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
@@ -316,14 +320,17 @@ redef class MType
 	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
 	do
 		# actually, we do not need to do anything when using the bohem garbage collector
+		var call_context = from_c_call_context
 
 		# incr_ref
-		var nitni_visitor = v.compiler.new_visitor
-		ccu.header_decl.add("#define {mangled_cname}_incr_ref(from) while(0)\{\}\n")
+		ccu.header_decl.add "#ifndef {mangled_cname}_incr_ref\n"
+		ccu.header_decl.add "	#define {mangled_cname}_incr_ref(from) nitni_global_ref_incr(({call_context.name_mtype(self)})(from))\n"
+		ccu.header_decl.add "#endif\n"
 
-		# incr_ref
-		nitni_visitor = v.compiler.new_visitor
-		ccu.header_decl.add("#define {mangled_cname}_decr_ref(from) while(0)\{\}\n")
+		# decr_ref
+		ccu.header_decl.add "#ifndef {mangled_cname}_decr_ref\n"
+		ccu.header_decl.add "	#define {mangled_cname}_decr_ref(from) nitni_global_ref_decr(({call_context.name_mtype(self)})(from))\n"
+		ccu.header_decl.add "#endif\n"
 	end
 end
 
