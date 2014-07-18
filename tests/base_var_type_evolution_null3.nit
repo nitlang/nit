@@ -17,7 +17,7 @@
 import kernel
 
 class G[A: nullable Object]
-	var _a: A
+	var a: A
 	init (a: A) do _a = a
 
 	fun run

@@ -30,7 +30,7 @@ end
 
 class B[E]
 	redef fun output do _e.output
-	var _e: E
+	var e: E
 	init(e: E) do _e = e
 end
 
@@ -40,8 +40,8 @@ class C[F, G]
 		_f.output
 		_g.output
 	end
-	var _f: F
-	var _g: G
+	var f: F
+	var g: G
 	init(f: F, g: G)
 	do
 		_f = f

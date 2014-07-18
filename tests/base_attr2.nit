@@ -31,7 +31,7 @@ class A
 	protected var a11: Object private writable = self
 	private var a12: Object private writable = self
 
-	var _cpt: Int = 0
+	var cpt: Int = 0
 
 	redef fun output
 	do

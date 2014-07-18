@@ -79,7 +79,7 @@ class Bottles
 		_quantity = i
 	end
 
-	var _quantity: Int
+	var quantity: Int
 end
 
 var i = 99

@@ -24,8 +24,8 @@ class Int
 end
 
 class Foo
-	var _a1: Int
-	var _a2: Int
+	var a1: Int
+	var a2: Int
 	fun run
 	do
 		_a1.output
@@ -41,7 +41,7 @@ end
 
 class Bar
 	super Foo
-	var _a3: Int
+	var a3: Int
 	redef fun run
 	do
 		_a1.output

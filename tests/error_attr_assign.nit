@@ -15,7 +15,7 @@
 # limitations under the License.
 
 class A
-	var _toto: Int
+	var toto: Int
 	fun m
 	do
 		_toto = 't'

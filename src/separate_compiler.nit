@@ -263,8 +263,8 @@ class SeparateCompiler
 		var rta = runtime_type_analysis
 
 		# Layouts
-		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 		var poset = mainmodule.flatten_mclass_hierarchy
+		var mclasses = new HashSet[MClass].from(poset)
 		var colorer = new POSetColorer[MClass]
 		colorer.colorize(poset)
 
@@ -345,45 +345,12 @@ class SeparateCompiler
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
-			var supercalls = new List[MMethodDef]
+			tables[mclass] = table
 
-			# first, fill table from parents by reverse linearization order
-			var parents = new Array[MClass]
-			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
-				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
-				self.mainmodule.linearize_mclasses(parents)
-			end
+			var mproperties = self.mainmodule.properties(mclass)
+			var mtype = mclass.intro.bound_mtype
 
-			for parent in parents do
-				if parent == mclass then continue
-				for mproperty in self.mainmodule.properties(parent) do
-					if not mproperty isa MMethod then continue
-					if not method_colors.has_key(mproperty) then continue
-					var color = method_colors[mproperty]
-					if table.length <= color then
-						for i in [table.length .. color[ do
-							table[i] = null
-						end
-					end
-					for mpropdef in mproperty.mpropdefs do
-						if mpropdef.mclassdef.mclass == parent then
-							table[color] = mpropdef
-						end
-					end
-				end
-
-				# lookup for super calls in super classes
-				for mmethoddef in super_calls do
-					for mclassdef in parent.mclassdefs do
-						if mclassdef.mpropdefs.has(mmethoddef) then
-							supercalls.add(mmethoddef)
-						end
-					end
-				end
-			end
-
-			# then override with local properties
-			for mproperty in self.mainmodule.properties(mclass) do
+			for mproperty in mproperties do
 				if not mproperty isa MMethod then continue
 				if not method_colors.has_key(mproperty) then continue
 				var color = method_colors[mproperty]
@@ -392,33 +359,22 @@ class SeparateCompiler
 						table[i] = null
 					end
 				end
-				for mpropdef in mproperty.mpropdefs do
-					if mpropdef.mclassdef.mclass == mclass then
-						table[color] = mpropdef
-					end
-				end
+				table[color] = mproperty.lookup_first_definition(mainmodule, mtype)
 			end
 
-			# lookup for super calls in local class
-			for mmethoddef in super_calls do
-				for mclassdef in mclass.mclassdefs do
-					if mclassdef.mpropdefs.has(mmethoddef) then
-						supercalls.add(mmethoddef)
-					end
-				end
-			end
-			# insert super calls in table according to receiver
-			for supercall in supercalls do
+			for supercall in super_calls do
+				if not mtype.collect_mclassdefs(mainmodule).has(supercall.mclassdef) then continue
+
 				var color = method_colors[supercall]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
 					end
 				end
-				var mmethoddef = supercall.lookup_next_definition(self.mainmodule, mclass.intro.bound_mtype)
+				var mmethoddef = supercall.lookup_next_definition(mainmodule, mtype)
 				table[color] = mmethoddef
 			end
-			tables[mclass] = table
+
 		end
 		return tables
 	end
@@ -427,46 +383,22 @@ class SeparateCompiler
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
-			# first, fill table from parents by reverse linearization order
-			var parents = new Array[MClass]
-			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
-				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
-				self.mainmodule.linearize_mclasses(parents)
-			end
-			for parent in parents do
-				if parent == mclass then continue
-				for mproperty in self.mainmodule.properties(parent) do
-					if not mproperty isa MAttribute then continue
-					var color = attr_colors[mproperty]
-					if table.length <= color then
-						for i in [table.length .. color[ do
-							table[i] = null
-						end
-					end
-					for mpropdef in mproperty.mpropdefs do
-						if mpropdef.mclassdef.mclass == parent then
-							table[color] = mpropdef
-						end
-					end
-				end
-			end
+			tables[mclass] = table
 
-			# then override with local properties
-			for mproperty in self.mainmodule.properties(mclass) do
+			var mproperties = self.mainmodule.properties(mclass)
+			var mtype = mclass.intro.bound_mtype
+
+			for mproperty in mproperties do
 				if not mproperty isa MAttribute then continue
+				if not attr_colors.has_key(mproperty) then continue
 				var color = attr_colors[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
 					end
 				end
-				for mpropdef in mproperty.mpropdefs do
-					if mpropdef.mclassdef.mclass == mclass then
-						table[color] = mpropdef
-					end
-				end
+				table[color] = mproperty.lookup_first_definition(mainmodule, mtype)
 			end
-			tables[mclass] = table
 		end
 		return tables
 	end

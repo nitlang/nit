@@ -15,9 +15,9 @@
 # Transform Nit verbatim documentation into HTML
 module markdown
 
-import parser
+private import parser
 import html
-import highlight
+private import highlight
 
 # The class that does the convertion from a `ADoc` to HTML
 private class Doc2Mdwn

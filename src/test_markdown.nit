@@ -16,6 +16,7 @@
 module test_markdown
 
 import modelize_property
+import highlight
 import markdown
 
 redef class ModelBuilder

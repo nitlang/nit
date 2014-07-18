@@ -21,7 +21,7 @@
 # * try to change the optimization flags
 # * try to update your gcc version
 class Foo
-	var _count: Int = 0
+	var count: Int = 0
 	fun run: Int
 	do
 		# Under some case gcc produce bad code here and make the if

@@ -1,4 +1,4 @@
-alt/error_expr_not_ok_alt3.nit:19,19--22: Error: Method or variable 'fail' unknown in A.
+alt/error_expr_not_ok_alt3.nit:19,18--21: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt3.nit:21,11--14: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt3.nit:22,26--29: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt3.nit:24,8--11: Error: Method or variable 'fail' unknown in A.

@@ -1,1 +1,1 @@
-Runtime error: Uninitialized attribute @a (alt/rterror_attr_def_alt2.nit:26)
+Runtime error: Uninitialized attribute _a (alt/rterror_attr_def_alt2.nit:26)

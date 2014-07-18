@@ -1,4 +1,4 @@
-error_expr_not_ok.nit:19,19--22: Error: Method or variable 'fail' unknown in A.
+error_expr_not_ok.nit:19,18--21: Error: Method or variable 'fail' unknown in A.
 error_expr_not_ok.nit:21,11--14: Error: Method or variable 'fail' unknown in A.
 error_expr_not_ok.nit:22,26--29: Error: Method or variable 'fail' unknown in A.
 error_expr_not_ok.nit:24,8--11: Error: Method or variable 'fail' unknown in A.

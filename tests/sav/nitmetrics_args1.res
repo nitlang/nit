@@ -225,23 +225,23 @@
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 4.0
-	  max: C (8)
+	  avg: 5.0
+	  max: C (10)
 	  min: Object (3)
-	  std: 2.0
-	  sum: 34
+	  std: 2.507
+	  sum: 37
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
-	  max: Object (0)
+	  max: C (2)
 	  min: Object (0)
-	  std: 0.0
-	  sum: 0
+	  std: 0.845
+	  sum: 3
 	cnbip: number of introduced properties
 	  avg: 2.0
-	  max: C (5)
+	  max: C (7)
 	  min: Bool (0)
-	  std: 1.69
-	  sum: 16
+	  std: 2.42
+	  sum: 19
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
@@ -351,22 +351,22 @@
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
 	  avg: 4.0
-	  max: C (8)
+	  max: C (10)
 	  min: Object (1)
-	  std: 2.151
-	  sum: 35
+	  std: 2.828
+	  sum: 38
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
-	  max: Object (0)
+	  max: C (2)
 	  min: Object (0)
-	  std: 0.0
-	  sum: 0
+	  std: 0.791
+	  sum: 3
 	cnbip: number of introduced properties
 	  avg: 2.0
-	  max: C (5)
+	  max: C (7)
 	  min: Bool (0)
-	  std: 1.62
-	  sum: 17
+	  std: 2.291
+	  sum: 20
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: Object (0)
@@ -638,10 +638,10 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
   `- group base_simple3
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
-	  max: Object (0)
+	  max: C (2)
 	  min: Object (0)
-	  std: 0.0
-	  sum: 0
+	  std: 0.845
+	  sum: 3
 	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
 	  sum: 0
 
@@ -659,10 +659,10 @@ generating out/nitmetrics_args1.write/module_hierarchy.dot
  ## global metrics
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
-	  max: Object (0)
+	  max: C (2)
 	  min: Object (0)
-	  std: 0.0
-	  sum: 0
+	  std: 0.791
+	  sum: 3
 	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
 	  sum: 0
 --- Sends on Nullable Receiver ---

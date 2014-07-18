@@ -3,6 +3,7 @@ Start ../src/test_parser.nit:17,1--152,1
     AModuledecl ../src/test_parser.nit:17,1--18,18
       ADoc ../src/test_parser.nit:17,1--18,0
         TComment "# Program used to test the NIT parser\n" ../src/test_parser.nit:17,1--18,0
+      APublicVisibility ../src/test_parser.nit:18,1
       TKwmodule "module" ../src/test_parser.nit:18,1--6
       AModuleName ../src/test_parser.nit:18,8--18
         TId "test_parser" ../src/test_parser.nit:18,8--18
