@@ -23,7 +23,7 @@ var curl = new Curl
 var mail_request = new CurlMailRequest(curl)
 
 # Networks
-var response = mail_request.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
+var response: nullable CurlResponse = mail_request.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
 if response isa CurlResponseFailed then
 	print "Error code : {response.error_code}"
 	print "Error msg : {response.error_msg}"
