@@ -133,13 +133,97 @@ class VirtualMachine super NaiveInterpreter
 	redef fun init_instance(recv: Instance)
 	do
 		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
-		super
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
+
+		assert(recv isa MutableInstance)
+ 
+		recv.internal_attributes = init_internal_attributes(null_instance, recv.mtype.as(MClassType).mclass.cached_attributes.length)
+
+		super
 	end
-	
+		
+	# Initialize the internal representation of an object (its attribute values)
+	private fun init_internal_attributes(null_instance: Instance, size: Int): Pointer
+		import Array[Instance].length, Array[Instance].[] `{
+		
+		Instance* attributes = malloc(sizeof(Instance) * size);
+
+		int i;
+		for(i=0; i<size; i++)
+			attributes[i] = null_instance;
+
+		return attributes;
+	`}
+
 	# Creates the runtime structures for this class
 	fun create_class(mclass: MClass) do	mclass.make_vt(self)
+
+	# Return the value of the attribute `mproperty for the object `recv
+	redef fun read_attribute(mproperty: MAttribute, recv: Instance): Instance
+	do
+		assert recv isa MutableInstance
+
+		# Read the attribute value with perfect hashing
+		var id = mproperty.intro_mclassdef.mclass.vtable.id
+		
+		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+					recv.vtable.mask, id, mproperty.offset)
+		
+		return i
+	end
+
+	# Return the attribute value in `instance with a sequence of perfect_hashing
+	#     `instance is the attributes array of the receiver
+	#     `vtable is the pointer to the virtual table of the class (of the receiver)
+	#     `mask is the perfect hashing mask of the class
+	#     `id is the identifier of the class
+	#     `offset is the relative offset of this attribute
+	private fun read_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int): Instance `{
+		// Perfect hashing position
+		int hv = mask & id;
+		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
+		
+		// pointer+1 is the position where the delta of the class is
+		int absolute_offset = *(pointer + 1);
+
+		Instance res = ((Instance *)instance)[absolute_offset + offset];
+		
+		return res;
+	`}
+
+	# Replace in `recv the value of the attribute `mproperty by `value
+	redef fun write_attribute(mproperty: MAttribute, recv: Instance, value: Instance)
+	do
+		assert recv isa MutableInstance
+
+		var id = mproperty.intro_mclassdef.mclass.vtable.id
+		
+		# TODO : ugly hack
+		recv.attributes[mproperty] = value
+
+		# Replace the old value of mproperty in recv
+		write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+					recv.vtable.mask, id, mproperty.offset, value)
+	end
+
+	# Replace the value of an attribute in an instance
+	#     `instance is the attributes array of the receiver
+	#     `vtable is the pointer to the virtual table of the class (of the receiver)
+	#     `mask is the perfect hashing mask of the class
+	#     `id is the identifier of the class
+	#     `offset is the relative offset of this attribute
+	# 	  `value is the new value for this attribute
+	private fun write_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int, value: Instance) `{
+		// Perfect hashing position
+		int hv = mask & id;
+		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
+
+		// pointer+1 is the position where the delta of the class is
+		int absolute_offset = *(pointer + 1);
+
+		((Instance *)instance)[absolute_offset + offset] = value;
+	`}
 end
 
 redef class MClass
@@ -148,6 +232,9 @@ redef class MClass
 
 	# True when the class is effectively loaded by the vm, false otherwise
 	var loaded: Bool = false
+
+	# Cached attributes for faster instanciations of this class
+	var cached_attributes: Array[MAttribute] = new Array[MAttribute]
 
 	# Allocates a VTable for this class and gives it an id
 	private fun make_vt(v: VirtualMachine)
@@ -163,33 +250,38 @@ redef class MClass
 		# Make_vt for super-classes
 		var ids = new Array[Int]
 		var nb_methods = new Array[Int]
+		var nb_attributes = new Array[Int]
 
 		for parent in superclasses do
 			if parent.vtable == null then parent.make_vt(v)
 			
-			# Get the number of introduced methods for this class
-			var count = 0
-			var min_visibility = public_visibility
-			for p in parent.intro_mproperties(min_visibility) do
-				if p isa MMethod then
-					count += 1
+			# Get the number of introduced methods and attributes for this class
+			var methods = 0
+			var attributes = 0
+
+			for p in parent.intro_mproperties(none_visibility) do
+				if p isa MMethod then methods += 1
+				if p isa MAttribute then
+					attributes += 1
 				end
 			end
 			
 			ids.push(parent.vtable.id)
-			nb_methods.push(count)
+			nb_methods.push(methods)
+			nb_attributes.push(attributes)
 		end
 		
 		# When all super-classes have their identifiers and vtables, allocate current one
-		allocate_vtable(v, ids, nb_methods)
+		allocate_vtable(v, ids, nb_methods, nb_attributes)
 		loaded = true
 		# The virtual table now needs to be filled with pointer to methods
 	end
 
 	# Allocate a single vtable
 	# 	ids : Array of superclasses identifiers
-	# 	nb_methods : Array which contain the number of methods for each class in ids
-	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int])
+	# 	nb_methods : Array which contain the number of introducted methods for each class in ids
+	# 	nb_attributes : Array which contain the number of introducted attributes for each class in ids
+	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int], nb_attributes: Array[Int])
 	do
 		vtable = new VTable
 		var idc = new Array[Int]
@@ -204,18 +296,62 @@ redef class MClass
 		ids_total.push(vtable.id)
 
 		var nb_methods_total = new Array[Int]
-		var count = 0
-		var min_visibility = public_visibility
-		for p in intro_mproperties(min_visibility) do
-			if p isa MMethod then
-				count += 1
+		var nb_attributes_total = new Array[Int]
+
+		var self_methods = 0
+		var self_attributes = 0
+		
+		# For self attributes, fixing offsets
+		var relative_offset = 0
+		for p in intro_mproperties(none_visibility) do
+			if p isa MMethod then self_methods += 1
+			if p isa MAttribute then 
+				self_attributes += 1
+				p.offset = relative_offset
+				relative_offset += 1
+				cached_attributes.push(p)
 			end
 		end
+
 		nb_methods_total.add_all(nb_methods)
-		nb_methods_total.push(count)
-		
-		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, vtable.mask)
+		nb_methods_total.push(self_methods)
+
+		nb_attributes_total.add_all(nb_attributes)
+		nb_attributes_total.push(self_attributes)
+
+		# Since we have the number of attributes for each class, calculate the delta 
+		var d = calculate_delta(nb_attributes_total)
+		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, d, vtable.mask)
 	end
+
+	# Computes delta for each class
+	# A delta represents the offset for this group of attributes in the object
+	#    nb_attributes : number of attributes for each class (classes are linearized from Object to current)
+	#    return deltas for each class
+	private fun calculate_delta(nb_attributes: Array[Int]): Array[Int]
+	do
+		var deltas = new Array[Int]
+
+		var total = 0
+		for nb in nb_attributes do
+			deltas.push(total)
+			total += nb
+		end
+
+		return deltas
+	end
+end
+
+redef class MAttribute
+	# Represents the relative offset of this attribute in the runtime instance
+	var offset: Int
+end
+
+# Redef MutableInstance to improve implementation of attributes in objects
+redef class MutableInstance
+	
+	# C-array to store pointers to attributes of this Object
+	var internal_attributes: Pointer
 end
 
 # A VTable contains the virtual method table for the dispatch
@@ -237,34 +373,23 @@ class VTable
 end
 
 redef class Instance
-	
 	var vtable: nullable VTable
-
-	init(mt: MType)
-	do
-		mtype = mt
-
-		# An instance is associated to its class virtual table
-		if mt isa MClassType then
-			vtable = mt.mclass.vtable
-		end
-	end
 end
 
 # Handle memory, used for allocate virtual table and associated structures
 class MemoryManager
 
 	# Allocate and fill a virtual table
-	fun init_vtable(ids: Array[Int], nb_methods: Array[Int], mask: Int): Pointer 
+	fun init_vtable(ids: Array[Int], nb_methods: Array[Int], nb_attributes: Array[Int], mask: Int): Pointer 
 	do
 		# Allocate in C current virtual table
-		var res = intern_init_vtable(ids, nb_methods, mask)
+		var res = intern_init_vtable(ids, nb_methods, nb_attributes, mask)
 
 		return res
 	end
 
 	# Construct virtual tables with a bi-dimensional layout
-	private fun intern_init_vtable(ids: Array[Int], nb_methods: Array[Int], mask: Int): Pointer 
+	private fun intern_init_vtable(ids: Array[Int], nb_methods: Array[Int], deltas: Array[Int], mask: Int): Pointer 
 		import Array[Int].length, Array[Int].[] `{
 
 		// Allocate and fill current virtual table
@@ -273,15 +398,16 @@ class MemoryManager
 		int nb_classes = Array_of_Int_length(nb_methods);
 		for(i = 0; i<nb_classes; i++) {
 			/* - One for each method of this class
-			*  - One for the delta (pointer to attributes)
+			*  - One for the delta (offset of this group of attributes in objects)
 			*  - One for the id 
 			*/
 			total_size += Array_of_Int__index(nb_methods, i);
 			total_size += 2;
 		}
 
-		// And the size of the perfect hashtable
-		total_size += mask+1;
+		// Add the size of the perfect hashtable (mask +1)
+		// Add one because we start to fill the vtable at position 1 (0 is the init position)
+		total_size += mask+2;
 		long unsigned int* vtable = malloc(sizeof(long unsigned int)*total_size);
 		
 		// Initialisation to the first position of the virtual table (ie : Object)
@@ -298,11 +424,12 @@ class MemoryManager
 			/*
 				vtable[hv] contains a pointer to the group of introducted methods
 				For each superclasse we have in virtual table :
-					(id | delta (attributes) | introduced methods)
+					(id | delta | introduced methods)
 			*/
 			int hv = mask & Array_of_Int__index(ids, i);
 
 			vtable[current_size] = Array_of_Int__index(ids, i);
+			vtable[current_size + 1] = Array_of_Int__index(deltas, i);
 			vtable[-hv] = (long unsigned int)&(vtable[current_size]);
 			
 			current_size += 2;

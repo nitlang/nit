@@ -434,6 +434,13 @@ private class NaiveInterpreter
 		return recv.attributes[mproperty]
 	end
 
+	# Replace in `recv` the value of the attribute `mproperty` by `value`
+	fun write_attribute(mproperty: MAttribute, recv: Instance, value: Instance)
+	do
+		assert recv isa MutableInstance
+		recv.attributes[mproperty] = value
+	end
+
 	# Collect attributes of a type in the order of their init
 	fun collect_attr_propdef(mtype: MType): Array[AAttrPropdef]
 	do
@@ -979,7 +986,7 @@ redef class AAttrPropdef
 			return v.read_attribute(attr, recv)
 		else
 			assert args.length == 2
-			recv.attributes[attr] = args[1]
+			v.write_attribute(attr, recv, args[1])
 			return null
 		end
 	end
@@ -996,13 +1003,13 @@ redef class AAttrPropdef
 			assert val != null
 			v.frames.shift
 			assert not v.is_escaping
-			recv.attributes[self.mpropdef.mproperty] = val
+			v.write_attribute(self.mpropdef.mproperty, recv, val)
 			return
 		end
 		var mtype = self.mpropdef.static_mtype.as(not null)
 		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
-			recv.attributes[self.mpropdef.mproperty] = v.null_instance
+			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
 		end
 	end
 end
@@ -1025,7 +1032,7 @@ redef class AClassdef
 		# Collect undefined attributes
 		for npropdef in self.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
-				recv.attributes[npropdef.mpropdef.mproperty] = args[i]
+				v.write_attribute(npropdef.mpropdef.mproperty, recv, args[i])
 				i += 1
 			end
 		end
@@ -1635,8 +1642,7 @@ redef class AAttrAssignExpr
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
-		assert recv isa MutableInstance
-		recv.attributes[mproperty] = i
+		v.write_attribute(mproperty, recv, i)
 	end
 end
 
@@ -1652,8 +1658,7 @@ redef class AAttrReassignExpr
 		var attr = v.read_attribute(mproperty, recv)
 		var res = v.callsite(reassign_callsite, [attr, value])
 		assert res != null
-		assert recv isa MutableInstance
-		recv.attributes[mproperty] = res
+		v.write_attribute(mproperty, recv, res)
 	end
 end
 
