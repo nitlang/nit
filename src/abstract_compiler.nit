@@ -2545,6 +2545,8 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
+		if i.mtype.ctype != "val*" then return i
+
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
@@ -2582,7 +2584,7 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var args = [recv]
-		for a in self.raw_arguments.as(not null) do
+		for a in self.raw_arguments do
 			args.add(v.expr(a, null))
 		end
 		return v.compile_callsite(self.callsite.as(not null), args)
@@ -2594,7 +2596,7 @@ redef class ASendReassignFormExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var args = [recv]
-		for a in self.raw_arguments.as(not null) do
+		for a in self.raw_arguments do
 			args.add(v.expr(a, null))
 		end
 		var value = v.expr(self.n_value, null)

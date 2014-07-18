@@ -1194,6 +1194,8 @@ redef class AAsNotnullExpr
 	redef fun accept_typing(v)
 	do
 		var mtype = v.visit_expr(self.n_expr)
+		if mtype == null then return # Forward error
+
 		if mtype isa MNullType then
 			v.error(self, "Type error: as(not null) on null")
 			return
@@ -1202,8 +1204,18 @@ redef class AAsNotnullExpr
 			self.mtype = mtype.mtype
 			return
 		end
-		# TODO: warn on useless as not null
 		self.mtype = mtype
+
+		if mtype isa MClassType then
+			v.modelbuilder.warning(self, "Warning: expression is already not null, since it is a `{mtype}`.")
+			return
+		end
+		assert mtype.need_anchor
+		var u = v.anchor_to(mtype)
+		if not u isa MNullableType then
+			v.modelbuilder.warning(self, "Warning: expression is already not null, since it is a `{mtype}: {u}`.")
+			return
+		end
 	end
 end
 

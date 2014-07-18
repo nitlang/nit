@@ -34,7 +34,7 @@ toolcontext.process_options(args)
 var model = new Model
 
 # Add a model builder to parse files
-var modelbuilder = new ModelBuilder(model, toolcontext.as(not null))
+var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
 var progname = arguments.first
@@ -56,7 +56,7 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
-var self_mm = mainmodule.as(not null)
-var self_args = arguments.as(not null)
+var self_mm = mainmodule
+var self_args = arguments
 
 modelbuilder.run_naive_interpreter(self_mm, self_args)

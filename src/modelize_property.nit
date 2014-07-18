@@ -968,7 +968,7 @@ redef class ATypePropdef
 		var bound = self.mpropdef.bound
 		if bound == null then return # Error thus skiped
 
-		modelbuilder.check_visibility(n_type.as(not null), bound, mpropdef)
+		modelbuilder.check_visibility(n_type, bound, mpropdef)
 
 		# Fast case: the bound is not a formal type
 		if not bound isa MVirtualType then return

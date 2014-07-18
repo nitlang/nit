@@ -203,7 +203,7 @@ abstract class Rope
 				return new Path(root.as(Leaf), length, st)
 			end
 		end
-		return get_node_from(root.as(not null), 0, position, new List[PathElement])
+		return get_node_from(root, 0, position, new List[PathElement])
 	end
 
 	# Special case for when the required pos is length
