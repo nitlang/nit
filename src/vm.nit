@@ -405,8 +405,9 @@ class MemoryManager
 			total_size += 2;
 		}
 
-		// Add the size of the perfect hashtable
-		total_size += mask+1;
+		// Add the size of the perfect hashtable (mask +1)
+		// Add one because we start to fill the vtable at position 1 (0 is the init position)
+		total_size += mask+2;
 		long unsigned int* vtable = malloc(sizeof(long unsigned int)*total_size);
 		
 		// Initialisation to the first position of the virtual table (ie : Object)
