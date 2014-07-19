@@ -19,6 +19,7 @@ module platform
 import modelize_property
 import parser_util
 import modelbuilder
+private import annotation
 
 redef class ToolContext
 	var platform_phase: Phase = new PlatformPhase(self, [modelize_property_phase])
@@ -37,7 +38,7 @@ private class PlatformPhase
 		var annotation_name = "platform"
 
 		# Skip if we are not interested
-		if nat.n_atid.n_id.text != annotation_name then return
+		if nat.name != annotation_name then return
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
@@ -54,21 +55,12 @@ private class PlatformPhase
 		else if args.is_empty then
 			platform_name = nmoduledecl.n_name.collect_text
 		else
-			var arg = args.first
-			var format_error = "Syntax error: \"{annotation_name}\" expects its argument to be the name of the target platform as a String literal."
-			
-			if not arg isa AExprAtArg then
+			platform_name = args.first.as_string
+			if platform_name == null then
+				var format_error = "Syntax error: \"{annotation_name}\" expects its argument to be the name of the target platform as a String literal."
 				modelbuilder.error(nat, format_error)
 				return
 			end
-
-			var expr = arg.n_expr
-			if not expr isa AStringFormExpr then
-				modelbuilder.error(nat, format_error)
-				return
-			end
-			var target = expr.collect_text
-			platform_name = target.substring(1, target.length-2)
 		end
 
 		var nmodule = nmoduledecl.parent.as(AModule)

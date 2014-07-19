@@ -23,6 +23,7 @@ import modelbuilder
 import modelize_property
 import literal
 import typing
+private import annotation
 
 # Metadata associated to an Android project
 class AndroidProject
@@ -84,10 +85,10 @@ redef class ModelBuilder
 		for an in annots do project.target_sdk = an.arg_as_int(self)
 
 		annots = collect_annotations_on_modules("android_manifest", mmodule)
-		for an in annots do project.manifest_lines.add an.arg_as_string(self)
+		for an in annots do project.manifest_lines.add an.arg_as_string(self) or else ""
 
 		annots = collect_annotations_on_modules("android_manifest_application", mmodule)
-		for an in annots do project.manifest_application_lines.add an.arg_as_string(self)
+		for an in annots do project.manifest_application_lines.add an.arg_as_string(self) or else ""
 
 		# Get the date and time (down to the minute) as string
 		var local_time = new Tm.localtime
@@ -151,62 +152,6 @@ redef class ModelBuilder
 end
 
 redef class AAnnotation
-	# Get the single argument of `self` as a `String`. Raise error on any inconsistency.
-	private fun arg_as_string(modelbuilder: ModelBuilder): String
-	do
-		var annotation_name = n_atid.n_id.text
-		var format_error = "Annotation error: \"{annotation_name}\" expects a single String as argument."
-
-		var args = n_args
-		var platform_name
-		if args.length != 1 then
-			modelbuilder.error(self, format_error)
-			return ""
-		else
-			var arg = args.first
-			
-			if not arg isa AExprAtArg then
-				modelbuilder.error(self, format_error)
-				return ""
-			end
-
-			var expr = arg.n_expr
-			if not expr isa AStringFormExpr then
-				modelbuilder.error(self, format_error)
-				return ""
-			end
-			return expr.value.as(not null)
-		end
-	end
-
-	# Get the single argument of `self` as an `Int`. Raise error on any inconsistency.
-	private fun arg_as_int(modelbuilder: ModelBuilder): nullable Int
-	do
-		var annotation_name = n_atid.n_id.text
-		var format_error = "Annotation error: \"{annotation_name}\" expects a single Int as argument."
-
-		var args = n_args
-		var platform_name
-		if args.length != 1 then
-			modelbuilder.error(self, format_error)
-			return null
-		else
-			var arg = args.first
-			
-			if not arg isa AExprAtArg then
-				modelbuilder.error(self, format_error)
-				return null
-			end
-
-			var expr = arg.n_expr
-			if not expr isa AIntExpr then
-				modelbuilder.error(self, format_error)
-				return null
-			end
-			return expr.value.as(not null)
-		end
-	end
-
 	# Returns a version string (example: "1.5.6b42a7c") from an annotation `version(1, 5, git_revision)`.
 	#
 	# The user can enter as many fields as needed. The call to `git_revision` will be replaced by the short
@@ -219,33 +164,26 @@ redef class AAnnotation
 		var args = n_args
 		var platform_name
 		if args.length < 1 then
-			modelbuilder.error(self, "Annotation error: \"{annotation_name}\" expects at least a single argument.")
+			modelbuilder.error(self, "Annotation error: \"{name}\" expects at least a single argument.")
 			return ""
 		else
 			for arg in args do
-				var format_error = "Annotation error: \"{annotation_name}\" expects its arguments to be of type Int or a call to `git_revision`"
+				var format_error = "Annotation error: \"{name}\" expects its arguments to be of type Int or a call to `git_revision`"
 				
-				if not arg isa AExprAtArg then
-					modelbuilder.error(self, format_error)
-					return ""
+				var value
+				value = arg.as_int
+				if value != null then
+					version_fields.add value
+					continue
 				end
 
-				var expr = arg.n_expr
-				if expr isa AIntExpr then
-					var value = expr.value
-					assert value != null
+				value = arg.as_string
+				if value != null then
 					version_fields.add value
-				else if expr isa AStringFormExpr then
-					version_fields.add expr.value.as(not null)
-				else if expr isa ACallExpr then
-					# We support calls to "git" only
-					var exec_args = expr.n_args.to_a
-					if expr.n_id.text != "git_revision" or not exec_args.is_empty then
-						modelbuilder.error(self,
-							"Annotation error: \"{annotation_name}\" accepts only calls to `git_revision` with the command as arguments.")
-						return ""
-					end
+				end
 
+				value = arg.as_id
+				if value == "git_revision" then
 					# Get Git short revision
 					var proc = new IProcess("git", "rev-parse", "--short", "HEAD")
 					proc.wait
@@ -261,10 +199,11 @@ redef class AAnnotation
 					if dirty then revision += ".d"
 
 					version_fields.add revision
-				else
-					modelbuilder.error(self, format_error)
-					return ""
+					continue
 				end
+
+				modelbuilder.error(self, format_error)
+				return ""
 			end
 		end
 

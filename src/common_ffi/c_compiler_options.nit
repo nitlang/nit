@@ -21,6 +21,7 @@ module c_compiler_options
 
 import c
 import cpp
+private import annotation
 
 redef class ToolContext
 	var c_compiler_options_phase: Phase = new CCompilerOptionsPhase(self, null)
@@ -36,7 +37,7 @@ private class CCompilerOptionsPhase
 	redef fun process_annotated_node(nmoduledecl, nat)
 	do
 		# Skip if we are not interested
-		var annotation_name = nat.n_atid.n_id.text
+		var annotation_name = nat.name
 		if annotation_name != compiler_annotation_name and
 		   annotation_name != linker_annotation_name and
 		   annotation_name != cpp_compiler_annotation_name then return

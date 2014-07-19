@@ -21,6 +21,7 @@ module extra_java_files
 
 import literal
 import java
+private import annotation
 
 redef class ToolContext
 	var extra_java_files_phase: Phase = new JavaExtraFilesPhase(self, [literal_phase])
@@ -38,7 +39,7 @@ private class JavaExtraFilesPhase
 	do
 		# Skip if we are not interested
 		var annot_name = "extra_java_files"
-		if nat.n_atid.n_id.text != annot_name then return
+		if nat.name != annot_name then return
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
@@ -65,19 +66,11 @@ private class JavaExtraFilesPhase
 
 		var format_error = "Syntax error: \"{annot_name}\" expects its arguments to be paths to java files."
 		for arg in args do
-			if not arg isa AExprAtArg then
-				modelbuilder.error(nat, format_error)
+			var path = arg.as_string
+			if path == null then
+				modelbuilder.error(arg, format_error)
 				return
 			end
-
-			var expr = arg.n_expr
-			if not expr isa AStringFormExpr then
-				modelbuilder.error(nat, format_error)
-				return
-			end
-
-			var path = expr.value
-			assert path != null
 
 			# Append specified path to directory of the Nit source file
 			var source_file = nat.location.file
