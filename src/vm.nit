@@ -153,6 +153,7 @@ class VirtualMachine super NaiveInterpreter
 		for(i=0; i<size; i++)
 			attributes[i] = null_instance;
 
+		Instance_incr_ref(null_instance);
 		return attributes;
 	`}
 
@@ -199,9 +200,6 @@ class VirtualMachine super NaiveInterpreter
 
 		var id = mproperty.intro_mclassdef.mclass.vtable.id
 		
-		# TODO : ugly hack
-		recv.attributes[mproperty] = value
-
 		# Replace the old value of mproperty in recv
 		write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset, value)
@@ -223,6 +221,7 @@ class VirtualMachine super NaiveInterpreter
 		int absolute_offset = *(pointer + 1);
 
 		((Instance *)instance)[absolute_offset + offset] = value;
+		Instance_incr_ref(value);
 	`}
 end
 
