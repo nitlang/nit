@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2014 Romain Chanoir <romain.chanoir@viacesi.fr>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,43 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Test for the API level related annotations
-module test_target_api is
-	min_api_version(10)
-	max_api_version(19)
-	target_api_version(11)
-end
+# Test for the asserts_and_resources module of App.nit framework
+module test_assets_and_resources
 
 import simple_android
-#FIXME: Double quad to access lib/foo/goo/bar.nit is evil
-import android::shared_preferences::shared_preferences_api11
+import android::assets_and_resources
 
 redef class App
 	redef fun input( ie )
 	do
 		if ie isa PointerEvent and ie.depressed then 
-			test_target_api
+			test_assets
+			test_resources
 		end
 		return super
 	end
 
-	fun test_target_api
+	# Testing the assets manager
+	fun test_assets
 	do
-		var hash_set = new HashSet[JavaString]
-		hash_set.add "foo".to_java_string
-		hash_set.add "bar".to_java_string
+		assert asset_manager.bitmap("fighter.png") != null
+	end
 
-		shared_preferences.add_string_set("test", hash_set)
-
-		var hash_set2 = shared_preferences.string_set("test")
-
-		var tab = ["foo", "bar"]
-		var i = 0
-
-		for entry in hash_set2 do
-			assert entry == tab[i].to_java_string
-			i+=1
-		end
-
+	# Testing the resources manager
+	fun test_resources do
+		assert resource_manager.string("string_test") == "string test"
+		assert resource_manager.boolean("test_bool") == true
+		assert resource_manager.dimension("test_dimen_1") != null
+		assert resource_manager.dimension("test_dimen_2") != null
 	end
 end
