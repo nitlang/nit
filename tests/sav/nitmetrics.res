@@ -1,2 +1,3 @@
-Usage: nitmetrics [OPTION]... <file.nit>...mComputes various metrics on Nit programs.
+Usage: nitmetrics [OPTION]... <file.nit>...
+Computes various metrics on Nit programs.
 Use --help for help
