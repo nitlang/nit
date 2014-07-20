@@ -249,13 +249,12 @@ class Neo4jClient
 	fun nodes_with_label(lbl: String): Array[NeoNode] do
 		var res = get("{base_url}/db/data/label/{lbl}/nodes")
 		var nodes = new Array[NeoNode]
-		var batch = new NeoBatch(self)
-		for obj in res.as(JsonArray) do
-			var node = new NeoNode.from_json(self, obj.as(JsonObject))
-			batch.load_node(node)
+		for json in res.as(JsonArray) do
+			var obj = json.as(JsonObject)
+			var node = load_node(obj["self"].to_s)
+			node.internal_properties = obj["data"].as(JsonObject)
 			nodes.add node
 		end
-		batch.execute
 		return nodes
 	end
 
