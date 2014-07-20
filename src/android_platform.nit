@@ -67,14 +67,14 @@ class AndroidToolchain
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
 
-		var app_min_sdk = project.min_sdk
-		if app_min_sdk == null then app_min_sdk = 10
+		var app_min_api = project.min_api
+		if app_min_api == null then app_min_api = 10
 
-		var app_target_sdk = project.target_sdk
-		if app_target_sdk == null then app_target_sdk = app_min_sdk
+		var app_target_api = project.target_api
+		if app_target_api == null then app_target_api = app_min_api
 
-		var app_max_sdk = ""
-		if project.max_sdk != null then app_max_sdk = "android:maxSdkVersion=\"{app_max_sdk}\""
+		var app_max_api = ""
+		if project.max_api != null then app_max_api = "android:maxSdkVersion=\"{project.max_api.as(not null)}\""
 
 		# Clear the previous android project, so there is no "existing project warning"
 		# or conflict between Java files of different projects
@@ -83,7 +83,7 @@ class AndroidToolchain
 		var args = ["android", "-s",
 			"create", "project",
 			"--name", short_project_name,
-			"--target", "android-{app_target_sdk}",
+			"--target", "android-{app_target_api}",
 			"--path", android_project_root,
 			"--package", app_package,
 			"--activity", short_project_name]
@@ -139,9 +139,9 @@ $(call import-module,android/native_app_glue)
 
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk 
-        android:minSdkVersion="{{{app_min_sdk}}}" 
-        android:targetSdkVersion="{{{app_target_sdk}}}" 
-        {{{app_max_sdk}}} /> 
+        android:minSdkVersion="{{{app_min_api}}}" 
+        android:targetSdkVersion="{{{app_target_api}}}" 
+        {{{app_max_api}}} /> 
 
     <application
 		android:label="@string/app_name"

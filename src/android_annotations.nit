@@ -45,13 +45,13 @@ class AndroidProject
 	var manifest_application_lines = new Array[String]
 
 	# Minimum API level required for the application to run
-	var min_sdk: nullable Int = null
+	var min_api: nullable Int = null
 
 	# Build target API level
-	var target_sdk: nullable Int = null
+	var target_api: nullable Int = null
 
 	# Maximum API level on which the application will be allowed to run
-	var max_sdk: nullable Int = null
+	var max_api: nullable Int = null
 
 	redef fun to_s do return """
 name: {{{name or else "null"}}}
@@ -74,14 +74,14 @@ redef class ModelBuilder
 		annot = priority_annotation_on_modules("java_package", mmodule)
 		if annot != null then project.java_package = annot.arg_as_string(self)
 
-		var annots = collect_annotations_on_modules("min_sdk_version", mmodule)
-		for an in annots do project.min_sdk = an.arg_as_int(self)
+		var annots = collect_annotations_on_modules("min_api_version", mmodule)
+		for an in annots do project.min_api = an.arg_as_int(self)
 
-		annots = collect_annotations_on_modules("max_sdk_version", mmodule)
-		for an in annots do project.max_sdk = an.arg_as_int(self)
+		annots = collect_annotations_on_modules("max_api_version", mmodule)
+		for an in annots do project.max_api = an.arg_as_int(self)
 
-		annots = collect_annotations_on_modules("target_sdk_version", mmodule)
-		for an in annots do project.target_sdk = an.arg_as_int(self)
+		annots = collect_annotations_on_modules("target_api_version", mmodule)
+		for an in annots do project.target_api = an.arg_as_int(self)
 
 		annots = collect_annotations_on_modules("android_manifest", mmodule)
 		for an in annots do project.manifest_lines.add an.arg_as_string(self)
