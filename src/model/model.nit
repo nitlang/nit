@@ -1497,14 +1497,22 @@ end
 
 # A parameter in a signature
 class MParameter
+	super MEntity
+
 	# The name of the parameter
-	var name: String
+	redef var name: String
 
 	# The static type of the parameter
 	var mtype: MType
 
 	# Is the parameter a vararg?
 	var is_vararg: Bool
+
+	init(name: String, mtype: MType, is_vararg: Bool) do
+		self.name = name
+		self.mtype = mtype
+		self.is_vararg = is_vararg
+	end
 
 	redef fun to_s
 	do
