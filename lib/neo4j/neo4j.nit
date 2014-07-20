@@ -768,13 +768,6 @@ class NeoBatch
 
 	# Load a node in batch mode also load labels, data and edges
 	fun load_node(node: NeoNode) do
-		load_node_data(node)
-		load_node_labels(node)
-		load_node_out_edges(node)
-	end
-
-	# Load data into node
-	private fun load_node_data(node: NeoNode) do
 		var job = new_job(node)
 		job.action = load_node_data_action
 		job.method = "GET"
@@ -783,11 +776,7 @@ class NeoBatch
 		else
 			job.to = "\{{node.batch_id.to_s}\}"
 		end
-	end
-
-	# Load labels into node
-	private fun load_node_labels(node: NeoNode) do
-		var job = new_job(node)
+		job = new_job(node)
 		job.action = load_node_labels_action
 		job.method = "GET"
 		if node.id != null then
@@ -797,9 +786,17 @@ class NeoBatch
 		end
 	end
 
-	# Load out edges into node
-	private fun load_node_out_edges(node: NeoNode) do
+	# Load in and out edges into node
+	fun load_node_edges(node: NeoNode) do
 		var job = new_job(node)
+		job.action = load_node_in_edges_action
+		job.method = "GET"
+		if node.id != null then
+			job.to = "/node/{node.id.to_s}/relationships/in"
+		else
+			job.to = "\{{node.batch_id.to_s}\}/relationships/in"
+		end
+		job = new_job(node)
 		job.action = load_node_out_edges_action
 		job.method = "GET"
 		if node.id != null then
@@ -825,7 +822,7 @@ class NeoBatch
 		job.to = "\{{node.batch_id.to_s}\}/labels"
 		job.body = new JsonArray.from(node.labels)
 		# add edges
-		save_edges(node.out_edges)
+		#save_edges(node.out_edges)
 	end
 
 	# Create multiple nodes
@@ -898,12 +895,19 @@ class NeoBatch
 				var labels = new Array[String]
 				for l in res["body"].as(JsonArray) do labels.add l.to_s
 				node.internal_labels = labels
+			else if job.action == load_node_in_edges_action then
+				var node = job.entity.as(NeoNode)
+				var edges = res["body"].as(JsonArray)
+				node.internal_in_edges = new List[NeoEdge]
+				for edge in edges do
+					node.internal_in_edges.add client.load_edge(edge.as(JsonObject)["self"].to_s)
+				end
 			else if job.action == load_node_out_edges_action then
 				var node = job.entity.as(NeoNode)
 				var edges = res["body"].as(JsonArray)
 				node.internal_out_edges = new List[NeoEdge]
 				for edge in edges do
-					node.internal_out_edges.add new NeoEdge.from_json(client, edge.as(JsonObject))
+					node.internal_out_edges.add client.load_edge(edge.as(JsonObject)["self"].to_s)
 				end
 			end
 		end
@@ -917,7 +921,8 @@ class NeoBatch
 	private fun create_edge_action: Int do return 2
 	private fun load_node_data_action: Int do return 3
 	private fun load_node_labels_action: Int do return 4
-	private fun load_node_out_edges_action: Int do return 5
+	private fun load_node_in_edges_action: Int do return 5
+	private fun load_node_out_edges_action: Int do return 6
 end
 
 # A job that can be executed in a `NeoBatch`
