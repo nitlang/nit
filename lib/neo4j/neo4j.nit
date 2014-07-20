@@ -690,7 +690,7 @@ class NeoEdge
 	fun from: NeoNode do return internal_from or else load_from
 
 	private fun load_from: NeoNode do
-		var node = new NeoNode.from_neo(neo, internal_from_url.to_s)
+		var node = neo.load_node(internal_from_url.to_s)
 		internal_from = node
 		return node
 	end
@@ -699,7 +699,7 @@ class NeoEdge
 	fun to: NeoNode do return internal_to or else load_to
 
 	private fun load_to: NeoNode do
-		var node = new NeoNode.from_neo(neo, internal_to_url.to_s)
+		var node = neo.load_node(internal_to_url.to_s)
 		internal_to = node
 		return node
 	end
