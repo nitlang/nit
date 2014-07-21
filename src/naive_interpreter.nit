@@ -441,6 +441,13 @@ private class NaiveInterpreter
 		recv.attributes[mproperty] = value
 	end
 
+	# Is the attribute `mproperty` initialized the instance `recv`?
+	fun isset_attribute(mproperty: MAttribute, recv: Instance): Bool
+	do
+		assert recv isa MutableInstance
+		return recv.attributes.has_key(mproperty)
+	end
+
 	# Collect attributes of a type in the order of their init
 	fun collect_attr_propdef(mtype: MType): Array[AAttrPropdef]
 	do
@@ -1672,8 +1679,7 @@ redef class AIssetAttrExpr
 		if recv == null then return null
 		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
-		assert recv isa MutableInstance
-		return v.bool_instance(recv.attributes.has_key(mproperty))
+		return v.bool_instance(v.isset_attribute(mproperty, recv))
 	end
 end
 
