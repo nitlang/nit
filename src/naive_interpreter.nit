@@ -982,12 +982,15 @@ redef class AAttrPropdef
 		var recv = args.first
 		assert recv isa MutableInstance
 		var attr = self.mpropdef.mproperty
-		if args.length == 1 then
+		if mpropdef == mreadpropdef then
+			assert args.length == 1
 			return v.read_attribute(attr, recv)
-		else
+		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			v.write_attribute(attr, recv, args[1])
 			return null
+		else
+			abort
 		end
 	end
 
