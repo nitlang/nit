@@ -144,6 +144,23 @@ extern class UnicodeChar `{ UTF8Char* `}
 		return false
 	end
 
+	redef fun output import UnicodeChar.code_point `{
+		switch(UnicodeChar_len(recv)){
+			case 1:
+				printf("%c", recv->ns[recv->pos]);
+				break;
+			case 2:
+				printf("%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1]);
+				break;
+			case 3:
+				printf("%c%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1], recv->ns[recv->pos + 2]);
+				break;
+			case 4:
+				printf("%c%c%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1], recv->ns[recv->pos + 2], recv->ns[recv->pos + 3]);
+				break;
+		}
+	`}
+
 	redef fun to_s import NativeString.to_s_with_length `{
 		int len = utf8___UnicodeChar_len___impl(recv);
 		char* r = malloc(len + 1);
@@ -322,6 +339,16 @@ redef class FlatString
 		outstr[self.bytelen] = '\0'
 
 		return outstr.to_s_with_length(self.bytelen)
+	end
+
+	redef fun output
+	do
+		var i = self.index_from
+		var imax = self.index_to
+		while i <= imax do
+			index[i].output
+			i += 1
+		end
 	end
 
 end
