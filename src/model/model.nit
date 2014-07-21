@@ -14,16 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Object model of the Nit language
+# Classes, types and properties
 #
-# This module define the entities of the Nit meta-model like modules,
-# classes, types and properties
-#
-# It also provide an API to build and query models.
-#
-# All model classes starts with the M letter (`MModule`, `MClass`, etc.)
-#
-# TODO: better doc
+# All three concepts are defined in this same module because these are strongly connected:
+# * types are based on classes
+# * classes contains properties
+# * some properties are types (virtual types)
 #
 # TODO: liearization, extern stuff
 # FIXME: better handling of the types
@@ -319,9 +315,20 @@ end
 #
 # This characteristic helps the reasoning about classes in a program since a
 # single `MClass` object always denote the same class.
-# However, because a `MClass` is global, it does not really have properties nor
-# belong to a hierarchy since the property and the
-# hierarchy of a class depends of a module.
+#
+# The drawback is that classes (`MClass`) contain almost nothing by themselves.
+# These do not really have properties nor belong to a hierarchy since the property and the
+# hierarchy of a class depends of the refinement in the modules.
+#
+# Most services on classes require the precision of a module, and no one can asks what are
+# the super-classes of a class nor what are properties of a class without precising what is
+# the module considered.
+#
+# For instance, during the typing of a source-file, the module considered is the module of the file.
+# eg. the question *is the method `foo` exists in the class `Bar`?* must be reformulated into
+# *is the method `foo` exists in the class `Bar` in the current module?*
+#
+# During some global analysis, the module considered may be the main module of the program.
 class MClass
 	super MEntity
 
@@ -448,7 +455,14 @@ end
 #
 # A `MClassDef` is associated with an explicit (or almost) definition of a
 # class. Unlike `MClass`, a `MClassDef` is a local definition that belong to
-# a specific module
+# a specific class and a specific module, and contains declarations like super-classes
+# or properties.
+#
+# It is the class definitions that are the backbone of most things in the model:
+# ClassDefs are defined with regard with other classdefs.
+# Refinement and specialization are combined to produce a big poset called the `Model::mclassdef_hierarchy`.
+#
+# Moreover, the extension and the intention of types is defined by looking at the MClassDefs.
 class MClassDef
 	super MEntity
 
@@ -769,7 +783,7 @@ abstract class MType
 
 	# Replace formals generic types in self with resolved values in `mtype`
 	# If `cleanup_virtual` is true, then virtual types are also replaced
-	# with their bounds
+	# with their bounds.
 	#
 	# This function returns self if `need_anchor` is false.
 	#
@@ -829,8 +843,6 @@ abstract class MType
 	#   E.resolve_for(A[Array[F]],B[nullable Object])  #->  Array[F]
 	#
 	# The resolution can be done because `E` make sense for the class A (see `can_resolve_for`)
-	#
-	# TODO: Explain the cleanup_virtual
 	#
 	# FIXME: the parameter `cleanup_virtual` is just a bad idea, but having
 	# two function instead of one seems also to be a bad idea.
@@ -1199,8 +1211,8 @@ end
 # It's mean that all refinements of a same class "share" the parameter type,
 # but that a generic subclass has its on parameter types.
 #
-# However, in the sense of the meta-model, the a parameter type of a class is
-# a valid types in a subclass. The "in the sense of the meta-model" is
+# However, in the sense of the meta-model, a parameter type of a class is
+# a valid type in a subclass. The "in the sense of the meta-model" is
 # important because, in the Nit language, the programmer cannot refers
 # directly to the parameter types of the super-classes.
 #
