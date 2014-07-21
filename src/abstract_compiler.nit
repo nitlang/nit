@@ -578,7 +578,40 @@ abstract class AbstractCompiler
 	protected fun compile_header_structs is abstract
 
 	# Declaration of structures for nitni undelying the FFI
-	protected fun compile_nitni_structs is abstract
+	protected fun compile_nitni_structs
+	do
+		self.header.add_decl """
+/* Native reference to Nit objects */
+/* This structure is used to represent every Nit type in extern methods and custom C code. */
+struct nitni_ref {
+	struct nitni_ref *next,
+		*prev; /* adjacent global references in global list */
+	int count; /* number of time this global reference has been marked */
+};
+
+/* List of global references from C code to Nit objects */
+/* Instanciated empty at init of Nit system and filled explicitly by user in C code */
+struct nitni_global_ref_list_t {
+	struct nitni_ref *head, *tail;
+};
+extern struct nitni_global_ref_list_t *nitni_global_ref_list;
+
+/* Initializer of global reference list */
+extern void nitni_global_ref_list_init();
+
+/* Intern function to add a global reference to the list */
+extern void nitni_global_ref_add( struct nitni_ref *ref );
+
+/* Intern function to remove a global reference from the list */
+extern void nitni_global_ref_remove( struct nitni_ref *ref );
+
+/* Increase count on an existing global reference */
+extern void nitni_global_ref_incr( struct nitni_ref *ref );
+
+/* Decrease count on an existing global reference */
+extern void nitni_global_ref_decr( struct nitni_ref *ref );
+"""
+	end
 
 	# Generate the main C function.
 	# This function:
@@ -688,6 +721,9 @@ abstract class AbstractCompiler
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
+
+		v.add "initialize_nitni_global_refs();"
+
 		var main_type = mainmodule.sys_type
 		if main_type != null then
 			var mainmodule = v.compiler.mainmodule
@@ -745,6 +781,67 @@ abstract class AbstractCompiler
 
 		v.add("return 0;")
 		v.add("\}")
+	end
+
+	# Copile all C functions related to the [incr|decr]_ref features of the FFI
+	fun compile_nitni_global_ref_functions
+	do
+		var v = self.new_visitor
+		v.add """
+struct nitni_global_ref_list_t *nitni_global_ref_list;
+void initialize_nitni_global_refs() {
+	nitni_global_ref_list = (struct nitni_global_ref_list_t*)nit_alloc(sizeof(struct nitni_global_ref_list_t));
+	nitni_global_ref_list->head = NULL;
+	nitni_global_ref_list->tail = NULL;
+}
+
+void nitni_global_ref_add( struct nitni_ref *ref ) {
+	if ( nitni_global_ref_list->head == NULL ) {
+		nitni_global_ref_list->head = ref;
+		ref->prev = NULL;
+	} else {
+		nitni_global_ref_list->tail->next = ref;
+		ref->prev = nitni_global_ref_list->tail;
+	}
+	nitni_global_ref_list->tail = ref;
+
+	ref->next = NULL;
+}
+
+void nitni_global_ref_remove( struct nitni_ref *ref ) {
+	if ( ref->prev == NULL ) {
+		nitni_global_ref_list->head = ref->next;
+	} else {
+		ref->prev->next = ref->next;
+	}
+
+	if ( ref->next == NULL ) {
+		nitni_global_ref_list->tail = ref->prev;
+	} else {
+		ref->next->prev = ref->prev;
+	}
+}
+
+extern void nitni_global_ref_incr( struct nitni_ref *ref ) {
+	if ( ref->count == 0 ) /* not registered */
+	{
+		/* add to list */
+		nitni_global_ref_add( ref );
+	}
+
+	ref->count ++;
+}
+
+extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
+	if ( ref->count == 1 ) /* was last reference */
+	{
+		/* remove from list */
+		nitni_global_ref_remove( ref );
+	}
+
+	ref->count --;
+}
+"""
 	end
 
 	# List of additional files required to compile (FFI)

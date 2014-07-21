@@ -77,6 +77,7 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
+		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 
 		# Compile until all runtime_functions are visited
@@ -269,7 +270,14 @@ class GlobalCompiler
 
 	redef fun compile_nitni_structs
 	do
-		self.header.add_decl("struct nitni_instance \{ val *value; \};")
+		self.header.add_decl """
+struct nitni_instance \{
+	struct nitni_instance *next,
+		*prev; /* adjacent global references in global list */
+	int count; /* number of time this global reference has been marked */
+	val *value;
+\};"""
+		super
 	end
 end
 

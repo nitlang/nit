@@ -71,6 +71,7 @@ redef class ModelBuilder
 
 		# The main function of the C
 		compiler.new_file("{mainmodule.name}.main")
+		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 
 		# compile methods

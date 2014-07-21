@@ -105,6 +105,7 @@ redef class ModelBuilder
 
 		# The main function of the C
 		compiler.new_file("{mainmodule.name}.main")
+		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 
 		# compile methods
@@ -870,9 +871,17 @@ class SeparateCompiler
 
 	redef fun compile_nitni_structs
 	do
-		self.header.add_decl("struct nitni_instance \{struct instance *value;\};")
+		self.header.add_decl """
+struct nitni_instance \{
+	struct nitni_instance *next,
+		*prev; /* adjacent global references in global list */
+	int count; /* number of time this global reference has been marked */
+	struct instance *value;
+\};
+"""
+		super
 	end
-	
+
 	redef fun finalize_ffi_for_module(mmodule)
 	do
 		var old_module = self.mainmodule
