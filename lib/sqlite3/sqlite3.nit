@@ -228,7 +228,7 @@ class StatementEntry
 
 		var native_string = statement.native_statement.column_text(index)
 		if native_string.address_is_null then return ""
-		return native_string.to_s
+		return native_string.to_s_with_copy
 	end
 
 	# Get this entry as `Blob`
