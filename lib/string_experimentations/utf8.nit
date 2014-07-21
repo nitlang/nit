@@ -105,11 +105,11 @@ extern class UnicodeChar `{ UTF8Char* `}
 	fun to_upper: UnicodeChar import UnicodeChar.code_point `{
 		int cp = UnicodeChar_code_point(recv);
 		if(cp < 97 || cp > 122){ return recv; }
-		char* ns = nit_alloc(2);
+		char* ns = malloc(2);
 		ns[1] = '\0';
 		char c = recv->ns[recv->pos];
 		ns[0] = c - 32;
-		UTF8Char* ret = nit_alloc(sizeof(UTF8Char));
+		UTF8Char* ret = malloc(sizeof(UTF8Char));
 		ret->ns = ns;
 		ret->pos = 0;
 		return ret;
@@ -122,11 +122,11 @@ extern class UnicodeChar `{ UTF8Char* `}
 	fun to_lower: UnicodeChar import UnicodeChar.code_point `{
 		int cp = UnicodeChar_code_point(recv);
 		if(cp < 65 || cp > 90){ return recv; }
-		char* ns = nit_alloc(2);
+		char* ns = malloc(2);
 		ns[1] = '\0';
 		char c = recv->ns[recv->pos];
 		ns[0] = c + 32;
-		UTF8Char* ret = nit_alloc(sizeof(UTF8Char));
+		UTF8Char* ret = malloc(sizeof(UTF8Char));
 		ret->ns = ns;
 		ret->pos = 0;
 		return ret;
@@ -278,6 +278,50 @@ redef class FlatString
 
 		return new FlatString.with_infos_index(target_string, my_real_fin_len, 0, my_real_fin_len -1, new_index, finlen)
 
+	end
+
+	redef fun to_upper
+	do
+		var outstr = calloc_string(self.bytelen + 1)
+
+		var out_index = 0
+		var index = self.index
+		var ipos = 0
+		var max = length
+		var items = self.items
+
+		while ipos < max do
+			var u = index[ipos].to_upper
+			u.ns.copy_to(outstr, u.len, u.pos, out_index)
+			out_index += u.len
+			ipos += 1
+		end
+
+		outstr[self.bytelen] = '\0'
+
+		return outstr.to_s_with_length(self.bytelen)
+	end
+
+	redef fun to_lower
+	do
+		var outstr = calloc_string(self.bytelen + 1)
+
+		var out_index = 0
+		var index = self.index
+		var ipos = 0
+		var max = length
+		var items = self.items
+
+		while ipos < max do
+			var u = index[ipos].to_lower
+			u.ns.copy_to(outstr, u.len, u.pos, out_index)
+			out_index += u.len
+			ipos += 1
+		end
+
+		outstr[self.bytelen] = '\0'
+
+		return outstr.to_s_with_length(self.bytelen)
 	end
 
 end
