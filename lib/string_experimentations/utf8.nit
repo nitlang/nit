@@ -159,6 +159,16 @@ redef class FlatString
 		self.bytelen = bytelen
 	end
 
+	redef fun to_cstring
+	do
+		if real_items != null then return real_items.as(not null)
+		var new_items = calloc_string(bytelen + 1)
+		self.items.copy_to(new_items, bytelen, index[index_from].pos, 0)
+		new_items[bytelen] = '\0'
+		self.real_items = new_items
+		return new_items
+	end
+
 	redef fun substring(from, count)
 	do
 		assert count >= 0
