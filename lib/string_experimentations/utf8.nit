@@ -126,6 +126,38 @@ redef class FlatString
 		self.bytelen = bytelen
 	end
 
+	redef fun *(i)
+	do
+		assert i >= 0
+
+		var mylen = self.bytelen
+		var finlen = mylen * i
+
+		var my_items = self.items
+
+		var my_real_len = length
+		var my_real_fin_len = my_real_len * i
+
+		var target_string = calloc_string((finlen) + 1)
+
+		var my_index = index
+		var new_index = new StringIndex(my_real_fin_len)
+
+		target_string[finlen] = '\0'
+
+		var current_last = 0
+		var curr_index = 0
+
+		for iteration in [1 .. i] do
+			my_items.copy_to(target_string, mylen, index_from, current_last)
+			my_index.copy_to(new_index, length, 0, curr_index)
+			current_last += mylen
+		end
+
+		return new FlatString.with_infos_index(target_string, my_real_fin_len, 0, my_real_fin_len -1, new_index, finlen)
+
+	end
+
 end
 
 redef class NativeString
