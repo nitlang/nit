@@ -2081,7 +2081,7 @@ redef class AClassdef
 			var i = 1
 			# Collect undefined attributes
 			for npropdef in self.n_propdefs do
-				if npropdef isa AAttrPropdef and npropdef.n_expr == null then
+				if npropdef isa AAttrPropdef and npropdef.n_expr == null and not npropdef.noinit then
 					v.write_attribute(npropdef.mpropdef.mproperty, recv, arguments[i])
 					i += 1
 				end
