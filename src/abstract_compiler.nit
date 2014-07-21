@@ -2121,11 +2121,15 @@ end
 redef class AAttrPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		if arguments.length == 1 then
+		if mpropdef == mreadpropdef then
+			assert arguments.length == 1
 			var res = v.read_attribute(self.mpropdef.mproperty, arguments.first)
 			v.assign(v.frame.returnvar.as(not null), res)
-		else
+		else if mpropdef == mwritepropdef then
+			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
+		else
+			abort
 		end
 	end
 
