@@ -33,8 +33,8 @@ end
 
 class Gen3[H: Int]
 	super Gen1[H, Char]
-   redef var e: H redef writable
-   redef var f_: Char redef writable = 'N'
+   redef var e: H is redef writable
+   redef var f_: Char = 'N' is redef writable
    redef fun f: Char do return f_ end
    redef fun f=(x: Char) do f_ = x end
 

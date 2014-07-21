@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: F
 	type F: E
-	var e: nullable E writable = null
+	var e: nullable E = null is writable
 	init do end
 end
 

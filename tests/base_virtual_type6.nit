@@ -20,9 +20,9 @@ class G[E]
 	type F: E
 	type F2: F
 
-	var e: E writable
-	var f: F writable
-	var f2: F2 writable
+	var e: E is writable
+	var f: F is writable
+	var f2: F2 is writable
 
 	init(e: E, f: F, f2: F2)
 	do

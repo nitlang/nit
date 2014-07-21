@@ -24,8 +24,8 @@ end
 class B
 	super A
 	redef var foo: Int = 20
-	var bar: Int redef writable = 30
-	redef var baz: Int redef writable = 40
+	var bar: Int = 30 is redef writable
+	redef var baz: Int = 40 is redef writable
 end
 
 class C

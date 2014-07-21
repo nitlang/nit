@@ -18,24 +18,24 @@ class A
 	protected fun proA(a: A) do end
 	private fun priA(a: A) do end
 
-	var vpubA: nullable A writable
-	protected var vproA: nullable A protected writable
+	var vpubA: nullable A is writable
+	protected var vproA: nullable A is protected writable
 	private var vpriA: nullable A
 
-	var vpubA2 writable = new A
-	protected var vproA2 protected writable = new A
+	var vpubA2 = new A is writable
+	protected var vproA2 = new A is protected writable
 	private var vpriA2 = new A
 
 	#alt1#fun pubB(a: B) do end
 	#alt2#protected fun proB(a: B) do end
 	private fun priB(a: B) do end
 
-	#alt3#var vpubB: nullable B writable
-	#alt4#protected var vproB: nullable B protected writable
+	#alt3#var vpubB: nullable B is writable
+	#alt4#protected var vproB: nullable B is protected writable
 	private var vpriB: nullable B
 
-	#alt5#var vpubB2 writable = new B
-	#alt6#protected var vproB2 protected writable = new B
+	#alt5#var vpubB2 = new B is writable
+	#alt6#protected var vproB2 = new B is protected writable
 	private var vpriB2 = new B
 
 	init do end
@@ -46,24 +46,24 @@ private class B
 	#alt7#protected fun proA(a: A) do end
 	private fun priA(a: A) do end
 
-	var vpubA: nullable A writable
-	#alt7#protected var vproA: nullable A protected writable
+	var vpubA: nullable A is writable
+	#alt7#protected var vproA: nullable A is protected writable
 	private var vpriA: nullable A
 
-	var vpubA2 writable = new A
-	#alt7#protected var vproA2 protected writable = new A
+	var vpubA2 = new A is writable
+	#alt7#protected var vproA2 = new A is protected writable
 	private var vpriA2 = new A
 
 	fun pubB(a: B) do end
 	#alt7#protected fun proB(a: B) do end
 	private fun priB(a: B) do end
 
-	var vpubB: nullable B writable
-	#alt7#protected var vproB: nullable B protected writable
+	var vpubB: nullable B is writable
+	#alt7#protected var vproB: nullable B is protected writable
 	private var vpriB: nullable B
 
-	var vpubB2 writable = new B
-	#alt7#protected var vproB2 protected writable = new B
+	var vpubB2 = new B is writable
+	#alt7#protected var vproB2 = new B is protected writable
 	private var vpriB2 = new B
 
 	init do end
