@@ -1004,16 +1004,9 @@ redef class AAttrPropdef
 	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
-		assert recv isa MutableInstance
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var f = new Frame(self, self.mpropdef.as(not null), [recv])
-			v.frames.unshift(f)
-			var val = v.expr(nexpr)
-			assert val != null
-			v.frames.shift
-			assert not v.is_escaping
-			v.write_attribute(self.mpropdef.mproperty, recv, val)
+			evaluate_expr(v, recv)
 			return
 		end
 		var mtype = self.mpropdef.static_mtype.as(not null)
@@ -1021,6 +1014,21 @@ redef class AAttrPropdef
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
 		end
+	end
+
+	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance): Instance
+	do
+		assert recv isa MutableInstance
+		var nexpr = self.n_expr
+		assert nexpr != null
+		var f = new Frame(self, self.mpropdef.as(not null), [recv])
+		v.frames.unshift(f)
+		var val = v.expr(nexpr)
+		assert val != null
+		v.frames.shift
+		assert not v.is_escaping
+		v.write_attribute(self.mpropdef.mproperty, recv, val)
+		return val
 	end
 end
 
