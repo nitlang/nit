@@ -98,6 +98,40 @@ extern class UnicodeChar `{ UTF8Char* `}
 		}
 	`}
 
+	# Returns an upper-case version of self
+	#
+	# NOTE : Works only on ASCII chars
+	# TODO : Support unicode for to_upper
+	fun to_upper: UnicodeChar import UnicodeChar.code_point `{
+		int cp = UnicodeChar_code_point(recv);
+		if(cp < 97 || cp > 122){ return recv; }
+		char* ns = nit_alloc(2);
+		ns[1] = '\0';
+		char c = recv->ns[recv->pos];
+		ns[0] = c - 32;
+		UTF8Char* ret = nit_alloc(sizeof(UTF8Char));
+		ret->ns = ns;
+		ret->pos = 0;
+		return ret;
+	`}
+
+	# Returns an lower-case version of self
+	#
+	# NOTE : Works only on ASCII chars
+	# TODO : Support unicode for to_upper
+	fun to_lower: UnicodeChar import UnicodeChar.code_point `{
+		int cp = UnicodeChar_code_point(recv);
+		if(cp < 65 || cp > 90){ return recv; }
+		char* ns = nit_alloc(2);
+		ns[1] = '\0';
+		char c = recv->ns[recv->pos];
+		ns[0] = c + 32;
+		UTF8Char* ret = nit_alloc(sizeof(UTF8Char));
+		ret->ns = ns;
+		ret->pos = 0;
+		return ret;
+	`}
+
 	redef fun ==(o)
 	do
 		if o isa Char then
