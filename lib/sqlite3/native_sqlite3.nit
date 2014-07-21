@@ -16,11 +16,16 @@
 # limitations under the License.
 
 # Low-level Sqlite3 features
-module sqlite3 is pkgconfig("sqlite3")
+module native_sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
 	#include <sqlite3.h>
 `}
+
+redef class Sys
+	# Last error raised when calling `Sqlite3::open`
+	var sqlite_open_error: nullable Sqlite3Code = null
+end
 
 extern class Sqlite3Code `{int`}
 	new ok `{ return SQLITE_OK; `} #         0   /* Successful result */
@@ -73,7 +78,7 @@ extern class Sqlite3Code `{int`}
 end
 
 # A prepared statement
-extern class Statement `{sqlite3_stmt*`}
+extern class NativeStatement `{sqlite3_stmt*`}
 
 	# Evaluate the statement
 	fun step: Sqlite3Code `{
@@ -89,6 +94,7 @@ extern class Statement `{sqlite3_stmt*`}
 		return NativeString_to_s(ret);
 	`}
 
+	# Number of bytes in the blob or string at row `i`
 	fun column_bytes(i: Int) : Int `{
 		return sqlite3_column_bytes(recv, i);
 	`}
@@ -101,15 +107,12 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_column_int(recv, i);
 	`}
 
-	fun column_text(i: Int) : String import NativeString.to_s `{
-		char * ret = (char *) sqlite3_column_text(recv, i);
-		if( ret == NULL ){
-			ret = "";
-		}
-		return NativeString_to_s(ret);
+	fun column_text(i: Int): NativeString `{
+		return (char *)sqlite3_column_text(recv, i);
 	`}
 
-	fun column_type(i: Int) : Int `{
+	# Type of the entry at row `i`
+	fun column_type(i: Int): DataType `{
 		return sqlite3_column_type(recv, i);
 	`}
 
@@ -127,14 +130,20 @@ extern class Statement `{sqlite3_stmt*`}
 end
 
 # A database connection
-extern class Sqlite3 `{sqlite3 *`}
+extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: String) import String.to_cstring `{
+	new open(filename: String) import String.to_cstring, set_sys_sqlite_open_error `{
 		sqlite3 *self = NULL;
-		sqlite3_open(String_to_cstring(filename), &self);
+		int err = sqlite3_open(String_to_cstring(filename), &self);
+		NativeSqlite3_set_sys_sqlite_open_error(self, (void*)(long)err);
+		// The previous cast is a hack, using non pointers in extern classes is not
+		// yet in the spec of the FFI.
 		return self;
 	`}
+
+	# Utility method to set `Sys.sqlite_open_error`
+	private fun set_sys_sqlite_open_error(err: Sqlite3Code) do sys.sqlite_open_error = err
 
 	# Has this DB been correctly opened?
 	#
@@ -152,13 +161,13 @@ extern class Sqlite3 `{sqlite3 *`}
 	`}
 
 	# Prepare a SQL statement
-	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement.as nullable `{
+	fun prepare(sql: String): nullable NativeStatement import String.to_cstring, NativeStatement.as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)
-			return Statement_as_nullable(stmt);
+			return NativeStatement_as_nullable(stmt);
 		else
-			return null_Statement();
+			return null_NativeStatement();
 	`}
 
 	fun last_insert_rowid: Int `{
@@ -168,4 +177,15 @@ extern class Sqlite3 `{sqlite3 *`}
 	fun error: Sqlite3Code `{
 		return sqlite3_errcode(recv);
 	`}
+end
+
+# Sqlite data types
+extern class DataType `{ int `}
+	fun is_integer: Bool `{ return recv == SQLITE_INTEGER; `}
+	fun is_float: Bool `{ return recv == SQLITE_FLOAT; `}
+	fun is_blob: Bool `{ return recv == SQLITE_BLOB; `}
+	fun is_null: Bool `{ return recv == SQLITE_NULL; `}
+	fun is_text: Bool `{ return recv == SQLITE_TEXT; `}
+
+	fun to_i: Int `{ return recv; `}
 end
