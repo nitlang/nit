@@ -26,7 +26,6 @@ redef class ToolContext
 	var serialization_phase: Phase = new SerializationPhase(self, null)
 end
 
-# TODO automaticaly add Serializable as a super class
 # TODO Sequences
 # TODO add annotations on attributes (volatile, sensitive or do_not_serialize?)
 private class SerializationPhase
@@ -40,6 +39,11 @@ private class SerializationPhase
 			toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be automatically serialized.")
 			return
 		end
+
+		# Add `super Serializable`
+		var sc = toolcontext.parse_superclass("Serializable")
+		sc.location = nat.location
+		nclassdef.n_superclasses.add sc
 
 		generate_serialization_method(nclassdef)
 
