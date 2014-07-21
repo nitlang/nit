@@ -18,6 +18,7 @@
 module modelize_property
 
 import modelize_class
+import annotation
 
 redef class ToolContext
 	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])
@@ -704,6 +705,15 @@ redef class AAttrPropdef
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
 			mreadpropdef.mdoc = mpropdef.mdoc
+
+			var atreadonly = self.get_single_annotation("readonly", modelbuilder)
+			if atreadonly != null then
+				if n_expr == null then
+					modelbuilder.error(atreadonly, "Error: a readonly attribute needs a value")
+				end
+				# No setter, so just leave
+				return
+			end
 
 			var writename = name + "="
 			var nwritable = self.n_writable
