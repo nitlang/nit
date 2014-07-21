@@ -16,10 +16,9 @@
 
 NITCOPT=
 
-all: tools doc/stdlib/index.html
+all: tools
 
 docs: doc/stdlib/index.html doc/nitc/index.html
-	#cd doc; make
 
 tools:
 	cd src; make
