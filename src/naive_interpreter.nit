@@ -991,7 +991,8 @@ redef class AAttrPropdef
 		var attr = self.mpropdef.mproperty
 		if mpropdef == mreadpropdef then
 			assert args.length == 1
-			return v.read_attribute(attr, recv)
+			if not is_lazy or v.isset_attribute(attr, recv) then return v.read_attribute(attr, recv)
+			return evaluate_expr(v, recv)
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			v.write_attribute(attr, recv, args[1])
@@ -1004,6 +1005,7 @@ redef class AAttrPropdef
 	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
+		if is_lazy then return
 		var nexpr = self.n_expr
 		if nexpr != null then
 			evaluate_expr(v, recv)
