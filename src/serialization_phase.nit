@@ -139,7 +139,7 @@ private class SerializationPhase
 
 		for nclassdef in nclassdefs do
 			var name = nclassdef.n_id.text
-			if not name.chars.has('[') then # FIXME this is a temporary hack
+			if nclassdef.n_formaldefs.is_empty then
 				code.add "		if name == \"{name}\" then return new {name}.from_deserializer(self)"
 			end
 		end
