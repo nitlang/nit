@@ -21,6 +21,7 @@ module cached
 import modelize_property
 import parser_util
 import simple_misc_analysis
+private import annotation
 
 redef class ToolContext
 	var cached_phase: Phase = new CachedPhase(self, [modelize_property_phase])
@@ -41,7 +42,7 @@ private class CachedPhase
 	redef fun process_annotated_node(npropdef, nat)
 	do
 		# Skip if we are not interested
-		if nat.n_atid.n_id.text != "cached" then return
+		if nat.name != "cached" then return
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder

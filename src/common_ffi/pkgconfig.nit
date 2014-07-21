@@ -19,9 +19,10 @@
 module pkgconfig
 
 import c
+private import annotation
 
 redef class ToolContext
-	var pkgconfig_phase: Phase = new PkgconfigPhase(self, null)
+	var pkgconfig_phase: Phase = new PkgconfigPhase(self, [literal_phase])
 end
 
 # Detects the `pkgconfig` annotation on the module declaration only.
@@ -31,7 +32,7 @@ class PkgconfigPhase
 	redef fun process_annotated_node(nmoduledecl, nat)
 	do
 		# Skip if we are not interested
-		if nat.n_atid.n_id.text != "pkgconfig" then return
+		if nat.name != "pkgconfig" then return
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
@@ -49,19 +50,12 @@ class PkgconfigPhase
 
 		var pkgs = new Array[String]
 		for arg in args do
-			if not arg isa AExprAtArg then
+			var pkg = arg.as_string
+			if pkg == null then
 				modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects its arguments to be the name of the package as String literals.")
 				return
 			end
 
-			var expr = arg.n_expr
-			if not expr isa AStringFormExpr then
-				modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects its arguments to be the name of the package as String literals.")
-				return
-			end
-
-			var pkg = expr.collect_text
-			pkg = pkg.substring(1, pkg.length-2)
 			pkgs.add(pkg)
 		end
 
