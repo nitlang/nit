@@ -162,17 +162,19 @@ redef class AAttrPropdef
 		if n_id == null then return n_id2.text
 		return n_id.text
 	end
+end
 
+redef class AType
 	private fun type_name: String
 	do
-		var name = n_type.n_id.text
+		var name = n_id.text
 
-		if n_type.n_kwnullable != null then name = "nullable {name}"
+		if n_kwnullable != null then name = "nullable {name}"
 
-		var types = n_type.n_types
+		var types = n_types
 		if not types.is_empty then
 			var params = new Array[String]
-			for t in types do params.add(t.n_id.text)
+			for t in types do params.add(t.type_name)
 			return "{name}[{params.join(", ")}]"
 		else return name
 	end
