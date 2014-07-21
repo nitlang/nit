@@ -18,6 +18,7 @@
 module modelize_property
 
 import modelize_class
+import annotation
 
 redef class ToolContext
 	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])
@@ -118,8 +119,17 @@ redef class ModelBuilder
 		var mparameters = new Array[MParameter]
 		var anode: nullable ANode = null
 		for npropdef in nclassdef.n_propdefs do
-			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
+			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
+				var at = npropdef.get_single_annotation("noinit", self)
+				if at != null then
+					npropdef.noinit = true
+					if npropdef.n_expr != null then
+						self.error(at, "Error: `noinit` attributes cannot have an initial value")
+					end
+					continue # Skip noinit attributes
+				end
+				if npropdef.n_expr != null then continue
 				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
 				if ret_type == null then return
@@ -631,6 +641,9 @@ end
 
 redef class AAttrPropdef
 	redef type MPROPDEF: MAttributeDef
+
+	# Is the node tagged `noinit`?
+	var noinit = false
 
 	# The associated getter (read accessor) if any
 	var mreadpropdef: nullable MMethodDef writable
