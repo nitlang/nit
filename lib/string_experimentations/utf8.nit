@@ -159,6 +159,28 @@ redef class FlatString
 		self.bytelen = bytelen
 	end
 
+	redef fun substring(from, count)
+	do
+		assert count >= 0
+
+		if from < 0 then
+			count += from
+			if count < 0 then count = 0
+			from = 0
+		end
+
+		if count == 0 then return empty
+
+		var real_from = index_from + from
+		var real_to = real_from + count - 1
+
+		if real_to > index_to then real_to = index_to
+
+		var sub_bytelen = (index[real_to].pos - index[from].pos) + index[from].len
+
+		return new FlatString.with_infos_index(items, count, real_from, real_to, index, sub_bytelen)
+	end
+
 	redef fun reversed
 	do
 		var native = calloc_string(self.bytelen + 1)
