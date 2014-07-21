@@ -271,6 +271,33 @@ class Neo4jClient
 		return nodes
 	end
 
+	# Retrieve nodes belonging to all the specified `labels`.
+	#
+	#     var client = new Neo4jClient("http://localhost:7474")
+	#     #
+	#     var andres = new NeoNode
+	#     andres.labels.add_all(["Human", "Male"])
+	#     client.save_node(andres)
+	#     var kate = new NeoNode
+	#     kate.labels.add_all(["Human", "Female"])
+	#     client.save_node(kate)
+	#     #
+	#     var nodes = client.nodes_with_labels(["Human", "Male"])
+	#     assert nodes.has(andres)
+	#     assert not nodes.has(kate)
+	fun nodes_with_labels(labels: Array[String]): Array[NeoNode] do
+		assert not labels.is_empty
+		var res = cypher(new CypherQuery.from_string("MATCH (n:{labels.join(":")}) RETURN n"))
+		var nodes = new Array[NeoNode]
+		for json in res.as(JsonObject)["data"].as(JsonArray) do
+			var obj = json.as(JsonArray).first.as(JsonObject)
+			var node = load_node(obj["self"].to_s)
+			node.internal_properties = obj["data"].as(JsonObject)
+			nodes.add node
+		end
+		return nodes
+	end
+
 	# Perform a `CypherQuery`
 	# see: CypherQuery
 	fun cypher(query: CypherQuery): Jsonable do
