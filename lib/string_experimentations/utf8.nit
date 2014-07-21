@@ -98,6 +98,18 @@ extern class UnicodeChar `{ UTF8Char* `}
 		}
 	`}
 
+	redef fun ==(o)
+	do
+		if o isa Char then
+			if len != 1 then return false
+			if code_point == o.ascii then return true
+		else if o isa UnicodeChar then
+			if len != o.len then return false
+			if code_point == o.code_point then return true
+		end
+		return false
+	end
+
 	redef fun to_s import NativeString.to_s_with_length `{
 		int len = utf8___UnicodeChar_len___impl(recv);
 		char* r = malloc(len + 1);
