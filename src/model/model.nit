@@ -380,6 +380,8 @@ class MClass
 		end
 	end
 
+	redef fun model do return intro_mmodule.model
+
 	# All class definitions (introduction and refinements)
 	var mclassdefs: Array[MClassDef] = new Array[MClassDef]
 
@@ -496,6 +498,8 @@ class MClassDef
 	# Actually the name of the `mclass`
 	redef fun name do return mclass.name
 
+	redef fun model do return mmodule.model
+
 	# All declared super-types
 	# FIXME: quite ugly but not better idea yet
 	var supertypes: Array[MClassType] = new Array[MClassType]
@@ -588,8 +592,6 @@ abstract class MType
 	super MEntity
 
 	redef fun name do return to_s
-	# The model of the type
-	fun model: Model is abstract
 
 	# Return true if `self` is an subtype of `sup`.
 	# The typing is done using the standard typing policy of Nit.
@@ -1530,6 +1532,8 @@ class MParameter
 		var res = new MParameter(self.name, newtype, self.is_vararg)
 		return res
 	end
+
+	redef fun model do return mtype.model
 end
 
 # A service (global property) that generalize method, attribute, etc.
@@ -1589,6 +1593,8 @@ abstract class MProperty
 	# associated to self. If self is just created without having any
 	# associated definition, this method will abort
 	fun intro: MPROPDEF do return mpropdefs.first
+
+	redef fun model do return intro.model
 
 	# Alias for `name`
 	redef fun to_s do return name
@@ -1843,6 +1849,8 @@ abstract class MPropDef
 
 	# Actually the name of the `mproperty`
 	redef fun name do return mproperty.name
+
+	redef fun model do return mclassdef.model
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"

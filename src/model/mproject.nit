@@ -27,7 +27,7 @@ class MProject
 	redef var name: String
 
 	# The model of the project
-	var model: Model
+	redef var model: Model
 
 	# The root of the group tree
 	var root: nullable MGroup writable = null
@@ -94,6 +94,8 @@ class MGroup
 			tree.add_edge(self, parent)
 		end
 	end
+
+	redef fun model do return mproject.model
 
 	redef fun parent_concern do
 		if not is_root then return parent

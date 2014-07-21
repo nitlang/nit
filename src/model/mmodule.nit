@@ -72,7 +72,7 @@ class MModule
 	super MConcern
 
 	# The model considered
-	var model: Model
+	redef var model: Model
 
 	# placebo for old module nesting hierarchy
 	# return null if self is not nested (ie. is a top-level module)
