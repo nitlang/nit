@@ -159,6 +159,29 @@ redef class FlatString
 		self.bytelen = bytelen
 	end
 
+	redef fun reversed
+	do
+		var native = calloc_string(self.bytelen + 1)
+		var length = self.length
+		var index = self.index
+		var pos = 0
+		var i = 0
+		var ipos = bytelen
+		var new_index = new StringIndex(length)
+		var pos_index = length
+		while i < length do
+			var uchar = index[i]
+			var uchar_len = uchar.len
+			ipos -= uchar_len
+			new_index[pos_index] = new UnicodeChar(ipos, native)
+			pos_index -= 1
+			items.copy_to(native, uchar_len, pos, ipos)
+			pos += uchar_len
+			i += 1
+		end
+		return new FlatString.with_infos_index(native, length, 0, length-1, new_index, bytelen)
+	end
+
 	redef fun *(i)
 	do
 		assert i >= 0
