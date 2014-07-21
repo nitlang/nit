@@ -77,6 +77,27 @@ extern class UnicodeChar `{ UTF8Char* `}
 		return recv->ns;
 	`}
 
+	# Returns the Unicode code point representing the character
+	#
+	# Note : A unicode character might not be a visible glyph, but it will be used to determine canonical equivalence
+	fun code_point: Int import UnicodeChar.len `{
+		switch(UnicodeChar_len(recv)){
+			case 1:
+				return (long)(0x7F & (unsigned char)recv->ns[recv->pos]);
+			case 2:
+				return 0 | ((0x1F & (unsigned char)recv->ns[recv->pos]) << 6) | (0x3F & (unsigned char)recv->ns[recv->pos+1]);
+			case 3:
+				return 0 | ((0x0F & (unsigned char)recv->ns[recv->pos]) << 12) |
+				((0x3F & (unsigned char)recv->ns[recv->pos+1]) << 6) |
+				(0x3F & (unsigned char)recv->ns[recv->pos+2]);
+			case 4:
+				return 0 | ((0x07 & (unsigned char)recv->ns[recv->pos]) << 18) |
+				((0x3F & (unsigned char)recv->ns[recv->pos+1]) << 12) |
+				((0x3F & (unsigned char)recv->ns[recv->pos+2]) << 6) |
+				(0x3F & (unsigned char)recv->ns[recv->pos+3]);
+		}
+	`}
+
 	redef fun to_s import NativeString.to_s_with_length `{
 		int len = utf8___UnicodeChar_len___impl(recv);
 		char* r = malloc(len + 1);
