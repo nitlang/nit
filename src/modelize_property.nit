@@ -709,6 +709,11 @@ redef class AAttrPropdef
 			var writename = name + "="
 			var nwritable = self.n_writable
 			var atwritable = self.get_single_annotation("writable", modelbuilder)
+			if atwritable != null then
+				if not atwritable.n_args.is_empty then
+					writename = atwritable.arg_as_id(modelbuilder) or else writename
+				end
+			end
 			var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
 			var nwkwredef: nullable Token = null
 			if nwritable != null then nwkwredef = nwritable.n_kwredef
