@@ -645,10 +645,14 @@ redef class AAttrPropdef
 	# Is the node tagged `noinit`?
 	var noinit = false
 
+	# Is the node taggeg lazy?
+	var is_lazy = false
+
 	# The associated getter (read accessor) if any
 	var mreadpropdef: nullable MMethodDef writable
 	# The associated setter (write accessor) if any
 	var mwritepropdef: nullable MMethodDef writable
+
 	redef fun build_property(modelbuilder, mclassdef)
 	do
 		var mclass = mclassdef.mclass
@@ -717,6 +721,14 @@ redef class AAttrPropdef
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
 			mreadpropdef.mdoc = mpropdef.mdoc
+
+			var atlazy = self.get_single_annotation("lazy", modelbuilder)
+			if atlazy != null then
+				if n_expr == null then
+					modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
+				end
+				is_lazy = true
+			end
 
 			var atreadonly = self.get_single_annotation("readonly", modelbuilder)
 			if atreadonly != null then
