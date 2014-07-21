@@ -22,25 +22,48 @@ intrude import types
 class CodeGenerator
 
 	var file_out: OFStream
+	var java_class: JavaClass
 	fun code_warehouse: CodeWarehouse do return once new CodeWarehouse
 
-	init (file_name: String)
+	init (file_name: String, jclass: JavaClass) 
 	do
 		file_out = new OFStream.open(file_name)
+		self.java_class = jclass
+	end
+
+	fun generate
+	do
+		var jclass = self.java_class
+
+		file_out.write("import mnit_android\n")
+		gen_class_header(jclass.name)
+
+		# Attributes generation
+		for id, jtype in jclass.attributes do gen_attribute(id, jtype)
+
+		for id, methods_info in jclass.methods do
+			for method_info in methods_info do
+				var nid = id
+				if methods_info.length > 1 then nid += "{methods_info.index_of(method_info)}"
+				gen_method(id, nid, method_info.return_type, method_info.params)
+			end
+		end
+
+		file_out.write("\nend")
 	end
 
 	fun gen_class_header(full_class_name: Array[String])
 	do
-		file_out.write("extern class Native{full_class_name.last} in \"Java\" `\{ {full_class_name.join(".")} `\}")
+		file_out.write("extern class Native{full_class_name.last} in \"Java\" `\{ {full_class_name.join(".")} `\}\n")
 		file_out.write("\tsuper JavaObject\n\tredef type SELF: Native{full_class_name.last}\n\n")
 	end
 
-	fun gen_variable(jid: String, jtype: JavaType)
+	fun gen_attribute(jid: String, jtype: JavaType)
 	do
 		file_out.write("\tvar {jid.to_snake_case}: {jtype.to_nit_type}\n")
 	end
 	
-	fun gen_method(jparam_list: Array[JavaType], jreturn_type: JavaType, jmethod_id: String)
+	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType])
 	do
 		var java_params = ""
 		var nit_params  = ""
@@ -74,7 +97,7 @@ class CodeGenerator
 		end
 
 		# Method identifier
-		var method_id = jmethod_id.to_snake_case
+		var method_id = nmethod_id.to_snake_case
 		var nit_signature = new Array[String]
 
 		nit_signature.add "\tfun {method_id}"

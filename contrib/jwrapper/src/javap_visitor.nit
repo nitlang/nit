@@ -25,7 +25,7 @@ intrude import types
 class JavaVisitor
 	super Visitor
 
-	fun generator: CodeGenerator do return once new CodeGenerator("bundle2.nit")
+	var java_class = new JavaClass
 	var declaration_type: nullable String =  null
 	var declaration_element: nullable String = null
 	var full_class_name = new Array[String]
@@ -282,7 +282,7 @@ redef class Nclass_header
 		v.declaration_type = null
 		v.declaration_element = null
 
-		v.generator.gen_class_header(v.full_class_name)
+		v.java_class.name = v.full_class_name
 	end
 end
 
@@ -318,7 +318,7 @@ redef class Nmethod_declaration
 		super
 		v.declaration_type = null
 
-		v.generator.gen_method(v.method_params, v.method_return_type, v.method_id)
+		v.java_class.add_method(v.method_id, v.method_return_type, v.method_params)
 
 		v.method_params.clear
 		v.method_id = ""
@@ -344,7 +344,7 @@ redef class Nvariable_declaration
 		super
 		v.declaration_type = null
 
-		v.generator.gen_variable(v.variable_id, v.variable_type)
+		v.java_class.attributes[v.variable_id] = v.variable_type
 
 		v.variable_id = ""
 		v.variable_type = new JavaType
@@ -489,4 +489,5 @@ var tree = p.main
 var visitor = new JavaVisitor
 visitor.enter_visit(tree)
 
-print "end"
+var generator = new CodeGenerator("bundle.nit", visitor.java_class)
+generator.generate

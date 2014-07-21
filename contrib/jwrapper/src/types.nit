@@ -189,3 +189,28 @@ class NitType
 		return id
 	end
 end
+
+class JavaClass
+	var name = new Array[String]
+	var attributes = new HashMap[String, JavaType]
+	var methods = new HashMap[String, Array[JReturnAndParams]]
+
+	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
+	do
+		var ret_and_params = methods.get_or_default(id, new Array[JReturnAndParams])
+		
+		ret_and_params.add(new JReturnAndParams(return_type, new Array[JavaType].from(params)))
+		methods[id] = ret_and_params
+	end
+end
+
+class JReturnAndParams
+	var return_type: JavaType
+	var params: Array[JavaType]
+
+	init(return_type: JavaType, params: Array[JavaType])
+	do
+		self.return_type = return_type
+		self.params = params
+	end
+end
