@@ -17,12 +17,13 @@ import kernel
 interface Number
 	type OTHE: Number
 	type OTHE2: Int
+	type OTHE3: Object is fixed
 end
-
 redef class Int
 	super Number
 
 	redef type OTHE: Int
 	#alt1#redef type OTHE2: Number
+	#alt2#redef type OTHE3: Int
 end
 
