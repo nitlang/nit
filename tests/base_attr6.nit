@@ -37,7 +37,7 @@ class B
 		i.output
 		super(i+30)
 	end
-	redef var vaz: Int redef writable = 40
+	redef var vaz: Int = 40 is redef writable
 end
 
 var b = new B

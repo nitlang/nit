@@ -19,7 +19,7 @@ import base_virtual_type2
 
 class C
 	super A
-	var tab: nullable Array[E] writable
+	var tab: nullable Array[E] is writable
 	init do end
 end
 

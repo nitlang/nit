@@ -16,42 +16,44 @@ import kernel
 
 class A
 	fun foo: Int do return 1
-	fun bar=(i: Int) do i.output
+	fun set_bar(i: Int) do i.output
 	fun baz: Int do return 4
-	fun baz=(i: Int) do i.output
+	fun set_baz(i: Int) do i.output
+	fun zz do end
 end
 
 class B
 	super A
-	redef var foo: Int = 20
-	var bar: Int = 30 is redef writable
-	redef var baz: Int = 40 is redef writable
+	redef var foo: Int = 20 is writable(set_foo)
+	var bar: Int = 30 is redef writable(set_bar)
+	redef var baz: Int = 40 is writable(set_baz)
+	#alt2#var z: Int is writable(set_baz)
+	#alt3#var z: Int is writable(zz)
+	#alt4#var z: Int is redef writable(zz)
 end
 
 class C
 	super B
-	redef fun foo: Int do return 100
-	redef fun bar=(i: Int) do i.output
-	redef fun baz: Int do return 400
-	redef fun baz=(i: Int) do i.output
+	fun foo=(i: Int) do set_foo(i)
+	fun bar=(i: Int) do set_bar(i)
+	fun baz=(i: Int) do set_baz(i)
 end
 
 var a = new A
-#alt1#a.foo = 1
 a.foo.output
-a.bar = 2
-#alt2#a.bar.output
-a.baz = 3
+a.set_bar 2
+a.set_baz 3
 a.baz.output
 
 '\n'.output
 
 var b = new B
-b.foo = 10
+b.set_foo 10
+#alt1#b.foo = 10
 b.foo.output
-b.bar = 20
+b.set_bar 20
 b.bar.output
-b.baz = 30
+b.set_baz 30
 b.baz.output
 
 '\n'.output

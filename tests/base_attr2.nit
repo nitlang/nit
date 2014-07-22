@@ -19,17 +19,17 @@ class A
 	protected var a2: Object = self
 	private var a3: Object = self
 
-	var a4: Object writable = self
-	protected var a5: Object writable = self
-	private var a6: Object writable = self
+	var a4: Object = self is writable
+	protected var a5: Object = self is writable
+	private var a6: Object = self is writable
 
-	var a7: Object protected writable = self
-	protected var a8: Object protected writable = self
-	private var a9: Object protected writable = self
+	var a7: Object = self is protected writable
+	protected var a8: Object = self is protected writable
+	private var a9: Object = self is protected writable
 
-	var a10: Object private writable = self
-	protected var a11: Object private writable = self
-	private var a12: Object private writable = self
+	var a10: Object = self is private writable
+	protected var a11: Object = self is private writable
+	private var a12: Object = self is private writable
 
 	var cpt: Int = 0
 

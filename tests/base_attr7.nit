@@ -32,8 +32,8 @@ end
 class B
 	super A
 	#alt1#redef var foo: Bool = true
-	#alt2#var bar: Bool redef writable = true
-	#alt3#redef var baz: Bool redef writable = true
+	#alt2#var bar: Bool = true is redef writable
+	#alt3#redef var baz: Bool = true is redef writable
 end
 
 var b = new B

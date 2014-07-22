@@ -33,24 +33,24 @@ class B
 	super A
 	#alt1#var foo: Int = 10
 	#alt2#redef var foo: Int = 10
-	#alt3#var foo: Int writable = 10
-	#alt4#redef var foo: Int writable = 10
-	#alt5#var foo: Int redef writable = 10
-	#alt6#redef var foo: Int redef writable = 10
+	#alt3#var foo: Int = 10 is writable
+	#alt4#redef var foo: Int = 10 is writable
+	#alt5#var foo: Int = 10 is redef writable
+	#alt6#redef var foo: Int = 10 is redef writable
 	#alt7#redef var foo
 	#alt11#var bar: Int = 20
 	#alt12#redef var bar: Int = 20
-	#alt13#var bar: Int writable = 20
-	#alt14#redef var bar: Int writable = 20
-	#alt15#var bar: Int redef writable = 20
-	#alt16#redef var bar: Int redef writable = 20
+	#alt13#var bar: Int = 20 is writable
+	#alt14#redef var bar: Int = 20 is writable
+	#alt15#var bar: Int = 20 is redef writable
+	#alt16#redef var bar: Int = 20 is redef writable
 	#alt17#redef var bar
 	#alt21#var baz: Int = 30
 	#alt22#redef var baz: Int = 30
-	#alt23#var baz: Int writable = 30
-	#alt24#redef var baz: Int writable = 30
-	#alt25#var baz: Int redef writable = 30
-	#alt26#redef var baz: Int redef writable = 30
+	#alt23#var baz: Int = 30 is writable
+	#alt24#redef var baz: Int = 30 is writable
+	#alt25#var baz: Int = 30 is redef writable
+	#alt26#redef var baz: Int = 30 is redef writable
 	#alt27#redef var baz
 end
 

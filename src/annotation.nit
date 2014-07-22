@@ -84,6 +84,20 @@ redef class AAnnotation
 		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single Int as argument.")
 		return null
 	end
+
+	# Get the single argument of `self` as an identifier.
+	# Raise error and return null on any inconsistency.
+	fun arg_as_id(modelbuilder: ModelBuilder): nullable String
+	do
+		var args = n_args
+		if args.length == 1 then
+			var arg = args.first.as_id
+			if arg != null then return arg
+		end
+
+		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single identifier as argument.")
+		return null
+	end
 end
 
 redef class AAtArg
