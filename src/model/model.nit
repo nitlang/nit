@@ -216,6 +216,10 @@ redef class MModule
 
 	private var object_type_cache: nullable MClassType
 
+	# The type `Pointer`, super class to all extern classes
+	fun pointer_type: MClassType
+	is cached do return self.get_primitive_class("Pointer").mclass_type
+
 	# The primitive type `Bool`
 	fun bool_type: MClassType
 	do
