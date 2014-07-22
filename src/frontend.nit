@@ -37,7 +37,8 @@ redef class ToolContext
 		# Force easy warnings before intraproc-errors
 		phases.add_edge(scope_phase, simple_misc_analysis_phase)
 		# Code genrated by the serialization phase must be analyzed for literals
-		phases.add_edge(literal_phase, serialization_phase)
+		phases.add_edge(literal_phase, serialization_phase_pre_model)
+		phases.add_edge(modelize_class_phase, serialization_phase_pre_model)
 		return true
 	end
 end

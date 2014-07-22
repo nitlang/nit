@@ -380,7 +380,10 @@ redef class ModelBuilder
 				assert mtype isa MClassType
 				var sc = mtype.mclass
 				if not parents.has(sc) or sc == objectclass then
-					warning(ntype, "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+					# Skip the warning on generated code
+					if ntype.location.file != null and not ntype.location.file.filename.is_empty then
+						warning(ntype, "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+					end
 				else if not seen_parents.has_key(sc) then
 					seen_parents[sc] = ntype
 				else

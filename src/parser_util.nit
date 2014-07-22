@@ -83,6 +83,20 @@ redef class ToolContext
 		return nexpr
 	end
 
+	# Parse a super class declaration
+	# Fatal error if the `string` is not a syntactically correct super class declaration
+	fun parse_superclass(string: String): ASuperclass
+	do
+		var mod_string = "class Dummy\nsuper {string}\nend"
+		var nclassdef = parse_classdef(mod_string).as(AStdClassdef)
+		var nsuperclasses = nclassdef.n_superclasses
+		if nsuperclasses.length != 1 then
+			self.fatal_error(null, "Fatal Error: not a super class declaration")
+			abort
+		end
+		return nsuperclasses.first
+	end
+
 	# Try to parse the `string` as something
 	#
 	# Returns the first possible syntacticaly correct type among:

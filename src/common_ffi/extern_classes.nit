@@ -22,7 +22,8 @@ import ffi_base
 redef class ToolContext
 	var extern_classes_typing_phase_ast: Phase = new ExternClassesTypingPhaseAst(self, [ffi_language_assignation_phase])
 
-	var extern_classes_typing_phase_model: Phase = new ExternClassesTypingPhaseModel(self, [extern_classes_typing_phase_ast, modelize_class_phase])
+	var extern_classes_typing_phase_model: Phase = new ExternClassesTypingPhaseModel(self,
+		[extern_classes_typing_phase_ast, modelize_class_phase, modelize_property_phase])
 end
 
 # Assigns the `ftype` to class definitions, work on the AST only
