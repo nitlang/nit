@@ -17,7 +17,9 @@
 # Classic moles game
 #
 # This is a minimal practical example of the mnit framework.
-module moles
+module moles is
+	app_name("Crazy Groundhogs")
+end
 
 import mnit
 
