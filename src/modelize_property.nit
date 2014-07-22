@@ -648,6 +648,12 @@ redef class AAttrPropdef
 	# Is the node taggeg lazy?
 	var is_lazy = false
 
+	# The guard associated to a lasy attribute.
+	# Because some engines does not have a working `isset`,
+	# this additionnal attribute is used to guard the lazy initialization.
+	# TODO: to remove once isset is correctly implemented
+	var mlazypropdef: nullable MAttributeDef
+
 	# The associated getter (read accessor) if any
 	var mreadpropdef: nullable MMethodDef writable
 	# The associated setter (write accessor) if any
@@ -728,6 +734,9 @@ redef class AAttrPropdef
 					modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
 				end
 				is_lazy = true
+				var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
+				var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
+				self.mlazypropdef = mlazypropdef
 			end
 
 			var atreadonly = self.get_single_annotation("readonly", modelbuilder)
@@ -852,7 +861,7 @@ redef class AAttrPropdef
 			mreadpropdef.msignature = msignature
 		end
 
-		var msritepropdef = self.mwritepropdef
+		var mwritepropdef = self.mwritepropdef
 		if mwritepropdef != null then
 			var name: String
 			if n_id != null then
@@ -863,6 +872,11 @@ redef class AAttrPropdef
 			var mparameter = new MParameter(name, mtype, false)
 			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature
+		end
+
+		var mlazypropdef = self.mlazypropdef
+		if mlazypropdef != null then
+			mlazypropdef.static_mtype = modelbuilder.model.get_mclasses_by_name("Bool").first.mclass_type
 		end
 	end
 
