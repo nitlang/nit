@@ -27,6 +27,9 @@ end
 abstract class MEntity
 	# The short (unqualified) name of this model entity
 	fun name: String is abstract
+
+	# A Model Entity has a direct link to its model
+	fun model: Model is abstract
 end
 
 # Something that represents a concern
