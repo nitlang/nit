@@ -24,7 +24,7 @@ enum Bool
 end
 
 class A[X]
-	type T: Object
+	type T: nullable Object
 
 	fun foo(o: Object): Bool do
 		return o isa T
@@ -43,7 +43,7 @@ end
 
 class C[X, Y]
 	super B[X]
-	redef type T: Y
+	redef type T: X
 end
 
 var a = new A[Object]
@@ -57,7 +57,7 @@ assert not b.bar(new B[Object])
 assert b.bar(true)
 
 var c = new C[Object, B[Object]]
-assert not c.foo(new A[Object])
+assert c.foo(new A[Object])
 assert c.foo(new B[Object])
 assert c.foo(new C[Object, B[Object]])
 

@@ -15,12 +15,14 @@
 import kernel
 
 interface Number
-	type OTHER: Number
+	type OTHE: Number
+	type OTHE2: Int
 end
 
 redef class Int
 	super Number
 
-	redef type OTHER: Int
+	redef type OTHE: Int
+	#alt1#redef type OTHE2: Number
 end
 

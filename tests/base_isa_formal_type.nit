@@ -15,7 +15,7 @@
 import kernel
 
 class A[T]
-	type U: Object
+	type U: nullable Object
 	fun testT(o: Object): Bool do return o isa T
 	fun testU(o: Object): Bool do return o isa U
 

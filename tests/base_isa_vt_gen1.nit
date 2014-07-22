@@ -23,7 +23,7 @@ class Triple[X, Y, Z]
 end
 
 class A[T, U]
-	type V: Object
+	type V: nullable Object
 
 	fun foo: Triple[T, U, V] do
 		var triple = new Triple[T, U, V]
@@ -51,7 +51,7 @@ end
 
 
 var a = new A[String, Int]
-assert a.foo isa Triple[String, Int, Object]
+assert a.foo isa Triple[String, Int, nullable Object]
 
 var b = new B[String]
 assert b.foo isa Triple[String, String, String]

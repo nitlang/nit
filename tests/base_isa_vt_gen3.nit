@@ -17,7 +17,7 @@
 import base_minimal
 
 class A[X]
-	type T: Object
+	type T: nullable Object
 
 	fun foo(o: Object): Bool do
 		return o isa T
@@ -31,7 +31,7 @@ end
 
 class C[X]
 	super B[X]
-	redef type T: C[B[X]]
+	redef type T: C[X]
 end
 
 var a = new A[Object]
@@ -45,7 +45,7 @@ assert b.foo(new C[Object])
 var c = new C[Object]
 assert not c.foo(new A[Object])
 assert not c.foo(new B[Object])
-assert not c.foo(new C[Object])
+assert c.foo(new C[Object])
 assert c.foo(new C[B[Object]])
 assert c.foo(new C[B[Bool]])
 
