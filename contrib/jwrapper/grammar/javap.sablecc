@@ -1,0 +1,61 @@
+Grammar javap;
+
+Lexer
+
+identifier = ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9')*;
+blank = (' '|'\n'|'\t'|'\r')+;
+separator = ('.'|'/');
+
+Parser
+Ignored blank;
+
+multi_files = class_or_interface*;
+
+class_or_interface = class_declaration | interface_declaration;
+
+class_declaration = class_header '{' field_declaration* '}';
+
+class_header = modifier* 'class' full_class_name extends_declaration?
+			   implements_declaration? throws_declaration?;
+interface_declaration = modifier* 'interface' full_class_name extends_interface_declaration?
+						'{' field_declaration* '}';
+
+modifier = 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
+type = type_specifier '[]'*;
+type_specifier = 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double' | type_ref;
+
+type_ref = full_class_name | generic_identifier 'extends' full_class_name | '?';
+type_refs = {tail:} type_refs ',' type_ref | {head:} type_ref;
+
+generic_param = '<' generic_parameter_list '>';
+generic_parameter_list = {tail:} generic_parameter_list ',' parameter | {head:} parameter;
+generic_identifier = full_class_name | '?';
+
+full_class_name = full_class_name separator class_name | class_name;
+class_name = identifier generic_param?;
+
+interface_name = full_class_name;
+interface_list = {tail:} interface_list ',' interface_name | {head:} interface_name;
+
+parameter = type '...'?;
+parameter_list_comp = {tail:} parameter_list_comp ',' parameter | {head:} parameter;
+parameter_list = parameter_list_comp;
+
+exception = type;
+exception_list = exception_list ',' exception | exception;
+
+statement = variable_declaration | statement_block | ';';
+statement_block = '{' statement* '}';
+
+variable_id = identifier '[]'*;
+method_id = identifier;
+
+field_declaration = method_declaration | constructor_declaration | variable_declaration | static_declaration | ';';
+variable_declaration = modifier* type variable_id throws_declaration? ';';
+method_declaration = modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';';
+constructor_declaration = modifier* full_class_name '(' parameter_list? ')' throws_declaration? ';';
+implements_declaration = 'implements' interface_list*;
+extends_interface_declaration = 'extends' interface_list*;
+extends_declaration = 'extends' type;
+static_declaration = modifier* '{' '}' ';';
+throws_declaration = 'throws' exception_list?;
