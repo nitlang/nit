@@ -468,7 +468,7 @@ redef class MClassType
 			replace('/', ".").replace('$', ".").replace(' ', "").replace('\n',"")
 		if mclass.name == "Bool" then return "boolean"
 		if mclass.name == "Char" then return "char"
-		if mclass.name == "Int" then return "int"
+		if mclass.name == "Int" then return "long"
 		if mclass.name == "Float" then return "double"
 		return super
 	end
@@ -479,7 +479,7 @@ redef class MClassType
 		if ftype isa ForeignJavaType then return "jobject"
 		if mclass.name == "Bool" then return "jboolean"
 		if mclass.name == "Char" then return "jchar"
-		if mclass.name == "Int" then return "jint"
+		if mclass.name == "Int" then return "jlong"
 		if mclass.name == "Float" then return "jdouble"
 		return super
 	end
@@ -510,7 +510,7 @@ redef class MClassType
 		end
 		if mclass.name == "Bool" then return "Z"
 		if mclass.name == "Char" then return "C"
-		if mclass.name == "Int" then return "I"
+		if mclass.name == "Int" then return "J"
 		if mclass.name == "Float" then return "D"
 		return super
 	end
@@ -521,7 +521,7 @@ redef class MClassType
 		if ftype isa ForeignJavaType then return "Object"
 		if mclass.name == "Bool" then return "Boolean"
 		if mclass.name == "Char" then return "Char"
-		if mclass.name == "Int" then return "Int"
+		if mclass.name == "Int" then return "Long"
 		if mclass.name == "Float" then return "Double"
 		return super
 	end
