@@ -15,18 +15,22 @@
 # `nx` is a tool suite to manage code repository and documentation.
 module nx
 
-import base
+import config
 
 # Front controller for `nx` program.
 class NxApp
 	super Command
+
+	private var config_file = ".nx_config"
 
 	redef fun name do return "nx"
 	redef fun desc do return "Tool suite for documentation management."
 	redef fun usage do return "nx [OPTIONS]... <command>"
 
 	init standalone do
+		config = new ConfigTree(config_file)
 		controller = new Controller
+		controller.add_command(new ConfigCtrl(self))
 	end
 end
 
