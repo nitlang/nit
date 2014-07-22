@@ -246,6 +246,19 @@ class Neo4jClient
 	end
 
 	# Retrieve all nodes with specified `lbl`
+	#
+	#     var client = new Neo4jClient("http://localhost:7474")
+	#     #
+	#     var andres = new NeoNode
+	#     andres.labels.add_all(["Human", "Male"])
+	#     client.save_node(andres)
+	#     var kate = new NeoNode
+	#     kate.labels.add_all(["Human", "Female"])
+	#     client.save_node(kate)
+	#     #
+	#     var nodes = client.nodes_with_label("Human")
+	#     assert nodes.has(andres)
+	#     assert nodes.has(kate)
 	fun nodes_with_label(lbl: String): Array[NeoNode] do
 		var res = get("{base_url}/db/data/label/{lbl}/nodes")
 		var nodes = new Array[NeoNode]
