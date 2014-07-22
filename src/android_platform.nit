@@ -218,14 +218,17 @@ $(call import-module,android/native_app_glue)
 			res_dir = "res"
 		end
 		if res_dir.file_exists then
+			# copy the res folder to .nit_compile
 			res_dir = res_dir.realpath
 			var target_res_dir = "{android_project_root}"
-			if target_res_dir.file_exists then
-				# copy the res folder to .nit_compile
-				toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
-			end
+			toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
+		else
+			# Create our own custom `res/values/string.xml` with the App name
+"""<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">{{{app_name}}}</string>
+</resources>""".write_to_file "{dir}/res/values/strings.xml"
 		end
-
 	end
 
 	redef fun write_makefile(compiler, compile_dir, cfiles)
