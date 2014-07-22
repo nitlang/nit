@@ -1524,15 +1524,19 @@ redef class Int
 	end
 
 	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_int_to_s(len: Int): NativeString is extern "native_int_to_s"
+	private fun native_int_to_s: String import NativeString.to_s_with_length `{
+		int len = snprintf(NULL, 0, "%ld", recv);
+		char* str = malloc(len);
+		sprintf(str, "%ld", recv);
+		return NativeString_to_s_with_length(str, len);
+	`}
 
 	# return displayable int in base 10 and signed
 	#
 	#     assert 1.to_s            == "1"
 	#     assert (-123).to_s       == "-123"
 	redef fun to_s do
-		var len = digit_count(10)
-		return native_int_to_s(len).to_s_with_length(len)
+		return native_int_to_s
 	end
 
 	# return displayable int in hexadecimal
