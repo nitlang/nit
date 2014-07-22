@@ -16,6 +16,7 @@
 module nx
 
 import config
+import repo
 
 # Front controller for `nx` program.
 class NxApp
@@ -31,6 +32,7 @@ class NxApp
 		config = new ConfigTree(config_file)
 		controller = new Controller
 		controller.add_command(new ConfigCtrl(self))
+		controller.add_command(new RepoCtrl(self))
 	end
 end
 
