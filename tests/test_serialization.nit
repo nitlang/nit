@@ -20,15 +20,14 @@ import json_serialization
 # Simple class
 class A
 	auto_serializable
-	super Serializable
 
-	var b: Bool
+	var b = false
 	var c: Char
 	var f: Float
-	var i: Int
-	var s: String
+	var i = 123
+	var s = "asdf"
 	var n: nullable Int
-	var array: Array[nullable Object] = new Array[nullable Object].with_items(88, "hello", null)
+	var array = new Array[nullable Object].with_items(88, "hello", null)
 
 	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
 	do
@@ -64,10 +63,9 @@ end
 # Composed of an A and a B
 class C
 	auto_serializable
-	super Serializable
 
 	var a: A
-	var b: B
+	var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
 	var aa: A
 
 	init(a: A, b: B)
