@@ -19,6 +19,37 @@ import parser
 import modelbuilder
 import literal
 
+redef class Prod
+	super ANode
+
+	# Try to get its single annotation with a given name
+	# If there is no such an annotation, null is returned.
+	# If there is more than one annotation, a error message is printed and the first annotation is returned
+	fun get_single_annotation(name: String, modelbuilder: ModelBuilder): nullable AAnnotation
+	do
+		var res = get_annotations(name)
+		if res.is_empty then return null
+		if res.length > 1 then
+			modelbuilder.error(res[1], "Error: multiple annotation `{name}`. A previous one is defined line {res[0].location.line_start}")
+		end
+		return res.first
+	end
+
+	# Return all its annotations of a given name in the order of their declaration
+	# Retun an empty array if no such an annotation.
+	fun get_annotations(name: String): Array[AAnnotation]
+	do
+		var res = new Array[AAnnotation]
+		var nas = n_annotations
+		if nas == null then return res
+		for na in nas.n_items do
+			if na.name != name then continue
+			res.add(na)
+		end
+		return res
+	end
+end
+
 redef class AAnnotation
 	# The name of the annotation
 	fun name: String
