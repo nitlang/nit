@@ -18,6 +18,7 @@ module nx
 import config
 import repo
 import ls
+import push
 
 # Front controller for `nx` program.
 class NxApp
@@ -35,6 +36,7 @@ class NxApp
 		controller.add_command(new ConfigCtrl(self))
 		controller.add_command(new RepoCtrl(self))
 		controller.add_command(new ListCmd(self))
+		controller.add_command(new NeoCtrl(self))
 	end
 end
 
