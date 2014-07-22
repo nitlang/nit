@@ -6,7 +6,7 @@ linux:
 
 android:
 	mkdir -p bin
-	../../bin/nitg -o bin/simple.apk src/simple_android.nit
+	../../bin/nitg -o bin/simple.apk src/complete_simple_android.nit
 
 clean:
 	rm -rf bin
