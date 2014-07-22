@@ -22,7 +22,7 @@ import metrics
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
-toolcontext.tooldescription = "Usage: nitmetrics [OPTION]... <file.nit>...\mComputes various metrics on Nit programs."
+toolcontext.tooldescription = "Usage: nitmetrics [OPTION]... <file.nit>...\nComputes various metrics on Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
