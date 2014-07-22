@@ -85,7 +85,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun put_integer_array_list(key: JavaString, value: Array[Int]) 
 	  import Array[Int].length, Array[Int].[] in "Java" `{
 		ArrayList<Integer> java_array = 
-			new ArrayList<Integer>(Array_of_Int_length(value));
+			new ArrayList<Integer>((int) Array_of_Int_length(value));
 		
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add((int) Array_of_Int__index(value, i));
@@ -94,7 +94,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_string_array_list(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
-		ArrayList<String> java_array = new ArrayList<String>(Array_of_JavaString_length(value));
+		ArrayList<String> java_array = new ArrayList<String>((int)Array_of_JavaString_length(value));
 		
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add(Array_of_JavaString__index(value, i));
@@ -104,7 +104,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun put_char_sequence_array_list(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
 		ArrayList<CharSequence> java_array = 
-		  new ArrayList<CharSequence>(Array_of_JavaString_length(value));
+		  new ArrayList<CharSequence>((int)Array_of_JavaString_length(value));
 		
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add(Array_of_JavaString__index(value, i));
@@ -113,7 +113,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_boolean_array(key: JavaString, value: Array[Bool])
 	  import Array[Bool].length, Array[Bool].[] in "Java" `{
-		boolean[] java_array = new boolean[Array_of_Bool_length(value)];
+		boolean[] java_array = new boolean[(int)Array_of_Bool_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Bool__index(value, i);
@@ -122,7 +122,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_byte_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
-		byte[] java_array = new byte[Array_of_Int_length(value)];
+		byte[] java_array = new byte[(int)Array_of_Int_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (byte) Array_of_Int__index(value, i);
@@ -131,7 +131,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_short_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
-		short[] java_array = new short[Array_of_Int_length(value)];
+		short[] java_array = new short[(int)Array_of_Int_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (short) Array_of_Int__index(value, i);
@@ -140,7 +140,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_char_array(key: JavaString, value: Array[Char])
 	  import Array[Char].length, Array[Char].[] in "Java" `{
-		char[] java_array = new char[Array_of_Char_length(value)];
+		char[] java_array = new char[(int)Array_of_Char_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Char__index(value, i);
@@ -149,7 +149,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_int_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
-		int[] java_array = new int[Array_of_Int_length(value)];
+		int[] java_array = new int[(int)Array_of_Int_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (int) Array_of_Int__index(value, i);
@@ -158,7 +158,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_long_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
-		long[] java_array = new long[Array_of_Int_length(value)];
+		long[] java_array = new long[(int)Array_of_Int_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Int__index(value, i);
@@ -167,7 +167,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_float_array(key: JavaString, value: Array[Float])
 	  import Array[Float].length, Array[Float].[] in "Java" `{
-		float[] java_array = new float[Array_of_Float_length(value)];
+		float[] java_array = new float[(int)Array_of_Float_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (float) Array_of_Float__index(value, i);
@@ -176,7 +176,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_double_array(key: JavaString, value: Array[Float])
 	  import Array[Float].length, Array[Float].[] in "Java" `{
-		double[] java_array = new double[Array_of_Float_length(value)];
+		double[] java_array = new double[(int)Array_of_Float_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Float__index(value, i);
@@ -185,7 +185,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_string_array(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
-		String[] java_array = new String[Array_of_JavaString_length(value)];
+		String[] java_array = new String[(int)Array_of_JavaString_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
@@ -194,7 +194,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun put_char_sequence_array(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
-		CharSequence[] java_array = new CharSequence[Array_of_JavaString_length(value)];
+		CharSequence[] java_array = new CharSequence[(int)Array_of_JavaString_length(value)];
 		
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
@@ -222,13 +222,11 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun get_int(key: JavaString): Int in "Java" `{ return recv.getInt(key); `}
 	fun get_int_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
-		return (int) recv.getInt(key, (int) def_value);
+		return recv.getInt(key, (int) def_value);
 	`}
-	# FIXME: Get rid of the int cast as soon as the ffi is fixed
-	fun get_long(key: JavaString): Int in "Java" `{ return (int) recv.getLong(key); `}
-	# FIXME: Get rid of the int cast as soon as the ffi is fixed
+	fun get_long(key: JavaString): Int in "Java" `{ return recv.getLong(key); `}
 	fun get_long_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
-		return (int) recv.getLong(key); 
+		return recv.getLong(key); 
 	`}
 	fun get_float(key: JavaString): Float in "Java" `{
 		return (float) recv.getFloat(key); 
@@ -305,7 +303,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_Int_add(nit_array, (int) java_array[i]);
+			Array_of_Int_add(nit_array, java_array[i]);
 			
 		return nit_array;
 	`}
@@ -317,7 +315,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_Int_add(nit_array, (int) java_array[i]);
+			Array_of_Int_add(nit_array, java_array[i]);
 			
 		return nit_array;
 	`}
@@ -354,7 +352,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_Int_add(nit_array, (int) java_array[i]);
+			Array_of_Int_add(nit_array, java_array[i]);
 			
 		return nit_array;
 	`}
