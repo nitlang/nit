@@ -1,0 +1,21 @@
+`nx` is a tool suite to manage code repository and documentation.
+
+Configure the tool:
+
+	$ nx config set neo.url http://localhost:7474
+
+Add some repos:
+
+	$ nx repo add std lib/standard
+	$ nx repo add lib lib/
+	$ nx repo add nit src/
+
+ Push repo to neo:
+
+	$ nx start
+	$ nx neo push std
+
+Generate documentation from neo:
+
+	$ nx doc std -d std_doc/
+
