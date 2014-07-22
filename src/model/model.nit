@@ -1945,6 +1945,9 @@ class MVirtualTypeDef
 
 	# The bound of the virtual type
 	var bound: nullable MType writable = null
+
+	# Is the bound fixed?
+	var is_fixed writable = false
 end
 
 # A kind of class.

@@ -975,6 +975,11 @@ redef class ATypePropdef
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		set_doc(mpropdef)
+
+		var atfixed = get_single_annotation("fixed", modelbuilder)
+		if atfixed != null then
+			mpropdef.is_fixed = true
+		end
 	end
 
 	redef fun build_signature(modelbuilder)
@@ -1028,6 +1033,10 @@ redef class ATypePropdef
 		bound = mpropdef.bound.as(not null)
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
 			var supbound = p.bound.as(not null)
+			if p.is_fixed then
+				modelbuilder.error(self, "Redef Error: Virtual type {mpropdef.mproperty} is fixed in super-class {p.mclassdef.mclass}")
+				break
+			end
 			if p.mclassdef.mclass == mclassdef.mclass then
 				# Still a warning to pass existing bad code
 				modelbuilder.warning(n_type, "Redef Error: a virtual type cannot be refined.")
