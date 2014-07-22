@@ -75,14 +75,13 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_int(key: JavaString, def_value: Int): Int in "Java" `{
 		int return_value;
 		try {
-			return_value = recv.getInt(key, def_value); 
+			return_value = recv.getInt(key, (int)def_value); 
 		} catch (ClassCastException e) {
 			return def_value;
 		}
 
 		return return_value;
 	`}
-	#FIXME: Get rid of the `int` cast when the ffi is fixed
 	fun get_long(key: JavaString, def_value: Int): Int in "Java" `{
 		long return_value;
 		try {
@@ -118,7 +117,7 @@ extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPr
 		return recv.putFloat(key, (float) value); 
 	`}
 	fun put_int(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putInt(key, value); 
+		return recv.putInt(key, (int)value); 
 	`}
 	fun put_long(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
 		return recv.putLong(key, value); 
@@ -169,9 +168,9 @@ class SharedPreferences
 
 		// Uses default SharedPreferences if file_name is an empty String
 		if (file_name.equals("")) {
-			sp = context.getPreferences( mode);
+			sp = context.getPreferences((int)mode);
 		} else { 
-			sp = context.getSharedPreferences(file_name, mode);
+			sp = context.getSharedPreferences(file_name, (int)mode);
 		}
 
 		SharedPreferences.Editor editor = sp.edit();

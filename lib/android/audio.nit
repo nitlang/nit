@@ -41,7 +41,7 @@ extern class NativeAudioManager in "Java" `{ android.media.AudioManager `}
 	redef type SELF: NativeAudioManager
 
 	fun mode: Int in "Java" `{ return recv.getMode(); `}
-	fun mode=(i: Int) in "Java" `{ recv.setMode(i); `}
+	fun mode=(i: Int) in "Java" `{ recv.setMode((int)i); `}
 	fun wired_headset_on: Bool in "Java" `{ return recv.isWiredHeadsetOn(); `}
 	fun wired_headset_on=(b: Bool) in "Java" `{ recv.setWiredHeadsetOn(b); `}
 	fun speakerphone_on: Bool in "Java" `{ return recv.isSpeakerphoneOn(); `}
@@ -74,7 +74,7 @@ extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		}
 	`}
 
-	fun create(context: NativeActivity, id: Int): NativeMediaPlayer in "Java" `{ return recv.create(context, id); `}
+	fun create(context: NativeActivity, id: Int): NativeMediaPlayer in "Java" `{ return recv.create(context, (int)id); `}
 	fun pause in "Java" `{ recv.pause(); `}
 	fun stop in "Java" `{ recv.stop(); `}
 	fun playing: Bool in "Java" `{ return recv.isPlaying(); `}
@@ -84,7 +84,7 @@ extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 	fun looping=(b: Bool) in "Java" `{ recv.setLooping(b); `}
 	fun volume=(vol: Float) in "Java" `{ recv.setVolume((float)vol, (float)vol); `}
 	fun both_volume(left_volume, right_volume: Float) in "Java" `{ recv.setVolume((float)left_volume, (float)right_volume); `}
-	fun stream_type=(stream_type: Int) in "Java" `{ recv.setAudioStreamType(stream_type); `}
+	fun stream_type=(stream_type: Int) in "Java" `{ recv.setAudioStreamType((int)stream_type); `}
 	fun data_source_fd(fd: NativeFileDescriptor, start_offset, length: Int) in "Java"  `{
 		try {
 			recv.setDataSource(fd, start_offset, length);
@@ -110,24 +110,24 @@ extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	redef type SELF: NativeSoundPool
 
 	new(max_streams, stream_type, src_quality: Int) in "Java" `{
-		return new SoundPool(max_streams, stream_type, src_quality);
+		return new SoundPool((int)max_streams, (int)stream_type, (int)src_quality);
 	`}
-	fun load_asset_fd(afd: NativeAssetFileDescriptor, priority: Int): Int in "Java" `{ return recv.load(afd, priority); `}
-	fun load_id(context: NativeActivity, resid, priority: Int): Int in "Java" `{ return recv.load(context, resid, priority); `}
-	fun load_path(path: JavaString, priority: Int): Int in "Java" `{ return recv.load(path, priority); `}
+	fun load_asset_fd(afd: NativeAssetFileDescriptor, priority: Int): Int in "Java" `{ return recv.load(afd, (int)priority); `}
+	fun load_id(context: NativeActivity, resid, priority: Int): Int in "Java" `{ return recv.load(context, (int)resid, (int)priority); `}
+	fun load_path(path: JavaString, priority: Int): Int in "Java" `{ return recv.load(path, (int)priority); `}
 	fun play(sound_id: Int, left_volume, right_volume: Float, priority, l: Int, rate: Float): Int in "Java" `{
-		return recv.play(sound_id, (float)left_volume, (float)right_volume, priority, l, (float)rate);
+		return recv.play((int)sound_id, (float)left_volume, (float)right_volume, (int)priority, (int)l, (float)rate);
 	`}
-	fun pause(stream_id: Int) in "Java" `{ recv.pause(stream_id); `}
+	fun pause(stream_id: Int) in "Java" `{ recv.pause((int)stream_id); `}
 	fun auto_pause in "Java" `{ recv.autoPause(); `}
 	fun auto_resume in "Java" `{ recv.autoResume(); `}
-	fun resume(stream_id: Int) in "Java" `{ recv.resume(stream_id); `}
-	fun set_loop(stream_id, l: Int) in "Java" `{ recv.setLoop(stream_id, l); `}
-	fun set_priority(stream_id, priority: Int) in "Java" `{ recv.setPriority(stream_id, priority); `}
-	fun set_rate(stream_id: Int, rate: Float) in "Java" `{ recv.setRate(stream_id, (float)rate); `}
-	fun set_volume(stream_id: Int, left_volume, right_volume: Float) in "Java" `{ recv.setVolume(stream_id, (float)left_volume, (float)right_volume); `}
-	fun stop(stream_id: Int) in "Java" `{ recv.stop(stream_id); `}
-	fun unload(sound_id: Int): Bool in "Java" `{ return recv.unload(sound_id); `}
+	fun resume(stream_id: Int) in "Java" `{ recv.resume((int)stream_id); `}
+	fun set_loop(stream_id, l: Int) in "Java" `{ recv.setLoop((int)stream_id, (int)l); `}
+	fun set_priority(stream_id, priority: Int) in "Java" `{ recv.setPriority((int)stream_id, (int)priority); `}
+	fun set_rate(stream_id: Int, rate: Float) in "Java" `{ recv.setRate((int)stream_id, (float)rate); `}
+	fun set_volume(stream_id: Int, left_volume, right_volume: Float) in "Java" `{ recv.setVolume((int)stream_id, (float)left_volume, (float)right_volume); `}
+	fun stop(stream_id: Int) in "Java" `{ recv.stop((int)stream_id); `}
+	fun unload(sound_id: Int): Bool in "Java" `{ return recv.unload((int)sound_id); `}
 end
 
 

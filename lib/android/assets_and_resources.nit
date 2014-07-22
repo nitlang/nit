@@ -175,17 +175,17 @@ extern class NativeResources in "Java" `{ android.content.res.Resources `}
 	redef type SELF: NativeResources
 
 	fun get_assets:NativeAssetManager in "Java" `{ return recv.getAssets(); `}
-	fun get_color(id: Int): Int in "Java" `{ return recv.getColor(id); `}
-	fun get_boolean(id: Int): Bool in "Java" `{ return recv.getBoolean(id); `}
-	fun get_dimension(id: Int): Int in "Java" `{ return (int)recv.getDimension(id); `}
-	fun get_drawable(id: Int): NativeDrawable in "Java" `{ return recv.getDrawable(id); `}
+	fun get_color(id: Int): Int in "Java" `{ return recv.getColor((int)id); `}
+	fun get_boolean(id: Int): Bool in "Java" `{ return recv.getBoolean((int)id); `}
+	fun get_dimension(id: Int): Int in "Java" `{ return (int)recv.getDimension((int)id); `}
+	fun get_drawable(id: Int): NativeDrawable in "Java" `{ return recv.getDrawable((int)id); `}
 	fun get_identifier(name, def_type, def_package: JavaString): Int in "Java" `{ return recv.getIdentifier(name, def_type, def_package); `}
-	fun get_integer(id: Int): Int in "Java" `{ return recv.getInteger(id); `}
-	fun get_string(id: Int): JavaString in "Java" `{ return recv.getString(id); `}
-	fun get_resource_entry_name(resid: Int): JavaString in "Java" `{ return recv.getResourceEntryName(resid); `}
-	fun get_resource_name(resid: Int): JavaString in "Java" `{ return recv.getResourceName(resid); `}
-	fun get_resource_pakage_name(resid: Int): JavaString in "Java" `{ return recv.getResourcePackageName(resid); `}
-	fun get_resource_type_name(resid: Int): JavaString in "Java" `{ return recv.getResourceTypeName(resid); `}
+	fun get_integer(id: Int): Int in "Java" `{ return recv.getInteger((int)id); `}
+	fun get_string(id: Int): JavaString in "Java" `{ return recv.getString((int)id); `}
+	fun get_resource_entry_name(resid: Int): JavaString in "Java" `{ return recv.getResourceEntryName((int)resid); `}
+	fun get_resource_name(resid: Int): JavaString in "Java" `{ return recv.getResourceName((int)resid); `}
+	fun get_resource_pakage_name(resid: Int): JavaString in "Java" `{ return recv.getResourcePackageName((int)resid); `}
+	fun get_resource_type_name(resid: Int): JavaString in "Java" `{ return recv.getResourceTypeName((int)resid); `}
 end
 
 # Resource manager for android resources placed in the `res` folder of your app
@@ -284,7 +284,7 @@ extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 
 	# Create a NativeBitmap using a resource ID and the NativeResources
 	# Called by the ResourceManager
-	new from_resources(res: NativeResources, id: Int) in "Java" `{ return BitmapFactory.decodeResource(res, id); `}
+	new from_resources(res: NativeResources, id: Int) in "Java" `{ return BitmapFactory.decodeResource(res, (int)id); `}
 	fun width: Int in "Java" `{ return recv.getWidth(); `}
 	fun height: Int in "Java" `{ return recv.getHeight(); `}
 end

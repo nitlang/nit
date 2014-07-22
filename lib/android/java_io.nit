@@ -128,7 +128,7 @@ extern class NativeFileOutputStream in "Java" `{ java.io.FileOutputStream `}
 	`}
 	fun write(one_byte: Int) in "Java" `{
 		try {
-			recv.write(one_byte);
+			recv.write((byte)one_byte);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
