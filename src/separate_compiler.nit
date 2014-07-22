@@ -191,7 +191,11 @@ class SeparateCompiler
 			self.header.add_decl("void* val;")
 			for c, v in self.box_kinds do
 				var t = c.mclass_type
-				self.header.add_decl("{t.ctype} {t.ctypename};")
+
+				# `Pointer` reuse the `val` field
+				if t.mclass.name == "Pointer" then continue
+
+				self.header.add_decl("{t.ctype_extern} {t.ctypename};")
 			end
 			self.header.add_decl("\} nitattribute_t; /* general C type representing a Nit attribute. */")
 		end
@@ -213,9 +217,11 @@ class SeparateCompiler
 
 	fun box_kind_of(mclass: MClass): Int
 	do
-		if mclass.mclass_type.ctype == "val*" then
+		#var pointer_type = self.mainmodule.pointer_type
+		#if mclass.mclass_type.ctype == "val*" or mclass.mclass_type.is_subtype(self.mainmodule, mclass.mclass_type pointer_type) then
+		if mclass.mclass_type.ctype_extern == "val*" then
 			return 0
-		else if mclass.kind == extern_kind then
+		else if mclass.kind == extern_kind and mclass.name != "NativeString" then
 			return self.box_kinds[self.mainmodule.get_primitive_class("Pointer")]
 		else
 			return self.box_kinds[mclass]
@@ -662,14 +668,13 @@ class SeparateCompiler
 	do
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
-		var c_instance_name = mclass.c_instance_name
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
 		var rta = runtime_type_analysis
-		var is_dead = rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var is_dead = rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray" and mclass.name != "Pointer"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -698,23 +703,24 @@ class SeparateCompiler
 			v.add_decl("\};")
 		end
 
-		if mtype.ctype != "val*" then
-			if mtype.mclass.name == "Pointer" or mtype.mclass.kind != extern_kind then
-				#Build instance struct
-				self.header.add_decl("struct instance_{c_instance_name} \{")
-				self.header.add_decl("const struct type *type;")
-				self.header.add_decl("const struct class *class;")
-				self.header.add_decl("{mtype.ctype} value;")
-				self.header.add_decl("\};")
-			end
+		if mtype.ctype != "val*" or mtype.mclass.name == "Pointer" then
+			# Is a primitive type or the Pointer class, not any other extern class
 
-			if not rta.live_types.has(mtype) then return
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct type *type;")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("{mtype.ctype_extern} value;")
+			self.header.add_decl("\};")
+
+			if not rta.live_types.has(mtype) and mtype.mclass.name != "Pointer" then return
 
 			#Build BOX
-			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
+			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
 			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_instance_name}*res = nit_alloc(sizeof(struct instance_{c_instance_name}));")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype_extern} value) \{")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
+			v.compiler.undead_types.add(mtype)
 			v.require_declaration("type_{c_name}")
 			v.add("res->type = &type_{c_name};")
 			v.require_declaration("class_{c_name}")
@@ -722,10 +728,31 @@ class SeparateCompiler
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
 			v.add("\}")
+
+			if mtype.mclass.name != "Pointer" then return
+
+			v = new_visitor
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{mtype.c_name}));")
+				v.add("{res}->type = type;")
+				hardening_live_type(v, "type")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{mtype.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
+			v.add("\}")
 			return
 		else if mclass.name == "NativeArray" then
 			#Build instance struct
-			self.header.add_decl("struct instance_{c_instance_name} \{")
+			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct type *type;")
 			self.header.add_decl("const struct class *class;")
 			# NativeArrays are just a instance header followed by a length and an array of values
@@ -738,15 +765,39 @@ class SeparateCompiler
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(int length, const struct type* type) \{")
 			var res = v.get_name("self")
-			v.add_decl("struct instance_{c_instance_name} *{res};")
+			v.add_decl("struct instance_{c_name} *{res};")
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = nit_alloc(sizeof(struct instance_{c_instance_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
 			v.add("{res}->length = length;")
 			v.add("return (val*){res};")
+			v.add("\}")
+			return
+		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
+			# Is an extern class (other than Pointer and NativeString)
+			# Pointer is caught in a previous `if`, and NativeString is internal
+
+			var pointer_type = mainmodule.pointer_type
+
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{pointer_type.c_name}));")
+				v.add("{res}->type = type;")
+				hardening_live_type(v, "type")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{pointer_type.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
 			v.add("\}")
 			return
 		end
@@ -909,6 +960,22 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	redef fun unbox_signature_extern(m, args)
+	do
+		var msignature = m.msignature.resolve_for(m.mclassdef.bound_mtype, m.mclassdef.bound_mtype, m.mclassdef.mmodule, true)
+		var recv = args.first
+		if not m.mproperty.is_init and m.is_extern then
+			args.first = self.unbox_extern(args.first, m.mclassdef.mclass.mclass_type)
+		end
+		for i in [0..msignature.arity[ do
+			var t = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
+				t = args[i+1].mtype
+			end
+			if m.is_extern then args[i+1] = self.unbox_extern(args[i+1], t)
+		end
+	end
+
 	redef fun autobox(value, mtype)
 	do
 		if value.mtype == mtype then
@@ -916,9 +983,12 @@ class SeparateCompilerVisitor
 		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct instance_{mtype.c_instance_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
+			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
+			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
+				valtype = compiler.mainmodule.pointer_type
+			end
 			var res = self.new_var(mtype)
 			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
@@ -938,6 +1008,42 @@ class SeparateCompilerVisitor
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
 			self.add("PRINT_ERROR(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
 			return res
+		end
+	end
+
+	redef fun unbox_extern(value, mtype)
+	do
+		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
+		   mtype.mclass.name != "NativeString" then
+			var pointer_type = compiler.mainmodule.pointer_type
+			var res = self.new_var_extern(mtype)
+			self.add "{res} = ((struct instance_{pointer_type.c_name}*){value})->value; /* unboxing {value.mtype} */"
+			return res
+		else
+			return value
+		end
+	end
+
+	redef fun box_extern(value, mtype)
+	do
+		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
+		   mtype.mclass.name != "NativeString" then
+			var valtype = compiler.mainmodule.pointer_type
+			var res = self.new_var(mtype)
+			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
+				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
+				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); show_backtrace(1);")
+				return res
+			end
+			self.require_declaration("BOX_{valtype.c_name}")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
+			self.require_declaration("type_{mtype.c_name}")
+			self.add("{res}->type = &type_{mtype.c_name};")
+			self.require_declaration("class_{mtype.c_name}")
+			self.add("{res}->class = &class_{mtype.c_name};")
+			return res
+		else
+			return value
 		end
 	end
 
@@ -1307,7 +1413,7 @@ class SeparateCompilerVisitor
 				# The attribute is primitive, thus we store it in a box
 				# The trick is to create the box the first time then resuse the box
 				self.add("if ({attr} != NULL) \{")
-				self.add("((struct instance_{mtype.c_instance_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
+				self.add("((struct instance_{mtype.c_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
 				self.add("\} else \{")
 				value = self.autobox(value, self.object_type.as_nullable)
 				self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
@@ -1481,7 +1587,8 @@ class SeparateCompilerVisitor
 		self.add_decl("const char* {res};")
 		if value.mtype.ctype == "val*" then
 			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
-		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind then
+		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind and
+			value.mtype.as(MClassType).name != "NativeString" then
 			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
 		else
 			self.require_declaration("type_{value.mtype.c_name}")
@@ -1564,12 +1671,12 @@ class SeparateCompilerVisitor
 			end
 		end
 		if primitive != null then
-			test.add("((struct instance_{primitive.c_instance_name}*){value1})->value == ((struct instance_{primitive.c_instance_name}*){value2})->value")
+			test.add("((struct instance_{primitive.c_name}*){value1})->value == ((struct instance_{primitive.c_name}*){value2})->value")
 		else if can_be_primitive(value1) and can_be_primitive(value2) then
 			test.add("{value1}->class == {value2}->class")
 			var s = new Array[String]
 			for t, v in self.compiler.box_kinds do
-				s.add "({value1}->class->box_kind == {v} && ((struct instance_{t.c_instance_name}*){value1})->value == ((struct instance_{t.c_instance_name}*){value2})->value)"
+				s.add "({value1}->class->box_kind == {v} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
 			end
 			test.add("({s.join(" || ")})")
 		else
@@ -1635,7 +1742,7 @@ class SeparateCompilerVisitor
 	do
 		var elttype = arguments.first.mtype
 		var nclass = self.get_class("NativeArray")
-		var recv = "((struct instance_{nclass.c_instance_name}*){arguments[0]})->values"
+		var recv = "((struct instance_{nclass.c_name}*){arguments[0]})->values"
 		if pname == "[]" then
 			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
 			return
@@ -1643,10 +1750,10 @@ class SeparateCompilerVisitor
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
 			return
 		else if pname == "length" then
-			self.ret(self.new_expr("((struct instance_{nclass.c_instance_name}*){arguments[0]})->length", ret_type.as(not null)))
+			self.ret(self.new_expr("((struct instance_{nclass.c_name}*){arguments[0]})->length", ret_type.as(not null)))
 			return
 		else if pname == "copy_to" then
-			var recv1 = "((struct instance_{nclass.c_instance_name}*){arguments[1]})->values"
+			var recv1 = "((struct instance_{nclass.c_name}*){arguments[1]})->values"
 			self.add("memmove({recv1}, {recv}, {arguments[2]}*sizeof({elttype.ctype}));")
 			return
 		end
@@ -1851,23 +1958,6 @@ end
 
 redef class MType
 	fun const_color: String do return "COLOR_{c_name}"
-
-	# C name of the instance type to use
-	fun c_instance_name: String do return c_name
-end
-
-redef class MClassType
-	redef fun c_instance_name do return mclass.c_instance_name
-end
-
-redef class MClass
-	# Extern classes use the C instance of kernel::Pointer
-	fun c_instance_name: String
-	do
-		if kind == extern_kind then
-			return "kernel__Pointer"
-		else return c_name
-	end
 end
 
 interface PropertyLayoutElement end
@@ -1880,4 +1970,9 @@ end
 redef class MPropDef
 	super PropertyLayoutElement
 	fun const_color: String do return "COLOR_{c_name}"
+end
+
+redef class AExternInitPropdef
+	# The semi-global compilation does not support inlining calls to extern news
+	redef fun can_inline do return false
 end

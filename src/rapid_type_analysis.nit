@@ -207,6 +207,7 @@ class RapidTypeAnalysis
 		force_alive("Int")
 		force_alive("Float")
 		force_alive("Char")
+		force_alive("Pointer")
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
