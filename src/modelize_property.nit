@@ -1003,25 +1003,40 @@ redef class ATypePropdef
 
 		modelbuilder.check_visibility(n_type, bound, mpropdef)
 
-		# Fast case: the bound is not a formal type
-		if not bound isa MVirtualType then return
-
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
 
-		# Slow case: progress on each resolution until: (i) we loop, or (ii) we found a non formal type
-		var seen = [self.mpropdef.mproperty.mvirtualtype]
-		loop
-			if seen.has(bound) then
+		# Check circularity
+		if bound isa MVirtualType then
+			# Slow case: progress on each resolution until: (i) we loop, or (ii) we found a non formal type
+			var seen = [self.mpropdef.mproperty.mvirtualtype]
+			loop
+				if seen.has(bound) then
+					seen.add(bound)
+					modelbuilder.error(self, "Error: circularity of virtual type definition: {seen.join(" -> ")}")
+					return
+				end
 				seen.add(bound)
-				modelbuilder.error(self, "Error: circularity of virtual type definition: {seen.join(" -> ")}")
-				return
+				var next = bound.lookup_bound(mmodule, anchor)
+				if not next isa MVirtualType then break
+				bound = next
 			end
-			seen.add(bound)
-			var next = bound.lookup_bound(mmodule, anchor)
-			if not next isa MVirtualType then break
-			bound = next
+		end
+
+		# Check redefinitions
+		bound = mpropdef.bound.as(not null)
+		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
+			var supbound = p.bound.as(not null)
+			if p.mclassdef.mclass == mclassdef.mclass then
+				# Still a warning to pass existing bad code
+				modelbuilder.warning(n_type, "Redef Error: a virtual type cannot be refined.")
+				break
+			end
+			if not bound.is_subtype(mmodule, anchor, supbound) then
+				modelbuilder.error(n_type, "Redef Error: Wrong bound type. Found {bound}, expected a subtype of {supbound}, as in {p}.")
+				break
+			end
 		end
 	end
 end
