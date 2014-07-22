@@ -441,6 +441,13 @@ private class NaiveInterpreter
 		recv.attributes[mproperty] = value
 	end
 
+	# Is the attribute `mproperty` initialized the instance `recv`?
+	fun isset_attribute(mproperty: MAttribute, recv: Instance): Bool
+	do
+		assert recv isa MutableInstance
+		return recv.attributes.has_key(mproperty)
+	end
+
 	# Collect attributes of a type in the order of their init
 	fun collect_attr_propdef(mtype: MType): Array[AAttrPropdef]
 	do
@@ -982,28 +989,26 @@ redef class AAttrPropdef
 		var recv = args.first
 		assert recv isa MutableInstance
 		var attr = self.mpropdef.mproperty
-		if args.length == 1 then
-			return v.read_attribute(attr, recv)
-		else
+		if mpropdef == mreadpropdef then
+			assert args.length == 1
+			if not is_lazy or v.isset_attribute(attr, recv) then return v.read_attribute(attr, recv)
+			return evaluate_expr(v, recv)
+		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			v.write_attribute(attr, recv, args[1])
 			return null
+		else
+			abort
 		end
 	end
 
 	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
-		assert recv isa MutableInstance
+		if is_lazy then return
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var f = new Frame(self, self.mpropdef.as(not null), [recv])
-			v.frames.unshift(f)
-			var val = v.expr(nexpr)
-			assert val != null
-			v.frames.shift
-			assert not v.is_escaping
-			v.write_attribute(self.mpropdef.mproperty, recv, val)
+			evaluate_expr(v, recv)
 			return
 		end
 		var mtype = self.mpropdef.static_mtype.as(not null)
@@ -1011,6 +1016,21 @@ redef class AAttrPropdef
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
 		end
+	end
+
+	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance): Instance
+	do
+		assert recv isa MutableInstance
+		var nexpr = self.n_expr
+		assert nexpr != null
+		var f = new Frame(self, self.mpropdef.as(not null), [recv])
+		v.frames.unshift(f)
+		var val = v.expr(nexpr)
+		assert val != null
+		v.frames.shift
+		assert not v.is_escaping
+		v.write_attribute(self.mpropdef.mproperty, recv, val)
+		return val
 	end
 end
 
@@ -1669,8 +1689,7 @@ redef class AIssetAttrExpr
 		if recv == null then return null
 		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
-		assert recv isa MutableInstance
-		return v.bool_instance(recv.attributes.has_key(mproperty))
+		return v.bool_instance(v.isset_attribute(mproperty, recv))
 	end
 end
 

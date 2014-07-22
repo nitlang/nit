@@ -2121,18 +2121,55 @@ end
 redef class AAttrPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		if arguments.length == 1 then
-			var res = v.read_attribute(self.mpropdef.mproperty, arguments.first)
+		if mpropdef == mreadpropdef then
+			assert arguments.length == 1
+			var res
+			if is_lazy then
+				var nexpr = n_expr
+				assert nexpr != null
+				var set
+				var ret = self.mpropdef.static_mtype
+				var useiset = ret.ctype == "val*" and not ret isa MNullableType
+				var guard = self.mlazypropdef.mproperty
+				if useiset then
+					set = v.isset_attribute(self.mpropdef.mproperty, arguments.first)
+				else
+					set = v.read_attribute(guard, arguments.first)
+				end
+				v.add("if(likely({set})) \{")
+				res = v.read_attribute(self.mpropdef.mproperty, arguments.first)
+				v.add("\} else \{")
+				var value = v.expr(nexpr, self.mpropdef.static_mtype)
+				v.write_attribute(self.mpropdef.mproperty, arguments.first, value)
+				v.assign(res, value)
+				if not useiset then
+					var true_v = v.new_expr("1", v.bool_type)
+					v.write_attribute(guard, arguments.first, true_v)
+				end
+				v.add("\}")
+			else
+				res = v.read_attribute(self.mpropdef.mproperty, arguments.first)
+			end
 			v.assign(v.frame.returnvar.as(not null), res)
-		else
+		else if mpropdef == mwritepropdef then
+			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
+			if is_lazy then
+				var ret = self.mpropdef.static_mtype
+				var useiset = ret.ctype == "val*" and not ret isa MNullableType
+				if not useiset then
+					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.new_expr("1", v.bool_type))
+				end
+			end
+		else
+			abort
 		end
 	end
 
 	fun init_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
-		if nexpr != null then
+		if nexpr != null and not is_lazy then
 			var oldnode = v.current_node
 			v.current_node = self
 			var old_frame = v.frame
