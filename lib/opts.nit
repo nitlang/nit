@@ -295,7 +295,6 @@ class OptionContext
 	end
 
 	# Parse the command line
-	# FIXME: avoir crashing on a command line like : `myprog -foo` (more than one letter after a single `-`)
 	protected fun parse_intern(it: Iterator[String])
 	do
 		var parseargs = true
@@ -312,7 +311,7 @@ class OptionContext
 				# We're looking for packed short options
 				if str.chars.last_index_of('-') == 0 and str.length > 2 then
 					var next_called = false
-					for i in [1..str.length] do
+					for i in [1..str.length[ do
 						var short_opt = "-" + str.chars[i].to_s
 						if optmap.has_key(short_opt) then
 							var option = optmap[short_opt]
