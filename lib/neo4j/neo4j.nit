@@ -845,6 +845,15 @@ class NeoBatch
 		end
 	end
 
+	# Create a `NeoNode` or a `NeoEdge` in batch mode.
+	fun save_entity(nentity: NeoEntity) do
+		if nentity isa NeoNode then
+			save_node(nentity)
+		else if nentity isa NeoEdge then
+			save_edge(nentity)
+		else abort
+	end
+
 	# Create a node in batch mode also create labels and edges
 	fun save_node(node: NeoNode) do
 		if node.id != null or node.batch_id != null then return
