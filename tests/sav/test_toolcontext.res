@@ -1,0 +1,3 @@
+Usage: test_toolcontext [OPTION]...
+Test for ToolContext, try --bash-completion.
+Use --help for help

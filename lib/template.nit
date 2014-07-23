@@ -111,6 +111,17 @@ class Template
 		content.add element
 	end
 
+	# Append `element` and the end of the template then append a "\n".
+	#
+	#     var t = new Template
+	#     t.addn("1")
+	#     t.addn("2")
+	#     assert t.write_to_string == "1\n2\n"
+	fun addn(element: Streamable) do
+		add element
+		add "\n"
+	end
+
 	# Append a bunch of elements at the end of the template.
 	# See `add`.
 	#
