@@ -23,6 +23,7 @@ module toolcontext
 import opts
 import location
 import version
+import template
 
 class Message
 	super Comparable
@@ -195,12 +196,20 @@ class ToolContext
 	# Option --no-color
 	var opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
 
+	# Option --bash-completion
+	var opt_bash_completion: OptionBool = new OptionBool("Generate bash_completion file for this program", "--bash-completion")
+
 	# Verbose level
 	var verbose_level: Int = 0
 
+	# Bash completion behavior in command line
+	# see `BashCompletion`
+	var bash_completion: BashCompletion
+
 	init
 	do
-		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose)
+		bash_completion = new BashCompletion(self)
+		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
 	end
 
 	# Name, usage and synopsis of the tool.
@@ -242,6 +251,12 @@ class ToolContext
 
 		if opt_version.value then
 			print version
+			exit 0
+		end
+
+		if opt_bash_completion.value then
+			print bash_completion.write_to_string
+			bash_completion.write_to_file("{sys.program_name}.bash")
 			exit 0
 		end
 
@@ -311,5 +326,64 @@ class ToolContext
 		end
 
 		return null
+	end
+end
+
+# This class generates a compatible `bash_completion` script file.
+#
+# On some Linux systems `bash_completion` allow the program to control command line behaviour.
+#
+#	$ nitls [TAB][TAB]
+#	file1.nit              file2.nit              file3.nit
+#
+#	$ nitls --[TAB][TAB]
+#	--bash-toolname        --keep                 --path                 --tree
+#	--depends              --log                  --project              --verbose
+#	--disable-phase        --log-dir              --quiet                --version
+#	--gen-bash-completion  --no-color             --recursive            --warn
+#	--help                 --only-metamodel       --source
+#	--ignore-visibility    --only-parse           --stop-on-first-error
+#
+# Generated file must be placed in system bash_completion directory `/etc/bash_completion.d/`
+# or in the user directory `~/.bash_completion`.
+class BashCompletion
+	super Template
+
+	var toolcontext: ToolContext
+
+	init(toolcontext: ToolContext) do
+		self.toolcontext = toolcontext
+	end
+
+	private fun extract_options_names: Array[String] do
+		var names = new Array[String]
+		for option in toolcontext.option_context.options do
+			for name in option.names do
+				if name.has_prefix("--") then names.add name
+			end
+		end
+		return names
+	end
+
+	redef fun rendering do
+		var name = toolcontext.toolname
+		var option_names = extract_options_names
+		addn "# generated bash completion file for {name} {toolcontext.version}"
+		addn "_{name}()"
+		addn "\{"
+		addn "	local cur prev opts"
+		addn "	COMPREPLY=()"
+		addn "	cur=\"$\{COMP_WORDS[COMP_CWORD]\}\""
+		addn "	prev=\"$\{COMP_WORDS[COMP_CWORD-1]\}\""
+		if option_names != null then
+			addn "	opts=\"{option_names.join(" ")}\""
+			addn "	if [[ $\{cur\} == -* ]] ; then"
+			addn "		COMPREPLY=( $(compgen -W \"$\{opts\}\" -- $\{cur\}) )"
+			addn "		return 0"
+			addn "	fi"
+		end
+		addn "  _filedir"
+		addn "\}"
+		addn "complete -F _{name} {name}"
 	end
 end
