@@ -1469,11 +1469,6 @@ redef class Object
 	do
 		return "{class_name}:#{object_id.to_hex}"
 	end
-
-	protected fun args: Sequence[String]
-	do
-		return sys.args
-	end
 end
 
 redef class Bool
@@ -1811,7 +1806,8 @@ end
 redef class Sys
 	var _args_cache: nullable Sequence[String]
 
-	redef fun args: Sequence[String]
+	# The arguments of the program as given by the OS
+	fun program_args: Sequence[String]
 	do
 		if _args_cache == null then init_args
 		return _args_cache.as(not null)
@@ -1823,7 +1819,7 @@ redef class Sys
 		return native_argv(0).to_s
 	end
 
-	# Initialize `args` with the contents of `native_argc` and `native_argv`.
+	# Initialize `program_args` with the contents of `native_argc` and `native_argv`.
 	private fun init_args
 	do
 		var argc = native_argc
@@ -1887,3 +1883,9 @@ end
 #     alpha_comparator.sort(a)
 #     assert a == [1, 10, 2, 20, 3]
 fun alpha_comparator: Comparator[Object] do return once new AlphaComparator
+
+# The arguments of the program as given by the OS
+fun args: Sequence[String]
+do
+	return sys.program_args
+end
