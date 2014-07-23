@@ -3,6 +3,7 @@
 # Copyright 2006-2008 Floréal Morandat <morandat@lirmm.fr>
 # Copyright 2008-2012 Jean Privat <jean@pryen.org>
 # Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -182,6 +183,9 @@ class ToolContext
 	# Option --version
 	var opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
 
+	# Option --set-dummy-tool
+	var opt_set_dummy_tool: OptionBool = new OptionBool("Set toolname and version to DUMMY. Useful for testing", "--set-dummy-tool")
+
 	# Option --verbose
 	var opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
 
@@ -196,7 +200,7 @@ class ToolContext
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose)
 	end
 
 	# Name, usage and synopsis of the tool.
@@ -237,7 +241,7 @@ class ToolContext
 		end
 
 		if opt_version.value then
-			print nit_version
+			print version
 			exit 0
 		end
 
@@ -267,6 +271,22 @@ class ToolContext
 		end
 
 		nit_dir = compute_nit_dir
+	end
+
+	# Get the current `nit_version` or "DUMMY_VERSION" if `--set-dummy-tool` is set.
+	fun version: String do
+		if opt_set_dummy_tool.value then
+			return "DUMMY_VERSION"
+		end
+		return nit_version
+	end
+
+	# Get the name of the tool or "DUMMY_TOOL" id `--set-dummy-tool` is set.
+	fun toolname: String do
+		if opt_set_dummy_tool.value then
+			return "DUMMY_TOOL"
+		end
+		return sys.program_name
 	end
 
 	# The identified root directory of the Nit project
