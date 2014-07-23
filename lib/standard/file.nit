@@ -26,6 +26,7 @@ in "C Header" `{
 	#include <sys/types.h>
 	#include <sys/stat.h>
 	#include <unistd.h>
+	#include <stdio.h>
 `}
 
 # File Abstract Stream
@@ -37,8 +38,10 @@ abstract class FStream
 	# The FILE *.
 	var _file: nullable NativeFile = null
 
-	fun file_stat: FileStat
-	do return _file.file_stat end
+	fun file_stat: FileStat do return _file.file_stat
+
+	# File descriptor of this file
+	fun fd: Int do return _file.fileno
 end
 
 # File input stream
@@ -514,6 +517,7 @@ private extern class NativeFile `{ FILE* `}
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
+	fun fileno: Int `{ return fileno(recv); `}
 
 	new io_open_read(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
 	new io_open_write(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
