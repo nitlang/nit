@@ -306,6 +306,7 @@ redef class String
 	#     assert "dir/../../".simplify_path        ==  ".."
 	#     assert "dir/..".simplify_path            ==  "."
 	#     assert "//absolute//path/".simplify_path ==  "/absolute/path"
+	#     assert "//absolute//../".simplify_path   ==  "/"
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")
@@ -320,6 +321,7 @@ redef class String
 			a2.push(x)
 		end
 		if a2.is_empty then return "."
+		if a2.length == 1 and a2.first == "" then return "/"
 		return a2.join("/")
 	end
 
