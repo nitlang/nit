@@ -1153,6 +1153,20 @@ class MVirtualType
 		abort
 	end
 
+	# Is the virtual type fixed for a given resolved_receiver?
+	fun is_fixed(mmodule: MModule, resolved_receiver: MType): Bool
+	do
+		assert not resolved_receiver.need_anchor
+		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
+		if props.is_empty then
+			abort
+		end
+		for p in props do
+			if p.as(MVirtualTypeDef).is_fixed then return true
+		end
+		return false
+	end
+
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		assert can_resolve_for(mtype, anchor, mmodule)
@@ -1181,6 +1195,8 @@ class MVirtualType
 		if resolved_reciever.as(MClassType).mclass.kind == enum_kind then return res
 		# If the resolved type isa MVirtualType, it means that self was bound to it, and cannot be unbound. self is just fixed. so return the resolution.
 		if res isa MVirtualType then return res
+		# If we are final, just return the resolution
+		if is_fixed(mmodule, resolved_reciever) then return res
 		# It the resolved type isa intern class, then there is no possible valid redefinition is any potentiel subclass. self is just fixed. so simply return the resolution
 		if res isa MClassType and res.mclass.kind == enum_kind then return res
 		# TODO: Add 'fixed' virtual type in the specification.
@@ -1945,6 +1961,9 @@ class MVirtualTypeDef
 
 	# The bound of the virtual type
 	var bound: nullable MType writable = null
+
+	# Is the bound fixed?
+	var is_fixed writable = false
 end
 
 # A kind of class.
