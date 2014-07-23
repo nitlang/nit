@@ -31,6 +31,9 @@ abstract class Option
 	# Is this option mandatory?
 	var mandatory: Bool writable = false
 
+	# Is this option hidden from `usage`?
+	var hidden: Bool writable = false
+
 	# Has this option been read?
 	var read: Bool writable = false
 
@@ -60,10 +63,10 @@ abstract class Option
 
 	# Add new aliases for this option
 	fun add_aliases(names: String...) do names.add_all(names)
-	
+
 	# An help text for this option with default settings
 	redef fun to_s do return pretty(2)
-	
+
 	# A pretty print for this help
 	fun pretty(off: Int): String
 	do
@@ -91,6 +94,7 @@ abstract class Option
 	end
 end
 
+# Not really an option. Just add a line of text when displaying the usage
 class OptionText
 	super Option
 	init(text: String) do super(text, null, null)
@@ -100,6 +104,7 @@ class OptionText
 	redef fun to_s do return helptext
 end
 
+# A boolean option, `true` when present, `false` if not
 class OptionBool
 	super Option
 	redef type VALUE: Bool
@@ -113,6 +118,7 @@ class OptionBool
 	end
 end
 
+# A count option. Count the number of time this option is present
 class OptionCount
 	super Option
 	redef type VALUE: Int
@@ -148,6 +154,7 @@ abstract class OptionParameter
 	end
 end
 
+# An option with a String as parameter
 class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
@@ -157,6 +164,9 @@ class OptionString
 	redef fun convert(str) do return str
 end
 
+# An option with an enum as parameter
+# In the code, declaring an option enum (-e) with an enum like `["zero", "one", "two"]
+# In the command line, typing `myprog -e one` is giving 1 as value
 class OptionEnum
 	super OptionParameter
 	redef type VALUE: Int
@@ -189,27 +199,31 @@ class OptionEnum
 		else
 			return ""
 		end
-	end	
+	end
 end
 
+# An option with an Int as parameter
 class OptionInt
 	super OptionParameter
 	redef type VALUE: Int
 
 	init(help: String, default: Int, names: String...) do super(help, default, names)
-	
+
 	redef fun convert(str) do return str.to_i
 end
 
+# An option with a Float as parameter
 class OptionFloat
 	super OptionParameter
 	redef type VALUE: Float
 
 	init(help: String, default: Float, names: String...) do super(help, default, names)
-	
+
 	redef fun convert(str) do return str.to_f
 end
 
+# An option with an array as parameter
+# `myprog -optA arg1 -optA arg2` is giving an Array `["arg1", "arg2"]`
 class OptionArray
 	super OptionParameter
 	redef type VALUE: Array[String]
@@ -228,13 +242,33 @@ class OptionArray
 	end
 end
 
+# Context where the options process
 class OptionContext
+	# Options present in the context
 	var options: Array[Option]
+
+	# Rest of the options after `parse` is called
 	var rest: Array[String]
+
+	# Errors found in the context after parsing
 	var errors: Array[String]
 
 	private var optmap: Map[String, Option]
-	
+
+	init
+	do
+		options = new Array[Option]
+		optmap = new HashMap[String, Option]
+		rest = new Array[String]
+		errors = new Array[String]
+	end
+
+	# Add one or more options to the context
+	fun add_option(opts: Option...) do
+			options.add_all(opts)
+	end
+
+	# Display all the options available
 	fun usage
 	do
 		var lmax = 1
@@ -245,19 +279,22 @@ class OptionContext
 			end
 			if lmax < l then lmax = l
 		end
-		
+
 		for i in options do
-			print(i.pretty(lmax))
+			if not i.hidden then
+				print(i.pretty(lmax))
+			end
 		end
 	end
 
-	# Parse ans assign options everywhere is the argument list
+	# Parse and assign options everywhere in the argument list
 	fun parse(argv: Collection[String])
 	do
 		var it = argv.iterator
 		parse_intern(it)
 	end
 
+	# Parse the command line
 	protected fun parse_intern(it: Iterator[String])
 	do
 		var parseargs = true
@@ -274,7 +311,7 @@ class OptionContext
 				# We're looking for packed short options
 				if str.chars.last_index_of('-') == 0 and str.length > 2 then
 					var next_called = false
-					for i in [1..str.length] do
+					for i in [1..str.length[ do
 						var short_opt = "-" + str.chars[i].to_s
 						if optmap.has_key(short_opt) then
 							var option = optmap[short_opt]
@@ -306,21 +343,6 @@ class OptionContext
 		end
 	end
 
-	fun add_option(opts: Option...)
-	do
-		for opt in opts do
-			options.add(opt)
-		end
-	end
-
-	init
-	do
-		options = new Array[Option]
-		optmap = new HashMap[String, Option]
-		rest = new Array[String]
-		errors = new Array[String]
-	end
-
 	private fun build
 	do
 		for o in options do
@@ -333,15 +355,12 @@ class OptionContext
 	fun get_errors: Array[String]
 	do
 		var errors: Array[String] = new Array[String]
-
 		errors.add_all(errors)
-
 		for o in options do
 			for e in o.errors do
 				errors.add(e)
 			end
 		end
-
 		return errors
 	end
 end

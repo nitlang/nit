@@ -5,3 +5,4 @@ args --bool args -- args -c
 -i one
 -a
 -e 1
+-bcc
