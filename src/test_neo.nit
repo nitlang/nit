@@ -1,0 +1,90 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Test for neo model saving and loading.
+module test_neo
+
+import neo
+import model_utils
+import frontend
+
+var test_name = "test_{get_time.to_s}"
+
+# init tool
+var toolcontext = new ToolContext
+toolcontext.tooldescription = "Usage: neo_saver host port files..."
+toolcontext.process_options(args)
+var arguments = toolcontext.option_context.rest
+
+if arguments.length < 3 then
+	toolcontext.usage
+	exit 0
+end
+
+var host = arguments.shift
+var port = arguments.shift
+var url = "http://{host}:{port}"
+
+# parse model
+toolcontext.info("Parse files...", 1)
+var org_model = new Model
+var modelbuilder = new ModelBuilder(org_model, toolcontext)
+modelbuilder.parse(arguments)
+modelbuilder.run_phases
+
+toolcontext.info("Open connection to neo4j on {url} for saving...", 1)
+var save_client = new Neo4jClient(url)
+var save_model = new NeoModel(test_name, toolcontext, save_client)
+save_model.save(org_model)
+
+toolcontext.info("Open connection to neo4j on {url} for reading...", 1)
+var read_client = new Neo4jClient(url)
+var neo_model = new Model
+var read_model = new NeoModel(test_name, toolcontext, read_client)
+read_model.load(neo_model)
+
+# Compare model
+var sorter = new MEntityNameSorter
+
+print "mprojects:"
+var org_mprojects = org_model.mprojects.to_a
+sorter.sort org_mprojects
+print org_mprojects.join(" ")
+var neo_mprojects = neo_model.mprojects.to_a
+sorter.sort neo_mprojects
+print neo_mprojects.join(" ")
+
+print "mmodules:"
+var org_mmodules = org_model.mmodules.to_a
+sorter.sort org_mmodules
+print org_mmodules.join(" ")
+var neo_mmodules = neo_model.mmodules.to_a
+sorter.sort neo_mmodules
+print neo_mmodules.join(" ")
+
+print "mclasses:"
+var org_mclasses = org_model.mclasses.to_a
+sorter.sort org_mclasses
+print org_mclasses.join(" ")
+var neo_mclasses = neo_model.mclasses.to_a
+sorter.sort neo_mclasses
+print neo_mclasses.join(" ")
+
+print "mproperties:"
+var org_mproperties = org_model.mproperties.to_a
+sorter.sort org_mproperties
+print org_mproperties.join(" ")
+var neo_mproperties = neo_model.mproperties.to_a
+sorter.sort neo_mproperties
+print neo_mproperties.join(" ")
