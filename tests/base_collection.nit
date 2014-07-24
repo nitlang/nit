@@ -23,7 +23,7 @@ end
 class G[E]
 	super Collection[E]
 
-	var a: A
+	var a: E
 
 	redef fun iterator do return new I[E](self)
 end
