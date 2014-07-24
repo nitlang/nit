@@ -56,11 +56,12 @@ How to start:
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
+You can put the `bin/` directoty in your PATH
+
 Using bash completion with Nit tools:
 
-    $ bin/nitc --bash-completion
-    $ ln -s /absolute/path/to/bin/nitc.bash ~/.bash_completion/nitc
-    $ . ~/.bash_completion/nitc
+    $ echo source /absolute/path/to/misc/bash_completion/nit >> ~/.bash_completion
+    $ source ~/.bash_completion
 
 More information:
 

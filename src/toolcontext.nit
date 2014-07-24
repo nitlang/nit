@@ -339,8 +339,8 @@ end
 #	--help                 --only-metamodel       --source
 #	--ignore-visibility    --only-parse           --stop-on-first-error
 #
-# Generated file must be placed in system bash_completion directory `/etc/bash_completion.d/`
-# or in the user directory `~/.bash_completion`.
+# Generated file can be placed in system bash_completion directory `/etc/bash_completion.d/`
+# or source it in `~/.bash_completion`.
 class BashCompletion
 	super Template
 
