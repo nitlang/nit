@@ -25,6 +25,28 @@ private class BufferLeaf
 
 end
 
+redef class Concat
+	redef fun to_leaf
+	do
+		if left == null then
+			if right == null then return new StringLeaf("".as(FlatString))
+			return right.to_leaf
+		end
+		if right == null then return left.as(not null).to_leaf
+		if left.length + right.length < buf_len then
+			var b = new FlatBuffer.with_capacity(buf_len)
+			b.append(left.to_leaf.str)
+			b.append(right.to_leaf.str)
+			return new BufferLeaf(b)
+		else
+			var b = new FlatBuffer.with_capacity(left.length + right.length)
+			b.append(left.to_leaf.str)
+			b.append(right.to_leaf.str)
+			return new StringLeaf(b.lazy_to_s(b.length))
+		end
+	end
+end
+
 redef class FlatText
 
 	# Creates a substring, only without any copy overhead for Buffers
