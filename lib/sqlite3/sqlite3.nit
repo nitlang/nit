@@ -127,7 +127,6 @@ class Statement
 	fun iterator: StatementIterator
 	do
 		native_statement.reset
-		native_statement.step
 		return new StatementIterator(self)
 	end
 end
@@ -260,11 +259,13 @@ class StatementIterator
 	do
 		self.statement = s
  		self.item = new StatementRow(s)
+
+		self.is_ok = statement.native_statement.step.is_row
 	end
 
 	redef var item: StatementRow
 
-	redef var is_ok = true
+	redef var is_ok: Bool
 
 	# require: `self.statement.is_open`
 	redef fun next
