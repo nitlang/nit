@@ -293,6 +293,21 @@ abstract class Text
 		return true
 	end
 
+	# Returns `true` if the string contains only Hex chars
+	#
+	#     assert "048bf".is_hex  == true
+	#     assert "ABCDEF".is_hex  == true
+	#     assert "0G".is_hex == false
+	fun is_hex: Bool
+	do
+		for c in self.chars do
+			if not (c >= 'a' and c <= 'f') and
+			   not (c >= 'A' and c <= 'F') and
+			   not (c >= '0' and c <= '9') then return false
+		end
+		return true
+	end
+
 	# Are all letters in `self` upper-case ?
 	#
 	#     assert "HELLO WORLD".is_upper == true
