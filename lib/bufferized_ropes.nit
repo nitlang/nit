@@ -312,3 +312,6 @@ redef class RopeString
 
 end
 
+# Default size of a buffer in a rope leaf.
+fun buf_len: Int do return 200
+
