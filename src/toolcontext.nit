@@ -301,7 +301,7 @@ class ToolContext
 		if opt_set_dummy_tool.value then
 			return "DUMMY_TOOL"
 		end
-		return sys.program_name
+		return sys.program_name.basename("")
 	end
 
 	# The identified root directory of the Nit project
