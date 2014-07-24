@@ -10,7 +10,5 @@ _DUMMY_TOOL()
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
 	fi
-  _filedir
-}
-complete -F _DUMMY_TOOL DUMMY_TOOL
-
+} &&
+complete -o default -F _DUMMY_TOOL DUMMY_TOOL
