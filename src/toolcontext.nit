@@ -255,8 +255,7 @@ class ToolContext
 		end
 
 		if opt_bash_completion.value then
-			print bash_completion.write_to_string
-			bash_completion.write_to_file("{sys.program_name}.bash")
+			bash_completion.write_to(sys.stdout)
 			exit 0
 		end
 
