@@ -858,7 +858,7 @@ redef class AType
 	do
 		var mt = mtype
 		if mt == null then return null
-		if mt isa MNullableType then mt = mt.mtype
+		mt = mt.as_notnullable
 		if mt isa MVirtualType or mt isa MParameterType then
 			res.add_class("nc_vt")
 		end

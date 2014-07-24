@@ -284,7 +284,7 @@ private class TypeVisitor
 		var erasure_cast = false
 		var rettype = mpropdef.msignature.return_mtype
 		if not recv_is_self and rettype != null then
-			if rettype isa MNullableType then rettype = rettype.mtype
+			rettype = rettype.as_notnullable
 			if rettype isa MParameterType then
 				var erased_rettype = msignature.return_mtype
 				assert erased_rettype != null
@@ -905,7 +905,7 @@ redef class AForExpr
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
@@ -1008,9 +1008,7 @@ redef class AOrElseExpr
 			return # Skip error
 		end
 
-		if t1 isa MNullableType then
-			t1 = t1.mtype
-		end
+		t1 = t1.as_notnullable
 
 		var t = v.merge_types(self, [t1, t2])
 		if t == null then

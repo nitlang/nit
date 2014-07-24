@@ -1647,7 +1647,7 @@ abstract class MProperty
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 
 		var cache = self.lookup_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
@@ -1686,7 +1686,7 @@ abstract class MProperty
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
@@ -1763,7 +1763,7 @@ abstract class MProperty
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 
 		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
