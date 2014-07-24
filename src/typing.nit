@@ -191,7 +191,7 @@ private class TypeVisitor
 
 		if sup == sub then
 			self.modelbuilder.warning(node, "Warning: Expression is already a {sup}.")
-		else if self.is_subtype(sub, sup) and not sup.need_anchor then
+		else if self.is_subtype(sub, sup) then
 			self.modelbuilder.warning(node, "Warning: Expression is already a {sup} since it is a {sub}.")
 		end
 		return sup
