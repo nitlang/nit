@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#alt3 import bufferized_ropes
+
 var str = "Woe to you, oh earth and sea for the Devil sends the beast with wrath because he knows the time is short. Let him who hath understanding reckon the number of the beast, for it is a human number, its number is Six Hundred and Sixty-Six."
 var spaces = "           "
 var numstr = "1001"
@@ -35,6 +37,12 @@ num = numstr
 #alt2 trimable = trimable + str
 #alt2 trimable = trimable + spaces
 #alt2 num = new RopeString.from(numstr)
+
+#alt3 txt = new RopeString.from(str)
+#alt3 trimable = new RopeString.from(spaces)
+#alt3 trimable = trimable + str
+#alt3 trimable = trimable + spaces
+#alt3 num = new RopeString.from(numstr)
 
 # Test Text methods on all types of receivers
 
