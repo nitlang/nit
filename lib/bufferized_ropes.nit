@@ -334,6 +334,35 @@ redef class RopeString
 
 end
 
+redef class SubstringsIterator
+
+	# Compute the bounds of the current substring and makes the substring
+	redef fun make_substring
+	do
+		var l = nodes.item
+		var s = l.str
+		var min = 0
+		var length = l.length
+		if nodes.index < pos then
+			min = pos - nodes.index
+		end
+		substring = s.lazy_substring(min, length)
+	end
+
+end
+
+redef class ReverseSubstringsIterator
+
+	redef fun make_substring
+	do
+		var l = leaves.item
+		var s = l.str
+		if pos > (leaves.index + l.length - 1) then return
+		str = s.lazy_substring(0, (pos - leaves.index + 1))
+	end
+
+end
+
 # Default size of a buffer in a rope leaf.
 fun buf_len: Int do return 200
 
