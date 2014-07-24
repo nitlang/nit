@@ -5,3 +5,8 @@ This directory contains small NIT programs divided in some categories:
 * 'example' are examples 
 * 'test' are others tests
 * 'shootout' are benchmarks from http://shootout.alioth.debian.org/
+
+The .gitignore contains specific artefacts produced by some tests.
+However, it is better to produce these artifacts in the `out` directory instead,
+because `out` is cleaned before runing tests (so that old artefacts do not
+interfere with new executions of tests)
