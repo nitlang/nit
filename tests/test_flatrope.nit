@@ -13,6 +13,7 @@
 # limitations under the License.
 
 #alt1 import splay_ropes
+#alt2 import bufferized_ropes
 
 var st = "quick brown fox over the lazy dog"
 

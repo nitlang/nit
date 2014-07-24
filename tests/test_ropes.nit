@@ -13,6 +13,7 @@
 # limitations under the License.
 
 #alt1 import splay_ropes
+#alt2 import bufferized_ropes
 
 var x :String = new RopeString
 
