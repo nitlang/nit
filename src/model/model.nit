@@ -887,6 +887,16 @@ abstract class MType
 		return res
 	end
 
+	# Return the not nullable version of the type
+	# Is the type is already not nullable, then self is returned.
+	#
+	# Note: this just remove the `nullable` notation, but the result can still contains null.
+	# For instance if `self isa MNullType` or self is a a formal type bounded by a nullable type.
+	fun as_notnullable: MType
+	do
+		return self
+	end
+
 	private var as_nullable_cache: nullable MType = null
 
 
@@ -1371,6 +1381,7 @@ class MNullableType
 
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
+	redef fun as_notnullable do return mtype
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
