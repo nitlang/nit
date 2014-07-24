@@ -382,8 +382,7 @@ class BashCompletion
 			addn "		return 0"
 			addn "	fi"
 		end
-		addn "  _filedir"
-		addn "\}"
-		addn "complete -F _{name} {name}"
+		addn "\} &&"
+		addn "complete -o default -F _{name} {name}"
 	end
 end
