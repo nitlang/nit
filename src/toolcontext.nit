@@ -202,13 +202,8 @@ class ToolContext
 	# Verbose level
 	var verbose_level: Int = 0
 
-	# Bash completion behavior in command line
-	# see `BashCompletion`
-	var bash_completion: BashCompletion
-
 	init
 	do
-		bash_completion = new BashCompletion(self)
 		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
 	end
 
@@ -255,6 +250,7 @@ class ToolContext
 		end
 
 		if opt_bash_completion.value then
+			var bash_completion = new BashCompletion(self)
 			bash_completion.write_to(sys.stdout)
 			exit 0
 		end
