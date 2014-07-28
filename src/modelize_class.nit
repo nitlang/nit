@@ -154,6 +154,9 @@ redef class ModelBuilder
 						bounds.add(bound)
 						nfd.bound = bound
 					end
+					if bound isa MClassType and bound.mclass.kind == enum_kind then
+						warning(nfdt, "Warning: Useless formal parameter type since `{bound}` cannnot have subclasses.")
+					end
 				else if mclass.mclassdefs.is_empty then
 					# No bound, then implicitely bound by nullable Object
 					var bound = objectclass.mclass_type.as_nullable

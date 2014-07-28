@@ -1292,7 +1292,13 @@ class MParameterType
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
 
 		if mtype isa MGenericType and mtype.mclass == self.mclass then
-			return mtype.arguments[self.rank]
+			var res = mtype.arguments[self.rank]
+			if anchor != null and res.need_anchor then
+				# Maybe the result can be resolved more if are bound to a final class
+				var r2 = res.anchor_to(mmodule, anchor)
+				if r2 isa MClassType and r2.mclass.kind == enum_kind then return r2
+			end
+			return res
 		end
 
 		# self is a parameter type of mtype (or of a super-class of mtype)
