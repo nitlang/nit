@@ -135,6 +135,8 @@ redef class ModelBuilder
 
 		var sources = new Array[MModule]
 		var annotations = null
+		# FIXME: It it not how module imporation works, since it considers paths, and not relationships
+		# Morehover, using paths, the complecity is exponential (instead of quatratic with relationships)
 		for mmod in mmodule.in_importation.direct_greaters do
 			var res = priority_annotation_on_modules(name, mmod)
 			if res != null then
