@@ -187,7 +187,7 @@ redef class ModelBuilder
 		# It is a case-by case
 		var vis_type: nullable MVisibility = null # The own visibility of the type
 		var mmodule_type: nullable MModule = null # The origial module of the type
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 		if mtype isa MClassType then
 			vis_type = mtype.mclass.visibility
 			mmodule_type = mtype.mclass.intro.mmodule

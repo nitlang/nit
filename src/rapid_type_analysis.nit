@@ -88,7 +88,7 @@ class RapidTypeAnalysis
 		var mtype = callsite.recv
 		var anchor = callsite.anchor
 		if anchor != null then mtype = mtype.anchor_to(callsite.mmodule, anchor)
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 		assert mtype isa MClassType
 		mtype = mtype.mclass.intro.bound_mtype
 		var mproperty = callsite.mproperty
@@ -457,7 +457,7 @@ class RapidTypeVisitor
 	do
 		mtype = mtype.anchor_to(self.analysis.mainmodule, self.receiver)
 		if mtype isa MNullType then return null
-		if mtype isa MNullableType then mtype = mtype.mtype
+		mtype = mtype.as_notnullable
 		assert mtype isa MClassType
 		assert not mtype.need_anchor
 		return mtype
