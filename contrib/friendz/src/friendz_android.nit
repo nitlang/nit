@@ -8,7 +8,10 @@
 # http://sam.zoy.org/projects/COPYING.WTFPL for more details.
 
 # android version of the game
-module friendz_android
+module friendz_android is
+	app_name("ChainZ of FriendZ")
+	app_version(0, 1, git_revision)
+end
 
 import friendz
 import mnit_android

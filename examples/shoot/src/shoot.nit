@@ -14,10 +14,7 @@
 
 # Space shooter.
 # This program is a fun game but also a good example of the scene2d module
-module shoot is
-	app_name("Space Shooter")
-	app_version(0, 1, git_revision)
-end
+module shoot
 
 import mnit
 import shoot_logic
