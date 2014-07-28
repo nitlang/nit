@@ -117,6 +117,8 @@ redef class ToolContext
 					break
 				end
 			end
+			var v = new AnnotationCheckVisitor(self)
+			v.enter_visit(nmodule)
 			self.check_errors
 		end
 
@@ -136,6 +138,22 @@ private class AnnotationPhaseVisitor
 	do
 		n.visit_all(self)
 		if n isa AAnnotation then phase.process_annotated_node(n.parent.parent.as(not null), n)
+	end
+end
+
+private class AnnotationCheckVisitor
+	super Visitor
+
+	var tc: ToolContext
+
+	init(tc: ToolContext) do self.tc = tc
+
+	redef fun visit(n)
+	do
+		n.visit_all(self)
+		if n isa AAnnotation and not n.processed then
+			tc.warning(n.location, "Warning: unprocessed annotation.")
+		end
 	end
 end
 
@@ -184,5 +202,12 @@ abstract class Phase
 	# Specific actions to execute on annotated nodes
 	# Note that the order of the visit is the one of the file
 	# @toimplement
+	# Note: it is up to the phase to set `nat.processed` to true
 	fun process_annotated_node(node: ANode, nat: AAnnotation) do end
+end
+
+redef class AAnnotation
+	# Is the annotation processed by a phase or something?
+	# This tag is used to show warnings on remaining unprocessed annotations
+	var processed writable = false
 end
