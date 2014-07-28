@@ -202,13 +202,8 @@ class ToolContext
 	# Verbose level
 	var verbose_level: Int = 0
 
-	# Bash completion behavior in command line
-	# see `BashCompletion`
-	var bash_completion: BashCompletion
-
 	init
 	do
-		bash_completion = new BashCompletion(self)
 		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
 	end
 
@@ -255,8 +250,8 @@ class ToolContext
 		end
 
 		if opt_bash_completion.value then
-			print bash_completion.write_to_string
-			bash_completion.write_to_file("{sys.program_name}.bash")
+			var bash_completion = new BashCompletion(self)
+			bash_completion.write_to(sys.stdout)
 			exit 0
 		end
 
@@ -301,7 +296,7 @@ class ToolContext
 		if opt_set_dummy_tool.value then
 			return "DUMMY_TOOL"
 		end
-		return sys.program_name
+		return sys.program_name.basename("")
 	end
 
 	# The identified root directory of the Nit project
@@ -344,8 +339,8 @@ end
 #	--help                 --only-metamodel       --source
 #	--ignore-visibility    --only-parse           --stop-on-first-error
 #
-# Generated file must be placed in system bash_completion directory `/etc/bash_completion.d/`
-# or in the user directory `~/.bash_completion`.
+# Generated file can be placed in system bash_completion directory `/etc/bash_completion.d/`
+# or source it in `~/.bash_completion`.
 class BashCompletion
 	super Template
 
@@ -382,8 +377,7 @@ class BashCompletion
 			addn "		return 0"
 			addn "	fi"
 		end
-		addn "  _filedir"
-		addn "\}"
-		addn "complete -F _{name} {name}"
+		addn "\} &&"
+		addn "complete -o default -F _{name} {name}"
 	end
 end
