@@ -33,6 +33,7 @@ class PkgconfigPhase
 	do
 		# Skip if we are not interested
 		if nat.name != "pkgconfig" then return
+		nat.processed = true
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder

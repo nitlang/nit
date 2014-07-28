@@ -40,6 +40,8 @@ private class SerializationPhasePreModel
 	do
 		# Skip if we are not interested
 		if nat.n_atid.n_id.text != "auto_serializable" then return
+		nat.processed = true
+
 		if not nclassdef isa AStdClassdef then
 			toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be automatically serialized.")
 			return
