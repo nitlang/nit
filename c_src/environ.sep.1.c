@@ -4,67 +4,119 @@ val* environ__String__environ(val* self) {
 val* var /* : String */;
 char* var1 /* : NativeString */;
 char* var2 /* : NativeString */;
+char* var4 /* : NativeString */;
 char* var_res /* var res: NativeString */;
 static char* varonce;
 static int varonce_guard;
-char* var3 /* : NativeString */;
-static val* varonce4;
-val* var5 /* : String */;
-char* var6 /* : NativeString */;
-long var7 /* : Int */;
-val* var8 /* : String */;
-char* var9 /* : NativeString */;
-char* var10 /* : NativeString */;
+char* var5 /* : NativeString */;
+static val* varonce6;
+val* var7 /* : String */;
+char* var8 /* : NativeString */;
+long var9 /* : Int */;
+val* var10 /* : FlatString */;
+char* var11 /* : NativeString */;
+char* var12 /* : NativeString */;
+char* var14 /* : NativeString */;
 char* var_nulstr /* var nulstr: NativeString */;
-short int var11 /* : Bool */;
-val* var12 /* : Object */;
-val* var13 /* : nullable Object */;
-val* var14 /* : String */;
-static val* varonce15;
-val* var16 /* : String */;
-char* var17 /* : NativeString */;
-long var18 /* : Int */;
-val* var19 /* : String */;
-var1 = ((char* (*)(val*))(self->class->vft[COLOR_string__String__to_cstring]))(self) /* to_cstring on <self:String>*/;
-var2 = environ__NativeString__get_environ(var1);
+short int var15 /* : Bool */;
+short int var16 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+val* var18 /* : nullable Object */;
+short int var19 /* : Bool */;
+val* var_other21 /* var other: nullable Object */;
+short int var22 /* : Bool */;
+val* var24 /* : Object */;
+short int var25 /* : Bool */;
+short int var26 /* : Bool */;
+val* var27 /* : String */;
+static val* varonce28;
+val* var29 /* : String */;
+char* var30 /* : NativeString */;
+long var31 /* : Int */;
+val* var32 /* : FlatString */;
+{
+var1 = string__FlatString__to_cstring(self);
+}
+{
+{ /* Inline environ#NativeString#get_environ (var1) on <var1:NativeString> */
+var4 = string_NativeString_NativeString_get_environ_0(var1);
+var2 = var4;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
+}
+}
 var_res = var2;
 if (varonce_guard) {
-var3 = varonce;
+var5 = varonce;
 } else {
-if (varonce4) {
-var5 = varonce4;
+if (varonce6) {
+var7 = varonce6;
 } else {
-var6 = "";
-var7 = 0;
-var8 = string__NativeString__to_s_with_length(var6, var7);
-var5 = var8;
-varonce4 = var5;
+var8 = "";
+var9 = 0;
+var10 = string__NativeString__to_s_with_length(var8, var9);
+var7 = var10;
+varonce6 = var7;
 }
-var9 = ((char* (*)(val*))(var5->class->vft[COLOR_string__String__to_cstring]))(var5) /* to_cstring on <var5:String>*/;
-var10 = environ__NativeString__get_environ(var9);
-var3 = var10;
-varonce = var3;
+{
+var11 = string__FlatString__to_cstring(var7);
+}
+{
+{ /* Inline environ#NativeString#get_environ (var11) on <var11:NativeString> */
+var14 = string_NativeString_NativeString_get_environ_0(var11);
+var12 = var14;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
+}
+}
+var5 = var12;
+varonce = var5;
 varonce_guard = 1;
 }
-var_nulstr = var3;
-var12 = BOX_string__NativeString(var_res); /* autobox from NativeString to Object */
-var13 = BOX_string__NativeString(var_nulstr); /* autobox from NativeString to nullable Object */
-var11 = kernel__Object___33d_61d(var12, var13);
-if (var11){
-var14 = string__NativeString__to_s(var_res);
-var = var14;
+var_nulstr = var5;
+{
+{ /* Inline kernel#Object#!= (var_res,var_nulstr) on <var_res:NativeString> */
+var18 = BOX_string__NativeString(var_nulstr); /* autobox from NativeString to nullable Object */
+var_other = var18;
+{ /* Inline kernel#Object#== (var_res,var_other) on <var_res:NativeString> */
+var_other21 = var_other;
+{
+{ /* Inline kernel#Object#is_same_instance (var_res,var_other21) on <var_res:NativeString> */
+var24 = BOX_string__NativeString(var_res); /* autobox from NativeString to Object */
+var25 = var24 == var_other21 || (var_other21 != NULL && var24->class == var_other21->class && ((var24->class->box_kind == 1 && ((struct instance_kernel__Int*)var24)->value == ((struct instance_kernel__Int*)var_other21)->value) || (var24->class->box_kind == 2 && ((struct instance_kernel__Bool*)var24)->value == ((struct instance_kernel__Bool*)var_other21)->value) || (var24->class->box_kind == 3 && ((struct instance_kernel__Char*)var24)->value == ((struct instance_kernel__Char*)var_other21)->value) || (var24->class->box_kind == 4 && ((struct instance_kernel__Float*)var24)->value == ((struct instance_kernel__Float*)var_other21)->value) || (var24->class->box_kind == 5 && ((struct instance_kernel__Pointer*)var24)->value == ((struct instance_kernel__Pointer*)var_other21)->value) || (var24->class->box_kind == 6 && ((struct instance_kernel__Pointer*)var24)->value == ((struct instance_kernel__Pointer*)var_other21)->value)));
+var22 = var25;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
+}
+}
+var19 = var22;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+var26 = !var19;
+var16 = var26;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
+}
+var15 = var16;
+}
+if (var15){
+{
+var27 = string__NativeString__to_s(var_res);
+}
+var = var27;
 goto RET_LABEL;
 } else {
-if (varonce15) {
-var16 = varonce15;
+if (varonce28) {
+var29 = varonce28;
 } else {
-var17 = "";
-var18 = 0;
-var19 = string__NativeString__to_s_with_length(var17, var18);
-var16 = var19;
-varonce15 = var16;
+var30 = "";
+var31 = 0;
+var32 = string__NativeString__to_s_with_length(var30, var31);
+var29 = var32;
+varonce28 = var29;
 }
-var = var16;
+var = var29;
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -78,22 +130,6 @@ var1 = environ__String__environ(self);
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method environ#String#setenv for (self: String, String) */
-void environ__String__setenv(val* self, val* p0) {
-val* var_v /* var v: String */;
-char* var /* : NativeString */;
-char* var1 /* : NativeString */;
-var_v = p0;
-var = ((char* (*)(val*))(self->class->vft[COLOR_string__String__to_cstring]))(self) /* to_cstring on <self:String>*/;
-var1 = ((char* (*)(val*))(var_v->class->vft[COLOR_string__String__to_cstring]))(var_v) /* to_cstring on <var_v:String>*/;
-environ__NativeString__setenv(var, var1);
-RET_LABEL:;
-}
-/* method environ#String#setenv for (self: Object, String) */
-void VIRTUAL_environ__String__setenv(val* self, val* p0) {
-environ__String__setenv(self, p0);
-RET_LABEL:;
 }
 /* method environ#NativeString#get_environ for (self: NativeString): NativeString */
 char* environ__NativeString__get_environ(char* self) {
@@ -109,22 +145,16 @@ return var;
 char* VIRTUAL_environ__NativeString__get_environ(val* self) {
 char* var /* : NativeString */;
 char* var1 /* : NativeString */;
-char* var2 /* : NativeString */;
-var2 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
-var1 = environ__NativeString__get_environ(var2);
+char* var3 /* : NativeString */;
+char* var4 /* : NativeString */;
+{ /* Inline environ#NativeString#get_environ (self) on <self:Object(NativeString)> */
+var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var3 = string_NativeString_NativeString_get_environ_0(var4);
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method environ#NativeString#setenv for (self: NativeString, NativeString) */
-void environ__NativeString__setenv(char* self, char* p0) {
-string_NativeString_NativeString_setenv_1(self, p0);
-RET_LABEL:;
-}
-/* method environ#NativeString#setenv for (self: Object, NativeString) */
-void VIRTUAL_environ__NativeString__setenv(val* self, char* p0) {
-char* var /* : NativeString */;
-var = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
-environ__NativeString__setenv(var, p0);
-RET_LABEL:;
 }

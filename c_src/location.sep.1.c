@@ -3,10 +3,10 @@
 val* location__SourceFile__filename(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = self->attrs[COLOR_location__SourceFile___64dfilename].val; /* @filename on <self:SourceFile> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @filename");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 22);
+var1 = self->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <self:SourceFile> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
 show_backtrace(1);
 }
 var = var1;
@@ -17,29 +17,42 @@ return var;
 val* VIRTUAL_location__SourceFile__filename(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = location__SourceFile__filename(self);
+val* var3 /* : String */;
+{ /* Inline location#SourceFile#filename (self) on <self:Object(SourceFile)> */
+var3 = self->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <self:Object(SourceFile)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#SourceFile#filename= for (self: SourceFile, String) */
 void location__SourceFile__filename_61d(val* self, val* p0) {
-self->attrs[COLOR_location__SourceFile___64dfilename].val = p0; /* @filename on <self:SourceFile> */
+self->attrs[COLOR_location__SourceFile___filename].val = p0; /* _filename on <self:SourceFile> */
 RET_LABEL:;
 }
 /* method location#SourceFile#filename= for (self: Object, String) */
 void VIRTUAL_location__SourceFile__filename_61d(val* self, val* p0) {
-location__SourceFile__filename_61d(self, p0);
+{ /* Inline location#SourceFile#filename= (self,p0) on <self:Object(SourceFile)> */
+self->attrs[COLOR_location__SourceFile___filename].val = p0; /* _filename on <self:Object(SourceFile)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#SourceFile#string for (self: SourceFile): String */
 val* location__SourceFile__string(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = self->attrs[COLOR_location__SourceFile___64dstring].val; /* @string on <self:SourceFile> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @string");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 25);
+var1 = self->attrs[COLOR_location__SourceFile___string].val; /* _string on <self:SourceFile> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
 show_backtrace(1);
 }
 var = var1;
@@ -50,19 +63,32 @@ return var;
 val* VIRTUAL_location__SourceFile__string(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = location__SourceFile__string(self);
+val* var3 /* : String */;
+{ /* Inline location#SourceFile#string (self) on <self:Object(SourceFile)> */
+var3 = self->attrs[COLOR_location__SourceFile___string].val; /* _string on <self:Object(SourceFile)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#SourceFile#string= for (self: SourceFile, String) */
 void location__SourceFile__string_61d(val* self, val* p0) {
-self->attrs[COLOR_location__SourceFile___64dstring].val = p0; /* @string on <self:SourceFile> */
+self->attrs[COLOR_location__SourceFile___string].val = p0; /* _string on <self:SourceFile> */
 RET_LABEL:;
 }
 /* method location#SourceFile#string= for (self: Object, String) */
 void VIRTUAL_location__SourceFile__string_61d(val* self, val* p0) {
-location__SourceFile__string_61d(self, p0);
+{ /* Inline location#SourceFile#string= (self,p0) on <self:Object(SourceFile)> */
+self->attrs[COLOR_location__SourceFile___string].val = p0; /* _string on <self:Object(SourceFile)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#SourceFile#init for (self: SourceFile, String, IStream) */
@@ -70,59 +96,61 @@ void location__SourceFile__init(val* self, val* p0, val* p1) {
 val* var_filename /* var filename: String */;
 val* var_stream /* var stream: IStream */;
 val* var /* : String */;
-val* var1 /* : Array[Int] */;
-long var2 /* : Int */;
-long var3 /* : Int */;
-val* var4 /* : nullable Object */;
+val* var3 /* : Array[Int] */;
+val* var5 /* : Array[Int] */;
+long var6 /* : Int */;
+long var7 /* : Int */;
+val* var8 /* : nullable Object */;
 var_filename = p0;
 var_stream = p1;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__SourceFile__filename_61d]))(self, var_filename) /* filename= on <self:SourceFile>*/;
-var = ((val* (*)(val*))(var_stream->class->vft[COLOR_stream__IStream__read_all]))(var_stream) /* read_all on <var_stream:IStream>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__SourceFile__string_61d]))(self, var) /* string= on <self:SourceFile>*/;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__SourceFile__line_starts]))(self) /* line_starts on <self:SourceFile>*/;
-var2 = 0;
-var3 = 0;
-var4 = BOX_kernel__Int(var3); /* autobox from Int to nullable Object */
-((void (*)(val*, long, val*))(var1->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var1, var2, var4) /* []= on <var1:Array[Int]>*/;
+{
+{ /* Inline location#SourceFile#filename= (self,var_filename) on <self:SourceFile> */
+self->attrs[COLOR_location__SourceFile___filename].val = var_filename; /* _filename on <self:SourceFile> */
+RET_LABEL1:(void)0;
+}
+}
+{
+var = stream__BufferedIStream__read_all(var_stream);
+}
+{
+{ /* Inline location#SourceFile#string= (self,var) on <self:SourceFile> */
+self->attrs[COLOR_location__SourceFile___string].val = var; /* _string on <self:SourceFile> */
+RET_LABEL2:(void)0;
+}
+}
+{
+{ /* Inline location#SourceFile#line_starts (self) on <self:SourceFile> */
+var5 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:SourceFile> */
+if (unlikely(var5 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
+}
+var3 = var5;
+RET_LABEL4:(void)0;
+}
+}
+var6 = 0;
+var7 = 0;
+{
+var8 = BOX_kernel__Int(var7); /* autobox from Int to nullable Object */
+array__Array___91d_93d_61d(var3, var6, var8); /* Direct call array#Array#[]= on <var3:Array[Int]>*/
+}
 RET_LABEL:;
 }
 /* method location#SourceFile#init for (self: Object, String, IStream) */
 void VIRTUAL_location__SourceFile__init(val* self, val* p0, val* p1) {
-location__SourceFile__init(self, p0, p1);
-RET_LABEL:;
-}
-/* method location#SourceFile#from_string for (self: SourceFile, String, String) */
-void location__SourceFile__from_string(val* self, val* p0, val* p1) {
-val* var_filename /* var filename: String */;
-val* var_string /* var string: String */;
-val* var /* : Array[Int] */;
-long var1 /* : Int */;
-long var2 /* : Int */;
-val* var3 /* : nullable Object */;
-var_filename = p0;
-var_string = p1;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__SourceFile__filename_61d]))(self, var_filename) /* filename= on <self:SourceFile>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__SourceFile__string_61d]))(self, var_string) /* string= on <self:SourceFile>*/;
-var = ((val* (*)(val*))(self->class->vft[COLOR_location__SourceFile__line_starts]))(self) /* line_starts on <self:SourceFile>*/;
-var1 = 0;
-var2 = 0;
-var3 = BOX_kernel__Int(var2); /* autobox from Int to nullable Object */
-((void (*)(val*, long, val*))(var->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var, var1, var3) /* []= on <var:Array[Int]>*/;
-RET_LABEL:;
-}
-/* method location#SourceFile#from_string for (self: Object, String, String) */
-void VIRTUAL_location__SourceFile__from_string(val* self, val* p0, val* p1) {
-location__SourceFile__from_string(self, p0, p1);
+location__SourceFile__init(self, p0, p1); /* Direct call location#SourceFile#init on <self:Object(SourceFile)>*/
 RET_LABEL:;
 }
 /* method location#SourceFile#line_starts for (self: SourceFile): Array[Int] */
 val* location__SourceFile__line_starts(val* self) {
 val* var /* : Array[Int] */;
 val* var1 /* : Array[Int] */;
-var1 = self->attrs[COLOR_location__SourceFile___64dline_starts].val; /* @line_starts on <self:SourceFile> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @line_starts");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 44);
+var1 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:SourceFile> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
 show_backtrace(1);
 }
 var = var1;
@@ -133,26 +161,26 @@ return var;
 val* VIRTUAL_location__SourceFile__line_starts(val* self) {
 val* var /* : Array[Int] */;
 val* var1 /* : Array[Int] */;
-var1 = location__SourceFile__line_starts(self);
+val* var3 /* : Array[Int] */;
+{ /* Inline location#SourceFile#line_starts (self) on <self:Object(SourceFile)> */
+var3 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:Object(SourceFile)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method location#SourceFile#line_starts= for (self: SourceFile, Array[Int]) */
-void location__SourceFile__line_starts_61d(val* self, val* p0) {
-self->attrs[COLOR_location__SourceFile___64dline_starts].val = p0; /* @line_starts on <self:SourceFile> */
-RET_LABEL:;
-}
-/* method location#SourceFile#line_starts= for (self: Object, Array[Int]) */
-void VIRTUAL_location__SourceFile__line_starts_61d(val* self, val* p0) {
-location__SourceFile__line_starts_61d(self, p0);
-RET_LABEL:;
 }
 /* method location#Location#file for (self: Location): nullable SourceFile */
 val* location__Location__file(val* self) {
 val* var /* : nullable SourceFile */;
 val* var1 /* : nullable SourceFile */;
-var1 = self->attrs[COLOR_location__Location___64dfile].val; /* @file on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -161,26 +189,34 @@ return var;
 val* VIRTUAL_location__Location__file(val* self) {
 val* var /* : nullable SourceFile */;
 val* var1 /* : nullable SourceFile */;
-var1 = location__Location__file(self);
+val* var3 /* : nullable SourceFile */;
+{ /* Inline location#Location#file (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#file= for (self: Location, nullable SourceFile) */
 void location__Location__file_61d(val* self, val* p0) {
-self->attrs[COLOR_location__Location___64dfile].val = p0; /* @file on <self:Location> */
+self->attrs[COLOR_location__Location___file].val = p0; /* _file on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#file= for (self: Object, nullable SourceFile) */
 void VIRTUAL_location__Location__file_61d(val* self, val* p0) {
-location__Location__file_61d(self, p0);
+{ /* Inline location#Location#file= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___file].val = p0; /* _file on <self:Object(Location)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#Location#line_start for (self: Location): Int */
 long location__Location__line_start(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = self->attrs[COLOR_location__Location___64dline_start].l; /* @line_start on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -189,26 +225,34 @@ return var;
 long VIRTUAL_location__Location__line_start(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = location__Location__line_start(self);
+long var3 /* : Int */;
+{ /* Inline location#Location#line_start (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#line_start= for (self: Location, Int) */
 void location__Location__line_start_61d(val* self, long p0) {
-self->attrs[COLOR_location__Location___64dline_start].l = p0; /* @line_start on <self:Location> */
+self->attrs[COLOR_location__Location___line_start].l = p0; /* _line_start on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#line_start= for (self: Object, Int) */
 void VIRTUAL_location__Location__line_start_61d(val* self, long p0) {
-location__Location__line_start_61d(self, p0);
+{ /* Inline location#Location#line_start= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___line_start].l = p0; /* _line_start on <self:Object(Location)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#Location#line_end for (self: Location): Int */
 long location__Location__line_end(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = self->attrs[COLOR_location__Location___64dline_end].l; /* @line_end on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -217,26 +261,34 @@ return var;
 long VIRTUAL_location__Location__line_end(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = location__Location__line_end(self);
+long var3 /* : Int */;
+{ /* Inline location#Location#line_end (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#line_end= for (self: Location, Int) */
 void location__Location__line_end_61d(val* self, long p0) {
-self->attrs[COLOR_location__Location___64dline_end].l = p0; /* @line_end on <self:Location> */
+self->attrs[COLOR_location__Location___line_end].l = p0; /* _line_end on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#line_end= for (self: Object, Int) */
 void VIRTUAL_location__Location__line_end_61d(val* self, long p0) {
-location__Location__line_end_61d(self, p0);
+{ /* Inline location#Location#line_end= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___line_end].l = p0; /* _line_end on <self:Object(Location)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#Location#column_start for (self: Location): Int */
 long location__Location__column_start(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = self->attrs[COLOR_location__Location___64dcolumn_start].l; /* @column_start on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -245,26 +297,34 @@ return var;
 long VIRTUAL_location__Location__column_start(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = location__Location__column_start(self);
+long var3 /* : Int */;
+{ /* Inline location#Location#column_start (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#column_start= for (self: Location, Int) */
 void location__Location__column_start_61d(val* self, long p0) {
-self->attrs[COLOR_location__Location___64dcolumn_start].l = p0; /* @column_start on <self:Location> */
+self->attrs[COLOR_location__Location___column_start].l = p0; /* _column_start on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#column_start= for (self: Object, Int) */
 void VIRTUAL_location__Location__column_start_61d(val* self, long p0) {
-location__Location__column_start_61d(self, p0);
+{ /* Inline location#Location#column_start= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___column_start].l = p0; /* _column_start on <self:Object(Location)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#Location#column_end for (self: Location): Int */
 long location__Location__column_end(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = self->attrs[COLOR_location__Location___64dcolumn_end].l; /* @column_end on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -273,19 +333,27 @@ return var;
 long VIRTUAL_location__Location__column_end(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = location__Location__column_end(self);
+long var3 /* : Int */;
+{ /* Inline location#Location#column_end (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#column_end= for (self: Location, Int) */
 void location__Location__column_end_61d(val* self, long p0) {
-self->attrs[COLOR_location__Location___64dcolumn_end].l = p0; /* @column_end on <self:Location> */
+self->attrs[COLOR_location__Location___column_end].l = p0; /* _column_end on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#column_end= for (self: Object, Int) */
 void VIRTUAL_location__Location__column_end_61d(val* self, long p0) {
-location__Location__column_end_61d(self, p0);
+{ /* Inline location#Location#column_end= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___column_end].l = p0; /* _column_end on <self:Object(Location)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method location#Location#init for (self: Location, nullable SourceFile, Int, Int, Int, Int) */
@@ -300,68 +368,176 @@ var_line_s = p1;
 var_line_e = p2;
 var_column_s = p3;
 var_column_e = p4;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__Location__file_61d]))(self, var_f) /* file= on <self:Location>*/;
-((void (*)(val*, long))(self->class->vft[COLOR_location__Location__line_start_61d]))(self, var_line_s) /* line_start= on <self:Location>*/;
-((void (*)(val*, long))(self->class->vft[COLOR_location__Location__line_end_61d]))(self, var_line_e) /* line_end= on <self:Location>*/;
-((void (*)(val*, long))(self->class->vft[COLOR_location__Location__column_start_61d]))(self, var_column_s) /* column_start= on <self:Location>*/;
-((void (*)(val*, long))(self->class->vft[COLOR_location__Location__column_end_61d]))(self, var_column_e) /* column_end= on <self:Location>*/;
+{
+{ /* Inline location#Location#file= (self,var_f) on <self:Location> */
+self->attrs[COLOR_location__Location___file].val = var_f; /* _file on <self:Location> */
+RET_LABEL1:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_start= (self,var_line_s) on <self:Location> */
+self->attrs[COLOR_location__Location___line_start].l = var_line_s; /* _line_start on <self:Location> */
+RET_LABEL2:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_end= (self,var_line_e) on <self:Location> */
+self->attrs[COLOR_location__Location___line_end].l = var_line_e; /* _line_end on <self:Location> */
+RET_LABEL3:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start= (self,var_column_s) on <self:Location> */
+self->attrs[COLOR_location__Location___column_start].l = var_column_s; /* _column_start on <self:Location> */
+RET_LABEL4:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end= (self,var_column_e) on <self:Location> */
+self->attrs[COLOR_location__Location___column_end].l = var_column_e; /* _column_end on <self:Location> */
+RET_LABEL5:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method location#Location#init for (self: Object, nullable SourceFile, Int, Int, Int, Int) */
 void VIRTUAL_location__Location__init(val* self, val* p0, long p1, long p2, long p3, long p4) {
-location__Location__init(self, p0, p1, p2, p3, p4);
+location__Location__init(self, p0, p1, p2, p3, p4); /* Direct call location#Location#init on <self:Object(Location)>*/
 RET_LABEL:;
 }
 /* method location#Location#pstart for (self: Location): Int */
 long location__Location__pstart(val* self) {
 long var /* : Int */;
 val* var1 /* : nullable SourceFile */;
-val* var2 /* : Array[Int] */;
-long var3 /* : Int */;
-long var4 /* : Int */;
-long var5 /* : Int */;
+val* var3 /* : nullable SourceFile */;
+val* var4 /* : Array[Int] */;
+val* var6 /* : Array[Int] */;
 long var7 /* : Int */;
-val* var8 /* : nullable Object */;
 long var9 /* : Int */;
 long var10 /* : Int */;
-long var12 /* : Int */;
-long var13 /* : Int */;
+long var11 /* : Int */;
+short int var13 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
 long var14 /* : Int */;
-long var15 /* : Int */;
-long var17 /* : Int */;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
+val* var15 /* : nullable Object */;
+long var16 /* : Int */;
+long var18 /* : Int */;
+long var19 /* : Int */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+long var25 /* : Int */;
+long var26 /* : Int */;
+long var27 /* : Int */;
+long var28 /* : Int */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+const char* var_class_name33;
+long var34 /* : Int */;
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var3 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 68);
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 68);
 show_backtrace(1);
 } else {
-var2 = ((val* (*)(val*))(var1->class->vft[COLOR_location__SourceFile__line_starts]))(var1) /* line_starts on <var1:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#line_starts (var1) on <var1:nullable SourceFile> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var3 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var4 = 1;
-{ /* Inline kernel#Int#- (var3,var4) */
-var7 = var3 - var4;
-var5 = var7;
-goto RET_LABEL6;
-RET_LABEL6:(void)0;
+var6 = var1->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var1:nullable SourceFile> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var8 = ((val* (*)(val*, long))(var2->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var2, var5) /* [] on <var2:Array[Int]>*/;
-var9 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-{ /* Inline kernel#Int#+ (var8,var9) */
-var12 = ((struct instance_kernel__Int*)var8)->value; /* autounbox from nullable Object to Int */;
-var13 = var12 + var9;
-var10 = var13;
-goto RET_LABEL11;
-RET_LABEL11:(void)0;
+var4 = var6;
+RET_LABEL5:(void)0;
 }
-var14 = 1;
-{ /* Inline kernel#Int#- (var10,var14) */
-var17 = var10 - var14;
-var15 = var17;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
 }
-var = var15;
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var9 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var7 = var9;
+RET_LABEL8:(void)0;
+}
+}
+var10 = 1;
+{
+{ /* Inline kernel#Int#- (var7,var10) on <var7:Int> */
+/* Covariant cast for argument 0 (i) <var10:Int> isa OTHER */
+/* <var10:Int> isa OTHER */
+var13 = 1; /* easy <var10:Int> isa OTHER*/
+if (unlikely(!var13)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var14 = var7 - var10;
+var11 = var14;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
+}
+}
+{
+var15 = array__Array___91d_93d(var4, var11);
+}
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var18 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var16 = var18;
+RET_LABEL17:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var15,var16) on <var15:nullable Object(Int)> */
+/* Covariant cast for argument 0 (i) <var16:Int> isa OTHER */
+/* <var16:Int> isa OTHER */
+var21 = 1; /* easy <var16:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name24 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var25 = ((struct instance_kernel__Int*)var15)->value; /* autounbox from nullable Object to Int */;
+var26 = var25 + var16;
+var19 = var26;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+}
+var27 = 1;
+{
+{ /* Inline kernel#Int#- (var19,var27) on <var19:Int> */
+/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
+/* <var27:Int> isa OTHER */
+var30 = 1; /* easy <var27:Int> isa OTHER*/
+if (unlikely(!var30)) {
+var_class_name33 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var34 = var19 - var27;
+var28 = var34;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
+}
+}
+var = var28;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -379,52 +555,135 @@ return var;
 long location__Location__pend(val* self) {
 long var /* : Int */;
 val* var1 /* : nullable SourceFile */;
-val* var2 /* : Array[Int] */;
-long var3 /* : Int */;
-long var4 /* : Int */;
-long var5 /* : Int */;
+val* var3 /* : nullable SourceFile */;
+val* var4 /* : Array[Int] */;
+val* var6 /* : Array[Int] */;
 long var7 /* : Int */;
-val* var8 /* : nullable Object */;
 long var9 /* : Int */;
 long var10 /* : Int */;
-long var12 /* : Int */;
-long var13 /* : Int */;
+long var11 /* : Int */;
+short int var13 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
 long var14 /* : Int */;
-long var15 /* : Int */;
-long var17 /* : Int */;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
+val* var15 /* : nullable Object */;
+long var16 /* : Int */;
+long var18 /* : Int */;
+long var19 /* : Int */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+long var25 /* : Int */;
+long var26 /* : Int */;
+long var27 /* : Int */;
+long var28 /* : Int */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+const char* var_class_name33;
+long var34 /* : Int */;
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var3 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 71);
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 71);
 show_backtrace(1);
 } else {
-var2 = ((val* (*)(val*))(var1->class->vft[COLOR_location__SourceFile__line_starts]))(var1) /* line_starts on <var1:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#line_starts (var1) on <var1:nullable SourceFile> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var3 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var4 = 1;
-{ /* Inline kernel#Int#- (var3,var4) */
-var7 = var3 - var4;
-var5 = var7;
-goto RET_LABEL6;
-RET_LABEL6:(void)0;
+var6 = var1->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var1:nullable SourceFile> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var8 = ((val* (*)(val*, long))(var2->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var2, var5) /* [] on <var2:Array[Int]>*/;
-var9 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-{ /* Inline kernel#Int#+ (var8,var9) */
-var12 = ((struct instance_kernel__Int*)var8)->value; /* autounbox from nullable Object to Int */;
-var13 = var12 + var9;
-var10 = var13;
-goto RET_LABEL11;
-RET_LABEL11:(void)0;
+var4 = var6;
+RET_LABEL5:(void)0;
 }
-var14 = 1;
-{ /* Inline kernel#Int#- (var10,var14) */
-var17 = var10 - var14;
-var15 = var17;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
 }
-var = var15;
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var9 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var7 = var9;
+RET_LABEL8:(void)0;
+}
+}
+var10 = 1;
+{
+{ /* Inline kernel#Int#- (var7,var10) on <var7:Int> */
+/* Covariant cast for argument 0 (i) <var10:Int> isa OTHER */
+/* <var10:Int> isa OTHER */
+var13 = 1; /* easy <var10:Int> isa OTHER*/
+if (unlikely(!var13)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var14 = var7 - var10;
+var11 = var14;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
+}
+}
+{
+var15 = array__Array___91d_93d(var4, var11);
+}
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var18 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var16 = var18;
+RET_LABEL17:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var15,var16) on <var15:nullable Object(Int)> */
+/* Covariant cast for argument 0 (i) <var16:Int> isa OTHER */
+/* <var16:Int> isa OTHER */
+var21 = 1; /* easy <var16:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name24 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var25 = ((struct instance_kernel__Int*)var15)->value; /* autounbox from nullable Object to Int */;
+var26 = var25 + var16;
+var19 = var26;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+}
+var27 = 1;
+{
+{ /* Inline kernel#Int#- (var19,var27) on <var19:Int> */
+/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
+/* <var27:Int> isa OTHER */
+var30 = 1; /* easy <var27:Int> isa OTHER*/
+if (unlikely(!var30)) {
+var_class_name33 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var34 = var19 - var27;
+var28 = var34;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
+}
+}
+var = var28;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -442,64 +701,153 @@ return var;
 val* location__Location__text(val* self) {
 val* var /* : String */;
 val* var1 /* : nullable String */;
+val* var3 /* : nullable String */;
 val* var_res /* var res: nullable String */;
-val* var2 /* : null */;
-short int var3 /* : Bool */;
+val* var4 /* : null */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var8 /* : Bool */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
 val* var_l /* var l: Location */;
-long var4 /* : Int */;
-long var_pstart /* var pstart: Int */;
-long var5 /* : Int */;
-long var_pend /* var pend: Int */;
-val* var6 /* : nullable SourceFile */;
-val* var7 /* : String */;
-long var8 /* : Int */;
-long var10 /* : Int */;
 long var11 /* : Int */;
+long var_pstart /* var pstart: Int */;
 long var12 /* : Int */;
-long var14 /* : Int */;
-val* var15 /* : String */;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__text_cache]))(self) /* text_cache on <self:Location>*/;
-var_res = var1;
-var2 = NULL;
-if (var_res == NULL) {
-var3 = 0; /* is null */
-} else {
-var3 = 1; /* arg is null and recv is not */
+long var_pend /* var pend: Int */;
+val* var13 /* : nullable SourceFile */;
+val* var15 /* : nullable SourceFile */;
+val* var16 /* : String */;
+val* var18 /* : String */;
+long var19 /* : Int */;
+short int var21 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var22 /* : Int */;
+long var23 /* : Int */;
+long var24 /* : Int */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+const char* var_class_name29;
+long var30 /* : Int */;
+val* var31 /* : String */;
+{
+{ /* Inline location#Location#text_cache (self) on <self:Location> */
+var3 = self->attrs[COLOR_location__Location___text_cache].val; /* _text_cache on <self:Location> */
+var1 = var3;
+RET_LABEL2:(void)0;
 }
-if (var3){
+}
+var_res = var1;
+var4 = NULL;
+if (var_res == NULL) {
+var5 = 0; /* is null */
+} else {
+var5 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_res,var4) on <var_res:nullable String> */
+var_other = var4;
+{
+var9 = ((short int (*)(val*, val*))(var_res->class->vft[COLOR_kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable String(String)>*/;
+var8 = var9;
+}
+var10 = !var8;
+var6 = var10;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
+}
+var5 = var6;
+}
+if (var5){
 var = var_res;
 goto RET_LABEL;
 } else {
 }
 var_l = self;
-var4 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__pstart]))(self) /* pstart on <self:Location>*/;
-var_pstart = var4;
-var5 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__pend]))(self) /* pend on <self:Location>*/;
-var_pend = var5;
-var6 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
-if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 81);
+{
+var11 = location__Location__pstart(self);
+}
+var_pstart = var11;
+{
+var12 = location__Location__pend(self);
+}
+var_pend = var12;
+{
+{ /* Inline location#Location#file (var_l) on <var_l:Location> */
+var15 = var_l->attrs[COLOR_location__Location___file].val; /* _file on <var_l:Location> */
+var13 = var15;
+RET_LABEL14:(void)0;
+}
+}
+if (var13 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 81);
 show_backtrace(1);
 } else {
-var7 = ((val* (*)(val*))(var6->class->vft[COLOR_location__SourceFile__string]))(var6) /* string on <var6:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#string (var13) on <var13:nullable SourceFile> */
+if (unlikely(var13 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+show_backtrace(1);
 }
-{ /* Inline kernel#Int#- (var_pend,var_pstart) */
-var10 = var_pend - var_pstart;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var18 = var13->attrs[COLOR_location__SourceFile___string].val; /* _string on <var13:nullable SourceFile> */
+if (unlikely(var18 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+show_backtrace(1);
 }
-var11 = 1;
-{ /* Inline kernel#Int#+ (var8,var11) */
-var14 = var8 + var11;
-var12 = var14;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var16 = var18;
+RET_LABEL17:(void)0;
 }
-var15 = ((val* (*)(val*, long, long))(var7->class->vft[COLOR_string__AbstractString__substring]))(var7, var_pstart, var12) /* substring on <var7:String>*/;
-var_res = var15;
-((void (*)(val*, val*))(self->class->vft[COLOR_location__Location__text_cache_61d]))(self, var_res) /* text_cache= on <self:Location>*/;
+}
+{
+{ /* Inline kernel#Int#- (var_pend,var_pstart) on <var_pend:Int> */
+/* Covariant cast for argument 0 (i) <var_pstart:Int> isa OTHER */
+/* <var_pstart:Int> isa OTHER */
+var21 = 1; /* easy <var_pstart:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var22 = var_pend - var_pstart;
+var19 = var22;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+}
+var23 = 1;
+{
+{ /* Inline kernel#Int#+ (var19,var23) on <var19:Int> */
+/* Covariant cast for argument 0 (i) <var23:Int> isa OTHER */
+/* <var23:Int> isa OTHER */
+var26 = 1; /* easy <var23:Int> isa OTHER*/
+if (unlikely(!var26)) {
+var_class_name29 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var30 = var19 + var23;
+var24 = var30;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
+}
+}
+{
+var31 = string__FlatString__substring(var16, var_pstart, var24);
+}
+var_res = var31;
+{
+{ /* Inline location#Location#text_cache= (self,var_res) on <self:Location> */
+self->attrs[COLOR_location__Location___text_cache].val = var_res; /* _text_cache on <self:Location> */
+RET_LABEL32:(void)0;
+}
+}
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
@@ -518,7 +866,7 @@ return var;
 val* location__Location__text_cache(val* self) {
 val* var /* : nullable String */;
 val* var1 /* : nullable String */;
-var1 = self->attrs[COLOR_location__Location___64dtext_cache].val; /* @text_cache on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___text_cache].val; /* _text_cache on <self:Location> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -527,39 +875,27 @@ return var;
 val* VIRTUAL_location__Location__text_cache(val* self) {
 val* var /* : nullable String */;
 val* var1 /* : nullable String */;
-var1 = location__Location__text_cache(self);
+val* var3 /* : nullable String */;
+{ /* Inline location#Location#text_cache (self) on <self:Object(Location)> */
+var3 = self->attrs[COLOR_location__Location___text_cache].val; /* _text_cache on <self:Object(Location)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method location#Location#text_cache= for (self: Location, nullable String) */
 void location__Location__text_cache_61d(val* self, val* p0) {
-self->attrs[COLOR_location__Location___64dtext_cache].val = p0; /* @text_cache on <self:Location> */
+self->attrs[COLOR_location__Location___text_cache].val = p0; /* _text_cache on <self:Location> */
 RET_LABEL:;
 }
 /* method location#Location#text_cache= for (self: Object, nullable String) */
 void VIRTUAL_location__Location__text_cache_61d(val* self, val* p0) {
-location__Location__text_cache_61d(self, p0);
-RET_LABEL:;
+{ /* Inline location#Location#text_cache= (self,p0) on <self:Object(Location)> */
+self->attrs[COLOR_location__Location___text_cache].val = p0; /* _text_cache on <self:Object(Location)> */
+RET_LABEL1:(void)0;
 }
-/* method location#Location#with_file for (self: Location, SourceFile) */
-void location__Location__with_file(val* self, val* p0) {
-val* var_f /* var f: SourceFile */;
-long var /* : Int */;
-long var1 /* : Int */;
-long var2 /* : Int */;
-long var3 /* : Int */;
-var_f = p0;
-var = 0;
-var1 = 0;
-var2 = 0;
-var3 = 0;
-((void (*)(val*, val*, long, long, long, long))(self->class->vft[COLOR_location__Location__init]))(self, var_f, var, var1, var2, var3) /* init on <self:Location>*/;
-RET_LABEL:;
-}
-/* method location#Location#with_file for (self: Object, SourceFile) */
-void VIRTUAL_location__Location__with_file(val* self, val* p0) {
-location__Location__with_file(self, p0);
 RET_LABEL:;
 }
 /* method location#Location#== for (self: Location, nullable Object): Bool */
@@ -570,39 +906,59 @@ val* var1 /* : null */;
 short int var2 /* : Bool */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
+short int var5 /* : Bool */;
 int cltype;
 int idtype;
-short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-val* var7 /* : nullable SourceFile */;
+short int var7 /* : Bool */;
 val* var8 /* : nullable SourceFile */;
-short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-long var11 /* : Int */;
-long var12 /* : Int */;
-short int var13 /* : Bool */;
+val* var10 /* : nullable SourceFile */;
+val* var11 /* : nullable SourceFile */;
+val* var13 /* : nullable SourceFile */;
+short int var14 /* : Bool */;
 short int var15 /* : Bool */;
-short int var16 /* : Bool */;
-short int var17 /* : Bool */;
-long var18 /* : Int */;
-long var19 /* : Int */;
+val* var_other17 /* var other: nullable Object */;
+short int var18 /* : Bool */;
+short int var19 /* : Bool */;
 short int var20 /* : Bool */;
-short int var22 /* : Bool */;
-short int var23 /* : Bool */;
-short int var24 /* : Bool */;
+short int var21 /* : Bool */;
+long var22 /* : Int */;
+long var24 /* : Int */;
 long var25 /* : Int */;
-long var26 /* : Int */;
-short int var27 /* : Bool */;
+long var27 /* : Int */;
+short int var28 /* : Bool */;
 short int var29 /* : Bool */;
-short int var30 /* : Bool */;
 short int var31 /* : Bool */;
-long var32 /* : Int */;
-long var33 /* : Int */;
-short int var34 /* : Bool */;
-short int var36 /* : Bool */;
-short int var37 /* : Bool */;
-short int var38 /* : Bool */;
-short int var39 /* : Bool */;
+short int var32 /* : Bool */;
+short int var33 /* : Bool */;
+long var34 /* : Int */;
+long var36 /* : Int */;
+long var37 /* : Int */;
+long var39 /* : Int */;
+short int var40 /* : Bool */;
+short int var41 /* : Bool */;
+short int var43 /* : Bool */;
+short int var44 /* : Bool */;
+short int var45 /* : Bool */;
+long var46 /* : Int */;
+long var48 /* : Int */;
+long var49 /* : Int */;
+long var51 /* : Int */;
+short int var52 /* : Bool */;
+short int var53 /* : Bool */;
+short int var55 /* : Bool */;
+short int var56 /* : Bool */;
+short int var57 /* : Bool */;
+long var58 /* : Int */;
+long var60 /* : Int */;
+long var61 /* : Int */;
+long var63 /* : Int */;
+short int var64 /* : Bool */;
+short int var65 /* : Bool */;
+short int var67 /* : Bool */;
+short int var68 /* : Bool */;
+short int var69 /* : Bool */;
+short int var70 /* : Bool */;
 var_other = p0;
 var1 = NULL;
 if (var_other == NULL) {
@@ -610,9 +966,13 @@ var2 = 1; /* is null */
 } else {
 var2 = 0; /* arg is null but recv is not */
 }
+if (0) {
+var3 = ((short int (*)(val*, val*))(var_other->class->vft[COLOR_kernel__Object___61d_61d]))(var_other, var1) /* == on <var_other:nullable Object>*/;
+var2 = var3;
+}
 if (var2){
-var3 = 0;
-var = var3;
+var4 = 0;
+var = var4;
 goto RET_LABEL;
 } else {
 }
@@ -620,92 +980,175 @@ goto RET_LABEL;
 cltype = type_location__Location.color;
 idtype = type_location__Location.id;
 if(cltype >= var_other->type->table_size) {
-var4 = 0;
+var5 = 0;
 } else {
-var4 = var_other->type->type_table[cltype] == idtype;
+var5 = var_other->type->type_table[cltype] == idtype;
 }
-var5 = !var4;
-if (var5){
-var6 = 0;
-var = var6;
+var6 = !var5;
+if (var6){
+var7 = 0;
+var = var7;
 goto RET_LABEL;
 } else {
 }
-var7 = ((val* (*)(val*))(var_other->class->vft[COLOR_location__Location__file]))(var_other) /* file on <var_other:nullable Object(Location)>*/;
-var8 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-if (var7 == NULL) {
-var9 = (var8 != NULL);
-} else {
-var9 = ((short int (*)(val*, val*))(var7->class->vft[COLOR_kernel__Object___33d_61d]))(var7, var8) /* != on <var7:nullable SourceFile>*/;
+{
+{ /* Inline location#Location#file (var_other) on <var_other:nullable Object(Location)> */
+var10 = var_other->attrs[COLOR_location__Location___file].val; /* _file on <var_other:nullable Object(Location)> */
+var8 = var10;
+RET_LABEL9:(void)0;
 }
-if (var9){
-var10 = 0;
-var = var10;
+}
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var13 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var11 = var13;
+RET_LABEL12:(void)0;
+}
+}
+if (var8 == NULL) {
+var14 = (var11 != NULL);
+} else {
+{ /* Inline kernel#Object#!= (var8,var11) on <var8:nullable SourceFile> */
+var_other17 = var11;
+{
+var19 = ((short int (*)(val*, val*))(var8->class->vft[COLOR_kernel__Object___61d_61d]))(var8, var_other17) /* == on <var8:nullable SourceFile(SourceFile)>*/;
+var18 = var19;
+}
+var20 = !var18;
+var15 = var20;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
+}
+var14 = var15;
+}
+if (var14){
+var21 = 0;
+var = var21;
 goto RET_LABEL;
 } else {
 }
-var11 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_start]))(var_other) /* line_start on <var_other:nullable Object(Location)>*/;
-var12 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-{ /* Inline kernel#Int#!= (var11,var12) */
-var15 = var11 == var12;
-var16 = !var15;
-var13 = var16;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+{
+{ /* Inline location#Location#line_start (var_other) on <var_other:nullable Object(Location)> */
+var24 = var_other->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_other:nullable Object(Location)> */
+var22 = var24;
+RET_LABEL23:(void)0;
 }
-if (var13){
-var17 = 0;
-var = var17;
+}
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var27 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var25 = var27;
+RET_LABEL26:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var22,var25) on <var22:Int> */
+var31 = var22 == var25;
+var32 = !var31;
+var29 = var32;
+goto RET_LABEL30;
+RET_LABEL30:(void)0;
+}
+var28 = var29;
+}
+if (var28){
+var33 = 0;
+var = var33;
 goto RET_LABEL;
 } else {
 }
-var18 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_end]))(var_other) /* line_end on <var_other:nullable Object(Location)>*/;
-var19 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-{ /* Inline kernel#Int#!= (var18,var19) */
-var22 = var18 == var19;
-var23 = !var22;
-var20 = var23;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
-}
-if (var20){
-var24 = 0;
-var = var24;
-goto RET_LABEL;
-} else {
-}
-var25 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__column_start]))(var_other) /* column_start on <var_other:nullable Object(Location)>*/;
-var26 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-{ /* Inline kernel#Int#!= (var25,var26) */
-var29 = var25 == var26;
-var30 = !var29;
-var27 = var30;
-goto RET_LABEL28;
-RET_LABEL28:(void)0;
-}
-if (var27){
-var31 = 0;
-var = var31;
-goto RET_LABEL;
-} else {
-}
-var32 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__column_end]))(var_other) /* column_end on <var_other:nullable Object(Location)>*/;
-var33 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-{ /* Inline kernel#Int#!= (var32,var33) */
-var36 = var32 == var33;
-var37 = !var36;
-var34 = var37;
-goto RET_LABEL35;
+{
+{ /* Inline location#Location#line_end (var_other) on <var_other:nullable Object(Location)> */
+var36 = var_other->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_other:nullable Object(Location)> */
+var34 = var36;
 RET_LABEL35:(void)0;
 }
-if (var34){
-var38 = 0;
-var = var38;
+}
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var39 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var37 = var39;
+RET_LABEL38:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var34,var37) on <var34:Int> */
+var43 = var34 == var37;
+var44 = !var43;
+var41 = var44;
+goto RET_LABEL42;
+RET_LABEL42:(void)0;
+}
+var40 = var41;
+}
+if (var40){
+var45 = 0;
+var = var45;
 goto RET_LABEL;
 } else {
 }
-var39 = 1;
-var = var39;
+{
+{ /* Inline location#Location#column_start (var_other) on <var_other:nullable Object(Location)> */
+var48 = var_other->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_other:nullable Object(Location)> */
+var46 = var48;
+RET_LABEL47:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var51 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var49 = var51;
+RET_LABEL50:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var46,var49) on <var46:Int> */
+var55 = var46 == var49;
+var56 = !var55;
+var53 = var56;
+goto RET_LABEL54;
+RET_LABEL54:(void)0;
+}
+var52 = var53;
+}
+if (var52){
+var57 = 0;
+var = var57;
+goto RET_LABEL;
+} else {
+}
+{
+{ /* Inline location#Location#column_end (var_other) on <var_other:nullable Object(Location)> */
+var60 = var_other->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_other:nullable Object(Location)> */
+var58 = var60;
+RET_LABEL59:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var63 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var61 = var63;
+RET_LABEL62:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var58,var61) on <var58:Int> */
+var67 = var58 == var61;
+var68 = !var67;
+var65 = var68;
+goto RET_LABEL66;
+RET_LABEL66:(void)0;
+}
+var64 = var65;
+}
+if (var64){
+var69 = 0;
+var = var69;
+goto RET_LABEL;
+} else {
+}
+var70 = 1;
+var = var70;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -726,71 +1169,90 @@ val* var_loc /* var loc: nullable Location */;
 val* var1 /* : null */;
 short int var2 /* : Bool */;
 short int var3 /* : Bool */;
-long var4 /* : Int */;
+short int var4 /* : Bool */;
 long var5 /* : Int */;
-short int var6 /* : Bool */;
-short int var8 /* : Bool */;
+long var7 /* : Int */;
+long var8 /* : Int */;
+long var10 /* : Int */;
+short int var11 /* : Bool */;
+short int var13 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-long var11 /* : Int */;
-long var12 /* : Int */;
-short int var13 /* : Bool */;
+short int var14 /* : Bool */;
 short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-const char* var_class_name18;
-short int var19 /* : Bool */;
-short int var20 /* : Bool */;
+long var16 /* : Int */;
+long var18 /* : Int */;
+long var19 /* : Int */;
 long var21 /* : Int */;
-long var22 /* : Int */;
-short int var23 /* : Bool */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-const char* var_class_name28;
+short int var22 /* : Bool */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+const char* var_class_name27;
+short int var28 /* : Bool */;
 short int var29 /* : Bool */;
-short int var30 /* : Bool */;
-long var31 /* : Int */;
+long var30 /* : Int */;
 long var32 /* : Int */;
-short int var33 /* : Bool */;
-short int var35 /* : Bool */;
-long var36 /* : Int */;
-long var37 /* : Int */;
+long var33 /* : Int */;
+long var35 /* : Int */;
+short int var36 /* : Bool */;
 short int var38 /* : Bool */;
-short int var40 /* : Bool */;
-int cltype41;
-int idtype42;
-const char* var_class_name43;
-short int var44 /* : Bool */;
-short int var45 /* : Bool */;
+int cltype39;
+int idtype40;
+const char* var_class_name41;
+short int var42 /* : Bool */;
+short int var43 /* : Bool */;
+long var44 /* : Int */;
 long var46 /* : Int */;
 long var47 /* : Int */;
-short int var48 /* : Bool */;
+long var49 /* : Int */;
 short int var50 /* : Bool */;
-int cltype51;
-int idtype52;
-const char* var_class_name53;
-short int var54 /* : Bool */;
-short int var55 /* : Bool */;
-short int var56 /* : Bool */;
+short int var51 /* : Bool */;
+short int var53 /* : Bool */;
+long var54 /* : Int */;
+long var56 /* : Int */;
 long var57 /* : Int */;
-long var58 /* : Int */;
-short int var59 /* : Bool */;
-short int var61 /* : Bool */;
-short int var_ /* var : Bool */;
-long var62 /* : Int */;
-long var63 /* : Int */;
-short int var64 /* : Bool */;
+long var59 /* : Int */;
+short int var60 /* : Bool */;
+short int var62 /* : Bool */;
+int cltype63;
+int idtype64;
+const char* var_class_name65;
 short int var66 /* : Bool */;
-int cltype67;
-int idtype68;
-const char* var_class_name69;
-short int var70 /* : Bool */;
-short int var71 /* : Bool */;
-short int var72 /* : Bool */;
+short int var67 /* : Bool */;
+long var68 /* : Int */;
+long var70 /* : Int */;
+long var71 /* : Int */;
+long var73 /* : Int */;
+short int var74 /* : Bool */;
+short int var76 /* : Bool */;
+int cltype77;
+int idtype78;
+const char* var_class_name79;
+short int var80 /* : Bool */;
+short int var81 /* : Bool */;
+short int var82 /* : Bool */;
+long var83 /* : Int */;
+long var85 /* : Int */;
+long var86 /* : Int */;
+long var88 /* : Int */;
+short int var89 /* : Bool */;
+short int var90 /* : Bool */;
+short int var92 /* : Bool */;
+short int var_ /* var : Bool */;
+long var93 /* : Int */;
+long var95 /* : Int */;
+long var96 /* : Int */;
+long var98 /* : Int */;
+short int var99 /* : Bool */;
+short int var101 /* : Bool */;
+int cltype102;
+int idtype103;
+const char* var_class_name104;
+short int var105 /* : Bool */;
+short int var106 /* : Bool */;
+short int var107 /* : Bool */;
 var_loc = p0;
 var1 = NULL;
 if (var_loc == NULL) {
@@ -798,177 +1260,295 @@ var2 = 1; /* is null */
 } else {
 var2 = 0; /* arg is null but recv is not */
 }
+if (0) {
+var3 = location__Location___61d_61d(var_loc, var1);
+var2 = var3;
+}
 if (var2){
-var3 = 0;
-var = var3;
+var4 = 0;
+var = var4;
 goto RET_LABEL;
 } else {
 }
-var4 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var5 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_start]))(var_loc) /* line_start on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#< (var4,var5) */
-/* Covariant cast for argument 0 (i) <var5:Int> isa OTHER */
-/* <var5:Int> isa OTHER */
-var8 = 1; /* easy <var5:Int> isa OTHER*/
-if (!var8) {
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var7 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_start (var_loc) on <var_loc:nullable Location(Location)> */
+var10 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:nullable Location(Location)> */
+var8 = var10;
+RET_LABEL9:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var5,var8) on <var5:Int> */
+/* Covariant cast for argument 0 (i) <var8:Int> isa OTHER */
+/* <var8:Int> isa OTHER */
+var13 = 1; /* easy <var8:Int> isa OTHER*/
+if (unlikely(!var13)) {
 var_class_name = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var9 = var4 < var5;
-var6 = var9;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var14 = var5 < var8;
+var11 = var14;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
 }
-if (var6){
-var10 = 0;
-var = var10;
+}
+if (var11){
+var15 = 0;
+var = var15;
 goto RET_LABEL;
 } else {
 }
-var11 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var12 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_end]))(var_loc) /* line_end on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#> (var11,var12) */
-/* Covariant cast for argument 0 (i) <var12:Int> isa OTHER */
-/* <var12:Int> isa OTHER */
-var15 = 1; /* easy <var12:Int> isa OTHER*/
-if (!var15) {
-var_class_name18 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var18 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var16 = var18;
+RET_LABEL17:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_end (var_loc) on <var_loc:nullable Location(Location)> */
+var21 = var_loc->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_loc:nullable Location(Location)> */
+var19 = var21;
+RET_LABEL20:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#> (var16,var19) on <var16:Int> */
+/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
+/* <var19:Int> isa OTHER */
+var24 = 1; /* easy <var19:Int> isa OTHER*/
+if (unlikely(!var24)) {
+var_class_name27 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
 show_backtrace(1);
 }
-var19 = var11 > var12;
-var13 = var19;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var28 = var16 > var19;
+var22 = var28;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
 }
-if (var13){
-var20 = 0;
-var = var20;
+}
+if (var22){
+var29 = 0;
+var = var29;
 goto RET_LABEL;
 } else {
 }
-var21 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var22 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_end]))(var_loc) /* line_end on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#> (var21,var22) */
-/* Covariant cast for argument 0 (i) <var22:Int> isa OTHER */
-/* <var22:Int> isa OTHER */
-var25 = 1; /* easy <var22:Int> isa OTHER*/
-if (!var25) {
-var_class_name28 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
-show_backtrace(1);
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var32 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var30 = var32;
+RET_LABEL31:(void)0;
 }
-var29 = var21 > var22;
-var23 = var29;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
 }
-if (var23){
-var30 = 0;
-var = var30;
-goto RET_LABEL;
-} else {
-}
-var31 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var32 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_start]))(var_loc) /* line_start on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#== (var31,var32) */
-var35 = var31 == var32;
+{
+{ /* Inline location#Location#line_end (var_loc) on <var_loc:nullable Location(Location)> */
+var35 = var_loc->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_loc:nullable Location(Location)> */
 var33 = var35;
-goto RET_LABEL34;
 RET_LABEL34:(void)0;
 }
-if (var33){
-var36 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var37 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__column_start]))(var_loc) /* column_start on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#< (var36,var37) */
-/* Covariant cast for argument 0 (i) <var37:Int> isa OTHER */
-/* <var37:Int> isa OTHER */
-var40 = 1; /* easy <var37:Int> isa OTHER*/
-if (!var40) {
-var_class_name43 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+}
+{
+{ /* Inline kernel#Int#> (var30,var33) on <var30:Int> */
+/* Covariant cast for argument 0 (i) <var33:Int> isa OTHER */
+/* <var33:Int> isa OTHER */
+var38 = 1; /* easy <var33:Int> isa OTHER*/
+if (unlikely(!var38)) {
+var_class_name41 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name41);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
 show_backtrace(1);
 }
-var44 = var36 < var37;
-var38 = var44;
-goto RET_LABEL39;
-RET_LABEL39:(void)0;
+var42 = var30 > var33;
+var36 = var42;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
-if (var38){
-var45 = 0;
-var = var45;
+}
+if (var36){
+var43 = 0;
+var = var43;
 goto RET_LABEL;
 } else {
 }
-var46 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var47 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__column_end]))(var_loc) /* column_end on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#> (var46,var47) */
-/* Covariant cast for argument 0 (i) <var47:Int> isa OTHER */
-/* <var47:Int> isa OTHER */
-var50 = 1; /* easy <var47:Int> isa OTHER*/
-if (!var50) {
-var_class_name53 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name53);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var46 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var44 = var46;
+RET_LABEL45:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_start (var_loc) on <var_loc:nullable Location(Location)> */
+var49 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:nullable Location(Location)> */
+var47 = var49;
+RET_LABEL48:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#== (var44,var47) on <var44:Int> */
+var53 = var44 == var47;
+var51 = var53;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
+}
+var50 = var51;
+}
+if (var50){
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var56 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var54 = var56;
+RET_LABEL55:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start (var_loc) on <var_loc:nullable Location(Location)> */
+var59 = var_loc->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_loc:nullable Location(Location)> */
+var57 = var59;
+RET_LABEL58:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var54,var57) on <var54:Int> */
+/* Covariant cast for argument 0 (i) <var57:Int> isa OTHER */
+/* <var57:Int> isa OTHER */
+var62 = 1; /* easy <var57:Int> isa OTHER*/
+if (unlikely(!var62)) {
+var_class_name65 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name65);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var54 = var46 > var47;
-var48 = var54;
-goto RET_LABEL49;
-RET_LABEL49:(void)0;
+var66 = var54 < var57;
+var60 = var66;
+goto RET_LABEL61;
+RET_LABEL61:(void)0;
 }
-if (var48){
-var55 = 0;
-var = var55;
+}
+if (var60){
+var67 = 0;
+var = var67;
+goto RET_LABEL;
+} else {
+}
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var70 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var68 = var70;
+RET_LABEL69:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end (var_loc) on <var_loc:nullable Location(Location)> */
+var73 = var_loc->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_loc:nullable Location(Location)> */
+var71 = var73;
+RET_LABEL72:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#> (var68,var71) on <var68:Int> */
+/* Covariant cast for argument 0 (i) <var71:Int> isa OTHER */
+/* <var71:Int> isa OTHER */
+var76 = 1; /* easy <var71:Int> isa OTHER*/
+if (unlikely(!var76)) {
+var_class_name79 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name79);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+show_backtrace(1);
+}
+var80 = var68 > var71;
+var74 = var80;
+goto RET_LABEL75;
+RET_LABEL75:(void)0;
+}
+}
+if (var74){
+var81 = 0;
+var = var81;
 goto RET_LABEL;
 } else {
 }
 } else {
 }
-var57 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var58 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_end]))(var_loc) /* line_end on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#== (var57,var58) */
-var61 = var57 == var58;
-var59 = var61;
-goto RET_LABEL60;
-RET_LABEL60:(void)0;
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var85 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var83 = var85;
+RET_LABEL84:(void)0;
 }
-var_ = var59;
-if (var59){
-var62 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-var63 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__column_end]))(var_loc) /* column_end on <var_loc:nullable Location(Location)>*/;
-{ /* Inline kernel#Int#> (var62,var63) */
-/* Covariant cast for argument 0 (i) <var63:Int> isa OTHER */
-/* <var63:Int> isa OTHER */
-var66 = 1; /* easy <var63:Int> isa OTHER*/
-if (!var66) {
-var_class_name69 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+}
+{
+{ /* Inline location#Location#line_end (var_loc) on <var_loc:nullable Location(Location)> */
+var88 = var_loc->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_loc:nullable Location(Location)> */
+var86 = var88;
+RET_LABEL87:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#== (var83,var86) on <var83:Int> */
+var92 = var83 == var86;
+var90 = var92;
+goto RET_LABEL91;
+RET_LABEL91:(void)0;
+}
+var89 = var90;
+}
+var_ = var89;
+if (var89){
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var95 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var93 = var95;
+RET_LABEL94:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end (var_loc) on <var_loc:nullable Location(Location)> */
+var98 = var_loc->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_loc:nullable Location(Location)> */
+var96 = var98;
+RET_LABEL97:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#> (var93,var96) on <var93:Int> */
+/* Covariant cast for argument 0 (i) <var96:Int> isa OTHER */
+/* <var96:Int> isa OTHER */
+var101 = 1; /* easy <var96:Int> isa OTHER*/
+if (unlikely(!var101)) {
+var_class_name104 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name104);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
 show_backtrace(1);
 }
-var70 = var62 > var63;
-var64 = var70;
-goto RET_LABEL65;
-RET_LABEL65:(void)0;
+var105 = var93 > var96;
+var99 = var105;
+goto RET_LABEL100;
+RET_LABEL100:(void)0;
 }
-var56 = var64;
+}
+var82 = var99;
 } else {
-var56 = var_;
+var82 = var_;
 }
-if (var56){
-var71 = 0;
-var = var71;
+if (var82){
+var106 = 0;
+var = var106;
 goto RET_LABEL;
 } else {
 }
-var72 = 1;
-var = var72;
+var107 = 1;
+var = var107;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -989,142 +1569,123 @@ static val* varonce;
 val* var1 /* : String */;
 char* var2 /* : NativeString */;
 long var3 /* : Int */;
-val* var4 /* : String */;
+val* var4 /* : FlatString */;
 val* var_file_part /* var file_part: String */;
 val* var5 /* : nullable SourceFile */;
-val* var6 /* : null */;
-short int var7 /* : Bool */;
-val* var8 /* : nullable SourceFile */;
-val* var9 /* : String */;
-val* var10 /* : nullable SourceFile */;
-val* var11 /* : String */;
-long var12 /* : Int */;
-long var13 /* : Int */;
+val* var7 /* : nullable SourceFile */;
+val* var8 /* : null */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var12 /* : Bool */;
+short int var13 /* : Bool */;
 short int var14 /* : Bool */;
-short int var16 /* : Bool */;
-int cltype;
-int idtype;
-const char* var_class_name;
-short int var17 /* : Bool */;
-static val* varonce18;
-val* var19 /* : String */;
-char* var20 /* : NativeString */;
-long var21 /* : Int */;
-val* var22 /* : String */;
-val* var23 /* : String */;
-long var24 /* : Int */;
-long var25 /* : Int */;
-short int var26 /* : Bool */;
-short int var28 /* : Bool */;
+val* var15 /* : nullable SourceFile */;
+val* var17 /* : nullable SourceFile */;
+val* var18 /* : String */;
+val* var20 /* : String */;
+val* var21 /* : nullable SourceFile */;
+val* var23 /* : nullable SourceFile */;
+val* var24 /* : String */;
+val* var26 /* : String */;
+long var27 /* : Int */;
 long var29 /* : Int */;
 long var30 /* : Int */;
 short int var31 /* : Bool */;
 short int var33 /* : Bool */;
-val* var34 /* : Array[Object] */;
-long var35 /* : Int */;
-val* var_ /* var : Array[Object] */;
-static val* varonce36;
-val* var37 /* : String */;
-char* var38 /* : NativeString */;
-long var39 /* : Int */;
+int cltype;
+int idtype;
+const char* var_class_name;
+short int var34 /* : Bool */;
+static val* varonce35;
+val* var36 /* : String */;
+char* var37 /* : NativeString */;
+long var38 /* : Int */;
+val* var39 /* : FlatString */;
 val* var40 /* : String */;
-static val* varonce41;
-val* var42 /* : String */;
-char* var43 /* : NativeString */;
+long var41 /* : Int */;
+long var43 /* : Int */;
 long var44 /* : Int */;
-val* var45 /* : String */;
 long var46 /* : Int */;
-val* var47 /* : nullable Object */;
-static val* varonce48;
-val* var49 /* : String */;
-char* var50 /* : NativeString */;
+short int var47 /* : Bool */;
+short int var48 /* : Bool */;
+short int var50 /* : Bool */;
 long var51 /* : Int */;
-val* var52 /* : String */;
 long var53 /* : Int */;
-val* var54 /* : nullable Object */;
-static val* varonce55;
-val* var56 /* : String */;
-char* var57 /* : NativeString */;
-long var58 /* : Int */;
-val* var59 /* : String */;
-val* var60 /* : String */;
-val* var61 /* : Array[Object] */;
-long var62 /* : Int */;
-val* var_63 /* var : Array[Object] */;
+long var54 /* : Int */;
+long var56 /* : Int */;
+short int var57 /* : Bool */;
+short int var58 /* : Bool */;
+short int var60 /* : Bool */;
+long var61 /* : Int */;
+long var63 /* : Int */;
 static val* varonce64;
 val* var65 /* : String */;
 char* var66 /* : NativeString */;
 long var67 /* : Int */;
-val* var68 /* : String */;
-static val* varonce69;
-val* var70 /* : String */;
-char* var71 /* : NativeString */;
-long var72 /* : Int */;
-val* var73 /* : String */;
-long var74 /* : Int */;
-val* var75 /* : nullable Object */;
-static val* varonce76;
+val* var68 /* : FlatString */;
+long var69 /* : Int */;
+long var71 /* : Int */;
+val* var72 /* : Array[Object] */;
+long var73 /* : Int */;
+val* var74 /* : NativeArray[Object] */;
+val* var75 /* : Object */;
+val* var76 /* : Object */;
 val* var77 /* : String */;
-char* var78 /* : NativeString */;
-long var79 /* : Int */;
-val* var80 /* : String */;
-long var81 /* : Int */;
-val* var82 /* : nullable Object */;
-static val* varonce83;
-val* var84 /* : String */;
-char* var85 /* : NativeString */;
+long var78 /* : Int */;
+long var80 /* : Int */;
+static val* varonce81;
+val* var82 /* : String */;
+char* var83 /* : NativeString */;
+long var84 /* : Int */;
+val* var85 /* : FlatString */;
 long var86 /* : Int */;
-val* var87 /* : String */;
 long var88 /* : Int */;
-val* var89 /* : nullable Object */;
-static val* varonce90;
-val* var91 /* : String */;
-char* var92 /* : NativeString */;
-long var93 /* : Int */;
-val* var94 /* : String */;
-val* var95 /* : String */;
-val* var96 /* : Array[Object] */;
-long var97 /* : Int */;
-val* var_98 /* var : Array[Object] */;
-static val* varonce99;
-val* var100 /* : String */;
-char* var101 /* : NativeString */;
-long var102 /* : Int */;
+static val* varonce89;
+val* var90 /* : String */;
+char* var91 /* : NativeString */;
+long var92 /* : Int */;
+val* var93 /* : FlatString */;
+long var94 /* : Int */;
+long var96 /* : Int */;
+val* var97 /* : Array[Object] */;
+long var98 /* : Int */;
+val* var99 /* : NativeArray[Object] */;
+val* var100 /* : Object */;
+val* var101 /* : Object */;
+val* var102 /* : Object */;
 val* var103 /* : String */;
-static val* varonce104;
-val* var105 /* : String */;
-char* var106 /* : NativeString */;
-long var107 /* : Int */;
+long var104 /* : Int */;
+long var106 /* : Int */;
+static val* varonce107;
 val* var108 /* : String */;
-long var109 /* : Int */;
-val* var110 /* : nullable Object */;
-static val* varonce111;
-val* var112 /* : String */;
-char* var113 /* : NativeString */;
+char* var109 /* : NativeString */;
+long var110 /* : Int */;
+val* var111 /* : FlatString */;
+long var112 /* : Int */;
 long var114 /* : Int */;
-val* var115 /* : String */;
-long var116 /* : Int */;
-val* var117 /* : nullable Object */;
-static val* varonce118;
-val* var119 /* : String */;
-char* var120 /* : NativeString */;
-long var121 /* : Int */;
-val* var122 /* : String */;
-long var123 /* : Int */;
-val* var124 /* : nullable Object */;
-static val* varonce125;
-val* var126 /* : String */;
-char* var127 /* : NativeString */;
+static val* varonce115;
+val* var116 /* : String */;
+char* var117 /* : NativeString */;
+long var118 /* : Int */;
+val* var119 /* : FlatString */;
+long var120 /* : Int */;
+long var122 /* : Int */;
+static val* varonce123;
+val* var124 /* : String */;
+char* var125 /* : NativeString */;
+long var126 /* : Int */;
+val* var127 /* : FlatString */;
 long var128 /* : Int */;
-val* var129 /* : String */;
 long var130 /* : Int */;
-val* var131 /* : nullable Object */;
-static val* varonce132;
-val* var133 /* : String */;
-char* var134 /* : NativeString */;
-long var135 /* : Int */;
-val* var136 /* : String */;
-val* var137 /* : String */;
+val* var131 /* : Array[Object] */;
+long var132 /* : Int */;
+val* var133 /* : NativeArray[Object] */;
+val* var134 /* : Object */;
+val* var135 /* : Object */;
+val* var136 /* : Object */;
+val* var137 /* : Object */;
+val* var138 /* : String */;
 if (varonce) {
 var1 = varonce;
 } else {
@@ -1135,285 +1696,367 @@ var1 = var4;
 varonce = var1;
 }
 var_file_part = var1;
-var5 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-var6 = NULL;
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var7 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
+}
+var8 = NULL;
 if (var5 == NULL) {
-var7 = 0; /* is null */
+var9 = 0; /* is null */
 } else {
-var7 = 1; /* arg is null and recv is not */
+var9 = 1; /* arg is null and recv is not */
 }
-if (var7){
-var8 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 124);
+if (0) {
+{ /* Inline kernel#Object#!= (var5,var8) on <var5:nullable SourceFile> */
+var_other = var8;
+{
+var13 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_other) /* == on <var5:nullable SourceFile(SourceFile)>*/;
+var12 = var13;
+}
+var14 = !var12;
+var10 = var14;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
+}
+var9 = var10;
+}
+if (var9){
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var17 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+if (var15 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 124);
 show_backtrace(1);
 } else {
-var9 = ((val* (*)(val*))(var8->class->vft[COLOR_location__SourceFile__filename]))(var8) /* filename on <var8:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#filename (var15) on <var15:nullable SourceFile> */
+if (unlikely(var15 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+show_backtrace(1);
 }
-var_file_part = var9;
-var10 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 125);
+var20 = var15->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <var15:nullable SourceFile> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+show_backtrace(1);
+}
+var18 = var20;
+RET_LABEL19:(void)0;
+}
+}
+var_file_part = var18;
+{
+{ /* Inline location#Location#file (self) on <self:Location> */
+var23 = self->attrs[COLOR_location__Location___file].val; /* _file on <self:Location> */
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
+if (var21 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 125);
 show_backtrace(1);
 } else {
-var11 = ((val* (*)(val*))(var10->class->vft[COLOR_location__SourceFile__filename]))(var10) /* filename on <var10:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#filename (var21) on <var21:nullable SourceFile> */
+if (unlikely(var21 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+show_backtrace(1);
 }
-var12 = ((long (*)(val*))(var11->class->vft[COLOR_abstract_collection__Collection__length]))(var11) /* length on <var11:String>*/;
-var13 = 0;
-{ /* Inline kernel#Int#> (var12,var13) */
-/* Covariant cast for argument 0 (i) <var13:Int> isa OTHER */
-/* <var13:Int> isa OTHER */
-var16 = 1; /* easy <var13:Int> isa OTHER*/
-if (!var16) {
+var26 = var21->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <var21:nullable SourceFile> */
+if (unlikely(var26 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+show_backtrace(1);
+}
+var24 = var26;
+RET_LABEL25:(void)0;
+}
+}
+{
+{ /* Inline string#FlatText#length (var24) on <var24:String> */
+var29 = var24->attrs[COLOR_string__FlatText___length].l; /* _length on <var24:String> */
+var27 = var29;
+RET_LABEL28:(void)0;
+}
+}
+var30 = 0;
+{
+{ /* Inline kernel#Int#> (var27,var30) on <var27:Int> */
+/* Covariant cast for argument 0 (i) <var30:Int> isa OTHER */
+/* <var30:Int> isa OTHER */
+var33 = 1; /* easy <var30:Int> isa OTHER*/
+if (unlikely(!var33)) {
 var_class_name = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 267);
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
 show_backtrace(1);
 }
-var17 = var12 > var13;
-var14 = var17;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
-}
-if (var14){
-if (varonce18) {
-var19 = varonce18;
-} else {
-var20 = ":";
-var21 = 1;
-var22 = string__NativeString__to_s_with_length(var20, var21);
-var19 = var22;
-varonce18 = var19;
-}
-var23 = ((val* (*)(val*, val*))(var_file_part->class->vft[COLOR_string__String___43d]))(var_file_part, var19) /* + on <var_file_part:String>*/;
-var_file_part = var23;
-} else {
-}
-} else {
-}
-var24 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var25 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-{ /* Inline kernel#Int#== (var24,var25) */
-var28 = var24 == var25;
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
-}
-if (var26){
-var29 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var30 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-{ /* Inline kernel#Int#== (var29,var30) */
-var33 = var29 == var30;
-var31 = var33;
+var34 = var27 > var30;
+var31 = var34;
 goto RET_LABEL32;
 RET_LABEL32:(void)0;
 }
+}
 if (var31){
-var34 = NEW_array__Array(&type_array__Arraykernel__Object);
-var35 = 7;
-((void (*)(val*, long))(var34->class->vft[COLOR_array__Array__with_capacity]))(var34, var35) /* with_capacity on <var34:Array[Object]>*/;
-var_ = var34;
-if (varonce36) {
-var37 = varonce36;
+if (varonce35) {
+var36 = varonce35;
 } else {
-var38 = "";
-var39 = 0;
-var40 = string__NativeString__to_s_with_length(var38, var39);
-var37 = var40;
-varonce36 = var37;
+var37 = ":";
+var38 = 1;
+var39 = string__NativeString__to_s_with_length(var37, var38);
+var36 = var39;
+varonce35 = var36;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var37) /* add on <var_:Array[Object]>*/;
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var_file_part) /* add on <var_:Array[Object]>*/;
-if (varonce41) {
-var42 = varonce41;
-} else {
-var43 = "";
-var44 = 0;
-var45 = string__NativeString__to_s_with_length(var43, var44);
-var42 = var45;
-varonce41 = var42;
+{
+var40 = string__FlatString___43d(var_file_part, var36);
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var42) /* add on <var_:Array[Object]>*/;
-var46 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var47 = BOX_kernel__Int(var46); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var47) /* add on <var_:Array[Object]>*/;
-if (varonce48) {
-var49 = varonce48;
+var_file_part = var40;
 } else {
-var50 = ",";
-var51 = 1;
-var52 = string__NativeString__to_s_with_length(var50, var51);
-var49 = var52;
-varonce48 = var49;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var49) /* add on <var_:Array[Object]>*/;
-var53 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var54 = BOX_kernel__Int(var53); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var54) /* add on <var_:Array[Object]>*/;
-if (varonce55) {
-var56 = varonce55;
 } else {
-var57 = "";
-var58 = 0;
-var59 = string__NativeString__to_s_with_length(var57, var58);
-var56 = var59;
-varonce55 = var56;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var56) /* add on <var_:Array[Object]>*/;
-var60 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
-var = var60;
-goto RET_LABEL;
-} else {
-var61 = NEW_array__Array(&type_array__Arraykernel__Object);
-var62 = 9;
-((void (*)(val*, long))(var61->class->vft[COLOR_array__Array__with_capacity]))(var61, var62) /* with_capacity on <var61:Array[Object]>*/;
-var_63 = var61;
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var43 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var41 = var43;
+RET_LABEL42:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var46 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var44 = var46;
+RET_LABEL45:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#== (var41,var44) on <var41:Int> */
+var50 = var41 == var44;
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
+}
+var47 = var48;
+}
+if (var47){
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var53 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var51 = var53;
+RET_LABEL52:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var56 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var54 = var56;
+RET_LABEL55:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#== (var51,var54) on <var51:Int> */
+var60 = var51 == var54;
+var58 = var60;
+goto RET_LABEL59;
+RET_LABEL59:(void)0;
+}
+var57 = var58;
+}
+if (var57){
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var63 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var61 = var63;
+RET_LABEL62:(void)0;
+}
+}
 if (varonce64) {
 var65 = varonce64;
 } else {
-var66 = "";
-var67 = 0;
+var66 = ",";
+var67 = 1;
 var68 = string__NativeString__to_s_with_length(var66, var67);
 var65 = var68;
 varonce64 = var65;
 }
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var65) /* add on <var_63:Array[Object]>*/;
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var_file_part) /* add on <var_63:Array[Object]>*/;
-if (varonce69) {
-var70 = varonce69;
-} else {
-var71 = "";
-var72 = 0;
-var73 = string__NativeString__to_s_with_length(var71, var72);
-var70 = var73;
-varonce69 = var70;
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var71 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var69 = var71;
+RET_LABEL70:(void)0;
 }
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var70) /* add on <var_63:Array[Object]>*/;
-var74 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var75 = BOX_kernel__Int(var74); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var75) /* add on <var_63:Array[Object]>*/;
-if (varonce76) {
-var77 = varonce76;
-} else {
-var78 = ",";
-var79 = 1;
-var80 = string__NativeString__to_s_with_length(var78, var79);
-var77 = var80;
-varonce76 = var77;
 }
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var77) /* add on <var_63:Array[Object]>*/;
-var81 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var82 = BOX_kernel__Int(var81); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var82) /* add on <var_63:Array[Object]>*/;
-if (varonce83) {
-var84 = varonce83;
-} else {
-var85 = "--";
-var86 = 2;
-var87 = string__NativeString__to_s_with_length(var85, var86);
-var84 = var87;
-varonce83 = var84;
+var72 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var72 = array_instance Array[Object] */
+var73 = 4;
+var74 = NEW_array__NativeArray(var73, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var74)->values[0] = (val*) var_file_part;
+var75 = BOX_kernel__Int(var61); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var74)->values[1] = (val*) var75;
+((struct instance_array__NativeArray*)var74)->values[2] = (val*) var65;
+var76 = BOX_kernel__Int(var69); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var74)->values[3] = (val*) var76;
+{
+((void (*)(val*, val*, long))(var72->class->vft[COLOR_array__Array__with_native]))(var72, var74, var73) /* with_native on <var72:Array[Object]>*/;
 }
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var84) /* add on <var_63:Array[Object]>*/;
-var88 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-var89 = BOX_kernel__Int(var88); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var89) /* add on <var_63:Array[Object]>*/;
-if (varonce90) {
-var91 = varonce90;
-} else {
-var92 = "";
-var93 = 0;
-var94 = string__NativeString__to_s_with_length(var92, var93);
-var91 = var94;
-varonce90 = var91;
 }
-((void (*)(val*, val*))(var_63->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_63, var91) /* add on <var_63:Array[Object]>*/;
-var95 = ((val* (*)(val*))(var_63->class->vft[COLOR_string__Object__to_s]))(var_63) /* to_s on <var_63:Array[Object]>*/;
-var = var95;
+{
+var77 = ((val* (*)(val*))(var72->class->vft[COLOR_string__Object__to_s]))(var72) /* to_s on <var72:Array[Object]>*/;
+}
+var = var77;
+goto RET_LABEL;
+} else {
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var80 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var78 = var80;
+RET_LABEL79:(void)0;
+}
+}
+if (varonce81) {
+var82 = varonce81;
+} else {
+var83 = ",";
+var84 = 1;
+var85 = string__NativeString__to_s_with_length(var83, var84);
+var82 = var85;
+varonce81 = var82;
+}
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var88 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var86 = var88;
+RET_LABEL87:(void)0;
+}
+}
+if (varonce89) {
+var90 = varonce89;
+} else {
+var91 = "--";
+var92 = 2;
+var93 = string__NativeString__to_s_with_length(var91, var92);
+var90 = var93;
+varonce89 = var90;
+}
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var96 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var94 = var96;
+RET_LABEL95:(void)0;
+}
+}
+var97 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var97 = array_instance Array[Object] */
+var98 = 6;
+var99 = NEW_array__NativeArray(var98, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var99)->values[0] = (val*) var_file_part;
+var100 = BOX_kernel__Int(var78); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var99)->values[1] = (val*) var100;
+((struct instance_array__NativeArray*)var99)->values[2] = (val*) var82;
+var101 = BOX_kernel__Int(var86); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var99)->values[3] = (val*) var101;
+((struct instance_array__NativeArray*)var99)->values[4] = (val*) var90;
+var102 = BOX_kernel__Int(var94); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var99)->values[5] = (val*) var102;
+{
+((void (*)(val*, val*, long))(var97->class->vft[COLOR_array__Array__with_native]))(var97, var99, var98) /* with_native on <var97:Array[Object]>*/;
+}
+}
+{
+var103 = ((val* (*)(val*))(var97->class->vft[COLOR_string__Object__to_s]))(var97) /* to_s on <var97:Array[Object]>*/;
+}
+var = var103;
 goto RET_LABEL;
 }
 } else {
-var96 = NEW_array__Array(&type_array__Arraykernel__Object);
-var97 = 11;
-((void (*)(val*, long))(var96->class->vft[COLOR_array__Array__with_capacity]))(var96, var97) /* with_capacity on <var96:Array[Object]>*/;
-var_98 = var96;
-if (varonce99) {
-var100 = varonce99;
-} else {
-var101 = "";
-var102 = 0;
-var103 = string__NativeString__to_s_with_length(var101, var102);
-var100 = var103;
-varonce99 = var100;
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var106 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var104 = var106;
+RET_LABEL105:(void)0;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var100) /* add on <var_98:Array[Object]>*/;
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var_file_part) /* add on <var_98:Array[Object]>*/;
-if (varonce104) {
-var105 = varonce104;
-} else {
-var106 = "";
-var107 = 0;
-var108 = string__NativeString__to_s_with_length(var106, var107);
-var105 = var108;
-varonce104 = var105;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var105) /* add on <var_98:Array[Object]>*/;
-var109 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var110 = BOX_kernel__Int(var109); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var110) /* add on <var_98:Array[Object]>*/;
-if (varonce111) {
-var112 = varonce111;
+if (varonce107) {
+var108 = varonce107;
 } else {
-var113 = ",";
-var114 = 1;
-var115 = string__NativeString__to_s_with_length(var113, var114);
-var112 = var115;
-varonce111 = var112;
+var109 = ",";
+var110 = 1;
+var111 = string__NativeString__to_s_with_length(var109, var110);
+var108 = var111;
+varonce107 = var108;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var112) /* add on <var_98:Array[Object]>*/;
-var116 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var117 = BOX_kernel__Int(var116); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var117) /* add on <var_98:Array[Object]>*/;
-if (varonce118) {
-var119 = varonce118;
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var114 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var112 = var114;
+RET_LABEL113:(void)0;
+}
+}
+if (varonce115) {
+var116 = varonce115;
 } else {
-var120 = "--";
-var121 = 2;
-var122 = string__NativeString__to_s_with_length(var120, var121);
-var119 = var122;
-varonce118 = var119;
+var117 = "--";
+var118 = 2;
+var119 = string__NativeString__to_s_with_length(var117, var118);
+var116 = var119;
+varonce115 = var116;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var119) /* add on <var_98:Array[Object]>*/;
-var123 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var124 = BOX_kernel__Int(var123); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var124) /* add on <var_98:Array[Object]>*/;
-if (varonce125) {
-var126 = varonce125;
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var122 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var120 = var122;
+RET_LABEL121:(void)0;
+}
+}
+if (varonce123) {
+var124 = varonce123;
 } else {
-var127 = ",";
-var128 = 1;
-var129 = string__NativeString__to_s_with_length(var127, var128);
-var126 = var129;
-varonce125 = var126;
+var125 = ",";
+var126 = 1;
+var127 = string__NativeString__to_s_with_length(var125, var126);
+var124 = var127;
+varonce123 = var124;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var126) /* add on <var_98:Array[Object]>*/;
-var130 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-var131 = BOX_kernel__Int(var130); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var131) /* add on <var_98:Array[Object]>*/;
-if (varonce132) {
-var133 = varonce132;
-} else {
-var134 = "";
-var135 = 0;
-var136 = string__NativeString__to_s_with_length(var134, var135);
-var133 = var136;
-varonce132 = var133;
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var130 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var128 = var130;
+RET_LABEL129:(void)0;
 }
-((void (*)(val*, val*))(var_98->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_98, var133) /* add on <var_98:Array[Object]>*/;
-var137 = ((val* (*)(val*))(var_98->class->vft[COLOR_string__Object__to_s]))(var_98) /* to_s on <var_98:Array[Object]>*/;
-var = var137;
+}
+var131 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var131 = array_instance Array[Object] */
+var132 = 8;
+var133 = NEW_array__NativeArray(var132, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var133)->values[0] = (val*) var_file_part;
+var134 = BOX_kernel__Int(var104); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var133)->values[1] = (val*) var134;
+((struct instance_array__NativeArray*)var133)->values[2] = (val*) var108;
+var135 = BOX_kernel__Int(var112); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var133)->values[3] = (val*) var135;
+((struct instance_array__NativeArray*)var133)->values[4] = (val*) var116;
+var136 = BOX_kernel__Int(var120); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var133)->values[5] = (val*) var136;
+((struct instance_array__NativeArray*)var133)->values[6] = (val*) var124;
+var137 = BOX_kernel__Int(var128); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var133)->values[7] = (val*) var137;
+{
+((void (*)(val*, val*, long))(var131->class->vft[COLOR_array__Array__with_native]))(var131, var133, var132) /* with_native on <var131:Array[Object]>*/;
+}
+}
+{
+var138 = ((val* (*)(val*))(var131->class->vft[COLOR_string__Object__to_s]))(var131) /* to_s on <var131:Array[Object]>*/;
+}
+var = var138;
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -1424,83 +2067,6 @@ val* VIRTUAL_location__Location__to_s(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
 var1 = location__Location__to_s(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method location#Location#relative_to for (self: Location, nullable Location): String */
-val* location__Location__relative_to(val* self, val* p0) {
-val* var /* : String */;
-val* var_loc /* var loc: nullable Location */;
-short int var1 /* : Bool */;
-val* var2 /* : null */;
-short int var3 /* : Bool */;
-val* var4 /* : nullable SourceFile */;
-val* var5 /* : nullable SourceFile */;
-short int var6 /* : Bool */;
-val* var7 /* : Location */;
-val* var8 /* : null */;
-long var9 /* : Int */;
-long var10 /* : Int */;
-long var11 /* : Int */;
-long var12 /* : Int */;
-val* var_relative /* var relative: Location */;
-val* var13 /* : Location */;
-val* var14 /* : nullable SourceFile */;
-long var15 /* : Int */;
-long var16 /* : Int */;
-long var17 /* : Int */;
-long var18 /* : Int */;
-val* var19 /* : String */;
-var_loc = p0;
-var2 = NULL;
-if (var_loc == NULL) {
-var3 = 0; /* is null */
-} else {
-var3 = 1; /* arg is null and recv is not */
-}
-if (!var3) {
-var1 = 0;
-} else {
-var4 = ((val* (*)(val*))(var_loc->class->vft[COLOR_location__Location__file]))(var_loc) /* file on <var_loc:nullable Location(Location)>*/;
-var5 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-if (var4 == NULL) {
-var6 = (var5 == NULL);
-} else {
-var6 = ((short int (*)(val*, val*))(var4->class->vft[COLOR_kernel__Object___61d_61d]))(var4, var5) /* == on <var4:nullable SourceFile>*/;
-}
-var1 = var6;
-}
-if (var1){
-var7 = NEW_location__Location(&type_location__Location);
-var8 = NULL;
-var9 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var10 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var11 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var12 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-((void (*)(val*, val*, long, long, long, long))(var7->class->vft[COLOR_location__Location__init]))(var7, var8, var9, var10, var11, var12) /* init on <var7:Location>*/;
-var_relative = var7;
-} else {
-var13 = NEW_location__Location(&type_location__Location);
-var14 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self) /* file on <self:Location>*/;
-var15 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var16 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var17 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var18 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-((void (*)(val*, val*, long, long, long, long))(var13->class->vft[COLOR_location__Location__init]))(var13, var14, var15, var16, var17, var18) /* init on <var13:Location>*/;
-var_relative = var13;
-}
-var19 = ((val* (*)(val*))(var_relative->class->vft[COLOR_string__Object__to_s]))(var_relative) /* to_s on <var_relative:Location>*/;
-var = var19;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method location#Location#relative_to for (self: Object, nullable Location): String */
-val* VIRTUAL_location__Location__relative_to(val* self, val* p0) {
-val* var /* : String */;
-val* var1 /* : String */;
-var1 = location__Location__relative_to(self, p0);
 var = var1;
 RET_LABEL:;
 return var;
@@ -1520,53 +2086,71 @@ short int var4 /* : Bool */;
 short int var5 /* : Bool */;
 short int var6 /* : Bool */;
 short int var7 /* : Bool */;
-long var8 /* : Int */;
+short int var8 /* : Bool */;
 long var9 /* : Int */;
-short int var10 /* : Bool */;
-short int var12 /* : Bool */;
-short int var13 /* : Bool */;
+long var11 /* : Int */;
+long var12 /* : Int */;
 long var14 /* : Int */;
-long var15 /* : Int */;
+short int var15 /* : Bool */;
 short int var16 /* : Bool */;
 short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-const char* var_class_name21;
-short int var22 /* : Bool */;
+short int var19 /* : Bool */;
+long var20 /* : Int */;
+long var22 /* : Int */;
 long var23 /* : Int */;
-long var24 /* : Int */;
-short int var25 /* : Bool */;
-short int var27 /* : Bool */;
+long var25 /* : Int */;
+short int var26 /* : Bool */;
 short int var28 /* : Bool */;
-long var29 /* : Int */;
-long var30 /* : Int */;
-short int var31 /* : Bool */;
-short int var33 /* : Bool */;
-int cltype34;
-int idtype35;
-const char* var_class_name36;
-short int var37 /* : Bool */;
+int cltype29;
+int idtype30;
+const char* var_class_name31;
+short int var32 /* : Bool */;
+long var33 /* : Int */;
+long var35 /* : Int */;
+long var36 /* : Int */;
 long var38 /* : Int */;
-long var39 /* : Int */;
+short int var39 /* : Bool */;
 short int var40 /* : Bool */;
 short int var42 /* : Bool */;
 short int var43 /* : Bool */;
 long var44 /* : Int */;
-long var45 /* : Int */;
-short int var46 /* : Bool */;
-short int var48 /* : Bool */;
-int cltype49;
-int idtype50;
-const char* var_class_name51;
+long var46 /* : Int */;
+long var47 /* : Int */;
+long var49 /* : Int */;
+short int var50 /* : Bool */;
 short int var52 /* : Bool */;
-long var53 /* : Int */;
-long var54 /* : Int */;
-short int var55 /* : Bool */;
-short int var57 /* : Bool */;
-int cltype58;
-int idtype59;
-const char* var_class_name60;
-short int var61 /* : Bool */;
+int cltype53;
+int idtype54;
+const char* var_class_name55;
+short int var56 /* : Bool */;
+long var57 /* : Int */;
+long var59 /* : Int */;
+long var60 /* : Int */;
+long var62 /* : Int */;
+short int var63 /* : Bool */;
+short int var64 /* : Bool */;
+short int var66 /* : Bool */;
+short int var67 /* : Bool */;
+long var68 /* : Int */;
+long var70 /* : Int */;
+long var71 /* : Int */;
+long var73 /* : Int */;
+short int var74 /* : Bool */;
+short int var76 /* : Bool */;
+int cltype77;
+int idtype78;
+const char* var_class_name79;
+short int var80 /* : Bool */;
+long var81 /* : Int */;
+long var83 /* : Int */;
+long var84 /* : Int */;
+long var86 /* : Int */;
+short int var87 /* : Bool */;
+short int var89 /* : Bool */;
+int cltype90;
+int idtype91;
+const char* var_class_name92;
+short int var93 /* : Bool */;
 /* Covariant cast for argument 0 (other) <p0:Location> isa OTHER */
 /* <p0:Location> isa OTHER */
 type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
@@ -1577,145 +2161,253 @@ var1 = 0;
 } else {
 var1 = p0->type->type_table[cltype] == idtype;
 }
-if (!var1) {
+if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 149);
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 149);
 show_backtrace(1);
 }
 var_other = p0;
-var2 = ((short int (*)(val*, val*))(self->class->vft[COLOR_kernel__Object___61d_61d]))(self, var_other) /* == on <self:Location>*/;
+{
+var3 = location__Location___61d_61d(self, var_other);
+var2 = var3;
+}
 if (var2){
-var3 = 0;
-var = var3;
+var4 = 0;
+var = var4;
 goto RET_LABEL;
 } else {
 }
-var4 = ((short int (*)(val*, val*))(self->class->vft[COLOR_location__Location__located_in]))(self, var_other) /* located_in on <self:Location>*/;
-if (var4){
-var5 = 1;
-var = var5;
+{
+var5 = location__Location__located_in(self, var_other);
+}
+if (var5){
+var6 = 1;
+var = var6;
 goto RET_LABEL;
 } else {
 }
-var6 = ((short int (*)(val*, val*))(var_other->class->vft[COLOR_location__Location__located_in]))(var_other, self) /* located_in on <var_other:Location>*/;
-if (var6){
-var7 = 0;
-var = var7;
+{
+var7 = location__Location__located_in(var_other, self);
+}
+if (var7){
+var8 = 0;
+var = var8;
 goto RET_LABEL;
 } else {
 }
-var8 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var9 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_start]))(var_other) /* line_start on <var_other:Location>*/;
-{ /* Inline kernel#Int#!= (var8,var9) */
-var12 = var8 == var9;
-var13 = !var12;
-var10 = var13;
-goto RET_LABEL11;
-RET_LABEL11:(void)0;
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var11 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var9 = var11;
+RET_LABEL10:(void)0;
 }
-if (var10){
-var14 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_start]))(self) /* line_start on <self:Location>*/;
-var15 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_start]))(var_other) /* line_start on <var_other:Location>*/;
-{ /* Inline kernel#Int#< (var14,var15) */
-/* Covariant cast for argument 0 (i) <var15:Int> isa OTHER */
-/* <var15:Int> isa OTHER */
-var18 = 1; /* easy <var15:Int> isa OTHER*/
-if (!var18) {
-var_class_name21 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
-show_backtrace(1);
 }
-var22 = var14 < var15;
-var16 = var22;
+{
+{ /* Inline location#Location#line_start (var_other) on <var_other:Location> */
+var14 = var_other->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_other:Location> */
+var12 = var14;
+RET_LABEL13:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var9,var12) on <var9:Int> */
+var18 = var9 == var12;
+var19 = !var18;
+var16 = var19;
 goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
-var = var16;
-goto RET_LABEL;
-} else {
+var15 = var16;
 }
-var23 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var24 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__column_start]))(var_other) /* column_start on <var_other:Location>*/;
-{ /* Inline kernel#Int#!= (var23,var24) */
-var27 = var23 == var24;
-var28 = !var27;
-var25 = var28;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+if (var15){
+{
+{ /* Inline location#Location#line_start (self) on <self:Location> */
+var22 = self->attrs[COLOR_location__Location___line_start].l; /* _line_start on <self:Location> */
+var20 = var22;
+RET_LABEL21:(void)0;
 }
-if (var25){
-var29 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
-var30 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__column_start]))(var_other) /* column_start on <var_other:Location>*/;
-{ /* Inline kernel#Int#< (var29,var30) */
-/* Covariant cast for argument 0 (i) <var30:Int> isa OTHER */
-/* <var30:Int> isa OTHER */
-var33 = 1; /* easy <var30:Int> isa OTHER*/
-if (!var33) {
-var_class_name36 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+}
+{
+{ /* Inline location#Location#line_start (var_other) on <var_other:Location> */
+var25 = var_other->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_other:Location> */
+var23 = var25;
+RET_LABEL24:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var20,var23) on <var20:Int> */
+/* Covariant cast for argument 0 (i) <var23:Int> isa OTHER */
+/* <var23:Int> isa OTHER */
+var28 = 1; /* easy <var23:Int> isa OTHER*/
+if (unlikely(!var28)) {
+var_class_name31 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var37 = var29 < var30;
-var31 = var37;
-goto RET_LABEL32;
-RET_LABEL32:(void)0;
+var32 = var20 < var23;
+var26 = var32;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var = var31;
+}
+var = var26;
 goto RET_LABEL;
 } else {
 }
-var38 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var39 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_end]))(var_other) /* line_end on <var_other:Location>*/;
-{ /* Inline kernel#Int#!= (var38,var39) */
-var42 = var38 == var39;
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var35 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var33 = var35;
+RET_LABEL34:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start (var_other) on <var_other:Location> */
+var38 = var_other->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_other:Location> */
+var36 = var38;
+RET_LABEL37:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var33,var36) on <var33:Int> */
+var42 = var33 == var36;
 var43 = !var42;
 var40 = var43;
 goto RET_LABEL41;
 RET_LABEL41:(void)0;
 }
-if (var40){
-var44 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))(self) /* line_end on <self:Location>*/;
-var45 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__line_end]))(var_other) /* line_end on <var_other:Location>*/;
-{ /* Inline kernel#Int#< (var44,var45) */
-/* Covariant cast for argument 0 (i) <var45:Int> isa OTHER */
-/* <var45:Int> isa OTHER */
-var48 = 1; /* easy <var45:Int> isa OTHER*/
-if (!var48) {
-var_class_name51 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name51);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+var39 = var40;
+}
+if (var39){
+{
+{ /* Inline location#Location#column_start (self) on <self:Location> */
+var46 = self->attrs[COLOR_location__Location___column_start].l; /* _column_start on <self:Location> */
+var44 = var46;
+RET_LABEL45:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start (var_other) on <var_other:Location> */
+var49 = var_other->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_other:Location> */
+var47 = var49;
+RET_LABEL48:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var44,var47) on <var44:Int> */
+/* Covariant cast for argument 0 (i) <var47:Int> isa OTHER */
+/* <var47:Int> isa OTHER */
+var52 = 1; /* easy <var47:Int> isa OTHER*/
+if (unlikely(!var52)) {
+var_class_name55 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var52 = var44 < var45;
-var46 = var52;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
+var56 = var44 < var47;
+var50 = var56;
+goto RET_LABEL51;
+RET_LABEL51:(void)0;
 }
-var = var46;
+}
+var = var50;
 goto RET_LABEL;
 } else {
 }
-var53 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
-var54 = ((long (*)(val*))(var_other->class->vft[COLOR_location__Location__column_end]))(var_other) /* column_end on <var_other:Location>*/;
-{ /* Inline kernel#Int#< (var53,var54) */
-/* Covariant cast for argument 0 (i) <var54:Int> isa OTHER */
-/* <var54:Int> isa OTHER */
-var57 = 1; /* easy <var54:Int> isa OTHER*/
-if (!var57) {
-var_class_name60 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var59 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var57 = var59;
+RET_LABEL58:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_end (var_other) on <var_other:Location> */
+var62 = var_other->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_other:Location> */
+var60 = var62;
+RET_LABEL61:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#!= (var57,var60) on <var57:Int> */
+var66 = var57 == var60;
+var67 = !var66;
+var64 = var67;
+goto RET_LABEL65;
+RET_LABEL65:(void)0;
+}
+var63 = var64;
+}
+if (var63){
+{
+{ /* Inline location#Location#line_end (self) on <self:Location> */
+var70 = self->attrs[COLOR_location__Location___line_end].l; /* _line_end on <self:Location> */
+var68 = var70;
+RET_LABEL69:(void)0;
+}
+}
+{
+{ /* Inline location#Location#line_end (var_other) on <var_other:Location> */
+var73 = var_other->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_other:Location> */
+var71 = var73;
+RET_LABEL72:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var68,var71) on <var68:Int> */
+/* Covariant cast for argument 0 (i) <var71:Int> isa OTHER */
+/* <var71:Int> isa OTHER */
+var76 = 1; /* easy <var71:Int> isa OTHER*/
+if (unlikely(!var76)) {
+var_class_name79 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name79);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var61 = var53 < var54;
-var55 = var61;
-goto RET_LABEL56;
-RET_LABEL56:(void)0;
+var80 = var68 < var71;
+var74 = var80;
+goto RET_LABEL75;
+RET_LABEL75:(void)0;
 }
-var = var55;
+}
+var = var74;
+goto RET_LABEL;
+} else {
+}
+{
+{ /* Inline location#Location#column_end (self) on <self:Location> */
+var83 = self->attrs[COLOR_location__Location___column_end].l; /* _column_end on <self:Location> */
+var81 = var83;
+RET_LABEL82:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_end (var_other) on <var_other:Location> */
+var86 = var_other->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_other:Location> */
+var84 = var86;
+RET_LABEL85:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var81,var84) on <var81:Int> */
+/* Covariant cast for argument 0 (i) <var84:Int> isa OTHER */
+/* <var84:Int> isa OTHER */
+var89 = 1; /* easy <var84:Int> isa OTHER*/
+if (unlikely(!var89)) {
+var_class_name92 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name92);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+show_backtrace(1);
+}
+var93 = var81 < var84;
+var87 = var93;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
+}
+}
+var = var87;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1737,705 +2429,1109 @@ long var1 /* : Int */;
 char var2 /* : Char */;
 char var4 /* : Char */;
 char var_esc /* var esc: Char */;
-val* var5 /* : Array[Object] */;
-long var6 /* : Int */;
-val* var_ /* var : Array[Object] */;
 static val* varonce;
-val* var7 /* : String */;
-char* var8 /* : NativeString */;
-long var9 /* : Int */;
-val* var10 /* : String */;
-val* var11 /* : nullable Object */;
-static val* varonce12;
+val* var5 /* : String */;
+char* var6 /* : NativeString */;
+long var7 /* : Int */;
+val* var8 /* : FlatString */;
+val* var9 /* : Array[Object] */;
+long var10 /* : Int */;
+val* var11 /* : NativeArray[Object] */;
+val* var12 /* : Object */;
 val* var13 /* : String */;
-char* var14 /* : NativeString */;
-long var15 /* : Int */;
-val* var16 /* : String */;
-val* var17 /* : String */;
 val* var_def /* var def: String */;
-val* var18 /* : Array[Object] */;
-long var19 /* : Int */;
-val* var_20 /* var : Array[Object] */;
-static val* varonce21;
-val* var22 /* : String */;
-char* var23 /* : NativeString */;
-long var24 /* : Int */;
-val* var25 /* : String */;
-val* var26 /* : nullable Object */;
-static val* varonce27;
+static val* varonce14;
+val* var15 /* : String */;
+char* var16 /* : NativeString */;
+long var17 /* : Int */;
+val* var18 /* : FlatString */;
+static val* varonce19;
+val* var20 /* : String */;
+char* var21 /* : NativeString */;
+long var22 /* : Int */;
+val* var23 /* : FlatString */;
+val* var24 /* : Array[Object] */;
+long var25 /* : Int */;
+val* var26 /* : NativeArray[Object] */;
+val* var27 /* : Object */;
 val* var28 /* : String */;
-char* var29 /* : NativeString */;
-long var30 /* : Int */;
-val* var31 /* : String */;
-static val* varonce32;
-val* var33 /* : String */;
-char* var34 /* : NativeString */;
-long var35 /* : Int */;
-val* var36 /* : String */;
-val* var37 /* : String */;
 val* var_col /* var col: String */;
 val* var_l /* var l: Location */;
-long var38 /* : Int */;
+long var29 /* : Int */;
+long var31 /* : Int */;
 long var_i /* var i: Int */;
-val* var39 /* : nullable SourceFile */;
-val* var40 /* : Array[Int] */;
-long var41 /* : Int */;
-long var42 /* : Int */;
-long var44 /* : Int */;
-val* var45 /* : nullable Object */;
-long var46 /* : Int */;
-long var_line_start /* var line_start: Int */;
-long var_line_end /* var line_end: Int */;
-val* var47 /* : nullable SourceFile */;
-val* var48 /* : String */;
-val* var_string /* var string: String */;
-short int var49 /* : Bool */;
-short int var50 /* : Bool */;
-long var51 /* : Int */;
-long var52 /* : Int */;
-long var54 /* : Int */;
-long var55 /* : Int */;
-short int var56 /* : Bool */;
-short int var58 /* : Bool */;
+val* var32 /* : nullable SourceFile */;
+val* var34 /* : nullable SourceFile */;
+val* var35 /* : Array[Int] */;
+val* var37 /* : Array[Int] */;
+long var38 /* : Int */;
+long var39 /* : Int */;
+short int var41 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var59 /* : Bool */;
-short int var_60 /* var : Bool */;
-val* var61 /* : StringCharView */;
-long var62 /* : Int */;
+long var42 /* : Int */;
+val* var43 /* : nullable Object */;
+long var44 /* : Int */;
+long var_line_start /* var line_start: Int */;
+long var_line_end /* var line_end: Int */;
+val* var45 /* : nullable SourceFile */;
+val* var47 /* : nullable SourceFile */;
+val* var48 /* : String */;
+val* var50 /* : String */;
+val* var_string /* var string: String */;
+short int var51 /* : Bool */;
+short int var52 /* : Bool */;
+long var53 /* : Int */;
+long var54 /* : Int */;
+short int var56 /* : Bool */;
+int cltype57;
+int idtype58;
+const char* var_class_name59;
+long var60 /* : Int */;
+long var61 /* : Int */;
 long var63 /* : Int */;
-long var65 /* : Int */;
-val* var66 /* : nullable Object */;
-char var67 /* : Char */;
-short int var68 /* : Bool */;
+short int var64 /* : Bool */;
+short int var66 /* : Bool */;
+int cltype67;
+int idtype68;
+const char* var_class_name69;
 short int var70 /* : Bool */;
-char var71 /* : Char */;
-short int var72 /* : Bool */;
-short int var_73 /* var : Bool */;
-val* var74 /* : StringCharView */;
+short int var_ /* var : Bool */;
+val* var71 /* : SequenceRead[Char] */;
+val* var73 /* : SequenceRead[Char] */;
+long var74 /* : Int */;
 long var75 /* : Int */;
-long var76 /* : Int */;
-long var78 /* : Int */;
-val* var79 /* : nullable Object */;
-char var80 /* : Char */;
-short int var81 /* : Bool */;
-short int var83 /* : Bool */;
-char var84 /* : Char */;
+short int var77 /* : Bool */;
+int cltype78;
+int idtype79;
+const char* var_class_name80;
+long var81 /* : Int */;
+val* var82 /* : nullable Object */;
+char var83 /* : Char */;
+short int var84 /* : Bool */;
 short int var85 /* : Bool */;
-long var86 /* : Int */;
-long var87 /* : Int */;
-long var89 /* : Int */;
-long var90 /* : Int */;
-long var91 /* : Int */;
-long var92 /* : Int */;
+short int var87 /* : Bool */;
+char var88 /* : Char */;
+short int var89 /* : Bool */;
+short int var_90 /* var : Bool */;
+val* var91 /* : SequenceRead[Char] */;
+val* var93 /* : SequenceRead[Char] */;
 long var94 /* : Int */;
-val* var95 /* : String */;
-val* var_lstart /* var lstart: String */;
-long var96 /* : Int */;
+long var95 /* : Int */;
 short int var97 /* : Bool */;
-short int var99 /* : Bool */;
-short int var100 /* : Bool */;
+int cltype98;
+int idtype99;
+const char* var_class_name100;
 long var101 /* : Int */;
-long var103 /* : Int */;
-long var104 /* : Int */;
-long var105 /* : Int */;
-long var107 /* : Int */;
-val* var108 /* : nullable Object */;
-val* var_cend /* var cend: nullable Object */;
-long var109 /* : Int */;
-val* var110 /* : nullable Object */;
+val* var102 /* : nullable Object */;
+char var103 /* : Char */;
+short int var104 /* : Bool */;
+short int var105 /* : Bool */;
+short int var107 /* : Bool */;
+char var108 /* : Char */;
+short int var109 /* : Bool */;
+long var110 /* : Int */;
 long var111 /* : Int */;
-long var113 /* : Int */;
-long var114 /* : Int */;
-long var115 /* : Int */;
-short int var116 /* : Bool */;
-short int var118 /* : Bool */;
-int cltype119;
-int idtype120;
-const char* var_class_name121;
-short int var122 /* : Bool */;
-long var123 /* : Int */;
-long var124 /* : Int */;
-long var126 /* : Int */;
-long var127 /* : Int */;
+short int var113 /* : Bool */;
+int cltype114;
+int idtype115;
+const char* var_class_name116;
+long var117 /* : Int */;
+long var118 /* : Int */;
+long var120 /* : Int */;
+long var121 /* : Int */;
+long var122 /* : Int */;
+short int var124 /* : Bool */;
+int cltype125;
+int idtype126;
+const char* var_class_name127;
 long var128 /* : Int */;
+val* var129 /* : String */;
+val* var_lstart /* var lstart: String */;
 long var130 /* : Int */;
-long var131 /* : Int */;
 long var132 /* : Int */;
-long var134 /* : Int */;
-long var135 /* : Int */;
-long var136 /* : Int */;
-long var137 /* : Int */;
-long var139 /* : Int */;
-val* var140 /* : String */;
-val* var_lmid /* var lmid: nullable Object */;
-long var141 /* : Int */;
-long var143 /* : Int */;
+short int var133 /* : Bool */;
+short int var134 /* : Bool */;
+short int var136 /* : Bool */;
+short int var137 /* : Bool */;
+long var138 /* : Int */;
+short int var140 /* : Bool */;
+int cltype141;
+int idtype142;
+const char* var_class_name143;
 long var144 /* : Int */;
 long var145 /* : Int */;
-long var147 /* : Int */;
-long var148 /* : Int */;
-long var150 /* : Int */;
-long var151 /* : Int */;
+long var146 /* : Int */;
+short int var148 /* : Bool */;
+int cltype149;
+int idtype150;
+const char* var_class_name151;
 long var152 /* : Int */;
-long var153 /* : Int */;
-long var155 /* : Int */;
-val* var156 /* : String */;
-val* var_lend /* var lend: nullable Object */;
-static val* varonce157;
-val* var158 /* : String */;
-char* var159 /* : NativeString */;
-long var160 /* : Int */;
-val* var161 /* : String */;
-static val* varonce162;
-val* var163 /* : String */;
-char* var164 /* : NativeString */;
+val* var153 /* : nullable Object */;
+val* var_cend /* var cend: nullable Object */;
+long var154 /* : Int */;
+long var156 /* : Int */;
+val* var157 /* : nullable Object */;
+long var158 /* : Int */;
+short int var160 /* : Bool */;
+int cltype161;
+int idtype162;
+const char* var_class_name163;
+long var164 /* : Int */;
 long var165 /* : Int */;
-val* var166 /* : String */;
-val* var167 /* : Buffer */;
-val* var_indent /* var indent: Buffer */;
-val* var168 /* : Range[Int] */;
-long var169 /* : Int */;
-long var170 /* : Int */;
-long var172 /* : Int */;
-long var173 /* : Int */;
-long var174 /* : Int */;
+long var166 /* : Int */;
+long var168 /* : Int */;
+short int var169 /* : Bool */;
+short int var171 /* : Bool */;
+int cltype172;
+int idtype173;
+const char* var_class_name174;
+short int var175 /* : Bool */;
 long var176 /* : Int */;
-val* var177 /* : Discrete */;
-val* var178 /* : Discrete */;
-val* var179 /* : Iterator[nullable Object] */;
-short int var180 /* : Bool */;
-val* var181 /* : nullable Object */;
-long var_j /* var j: Int */;
-long var182 /* : Int */;
-val* var183 /* : StringCharView */;
-val* var184 /* : nullable Object */;
-char var185 /* : Char */;
-short int var186 /* : Bool */;
-short int var188 /* : Bool */;
-char var189 /* : Char */;
-char var190 /* : Char */;
-val* var191 /* : nullable Object */;
-char var192 /* : Char */;
-val* var193 /* : nullable Object */;
-val* var195 /* : Array[Object] */;
+long var178 /* : Int */;
+long var179 /* : Int */;
+short int var181 /* : Bool */;
+int cltype182;
+int idtype183;
+const char* var_class_name184;
+long var185 /* : Int */;
+long var186 /* : Int */;
+long var187 /* : Int */;
+short int var189 /* : Bool */;
+int cltype190;
+int idtype191;
+const char* var_class_name192;
+long var193 /* : Int */;
+long var194 /* : Int */;
 long var196 /* : Int */;
-val* var_197 /* var : Array[Object] */;
-static val* varonce198;
-val* var199 /* : String */;
-char* var200 /* : NativeString */;
-long var201 /* : Int */;
-val* var202 /* : String */;
-static val* varonce203;
-val* var204 /* : String */;
-char* var205 /* : NativeString */;
+long var197 /* : Int */;
+short int var199 /* : Bool */;
+int cltype200;
+int idtype201;
+const char* var_class_name202;
+long var203 /* : Int */;
+long var204 /* : Int */;
+long var205 /* : Int */;
 long var206 /* : Int */;
-val* var207 /* : String */;
-static val* varonce208;
-val* var209 /* : String */;
-char* var210 /* : NativeString */;
-long var211 /* : Int */;
-val* var212 /* : String */;
-static val* varonce213;
-val* var214 /* : String */;
-char* var215 /* : NativeString */;
-long var216 /* : Int */;
-val* var217 /* : String */;
-static val* varonce218;
-val* var219 /* : String */;
-char* var220 /* : NativeString */;
+short int var208 /* : Bool */;
+int cltype209;
+int idtype210;
+const char* var_class_name211;
+long var212 /* : Int */;
+val* var213 /* : String */;
+val* var_lmid /* var lmid: nullable Object */;
+long var214 /* : Int */;
+short int var216 /* : Bool */;
+int cltype217;
+int idtype218;
+const char* var_class_name219;
+long var220 /* : Int */;
 long var221 /* : Int */;
-val* var222 /* : String */;
-static val* varonce223;
-val* var224 /* : String */;
-char* var225 /* : NativeString */;
-long var226 /* : Int */;
-val* var227 /* : String */;
-static val* varonce228;
-val* var229 /* : String */;
-char* var230 /* : NativeString */;
-long var231 /* : Int */;
-val* var232 /* : String */;
-val* var233 /* : String */;
+long var222 /* : Int */;
+short int var224 /* : Bool */;
+int cltype225;
+int idtype226;
+const char* var_class_name227;
+long var228 /* : Int */;
+long var229 /* : Int */;
+short int var231 /* : Bool */;
+int cltype232;
+int idtype233;
+const char* var_class_name234;
+long var235 /* : Int */;
+long var236 /* : Int */;
+long var237 /* : Int */;
+long var238 /* : Int */;
+short int var240 /* : Bool */;
+int cltype241;
+int idtype242;
+const char* var_class_name243;
+long var244 /* : Int */;
+val* var245 /* : String */;
+val* var_lend /* var lend: nullable Object */;
+static val* varonce246;
+val* var247 /* : String */;
+char* var248 /* : NativeString */;
+long var249 /* : Int */;
+val* var250 /* : FlatString */;
+static val* varonce251;
+val* var252 /* : String */;
+char* var253 /* : NativeString */;
+long var254 /* : Int */;
+val* var255 /* : FlatString */;
+val* var256 /* : FlatBuffer */;
+val* var_indent /* var indent: FlatBuffer */;
+val* var257 /* : Range[Int] */;
+long var258 /* : Int */;
+long var260 /* : Int */;
+long var261 /* : Int */;
+short int var263 /* : Bool */;
+int cltype264;
+int idtype265;
+const char* var_class_name266;
+long var267 /* : Int */;
+long var268 /* : Int */;
+long var269 /* : Int */;
+short int var271 /* : Bool */;
+int cltype272;
+int idtype273;
+const char* var_class_name274;
+long var275 /* : Int */;
+val* var276 /* : Discrete */;
+val* var277 /* : Discrete */;
+val* var278 /* : Iterator[Discrete] */;
+short int var279 /* : Bool */;
+val* var280 /* : nullable Object */;
+long var_j /* var j: Int */;
+long var281 /* : Int */;
+val* var282 /* : SequenceRead[Char] */;
+val* var284 /* : SequenceRead[Char] */;
+val* var285 /* : nullable Object */;
+char var286 /* : Char */;
+short int var287 /* : Bool */;
+short int var288 /* : Bool */;
+short int var290 /* : Bool */;
+char var291 /* : Char */;
+char var292 /* : Char */;
+char var293 /* : Char */;
+static val* varonce295;
+val* var296 /* : String */;
+char* var297 /* : NativeString */;
+long var298 /* : Int */;
+val* var299 /* : FlatString */;
+static val* varonce300;
+val* var301 /* : String */;
+char* var302 /* : NativeString */;
+long var303 /* : Int */;
+val* var304 /* : FlatString */;
+static val* varonce305;
+val* var306 /* : String */;
+char* var307 /* : NativeString */;
+long var308 /* : Int */;
+val* var309 /* : FlatString */;
+val* var310 /* : Array[Object] */;
+long var311 /* : Int */;
+val* var312 /* : NativeArray[Object] */;
+val* var313 /* : String */;
 var_color = p0;
 var1 = 27;
-{ /* Inline kernel#Int#ascii (var1) */
+{
+{ /* Inline kernel#Int#ascii (var1) on <var1:Int> */
 var4 = var1;
 var2 = var4;
 goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
+}
 var_esc = var2;
-var5 = NEW_array__Array(&type_array__Arraykernel__Object);
-var6 = 3;
-((void (*)(val*, long))(var5->class->vft[COLOR_array__Array__with_capacity]))(var5, var6) /* with_capacity on <var5:Array[Object]>*/;
-var_ = var5;
 if (varonce) {
-var7 = varonce;
+var5 = varonce;
 } else {
-var8 = "";
-var9 = 0;
-var10 = string__NativeString__to_s_with_length(var8, var9);
-var7 = var10;
-varonce = var7;
+var6 = "[0m";
+var7 = 3;
+var8 = string__NativeString__to_s_with_length(var6, var7);
+var5 = var8;
+varonce = var5;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var7) /* add on <var_:Array[Object]>*/;
-var11 = BOX_kernel__Char(var_esc); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var11) /* add on <var_:Array[Object]>*/;
-if (varonce12) {
-var13 = varonce12;
+var9 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var9 = array_instance Array[Object] */
+var10 = 2;
+var11 = NEW_array__NativeArray(var10, &type_array__NativeArraykernel__Object);
+var12 = BOX_kernel__Char(var_esc); /* autobox from Char to Object */
+((struct instance_array__NativeArray*)var11)->values[0] = (val*) var12;
+((struct instance_array__NativeArray*)var11)->values[1] = (val*) var5;
+{
+((void (*)(val*, val*, long))(var9->class->vft[COLOR_array__Array__with_native]))(var9, var11, var10) /* with_native on <var9:Array[Object]>*/;
+}
+}
+{
+var13 = ((val* (*)(val*))(var9->class->vft[COLOR_string__Object__to_s]))(var9) /* to_s on <var9:Array[Object]>*/;
+}
+var_def = var13;
+if (varonce14) {
+var15 = varonce14;
 } else {
-var14 = "[0m";
-var15 = 3;
-var16 = string__NativeString__to_s_with_length(var14, var15);
-var13 = var16;
-varonce12 = var13;
+var16 = "[";
+var17 = 1;
+var18 = string__NativeString__to_s_with_length(var16, var17);
+var15 = var18;
+varonce14 = var15;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var13) /* add on <var_:Array[Object]>*/;
-var17 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
-var_def = var17;
-var18 = NEW_array__Array(&type_array__Arraykernel__Object);
-var19 = 5;
-((void (*)(val*, long))(var18->class->vft[COLOR_array__Array__with_capacity]))(var18, var19) /* with_capacity on <var18:Array[Object]>*/;
-var_20 = var18;
-if (varonce21) {
-var22 = varonce21;
+if (varonce19) {
+var20 = varonce19;
 } else {
-var23 = "";
-var24 = 0;
-var25 = string__NativeString__to_s_with_length(var23, var24);
-var22 = var25;
-varonce21 = var22;
+var21 = "m";
+var22 = 1;
+var23 = string__NativeString__to_s_with_length(var21, var22);
+var20 = var23;
+varonce19 = var20;
 }
-((void (*)(val*, val*))(var_20->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_20, var22) /* add on <var_20:Array[Object]>*/;
-var26 = BOX_kernel__Char(var_esc); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_20->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_20, var26) /* add on <var_20:Array[Object]>*/;
-if (varonce27) {
-var28 = varonce27;
-} else {
-var29 = "[";
-var30 = 1;
-var31 = string__NativeString__to_s_with_length(var29, var30);
-var28 = var31;
-varonce27 = var28;
+var24 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var24 = array_instance Array[Object] */
+var25 = 4;
+var26 = NEW_array__NativeArray(var25, &type_array__NativeArraykernel__Object);
+var27 = BOX_kernel__Char(var_esc); /* autobox from Char to Object */
+((struct instance_array__NativeArray*)var26)->values[0] = (val*) var27;
+((struct instance_array__NativeArray*)var26)->values[1] = (val*) var15;
+((struct instance_array__NativeArray*)var26)->values[2] = (val*) var_color;
+((struct instance_array__NativeArray*)var26)->values[3] = (val*) var20;
+{
+((void (*)(val*, val*, long))(var24->class->vft[COLOR_array__Array__with_native]))(var24, var26, var25) /* with_native on <var24:Array[Object]>*/;
 }
-((void (*)(val*, val*))(var_20->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_20, var28) /* add on <var_20:Array[Object]>*/;
-((void (*)(val*, val*))(var_20->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_20, var_color) /* add on <var_20:Array[Object]>*/;
-if (varonce32) {
-var33 = varonce32;
-} else {
-var34 = "m";
-var35 = 1;
-var36 = string__NativeString__to_s_with_length(var34, var35);
-var33 = var36;
-varonce32 = var33;
 }
-((void (*)(val*, val*))(var_20->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_20, var33) /* add on <var_20:Array[Object]>*/;
-var37 = ((val* (*)(val*))(var_20->class->vft[COLOR_string__Object__to_s]))(var_20) /* to_s on <var_20:Array[Object]>*/;
-var_col = var37;
+{
+var28 = ((val* (*)(val*))(var24->class->vft[COLOR_string__Object__to_s]))(var24) /* to_s on <var24:Array[Object]>*/;
+}
+var_col = var28;
 var_l = self;
-var38 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__line_start]))(var_l) /* line_start on <var_l:Location>*/;
-var_i = var38;
-var39 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
-if (var39 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 174);
+{
+{ /* Inline location#Location#line_start (var_l) on <var_l:Location> */
+var31 = var_l->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_l:Location> */
+var29 = var31;
+RET_LABEL30:(void)0;
+}
+}
+var_i = var29;
+{
+{ /* Inline location#Location#file (var_l) on <var_l:Location> */
+var34 = var_l->attrs[COLOR_location__Location___file].val; /* _file on <var_l:Location> */
+var32 = var34;
+RET_LABEL33:(void)0;
+}
+}
+if (var32 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 174);
 show_backtrace(1);
 } else {
-var40 = ((val* (*)(val*))(var39->class->vft[COLOR_location__SourceFile__line_starts]))(var39) /* line_starts on <var39:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#line_starts (var32) on <var32:nullable SourceFile> */
+if (unlikely(var32 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var41 = 1;
-{ /* Inline kernel#Int#- (var_i,var41) */
-var44 = var_i - var41;
-var42 = var44;
-goto RET_LABEL43;
-RET_LABEL43:(void)0;
+var37 = var32->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var32:nullable SourceFile> */
+if (unlikely(var37 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+show_backtrace(1);
 }
-var45 = ((val* (*)(val*, long))(var40->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var40, var42) /* [] on <var40:Array[Int]>*/;
-var46 = ((struct instance_kernel__Int*)var45)->value; /* autounbox from nullable Object to Int */;
-var_line_start = var46;
+var35 = var37;
+RET_LABEL36:(void)0;
+}
+}
+var38 = 1;
+{
+{ /* Inline kernel#Int#- (var_i,var38) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var38:Int> isa OTHER */
+/* <var38:Int> isa OTHER */
+var41 = 1; /* easy <var38:Int> isa OTHER*/
+if (unlikely(!var41)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var42 = var_i - var38;
+var39 = var42;
+goto RET_LABEL40;
+RET_LABEL40:(void)0;
+}
+}
+{
+var43 = array__Array___91d_93d(var35, var39);
+}
+var44 = ((struct instance_kernel__Int*)var43)->value; /* autounbox from nullable Object to Int */;
+var_line_start = var44;
 var_line_end = var_line_start;
-var47 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var_l) /* file on <var_l:Location>*/;
-if (var47 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Receiver is null");
-fprintf(stderr, " (%s:%d)\n", "src/location.nit", 176);
+{
+{ /* Inline location#Location#file (var_l) on <var_l:Location> */
+var47 = var_l->attrs[COLOR_location__Location___file].val; /* _file on <var_l:Location> */
+var45 = var47;
+RET_LABEL46:(void)0;
+}
+}
+if (var45 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 176);
 show_backtrace(1);
 } else {
-var48 = ((val* (*)(val*))(var47->class->vft[COLOR_location__SourceFile__string]))(var47) /* string on <var47:nullable SourceFile>*/;
+{ /* Inline location#SourceFile#string (var45) on <var45:nullable SourceFile> */
+if (unlikely(var45 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+show_backtrace(1);
+}
+var50 = var45->attrs[COLOR_location__SourceFile___string].val; /* _string on <var45:nullable SourceFile> */
+if (unlikely(var50 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
+PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+show_backtrace(1);
+}
+var48 = var50;
+RET_LABEL49:(void)0;
+}
 }
 var_string = var48;
 for(;;) {
-var51 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var51) */
-var54 = var_line_end + var51;
-var52 = var54;
-goto RET_LABEL53;
-RET_LABEL53:(void)0;
-}
-var55 = ((long (*)(val*))(var_string->class->vft[COLOR_abstract_collection__Collection__length]))(var_string) /* length on <var_string:String>*/;
-{ /* Inline kernel#Int#< (var52,var55) */
-/* Covariant cast for argument 0 (i) <var55:Int> isa OTHER */
-/* <var55:Int> isa OTHER */
-var58 = 1; /* easy <var55:Int> isa OTHER*/
-if (!var58) {
-var_class_name = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+var53 = 1;
+{
+{ /* Inline kernel#Int#+ (var_line_end,var53) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var53:Int> isa OTHER */
+/* <var53:Int> isa OTHER */
+var56 = 1; /* easy <var53:Int> isa OTHER*/
+if (unlikely(!var56)) {
+var_class_name59 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name59);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
 show_backtrace(1);
 }
-var59 = var52 < var55;
-var56 = var59;
-goto RET_LABEL57;
-RET_LABEL57:(void)0;
+var60 = var_line_end + var53;
+var54 = var60;
+goto RET_LABEL55;
+RET_LABEL55:(void)0;
 }
-var_60 = var56;
-if (var56){
-var61 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
-var62 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var62) */
-var65 = var_line_end + var62;
-var63 = var65;
-goto RET_LABEL64;
-RET_LABEL64:(void)0;
 }
-var66 = ((val* (*)(val*, long))(var61->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var61, var63) /* [] on <var61:StringCharView>*/;
-var67 = '\n';
-{ /* Inline kernel#Char#!= (var66,var67) */
-var70 = (var66 != NULL) && (var66->class == &class_kernel__Char);
-if (var70) {
-var71 = ((struct instance_kernel__Char*)var66)->value; /* autounbox from nullable Object to Char */;
-var70 = (var71 == var67);
+{
+{ /* Inline string#FlatText#length (var_string) on <var_string:String> */
+var63 = var_string->attrs[COLOR_string__FlatText___length].l; /* _length on <var_string:String> */
+var61 = var63;
+RET_LABEL62:(void)0;
 }
-var72 = !var70;
-var68 = var72;
-goto RET_LABEL69;
-RET_LABEL69:(void)0;
 }
-var50 = var68;
+{
+{ /* Inline kernel#Int#< (var54,var61) on <var54:Int> */
+/* Covariant cast for argument 0 (i) <var61:Int> isa OTHER */
+/* <var61:Int> isa OTHER */
+var66 = 1; /* easy <var61:Int> isa OTHER*/
+if (unlikely(!var66)) {
+var_class_name69 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+show_backtrace(1);
+}
+var70 = var54 < var61;
+var64 = var70;
+goto RET_LABEL65;
+RET_LABEL65:(void)0;
+}
+}
+var_ = var64;
+if (var64){
+{
+{ /* Inline string#FlatString#chars (var_string) on <var_string:String> */
+var73 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
+if (unlikely(var73 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+show_backtrace(1);
+}
+var71 = var73;
+RET_LABEL72:(void)0;
+}
+}
+var74 = 1;
+{
+{ /* Inline kernel#Int#+ (var_line_end,var74) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var74:Int> isa OTHER */
+/* <var74:Int> isa OTHER */
+var77 = 1; /* easy <var74:Int> isa OTHER*/
+if (unlikely(!var77)) {
+var_class_name80 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name80);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var81 = var_line_end + var74;
+var75 = var81;
+goto RET_LABEL76;
+RET_LABEL76:(void)0;
+}
+}
+{
+var82 = ((val* (*)(val*, long))(var71->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var71, var75) /* [] on <var71:SequenceRead[Char]>*/;
+}
+var83 = '\n';
+{
+{ /* Inline kernel#Char#!= (var82,var83) on <var82:nullable Object(Char)> */
+var87 = (var82 != NULL) && (var82->class == &class_kernel__Char);
+if (var87) {
+var88 = ((struct instance_kernel__Char*)var82)->value; /* autounbox from nullable Object to Char */;
+var87 = (var88 == var83);
+}
+var89 = !var87;
+var85 = var89;
+goto RET_LABEL86;
+RET_LABEL86:(void)0;
+}
+var84 = var85;
+}
+var52 = var84;
 } else {
-var50 = var_60;
+var52 = var_;
 }
-var_73 = var50;
-if (var50){
-var74 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
-var75 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var75) */
-var78 = var_line_end + var75;
-var76 = var78;
-goto RET_LABEL77;
-RET_LABEL77:(void)0;
+var_90 = var52;
+if (var52){
+{
+{ /* Inline string#FlatString#chars (var_string) on <var_string:String> */
+var93 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
+if (unlikely(var93 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+show_backtrace(1);
 }
-var79 = ((val* (*)(val*, long))(var74->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var74, var76) /* [] on <var74:StringCharView>*/;
-var80 = '\15';
-{ /* Inline kernel#Char#!= (var79,var80) */
-var83 = (var79 != NULL) && (var79->class == &class_kernel__Char);
-if (var83) {
-var84 = ((struct instance_kernel__Char*)var79)->value; /* autounbox from nullable Object to Char */;
-var83 = (var84 == var80);
+var91 = var93;
+RET_LABEL92:(void)0;
 }
-var85 = !var83;
-var81 = var85;
-goto RET_LABEL82;
-RET_LABEL82:(void)0;
 }
-var49 = var81;
-} else {
-var49 = var_73;
+var94 = 1;
+{
+{ /* Inline kernel#Int#+ (var_line_end,var94) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var94:Int> isa OTHER */
+/* <var94:Int> isa OTHER */
+var97 = 1; /* easy <var94:Int> isa OTHER*/
+if (unlikely(!var97)) {
+var_class_name100 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name100);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
 }
-if (!var49) break;
-var86 = 1;
-{ /* Inline kernel#Int#+ (var_line_end,var86) */
-var89 = var_line_end + var86;
-var87 = var89;
-goto RET_LABEL88;
-RET_LABEL88:(void)0;
+var101 = var_line_end + var94;
+var95 = var101;
+goto RET_LABEL96;
+RET_LABEL96:(void)0;
 }
-var_line_end = var87;
-CONTINUE_label: (void)0;
 }
-BREAK_label: (void)0;
-var90 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-var91 = 1;
-{ /* Inline kernel#Int#- (var90,var91) */
-var94 = var90 - var91;
-var92 = var94;
-goto RET_LABEL93;
-RET_LABEL93:(void)0;
+{
+var102 = ((val* (*)(val*, long))(var91->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var91, var95) /* [] on <var91:SequenceRead[Char]>*/;
 }
-var95 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var_line_start, var92) /* substring on <var_string:String>*/;
-var_lstart = var95;
-var96 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__line_end]))(var_l) /* line_end on <var_l:Location>*/;
-{ /* Inline kernel#Int#!= (var_i,var96) */
-var99 = var_i == var96;
-var100 = !var99;
-var97 = var100;
-goto RET_LABEL98;
-RET_LABEL98:(void)0;
+var103 = '\15';
+{
+{ /* Inline kernel#Char#!= (var102,var103) on <var102:nullable Object(Char)> */
+var107 = (var102 != NULL) && (var102->class == &class_kernel__Char);
+if (var107) {
+var108 = ((struct instance_kernel__Char*)var102)->value; /* autounbox from nullable Object to Char */;
+var107 = (var108 == var103);
 }
-if (var97){
-{ /* Inline kernel#Int#- (var_line_end,var_line_start) */
-var103 = var_line_end - var_line_start;
-var101 = var103;
-goto RET_LABEL102;
-RET_LABEL102:(void)0;
-}
-var104 = 1;
-{ /* Inline kernel#Int#+ (var101,var104) */
-var107 = var101 + var104;
-var105 = var107;
+var109 = !var107;
+var105 = var109;
 goto RET_LABEL106;
 RET_LABEL106:(void)0;
 }
-var108 = BOX_kernel__Int(var105); /* autobox from Int to nullable Object */
-var_cend = var108;
-} else {
-var109 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_end]))(var_l) /* column_end on <var_l:Location>*/;
-var110 = BOX_kernel__Int(var109); /* autobox from Int to nullable Object */
-var_cend = var110;
+var104 = var105;
 }
-{ /* Inline kernel#Int#+ (var_line_start,var_cend) */
-var113 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var114 = var_line_start + var113;
-var111 = var114;
+var51 = var104;
+} else {
+var51 = var_90;
+}
+if (!var51) break;
+var110 = 1;
+{
+{ /* Inline kernel#Int#+ (var_line_end,var110) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var110:Int> isa OTHER */
+/* <var110:Int> isa OTHER */
+var113 = 1; /* easy <var110:Int> isa OTHER*/
+if (unlikely(!var113)) {
+var_class_name116 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name116);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var117 = var_line_end + var110;
+var111 = var117;
 goto RET_LABEL112;
 RET_LABEL112:(void)0;
 }
-var115 = ((long (*)(val*))(var_string->class->vft[COLOR_abstract_collection__Collection__length]))(var_string) /* length on <var_string:String>*/;
-{ /* Inline kernel#Int#<= (var111,var115) */
-/* Covariant cast for argument 0 (i) <var115:Int> isa OTHER */
-/* <var115:Int> isa OTHER */
-var118 = 1; /* easy <var115:Int> isa OTHER*/
-if (!var118) {
-var_class_name121 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name121);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 264);
+}
+var_line_end = var111;
+CONTINUE_label: (void)0;
+}
+BREAK_label: (void)0;
+{
+{ /* Inline location#Location#column_start (var_l) on <var_l:Location> */
+var120 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
+var118 = var120;
+RET_LABEL119:(void)0;
+}
+}
+var121 = 1;
+{
+{ /* Inline kernel#Int#- (var118,var121) on <var118:Int> */
+/* Covariant cast for argument 0 (i) <var121:Int> isa OTHER */
+/* <var121:Int> isa OTHER */
+var124 = 1; /* easy <var121:Int> isa OTHER*/
+if (unlikely(!var124)) {
+var_class_name127 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name127);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
 show_backtrace(1);
 }
-var122 = var111 <= var115;
-var116 = var122;
-goto RET_LABEL117;
-RET_LABEL117:(void)0;
+var128 = var118 - var121;
+var122 = var128;
+goto RET_LABEL123;
+RET_LABEL123:(void)0;
 }
-if (var116){
-var123 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#+ (var_line_start,var123) */
-var126 = var_line_start + var123;
-var124 = var126;
-goto RET_LABEL125;
-RET_LABEL125:(void)0;
 }
-var127 = 1;
-{ /* Inline kernel#Int#- (var124,var127) */
-var130 = var124 - var127;
-var128 = var130;
-goto RET_LABEL129;
-RET_LABEL129:(void)0;
+{
+var129 = string__FlatString__substring(var_string, var_line_start, var122);
 }
-var131 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#- (var_cend,var131) */
-var134 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var135 = var134 - var131;
-var132 = var135;
-goto RET_LABEL133;
-RET_LABEL133:(void)0;
+var_lstart = var129;
+{
+{ /* Inline location#Location#line_end (var_l) on <var_l:Location> */
+var132 = var_l->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_l:Location> */
+var130 = var132;
+RET_LABEL131:(void)0;
 }
-var136 = 1;
-{ /* Inline kernel#Int#+ (var132,var136) */
-var139 = var132 + var136;
-var137 = var139;
-goto RET_LABEL138;
-RET_LABEL138:(void)0;
 }
-var140 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var128, var137) /* substring on <var_string:String>*/;
-var_lmid = var140;
-{ /* Inline kernel#Int#+ (var_line_start,var_cend) */
-var143 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var144 = var_line_start + var143;
-var141 = var144;
-goto RET_LABEL142;
-RET_LABEL142:(void)0;
+{
+{ /* Inline kernel#Int#!= (var_i,var130) on <var_i:Int> */
+var136 = var_i == var130;
+var137 = !var136;
+var134 = var137;
+goto RET_LABEL135;
+RET_LABEL135:(void)0;
 }
-{ /* Inline kernel#Int#- (var_line_end,var_line_start) */
-var147 = var_line_end - var_line_start;
-var145 = var147;
-goto RET_LABEL146;
-RET_LABEL146:(void)0;
+var133 = var134;
 }
-{ /* Inline kernel#Int#- (var145,var_cend) */
-var150 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
-var151 = var145 - var150;
-var148 = var151;
-goto RET_LABEL149;
-RET_LABEL149:(void)0;
+if (var133){
+{
+{ /* Inline kernel#Int#- (var_line_end,var_line_start) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var_line_start:Int> isa OTHER */
+/* <var_line_start:Int> isa OTHER */
+var140 = 1; /* easy <var_line_start:Int> isa OTHER*/
+if (unlikely(!var140)) {
+var_class_name143 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name143);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
 }
-var152 = 1;
-{ /* Inline kernel#Int#+ (var148,var152) */
-var155 = var148 + var152;
-var153 = var155;
-goto RET_LABEL154;
-RET_LABEL154:(void)0;
+var144 = var_line_end - var_line_start;
+var138 = var144;
+goto RET_LABEL139;
+RET_LABEL139:(void)0;
 }
-var156 = ((val* (*)(val*, long, long))(var_string->class->vft[COLOR_string__AbstractString__substring]))(var_string, var141, var153) /* substring on <var_string:String>*/;
-var_lend = var156;
+}
+var145 = 1;
+{
+{ /* Inline kernel#Int#+ (var138,var145) on <var138:Int> */
+/* Covariant cast for argument 0 (i) <var145:Int> isa OTHER */
+/* <var145:Int> isa OTHER */
+var148 = 1; /* easy <var145:Int> isa OTHER*/
+if (unlikely(!var148)) {
+var_class_name151 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name151);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var152 = var138 + var145;
+var146 = var152;
+goto RET_LABEL147;
+RET_LABEL147:(void)0;
+}
+}
+var153 = BOX_kernel__Int(var146); /* autobox from Int to nullable Object */
+var_cend = var153;
 } else {
-if (varonce157) {
-var158 = varonce157;
+{
+{ /* Inline location#Location#column_end (var_l) on <var_l:Location> */
+var156 = var_l->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_l:Location> */
+var154 = var156;
+RET_LABEL155:(void)0;
+}
+}
+var157 = BOX_kernel__Int(var154); /* autobox from Int to nullable Object */
+var_cend = var157;
+}
+{
+{ /* Inline kernel#Int#+ (var_line_start,var_cend) on <var_line_start:Int> */
+/* Covariant cast for argument 0 (i) <var_cend:nullable Object(Int)> isa OTHER */
+/* <var_cend:nullable Object(Int)> isa OTHER */
+var160 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
+if (unlikely(!var160)) {
+var_class_name163 = var_cend == NULL ? "null" : var_cend->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name163);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var164 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var165 = var_line_start + var164;
+var158 = var165;
+goto RET_LABEL159;
+RET_LABEL159:(void)0;
+}
+}
+{
+{ /* Inline string#FlatText#length (var_string) on <var_string:String> */
+var168 = var_string->attrs[COLOR_string__FlatText___length].l; /* _length on <var_string:String> */
+var166 = var168;
+RET_LABEL167:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#<= (var158,var166) on <var158:Int> */
+/* Covariant cast for argument 0 (i) <var166:Int> isa OTHER */
+/* <var166:Int> isa OTHER */
+var171 = 1; /* easy <var166:Int> isa OTHER*/
+if (unlikely(!var171)) {
+var_class_name174 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name174);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+show_backtrace(1);
+}
+var175 = var158 <= var166;
+var169 = var175;
+goto RET_LABEL170;
+RET_LABEL170:(void)0;
+}
+}
+if (var169){
+{
+{ /* Inline location#Location#column_start (var_l) on <var_l:Location> */
+var178 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
+var176 = var178;
+RET_LABEL177:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var_line_start,var176) on <var_line_start:Int> */
+/* Covariant cast for argument 0 (i) <var176:Int> isa OTHER */
+/* <var176:Int> isa OTHER */
+var181 = 1; /* easy <var176:Int> isa OTHER*/
+if (unlikely(!var181)) {
+var_class_name184 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name184);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var185 = var_line_start + var176;
+var179 = var185;
+goto RET_LABEL180;
+RET_LABEL180:(void)0;
+}
+}
+var186 = 1;
+{
+{ /* Inline kernel#Int#- (var179,var186) on <var179:Int> */
+/* Covariant cast for argument 0 (i) <var186:Int> isa OTHER */
+/* <var186:Int> isa OTHER */
+var189 = 1; /* easy <var186:Int> isa OTHER*/
+if (unlikely(!var189)) {
+var_class_name192 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name192);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var193 = var179 - var186;
+var187 = var193;
+goto RET_LABEL188;
+RET_LABEL188:(void)0;
+}
+}
+{
+{ /* Inline location#Location#column_start (var_l) on <var_l:Location> */
+var196 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
+var194 = var196;
+RET_LABEL195:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#- (var_cend,var194) on <var_cend:nullable Object(Int)> */
+/* Covariant cast for argument 0 (i) <var194:Int> isa OTHER */
+/* <var194:Int> isa OTHER */
+var199 = 1; /* easy <var194:Int> isa OTHER*/
+if (unlikely(!var199)) {
+var_class_name202 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name202);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var203 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var204 = var203 - var194;
+var197 = var204;
+goto RET_LABEL198;
+RET_LABEL198:(void)0;
+}
+}
+var205 = 1;
+{
+{ /* Inline kernel#Int#+ (var197,var205) on <var197:Int> */
+/* Covariant cast for argument 0 (i) <var205:Int> isa OTHER */
+/* <var205:Int> isa OTHER */
+var208 = 1; /* easy <var205:Int> isa OTHER*/
+if (unlikely(!var208)) {
+var_class_name211 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name211);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var212 = var197 + var205;
+var206 = var212;
+goto RET_LABEL207;
+RET_LABEL207:(void)0;
+}
+}
+{
+var213 = string__FlatString__substring(var_string, var187, var206);
+}
+var_lmid = var213;
+{
+{ /* Inline kernel#Int#+ (var_line_start,var_cend) on <var_line_start:Int> */
+/* Covariant cast for argument 0 (i) <var_cend:nullable Object(Int)> isa OTHER */
+/* <var_cend:nullable Object(Int)> isa OTHER */
+var216 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
+if (unlikely(!var216)) {
+var_class_name219 = var_cend == NULL ? "null" : var_cend->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name219);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var220 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var221 = var_line_start + var220;
+var214 = var221;
+goto RET_LABEL215;
+RET_LABEL215:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#- (var_line_end,var_line_start) on <var_line_end:Int> */
+/* Covariant cast for argument 0 (i) <var_line_start:Int> isa OTHER */
+/* <var_line_start:Int> isa OTHER */
+var224 = 1; /* easy <var_line_start:Int> isa OTHER*/
+if (unlikely(!var224)) {
+var_class_name227 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name227);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var228 = var_line_end - var_line_start;
+var222 = var228;
+goto RET_LABEL223;
+RET_LABEL223:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#- (var222,var_cend) on <var222:Int> */
+/* Covariant cast for argument 0 (i) <var_cend:nullable Object(Int)> isa OTHER */
+/* <var_cend:nullable Object(Int)> isa OTHER */
+var231 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
+if (unlikely(!var231)) {
+var_class_name234 = var_cend == NULL ? "null" : var_cend->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name234);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var235 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
+var236 = var222 - var235;
+var229 = var236;
+goto RET_LABEL230;
+RET_LABEL230:(void)0;
+}
+}
+var237 = 1;
+{
+{ /* Inline kernel#Int#+ (var229,var237) on <var229:Int> */
+/* Covariant cast for argument 0 (i) <var237:Int> isa OTHER */
+/* <var237:Int> isa OTHER */
+var240 = 1; /* easy <var237:Int> isa OTHER*/
+if (unlikely(!var240)) {
+var_class_name243 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name243);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var244 = var229 + var237;
+var238 = var244;
+goto RET_LABEL239;
+RET_LABEL239:(void)0;
+}
+}
+{
+var245 = string__FlatString__substring(var_string, var214, var238);
+}
+var_lend = var245;
 } else {
-var159 = "";
-var160 = 0;
-var161 = string__NativeString__to_s_with_length(var159, var160);
-var158 = var161;
-varonce157 = var158;
-}
-var_lmid = var158;
-if (varonce162) {
-var163 = varonce162;
+if (varonce246) {
+var247 = varonce246;
 } else {
-var164 = "";
-var165 = 0;
-var166 = string__NativeString__to_s_with_length(var164, var165);
-var163 = var166;
-varonce162 = var163;
+var248 = "";
+var249 = 0;
+var250 = string__NativeString__to_s_with_length(var248, var249);
+var247 = var250;
+varonce246 = var247;
 }
-var_lend = var163;
+var_lmid = var247;
+if (varonce251) {
+var252 = varonce251;
+} else {
+var253 = "";
+var254 = 0;
+var255 = string__NativeString__to_s_with_length(var253, var254);
+var252 = var255;
+varonce251 = var252;
 }
-var167 = NEW_string__Buffer(&type_string__Buffer);
-((void (*)(val*))(var167->class->vft[COLOR_string__Buffer__init]))(var167) /* init on <var167:Buffer>*/;
-var_indent = var167;
-var168 = NEW_range__Range(&type_range__Rangekernel__Int);
-var169 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
-{ /* Inline kernel#Int#+ (var_line_start,var169) */
-var172 = var_line_start + var169;
-var170 = var172;
-goto RET_LABEL171;
-RET_LABEL171:(void)0;
+var_lend = var252;
 }
-var173 = 1;
-{ /* Inline kernel#Int#- (var170,var173) */
-var176 = var170 - var173;
-var174 = var176;
-goto RET_LABEL175;
-RET_LABEL175:(void)0;
+var256 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
+{
+string__FlatBuffer__init(var256); /* Direct call string#FlatBuffer#init on <var256:FlatBuffer>*/
 }
-var177 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
-var178 = BOX_kernel__Int(var174); /* autobox from Int to Discrete */
-((void (*)(val*, val*, val*))(var168->class->vft[COLOR_range__Range__without_last]))(var168, var177, var178) /* without_last on <var168:Range[Int]>*/;
-var179 = ((val* (*)(val*))(var168->class->vft[COLOR_abstract_collection__Collection__iterator]))(var168) /* iterator on <var168:Range[Int]>*/;
+var_indent = var256;
+var257 = NEW_range__Range(&type_range__Rangekernel__Int);
+{
+{ /* Inline location#Location#column_start (var_l) on <var_l:Location> */
+var260 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
+var258 = var260;
+RET_LABEL259:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var_line_start,var258) on <var_line_start:Int> */
+/* Covariant cast for argument 0 (i) <var258:Int> isa OTHER */
+/* <var258:Int> isa OTHER */
+var263 = 1; /* easy <var258:Int> isa OTHER*/
+if (unlikely(!var263)) {
+var_class_name266 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name266);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+show_backtrace(1);
+}
+var267 = var_line_start + var258;
+var261 = var267;
+goto RET_LABEL262;
+RET_LABEL262:(void)0;
+}
+}
+var268 = 1;
+{
+{ /* Inline kernel#Int#- (var261,var268) on <var261:Int> */
+/* Covariant cast for argument 0 (i) <var268:Int> isa OTHER */
+/* <var268:Int> isa OTHER */
+var271 = 1; /* easy <var268:Int> isa OTHER*/
+if (unlikely(!var271)) {
+var_class_name274 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name274);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+show_backtrace(1);
+}
+var275 = var261 - var268;
+var269 = var275;
+goto RET_LABEL270;
+RET_LABEL270:(void)0;
+}
+}
+{
+var276 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
+var277 = BOX_kernel__Int(var269); /* autobox from Int to Discrete */
+range__Range__without_last(var257, var276, var277); /* Direct call range#Range#without_last on <var257:Range[Int]>*/
+}
+{
+var278 = range__Range__iterator(var257);
+}
 for(;;) {
-var180 = ((short int (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var179) /* is_ok on <var179:Iterator[nullable Object]>*/;
-if(!var180) break;
-var181 = ((val* (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__item]))(var179) /* item on <var179:Iterator[nullable Object]>*/;
-var182 = ((struct instance_kernel__Int*)var181)->value; /* autounbox from nullable Object to Int */;
-var_j = var182;
-var183 = ((val* (*)(val*))(var_string->class->vft[COLOR_string__AbstractString__chars]))(var_string) /* chars on <var_string:String>*/;
-var184 = ((val* (*)(val*, long))(var183->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var183, var_j) /* [] on <var183:StringCharView>*/;
-var185 = '\11';
-{ /* Inline kernel#Char#== (var184,var185) */
-var188 = (var184 != NULL) && (var184->class == &class_kernel__Char);
-if (var188) {
-var189 = ((struct instance_kernel__Char*)var184)->value; /* autounbox from nullable Object to Char */;
-var188 = (var189 == var185);
+{
+var279 = ((short int (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var278) /* is_ok on <var278:Iterator[Discrete]>*/;
 }
-var186 = var188;
-goto RET_LABEL187;
-RET_LABEL187:(void)0;
+if(!var279) break;
+{
+var280 = ((val* (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__item]))(var278) /* item on <var278:Iterator[Discrete]>*/;
 }
-if (var186){
-var190 = '\11';
-var191 = BOX_kernel__Char(var190); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var191) /* add on <var_indent:Buffer>*/;
+var281 = ((struct instance_kernel__Int*)var280)->value; /* autounbox from nullable Object to Int */;
+var_j = var281;
+{
+{ /* Inline string#FlatString#chars (var_string) on <var_string:String> */
+var284 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
+if (unlikely(var284 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+show_backtrace(1);
+}
+var282 = var284;
+RET_LABEL283:(void)0;
+}
+}
+{
+var285 = ((val* (*)(val*, long))(var282->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var282, var_j) /* [] on <var282:SequenceRead[Char]>*/;
+}
+var286 = '\11';
+{
+{ /* Inline kernel#Char#== (var285,var286) on <var285:nullable Object(Char)> */
+var290 = (var285 != NULL) && (var285->class == &class_kernel__Char);
+if (var290) {
+var291 = ((struct instance_kernel__Char*)var285)->value; /* autounbox from nullable Object to Char */;
+var290 = (var291 == var286);
+}
+var288 = var290;
+goto RET_LABEL289;
+RET_LABEL289:(void)0;
+}
+var287 = var288;
+}
+if (var287){
+var292 = '\11';
+{
+string__FlatBuffer__add(var_indent, var292); /* Direct call string#FlatBuffer#add on <var_indent:FlatBuffer>*/
+}
 } else {
-var192 = ' ';
-var193 = BOX_kernel__Char(var192); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_indent->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_indent, var193) /* add on <var_indent:Buffer>*/;
+var293 = ' ';
+{
+string__FlatBuffer__add(var_indent, var293); /* Direct call string#FlatBuffer#add on <var_indent:FlatBuffer>*/
 }
-CONTINUE_label194: (void)0;
-((void (*)(val*))(var179->class->vft[COLOR_abstract_collection__Iterator__next]))(var179) /* next on <var179:Iterator[nullable Object]>*/;
 }
-BREAK_label194: (void)0;
-var195 = NEW_array__Array(&type_array__Arraykernel__Object);
-var196 = 13;
-((void (*)(val*, long))(var195->class->vft[COLOR_array__Array__with_capacity]))(var195, var196) /* with_capacity on <var195:Array[Object]>*/;
-var_197 = var195;
-if (varonce198) {
-var199 = varonce198;
+CONTINUE_label294: (void)0;
+{
+((void (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__next]))(var278) /* next on <var278:Iterator[Discrete]>*/;
+}
+}
+BREAK_label294: (void)0;
+if (varonce295) {
+var296 = varonce295;
 } else {
-var200 = "\11";
-var201 = 1;
-var202 = string__NativeString__to_s_with_length(var200, var201);
-var199 = var202;
-varonce198 = var199;
+var297 = "\11";
+var298 = 1;
+var299 = string__NativeString__to_s_with_length(var297, var298);
+var296 = var299;
+varonce295 = var296;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var199) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lstart) /* add on <var_197:Array[Object]>*/;
-if (varonce203) {
-var204 = varonce203;
+if (varonce300) {
+var301 = varonce300;
 } else {
-var205 = "";
-var206 = 0;
-var207 = string__NativeString__to_s_with_length(var205, var206);
-var204 = var207;
-varonce203 = var204;
+var302 = "\n\11";
+var303 = 2;
+var304 = string__NativeString__to_s_with_length(var302, var303);
+var301 = var304;
+varonce300 = var301;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var204) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_col) /* add on <var_197:Array[Object]>*/;
-if (varonce208) {
-var209 = varonce208;
+if (varonce305) {
+var306 = varonce305;
 } else {
-var210 = "";
-var211 = 0;
-var212 = string__NativeString__to_s_with_length(var210, var211);
-var209 = var212;
-varonce208 = var209;
+var307 = "^";
+var308 = 1;
+var309 = string__NativeString__to_s_with_length(var307, var308);
+var306 = var309;
+varonce305 = var306;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var209) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lmid) /* add on <var_197:Array[Object]>*/;
-if (varonce213) {
-var214 = varonce213;
-} else {
-var215 = "";
-var216 = 0;
-var217 = string__NativeString__to_s_with_length(var215, var216);
-var214 = var217;
-varonce213 = var214;
+var310 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var310 = array_instance Array[Object] */
+var311 = 9;
+var312 = NEW_array__NativeArray(var311, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var312)->values[0] = (val*) var296;
+((struct instance_array__NativeArray*)var312)->values[1] = (val*) var_lstart;
+((struct instance_array__NativeArray*)var312)->values[2] = (val*) var_col;
+((struct instance_array__NativeArray*)var312)->values[3] = (val*) var_lmid;
+((struct instance_array__NativeArray*)var312)->values[4] = (val*) var_def;
+((struct instance_array__NativeArray*)var312)->values[5] = (val*) var_lend;
+((struct instance_array__NativeArray*)var312)->values[6] = (val*) var301;
+((struct instance_array__NativeArray*)var312)->values[7] = (val*) var_indent;
+((struct instance_array__NativeArray*)var312)->values[8] = (val*) var306;
+{
+((void (*)(val*, val*, long))(var310->class->vft[COLOR_array__Array__with_native]))(var310, var312, var311) /* with_native on <var310:Array[Object]>*/;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var214) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_def) /* add on <var_197:Array[Object]>*/;
-if (varonce218) {
-var219 = varonce218;
-} else {
-var220 = "";
-var221 = 0;
-var222 = string__NativeString__to_s_with_length(var220, var221);
-var219 = var222;
-varonce218 = var219;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var219) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_lend) /* add on <var_197:Array[Object]>*/;
-if (varonce223) {
-var224 = varonce223;
-} else {
-var225 = "\n\11";
-var226 = 2;
-var227 = string__NativeString__to_s_with_length(var225, var226);
-var224 = var227;
-varonce223 = var224;
+{
+var313 = ((val* (*)(val*))(var310->class->vft[COLOR_string__Object__to_s]))(var310) /* to_s on <var310:Array[Object]>*/;
 }
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var224) /* add on <var_197:Array[Object]>*/;
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var_indent) /* add on <var_197:Array[Object]>*/;
-if (varonce228) {
-var229 = varonce228;
-} else {
-var230 = "^";
-var231 = 1;
-var232 = string__NativeString__to_s_with_length(var230, var231);
-var229 = var232;
-varonce228 = var229;
-}
-((void (*)(val*, val*))(var_197->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_197, var229) /* add on <var_197:Array[Object]>*/;
-var233 = ((val* (*)(val*))(var_197->class->vft[COLOR_string__Object__to_s]))(var_197) /* to_s on <var_197:Array[Object]>*/;
-var = var233;
+var = var313;
 goto RET_LABEL;
 RET_LABEL:;
 return var;

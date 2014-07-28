@@ -1,22 +1,13 @@
 #include "nit.common.h"
-void model_base__Model__init(val* self);
-extern const int COLOR_model_base__MVisibility___64dto_s;
-val* model_base__MVisibility__to_s(val* self);
-void model_base__MVisibility__to_s_61d(val* self, val* p0);
-extern const int COLOR_model_base__MVisibility___64dlevel;
-long model_base__MVisibility__level(val* self);
-void model_base__MVisibility__level_61d(val* self, long p0);
-extern const int COLOR_model_base__MVisibility__to_s_61d;
-extern const int COLOR_model_base__MVisibility__level_61d;
+#define COLOR_model_base__MVisibility___to_s 0
+#define COLOR_model_base__MVisibility___level 1
 void model_base__MVisibility__init(val* self, val* p0, long p1);
-extern const int COLOR_kernel__Comparable_VTOTHER;
-extern const int COLOR_model_base__MVisibility__level;
+#define COLOR_kernel__Comparable_VTOTHER 0
 extern const struct type type_kernel__Int;
 short int model_base__MVisibility___60d(val* self, val* p0);
 val* NEW_model_base__MVisibility(const struct type* type);
 extern const struct type type_model_base__MVisibility;
 val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_model_base__MVisibility__init;
 val* model_base__Object__intrude_visibility(val* self);
 val* model_base__Object__public_visibility(val* self);
 val* model_base__Object__protected_visibility(val* self);

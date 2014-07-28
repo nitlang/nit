@@ -1,85 +1,51 @@
 #include "nit.common.h"
-extern const int COLOR_list__List__get_node;
-extern const int COLOR_abstract_collection__Container__item;
+val* list__List__get_node(val* self, long p0);
+#define COLOR_abstract_collection__Container___item 0
 val* list__List___91d_93d(val* self, long p0);
-extern const int COLOR_abstract_collection__Sequence_FT0;
-extern const int COLOR_abstract_collection__Container__item_61d;
+#define COLOR_abstract_collection__Sequence_FT0 0
+#define COLOR_abstract_collection__Container_FT0 3
 void list__List___91d_93d_61d(val* self, long p0, val* p1);
-extern const int COLOR_list__List___head;
+#define COLOR_list__List___head 0
 val* list__List__first(val* self);
 void list__List__first_61d(val* self, val* p0);
-extern const int COLOR_list__List___tail;
+#define COLOR_list__List___tail 1
 val* list__List__last(val* self);
-void list__List__last_61d(val* self, val* p0);
 short int list__List__is_empty(val* self);
-extern const int COLOR_list__ListNode__next;
-long list__List__length(val* self);
-extern const int COLOR_abstract_collection__Collection_FT0;
-extern const int COLOR_list__List__search_node_after;
-short int list__List__has(val* self, val* p0);
-extern const int COLOR_kernel__Object___33d_61d;
-short int list__List__has_only(val* self, val* p0);
-long list__List__count(val* self, val* p0);
+#define COLOR_kernel__Object___61d_61d 2
 extern const struct type type_kernel__Int;
-extern const int COLOR_abstract_collection__Collection__length;
-val* NEW_list__List(const struct type* type);
-extern const int COLOR_list__Listlist__List_FT0;
-extern const int COLOR_list__List__init;
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-val* list__List__slice(val* self, long p0, long p1);
+#define COLOR_list__ListNode___next 1
+long list__List__length(val* self);
+#define COLOR_abstract_collection__Collection_FT0 8
+val* list__List__search_node_after(val* self, val* p0, val* p1);
+short int list__List__has(val* self, val* p0);
 val* NEW_list__ListNode(const struct type* type);
-extern const int COLOR_list__ListNodelist__List_FT0;
-extern const int COLOR_list__ListNode__init;
-extern const int COLOR_list__ListNode__next_61d;
-extern const int COLOR_list__ListNode__prev_61d;
+#define COLOR_list__ListNodelist__List_FT0 2
+void list__ListNode__init(val* self, val* p0);
+#define COLOR_nullable_list__ListNodelist__ListNode_FT0 0
+#define COLOR_list__ListNode___prev 2
 void list__List__push(val* self, val* p0);
 void list__List__unshift(val* self, val* p0);
-extern const int COLOR_abstract_collection__RemovableCollection__clear;
-void list__List__link(val* self, val* p0);
-extern const int COLOR_list__ListNode__prev;
 val* list__List__pop(val* self);
 val* list__List__shift(val* self);
-extern const int COLOR_abstract_collection__RemovableCollection_FT0;
-extern const int COLOR_list__List__remove_node;
+#define COLOR_abstract_collection__RemovableCollection_FT0 5
+void list__List__remove_node(val* self, val* p0);
 void list__List__remove(val* self, val* p0);
 void list__List__remove_at(val* self, long p0);
 void list__List__clear(val* self);
 val* NEW_list__ListIterator(const struct type* type);
-extern const int COLOR_list__ListIteratorlist__List_FT0;
-extern const int COLOR_list__ListIterator__init;
-val* list__List__iterator(val* self);
-void list__List__init(val* self);
-extern const int COLOR_abstract_collection__Collectionlist__List_FT0;
-extern const int COLOR_abstract_collection__Sequence__append;
-void list__List__from(val* self, val* p0);
-val* list__List__get_node(val* self, long p0);
-extern const int COLOR_list__List_FT0;
-extern const int COLOR_nullable_list__ListNodelist__List_FT0;
-val* list__List__search_node_after(val* self, val* p0, val* p1);
-void list__List__remove_node(val* self, val* p0);
-void list__List__insert_before(val* self, val* p0, val* p1);
-extern const int COLOR_list__ListIterator___node;
-val* list__ListIterator__item(val* self);
-extern const int COLOR_list__ListIterator_FT0;
-void list__ListIterator__item_61d(val* self, val* p0);
-short int list__ListIterator__is_ok(val* self);
-extern const int COLOR_list__ListIterator___index;
-void list__ListIterator__next(val* self);
-extern const int COLOR_list__Listlist__ListIterator_FT0;
-extern const int COLOR_list__ListIterator___list;
+#define COLOR_list__ListIteratorlist__List_FT0 3
 void list__ListIterator__init(val* self, val* p0);
+val* list__List__iterator(val* self);
+#define COLOR_list__List_FT0 4
+#define COLOR_nullable_list__ListNodelist__List_FT0 11
+#define COLOR_kernel__Object___33d_61d 3
+#define COLOR_list__ListIterator___node 1
+val* list__ListIterator__item(val* self);
+short int list__ListIterator__is_ok(val* self);
+#define COLOR_list__ListIterator___index 2
+void list__ListIterator__next(val* self);
+#define COLOR_list__Listlist__ListIterator_FT0 1
+#define COLOR_list__ListIterator___list 0
 long list__ListIterator__index(val* self);
-void list__ListIterator__delete(val* self);
-extern const int COLOR_list__List__insert_before;
-void list__ListIterator__insert_before(val* self, val* p0);
-extern const int COLOR_list__ListNode_FT0;
-extern const int COLOR_abstract_collection__Container__init;
-void list__ListNode__init(val* self, val* p0);
-extern const int COLOR_list__ListNode___next;
-val* list__ListNode__next(val* self);
-extern const int COLOR_nullable_list__ListNodelist__ListNode_FT0;
-void list__ListNode__next_61d(val* self, val* p0);
-extern const int COLOR_list__ListNode___prev;
-val* list__ListNode__prev(val* self);
-void list__ListNode__prev_61d(val* self, val* p0);
+#define COLOR_list__ListNode_FT0 1
+void abstract_collection__Container__init(val* self, val* p0);

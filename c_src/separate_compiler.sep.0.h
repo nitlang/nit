@@ -1,510 +1,410 @@
 #include "nit.common.h"
-extern const int COLOR_separate_compiler__ToolContext___64dopt_separate;
-val* separate_compiler__ToolContext__opt_separate(val* self);
-void separate_compiler__ToolContext__opt_separate_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_no_inline_intern;
-val* separate_compiler__ToolContext__opt_no_inline_intern(val* self);
-void separate_compiler__ToolContext__opt_no_inline_intern_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_no_union_attribute;
-val* separate_compiler__ToolContext__opt_no_union_attribute(val* self);
-void separate_compiler__ToolContext__opt_no_union_attribute_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_no_shortcut_equate;
-val* separate_compiler__ToolContext__opt_no_shortcut_equate(val* self);
-void separate_compiler__ToolContext__opt_no_shortcut_equate_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_inline_coloring_numbers;
-val* separate_compiler__ToolContext__opt_inline_coloring_numbers(val* self);
-void separate_compiler__ToolContext__opt_inline_coloring_numbers_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_bm_typing;
-val* separate_compiler__ToolContext__opt_bm_typing(val* self);
-void separate_compiler__ToolContext__opt_bm_typing_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_phmod_typing;
-val* separate_compiler__ToolContext__opt_phmod_typing(val* self);
-void separate_compiler__ToolContext__opt_phmod_typing_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_phand_typing;
-val* separate_compiler__ToolContext__opt_phand_typing(val* self);
-void separate_compiler__ToolContext__opt_phand_typing_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext___64dopt_tables_metrics;
-val* separate_compiler__ToolContext__opt_tables_metrics(val* self);
-void separate_compiler__ToolContext__opt_tables_metrics_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__ToolContext__init;
-extern const int COLOR_toolcontext__ToolContext__option_context;
-extern const int COLOR_separate_compiler__ToolContext__opt_separate;
+#define COLOR_separate_compiler__ToolContext___opt_separate 58
+#define COLOR_separate_compiler__ToolContext___opt_no_inline_intern 59
+#define COLOR_separate_compiler__ToolContext___opt_no_union_attribute 60
+#define COLOR_separate_compiler__ToolContext___opt_no_shortcut_equate 61
+#define COLOR_separate_compiler__ToolContext___opt_inline_coloring_numbers 62
+#define COLOR_separate_compiler__ToolContext___opt_inline_some_methods 63
+#define COLOR_separate_compiler__ToolContext___opt_direct_call_monomorph 64
+#define COLOR_separate_compiler__ToolContext___opt_skip_dead_methods 65
+#define COLOR_separate_compiler__ToolContext___opt_semi_global 66
+#define COLOR_separate_compiler__ToolContext___opt_colo_dead_methods 67
+#define COLOR_separate_compiler__ToolContext___opt_tables_metrics 68
+#define COLOR_separate_compiler__ToolContext__init 123
+#define COLOR_toolcontext__ToolContext___option_context 5
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arrayopts__Option;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArrayopts__Option;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_opts__OptionContext__add_option;
-extern const int COLOR_separate_compiler__ToolContext__opt_no_inline_intern;
-extern const int COLOR_separate_compiler__ToolContext__opt_no_union_attribute;
-extern const int COLOR_separate_compiler__ToolContext__opt_no_shortcut_equate;
-extern const int COLOR_separate_compiler__ToolContext__opt_inline_coloring_numbers;
-extern const int COLOR_separate_compiler__ToolContext__opt_bm_typing;
-extern const int COLOR_separate_compiler__ToolContext__opt_phmod_typing;
-extern const int COLOR_separate_compiler__ToolContext__opt_phand_typing;
-extern const int COLOR_separate_compiler__ToolContext__opt_tables_metrics;
+#define COLOR_array__Array__with_native 65
+void opts__OptionContext__add_option(val* self, val* p0);
 void separate_compiler__ToolContext__init(val* self);
-extern const int COLOR_time__Object__get_time;
-extern const int COLOR_modelbuilder__ModelBuilder__toolcontext;
+#define COLOR_separate_compiler__ToolContext__process_options 124
+#define COLOR_opts__Option___value 6
+#define COLOR_opts__Option_VTVALUE 0
+extern const struct type type_kernel__Bool;
+val* BOX_kernel__Bool(short int);
+void separate_compiler__ToolContext__process_options(val* self, val* p0);
+#define COLOR_phase__Phase___toolcontext 0
+val* modelbuilder__ToolContext__modelbuilder(val* self);
+val* rapid_type_analysis__ModelBuilder__do_rapid_type_analysis(val* self, val* p0);
+void separate_compiler__ModelBuilder__run_separate_compiler(val* self, val* p0, val* p1);
+void separate_compiler__SeparateCompilerPhase__process_mainmodule(val* self, val* p0, val* p1);
+#include "time_nit.h"
+#define COLOR_modelbuilder__ModelBuilder___toolcontext 1
 val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_toolcontext__ToolContext__info;
+void toolcontext__ToolContext__info(val* self, val* p0, long p1);
 val* NEW_separate_compiler__SeparateCompiler(const struct type* type);
 extern const struct type type_separate_compiler__SeparateCompiler;
-extern const int COLOR_separate_compiler__SeparateCompiler__init;
-extern const int COLOR_abstract_compiler__AbstractCompiler__compile_header;
-extern const int COLOR_mmodule__MModule__name;
+void separate_compiler__SeparateCompiler__init(val* self, val* p0, val* p1, val* p2);
+void abstract_compiler__AbstractCompiler__compile_header(val* self);
+#define COLOR_mmodule__MModule___name 4
 extern const struct type type_array__Arraykernel__Object;
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_abstract_compiler__AbstractCompiler__new_file;
-extern const int COLOR_separate_compiler__SeparateCompiler__do_property_coloring;
-extern const int COLOR_mmodule__MModule__in_importation;
-extern const int COLOR_poset__POSetElement__greaters;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_model__MModule__intro_mclasses;
-extern const int COLOR_model__MClass__kind;
-extern const int COLOR_model__Object__abstract_kind;
-extern const int COLOR_kernel__Object___61d_61d;
-extern const int COLOR_model__Object__interface_kind;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_class_to_c;
-extern const int COLOR_abstract_collection__Iterator__next;
-extern const int COLOR_abstract_compiler__AbstractCompiler__compile_main_function;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_module_to_c;
-extern const int COLOR_separate_compiler__SeparateCompiler__do_type_coloring;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_type_to_c;
-extern const int COLOR_separate_compiler__SeparateCompiler__undead_types;
-extern const int COLOR_abstract_collection__Collection__has;
-extern const int COLOR_abstract_compiler__AbstractCompiler__display_stats;
+#define COLOR_string__Object__to_s 7
+val* abstract_compiler__AbstractCompiler__new_file(val* self, val* p0);
+void separate_compiler__SeparateCompiler__do_property_coloring(val* self);
+#define COLOR_mmodule__MModule___in_importation 7
+val* poset__POSetElement__greaters(val* self);
+#define COLOR_abstract_collection__Collection__iterator 29
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_model__MModule___intro_mclasses 12
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+#define COLOR_model__MClass___kind 4
+val* model__Object__abstract_kind(val* self);
+val* model__Object__interface_kind(val* self);
+#define COLOR_separate_compiler__SeparateCompiler__compile_class_to_c 96
+void array__ArrayIterator__next(val* self);
+#define COLOR_abstract_collection__Iterator__next 30
+void abstract_compiler__AbstractCompiler__compile_nitni_global_ref_functions(val* self);
+void abstract_compiler__AbstractCompiler__compile_main_function(val* self);
+void separate_compiler__SeparateCompiler__compile_module_to_c(val* self, val* p0);
+val* separate_compiler__SeparateCompiler__do_type_coloring(val* self);
+val* poset__POSet__iterator(val* self);
+void separate_compiler__SeparateCompiler__compile_type_to_c(val* self, val* p0);
+#define COLOR_separate_compiler__SeparateCompiler___undead_types 16
+short int poset__POSet__has(val* self, val* p0);
+void separate_compiler__SeparateCompiler__display_stats(val* self);
+extern const struct type type_kernel__Int;
 val* BOX_kernel__Int(long);
-extern const int COLOR_abstract_compiler__ModelBuilder__write_and_make;
-void separate_compiler__ModelBuilder__run_separate_compiler(val* self, val* p0, val* p1);
-extern const int COLOR_separate_compiler__SeparateCompiler___64druntime_type_analysis;
-val* separate_compiler__SeparateCompiler__runtime_type_analysis(val* self);
-void separate_compiler__SeparateCompiler__runtime_type_analysis_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dundead_types;
-val* separate_compiler__SeparateCompiler__undead_types(val* self);
-void separate_compiler__SeparateCompiler__undead_types_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dlive_unresolved_types;
-val* separate_compiler__SeparateCompiler__live_unresolved_types(val* self);
-void separate_compiler__SeparateCompiler__live_unresolved_types_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dtype_layout;
-val* separate_compiler__SeparateCompiler__type_layout(val* self);
-void separate_compiler__SeparateCompiler__type_layout_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dresolution_layout;
-val* separate_compiler__SeparateCompiler__resolution_layout(val* self);
-void separate_compiler__SeparateCompiler__resolution_layout_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dmethod_layout;
-val* separate_compiler__SeparateCompiler__method_layout(val* self);
-void separate_compiler__SeparateCompiler__method_layout_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dattr_layout;
-val* separate_compiler__SeparateCompiler__attr_layout(val* self);
-void separate_compiler__SeparateCompiler__attr_layout_61d(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractCompiler__init;
+void abstract_compiler__ModelBuilder__write_and_make(val* self, val* p0);
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_tables 11
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_direct 12
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_inline 13
+#define COLOR_separate_compiler__SeparateCompiler___runtime_type_analysis 15
+#define COLOR_separate_compiler__SeparateCompiler___live_unresolved_types 17
+#define COLOR_separate_compiler__SeparateCompiler___type_ids 18
+#define COLOR_separate_compiler__SeparateCompiler___type_colors 19
+#define COLOR_separate_compiler__SeparateCompiler___opentype_colors 20
+#define COLOR_separate_compiler__SeparateCompiler___method_colors 21
+#define COLOR_separate_compiler__SeparateCompiler___attr_colors 22
+void abstract_compiler__AbstractCompiler__init(val* self, val* p0, val* p1);
 val* NEW_abstract_compiler__CodeWriter(const struct type* type);
 extern const struct type type_abstract_compiler__CodeWriter;
-extern const int COLOR_abstract_compiler__CodeWriter__init;
-extern const int COLOR_abstract_compiler__AbstractCompiler__header_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_box_kinds;
-void separate_compiler__SeparateCompiler__init(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_abstract_compiler__AbstractCompiler__header;
-extern const int COLOR_abstract_compiler__CodeWriter__add_decl;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_header_attribute_structs;
-extern const int COLOR_abstract_compiler__AbstractCompiler__modelbuilder;
-extern const int COLOR_opts__Option__value;
-void separate_compiler__SeparateCompiler__compile_header_structs(val* self);
-extern const int COLOR_separate_compiler__SeparateCompiler__box_kinds;
-extern const int COLOR_abstract_collection__MapRead__iterator;
-extern const int COLOR_abstract_collection__MapIterator__is_ok;
-extern const int COLOR_abstract_collection__MapIterator__key;
-extern const int COLOR_abstract_collection__MapIterator__item;
-extern const int COLOR_model__MClass__mclass_type;
-extern const int COLOR_abstract_compiler__MType__ctype;
-extern const int COLOR_abstract_compiler__MType__ctypename;
-extern const int COLOR_abstract_collection__MapIterator__next;
-void separate_compiler__SeparateCompiler__compile_header_attribute_structs(val* self);
-extern const struct type type_array__Arraystring__String;
-extern const int COLOR_array__Array__with_capacity;
-extern const int COLOR_abstract_collection__Sequence__push;
-extern const int COLOR_abstract_compiler__AbstractCompiler__mainmodule;
-extern const int COLOR_mmodule__MModule__model;
-extern const int COLOR_model__Model__get_mclasses_by_name;
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_string__Collection__join;
-extern const int COLOR_file__Object__print;
-extern const int COLOR_abstract_collection__Collection__first;
-extern const int COLOR_abstract_collection__MapRead__length;
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
+void abstract_compiler__CodeWriter__init(val* self, val* p0);
+#define COLOR_abstract_compiler__AbstractCompiler___header 5
 void separate_compiler__SeparateCompiler__compile_box_kinds(val* self);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dbox_kinds;
-val* separate_compiler__SeparateCompiler__box_kinds(val* self);
-void separate_compiler__SeparateCompiler__box_kinds_61d(val* self, val* p0);
-extern const int COLOR_model__Object__extern_kind;
-extern const int COLOR_model__MModule__get_primitive_class;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
+void abstract_compiler__CodeWriter__add_decl(val* self, val* p0);
+void separate_compiler__SeparateCompiler__compile_header_attribute_structs(val* self);
+void separate_compiler__SeparateCompiler__compile_header_structs(val* self);
+#define COLOR_abstract_compiler__AbstractCompiler___modelbuilder 3
+#define COLOR_separate_compiler__SeparateCompiler___box_kinds 23
+val* hash_collection__HashMap__iterator(val* self);
+short int hash_collection__HashMapIterator__is_ok(val* self);
+val* hash_collection__HashMapIterator__key(val* self);
+val* hash_collection__HashMapIterator__item(val* self);
+#define COLOR_model__MClass___mclass_type 7
+val* abstract_compiler__MClassType__ctype(val* self);
+val* abstract_compiler__MClassType__ctypename(val* self);
+void hash_collection__HashMapIterator__next(val* self);
+extern const struct type type_array__Arraystring__String;
+void array__Array__with_capacity(val* self, long p0);
+void array__AbstractArray__push(val* self, val* p0);
+#define COLOR_abstract_compiler__AbstractCompiler___mainmodule 1
+#define COLOR_mmodule__MModule___model 1
+val* model__Model__get_mclasses_by_name(val* self, val* p0);
+short int abstract_collection__SequenceRead___61d_61d(val* self, val* p0);
+long array__AbstractArrayRead__length(val* self);
+val* string__Collection__join(val* self, val* p0);
+void file__Object__print(val* self, val* p0);
+val* abstract_collection__SequenceRead__first(val* self);
+long hash_collection__HashMap__length(val* self);
+void hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
+short int string__FlatString___61d_61d(val* self, val* p0);
+val* model__Object__extern_kind(val* self);
+val* model__MModule__get_primitive_class(val* self, val* p0);
+val* hash_collection__HashMap___91d_93d(val* self, val* p0);
 long separate_compiler__SeparateCompiler__box_kind_of(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractCompiler__new_visitor;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_color_const;
-void separate_compiler__SeparateCompiler__compile_color_consts(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler__color_consts_done;
-extern const struct type type_model__MProperty;
-extern const int COLOR_separate_compiler__MProperty__const_color;
-extern const int COLOR_abstract_compiler__AbstractCompiler__provide_declaration;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__add;
-extern const struct type type_model__MPropDef;
-extern const int COLOR_separate_compiler__MPropDef__const_color;
-extern const struct type type_model__MType;
-extern const int COLOR_separate_compiler__MType__const_color;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+#define COLOR_abstract_compiler__AbstractCompiler__new_visitor 39
+#define COLOR_abstract_collection__MapRead__iterator 32
+#define COLOR_abstract_collection__MapIterator__is_ok 32
+#define COLOR_abstract_collection__MapIterator__key 30
+#define COLOR_abstract_collection__MapIterator__item 29
 void separate_compiler__SeparateCompiler__compile_color_const(val* self, val* p0, val* p1, long p2);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dcolor_consts_done;
-val* separate_compiler__SeparateCompiler__color_consts_done(val* self);
-void separate_compiler__SeparateCompiler__color_consts_done_61d(val* self, val* p0);
+#define COLOR_abstract_collection__MapIterator__next 31
+void separate_compiler__SeparateCompiler__compile_color_consts(val* self, val* p0);
+#define COLOR_separate_compiler__SeparateCompiler___color_consts_done 24
+short int hash_collection__HashSet__has(val* self, val* p0);
+extern const struct type type_model__MProperty;
+val* separate_compiler__MProperty__const_color(val* self);
+void abstract_compiler__AbstractCompiler__provide_declaration(val* self, val* p0, val* p1);
+void abstract_compiler__AbstractCompilerVisitor__add(val* self, val* p0);
+extern const struct type type_model__MPropDef;
+val* separate_compiler__MPropDef__const_color(val* self);
+extern const struct type type_model__MType;
+val* separate_compiler__MType__const_color(val* self);
+void hash_collection__HashSet__add(val* self, val* p0);
+val* model__MModule__flatten_mclass_hierarchy(val* self);
 val* NEW_hash_collection__HashSet(const struct type* type);
 extern const struct type type_hash_collection__HashSetmodel__MClass;
-extern const int COLOR_modelbuilder__ModelBuilder__model;
-extern const int COLOR_model__Model__mclasses;
-extern const int COLOR_hash_collection__HashSet__from;
-val* NEW_layout_builders__MClassColorer(const struct type* type);
-extern const struct type type_layout_builders__MClassColorer;
-extern const int COLOR_layout_builders__MClassColorer__init;
-extern const int COLOR_layout_builders__TypingLayoutBuilder__build_layout;
-val* NEW_layout_builders__MPropertyColorer(const struct type* type);
-extern const struct type type_layout_builders__MPropertyColorerlayout_builders__PropertyLayoutElement;
-extern const int COLOR_layout_builders__MPropertyColorer__init;
-extern const struct type type_layout_builders__MPropertyColorermodel__MAttribute;
+void hash_collection__HashSet__from(val* self, val* p0);
+val* NEW_coloring__POSetColorer(const struct type* type);
+extern const struct type type_coloring__POSetColorermodel__MClass;
+void coloring__POSetColorer__colorize(val* self, val* p0);
+extern const struct type type_array__Arraymodel__MMethod;
+void array__Array__init(val* self);
 val* NEW_hash_collection__HashMap(const struct type* type);
-extern const struct type type_hash_collection__HashMapmodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement;
-extern const int COLOR_hash_collection__HashMap__init;
+extern const struct type type_hash_collection__HashMapmodel__MClassabstract_collection__Setseparate_compiler__PropertyLayoutElement;
+void hash_collection__HashMap__init(val* self);
 extern const struct type type_hash_collection__HashMapmodel__MClassabstract_collection__Setmodel__MAttribute;
-extern const struct type type_hash_collection__HashSetlayout_builders__PropertyLayoutElement;
-extern const int COLOR_hash_collection__HashSet__init;
+val* hash_collection__HashSet__iterator(val* self);
+extern const struct type type_hash_collection__HashSetseparate_compiler__PropertyLayoutElement;
+void hash_collection__HashSet__init(val* self);
 extern const struct type type_hash_collection__HashSetmodel__MAttribute;
-extern const int COLOR_abstract_compiler__MModule__properties;
+val* abstract_compiler__MModule__properties(val* self, val* p0);
 extern const struct type type_model__MMethod;
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods 8
+void array__Array__add(val* self, val* p0);
+#define COLOR_abstract_collection__SimpleCollection__add 51
 extern const struct type type_model__MAttribute;
 extern const struct type type_hash_collection__HashSetmodel__MMethodDef;
-extern const int COLOR_model__MModule__mclassdefs;
-extern const int COLOR_model__MClassDef__mpropdefs;
+#define COLOR_model__MModule___mclassdefs 13
+#define COLOR_model__MClassDef___mpropdefs 10
 extern const struct type type_model__MMethodDef;
-extern const int COLOR_modelize_property__MPropDef__has_supercall;
-extern const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_super_sends;
-extern const int COLOR_model__MPropDef__mclassdef;
-extern const int COLOR_model__MClassDef__mclass;
-extern const int COLOR_model__MClass__in_hierarchy;
-extern const int COLOR_poset__POSetElement__smallers;
-extern const int COLOR_layout_builders__PropertyLayoutBuilder__build_layout;
-extern const int COLOR_separate_compiler__SeparateCompiler__method_layout_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__build_method_tables;
-extern const int COLOR_separate_compiler__SeparateCompiler__method_tables_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__method_layout;
-extern const int COLOR_layout_builders__Layout__pos;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_color_consts;
-extern const int COLOR_separate_compiler__SeparateCompiler__attr_layout_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__build_attr_tables;
-extern const int COLOR_separate_compiler__SeparateCompiler__attr_tables_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__attr_layout;
-void separate_compiler__SeparateCompiler__do_property_coloring(val* self);
+#define COLOR_modelize_property__MPropDef___has_supercall 5
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends 11
+#define COLOR_model__MPropDef___mclassdef 2
+#define COLOR_model__MClassDef___mclass 2
+val* model__MClass__in_hierarchy(val* self, val* p0);
+val* poset__POSetElement__smallers(val* self);
+val* NEW_coloring__POSetBucketsColorer(const struct type* type);
+extern const struct type type_coloring__POSetBucketsColorermodel__MClassseparate_compiler__PropertyLayoutElement;
+val* coloring__POSetColorer__conflicts(val* self);
+void coloring__POSetBucketsColorer__init(val* self, val* p0, val* p1);
+val* coloring__POSetBucketsColorer__colorize(val* self, val* p0);
+val* separate_compiler__SeparateCompiler__build_method_tables(val* self, val* p0, val* p1);
+#define COLOR_separate_compiler__SeparateCompiler___method_tables 27
+extern const struct type type_coloring__POSetBucketsColorermodel__MClassmodel__MAttribute;
+val* separate_compiler__SeparateCompiler__build_attr_tables(val* self, val* p0);
+#define COLOR_separate_compiler__SeparateCompiler___attr_tables 28
 extern const struct type type_hash_collection__HashMapmodel__MClassarray__Arraynullable_model__MPropDef;
 extern const struct type type_array__Arraynullable_model__MPropDef;
-extern const int COLOR_array__Array__init;
-val* NEW_list__List(const struct type* type);
-extern const struct type type_list__Listmodel__MMethodDef;
-extern const int COLOR_list__List__init;
-extern const struct type type_array__Arraymodel__MClass;
-extern const int COLOR_model__MModule__flatten_mclass_hierarchy;
-extern const int COLOR_array__Collection__to_a;
-extern const int COLOR_model__MModule__linearize_mclasses;
-extern const struct type type_kernel__Int;
+val* model__MClass__intro(val* self);
+#define COLOR_model__MClassDef___bound_mtype 3
+short int abstract_collection__MapRead__has_key(val* self, val* p0);
+#define COLOR_abstract_collection__MapRead___91d_93d 29
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
-extern const int COLOR_range__Range__without_last;
-extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;
-extern const int COLOR_model__MProperty__mpropdefs;
-extern const int COLOR_model__MClass__mclassdefs;
-extern const int COLOR_model__MClass__intro;
-extern const int COLOR_model__MClassDef__bound_mtype;
-extern const int COLOR_model__MPropDef__lookup_next_definition;
-val* separate_compiler__SeparateCompiler__build_method_tables(val* self, val* p0, val* p1);
-val* separate_compiler__SeparateCompiler__build_attr_tables(val* self, val* p0);
+void range__Range__without_last(val* self, val* p0, val* p1);
+val* range__Range__iterator(val* self);
+void array__Array___91d_93d_61d(val* self, long p0, val* p1);
+val* model__MProperty__lookup_first_definition(val* self, val* p0, val* p1);
+val* model__MClassType__collect_mclassdefs(val* self, val* p0);
+#define COLOR_abstract_collection__Collection__has 32
+val* model__MPropDef__lookup_next_definition(val* self, val* p0, val* p1);
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types 2
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types 5
 extern const struct type type_hash_collection__HashSetmodel__MType;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types;
-extern const int COLOR_abstract_collection__SimpleCollection__add_all;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_cast_types;
-extern const int COLOR_abstract_collection__MapRead__keys;
-val* NEW_layout_builders__MTypeBMizer(const struct type* type);
-extern const struct type type_layout_builders__MTypeBMizer;
-extern const int COLOR_layout_builders__MTypeBMizer__init;
-val* NEW_layout_builders__MTypeHasher(const struct type* type);
-extern const struct type type_layout_builders__MTypeHasher;
-val* NEW_layout_builders__PHModOperator(const struct type* type);
-extern const struct type type_layout_builders__PHModOperator;
-extern const int COLOR_layout_builders__PHModOperator__init;
-extern const int COLOR_layout_builders__MTypeHasher__init;
-val* NEW_layout_builders__PHAndOperator(const struct type* type);
-extern const struct type type_layout_builders__PHAndOperator;
-extern const int COLOR_layout_builders__PHAndOperator__init;
-val* NEW_layout_builders__MTypeColorer(const struct type* type);
-extern const struct type type_layout_builders__MTypeColorer;
-extern const int COLOR_layout_builders__MTypeColorer__init;
-extern const int COLOR_separate_compiler__SeparateCompiler__type_layout_61d;
-extern const int COLOR_layout_builders__TypingLayoutBuilder__poset;
-extern const int COLOR_separate_compiler__SeparateCompiler__build_type_tables;
-extern const int COLOR_separate_compiler__SeparateCompiler__type_tables_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_resolution_tables;
-val* separate_compiler__SeparateCompiler__do_type_coloring(val* self);
-extern const struct type type_hash_collection__HashMapmodel__MTypearray__Arraynullable_model__MType;
-extern const int COLOR_separate_compiler__SeparateCompiler__type_layout;
-extern const struct type type_array__Arraynullable_model__MType;
-extern const int COLOR_poset__POSet___91d_93d;
-extern const struct type type_layout_builders__PHLayoutmodel__MTypemodel__MType;
-extern const int COLOR_layout_builders__PHLayout__hashes;
+void abstract_collection__SimpleCollection__add_all(val* self, val* p0);
+#define COLOR_hash_collection__HashMap___keys 7
+val* separate_compiler__SeparateCompiler__poset_from_mtypes(val* self, val* p0);
+extern const struct type type_coloring__POSetColorermodel__MType;
+val* coloring__POSetColorer__ids(val* self);
+val* coloring__POSetColorer__colors(val* self);
 val* separate_compiler__SeparateCompiler__build_type_tables(val* self, val* p0);
-extern const struct type type_hash_collection__HashMapmodel__MClassTypeabstract_collection__Setmodel__MType;
-extern const int COLOR_model__MType__collect_mclassdefs;
-extern const int COLOR_separate_compiler__SeparateCompiler__live_unresolved_types;
-extern const int COLOR_abstract_collection__MapRead__has_key;
-val* NEW_layout_builders__ResolutionBMizer(const struct type* type);
-extern const struct type type_layout_builders__ResolutionBMizer;
-extern const int COLOR_layout_builders__ResolutionBMizer__init;
-val* NEW_layout_builders__ResolutionHasher(const struct type* type);
-extern const struct type type_layout_builders__ResolutionHasher;
-extern const int COLOR_layout_builders__ResolutionHasher__init;
-val* NEW_layout_builders__ResolutionColorer(const struct type* type);
-extern const struct type type_layout_builders__ResolutionColorer;
-extern const int COLOR_layout_builders__ResolutionColorer__init;
-extern const int COLOR_layout_builders__ResolutionLayoutBuilder__build_layout;
-extern const int COLOR_separate_compiler__SeparateCompiler__resolution_layout_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__build_resolution_tables;
-extern const int COLOR_separate_compiler__SeparateCompiler__resolution_tables_61d;
-extern const int COLOR_abstract_collection__MapRead__values;
-extern const struct type type_hash_collection__HashMapmodel__MTypekernel__Int;
-extern const int COLOR_separate_compiler__SeparateCompiler__resolution_layout;
+#define COLOR_separate_compiler__SeparateCompiler___type_tables 25
 void separate_compiler__SeparateCompiler__compile_resolution_tables(val* self, val* p0);
-extern const struct type type_hash_collection__HashMapmodel__MClassTypearray__Arraynullable_model__MType;
-extern const struct type type_layout_builders__PHLayoutmodel__MClassTypemodel__MType;
+val* NEW_poset__POSet(const struct type* type);
+extern const struct type type_poset__POSetmodel__MType;
+val* poset__POSet__add_node(val* self, val* p0);
+short int model__MType__is_subtype(val* self, val* p0, val* p1, val* p2);
+void poset__POSet__add_edge(val* self, val* p0, val* p1);
+extern const struct type type_hash_collection__HashMapmodel__MTypearray__Arraynullable_model__MType;
+extern const struct type type_array__Arraynullable_model__MType;
+val* poset__POSet___91d_93d(val* self, val* p0);
+extern const struct type type_hash_collection__HashMapmodel__MClassTypeabstract_collection__Setmodel__MType;
+val* NEW_coloring__BucketsColorer(const struct type* type);
+extern const struct type type_coloring__BucketsColorermodel__MTypemodel__MType;
+val* coloring__BucketsColorer__colorize(val* self, val* p0);
 val* separate_compiler__SeparateCompiler__build_resolution_tables(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractCompiler__mainmodule_61d;
-extern const int COLOR_separate_compiler__MMethodDef__separate_runtime_function;
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction__compile_to_c;
-extern const int COLOR_separate_compiler__MMethodDef__virtual_runtime_function;
-void separate_compiler__SeparateCompiler__compile_module_to_c(val* self, val* p0);
-extern const int COLOR_model__MType__need_anchor;
+#define COLOR_separate_compiler__SeparateCompiler___resolution_tables 26
+#define COLOR_abstract_collection__MapRead__values 33
+extern const struct type type_hash_collection__HashMapmodel__MTypekernel__Int;
+extern const struct type type_hash_collection__HashMapmodel__MClassTypearray__Arraynullable_model__MType;
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs 7
+val* separate_compiler__MMethodDef__separate_runtime_function(val* self);
+#define COLOR_abstract_compiler__AbstractRuntimeFunction__compile_to_c 34
+val* separate_compiler__MMethodDef__virtual_runtime_function(val* self);
+#define COLOR_model__MType__need_anchor 36
 extern const struct type type_model__MClassType;
-extern const int COLOR_abstract_compiler__MType__c_name;
+#define COLOR_abstract_compiler__MType__c_name 51
 val* NEW_separate_compiler__SeparateCompilerVisitor(const struct type* type);
 extern const struct type type_separate_compiler__SeparateCompilerVisitor;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__init;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__add_decl;
-extern const int COLOR_layout_builders__Layout__ids;
-extern const int COLOR_layout_builders__PHLayout__masks;
+void abstract_compiler__AbstractCompilerVisitor__init(val* self, val* p0);
+void abstract_compiler__AbstractCompilerVisitor__add_decl(val* self, val* p0);
 extern const struct type type_model__MNullableType;
-extern const int COLOR_model__MNullableType__mtype;
-extern const int COLOR_separate_compiler__SeparateCompiler__resolution_tables;
-extern const int COLOR_abstract_collection__Collection__is_empty;
-extern const int COLOR_separate_compiler__SeparateCompiler__compile_type_resolution_table;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__require_declaration;
-extern const int COLOR_separate_compiler__SeparateCompiler__type_tables;
-void separate_compiler__SeparateCompiler__compile_type_to_c(val* self, val* p0);
-extern const int COLOR_model__MType__resolve_for;
+#define COLOR_model__MType__as_notnullable 41
+short int array__AbstractArrayRead__is_empty(val* self);
 void separate_compiler__SeparateCompiler__compile_type_resolution_table(val* self, val* p0);
-extern const int COLOR_abstract_compiler__MClass__c_name;
-extern const int COLOR_separate_compiler__MClass__c_instance_name;
-extern const int COLOR_separate_compiler__SeparateCompiler__method_tables;
-extern const int COLOR_separate_compiler__SeparateCompiler__attr_tables;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_classes;
-extern const int COLOR_model__MClass__name;
-extern const int COLOR_kernel__Object___33d_61d;
-extern const int COLOR_separate_compiler__SeparateCompiler__box_kind_of;
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction__c_name;
-extern const int COLOR_model__MClass__intro_mmodule;
-extern const int COLOR_model__MClassType__mclass;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__new_named_var;
-extern const int COLOR_abstract_compiler__RuntimeVariable__is_exact_61d;
-extern const int COLOR_model__MClassType__arguments;
-extern const int COLOR_separate_compiler__SeparateCompiler__hardening_live_type;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__add_abort;
-extern const int COLOR_abstract_compiler__AbstractCompiler__generate_init_attr;
-void separate_compiler__SeparateCompiler__compile_class_to_c(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractCompiler_VTVISITOR;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__compiler;
-extern const int COLOR_abstract_compiler__ToolContext__opt_hardening;
+void abstract_compiler__AbstractCompilerVisitor__require_declaration(val* self, val* p0);
+#define COLOR_model__MType__resolve_for 38
+val* abstract_compiler__MClass__c_name(val* self);
+val* separate_compiler__MClass__c_instance_name(val* self);
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes 4
+#define COLOR_model__MClass___name 2
+val* array__Array___91d_93d(val* self, long p0);
+#define COLOR_model__MClass___intro_mmodule 1
+val* abstract_compiler__AbstractRuntimeFunction__c_name(val* self);
+#define COLOR_model__MClassType___mclass 3
+val* abstract_compiler__AbstractCompilerVisitor__get_name(val* self, val* p0);
+#define COLOR_model__MClassType___arguments 4
+#define COLOR_abstract_compiler__MType__ctype 49
 void separate_compiler__SeparateCompiler__hardening_live_type(val* self, val* p0, val* p1);
+void abstract_compiler__AbstractCompilerVisitor__add_abort(val* self, val* p0);
+val* abstract_compiler__AbstractCompilerVisitor__new_named_var(val* self, val* p0, val* p1);
+#define COLOR_abstract_compiler__RuntimeVariable___is_exact 3
+void abstract_compiler__AbstractCompiler__generate_init_attr(val* self, val* p0, val* p1, val* p2);
+void separate_compiler__SeparateCompiler__compile_class_to_c(val* self, val* p0);
+#define COLOR_abstract_compiler__AbstractCompiler_VTVISITOR 0
+#define COLOR_abstract_compiler__AbstractCompilerVisitor___compiler 0
+#define COLOR_abstract_compiler__ToolContext___opt_hardening 45
 val* separate_compiler__SeparateCompiler__new_visitor(val* self);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dtype_tables;
-val* separate_compiler__SeparateCompiler__type_tables(val* self);
-void separate_compiler__SeparateCompiler__type_tables_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dresolution_tables;
-val* separate_compiler__SeparateCompiler__resolution_tables(val* self);
-void separate_compiler__SeparateCompiler__resolution_tables_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dmethod_tables;
-val* separate_compiler__SeparateCompiler__method_tables(val* self);
-void separate_compiler__SeparateCompiler__method_tables_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler___64dattr_tables;
-val* separate_compiler__SeparateCompiler__attr_tables(val* self);
-void separate_compiler__SeparateCompiler__attr_tables_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompiler__display_stats;
-extern const int COLOR_separate_compiler__SeparateCompiler__display_sizes;
-void separate_compiler__SeparateCompiler__display_stats(val* self);
+#define COLOR_separate_compiler__SeparateCompiler__display_stats 112
+#define COLOR_separate_compiler__SeparateCompiler__display_sizes 106
+#define COLOR_abstract_compiler__ToolContext___opt_isset_checks_metrics 54
+void separate_compiler__SeparateCompiler__display_isset_checks(val* self);
+val* abstract_compiler__AbstractCompiler__div(val* self, long p0, long p1);
 void separate_compiler__SeparateCompiler__display_sizes(val* self);
+#define COLOR_separate_compiler__SeparateCompiler___isset_checks_count 29
+#define COLOR_separate_compiler__SeparateCompiler___attr_read_count 30
+#define COLOR_separate_compiler__SeparateCompiler__compile_nitni_structs 113
 void separate_compiler__SeparateCompiler__compile_nitni_structs(val* self);
-extern const int COLOR_modelbuilder__AModule__mmodule;
-extern const int COLOR_separate_compiler__SeparateCompiler__finalize_ffi_for_module;
+#define COLOR_separate_compiler__SeparateCompiler__finalize_ffi_for_module 114
 void separate_compiler__SeparateCompiler__finalize_ffi_for_module(val* self, val* p0);
-extern const int COLOR_model__MMethodDef__msignature;
-extern const int COLOR_model__MClassDef__mmodule;
-extern const int COLOR_abstract_compiler__RuntimeVariable__mtype;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__autobox;
-extern const int COLOR_abstract_collection__Sequence__first_61d;
-extern const int COLOR_model__MSignature__arity;
-extern const int COLOR_model__MSignature__mparameters;
-extern const int COLOR_model__MParameter__mtype;
-extern const int COLOR_model__MSignature__vararg_rank;
-void separate_compiler__SeparateCompilerVisitor__adapt_signature(val* self, val* p0, val* p1);
-extern const int COLOR_separate_compiler__MType__c_instance_name;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__new_var;
-extern const int COLOR_nitni_base__MType__cname_blind;
+#define COLOR_model__MMethodDef___msignature 7
+#define COLOR_model__MClassDef___mmodule 1
+val* model__MSignature__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+#define COLOR_abstract_compiler__RuntimeVariable___mtype 1
 val* separate_compiler__SeparateCompilerVisitor__autobox(val* self, val* p0, val* p1);
+void abstract_collection__Sequence__first_61d(val* self, val* p0);
+long model__MSignature__arity(val* self);
+#define COLOR_model__MSignature___mparameters 3
+#define COLOR_model__MParameter___mtype 2
+#define COLOR_model__MSignature___vararg_rank 5
+void separate_compiler__SeparateCompilerVisitor__adapt_signature(val* self, val* p0, val* p1);
+#define COLOR_separate_compiler__MType__c_instance_name 55
+val* abstract_compiler__AbstractCompilerVisitor__new_expr(val* self, val* p0, val* p1);
+val* abstract_compiler__AbstractCompilerVisitor__new_var(val* self, val* p0);
 val* separate_compiler__SeparateCompilerVisitor__type_info(val* self, val* p0);
-extern const int COLOR_model__MProperty__intro;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__varargize;
-extern const int COLOR_abstract_compiler__RuntimeVariable__mcasttype;
-extern const int COLOR_abstract_compiler__AbstractCompiler__realmainmodule;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__monomorphic_send;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__table_send;
-val* separate_compiler__SeparateCompilerVisitor__send(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__debug;
-extern const int COLOR_model__MSignature__return_mtype;
-extern const int COLOR_model__MMethod__is_new;
-val* NEW_string__Buffer(const struct type* type);
-extern const struct type type_string__Buffer;
-extern const int COLOR_string__Buffer__init;
-extern const int COLOR_abstract_collection__Sequence__append;
-extern const int COLOR_abstract_compiler__ToolContext__opt_no_check_other;
-extern const int COLOR_model__MProperty__name;
-extern const struct type type_model__MNullType;
-extern const int COLOR_string__Object__inspect;
+val* rapid_type_analysis__RapidTypeAnalysis__live_targets(val* self, val* p0);
+#define COLOR_abstract_collection__Collection__length 31
+#define COLOR_typing__CallSite___mproperty 5
+val* model__MProperty__intro(val* self);
+void abstract_compiler__AbstractCompilerVisitor__varargize(val* self, val* p0, val* p1, val* p2);
+val* separate_compiler__SeparateCompilerVisitor__before_send(val* self, val* p0, val* p1);
+#define COLOR_abstract_collection__Collection__first 33
+val* separate_compiler__SeparateCompilerVisitor__call(val* self, val* p0, val* p1, val* p2);
+void abstract_compiler__AbstractCompilerVisitor__assign(val* self, val* p0, val* p1);
+#define COLOR_separate_compiler__SeparateCompilerVisitor__compile_callsite 103
+val* separate_compiler__SeparateCompilerVisitor__compile_callsite(val* self, val* p0, val* p1);
+#define COLOR_abstract_compiler__RuntimeVariable___mcasttype 2
+#define COLOR_abstract_compiler__AbstractCompiler___realmainmodule 2
+val* abstract_compiler__AbstractCompilerVisitor__monomorphic_send(val* self, val* p0, val* p1, val* p2);
 val* separate_compiler__SeparateCompilerVisitor__table_send(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_model__MPropDef__mproperty;
-extern const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef;
-extern const struct type type_parser_nodes__AInternMethPropdef;
+val* separate_compiler__SeparateCompilerVisitor__send(val* self, val* p0, val* p1);
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_other 51
+#define COLOR_model__MProperty___name 2
+val* abstract_compiler__AbstractCompilerVisitor__bool_type(val* self);
+extern const struct type type_model__MNullType;
+val* abstract_compiler__RuntimeVariable__inspect(val* self);
+#define COLOR_abstract_compiler__ToolContext___opt_invocation_metrics 53
+void abstract_compiler__AbstractCompilerVisitor__debug(val* self, val* p0);
+#define COLOR_model__MSignature___return_mtype 4
+#define COLOR_model__MMethod___is_new 10
+val* NEW_string__FlatBuffer(const struct type* type);
+extern const struct type type_string__FlatBuffer;
+void string__FlatBuffer__init(val* self);
+void string__FlatBuffer__append(val* self, val* p0);
+#define COLOR_model__MPropDef___mproperty 3
+#define COLOR_model__MMethodDef___is_intern 9
+short int abstract_compiler__MMethodDef__can_inline(val* self, val* p0);
 val* NEW_abstract_compiler__Frame(const struct type* type);
 extern const struct type type_abstract_compiler__Frame;
-extern const int COLOR_abstract_compiler__Frame__init;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__get_name;
-extern const int COLOR_abstract_compiler__Frame__returnlabel_61d;
-extern const int COLOR_abstract_compiler__Frame__returnvar_61d;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__frame;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__frame_61d;
-extern const int COLOR_abstract_compiler__MMethodDef__compile_inside_to_c;
-extern const int COLOR_abstract_compiler__Frame__returnlabel;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__adapt_signature;
-extern const int COLOR_abstract_compiler__MPropDef__c_name;
-val* separate_compiler__SeparateCompilerVisitor__call(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__monomorphic_super_send;
+#define COLOR_abstract_compiler__Frame_VTVISITOR 0
+#define COLOR_abstract_compiler__Frame___visitor 0
+#define COLOR_abstract_compiler__Frame___mpropdef 1
+#define COLOR_abstract_compiler__Frame___receiver 2
+#define COLOR_abstract_compiler__Frame___arguments 3
+#define COLOR_abstract_compiler__Frame___returnlabel 5
+#define COLOR_abstract_compiler__Frame___returnvar 4
+#define COLOR_abstract_compiler__AbstractCompilerVisitor___frame 2
+val* abstract_compiler__MMethodDef__compile_inside_to_c(val* self, val* p0, val* p1);
+val* abstract_compiler__MPropDef__c_name(val* self);
+val* abstract_compiler__AbstractCompilerVisitor__monomorphic_super_send(val* self, val* p0, val* p1, val* p2);
 val* separate_compiler__SeparateCompilerVisitor__supercall(val* self, val* p0, val* p1, val* p2);
 extern const struct type type_array__Arrayabstract_compiler__RuntimeVariable;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__array_instance;
+val* separate_compiler__SeparateCompilerVisitor__array_instance(val* self, val* p0, val* p1);
 val* separate_compiler__SeparateCompilerVisitor__vararg_instance(val* self, val* p0, val* p1, val* p2, val* p3);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__check_recv_notnull;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__bool_type;
-extern const int COLOR_model__MAttributeDef__static_mtype;
+void abstract_compiler__AbstractCompilerVisitor__check_recv_notnull(val* self, val* p0);
+#define COLOR_model__MAttributeDef___static_mtype 7
 val* separate_compiler__SeparateCompilerVisitor__isset_attribute(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__object_type;
-extern const int COLOR_model__MType__as_nullable;
-extern const int COLOR_abstract_compiler__RuntimeVariable__mcasttype_61d;
-extern const int COLOR_abstract_compiler__ToolContext__opt_no_check_initialization;
+val* abstract_compiler__AbstractCompilerVisitor__object_type(val* self);
+val* model__MType__as_nullable(val* self);
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_attr_isset 48
+#define COLOR_abstract_compiler__MType__ctypename 50
 val* separate_compiler__SeparateCompilerVisitor__read_attribute(val* self, val* p0, val* p1);
+val* separate_compiler__MClassType__c_instance_name(val* self);
 void separate_compiler__SeparateCompilerVisitor__write_attribute(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_string__AbstractString__escape_to_c;
+val* string__Text__escape_to_c(val* self);
 void separate_compiler__SeparateCompilerVisitor__hardening_live_open_type(val* self, val* p0);
 void separate_compiler__SeparateCompilerVisitor__hardening_cast_type(val* self, val* p0);
 extern const struct type type_model__MGenericType;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__hardening_live_open_type;
-extern const int COLOR_abstract_compiler__Frame__mpropdef;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__link_unresolved_type;
-extern const int COLOR_abstract_compiler__Frame__arguments;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__type_info;
+#define COLOR_model__MGenericType___need_anchor 9
+void separate_compiler__SeparateCompilerVisitor__link_unresolved_type(val* self, val* p0, val* p1);
 val* separate_compiler__SeparateCompilerVisitor__init_instance(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__maybe_null;
-extern const int COLOR_model__MType__is_subtype;
-extern const int COLOR_abstract_compiler__ToolContext__opt_typing_test_metrics;
-extern const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_skipped;
-extern const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_unresolved;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__hardening_cast_type;
-extern const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_resolved;
+short int separate_compiler__SeparateCompilerVisitor__maybe_null(val* self, val* p0);
+#define COLOR_model__MNullableType___mtype 3
+#define COLOR_abstract_compiler__ToolContext___opt_typing_test_metrics 52
+#define COLOR_abstract_compiler__AbstractCompiler___count_type_test_skipped 14
+#define COLOR_abstract_compiler__AbstractCompiler___count_type_test_unresolved 13
+val* string__String__to_s(val* self);
+#define COLOR_abstract_compiler__AbstractCompiler___count_type_test_resolved 12
 val* separate_compiler__SeparateCompilerVisitor__type_test(val* self, val* p0, val* p1, val* p2);
 val* separate_compiler__SeparateCompilerVisitor__is_same_type_test(val* self, val* p0, val* p1);
 val* separate_compiler__SeparateCompilerVisitor__class_name_string(val* self, val* p0);
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__can_be_primitive;
-val* separate_compiler__SeparateCompilerVisitor__equal_test(val* self, val* p0, val* p1);
 short int separate_compiler__SeparateCompilerVisitor__can_be_primitive(val* self, val* p0);
-short int separate_compiler__SeparateCompilerVisitor__maybe_null(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__get_class;
+val* separate_compiler__SeparateCompilerVisitor__equal_test(val* self, val* p0, val* p1);
+val* abstract_compiler__AbstractCompilerVisitor__get_class(val* self, val* p0);
 extern const struct type type_array__Arraymodel__MType;
-extern const struct type type_array__NativeArraymodel__MType;
-extern const int COLOR_model__MClass__get_mtype;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__init_instance;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__int_instance;
-extern const int COLOR_separate_compiler__SeparateCompilerVisitor__native_array_instance;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__get_property;
-extern const struct type type_array__NativeArrayabstract_compiler__RuntimeVariable;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__send;
-val* separate_compiler__SeparateCompilerVisitor__array_instance(val* self, val* p0, val* p1);
+val* model__MClass__get_mtype(val* self, val* p0);
+#define COLOR_abstract_compiler__AbstractCompilerVisitor__init_instance 76
+val* abstract_compiler__AbstractCompilerVisitor__int_instance(val* self, long p0);
+#define COLOR_abstract_compiler__AbstractCompilerVisitor__native_array_instance 43
+val* abstract_compiler__AbstractCompilerVisitor__get_property(val* self, val* p0, val* p1);
+val* abstract_compiler__MGenericType__c_name(val* self);
 val* separate_compiler__SeparateCompilerVisitor__native_array_instance(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__ret;
+void abstract_compiler__AbstractCompilerVisitor__ret(val* self, val* p0);
 void separate_compiler__SeparateCompilerVisitor__native_array_def(val* self, val* p0, val* p1, val* p2);
 extern const struct type type_model__MParameterType;
 void separate_compiler__SeparateCompilerVisitor__calloc_array(val* self, val* p0, val* p1);
-void separate_compiler__SeparateCompilerVisitor__link_unresolved_type(val* self, val* p0, val* p1);
-extern const int COLOR_separate_compiler__MMethodDef__separate_runtime_function_cache;
+#define COLOR_abstract_collection__Map___91d_93d_61d 39
+#define COLOR_separate_compiler__MMethodDef___separate_runtime_function_cache 11
 val* NEW_separate_compiler__SeparateRuntimeFunction(const struct type* type);
 extern const struct type type_separate_compiler__SeparateRuntimeFunction;
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction__init;
-extern const int COLOR_separate_compiler__MMethodDef__separate_runtime_function_cache_61d;
-val* separate_compiler__MMethodDef__separate_runtime_function(val* self);
-extern const int COLOR_separate_compiler__MMethodDef___64dseparate_runtime_function_cache;
-val* separate_compiler__MMethodDef__separate_runtime_function_cache(val* self);
-void separate_compiler__MMethodDef__separate_runtime_function_cache_61d(val* self, val* p0);
-extern const int COLOR_separate_compiler__MMethodDef__virtual_runtime_function_cache;
+#define COLOR_abstract_compiler__AbstractRuntimeFunction___mmethoddef 0
+#define COLOR_separate_compiler__MMethodDef___virtual_runtime_function_cache 12
 val* NEW_separate_compiler__VirtualRuntimeFunction(const struct type* type);
 extern const struct type type_separate_compiler__VirtualRuntimeFunction;
-extern const int COLOR_separate_compiler__MMethodDef__virtual_runtime_function_cache_61d;
-val* separate_compiler__MMethodDef__virtual_runtime_function(val* self);
-extern const int COLOR_separate_compiler__MMethodDef___64dvirtual_runtime_function_cache;
-val* separate_compiler__MMethodDef__virtual_runtime_function_cache(val* self);
-void separate_compiler__MMethodDef__virtual_runtime_function_cache_61d(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction__mmethoddef;
 val* separate_compiler__SeparateRuntimeFunction__build_c_name(val* self);
+#define COLOR_model__MPropDef___to_s 4
 val* separate_compiler__SeparateRuntimeFunction__to_s(val* self);
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction_VTCOMPILER;
+#define COLOR_abstract_compiler__AbstractRuntimeFunction_VTCOMPILER 0
 val* NEW_abstract_compiler__RuntimeVariable(const struct type* type);
 extern const struct type type_abstract_compiler__RuntimeVariable;
-extern const int COLOR_abstract_compiler__RuntimeVariable__init;
-extern const int COLOR_abstract_compiler__Frame__returnvar;
-extern const int COLOR_string__AbstractString__has_substring;
-extern const int COLOR_abstract_compiler__AbstractCompiler__names;
-extern const int COLOR_model__MPropDef__location;
-extern const int COLOR_location__Location__file;
-extern const int COLOR_location__SourceFile__filename;
-extern const int COLOR_location__Location__line_start;
+void abstract_compiler__RuntimeVariable__init(val* self, val* p0, val* p1, val* p2);
+short int string__Text__has_substring(val* self, val* p0, long p1);
+#define COLOR_abstract_compiler__AbstractCompiler___names 0
+#define COLOR_model__MPropDef___location 1
+#define COLOR_location__Location___file 0
+#define COLOR_location__SourceFile___filename 0
+#define COLOR_location__Location___line_start 1
 void separate_compiler__SeparateRuntimeFunction__compile_to_c(val* self, val* p0);
 val* separate_compiler__VirtualRuntimeFunction__build_c_name(val* self);
 val* separate_compiler__VirtualRuntimeFunction__to_s(val* self);
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__call;
-extern const int COLOR_abstract_compiler__AbstractCompilerVisitor__assign;
 void separate_compiler__VirtualRuntimeFunction__compile_to_c(val* self, val* p0);
-extern const int COLOR_abstract_compiler__AbstractRuntimeFunction_VTVISITOR;
-val* separate_compiler__VirtualRuntimeFunction__call(val* self, val* p0, val* p1);
-val* separate_compiler__MType__const_color(val* self);
 val* separate_compiler__MType__c_instance_name(val* self);
-val* separate_compiler__MClassType__c_instance_name(val* self);
-val* separate_compiler__MClass__c_instance_name(val* self);
-extern const int COLOR_abstract_compiler__MProperty__c_name;
-val* separate_compiler__MProperty__const_color(val* self);
-val* separate_compiler__MPropDef__const_color(val* self);
+val* abstract_compiler__MProperty__c_name(val* self);

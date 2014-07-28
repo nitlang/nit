@@ -1,64 +1,30 @@
 #include "nit.common.h"
-extern const int COLOR_mproject__MProject___64dname;
-val* mproject__MProject__name(val* self);
-void mproject__MProject__name_61d(val* self, val* p0);
-extern const int COLOR_mproject__MProject___64dmodel;
-val* mproject__MProject__model(val* self);
-void mproject__MProject__model_61d(val* self, val* p0);
-extern const int COLOR_mproject__MProject___64droot;
-val* mproject__MProject__root(val* self);
-void mproject__MProject__root_61d(val* self, val* p0);
-extern const int COLOR_mproject__MProject___64dmgroups;
-val* mproject__MProject__mgroups(val* self);
-void mproject__MProject__mgroups_61d(val* self, val* p0);
-extern const int COLOR_mproject__MProject__name;
+#define COLOR_mproject__MProject___name 1
+#define COLOR_mproject__MProject___model 2
+#define COLOR_mproject__MProject___root 3
+#define COLOR_mproject__MProject___mgroups 4
 val* mproject__MProject__to_s(val* self);
-extern const int COLOR_mproject__MProject__name_61d;
-extern const int COLOR_mproject__MProject__model_61d;
-extern const int COLOR_mproject__Model__mprojects;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_mproject__Model__mproject_by_name;
-extern const int COLOR_more_collections__MultiHashMap__add_one;
+#define COLOR_mproject__Model___mprojects 0
+void array__Array__add(val* self, val* p0);
+#define COLOR_mproject__Model___mproject_by_name 1
+void more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1);
 void mproject__MProject__init(val* self, val* p0, val* p1);
-extern const int COLOR_mproject__MGroup___64dname;
-val* mproject__MGroup__name(val* self);
-void mproject__MGroup__name_61d(val* self, val* p0);
-extern const int COLOR_mproject__MGroup___64dmproject;
-val* mproject__MGroup__mproject(val* self);
-void mproject__MGroup__mproject_61d(val* self, val* p0);
-extern const int COLOR_mproject__MGroup___64dparent;
-val* mproject__MGroup__parent(val* self);
-void mproject__MGroup__parent_61d(val* self, val* p0);
-extern const int COLOR_mproject__MGroup__parent;
-extern const int COLOR_mproject__MGroup__name;
+#define COLOR_mproject__MGroup___name 1
+#define COLOR_mproject__MGroup___mproject 2
+#define COLOR_mproject__MGroup___parent 3
+val* mproject__MGroup__full_name(val* self);
+val* string__NativeString__to_s_with_length(char* self, long p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
-extern const int COLOR_array__Array__with_capacity;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_mproject__MGroup__full_name;
-extern const int COLOR_string__Object__to_s;
-val* mproject__MGroup__full_name(val* self);
-extern const int COLOR_mproject__MGroup___64din_nesting;
-val* mproject__MGroup__in_nesting(val* self);
-void mproject__MGroup__in_nesting_61d(val* self, val* p0);
-extern const int COLOR_mproject__MGroup___64dfilepath;
-val* mproject__MGroup__filepath(val* self);
-void mproject__MGroup__filepath_61d(val* self, val* p0);
-extern const int COLOR_mproject__MGroup__name_61d;
-extern const int COLOR_mproject__MGroup__mproject_61d;
-extern const int COLOR_mproject__MGroup__parent_61d;
-extern const int COLOR_mproject__MProject__mgroups;
-extern const int COLOR_poset__POSet__add_node;
-extern const int COLOR_mproject__MGroup__in_nesting_61d;
-extern const int COLOR_poset__POSet__add_edge;
+val* NEW_array__NativeArray(int length, const struct type* type);
+extern const struct type type_array__NativeArraykernel__Object;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+#define COLOR_mproject__MGroup___in_nesting 4
+#define COLOR_mproject__MGroup___filepath 5
+val* poset__POSet__add_node(val* self, val* p0);
+#define COLOR_kernel__Object___61d_61d 2
+void poset__POSet__add_edge(val* self, val* p0, val* p1);
 void mproject__MGroup__init(val* self, val* p0, val* p1, val* p2);
+val* mproject__MGroup__model(val* self);
 val* mproject__MGroup__to_s(val* self);
-extern const int COLOR_mproject__Model___64dmprojects;
-val* mproject__Model__mprojects(val* self);
-void mproject__Model__mprojects_61d(val* self, val* p0);
-extern const int COLOR_mproject__Model___64dmproject_by_name;
-val* mproject__Model__mproject_by_name(val* self);
-void mproject__Model__mproject_by_name_61d(val* self, val* p0);
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-val* mproject__Model__get_mprojects_by_name(val* self, val* p0);

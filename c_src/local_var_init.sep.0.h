@@ -1,70 +1,52 @@
 #include "nit.common.h"
-extern const int COLOR_local_var_init__ToolContext___64dlocal_var_init_phase;
-val* local_var_init__ToolContext__local_var_init_phase(val* self);
-void local_var_init__ToolContext__local_var_init_phase_61d(val* self, val* p0);
-extern const int COLOR_phase__Phase__toolcontext;
-extern const int COLOR_local_var_init__APropdef__do_local_var_init;
+#define COLOR_local_var_init__ToolContext___local_var_init_phase 26
+#define COLOR_phase__Phase___toolcontext 0
+void local_var_init__APropdef__do_local_var_init(val* self, val* p0);
 void local_var_init__LocalVarInitPhase__process_npropdef(val* self, val* p0);
 val* NEW_local_var_init__LocalVarInitVisitor(const struct type* type);
 extern const struct type type_local_var_init__LocalVarInitVisitor;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__init;
-extern const int COLOR_parser_nodes__Visitor__enter_visit;
-void local_var_init__APropdef__do_local_var_init(val* self, val* p0);
-extern const int COLOR_local_var_init__LocalVarInitVisitor___64dtoolcontext;
-val* local_var_init__LocalVarInitVisitor__toolcontext(val* self);
-void local_var_init__LocalVarInitVisitor__toolcontext_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Visitor__init;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__toolcontext_61d;
 void local_var_init__LocalVarInitVisitor__init(val* self, val* p0);
-extern const int COLOR_local_var_init__LocalVarInitVisitor___64dmaybe_unset_vars;
-val* local_var_init__LocalVarInitVisitor__maybe_unset_vars(val* self);
-void local_var_init__LocalVarInitVisitor__maybe_unset_vars_61d(val* self, val* p0);
-extern const int COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+void parser_nodes__Visitor__enter_visit(val* self, val* p0);
+#define COLOR_local_var_init__LocalVarInitVisitor___toolcontext 1
+#define COLOR_local_var_init__LocalVarInitVisitor___maybe_unset_vars 2
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_abstract_collection__SimpleCollection__add 51
 void local_var_init__LocalVarInitVisitor__mark_is_unset(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_collection__Collection__has;
-extern const int COLOR_flow__AExpr__after_flow_context;
-extern const int COLOR_local_var_init__FlowContext__set_vars;
+#define COLOR_abstract_collection__Collection__has 32
+#define COLOR_flow__AExpr___after_flow_context 4
+#define COLOR_local_var_init__FlowContext___set_vars 9
 void local_var_init__LocalVarInitVisitor__mark_is_set(val* self, val* p0, val* p1);
-extern const int COLOR_local_var_init__FlowContext__is_variable_set;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__toolcontext;
-extern const int COLOR_parser_nodes__ANode__hot_location;
+short int local_var_init__FlowContext__is_variable_set(val* self, val* p0);
+val* parser_nodes__ANode__hot_location(val* self);
 val* string__NativeString__to_s_with_length(char* self, long p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_toolcontext__ToolContext__error;
-extern const int COLOR_abstract_collection__RemovableCollection__remove;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+void toolcontext__ToolContext__error(val* self, val* p0, val* p1);
+#define COLOR_abstract_collection__RemovableCollection__remove 47
 void local_var_init__LocalVarInitVisitor__check_is_set(val* self, val* p0, val* p1);
-extern const int COLOR_local_var_init__ANode__accept_local_var_visitor;
+#define COLOR_local_var_init__ANode__accept_local_var_visitor 41
 void local_var_init__LocalVarInitVisitor__visit(val* self, val* p0);
-extern const int COLOR_local_var_init__FlowContext___64dset_vars;
-val* local_var_init__FlowContext__set_vars(val* self);
-void local_var_init__FlowContext__set_vars_61d(val* self, val* p0);
-extern const int COLOR_flow__FlowContext__previous;
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_abstract_collection__Collection__first;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_abstract_collection__Iterator__next;
-short int local_var_init__FlowContext__is_variable_set(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANode__visit_all;
+#define COLOR_flow__FlowContext___previous 0
+long array__AbstractArrayRead__length(val* self);
+val* abstract_collection__SequenceRead__first(val* self);
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+void array__ArrayIterator__next(val* self);
+#define COLOR_parser_nodes__ANode__visit_all 37
 void local_var_init__ANode__accept_local_var_visitor(val* self, val* p0);
-extern const int COLOR_local_var_init__AVardeclExpr__accept_local_var_visitor;
-extern const int COLOR_parser_nodes__AVardeclExpr__n_expr;
-extern const int COLOR_scope__AVardeclExpr__variable;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__mark_is_unset;
+#define COLOR_local_var_init__AVardeclExpr__accept_local_var_visitor 83
+val* parser_nodes__AVardeclExpr__n_expr(val* self);
+#define COLOR_scope__AVardeclExpr___variable 14
 void local_var_init__AVardeclExpr__accept_local_var_visitor(val* self, val* p0);
-extern const int COLOR_local_var_init__AVarExpr__accept_local_var_visitor;
-extern const int COLOR_scope__AVarFormExpr__variable;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__check_is_set;
+#define COLOR_local_var_init__AVarExpr__accept_local_var_visitor 76
+#define COLOR_scope__AVarFormExpr___variable 10
 void local_var_init__AVarExpr__accept_local_var_visitor(val* self, val* p0);
-extern const int COLOR_local_var_init__AVarAssignExpr__accept_local_var_visitor;
-extern const int COLOR_local_var_init__LocalVarInitVisitor__mark_is_set;
+#define COLOR_local_var_init__AVarAssignExpr__accept_local_var_visitor 85
 void local_var_init__AVarAssignExpr__accept_local_var_visitor(val* self, val* p0);
-extern const int COLOR_local_var_init__AVarReassignExpr__accept_local_var_visitor;
+#define COLOR_local_var_init__AVarReassignExpr__accept_local_var_visitor 89
 void local_var_init__AVarReassignExpr__accept_local_var_visitor(val* self, val* p0);

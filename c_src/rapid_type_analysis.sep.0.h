@@ -1,267 +1,196 @@
 #include "nit.common.h"
 val* NEW_rapid_type_analysis__RapidTypeAnalysis(const struct type* type);
 extern const struct type type_rapid_type_analysis__RapidTypeAnalysis;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__init;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__run_analysis;
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder 0
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule 1
+void rapid_type_analysis__RapidTypeAnalysis__run_analysis(val* self);
 val* rapid_type_analysis__ModelBuilder__do_rapid_type_analysis(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dmodelbuilder;
-val* rapid_type_analysis__RapidTypeAnalysis__modelbuilder(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__modelbuilder_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dmainmodule;
-val* rapid_type_analysis__RapidTypeAnalysis__mainmodule(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__mainmodule_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_types;
-val* rapid_type_analysis__RapidTypeAnalysis__live_types(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_types_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_open_types;
-val* rapid_type_analysis__RapidTypeAnalysis__live_open_types(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_open_types_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_classes;
-val* rapid_type_analysis__RapidTypeAnalysis__live_classes(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_classes_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_cast_types;
-val* rapid_type_analysis__RapidTypeAnalysis__live_cast_types(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_cast_types_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_open_cast_types;
-val* rapid_type_analysis__RapidTypeAnalysis__live_open_cast_types(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_open_cast_types_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_methoddefs;
-val* rapid_type_analysis__RapidTypeAnalysis__live_methoddefs(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_methoddefs_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_methods;
-val* rapid_type_analysis__RapidTypeAnalysis__live_methods(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_methods_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_super_sends;
-val* rapid_type_analysis__RapidTypeAnalysis__live_super_sends(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__live_super_sends_61d(val* self, val* p0);
-val* NEW_hash_collection__HashSet(const struct type* type);
-extern const struct type type_hash_collection__HashSetmodel__MType;
-extern const int COLOR_hash_collection__HashSet__init;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types;
-extern const int COLOR_abstract_collection__SimpleCollection__add_all;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_types;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_cast_types;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_cast_types;
-extern const int COLOR_array__Collection__to_a;
-val* NEW_string__CachedAlphaComparator(const struct type* type);
-extern const struct type type_string__CachedAlphaComparator;
-extern const int COLOR_string__CachedAlphaComparator__init;
-extern const int COLOR_sorter__AbstractSorter__sort;
-val* NEW_csv__CSVDocument(const struct type* type);
-extern const struct type type_csv__CSVDocument;
-extern const int COLOR_csv__CSVDocument__init;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-val* NEW_array__Array(const struct type* type);
-extern const struct type type_array__Arraystring__String;
-val* NEW_array__NativeArray(int length, const struct type* type);
-extern const struct type type_array__NativeArraystring__String;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_csv__CSVDocument__header_61d;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_model__MType__need_anchor;
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types 2
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types 3
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes 4
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types 5
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types 6
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs 7
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods 8
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_callsites 9
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache 10
+#define COLOR_typing__CallSite___recv 1
+#define COLOR_typing__CallSite___anchor 3
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_typing__CallSite___mmodule 2
+#define COLOR_model__MType__anchor_to 35
+#define COLOR_model__MType__as_notnullable 41
 extern const struct type type_model__MClassType;
-extern const int COLOR_abstract_collection__Collection__has;
-extern const struct type type_array__Arraykernel__Object;
-extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_csv__CSVDocument__add_line;
-extern const int COLOR_abstract_collection__Iterator__next;
-val* rapid_type_analysis__RapidTypeAnalysis__live_types_to_csv(val* self);
-val* NEW_ordered_tree__OrderedTree(const struct type* type);
-extern const struct type type_ordered_tree__OrderedTreekernel__Object;
-extern const int COLOR_ordered_tree__OrderedTree__init;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_methods;
-extern const int COLOR_model__MProperty__full_name;
-extern const int COLOR_ordered_tree__OrderedTree__add;
-extern const int COLOR_model__MProperty__mpropdefs;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_methoddefs;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_super_sends;
-extern const int COLOR_string__String___43d;
-extern const int COLOR_string__Object__alpha_comparator;
-extern const int COLOR_ordered_tree__OrderedTree__sort_with;
-val* rapid_type_analysis__RapidTypeAnalysis__live_methods_to_tree(val* self);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dtotry_methods;
-val* rapid_type_analysis__RapidTypeAnalysis__totry_methods(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__totry_methods_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis___64dtodo;
-val* rapid_type_analysis__RapidTypeAnalysis__todo(val* self);
-void rapid_type_analysis__RapidTypeAnalysis__todo_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__modelbuilder;
-extern const int COLOR_modelbuilder__ModelBuilder__model;
-extern const int COLOR_model__Model__get_mclasses_by_name;
-extern const int COLOR_model__MClass__mclass_type;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__add_new;
+#define COLOR_model__MClassType___mclass 3
+val* model__MClass__intro(val* self);
+#define COLOR_model__MClassDef___bound_mtype 3
+#define COLOR_typing__CallSite___mproperty 5
+val* more_collections__HashMap2___91d_93d(val* self, val* p0, val* p1);
+val* NEW_array__ArraySet(const struct type* type);
+extern const struct type type_array__ArraySetmodel__MMethodDef;
+void array__ArraySet__init(val* self);
+void more_collections__HashMap2___91d_93d_61d(val* self, val* p0, val* p1, val* p2);
+val* hash_collection__HashSet__iterator(val* self);
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+short int model__MType__is_subtype(val* self, val* p0, val* p1, val* p2);
+val* model__MProperty__lookup_first_definition(val* self, val* p0, val* p1);
+void array__ArraySet__add(val* self, val* p0);
+#define COLOR_abstract_collection__Iterator__next 30
+val* rapid_type_analysis__RapidTypeAnalysis__live_targets(val* self, val* p0);
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends 11
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods 12
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove 13
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___try_methods 14
+#define COLOR_rapid_type_analysis__RapidTypeAnalysis___todo 15
+#define COLOR_modelbuilder__ModelBuilder___model 0
+val* model__Model__get_mclasses_by_name(val* self, val* p0);
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+#define COLOR_model__MClass___mclass_type 7
+void rapid_type_analysis__RapidTypeAnalysis__add_new(val* self, val* p0, val* p1);
+void array__ArrayIterator__next(val* self);
 void rapid_type_analysis__RapidTypeAnalysis__force_alive(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule;
-extern const int COLOR_model__MModule__sys_type;
-extern const int COLOR_model__MClassType__mclass;
-extern const int COLOR_model__MModule__try_get_primitive_method;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__add_send;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__force_alive;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__todo;
-extern const int COLOR_abstract_collection__Collection__is_empty;
-extern const int COLOR_abstract_collection__Sequence__shift;
+val* model__MModule__sys_type(val* self);
+val* string__NativeString__to_s_with_length(char* self, long p0);
+val* model__MModule__try_get_primitive_method(val* self, val* p0, val* p1);
+void rapid_type_analysis__RapidTypeAnalysis__add_send(val* self, val* p0, val* p1);
+short int list__List__is_empty(val* self);
+val* list__List__shift(val* self);
+#define COLOR_model__MPropDef___mproperty 3
 val* NEW_rapid_type_analysis__RapidTypeVisitor(const struct type* type);
 extern const struct type type_rapid_type_analysis__RapidTypeVisitor;
-extern const int COLOR_model__MPropDef__mclassdef;
-extern const int COLOR_model__MClassDef__bound_mtype;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__init;
-extern const int COLOR_model__MMethodDef__msignature;
-extern const int COLOR_model__MSignature__vararg_rank;
+#define COLOR_model__MPropDef___mclassdef 2
+void rapid_type_analysis__RapidTypeVisitor__init(val* self, val* p0, val* p1, val* p2);
+#define COLOR_model__MMethodDef___msignature 7
+#define COLOR_model__MSignature___vararg_rank 5
 extern const struct type type_kernel__Int;
-extern const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-extern const int COLOR_model__MSignature__mparameters;
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-extern const int COLOR_model__MParameter__mtype;
-extern const int COLOR_model__MModule__get_primitive_class;
+#define COLOR_modelize_property__ModelBuilder___mpropdef2npropdef 9
+val* hash_collection__HashMap___91d_93d(val* self, val* p0);
+#define COLOR_model__MSignature___mparameters 3
+val* array__Array___91d_93d(val* self, long p0);
+#define COLOR_model__MParameter___mtype 2
+val* model__MModule__get_primitive_class(val* self, val* p0);
+val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraymodel__MType;
-extern const struct type type_array__NativeArraymodel__MType;
-extern const int COLOR_model__MClass__get_mtype;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__add_type;
-extern const int COLOR_modelbuilder__ModelBuilder__force_get_primitive_method;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send;
+void array__Array__with_capacity(val* self, long p0);
+void array__AbstractArray__push(val* self, val* p0);
+val* model__MClass__get_mtype(val* self, val* p0);
+void rapid_type_analysis__RapidTypeVisitor__add_type(val* self, val* p0);
+val* modelbuilder__ModelBuilder__force_get_primitive_method(val* self, val* p0, val* p1, val* p2, val* p3);
+void rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send(val* self, val* p0, val* p1);
+val* model__MProperty__intro(val* self);
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
-extern const int COLOR_model__MSignature__arity;
+long model__MSignature__arity(val* self);
 val* BOX_kernel__Int(long);
-extern const int COLOR_range__Range__without_last;
-extern const int COLOR_model__MPropDef__mproperty;
-extern const int COLOR_model__MProperty__intro;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__add_cast;
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_model__MProperty__name;
-extern const int COLOR_kernel__Object___61d_61d;
-extern const int COLOR_modelize_class__ModelBuilder__mclassdef2nclassdef;
-extern const int COLOR_modelize_property__AClassdef__super_inits;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__receiver;
-extern const struct type type_parser_nodes__AConcreteMethPropdef;
-extern const int COLOR_auto_super_init__AConcreteMethPropdef__auto_super_inits;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__add_callsite;
-extern const struct type type_parser_nodes__AInternMethPropdef;
-extern const struct type type_parser_nodes__AExternMethPropdef;
-extern const int COLOR_parser_nodes__AExternPropdef__n_extern;
-extern const int COLOR_model__MSignature__return_mtype;
-extern const int COLOR_model__MClass__kind;
-extern const int COLOR_model__Object__abstract_kind;
-extern const int COLOR_kernel__Object___33d_61d;
-extern const int COLOR_model__Object__interface_kind;
-extern const int COLOR_parser_nodes__ANode__parent;
-extern const struct type type_parser_nodes__AClassdef;
-extern const int COLOR_parser_nodes__Visitor__enter_visit;
-extern const struct type type_parser_nodes__AExternInitPropdef;
+void range__Range__without_last(val* self, val* p0, val* p1);
+val* range__Range__iterator(val* self);
+#define COLOR_model__MType__need_anchor 36
+void rapid_type_analysis__RapidTypeAnalysis__add_cast(val* self, val* p0);
+short int abstract_collection__MapRead__has_key(val* self, val* p0);
+#define COLOR_model__MProperty___name 2
+short int string__FlatString___61d_61d(val* self, val* p0);
+#define COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef 8
+#define COLOR_modelize_property__AClassdef___super_inits 9
+#define COLOR_abstract_collection__Collection__iterator 29
+#define COLOR_rapid_type_analysis__RapidTypeVisitor___receiver 2
+extern const struct type type_parser_nodes__AMethPropdef;
+#define COLOR_auto_super_init__AMethPropdef___auto_super_inits 20
+void rapid_type_analysis__RapidTypeVisitor__add_callsite(val* self, val* p0);
+#define COLOR_model__MMethod___is_new 10
+#define COLOR_model__MMethodDef___is_intern 9
+#define COLOR_model__MMethodDef___is_extern 10
+#define COLOR_model__MSignature___return_mtype 4
+#define COLOR_model__MClass___kind 4
+val* model__Object__abstract_kind(val* self);
+val* model__Object__interface_kind(val* self);
+void parser_nodes__Visitor__enter_visit(val* self, val* p0);
 val* NEW_list__List(const struct type* type);
 extern const struct type type_list__Listmodel__MClassType;
-extern const int COLOR_list__List__init;
-extern const int COLOR_model__MType__can_resolve_for;
-extern const int COLOR_model__MType__anchor_to;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__check_depth;
-void rapid_type_analysis__RapidTypeAnalysis__run_analysis(val* self);
-extern const int COLOR_model__MType__length;
-extern const int COLOR_modelbuilder__ModelBuilder__toolcontext;
-extern const int COLOR_toolcontext__ToolContext__fatal_error;
+void abstract_collection__SimpleCollection__add_all(val* self, val* p0);
+#define COLOR_model__MType__can_resolve_for 39
+val* model__MClassType__anchor_to(val* self, val* p0, val* p1);
+short int hash_collection__HashSet__has(val* self, val* p0);
+void hash_collection__HashSet__add(val* self, val* p0);
+void abstract_collection__Sequence__add(val* self, val* p0);
 void rapid_type_analysis__RapidTypeAnalysis__check_depth(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__live_classes;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__totry_methods;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__try_send;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__try_super_send;
-extern const int COLOR_model__MType__collect_mclassdefs;
-extern const int COLOR_parser_nodes__AClassdef__n_propdefs;
-extern const struct type type_parser_nodes__AAttrPropdef;
-extern const int COLOR_parser_nodes__AAttrPropdef__n_expr;
-extern const int COLOR_modelize_property__APropdef__mpropdef;
-void rapid_type_analysis__RapidTypeAnalysis__add_new(val* self, val* p0, val* p1);
-void rapid_type_analysis__RapidTypeAnalysis__add_cast(val* self, val* p0);
-extern const int COLOR_model__MClass__intro;
-extern const int COLOR_model__MType__has_mproperty;
-extern const int COLOR_model__MProperty__lookup_first_definition;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__add_call;
+#define COLOR_model__MType__length 44
+#define COLOR_modelbuilder__ModelBuilder___toolcontext 1
+extern const struct type type_array__Arraykernel__Object;
+val* NEW_array__NativeArray(int length, const struct type* type);
+extern const struct type type_array__NativeArraykernel__Object;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+void toolcontext__ToolContext__fatal_error(val* self, val* p0, val* p1);
 void rapid_type_analysis__RapidTypeAnalysis__try_send(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_model__MMethodDef__is_abstract;
-extern const int COLOR_abstract_collection__RemovableCollection__remove;
-void rapid_type_analysis__RapidTypeAnalysis__add_call(val* self, val* p0);
-extern const int COLOR_abstract_collection__Collection__first;
-void rapid_type_analysis__RapidTypeAnalysis__add_send(val* self, val* p0, val* p1);
-extern const int COLOR_model__MPropDef__lookup_next_definition;
 void rapid_type_analysis__RapidTypeAnalysis__try_super_send(val* self, val* p0, val* p1);
+void hash_collection__HashSet__remove(val* self, val* p0);
+void array__AbstractArray__clear(val* self);
+val* model__MClassType__collect_mclassdefs(val* self, val* p0);
+#define COLOR_parser_nodes__AClassdef___n_propdefs 4
+val* parser_nodes__ANodes__iterator(val* self);
+extern const struct type type_parser_nodes__AAttrPropdef;
+val* parser_nodes__AAttrPropdef__n_expr(val* self);
+#define COLOR_modelize_property__APropdef___mpropdef 9
+short int model__MType__has_mproperty(val* self, val* p0, val* p1);
+void rapid_type_analysis__RapidTypeAnalysis__add_call(val* self, val* p0);
+#define COLOR_model__MProperty___mpropdefs 4
+long array__AbstractArrayRead__length(val* self);
+#define COLOR_model__MMethodDef___is_abstract 8
+void array__Array__add(val* self, val* p0);
+val* abstract_collection__SequenceRead__first(val* self);
+#define COLOR_abstract_collection__Collection__has 32
+val* model__MPropDef__lookup_next_definition(val* self, val* p0, val* p1);
 void rapid_type_analysis__RapidTypeAnalysis__add_super_send(val* self, val* p0, val* p1);
-void rapid_type_analysis__RapidTypeAnalysis__init(val* self, val* p0, val* p1);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor___64danalysis;
-val* rapid_type_analysis__RapidTypeVisitor__analysis(val* self);
-void rapid_type_analysis__RapidTypeVisitor__analysis_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor___64dreceiver;
-val* rapid_type_analysis__RapidTypeVisitor__receiver(val* self);
-void rapid_type_analysis__RapidTypeVisitor__receiver_61d(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor___64dmpropdef;
-val* rapid_type_analysis__RapidTypeVisitor__mpropdef(val* self);
-void rapid_type_analysis__RapidTypeVisitor__mpropdef_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Visitor__init;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__analysis_61d;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__receiver_61d;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__mpropdef_61d;
-void rapid_type_analysis__RapidTypeVisitor__init(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_rapid_type_analysis__ANode__accept_rapid_type_visitor;
+#define COLOR_rapid_type_analysis__RapidTypeVisitor___analysis 1
+#define COLOR_rapid_type_analysis__RapidTypeVisitor___mpropdef 3
+#define COLOR_rapid_type_analysis__ANode__accept_rapid_type_visitor 44
 extern const struct type type_parser_nodes__AExpr;
-extern const int COLOR_typing__AExpr__implicit_cast_to;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__add_cast_type;
+#define COLOR_typing__AExpr___implicit_cast_to 7
+void rapid_type_analysis__RapidTypeVisitor__add_cast_type(val* self, val* p0);
 extern const struct type type_parser_nodes__AAnnotations;
-extern const int COLOR_parser_nodes__ANode__visit_all;
+#define COLOR_parser_nodes__ANode__visit_all 37
 void rapid_type_analysis__RapidTypeVisitor__visit(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__analysis;
 extern const struct type type_model__MNullType;
-extern const struct type type_model__MNullableType;
-extern const int COLOR_model__MNullableType__mtype;
 val* rapid_type_analysis__RapidTypeVisitor__cleanup_type(val* self, val* p0);
 val* rapid_type_analysis__RapidTypeVisitor__get_class(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__cleanup_type;
-extern const int COLOR_parser_nodes__Visitor__current_node;
+val* parser_nodes__Visitor__current_node(val* self);
 val* rapid_type_analysis__RapidTypeVisitor__get_method(val* self, val* p0, val* p1);
-void rapid_type_analysis__RapidTypeVisitor__add_type(val* self, val* p0);
-void rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send(val* self, val* p0, val* p1);
-void rapid_type_analysis__RapidTypeVisitor__add_send(val* self, val* p0, val* p1);
-void rapid_type_analysis__RapidTypeVisitor__add_cast_type(val* self, val* p0);
-extern const int COLOR_typing__CallSite__recv;
-extern const int COLOR_typing__CallSite__mproperty;
-void rapid_type_analysis__RapidTypeVisitor__add_callsite(val* self, val* p0);
-void rapid_type_analysis__ANode__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__AExpr__mtype;
+#define COLOR_typing__AExpr___mtype 5
 void rapid_type_analysis__AIntExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AFloatExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__ACharExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_model__MClassType__arguments;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__get_method;
+#define COLOR_model__MClassType___arguments 4
 void rapid_type_analysis__AArrayExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__get_class;
 void rapid_type_analysis__AStringFormExpr__accept_rapid_type_visitor(val* self, val* p0);
 extern const struct type type_array__Arraymodel__MClassType;
-extern const struct type type_array__NativeArraymodel__MClassType;
 void rapid_type_analysis__ASuperstringExpr__accept_rapid_type_visitor(val* self, val* p0);
+#define COLOR_typing__ARangeExpr___init_callsite 11
 void rapid_type_analysis__ACrangeExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AOrangeExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__ATrueExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AFalseExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__AIsaExpr__cast_type;
+#define COLOR_typing__AIsaExpr___cast_type 11
 void rapid_type_analysis__AIsaExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AAsCastExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__ASendExpr__callsite;
+#define COLOR_typing__ASendExpr___callsite 10
 void rapid_type_analysis__ASendExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__AReassignFormExpr__reassign_callsite;
-extern const int COLOR_typing__ASendReassignFormExpr__write_callsite;
+#define COLOR_typing__AReassignFormExpr___reassign_callsite 13
+#define COLOR_typing__ASendReassignFormExpr___write_callsite 17
 void rapid_type_analysis__ASendReassignFormExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AVarReassignExpr__accept_rapid_type_visitor(val* self, val* p0);
 void rapid_type_analysis__AAttrReassignExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__ASuperExpr__callsite;
-extern const int COLOR_typing__ASuperExpr__mpropdef;
-extern const int COLOR_rapid_type_analysis__RapidTypeAnalysis__add_super_send;
+#define COLOR_typing__ASuperExpr___callsite 12
+#define COLOR_typing__ASuperExpr___mpropdef 13
 void rapid_type_analysis__ASuperExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AForExpr__n_expr;
-extern const int COLOR_typing__AForExpr__coltype;
-extern const int COLOR_rapid_type_analysis__RapidTypeVisitor__add_send;
-extern const int COLOR_scope__AForExpr__variables;
+#define COLOR_typing__AForExpr___method_iterator 18
+#define COLOR_typing__AForExpr___method_is_ok 19
+#define COLOR_scope__AForExpr___variables 15
+#define COLOR_typing__AForExpr___method_item 20
+#define COLOR_typing__AForExpr___method_key 22
+#define COLOR_typing__AForExpr___method_next 21
 void rapid_type_analysis__AForExpr__accept_rapid_type_visitor(val* self, val* p0);
-extern const int COLOR_typing__ANewExpr__callsite;
+#define COLOR_typing__ANewExpr___callsite 13
 void rapid_type_analysis__ANewExpr__accept_rapid_type_visitor(val* self, val* p0);

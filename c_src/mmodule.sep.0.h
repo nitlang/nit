@@ -1,113 +1,58 @@
 #include "nit.common.h"
-extern const int COLOR_mmodule__Model___64dmmodules;
-val* mmodule__Model__mmodules(val* self);
-void mmodule__Model__mmodules_61d(val* self, val* p0);
-extern const int COLOR_mmodule__Model___64dmmodule_nesting_hierarchy;
-val* mmodule__Model__mmodule_nesting_hierarchy(val* self);
-void mmodule__Model__mmodule_nesting_hierarchy_61d(val* self, val* p0);
-extern const int COLOR_mmodule__Model___64dmmodule_importation_hierarchy;
-val* mmodule__Model__mmodule_importation_hierarchy(val* self);
-void mmodule__Model__mmodule_importation_hierarchy_61d(val* self, val* p0);
-extern const int COLOR_mmodule__Model___64dmmodules_by_name;
-val* mmodule__Model__mmodules_by_name(val* self);
-void mmodule__Model__mmodules_by_name_61d(val* self, val* p0);
-extern const int COLOR_mmodule__Model__mmodules_by_name;
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-val* mmodule__Model__get_mmodules_by_name(val* self, val* p0);
-extern const int COLOR_mmodule__MGroup___64dmmodules;
-val* mmodule__MGroup__mmodules(val* self);
-void mmodule__MGroup__mmodules_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MGroup__mmodules;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_mmodule__MModule__name;
-extern const int COLOR_mproject__MGroup__name;
-extern const int COLOR_kernel__Object___61d_61d;
-extern const int COLOR_abstract_collection__Iterator__next;
+#define COLOR_mmodule__Model___mmodules 2
+#define COLOR_mmodule__Model___mmodule_nesting_hierarchy 3
+#define COLOR_mmodule__Model___mmodule_importation_hierarchy 4
+#define COLOR_mmodule__Model___mmodules_by_name 5
+#define COLOR_mmodule__MGroup___mmodules 6
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+#define COLOR_mmodule__MModule___name 4
+#define COLOR_mproject__MGroup___name 1
+short int string__FlatString___61d_61d(val* self, val* p0);
+void array__ArrayIterator__next(val* self);
 val* mmodule__MGroup__fuzzy_owner(val* self);
-extern const int COLOR_mmodule__MModule___64dmodel;
-val* mmodule__MModule__model(val* self);
-void mmodule__MModule__model_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64ddirect_owner;
-val* mmodule__MModule__direct_owner(val* self);
-void mmodule__MModule__direct_owner_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dmgroup;
-val* mmodule__MModule__mgroup(val* self);
-void mmodule__MModule__mgroup_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dname;
-val* mmodule__MModule__name(val* self);
-void mmodule__MModule__name_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dlocation;
-val* mmodule__MModule__location(val* self);
-void mmodule__MModule__location_61d(val* self, val* p0);
+#define COLOR_mmodule__MModule___model 1
+#define COLOR_mmodule__MModule___direct_owner 2
+#define COLOR_mmodule__MModule___mgroup 3
+#define COLOR_mmodule__MModule___location 5
 val* mmodule__MModule__to_s(val* self);
-extern const int COLOR_mmodule__MModule___64din_nesting;
-val* mmodule__MModule__in_nesting(val* self);
-void mmodule__MModule__in_nesting_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64din_importation;
-val* mmodule__MModule__in_importation(val* self);
-void mmodule__MModule__in_importation_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule__mgroup;
-extern const int COLOR_mproject__MGroup__mproject;
-extern const int COLOR_mproject__MProject__name;
+#define COLOR_mmodule__MModule___in_nesting 6
+#define COLOR_mmodule__MModule___in_importation 7
+#define COLOR_mproject__MGroup___mproject 2
+#define COLOR_mproject__MProject___name 1
+val* string__NativeString__to_s_with_length(char* self, long p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
-extern const int COLOR_array__Array__with_capacity;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_string__Object__to_s;
-val* mmodule__MModule__full_name(val* self);
-extern const int COLOR_mmodule__MModule__model_61d;
-extern const int COLOR_mmodule__MModule__name_61d;
-extern const int COLOR_mmodule__MModule__location_61d;
-extern const int COLOR_more_collections__MultiHashMap__add_one;
-extern const int COLOR_mmodule__Model__mmodules;
-extern const int COLOR_mmodule__Model__mmodule_nesting_hierarchy;
-extern const int COLOR_poset__POSet__add_node;
-extern const int COLOR_mmodule__MModule__in_nesting_61d;
-extern const int COLOR_mmodule__MModule__mgroup_61d;
-extern const int COLOR_mmodule__MGroup__fuzzy_owner;
-extern const int COLOR_mmodule__MModule__direct_owner_61d;
-extern const int COLOR_poset__POSet__add_edge;
-extern const int COLOR_mproject__MGroup__parent;
-extern const int COLOR_kernel__Object___33d_61d;
-extern const int COLOR_mmodule__Model__mmodule_importation_hierarchy;
-extern const int COLOR_mmodule__MModule__in_importation_61d;
-void mmodule__MModule__init(val* self, val* p0, val* p1, val* p2, val* p3);
-extern const int COLOR_mmodule__MModule__in_importation;
-extern const int COLOR_poset__POSetElement__direct_greaters;
-extern const int COLOR_abstract_collection__Collection__is_empty;
-extern const int COLOR_mmodule__MModule__model;
-void mmodule__MModule__set_imported_mmodules(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dintrude_mmodules;
-val* mmodule__MModule__intrude_mmodules(val* self);
-void mmodule__MModule__intrude_mmodules_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dpublic_mmodules;
-val* mmodule__MModule__public_mmodules(val* self);
-void mmodule__MModule__public_mmodules_61d(val* self, val* p0);
-extern const int COLOR_mmodule__MModule___64dprivate_mmodules;
-val* mmodule__MModule__private_mmodules(val* self);
-void mmodule__MModule__private_mmodules_61d(val* self, val* p0);
-extern const int COLOR_model_base__Object__intrude_visibility;
-extern const int COLOR_mmodule__MModule__intrude_mmodules;
-extern const int COLOR_abstract_collection__Collection__has;
-extern const int COLOR_mmodule__MModule__public_mmodules;
-extern const int COLOR_model_base__Object__public_visibility;
-extern const int COLOR_mmodule__MModule__private_mmodules;
-extern const int COLOR_model_base__Object__private_visibility;
-extern const int COLOR_model_base__Object__none_visibility;
-val* mmodule__MModule__visibility_for(val* self, val* p0);
-extern const int COLOR_abstract_collection__SimpleCollection__add_all;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_file__Object__print;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+val* mmodule__MModule__full_name(val* self);
+void more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1);
+void array__Array__add(val* self, val* p0);
+val* poset__POSet__add_node(val* self, val* p0);
+#define COLOR_kernel__Object___61d_61d 2
+void poset__POSet__add_edge(val* self, val* p0, val* p1);
+#define COLOR_mproject__MGroup___parent 3
+void mmodule__MModule__init(val* self, val* p0, val* p1, val* p2, val* p3);
+val* poset__POSetElement__direct_greaters(val* self);
+#define COLOR_abstract_collection__Collection__is_empty 30
+void mmodule__MModule__set_imported_mmodules(val* self, val* p0);
+#define COLOR_mmodule__MModule___intrude_mmodules 8
+#define COLOR_mmodule__MModule___public_mmodules 9
+#define COLOR_mmodule__MModule___private_mmodules 10
+val* model_base__Object__intrude_visibility(val* self);
+short int hash_collection__HashSet__has(val* self, val* p0);
+val* model_base__Object__public_visibility(val* self);
+val* model_base__Object__private_visibility(val* self);
+val* model_base__Object__none_visibility(val* self);
+val* mmodule__MModule__visibility_for(val* self, val* p0);
+void hash_collection__HashSet__add(val* self, val* p0);
+void abstract_collection__SimpleCollection__add_all(val* self, val* p0);
+void file__Object__print(val* self, val* p0);
 void mmodule__MModule__set_visibility_for(val* self, val* p0, val* p1);
-extern const int COLOR_mproject__MProject__root;
-val* mmodule__MModule__public_owner(val* self);
-extern const int COLOR_mmodule__MModule__visibility_for;
-extern const int COLOR_kernel__Comparable___62d_61d;
-extern const int COLOR_kernel__Comparable___62d;
+short int kernel__Comparable___62d_61d(val* self, val* p0);
+short int kernel__Comparable___62d(val* self, val* p0);
 short int mmodule__MModule__is_visible(val* self, val* p0, val* p1);
+#define COLOR_mmodule__MModule___is_fictive 11

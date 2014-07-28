@@ -1,48 +1,34 @@
 #include "nit.common.h"
-extern const int COLOR_more_collections__MultiHashMap_FT0;
-extern const int COLOR_more_collections__MultiHashMap_FT1;
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+#define COLOR_more_collections__MultiHashMap_FT0 0
+#define COLOR_more_collections__MultiHashMap_FT1 1
+short int abstract_collection__MapRead__has_key(val* self, val* p0);
+val* hash_collection__HashMap___91d_93d(val* self, val* p0);
+void array__Array__add(val* self, val* p0);
 val* NEW_array__Array(const struct type* type);
-extern const int COLOR_array__Arraymore_collections__MultiHashMap_FT1;
-val* NEW_array__NativeArray(int length, const struct type* type);
-extern const int COLOR_array__NativeArraymore_collections__MultiHashMap_FT1;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
+#define COLOR_array__Arraymore_collections__MultiHashMap_FT1 2
+void array__Array__with_capacity(val* self, long p0);
+void array__AbstractArray__push(val* self, val* p0);
+void hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
 void more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_collection__MapRead_FT0;
-extern const int COLOR_array__Array__init;
+#define COLOR_abstract_collection__MapRead_FT0 3
+void array__Array__init(val* self);
 val* more_collections__MultiHashMap__provide_default_value(val* self, val* p0);
-extern const int COLOR_hash_collection__HashMap__init;
+void hash_collection__HashMap__init(val* self);
 void more_collections__MultiHashMap__init(val* self);
-extern const int COLOR_more_collections__HashMap2___64dlevel1;
-val* more_collections__HashMap2__level1(val* self);
-extern const int COLOR_hash_collection__HashMapmore_collections__HashMap2_FT0hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2;
-void more_collections__HashMap2__level1_61d(val* self, val* p0);
-extern const int COLOR_more_collections__HashMap2_FT0;
-extern const int COLOR_more_collections__HashMap2_FT1;
-extern const int COLOR_more_collections__HashMap2__level1;
+#define COLOR_more_collections__HashMap2___level1 0
+#define COLOR_more_collections__HashMap2_FT0 1
+#define COLOR_more_collections__HashMap2_FT1 2
 val* more_collections__HashMap2___91d_93d(val* self, val* p0, val* p1);
-extern const int COLOR_more_collections__HashMap2_FT2;
+#define COLOR_more_collections__HashMap2_FT2 3
 val* NEW_hash_collection__HashMap(const struct type* type);
-extern const int COLOR_hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2;
+#define COLOR_hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2 4
 void more_collections__HashMap2___91d_93d_61d(val* self, val* p0, val* p1, val* p2);
-void more_collections__HashMap2__init(val* self);
-extern const int COLOR_more_collections__HashMap3___64dlevel1;
-val* more_collections__HashMap3__level1(val* self);
-extern const int COLOR_hash_collection__HashMapmore_collections__HashMap3_FT0more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3;
-void more_collections__HashMap3__level1_61d(val* self, val* p0);
-extern const int COLOR_more_collections__HashMap3_FT0;
-extern const int COLOR_more_collections__HashMap3_FT1;
-extern const int COLOR_more_collections__HashMap3_FT2;
-extern const int COLOR_more_collections__HashMap3__level1;
-extern const int COLOR_more_collections__HashMap2___91d_93d;
+#define COLOR_more_collections__HashMap3___level1 0
+#define COLOR_more_collections__HashMap3_FT0 1
+#define COLOR_more_collections__HashMap3_FT1 2
+#define COLOR_more_collections__HashMap3_FT2 3
 val* more_collections__HashMap3___91d_93d(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_more_collections__HashMap3_FT3;
+#define COLOR_more_collections__HashMap3_FT3 4
 val* NEW_more_collections__HashMap2(const struct type* type);
-extern const int COLOR_more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3;
-extern const int COLOR_more_collections__HashMap2__init;
-extern const int COLOR_more_collections__HashMap2___91d_93d_61d;
+#define COLOR_more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3 5
 void more_collections__HashMap3___91d_93d_61d(val* self, val* p0, val* p1, val* p2, val* p3);
-void more_collections__HashMap3__init(val* self);

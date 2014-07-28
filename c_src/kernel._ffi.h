@@ -5,5 +5,5 @@
 #define KERNEL_NIT_H
 
 #include "kernel._nitni.h"
-int kernel___Pointer_address_is_null___impl( void* recv );
+long kernel___Sys_errno___impl( Sys recv );
 #endif

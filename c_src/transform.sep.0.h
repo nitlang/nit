@@ -1,137 +1,95 @@
 #include "nit.common.h"
-extern const int COLOR_transform__ToolContext___64dtransform_phase;
-val* transform__ToolContext__transform_phase(val* self);
-void transform__ToolContext__transform_phase_61d(val* self, val* p0);
 val* NEW_transform__TransformVisitor(const struct type* type);
 extern const struct type type_transform__TransformVisitor;
-extern const int COLOR_transform__TransformVisitor__init;
-extern const int COLOR_parser_nodes__Visitor__enter_visit;
+void transform__TransformVisitor__init(val* self, val* p0, val* p1);
+void parser_nodes__Visitor__enter_visit(val* self, val* p0);
 val* NEW_astvalidation__ASTValidationVisitor(const struct type* type);
 extern const struct type type_astvalidation__ASTValidationVisitor;
-extern const int COLOR_astvalidation__ASTValidationVisitor__init;
 void transform__TransformPhase__process_npropdef(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor___64dphase;
-val* transform__TransformVisitor__phase(val* self);
-void transform__TransformVisitor__phase_61d(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor___64dmmodule;
-val* transform__TransformVisitor__mmodule(val* self);
-void transform__TransformVisitor__mmodule_61d(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor___64dmclassdef;
-val* transform__TransformVisitor__mclassdef(val* self);
-void transform__TransformVisitor__mclassdef_61d(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor___64dmpropdef;
-val* transform__TransformVisitor__mpropdef(val* self);
-void transform__TransformVisitor__mpropdef_61d(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor___64dbuilder;
-val* transform__TransformVisitor__builder(val* self);
-void transform__TransformVisitor__builder_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Visitor__init;
-extern const int COLOR_transform__TransformVisitor__phase_61d;
-extern const int COLOR_modelize_property__APropdef__mpropdef;
-extern const int COLOR_transform__TransformVisitor__mpropdef_61d;
-extern const int COLOR_transform__TransformVisitor__mpropdef;
-extern const int COLOR_model__MPropDef__mclassdef;
-extern const int COLOR_transform__TransformVisitor__mclassdef_61d;
-extern const int COLOR_transform__TransformVisitor__mclassdef;
-extern const int COLOR_model__MClassDef__mmodule;
-extern const int COLOR_transform__TransformVisitor__mmodule_61d;
+#define COLOR_transform__TransformVisitor___phase 1
+#define COLOR_transform__TransformVisitor___mmodule 2
+#define COLOR_transform__TransformVisitor___mclassdef 3
+#define COLOR_transform__TransformVisitor___mpropdef 4
+#define COLOR_transform__TransformVisitor___builder 5
+#define COLOR_modelize_property__APropdef___mpropdef 9
+#define COLOR_model__MPropDef___mclassdef 2
+#define COLOR_model__MClassDef___mmodule 1
 val* NEW_astbuilder__ASTBuilder(const struct type* type);
 extern const struct type type_astbuilder__ASTBuilder;
-extern const int COLOR_transform__TransformVisitor__mmodule;
-extern const int COLOR_model__MClassDef__bound_mtype;
-extern const int COLOR_astbuilder__ASTBuilder__init;
-extern const int COLOR_transform__TransformVisitor__builder_61d;
-void transform__TransformVisitor__init(val* self, val* p0, val* p1);
+#define COLOR_model__MClassDef___bound_mtype 3
+#define COLOR_astbuilder__ASTBuilder___mmodule 0
+#define COLOR_astbuilder__ASTBuilder___anchor 1
 extern const struct type type_parser_nodes__AAnnotations;
-extern const int COLOR_parser_nodes__ANode__visit_all;
-extern const int COLOR_transform__ANode__accept_transform_visitor;
+#define COLOR_parser_nodes__ANode__visit_all 37
+#define COLOR_transform__ANode__accept_transform_visitor 45
 void transform__TransformVisitor__visit(val* self, val* p0);
-extern const int COLOR_model__MModule__get_primitive_class;
-val* transform__TransformVisitor__get_class(val* self, val* p0, val* p1);
-extern const int COLOR_transform__TransformVisitor__phase;
-extern const int COLOR_phase__Phase__toolcontext;
-extern const int COLOR_modelbuilder__ToolContext__modelbuilder;
-extern const int COLOR_modelbuilder__ModelBuilder__force_get_primitive_method;
-val* transform__TransformVisitor__get_method(val* self, val* p0, val* p1, val* p2);
-void transform__ANode__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AVardeclExpr__n_expr;
-extern const int COLOR_parser_nodes__ANode__detach;
-extern const int COLOR_transform__TransformVisitor__builder;
-extern const int COLOR_scope__AVardeclExpr__variable;
-extern const int COLOR_astbuilder__ASTBuilder__make_var_assign;
-extern const int COLOR_parser_nodes__ANode__replace_with;
+val* parser_nodes__AVardeclExpr__n_expr(val* self);
+#define COLOR_scope__AVardeclExpr___variable 14
+val* astbuilder__ASTBuilder__make_var_assign(val* self, val* p0, val* p1);
+void parser_nodes__Prod__replace_with(val* self, val* p0);
 void transform__AVardeclExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr__n_expr;
-extern const int COLOR_typing__AExpr__mtype;
-extern const int COLOR_astbuilder__ASTBuilder__make_if;
-extern const int COLOR_parser_nodes__AIfExpr__n_then;
-extern const int COLOR_parser_nodes__AIfexprExpr__n_then;
-extern const int COLOR_astbuilder__AExpr__add;
-extern const int COLOR_parser_nodes__AIfExpr__n_else;
-extern const int COLOR_parser_nodes__AIfexprExpr__n_else;
+val* parser_nodes__AIfexprExpr__n_expr(val* self);
+#define COLOR_typing__AExpr___mtype 5
+val* astbuilder__ASTBuilder__make_if(val* self, val* p0, val* p1);
+val* parser_nodes__AIfExpr__n_then(val* self);
+val* parser_nodes__AIfexprExpr__n_then(val* self);
+#define COLOR_astbuilder__AExpr__add 67
+val* parser_nodes__AIfExpr__n_else(val* self);
+val* parser_nodes__AIfexprExpr__n_else(val* self);
 void transform__AIfexprExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AOrExpr__n_expr;
-extern const int COLOR_astbuilder__AExpr__make_var_read;
-extern const int COLOR_parser_nodes__AOrExpr__n_expr2;
+val* parser_nodes__AOrExpr__n_expr(val* self);
+val* astbuilder__AExpr__make_var_read(val* self);
+val* parser_nodes__AOrExpr__n_expr2(val* self);
 void transform__AOrExpr__accept_transform_visitor(val* self, val* p0);
-void transform__AImpliesExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAndExpr__n_expr;
-extern const int COLOR_parser_nodes__AAndExpr__n_expr2;
+val* parser_nodes__AAndExpr__n_expr(val* self);
+val* parser_nodes__AAndExpr__n_expr2(val* self);
 void transform__AAndExpr__accept_transform_visitor(val* self, val* p0);
-void transform__AWhileExpr__accept_transform_visitor(val* self, val* p0);
-void transform__AForExpr__accept_transform_visitor(val* self, val* p0);
-extern const struct type type_model__MClassType;
-extern const int COLOR_astbuilder__ASTBuilder__make_block;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_model__MClassType__mclass;
-extern const int COLOR_transform__TransformVisitor__get_method;
-extern const int COLOR_parser_nodes__AArrayExpr__n_exprs;
-extern const int COLOR_parser_nodes__AExprs__n_exprs;
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_astbuilder__ASTBuilder__make_int;
+val* astbuilder__ASTBuilder__make_block(val* self);
+#define COLOR_typing__AArrayExpr___with_capacity_callsite 10
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arrayparser_nodes__AIntExpr;
-val* NEW_array__NativeArray(int length, const struct type* type);
-extern const struct type type_array__NativeArrayparser_nodes__AIntExpr;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_astbuilder__ASTBuilder__make_new;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
+void array__Array__with_capacity(val* self, long p0);
+val* parser_nodes__AArrayExpr__n_exprs(val* self);
+#define COLOR_parser_nodes__AExprs___n_exprs 4
+long parser_nodes__ANodes__length(val* self);
+val* astbuilder__ASTBuilder__make_int(val* self, long p0);
+void array__AbstractArray__push(val* self, val* p0);
+val* astbuilder__ASTBuilder__make_new(val* self, val* p0, val* p1);
+void astbuilder__ABlockExpr__add(val* self, val* p0);
+val* parser_nodes__ANodes__iterator(val* self);
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_typing__AArrayExpr___push_callsite 11
 extern const struct type type_array__Arrayparser_nodes__AExpr;
-extern const struct type type_array__NativeArrayparser_nodes__AExpr;
-extern const int COLOR_astbuilder__ASTBuilder__make_call;
-extern const int COLOR_abstract_collection__Iterator__next;
+val* astbuilder__ASTBuilder__make_call(val* self, val* p0, val* p1, val* p2);
+#define COLOR_abstract_collection__Iterator__next 30
 void transform__AArrayExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_transform__TransformVisitor__get_class;
-extern const int COLOR_model__MClass__mclass_type;
-extern const struct type type_array__Arraymodel__MClassType;
-extern const struct type type_array__NativeArraymodel__MClassType;
-extern const int COLOR_model__MClass__get_mtype;
-extern const int COLOR_parser_nodes__ASuperstringExpr__n_exprs;
-void transform__ASuperstringExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__ARangeExpr__n_expr;
-extern const int COLOR_parser_nodes__ARangeExpr__n_expr2;
+#define COLOR_typing__ARangeExpr___init_callsite 11
+val* parser_nodes__ARangeExpr__n_expr(val* self);
+val* parser_nodes__ARangeExpr__n_expr2(val* self);
 void transform__ACrangeExpr__accept_transform_visitor(val* self, val* p0);
 void transform__AOrangeExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AProxyExpr__n_expr;
+val* parser_nodes__AProxyExpr__n_expr(val* self);
 void transform__AParExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASendExpr__n_expr;
-extern const int COLOR_array__Array__init;
-extern const int COLOR_typing__ASendExpr__raw_arguments;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_typing__ASendExpr__callsite;
-extern const int COLOR_typing__CallSite__mproperty;
-extern const int COLOR_typing__AReassignFormExpr__reassign_callsite;
-extern const int COLOR_parser_nodes__AReassignFormExpr__n_value;
-extern const int COLOR_typing__ASendReassignFormExpr__write_callsite;
+val* parser_nodes__ASendExpr__n_expr(val* self);
+void array__Array__init(val* self);
+val* typing__ASendExpr__raw_arguments(val* self);
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+void array__Array__add(val* self, val* p0);
+void array__ArrayIterator__next(val* self);
+#define COLOR_typing__ASendExpr___callsite 10
+#define COLOR_typing__AReassignFormExpr___reassign_callsite 13
+val* parser_nodes__AReassignFormExpr__n_value(val* self);
+#define COLOR_typing__ASendReassignFormExpr___write_callsite 17
 void transform__ASendReassignFormExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_scope__AVarFormExpr__variable;
-extern const int COLOR_typing__AReassignFormExpr__read_type;
-extern const int COLOR_astbuilder__ASTBuilder__make_var_read;
+#define COLOR_scope__AVarFormExpr___variable 10
+#define COLOR_typing__AReassignFormExpr___read_type 14
+val* astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1);
 void transform__AVarReassignExpr__accept_transform_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrFormExpr__n_expr;
-extern const int COLOR_typing__AAttrFormExpr__mproperty;
-extern const int COLOR_astbuilder__ASTBuilder__make_attr_read;
-extern const int COLOR_astbuilder__ASTBuilder__make_attr_assign;
+val* parser_nodes__AAttrFormExpr__n_expr(val* self);
+#define COLOR_typing__AAttrFormExpr___mproperty 15
+val* astbuilder__ASTBuilder__make_attr_read(val* self, val* p0, val* p1);
+val* astbuilder__ASTBuilder__make_attr_assign(val* self, val* p0, val* p1, val* p2);
 void transform__AAttrReassignExpr__accept_transform_visitor(val* self, val* p0);

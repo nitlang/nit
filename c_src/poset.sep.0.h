@@ -1,95 +1,51 @@
 #include "nit.common.h"
-extern const int COLOR_poset__POSet__elements;
-extern const int COLOR_abstract_collection__MapRead__keys;
-extern const int COLOR_abstract_collection__Collection__iterator;
+#define COLOR_poset__POSet___elements 0
+#define COLOR_hash_collection__HashMap___keys 7
+#define COLOR_abstract_collection__Collection__iterator 29
 val* poset__POSet__iterator(val* self);
-extern const int COLOR_poset__POSet___64delements;
-val* poset__POSet__elements(val* self);
-extern const int COLOR_hash_collection__HashMapposet__POSet_FT0poset__POSetElementposet__POSet_FT0;
-void poset__POSet__elements_61d(val* self, val* p0);
-extern const int COLOR_abstract_collection__Collection_FT0;
-extern const int COLOR_abstract_collection__Collection__has;
+#define COLOR_abstract_collection__Collection_FT0 8
+#define COLOR_abstract_collection__Collection__has 32
 short int poset__POSet__has(val* self, val* p0);
-extern const int COLOR_poset__POSet_FT0;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
+#define COLOR_poset__POSet_FT0 2
+val* hash_collection__HashMap___91d_93d(val* self, val* p0);
 val* NEW_poset__POSetElement(const struct type* type);
-extern const int COLOR_poset__POSetElementposet__POSet_FT0;
-extern const int COLOR_abstract_collection__MapRead__length;
-extern const int COLOR_poset__POSetElement__init;
-extern const int COLOR_poset__POSetElement__tos;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_poset__POSetElement__froms;
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
+#define COLOR_poset__POSetElementposet__POSet_FT0 3
+long hash_collection__HashMap__length(val* self);
+#define COLOR_poset__POSetposet__POSetElement_FT0 1
+#define COLOR_poset__POSetElement_FT0 2
+#define COLOR_poset__POSetElement___poset 0
+#define COLOR_poset__POSetElement___element 1
+#define COLOR_poset__POSetElement___count 6
+#define COLOR_poset__POSetElement___tos 2
+void hash_collection__HashSet__add(val* self, val* p0);
+#define COLOR_poset__POSetElement___froms 3
+void hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
 val* poset__POSet__add_node(val* self, val* p0);
 val* poset__POSet___91d_93d(val* self, val* p0);
-extern const int COLOR_poset__POSet__add_node;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_abstract_collection__Iterator__next;
-extern const int COLOR_poset__POSetElement__dfroms;
-extern const int COLOR_array__Collection__to_a;
-extern const int COLOR_abstract_collection__RemovableCollection__remove;
-extern const int COLOR_poset__POSetElement__dtos;
+short int hash_collection__HashSet__has(val* self, val* p0);
+val* hash_collection__HashSet__iterator(val* self);
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_abstract_collection__Iterator__next 30
+#define COLOR_poset__POSetElement___dfroms 5
+val* array__Collection__to_a(val* self);
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+void hash_collection__HashSet__remove(val* self, val* p0);
+#define COLOR_poset__POSetElement___dtos 4
+void array__ArrayIterator__next(val* self);
 void poset__POSet__add_edge(val* self, val* p0, val* p1);
-short int poset__POSet__has_edge(val* self, val* p0, val* p1);
-short int poset__POSet__has_direct_edge(val* self, val* p0, val* p1);
-val* NEW_exec__OProcess(const struct type* type);
-extern const struct type type_exec__OProcess;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-val* NEW_array__Array(const struct type* type);
-extern const struct type type_array__Arraystring__String;
-val* NEW_array__NativeArray(int length, const struct type* type);
-extern const struct type type_array__NativeArraystring__String;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_exec__OProcess__init;
-extern const int COLOR_stream__OStream__write;
-extern const struct type type_array__Arraykernel__Object;
-extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_poset__POSet__has_edge;
-void poset__POSet__show_dot(val* self);
-extern const int COLOR_abstract_collection__Collection__length;
+long hash_collection__HashSet__length(val* self);
 long kernel__Int___60d_61d_62d(long self, long p0);
-extern const int COLOR_poset__POSetElement__count;
 long poset__POSet__compare(val* self, val* p0, val* p1);
-void poset__POSet__init(val* self);
-extern const int COLOR_poset__POSetElement___64dposet;
-val* poset__POSetElement__poset(val* self);
-extern const int COLOR_poset__POSetposet__POSetElement_FT0;
-void poset__POSetElement__poset_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64delement;
-val* poset__POSetElement__element(val* self);
-extern const int COLOR_poset__POSetElement_FT0;
-void poset__POSetElement__element_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64dtos;
-val* poset__POSetElement__tos(val* self);
-extern const int COLOR_hash_collection__HashSetposet__POSetElement_FT0;
-void poset__POSetElement__tos_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64dfroms;
-val* poset__POSetElement__froms(val* self);
-void poset__POSetElement__froms_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64ddtos;
-val* poset__POSetElement__dtos(val* self);
-void poset__POSetElement__dtos_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64ddfroms;
-val* poset__POSetElement__dfroms(val* self);
-void poset__POSetElement__dfroms_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement___64dcount;
-long poset__POSetElement__count(val* self);
-void poset__POSetElement__count_61d(val* self, long p0);
+#define COLOR_abstract_collection__Collectionposet__POSet_FT0 4
+void sorter__Comparator__sort(val* self, val* p0);
+val* poset__POSet__linearize(val* self, val* p0);
 val* poset__POSetElement__greaters(val* self);
 val* poset__POSetElement__direct_greaters(val* self);
 val* poset__POSetElement__smallers(val* self);
 val* poset__POSetElement__direct_smallers(val* self);
 short int poset__POSetElement___60d_61d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement__element;
-extern const int COLOR_kernel__Object___33d_61d;
+#define COLOR_kernel__Object___33d_61d 3
 short int poset__POSetElement___60d(val* self, val* p0);
-extern const int COLOR_poset__POSetElement__direct_greaters;
-extern const int COLOR_abstract_collection__Collection__is_empty;
-extern const int COLOR_poset__POSetElement__poset;
-extern const int COLOR_poset__POSet___91d_93d;
-extern const int COLOR_poset__POSetElement__depth;
-extern const struct type type_kernel__Int;
-long poset__POSetElement__depth(val* self);
-void poset__POSetElement__init(val* self, val* p0, val* p1, long p2);

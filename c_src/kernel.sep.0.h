@@ -1,49 +1,32 @@
 #include "nit.common.h"
-extern const int COLOR_kernel__Object__is_same_instance;
-short int kernel__Object___61d_61d(val* self, val* p0);
-extern const int COLOR_kernel__Object___61d_61d;
-short int kernel__Object___33d_61d(val* self, val* p0);
-extern const int COLOR_kernel__Object__object_id;
-void kernel__Object__output(val* self);
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_kernel__Object__object_id 0
+extern const struct type type_kernel__Int;
 long kernel__Object__hash(val* self);
-void kernel__Sys__main(val* self);
-void kernel__Sys__init(val* self);
-extern const int COLOR_kernel__Comparable_VTOTHER;
-short int kernel__Comparable___60d(val* self, val* p0);
-extern const int COLOR_kernel__Comparable___60d;
+long kernel___Sys_errno___impl( struct nitni_instance * recv );
+#define COLOR_kernel__Comparable_VTOTHER 0
+#define COLOR_kernel__Comparable___60d 29
 short int kernel__Comparable___60d_61d(val* self, val* p0);
 short int kernel__Comparable___62d_61d(val* self, val* p0);
 short int kernel__Comparable___62d(val* self, val* p0);
 long kernel__Comparable___60d_61d_62d(val* self, val* p0);
-extern const int COLOR_kernel__Comparable___60d_61d;
-short int kernel__Comparable__is_between(val* self, val* p0, val* p1);
-val* kernel__Comparable__max(val* self, val* p0);
-val* kernel__Comparable__min(val* self, val* p0);
-extern const int COLOR_kernel__Discrete___43d;
-val* kernel__Discrete__succ(val* self);
-extern const int COLOR_kernel__Discrete___45d;
-val* kernel__Discrete__prec(val* self);
-val* kernel__Discrete___43d(val* self, long p0);
-val* kernel__Discrete___45d(val* self, long p0);
-extern const int COLOR_kernel__Comparable___62d;
-extern const int COLOR_kernel__Discrete__succ;
-long kernel__Discrete__distance(val* self, val* p0);
 extern const struct class class_kernel__Bool;
+long kernel__Bool__to_i(short int self);
 long kernel__Bool__hash(short int self);
 extern const struct type type_kernel__Float;
+val* BOX_kernel__Float(double);
+double kernel__Float__to_f(double self);
+long kernel__Int__successor(long self, long p0);
+val* BOX_kernel__Int(long);
+long kernel__Int__predecessor(long self, long p0);
 long kernel__Int__hash(long self);
 extern const struct class class_kernel__Int;
-extern const struct type type_kernel__Int;
-val* BOX_kernel__Int(long);
+long kernel__Int__to_i(long self);
 long kernel__Int__distance(long self, long p0);
 long kernel__Int___60d_61d_62d(long self, long p0);
-short int kernel__Int__is_between(long self, long p0, long p1);
-long kernel__Int__max(long self, long p0);
-long kernel__Int__min(long self, long p0);
 long kernel__Int__digit_count_base_95d10(long self);
 long kernel__Int__digit_count(long self, long p0);
 char kernel__Int__to_c(long self);
-long kernel__Int__abs(long self);
 long kernel__Char__hash(char self);
 extern const struct class class_kernel__Char;
 extern const struct type type_kernel__Char;
@@ -53,8 +36,4 @@ short int kernel__Char__is_digit(char self);
 char kernel__Char__to_lower(char self);
 long kernel__Char__to_i(char self);
 short int kernel__Char__is_upper(char self);
-short int kernel__Char__is_lower(char self);
-char kernel__Char__to_upper(char self);
-short int kernel__Char__is_letter(char self);
-int kernel___Pointer_address_is_null___impl( void* recv );
-short int kernel__Pointer__address_is_null(void* self);
+#include "kernel_nit.h"

@@ -1,173 +1,115 @@
 #include "nit.common.h"
-extern const int COLOR_astbuilder__ASTBuilder___64dmmodule;
-val* astbuilder__ASTBuilder__mmodule(val* self);
-void astbuilder__ASTBuilder__mmodule_61d(val* self, val* p0);
-extern const int COLOR_astbuilder__ASTBuilder___64danchor;
-val* astbuilder__ASTBuilder__anchor(val* self);
-void astbuilder__ASTBuilder__anchor_61d(val* self, val* p0);
-val* NEW_parser_nodes__AIntExpr(const struct type* type);
-extern const struct type type_parser_nodes__AIntExpr;
-extern const int COLOR_astbuilder__ASTBuilder__mmodule;
+#define COLOR_astbuilder__ASTBuilder___mmodule 0
+#define COLOR_astbuilder__ASTBuilder___anchor 1
+val* NEW_parser_nodes__ADecIntExpr(const struct type* type);
+extern const struct type type_parser_nodes__ADecIntExpr;
 val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_model__MModule__get_primitive_class;
-extern const int COLOR_model__MClass__mclass_type;
-extern const int COLOR_astbuilder__AIntExpr__make;
+val* model__MModule__get_primitive_class(val* self, val* p0);
+#define COLOR_model__MClass___mclass_type 7
+void astbuilder__ADecIntExpr__make(val* self, long p0, val* p1);
 val* astbuilder__ASTBuilder__make_int(val* self, long p0);
 val* NEW_parser_nodes__ANewExpr(const struct type* type);
 extern const struct type type_parser_nodes__ANewExpr;
-extern const int COLOR_astbuilder__ANewExpr__make;
-val* astbuilder__ASTBuilder__make_new(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_model__MProperty__intro;
-extern const int COLOR_model__MMethodDef__msignature;
-extern const int COLOR_model__MSignature__return_mtype;
-extern const int COLOR_typing__AExpr__mtype;
-extern const int COLOR_astbuilder__ASTBuilder__anchor;
-extern const int COLOR_model__MType__resolve_for;
+void astbuilder__ANewExpr__make(val* self, val* p0, val* p1);
+val* astbuilder__ASTBuilder__make_new(val* self, val* p0, val* p1);
 val* NEW_parser_nodes__ACallExpr(const struct type* type);
 extern const struct type type_parser_nodes__ACallExpr;
-extern const int COLOR_astbuilder__ACallExpr__make;
+void astbuilder__ACallExpr__make(val* self, val* p0, val* p1, val* p2);
 val* astbuilder__ASTBuilder__make_call(val* self, val* p0, val* p1, val* p2);
 val* NEW_parser_nodes__ABlockExpr(const struct type* type);
 extern const struct type type_parser_nodes__ABlockExpr;
-extern const int COLOR_astbuilder__ABlockExpr__make;
+void astbuilder__ABlockExpr__make(val* self);
 val* astbuilder__ASTBuilder__make_block(val* self);
 val* NEW_parser_nodes__AVarExpr(const struct type* type);
 extern const struct type type_parser_nodes__AVarExpr;
-extern const int COLOR_astbuilder__AVarExpr__make;
+void astbuilder__AVarExpr__make(val* self, val* p0, val* p1);
 val* astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1);
 val* NEW_parser_nodes__AVarAssignExpr(const struct type* type);
 extern const struct type type_parser_nodes__AVarAssignExpr;
-extern const int COLOR_astbuilder__AVarAssignExpr__make;
+void astbuilder__AVarAssignExpr__make(val* self, val* p0, val* p1);
 val* astbuilder__ASTBuilder__make_var_assign(val* self, val* p0, val* p1);
-extern const int COLOR_model__MAttributeDef__static_mtype;
+val* model__MProperty__intro(val* self);
+#define COLOR_model__MAttributeDef___static_mtype 7
+#define COLOR_typing__AExpr__mtype 55
+#define COLOR_model__MType__resolve_for 38
 val* NEW_parser_nodes__AAttrExpr(const struct type* type);
 extern const struct type type_parser_nodes__AAttrExpr;
-extern const int COLOR_astbuilder__AAttrExpr__make;
+void astbuilder__AAttrExpr__make(val* self, val* p0, val* p1, val* p2);
 val* astbuilder__ASTBuilder__make_attr_read(val* self, val* p0, val* p1);
 val* NEW_parser_nodes__AAttrAssignExpr(const struct type* type);
 extern const struct type type_parser_nodes__AAttrAssignExpr;
-extern const int COLOR_astbuilder__AAttrAssignExpr__make;
+void astbuilder__AAttrAssignExpr__make(val* self, val* p0, val* p1, val* p2);
 val* astbuilder__ASTBuilder__make_attr_assign(val* self, val* p0, val* p1, val* p2);
-val* NEW_parser_nodes__ADoExpr(const struct type* type);
-extern const struct type type_parser_nodes__ADoExpr;
-extern const int COLOR_astbuilder__ADoExpr__make;
-val* astbuilder__ASTBuilder__make_do(val* self);
 val* NEW_parser_nodes__AIfExpr(const struct type* type);
 extern const struct type type_parser_nodes__AIfExpr;
-extern const int COLOR_astbuilder__AIfExpr__make;
+void astbuilder__AIfExpr__make(val* self, val* p0, val* p1);
 val* astbuilder__ASTBuilder__make_if(val* self, val* p0, val* p1);
-void astbuilder__ASTBuilder__init(val* self, val* p0, val* p1);
-extern const int COLOR_astbuilder__AExpr__variable_cache;
-extern const int COLOR_parser_nodes__ANode__parent;
-extern const int COLOR_astbuilder__AExpr__detach_with_placeholder;
+#define COLOR_astbuilder__AExpr___variable_cache 8
+#define COLOR_parser_nodes__ANode___parent 1
+#define COLOR_kernel__Object___61d_61d 2
+val* astbuilder__AExpr__detach_with_placeholder(val* self);
 val* NEW_scope__Variable(const struct type* type);
 extern const struct type type_scope__Variable;
-extern const int COLOR_scope__Variable__init;
-extern const int COLOR_typing__Variable__declared_type_61d;
-extern const int COLOR_parser_nodes__ANode__replace_with;
-extern const int COLOR_astbuilder__AExpr__variable_cache_61d;
-extern const int COLOR_typing__Variable__declared_type;
+#define COLOR_scope__Variable___name 0
+#define COLOR_typing__Variable___declared_type 1
+void parser_nodes__Prod__replace_with(val* self, val* p0);
 val* astbuilder__AExpr__make_var_read(val* self);
-extern const int COLOR_astbuilder__AExpr___64dvariable_cache;
-val* astbuilder__AExpr__variable_cache(val* self);
-void astbuilder__AExpr__variable_cache_61d(val* self, val* p0);
 val* NEW_astbuilder__APlaceholderExpr(const struct type* type);
 extern const struct type type_astbuilder__APlaceholderExpr;
-extern const int COLOR_astbuilder__APlaceholderExpr__make;
-val* astbuilder__AExpr__detach_with_placeholder(val* self);
-void astbuilder__AExpr__add(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExpr__init;
 void astbuilder__APlaceholderExpr__make(val* self);
-extern const int COLOR_typing__AExpr__is_typed_61d;
-void astbuilder__ABlockExpr__make(val* self);
-extern const int COLOR_parser_nodes__ABlockExpr__n_expr;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+void astbuilder__AExpr__add(val* self, val* p0);
+#define COLOR_typing__AExpr___is_typed 6
+#define COLOR_parser_nodes__ABlockExpr___n_expr 9
+void abstract_collection__Sequence__add(val* self, val* p0);
 void astbuilder__ABlockExpr__add(val* self, val* p0);
-val* NEW_parser_nodes__TKwdo(const struct type* type);
-extern const struct type type_parser_nodes__TKwdo;
-extern const int COLOR_parser_nodes__TKwdo__init;
-extern const int COLOR_parser_nodes__ADoExpr___n_kwdo;
-val* NEW_scope__EscapeMark(const struct type* type);
-extern const struct type type_scope__EscapeMark;
-extern const int COLOR_scope__EscapeMark__init;
-extern const int COLOR_scope__ADoExpr__escapemark_61d;
-void astbuilder__ADoExpr__make(val* self);
-extern const int COLOR_scope__ADoExpr__escapemark;
-val* NEW_parser_nodes__ABreakExpr(const struct type* type);
-extern const struct type type_parser_nodes__ABreakExpr;
-extern const int COLOR_astbuilder__ABreakExpr__make;
-val* astbuilder__ADoExpr__make_break(val* self);
-extern const int COLOR_scope__ABreakExpr__escapemark_61d;
-void astbuilder__ABreakExpr__make(val* self, val* p0);
 val* NEW_parser_nodes__TKwif(const struct type* type);
 extern const struct type type_parser_nodes__TKwif;
-extern const int COLOR_parser_nodes__TKwif__init;
-extern const int COLOR_parser_nodes__AIfExpr___n_kwif;
-extern const int COLOR_parser_nodes__AIfExpr___n_expr;
-extern const int COLOR_parser_nodes__ANode__parent_61d;
-extern const int COLOR_parser_nodes__AIfExpr___n_then;
-extern const int COLOR_parser_nodes__AIfExpr___n_else;
-extern const int COLOR_typing__AExpr__mtype_61d;
-void astbuilder__AIfExpr__make(val* self, val* p0, val* p1);
+#define COLOR_parser_nodes__AIfExpr___n_kwif 9
+#define COLOR_parser_nodes__AIfExpr___n_expr 10
+#define COLOR_parser_nodes__AIfExpr___n_then 11
+#define COLOR_parser_nodes__AIfExpr___n_else 12
+#define COLOR_typing__AExpr___mtype 5
 val* NEW_parser_nodes__TClassid(const struct type* type);
 extern const struct type type_parser_nodes__TClassid;
-extern const int COLOR_parser_nodes__TClassid__init;
-extern const int COLOR_parser_nodes__AType___n_id;
+#define COLOR_parser_nodes__AType___n_id 5
 void astbuilder__AType__make(val* self);
 val* BOX_kernel__Int(long);
-extern const int COLOR_literal__AIntExpr__value_61d;
+#define COLOR_literal__AIntExpr___value 9
 val* NEW_parser_nodes__TNumber(const struct type* type);
 extern const struct type type_parser_nodes__TNumber;
-extern const int COLOR_parser_nodes__TNumber__init;
-extern const int COLOR_parser_nodes__AIntExpr___n_number;
-void astbuilder__AIntExpr__make(val* self, long p0, val* p1);
+#define COLOR_parser_nodes__ADecIntExpr___n_number 10
 val* NEW_parser_nodes__TKwnew(const struct type* type);
 extern const struct type type_parser_nodes__TKwnew;
-extern const int COLOR_parser_nodes__TKwnew__init;
-extern const int COLOR_parser_nodes__ANewExpr___n_kwnew;
+#define COLOR_parser_nodes__ANewExpr___n_kwnew 9
 val* NEW_parser_nodes__AType(const struct type* type);
 extern const struct type type_parser_nodes__AType;
-extern const int COLOR_astbuilder__AType__make;
-extern const int COLOR_parser_nodes__ANewExpr___n_type;
+#define COLOR_parser_nodes__ANewExpr___n_type 10
 val* NEW_parser_nodes__AListExprs(const struct type* type);
 extern const struct type type_parser_nodes__AListExprs;
-extern const int COLOR_parser_nodes__AListExprs__init;
-extern const int COLOR_parser_nodes__ANewExpr___n_args;
-extern const int COLOR_parser_nodes__ANewExpr__n_args;
-extern const int COLOR_parser_nodes__AExprs__n_exprs;
-extern const int COLOR_abstract_collection__SimpleCollection__add_all;
-val* NEW_typing__CallSite(const struct type* type);
-extern const struct type type_typing__CallSite;
-extern const int COLOR_typing__CallSite__init;
-extern const int COLOR_typing__ANewExpr__callsite_61d;
-void astbuilder__ANewExpr__make(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_parser_nodes__ASendExpr___n_expr;
-val* NEW_array__Array(const struct type* type);
-extern const struct type type_array__Arrayparser_nodes__AExpr;
-extern const int COLOR_array__Array__init;
-extern const int COLOR_typing__ASendExpr__raw_arguments_61d;
-extern const int COLOR_parser_nodes__ACallFormExpr___n_args;
+void parser_nodes__AExprs__init(val* self);
+#define COLOR_parser_nodes__ANewExpr___n_args 12
+val* parser_nodes__ANewExpr__n_args(val* self);
+#define COLOR_parser_nodes__AExprs___n_exprs 4
+void abstract_collection__SimpleCollection__add_all(val* self, val* p0);
+#define COLOR_typing__ANewExpr___callsite 13
+#define COLOR_typing__CallSite___recv 1
+#define COLOR_parser_nodes__ASendExpr___n_expr 9
+#define COLOR_parser_nodes__ACallFormExpr___n_args 16
 val* NEW_parser_nodes__TId(const struct type* type);
 extern const struct type type_parser_nodes__TId;
-extern const int COLOR_parser_nodes__TId__init;
-extern const int COLOR_parser_nodes__ACallFormExpr___n_id;
-extern const int COLOR_parser_nodes__ACallFormExpr__n_args;
-extern const int COLOR_typing__ASendExpr__callsite_61d;
-void astbuilder__ACallExpr__make(val* self, val* p0, val* p1, val* p2, val* p3);
-extern const int COLOR_parser_nodes__AAttrFormExpr___n_expr;
+#define COLOR_parser_nodes__ACallFormExpr___n_id 15
+val* parser_nodes__ACallFormExpr__n_args(val* self);
+#define COLOR_typing__ASendExpr___callsite 10
+#define COLOR_typing__CallSite___msignature 7
+#define COLOR_model__MSignature___return_mtype 4
+#define COLOR_parser_nodes__AAttrFormExpr___n_expr 9
 val* NEW_parser_nodes__TAttrid(const struct type* type);
 extern const struct type type_parser_nodes__TAttrid;
-extern const int COLOR_parser_nodes__TAttrid__init;
-extern const int COLOR_parser_nodes__AAttrFormExpr___n_id;
-extern const int COLOR_typing__AAttrFormExpr__mproperty_61d;
-void astbuilder__AAttrExpr__make(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_parser_nodes__AAssignFormExpr___n_value;
+#define COLOR_parser_nodes__AAttrFormExpr___n_id 10
+#define COLOR_typing__AAttrFormExpr___mproperty 15
+#define COLOR_parser_nodes__AAssignFormExpr___n_value 12
 val* NEW_parser_nodes__TAssign(const struct type* type);
 extern const struct type type_parser_nodes__TAssign;
-extern const int COLOR_parser_nodes__TAssign__init;
-extern const int COLOR_parser_nodes__AAssignFormExpr___n_assign;
-void astbuilder__AAttrAssignExpr__make(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_parser_nodes__AVarFormExpr___n_id;
-extern const int COLOR_scope__AVarFormExpr__variable_61d;
-void astbuilder__AVarExpr__make(val* self, val* p0, val* p1);
-void astbuilder__AVarAssignExpr__make(val* self, val* p0, val* p1);
+#define COLOR_parser_nodes__AAssignFormExpr___n_assign 11
+#define COLOR_parser_nodes__AVarFormExpr___n_id 9
+#define COLOR_scope__AVarFormExpr___variable 10

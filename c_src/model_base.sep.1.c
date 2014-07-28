@@ -5,17 +5,57 @@ RET_LABEL:;
 }
 /* method model_base#Model#init for (self: Object) */
 void VIRTUAL_model_base__Model__init(val* self) {
-model_base__Model__init(self);
+{ /* Inline model_base#Model#init (self) on <self:Object(Model)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
+/* method model_base#MEntity#model for (self: MEntity): Model */
+val* model_base__MEntity__model(val* self) {
+val* var /* : Model */;
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "model", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 31);
+show_backtrace(1);
+RET_LABEL:;
+return var;
+}
+/* method model_base#MEntity#model for (self: Object): Model */
+val* VIRTUAL_model_base__MEntity__model(val* self) {
+val* var /* : Model */;
+val* var1 /* : Model */;
+const char* var_class_name;
+{ /* Inline model_base#MEntity#model (self) on <self:Object(MEntity)> */
+var_class_name = self == NULL ? "null" : self->type->name;
+PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "model", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 31);
+show_backtrace(1);
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model_base#MEntity#init for (self: MEntity) */
+void model_base__MEntity__init(val* self) {
+RET_LABEL:;
+}
+/* method model_base#MEntity#init for (self: Object) */
+void VIRTUAL_model_base__MEntity__init(val* self) {
+{ /* Inline model_base#MEntity#init (self) on <self:Object(MEntity)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method model_base#MVisibility#to_s for (self: MVisibility): String */
 val* model_base__MVisibility__to_s(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = self->attrs[COLOR_model_base__MVisibility___64dto_s].val; /* @to_s on <self:MVisibility> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @to_s");
-fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 39);
+var1 = self->attrs[COLOR_model_base__MVisibility___to_s].val; /* _to_s on <self:MVisibility> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
+PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 56);
 show_backtrace(1);
 }
 var = var1;
@@ -26,26 +66,39 @@ return var;
 val* VIRTUAL_model_base__MVisibility__to_s(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
-var1 = model_base__MVisibility__to_s(self);
+val* var3 /* : String */;
+{ /* Inline model_base#MVisibility#to_s (self) on <self:Object(MVisibility)> */
+var3 = self->attrs[COLOR_model_base__MVisibility___to_s].val; /* _to_s on <self:Object(MVisibility)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
+PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 56);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method model_base#MVisibility#to_s= for (self: MVisibility, String) */
 void model_base__MVisibility__to_s_61d(val* self, val* p0) {
-self->attrs[COLOR_model_base__MVisibility___64dto_s].val = p0; /* @to_s on <self:MVisibility> */
+self->attrs[COLOR_model_base__MVisibility___to_s].val = p0; /* _to_s on <self:MVisibility> */
 RET_LABEL:;
 }
 /* method model_base#MVisibility#to_s= for (self: Object, String) */
 void VIRTUAL_model_base__MVisibility__to_s_61d(val* self, val* p0) {
-model_base__MVisibility__to_s_61d(self, p0);
+{ /* Inline model_base#MVisibility#to_s= (self,p0) on <self:Object(MVisibility)> */
+self->attrs[COLOR_model_base__MVisibility___to_s].val = p0; /* _to_s on <self:Object(MVisibility)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method model_base#MVisibility#level for (self: MVisibility): Int */
 long model_base__MVisibility__level(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = self->attrs[COLOR_model_base__MVisibility___64dlevel].l; /* @level on <self:MVisibility> */
+var1 = self->attrs[COLOR_model_base__MVisibility___level].l; /* _level on <self:MVisibility> */
 var = var1;
 RET_LABEL:;
 return var;
@@ -54,19 +107,27 @@ return var;
 long VIRTUAL_model_base__MVisibility__level(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = model_base__MVisibility__level(self);
+long var3 /* : Int */;
+{ /* Inline model_base#MVisibility#level (self) on <self:Object(MVisibility)> */
+var3 = self->attrs[COLOR_model_base__MVisibility___level].l; /* _level on <self:Object(MVisibility)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
 }
 /* method model_base#MVisibility#level= for (self: MVisibility, Int) */
 void model_base__MVisibility__level_61d(val* self, long p0) {
-self->attrs[COLOR_model_base__MVisibility___64dlevel].l = p0; /* @level on <self:MVisibility> */
+self->attrs[COLOR_model_base__MVisibility___level].l = p0; /* _level on <self:MVisibility> */
 RET_LABEL:;
 }
 /* method model_base#MVisibility#level= for (self: Object, Int) */
 void VIRTUAL_model_base__MVisibility__level_61d(val* self, long p0) {
-model_base__MVisibility__level_61d(self, p0);
+{ /* Inline model_base#MVisibility#level= (self,p0) on <self:Object(MVisibility)> */
+self->attrs[COLOR_model_base__MVisibility___level].l = p0; /* _level on <self:Object(MVisibility)> */
+RET_LABEL1:(void)0;
+}
 RET_LABEL:;
 }
 /* method model_base#MVisibility#init for (self: MVisibility, String, Int) */
@@ -75,13 +136,23 @@ val* var_s /* var s: String */;
 long var_level /* var level: Int */;
 var_s = p0;
 var_level = p1;
-((void (*)(val*, val*))(self->class->vft[COLOR_model_base__MVisibility__to_s_61d]))(self, var_s) /* to_s= on <self:MVisibility>*/;
-((void (*)(val*, long))(self->class->vft[COLOR_model_base__MVisibility__level_61d]))(self, var_level) /* level= on <self:MVisibility>*/;
+{
+{ /* Inline model_base#MVisibility#to_s= (self,var_s) on <self:MVisibility> */
+self->attrs[COLOR_model_base__MVisibility___to_s].val = var_s; /* _to_s on <self:MVisibility> */
+RET_LABEL1:(void)0;
+}
+}
+{
+{ /* Inline model_base#MVisibility#level= (self,var_level) on <self:MVisibility> */
+self->attrs[COLOR_model_base__MVisibility___level].l = var_level; /* _level on <self:MVisibility> */
+RET_LABEL2:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method model_base#MVisibility#init for (self: Object, String, Int) */
 void VIRTUAL_model_base__MVisibility__init(val* self, val* p0, long p1) {
-model_base__MVisibility__init(self, p0, p1);
+model_base__MVisibility__init(self, p0, p1); /* Direct call model_base#MVisibility#init on <self:Object(MVisibility)>*/
 RET_LABEL:;
 }
 /* method model_base#MVisibility#< for (self: MVisibility, MVisibility): Bool */
@@ -94,13 +165,15 @@ const struct type* type_struct;
 const char* var_class_name;
 val* var_other /* var other: MVisibility */;
 long var2 /* : Int */;
-long var3 /* : Int */;
-short int var4 /* : Bool */;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const char* var_class_name9;
+long var4 /* : Int */;
+long var5 /* : Int */;
+long var7 /* : Int */;
+short int var8 /* : Bool */;
 short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+const char* var_class_name13;
+short int var14 /* : Bool */;
 /* Covariant cast for argument 0 (other) <p0:MVisibility> isa OTHER */
 /* <p0:MVisibility> isa OTHER */
 type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
@@ -111,31 +184,45 @@ var1 = 0;
 } else {
 var1 = p0->type->type_table[cltype] == idtype;
 }
-if (!var1) {
+if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 49);
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 66);
 show_backtrace(1);
 }
 var_other = p0;
-var2 = ((long (*)(val*))(self->class->vft[COLOR_model_base__MVisibility__level]))(self) /* level on <self:MVisibility>*/;
-var3 = ((long (*)(val*))(var_other->class->vft[COLOR_model_base__MVisibility__level]))(var_other) /* level on <var_other:MVisibility>*/;
-{ /* Inline kernel#Int#< (var2,var3) */
-/* Covariant cast for argument 0 (i) <var3:Int> isa OTHER */
-/* <var3:Int> isa OTHER */
-var6 = 1; /* easy <var3:Int> isa OTHER*/
-if (!var6) {
-var_class_name9 = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 265);
+{
+{ /* Inline model_base#MVisibility#level (self) on <self:MVisibility> */
+var4 = self->attrs[COLOR_model_base__MVisibility___level].l; /* _level on <self:MVisibility> */
+var2 = var4;
+RET_LABEL3:(void)0;
+}
+}
+{
+{ /* Inline model_base#MVisibility#level (var_other) on <var_other:MVisibility> */
+var7 = var_other->attrs[COLOR_model_base__MVisibility___level].l; /* _level on <var_other:MVisibility> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#< (var2,var5) on <var2:Int> */
+/* Covariant cast for argument 0 (i) <var5:Int> isa OTHER */
+/* <var5:Int> isa OTHER */
+var10 = 1; /* easy <var5:Int> isa OTHER*/
+if (unlikely(!var10)) {
+var_class_name13 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
 show_backtrace(1);
 }
-var10 = var2 < var3;
-var4 = var10;
-goto RET_LABEL5;
-RET_LABEL5:(void)0;
+var14 = var2 < var5;
+var8 = var14;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
 }
-var = var4;
+}
+var = var8;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -160,7 +247,7 @@ static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
 long var6 /* : Int */;
-val* var7 /* : String */;
+val* var7 /* : FlatString */;
 long var8 /* : Int */;
 if (varonce_guard) {
 var1 = varonce;
@@ -175,8 +262,10 @@ var7 = string__NativeString__to_s_with_length(var5, var6);
 var4 = var7;
 varonce3 = var4;
 }
-var8 = 4;
-((void (*)(val*, val*, long))(var2->class->vft[COLOR_model_base__MVisibility__init]))(var2, var4, var8) /* init on <var2:MVisibility>*/;
+var8 = 5;
+{
+model_base__MVisibility__init(var2, var4, var8); /* Direct call model_base#MVisibility#init on <var2:MVisibility>*/
+}
 var1 = var2;
 varonce = var1;
 varonce_guard = 1;
@@ -206,7 +295,7 @@ static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
 long var6 /* : Int */;
-val* var7 /* : String */;
+val* var7 /* : FlatString */;
 long var8 /* : Int */;
 if (varonce_guard) {
 var1 = varonce;
@@ -222,7 +311,9 @@ var4 = var7;
 varonce3 = var4;
 }
 var8 = 4;
-((void (*)(val*, val*, long))(var2->class->vft[COLOR_model_base__MVisibility__init]))(var2, var4, var8) /* init on <var2:MVisibility>*/;
+{
+model_base__MVisibility__init(var2, var4, var8); /* Direct call model_base#MVisibility#init on <var2:MVisibility>*/
+}
 var1 = var2;
 varonce = var1;
 varonce_guard = 1;
@@ -252,7 +343,7 @@ static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
 long var6 /* : Int */;
-val* var7 /* : String */;
+val* var7 /* : FlatString */;
 long var8 /* : Int */;
 if (varonce_guard) {
 var1 = varonce;
@@ -268,7 +359,9 @@ var4 = var7;
 varonce3 = var4;
 }
 var8 = 3;
-((void (*)(val*, val*, long))(var2->class->vft[COLOR_model_base__MVisibility__init]))(var2, var4, var8) /* init on <var2:MVisibility>*/;
+{
+model_base__MVisibility__init(var2, var4, var8); /* Direct call model_base#MVisibility#init on <var2:MVisibility>*/
+}
 var1 = var2;
 varonce = var1;
 varonce_guard = 1;
@@ -298,7 +391,7 @@ static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
 long var6 /* : Int */;
-val* var7 /* : String */;
+val* var7 /* : FlatString */;
 long var8 /* : Int */;
 if (varonce_guard) {
 var1 = varonce;
@@ -314,7 +407,9 @@ var4 = var7;
 varonce3 = var4;
 }
 var8 = 2;
-((void (*)(val*, val*, long))(var2->class->vft[COLOR_model_base__MVisibility__init]))(var2, var4, var8) /* init on <var2:MVisibility>*/;
+{
+model_base__MVisibility__init(var2, var4, var8); /* Direct call model_base#MVisibility#init on <var2:MVisibility>*/
+}
 var1 = var2;
 varonce = var1;
 varonce_guard = 1;
@@ -344,7 +439,7 @@ static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
 long var6 /* : Int */;
-val* var7 /* : String */;
+val* var7 /* : FlatString */;
 long var8 /* : Int */;
 if (varonce_guard) {
 var1 = varonce;
@@ -359,8 +454,10 @@ var7 = string__NativeString__to_s_with_length(var5, var6);
 var4 = var7;
 varonce3 = var4;
 }
-var8 = 2;
-((void (*)(val*, val*, long))(var2->class->vft[COLOR_model_base__MVisibility__init]))(var2, var4, var8) /* init on <var2:MVisibility>*/;
+var8 = 1;
+{
+model_base__MVisibility__init(var2, var4, var8); /* Direct call model_base#MVisibility#init on <var2:MVisibility>*/
+}
 var1 = var2;
 varonce = var1;
 varonce_guard = 1;

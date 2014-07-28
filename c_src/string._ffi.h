@@ -5,6 +5,5 @@
 #define STRING_NIT_H
 
 #include "string._nitni.h"
-#include "math._ffi.h"
-String string___Float_to_precision_native___impl( double recv, int nb );
+char* string___Int_strerror_ext___impl( long recv );
 #endif
