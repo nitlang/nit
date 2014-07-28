@@ -109,7 +109,7 @@ redef class ModelBuilder
 			var amod = mmodule2nmodule[mmod]
 			var module_decl = amod.n_moduledecl
 			if module_decl == null then continue
-			var aas = module_decl.collect_annotations_by_name(name)
+			var aas = module_decl.get_annotations(name)
 			annotations.add_all aas
 		end
 		return annotations
@@ -123,7 +123,7 @@ redef class ModelBuilder
 			var amod = mmodule2nmodule[mmodule]
 			var module_decl = amod.n_moduledecl
 			if module_decl != null then
-				var annotations = module_decl.collect_annotations_by_name(name)
+				var annotations = module_decl.get_annotations(name)
 				if annotations.length == 1 then
 					return annotations.first
 				else if annotations.length > 1 then
