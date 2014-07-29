@@ -309,7 +309,18 @@ class RopeString
 		return ret
 	end
 
-	redef fun +(o) do return insert_at(o.to_s, length)
+	redef fun +(o) do
+		if self.length == 0 then return o.to_s
+		if o.length == 0 then return self
+		var str = o.to_s
+		if str isa FlatString then
+			return new RopeString.from_root(new Concat(root, new StringLeaf(str)))
+		else if str isa RopeString then
+			return new RopeString.from_root(new Concat(root, str.root))
+		else
+			abort
+		end
+	end
 
 	redef fun *(n)
 	do
