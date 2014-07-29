@@ -10,13 +10,11 @@ EIFGENs
 bin/nit*
 doc/stdlib
 doc/nitc
-doc/newmodel
 
 *.aux
 *.log
 *.out
 *.toc
-doc/nit_version.sty
 
 src/parser/.nit.sablecc3
 src/parser/.nit.sablecc3.dump
@@ -28,6 +26,7 @@ src/*.dot
 src/*.dat
 src/*.gnu
 src/*.bin
+src/nitg_0
 
 c_src/*.o
 c_src/*.cksum
@@ -47,6 +46,7 @@ tests/alt
 tests/errlist
 tests/out
 tests/*.xml
+tests/nitunit
 
 *.stub.nit.[ch]
 
