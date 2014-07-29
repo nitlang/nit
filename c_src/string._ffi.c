@@ -4,22 +4,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "string._ffi.h"
+#ifdef ANDROID
+	#include <android/log.h>
+	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, "Nit", __VA_ARGS__)
+#else
+	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
+#endif
 #define NativeString_to_s string___NativeString_to_s
 #line 20 "lib/standard/string.nit"
 
 #include <stdio.h>
+#include <string.h>
 
-String string___Float_to_precision_native___impl( double recv, int nb )
+char* string___Int_strerror_ext___impl( long recv )
 {
-#line 1103 "lib/standard/string.nit"
+#line 1490 "lib/standard/string.nit"
 
 
-		int size;
-		char *str;
-
-		size = snprintf(NULL, 0, "%.*f", (int)nb, recv);
-		str = malloc(size + 1);
-		sprintf(str, "%.*f", (int)nb, recv );
-
-		return NativeString_to_s( str );
+		return strerror(recv);
 	}

@@ -13,6 +13,6 @@
  * another product.
  */
 
-char* native_int_to_s(int recv, int len);
+char* native_int_to_s(long recv);
 
 #endif

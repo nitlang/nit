@@ -1,9937 +1,9856 @@
 #include "parser.sep.0.h"
-/* method parser#Parser#build_reduce_table for (self: Parser) */
-void parser__Parser__build_reduce_table(val* self) {
-val* var /* : Array[ReduceAction] */;
-val* var1 /* : ReduceAction0 */;
-long var2 /* : Int */;
-val* var3 /* : ReduceAction1 */;
-long var4 /* : Int */;
-val* var5 /* : ReduceAction2 */;
-long var6 /* : Int */;
-val* var7 /* : ReduceAction3 */;
-long var8 /* : Int */;
-val* var9 /* : ReduceAction4 */;
-long var10 /* : Int */;
-val* var11 /* : ReduceAction5 */;
-long var12 /* : Int */;
-val* var13 /* : ReduceAction6 */;
-long var14 /* : Int */;
-val* var15 /* : ReduceAction7 */;
-long var16 /* : Int */;
-val* var17 /* : ReduceAction8 */;
-long var18 /* : Int */;
-val* var19 /* : ReduceAction9 */;
-long var20 /* : Int */;
-val* var21 /* : ReduceAction10 */;
-long var22 /* : Int */;
-val* var23 /* : ReduceAction11 */;
-long var24 /* : Int */;
-val* var25 /* : ReduceAction12 */;
-long var26 /* : Int */;
-val* var27 /* : ReduceAction13 */;
-long var28 /* : Int */;
-val* var29 /* : ReduceAction14 */;
-long var30 /* : Int */;
-val* var31 /* : ReduceAction15 */;
-long var32 /* : Int */;
-val* var33 /* : ReduceAction16 */;
-long var34 /* : Int */;
-val* var35 /* : ReduceAction17 */;
-long var36 /* : Int */;
-val* var37 /* : ReduceAction18 */;
-long var38 /* : Int */;
-val* var39 /* : ReduceAction19 */;
-long var40 /* : Int */;
-val* var41 /* : ReduceAction20 */;
-long var42 /* : Int */;
-val* var43 /* : ReduceAction21 */;
-long var44 /* : Int */;
-val* var45 /* : ReduceAction22 */;
-long var46 /* : Int */;
-val* var47 /* : ReduceAction23 */;
-long var48 /* : Int */;
-val* var49 /* : ReduceAction24 */;
-long var50 /* : Int */;
-val* var51 /* : ReduceAction25 */;
-long var52 /* : Int */;
-val* var53 /* : ReduceAction26 */;
-long var54 /* : Int */;
-val* var55 /* : ReduceAction27 */;
-long var56 /* : Int */;
-val* var57 /* : ReduceAction28 */;
-long var58 /* : Int */;
-val* var59 /* : ReduceAction29 */;
-long var60 /* : Int */;
-val* var61 /* : ReduceAction30 */;
-long var62 /* : Int */;
-val* var63 /* : ReduceAction31 */;
-long var64 /* : Int */;
-val* var65 /* : ReduceAction32 */;
-long var66 /* : Int */;
-val* var67 /* : ReduceAction33 */;
-long var68 /* : Int */;
-val* var69 /* : ReduceAction34 */;
-long var70 /* : Int */;
-val* var71 /* : ReduceAction35 */;
-long var72 /* : Int */;
-val* var73 /* : ReduceAction36 */;
-long var74 /* : Int */;
-val* var75 /* : ReduceAction37 */;
-long var76 /* : Int */;
-val* var77 /* : ReduceAction38 */;
-long var78 /* : Int */;
-val* var79 /* : ReduceAction39 */;
-long var80 /* : Int */;
-val* var81 /* : ReduceAction40 */;
-long var82 /* : Int */;
-val* var83 /* : ReduceAction41 */;
-long var84 /* : Int */;
-val* var85 /* : ReduceAction42 */;
-long var86 /* : Int */;
-val* var87 /* : ReduceAction43 */;
-long var88 /* : Int */;
-val* var89 /* : ReduceAction44 */;
-long var90 /* : Int */;
-val* var91 /* : ReduceAction45 */;
-long var92 /* : Int */;
-val* var93 /* : ReduceAction46 */;
-long var94 /* : Int */;
-val* var95 /* : ReduceAction47 */;
-long var96 /* : Int */;
-val* var97 /* : ReduceAction48 */;
-long var98 /* : Int */;
-val* var99 /* : ReduceAction49 */;
-long var100 /* : Int */;
-val* var101 /* : ReduceAction50 */;
-long var102 /* : Int */;
-val* var103 /* : ReduceAction51 */;
-long var104 /* : Int */;
-val* var105 /* : ReduceAction52 */;
-long var106 /* : Int */;
-val* var107 /* : ReduceAction53 */;
-long var108 /* : Int */;
-val* var109 /* : ReduceAction54 */;
-long var110 /* : Int */;
-val* var111 /* : ReduceAction55 */;
-long var112 /* : Int */;
-val* var113 /* : ReduceAction56 */;
-long var114 /* : Int */;
-val* var115 /* : ReduceAction57 */;
-long var116 /* : Int */;
-val* var117 /* : ReduceAction58 */;
-long var118 /* : Int */;
-val* var119 /* : ReduceAction59 */;
-long var120 /* : Int */;
-val* var121 /* : ReduceAction60 */;
-long var122 /* : Int */;
-val* var123 /* : ReduceAction61 */;
-long var124 /* : Int */;
-val* var125 /* : ReduceAction62 */;
-long var126 /* : Int */;
-val* var127 /* : ReduceAction63 */;
-long var128 /* : Int */;
-val* var129 /* : ReduceAction64 */;
-long var130 /* : Int */;
-val* var131 /* : ReduceAction65 */;
-long var132 /* : Int */;
-val* var133 /* : ReduceAction66 */;
-long var134 /* : Int */;
-val* var135 /* : ReduceAction67 */;
-long var136 /* : Int */;
-val* var137 /* : ReduceAction68 */;
-long var138 /* : Int */;
-val* var139 /* : ReduceAction69 */;
-long var140 /* : Int */;
-val* var141 /* : ReduceAction70 */;
-long var142 /* : Int */;
-val* var143 /* : ReduceAction71 */;
-long var144 /* : Int */;
-val* var145 /* : ReduceAction71 */;
-long var146 /* : Int */;
-val* var147 /* : ReduceAction73 */;
-long var148 /* : Int */;
-val* var149 /* : ReduceAction74 */;
-long var150 /* : Int */;
-val* var151 /* : ReduceAction75 */;
-long var152 /* : Int */;
-val* var153 /* : ReduceAction76 */;
-long var154 /* : Int */;
-val* var155 /* : ReduceAction75 */;
-long var156 /* : Int */;
-val* var157 /* : ReduceAction78 */;
-long var158 /* : Int */;
-val* var159 /* : ReduceAction79 */;
-long var160 /* : Int */;
-val* var161 /* : ReduceAction78 */;
-long var162 /* : Int */;
-val* var163 /* : ReduceAction81 */;
-long var164 /* : Int */;
-val* var165 /* : ReduceAction82 */;
-long var166 /* : Int */;
-val* var167 /* : ReduceAction83 */;
-long var168 /* : Int */;
-val* var169 /* : ReduceAction84 */;
-long var170 /* : Int */;
-val* var171 /* : ReduceAction83 */;
-long var172 /* : Int */;
-val* var173 /* : ReduceAction86 */;
-long var174 /* : Int */;
-val* var175 /* : ReduceAction87 */;
-long var176 /* : Int */;
-val* var177 /* : ReduceAction86 */;
-long var178 /* : Int */;
-val* var179 /* : ReduceAction89 */;
-long var180 /* : Int */;
-val* var181 /* : ReduceAction90 */;
-long var182 /* : Int */;
-val* var183 /* : ReduceAction91 */;
-long var184 /* : Int */;
-val* var185 /* : ReduceAction92 */;
-long var186 /* : Int */;
-val* var187 /* : ReduceAction91 */;
-long var188 /* : Int */;
-val* var189 /* : ReduceAction94 */;
-long var190 /* : Int */;
-val* var191 /* : ReduceAction95 */;
-long var192 /* : Int */;
-val* var193 /* : ReduceAction94 */;
-long var194 /* : Int */;
-val* var195 /* : ReduceAction97 */;
-long var196 /* : Int */;
-val* var197 /* : ReduceAction98 */;
-long var198 /* : Int */;
-val* var199 /* : ReduceAction99 */;
-long var200 /* : Int */;
-val* var201 /* : ReduceAction100 */;
-long var202 /* : Int */;
-val* var203 /* : ReduceAction99 */;
-long var204 /* : Int */;
-val* var205 /* : ReduceAction102 */;
-long var206 /* : Int */;
-val* var207 /* : ReduceAction103 */;
-long var208 /* : Int */;
-val* var209 /* : ReduceAction102 */;
-long var210 /* : Int */;
-val* var211 /* : ReduceAction105 */;
-long var212 /* : Int */;
-val* var213 /* : ReduceAction106 */;
-long var214 /* : Int */;
-val* var215 /* : ReduceAction107 */;
-long var216 /* : Int */;
-val* var217 /* : ReduceAction108 */;
-long var218 /* : Int */;
-val* var219 /* : ReduceAction107 */;
-long var220 /* : Int */;
-val* var221 /* : ReduceAction110 */;
-long var222 /* : Int */;
-val* var223 /* : ReduceAction111 */;
-long var224 /* : Int */;
-val* var225 /* : ReduceAction110 */;
-long var226 /* : Int */;
-val* var227 /* : ReduceAction113 */;
-long var228 /* : Int */;
-val* var229 /* : ReduceAction114 */;
-long var230 /* : Int */;
-val* var231 /* : ReduceAction115 */;
-long var232 /* : Int */;
-val* var233 /* : ReduceAction116 */;
-long var234 /* : Int */;
-val* var235 /* : ReduceAction115 */;
-long var236 /* : Int */;
-val* var237 /* : ReduceAction118 */;
-long var238 /* : Int */;
-val* var239 /* : ReduceAction119 */;
-long var240 /* : Int */;
-val* var241 /* : ReduceAction118 */;
-long var242 /* : Int */;
-val* var243 /* : ReduceAction121 */;
-long var244 /* : Int */;
-val* var245 /* : ReduceAction122 */;
-long var246 /* : Int */;
-val* var247 /* : ReduceAction123 */;
-long var248 /* : Int */;
-val* var249 /* : ReduceAction124 */;
-long var250 /* : Int */;
-val* var251 /* : ReduceAction123 */;
-long var252 /* : Int */;
-val* var253 /* : ReduceAction126 */;
-long var254 /* : Int */;
-val* var255 /* : ReduceAction127 */;
-long var256 /* : Int */;
-val* var257 /* : ReduceAction126 */;
-long var258 /* : Int */;
-val* var259 /* : ReduceAction129 */;
-long var260 /* : Int */;
-val* var261 /* : ReduceAction130 */;
-long var262 /* : Int */;
-val* var263 /* : ReduceAction131 */;
-long var264 /* : Int */;
-val* var265 /* : ReduceAction132 */;
-long var266 /* : Int */;
-val* var267 /* : ReduceAction131 */;
-long var268 /* : Int */;
-val* var269 /* : ReduceAction134 */;
-long var270 /* : Int */;
-val* var271 /* : ReduceAction135 */;
-long var272 /* : Int */;
-val* var273 /* : ReduceAction134 */;
-long var274 /* : Int */;
-val* var275 /* : ReduceAction137 */;
-long var276 /* : Int */;
-val* var277 /* : ReduceAction138 */;
-long var278 /* : Int */;
-val* var279 /* : ReduceAction139 */;
-long var280 /* : Int */;
-val* var281 /* : ReduceAction140 */;
-long var282 /* : Int */;
-val* var283 /* : ReduceAction139 */;
-long var284 /* : Int */;
-val* var285 /* : ReduceAction142 */;
-long var286 /* : Int */;
-val* var287 /* : ReduceAction143 */;
-long var288 /* : Int */;
-val* var289 /* : ReduceAction142 */;
-long var290 /* : Int */;
-val* var291 /* : ReduceAction145 */;
-long var292 /* : Int */;
-val* var293 /* : ReduceAction146 */;
-long var294 /* : Int */;
-val* var295 /* : ReduceAction147 */;
-long var296 /* : Int */;
-val* var297 /* : ReduceAction148 */;
-long var298 /* : Int */;
-val* var299 /* : ReduceAction147 */;
-long var300 /* : Int */;
-val* var301 /* : ReduceAction150 */;
-long var302 /* : Int */;
-val* var303 /* : ReduceAction151 */;
-long var304 /* : Int */;
-val* var305 /* : ReduceAction150 */;
-long var306 /* : Int */;
-val* var307 /* : ReduceAction153 */;
-long var308 /* : Int */;
-val* var309 /* : ReduceAction154 */;
-long var310 /* : Int */;
-val* var311 /* : ReduceAction155 */;
-long var312 /* : Int */;
-val* var313 /* : ReduceAction156 */;
-long var314 /* : Int */;
-val* var315 /* : ReduceAction155 */;
-long var316 /* : Int */;
-val* var317 /* : ReduceAction158 */;
-long var318 /* : Int */;
-val* var319 /* : ReduceAction159 */;
-long var320 /* : Int */;
-val* var321 /* : ReduceAction158 */;
-long var322 /* : Int */;
-val* var323 /* : ReduceAction161 */;
-long var324 /* : Int */;
-val* var325 /* : ReduceAction162 */;
-long var326 /* : Int */;
-val* var327 /* : ReduceAction163 */;
-long var328 /* : Int */;
-val* var329 /* : ReduceAction164 */;
-long var330 /* : Int */;
-val* var331 /* : ReduceAction163 */;
-long var332 /* : Int */;
-val* var333 /* : ReduceAction166 */;
-long var334 /* : Int */;
-val* var335 /* : ReduceAction167 */;
-long var336 /* : Int */;
-val* var337 /* : ReduceAction166 */;
-long var338 /* : Int */;
-val* var339 /* : ReduceAction169 */;
-long var340 /* : Int */;
-val* var341 /* : ReduceAction170 */;
-long var342 /* : Int */;
-val* var343 /* : ReduceAction171 */;
-long var344 /* : Int */;
-val* var345 /* : ReduceAction172 */;
-long var346 /* : Int */;
-val* var347 /* : ReduceAction171 */;
-long var348 /* : Int */;
-val* var349 /* : ReduceAction174 */;
-long var350 /* : Int */;
-val* var351 /* : ReduceAction175 */;
-long var352 /* : Int */;
-val* var353 /* : ReduceAction174 */;
-long var354 /* : Int */;
-val* var355 /* : ReduceAction177 */;
-long var356 /* : Int */;
-val* var357 /* : ReduceAction178 */;
-long var358 /* : Int */;
-val* var359 /* : ReduceAction179 */;
-long var360 /* : Int */;
-val* var361 /* : ReduceAction180 */;
-long var362 /* : Int */;
-val* var363 /* : ReduceAction179 */;
-long var364 /* : Int */;
-val* var365 /* : ReduceAction182 */;
-long var366 /* : Int */;
-val* var367 /* : ReduceAction183 */;
-long var368 /* : Int */;
-val* var369 /* : ReduceAction182 */;
-long var370 /* : Int */;
-val* var371 /* : ReduceAction185 */;
-long var372 /* : Int */;
-val* var373 /* : ReduceAction186 */;
-long var374 /* : Int */;
-val* var375 /* : ReduceAction187 */;
-long var376 /* : Int */;
-val* var377 /* : ReduceAction188 */;
-long var378 /* : Int */;
-val* var379 /* : ReduceAction187 */;
-long var380 /* : Int */;
-val* var381 /* : ReduceAction190 */;
-long var382 /* : Int */;
-val* var383 /* : ReduceAction191 */;
-long var384 /* : Int */;
-val* var385 /* : ReduceAction190 */;
-long var386 /* : Int */;
-val* var387 /* : ReduceAction193 */;
-long var388 /* : Int */;
-val* var389 /* : ReduceAction194 */;
-long var390 /* : Int */;
-val* var391 /* : ReduceAction195 */;
-long var392 /* : Int */;
-val* var393 /* : ReduceAction196 */;
-long var394 /* : Int */;
-val* var395 /* : ReduceAction195 */;
-long var396 /* : Int */;
-val* var397 /* : ReduceAction198 */;
-long var398 /* : Int */;
-val* var399 /* : ReduceAction199 */;
-long var400 /* : Int */;
-val* var401 /* : ReduceAction198 */;
-long var402 /* : Int */;
-val* var403 /* : ReduceAction201 */;
-long var404 /* : Int */;
-val* var405 /* : ReduceAction202 */;
-long var406 /* : Int */;
-val* var407 /* : ReduceAction203 */;
-long var408 /* : Int */;
-val* var409 /* : ReduceAction204 */;
-long var410 /* : Int */;
-val* var411 /* : ReduceAction203 */;
-long var412 /* : Int */;
-val* var413 /* : ReduceAction206 */;
-long var414 /* : Int */;
-val* var415 /* : ReduceAction207 */;
-long var416 /* : Int */;
-val* var417 /* : ReduceAction206 */;
-long var418 /* : Int */;
-val* var419 /* : ReduceAction209 */;
-long var420 /* : Int */;
-val* var421 /* : ReduceAction210 */;
-long var422 /* : Int */;
-val* var423 /* : ReduceAction211 */;
-long var424 /* : Int */;
-val* var425 /* : ReduceAction212 */;
-long var426 /* : Int */;
-val* var427 /* : ReduceAction211 */;
-long var428 /* : Int */;
-val* var429 /* : ReduceAction214 */;
-long var430 /* : Int */;
-val* var431 /* : ReduceAction215 */;
-long var432 /* : Int */;
-val* var433 /* : ReduceAction214 */;
-long var434 /* : Int */;
-val* var435 /* : ReduceAction217 */;
-long var436 /* : Int */;
-val* var437 /* : ReduceAction218 */;
-long var438 /* : Int */;
-val* var439 /* : ReduceAction219 */;
-long var440 /* : Int */;
-val* var441 /* : ReduceAction220 */;
-long var442 /* : Int */;
-val* var443 /* : ReduceAction219 */;
-long var444 /* : Int */;
-val* var445 /* : ReduceAction222 */;
-long var446 /* : Int */;
-val* var447 /* : ReduceAction223 */;
-long var448 /* : Int */;
-val* var449 /* : ReduceAction222 */;
-long var450 /* : Int */;
-val* var451 /* : ReduceAction225 */;
-long var452 /* : Int */;
-val* var453 /* : ReduceAction226 */;
-long var454 /* : Int */;
-val* var455 /* : ReduceAction227 */;
-long var456 /* : Int */;
-val* var457 /* : ReduceAction228 */;
-long var458 /* : Int */;
-val* var459 /* : ReduceAction227 */;
-long var460 /* : Int */;
-val* var461 /* : ReduceAction230 */;
-long var462 /* : Int */;
-val* var463 /* : ReduceAction231 */;
-long var464 /* : Int */;
-val* var465 /* : ReduceAction230 */;
-long var466 /* : Int */;
-val* var467 /* : ReduceAction233 */;
-long var468 /* : Int */;
-val* var469 /* : ReduceAction234 */;
-long var470 /* : Int */;
-val* var471 /* : ReduceAction235 */;
-long var472 /* : Int */;
-val* var473 /* : ReduceAction236 */;
-long var474 /* : Int */;
-val* var475 /* : ReduceAction235 */;
-long var476 /* : Int */;
-val* var477 /* : ReduceAction238 */;
-long var478 /* : Int */;
-val* var479 /* : ReduceAction239 */;
-long var480 /* : Int */;
-val* var481 /* : ReduceAction238 */;
-long var482 /* : Int */;
-val* var483 /* : ReduceAction241 */;
-long var484 /* : Int */;
-val* var485 /* : ReduceAction242 */;
-long var486 /* : Int */;
-val* var487 /* : ReduceAction243 */;
-long var488 /* : Int */;
-val* var489 /* : ReduceAction244 */;
-long var490 /* : Int */;
-val* var491 /* : ReduceAction243 */;
-long var492 /* : Int */;
-val* var493 /* : ReduceAction246 */;
-long var494 /* : Int */;
-val* var495 /* : ReduceAction247 */;
-long var496 /* : Int */;
-val* var497 /* : ReduceAction246 */;
-long var498 /* : Int */;
-val* var499 /* : ReduceAction249 */;
-long var500 /* : Int */;
-val* var501 /* : ReduceAction250 */;
-long var502 /* : Int */;
-val* var503 /* : ReduceAction251 */;
-long var504 /* : Int */;
-val* var505 /* : ReduceAction252 */;
-long var506 /* : Int */;
-val* var507 /* : ReduceAction251 */;
-long var508 /* : Int */;
-val* var509 /* : ReduceAction254 */;
-long var510 /* : Int */;
-val* var511 /* : ReduceAction255 */;
-long var512 /* : Int */;
-val* var513 /* : ReduceAction254 */;
-long var514 /* : Int */;
-val* var515 /* : ReduceAction257 */;
-long var516 /* : Int */;
-val* var517 /* : ReduceAction258 */;
-long var518 /* : Int */;
-val* var519 /* : ReduceAction259 */;
-long var520 /* : Int */;
-val* var521 /* : ReduceAction260 */;
-long var522 /* : Int */;
-val* var523 /* : ReduceAction259 */;
-long var524 /* : Int */;
-val* var525 /* : ReduceAction262 */;
-long var526 /* : Int */;
-val* var527 /* : ReduceAction263 */;
-long var528 /* : Int */;
-val* var529 /* : ReduceAction262 */;
-long var530 /* : Int */;
-val* var531 /* : ReduceAction265 */;
-long var532 /* : Int */;
-val* var533 /* : ReduceAction266 */;
-long var534 /* : Int */;
-val* var535 /* : ReduceAction267 */;
-long var536 /* : Int */;
-val* var537 /* : ReduceAction268 */;
-long var538 /* : Int */;
-val* var539 /* : ReduceAction267 */;
-long var540 /* : Int */;
-val* var541 /* : ReduceAction270 */;
-long var542 /* : Int */;
-val* var543 /* : ReduceAction271 */;
-long var544 /* : Int */;
-val* var545 /* : ReduceAction270 */;
-long var546 /* : Int */;
-val* var547 /* : ReduceAction273 */;
-long var548 /* : Int */;
-val* var549 /* : ReduceAction274 */;
-long var550 /* : Int */;
-val* var551 /* : ReduceAction275 */;
-long var552 /* : Int */;
-val* var553 /* : ReduceAction276 */;
-long var554 /* : Int */;
-val* var555 /* : ReduceAction275 */;
-long var556 /* : Int */;
-val* var557 /* : ReduceAction278 */;
-long var558 /* : Int */;
-val* var559 /* : ReduceAction279 */;
-long var560 /* : Int */;
-val* var561 /* : ReduceAction278 */;
-long var562 /* : Int */;
-val* var563 /* : ReduceAction281 */;
-long var564 /* : Int */;
-val* var565 /* : ReduceAction282 */;
-long var566 /* : Int */;
-val* var567 /* : ReduceAction283 */;
-long var568 /* : Int */;
-val* var569 /* : ReduceAction284 */;
-long var570 /* : Int */;
-val* var571 /* : ReduceAction283 */;
-long var572 /* : Int */;
-val* var573 /* : ReduceAction286 */;
-long var574 /* : Int */;
-val* var575 /* : ReduceAction287 */;
-long var576 /* : Int */;
-val* var577 /* : ReduceAction286 */;
-long var578 /* : Int */;
-val* var579 /* : ReduceAction289 */;
-long var580 /* : Int */;
-val* var581 /* : ReduceAction290 */;
-long var582 /* : Int */;
-val* var583 /* : ReduceAction291 */;
-long var584 /* : Int */;
-val* var585 /* : ReduceAction292 */;
-long var586 /* : Int */;
-val* var587 /* : ReduceAction291 */;
-long var588 /* : Int */;
-val* var589 /* : ReduceAction294 */;
-long var590 /* : Int */;
-val* var591 /* : ReduceAction295 */;
-long var592 /* : Int */;
-val* var593 /* : ReduceAction294 */;
-long var594 /* : Int */;
-val* var595 /* : ReduceAction297 */;
-long var596 /* : Int */;
-val* var597 /* : ReduceAction298 */;
-long var598 /* : Int */;
-val* var599 /* : ReduceAction299 */;
-long var600 /* : Int */;
-val* var601 /* : ReduceAction300 */;
-long var602 /* : Int */;
-val* var603 /* : ReduceAction299 */;
-long var604 /* : Int */;
-val* var605 /* : ReduceAction302 */;
-long var606 /* : Int */;
-val* var607 /* : ReduceAction303 */;
-long var608 /* : Int */;
-val* var609 /* : ReduceAction302 */;
-long var610 /* : Int */;
-val* var611 /* : ReduceAction305 */;
-long var612 /* : Int */;
-val* var613 /* : ReduceAction306 */;
-long var614 /* : Int */;
-val* var615 /* : ReduceAction307 */;
-long var616 /* : Int */;
-val* var617 /* : ReduceAction308 */;
-long var618 /* : Int */;
-val* var619 /* : ReduceAction307 */;
-long var620 /* : Int */;
-val* var621 /* : ReduceAction310 */;
-long var622 /* : Int */;
-val* var623 /* : ReduceAction311 */;
-long var624 /* : Int */;
-val* var625 /* : ReduceAction310 */;
-long var626 /* : Int */;
-val* var627 /* : ReduceAction313 */;
-long var628 /* : Int */;
-val* var629 /* : ReduceAction314 */;
-long var630 /* : Int */;
-val* var631 /* : ReduceAction315 */;
-long var632 /* : Int */;
-val* var633 /* : ReduceAction316 */;
-long var634 /* : Int */;
-val* var635 /* : ReduceAction315 */;
-long var636 /* : Int */;
-val* var637 /* : ReduceAction318 */;
-long var638 /* : Int */;
-val* var639 /* : ReduceAction319 */;
-long var640 /* : Int */;
-val* var641 /* : ReduceAction318 */;
-long var642 /* : Int */;
-val* var643 /* : ReduceAction321 */;
-long var644 /* : Int */;
-val* var645 /* : ReduceAction322 */;
-long var646 /* : Int */;
-val* var647 /* : ReduceAction323 */;
-long var648 /* : Int */;
-val* var649 /* : ReduceAction324 */;
-long var650 /* : Int */;
-val* var651 /* : ReduceAction323 */;
-long var652 /* : Int */;
-val* var653 /* : ReduceAction326 */;
-long var654 /* : Int */;
-val* var655 /* : ReduceAction327 */;
-long var656 /* : Int */;
-val* var657 /* : ReduceAction326 */;
-long var658 /* : Int */;
-val* var659 /* : ReduceAction329 */;
-long var660 /* : Int */;
-val* var661 /* : ReduceAction330 */;
-long var662 /* : Int */;
-val* var663 /* : ReduceAction331 */;
-long var664 /* : Int */;
-val* var665 /* : ReduceAction332 */;
-long var666 /* : Int */;
-val* var667 /* : ReduceAction333 */;
-long var668 /* : Int */;
-val* var669 /* : ReduceAction334 */;
-long var670 /* : Int */;
-val* var671 /* : ReduceAction335 */;
-long var672 /* : Int */;
-val* var673 /* : ReduceAction336 */;
-long var674 /* : Int */;
-val* var675 /* : ReduceAction337 */;
-long var676 /* : Int */;
-val* var677 /* : ReduceAction338 */;
-long var678 /* : Int */;
-val* var679 /* : ReduceAction339 */;
-long var680 /* : Int */;
-val* var681 /* : ReduceAction340 */;
-long var682 /* : Int */;
-val* var683 /* : ReduceAction341 */;
-long var684 /* : Int */;
-val* var685 /* : ReduceAction342 */;
-long var686 /* : Int */;
-val* var687 /* : ReduceAction343 */;
-long var688 /* : Int */;
-val* var689 /* : ReduceAction344 */;
-long var690 /* : Int */;
-val* var691 /* : ReduceAction345 */;
-long var692 /* : Int */;
-val* var693 /* : ReduceAction346 */;
-long var694 /* : Int */;
-val* var695 /* : ReduceAction347 */;
-long var696 /* : Int */;
-val* var697 /* : ReduceAction348 */;
-long var698 /* : Int */;
-val* var699 /* : ReduceAction349 */;
-long var700 /* : Int */;
-val* var701 /* : ReduceAction350 */;
-long var702 /* : Int */;
-val* var703 /* : ReduceAction351 */;
-long var704 /* : Int */;
-val* var705 /* : ReduceAction352 */;
-long var706 /* : Int */;
-val* var707 /* : ReduceAction353 */;
-long var708 /* : Int */;
-val* var709 /* : ReduceAction354 */;
-long var710 /* : Int */;
-val* var711 /* : ReduceAction355 */;
-long var712 /* : Int */;
-val* var713 /* : ReduceAction356 */;
-long var714 /* : Int */;
-val* var715 /* : ReduceAction357 */;
-long var716 /* : Int */;
-val* var717 /* : ReduceAction358 */;
-long var718 /* : Int */;
-val* var719 /* : ReduceAction359 */;
-long var720 /* : Int */;
-val* var721 /* : ReduceAction360 */;
-long var722 /* : Int */;
-val* var723 /* : ReduceAction361 */;
-long var724 /* : Int */;
-val* var725 /* : ReduceAction362 */;
-long var726 /* : Int */;
-val* var727 /* : ReduceAction363 */;
-long var728 /* : Int */;
-val* var729 /* : ReduceAction364 */;
-long var730 /* : Int */;
-val* var731 /* : ReduceAction365 */;
-long var732 /* : Int */;
-val* var733 /* : ReduceAction366 */;
-long var734 /* : Int */;
-val* var735 /* : ReduceAction367 */;
-long var736 /* : Int */;
-val* var737 /* : ReduceAction368 */;
-long var738 /* : Int */;
-val* var739 /* : ReduceAction369 */;
-long var740 /* : Int */;
-val* var741 /* : ReduceAction370 */;
-long var742 /* : Int */;
-val* var743 /* : ReduceAction371 */;
-long var744 /* : Int */;
-val* var745 /* : ReduceAction372 */;
-long var746 /* : Int */;
-val* var747 /* : ReduceAction373 */;
-long var748 /* : Int */;
-val* var749 /* : ReduceAction374 */;
-long var750 /* : Int */;
-val* var751 /* : ReduceAction375 */;
-long var752 /* : Int */;
-val* var753 /* : ReduceAction376 */;
-long var754 /* : Int */;
-val* var755 /* : ReduceAction377 */;
-long var756 /* : Int */;
-val* var757 /* : ReduceAction378 */;
-long var758 /* : Int */;
-val* var759 /* : ReduceAction379 */;
-long var760 /* : Int */;
-val* var761 /* : ReduceAction380 */;
-long var762 /* : Int */;
-val* var763 /* : ReduceAction381 */;
-long var764 /* : Int */;
-val* var765 /* : ReduceAction382 */;
-long var766 /* : Int */;
-val* var767 /* : ReduceAction383 */;
-long var768 /* : Int */;
-val* var769 /* : ReduceAction384 */;
-long var770 /* : Int */;
-val* var771 /* : ReduceAction385 */;
-long var772 /* : Int */;
-val* var773 /* : ReduceAction386 */;
-long var774 /* : Int */;
-val* var775 /* : ReduceAction387 */;
-long var776 /* : Int */;
-val* var777 /* : ReduceAction388 */;
-long var778 /* : Int */;
-val* var779 /* : ReduceAction389 */;
-long var780 /* : Int */;
-val* var781 /* : ReduceAction390 */;
-long var782 /* : Int */;
-val* var783 /* : ReduceAction391 */;
-long var784 /* : Int */;
-val* var785 /* : ReduceAction392 */;
-long var786 /* : Int */;
-val* var787 /* : ReduceAction393 */;
-long var788 /* : Int */;
-val* var789 /* : ReduceAction394 */;
-long var790 /* : Int */;
-val* var791 /* : ReduceAction395 */;
-long var792 /* : Int */;
-val* var793 /* : ReduceAction396 */;
-long var794 /* : Int */;
-val* var795 /* : ReduceAction397 */;
-long var796 /* : Int */;
-val* var797 /* : ReduceAction398 */;
-long var798 /* : Int */;
-val* var799 /* : ReduceAction399 */;
-long var800 /* : Int */;
-val* var801 /* : ReduceAction400 */;
-long var802 /* : Int */;
-val* var803 /* : ReduceAction401 */;
-long var804 /* : Int */;
-val* var805 /* : ReduceAction402 */;
-long var806 /* : Int */;
-val* var807 /* : ReduceAction403 */;
-long var808 /* : Int */;
-val* var809 /* : ReduceAction404 */;
-long var810 /* : Int */;
-val* var811 /* : ReduceAction405 */;
-long var812 /* : Int */;
-val* var813 /* : ReduceAction406 */;
-long var814 /* : Int */;
-val* var815 /* : ReduceAction407 */;
-long var816 /* : Int */;
-val* var817 /* : ReduceAction408 */;
-long var818 /* : Int */;
-val* var819 /* : ReduceAction409 */;
-long var820 /* : Int */;
-val* var821 /* : ReduceAction410 */;
-long var822 /* : Int */;
-val* var823 /* : ReduceAction411 */;
-long var824 /* : Int */;
-val* var825 /* : ReduceAction412 */;
-long var826 /* : Int */;
-val* var827 /* : ReduceAction413 */;
-long var828 /* : Int */;
-val* var829 /* : ReduceAction414 */;
-long var830 /* : Int */;
-val* var831 /* : ReduceAction415 */;
-long var832 /* : Int */;
-val* var833 /* : ReduceAction416 */;
-long var834 /* : Int */;
-val* var835 /* : ReduceAction417 */;
-long var836 /* : Int */;
-val* var837 /* : ReduceAction418 */;
-long var838 /* : Int */;
-val* var839 /* : ReduceAction419 */;
-long var840 /* : Int */;
-val* var841 /* : ReduceAction420 */;
-long var842 /* : Int */;
-val* var843 /* : ReduceAction421 */;
-long var844 /* : Int */;
-val* var845 /* : ReduceAction422 */;
-long var846 /* : Int */;
-val* var847 /* : ReduceAction423 */;
-long var848 /* : Int */;
-val* var849 /* : ReduceAction424 */;
-long var850 /* : Int */;
-val* var851 /* : ReduceAction425 */;
-long var852 /* : Int */;
-val* var853 /* : ReduceAction426 */;
-long var854 /* : Int */;
-val* var855 /* : ReduceAction427 */;
-long var856 /* : Int */;
-val* var857 /* : ReduceAction428 */;
-long var858 /* : Int */;
-val* var859 /* : ReduceAction429 */;
-long var860 /* : Int */;
-val* var861 /* : ReduceAction430 */;
-long var862 /* : Int */;
-val* var863 /* : ReduceAction431 */;
-long var864 /* : Int */;
-val* var865 /* : ReduceAction432 */;
-long var866 /* : Int */;
-val* var867 /* : ReduceAction433 */;
-long var868 /* : Int */;
-val* var869 /* : ReduceAction434 */;
-long var870 /* : Int */;
-val* var871 /* : ReduceAction435 */;
-long var872 /* : Int */;
-val* var873 /* : ReduceAction436 */;
-long var874 /* : Int */;
-val* var875 /* : ReduceAction437 */;
-long var876 /* : Int */;
-val* var877 /* : ReduceAction438 */;
-long var878 /* : Int */;
-val* var879 /* : ReduceAction439 */;
-long var880 /* : Int */;
-val* var881 /* : ReduceAction440 */;
-long var882 /* : Int */;
-val* var883 /* : ReduceAction441 */;
-long var884 /* : Int */;
-val* var885 /* : ReduceAction442 */;
-long var886 /* : Int */;
-val* var887 /* : ReduceAction443 */;
-long var888 /* : Int */;
-val* var889 /* : ReduceAction444 */;
-long var890 /* : Int */;
-val* var891 /* : ReduceAction445 */;
-long var892 /* : Int */;
-val* var893 /* : ReduceAction446 */;
-long var894 /* : Int */;
-val* var895 /* : ReduceAction447 */;
-long var896 /* : Int */;
-val* var897 /* : ReduceAction448 */;
-long var898 /* : Int */;
-val* var899 /* : ReduceAction449 */;
-long var900 /* : Int */;
-val* var901 /* : ReduceAction450 */;
-long var902 /* : Int */;
-val* var903 /* : ReduceAction451 */;
-long var904 /* : Int */;
-val* var905 /* : ReduceAction452 */;
-long var906 /* : Int */;
-val* var907 /* : ReduceAction453 */;
-long var908 /* : Int */;
-val* var909 /* : ReduceAction454 */;
-long var910 /* : Int */;
-val* var911 /* : ReduceAction455 */;
-long var912 /* : Int */;
-val* var913 /* : ReduceAction456 */;
-long var914 /* : Int */;
-val* var915 /* : ReduceAction457 */;
-long var916 /* : Int */;
-val* var917 /* : ReduceAction458 */;
-long var918 /* : Int */;
-val* var919 /* : ReduceAction459 */;
-long var920 /* : Int */;
-val* var921 /* : ReduceAction460 */;
-long var922 /* : Int */;
-val* var923 /* : ReduceAction461 */;
-long var924 /* : Int */;
-val* var925 /* : ReduceAction462 */;
-long var926 /* : Int */;
-val* var927 /* : ReduceAction463 */;
-long var928 /* : Int */;
-val* var929 /* : ReduceAction464 */;
-long var930 /* : Int */;
-val* var931 /* : ReduceAction465 */;
-long var932 /* : Int */;
-val* var933 /* : ReduceAction466 */;
-long var934 /* : Int */;
-val* var935 /* : ReduceAction467 */;
-long var936 /* : Int */;
-val* var937 /* : ReduceAction468 */;
-long var938 /* : Int */;
-val* var939 /* : ReduceAction469 */;
-long var940 /* : Int */;
-val* var941 /* : ReduceAction470 */;
-long var942 /* : Int */;
-val* var943 /* : ReduceAction471 */;
-long var944 /* : Int */;
-val* var945 /* : ReduceAction472 */;
-long var946 /* : Int */;
-val* var947 /* : ReduceAction473 */;
-long var948 /* : Int */;
-val* var949 /* : ReduceAction474 */;
-long var950 /* : Int */;
-val* var951 /* : ReduceAction475 */;
-long var952 /* : Int */;
-val* var953 /* : ReduceAction476 */;
-long var954 /* : Int */;
-val* var955 /* : ReduceAction477 */;
-long var956 /* : Int */;
-val* var957 /* : ReduceAction478 */;
-long var958 /* : Int */;
-val* var959 /* : ReduceAction479 */;
-long var960 /* : Int */;
-val* var961 /* : ReduceAction480 */;
-long var962 /* : Int */;
-val* var963 /* : ReduceAction481 */;
-long var964 /* : Int */;
-val* var965 /* : ReduceAction482 */;
-long var966 /* : Int */;
-val* var967 /* : ReduceAction483 */;
-long var968 /* : Int */;
-val* var969 /* : ReduceAction484 */;
-long var970 /* : Int */;
-val* var971 /* : ReduceAction485 */;
-long var972 /* : Int */;
-val* var973 /* : ReduceAction486 */;
-long var974 /* : Int */;
-val* var975 /* : ReduceAction487 */;
-long var976 /* : Int */;
-val* var977 /* : ReduceAction488 */;
-long var978 /* : Int */;
-val* var979 /* : ReduceAction489 */;
-long var980 /* : Int */;
-val* var981 /* : ReduceAction490 */;
-long var982 /* : Int */;
-val* var983 /* : ReduceAction491 */;
-long var984 /* : Int */;
-val* var985 /* : ReduceAction492 */;
-long var986 /* : Int */;
-val* var987 /* : ReduceAction493 */;
-long var988 /* : Int */;
-val* var989 /* : ReduceAction494 */;
-long var990 /* : Int */;
-val* var991 /* : ReduceAction495 */;
-long var992 /* : Int */;
-val* var993 /* : ReduceAction496 */;
-long var994 /* : Int */;
-val* var995 /* : ReduceAction497 */;
-long var996 /* : Int */;
-val* var997 /* : ReduceAction498 */;
-long var998 /* : Int */;
-val* var999 /* : ReduceAction499 */;
-long var1000 /* : Int */;
-val* var1001 /* : ReduceAction500 */;
-long var1002 /* : Int */;
-val* var1003 /* : ReduceAction501 */;
-long var1004 /* : Int */;
-val* var1005 /* : ReduceAction502 */;
-long var1006 /* : Int */;
-val* var1007 /* : ReduceAction503 */;
-long var1008 /* : Int */;
-val* var1009 /* : ReduceAction504 */;
-long var1010 /* : Int */;
-val* var1011 /* : ReduceAction505 */;
-long var1012 /* : Int */;
-val* var1013 /* : ReduceAction506 */;
-long var1014 /* : Int */;
-val* var1015 /* : ReduceAction507 */;
-long var1016 /* : Int */;
-val* var1017 /* : ReduceAction508 */;
-long var1018 /* : Int */;
-val* var1019 /* : ReduceAction509 */;
-long var1020 /* : Int */;
-val* var1021 /* : ReduceAction510 */;
-long var1022 /* : Int */;
-val* var1023 /* : ReduceAction511 */;
-long var1024 /* : Int */;
-val* var1025 /* : ReduceAction512 */;
-long var1026 /* : Int */;
-val* var1027 /* : ReduceAction513 */;
-long var1028 /* : Int */;
-val* var1029 /* : ReduceAction514 */;
-long var1030 /* : Int */;
-val* var1031 /* : ReduceAction513 */;
-long var1032 /* : Int */;
-val* var1033 /* : ReduceAction516 */;
-long var1034 /* : Int */;
-val* var1035 /* : ReduceAction517 */;
-long var1036 /* : Int */;
-val* var1037 /* : ReduceAction518 */;
-long var1038 /* : Int */;
-val* var1039 /* : ReduceAction519 */;
-long var1040 /* : Int */;
-val* var1041 /* : ReduceAction520 */;
-long var1042 /* : Int */;
-val* var1043 /* : ReduceAction521 */;
-long var1044 /* : Int */;
-val* var1045 /* : ReduceAction522 */;
-long var1046 /* : Int */;
-val* var1047 /* : ReduceAction523 */;
-long var1048 /* : Int */;
-val* var1049 /* : ReduceAction524 */;
-long var1050 /* : Int */;
-val* var1051 /* : ReduceAction525 */;
-long var1052 /* : Int */;
-val* var1053 /* : ReduceAction526 */;
-long var1054 /* : Int */;
-val* var1055 /* : ReduceAction527 */;
-long var1056 /* : Int */;
-val* var1057 /* : ReduceAction528 */;
-long var1058 /* : Int */;
-val* var1059 /* : ReduceAction529 */;
-long var1060 /* : Int */;
-val* var1061 /* : ReduceAction530 */;
-long var1062 /* : Int */;
-val* var1063 /* : ReduceAction531 */;
-long var1064 /* : Int */;
-val* var1065 /* : ReduceAction532 */;
-long var1066 /* : Int */;
-val* var1067 /* : ReduceAction533 */;
-long var1068 /* : Int */;
-val* var1069 /* : ReduceAction534 */;
-long var1070 /* : Int */;
-val* var1071 /* : ReduceAction535 */;
-long var1072 /* : Int */;
-val* var1073 /* : ReduceAction536 */;
-long var1074 /* : Int */;
-val* var1075 /* : ReduceAction537 */;
-long var1076 /* : Int */;
-val* var1077 /* : ReduceAction538 */;
-long var1078 /* : Int */;
-val* var1079 /* : ReduceAction539 */;
-long var1080 /* : Int */;
-val* var1081 /* : ReduceAction540 */;
-long var1082 /* : Int */;
-val* var1083 /* : ReduceAction541 */;
-long var1084 /* : Int */;
-val* var1085 /* : ReduceAction542 */;
-long var1086 /* : Int */;
-val* var1087 /* : ReduceAction543 */;
-long var1088 /* : Int */;
-val* var1089 /* : ReduceAction544 */;
-long var1090 /* : Int */;
-val* var1091 /* : ReduceAction545 */;
-long var1092 /* : Int */;
-val* var1093 /* : ReduceAction546 */;
-long var1094 /* : Int */;
-val* var1095 /* : ReduceAction547 */;
-long var1096 /* : Int */;
-val* var1097 /* : ReduceAction548 */;
-long var1098 /* : Int */;
-val* var1099 /* : ReduceAction549 */;
-long var1100 /* : Int */;
-val* var1101 /* : ReduceAction550 */;
-long var1102 /* : Int */;
-val* var1103 /* : ReduceAction551 */;
-long var1104 /* : Int */;
-val* var1105 /* : ReduceAction552 */;
-long var1106 /* : Int */;
-val* var1107 /* : ReduceAction553 */;
-long var1108 /* : Int */;
-val* var1109 /* : ReduceAction554 */;
-long var1110 /* : Int */;
-val* var1111 /* : ReduceAction555 */;
-long var1112 /* : Int */;
-val* var1113 /* : ReduceAction556 */;
-long var1114 /* : Int */;
-val* var1115 /* : ReduceAction557 */;
-long var1116 /* : Int */;
-val* var1117 /* : ReduceAction558 */;
-long var1118 /* : Int */;
-val* var1119 /* : ReduceAction559 */;
-long var1120 /* : Int */;
-val* var1121 /* : ReduceAction560 */;
-long var1122 /* : Int */;
-val* var1123 /* : ReduceAction561 */;
-long var1124 /* : Int */;
-val* var1125 /* : ReduceAction562 */;
-long var1126 /* : Int */;
-val* var1127 /* : ReduceAction563 */;
-long var1128 /* : Int */;
-val* var1129 /* : ReduceAction564 */;
-long var1130 /* : Int */;
-val* var1131 /* : ReduceAction564 */;
-long var1132 /* : Int */;
-val* var1133 /* : ReduceAction566 */;
-long var1134 /* : Int */;
-val* var1135 /* : ReduceAction567 */;
-long var1136 /* : Int */;
-val* var1137 /* : ReduceAction568 */;
-long var1138 /* : Int */;
-val* var1139 /* : ReduceAction569 */;
-long var1140 /* : Int */;
-val* var1141 /* : ReduceAction570 */;
-long var1142 /* : Int */;
-val* var1143 /* : ReduceAction571 */;
-long var1144 /* : Int */;
-val* var1145 /* : ReduceAction572 */;
-long var1146 /* : Int */;
-val* var1147 /* : ReduceAction573 */;
-long var1148 /* : Int */;
-val* var1149 /* : ReduceAction574 */;
-long var1150 /* : Int */;
-val* var1151 /* : ReduceAction575 */;
-long var1152 /* : Int */;
-val* var1153 /* : ReduceAction576 */;
-long var1154 /* : Int */;
-val* var1155 /* : ReduceAction577 */;
-long var1156 /* : Int */;
-val* var1157 /* : ReduceAction578 */;
-long var1158 /* : Int */;
-val* var1159 /* : ReduceAction579 */;
-long var1160 /* : Int */;
-val* var1161 /* : ReduceAction580 */;
-long var1162 /* : Int */;
-val* var1163 /* : ReduceAction581 */;
-long var1164 /* : Int */;
-val* var1165 /* : ReduceAction582 */;
-long var1166 /* : Int */;
-val* var1167 /* : ReduceAction583 */;
-long var1168 /* : Int */;
-val* var1169 /* : ReduceAction584 */;
-long var1170 /* : Int */;
-val* var1171 /* : ReduceAction585 */;
-long var1172 /* : Int */;
-val* var1173 /* : ReduceAction586 */;
-long var1174 /* : Int */;
-val* var1175 /* : ReduceAction587 */;
-long var1176 /* : Int */;
-val* var1177 /* : ReduceAction588 */;
-long var1178 /* : Int */;
-val* var1179 /* : ReduceAction589 */;
-long var1180 /* : Int */;
-val* var1181 /* : ReduceAction590 */;
-long var1182 /* : Int */;
-val* var1183 /* : ReduceAction591 */;
-long var1184 /* : Int */;
-val* var1185 /* : ReduceAction591 */;
-long var1186 /* : Int */;
-val* var1187 /* : ReduceAction593 */;
-long var1188 /* : Int */;
-val* var1189 /* : ReduceAction594 */;
-long var1190 /* : Int */;
-val* var1191 /* : ReduceAction595 */;
-long var1192 /* : Int */;
-val* var1193 /* : ReduceAction596 */;
-long var1194 /* : Int */;
-val* var1195 /* : ReduceAction597 */;
-long var1196 /* : Int */;
-val* var1197 /* : ReduceAction598 */;
-long var1198 /* : Int */;
-val* var1199 /* : ReduceAction599 */;
-long var1200 /* : Int */;
-val* var1201 /* : ReduceAction600 */;
-long var1202 /* : Int */;
-val* var1203 /* : ReduceAction601 */;
-long var1204 /* : Int */;
-val* var1205 /* : ReduceAction602 */;
-long var1206 /* : Int */;
-val* var1207 /* : ReduceAction593 */;
-long var1208 /* : Int */;
-val* var1209 /* : ReduceAction596 */;
-long var1210 /* : Int */;
-val* var1211 /* : ReduceAction596 */;
-long var1212 /* : Int */;
-val* var1213 /* : ReduceAction606 */;
-long var1214 /* : Int */;
-val* var1215 /* : ReduceAction607 */;
-long var1216 /* : Int */;
-val* var1217 /* : ReduceAction608 */;
-long var1218 /* : Int */;
-val* var1219 /* : ReduceAction609 */;
-long var1220 /* : Int */;
-val* var1221 /* : ReduceAction610 */;
-long var1222 /* : Int */;
-val* var1223 /* : ReduceAction611 */;
-long var1224 /* : Int */;
-val* var1225 /* : ReduceAction612 */;
-long var1226 /* : Int */;
-val* var1227 /* : ReduceAction613 */;
-long var1228 /* : Int */;
-val* var1229 /* : ReduceAction614 */;
-long var1230 /* : Int */;
-val* var1231 /* : ReduceAction615 */;
-long var1232 /* : Int */;
-val* var1233 /* : ReduceAction616 */;
-long var1234 /* : Int */;
-val* var1235 /* : ReduceAction596 */;
-long var1236 /* : Int */;
-val* var1237 /* : ReduceAction596 */;
-long var1238 /* : Int */;
-val* var1239 /* : ReduceAction596 */;
-long var1240 /* : Int */;
-val* var1241 /* : ReduceAction596 */;
-long var1242 /* : Int */;
-val* var1243 /* : ReduceAction596 */;
-long var1244 /* : Int */;
-val* var1245 /* : ReduceAction596 */;
-long var1246 /* : Int */;
-val* var1247 /* : ReduceAction623 */;
-long var1248 /* : Int */;
-val* var1249 /* : ReduceAction624 */;
-long var1250 /* : Int */;
-val* var1251 /* : ReduceAction625 */;
-long var1252 /* : Int */;
-val* var1253 /* : ReduceAction626 */;
-long var1254 /* : Int */;
-val* var1255 /* : ReduceAction625 */;
-long var1256 /* : Int */;
-val* var1257 /* : ReduceAction628 */;
-long var1258 /* : Int */;
-val* var1259 /* : ReduceAction629 */;
-long var1260 /* : Int */;
-val* var1261 /* : ReduceAction628 */;
-long var1262 /* : Int */;
-val* var1263 /* : ReduceAction631 */;
-long var1264 /* : Int */;
-val* var1265 /* : ReduceAction632 */;
-long var1266 /* : Int */;
-val* var1267 /* : ReduceAction633 */;
-long var1268 /* : Int */;
-val* var1269 /* : ReduceAction634 */;
-long var1270 /* : Int */;
-val* var1271 /* : ReduceAction635 */;
-long var1272 /* : Int */;
-val* var1273 /* : ReduceAction636 */;
-long var1274 /* : Int */;
-val* var1275 /* : ReduceAction637 */;
-long var1276 /* : Int */;
-val* var1277 /* : ReduceAction638 */;
-long var1278 /* : Int */;
-val* var1279 /* : ReduceAction637 */;
-long var1280 /* : Int */;
-val* var1281 /* : ReduceAction640 */;
-long var1282 /* : Int */;
-val* var1283 /* : ReduceAction641 */;
-long var1284 /* : Int */;
-val* var1285 /* : ReduceAction640 */;
-long var1286 /* : Int */;
-val* var1287 /* : ReduceAction643 */;
-long var1288 /* : Int */;
-val* var1289 /* : ReduceAction644 */;
-long var1290 /* : Int */;
-val* var1291 /* : ReduceAction645 */;
-long var1292 /* : Int */;
-val* var1293 /* : ReduceAction646 */;
-long var1294 /* : Int */;
-val* var1295 /* : ReduceAction647 */;
-long var1296 /* : Int */;
-val* var1297 /* : ReduceAction648 */;
-long var1298 /* : Int */;
-val* var1299 /* : ReduceAction649 */;
-long var1300 /* : Int */;
-val* var1301 /* : ReduceAction650 */;
-long var1302 /* : Int */;
-val* var1303 /* : ReduceAction651 */;
-long var1304 /* : Int */;
-val* var1305 /* : ReduceAction652 */;
-long var1306 /* : Int */;
-val* var1307 /* : ReduceAction653 */;
-long var1308 /* : Int */;
-val* var1309 /* : ReduceAction654 */;
-long var1310 /* : Int */;
-val* var1311 /* : ReduceAction655 */;
-long var1312 /* : Int */;
-val* var1313 /* : ReduceAction656 */;
-long var1314 /* : Int */;
-val* var1315 /* : ReduceAction657 */;
-long var1316 /* : Int */;
-val* var1317 /* : ReduceAction656 */;
-long var1318 /* : Int */;
-val* var1319 /* : ReduceAction659 */;
-long var1320 /* : Int */;
-val* var1321 /* : ReduceAction660 */;
-long var1322 /* : Int */;
-val* var1323 /* : ReduceAction659 */;
-long var1324 /* : Int */;
-val* var1325 /* : ReduceAction662 */;
-long var1326 /* : Int */;
-val* var1327 /* : ReduceAction663 */;
-long var1328 /* : Int */;
-val* var1329 /* : ReduceAction664 */;
-long var1330 /* : Int */;
-val* var1331 /* : ReduceAction665 */;
-long var1332 /* : Int */;
-val* var1333 /* : ReduceAction664 */;
-long var1334 /* : Int */;
-val* var1335 /* : ReduceAction667 */;
-long var1336 /* : Int */;
-val* var1337 /* : ReduceAction668 */;
-long var1338 /* : Int */;
-val* var1339 /* : ReduceAction667 */;
-long var1340 /* : Int */;
-val* var1341 /* : ReduceAction670 */;
-long var1342 /* : Int */;
-val* var1343 /* : ReduceAction671 */;
-long var1344 /* : Int */;
-val* var1345 /* : ReduceAction672 */;
-long var1346 /* : Int */;
-val* var1347 /* : ReduceAction673 */;
-long var1348 /* : Int */;
-val* var1349 /* : ReduceAction674 */;
-long var1350 /* : Int */;
-val* var1351 /* : ReduceAction673 */;
-long var1352 /* : Int */;
-val* var1353 /* : ReduceAction676 */;
-long var1354 /* : Int */;
-val* var1355 /* : ReduceAction677 */;
-long var1356 /* : Int */;
-val* var1357 /* : ReduceAction676 */;
-long var1358 /* : Int */;
-val* var1359 /* : ReduceAction679 */;
-long var1360 /* : Int */;
-val* var1361 /* : ReduceAction680 */;
-long var1362 /* : Int */;
-val* var1363 /* : ReduceAction681 */;
-long var1364 /* : Int */;
-val* var1365 /* : ReduceAction682 */;
-long var1366 /* : Int */;
-val* var1367 /* : ReduceAction681 */;
-long var1368 /* : Int */;
-val* var1369 /* : ReduceAction684 */;
-long var1370 /* : Int */;
-val* var1371 /* : ReduceAction685 */;
-long var1372 /* : Int */;
-val* var1373 /* : ReduceAction684 */;
-long var1374 /* : Int */;
-val* var1375 /* : ReduceAction687 */;
-long var1376 /* : Int */;
-val* var1377 /* : ReduceAction688 */;
-long var1378 /* : Int */;
-val* var1379 /* : ReduceAction689 */;
-long var1380 /* : Int */;
-val* var1381 /* : ReduceAction690 */;
-long var1382 /* : Int */;
-val* var1383 /* : ReduceAction691 */;
-long var1384 /* : Int */;
-val* var1385 /* : ReduceAction692 */;
-long var1386 /* : Int */;
-val* var1387 /* : ReduceAction693 */;
-long var1388 /* : Int */;
-val* var1389 /* : ReduceAction694 */;
-long var1390 /* : Int */;
-val* var1391 /* : ReduceAction695 */;
-long var1392 /* : Int */;
-val* var1393 /* : ReduceAction696 */;
-long var1394 /* : Int */;
-val* var1395 /* : ReduceAction593 */;
-long var1396 /* : Int */;
-val* var1397 /* : ReduceAction595 */;
-long var1398 /* : Int */;
-val* var1399 /* : ReduceAction699 */;
-long var1400 /* : Int */;
-val* var1401 /* : ReduceAction700 */;
-long var1402 /* : Int */;
-val* var1403 /* : ReduceAction701 */;
-long var1404 /* : Int */;
-val* var1405 /* : ReduceAction702 */;
-long var1406 /* : Int */;
-val* var1407 /* : ReduceAction703 */;
-long var1408 /* : Int */;
-val* var1409 /* : ReduceAction704 */;
-long var1410 /* : Int */;
-val* var1411 /* : ReduceAction705 */;
-long var1412 /* : Int */;
-val* var1413 /* : ReduceAction706 */;
-long var1414 /* : Int */;
-val* var1415 /* : ReduceAction707 */;
-long var1416 /* : Int */;
-val* var1417 /* : ReduceAction708 */;
-long var1418 /* : Int */;
-val* var1419 /* : ReduceAction709 */;
-long var1420 /* : Int */;
-val* var1421 /* : ReduceAction710 */;
-long var1422 /* : Int */;
-val* var1423 /* : ReduceAction711 */;
-long var1424 /* : Int */;
-val* var1425 /* : ReduceAction596 */;
-long var1426 /* : Int */;
-val* var1427 /* : ReduceAction596 */;
-long var1428 /* : Int */;
-val* var1429 /* : ReduceAction714 */;
-long var1430 /* : Int */;
-val* var1431 /* : ReduceAction596 */;
-long var1432 /* : Int */;
-val* var1433 /* : ReduceAction716 */;
-long var1434 /* : Int */;
-val* var1435 /* : ReduceAction717 */;
-long var1436 /* : Int */;
-val* var1437 /* : ReduceAction718 */;
-long var1438 /* : Int */;
-val* var1439 /* : ReduceAction719 */;
-long var1440 /* : Int */;
-val* var1441 /* : ReduceAction596 */;
-long var1442 /* : Int */;
-val* var1443 /* : ReduceAction721 */;
-long var1444 /* : Int */;
-val* var1445 /* : ReduceAction596 */;
-long var1446 /* : Int */;
-val* var1447 /* : ReduceAction723 */;
-long var1448 /* : Int */;
-val* var1449 /* : ReduceAction724 */;
-long var1450 /* : Int */;
-val* var1451 /* : ReduceAction725 */;
-long var1452 /* : Int */;
-val* var1453 /* : ReduceAction726 */;
-long var1454 /* : Int */;
-val* var1455 /* : ReduceAction727 */;
-long var1456 /* : Int */;
-val* var1457 /* : ReduceAction728 */;
-long var1458 /* : Int */;
-val* var1459 /* : ReduceAction729 */;
-long var1460 /* : Int */;
-val* var1461 /* : ReduceAction730 */;
-long var1462 /* : Int */;
-val* var1463 /* : ReduceAction731 */;
-long var1464 /* : Int */;
-val* var1465 /* : ReduceAction732 */;
-long var1466 /* : Int */;
-val* var1467 /* : ReduceAction596 */;
-long var1468 /* : Int */;
-val* var1469 /* : ReduceAction734 */;
-long var1470 /* : Int */;
-val* var1471 /* : ReduceAction735 */;
-long var1472 /* : Int */;
-val* var1473 /* : ReduceAction596 */;
-long var1474 /* : Int */;
-val* var1475 /* : ReduceAction737 */;
-long var1476 /* : Int */;
-val* var1477 /* : ReduceAction738 */;
-long var1478 /* : Int */;
-val* var1479 /* : ReduceAction739 */;
-long var1480 /* : Int */;
-val* var1481 /* : ReduceAction596 */;
-long var1482 /* : Int */;
-val* var1483 /* : ReduceAction741 */;
-long var1484 /* : Int */;
-val* var1485 /* : ReduceAction742 */;
-long var1486 /* : Int */;
-val* var1487 /* : ReduceAction596 */;
-long var1488 /* : Int */;
-val* var1489 /* : ReduceAction744 */;
-long var1490 /* : Int */;
-val* var1491 /* : ReduceAction745 */;
-long var1492 /* : Int */;
-val* var1493 /* : ReduceAction746 */;
-long var1494 /* : Int */;
-val* var1495 /* : ReduceAction747 */;
-long var1496 /* : Int */;
-val* var1497 /* : ReduceAction748 */;
-long var1498 /* : Int */;
-val* var1499 /* : ReduceAction747 */;
-long var1500 /* : Int */;
-val* var1501 /* : ReduceAction750 */;
-long var1502 /* : Int */;
-val* var1503 /* : ReduceAction751 */;
-long var1504 /* : Int */;
-val* var1505 /* : ReduceAction750 */;
-long var1506 /* : Int */;
-val* var1507 /* : ReduceAction753 */;
-long var1508 /* : Int */;
-val* var1509 /* : ReduceAction754 */;
-long var1510 /* : Int */;
-val* var1511 /* : ReduceAction755 */;
-long var1512 /* : Int */;
-val* var1513 /* : ReduceAction756 */;
-long var1514 /* : Int */;
-val* var1515 /* : ReduceAction755 */;
-long var1516 /* : Int */;
-val* var1517 /* : ReduceAction758 */;
-long var1518 /* : Int */;
-val* var1519 /* : ReduceAction759 */;
-long var1520 /* : Int */;
-val* var1521 /* : ReduceAction758 */;
-long var1522 /* : Int */;
-val* var1523 /* : ReduceAction623 */;
-long var1524 /* : Int */;
-val* var1525 /* : ReduceAction624 */;
-long var1526 /* : Int */;
-val* var1527 /* : ReduceAction625 */;
-long var1528 /* : Int */;
-val* var1529 /* : ReduceAction626 */;
-long var1530 /* : Int */;
-val* var1531 /* : ReduceAction625 */;
-long var1532 /* : Int */;
-val* var1533 /* : ReduceAction628 */;
-long var1534 /* : Int */;
-val* var1535 /* : ReduceAction629 */;
-long var1536 /* : Int */;
-val* var1537 /* : ReduceAction628 */;
-long var1538 /* : Int */;
-val* var1539 /* : ReduceAction631 */;
-long var1540 /* : Int */;
-val* var1541 /* : ReduceAction632 */;
-long var1542 /* : Int */;
-val* var1543 /* : ReduceAction633 */;
-long var1544 /* : Int */;
-val* var1545 /* : ReduceAction634 */;
-long var1546 /* : Int */;
-val* var1547 /* : ReduceAction635 */;
-long var1548 /* : Int */;
-val* var1549 /* : ReduceAction636 */;
-long var1550 /* : Int */;
-val* var1551 /* : ReduceAction775 */;
-long var1552 /* : Int */;
-val* var1553 /* : ReduceAction776 */;
-long var1554 /* : Int */;
-val* var1555 /* : ReduceAction777 */;
-long var1556 /* : Int */;
-val* var1557 /* : ReduceAction778 */;
-long var1558 /* : Int */;
-val* var1559 /* : ReduceAction777 */;
-long var1560 /* : Int */;
-val* var1561 /* : ReduceAction780 */;
-long var1562 /* : Int */;
-val* var1563 /* : ReduceAction781 */;
-long var1564 /* : Int */;
-val* var1565 /* : ReduceAction782 */;
-long var1566 /* : Int */;
-val* var1567 /* : ReduceAction783 */;
-long var1568 /* : Int */;
-val* var1569 /* : ReduceAction784 */;
-long var1570 /* : Int */;
-val* var1571 /* : ReduceAction785 */;
-long var1572 /* : Int */;
-val* var1573 /* : ReduceAction786 */;
-long var1574 /* : Int */;
-val* var1575 /* : ReduceAction787 */;
-long var1576 /* : Int */;
-val* var1577 /* : ReduceAction788 */;
-long var1578 /* : Int */;
-val* var1579 /* : ReduceAction789 */;
-long var1580 /* : Int */;
-val* var1581 /* : ReduceAction790 */;
-long var1582 /* : Int */;
-val* var1583 /* : ReduceAction791 */;
-long var1584 /* : Int */;
-val* var1585 /* : ReduceAction792 */;
-long var1586 /* : Int */;
-val* var1587 /* : ReduceAction793 */;
-long var1588 /* : Int */;
-val* var1589 /* : ReduceAction794 */;
-long var1590 /* : Int */;
-val* var1591 /* : ReduceAction795 */;
-long var1592 /* : Int */;
-val* var1593 /* : ReduceAction796 */;
-long var1594 /* : Int */;
-val* var1595 /* : ReduceAction797 */;
-long var1596 /* : Int */;
-val* var1597 /* : ReduceAction798 */;
-long var1598 /* : Int */;
-val* var1599 /* : ReduceAction799 */;
-long var1600 /* : Int */;
-val* var1601 /* : ReduceAction800 */;
-long var1602 /* : Int */;
-val* var1603 /* : ReduceAction801 */;
-long var1604 /* : Int */;
-val* var1605 /* : ReduceAction596 */;
-long var1606 /* : Int */;
-val* var1607 /* : ReduceAction803 */;
-long var1608 /* : Int */;
-val* var1609 /* : ReduceAction804 */;
-long var1610 /* : Int */;
-val* var1611 /* : ReduceAction805 */;
-long var1612 /* : Int */;
-val* var1613 /* : ReduceAction806 */;
-long var1614 /* : Int */;
-val* var1615 /* : ReduceAction807 */;
-long var1616 /* : Int */;
-val* var1617 /* : ReduceAction808 */;
-long var1618 /* : Int */;
-val* var1619 /* : ReduceAction809 */;
-long var1620 /* : Int */;
-val* var1621 /* : ReduceAction810 */;
-long var1622 /* : Int */;
-val* var1623 /* : ReduceAction811 */;
-long var1624 /* : Int */;
-val* var1625 /* : ReduceAction812 */;
-long var1626 /* : Int */;
-val* var1627 /* : ReduceAction813 */;
-long var1628 /* : Int */;
-val* var1629 /* : ReduceAction811 */;
-long var1630 /* : Int */;
-val* var1631 /* : ReduceAction812 */;
-long var1632 /* : Int */;
-val* var1633 /* : ReduceAction816 */;
-long var1634 /* : Int */;
-val* var1635 /* : ReduceAction817 */;
-long var1636 /* : Int */;
-val* var1637 /* : ReduceAction818 */;
-long var1638 /* : Int */;
-val* var1639 /* : ReduceAction819 */;
-long var1640 /* : Int */;
-val* var1641 /* : ReduceAction820 */;
-long var1642 /* : Int */;
-val* var1643 /* : ReduceAction821 */;
-long var1644 /* : Int */;
-val* var1645 /* : ReduceAction822 */;
-long var1646 /* : Int */;
-val* var1647 /* : ReduceAction823 */;
-long var1648 /* : Int */;
-val* var1649 /* : ReduceAction824 */;
-long var1650 /* : Int */;
-val* var1651 /* : ReduceAction825 */;
-long var1652 /* : Int */;
-val* var1653 /* : ReduceAction826 */;
-long var1654 /* : Int */;
-val* var1655 /* : ReduceAction824 */;
-long var1656 /* : Int */;
-val* var1657 /* : ReduceAction828 */;
-long var1658 /* : Int */;
-val* var1659 /* : ReduceAction829 */;
-long var1660 /* : Int */;
-val* var1661 /* : ReduceAction830 */;
-long var1662 /* : Int */;
-val* var1663 /* : ReduceAction831 */;
-long var1664 /* : Int */;
-val* var1665 /* : ReduceAction832 */;
-long var1666 /* : Int */;
-val* var1667 /* : ReduceAction833 */;
-long var1668 /* : Int */;
-val* var1669 /* : ReduceAction834 */;
-long var1670 /* : Int */;
-val* var1671 /* : ReduceAction835 */;
-long var1672 /* : Int */;
-val* var1673 /* : ReduceAction836 */;
-long var1674 /* : Int */;
-val* var1675 /* : ReduceAction837 */;
-long var1676 /* : Int */;
-val* var1677 /* : ReduceAction838 */;
-long var1678 /* : Int */;
-val* var1679 /* : ReduceAction838 */;
-long var1680 /* : Int */;
-val* var1681 /* : ReduceAction840 */;
-long var1682 /* : Int */;
-val* var1683 /* : ReduceAction841 */;
-long var1684 /* : Int */;
-val* var1685 /* : ReduceAction842 */;
-long var1686 /* : Int */;
-val* var1687 /* : ReduceAction843 */;
-long var1688 /* : Int */;
-val* var1689 /* : ReduceAction844 */;
-long var1690 /* : Int */;
-val* var1691 /* : ReduceAction845 */;
-long var1692 /* : Int */;
-val* var1693 /* : ReduceAction846 */;
-long var1694 /* : Int */;
-val* var1695 /* : ReduceAction847 */;
-long var1696 /* : Int */;
-val* var1697 /* : ReduceAction845 */;
-long var1698 /* : Int */;
-val* var1699 /* : ReduceAction849 */;
-long var1700 /* : Int */;
-val* var1701 /* : ReduceAction846 */;
-long var1702 /* : Int */;
-val* var1703 /* : ReduceAction847 */;
-long var1704 /* : Int */;
-val* var1705 /* : ReduceAction852 */;
-long var1706 /* : Int */;
-val* var1707 /* : ReduceAction812 */;
-long var1708 /* : Int */;
-val* var1709 /* : ReduceAction854 */;
-long var1710 /* : Int */;
-val* var1711 /* : ReduceAction855 */;
-long var1712 /* : Int */;
-val* var1713 /* : ReduceAction856 */;
-long var1714 /* : Int */;
-val* var1715 /* : ReduceAction857 */;
-long var1716 /* : Int */;
-val* var1717 /* : ReduceAction858 */;
-long var1718 /* : Int */;
-val* var1719 /* : ReduceAction859 */;
-long var1720 /* : Int */;
-val* var1721 /* : ReduceAction860 */;
-long var1722 /* : Int */;
-val* var1723 /* : ReduceAction861 */;
-long var1724 /* : Int */;
-val* var1725 /* : ReduceAction862 */;
-long var1726 /* : Int */;
-val* var1727 /* : ReduceAction863 */;
-long var1728 /* : Int */;
-val* var1729 /* : ReduceAction864 */;
-long var1730 /* : Int */;
-val* var1731 /* : ReduceAction864 */;
-long var1732 /* : Int */;
-val* var1733 /* : ReduceAction866 */;
-long var1734 /* : Int */;
-val* var1735 /* : ReduceAction867 */;
-long var1736 /* : Int */;
-val* var1737 /* : ReduceAction70 */;
-long var1738 /* : Int */;
-val* var1739 /* : ReduceAction869 */;
-long var1740 /* : Int */;
-val* var1741 /* : ReduceAction870 */;
-long var1742 /* : Int */;
-val* var1743 /* : ReduceAction871 */;
-long var1744 /* : Int */;
-val* var1745 /* : ReduceAction872 */;
-long var1746 /* : Int */;
-val* var1747 /* : ReduceAction864 */;
-long var1748 /* : Int */;
-val* var1749 /* : ReduceAction344 */;
-long var1750 /* : Int */;
-val* var1751 /* : ReduceAction345 */;
-long var1752 /* : Int */;
-val* var1753 /* : ReduceAction346 */;
-long var1754 /* : Int */;
-val* var1755 /* : ReduceAction347 */;
-long var1756 /* : Int */;
-val* var1757 /* : ReduceAction348 */;
-long var1758 /* : Int */;
-val* var1759 /* : ReduceAction349 */;
-long var1760 /* : Int */;
-val* var1761 /* : ReduceAction350 */;
-long var1762 /* : Int */;
-val* var1763 /* : ReduceAction351 */;
-long var1764 /* : Int */;
-val* var1765 /* : ReduceAction352 */;
-long var1766 /* : Int */;
-val* var1767 /* : ReduceAction353 */;
-long var1768 /* : Int */;
-val* var1769 /* : ReduceAction354 */;
-long var1770 /* : Int */;
-val* var1771 /* : ReduceAction355 */;
-long var1772 /* : Int */;
-val* var1773 /* : ReduceAction356 */;
-long var1774 /* : Int */;
-val* var1775 /* : ReduceAction361 */;
-long var1776 /* : Int */;
-val* var1777 /* : ReduceAction362 */;
-long var1778 /* : Int */;
-val* var1779 /* : ReduceAction363 */;
-long var1780 /* : Int */;
-val* var1781 /* : ReduceAction364 */;
-long var1782 /* : Int */;
-val* var1783 /* : ReduceAction365 */;
-long var1784 /* : Int */;
-val* var1785 /* : ReduceAction366 */;
-long var1786 /* : Int */;
-val* var1787 /* : ReduceAction367 */;
-long var1788 /* : Int */;
-val* var1789 /* : ReduceAction368 */;
-long var1790 /* : Int */;
-val* var1791 /* : ReduceAction369 */;
-long var1792 /* : Int */;
-val* var1793 /* : ReduceAction370 */;
-long var1794 /* : Int */;
-val* var1795 /* : ReduceAction371 */;
-long var1796 /* : Int */;
-val* var1797 /* : ReduceAction372 */;
-long var1798 /* : Int */;
-val* var1799 /* : ReduceAction373 */;
-long var1800 /* : Int */;
-val* var1801 /* : ReduceAction374 */;
-long var1802 /* : Int */;
-val* var1803 /* : ReduceAction375 */;
-long var1804 /* : Int */;
-val* var1805 /* : ReduceAction376 */;
-long var1806 /* : Int */;
-val* var1807 /* : ReduceAction377 */;
-long var1808 /* : Int */;
-val* var1809 /* : ReduceAction378 */;
-long var1810 /* : Int */;
-val* var1811 /* : ReduceAction379 */;
-long var1812 /* : Int */;
-val* var1813 /* : ReduceAction380 */;
-long var1814 /* : Int */;
-val* var1815 /* : ReduceAction545 */;
-long var1816 /* : Int */;
-val* var1817 /* : ReduceAction546 */;
-long var1818 /* : Int */;
-val* var1819 /* : ReduceAction549 */;
-long var1820 /* : Int */;
-val* var1821 /* : ReduceAction581 */;
-long var1822 /* : Int */;
-val* var1823 /* : ReduceAction582 */;
-long var1824 /* : Int */;
-val* var1825 /* : ReduceAction583 */;
-long var1826 /* : Int */;
-val* var1827 /* : ReduceAction584 */;
-long var1828 /* : Int */;
-val* var1829 /* : ReduceAction596 */;
-long var1830 /* : Int */;
-val* var1831 /* : ReduceAction596 */;
-long var1832 /* : Int */;
-val* var1833 /* : ReduceAction714 */;
-long var1834 /* : Int */;
-val* var1835 /* : ReduceAction596 */;
-long var1836 /* : Int */;
-val* var1837 /* : ReduceAction716 */;
-long var1838 /* : Int */;
-val* var1839 /* : ReduceAction717 */;
-long var1840 /* : Int */;
-val* var1841 /* : ReduceAction718 */;
-long var1842 /* : Int */;
-val* var1843 /* : ReduceAction719 */;
-long var1844 /* : Int */;
-val* var1845 /* : ReduceAction596 */;
-long var1846 /* : Int */;
-val* var1847 /* : ReduceAction721 */;
-long var1848 /* : Int */;
-val* var1849 /* : ReduceAction596 */;
-long var1850 /* : Int */;
-val* var1851 /* : ReduceAction723 */;
-long var1852 /* : Int */;
-val* var1853 /* : ReduceAction724 */;
-long var1854 /* : Int */;
-val* var1855 /* : ReduceAction725 */;
-long var1856 /* : Int */;
-val* var1857 /* : ReduceAction726 */;
-long var1858 /* : Int */;
-val* var1859 /* : ReduceAction727 */;
-long var1860 /* : Int */;
-val* var1861 /* : ReduceAction728 */;
-long var1862 /* : Int */;
-val* var1863 /* : ReduceAction729 */;
-long var1864 /* : Int */;
-val* var1865 /* : ReduceAction730 */;
-long var1866 /* : Int */;
-val* var1867 /* : ReduceAction731 */;
-long var1868 /* : Int */;
-val* var1869 /* : ReduceAction732 */;
-long var1870 /* : Int */;
-val* var1871 /* : ReduceAction596 */;
-long var1872 /* : Int */;
-val* var1873 /* : ReduceAction734 */;
-long var1874 /* : Int */;
-val* var1875 /* : ReduceAction735 */;
-long var1876 /* : Int */;
-val* var1877 /* : ReduceAction596 */;
-long var1878 /* : Int */;
-val* var1879 /* : ReduceAction737 */;
-long var1880 /* : Int */;
-val* var1881 /* : ReduceAction738 */;
-long var1882 /* : Int */;
-val* var1883 /* : ReduceAction739 */;
-long var1884 /* : Int */;
-val* var1885 /* : ReduceAction596 */;
-long var1886 /* : Int */;
-val* var1887 /* : ReduceAction741 */;
-long var1888 /* : Int */;
-val* var1889 /* : ReduceAction742 */;
-long var1890 /* : Int */;
-val* var1891 /* : ReduceAction596 */;
-long var1892 /* : Int */;
-val* var1893 /* : ReduceAction744 */;
-long var1894 /* : Int */;
-val* var1895 /* : ReduceAction745 */;
-long var1896 /* : Int */;
-val* var1897 /* : ReduceAction746 */;
-long var1898 /* : Int */;
-val* var1899 /* : ReduceAction747 */;
-long var1900 /* : Int */;
-val* var1901 /* : ReduceAction750 */;
-long var1902 /* : Int */;
-val* var1903 /* : ReduceAction748 */;
-long var1904 /* : Int */;
-val* var1905 /* : ReduceAction751 */;
-long var1906 /* : Int */;
-val* var1907 /* : ReduceAction747 */;
-long var1908 /* : Int */;
-val* var1909 /* : ReduceAction750 */;
-long var1910 /* : Int */;
-val* var1911 /* : ReduceAction753 */;
-long var1912 /* : Int */;
-val* var1913 /* : ReduceAction754 */;
-long var1914 /* : Int */;
-val* var1915 /* : ReduceAction755 */;
-long var1916 /* : Int */;
-val* var1917 /* : ReduceAction758 */;
-long var1918 /* : Int */;
-val* var1919 /* : ReduceAction756 */;
-long var1920 /* : Int */;
-val* var1921 /* : ReduceAction759 */;
-long var1922 /* : Int */;
-val* var1923 /* : ReduceAction755 */;
-long var1924 /* : Int */;
-val* var1925 /* : ReduceAction758 */;
-long var1926 /* : Int */;
-val* var1927 /* : ReduceAction623 */;
-long var1928 /* : Int */;
-val* var1929 /* : ReduceAction624 */;
-long var1930 /* : Int */;
-val* var1931 /* : ReduceAction625 */;
-long var1932 /* : Int */;
-val* var1933 /* : ReduceAction628 */;
-long var1934 /* : Int */;
-val* var1935 /* : ReduceAction626 */;
-long var1936 /* : Int */;
-val* var1937 /* : ReduceAction629 */;
-long var1938 /* : Int */;
-val* var1939 /* : ReduceAction625 */;
-long var1940 /* : Int */;
-val* var1941 /* : ReduceAction628 */;
-long var1942 /* : Int */;
-val* var1943 /* : ReduceAction631 */;
-long var1944 /* : Int */;
-val* var1945 /* : ReduceAction632 */;
-long var1946 /* : Int */;
-val* var1947 /* : ReduceAction633 */;
-long var1948 /* : Int */;
-val* var1949 /* : ReduceAction634 */;
-long var1950 /* : Int */;
-val* var1951 /* : ReduceAction635 */;
-long var1952 /* : Int */;
-val* var1953 /* : ReduceAction636 */;
-long var1954 /* : Int */;
-val* var1955 /* : ReduceAction776 */;
-long var1956 /* : Int */;
-val* var1957 /* : ReduceAction777 */;
-long var1958 /* : Int */;
-val* var1959 /* : ReduceAction778 */;
-long var1960 /* : Int */;
-val* var1961 /* : ReduceAction777 */;
-long var1962 /* : Int */;
-val* var1963 /* : ReduceAction786 */;
-long var1964 /* : Int */;
-val* var1965 /* : ReduceAction787 */;
-long var1966 /* : Int */;
-val* var1967 /* : ReduceAction788 */;
-long var1968 /* : Int */;
-val* var1969 /* : ReduceAction789 */;
-long var1970 /* : Int */;
-val* var1971 /* : ReduceAction790 */;
-long var1972 /* : Int */;
-val* var1973 /* : ReduceAction791 */;
-long var1974 /* : Int */;
-val* var1975 /* : ReduceAction792 */;
-long var1976 /* : Int */;
-val* var1977 /* : ReduceAction793 */;
-long var1978 /* : Int */;
-val* var1979 /* : ReduceAction794 */;
-long var1980 /* : Int */;
-val* var1981 /* : ReduceAction795 */;
-long var1982 /* : Int */;
-val* var1983 /* : ReduceAction796 */;
-long var1984 /* : Int */;
-val* var1985 /* : ReduceAction797 */;
-long var1986 /* : Int */;
-val* var1987 /* : ReduceAction798 */;
-long var1988 /* : Int */;
-val* var1989 /* : ReduceAction799 */;
-long var1990 /* : Int */;
-val* var1991 /* : ReduceAction800 */;
-long var1992 /* : Int */;
-val* var1993 /* : ReduceAction801 */;
-long var1994 /* : Int */;
-val* var1995 /* : ReduceAction596 */;
-long var1996 /* : Int */;
-val* var1997 /* : ReduceAction803 */;
-long var1998 /* : Int */;
-val* var1999 /* : ReduceAction804 */;
-long var2000 /* : Int */;
-val* var2001 /* : ReduceAction805 */;
-long var2002 /* : Int */;
-val* var2003 /* : ReduceAction806 */;
-long var2004 /* : Int */;
-val* var2005 /* : ReduceAction581 */;
-long var2006 /* : Int */;
-val* var2007 /* : ReduceAction582 */;
-long var2008 /* : Int */;
-val* var2009 /* : ReduceAction583 */;
-long var2010 /* : Int */;
-val* var2011 /* : ReduceAction584 */;
-long var2012 /* : Int */;
-val* var2013 /* : ReduceAction585 */;
-long var2014 /* : Int */;
-val* var2015 /* : ReduceAction586 */;
-long var2016 /* : Int */;
-val* var2017 /* : ReduceAction587 */;
-long var2018 /* : Int */;
-val* var2019 /* : ReduceAction588 */;
-long var2020 /* : Int */;
-val* var2021 /* : ReduceAction596 */;
-long var2022 /* : Int */;
-val* var2023 /* : ReduceAction596 */;
-long var2024 /* : Int */;
-val* var2025 /* : ReduceAction606 */;
-long var2026 /* : Int */;
-val* var2027 /* : ReduceAction607 */;
-long var2028 /* : Int */;
-val* var2029 /* : ReduceAction608 */;
-long var2030 /* : Int */;
-val* var2031 /* : ReduceAction609 */;
-long var2032 /* : Int */;
-val* var2033 /* : ReduceAction610 */;
-long var2034 /* : Int */;
-val* var2035 /* : ReduceAction611 */;
-long var2036 /* : Int */;
-val* var2037 /* : ReduceAction612 */;
-long var2038 /* : Int */;
-val* var2039 /* : ReduceAction613 */;
-long var2040 /* : Int */;
-val* var2041 /* : ReduceAction614 */;
-long var2042 /* : Int */;
-val* var2043 /* : ReduceAction615 */;
-long var2044 /* : Int */;
-val* var2045 /* : ReduceAction616 */;
-long var2046 /* : Int */;
-val* var2047 /* : ReduceAction596 */;
-long var2048 /* : Int */;
-val* var2049 /* : ReduceAction596 */;
-long var2050 /* : Int */;
-val* var2051 /* : ReduceAction596 */;
-long var2052 /* : Int */;
-val* var2053 /* : ReduceAction596 */;
-long var2054 /* : Int */;
-val* var2055 /* : ReduceAction596 */;
-long var2056 /* : Int */;
-val* var2057 /* : ReduceAction596 */;
-long var2058 /* : Int */;
-val* var2059 /* : ReduceAction623 */;
-long var2060 /* : Int */;
-val* var2061 /* : ReduceAction624 */;
-long var2062 /* : Int */;
-val* var2063 /* : ReduceAction625 */;
-long var2064 /* : Int */;
-val* var2065 /* : ReduceAction626 */;
-long var2066 /* : Int */;
-val* var2067 /* : ReduceAction625 */;
-long var2068 /* : Int */;
-val* var2069 /* : ReduceAction628 */;
-long var2070 /* : Int */;
-val* var2071 /* : ReduceAction629 */;
-long var2072 /* : Int */;
-val* var2073 /* : ReduceAction628 */;
-long var2074 /* : Int */;
-val* var2075 /* : ReduceAction631 */;
-long var2076 /* : Int */;
-val* var2077 /* : ReduceAction632 */;
-long var2078 /* : Int */;
-val* var2079 /* : ReduceAction633 */;
-long var2080 /* : Int */;
-val* var2081 /* : ReduceAction634 */;
-long var2082 /* : Int */;
-val* var2083 /* : ReduceAction635 */;
-long var2084 /* : Int */;
-val* var2085 /* : ReduceAction636 */;
-long var2086 /* : Int */;
-val* var2087 /* : ReduceAction637 */;
-long var2088 /* : Int */;
-val* var2089 /* : ReduceAction638 */;
-long var2090 /* : Int */;
-val* var2091 /* : ReduceAction637 */;
-long var2092 /* : Int */;
-val* var2093 /* : ReduceAction640 */;
-long var2094 /* : Int */;
-val* var2095 /* : ReduceAction641 */;
-long var2096 /* : Int */;
-val* var2097 /* : ReduceAction640 */;
-long var2098 /* : Int */;
-val* var2099 /* : ReduceAction643 */;
-long var2100 /* : Int */;
-val* var2101 /* : ReduceAction654 */;
-long var2102 /* : Int */;
-val* var2103 /* : ReduceAction655 */;
-long var2104 /* : Int */;
-val* var2105 /* : ReduceAction656 */;
-long var2106 /* : Int */;
-val* var2107 /* : ReduceAction657 */;
-long var2108 /* : Int */;
-val* var2109 /* : ReduceAction656 */;
-long var2110 /* : Int */;
-val* var2111 /* : ReduceAction659 */;
-long var2112 /* : Int */;
-val* var2113 /* : ReduceAction660 */;
-long var2114 /* : Int */;
-val* var2115 /* : ReduceAction659 */;
-long var2116 /* : Int */;
-val* var2117 /* : ReduceAction662 */;
-long var2118 /* : Int */;
-val* var2119 /* : ReduceAction663 */;
-long var2120 /* : Int */;
-val* var2121 /* : ReduceAction664 */;
-long var2122 /* : Int */;
-val* var2123 /* : ReduceAction665 */;
-long var2124 /* : Int */;
-val* var2125 /* : ReduceAction664 */;
-long var2126 /* : Int */;
-val* var2127 /* : ReduceAction667 */;
-long var2128 /* : Int */;
-val* var2129 /* : ReduceAction668 */;
-long var2130 /* : Int */;
-val* var2131 /* : ReduceAction667 */;
-long var2132 /* : Int */;
-val* var2133 /* : ReduceAction670 */;
-long var2134 /* : Int */;
-val* var2135 /* : ReduceAction671 */;
-long var2136 /* : Int */;
-val* var2137 /* : ReduceAction672 */;
-long var2138 /* : Int */;
-val* var2139 /* : ReduceAction673 */;
-long var2140 /* : Int */;
-val* var2141 /* : ReduceAction674 */;
-long var2142 /* : Int */;
-val* var2143 /* : ReduceAction673 */;
-long var2144 /* : Int */;
-val* var2145 /* : ReduceAction676 */;
-long var2146 /* : Int */;
-val* var2147 /* : ReduceAction677 */;
-long var2148 /* : Int */;
-val* var2149 /* : ReduceAction676 */;
-long var2150 /* : Int */;
-val* var2151 /* : ReduceAction679 */;
-long var2152 /* : Int */;
-val* var2153 /* : ReduceAction680 */;
-long var2154 /* : Int */;
-val* var2155 /* : ReduceAction681 */;
-long var2156 /* : Int */;
-val* var2157 /* : ReduceAction682 */;
-long var2158 /* : Int */;
-val* var2159 /* : ReduceAction681 */;
-long var2160 /* : Int */;
-val* var2161 /* : ReduceAction684 */;
-long var2162 /* : Int */;
-val* var2163 /* : ReduceAction685 */;
-long var2164 /* : Int */;
-val* var2165 /* : ReduceAction684 */;
-long var2166 /* : Int */;
-val* var2167 /* : ReduceAction687 */;
-long var2168 /* : Int */;
-val* var2169 /* : ReduceAction596 */;
-long var2170 /* : Int */;
-val* var2171 /* : ReduceAction596 */;
-long var2172 /* : Int */;
-val* var2173 /* : ReduceAction714 */;
-long var2174 /* : Int */;
-val* var2175 /* : ReduceAction596 */;
-long var2176 /* : Int */;
-val* var2177 /* : ReduceAction716 */;
-long var2178 /* : Int */;
-val* var2179 /* : ReduceAction717 */;
-long var2180 /* : Int */;
-val* var2181 /* : ReduceAction718 */;
-long var2182 /* : Int */;
-val* var2183 /* : ReduceAction719 */;
-long var2184 /* : Int */;
-val* var2185 /* : ReduceAction596 */;
-long var2186 /* : Int */;
-val* var2187 /* : ReduceAction721 */;
-long var2188 /* : Int */;
-val* var2189 /* : ReduceAction596 */;
-long var2190 /* : Int */;
-val* var2191 /* : ReduceAction723 */;
-long var2192 /* : Int */;
-val* var2193 /* : ReduceAction724 */;
-long var2194 /* : Int */;
-val* var2195 /* : ReduceAction725 */;
-long var2196 /* : Int */;
-val* var2197 /* : ReduceAction726 */;
-long var2198 /* : Int */;
-val* var2199 /* : ReduceAction727 */;
-long var2200 /* : Int */;
-val* var2201 /* : ReduceAction728 */;
-long var2202 /* : Int */;
-val* var2203 /* : ReduceAction729 */;
-long var2204 /* : Int */;
-val* var2205 /* : ReduceAction730 */;
-long var2206 /* : Int */;
-val* var2207 /* : ReduceAction731 */;
-long var2208 /* : Int */;
-val* var2209 /* : ReduceAction732 */;
-long var2210 /* : Int */;
-val* var2211 /* : ReduceAction596 */;
-long var2212 /* : Int */;
-val* var2213 /* : ReduceAction734 */;
-long var2214 /* : Int */;
-val* var2215 /* : ReduceAction735 */;
-long var2216 /* : Int */;
-val* var2217 /* : ReduceAction596 */;
-long var2218 /* : Int */;
-val* var2219 /* : ReduceAction737 */;
-long var2220 /* : Int */;
-val* var2221 /* : ReduceAction738 */;
-long var2222 /* : Int */;
-val* var2223 /* : ReduceAction739 */;
-long var2224 /* : Int */;
-val* var2225 /* : ReduceAction596 */;
-long var2226 /* : Int */;
-val* var2227 /* : ReduceAction741 */;
-long var2228 /* : Int */;
-val* var2229 /* : ReduceAction742 */;
-long var2230 /* : Int */;
-val* var2231 /* : ReduceAction596 */;
-long var2232 /* : Int */;
-val* var2233 /* : ReduceAction744 */;
-long var2234 /* : Int */;
-val* var2235 /* : ReduceAction745 */;
-long var2236 /* : Int */;
-val* var2237 /* : ReduceAction746 */;
-long var2238 /* : Int */;
-val* var2239 /* : ReduceAction747 */;
-long var2240 /* : Int */;
-val* var2241 /* : ReduceAction748 */;
-long var2242 /* : Int */;
-val* var2243 /* : ReduceAction747 */;
-long var2244 /* : Int */;
-val* var2245 /* : ReduceAction750 */;
-long var2246 /* : Int */;
-val* var2247 /* : ReduceAction751 */;
-long var2248 /* : Int */;
-val* var2249 /* : ReduceAction750 */;
-long var2250 /* : Int */;
-val* var2251 /* : ReduceAction753 */;
-long var2252 /* : Int */;
-val* var2253 /* : ReduceAction754 */;
-long var2254 /* : Int */;
-val* var2255 /* : ReduceAction755 */;
-long var2256 /* : Int */;
-val* var2257 /* : ReduceAction756 */;
-long var2258 /* : Int */;
-val* var2259 /* : ReduceAction755 */;
-long var2260 /* : Int */;
-val* var2261 /* : ReduceAction758 */;
-long var2262 /* : Int */;
-val* var2263 /* : ReduceAction759 */;
-long var2264 /* : Int */;
-val* var2265 /* : ReduceAction758 */;
-long var2266 /* : Int */;
-val* var2267 /* : ReduceAction623 */;
-long var2268 /* : Int */;
-val* var2269 /* : ReduceAction624 */;
-long var2270 /* : Int */;
-val* var2271 /* : ReduceAction625 */;
-long var2272 /* : Int */;
-val* var2273 /* : ReduceAction626 */;
-long var2274 /* : Int */;
-val* var2275 /* : ReduceAction625 */;
-long var2276 /* : Int */;
-val* var2277 /* : ReduceAction628 */;
-long var2278 /* : Int */;
-val* var2279 /* : ReduceAction629 */;
-long var2280 /* : Int */;
-val* var2281 /* : ReduceAction628 */;
-long var2282 /* : Int */;
-val* var2283 /* : ReduceAction631 */;
-long var2284 /* : Int */;
-val* var2285 /* : ReduceAction632 */;
-long var2286 /* : Int */;
-val* var2287 /* : ReduceAction633 */;
-long var2288 /* : Int */;
-val* var2289 /* : ReduceAction634 */;
-long var2290 /* : Int */;
-val* var2291 /* : ReduceAction635 */;
-long var2292 /* : Int */;
-val* var2293 /* : ReduceAction636 */;
-long var2294 /* : Int */;
-val* var2295 /* : ReduceAction775 */;
-long var2296 /* : Int */;
-val* var2297 /* : ReduceAction776 */;
-long var2298 /* : Int */;
-val* var2299 /* : ReduceAction777 */;
-long var2300 /* : Int */;
-val* var2301 /* : ReduceAction778 */;
-long var2302 /* : Int */;
-val* var2303 /* : ReduceAction777 */;
-long var2304 /* : Int */;
-val* var2305 /* : ReduceAction786 */;
-long var2306 /* : Int */;
-val* var2307 /* : ReduceAction787 */;
-long var2308 /* : Int */;
-val* var2309 /* : ReduceAction788 */;
-long var2310 /* : Int */;
-val* var2311 /* : ReduceAction789 */;
-long var2312 /* : Int */;
-val* var2313 /* : ReduceAction790 */;
-long var2314 /* : Int */;
-val* var2315 /* : ReduceAction791 */;
-long var2316 /* : Int */;
-val* var2317 /* : ReduceAction792 */;
-long var2318 /* : Int */;
-val* var2319 /* : ReduceAction793 */;
-long var2320 /* : Int */;
-val* var2321 /* : ReduceAction794 */;
-long var2322 /* : Int */;
-val* var2323 /* : ReduceAction795 */;
-long var2324 /* : Int */;
-val* var2325 /* : ReduceAction796 */;
-long var2326 /* : Int */;
-val* var2327 /* : ReduceAction797 */;
-long var2328 /* : Int */;
-val* var2329 /* : ReduceAction798 */;
-long var2330 /* : Int */;
-val* var2331 /* : ReduceAction799 */;
-long var2332 /* : Int */;
-val* var2333 /* : ReduceAction800 */;
-long var2334 /* : Int */;
-val* var2335 /* : ReduceAction801 */;
-long var2336 /* : Int */;
-val* var2337 /* : ReduceAction596 */;
-long var2338 /* : Int */;
-val* var2339 /* : ReduceAction805 */;
-long var2340 /* : Int */;
-val* var2341 /* : ReduceAction806 */;
-long var2342 /* : Int */;
-val* var2343 /* : ReduceAction818 */;
-long var2344 /* : Int */;
-val* var2345 /* : ReduceAction819 */;
-long var2346 /* : Int */;
-val* var2347 /* : ReduceAction820 */;
-long var2348 /* : Int */;
-val* var2349 /* : ReduceAction821 */;
-long var2350 /* : Int */;
-val* var2351 /* : ReduceAction834 */;
-long var2352 /* : Int */;
-val* var2353 /* : ReduceAction835 */;
-long var2354 /* : Int */;
-val* var2355 /* : ReduceAction837 */;
-long var2356 /* : Int */;
-val* var2357 /* : ReduceAction838 */;
-long var2358 /* : Int */;
-val* var2359 /* : ReduceAction838 */;
-long var2360 /* : Int */;
-val* var2361 /* : ReduceAction581 */;
-long var2362 /* : Int */;
-val* var2363 /* : ReduceAction582 */;
-long var2364 /* : Int */;
-val* var2365 /* : ReduceAction583 */;
-long var2366 /* : Int */;
-val* var2367 /* : ReduceAction584 */;
-long var2368 /* : Int */;
-val* var2369 /* : ReduceAction596 */;
-long var2370 /* : Int */;
-val* var2371 /* : ReduceAction596 */;
-long var2372 /* : Int */;
-val* var2373 /* : ReduceAction714 */;
-long var2374 /* : Int */;
-val* var2375 /* : ReduceAction596 */;
-long var2376 /* : Int */;
-val* var2377 /* : ReduceAction716 */;
-long var2378 /* : Int */;
-val* var2379 /* : ReduceAction717 */;
-long var2380 /* : Int */;
-val* var2381 /* : ReduceAction718 */;
-long var2382 /* : Int */;
-val* var2383 /* : ReduceAction719 */;
-long var2384 /* : Int */;
-val* var2385 /* : ReduceAction596 */;
-long var2386 /* : Int */;
-val* var2387 /* : ReduceAction721 */;
-long var2388 /* : Int */;
-val* var2389 /* : ReduceAction596 */;
-long var2390 /* : Int */;
-val* var2391 /* : ReduceAction723 */;
-long var2392 /* : Int */;
-val* var2393 /* : ReduceAction724 */;
-long var2394 /* : Int */;
-val* var2395 /* : ReduceAction725 */;
-long var2396 /* : Int */;
-val* var2397 /* : ReduceAction726 */;
-long var2398 /* : Int */;
-val* var2399 /* : ReduceAction727 */;
-long var2400 /* : Int */;
-val* var2401 /* : ReduceAction728 */;
-long var2402 /* : Int */;
-val* var2403 /* : ReduceAction729 */;
-long var2404 /* : Int */;
-val* var2405 /* : ReduceAction730 */;
-long var2406 /* : Int */;
-val* var2407 /* : ReduceAction731 */;
-long var2408 /* : Int */;
-val* var2409 /* : ReduceAction732 */;
-long var2410 /* : Int */;
-val* var2411 /* : ReduceAction596 */;
-long var2412 /* : Int */;
-val* var2413 /* : ReduceAction734 */;
-long var2414 /* : Int */;
-val* var2415 /* : ReduceAction735 */;
-long var2416 /* : Int */;
-val* var2417 /* : ReduceAction596 */;
-long var2418 /* : Int */;
-val* var2419 /* : ReduceAction737 */;
-long var2420 /* : Int */;
-val* var2421 /* : ReduceAction738 */;
-long var2422 /* : Int */;
-val* var2423 /* : ReduceAction739 */;
-long var2424 /* : Int */;
-val* var2425 /* : ReduceAction596 */;
-long var2426 /* : Int */;
-val* var2427 /* : ReduceAction741 */;
-long var2428 /* : Int */;
-val* var2429 /* : ReduceAction742 */;
-long var2430 /* : Int */;
-val* var2431 /* : ReduceAction596 */;
-long var2432 /* : Int */;
-val* var2433 /* : ReduceAction744 */;
-long var2434 /* : Int */;
-val* var2435 /* : ReduceAction1217 */;
-long var2436 /* : Int */;
-val* var2437 /* : ReduceAction1218 */;
-long var2438 /* : Int */;
-val* var2439 /* : ReduceAction745 */;
-long var2440 /* : Int */;
-val* var2441 /* : ReduceAction1218 */;
-long var2442 /* : Int */;
-val* var2443 /* : ReduceAction1221 */;
-long var2444 /* : Int */;
-val* var2445 /* : ReduceAction1222 */;
-long var2446 /* : Int */;
-val* var2447 /* : ReduceAction753 */;
-long var2448 /* : Int */;
-val* var2449 /* : ReduceAction1222 */;
-long var2450 /* : Int */;
-val* var2451 /* : ReduceAction1225 */;
-long var2452 /* : Int */;
-val* var2453 /* : ReduceAction1226 */;
-long var2454 /* : Int */;
-val* var2455 /* : ReduceAction623 */;
-long var2456 /* : Int */;
-val* var2457 /* : ReduceAction1226 */;
-long var2458 /* : Int */;
-val* var2459 /* : ReduceAction631 */;
-long var2460 /* : Int */;
-val* var2461 /* : ReduceAction632 */;
-long var2462 /* : Int */;
-val* var2463 /* : ReduceAction633 */;
-long var2464 /* : Int */;
-val* var2465 /* : ReduceAction634 */;
-long var2466 /* : Int */;
-val* var2467 /* : ReduceAction1233 */;
-long var2468 /* : Int */;
-val* var2469 /* : ReduceAction776 */;
-long var2470 /* : Int */;
-val* var2471 /* : ReduceAction777 */;
-long var2472 /* : Int */;
-val* var2473 /* : ReduceAction778 */;
-long var2474 /* : Int */;
-val* var2475 /* : ReduceAction777 */;
-long var2476 /* : Int */;
-val* var2477 /* : ReduceAction786 */;
-long var2478 /* : Int */;
-val* var2479 /* : ReduceAction787 */;
-long var2480 /* : Int */;
-val* var2481 /* : ReduceAction788 */;
-long var2482 /* : Int */;
-val* var2483 /* : ReduceAction789 */;
-long var2484 /* : Int */;
-val* var2485 /* : ReduceAction790 */;
-long var2486 /* : Int */;
-val* var2487 /* : ReduceAction791 */;
-long var2488 /* : Int */;
-val* var2489 /* : ReduceAction792 */;
-long var2490 /* : Int */;
-val* var2491 /* : ReduceAction793 */;
-long var2492 /* : Int */;
-val* var2493 /* : ReduceAction794 */;
-long var2494 /* : Int */;
-val* var2495 /* : ReduceAction795 */;
-long var2496 /* : Int */;
-val* var2497 /* : ReduceAction796 */;
-long var2498 /* : Int */;
-val* var2499 /* : ReduceAction797 */;
-long var2500 /* : Int */;
-val* var2501 /* : ReduceAction798 */;
-long var2502 /* : Int */;
-val* var2503 /* : ReduceAction799 */;
-long var2504 /* : Int */;
-val* var2505 /* : ReduceAction800 */;
-long var2506 /* : Int */;
-val* var2507 /* : ReduceAction801 */;
-long var2508 /* : Int */;
-val* var2509 /* : ReduceAction596 */;
-long var2510 /* : Int */;
-val* var2511 /* : ReduceAction805 */;
-long var2512 /* : Int */;
-val* var2513 /* : ReduceAction806 */;
-long var2514 /* : Int */;
-val* var2515 /* : ReduceAction1257 */;
-long var2516 /* : Int */;
-val* var2517 /* : ReduceAction1258 */;
-long var2518 /* : Int */;
-val* var2519 /* : ReduceAction593 */;
-long var2520 /* : Int */;
-val* var2521 /* : ReduceAction594 */;
-long var2522 /* : Int */;
-val* var2523 /* : ReduceAction595 */;
-long var2524 /* : Int */;
-val* var2525 /* : ReduceAction596 */;
-long var2526 /* : Int */;
-val* var2527 /* : ReduceAction596 */;
-long var2528 /* : Int */;
-val* var2529 /* : ReduceAction596 */;
-long var2530 /* : Int */;
-val* var2531 /* : ReduceAction606 */;
-long var2532 /* : Int */;
-val* var2533 /* : ReduceAction607 */;
-long var2534 /* : Int */;
-val* var2535 /* : ReduceAction608 */;
-long var2536 /* : Int */;
-val* var2537 /* : ReduceAction609 */;
-long var2538 /* : Int */;
-val* var2539 /* : ReduceAction610 */;
-long var2540 /* : Int */;
-val* var2541 /* : ReduceAction611 */;
-long var2542 /* : Int */;
-val* var2543 /* : ReduceAction612 */;
-long var2544 /* : Int */;
-val* var2545 /* : ReduceAction613 */;
-long var2546 /* : Int */;
-val* var2547 /* : ReduceAction614 */;
-long var2548 /* : Int */;
-val* var2549 /* : ReduceAction615 */;
-long var2550 /* : Int */;
-val* var2551 /* : ReduceAction616 */;
-long var2552 /* : Int */;
-val* var2553 /* : ReduceAction596 */;
-long var2554 /* : Int */;
-val* var2555 /* : ReduceAction596 */;
-long var2556 /* : Int */;
-val* var2557 /* : ReduceAction596 */;
-long var2558 /* : Int */;
-val* var2559 /* : ReduceAction596 */;
-long var2560 /* : Int */;
-val* var2561 /* : ReduceAction596 */;
-long var2562 /* : Int */;
-val* var2563 /* : ReduceAction596 */;
-long var2564 /* : Int */;
-val* var2565 /* : ReduceAction623 */;
-long var2566 /* : Int */;
-val* var2567 /* : ReduceAction624 */;
-long var2568 /* : Int */;
-val* var2569 /* : ReduceAction625 */;
-long var2570 /* : Int */;
-val* var2571 /* : ReduceAction626 */;
-long var2572 /* : Int */;
-val* var2573 /* : ReduceAction625 */;
-long var2574 /* : Int */;
-val* var2575 /* : ReduceAction628 */;
-long var2576 /* : Int */;
-val* var2577 /* : ReduceAction629 */;
-long var2578 /* : Int */;
-val* var2579 /* : ReduceAction628 */;
-long var2580 /* : Int */;
-val* var2581 /* : ReduceAction631 */;
-long var2582 /* : Int */;
-val* var2583 /* : ReduceAction632 */;
-long var2584 /* : Int */;
-val* var2585 /* : ReduceAction633 */;
-long var2586 /* : Int */;
-val* var2587 /* : ReduceAction634 */;
-long var2588 /* : Int */;
-val* var2589 /* : ReduceAction635 */;
-long var2590 /* : Int */;
-val* var2591 /* : ReduceAction636 */;
-long var2592 /* : Int */;
-val* var2593 /* : ReduceAction637 */;
-long var2594 /* : Int */;
-val* var2595 /* : ReduceAction638 */;
-long var2596 /* : Int */;
-val* var2597 /* : ReduceAction637 */;
-long var2598 /* : Int */;
-val* var2599 /* : ReduceAction640 */;
-long var2600 /* : Int */;
-val* var2601 /* : ReduceAction641 */;
-long var2602 /* : Int */;
-val* var2603 /* : ReduceAction640 */;
-long var2604 /* : Int */;
-val* var2605 /* : ReduceAction643 */;
-long var2606 /* : Int */;
-val* var2607 /* : ReduceAction645 */;
-long var2608 /* : Int */;
-val* var2609 /* : ReduceAction646 */;
-long var2610 /* : Int */;
-val* var2611 /* : ReduceAction647 */;
-long var2612 /* : Int */;
-val* var2613 /* : ReduceAction648 */;
-long var2614 /* : Int */;
-val* var2615 /* : ReduceAction649 */;
-long var2616 /* : Int */;
-val* var2617 /* : ReduceAction650 */;
-long var2618 /* : Int */;
-val* var2619 /* : ReduceAction651 */;
-long var2620 /* : Int */;
-val* var2621 /* : ReduceAction652 */;
-long var2622 /* : Int */;
-val* var2623 /* : ReduceAction653 */;
-long var2624 /* : Int */;
-val* var2625 /* : ReduceAction654 */;
-long var2626 /* : Int */;
-val* var2627 /* : ReduceAction655 */;
-long var2628 /* : Int */;
-val* var2629 /* : ReduceAction656 */;
-long var2630 /* : Int */;
-val* var2631 /* : ReduceAction657 */;
-long var2632 /* : Int */;
-val* var2633 /* : ReduceAction656 */;
-long var2634 /* : Int */;
-val* var2635 /* : ReduceAction659 */;
-long var2636 /* : Int */;
-val* var2637 /* : ReduceAction660 */;
-long var2638 /* : Int */;
-val* var2639 /* : ReduceAction659 */;
-long var2640 /* : Int */;
-val* var2641 /* : ReduceAction662 */;
-long var2642 /* : Int */;
-val* var2643 /* : ReduceAction663 */;
-long var2644 /* : Int */;
-val* var2645 /* : ReduceAction664 */;
-long var2646 /* : Int */;
-val* var2647 /* : ReduceAction665 */;
-long var2648 /* : Int */;
-val* var2649 /* : ReduceAction664 */;
-long var2650 /* : Int */;
-val* var2651 /* : ReduceAction667 */;
-long var2652 /* : Int */;
-val* var2653 /* : ReduceAction668 */;
-long var2654 /* : Int */;
-val* var2655 /* : ReduceAction667 */;
-long var2656 /* : Int */;
-val* var2657 /* : ReduceAction670 */;
-long var2658 /* : Int */;
-val* var2659 /* : ReduceAction671 */;
-long var2660 /* : Int */;
-val* var2661 /* : ReduceAction672 */;
-long var2662 /* : Int */;
-val* var2663 /* : ReduceAction673 */;
-long var2664 /* : Int */;
-val* var2665 /* : ReduceAction674 */;
-long var2666 /* : Int */;
-val* var2667 /* : ReduceAction673 */;
-long var2668 /* : Int */;
-val* var2669 /* : ReduceAction676 */;
-long var2670 /* : Int */;
-val* var2671 /* : ReduceAction677 */;
-long var2672 /* : Int */;
-val* var2673 /* : ReduceAction676 */;
-long var2674 /* : Int */;
-val* var2675 /* : ReduceAction679 */;
-long var2676 /* : Int */;
-val* var2677 /* : ReduceAction680 */;
-long var2678 /* : Int */;
-val* var2679 /* : ReduceAction681 */;
-long var2680 /* : Int */;
-val* var2681 /* : ReduceAction682 */;
-long var2682 /* : Int */;
-val* var2683 /* : ReduceAction681 */;
-long var2684 /* : Int */;
-val* var2685 /* : ReduceAction684 */;
-long var2686 /* : Int */;
-val* var2687 /* : ReduceAction685 */;
-long var2688 /* : Int */;
-val* var2689 /* : ReduceAction684 */;
-long var2690 /* : Int */;
-val* var2691 /* : ReduceAction687 */;
-long var2692 /* : Int */;
-val* var2693 /* : ReduceAction690 */;
-long var2694 /* : Int */;
-val* var2695 /* : ReduceAction691 */;
-long var2696 /* : Int */;
-val* var2697 /* : ReduceAction692 */;
-long var2698 /* : Int */;
-val* var2699 /* : ReduceAction699 */;
-long var2700 /* : Int */;
-val* var2701 /* : ReduceAction700 */;
-long var2702 /* : Int */;
-val* var2703 /* : ReduceAction701 */;
-long var2704 /* : Int */;
-val* var2705 /* : ReduceAction702 */;
-long var2706 /* : Int */;
-val* var2707 /* : ReduceAction703 */;
-long var2708 /* : Int */;
-val* var2709 /* : ReduceAction704 */;
-long var2710 /* : Int */;
-val* var2711 /* : ReduceAction705 */;
-long var2712 /* : Int */;
-val* var2713 /* : ReduceAction706 */;
-long var2714 /* : Int */;
-val* var2715 /* : ReduceAction707 */;
-long var2716 /* : Int */;
-val* var2717 /* : ReduceAction708 */;
-long var2718 /* : Int */;
-val* var2719 /* : ReduceAction596 */;
-long var2720 /* : Int */;
-val* var2721 /* : ReduceAction596 */;
-long var2722 /* : Int */;
-val* var2723 /* : ReduceAction596 */;
-long var2724 /* : Int */;
-val* var2725 /* : ReduceAction596 */;
-long var2726 /* : Int */;
-val* var2727 /* : ReduceAction606 */;
-long var2728 /* : Int */;
-val* var2729 /* : ReduceAction607 */;
-long var2730 /* : Int */;
-val* var2731 /* : ReduceAction608 */;
-long var2732 /* : Int */;
-val* var2733 /* : ReduceAction609 */;
-long var2734 /* : Int */;
-val* var2735 /* : ReduceAction610 */;
-long var2736 /* : Int */;
-val* var2737 /* : ReduceAction611 */;
-long var2738 /* : Int */;
-val* var2739 /* : ReduceAction612 */;
-long var2740 /* : Int */;
-val* var2741 /* : ReduceAction613 */;
-long var2742 /* : Int */;
-val* var2743 /* : ReduceAction614 */;
-long var2744 /* : Int */;
-val* var2745 /* : ReduceAction615 */;
-long var2746 /* : Int */;
-val* var2747 /* : ReduceAction616 */;
-long var2748 /* : Int */;
-val* var2749 /* : ReduceAction596 */;
-long var2750 /* : Int */;
-val* var2751 /* : ReduceAction596 */;
-long var2752 /* : Int */;
-val* var2753 /* : ReduceAction596 */;
-long var2754 /* : Int */;
-val* var2755 /* : ReduceAction596 */;
-long var2756 /* : Int */;
-val* var2757 /* : ReduceAction596 */;
-long var2758 /* : Int */;
-val* var2759 /* : ReduceAction596 */;
-long var2760 /* : Int */;
-val* var2761 /* : ReduceAction623 */;
-long var2762 /* : Int */;
-val* var2763 /* : ReduceAction624 */;
-long var2764 /* : Int */;
-val* var2765 /* : ReduceAction625 */;
-long var2766 /* : Int */;
-val* var2767 /* : ReduceAction626 */;
-long var2768 /* : Int */;
-val* var2769 /* : ReduceAction625 */;
-long var2770 /* : Int */;
-val* var2771 /* : ReduceAction628 */;
-long var2772 /* : Int */;
-val* var2773 /* : ReduceAction629 */;
-long var2774 /* : Int */;
-val* var2775 /* : ReduceAction628 */;
-long var2776 /* : Int */;
-val* var2777 /* : ReduceAction631 */;
-long var2778 /* : Int */;
-val* var2779 /* : ReduceAction632 */;
-long var2780 /* : Int */;
-val* var2781 /* : ReduceAction633 */;
-long var2782 /* : Int */;
-val* var2783 /* : ReduceAction634 */;
-long var2784 /* : Int */;
-val* var2785 /* : ReduceAction635 */;
-long var2786 /* : Int */;
-val* var2787 /* : ReduceAction636 */;
-long var2788 /* : Int */;
-val* var2789 /* : ReduceAction637 */;
-long var2790 /* : Int */;
-val* var2791 /* : ReduceAction638 */;
-long var2792 /* : Int */;
-val* var2793 /* : ReduceAction637 */;
-long var2794 /* : Int */;
-val* var2795 /* : ReduceAction640 */;
-long var2796 /* : Int */;
-val* var2797 /* : ReduceAction641 */;
-long var2798 /* : Int */;
-val* var2799 /* : ReduceAction640 */;
-long var2800 /* : Int */;
-val* var2801 /* : ReduceAction643 */;
-long var2802 /* : Int */;
-val* var2803 /* : ReduceAction654 */;
-long var2804 /* : Int */;
-val* var2805 /* : ReduceAction655 */;
-long var2806 /* : Int */;
-val* var2807 /* : ReduceAction656 */;
-long var2808 /* : Int */;
-val* var2809 /* : ReduceAction657 */;
-long var2810 /* : Int */;
-val* var2811 /* : ReduceAction656 */;
-long var2812 /* : Int */;
-val* var2813 /* : ReduceAction659 */;
-long var2814 /* : Int */;
-val* var2815 /* : ReduceAction660 */;
-long var2816 /* : Int */;
-val* var2817 /* : ReduceAction659 */;
-long var2818 /* : Int */;
-val* var2819 /* : ReduceAction662 */;
-long var2820 /* : Int */;
-val* var2821 /* : ReduceAction663 */;
-long var2822 /* : Int */;
-val* var2823 /* : ReduceAction664 */;
-long var2824 /* : Int */;
-val* var2825 /* : ReduceAction665 */;
-long var2826 /* : Int */;
-val* var2827 /* : ReduceAction664 */;
-long var2828 /* : Int */;
-val* var2829 /* : ReduceAction667 */;
-long var2830 /* : Int */;
-val* var2831 /* : ReduceAction668 */;
-long var2832 /* : Int */;
-val* var2833 /* : ReduceAction667 */;
-long var2834 /* : Int */;
-val* var2835 /* : ReduceAction670 */;
-long var2836 /* : Int */;
-val* var2837 /* : ReduceAction671 */;
-long var2838 /* : Int */;
-val* var2839 /* : ReduceAction672 */;
-long var2840 /* : Int */;
-val* var2841 /* : ReduceAction673 */;
-long var2842 /* : Int */;
-val* var2843 /* : ReduceAction674 */;
-long var2844 /* : Int */;
-val* var2845 /* : ReduceAction673 */;
-long var2846 /* : Int */;
-val* var2847 /* : ReduceAction676 */;
-long var2848 /* : Int */;
-val* var2849 /* : ReduceAction677 */;
-long var2850 /* : Int */;
-val* var2851 /* : ReduceAction676 */;
-long var2852 /* : Int */;
-val* var2853 /* : ReduceAction679 */;
-long var2854 /* : Int */;
-val* var2855 /* : ReduceAction680 */;
-long var2856 /* : Int */;
-val* var2857 /* : ReduceAction681 */;
-long var2858 /* : Int */;
-val* var2859 /* : ReduceAction682 */;
-long var2860 /* : Int */;
-val* var2861 /* : ReduceAction681 */;
-long var2862 /* : Int */;
-val* var2863 /* : ReduceAction684 */;
-long var2864 /* : Int */;
-val* var2865 /* : ReduceAction685 */;
-long var2866 /* : Int */;
-val* var2867 /* : ReduceAction684 */;
-long var2868 /* : Int */;
-val* var2869 /* : ReduceAction687 */;
-long var2870 /* : Int */;
-val* var2871 /* : ReduceAction596 */;
-long var2872 /* : Int */;
-val* var2873 /* : ReduceAction596 */;
-long var2874 /* : Int */;
-val* var2875 /* : ReduceAction593 */;
-long var2876 /* : Int */;
-val* var2877 /* : ReduceAction594 */;
-long var2878 /* : Int */;
-val* var2879 /* : ReduceAction595 */;
-long var2880 /* : Int */;
-val* var2881 /* : ReduceAction593 */;
-long var2882 /* : Int */;
-val* var2883 /* : ReduceAction594 */;
-long var2884 /* : Int */;
-val* var2885 /* : ReduceAction595 */;
-long var2886 /* : Int */;
-val* var2887 /* : ReduceAction596 */;
-long var2888 /* : Int */;
-val* var2889 /* : ReduceAction596 */;
-long var2890 /* : Int */;
-val* var2891 /* : ReduceAction606 */;
-long var2892 /* : Int */;
-val* var2893 /* : ReduceAction607 */;
-long var2894 /* : Int */;
-val* var2895 /* : ReduceAction608 */;
-long var2896 /* : Int */;
-val* var2897 /* : ReduceAction609 */;
-long var2898 /* : Int */;
-val* var2899 /* : ReduceAction610 */;
-long var2900 /* : Int */;
-val* var2901 /* : ReduceAction611 */;
-long var2902 /* : Int */;
-val* var2903 /* : ReduceAction612 */;
-long var2904 /* : Int */;
-val* var2905 /* : ReduceAction613 */;
-long var2906 /* : Int */;
-val* var2907 /* : ReduceAction614 */;
-long var2908 /* : Int */;
-val* var2909 /* : ReduceAction615 */;
-long var2910 /* : Int */;
-val* var2911 /* : ReduceAction616 */;
-long var2912 /* : Int */;
-val* var2913 /* : ReduceAction596 */;
-long var2914 /* : Int */;
-val* var2915 /* : ReduceAction596 */;
-long var2916 /* : Int */;
-val* var2917 /* : ReduceAction596 */;
-long var2918 /* : Int */;
-val* var2919 /* : ReduceAction596 */;
-long var2920 /* : Int */;
-val* var2921 /* : ReduceAction596 */;
-long var2922 /* : Int */;
-val* var2923 /* : ReduceAction643 */;
-long var2924 /* : Int */;
-val* var2925 /* : ReduceAction596 */;
-long var2926 /* : Int */;
-val* var2927 /* : ReduceAction596 */;
-long var2928 /* : Int */;
-val* var2929 /* : ReduceAction606 */;
-long var2930 /* : Int */;
-val* var2931 /* : ReduceAction607 */;
-long var2932 /* : Int */;
-val* var2933 /* : ReduceAction608 */;
-long var2934 /* : Int */;
-val* var2935 /* : ReduceAction609 */;
-long var2936 /* : Int */;
-val* var2937 /* : ReduceAction610 */;
-long var2938 /* : Int */;
-val* var2939 /* : ReduceAction611 */;
-long var2940 /* : Int */;
-val* var2941 /* : ReduceAction612 */;
-long var2942 /* : Int */;
-val* var2943 /* : ReduceAction613 */;
-long var2944 /* : Int */;
-val* var2945 /* : ReduceAction614 */;
-long var2946 /* : Int */;
-val* var2947 /* : ReduceAction615 */;
-long var2948 /* : Int */;
-val* var2949 /* : ReduceAction616 */;
-long var2950 /* : Int */;
-val* var2951 /* : ReduceAction596 */;
-long var2952 /* : Int */;
-val* var2953 /* : ReduceAction596 */;
-long var2954 /* : Int */;
-val* var2955 /* : ReduceAction596 */;
-long var2956 /* : Int */;
-val* var2957 /* : ReduceAction596 */;
-long var2958 /* : Int */;
-val* var2959 /* : ReduceAction596 */;
-long var2960 /* : Int */;
-val* var2961 /* : ReduceAction643 */;
-long var2962 /* : Int */;
-val* var2963 /* : ReduceAction596 */;
-long var2964 /* : Int */;
-val* var2965 /* : ReduceAction596 */;
-long var2966 /* : Int */;
-val* var2967 /* : ReduceAction606 */;
-long var2968 /* : Int */;
-val* var2969 /* : ReduceAction607 */;
-long var2970 /* : Int */;
-val* var2971 /* : ReduceAction608 */;
-long var2972 /* : Int */;
-val* var2973 /* : ReduceAction609 */;
-long var2974 /* : Int */;
-val* var2975 /* : ReduceAction610 */;
-long var2976 /* : Int */;
-val* var2977 /* : ReduceAction611 */;
-long var2978 /* : Int */;
-val* var2979 /* : ReduceAction612 */;
-long var2980 /* : Int */;
-val* var2981 /* : ReduceAction613 */;
-long var2982 /* : Int */;
-val* var2983 /* : ReduceAction614 */;
-long var2984 /* : Int */;
-val* var2985 /* : ReduceAction615 */;
-long var2986 /* : Int */;
-val* var2987 /* : ReduceAction616 */;
-long var2988 /* : Int */;
-val* var2989 /* : ReduceAction596 */;
-long var2990 /* : Int */;
-val* var2991 /* : ReduceAction596 */;
-long var2992 /* : Int */;
-val* var2993 /* : ReduceAction596 */;
-long var2994 /* : Int */;
-val* var2995 /* : ReduceAction596 */;
-long var2996 /* : Int */;
-val* var2997 /* : ReduceAction596 */;
-long var2998 /* : Int */;
-val* var2999 /* : ReduceAction643 */;
-long var3000 /* : Int */;
-val* var3001 /* : ReduceAction596 */;
-long var3002 /* : Int */;
-val* var3003 /* : ReduceAction596 */;
-long var3004 /* : Int */;
-val* var3005 /* : ReduceAction606 */;
-long var3006 /* : Int */;
-val* var3007 /* : ReduceAction607 */;
-long var3008 /* : Int */;
-val* var3009 /* : ReduceAction608 */;
-long var3010 /* : Int */;
-val* var3011 /* : ReduceAction609 */;
-long var3012 /* : Int */;
-val* var3013 /* : ReduceAction610 */;
-long var3014 /* : Int */;
-val* var3015 /* : ReduceAction611 */;
-long var3016 /* : Int */;
-val* var3017 /* : ReduceAction612 */;
-long var3018 /* : Int */;
-val* var3019 /* : ReduceAction613 */;
-long var3020 /* : Int */;
-val* var3021 /* : ReduceAction614 */;
-long var3022 /* : Int */;
-val* var3023 /* : ReduceAction615 */;
-long var3024 /* : Int */;
-val* var3025 /* : ReduceAction616 */;
-long var3026 /* : Int */;
-val* var3027 /* : ReduceAction596 */;
-long var3028 /* : Int */;
-val* var3029 /* : ReduceAction596 */;
-long var3030 /* : Int */;
-val* var3031 /* : ReduceAction596 */;
-long var3032 /* : Int */;
-val* var3033 /* : ReduceAction596 */;
-long var3034 /* : Int */;
-val* var3035 /* : ReduceAction596 */;
-long var3036 /* : Int */;
-val* var3037 /* : ReduceAction643 */;
-long var3038 /* : Int */;
-val* var3039 /* : ReduceAction828 */;
-long var3040 /* : Int */;
-val* var3041 /* : ReduceAction829 */;
-long var3042 /* : Int */;
-val* var3043 /* : ReduceAction830 */;
-long var3044 /* : Int */;
-val* var3045 /* : ReduceAction831 */;
-long var3046 /* : Int */;
-val* var3047 /* : ReduceAction832 */;
-long var3048 /* : Int */;
-val* var3049 /* : ReduceAction841 */;
-long var3050 /* : Int */;
-val* var3051 /* : ReduceAction844 */;
-long var3052 /* : Int */;
-val* var3053 /* : ReduceAction1526 */;
-long var3054 /* : Int */;
-val* var3055 /* : ReduceAction1527 */;
-long var3056 /* : Int */;
-val* var3057 /* : ReduceAction1528 */;
-long var3058 /* : Int */;
-val* var3059 /* : ReduceAction1529 */;
-long var3060 /* : Int */;
-val* var3061 /* : ReduceAction1530 */;
-long var3062 /* : Int */;
-val* var3063 /* : ReduceAction1531 */;
-long var3064 /* : Int */;
-val* var3065 /* : ReduceAction1532 */;
-long var3066 /* : Int */;
-val* var3067 /* : ReduceAction1533 */;
-long var3068 /* : Int */;
-val* var3069 /* : ReduceAction1534 */;
-long var3070 /* : Int */;
-val* var3071 /* : ReduceAction1535 */;
-long var3072 /* : Int */;
-val* var3073 /* : ReduceAction1532 */;
-long var3074 /* : Int */;
-val* var3075 /* : ReduceAction1533 */;
-long var3076 /* : Int */;
-val* var3077 /* : ReduceAction1538 */;
-long var3078 /* : Int */;
-val* var3079 /* : ReduceAction1539 */;
-long var3080 /* : Int */;
-val* var3081 /* : ReduceAction1540 */;
-long var3082 /* : Int */;
-val* var3083 /* : ReduceAction1541 */;
-long var3084 /* : Int */;
-val* var3085 /* : ReduceAction1542 */;
-long var3086 /* : Int */;
-val* var3087 /* : ReduceAction1543 */;
-long var3088 /* : Int */;
-val* var3089 /* : ReduceAction589 */;
-long var3090 /* : Int */;
-val* var3091 /* : ReduceAction1545 */;
-long var3092 /* : Int */;
-val* var3093 /* : ReduceAction1546 */;
-long var3094 /* : Int */;
-val* var3095 /* : ReduceAction1547 */;
-long var3096 /* : Int */;
-val* var3097 /* : ReduceAction1548 */;
-long var3098 /* : Int */;
-val* var3099 /* : ReduceAction1549 */;
-long var3100 /* : Int */;
-val* var3101 /* : ReduceAction825 */;
-long var3102 /* : Int */;
-val* var3103 /* : ReduceAction1551 */;
-long var3104 /* : Int */;
-val* var3105 /* : ReduceAction825 */;
-long var3106 /* : Int */;
-val* var3107 /* : ReduceAction1551 */;
-long var3108 /* : Int */;
-val* var3109 /* : ReduceAction834 */;
-long var3110 /* : Int */;
-val* var3111 /* : ReduceAction1555 */;
-long var3112 /* : Int */;
-val* var3113 /* : ReduceAction1546 */;
-long var3114 /* : Int */;
-val* var3115 /* : ReduceAction1547 */;
-long var3116 /* : Int */;
-val* var3117 /* : ReduceAction856 */;
-long var3118 /* : Int */;
-val* var3119 /* : ReduceAction1559 */;
-long var3120 /* : Int */;
-val* var3121 /* : ReduceAction1560 */;
-long var3122 /* : Int */;
-val* var3123 /* : ReduceAction1561 */;
-long var3124 /* : Int */;
-val* var3125 /* : ReduceAction1562 */;
-long var3126 /* : Int */;
-val* var3127 /* : ReduceAction1563 */;
-long var3128 /* : Int */;
-val* var3129 /* : ReduceAction825 */;
-long var3130 /* : Int */;
-val* var3131 /* : ReduceAction1551 */;
-long var3132 /* : Int */;
-val* var3133 /* : Array[nullable Object] */;
-long var3134 /* : Int */;
-val* var3135 /* : NativeArray[nullable Object] */;
-var = NEW_array__Array(&type_array__Arrayparser__ReduceAction);
-var1 = NEW_parser__ReduceAction0(&type_parser__ReduceAction0);
-var2 = 0;
-((void (*)(val*, long))(var1->class->vft[COLOR_parser__ReduceAction__init]))(var1, var2) /* init on <var1:ReduceAction0>*/;
-var3 = NEW_parser__ReduceAction1(&type_parser__ReduceAction1);
-var4 = 0;
-((void (*)(val*, long))(var3->class->vft[COLOR_parser__ReduceAction__init]))(var3, var4) /* init on <var3:ReduceAction1>*/;
-var5 = NEW_parser__ReduceAction2(&type_parser__ReduceAction2);
-var6 = 0;
-((void (*)(val*, long))(var5->class->vft[COLOR_parser__ReduceAction__init]))(var5, var6) /* init on <var5:ReduceAction2>*/;
-var7 = NEW_parser__ReduceAction3(&type_parser__ReduceAction3);
-var8 = 0;
-((void (*)(val*, long))(var7->class->vft[COLOR_parser__ReduceAction__init]))(var7, var8) /* init on <var7:ReduceAction3>*/;
-var9 = NEW_parser__ReduceAction4(&type_parser__ReduceAction4);
-var10 = 0;
-((void (*)(val*, long))(var9->class->vft[COLOR_parser__ReduceAction__init]))(var9, var10) /* init on <var9:ReduceAction4>*/;
-var11 = NEW_parser__ReduceAction5(&type_parser__ReduceAction5);
-var12 = 0;
-((void (*)(val*, long))(var11->class->vft[COLOR_parser__ReduceAction__init]))(var11, var12) /* init on <var11:ReduceAction5>*/;
-var13 = NEW_parser__ReduceAction6(&type_parser__ReduceAction6);
-var14 = 0;
-((void (*)(val*, long))(var13->class->vft[COLOR_parser__ReduceAction__init]))(var13, var14) /* init on <var13:ReduceAction6>*/;
-var15 = NEW_parser__ReduceAction7(&type_parser__ReduceAction7);
-var16 = 0;
-((void (*)(val*, long))(var15->class->vft[COLOR_parser__ReduceAction__init]))(var15, var16) /* init on <var15:ReduceAction7>*/;
-var17 = NEW_parser__ReduceAction8(&type_parser__ReduceAction8);
-var18 = 0;
-((void (*)(val*, long))(var17->class->vft[COLOR_parser__ReduceAction__init]))(var17, var18) /* init on <var17:ReduceAction8>*/;
-var19 = NEW_parser__ReduceAction9(&type_parser__ReduceAction9);
-var20 = 0;
-((void (*)(val*, long))(var19->class->vft[COLOR_parser__ReduceAction__init]))(var19, var20) /* init on <var19:ReduceAction9>*/;
-var21 = NEW_parser__ReduceAction10(&type_parser__ReduceAction10);
-var22 = 0;
-((void (*)(val*, long))(var21->class->vft[COLOR_parser__ReduceAction__init]))(var21, var22) /* init on <var21:ReduceAction10>*/;
-var23 = NEW_parser__ReduceAction11(&type_parser__ReduceAction11);
-var24 = 0;
-((void (*)(val*, long))(var23->class->vft[COLOR_parser__ReduceAction__init]))(var23, var24) /* init on <var23:ReduceAction11>*/;
-var25 = NEW_parser__ReduceAction12(&type_parser__ReduceAction12);
-var26 = 0;
-((void (*)(val*, long))(var25->class->vft[COLOR_parser__ReduceAction__init]))(var25, var26) /* init on <var25:ReduceAction12>*/;
-var27 = NEW_parser__ReduceAction13(&type_parser__ReduceAction13);
-var28 = 0;
-((void (*)(val*, long))(var27->class->vft[COLOR_parser__ReduceAction__init]))(var27, var28) /* init on <var27:ReduceAction13>*/;
-var29 = NEW_parser__ReduceAction14(&type_parser__ReduceAction14);
-var30 = 0;
-((void (*)(val*, long))(var29->class->vft[COLOR_parser__ReduceAction__init]))(var29, var30) /* init on <var29:ReduceAction14>*/;
-var31 = NEW_parser__ReduceAction15(&type_parser__ReduceAction15);
-var32 = 0;
-((void (*)(val*, long))(var31->class->vft[COLOR_parser__ReduceAction__init]))(var31, var32) /* init on <var31:ReduceAction15>*/;
-var33 = NEW_parser__ReduceAction16(&type_parser__ReduceAction16);
-var34 = 0;
-((void (*)(val*, long))(var33->class->vft[COLOR_parser__ReduceAction__init]))(var33, var34) /* init on <var33:ReduceAction16>*/;
-var35 = NEW_parser__ReduceAction17(&type_parser__ReduceAction17);
-var36 = 0;
-((void (*)(val*, long))(var35->class->vft[COLOR_parser__ReduceAction__init]))(var35, var36) /* init on <var35:ReduceAction17>*/;
-var37 = NEW_parser__ReduceAction18(&type_parser__ReduceAction18);
-var38 = 0;
-((void (*)(val*, long))(var37->class->vft[COLOR_parser__ReduceAction__init]))(var37, var38) /* init on <var37:ReduceAction18>*/;
-var39 = NEW_parser__ReduceAction19(&type_parser__ReduceAction19);
-var40 = 0;
-((void (*)(val*, long))(var39->class->vft[COLOR_parser__ReduceAction__init]))(var39, var40) /* init on <var39:ReduceAction19>*/;
-var41 = NEW_parser__ReduceAction20(&type_parser__ReduceAction20);
-var42 = 0;
-((void (*)(val*, long))(var41->class->vft[COLOR_parser__ReduceAction__init]))(var41, var42) /* init on <var41:ReduceAction20>*/;
-var43 = NEW_parser__ReduceAction21(&type_parser__ReduceAction21);
-var44 = 0;
-((void (*)(val*, long))(var43->class->vft[COLOR_parser__ReduceAction__init]))(var43, var44) /* init on <var43:ReduceAction21>*/;
-var45 = NEW_parser__ReduceAction22(&type_parser__ReduceAction22);
-var46 = 0;
-((void (*)(val*, long))(var45->class->vft[COLOR_parser__ReduceAction__init]))(var45, var46) /* init on <var45:ReduceAction22>*/;
-var47 = NEW_parser__ReduceAction23(&type_parser__ReduceAction23);
-var48 = 0;
-((void (*)(val*, long))(var47->class->vft[COLOR_parser__ReduceAction__init]))(var47, var48) /* init on <var47:ReduceAction23>*/;
-var49 = NEW_parser__ReduceAction24(&type_parser__ReduceAction24);
-var50 = 0;
-((void (*)(val*, long))(var49->class->vft[COLOR_parser__ReduceAction__init]))(var49, var50) /* init on <var49:ReduceAction24>*/;
-var51 = NEW_parser__ReduceAction25(&type_parser__ReduceAction25);
-var52 = 0;
-((void (*)(val*, long))(var51->class->vft[COLOR_parser__ReduceAction__init]))(var51, var52) /* init on <var51:ReduceAction25>*/;
-var53 = NEW_parser__ReduceAction26(&type_parser__ReduceAction26);
-var54 = 0;
-((void (*)(val*, long))(var53->class->vft[COLOR_parser__ReduceAction__init]))(var53, var54) /* init on <var53:ReduceAction26>*/;
-var55 = NEW_parser__ReduceAction27(&type_parser__ReduceAction27);
-var56 = 0;
-((void (*)(val*, long))(var55->class->vft[COLOR_parser__ReduceAction__init]))(var55, var56) /* init on <var55:ReduceAction27>*/;
-var57 = NEW_parser__ReduceAction28(&type_parser__ReduceAction28);
-var58 = 0;
-((void (*)(val*, long))(var57->class->vft[COLOR_parser__ReduceAction__init]))(var57, var58) /* init on <var57:ReduceAction28>*/;
-var59 = NEW_parser__ReduceAction29(&type_parser__ReduceAction29);
-var60 = 0;
-((void (*)(val*, long))(var59->class->vft[COLOR_parser__ReduceAction__init]))(var59, var60) /* init on <var59:ReduceAction29>*/;
-var61 = NEW_parser__ReduceAction30(&type_parser__ReduceAction30);
-var62 = 0;
-((void (*)(val*, long))(var61->class->vft[COLOR_parser__ReduceAction__init]))(var61, var62) /* init on <var61:ReduceAction30>*/;
-var63 = NEW_parser__ReduceAction31(&type_parser__ReduceAction31);
-var64 = 0;
-((void (*)(val*, long))(var63->class->vft[COLOR_parser__ReduceAction__init]))(var63, var64) /* init on <var63:ReduceAction31>*/;
-var65 = NEW_parser__ReduceAction32(&type_parser__ReduceAction32);
-var66 = 0;
-((void (*)(val*, long))(var65->class->vft[COLOR_parser__ReduceAction__init]))(var65, var66) /* init on <var65:ReduceAction32>*/;
-var67 = NEW_parser__ReduceAction33(&type_parser__ReduceAction33);
-var68 = 0;
-((void (*)(val*, long))(var67->class->vft[COLOR_parser__ReduceAction__init]))(var67, var68) /* init on <var67:ReduceAction33>*/;
-var69 = NEW_parser__ReduceAction34(&type_parser__ReduceAction34);
-var70 = 0;
-((void (*)(val*, long))(var69->class->vft[COLOR_parser__ReduceAction__init]))(var69, var70) /* init on <var69:ReduceAction34>*/;
-var71 = NEW_parser__ReduceAction35(&type_parser__ReduceAction35);
-var72 = 0;
-((void (*)(val*, long))(var71->class->vft[COLOR_parser__ReduceAction__init]))(var71, var72) /* init on <var71:ReduceAction35>*/;
-var73 = NEW_parser__ReduceAction36(&type_parser__ReduceAction36);
-var74 = 0;
-((void (*)(val*, long))(var73->class->vft[COLOR_parser__ReduceAction__init]))(var73, var74) /* init on <var73:ReduceAction36>*/;
-var75 = NEW_parser__ReduceAction37(&type_parser__ReduceAction37);
-var76 = 0;
-((void (*)(val*, long))(var75->class->vft[COLOR_parser__ReduceAction__init]))(var75, var76) /* init on <var75:ReduceAction37>*/;
-var77 = NEW_parser__ReduceAction38(&type_parser__ReduceAction38);
-var78 = 0;
-((void (*)(val*, long))(var77->class->vft[COLOR_parser__ReduceAction__init]))(var77, var78) /* init on <var77:ReduceAction38>*/;
-var79 = NEW_parser__ReduceAction39(&type_parser__ReduceAction39);
-var80 = 0;
-((void (*)(val*, long))(var79->class->vft[COLOR_parser__ReduceAction__init]))(var79, var80) /* init on <var79:ReduceAction39>*/;
-var81 = NEW_parser__ReduceAction40(&type_parser__ReduceAction40);
-var82 = 0;
-((void (*)(val*, long))(var81->class->vft[COLOR_parser__ReduceAction__init]))(var81, var82) /* init on <var81:ReduceAction40>*/;
-var83 = NEW_parser__ReduceAction41(&type_parser__ReduceAction41);
-var84 = 0;
-((void (*)(val*, long))(var83->class->vft[COLOR_parser__ReduceAction__init]))(var83, var84) /* init on <var83:ReduceAction41>*/;
-var85 = NEW_parser__ReduceAction42(&type_parser__ReduceAction42);
-var86 = 0;
-((void (*)(val*, long))(var85->class->vft[COLOR_parser__ReduceAction__init]))(var85, var86) /* init on <var85:ReduceAction42>*/;
-var87 = NEW_parser__ReduceAction43(&type_parser__ReduceAction43);
-var88 = 0;
-((void (*)(val*, long))(var87->class->vft[COLOR_parser__ReduceAction__init]))(var87, var88) /* init on <var87:ReduceAction43>*/;
-var89 = NEW_parser__ReduceAction44(&type_parser__ReduceAction44);
-var90 = 0;
-((void (*)(val*, long))(var89->class->vft[COLOR_parser__ReduceAction__init]))(var89, var90) /* init on <var89:ReduceAction44>*/;
-var91 = NEW_parser__ReduceAction45(&type_parser__ReduceAction45);
-var92 = 0;
-((void (*)(val*, long))(var91->class->vft[COLOR_parser__ReduceAction__init]))(var91, var92) /* init on <var91:ReduceAction45>*/;
-var93 = NEW_parser__ReduceAction46(&type_parser__ReduceAction46);
-var94 = 0;
-((void (*)(val*, long))(var93->class->vft[COLOR_parser__ReduceAction__init]))(var93, var94) /* init on <var93:ReduceAction46>*/;
-var95 = NEW_parser__ReduceAction47(&type_parser__ReduceAction47);
-var96 = 0;
-((void (*)(val*, long))(var95->class->vft[COLOR_parser__ReduceAction__init]))(var95, var96) /* init on <var95:ReduceAction47>*/;
-var97 = NEW_parser__ReduceAction48(&type_parser__ReduceAction48);
-var98 = 0;
-((void (*)(val*, long))(var97->class->vft[COLOR_parser__ReduceAction__init]))(var97, var98) /* init on <var97:ReduceAction48>*/;
-var99 = NEW_parser__ReduceAction49(&type_parser__ReduceAction49);
-var100 = 0;
-((void (*)(val*, long))(var99->class->vft[COLOR_parser__ReduceAction__init]))(var99, var100) /* init on <var99:ReduceAction49>*/;
-var101 = NEW_parser__ReduceAction50(&type_parser__ReduceAction50);
-var102 = 0;
-((void (*)(val*, long))(var101->class->vft[COLOR_parser__ReduceAction__init]))(var101, var102) /* init on <var101:ReduceAction50>*/;
-var103 = NEW_parser__ReduceAction51(&type_parser__ReduceAction51);
-var104 = 0;
-((void (*)(val*, long))(var103->class->vft[COLOR_parser__ReduceAction__init]))(var103, var104) /* init on <var103:ReduceAction51>*/;
-var105 = NEW_parser__ReduceAction52(&type_parser__ReduceAction52);
-var106 = 0;
-((void (*)(val*, long))(var105->class->vft[COLOR_parser__ReduceAction__init]))(var105, var106) /* init on <var105:ReduceAction52>*/;
-var107 = NEW_parser__ReduceAction53(&type_parser__ReduceAction53);
-var108 = 0;
-((void (*)(val*, long))(var107->class->vft[COLOR_parser__ReduceAction__init]))(var107, var108) /* init on <var107:ReduceAction53>*/;
-var109 = NEW_parser__ReduceAction54(&type_parser__ReduceAction54);
-var110 = 0;
-((void (*)(val*, long))(var109->class->vft[COLOR_parser__ReduceAction__init]))(var109, var110) /* init on <var109:ReduceAction54>*/;
-var111 = NEW_parser__ReduceAction55(&type_parser__ReduceAction55);
-var112 = 0;
-((void (*)(val*, long))(var111->class->vft[COLOR_parser__ReduceAction__init]))(var111, var112) /* init on <var111:ReduceAction55>*/;
-var113 = NEW_parser__ReduceAction56(&type_parser__ReduceAction56);
-var114 = 0;
-((void (*)(val*, long))(var113->class->vft[COLOR_parser__ReduceAction__init]))(var113, var114) /* init on <var113:ReduceAction56>*/;
-var115 = NEW_parser__ReduceAction57(&type_parser__ReduceAction57);
-var116 = 0;
-((void (*)(val*, long))(var115->class->vft[COLOR_parser__ReduceAction__init]))(var115, var116) /* init on <var115:ReduceAction57>*/;
-var117 = NEW_parser__ReduceAction58(&type_parser__ReduceAction58);
-var118 = 0;
-((void (*)(val*, long))(var117->class->vft[COLOR_parser__ReduceAction__init]))(var117, var118) /* init on <var117:ReduceAction58>*/;
-var119 = NEW_parser__ReduceAction59(&type_parser__ReduceAction59);
-var120 = 0;
-((void (*)(val*, long))(var119->class->vft[COLOR_parser__ReduceAction__init]))(var119, var120) /* init on <var119:ReduceAction59>*/;
-var121 = NEW_parser__ReduceAction60(&type_parser__ReduceAction60);
-var122 = 0;
-((void (*)(val*, long))(var121->class->vft[COLOR_parser__ReduceAction__init]))(var121, var122) /* init on <var121:ReduceAction60>*/;
-var123 = NEW_parser__ReduceAction61(&type_parser__ReduceAction61);
-var124 = 0;
-((void (*)(val*, long))(var123->class->vft[COLOR_parser__ReduceAction__init]))(var123, var124) /* init on <var123:ReduceAction61>*/;
-var125 = NEW_parser__ReduceAction62(&type_parser__ReduceAction62);
-var126 = 0;
-((void (*)(val*, long))(var125->class->vft[COLOR_parser__ReduceAction__init]))(var125, var126) /* init on <var125:ReduceAction62>*/;
-var127 = NEW_parser__ReduceAction63(&type_parser__ReduceAction63);
-var128 = 0;
-((void (*)(val*, long))(var127->class->vft[COLOR_parser__ReduceAction__init]))(var127, var128) /* init on <var127:ReduceAction63>*/;
-var129 = NEW_parser__ReduceAction64(&type_parser__ReduceAction64);
-var130 = 1;
-((void (*)(val*, long))(var129->class->vft[COLOR_parser__ReduceAction__init]))(var129, var130) /* init on <var129:ReduceAction64>*/;
-var131 = NEW_parser__ReduceAction65(&type_parser__ReduceAction65);
-var132 = 1;
-((void (*)(val*, long))(var131->class->vft[COLOR_parser__ReduceAction__init]))(var131, var132) /* init on <var131:ReduceAction65>*/;
-var133 = NEW_parser__ReduceAction66(&type_parser__ReduceAction66);
-var134 = 2;
-((void (*)(val*, long))(var133->class->vft[COLOR_parser__ReduceAction__init]))(var133, var134) /* init on <var133:ReduceAction66>*/;
-var135 = NEW_parser__ReduceAction67(&type_parser__ReduceAction67);
-var136 = 2;
-((void (*)(val*, long))(var135->class->vft[COLOR_parser__ReduceAction__init]))(var135, var136) /* init on <var135:ReduceAction67>*/;
-var137 = NEW_parser__ReduceAction68(&type_parser__ReduceAction68);
-var138 = 2;
-((void (*)(val*, long))(var137->class->vft[COLOR_parser__ReduceAction__init]))(var137, var138) /* init on <var137:ReduceAction68>*/;
-var139 = NEW_parser__ReduceAction69(&type_parser__ReduceAction69);
-var140 = 3;
-((void (*)(val*, long))(var139->class->vft[COLOR_parser__ReduceAction__init]))(var139, var140) /* init on <var139:ReduceAction69>*/;
-var141 = NEW_parser__ReduceAction70(&type_parser__ReduceAction70);
-var142 = 3;
-((void (*)(val*, long))(var141->class->vft[COLOR_parser__ReduceAction__init]))(var141, var142) /* init on <var141:ReduceAction70>*/;
-var143 = NEW_parser__ReduceAction71(&type_parser__ReduceAction71);
-var144 = 4;
-((void (*)(val*, long))(var143->class->vft[COLOR_parser__ReduceAction__init]))(var143, var144) /* init on <var143:ReduceAction71>*/;
-var145 = NEW_parser__ReduceAction71(&type_parser__ReduceAction71);
-var146 = 4;
-((void (*)(val*, long))(var145->class->vft[COLOR_parser__ReduceAction__init]))(var145, var146) /* init on <var145:ReduceAction71>*/;
-var147 = NEW_parser__ReduceAction73(&type_parser__ReduceAction73);
-var148 = 5;
-((void (*)(val*, long))(var147->class->vft[COLOR_parser__ReduceAction__init]))(var147, var148) /* init on <var147:ReduceAction73>*/;
-var149 = NEW_parser__ReduceAction74(&type_parser__ReduceAction74);
-var150 = 5;
-((void (*)(val*, long))(var149->class->vft[COLOR_parser__ReduceAction__init]))(var149, var150) /* init on <var149:ReduceAction74>*/;
-var151 = NEW_parser__ReduceAction75(&type_parser__ReduceAction75);
-var152 = 5;
-((void (*)(val*, long))(var151->class->vft[COLOR_parser__ReduceAction__init]))(var151, var152) /* init on <var151:ReduceAction75>*/;
-var153 = NEW_parser__ReduceAction76(&type_parser__ReduceAction76);
-var154 = 5;
-((void (*)(val*, long))(var153->class->vft[COLOR_parser__ReduceAction__init]))(var153, var154) /* init on <var153:ReduceAction76>*/;
-var155 = NEW_parser__ReduceAction75(&type_parser__ReduceAction75);
-var156 = 5;
-((void (*)(val*, long))(var155->class->vft[COLOR_parser__ReduceAction__init]))(var155, var156) /* init on <var155:ReduceAction75>*/;
-var157 = NEW_parser__ReduceAction78(&type_parser__ReduceAction78);
-var158 = 5;
-((void (*)(val*, long))(var157->class->vft[COLOR_parser__ReduceAction__init]))(var157, var158) /* init on <var157:ReduceAction78>*/;
-var159 = NEW_parser__ReduceAction79(&type_parser__ReduceAction79);
-var160 = 5;
-((void (*)(val*, long))(var159->class->vft[COLOR_parser__ReduceAction__init]))(var159, var160) /* init on <var159:ReduceAction79>*/;
-var161 = NEW_parser__ReduceAction78(&type_parser__ReduceAction78);
-var162 = 5;
-((void (*)(val*, long))(var161->class->vft[COLOR_parser__ReduceAction__init]))(var161, var162) /* init on <var161:ReduceAction78>*/;
-var163 = NEW_parser__ReduceAction81(&type_parser__ReduceAction81);
-var164 = 5;
-((void (*)(val*, long))(var163->class->vft[COLOR_parser__ReduceAction__init]))(var163, var164) /* init on <var163:ReduceAction81>*/;
-var165 = NEW_parser__ReduceAction82(&type_parser__ReduceAction82);
-var166 = 5;
-((void (*)(val*, long))(var165->class->vft[COLOR_parser__ReduceAction__init]))(var165, var166) /* init on <var165:ReduceAction82>*/;
-var167 = NEW_parser__ReduceAction83(&type_parser__ReduceAction83);
-var168 = 5;
-((void (*)(val*, long))(var167->class->vft[COLOR_parser__ReduceAction__init]))(var167, var168) /* init on <var167:ReduceAction83>*/;
-var169 = NEW_parser__ReduceAction84(&type_parser__ReduceAction84);
-var170 = 5;
-((void (*)(val*, long))(var169->class->vft[COLOR_parser__ReduceAction__init]))(var169, var170) /* init on <var169:ReduceAction84>*/;
-var171 = NEW_parser__ReduceAction83(&type_parser__ReduceAction83);
-var172 = 5;
-((void (*)(val*, long))(var171->class->vft[COLOR_parser__ReduceAction__init]))(var171, var172) /* init on <var171:ReduceAction83>*/;
-var173 = NEW_parser__ReduceAction86(&type_parser__ReduceAction86);
-var174 = 5;
-((void (*)(val*, long))(var173->class->vft[COLOR_parser__ReduceAction__init]))(var173, var174) /* init on <var173:ReduceAction86>*/;
-var175 = NEW_parser__ReduceAction87(&type_parser__ReduceAction87);
-var176 = 5;
-((void (*)(val*, long))(var175->class->vft[COLOR_parser__ReduceAction__init]))(var175, var176) /* init on <var175:ReduceAction87>*/;
-var177 = NEW_parser__ReduceAction86(&type_parser__ReduceAction86);
-var178 = 5;
-((void (*)(val*, long))(var177->class->vft[COLOR_parser__ReduceAction__init]))(var177, var178) /* init on <var177:ReduceAction86>*/;
-var179 = NEW_parser__ReduceAction89(&type_parser__ReduceAction89);
-var180 = 5;
-((void (*)(val*, long))(var179->class->vft[COLOR_parser__ReduceAction__init]))(var179, var180) /* init on <var179:ReduceAction89>*/;
-var181 = NEW_parser__ReduceAction90(&type_parser__ReduceAction90);
-var182 = 5;
-((void (*)(val*, long))(var181->class->vft[COLOR_parser__ReduceAction__init]))(var181, var182) /* init on <var181:ReduceAction90>*/;
-var183 = NEW_parser__ReduceAction91(&type_parser__ReduceAction91);
-var184 = 5;
-((void (*)(val*, long))(var183->class->vft[COLOR_parser__ReduceAction__init]))(var183, var184) /* init on <var183:ReduceAction91>*/;
-var185 = NEW_parser__ReduceAction92(&type_parser__ReduceAction92);
-var186 = 5;
-((void (*)(val*, long))(var185->class->vft[COLOR_parser__ReduceAction__init]))(var185, var186) /* init on <var185:ReduceAction92>*/;
-var187 = NEW_parser__ReduceAction91(&type_parser__ReduceAction91);
-var188 = 5;
-((void (*)(val*, long))(var187->class->vft[COLOR_parser__ReduceAction__init]))(var187, var188) /* init on <var187:ReduceAction91>*/;
-var189 = NEW_parser__ReduceAction94(&type_parser__ReduceAction94);
-var190 = 5;
-((void (*)(val*, long))(var189->class->vft[COLOR_parser__ReduceAction__init]))(var189, var190) /* init on <var189:ReduceAction94>*/;
-var191 = NEW_parser__ReduceAction95(&type_parser__ReduceAction95);
-var192 = 5;
-((void (*)(val*, long))(var191->class->vft[COLOR_parser__ReduceAction__init]))(var191, var192) /* init on <var191:ReduceAction95>*/;
-var193 = NEW_parser__ReduceAction94(&type_parser__ReduceAction94);
-var194 = 5;
-((void (*)(val*, long))(var193->class->vft[COLOR_parser__ReduceAction__init]))(var193, var194) /* init on <var193:ReduceAction94>*/;
-var195 = NEW_parser__ReduceAction97(&type_parser__ReduceAction97);
-var196 = 5;
-((void (*)(val*, long))(var195->class->vft[COLOR_parser__ReduceAction__init]))(var195, var196) /* init on <var195:ReduceAction97>*/;
-var197 = NEW_parser__ReduceAction98(&type_parser__ReduceAction98);
-var198 = 5;
-((void (*)(val*, long))(var197->class->vft[COLOR_parser__ReduceAction__init]))(var197, var198) /* init on <var197:ReduceAction98>*/;
-var199 = NEW_parser__ReduceAction99(&type_parser__ReduceAction99);
-var200 = 5;
-((void (*)(val*, long))(var199->class->vft[COLOR_parser__ReduceAction__init]))(var199, var200) /* init on <var199:ReduceAction99>*/;
-var201 = NEW_parser__ReduceAction100(&type_parser__ReduceAction100);
-var202 = 5;
-((void (*)(val*, long))(var201->class->vft[COLOR_parser__ReduceAction__init]))(var201, var202) /* init on <var201:ReduceAction100>*/;
-var203 = NEW_parser__ReduceAction99(&type_parser__ReduceAction99);
-var204 = 5;
-((void (*)(val*, long))(var203->class->vft[COLOR_parser__ReduceAction__init]))(var203, var204) /* init on <var203:ReduceAction99>*/;
-var205 = NEW_parser__ReduceAction102(&type_parser__ReduceAction102);
-var206 = 5;
-((void (*)(val*, long))(var205->class->vft[COLOR_parser__ReduceAction__init]))(var205, var206) /* init on <var205:ReduceAction102>*/;
-var207 = NEW_parser__ReduceAction103(&type_parser__ReduceAction103);
-var208 = 5;
-((void (*)(val*, long))(var207->class->vft[COLOR_parser__ReduceAction__init]))(var207, var208) /* init on <var207:ReduceAction103>*/;
-var209 = NEW_parser__ReduceAction102(&type_parser__ReduceAction102);
-var210 = 5;
-((void (*)(val*, long))(var209->class->vft[COLOR_parser__ReduceAction__init]))(var209, var210) /* init on <var209:ReduceAction102>*/;
-var211 = NEW_parser__ReduceAction105(&type_parser__ReduceAction105);
-var212 = 5;
-((void (*)(val*, long))(var211->class->vft[COLOR_parser__ReduceAction__init]))(var211, var212) /* init on <var211:ReduceAction105>*/;
-var213 = NEW_parser__ReduceAction106(&type_parser__ReduceAction106);
-var214 = 5;
-((void (*)(val*, long))(var213->class->vft[COLOR_parser__ReduceAction__init]))(var213, var214) /* init on <var213:ReduceAction106>*/;
-var215 = NEW_parser__ReduceAction107(&type_parser__ReduceAction107);
-var216 = 5;
-((void (*)(val*, long))(var215->class->vft[COLOR_parser__ReduceAction__init]))(var215, var216) /* init on <var215:ReduceAction107>*/;
-var217 = NEW_parser__ReduceAction108(&type_parser__ReduceAction108);
-var218 = 5;
-((void (*)(val*, long))(var217->class->vft[COLOR_parser__ReduceAction__init]))(var217, var218) /* init on <var217:ReduceAction108>*/;
-var219 = NEW_parser__ReduceAction107(&type_parser__ReduceAction107);
-var220 = 5;
-((void (*)(val*, long))(var219->class->vft[COLOR_parser__ReduceAction__init]))(var219, var220) /* init on <var219:ReduceAction107>*/;
-var221 = NEW_parser__ReduceAction110(&type_parser__ReduceAction110);
-var222 = 5;
-((void (*)(val*, long))(var221->class->vft[COLOR_parser__ReduceAction__init]))(var221, var222) /* init on <var221:ReduceAction110>*/;
-var223 = NEW_parser__ReduceAction111(&type_parser__ReduceAction111);
-var224 = 5;
-((void (*)(val*, long))(var223->class->vft[COLOR_parser__ReduceAction__init]))(var223, var224) /* init on <var223:ReduceAction111>*/;
-var225 = NEW_parser__ReduceAction110(&type_parser__ReduceAction110);
-var226 = 5;
-((void (*)(val*, long))(var225->class->vft[COLOR_parser__ReduceAction__init]))(var225, var226) /* init on <var225:ReduceAction110>*/;
-var227 = NEW_parser__ReduceAction113(&type_parser__ReduceAction113);
-var228 = 5;
-((void (*)(val*, long))(var227->class->vft[COLOR_parser__ReduceAction__init]))(var227, var228) /* init on <var227:ReduceAction113>*/;
-var229 = NEW_parser__ReduceAction114(&type_parser__ReduceAction114);
-var230 = 5;
-((void (*)(val*, long))(var229->class->vft[COLOR_parser__ReduceAction__init]))(var229, var230) /* init on <var229:ReduceAction114>*/;
-var231 = NEW_parser__ReduceAction115(&type_parser__ReduceAction115);
-var232 = 5;
-((void (*)(val*, long))(var231->class->vft[COLOR_parser__ReduceAction__init]))(var231, var232) /* init on <var231:ReduceAction115>*/;
-var233 = NEW_parser__ReduceAction116(&type_parser__ReduceAction116);
-var234 = 5;
-((void (*)(val*, long))(var233->class->vft[COLOR_parser__ReduceAction__init]))(var233, var234) /* init on <var233:ReduceAction116>*/;
-var235 = NEW_parser__ReduceAction115(&type_parser__ReduceAction115);
-var236 = 5;
-((void (*)(val*, long))(var235->class->vft[COLOR_parser__ReduceAction__init]))(var235, var236) /* init on <var235:ReduceAction115>*/;
-var237 = NEW_parser__ReduceAction118(&type_parser__ReduceAction118);
-var238 = 5;
-((void (*)(val*, long))(var237->class->vft[COLOR_parser__ReduceAction__init]))(var237, var238) /* init on <var237:ReduceAction118>*/;
-var239 = NEW_parser__ReduceAction119(&type_parser__ReduceAction119);
-var240 = 5;
-((void (*)(val*, long))(var239->class->vft[COLOR_parser__ReduceAction__init]))(var239, var240) /* init on <var239:ReduceAction119>*/;
-var241 = NEW_parser__ReduceAction118(&type_parser__ReduceAction118);
-var242 = 5;
-((void (*)(val*, long))(var241->class->vft[COLOR_parser__ReduceAction__init]))(var241, var242) /* init on <var241:ReduceAction118>*/;
-var243 = NEW_parser__ReduceAction121(&type_parser__ReduceAction121);
-var244 = 5;
-((void (*)(val*, long))(var243->class->vft[COLOR_parser__ReduceAction__init]))(var243, var244) /* init on <var243:ReduceAction121>*/;
-var245 = NEW_parser__ReduceAction122(&type_parser__ReduceAction122);
-var246 = 5;
-((void (*)(val*, long))(var245->class->vft[COLOR_parser__ReduceAction__init]))(var245, var246) /* init on <var245:ReduceAction122>*/;
-var247 = NEW_parser__ReduceAction123(&type_parser__ReduceAction123);
-var248 = 5;
-((void (*)(val*, long))(var247->class->vft[COLOR_parser__ReduceAction__init]))(var247, var248) /* init on <var247:ReduceAction123>*/;
-var249 = NEW_parser__ReduceAction124(&type_parser__ReduceAction124);
-var250 = 5;
-((void (*)(val*, long))(var249->class->vft[COLOR_parser__ReduceAction__init]))(var249, var250) /* init on <var249:ReduceAction124>*/;
-var251 = NEW_parser__ReduceAction123(&type_parser__ReduceAction123);
-var252 = 5;
-((void (*)(val*, long))(var251->class->vft[COLOR_parser__ReduceAction__init]))(var251, var252) /* init on <var251:ReduceAction123>*/;
-var253 = NEW_parser__ReduceAction126(&type_parser__ReduceAction126);
-var254 = 5;
-((void (*)(val*, long))(var253->class->vft[COLOR_parser__ReduceAction__init]))(var253, var254) /* init on <var253:ReduceAction126>*/;
-var255 = NEW_parser__ReduceAction127(&type_parser__ReduceAction127);
-var256 = 5;
-((void (*)(val*, long))(var255->class->vft[COLOR_parser__ReduceAction__init]))(var255, var256) /* init on <var255:ReduceAction127>*/;
-var257 = NEW_parser__ReduceAction126(&type_parser__ReduceAction126);
-var258 = 5;
-((void (*)(val*, long))(var257->class->vft[COLOR_parser__ReduceAction__init]))(var257, var258) /* init on <var257:ReduceAction126>*/;
-var259 = NEW_parser__ReduceAction129(&type_parser__ReduceAction129);
-var260 = 5;
-((void (*)(val*, long))(var259->class->vft[COLOR_parser__ReduceAction__init]))(var259, var260) /* init on <var259:ReduceAction129>*/;
-var261 = NEW_parser__ReduceAction130(&type_parser__ReduceAction130);
-var262 = 5;
-((void (*)(val*, long))(var261->class->vft[COLOR_parser__ReduceAction__init]))(var261, var262) /* init on <var261:ReduceAction130>*/;
-var263 = NEW_parser__ReduceAction131(&type_parser__ReduceAction131);
-var264 = 5;
-((void (*)(val*, long))(var263->class->vft[COLOR_parser__ReduceAction__init]))(var263, var264) /* init on <var263:ReduceAction131>*/;
-var265 = NEW_parser__ReduceAction132(&type_parser__ReduceAction132);
-var266 = 5;
-((void (*)(val*, long))(var265->class->vft[COLOR_parser__ReduceAction__init]))(var265, var266) /* init on <var265:ReduceAction132>*/;
-var267 = NEW_parser__ReduceAction131(&type_parser__ReduceAction131);
-var268 = 5;
-((void (*)(val*, long))(var267->class->vft[COLOR_parser__ReduceAction__init]))(var267, var268) /* init on <var267:ReduceAction131>*/;
-var269 = NEW_parser__ReduceAction134(&type_parser__ReduceAction134);
-var270 = 5;
-((void (*)(val*, long))(var269->class->vft[COLOR_parser__ReduceAction__init]))(var269, var270) /* init on <var269:ReduceAction134>*/;
-var271 = NEW_parser__ReduceAction135(&type_parser__ReduceAction135);
-var272 = 5;
-((void (*)(val*, long))(var271->class->vft[COLOR_parser__ReduceAction__init]))(var271, var272) /* init on <var271:ReduceAction135>*/;
-var273 = NEW_parser__ReduceAction134(&type_parser__ReduceAction134);
-var274 = 5;
-((void (*)(val*, long))(var273->class->vft[COLOR_parser__ReduceAction__init]))(var273, var274) /* init on <var273:ReduceAction134>*/;
-var275 = NEW_parser__ReduceAction137(&type_parser__ReduceAction137);
-var276 = 5;
-((void (*)(val*, long))(var275->class->vft[COLOR_parser__ReduceAction__init]))(var275, var276) /* init on <var275:ReduceAction137>*/;
-var277 = NEW_parser__ReduceAction138(&type_parser__ReduceAction138);
-var278 = 5;
-((void (*)(val*, long))(var277->class->vft[COLOR_parser__ReduceAction__init]))(var277, var278) /* init on <var277:ReduceAction138>*/;
-var279 = NEW_parser__ReduceAction139(&type_parser__ReduceAction139);
-var280 = 5;
-((void (*)(val*, long))(var279->class->vft[COLOR_parser__ReduceAction__init]))(var279, var280) /* init on <var279:ReduceAction139>*/;
-var281 = NEW_parser__ReduceAction140(&type_parser__ReduceAction140);
-var282 = 5;
-((void (*)(val*, long))(var281->class->vft[COLOR_parser__ReduceAction__init]))(var281, var282) /* init on <var281:ReduceAction140>*/;
-var283 = NEW_parser__ReduceAction139(&type_parser__ReduceAction139);
-var284 = 5;
-((void (*)(val*, long))(var283->class->vft[COLOR_parser__ReduceAction__init]))(var283, var284) /* init on <var283:ReduceAction139>*/;
-var285 = NEW_parser__ReduceAction142(&type_parser__ReduceAction142);
-var286 = 5;
-((void (*)(val*, long))(var285->class->vft[COLOR_parser__ReduceAction__init]))(var285, var286) /* init on <var285:ReduceAction142>*/;
-var287 = NEW_parser__ReduceAction143(&type_parser__ReduceAction143);
-var288 = 5;
-((void (*)(val*, long))(var287->class->vft[COLOR_parser__ReduceAction__init]))(var287, var288) /* init on <var287:ReduceAction143>*/;
-var289 = NEW_parser__ReduceAction142(&type_parser__ReduceAction142);
-var290 = 5;
-((void (*)(val*, long))(var289->class->vft[COLOR_parser__ReduceAction__init]))(var289, var290) /* init on <var289:ReduceAction142>*/;
-var291 = NEW_parser__ReduceAction145(&type_parser__ReduceAction145);
-var292 = 5;
-((void (*)(val*, long))(var291->class->vft[COLOR_parser__ReduceAction__init]))(var291, var292) /* init on <var291:ReduceAction145>*/;
-var293 = NEW_parser__ReduceAction146(&type_parser__ReduceAction146);
-var294 = 5;
-((void (*)(val*, long))(var293->class->vft[COLOR_parser__ReduceAction__init]))(var293, var294) /* init on <var293:ReduceAction146>*/;
-var295 = NEW_parser__ReduceAction147(&type_parser__ReduceAction147);
-var296 = 5;
-((void (*)(val*, long))(var295->class->vft[COLOR_parser__ReduceAction__init]))(var295, var296) /* init on <var295:ReduceAction147>*/;
-var297 = NEW_parser__ReduceAction148(&type_parser__ReduceAction148);
-var298 = 5;
-((void (*)(val*, long))(var297->class->vft[COLOR_parser__ReduceAction__init]))(var297, var298) /* init on <var297:ReduceAction148>*/;
-var299 = NEW_parser__ReduceAction147(&type_parser__ReduceAction147);
-var300 = 5;
-((void (*)(val*, long))(var299->class->vft[COLOR_parser__ReduceAction__init]))(var299, var300) /* init on <var299:ReduceAction147>*/;
-var301 = NEW_parser__ReduceAction150(&type_parser__ReduceAction150);
-var302 = 5;
-((void (*)(val*, long))(var301->class->vft[COLOR_parser__ReduceAction__init]))(var301, var302) /* init on <var301:ReduceAction150>*/;
-var303 = NEW_parser__ReduceAction151(&type_parser__ReduceAction151);
-var304 = 5;
-((void (*)(val*, long))(var303->class->vft[COLOR_parser__ReduceAction__init]))(var303, var304) /* init on <var303:ReduceAction151>*/;
-var305 = NEW_parser__ReduceAction150(&type_parser__ReduceAction150);
-var306 = 5;
-((void (*)(val*, long))(var305->class->vft[COLOR_parser__ReduceAction__init]))(var305, var306) /* init on <var305:ReduceAction150>*/;
-var307 = NEW_parser__ReduceAction153(&type_parser__ReduceAction153);
-var308 = 5;
-((void (*)(val*, long))(var307->class->vft[COLOR_parser__ReduceAction__init]))(var307, var308) /* init on <var307:ReduceAction153>*/;
-var309 = NEW_parser__ReduceAction154(&type_parser__ReduceAction154);
-var310 = 5;
-((void (*)(val*, long))(var309->class->vft[COLOR_parser__ReduceAction__init]))(var309, var310) /* init on <var309:ReduceAction154>*/;
-var311 = NEW_parser__ReduceAction155(&type_parser__ReduceAction155);
-var312 = 5;
-((void (*)(val*, long))(var311->class->vft[COLOR_parser__ReduceAction__init]))(var311, var312) /* init on <var311:ReduceAction155>*/;
-var313 = NEW_parser__ReduceAction156(&type_parser__ReduceAction156);
-var314 = 5;
-((void (*)(val*, long))(var313->class->vft[COLOR_parser__ReduceAction__init]))(var313, var314) /* init on <var313:ReduceAction156>*/;
-var315 = NEW_parser__ReduceAction155(&type_parser__ReduceAction155);
-var316 = 5;
-((void (*)(val*, long))(var315->class->vft[COLOR_parser__ReduceAction__init]))(var315, var316) /* init on <var315:ReduceAction155>*/;
-var317 = NEW_parser__ReduceAction158(&type_parser__ReduceAction158);
-var318 = 5;
-((void (*)(val*, long))(var317->class->vft[COLOR_parser__ReduceAction__init]))(var317, var318) /* init on <var317:ReduceAction158>*/;
-var319 = NEW_parser__ReduceAction159(&type_parser__ReduceAction159);
-var320 = 5;
-((void (*)(val*, long))(var319->class->vft[COLOR_parser__ReduceAction__init]))(var319, var320) /* init on <var319:ReduceAction159>*/;
-var321 = NEW_parser__ReduceAction158(&type_parser__ReduceAction158);
-var322 = 5;
-((void (*)(val*, long))(var321->class->vft[COLOR_parser__ReduceAction__init]))(var321, var322) /* init on <var321:ReduceAction158>*/;
-var323 = NEW_parser__ReduceAction161(&type_parser__ReduceAction161);
-var324 = 5;
-((void (*)(val*, long))(var323->class->vft[COLOR_parser__ReduceAction__init]))(var323, var324) /* init on <var323:ReduceAction161>*/;
-var325 = NEW_parser__ReduceAction162(&type_parser__ReduceAction162);
-var326 = 5;
-((void (*)(val*, long))(var325->class->vft[COLOR_parser__ReduceAction__init]))(var325, var326) /* init on <var325:ReduceAction162>*/;
-var327 = NEW_parser__ReduceAction163(&type_parser__ReduceAction163);
-var328 = 5;
-((void (*)(val*, long))(var327->class->vft[COLOR_parser__ReduceAction__init]))(var327, var328) /* init on <var327:ReduceAction163>*/;
-var329 = NEW_parser__ReduceAction164(&type_parser__ReduceAction164);
-var330 = 5;
-((void (*)(val*, long))(var329->class->vft[COLOR_parser__ReduceAction__init]))(var329, var330) /* init on <var329:ReduceAction164>*/;
-var331 = NEW_parser__ReduceAction163(&type_parser__ReduceAction163);
-var332 = 5;
-((void (*)(val*, long))(var331->class->vft[COLOR_parser__ReduceAction__init]))(var331, var332) /* init on <var331:ReduceAction163>*/;
-var333 = NEW_parser__ReduceAction166(&type_parser__ReduceAction166);
-var334 = 5;
-((void (*)(val*, long))(var333->class->vft[COLOR_parser__ReduceAction__init]))(var333, var334) /* init on <var333:ReduceAction166>*/;
-var335 = NEW_parser__ReduceAction167(&type_parser__ReduceAction167);
-var336 = 5;
-((void (*)(val*, long))(var335->class->vft[COLOR_parser__ReduceAction__init]))(var335, var336) /* init on <var335:ReduceAction167>*/;
-var337 = NEW_parser__ReduceAction166(&type_parser__ReduceAction166);
-var338 = 5;
-((void (*)(val*, long))(var337->class->vft[COLOR_parser__ReduceAction__init]))(var337, var338) /* init on <var337:ReduceAction166>*/;
-var339 = NEW_parser__ReduceAction169(&type_parser__ReduceAction169);
-var340 = 5;
-((void (*)(val*, long))(var339->class->vft[COLOR_parser__ReduceAction__init]))(var339, var340) /* init on <var339:ReduceAction169>*/;
-var341 = NEW_parser__ReduceAction170(&type_parser__ReduceAction170);
-var342 = 5;
-((void (*)(val*, long))(var341->class->vft[COLOR_parser__ReduceAction__init]))(var341, var342) /* init on <var341:ReduceAction170>*/;
-var343 = NEW_parser__ReduceAction171(&type_parser__ReduceAction171);
-var344 = 5;
-((void (*)(val*, long))(var343->class->vft[COLOR_parser__ReduceAction__init]))(var343, var344) /* init on <var343:ReduceAction171>*/;
-var345 = NEW_parser__ReduceAction172(&type_parser__ReduceAction172);
-var346 = 5;
-((void (*)(val*, long))(var345->class->vft[COLOR_parser__ReduceAction__init]))(var345, var346) /* init on <var345:ReduceAction172>*/;
-var347 = NEW_parser__ReduceAction171(&type_parser__ReduceAction171);
-var348 = 5;
-((void (*)(val*, long))(var347->class->vft[COLOR_parser__ReduceAction__init]))(var347, var348) /* init on <var347:ReduceAction171>*/;
-var349 = NEW_parser__ReduceAction174(&type_parser__ReduceAction174);
-var350 = 5;
-((void (*)(val*, long))(var349->class->vft[COLOR_parser__ReduceAction__init]))(var349, var350) /* init on <var349:ReduceAction174>*/;
-var351 = NEW_parser__ReduceAction175(&type_parser__ReduceAction175);
-var352 = 5;
-((void (*)(val*, long))(var351->class->vft[COLOR_parser__ReduceAction__init]))(var351, var352) /* init on <var351:ReduceAction175>*/;
-var353 = NEW_parser__ReduceAction174(&type_parser__ReduceAction174);
-var354 = 5;
-((void (*)(val*, long))(var353->class->vft[COLOR_parser__ReduceAction__init]))(var353, var354) /* init on <var353:ReduceAction174>*/;
-var355 = NEW_parser__ReduceAction177(&type_parser__ReduceAction177);
-var356 = 5;
-((void (*)(val*, long))(var355->class->vft[COLOR_parser__ReduceAction__init]))(var355, var356) /* init on <var355:ReduceAction177>*/;
-var357 = NEW_parser__ReduceAction178(&type_parser__ReduceAction178);
-var358 = 5;
-((void (*)(val*, long))(var357->class->vft[COLOR_parser__ReduceAction__init]))(var357, var358) /* init on <var357:ReduceAction178>*/;
-var359 = NEW_parser__ReduceAction179(&type_parser__ReduceAction179);
-var360 = 5;
-((void (*)(val*, long))(var359->class->vft[COLOR_parser__ReduceAction__init]))(var359, var360) /* init on <var359:ReduceAction179>*/;
-var361 = NEW_parser__ReduceAction180(&type_parser__ReduceAction180);
-var362 = 5;
-((void (*)(val*, long))(var361->class->vft[COLOR_parser__ReduceAction__init]))(var361, var362) /* init on <var361:ReduceAction180>*/;
-var363 = NEW_parser__ReduceAction179(&type_parser__ReduceAction179);
-var364 = 5;
-((void (*)(val*, long))(var363->class->vft[COLOR_parser__ReduceAction__init]))(var363, var364) /* init on <var363:ReduceAction179>*/;
-var365 = NEW_parser__ReduceAction182(&type_parser__ReduceAction182);
-var366 = 5;
-((void (*)(val*, long))(var365->class->vft[COLOR_parser__ReduceAction__init]))(var365, var366) /* init on <var365:ReduceAction182>*/;
-var367 = NEW_parser__ReduceAction183(&type_parser__ReduceAction183);
-var368 = 5;
-((void (*)(val*, long))(var367->class->vft[COLOR_parser__ReduceAction__init]))(var367, var368) /* init on <var367:ReduceAction183>*/;
-var369 = NEW_parser__ReduceAction182(&type_parser__ReduceAction182);
-var370 = 5;
-((void (*)(val*, long))(var369->class->vft[COLOR_parser__ReduceAction__init]))(var369, var370) /* init on <var369:ReduceAction182>*/;
-var371 = NEW_parser__ReduceAction185(&type_parser__ReduceAction185);
-var372 = 5;
-((void (*)(val*, long))(var371->class->vft[COLOR_parser__ReduceAction__init]))(var371, var372) /* init on <var371:ReduceAction185>*/;
-var373 = NEW_parser__ReduceAction186(&type_parser__ReduceAction186);
-var374 = 5;
-((void (*)(val*, long))(var373->class->vft[COLOR_parser__ReduceAction__init]))(var373, var374) /* init on <var373:ReduceAction186>*/;
-var375 = NEW_parser__ReduceAction187(&type_parser__ReduceAction187);
-var376 = 5;
-((void (*)(val*, long))(var375->class->vft[COLOR_parser__ReduceAction__init]))(var375, var376) /* init on <var375:ReduceAction187>*/;
-var377 = NEW_parser__ReduceAction188(&type_parser__ReduceAction188);
-var378 = 5;
-((void (*)(val*, long))(var377->class->vft[COLOR_parser__ReduceAction__init]))(var377, var378) /* init on <var377:ReduceAction188>*/;
-var379 = NEW_parser__ReduceAction187(&type_parser__ReduceAction187);
-var380 = 5;
-((void (*)(val*, long))(var379->class->vft[COLOR_parser__ReduceAction__init]))(var379, var380) /* init on <var379:ReduceAction187>*/;
-var381 = NEW_parser__ReduceAction190(&type_parser__ReduceAction190);
-var382 = 5;
-((void (*)(val*, long))(var381->class->vft[COLOR_parser__ReduceAction__init]))(var381, var382) /* init on <var381:ReduceAction190>*/;
-var383 = NEW_parser__ReduceAction191(&type_parser__ReduceAction191);
-var384 = 5;
-((void (*)(val*, long))(var383->class->vft[COLOR_parser__ReduceAction__init]))(var383, var384) /* init on <var383:ReduceAction191>*/;
-var385 = NEW_parser__ReduceAction190(&type_parser__ReduceAction190);
-var386 = 5;
-((void (*)(val*, long))(var385->class->vft[COLOR_parser__ReduceAction__init]))(var385, var386) /* init on <var385:ReduceAction190>*/;
-var387 = NEW_parser__ReduceAction193(&type_parser__ReduceAction193);
-var388 = 5;
-((void (*)(val*, long))(var387->class->vft[COLOR_parser__ReduceAction__init]))(var387, var388) /* init on <var387:ReduceAction193>*/;
-var389 = NEW_parser__ReduceAction194(&type_parser__ReduceAction194);
-var390 = 5;
-((void (*)(val*, long))(var389->class->vft[COLOR_parser__ReduceAction__init]))(var389, var390) /* init on <var389:ReduceAction194>*/;
-var391 = NEW_parser__ReduceAction195(&type_parser__ReduceAction195);
-var392 = 5;
-((void (*)(val*, long))(var391->class->vft[COLOR_parser__ReduceAction__init]))(var391, var392) /* init on <var391:ReduceAction195>*/;
-var393 = NEW_parser__ReduceAction196(&type_parser__ReduceAction196);
-var394 = 5;
-((void (*)(val*, long))(var393->class->vft[COLOR_parser__ReduceAction__init]))(var393, var394) /* init on <var393:ReduceAction196>*/;
-var395 = NEW_parser__ReduceAction195(&type_parser__ReduceAction195);
-var396 = 5;
-((void (*)(val*, long))(var395->class->vft[COLOR_parser__ReduceAction__init]))(var395, var396) /* init on <var395:ReduceAction195>*/;
-var397 = NEW_parser__ReduceAction198(&type_parser__ReduceAction198);
-var398 = 5;
-((void (*)(val*, long))(var397->class->vft[COLOR_parser__ReduceAction__init]))(var397, var398) /* init on <var397:ReduceAction198>*/;
-var399 = NEW_parser__ReduceAction199(&type_parser__ReduceAction199);
-var400 = 5;
-((void (*)(val*, long))(var399->class->vft[COLOR_parser__ReduceAction__init]))(var399, var400) /* init on <var399:ReduceAction199>*/;
-var401 = NEW_parser__ReduceAction198(&type_parser__ReduceAction198);
-var402 = 5;
-((void (*)(val*, long))(var401->class->vft[COLOR_parser__ReduceAction__init]))(var401, var402) /* init on <var401:ReduceAction198>*/;
-var403 = NEW_parser__ReduceAction201(&type_parser__ReduceAction201);
-var404 = 5;
-((void (*)(val*, long))(var403->class->vft[COLOR_parser__ReduceAction__init]))(var403, var404) /* init on <var403:ReduceAction201>*/;
-var405 = NEW_parser__ReduceAction202(&type_parser__ReduceAction202);
-var406 = 5;
-((void (*)(val*, long))(var405->class->vft[COLOR_parser__ReduceAction__init]))(var405, var406) /* init on <var405:ReduceAction202>*/;
-var407 = NEW_parser__ReduceAction203(&type_parser__ReduceAction203);
-var408 = 5;
-((void (*)(val*, long))(var407->class->vft[COLOR_parser__ReduceAction__init]))(var407, var408) /* init on <var407:ReduceAction203>*/;
-var409 = NEW_parser__ReduceAction204(&type_parser__ReduceAction204);
-var410 = 5;
-((void (*)(val*, long))(var409->class->vft[COLOR_parser__ReduceAction__init]))(var409, var410) /* init on <var409:ReduceAction204>*/;
-var411 = NEW_parser__ReduceAction203(&type_parser__ReduceAction203);
-var412 = 5;
-((void (*)(val*, long))(var411->class->vft[COLOR_parser__ReduceAction__init]))(var411, var412) /* init on <var411:ReduceAction203>*/;
-var413 = NEW_parser__ReduceAction206(&type_parser__ReduceAction206);
-var414 = 5;
-((void (*)(val*, long))(var413->class->vft[COLOR_parser__ReduceAction__init]))(var413, var414) /* init on <var413:ReduceAction206>*/;
-var415 = NEW_parser__ReduceAction207(&type_parser__ReduceAction207);
-var416 = 5;
-((void (*)(val*, long))(var415->class->vft[COLOR_parser__ReduceAction__init]))(var415, var416) /* init on <var415:ReduceAction207>*/;
-var417 = NEW_parser__ReduceAction206(&type_parser__ReduceAction206);
-var418 = 5;
-((void (*)(val*, long))(var417->class->vft[COLOR_parser__ReduceAction__init]))(var417, var418) /* init on <var417:ReduceAction206>*/;
-var419 = NEW_parser__ReduceAction209(&type_parser__ReduceAction209);
-var420 = 5;
-((void (*)(val*, long))(var419->class->vft[COLOR_parser__ReduceAction__init]))(var419, var420) /* init on <var419:ReduceAction209>*/;
-var421 = NEW_parser__ReduceAction210(&type_parser__ReduceAction210);
-var422 = 5;
-((void (*)(val*, long))(var421->class->vft[COLOR_parser__ReduceAction__init]))(var421, var422) /* init on <var421:ReduceAction210>*/;
-var423 = NEW_parser__ReduceAction211(&type_parser__ReduceAction211);
-var424 = 5;
-((void (*)(val*, long))(var423->class->vft[COLOR_parser__ReduceAction__init]))(var423, var424) /* init on <var423:ReduceAction211>*/;
-var425 = NEW_parser__ReduceAction212(&type_parser__ReduceAction212);
-var426 = 5;
-((void (*)(val*, long))(var425->class->vft[COLOR_parser__ReduceAction__init]))(var425, var426) /* init on <var425:ReduceAction212>*/;
-var427 = NEW_parser__ReduceAction211(&type_parser__ReduceAction211);
-var428 = 5;
-((void (*)(val*, long))(var427->class->vft[COLOR_parser__ReduceAction__init]))(var427, var428) /* init on <var427:ReduceAction211>*/;
-var429 = NEW_parser__ReduceAction214(&type_parser__ReduceAction214);
-var430 = 5;
-((void (*)(val*, long))(var429->class->vft[COLOR_parser__ReduceAction__init]))(var429, var430) /* init on <var429:ReduceAction214>*/;
-var431 = NEW_parser__ReduceAction215(&type_parser__ReduceAction215);
-var432 = 5;
-((void (*)(val*, long))(var431->class->vft[COLOR_parser__ReduceAction__init]))(var431, var432) /* init on <var431:ReduceAction215>*/;
-var433 = NEW_parser__ReduceAction214(&type_parser__ReduceAction214);
-var434 = 5;
-((void (*)(val*, long))(var433->class->vft[COLOR_parser__ReduceAction__init]))(var433, var434) /* init on <var433:ReduceAction214>*/;
-var435 = NEW_parser__ReduceAction217(&type_parser__ReduceAction217);
-var436 = 5;
-((void (*)(val*, long))(var435->class->vft[COLOR_parser__ReduceAction__init]))(var435, var436) /* init on <var435:ReduceAction217>*/;
-var437 = NEW_parser__ReduceAction218(&type_parser__ReduceAction218);
-var438 = 5;
-((void (*)(val*, long))(var437->class->vft[COLOR_parser__ReduceAction__init]))(var437, var438) /* init on <var437:ReduceAction218>*/;
-var439 = NEW_parser__ReduceAction219(&type_parser__ReduceAction219);
-var440 = 5;
-((void (*)(val*, long))(var439->class->vft[COLOR_parser__ReduceAction__init]))(var439, var440) /* init on <var439:ReduceAction219>*/;
-var441 = NEW_parser__ReduceAction220(&type_parser__ReduceAction220);
-var442 = 5;
-((void (*)(val*, long))(var441->class->vft[COLOR_parser__ReduceAction__init]))(var441, var442) /* init on <var441:ReduceAction220>*/;
-var443 = NEW_parser__ReduceAction219(&type_parser__ReduceAction219);
-var444 = 5;
-((void (*)(val*, long))(var443->class->vft[COLOR_parser__ReduceAction__init]))(var443, var444) /* init on <var443:ReduceAction219>*/;
-var445 = NEW_parser__ReduceAction222(&type_parser__ReduceAction222);
-var446 = 5;
-((void (*)(val*, long))(var445->class->vft[COLOR_parser__ReduceAction__init]))(var445, var446) /* init on <var445:ReduceAction222>*/;
-var447 = NEW_parser__ReduceAction223(&type_parser__ReduceAction223);
-var448 = 5;
-((void (*)(val*, long))(var447->class->vft[COLOR_parser__ReduceAction__init]))(var447, var448) /* init on <var447:ReduceAction223>*/;
-var449 = NEW_parser__ReduceAction222(&type_parser__ReduceAction222);
-var450 = 5;
-((void (*)(val*, long))(var449->class->vft[COLOR_parser__ReduceAction__init]))(var449, var450) /* init on <var449:ReduceAction222>*/;
-var451 = NEW_parser__ReduceAction225(&type_parser__ReduceAction225);
-var452 = 5;
-((void (*)(val*, long))(var451->class->vft[COLOR_parser__ReduceAction__init]))(var451, var452) /* init on <var451:ReduceAction225>*/;
-var453 = NEW_parser__ReduceAction226(&type_parser__ReduceAction226);
-var454 = 5;
-((void (*)(val*, long))(var453->class->vft[COLOR_parser__ReduceAction__init]))(var453, var454) /* init on <var453:ReduceAction226>*/;
-var455 = NEW_parser__ReduceAction227(&type_parser__ReduceAction227);
-var456 = 5;
-((void (*)(val*, long))(var455->class->vft[COLOR_parser__ReduceAction__init]))(var455, var456) /* init on <var455:ReduceAction227>*/;
-var457 = NEW_parser__ReduceAction228(&type_parser__ReduceAction228);
-var458 = 5;
-((void (*)(val*, long))(var457->class->vft[COLOR_parser__ReduceAction__init]))(var457, var458) /* init on <var457:ReduceAction228>*/;
-var459 = NEW_parser__ReduceAction227(&type_parser__ReduceAction227);
-var460 = 5;
-((void (*)(val*, long))(var459->class->vft[COLOR_parser__ReduceAction__init]))(var459, var460) /* init on <var459:ReduceAction227>*/;
-var461 = NEW_parser__ReduceAction230(&type_parser__ReduceAction230);
-var462 = 5;
-((void (*)(val*, long))(var461->class->vft[COLOR_parser__ReduceAction__init]))(var461, var462) /* init on <var461:ReduceAction230>*/;
-var463 = NEW_parser__ReduceAction231(&type_parser__ReduceAction231);
-var464 = 5;
-((void (*)(val*, long))(var463->class->vft[COLOR_parser__ReduceAction__init]))(var463, var464) /* init on <var463:ReduceAction231>*/;
-var465 = NEW_parser__ReduceAction230(&type_parser__ReduceAction230);
-var466 = 5;
-((void (*)(val*, long))(var465->class->vft[COLOR_parser__ReduceAction__init]))(var465, var466) /* init on <var465:ReduceAction230>*/;
-var467 = NEW_parser__ReduceAction233(&type_parser__ReduceAction233);
-var468 = 5;
-((void (*)(val*, long))(var467->class->vft[COLOR_parser__ReduceAction__init]))(var467, var468) /* init on <var467:ReduceAction233>*/;
-var469 = NEW_parser__ReduceAction234(&type_parser__ReduceAction234);
-var470 = 5;
-((void (*)(val*, long))(var469->class->vft[COLOR_parser__ReduceAction__init]))(var469, var470) /* init on <var469:ReduceAction234>*/;
-var471 = NEW_parser__ReduceAction235(&type_parser__ReduceAction235);
-var472 = 5;
-((void (*)(val*, long))(var471->class->vft[COLOR_parser__ReduceAction__init]))(var471, var472) /* init on <var471:ReduceAction235>*/;
-var473 = NEW_parser__ReduceAction236(&type_parser__ReduceAction236);
-var474 = 5;
-((void (*)(val*, long))(var473->class->vft[COLOR_parser__ReduceAction__init]))(var473, var474) /* init on <var473:ReduceAction236>*/;
-var475 = NEW_parser__ReduceAction235(&type_parser__ReduceAction235);
-var476 = 5;
-((void (*)(val*, long))(var475->class->vft[COLOR_parser__ReduceAction__init]))(var475, var476) /* init on <var475:ReduceAction235>*/;
-var477 = NEW_parser__ReduceAction238(&type_parser__ReduceAction238);
-var478 = 5;
-((void (*)(val*, long))(var477->class->vft[COLOR_parser__ReduceAction__init]))(var477, var478) /* init on <var477:ReduceAction238>*/;
-var479 = NEW_parser__ReduceAction239(&type_parser__ReduceAction239);
-var480 = 5;
-((void (*)(val*, long))(var479->class->vft[COLOR_parser__ReduceAction__init]))(var479, var480) /* init on <var479:ReduceAction239>*/;
-var481 = NEW_parser__ReduceAction238(&type_parser__ReduceAction238);
-var482 = 5;
-((void (*)(val*, long))(var481->class->vft[COLOR_parser__ReduceAction__init]))(var481, var482) /* init on <var481:ReduceAction238>*/;
-var483 = NEW_parser__ReduceAction241(&type_parser__ReduceAction241);
-var484 = 5;
-((void (*)(val*, long))(var483->class->vft[COLOR_parser__ReduceAction__init]))(var483, var484) /* init on <var483:ReduceAction241>*/;
-var485 = NEW_parser__ReduceAction242(&type_parser__ReduceAction242);
-var486 = 5;
-((void (*)(val*, long))(var485->class->vft[COLOR_parser__ReduceAction__init]))(var485, var486) /* init on <var485:ReduceAction242>*/;
-var487 = NEW_parser__ReduceAction243(&type_parser__ReduceAction243);
-var488 = 5;
-((void (*)(val*, long))(var487->class->vft[COLOR_parser__ReduceAction__init]))(var487, var488) /* init on <var487:ReduceAction243>*/;
-var489 = NEW_parser__ReduceAction244(&type_parser__ReduceAction244);
-var490 = 5;
-((void (*)(val*, long))(var489->class->vft[COLOR_parser__ReduceAction__init]))(var489, var490) /* init on <var489:ReduceAction244>*/;
-var491 = NEW_parser__ReduceAction243(&type_parser__ReduceAction243);
-var492 = 5;
-((void (*)(val*, long))(var491->class->vft[COLOR_parser__ReduceAction__init]))(var491, var492) /* init on <var491:ReduceAction243>*/;
-var493 = NEW_parser__ReduceAction246(&type_parser__ReduceAction246);
-var494 = 5;
-((void (*)(val*, long))(var493->class->vft[COLOR_parser__ReduceAction__init]))(var493, var494) /* init on <var493:ReduceAction246>*/;
-var495 = NEW_parser__ReduceAction247(&type_parser__ReduceAction247);
-var496 = 5;
-((void (*)(val*, long))(var495->class->vft[COLOR_parser__ReduceAction__init]))(var495, var496) /* init on <var495:ReduceAction247>*/;
-var497 = NEW_parser__ReduceAction246(&type_parser__ReduceAction246);
-var498 = 5;
-((void (*)(val*, long))(var497->class->vft[COLOR_parser__ReduceAction__init]))(var497, var498) /* init on <var497:ReduceAction246>*/;
-var499 = NEW_parser__ReduceAction249(&type_parser__ReduceAction249);
-var500 = 5;
-((void (*)(val*, long))(var499->class->vft[COLOR_parser__ReduceAction__init]))(var499, var500) /* init on <var499:ReduceAction249>*/;
-var501 = NEW_parser__ReduceAction250(&type_parser__ReduceAction250);
-var502 = 5;
-((void (*)(val*, long))(var501->class->vft[COLOR_parser__ReduceAction__init]))(var501, var502) /* init on <var501:ReduceAction250>*/;
-var503 = NEW_parser__ReduceAction251(&type_parser__ReduceAction251);
-var504 = 5;
-((void (*)(val*, long))(var503->class->vft[COLOR_parser__ReduceAction__init]))(var503, var504) /* init on <var503:ReduceAction251>*/;
-var505 = NEW_parser__ReduceAction252(&type_parser__ReduceAction252);
-var506 = 5;
-((void (*)(val*, long))(var505->class->vft[COLOR_parser__ReduceAction__init]))(var505, var506) /* init on <var505:ReduceAction252>*/;
-var507 = NEW_parser__ReduceAction251(&type_parser__ReduceAction251);
-var508 = 5;
-((void (*)(val*, long))(var507->class->vft[COLOR_parser__ReduceAction__init]))(var507, var508) /* init on <var507:ReduceAction251>*/;
-var509 = NEW_parser__ReduceAction254(&type_parser__ReduceAction254);
-var510 = 5;
-((void (*)(val*, long))(var509->class->vft[COLOR_parser__ReduceAction__init]))(var509, var510) /* init on <var509:ReduceAction254>*/;
-var511 = NEW_parser__ReduceAction255(&type_parser__ReduceAction255);
-var512 = 5;
-((void (*)(val*, long))(var511->class->vft[COLOR_parser__ReduceAction__init]))(var511, var512) /* init on <var511:ReduceAction255>*/;
-var513 = NEW_parser__ReduceAction254(&type_parser__ReduceAction254);
-var514 = 5;
-((void (*)(val*, long))(var513->class->vft[COLOR_parser__ReduceAction__init]))(var513, var514) /* init on <var513:ReduceAction254>*/;
-var515 = NEW_parser__ReduceAction257(&type_parser__ReduceAction257);
-var516 = 5;
-((void (*)(val*, long))(var515->class->vft[COLOR_parser__ReduceAction__init]))(var515, var516) /* init on <var515:ReduceAction257>*/;
-var517 = NEW_parser__ReduceAction258(&type_parser__ReduceAction258);
-var518 = 5;
-((void (*)(val*, long))(var517->class->vft[COLOR_parser__ReduceAction__init]))(var517, var518) /* init on <var517:ReduceAction258>*/;
-var519 = NEW_parser__ReduceAction259(&type_parser__ReduceAction259);
-var520 = 5;
-((void (*)(val*, long))(var519->class->vft[COLOR_parser__ReduceAction__init]))(var519, var520) /* init on <var519:ReduceAction259>*/;
-var521 = NEW_parser__ReduceAction260(&type_parser__ReduceAction260);
-var522 = 5;
-((void (*)(val*, long))(var521->class->vft[COLOR_parser__ReduceAction__init]))(var521, var522) /* init on <var521:ReduceAction260>*/;
-var523 = NEW_parser__ReduceAction259(&type_parser__ReduceAction259);
-var524 = 5;
-((void (*)(val*, long))(var523->class->vft[COLOR_parser__ReduceAction__init]))(var523, var524) /* init on <var523:ReduceAction259>*/;
-var525 = NEW_parser__ReduceAction262(&type_parser__ReduceAction262);
-var526 = 5;
-((void (*)(val*, long))(var525->class->vft[COLOR_parser__ReduceAction__init]))(var525, var526) /* init on <var525:ReduceAction262>*/;
-var527 = NEW_parser__ReduceAction263(&type_parser__ReduceAction263);
-var528 = 5;
-((void (*)(val*, long))(var527->class->vft[COLOR_parser__ReduceAction__init]))(var527, var528) /* init on <var527:ReduceAction263>*/;
-var529 = NEW_parser__ReduceAction262(&type_parser__ReduceAction262);
-var530 = 5;
-((void (*)(val*, long))(var529->class->vft[COLOR_parser__ReduceAction__init]))(var529, var530) /* init on <var529:ReduceAction262>*/;
-var531 = NEW_parser__ReduceAction265(&type_parser__ReduceAction265);
-var532 = 5;
-((void (*)(val*, long))(var531->class->vft[COLOR_parser__ReduceAction__init]))(var531, var532) /* init on <var531:ReduceAction265>*/;
-var533 = NEW_parser__ReduceAction266(&type_parser__ReduceAction266);
-var534 = 5;
-((void (*)(val*, long))(var533->class->vft[COLOR_parser__ReduceAction__init]))(var533, var534) /* init on <var533:ReduceAction266>*/;
-var535 = NEW_parser__ReduceAction267(&type_parser__ReduceAction267);
-var536 = 5;
-((void (*)(val*, long))(var535->class->vft[COLOR_parser__ReduceAction__init]))(var535, var536) /* init on <var535:ReduceAction267>*/;
-var537 = NEW_parser__ReduceAction268(&type_parser__ReduceAction268);
-var538 = 5;
-((void (*)(val*, long))(var537->class->vft[COLOR_parser__ReduceAction__init]))(var537, var538) /* init on <var537:ReduceAction268>*/;
-var539 = NEW_parser__ReduceAction267(&type_parser__ReduceAction267);
-var540 = 5;
-((void (*)(val*, long))(var539->class->vft[COLOR_parser__ReduceAction__init]))(var539, var540) /* init on <var539:ReduceAction267>*/;
-var541 = NEW_parser__ReduceAction270(&type_parser__ReduceAction270);
-var542 = 5;
-((void (*)(val*, long))(var541->class->vft[COLOR_parser__ReduceAction__init]))(var541, var542) /* init on <var541:ReduceAction270>*/;
-var543 = NEW_parser__ReduceAction271(&type_parser__ReduceAction271);
-var544 = 5;
-((void (*)(val*, long))(var543->class->vft[COLOR_parser__ReduceAction__init]))(var543, var544) /* init on <var543:ReduceAction271>*/;
-var545 = NEW_parser__ReduceAction270(&type_parser__ReduceAction270);
-var546 = 5;
-((void (*)(val*, long))(var545->class->vft[COLOR_parser__ReduceAction__init]))(var545, var546) /* init on <var545:ReduceAction270>*/;
-var547 = NEW_parser__ReduceAction273(&type_parser__ReduceAction273);
-var548 = 5;
-((void (*)(val*, long))(var547->class->vft[COLOR_parser__ReduceAction__init]))(var547, var548) /* init on <var547:ReduceAction273>*/;
-var549 = NEW_parser__ReduceAction274(&type_parser__ReduceAction274);
-var550 = 5;
-((void (*)(val*, long))(var549->class->vft[COLOR_parser__ReduceAction__init]))(var549, var550) /* init on <var549:ReduceAction274>*/;
-var551 = NEW_parser__ReduceAction275(&type_parser__ReduceAction275);
-var552 = 5;
-((void (*)(val*, long))(var551->class->vft[COLOR_parser__ReduceAction__init]))(var551, var552) /* init on <var551:ReduceAction275>*/;
-var553 = NEW_parser__ReduceAction276(&type_parser__ReduceAction276);
-var554 = 5;
-((void (*)(val*, long))(var553->class->vft[COLOR_parser__ReduceAction__init]))(var553, var554) /* init on <var553:ReduceAction276>*/;
-var555 = NEW_parser__ReduceAction275(&type_parser__ReduceAction275);
-var556 = 5;
-((void (*)(val*, long))(var555->class->vft[COLOR_parser__ReduceAction__init]))(var555, var556) /* init on <var555:ReduceAction275>*/;
-var557 = NEW_parser__ReduceAction278(&type_parser__ReduceAction278);
-var558 = 5;
-((void (*)(val*, long))(var557->class->vft[COLOR_parser__ReduceAction__init]))(var557, var558) /* init on <var557:ReduceAction278>*/;
-var559 = NEW_parser__ReduceAction279(&type_parser__ReduceAction279);
-var560 = 5;
-((void (*)(val*, long))(var559->class->vft[COLOR_parser__ReduceAction__init]))(var559, var560) /* init on <var559:ReduceAction279>*/;
-var561 = NEW_parser__ReduceAction278(&type_parser__ReduceAction278);
-var562 = 5;
-((void (*)(val*, long))(var561->class->vft[COLOR_parser__ReduceAction__init]))(var561, var562) /* init on <var561:ReduceAction278>*/;
-var563 = NEW_parser__ReduceAction281(&type_parser__ReduceAction281);
-var564 = 5;
-((void (*)(val*, long))(var563->class->vft[COLOR_parser__ReduceAction__init]))(var563, var564) /* init on <var563:ReduceAction281>*/;
-var565 = NEW_parser__ReduceAction282(&type_parser__ReduceAction282);
-var566 = 5;
-((void (*)(val*, long))(var565->class->vft[COLOR_parser__ReduceAction__init]))(var565, var566) /* init on <var565:ReduceAction282>*/;
-var567 = NEW_parser__ReduceAction283(&type_parser__ReduceAction283);
-var568 = 5;
-((void (*)(val*, long))(var567->class->vft[COLOR_parser__ReduceAction__init]))(var567, var568) /* init on <var567:ReduceAction283>*/;
-var569 = NEW_parser__ReduceAction284(&type_parser__ReduceAction284);
-var570 = 5;
-((void (*)(val*, long))(var569->class->vft[COLOR_parser__ReduceAction__init]))(var569, var570) /* init on <var569:ReduceAction284>*/;
-var571 = NEW_parser__ReduceAction283(&type_parser__ReduceAction283);
-var572 = 5;
-((void (*)(val*, long))(var571->class->vft[COLOR_parser__ReduceAction__init]))(var571, var572) /* init on <var571:ReduceAction283>*/;
-var573 = NEW_parser__ReduceAction286(&type_parser__ReduceAction286);
-var574 = 5;
-((void (*)(val*, long))(var573->class->vft[COLOR_parser__ReduceAction__init]))(var573, var574) /* init on <var573:ReduceAction286>*/;
-var575 = NEW_parser__ReduceAction287(&type_parser__ReduceAction287);
-var576 = 5;
-((void (*)(val*, long))(var575->class->vft[COLOR_parser__ReduceAction__init]))(var575, var576) /* init on <var575:ReduceAction287>*/;
-var577 = NEW_parser__ReduceAction286(&type_parser__ReduceAction286);
-var578 = 5;
-((void (*)(val*, long))(var577->class->vft[COLOR_parser__ReduceAction__init]))(var577, var578) /* init on <var577:ReduceAction286>*/;
-var579 = NEW_parser__ReduceAction289(&type_parser__ReduceAction289);
-var580 = 5;
-((void (*)(val*, long))(var579->class->vft[COLOR_parser__ReduceAction__init]))(var579, var580) /* init on <var579:ReduceAction289>*/;
-var581 = NEW_parser__ReduceAction290(&type_parser__ReduceAction290);
-var582 = 5;
-((void (*)(val*, long))(var581->class->vft[COLOR_parser__ReduceAction__init]))(var581, var582) /* init on <var581:ReduceAction290>*/;
-var583 = NEW_parser__ReduceAction291(&type_parser__ReduceAction291);
-var584 = 5;
-((void (*)(val*, long))(var583->class->vft[COLOR_parser__ReduceAction__init]))(var583, var584) /* init on <var583:ReduceAction291>*/;
-var585 = NEW_parser__ReduceAction292(&type_parser__ReduceAction292);
-var586 = 5;
-((void (*)(val*, long))(var585->class->vft[COLOR_parser__ReduceAction__init]))(var585, var586) /* init on <var585:ReduceAction292>*/;
-var587 = NEW_parser__ReduceAction291(&type_parser__ReduceAction291);
-var588 = 5;
-((void (*)(val*, long))(var587->class->vft[COLOR_parser__ReduceAction__init]))(var587, var588) /* init on <var587:ReduceAction291>*/;
-var589 = NEW_parser__ReduceAction294(&type_parser__ReduceAction294);
-var590 = 5;
-((void (*)(val*, long))(var589->class->vft[COLOR_parser__ReduceAction__init]))(var589, var590) /* init on <var589:ReduceAction294>*/;
-var591 = NEW_parser__ReduceAction295(&type_parser__ReduceAction295);
-var592 = 5;
-((void (*)(val*, long))(var591->class->vft[COLOR_parser__ReduceAction__init]))(var591, var592) /* init on <var591:ReduceAction295>*/;
-var593 = NEW_parser__ReduceAction294(&type_parser__ReduceAction294);
-var594 = 5;
-((void (*)(val*, long))(var593->class->vft[COLOR_parser__ReduceAction__init]))(var593, var594) /* init on <var593:ReduceAction294>*/;
-var595 = NEW_parser__ReduceAction297(&type_parser__ReduceAction297);
-var596 = 5;
-((void (*)(val*, long))(var595->class->vft[COLOR_parser__ReduceAction__init]))(var595, var596) /* init on <var595:ReduceAction297>*/;
-var597 = NEW_parser__ReduceAction298(&type_parser__ReduceAction298);
-var598 = 5;
-((void (*)(val*, long))(var597->class->vft[COLOR_parser__ReduceAction__init]))(var597, var598) /* init on <var597:ReduceAction298>*/;
-var599 = NEW_parser__ReduceAction299(&type_parser__ReduceAction299);
-var600 = 5;
-((void (*)(val*, long))(var599->class->vft[COLOR_parser__ReduceAction__init]))(var599, var600) /* init on <var599:ReduceAction299>*/;
-var601 = NEW_parser__ReduceAction300(&type_parser__ReduceAction300);
-var602 = 5;
-((void (*)(val*, long))(var601->class->vft[COLOR_parser__ReduceAction__init]))(var601, var602) /* init on <var601:ReduceAction300>*/;
-var603 = NEW_parser__ReduceAction299(&type_parser__ReduceAction299);
-var604 = 5;
-((void (*)(val*, long))(var603->class->vft[COLOR_parser__ReduceAction__init]))(var603, var604) /* init on <var603:ReduceAction299>*/;
-var605 = NEW_parser__ReduceAction302(&type_parser__ReduceAction302);
-var606 = 5;
-((void (*)(val*, long))(var605->class->vft[COLOR_parser__ReduceAction__init]))(var605, var606) /* init on <var605:ReduceAction302>*/;
-var607 = NEW_parser__ReduceAction303(&type_parser__ReduceAction303);
-var608 = 5;
-((void (*)(val*, long))(var607->class->vft[COLOR_parser__ReduceAction__init]))(var607, var608) /* init on <var607:ReduceAction303>*/;
-var609 = NEW_parser__ReduceAction302(&type_parser__ReduceAction302);
-var610 = 5;
-((void (*)(val*, long))(var609->class->vft[COLOR_parser__ReduceAction__init]))(var609, var610) /* init on <var609:ReduceAction302>*/;
-var611 = NEW_parser__ReduceAction305(&type_parser__ReduceAction305);
-var612 = 5;
-((void (*)(val*, long))(var611->class->vft[COLOR_parser__ReduceAction__init]))(var611, var612) /* init on <var611:ReduceAction305>*/;
-var613 = NEW_parser__ReduceAction306(&type_parser__ReduceAction306);
-var614 = 5;
-((void (*)(val*, long))(var613->class->vft[COLOR_parser__ReduceAction__init]))(var613, var614) /* init on <var613:ReduceAction306>*/;
-var615 = NEW_parser__ReduceAction307(&type_parser__ReduceAction307);
-var616 = 5;
-((void (*)(val*, long))(var615->class->vft[COLOR_parser__ReduceAction__init]))(var615, var616) /* init on <var615:ReduceAction307>*/;
-var617 = NEW_parser__ReduceAction308(&type_parser__ReduceAction308);
-var618 = 5;
-((void (*)(val*, long))(var617->class->vft[COLOR_parser__ReduceAction__init]))(var617, var618) /* init on <var617:ReduceAction308>*/;
-var619 = NEW_parser__ReduceAction307(&type_parser__ReduceAction307);
-var620 = 5;
-((void (*)(val*, long))(var619->class->vft[COLOR_parser__ReduceAction__init]))(var619, var620) /* init on <var619:ReduceAction307>*/;
-var621 = NEW_parser__ReduceAction310(&type_parser__ReduceAction310);
-var622 = 5;
-((void (*)(val*, long))(var621->class->vft[COLOR_parser__ReduceAction__init]))(var621, var622) /* init on <var621:ReduceAction310>*/;
-var623 = NEW_parser__ReduceAction311(&type_parser__ReduceAction311);
-var624 = 5;
-((void (*)(val*, long))(var623->class->vft[COLOR_parser__ReduceAction__init]))(var623, var624) /* init on <var623:ReduceAction311>*/;
-var625 = NEW_parser__ReduceAction310(&type_parser__ReduceAction310);
-var626 = 5;
-((void (*)(val*, long))(var625->class->vft[COLOR_parser__ReduceAction__init]))(var625, var626) /* init on <var625:ReduceAction310>*/;
-var627 = NEW_parser__ReduceAction313(&type_parser__ReduceAction313);
-var628 = 5;
-((void (*)(val*, long))(var627->class->vft[COLOR_parser__ReduceAction__init]))(var627, var628) /* init on <var627:ReduceAction313>*/;
-var629 = NEW_parser__ReduceAction314(&type_parser__ReduceAction314);
-var630 = 5;
-((void (*)(val*, long))(var629->class->vft[COLOR_parser__ReduceAction__init]))(var629, var630) /* init on <var629:ReduceAction314>*/;
-var631 = NEW_parser__ReduceAction315(&type_parser__ReduceAction315);
-var632 = 5;
-((void (*)(val*, long))(var631->class->vft[COLOR_parser__ReduceAction__init]))(var631, var632) /* init on <var631:ReduceAction315>*/;
-var633 = NEW_parser__ReduceAction316(&type_parser__ReduceAction316);
-var634 = 5;
-((void (*)(val*, long))(var633->class->vft[COLOR_parser__ReduceAction__init]))(var633, var634) /* init on <var633:ReduceAction316>*/;
-var635 = NEW_parser__ReduceAction315(&type_parser__ReduceAction315);
-var636 = 5;
-((void (*)(val*, long))(var635->class->vft[COLOR_parser__ReduceAction__init]))(var635, var636) /* init on <var635:ReduceAction315>*/;
-var637 = NEW_parser__ReduceAction318(&type_parser__ReduceAction318);
-var638 = 5;
-((void (*)(val*, long))(var637->class->vft[COLOR_parser__ReduceAction__init]))(var637, var638) /* init on <var637:ReduceAction318>*/;
-var639 = NEW_parser__ReduceAction319(&type_parser__ReduceAction319);
-var640 = 5;
-((void (*)(val*, long))(var639->class->vft[COLOR_parser__ReduceAction__init]))(var639, var640) /* init on <var639:ReduceAction319>*/;
-var641 = NEW_parser__ReduceAction318(&type_parser__ReduceAction318);
-var642 = 5;
-((void (*)(val*, long))(var641->class->vft[COLOR_parser__ReduceAction__init]))(var641, var642) /* init on <var641:ReduceAction318>*/;
-var643 = NEW_parser__ReduceAction321(&type_parser__ReduceAction321);
-var644 = 5;
-((void (*)(val*, long))(var643->class->vft[COLOR_parser__ReduceAction__init]))(var643, var644) /* init on <var643:ReduceAction321>*/;
-var645 = NEW_parser__ReduceAction322(&type_parser__ReduceAction322);
-var646 = 5;
-((void (*)(val*, long))(var645->class->vft[COLOR_parser__ReduceAction__init]))(var645, var646) /* init on <var645:ReduceAction322>*/;
-var647 = NEW_parser__ReduceAction323(&type_parser__ReduceAction323);
-var648 = 5;
-((void (*)(val*, long))(var647->class->vft[COLOR_parser__ReduceAction__init]))(var647, var648) /* init on <var647:ReduceAction323>*/;
-var649 = NEW_parser__ReduceAction324(&type_parser__ReduceAction324);
-var650 = 5;
-((void (*)(val*, long))(var649->class->vft[COLOR_parser__ReduceAction__init]))(var649, var650) /* init on <var649:ReduceAction324>*/;
-var651 = NEW_parser__ReduceAction323(&type_parser__ReduceAction323);
-var652 = 5;
-((void (*)(val*, long))(var651->class->vft[COLOR_parser__ReduceAction__init]))(var651, var652) /* init on <var651:ReduceAction323>*/;
-var653 = NEW_parser__ReduceAction326(&type_parser__ReduceAction326);
-var654 = 5;
-((void (*)(val*, long))(var653->class->vft[COLOR_parser__ReduceAction__init]))(var653, var654) /* init on <var653:ReduceAction326>*/;
-var655 = NEW_parser__ReduceAction327(&type_parser__ReduceAction327);
-var656 = 5;
-((void (*)(val*, long))(var655->class->vft[COLOR_parser__ReduceAction__init]))(var655, var656) /* init on <var655:ReduceAction327>*/;
-var657 = NEW_parser__ReduceAction326(&type_parser__ReduceAction326);
-var658 = 5;
-((void (*)(val*, long))(var657->class->vft[COLOR_parser__ReduceAction__init]))(var657, var658) /* init on <var657:ReduceAction326>*/;
-var659 = NEW_parser__ReduceAction329(&type_parser__ReduceAction329);
-var660 = 6;
-((void (*)(val*, long))(var659->class->vft[COLOR_parser__ReduceAction__init]))(var659, var660) /* init on <var659:ReduceAction329>*/;
-var661 = NEW_parser__ReduceAction330(&type_parser__ReduceAction330);
-var662 = 6;
-((void (*)(val*, long))(var661->class->vft[COLOR_parser__ReduceAction__init]))(var661, var662) /* init on <var661:ReduceAction330>*/;
-var663 = NEW_parser__ReduceAction331(&type_parser__ReduceAction331);
-var664 = 6;
-((void (*)(val*, long))(var663->class->vft[COLOR_parser__ReduceAction__init]))(var663, var664) /* init on <var663:ReduceAction331>*/;
-var665 = NEW_parser__ReduceAction332(&type_parser__ReduceAction332);
-var666 = 6;
-((void (*)(val*, long))(var665->class->vft[COLOR_parser__ReduceAction__init]))(var665, var666) /* init on <var665:ReduceAction332>*/;
-var667 = NEW_parser__ReduceAction333(&type_parser__ReduceAction333);
-var668 = 6;
-((void (*)(val*, long))(var667->class->vft[COLOR_parser__ReduceAction__init]))(var667, var668) /* init on <var667:ReduceAction333>*/;
-var669 = NEW_parser__ReduceAction334(&type_parser__ReduceAction334);
-var670 = 6;
-((void (*)(val*, long))(var669->class->vft[COLOR_parser__ReduceAction__init]))(var669, var670) /* init on <var669:ReduceAction334>*/;
-var671 = NEW_parser__ReduceAction335(&type_parser__ReduceAction335);
-var672 = 7;
-((void (*)(val*, long))(var671->class->vft[COLOR_parser__ReduceAction__init]))(var671, var672) /* init on <var671:ReduceAction335>*/;
-var673 = NEW_parser__ReduceAction336(&type_parser__ReduceAction336);
-var674 = 7;
-((void (*)(val*, long))(var673->class->vft[COLOR_parser__ReduceAction__init]))(var673, var674) /* init on <var673:ReduceAction336>*/;
-var675 = NEW_parser__ReduceAction337(&type_parser__ReduceAction337);
-var676 = 8;
-((void (*)(val*, long))(var675->class->vft[COLOR_parser__ReduceAction__init]))(var675, var676) /* init on <var675:ReduceAction337>*/;
-var677 = NEW_parser__ReduceAction338(&type_parser__ReduceAction338);
-var678 = 9;
-((void (*)(val*, long))(var677->class->vft[COLOR_parser__ReduceAction__init]))(var677, var678) /* init on <var677:ReduceAction338>*/;
-var679 = NEW_parser__ReduceAction339(&type_parser__ReduceAction339);
-var680 = 9;
-((void (*)(val*, long))(var679->class->vft[COLOR_parser__ReduceAction__init]))(var679, var680) /* init on <var679:ReduceAction339>*/;
-var681 = NEW_parser__ReduceAction340(&type_parser__ReduceAction340);
-var682 = 9;
-((void (*)(val*, long))(var681->class->vft[COLOR_parser__ReduceAction__init]))(var681, var682) /* init on <var681:ReduceAction340>*/;
-var683 = NEW_parser__ReduceAction341(&type_parser__ReduceAction341);
-var684 = 9;
-((void (*)(val*, long))(var683->class->vft[COLOR_parser__ReduceAction__init]))(var683, var684) /* init on <var683:ReduceAction341>*/;
-var685 = NEW_parser__ReduceAction342(&type_parser__ReduceAction342);
-var686 = 10;
-((void (*)(val*, long))(var685->class->vft[COLOR_parser__ReduceAction__init]))(var685, var686) /* init on <var685:ReduceAction342>*/;
-var687 = NEW_parser__ReduceAction343(&type_parser__ReduceAction343);
-var688 = 10;
-((void (*)(val*, long))(var687->class->vft[COLOR_parser__ReduceAction__init]))(var687, var688) /* init on <var687:ReduceAction343>*/;
-var689 = NEW_parser__ReduceAction344(&type_parser__ReduceAction344);
-var690 = 11;
-((void (*)(val*, long))(var689->class->vft[COLOR_parser__ReduceAction__init]))(var689, var690) /* init on <var689:ReduceAction344>*/;
-var691 = NEW_parser__ReduceAction345(&type_parser__ReduceAction345);
-var692 = 12;
-((void (*)(val*, long))(var691->class->vft[COLOR_parser__ReduceAction__init]))(var691, var692) /* init on <var691:ReduceAction345>*/;
-var693 = NEW_parser__ReduceAction346(&type_parser__ReduceAction346);
-var694 = 12;
-((void (*)(val*, long))(var693->class->vft[COLOR_parser__ReduceAction__init]))(var693, var694) /* init on <var693:ReduceAction346>*/;
-var695 = NEW_parser__ReduceAction347(&type_parser__ReduceAction347);
-var696 = 12;
-((void (*)(val*, long))(var695->class->vft[COLOR_parser__ReduceAction__init]))(var695, var696) /* init on <var695:ReduceAction347>*/;
-var697 = NEW_parser__ReduceAction348(&type_parser__ReduceAction348);
-var698 = 12;
-((void (*)(val*, long))(var697->class->vft[COLOR_parser__ReduceAction__init]))(var697, var698) /* init on <var697:ReduceAction348>*/;
-var699 = NEW_parser__ReduceAction349(&type_parser__ReduceAction349);
-var700 = 12;
-((void (*)(val*, long))(var699->class->vft[COLOR_parser__ReduceAction__init]))(var699, var700) /* init on <var699:ReduceAction349>*/;
-var701 = NEW_parser__ReduceAction350(&type_parser__ReduceAction350);
-var702 = 12;
-((void (*)(val*, long))(var701->class->vft[COLOR_parser__ReduceAction__init]))(var701, var702) /* init on <var701:ReduceAction350>*/;
-var703 = NEW_parser__ReduceAction351(&type_parser__ReduceAction351);
-var704 = 12;
-((void (*)(val*, long))(var703->class->vft[COLOR_parser__ReduceAction__init]))(var703, var704) /* init on <var703:ReduceAction351>*/;
-var705 = NEW_parser__ReduceAction352(&type_parser__ReduceAction352);
-var706 = 12;
-((void (*)(val*, long))(var705->class->vft[COLOR_parser__ReduceAction__init]))(var705, var706) /* init on <var705:ReduceAction352>*/;
-var707 = NEW_parser__ReduceAction353(&type_parser__ReduceAction353);
-var708 = 12;
-((void (*)(val*, long))(var707->class->vft[COLOR_parser__ReduceAction__init]))(var707, var708) /* init on <var707:ReduceAction353>*/;
-var709 = NEW_parser__ReduceAction354(&type_parser__ReduceAction354);
-var710 = 12;
-((void (*)(val*, long))(var709->class->vft[COLOR_parser__ReduceAction__init]))(var709, var710) /* init on <var709:ReduceAction354>*/;
-var711 = NEW_parser__ReduceAction355(&type_parser__ReduceAction355);
-var712 = 12;
-((void (*)(val*, long))(var711->class->vft[COLOR_parser__ReduceAction__init]))(var711, var712) /* init on <var711:ReduceAction355>*/;
-var713 = NEW_parser__ReduceAction356(&type_parser__ReduceAction356);
-var714 = 12;
-((void (*)(val*, long))(var713->class->vft[COLOR_parser__ReduceAction__init]))(var713, var714) /* init on <var713:ReduceAction356>*/;
-var715 = NEW_parser__ReduceAction357(&type_parser__ReduceAction357);
-var716 = 12;
-((void (*)(val*, long))(var715->class->vft[COLOR_parser__ReduceAction__init]))(var715, var716) /* init on <var715:ReduceAction357>*/;
-var717 = NEW_parser__ReduceAction358(&type_parser__ReduceAction358);
-var718 = 12;
-((void (*)(val*, long))(var717->class->vft[COLOR_parser__ReduceAction__init]))(var717, var718) /* init on <var717:ReduceAction358>*/;
-var719 = NEW_parser__ReduceAction359(&type_parser__ReduceAction359);
-var720 = 12;
-((void (*)(val*, long))(var719->class->vft[COLOR_parser__ReduceAction__init]))(var719, var720) /* init on <var719:ReduceAction359>*/;
-var721 = NEW_parser__ReduceAction360(&type_parser__ReduceAction360);
-var722 = 12;
-((void (*)(val*, long))(var721->class->vft[COLOR_parser__ReduceAction__init]))(var721, var722) /* init on <var721:ReduceAction360>*/;
-var723 = NEW_parser__ReduceAction361(&type_parser__ReduceAction361);
-var724 = 12;
-((void (*)(val*, long))(var723->class->vft[COLOR_parser__ReduceAction__init]))(var723, var724) /* init on <var723:ReduceAction361>*/;
-var725 = NEW_parser__ReduceAction362(&type_parser__ReduceAction362);
-var726 = 12;
-((void (*)(val*, long))(var725->class->vft[COLOR_parser__ReduceAction__init]))(var725, var726) /* init on <var725:ReduceAction362>*/;
-var727 = NEW_parser__ReduceAction363(&type_parser__ReduceAction363);
-var728 = 12;
-((void (*)(val*, long))(var727->class->vft[COLOR_parser__ReduceAction__init]))(var727, var728) /* init on <var727:ReduceAction363>*/;
-var729 = NEW_parser__ReduceAction364(&type_parser__ReduceAction364);
-var730 = 12;
-((void (*)(val*, long))(var729->class->vft[COLOR_parser__ReduceAction__init]))(var729, var730) /* init on <var729:ReduceAction364>*/;
-var731 = NEW_parser__ReduceAction365(&type_parser__ReduceAction365);
-var732 = 12;
-((void (*)(val*, long))(var731->class->vft[COLOR_parser__ReduceAction__init]))(var731, var732) /* init on <var731:ReduceAction365>*/;
-var733 = NEW_parser__ReduceAction366(&type_parser__ReduceAction366);
-var734 = 12;
-((void (*)(val*, long))(var733->class->vft[COLOR_parser__ReduceAction__init]))(var733, var734) /* init on <var733:ReduceAction366>*/;
-var735 = NEW_parser__ReduceAction367(&type_parser__ReduceAction367);
-var736 = 12;
-((void (*)(val*, long))(var735->class->vft[COLOR_parser__ReduceAction__init]))(var735, var736) /* init on <var735:ReduceAction367>*/;
-var737 = NEW_parser__ReduceAction368(&type_parser__ReduceAction368);
-var738 = 12;
-((void (*)(val*, long))(var737->class->vft[COLOR_parser__ReduceAction__init]))(var737, var738) /* init on <var737:ReduceAction368>*/;
-var739 = NEW_parser__ReduceAction369(&type_parser__ReduceAction369);
-var740 = 12;
-((void (*)(val*, long))(var739->class->vft[COLOR_parser__ReduceAction__init]))(var739, var740) /* init on <var739:ReduceAction369>*/;
-var741 = NEW_parser__ReduceAction370(&type_parser__ReduceAction370);
-var742 = 12;
-((void (*)(val*, long))(var741->class->vft[COLOR_parser__ReduceAction__init]))(var741, var742) /* init on <var741:ReduceAction370>*/;
-var743 = NEW_parser__ReduceAction371(&type_parser__ReduceAction371);
-var744 = 12;
-((void (*)(val*, long))(var743->class->vft[COLOR_parser__ReduceAction__init]))(var743, var744) /* init on <var743:ReduceAction371>*/;
-var745 = NEW_parser__ReduceAction372(&type_parser__ReduceAction372);
-var746 = 12;
-((void (*)(val*, long))(var745->class->vft[COLOR_parser__ReduceAction__init]))(var745, var746) /* init on <var745:ReduceAction372>*/;
-var747 = NEW_parser__ReduceAction373(&type_parser__ReduceAction373);
-var748 = 12;
-((void (*)(val*, long))(var747->class->vft[COLOR_parser__ReduceAction__init]))(var747, var748) /* init on <var747:ReduceAction373>*/;
-var749 = NEW_parser__ReduceAction374(&type_parser__ReduceAction374);
-var750 = 12;
-((void (*)(val*, long))(var749->class->vft[COLOR_parser__ReduceAction__init]))(var749, var750) /* init on <var749:ReduceAction374>*/;
-var751 = NEW_parser__ReduceAction375(&type_parser__ReduceAction375);
-var752 = 12;
-((void (*)(val*, long))(var751->class->vft[COLOR_parser__ReduceAction__init]))(var751, var752) /* init on <var751:ReduceAction375>*/;
-var753 = NEW_parser__ReduceAction376(&type_parser__ReduceAction376);
-var754 = 12;
-((void (*)(val*, long))(var753->class->vft[COLOR_parser__ReduceAction__init]))(var753, var754) /* init on <var753:ReduceAction376>*/;
-var755 = NEW_parser__ReduceAction377(&type_parser__ReduceAction377);
-var756 = 12;
-((void (*)(val*, long))(var755->class->vft[COLOR_parser__ReduceAction__init]))(var755, var756) /* init on <var755:ReduceAction377>*/;
-var757 = NEW_parser__ReduceAction378(&type_parser__ReduceAction378);
-var758 = 12;
-((void (*)(val*, long))(var757->class->vft[COLOR_parser__ReduceAction__init]))(var757, var758) /* init on <var757:ReduceAction378>*/;
-var759 = NEW_parser__ReduceAction379(&type_parser__ReduceAction379);
-var760 = 12;
-((void (*)(val*, long))(var759->class->vft[COLOR_parser__ReduceAction__init]))(var759, var760) /* init on <var759:ReduceAction379>*/;
-var761 = NEW_parser__ReduceAction380(&type_parser__ReduceAction380);
-var762 = 12;
-((void (*)(val*, long))(var761->class->vft[COLOR_parser__ReduceAction__init]))(var761, var762) /* init on <var761:ReduceAction380>*/;
-var763 = NEW_parser__ReduceAction381(&type_parser__ReduceAction381);
-var764 = 12;
-((void (*)(val*, long))(var763->class->vft[COLOR_parser__ReduceAction__init]))(var763, var764) /* init on <var763:ReduceAction381>*/;
-var765 = NEW_parser__ReduceAction382(&type_parser__ReduceAction382);
-var766 = 12;
-((void (*)(val*, long))(var765->class->vft[COLOR_parser__ReduceAction__init]))(var765, var766) /* init on <var765:ReduceAction382>*/;
-var767 = NEW_parser__ReduceAction383(&type_parser__ReduceAction383);
-var768 = 12;
-((void (*)(val*, long))(var767->class->vft[COLOR_parser__ReduceAction__init]))(var767, var768) /* init on <var767:ReduceAction383>*/;
-var769 = NEW_parser__ReduceAction384(&type_parser__ReduceAction384);
-var770 = 12;
-((void (*)(val*, long))(var769->class->vft[COLOR_parser__ReduceAction__init]))(var769, var770) /* init on <var769:ReduceAction384>*/;
-var771 = NEW_parser__ReduceAction385(&type_parser__ReduceAction385);
-var772 = 12;
-((void (*)(val*, long))(var771->class->vft[COLOR_parser__ReduceAction__init]))(var771, var772) /* init on <var771:ReduceAction385>*/;
-var773 = NEW_parser__ReduceAction386(&type_parser__ReduceAction386);
-var774 = 12;
-((void (*)(val*, long))(var773->class->vft[COLOR_parser__ReduceAction__init]))(var773, var774) /* init on <var773:ReduceAction386>*/;
-var775 = NEW_parser__ReduceAction387(&type_parser__ReduceAction387);
-var776 = 12;
-((void (*)(val*, long))(var775->class->vft[COLOR_parser__ReduceAction__init]))(var775, var776) /* init on <var775:ReduceAction387>*/;
-var777 = NEW_parser__ReduceAction388(&type_parser__ReduceAction388);
-var778 = 12;
-((void (*)(val*, long))(var777->class->vft[COLOR_parser__ReduceAction__init]))(var777, var778) /* init on <var777:ReduceAction388>*/;
-var779 = NEW_parser__ReduceAction389(&type_parser__ReduceAction389);
-var780 = 12;
-((void (*)(val*, long))(var779->class->vft[COLOR_parser__ReduceAction__init]))(var779, var780) /* init on <var779:ReduceAction389>*/;
-var781 = NEW_parser__ReduceAction390(&type_parser__ReduceAction390);
-var782 = 12;
-((void (*)(val*, long))(var781->class->vft[COLOR_parser__ReduceAction__init]))(var781, var782) /* init on <var781:ReduceAction390>*/;
-var783 = NEW_parser__ReduceAction391(&type_parser__ReduceAction391);
-var784 = 12;
-((void (*)(val*, long))(var783->class->vft[COLOR_parser__ReduceAction__init]))(var783, var784) /* init on <var783:ReduceAction391>*/;
-var785 = NEW_parser__ReduceAction392(&type_parser__ReduceAction392);
-var786 = 12;
-((void (*)(val*, long))(var785->class->vft[COLOR_parser__ReduceAction__init]))(var785, var786) /* init on <var785:ReduceAction392>*/;
-var787 = NEW_parser__ReduceAction393(&type_parser__ReduceAction393);
-var788 = 12;
-((void (*)(val*, long))(var787->class->vft[COLOR_parser__ReduceAction__init]))(var787, var788) /* init on <var787:ReduceAction393>*/;
-var789 = NEW_parser__ReduceAction394(&type_parser__ReduceAction394);
-var790 = 12;
-((void (*)(val*, long))(var789->class->vft[COLOR_parser__ReduceAction__init]))(var789, var790) /* init on <var789:ReduceAction394>*/;
-var791 = NEW_parser__ReduceAction395(&type_parser__ReduceAction395);
-var792 = 12;
-((void (*)(val*, long))(var791->class->vft[COLOR_parser__ReduceAction__init]))(var791, var792) /* init on <var791:ReduceAction395>*/;
-var793 = NEW_parser__ReduceAction396(&type_parser__ReduceAction396);
-var794 = 12;
-((void (*)(val*, long))(var793->class->vft[COLOR_parser__ReduceAction__init]))(var793, var794) /* init on <var793:ReduceAction396>*/;
-var795 = NEW_parser__ReduceAction397(&type_parser__ReduceAction397);
-var796 = 12;
-((void (*)(val*, long))(var795->class->vft[COLOR_parser__ReduceAction__init]))(var795, var796) /* init on <var795:ReduceAction397>*/;
-var797 = NEW_parser__ReduceAction398(&type_parser__ReduceAction398);
-var798 = 12;
-((void (*)(val*, long))(var797->class->vft[COLOR_parser__ReduceAction__init]))(var797, var798) /* init on <var797:ReduceAction398>*/;
-var799 = NEW_parser__ReduceAction399(&type_parser__ReduceAction399);
-var800 = 12;
-((void (*)(val*, long))(var799->class->vft[COLOR_parser__ReduceAction__init]))(var799, var800) /* init on <var799:ReduceAction399>*/;
-var801 = NEW_parser__ReduceAction400(&type_parser__ReduceAction400);
-var802 = 12;
-((void (*)(val*, long))(var801->class->vft[COLOR_parser__ReduceAction__init]))(var801, var802) /* init on <var801:ReduceAction400>*/;
-var803 = NEW_parser__ReduceAction401(&type_parser__ReduceAction401);
-var804 = 12;
-((void (*)(val*, long))(var803->class->vft[COLOR_parser__ReduceAction__init]))(var803, var804) /* init on <var803:ReduceAction401>*/;
-var805 = NEW_parser__ReduceAction402(&type_parser__ReduceAction402);
-var806 = 12;
-((void (*)(val*, long))(var805->class->vft[COLOR_parser__ReduceAction__init]))(var805, var806) /* init on <var805:ReduceAction402>*/;
-var807 = NEW_parser__ReduceAction403(&type_parser__ReduceAction403);
-var808 = 12;
-((void (*)(val*, long))(var807->class->vft[COLOR_parser__ReduceAction__init]))(var807, var808) /* init on <var807:ReduceAction403>*/;
-var809 = NEW_parser__ReduceAction404(&type_parser__ReduceAction404);
-var810 = 12;
-((void (*)(val*, long))(var809->class->vft[COLOR_parser__ReduceAction__init]))(var809, var810) /* init on <var809:ReduceAction404>*/;
-var811 = NEW_parser__ReduceAction405(&type_parser__ReduceAction405);
-var812 = 12;
-((void (*)(val*, long))(var811->class->vft[COLOR_parser__ReduceAction__init]))(var811, var812) /* init on <var811:ReduceAction405>*/;
-var813 = NEW_parser__ReduceAction406(&type_parser__ReduceAction406);
-var814 = 12;
-((void (*)(val*, long))(var813->class->vft[COLOR_parser__ReduceAction__init]))(var813, var814) /* init on <var813:ReduceAction406>*/;
-var815 = NEW_parser__ReduceAction407(&type_parser__ReduceAction407);
-var816 = 12;
-((void (*)(val*, long))(var815->class->vft[COLOR_parser__ReduceAction__init]))(var815, var816) /* init on <var815:ReduceAction407>*/;
-var817 = NEW_parser__ReduceAction408(&type_parser__ReduceAction408);
-var818 = 12;
-((void (*)(val*, long))(var817->class->vft[COLOR_parser__ReduceAction__init]))(var817, var818) /* init on <var817:ReduceAction408>*/;
-var819 = NEW_parser__ReduceAction409(&type_parser__ReduceAction409);
-var820 = 12;
-((void (*)(val*, long))(var819->class->vft[COLOR_parser__ReduceAction__init]))(var819, var820) /* init on <var819:ReduceAction409>*/;
-var821 = NEW_parser__ReduceAction410(&type_parser__ReduceAction410);
-var822 = 12;
-((void (*)(val*, long))(var821->class->vft[COLOR_parser__ReduceAction__init]))(var821, var822) /* init on <var821:ReduceAction410>*/;
-var823 = NEW_parser__ReduceAction411(&type_parser__ReduceAction411);
-var824 = 12;
-((void (*)(val*, long))(var823->class->vft[COLOR_parser__ReduceAction__init]))(var823, var824) /* init on <var823:ReduceAction411>*/;
-var825 = NEW_parser__ReduceAction412(&type_parser__ReduceAction412);
-var826 = 12;
-((void (*)(val*, long))(var825->class->vft[COLOR_parser__ReduceAction__init]))(var825, var826) /* init on <var825:ReduceAction412>*/;
-var827 = NEW_parser__ReduceAction413(&type_parser__ReduceAction413);
-var828 = 12;
-((void (*)(val*, long))(var827->class->vft[COLOR_parser__ReduceAction__init]))(var827, var828) /* init on <var827:ReduceAction413>*/;
-var829 = NEW_parser__ReduceAction414(&type_parser__ReduceAction414);
-var830 = 12;
-((void (*)(val*, long))(var829->class->vft[COLOR_parser__ReduceAction__init]))(var829, var830) /* init on <var829:ReduceAction414>*/;
-var831 = NEW_parser__ReduceAction415(&type_parser__ReduceAction415);
-var832 = 12;
-((void (*)(val*, long))(var831->class->vft[COLOR_parser__ReduceAction__init]))(var831, var832) /* init on <var831:ReduceAction415>*/;
-var833 = NEW_parser__ReduceAction416(&type_parser__ReduceAction416);
-var834 = 12;
-((void (*)(val*, long))(var833->class->vft[COLOR_parser__ReduceAction__init]))(var833, var834) /* init on <var833:ReduceAction416>*/;
-var835 = NEW_parser__ReduceAction417(&type_parser__ReduceAction417);
-var836 = 12;
-((void (*)(val*, long))(var835->class->vft[COLOR_parser__ReduceAction__init]))(var835, var836) /* init on <var835:ReduceAction417>*/;
-var837 = NEW_parser__ReduceAction418(&type_parser__ReduceAction418);
-var838 = 12;
-((void (*)(val*, long))(var837->class->vft[COLOR_parser__ReduceAction__init]))(var837, var838) /* init on <var837:ReduceAction418>*/;
-var839 = NEW_parser__ReduceAction419(&type_parser__ReduceAction419);
-var840 = 12;
-((void (*)(val*, long))(var839->class->vft[COLOR_parser__ReduceAction__init]))(var839, var840) /* init on <var839:ReduceAction419>*/;
-var841 = NEW_parser__ReduceAction420(&type_parser__ReduceAction420);
-var842 = 12;
-((void (*)(val*, long))(var841->class->vft[COLOR_parser__ReduceAction__init]))(var841, var842) /* init on <var841:ReduceAction420>*/;
-var843 = NEW_parser__ReduceAction421(&type_parser__ReduceAction421);
-var844 = 12;
-((void (*)(val*, long))(var843->class->vft[COLOR_parser__ReduceAction__init]))(var843, var844) /* init on <var843:ReduceAction421>*/;
-var845 = NEW_parser__ReduceAction422(&type_parser__ReduceAction422);
-var846 = 12;
-((void (*)(val*, long))(var845->class->vft[COLOR_parser__ReduceAction__init]))(var845, var846) /* init on <var845:ReduceAction422>*/;
-var847 = NEW_parser__ReduceAction423(&type_parser__ReduceAction423);
-var848 = 12;
-((void (*)(val*, long))(var847->class->vft[COLOR_parser__ReduceAction__init]))(var847, var848) /* init on <var847:ReduceAction423>*/;
-var849 = NEW_parser__ReduceAction424(&type_parser__ReduceAction424);
-var850 = 12;
-((void (*)(val*, long))(var849->class->vft[COLOR_parser__ReduceAction__init]))(var849, var850) /* init on <var849:ReduceAction424>*/;
-var851 = NEW_parser__ReduceAction425(&type_parser__ReduceAction425);
-var852 = 12;
-((void (*)(val*, long))(var851->class->vft[COLOR_parser__ReduceAction__init]))(var851, var852) /* init on <var851:ReduceAction425>*/;
-var853 = NEW_parser__ReduceAction426(&type_parser__ReduceAction426);
-var854 = 12;
-((void (*)(val*, long))(var853->class->vft[COLOR_parser__ReduceAction__init]))(var853, var854) /* init on <var853:ReduceAction426>*/;
-var855 = NEW_parser__ReduceAction427(&type_parser__ReduceAction427);
-var856 = 12;
-((void (*)(val*, long))(var855->class->vft[COLOR_parser__ReduceAction__init]))(var855, var856) /* init on <var855:ReduceAction427>*/;
-var857 = NEW_parser__ReduceAction428(&type_parser__ReduceAction428);
-var858 = 12;
-((void (*)(val*, long))(var857->class->vft[COLOR_parser__ReduceAction__init]))(var857, var858) /* init on <var857:ReduceAction428>*/;
-var859 = NEW_parser__ReduceAction429(&type_parser__ReduceAction429);
-var860 = 12;
-((void (*)(val*, long))(var859->class->vft[COLOR_parser__ReduceAction__init]))(var859, var860) /* init on <var859:ReduceAction429>*/;
-var861 = NEW_parser__ReduceAction430(&type_parser__ReduceAction430);
-var862 = 12;
-((void (*)(val*, long))(var861->class->vft[COLOR_parser__ReduceAction__init]))(var861, var862) /* init on <var861:ReduceAction430>*/;
-var863 = NEW_parser__ReduceAction431(&type_parser__ReduceAction431);
-var864 = 12;
-((void (*)(val*, long))(var863->class->vft[COLOR_parser__ReduceAction__init]))(var863, var864) /* init on <var863:ReduceAction431>*/;
-var865 = NEW_parser__ReduceAction432(&type_parser__ReduceAction432);
-var866 = 12;
-((void (*)(val*, long))(var865->class->vft[COLOR_parser__ReduceAction__init]))(var865, var866) /* init on <var865:ReduceAction432>*/;
-var867 = NEW_parser__ReduceAction433(&type_parser__ReduceAction433);
-var868 = 12;
-((void (*)(val*, long))(var867->class->vft[COLOR_parser__ReduceAction__init]))(var867, var868) /* init on <var867:ReduceAction433>*/;
-var869 = NEW_parser__ReduceAction434(&type_parser__ReduceAction434);
-var870 = 12;
-((void (*)(val*, long))(var869->class->vft[COLOR_parser__ReduceAction__init]))(var869, var870) /* init on <var869:ReduceAction434>*/;
-var871 = NEW_parser__ReduceAction435(&type_parser__ReduceAction435);
-var872 = 12;
-((void (*)(val*, long))(var871->class->vft[COLOR_parser__ReduceAction__init]))(var871, var872) /* init on <var871:ReduceAction435>*/;
-var873 = NEW_parser__ReduceAction436(&type_parser__ReduceAction436);
-var874 = 12;
-((void (*)(val*, long))(var873->class->vft[COLOR_parser__ReduceAction__init]))(var873, var874) /* init on <var873:ReduceAction436>*/;
-var875 = NEW_parser__ReduceAction437(&type_parser__ReduceAction437);
-var876 = 12;
-((void (*)(val*, long))(var875->class->vft[COLOR_parser__ReduceAction__init]))(var875, var876) /* init on <var875:ReduceAction437>*/;
-var877 = NEW_parser__ReduceAction438(&type_parser__ReduceAction438);
-var878 = 12;
-((void (*)(val*, long))(var877->class->vft[COLOR_parser__ReduceAction__init]))(var877, var878) /* init on <var877:ReduceAction438>*/;
-var879 = NEW_parser__ReduceAction439(&type_parser__ReduceAction439);
-var880 = 12;
-((void (*)(val*, long))(var879->class->vft[COLOR_parser__ReduceAction__init]))(var879, var880) /* init on <var879:ReduceAction439>*/;
-var881 = NEW_parser__ReduceAction440(&type_parser__ReduceAction440);
-var882 = 12;
-((void (*)(val*, long))(var881->class->vft[COLOR_parser__ReduceAction__init]))(var881, var882) /* init on <var881:ReduceAction440>*/;
-var883 = NEW_parser__ReduceAction441(&type_parser__ReduceAction441);
-var884 = 12;
-((void (*)(val*, long))(var883->class->vft[COLOR_parser__ReduceAction__init]))(var883, var884) /* init on <var883:ReduceAction441>*/;
-var885 = NEW_parser__ReduceAction442(&type_parser__ReduceAction442);
-var886 = 12;
-((void (*)(val*, long))(var885->class->vft[COLOR_parser__ReduceAction__init]))(var885, var886) /* init on <var885:ReduceAction442>*/;
-var887 = NEW_parser__ReduceAction443(&type_parser__ReduceAction443);
-var888 = 12;
-((void (*)(val*, long))(var887->class->vft[COLOR_parser__ReduceAction__init]))(var887, var888) /* init on <var887:ReduceAction443>*/;
-var889 = NEW_parser__ReduceAction444(&type_parser__ReduceAction444);
-var890 = 12;
-((void (*)(val*, long))(var889->class->vft[COLOR_parser__ReduceAction__init]))(var889, var890) /* init on <var889:ReduceAction444>*/;
-var891 = NEW_parser__ReduceAction445(&type_parser__ReduceAction445);
-var892 = 12;
-((void (*)(val*, long))(var891->class->vft[COLOR_parser__ReduceAction__init]))(var891, var892) /* init on <var891:ReduceAction445>*/;
-var893 = NEW_parser__ReduceAction446(&type_parser__ReduceAction446);
-var894 = 12;
-((void (*)(val*, long))(var893->class->vft[COLOR_parser__ReduceAction__init]))(var893, var894) /* init on <var893:ReduceAction446>*/;
-var895 = NEW_parser__ReduceAction447(&type_parser__ReduceAction447);
-var896 = 12;
-((void (*)(val*, long))(var895->class->vft[COLOR_parser__ReduceAction__init]))(var895, var896) /* init on <var895:ReduceAction447>*/;
-var897 = NEW_parser__ReduceAction448(&type_parser__ReduceAction448);
-var898 = 12;
-((void (*)(val*, long))(var897->class->vft[COLOR_parser__ReduceAction__init]))(var897, var898) /* init on <var897:ReduceAction448>*/;
-var899 = NEW_parser__ReduceAction449(&type_parser__ReduceAction449);
-var900 = 12;
-((void (*)(val*, long))(var899->class->vft[COLOR_parser__ReduceAction__init]))(var899, var900) /* init on <var899:ReduceAction449>*/;
-var901 = NEW_parser__ReduceAction450(&type_parser__ReduceAction450);
-var902 = 12;
-((void (*)(val*, long))(var901->class->vft[COLOR_parser__ReduceAction__init]))(var901, var902) /* init on <var901:ReduceAction450>*/;
-var903 = NEW_parser__ReduceAction451(&type_parser__ReduceAction451);
-var904 = 12;
-((void (*)(val*, long))(var903->class->vft[COLOR_parser__ReduceAction__init]))(var903, var904) /* init on <var903:ReduceAction451>*/;
-var905 = NEW_parser__ReduceAction452(&type_parser__ReduceAction452);
-var906 = 12;
-((void (*)(val*, long))(var905->class->vft[COLOR_parser__ReduceAction__init]))(var905, var906) /* init on <var905:ReduceAction452>*/;
-var907 = NEW_parser__ReduceAction453(&type_parser__ReduceAction453);
-var908 = 12;
-((void (*)(val*, long))(var907->class->vft[COLOR_parser__ReduceAction__init]))(var907, var908) /* init on <var907:ReduceAction453>*/;
-var909 = NEW_parser__ReduceAction454(&type_parser__ReduceAction454);
-var910 = 12;
-((void (*)(val*, long))(var909->class->vft[COLOR_parser__ReduceAction__init]))(var909, var910) /* init on <var909:ReduceAction454>*/;
-var911 = NEW_parser__ReduceAction455(&type_parser__ReduceAction455);
-var912 = 12;
-((void (*)(val*, long))(var911->class->vft[COLOR_parser__ReduceAction__init]))(var911, var912) /* init on <var911:ReduceAction455>*/;
-var913 = NEW_parser__ReduceAction456(&type_parser__ReduceAction456);
-var914 = 12;
-((void (*)(val*, long))(var913->class->vft[COLOR_parser__ReduceAction__init]))(var913, var914) /* init on <var913:ReduceAction456>*/;
-var915 = NEW_parser__ReduceAction457(&type_parser__ReduceAction457);
-var916 = 12;
-((void (*)(val*, long))(var915->class->vft[COLOR_parser__ReduceAction__init]))(var915, var916) /* init on <var915:ReduceAction457>*/;
-var917 = NEW_parser__ReduceAction458(&type_parser__ReduceAction458);
-var918 = 12;
-((void (*)(val*, long))(var917->class->vft[COLOR_parser__ReduceAction__init]))(var917, var918) /* init on <var917:ReduceAction458>*/;
-var919 = NEW_parser__ReduceAction459(&type_parser__ReduceAction459);
-var920 = 12;
-((void (*)(val*, long))(var919->class->vft[COLOR_parser__ReduceAction__init]))(var919, var920) /* init on <var919:ReduceAction459>*/;
-var921 = NEW_parser__ReduceAction460(&type_parser__ReduceAction460);
-var922 = 12;
-((void (*)(val*, long))(var921->class->vft[COLOR_parser__ReduceAction__init]))(var921, var922) /* init on <var921:ReduceAction460>*/;
-var923 = NEW_parser__ReduceAction461(&type_parser__ReduceAction461);
-var924 = 12;
-((void (*)(val*, long))(var923->class->vft[COLOR_parser__ReduceAction__init]))(var923, var924) /* init on <var923:ReduceAction461>*/;
-var925 = NEW_parser__ReduceAction462(&type_parser__ReduceAction462);
-var926 = 12;
-((void (*)(val*, long))(var925->class->vft[COLOR_parser__ReduceAction__init]))(var925, var926) /* init on <var925:ReduceAction462>*/;
-var927 = NEW_parser__ReduceAction463(&type_parser__ReduceAction463);
-var928 = 12;
-((void (*)(val*, long))(var927->class->vft[COLOR_parser__ReduceAction__init]))(var927, var928) /* init on <var927:ReduceAction463>*/;
-var929 = NEW_parser__ReduceAction464(&type_parser__ReduceAction464);
-var930 = 12;
-((void (*)(val*, long))(var929->class->vft[COLOR_parser__ReduceAction__init]))(var929, var930) /* init on <var929:ReduceAction464>*/;
-var931 = NEW_parser__ReduceAction465(&type_parser__ReduceAction465);
-var932 = 12;
-((void (*)(val*, long))(var931->class->vft[COLOR_parser__ReduceAction__init]))(var931, var932) /* init on <var931:ReduceAction465>*/;
-var933 = NEW_parser__ReduceAction466(&type_parser__ReduceAction466);
-var934 = 12;
-((void (*)(val*, long))(var933->class->vft[COLOR_parser__ReduceAction__init]))(var933, var934) /* init on <var933:ReduceAction466>*/;
-var935 = NEW_parser__ReduceAction467(&type_parser__ReduceAction467);
-var936 = 12;
-((void (*)(val*, long))(var935->class->vft[COLOR_parser__ReduceAction__init]))(var935, var936) /* init on <var935:ReduceAction467>*/;
-var937 = NEW_parser__ReduceAction468(&type_parser__ReduceAction468);
-var938 = 12;
-((void (*)(val*, long))(var937->class->vft[COLOR_parser__ReduceAction__init]))(var937, var938) /* init on <var937:ReduceAction468>*/;
-var939 = NEW_parser__ReduceAction469(&type_parser__ReduceAction469);
-var940 = 12;
-((void (*)(val*, long))(var939->class->vft[COLOR_parser__ReduceAction__init]))(var939, var940) /* init on <var939:ReduceAction469>*/;
-var941 = NEW_parser__ReduceAction470(&type_parser__ReduceAction470);
-var942 = 12;
-((void (*)(val*, long))(var941->class->vft[COLOR_parser__ReduceAction__init]))(var941, var942) /* init on <var941:ReduceAction470>*/;
-var943 = NEW_parser__ReduceAction471(&type_parser__ReduceAction471);
-var944 = 12;
-((void (*)(val*, long))(var943->class->vft[COLOR_parser__ReduceAction__init]))(var943, var944) /* init on <var943:ReduceAction471>*/;
-var945 = NEW_parser__ReduceAction472(&type_parser__ReduceAction472);
-var946 = 12;
-((void (*)(val*, long))(var945->class->vft[COLOR_parser__ReduceAction__init]))(var945, var946) /* init on <var945:ReduceAction472>*/;
-var947 = NEW_parser__ReduceAction473(&type_parser__ReduceAction473);
-var948 = 12;
-((void (*)(val*, long))(var947->class->vft[COLOR_parser__ReduceAction__init]))(var947, var948) /* init on <var947:ReduceAction473>*/;
-var949 = NEW_parser__ReduceAction474(&type_parser__ReduceAction474);
-var950 = 12;
-((void (*)(val*, long))(var949->class->vft[COLOR_parser__ReduceAction__init]))(var949, var950) /* init on <var949:ReduceAction474>*/;
-var951 = NEW_parser__ReduceAction475(&type_parser__ReduceAction475);
-var952 = 12;
-((void (*)(val*, long))(var951->class->vft[COLOR_parser__ReduceAction__init]))(var951, var952) /* init on <var951:ReduceAction475>*/;
-var953 = NEW_parser__ReduceAction476(&type_parser__ReduceAction476);
-var954 = 12;
-((void (*)(val*, long))(var953->class->vft[COLOR_parser__ReduceAction__init]))(var953, var954) /* init on <var953:ReduceAction476>*/;
-var955 = NEW_parser__ReduceAction477(&type_parser__ReduceAction477);
-var956 = 12;
-((void (*)(val*, long))(var955->class->vft[COLOR_parser__ReduceAction__init]))(var955, var956) /* init on <var955:ReduceAction477>*/;
-var957 = NEW_parser__ReduceAction478(&type_parser__ReduceAction478);
-var958 = 12;
-((void (*)(val*, long))(var957->class->vft[COLOR_parser__ReduceAction__init]))(var957, var958) /* init on <var957:ReduceAction478>*/;
-var959 = NEW_parser__ReduceAction479(&type_parser__ReduceAction479);
-var960 = 12;
-((void (*)(val*, long))(var959->class->vft[COLOR_parser__ReduceAction__init]))(var959, var960) /* init on <var959:ReduceAction479>*/;
-var961 = NEW_parser__ReduceAction480(&type_parser__ReduceAction480);
-var962 = 12;
-((void (*)(val*, long))(var961->class->vft[COLOR_parser__ReduceAction__init]))(var961, var962) /* init on <var961:ReduceAction480>*/;
-var963 = NEW_parser__ReduceAction481(&type_parser__ReduceAction481);
-var964 = 12;
-((void (*)(val*, long))(var963->class->vft[COLOR_parser__ReduceAction__init]))(var963, var964) /* init on <var963:ReduceAction481>*/;
-var965 = NEW_parser__ReduceAction482(&type_parser__ReduceAction482);
-var966 = 12;
-((void (*)(val*, long))(var965->class->vft[COLOR_parser__ReduceAction__init]))(var965, var966) /* init on <var965:ReduceAction482>*/;
-var967 = NEW_parser__ReduceAction483(&type_parser__ReduceAction483);
-var968 = 12;
-((void (*)(val*, long))(var967->class->vft[COLOR_parser__ReduceAction__init]))(var967, var968) /* init on <var967:ReduceAction483>*/;
-var969 = NEW_parser__ReduceAction484(&type_parser__ReduceAction484);
-var970 = 12;
-((void (*)(val*, long))(var969->class->vft[COLOR_parser__ReduceAction__init]))(var969, var970) /* init on <var969:ReduceAction484>*/;
-var971 = NEW_parser__ReduceAction485(&type_parser__ReduceAction485);
-var972 = 12;
-((void (*)(val*, long))(var971->class->vft[COLOR_parser__ReduceAction__init]))(var971, var972) /* init on <var971:ReduceAction485>*/;
-var973 = NEW_parser__ReduceAction486(&type_parser__ReduceAction486);
-var974 = 12;
-((void (*)(val*, long))(var973->class->vft[COLOR_parser__ReduceAction__init]))(var973, var974) /* init on <var973:ReduceAction486>*/;
-var975 = NEW_parser__ReduceAction487(&type_parser__ReduceAction487);
-var976 = 12;
-((void (*)(val*, long))(var975->class->vft[COLOR_parser__ReduceAction__init]))(var975, var976) /* init on <var975:ReduceAction487>*/;
-var977 = NEW_parser__ReduceAction488(&type_parser__ReduceAction488);
-var978 = 12;
-((void (*)(val*, long))(var977->class->vft[COLOR_parser__ReduceAction__init]))(var977, var978) /* init on <var977:ReduceAction488>*/;
-var979 = NEW_parser__ReduceAction489(&type_parser__ReduceAction489);
-var980 = 12;
-((void (*)(val*, long))(var979->class->vft[COLOR_parser__ReduceAction__init]))(var979, var980) /* init on <var979:ReduceAction489>*/;
-var981 = NEW_parser__ReduceAction490(&type_parser__ReduceAction490);
-var982 = 12;
-((void (*)(val*, long))(var981->class->vft[COLOR_parser__ReduceAction__init]))(var981, var982) /* init on <var981:ReduceAction490>*/;
-var983 = NEW_parser__ReduceAction491(&type_parser__ReduceAction491);
-var984 = 12;
-((void (*)(val*, long))(var983->class->vft[COLOR_parser__ReduceAction__init]))(var983, var984) /* init on <var983:ReduceAction491>*/;
-var985 = NEW_parser__ReduceAction492(&type_parser__ReduceAction492);
-var986 = 12;
-((void (*)(val*, long))(var985->class->vft[COLOR_parser__ReduceAction__init]))(var985, var986) /* init on <var985:ReduceAction492>*/;
-var987 = NEW_parser__ReduceAction493(&type_parser__ReduceAction493);
-var988 = 12;
-((void (*)(val*, long))(var987->class->vft[COLOR_parser__ReduceAction__init]))(var987, var988) /* init on <var987:ReduceAction493>*/;
-var989 = NEW_parser__ReduceAction494(&type_parser__ReduceAction494);
-var990 = 12;
-((void (*)(val*, long))(var989->class->vft[COLOR_parser__ReduceAction__init]))(var989, var990) /* init on <var989:ReduceAction494>*/;
-var991 = NEW_parser__ReduceAction495(&type_parser__ReduceAction495);
-var992 = 12;
-((void (*)(val*, long))(var991->class->vft[COLOR_parser__ReduceAction__init]))(var991, var992) /* init on <var991:ReduceAction495>*/;
-var993 = NEW_parser__ReduceAction496(&type_parser__ReduceAction496);
-var994 = 12;
-((void (*)(val*, long))(var993->class->vft[COLOR_parser__ReduceAction__init]))(var993, var994) /* init on <var993:ReduceAction496>*/;
-var995 = NEW_parser__ReduceAction497(&type_parser__ReduceAction497);
-var996 = 12;
-((void (*)(val*, long))(var995->class->vft[COLOR_parser__ReduceAction__init]))(var995, var996) /* init on <var995:ReduceAction497>*/;
-var997 = NEW_parser__ReduceAction498(&type_parser__ReduceAction498);
-var998 = 12;
-((void (*)(val*, long))(var997->class->vft[COLOR_parser__ReduceAction__init]))(var997, var998) /* init on <var997:ReduceAction498>*/;
-var999 = NEW_parser__ReduceAction499(&type_parser__ReduceAction499);
-var1000 = 12;
-((void (*)(val*, long))(var999->class->vft[COLOR_parser__ReduceAction__init]))(var999, var1000) /* init on <var999:ReduceAction499>*/;
-var1001 = NEW_parser__ReduceAction500(&type_parser__ReduceAction500);
-var1002 = 12;
-((void (*)(val*, long))(var1001->class->vft[COLOR_parser__ReduceAction__init]))(var1001, var1002) /* init on <var1001:ReduceAction500>*/;
-var1003 = NEW_parser__ReduceAction501(&type_parser__ReduceAction501);
-var1004 = 12;
-((void (*)(val*, long))(var1003->class->vft[COLOR_parser__ReduceAction__init]))(var1003, var1004) /* init on <var1003:ReduceAction501>*/;
-var1005 = NEW_parser__ReduceAction502(&type_parser__ReduceAction502);
-var1006 = 12;
-((void (*)(val*, long))(var1005->class->vft[COLOR_parser__ReduceAction__init]))(var1005, var1006) /* init on <var1005:ReduceAction502>*/;
-var1007 = NEW_parser__ReduceAction503(&type_parser__ReduceAction503);
-var1008 = 12;
-((void (*)(val*, long))(var1007->class->vft[COLOR_parser__ReduceAction__init]))(var1007, var1008) /* init on <var1007:ReduceAction503>*/;
-var1009 = NEW_parser__ReduceAction504(&type_parser__ReduceAction504);
-var1010 = 12;
-((void (*)(val*, long))(var1009->class->vft[COLOR_parser__ReduceAction__init]))(var1009, var1010) /* init on <var1009:ReduceAction504>*/;
-var1011 = NEW_parser__ReduceAction505(&type_parser__ReduceAction505);
-var1012 = 12;
-((void (*)(val*, long))(var1011->class->vft[COLOR_parser__ReduceAction__init]))(var1011, var1012) /* init on <var1011:ReduceAction505>*/;
-var1013 = NEW_parser__ReduceAction506(&type_parser__ReduceAction506);
-var1014 = 12;
-((void (*)(val*, long))(var1013->class->vft[COLOR_parser__ReduceAction__init]))(var1013, var1014) /* init on <var1013:ReduceAction506>*/;
-var1015 = NEW_parser__ReduceAction507(&type_parser__ReduceAction507);
-var1016 = 12;
-((void (*)(val*, long))(var1015->class->vft[COLOR_parser__ReduceAction__init]))(var1015, var1016) /* init on <var1015:ReduceAction507>*/;
-var1017 = NEW_parser__ReduceAction508(&type_parser__ReduceAction508);
-var1018 = 12;
-((void (*)(val*, long))(var1017->class->vft[COLOR_parser__ReduceAction__init]))(var1017, var1018) /* init on <var1017:ReduceAction508>*/;
-var1019 = NEW_parser__ReduceAction509(&type_parser__ReduceAction509);
-var1020 = 12;
-((void (*)(val*, long))(var1019->class->vft[COLOR_parser__ReduceAction__init]))(var1019, var1020) /* init on <var1019:ReduceAction509>*/;
-var1021 = NEW_parser__ReduceAction510(&type_parser__ReduceAction510);
-var1022 = 12;
-((void (*)(val*, long))(var1021->class->vft[COLOR_parser__ReduceAction__init]))(var1021, var1022) /* init on <var1021:ReduceAction510>*/;
-var1023 = NEW_parser__ReduceAction511(&type_parser__ReduceAction511);
-var1024 = 12;
-((void (*)(val*, long))(var1023->class->vft[COLOR_parser__ReduceAction__init]))(var1023, var1024) /* init on <var1023:ReduceAction511>*/;
-var1025 = NEW_parser__ReduceAction512(&type_parser__ReduceAction512);
-var1026 = 12;
-((void (*)(val*, long))(var1025->class->vft[COLOR_parser__ReduceAction__init]))(var1025, var1026) /* init on <var1025:ReduceAction512>*/;
-var1027 = NEW_parser__ReduceAction513(&type_parser__ReduceAction513);
-var1028 = 13;
-((void (*)(val*, long))(var1027->class->vft[COLOR_parser__ReduceAction__init]))(var1027, var1028) /* init on <var1027:ReduceAction513>*/;
-var1029 = NEW_parser__ReduceAction514(&type_parser__ReduceAction514);
-var1030 = 13;
-((void (*)(val*, long))(var1029->class->vft[COLOR_parser__ReduceAction__init]))(var1029, var1030) /* init on <var1029:ReduceAction514>*/;
-var1031 = NEW_parser__ReduceAction513(&type_parser__ReduceAction513);
-var1032 = 14;
-((void (*)(val*, long))(var1031->class->vft[COLOR_parser__ReduceAction__init]))(var1031, var1032) /* init on <var1031:ReduceAction513>*/;
-var1033 = NEW_parser__ReduceAction516(&type_parser__ReduceAction516);
-var1034 = 14;
-((void (*)(val*, long))(var1033->class->vft[COLOR_parser__ReduceAction__init]))(var1033, var1034) /* init on <var1033:ReduceAction516>*/;
-var1035 = NEW_parser__ReduceAction517(&type_parser__ReduceAction517);
-var1036 = 15;
-((void (*)(val*, long))(var1035->class->vft[COLOR_parser__ReduceAction__init]))(var1035, var1036) /* init on <var1035:ReduceAction517>*/;
-var1037 = NEW_parser__ReduceAction518(&type_parser__ReduceAction518);
-var1038 = 15;
-((void (*)(val*, long))(var1037->class->vft[COLOR_parser__ReduceAction__init]))(var1037, var1038) /* init on <var1037:ReduceAction518>*/;
-var1039 = NEW_parser__ReduceAction519(&type_parser__ReduceAction519);
-var1040 = 16;
-((void (*)(val*, long))(var1039->class->vft[COLOR_parser__ReduceAction__init]))(var1039, var1040) /* init on <var1039:ReduceAction519>*/;
-var1041 = NEW_parser__ReduceAction520(&type_parser__ReduceAction520);
-var1042 = 16;
-((void (*)(val*, long))(var1041->class->vft[COLOR_parser__ReduceAction__init]))(var1041, var1042) /* init on <var1041:ReduceAction520>*/;
-var1043 = NEW_parser__ReduceAction521(&type_parser__ReduceAction521);
-var1044 = 17;
-((void (*)(val*, long))(var1043->class->vft[COLOR_parser__ReduceAction__init]))(var1043, var1044) /* init on <var1043:ReduceAction521>*/;
-var1045 = NEW_parser__ReduceAction522(&type_parser__ReduceAction522);
-var1046 = 17;
-((void (*)(val*, long))(var1045->class->vft[COLOR_parser__ReduceAction__init]))(var1045, var1046) /* init on <var1045:ReduceAction522>*/;
-var1047 = NEW_parser__ReduceAction523(&type_parser__ReduceAction523);
-var1048 = 18;
-((void (*)(val*, long))(var1047->class->vft[COLOR_parser__ReduceAction__init]))(var1047, var1048) /* init on <var1047:ReduceAction523>*/;
-var1049 = NEW_parser__ReduceAction524(&type_parser__ReduceAction524);
-var1050 = 18;
-((void (*)(val*, long))(var1049->class->vft[COLOR_parser__ReduceAction__init]))(var1049, var1050) /* init on <var1049:ReduceAction524>*/;
-var1051 = NEW_parser__ReduceAction525(&type_parser__ReduceAction525);
-var1052 = 18;
-((void (*)(val*, long))(var1051->class->vft[COLOR_parser__ReduceAction__init]))(var1051, var1052) /* init on <var1051:ReduceAction525>*/;
-var1053 = NEW_parser__ReduceAction526(&type_parser__ReduceAction526);
-var1054 = 18;
-((void (*)(val*, long))(var1053->class->vft[COLOR_parser__ReduceAction__init]))(var1053, var1054) /* init on <var1053:ReduceAction526>*/;
-var1055 = NEW_parser__ReduceAction527(&type_parser__ReduceAction527);
-var1056 = 19;
-((void (*)(val*, long))(var1055->class->vft[COLOR_parser__ReduceAction__init]))(var1055, var1056) /* init on <var1055:ReduceAction527>*/;
-var1057 = NEW_parser__ReduceAction528(&type_parser__ReduceAction528);
-var1058 = 19;
-((void (*)(val*, long))(var1057->class->vft[COLOR_parser__ReduceAction__init]))(var1057, var1058) /* init on <var1057:ReduceAction528>*/;
-var1059 = NEW_parser__ReduceAction529(&type_parser__ReduceAction529);
-var1060 = 19;
-((void (*)(val*, long))(var1059->class->vft[COLOR_parser__ReduceAction__init]))(var1059, var1060) /* init on <var1059:ReduceAction529>*/;
-var1061 = NEW_parser__ReduceAction530(&type_parser__ReduceAction530);
-var1062 = 19;
-((void (*)(val*, long))(var1061->class->vft[COLOR_parser__ReduceAction__init]))(var1061, var1062) /* init on <var1061:ReduceAction530>*/;
-var1063 = NEW_parser__ReduceAction531(&type_parser__ReduceAction531);
-var1064 = 19;
-((void (*)(val*, long))(var1063->class->vft[COLOR_parser__ReduceAction__init]))(var1063, var1064) /* init on <var1063:ReduceAction531>*/;
-var1065 = NEW_parser__ReduceAction532(&type_parser__ReduceAction532);
-var1066 = 19;
-((void (*)(val*, long))(var1065->class->vft[COLOR_parser__ReduceAction__init]))(var1065, var1066) /* init on <var1065:ReduceAction532>*/;
-var1067 = NEW_parser__ReduceAction533(&type_parser__ReduceAction533);
-var1068 = 19;
-((void (*)(val*, long))(var1067->class->vft[COLOR_parser__ReduceAction__init]))(var1067, var1068) /* init on <var1067:ReduceAction533>*/;
-var1069 = NEW_parser__ReduceAction534(&type_parser__ReduceAction534);
-var1070 = 19;
-((void (*)(val*, long))(var1069->class->vft[COLOR_parser__ReduceAction__init]))(var1069, var1070) /* init on <var1069:ReduceAction534>*/;
-var1071 = NEW_parser__ReduceAction535(&type_parser__ReduceAction535);
-var1072 = 19;
-((void (*)(val*, long))(var1071->class->vft[COLOR_parser__ReduceAction__init]))(var1071, var1072) /* init on <var1071:ReduceAction535>*/;
-var1073 = NEW_parser__ReduceAction536(&type_parser__ReduceAction536);
-var1074 = 19;
-((void (*)(val*, long))(var1073->class->vft[COLOR_parser__ReduceAction__init]))(var1073, var1074) /* init on <var1073:ReduceAction536>*/;
-var1075 = NEW_parser__ReduceAction537(&type_parser__ReduceAction537);
-var1076 = 19;
-((void (*)(val*, long))(var1075->class->vft[COLOR_parser__ReduceAction__init]))(var1075, var1076) /* init on <var1075:ReduceAction537>*/;
-var1077 = NEW_parser__ReduceAction538(&type_parser__ReduceAction538);
-var1078 = 19;
-((void (*)(val*, long))(var1077->class->vft[COLOR_parser__ReduceAction__init]))(var1077, var1078) /* init on <var1077:ReduceAction538>*/;
-var1079 = NEW_parser__ReduceAction539(&type_parser__ReduceAction539);
-var1080 = 19;
-((void (*)(val*, long))(var1079->class->vft[COLOR_parser__ReduceAction__init]))(var1079, var1080) /* init on <var1079:ReduceAction539>*/;
-var1081 = NEW_parser__ReduceAction540(&type_parser__ReduceAction540);
-var1082 = 19;
-((void (*)(val*, long))(var1081->class->vft[COLOR_parser__ReduceAction__init]))(var1081, var1082) /* init on <var1081:ReduceAction540>*/;
-var1083 = NEW_parser__ReduceAction541(&type_parser__ReduceAction541);
-var1084 = 19;
-((void (*)(val*, long))(var1083->class->vft[COLOR_parser__ReduceAction__init]))(var1083, var1084) /* init on <var1083:ReduceAction541>*/;
-var1085 = NEW_parser__ReduceAction542(&type_parser__ReduceAction542);
-var1086 = 19;
-((void (*)(val*, long))(var1085->class->vft[COLOR_parser__ReduceAction__init]))(var1085, var1086) /* init on <var1085:ReduceAction542>*/;
-var1087 = NEW_parser__ReduceAction543(&type_parser__ReduceAction543);
-var1088 = 19;
-((void (*)(val*, long))(var1087->class->vft[COLOR_parser__ReduceAction__init]))(var1087, var1088) /* init on <var1087:ReduceAction543>*/;
-var1089 = NEW_parser__ReduceAction544(&type_parser__ReduceAction544);
-var1090 = 19;
-((void (*)(val*, long))(var1089->class->vft[COLOR_parser__ReduceAction__init]))(var1089, var1090) /* init on <var1089:ReduceAction544>*/;
-var1091 = NEW_parser__ReduceAction545(&type_parser__ReduceAction545);
-var1092 = 20;
-((void (*)(val*, long))(var1091->class->vft[COLOR_parser__ReduceAction__init]))(var1091, var1092) /* init on <var1091:ReduceAction545>*/;
-var1093 = NEW_parser__ReduceAction546(&type_parser__ReduceAction546);
-var1094 = 20;
-((void (*)(val*, long))(var1093->class->vft[COLOR_parser__ReduceAction__init]))(var1093, var1094) /* init on <var1093:ReduceAction546>*/;
-var1095 = NEW_parser__ReduceAction547(&type_parser__ReduceAction547);
-var1096 = 20;
-((void (*)(val*, long))(var1095->class->vft[COLOR_parser__ReduceAction__init]))(var1095, var1096) /* init on <var1095:ReduceAction547>*/;
-var1097 = NEW_parser__ReduceAction548(&type_parser__ReduceAction548);
-var1098 = 20;
-((void (*)(val*, long))(var1097->class->vft[COLOR_parser__ReduceAction__init]))(var1097, var1098) /* init on <var1097:ReduceAction548>*/;
-var1099 = NEW_parser__ReduceAction549(&type_parser__ReduceAction549);
-var1100 = 20;
-((void (*)(val*, long))(var1099->class->vft[COLOR_parser__ReduceAction__init]))(var1099, var1100) /* init on <var1099:ReduceAction549>*/;
-var1101 = NEW_parser__ReduceAction550(&type_parser__ReduceAction550);
-var1102 = 20;
-((void (*)(val*, long))(var1101->class->vft[COLOR_parser__ReduceAction__init]))(var1101, var1102) /* init on <var1101:ReduceAction550>*/;
-var1103 = NEW_parser__ReduceAction551(&type_parser__ReduceAction551);
-var1104 = 21;
-((void (*)(val*, long))(var1103->class->vft[COLOR_parser__ReduceAction__init]))(var1103, var1104) /* init on <var1103:ReduceAction551>*/;
-var1105 = NEW_parser__ReduceAction552(&type_parser__ReduceAction552);
-var1106 = 21;
-((void (*)(val*, long))(var1105->class->vft[COLOR_parser__ReduceAction__init]))(var1105, var1106) /* init on <var1105:ReduceAction552>*/;
-var1107 = NEW_parser__ReduceAction553(&type_parser__ReduceAction553);
-var1108 = 22;
-((void (*)(val*, long))(var1107->class->vft[COLOR_parser__ReduceAction__init]))(var1107, var1108) /* init on <var1107:ReduceAction553>*/;
-var1109 = NEW_parser__ReduceAction554(&type_parser__ReduceAction554);
-var1110 = 23;
-((void (*)(val*, long))(var1109->class->vft[COLOR_parser__ReduceAction__init]))(var1109, var1110) /* init on <var1109:ReduceAction554>*/;
-var1111 = NEW_parser__ReduceAction555(&type_parser__ReduceAction555);
-var1112 = 23;
-((void (*)(val*, long))(var1111->class->vft[COLOR_parser__ReduceAction__init]))(var1111, var1112) /* init on <var1111:ReduceAction555>*/;
-var1113 = NEW_parser__ReduceAction556(&type_parser__ReduceAction556);
-var1114 = 23;
-((void (*)(val*, long))(var1113->class->vft[COLOR_parser__ReduceAction__init]))(var1113, var1114) /* init on <var1113:ReduceAction556>*/;
-var1115 = NEW_parser__ReduceAction557(&type_parser__ReduceAction557);
-var1116 = 23;
-((void (*)(val*, long))(var1115->class->vft[COLOR_parser__ReduceAction__init]))(var1115, var1116) /* init on <var1115:ReduceAction557>*/;
-var1117 = NEW_parser__ReduceAction558(&type_parser__ReduceAction558);
-var1118 = 23;
-((void (*)(val*, long))(var1117->class->vft[COLOR_parser__ReduceAction__init]))(var1117, var1118) /* init on <var1117:ReduceAction558>*/;
-var1119 = NEW_parser__ReduceAction559(&type_parser__ReduceAction559);
-var1120 = 23;
-((void (*)(val*, long))(var1119->class->vft[COLOR_parser__ReduceAction__init]))(var1119, var1120) /* init on <var1119:ReduceAction559>*/;
-var1121 = NEW_parser__ReduceAction560(&type_parser__ReduceAction560);
-var1122 = 24;
-((void (*)(val*, long))(var1121->class->vft[COLOR_parser__ReduceAction__init]))(var1121, var1122) /* init on <var1121:ReduceAction560>*/;
-var1123 = NEW_parser__ReduceAction561(&type_parser__ReduceAction561);
-var1124 = 25;
-((void (*)(val*, long))(var1123->class->vft[COLOR_parser__ReduceAction__init]))(var1123, var1124) /* init on <var1123:ReduceAction561>*/;
-var1125 = NEW_parser__ReduceAction562(&type_parser__ReduceAction562);
-var1126 = 25;
-((void (*)(val*, long))(var1125->class->vft[COLOR_parser__ReduceAction__init]))(var1125, var1126) /* init on <var1125:ReduceAction562>*/;
-var1127 = NEW_parser__ReduceAction563(&type_parser__ReduceAction563);
-var1128 = 26;
-((void (*)(val*, long))(var1127->class->vft[COLOR_parser__ReduceAction__init]))(var1127, var1128) /* init on <var1127:ReduceAction563>*/;
-var1129 = NEW_parser__ReduceAction564(&type_parser__ReduceAction564);
-var1130 = 27;
-((void (*)(val*, long))(var1129->class->vft[COLOR_parser__ReduceAction__init]))(var1129, var1130) /* init on <var1129:ReduceAction564>*/;
-var1131 = NEW_parser__ReduceAction564(&type_parser__ReduceAction564);
-var1132 = 27;
-((void (*)(val*, long))(var1131->class->vft[COLOR_parser__ReduceAction__init]))(var1131, var1132) /* init on <var1131:ReduceAction564>*/;
-var1133 = NEW_parser__ReduceAction566(&type_parser__ReduceAction566);
-var1134 = 27;
-((void (*)(val*, long))(var1133->class->vft[COLOR_parser__ReduceAction__init]))(var1133, var1134) /* init on <var1133:ReduceAction566>*/;
-var1135 = NEW_parser__ReduceAction567(&type_parser__ReduceAction567);
-var1136 = 28;
-((void (*)(val*, long))(var1135->class->vft[COLOR_parser__ReduceAction__init]))(var1135, var1136) /* init on <var1135:ReduceAction567>*/;
-var1137 = NEW_parser__ReduceAction568(&type_parser__ReduceAction568);
-var1138 = 28;
-((void (*)(val*, long))(var1137->class->vft[COLOR_parser__ReduceAction__init]))(var1137, var1138) /* init on <var1137:ReduceAction568>*/;
-var1139 = NEW_parser__ReduceAction569(&type_parser__ReduceAction569);
-var1140 = 28;
-((void (*)(val*, long))(var1139->class->vft[COLOR_parser__ReduceAction__init]))(var1139, var1140) /* init on <var1139:ReduceAction569>*/;
-var1141 = NEW_parser__ReduceAction570(&type_parser__ReduceAction570);
-var1142 = 28;
-((void (*)(val*, long))(var1141->class->vft[COLOR_parser__ReduceAction__init]))(var1141, var1142) /* init on <var1141:ReduceAction570>*/;
-var1143 = NEW_parser__ReduceAction571(&type_parser__ReduceAction571);
-var1144 = 29;
-((void (*)(val*, long))(var1143->class->vft[COLOR_parser__ReduceAction__init]))(var1143, var1144) /* init on <var1143:ReduceAction571>*/;
-var1145 = NEW_parser__ReduceAction572(&type_parser__ReduceAction572);
-var1146 = 29;
-((void (*)(val*, long))(var1145->class->vft[COLOR_parser__ReduceAction__init]))(var1145, var1146) /* init on <var1145:ReduceAction572>*/;
-var1147 = NEW_parser__ReduceAction573(&type_parser__ReduceAction573);
-var1148 = 29;
-((void (*)(val*, long))(var1147->class->vft[COLOR_parser__ReduceAction__init]))(var1147, var1148) /* init on <var1147:ReduceAction573>*/;
-var1149 = NEW_parser__ReduceAction574(&type_parser__ReduceAction574);
-var1150 = 29;
-((void (*)(val*, long))(var1149->class->vft[COLOR_parser__ReduceAction__init]))(var1149, var1150) /* init on <var1149:ReduceAction574>*/;
-var1151 = NEW_parser__ReduceAction575(&type_parser__ReduceAction575);
-var1152 = 29;
-((void (*)(val*, long))(var1151->class->vft[COLOR_parser__ReduceAction__init]))(var1151, var1152) /* init on <var1151:ReduceAction575>*/;
-var1153 = NEW_parser__ReduceAction576(&type_parser__ReduceAction576);
-var1154 = 29;
-((void (*)(val*, long))(var1153->class->vft[COLOR_parser__ReduceAction__init]))(var1153, var1154) /* init on <var1153:ReduceAction576>*/;
-var1155 = NEW_parser__ReduceAction577(&type_parser__ReduceAction577);
-var1156 = 30;
-((void (*)(val*, long))(var1155->class->vft[COLOR_parser__ReduceAction__init]))(var1155, var1156) /* init on <var1155:ReduceAction577>*/;
-var1157 = NEW_parser__ReduceAction578(&type_parser__ReduceAction578);
-var1158 = 31;
-((void (*)(val*, long))(var1157->class->vft[COLOR_parser__ReduceAction__init]))(var1157, var1158) /* init on <var1157:ReduceAction578>*/;
-var1159 = NEW_parser__ReduceAction579(&type_parser__ReduceAction579);
-var1160 = 31;
-((void (*)(val*, long))(var1159->class->vft[COLOR_parser__ReduceAction__init]))(var1159, var1160) /* init on <var1159:ReduceAction579>*/;
-var1161 = NEW_parser__ReduceAction580(&type_parser__ReduceAction580);
-var1162 = 32;
-((void (*)(val*, long))(var1161->class->vft[COLOR_parser__ReduceAction__init]))(var1161, var1162) /* init on <var1161:ReduceAction580>*/;
-var1163 = NEW_parser__ReduceAction581(&type_parser__ReduceAction581);
-var1164 = 33;
-((void (*)(val*, long))(var1163->class->vft[COLOR_parser__ReduceAction__init]))(var1163, var1164) /* init on <var1163:ReduceAction581>*/;
-var1165 = NEW_parser__ReduceAction582(&type_parser__ReduceAction582);
-var1166 = 33;
-((void (*)(val*, long))(var1165->class->vft[COLOR_parser__ReduceAction__init]))(var1165, var1166) /* init on <var1165:ReduceAction582>*/;
-var1167 = NEW_parser__ReduceAction583(&type_parser__ReduceAction583);
-var1168 = 33;
-((void (*)(val*, long))(var1167->class->vft[COLOR_parser__ReduceAction__init]))(var1167, var1168) /* init on <var1167:ReduceAction583>*/;
-var1169 = NEW_parser__ReduceAction584(&type_parser__ReduceAction584);
-var1170 = 33;
-((void (*)(val*, long))(var1169->class->vft[COLOR_parser__ReduceAction__init]))(var1169, var1170) /* init on <var1169:ReduceAction584>*/;
-var1171 = NEW_parser__ReduceAction585(&type_parser__ReduceAction585);
-var1172 = 33;
-((void (*)(val*, long))(var1171->class->vft[COLOR_parser__ReduceAction__init]))(var1171, var1172) /* init on <var1171:ReduceAction585>*/;
-var1173 = NEW_parser__ReduceAction586(&type_parser__ReduceAction586);
-var1174 = 33;
-((void (*)(val*, long))(var1173->class->vft[COLOR_parser__ReduceAction__init]))(var1173, var1174) /* init on <var1173:ReduceAction586>*/;
-var1175 = NEW_parser__ReduceAction587(&type_parser__ReduceAction587);
-var1176 = 33;
-((void (*)(val*, long))(var1175->class->vft[COLOR_parser__ReduceAction__init]))(var1175, var1176) /* init on <var1175:ReduceAction587>*/;
-var1177 = NEW_parser__ReduceAction588(&type_parser__ReduceAction588);
-var1178 = 33;
-((void (*)(val*, long))(var1177->class->vft[COLOR_parser__ReduceAction__init]))(var1177, var1178) /* init on <var1177:ReduceAction588>*/;
-var1179 = NEW_parser__ReduceAction589(&type_parser__ReduceAction589);
-var1180 = 34;
-((void (*)(val*, long))(var1179->class->vft[COLOR_parser__ReduceAction__init]))(var1179, var1180) /* init on <var1179:ReduceAction589>*/;
-var1181 = NEW_parser__ReduceAction590(&type_parser__ReduceAction590);
-var1182 = 34;
-((void (*)(val*, long))(var1181->class->vft[COLOR_parser__ReduceAction__init]))(var1181, var1182) /* init on <var1181:ReduceAction590>*/;
-var1183 = NEW_parser__ReduceAction591(&type_parser__ReduceAction591);
-var1184 = 35;
-((void (*)(val*, long))(var1183->class->vft[COLOR_parser__ReduceAction__init]))(var1183, var1184) /* init on <var1183:ReduceAction591>*/;
-var1185 = NEW_parser__ReduceAction591(&type_parser__ReduceAction591);
-var1186 = 36;
-((void (*)(val*, long))(var1185->class->vft[COLOR_parser__ReduceAction__init]))(var1185, var1186) /* init on <var1185:ReduceAction591>*/;
-var1187 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var1188 = 37;
-((void (*)(val*, long))(var1187->class->vft[COLOR_parser__ReduceAction__init]))(var1187, var1188) /* init on <var1187:ReduceAction593>*/;
-var1189 = NEW_parser__ReduceAction594(&type_parser__ReduceAction594);
-var1190 = 37;
-((void (*)(val*, long))(var1189->class->vft[COLOR_parser__ReduceAction__init]))(var1189, var1190) /* init on <var1189:ReduceAction594>*/;
-var1191 = NEW_parser__ReduceAction595(&type_parser__ReduceAction595);
-var1192 = 37;
-((void (*)(val*, long))(var1191->class->vft[COLOR_parser__ReduceAction__init]))(var1191, var1192) /* init on <var1191:ReduceAction595>*/;
-var1193 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1194 = 37;
-((void (*)(val*, long))(var1193->class->vft[COLOR_parser__ReduceAction__init]))(var1193, var1194) /* init on <var1193:ReduceAction596>*/;
-var1195 = NEW_parser__ReduceAction597(&type_parser__ReduceAction597);
-var1196 = 38;
-((void (*)(val*, long))(var1195->class->vft[COLOR_parser__ReduceAction__init]))(var1195, var1196) /* init on <var1195:ReduceAction597>*/;
-var1197 = NEW_parser__ReduceAction598(&type_parser__ReduceAction598);
-var1198 = 38;
-((void (*)(val*, long))(var1197->class->vft[COLOR_parser__ReduceAction__init]))(var1197, var1198) /* init on <var1197:ReduceAction598>*/;
-var1199 = NEW_parser__ReduceAction599(&type_parser__ReduceAction599);
-var1200 = 39;
-((void (*)(val*, long))(var1199->class->vft[COLOR_parser__ReduceAction__init]))(var1199, var1200) /* init on <var1199:ReduceAction599>*/;
-var1201 = NEW_parser__ReduceAction600(&type_parser__ReduceAction600);
-var1202 = 39;
-((void (*)(val*, long))(var1201->class->vft[COLOR_parser__ReduceAction__init]))(var1201, var1202) /* init on <var1201:ReduceAction600>*/;
-var1203 = NEW_parser__ReduceAction601(&type_parser__ReduceAction601);
-var1204 = 40;
-((void (*)(val*, long))(var1203->class->vft[COLOR_parser__ReduceAction__init]))(var1203, var1204) /* init on <var1203:ReduceAction601>*/;
-var1205 = NEW_parser__ReduceAction602(&type_parser__ReduceAction602);
-var1206 = 40;
-((void (*)(val*, long))(var1205->class->vft[COLOR_parser__ReduceAction__init]))(var1205, var1206) /* init on <var1205:ReduceAction602>*/;
-var1207 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var1208 = 41;
-((void (*)(val*, long))(var1207->class->vft[COLOR_parser__ReduceAction__init]))(var1207, var1208) /* init on <var1207:ReduceAction593>*/;
-var1209 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1210 = 42;
-((void (*)(val*, long))(var1209->class->vft[COLOR_parser__ReduceAction__init]))(var1209, var1210) /* init on <var1209:ReduceAction596>*/;
-var1211 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1212 = 42;
-((void (*)(val*, long))(var1211->class->vft[COLOR_parser__ReduceAction__init]))(var1211, var1212) /* init on <var1211:ReduceAction596>*/;
-var1213 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var1214 = 42;
-((void (*)(val*, long))(var1213->class->vft[COLOR_parser__ReduceAction__init]))(var1213, var1214) /* init on <var1213:ReduceAction606>*/;
-var1215 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var1216 = 42;
-((void (*)(val*, long))(var1215->class->vft[COLOR_parser__ReduceAction__init]))(var1215, var1216) /* init on <var1215:ReduceAction607>*/;
-var1217 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var1218 = 42;
-((void (*)(val*, long))(var1217->class->vft[COLOR_parser__ReduceAction__init]))(var1217, var1218) /* init on <var1217:ReduceAction608>*/;
-var1219 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var1220 = 42;
-((void (*)(val*, long))(var1219->class->vft[COLOR_parser__ReduceAction__init]))(var1219, var1220) /* init on <var1219:ReduceAction609>*/;
-var1221 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var1222 = 42;
-((void (*)(val*, long))(var1221->class->vft[COLOR_parser__ReduceAction__init]))(var1221, var1222) /* init on <var1221:ReduceAction610>*/;
-var1223 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var1224 = 42;
-((void (*)(val*, long))(var1223->class->vft[COLOR_parser__ReduceAction__init]))(var1223, var1224) /* init on <var1223:ReduceAction611>*/;
-var1225 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var1226 = 42;
-((void (*)(val*, long))(var1225->class->vft[COLOR_parser__ReduceAction__init]))(var1225, var1226) /* init on <var1225:ReduceAction612>*/;
-var1227 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var1228 = 42;
-((void (*)(val*, long))(var1227->class->vft[COLOR_parser__ReduceAction__init]))(var1227, var1228) /* init on <var1227:ReduceAction613>*/;
-var1229 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var1230 = 42;
-((void (*)(val*, long))(var1229->class->vft[COLOR_parser__ReduceAction__init]))(var1229, var1230) /* init on <var1229:ReduceAction614>*/;
-var1231 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var1232 = 42;
-((void (*)(val*, long))(var1231->class->vft[COLOR_parser__ReduceAction__init]))(var1231, var1232) /* init on <var1231:ReduceAction615>*/;
-var1233 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var1234 = 42;
-((void (*)(val*, long))(var1233->class->vft[COLOR_parser__ReduceAction__init]))(var1233, var1234) /* init on <var1233:ReduceAction616>*/;
-var1235 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1236 = 42;
-((void (*)(val*, long))(var1235->class->vft[COLOR_parser__ReduceAction__init]))(var1235, var1236) /* init on <var1235:ReduceAction596>*/;
-var1237 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1238 = 42;
-((void (*)(val*, long))(var1237->class->vft[COLOR_parser__ReduceAction__init]))(var1237, var1238) /* init on <var1237:ReduceAction596>*/;
-var1239 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1240 = 42;
-((void (*)(val*, long))(var1239->class->vft[COLOR_parser__ReduceAction__init]))(var1239, var1240) /* init on <var1239:ReduceAction596>*/;
-var1241 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1242 = 42;
-((void (*)(val*, long))(var1241->class->vft[COLOR_parser__ReduceAction__init]))(var1241, var1242) /* init on <var1241:ReduceAction596>*/;
-var1243 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1244 = 42;
-((void (*)(val*, long))(var1243->class->vft[COLOR_parser__ReduceAction__init]))(var1243, var1244) /* init on <var1243:ReduceAction596>*/;
-var1245 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1246 = 42;
-((void (*)(val*, long))(var1245->class->vft[COLOR_parser__ReduceAction__init]))(var1245, var1246) /* init on <var1245:ReduceAction596>*/;
-var1247 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var1248 = 42;
-((void (*)(val*, long))(var1247->class->vft[COLOR_parser__ReduceAction__init]))(var1247, var1248) /* init on <var1247:ReduceAction623>*/;
-var1249 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var1250 = 42;
-((void (*)(val*, long))(var1249->class->vft[COLOR_parser__ReduceAction__init]))(var1249, var1250) /* init on <var1249:ReduceAction624>*/;
-var1251 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1252 = 42;
-((void (*)(val*, long))(var1251->class->vft[COLOR_parser__ReduceAction__init]))(var1251, var1252) /* init on <var1251:ReduceAction625>*/;
-var1253 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var1254 = 42;
-((void (*)(val*, long))(var1253->class->vft[COLOR_parser__ReduceAction__init]))(var1253, var1254) /* init on <var1253:ReduceAction626>*/;
-var1255 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1256 = 42;
-((void (*)(val*, long))(var1255->class->vft[COLOR_parser__ReduceAction__init]))(var1255, var1256) /* init on <var1255:ReduceAction625>*/;
-var1257 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1258 = 42;
-((void (*)(val*, long))(var1257->class->vft[COLOR_parser__ReduceAction__init]))(var1257, var1258) /* init on <var1257:ReduceAction628>*/;
-var1259 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var1260 = 42;
-((void (*)(val*, long))(var1259->class->vft[COLOR_parser__ReduceAction__init]))(var1259, var1260) /* init on <var1259:ReduceAction629>*/;
-var1261 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1262 = 42;
-((void (*)(val*, long))(var1261->class->vft[COLOR_parser__ReduceAction__init]))(var1261, var1262) /* init on <var1261:ReduceAction628>*/;
-var1263 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var1264 = 42;
-((void (*)(val*, long))(var1263->class->vft[COLOR_parser__ReduceAction__init]))(var1263, var1264) /* init on <var1263:ReduceAction631>*/;
-var1265 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var1266 = 42;
-((void (*)(val*, long))(var1265->class->vft[COLOR_parser__ReduceAction__init]))(var1265, var1266) /* init on <var1265:ReduceAction632>*/;
-var1267 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var1268 = 42;
-((void (*)(val*, long))(var1267->class->vft[COLOR_parser__ReduceAction__init]))(var1267, var1268) /* init on <var1267:ReduceAction633>*/;
-var1269 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var1270 = 42;
-((void (*)(val*, long))(var1269->class->vft[COLOR_parser__ReduceAction__init]))(var1269, var1270) /* init on <var1269:ReduceAction634>*/;
-var1271 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var1272 = 42;
-((void (*)(val*, long))(var1271->class->vft[COLOR_parser__ReduceAction__init]))(var1271, var1272) /* init on <var1271:ReduceAction635>*/;
-var1273 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var1274 = 42;
-((void (*)(val*, long))(var1273->class->vft[COLOR_parser__ReduceAction__init]))(var1273, var1274) /* init on <var1273:ReduceAction636>*/;
-var1275 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var1276 = 42;
-((void (*)(val*, long))(var1275->class->vft[COLOR_parser__ReduceAction__init]))(var1275, var1276) /* init on <var1275:ReduceAction637>*/;
-var1277 = NEW_parser__ReduceAction638(&type_parser__ReduceAction638);
-var1278 = 42;
-((void (*)(val*, long))(var1277->class->vft[COLOR_parser__ReduceAction__init]))(var1277, var1278) /* init on <var1277:ReduceAction638>*/;
-var1279 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var1280 = 42;
-((void (*)(val*, long))(var1279->class->vft[COLOR_parser__ReduceAction__init]))(var1279, var1280) /* init on <var1279:ReduceAction637>*/;
-var1281 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var1282 = 42;
-((void (*)(val*, long))(var1281->class->vft[COLOR_parser__ReduceAction__init]))(var1281, var1282) /* init on <var1281:ReduceAction640>*/;
-var1283 = NEW_parser__ReduceAction641(&type_parser__ReduceAction641);
-var1284 = 42;
-((void (*)(val*, long))(var1283->class->vft[COLOR_parser__ReduceAction__init]))(var1283, var1284) /* init on <var1283:ReduceAction641>*/;
-var1285 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var1286 = 42;
-((void (*)(val*, long))(var1285->class->vft[COLOR_parser__ReduceAction__init]))(var1285, var1286) /* init on <var1285:ReduceAction640>*/;
-var1287 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var1288 = 42;
-((void (*)(val*, long))(var1287->class->vft[COLOR_parser__ReduceAction__init]))(var1287, var1288) /* init on <var1287:ReduceAction643>*/;
-var1289 = NEW_parser__ReduceAction644(&type_parser__ReduceAction644);
-var1290 = 43;
-((void (*)(val*, long))(var1289->class->vft[COLOR_parser__ReduceAction__init]))(var1289, var1290) /* init on <var1289:ReduceAction644>*/;
-var1291 = NEW_parser__ReduceAction645(&type_parser__ReduceAction645);
-var1292 = 44;
-((void (*)(val*, long))(var1291->class->vft[COLOR_parser__ReduceAction__init]))(var1291, var1292) /* init on <var1291:ReduceAction645>*/;
-var1293 = NEW_parser__ReduceAction646(&type_parser__ReduceAction646);
-var1294 = 45;
-((void (*)(val*, long))(var1293->class->vft[COLOR_parser__ReduceAction__init]))(var1293, var1294) /* init on <var1293:ReduceAction646>*/;
-var1295 = NEW_parser__ReduceAction647(&type_parser__ReduceAction647);
-var1296 = 45;
-((void (*)(val*, long))(var1295->class->vft[COLOR_parser__ReduceAction__init]))(var1295, var1296) /* init on <var1295:ReduceAction647>*/;
-var1297 = NEW_parser__ReduceAction648(&type_parser__ReduceAction648);
-var1298 = 45;
-((void (*)(val*, long))(var1297->class->vft[COLOR_parser__ReduceAction__init]))(var1297, var1298) /* init on <var1297:ReduceAction648>*/;
-var1299 = NEW_parser__ReduceAction649(&type_parser__ReduceAction649);
-var1300 = 45;
-((void (*)(val*, long))(var1299->class->vft[COLOR_parser__ReduceAction__init]))(var1299, var1300) /* init on <var1299:ReduceAction649>*/;
-var1301 = NEW_parser__ReduceAction650(&type_parser__ReduceAction650);
-var1302 = 45;
-((void (*)(val*, long))(var1301->class->vft[COLOR_parser__ReduceAction__init]))(var1301, var1302) /* init on <var1301:ReduceAction650>*/;
-var1303 = NEW_parser__ReduceAction651(&type_parser__ReduceAction651);
-var1304 = 45;
-((void (*)(val*, long))(var1303->class->vft[COLOR_parser__ReduceAction__init]))(var1303, var1304) /* init on <var1303:ReduceAction651>*/;
-var1305 = NEW_parser__ReduceAction652(&type_parser__ReduceAction652);
-var1306 = 45;
-((void (*)(val*, long))(var1305->class->vft[COLOR_parser__ReduceAction__init]))(var1305, var1306) /* init on <var1305:ReduceAction652>*/;
-var1307 = NEW_parser__ReduceAction653(&type_parser__ReduceAction653);
-var1308 = 45;
-((void (*)(val*, long))(var1307->class->vft[COLOR_parser__ReduceAction__init]))(var1307, var1308) /* init on <var1307:ReduceAction653>*/;
-var1309 = NEW_parser__ReduceAction654(&type_parser__ReduceAction654);
-var1310 = 46;
-((void (*)(val*, long))(var1309->class->vft[COLOR_parser__ReduceAction__init]))(var1309, var1310) /* init on <var1309:ReduceAction654>*/;
-var1311 = NEW_parser__ReduceAction655(&type_parser__ReduceAction655);
-var1312 = 46;
-((void (*)(val*, long))(var1311->class->vft[COLOR_parser__ReduceAction__init]))(var1311, var1312) /* init on <var1311:ReduceAction655>*/;
-var1313 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var1314 = 46;
-((void (*)(val*, long))(var1313->class->vft[COLOR_parser__ReduceAction__init]))(var1313, var1314) /* init on <var1313:ReduceAction656>*/;
-var1315 = NEW_parser__ReduceAction657(&type_parser__ReduceAction657);
-var1316 = 46;
-((void (*)(val*, long))(var1315->class->vft[COLOR_parser__ReduceAction__init]))(var1315, var1316) /* init on <var1315:ReduceAction657>*/;
-var1317 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var1318 = 46;
-((void (*)(val*, long))(var1317->class->vft[COLOR_parser__ReduceAction__init]))(var1317, var1318) /* init on <var1317:ReduceAction656>*/;
-var1319 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var1320 = 46;
-((void (*)(val*, long))(var1319->class->vft[COLOR_parser__ReduceAction__init]))(var1319, var1320) /* init on <var1319:ReduceAction659>*/;
-var1321 = NEW_parser__ReduceAction660(&type_parser__ReduceAction660);
-var1322 = 46;
-((void (*)(val*, long))(var1321->class->vft[COLOR_parser__ReduceAction__init]))(var1321, var1322) /* init on <var1321:ReduceAction660>*/;
-var1323 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var1324 = 46;
-((void (*)(val*, long))(var1323->class->vft[COLOR_parser__ReduceAction__init]))(var1323, var1324) /* init on <var1323:ReduceAction659>*/;
-var1325 = NEW_parser__ReduceAction662(&type_parser__ReduceAction662);
-var1326 = 46;
-((void (*)(val*, long))(var1325->class->vft[COLOR_parser__ReduceAction__init]))(var1325, var1326) /* init on <var1325:ReduceAction662>*/;
-var1327 = NEW_parser__ReduceAction663(&type_parser__ReduceAction663);
-var1328 = 46;
-((void (*)(val*, long))(var1327->class->vft[COLOR_parser__ReduceAction__init]))(var1327, var1328) /* init on <var1327:ReduceAction663>*/;
-var1329 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var1330 = 46;
-((void (*)(val*, long))(var1329->class->vft[COLOR_parser__ReduceAction__init]))(var1329, var1330) /* init on <var1329:ReduceAction664>*/;
-var1331 = NEW_parser__ReduceAction665(&type_parser__ReduceAction665);
-var1332 = 46;
-((void (*)(val*, long))(var1331->class->vft[COLOR_parser__ReduceAction__init]))(var1331, var1332) /* init on <var1331:ReduceAction665>*/;
-var1333 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var1334 = 46;
-((void (*)(val*, long))(var1333->class->vft[COLOR_parser__ReduceAction__init]))(var1333, var1334) /* init on <var1333:ReduceAction664>*/;
-var1335 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var1336 = 46;
-((void (*)(val*, long))(var1335->class->vft[COLOR_parser__ReduceAction__init]))(var1335, var1336) /* init on <var1335:ReduceAction667>*/;
-var1337 = NEW_parser__ReduceAction668(&type_parser__ReduceAction668);
-var1338 = 46;
-((void (*)(val*, long))(var1337->class->vft[COLOR_parser__ReduceAction__init]))(var1337, var1338) /* init on <var1337:ReduceAction668>*/;
-var1339 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var1340 = 46;
-((void (*)(val*, long))(var1339->class->vft[COLOR_parser__ReduceAction__init]))(var1339, var1340) /* init on <var1339:ReduceAction667>*/;
-var1341 = NEW_parser__ReduceAction670(&type_parser__ReduceAction670);
-var1342 = 46;
-((void (*)(val*, long))(var1341->class->vft[COLOR_parser__ReduceAction__init]))(var1341, var1342) /* init on <var1341:ReduceAction670>*/;
-var1343 = NEW_parser__ReduceAction671(&type_parser__ReduceAction671);
-var1344 = 46;
-((void (*)(val*, long))(var1343->class->vft[COLOR_parser__ReduceAction__init]))(var1343, var1344) /* init on <var1343:ReduceAction671>*/;
-var1345 = NEW_parser__ReduceAction672(&type_parser__ReduceAction672);
-var1346 = 46;
-((void (*)(val*, long))(var1345->class->vft[COLOR_parser__ReduceAction__init]))(var1345, var1346) /* init on <var1345:ReduceAction672>*/;
-var1347 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var1348 = 46;
-((void (*)(val*, long))(var1347->class->vft[COLOR_parser__ReduceAction__init]))(var1347, var1348) /* init on <var1347:ReduceAction673>*/;
-var1349 = NEW_parser__ReduceAction674(&type_parser__ReduceAction674);
-var1350 = 46;
-((void (*)(val*, long))(var1349->class->vft[COLOR_parser__ReduceAction__init]))(var1349, var1350) /* init on <var1349:ReduceAction674>*/;
-var1351 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var1352 = 46;
-((void (*)(val*, long))(var1351->class->vft[COLOR_parser__ReduceAction__init]))(var1351, var1352) /* init on <var1351:ReduceAction673>*/;
-var1353 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var1354 = 46;
-((void (*)(val*, long))(var1353->class->vft[COLOR_parser__ReduceAction__init]))(var1353, var1354) /* init on <var1353:ReduceAction676>*/;
-var1355 = NEW_parser__ReduceAction677(&type_parser__ReduceAction677);
-var1356 = 46;
-((void (*)(val*, long))(var1355->class->vft[COLOR_parser__ReduceAction__init]))(var1355, var1356) /* init on <var1355:ReduceAction677>*/;
-var1357 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var1358 = 46;
-((void (*)(val*, long))(var1357->class->vft[COLOR_parser__ReduceAction__init]))(var1357, var1358) /* init on <var1357:ReduceAction676>*/;
-var1359 = NEW_parser__ReduceAction679(&type_parser__ReduceAction679);
-var1360 = 46;
-((void (*)(val*, long))(var1359->class->vft[COLOR_parser__ReduceAction__init]))(var1359, var1360) /* init on <var1359:ReduceAction679>*/;
-var1361 = NEW_parser__ReduceAction680(&type_parser__ReduceAction680);
-var1362 = 46;
-((void (*)(val*, long))(var1361->class->vft[COLOR_parser__ReduceAction__init]))(var1361, var1362) /* init on <var1361:ReduceAction680>*/;
-var1363 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var1364 = 46;
-((void (*)(val*, long))(var1363->class->vft[COLOR_parser__ReduceAction__init]))(var1363, var1364) /* init on <var1363:ReduceAction681>*/;
-var1365 = NEW_parser__ReduceAction682(&type_parser__ReduceAction682);
-var1366 = 46;
-((void (*)(val*, long))(var1365->class->vft[COLOR_parser__ReduceAction__init]))(var1365, var1366) /* init on <var1365:ReduceAction682>*/;
-var1367 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var1368 = 46;
-((void (*)(val*, long))(var1367->class->vft[COLOR_parser__ReduceAction__init]))(var1367, var1368) /* init on <var1367:ReduceAction681>*/;
-var1369 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var1370 = 46;
-((void (*)(val*, long))(var1369->class->vft[COLOR_parser__ReduceAction__init]))(var1369, var1370) /* init on <var1369:ReduceAction684>*/;
-var1371 = NEW_parser__ReduceAction685(&type_parser__ReduceAction685);
-var1372 = 46;
-((void (*)(val*, long))(var1371->class->vft[COLOR_parser__ReduceAction__init]))(var1371, var1372) /* init on <var1371:ReduceAction685>*/;
-var1373 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var1374 = 46;
-((void (*)(val*, long))(var1373->class->vft[COLOR_parser__ReduceAction__init]))(var1373, var1374) /* init on <var1373:ReduceAction684>*/;
-var1375 = NEW_parser__ReduceAction687(&type_parser__ReduceAction687);
-var1376 = 46;
-((void (*)(val*, long))(var1375->class->vft[COLOR_parser__ReduceAction__init]))(var1375, var1376) /* init on <var1375:ReduceAction687>*/;
-var1377 = NEW_parser__ReduceAction688(&type_parser__ReduceAction688);
-var1378 = 47;
-((void (*)(val*, long))(var1377->class->vft[COLOR_parser__ReduceAction__init]))(var1377, var1378) /* init on <var1377:ReduceAction688>*/;
-var1379 = NEW_parser__ReduceAction689(&type_parser__ReduceAction689);
-var1380 = 47;
-((void (*)(val*, long))(var1379->class->vft[COLOR_parser__ReduceAction__init]))(var1379, var1380) /* init on <var1379:ReduceAction689>*/;
-var1381 = NEW_parser__ReduceAction690(&type_parser__ReduceAction690);
-var1382 = 48;
-((void (*)(val*, long))(var1381->class->vft[COLOR_parser__ReduceAction__init]))(var1381, var1382) /* init on <var1381:ReduceAction690>*/;
-var1383 = NEW_parser__ReduceAction691(&type_parser__ReduceAction691);
-var1384 = 48;
-((void (*)(val*, long))(var1383->class->vft[COLOR_parser__ReduceAction__init]))(var1383, var1384) /* init on <var1383:ReduceAction691>*/;
-var1385 = NEW_parser__ReduceAction692(&type_parser__ReduceAction692);
-var1386 = 49;
-((void (*)(val*, long))(var1385->class->vft[COLOR_parser__ReduceAction__init]))(var1385, var1386) /* init on <var1385:ReduceAction692>*/;
-var1387 = NEW_parser__ReduceAction693(&type_parser__ReduceAction693);
-var1388 = 49;
-((void (*)(val*, long))(var1387->class->vft[COLOR_parser__ReduceAction__init]))(var1387, var1388) /* init on <var1387:ReduceAction693>*/;
-var1389 = NEW_parser__ReduceAction694(&type_parser__ReduceAction694);
-var1390 = 49;
-((void (*)(val*, long))(var1389->class->vft[COLOR_parser__ReduceAction__init]))(var1389, var1390) /* init on <var1389:ReduceAction694>*/;
-var1391 = NEW_parser__ReduceAction695(&type_parser__ReduceAction695);
-var1392 = 49;
-((void (*)(val*, long))(var1391->class->vft[COLOR_parser__ReduceAction__init]))(var1391, var1392) /* init on <var1391:ReduceAction695>*/;
-var1393 = NEW_parser__ReduceAction696(&type_parser__ReduceAction696);
-var1394 = 49;
-((void (*)(val*, long))(var1393->class->vft[COLOR_parser__ReduceAction__init]))(var1393, var1394) /* init on <var1393:ReduceAction696>*/;
-var1395 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var1396 = 50;
-((void (*)(val*, long))(var1395->class->vft[COLOR_parser__ReduceAction__init]))(var1395, var1396) /* init on <var1395:ReduceAction593>*/;
-var1397 = NEW_parser__ReduceAction595(&type_parser__ReduceAction595);
-var1398 = 50;
-((void (*)(val*, long))(var1397->class->vft[COLOR_parser__ReduceAction__init]))(var1397, var1398) /* init on <var1397:ReduceAction595>*/;
-var1399 = NEW_parser__ReduceAction699(&type_parser__ReduceAction699);
-var1400 = 51;
-((void (*)(val*, long))(var1399->class->vft[COLOR_parser__ReduceAction__init]))(var1399, var1400) /* init on <var1399:ReduceAction699>*/;
-var1401 = NEW_parser__ReduceAction700(&type_parser__ReduceAction700);
-var1402 = 51;
-((void (*)(val*, long))(var1401->class->vft[COLOR_parser__ReduceAction__init]))(var1401, var1402) /* init on <var1401:ReduceAction700>*/;
-var1403 = NEW_parser__ReduceAction701(&type_parser__ReduceAction701);
-var1404 = 52;
-((void (*)(val*, long))(var1403->class->vft[COLOR_parser__ReduceAction__init]))(var1403, var1404) /* init on <var1403:ReduceAction701>*/;
-var1405 = NEW_parser__ReduceAction702(&type_parser__ReduceAction702);
-var1406 = 52;
-((void (*)(val*, long))(var1405->class->vft[COLOR_parser__ReduceAction__init]))(var1405, var1406) /* init on <var1405:ReduceAction702>*/;
-var1407 = NEW_parser__ReduceAction703(&type_parser__ReduceAction703);
-var1408 = 53;
-((void (*)(val*, long))(var1407->class->vft[COLOR_parser__ReduceAction__init]))(var1407, var1408) /* init on <var1407:ReduceAction703>*/;
-var1409 = NEW_parser__ReduceAction704(&type_parser__ReduceAction704);
-var1410 = 53;
-((void (*)(val*, long))(var1409->class->vft[COLOR_parser__ReduceAction__init]))(var1409, var1410) /* init on <var1409:ReduceAction704>*/;
-var1411 = NEW_parser__ReduceAction705(&type_parser__ReduceAction705);
-var1412 = 53;
-((void (*)(val*, long))(var1411->class->vft[COLOR_parser__ReduceAction__init]))(var1411, var1412) /* init on <var1411:ReduceAction705>*/;
-var1413 = NEW_parser__ReduceAction706(&type_parser__ReduceAction706);
-var1414 = 53;
-((void (*)(val*, long))(var1413->class->vft[COLOR_parser__ReduceAction__init]))(var1413, var1414) /* init on <var1413:ReduceAction706>*/;
-var1415 = NEW_parser__ReduceAction707(&type_parser__ReduceAction707);
-var1416 = 54;
-((void (*)(val*, long))(var1415->class->vft[COLOR_parser__ReduceAction__init]))(var1415, var1416) /* init on <var1415:ReduceAction707>*/;
-var1417 = NEW_parser__ReduceAction708(&type_parser__ReduceAction708);
-var1418 = 54;
-((void (*)(val*, long))(var1417->class->vft[COLOR_parser__ReduceAction__init]))(var1417, var1418) /* init on <var1417:ReduceAction708>*/;
-var1419 = NEW_parser__ReduceAction709(&type_parser__ReduceAction709);
-var1420 = 54;
-((void (*)(val*, long))(var1419->class->vft[COLOR_parser__ReduceAction__init]))(var1419, var1420) /* init on <var1419:ReduceAction709>*/;
-var1421 = NEW_parser__ReduceAction710(&type_parser__ReduceAction710);
-var1422 = 54;
-((void (*)(val*, long))(var1421->class->vft[COLOR_parser__ReduceAction__init]))(var1421, var1422) /* init on <var1421:ReduceAction710>*/;
-var1423 = NEW_parser__ReduceAction711(&type_parser__ReduceAction711);
-var1424 = 55;
-((void (*)(val*, long))(var1423->class->vft[COLOR_parser__ReduceAction__init]))(var1423, var1424) /* init on <var1423:ReduceAction711>*/;
-var1425 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1426 = 56;
-((void (*)(val*, long))(var1425->class->vft[COLOR_parser__ReduceAction__init]))(var1425, var1426) /* init on <var1425:ReduceAction596>*/;
-var1427 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1428 = 57;
-((void (*)(val*, long))(var1427->class->vft[COLOR_parser__ReduceAction__init]))(var1427, var1428) /* init on <var1427:ReduceAction596>*/;
-var1429 = NEW_parser__ReduceAction714(&type_parser__ReduceAction714);
-var1430 = 57;
-((void (*)(val*, long))(var1429->class->vft[COLOR_parser__ReduceAction__init]))(var1429, var1430) /* init on <var1429:ReduceAction714>*/;
-var1431 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1432 = 58;
-((void (*)(val*, long))(var1431->class->vft[COLOR_parser__ReduceAction__init]))(var1431, var1432) /* init on <var1431:ReduceAction596>*/;
-var1433 = NEW_parser__ReduceAction716(&type_parser__ReduceAction716);
-var1434 = 58;
-((void (*)(val*, long))(var1433->class->vft[COLOR_parser__ReduceAction__init]))(var1433, var1434) /* init on <var1433:ReduceAction716>*/;
-var1435 = NEW_parser__ReduceAction717(&type_parser__ReduceAction717);
-var1436 = 58;
-((void (*)(val*, long))(var1435->class->vft[COLOR_parser__ReduceAction__init]))(var1435, var1436) /* init on <var1435:ReduceAction717>*/;
-var1437 = NEW_parser__ReduceAction718(&type_parser__ReduceAction718);
-var1438 = 58;
-((void (*)(val*, long))(var1437->class->vft[COLOR_parser__ReduceAction__init]))(var1437, var1438) /* init on <var1437:ReduceAction718>*/;
-var1439 = NEW_parser__ReduceAction719(&type_parser__ReduceAction719);
-var1440 = 58;
-((void (*)(val*, long))(var1439->class->vft[COLOR_parser__ReduceAction__init]))(var1439, var1440) /* init on <var1439:ReduceAction719>*/;
-var1441 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1442 = 59;
-((void (*)(val*, long))(var1441->class->vft[COLOR_parser__ReduceAction__init]))(var1441, var1442) /* init on <var1441:ReduceAction596>*/;
-var1443 = NEW_parser__ReduceAction721(&type_parser__ReduceAction721);
-var1444 = 59;
-((void (*)(val*, long))(var1443->class->vft[COLOR_parser__ReduceAction__init]))(var1443, var1444) /* init on <var1443:ReduceAction721>*/;
-var1445 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1446 = 60;
-((void (*)(val*, long))(var1445->class->vft[COLOR_parser__ReduceAction__init]))(var1445, var1446) /* init on <var1445:ReduceAction596>*/;
-var1447 = NEW_parser__ReduceAction723(&type_parser__ReduceAction723);
-var1448 = 60;
-((void (*)(val*, long))(var1447->class->vft[COLOR_parser__ReduceAction__init]))(var1447, var1448) /* init on <var1447:ReduceAction723>*/;
-var1449 = NEW_parser__ReduceAction724(&type_parser__ReduceAction724);
-var1450 = 60;
-((void (*)(val*, long))(var1449->class->vft[COLOR_parser__ReduceAction__init]))(var1449, var1450) /* init on <var1449:ReduceAction724>*/;
-var1451 = NEW_parser__ReduceAction725(&type_parser__ReduceAction725);
-var1452 = 60;
-((void (*)(val*, long))(var1451->class->vft[COLOR_parser__ReduceAction__init]))(var1451, var1452) /* init on <var1451:ReduceAction725>*/;
-var1453 = NEW_parser__ReduceAction726(&type_parser__ReduceAction726);
-var1454 = 60;
-((void (*)(val*, long))(var1453->class->vft[COLOR_parser__ReduceAction__init]))(var1453, var1454) /* init on <var1453:ReduceAction726>*/;
-var1455 = NEW_parser__ReduceAction727(&type_parser__ReduceAction727);
-var1456 = 60;
-((void (*)(val*, long))(var1455->class->vft[COLOR_parser__ReduceAction__init]))(var1455, var1456) /* init on <var1455:ReduceAction727>*/;
-var1457 = NEW_parser__ReduceAction728(&type_parser__ReduceAction728);
-var1458 = 60;
-((void (*)(val*, long))(var1457->class->vft[COLOR_parser__ReduceAction__init]))(var1457, var1458) /* init on <var1457:ReduceAction728>*/;
-var1459 = NEW_parser__ReduceAction729(&type_parser__ReduceAction729);
-var1460 = 60;
-((void (*)(val*, long))(var1459->class->vft[COLOR_parser__ReduceAction__init]))(var1459, var1460) /* init on <var1459:ReduceAction729>*/;
-var1461 = NEW_parser__ReduceAction730(&type_parser__ReduceAction730);
-var1462 = 60;
-((void (*)(val*, long))(var1461->class->vft[COLOR_parser__ReduceAction__init]))(var1461, var1462) /* init on <var1461:ReduceAction730>*/;
-var1463 = NEW_parser__ReduceAction731(&type_parser__ReduceAction731);
-var1464 = 60;
-((void (*)(val*, long))(var1463->class->vft[COLOR_parser__ReduceAction__init]))(var1463, var1464) /* init on <var1463:ReduceAction731>*/;
-var1465 = NEW_parser__ReduceAction732(&type_parser__ReduceAction732);
-var1466 = 60;
-((void (*)(val*, long))(var1465->class->vft[COLOR_parser__ReduceAction__init]))(var1465, var1466) /* init on <var1465:ReduceAction732>*/;
-var1467 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1468 = 61;
-((void (*)(val*, long))(var1467->class->vft[COLOR_parser__ReduceAction__init]))(var1467, var1468) /* init on <var1467:ReduceAction596>*/;
-var1469 = NEW_parser__ReduceAction734(&type_parser__ReduceAction734);
-var1470 = 61;
-((void (*)(val*, long))(var1469->class->vft[COLOR_parser__ReduceAction__init]))(var1469, var1470) /* init on <var1469:ReduceAction734>*/;
-var1471 = NEW_parser__ReduceAction735(&type_parser__ReduceAction735);
-var1472 = 61;
-((void (*)(val*, long))(var1471->class->vft[COLOR_parser__ReduceAction__init]))(var1471, var1472) /* init on <var1471:ReduceAction735>*/;
-var1473 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1474 = 62;
-((void (*)(val*, long))(var1473->class->vft[COLOR_parser__ReduceAction__init]))(var1473, var1474) /* init on <var1473:ReduceAction596>*/;
-var1475 = NEW_parser__ReduceAction737(&type_parser__ReduceAction737);
-var1476 = 62;
-((void (*)(val*, long))(var1475->class->vft[COLOR_parser__ReduceAction__init]))(var1475, var1476) /* init on <var1475:ReduceAction737>*/;
-var1477 = NEW_parser__ReduceAction738(&type_parser__ReduceAction738);
-var1478 = 62;
-((void (*)(val*, long))(var1477->class->vft[COLOR_parser__ReduceAction__init]))(var1477, var1478) /* init on <var1477:ReduceAction738>*/;
-var1479 = NEW_parser__ReduceAction739(&type_parser__ReduceAction739);
-var1480 = 62;
-((void (*)(val*, long))(var1479->class->vft[COLOR_parser__ReduceAction__init]))(var1479, var1480) /* init on <var1479:ReduceAction739>*/;
-var1481 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1482 = 63;
-((void (*)(val*, long))(var1481->class->vft[COLOR_parser__ReduceAction__init]))(var1481, var1482) /* init on <var1481:ReduceAction596>*/;
-var1483 = NEW_parser__ReduceAction741(&type_parser__ReduceAction741);
-var1484 = 63;
-((void (*)(val*, long))(var1483->class->vft[COLOR_parser__ReduceAction__init]))(var1483, var1484) /* init on <var1483:ReduceAction741>*/;
-var1485 = NEW_parser__ReduceAction742(&type_parser__ReduceAction742);
-var1486 = 63;
-((void (*)(val*, long))(var1485->class->vft[COLOR_parser__ReduceAction__init]))(var1485, var1486) /* init on <var1485:ReduceAction742>*/;
-var1487 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1488 = 64;
-((void (*)(val*, long))(var1487->class->vft[COLOR_parser__ReduceAction__init]))(var1487, var1488) /* init on <var1487:ReduceAction596>*/;
-var1489 = NEW_parser__ReduceAction744(&type_parser__ReduceAction744);
-var1490 = 64;
-((void (*)(val*, long))(var1489->class->vft[COLOR_parser__ReduceAction__init]))(var1489, var1490) /* init on <var1489:ReduceAction744>*/;
-var1491 = NEW_parser__ReduceAction745(&type_parser__ReduceAction745);
-var1492 = 64;
-((void (*)(val*, long))(var1491->class->vft[COLOR_parser__ReduceAction__init]))(var1491, var1492) /* init on <var1491:ReduceAction745>*/;
-var1493 = NEW_parser__ReduceAction746(&type_parser__ReduceAction746);
-var1494 = 64;
-((void (*)(val*, long))(var1493->class->vft[COLOR_parser__ReduceAction__init]))(var1493, var1494) /* init on <var1493:ReduceAction746>*/;
-var1495 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var1496 = 64;
-((void (*)(val*, long))(var1495->class->vft[COLOR_parser__ReduceAction__init]))(var1495, var1496) /* init on <var1495:ReduceAction747>*/;
-var1497 = NEW_parser__ReduceAction748(&type_parser__ReduceAction748);
-var1498 = 64;
-((void (*)(val*, long))(var1497->class->vft[COLOR_parser__ReduceAction__init]))(var1497, var1498) /* init on <var1497:ReduceAction748>*/;
-var1499 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var1500 = 64;
-((void (*)(val*, long))(var1499->class->vft[COLOR_parser__ReduceAction__init]))(var1499, var1500) /* init on <var1499:ReduceAction747>*/;
-var1501 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var1502 = 64;
-((void (*)(val*, long))(var1501->class->vft[COLOR_parser__ReduceAction__init]))(var1501, var1502) /* init on <var1501:ReduceAction750>*/;
-var1503 = NEW_parser__ReduceAction751(&type_parser__ReduceAction751);
-var1504 = 64;
-((void (*)(val*, long))(var1503->class->vft[COLOR_parser__ReduceAction__init]))(var1503, var1504) /* init on <var1503:ReduceAction751>*/;
-var1505 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var1506 = 64;
-((void (*)(val*, long))(var1505->class->vft[COLOR_parser__ReduceAction__init]))(var1505, var1506) /* init on <var1505:ReduceAction750>*/;
-var1507 = NEW_parser__ReduceAction753(&type_parser__ReduceAction753);
-var1508 = 65;
-((void (*)(val*, long))(var1507->class->vft[COLOR_parser__ReduceAction__init]))(var1507, var1508) /* init on <var1507:ReduceAction753>*/;
-var1509 = NEW_parser__ReduceAction754(&type_parser__ReduceAction754);
-var1510 = 65;
-((void (*)(val*, long))(var1509->class->vft[COLOR_parser__ReduceAction__init]))(var1509, var1510) /* init on <var1509:ReduceAction754>*/;
-var1511 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var1512 = 65;
-((void (*)(val*, long))(var1511->class->vft[COLOR_parser__ReduceAction__init]))(var1511, var1512) /* init on <var1511:ReduceAction755>*/;
-var1513 = NEW_parser__ReduceAction756(&type_parser__ReduceAction756);
-var1514 = 65;
-((void (*)(val*, long))(var1513->class->vft[COLOR_parser__ReduceAction__init]))(var1513, var1514) /* init on <var1513:ReduceAction756>*/;
-var1515 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var1516 = 65;
-((void (*)(val*, long))(var1515->class->vft[COLOR_parser__ReduceAction__init]))(var1515, var1516) /* init on <var1515:ReduceAction755>*/;
-var1517 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var1518 = 65;
-((void (*)(val*, long))(var1517->class->vft[COLOR_parser__ReduceAction__init]))(var1517, var1518) /* init on <var1517:ReduceAction758>*/;
-var1519 = NEW_parser__ReduceAction759(&type_parser__ReduceAction759);
-var1520 = 65;
-((void (*)(val*, long))(var1519->class->vft[COLOR_parser__ReduceAction__init]))(var1519, var1520) /* init on <var1519:ReduceAction759>*/;
-var1521 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var1522 = 65;
-((void (*)(val*, long))(var1521->class->vft[COLOR_parser__ReduceAction__init]))(var1521, var1522) /* init on <var1521:ReduceAction758>*/;
-var1523 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var1524 = 65;
-((void (*)(val*, long))(var1523->class->vft[COLOR_parser__ReduceAction__init]))(var1523, var1524) /* init on <var1523:ReduceAction623>*/;
-var1525 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var1526 = 65;
-((void (*)(val*, long))(var1525->class->vft[COLOR_parser__ReduceAction__init]))(var1525, var1526) /* init on <var1525:ReduceAction624>*/;
-var1527 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1528 = 65;
-((void (*)(val*, long))(var1527->class->vft[COLOR_parser__ReduceAction__init]))(var1527, var1528) /* init on <var1527:ReduceAction625>*/;
-var1529 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var1530 = 65;
-((void (*)(val*, long))(var1529->class->vft[COLOR_parser__ReduceAction__init]))(var1529, var1530) /* init on <var1529:ReduceAction626>*/;
-var1531 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1532 = 65;
-((void (*)(val*, long))(var1531->class->vft[COLOR_parser__ReduceAction__init]))(var1531, var1532) /* init on <var1531:ReduceAction625>*/;
-var1533 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1534 = 65;
-((void (*)(val*, long))(var1533->class->vft[COLOR_parser__ReduceAction__init]))(var1533, var1534) /* init on <var1533:ReduceAction628>*/;
-var1535 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var1536 = 65;
-((void (*)(val*, long))(var1535->class->vft[COLOR_parser__ReduceAction__init]))(var1535, var1536) /* init on <var1535:ReduceAction629>*/;
-var1537 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1538 = 65;
-((void (*)(val*, long))(var1537->class->vft[COLOR_parser__ReduceAction__init]))(var1537, var1538) /* init on <var1537:ReduceAction628>*/;
-var1539 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var1540 = 65;
-((void (*)(val*, long))(var1539->class->vft[COLOR_parser__ReduceAction__init]))(var1539, var1540) /* init on <var1539:ReduceAction631>*/;
-var1541 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var1542 = 65;
-((void (*)(val*, long))(var1541->class->vft[COLOR_parser__ReduceAction__init]))(var1541, var1542) /* init on <var1541:ReduceAction632>*/;
-var1543 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var1544 = 65;
-((void (*)(val*, long))(var1543->class->vft[COLOR_parser__ReduceAction__init]))(var1543, var1544) /* init on <var1543:ReduceAction633>*/;
-var1545 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var1546 = 65;
-((void (*)(val*, long))(var1545->class->vft[COLOR_parser__ReduceAction__init]))(var1545, var1546) /* init on <var1545:ReduceAction634>*/;
-var1547 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var1548 = 65;
-((void (*)(val*, long))(var1547->class->vft[COLOR_parser__ReduceAction__init]))(var1547, var1548) /* init on <var1547:ReduceAction635>*/;
-var1549 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var1550 = 65;
-((void (*)(val*, long))(var1549->class->vft[COLOR_parser__ReduceAction__init]))(var1549, var1550) /* init on <var1549:ReduceAction636>*/;
-var1551 = NEW_parser__ReduceAction775(&type_parser__ReduceAction775);
-var1552 = 65;
-((void (*)(val*, long))(var1551->class->vft[COLOR_parser__ReduceAction__init]))(var1551, var1552) /* init on <var1551:ReduceAction775>*/;
-var1553 = NEW_parser__ReduceAction776(&type_parser__ReduceAction776);
-var1554 = 65;
-((void (*)(val*, long))(var1553->class->vft[COLOR_parser__ReduceAction__init]))(var1553, var1554) /* init on <var1553:ReduceAction776>*/;
-var1555 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var1556 = 65;
-((void (*)(val*, long))(var1555->class->vft[COLOR_parser__ReduceAction__init]))(var1555, var1556) /* init on <var1555:ReduceAction777>*/;
-var1557 = NEW_parser__ReduceAction778(&type_parser__ReduceAction778);
-var1558 = 65;
-((void (*)(val*, long))(var1557->class->vft[COLOR_parser__ReduceAction__init]))(var1557, var1558) /* init on <var1557:ReduceAction778>*/;
-var1559 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var1560 = 65;
-((void (*)(val*, long))(var1559->class->vft[COLOR_parser__ReduceAction__init]))(var1559, var1560) /* init on <var1559:ReduceAction777>*/;
-var1561 = NEW_parser__ReduceAction780(&type_parser__ReduceAction780);
-var1562 = 65;
-((void (*)(val*, long))(var1561->class->vft[COLOR_parser__ReduceAction__init]))(var1561, var1562) /* init on <var1561:ReduceAction780>*/;
-var1563 = NEW_parser__ReduceAction781(&type_parser__ReduceAction781);
-var1564 = 65;
-((void (*)(val*, long))(var1563->class->vft[COLOR_parser__ReduceAction__init]))(var1563, var1564) /* init on <var1563:ReduceAction781>*/;
-var1565 = NEW_parser__ReduceAction782(&type_parser__ReduceAction782);
-var1566 = 65;
-((void (*)(val*, long))(var1565->class->vft[COLOR_parser__ReduceAction__init]))(var1565, var1566) /* init on <var1565:ReduceAction782>*/;
-var1567 = NEW_parser__ReduceAction783(&type_parser__ReduceAction783);
-var1568 = 65;
-((void (*)(val*, long))(var1567->class->vft[COLOR_parser__ReduceAction__init]))(var1567, var1568) /* init on <var1567:ReduceAction783>*/;
-var1569 = NEW_parser__ReduceAction784(&type_parser__ReduceAction784);
-var1570 = 65;
-((void (*)(val*, long))(var1569->class->vft[COLOR_parser__ReduceAction__init]))(var1569, var1570) /* init on <var1569:ReduceAction784>*/;
-var1571 = NEW_parser__ReduceAction785(&type_parser__ReduceAction785);
-var1572 = 65;
-((void (*)(val*, long))(var1571->class->vft[COLOR_parser__ReduceAction__init]))(var1571, var1572) /* init on <var1571:ReduceAction785>*/;
-var1573 = NEW_parser__ReduceAction786(&type_parser__ReduceAction786);
-var1574 = 65;
-((void (*)(val*, long))(var1573->class->vft[COLOR_parser__ReduceAction__init]))(var1573, var1574) /* init on <var1573:ReduceAction786>*/;
-var1575 = NEW_parser__ReduceAction787(&type_parser__ReduceAction787);
-var1576 = 65;
-((void (*)(val*, long))(var1575->class->vft[COLOR_parser__ReduceAction__init]))(var1575, var1576) /* init on <var1575:ReduceAction787>*/;
-var1577 = NEW_parser__ReduceAction788(&type_parser__ReduceAction788);
-var1578 = 65;
-((void (*)(val*, long))(var1577->class->vft[COLOR_parser__ReduceAction__init]))(var1577, var1578) /* init on <var1577:ReduceAction788>*/;
-var1579 = NEW_parser__ReduceAction789(&type_parser__ReduceAction789);
-var1580 = 65;
-((void (*)(val*, long))(var1579->class->vft[COLOR_parser__ReduceAction__init]))(var1579, var1580) /* init on <var1579:ReduceAction789>*/;
-var1581 = NEW_parser__ReduceAction790(&type_parser__ReduceAction790);
-var1582 = 65;
-((void (*)(val*, long))(var1581->class->vft[COLOR_parser__ReduceAction__init]))(var1581, var1582) /* init on <var1581:ReduceAction790>*/;
-var1583 = NEW_parser__ReduceAction791(&type_parser__ReduceAction791);
-var1584 = 65;
-((void (*)(val*, long))(var1583->class->vft[COLOR_parser__ReduceAction__init]))(var1583, var1584) /* init on <var1583:ReduceAction791>*/;
-var1585 = NEW_parser__ReduceAction792(&type_parser__ReduceAction792);
-var1586 = 65;
-((void (*)(val*, long))(var1585->class->vft[COLOR_parser__ReduceAction__init]))(var1585, var1586) /* init on <var1585:ReduceAction792>*/;
-var1587 = NEW_parser__ReduceAction793(&type_parser__ReduceAction793);
-var1588 = 65;
-((void (*)(val*, long))(var1587->class->vft[COLOR_parser__ReduceAction__init]))(var1587, var1588) /* init on <var1587:ReduceAction793>*/;
-var1589 = NEW_parser__ReduceAction794(&type_parser__ReduceAction794);
-var1590 = 65;
-((void (*)(val*, long))(var1589->class->vft[COLOR_parser__ReduceAction__init]))(var1589, var1590) /* init on <var1589:ReduceAction794>*/;
-var1591 = NEW_parser__ReduceAction795(&type_parser__ReduceAction795);
-var1592 = 65;
-((void (*)(val*, long))(var1591->class->vft[COLOR_parser__ReduceAction__init]))(var1591, var1592) /* init on <var1591:ReduceAction795>*/;
-var1593 = NEW_parser__ReduceAction796(&type_parser__ReduceAction796);
-var1594 = 65;
-((void (*)(val*, long))(var1593->class->vft[COLOR_parser__ReduceAction__init]))(var1593, var1594) /* init on <var1593:ReduceAction796>*/;
-var1595 = NEW_parser__ReduceAction797(&type_parser__ReduceAction797);
-var1596 = 65;
-((void (*)(val*, long))(var1595->class->vft[COLOR_parser__ReduceAction__init]))(var1595, var1596) /* init on <var1595:ReduceAction797>*/;
-var1597 = NEW_parser__ReduceAction798(&type_parser__ReduceAction798);
-var1598 = 65;
-((void (*)(val*, long))(var1597->class->vft[COLOR_parser__ReduceAction__init]))(var1597, var1598) /* init on <var1597:ReduceAction798>*/;
-var1599 = NEW_parser__ReduceAction799(&type_parser__ReduceAction799);
-var1600 = 65;
-((void (*)(val*, long))(var1599->class->vft[COLOR_parser__ReduceAction__init]))(var1599, var1600) /* init on <var1599:ReduceAction799>*/;
-var1601 = NEW_parser__ReduceAction800(&type_parser__ReduceAction800);
-var1602 = 65;
-((void (*)(val*, long))(var1601->class->vft[COLOR_parser__ReduceAction__init]))(var1601, var1602) /* init on <var1601:ReduceAction800>*/;
-var1603 = NEW_parser__ReduceAction801(&type_parser__ReduceAction801);
-var1604 = 65;
-((void (*)(val*, long))(var1603->class->vft[COLOR_parser__ReduceAction__init]))(var1603, var1604) /* init on <var1603:ReduceAction801>*/;
-var1605 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1606 = 65;
-((void (*)(val*, long))(var1605->class->vft[COLOR_parser__ReduceAction__init]))(var1605, var1606) /* init on <var1605:ReduceAction596>*/;
-var1607 = NEW_parser__ReduceAction803(&type_parser__ReduceAction803);
-var1608 = 65;
-((void (*)(val*, long))(var1607->class->vft[COLOR_parser__ReduceAction__init]))(var1607, var1608) /* init on <var1607:ReduceAction803>*/;
-var1609 = NEW_parser__ReduceAction804(&type_parser__ReduceAction804);
-var1610 = 65;
-((void (*)(val*, long))(var1609->class->vft[COLOR_parser__ReduceAction__init]))(var1609, var1610) /* init on <var1609:ReduceAction804>*/;
-var1611 = NEW_parser__ReduceAction805(&type_parser__ReduceAction805);
-var1612 = 65;
-((void (*)(val*, long))(var1611->class->vft[COLOR_parser__ReduceAction__init]))(var1611, var1612) /* init on <var1611:ReduceAction805>*/;
-var1613 = NEW_parser__ReduceAction806(&type_parser__ReduceAction806);
-var1614 = 65;
-((void (*)(val*, long))(var1613->class->vft[COLOR_parser__ReduceAction__init]))(var1613, var1614) /* init on <var1613:ReduceAction806>*/;
-var1615 = NEW_parser__ReduceAction807(&type_parser__ReduceAction807);
-var1616 = 66;
-((void (*)(val*, long))(var1615->class->vft[COLOR_parser__ReduceAction__init]))(var1615, var1616) /* init on <var1615:ReduceAction807>*/;
-var1617 = NEW_parser__ReduceAction808(&type_parser__ReduceAction808);
-var1618 = 66;
-((void (*)(val*, long))(var1617->class->vft[COLOR_parser__ReduceAction__init]))(var1617, var1618) /* init on <var1617:ReduceAction808>*/;
-var1619 = NEW_parser__ReduceAction809(&type_parser__ReduceAction809);
-var1620 = 66;
-((void (*)(val*, long))(var1619->class->vft[COLOR_parser__ReduceAction__init]))(var1619, var1620) /* init on <var1619:ReduceAction809>*/;
-var1621 = NEW_parser__ReduceAction810(&type_parser__ReduceAction810);
-var1622 = 66;
-((void (*)(val*, long))(var1621->class->vft[COLOR_parser__ReduceAction__init]))(var1621, var1622) /* init on <var1621:ReduceAction810>*/;
-var1623 = NEW_parser__ReduceAction811(&type_parser__ReduceAction811);
-var1624 = 67;
-((void (*)(val*, long))(var1623->class->vft[COLOR_parser__ReduceAction__init]))(var1623, var1624) /* init on <var1623:ReduceAction811>*/;
-var1625 = NEW_parser__ReduceAction812(&type_parser__ReduceAction812);
-var1626 = 67;
-((void (*)(val*, long))(var1625->class->vft[COLOR_parser__ReduceAction__init]))(var1625, var1626) /* init on <var1625:ReduceAction812>*/;
-var1627 = NEW_parser__ReduceAction813(&type_parser__ReduceAction813);
-var1628 = 68;
-((void (*)(val*, long))(var1627->class->vft[COLOR_parser__ReduceAction__init]))(var1627, var1628) /* init on <var1627:ReduceAction813>*/;
-var1629 = NEW_parser__ReduceAction811(&type_parser__ReduceAction811);
-var1630 = 69;
-((void (*)(val*, long))(var1629->class->vft[COLOR_parser__ReduceAction__init]))(var1629, var1630) /* init on <var1629:ReduceAction811>*/;
-var1631 = NEW_parser__ReduceAction812(&type_parser__ReduceAction812);
-var1632 = 69;
-((void (*)(val*, long))(var1631->class->vft[COLOR_parser__ReduceAction__init]))(var1631, var1632) /* init on <var1631:ReduceAction812>*/;
-var1633 = NEW_parser__ReduceAction816(&type_parser__ReduceAction816);
-var1634 = 70;
-((void (*)(val*, long))(var1633->class->vft[COLOR_parser__ReduceAction__init]))(var1633, var1634) /* init on <var1633:ReduceAction816>*/;
-var1635 = NEW_parser__ReduceAction817(&type_parser__ReduceAction817);
-var1636 = 71;
-((void (*)(val*, long))(var1635->class->vft[COLOR_parser__ReduceAction__init]))(var1635, var1636) /* init on <var1635:ReduceAction817>*/;
-var1637 = NEW_parser__ReduceAction818(&type_parser__ReduceAction818);
-var1638 = 72;
-((void (*)(val*, long))(var1637->class->vft[COLOR_parser__ReduceAction__init]))(var1637, var1638) /* init on <var1637:ReduceAction818>*/;
-var1639 = NEW_parser__ReduceAction819(&type_parser__ReduceAction819);
-var1640 = 72;
-((void (*)(val*, long))(var1639->class->vft[COLOR_parser__ReduceAction__init]))(var1639, var1640) /* init on <var1639:ReduceAction819>*/;
-var1641 = NEW_parser__ReduceAction820(&type_parser__ReduceAction820);
-var1642 = 73;
-((void (*)(val*, long))(var1641->class->vft[COLOR_parser__ReduceAction__init]))(var1641, var1642) /* init on <var1641:ReduceAction820>*/;
-var1643 = NEW_parser__ReduceAction821(&type_parser__ReduceAction821);
-var1644 = 73;
-((void (*)(val*, long))(var1643->class->vft[COLOR_parser__ReduceAction__init]))(var1643, var1644) /* init on <var1643:ReduceAction821>*/;
-var1645 = NEW_parser__ReduceAction822(&type_parser__ReduceAction822);
-var1646 = 73;
-((void (*)(val*, long))(var1645->class->vft[COLOR_parser__ReduceAction__init]))(var1645, var1646) /* init on <var1645:ReduceAction822>*/;
-var1647 = NEW_parser__ReduceAction823(&type_parser__ReduceAction823);
-var1648 = 73;
-((void (*)(val*, long))(var1647->class->vft[COLOR_parser__ReduceAction__init]))(var1647, var1648) /* init on <var1647:ReduceAction823>*/;
-var1649 = NEW_parser__ReduceAction824(&type_parser__ReduceAction824);
-var1650 = 74;
-((void (*)(val*, long))(var1649->class->vft[COLOR_parser__ReduceAction__init]))(var1649, var1650) /* init on <var1649:ReduceAction824>*/;
-var1651 = NEW_parser__ReduceAction825(&type_parser__ReduceAction825);
-var1652 = 75;
-((void (*)(val*, long))(var1651->class->vft[COLOR_parser__ReduceAction__init]))(var1651, var1652) /* init on <var1651:ReduceAction825>*/;
-var1653 = NEW_parser__ReduceAction826(&type_parser__ReduceAction826);
-var1654 = 75;
-((void (*)(val*, long))(var1653->class->vft[COLOR_parser__ReduceAction__init]))(var1653, var1654) /* init on <var1653:ReduceAction826>*/;
-var1655 = NEW_parser__ReduceAction824(&type_parser__ReduceAction824);
-var1656 = 76;
-((void (*)(val*, long))(var1655->class->vft[COLOR_parser__ReduceAction__init]))(var1655, var1656) /* init on <var1655:ReduceAction824>*/;
-var1657 = NEW_parser__ReduceAction828(&type_parser__ReduceAction828);
-var1658 = 77;
-((void (*)(val*, long))(var1657->class->vft[COLOR_parser__ReduceAction__init]))(var1657, var1658) /* init on <var1657:ReduceAction828>*/;
-var1659 = NEW_parser__ReduceAction829(&type_parser__ReduceAction829);
-var1660 = 77;
-((void (*)(val*, long))(var1659->class->vft[COLOR_parser__ReduceAction__init]))(var1659, var1660) /* init on <var1659:ReduceAction829>*/;
-var1661 = NEW_parser__ReduceAction830(&type_parser__ReduceAction830);
-var1662 = 77;
-((void (*)(val*, long))(var1661->class->vft[COLOR_parser__ReduceAction__init]))(var1661, var1662) /* init on <var1661:ReduceAction830>*/;
-var1663 = NEW_parser__ReduceAction831(&type_parser__ReduceAction831);
-var1664 = 77;
-((void (*)(val*, long))(var1663->class->vft[COLOR_parser__ReduceAction__init]))(var1663, var1664) /* init on <var1663:ReduceAction831>*/;
-var1665 = NEW_parser__ReduceAction832(&type_parser__ReduceAction832);
-var1666 = 77;
-((void (*)(val*, long))(var1665->class->vft[COLOR_parser__ReduceAction__init]))(var1665, var1666) /* init on <var1665:ReduceAction832>*/;
-var1667 = NEW_parser__ReduceAction833(&type_parser__ReduceAction833);
-var1668 = 78;
-((void (*)(val*, long))(var1667->class->vft[COLOR_parser__ReduceAction__init]))(var1667, var1668) /* init on <var1667:ReduceAction833>*/;
-var1669 = NEW_parser__ReduceAction834(&type_parser__ReduceAction834);
-var1670 = 79;
-((void (*)(val*, long))(var1669->class->vft[COLOR_parser__ReduceAction__init]))(var1669, var1670) /* init on <var1669:ReduceAction834>*/;
-var1671 = NEW_parser__ReduceAction835(&type_parser__ReduceAction835);
-var1672 = 79;
-((void (*)(val*, long))(var1671->class->vft[COLOR_parser__ReduceAction__init]))(var1671, var1672) /* init on <var1671:ReduceAction835>*/;
-var1673 = NEW_parser__ReduceAction836(&type_parser__ReduceAction836);
-var1674 = 80;
-((void (*)(val*, long))(var1673->class->vft[COLOR_parser__ReduceAction__init]))(var1673, var1674) /* init on <var1673:ReduceAction836>*/;
-var1675 = NEW_parser__ReduceAction837(&type_parser__ReduceAction837);
-var1676 = 81;
-((void (*)(val*, long))(var1675->class->vft[COLOR_parser__ReduceAction__init]))(var1675, var1676) /* init on <var1675:ReduceAction837>*/;
-var1677 = NEW_parser__ReduceAction838(&type_parser__ReduceAction838);
-var1678 = 81;
-((void (*)(val*, long))(var1677->class->vft[COLOR_parser__ReduceAction__init]))(var1677, var1678) /* init on <var1677:ReduceAction838>*/;
-var1679 = NEW_parser__ReduceAction838(&type_parser__ReduceAction838);
-var1680 = 81;
-((void (*)(val*, long))(var1679->class->vft[COLOR_parser__ReduceAction__init]))(var1679, var1680) /* init on <var1679:ReduceAction838>*/;
-var1681 = NEW_parser__ReduceAction840(&type_parser__ReduceAction840);
-var1682 = 81;
-((void (*)(val*, long))(var1681->class->vft[COLOR_parser__ReduceAction__init]))(var1681, var1682) /* init on <var1681:ReduceAction840>*/;
-var1683 = NEW_parser__ReduceAction841(&type_parser__ReduceAction841);
-var1684 = 82;
-((void (*)(val*, long))(var1683->class->vft[COLOR_parser__ReduceAction__init]))(var1683, var1684) /* init on <var1683:ReduceAction841>*/;
-var1685 = NEW_parser__ReduceAction842(&type_parser__ReduceAction842);
-var1686 = 82;
-((void (*)(val*, long))(var1685->class->vft[COLOR_parser__ReduceAction__init]))(var1685, var1686) /* init on <var1685:ReduceAction842>*/;
-var1687 = NEW_parser__ReduceAction843(&type_parser__ReduceAction843);
-var1688 = 82;
-((void (*)(val*, long))(var1687->class->vft[COLOR_parser__ReduceAction__init]))(var1687, var1688) /* init on <var1687:ReduceAction843>*/;
-var1689 = NEW_parser__ReduceAction844(&type_parser__ReduceAction844);
-var1690 = 82;
-((void (*)(val*, long))(var1689->class->vft[COLOR_parser__ReduceAction__init]))(var1689, var1690) /* init on <var1689:ReduceAction844>*/;
-var1691 = NEW_parser__ReduceAction845(&type_parser__ReduceAction845);
-var1692 = 83;
-((void (*)(val*, long))(var1691->class->vft[COLOR_parser__ReduceAction__init]))(var1691, var1692) /* init on <var1691:ReduceAction845>*/;
-var1693 = NEW_parser__ReduceAction846(&type_parser__ReduceAction846);
-var1694 = 83;
-((void (*)(val*, long))(var1693->class->vft[COLOR_parser__ReduceAction__init]))(var1693, var1694) /* init on <var1693:ReduceAction846>*/;
-var1695 = NEW_parser__ReduceAction847(&type_parser__ReduceAction847);
-var1696 = 83;
-((void (*)(val*, long))(var1695->class->vft[COLOR_parser__ReduceAction__init]))(var1695, var1696) /* init on <var1695:ReduceAction847>*/;
-var1697 = NEW_parser__ReduceAction845(&type_parser__ReduceAction845);
-var1698 = 84;
-((void (*)(val*, long))(var1697->class->vft[COLOR_parser__ReduceAction__init]))(var1697, var1698) /* init on <var1697:ReduceAction845>*/;
-var1699 = NEW_parser__ReduceAction849(&type_parser__ReduceAction849);
-var1700 = 84;
-((void (*)(val*, long))(var1699->class->vft[COLOR_parser__ReduceAction__init]))(var1699, var1700) /* init on <var1699:ReduceAction849>*/;
-var1701 = NEW_parser__ReduceAction846(&type_parser__ReduceAction846);
-var1702 = 84;
-((void (*)(val*, long))(var1701->class->vft[COLOR_parser__ReduceAction__init]))(var1701, var1702) /* init on <var1701:ReduceAction846>*/;
-var1703 = NEW_parser__ReduceAction847(&type_parser__ReduceAction847);
-var1704 = 84;
-((void (*)(val*, long))(var1703->class->vft[COLOR_parser__ReduceAction__init]))(var1703, var1704) /* init on <var1703:ReduceAction847>*/;
-var1705 = NEW_parser__ReduceAction852(&type_parser__ReduceAction852);
-var1706 = 85;
-((void (*)(val*, long))(var1705->class->vft[COLOR_parser__ReduceAction__init]))(var1705, var1706) /* init on <var1705:ReduceAction852>*/;
-var1707 = NEW_parser__ReduceAction812(&type_parser__ReduceAction812);
-var1708 = 86;
-((void (*)(val*, long))(var1707->class->vft[COLOR_parser__ReduceAction__init]))(var1707, var1708) /* init on <var1707:ReduceAction812>*/;
-var1709 = NEW_parser__ReduceAction854(&type_parser__ReduceAction854);
-var1710 = 86;
-((void (*)(val*, long))(var1709->class->vft[COLOR_parser__ReduceAction__init]))(var1709, var1710) /* init on <var1709:ReduceAction854>*/;
-var1711 = NEW_parser__ReduceAction855(&type_parser__ReduceAction855);
-var1712 = 87;
-((void (*)(val*, long))(var1711->class->vft[COLOR_parser__ReduceAction__init]))(var1711, var1712) /* init on <var1711:ReduceAction855>*/;
-var1713 = NEW_parser__ReduceAction856(&type_parser__ReduceAction856);
-var1714 = 88;
-((void (*)(val*, long))(var1713->class->vft[COLOR_parser__ReduceAction__init]))(var1713, var1714) /* init on <var1713:ReduceAction856>*/;
-var1715 = NEW_parser__ReduceAction857(&type_parser__ReduceAction857);
-var1716 = 88;
-((void (*)(val*, long))(var1715->class->vft[COLOR_parser__ReduceAction__init]))(var1715, var1716) /* init on <var1715:ReduceAction857>*/;
-var1717 = NEW_parser__ReduceAction858(&type_parser__ReduceAction858);
-var1718 = 89;
-((void (*)(val*, long))(var1717->class->vft[COLOR_parser__ReduceAction__init]))(var1717, var1718) /* init on <var1717:ReduceAction858>*/;
-var1719 = NEW_parser__ReduceAction859(&type_parser__ReduceAction859);
-var1720 = 89;
-((void (*)(val*, long))(var1719->class->vft[COLOR_parser__ReduceAction__init]))(var1719, var1720) /* init on <var1719:ReduceAction859>*/;
-var1721 = NEW_parser__ReduceAction860(&type_parser__ReduceAction860);
-var1722 = 89;
-((void (*)(val*, long))(var1721->class->vft[COLOR_parser__ReduceAction__init]))(var1721, var1722) /* init on <var1721:ReduceAction860>*/;
-var1723 = NEW_parser__ReduceAction861(&type_parser__ReduceAction861);
-var1724 = 89;
-((void (*)(val*, long))(var1723->class->vft[COLOR_parser__ReduceAction__init]))(var1723, var1724) /* init on <var1723:ReduceAction861>*/;
-var1725 = NEW_parser__ReduceAction862(&type_parser__ReduceAction862);
-var1726 = 90;
-((void (*)(val*, long))(var1725->class->vft[COLOR_parser__ReduceAction__init]))(var1725, var1726) /* init on <var1725:ReduceAction862>*/;
-var1727 = NEW_parser__ReduceAction863(&type_parser__ReduceAction863);
-var1728 = 91;
-((void (*)(val*, long))(var1727->class->vft[COLOR_parser__ReduceAction__init]))(var1727, var1728) /* init on <var1727:ReduceAction863>*/;
-var1729 = NEW_parser__ReduceAction864(&type_parser__ReduceAction864);
-var1730 = 92;
-((void (*)(val*, long))(var1729->class->vft[COLOR_parser__ReduceAction__init]))(var1729, var1730) /* init on <var1729:ReduceAction864>*/;
-var1731 = NEW_parser__ReduceAction864(&type_parser__ReduceAction864);
-var1732 = 92;
-((void (*)(val*, long))(var1731->class->vft[COLOR_parser__ReduceAction__init]))(var1731, var1732) /* init on <var1731:ReduceAction864>*/;
-var1733 = NEW_parser__ReduceAction866(&type_parser__ReduceAction866);
-var1734 = 93;
-((void (*)(val*, long))(var1733->class->vft[COLOR_parser__ReduceAction__init]))(var1733, var1734) /* init on <var1733:ReduceAction866>*/;
-var1735 = NEW_parser__ReduceAction867(&type_parser__ReduceAction867);
-var1736 = 93;
-((void (*)(val*, long))(var1735->class->vft[COLOR_parser__ReduceAction__init]))(var1735, var1736) /* init on <var1735:ReduceAction867>*/;
-var1737 = NEW_parser__ReduceAction70(&type_parser__ReduceAction70);
-var1738 = 93;
-((void (*)(val*, long))(var1737->class->vft[COLOR_parser__ReduceAction__init]))(var1737, var1738) /* init on <var1737:ReduceAction70>*/;
-var1739 = NEW_parser__ReduceAction869(&type_parser__ReduceAction869);
-var1740 = 94;
-((void (*)(val*, long))(var1739->class->vft[COLOR_parser__ReduceAction__init]))(var1739, var1740) /* init on <var1739:ReduceAction869>*/;
-var1741 = NEW_parser__ReduceAction870(&type_parser__ReduceAction870);
-var1742 = 94;
-((void (*)(val*, long))(var1741->class->vft[COLOR_parser__ReduceAction__init]))(var1741, var1742) /* init on <var1741:ReduceAction870>*/;
-var1743 = NEW_parser__ReduceAction871(&type_parser__ReduceAction871);
-var1744 = 95;
-((void (*)(val*, long))(var1743->class->vft[COLOR_parser__ReduceAction__init]))(var1743, var1744) /* init on <var1743:ReduceAction871>*/;
-var1745 = NEW_parser__ReduceAction872(&type_parser__ReduceAction872);
-var1746 = 95;
-((void (*)(val*, long))(var1745->class->vft[COLOR_parser__ReduceAction__init]))(var1745, var1746) /* init on <var1745:ReduceAction872>*/;
-var1747 = NEW_parser__ReduceAction864(&type_parser__ReduceAction864);
-var1748 = 95;
-((void (*)(val*, long))(var1747->class->vft[COLOR_parser__ReduceAction__init]))(var1747, var1748) /* init on <var1747:ReduceAction864>*/;
-var1749 = NEW_parser__ReduceAction344(&type_parser__ReduceAction344);
-var1750 = 96;
-((void (*)(val*, long))(var1749->class->vft[COLOR_parser__ReduceAction__init]))(var1749, var1750) /* init on <var1749:ReduceAction344>*/;
-var1751 = NEW_parser__ReduceAction345(&type_parser__ReduceAction345);
-var1752 = 97;
-((void (*)(val*, long))(var1751->class->vft[COLOR_parser__ReduceAction__init]))(var1751, var1752) /* init on <var1751:ReduceAction345>*/;
-var1753 = NEW_parser__ReduceAction346(&type_parser__ReduceAction346);
-var1754 = 97;
-((void (*)(val*, long))(var1753->class->vft[COLOR_parser__ReduceAction__init]))(var1753, var1754) /* init on <var1753:ReduceAction346>*/;
-var1755 = NEW_parser__ReduceAction347(&type_parser__ReduceAction347);
-var1756 = 97;
-((void (*)(val*, long))(var1755->class->vft[COLOR_parser__ReduceAction__init]))(var1755, var1756) /* init on <var1755:ReduceAction347>*/;
-var1757 = NEW_parser__ReduceAction348(&type_parser__ReduceAction348);
-var1758 = 97;
-((void (*)(val*, long))(var1757->class->vft[COLOR_parser__ReduceAction__init]))(var1757, var1758) /* init on <var1757:ReduceAction348>*/;
-var1759 = NEW_parser__ReduceAction349(&type_parser__ReduceAction349);
-var1760 = 97;
-((void (*)(val*, long))(var1759->class->vft[COLOR_parser__ReduceAction__init]))(var1759, var1760) /* init on <var1759:ReduceAction349>*/;
-var1761 = NEW_parser__ReduceAction350(&type_parser__ReduceAction350);
-var1762 = 97;
-((void (*)(val*, long))(var1761->class->vft[COLOR_parser__ReduceAction__init]))(var1761, var1762) /* init on <var1761:ReduceAction350>*/;
-var1763 = NEW_parser__ReduceAction351(&type_parser__ReduceAction351);
-var1764 = 97;
-((void (*)(val*, long))(var1763->class->vft[COLOR_parser__ReduceAction__init]))(var1763, var1764) /* init on <var1763:ReduceAction351>*/;
-var1765 = NEW_parser__ReduceAction352(&type_parser__ReduceAction352);
-var1766 = 97;
-((void (*)(val*, long))(var1765->class->vft[COLOR_parser__ReduceAction__init]))(var1765, var1766) /* init on <var1765:ReduceAction352>*/;
-var1767 = NEW_parser__ReduceAction353(&type_parser__ReduceAction353);
-var1768 = 97;
-((void (*)(val*, long))(var1767->class->vft[COLOR_parser__ReduceAction__init]))(var1767, var1768) /* init on <var1767:ReduceAction353>*/;
-var1769 = NEW_parser__ReduceAction354(&type_parser__ReduceAction354);
-var1770 = 97;
-((void (*)(val*, long))(var1769->class->vft[COLOR_parser__ReduceAction__init]))(var1769, var1770) /* init on <var1769:ReduceAction354>*/;
-var1771 = NEW_parser__ReduceAction355(&type_parser__ReduceAction355);
-var1772 = 97;
-((void (*)(val*, long))(var1771->class->vft[COLOR_parser__ReduceAction__init]))(var1771, var1772) /* init on <var1771:ReduceAction355>*/;
-var1773 = NEW_parser__ReduceAction356(&type_parser__ReduceAction356);
-var1774 = 97;
-((void (*)(val*, long))(var1773->class->vft[COLOR_parser__ReduceAction__init]))(var1773, var1774) /* init on <var1773:ReduceAction356>*/;
-var1775 = NEW_parser__ReduceAction361(&type_parser__ReduceAction361);
-var1776 = 97;
-((void (*)(val*, long))(var1775->class->vft[COLOR_parser__ReduceAction__init]))(var1775, var1776) /* init on <var1775:ReduceAction361>*/;
-var1777 = NEW_parser__ReduceAction362(&type_parser__ReduceAction362);
-var1778 = 97;
-((void (*)(val*, long))(var1777->class->vft[COLOR_parser__ReduceAction__init]))(var1777, var1778) /* init on <var1777:ReduceAction362>*/;
-var1779 = NEW_parser__ReduceAction363(&type_parser__ReduceAction363);
-var1780 = 97;
-((void (*)(val*, long))(var1779->class->vft[COLOR_parser__ReduceAction__init]))(var1779, var1780) /* init on <var1779:ReduceAction363>*/;
-var1781 = NEW_parser__ReduceAction364(&type_parser__ReduceAction364);
-var1782 = 97;
-((void (*)(val*, long))(var1781->class->vft[COLOR_parser__ReduceAction__init]))(var1781, var1782) /* init on <var1781:ReduceAction364>*/;
-var1783 = NEW_parser__ReduceAction365(&type_parser__ReduceAction365);
-var1784 = 97;
-((void (*)(val*, long))(var1783->class->vft[COLOR_parser__ReduceAction__init]))(var1783, var1784) /* init on <var1783:ReduceAction365>*/;
-var1785 = NEW_parser__ReduceAction366(&type_parser__ReduceAction366);
-var1786 = 97;
-((void (*)(val*, long))(var1785->class->vft[COLOR_parser__ReduceAction__init]))(var1785, var1786) /* init on <var1785:ReduceAction366>*/;
-var1787 = NEW_parser__ReduceAction367(&type_parser__ReduceAction367);
-var1788 = 97;
-((void (*)(val*, long))(var1787->class->vft[COLOR_parser__ReduceAction__init]))(var1787, var1788) /* init on <var1787:ReduceAction367>*/;
-var1789 = NEW_parser__ReduceAction368(&type_parser__ReduceAction368);
-var1790 = 97;
-((void (*)(val*, long))(var1789->class->vft[COLOR_parser__ReduceAction__init]))(var1789, var1790) /* init on <var1789:ReduceAction368>*/;
-var1791 = NEW_parser__ReduceAction369(&type_parser__ReduceAction369);
-var1792 = 97;
-((void (*)(val*, long))(var1791->class->vft[COLOR_parser__ReduceAction__init]))(var1791, var1792) /* init on <var1791:ReduceAction369>*/;
-var1793 = NEW_parser__ReduceAction370(&type_parser__ReduceAction370);
-var1794 = 97;
-((void (*)(val*, long))(var1793->class->vft[COLOR_parser__ReduceAction__init]))(var1793, var1794) /* init on <var1793:ReduceAction370>*/;
-var1795 = NEW_parser__ReduceAction371(&type_parser__ReduceAction371);
-var1796 = 97;
-((void (*)(val*, long))(var1795->class->vft[COLOR_parser__ReduceAction__init]))(var1795, var1796) /* init on <var1795:ReduceAction371>*/;
-var1797 = NEW_parser__ReduceAction372(&type_parser__ReduceAction372);
-var1798 = 97;
-((void (*)(val*, long))(var1797->class->vft[COLOR_parser__ReduceAction__init]))(var1797, var1798) /* init on <var1797:ReduceAction372>*/;
-var1799 = NEW_parser__ReduceAction373(&type_parser__ReduceAction373);
-var1800 = 97;
-((void (*)(val*, long))(var1799->class->vft[COLOR_parser__ReduceAction__init]))(var1799, var1800) /* init on <var1799:ReduceAction373>*/;
-var1801 = NEW_parser__ReduceAction374(&type_parser__ReduceAction374);
-var1802 = 97;
-((void (*)(val*, long))(var1801->class->vft[COLOR_parser__ReduceAction__init]))(var1801, var1802) /* init on <var1801:ReduceAction374>*/;
-var1803 = NEW_parser__ReduceAction375(&type_parser__ReduceAction375);
-var1804 = 97;
-((void (*)(val*, long))(var1803->class->vft[COLOR_parser__ReduceAction__init]))(var1803, var1804) /* init on <var1803:ReduceAction375>*/;
-var1805 = NEW_parser__ReduceAction376(&type_parser__ReduceAction376);
-var1806 = 97;
-((void (*)(val*, long))(var1805->class->vft[COLOR_parser__ReduceAction__init]))(var1805, var1806) /* init on <var1805:ReduceAction376>*/;
-var1807 = NEW_parser__ReduceAction377(&type_parser__ReduceAction377);
-var1808 = 97;
-((void (*)(val*, long))(var1807->class->vft[COLOR_parser__ReduceAction__init]))(var1807, var1808) /* init on <var1807:ReduceAction377>*/;
-var1809 = NEW_parser__ReduceAction378(&type_parser__ReduceAction378);
-var1810 = 97;
-((void (*)(val*, long))(var1809->class->vft[COLOR_parser__ReduceAction__init]))(var1809, var1810) /* init on <var1809:ReduceAction378>*/;
-var1811 = NEW_parser__ReduceAction379(&type_parser__ReduceAction379);
-var1812 = 97;
-((void (*)(val*, long))(var1811->class->vft[COLOR_parser__ReduceAction__init]))(var1811, var1812) /* init on <var1811:ReduceAction379>*/;
-var1813 = NEW_parser__ReduceAction380(&type_parser__ReduceAction380);
-var1814 = 97;
-((void (*)(val*, long))(var1813->class->vft[COLOR_parser__ReduceAction__init]))(var1813, var1814) /* init on <var1813:ReduceAction380>*/;
-var1815 = NEW_parser__ReduceAction545(&type_parser__ReduceAction545);
-var1816 = 98;
-((void (*)(val*, long))(var1815->class->vft[COLOR_parser__ReduceAction__init]))(var1815, var1816) /* init on <var1815:ReduceAction545>*/;
-var1817 = NEW_parser__ReduceAction546(&type_parser__ReduceAction546);
-var1818 = 98;
-((void (*)(val*, long))(var1817->class->vft[COLOR_parser__ReduceAction__init]))(var1817, var1818) /* init on <var1817:ReduceAction546>*/;
-var1819 = NEW_parser__ReduceAction549(&type_parser__ReduceAction549);
-var1820 = 98;
-((void (*)(val*, long))(var1819->class->vft[COLOR_parser__ReduceAction__init]))(var1819, var1820) /* init on <var1819:ReduceAction549>*/;
-var1821 = NEW_parser__ReduceAction581(&type_parser__ReduceAction581);
-var1822 = 99;
-((void (*)(val*, long))(var1821->class->vft[COLOR_parser__ReduceAction__init]))(var1821, var1822) /* init on <var1821:ReduceAction581>*/;
-var1823 = NEW_parser__ReduceAction582(&type_parser__ReduceAction582);
-var1824 = 99;
-((void (*)(val*, long))(var1823->class->vft[COLOR_parser__ReduceAction__init]))(var1823, var1824) /* init on <var1823:ReduceAction582>*/;
-var1825 = NEW_parser__ReduceAction583(&type_parser__ReduceAction583);
-var1826 = 99;
-((void (*)(val*, long))(var1825->class->vft[COLOR_parser__ReduceAction__init]))(var1825, var1826) /* init on <var1825:ReduceAction583>*/;
-var1827 = NEW_parser__ReduceAction584(&type_parser__ReduceAction584);
-var1828 = 99;
-((void (*)(val*, long))(var1827->class->vft[COLOR_parser__ReduceAction__init]))(var1827, var1828) /* init on <var1827:ReduceAction584>*/;
-var1829 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1830 = 100;
-((void (*)(val*, long))(var1829->class->vft[COLOR_parser__ReduceAction__init]))(var1829, var1830) /* init on <var1829:ReduceAction596>*/;
-var1831 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1832 = 101;
-((void (*)(val*, long))(var1831->class->vft[COLOR_parser__ReduceAction__init]))(var1831, var1832) /* init on <var1831:ReduceAction596>*/;
-var1833 = NEW_parser__ReduceAction714(&type_parser__ReduceAction714);
-var1834 = 101;
-((void (*)(val*, long))(var1833->class->vft[COLOR_parser__ReduceAction__init]))(var1833, var1834) /* init on <var1833:ReduceAction714>*/;
-var1835 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1836 = 102;
-((void (*)(val*, long))(var1835->class->vft[COLOR_parser__ReduceAction__init]))(var1835, var1836) /* init on <var1835:ReduceAction596>*/;
-var1837 = NEW_parser__ReduceAction716(&type_parser__ReduceAction716);
-var1838 = 102;
-((void (*)(val*, long))(var1837->class->vft[COLOR_parser__ReduceAction__init]))(var1837, var1838) /* init on <var1837:ReduceAction716>*/;
-var1839 = NEW_parser__ReduceAction717(&type_parser__ReduceAction717);
-var1840 = 102;
-((void (*)(val*, long))(var1839->class->vft[COLOR_parser__ReduceAction__init]))(var1839, var1840) /* init on <var1839:ReduceAction717>*/;
-var1841 = NEW_parser__ReduceAction718(&type_parser__ReduceAction718);
-var1842 = 102;
-((void (*)(val*, long))(var1841->class->vft[COLOR_parser__ReduceAction__init]))(var1841, var1842) /* init on <var1841:ReduceAction718>*/;
-var1843 = NEW_parser__ReduceAction719(&type_parser__ReduceAction719);
-var1844 = 102;
-((void (*)(val*, long))(var1843->class->vft[COLOR_parser__ReduceAction__init]))(var1843, var1844) /* init on <var1843:ReduceAction719>*/;
-var1845 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1846 = 103;
-((void (*)(val*, long))(var1845->class->vft[COLOR_parser__ReduceAction__init]))(var1845, var1846) /* init on <var1845:ReduceAction596>*/;
-var1847 = NEW_parser__ReduceAction721(&type_parser__ReduceAction721);
-var1848 = 103;
-((void (*)(val*, long))(var1847->class->vft[COLOR_parser__ReduceAction__init]))(var1847, var1848) /* init on <var1847:ReduceAction721>*/;
-var1849 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1850 = 104;
-((void (*)(val*, long))(var1849->class->vft[COLOR_parser__ReduceAction__init]))(var1849, var1850) /* init on <var1849:ReduceAction596>*/;
-var1851 = NEW_parser__ReduceAction723(&type_parser__ReduceAction723);
-var1852 = 104;
-((void (*)(val*, long))(var1851->class->vft[COLOR_parser__ReduceAction__init]))(var1851, var1852) /* init on <var1851:ReduceAction723>*/;
-var1853 = NEW_parser__ReduceAction724(&type_parser__ReduceAction724);
-var1854 = 104;
-((void (*)(val*, long))(var1853->class->vft[COLOR_parser__ReduceAction__init]))(var1853, var1854) /* init on <var1853:ReduceAction724>*/;
-var1855 = NEW_parser__ReduceAction725(&type_parser__ReduceAction725);
-var1856 = 104;
-((void (*)(val*, long))(var1855->class->vft[COLOR_parser__ReduceAction__init]))(var1855, var1856) /* init on <var1855:ReduceAction725>*/;
-var1857 = NEW_parser__ReduceAction726(&type_parser__ReduceAction726);
-var1858 = 104;
-((void (*)(val*, long))(var1857->class->vft[COLOR_parser__ReduceAction__init]))(var1857, var1858) /* init on <var1857:ReduceAction726>*/;
-var1859 = NEW_parser__ReduceAction727(&type_parser__ReduceAction727);
-var1860 = 104;
-((void (*)(val*, long))(var1859->class->vft[COLOR_parser__ReduceAction__init]))(var1859, var1860) /* init on <var1859:ReduceAction727>*/;
-var1861 = NEW_parser__ReduceAction728(&type_parser__ReduceAction728);
-var1862 = 104;
-((void (*)(val*, long))(var1861->class->vft[COLOR_parser__ReduceAction__init]))(var1861, var1862) /* init on <var1861:ReduceAction728>*/;
-var1863 = NEW_parser__ReduceAction729(&type_parser__ReduceAction729);
-var1864 = 104;
-((void (*)(val*, long))(var1863->class->vft[COLOR_parser__ReduceAction__init]))(var1863, var1864) /* init on <var1863:ReduceAction729>*/;
-var1865 = NEW_parser__ReduceAction730(&type_parser__ReduceAction730);
-var1866 = 104;
-((void (*)(val*, long))(var1865->class->vft[COLOR_parser__ReduceAction__init]))(var1865, var1866) /* init on <var1865:ReduceAction730>*/;
-var1867 = NEW_parser__ReduceAction731(&type_parser__ReduceAction731);
-var1868 = 104;
-((void (*)(val*, long))(var1867->class->vft[COLOR_parser__ReduceAction__init]))(var1867, var1868) /* init on <var1867:ReduceAction731>*/;
-var1869 = NEW_parser__ReduceAction732(&type_parser__ReduceAction732);
-var1870 = 104;
-((void (*)(val*, long))(var1869->class->vft[COLOR_parser__ReduceAction__init]))(var1869, var1870) /* init on <var1869:ReduceAction732>*/;
-var1871 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1872 = 105;
-((void (*)(val*, long))(var1871->class->vft[COLOR_parser__ReduceAction__init]))(var1871, var1872) /* init on <var1871:ReduceAction596>*/;
-var1873 = NEW_parser__ReduceAction734(&type_parser__ReduceAction734);
-var1874 = 105;
-((void (*)(val*, long))(var1873->class->vft[COLOR_parser__ReduceAction__init]))(var1873, var1874) /* init on <var1873:ReduceAction734>*/;
-var1875 = NEW_parser__ReduceAction735(&type_parser__ReduceAction735);
-var1876 = 105;
-((void (*)(val*, long))(var1875->class->vft[COLOR_parser__ReduceAction__init]))(var1875, var1876) /* init on <var1875:ReduceAction735>*/;
-var1877 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1878 = 106;
-((void (*)(val*, long))(var1877->class->vft[COLOR_parser__ReduceAction__init]))(var1877, var1878) /* init on <var1877:ReduceAction596>*/;
-var1879 = NEW_parser__ReduceAction737(&type_parser__ReduceAction737);
-var1880 = 106;
-((void (*)(val*, long))(var1879->class->vft[COLOR_parser__ReduceAction__init]))(var1879, var1880) /* init on <var1879:ReduceAction737>*/;
-var1881 = NEW_parser__ReduceAction738(&type_parser__ReduceAction738);
-var1882 = 106;
-((void (*)(val*, long))(var1881->class->vft[COLOR_parser__ReduceAction__init]))(var1881, var1882) /* init on <var1881:ReduceAction738>*/;
-var1883 = NEW_parser__ReduceAction739(&type_parser__ReduceAction739);
-var1884 = 106;
-((void (*)(val*, long))(var1883->class->vft[COLOR_parser__ReduceAction__init]))(var1883, var1884) /* init on <var1883:ReduceAction739>*/;
-var1885 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1886 = 107;
-((void (*)(val*, long))(var1885->class->vft[COLOR_parser__ReduceAction__init]))(var1885, var1886) /* init on <var1885:ReduceAction596>*/;
-var1887 = NEW_parser__ReduceAction741(&type_parser__ReduceAction741);
-var1888 = 107;
-((void (*)(val*, long))(var1887->class->vft[COLOR_parser__ReduceAction__init]))(var1887, var1888) /* init on <var1887:ReduceAction741>*/;
-var1889 = NEW_parser__ReduceAction742(&type_parser__ReduceAction742);
-var1890 = 107;
-((void (*)(val*, long))(var1889->class->vft[COLOR_parser__ReduceAction__init]))(var1889, var1890) /* init on <var1889:ReduceAction742>*/;
-var1891 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1892 = 108;
-((void (*)(val*, long))(var1891->class->vft[COLOR_parser__ReduceAction__init]))(var1891, var1892) /* init on <var1891:ReduceAction596>*/;
-var1893 = NEW_parser__ReduceAction744(&type_parser__ReduceAction744);
-var1894 = 108;
-((void (*)(val*, long))(var1893->class->vft[COLOR_parser__ReduceAction__init]))(var1893, var1894) /* init on <var1893:ReduceAction744>*/;
-var1895 = NEW_parser__ReduceAction745(&type_parser__ReduceAction745);
-var1896 = 108;
-((void (*)(val*, long))(var1895->class->vft[COLOR_parser__ReduceAction__init]))(var1895, var1896) /* init on <var1895:ReduceAction745>*/;
-var1897 = NEW_parser__ReduceAction746(&type_parser__ReduceAction746);
-var1898 = 108;
-((void (*)(val*, long))(var1897->class->vft[COLOR_parser__ReduceAction__init]))(var1897, var1898) /* init on <var1897:ReduceAction746>*/;
-var1899 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var1900 = 108;
-((void (*)(val*, long))(var1899->class->vft[COLOR_parser__ReduceAction__init]))(var1899, var1900) /* init on <var1899:ReduceAction747>*/;
-var1901 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var1902 = 108;
-((void (*)(val*, long))(var1901->class->vft[COLOR_parser__ReduceAction__init]))(var1901, var1902) /* init on <var1901:ReduceAction750>*/;
-var1903 = NEW_parser__ReduceAction748(&type_parser__ReduceAction748);
-var1904 = 108;
-((void (*)(val*, long))(var1903->class->vft[COLOR_parser__ReduceAction__init]))(var1903, var1904) /* init on <var1903:ReduceAction748>*/;
-var1905 = NEW_parser__ReduceAction751(&type_parser__ReduceAction751);
-var1906 = 108;
-((void (*)(val*, long))(var1905->class->vft[COLOR_parser__ReduceAction__init]))(var1905, var1906) /* init on <var1905:ReduceAction751>*/;
-var1907 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var1908 = 108;
-((void (*)(val*, long))(var1907->class->vft[COLOR_parser__ReduceAction__init]))(var1907, var1908) /* init on <var1907:ReduceAction747>*/;
-var1909 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var1910 = 108;
-((void (*)(val*, long))(var1909->class->vft[COLOR_parser__ReduceAction__init]))(var1909, var1910) /* init on <var1909:ReduceAction750>*/;
-var1911 = NEW_parser__ReduceAction753(&type_parser__ReduceAction753);
-var1912 = 109;
-((void (*)(val*, long))(var1911->class->vft[COLOR_parser__ReduceAction__init]))(var1911, var1912) /* init on <var1911:ReduceAction753>*/;
-var1913 = NEW_parser__ReduceAction754(&type_parser__ReduceAction754);
-var1914 = 109;
-((void (*)(val*, long))(var1913->class->vft[COLOR_parser__ReduceAction__init]))(var1913, var1914) /* init on <var1913:ReduceAction754>*/;
-var1915 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var1916 = 109;
-((void (*)(val*, long))(var1915->class->vft[COLOR_parser__ReduceAction__init]))(var1915, var1916) /* init on <var1915:ReduceAction755>*/;
-var1917 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var1918 = 109;
-((void (*)(val*, long))(var1917->class->vft[COLOR_parser__ReduceAction__init]))(var1917, var1918) /* init on <var1917:ReduceAction758>*/;
-var1919 = NEW_parser__ReduceAction756(&type_parser__ReduceAction756);
-var1920 = 109;
-((void (*)(val*, long))(var1919->class->vft[COLOR_parser__ReduceAction__init]))(var1919, var1920) /* init on <var1919:ReduceAction756>*/;
-var1921 = NEW_parser__ReduceAction759(&type_parser__ReduceAction759);
-var1922 = 109;
-((void (*)(val*, long))(var1921->class->vft[COLOR_parser__ReduceAction__init]))(var1921, var1922) /* init on <var1921:ReduceAction759>*/;
-var1923 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var1924 = 109;
-((void (*)(val*, long))(var1923->class->vft[COLOR_parser__ReduceAction__init]))(var1923, var1924) /* init on <var1923:ReduceAction755>*/;
-var1925 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var1926 = 109;
-((void (*)(val*, long))(var1925->class->vft[COLOR_parser__ReduceAction__init]))(var1925, var1926) /* init on <var1925:ReduceAction758>*/;
-var1927 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var1928 = 109;
-((void (*)(val*, long))(var1927->class->vft[COLOR_parser__ReduceAction__init]))(var1927, var1928) /* init on <var1927:ReduceAction623>*/;
-var1929 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var1930 = 109;
-((void (*)(val*, long))(var1929->class->vft[COLOR_parser__ReduceAction__init]))(var1929, var1930) /* init on <var1929:ReduceAction624>*/;
-var1931 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1932 = 109;
-((void (*)(val*, long))(var1931->class->vft[COLOR_parser__ReduceAction__init]))(var1931, var1932) /* init on <var1931:ReduceAction625>*/;
-var1933 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1934 = 109;
-((void (*)(val*, long))(var1933->class->vft[COLOR_parser__ReduceAction__init]))(var1933, var1934) /* init on <var1933:ReduceAction628>*/;
-var1935 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var1936 = 109;
-((void (*)(val*, long))(var1935->class->vft[COLOR_parser__ReduceAction__init]))(var1935, var1936) /* init on <var1935:ReduceAction626>*/;
-var1937 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var1938 = 109;
-((void (*)(val*, long))(var1937->class->vft[COLOR_parser__ReduceAction__init]))(var1937, var1938) /* init on <var1937:ReduceAction629>*/;
-var1939 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var1940 = 109;
-((void (*)(val*, long))(var1939->class->vft[COLOR_parser__ReduceAction__init]))(var1939, var1940) /* init on <var1939:ReduceAction625>*/;
-var1941 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var1942 = 109;
-((void (*)(val*, long))(var1941->class->vft[COLOR_parser__ReduceAction__init]))(var1941, var1942) /* init on <var1941:ReduceAction628>*/;
-var1943 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var1944 = 109;
-((void (*)(val*, long))(var1943->class->vft[COLOR_parser__ReduceAction__init]))(var1943, var1944) /* init on <var1943:ReduceAction631>*/;
-var1945 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var1946 = 109;
-((void (*)(val*, long))(var1945->class->vft[COLOR_parser__ReduceAction__init]))(var1945, var1946) /* init on <var1945:ReduceAction632>*/;
-var1947 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var1948 = 109;
-((void (*)(val*, long))(var1947->class->vft[COLOR_parser__ReduceAction__init]))(var1947, var1948) /* init on <var1947:ReduceAction633>*/;
-var1949 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var1950 = 109;
-((void (*)(val*, long))(var1949->class->vft[COLOR_parser__ReduceAction__init]))(var1949, var1950) /* init on <var1949:ReduceAction634>*/;
-var1951 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var1952 = 109;
-((void (*)(val*, long))(var1951->class->vft[COLOR_parser__ReduceAction__init]))(var1951, var1952) /* init on <var1951:ReduceAction635>*/;
-var1953 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var1954 = 109;
-((void (*)(val*, long))(var1953->class->vft[COLOR_parser__ReduceAction__init]))(var1953, var1954) /* init on <var1953:ReduceAction636>*/;
-var1955 = NEW_parser__ReduceAction776(&type_parser__ReduceAction776);
-var1956 = 109;
-((void (*)(val*, long))(var1955->class->vft[COLOR_parser__ReduceAction__init]))(var1955, var1956) /* init on <var1955:ReduceAction776>*/;
-var1957 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var1958 = 109;
-((void (*)(val*, long))(var1957->class->vft[COLOR_parser__ReduceAction__init]))(var1957, var1958) /* init on <var1957:ReduceAction777>*/;
-var1959 = NEW_parser__ReduceAction778(&type_parser__ReduceAction778);
-var1960 = 109;
-((void (*)(val*, long))(var1959->class->vft[COLOR_parser__ReduceAction__init]))(var1959, var1960) /* init on <var1959:ReduceAction778>*/;
-var1961 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var1962 = 109;
-((void (*)(val*, long))(var1961->class->vft[COLOR_parser__ReduceAction__init]))(var1961, var1962) /* init on <var1961:ReduceAction777>*/;
-var1963 = NEW_parser__ReduceAction786(&type_parser__ReduceAction786);
-var1964 = 109;
-((void (*)(val*, long))(var1963->class->vft[COLOR_parser__ReduceAction__init]))(var1963, var1964) /* init on <var1963:ReduceAction786>*/;
-var1965 = NEW_parser__ReduceAction787(&type_parser__ReduceAction787);
-var1966 = 109;
-((void (*)(val*, long))(var1965->class->vft[COLOR_parser__ReduceAction__init]))(var1965, var1966) /* init on <var1965:ReduceAction787>*/;
-var1967 = NEW_parser__ReduceAction788(&type_parser__ReduceAction788);
-var1968 = 109;
-((void (*)(val*, long))(var1967->class->vft[COLOR_parser__ReduceAction__init]))(var1967, var1968) /* init on <var1967:ReduceAction788>*/;
-var1969 = NEW_parser__ReduceAction789(&type_parser__ReduceAction789);
-var1970 = 109;
-((void (*)(val*, long))(var1969->class->vft[COLOR_parser__ReduceAction__init]))(var1969, var1970) /* init on <var1969:ReduceAction789>*/;
-var1971 = NEW_parser__ReduceAction790(&type_parser__ReduceAction790);
-var1972 = 109;
-((void (*)(val*, long))(var1971->class->vft[COLOR_parser__ReduceAction__init]))(var1971, var1972) /* init on <var1971:ReduceAction790>*/;
-var1973 = NEW_parser__ReduceAction791(&type_parser__ReduceAction791);
-var1974 = 109;
-((void (*)(val*, long))(var1973->class->vft[COLOR_parser__ReduceAction__init]))(var1973, var1974) /* init on <var1973:ReduceAction791>*/;
-var1975 = NEW_parser__ReduceAction792(&type_parser__ReduceAction792);
-var1976 = 109;
-((void (*)(val*, long))(var1975->class->vft[COLOR_parser__ReduceAction__init]))(var1975, var1976) /* init on <var1975:ReduceAction792>*/;
-var1977 = NEW_parser__ReduceAction793(&type_parser__ReduceAction793);
-var1978 = 109;
-((void (*)(val*, long))(var1977->class->vft[COLOR_parser__ReduceAction__init]))(var1977, var1978) /* init on <var1977:ReduceAction793>*/;
-var1979 = NEW_parser__ReduceAction794(&type_parser__ReduceAction794);
-var1980 = 109;
-((void (*)(val*, long))(var1979->class->vft[COLOR_parser__ReduceAction__init]))(var1979, var1980) /* init on <var1979:ReduceAction794>*/;
-var1981 = NEW_parser__ReduceAction795(&type_parser__ReduceAction795);
-var1982 = 109;
-((void (*)(val*, long))(var1981->class->vft[COLOR_parser__ReduceAction__init]))(var1981, var1982) /* init on <var1981:ReduceAction795>*/;
-var1983 = NEW_parser__ReduceAction796(&type_parser__ReduceAction796);
-var1984 = 109;
-((void (*)(val*, long))(var1983->class->vft[COLOR_parser__ReduceAction__init]))(var1983, var1984) /* init on <var1983:ReduceAction796>*/;
-var1985 = NEW_parser__ReduceAction797(&type_parser__ReduceAction797);
-var1986 = 109;
-((void (*)(val*, long))(var1985->class->vft[COLOR_parser__ReduceAction__init]))(var1985, var1986) /* init on <var1985:ReduceAction797>*/;
-var1987 = NEW_parser__ReduceAction798(&type_parser__ReduceAction798);
-var1988 = 109;
-((void (*)(val*, long))(var1987->class->vft[COLOR_parser__ReduceAction__init]))(var1987, var1988) /* init on <var1987:ReduceAction798>*/;
-var1989 = NEW_parser__ReduceAction799(&type_parser__ReduceAction799);
-var1990 = 109;
-((void (*)(val*, long))(var1989->class->vft[COLOR_parser__ReduceAction__init]))(var1989, var1990) /* init on <var1989:ReduceAction799>*/;
-var1991 = NEW_parser__ReduceAction800(&type_parser__ReduceAction800);
-var1992 = 109;
-((void (*)(val*, long))(var1991->class->vft[COLOR_parser__ReduceAction__init]))(var1991, var1992) /* init on <var1991:ReduceAction800>*/;
-var1993 = NEW_parser__ReduceAction801(&type_parser__ReduceAction801);
-var1994 = 109;
-((void (*)(val*, long))(var1993->class->vft[COLOR_parser__ReduceAction__init]))(var1993, var1994) /* init on <var1993:ReduceAction801>*/;
-var1995 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var1996 = 109;
-((void (*)(val*, long))(var1995->class->vft[COLOR_parser__ReduceAction__init]))(var1995, var1996) /* init on <var1995:ReduceAction596>*/;
-var1997 = NEW_parser__ReduceAction803(&type_parser__ReduceAction803);
-var1998 = 109;
-((void (*)(val*, long))(var1997->class->vft[COLOR_parser__ReduceAction__init]))(var1997, var1998) /* init on <var1997:ReduceAction803>*/;
-var1999 = NEW_parser__ReduceAction804(&type_parser__ReduceAction804);
-var2000 = 109;
-((void (*)(val*, long))(var1999->class->vft[COLOR_parser__ReduceAction__init]))(var1999, var2000) /* init on <var1999:ReduceAction804>*/;
-var2001 = NEW_parser__ReduceAction805(&type_parser__ReduceAction805);
-var2002 = 109;
-((void (*)(val*, long))(var2001->class->vft[COLOR_parser__ReduceAction__init]))(var2001, var2002) /* init on <var2001:ReduceAction805>*/;
-var2003 = NEW_parser__ReduceAction806(&type_parser__ReduceAction806);
-var2004 = 109;
-((void (*)(val*, long))(var2003->class->vft[COLOR_parser__ReduceAction__init]))(var2003, var2004) /* init on <var2003:ReduceAction806>*/;
-var2005 = NEW_parser__ReduceAction581(&type_parser__ReduceAction581);
-var2006 = 110;
-((void (*)(val*, long))(var2005->class->vft[COLOR_parser__ReduceAction__init]))(var2005, var2006) /* init on <var2005:ReduceAction581>*/;
-var2007 = NEW_parser__ReduceAction582(&type_parser__ReduceAction582);
-var2008 = 110;
-((void (*)(val*, long))(var2007->class->vft[COLOR_parser__ReduceAction__init]))(var2007, var2008) /* init on <var2007:ReduceAction582>*/;
-var2009 = NEW_parser__ReduceAction583(&type_parser__ReduceAction583);
-var2010 = 110;
-((void (*)(val*, long))(var2009->class->vft[COLOR_parser__ReduceAction__init]))(var2009, var2010) /* init on <var2009:ReduceAction583>*/;
-var2011 = NEW_parser__ReduceAction584(&type_parser__ReduceAction584);
-var2012 = 110;
-((void (*)(val*, long))(var2011->class->vft[COLOR_parser__ReduceAction__init]))(var2011, var2012) /* init on <var2011:ReduceAction584>*/;
-var2013 = NEW_parser__ReduceAction585(&type_parser__ReduceAction585);
-var2014 = 110;
-((void (*)(val*, long))(var2013->class->vft[COLOR_parser__ReduceAction__init]))(var2013, var2014) /* init on <var2013:ReduceAction585>*/;
-var2015 = NEW_parser__ReduceAction586(&type_parser__ReduceAction586);
-var2016 = 110;
-((void (*)(val*, long))(var2015->class->vft[COLOR_parser__ReduceAction__init]))(var2015, var2016) /* init on <var2015:ReduceAction586>*/;
-var2017 = NEW_parser__ReduceAction587(&type_parser__ReduceAction587);
-var2018 = 110;
-((void (*)(val*, long))(var2017->class->vft[COLOR_parser__ReduceAction__init]))(var2017, var2018) /* init on <var2017:ReduceAction587>*/;
-var2019 = NEW_parser__ReduceAction588(&type_parser__ReduceAction588);
-var2020 = 110;
-((void (*)(val*, long))(var2019->class->vft[COLOR_parser__ReduceAction__init]))(var2019, var2020) /* init on <var2019:ReduceAction588>*/;
-var2021 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2022 = 111;
-((void (*)(val*, long))(var2021->class->vft[COLOR_parser__ReduceAction__init]))(var2021, var2022) /* init on <var2021:ReduceAction596>*/;
-var2023 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2024 = 111;
-((void (*)(val*, long))(var2023->class->vft[COLOR_parser__ReduceAction__init]))(var2023, var2024) /* init on <var2023:ReduceAction596>*/;
-var2025 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2026 = 111;
-((void (*)(val*, long))(var2025->class->vft[COLOR_parser__ReduceAction__init]))(var2025, var2026) /* init on <var2025:ReduceAction606>*/;
-var2027 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2028 = 111;
-((void (*)(val*, long))(var2027->class->vft[COLOR_parser__ReduceAction__init]))(var2027, var2028) /* init on <var2027:ReduceAction607>*/;
-var2029 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2030 = 111;
-((void (*)(val*, long))(var2029->class->vft[COLOR_parser__ReduceAction__init]))(var2029, var2030) /* init on <var2029:ReduceAction608>*/;
-var2031 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2032 = 111;
-((void (*)(val*, long))(var2031->class->vft[COLOR_parser__ReduceAction__init]))(var2031, var2032) /* init on <var2031:ReduceAction609>*/;
-var2033 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2034 = 111;
-((void (*)(val*, long))(var2033->class->vft[COLOR_parser__ReduceAction__init]))(var2033, var2034) /* init on <var2033:ReduceAction610>*/;
-var2035 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2036 = 111;
-((void (*)(val*, long))(var2035->class->vft[COLOR_parser__ReduceAction__init]))(var2035, var2036) /* init on <var2035:ReduceAction611>*/;
-var2037 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2038 = 111;
-((void (*)(val*, long))(var2037->class->vft[COLOR_parser__ReduceAction__init]))(var2037, var2038) /* init on <var2037:ReduceAction612>*/;
-var2039 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2040 = 111;
-((void (*)(val*, long))(var2039->class->vft[COLOR_parser__ReduceAction__init]))(var2039, var2040) /* init on <var2039:ReduceAction613>*/;
-var2041 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2042 = 111;
-((void (*)(val*, long))(var2041->class->vft[COLOR_parser__ReduceAction__init]))(var2041, var2042) /* init on <var2041:ReduceAction614>*/;
-var2043 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2044 = 111;
-((void (*)(val*, long))(var2043->class->vft[COLOR_parser__ReduceAction__init]))(var2043, var2044) /* init on <var2043:ReduceAction615>*/;
-var2045 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2046 = 111;
-((void (*)(val*, long))(var2045->class->vft[COLOR_parser__ReduceAction__init]))(var2045, var2046) /* init on <var2045:ReduceAction616>*/;
-var2047 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2048 = 111;
-((void (*)(val*, long))(var2047->class->vft[COLOR_parser__ReduceAction__init]))(var2047, var2048) /* init on <var2047:ReduceAction596>*/;
-var2049 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2050 = 111;
-((void (*)(val*, long))(var2049->class->vft[COLOR_parser__ReduceAction__init]))(var2049, var2050) /* init on <var2049:ReduceAction596>*/;
-var2051 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2052 = 111;
-((void (*)(val*, long))(var2051->class->vft[COLOR_parser__ReduceAction__init]))(var2051, var2052) /* init on <var2051:ReduceAction596>*/;
-var2053 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2054 = 111;
-((void (*)(val*, long))(var2053->class->vft[COLOR_parser__ReduceAction__init]))(var2053, var2054) /* init on <var2053:ReduceAction596>*/;
-var2055 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2056 = 111;
-((void (*)(val*, long))(var2055->class->vft[COLOR_parser__ReduceAction__init]))(var2055, var2056) /* init on <var2055:ReduceAction596>*/;
-var2057 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2058 = 111;
-((void (*)(val*, long))(var2057->class->vft[COLOR_parser__ReduceAction__init]))(var2057, var2058) /* init on <var2057:ReduceAction596>*/;
-var2059 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var2060 = 111;
-((void (*)(val*, long))(var2059->class->vft[COLOR_parser__ReduceAction__init]))(var2059, var2060) /* init on <var2059:ReduceAction623>*/;
-var2061 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var2062 = 111;
-((void (*)(val*, long))(var2061->class->vft[COLOR_parser__ReduceAction__init]))(var2061, var2062) /* init on <var2061:ReduceAction624>*/;
-var2063 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2064 = 111;
-((void (*)(val*, long))(var2063->class->vft[COLOR_parser__ReduceAction__init]))(var2063, var2064) /* init on <var2063:ReduceAction625>*/;
-var2065 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var2066 = 111;
-((void (*)(val*, long))(var2065->class->vft[COLOR_parser__ReduceAction__init]))(var2065, var2066) /* init on <var2065:ReduceAction626>*/;
-var2067 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2068 = 111;
-((void (*)(val*, long))(var2067->class->vft[COLOR_parser__ReduceAction__init]))(var2067, var2068) /* init on <var2067:ReduceAction625>*/;
-var2069 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2070 = 111;
-((void (*)(val*, long))(var2069->class->vft[COLOR_parser__ReduceAction__init]))(var2069, var2070) /* init on <var2069:ReduceAction628>*/;
-var2071 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var2072 = 111;
-((void (*)(val*, long))(var2071->class->vft[COLOR_parser__ReduceAction__init]))(var2071, var2072) /* init on <var2071:ReduceAction629>*/;
-var2073 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2074 = 111;
-((void (*)(val*, long))(var2073->class->vft[COLOR_parser__ReduceAction__init]))(var2073, var2074) /* init on <var2073:ReduceAction628>*/;
-var2075 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var2076 = 111;
-((void (*)(val*, long))(var2075->class->vft[COLOR_parser__ReduceAction__init]))(var2075, var2076) /* init on <var2075:ReduceAction631>*/;
-var2077 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var2078 = 111;
-((void (*)(val*, long))(var2077->class->vft[COLOR_parser__ReduceAction__init]))(var2077, var2078) /* init on <var2077:ReduceAction632>*/;
-var2079 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var2080 = 111;
-((void (*)(val*, long))(var2079->class->vft[COLOR_parser__ReduceAction__init]))(var2079, var2080) /* init on <var2079:ReduceAction633>*/;
-var2081 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var2082 = 111;
-((void (*)(val*, long))(var2081->class->vft[COLOR_parser__ReduceAction__init]))(var2081, var2082) /* init on <var2081:ReduceAction634>*/;
-var2083 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var2084 = 111;
-((void (*)(val*, long))(var2083->class->vft[COLOR_parser__ReduceAction__init]))(var2083, var2084) /* init on <var2083:ReduceAction635>*/;
-var2085 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var2086 = 111;
-((void (*)(val*, long))(var2085->class->vft[COLOR_parser__ReduceAction__init]))(var2085, var2086) /* init on <var2085:ReduceAction636>*/;
-var2087 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2088 = 111;
-((void (*)(val*, long))(var2087->class->vft[COLOR_parser__ReduceAction__init]))(var2087, var2088) /* init on <var2087:ReduceAction637>*/;
-var2089 = NEW_parser__ReduceAction638(&type_parser__ReduceAction638);
-var2090 = 111;
-((void (*)(val*, long))(var2089->class->vft[COLOR_parser__ReduceAction__init]))(var2089, var2090) /* init on <var2089:ReduceAction638>*/;
-var2091 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2092 = 111;
-((void (*)(val*, long))(var2091->class->vft[COLOR_parser__ReduceAction__init]))(var2091, var2092) /* init on <var2091:ReduceAction637>*/;
-var2093 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2094 = 111;
-((void (*)(val*, long))(var2093->class->vft[COLOR_parser__ReduceAction__init]))(var2093, var2094) /* init on <var2093:ReduceAction640>*/;
-var2095 = NEW_parser__ReduceAction641(&type_parser__ReduceAction641);
-var2096 = 111;
-((void (*)(val*, long))(var2095->class->vft[COLOR_parser__ReduceAction__init]))(var2095, var2096) /* init on <var2095:ReduceAction641>*/;
-var2097 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2098 = 111;
-((void (*)(val*, long))(var2097->class->vft[COLOR_parser__ReduceAction__init]))(var2097, var2098) /* init on <var2097:ReduceAction640>*/;
-var2099 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var2100 = 111;
-((void (*)(val*, long))(var2099->class->vft[COLOR_parser__ReduceAction__init]))(var2099, var2100) /* init on <var2099:ReduceAction643>*/;
-var2101 = NEW_parser__ReduceAction654(&type_parser__ReduceAction654);
-var2102 = 112;
-((void (*)(val*, long))(var2101->class->vft[COLOR_parser__ReduceAction__init]))(var2101, var2102) /* init on <var2101:ReduceAction654>*/;
-var2103 = NEW_parser__ReduceAction655(&type_parser__ReduceAction655);
-var2104 = 112;
-((void (*)(val*, long))(var2103->class->vft[COLOR_parser__ReduceAction__init]))(var2103, var2104) /* init on <var2103:ReduceAction655>*/;
-var2105 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2106 = 112;
-((void (*)(val*, long))(var2105->class->vft[COLOR_parser__ReduceAction__init]))(var2105, var2106) /* init on <var2105:ReduceAction656>*/;
-var2107 = NEW_parser__ReduceAction657(&type_parser__ReduceAction657);
-var2108 = 112;
-((void (*)(val*, long))(var2107->class->vft[COLOR_parser__ReduceAction__init]))(var2107, var2108) /* init on <var2107:ReduceAction657>*/;
-var2109 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2110 = 112;
-((void (*)(val*, long))(var2109->class->vft[COLOR_parser__ReduceAction__init]))(var2109, var2110) /* init on <var2109:ReduceAction656>*/;
-var2111 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2112 = 112;
-((void (*)(val*, long))(var2111->class->vft[COLOR_parser__ReduceAction__init]))(var2111, var2112) /* init on <var2111:ReduceAction659>*/;
-var2113 = NEW_parser__ReduceAction660(&type_parser__ReduceAction660);
-var2114 = 112;
-((void (*)(val*, long))(var2113->class->vft[COLOR_parser__ReduceAction__init]))(var2113, var2114) /* init on <var2113:ReduceAction660>*/;
-var2115 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2116 = 112;
-((void (*)(val*, long))(var2115->class->vft[COLOR_parser__ReduceAction__init]))(var2115, var2116) /* init on <var2115:ReduceAction659>*/;
-var2117 = NEW_parser__ReduceAction662(&type_parser__ReduceAction662);
-var2118 = 112;
-((void (*)(val*, long))(var2117->class->vft[COLOR_parser__ReduceAction__init]))(var2117, var2118) /* init on <var2117:ReduceAction662>*/;
-var2119 = NEW_parser__ReduceAction663(&type_parser__ReduceAction663);
-var2120 = 112;
-((void (*)(val*, long))(var2119->class->vft[COLOR_parser__ReduceAction__init]))(var2119, var2120) /* init on <var2119:ReduceAction663>*/;
-var2121 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2122 = 112;
-((void (*)(val*, long))(var2121->class->vft[COLOR_parser__ReduceAction__init]))(var2121, var2122) /* init on <var2121:ReduceAction664>*/;
-var2123 = NEW_parser__ReduceAction665(&type_parser__ReduceAction665);
-var2124 = 112;
-((void (*)(val*, long))(var2123->class->vft[COLOR_parser__ReduceAction__init]))(var2123, var2124) /* init on <var2123:ReduceAction665>*/;
-var2125 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2126 = 112;
-((void (*)(val*, long))(var2125->class->vft[COLOR_parser__ReduceAction__init]))(var2125, var2126) /* init on <var2125:ReduceAction664>*/;
-var2127 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2128 = 112;
-((void (*)(val*, long))(var2127->class->vft[COLOR_parser__ReduceAction__init]))(var2127, var2128) /* init on <var2127:ReduceAction667>*/;
-var2129 = NEW_parser__ReduceAction668(&type_parser__ReduceAction668);
-var2130 = 112;
-((void (*)(val*, long))(var2129->class->vft[COLOR_parser__ReduceAction__init]))(var2129, var2130) /* init on <var2129:ReduceAction668>*/;
-var2131 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2132 = 112;
-((void (*)(val*, long))(var2131->class->vft[COLOR_parser__ReduceAction__init]))(var2131, var2132) /* init on <var2131:ReduceAction667>*/;
-var2133 = NEW_parser__ReduceAction670(&type_parser__ReduceAction670);
-var2134 = 112;
-((void (*)(val*, long))(var2133->class->vft[COLOR_parser__ReduceAction__init]))(var2133, var2134) /* init on <var2133:ReduceAction670>*/;
-var2135 = NEW_parser__ReduceAction671(&type_parser__ReduceAction671);
-var2136 = 112;
-((void (*)(val*, long))(var2135->class->vft[COLOR_parser__ReduceAction__init]))(var2135, var2136) /* init on <var2135:ReduceAction671>*/;
-var2137 = NEW_parser__ReduceAction672(&type_parser__ReduceAction672);
-var2138 = 112;
-((void (*)(val*, long))(var2137->class->vft[COLOR_parser__ReduceAction__init]))(var2137, var2138) /* init on <var2137:ReduceAction672>*/;
-var2139 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2140 = 112;
-((void (*)(val*, long))(var2139->class->vft[COLOR_parser__ReduceAction__init]))(var2139, var2140) /* init on <var2139:ReduceAction673>*/;
-var2141 = NEW_parser__ReduceAction674(&type_parser__ReduceAction674);
-var2142 = 112;
-((void (*)(val*, long))(var2141->class->vft[COLOR_parser__ReduceAction__init]))(var2141, var2142) /* init on <var2141:ReduceAction674>*/;
-var2143 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2144 = 112;
-((void (*)(val*, long))(var2143->class->vft[COLOR_parser__ReduceAction__init]))(var2143, var2144) /* init on <var2143:ReduceAction673>*/;
-var2145 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2146 = 112;
-((void (*)(val*, long))(var2145->class->vft[COLOR_parser__ReduceAction__init]))(var2145, var2146) /* init on <var2145:ReduceAction676>*/;
-var2147 = NEW_parser__ReduceAction677(&type_parser__ReduceAction677);
-var2148 = 112;
-((void (*)(val*, long))(var2147->class->vft[COLOR_parser__ReduceAction__init]))(var2147, var2148) /* init on <var2147:ReduceAction677>*/;
-var2149 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2150 = 112;
-((void (*)(val*, long))(var2149->class->vft[COLOR_parser__ReduceAction__init]))(var2149, var2150) /* init on <var2149:ReduceAction676>*/;
-var2151 = NEW_parser__ReduceAction679(&type_parser__ReduceAction679);
-var2152 = 112;
-((void (*)(val*, long))(var2151->class->vft[COLOR_parser__ReduceAction__init]))(var2151, var2152) /* init on <var2151:ReduceAction679>*/;
-var2153 = NEW_parser__ReduceAction680(&type_parser__ReduceAction680);
-var2154 = 112;
-((void (*)(val*, long))(var2153->class->vft[COLOR_parser__ReduceAction__init]))(var2153, var2154) /* init on <var2153:ReduceAction680>*/;
-var2155 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2156 = 112;
-((void (*)(val*, long))(var2155->class->vft[COLOR_parser__ReduceAction__init]))(var2155, var2156) /* init on <var2155:ReduceAction681>*/;
-var2157 = NEW_parser__ReduceAction682(&type_parser__ReduceAction682);
-var2158 = 112;
-((void (*)(val*, long))(var2157->class->vft[COLOR_parser__ReduceAction__init]))(var2157, var2158) /* init on <var2157:ReduceAction682>*/;
-var2159 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2160 = 112;
-((void (*)(val*, long))(var2159->class->vft[COLOR_parser__ReduceAction__init]))(var2159, var2160) /* init on <var2159:ReduceAction681>*/;
-var2161 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2162 = 112;
-((void (*)(val*, long))(var2161->class->vft[COLOR_parser__ReduceAction__init]))(var2161, var2162) /* init on <var2161:ReduceAction684>*/;
-var2163 = NEW_parser__ReduceAction685(&type_parser__ReduceAction685);
-var2164 = 112;
-((void (*)(val*, long))(var2163->class->vft[COLOR_parser__ReduceAction__init]))(var2163, var2164) /* init on <var2163:ReduceAction685>*/;
-var2165 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2166 = 112;
-((void (*)(val*, long))(var2165->class->vft[COLOR_parser__ReduceAction__init]))(var2165, var2166) /* init on <var2165:ReduceAction684>*/;
-var2167 = NEW_parser__ReduceAction687(&type_parser__ReduceAction687);
-var2168 = 112;
-((void (*)(val*, long))(var2167->class->vft[COLOR_parser__ReduceAction__init]))(var2167, var2168) /* init on <var2167:ReduceAction687>*/;
-var2169 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2170 = 113;
-((void (*)(val*, long))(var2169->class->vft[COLOR_parser__ReduceAction__init]))(var2169, var2170) /* init on <var2169:ReduceAction596>*/;
-var2171 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2172 = 114;
-((void (*)(val*, long))(var2171->class->vft[COLOR_parser__ReduceAction__init]))(var2171, var2172) /* init on <var2171:ReduceAction596>*/;
-var2173 = NEW_parser__ReduceAction714(&type_parser__ReduceAction714);
-var2174 = 114;
-((void (*)(val*, long))(var2173->class->vft[COLOR_parser__ReduceAction__init]))(var2173, var2174) /* init on <var2173:ReduceAction714>*/;
-var2175 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2176 = 115;
-((void (*)(val*, long))(var2175->class->vft[COLOR_parser__ReduceAction__init]))(var2175, var2176) /* init on <var2175:ReduceAction596>*/;
-var2177 = NEW_parser__ReduceAction716(&type_parser__ReduceAction716);
-var2178 = 115;
-((void (*)(val*, long))(var2177->class->vft[COLOR_parser__ReduceAction__init]))(var2177, var2178) /* init on <var2177:ReduceAction716>*/;
-var2179 = NEW_parser__ReduceAction717(&type_parser__ReduceAction717);
-var2180 = 115;
-((void (*)(val*, long))(var2179->class->vft[COLOR_parser__ReduceAction__init]))(var2179, var2180) /* init on <var2179:ReduceAction717>*/;
-var2181 = NEW_parser__ReduceAction718(&type_parser__ReduceAction718);
-var2182 = 115;
-((void (*)(val*, long))(var2181->class->vft[COLOR_parser__ReduceAction__init]))(var2181, var2182) /* init on <var2181:ReduceAction718>*/;
-var2183 = NEW_parser__ReduceAction719(&type_parser__ReduceAction719);
-var2184 = 115;
-((void (*)(val*, long))(var2183->class->vft[COLOR_parser__ReduceAction__init]))(var2183, var2184) /* init on <var2183:ReduceAction719>*/;
-var2185 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2186 = 116;
-((void (*)(val*, long))(var2185->class->vft[COLOR_parser__ReduceAction__init]))(var2185, var2186) /* init on <var2185:ReduceAction596>*/;
-var2187 = NEW_parser__ReduceAction721(&type_parser__ReduceAction721);
-var2188 = 116;
-((void (*)(val*, long))(var2187->class->vft[COLOR_parser__ReduceAction__init]))(var2187, var2188) /* init on <var2187:ReduceAction721>*/;
-var2189 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2190 = 117;
-((void (*)(val*, long))(var2189->class->vft[COLOR_parser__ReduceAction__init]))(var2189, var2190) /* init on <var2189:ReduceAction596>*/;
-var2191 = NEW_parser__ReduceAction723(&type_parser__ReduceAction723);
-var2192 = 117;
-((void (*)(val*, long))(var2191->class->vft[COLOR_parser__ReduceAction__init]))(var2191, var2192) /* init on <var2191:ReduceAction723>*/;
-var2193 = NEW_parser__ReduceAction724(&type_parser__ReduceAction724);
-var2194 = 117;
-((void (*)(val*, long))(var2193->class->vft[COLOR_parser__ReduceAction__init]))(var2193, var2194) /* init on <var2193:ReduceAction724>*/;
-var2195 = NEW_parser__ReduceAction725(&type_parser__ReduceAction725);
-var2196 = 117;
-((void (*)(val*, long))(var2195->class->vft[COLOR_parser__ReduceAction__init]))(var2195, var2196) /* init on <var2195:ReduceAction725>*/;
-var2197 = NEW_parser__ReduceAction726(&type_parser__ReduceAction726);
-var2198 = 117;
-((void (*)(val*, long))(var2197->class->vft[COLOR_parser__ReduceAction__init]))(var2197, var2198) /* init on <var2197:ReduceAction726>*/;
-var2199 = NEW_parser__ReduceAction727(&type_parser__ReduceAction727);
-var2200 = 117;
-((void (*)(val*, long))(var2199->class->vft[COLOR_parser__ReduceAction__init]))(var2199, var2200) /* init on <var2199:ReduceAction727>*/;
-var2201 = NEW_parser__ReduceAction728(&type_parser__ReduceAction728);
-var2202 = 117;
-((void (*)(val*, long))(var2201->class->vft[COLOR_parser__ReduceAction__init]))(var2201, var2202) /* init on <var2201:ReduceAction728>*/;
-var2203 = NEW_parser__ReduceAction729(&type_parser__ReduceAction729);
-var2204 = 117;
-((void (*)(val*, long))(var2203->class->vft[COLOR_parser__ReduceAction__init]))(var2203, var2204) /* init on <var2203:ReduceAction729>*/;
-var2205 = NEW_parser__ReduceAction730(&type_parser__ReduceAction730);
-var2206 = 117;
-((void (*)(val*, long))(var2205->class->vft[COLOR_parser__ReduceAction__init]))(var2205, var2206) /* init on <var2205:ReduceAction730>*/;
-var2207 = NEW_parser__ReduceAction731(&type_parser__ReduceAction731);
-var2208 = 117;
-((void (*)(val*, long))(var2207->class->vft[COLOR_parser__ReduceAction__init]))(var2207, var2208) /* init on <var2207:ReduceAction731>*/;
-var2209 = NEW_parser__ReduceAction732(&type_parser__ReduceAction732);
-var2210 = 117;
-((void (*)(val*, long))(var2209->class->vft[COLOR_parser__ReduceAction__init]))(var2209, var2210) /* init on <var2209:ReduceAction732>*/;
-var2211 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2212 = 118;
-((void (*)(val*, long))(var2211->class->vft[COLOR_parser__ReduceAction__init]))(var2211, var2212) /* init on <var2211:ReduceAction596>*/;
-var2213 = NEW_parser__ReduceAction734(&type_parser__ReduceAction734);
-var2214 = 118;
-((void (*)(val*, long))(var2213->class->vft[COLOR_parser__ReduceAction__init]))(var2213, var2214) /* init on <var2213:ReduceAction734>*/;
-var2215 = NEW_parser__ReduceAction735(&type_parser__ReduceAction735);
-var2216 = 118;
-((void (*)(val*, long))(var2215->class->vft[COLOR_parser__ReduceAction__init]))(var2215, var2216) /* init on <var2215:ReduceAction735>*/;
-var2217 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2218 = 119;
-((void (*)(val*, long))(var2217->class->vft[COLOR_parser__ReduceAction__init]))(var2217, var2218) /* init on <var2217:ReduceAction596>*/;
-var2219 = NEW_parser__ReduceAction737(&type_parser__ReduceAction737);
-var2220 = 119;
-((void (*)(val*, long))(var2219->class->vft[COLOR_parser__ReduceAction__init]))(var2219, var2220) /* init on <var2219:ReduceAction737>*/;
-var2221 = NEW_parser__ReduceAction738(&type_parser__ReduceAction738);
-var2222 = 119;
-((void (*)(val*, long))(var2221->class->vft[COLOR_parser__ReduceAction__init]))(var2221, var2222) /* init on <var2221:ReduceAction738>*/;
-var2223 = NEW_parser__ReduceAction739(&type_parser__ReduceAction739);
-var2224 = 119;
-((void (*)(val*, long))(var2223->class->vft[COLOR_parser__ReduceAction__init]))(var2223, var2224) /* init on <var2223:ReduceAction739>*/;
-var2225 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2226 = 120;
-((void (*)(val*, long))(var2225->class->vft[COLOR_parser__ReduceAction__init]))(var2225, var2226) /* init on <var2225:ReduceAction596>*/;
-var2227 = NEW_parser__ReduceAction741(&type_parser__ReduceAction741);
-var2228 = 120;
-((void (*)(val*, long))(var2227->class->vft[COLOR_parser__ReduceAction__init]))(var2227, var2228) /* init on <var2227:ReduceAction741>*/;
-var2229 = NEW_parser__ReduceAction742(&type_parser__ReduceAction742);
-var2230 = 120;
-((void (*)(val*, long))(var2229->class->vft[COLOR_parser__ReduceAction__init]))(var2229, var2230) /* init on <var2229:ReduceAction742>*/;
-var2231 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2232 = 121;
-((void (*)(val*, long))(var2231->class->vft[COLOR_parser__ReduceAction__init]))(var2231, var2232) /* init on <var2231:ReduceAction596>*/;
-var2233 = NEW_parser__ReduceAction744(&type_parser__ReduceAction744);
-var2234 = 121;
-((void (*)(val*, long))(var2233->class->vft[COLOR_parser__ReduceAction__init]))(var2233, var2234) /* init on <var2233:ReduceAction744>*/;
-var2235 = NEW_parser__ReduceAction745(&type_parser__ReduceAction745);
-var2236 = 121;
-((void (*)(val*, long))(var2235->class->vft[COLOR_parser__ReduceAction__init]))(var2235, var2236) /* init on <var2235:ReduceAction745>*/;
-var2237 = NEW_parser__ReduceAction746(&type_parser__ReduceAction746);
-var2238 = 121;
-((void (*)(val*, long))(var2237->class->vft[COLOR_parser__ReduceAction__init]))(var2237, var2238) /* init on <var2237:ReduceAction746>*/;
-var2239 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var2240 = 121;
-((void (*)(val*, long))(var2239->class->vft[COLOR_parser__ReduceAction__init]))(var2239, var2240) /* init on <var2239:ReduceAction747>*/;
-var2241 = NEW_parser__ReduceAction748(&type_parser__ReduceAction748);
-var2242 = 121;
-((void (*)(val*, long))(var2241->class->vft[COLOR_parser__ReduceAction__init]))(var2241, var2242) /* init on <var2241:ReduceAction748>*/;
-var2243 = NEW_parser__ReduceAction747(&type_parser__ReduceAction747);
-var2244 = 121;
-((void (*)(val*, long))(var2243->class->vft[COLOR_parser__ReduceAction__init]))(var2243, var2244) /* init on <var2243:ReduceAction747>*/;
-var2245 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var2246 = 121;
-((void (*)(val*, long))(var2245->class->vft[COLOR_parser__ReduceAction__init]))(var2245, var2246) /* init on <var2245:ReduceAction750>*/;
-var2247 = NEW_parser__ReduceAction751(&type_parser__ReduceAction751);
-var2248 = 121;
-((void (*)(val*, long))(var2247->class->vft[COLOR_parser__ReduceAction__init]))(var2247, var2248) /* init on <var2247:ReduceAction751>*/;
-var2249 = NEW_parser__ReduceAction750(&type_parser__ReduceAction750);
-var2250 = 121;
-((void (*)(val*, long))(var2249->class->vft[COLOR_parser__ReduceAction__init]))(var2249, var2250) /* init on <var2249:ReduceAction750>*/;
-var2251 = NEW_parser__ReduceAction753(&type_parser__ReduceAction753);
-var2252 = 122;
-((void (*)(val*, long))(var2251->class->vft[COLOR_parser__ReduceAction__init]))(var2251, var2252) /* init on <var2251:ReduceAction753>*/;
-var2253 = NEW_parser__ReduceAction754(&type_parser__ReduceAction754);
-var2254 = 122;
-((void (*)(val*, long))(var2253->class->vft[COLOR_parser__ReduceAction__init]))(var2253, var2254) /* init on <var2253:ReduceAction754>*/;
-var2255 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var2256 = 122;
-((void (*)(val*, long))(var2255->class->vft[COLOR_parser__ReduceAction__init]))(var2255, var2256) /* init on <var2255:ReduceAction755>*/;
-var2257 = NEW_parser__ReduceAction756(&type_parser__ReduceAction756);
-var2258 = 122;
-((void (*)(val*, long))(var2257->class->vft[COLOR_parser__ReduceAction__init]))(var2257, var2258) /* init on <var2257:ReduceAction756>*/;
-var2259 = NEW_parser__ReduceAction755(&type_parser__ReduceAction755);
-var2260 = 122;
-((void (*)(val*, long))(var2259->class->vft[COLOR_parser__ReduceAction__init]))(var2259, var2260) /* init on <var2259:ReduceAction755>*/;
-var2261 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var2262 = 122;
-((void (*)(val*, long))(var2261->class->vft[COLOR_parser__ReduceAction__init]))(var2261, var2262) /* init on <var2261:ReduceAction758>*/;
-var2263 = NEW_parser__ReduceAction759(&type_parser__ReduceAction759);
-var2264 = 122;
-((void (*)(val*, long))(var2263->class->vft[COLOR_parser__ReduceAction__init]))(var2263, var2264) /* init on <var2263:ReduceAction759>*/;
-var2265 = NEW_parser__ReduceAction758(&type_parser__ReduceAction758);
-var2266 = 122;
-((void (*)(val*, long))(var2265->class->vft[COLOR_parser__ReduceAction__init]))(var2265, var2266) /* init on <var2265:ReduceAction758>*/;
-var2267 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var2268 = 122;
-((void (*)(val*, long))(var2267->class->vft[COLOR_parser__ReduceAction__init]))(var2267, var2268) /* init on <var2267:ReduceAction623>*/;
-var2269 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var2270 = 122;
-((void (*)(val*, long))(var2269->class->vft[COLOR_parser__ReduceAction__init]))(var2269, var2270) /* init on <var2269:ReduceAction624>*/;
-var2271 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2272 = 122;
-((void (*)(val*, long))(var2271->class->vft[COLOR_parser__ReduceAction__init]))(var2271, var2272) /* init on <var2271:ReduceAction625>*/;
-var2273 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var2274 = 122;
-((void (*)(val*, long))(var2273->class->vft[COLOR_parser__ReduceAction__init]))(var2273, var2274) /* init on <var2273:ReduceAction626>*/;
-var2275 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2276 = 122;
-((void (*)(val*, long))(var2275->class->vft[COLOR_parser__ReduceAction__init]))(var2275, var2276) /* init on <var2275:ReduceAction625>*/;
-var2277 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2278 = 122;
-((void (*)(val*, long))(var2277->class->vft[COLOR_parser__ReduceAction__init]))(var2277, var2278) /* init on <var2277:ReduceAction628>*/;
-var2279 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var2280 = 122;
-((void (*)(val*, long))(var2279->class->vft[COLOR_parser__ReduceAction__init]))(var2279, var2280) /* init on <var2279:ReduceAction629>*/;
-var2281 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2282 = 122;
-((void (*)(val*, long))(var2281->class->vft[COLOR_parser__ReduceAction__init]))(var2281, var2282) /* init on <var2281:ReduceAction628>*/;
-var2283 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var2284 = 122;
-((void (*)(val*, long))(var2283->class->vft[COLOR_parser__ReduceAction__init]))(var2283, var2284) /* init on <var2283:ReduceAction631>*/;
-var2285 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var2286 = 122;
-((void (*)(val*, long))(var2285->class->vft[COLOR_parser__ReduceAction__init]))(var2285, var2286) /* init on <var2285:ReduceAction632>*/;
-var2287 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var2288 = 122;
-((void (*)(val*, long))(var2287->class->vft[COLOR_parser__ReduceAction__init]))(var2287, var2288) /* init on <var2287:ReduceAction633>*/;
-var2289 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var2290 = 122;
-((void (*)(val*, long))(var2289->class->vft[COLOR_parser__ReduceAction__init]))(var2289, var2290) /* init on <var2289:ReduceAction634>*/;
-var2291 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var2292 = 122;
-((void (*)(val*, long))(var2291->class->vft[COLOR_parser__ReduceAction__init]))(var2291, var2292) /* init on <var2291:ReduceAction635>*/;
-var2293 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var2294 = 122;
-((void (*)(val*, long))(var2293->class->vft[COLOR_parser__ReduceAction__init]))(var2293, var2294) /* init on <var2293:ReduceAction636>*/;
-var2295 = NEW_parser__ReduceAction775(&type_parser__ReduceAction775);
-var2296 = 122;
-((void (*)(val*, long))(var2295->class->vft[COLOR_parser__ReduceAction__init]))(var2295, var2296) /* init on <var2295:ReduceAction775>*/;
-var2297 = NEW_parser__ReduceAction776(&type_parser__ReduceAction776);
-var2298 = 122;
-((void (*)(val*, long))(var2297->class->vft[COLOR_parser__ReduceAction__init]))(var2297, var2298) /* init on <var2297:ReduceAction776>*/;
-var2299 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var2300 = 122;
-((void (*)(val*, long))(var2299->class->vft[COLOR_parser__ReduceAction__init]))(var2299, var2300) /* init on <var2299:ReduceAction777>*/;
-var2301 = NEW_parser__ReduceAction778(&type_parser__ReduceAction778);
-var2302 = 122;
-((void (*)(val*, long))(var2301->class->vft[COLOR_parser__ReduceAction__init]))(var2301, var2302) /* init on <var2301:ReduceAction778>*/;
-var2303 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var2304 = 122;
-((void (*)(val*, long))(var2303->class->vft[COLOR_parser__ReduceAction__init]))(var2303, var2304) /* init on <var2303:ReduceAction777>*/;
-var2305 = NEW_parser__ReduceAction786(&type_parser__ReduceAction786);
-var2306 = 122;
-((void (*)(val*, long))(var2305->class->vft[COLOR_parser__ReduceAction__init]))(var2305, var2306) /* init on <var2305:ReduceAction786>*/;
-var2307 = NEW_parser__ReduceAction787(&type_parser__ReduceAction787);
-var2308 = 122;
-((void (*)(val*, long))(var2307->class->vft[COLOR_parser__ReduceAction__init]))(var2307, var2308) /* init on <var2307:ReduceAction787>*/;
-var2309 = NEW_parser__ReduceAction788(&type_parser__ReduceAction788);
-var2310 = 122;
-((void (*)(val*, long))(var2309->class->vft[COLOR_parser__ReduceAction__init]))(var2309, var2310) /* init on <var2309:ReduceAction788>*/;
-var2311 = NEW_parser__ReduceAction789(&type_parser__ReduceAction789);
-var2312 = 122;
-((void (*)(val*, long))(var2311->class->vft[COLOR_parser__ReduceAction__init]))(var2311, var2312) /* init on <var2311:ReduceAction789>*/;
-var2313 = NEW_parser__ReduceAction790(&type_parser__ReduceAction790);
-var2314 = 122;
-((void (*)(val*, long))(var2313->class->vft[COLOR_parser__ReduceAction__init]))(var2313, var2314) /* init on <var2313:ReduceAction790>*/;
-var2315 = NEW_parser__ReduceAction791(&type_parser__ReduceAction791);
-var2316 = 122;
-((void (*)(val*, long))(var2315->class->vft[COLOR_parser__ReduceAction__init]))(var2315, var2316) /* init on <var2315:ReduceAction791>*/;
-var2317 = NEW_parser__ReduceAction792(&type_parser__ReduceAction792);
-var2318 = 122;
-((void (*)(val*, long))(var2317->class->vft[COLOR_parser__ReduceAction__init]))(var2317, var2318) /* init on <var2317:ReduceAction792>*/;
-var2319 = NEW_parser__ReduceAction793(&type_parser__ReduceAction793);
-var2320 = 122;
-((void (*)(val*, long))(var2319->class->vft[COLOR_parser__ReduceAction__init]))(var2319, var2320) /* init on <var2319:ReduceAction793>*/;
-var2321 = NEW_parser__ReduceAction794(&type_parser__ReduceAction794);
-var2322 = 122;
-((void (*)(val*, long))(var2321->class->vft[COLOR_parser__ReduceAction__init]))(var2321, var2322) /* init on <var2321:ReduceAction794>*/;
-var2323 = NEW_parser__ReduceAction795(&type_parser__ReduceAction795);
-var2324 = 122;
-((void (*)(val*, long))(var2323->class->vft[COLOR_parser__ReduceAction__init]))(var2323, var2324) /* init on <var2323:ReduceAction795>*/;
-var2325 = NEW_parser__ReduceAction796(&type_parser__ReduceAction796);
-var2326 = 122;
-((void (*)(val*, long))(var2325->class->vft[COLOR_parser__ReduceAction__init]))(var2325, var2326) /* init on <var2325:ReduceAction796>*/;
-var2327 = NEW_parser__ReduceAction797(&type_parser__ReduceAction797);
-var2328 = 122;
-((void (*)(val*, long))(var2327->class->vft[COLOR_parser__ReduceAction__init]))(var2327, var2328) /* init on <var2327:ReduceAction797>*/;
-var2329 = NEW_parser__ReduceAction798(&type_parser__ReduceAction798);
-var2330 = 122;
-((void (*)(val*, long))(var2329->class->vft[COLOR_parser__ReduceAction__init]))(var2329, var2330) /* init on <var2329:ReduceAction798>*/;
-var2331 = NEW_parser__ReduceAction799(&type_parser__ReduceAction799);
-var2332 = 122;
-((void (*)(val*, long))(var2331->class->vft[COLOR_parser__ReduceAction__init]))(var2331, var2332) /* init on <var2331:ReduceAction799>*/;
-var2333 = NEW_parser__ReduceAction800(&type_parser__ReduceAction800);
-var2334 = 122;
-((void (*)(val*, long))(var2333->class->vft[COLOR_parser__ReduceAction__init]))(var2333, var2334) /* init on <var2333:ReduceAction800>*/;
-var2335 = NEW_parser__ReduceAction801(&type_parser__ReduceAction801);
-var2336 = 122;
-((void (*)(val*, long))(var2335->class->vft[COLOR_parser__ReduceAction__init]))(var2335, var2336) /* init on <var2335:ReduceAction801>*/;
-var2337 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2338 = 122;
-((void (*)(val*, long))(var2337->class->vft[COLOR_parser__ReduceAction__init]))(var2337, var2338) /* init on <var2337:ReduceAction596>*/;
-var2339 = NEW_parser__ReduceAction805(&type_parser__ReduceAction805);
-var2340 = 122;
-((void (*)(val*, long))(var2339->class->vft[COLOR_parser__ReduceAction__init]))(var2339, var2340) /* init on <var2339:ReduceAction805>*/;
-var2341 = NEW_parser__ReduceAction806(&type_parser__ReduceAction806);
-var2342 = 122;
-((void (*)(val*, long))(var2341->class->vft[COLOR_parser__ReduceAction__init]))(var2341, var2342) /* init on <var2341:ReduceAction806>*/;
-var2343 = NEW_parser__ReduceAction818(&type_parser__ReduceAction818);
-var2344 = 123;
-((void (*)(val*, long))(var2343->class->vft[COLOR_parser__ReduceAction__init]))(var2343, var2344) /* init on <var2343:ReduceAction818>*/;
-var2345 = NEW_parser__ReduceAction819(&type_parser__ReduceAction819);
-var2346 = 123;
-((void (*)(val*, long))(var2345->class->vft[COLOR_parser__ReduceAction__init]))(var2345, var2346) /* init on <var2345:ReduceAction819>*/;
-var2347 = NEW_parser__ReduceAction820(&type_parser__ReduceAction820);
-var2348 = 124;
-((void (*)(val*, long))(var2347->class->vft[COLOR_parser__ReduceAction__init]))(var2347, var2348) /* init on <var2347:ReduceAction820>*/;
-var2349 = NEW_parser__ReduceAction821(&type_parser__ReduceAction821);
-var2350 = 124;
-((void (*)(val*, long))(var2349->class->vft[COLOR_parser__ReduceAction__init]))(var2349, var2350) /* init on <var2349:ReduceAction821>*/;
-var2351 = NEW_parser__ReduceAction834(&type_parser__ReduceAction834);
-var2352 = 125;
-((void (*)(val*, long))(var2351->class->vft[COLOR_parser__ReduceAction__init]))(var2351, var2352) /* init on <var2351:ReduceAction834>*/;
-var2353 = NEW_parser__ReduceAction835(&type_parser__ReduceAction835);
-var2354 = 125;
-((void (*)(val*, long))(var2353->class->vft[COLOR_parser__ReduceAction__init]))(var2353, var2354) /* init on <var2353:ReduceAction835>*/;
-var2355 = NEW_parser__ReduceAction837(&type_parser__ReduceAction837);
-var2356 = 126;
-((void (*)(val*, long))(var2355->class->vft[COLOR_parser__ReduceAction__init]))(var2355, var2356) /* init on <var2355:ReduceAction837>*/;
-var2357 = NEW_parser__ReduceAction838(&type_parser__ReduceAction838);
-var2358 = 126;
-((void (*)(val*, long))(var2357->class->vft[COLOR_parser__ReduceAction__init]))(var2357, var2358) /* init on <var2357:ReduceAction838>*/;
-var2359 = NEW_parser__ReduceAction838(&type_parser__ReduceAction838);
-var2360 = 126;
-((void (*)(val*, long))(var2359->class->vft[COLOR_parser__ReduceAction__init]))(var2359, var2360) /* init on <var2359:ReduceAction838>*/;
-var2361 = NEW_parser__ReduceAction581(&type_parser__ReduceAction581);
-var2362 = 127;
-((void (*)(val*, long))(var2361->class->vft[COLOR_parser__ReduceAction__init]))(var2361, var2362) /* init on <var2361:ReduceAction581>*/;
-var2363 = NEW_parser__ReduceAction582(&type_parser__ReduceAction582);
-var2364 = 127;
-((void (*)(val*, long))(var2363->class->vft[COLOR_parser__ReduceAction__init]))(var2363, var2364) /* init on <var2363:ReduceAction582>*/;
-var2365 = NEW_parser__ReduceAction583(&type_parser__ReduceAction583);
-var2366 = 127;
-((void (*)(val*, long))(var2365->class->vft[COLOR_parser__ReduceAction__init]))(var2365, var2366) /* init on <var2365:ReduceAction583>*/;
-var2367 = NEW_parser__ReduceAction584(&type_parser__ReduceAction584);
-var2368 = 127;
-((void (*)(val*, long))(var2367->class->vft[COLOR_parser__ReduceAction__init]))(var2367, var2368) /* init on <var2367:ReduceAction584>*/;
-var2369 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2370 = 128;
-((void (*)(val*, long))(var2369->class->vft[COLOR_parser__ReduceAction__init]))(var2369, var2370) /* init on <var2369:ReduceAction596>*/;
-var2371 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2372 = 129;
-((void (*)(val*, long))(var2371->class->vft[COLOR_parser__ReduceAction__init]))(var2371, var2372) /* init on <var2371:ReduceAction596>*/;
-var2373 = NEW_parser__ReduceAction714(&type_parser__ReduceAction714);
-var2374 = 129;
-((void (*)(val*, long))(var2373->class->vft[COLOR_parser__ReduceAction__init]))(var2373, var2374) /* init on <var2373:ReduceAction714>*/;
-var2375 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2376 = 130;
-((void (*)(val*, long))(var2375->class->vft[COLOR_parser__ReduceAction__init]))(var2375, var2376) /* init on <var2375:ReduceAction596>*/;
-var2377 = NEW_parser__ReduceAction716(&type_parser__ReduceAction716);
-var2378 = 130;
-((void (*)(val*, long))(var2377->class->vft[COLOR_parser__ReduceAction__init]))(var2377, var2378) /* init on <var2377:ReduceAction716>*/;
-var2379 = NEW_parser__ReduceAction717(&type_parser__ReduceAction717);
-var2380 = 130;
-((void (*)(val*, long))(var2379->class->vft[COLOR_parser__ReduceAction__init]))(var2379, var2380) /* init on <var2379:ReduceAction717>*/;
-var2381 = NEW_parser__ReduceAction718(&type_parser__ReduceAction718);
-var2382 = 130;
-((void (*)(val*, long))(var2381->class->vft[COLOR_parser__ReduceAction__init]))(var2381, var2382) /* init on <var2381:ReduceAction718>*/;
-var2383 = NEW_parser__ReduceAction719(&type_parser__ReduceAction719);
-var2384 = 130;
-((void (*)(val*, long))(var2383->class->vft[COLOR_parser__ReduceAction__init]))(var2383, var2384) /* init on <var2383:ReduceAction719>*/;
-var2385 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2386 = 131;
-((void (*)(val*, long))(var2385->class->vft[COLOR_parser__ReduceAction__init]))(var2385, var2386) /* init on <var2385:ReduceAction596>*/;
-var2387 = NEW_parser__ReduceAction721(&type_parser__ReduceAction721);
-var2388 = 131;
-((void (*)(val*, long))(var2387->class->vft[COLOR_parser__ReduceAction__init]))(var2387, var2388) /* init on <var2387:ReduceAction721>*/;
-var2389 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2390 = 132;
-((void (*)(val*, long))(var2389->class->vft[COLOR_parser__ReduceAction__init]))(var2389, var2390) /* init on <var2389:ReduceAction596>*/;
-var2391 = NEW_parser__ReduceAction723(&type_parser__ReduceAction723);
-var2392 = 132;
-((void (*)(val*, long))(var2391->class->vft[COLOR_parser__ReduceAction__init]))(var2391, var2392) /* init on <var2391:ReduceAction723>*/;
-var2393 = NEW_parser__ReduceAction724(&type_parser__ReduceAction724);
-var2394 = 132;
-((void (*)(val*, long))(var2393->class->vft[COLOR_parser__ReduceAction__init]))(var2393, var2394) /* init on <var2393:ReduceAction724>*/;
-var2395 = NEW_parser__ReduceAction725(&type_parser__ReduceAction725);
-var2396 = 132;
-((void (*)(val*, long))(var2395->class->vft[COLOR_parser__ReduceAction__init]))(var2395, var2396) /* init on <var2395:ReduceAction725>*/;
-var2397 = NEW_parser__ReduceAction726(&type_parser__ReduceAction726);
-var2398 = 132;
-((void (*)(val*, long))(var2397->class->vft[COLOR_parser__ReduceAction__init]))(var2397, var2398) /* init on <var2397:ReduceAction726>*/;
-var2399 = NEW_parser__ReduceAction727(&type_parser__ReduceAction727);
-var2400 = 132;
-((void (*)(val*, long))(var2399->class->vft[COLOR_parser__ReduceAction__init]))(var2399, var2400) /* init on <var2399:ReduceAction727>*/;
-var2401 = NEW_parser__ReduceAction728(&type_parser__ReduceAction728);
-var2402 = 132;
-((void (*)(val*, long))(var2401->class->vft[COLOR_parser__ReduceAction__init]))(var2401, var2402) /* init on <var2401:ReduceAction728>*/;
-var2403 = NEW_parser__ReduceAction729(&type_parser__ReduceAction729);
-var2404 = 132;
-((void (*)(val*, long))(var2403->class->vft[COLOR_parser__ReduceAction__init]))(var2403, var2404) /* init on <var2403:ReduceAction729>*/;
-var2405 = NEW_parser__ReduceAction730(&type_parser__ReduceAction730);
-var2406 = 132;
-((void (*)(val*, long))(var2405->class->vft[COLOR_parser__ReduceAction__init]))(var2405, var2406) /* init on <var2405:ReduceAction730>*/;
-var2407 = NEW_parser__ReduceAction731(&type_parser__ReduceAction731);
-var2408 = 132;
-((void (*)(val*, long))(var2407->class->vft[COLOR_parser__ReduceAction__init]))(var2407, var2408) /* init on <var2407:ReduceAction731>*/;
-var2409 = NEW_parser__ReduceAction732(&type_parser__ReduceAction732);
-var2410 = 132;
-((void (*)(val*, long))(var2409->class->vft[COLOR_parser__ReduceAction__init]))(var2409, var2410) /* init on <var2409:ReduceAction732>*/;
-var2411 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2412 = 133;
-((void (*)(val*, long))(var2411->class->vft[COLOR_parser__ReduceAction__init]))(var2411, var2412) /* init on <var2411:ReduceAction596>*/;
-var2413 = NEW_parser__ReduceAction734(&type_parser__ReduceAction734);
-var2414 = 133;
-((void (*)(val*, long))(var2413->class->vft[COLOR_parser__ReduceAction__init]))(var2413, var2414) /* init on <var2413:ReduceAction734>*/;
-var2415 = NEW_parser__ReduceAction735(&type_parser__ReduceAction735);
-var2416 = 133;
-((void (*)(val*, long))(var2415->class->vft[COLOR_parser__ReduceAction__init]))(var2415, var2416) /* init on <var2415:ReduceAction735>*/;
-var2417 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2418 = 134;
-((void (*)(val*, long))(var2417->class->vft[COLOR_parser__ReduceAction__init]))(var2417, var2418) /* init on <var2417:ReduceAction596>*/;
-var2419 = NEW_parser__ReduceAction737(&type_parser__ReduceAction737);
-var2420 = 134;
-((void (*)(val*, long))(var2419->class->vft[COLOR_parser__ReduceAction__init]))(var2419, var2420) /* init on <var2419:ReduceAction737>*/;
-var2421 = NEW_parser__ReduceAction738(&type_parser__ReduceAction738);
-var2422 = 134;
-((void (*)(val*, long))(var2421->class->vft[COLOR_parser__ReduceAction__init]))(var2421, var2422) /* init on <var2421:ReduceAction738>*/;
-var2423 = NEW_parser__ReduceAction739(&type_parser__ReduceAction739);
-var2424 = 134;
-((void (*)(val*, long))(var2423->class->vft[COLOR_parser__ReduceAction__init]))(var2423, var2424) /* init on <var2423:ReduceAction739>*/;
-var2425 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2426 = 135;
-((void (*)(val*, long))(var2425->class->vft[COLOR_parser__ReduceAction__init]))(var2425, var2426) /* init on <var2425:ReduceAction596>*/;
-var2427 = NEW_parser__ReduceAction741(&type_parser__ReduceAction741);
-var2428 = 135;
-((void (*)(val*, long))(var2427->class->vft[COLOR_parser__ReduceAction__init]))(var2427, var2428) /* init on <var2427:ReduceAction741>*/;
-var2429 = NEW_parser__ReduceAction742(&type_parser__ReduceAction742);
-var2430 = 135;
-((void (*)(val*, long))(var2429->class->vft[COLOR_parser__ReduceAction__init]))(var2429, var2430) /* init on <var2429:ReduceAction742>*/;
-var2431 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2432 = 136;
-((void (*)(val*, long))(var2431->class->vft[COLOR_parser__ReduceAction__init]))(var2431, var2432) /* init on <var2431:ReduceAction596>*/;
-var2433 = NEW_parser__ReduceAction744(&type_parser__ReduceAction744);
-var2434 = 136;
-((void (*)(val*, long))(var2433->class->vft[COLOR_parser__ReduceAction__init]))(var2433, var2434) /* init on <var2433:ReduceAction744>*/;
-var2435 = NEW_parser__ReduceAction1217(&type_parser__ReduceAction1217);
-var2436 = 136;
-((void (*)(val*, long))(var2435->class->vft[COLOR_parser__ReduceAction__init]))(var2435, var2436) /* init on <var2435:ReduceAction1217>*/;
-var2437 = NEW_parser__ReduceAction1218(&type_parser__ReduceAction1218);
-var2438 = 136;
-((void (*)(val*, long))(var2437->class->vft[COLOR_parser__ReduceAction__init]))(var2437, var2438) /* init on <var2437:ReduceAction1218>*/;
-var2439 = NEW_parser__ReduceAction745(&type_parser__ReduceAction745);
-var2440 = 136;
-((void (*)(val*, long))(var2439->class->vft[COLOR_parser__ReduceAction__init]))(var2439, var2440) /* init on <var2439:ReduceAction745>*/;
-var2441 = NEW_parser__ReduceAction1218(&type_parser__ReduceAction1218);
-var2442 = 136;
-((void (*)(val*, long))(var2441->class->vft[COLOR_parser__ReduceAction__init]))(var2441, var2442) /* init on <var2441:ReduceAction1218>*/;
-var2443 = NEW_parser__ReduceAction1221(&type_parser__ReduceAction1221);
-var2444 = 137;
-((void (*)(val*, long))(var2443->class->vft[COLOR_parser__ReduceAction__init]))(var2443, var2444) /* init on <var2443:ReduceAction1221>*/;
-var2445 = NEW_parser__ReduceAction1222(&type_parser__ReduceAction1222);
-var2446 = 137;
-((void (*)(val*, long))(var2445->class->vft[COLOR_parser__ReduceAction__init]))(var2445, var2446) /* init on <var2445:ReduceAction1222>*/;
-var2447 = NEW_parser__ReduceAction753(&type_parser__ReduceAction753);
-var2448 = 137;
-((void (*)(val*, long))(var2447->class->vft[COLOR_parser__ReduceAction__init]))(var2447, var2448) /* init on <var2447:ReduceAction753>*/;
-var2449 = NEW_parser__ReduceAction1222(&type_parser__ReduceAction1222);
-var2450 = 137;
-((void (*)(val*, long))(var2449->class->vft[COLOR_parser__ReduceAction__init]))(var2449, var2450) /* init on <var2449:ReduceAction1222>*/;
-var2451 = NEW_parser__ReduceAction1225(&type_parser__ReduceAction1225);
-var2452 = 137;
-((void (*)(val*, long))(var2451->class->vft[COLOR_parser__ReduceAction__init]))(var2451, var2452) /* init on <var2451:ReduceAction1225>*/;
-var2453 = NEW_parser__ReduceAction1226(&type_parser__ReduceAction1226);
-var2454 = 137;
-((void (*)(val*, long))(var2453->class->vft[COLOR_parser__ReduceAction__init]))(var2453, var2454) /* init on <var2453:ReduceAction1226>*/;
-var2455 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var2456 = 137;
-((void (*)(val*, long))(var2455->class->vft[COLOR_parser__ReduceAction__init]))(var2455, var2456) /* init on <var2455:ReduceAction623>*/;
-var2457 = NEW_parser__ReduceAction1226(&type_parser__ReduceAction1226);
-var2458 = 137;
-((void (*)(val*, long))(var2457->class->vft[COLOR_parser__ReduceAction__init]))(var2457, var2458) /* init on <var2457:ReduceAction1226>*/;
-var2459 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var2460 = 137;
-((void (*)(val*, long))(var2459->class->vft[COLOR_parser__ReduceAction__init]))(var2459, var2460) /* init on <var2459:ReduceAction631>*/;
-var2461 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var2462 = 137;
-((void (*)(val*, long))(var2461->class->vft[COLOR_parser__ReduceAction__init]))(var2461, var2462) /* init on <var2461:ReduceAction632>*/;
-var2463 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var2464 = 137;
-((void (*)(val*, long))(var2463->class->vft[COLOR_parser__ReduceAction__init]))(var2463, var2464) /* init on <var2463:ReduceAction633>*/;
-var2465 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var2466 = 137;
-((void (*)(val*, long))(var2465->class->vft[COLOR_parser__ReduceAction__init]))(var2465, var2466) /* init on <var2465:ReduceAction634>*/;
-var2467 = NEW_parser__ReduceAction1233(&type_parser__ReduceAction1233);
-var2468 = 137;
-((void (*)(val*, long))(var2467->class->vft[COLOR_parser__ReduceAction__init]))(var2467, var2468) /* init on <var2467:ReduceAction1233>*/;
-var2469 = NEW_parser__ReduceAction776(&type_parser__ReduceAction776);
-var2470 = 137;
-((void (*)(val*, long))(var2469->class->vft[COLOR_parser__ReduceAction__init]))(var2469, var2470) /* init on <var2469:ReduceAction776>*/;
-var2471 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var2472 = 137;
-((void (*)(val*, long))(var2471->class->vft[COLOR_parser__ReduceAction__init]))(var2471, var2472) /* init on <var2471:ReduceAction777>*/;
-var2473 = NEW_parser__ReduceAction778(&type_parser__ReduceAction778);
-var2474 = 137;
-((void (*)(val*, long))(var2473->class->vft[COLOR_parser__ReduceAction__init]))(var2473, var2474) /* init on <var2473:ReduceAction778>*/;
-var2475 = NEW_parser__ReduceAction777(&type_parser__ReduceAction777);
-var2476 = 137;
-((void (*)(val*, long))(var2475->class->vft[COLOR_parser__ReduceAction__init]))(var2475, var2476) /* init on <var2475:ReduceAction777>*/;
-var2477 = NEW_parser__ReduceAction786(&type_parser__ReduceAction786);
-var2478 = 137;
-((void (*)(val*, long))(var2477->class->vft[COLOR_parser__ReduceAction__init]))(var2477, var2478) /* init on <var2477:ReduceAction786>*/;
-var2479 = NEW_parser__ReduceAction787(&type_parser__ReduceAction787);
-var2480 = 137;
-((void (*)(val*, long))(var2479->class->vft[COLOR_parser__ReduceAction__init]))(var2479, var2480) /* init on <var2479:ReduceAction787>*/;
-var2481 = NEW_parser__ReduceAction788(&type_parser__ReduceAction788);
-var2482 = 137;
-((void (*)(val*, long))(var2481->class->vft[COLOR_parser__ReduceAction__init]))(var2481, var2482) /* init on <var2481:ReduceAction788>*/;
-var2483 = NEW_parser__ReduceAction789(&type_parser__ReduceAction789);
-var2484 = 137;
-((void (*)(val*, long))(var2483->class->vft[COLOR_parser__ReduceAction__init]))(var2483, var2484) /* init on <var2483:ReduceAction789>*/;
-var2485 = NEW_parser__ReduceAction790(&type_parser__ReduceAction790);
-var2486 = 137;
-((void (*)(val*, long))(var2485->class->vft[COLOR_parser__ReduceAction__init]))(var2485, var2486) /* init on <var2485:ReduceAction790>*/;
-var2487 = NEW_parser__ReduceAction791(&type_parser__ReduceAction791);
-var2488 = 137;
-((void (*)(val*, long))(var2487->class->vft[COLOR_parser__ReduceAction__init]))(var2487, var2488) /* init on <var2487:ReduceAction791>*/;
-var2489 = NEW_parser__ReduceAction792(&type_parser__ReduceAction792);
-var2490 = 137;
-((void (*)(val*, long))(var2489->class->vft[COLOR_parser__ReduceAction__init]))(var2489, var2490) /* init on <var2489:ReduceAction792>*/;
-var2491 = NEW_parser__ReduceAction793(&type_parser__ReduceAction793);
-var2492 = 137;
-((void (*)(val*, long))(var2491->class->vft[COLOR_parser__ReduceAction__init]))(var2491, var2492) /* init on <var2491:ReduceAction793>*/;
-var2493 = NEW_parser__ReduceAction794(&type_parser__ReduceAction794);
-var2494 = 137;
-((void (*)(val*, long))(var2493->class->vft[COLOR_parser__ReduceAction__init]))(var2493, var2494) /* init on <var2493:ReduceAction794>*/;
-var2495 = NEW_parser__ReduceAction795(&type_parser__ReduceAction795);
-var2496 = 137;
-((void (*)(val*, long))(var2495->class->vft[COLOR_parser__ReduceAction__init]))(var2495, var2496) /* init on <var2495:ReduceAction795>*/;
-var2497 = NEW_parser__ReduceAction796(&type_parser__ReduceAction796);
-var2498 = 137;
-((void (*)(val*, long))(var2497->class->vft[COLOR_parser__ReduceAction__init]))(var2497, var2498) /* init on <var2497:ReduceAction796>*/;
-var2499 = NEW_parser__ReduceAction797(&type_parser__ReduceAction797);
-var2500 = 137;
-((void (*)(val*, long))(var2499->class->vft[COLOR_parser__ReduceAction__init]))(var2499, var2500) /* init on <var2499:ReduceAction797>*/;
-var2501 = NEW_parser__ReduceAction798(&type_parser__ReduceAction798);
-var2502 = 137;
-((void (*)(val*, long))(var2501->class->vft[COLOR_parser__ReduceAction__init]))(var2501, var2502) /* init on <var2501:ReduceAction798>*/;
-var2503 = NEW_parser__ReduceAction799(&type_parser__ReduceAction799);
-var2504 = 137;
-((void (*)(val*, long))(var2503->class->vft[COLOR_parser__ReduceAction__init]))(var2503, var2504) /* init on <var2503:ReduceAction799>*/;
-var2505 = NEW_parser__ReduceAction800(&type_parser__ReduceAction800);
-var2506 = 137;
-((void (*)(val*, long))(var2505->class->vft[COLOR_parser__ReduceAction__init]))(var2505, var2506) /* init on <var2505:ReduceAction800>*/;
-var2507 = NEW_parser__ReduceAction801(&type_parser__ReduceAction801);
-var2508 = 137;
-((void (*)(val*, long))(var2507->class->vft[COLOR_parser__ReduceAction__init]))(var2507, var2508) /* init on <var2507:ReduceAction801>*/;
-var2509 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2510 = 137;
-((void (*)(val*, long))(var2509->class->vft[COLOR_parser__ReduceAction__init]))(var2509, var2510) /* init on <var2509:ReduceAction596>*/;
-var2511 = NEW_parser__ReduceAction805(&type_parser__ReduceAction805);
-var2512 = 137;
-((void (*)(val*, long))(var2511->class->vft[COLOR_parser__ReduceAction__init]))(var2511, var2512) /* init on <var2511:ReduceAction805>*/;
-var2513 = NEW_parser__ReduceAction806(&type_parser__ReduceAction806);
-var2514 = 137;
-((void (*)(val*, long))(var2513->class->vft[COLOR_parser__ReduceAction__init]))(var2513, var2514) /* init on <var2513:ReduceAction806>*/;
-var2515 = NEW_parser__ReduceAction1257(&type_parser__ReduceAction1257);
-var2516 = 138;
-((void (*)(val*, long))(var2515->class->vft[COLOR_parser__ReduceAction__init]))(var2515, var2516) /* init on <var2515:ReduceAction1257>*/;
-var2517 = NEW_parser__ReduceAction1258(&type_parser__ReduceAction1258);
-var2518 = 138;
-((void (*)(val*, long))(var2517->class->vft[COLOR_parser__ReduceAction__init]))(var2517, var2518) /* init on <var2517:ReduceAction1258>*/;
-var2519 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var2520 = 139;
-((void (*)(val*, long))(var2519->class->vft[COLOR_parser__ReduceAction__init]))(var2519, var2520) /* init on <var2519:ReduceAction593>*/;
-var2521 = NEW_parser__ReduceAction594(&type_parser__ReduceAction594);
-var2522 = 139;
-((void (*)(val*, long))(var2521->class->vft[COLOR_parser__ReduceAction__init]))(var2521, var2522) /* init on <var2521:ReduceAction594>*/;
-var2523 = NEW_parser__ReduceAction595(&type_parser__ReduceAction595);
-var2524 = 139;
-((void (*)(val*, long))(var2523->class->vft[COLOR_parser__ReduceAction__init]))(var2523, var2524) /* init on <var2523:ReduceAction595>*/;
-var2525 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2526 = 139;
-((void (*)(val*, long))(var2525->class->vft[COLOR_parser__ReduceAction__init]))(var2525, var2526) /* init on <var2525:ReduceAction596>*/;
-var2527 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2528 = 140;
-((void (*)(val*, long))(var2527->class->vft[COLOR_parser__ReduceAction__init]))(var2527, var2528) /* init on <var2527:ReduceAction596>*/;
-var2529 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2530 = 140;
-((void (*)(val*, long))(var2529->class->vft[COLOR_parser__ReduceAction__init]))(var2529, var2530) /* init on <var2529:ReduceAction596>*/;
-var2531 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2532 = 140;
-((void (*)(val*, long))(var2531->class->vft[COLOR_parser__ReduceAction__init]))(var2531, var2532) /* init on <var2531:ReduceAction606>*/;
-var2533 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2534 = 140;
-((void (*)(val*, long))(var2533->class->vft[COLOR_parser__ReduceAction__init]))(var2533, var2534) /* init on <var2533:ReduceAction607>*/;
-var2535 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2536 = 140;
-((void (*)(val*, long))(var2535->class->vft[COLOR_parser__ReduceAction__init]))(var2535, var2536) /* init on <var2535:ReduceAction608>*/;
-var2537 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2538 = 140;
-((void (*)(val*, long))(var2537->class->vft[COLOR_parser__ReduceAction__init]))(var2537, var2538) /* init on <var2537:ReduceAction609>*/;
-var2539 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2540 = 140;
-((void (*)(val*, long))(var2539->class->vft[COLOR_parser__ReduceAction__init]))(var2539, var2540) /* init on <var2539:ReduceAction610>*/;
-var2541 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2542 = 140;
-((void (*)(val*, long))(var2541->class->vft[COLOR_parser__ReduceAction__init]))(var2541, var2542) /* init on <var2541:ReduceAction611>*/;
-var2543 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2544 = 140;
-((void (*)(val*, long))(var2543->class->vft[COLOR_parser__ReduceAction__init]))(var2543, var2544) /* init on <var2543:ReduceAction612>*/;
-var2545 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2546 = 140;
-((void (*)(val*, long))(var2545->class->vft[COLOR_parser__ReduceAction__init]))(var2545, var2546) /* init on <var2545:ReduceAction613>*/;
-var2547 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2548 = 140;
-((void (*)(val*, long))(var2547->class->vft[COLOR_parser__ReduceAction__init]))(var2547, var2548) /* init on <var2547:ReduceAction614>*/;
-var2549 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2550 = 140;
-((void (*)(val*, long))(var2549->class->vft[COLOR_parser__ReduceAction__init]))(var2549, var2550) /* init on <var2549:ReduceAction615>*/;
-var2551 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2552 = 140;
-((void (*)(val*, long))(var2551->class->vft[COLOR_parser__ReduceAction__init]))(var2551, var2552) /* init on <var2551:ReduceAction616>*/;
-var2553 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2554 = 140;
-((void (*)(val*, long))(var2553->class->vft[COLOR_parser__ReduceAction__init]))(var2553, var2554) /* init on <var2553:ReduceAction596>*/;
-var2555 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2556 = 140;
-((void (*)(val*, long))(var2555->class->vft[COLOR_parser__ReduceAction__init]))(var2555, var2556) /* init on <var2555:ReduceAction596>*/;
-var2557 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2558 = 140;
-((void (*)(val*, long))(var2557->class->vft[COLOR_parser__ReduceAction__init]))(var2557, var2558) /* init on <var2557:ReduceAction596>*/;
-var2559 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2560 = 140;
-((void (*)(val*, long))(var2559->class->vft[COLOR_parser__ReduceAction__init]))(var2559, var2560) /* init on <var2559:ReduceAction596>*/;
-var2561 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2562 = 140;
-((void (*)(val*, long))(var2561->class->vft[COLOR_parser__ReduceAction__init]))(var2561, var2562) /* init on <var2561:ReduceAction596>*/;
-var2563 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2564 = 140;
-((void (*)(val*, long))(var2563->class->vft[COLOR_parser__ReduceAction__init]))(var2563, var2564) /* init on <var2563:ReduceAction596>*/;
-var2565 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var2566 = 140;
-((void (*)(val*, long))(var2565->class->vft[COLOR_parser__ReduceAction__init]))(var2565, var2566) /* init on <var2565:ReduceAction623>*/;
-var2567 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var2568 = 140;
-((void (*)(val*, long))(var2567->class->vft[COLOR_parser__ReduceAction__init]))(var2567, var2568) /* init on <var2567:ReduceAction624>*/;
-var2569 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2570 = 140;
-((void (*)(val*, long))(var2569->class->vft[COLOR_parser__ReduceAction__init]))(var2569, var2570) /* init on <var2569:ReduceAction625>*/;
-var2571 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var2572 = 140;
-((void (*)(val*, long))(var2571->class->vft[COLOR_parser__ReduceAction__init]))(var2571, var2572) /* init on <var2571:ReduceAction626>*/;
-var2573 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2574 = 140;
-((void (*)(val*, long))(var2573->class->vft[COLOR_parser__ReduceAction__init]))(var2573, var2574) /* init on <var2573:ReduceAction625>*/;
-var2575 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2576 = 140;
-((void (*)(val*, long))(var2575->class->vft[COLOR_parser__ReduceAction__init]))(var2575, var2576) /* init on <var2575:ReduceAction628>*/;
-var2577 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var2578 = 140;
-((void (*)(val*, long))(var2577->class->vft[COLOR_parser__ReduceAction__init]))(var2577, var2578) /* init on <var2577:ReduceAction629>*/;
-var2579 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2580 = 140;
-((void (*)(val*, long))(var2579->class->vft[COLOR_parser__ReduceAction__init]))(var2579, var2580) /* init on <var2579:ReduceAction628>*/;
-var2581 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var2582 = 140;
-((void (*)(val*, long))(var2581->class->vft[COLOR_parser__ReduceAction__init]))(var2581, var2582) /* init on <var2581:ReduceAction631>*/;
-var2583 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var2584 = 140;
-((void (*)(val*, long))(var2583->class->vft[COLOR_parser__ReduceAction__init]))(var2583, var2584) /* init on <var2583:ReduceAction632>*/;
-var2585 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var2586 = 140;
-((void (*)(val*, long))(var2585->class->vft[COLOR_parser__ReduceAction__init]))(var2585, var2586) /* init on <var2585:ReduceAction633>*/;
-var2587 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var2588 = 140;
-((void (*)(val*, long))(var2587->class->vft[COLOR_parser__ReduceAction__init]))(var2587, var2588) /* init on <var2587:ReduceAction634>*/;
-var2589 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var2590 = 140;
-((void (*)(val*, long))(var2589->class->vft[COLOR_parser__ReduceAction__init]))(var2589, var2590) /* init on <var2589:ReduceAction635>*/;
-var2591 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var2592 = 140;
-((void (*)(val*, long))(var2591->class->vft[COLOR_parser__ReduceAction__init]))(var2591, var2592) /* init on <var2591:ReduceAction636>*/;
-var2593 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2594 = 140;
-((void (*)(val*, long))(var2593->class->vft[COLOR_parser__ReduceAction__init]))(var2593, var2594) /* init on <var2593:ReduceAction637>*/;
-var2595 = NEW_parser__ReduceAction638(&type_parser__ReduceAction638);
-var2596 = 140;
-((void (*)(val*, long))(var2595->class->vft[COLOR_parser__ReduceAction__init]))(var2595, var2596) /* init on <var2595:ReduceAction638>*/;
-var2597 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2598 = 140;
-((void (*)(val*, long))(var2597->class->vft[COLOR_parser__ReduceAction__init]))(var2597, var2598) /* init on <var2597:ReduceAction637>*/;
-var2599 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2600 = 140;
-((void (*)(val*, long))(var2599->class->vft[COLOR_parser__ReduceAction__init]))(var2599, var2600) /* init on <var2599:ReduceAction640>*/;
-var2601 = NEW_parser__ReduceAction641(&type_parser__ReduceAction641);
-var2602 = 140;
-((void (*)(val*, long))(var2601->class->vft[COLOR_parser__ReduceAction__init]))(var2601, var2602) /* init on <var2601:ReduceAction641>*/;
-var2603 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2604 = 140;
-((void (*)(val*, long))(var2603->class->vft[COLOR_parser__ReduceAction__init]))(var2603, var2604) /* init on <var2603:ReduceAction640>*/;
-var2605 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var2606 = 140;
-((void (*)(val*, long))(var2605->class->vft[COLOR_parser__ReduceAction__init]))(var2605, var2606) /* init on <var2605:ReduceAction643>*/;
-var2607 = NEW_parser__ReduceAction645(&type_parser__ReduceAction645);
-var2608 = 141;
-((void (*)(val*, long))(var2607->class->vft[COLOR_parser__ReduceAction__init]))(var2607, var2608) /* init on <var2607:ReduceAction645>*/;
-var2609 = NEW_parser__ReduceAction646(&type_parser__ReduceAction646);
-var2610 = 142;
-((void (*)(val*, long))(var2609->class->vft[COLOR_parser__ReduceAction__init]))(var2609, var2610) /* init on <var2609:ReduceAction646>*/;
-var2611 = NEW_parser__ReduceAction647(&type_parser__ReduceAction647);
-var2612 = 142;
-((void (*)(val*, long))(var2611->class->vft[COLOR_parser__ReduceAction__init]))(var2611, var2612) /* init on <var2611:ReduceAction647>*/;
-var2613 = NEW_parser__ReduceAction648(&type_parser__ReduceAction648);
-var2614 = 142;
-((void (*)(val*, long))(var2613->class->vft[COLOR_parser__ReduceAction__init]))(var2613, var2614) /* init on <var2613:ReduceAction648>*/;
-var2615 = NEW_parser__ReduceAction649(&type_parser__ReduceAction649);
-var2616 = 142;
-((void (*)(val*, long))(var2615->class->vft[COLOR_parser__ReduceAction__init]))(var2615, var2616) /* init on <var2615:ReduceAction649>*/;
-var2617 = NEW_parser__ReduceAction650(&type_parser__ReduceAction650);
-var2618 = 142;
-((void (*)(val*, long))(var2617->class->vft[COLOR_parser__ReduceAction__init]))(var2617, var2618) /* init on <var2617:ReduceAction650>*/;
-var2619 = NEW_parser__ReduceAction651(&type_parser__ReduceAction651);
-var2620 = 142;
-((void (*)(val*, long))(var2619->class->vft[COLOR_parser__ReduceAction__init]))(var2619, var2620) /* init on <var2619:ReduceAction651>*/;
-var2621 = NEW_parser__ReduceAction652(&type_parser__ReduceAction652);
-var2622 = 142;
-((void (*)(val*, long))(var2621->class->vft[COLOR_parser__ReduceAction__init]))(var2621, var2622) /* init on <var2621:ReduceAction652>*/;
-var2623 = NEW_parser__ReduceAction653(&type_parser__ReduceAction653);
-var2624 = 142;
-((void (*)(val*, long))(var2623->class->vft[COLOR_parser__ReduceAction__init]))(var2623, var2624) /* init on <var2623:ReduceAction653>*/;
-var2625 = NEW_parser__ReduceAction654(&type_parser__ReduceAction654);
-var2626 = 143;
-((void (*)(val*, long))(var2625->class->vft[COLOR_parser__ReduceAction__init]))(var2625, var2626) /* init on <var2625:ReduceAction654>*/;
-var2627 = NEW_parser__ReduceAction655(&type_parser__ReduceAction655);
-var2628 = 143;
-((void (*)(val*, long))(var2627->class->vft[COLOR_parser__ReduceAction__init]))(var2627, var2628) /* init on <var2627:ReduceAction655>*/;
-var2629 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2630 = 143;
-((void (*)(val*, long))(var2629->class->vft[COLOR_parser__ReduceAction__init]))(var2629, var2630) /* init on <var2629:ReduceAction656>*/;
-var2631 = NEW_parser__ReduceAction657(&type_parser__ReduceAction657);
-var2632 = 143;
-((void (*)(val*, long))(var2631->class->vft[COLOR_parser__ReduceAction__init]))(var2631, var2632) /* init on <var2631:ReduceAction657>*/;
-var2633 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2634 = 143;
-((void (*)(val*, long))(var2633->class->vft[COLOR_parser__ReduceAction__init]))(var2633, var2634) /* init on <var2633:ReduceAction656>*/;
-var2635 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2636 = 143;
-((void (*)(val*, long))(var2635->class->vft[COLOR_parser__ReduceAction__init]))(var2635, var2636) /* init on <var2635:ReduceAction659>*/;
-var2637 = NEW_parser__ReduceAction660(&type_parser__ReduceAction660);
-var2638 = 143;
-((void (*)(val*, long))(var2637->class->vft[COLOR_parser__ReduceAction__init]))(var2637, var2638) /* init on <var2637:ReduceAction660>*/;
-var2639 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2640 = 143;
-((void (*)(val*, long))(var2639->class->vft[COLOR_parser__ReduceAction__init]))(var2639, var2640) /* init on <var2639:ReduceAction659>*/;
-var2641 = NEW_parser__ReduceAction662(&type_parser__ReduceAction662);
-var2642 = 143;
-((void (*)(val*, long))(var2641->class->vft[COLOR_parser__ReduceAction__init]))(var2641, var2642) /* init on <var2641:ReduceAction662>*/;
-var2643 = NEW_parser__ReduceAction663(&type_parser__ReduceAction663);
-var2644 = 143;
-((void (*)(val*, long))(var2643->class->vft[COLOR_parser__ReduceAction__init]))(var2643, var2644) /* init on <var2643:ReduceAction663>*/;
-var2645 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2646 = 143;
-((void (*)(val*, long))(var2645->class->vft[COLOR_parser__ReduceAction__init]))(var2645, var2646) /* init on <var2645:ReduceAction664>*/;
-var2647 = NEW_parser__ReduceAction665(&type_parser__ReduceAction665);
-var2648 = 143;
-((void (*)(val*, long))(var2647->class->vft[COLOR_parser__ReduceAction__init]))(var2647, var2648) /* init on <var2647:ReduceAction665>*/;
-var2649 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2650 = 143;
-((void (*)(val*, long))(var2649->class->vft[COLOR_parser__ReduceAction__init]))(var2649, var2650) /* init on <var2649:ReduceAction664>*/;
-var2651 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2652 = 143;
-((void (*)(val*, long))(var2651->class->vft[COLOR_parser__ReduceAction__init]))(var2651, var2652) /* init on <var2651:ReduceAction667>*/;
-var2653 = NEW_parser__ReduceAction668(&type_parser__ReduceAction668);
-var2654 = 143;
-((void (*)(val*, long))(var2653->class->vft[COLOR_parser__ReduceAction__init]))(var2653, var2654) /* init on <var2653:ReduceAction668>*/;
-var2655 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2656 = 143;
-((void (*)(val*, long))(var2655->class->vft[COLOR_parser__ReduceAction__init]))(var2655, var2656) /* init on <var2655:ReduceAction667>*/;
-var2657 = NEW_parser__ReduceAction670(&type_parser__ReduceAction670);
-var2658 = 143;
-((void (*)(val*, long))(var2657->class->vft[COLOR_parser__ReduceAction__init]))(var2657, var2658) /* init on <var2657:ReduceAction670>*/;
-var2659 = NEW_parser__ReduceAction671(&type_parser__ReduceAction671);
-var2660 = 143;
-((void (*)(val*, long))(var2659->class->vft[COLOR_parser__ReduceAction__init]))(var2659, var2660) /* init on <var2659:ReduceAction671>*/;
-var2661 = NEW_parser__ReduceAction672(&type_parser__ReduceAction672);
-var2662 = 143;
-((void (*)(val*, long))(var2661->class->vft[COLOR_parser__ReduceAction__init]))(var2661, var2662) /* init on <var2661:ReduceAction672>*/;
-var2663 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2664 = 143;
-((void (*)(val*, long))(var2663->class->vft[COLOR_parser__ReduceAction__init]))(var2663, var2664) /* init on <var2663:ReduceAction673>*/;
-var2665 = NEW_parser__ReduceAction674(&type_parser__ReduceAction674);
-var2666 = 143;
-((void (*)(val*, long))(var2665->class->vft[COLOR_parser__ReduceAction__init]))(var2665, var2666) /* init on <var2665:ReduceAction674>*/;
-var2667 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2668 = 143;
-((void (*)(val*, long))(var2667->class->vft[COLOR_parser__ReduceAction__init]))(var2667, var2668) /* init on <var2667:ReduceAction673>*/;
-var2669 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2670 = 143;
-((void (*)(val*, long))(var2669->class->vft[COLOR_parser__ReduceAction__init]))(var2669, var2670) /* init on <var2669:ReduceAction676>*/;
-var2671 = NEW_parser__ReduceAction677(&type_parser__ReduceAction677);
-var2672 = 143;
-((void (*)(val*, long))(var2671->class->vft[COLOR_parser__ReduceAction__init]))(var2671, var2672) /* init on <var2671:ReduceAction677>*/;
-var2673 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2674 = 143;
-((void (*)(val*, long))(var2673->class->vft[COLOR_parser__ReduceAction__init]))(var2673, var2674) /* init on <var2673:ReduceAction676>*/;
-var2675 = NEW_parser__ReduceAction679(&type_parser__ReduceAction679);
-var2676 = 143;
-((void (*)(val*, long))(var2675->class->vft[COLOR_parser__ReduceAction__init]))(var2675, var2676) /* init on <var2675:ReduceAction679>*/;
-var2677 = NEW_parser__ReduceAction680(&type_parser__ReduceAction680);
-var2678 = 143;
-((void (*)(val*, long))(var2677->class->vft[COLOR_parser__ReduceAction__init]))(var2677, var2678) /* init on <var2677:ReduceAction680>*/;
-var2679 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2680 = 143;
-((void (*)(val*, long))(var2679->class->vft[COLOR_parser__ReduceAction__init]))(var2679, var2680) /* init on <var2679:ReduceAction681>*/;
-var2681 = NEW_parser__ReduceAction682(&type_parser__ReduceAction682);
-var2682 = 143;
-((void (*)(val*, long))(var2681->class->vft[COLOR_parser__ReduceAction__init]))(var2681, var2682) /* init on <var2681:ReduceAction682>*/;
-var2683 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2684 = 143;
-((void (*)(val*, long))(var2683->class->vft[COLOR_parser__ReduceAction__init]))(var2683, var2684) /* init on <var2683:ReduceAction681>*/;
-var2685 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2686 = 143;
-((void (*)(val*, long))(var2685->class->vft[COLOR_parser__ReduceAction__init]))(var2685, var2686) /* init on <var2685:ReduceAction684>*/;
-var2687 = NEW_parser__ReduceAction685(&type_parser__ReduceAction685);
-var2688 = 143;
-((void (*)(val*, long))(var2687->class->vft[COLOR_parser__ReduceAction__init]))(var2687, var2688) /* init on <var2687:ReduceAction685>*/;
-var2689 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2690 = 143;
-((void (*)(val*, long))(var2689->class->vft[COLOR_parser__ReduceAction__init]))(var2689, var2690) /* init on <var2689:ReduceAction684>*/;
-var2691 = NEW_parser__ReduceAction687(&type_parser__ReduceAction687);
-var2692 = 143;
-((void (*)(val*, long))(var2691->class->vft[COLOR_parser__ReduceAction__init]))(var2691, var2692) /* init on <var2691:ReduceAction687>*/;
-var2693 = NEW_parser__ReduceAction690(&type_parser__ReduceAction690);
-var2694 = 144;
-((void (*)(val*, long))(var2693->class->vft[COLOR_parser__ReduceAction__init]))(var2693, var2694) /* init on <var2693:ReduceAction690>*/;
-var2695 = NEW_parser__ReduceAction691(&type_parser__ReduceAction691);
-var2696 = 144;
-((void (*)(val*, long))(var2695->class->vft[COLOR_parser__ReduceAction__init]))(var2695, var2696) /* init on <var2695:ReduceAction691>*/;
-var2697 = NEW_parser__ReduceAction692(&type_parser__ReduceAction692);
-var2698 = 145;
-((void (*)(val*, long))(var2697->class->vft[COLOR_parser__ReduceAction__init]))(var2697, var2698) /* init on <var2697:ReduceAction692>*/;
-var2699 = NEW_parser__ReduceAction699(&type_parser__ReduceAction699);
-var2700 = 146;
-((void (*)(val*, long))(var2699->class->vft[COLOR_parser__ReduceAction__init]))(var2699, var2700) /* init on <var2699:ReduceAction699>*/;
-var2701 = NEW_parser__ReduceAction700(&type_parser__ReduceAction700);
-var2702 = 146;
-((void (*)(val*, long))(var2701->class->vft[COLOR_parser__ReduceAction__init]))(var2701, var2702) /* init on <var2701:ReduceAction700>*/;
-var2703 = NEW_parser__ReduceAction701(&type_parser__ReduceAction701);
-var2704 = 147;
-((void (*)(val*, long))(var2703->class->vft[COLOR_parser__ReduceAction__init]))(var2703, var2704) /* init on <var2703:ReduceAction701>*/;
-var2705 = NEW_parser__ReduceAction702(&type_parser__ReduceAction702);
-var2706 = 147;
-((void (*)(val*, long))(var2705->class->vft[COLOR_parser__ReduceAction__init]))(var2705, var2706) /* init on <var2705:ReduceAction702>*/;
-var2707 = NEW_parser__ReduceAction703(&type_parser__ReduceAction703);
-var2708 = 148;
-((void (*)(val*, long))(var2707->class->vft[COLOR_parser__ReduceAction__init]))(var2707, var2708) /* init on <var2707:ReduceAction703>*/;
-var2709 = NEW_parser__ReduceAction704(&type_parser__ReduceAction704);
-var2710 = 148;
-((void (*)(val*, long))(var2709->class->vft[COLOR_parser__ReduceAction__init]))(var2709, var2710) /* init on <var2709:ReduceAction704>*/;
-var2711 = NEW_parser__ReduceAction705(&type_parser__ReduceAction705);
-var2712 = 148;
-((void (*)(val*, long))(var2711->class->vft[COLOR_parser__ReduceAction__init]))(var2711, var2712) /* init on <var2711:ReduceAction705>*/;
-var2713 = NEW_parser__ReduceAction706(&type_parser__ReduceAction706);
-var2714 = 148;
-((void (*)(val*, long))(var2713->class->vft[COLOR_parser__ReduceAction__init]))(var2713, var2714) /* init on <var2713:ReduceAction706>*/;
-var2715 = NEW_parser__ReduceAction707(&type_parser__ReduceAction707);
-var2716 = 149;
-((void (*)(val*, long))(var2715->class->vft[COLOR_parser__ReduceAction__init]))(var2715, var2716) /* init on <var2715:ReduceAction707>*/;
-var2717 = NEW_parser__ReduceAction708(&type_parser__ReduceAction708);
-var2718 = 149;
-((void (*)(val*, long))(var2717->class->vft[COLOR_parser__ReduceAction__init]))(var2717, var2718) /* init on <var2717:ReduceAction708>*/;
-var2719 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2720 = 150;
-((void (*)(val*, long))(var2719->class->vft[COLOR_parser__ReduceAction__init]))(var2719, var2720) /* init on <var2719:ReduceAction596>*/;
-var2721 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2722 = 151;
-((void (*)(val*, long))(var2721->class->vft[COLOR_parser__ReduceAction__init]))(var2721, var2722) /* init on <var2721:ReduceAction596>*/;
-var2723 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2724 = 152;
-((void (*)(val*, long))(var2723->class->vft[COLOR_parser__ReduceAction__init]))(var2723, var2724) /* init on <var2723:ReduceAction596>*/;
-var2725 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2726 = 152;
-((void (*)(val*, long))(var2725->class->vft[COLOR_parser__ReduceAction__init]))(var2725, var2726) /* init on <var2725:ReduceAction596>*/;
-var2727 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2728 = 152;
-((void (*)(val*, long))(var2727->class->vft[COLOR_parser__ReduceAction__init]))(var2727, var2728) /* init on <var2727:ReduceAction606>*/;
-var2729 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2730 = 152;
-((void (*)(val*, long))(var2729->class->vft[COLOR_parser__ReduceAction__init]))(var2729, var2730) /* init on <var2729:ReduceAction607>*/;
-var2731 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2732 = 152;
-((void (*)(val*, long))(var2731->class->vft[COLOR_parser__ReduceAction__init]))(var2731, var2732) /* init on <var2731:ReduceAction608>*/;
-var2733 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2734 = 152;
-((void (*)(val*, long))(var2733->class->vft[COLOR_parser__ReduceAction__init]))(var2733, var2734) /* init on <var2733:ReduceAction609>*/;
-var2735 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2736 = 152;
-((void (*)(val*, long))(var2735->class->vft[COLOR_parser__ReduceAction__init]))(var2735, var2736) /* init on <var2735:ReduceAction610>*/;
-var2737 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2738 = 152;
-((void (*)(val*, long))(var2737->class->vft[COLOR_parser__ReduceAction__init]))(var2737, var2738) /* init on <var2737:ReduceAction611>*/;
-var2739 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2740 = 152;
-((void (*)(val*, long))(var2739->class->vft[COLOR_parser__ReduceAction__init]))(var2739, var2740) /* init on <var2739:ReduceAction612>*/;
-var2741 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2742 = 152;
-((void (*)(val*, long))(var2741->class->vft[COLOR_parser__ReduceAction__init]))(var2741, var2742) /* init on <var2741:ReduceAction613>*/;
-var2743 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2744 = 152;
-((void (*)(val*, long))(var2743->class->vft[COLOR_parser__ReduceAction__init]))(var2743, var2744) /* init on <var2743:ReduceAction614>*/;
-var2745 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2746 = 152;
-((void (*)(val*, long))(var2745->class->vft[COLOR_parser__ReduceAction__init]))(var2745, var2746) /* init on <var2745:ReduceAction615>*/;
-var2747 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2748 = 152;
-((void (*)(val*, long))(var2747->class->vft[COLOR_parser__ReduceAction__init]))(var2747, var2748) /* init on <var2747:ReduceAction616>*/;
-var2749 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2750 = 152;
-((void (*)(val*, long))(var2749->class->vft[COLOR_parser__ReduceAction__init]))(var2749, var2750) /* init on <var2749:ReduceAction596>*/;
-var2751 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2752 = 152;
-((void (*)(val*, long))(var2751->class->vft[COLOR_parser__ReduceAction__init]))(var2751, var2752) /* init on <var2751:ReduceAction596>*/;
-var2753 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2754 = 152;
-((void (*)(val*, long))(var2753->class->vft[COLOR_parser__ReduceAction__init]))(var2753, var2754) /* init on <var2753:ReduceAction596>*/;
-var2755 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2756 = 152;
-((void (*)(val*, long))(var2755->class->vft[COLOR_parser__ReduceAction__init]))(var2755, var2756) /* init on <var2755:ReduceAction596>*/;
-var2757 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2758 = 152;
-((void (*)(val*, long))(var2757->class->vft[COLOR_parser__ReduceAction__init]))(var2757, var2758) /* init on <var2757:ReduceAction596>*/;
-var2759 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2760 = 152;
-((void (*)(val*, long))(var2759->class->vft[COLOR_parser__ReduceAction__init]))(var2759, var2760) /* init on <var2759:ReduceAction596>*/;
-var2761 = NEW_parser__ReduceAction623(&type_parser__ReduceAction623);
-var2762 = 152;
-((void (*)(val*, long))(var2761->class->vft[COLOR_parser__ReduceAction__init]))(var2761, var2762) /* init on <var2761:ReduceAction623>*/;
-var2763 = NEW_parser__ReduceAction624(&type_parser__ReduceAction624);
-var2764 = 152;
-((void (*)(val*, long))(var2763->class->vft[COLOR_parser__ReduceAction__init]))(var2763, var2764) /* init on <var2763:ReduceAction624>*/;
-var2765 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2766 = 152;
-((void (*)(val*, long))(var2765->class->vft[COLOR_parser__ReduceAction__init]))(var2765, var2766) /* init on <var2765:ReduceAction625>*/;
-var2767 = NEW_parser__ReduceAction626(&type_parser__ReduceAction626);
-var2768 = 152;
-((void (*)(val*, long))(var2767->class->vft[COLOR_parser__ReduceAction__init]))(var2767, var2768) /* init on <var2767:ReduceAction626>*/;
-var2769 = NEW_parser__ReduceAction625(&type_parser__ReduceAction625);
-var2770 = 152;
-((void (*)(val*, long))(var2769->class->vft[COLOR_parser__ReduceAction__init]))(var2769, var2770) /* init on <var2769:ReduceAction625>*/;
-var2771 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2772 = 152;
-((void (*)(val*, long))(var2771->class->vft[COLOR_parser__ReduceAction__init]))(var2771, var2772) /* init on <var2771:ReduceAction628>*/;
-var2773 = NEW_parser__ReduceAction629(&type_parser__ReduceAction629);
-var2774 = 152;
-((void (*)(val*, long))(var2773->class->vft[COLOR_parser__ReduceAction__init]))(var2773, var2774) /* init on <var2773:ReduceAction629>*/;
-var2775 = NEW_parser__ReduceAction628(&type_parser__ReduceAction628);
-var2776 = 152;
-((void (*)(val*, long))(var2775->class->vft[COLOR_parser__ReduceAction__init]))(var2775, var2776) /* init on <var2775:ReduceAction628>*/;
-var2777 = NEW_parser__ReduceAction631(&type_parser__ReduceAction631);
-var2778 = 152;
-((void (*)(val*, long))(var2777->class->vft[COLOR_parser__ReduceAction__init]))(var2777, var2778) /* init on <var2777:ReduceAction631>*/;
-var2779 = NEW_parser__ReduceAction632(&type_parser__ReduceAction632);
-var2780 = 152;
-((void (*)(val*, long))(var2779->class->vft[COLOR_parser__ReduceAction__init]))(var2779, var2780) /* init on <var2779:ReduceAction632>*/;
-var2781 = NEW_parser__ReduceAction633(&type_parser__ReduceAction633);
-var2782 = 152;
-((void (*)(val*, long))(var2781->class->vft[COLOR_parser__ReduceAction__init]))(var2781, var2782) /* init on <var2781:ReduceAction633>*/;
-var2783 = NEW_parser__ReduceAction634(&type_parser__ReduceAction634);
-var2784 = 152;
-((void (*)(val*, long))(var2783->class->vft[COLOR_parser__ReduceAction__init]))(var2783, var2784) /* init on <var2783:ReduceAction634>*/;
-var2785 = NEW_parser__ReduceAction635(&type_parser__ReduceAction635);
-var2786 = 152;
-((void (*)(val*, long))(var2785->class->vft[COLOR_parser__ReduceAction__init]))(var2785, var2786) /* init on <var2785:ReduceAction635>*/;
-var2787 = NEW_parser__ReduceAction636(&type_parser__ReduceAction636);
-var2788 = 152;
-((void (*)(val*, long))(var2787->class->vft[COLOR_parser__ReduceAction__init]))(var2787, var2788) /* init on <var2787:ReduceAction636>*/;
-var2789 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2790 = 152;
-((void (*)(val*, long))(var2789->class->vft[COLOR_parser__ReduceAction__init]))(var2789, var2790) /* init on <var2789:ReduceAction637>*/;
-var2791 = NEW_parser__ReduceAction638(&type_parser__ReduceAction638);
-var2792 = 152;
-((void (*)(val*, long))(var2791->class->vft[COLOR_parser__ReduceAction__init]))(var2791, var2792) /* init on <var2791:ReduceAction638>*/;
-var2793 = NEW_parser__ReduceAction637(&type_parser__ReduceAction637);
-var2794 = 152;
-((void (*)(val*, long))(var2793->class->vft[COLOR_parser__ReduceAction__init]))(var2793, var2794) /* init on <var2793:ReduceAction637>*/;
-var2795 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2796 = 152;
-((void (*)(val*, long))(var2795->class->vft[COLOR_parser__ReduceAction__init]))(var2795, var2796) /* init on <var2795:ReduceAction640>*/;
-var2797 = NEW_parser__ReduceAction641(&type_parser__ReduceAction641);
-var2798 = 152;
-((void (*)(val*, long))(var2797->class->vft[COLOR_parser__ReduceAction__init]))(var2797, var2798) /* init on <var2797:ReduceAction641>*/;
-var2799 = NEW_parser__ReduceAction640(&type_parser__ReduceAction640);
-var2800 = 152;
-((void (*)(val*, long))(var2799->class->vft[COLOR_parser__ReduceAction__init]))(var2799, var2800) /* init on <var2799:ReduceAction640>*/;
-var2801 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var2802 = 152;
-((void (*)(val*, long))(var2801->class->vft[COLOR_parser__ReduceAction__init]))(var2801, var2802) /* init on <var2801:ReduceAction643>*/;
-var2803 = NEW_parser__ReduceAction654(&type_parser__ReduceAction654);
-var2804 = 153;
-((void (*)(val*, long))(var2803->class->vft[COLOR_parser__ReduceAction__init]))(var2803, var2804) /* init on <var2803:ReduceAction654>*/;
-var2805 = NEW_parser__ReduceAction655(&type_parser__ReduceAction655);
-var2806 = 153;
-((void (*)(val*, long))(var2805->class->vft[COLOR_parser__ReduceAction__init]))(var2805, var2806) /* init on <var2805:ReduceAction655>*/;
-var2807 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2808 = 153;
-((void (*)(val*, long))(var2807->class->vft[COLOR_parser__ReduceAction__init]))(var2807, var2808) /* init on <var2807:ReduceAction656>*/;
-var2809 = NEW_parser__ReduceAction657(&type_parser__ReduceAction657);
-var2810 = 153;
-((void (*)(val*, long))(var2809->class->vft[COLOR_parser__ReduceAction__init]))(var2809, var2810) /* init on <var2809:ReduceAction657>*/;
-var2811 = NEW_parser__ReduceAction656(&type_parser__ReduceAction656);
-var2812 = 153;
-((void (*)(val*, long))(var2811->class->vft[COLOR_parser__ReduceAction__init]))(var2811, var2812) /* init on <var2811:ReduceAction656>*/;
-var2813 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2814 = 153;
-((void (*)(val*, long))(var2813->class->vft[COLOR_parser__ReduceAction__init]))(var2813, var2814) /* init on <var2813:ReduceAction659>*/;
-var2815 = NEW_parser__ReduceAction660(&type_parser__ReduceAction660);
-var2816 = 153;
-((void (*)(val*, long))(var2815->class->vft[COLOR_parser__ReduceAction__init]))(var2815, var2816) /* init on <var2815:ReduceAction660>*/;
-var2817 = NEW_parser__ReduceAction659(&type_parser__ReduceAction659);
-var2818 = 153;
-((void (*)(val*, long))(var2817->class->vft[COLOR_parser__ReduceAction__init]))(var2817, var2818) /* init on <var2817:ReduceAction659>*/;
-var2819 = NEW_parser__ReduceAction662(&type_parser__ReduceAction662);
-var2820 = 153;
-((void (*)(val*, long))(var2819->class->vft[COLOR_parser__ReduceAction__init]))(var2819, var2820) /* init on <var2819:ReduceAction662>*/;
-var2821 = NEW_parser__ReduceAction663(&type_parser__ReduceAction663);
-var2822 = 153;
-((void (*)(val*, long))(var2821->class->vft[COLOR_parser__ReduceAction__init]))(var2821, var2822) /* init on <var2821:ReduceAction663>*/;
-var2823 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2824 = 153;
-((void (*)(val*, long))(var2823->class->vft[COLOR_parser__ReduceAction__init]))(var2823, var2824) /* init on <var2823:ReduceAction664>*/;
-var2825 = NEW_parser__ReduceAction665(&type_parser__ReduceAction665);
-var2826 = 153;
-((void (*)(val*, long))(var2825->class->vft[COLOR_parser__ReduceAction__init]))(var2825, var2826) /* init on <var2825:ReduceAction665>*/;
-var2827 = NEW_parser__ReduceAction664(&type_parser__ReduceAction664);
-var2828 = 153;
-((void (*)(val*, long))(var2827->class->vft[COLOR_parser__ReduceAction__init]))(var2827, var2828) /* init on <var2827:ReduceAction664>*/;
-var2829 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2830 = 153;
-((void (*)(val*, long))(var2829->class->vft[COLOR_parser__ReduceAction__init]))(var2829, var2830) /* init on <var2829:ReduceAction667>*/;
-var2831 = NEW_parser__ReduceAction668(&type_parser__ReduceAction668);
-var2832 = 153;
-((void (*)(val*, long))(var2831->class->vft[COLOR_parser__ReduceAction__init]))(var2831, var2832) /* init on <var2831:ReduceAction668>*/;
-var2833 = NEW_parser__ReduceAction667(&type_parser__ReduceAction667);
-var2834 = 153;
-((void (*)(val*, long))(var2833->class->vft[COLOR_parser__ReduceAction__init]))(var2833, var2834) /* init on <var2833:ReduceAction667>*/;
-var2835 = NEW_parser__ReduceAction670(&type_parser__ReduceAction670);
-var2836 = 153;
-((void (*)(val*, long))(var2835->class->vft[COLOR_parser__ReduceAction__init]))(var2835, var2836) /* init on <var2835:ReduceAction670>*/;
-var2837 = NEW_parser__ReduceAction671(&type_parser__ReduceAction671);
-var2838 = 153;
-((void (*)(val*, long))(var2837->class->vft[COLOR_parser__ReduceAction__init]))(var2837, var2838) /* init on <var2837:ReduceAction671>*/;
-var2839 = NEW_parser__ReduceAction672(&type_parser__ReduceAction672);
-var2840 = 153;
-((void (*)(val*, long))(var2839->class->vft[COLOR_parser__ReduceAction__init]))(var2839, var2840) /* init on <var2839:ReduceAction672>*/;
-var2841 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2842 = 153;
-((void (*)(val*, long))(var2841->class->vft[COLOR_parser__ReduceAction__init]))(var2841, var2842) /* init on <var2841:ReduceAction673>*/;
-var2843 = NEW_parser__ReduceAction674(&type_parser__ReduceAction674);
-var2844 = 153;
-((void (*)(val*, long))(var2843->class->vft[COLOR_parser__ReduceAction__init]))(var2843, var2844) /* init on <var2843:ReduceAction674>*/;
-var2845 = NEW_parser__ReduceAction673(&type_parser__ReduceAction673);
-var2846 = 153;
-((void (*)(val*, long))(var2845->class->vft[COLOR_parser__ReduceAction__init]))(var2845, var2846) /* init on <var2845:ReduceAction673>*/;
-var2847 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2848 = 153;
-((void (*)(val*, long))(var2847->class->vft[COLOR_parser__ReduceAction__init]))(var2847, var2848) /* init on <var2847:ReduceAction676>*/;
-var2849 = NEW_parser__ReduceAction677(&type_parser__ReduceAction677);
-var2850 = 153;
-((void (*)(val*, long))(var2849->class->vft[COLOR_parser__ReduceAction__init]))(var2849, var2850) /* init on <var2849:ReduceAction677>*/;
-var2851 = NEW_parser__ReduceAction676(&type_parser__ReduceAction676);
-var2852 = 153;
-((void (*)(val*, long))(var2851->class->vft[COLOR_parser__ReduceAction__init]))(var2851, var2852) /* init on <var2851:ReduceAction676>*/;
-var2853 = NEW_parser__ReduceAction679(&type_parser__ReduceAction679);
-var2854 = 153;
-((void (*)(val*, long))(var2853->class->vft[COLOR_parser__ReduceAction__init]))(var2853, var2854) /* init on <var2853:ReduceAction679>*/;
-var2855 = NEW_parser__ReduceAction680(&type_parser__ReduceAction680);
-var2856 = 153;
-((void (*)(val*, long))(var2855->class->vft[COLOR_parser__ReduceAction__init]))(var2855, var2856) /* init on <var2855:ReduceAction680>*/;
-var2857 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2858 = 153;
-((void (*)(val*, long))(var2857->class->vft[COLOR_parser__ReduceAction__init]))(var2857, var2858) /* init on <var2857:ReduceAction681>*/;
-var2859 = NEW_parser__ReduceAction682(&type_parser__ReduceAction682);
-var2860 = 153;
-((void (*)(val*, long))(var2859->class->vft[COLOR_parser__ReduceAction__init]))(var2859, var2860) /* init on <var2859:ReduceAction682>*/;
-var2861 = NEW_parser__ReduceAction681(&type_parser__ReduceAction681);
-var2862 = 153;
-((void (*)(val*, long))(var2861->class->vft[COLOR_parser__ReduceAction__init]))(var2861, var2862) /* init on <var2861:ReduceAction681>*/;
-var2863 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2864 = 153;
-((void (*)(val*, long))(var2863->class->vft[COLOR_parser__ReduceAction__init]))(var2863, var2864) /* init on <var2863:ReduceAction684>*/;
-var2865 = NEW_parser__ReduceAction685(&type_parser__ReduceAction685);
-var2866 = 153;
-((void (*)(val*, long))(var2865->class->vft[COLOR_parser__ReduceAction__init]))(var2865, var2866) /* init on <var2865:ReduceAction685>*/;
-var2867 = NEW_parser__ReduceAction684(&type_parser__ReduceAction684);
-var2868 = 153;
-((void (*)(val*, long))(var2867->class->vft[COLOR_parser__ReduceAction__init]))(var2867, var2868) /* init on <var2867:ReduceAction684>*/;
-var2869 = NEW_parser__ReduceAction687(&type_parser__ReduceAction687);
-var2870 = 153;
-((void (*)(val*, long))(var2869->class->vft[COLOR_parser__ReduceAction__init]))(var2869, var2870) /* init on <var2869:ReduceAction687>*/;
-var2871 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2872 = 154;
-((void (*)(val*, long))(var2871->class->vft[COLOR_parser__ReduceAction__init]))(var2871, var2872) /* init on <var2871:ReduceAction596>*/;
-var2873 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2874 = 155;
-((void (*)(val*, long))(var2873->class->vft[COLOR_parser__ReduceAction__init]))(var2873, var2874) /* init on <var2873:ReduceAction596>*/;
-var2875 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var2876 = 156;
-((void (*)(val*, long))(var2875->class->vft[COLOR_parser__ReduceAction__init]))(var2875, var2876) /* init on <var2875:ReduceAction593>*/;
-var2877 = NEW_parser__ReduceAction594(&type_parser__ReduceAction594);
-var2878 = 156;
-((void (*)(val*, long))(var2877->class->vft[COLOR_parser__ReduceAction__init]))(var2877, var2878) /* init on <var2877:ReduceAction594>*/;
-var2879 = NEW_parser__ReduceAction595(&type_parser__ReduceAction595);
-var2880 = 156;
-((void (*)(val*, long))(var2879->class->vft[COLOR_parser__ReduceAction__init]))(var2879, var2880) /* init on <var2879:ReduceAction595>*/;
-var2881 = NEW_parser__ReduceAction593(&type_parser__ReduceAction593);
-var2882 = 157;
-((void (*)(val*, long))(var2881->class->vft[COLOR_parser__ReduceAction__init]))(var2881, var2882) /* init on <var2881:ReduceAction593>*/;
-var2883 = NEW_parser__ReduceAction594(&type_parser__ReduceAction594);
-var2884 = 157;
-((void (*)(val*, long))(var2883->class->vft[COLOR_parser__ReduceAction__init]))(var2883, var2884) /* init on <var2883:ReduceAction594>*/;
-var2885 = NEW_parser__ReduceAction595(&type_parser__ReduceAction595);
-var2886 = 157;
-((void (*)(val*, long))(var2885->class->vft[COLOR_parser__ReduceAction__init]))(var2885, var2886) /* init on <var2885:ReduceAction595>*/;
-var2887 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2888 = 158;
-((void (*)(val*, long))(var2887->class->vft[COLOR_parser__ReduceAction__init]))(var2887, var2888) /* init on <var2887:ReduceAction596>*/;
-var2889 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2890 = 158;
-((void (*)(val*, long))(var2889->class->vft[COLOR_parser__ReduceAction__init]))(var2889, var2890) /* init on <var2889:ReduceAction596>*/;
-var2891 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2892 = 158;
-((void (*)(val*, long))(var2891->class->vft[COLOR_parser__ReduceAction__init]))(var2891, var2892) /* init on <var2891:ReduceAction606>*/;
-var2893 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2894 = 158;
-((void (*)(val*, long))(var2893->class->vft[COLOR_parser__ReduceAction__init]))(var2893, var2894) /* init on <var2893:ReduceAction607>*/;
-var2895 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2896 = 158;
-((void (*)(val*, long))(var2895->class->vft[COLOR_parser__ReduceAction__init]))(var2895, var2896) /* init on <var2895:ReduceAction608>*/;
-var2897 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2898 = 158;
-((void (*)(val*, long))(var2897->class->vft[COLOR_parser__ReduceAction__init]))(var2897, var2898) /* init on <var2897:ReduceAction609>*/;
-var2899 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2900 = 158;
-((void (*)(val*, long))(var2899->class->vft[COLOR_parser__ReduceAction__init]))(var2899, var2900) /* init on <var2899:ReduceAction610>*/;
-var2901 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2902 = 158;
-((void (*)(val*, long))(var2901->class->vft[COLOR_parser__ReduceAction__init]))(var2901, var2902) /* init on <var2901:ReduceAction611>*/;
-var2903 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2904 = 158;
-((void (*)(val*, long))(var2903->class->vft[COLOR_parser__ReduceAction__init]))(var2903, var2904) /* init on <var2903:ReduceAction612>*/;
-var2905 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2906 = 158;
-((void (*)(val*, long))(var2905->class->vft[COLOR_parser__ReduceAction__init]))(var2905, var2906) /* init on <var2905:ReduceAction613>*/;
-var2907 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2908 = 158;
-((void (*)(val*, long))(var2907->class->vft[COLOR_parser__ReduceAction__init]))(var2907, var2908) /* init on <var2907:ReduceAction614>*/;
-var2909 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2910 = 158;
-((void (*)(val*, long))(var2909->class->vft[COLOR_parser__ReduceAction__init]))(var2909, var2910) /* init on <var2909:ReduceAction615>*/;
-var2911 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2912 = 158;
-((void (*)(val*, long))(var2911->class->vft[COLOR_parser__ReduceAction__init]))(var2911, var2912) /* init on <var2911:ReduceAction616>*/;
-var2913 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2914 = 158;
-((void (*)(val*, long))(var2913->class->vft[COLOR_parser__ReduceAction__init]))(var2913, var2914) /* init on <var2913:ReduceAction596>*/;
-var2915 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2916 = 158;
-((void (*)(val*, long))(var2915->class->vft[COLOR_parser__ReduceAction__init]))(var2915, var2916) /* init on <var2915:ReduceAction596>*/;
-var2917 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2918 = 158;
-((void (*)(val*, long))(var2917->class->vft[COLOR_parser__ReduceAction__init]))(var2917, var2918) /* init on <var2917:ReduceAction596>*/;
-var2919 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2920 = 158;
-((void (*)(val*, long))(var2919->class->vft[COLOR_parser__ReduceAction__init]))(var2919, var2920) /* init on <var2919:ReduceAction596>*/;
-var2921 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2922 = 158;
-((void (*)(val*, long))(var2921->class->vft[COLOR_parser__ReduceAction__init]))(var2921, var2922) /* init on <var2921:ReduceAction596>*/;
-var2923 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var2924 = 158;
-((void (*)(val*, long))(var2923->class->vft[COLOR_parser__ReduceAction__init]))(var2923, var2924) /* init on <var2923:ReduceAction643>*/;
-var2925 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2926 = 159;
-((void (*)(val*, long))(var2925->class->vft[COLOR_parser__ReduceAction__init]))(var2925, var2926) /* init on <var2925:ReduceAction596>*/;
-var2927 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2928 = 159;
-((void (*)(val*, long))(var2927->class->vft[COLOR_parser__ReduceAction__init]))(var2927, var2928) /* init on <var2927:ReduceAction596>*/;
-var2929 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2930 = 159;
-((void (*)(val*, long))(var2929->class->vft[COLOR_parser__ReduceAction__init]))(var2929, var2930) /* init on <var2929:ReduceAction606>*/;
-var2931 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2932 = 159;
-((void (*)(val*, long))(var2931->class->vft[COLOR_parser__ReduceAction__init]))(var2931, var2932) /* init on <var2931:ReduceAction607>*/;
-var2933 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2934 = 159;
-((void (*)(val*, long))(var2933->class->vft[COLOR_parser__ReduceAction__init]))(var2933, var2934) /* init on <var2933:ReduceAction608>*/;
-var2935 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2936 = 159;
-((void (*)(val*, long))(var2935->class->vft[COLOR_parser__ReduceAction__init]))(var2935, var2936) /* init on <var2935:ReduceAction609>*/;
-var2937 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2938 = 159;
-((void (*)(val*, long))(var2937->class->vft[COLOR_parser__ReduceAction__init]))(var2937, var2938) /* init on <var2937:ReduceAction610>*/;
-var2939 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2940 = 159;
-((void (*)(val*, long))(var2939->class->vft[COLOR_parser__ReduceAction__init]))(var2939, var2940) /* init on <var2939:ReduceAction611>*/;
-var2941 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2942 = 159;
-((void (*)(val*, long))(var2941->class->vft[COLOR_parser__ReduceAction__init]))(var2941, var2942) /* init on <var2941:ReduceAction612>*/;
-var2943 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2944 = 159;
-((void (*)(val*, long))(var2943->class->vft[COLOR_parser__ReduceAction__init]))(var2943, var2944) /* init on <var2943:ReduceAction613>*/;
-var2945 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2946 = 159;
-((void (*)(val*, long))(var2945->class->vft[COLOR_parser__ReduceAction__init]))(var2945, var2946) /* init on <var2945:ReduceAction614>*/;
-var2947 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2948 = 159;
-((void (*)(val*, long))(var2947->class->vft[COLOR_parser__ReduceAction__init]))(var2947, var2948) /* init on <var2947:ReduceAction615>*/;
-var2949 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2950 = 159;
-((void (*)(val*, long))(var2949->class->vft[COLOR_parser__ReduceAction__init]))(var2949, var2950) /* init on <var2949:ReduceAction616>*/;
-var2951 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2952 = 159;
-((void (*)(val*, long))(var2951->class->vft[COLOR_parser__ReduceAction__init]))(var2951, var2952) /* init on <var2951:ReduceAction596>*/;
-var2953 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2954 = 159;
-((void (*)(val*, long))(var2953->class->vft[COLOR_parser__ReduceAction__init]))(var2953, var2954) /* init on <var2953:ReduceAction596>*/;
-var2955 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2956 = 159;
-((void (*)(val*, long))(var2955->class->vft[COLOR_parser__ReduceAction__init]))(var2955, var2956) /* init on <var2955:ReduceAction596>*/;
-var2957 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2958 = 159;
-((void (*)(val*, long))(var2957->class->vft[COLOR_parser__ReduceAction__init]))(var2957, var2958) /* init on <var2957:ReduceAction596>*/;
-var2959 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2960 = 159;
-((void (*)(val*, long))(var2959->class->vft[COLOR_parser__ReduceAction__init]))(var2959, var2960) /* init on <var2959:ReduceAction596>*/;
-var2961 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var2962 = 159;
-((void (*)(val*, long))(var2961->class->vft[COLOR_parser__ReduceAction__init]))(var2961, var2962) /* init on <var2961:ReduceAction643>*/;
-var2963 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2964 = 160;
-((void (*)(val*, long))(var2963->class->vft[COLOR_parser__ReduceAction__init]))(var2963, var2964) /* init on <var2963:ReduceAction596>*/;
-var2965 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2966 = 160;
-((void (*)(val*, long))(var2965->class->vft[COLOR_parser__ReduceAction__init]))(var2965, var2966) /* init on <var2965:ReduceAction596>*/;
-var2967 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var2968 = 160;
-((void (*)(val*, long))(var2967->class->vft[COLOR_parser__ReduceAction__init]))(var2967, var2968) /* init on <var2967:ReduceAction606>*/;
-var2969 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var2970 = 160;
-((void (*)(val*, long))(var2969->class->vft[COLOR_parser__ReduceAction__init]))(var2969, var2970) /* init on <var2969:ReduceAction607>*/;
-var2971 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var2972 = 160;
-((void (*)(val*, long))(var2971->class->vft[COLOR_parser__ReduceAction__init]))(var2971, var2972) /* init on <var2971:ReduceAction608>*/;
-var2973 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var2974 = 160;
-((void (*)(val*, long))(var2973->class->vft[COLOR_parser__ReduceAction__init]))(var2973, var2974) /* init on <var2973:ReduceAction609>*/;
-var2975 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var2976 = 160;
-((void (*)(val*, long))(var2975->class->vft[COLOR_parser__ReduceAction__init]))(var2975, var2976) /* init on <var2975:ReduceAction610>*/;
-var2977 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var2978 = 160;
-((void (*)(val*, long))(var2977->class->vft[COLOR_parser__ReduceAction__init]))(var2977, var2978) /* init on <var2977:ReduceAction611>*/;
-var2979 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var2980 = 160;
-((void (*)(val*, long))(var2979->class->vft[COLOR_parser__ReduceAction__init]))(var2979, var2980) /* init on <var2979:ReduceAction612>*/;
-var2981 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var2982 = 160;
-((void (*)(val*, long))(var2981->class->vft[COLOR_parser__ReduceAction__init]))(var2981, var2982) /* init on <var2981:ReduceAction613>*/;
-var2983 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var2984 = 160;
-((void (*)(val*, long))(var2983->class->vft[COLOR_parser__ReduceAction__init]))(var2983, var2984) /* init on <var2983:ReduceAction614>*/;
-var2985 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var2986 = 160;
-((void (*)(val*, long))(var2985->class->vft[COLOR_parser__ReduceAction__init]))(var2985, var2986) /* init on <var2985:ReduceAction615>*/;
-var2987 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var2988 = 160;
-((void (*)(val*, long))(var2987->class->vft[COLOR_parser__ReduceAction__init]))(var2987, var2988) /* init on <var2987:ReduceAction616>*/;
-var2989 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2990 = 160;
-((void (*)(val*, long))(var2989->class->vft[COLOR_parser__ReduceAction__init]))(var2989, var2990) /* init on <var2989:ReduceAction596>*/;
-var2991 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2992 = 160;
-((void (*)(val*, long))(var2991->class->vft[COLOR_parser__ReduceAction__init]))(var2991, var2992) /* init on <var2991:ReduceAction596>*/;
-var2993 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2994 = 160;
-((void (*)(val*, long))(var2993->class->vft[COLOR_parser__ReduceAction__init]))(var2993, var2994) /* init on <var2993:ReduceAction596>*/;
-var2995 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2996 = 160;
-((void (*)(val*, long))(var2995->class->vft[COLOR_parser__ReduceAction__init]))(var2995, var2996) /* init on <var2995:ReduceAction596>*/;
-var2997 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var2998 = 160;
-((void (*)(val*, long))(var2997->class->vft[COLOR_parser__ReduceAction__init]))(var2997, var2998) /* init on <var2997:ReduceAction596>*/;
-var2999 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var3000 = 160;
-((void (*)(val*, long))(var2999->class->vft[COLOR_parser__ReduceAction__init]))(var2999, var3000) /* init on <var2999:ReduceAction643>*/;
-var3001 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3002 = 161;
-((void (*)(val*, long))(var3001->class->vft[COLOR_parser__ReduceAction__init]))(var3001, var3002) /* init on <var3001:ReduceAction596>*/;
-var3003 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3004 = 161;
-((void (*)(val*, long))(var3003->class->vft[COLOR_parser__ReduceAction__init]))(var3003, var3004) /* init on <var3003:ReduceAction596>*/;
-var3005 = NEW_parser__ReduceAction606(&type_parser__ReduceAction606);
-var3006 = 161;
-((void (*)(val*, long))(var3005->class->vft[COLOR_parser__ReduceAction__init]))(var3005, var3006) /* init on <var3005:ReduceAction606>*/;
-var3007 = NEW_parser__ReduceAction607(&type_parser__ReduceAction607);
-var3008 = 161;
-((void (*)(val*, long))(var3007->class->vft[COLOR_parser__ReduceAction__init]))(var3007, var3008) /* init on <var3007:ReduceAction607>*/;
-var3009 = NEW_parser__ReduceAction608(&type_parser__ReduceAction608);
-var3010 = 161;
-((void (*)(val*, long))(var3009->class->vft[COLOR_parser__ReduceAction__init]))(var3009, var3010) /* init on <var3009:ReduceAction608>*/;
-var3011 = NEW_parser__ReduceAction609(&type_parser__ReduceAction609);
-var3012 = 161;
-((void (*)(val*, long))(var3011->class->vft[COLOR_parser__ReduceAction__init]))(var3011, var3012) /* init on <var3011:ReduceAction609>*/;
-var3013 = NEW_parser__ReduceAction610(&type_parser__ReduceAction610);
-var3014 = 161;
-((void (*)(val*, long))(var3013->class->vft[COLOR_parser__ReduceAction__init]))(var3013, var3014) /* init on <var3013:ReduceAction610>*/;
-var3015 = NEW_parser__ReduceAction611(&type_parser__ReduceAction611);
-var3016 = 161;
-((void (*)(val*, long))(var3015->class->vft[COLOR_parser__ReduceAction__init]))(var3015, var3016) /* init on <var3015:ReduceAction611>*/;
-var3017 = NEW_parser__ReduceAction612(&type_parser__ReduceAction612);
-var3018 = 161;
-((void (*)(val*, long))(var3017->class->vft[COLOR_parser__ReduceAction__init]))(var3017, var3018) /* init on <var3017:ReduceAction612>*/;
-var3019 = NEW_parser__ReduceAction613(&type_parser__ReduceAction613);
-var3020 = 161;
-((void (*)(val*, long))(var3019->class->vft[COLOR_parser__ReduceAction__init]))(var3019, var3020) /* init on <var3019:ReduceAction613>*/;
-var3021 = NEW_parser__ReduceAction614(&type_parser__ReduceAction614);
-var3022 = 161;
-((void (*)(val*, long))(var3021->class->vft[COLOR_parser__ReduceAction__init]))(var3021, var3022) /* init on <var3021:ReduceAction614>*/;
-var3023 = NEW_parser__ReduceAction615(&type_parser__ReduceAction615);
-var3024 = 161;
-((void (*)(val*, long))(var3023->class->vft[COLOR_parser__ReduceAction__init]))(var3023, var3024) /* init on <var3023:ReduceAction615>*/;
-var3025 = NEW_parser__ReduceAction616(&type_parser__ReduceAction616);
-var3026 = 161;
-((void (*)(val*, long))(var3025->class->vft[COLOR_parser__ReduceAction__init]))(var3025, var3026) /* init on <var3025:ReduceAction616>*/;
-var3027 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3028 = 161;
-((void (*)(val*, long))(var3027->class->vft[COLOR_parser__ReduceAction__init]))(var3027, var3028) /* init on <var3027:ReduceAction596>*/;
-var3029 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3030 = 161;
-((void (*)(val*, long))(var3029->class->vft[COLOR_parser__ReduceAction__init]))(var3029, var3030) /* init on <var3029:ReduceAction596>*/;
-var3031 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3032 = 161;
-((void (*)(val*, long))(var3031->class->vft[COLOR_parser__ReduceAction__init]))(var3031, var3032) /* init on <var3031:ReduceAction596>*/;
-var3033 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3034 = 161;
-((void (*)(val*, long))(var3033->class->vft[COLOR_parser__ReduceAction__init]))(var3033, var3034) /* init on <var3033:ReduceAction596>*/;
-var3035 = NEW_parser__ReduceAction596(&type_parser__ReduceAction596);
-var3036 = 161;
-((void (*)(val*, long))(var3035->class->vft[COLOR_parser__ReduceAction__init]))(var3035, var3036) /* init on <var3035:ReduceAction596>*/;
-var3037 = NEW_parser__ReduceAction643(&type_parser__ReduceAction643);
-var3038 = 161;
-((void (*)(val*, long))(var3037->class->vft[COLOR_parser__ReduceAction__init]))(var3037, var3038) /* init on <var3037:ReduceAction643>*/;
-var3039 = NEW_parser__ReduceAction828(&type_parser__ReduceAction828);
-var3040 = 162;
-((void (*)(val*, long))(var3039->class->vft[COLOR_parser__ReduceAction__init]))(var3039, var3040) /* init on <var3039:ReduceAction828>*/;
-var3041 = NEW_parser__ReduceAction829(&type_parser__ReduceAction829);
-var3042 = 162;
-((void (*)(val*, long))(var3041->class->vft[COLOR_parser__ReduceAction__init]))(var3041, var3042) /* init on <var3041:ReduceAction829>*/;
-var3043 = NEW_parser__ReduceAction830(&type_parser__ReduceAction830);
-var3044 = 162;
-((void (*)(val*, long))(var3043->class->vft[COLOR_parser__ReduceAction__init]))(var3043, var3044) /* init on <var3043:ReduceAction830>*/;
-var3045 = NEW_parser__ReduceAction831(&type_parser__ReduceAction831);
-var3046 = 162;
-((void (*)(val*, long))(var3045->class->vft[COLOR_parser__ReduceAction__init]))(var3045, var3046) /* init on <var3045:ReduceAction831>*/;
-var3047 = NEW_parser__ReduceAction832(&type_parser__ReduceAction832);
-var3048 = 162;
-((void (*)(val*, long))(var3047->class->vft[COLOR_parser__ReduceAction__init]))(var3047, var3048) /* init on <var3047:ReduceAction832>*/;
-var3049 = NEW_parser__ReduceAction841(&type_parser__ReduceAction841);
-var3050 = 163;
-((void (*)(val*, long))(var3049->class->vft[COLOR_parser__ReduceAction__init]))(var3049, var3050) /* init on <var3049:ReduceAction841>*/;
-var3051 = NEW_parser__ReduceAction844(&type_parser__ReduceAction844);
-var3052 = 163;
-((void (*)(val*, long))(var3051->class->vft[COLOR_parser__ReduceAction__init]))(var3051, var3052) /* init on <var3051:ReduceAction844>*/;
-var3053 = NEW_parser__ReduceAction1526(&type_parser__ReduceAction1526);
-var3054 = 164;
-((void (*)(val*, long))(var3053->class->vft[COLOR_parser__ReduceAction__init]))(var3053, var3054) /* init on <var3053:ReduceAction1526>*/;
-var3055 = NEW_parser__ReduceAction1527(&type_parser__ReduceAction1527);
-var3056 = 164;
-((void (*)(val*, long))(var3055->class->vft[COLOR_parser__ReduceAction__init]))(var3055, var3056) /* init on <var3055:ReduceAction1527>*/;
-var3057 = NEW_parser__ReduceAction1528(&type_parser__ReduceAction1528);
-var3058 = 165;
-((void (*)(val*, long))(var3057->class->vft[COLOR_parser__ReduceAction__init]))(var3057, var3058) /* init on <var3057:ReduceAction1528>*/;
-var3059 = NEW_parser__ReduceAction1529(&type_parser__ReduceAction1529);
-var3060 = 165;
-((void (*)(val*, long))(var3059->class->vft[COLOR_parser__ReduceAction__init]))(var3059, var3060) /* init on <var3059:ReduceAction1529>*/;
-var3061 = NEW_parser__ReduceAction1530(&type_parser__ReduceAction1530);
-var3062 = 166;
-((void (*)(val*, long))(var3061->class->vft[COLOR_parser__ReduceAction__init]))(var3061, var3062) /* init on <var3061:ReduceAction1530>*/;
-var3063 = NEW_parser__ReduceAction1531(&type_parser__ReduceAction1531);
-var3064 = 166;
-((void (*)(val*, long))(var3063->class->vft[COLOR_parser__ReduceAction__init]))(var3063, var3064) /* init on <var3063:ReduceAction1531>*/;
-var3065 = NEW_parser__ReduceAction1532(&type_parser__ReduceAction1532);
-var3066 = 167;
-((void (*)(val*, long))(var3065->class->vft[COLOR_parser__ReduceAction__init]))(var3065, var3066) /* init on <var3065:ReduceAction1532>*/;
-var3067 = NEW_parser__ReduceAction1533(&type_parser__ReduceAction1533);
-var3068 = 167;
-((void (*)(val*, long))(var3067->class->vft[COLOR_parser__ReduceAction__init]))(var3067, var3068) /* init on <var3067:ReduceAction1533>*/;
-var3069 = NEW_parser__ReduceAction1534(&type_parser__ReduceAction1534);
-var3070 = 168;
-((void (*)(val*, long))(var3069->class->vft[COLOR_parser__ReduceAction__init]))(var3069, var3070) /* init on <var3069:ReduceAction1534>*/;
-var3071 = NEW_parser__ReduceAction1535(&type_parser__ReduceAction1535);
-var3072 = 168;
-((void (*)(val*, long))(var3071->class->vft[COLOR_parser__ReduceAction__init]))(var3071, var3072) /* init on <var3071:ReduceAction1535>*/;
-var3073 = NEW_parser__ReduceAction1532(&type_parser__ReduceAction1532);
-var3074 = 169;
-((void (*)(val*, long))(var3073->class->vft[COLOR_parser__ReduceAction__init]))(var3073, var3074) /* init on <var3073:ReduceAction1532>*/;
-var3075 = NEW_parser__ReduceAction1533(&type_parser__ReduceAction1533);
-var3076 = 169;
-((void (*)(val*, long))(var3075->class->vft[COLOR_parser__ReduceAction__init]))(var3075, var3076) /* init on <var3075:ReduceAction1533>*/;
-var3077 = NEW_parser__ReduceAction1538(&type_parser__ReduceAction1538);
-var3078 = 170;
-((void (*)(val*, long))(var3077->class->vft[COLOR_parser__ReduceAction__init]))(var3077, var3078) /* init on <var3077:ReduceAction1538>*/;
-var3079 = NEW_parser__ReduceAction1539(&type_parser__ReduceAction1539);
-var3080 = 170;
-((void (*)(val*, long))(var3079->class->vft[COLOR_parser__ReduceAction__init]))(var3079, var3080) /* init on <var3079:ReduceAction1539>*/;
-var3081 = NEW_parser__ReduceAction1540(&type_parser__ReduceAction1540);
-var3082 = 171;
-((void (*)(val*, long))(var3081->class->vft[COLOR_parser__ReduceAction__init]))(var3081, var3082) /* init on <var3081:ReduceAction1540>*/;
-var3083 = NEW_parser__ReduceAction1541(&type_parser__ReduceAction1541);
-var3084 = 171;
-((void (*)(val*, long))(var3083->class->vft[COLOR_parser__ReduceAction__init]))(var3083, var3084) /* init on <var3083:ReduceAction1541>*/;
-var3085 = NEW_parser__ReduceAction1542(&type_parser__ReduceAction1542);
-var3086 = 172;
-((void (*)(val*, long))(var3085->class->vft[COLOR_parser__ReduceAction__init]))(var3085, var3086) /* init on <var3085:ReduceAction1542>*/;
-var3087 = NEW_parser__ReduceAction1543(&type_parser__ReduceAction1543);
-var3088 = 172;
-((void (*)(val*, long))(var3087->class->vft[COLOR_parser__ReduceAction__init]))(var3087, var3088) /* init on <var3087:ReduceAction1543>*/;
-var3089 = NEW_parser__ReduceAction589(&type_parser__ReduceAction589);
-var3090 = 173;
-((void (*)(val*, long))(var3089->class->vft[COLOR_parser__ReduceAction__init]))(var3089, var3090) /* init on <var3089:ReduceAction589>*/;
-var3091 = NEW_parser__ReduceAction1545(&type_parser__ReduceAction1545);
-var3092 = 173;
-((void (*)(val*, long))(var3091->class->vft[COLOR_parser__ReduceAction__init]))(var3091, var3092) /* init on <var3091:ReduceAction1545>*/;
-var3093 = NEW_parser__ReduceAction1546(&type_parser__ReduceAction1546);
-var3094 = 174;
-((void (*)(val*, long))(var3093->class->vft[COLOR_parser__ReduceAction__init]))(var3093, var3094) /* init on <var3093:ReduceAction1546>*/;
-var3095 = NEW_parser__ReduceAction1547(&type_parser__ReduceAction1547);
-var3096 = 174;
-((void (*)(val*, long))(var3095->class->vft[COLOR_parser__ReduceAction__init]))(var3095, var3096) /* init on <var3095:ReduceAction1547>*/;
-var3097 = NEW_parser__ReduceAction1548(&type_parser__ReduceAction1548);
-var3098 = 175;
-((void (*)(val*, long))(var3097->class->vft[COLOR_parser__ReduceAction__init]))(var3097, var3098) /* init on <var3097:ReduceAction1548>*/;
-var3099 = NEW_parser__ReduceAction1549(&type_parser__ReduceAction1549);
-var3100 = 175;
-((void (*)(val*, long))(var3099->class->vft[COLOR_parser__ReduceAction__init]))(var3099, var3100) /* init on <var3099:ReduceAction1549>*/;
-var3101 = NEW_parser__ReduceAction825(&type_parser__ReduceAction825);
-var3102 = 176;
-((void (*)(val*, long))(var3101->class->vft[COLOR_parser__ReduceAction__init]))(var3101, var3102) /* init on <var3101:ReduceAction825>*/;
-var3103 = NEW_parser__ReduceAction1551(&type_parser__ReduceAction1551);
-var3104 = 176;
-((void (*)(val*, long))(var3103->class->vft[COLOR_parser__ReduceAction__init]))(var3103, var3104) /* init on <var3103:ReduceAction1551>*/;
-var3105 = NEW_parser__ReduceAction825(&type_parser__ReduceAction825);
-var3106 = 177;
-((void (*)(val*, long))(var3105->class->vft[COLOR_parser__ReduceAction__init]))(var3105, var3106) /* init on <var3105:ReduceAction825>*/;
-var3107 = NEW_parser__ReduceAction1551(&type_parser__ReduceAction1551);
-var3108 = 177;
-((void (*)(val*, long))(var3107->class->vft[COLOR_parser__ReduceAction__init]))(var3107, var3108) /* init on <var3107:ReduceAction1551>*/;
-var3109 = NEW_parser__ReduceAction834(&type_parser__ReduceAction834);
-var3110 = 178;
-((void (*)(val*, long))(var3109->class->vft[COLOR_parser__ReduceAction__init]))(var3109, var3110) /* init on <var3109:ReduceAction834>*/;
-var3111 = NEW_parser__ReduceAction1555(&type_parser__ReduceAction1555);
-var3112 = 178;
-((void (*)(val*, long))(var3111->class->vft[COLOR_parser__ReduceAction__init]))(var3111, var3112) /* init on <var3111:ReduceAction1555>*/;
-var3113 = NEW_parser__ReduceAction1546(&type_parser__ReduceAction1546);
-var3114 = 179;
-((void (*)(val*, long))(var3113->class->vft[COLOR_parser__ReduceAction__init]))(var3113, var3114) /* init on <var3113:ReduceAction1546>*/;
-var3115 = NEW_parser__ReduceAction1547(&type_parser__ReduceAction1547);
-var3116 = 179;
-((void (*)(val*, long))(var3115->class->vft[COLOR_parser__ReduceAction__init]))(var3115, var3116) /* init on <var3115:ReduceAction1547>*/;
-var3117 = NEW_parser__ReduceAction856(&type_parser__ReduceAction856);
-var3118 = 180;
-((void (*)(val*, long))(var3117->class->vft[COLOR_parser__ReduceAction__init]))(var3117, var3118) /* init on <var3117:ReduceAction856>*/;
-var3119 = NEW_parser__ReduceAction1559(&type_parser__ReduceAction1559);
-var3120 = 180;
-((void (*)(val*, long))(var3119->class->vft[COLOR_parser__ReduceAction__init]))(var3119, var3120) /* init on <var3119:ReduceAction1559>*/;
-var3121 = NEW_parser__ReduceAction1560(&type_parser__ReduceAction1560);
-var3122 = 181;
-((void (*)(val*, long))(var3121->class->vft[COLOR_parser__ReduceAction__init]))(var3121, var3122) /* init on <var3121:ReduceAction1560>*/;
-var3123 = NEW_parser__ReduceAction1561(&type_parser__ReduceAction1561);
-var3124 = 181;
-((void (*)(val*, long))(var3123->class->vft[COLOR_parser__ReduceAction__init]))(var3123, var3124) /* init on <var3123:ReduceAction1561>*/;
-var3125 = NEW_parser__ReduceAction1562(&type_parser__ReduceAction1562);
-var3126 = 182;
-((void (*)(val*, long))(var3125->class->vft[COLOR_parser__ReduceAction__init]))(var3125, var3126) /* init on <var3125:ReduceAction1562>*/;
-var3127 = NEW_parser__ReduceAction1563(&type_parser__ReduceAction1563);
-var3128 = 182;
-((void (*)(val*, long))(var3127->class->vft[COLOR_parser__ReduceAction__init]))(var3127, var3128) /* init on <var3127:ReduceAction1563>*/;
-var3129 = NEW_parser__ReduceAction825(&type_parser__ReduceAction825);
-var3130 = 183;
-((void (*)(val*, long))(var3129->class->vft[COLOR_parser__ReduceAction__init]))(var3129, var3130) /* init on <var3129:ReduceAction825>*/;
-var3131 = NEW_parser__ReduceAction1551(&type_parser__ReduceAction1551);
-var3132 = 183;
-((void (*)(val*, long))(var3131->class->vft[COLOR_parser__ReduceAction__init]))(var3131, var3132) /* init on <var3131:ReduceAction1551>*/;
-var3133 = NEW_array__Array(var->type->resolution_table->types[COLOR_array__Arrayarray__Array_FT0]);
-{ /* var3133 = array_instance Array[Array#0] */
-var3134 = 1566;
-var3135 = NEW_array__NativeArray(var3134, var->type->resolution_table->types[COLOR_array__NativeArrayarray__Array_FT0]);
-((struct instance_array__NativeArray*)var3135)->values[0] = (val*) var1;
-((struct instance_array__NativeArray*)var3135)->values[1] = (val*) var3;
-((struct instance_array__NativeArray*)var3135)->values[2] = (val*) var5;
-((struct instance_array__NativeArray*)var3135)->values[3] = (val*) var7;
-((struct instance_array__NativeArray*)var3135)->values[4] = (val*) var9;
-((struct instance_array__NativeArray*)var3135)->values[5] = (val*) var11;
-((struct instance_array__NativeArray*)var3135)->values[6] = (val*) var13;
-((struct instance_array__NativeArray*)var3135)->values[7] = (val*) var15;
-((struct instance_array__NativeArray*)var3135)->values[8] = (val*) var17;
-((struct instance_array__NativeArray*)var3135)->values[9] = (val*) var19;
-((struct instance_array__NativeArray*)var3135)->values[10] = (val*) var21;
-((struct instance_array__NativeArray*)var3135)->values[11] = (val*) var23;
-((struct instance_array__NativeArray*)var3135)->values[12] = (val*) var25;
-((struct instance_array__NativeArray*)var3135)->values[13] = (val*) var27;
-((struct instance_array__NativeArray*)var3135)->values[14] = (val*) var29;
-((struct instance_array__NativeArray*)var3135)->values[15] = (val*) var31;
-((struct instance_array__NativeArray*)var3135)->values[16] = (val*) var33;
-((struct instance_array__NativeArray*)var3135)->values[17] = (val*) var35;
-((struct instance_array__NativeArray*)var3135)->values[18] = (val*) var37;
-((struct instance_array__NativeArray*)var3135)->values[19] = (val*) var39;
-((struct instance_array__NativeArray*)var3135)->values[20] = (val*) var41;
-((struct instance_array__NativeArray*)var3135)->values[21] = (val*) var43;
-((struct instance_array__NativeArray*)var3135)->values[22] = (val*) var45;
-((struct instance_array__NativeArray*)var3135)->values[23] = (val*) var47;
-((struct instance_array__NativeArray*)var3135)->values[24] = (val*) var49;
-((struct instance_array__NativeArray*)var3135)->values[25] = (val*) var51;
-((struct instance_array__NativeArray*)var3135)->values[26] = (val*) var53;
-((struct instance_array__NativeArray*)var3135)->values[27] = (val*) var55;
-((struct instance_array__NativeArray*)var3135)->values[28] = (val*) var57;
-((struct instance_array__NativeArray*)var3135)->values[29] = (val*) var59;
-((struct instance_array__NativeArray*)var3135)->values[30] = (val*) var61;
-((struct instance_array__NativeArray*)var3135)->values[31] = (val*) var63;
-((struct instance_array__NativeArray*)var3135)->values[32] = (val*) var65;
-((struct instance_array__NativeArray*)var3135)->values[33] = (val*) var67;
-((struct instance_array__NativeArray*)var3135)->values[34] = (val*) var69;
-((struct instance_array__NativeArray*)var3135)->values[35] = (val*) var71;
-((struct instance_array__NativeArray*)var3135)->values[36] = (val*) var73;
-((struct instance_array__NativeArray*)var3135)->values[37] = (val*) var75;
-((struct instance_array__NativeArray*)var3135)->values[38] = (val*) var77;
-((struct instance_array__NativeArray*)var3135)->values[39] = (val*) var79;
-((struct instance_array__NativeArray*)var3135)->values[40] = (val*) var81;
-((struct instance_array__NativeArray*)var3135)->values[41] = (val*) var83;
-((struct instance_array__NativeArray*)var3135)->values[42] = (val*) var85;
-((struct instance_array__NativeArray*)var3135)->values[43] = (val*) var87;
-((struct instance_array__NativeArray*)var3135)->values[44] = (val*) var89;
-((struct instance_array__NativeArray*)var3135)->values[45] = (val*) var91;
-((struct instance_array__NativeArray*)var3135)->values[46] = (val*) var93;
-((struct instance_array__NativeArray*)var3135)->values[47] = (val*) var95;
-((struct instance_array__NativeArray*)var3135)->values[48] = (val*) var97;
-((struct instance_array__NativeArray*)var3135)->values[49] = (val*) var99;
-((struct instance_array__NativeArray*)var3135)->values[50] = (val*) var101;
-((struct instance_array__NativeArray*)var3135)->values[51] = (val*) var103;
-((struct instance_array__NativeArray*)var3135)->values[52] = (val*) var105;
-((struct instance_array__NativeArray*)var3135)->values[53] = (val*) var107;
-((struct instance_array__NativeArray*)var3135)->values[54] = (val*) var109;
-((struct instance_array__NativeArray*)var3135)->values[55] = (val*) var111;
-((struct instance_array__NativeArray*)var3135)->values[56] = (val*) var113;
-((struct instance_array__NativeArray*)var3135)->values[57] = (val*) var115;
-((struct instance_array__NativeArray*)var3135)->values[58] = (val*) var117;
-((struct instance_array__NativeArray*)var3135)->values[59] = (val*) var119;
-((struct instance_array__NativeArray*)var3135)->values[60] = (val*) var121;
-((struct instance_array__NativeArray*)var3135)->values[61] = (val*) var123;
-((struct instance_array__NativeArray*)var3135)->values[62] = (val*) var125;
-((struct instance_array__NativeArray*)var3135)->values[63] = (val*) var127;
-((struct instance_array__NativeArray*)var3135)->values[64] = (val*) var129;
-((struct instance_array__NativeArray*)var3135)->values[65] = (val*) var131;
-((struct instance_array__NativeArray*)var3135)->values[66] = (val*) var133;
-((struct instance_array__NativeArray*)var3135)->values[67] = (val*) var135;
-((struct instance_array__NativeArray*)var3135)->values[68] = (val*) var137;
-((struct instance_array__NativeArray*)var3135)->values[69] = (val*) var139;
-((struct instance_array__NativeArray*)var3135)->values[70] = (val*) var141;
-((struct instance_array__NativeArray*)var3135)->values[71] = (val*) var143;
-((struct instance_array__NativeArray*)var3135)->values[72] = (val*) var145;
-((struct instance_array__NativeArray*)var3135)->values[73] = (val*) var147;
-((struct instance_array__NativeArray*)var3135)->values[74] = (val*) var149;
-((struct instance_array__NativeArray*)var3135)->values[75] = (val*) var151;
-((struct instance_array__NativeArray*)var3135)->values[76] = (val*) var153;
-((struct instance_array__NativeArray*)var3135)->values[77] = (val*) var155;
-((struct instance_array__NativeArray*)var3135)->values[78] = (val*) var157;
-((struct instance_array__NativeArray*)var3135)->values[79] = (val*) var159;
-((struct instance_array__NativeArray*)var3135)->values[80] = (val*) var161;
-((struct instance_array__NativeArray*)var3135)->values[81] = (val*) var163;
-((struct instance_array__NativeArray*)var3135)->values[82] = (val*) var165;
-((struct instance_array__NativeArray*)var3135)->values[83] = (val*) var167;
-((struct instance_array__NativeArray*)var3135)->values[84] = (val*) var169;
-((struct instance_array__NativeArray*)var3135)->values[85] = (val*) var171;
-((struct instance_array__NativeArray*)var3135)->values[86] = (val*) var173;
-((struct instance_array__NativeArray*)var3135)->values[87] = (val*) var175;
-((struct instance_array__NativeArray*)var3135)->values[88] = (val*) var177;
-((struct instance_array__NativeArray*)var3135)->values[89] = (val*) var179;
-((struct instance_array__NativeArray*)var3135)->values[90] = (val*) var181;
-((struct instance_array__NativeArray*)var3135)->values[91] = (val*) var183;
-((struct instance_array__NativeArray*)var3135)->values[92] = (val*) var185;
-((struct instance_array__NativeArray*)var3135)->values[93] = (val*) var187;
-((struct instance_array__NativeArray*)var3135)->values[94] = (val*) var189;
-((struct instance_array__NativeArray*)var3135)->values[95] = (val*) var191;
-((struct instance_array__NativeArray*)var3135)->values[96] = (val*) var193;
-((struct instance_array__NativeArray*)var3135)->values[97] = (val*) var195;
-((struct instance_array__NativeArray*)var3135)->values[98] = (val*) var197;
-((struct instance_array__NativeArray*)var3135)->values[99] = (val*) var199;
-((struct instance_array__NativeArray*)var3135)->values[100] = (val*) var201;
-((struct instance_array__NativeArray*)var3135)->values[101] = (val*) var203;
-((struct instance_array__NativeArray*)var3135)->values[102] = (val*) var205;
-((struct instance_array__NativeArray*)var3135)->values[103] = (val*) var207;
-((struct instance_array__NativeArray*)var3135)->values[104] = (val*) var209;
-((struct instance_array__NativeArray*)var3135)->values[105] = (val*) var211;
-((struct instance_array__NativeArray*)var3135)->values[106] = (val*) var213;
-((struct instance_array__NativeArray*)var3135)->values[107] = (val*) var215;
-((struct instance_array__NativeArray*)var3135)->values[108] = (val*) var217;
-((struct instance_array__NativeArray*)var3135)->values[109] = (val*) var219;
-((struct instance_array__NativeArray*)var3135)->values[110] = (val*) var221;
-((struct instance_array__NativeArray*)var3135)->values[111] = (val*) var223;
-((struct instance_array__NativeArray*)var3135)->values[112] = (val*) var225;
-((struct instance_array__NativeArray*)var3135)->values[113] = (val*) var227;
-((struct instance_array__NativeArray*)var3135)->values[114] = (val*) var229;
-((struct instance_array__NativeArray*)var3135)->values[115] = (val*) var231;
-((struct instance_array__NativeArray*)var3135)->values[116] = (val*) var233;
-((struct instance_array__NativeArray*)var3135)->values[117] = (val*) var235;
-((struct instance_array__NativeArray*)var3135)->values[118] = (val*) var237;
-((struct instance_array__NativeArray*)var3135)->values[119] = (val*) var239;
-((struct instance_array__NativeArray*)var3135)->values[120] = (val*) var241;
-((struct instance_array__NativeArray*)var3135)->values[121] = (val*) var243;
-((struct instance_array__NativeArray*)var3135)->values[122] = (val*) var245;
-((struct instance_array__NativeArray*)var3135)->values[123] = (val*) var247;
-((struct instance_array__NativeArray*)var3135)->values[124] = (val*) var249;
-((struct instance_array__NativeArray*)var3135)->values[125] = (val*) var251;
-((struct instance_array__NativeArray*)var3135)->values[126] = (val*) var253;
-((struct instance_array__NativeArray*)var3135)->values[127] = (val*) var255;
-((struct instance_array__NativeArray*)var3135)->values[128] = (val*) var257;
-((struct instance_array__NativeArray*)var3135)->values[129] = (val*) var259;
-((struct instance_array__NativeArray*)var3135)->values[130] = (val*) var261;
-((struct instance_array__NativeArray*)var3135)->values[131] = (val*) var263;
-((struct instance_array__NativeArray*)var3135)->values[132] = (val*) var265;
-((struct instance_array__NativeArray*)var3135)->values[133] = (val*) var267;
-((struct instance_array__NativeArray*)var3135)->values[134] = (val*) var269;
-((struct instance_array__NativeArray*)var3135)->values[135] = (val*) var271;
-((struct instance_array__NativeArray*)var3135)->values[136] = (val*) var273;
-((struct instance_array__NativeArray*)var3135)->values[137] = (val*) var275;
-((struct instance_array__NativeArray*)var3135)->values[138] = (val*) var277;
-((struct instance_array__NativeArray*)var3135)->values[139] = (val*) var279;
-((struct instance_array__NativeArray*)var3135)->values[140] = (val*) var281;
-((struct instance_array__NativeArray*)var3135)->values[141] = (val*) var283;
-((struct instance_array__NativeArray*)var3135)->values[142] = (val*) var285;
-((struct instance_array__NativeArray*)var3135)->values[143] = (val*) var287;
-((struct instance_array__NativeArray*)var3135)->values[144] = (val*) var289;
-((struct instance_array__NativeArray*)var3135)->values[145] = (val*) var291;
-((struct instance_array__NativeArray*)var3135)->values[146] = (val*) var293;
-((struct instance_array__NativeArray*)var3135)->values[147] = (val*) var295;
-((struct instance_array__NativeArray*)var3135)->values[148] = (val*) var297;
-((struct instance_array__NativeArray*)var3135)->values[149] = (val*) var299;
-((struct instance_array__NativeArray*)var3135)->values[150] = (val*) var301;
-((struct instance_array__NativeArray*)var3135)->values[151] = (val*) var303;
-((struct instance_array__NativeArray*)var3135)->values[152] = (val*) var305;
-((struct instance_array__NativeArray*)var3135)->values[153] = (val*) var307;
-((struct instance_array__NativeArray*)var3135)->values[154] = (val*) var309;
-((struct instance_array__NativeArray*)var3135)->values[155] = (val*) var311;
-((struct instance_array__NativeArray*)var3135)->values[156] = (val*) var313;
-((struct instance_array__NativeArray*)var3135)->values[157] = (val*) var315;
-((struct instance_array__NativeArray*)var3135)->values[158] = (val*) var317;
-((struct instance_array__NativeArray*)var3135)->values[159] = (val*) var319;
-((struct instance_array__NativeArray*)var3135)->values[160] = (val*) var321;
-((struct instance_array__NativeArray*)var3135)->values[161] = (val*) var323;
-((struct instance_array__NativeArray*)var3135)->values[162] = (val*) var325;
-((struct instance_array__NativeArray*)var3135)->values[163] = (val*) var327;
-((struct instance_array__NativeArray*)var3135)->values[164] = (val*) var329;
-((struct instance_array__NativeArray*)var3135)->values[165] = (val*) var331;
-((struct instance_array__NativeArray*)var3135)->values[166] = (val*) var333;
-((struct instance_array__NativeArray*)var3135)->values[167] = (val*) var335;
-((struct instance_array__NativeArray*)var3135)->values[168] = (val*) var337;
-((struct instance_array__NativeArray*)var3135)->values[169] = (val*) var339;
-((struct instance_array__NativeArray*)var3135)->values[170] = (val*) var341;
-((struct instance_array__NativeArray*)var3135)->values[171] = (val*) var343;
-((struct instance_array__NativeArray*)var3135)->values[172] = (val*) var345;
-((struct instance_array__NativeArray*)var3135)->values[173] = (val*) var347;
-((struct instance_array__NativeArray*)var3135)->values[174] = (val*) var349;
-((struct instance_array__NativeArray*)var3135)->values[175] = (val*) var351;
-((struct instance_array__NativeArray*)var3135)->values[176] = (val*) var353;
-((struct instance_array__NativeArray*)var3135)->values[177] = (val*) var355;
-((struct instance_array__NativeArray*)var3135)->values[178] = (val*) var357;
-((struct instance_array__NativeArray*)var3135)->values[179] = (val*) var359;
-((struct instance_array__NativeArray*)var3135)->values[180] = (val*) var361;
-((struct instance_array__NativeArray*)var3135)->values[181] = (val*) var363;
-((struct instance_array__NativeArray*)var3135)->values[182] = (val*) var365;
-((struct instance_array__NativeArray*)var3135)->values[183] = (val*) var367;
-((struct instance_array__NativeArray*)var3135)->values[184] = (val*) var369;
-((struct instance_array__NativeArray*)var3135)->values[185] = (val*) var371;
-((struct instance_array__NativeArray*)var3135)->values[186] = (val*) var373;
-((struct instance_array__NativeArray*)var3135)->values[187] = (val*) var375;
-((struct instance_array__NativeArray*)var3135)->values[188] = (val*) var377;
-((struct instance_array__NativeArray*)var3135)->values[189] = (val*) var379;
-((struct instance_array__NativeArray*)var3135)->values[190] = (val*) var381;
-((struct instance_array__NativeArray*)var3135)->values[191] = (val*) var383;
-((struct instance_array__NativeArray*)var3135)->values[192] = (val*) var385;
-((struct instance_array__NativeArray*)var3135)->values[193] = (val*) var387;
-((struct instance_array__NativeArray*)var3135)->values[194] = (val*) var389;
-((struct instance_array__NativeArray*)var3135)->values[195] = (val*) var391;
-((struct instance_array__NativeArray*)var3135)->values[196] = (val*) var393;
-((struct instance_array__NativeArray*)var3135)->values[197] = (val*) var395;
-((struct instance_array__NativeArray*)var3135)->values[198] = (val*) var397;
-((struct instance_array__NativeArray*)var3135)->values[199] = (val*) var399;
-((struct instance_array__NativeArray*)var3135)->values[200] = (val*) var401;
-((struct instance_array__NativeArray*)var3135)->values[201] = (val*) var403;
-((struct instance_array__NativeArray*)var3135)->values[202] = (val*) var405;
-((struct instance_array__NativeArray*)var3135)->values[203] = (val*) var407;
-((struct instance_array__NativeArray*)var3135)->values[204] = (val*) var409;
-((struct instance_array__NativeArray*)var3135)->values[205] = (val*) var411;
-((struct instance_array__NativeArray*)var3135)->values[206] = (val*) var413;
-((struct instance_array__NativeArray*)var3135)->values[207] = (val*) var415;
-((struct instance_array__NativeArray*)var3135)->values[208] = (val*) var417;
-((struct instance_array__NativeArray*)var3135)->values[209] = (val*) var419;
-((struct instance_array__NativeArray*)var3135)->values[210] = (val*) var421;
-((struct instance_array__NativeArray*)var3135)->values[211] = (val*) var423;
-((struct instance_array__NativeArray*)var3135)->values[212] = (val*) var425;
-((struct instance_array__NativeArray*)var3135)->values[213] = (val*) var427;
-((struct instance_array__NativeArray*)var3135)->values[214] = (val*) var429;
-((struct instance_array__NativeArray*)var3135)->values[215] = (val*) var431;
-((struct instance_array__NativeArray*)var3135)->values[216] = (val*) var433;
-((struct instance_array__NativeArray*)var3135)->values[217] = (val*) var435;
-((struct instance_array__NativeArray*)var3135)->values[218] = (val*) var437;
-((struct instance_array__NativeArray*)var3135)->values[219] = (val*) var439;
-((struct instance_array__NativeArray*)var3135)->values[220] = (val*) var441;
-((struct instance_array__NativeArray*)var3135)->values[221] = (val*) var443;
-((struct instance_array__NativeArray*)var3135)->values[222] = (val*) var445;
-((struct instance_array__NativeArray*)var3135)->values[223] = (val*) var447;
-((struct instance_array__NativeArray*)var3135)->values[224] = (val*) var449;
-((struct instance_array__NativeArray*)var3135)->values[225] = (val*) var451;
-((struct instance_array__NativeArray*)var3135)->values[226] = (val*) var453;
-((struct instance_array__NativeArray*)var3135)->values[227] = (val*) var455;
-((struct instance_array__NativeArray*)var3135)->values[228] = (val*) var457;
-((struct instance_array__NativeArray*)var3135)->values[229] = (val*) var459;
-((struct instance_array__NativeArray*)var3135)->values[230] = (val*) var461;
-((struct instance_array__NativeArray*)var3135)->values[231] = (val*) var463;
-((struct instance_array__NativeArray*)var3135)->values[232] = (val*) var465;
-((struct instance_array__NativeArray*)var3135)->values[233] = (val*) var467;
-((struct instance_array__NativeArray*)var3135)->values[234] = (val*) var469;
-((struct instance_array__NativeArray*)var3135)->values[235] = (val*) var471;
-((struct instance_array__NativeArray*)var3135)->values[236] = (val*) var473;
-((struct instance_array__NativeArray*)var3135)->values[237] = (val*) var475;
-((struct instance_array__NativeArray*)var3135)->values[238] = (val*) var477;
-((struct instance_array__NativeArray*)var3135)->values[239] = (val*) var479;
-((struct instance_array__NativeArray*)var3135)->values[240] = (val*) var481;
-((struct instance_array__NativeArray*)var3135)->values[241] = (val*) var483;
-((struct instance_array__NativeArray*)var3135)->values[242] = (val*) var485;
-((struct instance_array__NativeArray*)var3135)->values[243] = (val*) var487;
-((struct instance_array__NativeArray*)var3135)->values[244] = (val*) var489;
-((struct instance_array__NativeArray*)var3135)->values[245] = (val*) var491;
-((struct instance_array__NativeArray*)var3135)->values[246] = (val*) var493;
-((struct instance_array__NativeArray*)var3135)->values[247] = (val*) var495;
-((struct instance_array__NativeArray*)var3135)->values[248] = (val*) var497;
-((struct instance_array__NativeArray*)var3135)->values[249] = (val*) var499;
-((struct instance_array__NativeArray*)var3135)->values[250] = (val*) var501;
-((struct instance_array__NativeArray*)var3135)->values[251] = (val*) var503;
-((struct instance_array__NativeArray*)var3135)->values[252] = (val*) var505;
-((struct instance_array__NativeArray*)var3135)->values[253] = (val*) var507;
-((struct instance_array__NativeArray*)var3135)->values[254] = (val*) var509;
-((struct instance_array__NativeArray*)var3135)->values[255] = (val*) var511;
-((struct instance_array__NativeArray*)var3135)->values[256] = (val*) var513;
-((struct instance_array__NativeArray*)var3135)->values[257] = (val*) var515;
-((struct instance_array__NativeArray*)var3135)->values[258] = (val*) var517;
-((struct instance_array__NativeArray*)var3135)->values[259] = (val*) var519;
-((struct instance_array__NativeArray*)var3135)->values[260] = (val*) var521;
-((struct instance_array__NativeArray*)var3135)->values[261] = (val*) var523;
-((struct instance_array__NativeArray*)var3135)->values[262] = (val*) var525;
-((struct instance_array__NativeArray*)var3135)->values[263] = (val*) var527;
-((struct instance_array__NativeArray*)var3135)->values[264] = (val*) var529;
-((struct instance_array__NativeArray*)var3135)->values[265] = (val*) var531;
-((struct instance_array__NativeArray*)var3135)->values[266] = (val*) var533;
-((struct instance_array__NativeArray*)var3135)->values[267] = (val*) var535;
-((struct instance_array__NativeArray*)var3135)->values[268] = (val*) var537;
-((struct instance_array__NativeArray*)var3135)->values[269] = (val*) var539;
-((struct instance_array__NativeArray*)var3135)->values[270] = (val*) var541;
-((struct instance_array__NativeArray*)var3135)->values[271] = (val*) var543;
-((struct instance_array__NativeArray*)var3135)->values[272] = (val*) var545;
-((struct instance_array__NativeArray*)var3135)->values[273] = (val*) var547;
-((struct instance_array__NativeArray*)var3135)->values[274] = (val*) var549;
-((struct instance_array__NativeArray*)var3135)->values[275] = (val*) var551;
-((struct instance_array__NativeArray*)var3135)->values[276] = (val*) var553;
-((struct instance_array__NativeArray*)var3135)->values[277] = (val*) var555;
-((struct instance_array__NativeArray*)var3135)->values[278] = (val*) var557;
-((struct instance_array__NativeArray*)var3135)->values[279] = (val*) var559;
-((struct instance_array__NativeArray*)var3135)->values[280] = (val*) var561;
-((struct instance_array__NativeArray*)var3135)->values[281] = (val*) var563;
-((struct instance_array__NativeArray*)var3135)->values[282] = (val*) var565;
-((struct instance_array__NativeArray*)var3135)->values[283] = (val*) var567;
-((struct instance_array__NativeArray*)var3135)->values[284] = (val*) var569;
-((struct instance_array__NativeArray*)var3135)->values[285] = (val*) var571;
-((struct instance_array__NativeArray*)var3135)->values[286] = (val*) var573;
-((struct instance_array__NativeArray*)var3135)->values[287] = (val*) var575;
-((struct instance_array__NativeArray*)var3135)->values[288] = (val*) var577;
-((struct instance_array__NativeArray*)var3135)->values[289] = (val*) var579;
-((struct instance_array__NativeArray*)var3135)->values[290] = (val*) var581;
-((struct instance_array__NativeArray*)var3135)->values[291] = (val*) var583;
-((struct instance_array__NativeArray*)var3135)->values[292] = (val*) var585;
-((struct instance_array__NativeArray*)var3135)->values[293] = (val*) var587;
-((struct instance_array__NativeArray*)var3135)->values[294] = (val*) var589;
-((struct instance_array__NativeArray*)var3135)->values[295] = (val*) var591;
-((struct instance_array__NativeArray*)var3135)->values[296] = (val*) var593;
-((struct instance_array__NativeArray*)var3135)->values[297] = (val*) var595;
-((struct instance_array__NativeArray*)var3135)->values[298] = (val*) var597;
-((struct instance_array__NativeArray*)var3135)->values[299] = (val*) var599;
-((struct instance_array__NativeArray*)var3135)->values[300] = (val*) var601;
-((struct instance_array__NativeArray*)var3135)->values[301] = (val*) var603;
-((struct instance_array__NativeArray*)var3135)->values[302] = (val*) var605;
-((struct instance_array__NativeArray*)var3135)->values[303] = (val*) var607;
-((struct instance_array__NativeArray*)var3135)->values[304] = (val*) var609;
-((struct instance_array__NativeArray*)var3135)->values[305] = (val*) var611;
-((struct instance_array__NativeArray*)var3135)->values[306] = (val*) var613;
-((struct instance_array__NativeArray*)var3135)->values[307] = (val*) var615;
-((struct instance_array__NativeArray*)var3135)->values[308] = (val*) var617;
-((struct instance_array__NativeArray*)var3135)->values[309] = (val*) var619;
-((struct instance_array__NativeArray*)var3135)->values[310] = (val*) var621;
-((struct instance_array__NativeArray*)var3135)->values[311] = (val*) var623;
-((struct instance_array__NativeArray*)var3135)->values[312] = (val*) var625;
-((struct instance_array__NativeArray*)var3135)->values[313] = (val*) var627;
-((struct instance_array__NativeArray*)var3135)->values[314] = (val*) var629;
-((struct instance_array__NativeArray*)var3135)->values[315] = (val*) var631;
-((struct instance_array__NativeArray*)var3135)->values[316] = (val*) var633;
-((struct instance_array__NativeArray*)var3135)->values[317] = (val*) var635;
-((struct instance_array__NativeArray*)var3135)->values[318] = (val*) var637;
-((struct instance_array__NativeArray*)var3135)->values[319] = (val*) var639;
-((struct instance_array__NativeArray*)var3135)->values[320] = (val*) var641;
-((struct instance_array__NativeArray*)var3135)->values[321] = (val*) var643;
-((struct instance_array__NativeArray*)var3135)->values[322] = (val*) var645;
-((struct instance_array__NativeArray*)var3135)->values[323] = (val*) var647;
-((struct instance_array__NativeArray*)var3135)->values[324] = (val*) var649;
-((struct instance_array__NativeArray*)var3135)->values[325] = (val*) var651;
-((struct instance_array__NativeArray*)var3135)->values[326] = (val*) var653;
-((struct instance_array__NativeArray*)var3135)->values[327] = (val*) var655;
-((struct instance_array__NativeArray*)var3135)->values[328] = (val*) var657;
-((struct instance_array__NativeArray*)var3135)->values[329] = (val*) var659;
-((struct instance_array__NativeArray*)var3135)->values[330] = (val*) var661;
-((struct instance_array__NativeArray*)var3135)->values[331] = (val*) var663;
-((struct instance_array__NativeArray*)var3135)->values[332] = (val*) var665;
-((struct instance_array__NativeArray*)var3135)->values[333] = (val*) var667;
-((struct instance_array__NativeArray*)var3135)->values[334] = (val*) var669;
-((struct instance_array__NativeArray*)var3135)->values[335] = (val*) var671;
-((struct instance_array__NativeArray*)var3135)->values[336] = (val*) var673;
-((struct instance_array__NativeArray*)var3135)->values[337] = (val*) var675;
-((struct instance_array__NativeArray*)var3135)->values[338] = (val*) var677;
-((struct instance_array__NativeArray*)var3135)->values[339] = (val*) var679;
-((struct instance_array__NativeArray*)var3135)->values[340] = (val*) var681;
-((struct instance_array__NativeArray*)var3135)->values[341] = (val*) var683;
-((struct instance_array__NativeArray*)var3135)->values[342] = (val*) var685;
-((struct instance_array__NativeArray*)var3135)->values[343] = (val*) var687;
-((struct instance_array__NativeArray*)var3135)->values[344] = (val*) var689;
-((struct instance_array__NativeArray*)var3135)->values[345] = (val*) var691;
-((struct instance_array__NativeArray*)var3135)->values[346] = (val*) var693;
-((struct instance_array__NativeArray*)var3135)->values[347] = (val*) var695;
-((struct instance_array__NativeArray*)var3135)->values[348] = (val*) var697;
-((struct instance_array__NativeArray*)var3135)->values[349] = (val*) var699;
-((struct instance_array__NativeArray*)var3135)->values[350] = (val*) var701;
-((struct instance_array__NativeArray*)var3135)->values[351] = (val*) var703;
-((struct instance_array__NativeArray*)var3135)->values[352] = (val*) var705;
-((struct instance_array__NativeArray*)var3135)->values[353] = (val*) var707;
-((struct instance_array__NativeArray*)var3135)->values[354] = (val*) var709;
-((struct instance_array__NativeArray*)var3135)->values[355] = (val*) var711;
-((struct instance_array__NativeArray*)var3135)->values[356] = (val*) var713;
-((struct instance_array__NativeArray*)var3135)->values[357] = (val*) var715;
-((struct instance_array__NativeArray*)var3135)->values[358] = (val*) var717;
-((struct instance_array__NativeArray*)var3135)->values[359] = (val*) var719;
-((struct instance_array__NativeArray*)var3135)->values[360] = (val*) var721;
-((struct instance_array__NativeArray*)var3135)->values[361] = (val*) var723;
-((struct instance_array__NativeArray*)var3135)->values[362] = (val*) var725;
-((struct instance_array__NativeArray*)var3135)->values[363] = (val*) var727;
-((struct instance_array__NativeArray*)var3135)->values[364] = (val*) var729;
-((struct instance_array__NativeArray*)var3135)->values[365] = (val*) var731;
-((struct instance_array__NativeArray*)var3135)->values[366] = (val*) var733;
-((struct instance_array__NativeArray*)var3135)->values[367] = (val*) var735;
-((struct instance_array__NativeArray*)var3135)->values[368] = (val*) var737;
-((struct instance_array__NativeArray*)var3135)->values[369] = (val*) var739;
-((struct instance_array__NativeArray*)var3135)->values[370] = (val*) var741;
-((struct instance_array__NativeArray*)var3135)->values[371] = (val*) var743;
-((struct instance_array__NativeArray*)var3135)->values[372] = (val*) var745;
-((struct instance_array__NativeArray*)var3135)->values[373] = (val*) var747;
-((struct instance_array__NativeArray*)var3135)->values[374] = (val*) var749;
-((struct instance_array__NativeArray*)var3135)->values[375] = (val*) var751;
-((struct instance_array__NativeArray*)var3135)->values[376] = (val*) var753;
-((struct instance_array__NativeArray*)var3135)->values[377] = (val*) var755;
-((struct instance_array__NativeArray*)var3135)->values[378] = (val*) var757;
-((struct instance_array__NativeArray*)var3135)->values[379] = (val*) var759;
-((struct instance_array__NativeArray*)var3135)->values[380] = (val*) var761;
-((struct instance_array__NativeArray*)var3135)->values[381] = (val*) var763;
-((struct instance_array__NativeArray*)var3135)->values[382] = (val*) var765;
-((struct instance_array__NativeArray*)var3135)->values[383] = (val*) var767;
-((struct instance_array__NativeArray*)var3135)->values[384] = (val*) var769;
-((struct instance_array__NativeArray*)var3135)->values[385] = (val*) var771;
-((struct instance_array__NativeArray*)var3135)->values[386] = (val*) var773;
-((struct instance_array__NativeArray*)var3135)->values[387] = (val*) var775;
-((struct instance_array__NativeArray*)var3135)->values[388] = (val*) var777;
-((struct instance_array__NativeArray*)var3135)->values[389] = (val*) var779;
-((struct instance_array__NativeArray*)var3135)->values[390] = (val*) var781;
-((struct instance_array__NativeArray*)var3135)->values[391] = (val*) var783;
-((struct instance_array__NativeArray*)var3135)->values[392] = (val*) var785;
-((struct instance_array__NativeArray*)var3135)->values[393] = (val*) var787;
-((struct instance_array__NativeArray*)var3135)->values[394] = (val*) var789;
-((struct instance_array__NativeArray*)var3135)->values[395] = (val*) var791;
-((struct instance_array__NativeArray*)var3135)->values[396] = (val*) var793;
-((struct instance_array__NativeArray*)var3135)->values[397] = (val*) var795;
-((struct instance_array__NativeArray*)var3135)->values[398] = (val*) var797;
-((struct instance_array__NativeArray*)var3135)->values[399] = (val*) var799;
-((struct instance_array__NativeArray*)var3135)->values[400] = (val*) var801;
-((struct instance_array__NativeArray*)var3135)->values[401] = (val*) var803;
-((struct instance_array__NativeArray*)var3135)->values[402] = (val*) var805;
-((struct instance_array__NativeArray*)var3135)->values[403] = (val*) var807;
-((struct instance_array__NativeArray*)var3135)->values[404] = (val*) var809;
-((struct instance_array__NativeArray*)var3135)->values[405] = (val*) var811;
-((struct instance_array__NativeArray*)var3135)->values[406] = (val*) var813;
-((struct instance_array__NativeArray*)var3135)->values[407] = (val*) var815;
-((struct instance_array__NativeArray*)var3135)->values[408] = (val*) var817;
-((struct instance_array__NativeArray*)var3135)->values[409] = (val*) var819;
-((struct instance_array__NativeArray*)var3135)->values[410] = (val*) var821;
-((struct instance_array__NativeArray*)var3135)->values[411] = (val*) var823;
-((struct instance_array__NativeArray*)var3135)->values[412] = (val*) var825;
-((struct instance_array__NativeArray*)var3135)->values[413] = (val*) var827;
-((struct instance_array__NativeArray*)var3135)->values[414] = (val*) var829;
-((struct instance_array__NativeArray*)var3135)->values[415] = (val*) var831;
-((struct instance_array__NativeArray*)var3135)->values[416] = (val*) var833;
-((struct instance_array__NativeArray*)var3135)->values[417] = (val*) var835;
-((struct instance_array__NativeArray*)var3135)->values[418] = (val*) var837;
-((struct instance_array__NativeArray*)var3135)->values[419] = (val*) var839;
-((struct instance_array__NativeArray*)var3135)->values[420] = (val*) var841;
-((struct instance_array__NativeArray*)var3135)->values[421] = (val*) var843;
-((struct instance_array__NativeArray*)var3135)->values[422] = (val*) var845;
-((struct instance_array__NativeArray*)var3135)->values[423] = (val*) var847;
-((struct instance_array__NativeArray*)var3135)->values[424] = (val*) var849;
-((struct instance_array__NativeArray*)var3135)->values[425] = (val*) var851;
-((struct instance_array__NativeArray*)var3135)->values[426] = (val*) var853;
-((struct instance_array__NativeArray*)var3135)->values[427] = (val*) var855;
-((struct instance_array__NativeArray*)var3135)->values[428] = (val*) var857;
-((struct instance_array__NativeArray*)var3135)->values[429] = (val*) var859;
-((struct instance_array__NativeArray*)var3135)->values[430] = (val*) var861;
-((struct instance_array__NativeArray*)var3135)->values[431] = (val*) var863;
-((struct instance_array__NativeArray*)var3135)->values[432] = (val*) var865;
-((struct instance_array__NativeArray*)var3135)->values[433] = (val*) var867;
-((struct instance_array__NativeArray*)var3135)->values[434] = (val*) var869;
-((struct instance_array__NativeArray*)var3135)->values[435] = (val*) var871;
-((struct instance_array__NativeArray*)var3135)->values[436] = (val*) var873;
-((struct instance_array__NativeArray*)var3135)->values[437] = (val*) var875;
-((struct instance_array__NativeArray*)var3135)->values[438] = (val*) var877;
-((struct instance_array__NativeArray*)var3135)->values[439] = (val*) var879;
-((struct instance_array__NativeArray*)var3135)->values[440] = (val*) var881;
-((struct instance_array__NativeArray*)var3135)->values[441] = (val*) var883;
-((struct instance_array__NativeArray*)var3135)->values[442] = (val*) var885;
-((struct instance_array__NativeArray*)var3135)->values[443] = (val*) var887;
-((struct instance_array__NativeArray*)var3135)->values[444] = (val*) var889;
-((struct instance_array__NativeArray*)var3135)->values[445] = (val*) var891;
-((struct instance_array__NativeArray*)var3135)->values[446] = (val*) var893;
-((struct instance_array__NativeArray*)var3135)->values[447] = (val*) var895;
-((struct instance_array__NativeArray*)var3135)->values[448] = (val*) var897;
-((struct instance_array__NativeArray*)var3135)->values[449] = (val*) var899;
-((struct instance_array__NativeArray*)var3135)->values[450] = (val*) var901;
-((struct instance_array__NativeArray*)var3135)->values[451] = (val*) var903;
-((struct instance_array__NativeArray*)var3135)->values[452] = (val*) var905;
-((struct instance_array__NativeArray*)var3135)->values[453] = (val*) var907;
-((struct instance_array__NativeArray*)var3135)->values[454] = (val*) var909;
-((struct instance_array__NativeArray*)var3135)->values[455] = (val*) var911;
-((struct instance_array__NativeArray*)var3135)->values[456] = (val*) var913;
-((struct instance_array__NativeArray*)var3135)->values[457] = (val*) var915;
-((struct instance_array__NativeArray*)var3135)->values[458] = (val*) var917;
-((struct instance_array__NativeArray*)var3135)->values[459] = (val*) var919;
-((struct instance_array__NativeArray*)var3135)->values[460] = (val*) var921;
-((struct instance_array__NativeArray*)var3135)->values[461] = (val*) var923;
-((struct instance_array__NativeArray*)var3135)->values[462] = (val*) var925;
-((struct instance_array__NativeArray*)var3135)->values[463] = (val*) var927;
-((struct instance_array__NativeArray*)var3135)->values[464] = (val*) var929;
-((struct instance_array__NativeArray*)var3135)->values[465] = (val*) var931;
-((struct instance_array__NativeArray*)var3135)->values[466] = (val*) var933;
-((struct instance_array__NativeArray*)var3135)->values[467] = (val*) var935;
-((struct instance_array__NativeArray*)var3135)->values[468] = (val*) var937;
-((struct instance_array__NativeArray*)var3135)->values[469] = (val*) var939;
-((struct instance_array__NativeArray*)var3135)->values[470] = (val*) var941;
-((struct instance_array__NativeArray*)var3135)->values[471] = (val*) var943;
-((struct instance_array__NativeArray*)var3135)->values[472] = (val*) var945;
-((struct instance_array__NativeArray*)var3135)->values[473] = (val*) var947;
-((struct instance_array__NativeArray*)var3135)->values[474] = (val*) var949;
-((struct instance_array__NativeArray*)var3135)->values[475] = (val*) var951;
-((struct instance_array__NativeArray*)var3135)->values[476] = (val*) var953;
-((struct instance_array__NativeArray*)var3135)->values[477] = (val*) var955;
-((struct instance_array__NativeArray*)var3135)->values[478] = (val*) var957;
-((struct instance_array__NativeArray*)var3135)->values[479] = (val*) var959;
-((struct instance_array__NativeArray*)var3135)->values[480] = (val*) var961;
-((struct instance_array__NativeArray*)var3135)->values[481] = (val*) var963;
-((struct instance_array__NativeArray*)var3135)->values[482] = (val*) var965;
-((struct instance_array__NativeArray*)var3135)->values[483] = (val*) var967;
-((struct instance_array__NativeArray*)var3135)->values[484] = (val*) var969;
-((struct instance_array__NativeArray*)var3135)->values[485] = (val*) var971;
-((struct instance_array__NativeArray*)var3135)->values[486] = (val*) var973;
-((struct instance_array__NativeArray*)var3135)->values[487] = (val*) var975;
-((struct instance_array__NativeArray*)var3135)->values[488] = (val*) var977;
-((struct instance_array__NativeArray*)var3135)->values[489] = (val*) var979;
-((struct instance_array__NativeArray*)var3135)->values[490] = (val*) var981;
-((struct instance_array__NativeArray*)var3135)->values[491] = (val*) var983;
-((struct instance_array__NativeArray*)var3135)->values[492] = (val*) var985;
-((struct instance_array__NativeArray*)var3135)->values[493] = (val*) var987;
-((struct instance_array__NativeArray*)var3135)->values[494] = (val*) var989;
-((struct instance_array__NativeArray*)var3135)->values[495] = (val*) var991;
-((struct instance_array__NativeArray*)var3135)->values[496] = (val*) var993;
-((struct instance_array__NativeArray*)var3135)->values[497] = (val*) var995;
-((struct instance_array__NativeArray*)var3135)->values[498] = (val*) var997;
-((struct instance_array__NativeArray*)var3135)->values[499] = (val*) var999;
-((struct instance_array__NativeArray*)var3135)->values[500] = (val*) var1001;
-((struct instance_array__NativeArray*)var3135)->values[501] = (val*) var1003;
-((struct instance_array__NativeArray*)var3135)->values[502] = (val*) var1005;
-((struct instance_array__NativeArray*)var3135)->values[503] = (val*) var1007;
-((struct instance_array__NativeArray*)var3135)->values[504] = (val*) var1009;
-((struct instance_array__NativeArray*)var3135)->values[505] = (val*) var1011;
-((struct instance_array__NativeArray*)var3135)->values[506] = (val*) var1013;
-((struct instance_array__NativeArray*)var3135)->values[507] = (val*) var1015;
-((struct instance_array__NativeArray*)var3135)->values[508] = (val*) var1017;
-((struct instance_array__NativeArray*)var3135)->values[509] = (val*) var1019;
-((struct instance_array__NativeArray*)var3135)->values[510] = (val*) var1021;
-((struct instance_array__NativeArray*)var3135)->values[511] = (val*) var1023;
-((struct instance_array__NativeArray*)var3135)->values[512] = (val*) var1025;
-((struct instance_array__NativeArray*)var3135)->values[513] = (val*) var1027;
-((struct instance_array__NativeArray*)var3135)->values[514] = (val*) var1029;
-((struct instance_array__NativeArray*)var3135)->values[515] = (val*) var1031;
-((struct instance_array__NativeArray*)var3135)->values[516] = (val*) var1033;
-((struct instance_array__NativeArray*)var3135)->values[517] = (val*) var1035;
-((struct instance_array__NativeArray*)var3135)->values[518] = (val*) var1037;
-((struct instance_array__NativeArray*)var3135)->values[519] = (val*) var1039;
-((struct instance_array__NativeArray*)var3135)->values[520] = (val*) var1041;
-((struct instance_array__NativeArray*)var3135)->values[521] = (val*) var1043;
-((struct instance_array__NativeArray*)var3135)->values[522] = (val*) var1045;
-((struct instance_array__NativeArray*)var3135)->values[523] = (val*) var1047;
-((struct instance_array__NativeArray*)var3135)->values[524] = (val*) var1049;
-((struct instance_array__NativeArray*)var3135)->values[525] = (val*) var1051;
-((struct instance_array__NativeArray*)var3135)->values[526] = (val*) var1053;
-((struct instance_array__NativeArray*)var3135)->values[527] = (val*) var1055;
-((struct instance_array__NativeArray*)var3135)->values[528] = (val*) var1057;
-((struct instance_array__NativeArray*)var3135)->values[529] = (val*) var1059;
-((struct instance_array__NativeArray*)var3135)->values[530] = (val*) var1061;
-((struct instance_array__NativeArray*)var3135)->values[531] = (val*) var1063;
-((struct instance_array__NativeArray*)var3135)->values[532] = (val*) var1065;
-((struct instance_array__NativeArray*)var3135)->values[533] = (val*) var1067;
-((struct instance_array__NativeArray*)var3135)->values[534] = (val*) var1069;
-((struct instance_array__NativeArray*)var3135)->values[535] = (val*) var1071;
-((struct instance_array__NativeArray*)var3135)->values[536] = (val*) var1073;
-((struct instance_array__NativeArray*)var3135)->values[537] = (val*) var1075;
-((struct instance_array__NativeArray*)var3135)->values[538] = (val*) var1077;
-((struct instance_array__NativeArray*)var3135)->values[539] = (val*) var1079;
-((struct instance_array__NativeArray*)var3135)->values[540] = (val*) var1081;
-((struct instance_array__NativeArray*)var3135)->values[541] = (val*) var1083;
-((struct instance_array__NativeArray*)var3135)->values[542] = (val*) var1085;
-((struct instance_array__NativeArray*)var3135)->values[543] = (val*) var1087;
-((struct instance_array__NativeArray*)var3135)->values[544] = (val*) var1089;
-((struct instance_array__NativeArray*)var3135)->values[545] = (val*) var1091;
-((struct instance_array__NativeArray*)var3135)->values[546] = (val*) var1093;
-((struct instance_array__NativeArray*)var3135)->values[547] = (val*) var1095;
-((struct instance_array__NativeArray*)var3135)->values[548] = (val*) var1097;
-((struct instance_array__NativeArray*)var3135)->values[549] = (val*) var1099;
-((struct instance_array__NativeArray*)var3135)->values[550] = (val*) var1101;
-((struct instance_array__NativeArray*)var3135)->values[551] = (val*) var1103;
-((struct instance_array__NativeArray*)var3135)->values[552] = (val*) var1105;
-((struct instance_array__NativeArray*)var3135)->values[553] = (val*) var1107;
-((struct instance_array__NativeArray*)var3135)->values[554] = (val*) var1109;
-((struct instance_array__NativeArray*)var3135)->values[555] = (val*) var1111;
-((struct instance_array__NativeArray*)var3135)->values[556] = (val*) var1113;
-((struct instance_array__NativeArray*)var3135)->values[557] = (val*) var1115;
-((struct instance_array__NativeArray*)var3135)->values[558] = (val*) var1117;
-((struct instance_array__NativeArray*)var3135)->values[559] = (val*) var1119;
-((struct instance_array__NativeArray*)var3135)->values[560] = (val*) var1121;
-((struct instance_array__NativeArray*)var3135)->values[561] = (val*) var1123;
-((struct instance_array__NativeArray*)var3135)->values[562] = (val*) var1125;
-((struct instance_array__NativeArray*)var3135)->values[563] = (val*) var1127;
-((struct instance_array__NativeArray*)var3135)->values[564] = (val*) var1129;
-((struct instance_array__NativeArray*)var3135)->values[565] = (val*) var1131;
-((struct instance_array__NativeArray*)var3135)->values[566] = (val*) var1133;
-((struct instance_array__NativeArray*)var3135)->values[567] = (val*) var1135;
-((struct instance_array__NativeArray*)var3135)->values[568] = (val*) var1137;
-((struct instance_array__NativeArray*)var3135)->values[569] = (val*) var1139;
-((struct instance_array__NativeArray*)var3135)->values[570] = (val*) var1141;
-((struct instance_array__NativeArray*)var3135)->values[571] = (val*) var1143;
-((struct instance_array__NativeArray*)var3135)->values[572] = (val*) var1145;
-((struct instance_array__NativeArray*)var3135)->values[573] = (val*) var1147;
-((struct instance_array__NativeArray*)var3135)->values[574] = (val*) var1149;
-((struct instance_array__NativeArray*)var3135)->values[575] = (val*) var1151;
-((struct instance_array__NativeArray*)var3135)->values[576] = (val*) var1153;
-((struct instance_array__NativeArray*)var3135)->values[577] = (val*) var1155;
-((struct instance_array__NativeArray*)var3135)->values[578] = (val*) var1157;
-((struct instance_array__NativeArray*)var3135)->values[579] = (val*) var1159;
-((struct instance_array__NativeArray*)var3135)->values[580] = (val*) var1161;
-((struct instance_array__NativeArray*)var3135)->values[581] = (val*) var1163;
-((struct instance_array__NativeArray*)var3135)->values[582] = (val*) var1165;
-((struct instance_array__NativeArray*)var3135)->values[583] = (val*) var1167;
-((struct instance_array__NativeArray*)var3135)->values[584] = (val*) var1169;
-((struct instance_array__NativeArray*)var3135)->values[585] = (val*) var1171;
-((struct instance_array__NativeArray*)var3135)->values[586] = (val*) var1173;
-((struct instance_array__NativeArray*)var3135)->values[587] = (val*) var1175;
-((struct instance_array__NativeArray*)var3135)->values[588] = (val*) var1177;
-((struct instance_array__NativeArray*)var3135)->values[589] = (val*) var1179;
-((struct instance_array__NativeArray*)var3135)->values[590] = (val*) var1181;
-((struct instance_array__NativeArray*)var3135)->values[591] = (val*) var1183;
-((struct instance_array__NativeArray*)var3135)->values[592] = (val*) var1185;
-((struct instance_array__NativeArray*)var3135)->values[593] = (val*) var1187;
-((struct instance_array__NativeArray*)var3135)->values[594] = (val*) var1189;
-((struct instance_array__NativeArray*)var3135)->values[595] = (val*) var1191;
-((struct instance_array__NativeArray*)var3135)->values[596] = (val*) var1193;
-((struct instance_array__NativeArray*)var3135)->values[597] = (val*) var1195;
-((struct instance_array__NativeArray*)var3135)->values[598] = (val*) var1197;
-((struct instance_array__NativeArray*)var3135)->values[599] = (val*) var1199;
-((struct instance_array__NativeArray*)var3135)->values[600] = (val*) var1201;
-((struct instance_array__NativeArray*)var3135)->values[601] = (val*) var1203;
-((struct instance_array__NativeArray*)var3135)->values[602] = (val*) var1205;
-((struct instance_array__NativeArray*)var3135)->values[603] = (val*) var1207;
-((struct instance_array__NativeArray*)var3135)->values[604] = (val*) var1209;
-((struct instance_array__NativeArray*)var3135)->values[605] = (val*) var1211;
-((struct instance_array__NativeArray*)var3135)->values[606] = (val*) var1213;
-((struct instance_array__NativeArray*)var3135)->values[607] = (val*) var1215;
-((struct instance_array__NativeArray*)var3135)->values[608] = (val*) var1217;
-((struct instance_array__NativeArray*)var3135)->values[609] = (val*) var1219;
-((struct instance_array__NativeArray*)var3135)->values[610] = (val*) var1221;
-((struct instance_array__NativeArray*)var3135)->values[611] = (val*) var1223;
-((struct instance_array__NativeArray*)var3135)->values[612] = (val*) var1225;
-((struct instance_array__NativeArray*)var3135)->values[613] = (val*) var1227;
-((struct instance_array__NativeArray*)var3135)->values[614] = (val*) var1229;
-((struct instance_array__NativeArray*)var3135)->values[615] = (val*) var1231;
-((struct instance_array__NativeArray*)var3135)->values[616] = (val*) var1233;
-((struct instance_array__NativeArray*)var3135)->values[617] = (val*) var1235;
-((struct instance_array__NativeArray*)var3135)->values[618] = (val*) var1237;
-((struct instance_array__NativeArray*)var3135)->values[619] = (val*) var1239;
-((struct instance_array__NativeArray*)var3135)->values[620] = (val*) var1241;
-((struct instance_array__NativeArray*)var3135)->values[621] = (val*) var1243;
-((struct instance_array__NativeArray*)var3135)->values[622] = (val*) var1245;
-((struct instance_array__NativeArray*)var3135)->values[623] = (val*) var1247;
-((struct instance_array__NativeArray*)var3135)->values[624] = (val*) var1249;
-((struct instance_array__NativeArray*)var3135)->values[625] = (val*) var1251;
-((struct instance_array__NativeArray*)var3135)->values[626] = (val*) var1253;
-((struct instance_array__NativeArray*)var3135)->values[627] = (val*) var1255;
-((struct instance_array__NativeArray*)var3135)->values[628] = (val*) var1257;
-((struct instance_array__NativeArray*)var3135)->values[629] = (val*) var1259;
-((struct instance_array__NativeArray*)var3135)->values[630] = (val*) var1261;
-((struct instance_array__NativeArray*)var3135)->values[631] = (val*) var1263;
-((struct instance_array__NativeArray*)var3135)->values[632] = (val*) var1265;
-((struct instance_array__NativeArray*)var3135)->values[633] = (val*) var1267;
-((struct instance_array__NativeArray*)var3135)->values[634] = (val*) var1269;
-((struct instance_array__NativeArray*)var3135)->values[635] = (val*) var1271;
-((struct instance_array__NativeArray*)var3135)->values[636] = (val*) var1273;
-((struct instance_array__NativeArray*)var3135)->values[637] = (val*) var1275;
-((struct instance_array__NativeArray*)var3135)->values[638] = (val*) var1277;
-((struct instance_array__NativeArray*)var3135)->values[639] = (val*) var1279;
-((struct instance_array__NativeArray*)var3135)->values[640] = (val*) var1281;
-((struct instance_array__NativeArray*)var3135)->values[641] = (val*) var1283;
-((struct instance_array__NativeArray*)var3135)->values[642] = (val*) var1285;
-((struct instance_array__NativeArray*)var3135)->values[643] = (val*) var1287;
-((struct instance_array__NativeArray*)var3135)->values[644] = (val*) var1289;
-((struct instance_array__NativeArray*)var3135)->values[645] = (val*) var1291;
-((struct instance_array__NativeArray*)var3135)->values[646] = (val*) var1293;
-((struct instance_array__NativeArray*)var3135)->values[647] = (val*) var1295;
-((struct instance_array__NativeArray*)var3135)->values[648] = (val*) var1297;
-((struct instance_array__NativeArray*)var3135)->values[649] = (val*) var1299;
-((struct instance_array__NativeArray*)var3135)->values[650] = (val*) var1301;
-((struct instance_array__NativeArray*)var3135)->values[651] = (val*) var1303;
-((struct instance_array__NativeArray*)var3135)->values[652] = (val*) var1305;
-((struct instance_array__NativeArray*)var3135)->values[653] = (val*) var1307;
-((struct instance_array__NativeArray*)var3135)->values[654] = (val*) var1309;
-((struct instance_array__NativeArray*)var3135)->values[655] = (val*) var1311;
-((struct instance_array__NativeArray*)var3135)->values[656] = (val*) var1313;
-((struct instance_array__NativeArray*)var3135)->values[657] = (val*) var1315;
-((struct instance_array__NativeArray*)var3135)->values[658] = (val*) var1317;
-((struct instance_array__NativeArray*)var3135)->values[659] = (val*) var1319;
-((struct instance_array__NativeArray*)var3135)->values[660] = (val*) var1321;
-((struct instance_array__NativeArray*)var3135)->values[661] = (val*) var1323;
-((struct instance_array__NativeArray*)var3135)->values[662] = (val*) var1325;
-((struct instance_array__NativeArray*)var3135)->values[663] = (val*) var1327;
-((struct instance_array__NativeArray*)var3135)->values[664] = (val*) var1329;
-((struct instance_array__NativeArray*)var3135)->values[665] = (val*) var1331;
-((struct instance_array__NativeArray*)var3135)->values[666] = (val*) var1333;
-((struct instance_array__NativeArray*)var3135)->values[667] = (val*) var1335;
-((struct instance_array__NativeArray*)var3135)->values[668] = (val*) var1337;
-((struct instance_array__NativeArray*)var3135)->values[669] = (val*) var1339;
-((struct instance_array__NativeArray*)var3135)->values[670] = (val*) var1341;
-((struct instance_array__NativeArray*)var3135)->values[671] = (val*) var1343;
-((struct instance_array__NativeArray*)var3135)->values[672] = (val*) var1345;
-((struct instance_array__NativeArray*)var3135)->values[673] = (val*) var1347;
-((struct instance_array__NativeArray*)var3135)->values[674] = (val*) var1349;
-((struct instance_array__NativeArray*)var3135)->values[675] = (val*) var1351;
-((struct instance_array__NativeArray*)var3135)->values[676] = (val*) var1353;
-((struct instance_array__NativeArray*)var3135)->values[677] = (val*) var1355;
-((struct instance_array__NativeArray*)var3135)->values[678] = (val*) var1357;
-((struct instance_array__NativeArray*)var3135)->values[679] = (val*) var1359;
-((struct instance_array__NativeArray*)var3135)->values[680] = (val*) var1361;
-((struct instance_array__NativeArray*)var3135)->values[681] = (val*) var1363;
-((struct instance_array__NativeArray*)var3135)->values[682] = (val*) var1365;
-((struct instance_array__NativeArray*)var3135)->values[683] = (val*) var1367;
-((struct instance_array__NativeArray*)var3135)->values[684] = (val*) var1369;
-((struct instance_array__NativeArray*)var3135)->values[685] = (val*) var1371;
-((struct instance_array__NativeArray*)var3135)->values[686] = (val*) var1373;
-((struct instance_array__NativeArray*)var3135)->values[687] = (val*) var1375;
-((struct instance_array__NativeArray*)var3135)->values[688] = (val*) var1377;
-((struct instance_array__NativeArray*)var3135)->values[689] = (val*) var1379;
-((struct instance_array__NativeArray*)var3135)->values[690] = (val*) var1381;
-((struct instance_array__NativeArray*)var3135)->values[691] = (val*) var1383;
-((struct instance_array__NativeArray*)var3135)->values[692] = (val*) var1385;
-((struct instance_array__NativeArray*)var3135)->values[693] = (val*) var1387;
-((struct instance_array__NativeArray*)var3135)->values[694] = (val*) var1389;
-((struct instance_array__NativeArray*)var3135)->values[695] = (val*) var1391;
-((struct instance_array__NativeArray*)var3135)->values[696] = (val*) var1393;
-((struct instance_array__NativeArray*)var3135)->values[697] = (val*) var1395;
-((struct instance_array__NativeArray*)var3135)->values[698] = (val*) var1397;
-((struct instance_array__NativeArray*)var3135)->values[699] = (val*) var1399;
-((struct instance_array__NativeArray*)var3135)->values[700] = (val*) var1401;
-((struct instance_array__NativeArray*)var3135)->values[701] = (val*) var1403;
-((struct instance_array__NativeArray*)var3135)->values[702] = (val*) var1405;
-((struct instance_array__NativeArray*)var3135)->values[703] = (val*) var1407;
-((struct instance_array__NativeArray*)var3135)->values[704] = (val*) var1409;
-((struct instance_array__NativeArray*)var3135)->values[705] = (val*) var1411;
-((struct instance_array__NativeArray*)var3135)->values[706] = (val*) var1413;
-((struct instance_array__NativeArray*)var3135)->values[707] = (val*) var1415;
-((struct instance_array__NativeArray*)var3135)->values[708] = (val*) var1417;
-((struct instance_array__NativeArray*)var3135)->values[709] = (val*) var1419;
-((struct instance_array__NativeArray*)var3135)->values[710] = (val*) var1421;
-((struct instance_array__NativeArray*)var3135)->values[711] = (val*) var1423;
-((struct instance_array__NativeArray*)var3135)->values[712] = (val*) var1425;
-((struct instance_array__NativeArray*)var3135)->values[713] = (val*) var1427;
-((struct instance_array__NativeArray*)var3135)->values[714] = (val*) var1429;
-((struct instance_array__NativeArray*)var3135)->values[715] = (val*) var1431;
-((struct instance_array__NativeArray*)var3135)->values[716] = (val*) var1433;
-((struct instance_array__NativeArray*)var3135)->values[717] = (val*) var1435;
-((struct instance_array__NativeArray*)var3135)->values[718] = (val*) var1437;
-((struct instance_array__NativeArray*)var3135)->values[719] = (val*) var1439;
-((struct instance_array__NativeArray*)var3135)->values[720] = (val*) var1441;
-((struct instance_array__NativeArray*)var3135)->values[721] = (val*) var1443;
-((struct instance_array__NativeArray*)var3135)->values[722] = (val*) var1445;
-((struct instance_array__NativeArray*)var3135)->values[723] = (val*) var1447;
-((struct instance_array__NativeArray*)var3135)->values[724] = (val*) var1449;
-((struct instance_array__NativeArray*)var3135)->values[725] = (val*) var1451;
-((struct instance_array__NativeArray*)var3135)->values[726] = (val*) var1453;
-((struct instance_array__NativeArray*)var3135)->values[727] = (val*) var1455;
-((struct instance_array__NativeArray*)var3135)->values[728] = (val*) var1457;
-((struct instance_array__NativeArray*)var3135)->values[729] = (val*) var1459;
-((struct instance_array__NativeArray*)var3135)->values[730] = (val*) var1461;
-((struct instance_array__NativeArray*)var3135)->values[731] = (val*) var1463;
-((struct instance_array__NativeArray*)var3135)->values[732] = (val*) var1465;
-((struct instance_array__NativeArray*)var3135)->values[733] = (val*) var1467;
-((struct instance_array__NativeArray*)var3135)->values[734] = (val*) var1469;
-((struct instance_array__NativeArray*)var3135)->values[735] = (val*) var1471;
-((struct instance_array__NativeArray*)var3135)->values[736] = (val*) var1473;
-((struct instance_array__NativeArray*)var3135)->values[737] = (val*) var1475;
-((struct instance_array__NativeArray*)var3135)->values[738] = (val*) var1477;
-((struct instance_array__NativeArray*)var3135)->values[739] = (val*) var1479;
-((struct instance_array__NativeArray*)var3135)->values[740] = (val*) var1481;
-((struct instance_array__NativeArray*)var3135)->values[741] = (val*) var1483;
-((struct instance_array__NativeArray*)var3135)->values[742] = (val*) var1485;
-((struct instance_array__NativeArray*)var3135)->values[743] = (val*) var1487;
-((struct instance_array__NativeArray*)var3135)->values[744] = (val*) var1489;
-((struct instance_array__NativeArray*)var3135)->values[745] = (val*) var1491;
-((struct instance_array__NativeArray*)var3135)->values[746] = (val*) var1493;
-((struct instance_array__NativeArray*)var3135)->values[747] = (val*) var1495;
-((struct instance_array__NativeArray*)var3135)->values[748] = (val*) var1497;
-((struct instance_array__NativeArray*)var3135)->values[749] = (val*) var1499;
-((struct instance_array__NativeArray*)var3135)->values[750] = (val*) var1501;
-((struct instance_array__NativeArray*)var3135)->values[751] = (val*) var1503;
-((struct instance_array__NativeArray*)var3135)->values[752] = (val*) var1505;
-((struct instance_array__NativeArray*)var3135)->values[753] = (val*) var1507;
-((struct instance_array__NativeArray*)var3135)->values[754] = (val*) var1509;
-((struct instance_array__NativeArray*)var3135)->values[755] = (val*) var1511;
-((struct instance_array__NativeArray*)var3135)->values[756] = (val*) var1513;
-((struct instance_array__NativeArray*)var3135)->values[757] = (val*) var1515;
-((struct instance_array__NativeArray*)var3135)->values[758] = (val*) var1517;
-((struct instance_array__NativeArray*)var3135)->values[759] = (val*) var1519;
-((struct instance_array__NativeArray*)var3135)->values[760] = (val*) var1521;
-((struct instance_array__NativeArray*)var3135)->values[761] = (val*) var1523;
-((struct instance_array__NativeArray*)var3135)->values[762] = (val*) var1525;
-((struct instance_array__NativeArray*)var3135)->values[763] = (val*) var1527;
-((struct instance_array__NativeArray*)var3135)->values[764] = (val*) var1529;
-((struct instance_array__NativeArray*)var3135)->values[765] = (val*) var1531;
-((struct instance_array__NativeArray*)var3135)->values[766] = (val*) var1533;
-((struct instance_array__NativeArray*)var3135)->values[767] = (val*) var1535;
-((struct instance_array__NativeArray*)var3135)->values[768] = (val*) var1537;
-((struct instance_array__NativeArray*)var3135)->values[769] = (val*) var1539;
-((struct instance_array__NativeArray*)var3135)->values[770] = (val*) var1541;
-((struct instance_array__NativeArray*)var3135)->values[771] = (val*) var1543;
-((struct instance_array__NativeArray*)var3135)->values[772] = (val*) var1545;
-((struct instance_array__NativeArray*)var3135)->values[773] = (val*) var1547;
-((struct instance_array__NativeArray*)var3135)->values[774] = (val*) var1549;
-((struct instance_array__NativeArray*)var3135)->values[775] = (val*) var1551;
-((struct instance_array__NativeArray*)var3135)->values[776] = (val*) var1553;
-((struct instance_array__NativeArray*)var3135)->values[777] = (val*) var1555;
-((struct instance_array__NativeArray*)var3135)->values[778] = (val*) var1557;
-((struct instance_array__NativeArray*)var3135)->values[779] = (val*) var1559;
-((struct instance_array__NativeArray*)var3135)->values[780] = (val*) var1561;
-((struct instance_array__NativeArray*)var3135)->values[781] = (val*) var1563;
-((struct instance_array__NativeArray*)var3135)->values[782] = (val*) var1565;
-((struct instance_array__NativeArray*)var3135)->values[783] = (val*) var1567;
-((struct instance_array__NativeArray*)var3135)->values[784] = (val*) var1569;
-((struct instance_array__NativeArray*)var3135)->values[785] = (val*) var1571;
-((struct instance_array__NativeArray*)var3135)->values[786] = (val*) var1573;
-((struct instance_array__NativeArray*)var3135)->values[787] = (val*) var1575;
-((struct instance_array__NativeArray*)var3135)->values[788] = (val*) var1577;
-((struct instance_array__NativeArray*)var3135)->values[789] = (val*) var1579;
-((struct instance_array__NativeArray*)var3135)->values[790] = (val*) var1581;
-((struct instance_array__NativeArray*)var3135)->values[791] = (val*) var1583;
-((struct instance_array__NativeArray*)var3135)->values[792] = (val*) var1585;
-((struct instance_array__NativeArray*)var3135)->values[793] = (val*) var1587;
-((struct instance_array__NativeArray*)var3135)->values[794] = (val*) var1589;
-((struct instance_array__NativeArray*)var3135)->values[795] = (val*) var1591;
-((struct instance_array__NativeArray*)var3135)->values[796] = (val*) var1593;
-((struct instance_array__NativeArray*)var3135)->values[797] = (val*) var1595;
-((struct instance_array__NativeArray*)var3135)->values[798] = (val*) var1597;
-((struct instance_array__NativeArray*)var3135)->values[799] = (val*) var1599;
-((struct instance_array__NativeArray*)var3135)->values[800] = (val*) var1601;
-((struct instance_array__NativeArray*)var3135)->values[801] = (val*) var1603;
-((struct instance_array__NativeArray*)var3135)->values[802] = (val*) var1605;
-((struct instance_array__NativeArray*)var3135)->values[803] = (val*) var1607;
-((struct instance_array__NativeArray*)var3135)->values[804] = (val*) var1609;
-((struct instance_array__NativeArray*)var3135)->values[805] = (val*) var1611;
-((struct instance_array__NativeArray*)var3135)->values[806] = (val*) var1613;
-((struct instance_array__NativeArray*)var3135)->values[807] = (val*) var1615;
-((struct instance_array__NativeArray*)var3135)->values[808] = (val*) var1617;
-((struct instance_array__NativeArray*)var3135)->values[809] = (val*) var1619;
-((struct instance_array__NativeArray*)var3135)->values[810] = (val*) var1621;
-((struct instance_array__NativeArray*)var3135)->values[811] = (val*) var1623;
-((struct instance_array__NativeArray*)var3135)->values[812] = (val*) var1625;
-((struct instance_array__NativeArray*)var3135)->values[813] = (val*) var1627;
-((struct instance_array__NativeArray*)var3135)->values[814] = (val*) var1629;
-((struct instance_array__NativeArray*)var3135)->values[815] = (val*) var1631;
-((struct instance_array__NativeArray*)var3135)->values[816] = (val*) var1633;
-((struct instance_array__NativeArray*)var3135)->values[817] = (val*) var1635;
-((struct instance_array__NativeArray*)var3135)->values[818] = (val*) var1637;
-((struct instance_array__NativeArray*)var3135)->values[819] = (val*) var1639;
-((struct instance_array__NativeArray*)var3135)->values[820] = (val*) var1641;
-((struct instance_array__NativeArray*)var3135)->values[821] = (val*) var1643;
-((struct instance_array__NativeArray*)var3135)->values[822] = (val*) var1645;
-((struct instance_array__NativeArray*)var3135)->values[823] = (val*) var1647;
-((struct instance_array__NativeArray*)var3135)->values[824] = (val*) var1649;
-((struct instance_array__NativeArray*)var3135)->values[825] = (val*) var1651;
-((struct instance_array__NativeArray*)var3135)->values[826] = (val*) var1653;
-((struct instance_array__NativeArray*)var3135)->values[827] = (val*) var1655;
-((struct instance_array__NativeArray*)var3135)->values[828] = (val*) var1657;
-((struct instance_array__NativeArray*)var3135)->values[829] = (val*) var1659;
-((struct instance_array__NativeArray*)var3135)->values[830] = (val*) var1661;
-((struct instance_array__NativeArray*)var3135)->values[831] = (val*) var1663;
-((struct instance_array__NativeArray*)var3135)->values[832] = (val*) var1665;
-((struct instance_array__NativeArray*)var3135)->values[833] = (val*) var1667;
-((struct instance_array__NativeArray*)var3135)->values[834] = (val*) var1669;
-((struct instance_array__NativeArray*)var3135)->values[835] = (val*) var1671;
-((struct instance_array__NativeArray*)var3135)->values[836] = (val*) var1673;
-((struct instance_array__NativeArray*)var3135)->values[837] = (val*) var1675;
-((struct instance_array__NativeArray*)var3135)->values[838] = (val*) var1677;
-((struct instance_array__NativeArray*)var3135)->values[839] = (val*) var1679;
-((struct instance_array__NativeArray*)var3135)->values[840] = (val*) var1681;
-((struct instance_array__NativeArray*)var3135)->values[841] = (val*) var1683;
-((struct instance_array__NativeArray*)var3135)->values[842] = (val*) var1685;
-((struct instance_array__NativeArray*)var3135)->values[843] = (val*) var1687;
-((struct instance_array__NativeArray*)var3135)->values[844] = (val*) var1689;
-((struct instance_array__NativeArray*)var3135)->values[845] = (val*) var1691;
-((struct instance_array__NativeArray*)var3135)->values[846] = (val*) var1693;
-((struct instance_array__NativeArray*)var3135)->values[847] = (val*) var1695;
-((struct instance_array__NativeArray*)var3135)->values[848] = (val*) var1697;
-((struct instance_array__NativeArray*)var3135)->values[849] = (val*) var1699;
-((struct instance_array__NativeArray*)var3135)->values[850] = (val*) var1701;
-((struct instance_array__NativeArray*)var3135)->values[851] = (val*) var1703;
-((struct instance_array__NativeArray*)var3135)->values[852] = (val*) var1705;
-((struct instance_array__NativeArray*)var3135)->values[853] = (val*) var1707;
-((struct instance_array__NativeArray*)var3135)->values[854] = (val*) var1709;
-((struct instance_array__NativeArray*)var3135)->values[855] = (val*) var1711;
-((struct instance_array__NativeArray*)var3135)->values[856] = (val*) var1713;
-((struct instance_array__NativeArray*)var3135)->values[857] = (val*) var1715;
-((struct instance_array__NativeArray*)var3135)->values[858] = (val*) var1717;
-((struct instance_array__NativeArray*)var3135)->values[859] = (val*) var1719;
-((struct instance_array__NativeArray*)var3135)->values[860] = (val*) var1721;
-((struct instance_array__NativeArray*)var3135)->values[861] = (val*) var1723;
-((struct instance_array__NativeArray*)var3135)->values[862] = (val*) var1725;
-((struct instance_array__NativeArray*)var3135)->values[863] = (val*) var1727;
-((struct instance_array__NativeArray*)var3135)->values[864] = (val*) var1729;
-((struct instance_array__NativeArray*)var3135)->values[865] = (val*) var1731;
-((struct instance_array__NativeArray*)var3135)->values[866] = (val*) var1733;
-((struct instance_array__NativeArray*)var3135)->values[867] = (val*) var1735;
-((struct instance_array__NativeArray*)var3135)->values[868] = (val*) var1737;
-((struct instance_array__NativeArray*)var3135)->values[869] = (val*) var1739;
-((struct instance_array__NativeArray*)var3135)->values[870] = (val*) var1741;
-((struct instance_array__NativeArray*)var3135)->values[871] = (val*) var1743;
-((struct instance_array__NativeArray*)var3135)->values[872] = (val*) var1745;
-((struct instance_array__NativeArray*)var3135)->values[873] = (val*) var1747;
-((struct instance_array__NativeArray*)var3135)->values[874] = (val*) var1749;
-((struct instance_array__NativeArray*)var3135)->values[875] = (val*) var1751;
-((struct instance_array__NativeArray*)var3135)->values[876] = (val*) var1753;
-((struct instance_array__NativeArray*)var3135)->values[877] = (val*) var1755;
-((struct instance_array__NativeArray*)var3135)->values[878] = (val*) var1757;
-((struct instance_array__NativeArray*)var3135)->values[879] = (val*) var1759;
-((struct instance_array__NativeArray*)var3135)->values[880] = (val*) var1761;
-((struct instance_array__NativeArray*)var3135)->values[881] = (val*) var1763;
-((struct instance_array__NativeArray*)var3135)->values[882] = (val*) var1765;
-((struct instance_array__NativeArray*)var3135)->values[883] = (val*) var1767;
-((struct instance_array__NativeArray*)var3135)->values[884] = (val*) var1769;
-((struct instance_array__NativeArray*)var3135)->values[885] = (val*) var1771;
-((struct instance_array__NativeArray*)var3135)->values[886] = (val*) var1773;
-((struct instance_array__NativeArray*)var3135)->values[887] = (val*) var1775;
-((struct instance_array__NativeArray*)var3135)->values[888] = (val*) var1777;
-((struct instance_array__NativeArray*)var3135)->values[889] = (val*) var1779;
-((struct instance_array__NativeArray*)var3135)->values[890] = (val*) var1781;
-((struct instance_array__NativeArray*)var3135)->values[891] = (val*) var1783;
-((struct instance_array__NativeArray*)var3135)->values[892] = (val*) var1785;
-((struct instance_array__NativeArray*)var3135)->values[893] = (val*) var1787;
-((struct instance_array__NativeArray*)var3135)->values[894] = (val*) var1789;
-((struct instance_array__NativeArray*)var3135)->values[895] = (val*) var1791;
-((struct instance_array__NativeArray*)var3135)->values[896] = (val*) var1793;
-((struct instance_array__NativeArray*)var3135)->values[897] = (val*) var1795;
-((struct instance_array__NativeArray*)var3135)->values[898] = (val*) var1797;
-((struct instance_array__NativeArray*)var3135)->values[899] = (val*) var1799;
-((struct instance_array__NativeArray*)var3135)->values[900] = (val*) var1801;
-((struct instance_array__NativeArray*)var3135)->values[901] = (val*) var1803;
-((struct instance_array__NativeArray*)var3135)->values[902] = (val*) var1805;
-((struct instance_array__NativeArray*)var3135)->values[903] = (val*) var1807;
-((struct instance_array__NativeArray*)var3135)->values[904] = (val*) var1809;
-((struct instance_array__NativeArray*)var3135)->values[905] = (val*) var1811;
-((struct instance_array__NativeArray*)var3135)->values[906] = (val*) var1813;
-((struct instance_array__NativeArray*)var3135)->values[907] = (val*) var1815;
-((struct instance_array__NativeArray*)var3135)->values[908] = (val*) var1817;
-((struct instance_array__NativeArray*)var3135)->values[909] = (val*) var1819;
-((struct instance_array__NativeArray*)var3135)->values[910] = (val*) var1821;
-((struct instance_array__NativeArray*)var3135)->values[911] = (val*) var1823;
-((struct instance_array__NativeArray*)var3135)->values[912] = (val*) var1825;
-((struct instance_array__NativeArray*)var3135)->values[913] = (val*) var1827;
-((struct instance_array__NativeArray*)var3135)->values[914] = (val*) var1829;
-((struct instance_array__NativeArray*)var3135)->values[915] = (val*) var1831;
-((struct instance_array__NativeArray*)var3135)->values[916] = (val*) var1833;
-((struct instance_array__NativeArray*)var3135)->values[917] = (val*) var1835;
-((struct instance_array__NativeArray*)var3135)->values[918] = (val*) var1837;
-((struct instance_array__NativeArray*)var3135)->values[919] = (val*) var1839;
-((struct instance_array__NativeArray*)var3135)->values[920] = (val*) var1841;
-((struct instance_array__NativeArray*)var3135)->values[921] = (val*) var1843;
-((struct instance_array__NativeArray*)var3135)->values[922] = (val*) var1845;
-((struct instance_array__NativeArray*)var3135)->values[923] = (val*) var1847;
-((struct instance_array__NativeArray*)var3135)->values[924] = (val*) var1849;
-((struct instance_array__NativeArray*)var3135)->values[925] = (val*) var1851;
-((struct instance_array__NativeArray*)var3135)->values[926] = (val*) var1853;
-((struct instance_array__NativeArray*)var3135)->values[927] = (val*) var1855;
-((struct instance_array__NativeArray*)var3135)->values[928] = (val*) var1857;
-((struct instance_array__NativeArray*)var3135)->values[929] = (val*) var1859;
-((struct instance_array__NativeArray*)var3135)->values[930] = (val*) var1861;
-((struct instance_array__NativeArray*)var3135)->values[931] = (val*) var1863;
-((struct instance_array__NativeArray*)var3135)->values[932] = (val*) var1865;
-((struct instance_array__NativeArray*)var3135)->values[933] = (val*) var1867;
-((struct instance_array__NativeArray*)var3135)->values[934] = (val*) var1869;
-((struct instance_array__NativeArray*)var3135)->values[935] = (val*) var1871;
-((struct instance_array__NativeArray*)var3135)->values[936] = (val*) var1873;
-((struct instance_array__NativeArray*)var3135)->values[937] = (val*) var1875;
-((struct instance_array__NativeArray*)var3135)->values[938] = (val*) var1877;
-((struct instance_array__NativeArray*)var3135)->values[939] = (val*) var1879;
-((struct instance_array__NativeArray*)var3135)->values[940] = (val*) var1881;
-((struct instance_array__NativeArray*)var3135)->values[941] = (val*) var1883;
-((struct instance_array__NativeArray*)var3135)->values[942] = (val*) var1885;
-((struct instance_array__NativeArray*)var3135)->values[943] = (val*) var1887;
-((struct instance_array__NativeArray*)var3135)->values[944] = (val*) var1889;
-((struct instance_array__NativeArray*)var3135)->values[945] = (val*) var1891;
-((struct instance_array__NativeArray*)var3135)->values[946] = (val*) var1893;
-((struct instance_array__NativeArray*)var3135)->values[947] = (val*) var1895;
-((struct instance_array__NativeArray*)var3135)->values[948] = (val*) var1897;
-((struct instance_array__NativeArray*)var3135)->values[949] = (val*) var1899;
-((struct instance_array__NativeArray*)var3135)->values[950] = (val*) var1901;
-((struct instance_array__NativeArray*)var3135)->values[951] = (val*) var1903;
-((struct instance_array__NativeArray*)var3135)->values[952] = (val*) var1905;
-((struct instance_array__NativeArray*)var3135)->values[953] = (val*) var1907;
-((struct instance_array__NativeArray*)var3135)->values[954] = (val*) var1909;
-((struct instance_array__NativeArray*)var3135)->values[955] = (val*) var1911;
-((struct instance_array__NativeArray*)var3135)->values[956] = (val*) var1913;
-((struct instance_array__NativeArray*)var3135)->values[957] = (val*) var1915;
-((struct instance_array__NativeArray*)var3135)->values[958] = (val*) var1917;
-((struct instance_array__NativeArray*)var3135)->values[959] = (val*) var1919;
-((struct instance_array__NativeArray*)var3135)->values[960] = (val*) var1921;
-((struct instance_array__NativeArray*)var3135)->values[961] = (val*) var1923;
-((struct instance_array__NativeArray*)var3135)->values[962] = (val*) var1925;
-((struct instance_array__NativeArray*)var3135)->values[963] = (val*) var1927;
-((struct instance_array__NativeArray*)var3135)->values[964] = (val*) var1929;
-((struct instance_array__NativeArray*)var3135)->values[965] = (val*) var1931;
-((struct instance_array__NativeArray*)var3135)->values[966] = (val*) var1933;
-((struct instance_array__NativeArray*)var3135)->values[967] = (val*) var1935;
-((struct instance_array__NativeArray*)var3135)->values[968] = (val*) var1937;
-((struct instance_array__NativeArray*)var3135)->values[969] = (val*) var1939;
-((struct instance_array__NativeArray*)var3135)->values[970] = (val*) var1941;
-((struct instance_array__NativeArray*)var3135)->values[971] = (val*) var1943;
-((struct instance_array__NativeArray*)var3135)->values[972] = (val*) var1945;
-((struct instance_array__NativeArray*)var3135)->values[973] = (val*) var1947;
-((struct instance_array__NativeArray*)var3135)->values[974] = (val*) var1949;
-((struct instance_array__NativeArray*)var3135)->values[975] = (val*) var1951;
-((struct instance_array__NativeArray*)var3135)->values[976] = (val*) var1953;
-((struct instance_array__NativeArray*)var3135)->values[977] = (val*) var1955;
-((struct instance_array__NativeArray*)var3135)->values[978] = (val*) var1957;
-((struct instance_array__NativeArray*)var3135)->values[979] = (val*) var1959;
-((struct instance_array__NativeArray*)var3135)->values[980] = (val*) var1961;
-((struct instance_array__NativeArray*)var3135)->values[981] = (val*) var1963;
-((struct instance_array__NativeArray*)var3135)->values[982] = (val*) var1965;
-((struct instance_array__NativeArray*)var3135)->values[983] = (val*) var1967;
-((struct instance_array__NativeArray*)var3135)->values[984] = (val*) var1969;
-((struct instance_array__NativeArray*)var3135)->values[985] = (val*) var1971;
-((struct instance_array__NativeArray*)var3135)->values[986] = (val*) var1973;
-((struct instance_array__NativeArray*)var3135)->values[987] = (val*) var1975;
-((struct instance_array__NativeArray*)var3135)->values[988] = (val*) var1977;
-((struct instance_array__NativeArray*)var3135)->values[989] = (val*) var1979;
-((struct instance_array__NativeArray*)var3135)->values[990] = (val*) var1981;
-((struct instance_array__NativeArray*)var3135)->values[991] = (val*) var1983;
-((struct instance_array__NativeArray*)var3135)->values[992] = (val*) var1985;
-((struct instance_array__NativeArray*)var3135)->values[993] = (val*) var1987;
-((struct instance_array__NativeArray*)var3135)->values[994] = (val*) var1989;
-((struct instance_array__NativeArray*)var3135)->values[995] = (val*) var1991;
-((struct instance_array__NativeArray*)var3135)->values[996] = (val*) var1993;
-((struct instance_array__NativeArray*)var3135)->values[997] = (val*) var1995;
-((struct instance_array__NativeArray*)var3135)->values[998] = (val*) var1997;
-((struct instance_array__NativeArray*)var3135)->values[999] = (val*) var1999;
-((struct instance_array__NativeArray*)var3135)->values[1000] = (val*) var2001;
-((struct instance_array__NativeArray*)var3135)->values[1001] = (val*) var2003;
-((struct instance_array__NativeArray*)var3135)->values[1002] = (val*) var2005;
-((struct instance_array__NativeArray*)var3135)->values[1003] = (val*) var2007;
-((struct instance_array__NativeArray*)var3135)->values[1004] = (val*) var2009;
-((struct instance_array__NativeArray*)var3135)->values[1005] = (val*) var2011;
-((struct instance_array__NativeArray*)var3135)->values[1006] = (val*) var2013;
-((struct instance_array__NativeArray*)var3135)->values[1007] = (val*) var2015;
-((struct instance_array__NativeArray*)var3135)->values[1008] = (val*) var2017;
-((struct instance_array__NativeArray*)var3135)->values[1009] = (val*) var2019;
-((struct instance_array__NativeArray*)var3135)->values[1010] = (val*) var2021;
-((struct instance_array__NativeArray*)var3135)->values[1011] = (val*) var2023;
-((struct instance_array__NativeArray*)var3135)->values[1012] = (val*) var2025;
-((struct instance_array__NativeArray*)var3135)->values[1013] = (val*) var2027;
-((struct instance_array__NativeArray*)var3135)->values[1014] = (val*) var2029;
-((struct instance_array__NativeArray*)var3135)->values[1015] = (val*) var2031;
-((struct instance_array__NativeArray*)var3135)->values[1016] = (val*) var2033;
-((struct instance_array__NativeArray*)var3135)->values[1017] = (val*) var2035;
-((struct instance_array__NativeArray*)var3135)->values[1018] = (val*) var2037;
-((struct instance_array__NativeArray*)var3135)->values[1019] = (val*) var2039;
-((struct instance_array__NativeArray*)var3135)->values[1020] = (val*) var2041;
-((struct instance_array__NativeArray*)var3135)->values[1021] = (val*) var2043;
-((struct instance_array__NativeArray*)var3135)->values[1022] = (val*) var2045;
-((struct instance_array__NativeArray*)var3135)->values[1023] = (val*) var2047;
-((struct instance_array__NativeArray*)var3135)->values[1024] = (val*) var2049;
-((struct instance_array__NativeArray*)var3135)->values[1025] = (val*) var2051;
-((struct instance_array__NativeArray*)var3135)->values[1026] = (val*) var2053;
-((struct instance_array__NativeArray*)var3135)->values[1027] = (val*) var2055;
-((struct instance_array__NativeArray*)var3135)->values[1028] = (val*) var2057;
-((struct instance_array__NativeArray*)var3135)->values[1029] = (val*) var2059;
-((struct instance_array__NativeArray*)var3135)->values[1030] = (val*) var2061;
-((struct instance_array__NativeArray*)var3135)->values[1031] = (val*) var2063;
-((struct instance_array__NativeArray*)var3135)->values[1032] = (val*) var2065;
-((struct instance_array__NativeArray*)var3135)->values[1033] = (val*) var2067;
-((struct instance_array__NativeArray*)var3135)->values[1034] = (val*) var2069;
-((struct instance_array__NativeArray*)var3135)->values[1035] = (val*) var2071;
-((struct instance_array__NativeArray*)var3135)->values[1036] = (val*) var2073;
-((struct instance_array__NativeArray*)var3135)->values[1037] = (val*) var2075;
-((struct instance_array__NativeArray*)var3135)->values[1038] = (val*) var2077;
-((struct instance_array__NativeArray*)var3135)->values[1039] = (val*) var2079;
-((struct instance_array__NativeArray*)var3135)->values[1040] = (val*) var2081;
-((struct instance_array__NativeArray*)var3135)->values[1041] = (val*) var2083;
-((struct instance_array__NativeArray*)var3135)->values[1042] = (val*) var2085;
-((struct instance_array__NativeArray*)var3135)->values[1043] = (val*) var2087;
-((struct instance_array__NativeArray*)var3135)->values[1044] = (val*) var2089;
-((struct instance_array__NativeArray*)var3135)->values[1045] = (val*) var2091;
-((struct instance_array__NativeArray*)var3135)->values[1046] = (val*) var2093;
-((struct instance_array__NativeArray*)var3135)->values[1047] = (val*) var2095;
-((struct instance_array__NativeArray*)var3135)->values[1048] = (val*) var2097;
-((struct instance_array__NativeArray*)var3135)->values[1049] = (val*) var2099;
-((struct instance_array__NativeArray*)var3135)->values[1050] = (val*) var2101;
-((struct instance_array__NativeArray*)var3135)->values[1051] = (val*) var2103;
-((struct instance_array__NativeArray*)var3135)->values[1052] = (val*) var2105;
-((struct instance_array__NativeArray*)var3135)->values[1053] = (val*) var2107;
-((struct instance_array__NativeArray*)var3135)->values[1054] = (val*) var2109;
-((struct instance_array__NativeArray*)var3135)->values[1055] = (val*) var2111;
-((struct instance_array__NativeArray*)var3135)->values[1056] = (val*) var2113;
-((struct instance_array__NativeArray*)var3135)->values[1057] = (val*) var2115;
-((struct instance_array__NativeArray*)var3135)->values[1058] = (val*) var2117;
-((struct instance_array__NativeArray*)var3135)->values[1059] = (val*) var2119;
-((struct instance_array__NativeArray*)var3135)->values[1060] = (val*) var2121;
-((struct instance_array__NativeArray*)var3135)->values[1061] = (val*) var2123;
-((struct instance_array__NativeArray*)var3135)->values[1062] = (val*) var2125;
-((struct instance_array__NativeArray*)var3135)->values[1063] = (val*) var2127;
-((struct instance_array__NativeArray*)var3135)->values[1064] = (val*) var2129;
-((struct instance_array__NativeArray*)var3135)->values[1065] = (val*) var2131;
-((struct instance_array__NativeArray*)var3135)->values[1066] = (val*) var2133;
-((struct instance_array__NativeArray*)var3135)->values[1067] = (val*) var2135;
-((struct instance_array__NativeArray*)var3135)->values[1068] = (val*) var2137;
-((struct instance_array__NativeArray*)var3135)->values[1069] = (val*) var2139;
-((struct instance_array__NativeArray*)var3135)->values[1070] = (val*) var2141;
-((struct instance_array__NativeArray*)var3135)->values[1071] = (val*) var2143;
-((struct instance_array__NativeArray*)var3135)->values[1072] = (val*) var2145;
-((struct instance_array__NativeArray*)var3135)->values[1073] = (val*) var2147;
-((struct instance_array__NativeArray*)var3135)->values[1074] = (val*) var2149;
-((struct instance_array__NativeArray*)var3135)->values[1075] = (val*) var2151;
-((struct instance_array__NativeArray*)var3135)->values[1076] = (val*) var2153;
-((struct instance_array__NativeArray*)var3135)->values[1077] = (val*) var2155;
-((struct instance_array__NativeArray*)var3135)->values[1078] = (val*) var2157;
-((struct instance_array__NativeArray*)var3135)->values[1079] = (val*) var2159;
-((struct instance_array__NativeArray*)var3135)->values[1080] = (val*) var2161;
-((struct instance_array__NativeArray*)var3135)->values[1081] = (val*) var2163;
-((struct instance_array__NativeArray*)var3135)->values[1082] = (val*) var2165;
-((struct instance_array__NativeArray*)var3135)->values[1083] = (val*) var2167;
-((struct instance_array__NativeArray*)var3135)->values[1084] = (val*) var2169;
-((struct instance_array__NativeArray*)var3135)->values[1085] = (val*) var2171;
-((struct instance_array__NativeArray*)var3135)->values[1086] = (val*) var2173;
-((struct instance_array__NativeArray*)var3135)->values[1087] = (val*) var2175;
-((struct instance_array__NativeArray*)var3135)->values[1088] = (val*) var2177;
-((struct instance_array__NativeArray*)var3135)->values[1089] = (val*) var2179;
-((struct instance_array__NativeArray*)var3135)->values[1090] = (val*) var2181;
-((struct instance_array__NativeArray*)var3135)->values[1091] = (val*) var2183;
-((struct instance_array__NativeArray*)var3135)->values[1092] = (val*) var2185;
-((struct instance_array__NativeArray*)var3135)->values[1093] = (val*) var2187;
-((struct instance_array__NativeArray*)var3135)->values[1094] = (val*) var2189;
-((struct instance_array__NativeArray*)var3135)->values[1095] = (val*) var2191;
-((struct instance_array__NativeArray*)var3135)->values[1096] = (val*) var2193;
-((struct instance_array__NativeArray*)var3135)->values[1097] = (val*) var2195;
-((struct instance_array__NativeArray*)var3135)->values[1098] = (val*) var2197;
-((struct instance_array__NativeArray*)var3135)->values[1099] = (val*) var2199;
-((struct instance_array__NativeArray*)var3135)->values[1100] = (val*) var2201;
-((struct instance_array__NativeArray*)var3135)->values[1101] = (val*) var2203;
-((struct instance_array__NativeArray*)var3135)->values[1102] = (val*) var2205;
-((struct instance_array__NativeArray*)var3135)->values[1103] = (val*) var2207;
-((struct instance_array__NativeArray*)var3135)->values[1104] = (val*) var2209;
-((struct instance_array__NativeArray*)var3135)->values[1105] = (val*) var2211;
-((struct instance_array__NativeArray*)var3135)->values[1106] = (val*) var2213;
-((struct instance_array__NativeArray*)var3135)->values[1107] = (val*) var2215;
-((struct instance_array__NativeArray*)var3135)->values[1108] = (val*) var2217;
-((struct instance_array__NativeArray*)var3135)->values[1109] = (val*) var2219;
-((struct instance_array__NativeArray*)var3135)->values[1110] = (val*) var2221;
-((struct instance_array__NativeArray*)var3135)->values[1111] = (val*) var2223;
-((struct instance_array__NativeArray*)var3135)->values[1112] = (val*) var2225;
-((struct instance_array__NativeArray*)var3135)->values[1113] = (val*) var2227;
-((struct instance_array__NativeArray*)var3135)->values[1114] = (val*) var2229;
-((struct instance_array__NativeArray*)var3135)->values[1115] = (val*) var2231;
-((struct instance_array__NativeArray*)var3135)->values[1116] = (val*) var2233;
-((struct instance_array__NativeArray*)var3135)->values[1117] = (val*) var2235;
-((struct instance_array__NativeArray*)var3135)->values[1118] = (val*) var2237;
-((struct instance_array__NativeArray*)var3135)->values[1119] = (val*) var2239;
-((struct instance_array__NativeArray*)var3135)->values[1120] = (val*) var2241;
-((struct instance_array__NativeArray*)var3135)->values[1121] = (val*) var2243;
-((struct instance_array__NativeArray*)var3135)->values[1122] = (val*) var2245;
-((struct instance_array__NativeArray*)var3135)->values[1123] = (val*) var2247;
-((struct instance_array__NativeArray*)var3135)->values[1124] = (val*) var2249;
-((struct instance_array__NativeArray*)var3135)->values[1125] = (val*) var2251;
-((struct instance_array__NativeArray*)var3135)->values[1126] = (val*) var2253;
-((struct instance_array__NativeArray*)var3135)->values[1127] = (val*) var2255;
-((struct instance_array__NativeArray*)var3135)->values[1128] = (val*) var2257;
-((struct instance_array__NativeArray*)var3135)->values[1129] = (val*) var2259;
-((struct instance_array__NativeArray*)var3135)->values[1130] = (val*) var2261;
-((struct instance_array__NativeArray*)var3135)->values[1131] = (val*) var2263;
-((struct instance_array__NativeArray*)var3135)->values[1132] = (val*) var2265;
-((struct instance_array__NativeArray*)var3135)->values[1133] = (val*) var2267;
-((struct instance_array__NativeArray*)var3135)->values[1134] = (val*) var2269;
-((struct instance_array__NativeArray*)var3135)->values[1135] = (val*) var2271;
-((struct instance_array__NativeArray*)var3135)->values[1136] = (val*) var2273;
-((struct instance_array__NativeArray*)var3135)->values[1137] = (val*) var2275;
-((struct instance_array__NativeArray*)var3135)->values[1138] = (val*) var2277;
-((struct instance_array__NativeArray*)var3135)->values[1139] = (val*) var2279;
-((struct instance_array__NativeArray*)var3135)->values[1140] = (val*) var2281;
-((struct instance_array__NativeArray*)var3135)->values[1141] = (val*) var2283;
-((struct instance_array__NativeArray*)var3135)->values[1142] = (val*) var2285;
-((struct instance_array__NativeArray*)var3135)->values[1143] = (val*) var2287;
-((struct instance_array__NativeArray*)var3135)->values[1144] = (val*) var2289;
-((struct instance_array__NativeArray*)var3135)->values[1145] = (val*) var2291;
-((struct instance_array__NativeArray*)var3135)->values[1146] = (val*) var2293;
-((struct instance_array__NativeArray*)var3135)->values[1147] = (val*) var2295;
-((struct instance_array__NativeArray*)var3135)->values[1148] = (val*) var2297;
-((struct instance_array__NativeArray*)var3135)->values[1149] = (val*) var2299;
-((struct instance_array__NativeArray*)var3135)->values[1150] = (val*) var2301;
-((struct instance_array__NativeArray*)var3135)->values[1151] = (val*) var2303;
-((struct instance_array__NativeArray*)var3135)->values[1152] = (val*) var2305;
-((struct instance_array__NativeArray*)var3135)->values[1153] = (val*) var2307;
-((struct instance_array__NativeArray*)var3135)->values[1154] = (val*) var2309;
-((struct instance_array__NativeArray*)var3135)->values[1155] = (val*) var2311;
-((struct instance_array__NativeArray*)var3135)->values[1156] = (val*) var2313;
-((struct instance_array__NativeArray*)var3135)->values[1157] = (val*) var2315;
-((struct instance_array__NativeArray*)var3135)->values[1158] = (val*) var2317;
-((struct instance_array__NativeArray*)var3135)->values[1159] = (val*) var2319;
-((struct instance_array__NativeArray*)var3135)->values[1160] = (val*) var2321;
-((struct instance_array__NativeArray*)var3135)->values[1161] = (val*) var2323;
-((struct instance_array__NativeArray*)var3135)->values[1162] = (val*) var2325;
-((struct instance_array__NativeArray*)var3135)->values[1163] = (val*) var2327;
-((struct instance_array__NativeArray*)var3135)->values[1164] = (val*) var2329;
-((struct instance_array__NativeArray*)var3135)->values[1165] = (val*) var2331;
-((struct instance_array__NativeArray*)var3135)->values[1166] = (val*) var2333;
-((struct instance_array__NativeArray*)var3135)->values[1167] = (val*) var2335;
-((struct instance_array__NativeArray*)var3135)->values[1168] = (val*) var2337;
-((struct instance_array__NativeArray*)var3135)->values[1169] = (val*) var2339;
-((struct instance_array__NativeArray*)var3135)->values[1170] = (val*) var2341;
-((struct instance_array__NativeArray*)var3135)->values[1171] = (val*) var2343;
-((struct instance_array__NativeArray*)var3135)->values[1172] = (val*) var2345;
-((struct instance_array__NativeArray*)var3135)->values[1173] = (val*) var2347;
-((struct instance_array__NativeArray*)var3135)->values[1174] = (val*) var2349;
-((struct instance_array__NativeArray*)var3135)->values[1175] = (val*) var2351;
-((struct instance_array__NativeArray*)var3135)->values[1176] = (val*) var2353;
-((struct instance_array__NativeArray*)var3135)->values[1177] = (val*) var2355;
-((struct instance_array__NativeArray*)var3135)->values[1178] = (val*) var2357;
-((struct instance_array__NativeArray*)var3135)->values[1179] = (val*) var2359;
-((struct instance_array__NativeArray*)var3135)->values[1180] = (val*) var2361;
-((struct instance_array__NativeArray*)var3135)->values[1181] = (val*) var2363;
-((struct instance_array__NativeArray*)var3135)->values[1182] = (val*) var2365;
-((struct instance_array__NativeArray*)var3135)->values[1183] = (val*) var2367;
-((struct instance_array__NativeArray*)var3135)->values[1184] = (val*) var2369;
-((struct instance_array__NativeArray*)var3135)->values[1185] = (val*) var2371;
-((struct instance_array__NativeArray*)var3135)->values[1186] = (val*) var2373;
-((struct instance_array__NativeArray*)var3135)->values[1187] = (val*) var2375;
-((struct instance_array__NativeArray*)var3135)->values[1188] = (val*) var2377;
-((struct instance_array__NativeArray*)var3135)->values[1189] = (val*) var2379;
-((struct instance_array__NativeArray*)var3135)->values[1190] = (val*) var2381;
-((struct instance_array__NativeArray*)var3135)->values[1191] = (val*) var2383;
-((struct instance_array__NativeArray*)var3135)->values[1192] = (val*) var2385;
-((struct instance_array__NativeArray*)var3135)->values[1193] = (val*) var2387;
-((struct instance_array__NativeArray*)var3135)->values[1194] = (val*) var2389;
-((struct instance_array__NativeArray*)var3135)->values[1195] = (val*) var2391;
-((struct instance_array__NativeArray*)var3135)->values[1196] = (val*) var2393;
-((struct instance_array__NativeArray*)var3135)->values[1197] = (val*) var2395;
-((struct instance_array__NativeArray*)var3135)->values[1198] = (val*) var2397;
-((struct instance_array__NativeArray*)var3135)->values[1199] = (val*) var2399;
-((struct instance_array__NativeArray*)var3135)->values[1200] = (val*) var2401;
-((struct instance_array__NativeArray*)var3135)->values[1201] = (val*) var2403;
-((struct instance_array__NativeArray*)var3135)->values[1202] = (val*) var2405;
-((struct instance_array__NativeArray*)var3135)->values[1203] = (val*) var2407;
-((struct instance_array__NativeArray*)var3135)->values[1204] = (val*) var2409;
-((struct instance_array__NativeArray*)var3135)->values[1205] = (val*) var2411;
-((struct instance_array__NativeArray*)var3135)->values[1206] = (val*) var2413;
-((struct instance_array__NativeArray*)var3135)->values[1207] = (val*) var2415;
-((struct instance_array__NativeArray*)var3135)->values[1208] = (val*) var2417;
-((struct instance_array__NativeArray*)var3135)->values[1209] = (val*) var2419;
-((struct instance_array__NativeArray*)var3135)->values[1210] = (val*) var2421;
-((struct instance_array__NativeArray*)var3135)->values[1211] = (val*) var2423;
-((struct instance_array__NativeArray*)var3135)->values[1212] = (val*) var2425;
-((struct instance_array__NativeArray*)var3135)->values[1213] = (val*) var2427;
-((struct instance_array__NativeArray*)var3135)->values[1214] = (val*) var2429;
-((struct instance_array__NativeArray*)var3135)->values[1215] = (val*) var2431;
-((struct instance_array__NativeArray*)var3135)->values[1216] = (val*) var2433;
-((struct instance_array__NativeArray*)var3135)->values[1217] = (val*) var2435;
-((struct instance_array__NativeArray*)var3135)->values[1218] = (val*) var2437;
-((struct instance_array__NativeArray*)var3135)->values[1219] = (val*) var2439;
-((struct instance_array__NativeArray*)var3135)->values[1220] = (val*) var2441;
-((struct instance_array__NativeArray*)var3135)->values[1221] = (val*) var2443;
-((struct instance_array__NativeArray*)var3135)->values[1222] = (val*) var2445;
-((struct instance_array__NativeArray*)var3135)->values[1223] = (val*) var2447;
-((struct instance_array__NativeArray*)var3135)->values[1224] = (val*) var2449;
-((struct instance_array__NativeArray*)var3135)->values[1225] = (val*) var2451;
-((struct instance_array__NativeArray*)var3135)->values[1226] = (val*) var2453;
-((struct instance_array__NativeArray*)var3135)->values[1227] = (val*) var2455;
-((struct instance_array__NativeArray*)var3135)->values[1228] = (val*) var2457;
-((struct instance_array__NativeArray*)var3135)->values[1229] = (val*) var2459;
-((struct instance_array__NativeArray*)var3135)->values[1230] = (val*) var2461;
-((struct instance_array__NativeArray*)var3135)->values[1231] = (val*) var2463;
-((struct instance_array__NativeArray*)var3135)->values[1232] = (val*) var2465;
-((struct instance_array__NativeArray*)var3135)->values[1233] = (val*) var2467;
-((struct instance_array__NativeArray*)var3135)->values[1234] = (val*) var2469;
-((struct instance_array__NativeArray*)var3135)->values[1235] = (val*) var2471;
-((struct instance_array__NativeArray*)var3135)->values[1236] = (val*) var2473;
-((struct instance_array__NativeArray*)var3135)->values[1237] = (val*) var2475;
-((struct instance_array__NativeArray*)var3135)->values[1238] = (val*) var2477;
-((struct instance_array__NativeArray*)var3135)->values[1239] = (val*) var2479;
-((struct instance_array__NativeArray*)var3135)->values[1240] = (val*) var2481;
-((struct instance_array__NativeArray*)var3135)->values[1241] = (val*) var2483;
-((struct instance_array__NativeArray*)var3135)->values[1242] = (val*) var2485;
-((struct instance_array__NativeArray*)var3135)->values[1243] = (val*) var2487;
-((struct instance_array__NativeArray*)var3135)->values[1244] = (val*) var2489;
-((struct instance_array__NativeArray*)var3135)->values[1245] = (val*) var2491;
-((struct instance_array__NativeArray*)var3135)->values[1246] = (val*) var2493;
-((struct instance_array__NativeArray*)var3135)->values[1247] = (val*) var2495;
-((struct instance_array__NativeArray*)var3135)->values[1248] = (val*) var2497;
-((struct instance_array__NativeArray*)var3135)->values[1249] = (val*) var2499;
-((struct instance_array__NativeArray*)var3135)->values[1250] = (val*) var2501;
-((struct instance_array__NativeArray*)var3135)->values[1251] = (val*) var2503;
-((struct instance_array__NativeArray*)var3135)->values[1252] = (val*) var2505;
-((struct instance_array__NativeArray*)var3135)->values[1253] = (val*) var2507;
-((struct instance_array__NativeArray*)var3135)->values[1254] = (val*) var2509;
-((struct instance_array__NativeArray*)var3135)->values[1255] = (val*) var2511;
-((struct instance_array__NativeArray*)var3135)->values[1256] = (val*) var2513;
-((struct instance_array__NativeArray*)var3135)->values[1257] = (val*) var2515;
-((struct instance_array__NativeArray*)var3135)->values[1258] = (val*) var2517;
-((struct instance_array__NativeArray*)var3135)->values[1259] = (val*) var2519;
-((struct instance_array__NativeArray*)var3135)->values[1260] = (val*) var2521;
-((struct instance_array__NativeArray*)var3135)->values[1261] = (val*) var2523;
-((struct instance_array__NativeArray*)var3135)->values[1262] = (val*) var2525;
-((struct instance_array__NativeArray*)var3135)->values[1263] = (val*) var2527;
-((struct instance_array__NativeArray*)var3135)->values[1264] = (val*) var2529;
-((struct instance_array__NativeArray*)var3135)->values[1265] = (val*) var2531;
-((struct instance_array__NativeArray*)var3135)->values[1266] = (val*) var2533;
-((struct instance_array__NativeArray*)var3135)->values[1267] = (val*) var2535;
-((struct instance_array__NativeArray*)var3135)->values[1268] = (val*) var2537;
-((struct instance_array__NativeArray*)var3135)->values[1269] = (val*) var2539;
-((struct instance_array__NativeArray*)var3135)->values[1270] = (val*) var2541;
-((struct instance_array__NativeArray*)var3135)->values[1271] = (val*) var2543;
-((struct instance_array__NativeArray*)var3135)->values[1272] = (val*) var2545;
-((struct instance_array__NativeArray*)var3135)->values[1273] = (val*) var2547;
-((struct instance_array__NativeArray*)var3135)->values[1274] = (val*) var2549;
-((struct instance_array__NativeArray*)var3135)->values[1275] = (val*) var2551;
-((struct instance_array__NativeArray*)var3135)->values[1276] = (val*) var2553;
-((struct instance_array__NativeArray*)var3135)->values[1277] = (val*) var2555;
-((struct instance_array__NativeArray*)var3135)->values[1278] = (val*) var2557;
-((struct instance_array__NativeArray*)var3135)->values[1279] = (val*) var2559;
-((struct instance_array__NativeArray*)var3135)->values[1280] = (val*) var2561;
-((struct instance_array__NativeArray*)var3135)->values[1281] = (val*) var2563;
-((struct instance_array__NativeArray*)var3135)->values[1282] = (val*) var2565;
-((struct instance_array__NativeArray*)var3135)->values[1283] = (val*) var2567;
-((struct instance_array__NativeArray*)var3135)->values[1284] = (val*) var2569;
-((struct instance_array__NativeArray*)var3135)->values[1285] = (val*) var2571;
-((struct instance_array__NativeArray*)var3135)->values[1286] = (val*) var2573;
-((struct instance_array__NativeArray*)var3135)->values[1287] = (val*) var2575;
-((struct instance_array__NativeArray*)var3135)->values[1288] = (val*) var2577;
-((struct instance_array__NativeArray*)var3135)->values[1289] = (val*) var2579;
-((struct instance_array__NativeArray*)var3135)->values[1290] = (val*) var2581;
-((struct instance_array__NativeArray*)var3135)->values[1291] = (val*) var2583;
-((struct instance_array__NativeArray*)var3135)->values[1292] = (val*) var2585;
-((struct instance_array__NativeArray*)var3135)->values[1293] = (val*) var2587;
-((struct instance_array__NativeArray*)var3135)->values[1294] = (val*) var2589;
-((struct instance_array__NativeArray*)var3135)->values[1295] = (val*) var2591;
-((struct instance_array__NativeArray*)var3135)->values[1296] = (val*) var2593;
-((struct instance_array__NativeArray*)var3135)->values[1297] = (val*) var2595;
-((struct instance_array__NativeArray*)var3135)->values[1298] = (val*) var2597;
-((struct instance_array__NativeArray*)var3135)->values[1299] = (val*) var2599;
-((struct instance_array__NativeArray*)var3135)->values[1300] = (val*) var2601;
-((struct instance_array__NativeArray*)var3135)->values[1301] = (val*) var2603;
-((struct instance_array__NativeArray*)var3135)->values[1302] = (val*) var2605;
-((struct instance_array__NativeArray*)var3135)->values[1303] = (val*) var2607;
-((struct instance_array__NativeArray*)var3135)->values[1304] = (val*) var2609;
-((struct instance_array__NativeArray*)var3135)->values[1305] = (val*) var2611;
-((struct instance_array__NativeArray*)var3135)->values[1306] = (val*) var2613;
-((struct instance_array__NativeArray*)var3135)->values[1307] = (val*) var2615;
-((struct instance_array__NativeArray*)var3135)->values[1308] = (val*) var2617;
-((struct instance_array__NativeArray*)var3135)->values[1309] = (val*) var2619;
-((struct instance_array__NativeArray*)var3135)->values[1310] = (val*) var2621;
-((struct instance_array__NativeArray*)var3135)->values[1311] = (val*) var2623;
-((struct instance_array__NativeArray*)var3135)->values[1312] = (val*) var2625;
-((struct instance_array__NativeArray*)var3135)->values[1313] = (val*) var2627;
-((struct instance_array__NativeArray*)var3135)->values[1314] = (val*) var2629;
-((struct instance_array__NativeArray*)var3135)->values[1315] = (val*) var2631;
-((struct instance_array__NativeArray*)var3135)->values[1316] = (val*) var2633;
-((struct instance_array__NativeArray*)var3135)->values[1317] = (val*) var2635;
-((struct instance_array__NativeArray*)var3135)->values[1318] = (val*) var2637;
-((struct instance_array__NativeArray*)var3135)->values[1319] = (val*) var2639;
-((struct instance_array__NativeArray*)var3135)->values[1320] = (val*) var2641;
-((struct instance_array__NativeArray*)var3135)->values[1321] = (val*) var2643;
-((struct instance_array__NativeArray*)var3135)->values[1322] = (val*) var2645;
-((struct instance_array__NativeArray*)var3135)->values[1323] = (val*) var2647;
-((struct instance_array__NativeArray*)var3135)->values[1324] = (val*) var2649;
-((struct instance_array__NativeArray*)var3135)->values[1325] = (val*) var2651;
-((struct instance_array__NativeArray*)var3135)->values[1326] = (val*) var2653;
-((struct instance_array__NativeArray*)var3135)->values[1327] = (val*) var2655;
-((struct instance_array__NativeArray*)var3135)->values[1328] = (val*) var2657;
-((struct instance_array__NativeArray*)var3135)->values[1329] = (val*) var2659;
-((struct instance_array__NativeArray*)var3135)->values[1330] = (val*) var2661;
-((struct instance_array__NativeArray*)var3135)->values[1331] = (val*) var2663;
-((struct instance_array__NativeArray*)var3135)->values[1332] = (val*) var2665;
-((struct instance_array__NativeArray*)var3135)->values[1333] = (val*) var2667;
-((struct instance_array__NativeArray*)var3135)->values[1334] = (val*) var2669;
-((struct instance_array__NativeArray*)var3135)->values[1335] = (val*) var2671;
-((struct instance_array__NativeArray*)var3135)->values[1336] = (val*) var2673;
-((struct instance_array__NativeArray*)var3135)->values[1337] = (val*) var2675;
-((struct instance_array__NativeArray*)var3135)->values[1338] = (val*) var2677;
-((struct instance_array__NativeArray*)var3135)->values[1339] = (val*) var2679;
-((struct instance_array__NativeArray*)var3135)->values[1340] = (val*) var2681;
-((struct instance_array__NativeArray*)var3135)->values[1341] = (val*) var2683;
-((struct instance_array__NativeArray*)var3135)->values[1342] = (val*) var2685;
-((struct instance_array__NativeArray*)var3135)->values[1343] = (val*) var2687;
-((struct instance_array__NativeArray*)var3135)->values[1344] = (val*) var2689;
-((struct instance_array__NativeArray*)var3135)->values[1345] = (val*) var2691;
-((struct instance_array__NativeArray*)var3135)->values[1346] = (val*) var2693;
-((struct instance_array__NativeArray*)var3135)->values[1347] = (val*) var2695;
-((struct instance_array__NativeArray*)var3135)->values[1348] = (val*) var2697;
-((struct instance_array__NativeArray*)var3135)->values[1349] = (val*) var2699;
-((struct instance_array__NativeArray*)var3135)->values[1350] = (val*) var2701;
-((struct instance_array__NativeArray*)var3135)->values[1351] = (val*) var2703;
-((struct instance_array__NativeArray*)var3135)->values[1352] = (val*) var2705;
-((struct instance_array__NativeArray*)var3135)->values[1353] = (val*) var2707;
-((struct instance_array__NativeArray*)var3135)->values[1354] = (val*) var2709;
-((struct instance_array__NativeArray*)var3135)->values[1355] = (val*) var2711;
-((struct instance_array__NativeArray*)var3135)->values[1356] = (val*) var2713;
-((struct instance_array__NativeArray*)var3135)->values[1357] = (val*) var2715;
-((struct instance_array__NativeArray*)var3135)->values[1358] = (val*) var2717;
-((struct instance_array__NativeArray*)var3135)->values[1359] = (val*) var2719;
-((struct instance_array__NativeArray*)var3135)->values[1360] = (val*) var2721;
-((struct instance_array__NativeArray*)var3135)->values[1361] = (val*) var2723;
-((struct instance_array__NativeArray*)var3135)->values[1362] = (val*) var2725;
-((struct instance_array__NativeArray*)var3135)->values[1363] = (val*) var2727;
-((struct instance_array__NativeArray*)var3135)->values[1364] = (val*) var2729;
-((struct instance_array__NativeArray*)var3135)->values[1365] = (val*) var2731;
-((struct instance_array__NativeArray*)var3135)->values[1366] = (val*) var2733;
-((struct instance_array__NativeArray*)var3135)->values[1367] = (val*) var2735;
-((struct instance_array__NativeArray*)var3135)->values[1368] = (val*) var2737;
-((struct instance_array__NativeArray*)var3135)->values[1369] = (val*) var2739;
-((struct instance_array__NativeArray*)var3135)->values[1370] = (val*) var2741;
-((struct instance_array__NativeArray*)var3135)->values[1371] = (val*) var2743;
-((struct instance_array__NativeArray*)var3135)->values[1372] = (val*) var2745;
-((struct instance_array__NativeArray*)var3135)->values[1373] = (val*) var2747;
-((struct instance_array__NativeArray*)var3135)->values[1374] = (val*) var2749;
-((struct instance_array__NativeArray*)var3135)->values[1375] = (val*) var2751;
-((struct instance_array__NativeArray*)var3135)->values[1376] = (val*) var2753;
-((struct instance_array__NativeArray*)var3135)->values[1377] = (val*) var2755;
-((struct instance_array__NativeArray*)var3135)->values[1378] = (val*) var2757;
-((struct instance_array__NativeArray*)var3135)->values[1379] = (val*) var2759;
-((struct instance_array__NativeArray*)var3135)->values[1380] = (val*) var2761;
-((struct instance_array__NativeArray*)var3135)->values[1381] = (val*) var2763;
-((struct instance_array__NativeArray*)var3135)->values[1382] = (val*) var2765;
-((struct instance_array__NativeArray*)var3135)->values[1383] = (val*) var2767;
-((struct instance_array__NativeArray*)var3135)->values[1384] = (val*) var2769;
-((struct instance_array__NativeArray*)var3135)->values[1385] = (val*) var2771;
-((struct instance_array__NativeArray*)var3135)->values[1386] = (val*) var2773;
-((struct instance_array__NativeArray*)var3135)->values[1387] = (val*) var2775;
-((struct instance_array__NativeArray*)var3135)->values[1388] = (val*) var2777;
-((struct instance_array__NativeArray*)var3135)->values[1389] = (val*) var2779;
-((struct instance_array__NativeArray*)var3135)->values[1390] = (val*) var2781;
-((struct instance_array__NativeArray*)var3135)->values[1391] = (val*) var2783;
-((struct instance_array__NativeArray*)var3135)->values[1392] = (val*) var2785;
-((struct instance_array__NativeArray*)var3135)->values[1393] = (val*) var2787;
-((struct instance_array__NativeArray*)var3135)->values[1394] = (val*) var2789;
-((struct instance_array__NativeArray*)var3135)->values[1395] = (val*) var2791;
-((struct instance_array__NativeArray*)var3135)->values[1396] = (val*) var2793;
-((struct instance_array__NativeArray*)var3135)->values[1397] = (val*) var2795;
-((struct instance_array__NativeArray*)var3135)->values[1398] = (val*) var2797;
-((struct instance_array__NativeArray*)var3135)->values[1399] = (val*) var2799;
-((struct instance_array__NativeArray*)var3135)->values[1400] = (val*) var2801;
-((struct instance_array__NativeArray*)var3135)->values[1401] = (val*) var2803;
-((struct instance_array__NativeArray*)var3135)->values[1402] = (val*) var2805;
-((struct instance_array__NativeArray*)var3135)->values[1403] = (val*) var2807;
-((struct instance_array__NativeArray*)var3135)->values[1404] = (val*) var2809;
-((struct instance_array__NativeArray*)var3135)->values[1405] = (val*) var2811;
-((struct instance_array__NativeArray*)var3135)->values[1406] = (val*) var2813;
-((struct instance_array__NativeArray*)var3135)->values[1407] = (val*) var2815;
-((struct instance_array__NativeArray*)var3135)->values[1408] = (val*) var2817;
-((struct instance_array__NativeArray*)var3135)->values[1409] = (val*) var2819;
-((struct instance_array__NativeArray*)var3135)->values[1410] = (val*) var2821;
-((struct instance_array__NativeArray*)var3135)->values[1411] = (val*) var2823;
-((struct instance_array__NativeArray*)var3135)->values[1412] = (val*) var2825;
-((struct instance_array__NativeArray*)var3135)->values[1413] = (val*) var2827;
-((struct instance_array__NativeArray*)var3135)->values[1414] = (val*) var2829;
-((struct instance_array__NativeArray*)var3135)->values[1415] = (val*) var2831;
-((struct instance_array__NativeArray*)var3135)->values[1416] = (val*) var2833;
-((struct instance_array__NativeArray*)var3135)->values[1417] = (val*) var2835;
-((struct instance_array__NativeArray*)var3135)->values[1418] = (val*) var2837;
-((struct instance_array__NativeArray*)var3135)->values[1419] = (val*) var2839;
-((struct instance_array__NativeArray*)var3135)->values[1420] = (val*) var2841;
-((struct instance_array__NativeArray*)var3135)->values[1421] = (val*) var2843;
-((struct instance_array__NativeArray*)var3135)->values[1422] = (val*) var2845;
-((struct instance_array__NativeArray*)var3135)->values[1423] = (val*) var2847;
-((struct instance_array__NativeArray*)var3135)->values[1424] = (val*) var2849;
-((struct instance_array__NativeArray*)var3135)->values[1425] = (val*) var2851;
-((struct instance_array__NativeArray*)var3135)->values[1426] = (val*) var2853;
-((struct instance_array__NativeArray*)var3135)->values[1427] = (val*) var2855;
-((struct instance_array__NativeArray*)var3135)->values[1428] = (val*) var2857;
-((struct instance_array__NativeArray*)var3135)->values[1429] = (val*) var2859;
-((struct instance_array__NativeArray*)var3135)->values[1430] = (val*) var2861;
-((struct instance_array__NativeArray*)var3135)->values[1431] = (val*) var2863;
-((struct instance_array__NativeArray*)var3135)->values[1432] = (val*) var2865;
-((struct instance_array__NativeArray*)var3135)->values[1433] = (val*) var2867;
-((struct instance_array__NativeArray*)var3135)->values[1434] = (val*) var2869;
-((struct instance_array__NativeArray*)var3135)->values[1435] = (val*) var2871;
-((struct instance_array__NativeArray*)var3135)->values[1436] = (val*) var2873;
-((struct instance_array__NativeArray*)var3135)->values[1437] = (val*) var2875;
-((struct instance_array__NativeArray*)var3135)->values[1438] = (val*) var2877;
-((struct instance_array__NativeArray*)var3135)->values[1439] = (val*) var2879;
-((struct instance_array__NativeArray*)var3135)->values[1440] = (val*) var2881;
-((struct instance_array__NativeArray*)var3135)->values[1441] = (val*) var2883;
-((struct instance_array__NativeArray*)var3135)->values[1442] = (val*) var2885;
-((struct instance_array__NativeArray*)var3135)->values[1443] = (val*) var2887;
-((struct instance_array__NativeArray*)var3135)->values[1444] = (val*) var2889;
-((struct instance_array__NativeArray*)var3135)->values[1445] = (val*) var2891;
-((struct instance_array__NativeArray*)var3135)->values[1446] = (val*) var2893;
-((struct instance_array__NativeArray*)var3135)->values[1447] = (val*) var2895;
-((struct instance_array__NativeArray*)var3135)->values[1448] = (val*) var2897;
-((struct instance_array__NativeArray*)var3135)->values[1449] = (val*) var2899;
-((struct instance_array__NativeArray*)var3135)->values[1450] = (val*) var2901;
-((struct instance_array__NativeArray*)var3135)->values[1451] = (val*) var2903;
-((struct instance_array__NativeArray*)var3135)->values[1452] = (val*) var2905;
-((struct instance_array__NativeArray*)var3135)->values[1453] = (val*) var2907;
-((struct instance_array__NativeArray*)var3135)->values[1454] = (val*) var2909;
-((struct instance_array__NativeArray*)var3135)->values[1455] = (val*) var2911;
-((struct instance_array__NativeArray*)var3135)->values[1456] = (val*) var2913;
-((struct instance_array__NativeArray*)var3135)->values[1457] = (val*) var2915;
-((struct instance_array__NativeArray*)var3135)->values[1458] = (val*) var2917;
-((struct instance_array__NativeArray*)var3135)->values[1459] = (val*) var2919;
-((struct instance_array__NativeArray*)var3135)->values[1460] = (val*) var2921;
-((struct instance_array__NativeArray*)var3135)->values[1461] = (val*) var2923;
-((struct instance_array__NativeArray*)var3135)->values[1462] = (val*) var2925;
-((struct instance_array__NativeArray*)var3135)->values[1463] = (val*) var2927;
-((struct instance_array__NativeArray*)var3135)->values[1464] = (val*) var2929;
-((struct instance_array__NativeArray*)var3135)->values[1465] = (val*) var2931;
-((struct instance_array__NativeArray*)var3135)->values[1466] = (val*) var2933;
-((struct instance_array__NativeArray*)var3135)->values[1467] = (val*) var2935;
-((struct instance_array__NativeArray*)var3135)->values[1468] = (val*) var2937;
-((struct instance_array__NativeArray*)var3135)->values[1469] = (val*) var2939;
-((struct instance_array__NativeArray*)var3135)->values[1470] = (val*) var2941;
-((struct instance_array__NativeArray*)var3135)->values[1471] = (val*) var2943;
-((struct instance_array__NativeArray*)var3135)->values[1472] = (val*) var2945;
-((struct instance_array__NativeArray*)var3135)->values[1473] = (val*) var2947;
-((struct instance_array__NativeArray*)var3135)->values[1474] = (val*) var2949;
-((struct instance_array__NativeArray*)var3135)->values[1475] = (val*) var2951;
-((struct instance_array__NativeArray*)var3135)->values[1476] = (val*) var2953;
-((struct instance_array__NativeArray*)var3135)->values[1477] = (val*) var2955;
-((struct instance_array__NativeArray*)var3135)->values[1478] = (val*) var2957;
-((struct instance_array__NativeArray*)var3135)->values[1479] = (val*) var2959;
-((struct instance_array__NativeArray*)var3135)->values[1480] = (val*) var2961;
-((struct instance_array__NativeArray*)var3135)->values[1481] = (val*) var2963;
-((struct instance_array__NativeArray*)var3135)->values[1482] = (val*) var2965;
-((struct instance_array__NativeArray*)var3135)->values[1483] = (val*) var2967;
-((struct instance_array__NativeArray*)var3135)->values[1484] = (val*) var2969;
-((struct instance_array__NativeArray*)var3135)->values[1485] = (val*) var2971;
-((struct instance_array__NativeArray*)var3135)->values[1486] = (val*) var2973;
-((struct instance_array__NativeArray*)var3135)->values[1487] = (val*) var2975;
-((struct instance_array__NativeArray*)var3135)->values[1488] = (val*) var2977;
-((struct instance_array__NativeArray*)var3135)->values[1489] = (val*) var2979;
-((struct instance_array__NativeArray*)var3135)->values[1490] = (val*) var2981;
-((struct instance_array__NativeArray*)var3135)->values[1491] = (val*) var2983;
-((struct instance_array__NativeArray*)var3135)->values[1492] = (val*) var2985;
-((struct instance_array__NativeArray*)var3135)->values[1493] = (val*) var2987;
-((struct instance_array__NativeArray*)var3135)->values[1494] = (val*) var2989;
-((struct instance_array__NativeArray*)var3135)->values[1495] = (val*) var2991;
-((struct instance_array__NativeArray*)var3135)->values[1496] = (val*) var2993;
-((struct instance_array__NativeArray*)var3135)->values[1497] = (val*) var2995;
-((struct instance_array__NativeArray*)var3135)->values[1498] = (val*) var2997;
-((struct instance_array__NativeArray*)var3135)->values[1499] = (val*) var2999;
-((struct instance_array__NativeArray*)var3135)->values[1500] = (val*) var3001;
-((struct instance_array__NativeArray*)var3135)->values[1501] = (val*) var3003;
-((struct instance_array__NativeArray*)var3135)->values[1502] = (val*) var3005;
-((struct instance_array__NativeArray*)var3135)->values[1503] = (val*) var3007;
-((struct instance_array__NativeArray*)var3135)->values[1504] = (val*) var3009;
-((struct instance_array__NativeArray*)var3135)->values[1505] = (val*) var3011;
-((struct instance_array__NativeArray*)var3135)->values[1506] = (val*) var3013;
-((struct instance_array__NativeArray*)var3135)->values[1507] = (val*) var3015;
-((struct instance_array__NativeArray*)var3135)->values[1508] = (val*) var3017;
-((struct instance_array__NativeArray*)var3135)->values[1509] = (val*) var3019;
-((struct instance_array__NativeArray*)var3135)->values[1510] = (val*) var3021;
-((struct instance_array__NativeArray*)var3135)->values[1511] = (val*) var3023;
-((struct instance_array__NativeArray*)var3135)->values[1512] = (val*) var3025;
-((struct instance_array__NativeArray*)var3135)->values[1513] = (val*) var3027;
-((struct instance_array__NativeArray*)var3135)->values[1514] = (val*) var3029;
-((struct instance_array__NativeArray*)var3135)->values[1515] = (val*) var3031;
-((struct instance_array__NativeArray*)var3135)->values[1516] = (val*) var3033;
-((struct instance_array__NativeArray*)var3135)->values[1517] = (val*) var3035;
-((struct instance_array__NativeArray*)var3135)->values[1518] = (val*) var3037;
-((struct instance_array__NativeArray*)var3135)->values[1519] = (val*) var3039;
-((struct instance_array__NativeArray*)var3135)->values[1520] = (val*) var3041;
-((struct instance_array__NativeArray*)var3135)->values[1521] = (val*) var3043;
-((struct instance_array__NativeArray*)var3135)->values[1522] = (val*) var3045;
-((struct instance_array__NativeArray*)var3135)->values[1523] = (val*) var3047;
-((struct instance_array__NativeArray*)var3135)->values[1524] = (val*) var3049;
-((struct instance_array__NativeArray*)var3135)->values[1525] = (val*) var3051;
-((struct instance_array__NativeArray*)var3135)->values[1526] = (val*) var3053;
-((struct instance_array__NativeArray*)var3135)->values[1527] = (val*) var3055;
-((struct instance_array__NativeArray*)var3135)->values[1528] = (val*) var3057;
-((struct instance_array__NativeArray*)var3135)->values[1529] = (val*) var3059;
-((struct instance_array__NativeArray*)var3135)->values[1530] = (val*) var3061;
-((struct instance_array__NativeArray*)var3135)->values[1531] = (val*) var3063;
-((struct instance_array__NativeArray*)var3135)->values[1532] = (val*) var3065;
-((struct instance_array__NativeArray*)var3135)->values[1533] = (val*) var3067;
-((struct instance_array__NativeArray*)var3135)->values[1534] = (val*) var3069;
-((struct instance_array__NativeArray*)var3135)->values[1535] = (val*) var3071;
-((struct instance_array__NativeArray*)var3135)->values[1536] = (val*) var3073;
-((struct instance_array__NativeArray*)var3135)->values[1537] = (val*) var3075;
-((struct instance_array__NativeArray*)var3135)->values[1538] = (val*) var3077;
-((struct instance_array__NativeArray*)var3135)->values[1539] = (val*) var3079;
-((struct instance_array__NativeArray*)var3135)->values[1540] = (val*) var3081;
-((struct instance_array__NativeArray*)var3135)->values[1541] = (val*) var3083;
-((struct instance_array__NativeArray*)var3135)->values[1542] = (val*) var3085;
-((struct instance_array__NativeArray*)var3135)->values[1543] = (val*) var3087;
-((struct instance_array__NativeArray*)var3135)->values[1544] = (val*) var3089;
-((struct instance_array__NativeArray*)var3135)->values[1545] = (val*) var3091;
-((struct instance_array__NativeArray*)var3135)->values[1546] = (val*) var3093;
-((struct instance_array__NativeArray*)var3135)->values[1547] = (val*) var3095;
-((struct instance_array__NativeArray*)var3135)->values[1548] = (val*) var3097;
-((struct instance_array__NativeArray*)var3135)->values[1549] = (val*) var3099;
-((struct instance_array__NativeArray*)var3135)->values[1550] = (val*) var3101;
-((struct instance_array__NativeArray*)var3135)->values[1551] = (val*) var3103;
-((struct instance_array__NativeArray*)var3135)->values[1552] = (val*) var3105;
-((struct instance_array__NativeArray*)var3135)->values[1553] = (val*) var3107;
-((struct instance_array__NativeArray*)var3135)->values[1554] = (val*) var3109;
-((struct instance_array__NativeArray*)var3135)->values[1555] = (val*) var3111;
-((struct instance_array__NativeArray*)var3135)->values[1556] = (val*) var3113;
-((struct instance_array__NativeArray*)var3135)->values[1557] = (val*) var3115;
-((struct instance_array__NativeArray*)var3135)->values[1558] = (val*) var3117;
-((struct instance_array__NativeArray*)var3135)->values[1559] = (val*) var3119;
-((struct instance_array__NativeArray*)var3135)->values[1560] = (val*) var3121;
-((struct instance_array__NativeArray*)var3135)->values[1561] = (val*) var3123;
-((struct instance_array__NativeArray*)var3135)->values[1562] = (val*) var3125;
-((struct instance_array__NativeArray*)var3135)->values[1563] = (val*) var3127;
-((struct instance_array__NativeArray*)var3135)->values[1564] = (val*) var3129;
-((struct instance_array__NativeArray*)var3135)->values[1565] = (val*) var3131;
-((void (*)(val*, val*, long))(var3133->class->vft[COLOR_array__Array__with_native]))(var3133, var3135, var3134) /* with_native on <var3133:Array[nullable Object]>*/;
-}
-((void (*)(val*, val*))(var->class->vft[COLOR_array__Array__with_items]))(var, var3133) /* with_items on <var:Array[ReduceAction]>*/;
-self->attrs[COLOR_parser__Parser___reduce_table].val = var; /* _reduce_table on <self:Parser> */
-RET_LABEL:;
-}
-/* method parser#Parser#build_reduce_table for (self: Object) */
-void VIRTUAL_parser__Parser__build_reduce_table(val* self) {
-parser__Parser__build_reduce_table(self);
-RET_LABEL:;
-}
-/* method parser#ComputeProdLocationVisitor#visit for (self: ComputeProdLocationVisitor, ANode) */
-void parser__ComputeProdLocationVisitor__visit(val* self, val* p0) {
-val* var_n /* var n: ANode */;
-short int var /* : Bool */;
+/* method parser#ReduceAction18#action for (self: ReduceAction18, Parser) */
+void parser__ReduceAction18__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pvisibilitynode2 /* var pvisibilitynode2: nullable Object */;
+short int var8 /* : Bool */;
 int cltype;
 int idtype;
-val* var1 /* : Location */;
-val* var_loc /* var loc: Location */;
-val* var2 /* : Array[Prod] */;
-short int var3 /* : Bool */;
-short int var4 /* : Bool */;
-val* var5 /* : Array[Prod] */;
-val* var6 /* : Iterator[nullable Object] */;
-short int var7 /* : Bool */;
-val* var8 /* : nullable Object */;
-val* var_no /* var no: Prod */;
-val* var9 /* : Array[Prod] */;
-val* var10 /* : Array[Prod] */;
-short int var11 /* : Bool */;
+val* var_tkwimportnode3 /* var tkwimportnode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_tkwendnode4 /* var tkwendnode4: nullable Object */;
 short int var12 /* : Bool */;
-val* var13 /* : Location */;
-val* var14 /* : nullable SourceFile */;
-long var15 /* : Int */;
+int cltype13;
+int idtype14;
+val* var15 /* : ANoImport */;
+val* var_pimportnode1 /* var pimportnode1: nullable ANoImport */;
 long var16 /* : Int */;
 long var17 /* : Int */;
-long var18 /* : Int */;
-val* var_loco /* var loco: Location */;
-val* var19 /* : Array[Prod] */;
-val* var20 /* : Iterator[nullable Object] */;
-short int var21 /* : Bool */;
-val* var22 /* : nullable Object */;
-val* var_no23 /* var no: Prod */;
-val* var25 /* : Array[Prod] */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_pvisibilitynode2 = var_nodearraylist3;
+/* <var_pvisibilitynode2:nullable Object> isa nullable AVisibility */
+cltype = type_nullable_parser_nodes__AVisibility.color;
+idtype = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_pvisibilitynode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pvisibilitynode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1432);
+show_backtrace(1);
+}
+var_tkwimportnode3 = var_nodearraylist4;
+/* <var_tkwimportnode3:nullable Object> isa nullable TKwimport */
+cltype10 = type_nullable_parser_nodes__TKwimport.color;
+idtype11 = type_nullable_parser_nodes__TKwimport.id;
+if(var_tkwimportnode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_tkwimportnode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_tkwimportnode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1434);
+show_backtrace(1);
+}
+var_tkwendnode4 = var_nodearraylist6;
+/* <var_tkwendnode4:nullable Object> isa nullable TKwend */
+cltype13 = type_nullable_parser_nodes__TKwend.color;
+idtype14 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode4 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_tkwendnode4->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_tkwendnode4->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1436);
+show_backtrace(1);
+}
+var15 = NEW_parser_nodes__ANoImport(&type_parser_nodes__ANoImport);
+{
+parser_prod__ANoImport__init_anoimport(var15, var_pvisibilitynode2, var_tkwimportnode3, var_tkwendnode4); /* Direct call parser_prod#ANoImport#init_anoimport on <var15:ANoImport>*/
+}
+var_pimportnode1 = var15;
+var_node_list = var_pimportnode1;
+var16 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction18> */
+{
+var17 = parser_work__Parser__go_to(var_p, var16);
+}
+{
+parser_work__Parser__push(var_p, var17, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction18#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction18__action(val* self, val* p0) {
+parser__ReduceAction18__action(self, p0); /* Direct call parser#ReduceAction18#action on <self:Object(ReduceAction18)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction19#action for (self: ReduceAction19, Parser) */
+void parser__ReduceAction19__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable Object */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_pclassdefnode1 = var_nodearraylist1;
+var_node_list = var_pclassdefnode1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction19> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction19#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction19__action(val* self, val* p0) {
+parser__ReduceAction19__action(self, p0); /* Direct call parser#ReduceAction19#action on <self:Object(ReduceAction19)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction20#action for (self: ReduceAction20, Parser) */
+void parser__ReduceAction20__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var2 /* : Array[Object] */;
+val* var_listnode3 /* var listnode3: Array[Object] */;
+val* var_ppropdefnode2 /* var ppropdefnode2: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var4 /* : null */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var8 /* : Bool */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var11 /* : ATopClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable ATopClassdef */;
+long var12 /* : Int */;
+long var13 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var2 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+}
+var_listnode3 = var2;
+var_ppropdefnode2 = var_nodearraylist1;
+/* <var_ppropdefnode2:nullable Object> isa nullable APropdef */
+cltype = type_nullable_parser_nodes__APropdef.color;
+idtype = type_nullable_parser_nodes__APropdef.id;
+if(var_ppropdefnode2 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_ppropdefnode2->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_ppropdefnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1465);
+show_backtrace(1);
+}
+var4 = NULL;
+if (var_ppropdefnode2 == NULL) {
+var5 = 0; /* is null */
+} else {
+var5 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_ppropdefnode2,var4) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
+var_other = var4;
+{
+var9 = ((short int (*)(val*, val*))(var_ppropdefnode2->class->vft[COLOR_kernel__Object___61d_61d]))(var_ppropdefnode2, var_other) /* == on <var_ppropdefnode2:nullable APropdef(APropdef)>*/;
+var8 = var9;
+}
+var10 = !var8;
+var6 = var10;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
+}
+var5 = var6;
+}
+if (var5){
+{
+array__Array__add(var_listnode3, var_ppropdefnode2); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
+}
+} else {
+}
+var11 = NEW_parser_nodes__ATopClassdef(&type_parser_nodes__ATopClassdef);
+{
+parser_prod__ATopClassdef__init_atopclassdef(var11, var_listnode3); /* Direct call parser_prod#ATopClassdef#init_atopclassdef on <var11:ATopClassdef>*/
+}
+var_pclassdefnode1 = var11;
+var_node_list = var_pclassdefnode1;
+var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction20> */
+{
+var13 = parser_work__Parser__go_to(var_p, var12);
+}
+{
+parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction20#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction20__action(val* self, val* p0) {
+parser__ReduceAction20__action(self, p0); /* Direct call parser#ReduceAction20#action on <self:Object(ReduceAction20)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction21#action for (self: ReduceAction21, Parser) */
+void parser__ReduceAction21__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var2 /* : Array[Object] */;
+val* var_listnode3 /* var listnode3: Array[Object] */;
+val* var_ppropdefnode2 /* var ppropdefnode2: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var4 /* : null */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var8 /* : Bool */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var11 /* : AMainClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AMainClassdef */;
+long var12 /* : Int */;
+long var13 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var2 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+}
+var_listnode3 = var2;
+var_ppropdefnode2 = var_nodearraylist1;
+/* <var_ppropdefnode2:nullable Object> isa nullable APropdef */
+cltype = type_nullable_parser_nodes__APropdef.color;
+idtype = type_nullable_parser_nodes__APropdef.id;
+if(var_ppropdefnode2 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_ppropdefnode2->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_ppropdefnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1484);
+show_backtrace(1);
+}
+var4 = NULL;
+if (var_ppropdefnode2 == NULL) {
+var5 = 0; /* is null */
+} else {
+var5 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_ppropdefnode2,var4) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
+var_other = var4;
+{
+var9 = ((short int (*)(val*, val*))(var_ppropdefnode2->class->vft[COLOR_kernel__Object___61d_61d]))(var_ppropdefnode2, var_other) /* == on <var_ppropdefnode2:nullable APropdef(APropdef)>*/;
+var8 = var9;
+}
+var10 = !var8;
+var6 = var10;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
+}
+var5 = var6;
+}
+if (var5){
+{
+array__Array__add(var_listnode3, var_ppropdefnode2); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
+}
+} else {
+}
+var11 = NEW_parser_nodes__AMainClassdef(&type_parser_nodes__AMainClassdef);
+{
+parser_prod__AMainClassdef__init_amainclassdef(var11, var_listnode3); /* Direct call parser_prod#AMainClassdef#init_amainclassdef on <var11:AMainClassdef>*/
+}
+var_pclassdefnode1 = var11;
+var_node_list = var_pclassdefnode1;
+var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction21> */
+{
+var13 = parser_work__Parser__go_to(var_p, var12);
+}
+{
+parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction21#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction21__action(val* self, val* p0) {
+parser__ReduceAction21__action(self, p0); /* Direct call parser#ReduceAction21#action on <self:Object(ReduceAction21)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction22#action for (self: ReduceAction22, Parser) */
+void parser__ReduceAction22__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : null */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+var1 = NULL;
+var_node_list = var1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction22> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction22#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction22__action(val* self, val* p0) {
+parser__ReduceAction22__action(self, p0); /* Direct call parser#ReduceAction22#action on <self:Object(ReduceAction22)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction23#action for (self: ReduceAction23, Parser) */
+void parser__ReduceAction23__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var2 /* : null */;
+long var3 /* : Int */;
+long var4 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var2 = NULL;
+var_node_list = var2;
+var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction23> */
+{
+var4 = parser_work__Parser__go_to(var_p, var3);
+}
+{
+parser_work__Parser__push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction23#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction23__action(val* self, val* p0) {
+parser__ReduceAction23__action(self, p0); /* Direct call parser#ReduceAction23#action on <self:Object(ReduceAction23)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction24#action for (self: ReduceAction24, Parser) */
+void parser__ReduceAction24__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pexprnode3 /* var pexprnode3: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var4 /* : AMainMethPropdef */;
+val* var5 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMainMethPropdef */;
+long var6 /* : Int */;
+long var7 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_pexprnode3 = var_nodearraylist2;
+/* <var_pexprnode3:nullable Object> isa nullable AExpr */
+cltype = type_nullable_parser_nodes__AExpr.color;
+idtype = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode3 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_pexprnode3->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_pexprnode3->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1522);
+show_backtrace(1);
+}
+var4 = NEW_parser_nodes__AMainMethPropdef(&type_parser_nodes__AMainMethPropdef);
+var5 = NULL;
+{
+parser_prod__AMainMethPropdef__init_amainmethpropdef(var4, var5, var_pexprnode3); /* Direct call parser_prod#AMainMethPropdef#init_amainmethpropdef on <var4:AMainMethPropdef>*/
+}
+var_ppropdefnode1 = var4;
+var_node_list = var_ppropdefnode1;
+var6 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction24> */
+{
+var7 = parser_work__Parser__go_to(var_p, var6);
+}
+{
+parser_work__Parser__push(var_p, var7, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction24#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction24__action(val* self, val* p0) {
+parser__ReduceAction24__action(self, p0); /* Direct call parser#ReduceAction24#action on <self:Object(ReduceAction24)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction26#action for (self: ReduceAction26, Parser) */
+void parser__ReduceAction26__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var10 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var11 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: Array[Object] */;
+val* var12 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var13 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_listnode7 /* var listnode7: nullable Object */;
 short int var26 /* : Bool */;
 int cltype27;
 int idtype28;
-val* var29 /* : Array[Prod] */;
-val* var30 /* : nullable Location */;
-val* var_startl /* var startl: nullable Location */;
-val* var31 /* : null */;
-short int var32 /* : Bool */;
-val* var33 /* : nullable Location */;
-val* var_endl /* var endl: nullable Location */;
+val* var29 /* : Array[Object] */;
+val* var_tkwendnode13 /* var tkwendnode13: nullable Object */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+val* var33 /* : AStdClassdef */;
 val* var34 /* : null */;
-short int var35 /* : Bool */;
-val* var36 /* : Location */;
-val* var37 /* : nullable SourceFile */;
-long var38 /* : Int */;
-long var39 /* : Int */;
-long var40 /* : Int */;
-long var41 /* : Int */;
-val* var42 /* : Array[Prod] */;
-short int var43 /* : Bool */;
-short int var44 /* : Bool */;
-val* var45 /* : Location */;
-val* var46 /* : nullable SourceFile */;
-long var47 /* : Int */;
-long var48 /* : Int */;
-long var49 /* : Int */;
-long var50 /* : Int */;
-val* var_loc51 /* var loc: Location */;
-val* var52 /* : Array[Prod] */;
-val* var53 /* : Iterator[nullable Object] */;
-short int var54 /* : Bool */;
-val* var55 /* : nullable Object */;
-val* var_no56 /* var no: Prod */;
-val* var58 /* : Array[Prod] */;
-val* var59 /* : Array[Prod] */;
-var_n = p0;
-/* <var_n:ANode> isa Token */
-cltype = type_parser_nodes__Token.color;
-idtype = type_parser_nodes__Token.id;
-if(cltype >= var_n->type->table_size) {
-var = 0;
+val* var35 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var36 /* : Int */;
+long var37 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var10 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var10); /* Direct call array#Array#init on <var10:Array[Object]>*/
+}
+var_listnode8 = var10;
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var11); /* Direct call array#Array#init on <var11:Array[Object]>*/
+}
+var_listnode11 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode12 = var12;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var13 = 1;
 } else {
-var = var_n->type->type_table[cltype] == idtype;
-}
-if (var){
-var1 = ((val* (*)(val*))(var_n->class->vft[COLOR_parser_nodes__ANode__location]))(var_n) /* location on <var_n:ANode(Token)>*/;
-var_loc = var1;
-self->attrs[COLOR_parser__ComputeProdLocationVisitor___last_location].val = var_loc; /* _last_location on <self:ComputeProdLocationVisitor> */
-var2 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_first_prods");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1751);
-show_backtrace(1);
-}
-var3 = ((short int (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var2) /* is_empty on <var2:Array[Prod]>*/;
-var4 = !var3;
-if (var4){
-var5 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_first_prods");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1752);
-show_backtrace(1);
-}
-var6 = ((val* (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__iterator]))(var5) /* iterator on <var5:Array[Prod]>*/;
-for(;;) {
-var7 = ((short int (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var6) /* is_ok on <var6:Iterator[nullable Object]>*/;
-if(!var7) break;
-var8 = ((val* (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__item]))(var6) /* item on <var6:Iterator[nullable Object]>*/;
-var_no = var8;
-var_no->attrs[COLOR_parser__Prod___first_location].val = var_loc; /* _first_location on <var_no:Prod> */
-CONTINUE_label: (void)0;
-((void (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__next]))(var6) /* next on <var6:Iterator[nullable Object]>*/;
-}
-BREAK_label: (void)0;
-var9 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_first_prods");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1755);
-show_backtrace(1);
-}
-((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var9) /* clear on <var9:Array[Prod]>*/;
+if(cltype >= var_pdocnode2->type->table_size) {
+var13 = 0;
 } else {
+var13 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
-var10 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1759);
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1549);
 show_backtrace(1);
 }
-var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var10) /* is_empty on <var10:Array[Prod]>*/;
-var12 = !var11;
-if (var12){
-var13 = NEW_location__Location(&type_location__Location);
-var14 = ((val* (*)(val*))(var_loc->class->vft[COLOR_location__Location__file]))(var_loc) /* file on <var_loc:Location>*/;
-var15 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_start]))(var_loc) /* line_start on <var_loc:Location>*/;
-var16 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__line_start]))(var_loc) /* line_start on <var_loc:Location>*/;
-var17 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__column_start]))(var_loc) /* column_start on <var_loc:Location>*/;
-var18 = ((long (*)(val*))(var_loc->class->vft[COLOR_location__Location__column_start]))(var_loc) /* column_start on <var_loc:Location>*/;
-((void (*)(val*, val*, long, long, long, long))(var13->class->vft[COLOR_location__Location__init]))(var13, var14, var15, var16, var17, var18) /* init on <var13:Location>*/;
-var_loco = var13;
-var19 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1761);
-show_backtrace(1);
-}
-var20 = ((val* (*)(val*))(var19->class->vft[COLOR_abstract_collection__Collection__iterator]))(var19) /* iterator on <var19:Array[Prod]>*/;
-for(;;) {
-var21 = ((short int (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var20) /* is_ok on <var20:Iterator[nullable Object]>*/;
-if(!var21) break;
-var22 = ((val* (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__item]))(var20) /* item on <var20:Iterator[nullable Object]>*/;
-var_no23 = var22;
-((void (*)(val*, val*))(var_no23->class->vft[COLOR_parser_nodes__Prod__location_61d]))(var_no23, var_loco) /* location= on <var_no23:Prod>*/;
-CONTINUE_label24: (void)0;
-((void (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__next]))(var20) /* next on <var20:Iterator[nullable Object]>*/;
-}
-BREAK_label24: (void)0;
-var25 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var25 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1764);
-show_backtrace(1);
-}
-((void (*)(val*))(var25->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var25) /* clear on <var25:Array[Prod]>*/;
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype15 = type_nullable_parser_nodes__TKwredef.color;
+idtype16 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var14 = 1;
 } else {
-}
+if(cltype15 >= var_tkwredefnode3->type->table_size) {
+var14 = 0;
 } else {
-/* <var_n:ANode> isa Prod */
-cltype27 = type_parser_nodes__Prod.color;
-idtype28 = type_parser_nodes__Prod.id;
-if(cltype27 >= var_n->type->table_size) {
+var14 = var_tkwredefnode3->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1551);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype18 = type_nullable_parser_nodes__AVisibility.color;
+idtype19 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_pvisibilitynode4->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_pvisibilitynode4->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1553);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype21 = type_nullable_parser_nodes__AClasskind.color;
+idtype22 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pclasskindnode5->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pclasskindnode5->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1555);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype24 = type_nullable_parser_nodes__TClassid.color;
+idtype25 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_tclassidnode6->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_tclassidnode6->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1557);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype27 = type_array__Arraykernel__Object.color;
+idtype28 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
 var26 = 0;
 } else {
-var26 = var_n->type->type_table[cltype27] == idtype28;
-}
-if (!var26) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1767);
-show_backtrace(1);
-}
-var29 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (var29 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_first_prods");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1768);
-show_backtrace(1);
-}
-((void (*)(val*, val*))(var29->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var29, var_n) /* add on <var29:Array[Prod]>*/;
-((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__visit_all]))(var_n, self) /* visit_all on <var_n:ANode(Prod)>*/;
-var30 = var_n->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <var_n:ANode(Prod)> */
-var_startl = var30;
-var31 = NULL;
-if (var_startl == NULL) {
-var32 = 0; /* is null */
+if(cltype27 >= var_listnode7->type->table_size) {
+var26 = 0;
 } else {
-var32 = 1; /* arg is null and recv is not */
+var26 = var_listnode7->type->type_table[cltype27] == idtype28;
 }
-if (var32){
-var33 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___last_location].val; /* _last_location on <self:ComputeProdLocationVisitor> */
-var_endl = var33;
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1559);
+show_backtrace(1);
+}
+{
+var29 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var29;
+var_tkwendnode13 = var_nodearraylist9;
+/* <var_tkwendnode13:nullable Object> isa nullable TKwend */
+cltype31 = type_nullable_parser_nodes__TKwend.color;
+idtype32 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode13 == NULL) {
+var30 = 1;
+} else {
+if(cltype31 >= var_tkwendnode13->type->table_size) {
+var30 = 0;
+} else {
+var30 = var_tkwendnode13->type->type_table[cltype31] == idtype32;
+}
+}
+if (unlikely(!var30)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1562);
+show_backtrace(1);
+}
+var33 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
 var34 = NULL;
-if (var_endl == NULL) {
-var35 = 0; /* is null */
+var35 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var34, var35, var_listnode11, var_listnode12, var_tkwendnode13); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var33:AStdClassdef>*/
+}
+var_pclassdefnode1 = var33;
+var_node_list = var_pclassdefnode1;
+var36 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction26> */
+{
+var37 = parser_work__Parser__go_to(var_p, var36);
+}
+{
+parser_work__Parser__push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction26#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction26__action(val* self, val* p0) {
+parser__ReduceAction26__action(self, p0); /* Direct call parser#ReduceAction26#action on <self:Object(ReduceAction26)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction27#action for (self: ReduceAction27, Parser) */
+void parser__ReduceAction27__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var11 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var12 /* : Array[Object] */;
+val* var_listnode16 /* var listnode16: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var14 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var30 /* : Array[Object] */;
+val* var31 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var35 /* : Array[Object] */;
+val* var36 /* : AAnnotations */;
+val* var37 /* : null */;
+val* var38 /* : null */;
+val* var39 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_tkwendnode18 /* var tkwendnode18: nullable Object */;
+short int var40 /* : Bool */;
+int cltype41;
+int idtype42;
+val* var43 /* : AStdClassdef */;
+val* var44 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var45 /* : Int */;
+long var46 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var11); /* Direct call array#Array#init on <var11:Array[Object]>*/
+}
+var_listnode8 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode16 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode17 = var13;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var14 = 1;
 } else {
-var35 = 1; /* arg is null and recv is not */
+if(cltype >= var_pdocnode2->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
-if (!var35) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1776);
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1599);
 show_backtrace(1);
 }
-var36 = NEW_location__Location(&type_location__Location);
-var37 = ((val* (*)(val*))(var_startl->class->vft[COLOR_location__Location__file]))(var_startl) /* file on <var_startl:nullable Location(Location)>*/;
-var38 = ((long (*)(val*))(var_startl->class->vft[COLOR_location__Location__line_start]))(var_startl) /* line_start on <var_startl:nullable Location(Location)>*/;
-var39 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__line_end]))(var_endl) /* line_end on <var_endl:nullable Location(Location)>*/;
-var40 = ((long (*)(val*))(var_startl->class->vft[COLOR_location__Location__column_start]))(var_startl) /* column_start on <var_startl:nullable Location(Location)>*/;
-var41 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__column_end]))(var_endl) /* column_end on <var_endl:nullable Location(Location)>*/;
-((void (*)(val*, val*, long, long, long, long))(var36->class->vft[COLOR_location__Location__init]))(var36, var37, var38, var39, var40, var41) /* init on <var36:Location>*/;
-((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__Prod__location_61d]))(var_n, var36) /* location= on <var_n:ANode(Prod)>*/;
-var42 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var42 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1780);
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype16 = type_nullable_parser_nodes__TKwredef.color;
+idtype17 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwredefnode3->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwredefnode3->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1601);
 show_backtrace(1);
 }
-var43 = ((short int (*)(val*))(var42->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var42) /* is_empty on <var42:Array[Prod]>*/;
-var44 = !var43;
-if (var44){
-var45 = NEW_location__Location(&type_location__Location);
-var46 = ((val* (*)(val*))(var_endl->class->vft[COLOR_location__Location__file]))(var_endl) /* file on <var_endl:nullable Location(Location)>*/;
-var47 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__line_end]))(var_endl) /* line_end on <var_endl:nullable Location(Location)>*/;
-var48 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__line_end]))(var_endl) /* line_end on <var_endl:nullable Location(Location)>*/;
-var49 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__column_end]))(var_endl) /* column_end on <var_endl:nullable Location(Location)>*/;
-var50 = ((long (*)(val*))(var_endl->class->vft[COLOR_location__Location__column_end]))(var_endl) /* column_end on <var_endl:nullable Location(Location)>*/;
-((void (*)(val*, val*, long, long, long, long))(var45->class->vft[COLOR_location__Location__init]))(var45, var46, var47, var48, var49, var50) /* init on <var45:Location>*/;
-var_loc51 = var45;
-var52 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var52 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1782);
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype19 = type_nullable_parser_nodes__AVisibility.color;
+idtype20 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_pvisibilitynode4->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_pvisibilitynode4->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1603);
 show_backtrace(1);
 }
-var53 = ((val* (*)(val*))(var52->class->vft[COLOR_abstract_collection__Collection__iterator]))(var52) /* iterator on <var52:Array[Prod]>*/;
-for(;;) {
-var54 = ((short int (*)(val*))(var53->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var53) /* is_ok on <var53:Iterator[nullable Object]>*/;
-if(!var54) break;
-var55 = ((val* (*)(val*))(var53->class->vft[COLOR_abstract_collection__Iterator__item]))(var53) /* item on <var53:Iterator[nullable Object]>*/;
-var_no56 = var55;
-((void (*)(val*, val*))(var_no56->class->vft[COLOR_parser_nodes__Prod__location_61d]))(var_no56, var_loc51) /* location= on <var_no56:Prod>*/;
-CONTINUE_label57: (void)0;
-((void (*)(val*))(var53->class->vft[COLOR_abstract_collection__Iterator__next]))(var53) /* next on <var53:Iterator[nullable Object]>*/;
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype22 = type_nullable_parser_nodes__AClasskind.color;
+idtype23 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pclasskindnode5->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pclasskindnode5->type->type_table[cltype22] == idtype23;
 }
-BREAK_label57: (void)0;
-var58 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var58 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1786);
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1605);
 show_backtrace(1);
 }
-((void (*)(val*))(var58->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var58) /* clear on <var58:Array[Prod]>*/;
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype25 = type_nullable_parser_nodes__TClassid.color;
+idtype26 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_tclassidnode6->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_tclassidnode6->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1607);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype28 = type_array__Arraykernel__Object.color;
+idtype29 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var27 = 0;
+} else {
+if(cltype28 >= var_listnode7->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_listnode7->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1609);
+show_backtrace(1);
+}
+{
+var30 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var30;
+var31 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var31); /* Direct call array#Array#init on <var31:Array[Object]>*/
+}
+var_listnode13 = var31;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype33 = type_array__Arraykernel__Object.color;
+idtype34 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var32 = 0;
+} else {
+if(cltype33 >= var_listnode12->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_listnode12->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1613);
+show_backtrace(1);
+}
+{
+var35 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var35;
+var36 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var37 = NULL;
+var38 = NULL;
+var39 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var36, var37, var38, var_listnode13, var39); /* Direct call parser_prod#AAnnotations#init_aannotations on <var36:AAnnotations>*/
+}
+var_pannotationsnode9 = var36;
+var_tkwendnode18 = var_nodearraylist10;
+/* <var_tkwendnode18:nullable Object> isa nullable TKwend */
+cltype41 = type_nullable_parser_nodes__TKwend.color;
+idtype42 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode18 == NULL) {
+var40 = 1;
+} else {
+if(cltype41 >= var_tkwendnode18->type->table_size) {
+var40 = 0;
+} else {
+var40 = var_tkwendnode18->type->type_table[cltype41] == idtype42;
+}
+}
+if (unlikely(!var40)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1622);
+show_backtrace(1);
+}
+var43 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var44 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var43, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var44, var_listnode16, var_listnode17, var_tkwendnode18); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var43:AStdClassdef>*/
+}
+var_pclassdefnode1 = var43;
+var_node_list = var_pclassdefnode1;
+var45 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction27> */
+{
+var46 = parser_work__Parser__go_to(var_p, var45);
+}
+{
+parser_work__Parser__push(var_p, var46, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction27#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction27__action(val* self, val* p0) {
+parser__ReduceAction27__action(self, p0); /* Direct call parser#ReduceAction27#action on <self:Object(ReduceAction27)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction28#action for (self: ReduceAction28, Parser) */
+void parser__ReduceAction28__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var11 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var12 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var14 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var30 /* : Array[Object] */;
+val* var_pexterncodeblocknode10 /* var pexterncodeblocknode10: nullable Object */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+val* var_tkwendnode13 /* var tkwendnode13: nullable Object */;
+short int var34 /* : Bool */;
+int cltype35;
+int idtype36;
+val* var37 /* : AStdClassdef */;
+val* var38 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var39 /* : Int */;
+long var40 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var11); /* Direct call array#Array#init on <var11:Array[Object]>*/
+}
+var_listnode8 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode11 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode12 = var13;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var14 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1659);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype16 = type_nullable_parser_nodes__TKwredef.color;
+idtype17 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwredefnode3->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwredefnode3->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1661);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype19 = type_nullable_parser_nodes__AVisibility.color;
+idtype20 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_pvisibilitynode4->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_pvisibilitynode4->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1663);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype22 = type_nullable_parser_nodes__AClasskind.color;
+idtype23 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pclasskindnode5->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pclasskindnode5->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1665);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype25 = type_nullable_parser_nodes__TClassid.color;
+idtype26 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_tclassidnode6->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_tclassidnode6->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1667);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype28 = type_array__Arraykernel__Object.color;
+idtype29 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var27 = 0;
+} else {
+if(cltype28 >= var_listnode7->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_listnode7->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1669);
+show_backtrace(1);
+}
+{
+var30 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var30;
+var_pexterncodeblocknode10 = var_nodearraylist8;
+/* <var_pexterncodeblocknode10:nullable Object> isa nullable AExternCodeBlock */
+cltype32 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype33 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode10 == NULL) {
+var31 = 1;
+} else {
+if(cltype32 >= var_pexterncodeblocknode10->type->table_size) {
+var31 = 0;
+} else {
+var31 = var_pexterncodeblocknode10->type->type_table[cltype32] == idtype33;
+}
+}
+if (unlikely(!var31)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1672);
+show_backtrace(1);
+}
+var_tkwendnode13 = var_nodearraylist10;
+/* <var_tkwendnode13:nullable Object> isa nullable TKwend */
+cltype35 = type_nullable_parser_nodes__TKwend.color;
+idtype36 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode13 == NULL) {
+var34 = 1;
+} else {
+if(cltype35 >= var_tkwendnode13->type->table_size) {
+var34 = 0;
+} else {
+var34 = var_tkwendnode13->type->type_table[cltype35] == idtype36;
+}
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1674);
+show_backtrace(1);
+}
+var37 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var38 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var37, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var38, var_pexterncodeblocknode10, var_listnode11, var_listnode12, var_tkwendnode13); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var37:AStdClassdef>*/
+}
+var_pclassdefnode1 = var37;
+var_node_list = var_pclassdefnode1;
+var39 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction28> */
+{
+var40 = parser_work__Parser__go_to(var_p, var39);
+}
+{
+parser_work__Parser__push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction28#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction28__action(val* self, val* p0) {
+parser__ReduceAction28__action(self, p0); /* Direct call parser#ReduceAction28#action on <self:Object(ReduceAction28)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction29#action for (self: ReduceAction29, Parser) */
+void parser__ReduceAction29__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode16 /* var listnode16: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var32 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var33 /* : Bool */;
+int cltype34;
+int idtype35;
+val* var36 /* : Array[Object] */;
+val* var37 /* : AAnnotations */;
+val* var38 /* : null */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_pexterncodeblocknode15 /* var pexterncodeblocknode15: nullable Object */;
+short int var41 /* : Bool */;
+int cltype42;
+int idtype43;
+val* var_tkwendnode18 /* var tkwendnode18: nullable Object */;
+short int var44 /* : Bool */;
+int cltype45;
+int idtype46;
+val* var47 /* : AStdClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var48 /* : Int */;
+long var49 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode16 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode17 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1712);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1714);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1716);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1718);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1720);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1722);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var32 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var32); /* Direct call array#Array#init on <var32:Array[Object]>*/
+}
+var_listnode13 = var32;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype34 = type_array__Arraykernel__Object.color;
+idtype35 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var33 = 0;
+} else {
+if(cltype34 >= var_listnode12->type->table_size) {
+var33 = 0;
+} else {
+var33 = var_listnode12->type->type_table[cltype34] == idtype35;
+}
+}
+if (unlikely(!var33)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1726);
+show_backtrace(1);
+}
+{
+var36 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var36;
+var37 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var38 = NULL;
+var39 = NULL;
+var40 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var37, var38, var39, var_listnode13, var40); /* Direct call parser_prod#AAnnotations#init_aannotations on <var37:AAnnotations>*/
+}
+var_pannotationsnode9 = var37;
+var_pexterncodeblocknode15 = var_nodearraylist9;
+/* <var_pexterncodeblocknode15:nullable Object> isa nullable AExternCodeBlock */
+cltype42 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype43 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode15 == NULL) {
+var41 = 1;
+} else {
+if(cltype42 >= var_pexterncodeblocknode15->type->table_size) {
+var41 = 0;
+} else {
+var41 = var_pexterncodeblocknode15->type->type_table[cltype42] == idtype43;
+}
+}
+if (unlikely(!var41)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1735);
+show_backtrace(1);
+}
+var_tkwendnode18 = var_nodearraylist11;
+/* <var_tkwendnode18:nullable Object> isa nullable TKwend */
+cltype45 = type_nullable_parser_nodes__TKwend.color;
+idtype46 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode18 == NULL) {
+var44 = 1;
+} else {
+if(cltype45 >= var_tkwendnode18->type->table_size) {
+var44 = 0;
+} else {
+var44 = var_tkwendnode18->type->type_table[cltype45] == idtype46;
+}
+}
+if (unlikely(!var44)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1737);
+show_backtrace(1);
+}
+var47 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+{
+parser_prod__AStdClassdef__init_astdclassdef(var47, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var_pexterncodeblocknode15, var_listnode16, var_listnode17, var_tkwendnode18); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var47:AStdClassdef>*/
+}
+var_pclassdefnode1 = var47;
+var_node_list = var_pclassdefnode1;
+var48 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction29> */
+{
+var49 = parser_work__Parser__go_to(var_p, var48);
+}
+{
+parser_work__Parser__push(var_p, var49, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction29#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction29__action(val* self, val* p0) {
+parser__ReduceAction29__action(self, p0); /* Direct call parser#ReduceAction29#action on <self:Object(ReduceAction29)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction30#action for (self: ReduceAction30, Parser) */
+void parser__ReduceAction30__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var11 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var12 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var14 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var30 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: nullable Object */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+val* var34 /* : Array[Object] */;
+val* var_tkwendnode14 /* var tkwendnode14: nullable Object */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+val* var38 /* : AStdClassdef */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var41 /* : Int */;
+long var42 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var11); /* Direct call array#Array#init on <var11:Array[Object]>*/
+}
+var_listnode8 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode12 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode13 = var13;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var14 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1774);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype16 = type_nullable_parser_nodes__TKwredef.color;
+idtype17 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwredefnode3->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwredefnode3->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1776);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype19 = type_nullable_parser_nodes__AVisibility.color;
+idtype20 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_pvisibilitynode4->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_pvisibilitynode4->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1778);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype22 = type_nullable_parser_nodes__AClasskind.color;
+idtype23 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pclasskindnode5->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pclasskindnode5->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1780);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype25 = type_nullable_parser_nodes__TClassid.color;
+idtype26 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_tclassidnode6->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_tclassidnode6->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1782);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype28 = type_array__Arraykernel__Object.color;
+idtype29 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var27 = 0;
+} else {
+if(cltype28 >= var_listnode7->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_listnode7->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1784);
+show_backtrace(1);
+}
+{
+var30 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var30;
+var_listnode11 = var_nodearraylist8;
+/* <var_listnode11:nullable Object> isa Array[Object] */
+cltype32 = type_array__Arraykernel__Object.color;
+idtype33 = type_array__Arraykernel__Object.id;
+if(var_listnode11 == NULL) {
+var31 = 0;
+} else {
+if(cltype32 >= var_listnode11->type->table_size) {
+var31 = 0;
+} else {
+var31 = var_listnode11->type->type_table[cltype32] == idtype33;
+}
+}
+if (unlikely(!var31)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1787);
+show_backtrace(1);
+}
+{
+var34 = parser_work__ReduceAction__concat(self, var_listnode12, var_listnode11);
+}
+var_listnode12 = var34;
+var_tkwendnode14 = var_nodearraylist10;
+/* <var_tkwendnode14:nullable Object> isa nullable TKwend */
+cltype36 = type_nullable_parser_nodes__TKwend.color;
+idtype37 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode14 == NULL) {
+var35 = 1;
+} else {
+if(cltype36 >= var_tkwendnode14->type->table_size) {
+var35 = 0;
+} else {
+var35 = var_tkwendnode14->type->type_table[cltype36] == idtype37;
+}
+}
+if (unlikely(!var35)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1790);
+show_backtrace(1);
+}
+var38 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var39 = NULL;
+var40 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var39, var40, var_listnode12, var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var38:AStdClassdef>*/
+}
+var_pclassdefnode1 = var38;
+var_node_list = var_pclassdefnode1;
+var41 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction30> */
+{
+var42 = parser_work__Parser__go_to(var_p, var41);
+}
+{
+parser_work__Parser__push(var_p, var42, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction30#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction30__action(val* self, val* p0) {
+parser__ReduceAction30__action(self, p0); /* Direct call parser#ReduceAction30#action on <self:Object(ReduceAction30)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction31#action for (self: ReduceAction31, Parser) */
+void parser__ReduceAction31__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var32 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var33 /* : Bool */;
+int cltype34;
+int idtype35;
+val* var36 /* : Array[Object] */;
+val* var37 /* : AAnnotations */;
+val* var38 /* : null */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_listnode16 /* var listnode16: nullable Object */;
+short int var41 /* : Bool */;
+int cltype42;
+int idtype43;
+val* var44 /* : Array[Object] */;
+val* var_tkwendnode19 /* var tkwendnode19: nullable Object */;
+short int var45 /* : Bool */;
+int cltype46;
+int idtype47;
+val* var48 /* : AStdClassdef */;
+val* var49 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var50 /* : Int */;
+long var51 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode17 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode18 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1828);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1830);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1832);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1834);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1836);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1838);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var32 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var32); /* Direct call array#Array#init on <var32:Array[Object]>*/
+}
+var_listnode13 = var32;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype34 = type_array__Arraykernel__Object.color;
+idtype35 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var33 = 0;
+} else {
+if(cltype34 >= var_listnode12->type->table_size) {
+var33 = 0;
+} else {
+var33 = var_listnode12->type->type_table[cltype34] == idtype35;
+}
+}
+if (unlikely(!var33)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1842);
+show_backtrace(1);
+}
+{
+var36 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var36;
+var37 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var38 = NULL;
+var39 = NULL;
+var40 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var37, var38, var39, var_listnode13, var40); /* Direct call parser_prod#AAnnotations#init_aannotations on <var37:AAnnotations>*/
+}
+var_pannotationsnode9 = var37;
+var_listnode16 = var_nodearraylist9;
+/* <var_listnode16:nullable Object> isa Array[Object] */
+cltype42 = type_array__Arraykernel__Object.color;
+idtype43 = type_array__Arraykernel__Object.id;
+if(var_listnode16 == NULL) {
+var41 = 0;
+} else {
+if(cltype42 >= var_listnode16->type->table_size) {
+var41 = 0;
+} else {
+var41 = var_listnode16->type->type_table[cltype42] == idtype43;
+}
+}
+if (unlikely(!var41)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1851);
+show_backtrace(1);
+}
+{
+var44 = parser_work__ReduceAction__concat(self, var_listnode17, var_listnode16);
+}
+var_listnode17 = var44;
+var_tkwendnode19 = var_nodearraylist11;
+/* <var_tkwendnode19:nullable Object> isa nullable TKwend */
+cltype46 = type_nullable_parser_nodes__TKwend.color;
+idtype47 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode19 == NULL) {
+var45 = 1;
+} else {
+if(cltype46 >= var_tkwendnode19->type->table_size) {
+var45 = 0;
+} else {
+var45 = var_tkwendnode19->type->type_table[cltype46] == idtype47;
+}
+}
+if (unlikely(!var45)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1854);
+show_backtrace(1);
+}
+var48 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var49 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var48, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var49, var_listnode17, var_listnode18, var_tkwendnode19); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var48:AStdClassdef>*/
+}
+var_pclassdefnode1 = var48;
+var_node_list = var_pclassdefnode1;
+var50 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction31> */
+{
+var51 = parser_work__Parser__go_to(var_p, var50);
+}
+{
+parser_work__Parser__push(var_p, var51, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction31#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction31__action(val* self, val* p0) {
+parser__ReduceAction31__action(self, p0); /* Direct call parser#ReduceAction31#action on <self:Object(ReduceAction31)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction32#action for (self: ReduceAction32, Parser) */
+void parser__ReduceAction32__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var_pexterncodeblocknode10 /* var pexterncodeblocknode10: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var_listnode11 /* var listnode11: nullable Object */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+val* var38 /* : Array[Object] */;
+val* var_tkwendnode14 /* var tkwendnode14: nullable Object */;
+short int var39 /* : Bool */;
+int cltype40;
+int idtype41;
+val* var42 /* : AStdClassdef */;
+val* var43 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var44 /* : Int */;
+long var45 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode12 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode13 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1892);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1894);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1896);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1898);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1900);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1902);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var_pexterncodeblocknode10 = var_nodearraylist8;
+/* <var_pexterncodeblocknode10:nullable Object> isa nullable AExternCodeBlock */
+cltype33 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype34 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode10 == NULL) {
+var32 = 1;
+} else {
+if(cltype33 >= var_pexterncodeblocknode10->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_pexterncodeblocknode10->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1905);
+show_backtrace(1);
+}
+var_listnode11 = var_nodearraylist9;
+/* <var_listnode11:nullable Object> isa Array[Object] */
+cltype36 = type_array__Arraykernel__Object.color;
+idtype37 = type_array__Arraykernel__Object.id;
+if(var_listnode11 == NULL) {
+var35 = 0;
+} else {
+if(cltype36 >= var_listnode11->type->table_size) {
+var35 = 0;
+} else {
+var35 = var_listnode11->type->type_table[cltype36] == idtype37;
+}
+}
+if (unlikely(!var35)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1907);
+show_backtrace(1);
+}
+{
+var38 = parser_work__ReduceAction__concat(self, var_listnode12, var_listnode11);
+}
+var_listnode12 = var38;
+var_tkwendnode14 = var_nodearraylist11;
+/* <var_tkwendnode14:nullable Object> isa nullable TKwend */
+cltype40 = type_nullable_parser_nodes__TKwend.color;
+idtype41 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode14 == NULL) {
+var39 = 1;
+} else {
+if(cltype40 >= var_tkwendnode14->type->table_size) {
+var39 = 0;
+} else {
+var39 = var_tkwendnode14->type->type_table[cltype40] == idtype41;
+}
+}
+if (unlikely(!var39)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1910);
+show_backtrace(1);
+}
+var42 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var43 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var42, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var43, var_pexterncodeblocknode10, var_listnode12, var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var42:AStdClassdef>*/
+}
+var_pclassdefnode1 = var42;
+var_node_list = var_pclassdefnode1;
+var44 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction32> */
+{
+var45 = parser_work__Parser__go_to(var_p, var44);
+}
+{
+parser_work__Parser__push(var_p, var45, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction32#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction32__action(val* self, val* p0) {
+parser__ReduceAction32__action(self, p0); /* Direct call parser#ReduceAction32#action on <self:Object(ReduceAction32)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction33#action for (self: ReduceAction33, Parser) */
+void parser__ReduceAction33__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist12 /* var nodearraylist12: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var12 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var13 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var15 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var16 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var32 /* : Array[Object] */;
+val* var33 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var34 /* : Bool */;
+int cltype35;
+int idtype36;
+val* var37 /* : Array[Object] */;
+val* var38 /* : AAnnotations */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var41 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_pexterncodeblocknode15 /* var pexterncodeblocknode15: nullable Object */;
+short int var42 /* : Bool */;
+int cltype43;
+int idtype44;
+val* var_listnode16 /* var listnode16: nullable Object */;
+short int var45 /* : Bool */;
+int cltype46;
+int idtype47;
+val* var48 /* : Array[Object] */;
+val* var_tkwendnode19 /* var tkwendnode19: nullable Object */;
+short int var49 /* : Bool */;
+int cltype50;
+int idtype51;
+val* var52 /* : AStdClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var53 /* : Int */;
+long var54 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist12 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var11;
+{
+var12 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode8 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode17 = var14;
+var15 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[Object]>*/
+}
+var_listnode18 = var15;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var16 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1949);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype18 = type_nullable_parser_nodes__TKwredef.color;
+idtype19 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwredefnode3->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwredefnode3->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1951);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype21 = type_nullable_parser_nodes__AVisibility.color;
+idtype22 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pvisibilitynode4->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pvisibilitynode4->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1953);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype24 = type_nullable_parser_nodes__AClasskind.color;
+idtype25 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pclasskindnode5->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pclasskindnode5->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1955);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype27 = type_nullable_parser_nodes__TClassid.color;
+idtype28 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_tclassidnode6->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_tclassidnode6->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1957);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype30 = type_array__Arraykernel__Object.color;
+idtype31 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var29 = 0;
+} else {
+if(cltype30 >= var_listnode7->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_listnode7->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1959);
+show_backtrace(1);
+}
+{
+var32 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var32;
+var33 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var33); /* Direct call array#Array#init on <var33:Array[Object]>*/
+}
+var_listnode13 = var33;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype35 = type_array__Arraykernel__Object.color;
+idtype36 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var34 = 0;
+} else {
+if(cltype35 >= var_listnode12->type->table_size) {
+var34 = 0;
+} else {
+var34 = var_listnode12->type->type_table[cltype35] == idtype36;
+}
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1963);
+show_backtrace(1);
+}
+{
+var37 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var37;
+var38 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var39 = NULL;
+var40 = NULL;
+var41 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var38, var39, var40, var_listnode13, var41); /* Direct call parser_prod#AAnnotations#init_aannotations on <var38:AAnnotations>*/
+}
+var_pannotationsnode9 = var38;
+var_pexterncodeblocknode15 = var_nodearraylist9;
+/* <var_pexterncodeblocknode15:nullable Object> isa nullable AExternCodeBlock */
+cltype43 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype44 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode15 == NULL) {
+var42 = 1;
+} else {
+if(cltype43 >= var_pexterncodeblocknode15->type->table_size) {
+var42 = 0;
+} else {
+var42 = var_pexterncodeblocknode15->type->type_table[cltype43] == idtype44;
+}
+}
+if (unlikely(!var42)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1972);
+show_backtrace(1);
+}
+var_listnode16 = var_nodearraylist10;
+/* <var_listnode16:nullable Object> isa Array[Object] */
+cltype46 = type_array__Arraykernel__Object.color;
+idtype47 = type_array__Arraykernel__Object.id;
+if(var_listnode16 == NULL) {
+var45 = 0;
+} else {
+if(cltype46 >= var_listnode16->type->table_size) {
+var45 = 0;
+} else {
+var45 = var_listnode16->type->type_table[cltype46] == idtype47;
+}
+}
+if (unlikely(!var45)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1974);
+show_backtrace(1);
+}
+{
+var48 = parser_work__ReduceAction__concat(self, var_listnode17, var_listnode16);
+}
+var_listnode17 = var48;
+var_tkwendnode19 = var_nodearraylist12;
+/* <var_tkwendnode19:nullable Object> isa nullable TKwend */
+cltype50 = type_nullable_parser_nodes__TKwend.color;
+idtype51 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode19 == NULL) {
+var49 = 1;
+} else {
+if(cltype50 >= var_tkwendnode19->type->table_size) {
+var49 = 0;
+} else {
+var49 = var_tkwendnode19->type->type_table[cltype50] == idtype51;
+}
+}
+if (unlikely(!var49)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 1977);
+show_backtrace(1);
+}
+var52 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+{
+parser_prod__AStdClassdef__init_astdclassdef(var52, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var_pexterncodeblocknode15, var_listnode17, var_listnode18, var_tkwendnode19); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var52:AStdClassdef>*/
+}
+var_pclassdefnode1 = var52;
+var_node_list = var_pclassdefnode1;
+var53 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction33> */
+{
+var54 = parser_work__Parser__go_to(var_p, var53);
+}
+{
+parser_work__Parser__push(var_p, var54, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction33#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction33__action(val* self, val* p0) {
+parser__ReduceAction33__action(self, p0); /* Direct call parser#ReduceAction33#action on <self:Object(ReduceAction33)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction34#action for (self: ReduceAction34, Parser) */
+void parser__ReduceAction34__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var11 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var12 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var14 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var30 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+val* var34 /* : Array[Object] */;
+val* var_tkwendnode14 /* var tkwendnode14: nullable Object */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+val* var38 /* : AStdClassdef */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var41 /* : Int */;
+long var42 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var11); /* Direct call array#Array#init on <var11:Array[Object]>*/
+}
+var_listnode8 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode11 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode13 = var13;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var14 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2014);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype16 = type_nullable_parser_nodes__TKwredef.color;
+idtype17 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwredefnode3->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwredefnode3->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2016);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype19 = type_nullable_parser_nodes__AVisibility.color;
+idtype20 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_pvisibilitynode4->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_pvisibilitynode4->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2018);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype22 = type_nullable_parser_nodes__AClasskind.color;
+idtype23 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pclasskindnode5->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pclasskindnode5->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2020);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype25 = type_nullable_parser_nodes__TClassid.color;
+idtype26 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_tclassidnode6->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_tclassidnode6->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2022);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype28 = type_array__Arraykernel__Object.color;
+idtype29 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var27 = 0;
+} else {
+if(cltype28 >= var_listnode7->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_listnode7->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2024);
+show_backtrace(1);
+}
+{
+var30 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var30;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype32 = type_array__Arraykernel__Object.color;
+idtype33 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var31 = 0;
+} else {
+if(cltype32 >= var_listnode12->type->table_size) {
+var31 = 0;
+} else {
+var31 = var_listnode12->type->type_table[cltype32] == idtype33;
+}
+}
+if (unlikely(!var31)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2027);
+show_backtrace(1);
+}
+{
+var34 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var34;
+var_tkwendnode14 = var_nodearraylist10;
+/* <var_tkwendnode14:nullable Object> isa nullable TKwend */
+cltype36 = type_nullable_parser_nodes__TKwend.color;
+idtype37 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode14 == NULL) {
+var35 = 1;
+} else {
+if(cltype36 >= var_tkwendnode14->type->table_size) {
+var35 = 0;
+} else {
+var35 = var_tkwendnode14->type->type_table[cltype36] == idtype37;
+}
+}
+if (unlikely(!var35)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2030);
+show_backtrace(1);
+}
+var38 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var39 = NULL;
+var40 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var39, var40, var_listnode11, var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var38:AStdClassdef>*/
+}
+var_pclassdefnode1 = var38;
+var_node_list = var_pclassdefnode1;
+var41 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction34> */
+{
+var42 = parser_work__Parser__go_to(var_p, var41);
+}
+{
+parser_work__Parser__push(var_p, var42, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction34#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction34__action(val* self, val* p0) {
+parser__ReduceAction34__action(self, p0); /* Direct call parser#ReduceAction34#action on <self:Object(ReduceAction34)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction35#action for (self: ReduceAction35, Parser) */
+void parser__ReduceAction35__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode16 /* var listnode16: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var32 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var33 /* : Bool */;
+int cltype34;
+int idtype35;
+val* var36 /* : Array[Object] */;
+val* var37 /* : AAnnotations */;
+val* var38 /* : null */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_listnode17 /* var listnode17: nullable Object */;
+short int var41 /* : Bool */;
+int cltype42;
+int idtype43;
+val* var44 /* : Array[Object] */;
+val* var_tkwendnode19 /* var tkwendnode19: nullable Object */;
+short int var45 /* : Bool */;
+int cltype46;
+int idtype47;
+val* var48 /* : AStdClassdef */;
+val* var49 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var50 /* : Int */;
+long var51 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode16 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode18 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2068);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2070);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2072);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2074);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2076);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2078);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var32 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var32); /* Direct call array#Array#init on <var32:Array[Object]>*/
+}
+var_listnode13 = var32;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype34 = type_array__Arraykernel__Object.color;
+idtype35 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var33 = 0;
+} else {
+if(cltype34 >= var_listnode12->type->table_size) {
+var33 = 0;
+} else {
+var33 = var_listnode12->type->type_table[cltype34] == idtype35;
+}
+}
+if (unlikely(!var33)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2082);
+show_backtrace(1);
+}
+{
+var36 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var36;
+var37 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var38 = NULL;
+var39 = NULL;
+var40 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var37, var38, var39, var_listnode13, var40); /* Direct call parser_prod#AAnnotations#init_aannotations on <var37:AAnnotations>*/
+}
+var_pannotationsnode9 = var37;
+var_listnode17 = var_nodearraylist9;
+/* <var_listnode17:nullable Object> isa Array[Object] */
+cltype42 = type_array__Arraykernel__Object.color;
+idtype43 = type_array__Arraykernel__Object.id;
+if(var_listnode17 == NULL) {
+var41 = 0;
+} else {
+if(cltype42 >= var_listnode17->type->table_size) {
+var41 = 0;
+} else {
+var41 = var_listnode17->type->type_table[cltype42] == idtype43;
+}
+}
+if (unlikely(!var41)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2091);
+show_backtrace(1);
+}
+{
+var44 = parser_work__ReduceAction__concat(self, var_listnode18, var_listnode17);
+}
+var_listnode18 = var44;
+var_tkwendnode19 = var_nodearraylist11;
+/* <var_tkwendnode19:nullable Object> isa nullable TKwend */
+cltype46 = type_nullable_parser_nodes__TKwend.color;
+idtype47 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode19 == NULL) {
+var45 = 1;
+} else {
+if(cltype46 >= var_tkwendnode19->type->table_size) {
+var45 = 0;
+} else {
+var45 = var_tkwendnode19->type->type_table[cltype46] == idtype47;
+}
+}
+if (unlikely(!var45)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2094);
+show_backtrace(1);
+}
+var48 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var49 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var48, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var49, var_listnode16, var_listnode18, var_tkwendnode19); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var48:AStdClassdef>*/
+}
+var_pclassdefnode1 = var48;
+var_node_list = var_pclassdefnode1;
+var50 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction35> */
+{
+var51 = parser_work__Parser__go_to(var_p, var50);
+}
+{
+parser_work__Parser__push(var_p, var51, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction35#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction35__action(val* self, val* p0) {
+parser__ReduceAction35__action(self, p0); /* Direct call parser#ReduceAction35#action on <self:Object(ReduceAction35)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction36#action for (self: ReduceAction36, Parser) */
+void parser__ReduceAction36__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var_pexterncodeblocknode10 /* var pexterncodeblocknode10: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+val* var38 /* : Array[Object] */;
+val* var_tkwendnode14 /* var tkwendnode14: nullable Object */;
+short int var39 /* : Bool */;
+int cltype40;
+int idtype41;
+val* var42 /* : AStdClassdef */;
+val* var43 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var44 /* : Int */;
+long var45 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode11 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode13 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2132);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2134);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2136);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2138);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2140);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2142);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var_pexterncodeblocknode10 = var_nodearraylist8;
+/* <var_pexterncodeblocknode10:nullable Object> isa nullable AExternCodeBlock */
+cltype33 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype34 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode10 == NULL) {
+var32 = 1;
+} else {
+if(cltype33 >= var_pexterncodeblocknode10->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_pexterncodeblocknode10->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2145);
+show_backtrace(1);
+}
+var_listnode12 = var_nodearraylist9;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype36 = type_array__Arraykernel__Object.color;
+idtype37 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var35 = 0;
+} else {
+if(cltype36 >= var_listnode12->type->table_size) {
+var35 = 0;
+} else {
+var35 = var_listnode12->type->type_table[cltype36] == idtype37;
+}
+}
+if (unlikely(!var35)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2147);
+show_backtrace(1);
+}
+{
+var38 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var38;
+var_tkwendnode14 = var_nodearraylist11;
+/* <var_tkwendnode14:nullable Object> isa nullable TKwend */
+cltype40 = type_nullable_parser_nodes__TKwend.color;
+idtype41 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode14 == NULL) {
+var39 = 1;
+} else {
+if(cltype40 >= var_tkwendnode14->type->table_size) {
+var39 = 0;
+} else {
+var39 = var_tkwendnode14->type->type_table[cltype40] == idtype41;
+}
+}
+if (unlikely(!var39)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2150);
+show_backtrace(1);
+}
+var42 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var43 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var42, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var43, var_pexterncodeblocknode10, var_listnode11, var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var42:AStdClassdef>*/
+}
+var_pclassdefnode1 = var42;
+var_node_list = var_pclassdefnode1;
+var44 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction36> */
+{
+var45 = parser_work__Parser__go_to(var_p, var44);
+}
+{
+parser_work__Parser__push(var_p, var45, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction36#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction36__action(val* self, val* p0) {
+parser__ReduceAction36__action(self, p0); /* Direct call parser#ReduceAction36#action on <self:Object(ReduceAction36)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction37#action for (self: ReduceAction37, Parser) */
+void parser__ReduceAction37__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist12 /* var nodearraylist12: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var12 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var13 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode16 /* var listnode16: Array[Object] */;
+val* var15 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var16 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var32 /* : Array[Object] */;
+val* var33 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var34 /* : Bool */;
+int cltype35;
+int idtype36;
+val* var37 /* : Array[Object] */;
+val* var38 /* : AAnnotations */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var41 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_pexterncodeblocknode15 /* var pexterncodeblocknode15: nullable Object */;
+short int var42 /* : Bool */;
+int cltype43;
+int idtype44;
+val* var_listnode17 /* var listnode17: nullable Object */;
+short int var45 /* : Bool */;
+int cltype46;
+int idtype47;
+val* var48 /* : Array[Object] */;
+val* var_tkwendnode19 /* var tkwendnode19: nullable Object */;
+short int var49 /* : Bool */;
+int cltype50;
+int idtype51;
+val* var52 /* : AStdClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var53 /* : Int */;
+long var54 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist12 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var11;
+{
+var12 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode8 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode16 = var14;
+var15 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[Object]>*/
+}
+var_listnode18 = var15;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var16 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2189);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype18 = type_nullable_parser_nodes__TKwredef.color;
+idtype19 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwredefnode3->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwredefnode3->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2191);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype21 = type_nullable_parser_nodes__AVisibility.color;
+idtype22 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pvisibilitynode4->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pvisibilitynode4->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2193);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype24 = type_nullable_parser_nodes__AClasskind.color;
+idtype25 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pclasskindnode5->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pclasskindnode5->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2195);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype27 = type_nullable_parser_nodes__TClassid.color;
+idtype28 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_tclassidnode6->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_tclassidnode6->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2197);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype30 = type_array__Arraykernel__Object.color;
+idtype31 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var29 = 0;
+} else {
+if(cltype30 >= var_listnode7->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_listnode7->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2199);
+show_backtrace(1);
+}
+{
+var32 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var32;
+var33 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var33); /* Direct call array#Array#init on <var33:Array[Object]>*/
+}
+var_listnode13 = var33;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype35 = type_array__Arraykernel__Object.color;
+idtype36 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var34 = 0;
+} else {
+if(cltype35 >= var_listnode12->type->table_size) {
+var34 = 0;
+} else {
+var34 = var_listnode12->type->type_table[cltype35] == idtype36;
+}
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2203);
+show_backtrace(1);
+}
+{
+var37 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var37;
+var38 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var39 = NULL;
+var40 = NULL;
+var41 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var38, var39, var40, var_listnode13, var41); /* Direct call parser_prod#AAnnotations#init_aannotations on <var38:AAnnotations>*/
+}
+var_pannotationsnode9 = var38;
+var_pexterncodeblocknode15 = var_nodearraylist9;
+/* <var_pexterncodeblocknode15:nullable Object> isa nullable AExternCodeBlock */
+cltype43 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype44 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode15 == NULL) {
+var42 = 1;
+} else {
+if(cltype43 >= var_pexterncodeblocknode15->type->table_size) {
+var42 = 0;
+} else {
+var42 = var_pexterncodeblocknode15->type->type_table[cltype43] == idtype44;
+}
+}
+if (unlikely(!var42)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2212);
+show_backtrace(1);
+}
+var_listnode17 = var_nodearraylist10;
+/* <var_listnode17:nullable Object> isa Array[Object] */
+cltype46 = type_array__Arraykernel__Object.color;
+idtype47 = type_array__Arraykernel__Object.id;
+if(var_listnode17 == NULL) {
+var45 = 0;
+} else {
+if(cltype46 >= var_listnode17->type->table_size) {
+var45 = 0;
+} else {
+var45 = var_listnode17->type->type_table[cltype46] == idtype47;
+}
+}
+if (unlikely(!var45)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2214);
+show_backtrace(1);
+}
+{
+var48 = parser_work__ReduceAction__concat(self, var_listnode18, var_listnode17);
+}
+var_listnode18 = var48;
+var_tkwendnode19 = var_nodearraylist12;
+/* <var_tkwendnode19:nullable Object> isa nullable TKwend */
+cltype50 = type_nullable_parser_nodes__TKwend.color;
+idtype51 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode19 == NULL) {
+var49 = 1;
+} else {
+if(cltype50 >= var_tkwendnode19->type->table_size) {
+var49 = 0;
+} else {
+var49 = var_tkwendnode19->type->type_table[cltype50] == idtype51;
+}
+}
+if (unlikely(!var49)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2217);
+show_backtrace(1);
+}
+var52 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+{
+parser_prod__AStdClassdef__init_astdclassdef(var52, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var_pexterncodeblocknode15, var_listnode16, var_listnode18, var_tkwendnode19); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var52:AStdClassdef>*/
+}
+var_pclassdefnode1 = var52;
+var_node_list = var_pclassdefnode1;
+var53 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction37> */
+{
+var54 = parser_work__Parser__go_to(var_p, var53);
+}
+{
+parser_work__Parser__push(var_p, var54, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction37#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction37__action(val* self, val* p0) {
+parser__ReduceAction37__action(self, p0); /* Direct call parser#ReduceAction37#action on <self:Object(ReduceAction37)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction38#action for (self: ReduceAction38, Parser) */
+void parser__ReduceAction38__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var12 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var13 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode14 /* var listnode14: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : Array[Object] */;
+val* var_listnode11 /* var listnode11: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var35 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: nullable Object */;
+short int var36 /* : Bool */;
+int cltype37;
+int idtype38;
+val* var39 /* : Array[Object] */;
+val* var_tkwendnode15 /* var tkwendnode15: nullable Object */;
+short int var40 /* : Bool */;
+int cltype41;
+int idtype42;
+val* var43 /* : AStdClassdef */;
+val* var44 /* : null */;
+val* var45 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var46 /* : Int */;
+long var47 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var12 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+}
+var_listnode8 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode12 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode14 = var14;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var15 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2255);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype17 = type_nullable_parser_nodes__TKwredef.color;
+idtype18 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwredefnode3->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwredefnode3->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2257);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype20 = type_nullable_parser_nodes__AVisibility.color;
+idtype21 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pvisibilitynode4->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pvisibilitynode4->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2259);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype23 = type_nullable_parser_nodes__AClasskind.color;
+idtype24 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pclasskindnode5->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pclasskindnode5->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2261);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype26 = type_nullable_parser_nodes__TClassid.color;
+idtype27 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_tclassidnode6->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_tclassidnode6->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2263);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype29 = type_array__Arraykernel__Object.color;
+idtype30 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var28 = 0;
+} else {
+if(cltype29 >= var_listnode7->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_listnode7->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2265);
+show_backtrace(1);
+}
+{
+var31 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var31;
+var_listnode11 = var_nodearraylist8;
+/* <var_listnode11:nullable Object> isa Array[Object] */
+cltype33 = type_array__Arraykernel__Object.color;
+idtype34 = type_array__Arraykernel__Object.id;
+if(var_listnode11 == NULL) {
+var32 = 0;
+} else {
+if(cltype33 >= var_listnode11->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_listnode11->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2268);
+show_backtrace(1);
+}
+{
+var35 = parser_work__ReduceAction__concat(self, var_listnode12, var_listnode11);
+}
+var_listnode12 = var35;
+var_listnode13 = var_nodearraylist9;
+/* <var_listnode13:nullable Object> isa Array[Object] */
+cltype37 = type_array__Arraykernel__Object.color;
+idtype38 = type_array__Arraykernel__Object.id;
+if(var_listnode13 == NULL) {
+var36 = 0;
+} else {
+if(cltype37 >= var_listnode13->type->table_size) {
+var36 = 0;
+} else {
+var36 = var_listnode13->type->type_table[cltype37] == idtype38;
+}
+}
+if (unlikely(!var36)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2271);
+show_backtrace(1);
+}
+{
+var39 = parser_work__ReduceAction__concat(self, var_listnode14, var_listnode13);
+}
+var_listnode14 = var39;
+var_tkwendnode15 = var_nodearraylist11;
+/* <var_tkwendnode15:nullable Object> isa nullable TKwend */
+cltype41 = type_nullable_parser_nodes__TKwend.color;
+idtype42 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode15 == NULL) {
+var40 = 1;
+} else {
+if(cltype41 >= var_tkwendnode15->type->table_size) {
+var40 = 0;
+} else {
+var40 = var_tkwendnode15->type->type_table[cltype41] == idtype42;
+}
+}
+if (unlikely(!var40)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2274);
+show_backtrace(1);
+}
+var43 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var44 = NULL;
+var45 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var43, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var44, var45, var_listnode12, var_listnode14, var_tkwendnode15); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var43:AStdClassdef>*/
+}
+var_pclassdefnode1 = var43;
+var_node_list = var_pclassdefnode1;
+var46 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction38> */
+{
+var47 = parser_work__Parser__go_to(var_p, var46);
+}
+{
+parser_work__Parser__push(var_p, var47, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction38#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction38__action(val* self, val* p0) {
+parser__ReduceAction38__action(self, p0); /* Direct call parser#ReduceAction38#action on <self:Object(ReduceAction38)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction39#action for (self: ReduceAction39, Parser) */
+void parser__ReduceAction39__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist12 /* var nodearraylist12: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var12 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var13 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var15 /* : Array[Object] */;
+val* var_listnode19 /* var listnode19: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var16 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var32 /* : Array[Object] */;
+val* var33 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var34 /* : Bool */;
+int cltype35;
+int idtype36;
+val* var37 /* : Array[Object] */;
+val* var38 /* : AAnnotations */;
+val* var39 /* : null */;
+val* var40 /* : null */;
+val* var41 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_listnode16 /* var listnode16: nullable Object */;
+short int var42 /* : Bool */;
+int cltype43;
+int idtype44;
+val* var45 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: nullable Object */;
+short int var46 /* : Bool */;
+int cltype47;
+int idtype48;
+val* var49 /* : Array[Object] */;
+val* var_tkwendnode20 /* var tkwendnode20: nullable Object */;
+short int var50 /* : Bool */;
+int cltype51;
+int idtype52;
+val* var53 /* : AStdClassdef */;
+val* var54 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var55 /* : Int */;
+long var56 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist12 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var11;
+{
+var12 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode8 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode17 = var14;
+var15 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[Object]>*/
+}
+var_listnode19 = var15;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var16 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2313);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype18 = type_nullable_parser_nodes__TKwredef.color;
+idtype19 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwredefnode3->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwredefnode3->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2315);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype21 = type_nullable_parser_nodes__AVisibility.color;
+idtype22 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pvisibilitynode4->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pvisibilitynode4->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2317);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype24 = type_nullable_parser_nodes__AClasskind.color;
+idtype25 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pclasskindnode5->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pclasskindnode5->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2319);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype27 = type_nullable_parser_nodes__TClassid.color;
+idtype28 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_tclassidnode6->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_tclassidnode6->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2321);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype30 = type_array__Arraykernel__Object.color;
+idtype31 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var29 = 0;
+} else {
+if(cltype30 >= var_listnode7->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_listnode7->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2323);
+show_backtrace(1);
+}
+{
+var32 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var32;
+var33 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var33); /* Direct call array#Array#init on <var33:Array[Object]>*/
+}
+var_listnode13 = var33;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype35 = type_array__Arraykernel__Object.color;
+idtype36 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var34 = 0;
+} else {
+if(cltype35 >= var_listnode12->type->table_size) {
+var34 = 0;
+} else {
+var34 = var_listnode12->type->type_table[cltype35] == idtype36;
+}
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2327);
+show_backtrace(1);
+}
+{
+var37 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var37;
+var38 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var39 = NULL;
+var40 = NULL;
+var41 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var38, var39, var40, var_listnode13, var41); /* Direct call parser_prod#AAnnotations#init_aannotations on <var38:AAnnotations>*/
+}
+var_pannotationsnode9 = var38;
+var_listnode16 = var_nodearraylist9;
+/* <var_listnode16:nullable Object> isa Array[Object] */
+cltype43 = type_array__Arraykernel__Object.color;
+idtype44 = type_array__Arraykernel__Object.id;
+if(var_listnode16 == NULL) {
+var42 = 0;
+} else {
+if(cltype43 >= var_listnode16->type->table_size) {
+var42 = 0;
+} else {
+var42 = var_listnode16->type->type_table[cltype43] == idtype44;
+}
+}
+if (unlikely(!var42)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2336);
+show_backtrace(1);
+}
+{
+var45 = parser_work__ReduceAction__concat(self, var_listnode17, var_listnode16);
+}
+var_listnode17 = var45;
+var_listnode18 = var_nodearraylist10;
+/* <var_listnode18:nullable Object> isa Array[Object] */
+cltype47 = type_array__Arraykernel__Object.color;
+idtype48 = type_array__Arraykernel__Object.id;
+if(var_listnode18 == NULL) {
+var46 = 0;
+} else {
+if(cltype47 >= var_listnode18->type->table_size) {
+var46 = 0;
+} else {
+var46 = var_listnode18->type->type_table[cltype47] == idtype48;
+}
+}
+if (unlikely(!var46)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2339);
+show_backtrace(1);
+}
+{
+var49 = parser_work__ReduceAction__concat(self, var_listnode19, var_listnode18);
+}
+var_listnode19 = var49;
+var_tkwendnode20 = var_nodearraylist12;
+/* <var_tkwendnode20:nullable Object> isa nullable TKwend */
+cltype51 = type_nullable_parser_nodes__TKwend.color;
+idtype52 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode20 == NULL) {
+var50 = 1;
+} else {
+if(cltype51 >= var_tkwendnode20->type->table_size) {
+var50 = 0;
+} else {
+var50 = var_tkwendnode20->type->type_table[cltype51] == idtype52;
+}
+}
+if (unlikely(!var50)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2342);
+show_backtrace(1);
+}
+var53 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var54 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var53, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var54, var_listnode17, var_listnode19, var_tkwendnode20); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var53:AStdClassdef>*/
+}
+var_pclassdefnode1 = var53;
+var_node_list = var_pclassdefnode1;
+var55 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction39> */
+{
+var56 = parser_work__Parser__go_to(var_p, var55);
+}
+{
+parser_work__Parser__push(var_p, var56, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction39#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction39__action(val* self, val* p0) {
+parser__ReduceAction39__action(self, p0); /* Direct call parser#ReduceAction39#action on <self:Object(ReduceAction39)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction40#action for (self: ReduceAction40, Parser) */
+void parser__ReduceAction40__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist12 /* var nodearraylist12: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var12 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var13 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var14 /* : Array[Object] */;
+val* var_listnode12 /* var listnode12: Array[Object] */;
+val* var15 /* : Array[Object] */;
+val* var_listnode14 /* var listnode14: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var16 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var32 /* : Array[Object] */;
+val* var_pexterncodeblocknode10 /* var pexterncodeblocknode10: nullable Object */;
+short int var33 /* : Bool */;
+int cltype34;
+int idtype35;
+val* var_listnode11 /* var listnode11: nullable Object */;
+short int var36 /* : Bool */;
+int cltype37;
+int idtype38;
+val* var39 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: nullable Object */;
+short int var40 /* : Bool */;
+int cltype41;
+int idtype42;
+val* var43 /* : Array[Object] */;
+val* var_tkwendnode15 /* var tkwendnode15: nullable Object */;
+short int var44 /* : Bool */;
+int cltype45;
+int idtype46;
+val* var47 /* : AStdClassdef */;
+val* var48 /* : null */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var49 /* : Int */;
+long var50 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist12 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var11;
+{
+var12 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var12;
+var13 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+}
+var_listnode8 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode12 = var14;
+var15 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[Object]>*/
+}
+var_listnode14 = var15;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var16 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2381);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype18 = type_nullable_parser_nodes__TKwredef.color;
+idtype19 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwredefnode3->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwredefnode3->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2383);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype21 = type_nullable_parser_nodes__AVisibility.color;
+idtype22 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pvisibilitynode4->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pvisibilitynode4->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2385);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype24 = type_nullable_parser_nodes__AClasskind.color;
+idtype25 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pclasskindnode5->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pclasskindnode5->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2387);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype27 = type_nullable_parser_nodes__TClassid.color;
+idtype28 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_tclassidnode6->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_tclassidnode6->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2389);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype30 = type_array__Arraykernel__Object.color;
+idtype31 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var29 = 0;
+} else {
+if(cltype30 >= var_listnode7->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_listnode7->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2391);
+show_backtrace(1);
+}
+{
+var32 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var32;
+var_pexterncodeblocknode10 = var_nodearraylist8;
+/* <var_pexterncodeblocknode10:nullable Object> isa nullable AExternCodeBlock */
+cltype34 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype35 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode10 == NULL) {
+var33 = 1;
+} else {
+if(cltype34 >= var_pexterncodeblocknode10->type->table_size) {
+var33 = 0;
+} else {
+var33 = var_pexterncodeblocknode10->type->type_table[cltype34] == idtype35;
+}
+}
+if (unlikely(!var33)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2394);
+show_backtrace(1);
+}
+var_listnode11 = var_nodearraylist9;
+/* <var_listnode11:nullable Object> isa Array[Object] */
+cltype37 = type_array__Arraykernel__Object.color;
+idtype38 = type_array__Arraykernel__Object.id;
+if(var_listnode11 == NULL) {
+var36 = 0;
+} else {
+if(cltype37 >= var_listnode11->type->table_size) {
+var36 = 0;
+} else {
+var36 = var_listnode11->type->type_table[cltype37] == idtype38;
+}
+}
+if (unlikely(!var36)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2396);
+show_backtrace(1);
+}
+{
+var39 = parser_work__ReduceAction__concat(self, var_listnode12, var_listnode11);
+}
+var_listnode12 = var39;
+var_listnode13 = var_nodearraylist10;
+/* <var_listnode13:nullable Object> isa Array[Object] */
+cltype41 = type_array__Arraykernel__Object.color;
+idtype42 = type_array__Arraykernel__Object.id;
+if(var_listnode13 == NULL) {
+var40 = 0;
+} else {
+if(cltype41 >= var_listnode13->type->table_size) {
+var40 = 0;
+} else {
+var40 = var_listnode13->type->type_table[cltype41] == idtype42;
+}
+}
+if (unlikely(!var40)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2399);
+show_backtrace(1);
+}
+{
+var43 = parser_work__ReduceAction__concat(self, var_listnode14, var_listnode13);
+}
+var_listnode14 = var43;
+var_tkwendnode15 = var_nodearraylist12;
+/* <var_tkwendnode15:nullable Object> isa nullable TKwend */
+cltype45 = type_nullable_parser_nodes__TKwend.color;
+idtype46 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode15 == NULL) {
+var44 = 1;
+} else {
+if(cltype45 >= var_tkwendnode15->type->table_size) {
+var44 = 0;
+} else {
+var44 = var_tkwendnode15->type->type_table[cltype45] == idtype46;
+}
+}
+if (unlikely(!var44)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2402);
+show_backtrace(1);
+}
+var47 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+var48 = NULL;
+{
+parser_prod__AStdClassdef__init_astdclassdef(var47, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var48, var_pexterncodeblocknode10, var_listnode12, var_listnode14, var_tkwendnode15); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var47:AStdClassdef>*/
+}
+var_pclassdefnode1 = var47;
+var_node_list = var_pclassdefnode1;
+var49 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction40> */
+{
+var50 = parser_work__Parser__go_to(var_p, var49);
+}
+{
+parser_work__Parser__push(var_p, var50, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction40#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction40__action(val* self, val* p0) {
+parser__ReduceAction40__action(self, p0); /* Direct call parser#ReduceAction40#action on <self:Object(ReduceAction40)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction41#action for (self: ReduceAction41, Parser) */
+void parser__ReduceAction41__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist13 /* var nodearraylist13: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist12 /* var nodearraylist12: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var12 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var13 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var14 /* : Array[Object] */;
+val* var_listnode8 /* var listnode8: Array[Object] */;
+val* var15 /* : Array[Object] */;
+val* var_listnode17 /* var listnode17: Array[Object] */;
+val* var16 /* : Array[Object] */;
+val* var_listnode19 /* var listnode19: Array[Object] */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var17 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_pclasskindnode5 /* var pclasskindnode5: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_tclassidnode6 /* var tclassidnode6: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var_listnode7 /* var listnode7: nullable Object */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+val* var33 /* : Array[Object] */;
+val* var34 /* : Array[Object] */;
+val* var_listnode13 /* var listnode13: Array[Object] */;
+val* var_listnode12 /* var listnode12: nullable Object */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+val* var38 /* : Array[Object] */;
+val* var39 /* : AAnnotations */;
+val* var40 /* : null */;
+val* var41 /* : null */;
+val* var42 /* : null */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable AAnnotations */;
+val* var_pexterncodeblocknode15 /* var pexterncodeblocknode15: nullable Object */;
+short int var43 /* : Bool */;
+int cltype44;
+int idtype45;
+val* var_listnode16 /* var listnode16: nullable Object */;
+short int var46 /* : Bool */;
+int cltype47;
+int idtype48;
+val* var49 /* : Array[Object] */;
+val* var_listnode18 /* var listnode18: nullable Object */;
+short int var50 /* : Bool */;
+int cltype51;
+int idtype52;
+val* var53 /* : Array[Object] */;
+val* var_tkwendnode20 /* var tkwendnode20: nullable Object */;
+short int var54 /* : Bool */;
+int cltype55;
+int idtype56;
+val* var57 /* : AStdClassdef */;
+val* var_pclassdefnode1 /* var pclassdefnode1: nullable AStdClassdef */;
+long var58 /* : Int */;
+long var59 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist13 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist12 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var11;
+{
+var12 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var12;
+{
+var13 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var13;
+var14 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+}
+var_listnode8 = var14;
+var15 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[Object]>*/
+}
+var_listnode17 = var15;
+var16 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var16); /* Direct call array#Array#init on <var16:Array[Object]>*/
+}
+var_listnode19 = var16;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var17 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2442);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype19 = type_nullable_parser_nodes__TKwredef.color;
+idtype20 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_tkwredefnode3->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_tkwredefnode3->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2444);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype22 = type_nullable_parser_nodes__AVisibility.color;
+idtype23 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pvisibilitynode4->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pvisibilitynode4->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2446);
+show_backtrace(1);
+}
+var_pclasskindnode5 = var_nodearraylist4;
+/* <var_pclasskindnode5:nullable Object> isa nullable AClasskind */
+cltype25 = type_nullable_parser_nodes__AClasskind.color;
+idtype26 = type_nullable_parser_nodes__AClasskind.id;
+if(var_pclasskindnode5 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_pclasskindnode5->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_pclasskindnode5->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2448);
+show_backtrace(1);
+}
+var_tclassidnode6 = var_nodearraylist6;
+/* <var_tclassidnode6:nullable Object> isa nullable TClassid */
+cltype28 = type_nullable_parser_nodes__TClassid.color;
+idtype29 = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode6 == NULL) {
+var27 = 1;
+} else {
+if(cltype28 >= var_tclassidnode6->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_tclassidnode6->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2450);
+show_backtrace(1);
+}
+var_listnode7 = var_nodearraylist7;
+/* <var_listnode7:nullable Object> isa Array[Object] */
+cltype31 = type_array__Arraykernel__Object.color;
+idtype32 = type_array__Arraykernel__Object.id;
+if(var_listnode7 == NULL) {
+var30 = 0;
+} else {
+if(cltype31 >= var_listnode7->type->table_size) {
+var30 = 0;
+} else {
+var30 = var_listnode7->type->type_table[cltype31] == idtype32;
+}
+}
+if (unlikely(!var30)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2452);
+show_backtrace(1);
+}
+{
+var33 = parser_work__ReduceAction__concat(self, var_listnode8, var_listnode7);
+}
+var_listnode8 = var33;
+var34 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var34); /* Direct call array#Array#init on <var34:Array[Object]>*/
+}
+var_listnode13 = var34;
+var_listnode12 = var_nodearraylist8;
+/* <var_listnode12:nullable Object> isa Array[Object] */
+cltype36 = type_array__Arraykernel__Object.color;
+idtype37 = type_array__Arraykernel__Object.id;
+if(var_listnode12 == NULL) {
+var35 = 0;
+} else {
+if(cltype36 >= var_listnode12->type->table_size) {
+var35 = 0;
+} else {
+var35 = var_listnode12->type->type_table[cltype36] == idtype37;
+}
+}
+if (unlikely(!var35)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2456);
+show_backtrace(1);
+}
+{
+var38 = parser_work__ReduceAction__concat(self, var_listnode13, var_listnode12);
+}
+var_listnode13 = var38;
+var39 = NEW_parser_nodes__AAnnotations(&type_parser_nodes__AAnnotations);
+var40 = NULL;
+var41 = NULL;
+var42 = NULL;
+{
+parser_prod__AAnnotations__init_aannotations(var39, var40, var41, var_listnode13, var42); /* Direct call parser_prod#AAnnotations#init_aannotations on <var39:AAnnotations>*/
+}
+var_pannotationsnode9 = var39;
+var_pexterncodeblocknode15 = var_nodearraylist9;
+/* <var_pexterncodeblocknode15:nullable Object> isa nullable AExternCodeBlock */
+cltype44 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype45 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode15 == NULL) {
+var43 = 1;
+} else {
+if(cltype44 >= var_pexterncodeblocknode15->type->table_size) {
+var43 = 0;
+} else {
+var43 = var_pexterncodeblocknode15->type->type_table[cltype44] == idtype45;
+}
+}
+if (unlikely(!var43)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2465);
+show_backtrace(1);
+}
+var_listnode16 = var_nodearraylist10;
+/* <var_listnode16:nullable Object> isa Array[Object] */
+cltype47 = type_array__Arraykernel__Object.color;
+idtype48 = type_array__Arraykernel__Object.id;
+if(var_listnode16 == NULL) {
+var46 = 0;
+} else {
+if(cltype47 >= var_listnode16->type->table_size) {
+var46 = 0;
+} else {
+var46 = var_listnode16->type->type_table[cltype47] == idtype48;
+}
+}
+if (unlikely(!var46)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2467);
+show_backtrace(1);
+}
+{
+var49 = parser_work__ReduceAction__concat(self, var_listnode17, var_listnode16);
+}
+var_listnode17 = var49;
+var_listnode18 = var_nodearraylist11;
+/* <var_listnode18:nullable Object> isa Array[Object] */
+cltype51 = type_array__Arraykernel__Object.color;
+idtype52 = type_array__Arraykernel__Object.id;
+if(var_listnode18 == NULL) {
+var50 = 0;
+} else {
+if(cltype51 >= var_listnode18->type->table_size) {
+var50 = 0;
+} else {
+var50 = var_listnode18->type->type_table[cltype51] == idtype52;
+}
+}
+if (unlikely(!var50)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2470);
+show_backtrace(1);
+}
+{
+var53 = parser_work__ReduceAction__concat(self, var_listnode19, var_listnode18);
+}
+var_listnode19 = var53;
+var_tkwendnode20 = var_nodearraylist13;
+/* <var_tkwendnode20:nullable Object> isa nullable TKwend */
+cltype55 = type_nullable_parser_nodes__TKwend.color;
+idtype56 = type_nullable_parser_nodes__TKwend.id;
+if(var_tkwendnode20 == NULL) {
+var54 = 1;
+} else {
+if(cltype55 >= var_tkwendnode20->type->table_size) {
+var54 = 0;
+} else {
+var54 = var_tkwendnode20->type->type_table[cltype55] == idtype56;
+}
+}
+if (unlikely(!var54)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2473);
+show_backtrace(1);
+}
+var57 = NEW_parser_nodes__AStdClassdef(&type_parser_nodes__AStdClassdef);
+{
+parser_prod__AStdClassdef__init_astdclassdef(var57, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_tclassidnode6, var_listnode8, var_pannotationsnode9, var_pexterncodeblocknode15, var_listnode17, var_listnode19, var_tkwendnode20); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var57:AStdClassdef>*/
+}
+var_pclassdefnode1 = var57;
+var_node_list = var_pclassdefnode1;
+var58 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction41> */
+{
+var59 = parser_work__Parser__go_to(var_p, var58);
+}
+{
+parser_work__Parser__push(var_p, var59, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction41#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction41__action(val* self, val* p0) {
+parser__ReduceAction41__action(self, p0); /* Direct call parser#ReduceAction41#action on <self:Object(ReduceAction41)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction43#action for (self: ReduceAction43, Parser) */
+void parser__ReduceAction43__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwredefnode1 /* var tkwredefnode1: nullable Object */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tkwredefnode1 = var_nodearraylist1;
+var_node_list = var_tkwredefnode1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction43> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction43#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction43__action(val* self, val* p0) {
+parser__ReduceAction43__action(self, p0); /* Direct call parser#ReduceAction43#action on <self:Object(ReduceAction43)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction44#action for (self: ReduceAction44, Parser) */
+void parser__ReduceAction44__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwclassnode2 /* var tkwclassnode2: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AConcreteClasskind */;
+val* var_pclasskindnode1 /* var pclasskindnode1: nullable AConcreteClasskind */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tkwclassnode2 = var_nodearraylist1;
+/* <var_tkwclassnode2:nullable Object> isa nullable TKwclass */
+cltype = type_nullable_parser_nodes__TKwclass.color;
+idtype = type_nullable_parser_nodes__TKwclass.id;
+if(var_tkwclassnode2 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_tkwclassnode2->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_tkwclassnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2509);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AConcreteClasskind(&type_parser_nodes__AConcreteClasskind);
+{
+parser_prod__AConcreteClasskind__init_aconcreteclasskind(var3, var_tkwclassnode2); /* Direct call parser_prod#AConcreteClasskind#init_aconcreteclasskind on <var3:AConcreteClasskind>*/
+}
+var_pclasskindnode1 = var3;
+var_node_list = var_pclasskindnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction44> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction44#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction44__action(val* self, val* p0) {
+parser__ReduceAction44__action(self, p0); /* Direct call parser#ReduceAction44#action on <self:Object(ReduceAction44)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction45#action for (self: ReduceAction45, Parser) */
+void parser__ReduceAction45__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwabstractnode2 /* var tkwabstractnode2: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwclassnode3 /* var tkwclassnode3: nullable Object */;
+short int var4 /* : Bool */;
+int cltype5;
+int idtype6;
+val* var7 /* : AAbstractClasskind */;
+val* var_pclasskindnode1 /* var pclasskindnode1: nullable AAbstractClasskind */;
+long var8 /* : Int */;
+long var9 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_tkwabstractnode2 = var_nodearraylist1;
+/* <var_tkwabstractnode2:nullable Object> isa nullable TKwabstract */
+cltype = type_nullable_parser_nodes__TKwabstract.color;
+idtype = type_nullable_parser_nodes__TKwabstract.id;
+if(var_tkwabstractnode2 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_tkwabstractnode2->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_tkwabstractnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2525);
+show_backtrace(1);
+}
+var_tkwclassnode3 = var_nodearraylist2;
+/* <var_tkwclassnode3:nullable Object> isa nullable TKwclass */
+cltype5 = type_nullable_parser_nodes__TKwclass.color;
+idtype6 = type_nullable_parser_nodes__TKwclass.id;
+if(var_tkwclassnode3 == NULL) {
+var4 = 1;
+} else {
+if(cltype5 >= var_tkwclassnode3->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_tkwclassnode3->type->type_table[cltype5] == idtype6;
+}
+}
+if (unlikely(!var4)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2527);
+show_backtrace(1);
+}
+var7 = NEW_parser_nodes__AAbstractClasskind(&type_parser_nodes__AAbstractClasskind);
+{
+parser_prod__AAbstractClasskind__init_aabstractclasskind(var7, var_tkwabstractnode2, var_tkwclassnode3); /* Direct call parser_prod#AAbstractClasskind#init_aabstractclasskind on <var7:AAbstractClasskind>*/
+}
+var_pclasskindnode1 = var7;
+var_node_list = var_pclasskindnode1;
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction45> */
+{
+var9 = parser_work__Parser__go_to(var_p, var8);
+}
+{
+parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction45#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction45__action(val* self, val* p0) {
+parser__ReduceAction45__action(self, p0); /* Direct call parser#ReduceAction45#action on <self:Object(ReduceAction45)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction46#action for (self: ReduceAction46, Parser) */
+void parser__ReduceAction46__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwinterfacenode2 /* var tkwinterfacenode2: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AInterfaceClasskind */;
+val* var_pclasskindnode1 /* var pclasskindnode1: nullable AInterfaceClasskind */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tkwinterfacenode2 = var_nodearraylist1;
+/* <var_tkwinterfacenode2:nullable Object> isa nullable TKwinterface */
+cltype = type_nullable_parser_nodes__TKwinterface.color;
+idtype = type_nullable_parser_nodes__TKwinterface.id;
+if(var_tkwinterfacenode2 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_tkwinterfacenode2->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_tkwinterfacenode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2543);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AInterfaceClasskind(&type_parser_nodes__AInterfaceClasskind);
+{
+parser_prod__AInterfaceClasskind__init_ainterfaceclasskind(var3, var_tkwinterfacenode2); /* Direct call parser_prod#AInterfaceClasskind#init_ainterfaceclasskind on <var3:AInterfaceClasskind>*/
+}
+var_pclasskindnode1 = var3;
+var_node_list = var_pclasskindnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction46> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction46#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction46__action(val* self, val* p0) {
+parser__ReduceAction46__action(self, p0); /* Direct call parser#ReduceAction46#action on <self:Object(ReduceAction46)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction47#action for (self: ReduceAction47, Parser) */
+void parser__ReduceAction47__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwenumnode2 /* var tkwenumnode2: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AEnumClasskind */;
+val* var_pclasskindnode1 /* var pclasskindnode1: nullable AEnumClasskind */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tkwenumnode2 = var_nodearraylist1;
+/* <var_tkwenumnode2:nullable Object> isa nullable TKwenum */
+cltype = type_nullable_parser_nodes__TKwenum.color;
+idtype = type_nullable_parser_nodes__TKwenum.id;
+if(var_tkwenumnode2 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_tkwenumnode2->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_tkwenumnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2558);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AEnumClasskind(&type_parser_nodes__AEnumClasskind);
+{
+parser_prod__AEnumClasskind__init_aenumclasskind(var3, var_tkwenumnode2); /* Direct call parser_prod#AEnumClasskind#init_aenumclasskind on <var3:AEnumClasskind>*/
+}
+var_pclasskindnode1 = var3;
+var_node_list = var_pclasskindnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction47> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction47#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction47__action(val* self, val* p0) {
+parser__ReduceAction47__action(self, p0); /* Direct call parser#ReduceAction47#action on <self:Object(ReduceAction47)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction48#action for (self: ReduceAction48, Parser) */
+void parser__ReduceAction48__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwexternnode2 /* var tkwexternnode2: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwclassnode3 /* var tkwclassnode3: nullable Object */;
+short int var4 /* : Bool */;
+int cltype5;
+int idtype6;
+val* var7 /* : AExternClasskind */;
+val* var_pclasskindnode1 /* var pclasskindnode1: nullable AExternClasskind */;
+long var8 /* : Int */;
+long var9 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_tkwexternnode2 = var_nodearraylist1;
+/* <var_tkwexternnode2:nullable Object> isa nullable TKwextern */
+cltype = type_nullable_parser_nodes__TKwextern.color;
+idtype = type_nullable_parser_nodes__TKwextern.id;
+if(var_tkwexternnode2 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_tkwexternnode2->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_tkwexternnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2574);
+show_backtrace(1);
+}
+var_tkwclassnode3 = var_nodearraylist2;
+/* <var_tkwclassnode3:nullable Object> isa nullable TKwclass */
+cltype5 = type_nullable_parser_nodes__TKwclass.color;
+idtype6 = type_nullable_parser_nodes__TKwclass.id;
+if(var_tkwclassnode3 == NULL) {
+var4 = 1;
+} else {
+if(cltype5 >= var_tkwclassnode3->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_tkwclassnode3->type->type_table[cltype5] == idtype6;
+}
+}
+if (unlikely(!var4)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2576);
+show_backtrace(1);
+}
+var7 = NEW_parser_nodes__AExternClasskind(&type_parser_nodes__AExternClasskind);
+{
+parser_prod__AExternClasskind__init_aexternclasskind(var7, var_tkwexternnode2, var_tkwclassnode3); /* Direct call parser_prod#AExternClasskind#init_aexternclasskind on <var7:AExternClasskind>*/
+}
+var_pclasskindnode1 = var7;
+var_node_list = var_pclasskindnode1;
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction48> */
+{
+var9 = parser_work__Parser__go_to(var_p, var8);
+}
+{
+parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction48#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction48__action(val* self, val* p0) {
+parser__ReduceAction48__action(self, p0); /* Direct call parser#ReduceAction48#action on <self:Object(ReduceAction48)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction49#action for (self: ReduceAction49, Parser) */
+void parser__ReduceAction49__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var6 /* : Array[Object] */;
+val* var_listnode2 /* var listnode2: Array[Object] */;
+val* var_pformaldefnode1 /* var pformaldefnode1: nullable Object */;
+val* var7 /* : null */;
+short int var8 /* : Bool */;
+short int var9 /* : Bool */;
+long var10 /* : Int */;
+long var11 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var5;
+var6 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+}
+var_listnode2 = var6;
+var_pformaldefnode1 = var_nodearraylist3;
+var7 = NULL;
+if (var_pformaldefnode1 == NULL) {
+var8 = 0; /* is null */
+} else {
+var8 = 1; /* arg is null and recv is not */
+}
+if (0) {
+var9 = ((short int (*)(val*, val*))(var_pformaldefnode1->class->vft[COLOR_kernel__Object___33d_61d]))(var_pformaldefnode1, var7) /* != on <var_pformaldefnode1:nullable Object>*/;
+var8 = var9;
+}
+if (var8){
+{
+array__Array__add(var_listnode2, var_pformaldefnode1); /* Direct call array#Array#add on <var_listnode2:Array[Object]>*/
+}
 } else {
 }
+var_node_list = var_listnode2;
+var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction49> */
+{
+var11 = parser_work__Parser__go_to(var_p, var10);
+}
+{
+parser_work__Parser__push(var_p, var11, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction49#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction49__action(val* self, val* p0) {
+parser__ReduceAction49__action(self, p0); /* Direct call parser#ReduceAction49#action on <self:Object(ReduceAction49)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction50#action for (self: ReduceAction50, Parser) */
+void parser__ReduceAction50__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var7 /* : Array[Object] */;
+val* var_listnode3 /* var listnode3: Array[Object] */;
+val* var_pformaldefnode1 /* var pformaldefnode1: nullable Object */;
+val* var_listnode2 /* var listnode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var9 /* : null */;
+short int var10 /* : Bool */;
+short int var11 /* : Bool */;
+val* var12 /* : Array[Object] */;
+long var13 /* : Int */;
+long var14 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var6;
+var7 = NEW_array__Array(&type_array__Arraykernel__Object);
+{
+array__Array__init(var7); /* Direct call array#Array#init on <var7:Array[Object]>*/
+}
+var_listnode3 = var7;
+var_pformaldefnode1 = var_nodearraylist3;
+var_listnode2 = var_nodearraylist4;
+/* <var_listnode2:nullable Object> isa Array[Object] */
+cltype = type_array__Arraykernel__Object.color;
+idtype = type_array__Arraykernel__Object.id;
+if(var_listnode2 == NULL) {
+var8 = 0;
 } else {
-var59 = self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (var59 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1790);
+if(cltype >= var_listnode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_listnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2618);
 show_backtrace(1);
 }
-((void (*)(val*, val*))(var59->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var59, var_n) /* add on <var59:Array[Prod]>*/;
+var9 = NULL;
+if (var_pformaldefnode1 == NULL) {
+var10 = 0; /* is null */
+} else {
+var10 = 1; /* arg is null and recv is not */
 }
+if (0) {
+var11 = ((short int (*)(val*, val*))(var_pformaldefnode1->class->vft[COLOR_kernel__Object___33d_61d]))(var_pformaldefnode1, var9) /* != on <var_pformaldefnode1:nullable Object>*/;
+var10 = var11;
 }
-RET_LABEL:;
+if (var10){
+{
+array__Array__add(var_listnode3, var_pformaldefnode1); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
 }
-/* method parser#ComputeProdLocationVisitor#visit for (self: Object, ANode) */
-void VIRTUAL_parser__ComputeProdLocationVisitor__visit(val* self, val* p0) {
-parser__ComputeProdLocationVisitor__visit(self, p0);
-RET_LABEL:;
-}
-/* method parser#ComputeProdLocationVisitor#init for (self: ComputeProdLocationVisitor) */
-void parser__ComputeProdLocationVisitor__init(val* self) {
-((void (*)(val*))(self->class->vft[COLOR_parser_nodes__Visitor__init]))(self) /* init on <self:ComputeProdLocationVisitor>*/;
-RET_LABEL:;
-}
-/* method parser#ComputeProdLocationVisitor#init for (self: Object) */
-void VIRTUAL_parser__ComputeProdLocationVisitor__init(val* self) {
-parser__ComputeProdLocationVisitor__init(self);
-RET_LABEL:;
-}
-/* method parser#ReduceAction#action for (self: ReduceAction, Parser) */
-void parser__ReduceAction__action(val* self, val* p0) {
-const char* var_class_name;
-var_class_name = self == NULL ? "null" : self->type->name;
-fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "action", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1800);
-show_backtrace(1);
-RET_LABEL:;
-}
-/* method parser#ReduceAction#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction__action(val* self, val* p0) {
-parser__ReduceAction__action(self, p0);
-RET_LABEL:;
-}
-/* method parser#ReduceAction#concat for (self: ReduceAction, Array[Object], Array[Object]): Array[Object] */
-val* parser__ReduceAction__concat(val* self, val* p0, val* p1) {
-val* var /* : Array[Object] */;
-val* var_l1 /* var l1: Array[Object] */;
-val* var_l2 /* var l2: Array[Object] */;
-short int var1 /* : Bool */;
-var_l1 = p0;
-var_l2 = p1;
-var1 = ((short int (*)(val*))(var_l1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_l1) /* is_empty on <var_l1:Array[Object]>*/;
-if (var1){
-var = var_l2;
-goto RET_LABEL;
 } else {
 }
-((void (*)(val*, val*))(var_l1->class->vft[COLOR_abstract_collection__Sequence__append]))(var_l1, var_l2) /* append on <var_l1:Array[Object]>*/;
-var = var_l1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
+{
+var12 = parser_work__ReduceAction__concat(self, var_listnode3, var_listnode2);
 }
-/* method parser#ReduceAction#concat for (self: Object, Array[Object], Array[Object]): Array[Object] */
-val* VIRTUAL_parser__ReduceAction__concat(val* self, val* p0, val* p1) {
-val* var /* : Array[Object] */;
-val* var1 /* : Array[Object] */;
-var1 = parser__ReduceAction__concat(self, p0, p1);
-var = var1;
-RET_LABEL:;
-return var;
+var_listnode3 = var12;
+var_node_list = var_listnode3;
+var13 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction50> */
+{
+var14 = parser_work__Parser__go_to(var_p, var13);
 }
-/* method parser#ReduceAction#init for (self: ReduceAction, Int) */
-void parser__ReduceAction__init(val* self, long p0) {
-long var_g /* var g: Int */;
-var_g = p0;
-self->attrs[COLOR_parser__ReduceAction___goto].l = var_g; /* _goto on <self:ReduceAction> */
+{
+parser_work__Parser__push(var_p, var14, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
 RET_LABEL:;
 }
-/* method parser#ReduceAction#init for (self: Object, Int) */
-void VIRTUAL_parser__ReduceAction__init(val* self, long p0) {
-parser__ReduceAction__init(self, p0);
+/* method parser#ReduceAction50#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction50__action(val* self, val* p0) {
+parser__ReduceAction50__action(self, p0); /* Direct call parser#ReduceAction50#action on <self:Object(ReduceAction50)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction0#action for (self: ReduceAction0, Parser) */
-void parser__ReduceAction0__action(val* self, val* p0) {
+/* method parser#ReduceAction51#action for (self: ReduceAction51, Parser) */
+void parser__ReduceAction51__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : Array[Object] */;
-val* var_listnode3 /* var listnode3: Array[Object] */;
-val* var2 /* : Array[Object] */;
-val* var_listnode4 /* var listnode4: Array[Object] */;
-val* var3 /* : Array[Object] */;
-val* var_listnode5 /* var listnode5: Array[Object] */;
-val* var4 /* : AModule */;
-val* var5 /* : null */;
-val* var_pmodulenode1 /* var pmodulenode1: nullable AModule */;
-long var6 /* : Int */;
-long var7 /* : Int */;
+val* var_listnode1 /* var listnode1: Array[Object] */;
+long var2 /* : Int */;
+long var3 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[Object]>*/;
-var_listnode3 = var1;
-var2 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[Object]>*/;
-var_listnode4 = var2;
-var3 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[Object]>*/;
-var_listnode5 = var3;
-var4 = NEW_parser_nodes__AModule(&type_parser_nodes__AModule);
-var5 = NULL;
-((void (*)(val*, val*, val*, val*, val*))(var4->class->vft[COLOR_parser_prod__AModule__init_amodule]))(var4, var5, var_listnode3, var_listnode4, var_listnode5) /* init_amodule on <var4:AModule>*/;
-var_pmodulenode1 = var4;
-var_node_list = var_pmodulenode1;
-var6 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction0> */
-var7 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var6) /* go_to on <var_p:Parser>*/;
-((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var7, var_node_list) /* push on <var_p:Parser>*/;
+{
+array__Array__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+}
+var_listnode1 = var1;
+var_node_list = var_listnode1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction51> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
 RET_LABEL:;
 }
-/* method parser#ReduceAction0#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction0__action(val* self, val* p0) {
-parser__ReduceAction0__action(self, p0);
+/* method parser#ReduceAction51#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction51__action(val* self, val* p0) {
+parser__ReduceAction51__action(self, p0); /* Direct call parser#ReduceAction51#action on <self:Object(ReduceAction51)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction1#action for (self: ReduceAction1, Parser) */
-void parser__ReduceAction1__action(val* self, val* p0) {
+/* method parser#ReduceAction52#action for (self: ReduceAction52, Parser) */
+void parser__ReduceAction52__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var3 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var2 /* : Array[Object] */;
-val* var_listnode3 /* var listnode3: Array[Object] */;
-val* var3 /* : Array[Object] */;
-val* var_listnode4 /* var listnode4: Array[Object] */;
-val* var4 /* : Array[Object] */;
-val* var_listnode5 /* var listnode5: Array[Object] */;
-val* var_pmoduledeclnode2 /* var pmoduledeclnode2: nullable Object */;
-short int var5 /* : Bool */;
-int cltype;
-int idtype;
-val* var6 /* : AModule */;
-val* var_pmodulenode1 /* var pmodulenode1: nullable AModule */;
-long var7 /* : Int */;
-long var8 /* : Int */;
+val* var_pformaldefnode1 /* var pformaldefnode1: nullable Object */;
+long var4 /* : Int */;
+long var5 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
-var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
-var_nodearraylist1 = var1;
-var2 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[Object]>*/;
-var_listnode3 = var2;
-var3 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[Object]>*/;
-var_listnode4 = var3;
-var4 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var4->class->vft[COLOR_array__Array__init]))(var4) /* init on <var4:Array[Object]>*/;
-var_listnode5 = var4;
-var_pmoduledeclnode2 = var_nodearraylist1;
-/* <var_pmoduledeclnode2:nullable Object> isa nullable AModuledecl */
-cltype = type_nullable_parser_nodes__AModuledecl.color;
-idtype = type_nullable_parser_nodes__AModuledecl.id;
-if(var_pmoduledeclnode2 == NULL) {
-var5 = 1;
-} else {
-if(cltype >= var_pmoduledeclnode2->type->table_size) {
-var5 = 0;
-} else {
-var5 = var_pmoduledeclnode2->type->type_table[cltype] == idtype;
+{
+var1 = parser_work__Parser__pop(var_p);
 }
+var_nodearraylist3 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
 }
-if (!var5) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1839);
-show_backtrace(1);
+var_nodearraylist2 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
 }
-var6 = NEW_parser_nodes__AModule(&type_parser_nodes__AModule);
-((void (*)(val*, val*, val*, val*, val*))(var6->class->vft[COLOR_parser_prod__AModule__init_amodule]))(var6, var_pmoduledeclnode2, var_listnode3, var_listnode4, var_listnode5) /* init_amodule on <var6:AModule>*/;
-var_pmodulenode1 = var6;
-var_node_list = var_pmodulenode1;
-var7 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1> */
-var8 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var7) /* go_to on <var_p:Parser>*/;
-((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var8, var_node_list) /* push on <var_p:Parser>*/;
+var_nodearraylist1 = var3;
+var_pformaldefnode1 = var_nodearraylist3;
+var_node_list = var_pformaldefnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction52> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
 RET_LABEL:;
 }
-/* method parser#ReduceAction1#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction1__action(val* self, val* p0) {
-parser__ReduceAction1__action(self, p0);
+/* method parser#ReduceAction52#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction52__action(val* self, val* p0) {
+parser__ReduceAction52__action(self, p0); /* Direct call parser#ReduceAction52#action on <self:Object(ReduceAction52)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction2#action for (self: ReduceAction2, Parser) */
-void parser__ReduceAction2__action(val* self, val* p0) {
+/* method parser#ReduceAction53#action for (self: ReduceAction53, Parser) */
+void parser__ReduceAction53__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var2 /* : Array[Object] */;
-val* var_listnode4 /* var listnode4: Array[Object] */;
-val* var3 /* : Array[Object] */;
-val* var_listnode5 /* var listnode5: Array[Object] */;
-val* var4 /* : Array[Object] */;
-val* var_listnode6 /* var listnode6: Array[Object] */;
-val* var_listnode3 /* var listnode3: nullable Object */;
-short int var5 /* : Bool */;
+val* var_tclassidnode2 /* var tclassidnode2: nullable Object */;
+short int var3 /* : Bool */;
 int cltype;
 int idtype;
-val* var6 /* : Array[Object] */;
-val* var7 /* : AModule */;
+val* var_ptypenode3 /* var ptypenode3: nullable Object */;
+short int var4 /* : Bool */;
+int cltype5;
+int idtype6;
+val* var7 /* : AFormaldef */;
 val* var8 /* : null */;
-val* var_pmodulenode1 /* var pmodulenode1: nullable AModule */;
+val* var_pformaldefnode1 /* var pformaldefnode1: nullable AFormaldef */;
 long var9 /* : Int */;
 long var10 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
-var1 = ((val* (*)(val*))(var_p->class->vft[COLOR_parser__Parser__pop]))(var_p) /* pop on <var_p:Parser>*/;
-var_nodearraylist1 = var1;
-var2 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[Object]>*/;
-var_listnode4 = var2;
-var3 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[Object]>*/;
-var_listnode5 = var3;
-var4 = NEW_array__Array(&type_array__Arraykernel__Object);
-((void (*)(val*))(var4->class->vft[COLOR_array__Array__init]))(var4) /* init on <var4:Array[Object]>*/;
-var_listnode6 = var4;
-var_listnode3 = var_nodearraylist1;
-/* <var_listnode3:nullable Object> isa Array[Object] */
-cltype = type_array__Arraykernel__Object.color;
-idtype = type_array__Arraykernel__Object.id;
-if(var_listnode3 == NULL) {
-var5 = 0;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_tclassidnode2 = var_nodearraylist1;
+/* <var_tclassidnode2:nullable Object> isa nullable TClassid */
+cltype = type_nullable_parser_nodes__TClassid.color;
+idtype = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode2 == NULL) {
+var3 = 1;
 } else {
-if(cltype >= var_listnode3->type->table_size) {
-var5 = 0;
+if(cltype >= var_tclassidnode2->type->table_size) {
+var3 = 0;
 } else {
-var5 = var_listnode3->type->type_table[cltype] == idtype;
+var3 = var_tclassidnode2->type->type_table[cltype] == idtype;
 }
 }
-if (!var5) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 1860);
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2658);
 show_backtrace(1);
 }
-var6 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_parser__ReduceAction__concat]))(self, var_listnode4, var_listnode3) /* concat on <self:ReduceAction2>*/;
-var_listnode4 = var6;
-var7 = NEW_parser_nodes__AModule(&type_parser_nodes__AModule);
+var_ptypenode3 = var_nodearraylist2;
+/* <var_ptypenode3:nullable Object> isa nullable AType */
+cltype5 = type_nullable_parser_nodes__AType.color;
+idtype6 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode3 == NULL) {
+var4 = 1;
+} else {
+if(cltype5 >= var_ptypenode3->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_ptypenode3->type->type_table[cltype5] == idtype6;
+}
+}
+if (unlikely(!var4)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2660);
+show_backtrace(1);
+}
+var7 = NEW_parser_nodes__AFormaldef(&type_parser_nodes__AFormaldef);
 var8 = NULL;
-((void (*)(val*, val*, val*, val*, val*))(var7->class->vft[COLOR_parser_prod__AModule__init_amodule]))(var7, var8, var_listnode4, var_listnode5, var_listnode6) /* init_amodule on <var7:AModule>*/;
-var_pmodulenode1 = var7;
-var_node_list = var_pmodulenode1;
-var9 = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction2> */
-var10 = ((long (*)(val*, long))(var_p->class->vft[COLOR_parser__Parser__go_to]))(var_p, var9) /* go_to on <var_p:Parser>*/;
-((void (*)(val*, long, val*))(var_p->class->vft[COLOR_parser__Parser__push]))(var_p, var10, var_node_list) /* push on <var_p:Parser>*/;
+{
+parser_prod__AFormaldef__init_aformaldef(var7, var_tclassidnode2, var_ptypenode3, var8); /* Direct call parser_prod#AFormaldef#init_aformaldef on <var7:AFormaldef>*/
+}
+var_pformaldefnode1 = var7;
+var_node_list = var_pformaldefnode1;
+var9 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction53> */
+{
+var10 = parser_work__Parser__go_to(var_p, var9);
+}
+{
+parser_work__Parser__push(var_p, var10, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
 RET_LABEL:;
 }
-/* method parser#ReduceAction2#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction2__action(val* self, val* p0) {
-parser__ReduceAction2__action(self, p0);
+/* method parser#ReduceAction53#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction53__action(val* self, val* p0) {
+parser__ReduceAction53__action(self, p0); /* Direct call parser#ReduceAction53#action on <self:Object(ReduceAction53)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction54#action for (self: ReduceAction54, Parser) */
+void parser__ReduceAction54__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tclassidnode2 /* var tclassidnode2: nullable Object */;
+short int var4 /* : Bool */;
+int cltype;
+int idtype;
+val* var_ptypenode3 /* var ptypenode3: nullable Object */;
+short int var5 /* : Bool */;
+int cltype6;
+int idtype7;
+val* var_pannotationsnode4 /* var pannotationsnode4: nullable Object */;
+short int var8 /* : Bool */;
+int cltype9;
+int idtype10;
+val* var11 /* : AFormaldef */;
+val* var_pformaldefnode1 /* var pformaldefnode1: nullable AFormaldef */;
+long var12 /* : Int */;
+long var13 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var3;
+var_tclassidnode2 = var_nodearraylist1;
+/* <var_tclassidnode2:nullable Object> isa nullable TClassid */
+cltype = type_nullable_parser_nodes__TClassid.color;
+idtype = type_nullable_parser_nodes__TClassid.id;
+if(var_tclassidnode2 == NULL) {
+var4 = 1;
+} else {
+if(cltype >= var_tclassidnode2->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_tclassidnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var4)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2679);
+show_backtrace(1);
+}
+var_ptypenode3 = var_nodearraylist3;
+/* <var_ptypenode3:nullable Object> isa nullable AType */
+cltype6 = type_nullable_parser_nodes__AType.color;
+idtype7 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode3 == NULL) {
+var5 = 1;
+} else {
+if(cltype6 >= var_ptypenode3->type->table_size) {
+var5 = 0;
+} else {
+var5 = var_ptypenode3->type->type_table[cltype6] == idtype7;
+}
+}
+if (unlikely(!var5)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2681);
+show_backtrace(1);
+}
+var_pannotationsnode4 = var_nodearraylist2;
+/* <var_pannotationsnode4:nullable Object> isa nullable AAnnotations */
+cltype9 = type_nullable_parser_nodes__AAnnotations.color;
+idtype10 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode4 == NULL) {
+var8 = 1;
+} else {
+if(cltype9 >= var_pannotationsnode4->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pannotationsnode4->type->type_table[cltype9] == idtype10;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2683);
+show_backtrace(1);
+}
+var11 = NEW_parser_nodes__AFormaldef(&type_parser_nodes__AFormaldef);
+{
+parser_prod__AFormaldef__init_aformaldef(var11, var_tclassidnode2, var_ptypenode3, var_pannotationsnode4); /* Direct call parser_prod#AFormaldef#init_aformaldef on <var11:AFormaldef>*/
+}
+var_pformaldefnode1 = var11;
+var_node_list = var_pformaldefnode1;
+var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction54> */
+{
+var13 = parser_work__Parser__go_to(var_p, var12);
+}
+{
+parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction54#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction54__action(val* self, val* p0) {
+parser__ReduceAction54__action(self, p0); /* Direct call parser#ReduceAction54#action on <self:Object(ReduceAction54)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction55#action for (self: ReduceAction55, Parser) */
+void parser__ReduceAction55__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwsupernode2 /* var tkwsupernode2: nullable Object */;
+short int var6 /* : Bool */;
+int cltype;
+int idtype;
+val* var_ptypenode3 /* var ptypenode3: nullable Object */;
+short int var7 /* : Bool */;
+int cltype8;
+int idtype9;
+val* var_pannotationsnode4 /* var pannotationsnode4: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var13 /* : ASuperclass */;
+val* var_psuperclassnode1 /* var psuperclassnode1: nullable ASuperclass */;
+long var14 /* : Int */;
+long var15 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var5;
+var_tkwsupernode2 = var_nodearraylist2;
+/* <var_tkwsupernode2:nullable Object> isa nullable TKwsuper */
+cltype = type_nullable_parser_nodes__TKwsuper.color;
+idtype = type_nullable_parser_nodes__TKwsuper.id;
+if(var_tkwsupernode2 == NULL) {
+var6 = 1;
+} else {
+if(cltype >= var_tkwsupernode2->type->table_size) {
+var6 = 0;
+} else {
+var6 = var_tkwsupernode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var6)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2704);
+show_backtrace(1);
+}
+var_ptypenode3 = var_nodearraylist4;
+/* <var_ptypenode3:nullable Object> isa nullable AType */
+cltype8 = type_nullable_parser_nodes__AType.color;
+idtype9 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode3 == NULL) {
+var7 = 1;
+} else {
+if(cltype8 >= var_ptypenode3->type->table_size) {
+var7 = 0;
+} else {
+var7 = var_ptypenode3->type->type_table[cltype8] == idtype9;
+}
+}
+if (unlikely(!var7)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2706);
+show_backtrace(1);
+}
+var_pannotationsnode4 = var_nodearraylist5;
+/* <var_pannotationsnode4:nullable Object> isa nullable AAnnotations */
+cltype11 = type_nullable_parser_nodes__AAnnotations.color;
+idtype12 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode4 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_pannotationsnode4->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pannotationsnode4->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2708);
+show_backtrace(1);
+}
+var13 = NEW_parser_nodes__ASuperclass(&type_parser_nodes__ASuperclass);
+{
+parser_prod__ASuperclass__init_asuperclass(var13, var_tkwsupernode2, var_ptypenode3, var_pannotationsnode4); /* Direct call parser_prod#ASuperclass#init_asuperclass on <var13:ASuperclass>*/
+}
+var_psuperclassnode1 = var13;
+var_node_list = var_psuperclassnode1;
+var14 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction55> */
+{
+var15 = parser_work__Parser__go_to(var_p, var14);
+}
+{
+parser_work__Parser__push(var_p, var15, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction55#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction55__action(val* self, val* p0) {
+parser__ReduceAction55__action(self, p0); /* Direct call parser#ReduceAction55#action on <self:Object(ReduceAction55)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction56#action for (self: ReduceAction56, Parser) */
+void parser__ReduceAction56__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable Object */;
+long var3 /* : Int */;
+long var4 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_ppropdefnode1 = var_nodearraylist1;
+var_node_list = var_ppropdefnode1;
+var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction56> */
+{
+var4 = parser_work__Parser__go_to(var_p, var3);
+}
+{
+parser_work__Parser__push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction56#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction56__action(val* self, val* p0) {
+parser__ReduceAction56__action(self, p0); /* Direct call parser#ReduceAction56#action on <self:Object(ReduceAction56)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction57#action for (self: ReduceAction57, Parser) */
+void parser__ReduceAction57__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode9 /* var pexprnode9: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AConcreteMethPropdef */;
+val* var30 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteMethPropdef */;
+long var31 /* : Int */;
+long var32 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2745);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2747);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2749);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype18 = type_nullable_parser_nodes__TKwmeth.color;
+idtype19 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwmethnode5->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwmethnode5->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2751);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype21 = type_nullable_parser_nodes__AMethid.color;
+idtype22 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pmethidnode6->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2753);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype24 = type_nullable_parser_nodes__ASignature.color;
+idtype25 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_psignaturenode7->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2755);
+show_backtrace(1);
+}
+var_pexprnode9 = var_nodearraylist8;
+/* <var_pexprnode9:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode9 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pexprnode9->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pexprnode9->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2757);
+show_backtrace(1);
+}
+var29 = NEW_parser_nodes__AConcreteMethPropdef(&type_parser_nodes__AConcreteMethPropdef);
+var30 = NULL;
+{
+parser_prod__AConcreteMethPropdef__init_aconcretemethpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var30, var_pexprnode9); /* Direct call parser_prod#AConcreteMethPropdef#init_aconcretemethpropdef on <var29:AConcreteMethPropdef>*/
+}
+var_ppropdefnode1 = var29;
+var_node_list = var_ppropdefnode1;
+var31 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction57> */
+{
+var32 = parser_work__Parser__go_to(var_p, var31);
+}
+{
+parser_work__Parser__push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction57#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction57__action(val* self, val* p0) {
+parser__ReduceAction57__action(self, p0); /* Direct call parser#ReduceAction57#action on <self:Object(ReduceAction57)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction58#action for (self: ReduceAction58, Parser) */
+void parser__ReduceAction58__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var11 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var_pexprnode9 /* var pexprnode9: nullable Object */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+val* var33 /* : AConcreteMethPropdef */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteMethPropdef */;
+long var34 /* : Int */;
+long var35 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var11 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2788);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype13 = type_nullable_parser_nodes__TKwredef.color;
+idtype14 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_tkwredefnode3->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2790);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype16 = type_nullable_parser_nodes__AVisibility.color;
+idtype17 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_pvisibilitynode4->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2792);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype19 = type_nullable_parser_nodes__TKwmeth.color;
+idtype20 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_tkwmethnode5->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_tkwmethnode5->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2794);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype22 = type_nullable_parser_nodes__AMethid.color;
+idtype23 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_pmethidnode6->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_pmethidnode6->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2796);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype25 = type_nullable_parser_nodes__ASignature.color;
+idtype26 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_psignaturenode7->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_psignaturenode7->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2798);
+show_backtrace(1);
+}
+var_pannotationsnode8 = var_nodearraylist7;
+/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+cltype28 = type_nullable_parser_nodes__AAnnotations.color;
+idtype29 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode8 == NULL) {
+var27 = 1;
+} else {
+if(cltype28 >= var_pannotationsnode8->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_pannotationsnode8->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2800);
+show_backtrace(1);
+}
+var_pexprnode9 = var_nodearraylist9;
+/* <var_pexprnode9:nullable Object> isa nullable AExpr */
+cltype31 = type_nullable_parser_nodes__AExpr.color;
+idtype32 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode9 == NULL) {
+var30 = 1;
+} else {
+if(cltype31 >= var_pexprnode9->type->table_size) {
+var30 = 0;
+} else {
+var30 = var_pexprnode9->type->type_table[cltype31] == idtype32;
+}
+}
+if (unlikely(!var30)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2802);
+show_backtrace(1);
+}
+var33 = NEW_parser_nodes__AConcreteMethPropdef(&type_parser_nodes__AConcreteMethPropdef);
+{
+parser_prod__AConcreteMethPropdef__init_aconcretemethpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var_pannotationsnode8, var_pexprnode9); /* Direct call parser_prod#AConcreteMethPropdef#init_aconcretemethpropdef on <var33:AConcreteMethPropdef>*/
+}
+var_ppropdefnode1 = var33;
+var_node_list = var_ppropdefnode1;
+var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction58> */
+{
+var35 = parser_work__Parser__go_to(var_p, var34);
+}
+{
+parser_work__Parser__push(var_p, var35, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction58#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction58__action(val* self, val* p0) {
+parser__ReduceAction58__action(self, p0); /* Direct call parser#ReduceAction58#action on <self:Object(ReduceAction58)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction59#action for (self: ReduceAction59, Parser) */
+void parser__ReduceAction59__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var27 /* : ADeferredMethPropdef */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable ADeferredMethPropdef */;
+long var28 /* : Int */;
+long var29 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2830);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype10 = type_nullable_parser_nodes__TKwredef.color;
+idtype11 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_tkwredefnode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2832);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype13 = type_nullable_parser_nodes__AVisibility.color;
+idtype14 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_pvisibilitynode4->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2834);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype16 = type_nullable_parser_nodes__TKwmeth.color;
+idtype17 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwmethnode5->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwmethnode5->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2836);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype19 = type_nullable_parser_nodes__AMethid.color;
+idtype20 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_pmethidnode6->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_pmethidnode6->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2838);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype22 = type_nullable_parser_nodes__ASignature.color;
+idtype23 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_psignaturenode7->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_psignaturenode7->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2840);
+show_backtrace(1);
+}
+var_pannotationsnode8 = var_nodearraylist7;
+/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+cltype25 = type_nullable_parser_nodes__AAnnotations.color;
+idtype26 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode8 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_pannotationsnode8->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_pannotationsnode8->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2842);
+show_backtrace(1);
+}
+var27 = NEW_parser_nodes__ADeferredMethPropdef(&type_parser_nodes__ADeferredMethPropdef);
+{
+parser_prod__ADeferredMethPropdef__init_adeferredmethpropdef(var27, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var_pannotationsnode8); /* Direct call parser_prod#ADeferredMethPropdef#init_adeferredmethpropdef on <var27:ADeferredMethPropdef>*/
+}
+var_ppropdefnode1 = var27;
+var_node_list = var_ppropdefnode1;
+var28 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction59> */
+{
+var29 = parser_work__Parser__go_to(var_p, var28);
+}
+{
+parser_work__Parser__push(var_p, var29, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction59#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction59__action(val* self, val* p0) {
+parser__ReduceAction59__action(self, p0); /* Direct call parser#ReduceAction59#action on <self:Object(ReduceAction59)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction60#action for (self: ReduceAction60, Parser) */
+void parser__ReduceAction60__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var9 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var25 /* : ADeferredMethPropdef */;
+val* var26 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable ADeferredMethPropdef */;
+long var27 /* : Int */;
+long var28 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var8;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var9 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2870);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2872);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2874);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype17 = type_nullable_parser_nodes__TKwmeth.color;
+idtype18 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwmethnode5->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwmethnode5->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2876);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype20 = type_nullable_parser_nodes__AMethid.color;
+idtype21 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pmethidnode6->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2878);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype23 = type_nullable_parser_nodes__ASignature.color;
+idtype24 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_psignaturenode7->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2880);
+show_backtrace(1);
+}
+var25 = NEW_parser_nodes__ADeferredMethPropdef(&type_parser_nodes__ADeferredMethPropdef);
+var26 = NULL;
+{
+parser_prod__ADeferredMethPropdef__init_adeferredmethpropdef(var25, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var26); /* Direct call parser_prod#ADeferredMethPropdef#init_adeferredmethpropdef on <var25:ADeferredMethPropdef>*/
+}
+var_ppropdefnode1 = var25;
+var_node_list = var_ppropdefnode1;
+var27 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction60> */
+{
+var28 = parser_work__Parser__go_to(var_p, var27);
+}
+{
+parser_work__Parser__push(var_p, var28, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction60#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction60__action(val* self, val* p0) {
+parser__ReduceAction60__action(self, p0); /* Direct call parser#ReduceAction60#action on <self:Object(ReduceAction60)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction61#action for (self: ReduceAction61, Parser) */
+void parser__ReduceAction61__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var9 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var25 /* : AInternMethPropdef */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AInternMethPropdef */;
+long var26 /* : Int */;
+long var27 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var8;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var9 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2908);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2910);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2912);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype17 = type_nullable_parser_nodes__TKwmeth.color;
+idtype18 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwmethnode5->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwmethnode5->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2914);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype20 = type_nullable_parser_nodes__AMethid.color;
+idtype21 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pmethidnode6->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2916);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype23 = type_nullable_parser_nodes__ASignature.color;
+idtype24 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_psignaturenode7->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2918);
+show_backtrace(1);
+}
+var25 = NEW_parser_nodes__AInternMethPropdef(&type_parser_nodes__AInternMethPropdef);
+{
+parser_prod__AInternMethPropdef__init_ainternmethpropdef(var25, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7); /* Direct call parser_prod#AInternMethPropdef#init_ainternmethpropdef on <var25:AInternMethPropdef>*/
+}
+var_ppropdefnode1 = var25;
+var_node_list = var_ppropdefnode1;
+var26 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction61> */
+{
+var27 = parser_work__Parser__go_to(var_p, var26);
+}
+{
+parser_work__Parser__push(var_p, var27, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction61#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction61__action(val* self, val* p0) {
+parser__ReduceAction61__action(self, p0); /* Direct call parser#ReduceAction61#action on <self:Object(ReduceAction61)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction62#action for (self: ReduceAction62, Parser) */
+void parser__ReduceAction62__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var21 /* : AInternNewPropdef */;
+val* var22 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AInternNewPropdef */;
+long var23 /* : Int */;
+long var24 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2944);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype10 = type_nullable_parser_nodes__TKwredef.color;
+idtype11 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_tkwredefnode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2946);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype13 = type_nullable_parser_nodes__AVisibility.color;
+idtype14 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_pvisibilitynode4->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2948);
+show_backtrace(1);
+}
+var_tkwnewnode5 = var_nodearraylist4;
+/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+cltype16 = type_nullable_parser_nodes__TKwnew.color;
+idtype17 = type_nullable_parser_nodes__TKwnew.id;
+if(var_tkwnewnode5 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwnewnode5->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2950);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist5;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype19 = type_nullable_parser_nodes__ASignature.color;
+idtype20 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_psignaturenode7->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2952);
+show_backtrace(1);
+}
+var21 = NEW_parser_nodes__AInternNewPropdef(&type_parser_nodes__AInternNewPropdef);
+var22 = NULL;
+{
+parser_prod__AInternNewPropdef__init_ainternnewpropdef(var21, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var22, var_psignaturenode7); /* Direct call parser_prod#AInternNewPropdef#init_ainternnewpropdef on <var21:AInternNewPropdef>*/
+}
+var_ppropdefnode1 = var21;
+var_node_list = var_ppropdefnode1;
+var23 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction62> */
+{
+var24 = parser_work__Parser__go_to(var_p, var23);
+}
+{
+parser_work__Parser__push(var_p, var24, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction62#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction62__action(val* self, val* p0) {
+parser__ReduceAction62__action(self, p0); /* Direct call parser#ReduceAction62#action on <self:Object(ReduceAction62)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction63#action for (self: ReduceAction63, Parser) */
+void parser__ReduceAction63__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var9 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var25 /* : AInternNewPropdef */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AInternNewPropdef */;
+long var26 /* : Int */;
+long var27 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var8;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var9 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2979);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2981);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2983);
+show_backtrace(1);
+}
+var_tkwnewnode5 = var_nodearraylist4;
+/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+cltype17 = type_nullable_parser_nodes__TKwnew.color;
+idtype18 = type_nullable_parser_nodes__TKwnew.id;
+if(var_tkwnewnode5 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwnewnode5->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2985);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype20 = type_nullable_parser_nodes__AMethid.color;
+idtype21 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pmethidnode6->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2987);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype23 = type_nullable_parser_nodes__ASignature.color;
+idtype24 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_psignaturenode7->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 2989);
+show_backtrace(1);
+}
+var25 = NEW_parser_nodes__AInternNewPropdef(&type_parser_nodes__AInternNewPropdef);
+{
+parser_prod__AInternNewPropdef__init_ainternnewpropdef(var25, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var_pmethidnode6, var_psignaturenode7); /* Direct call parser_prod#AInternNewPropdef#init_ainternnewpropdef on <var25:AInternNewPropdef>*/
+}
+var_ppropdefnode1 = var25;
+var_node_list = var_ppropdefnode1;
+var26 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction63> */
+{
+var27 = parser_work__Parser__go_to(var_p, var26);
+}
+{
+parser_work__Parser__push(var_p, var27, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction63#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction63__action(val* self, val* p0) {
+parser__ReduceAction63__action(self, p0); /* Direct call parser#ReduceAction63#action on <self:Object(ReduceAction63)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction64#action for (self: ReduceAction64, Parser) */
+void parser__ReduceAction64__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var11 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var12 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_tstringnode9 /* var tstringnode9: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+short int var34 /* : Bool */;
+int cltype35;
+int idtype36;
+val* var37 /* : AExternMethPropdef */;
+val* var38 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternMethPropdef */;
+long var39 /* : Int */;
+long var40 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist11 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var10;
+{
+var11 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var11;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var12 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3019);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype14 = type_nullable_parser_nodes__TKwredef.color;
+idtype15 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_tkwredefnode3->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_tkwredefnode3->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3021);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype17 = type_nullable_parser_nodes__AVisibility.color;
+idtype18 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_pvisibilitynode4->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_pvisibilitynode4->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3023);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype20 = type_nullable_parser_nodes__TKwmeth.color;
+idtype21 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_tkwmethnode5->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_tkwmethnode5->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3025);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype23 = type_nullable_parser_nodes__AMethid.color;
+idtype24 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_pmethidnode6->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_pmethidnode6->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3027);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype26 = type_nullable_parser_nodes__ASignature.color;
+idtype27 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_psignaturenode7->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_psignaturenode7->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3029);
+show_backtrace(1);
+}
+var_tstringnode9 = var_nodearraylist9;
+/* <var_tstringnode9:nullable Object> isa nullable TString */
+cltype29 = type_nullable_parser_nodes__TString.color;
+idtype30 = type_nullable_parser_nodes__TString.id;
+if(var_tstringnode9 == NULL) {
+var28 = 1;
+} else {
+if(cltype29 >= var_tstringnode9->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_tstringnode9->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3031);
+show_backtrace(1);
+}
+var_pexterncallsnode10 = var_nodearraylist10;
+/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+cltype32 = type_nullable_parser_nodes__AExternCalls.color;
+idtype33 = type_nullable_parser_nodes__AExternCalls.id;
+if(var_pexterncallsnode10 == NULL) {
+var31 = 1;
+} else {
+if(cltype32 >= var_pexterncallsnode10->type->table_size) {
+var31 = 0;
+} else {
+var31 = var_pexterncallsnode10->type->type_table[cltype32] == idtype33;
+}
+}
+if (unlikely(!var31)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3033);
+show_backtrace(1);
+}
+var_pexterncodeblocknode11 = var_nodearraylist11;
+/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+cltype35 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype36 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode11 == NULL) {
+var34 = 1;
+} else {
+if(cltype35 >= var_pexterncodeblocknode11->type->table_size) {
+var34 = 0;
+} else {
+var34 = var_pexterncodeblocknode11->type->type_table[cltype35] == idtype36;
+}
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3035);
+show_backtrace(1);
+}
+var37 = NEW_parser_nodes__AExternMethPropdef(&type_parser_nodes__AExternMethPropdef);
+var38 = NULL;
+{
+parser_prod__AExternMethPropdef__init_aexternmethpropdef(var37, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var38, var_tstringnode9, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternMethPropdef#init_aexternmethpropdef on <var37:AExternMethPropdef>*/
+}
+var_ppropdefnode1 = var37;
+var_node_list = var_ppropdefnode1;
+var39 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction64> */
+{
+var40 = parser_work__Parser__go_to(var_p, var39);
+}
+{
+parser_work__Parser__push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction64#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction64__action(val* self, val* p0) {
+parser__ReduceAction64__action(self, p0); /* Direct call parser#ReduceAction64#action on <self:Object(ReduceAction64)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction65#action for (self: ReduceAction65, Parser) */
+void parser__ReduceAction65__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var9 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+val* var31 /* : AExternMethPropdef */;
+val* var32 /* : null */;
+val* var33 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternMethPropdef */;
+long var34 /* : Int */;
+long var35 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var8;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var9 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3066);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3068);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3070);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype17 = type_nullable_parser_nodes__TKwmeth.color;
+idtype18 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwmethnode5->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwmethnode5->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3072);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype20 = type_nullable_parser_nodes__AMethid.color;
+idtype21 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_pmethidnode6->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3074);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype23 = type_nullable_parser_nodes__ASignature.color;
+idtype24 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_psignaturenode7->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3076);
+show_backtrace(1);
+}
+var_pexterncallsnode10 = var_nodearraylist7;
+/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+cltype26 = type_nullable_parser_nodes__AExternCalls.color;
+idtype27 = type_nullable_parser_nodes__AExternCalls.id;
+if(var_pexterncallsnode10 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_pexterncallsnode10->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_pexterncallsnode10->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3078);
+show_backtrace(1);
+}
+var_pexterncodeblocknode11 = var_nodearraylist8;
+/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+cltype29 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype30 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode11 == NULL) {
+var28 = 1;
+} else {
+if(cltype29 >= var_pexterncodeblocknode11->type->table_size) {
+var28 = 0;
+} else {
+var28 = var_pexterncodeblocknode11->type->type_table[cltype29] == idtype30;
+}
+}
+if (unlikely(!var28)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3080);
+show_backtrace(1);
+}
+var31 = NEW_parser_nodes__AExternMethPropdef(&type_parser_nodes__AExternMethPropdef);
+var32 = NULL;
+var33 = NULL;
+{
+parser_prod__AExternMethPropdef__init_aexternmethpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var32, var33, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternMethPropdef#init_aexternmethpropdef on <var31:AExternMethPropdef>*/
+}
+var_ppropdefnode1 = var31;
+var_node_list = var_ppropdefnode1;
+var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction65> */
+{
+var35 = parser_work__Parser__go_to(var_p, var34);
+}
+{
+parser_work__Parser__push(var_p, var35, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction65#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction65__action(val* self, val* p0) {
+parser__ReduceAction65__action(self, p0); /* Direct call parser#ReduceAction65#action on <self:Object(ReduceAction65)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction66#action for (self: ReduceAction66, Parser) */
+void parser__ReduceAction66__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var35 /* : AExternMethPropdef */;
+val* var36 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternMethPropdef */;
+long var37 /* : Int */;
+long var38 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3112);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3114);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3116);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype18 = type_nullable_parser_nodes__TKwmeth.color;
+idtype19 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwmethnode5->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwmethnode5->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3118);
+show_backtrace(1);
+}
+var_pmethidnode6 = var_nodearraylist5;
+/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+cltype21 = type_nullable_parser_nodes__AMethid.color;
+idtype22 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode6 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pmethidnode6->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3120);
+show_backtrace(1);
+}
+var_psignaturenode7 = var_nodearraylist6;
+/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+cltype24 = type_nullable_parser_nodes__ASignature.color;
+idtype25 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode7 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_psignaturenode7->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3122);
+show_backtrace(1);
+}
+var_pannotationsnode8 = var_nodearraylist7;
+/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+cltype27 = type_nullable_parser_nodes__AAnnotations.color;
+idtype28 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode8 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pannotationsnode8->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pannotationsnode8->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3124);
+show_backtrace(1);
+}
+var_pexterncallsnode10 = var_nodearraylist8;
+/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+cltype30 = type_nullable_parser_nodes__AExternCalls.color;
+idtype31 = type_nullable_parser_nodes__AExternCalls.id;
+if(var_pexterncallsnode10 == NULL) {
+var29 = 1;
+} else {
+if(cltype30 >= var_pexterncallsnode10->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_pexterncallsnode10->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3126);
+show_backtrace(1);
+}
+var_pexterncodeblocknode11 = var_nodearraylist9;
+/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+cltype33 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype34 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode11 == NULL) {
+var32 = 1;
+} else {
+if(cltype33 >= var_pexterncodeblocknode11->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_pexterncodeblocknode11->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3128);
+show_backtrace(1);
+}
+var35 = NEW_parser_nodes__AExternMethPropdef(&type_parser_nodes__AExternMethPropdef);
+var36 = NULL;
+{
+parser_prod__AExternMethPropdef__init_aexternmethpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var_pmethidnode6, var_psignaturenode7, var_pannotationsnode8, var36, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternMethPropdef#init_aexternmethpropdef on <var35:AExternMethPropdef>*/
+}
+var_ppropdefnode1 = var35;
+var_node_list = var_ppropdefnode1;
+var37 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction66> */
+{
+var38 = parser_work__Parser__go_to(var_p, var37);
+}
+{
+parser_work__Parser__push(var_p, var38, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction66#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction66__action(val* self, val* p0) {
+parser__ReduceAction66__action(self, p0); /* Direct call parser#ReduceAction66#action on <self:Object(ReduceAction66)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction67#action for (self: ReduceAction67, Parser) */
+void parser__ReduceAction67__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var7 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+short int var8 /* : Bool */;
+int cltype9;
+int idtype10;
+val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tattridnode8 /* var tattridnode8: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var23 /* : AAttrPropdef */;
+val* var24 /* : null */;
+val* var25 /* : null */;
+val* var26 /* : null */;
+val* var27 /* : null */;
+val* var28 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+long var29 /* : Int */;
+long var30 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var6;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var7 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var7 = 0;
+} else {
+var7 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var7)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3157);
+show_backtrace(1);
+}
+var_tkwredefnode5 = var_nodearraylist2;
+/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
+cltype9 = type_nullable_parser_nodes__TKwredef.color;
+idtype10 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode5 == NULL) {
+var8 = 1;
+} else {
+if(cltype9 >= var_tkwredefnode5->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_tkwredefnode5->type->type_table[cltype9] == idtype10;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3159);
+show_backtrace(1);
+}
+var_pvisibilitynode6 = var_nodearraylist3;
+/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
+cltype12 = type_nullable_parser_nodes__AVisibility.color;
+idtype13 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode6 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_pvisibilitynode6->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_pvisibilitynode6->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3161);
+show_backtrace(1);
+}
+var_tkwvarnode7 = var_nodearraylist4;
+/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
+cltype15 = type_nullable_parser_nodes__TKwvar.color;
+idtype16 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode7 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_tkwvarnode7->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_tkwvarnode7->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3163);
+show_backtrace(1);
+}
+var_tattridnode8 = var_nodearraylist5;
+/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
+cltype18 = type_nullable_parser_nodes__TAttrid.color;
+idtype19 = type_nullable_parser_nodes__TAttrid.id;
+if(var_tattridnode8 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tattridnode8->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tattridnode8->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3165);
+show_backtrace(1);
+}
+var_ptypenode10 = var_nodearraylist6;
+/* <var_ptypenode10:nullable Object> isa nullable AType */
+cltype21 = type_nullable_parser_nodes__AType.color;
+idtype22 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode10 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_ptypenode10->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_ptypenode10->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3167);
+show_backtrace(1);
+}
+var23 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var24 = NULL;
+var25 = NULL;
+var26 = NULL;
+var27 = NULL;
+var28 = NULL;
+{
+parser_prod__AAttrPropdef__init_aattrpropdef(var23, var_pdocnode2, var24, var25, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var26, var_ptypenode10, var27, var28); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var23:AAttrPropdef>*/
+}
+var_ppropdefnode1 = var23;
+var_node_list = var_ppropdefnode1;
+var29 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction67> */
+{
+var30 = parser_work__Parser__go_to(var_p, var29);
+}
+{
+parser_work__Parser__push(var_p, var30, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction67#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction67__action(val* self, val* p0) {
+parser__ReduceAction67__action(self, p0); /* Direct call parser#ReduceAction67#action on <self:Object(ReduceAction67)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction68#action for (self: ReduceAction68, Parser) */
+void parser__ReduceAction68__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var_pablenode3 /* var pablenode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_tattridnode8 /* var tattridnode8: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var27 /* : AAttrPropdef */;
+val* var28 /* : null */;
+val* var29 /* : null */;
+val* var30 /* : null */;
+val* var31 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+long var32 /* : Int */;
+long var33 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3198);
+show_backtrace(1);
+}
+var_pablenode3 = var_nodearraylist2;
+/* <var_pablenode3:nullable Object> isa nullable AAble */
+cltype10 = type_nullable_parser_nodes__AAble.color;
+idtype11 = type_nullable_parser_nodes__AAble.id;
+if(var_pablenode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_pablenode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pablenode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3200);
+show_backtrace(1);
+}
+var_tkwredefnode5 = var_nodearraylist3;
+/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
+cltype13 = type_nullable_parser_nodes__TKwredef.color;
+idtype14 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode5 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_tkwredefnode5->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_tkwredefnode5->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3202);
+show_backtrace(1);
+}
+var_pvisibilitynode6 = var_nodearraylist4;
+/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
+cltype16 = type_nullable_parser_nodes__AVisibility.color;
+idtype17 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode6 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_pvisibilitynode6->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pvisibilitynode6->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3204);
+show_backtrace(1);
+}
+var_tkwvarnode7 = var_nodearraylist5;
+/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
+cltype19 = type_nullable_parser_nodes__TKwvar.color;
+idtype20 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode7 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_tkwvarnode7->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_tkwvarnode7->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3206);
+show_backtrace(1);
+}
+var_tattridnode8 = var_nodearraylist6;
+/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
+cltype22 = type_nullable_parser_nodes__TAttrid.color;
+idtype23 = type_nullable_parser_nodes__TAttrid.id;
+if(var_tattridnode8 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_tattridnode8->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_tattridnode8->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3208);
+show_backtrace(1);
+}
+var_ptypenode10 = var_nodearraylist7;
+/* <var_ptypenode10:nullable Object> isa nullable AType */
+cltype25 = type_nullable_parser_nodes__AType.color;
+idtype26 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode10 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_ptypenode10->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_ptypenode10->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3210);
+show_backtrace(1);
+}
+var27 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var28 = NULL;
+var29 = NULL;
+var30 = NULL;
+var31 = NULL;
+{
+parser_prod__AAttrPropdef__init_aattrpropdef(var27, var_pdocnode2, var_pablenode3, var28, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var29, var_ptypenode10, var30, var31); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var27:AAttrPropdef>*/
+}
+var_ppropdefnode1 = var27;
+var_node_list = var_ppropdefnode1;
+var32 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction68> */
+{
+var33 = parser_work__Parser__go_to(var_p, var32);
+}
+{
+parser_work__Parser__push(var_p, var33, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction68#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction68__action(val* self, val* p0) {
+parser__ReduceAction68__action(self, p0); /* Direct call parser#ReduceAction68#action on <self:Object(ReduceAction68)>*/
 RET_LABEL:;
 }

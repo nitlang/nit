@@ -15,7 +15,7 @@
 # limitations under the License.
 
 NITCOPT=
-OLDNITCOPT= --no-stacktrace
+OLDNITCOPT=
 OBJS=nitdoc nitmetrics nitg nit nitx nitunit nitlight nitls nitdbg_client
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))

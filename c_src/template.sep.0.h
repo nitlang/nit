@@ -1,55 +1,18 @@
 #include "nit.common.h"
-void template__Template__rendering(val* self);
-extern const int COLOR_template__Template__is_frozen;
-extern const int COLOR_template__Template__content;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+#define COLOR_template__Template___is_frozen 0
+#define COLOR_template__Template___content 1
+void array__Array__add(val* self, val* p0);
 void template__Template__add(val* self, val* p0);
-extern const int COLOR_abstract_collection__SimpleCollection__add_all;
-void template__Template__add_all(val* self, val* p0);
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const struct type type_kernel__Int;
-extern const int COLOR_abstract_collection__Iterator__next;
-void template__Template__add_list(val* self, val* p0, val* p1, val* p2);
-extern const int COLOR_template__Template___64dis_frozen;
-short int template__Template__is_frozen(val* self);
-void template__Template__is_frozen_61d(val* self, short int p0);
-extern const int COLOR_template__Template__is_frozen_61d;
+val* string__NativeString__to_s_with_length(char* self, long p0);
+void template__Template__addn(val* self, val* p0);
 void template__Template__freeze(val* self);
-val* NEW_template__Template(const struct type* type);
-extern const struct type type_template__Template;
-extern const int COLOR_template__Template__init;
-extern const int COLOR_template__Template__add;
-val* template__Template__new_sub(val* self);
-extern const int COLOR_template__Template___64dcontent;
-val* template__Template__content(val* self);
-void template__Template__content_61d(val* self, val* p0);
-extern const int COLOR_template__Template___64drender_done;
-short int template__Template__render_done(val* self);
-void template__Template__render_done_61d(val* self, short int p0);
-extern const int COLOR_template__Template__render_done;
-extern const int COLOR_template__Template__render_done_61d;
-extern const int COLOR_template__Template__rendering;
-extern const int COLOR_template__Template__freeze;
+#define COLOR_template__Template___render_done 2
+void toolcontext__BashCompletion__rendering(val* self);
 void template__Template__force_render(val* self);
-extern const int COLOR_template__Template__is_writing;
-extern const int COLOR_template__Template__is_writing_61d;
-extern const int COLOR_template__Template__force_render;
-extern const int COLOR_stream__Streamable__write_to;
+#define COLOR_template__Template___is_writing 3
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+#define COLOR_stream__Streamable__write_to 38
+void array__ArrayIterator__next(val* self);
 void template__Template__write_to(val* self, val* p0);
-extern const int COLOR_template__Template___64dis_writing;
-short int template__Template__is_writing(val* self);
-void template__Template__is_writing_61d(val* self, short int p0);
-val* NEW_stream__StringOStream(const struct type* type);
-extern const struct type type_stream__StringOStream;
-extern const int COLOR_stream__StringOStream__init;
-extern const int COLOR_string__Object__to_s;
-val* template__Template__write_to_string(val* self);
-val* NEW_file__OFStream(const struct type* type);
-extern const struct type type_file__OFStream;
-extern const int COLOR_file__OFStream__open;
-extern const int COLOR_stream__IOS__close;
-void template__Template__write_to_file(val* self, val* p0);
-void template__Template__init(val* self);

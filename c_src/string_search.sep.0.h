@@ -1,90 +1,37 @@
 #include "nit.common.h"
-long string_search__Pattern__search_index_in(val* self, val* p0, long p1);
-val* string_search__Pattern__search_in(val* self, val* p0, long p1);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraystring_search__Match;
-extern const int COLOR_array__Array__init;
-extern const int COLOR_string_search__Pattern__search_in;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_string_search__Match__after;
-val* string_search__Pattern__search_all_in(val* self, val* p0);
-extern const int COLOR_string_search__Match__from;
+void array__Array__init(val* self);
+#define COLOR_string_search__Pattern__search_in 36
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_string_search__Match___from 1
+extern const struct type type_kernel__Int;
 val* NEW_string_search__Match(const struct type* type);
 extern const struct type type_string_search__Match;
-extern const int COLOR_string_search__Match__init;
-extern const int COLOR_abstract_collection__Collection__length;
-val* string_search__Pattern__split_in(val* self, val* p0);
-extern const int COLOR_string_search__BM_Pattern___motif;
-val* string_search__BM_Pattern__to_s(val* self);
-extern const struct type type_kernel__Int;
-extern const int COLOR_string_search__BM_Pattern___length;
-extern const int COLOR_string__AbstractString__chars;
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-extern const int COLOR_string_search__BM_Pattern___gs;
-extern const int COLOR_string_search__BM_Pattern__bc;
-long string_search__BM_Pattern__search_index_in(val* self, val* p0, long p1);
-extern const int COLOR_string_search__Pattern__search_index_in;
-val* string_search__BM_Pattern__search_in(val* self, val* p0, long p1);
-extern const struct type type_array__Arraykernel__Int;
-extern const int COLOR_array__Array__with_capacity;
-val* NEW_array__ArrayMap(const struct type* type);
-extern const struct type type_array__ArrayMapkernel__Charkernel__Int;
-extern const int COLOR_array__ArrayMap__init;
-extern const int COLOR_string_search__BM_Pattern___bc_table;
-extern const int COLOR_string_search__BM_Pattern__compute_gs;
-extern const int COLOR_string_search__BM_Pattern__compute_bc;
-void string_search__BM_Pattern__init(val* self, val* p0);
-val* BOX_kernel__Char(char);
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-long string_search__BM_Pattern__bc(val* self, char p0);
-val* BOX_kernel__Int(long);
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
-void string_search__BM_Pattern__compute_bc(val* self);
-extern const int COLOR_array__Array__filled_with;
-extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;
-val* string_search__BM_Pattern__suffixes(val* self);
-extern const int COLOR_string_search__BM_Pattern__suffixes;
-extern const struct class class_kernel__Int;
-void string_search__BM_Pattern__compute_gs(val* self);
-extern const int COLOR_kernel__Object__hash;
-long string_search__BM_Pattern__hash(val* self);
-extern const struct type type_string_search__BM_Pattern;
-extern const int COLOR_kernel__Object___61d_61d;
-short int string_search__BM_Pattern___61d_61d(val* self, val* p0);
-extern const int COLOR_string_search__Match___string;
-val* string_search__Match__string(val* self);
-extern const int COLOR_string_search__Match___from;
-long string_search__Match__from(val* self);
-extern const int COLOR_string_search__Match___length;
-long string_search__Match__length(val* self);
-long string_search__Match__after(val* self);
-extern const int COLOR_string__AbstractString__substring;
-val* string_search__Match__to_s(val* self);
+#define COLOR_string__Object__to_s 7
 void string_search__Match__init(val* self, val* p0, long p1, long p2);
+void array__Array__add(val* self, val* p0);
+long string_search__Match__after(val* self);
+#define COLOR_string__FlatText___length 3
+val* string_search__Pattern__split_in(val* self, val* p0);
+#define COLOR_string_search__Match___string 0
+#define COLOR_string_search__Match___length 2
+val* string__FlatString__substring(val* self, long p0, long p1);
+val* string_search__Match__to_s(val* self);
+#define COLOR_string__Text__chars 39
+#define COLOR_abstract_collection__SequenceRead___91d_93d 39
 extern const struct class class_kernel__Char;
 long string_search__Char__search_index_in(char self, val* p0, long p1);
 val* string_search__Char__search_in(char self, val* p0, long p1);
-long string_search__String__search_index_in(val* self, val* p0, long p1);
-val* string_search__String__search_in(val* self, val* p0, long p1);
-val* string_search__String__search(val* self, val* p0);
-val* string_search__String__search_from(val* self, val* p0, long p1);
-extern const int COLOR_string_search__Pattern__search_all_in;
-val* string_search__String__search_all(val* self, val* p0);
-extern const int COLOR_string_search__Pattern__split_in;
-extern const struct type type_array__Arraystring__String;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_abstract_collection__Iterator__next;
-val* string_search__String__split(val* self, val* p0);
-extern const int COLOR_string_search__String__split;
-val* string_search__String__split_with(val* self, val* p0);
-extern const int COLOR_string_search__String__split_with;
-extern const int COLOR_string__Collection__join;
-val* string_search__String__replace(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_collection__Collection__has;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_string_search__String__replace;
-val* string_search__String__html_escape(val* self);
+long string_search__Text__search_index_in(val* self, val* p0, long p1);
+val* string_search__Text__search_in(val* self, val* p0, long p1);
+#define COLOR_array__Arraystring__Text_VTSELFTYPE 2
+long array__AbstractArrayRead__length(val* self);
+void array__Array__with_capacity(val* self, long p0);
+val* array__AbstractArrayRead__iterator(val* self);
+short int array__ArrayIterator__is_ok(val* self);
+val* array__ArrayIterator__item(val* self);
+#define COLOR_string__Text_VTSELFTYPE 1
+void array__ArrayIterator__next(val* self);
+val* string_search__Text__split(val* self, val* p0);
+val* string_search__Text__split_with(val* self, val* p0);

@@ -1,37 +1,4 @@
 #include "nit.common.h"
 #include "math_nit.h"
-long math__Int__rand(long self);
-long math__Int__bin_and(long self, long p0);
-long math__Int__bin_or(long self, long p0);
-long math__Int__bin_xor(long self, long p0);
-int math___Int_sqrt___impl( int recv );
-long math__Int__sqrt(long self);
-double math__Float__sqrt(double self);
-double math__Float__cos(double self);
-double math__Float__sin(double self);
-double math__Float__tan(double self);
-double math__Float__acos(double self);
-double math__Float__asin(double self);
-double math__Float__atan(double self);
-double math___Float_abs___impl( double recv );
-double math__Float__abs(double self);
-double math__Float__pow(double self, double p0);
-double math__Float__log(double self);
-double math__Float__exp(double self);
-double math__Float__rand(double self);
-double math__Float__hypot_with(double self, double p0);
-short int math__Float__is_nan(double self);
-short int math__Float__is_inf_extern(double self);
 extern const struct type type_kernel__Float;
 long math__Float__is_inf(double self);
-extern const int COLOR_abstract_collection__Collection__is_empty;
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_abstract_collection__Iterator__next;
-val* math__Collection__rand(val* self);
-double math__Object__atan2(val* self, double p0, double p1);
-double math__Object__pi(val* self);
-void math__Object__srand_from(val* self, long p0);
-void math__Object__srand(val* self);

@@ -1,215 +1,135 @@
 #include "nit.common.h"
-extern const int COLOR_scope__ToolContext___64dscope_phase;
-val* scope__ToolContext__scope_phase(val* self);
-void scope__ToolContext__scope_phase_61d(val* self, val* p0);
-extern const int COLOR_phase__Phase__toolcontext;
-extern const int COLOR_scope__APropdef__do_scope;
+#define COLOR_scope__ToolContext___scope_phase 24
+#define COLOR_phase__Phase___toolcontext 0
+void scope__APropdef__do_scope(val* self, val* p0);
 void scope__ScopePhase__process_npropdef(val* self, val* p0);
-extern const int COLOR_scope__Variable___64dname;
-val* scope__Variable__name(val* self);
-void scope__Variable__name_61d(val* self, val* p0);
-extern const int COLOR_scope__Variable__name;
+#define COLOR_scope__Variable___name 0
 val* scope__Variable__to_s(val* self);
-void scope__Variable__init(val* self, val* p0);
-extern const int COLOR_scope__EscapeMark___64dname;
-val* scope__EscapeMark__name(val* self);
-void scope__EscapeMark__name_61d(val* self, val* p0);
-extern const int COLOR_scope__EscapeMark___64dfor_loop;
-short int scope__EscapeMark__for_loop(val* self);
-void scope__EscapeMark__for_loop_61d(val* self, short int p0);
-extern const int COLOR_scope__EscapeMark___64dcontinues;
-val* scope__EscapeMark__continues(val* self);
-void scope__EscapeMark__continues_61d(val* self, val* p0);
-extern const int COLOR_scope__EscapeMark___64dbreaks;
-val* scope__EscapeMark__breaks(val* self);
-void scope__EscapeMark__breaks_61d(val* self, val* p0);
-void scope__EscapeMark__init(val* self, val* p0, short int p1);
-extern const int COLOR_scope__ScopeVisitor___64dtoolcontext;
-val* scope__ScopeVisitor__toolcontext(val* self);
-void scope__ScopeVisitor__toolcontext_61d(val* self, val* p0);
-extern const int COLOR_scope__ScopeVisitor___64dselfvariable;
-val* scope__ScopeVisitor__selfvariable(val* self);
-void scope__ScopeVisitor__selfvariable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Visitor__init;
-extern const int COLOR_scope__ScopeVisitor__toolcontext_61d;
-extern const int COLOR_scope__ScopeVisitor__scopes;
+#define COLOR_scope__EscapeMark___name 0
+#define COLOR_scope__EscapeMark___for_loop 1
+#define COLOR_scope__EscapeMark___continues 2
+#define COLOR_scope__EscapeMark___breaks 3
+#define COLOR_scope__ScopeVisitor___toolcontext 1
+#define COLOR_scope__ScopeVisitor___selfvariable 2
+#define COLOR_scope__ScopeVisitor___scopes 3
 val* NEW_scope__Scope(const struct type* type);
 extern const struct type type_scope__Scope;
-extern const int COLOR_scope__Scope__init;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
+void abstract_collection__Sequence__add(val* self, val* p0);
 void scope__ScopeVisitor__init(val* self, val* p0);
-extern const int COLOR_scope__ScopeVisitor___64dscopes;
-val* scope__ScopeVisitor__scopes(val* self);
-void scope__ScopeVisitor__scopes_61d(val* self, val* p0);
-extern const int COLOR_scope__ScopeVisitor__search_variable;
+val* scope__ScopeVisitor__search_variable(val* self, val* p0);
+#define COLOR_kernel__Object___61d_61d 2
 val* string__NativeString__to_s_with_length(char* self, long p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_scope__ScopeVisitor__error;
-extern const int COLOR_abstract_collection__Collection__first;
-extern const int COLOR_scope__Scope__variables;
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+void scope__ScopeVisitor__error(val* self, val* p0, val* p1);
+val* list__List__first(val* self);
+#define COLOR_scope__Scope___variables 0
+void hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
 short int scope__ScopeVisitor__register_variable(val* self, val* p0, val* p1);
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_scope__Scope__get_variable;
-extern const int COLOR_abstract_collection__Iterator__next;
-val* scope__ScopeVisitor__search_variable(val* self, val* p0);
-extern const int COLOR_scope__ANode__accept_scope_visitor;
+val* list__List__iterator(val* self);
+short int list__ListIterator__is_ok(val* self);
+val* list__ListIterator__item(val* self);
+val* scope__Scope__get_variable(val* self, val* p0);
+void list__ListIterator__next(val* self);
+#define COLOR_scope__ANode__accept_scope_visitor 39
 void scope__ScopeVisitor__visit(val* self, val* p0);
-extern const int COLOR_scope__Scope__escapemark_61d;
-extern const int COLOR_abstract_collection__Sequence__unshift;
-extern const int COLOR_parser_nodes__Visitor__enter_visit;
-extern const int COLOR_abstract_collection__Sequence__shift;
+#define COLOR_scope__Scope___escapemark 1
+void list__List__unshift(val* self, val* p0);
+void parser_nodes__Visitor__enter_visit(val* self, val* p0);
+val* list__List__shift(val* self);
 void scope__ScopeVisitor__enter_visit_block(val* self, val* p0, val* p1);
-extern const int COLOR_scope__Scope__escapemark;
-extern const int COLOR_scope__EscapeMark__name;
-extern const int COLOR_kernel__Object___61d_61d;
+short int string__FlatString___61d_61d(val* self, val* p0);
 val* scope__ScopeVisitor__search_label(val* self, val* p0);
-extern const int COLOR_parser_nodes__ALabel__n_id;
-extern const int COLOR_parser_nodes__Token__text;
-extern const int COLOR_scope__ScopeVisitor__search_label;
+val* parser_nodes__ALabel__n_id(val* self);
+val* lexer_work__Token__text(val* self);
 val* NEW_scope__EscapeMark(const struct type* type);
 extern const struct type type_scope__EscapeMark;
-extern const int COLOR_scope__EscapeMark__init;
 val* scope__ScopeVisitor__make_escape_mark(val* self, val* p0, short int p1);
 val* scope__ScopeVisitor__get_escapemark(val* self, val* p0, val* p1);
-extern const int COLOR_scope__ScopeVisitor__toolcontext;
-extern const int COLOR_parser_nodes__ANode__hot_location;
-extern const int COLOR_toolcontext__ToolContext__error;
-void scope__ScopeVisitor__error(val* self, val* p0, val* p1);
-extern const int COLOR_scope__Scope___64dvariables;
-val* scope__Scope__variables(val* self);
-void scope__Scope__variables_61d(val* self, val* p0);
-extern const int COLOR_scope__Scope___64descapemark;
-val* scope__Scope__escapemark(val* self);
-void scope__Scope__escapemark_61d(val* self, val* p0);
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-val* scope__Scope__get_variable(val* self, val* p0);
-void scope__Scope__init(val* self);
-extern const int COLOR_parser_nodes__ANode__visit_all;
+#define COLOR_parser_nodes__ANode__hot_location 30
+void toolcontext__ToolContext__error(val* self, val* p0, val* p1);
+short int abstract_collection__MapRead__has_key(val* self, val* p0);
+val* hash_collection__HashMap___91d_93d(val* self, val* p0);
+#define COLOR_parser_nodes__ANode__visit_all 37
 void scope__ANode__accept_scope_visitor(val* self, val* p0);
 val* NEW_scope__ScopeVisitor(const struct type* type);
 extern const struct type type_scope__ScopeVisitor;
-extern const int COLOR_scope__ScopeVisitor__init;
-void scope__APropdef__do_scope(val* self, val* p0);
-extern const int COLOR_scope__AParam___64dvariable;
-val* scope__AParam__variable(val* self);
-void scope__AParam__variable_61d(val* self, val* p0);
-extern const int COLOR_scope__AParam__accept_scope_visitor;
-extern const int COLOR_parser_nodes__AParam__n_id;
+#define COLOR_scope__AParam___variable 7
+#define COLOR_scope__AParam__accept_scope_visitor 63
+val* parser_nodes__AParam__n_id(val* self);
 val* NEW_scope__Variable(const struct type* type);
 extern const struct type type_scope__Variable;
-extern const int COLOR_scope__Variable__init;
-extern const int COLOR_scope__ScopeVisitor__register_variable;
-extern const int COLOR_scope__AParam__variable_61d;
 void scope__AParam__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__AVardeclExpr___64dvariable;
-val* scope__AVardeclExpr__variable(val* self);
-void scope__AVardeclExpr__variable_61d(val* self, val* p0);
-extern const int COLOR_scope__AVardeclExpr__accept_scope_visitor;
-extern const int COLOR_parser_nodes__AVardeclExpr__n_id;
-extern const int COLOR_scope__AVardeclExpr__variable_61d;
+#define COLOR_scope__AVardeclExpr___variable 14
+#define COLOR_scope__AVardeclExpr__accept_scope_visitor 82
+val* parser_nodes__AVardeclExpr__n_id(val* self);
 void scope__AVardeclExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__ASelfExpr___64dvariable;
-val* scope__ASelfExpr__variable(val* self);
-void scope__ASelfExpr__variable_61d(val* self, val* p0);
-extern const int COLOR_scope__ASelfExpr__accept_scope_visitor;
-extern const int COLOR_scope__ScopeVisitor__selfvariable;
-extern const int COLOR_scope__ASelfExpr__variable_61d;
+#define COLOR_scope__ASelfExpr___variable 10
+#define COLOR_scope__ASelfExpr__accept_scope_visitor 75
 void scope__ASelfExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__AContinueExpr___64descapemark;
-val* scope__AContinueExpr__escapemark(val* self);
-void scope__AContinueExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_scope__AContinueExpr__accept_scope_visitor;
-extern const int COLOR_parser_nodes__ALabelable__n_label;
-extern const int COLOR_scope__ScopeVisitor__get_escapemark;
-extern const int COLOR_scope__EscapeMark__for_loop;
-extern const int COLOR_scope__EscapeMark__continues;
-extern const int COLOR_scope__AContinueExpr__escapemark_61d;
+#define COLOR_scope__AContinueExpr___escapemark 12
+#define COLOR_scope__AContinueExpr__accept_scope_visitor 79
+val* parser_nodes__ALabelable__n_label(val* self);
+void array__Array__add(val* self, val* p0);
 void scope__AContinueExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__ABreakExpr___64descapemark;
-val* scope__ABreakExpr__escapemark(val* self);
-void scope__ABreakExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_scope__ABreakExpr__accept_scope_visitor;
-extern const int COLOR_scope__EscapeMark__breaks;
-extern const int COLOR_scope__ABreakExpr__escapemark_61d;
+#define COLOR_scope__ABreakExpr___escapemark 12
+#define COLOR_scope__ABreakExpr__accept_scope_visitor 79
 void scope__ABreakExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__ADoExpr___64descapemark;
-val* scope__ADoExpr__escapemark(val* self);
-void scope__ADoExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_scope__ScopeVisitor__make_escape_mark;
-extern const int COLOR_scope__ADoExpr__escapemark_61d;
-extern const int COLOR_parser_nodes__ADoExpr__n_block;
-extern const int COLOR_scope__ADoExpr__escapemark;
-extern const int COLOR_scope__ScopeVisitor__enter_visit_block;
+#define COLOR_scope__ADoExpr___escapemark 12
+val* parser_nodes__ADoExpr__n_block(val* self);
 void scope__ADoExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfExpr__n_expr;
-extern const int COLOR_parser_nodes__AIfExpr__n_then;
-extern const int COLOR_parser_nodes__AIfExpr__n_else;
+val* parser_nodes__AIfExpr__n_expr(val* self);
+val* parser_nodes__AIfExpr__n_then(val* self);
+val* parser_nodes__AIfExpr__n_else(val* self);
 void scope__AIfExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__AWhileExpr___64descapemark;
-val* scope__AWhileExpr__escapemark(val* self);
-void scope__AWhileExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_scope__AWhileExpr__escapemark_61d;
-extern const int COLOR_parser_nodes__AWhileExpr__n_expr;
-extern const int COLOR_parser_nodes__AWhileExpr__n_block;
+#define COLOR_scope__AWhileExpr___escapemark 14
+val* parser_nodes__AWhileExpr__n_expr(val* self);
+val* parser_nodes__AWhileExpr__n_block(val* self);
 void scope__AWhileExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__ALoopExpr___64descapemark;
-val* scope__ALoopExpr__escapemark(val* self);
-void scope__ALoopExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_scope__ALoopExpr__escapemark_61d;
-extern const int COLOR_parser_nodes__ALoopExpr__n_block;
+#define COLOR_scope__ALoopExpr___escapemark 12
+val* parser_nodes__ALoopExpr__n_block(val* self);
 void scope__ALoopExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__AForExpr___64dvariables;
-val* scope__AForExpr__variables(val* self);
-void scope__AForExpr__variables_61d(val* self, val* p0);
-extern const int COLOR_scope__AForExpr___64descapemark;
-val* scope__AForExpr__escapemark(val* self);
-void scope__AForExpr__escapemark_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AForExpr__n_expr;
+#define COLOR_scope__AForExpr___variables 15
+#define COLOR_scope__AForExpr___escapemark 16
+val* parser_nodes__AForExpr__n_expr(val* self);
 extern const struct type type_array__Arrayscope__Variable;
-extern const int COLOR_array__Array__init;
-extern const int COLOR_scope__AForExpr__variables_61d;
-extern const int COLOR_parser_nodes__AForExpr__n_ids;
-extern const int COLOR_scope__AForExpr__escapemark_61d;
-extern const int COLOR_parser_nodes__AForExpr__n_block;
+void array__Array__init(val* self);
+#define COLOR_parser_nodes__AForExpr___n_ids 11
+val* parser_nodes__ANodes__iterator(val* self);
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_abstract_collection__Iterator__next 30
+val* parser_nodes__AForExpr__n_block(val* self);
 void scope__AForExpr__accept_scope_visitor(val* self, val* p0);
-extern const int COLOR_scope__AVarFormExpr___64dvariable;
-val* scope__AVarFormExpr__variable(val* self);
-void scope__AVarFormExpr__variable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASendExpr__n_expr;
+#define COLOR_scope__AVarFormExpr___variable 10
+val* parser_nodes__ASendExpr__n_expr(val* self);
 extern const struct type type_parser_nodes__AImplicitSelfExpr;
-extern const int COLOR_parser_nodes__ACallFormExpr__n_id;
-extern const int COLOR_parser_nodes__ACallFormExpr__n_args;
-extern const int COLOR_parser_nodes__AExprs__n_exprs;
-extern const int COLOR_abstract_collection__Collection__is_empty;
+val* parser_nodes__ACallFormExpr__n_id(val* self);
+val* parser_nodes__ACallFormExpr__n_args(val* self);
+#define COLOR_parser_nodes__AExprs___n_exprs 4
+short int parser_nodes__ANodes__is_empty(val* self);
 extern const struct type type_parser_nodes__AParExprs;
-extern const int COLOR_scope__ACallFormExpr__variable_create;
-extern const int COLOR_scope__AVarFormExpr__variable_61d;
-extern const int COLOR_parser_nodes__ANode__replace_with;
-extern const int COLOR_scope__ACallFormExpr__accept_scope_visitor;
+#define COLOR_scope__ACallFormExpr__variable_create 92
+void parser_nodes__Prod__replace_with(val* self, val* p0);
+#define COLOR_scope__ACallFormExpr__accept_scope_visitor 93
 void scope__ACallFormExpr__accept_scope_visitor(val* self, val* p0);
-val* scope__ACallFormExpr__variable_create(val* self, val* p0);
 val* NEW_parser_nodes__AVarExpr(const struct type* type);
 extern const struct type type_parser_nodes__AVarExpr;
-extern const int COLOR_parser_prod__AVarExpr__init_avarexpr;
+void parser_prod__AVarExpr__init_avarexpr(val* self, val* p0);
 val* scope__ACallExpr__variable_create(val* self, val* p0);
 val* NEW_parser_nodes__AVarAssignExpr(const struct type* type);
 extern const struct type type_parser_nodes__AVarAssignExpr;
-extern const int COLOR_parser_nodes__AAssignFormExpr__n_assign;
-extern const int COLOR_parser_nodes__AAssignFormExpr__n_value;
-extern const int COLOR_parser_prod__AVarAssignExpr__init_avarassignexpr;
+val* parser_nodes__AAssignFormExpr__n_assign(val* self);
+val* parser_nodes__AAssignFormExpr__n_value(val* self);
+void parser_prod__AVarAssignExpr__init_avarassignexpr(val* self, val* p0, val* p1, val* p2);
 val* scope__ACallAssignExpr__variable_create(val* self, val* p0);
 val* NEW_parser_nodes__AVarReassignExpr(const struct type* type);
 extern const struct type type_parser_nodes__AVarReassignExpr;
-extern const int COLOR_parser_nodes__AReassignFormExpr__n_assign_op;
-extern const int COLOR_parser_nodes__AReassignFormExpr__n_value;
-extern const int COLOR_parser_prod__AVarReassignExpr__init_avarreassignexpr;
+val* parser_nodes__AReassignFormExpr__n_assign_op(val* self);
+val* parser_nodes__AReassignFormExpr__n_value(val* self);
+void parser_prod__AVarReassignExpr__init_avarreassignexpr(val* self, val* p0, val* p1, val* p2);
 val* scope__ACallReassignExpr__variable_create(val* self, val* p0);

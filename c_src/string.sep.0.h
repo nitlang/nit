@@ -1,263 +1,176 @@
 #include "nit.common.h"
-extern const int COLOR_string__AbstractString___items;
-char* string__AbstractString__items(val* self);
-val* string__AbstractString__chars(val* self);
-char string__AbstractString___91d_93d(val* self, long p0);
-val* BOX_kernel__Char(char);
+#define COLOR_string__FlatText___length 3
+short int string__Text__is_empty(val* self);
 extern const struct type type_kernel__Int;
-extern const int COLOR_abstract_collection__Collection__length;
-val* NEW_string__Buffer(const struct type* type);
-extern const struct type type_string__Buffer;
-extern const int COLOR_string__Buffer__with_capacity;
-extern const int COLOR_string__AbstractString__chars;
-extern const int COLOR_abstract_collection__Sequence__push;
-extern const int COLOR_string__Object__to_s;
-val* string__NativeString__to_s_with_length(char* self, long p0);
-val* string__AbstractString__substring(val* self, long p0, long p1);
-extern const int COLOR_string__AbstractString__substring;
-val* string__AbstractString__substring_from(val* self, long p0);
-extern const int COLOR_string__String___index_from;
-short int string__AbstractString__has_substring(val* self, val* p0, long p1);
-extern const int COLOR_string__AbstractString__has_substring;
-short int string__AbstractString__has_prefix(val* self, val* p0);
-short int string__AbstractString__has_suffix(val* self, val* p0);
-extern const int COLOR_string__String__to_cstring;
-long string__AbstractString__to_i(val* self);
-double string__NativeString__atof(char* self);
-double string__AbstractString__to_f(val* self);
-extern const int COLOR_string__AbstractString__a_to;
-long string__AbstractString__to_hex(val* self);
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
+#define COLOR_string__Text__empty 44
+#define COLOR_string__Text__substring 41
+val* string__Text__substring_from(val* self, long p0);
+#define COLOR_string__Text__chars 39
+#define COLOR_abstract_collection__SequenceRead__iterator_from 45
+#define COLOR_string__FlatString___chars 6
+#define COLOR_abstract_collection__Collection__iterator 29
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_abstract_collection__Iterator__next 30
+short int string__Text__has_substring(val* self, val* p0, long p1);
+short int string__Text__has_prefix(val* self, val* p0);
+short int string__Text__has_suffix(val* self, val* p0);
+#define COLOR_string__Object__to_s 7
+char* string__FlatString__to_cstring(val* self);
+long string__Text__to_i(val* self);
+#include "string_nit.h"
+double string__Text__to_f(val* self);
+long string__Text__a_to(val* self, long p0);
+long string__Text__to_hex(val* self);
 long kernel__Char__to_i(char self);
-extern const int COLOR_abstract_collection__Iterator__next;
-long string__AbstractString__a_to(val* self, long p0);
-short int string__Char__is_numeric(char self);
-short int string__AbstractString__is_numeric(val* self);
-char kernel__Char__to_upper(char self);
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-val* string__AbstractString__to_upper(val* self);
-char kernel__Char__to_lower(char self);
-val* string__AbstractString__to_lower(val* self);
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-val* string__Char__to_s(char self);
-val* string__AbstractString__trim(val* self);
-void string__AbstractString__output(val* self);
-extern const int COLOR_string__Buffer__init;
+val* NEW_string__FlatBuffer(const struct type* type);
+extern const struct type type_string__FlatBuffer;
+void string__FlatBuffer__init(val* self);
 extern const struct type type_kernel__Char;
+void string__FlatBuffer__add(val* self, char p0);
 val* string__Int__to_s(long self);
-extern const int COLOR_abstract_collection__Sequence__append;
-val* string__AbstractString__to_cmangle(val* self);
+void string__FlatBuffer__append(val* self, val* p0);
+val* string__FlatBuffer__to_s(val* self);
+val* string__Text__to_cmangle(val* self);
+val* string__NativeString__to_s_with_length(char* self, long p0);
 val* string__Int__to_base(long self, long p0, short int p1);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_array__Array__with_native;
-val* string__AbstractString__escape_to_c(val* self);
-extern const int COLOR_string__AbstractString__escape_to_c;
-extern const int COLOR_abstract_collection__Collection__has;
-val* string__AbstractString__escape_more_to_c(val* self, val* p0);
-extern const int COLOR_string__AbstractString__escape_more_to_c;
-val* string__AbstractString__escape_to_nit(val* self);
-val* string__AbstractString__unescape_nit(val* self);
-extern const int COLOR_array__AbstractArrayRead__init;
-void string__AbstractString__init(val* self);
-extern const int COLOR_string__StringCharView___64dtarget;
-val* string__StringCharView__target(val* self);
-extern const int COLOR_string__StringCharView_VTSELFTYPE;
-void string__StringCharView__target_61d(val* self, val* p0);
-extern const int COLOR_string__StringCharView__target_61d;
+#define COLOR_array__Array__with_native 65
+val* string__Text__escape_to_c(val* self);
+void string__FlatBuffer__with_capacity(val* self, long p0);
+val* string__Text__unescape_nit(val* self);
+#define COLOR_kernel__Object___61d_61d 2
+extern const struct type type_string__Text;
+short int abstract_collection__SequenceRead___61d_61d(val* self, val* p0);
+short int string__Text___61d_61d(val* self, val* p0);
+#define COLOR_kernel__Comparable_VTOTHER 0
+short int string__Text___60d(val* self, val* p0);
+#define COLOR_string__Text___hash_cache 0
+val* BOX_kernel__Int(long);
+long string__Text__hash(val* self);
+#define COLOR_string__FlatText___items 1
+#define COLOR_string__FlatText___real_items 2
+void string__FlatText__init(val* self);
+#define COLOR_string__StringCharView___target 0
+#define COLOR_string__StringCharView_VTSELFTYPE 2
 void string__StringCharView__init(val* self, val* p0);
-extern const int COLOR_string__StringCharView__target;
-extern const int COLOR_abstract_collection__Collection__is_empty;
 short int string__StringCharView__is_empty(val* self);
 long string__StringCharView__length(val* self);
-short int string__StringCharView__has(val* self, char p0);
-long string__String__index_from(val* self);
-extern const int COLOR_string__String___index_to;
-long string__String__index_to(val* self);
-extern const int COLOR_string__String___64dchars;
-val* string__String__chars(val* self);
-void string__String__chars_61d(val* self, val* p0);
-char string__String___91d_93d(val* self, long p0);
-val* NEW_string__String(const struct type* type);
-extern const struct type type_string__String;
-extern const int COLOR_string__String__with_infos;
-val* string__String__substring(val* self, long p0, long p1);
-extern const int COLOR_array__AbstractArrayRead___length;
-val* string__String__substring_from(val* self, long p0);
-extern const int COLOR_string__String__index_from;
-short int string__String__has_substring(val* self, val* p0, long p1);
-extern const int COLOR_string__StringCapable__calloc_string;
-val* string__String__to_upper(val* self);
-val* string__String__to_lower(val* self);
-val* string__String__trim(val* self);
-void string__String__output(val* self);
-extern const int COLOR_string__AbstractString__init;
-void string__String__with_infos(val* self, char* p0, long p1, long p2, long p3);
-extern const int COLOR_string__AbstractString__items;
+val* string__StringCharView__iterator(val* self);
+val* string__String__to_s(val* self);
+#define COLOR_string__FlatSubstringsIter___tgt 0
+void string__FlatSubstringsIter__init(val* self, val* p0);
+short int string__FlatSubstringsIter__is_ok(val* self);
+val* string__FlatSubstringsIter__item(val* self);
+void string__FlatSubstringsIter__next(val* self);
+#define COLOR_string__FlatString___index_from 4
+#define COLOR_string__FlatString___index_to 5
+val* NEW_string__FlatString(const struct type* type);
+extern const struct type type_string__FlatString;
+void string__FlatString__with_infos(val* self, char* p0, long p1, long p2, long p3);
+#define COLOR_string__Text_VTSELFTYPE 1
+val* string__FlatString__empty(val* self);
+val* string__FlatString__substring(val* self, long p0, long p1);
+char kernel__Char__to_lower(char self);
+val* string__FlatString__to_lower(val* self);
 long string__NativeString__cstring_length(char* self);
-char* string__String__to_cstring(val* self);
-extern const int COLOR_kernel__Object__object_id;
-short int string__String___61d_61d(val* self, val* p0);
-extern const int COLOR_kernel__Comparable_VTOTHER;
-short int string__String___60d(val* self, val* p0);
-val* string__String___43d(val* self, val* p0);
+val* BOX_string__NativeString(char*);
+#define COLOR_string__FlatString___61d_61d 87
+short int string__FlatString___61d_61d(val* self, val* p0);
+#define COLOR_string__FlatString___60d 88
+short int string__FlatString___60d(val* self, val* p0);
+val* string__FlatString___43d(val* self, val* p0);
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
-val* BOX_kernel__Int(long);
-extern const int COLOR_range__Range__init;
-val* string__String___42d(val* self, long p0);
-val* string__String__to_s(val* self);
-long string__String__hash(val* self);
-extern const int COLOR_string__FlatStringIterator___64dtarget;
-val* string__FlatStringIterator__target(val* self);
-void string__FlatStringIterator__target_61d(val* self, val* p0);
-extern const int COLOR_string__FlatStringIterator___64dtarget_items;
-char* string__FlatStringIterator__target_items(val* self);
-void string__FlatStringIterator__target_items_61d(val* self, char* p0);
-extern const int COLOR_string__FlatStringIterator___64dcurr_pos;
-long string__FlatStringIterator__curr_pos(val* self);
-void string__FlatStringIterator__curr_pos_61d(val* self, long p0);
-extern const int COLOR_string__FlatStringIterator__target_61d;
-extern const int COLOR_string__FlatStringIterator__target_items_61d;
-extern const int COLOR_string__FlatStringIterator__target;
-extern const int COLOR_string__FlatStringIterator__curr_pos_61d;
+void range__Range__init(val* self, val* p0, val* p1);
+val* range__Range__iterator(val* self);
+val* string__FlatString___42d(val* self, long p0);
+long string__FlatString__hash(val* self);
+val* NEW_string__FlatSubstringsIter(const struct type* type);
+extern const struct type type_string__FlatSubstringsIter;
+val* string__FlatString__substrings(val* self);
+#define COLOR_string__FlatStringIterator___target 0
+#define COLOR_string__FlatStringIterator___target_items 1
+#define COLOR_string__FlatStringIterator___curr_pos 2
 void string__FlatStringIterator__with_pos(val* self, val* p0, long p1);
-extern const int COLOR_string__FlatStringIterator__curr_pos;
-extern const int COLOR_string__String__index_to;
 short int string__FlatStringIterator__is_ok(val* self);
-extern const int COLOR_string__FlatStringIterator__target_items;
 char string__FlatStringIterator__item(val* self);
+val* BOX_kernel__Char(char);
 void string__FlatStringIterator__next(val* self);
 long string__FlatStringIterator__index(val* self);
 char string__FlatStringCharView___91d_93d(val* self, long p0);
 val* NEW_string__FlatStringIterator(const struct type* type);
 extern const struct type type_string__FlatStringIterator;
-extern const int COLOR_string__FlatStringIterator__with_pos;
-val* string__FlatStringCharView__iterator(val* self);
-extern const int COLOR_string__Buffer___64dchars;
-val* string__Buffer__chars(val* self);
-void string__Buffer__chars_61d(val* self, val* p0);
-void string__Buffer___91d_93d_61d(val* self, long p0, char p1);
-extern const int COLOR_string__Buffer___capacity;
-extern const int COLOR_array__AbstractArray__enlarge;
-void string__Buffer__add(val* self, char p0);
-void string__Buffer__enlarge(val* self, long p0);
-extern const int COLOR_string__Buffer__append;
-void string__Buffer__append(val* self, val* p0);
-val* string__Buffer__to_s(val* self);
-short int string__Buffer___60d(val* self, val* p0);
-void string__Buffer__init(val* self);
-extern const int COLOR_array__AbstractArray__init;
-void string__Buffer__from(val* self, val* p0);
-void string__Buffer__with_capacity(val* self, long p0);
-short int string__Buffer___61d_61d(val* self, val* p0);
-long string__Buffer__capacity(val* self);
+val* string__FlatStringCharView__iterator_from(val* self, long p0);
+#define COLOR_string__Buffer___is_dirty 4
+#define COLOR_string__Buffer__hash 73
+long string__Buffer__hash(val* self);
+#define COLOR_string__FlatBuffer___chars 5
+#define COLOR_string__FlatBuffer___capacity 6
+val* string__FlatBuffer__substrings(val* self);
+void string__FlatBuffer__enlarge(val* self, long p0);
+val* string__FlatBuffer__empty(val* self);
+char* string__FlatBuffer__to_cstring(val* self);
+void string__FlatBuffer__from(val* self, val* p0);
+#define COLOR_abstract_collection__Sequence__push 54
+val* string__FlatBuffer__substring(val* self, long p0, long p1);
 char string__FlatBufferCharView___91d_93d(val* self, long p0);
+void string__FlatBufferCharView__add(val* self, char p0);
 void string__FlatBufferCharView___91d_93d_61d(val* self, long p0, char p1);
 void string__FlatBufferCharView__push(val* self, char p0);
-void string__FlatBufferCharView__add(val* self, char p0);
 void string__FlatBufferCharView__enlarge(val* self, long p0);
-extern const int COLOR_string__Buffer__capacity;
-extern const int COLOR_string__FlatBufferCharView__enlarge;
+#define COLOR_abstract_collection__Collection__length 31
 void string__FlatBufferCharView__append(val* self, val* p0);
 val* NEW_string__FlatBufferIterator(const struct type* type);
 extern const struct type type_string__FlatBufferIterator;
-extern const int COLOR_string__FlatBufferIterator__with_pos;
-val* string__FlatBufferCharView__iterator(val* self);
-extern const int COLOR_string__FlatBufferIterator___64dtarget;
-val* string__FlatBufferIterator__target(val* self);
-void string__FlatBufferIterator__target_61d(val* self, val* p0);
-extern const int COLOR_string__FlatBufferIterator___64dtarget_items;
-char* string__FlatBufferIterator__target_items(val* self);
-void string__FlatBufferIterator__target_items_61d(val* self, char* p0);
-extern const int COLOR_string__FlatBufferIterator___64dcurr_pos;
-long string__FlatBufferIterator__curr_pos(val* self);
-void string__FlatBufferIterator__curr_pos_61d(val* self, long p0);
-extern const int COLOR_string__FlatBufferIterator__target_61d;
-extern const int COLOR_string__FlatBufferIterator__target_items_61d;
-extern const int COLOR_string__FlatBufferIterator__curr_pos_61d;
 void string__FlatBufferIterator__with_pos(val* self, val* p0, long p1);
-extern const int COLOR_string__FlatBufferIterator__curr_pos;
+val* string__FlatBufferCharView__iterator_from(val* self, long p0);
+#define COLOR_string__FlatBufferIterator___target 0
+#define COLOR_string__FlatBufferIterator___target_items 1
+#define COLOR_string__FlatBufferIterator___curr_pos 2
 long string__FlatBufferIterator__index(val* self);
-extern const int COLOR_string__FlatBufferIterator__target;
 short int string__FlatBufferIterator__is_ok(val* self);
-extern const int COLOR_string__FlatBufferIterator__target_items;
 char string__FlatBufferIterator__item(val* self);
 void string__FlatBufferIterator__next(val* self);
-extern const int COLOR_string__Object__inspect;
+#define COLOR_string__Object__inspect 10
 val* string__Object__to_s(val* self);
-extern const int COLOR_string__Object__native_class_name;
 val* string__NativeString__to_s(char* self);
 val* string__Object__class_name(val* self);
-extern const int COLOR_array__Array__with_capacity;
-extern const int COLOR_string__Object__inspect_head;
-val* string__Object__inspect(val* self);
-extern const int COLOR_string__Object__class_name;
-val* string__Int__to_hex(long self);
 val* string__Object__inspect_head(val* self);
-extern const int COLOR_kernel__Object__sys;
-extern const int COLOR_string__Object__args;
+val* string__Object__inspect(val* self);
+#define COLOR_kernel__Object__object_id 0
+val* string__Int__to_hex(long self);
+val* string__Sys__program_args(val* self);
 val* string__Object__args(val* self);
 val* string__Bool__to_s(short int self);
-extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;
+char* string___Int_strerror_ext___impl( long recv );
+val* string__Int__strerror(long self);
+#define COLOR_abstract_collection__Sequence___91d_93d_61d 59
 long kernel__Int__digit_count(long self, long p0);
 char kernel__Int__to_c(long self);
 void string__Int__fill_buffer(long self, val* p0, long p1, short int p2);
-#include "string_nit.h"
-char* string__Int__native_int_to_s(long self, long p0);
-extern const int COLOR_string__String___42d;
-extern const int COLOR_string__Buffer__from;
 val* string__Float__to_precision(double self, long p0);
 long math__Float__is_inf(double self);
-short int math__Float__is_nan(double self);
+#include "math_nit.h"
+#define COLOR_abstract_collection__SequenceRead___91d_93d 39
 val* string__Float__to_s(double self);
-extern const int COLOR_range__Range__without_last;
+void range__Range__without_last(val* self, val* p0, val* p1);
 extern const struct type type_kernel__Float;
-extern const int COLOR_string__String___43d;
-struct nitni_instance * string___Float_to_precision_native___impl( double recv, int nb );
-val* string__Float__to_precision_native(double self, long p0);
-short int string__Char__is_alpha(char self);
-short int string__Char__is_alphanumeric(char self);
+val* string__Char__to_s(char self);
+#define COLOR_kernel__Object___33d_61d 3
 val* string__Collection__to_s(val* self);
+#define COLOR_abstract_collection__Collection__is_empty 30
 val* string__Collection__join(val* self, val* p0);
+long array__AbstractArrayRead__length(val* self);
+val* array__Array___91d_93d(val* self, long p0);
 val* string__Array__to_s(val* self);
-extern const int COLOR_abstract_collection__MapRead__is_empty;
-extern const int COLOR_abstract_collection__MapRead__iterator;
-extern const int COLOR_abstract_collection__MapIterator__key;
-extern const int COLOR_abstract_collection__MapIterator__item;
-extern const int COLOR_abstract_collection__MapIterator__next;
-extern const int COLOR_abstract_collection__MapIterator__is_ok;
-val* string__Map__join(val* self, val* p0, val* p1);
-val* BOX_string__NativeString(char*);
 val* string__NativeString__to_s_with_copy(char* self);
-void string__NativeString__init(char* self);
-extern const int COLOR_string__Sys___args_cache;
-extern const int COLOR_string__Sys__init_args;
-val* string__Sys__args(val* self);
-extern const int COLOR_string__Sys__native_argv;
-val* string__Sys__program_name(val* self);
-extern const int COLOR_string__Sys__native_argc;
-extern const struct type type_array__Arraystring__String;
+#define COLOR_string__Sys___args_cache 0
 void string__Sys__init_args(val* self);
-extern const int COLOR_string__CachedAlphaComparator___64dcache;
-val* string__CachedAlphaComparator__cache(val* self);
-void string__CachedAlphaComparator__cache_61d(val* self, val* p0);
-extern const int COLOR_string__CachedAlphaComparator__cache;
-extern const int COLOR_abstract_collection__MapRead__has_key;
-extern const int COLOR_abstract_collection__MapRead___91d_93d;
-extern const int COLOR_abstract_collection__Map___91d_93d_61d;
-val* string__CachedAlphaComparator__do_to_s(val* self, val* p0);
-extern const int COLOR_string__CachedAlphaComparator__do_to_s;
-extern const int COLOR_kernel__Comparable___60d_61d_62d;
-long string__CachedAlphaComparator__compare(val* self, val* p0, val* p1);
-void string__CachedAlphaComparator__init(val* self);
-long string__AlphaComparator__compare(val* self, val* p0, val* p1);
-void string__AlphaComparator__init(val* self);
-val* NEW_string__AlphaComparator(const struct type* type);
-extern const struct type type_string__AlphaComparator;
-extern const int COLOR_string__AlphaComparator__init;
-val* string__Object__alpha_comparator(val* self);
+val* string__Sys__program_name(val* self);
+extern const struct type type_array__Arraystring__String;
+void array__Array__with_capacity(val* self, long p0);
+void array__Array___91d_93d_61d(val* self, long p0, val* p1);

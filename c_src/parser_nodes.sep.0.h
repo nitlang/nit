@@ -1,1225 +1,349 @@
 #include "nit.common.h"
-extern const int COLOR_parser_nodes__ANode___location;
+#define COLOR_parser_nodes__ANode___location 0
 val* parser_nodes__ANode__location(val* self);
-extern const int COLOR_parser_nodes__ANode__location;
 val* parser_nodes__ANode__hot_location(val* self);
-extern const int COLOR_parser_nodes__ANode__hot_location;
+#define COLOR_file__Sys___stderr 3
+#define COLOR_parser_nodes__ANode__hot_location 30
 val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_string__Object__class_name;
-extern const int COLOR_location__Location__colored_line;
+val* string__Object__class_name(val* self);
+val* location__Location__colored_line(val* self, val* p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-extern const int COLOR_array__Array__with_native;
-extern const int COLOR_string__Object__to_s;
-extern const int COLOR_file__Object__print;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
+void file__OFStream__write(val* self, val* p0);
 void parser_nodes__ANode__debug(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANode___64dparent;
-val* parser_nodes__ANode__parent(val* self);
-void parser_nodes__ANode__parent_61d(val* self, val* p0);
-void parser_nodes__ANode__init(val* self);
-void parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-extern const int COLOR_parser_nodes__ANode__parent;
-extern const int COLOR_parser_nodes__ANode__replace_child;
-extern const int COLOR_parser_nodes__ANode__parent_61d;
-void parser_nodes__ANode__detach(val* self);
+#define COLOR_parser_nodes__ANode___parent 1
+#define COLOR_kernel__Object___61d_61d 2
+#define COLOR_parser_nodes__ANode__replace_child 35
 void parser_nodes__ANode__replace_with(val* self, val* p0);
-void parser_nodes__ANode__visit_all(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANodes___64dparent;
-val* parser_nodes__ANodes__parent(val* self);
-void parser_nodes__ANodes__parent_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANodes___64ditems;
-val* parser_nodes__ANodes__items(val* self);
-extern const int COLOR_array__Arrayparser_nodes__ANodes_FT0;
-void parser_nodes__ANodes__items_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANodes__items;
-extern const int COLOR_abstract_collection__Collection__iterator;
+#define COLOR_parser_nodes__ANodes___parent 0
+#define COLOR_parser_nodes__ANodes___items 1
+val* array__AbstractArrayRead__iterator(val* self);
 val* parser_nodes__ANodes__iterator(val* self);
-extern const int COLOR_abstract_collection__Collection__length;
+long array__AbstractArrayRead__length(val* self);
 long parser_nodes__ANodes__length(val* self);
-extern const int COLOR_abstract_collection__Collection__is_empty;
+short int array__AbstractArrayRead__is_empty(val* self);
 short int parser_nodes__ANodes__is_empty(val* self);
-extern const int COLOR_abstract_collection__Sequence_FT0;
-extern const int COLOR_parser_nodes__ANodes__hook_add;
-extern const int COLOR_abstract_collection__Sequence__push;
-void parser_nodes__ANodes__push(val* self, val* p0);
-extern const int COLOR_abstract_collection__Sequence__pop;
-extern const int COLOR_parser_nodes__ANodes__hook_remove;
-val* parser_nodes__ANodes__pop(val* self);
-extern const int COLOR_abstract_collection__Sequence__unshift;
-void parser_nodes__ANodes__unshift(val* self, val* p0);
-extern const int COLOR_abstract_collection__Sequence__shift;
-val* parser_nodes__ANodes__shift(val* self);
-extern const int COLOR_abstract_collection__Collection_FT0;
-extern const int COLOR_abstract_collection__Collection__has;
-short int parser_nodes__ANodes__has(val* self, val* p0);
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-val* parser_nodes__ANodes___91d_93d(val* self, long p0);
-extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;
-void parser_nodes__ANodes___91d_93d_61d(val* self, long p0, val* p1);
-extern const int COLOR_abstract_collection__Sequence__remove_at;
-void parser_nodes__ANodes__remove_at(val* self, long p0);
-extern const int COLOR_parser_nodes__ANodes_FT0;
-extern const int COLOR_parser_nodes__ANodes__parent;
+#define COLOR_abstract_collection__Sequence_FT0 0
 void parser_nodes__ANodes__hook_add(val* self, val* p0);
-extern const int COLOR_kernel__Object___61d_61d;
+void array__AbstractArray__push(val* self, val* p0);
+void parser_nodes__ANodes__push(val* self, val* p0);
+val* array__AbstractArray__pop(val* self);
 void parser_nodes__ANodes__hook_remove(val* self, val* p0);
-void parser_nodes__ANodes__init(val* self, val* p0);
-val* parser_nodes__Token__text(val* self);
-void parser_nodes__Token__text_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Token___64dprev_token;
-val* parser_nodes__Token__prev_token(val* self);
-void parser_nodes__Token__prev_token_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Token___64dnext_token;
-val* parser_nodes__Token__next_token(val* self);
-void parser_nodes__Token__next_token_61d(val* self, val* p0);
-extern const int COLOR_array__Array__with_capacity;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_parser_nodes__Token__text;
+val* parser_nodes__ANodes__pop(val* self);
+void array__AbstractArray__unshift(val* self, val* p0);
+void parser_nodes__ANodes__unshift(val* self, val* p0);
+val* array__AbstractArray__shift(val* self);
+val* parser_nodes__ANodes__shift(val* self);
+#define COLOR_abstract_collection__Collection_FT0 8
+short int array__AbstractArrayRead__has(val* self, val* p0);
+short int parser_nodes__ANodes__has(val* self, val* p0);
+val* array__Array___91d_93d(val* self, long p0);
+val* parser_nodes__ANodes___91d_93d(val* self, long p0);
+void array__Array___91d_93d_61d(val* self, long p0, val* p1);
+void parser_nodes__ANodes___91d_93d_61d(val* self, long p0, val* p1);
+void array__AbstractArray__remove_at(val* self, long p0);
+void parser_nodes__ANodes__remove_at(val* self, long p0);
+#define COLOR_parser_nodes__ANodes_FT0 3
+#define COLOR_abstract_collection__Collection__iterator 29
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+void abstract_collection__Sequence__add(val* self, val* p0);
+#define COLOR_abstract_collection__Iterator__next 30
+void parser_nodes__ANodes__unsafe_add_all(val* self, val* p0);
+val* NEW_range__Range(const struct type* type);
+extern const struct type type_range__Rangekernel__Int;
+val* BOX_kernel__Int(long);
+void range__Range__without_last(val* self, val* p0, val* p1);
+val* range__Range__iterator(val* self);
+short int parser_nodes__ANodes__replace_child(val* self, val* p0, val* p1);
+void parser_nodes__Visitor__enter_visit(val* self, val* p0);
+void parser_nodes__ANodes__visit_all(val* self, val* p0);
+#define COLOR_parser_nodes__Token___prev_token 2
+#define COLOR_parser_nodes__Token___next_token 3
+val* lexer_work__Token__text(val* self);
 val* parser_nodes__Token__to_s(val* self);
-void parser_nodes__Token__visit_all(val* self, val* p0);
-void parser_nodes__Token__replace_child(val* self, val* p0, val* p1);
-extern const int COLOR_parser_nodes__ANode__init;
-void parser_nodes__Token__init(val* self);
+#define COLOR_parser_nodes__SourceFile___first_token 3
+#define COLOR_parser_nodes__SourceFile___last_token 4
 void parser_nodes__Prod__location_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Prod___n_annotations;
+#define COLOR_parser_nodes__Prod___n_annotations 2
 val* parser_nodes__Prod__n_annotations(val* self);
 void parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Prod__replace_with;
+#define COLOR_parser_nodes__Prod__replace_with 52
 extern const struct type type_parser_nodes__Prod;
+short int location__Location___61d_61d(val* self, val* p0);
 void parser_nodes__Prod__replace_with(val* self, val* p0);
-void parser_nodes__Prod__init(val* self);
-void parser_nodes__Visitor__visit(val* self, val* p0);
-extern const int COLOR_parser_nodes__Visitor___current_node;
-extern const int COLOR_parser_nodes__Visitor__visit;
-void parser_nodes__Visitor__enter_visit(val* self, val* p0);
+#define COLOR_parser_nodes__Visitor___current_node 0
+#define COLOR_parser_nodes__Visitor__visit 29
 val* parser_nodes__Visitor__current_node(val* self);
-void parser_nodes__Visitor__current_node_61d(val* self, val* p0);
-void parser_nodes__Visitor__init(val* self);
 val* parser_nodes__TEol__to_s(val* self);
-extern const int COLOR_parser_nodes__Token__init;
-void parser_nodes__TEol__init(val* self);
-void parser_nodes__TComment__init(val* self);
 val* parser_nodes__TokenKeyword__to_s(val* self);
-void parser_nodes__TokenKeyword__init(val* self);
-extern const int COLOR_parser_nodes__TokenKeyword__init;
-void parser_nodes__TKwpackage__init(val* self);
-void parser_nodes__TKwmodule__init(val* self);
-void parser_nodes__TKwimport__init(val* self);
-void parser_nodes__TKwclass__init(val* self);
-void parser_nodes__TKwabstract__init(val* self);
-void parser_nodes__TKwinterface__init(val* self);
-void parser_nodes__TKwenum__init(val* self);
-void parser_nodes__TKwend__init(val* self);
-void parser_nodes__TKwmeth__init(val* self);
-void parser_nodes__TKwtype__init(val* self);
-void parser_nodes__TKwinit__init(val* self);
-void parser_nodes__TKwredef__init(val* self);
-void parser_nodes__TKwis__init(val* self);
-void parser_nodes__TKwdo__init(val* self);
-void parser_nodes__TKwreadable__init(val* self);
-void parser_nodes__TKwwritable__init(val* self);
-void parser_nodes__TKwvar__init(val* self);
-void parser_nodes__TKwintern__init(val* self);
-void parser_nodes__TKwextern__init(val* self);
-void parser_nodes__TKwprotected__init(val* self);
-void parser_nodes__TKwprivate__init(val* self);
-void parser_nodes__TKwintrude__init(val* self);
-void parser_nodes__TKwif__init(val* self);
-void parser_nodes__TKwthen__init(val* self);
-void parser_nodes__TKwelse__init(val* self);
-void parser_nodes__TKwwhile__init(val* self);
-void parser_nodes__TKwloop__init(val* self);
-void parser_nodes__TKwfor__init(val* self);
-void parser_nodes__TKwin__init(val* self);
-void parser_nodes__TKwand__init(val* self);
-void parser_nodes__TKwor__init(val* self);
-void parser_nodes__TKwimplies__init(val* self);
-void parser_nodes__TKwnot__init(val* self);
-void parser_nodes__TKwreturn__init(val* self);
-void parser_nodes__TKwcontinue__init(val* self);
-void parser_nodes__TKwbreak__init(val* self);
-void parser_nodes__TKwabort__init(val* self);
-void parser_nodes__TKwassert__init(val* self);
-void parser_nodes__TKwnew__init(val* self);
-void parser_nodes__TKwisa__init(val* self);
-void parser_nodes__TKwonce__init(val* self);
-void parser_nodes__TKwsuper__init(val* self);
-void parser_nodes__TKwself__init(val* self);
-void parser_nodes__TKwtrue__init(val* self);
-void parser_nodes__TKwfalse__init(val* self);
-void parser_nodes__TKwnull__init(val* self);
-void parser_nodes__TKwas__init(val* self);
-void parser_nodes__TKwnullable__init(val* self);
-void parser_nodes__TKwisset__init(val* self);
-void parser_nodes__TKwlabel__init(val* self);
-void parser_nodes__TKwdebug__init(val* self);
-void parser_nodes__TOpar__init(val* self);
-void parser_nodes__TCpar__init(val* self);
-void parser_nodes__TObra__init(val* self);
-void parser_nodes__TCbra__init(val* self);
-void parser_nodes__TComma__init(val* self);
-void parser_nodes__TColumn__init(val* self);
-void parser_nodes__TQuad__init(val* self);
-void parser_nodes__TAssign__init(val* self);
 val* parser_nodes__TokenOperator__to_s(val* self);
-void parser_nodes__TokenOperator__init(val* self);
-extern const int COLOR_parser_nodes__TokenOperator__init;
-void parser_nodes__TPluseq__init(val* self);
-void parser_nodes__TMinuseq__init(val* self);
-void parser_nodes__TDotdotdot__init(val* self);
-void parser_nodes__TDotdot__init(val* self);
-void parser_nodes__TDot__init(val* self);
-void parser_nodes__TPlus__init(val* self);
-void parser_nodes__TMinus__init(val* self);
-void parser_nodes__TStar__init(val* self);
-void parser_nodes__TSlash__init(val* self);
-void parser_nodes__TPercent__init(val* self);
-void parser_nodes__TEq__init(val* self);
-void parser_nodes__TNe__init(val* self);
-void parser_nodes__TLt__init(val* self);
-void parser_nodes__TLe__init(val* self);
-void parser_nodes__TLl__init(val* self);
-void parser_nodes__TGt__init(val* self);
-void parser_nodes__TGe__init(val* self);
-void parser_nodes__TGg__init(val* self);
-void parser_nodes__TStarship__init(val* self);
-void parser_nodes__TBang__init(val* self);
-void parser_nodes__TAt__init(val* self);
 val* parser_nodes__TClassid__to_s(val* self);
-void parser_nodes__TClassid__init(val* self);
 val* parser_nodes__TId__to_s(val* self);
-void parser_nodes__TId__init(val* self);
 val* parser_nodes__TAttrid__to_s(val* self);
-void parser_nodes__TAttrid__init(val* self);
 val* parser_nodes__TokenLiteral__to_s(val* self);
-void parser_nodes__TokenLiteral__init(val* self);
-extern const int COLOR_parser_nodes__TokenLiteral__init;
-void parser_nodes__TNumber__init(val* self);
-void parser_nodes__TFloat__init(val* self);
-void parser_nodes__TChar__init(val* self);
-void parser_nodes__TString__init(val* self);
-void parser_nodes__TStartString__init(val* self);
-void parser_nodes__TMidString__init(val* self);
-void parser_nodes__TEndString__init(val* self);
 val* parser_nodes__TBadString__to_s(val* self);
-void parser_nodes__TBadString__init(val* self);
 val* parser_nodes__TBadChar__to_s(val* self);
-void parser_nodes__TBadChar__init(val* self);
-void parser_nodes__TExternCodeSegment__init(val* self);
 val* parser_nodes__EOF__to_s(val* self);
-void parser_nodes__EOF__init(val* self);
-extern const int COLOR_parser_nodes__EOF__init;
-void parser_nodes__AError__init(val* self);
-extern const int COLOR_parser_nodes__AError__init;
-void parser_nodes__ALexerError__init(val* self);
-void parser_nodes__AParserError__init(val* self);
-extern const int COLOR_parser_nodes__AModule___n_moduledecl;
+#define COLOR_parser_nodes__AModule___n_moduledecl 4
 val* parser_nodes__AModule__n_moduledecl(val* self);
-void parser_nodes__AModule__n_moduledecl_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AModule___n_imports;
-val* parser_nodes__AModule__n_imports(val* self);
-extern const int COLOR_parser_nodes__AModule___n_extern_code_blocks;
-val* parser_nodes__AModule__n_extern_code_blocks(val* self);
-extern const int COLOR_parser_nodes__AModule___n_classdefs;
-val* parser_nodes__AModule__n_classdefs(val* self);
-extern const int COLOR_parser_nodes__Prod__init;
-void parser_nodes__AModule__init(val* self);
-extern const int COLOR_parser_nodes__AModuledecl___n_doc;
+#define COLOR_parser_nodes__AModule___n_imports 5
+#define COLOR_parser_nodes__AModule___n_extern_code_blocks 6
+#define COLOR_parser_nodes__AModule___n_classdefs 7
+#define COLOR_parser_nodes__AModuledecl___n_doc 4
 val* parser_nodes__AModuledecl__n_doc(val* self);
-void parser_nodes__AModuledecl__n_doc_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AModuledecl___n_kwmodule;
-val* parser_nodes__AModuledecl__n_kwmodule(val* self);
-void parser_nodes__AModuledecl__n_kwmodule_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AModuledecl___n_name;
+#define COLOR_parser_nodes__AModuledecl___n_name 8
 val* parser_nodes__AModuledecl__n_name(val* self);
-void parser_nodes__AModuledecl__n_name_61d(val* self, val* p0);
-void parser_nodes__AModuledecl__init(val* self);
-void parser_nodes__AImport__init(val* self);
-extern const int COLOR_parser_nodes__AStdImport___n_visibility;
+#define COLOR_parser_nodes__AStdImport___n_visibility 4
 val* parser_nodes__AStdImport__n_visibility(val* self);
-void parser_nodes__AStdImport__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdImport___n_kwimport;
-val* parser_nodes__AStdImport__n_kwimport(val* self);
-void parser_nodes__AStdImport__n_kwimport_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdImport___n_name;
+#define COLOR_parser_nodes__AStdImport___n_name 6
 val* parser_nodes__AStdImport__n_name(val* self);
-void parser_nodes__AStdImport__n_name_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AImport__init;
-void parser_nodes__AStdImport__init(val* self);
-extern const int COLOR_parser_nodes__ANoImport___n_visibility;
-val* parser_nodes__ANoImport__n_visibility(val* self);
-void parser_nodes__ANoImport__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANoImport___n_kwimport;
-val* parser_nodes__ANoImport__n_kwimport(val* self);
-void parser_nodes__ANoImport__n_kwimport_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANoImport___n_kwend;
-val* parser_nodes__ANoImport__n_kwend(val* self);
-void parser_nodes__ANoImport__n_kwend_61d(val* self, val* p0);
-void parser_nodes__ANoImport__init(val* self);
-void parser_nodes__AVisibility__init(val* self);
-extern const int COLOR_parser_nodes__AVisibility__init;
-void parser_nodes__APublicVisibility__init(val* self);
-extern const int COLOR_parser_nodes__APrivateVisibility___n_kwprivate;
-val* parser_nodes__APrivateVisibility__n_kwprivate(val* self);
-void parser_nodes__APrivateVisibility__n_kwprivate_61d(val* self, val* p0);
-void parser_nodes__APrivateVisibility__init(val* self);
-extern const int COLOR_parser_nodes__AProtectedVisibility___n_kwprotected;
-val* parser_nodes__AProtectedVisibility__n_kwprotected(val* self);
-void parser_nodes__AProtectedVisibility__n_kwprotected_61d(val* self, val* p0);
-void parser_nodes__AProtectedVisibility__init(val* self);
-extern const int COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude;
-val* parser_nodes__AIntrudeVisibility__n_kwintrude(val* self);
-void parser_nodes__AIntrudeVisibility__n_kwintrude_61d(val* self, val* p0);
-void parser_nodes__AIntrudeVisibility__init(val* self);
-extern const int COLOR_parser_nodes__AClassdef___n_propdefs;
-val* parser_nodes__AClassdef__n_propdefs(val* self);
-void parser_nodes__AClassdef__init(val* self);
-extern const int COLOR_parser_nodes__AStdClassdef___n_doc;
+#define COLOR_parser_nodes__AClassdef___n_propdefs 4
+#define COLOR_parser_nodes__AStdClassdef___n_doc 11
 val* parser_nodes__AStdClassdef__n_doc(val* self);
-void parser_nodes__AStdClassdef__n_doc_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_kwredef;
+#define COLOR_parser_nodes__AStdClassdef___n_kwredef 12
 val* parser_nodes__AStdClassdef__n_kwredef(val* self);
-void parser_nodes__AStdClassdef__n_kwredef_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_visibility;
+#define COLOR_parser_nodes__AStdClassdef___n_visibility 13
 val* parser_nodes__AStdClassdef__n_visibility(val* self);
-void parser_nodes__AStdClassdef__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_classkind;
+#define COLOR_parser_nodes__AStdClassdef___n_classkind 14
 val* parser_nodes__AStdClassdef__n_classkind(val* self);
-void parser_nodes__AStdClassdef__n_classkind_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_id;
+#define COLOR_parser_nodes__AStdClassdef___n_id 15
 val* parser_nodes__AStdClassdef__n_id(val* self);
-void parser_nodes__AStdClassdef__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_formaldefs;
-val* parser_nodes__AStdClassdef__n_formaldefs(val* self);
-extern const int COLOR_parser_nodes__AStdClassdef___n_extern_code_block;
-val* parser_nodes__AStdClassdef__n_extern_code_block(val* self);
-void parser_nodes__AStdClassdef__n_extern_code_block_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef___n_superclasses;
-val* parser_nodes__AStdClassdef__n_superclasses(val* self);
-extern const int COLOR_parser_nodes__AStdClassdef___n_kwend;
-val* parser_nodes__AStdClassdef__n_kwend(val* self);
-void parser_nodes__AStdClassdef__n_kwend_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AStdClassdef__n_id;
+#define COLOR_parser_nodes__AStdClassdef___n_formaldefs 16
+#define COLOR_parser_nodes__AStdClassdef___n_superclasses 18
 val* parser_nodes__AStdClassdef__hot_location(val* self);
-extern const int COLOR_parser_nodes__AClassdef__init;
-void parser_nodes__AStdClassdef__init(val* self);
-void parser_nodes__ATopClassdef__init(val* self);
-void parser_nodes__AMainClassdef__init(val* self);
-void parser_nodes__AClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AConcreteClasskind___n_kwclass;
-val* parser_nodes__AConcreteClasskind__n_kwclass(val* self);
-void parser_nodes__AConcreteClasskind__n_kwclass_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AClasskind__init;
-void parser_nodes__AConcreteClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AAbstractClasskind___n_kwabstract;
-val* parser_nodes__AAbstractClasskind__n_kwabstract(val* self);
-void parser_nodes__AAbstractClasskind__n_kwabstract_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAbstractClasskind___n_kwclass;
-val* parser_nodes__AAbstractClasskind__n_kwclass(val* self);
-void parser_nodes__AAbstractClasskind__n_kwclass_61d(val* self, val* p0);
-void parser_nodes__AAbstractClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface;
-val* parser_nodes__AInterfaceClasskind__n_kwinterface(val* self);
-void parser_nodes__AInterfaceClasskind__n_kwinterface_61d(val* self, val* p0);
-void parser_nodes__AInterfaceClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AEnumClasskind___n_kwenum;
-val* parser_nodes__AEnumClasskind__n_kwenum(val* self);
-void parser_nodes__AEnumClasskind__n_kwenum_61d(val* self, val* p0);
-void parser_nodes__AEnumClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AExternClasskind___n_kwextern;
-val* parser_nodes__AExternClasskind__n_kwextern(val* self);
-void parser_nodes__AExternClasskind__n_kwextern_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternClasskind___n_kwclass;
-val* parser_nodes__AExternClasskind__n_kwclass(val* self);
-void parser_nodes__AExternClasskind__n_kwclass_61d(val* self, val* p0);
-void parser_nodes__AExternClasskind__init(val* self);
-extern const int COLOR_parser_nodes__AFormaldef___n_id;
+#define COLOR_parser_nodes__AFormaldef___n_id 4
 val* parser_nodes__AFormaldef__n_id(val* self);
-void parser_nodes__AFormaldef__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AFormaldef___n_type;
+#define COLOR_parser_nodes__AFormaldef___n_type 5
 val* parser_nodes__AFormaldef__n_type(val* self);
-void parser_nodes__AFormaldef__n_type_61d(val* self, val* p0);
-void parser_nodes__AFormaldef__init(val* self);
-extern const int COLOR_parser_nodes__ASuperclass___n_kwsuper;
-val* parser_nodes__ASuperclass__n_kwsuper(val* self);
-void parser_nodes__ASuperclass__n_kwsuper_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASuperclass___n_type;
+#define COLOR_parser_nodes__ASuperclass___n_type 5
 val* parser_nodes__ASuperclass__n_type(val* self);
-void parser_nodes__ASuperclass__n_type_61d(val* self, val* p0);
-void parser_nodes__ASuperclass__init(val* self);
-extern const int COLOR_parser_nodes__APropdef___n_doc;
+#define COLOR_parser_nodes__APropdef___n_doc 4
 val* parser_nodes__APropdef__n_doc(val* self);
-void parser_nodes__APropdef__n_doc_61d(val* self, val* p0);
-void parser_nodes__APropdef__init(val* self);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_kwredef;
-val* parser_nodes__AAttrPropdef__n_kwredef(val* self);
-void parser_nodes__AAttrPropdef__n_kwredef_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_visibility;
-val* parser_nodes__AAttrPropdef__n_visibility(val* self);
-void parser_nodes__AAttrPropdef__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_kwvar;
-val* parser_nodes__AAttrPropdef__n_kwvar(val* self);
-void parser_nodes__AAttrPropdef__n_kwvar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_id;
+#define COLOR_parser_nodes__APropdef___n_kwredef 5
+val* parser_nodes__APropdef__n_kwredef(val* self);
+#define COLOR_parser_nodes__APropdef___n_visibility 6
+val* parser_nodes__APropdef__n_visibility(val* self);
+#define COLOR_parser_nodes__AAttrPropdef___n_id 12
 val* parser_nodes__AAttrPropdef__n_id(val* self);
-void parser_nodes__AAttrPropdef__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_id2;
+#define COLOR_parser_nodes__AAttrPropdef___n_id2 13
 val* parser_nodes__AAttrPropdef__n_id2(val* self);
-void parser_nodes__AAttrPropdef__n_id2_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_type;
+#define COLOR_parser_nodes__AAttrPropdef___n_type 14
 val* parser_nodes__AAttrPropdef__n_type(val* self);
-void parser_nodes__AAttrPropdef__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_readable;
+#define COLOR_parser_nodes__AAttrPropdef___n_readable 15
 val* parser_nodes__AAttrPropdef__n_readable(val* self);
-void parser_nodes__AAttrPropdef__n_readable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_writable;
+#define COLOR_parser_nodes__AAttrPropdef___n_writable 16
 val* parser_nodes__AAttrPropdef__n_writable(val* self);
-void parser_nodes__AAttrPropdef__n_writable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef___n_expr;
+#define COLOR_parser_nodes__AAttrPropdef___n_expr 17
 val* parser_nodes__AAttrPropdef__n_expr(val* self);
-void parser_nodes__AAttrPropdef__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrPropdef__n_id;
-extern const int COLOR_parser_nodes__AAttrPropdef__n_id2;
 val* parser_nodes__AAttrPropdef__hot_location(val* self);
-extern const int COLOR_parser_nodes__APropdef__init;
-void parser_nodes__AAttrPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AMethPropdef___n_kwredef;
-val* parser_nodes__AMethPropdef__n_kwredef(val* self);
-void parser_nodes__AMethPropdef__n_kwredef_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethPropdef___n_visibility;
-val* parser_nodes__AMethPropdef__n_visibility(val* self);
-void parser_nodes__AMethPropdef__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethPropdef___n_methid;
+#define COLOR_parser_nodes__AMethPropdef___n_kwmeth 11
+void parser_nodes__AMethPropdef__n_kwmeth_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_kwinit 12
+val* parser_nodes__AMethPropdef__n_kwinit(val* self);
+void parser_nodes__AMethPropdef__n_kwinit_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_kwnew 13
+val* parser_nodes__AMethPropdef__n_kwnew(val* self);
+void parser_nodes__AMethPropdef__n_kwnew_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_methid 14
 val* parser_nodes__AMethPropdef__n_methid(val* self);
-void parser_nodes__AMethPropdef__n_methid_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethPropdef___n_signature;
+#define COLOR_parser_nodes__AMethPropdef___n_signature 15
 val* parser_nodes__AMethPropdef__n_signature(val* self);
-void parser_nodes__AMethPropdef__n_signature_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethPropdef__n_methid;
+#define COLOR_parser_nodes__AMethPropdef___n_block 16
+val* parser_nodes__AMethPropdef__n_block(val* self);
+void parser_nodes__AMethPropdef__n_block_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_extern 17
+val* parser_nodes__AMethPropdef__n_extern(val* self);
+void parser_nodes__AMethPropdef__n_extern_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_extern_calls 18
+void parser_nodes__AMethPropdef__n_extern_calls_61d(val* self, val* p0);
+#define COLOR_parser_nodes__AMethPropdef___n_extern_code_block 19
+void parser_nodes__AMethPropdef__n_extern_code_block_61d(val* self, val* p0);
 val* parser_nodes__AMethPropdef__hot_location(val* self);
-void parser_nodes__AMethPropdef__init(val* self);
-extern const int COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth;
-val* parser_nodes__ADeferredMethPropdef__n_kwmeth(val* self);
-void parser_nodes__ADeferredMethPropdef__n_kwmeth_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethPropdef__init;
-void parser_nodes__ADeferredMethPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AInternMethPropdef___n_kwmeth;
-val* parser_nodes__AInternMethPropdef__n_kwmeth(val* self);
-void parser_nodes__AInternMethPropdef__n_kwmeth_61d(val* self, val* p0);
-void parser_nodes__AInternMethPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AExternPropdef___n_extern;
-val* parser_nodes__AExternPropdef__n_extern(val* self);
-void parser_nodes__AExternPropdef__n_extern_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternPropdef___n_extern_calls;
-val* parser_nodes__AExternPropdef__n_extern_calls(val* self);
-void parser_nodes__AExternPropdef__n_extern_calls_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternPropdef___n_extern_code_block;
-val* parser_nodes__AExternPropdef__n_extern_code_block(val* self);
-void parser_nodes__AExternPropdef__n_extern_code_block_61d(val* self, val* p0);
-void parser_nodes__AExternPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AExternMethPropdef___n_kwmeth;
-val* parser_nodes__AExternMethPropdef__n_kwmeth(val* self);
-void parser_nodes__AExternMethPropdef__n_kwmeth_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternPropdef__init;
-void parser_nodes__AExternMethPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AConcreteMethPropdef___n_kwmeth;
-val* parser_nodes__AConcreteMethPropdef__n_kwmeth(val* self);
-void parser_nodes__AConcreteMethPropdef__n_kwmeth_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AConcreteMethPropdef___n_block;
-val* parser_nodes__AConcreteMethPropdef__n_block(val* self);
-void parser_nodes__AConcreteMethPropdef__n_block_61d(val* self, val* p0);
-void parser_nodes__AConcreteMethPropdef__init(val* self);
-void parser_nodes__AInitPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AConcreteInitPropdef___n_kwinit;
-val* parser_nodes__AConcreteInitPropdef__n_kwinit(val* self);
-void parser_nodes__AConcreteInitPropdef__n_kwinit_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AConcreteInitPropdef__n_kwinit;
-val* parser_nodes__AConcreteInitPropdef__hot_location(val* self);
-extern const int COLOR_parser_nodes__AConcreteMethPropdef__init;
-extern const int COLOR_parser_nodes__AInitPropdef__init;
-void parser_nodes__AConcreteInitPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AExternInitPropdef___n_kwnew;
-val* parser_nodes__AExternInitPropdef__n_kwnew(val* self);
-void parser_nodes__AExternInitPropdef__n_kwnew_61d(val* self, val* p0);
-void parser_nodes__AExternInitPropdef__init(val* self);
-void parser_nodes__AMainMethPropdef__init(val* self);
-extern const int COLOR_parser_nodes__AExternCalls___n_kwimport;
-val* parser_nodes__AExternCalls__n_kwimport(val* self);
-void parser_nodes__AExternCalls__n_kwimport_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternCalls___n_extern_calls;
-val* parser_nodes__AExternCalls__n_extern_calls(val* self);
-void parser_nodes__AExternCalls__init(val* self);
-void parser_nodes__AExternCall__init(val* self);
-extern const int COLOR_parser_nodes__AExternCall__init;
-void parser_nodes__APropExternCall__init(val* self);
-extern const int COLOR_parser_nodes__ALocalPropExternCall___n_methid;
-val* parser_nodes__ALocalPropExternCall__n_methid(val* self);
-void parser_nodes__ALocalPropExternCall__n_methid_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__APropExternCall__init;
-void parser_nodes__ALocalPropExternCall__init(val* self);
-extern const int COLOR_parser_nodes__AFullPropExternCall___n_type;
-val* parser_nodes__AFullPropExternCall__n_type(val* self);
-void parser_nodes__AFullPropExternCall__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AFullPropExternCall___n_dot;
-val* parser_nodes__AFullPropExternCall__n_dot(val* self);
-void parser_nodes__AFullPropExternCall__n_dot_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AFullPropExternCall___n_methid;
-val* parser_nodes__AFullPropExternCall__n_methid(val* self);
-void parser_nodes__AFullPropExternCall__n_methid_61d(val* self, val* p0);
-void parser_nodes__AFullPropExternCall__init(val* self);
-extern const int COLOR_parser_nodes__AInitPropExternCall___n_type;
-val* parser_nodes__AInitPropExternCall__n_type(val* self);
-void parser_nodes__AInitPropExternCall__n_type_61d(val* self, val* p0);
-void parser_nodes__AInitPropExternCall__init(val* self);
-extern const int COLOR_parser_nodes__ASuperExternCall___n_kwsuper;
-val* parser_nodes__ASuperExternCall__n_kwsuper(val* self);
-void parser_nodes__ASuperExternCall__n_kwsuper_61d(val* self, val* p0);
-void parser_nodes__ASuperExternCall__init(val* self);
-void parser_nodes__ACastExternCall__init(val* self);
-extern const int COLOR_parser_nodes__ACastAsExternCall___n_from_type;
-val* parser_nodes__ACastAsExternCall__n_from_type(val* self);
-void parser_nodes__ACastAsExternCall__n_from_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACastAsExternCall___n_dot;
-val* parser_nodes__ACastAsExternCall__n_dot(val* self);
-void parser_nodes__ACastAsExternCall__n_dot_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACastAsExternCall___n_kwas;
-val* parser_nodes__ACastAsExternCall__n_kwas(val* self);
-void parser_nodes__ACastAsExternCall__n_kwas_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACastAsExternCall___n_to_type;
-val* parser_nodes__ACastAsExternCall__n_to_type(val* self);
-void parser_nodes__ACastAsExternCall__n_to_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACastExternCall__init;
-void parser_nodes__ACastAsExternCall__init(val* self);
-extern const int COLOR_parser_nodes__AAsNullableExternCall___n_type;
-val* parser_nodes__AAsNullableExternCall__n_type(val* self);
-void parser_nodes__AAsNullableExternCall__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNullableExternCall___n_kwas;
-val* parser_nodes__AAsNullableExternCall__n_kwas(val* self);
-void parser_nodes__AAsNullableExternCall__n_kwas_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNullableExternCall___n_kwnullable;
-val* parser_nodes__AAsNullableExternCall__n_kwnullable(val* self);
-void parser_nodes__AAsNullableExternCall__n_kwnullable_61d(val* self, val* p0);
-void parser_nodes__AAsNullableExternCall__init(val* self);
-extern const int COLOR_parser_nodes__AAsNotNullableExternCall___n_type;
-val* parser_nodes__AAsNotNullableExternCall__n_type(val* self);
-void parser_nodes__AAsNotNullableExternCall__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotNullableExternCall___n_kwas;
-val* parser_nodes__AAsNotNullableExternCall__n_kwas(val* self);
-void parser_nodes__AAsNotNullableExternCall__n_kwas_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotNullableExternCall___n_kwnot;
-val* parser_nodes__AAsNotNullableExternCall__n_kwnot(val* self);
-void parser_nodes__AAsNotNullableExternCall__n_kwnot_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotNullableExternCall___n_kwnullable;
-val* parser_nodes__AAsNotNullableExternCall__n_kwnullable(val* self);
-void parser_nodes__AAsNotNullableExternCall__n_kwnullable_61d(val* self, val* p0);
-void parser_nodes__AAsNotNullableExternCall__init(val* self);
-extern const int COLOR_parser_nodes__ATypePropdef___n_kwredef;
-val* parser_nodes__ATypePropdef__n_kwredef(val* self);
-void parser_nodes__ATypePropdef__n_kwredef_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ATypePropdef___n_visibility;
-val* parser_nodes__ATypePropdef__n_visibility(val* self);
-void parser_nodes__ATypePropdef__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ATypePropdef___n_kwtype;
-val* parser_nodes__ATypePropdef__n_kwtype(val* self);
-void parser_nodes__ATypePropdef__n_kwtype_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ATypePropdef___n_id;
+#define COLOR_parser_nodes__AExternCalls___n_extern_calls 5
+#define COLOR_parser_nodes__ATypePropdef___n_id 12
 val* parser_nodes__ATypePropdef__n_id(val* self);
-void parser_nodes__ATypePropdef__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ATypePropdef___n_type;
+#define COLOR_parser_nodes__ATypePropdef___n_type 13
 val* parser_nodes__ATypePropdef__n_type(val* self);
-void parser_nodes__ATypePropdef__n_type_61d(val* self, val* p0);
-void parser_nodes__ATypePropdef__init(val* self);
-extern const int COLOR_parser_nodes__AAble___n_visibility;
+#define COLOR_parser_nodes__AAble___n_visibility 4
 val* parser_nodes__AAble__n_visibility(val* self);
 void parser_nodes__AAble__n_visibility_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAble___n_kwredef;
+#define COLOR_parser_nodes__AAble___n_kwredef 5
 val* parser_nodes__AAble__n_kwredef(val* self);
-void parser_nodes__AAble__n_kwredef_61d(val* self, val* p0);
-void parser_nodes__AAble__init(val* self);
-extern const int COLOR_parser_nodes__AReadAble___n_kwreadable;
-val* parser_nodes__AReadAble__n_kwreadable(val* self);
-void parser_nodes__AReadAble__n_kwreadable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAble__init;
-void parser_nodes__AReadAble__init(val* self);
-extern const int COLOR_parser_nodes__AWriteAble___n_kwwritable;
-val* parser_nodes__AWriteAble__n_kwwritable(val* self);
-void parser_nodes__AWriteAble__n_kwwritable_61d(val* self, val* p0);
-void parser_nodes__AWriteAble__init(val* self);
-void parser_nodes__AMethid__init(val* self);
-extern const int COLOR_parser_nodes__AIdMethid___n_id;
+#define COLOR_parser_nodes__AIdMethid___n_id 4
 val* parser_nodes__AIdMethid__n_id(val* self);
-void parser_nodes__AIdMethid__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AMethid__init;
-void parser_nodes__AIdMethid__init(val* self);
-extern const int COLOR_parser_nodes__APlusMethid___n_plus;
-val* parser_nodes__APlusMethid__n_plus(val* self);
-void parser_nodes__APlusMethid__n_plus_61d(val* self, val* p0);
-void parser_nodes__APlusMethid__init(val* self);
-extern const int COLOR_parser_nodes__AMinusMethid___n_minus;
-val* parser_nodes__AMinusMethid__n_minus(val* self);
-void parser_nodes__AMinusMethid__n_minus_61d(val* self, val* p0);
-void parser_nodes__AMinusMethid__init(val* self);
-extern const int COLOR_parser_nodes__AStarMethid___n_star;
-val* parser_nodes__AStarMethid__n_star(val* self);
-void parser_nodes__AStarMethid__n_star_61d(val* self, val* p0);
-void parser_nodes__AStarMethid__init(val* self);
-extern const int COLOR_parser_nodes__ASlashMethid___n_slash;
-val* parser_nodes__ASlashMethid__n_slash(val* self);
-void parser_nodes__ASlashMethid__n_slash_61d(val* self, val* p0);
-void parser_nodes__ASlashMethid__init(val* self);
-extern const int COLOR_parser_nodes__APercentMethid___n_percent;
-val* parser_nodes__APercentMethid__n_percent(val* self);
-void parser_nodes__APercentMethid__n_percent_61d(val* self, val* p0);
-void parser_nodes__APercentMethid__init(val* self);
-extern const int COLOR_parser_nodes__AEqMethid___n_eq;
-val* parser_nodes__AEqMethid__n_eq(val* self);
-void parser_nodes__AEqMethid__n_eq_61d(val* self, val* p0);
-void parser_nodes__AEqMethid__init(val* self);
-extern const int COLOR_parser_nodes__ANeMethid___n_ne;
-val* parser_nodes__ANeMethid__n_ne(val* self);
-void parser_nodes__ANeMethid__n_ne_61d(val* self, val* p0);
-void parser_nodes__ANeMethid__init(val* self);
-extern const int COLOR_parser_nodes__ALeMethid___n_le;
-val* parser_nodes__ALeMethid__n_le(val* self);
-void parser_nodes__ALeMethid__n_le_61d(val* self, val* p0);
-void parser_nodes__ALeMethid__init(val* self);
-extern const int COLOR_parser_nodes__AGeMethid___n_ge;
-val* parser_nodes__AGeMethid__n_ge(val* self);
-void parser_nodes__AGeMethid__n_ge_61d(val* self, val* p0);
-void parser_nodes__AGeMethid__init(val* self);
-extern const int COLOR_parser_nodes__ALtMethid___n_lt;
-val* parser_nodes__ALtMethid__n_lt(val* self);
-void parser_nodes__ALtMethid__n_lt_61d(val* self, val* p0);
-void parser_nodes__ALtMethid__init(val* self);
-extern const int COLOR_parser_nodes__AGtMethid___n_gt;
-val* parser_nodes__AGtMethid__n_gt(val* self);
-void parser_nodes__AGtMethid__n_gt_61d(val* self, val* p0);
-void parser_nodes__AGtMethid__init(val* self);
-extern const int COLOR_parser_nodes__ALlMethid___n_ll;
-val* parser_nodes__ALlMethid__n_ll(val* self);
-void parser_nodes__ALlMethid__n_ll_61d(val* self, val* p0);
-void parser_nodes__ALlMethid__init(val* self);
-extern const int COLOR_parser_nodes__AGgMethid___n_gg;
-val* parser_nodes__AGgMethid__n_gg(val* self);
-void parser_nodes__AGgMethid__n_gg_61d(val* self, val* p0);
-void parser_nodes__AGgMethid__init(val* self);
-extern const int COLOR_parser_nodes__ABraMethid___n_obra;
-val* parser_nodes__ABraMethid__n_obra(val* self);
-void parser_nodes__ABraMethid__n_obra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABraMethid___n_cbra;
-val* parser_nodes__ABraMethid__n_cbra(val* self);
-void parser_nodes__ABraMethid__n_cbra_61d(val* self, val* p0);
-void parser_nodes__ABraMethid__init(val* self);
-extern const int COLOR_parser_nodes__AStarshipMethid___n_starship;
-val* parser_nodes__AStarshipMethid__n_starship(val* self);
-void parser_nodes__AStarshipMethid__n_starship_61d(val* self, val* p0);
-void parser_nodes__AStarshipMethid__init(val* self);
-extern const int COLOR_parser_nodes__AAssignMethid___n_id;
-val* parser_nodes__AAssignMethid__n_id(val* self);
-void parser_nodes__AAssignMethid__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssignMethid___n_assign;
-val* parser_nodes__AAssignMethid__n_assign(val* self);
-void parser_nodes__AAssignMethid__n_assign_61d(val* self, val* p0);
-void parser_nodes__AAssignMethid__init(val* self);
-extern const int COLOR_parser_nodes__ABraassignMethid___n_obra;
-val* parser_nodes__ABraassignMethid__n_obra(val* self);
-void parser_nodes__ABraassignMethid__n_obra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABraassignMethid___n_cbra;
-val* parser_nodes__ABraassignMethid__n_cbra(val* self);
-void parser_nodes__ABraassignMethid__n_cbra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABraassignMethid___n_assign;
-val* parser_nodes__ABraassignMethid__n_assign(val* self);
-void parser_nodes__ABraassignMethid__n_assign_61d(val* self, val* p0);
-void parser_nodes__ABraassignMethid__init(val* self);
-extern const int COLOR_parser_nodes__ASignature___n_opar;
-val* parser_nodes__ASignature__n_opar(val* self);
-void parser_nodes__ASignature__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASignature___n_params;
-val* parser_nodes__ASignature__n_params(val* self);
-extern const int COLOR_parser_nodes__ASignature___n_cpar;
-val* parser_nodes__ASignature__n_cpar(val* self);
-void parser_nodes__ASignature__n_cpar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASignature___n_type;
+#define COLOR_parser_nodes__ASignature___n_params 5
+#define COLOR_parser_nodes__ASignature___n_type 7
 val* parser_nodes__ASignature__n_type(val* self);
-void parser_nodes__ASignature__n_type_61d(val* self, val* p0);
-void parser_nodes__ASignature__init(val* self);
-extern const int COLOR_parser_nodes__AParam___n_id;
+#define COLOR_parser_nodes__AParam___n_id 4
 val* parser_nodes__AParam__n_id(val* self);
-void parser_nodes__AParam__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AParam___n_type;
+#define COLOR_parser_nodes__AParam___n_type 5
 val* parser_nodes__AParam__n_type(val* self);
-void parser_nodes__AParam__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AParam___n_dotdotdot;
+#define COLOR_parser_nodes__AParam___n_dotdotdot 6
 val* parser_nodes__AParam__n_dotdotdot(val* self);
-void parser_nodes__AParam__n_dotdotdot_61d(val* self, val* p0);
-void parser_nodes__AParam__init(val* self);
-extern const int COLOR_parser_nodes__AType___n_kwnullable;
+#define COLOR_parser_nodes__AType___n_kwnullable 4
 val* parser_nodes__AType__n_kwnullable(val* self);
-void parser_nodes__AType__n_kwnullable_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AType___n_id;
+#define COLOR_parser_nodes__AType___n_id 5
 val* parser_nodes__AType__n_id(val* self);
-void parser_nodes__AType__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AType___n_types;
-val* parser_nodes__AType__n_types(val* self);
-void parser_nodes__AType__init(val* self);
-extern const int COLOR_parser_nodes__ALabel___n_kwlabel;
-val* parser_nodes__ALabel__n_kwlabel(val* self);
-void parser_nodes__ALabel__n_kwlabel_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ALabel___n_id;
+#define COLOR_parser_nodes__AType___n_types 6
+#define COLOR_parser_nodes__ALabel___n_id 5
 val* parser_nodes__ALabel__n_id(val* self);
-void parser_nodes__ALabel__n_id_61d(val* self, val* p0);
-void parser_nodes__ALabel__init(val* self);
-void parser_nodes__AExpr__init(val* self);
-extern const int COLOR_parser_nodes__ABlockExpr___n_expr;
-val* parser_nodes__ABlockExpr__n_expr(val* self);
-extern const int COLOR_parser_nodes__ABlockExpr___n_kwend;
-val* parser_nodes__ABlockExpr__n_kwend(val* self);
-void parser_nodes__ABlockExpr__n_kwend_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExpr__init;
-void parser_nodes__ABlockExpr__init(val* self);
-extern const int COLOR_parser_nodes__AVardeclExpr___n_kwvar;
-val* parser_nodes__AVardeclExpr__n_kwvar(val* self);
-void parser_nodes__AVardeclExpr__n_kwvar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AVardeclExpr___n_id;
+#define COLOR_parser_nodes__ABlockExpr___n_expr 9
+#define COLOR_parser_nodes__AVardeclExpr___n_id 10
 val* parser_nodes__AVardeclExpr__n_id(val* self);
-void parser_nodes__AVardeclExpr__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AVardeclExpr___n_type;
+#define COLOR_parser_nodes__AVardeclExpr___n_type 11
 val* parser_nodes__AVardeclExpr__n_type(val* self);
-void parser_nodes__AVardeclExpr__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AVardeclExpr___n_assign;
-val* parser_nodes__AVardeclExpr__n_assign(val* self);
-void parser_nodes__AVardeclExpr__n_assign_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AVardeclExpr___n_expr;
+#define COLOR_parser_nodes__AVardeclExpr___n_expr 13
 val* parser_nodes__AVardeclExpr__n_expr(val* self);
-void parser_nodes__AVardeclExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__AVardeclExpr__init(val* self);
-extern const int COLOR_parser_nodes__AReturnExpr___n_kwreturn;
-val* parser_nodes__AReturnExpr__n_kwreturn(val* self);
-void parser_nodes__AReturnExpr__n_kwreturn_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AReturnExpr___n_expr;
+#define COLOR_parser_nodes__AReturnExpr___n_expr 10
 val* parser_nodes__AReturnExpr__n_expr(val* self);
-void parser_nodes__AReturnExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__AReturnExpr__init(val* self);
-extern const int COLOR_parser_nodes__ALabelable___n_label;
+#define COLOR_parser_nodes__ALabelable___n_label 9
 val* parser_nodes__ALabelable__n_label(val* self);
-void parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
-void parser_nodes__ALabelable__init(val* self);
-extern const int COLOR_parser_nodes__ABreakExpr___n_kwbreak;
-val* parser_nodes__ABreakExpr__n_kwbreak(val* self);
-void parser_nodes__ABreakExpr__n_kwbreak_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABreakExpr___n_expr;
+#define COLOR_parser_nodes__ABreakExpr___n_expr 11
 val* parser_nodes__ABreakExpr__n_expr(val* self);
-void parser_nodes__ABreakExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ALabelable__init;
-void parser_nodes__ABreakExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAbortExpr___n_kwabort;
-val* parser_nodes__AAbortExpr__n_kwabort(val* self);
-void parser_nodes__AAbortExpr__n_kwabort_61d(val* self, val* p0);
-void parser_nodes__AAbortExpr__init(val* self);
-extern const int COLOR_parser_nodes__AContinueExpr___n_kwcontinue;
-val* parser_nodes__AContinueExpr__n_kwcontinue(val* self);
-void parser_nodes__AContinueExpr__n_kwcontinue_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AContinueExpr___n_expr;
+#define COLOR_parser_nodes__AContinueExpr___n_expr 11
 val* parser_nodes__AContinueExpr__n_expr(val* self);
-void parser_nodes__AContinueExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__AContinueExpr__init(val* self);
-extern const int COLOR_parser_nodes__ADoExpr___n_kwdo;
-val* parser_nodes__ADoExpr__n_kwdo(val* self);
-void parser_nodes__ADoExpr__n_kwdo_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ADoExpr___n_block;
+#define COLOR_parser_nodes__ADoExpr___n_block 11
 val* parser_nodes__ADoExpr__n_block(val* self);
-void parser_nodes__ADoExpr__n_block_61d(val* self, val* p0);
-void parser_nodes__ADoExpr__init(val* self);
-extern const int COLOR_parser_nodes__AIfExpr___n_kwif;
-val* parser_nodes__AIfExpr__n_kwif(val* self);
-void parser_nodes__AIfExpr__n_kwif_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfExpr___n_expr;
+#define COLOR_parser_nodes__AIfExpr___n_expr 10
 val* parser_nodes__AIfExpr__n_expr(val* self);
-void parser_nodes__AIfExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfExpr___n_then;
+#define COLOR_parser_nodes__AIfExpr___n_then 11
 val* parser_nodes__AIfExpr__n_then(val* self);
-void parser_nodes__AIfExpr__n_then_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfExpr___n_else;
+#define COLOR_parser_nodes__AIfExpr___n_else 12
 val* parser_nodes__AIfExpr__n_else(val* self);
-void parser_nodes__AIfExpr__n_else_61d(val* self, val* p0);
-void parser_nodes__AIfExpr__init(val* self);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_kwif;
-val* parser_nodes__AIfexprExpr__n_kwif(val* self);
-void parser_nodes__AIfexprExpr__n_kwif_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_expr;
+#define COLOR_parser_nodes__AIfexprExpr___n_expr 10
 val* parser_nodes__AIfexprExpr__n_expr(val* self);
-void parser_nodes__AIfexprExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_kwthen;
-val* parser_nodes__AIfexprExpr__n_kwthen(val* self);
-void parser_nodes__AIfexprExpr__n_kwthen_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_then;
+#define COLOR_parser_nodes__AIfexprExpr___n_then 12
 val* parser_nodes__AIfexprExpr__n_then(val* self);
-void parser_nodes__AIfexprExpr__n_then_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_kwelse;
-val* parser_nodes__AIfexprExpr__n_kwelse(val* self);
-void parser_nodes__AIfexprExpr__n_kwelse_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIfexprExpr___n_else;
+#define COLOR_parser_nodes__AIfexprExpr___n_else 14
 val* parser_nodes__AIfexprExpr__n_else(val* self);
-void parser_nodes__AIfexprExpr__n_else_61d(val* self, val* p0);
-void parser_nodes__AIfexprExpr__init(val* self);
-extern const int COLOR_parser_nodes__AWhileExpr___n_kwwhile;
-val* parser_nodes__AWhileExpr__n_kwwhile(val* self);
-void parser_nodes__AWhileExpr__n_kwwhile_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AWhileExpr___n_expr;
+#define COLOR_parser_nodes__AWhileExpr___n_expr 11
 val* parser_nodes__AWhileExpr__n_expr(val* self);
-void parser_nodes__AWhileExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AWhileExpr___n_kwdo;
-val* parser_nodes__AWhileExpr__n_kwdo(val* self);
-void parser_nodes__AWhileExpr__n_kwdo_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AWhileExpr___n_block;
+#define COLOR_parser_nodes__AWhileExpr___n_block 13
 val* parser_nodes__AWhileExpr__n_block(val* self);
-void parser_nodes__AWhileExpr__n_block_61d(val* self, val* p0);
-void parser_nodes__AWhileExpr__init(val* self);
-extern const int COLOR_parser_nodes__ALoopExpr___n_kwloop;
-val* parser_nodes__ALoopExpr__n_kwloop(val* self);
-void parser_nodes__ALoopExpr__n_kwloop_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ALoopExpr___n_block;
+#define COLOR_parser_nodes__ALoopExpr___n_block 11
 val* parser_nodes__ALoopExpr__n_block(val* self);
-void parser_nodes__ALoopExpr__n_block_61d(val* self, val* p0);
-void parser_nodes__ALoopExpr__init(val* self);
-extern const int COLOR_parser_nodes__AForExpr___n_kwfor;
-val* parser_nodes__AForExpr__n_kwfor(val* self);
-void parser_nodes__AForExpr__n_kwfor_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AForExpr___n_ids;
-val* parser_nodes__AForExpr__n_ids(val* self);
-extern const int COLOR_parser_nodes__AForExpr___n_expr;
+#define COLOR_parser_nodes__AForExpr___n_ids 11
+#define COLOR_parser_nodes__AForExpr___n_expr 12
 val* parser_nodes__AForExpr__n_expr(val* self);
-void parser_nodes__AForExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AForExpr___n_kwdo;
-val* parser_nodes__AForExpr__n_kwdo(val* self);
-void parser_nodes__AForExpr__n_kwdo_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AForExpr___n_block;
+#define COLOR_parser_nodes__AForExpr___n_block 14
 val* parser_nodes__AForExpr__n_block(val* self);
-void parser_nodes__AForExpr__n_block_61d(val* self, val* p0);
-void parser_nodes__AForExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAssertExpr___n_kwassert;
-val* parser_nodes__AAssertExpr__n_kwassert(val* self);
-void parser_nodes__AAssertExpr__n_kwassert_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssertExpr___n_id;
+#define COLOR_parser_nodes__AAssertExpr___n_id 10
 val* parser_nodes__AAssertExpr__n_id(val* self);
-void parser_nodes__AAssertExpr__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssertExpr___n_expr;
+#define COLOR_parser_nodes__AAssertExpr___n_expr 11
 val* parser_nodes__AAssertExpr__n_expr(val* self);
-void parser_nodes__AAssertExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssertExpr___n_else;
+#define COLOR_parser_nodes__AAssertExpr___n_else 12
 val* parser_nodes__AAssertExpr__n_else(val* self);
-void parser_nodes__AAssertExpr__n_else_61d(val* self, val* p0);
-void parser_nodes__AAssertExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAssignFormExpr___n_assign;
+#define COLOR_parser_nodes__AAssignFormExpr___n_assign 11
 val* parser_nodes__AAssignFormExpr__n_assign(val* self);
-void parser_nodes__AAssignFormExpr__n_assign_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssignFormExpr___n_value;
+#define COLOR_parser_nodes__AAssignFormExpr___n_value 12
 val* parser_nodes__AAssignFormExpr__n_value(val* self);
-void parser_nodes__AAssignFormExpr__n_value_61d(val* self, val* p0);
-void parser_nodes__AAssignFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__AReassignFormExpr___n_assign_op;
+#define COLOR_parser_nodes__AReassignFormExpr___n_assign_op 11
 val* parser_nodes__AReassignFormExpr__n_assign_op(val* self);
-void parser_nodes__AReassignFormExpr__n_assign_op_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AReassignFormExpr___n_value;
+#define COLOR_parser_nodes__AReassignFormExpr___n_value 12
 val* parser_nodes__AReassignFormExpr__n_value(val* self);
-void parser_nodes__AReassignFormExpr__n_value_61d(val* self, val* p0);
-void parser_nodes__AReassignFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__AOnceExpr___n_kwonce;
-val* parser_nodes__AOnceExpr__n_kwonce(val* self);
-void parser_nodes__AOnceExpr__n_kwonce_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AProxyExpr__init;
-void parser_nodes__AOnceExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASendExpr___n_expr;
+#define COLOR_parser_nodes__ASendExpr___n_expr 9
 val* parser_nodes__ASendExpr__n_expr(val* self);
-void parser_nodes__ASendExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__ASendExpr__init(val* self);
-extern const int COLOR_parser_nodes__ABinopExpr___n_expr2;
+#define COLOR_parser_nodes__ABinopExpr___n_expr2 11
 val* parser_nodes__ABinopExpr__n_expr2(val* self);
-void parser_nodes__ABinopExpr__n_expr2_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASendExpr__init;
-void parser_nodes__ABinopExpr__init(val* self);
-void parser_nodes__ABoolExpr__init(val* self);
-extern const int COLOR_parser_nodes__AOrExpr___n_expr;
+#define COLOR_parser_nodes__AOrExpr___n_expr 9
 val* parser_nodes__AOrExpr__n_expr(val* self);
-void parser_nodes__AOrExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AOrExpr___n_expr2;
+#define COLOR_parser_nodes__AOrExpr___n_expr2 10
 val* parser_nodes__AOrExpr__n_expr2(val* self);
-void parser_nodes__AOrExpr__n_expr2_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABoolExpr__init;
-void parser_nodes__AOrExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAndExpr___n_expr;
+#define COLOR_parser_nodes__AAndExpr___n_expr 9
 val* parser_nodes__AAndExpr__n_expr(val* self);
-void parser_nodes__AAndExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAndExpr___n_expr2;
+#define COLOR_parser_nodes__AAndExpr___n_expr2 10
 val* parser_nodes__AAndExpr__n_expr2(val* self);
-void parser_nodes__AAndExpr__n_expr2_61d(val* self, val* p0);
-void parser_nodes__AAndExpr__init(val* self);
-extern const int COLOR_parser_nodes__AOrElseExpr___n_expr;
+#define COLOR_parser_nodes__AOrElseExpr___n_expr 9
 val* parser_nodes__AOrElseExpr__n_expr(val* self);
-void parser_nodes__AOrElseExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AOrElseExpr___n_expr2;
+#define COLOR_parser_nodes__AOrElseExpr___n_expr2 10
 val* parser_nodes__AOrElseExpr__n_expr2(val* self);
-void parser_nodes__AOrElseExpr__n_expr2_61d(val* self, val* p0);
-void parser_nodes__AOrElseExpr__init(val* self);
-extern const int COLOR_parser_nodes__AImpliesExpr___n_expr;
+#define COLOR_parser_nodes__AImpliesExpr___n_expr 9
 val* parser_nodes__AImpliesExpr__n_expr(val* self);
-void parser_nodes__AImpliesExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AImpliesExpr___n_expr2;
+#define COLOR_parser_nodes__AImpliesExpr___n_expr2 10
 val* parser_nodes__AImpliesExpr__n_expr2(val* self);
-void parser_nodes__AImpliesExpr__n_expr2_61d(val* self, val* p0);
-void parser_nodes__AImpliesExpr__init(val* self);
-extern const int COLOR_parser_nodes__ANotExpr___n_kwnot;
-val* parser_nodes__ANotExpr__n_kwnot(val* self);
-void parser_nodes__ANotExpr__n_kwnot_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANotExpr___n_expr;
+#define COLOR_parser_nodes__ANotExpr___n_expr 10
 val* parser_nodes__ANotExpr__n_expr(val* self);
-void parser_nodes__ANotExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__ANotExpr__init(val* self);
-extern const int COLOR_parser_nodes__ABinopExpr__init;
-void parser_nodes__AEqExpr__init(val* self);
-void parser_nodes__ANeExpr__init(val* self);
-void parser_nodes__ALtExpr__init(val* self);
-void parser_nodes__ALeExpr__init(val* self);
-void parser_nodes__ALlExpr__init(val* self);
-void parser_nodes__AGtExpr__init(val* self);
-void parser_nodes__AGeExpr__init(val* self);
-void parser_nodes__AGgExpr__init(val* self);
-extern const int COLOR_parser_nodes__AIsaExpr___n_expr;
+#define COLOR_parser_nodes__AIsaExpr___n_expr 9
 val* parser_nodes__AIsaExpr__n_expr(val* self);
-void parser_nodes__AIsaExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AIsaExpr___n_type;
+#define COLOR_parser_nodes__AIsaExpr___n_type 10
 val* parser_nodes__AIsaExpr__n_type(val* self);
-void parser_nodes__AIsaExpr__n_type_61d(val* self, val* p0);
-void parser_nodes__AIsaExpr__init(val* self);
-void parser_nodes__APlusExpr__init(val* self);
-void parser_nodes__AMinusExpr__init(val* self);
-void parser_nodes__AStarshipExpr__init(val* self);
-void parser_nodes__AStarExpr__init(val* self);
-void parser_nodes__ASlashExpr__init(val* self);
-void parser_nodes__APercentExpr__init(val* self);
-extern const int COLOR_parser_nodes__AUminusExpr___n_minus;
-val* parser_nodes__AUminusExpr__n_minus(val* self);
-void parser_nodes__AUminusExpr__n_minus_61d(val* self, val* p0);
-void parser_nodes__AUminusExpr__init(val* self);
-extern const int COLOR_parser_nodes__ANewExpr___n_kwnew;
-val* parser_nodes__ANewExpr__n_kwnew(val* self);
-void parser_nodes__ANewExpr__n_kwnew_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANewExpr___n_type;
+#define COLOR_parser_nodes__ANewExpr___n_type 10
 val* parser_nodes__ANewExpr__n_type(val* self);
-void parser_nodes__ANewExpr__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANewExpr___n_id;
+#define COLOR_parser_nodes__ANewExpr___n_id 11
 val* parser_nodes__ANewExpr__n_id(val* self);
-void parser_nodes__ANewExpr__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ANewExpr___n_args;
+#define COLOR_parser_nodes__ANewExpr___n_args 12
 val* parser_nodes__ANewExpr__n_args(val* self);
-void parser_nodes__ANewExpr__n_args_61d(val* self, val* p0);
-void parser_nodes__ANewExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAttrFormExpr___n_expr;
+#define COLOR_parser_nodes__AAttrFormExpr___n_expr 9
 val* parser_nodes__AAttrFormExpr__n_expr(val* self);
-void parser_nodes__AAttrFormExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAttrFormExpr___n_id;
+#define COLOR_parser_nodes__AAttrFormExpr___n_id 10
 val* parser_nodes__AAttrFormExpr__n_id(val* self);
-void parser_nodes__AAttrFormExpr__n_id_61d(val* self, val* p0);
-void parser_nodes__AAttrFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAttrFormExpr__init;
-void parser_nodes__AAttrExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAssignFormExpr__init;
-void parser_nodes__AAttrAssignExpr__init(val* self);
-extern const int COLOR_parser_nodes__ACallFormExpr___n_id;
+#define COLOR_parser_nodes__ACallFormExpr___n_id 15
 val* parser_nodes__ACallFormExpr__n_id(val* self);
-void parser_nodes__ACallFormExpr__n_id_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACallFormExpr___n_args;
+#define COLOR_parser_nodes__ACallFormExpr___n_args 16
 val* parser_nodes__ACallFormExpr__n_args(val* self);
-void parser_nodes__ACallFormExpr__n_args_61d(val* self, val* p0);
-void parser_nodes__ACallFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__AReassignFormExpr__init;
-void parser_nodes__ASendReassignFormExpr__init(val* self);
-void parser_nodes__AAttrReassignExpr__init(val* self);
-extern const int COLOR_parser_nodes__ACallFormExpr__init;
-void parser_nodes__ACallExpr__init(val* self);
-void parser_nodes__ACallAssignExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASendReassignFormExpr__init;
-void parser_nodes__ACallReassignExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASuperExpr___n_qualified;
-val* parser_nodes__ASuperExpr__n_qualified(val* self);
-void parser_nodes__ASuperExpr__n_qualified_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASuperExpr___n_kwsuper;
-val* parser_nodes__ASuperExpr__n_kwsuper(val* self);
-void parser_nodes__ASuperExpr__n_kwsuper_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ASuperExpr___n_args;
+#define COLOR_parser_nodes__ASuperExpr___n_args 11
 val* parser_nodes__ASuperExpr__n_args(val* self);
-void parser_nodes__ASuperExpr__n_args_61d(val* self, val* p0);
-void parser_nodes__ASuperExpr__init(val* self);
-extern const int COLOR_parser_nodes__AInitExpr___n_kwinit;
-val* parser_nodes__AInitExpr__n_kwinit(val* self);
-void parser_nodes__AInitExpr__n_kwinit_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AInitExpr___n_args;
+#define COLOR_parser_nodes__AInitExpr___n_args 12
 val* parser_nodes__AInitExpr__n_args(val* self);
-void parser_nodes__AInitExpr__n_args_61d(val* self, val* p0);
-void parser_nodes__AInitExpr__init(val* self);
-extern const int COLOR_parser_nodes__ABraFormExpr___n_args;
+#define COLOR_parser_nodes__ABraFormExpr___n_args 15
 val* parser_nodes__ABraFormExpr__n_args(val* self);
-void parser_nodes__ABraFormExpr__n_args_61d(val* self, val* p0);
-void parser_nodes__ABraFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__ABraFormExpr__init;
-void parser_nodes__ABraExpr__init(val* self);
-void parser_nodes__ABraAssignExpr__init(val* self);
-extern const int COLOR_parser_nodes__AVarFormExpr___n_id;
-val* parser_nodes__AVarFormExpr__n_id(val* self);
-void parser_nodes__AVarFormExpr__n_id_61d(val* self, val* p0);
-void parser_nodes__AVarFormExpr__init(val* self);
-void parser_nodes__ABraReassignExpr__init(val* self);
-extern const int COLOR_parser_nodes__AVarFormExpr__init;
-void parser_nodes__AVarExpr__init(val* self);
-void parser_nodes__AVarAssignExpr__init(val* self);
-void parser_nodes__AVarReassignExpr__init(val* self);
-extern const int COLOR_parser_nodes__ARangeExpr___n_expr;
+#define COLOR_parser_nodes__ARangeExpr___n_expr 9
 val* parser_nodes__ARangeExpr__n_expr(val* self);
-void parser_nodes__ARangeExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ARangeExpr___n_expr2;
+#define COLOR_parser_nodes__ARangeExpr___n_expr2 10
 val* parser_nodes__ARangeExpr__n_expr2(val* self);
-void parser_nodes__ARangeExpr__n_expr2_61d(val* self, val* p0);
-void parser_nodes__ARangeExpr__init(val* self);
-extern const int COLOR_parser_nodes__ACrangeExpr___n_obra;
-val* parser_nodes__ACrangeExpr__n_obra(val* self);
-void parser_nodes__ACrangeExpr__n_obra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ACrangeExpr___n_cbra;
-val* parser_nodes__ACrangeExpr__n_cbra(val* self);
-void parser_nodes__ACrangeExpr__n_cbra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ARangeExpr__init;
-void parser_nodes__ACrangeExpr__init(val* self);
-extern const int COLOR_parser_nodes__AOrangeExpr___n_obra;
-val* parser_nodes__AOrangeExpr__n_obra(val* self);
-void parser_nodes__AOrangeExpr__n_obra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AOrangeExpr___n_cbra;
-val* parser_nodes__AOrangeExpr__n_cbra(val* self);
-void parser_nodes__AOrangeExpr__n_cbra_61d(val* self, val* p0);
-void parser_nodes__AOrangeExpr__init(val* self);
-extern const int COLOR_parser_nodes__AArrayExpr___n_exprs;
+#define COLOR_parser_nodes__AArrayExpr___n_exprs 9
 val* parser_nodes__AArrayExpr__n_exprs(val* self);
-void parser_nodes__AArrayExpr__n_exprs_61d(val* self, val* p0);
-void parser_nodes__AArrayExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASelfExpr___n_kwself;
-val* parser_nodes__ASelfExpr__n_kwself(val* self);
-void parser_nodes__ASelfExpr__n_kwself_61d(val* self, val* p0);
-void parser_nodes__ASelfExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASelfExpr__init;
-void parser_nodes__AImplicitSelfExpr__init(val* self);
-extern const int COLOR_parser_nodes__ATrueExpr___n_kwtrue;
-val* parser_nodes__ATrueExpr__n_kwtrue(val* self);
-void parser_nodes__ATrueExpr__n_kwtrue_61d(val* self, val* p0);
-void parser_nodes__ATrueExpr__init(val* self);
-extern const int COLOR_parser_nodes__AFalseExpr___n_kwfalse;
-val* parser_nodes__AFalseExpr__n_kwfalse(val* self);
-void parser_nodes__AFalseExpr__n_kwfalse_61d(val* self, val* p0);
-void parser_nodes__AFalseExpr__init(val* self);
-extern const int COLOR_parser_nodes__ANullExpr___n_kwnull;
-val* parser_nodes__ANullExpr__n_kwnull(val* self);
-void parser_nodes__ANullExpr__n_kwnull_61d(val* self, val* p0);
-void parser_nodes__ANullExpr__init(val* self);
-extern const int COLOR_parser_nodes__AIntExpr___n_number;
-val* parser_nodes__AIntExpr__n_number(val* self);
-void parser_nodes__AIntExpr__n_number_61d(val* self, val* p0);
-void parser_nodes__AIntExpr__init(val* self);
-extern const int COLOR_parser_nodes__AFloatExpr___n_float;
+#define COLOR_parser_nodes__ADecIntExpr___n_number 10
+val* parser_nodes__ADecIntExpr__n_number(val* self);
+#define COLOR_parser_nodes__AHexIntExpr___n_hex_number 10
+val* parser_nodes__AHexIntExpr__n_hex_number(val* self);
+#define COLOR_parser_nodes__AFloatExpr___n_float 9
 val* parser_nodes__AFloatExpr__n_float(val* self);
-void parser_nodes__AFloatExpr__n_float_61d(val* self, val* p0);
-void parser_nodes__AFloatExpr__init(val* self);
-extern const int COLOR_parser_nodes__ACharExpr___n_char;
+#define COLOR_parser_nodes__ACharExpr___n_char 9
 val* parser_nodes__ACharExpr__n_char(val* self);
-void parser_nodes__ACharExpr__n_char_61d(val* self, val* p0);
-void parser_nodes__ACharExpr__init(val* self);
-extern const int COLOR_parser_nodes__AStringFormExpr___n_string;
+#define COLOR_parser_nodes__AStringFormExpr___n_string 9
 val* parser_nodes__AStringFormExpr__n_string(val* self);
-void parser_nodes__AStringFormExpr__n_string_61d(val* self, val* p0);
-void parser_nodes__AStringFormExpr__init(val* self);
-extern const int COLOR_parser_nodes__AStringFormExpr__init;
-void parser_nodes__AStringExpr__init(val* self);
-void parser_nodes__AStartStringExpr__init(val* self);
-void parser_nodes__AMidStringExpr__init(val* self);
-void parser_nodes__AEndStringExpr__init(val* self);
-extern const int COLOR_parser_nodes__ASuperstringExpr___n_exprs;
-val* parser_nodes__ASuperstringExpr__n_exprs(val* self);
-void parser_nodes__ASuperstringExpr__init(val* self);
-extern const int COLOR_parser_nodes__AParExpr___n_opar;
-val* parser_nodes__AParExpr__n_opar(val* self);
-void parser_nodes__AParExpr__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AParExpr___n_cpar;
-val* parser_nodes__AParExpr__n_cpar(val* self);
-void parser_nodes__AParExpr__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AParExpr__init(val* self);
-extern const int COLOR_parser_nodes__AProxyExpr___n_expr;
+#define COLOR_parser_nodes__ASuperstringExpr___n_exprs 9
+#define COLOR_parser_nodes__AProxyExpr___n_expr 9
 val* parser_nodes__AProxyExpr__n_expr(val* self);
-void parser_nodes__AProxyExpr__n_expr_61d(val* self, val* p0);
-void parser_nodes__AProxyExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAsCastExpr___n_expr;
+#define COLOR_parser_nodes__AAsCastExpr___n_expr 9
 val* parser_nodes__AAsCastExpr__n_expr(val* self);
-void parser_nodes__AAsCastExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsCastExpr___n_kwas;
-val* parser_nodes__AAsCastExpr__n_kwas(val* self);
-void parser_nodes__AAsCastExpr__n_kwas_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsCastExpr___n_opar;
-val* parser_nodes__AAsCastExpr__n_opar(val* self);
-void parser_nodes__AAsCastExpr__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsCastExpr___n_type;
+#define COLOR_parser_nodes__AAsCastExpr___n_type 12
 val* parser_nodes__AAsCastExpr__n_type(val* self);
-void parser_nodes__AAsCastExpr__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsCastExpr___n_cpar;
-val* parser_nodes__AAsCastExpr__n_cpar(val* self);
-void parser_nodes__AAsCastExpr__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AAsCastExpr__init(val* self);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_expr;
+#define COLOR_parser_nodes__AAsNotnullExpr___n_expr 9
 val* parser_nodes__AAsNotnullExpr__n_expr(val* self);
-void parser_nodes__AAsNotnullExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_kwas;
-val* parser_nodes__AAsNotnullExpr__n_kwas(val* self);
-void parser_nodes__AAsNotnullExpr__n_kwas_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_opar;
-val* parser_nodes__AAsNotnullExpr__n_opar(val* self);
-void parser_nodes__AAsNotnullExpr__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_kwnot;
-val* parser_nodes__AAsNotnullExpr__n_kwnot(val* self);
-void parser_nodes__AAsNotnullExpr__n_kwnot_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_kwnull;
-val* parser_nodes__AAsNotnullExpr__n_kwnull(val* self);
-void parser_nodes__AAsNotnullExpr__n_kwnull_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAsNotnullExpr___n_cpar;
-val* parser_nodes__AAsNotnullExpr__n_cpar(val* self);
-void parser_nodes__AAsNotnullExpr__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AAsNotnullExpr__init(val* self);
-extern const int COLOR_parser_nodes__AIssetAttrExpr___n_kwisset;
-val* parser_nodes__AIssetAttrExpr__n_kwisset(val* self);
-void parser_nodes__AIssetAttrExpr__n_kwisset_61d(val* self, val* p0);
-void parser_nodes__AIssetAttrExpr__init(val* self);
-extern const int COLOR_parser_nodes__AExprs___n_exprs;
-val* parser_nodes__AExprs__n_exprs(val* self);
+#define COLOR_parser_nodes__AExprs___n_exprs 4
 void parser_nodes__AExprs__init(val* self);
-extern const int COLOR_parser_nodes__ADebugTypeExpr___n_kwdebug;
-val* parser_nodes__ADebugTypeExpr__n_kwdebug(val* self);
-void parser_nodes__ADebugTypeExpr__n_kwdebug_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ADebugTypeExpr___n_kwtype;
-val* parser_nodes__ADebugTypeExpr__n_kwtype(val* self);
-void parser_nodes__ADebugTypeExpr__n_kwtype_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ADebugTypeExpr___n_expr;
+#define COLOR_parser_nodes__ADebugTypeExpr___n_expr 11
 val* parser_nodes__ADebugTypeExpr__n_expr(val* self);
-void parser_nodes__ADebugTypeExpr__n_expr_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ADebugTypeExpr___n_type;
+#define COLOR_parser_nodes__ADebugTypeExpr___n_type 12
 val* parser_nodes__ADebugTypeExpr__n_type(val* self);
-void parser_nodes__ADebugTypeExpr__n_type_61d(val* self, val* p0);
-void parser_nodes__ADebugTypeExpr__init(val* self);
-extern const int COLOR_parser_nodes__AExprs__init;
-void parser_nodes__AListExprs__init(val* self);
-extern const int COLOR_parser_nodes__AParExprs___n_opar;
-val* parser_nodes__AParExprs__n_opar(val* self);
-void parser_nodes__AParExprs__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AParExprs___n_cpar;
-val* parser_nodes__AParExprs__n_cpar(val* self);
-void parser_nodes__AParExprs__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AParExprs__init(val* self);
-extern const int COLOR_parser_nodes__ABraExprs___n_obra;
-val* parser_nodes__ABraExprs__n_obra(val* self);
-void parser_nodes__ABraExprs__n_obra_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__ABraExprs___n_cbra;
-val* parser_nodes__ABraExprs__n_cbra(val* self);
-void parser_nodes__ABraExprs__n_cbra_61d(val* self, val* p0);
-void parser_nodes__ABraExprs__init(val* self);
-void parser_nodes__AAssignOp__init(val* self);
-extern const int COLOR_parser_nodes__APlusAssignOp___n_pluseq;
-val* parser_nodes__APlusAssignOp__n_pluseq(val* self);
-void parser_nodes__APlusAssignOp__n_pluseq_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAssignOp__init;
-void parser_nodes__APlusAssignOp__init(val* self);
-extern const int COLOR_parser_nodes__AMinusAssignOp___n_minuseq;
-val* parser_nodes__AMinusAssignOp__n_minuseq(val* self);
-void parser_nodes__AMinusAssignOp__n_minuseq_61d(val* self, val* p0);
-void parser_nodes__AMinusAssignOp__init(val* self);
-extern const int COLOR_parser_nodes__AModuleName___n_quad;
+#define COLOR_parser_nodes__AModuleName___n_quad 4
 val* parser_nodes__AModuleName__n_quad(val* self);
-void parser_nodes__AModuleName__n_quad_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AModuleName___n_path;
-val* parser_nodes__AModuleName__n_path(val* self);
-extern const int COLOR_parser_nodes__AModuleName___n_id;
+#define COLOR_parser_nodes__AModuleName___n_path 5
+#define COLOR_parser_nodes__AModuleName___n_id 6
 val* parser_nodes__AModuleName__n_id(val* self);
-void parser_nodes__AModuleName__n_id_61d(val* self, val* p0);
-void parser_nodes__AModuleName__init(val* self);
-extern const int COLOR_parser_nodes__AInLanguage___n_kwin;
-val* parser_nodes__AInLanguage__n_kwin(val* self);
-void parser_nodes__AInLanguage__n_kwin_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AInLanguage___n_string;
-val* parser_nodes__AInLanguage__n_string(val* self);
-void parser_nodes__AInLanguage__n_string_61d(val* self, val* p0);
-void parser_nodes__AInLanguage__init(val* self);
-extern const int COLOR_parser_nodes__AExternCodeBlock___n_in_language;
-val* parser_nodes__AExternCodeBlock__n_in_language(val* self);
-void parser_nodes__AExternCodeBlock__n_in_language_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AExternCodeBlock___n_extern_code_segment;
-val* parser_nodes__AExternCodeBlock__n_extern_code_segment(val* self);
-void parser_nodes__AExternCodeBlock__n_extern_code_segment_61d(val* self, val* p0);
-void parser_nodes__AExternCodeBlock__init(val* self);
-extern const int COLOR_parser_nodes__AQualified___n_quad;
-val* parser_nodes__AQualified__n_quad(val* self);
-void parser_nodes__AQualified__n_quad_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AQualified___n_id;
-val* parser_nodes__AQualified__n_id(val* self);
-extern const int COLOR_parser_nodes__AQualified___n_classid;
-val* parser_nodes__AQualified__n_classid(val* self);
-void parser_nodes__AQualified__n_classid_61d(val* self, val* p0);
-void parser_nodes__AQualified__init(val* self);
-extern const int COLOR_parser_nodes__ADoc___n_comment;
-val* parser_nodes__ADoc__n_comment(val* self);
-void parser_nodes__ADoc__init(val* self);
-extern const int COLOR_parser_nodes__AAnnotations___n_at;
-val* parser_nodes__AAnnotations__n_at(val* self);
-void parser_nodes__AAnnotations__n_at_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAnnotations___n_opar;
-val* parser_nodes__AAnnotations__n_opar(val* self);
-void parser_nodes__AAnnotations__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAnnotations___n_items;
-val* parser_nodes__AAnnotations__n_items(val* self);
-extern const int COLOR_parser_nodes__AAnnotations___n_cpar;
-val* parser_nodes__AAnnotations__n_cpar(val* self);
-void parser_nodes__AAnnotations__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AAnnotations__init(val* self);
-extern const int COLOR_parser_nodes__AAnnotation___n_atid;
+#define COLOR_parser_nodes__AQualified___n_id 5
+#define COLOR_parser_nodes__ADoc___n_comment 4
+#define COLOR_parser_nodes__AAnnotations___n_items 6
+#define COLOR_parser_nodes__AAnnotation___n_kwredef 5
+val* parser_nodes__AAnnotation__n_kwredef(val* self);
+#define COLOR_parser_nodes__AAnnotation___n_visibility 6
+val* parser_nodes__AAnnotation__n_visibility(val* self);
+#define COLOR_parser_nodes__AAnnotation___n_atid 7
 val* parser_nodes__AAnnotation__n_atid(val* self);
-void parser_nodes__AAnnotation__n_atid_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAnnotation___n_opar;
-val* parser_nodes__AAnnotation__n_opar(val* self);
-void parser_nodes__AAnnotation__n_opar_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAnnotation___n_args;
-val* parser_nodes__AAnnotation__n_args(val* self);
-extern const int COLOR_parser_nodes__AAnnotation___n_cpar;
-val* parser_nodes__AAnnotation__n_cpar(val* self);
-void parser_nodes__AAnnotation__n_cpar_61d(val* self, val* p0);
-void parser_nodes__AAnnotation__init(val* self);
-void parser_nodes__AAtArg__init(val* self);
-extern const int COLOR_parser_nodes__ATypeAtArg___n_type;
-val* parser_nodes__ATypeAtArg__n_type(val* self);
-void parser_nodes__ATypeAtArg__n_type_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__AAtArg__init;
-void parser_nodes__ATypeAtArg__init(val* self);
-extern const int COLOR_parser_nodes__AExprAtArg___n_expr;
+#define COLOR_parser_nodes__AAnnotation___n_args 9
+#define COLOR_parser_nodes__AExprAtArg___n_expr 4
 val* parser_nodes__AExprAtArg__n_expr(val* self);
-void parser_nodes__AExprAtArg__n_expr_61d(val* self, val* p0);
-void parser_nodes__AExprAtArg__init(val* self);
-void parser_nodes__AAtAtArg__init(val* self);
-extern const int COLOR_parser_nodes__AAtid___n_id;
+#define COLOR_parser_nodes__AAtid___n_id 4
 val* parser_nodes__AAtid__n_id(val* self);
-void parser_nodes__AAtid__n_id_61d(val* self, val* p0);
-void parser_nodes__AAtid__init(val* self);
-extern const int COLOR_parser_nodes__AAtid__init;
-void parser_nodes__AIdAtid__init(val* self);
-void parser_nodes__AKwexternAtid__init(val* self);
-void parser_nodes__AKwinternAtid__init(val* self);
-void parser_nodes__AKwreadableAtid__init(val* self);
-void parser_nodes__AKwwritableAtid__init(val* self);
-void parser_nodes__AKwimportAtid__init(val* self);
-extern const int COLOR_parser_nodes__Start___n_base;
+#define COLOR_parser_nodes__Start___n_base 4
 val* parser_nodes__Start__n_base(val* self);
-void parser_nodes__Start__n_base_61d(val* self, val* p0);
-extern const int COLOR_parser_nodes__Start___n_eof;
+#define COLOR_parser_nodes__Start___n_eof 5
 val* parser_nodes__Start__n_eof(val* self);
-void parser_nodes__Start__n_eof_61d(val* self, val* p0);
 void parser_nodes__Start__init(val* self, val* p0, val* p1);

@@ -4,9 +4,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "kernel._ffi.h"
+#ifdef ANDROID
+	#include <android/log.h>
+	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, "Nit", __VA_ARGS__)
+#else
+	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
+#endif
+#line 20 "lib/standard/kernel.nit"
 
-int kernel___Pointer_address_is_null___impl( void* recv )
+#include <errno.h>
+
+long kernel___Sys_errno___impl( Sys recv )
 {
-#line 559 "lib/standard/kernel.nit"
+#line 93 "lib/standard/kernel.nit"
 
- return recv == NULL; }
+
+		return errno;
+	}

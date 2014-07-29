@@ -1,94 +1,53 @@
 #include "nit.common.h"
-extern const int COLOR_location__SourceFile___64dfilename;
-val* location__SourceFile__filename(val* self);
-void location__SourceFile__filename_61d(val* self, val* p0);
-extern const int COLOR_location__SourceFile___64dstring;
-val* location__SourceFile__string(val* self);
-void location__SourceFile__string_61d(val* self, val* p0);
-extern const int COLOR_location__SourceFile__filename_61d;
-extern const int COLOR_stream__IStream__read_all;
-extern const int COLOR_location__SourceFile__string_61d;
-extern const int COLOR_location__SourceFile__line_starts;
+#define COLOR_location__SourceFile___filename 0
+#define COLOR_location__SourceFile___string 1
+val* stream__BufferedIStream__read_all(val* self);
+#define COLOR_location__SourceFile___line_starts 2
 val* BOX_kernel__Int(long);
-extern const int COLOR_abstract_collection__Sequence___91d_93d_61d;
+void array__Array___91d_93d_61d(val* self, long p0, val* p1);
 void location__SourceFile__init(val* self, val* p0, val* p1);
-void location__SourceFile__from_string(val* self, val* p0, val* p1);
-extern const int COLOR_location__SourceFile___64dline_starts;
-val* location__SourceFile__line_starts(val* self);
-void location__SourceFile__line_starts_61d(val* self, val* p0);
-extern const int COLOR_location__Location___64dfile;
-val* location__Location__file(val* self);
-void location__Location__file_61d(val* self, val* p0);
-extern const int COLOR_location__Location___64dline_start;
-long location__Location__line_start(val* self);
-void location__Location__line_start_61d(val* self, long p0);
-extern const int COLOR_location__Location___64dline_end;
-long location__Location__line_end(val* self);
-void location__Location__line_end_61d(val* self, long p0);
-extern const int COLOR_location__Location___64dcolumn_start;
-long location__Location__column_start(val* self);
-void location__Location__column_start_61d(val* self, long p0);
-extern const int COLOR_location__Location___64dcolumn_end;
-long location__Location__column_end(val* self);
-void location__Location__column_end_61d(val* self, long p0);
-extern const int COLOR_location__Location__file_61d;
-extern const int COLOR_location__Location__line_start_61d;
-extern const int COLOR_location__Location__line_end_61d;
-extern const int COLOR_location__Location__column_start_61d;
-extern const int COLOR_location__Location__column_end_61d;
+#define COLOR_location__Location___file 0
+#define COLOR_location__Location___line_start 1
+#define COLOR_location__Location___line_end 2
+#define COLOR_location__Location___column_start 3
+#define COLOR_location__Location___column_end 4
 void location__Location__init(val* self, val* p0, long p1, long p2, long p3, long p4);
-extern const int COLOR_location__Location__file;
-extern const int COLOR_location__Location__line_start;
-extern const int COLOR_abstract_collection__SequenceRead___91d_93d;
-extern const int COLOR_location__Location__column_start;
-long location__Location__pstart(val* self);
-extern const int COLOR_location__Location__line_end;
-extern const int COLOR_location__Location__column_end;
-long location__Location__pend(val* self);
-extern const int COLOR_location__Location__text_cache;
-extern const int COLOR_location__Location__pstart;
-extern const int COLOR_location__Location__pend;
-extern const int COLOR_location__SourceFile__string;
-extern const int COLOR_string__AbstractString__substring;
-extern const int COLOR_location__Location__text_cache_61d;
-val* location__Location__text(val* self);
-extern const int COLOR_location__Location___64dtext_cache;
-val* location__Location__text_cache(val* self);
-void location__Location__text_cache_61d(val* self, val* p0);
-extern const int COLOR_location__Location__init;
-void location__Location__with_file(val* self, val* p0);
-extern const struct type type_location__Location;
-extern const int COLOR_kernel__Object___33d_61d;
-short int location__Location___61d_61d(val* self, val* p0);
 extern const struct type type_kernel__Int;
+val* array__Array___91d_93d(val* self, long p0);
+long location__Location__pstart(val* self);
+long location__Location__pend(val* self);
+#define COLOR_location__Location___text_cache 5
+#define COLOR_kernel__Object___61d_61d 2
+val* string__FlatString__substring(val* self, long p0, long p1);
+val* location__Location__text(val* self);
+extern const struct type type_location__Location;
+short int location__Location___61d_61d(val* self, val* p0);
 short int location__Location__located_in(val* self, val* p0);
 val* string__NativeString__to_s_with_length(char* self, long p0);
-extern const int COLOR_location__SourceFile__filename;
-extern const int COLOR_abstract_collection__Collection__length;
-extern const int COLOR_string__String___43d;
+#define COLOR_string__FlatText___length 3
+val* string__FlatString___43d(val* self, val* p0);
 val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
-extern const int COLOR_array__Array__with_capacity;
-extern const int COLOR_abstract_collection__SimpleCollection__add;
-extern const int COLOR_string__Object__to_s;
+val* NEW_array__NativeArray(int length, const struct type* type);
+extern const struct type type_array__NativeArraykernel__Object;
+#define COLOR_array__Array__with_native 65
+#define COLOR_string__Object__to_s 7
 val* location__Location__to_s(val* self);
-extern const int COLOR_kernel__Object___61d_61d;
-val* NEW_location__Location(const struct type* type);
-val* location__Location__relative_to(val* self, val* p0);
-extern const int COLOR_kernel__Comparable_VTOTHER;
-extern const int COLOR_location__Location__located_in;
+#define COLOR_kernel__Comparable_VTOTHER 0
 short int location__Location___60d(val* self, val* p0);
 val* BOX_kernel__Char(char);
-extern const int COLOR_string__AbstractString__chars;
+#define COLOR_string__FlatString___chars 6
+#define COLOR_abstract_collection__SequenceRead___91d_93d 39
 extern const struct class class_kernel__Char;
-val* NEW_string__Buffer(const struct type* type);
-extern const struct type type_string__Buffer;
-extern const int COLOR_string__Buffer__init;
+val* NEW_string__FlatBuffer(const struct type* type);
+extern const struct type type_string__FlatBuffer;
+void string__FlatBuffer__init(val* self);
 val* NEW_range__Range(const struct type* type);
 extern const struct type type_range__Rangekernel__Int;
-extern const int COLOR_range__Range__without_last;
-extern const int COLOR_abstract_collection__Collection__iterator;
-extern const int COLOR_abstract_collection__Iterator__is_ok;
-extern const int COLOR_abstract_collection__Iterator__item;
-extern const int COLOR_abstract_collection__Iterator__next;
+void range__Range__without_last(val* self, val* p0, val* p1);
+val* range__Range__iterator(val* self);
+#define COLOR_abstract_collection__Iterator__is_ok 31
+#define COLOR_abstract_collection__Iterator__item 29
+void string__FlatBuffer__add(val* self, char p0);
+#define COLOR_abstract_collection__Iterator__next 30
 val* location__Location__colored_line(val* self, val* p0);

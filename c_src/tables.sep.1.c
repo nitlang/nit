@@ -13,7 +13,13 @@ return var;
 long VIRTUAL_tables__TablesCapable__lexer_goto(val* self, long p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = tables__TablesCapable__lexer_goto(self, p0, p1);
+long var3 /* : Int */;
+{ /* Inline tables#TablesCapable#lexer_goto (self,p0,p1) on <self:Object(TablesCapable)> */
+var3 = lexer_goto(self, p0, p1);
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
@@ -32,7 +38,13 @@ return var;
 long VIRTUAL_tables__TablesCapable__lexer_accept(val* self, long p0) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = tables__TablesCapable__lexer_accept(self, p0);
+long var3 /* : Int */;
+{ /* Inline tables#TablesCapable#lexer_accept (self,p0) on <self:Object(TablesCapable)> */
+var3 = lexer_accept(self, p0);
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
@@ -51,7 +63,13 @@ return var;
 long VIRTUAL_tables__TablesCapable__parser_goto(val* self, long p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = tables__TablesCapable__parser_goto(self, p0, p1);
+long var3 /* : Int */;
+{ /* Inline tables#TablesCapable#parser_goto (self,p0,p1) on <self:Object(TablesCapable)> */
+var3 = parser_goto(self, p0, p1);
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
@@ -70,7 +88,13 @@ return var;
 long VIRTUAL_tables__TablesCapable__parser_action(val* self, long p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = tables__TablesCapable__parser_action(self, p0, p1);
+long var3 /* : Int */;
+{ /* Inline tables#TablesCapable#parser_action (self,p0,p1) on <self:Object(TablesCapable)> */
+var3 = parser_action(self, p0, p1);
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
