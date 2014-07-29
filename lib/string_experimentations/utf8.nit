@@ -16,6 +16,7 @@
 module utf8
 
 intrude import standard::string
+intrude import standard::file
 
 in "C Header" `{
 
@@ -394,5 +395,19 @@ redef class NativeString
 		var new_self = calloc_string(length + 1)
 		copy_to(new_self, length, 0, 0)
 		return new FlatString.with_infos_index(new_self, real_len.item, 0, real_len.item - 1, x, length)
+	end
+end
+
+redef class OFStream
+	redef fun write(s)
+	do
+		assert _writable
+		if s isa FlatText then
+			if s isa FlatString then
+				write_native(s.to_cstring, s.bytelen)
+			else
+				write_native(s.to_cstring, s.length)
+			end
+		else for i in s.substrings do write_native(i.to_cstring, i.length)
 	end
 end
