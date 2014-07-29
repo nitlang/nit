@@ -69,12 +69,6 @@ interface Object
 	# only and can be removed without any notice
 	fun output_class_name is intern	
 
-	# Quit the program with a specific return code
-	protected fun exit(exit_value: Int) is intern
-
-	# Return the global sys object, the only instance of the `Sys` class.
-	protected fun sys: Sys is intern
-
 	# The hash code of the object.
 	# Assuming that a == b -> a.hash == b.hash
 	##
@@ -94,6 +88,13 @@ class Sys
 		return errno;
 	`}
 end
+
+# Quit the program with a specific return code
+fun exit(exit_value: Int) is intern
+
+# Return the global sys object, the only instance of the `Sys` class.
+fun sys: Sys is intern
+
 
 ###############################################################################
 # Abstract Classes                                                            #
