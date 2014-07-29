@@ -21,6 +21,12 @@ class MyClass
 	fun foo in "Java" `{
 		System.out.println("Hello world");
 	`}
+
+	fun bar(i: Int) in "Java" `{
+		System.out.println(i);
+	`}
 end
 
-(new MyClass).foo
+var a = new MyClass
+a.foo
+a.bar(777)
