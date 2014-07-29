@@ -107,3 +107,67 @@ private extern class StringIndex `{ UTF8Char* `}
 		memcpy(itsfrom, myfrom, length);
 	`}
 end
+
+redef class FlatString
+
+	# Index of the characters of the FlatString
+	private var index: StringIndex
+
+	# Length in bytes of the string (e.g. the length of the C string)
+	var bytelen: Int
+
+	private init with_infos_index(items: NativeString, len: Int, index_from: Int, index_to: Int, index: StringIndex, bytelen: Int)
+	do
+		self.items = items
+		length = len
+		self.index_from = index_from
+		self.index_to = index_to
+		self.index = index
+		self.bytelen = bytelen
+	end
+
+end
+
+redef class NativeString
+
+	# Creates the index for said NativeString
+	# `length` is the size of the CString (in bytes, up to the first \0)
+	# real_len is just a way to store the length (UTF-8 characters)
+	private fun make_index(length: Int, real_len: Container[Int]): StringIndex import Container[Int].item=, UnicodeChar.len `{
+		int pos = 0;
+		int index_pos = 0;
+		UTF8Char* index = malloc(length*sizeof(UTF8Char));
+		while(pos < length){
+			UTF8Char* curr = &index[index_pos];
+			curr->pos = pos;
+			curr->ns = recv;
+			pos += UnicodeChar_len(curr);
+			index_pos ++;
+		}
+		Container_of_Int_item__assign(real_len, index_pos);
+		return index;
+	`}
+
+	redef fun to_s: FlatString
+	do
+		var len = cstring_length
+		return to_s_with_length(len)
+	end
+
+	redef fun to_s_with_length(len: Int): FlatString
+	do
+		var real_len = new Container[Int](0)
+		var x = make_index(len, real_len)
+		return new FlatString.with_infos_index(self, real_len.item, 0, real_len.item - 1, x, len)
+	end
+
+	redef fun to_s_with_copy
+	do
+		var real_len = new Container[Int](0)
+		var length = cstring_length
+		var x = make_index(length, real_len)
+		var new_self = calloc_string(length + 1)
+		copy_to(new_self, length, 0, 0)
+		return new FlatString.with_infos_index(new_self, real_len.item, 0, real_len.item - 1, x, length)
+	end
+end
