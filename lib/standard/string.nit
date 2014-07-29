@@ -15,7 +15,7 @@
 module string
 
 import math
-intrude import collection # FIXME should be collection::array
+import collection
 
 `{
 #include <stdio.h>
