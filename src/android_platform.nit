@@ -239,7 +239,9 @@ $(call import-module,android/native_app_glue)
 			res_dir = res_dir.realpath
 			var target_res_dir = "{android_project_root}"
 			toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
-		else
+		end
+
+		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
 			# Create our own custom `res/values/string.xml` with the App name
 """<?xml version="1.0" encoding="utf-8"?>
 <resources>
