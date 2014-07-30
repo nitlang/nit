@@ -293,6 +293,21 @@ abstract class Text
 		return true
 	end
 
+	# Returns `true` if the string contains only Hex chars
+	#
+	#     assert "048bf".is_hex  == true
+	#     assert "ABCDEF".is_hex  == true
+	#     assert "0G".is_hex == false
+	fun is_hex: Bool
+	do
+		for c in self.chars do
+			if not (c >= 'a' and c <= 'f') and
+			   not (c >= 'A' and c <= 'F') and
+			   not (c >= '0' and c <= '9') then return false
+		end
+		return true
+	end
+
 	# Are all letters in `self` upper-case ?
 	#
 	#     assert "HELLO WORLD".is_upper == true
@@ -472,6 +487,71 @@ abstract class Text
 			end
 		end
 		return res.to_s
+	end
+
+	# Encode `self` to percent (or URL) encoding
+	#
+	#     assert "aBc09-._~".to_percent_encoding == "aBc09-._~"
+	#     assert "%()< >".to_percent_encoding == "%25%28%29%3c%20%3e"
+	#     assert ".com/post?e=asdf&f=123".to_percent_encoding == ".com%2fpost%3fe%3dasdf%26f%3d123"
+	fun to_percent_encoding: String
+	do
+		var buf = new FlatBuffer
+
+		for c in self.chars do
+			if (c >= '0' and c <= '9') or
+			   (c >= 'a' and c <= 'z') or
+			   (c >= 'A' and c <= 'Z') or
+			   c == '-' or c == '.' or
+			   c == '_' or c == '~'
+			then
+				buf.add c
+			else buf.append "%{c.ascii.to_hex}"
+		end
+
+		return buf.to_s
+	end
+
+	# Decode `self` from percent (or URL) encoding to a clear string
+	#
+	# Replace invalid use of '%' with '?'.
+	#
+	#     assert "aBc09-._~".from_percent_encoding == "aBc09-._~"
+	#     assert "%25%28%29%3c%20%3e".from_percent_encoding == "%()< >"
+	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".from_percent_encoding == ".com/post?e=asdf&f=123"
+	#     assert "%25%28%29%3C%20%3E".from_percent_encoding == "%()< >"
+	#     assert "incomplete %".from_percent_encoding == "incomplete ?"
+	#     assert "invalid % usage".from_percent_encoding == "invalid ? usage"
+	fun from_percent_encoding: String
+	do
+		var buf = new FlatBuffer
+
+		var i = 0
+		while i < length do
+			var c = chars[i]
+			if c == '%' then
+				if i + 2 >= length then
+					# What follows % has been cut off
+					buf.add '?'
+				else
+					i += 1
+					var hex_s = substring(i, 2)
+					if hex_s.is_hex then
+						var hex_i = hex_s.to_hex
+						buf.add hex_i.ascii
+						i += 1
+					else
+						# What follows a % is not Hex
+						buf.add '?'
+						i -= 1
+					end
+				end
+			else buf.add c
+
+			i += 1
+		end
+
+		return buf.to_s
 	end
 
 	# Equality of text

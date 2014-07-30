@@ -127,7 +127,6 @@ class Statement
 	fun iterator: StatementIterator
 	do
 		native_statement.reset
-		native_statement.step
 		return new StatementIterator(self)
 	end
 end
@@ -228,7 +227,7 @@ class StatementEntry
 
 		var native_string = statement.native_statement.column_text(index)
 		if native_string.address_is_null then return ""
-		return native_string.to_s
+		return native_string.to_s_with_copy
 	end
 
 	# Get this entry as `Blob`
@@ -260,11 +259,13 @@ class StatementIterator
 	do
 		self.statement = s
  		self.item = new StatementRow(s)
+
+		self.is_ok = statement.native_statement.step.is_row
 	end
 
 	redef var item: StatementRow
 
-	redef var is_ok = true
+	redef var is_ok: Bool
 
 	# require: `self.statement.is_open`
 	redef fun next
@@ -290,7 +291,17 @@ interface Sqlite3Data end
 
 redef universal Int super Sqlite3Data end
 redef universal Float super Sqlite3Data end
-redef class String super Sqlite3Data end
+redef class String
+	super Sqlite3Data
+
+	# Return `self` between `'`s and escaping any extra `'`
+	#
+	#     assert "'; DROP TABLE students".to_sql_string == "'''; DROP TABLE students'"
+	fun to_sql_string: String
+	do
+		return "'{self.replace('\'', "''")}'"
+	end
+end
 
 # A Sqlite3 blob
 class Blob

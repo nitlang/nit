@@ -355,6 +355,17 @@ redef class Text
 	# @deprecated alias for `split`
 	fun split_with(p: Pattern): Array[SELFTYPE] do return self.split(p)
 
+	# Split `self` on the first `=`
+	#
+	#     assert "hello".split_once_on('l') == ["he", "lo"]
+	#     assert "a, b, c, d, e".split_once_on(", ") == ["a", "b, c, d, e"]
+	fun split_once_on(p: Pattern): Array[SELFTYPE]
+	do
+		var m = p.search_in(self, 0)
+		if m == null then return [self]
+		return new Array[SELFTYPE].with_items(substring(0, m.from), substring_from(m.after))
+	end
+
 	# Replace all occurences of a pattern with a string
 	#
 	#     assert "hlelo".replace("le", "el")	     ==  "hello"

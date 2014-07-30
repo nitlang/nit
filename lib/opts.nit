@@ -245,23 +245,15 @@ end
 # Context where the options process
 class OptionContext
 	# Options present in the context
-	var options: Array[Option]
+	var options = new Array[Option]
 
 	# Rest of the options after `parse` is called
-	var rest: Array[String]
+	var rest = new Array[String]
 
 	# Errors found in the context after parsing
-	var errors: Array[String]
+	var errors = new Array[String]
 
-	private var optmap: Map[String, Option]
-
-	init
-	do
-		options = new Array[Option]
-		optmap = new HashMap[String, Option]
-		rest = new Array[String]
-		errors = new Array[String]
-	end
+	private var optmap = new HashMap[String, Option]
 
 	# Add one or more options to the context
 	fun add_option(opts: Option...) do
