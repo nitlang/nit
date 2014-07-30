@@ -18,8 +18,7 @@
 module bitset
 
 import collection
-import math
-import file
+private import math
 
 in "C header" `{
 	#include <assert.h>

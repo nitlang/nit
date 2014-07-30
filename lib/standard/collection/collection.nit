@@ -13,7 +13,6 @@
 # This module define several collection classes.
 module collection
 
-import abstract_collection
 import range
 import list
 import array
