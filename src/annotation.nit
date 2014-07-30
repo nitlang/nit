@@ -17,6 +17,7 @@ module annotation
 
 import parser
 import modelbuilder
+import phase
 import literal
 
 redef class Prod
@@ -25,6 +26,8 @@ redef class Prod
 	# Try to get its single annotation with a given name
 	# If there is no such an annotation, null is returned.
 	# If there is more than one annotation, a error message is printed and the first annotation is returned
+	#
+	# The returned annotation is marked `AAnnotation::processed`
 	fun get_single_annotation(name: String, modelbuilder: ModelBuilder): nullable AAnnotation
 	do
 		var res = get_annotations(name)
@@ -37,6 +40,8 @@ redef class Prod
 
 	# Return all its annotations of a given name in the order of their declaration
 	# Retun an empty array if no such an annotation.
+	#
+	# All returned annotation are marked `AAnnotation::processed`
 	fun get_annotations(name: String): Array[AAnnotation]
 	do
 		var res = new Array[AAnnotation]
@@ -44,6 +49,7 @@ redef class Prod
 		if nas == null then return res
 		for na in nas.n_items do
 			if na.name != name then continue
+			na.processed = true
 			res.add(na)
 		end
 		return res

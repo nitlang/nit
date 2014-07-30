@@ -8,10 +8,7 @@
 # http://sam.zoy.org/projects/COPYING.WTFPL for more details.
 
 # Full UI for the game
-module friendz is
-	app_name("ChainZ of FriendZ")
-	app_version(0, 1, git_revision)
-end
+module friendz
 
 import mnit
 import realtime

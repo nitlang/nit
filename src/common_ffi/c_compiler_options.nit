@@ -41,6 +41,7 @@ private class CCompilerOptionsPhase
 		if annotation_name != compiler_annotation_name and
 		   annotation_name != linker_annotation_name and
 		   annotation_name != cpp_compiler_annotation_name then return
+		nat.processed = true
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder

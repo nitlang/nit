@@ -13,7 +13,10 @@
 # limitations under the License.
 
 # Android version of the shoot program
-module shoot_android
+module shoot_android is
+	app_name("Space Shooter")
+	app_version(0, 1, git_revision)
+end
 
 import shoot
 import mnit_android

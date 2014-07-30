@@ -40,6 +40,8 @@ private class SerializationPhasePreModel
 	do
 		# Skip if we are not interested
 		if nat.n_atid.n_id.text != "auto_serializable" then return
+		nat.processed = true
+
 		if not nclassdef isa AStdClassdef then
 			toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be automatically serialized.")
 			return
@@ -64,7 +66,7 @@ private class SerializationPhasePreModel
 		var auto_serializable_nclassdefs = new Array[AStdClassdef]
 		for nclassdef in nmodule.n_classdefs do
 			if nclassdef isa AStdClassdef and
-			   not nclassdef.collect_annotations_by_name("auto_serializable").is_empty then
+			   not nclassdef.get_annotations("auto_serializable").is_empty then
 				auto_serializable_nclassdefs.add nclassdef
 			end
 		end
