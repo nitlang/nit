@@ -71,7 +71,7 @@ module parser
 
 intrude import parser_prod
 intrude import parser_work
-import tables
+private import tables
 $ call make_parser()
 $ end output
 

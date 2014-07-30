@@ -22,6 +22,7 @@ import typing
 import auto_super_init
 import frontend
 import common_ffi
+private import parser::tables
 
 redef class ToolContext
 	# --discover-call-trace
