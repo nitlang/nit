@@ -119,7 +119,11 @@ class JavaLanguage
 			end
 		end
 
-		for p in signature.mparameters do params.add(p.name)
+		for p in signature.mparameters do
+			var param_mtype = p.mtype
+			param_mtype = param_mtype.resolve_for(mclass_type, mclass_type, mmodule, true)
+			params.add(to_java_call_context.cast_to(param_mtype, p.name))
+		end
 
 		var cname = "(*nit_ffi_jni_env)->CallStatic{jni_signature_alt}Method"
 		var ccall

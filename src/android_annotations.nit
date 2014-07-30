@@ -133,21 +133,21 @@ redef class ModelBuilder
 			end
 		end
 
-		var sources = new Array[MModule]
-		var annotations = null
+		var annotations = new HashSet[AAnnotation]
 		for mmod in mmodule.in_importation.direct_greaters do
 			var res = priority_annotation_on_modules(name, mmod)
-			if res != null then
-				sources.add mmod
-				annotations = res
-			end
+			if res != null then annotations.add res
 		end
-		if sources.length > 1 then
+		if annotations.length > 1 then
+			var locs = new Array[Location]
+			for annot in annotations do locs.add(annot.location)
+
 			toolcontext.error(mmodule.location,
-				"Priority conflict on annotation {name}, it has been defined in: {sources.join(", ")}")
+				"Priority conflict on annotation {name}, it has been defined in: {locs.join(", ")}")
 			return null
-		end
-		return annotations
+		else if annotations.length == 1 then
+			return annotations.first
+		else return null
 	end
 end
 
