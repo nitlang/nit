@@ -99,6 +99,14 @@ private class StringLeaf
 	redef fun to_leaf do return self
 end
 
+# Used as a cache when using indexed access to a substring in the Rope
+private class LeafCache
+	# Cached leaf
+	var leaf: Leaf
+	# Position in Rope
+	var pos: Int
+end
+
 # Basic structure, binary tree with a root node.
 #
 # Also shared services by subsequent implementations.
@@ -110,6 +118,8 @@ abstract class Rope
 
 	# Cached version of self as a flat String
 	private var str_representation: nullable NativeString = null
+
+	private var leaf_cache: nullable LeafCache = null
 
 	# Empty Rope
 	init do from("")
@@ -225,7 +235,10 @@ abstract class Rope
 	private fun get_node_from(node: RopeNode, curr_pos: Int, seek_pos: Int, stack: List[PathElement]): Path
 	do
 		assert curr_pos >= 0
-		if node isa Leaf then return new Path(node, seek_pos - curr_pos, stack)
+		if node isa Leaf then
+			self.leaf_cache = new LeafCache(node, curr_pos)
+			return new Path(node, seek_pos - curr_pos, stack)
+		end
 		node = node.as(Concat)
 
 		if node.left != null then
@@ -296,7 +309,18 @@ class RopeString
 		return ret
 	end
 
-	redef fun +(o) do return insert_at(o.to_s, length)
+	redef fun +(o) do
+		if self.length == 0 then return o.to_s
+		if o.length == 0 then return self
+		var str = o.to_s
+		if str isa FlatString then
+			return new RopeString.from_root(new Concat(root, new StringLeaf(str)))
+		else if str isa RopeString then
+			return new RopeString.from_root(new Concat(root, str.root))
+		else
+			abort
+		end
+	end
 
 	redef fun *(n)
 	do
@@ -439,6 +463,7 @@ private class RopeStringChars
 	redef fun [](pos)
 	do
 		assert pos < tgt.length
+		if tgt.leaf_cache != null and pos >= tgt.leaf_cache.pos and (tgt.leaf_cache.pos + tgt.leaf_cache.leaf.length) > pos then return tgt.leaf_cache.leaf.str.chars[pos - tgt.leaf_cache.pos]
 		var path = tgt.node_at(pos)
 		return path.leaf.str.chars[path.offset]
 	end

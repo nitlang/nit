@@ -105,6 +105,8 @@ redef class RopeString
 		end
 	end
 
+	redef fun +(o) do return insert_at(o.to_s, length)
+
 	# Inserts a String `str` at position `pos`
 	redef fun insert_at(str, pos)
 	do
