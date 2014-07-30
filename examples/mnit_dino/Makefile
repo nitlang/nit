@@ -4,9 +4,13 @@ linux:
 	mkdir -p bin
 	../../bin/nitg -o bin/dino src/dino_linux.nit
 
-android:
+android: android-icons
 	mkdir -p bin
 	../../bin/nitg -o bin/dino.apk src/dino_android.nit
+
+android-icons:
+	mkdir -p res
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
 
 doc:
 	mkdir -p doc
