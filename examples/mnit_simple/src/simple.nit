@@ -16,7 +16,7 @@
 
 # Very simple application
 module simple is
-	app_name("mnit Simple example")
+	app_name("mnit Simple example") # On Android, this name is hidden by the value in `res/values/strings.xml`
 	app_version(0, 2, git_revision)
 end
 

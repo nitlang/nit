@@ -15,7 +15,6 @@
 # limitations under the License.
 
 module simple_android is
-	java_package("org.nitlanguage.simple")
 	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
 end
 
