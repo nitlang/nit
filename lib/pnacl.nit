@@ -724,34 +724,32 @@ class PnaclApp
 	end
 end
 
-redef interface Object
-	# Creates a new thread for Nit.
-	#
-	# This function launches the Nit main on a new thread.
-	# Its purpose is to allow Nit to be still operational after an exit when needed,
-	# because reloading the page may not be an option.
-	#
-	# Should only be used within the 'exit' before stopping the current thread
-	# when the Nit execution causes a crash.
-	#
-	# REQUIRE: g_nit_thread and WrapperNitMain are set.
-	fun create_thread `{
-		pthread_create(&g_nit_thread, NULL, &WrapperNitMain, NULL);
-	`}
+# Creates a new thread for Nit.
+#
+# This function launches the Nit main on a new thread.
+# Its purpose is to allow Nit to be still operational after an exit when needed,
+# because reloading the page may not be an option.
+#
+# Should only be used within the 'exit' before stopping the current thread
+# when the Nit execution causes a crash.
+#
+# REQUIRE: g_nit_thread and WrapperNitMain are set.
+fun create_thread `{
+	pthread_create(&g_nit_thread, NULL, &WrapperNitMain, NULL);
+`}
 
-	# Calls 'pthread_exit on current thread.
-        fun exit_thread(exit_value: Int) `{
-		pthread_exit((void*) exit_value);
-	`}
+# Calls 'pthread_exit on current thread.
+fun exit_thread(exit_value: Int) `{
+	pthread_exit((void*) exit_value);
+`}
 
-	# Redef of exit in order to avoid the module to crash by terminating only the Nit thread.
-	redef fun exit(exit_value: Int)
-	do
-		var dictionary = new PepperDictionary
-		dictionary["exit"] = exit_value
-		app.post_dictionary dictionary
-		exit_thread exit_value
-	end
+# Redef of exit in order to avoid the module to crash by terminating only the Nit thread.
+redef fun exit(exit_value: Int)
+do
+	var dictionary = new PepperDictionary
+	dictionary["exit"] = exit_value
+	app.post_dictionary dictionary
+	exit_thread exit_value
 end
 
 fun app: PnaclApp do return once new PnaclApp

@@ -24,17 +24,15 @@ intrude import toolcontext
 intrude import modelbuilder
 intrude import standard::file
 
-redef interface Object
-	# We redefine exit to start a new thread before killing the one that called exit.
-	redef fun exit(exit_value: Int)
-	do
-		var dictionary = new PepperDictionary
-		dictionary["exit"] = exit_value
-		dictionary["exit_thread"] = "A new thread has been made available for Nit."
-		create_thread
-		app.post_dictionary dictionary
-		exit_thread exit_value
-	end
+# We redefine exit to start a new thread before killing the one that called exit.
+redef fun exit(exit_value: Int)
+do
+	var dictionary = new PepperDictionary
+	dictionary["exit"] = exit_value
+	dictionary["exit_thread"] = "A new thread has been made available for Nit."
+	create_thread
+	app.post_dictionary dictionary
+	exit_thread exit_value
 end
 
 #hack realpath.

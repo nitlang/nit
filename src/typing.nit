@@ -252,8 +252,7 @@ private class TypeVisitor
 
 		assert mproperty isa MMethod
 
-		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel and name != "sys" and name != "exit" then
-			# FIXME named methods are here as a workaround
+		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
 			error(node, "Error: '{name}' is not a top-level method, thus need a receiver.")
 		end
 		if not recv_is_self and mproperty.is_toplevel then
