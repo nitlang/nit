@@ -4,7 +4,7 @@ module parser
 
 intrude import parser_prod
 intrude import parser_work
-import tables
+private import tables
 
 redef class Parser
 	redef fun build_reduce_table

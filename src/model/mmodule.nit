@@ -17,7 +17,6 @@
 # modules and module hierarchies in the metamodel
 module mmodule
 
-import poset
 import location
 import mproject
 private import more_collections

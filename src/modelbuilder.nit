@@ -689,6 +689,18 @@ class ModelBuilder
 		end
 		self.toolcontext.info("{mmodule} imports {imported_modules.join(", ")}", 3)
 		mmodule.set_imported_mmodules(imported_modules)
+
+		# TODO: Correctly check for useless importation
+		# It is even doable?
+		var directs = mmodule.in_importation.direct_greaters
+		for nim in nmodule.n_imports do
+			if not nim isa AStdImport then continue
+			var im = nim.mmodule
+			if im == null then continue
+			if directs.has(im) then continue
+			# This generates so much noise that it is simpler to just comment it
+			#warning(nim, "Warning: possible useless importation of {im}")
+		end
 	end
 
 	# All the loaded modules

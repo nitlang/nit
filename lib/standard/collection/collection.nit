@@ -13,10 +13,9 @@
 # This module define several collection classes.
 module collection
 
-import abstract_collection
 import range
 import list
-intrude import array # FIXME because of string.nit
+import array
 import sorter
 import hash_collection
 import union_find
