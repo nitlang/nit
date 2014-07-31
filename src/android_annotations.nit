@@ -100,21 +100,6 @@ redef class ModelBuilder
 		return project
 	end
 
-	# Recursively collect all annotations by name in `mmodule` and its importations (direct and indirect)
-	private fun collect_annotations_on_modules(name: String, mmodule: MModule): Array[AAnnotation]
-	do
-		var annotations = new Array[AAnnotation]
-		for mmod in mmodule.in_importation.greaters do
-			if not mmodule2nmodule.keys.has(mmod) then continue
-			var amod = mmodule2nmodule[mmod]
-			var module_decl = amod.n_moduledecl
-			if module_decl == null then continue
-			var aas = module_decl.get_annotations(name)
-			annotations.add_all aas
-		end
-		return annotations
-	end
-
 	# Get an annotation by name from `mmodule` and its super modules. Will recursively search
 	# in imported module to find the "latest" declaration and detects priority conflicts.
 	private fun priority_annotation_on_modules(name: String, mmodule: MModule): nullable AAnnotation

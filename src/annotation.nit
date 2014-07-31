@@ -133,3 +133,21 @@ redef class AAtArg
 		return nexpr.n_id.text
 	end
 end
+
+redef class ModelBuilder
+	# Collect all annotations by `name` assocated to `mmodule` and its imported modules.
+	# Note that visibility is not considered.
+	fun collect_annotations_on_modules(name: String, mmodule: MModule): Array[AAnnotation]
+	do
+		var annotations = new Array[AAnnotation]
+		for mmod in mmodule.in_importation.greaters do
+			if not mmodule2nmodule.keys.has(mmod) then continue
+			var amod = mmodule2nmodule[mmod]
+			var module_decl = amod.n_moduledecl
+			if module_decl == null then continue
+			var aas = module_decl.get_annotations(name)
+			annotations.add_all aas
+		end
+		return annotations
+	end
+end
