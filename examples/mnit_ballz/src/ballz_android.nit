@@ -14,7 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module ballz_android
+module ballz_android is
+	app_version(1, 0, git_revision)
+	app_name("Ballz")
+end
 
 import game_logic
 
