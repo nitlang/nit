@@ -164,6 +164,55 @@ class POSet[E: Object]
 		return elements[a].count <=> elements[b].count
 	end
 
+	# Filter elements to return only the smallest ones
+	#
+	# ~~~
+	# var s = new POSet[String]
+	# s.add_edge("B", "A")
+	# s.add_edge("C", "A")
+	# s.add_edge("D", "B")
+	# s.add_edge("D", "C")
+	# assert s.select_smallest(["A", "B"]) == ["B"]
+	# assert s.select_smallest(["A", "B", "C"]) == ["B", "C"]
+	# assert s.select_smallest(["B", "C", "D"]) == ["D"]
+	# ~~~
+	fun select_smallest(elements: Collection[E]): Array[E]
+	do
+		var res = new Array[E]
+		for e in elements do
+			for f in elements do
+				if e == f then continue
+				if has_edge(f, e) then continue label
+			end
+			res.add(e)
+		end label
+		return res
+	end
+
+	# ~~~
+	# var s = new POSet[String]
+	# s.add_edge("B", "A")
+	# s.add_edge("C", "A")
+	# s.add_edge("D", "B")
+	# s.add_edge("D", "C")
+	# assert s.select_greatest(["A", "B"]) == ["A"]
+	# assert s.select_greatest(["A", "B", "C"]) == ["A"]
+	# assert s.select_greatest(["B", "C", "D"]) == ["B", "C"]
+	# ~~~
+	# Filter elements to return only the greatest ones
+	fun select_greatest(elements: Collection[E]): Array[E]
+	do
+		var res = new Array[E]
+		for e in elements do
+			for f in elements do
+				if e == f then continue
+				if has_edge(e, f) then continue label
+			end
+			res.add(e)
+		end label
+		return res
+	end
+
 	# Sort a sorted array of poset elements using linearization order
 	fun linearize(elements: Collection[E]): Array[E] do
 		var lin = elements.to_a
