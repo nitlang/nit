@@ -80,7 +80,10 @@ redef class HttpResponse
 
 		var session = self.session
 		if session != null then
-			header["Set-Cookie"] = "session={session.id_hash}; HttpOnly"
+			header["Set-Cookie"] = "nitcorn_session={session.id_hash}; HttpOnly"
+		else
+			# Make sure there are no cookie left client side
+			header["Set-Cookie"] = "nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT"
 		end
 	end
 end
@@ -95,8 +98,8 @@ redef class HttpRequestParser
 	do
 		var request = super
 		if request != null then
-			if request.cookie.keys.has("session") then
-				var id_hash = request.cookie["session"]
+			if request.cookie.keys.has("nitcorn_session") then
+				var id_hash = request.cookie["nitcorn_session"]
 
 				if sys.sessions.keys.has(id_hash) then
 					# Restore the session
