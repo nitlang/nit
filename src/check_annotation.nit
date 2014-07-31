@@ -51,14 +51,23 @@ private class CheckAnnotationPhase
 		# Get all the new annotations
 		var annots = nmoduledecl.get_annotations("new_annotation")
 
+		var super_mmodules = declared_annotations.lookup_all_modules(mmodule, private_visibility)
+
 		# Add each new annotations in the map
 		for annot in annots do
 			var name = annot.arg_as_id(modelbuilder)
 			if name == null then continue
 
+			for m in super_mmodules do
+				if declared_annotations[m].has(name) then
+					modelbuilder.warning(annot, "Warning: an annotation `{name}` is already declared in module `{m}`")
+					break label
+				end
+			end
+
 			declared_annotations[mmodule].add(name)
 			#annot.debug "add {mmodule}: {name}"
-		end
+		end label
 	end
 
 	# Raw new-line separated list of primitive annotation
