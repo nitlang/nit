@@ -4,9 +4,13 @@ linux:
 	mkdir -p bin
 	../../bin/nitg -o bin/moles src/moles_linux.nit
 
-android:
+android: android-icons
 	mkdir -p bin
 	../../bin/nitg -o bin/moles.apk src/moles_android.nit
+
+android-icons:
+	mkdir -p res
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
 
 android-install: android
 	adb install -rf bin/moles.apk

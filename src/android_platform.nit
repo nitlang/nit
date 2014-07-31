@@ -104,6 +104,22 @@ class AndroidToolchain
 			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
 		end
 
+		# Is there an icon?
+		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
+		var icon_available = false
+		for res in resolutions do
+			var path = "res/drawable-{res}/icon.png"
+			if path.file_exists then
+				icon_available = true
+				break
+			end
+		end
+
+		var icon_declaration
+		if icon_available then
+			icon_declaration = "android:icon=\"@drawable/icon\""
+		else icon_declaration = ""
+
 		## Generate delagating makefile
 		dir = "{android_project_root}/jni/"
 		"""
@@ -138,10 +154,10 @@ $(call import-module,android/native_app_glue)
         android:versionName="{{{app_version}}}">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
-    <uses-sdk 
-        android:minSdkVersion="{{{app_min_api}}}" 
-        android:targetSdkVersion="{{{app_target_api}}}" 
-        {{{app_max_api}}} /> 
+    <uses-sdk
+        android:minSdkVersion="{{{app_min_api}}}"
+        android:targetSdkVersion="{{{app_target_api}}}"
+        {{{app_max_api}}} />
 
     <application
 		android:label="@string/app_name"
@@ -154,7 +170,8 @@ $(call import-module,android/native_app_glue)
                 android:label="@string/app_name"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                 android:configChanges="orientation|keyboardHidden"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                {{{icon_declaration}}}>
             <!-- Tell NativeActivity the name of or .so -->
             <meta-data android:name=\"{{{app_package}}}\"
                     android:value=\"{{{app_name}}}\" />
@@ -170,7 +187,7 @@ $(call import-module,android/native_app_glue)
 
 {{{project.manifest_lines.join("\n")}}}
 
-</manifest> 
+</manifest>
 <!-- END_INCLUDE(manifest) -->
 		""".write_to_file("{dir}/AndroidManifest.xml")
 
@@ -206,7 +223,7 @@ $(call import-module,android/native_app_glue)
 				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
 			end
 		end
-		
+
 		### copy resources  (for android)
 		# This will be accessed from `android_project_root`
 		var res_dir
@@ -222,7 +239,9 @@ $(call import-module,android/native_app_glue)
 			res_dir = res_dir.realpath
 			var target_res_dir = "{android_project_root}"
 			toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
-		else
+		end
+
+		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
 			# Create our own custom `res/values/string.xml` with the App name
 """<?xml version="1.0" encoding="utf-8"?>
 <resources>
