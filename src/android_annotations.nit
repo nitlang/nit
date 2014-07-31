@@ -66,13 +66,13 @@ redef class ModelBuilder
 	do
 		var project = new AndroidProject
 
-		var annot = priority_annotation_on_modules("app_name", mmodule)
+		var annot = lookup_annotation_on_modules("app_name", mmodule)
 		if annot != null then project.name = annot.arg_as_string(self)
 
-		annot =  priority_annotation_on_modules("app_version", mmodule)
+		annot =  lookup_annotation_on_modules("app_version", mmodule)
 		if annot != null then project.version =  annot.as_version(self)
 
-		annot = priority_annotation_on_modules("java_package", mmodule)
+		annot = lookup_annotation_on_modules("java_package", mmodule)
 		if annot != null then project.java_package = annot.arg_as_string(self)
 
 		var annots = collect_annotations_on_modules("min_api_version", mmodule)
@@ -98,41 +98,6 @@ redef class ModelBuilder
 		toolcontext.check_errors
 
 		return project
-	end
-
-	# Get an annotation by name from `mmodule` and its super modules. Will recursively search
-	# in imported module to find the "latest" declaration and detects priority conflicts.
-	private fun priority_annotation_on_modules(name: String, mmodule: MModule): nullable AAnnotation
-	do
-		if mmodule2nmodule.keys.has(mmodule) then
-			var amod = mmodule2nmodule[mmodule]
-			var module_decl = amod.n_moduledecl
-			if module_decl != null then
-				var annotations = module_decl.get_annotations(name)
-				if annotations.length == 1 then
-					return annotations.first
-				else if annotations.length > 1 then
-					toolcontext.error(mmodule.location,
-						"Multiple declaration of annotation {name}, it must be defined only once.")
-				end
-			end
-		end
-
-		var annotations = new HashSet[AAnnotation]
-		for mmod in mmodule.in_importation.direct_greaters do
-			var res = priority_annotation_on_modules(name, mmod)
-			if res != null then annotations.add res
-		end
-		if annotations.length > 1 then
-			var locs = new Array[Location]
-			for annot in annotations do locs.add(annot.location)
-
-			toolcontext.error(mmodule.location,
-				"Priority conflict on annotation {name}, it has been defined in: {locs.join(", ")}")
-			return null
-		else if annotations.length == 1 then
-			return annotations.first
-		else return null
 	end
 end
 
