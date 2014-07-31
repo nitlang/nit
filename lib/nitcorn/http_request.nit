@@ -84,6 +84,10 @@ class HttpRequestParser
 		segment_http_request(full_request)
 
 		# Parse first line, looks like "GET dir/index.html?user=xymus HTTP/1.0"
+		if first_line.length < 3 then
+			print "HTTP error: request first line apprears invalid: {first_line}"
+			return null
+		end
 		http_request.method = first_line[0]
 		http_request.url = first_line[1]
 		http_request.http_version = first_line[2]
@@ -100,7 +104,7 @@ class HttpRequestParser
 		# POST args
 		if http_request.method == "POST" then
 			var lines = body.split_with('&')
-			for line in lines do
+			for line in lines do if not line.trim.is_empty then
 				var parts = line.split_once_on('=')
 				if parts.length > 1 then
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
