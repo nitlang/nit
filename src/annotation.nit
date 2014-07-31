@@ -18,6 +18,7 @@ module annotation
 import parser
 import modelbuilder
 import literal
+import model::mmodule_data
 
 redef class Prod
 	super ANode
@@ -149,5 +150,55 @@ redef class ModelBuilder
 			annotations.add_all aas
 		end
 		return annotations
+	end
+
+	# Return the single annotation `name` locally assocated to `mmodule`, if any.
+	# Obviously, if there is no ast associated to `mmodule`, then nothing is returned.
+	fun get_mmodule_annotation(name: String, mmodule: MModule): nullable AAnnotation
+	do
+		if not mmodule2nmodule.keys.has(mmodule) then return null
+		var amod = mmodule2nmodule[mmodule]
+		var module_decl = amod.n_moduledecl
+		if module_decl == null then return null
+		var res = module_decl.get_single_annotation(name, self)
+		return res
+	end
+
+	private var collect_annotations_data_cache = new HashMap[String, MModuleData[AAnnotation]]
+
+	# Collect all annotations by `name` in `mmodule` and its importations (direct and indirect)
+	# Note that visibility is not considered.
+	fun collect_annotations_data(name: String, mmodule: MModule): MModuleData[AAnnotation]
+	do
+		var res = collect_annotations_data_cache.get_or_null(name)
+		if res == null then
+			res = new MModuleData[AAnnotation](model)
+			collect_annotations_data_cache[name] = res
+		end
+
+		for mmod in mmodule.in_importation.greaters do
+			if res.has_mmodule(mmod) then continue
+			var ass = get_mmodule_annotation(name, mmod)
+			if ass == null then continue
+			res[mmod] = ass
+		end
+		return res
+	end
+
+	# Get an annotation by name from `mmodule` and its super modules. Will recursively search
+	# in imported module to find the "latest" declaration and detects priority conflicts.
+	fun lookup_annotation_on_modules(name: String, mmodule: MModule): nullable AAnnotation
+	do
+		var data = collect_annotations_data(name, mmodule)
+		var annotations = data.lookup_values(mmodule, none_visibility)
+		if annotations.is_empty then return null
+		if annotations.length > 1 then
+			var locs = new Array[Location]
+			for annot in annotations do locs.add(annot.location)
+
+			toolcontext.error(mmodule.location,
+				"Priority conflict on annotation {name}, it has been defined in: {locs.join(", ")}")
+		end
+		return annotations.first
 	end
 end
