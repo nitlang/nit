@@ -14,7 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module platform is platform("android")
+module platform is
+	platform("android")
+	new_annotation java_package
+	new_annotation min_api_version
+	new_annotation max_api_version
+	new_annotation target_api_version
+	new_annotation android_manifest
+end
 
 import java
 import app

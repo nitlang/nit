@@ -29,6 +29,7 @@
 module java is
 	c_compiler_option("-I $(JAVA_HOME)/include/")
 	c_linker_option("-L $(JNI_LIB_PATH) -ljvm")
+	new_annotation extra_java_files
 end
 
 import jvm

@@ -15,7 +15,9 @@
 # limitations under the License.
 
 # Offers services to serialize a Nit objects to different persistent formats
-module serialization
+module serialization is
+	new_annotation auto_serializable
+end
 
 # Abstract serialization service to be sub-classed by specialized services.
 interface Serializer
