@@ -21,6 +21,7 @@ module file_server
 import reactor
 import sessions
 import media_types
+import http_errors
 
 redef class String
 	# Returns a `String` copy of `self` without any of the prefixed '/'s
@@ -43,6 +44,9 @@ class FileServer
 
 	# Root of `self` file system
 	var root: String
+
+	# Error page template for a given `code`
+	fun error_page(code: Int): Streamable do return new ErrorTemplate(code)
 
 	redef fun answer(request, turi)
 	do
@@ -122,6 +126,11 @@ class FileServer
 
 			else response = new HttpResponse(404)
 		else response = new HttpResponse(403)
+
+		if response.status_code != 200 then
+			var tmpl = error_page(response.status_code)
+			response.body = tmpl.to_s
+		end
 
 		return response
 	end
