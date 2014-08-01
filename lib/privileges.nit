@@ -22,6 +22,22 @@ module privileges
 
 import opts
 
+redef class Text
+	# Does the operating system know the user named `self`?
+	fun user_exists: Bool
+	do
+		var passwd = new Passwd.from_name(to_s)
+		return not passwd.address_is_null
+	end
+
+	# Does the operating system know the group named `self`?
+	fun group_exists: Bool
+	do
+		var passwd = new Group.from_name(to_s)
+		return not passwd.address_is_null
+	end
+end
+
 # Class to manage user groups
 class UserGroup
 
