@@ -1,7 +1,6 @@
 bins:
 	mkdir -p bin
-	../../bin/nitg -o bin/svg_to_png_and_nit src/svg_to_png_and_nit.nit
-	../../bin/nitg -o bin/svg_to_icons src/svg_to_icons.nit
+	../../bin/nitg --dir bin src/svg_to_png_and_nit.nit src/svg_to_icons.nit
 
 tests: test-dino
 

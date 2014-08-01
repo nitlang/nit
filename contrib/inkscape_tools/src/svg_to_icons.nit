@@ -56,6 +56,11 @@ if not errors.is_empty or opt_help.value then
 	exit 1
 end
 
+if not "inkscape".program_is_in_path then
+	print "This tool needs the external program `inkscape`, make sure it is installed and in your PATH."
+	exit 1
+end
+
 var drawing = rest.first
 if not drawing.file_exists then
 	stderr.write "Source drawing file '{drawing}' does not exist."
