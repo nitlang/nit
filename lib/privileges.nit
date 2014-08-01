@@ -47,16 +47,20 @@ class UserGroup
 	# Group name
 	var group: nullable String
 
-	# Drop privileges of a user and set his privileges back to default (program privileges)
+	# Drop privileges of the running program to those of `self`
+	#
+	# require: `user.user_exists and (group == null or group.group_exists)`
 	fun drop_privileges
 	do
 		var passwd = new Passwd.from_name(user)
+		assert not passwd.address_is_null
 		var uid = passwd.uid
 
 		var group = group
 		var gid
 		if group != null then
 			var gpasswd = new Group.from_name(group)
+			assert not gpasswd.address_is_null
 			gid = gpasswd.gid
 		else gid = passwd.gid
 
