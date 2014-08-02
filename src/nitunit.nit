@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Program to extract and execute unit tests from nit source files
+# Testing tool.
+# see `testing/README`
 module nitunit
 
 import testing
