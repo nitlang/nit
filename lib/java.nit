@@ -134,7 +134,7 @@ redef class NativeString
 	`}
 end
 
-redef class String
+redef class Text
 	fun to_java_string: JavaString do return to_cstring.to_java_string
 end
 
