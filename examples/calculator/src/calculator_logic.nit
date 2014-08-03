@@ -18,50 +18,72 @@
 module calculator_logic
 
 class CalculatorContext
-	var result : nullable Float = null
+	var result: nullable Numeric = null
 
-	var last_op : nullable Char = null
+	var last_op: nullable Char = null
 
-	var current : nullable Float = null
-	var after_point : nullable Int = null
+	var current: nullable FlatBuffer = null
+	fun display_text: String
+	do
+		var result = result
+		var last_op = last_op
+		var current = current
+
+		var buf = new FlatBuffer
+
+		if result != null and (current == null or last_op != '=') then
+			if last_op == '=' then buf.append "= "
+
+			buf.append result.to_s
+			buf.add ' '
+		end
+
+		if last_op != null and last_op != '=' then
+			buf.add last_op
+			buf.add ' '
+		end
+
+		if current != null then
+			buf.append current.to_s
+			buf.add ' '
+		end
+
+		return buf.to_s
+	end
 
 	fun push_op( op : Char )
 	do
 		apply_last_op_if_any
 		if op == 'C' then
-			self.result = 0.0
+			self.result = null
 			last_op = null
 		else
 			last_op = op # store for next push_op
 		end
 
 		# prepare next current
-		after_point = null
-		current = null
+		self.current = null
 	end
 
 	fun push_digit( digit : Int )
 	do
 		var current = current
-		if current == null then current = 0.0
-
-		var after_point = after_point
-		if after_point == null then
-			current = current * 10.0 + digit.to_f
-		else
-			current = current + digit.to_f * 10.0.pow(after_point.to_f)
-			self.after_point -= 1
-		end
-
+		if current == null then current = new FlatBuffer
+		current.add digit.to_s.chars.first
 		self.current = current
+
+		if last_op == '=' then
+			self.result = null
+			last_op = null
+		end
 	end
 
 	fun switch_to_decimals
 	do
-		if self.current == null then current = 0.0
-		if after_point != null then return
-
-		after_point = -1
+		var current = current
+		if current == null then current = new FlatBuffer.from("0")
+		if not current.chars.has('.') then current.add '.'
+		self.current = current
 	end
 
 	fun apply_last_op_if_any
@@ -69,23 +91,26 @@ class CalculatorContext
 		var op = last_op
 
 		var result = result
-		if result == null then result = 0.0
 
 		var current = current
-		if current == null then current = 0.0
+		if current == null then current = new FlatBuffer
 
 		if op == null then
-			result = current
+			result = current.to_n
 		else if op == '+' then
-			result = result + current
+			result = result.add(current.to_n)
 		else if op == '-' then
-			result = result - current
+			result = result.sub(current.to_n)
 		else if op == '/' then
-			result = result / current
+			result = result.div(current.to_n)
 		else if op == '*' then
-			result = result * current
+			result = result.mul(current.to_n)
 		end
 		self.result = result
 		self.current = null
 	end
+end
+
+redef universal Float
+	redef fun to_s do return to_precision(6)
 end

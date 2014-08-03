@@ -33,46 +33,21 @@ class CalculatorGui
 
 	var context = new CalculatorContext
 
-	redef fun signal( sender, user_data )
+	redef fun signal(sender, op)
 	do
-		var after_point = context.after_point
-		if after_point == null then
-		    after_point = 0
-		else
-		    after_point = (after_point.abs)
-		end
-
-		if user_data isa Char then # is an operation
-			var c = user_data
-			if c == '.' then
-				but_dot.sensitive= false
+		if op isa Char then # is an operation
+			if op == '.' then
+				but_dot.sensitive = false
 				context.switch_to_decimals
-				lbl_disp.text = "{context.current.to_i}."
 			else
-				but_dot.sensitive= true
-				context.push_op( c )
-
-				var s = context.result.to_precision_native(6)
-				var index : nullable Int = null
-				for i in s.length.times do
-				    var chiffre = s.chars[i]
-				    if chiffre == '0' and index == null then
-					index = i
-				    else if chiffre != '0' then
-					index = null
-				    end
-				end
-				if index != null then
-					s = s.substring(0, index)
-					if s.chars[s.length-1] == ',' then s = s.substring(0, s.length-1)
-				end
-				lbl_disp.text = s
+				but_dot.sensitive = true
+				context.push_op op
 			end
-		else if user_data isa Int then # is a number
-			var n = user_data
-			context.push_digit( n )
-			lbl_disp.text = context.current.to_precision_native(after_point)
+		else if op isa Int then # is a number
+			context.push_digit op
 		end
+
+		lbl_disp.text = context.display_text
 	end
 
 	init
