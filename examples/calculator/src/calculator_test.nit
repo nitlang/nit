@@ -1,0 +1,87 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2013-2014 Alexis Laferrière <alexis.laf@xymus.net>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Test the business logic
+module calculator_test
+
+import calculator_logic
+
+# context tests
+var context = new CalculatorContext
+context.push_digit( 1 )
+context.push_digit( 2 )
+context.push_op( '+' )
+context.push_digit( 3 )
+context.push_op( '*' )
+context.push_digit( 2 )
+context.push_op( '=' )
+var r = context.result.to_precision( 2 )
+assert r == "30.00" else print r
+
+context = new CalculatorContext
+context.push_digit( 1 )
+context.push_digit( 4 )
+context.switch_to_decimals
+context.push_digit( 1 )
+context.push_op( '*' )
+context.push_digit( 3 )
+context.push_op( '=' )
+r = context.result.to_precision( 2 )
+assert r == "42.30" else print r
+
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_digit( 1 )
+context.push_op( '=' )
+r = context.result.to_precision( 2 )
+assert r == "53.30" else print r
+
+context = new CalculatorContext
+context.push_digit( 4 )
+context.push_digit( 2 )
+context.switch_to_decimals
+context.push_digit( 3 )
+context.push_op( '/' )
+context.push_digit( 3 )
+context.push_op( '=' )
+r = context.result.to_precision( 2 )
+assert r == "14.10" else print r
+
+#test multiple decimals
+context = new CalculatorContext
+context.push_digit( 5 )
+context.push_digit( 0 )
+context.switch_to_decimals
+context.push_digit( 1 )
+context.push_digit( 2 )
+context.push_digit( 3 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_op( '=' )
+r = context.result.to_precision( 3 )
+assert r == "51.123" else print r
+
+#test 'C' button
+context = new CalculatorContext
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '=' )
+context.push_op( 'C' )
+r = context.result.to_precision( 1 )
+assert r == "0.0" else print r
