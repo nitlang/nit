@@ -15,6 +15,7 @@
 module environ
 
 import string
+import file
 
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
 
@@ -41,6 +42,18 @@ redef class String
 	#     "NITis".setenv("fun")
 	#     assert "NITis".environ  == "fun"
 	fun setenv(v: String) do to_cstring.setenv( v.to_cstring )
+
+	# Search for the program `self` in all directories from `PATH`
+	fun program_is_in_path: Bool
+	do
+		var full_path = "PATH".environ
+		var paths = full_path.split(":")
+		for path in paths do if path.file_exists then
+			if path.join_path(self).file_exists then return true
+		end
+
+		return false
+	end
 end
 
 redef class NativeString
