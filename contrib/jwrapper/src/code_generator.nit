@@ -21,49 +21,94 @@ intrude import types
 
 class CodeGenerator
 
+	var with_attributes: Bool
+	var comment_unknown_types: Bool
 	var file_out: OFStream
 	var java_class: JavaClass
+	var nb_params: Int
+	var module_name: String
 	fun code_warehouse: CodeWarehouse do return once new CodeWarehouse
 
-	init (file_name: String, jclass: JavaClass) 
+	init (file_name: String, jclass: JavaClass, with_attributes, comment: Bool)
 	do
 		file_out = new OFStream.open(file_name)
+		module_name = file_name.substring(0, file_name.search(".nit").from)
 		self.java_class = jclass
+		self.with_attributes = with_attributes
+		self.comment_unknown_types = comment
 	end
 
 	fun generate
 	do
 		var jclass = self.java_class
 
-		file_out.write("import mnit_android\n")
-		gen_class_header(jclass.name)
+		var class_content = new Array[String]
+		class_content.add(gen_class_header(jclass.class_type))
 
-		# Attributes generation
-		for id, jtype in jclass.attributes do gen_attribute(id, jtype)
+		if with_attributes then
+			for id, jtype in jclass.attributes do class_content.add(gen_attribute(id, jtype))
+		end
 
 		for id, methods_info in jclass.methods do
 			for method_info in methods_info do
 				var nid = id
 				if methods_info.length > 1 then nid += "{methods_info.index_of(method_info)}"
-				gen_method(id, nid, method_info.return_type, method_info.params)
+				class_content.add gen_method(id, nid, method_info.return_type, method_info.params)
 			end
 		end
+		class_content.add("\nend\n")
 
-		file_out.write("\nend")
+		var wrappers = new Array[String]
+		for jtype in jclass.unknown_types do
+			if jtype == jclass.class_type then continue
+			wrappers.add("\n")
+			wrappers.add(gen_unknown_class_header(jtype))
+		end
+
+		var imports = new Array[String]
+		imports.add("import mnit_android\n")
+		for import_ in jclass.imports do
+			imports.add("import android::{import_}\n")
+		end
+
+		file_out.write("module {module_name}\n")
+		file_out.write(imports.join(""))
+		file_out.write("\n")
+		file_out.write(class_content.join(""))
+		file_out.write(wrappers.join(""))
 	end
 
-	fun gen_class_header(full_class_name: Array[String])
+	fun gen_class_header(jtype: JavaType): String
 	do
-		file_out.write("extern class Native{full_class_name.last} in \"Java\" `\{ {full_class_name.join(".")} `\}\n")
-		file_out.write("\tsuper JavaObject\n\tredef type SELF: Native{full_class_name.last}\n\n")
+		var temp = new Array[String]
+		temp.add("extern class Native{jtype.id} in \"Java\" `\{ {jtype} `\}\n")
+		temp.add("\tsuper JavaObject\n\tredef type SELF: Native{jtype.id}\n\n")
+
+		return temp.join("")
 	end
 
-	fun gen_attribute(jid: String, jtype: JavaType)
+	fun gen_unknown_class_header(jtype: JavaType): String
 	do
-		file_out.write("\tvar {jid.to_snake_case}: {jtype.to_nit_type}\n")
+		var nit_type: NitType
+		if jtype.extern_name.has_generic_params then
+			nit_type = jtype.extern_name.generic_params.first
+		else
+			nit_type = jtype.extern_name
+		end
+
+		var temp = new Array[String]
+		temp.add("extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n")
+		temp.add("\tsuper JavaObject\n\tredef type SELF: {nit_type}\n\nend\n")
+
+		return temp.join("")
+	end
+
+	fun gen_attribute(jid: String, jtype: JavaType): String
+	do
+		return "\tvar {jid.to_snake_case}: {jtype.to_nit_type}\n"
 	end
 	
-	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType])
+	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
 	do
 		var java_params = ""
 		var nit_params  = ""
@@ -76,6 +121,20 @@ class CodeGenerator
 		for i in [0..jparam_list.length[ do
 			var jparam = jparam_list[i]
 			var nit_type = jparam.to_nit_type
+
+			if not nit_type.is_complete then
+				if jparam.is_wrapped then
+					java_class.imports.add nit_type.mod.as(not null)
+				else
+					if comment_unknown_types then
+						comment = "#"
+					else
+						nit_type = jparam.extern_name
+						java_class.unknown_types.add(jparam)
+					end
+				end
+			end
+
 			var cast = ""
 
 			if not jparam.is_collection then cast = jparam.param_cast
@@ -92,8 +151,6 @@ class CodeGenerator
 			end
 
 			nit_id_no += 1
-			# Comment if one type is unknown
-			if not nit_type.is_complete then comment = "#"
 		end
 
 		# Method identifier
@@ -110,53 +167,89 @@ class CodeGenerator
 
 		if not jreturn_type.is_void then
 			return_type = jreturn_type.to_nit_type
-			if not return_type.is_complete then comment = "#"
+
+			if not return_type.is_complete then
+				if jreturn_type.is_wrapped then
+					java_class.imports.add return_type.mod.as(not null)
+				else
+					if comment_unknown_types then
+						comment = "#"
+					else
+						return_type = jreturn_type.extern_name
+						java_class.unknown_types.add(jreturn_type)
+					end
+				end
+			end
+
 			nit_signature.add ": {return_type} "
 		end
 
-		file_out.write(comment + nit_signature.join(""))
-
 		var param_to_copy = param_to_copy(jparam_list, nit_types)
 
-		# Copy one parameter, the return value, one parameter and the return value or nothing
-		if return_type != null then
-			if return_type.is_complete and jreturn_type.is_collection then
+		var temp = new Array[String]
+
+		if nb_params > 1 then
+			comment = "#"
+			temp.add("\t# NOT SUPPORTED: more than one parameter to copy\n")
+			temp.add("\t# Has to be implemented manually\n")
+		end
+
+		temp.add(comment + nit_signature.join(""))
+
+		# FIXME : This huge `if` block is only necessary to copy primitive arrays as long as there's no better way to do it
+		if comment == "#" then
+			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
+		# Methods with return type
+		else if return_type != null then
+			if jreturn_type.is_primitive_array then
+				# Copy one parameter and the return value
 				if param_to_copy != null then
 					var rtype_couple = new Couple[JavaType, NitType](jreturn_type, return_type)
-					file_out.write(code_warehouse.param_return_copy(rtype_couple, param_to_copy, jmethod_id, java_params))
+					temp.add(code_warehouse.param_return_copy(rtype_couple, param_to_copy, jmethod_id, java_params))
+				# Copy the return type
 				else
-					file_out.write(code_warehouse.return_type_copy(jreturn_type, return_type, jmethod_id, java_params))
+					temp.add(code_warehouse.return_type_copy(jreturn_type, return_type, jmethod_id, java_params))
 				end
+			# Copy the parameter
 			else if param_to_copy != null then
-				file_out.write(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, true))
+				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, true))
+			# No copy
 			else
-				file_out.write(" in \"Java\" `\{\n\t\t{comment}return {jreturn_type.return_cast} recv.{jmethod_id}({java_params}); \n\t{comment}`\}\n")
+				temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
 			end
+		# Methods without return type
 		else if jreturn_type.is_void then
+			# Copy one parameter
 			if param_to_copy != null then
-				file_out.write(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, false))
+				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, false))
+			# No copy
 			else
-				file_out.write(" in \"Java\" `\{\n\t\t{comment}recv.{jmethod_id}({java_params}); \n\t{comment}`\}\n")
+				temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
 			end
+		# No copy
 		else
-			file_out.write(" in \"Java\" `\{\n\t\t{comment}recv.{jmethod_id}({java_params}); \n\t{comment}`\}\n")
+			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
 		end
+
+		return temp.join("")
 	end
 
-	# Only one collection type parameter can be copied
+	# Only one primitive array parameter can be copied
 	# If there's none or more than one then `null` is returned
 	fun param_to_copy(jtypes: Array[JavaType], ntypes: Array[NitType]): nullable Couple[JavaType, NitType]
 	do
 		var counter = 0
 		var couple = null
 		for i in [0..jtypes.length[ do
-			if jtypes[i].is_collection and ntypes[i].is_complete then
+			if jtypes[i].is_primitive_array then
 				counter += 1
-				if counter > 1 then return null
 				couple = new Couple[JavaType, NitType](jtypes[i], ntypes[i])
 			end
 		end
 
+		nb_params = counter
+
+		if counter > 1 then return null
 		return couple
 	end
 end
@@ -179,7 +272,7 @@ class CodeWarehouse
 
 		return {{{narray_id}}};
 	`}
-	"""
+"""
 	end
 
 	# Collection as parameter
@@ -207,7 +300,7 @@ class CodeWarehouse
 
 		{{{return_str}}}recv.{{{jmethod_id}}}({{{params_id}}});
 	`}
-	"""
+"""
 	end
 
 	# One collection parameter and the return type will be copied
@@ -250,7 +343,7 @@ class CodeWarehouse
 
 		return {{{narray_id2}}};
 	`}
-	"""
+"""
 	end
 
 	private fun create_array_instance(java_type: JavaType, nit_type: NitType, jarray_id: String): String
@@ -259,7 +352,7 @@ class CodeWarehouse
 		var instanciation = ""
 
 		if java_type.is_primitive_array then
-			instanciation = "{jtype} {jarray_id} = new {java_type.full_id}[Array_of_{nit_type.generic_params[0]}_length({nit_type.arg_id})];"
+			instanciation = "{jtype} {jarray_id} = new {java_type.full_id}[(int)Array_of_{nit_type.generic_params[0]}_length({nit_type.arg_id})];"
 		else
 			instanciation = "{jtype} {jarray_id} = new {jtype}();"
 		end
@@ -275,16 +368,16 @@ class CodeWarehouse
 
 		if not is_param then
 			if nit_type.is_map then
-				imports = """import {{{ntype}}}, {{{ntype}}}.[]="""
+				imports = """ import {{{ntype}}}, {{{ntype}}}.[]="""
 			else
-				imports = """import {{{ntype}}}, {{{ntype}}}.add"""
+				imports = """ import {{{ntype}}}, {{{ntype}}}.add"""
 			end
 		else if nit_type.id == "Array" then
-			imports = """import {{{ntype}}}.length, {{{ntype}}}.[]"""
+			imports = """ import {{{ntype}}}, {{{ntype}}}.length, {{{ntype}}}.[]"""
 		else if nit_type.is_map then
-			imports = """import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item, Iterator[{{{gen_type}}}].key"""
+			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item, Iterator[{{{gen_type}}}].key"""
 		else
-			imports = """import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
+			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
 		end
 		
 		return imports
@@ -301,7 +394,7 @@ class CodeWarehouse
 				loop_header = "for(int i=0; i < {jarray_id}.length; ++i)"
 				loop_body   = """\t\t\t{{{jarray_id}}}[i] = {{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{nit_type.arg_id}}}, i);"""
 			else if nit_type.id == "Array" then
-				loop_header = """int length = Array_of_{{{gen_type}}}_length({{{nit_type.arg_id}}});\n\t\tfor(int i=0; i < length; ++i)"""
+				loop_header = """int length = Array_of_{{{gen_type}}}_length((int){{{nit_type.arg_id}}});\n\t\tfor(int i=0; i < length; ++i)"""
 				loop_body   = """\t\t\t{{{jarray_id}}}.add({{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{narray_id}}}, i));"""
 			else
 				loop_header = """int itr = {{{nit_type.id}}}_of_{{{gen_type}}}_iterator({{{nit_type.arg_id}}});\n\t\twhile(Iterator_of_{{{gen_type}}}_is_ok(itr)) {"""
@@ -318,7 +411,7 @@ class CodeWarehouse
 				var key_cast = java_type.to_cast(java_type.generic_params[0].id, false)
 				var value_cast = java_type.to_cast(java_type.generic_params[1].id, false)
 				loop_header = """for (java.util.Map.Entry<{{{java_type.generic_params[0]}}}, {{{java_type.generic_params[1]}}}> e: {{{jarray_id}}})"""
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_{{{nit_type.generic_params[1]}}}__index_assign({{{narray_id}}}, {{{key_cast}}}e.getKey(), {{{value_cast}}}e.getValue()); """
+				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_{{{nit_type.generic_params[1]}}}__index_assign({{{narray_id}}}, {{{key_cast}}}e.getKey(), {{{value_cast}}}e.getValue());"""
 			else if java_type.is_iterable then
 				loop_header = """for ({{{java_type.generic_params[0]}}} e: {{{jarray_id}}})"""
 				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_add({{{narray_id}}}, {{{java_type.return_cast}}}e);"""

@@ -1,9 +1,8 @@
 default:
 	mkdir -p bin
 	make -C ../nitcc
-	cp ../nitcc/src/nitcc bin/
-	./bin/nitcc ./grammar/javap.sablecc
-	../../bin/nitg ./src/javap_visitor.nit -o ./bin/jwrapper
+	../nitcc/src/nitcc ./grammar/javap.sablecc
+	../../bin/nitg ./src/jwrapper.nit -o ./bin/jwrapper
 	mv *.nit ./src/
 	mkdir -p gen
 	mv javap* ./gen/

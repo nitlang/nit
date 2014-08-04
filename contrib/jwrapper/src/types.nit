@@ -20,28 +20,26 @@ module types
 import jtype_converter
 
 class JavaType
-	private var converter = new JavaTypeConverter
-	var identifier: Array[String] = new Array[String]
+	private var converter: JavaTypeConverter
+	var identifier = new Array[String]
 	var generic_params: nullable Array[JavaType] = null
 	var is_void = false
+
+	# Has some generic type to be resolved (T extends foo => T is resolved to foo)
+	var has_unresolved_types = false
+
+	# Dimension of primitive array: `int[][]` is 2d
 	var array_dimension = 0
 
-	fun collections_list: Array[String] is cached do return ["List", "ArrayList", "LinkedList", "Vector", "Set", "SortedSet", "HashSet", "TreeSet", "LinkedHashSet", "Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
-	fun iterable: Array[String] is cached do return ["ArrayList", "Set", "HashSet", "LinkedHashSet", "LinkedList", "Stack", "TreeSet", "Vector"]
-	fun maps: Array[String] is cached do return ["Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
-	fun has_generic_params: Bool do return not generic_params == null
 	fun is_primitive_array: Bool do return array_dimension > 0
+
+	fun has_generic_params: Bool do return not generic_params == null
 	fun full_id: String do return identifier.join(".")
-	fun id: String do return identifier.last
+	fun id: String do return identifier.last.replace("$", "")
 
-	fun return_cast: String
-	do
-		if self.has_generic_params then
-			return converter.cast_as_return(self.generic_params[0].id)
-		end
+	init(converter: JavaTypeConverter) do self.converter = converter
 
-		return converter.cast_as_return(self.id)
-	end
+	fun return_cast: String do return converter.cast_as_return(self.id)
 
 	fun param_cast: String
 	do
@@ -63,7 +61,7 @@ class JavaType
 		var type_id = converter.to_nit_type(self.id)
 
 		if type_id == null then
-			nit_type = new NitType(self.full_id)
+			nit_type = self.extern_name
 			nit_type.is_complete = false
 		else
 			nit_type = new NitType(type_id)
@@ -98,11 +96,12 @@ class JavaType
 				var temp_type = converter.to_nit_type(self.id)
 
 				if temp_type == null then 
-					temp_type = self.full_id
+					temp = self.extern_name
 					nit_type.is_complete = false
+					if temp.mod != null then nit_type.mod = temp.mod
+				else
+					temp = new NitType(temp_type)
 				end
-
-				temp = new NitType(temp_type)
 			else
 				temp = new NitType("Array")
 			end
@@ -120,6 +119,33 @@ class JavaType
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
 	fun is_map: Bool do return maps.has(self.id)
+
+	fun is_wrapped: Bool do return find_extern_class != null
+
+	fun extern_name: NitType
+	do
+		if is_wrapped then return new NitType.with_module(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
+
+		var name = "Native" + extern_class_name.join("")
+		var nit_type: NitType
+		if self.is_primitive_array then
+			nit_type = new NitType.with_generic_params("Array", name)
+		else
+			nit_type = new NitType("Native" + extern_class_name.join(""))
+		end
+		nit_type.is_complete = false
+
+		return nit_type
+	end
+
+	fun to_cast(jtype: String, is_param: Bool): String
+	do
+		if is_param then
+			return converter.cast_as_param(jtype)
+		end
+
+		return converter.cast_as_return(jtype)
+	end
 
 	redef fun to_s: String
 	do
@@ -142,20 +168,115 @@ class JavaType
 		return id
 	end
 
-	fun to_cast(jtype: String, is_param: Bool): String
+	# To fully qualified package name
+	# Cuts the primitive array `[]`
+	fun to_package_name: String
 	do
-		if is_param then
-			return converter.cast_as_param(jtype)
+		var str = self.to_s
+		var len = str.length
+
+		return str.substring(0, len - (2*array_dimension))
+	end
+
+	fun resolve_types(conversion_map: HashMap[String, Array[String]])
+	do
+		if identifier.length == 1 then
+			var resolved_id = conversion_map.get_or_null(self.id)
+			if resolved_id != null then self.identifier = new Array[String].from(resolved_id)
 		end
 
-		return converter.cast_as_return(jtype)
+		if self.has_generic_params then
+			for params in generic_params do params.resolve_types(conversion_map)
+		end
 	end
+
+	private fun extern_class_name: Array[String]
+	do
+		var class_name = new Array[String]
+		class_name.add(self.id)
+
+		if not self.has_generic_params then return class_name
+
+		class_name.add "Of"
+
+		for param in generic_params do class_name.add_all param.extern_class_name
+
+		return class_name
+	end
+
+	# Search inside `lib/android` directory for already wrapped classes
+	# If found, contains the class identifier and the Nit Module name
+	var find_extern_class: nullable Couple[String, NitModule] = find_extern_class_fun is lazy
+
+	private fun find_extern_class_fun: nullable Couple[String, NitModule]
+	do
+		var regex = "extern class Native[a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
+		var grep = new IProcess("grep", "-r", regex, "{"NIT_DIR".environ}/lib/android/")
+		var to_eat = ["private", "extern", "class"]
+
+		var output = grep.read_line
+
+		var output_class = output.substring_from(output.index_of(':') + 1)
+		var tokens = output_class.split(" ")
+
+		var nclass_name = ""
+
+		for token in tokens do
+			if to_eat.has(token) then continue
+			nclass_name = token
+			break
+		end
+
+		if nclass_name == "" then return null
+
+		var str = output.substring(0, output.search(".nit").from)
+		str = str.substring_from(str.last_index_of('/') + 1)
+		var mod = new NitModule(str)
+
+		return new Couple[String, NitModule](nclass_name, mod)
+	end
+
+	# Comparison based on fully qualified named and generic params
+	# Ignores primitive array so `a.b.c[][] == a.b.c`
+	redef fun ==(other)
+	do
+		if other isa JavaType then
+			return self.repr == other.repr
+		end
+		return false
+	end
+
+	redef fun hash do return self.repr.hash
+
+	private fun repr: String
+	do
+		var id = self.full_id
+
+		if self.has_generic_params then
+			var gen_list = new Array[String]
+
+			for param in generic_params do
+				gen_list.add(param.to_s)
+			end
+
+			id += "<{gen_list.join(", ")}>"
+		end
+
+		return id
+	end
+
+	fun collections_list: Array[String] is cached do return ["List", "ArrayList", "LinkedList", "Vector", "Set", "SortedSet", "HashSet", "TreeSet", "LinkedHashSet", "Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
+	fun iterable: Array[String] is cached do return ["ArrayList", "Set", "HashSet", "LinkedHashSet", "LinkedList", "Stack", "TreeSet", "Vector"]
+	fun maps: Array[String] is cached do return ["Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
 end
 
 class NitType
 	var identifier: String
 	var arg_id: String
 	var generic_params: nullable Array[NitType] = null
+
+	# If this NitType was found in `lib/android`, contains the module name to import
+	var mod: nullable NitModule
 
 	# Returns `true` if all types have been successfully converted to Nit type
 	var is_complete: Bool = true
@@ -168,6 +289,19 @@ class NitType
 	init (id: String)
 	do
 		self.identifier = id
+	end
+
+	init with_generic_params(id: String, gen_params: String...)
+	do
+		self.init(id)
+		self.generic_params = new Array[NitType]
+		for param in gen_params do self.generic_params.add new NitType(param)
+	end
+
+	init with_module(id: String, mod: NitModule)
+	do
+		self.init(id)
+		self.mod = mod
 	end
 
 	fun is_map: Bool do return maps.has(self.identifier)
@@ -191,9 +325,11 @@ class NitType
 end
 
 class JavaClass
-	var name = new Array[String]
+	var class_type = new JavaType(new JavaTypeConverter)
 	var attributes = new HashMap[String, JavaType]
 	var methods = new HashMap[String, Array[JReturnAndParams]]
+	var unknown_types = new HashSet[JavaType]
+	var imports = new HashSet[NitModule]
 
 	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
 	do
@@ -213,4 +349,14 @@ class JReturnAndParams
 		self.return_type = return_type
 		self.params = params
 	end
+end
+
+class NitModule
+	var value: String
+
+	init(str: String) do value = str
+
+	redef fun ==(other): Bool do return self.to_s == other.to_s
+	redef fun to_s: String do return self.value
+	redef fun hash: Int do return self.value.hash
 end
