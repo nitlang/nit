@@ -18,7 +18,6 @@
 module test_target_api is
 	min_api_version(10)
 	max_api_version(19)
-	target_api_version(11)
 end
 
 import simple_android
