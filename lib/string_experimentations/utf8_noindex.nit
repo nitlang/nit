@@ -197,6 +197,34 @@ redef class FlatString
 		return length;
 	`}
 
+	private fun byte_index(index: Int): Int
+	do
+		assert index >= 0
+		assert index < length
+		var ns_i = index_from
+		var my_i = 0
+		while my_i != index do
+			if items[ns_i].ascii.bin_and(0x80) == 0 then
+				ns_i += 1
+			else if items[ns_i].ascii.bin_and(0xE0) == 0xC0 then
+				ns_i += 2
+			else if items[ns_i].ascii.bin_and(0xF0) == 0xE0 then
+				ns_i += 3
+			else if items[ns_i].ascii.bin_and(0xF7) == 0xF0 then
+				ns_i += 4
+			else
+				ns_i += 1
+			end
+			my_i += 1
+		end
+		return ns_i
+	end
+
+	fun char_at(pos: Int): UnicodeChar
+	do
+		return new UnicodeChar.from_ns(items, byte_index(pos))
+	end
+
 	private init with_bytelen(items: NativeString, index_from: Int, index_to: Int, bytelen: Int)
 	do
 		self.items = items
