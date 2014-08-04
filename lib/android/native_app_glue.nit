@@ -114,12 +114,22 @@ in "C body" `{
 	}
 `}
 
+# An Android activity context
+extern class NativeContext in "Java" `{ android.content.Context `}
+	super JavaObject
+end
+
+# A wrapper of context
+extern class NativeContextWrapper in "Java" `{ android.content.ContextWrapper `}
+	super NativeContext
+end
+
 # Android SDK's `android.app.NativeActivity`.
 #
 # Can be used to get anything related to the `Context` of the activity in Java
 # and as anchor to execute Java UI code.
 extern class NativeActivity in "Java" `{ android.app.NativeActivity `}
-	super JavaObject
+	super NativeContextWrapper
 end
 
 redef class App
@@ -252,11 +262,11 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	# The `NativeActivity`, as in the Java object, associated to `self`
 	fun java_native_activity: NativeActivity `{ return recv->clazz; `}
 
-     	# Path to this application's internal data directory.
+	# Path to this application's internal data directory.
 	fun internal_data_path: NativeString `{ return (char*)recv->internalDataPath; `}
     
 	# Path to this application's external (removable/mountable) data directory.
-    	fun external_data_path: NativeString `{ return (char*)recv->externalDataPath; `}
+	fun external_data_path: NativeString `{ return (char*)recv->externalDataPath; `}
     
 	# The platform's SDK version code.
 	fun sdk_version: Int `{ return recv->sdkVersion; `}
