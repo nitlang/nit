@@ -31,6 +31,21 @@ in "C Header" `{
 # UTF-8 char as defined in RFC-3629, e.g. 1-4 Bytes
 extern class UnicodeChar `{ uint32_t* `}
 
+	# Transforms a byte-variable char* character to its uint32_t equivalent
+	new from_ns(ns: NativeString, index: Int) `{
+		unsigned char* ret = calloc(1,4);
+		if((ns[index] & 0x80) == 0){ memcpy(ret + 3, ns + index, 1);  }
+		else if((ns[index] & 0xE0) == 0xC0) { memcpy(ret + 2, ns + index, 2); }
+		else if((ns[index] & 0xF0) == 0xE0) { memcpy(ret + 1, ns + index, 3); }
+		else if((ns[index] & 0xF7) == 0xF0) { memcpy(ret, ns + index, 4); }
+		else{ memcpy(ret + 3, ns + index, 1);}
+		if (!IS_BIG_ENDIAN) {
+			uint32_t tmp = ntohl(*((uint32_t*)ret));
+			memcpy(ret, &tmp, 4);
+		}
+		return (uint32_t*)ret;
+	`}
+
 	# Real length of the char in UTF8
 	#
 	# As per the specification :
