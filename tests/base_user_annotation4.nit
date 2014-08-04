@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,14 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module platform is
-	platform("android")
-	new_annotation java_package
-	new_annotation min_api_version
-	new_annotation max_api_version
-	new_annotation target_api_version
-	new_annotation android_manifest
+module base_user_annotation4 is
+	new_annotation foo
 end
 
-import java
-import app
+import base_user_annotation is foo

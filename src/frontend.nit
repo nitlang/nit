@@ -26,6 +26,7 @@ import auto_super_init
 import div_by_zero
 import cached
 import serialization_phase
+import check_annotation
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation

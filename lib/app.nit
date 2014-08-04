@@ -18,7 +18,10 @@
 #
 # The features offered by this modules are common to all platforms, but
 # may not be available on all devices.
-module app
+module app is
+	new_annotation app_name
+	new_annotation app_version
+end
 
 # App subclasses are cross-platform applications
 #

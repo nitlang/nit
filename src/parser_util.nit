@@ -248,7 +248,7 @@ class InjectedLexer
 end
 
 redef class ANode
-	# Return an array of tokens that match a given text
+	# Do a deep search and return an array of tokens that match a given text
 	fun collect_tokens_by_text(text: String): Array[Token]
 	do
 		var v = new CollectTokensByTextVisitor(text)
@@ -256,7 +256,7 @@ redef class ANode
 		return v.result
 	end
 
-	# Return an array of node that are annotated
+	# Do a deep search and return an array of node that are annotated
 	# The attached node can be retrieved by two invocation of parent
 	fun collect_annotations_by_name(name: String): Array[AAnnotation]
 	do
