@@ -18,6 +18,7 @@
 #
 # This is a minimal practical example of the mnit framework.
 module moles is
+	app_version(1, 0, git_revision)
 	app_name("Crazy Groundhogs")
 end
 
