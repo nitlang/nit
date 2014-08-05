@@ -6,3 +6,7 @@ It offers simple a generic class to extends and
 Contents:
 
 * see `backtrack`
+
+See the `examples` subdirectory for examples:
+
+* `examples/queens.nit`

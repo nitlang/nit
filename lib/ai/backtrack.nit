@@ -13,6 +13,8 @@
 # This module provides a simple abstract class `BacktrackProblem[S,A]` to be specialized for a specific problem.
 #
 # The concrete class `BacktrackSolver` is used to configure, query, and run a solver for a given problem.
+#
+# For an example, see the `queens.nit` program in the `examples` subdirectory.
 module backtrack
 
 # Abstract backtrack problem of states (`S`) and actions (`A`).
