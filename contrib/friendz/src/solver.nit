@@ -9,11 +9,48 @@
 
 # Basic game solver
 module solver
-intrude import grid
 
-# A solver with a deep-first search algorithm
-# Instead of storig grids in memory, it plays by placing monsters and backtrack by removing placed monsters.
-class Solver
+intrude import grid
+import ai::backtrack
+
+# The modelization of the friendzs problem.
+class FriendzProblem
+	super BacktrackProblem[Grid, Action]
+
+	redef var initial_state
+
+	redef fun actions(state, node)
+	do
+		var last_action = node.action
+		if state.won then return null
+		if last_action != null then
+			var res = state.frees(last_action.tile)
+			if not res.is_empty or last_action.tile.nexts != 2 then
+				var a = new Array[Action]
+				for t in res do a.add t.to_action(last_action.kind)
+				return a
+			end
+		end
+		return state.look_start
+	end
+
+	redef fun apply_action(state, action)
+	do
+		action.tile.update(action.kind)
+	end
+
+	redef fun backtrack(state, action)
+	do
+		action.tile.update(0)
+	end
+
+	redef fun is_goal(state)
+	do
+		return state.won
+	end
+end
+
+redef class Grid
 	# Return true if grid accepts kind at tile t.
 	# Accepts means that
 	# * the tile is playble (free and not fixed)
@@ -43,6 +80,7 @@ class Solver
 	end
 
 	# Return the list of accepting neighbors of t
+	# see `accepts`
 	fun frees(t: Tile): Array[Tile]
 	do
 		var grid = t.grid
@@ -60,23 +98,13 @@ class Solver
 		return res
 	end
 
-	# The grid played on
-	var grid: Grid
-
-	# Open moves to play
-	# If empty, it means the next move will be backtraking
-	var tries = new Array[Tile]
-
-	# The color played for `tries`
-	var kind = 1
-
 	# Search free tiles next to lonely monsters
-	# Used to initialize `tries`
-	fun look_start: Array[Tile]
+	fun look_start: Array[Action]
 	do
+		var grid = self
 		var start = new Array[Tile]
 		var min = 1
-		kind = 0
+		var kind = 0
 
 		var tile: nullable Tile = null
 
@@ -107,17 +135,22 @@ class Solver
 				min = n
 			end
 		end
+		var res = new Array[Action]
+		for t in start do
+			res.add t.to_action(kind)
+		end
 		#print "-------------"
 		#print grid
 		#dump
 		#print "START: {tile} -> {start.join(",")}"
 		#print "-------------"
-		return start
+		return res
 	end
 
 	# compute and print some metrics about the problem
 	fun size_problem
 	do
+		var grid = self
 		var free = 0
 		for x in [0..grid.width[ do
 			for y in [0..grid.height[ do
@@ -133,98 +166,14 @@ class Solver
 		print "KINDS: {ms}"
 		print "SIZE: {(ms+1).to_f.pow(free.to_f)}"
 	end
-
-	init(grid: Grid)
-	do
-		self.grid = grid
-		size_problem
-		tries = look_start
-	end
-
-	# Zipper in the search tree as a FIFO
-	var history = new Array[Move]
-
-	# Perform a backtrack step
-	# Remove the placed monsters and go for the other tries
-	fun backtrack: Bool
-	do
-		if history.is_empty then
-			is_over = true
-			return true
-		end
-		var h = history.pop
-		tries = h.tries
-		opens -= tries.length
-		h.tile.update(0)
-		kind = h.kind
-		return false
-	end
-
-	# Number of player steps
-	var steps = 0
-
-	# Number of open in the
-	# real opens is `opens+tries.length`
-	var opens = 0
-
-	fun dump
-	do
-		print "STEPS: {steps}"
-		print "OPENS: {opens+tries.length}"
-		print "DEPTH: {history.length}"
-		print "NEXTS: {tries.join(", ")}"
-	end
-
-	# Is the last step exhausted all the possibilities?
-	var is_over = false
-
-	# Compute the next step.
-	# Return tru on a wining position (`grid.won`) or when the solver `is_over`
-	fun step: Bool
-	do
-		#print "=========="
-		#print grid
-		#dump
-		#print "=========="
-		steps += 1
-		if tries.is_empty then
-			return backtrack
-		end
-		var t = tries.pop
-		var eval = 0
-		var fail = t.update(kind)
-		if not fail then
-			#eval = evaluate_new_tile(t)
-			#fail = (eval == -1)
-		end
-		if not fail then
-			opens += tries.length
-			var h = new Move(t, tries, kind)
-			history.push(h)
-			if grid.won then
-				tries = new Array[Tile]
-				return true
-			end
-			if t.nexts == 2 then
-				tries = look_start
-			else
-				tries = frees(t)
-			end
-		else
-			t.update(0)
-		end
-		return false
-	end
 end
 
-# A stored move in the `Solver::history`
-class Move
-	# The tile played
+class Action
 	var tile: Tile
-
-	# The remainig alternatives to try
-	var tries: Array[Tile]
-
-	# to color for the moves
 	var kind: Int
+	redef fun to_s do return "{tile}->{kind}"
+end
+
+redef class Tile
+	fun to_action(kind_to_play: Int): Action do return new Action(self, kind_to_play)
 end
