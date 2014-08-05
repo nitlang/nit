@@ -44,8 +44,8 @@ syn match NITClass		"\<\u\w*"
 syn match NITAttribute		"\<_\h\w*"
 
 " Literal strings
-syn region NITString matchgroup=NITStringDelimit start="\"" end="\"" skip="\\\\\|\\\"" contains=NITExprSubst,NITExprSubstError
-syn region NITString matchgroup=NITStringDelimit start="\"\"\"" end="\"*\zs\"\"\"" skip="\\\\\|\\\"" contains=NITExprSubstLong
+syn region NITString matchgroup=NITStringDelimit start="\"" end="\"" skip="\\\\\|\\\"" contains=NITExprSubst,NITExprSubstError,@Spell
+syn region NITString matchgroup=NITStringDelimit start="\"\"\"" end="\"*\zs\"\"\"" skip="\\\\\|\\\"" contains=NITExprSubstLong,@Spell
 syn region NITString matchgroup=NITStringDelimit start="'"  end="'"  skip="\\\\\|\\'"
 
 " Labels
@@ -82,7 +82,7 @@ exec "syn sync minlines=" . NIT_minlines
 
 " Comments and Documentation
 syn match  NITSharpBang	"\%^#!.*"
-syn match  NITComment	"#.*" contains=NITTodo
+syn match  NITComment	"#.*" contains=NITTodo,@Spell
 
 " Keywords
 syn keyword NITKeyword	 abstract intern new
