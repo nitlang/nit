@@ -38,7 +38,9 @@ class JavaLanguage
 		var java_file = mmodule.java_file
 		assert java_file != null
 
-		java_file.header.add(block.code)
+		if block.is_inner_java then
+			java_file.class_content.add(block.code)
+		else java_file.header.add(block.code)
 	end
 
 	redef fun compile_extern_method(block, m, ccu, mmodule)
@@ -316,8 +318,16 @@ redef class AExternPropdef
 end
 
 redef class AExternCodeBlock
-	fun is_java : Bool do return language_name != null and
+	# Is this code block in Java?
+	fun is_java: Bool do return is_default_java or (parent isa AModule and is_inner_java)
+
+	# Is this code block in Java, with the default mode? (On module blocks it targets the file header)
+	private fun is_default_java: Bool do return language_name != null and
 		language_name_lowered == "java"
+
+	# Is this code block in Java, and for a module block to generate in the class?
+	private fun is_inner_java: Bool do return language_name != null and
+		language_name_lowered == "java inner"
 end
 
 # Java class source template
