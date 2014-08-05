@@ -270,7 +270,7 @@ $(call import-module,android/native_app_glue)
 		var release = toolcontext.opt_release.value
 
 		# Compile C code (and thus Nit)
-		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "4", "-C", android_project_root], "Android project error")
+		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
 		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
