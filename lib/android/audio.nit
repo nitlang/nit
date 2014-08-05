@@ -101,6 +101,7 @@ extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 			e.printStackTrace();
 		}
 	`}
+	fun reset in "Java" `{ recv.reset(); `}
 end
 
 # Sound Pool from Java, used to play sounds simultaneously
@@ -128,6 +129,7 @@ extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	fun set_volume(stream_id: Int, left_volume, right_volume: Float) in "Java" `{ recv.setVolume((int)stream_id, (float)left_volume, (float)right_volume); `}
 	fun stop(stream_id: Int) in "Java" `{ recv.stop((int)stream_id); `}
 	fun unload(sound_id: Int): Bool in "Java" `{ return recv.unload((int)sound_id); `}
+	fun release in "Java" `{ recv.release(); `}
 end
 
 
@@ -222,6 +224,8 @@ class SoundPool
 
 	# Unload a sound from a sound ID
 	fun unload(sound: SoundSP): Bool do return nsoundpool.unload(sound.soundpool_id)
+
+	fun destroy do nsoundpool.release
 end
 
 # Used to play sounds, designed to use with medium sized sounds or streams
@@ -288,6 +292,9 @@ class MediaPlayer
 		self.sound = null
 	end
 
+	# Reset MediaPlayer to its initial state
+	fun reset do nmedia_player.reset
+
 	# Sets the datasource (file-pathor http/rtsp URL) to use
 	fun data_source(path: String): Sound do
 		sys.jni_env.push_local_frame(1)
@@ -317,7 +324,6 @@ class MediaPlayer
 
 	# Sets the audio stream type for this media player
 	fun stream_type=(stream_type: Int) do nmedia_player.stream_type = stream_type
-
 end
 
 # Represents an android sound that can be played by a SoundPool or a MediaPlayer
