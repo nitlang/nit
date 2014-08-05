@@ -60,6 +60,12 @@ extern class Timespec `{struct timespec*`}
 	fun destroy `{
 		free( recv );
 	`}
+
+	# Seconds in Float
+	# Loss of precision but great to print
+	fun to_f: Float do return sec.to_f + nanosec.to_f / 1000000000.0
+
+	redef fun to_s do return "{to_f}s"
 end
 
 # Keeps track of real time
