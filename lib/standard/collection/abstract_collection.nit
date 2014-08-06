@@ -304,8 +304,11 @@ interface Set[E: Object]
 	# Because of the law between `==` and `hash`, `hash` is redefined to be the sum of the hash of the elements
 	redef fun hash
 	do
-		var res = 0
-		for e in self do res += res.hash
+		# 23 is a magic number empirically determined to be not so bad.
+		var res = 23 + length
+		# Note: the order of the elements must not change the hash value.
+		# So, unlike usual hash functions, the accumulator is not combined with itself.
+		for e in self do res += e.hash
 		return res
 	end
 
@@ -677,8 +680,14 @@ interface SequenceRead[E]
 	# Because of the law between `==` and `hash`, `hash` is redefined to be the sum of the hash of the elements
 	redef fun hash
 	do
-		var res = 0
-		for e in self do res += res.hash
+		# The 17 and 2/3 magic numbers were determined empirically.
+		# Note: the standard hash functions djb2, sbdm and fnv1 were also
+		# tested but were comparable (or worse).
+		var res = 17 + length
+		for e in self do
+			res = res * 3 / 2
+			if e != null then res += e.hash
+		end
 		return res
 	end
 
