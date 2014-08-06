@@ -638,7 +638,9 @@ redef class Collection[E]
 	# Build a new array from a collection
 	fun to_a: Array[E]
 	do
-		return iterator.to_a
+		var res = new Array[E].with_capacity(length)
+		res.add_all(self)
+		return res
 	end
 end
 
