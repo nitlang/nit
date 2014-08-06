@@ -83,6 +83,11 @@ class Sys
 	# Instructions outside classes implicitly redefine this method.
 	fun main do end
 
+	# The entry point for the execution of the whole program.
+	# Its job is to call `main` but some modules may want to refine it
+	# and inject specific work before or after the main part.
+	fun run do main
+
 	# Number of the last error
 	fun errno: Int is extern `{
 		return errno;
