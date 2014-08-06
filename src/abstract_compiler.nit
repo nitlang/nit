@@ -733,7 +733,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			if main_init != null then
 				v.send(main_init, [glob_sys])
 			end
-			var main_method = mainmodule.try_get_primitive_method("main", main_type.mclass)
+			var main_method = mainmodule.try_get_primitive_method("run", main_type.mclass) or else
+				mainmodule.try_get_primitive_method("main", main_type.mclass)
 			if main_method != null then
 				v.send(main_method, [glob_sys])
 			end

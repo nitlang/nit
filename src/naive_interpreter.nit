@@ -64,7 +64,8 @@ redef class ModelBuilder
 		if initprop != null then
 			interpreter.send(initprop, [mainobj])
 		end
-		var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
+		var mainprop = mainmodule.try_get_primitive_method("run", sys_type.mclass) or else
+			mainmodule.try_get_primitive_method("main", sys_type.mclass)
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
 		end
