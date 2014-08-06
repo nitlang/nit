@@ -30,6 +30,9 @@ in "C Header" `{
 
 # UTF-8 char as defined in RFC-3629, e.g. 1-4 Bytes
 extern class UnicodeChar `{ uint32_t* `}
+	super Comparable
+
+	redef type OTHER: UnicodeChar
 
 	# Transforms a byte-variable char* character to its uint32_t equivalent
 	new from_ns(ns: NativeString, index: Int) `{
@@ -90,6 +93,11 @@ extern class UnicodeChar `{ uint32_t* `}
 		unsigned char* rt = (unsigned char*) &ret;
 		return ret;
 	`}
+
+	# Warning : This does not follow the Unicode specification for now
+	#
+	# TODO: Support Unicode-compliant comparison
+	redef fun <(o) do return self.code_point < o.code_point
 
 	# Returns an upper-case version of self
 	#
@@ -165,6 +173,8 @@ end
 
 redef class FlatString
 
+	redef type OTHER: FlatString
+
 	# Length in bytes of the string (e.g. the length of the C string)
 	var bytelen: Int
 
@@ -197,8 +207,36 @@ redef class FlatString
 		return length;
 	`}
 
-	private fun byte_index(index: Int): Int
+	redef fun <(o)
 	do
+		var o_pos = 0
+		var olen = o.length
+		for i in [0 .. length[ do
+			if o_pos >= olen then return false
+			if char_at(i) > o.char_at(i) then return false
+			if char_at(i) < o.char_at(i) then return true
+		end
+		return false
+	end
+
+	redef fun ==(o) do
+		if o == null then return false
+		if not o isa FlatString then return super
+		var mylen = length
+		var itslen = o.length
+		if mylen != itslen then return false
+		var mypos = 0
+		var itspos = 0
+
+		while mypos < mylen do
+			if char_at(mypos) != o.char_at(itspos) then return false
+			mypos += 1
+			itspos += 1
+		end
+		return true
+	end
+
+	private fun byte_index(index: Int): Int do
 		assert index >= 0
 		assert index < length
 		var ns_i = index_from
@@ -220,21 +258,115 @@ redef class FlatString
 		return ns_i
 	end
 
-	fun char_at(pos: Int): UnicodeChar
-	do
+	fun char_at(pos: Int): UnicodeChar do
 		return new UnicodeChar.from_ns(items, byte_index(pos))
 	end
 
-	private init with_bytelen(items: NativeString, index_from: Int, index_to: Int, bytelen: Int)
-	do
+	private init with_bytelen(items: NativeString, index_from: Int, index_to: Int, bytelen: Int) do
 		self.items = items
 		self.index_from = index_from
 		self.index_to = index_to
 		self.bytelen = bytelen
 	end
 
-	redef fun to_cstring
-	do
+	redef fun reversed do
+		var new_str = calloc_string(bytelen)
+		var s_pos = bytelen
+		var my_pos = index_from
+		var its = items
+		for i in [0..length[ do
+			var c = char_at(i).len
+			s_pos -= c
+			its.copy_to(new_str, c, my_pos, s_pos)
+			my_pos += c
+		end
+		return new FlatString.full(new_str, 0, bytelen - 1, bytelen, length)
+	end
+
+	redef fun to_upper do
+		var ns = calloc_string(bytelen)
+		var offset = 0
+		for i in [0 .. length[
+		do
+			var c = char_at(i)
+			c.to_upper.to_s.items.copy_to(ns, c.len, 0, offset)
+			offset += c.len
+		end
+		return new FlatString.full(ns, 0, bytelen - 1, bytelen, length)
+	end
+
+	redef fun to_lower do
+		var ns = calloc_string(bytelen)
+		var offset = 0
+		for i in [0 .. length[
+		do
+			var c = char_at(i)
+			c.to_lower.to_s.items.copy_to(ns, c.len, 0, offset)
+			offset += c.len
+		end
+		return new FlatString.full(ns, 0, bytelen - 1, bytelen, length)
+	end
+
+	redef fun +(o) do
+		if o isa Buffer then o = o.to_s
+		if o isa FlatString then
+			var new_str = calloc_string(bytelen + o.bytelen + 1)
+			var new_bytelen = bytelen + o.bytelen
+			new_str[new_bytelen] = '\0'
+			var newlen = length + o.length
+			items.copy_to(new_str, bytelen, index_from, 0)
+			o.items.copy_to(new_str, o.bytelen, o.index_from, bytelen)
+			return new FlatString.full(new_str, 0, new_bytelen - 1, new_bytelen, newlen)
+		else if o isa RopeString then
+			return new RopeString.from(self) + o
+		else
+			# If it goes to this point, that means another String implementation was concerned, therefore you need to support the + operation for this variant
+			abort
+		end
+	end
+
+	redef fun *(i) do
+		var mybtlen = bytelen
+		var new_bytelen = mybtlen * i
+		var mylen = length
+		var newlen = mylen * i
+		var ns = calloc_string(new_bytelen + 1)
+		ns[new_bytelen] = '\0'
+		var offset = 0
+		while i > 0 do
+			items.copy_to(ns, bytelen, index_from, offset)
+			offset += mybtlen
+			i -= 1
+		end
+		return new FlatString.full(ns, 0, new_bytelen - 1, new_bytelen, newlen)
+	end
+
+	# O(n)
+	redef fun substring(from: Int, count: Int) do
+		assert count >= 0
+
+		if from < 0 then
+			count += from
+			if count < 0 then count = 0
+			from = 0
+		end
+
+		if count == 0 then return empty
+
+		var real_from = byte_index(from)
+
+		var lst = from + count - 1
+
+		if lst > length - from then
+			return new FlatString.with_bytelen(items, real_from, index_to, index_to - real_from)
+		end
+
+		var real_to = byte_index(lst)
+
+		return new FlatString.full(items, real_from, real_to, (real_to + char_at(lst).len) - real_from, count)
+	end
+
+	redef fun to_cstring do
 		if real_items != null then return real_items.as(not null)
 		var new_items = calloc_string(bytelen + 1)
 		self.items.copy_to(new_items, bytelen, index_from, 0)
