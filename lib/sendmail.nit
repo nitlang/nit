@@ -102,7 +102,7 @@ To: {{{to.join(",")}}}\r
 CC: {{{cc.join(",")}}}\r
 BCC: {{{bcc.join(",")}}}\r
 Subject: {{{subject}}}\r
-{{{header.join("\r\n", ": ")}}}\r
+{{{header.join("\r\n", ": ")}}}\r\n\r
 {{{content}}}"""
 	end
 end
