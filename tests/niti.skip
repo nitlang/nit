@@ -19,3 +19,4 @@ android
 nitcc_parser_gen
 mnit
 emscripten
+nitserial_args
