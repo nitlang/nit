@@ -91,9 +91,13 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		# Enlarge if needed
 		var l = _length
 		_length = l + 1
-		l = (l + 5) * 3 / 2
+
+		# Magic values determined empirically
+		# We do not want to enlarge too much
+		# We also want a odd capacity so that the modulo is more distributive
+		l = (l + 5) * 2 + 1
 		if l >= _capacity then
-			enlarge(l * 2)
+			enlarge(l * 3 / 2 + 1)
 		end
 	end
 
