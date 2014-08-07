@@ -184,9 +184,9 @@ $(call import-module,android/native_app_glue)
                 android:configChanges="orientation|keyboardHidden"
                 android:screenOrientation="portrait"
                 {{{icon_declaration}}}>
-            <!-- Tell NativeActivity the name of or .so -->
-            <meta-data android:name=\"{{{app_package}}}\"
-                    android:value=\"{{{app_name}}}\" />
+            <!-- Tell NativeActivity the name of our .so -->
+            <meta-data android:name=\"android.app.lib_name\"
+                    android:value=\"main\" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
