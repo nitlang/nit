@@ -43,10 +43,27 @@ class JavaTypeConverter
 		type_map["boolean"] = "Bool"
 		type_map["Boolean"] = "Bool"
 		type_map["Object"] = "JavaObject"
-		type_map["Bundle"] = "NativeBundle"
 		type_map["String"] = "JavaString"
 		type_map["CharSequence"] = "JavaString"
 
+
+		# Cast if the type is given as a parameter
+		param_cast_map["byte"] = "(byte)"
+		param_cast_map["Byte"] = "(Byte)"
+		param_cast_map["short"] = "(short)"
+		param_cast_map["Short"] = "(short)"
+		param_cast_map["float"] = "(float)"
+		param_cast_map["Float"] = "(float)"
+		param_cast_map["int"] = "(int)"
+		param_cast_map["Integer"] = "(int)"
+
+		# Cast if the type is given as a return value
+		return_cast_map["CharSequence"] = "(String)"
+	end
+
+	init with_collections
+	do
+		self.init
 		# Collections
 		type_map["List"] = "Array"
 		type_map["ArrayList"] = "Array"
@@ -64,22 +81,6 @@ class JavaTypeConverter
 		type_map["TreeMap"] = "RBTreeMap"
 		type_map["Hashtable"] = "HashMap"
 		type_map["LinkedHashMap"] = "HashMap"
-
-		# Cast if the type is given as a parameter
-		param_cast_map["byte"] = "(byte)"
-		param_cast_map["Byte"] = "(Byte)"
-		param_cast_map["short"] = "(short)"
-		param_cast_map["Short"] = "(short)"
-		param_cast_map["float"] = "(float)"
-		param_cast_map["Float"] = "(float)"
-		# FIXME: Uncomment as soon as Nit `Int` will be equivalent to Java `long`
-		# param_cast_map["int"] = "int"
-		# param_cast_map["Integer"] = "int"
-
-		# Cast if the type is given as a return value
-		return_cast_map["CharSequence"] = "(String)"
-		# FIXME: Erase as soon as the Nit `Int` type will become a Java `long`
-		return_cast_map["long"] = "(int)"
 	end
 
 	fun to_nit_type(java_type: String): nullable String

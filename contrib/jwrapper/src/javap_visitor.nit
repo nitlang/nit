@@ -20,30 +20,47 @@ module javap_visitor
 
 import javap_test_parser
 import code_generator
+import jtype_converter
 intrude import types
 
 class JavaVisitor
 	super Visitor
 
+	var converter: JavaTypeConverter
+
 	var java_class = new JavaClass
 	var declaration_type: nullable String =  null
 	var declaration_element: nullable String = null
-	var full_class_name = new Array[String]
+	var class_type: JavaType
 
 	var variable_id = ""
-	var variable_type = new JavaType
+	var variable_type: JavaType
 
 	var is_generic_param = false
+	var is_generic_id = false
+	var generic_id = ""
 	var gen_params_index = 0
+
+	# Used to resolve generic return types (T -> foo.faz.Bar)
+	var generic_map = new HashMap[String, Array[String]]
 
 	var is_primitive_array = false
 
 	var method_id = ""
-	var method_return_type = new JavaType
+	var method_return_type: JavaType
 	var method_params = new Array[JavaType]
 	var param_index = 0
 
 	redef fun visit(n) do n.accept_visitor(self)
+
+	init(converter: JavaTypeConverter)
+	do
+		self.converter = converter
+		self.class_type = new JavaType(self.converter)
+		self.method_return_type = new JavaType(self.converter)
+		self.variable_type = new JavaType(self.converter)
+		super
+	end
 end
 
 redef class Node
@@ -56,7 +73,7 @@ redef class Nidentifier
 		if v.declaration_type == "class_header" then
 
 			if v.declaration_element == "id" then
-				v.full_class_name.add(self.text)
+				v.class_type.identifier.add(self.text)
 			end
 
 		else if v.declaration_type == "variable" then
@@ -88,6 +105,18 @@ redef class Nidentifier
 					v.method_params[v.param_index].generic_params[v.gen_params_index].identifier.add(self.text)
 				else
 					v.method_params[v.param_index].identifier.add(self.text)
+				end
+
+			# Creates a map to resolve generic return types
+			# Exemple : public **<T extends android/os/Bundle>** T foo();
+			else if v.is_generic_param then
+				if v.is_generic_id then
+					v.generic_id = self.text
+					v.generic_map[self.text] = new Array[String]
+
+					if not v.method_return_type.has_unresolved_types then v.method_return_type.has_unresolved_types = true
+				else
+					v.generic_map[v.generic_id].add(self.text)
 				end
 			end
 
@@ -282,7 +311,7 @@ redef class Nclass_header
 		v.declaration_type = null
 		v.declaration_element = null
 
-		v.java_class.name = v.full_class_name
+		v.java_class.class_type = v.class_type
 	end
 end
 
@@ -318,11 +347,12 @@ redef class Nmethod_declaration
 		super
 		v.declaration_type = null
 
+		if v.method_return_type.has_unresolved_types then v.method_return_type.resolve_types(v.generic_map)
 		v.java_class.add_method(v.method_id, v.method_return_type, v.method_params)
 
 		v.method_params.clear
 		v.method_id = ""
-		v.method_return_type = new JavaType
+		v.method_return_type = new JavaType(v.converter)
 	end
 end
 
@@ -347,7 +377,7 @@ redef class Nvariable_declaration
 		v.java_class.attributes[v.variable_id] = v.variable_type
 
 		v.variable_id = ""
-		v.variable_type = new JavaType
+		v.variable_type = new JavaType(v.converter)
 	end
 end
 
@@ -389,7 +419,10 @@ redef class Ntype
 		end
 
 		if v.declaration_type == "method" and v.declaration_element == null then
-			v.declaration_element = "return_type"
+			# Makes sure it is not the generic return type definition
+			if not (v.method_return_type.identifier.is_empty and v.is_generic_param) then
+				v.declaration_element = "return_type"
+			end
 		end
 
 		super
@@ -406,7 +439,7 @@ redef class Ngeneric_param
 		# Ignore the weird generic return type declaration
 		if v.declaration_type == "method" then
 			if v.declaration_element == null then
-				v.declaration_element = "ignore"
+				v.is_generic_param = true
 			else
 				v.is_generic_param = true
 				v.gen_params_index = 0
@@ -432,6 +465,22 @@ redef class Ngeneric_param
 	end
 end
 
+redef class Ngeneric_identifier
+	redef fun accept_visitor(v)
+	do
+		if v.declaration_type == "method" then
+			if v.declaration_element == null then
+				v.is_generic_id = true
+			end
+		end
+
+		super
+
+		v.is_generic_id = false
+
+	end
+end
+
 redef class Nparameter_list
 	redef fun accept_visitor(v)
 	do
@@ -449,13 +498,13 @@ redef class Nparameter
 		if v.declaration_type == "method" then
 			if v.declaration_element == "parameter_list" then
 				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params.add(new JavaType)
+					v.method_params[v.param_index].generic_params.add(new JavaType(v.converter))
 
 					super
 
 					v.gen_params_index += 1
 				else
-					v.method_params.add(new JavaType)
+					v.method_params.add(new JavaType(v.converter))
 
 					super
 
@@ -463,15 +512,19 @@ redef class Nparameter
 				end
 			else if v.declaration_element == "return_type" and v.is_generic_param then
 
-				v.method_return_type.generic_params.add(new JavaType)
+				v.method_return_type.generic_params.add(new JavaType(v.converter))
 
 				super
 
 				v.gen_params_index += 1
+
+			# For generic return type definition
+			else if v.declaration_element == null then
+				super
 			end
 		else if v.declaration_type == "variable" then
 			if v.declaration_element == "type" and v.is_generic_param then
-				v.variable_type.generic_params.add(new JavaType)
+				v.variable_type.generic_params.add(new JavaType(v.converter))
 
 				super
 
@@ -482,12 +535,3 @@ redef class Nparameter
 		end
 	end
 end
-
-var p = new TestParser_javap
-var tree = p.main
-
-var visitor = new JavaVisitor
-visitor.enter_visit(tree)
-
-var generator = new CodeGenerator("bundle.nit", visitor.java_class)
-generator.generate
