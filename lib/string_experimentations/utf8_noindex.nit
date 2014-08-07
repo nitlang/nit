@@ -383,6 +383,199 @@ redef class Text
 
 end
 
+redef class FlatBuffer
+
+	redef var bytelen: Int
+
+	redef init from(s) do
+		if s isa RopeString then
+			with_capacity(50)
+			for i in s.substrings do self.append(i)
+		end
+		items = calloc_string(s.bytelen)
+		if s isa FlatString then
+			s.items.copy_to(items, s.bytelen, s.index_from, 0)
+		else
+			s.as(FlatBuffer).items.copy_to(items, s.as(FlatBuffer).bytelen, 0, 0)
+		end
+		length = s.length
+		bytelen = s.bytelen
+		capacity = s.bytelen
+	end
+
+	# Replaces the char at `index` by `item`
+	fun char_at=(index: Int, item: UnicodeChar) do
+		is_dirty = true
+		if index == length then
+			add_unicode item
+			return
+		end
+		assert index >= 0 and index < length
+		var ip = byte_at(index)
+		var c = char_at_byte(ip)
+		var size_diff = item.len - c.len
+		if size_diff > 0 then
+			rshift_bytes(ip + c.len, size_diff)
+		else if size_diff < 0 then
+			lshift_bytes(ip + c.len, -size_diff)
+		end
+		var s = item.to_s
+		s.items.copy_to(items, s.bytelen, 0, ip)
+	end
+
+	# Shifts the content of the buffer by `len` bytes to the right, starting at byte `from`
+	fun rshift_bytes(from: Int, len: Int) import FlatBuffer.bytelen, FlatBuffer.bytelen=, FlatBuffer.items `{
+		long bt = FlatBuffer_bytelen(recv);
+		char* ns = FlatBuffer_items(recv);
+		int off = from + len;
+		memmove(ns + off, ns + from, bt - from);
+		FlatBuffer_bytelen__assign(recv, bt + len);
+	`}
+
+	# Shifts the content of the buffer by `len` bytes to the left, starting at `from`
+	fun lshift_bytes(from: Int, len: Int) import FlatBuffer.bytelen, FlatBuffer.bytelen=, FlatBuffer.items `{
+		long bt = FlatBuffer_bytelen(recv);
+		char* ns = FlatBuffer_items(recv);
+		int off = from - len;
+		memmove(ns + off, ns + from, bt - from);
+		FlatBuffer_bytelen__assign(recv, bt - len);
+	`}
+
+	# Get the Unicode char stored at `index` in `self`
+	fun char_at(index: Int): UnicodeChar do return new UnicodeChar.from_ns(items, byte_at(index))
+
+	# Get the Unicode char stored at `index` (bytewise) in `self`
+	fun char_at_byte(index: Int): UnicodeChar do return new UnicodeChar.from_ns(items, index)
+
+	# Add equivalent that supports Unicode
+	fun add_unicode(c: UnicodeChar) do
+		var s = c.to_s
+		if s.bytelen + bytelen > capacity then enlarge(s.bytelen)
+		s.items.copy_to(items, s.bytelen, 0, bytelen)
+	end
+
+	# Gets the byte index (in NativeString) of the char stored at `i`
+	fun byte_at(i: Int): Int do
+		assert i < length and i >= 0
+		var ns_i = 0
+		var real_i = 0
+		while real_i < i do
+			if items[ns_i].ascii.bin_and(0x80) == 0 then
+				ns_i += 1
+			else if items[ns_i].ascii.bin_and(0xE0) == 0xC0 then
+				ns_i += 2
+			else if items[ns_i].ascii.bin_and(0xF0) == 0xE0 then
+				ns_i += 3
+			else if items[ns_i].ascii.bin_and(0xF7) == 0xF0 then
+				ns_i += 4
+			else
+				ns_i += 1
+			end
+			real_i += 1
+		end
+		return ns_i
+	end
+
+	redef fun enlarge(cap) do
+		var c = capacity
+		if cap <= c then return
+		while c <= cap do c = c * 2 + 2
+		var a = calloc_string(c+1)
+		if bytelen > 0 then items.copy_to(a, bytelen, 0, 0)
+		items = a
+		capacity = c
+	end
+
+	redef fun append(s) do
+		if s isa RopeString then
+			for i in s.substrings do append i
+		end
+		var i = s.as(FlatString)
+		var blen = bytelen
+		var iblen = i.bytelen
+		var newlen = blen + iblen
+		if newlen > capacity then
+			enlarge(newlen)
+		end
+		i.items.copy_to(items, iblen, i.index_from, blen)
+		bytelen += iblen
+		length += i.length
+	end
+
+	redef fun reverse
+	do
+		var nns = calloc_string(bytelen)
+		var ns = items
+		var btlen = bytelen
+		var myp = 0
+		var itsp = btlen
+		while myp < btlen do
+			var c = char_at_byte(myp).len
+			itsp -= c
+			ns.copy_to(nns, c, myp, itsp)
+			myp += c
+		end
+		items = nns
+	end
+
+	redef fun clear do
+		length = 0
+		bytelen = 0
+	end
+
+	redef fun copy(s, l, d, ns) do
+		if not d isa FlatBuffer then
+			# This implementation here is only concerned by the FlatBuffer
+			# If you implement a new Buffer subclass, make sure to support this operation via refinement.
+			abort
+		end
+		var rs = byte_at(s)
+		var re = byte_at(s + l - 1)
+		var rl = re - rs
+		var rns = d.byte_at(ns)
+		items.copy_to(d.items, rl, rns, rs)
+	end
+
+	redef fun times(i) do
+		var len = bytelen
+		var off = len
+		var newlen = len * i
+		if newlen > capacity then enlarge(newlen)
+		for j in [1 .. i[ do
+			items.copy_to(items, len, 0, off)
+			off += len
+		end
+		bytelen = newlen
+		length = length * i
+	end
+
+	redef fun upper do
+		for i in [0 .. length[ do
+			var pos = byte_at(i)
+			var c = char_at_byte(pos)
+			var d = c.to_upper
+			if c == d then continue
+			d.to_s.items.copy_to(items, 1, 0, pos)
+		end
+	end
+
+	redef fun lower do
+		for i in [0 .. length[ do
+			var pos = byte_at(i)
+			var c = char_at_byte(pos)
+			var d = c.to_lower
+			if c == d then continue
+			d.to_s.items.copy_to(items, 1, 0, pos)
+		end
+	end
+
+	redef fun to_cstring do
+		var ns = calloc_string(bytelen)
+		items.copy_to(ns, bytelen, 0, 0)
+		return ns
+	end
+end
+
 redef class NativeString
 
 	redef fun to_s: FlatString
@@ -410,11 +603,7 @@ redef class OFStream
 	do
 		assert _writable
 		if s isa FlatText then
-			if s isa FlatString then
-				write_native(s.to_cstring, s.bytelen)
-			else
-				write_native(s.to_cstring, s.length)
-			end
+			write_native(s.to_cstring, s.bytelen)
 		else for i in s.substrings do write_native(i.to_cstring, i.length)
 	end
 end
