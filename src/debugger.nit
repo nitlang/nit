@@ -335,7 +335,8 @@ class Debugger
 				if initprop != null then
 					self.send(initprop, [mobj])
 				end
-				var mainprop = mmod.try_get_primitive_method("main", sys_type.mclass)
+				var mainprop = mmod.try_get_primitive_method("run", sys_type.mclass) or else
+					mmod.try_get_primitive_method("main", sys_type.mclass)
 				if mainprop != null then
 					self.rt_send(mainprop, [mobj])
 				end

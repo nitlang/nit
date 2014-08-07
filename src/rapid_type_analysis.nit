@@ -190,7 +190,8 @@ class RapidTypeAnalysis
 		if initprop != null then
 			add_send(maintype, initprop)
 		end
-		var mainprop = mainmodule.try_get_primitive_method("main", maintype.mclass)
+		var mainprop = mainmodule.try_get_primitive_method("run", maintype.mclass) or else
+			mainmodule.try_get_primitive_method("main", maintype.mclass)
 		if mainprop != null then
 			add_send(maintype, mainprop)
 		end
