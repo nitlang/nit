@@ -176,7 +176,7 @@ redef class FlatString
 	redef type OTHER: FlatString
 
 	# Length in bytes of the string (e.g. the length of the C string)
-	var bytelen: Int
+	redef var bytelen: Int
 
 	redef var length = length_l is lazy
 
@@ -374,6 +374,13 @@ redef class FlatString
 		self.real_items = new_items
 		return new_items
 	end
+end
+
+redef class Text
+
+	# Length of the string, in bytes
+	fun bytelen: Int is abstract
+
 end
 
 redef class NativeString
