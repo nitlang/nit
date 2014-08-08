@@ -342,6 +342,22 @@ class Array[E]
 
 	# The size of `_items`.
 	var _capacity: Int = 0
+
+	redef fun ==(o)
+	do
+		if not o isa Array[nullable Object] then return super
+		# Efficient implementation
+		var l = length
+		if l != o.length then return false
+		var i = 0
+		var it = _items
+		var oit = o._items
+		while i < l do
+			if it[i] != oit[i] then return false
+			i += 1
+		end
+		return true
+	end
 end
 
 # An `Iterator` on `AbstractArray`
