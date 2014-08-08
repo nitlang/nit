@@ -61,6 +61,9 @@ class HttpServer
 			end label
 		end
 
+		# Use default virtual host if none already responded
+		if virtual_host == null then virtual_host = factory.config.default_virtual_host
+
 		# Get a response from the virtual host
 		var response
 		if virtual_host != null then
