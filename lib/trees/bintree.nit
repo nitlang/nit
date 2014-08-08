@@ -94,8 +94,9 @@ class BinTreeMap[K: Comparable, E]
 	end
 
 	protected fun search_down(from: N, key: K): nullable N do
-		if key == from.key then return from
-		if from.left != null and key < from.key then
+		var cmp = key <=> from.key
+		if cmp == 0 then return from
+		if from.left != null and cmp < 0 then
 			return search_down(from.left.as(not null), key)
 		else if from.right != null then
 			return search_down(from.right.as(not null), key)
@@ -166,14 +167,15 @@ class BinTreeMap[K: Comparable, E]
 
 	# Push down the `node` in tree from a specified `from` index
 	protected fun shift_down(from, node: N) do
-		if node.key < from.key then
+		var cmp = node.key <=> from.key
+		if cmp < 0 then
 			if from.left == null then
 				from.left = node
 				node.parent = from
 			else
 				shift_down(from.left.as(not null), node)
 			end
-		else if node.key > from.key then
+		else if cmp > 0 then
 			if from.right == null then
 				from.right = node
 				node.parent = from
@@ -382,7 +384,7 @@ class BinTreeNode[K: Comparable, E]
 	# set `left` child for this node (or null if left no child)
 	# ENSURE: node.key < key (only if node != null)
 	fun left=(node: nullable SELF) do
-		assert node != null implies node.key < key
+		#assert node != null implies node.key < key
 		left_node = node
 	end
 
@@ -394,9 +396,7 @@ class BinTreeNode[K: Comparable, E]
 	# set `right` child for this node (or null if right no child)
 	# ENSURE: node.key < key (only if node != null)
 	fun right=(node: nullable SELF) do
-		if node != null then
-			assert node.key > key
-		end
+		#assert node != null implies node.key > key
 		right_node = node
 	end
 
