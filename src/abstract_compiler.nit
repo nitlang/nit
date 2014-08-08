@@ -2425,22 +2425,28 @@ redef class AForExpr
 		# Shortcut on explicit range
 		# Avoid the instantiation of the range and the iterator
 		var nexpr = self.n_expr
-		if self.variables.length == 1 and nexpr isa AOrangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
+		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
 			var from = v.expr(nexpr.n_expr, null)
 			var to = v.expr(nexpr.n_expr2, null)
 			var variable = v.variable(variables.first)
+			var one = v.new_expr("1", v.get_class("Int").mclass_type)
 
 			v.assign(variable, from)
 			v.add("for(;;) \{ /* shortcut range */")
 
-			var ok = v.send(v.get_property("<", variable.mtype), [variable, to])
+			var ok
+			if nexpr isa AOrangeExpr then
+				ok = v.send(v.get_property("<", variable.mtype), [variable, to])
+			else
+				ok = v.send(v.get_property("<=", variable.mtype), [variable, to])
+			end
 			assert ok != null
 			v.add("if(!{ok}) break;")
 
 			v.stmt(self.n_block)
 
 			v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
-			var succ = v.send(v.get_property("succ", variable.mtype), [variable])
+			var succ = v.send(v.get_property("successor", variable.mtype), [variable, one])
 			assert succ != null
 			v.assign(variable, succ)
 			v.add("\}")
