@@ -2425,7 +2425,7 @@ redef class AForExpr
 		# Shortcut on explicit range
 		# Avoid the instantiation of the range and the iterator
 		var nexpr = self.n_expr
-		if self.variables.length == 1 and nexpr isa AOrangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
+		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
 			var from = v.expr(nexpr.n_expr, null)
 			var to = v.expr(nexpr.n_expr2, null)
 			var variable = v.variable(variables.first)
@@ -2434,7 +2434,12 @@ redef class AForExpr
 			v.assign(variable, from)
 			v.add("for(;;) \{ /* shortcut range */")
 
-			var ok = v.send(v.get_property("<", variable.mtype), [variable, to])
+			var ok
+			if nexpr isa AOrangeExpr then
+				ok = v.send(v.get_property("<", variable.mtype), [variable, to])
+			else
+				ok = v.send(v.get_property("<=", variable.mtype), [variable, to])
+			end
 			assert ok != null
 			v.add("if(!{ok}) break;")
 
