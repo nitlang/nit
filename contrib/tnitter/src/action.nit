@@ -136,6 +136,11 @@ class Tnitter
 				# Post a Tnit!
 				var text = request.post_args["text"]
 				db.post(user, text)
+
+				# Redirect the user to avoid double posting
+				var response = new HttpResponse(303)
+				response.header["Location"] = request.uri
+				return response
 			end
 		end
 
