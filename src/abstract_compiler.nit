@@ -2429,6 +2429,7 @@ redef class AForExpr
 			var from = v.expr(nexpr.n_expr, null)
 			var to = v.expr(nexpr.n_expr2, null)
 			var variable = v.variable(variables.first)
+			var one = v.new_expr("1", v.get_class("Int").mclass_type)
 
 			v.assign(variable, from)
 			v.add("for(;;) \{ /* shortcut range */")
@@ -2440,7 +2441,7 @@ redef class AForExpr
 			v.stmt(self.n_block)
 
 			v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
-			var succ = v.send(v.get_property("succ", variable.mtype), [variable])
+			var succ = v.send(v.get_property("successor", variable.mtype), [variable, one])
 			assert succ != null
 			v.assign(variable, succ)
 			v.add("\}")
