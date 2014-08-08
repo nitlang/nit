@@ -95,6 +95,7 @@ class MediaTypes
 		types["asx"]        = "video/x-ms-asf"
 		types["asf"]        = "video/x-ms-asf"
 		types["mng"]        = "video/x-mng"
+		types["apk"]        = "application/vnd.android.package-archive"
 	end
 end
 
