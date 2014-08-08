@@ -634,6 +634,72 @@ private class ArrayMapValues[K: Object, E]
 	end
 end
 
+# Comparable array for comparable elements.
+#
+# For two arrays, if one is a prefix, then it is lower.
+#
+# ~~~
+# var a12 = new ArrayCmp[nullable Int].with_items(1,2)
+# var a123 = new ArrayCmp[nullable Int].with_items(1,2,3)
+# assert a12 < a123
+# ~~~
+#
+# Otherwise, the first element just after the longest
+# common prefix gives the order between the two arrays.
+#
+# ~~~
+# var a124 = new ArrayCmp[nullable Int].with_items(1,2,4)
+# var a13 = new ArrayCmp[nullable Int].with_items(1,3)
+# assert a12  < a123
+# assert a123 < a13
+# ~~~
+#
+# Obviously, two equal arrays are equal.
+#
+# ~~~
+# var b12 = new ArrayCmp[nullable Int].with_items(1,2)
+# assert (a12 <=> b12) == 0
+# ~~~
+#
+# `null` is considered lower than any other elements.
+# But is still greater than no element.
+#
+# ~~~
+# var a12n = new ArrayCmp[nullable Int].with_items(1,2,null)
+# assert a12n < a123
+# assert a12  < a12n
+# ~~~
+class ArrayCmp[E: nullable Comparable]
+	super Array[E]
+	super Comparable
+	redef type OTHER: ArrayCmp[E] is fixed
+
+	redef fun <(o) do return (self <=> o) < 0
+
+	redef fun <=>(o)
+	do
+		var it = _items
+		var oit = o._items
+		var i = 0
+		var l = length
+		var ol = o.length
+		var len
+		if l < ol then len = l else len = ol
+		while i < len do
+			var a = it[i]
+			var b = oit[i]
+			if a != null then
+				if b == null then return 1
+				var d = a <=> b.as(Comparable)
+				if d != 0 then return d
+			else
+				if b != null then return -1
+			end
+			i += 1
+		end
+		return l <=> ol
+	end
+end
 
 # Others tools ################################################################
 
