@@ -244,6 +244,7 @@ class GlobalCompiler
 		v.add("{res}->classid = {self.classid(mtype)};")
 
 		self.generate_init_attr(v, res, mtype)
+		v.set_finalizer res
 		v.add("return {res};")
 		v.add("\}")
 	end

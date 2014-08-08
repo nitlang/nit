@@ -107,6 +107,7 @@ redef class ModelBuilder
 		compiler.new_file("{mainmodule.name}.main")
 		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
+		compiler.compile_finalizer_function
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
@@ -765,6 +766,7 @@ class SeparateCompiler
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
 			self.generate_init_attr(v, res, mtype)
+			v.set_finalizer res
 			v.add("return {res};")
 		end
 		v.add("\}")

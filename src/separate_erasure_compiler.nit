@@ -339,6 +339,7 @@ class SeparateErasureCompiler
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
 			self.generate_init_attr(v, res, mtype)
+			v.set_finalizer res
 			v.add("return {res};")
 		end
 		v.add("\}")

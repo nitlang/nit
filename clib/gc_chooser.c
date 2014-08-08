@@ -120,3 +120,11 @@ void initialize_gc_option(void) {
 		default: break; /* Nothing */
 	}
 }
+
+void gc_register_finalizer(void* obj) {
+#ifdef WITH_LIBGC
+	GC_register_finalizer(obj, &gc_finalize, NULL, NULL, NULL);
+#endif
+}
+
+void __attribute__((weak)) gc_finalize(void *obj, void* client_data) {}

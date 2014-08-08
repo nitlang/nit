@@ -236,6 +236,13 @@ redef class MModule
 		return get_primitive_class("Sys").mclass_type
 	end
 
+	fun finalizable_type: nullable MClassType
+	do
+		var clas = self.model.get_mclasses_by_name("Finalizable")
+		if clas == null then return null
+		return get_primitive_class("Finalizable").mclass_type
+	end
+
 	# Force to get the primitive class named `name` or abort
 	fun get_primitive_class(name: String): MClass
 	do
