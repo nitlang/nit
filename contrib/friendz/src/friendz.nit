@@ -1151,14 +1151,9 @@ redef class Game
 	# Update all game entities.
 	fun step do
 		if solver != null and not solver_pause then
-			for i in [0..solver_steps[ do
-				if solver.step then
-					solver_pause = true
-					break
-				end
-			end
-			solver.dump
-			if solver.is_over then solver = null
+			if solver.run_steps(solver_steps) != null then solver_pause = true
+			print solver.to_s
+			if not solver.is_running then solver = null
 		end
 		for g in entities do
 			g.update
@@ -1231,7 +1226,7 @@ redef class Game
 	end
 
 	# Current solver, if any
-	var solver: nullable Solver = null
+	var solver: nullable BacktrackSolver[Grid, Action] = null
 
 	# Is the solver paused?
 	var solver_pause = false
@@ -1247,7 +1242,7 @@ redef class Game
 			edit_grid(grid)
 		else if kc == "s" then
 			if solver == null then
-				solver = new Solver(grid)
+				solver = (new FriendzProblem(grid)).solve
 				solver_pause = false
 			else
 				solver_pause = not solver_pause
@@ -1255,10 +1250,10 @@ redef class Game
 			#solver.step
 		else if kc == "d" then
 			if solver == null then
-				solver = new Solver(grid)
+				solver = (new FriendzProblem(grid)).solve
 				solver_pause = true
 			else
-				solver.step
+				solver.run_steps(1)
 			end
 		else if kc == "+" then
 			solver_steps += 100
