@@ -1,11 +1,12 @@
 Simple toolkit for artificial intelligence
 
-This library provides some frameworks for basic algorythm used for artificial intelligence.
-It offers simple a generic class to extends and
+This library provides some frameworks for basic algorithms used for artificial intelligence.
+It offers simple generic classes to extends.
 
 Contents:
 
 * see `backtrack`
+* see `search`
 
 See the `examples` subdirectory for examples:
 
