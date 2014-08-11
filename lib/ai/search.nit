@@ -13,6 +13,8 @@
 # The module provides a simple abstract class `SearchProblem[S,A]` to be specialized for a specific problem.
 #
 # The concrete class `SearchSolver` is used to configure, query, and run a solver for a given problem.
+#
+# For an example, see the `puzzle.nit` program in the `examples` subdirectory.
 module search
 
 import realtime
