@@ -191,7 +191,7 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 		return AKeyEvent_getKeyCode(recv);
 	`}
 
-	fun key_char: Char is extern `{
+	redef fun to_c `{
 		int code = AKeyEvent_getKeyCode(recv);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;
