@@ -554,6 +554,29 @@ abstract class Text
 		return buf.to_s
 	end
 
+	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
+	#
+	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
+	fun html_escape: SELFTYPE
+	do
+		var buf = new FlatBuffer
+
+		for i in [0..length[ do
+			var c = chars[i]
+			if c == '&' then
+				buf.append "&amp;"
+			else if c == '<' then
+				buf.append "&lt;"
+			else if c == '>' then
+				buf.append "&gt;"
+			else if c == '"' then
+				buf.append "&quot;"
+			else buf.add c
+		end
+
+		return buf.to_s
+	end
+
 	# Equality of text
 	# Two pieces of text are equals if thez have the same characters in the same order.
 	#

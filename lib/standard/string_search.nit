@@ -374,17 +374,4 @@ redef class Text
 	do
 		return self.split_with(p).join(string)
 	end
-
-	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
-	#
-	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
-	fun html_escape: SELFTYPE
-	do
-		var ret = self
-		if ret.chars.has('&') then ret = ret.replace('&', "&amp;")
-		if ret.chars.has('<') then ret = ret.replace('<', "&lt;")
-		if ret.chars.has('>') then ret = ret.replace('>', "&gt;")
-		if ret.chars.has('"') then ret = ret.replace('"', "&quot;")
-		return ret
-	end
 end
