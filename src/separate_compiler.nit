@@ -1007,7 +1007,7 @@ class SeparateCompilerVisitor
 	do
 		var res: nullable RuntimeVariable = null
 		var recv = arguments.first
-		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_null.value or mmethod.name == "==" or mmethod.name == "!="
 		var maybenull = recv.mcasttype isa MNullableType and consider_null
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
