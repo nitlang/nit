@@ -1,4 +1,3 @@
-Runtime error: Aborted (../lib/serialization.nit:72)
 # Nit:
 <A: true a 0.123 1234 asdf false>
 
@@ -37,4 +36,30 @@ Runtime error: Aborted (../lib/serialization.nit:72)
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false> 1111 	f"\/> true>
 
-Error: doesn't know how to deserialize class "Array[Object]"
+# Nit:
+<E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "E", "a": {"__kind": "obj", "__id": 1, "__class": "Array[Object]", "__length": 3, "__items": ["hello", 1234, 123.4]}, "b": ["hella", 2345, 234.5]}
+
+# Back in Nit:
+<E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
+
+# Nit:
+<E: 2222>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "F[Int]", "n": 2222}
+
+# Back in Nit:
+<E: 2222>
+
+# Nit:
+<E: 33.33>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "F[Float]", "n": 33.33}
+
+# Back in Nit:
+<E: 33.33>
+

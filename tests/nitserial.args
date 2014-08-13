@@ -1,0 +1,3 @@
+-o stdout test_serialization.nit
+-o out/ test_serialization.nit
+-o out/my_ser.nit test_serialization.nit

@@ -37,4 +37,4 @@ Runtime error: Aborted (../lib/serialization.nit:72)
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false> 1111 	f"\/> true>
 
-Error: doesn't know how to deserialize class "Array[Object]"
+Error: doesn't know how to deserialize class "Array"

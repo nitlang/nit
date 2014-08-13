@@ -161,6 +161,13 @@ class JsonDeserializer
 			abort
 		end
 
+		if object isa Array[nullable Object] then
+			# special case, isa Array[nullable Serializable]
+			var array = new Array[nullable Serializable]
+			for e in object do array.add e.as(nullable Serializable)
+			return array
+		end
+
 		return object
 	end
 
@@ -209,18 +216,54 @@ redef class NativeString
 end
 
 redef class Array[E]
-	redef fun serialize_to_json(v) do
-		v.stream.write "["
-		var is_first = true
-		for e in self do
-			if is_first then
-				is_first = false
-			else v.stream.write(", ")
-			
-			if not v.try_to_serialize(e) then
-				v.warn("element of type {e.class_name} is not serializable.")
+	redef fun serialize_to_json(v)
+	do
+		if class_name == "Array[nullable Serializable]" then
+			# Using class_name to the the exact type
+			# We do not want Array[Int] or anything else here
+			v.stream.write "["
+			var is_first = true
+			for e in self do
+				if is_first then
+					is_first = false
+				else v.stream.write(", ")
+
+				if not v.try_to_serialize(e) then
+					v.warn("element of type {e.class_name} is not serializable.")
+				end
+			end
+			v.stream.write "]"
+		else
+			# Register as pseudo object
+			var id = v.ref_id_for(self)
+			v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
+			v.stream.write """, "__length": {{{length}}}, "__items": ["""
+			var is_first = true
+			for e in self do
+				if is_first then
+					is_first = false
+				else v.stream.write(", ")
+
+				if not v.try_to_serialize(e) then
+					v.warn("element of type {e.class_name} is not serializable.")
+				end
+			end
+			v.stream.write "]"
+			v.stream.write "\}"
+		end
+	end
+
+	init from_deserializer(v: Deserializer)
+	do
+		if v isa JsonDeserializer then
+			v.notify_of_creation self
+
+			var length = v.deserialize_attribute("__length").as(Int)
+			var arr = v.path.last["__items"].as(Array[nullable Object])
+			for i in length.times do
+				var obj = v.convert_object(arr[i])
+				self.add obj
 			end
 		end
-		v.stream.write "]"
 	end
 end
