@@ -2038,7 +2038,7 @@ redef class AMethPropdef
 				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
 				return
 			else if pname == "copy_to" then
-				v.add("memcpy({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
+				v.add("memmove({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
 				return
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))

@@ -357,7 +357,7 @@ class GlobalCompilerVisitor
 			return
 		else if pname == "copy_to" then
 			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
-			self.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
+			self.add("memmove({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
 			return
 		end
 	end
