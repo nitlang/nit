@@ -401,7 +401,7 @@ class GlobalCompilerVisitor
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
-		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or m.name == "==" or m.name == "!="
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_null.value or m.name == "==" or m.name == "!="
 		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType and consider_null then
 			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
@@ -676,7 +676,7 @@ class GlobalCompilerVisitor
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			var res2 = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
-			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then
+			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
 				if ta.ctype == "val*" then
 					self.add("if ({res2} == NULL) \{")
 					self.add_abort("Uninitialized attribute {a.name}")

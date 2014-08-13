@@ -51,8 +51,10 @@ redef class ToolContext
 	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 	# --no-check-autocast
 	var opt_no_check_autocast: OptionBool = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
-	# --no-check-other
-	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
+	# --no-check-null
+	var opt_no_check_null: OptionBool = new OptionBool("Disable tests of null receiver (dangerous)", "--no-check-null")
+	# --no-check-all
+	var opt_no_check_all: OptionBool = new OptionBool("Disable all tests (dangerous)", "--no-check-all")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
@@ -70,7 +72,7 @@ redef class ToolContext
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
-		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
@@ -95,6 +97,14 @@ redef class ToolContext
 		if opt_output.value != null and opt_dir.value != null then
 			print "Error: cannot use both --dir and --output"
 			exit(1)
+		end
+
+		if opt_no_check_all.value then
+			opt_no_check_covariance.value = true
+			opt_no_check_attr_isset.value = true
+			opt_no_check_assert.value = true
+			opt_no_check_autocast.value = true
+			opt_no_check_null.value = true
 		end
 	end
 end
@@ -1174,7 +1184,7 @@ abstract class AbstractCompilerVisitor
 	# Add a check and an abort for a null reciever if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
-		if self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then return
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
