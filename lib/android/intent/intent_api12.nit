@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
 #
@@ -14,14 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module complete_simple_android is
-	java_package("org.nitlanguage.test_all")
-	target_api_version(19)
-end
+# Refines intent module to add API 12 services
+module intent_api12
 
-import test_bundle
-import test_audio
-import test_shared_preferences
-import test_assets_and_resources
-import test_target_api
-import test_intent
+import intent_api11
+
+in "Java" `{
+	import android.content.Intent;
+`}
+
+redef class Flag
+	fun exclude_stopped_packages: Int in "Java" `{ return Intent.FLAG_EXCLUDE_STOPPED_PACKAGES; `}
+	fun include_stopped_packages: Int in "Java" `{ return Intent.FLAG_INCLUDE_STOPPED_PACKAGES; `}
+end

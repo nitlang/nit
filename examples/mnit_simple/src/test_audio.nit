@@ -27,6 +27,8 @@ redef class App
 	redef fun init_window
 	do
 		super
+
+		default_mediaplayer.reset
 		manage_audio_mode
 
 		# Retrieve sound

@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
 #
@@ -14,14 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module complete_simple_android is
-	java_package("org.nitlanguage.test_all")
-	target_api_version(19)
+# Refines intent module to add API 19 services
+module intent_api19
+
+import intent_api18
+
+in "Java" `{
+	import android.content.Intent;
+`}
+
+redef class Extra
+	fun mime_types: JavaString in "Java" `{ return Intent.EXTRA_MIME_TYPES; `}
+	fun shutdown_userspace_only: JavaString in "Java" `{ return Intent.EXTRA_SHUTDOWN_USERSPACE_ONLY; `}
 end
 
-import test_bundle
-import test_audio
-import test_shared_preferences
-import test_assets_and_resources
-import test_target_api
-import test_intent
+redef class Flag
+	fun grant_persistable_uri_permission: Int in "Java" `{ return Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION; `}
+	fun receiver_no_abort: Int in "Java" `{ return Intent.FLAG_RECEIVER_NO_ABORT; `}
+end
