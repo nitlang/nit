@@ -247,8 +247,8 @@ abstract class Text
 		var i = 0
 		var neg = false
 
-		for c in self.chars
-		do
+		for j in [0..length[ do
+			var c = chars[j]
 			var v = c.to_i
 			if v > base then
 				if neg then
@@ -278,12 +278,10 @@ abstract class Text
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
-		for i in self.chars
-		do
-			if not i.is_numeric
-			then
-				if (i == '.' or i == ',') and not has_point_or_comma
-				then
+		for i in [0..length[ do
+			var c = chars[i]
+			if not c.is_numeric then
+				if (c == '.' or c == ',') and not has_point_or_comma then
 					has_point_or_comma = true
 				else
 					return false
@@ -300,7 +298,8 @@ abstract class Text
 	#     assert "0G".is_hex == false
 	fun is_hex: Bool
 	do
-		for c in self.chars do
+		for i in [0..length[ do
+			var c = chars[i]
 			if not (c >= 'a' and c <= 'f') and
 			   not (c >= 'A' and c <= 'F') and
 			   not (c >= '0' and c <= '9') then return false
@@ -316,7 +315,8 @@ abstract class Text
 	#     assert "Hello World".is_upper == false
 	fun is_upper: Bool
 	do
-		for char in self.chars do 
+		for i in [0..length[ do
+			var char = chars[i]
 			if char.is_lower then return false
 		end
 		return true
@@ -329,7 +329,8 @@ abstract class Text
 	#     assert "Hello World".is_lower == false
 	fun is_lower: Bool
 	do
-		for char in self.chars do 
+		for i in [0..length[ do
+			var char = chars[i]
 			if char.is_upper then return false
 		end
 		return true
@@ -379,7 +380,8 @@ abstract class Text
 	do
 		var res = new FlatBuffer
 		var underscore = false
-		for c in self.chars do
+		for i in [0..length[ do
+			var c = chars[i]
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
@@ -412,7 +414,8 @@ abstract class Text
 	fun escape_to_c: String
 	do
 		var b = new FlatBuffer
-		for c in self.chars do
+		for i in [0..length[ do
+			var c = chars[i]
 			if c == '\n' then
 				b.append("\\n")
 			else if c == '\0' then
@@ -464,7 +467,8 @@ abstract class Text
 	do
 		var res = new FlatBuffer.with_capacity(self.length)
 		var was_slash = false
-		for c in chars do
+		for i in [0..length[ do
+			var c = chars[i]
 			if not was_slash then
 				if c == '\\' then
 					was_slash = true
@@ -498,7 +502,8 @@ abstract class Text
 	do
 		var buf = new FlatBuffer
 
-		for c in self.chars do
+		for i in [0..length[ do
+			var c = chars[i]
 			if (c >= '0' and c <= '9') or
 			   (c >= 'a' and c <= 'z') or
 			   (c >= 'A' and c <= 'Z') or
@@ -549,6 +554,29 @@ abstract class Text
 			else buf.add c
 
 			i += 1
+		end
+
+		return buf.to_s
+	end
+
+	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
+	#
+	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
+	fun html_escape: SELFTYPE
+	do
+		var buf = new FlatBuffer
+
+		for i in [0..length[ do
+			var c = chars[i]
+			if c == '&' then
+				buf.append "&amp;"
+			else if c == '<' then
+				buf.append "&lt;"
+			else if c == '>' then
+				buf.append "&gt;"
+			else if c == '"' then
+				buf.append "&quot;"
+			else buf.add c
 		end
 
 		return buf.to_s
@@ -613,7 +641,8 @@ abstract class Text
 			# djb2 hash algorithm
 			var h = 5381
 
-			for char in self.chars do
+			for i in [0..length[ do
+				var char = chars[i]
 				h = h.lshift(5) + h + char.ascii
 			end
 
@@ -739,7 +768,8 @@ abstract class String
 		var new_str = new FlatBuffer.with_capacity(self.length)
 		var is_first_char = true
 
-		for char in self.chars do
+		for i in [0..length[ do
+			var char = chars[i]
 			if is_first_char then 
 				new_str.add(char.to_lower)
 				is_first_char = false
@@ -777,7 +807,8 @@ abstract class String
 		var is_first_char = true
 		var follows_us = false
 
-		for char in self.chars do
+		for i in [0..length[ do
+			var char = chars[i]
 			if is_first_char then
 				new_str.add(char)
 				is_first_char = false
@@ -1021,8 +1052,9 @@ class FlatString
 			s.items.copy_to(target_string, its_length, 0, my_length)
 		else
 			var curr_pos = my_length
-			for i in s.chars do
-				target_string[curr_pos] = i
+			for i in [0..s.length[ do
+				var c = s.chars[i]
+				target_string[curr_pos] = c
 				curr_pos += 1
 			end
 		end
@@ -1314,8 +1346,9 @@ class FlatBuffer
 			s.items.copy_to(items, length, 0, 0)
 		else
 			var curr_pos = 0
-			for i in s.chars do
-				items[curr_pos] = i
+			for i in [0..s.length[ do
+				var c = s.chars[i]
+				items[curr_pos] = c
 				curr_pos += 1
 			end
 		end
@@ -1343,8 +1376,9 @@ class FlatBuffer
 			s.items.copy_to(items, sl, 0, length)
 		else
 			var curr_pos = self.length
-			for i in s.chars do
-				items[curr_pos] = i
+			for i in [0..s.length[ do
+				var c = s.chars[i]
+				items[curr_pos] = c
 				curr_pos += 1
 			end
 		end
