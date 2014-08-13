@@ -4,6 +4,7 @@ This is only temporary as these modules will eventually be merged into standard 
 The modules contained here are :
 
  * utf8: A draft of implementation of UTF-8 as internal encoding for Strings with automatic indexing.
+ * utf8_no_index: Another draft of implementation of UTF-8, this time without indexing.
 
 TODO :
 
@@ -14,4 +15,8 @@ TODO :
   * Locale support
   * Comparisons
   * to_upper/lower fully-compatible with Unicode
-  * Lazy indexing version
+
+ * utf8_no_index:
+  * Add cache for the last indexed character
+  * Two-way iteration
+  * Intelligent indexed access (calculating the nearest point of insertion, i.e. begin, end, or cache)
