@@ -32,6 +32,15 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast, opt_rta)
 	end
 
+	redef fun process_options(args)
+	do
+		super
+
+		if opt_no_check_all.value then
+			opt_no_check_erasure_cast.value = true
+		end
+	end
+
 	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
 end
 
