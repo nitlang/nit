@@ -20,4 +20,7 @@ void *nit_raw_alloc(size_t); /* allocate raw memory to store a raw stram of byte
 void nit_gcollect(void); /* force a garbage collection */
 void initialize_gc_option(void); /* Select the wanted GC using envvar `NIT_GC_OPTION` */
 
+void gc_set_finializer(void*); /* Tag a pointer for finalization */
+void gc_finalize(void*, void*); /* Finalize a pointer, implemented in the generated code. */
+
 #endif

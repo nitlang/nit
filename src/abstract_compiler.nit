@@ -613,6 +613,25 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 """
 	end
 
+	fun compile_finalizer_function
+	do
+		var finalizable_type = mainmodule.finalizable_type
+		if finalizable_type == null then return
+
+		var finalize_meth = mainmodule.try_get_primitive_method("finalize", finalizable_type.mclass)
+
+		if finalize_meth == null then
+			modelbuilder.toolcontext.error(null, "The `Finalizable` class doesn't declare the `finalize` method.")
+			return
+		end
+
+		var v = self.new_visitor
+		v.add_decl "void gc_finalize (void *obj, void *client_data) \{"
+		var recv = v.new_expr("obj", finalizable_type)
+		v.send(finalize_meth, [recv])
+		v.add "\}"
+	end
+
 	# Generate the main C function.
 	# This function:
 	# 	* allocate the Sys object if it exists
@@ -1258,6 +1277,17 @@ abstract class AbstractCompilerVisitor
 
 	# Generate a alloc-instance + init-attributes
 	fun init_instance(mtype: MClassType): RuntimeVariable is abstract
+
+	# Set a GC finalizer on `recv`, only if `recv` isa Finalizable
+	fun set_finalizer(recv: RuntimeVariable)
+	do
+		var mtype = recv.mtype
+		var finalizable_type = compiler.mainmodule.finalizable_type
+		if finalizable_type != null and not mtype.need_anchor and
+		   mtype.is_subtype(compiler.mainmodule, null, finalizable_type) then
+			add "gc_register_finalizer({recv});"
+		end
+	end
 
 	# Generate an integer value
 	fun int_instance(value: Int): RuntimeVariable

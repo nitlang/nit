@@ -196,6 +196,12 @@ class RapidTypeAnalysis
 			add_send(maintype, mainprop)
 		end
 
+		var finalizable_type = mainmodule.finalizable_type
+		if finalizable_type != null then
+			var finalize_meth = mainmodule.try_get_primitive_method("finalize", finalizable_type.mclass)
+			if finalize_meth != null then add_send(finalizable_type, finalize_meth)
+		end
+
 		# Force primitive types
 		force_alive("Bool")
 		force_alive("Int")
