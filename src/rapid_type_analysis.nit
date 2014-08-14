@@ -427,8 +427,8 @@ class RapidTypeAnalysis
 		if live_super_sends.has(mpropdef) then return
 		#print "new super prop: {mpropdef}"
 		live_super_sends.add(mpropdef)
-		for t in live_types do
-			try_super_send(t, mpropdef)
+		for c in live_classes do
+			try_super_send(c.intro.bound_mtype, mpropdef)
 		end
 	end
 end
