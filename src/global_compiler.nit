@@ -480,7 +480,8 @@ class GlobalCompilerVisitor
 	do
 		check_valid_reciever(recvtype)
 		#debug("call {m} on {recvtype} on {args.first}:{args.first.mtype}")
-		if m.mclassdef.mclass.name == "Object" and recvtype.ctype == "val*" then
+		if m.mproperty.is_toplevel then
+			# Do not customize top-level methods
 			recvtype = m.mclassdef.bound_mtype
 		end
 		return recvtype
