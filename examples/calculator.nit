@@ -92,12 +92,12 @@ end
 class CalculatorGui
 	super GtkCallable
 
-	var win : GtkWindow
-	var container : GtkGrid
+	var win : GtkWindow is noinit
+	var container : GtkGrid is noinit
 
-	var lbl_disp : GtkLabel
-	var but_eq : GtkButton
-	var but_dot : GtkButton
+	var lbl_disp : GtkLabel is noinit
+	var but_eq : GtkButton is noinit
+	var but_dot : GtkButton is noinit
 
 	var context = new CalculatorContext
 
