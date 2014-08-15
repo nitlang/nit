@@ -781,7 +781,9 @@ interface Sequence[E]
 	#     var a = [1,2,3]
 	#     a.append([7..9])
 	#     assert a  == [1,2,3,7,8,9]
-	fun append(coll: Collection[E]) do for i in coll do push(i)
+	#
+	# Alias of `add_all`
+	fun append(coll: Collection[E]) do add_all(coll)
 
 	# Remove the last item.
 	#
