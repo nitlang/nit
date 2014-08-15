@@ -32,12 +32,7 @@ redef class Int
 end
 
 class Integer
-	var value: Int
-
-	init
-	do
-		value = 42
-	end
+	var value: Int = 42
 end
 
 var n = 100

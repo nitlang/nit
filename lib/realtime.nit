@@ -71,16 +71,10 @@ end
 # Keeps track of real time
 class Clock
 	# Time at instanciation
-	protected var time_at_beginning : Timespec
+	protected var time_at_beginning = new Timespec.monotonic_now
 
 	# Time at last time a lapse method was called
-	protected var time_at_last_lapse : Timespec
-
-	init
-	do
-		time_at_beginning = new Timespec.monotonic_now
-		time_at_last_lapse = new Timespec.monotonic_now
-	end
+	protected var time_at_last_lapse = new Timespec.monotonic_now
 
 	# Smallest time frame reported by clock
 	fun resolution : Timespec `{

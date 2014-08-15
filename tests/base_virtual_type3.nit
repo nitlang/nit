@@ -19,9 +19,9 @@ import base_virtual_type2
 
 class C
 	super A
-	var tab: nullable Array[E] is writable
-	init do end
+	var tab: nullable Array[E] = null is writable
 end
+
 
 var c = new C
 c.tab = new Array[T]

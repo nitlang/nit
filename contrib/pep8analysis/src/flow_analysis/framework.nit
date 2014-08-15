@@ -3,19 +3,13 @@ import cfg
 class FlowAnalysis[S]
 	super Visitor
 
-	var current_in:  nullable S writable
-	var current_out: nullable S writable
+	var current_in:  nullable S = default_in_set is writable
+	var current_out: nullable S = default_in_set is writable
 
 	fun in_set(bb: BasicBlock): nullable S is abstract
 	fun out_set(bb: BasicBlock): nullable S is abstract
 	fun in_set=(bb: BasicBlock, s: S) is abstract
 	fun out_set=(bb: BasicBlock, s: S) is abstract
-
-	init
-	do
-		current_in = default_in_set
-		current_out = default_in_set
-	end
 
 	redef fun visit( node ) do node.visit_all(self)
 

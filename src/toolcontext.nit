@@ -300,7 +300,7 @@ class ToolContext
 	end
 
 	# The identified root directory of the Nit project
-	var nit_dir: nullable String
+	var nit_dir: nullable String = null
 
 	private fun compute_nit_dir: nullable String
 	do

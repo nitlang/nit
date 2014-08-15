@@ -518,7 +518,7 @@ class ArrayMap[K: Object, E]
 	end
 
 	# Internal storage.
-	var _items: Array[Couple[K,E]]
+	var _items = new Array[Couple[K,E]]
 
 	# fast remove the ith element of the array
 	private fun remove_at_index(i: Int)
@@ -546,12 +546,6 @@ class ArrayMap[K: Object, E]
 			i += 1
 		end
 		return -1
-	end
-
-	# A new empty map.
-	init
-	do
-		_items = new Array[Couple[K,E]]
 	end
 end
 

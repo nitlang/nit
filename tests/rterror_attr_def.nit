@@ -21,7 +21,7 @@ end
 
 class A
 	var o: Object = 'c'
-	var a: I
+	var a: I is noinit
 	var b: nullable I = null
 	#alt2#var c: I = self.a
 	#alt3#var d: I = self.b.as(not null)

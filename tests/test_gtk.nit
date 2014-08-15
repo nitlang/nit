@@ -19,13 +19,13 @@ import gtk
 class MyApp
 	super GtkCallable
 
-	var win : GtkWindow
+	var win : GtkWindow is noinit
 
-	var container : GtkContainer
+	var container : GtkContainer is noinit
 
-	var lbl : GtkLabel
-	var but_ok : GtkButton
-	var but_cancel : GtkButton
+	var lbl : GtkLabel is noinit
+	var but_ok : GtkButton is noinit
+	var but_cancel : GtkButton is noinit
 
 	redef fun signal( sender, user_data )
 	do

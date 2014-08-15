@@ -20,9 +20,9 @@ class C
 	#alt2#protected fun proA(a: A) do end
 	private fun priA(a: A) do end
 
-	#alt3#var vpubA: nullable A is writable
-	#alt4#protected var vproA: nullable A is protected writable
-	private var vpriA: nullable A
+	#alt3#var vpubA: nullable A is writable, noinit
+	#alt4#protected var vproA: nullable A is protected writable, noinit
+	private var vpriA: nullable A is noinit
 
 	#alt5#var vpubA2 = new A is writable
 	#alt6#protected var vproA2 = new A is protected writable
@@ -35,8 +35,8 @@ private class D
 	fun pubA(a: A) do end
 	private fun priA(a: A) do end
 
-	var vpubA: nullable A is writable
-	private var vpriA: nullable A
+	var vpubA: nullable A is writable, noinit
+	private var vpriA: nullable A is noinit
 
 	var vpubA2 = new A is writable
 	private var vpriA2 = new A
