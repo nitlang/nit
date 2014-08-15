@@ -48,15 +48,7 @@ class Matrice
 		row[y] = v
 	end
 
-private
-	var tab: Array[Array[Int]] # An array of array to store items
-
-
-	init
-	# Build an empty matrice
-	do
-		_tab = new Array[Array[Int]]
-	end
+	private var tab = new Array[Array[Int]] # An array of array to store items
 end
 
 

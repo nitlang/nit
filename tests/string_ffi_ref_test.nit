@@ -21,15 +21,9 @@ import file
 
 class StringTest
 
-	var copied_str: nullable String
+	var copied_str: nullable String = null
 
-	var referenced_str: nullable String
-
-	init
-	do
-		copied_str = null
-		referenced_str = null
-	end
+	var referenced_str: nullable String = null
 
 	fun get_c_string import FlatString.items, NativeString.to_s, NativeString.to_s_with_copy, StringTest.ref_test, StringTest.copy_test `{
 		char* string = "This is a test string";

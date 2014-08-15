@@ -47,7 +47,7 @@ class Toto
 end
 
 class Test
-	var t: Toto
+	var t: Toto is noinit
 
 	init
 	do

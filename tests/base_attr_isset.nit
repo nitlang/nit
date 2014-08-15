@@ -30,13 +30,13 @@ end
 
 class Integer
 	var val: Int
-	init(val: Int) do _val = val
+
 	fun output do _val.output
 end
 
 class Foo
-	var a1: Integer
-	var a2: Integer
+	var a1: Integer is noinit
+	var a2: Integer is noinit
 	fun run
 	do
 		_a1.output
@@ -64,9 +64,9 @@ end
 
 class Bar
 	super Foo
-	var a3: Integer#alt1# #alt2#
+	var a3: Integer is noinit#alt1# #alt2#
 	#alt1#var a3: Integer = new Integer(9000)
-	#alt2#var a3: nullable Integer
+	#alt2#var a3: nullable Integer is noinit
 	redef fun run
 	do
 		_a1.output
@@ -82,7 +82,7 @@ class Bar
 
 	init
 	do
-		nop
+		if false then super # no auto super init call
 		show(4)
 		_a1 = new Integer(10)
 		show(5)
