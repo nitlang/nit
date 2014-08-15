@@ -24,19 +24,17 @@ class Perfecthashing
 	# Union of interval for implementing perfect numbering
 	# Represents the interval of free identifiers
 	# A null value represents the upper bound of identifier
-	private var interval: List[Couple[nullable Int, nullable Int]]
+	private var interval = new List[Couple[nullable Int, nullable Int]]
 
 	# An array used as a temporary Hashtable for 
 	# checking there is no collision between identifiers
-	private var tempht: Array[nullable Int]
+	private var tempht = new Array[nullable Int]
 
 	# Initialize the structure of free identifiers
 	init
 	do
 		# By default, all identifiers are available
-		interval = new List[Couple[nullable Int, nullable Int]]
 		interval.push(new Couple[nullable Int, nullable Int](1, null))
-		tempht = new Array[nullable Int]
 	end
 	
 	# Returns a mask composed by discriminants bits

@@ -21,11 +21,10 @@ import curl_c
 
 # Top level of Curl
 class Curl
-	protected var prim_curl: CCurl
+	protected var prim_curl = new CCurl.easy_init
 
 	init
 	do
-		self.prim_curl = new CCurl.easy_init
 		assert curlInstance:self.prim_curl.is_init else
 			print "Curl must be instancied to be used"
 		end

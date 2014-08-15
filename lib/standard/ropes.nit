@@ -122,7 +122,7 @@ abstract class Rope
 	private var leaf_cache: nullable LeafCache = null
 
 	# Empty Rope
-	init do from("")
+	init do root = new StringLeaf("".as(FlatString))
 
 	# Creates a new Rope with `s` as root
 	init from(s: String) do

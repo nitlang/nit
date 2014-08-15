@@ -135,7 +135,7 @@ end
 
 # Used to play sound, best suited for sounds effects in apps or games
 class SoundPool
-	private var nsoundpool: NativeSoundPool
+	private var nsoundpool: NativeSoundPool is noinit
 	# The maximum number of simultaneous streams for this SoundPool
 	var max_streams writable = 10
 
