@@ -835,9 +835,29 @@ interface Sequence[E]
 	#     a.insert(100, 2)
 	#     assert a      ==  [10, 20, 100, 30, 40]
 	#
-	# REQUIRE `index >= 0 and index < length`
+	# REQUIRE `index >= 0 and index <= length`
 	# ENSURE `self[index] == item`
 	fun insert(item: E, index: Int) is abstract
+
+	# Insert all elements at a given position, following elements are shifted.
+	#
+	#     var a = [10, 20, 30, 40]
+	#     a.insert_all([100..102], 2)
+	#     assert a      ==  [10, 20, 100, 101, 102, 30, 40]
+	#
+	# REQUIRE `index >= 0 and index <= length`
+	# ENSURE `self[index] == coll.first`
+	fun insert_all(coll: Collection[E], index: Int)
+	do
+		assert index >= 0 and index < length
+		if index == length then
+			add_all(coll)
+		end
+		for c in coll do
+			insert(c, index)
+			index += 1
+		end
+	end
 
 	# Remove the item at `index` and shift all following elements
 	#
