@@ -803,6 +803,15 @@ interface Sequence[E]
 	#     assert a  == [20,10,1,2,3]
 	fun unshift(e: E) is abstract
 
+	# Add all items of `coll` before the first one.
+	#
+	#     var a = [1,2,3]
+	#     a.prepend([7..9])
+	#     assert a  == [7,8,9,1,2,3]
+	#
+	# Alias of `insert_at(coll, 0)`
+	fun prepend(coll: Collection[E]) do insert_all(coll, 0)
+
 	# Remove the first item.
 	# The second item thus become the first.
 	#
