@@ -22,7 +22,7 @@ import parser_util
 
 class PrintTreeVisitor
 	super Visitor
-	private var rank: Int
+	private var rank: Int = 0
 	redef fun visit(n)
 	do
 		if n isa Token then
@@ -33,11 +33,6 @@ class PrintTreeVisitor
 		rank = rank + 1
 		n.visit_all(self)
 		rank = rank - 1
-	end
-
-	init
-	do
-		rank = 0
 	end
 end
 

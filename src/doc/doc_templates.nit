@@ -23,25 +23,25 @@ class TplPage
 	super Template
 
 	# Page title in HTML header
-	var title: String writable
+	var title: String is writable, noinit
 
 	# Directory where css, js and other assets can be found
-	var shareurl: String writable
+	var shareurl: String is writable, noinit
 
 	# Attributes of the body tag element
 	var body_attrs = new Array[TagAttribute]
 
 	# Top menu template if any
-	var topmenu: TplTopMenu writable
+	var topmenu: TplTopMenu is writable, noinit
 
 	# Sidebar template if any
-	var sidebar: nullable TplSidebar writable
+	var sidebar: nullable TplSidebar = null is writable
 
 	# Content of the page in form a TplSection
 	var sections = new Array[TplSection]
 
 	# Footer content if any
-	var footer: nullable Streamable writable
+	var footer: nullable Streamable = null is writable
 
 	# JS scripts to append at the end of the body
 	var scripts = new Array[TplScript]
@@ -150,7 +150,7 @@ class TplTopMenu
 	super Template
 
 	# Brand link to display in first position of the top menu
-	private var brand: nullable Streamable writable
+	private var brand: nullable Streamable = null is writable
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
@@ -511,15 +511,13 @@ class TplDefinition
 	super Template
 
 	# Comment to display
-	var comment: nullable Streamable writable
+	var comment: nullable Streamable = null is writable
 
 	# Namespace for this definition
-	var namespace: nullable Streamable writable
+	var namespace: nullable Streamable = null is writable
 
 	# Location link to display
-	var location: nullable Streamable writable
-
-	init do end
+	var location: nullable Streamable = null is writable
 
 	private fun render_info do
 		add "<div class='info text-right'>"
@@ -802,7 +800,7 @@ class TplScript
 	super Template
 
 	var attrs = new Array[TagAttribute]
-	var content: nullable Streamable writable
+	var content: nullable Streamable = null is writable
 
 	init do
 		attrs.add(new TagAttribute("type", "text/javascript"))

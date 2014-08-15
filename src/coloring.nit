@@ -177,18 +177,16 @@ class POSetColorer[E: Object]
 		assert is_colored
 		return poset_cache
 	end
-	private var poset_cache: POSet[E]
+	private var poset_cache: POSet[E] is noinit
 
 	# REQUIRE: is_colored
 	fun conflicts: Map[E, Set[E]] do
 		assert is_colored
 		return conflicts_cache
 	end
-	private var conflicts_cache: Map[E, Set[E]]
+	private var conflicts_cache: Map[E, Set[E]] is noinit
 
-	private var graph: POSetConflictGraph[E]
-
-	init do end
+	private var graph: POSetConflictGraph[E] is noinit
 
 	# Start coloring on given POSet
 	fun colorize(poset: POSet[E]) do

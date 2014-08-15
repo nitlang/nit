@@ -357,18 +357,16 @@ end
 # and informations to perform subtyping tests
 class VTable
 	# The mask to perform perfect hashing
-	var mask: Int
+	var mask: Int is noinit
 
 	# Unique identifier given by perfect hashing
-	var id: Int
+	var id: Int is noinit
 
 	# Pointer to the c-allocated area, represents the virtual table
-	var internal_vtable: Pointer
+	var internal_vtable: Pointer is noinit
 
 	# The short classname of this class
-	var classname: String
-
-	init do end
+	var classname: String is noinit
 end
 
 redef class Instance
