@@ -81,6 +81,7 @@ noinit
 readonly
 writable
 cached
+nosuper
 
 pkgconfig
 c_compiler_option

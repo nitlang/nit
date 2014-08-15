@@ -43,7 +43,7 @@ private class AutoSuperInitVisitor
 		n.visit_all(self)
 	end
 
-	var has_explicit_super_init: Bool = false
+	var has_explicit_super_init: nullable ANode = null
 end
 
 
@@ -59,8 +59,14 @@ redef class AMethPropdef
 		var anchor = mclassdef.bound_mtype
 		var recvtype = mclassdef.mclass.mclass_type
 
+		# Get the annotation, but check its pertinence before returning
+		var nosuper = get_single_annotation("nosuper", modelbuilder)
+
 		# Collect only for constructors
-		if not mpropdef.mproperty.is_init then return
+		if not mpropdef.mproperty.is_init then
+			if nosuper != null then modelbuilder.error(nosuper, "Error: nosuper only in `init`")
+			return
+		end
 
 		# FIXME: THIS IS STUPID (be here to keep the old code working)
 		if not mpropdef.mclassdef.is_intro then return
@@ -79,8 +85,14 @@ redef class AMethPropdef
 		if nblock != null then
 			var v = new AutoSuperInitVisitor
 			v.enter_visit(nblock)
-			if v.has_explicit_super_init then return
+			var anode = v.has_explicit_super_init
+			if anode != null then
+				if nosuper != null then modelbuilder.error(anode, "Error: method is annotated nosuper but a constructor call is present")
+				return
+			end
 		end
+
+		if nosuper != null then return
 
 		# Still here? So it means that we must determine what super inits need to be automatically invoked
 
@@ -149,7 +161,7 @@ redef class ASendExpr
 		var mproperty = self.callsite.mproperty
 		if mproperty == null then return
 		if mproperty.is_init then
-			v.has_explicit_super_init = true
+			v.has_explicit_super_init = self
 		end
 	end
 end
@@ -159,6 +171,6 @@ redef class ASuperExpr
 	do
 		# If the super is a standard call-next-method then there it is considered am explicit super init call
 		# The the super is a "super int" then it is also an explicit super init call
-		v.has_explicit_super_init = true
+		v.has_explicit_super_init = self
 	end
 end
