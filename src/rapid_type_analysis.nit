@@ -239,6 +239,7 @@ class RapidTypeAnalysis
 				# It is an init for a class?
 				if mmeth.name == "init" then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
+					assert mmethoddef == nclassdef.mfree_init
 					var super_inits = nclassdef.super_inits
 					if super_inits != null then
 						#assert args.length == 1
@@ -422,11 +423,12 @@ class RapidTypeAnalysis
 
 	fun add_super_send(recv: MType, mpropdef: MMethodDef)
 	do
+		assert mpropdef.has_supercall
 		if live_super_sends.has(mpropdef) then return
 		#print "new super prop: {mpropdef}"
 		live_super_sends.add(mpropdef)
-		for t in live_types do
-			try_super_send(t, mpropdef)
+		for c in live_classes do
+			try_super_send(c.intro.bound_mtype, mpropdef)
 		end
 	end
 end

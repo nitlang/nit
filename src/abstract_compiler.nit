@@ -1829,6 +1829,7 @@ redef class AMethPropdef
 		if auto_super_inits != null then
 			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
+				assert auto_super_init.mproperty != mpropdef.mproperty
 				args.clear
 				for i in [0..auto_super_init.msignature.arity+1[ do
 					args.add(arguments[i])
@@ -1852,6 +1853,8 @@ redef class AMethPropdef
 			else
 				compile_externmeth_to_c(v, mpropdef, arguments)
 			end
+		else
+			abort
 		end
 	end
 
