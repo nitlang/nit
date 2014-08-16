@@ -648,8 +648,14 @@ redef class AMethPropdef
 				for i in [0..auto_super_init.msignature.arity+1[ do
 					args.add(arguments[i])
 				end
+				assert auto_super_init.mproperty != mpropdef.mproperty
 				v.callsite(auto_super_init, args)
 			end
+		end
+		if auto_super_call then
+			# standard call-next-method
+			var superpd = mpropdef.lookup_next_definition(v.mainmodule, arguments.first.mtype)
+			v.call_without_varargs(superpd, arguments)
 		end
 
 		if n_block != null then

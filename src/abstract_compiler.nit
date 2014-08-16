@@ -1834,8 +1834,12 @@ redef class AMethPropdef
 				for i in [0..auto_super_init.msignature.arity+1[ do
 					args.add(arguments[i])
 				end
+				assert auto_super_init.mproperty != mpropdef.mproperty
 				v.compile_callsite(auto_super_init, args)
 			end
+		end
+		if auto_super_call then
+			v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 		end
 
 		var n_block = n_block
