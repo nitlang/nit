@@ -186,6 +186,19 @@ abstract class AbstractArray[E]
 		self[pos] = item
 	end
 
+	redef fun insert_all(coll, pos)
+	do
+		var l = coll.length
+		if l == 0 then return
+		enlarge(length + l)
+		_length += l
+		copy_to(pos, length-pos-l, self, pos + l)
+		for c in coll do
+			self[pos] = c
+			pos += 1
+		end
+	end
+
 	redef fun add(item) do self[length] = item
 
 	redef fun clear do _length = 0
