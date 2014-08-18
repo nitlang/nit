@@ -84,6 +84,17 @@ function bench_concat()
 		bench_command $i flatbuffer$i ./chain_concat -m flatbuf --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
+	prepare_res concat_flatstr_utf8_noindex.out concat_flatstr_utf8_noindex flatstring_utf8_noindex
+	if $verbose; then
+		echo "FlatString UTF-8 (without index) :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $2, Loops = $3"
+		fi
+		bench_command $i flatstr_utf8_noindex$i ./utf_chain_concat -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
 	plot concat.gnu
 }
 
@@ -159,6 +170,28 @@ function bench_iteration()
 		bench_command $i flatbuf_index$i ./iteration_bench -m flatbuf --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
+	prepare_res iter_flat_utf8_noindex_iter.out iter_flat_iter_utf8_noindex flatstring_utf8_noindex_iter
+	if $verbose; then
+		echo "FlatStrings by iterator :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String base length = $1, Concats = $i, Loops = $3"
+		fi
+		bench_command $i flatstr_iter_utf8_noindex$i ./utf_iteration_bench -m flatstr_utf8_noindex --iter-mode iterator --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
+	prepare_res iter_flat_utf8_noindex_index.out iter_flat_index_utf8_noindex flatstring_utf8_noindex_index
+	if $verbose; then
+		echo "FlatStrings by index :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String base length = $1, Concats = $i, Loops = $3"
+		fi
+		bench_command $i flatstr_index_utf8_noindex$i ./utf_iteration_bench -m flatstr_utf8_noindex --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
 	plot iter.gnu
 }
 
@@ -201,6 +234,17 @@ function bench_substr()
 		bench_command $i flatbuffer$i ./substr_bench -m flatbuf --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
+	prepare_res substr_flat_utf8_noindex.out substr_flat_utf8_noindex flatstring_utf8_noindex
+	if $verbose; then
+		echo "FlatStrings UTF-8 (without index) :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String length = $i, loops = $2, Loops = $3"
+		fi
+		bench_command $i flatstring_utf8_noindex$i ./utf_substr_bench -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
 	plot substr.gnu
 }
 
@@ -224,8 +268,11 @@ if $verbose; then
 fi
 
 ../bin/nitg --global ./strings/chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 ../bin/nitg --global ./strings/iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 ../bin/nitg --global ./strings/substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 case "$1" in
 	iter) shift; bench_iteration $@ ;;
