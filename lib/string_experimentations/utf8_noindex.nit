@@ -171,6 +171,14 @@ extern class UnicodeChar `{ uint32_t* `}
 	`}
 end
 
+# Used to keep track of the last accessed char in a String
+class CharCache
+	# The position (as in char) of a String
+	var position: Int
+	# The position in the NativeString underlying the String
+	var bytepos: Int
+end
+
 class FlatStringReviter
 	super IndexedIterator[UnicodeChar]
 
@@ -262,6 +270,9 @@ redef class FlatString
 
 	# Length in bytes of the string (e.g. the length of the C string)
 	redef var bytelen: Int
+
+	# Cache for the last accessed character in the char
+	var cache = new CharCache(-1,-1)
 
 	redef var length = length_l is lazy
 
