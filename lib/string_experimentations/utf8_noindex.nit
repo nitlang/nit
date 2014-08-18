@@ -171,6 +171,91 @@ extern class UnicodeChar `{ uint32_t* `}
 	`}
 end
 
+class FlatStringReviter
+	super IndexedIterator[UnicodeChar]
+
+	# The NativeString to iterate upon
+	private var ns: NativeString
+
+	# The position in the string
+	private var pos: Int
+
+	# The position in the native string
+	private var bytepos: Int
+
+	init(s: FlatString) do from(s, s.length - 1)
+
+	init from(s: FlatString, position: Int)
+	do
+		ns = s.items
+		pos = position
+		bytepos = s.byte_index(position)
+	end
+
+	redef fun next
+	do
+		bytepos -= 1
+		while ns[bytepos].ascii.bin_and(0xC0) == 0x80 do
+			bytepos -= 1
+		end
+		pos -= 1
+	end
+
+	redef fun index do return pos
+
+	redef fun item do return new UnicodeChar.from_ns(ns, bytepos)
+
+	redef fun is_ok do return pos >= 0
+end
+
+class FlatStringIter
+	super IndexedIterator[UnicodeChar]
+
+	private var ns: NativeString
+
+	private var pos: Int
+
+	private var bytepos: Int
+
+	private var slen: Int
+
+	private var it: UnicodeChar
+
+	private var is_created: Bool
+
+	init(s: FlatString) do from(s, 0)
+
+	init from(s: FlatString, position: Int) do
+		ns = s.items
+		pos = position
+		bytepos = s.byte_index(position)
+		slen = s.length
+	end
+
+	redef fun index do return pos
+
+	redef fun is_ok do return pos < slen
+
+	redef fun item do
+		if not is_created then
+			it = new UnicodeChar.from_ns(ns, bytepos)
+			is_created = true
+		end
+		return it
+	end
+
+	redef fun next
+	do
+		if not is_created then
+			it = new UnicodeChar.from_ns(ns, bytepos)
+		end
+		is_created = false
+		var pace = it.len
+		pos += 1
+		bytepos += pace
+	end
+end
+
 redef class FlatString
 
 	redef type OTHER: FlatString
