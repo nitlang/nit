@@ -105,7 +105,9 @@ redef class AMethPropdef
 		end
 
 		# Still here? So it means that we must determine what super inits need to be automatically invoked
+		# The code that follow is required to deal with complex cases with old-style and new-style inits
 
+		# Look for old-style super constructors
 		var auto_super_inits = new Array[CallSite]
 		for msupertype in mclassdef.supertypes do
 			# FIXME: the order is quite arbitrary
@@ -121,20 +123,59 @@ redef class AMethPropdef
 			end
 			assert candidate isa MMethod
 
+			# Skip new-style init
+			if candidate.is_root_init then continue
+
 			var candidatedefs = candidate.lookup_definitions(mmodule, anchor)
 			var candidatedef = candidatedefs.first
 			# TODO, we drop the others propdefs in the callsite, that is not great :(
 
-			var msignature = candidatedef.msignature
+			var msignature = candidatedef.new_msignature or else candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
 			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, candidate, candidatedef, msignature, false)
+			auto_super_inits.add(callsite)
+		end
+
+		# No old style? The look for new-style super constructors (called from a old style constructor)
+		var the_root_init_mmethod = modelbuilder.the_root_init_mmethod
+		if the_root_init_mmethod != null and auto_super_inits.is_empty then
+			var candidatedefs = the_root_init_mmethod.lookup_definitions(mmodule, anchor)
+
+			# Search the longest-one and checks for conflict
+			var candidatedef = candidatedefs.first
+			if candidatedefs.length > 1 then
+				# Check for conflict in the order of initializers
+				# Each initializer list must me a prefix of the longest list
+				# part 1. find the longest list
+				for spd in candidatedefs do
+					if spd.initializers.length > candidatedef.initializers.length then candidatedef = spd
+				end
+				# compare
+				for spd in candidatedefs do
+					var i = 0
+					for p in spd.initializers do
+						if p != candidatedef.initializers[i] then
+							modelbuilder.error(self, "Error: Cannot do an implicit constructor call to comflicting for inherited inits {spd}({spd.initializers.join(", ")}) and {candidatedef}({candidatedef.initializers.join(", ")}). NOTE: Do not mix old-style and new-style init!")
+							return
+						end
+						i += 1
+					end
+				end
+			end
+
+			var msignature = candidatedef.new_msignature or else candidatedef.msignature
+			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
+
+			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
 		end
 		if auto_super_inits.is_empty then
 			modelbuilder.error(self, "Error: No constructors to call implicitely in {mpropdef}. Call one explicitely.")
 			return
 		end
+
+		# Can the super-constructors be called?
 		for auto_super_init in auto_super_inits do
 			var auto_super_init_def = auto_super_init.mpropdef
 			var msig = mpropdef.msignature.as(not null)

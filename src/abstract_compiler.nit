@@ -1044,9 +1044,27 @@ abstract class AbstractCompilerVisitor
 		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv.mclass, self.compiler.mainmodule)
 	end
 
-	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
-		return self.send(callsite.mproperty, args)
+		var initializers = callsite.mpropdef.initializers
+		if not initializers.is_empty then
+			var recv = arguments.first
+
+			assert initializers.length == arguments.length - 1 else debug("expected {initializers.length}, got {arguments.length - 1}")
+			var i = 1
+			for p in initializers do
+				if p isa MMethod then
+					self.send(p, [recv, arguments[i]])
+				else if p isa MAttribute then
+					self.write_attribute(p, recv, arguments[i])
+				else abort
+				i += 1
+			end
+
+			return self.send(callsite.mproperty, [recv])
+		end
+
+		return self.send(callsite.mproperty, arguments)
 	end
 
 	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
@@ -2251,6 +2269,15 @@ redef class AClassdef
 	private fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		if mpropdef == self.mfree_init then
+			if mpropdef.mproperty.is_root_init then
+				assert self.super_inits == null
+				assert arguments.length == 1
+				if not mpropdef.is_intro then
+					v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
+				end
+				return
+			end
+
 			var super_inits = self.super_inits
 			if super_inits != null then
 				var args_of_super = arguments
@@ -2259,6 +2286,7 @@ redef class AClassdef
 					v.send(su, args_of_super)
 				end
 			end
+
 			var recv = arguments.first
 			var i = 1
 			# Collect undefined attributes
