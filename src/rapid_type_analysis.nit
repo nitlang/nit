@@ -247,7 +247,6 @@ class RapidTypeAnalysis
 							v.add_monomorphic_send(v.receiver, su)
 						end
 					end
-
 				else
 					abort
 				end
@@ -262,6 +261,9 @@ class RapidTypeAnalysis
 					for auto_super_init in auto_super_inits do
 						v.add_callsite(auto_super_init)
 					end
+				end
+				if npropdef.auto_super_call then
+					self.add_super_send(v.receiver, mmethoddef)
 				end
 			end
 

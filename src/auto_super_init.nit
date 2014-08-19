@@ -48,8 +48,11 @@ end
 
 
 redef class AMethPropdef
-	# In case of constructor, the list of implicit auto super init constructors invoked (if needed)
+	# In case of introduced constructor, the list of implicit auto super init constructors invoked (if needed)
 	var auto_super_inits: nullable Array[CallSite] = null
+
+	# In case of redefined constructors, is an implicit call-to-super required?
+	var auto_super_call = false
 
 	fun do_auto_super_init(modelbuilder: ModelBuilder)
 	do
@@ -93,6 +96,13 @@ redef class AMethPropdef
 		end
 
 		if nosuper != null then return
+
+		# Still here? So it means that we must add an implicit super-call on redefinitions.
+		if not mpropdef.is_intro then
+			auto_super_call = true
+			mpropdef.has_supercall = true
+			return
+		end
 
 		# Still here? So it means that we must determine what super inits need to be automatically invoked
 
