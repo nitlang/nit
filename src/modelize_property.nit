@@ -541,6 +541,31 @@ end
 redef class AMethPropdef
 	redef type MPROPDEF: MMethodDef
 
+
+	# Can self be used as a root init?
+	private fun look_like_a_root_init(modelbuilder: ModelBuilder): Bool
+	do
+		# Need the `init` keyword
+		if n_kwinit == null then return false
+		# Need to by anonymous
+		if self.n_methid != null then return false
+		# No parameters
+		if self.n_signature.n_params.length > 0 then return false
+		# Cannot be private or something
+		if not self.n_visibility isa APublicVisibility then return false
+		# No annotation on itself
+		if get_single_annotation("old_style_init", modelbuilder) != null then return false
+		# Nor on its module
+		var amod = self.parent.parent.as(AModule)
+		var amoddecl = amod.n_moduledecl
+		if amoddecl != null then
+			var old = amoddecl.get_single_annotation("old_style_init", modelbuilder)
+			if old != null then return false
+		end
+
+		return true
+	end
+
 	redef fun build_property(modelbuilder, mclassdef)
 	do
 		var n_kwinit = n_kwinit
@@ -577,15 +602,22 @@ redef class AMethPropdef
 
 		var mprop: nullable MMethod = null
 		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
+		if mprop == null and look_like_a_root_init(modelbuilder) then
+			mprop = modelbuilder.the_root_init_mmethod
+		end
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MMethod(mclassdef, name, mvisibility)
+			if look_like_a_root_init(modelbuilder) and modelbuilder.the_root_init_mmethod == null then
+				modelbuilder.the_root_init_mmethod = mprop
+				mprop.is_root_init = true
+			end
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
 			if parent isa ATopClassdef then mprop.is_toplevel = true
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then return
 		else
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
+			if not mprop.is_root_init and not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
 		mclassdef.mprop2npropdef[mprop] = self
