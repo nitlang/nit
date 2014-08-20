@@ -14,7 +14,7 @@
 
 # AST nodes of the Nit language
 # Was previously based on parser_abs.nit.
-module parser_nodes
+module parser_nodes is old_style_init
 
 import location
 

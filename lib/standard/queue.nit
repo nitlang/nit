@@ -320,5 +320,5 @@ end
 # ~~~
 class MinHeapCmp[E: Comparable]
 	super MinHeap[E]
-	init do super(new DefaultComparator[E])
+	init is old_style_init do super(new DefaultComparator[E])
 end
