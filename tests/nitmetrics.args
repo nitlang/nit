@@ -1,1 +1,1 @@
---no-colors --all --csv base_simple3.nit base_empty_module.nit -d $WRITE
+--no-colors --all --csv base_simple3.nit -d $WRITE

@@ -20,22 +20,22 @@ end
 
 class B1
 	super A
-	#alt1#init do super
+	#alt1#init is old_style_init do super
 end
 
 class B2
 	super A
-	init do super(3)
+	init is old_style_init do super(3)
 end
 
 class B3
 	super A
-	#alt2#init do super(true)
+	#alt2#init is old_style_init do super(true)
 end
 
 class B4
 	super A
-	#alt3#init do end
+	#alt3#init is old_style_init do end
 end
 
 class C1
@@ -48,7 +48,7 @@ end
 
 class D1
 	super A
-	init(j) do
+	init(j: Int) do
 		super
 		j.output
 	end
@@ -72,7 +72,7 @@ end
 
 class D2
 	super A
-	init(j) do
+	init(j: Int) do
 		super(j)
 		j.output
 	end
@@ -95,7 +95,7 @@ end
 
 class D3
 	super A
-	init(j) do
+	init(j: Int) do
 		j.output
 	end
 end
