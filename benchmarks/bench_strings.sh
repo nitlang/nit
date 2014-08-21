@@ -36,6 +36,8 @@ function usage()
 	echo "    - usage : cct max_nb_cct loops strlen"
 	echo "  substr: substring benching"
 	echo "    - usage : substr max_nb_cct loops strlen"
+	echo "  array: Benchmark for the to_s in array"
+	echo "    - usage : array nb_cct loops max_arrlen"
 }
 
 function benches()
@@ -43,6 +45,81 @@ function benches()
 	bench_concat $@;
 	bench_iteration $@;
 	bench_substr $@;
+	bench_array $@;
+}
+
+function bench_array()
+{
+	if $verbose; then
+		echo "*** Benching Array.to_s performance ***"
+	fi
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_rope.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_ropes.out arr_tos_ropes ropes
+	if $verbose; then
+		echo "Ropes :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i ropes$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_flat.out arr_tos_flat flatstring
+	if $verbose; then
+		echo "FlatStrings :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatstring$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_buffer.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_buf.out arr_tos_buf flatbuffer
+	if $verbose; then
+		echo "FlatBuffers :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatbuffer$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_manual.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_man.out arr_tos_man memmove
+	if $verbose; then
+		echo "Memmove :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i memmove$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_man_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_man_buf.out arr_tos_man_buf flatbuf_with_capacity
+	if $verbose; then
+		echo "Memmove :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatbuf_with_capacity$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	plot array_tos.gnu
 }
 
 function bench_concat()
@@ -278,6 +355,7 @@ case "$1" in
 	iter) shift; bench_iteration $@ ;;
 	cct) shift; bench_concat $@ ;;
 	substr) shift; bench_substr $@ ;;
+	array) shift; bench_array $@ ;;
 	all) shift; benches $@ ;;
 	*) usage; exit;;
 esac
