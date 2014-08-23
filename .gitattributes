@@ -5,3 +5,5 @@ lexer.nit		-diff
 tables_nit.c		-diff
 c_src/**/*.[ch]		-diff
 c_src/Makefile		-diff
+
+tests/sav/**/*.res	-whitespace
