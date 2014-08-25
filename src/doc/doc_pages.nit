@@ -135,20 +135,20 @@ class Nitdoc
 	end
 
 	private fun overview do
-		var overviewpage = new NitdocOverview(ctx, model, mainmodule)
-		overviewpage.render.write_to_file("{ctx.output_dir.to_s}/index.html")
+		var page = new NitdocOverview(ctx, model, mainmodule)
+		page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 	end
 
 	private fun search do
-		var searchpage = new NitdocSearch(ctx, model, mainmodule)
-		searchpage.render.write_to_file("{ctx.output_dir.to_s}/search.html")
+		var page = new NitdocSearch(ctx, model, mainmodule)
+		page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 	end
 
 	private fun groups do
 		for mproject in model.mprojects do
 			for mgroup in mproject.mgroups.to_a do
 				var page = new NitdocGroup(ctx, model, mainmodule, mgroup)
-				page.render.write_to_file("{ctx.output_dir.to_s}/{mgroup.nitdoc_url}")
+				page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 			end
 		end
 	end
@@ -156,22 +156,22 @@ class Nitdoc
 	private fun modules do
 		for mmodule in model.mmodules do
 			if mmodule.is_fictive then continue
-			var modulepage = new NitdocModule(ctx, model, mainmodule, mmodule)
-			modulepage.render.write_to_file("{ctx.output_dir.to_s}/{mmodule.nitdoc_url}")
+			var page = new NitdocModule(ctx, model, mainmodule, mmodule)
+			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
 	end
 
 	private fun classes do
 		for mclass in model.mclasses do
-			var classpage = new NitdocClass(ctx, model, mainmodule, mclass)
-			classpage.render.write_to_file("{ctx.output_dir.to_s}/{mclass.nitdoc_url}")
+			var page = new NitdocClass(ctx, model, mainmodule, mclass)
+			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
 	end
 
 	private fun properties do
 		for mproperty in model.mproperties do
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
-			page.render.write_to_file("{ctx.output_dir.to_s}/{mproperty.nitdoc_url}")
+			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
 	end
 
@@ -265,6 +265,7 @@ abstract class NitdocPage
 		# build page
 		var tpl = tpl_page
 		tpl.title = tpl_title
+		tpl.url = page_url
 		tpl.shareurl = shareurl
 		tpl.topmenu = tpl_topmenu
 		tpl_content
@@ -280,6 +281,9 @@ abstract class NitdocPage
 		end
 		return tpl
 	end
+
+	# URL to this page.
+	fun page_url: String is abstract
 
 	# Build page template
 	fun tpl_page: TplPage is abstract
@@ -499,6 +503,8 @@ class NitdocOverview
 		end
 	end
 
+	redef fun page_url do return "index.html"
+
 	redef fun tpl_topmenu do
 		var topmenu = super
 		topmenu.add_item(new TplLink("#", "Overview"), true)
@@ -546,6 +552,8 @@ class NitdocSearch
 	redef fun tpl_page do return page
 
 	redef fun tpl_title do return "Index"
+
+	redef fun page_url do return "search.html"
 
 	redef fun tpl_topmenu do
 		var topmenu = super
@@ -647,6 +655,8 @@ class NitdocGroup
 	redef fun tpl_sidebar do return sidebar
 
 	redef fun tpl_title do return "{mgroup.nitdoc_name}"
+
+	redef fun page_url do return mgroup.nitdoc_url
 
 	redef fun tpl_topmenu do
 		var topmenu = super
@@ -782,6 +792,7 @@ class NitdocModule
 	redef fun tpl_sidebar do return sidebar
 
 	redef fun tpl_title do return "{mmodule.nitdoc_name}"
+	redef fun page_url do return mmodule.nitdoc_url
 
 	redef fun tpl_topmenu do
 		var topmenu = super
@@ -1018,6 +1029,7 @@ class NitdocClass
 	redef fun tpl_sidebar do return sidebar
 
 	redef fun tpl_title do return "{mclass.nitdoc_name}{mclass.tpl_signature.write_to_string}"
+	redef fun page_url do return mclass.nitdoc_url
 
 	redef fun tpl_topmenu do
 		var topmenu = super
@@ -1378,6 +1390,8 @@ class NitdocProperty
 	redef fun tpl_title do
 		return "{mproperty.nitdoc_name}{mproperty.tpl_signature.write_to_string}"
 	end
+
+	redef fun page_url do return mproperty.nitdoc_url
 
 	redef fun tpl_topmenu do
 		var topmenu = super

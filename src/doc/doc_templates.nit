@@ -25,6 +25,9 @@ class TplPage
 	# Page title in HTML header
 	var title: String is writable, noinit
 
+	# Page url
+	var url: String is writable, noinit
+
 	# Directory where css, js and other assets can be found
 	var shareurl: String is writable, noinit
 
