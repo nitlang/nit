@@ -335,22 +335,57 @@ redef class FlatString
 	private fun byte_index(index: Int): Int do
 		assert index >= 0
 		assert index < length
-		var ns_i = index_from
-		var my_i = 0
-		while my_i != index do
-			if items[ns_i].ascii.bin_and(0x80) == 0 then
+
+		# Find best insertion point
+		var delta_begin = index
+		var delta_end = (length - 1) - index
+		var delta_cache = (cache.position - index).abs
+		var min = delta_begin
+
+		if delta_cache < min then min = delta_cache
+		if delta_end < min then min = delta_end
+
+		var ns_i: Int
+		var my_i: Int
+		var myits = items
+
+		if min == delta_begin then
+			ns_i = index_from
+			my_i = 0
+		else if min == delta_cache then
+			ns_i = cache.bytepos
+			my_i = cache.position
+		else
+			ns_i = index_to
+			my_i = length
+		end
+
+		while my_i < index do
+			if myits[ns_i].ascii.bin_and(0x80) == 0 then
 				ns_i += 1
-			else if items[ns_i].ascii.bin_and(0xE0) == 0xC0 then
+			else if myits[ns_i].ascii.bin_and(0xE0) == 0xC0 then
 				ns_i += 2
-			else if items[ns_i].ascii.bin_and(0xF0) == 0xE0 then
+			else if myits[ns_i].ascii.bin_and(0xF0) == 0xE0 then
 				ns_i += 3
-			else if items[ns_i].ascii.bin_and(0xF7) == 0xF0 then
+			else if myits[ns_i].ascii.bin_and(0xF7) == 0xF0 then
 				ns_i += 4
 			else
 				ns_i += 1
 			end
 			my_i += 1
 		end
+
+		while my_i > index do
+			if myits[ns_i].ascii.bin_and(0xC0) != 0x80 then
+				my_i -= 1
+				if my_i == index then break
+			end
+			ns_i -= 1
+		end
+
+		cache.position = index
+		cache.bytepos = ns_i
+
 		return ns_i
 	end
 
