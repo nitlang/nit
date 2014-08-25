@@ -186,7 +186,7 @@ redef class MGroup
 		return "{mproject.nitdoc_id}__{nitdoc_name}"
 	end
 
-	redef fun nitdoc_url do return "group_{name}.html"
+	redef fun nitdoc_url do return "group_{nitdoc_id}.html"
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -229,16 +229,7 @@ redef class MModule
 		return nitdoc_name
 	end
 
-	redef fun nitdoc_url do
-		var res = new FlatBuffer
-		res.append("module_")
-		var mowner = public_owner
-		if mowner != null then
-			res.append("{public_owner.name}_")
-		end
-		res.append("{self.name}.html")
-		return res.to_s
-	end
+	redef fun nitdoc_url do return "module_{nitdoc_id}.html"
 
 	redef fun tpl_declaration do
 		var tpl = new Template
@@ -272,8 +263,7 @@ end
 redef class MClass
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_id do return "{intro_mmodule.mgroup.mproject}__{name.to_cmangle}"
-	redef fun nitdoc_url do return "class_{public_owner}_{name}.html"
-
+	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc do return intro.mdoc
 
 	redef fun tpl_declaration do return intro.tpl_declaration
@@ -439,7 +429,7 @@ end
 redef class MProperty
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_id do return "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}"
-	redef fun nitdoc_url do return "proprety_{nitdoc_id}.html"
+	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
 
 	redef fun mdoc do return intro.mdoc
 
