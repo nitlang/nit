@@ -157,7 +157,20 @@ class TplTopMenu
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
-	init do end
+	# The page url where the top menu is displayed.
+	#
+	# Used to select the active link.
+	private var current_url: String
+
+	init(current_url: String) do
+		self.current_url = current_url
+	end
+
+	# Add a new link to the menu.
+	fun add_link(content: TplLink) do
+		var is_active = content.href == current_url
+		add_item(content, is_active)
+	end
 
 	# Add a content between `<li>` tags
 	fun add_item(content: Streamable, is_active: Bool) do

@@ -301,7 +301,7 @@ abstract class NitdocPage
 
 	# Build top menu template
 	fun tpl_topmenu: TplTopMenu do
-		var topmenu = new TplTopMenu
+		var topmenu = new TplTopMenu(page_url)
 		var brand = ctx.opt_custom_brand.value
 		if brand != null then
 			var tpl = new Template
@@ -310,6 +310,8 @@ abstract class NitdocPage
 			tpl.add "</span>"
 			topmenu.brand = tpl
 		end
+		topmenu.add_link new TplLink("index.html", "Overview")
+		topmenu.add_link new TplLink("search.html", "Index")
 		return topmenu
 	end
 
@@ -505,13 +507,6 @@ class NitdocOverview
 
 	redef fun page_url do return "index.html"
 
-	redef fun tpl_topmenu do
-		var topmenu = super
-		topmenu.add_item(new TplLink("#", "Overview"), true)
-		topmenu.add_item(new TplLink("search.html", "Index"), false)
-		return topmenu
-	end
-
 	# intro text
 	private fun tpl_intro: TplSection do
 		var section = new TplSection.with_title("overview", tpl_title)
@@ -554,13 +549,6 @@ class NitdocSearch
 	redef fun tpl_title do return "Index"
 
 	redef fun page_url do return "search.html"
-
-	redef fun tpl_topmenu do
-		var topmenu = super
-		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		topmenu.add_item(new TplLink("#", "Index"), true)
-		return topmenu
-	end
 
 	redef fun tpl_content do
 		var tpl = new TplSearchPage("search_all")
@@ -661,14 +649,10 @@ class NitdocGroup
 	redef fun tpl_topmenu do
 		var topmenu = super
 		var mproject = mgroup.mproject
-		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		if mgroup.is_root then
-			topmenu.add_item(new TplLink("#", "{mproject.nitdoc_name}"), true)
-		else
-			topmenu.add_item(new TplLink(mproject.nitdoc_url, "{mproject.nitdoc_name}"), false)
-			topmenu.add_item(new TplLink("#", "{mgroup.nitdoc_name}"), true)
+		if not mgroup.is_root then
+			topmenu.add_link new TplLink(mproject.nitdoc_url, "{mproject.nitdoc_name}")
 		end
-		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		topmenu.add_link new TplLink(page_url, "{mproject.nitdoc_name}")
 		return topmenu
 	end
 
@@ -797,10 +781,8 @@ class NitdocModule
 	redef fun tpl_topmenu do
 		var topmenu = super
 		var mproject = mmodule.mgroup.mproject
-		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
-		topmenu.add_item(new TplLink("#", "{mmodule.nitdoc_name}"), true)
-		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
+		topmenu.add_link new TplLink(page_url, mmodule.nitdoc_name)
 		return topmenu
 	end
 
@@ -1034,10 +1016,8 @@ class NitdocClass
 	redef fun tpl_topmenu do
 		var topmenu = super
 		var mproject = mclass.intro_mmodule.mgroup.mproject
-		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
-		topmenu.add_item(new TplLink("#", "{mclass.nitdoc_name}"), true)
-		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
+		topmenu.add_link new TplLink(page_url, "{mclass.nitdoc_name}")
 		return topmenu
 	end
 
@@ -1398,11 +1378,9 @@ class NitdocProperty
 		var mmodule = mproperty.intro_mclassdef.mmodule
 		var mproject = mmodule.mgroup.mproject
 		var mclass = mproperty.intro_mclassdef.mclass
-		topmenu.add_item(new TplLink("index.html", "Overview"), false)
-		topmenu.add_item(new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"), false)
-		topmenu.add_item(new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}"), false)
-		topmenu.add_item(new TplLink("#", "{mproperty.nitdoc_name}"), true)
-		topmenu.add_item(new TplLink("search.html", "Index"), false)
+		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
+		topmenu.add_link new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}")
+		topmenu.add_link new TplLink(page_url, "{mproperty.nitdoc_name}")
 		return topmenu
 	end
 
