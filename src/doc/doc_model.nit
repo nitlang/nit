@@ -107,7 +107,7 @@ redef class MEntity
 		lnk.add tpl_link
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_comment
+			lnk.add mdoc.short_markdown
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -137,7 +137,7 @@ redef class MConcern
 		lnk.add tpl_anchor
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_comment
+			lnk.add mdoc.short_markdown
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -397,10 +397,10 @@ redef class MClassDef
 		lnk.add tpl_link
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_comment
+			lnk.add mdoc.short_markdown
 		else if mclass.intro.mdoc != null then
 			lnk.add ": "
-			lnk.add mclass.intro.mdoc.short_comment
+			lnk.add mclass.intro.mdoc.short_markdown
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -550,10 +550,10 @@ redef class MPropDef
 		lnk.add tpl_link
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_comment
+			lnk.add mdoc.short_markdown
 		else if mproperty.intro.mdoc != null then
 			lnk.add ": "
-			lnk.add mproperty.intro.mdoc.short_comment
+			lnk.add mproperty.intro.mdoc.short_markdown
 		end
 		return new TplListItem.with_content(lnk)
 	end
