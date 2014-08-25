@@ -388,26 +388,30 @@ abstract class NitdocPage
 		article.content = mmodule.tpl_definition
 		# mclassdefs list
 		var intros = mmodule.intro_mclassdefs(ctx.min_visibility).to_a
-		mainmodule.linearize_mclassdefs(intros)
-		var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}_intros", "Introduces")
-		var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-		for mclassdef in intros do
-			intros_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
-		end
-		if not intros_lst.is_empty then
-			intros_art.content = intros_lst
-			article.add_child intros_art
+		if not intros.is_empty then
+			mainmodule.linearize_mclassdefs(intros)
+			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}_intros", "Introduces")
+			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
+			for mclassdef in intros do
+				intros_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
+			end
+			if not intros_lst.is_empty then
+				intros_art.content = intros_lst
+				article.add_child intros_art
+			end
 		end
 		var redefs = mmodule.redef_mclassdefs(ctx.min_visibility).to_a
-		mainmodule.linearize_mclassdefs(redefs)
-		var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}_redefs", "Redefines")
-		var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-		for mclassdef in redefs do
-			redefs_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
-		end
-		if not redefs_lst.is_empty then
-			redefs_art.content = redefs_lst
-			article.add_child redefs_art
+		if not redefs.is_empty then
+			mainmodule.linearize_mclassdefs(redefs)
+			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}_redefs", "Redefines")
+			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
+			for mclassdef in redefs do
+				redefs_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
+			end
+			if not redefs_lst.is_empty then
+				redefs_art.content = redefs_lst
+				article.add_child redefs_art
+			end
 		end
 		return article
 	end
