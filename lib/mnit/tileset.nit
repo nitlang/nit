@@ -84,6 +84,9 @@ class TileSetFont
 		if i == -1 then return null
 		return subimages[i]
 	end
+
+	# Distance between the beginning of a letter tile and the beginning of the next letter tile
+	fun advance: Numeric do return width.add(hspace)
 end
 
 redef class Display
