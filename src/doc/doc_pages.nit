@@ -1131,8 +1131,8 @@ class NitdocClass
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all hancestors
 		mclasses.add_all hparents
-		if hchildren.length < 10 then mclasses.add_all hchildren
-		if hdescendants.length < 10 then mclasses.add_all hdescendants
+		mclasses.add_all hchildren
+		mclasses.add_all hdescendants
 		mclasses.add mclass
 		var graph = tpl_dot(mclasses)
 		if graph != null then section.add_child graph
@@ -1152,14 +1152,14 @@ class NitdocClass
 		end
 
 		# children
-		if not hchildren.is_empty and hchildren.length < 15 then
+		if not hchildren.is_empty then
 			var lst = hchildren.to_a
 			name_sorter.sort lst
 			section.add_child tpl_list("children", "Children", lst)
 		end
 
 		# descendants
-		if not hdescendants.is_empty and hchildren.length < 15 then
+		if not hdescendants.is_empty then
 			var lst = hdescendants.to_a
 			name_sorter.sort lst
 			section.add_child tpl_list("descendants", "Descendants", lst)
@@ -1170,9 +1170,18 @@ class NitdocClass
 
 	private fun tpl_list(id: String, title: String, elts: Array[MClass]): TplArticle do
 		var article = new TplArticle.with_title(id, title)
-		var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for elt in elts do list.elts.add elt.tpl_list_item
-		article.content = list
+		if elts.length > 20 then
+			var tpl = new Template
+			for e in elts do
+				tpl.add e.tpl_link
+				if e != elts.last then tpl.add ", "
+			end
+			article.content = tpl
+		else
+			var list = new TplList.with_classes(["list-unstyled", "list-definition"])
+			for elt in elts do list.elts.add elt.tpl_list_item
+			article.content = list
+		end
 		return article
 	end
 
@@ -1305,6 +1314,7 @@ class NitdocClass
 		for mclass in mclasses do
 			poset.add_node mclass
 			for oclass in mclasses do
+				if mclass == oclass then continue
 				poset.add_node oclass
 				if mclass.in_hierarchy(mainmodule) < oclass then
 					poset.add_edge(mclass, oclass)
@@ -1315,14 +1325,28 @@ class NitdocClass
 		var op = new FlatBuffer
 		var name = "dep_{mclass.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for c in poset do
+		var classes = poset.to_a
+		var todo = new Array[MClass]
+		var done = new HashSet[MClass]
+		mainmodule.linearize_mclasses(classes)
+		if not classes.is_empty then todo.add classes.first
+		while not todo.is_empty do
+			var c = todo.shift
+			if done.has(c) then continue
+			done.add c
 			if c == mclass then
 				op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
 			else
 				op.append("\"{c.name}\"[URL=\"{c.nitdoc_url}\"];\n")
 			end
-			for c2 in poset[c].direct_greaters do
-				op.append("\"{c.name}\"->\"{c2.name}\";\n")
+			var smallers = poset[c].direct_smallers
+			if smallers.length < 10 then
+				for c2 in smallers do
+					op.append("\"{c2.name}\"->\"{c.name}\";\n")
+				end
+				todo.add_all smallers
+			else
+				op.append("\"...\"->\"{c.name}\";\n")
 			end
 		end
 		op.append("\}\n")
