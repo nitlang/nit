@@ -1298,17 +1298,6 @@ class NitdocClass
 		return res
 	end
 
-	private fun sort_by_public_owner(mmodules: Collection[MModule]): Map[MModule, Set[MModule]] do
-		var map = new HashMap[MModule, Set[MModule]]
-		for mmodule in mmodules do
-			var owner = mmodule
-			if mmodule.public_owner != null then owner = mmodule.public_owner.as(not null)
-			if not map.has_key(owner) then map[owner] = new HashSet[MModule]
-			map[owner].add mmodule
-		end
-		return map
-	end
-
 	# Generate dot hierarchy for classes
 	fun tpl_dot(mclasses: Collection[MClass]): nullable TplArticle do
 		var poset = new POSet[MClass]
