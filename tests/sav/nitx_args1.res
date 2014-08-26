@@ -10,7 +10,7 @@
     
     [1m== constructors[0m
       
-      [1m[32minit[0m[0m
+      redef [1m[32minit[0m[0m
       [30m[1mbase_simple3::A::init[0m[0m[30m (lines 30-30)[0m
     
     [1m== methods[0m

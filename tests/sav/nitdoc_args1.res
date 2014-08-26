@@ -39,16 +39,14 @@ js/
 less/
 module_module_0.html
 module_module_1.html
-proprety_module_0__Int__init.html
+proprety_module_0__Object__init.html
 proprety_module_0__Object__output.html
 proprety_module_0__Object__print.html
-proprety_module_0__Sys__init.html
 proprety_module_0__Sys__main.html
 proprety_module_1__A__a1.html
 proprety_module_1__A__a12.html
 proprety_module_1__A__a123.html
 proprety_module_1__A__a13.html
-proprety_module_1__A__init.html
 proprety_module_1__B__all2.html
 proprety_module_1__B__all25.html
 quicksearch-list.js

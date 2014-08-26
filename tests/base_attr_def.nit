@@ -32,7 +32,8 @@ class Foo
 		a2.output
 	end
 
-	init
+	init is
+		old_style_init
 	do
 		a1 = 1
 		a2 = 2
@@ -49,7 +50,8 @@ class Bar
 		a3.output
 	end
 
-	init 
+	init is
+		old_style_init
 	do 
 		a1 = 10
 		a2 = 20

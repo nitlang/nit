@@ -82,6 +82,7 @@ readonly
 writable
 cached
 nosuper
+old_style_init
 
 pkgconfig
 c_compiler_option

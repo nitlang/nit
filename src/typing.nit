@@ -277,7 +277,7 @@ private class TypeVisitor
 		end
 
 
-		var msignature = mpropdef.msignature.as(not null)
+		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
 		var erasure_cast = false
@@ -1267,6 +1267,9 @@ redef class ASendExpr
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
 				v.error(self, "Can call a init only in another init")
 			end
+			if vmpropdef isa MMethodDef and vmpropdef.mproperty.is_root_init and not callsite.mproperty.is_root_init then
+				v.error(self, "Error: {vmpropdef} cannot call a factory {callsite.mproperty}")
+			end
 		end
 
 		var ret = msignature.return_mtype
@@ -1522,12 +1525,15 @@ redef class ASuperExpr
 				if v.modelbuilder.toolcontext.error_count > errcount then return # Forard error
 				continue # Try next super-class
 			end
-			if superprop != null and superprop.mproperty != candidate then
+			if superprop != null and candidate.is_root_init then
+				continue
+			end
+			if superprop != null and superprop.mproperty != candidate and not superprop.mproperty.is_root_init then
 				v.error(self, "Error: conflicting super constructor to call for {mproperty}: {candidate.full_name}, {superprop.mproperty.full_name}")
 				return
 			end
 			var candidatedefs = candidate.lookup_definitions(v.mmodule, recvtype)
-			if superprop != null then
+			if superprop != null and superprop.mproperty == candidate then
 				if superprop == candidatedefs.first then continue
 				candidatedefs.add(superprop)
 			end
@@ -1542,7 +1548,7 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = superprop.msignature.as(not null)
+		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
 		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)

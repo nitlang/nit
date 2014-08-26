@@ -408,6 +408,22 @@ private class NaiveInterpreter
 	# Use this method, instead of `send` to execute and control the aditionnal behavior of the call-sites
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
+		var initializers = callsite.mpropdef.initializers
+		if not initializers.is_empty then
+			assert initializers.length == arguments.length - 1 else debug("expected {initializers.length} got {arguments.length - 1}")
+			var recv = arguments.first
+			var i = 1
+			for p in initializers do
+				if p isa MMethod then
+					self.send(p, [recv, arguments[i]])
+				else if p isa MAttribute then
+					assert recv isa MutableInstance
+					recv.attributes[p] = arguments[i]
+				else abort
+				i += 1
+			end
+			return send(callsite.mproperty, [recv])
+		end
 		return send(callsite.mproperty, arguments)
 	end
 
@@ -1046,6 +1062,17 @@ redef class AClassdef
 	# Execute an implicit `mpropdef` associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
+		if mpropdef.mproperty.is_root_init then
+			assert self.super_inits == null
+			assert args.length == 1
+			if not mpropdef.is_intro then
+				# standard call-next-method
+				var superpd = mpropdef.lookup_next_definition(v.mainmodule, args.first.mtype)
+				v.call_without_varargs(superpd, args)
+			end
+			return null
+		end
+
 		var super_inits = self.super_inits
 		if super_inits != null then
 			var args_of_super = args

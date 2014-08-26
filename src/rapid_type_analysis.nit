@@ -226,6 +226,7 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
+			# TODO? new_msignature
 			var sig = mmethoddef.msignature.as(not null)
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
@@ -246,6 +247,10 @@ class RapidTypeAnalysis
 						for su in super_inits do
 							v.add_monomorphic_send(v.receiver, su)
 						end
+					end
+
+					if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
+						self.add_super_send(v.receiver, mmethoddef)
 					end
 				else
 					abort
@@ -499,6 +504,11 @@ class RapidTypeVisitor
 	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
 
 	fun add_callsite(callsite: nullable CallSite) do if callsite != null then
+		for m in callsite.mpropdef.initializers do
+			if m isa MMethod then
+				analysis.add_send(callsite.recv, m)
+			end
+		end
 		analysis.add_send(callsite.recv, callsite.mproperty)
 		analysis.live_callsites.add(callsite)
 	end
