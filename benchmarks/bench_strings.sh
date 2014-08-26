@@ -36,6 +36,8 @@ function usage()
 	echo "    - usage : cct max_nb_cct loops strlen"
 	echo "  substr: substring benching"
 	echo "    - usage : substr max_nb_cct loops strlen"
+	echo "  array: Benchmark for the to_s in array"
+	echo "    - usage : array nb_cct loops max_arrlen"
 }
 
 function benches()
@@ -43,6 +45,81 @@ function benches()
 	bench_concat $@;
 	bench_iteration $@;
 	bench_substr $@;
+	bench_array $@;
+}
+
+function bench_array()
+{
+	if $verbose; then
+		echo "*** Benching Array.to_s performance ***"
+	fi
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_rope.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_ropes.out arr_tos_ropes ropes
+	if $verbose; then
+		echo "Ropes :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i ropes$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_flat.out arr_tos_flat flatstring
+	if $verbose; then
+		echo "FlatStrings :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatstring$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_buffer.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_buf.out arr_tos_buf flatbuffer
+	if $verbose; then
+		echo "FlatBuffers :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatbuffer$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_manual.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_man.out arr_tos_man memmove
+	if $verbose; then
+		echo "Memmove :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i memmove$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_man_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+
+	prepare_res arr_tos_man_buf.out arr_tos_man_buf flatbuf_with_capacity
+	if $verbose; then
+		echo "Memmove :"
+	fi
+	for i in `seq 1 "$3"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $1, Loops = $2"
+		fi
+		bench_command $i flatbuf_with_capacity$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
+	done
+
+	plot array_tos.gnu
 }
 
 function bench_concat()
@@ -82,6 +159,17 @@ function bench_concat()
 			echo "String length = $i, Concats/loop = $2, Loops = $3"
 		fi
 		bench_command $i flatbuffer$i ./chain_concat -m flatbuf --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
+	prepare_res concat_flatstr_utf8_noindex.out concat_flatstr_utf8_noindex flatstring_utf8_noindex
+	if $verbose; then
+		echo "FlatString UTF-8 (without index) :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String length = $i, Concats/loop = $2, Loops = $3"
+		fi
+		bench_command $i flatstr_utf8_noindex$i ./utf_chain_concat -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
 	plot concat.gnu
@@ -159,6 +247,28 @@ function bench_iteration()
 		bench_command $i flatbuf_index$i ./iteration_bench -m flatbuf --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
+	prepare_res iter_flat_utf8_noindex_iter.out iter_flat_iter_utf8_noindex flatstring_utf8_noindex_iter
+	if $verbose; then
+		echo "FlatStrings by iterator :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String base length = $1, Concats = $i, Loops = $3"
+		fi
+		bench_command $i flatstr_iter_utf8_noindex$i ./utf_iteration_bench -m flatstr_utf8_noindex --iter-mode iterator --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
+	prepare_res iter_flat_utf8_noindex_index.out iter_flat_index_utf8_noindex flatstring_utf8_noindex_index
+	if $verbose; then
+		echo "FlatStrings by index :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String base length = $1, Concats = $i, Loops = $3"
+		fi
+		bench_command $i flatstr_index_utf8_noindex$i ./utf_iteration_bench -m flatstr_utf8_noindex --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
 	plot iter.gnu
 }
 
@@ -201,6 +311,17 @@ function bench_substr()
 		bench_command $i flatbuffer$i ./substr_bench -m flatbuf --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
+	prepare_res substr_flat_utf8_noindex.out substr_flat_utf8_noindex flatstring_utf8_noindex
+	if $verbose; then
+		echo "FlatStrings UTF-8 (without index) :"
+	fi
+	for i in `seq 1 "$1"`; do
+		if $verbose; then
+			echo "String length = $i, loops = $2, Loops = $3"
+		fi
+		bench_command $i flatstring_utf8_noindex$i ./utf_substr_bench -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
+	done
+
 	plot substr.gnu
 }
 
@@ -224,13 +345,17 @@ if $verbose; then
 fi
 
 ../bin/nitg --global ./strings/chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 ../bin/nitg --global ./strings/iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 ../bin/nitg --global ./strings/substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+../bin/nitg --global ./strings/utf_substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 case "$1" in
 	iter) shift; bench_iteration $@ ;;
 	cct) shift; bench_concat $@ ;;
 	substr) shift; bench_substr $@ ;;
+	array) shift; bench_array $@ ;;
 	all) shift; benches $@ ;;
 	*) usage; exit;;
 esac
