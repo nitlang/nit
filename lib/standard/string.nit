@@ -1821,18 +1821,50 @@ redef class Collection[E]
 end
 
 redef class Array[E]
+
 	# Fast implementation
 	redef fun to_s
 	do
-		var s = new FlatBuffer
-		var i = 0
 		var l = length
+		if l == 0 then return ""
+		if l == 1 then if self[0] == null then return "" else return self[0].to_s
+		var its = _items
+		var na = new NativeArray[String](l)
+		var i = 0
+		var sl = 0
+		var mypos = 0
 		while i < l do
-			var e = self[i]
-			if e != null then s.append(e.to_s)
+			var itsi = its[i]
+			if itsi == null then
+				i += 1
+				continue
+			end
+			var tmp = itsi.to_s
+			sl += tmp.length
+			na[mypos] = tmp
+			i += 1
+			mypos += 1
+		end
+		var ns = new NativeString(sl + 1)
+		ns[sl] = '\0'
+		i = 0
+		var off = 0
+		while i < mypos do
+			var tmp = na[i]
+			var tpl = tmp.length
+			if tmp isa FlatString then
+				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
+				off += tpl
+			else
+				for j in tmp.substrings do
+					var s = j.as(FlatString)
+					s.items.copy_to(ns, tpl, s.index_from, off)
+					off += tpl
+				end
+			end
 			i += 1
 		end
-		return s.to_s
+		return ns.to_s_with_length(sl)
 	end
 end
 
@@ -1877,7 +1909,8 @@ end
 # Native strings are simple C char *
 extern class NativeString `{ char* `}
 	super StringCapable
-
+	# Creates a new NativeString with a capacity of `length`
+	new(length: Int) is intern
 	fun [](index: Int): Char is intern
 	fun []=(index: Int, item: Char) is intern
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
