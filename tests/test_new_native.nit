@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-redef class NativeArray[E]
-	new(length: Int) is intern
-end
-
-redef class NativeString
-	new(length: Int) is intern
-end
-
 var s = new NativeString(4)
 s[0] = 'N'
 s[2] = 't'

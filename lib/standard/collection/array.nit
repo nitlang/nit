@@ -732,6 +732,8 @@ end
 # Access are unchecked and it has a fixed size
 # Not for public use: may become private.
 universal NativeArray[E]
+	# Creates a new NativeArray of capacity `length`
+	new(length: Int) is intern
 	# The length of the array
 	fun length: Int is intern
 	# Use `self` to initialize a standard Nit Array.

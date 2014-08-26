@@ -1877,7 +1877,8 @@ end
 # Native strings are simple C char *
 extern class NativeString `{ char* `}
 	super StringCapable
-
+	# Creates a new NativeString with a capacity of `length`
+	new(length: Int) is intern
 	fun [](index: Int): Char is intern
 	fun []=(index: Int, item: Char) is intern
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
