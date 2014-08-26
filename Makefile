@@ -16,7 +16,14 @@
 
 NITCOPT=
 
+# Additional program directories (contrib and examples) that are buildable
+PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
+
 all: tools
+
+# Compile all programs in $PROGS
+full: all
+	for m in $(PROGS); do $(MAKE) -C "$$m" || exit 1; done
 
 docs: doc/stdlib/index.html doc/nitc/index.html
 
