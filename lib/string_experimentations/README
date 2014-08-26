@@ -17,6 +17,8 @@ TODO :
   * to_upper/lower fully-compatible with Unicode
 
  * utf8_no_index:
-  * Add cache for the last indexed character
-  * Two-way iteration
-  * Intelligent indexed access (calculating the nearest point of insertion, i.e. begin, end, or cache)
+  * Add cache for the last indexed character - DONE
+  * Two-way iteration - DONE
+  * Intelligent indexed access (calculating the nearest point of insertion, i.e. begin, end, or cache) - DONE
+  * UnicodeChar as universal type
+  * UnicodeChar => Char and Char => Byte

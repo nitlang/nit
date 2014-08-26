@@ -171,12 +171,108 @@ extern class UnicodeChar `{ uint32_t* `}
 	`}
 end
 
+# Used to keep track of the last accessed char in a String
+class CharCache
+	# The position (as in char) of a String
+	var position: Int
+	# The position in the NativeString underlying the String
+	var bytepos: Int
+end
+
+class FlatStringReviter
+	super IndexedIterator[UnicodeChar]
+
+	# The NativeString to iterate upon
+	private var ns: NativeString
+
+	# The position in the string
+	private var pos: Int
+
+	# The position in the native string
+	private var bytepos: Int
+
+	init(s: FlatString) do from(s, s.length - 1)
+
+	init from(s: FlatString, position: Int)
+	do
+		ns = s.items
+		pos = position
+		bytepos = s.byte_index(position)
+	end
+
+	redef fun next
+	do
+		bytepos -= 1
+		while ns[bytepos].ascii.bin_and(0xC0) == 0x80 do
+			bytepos -= 1
+		end
+		pos -= 1
+	end
+
+	redef fun index do return pos
+
+	redef fun item do return new UnicodeChar.from_ns(ns, bytepos)
+
+	redef fun is_ok do return pos >= 0
+end
+
+class FlatStringIter
+	super IndexedIterator[UnicodeChar]
+
+	private var ns: NativeString
+
+	private var pos: Int
+
+	private var bytepos: Int
+
+	private var slen: Int
+
+	private var it: UnicodeChar
+
+	private var is_created: Bool
+
+	init(s: FlatString) do from(s, 0)
+
+	init from(s: FlatString, position: Int) do
+		ns = s.items
+		pos = position
+		bytepos = s.byte_index(position)
+		slen = s.length
+	end
+
+	redef fun index do return pos
+
+	redef fun is_ok do return pos < slen
+
+	redef fun item do
+		if not is_created then
+			it = new UnicodeChar.from_ns(ns, bytepos)
+			is_created = true
+		end
+		return it
+	end
+
+	redef fun next
+	do
+		if not is_created then
+			it = new UnicodeChar.from_ns(ns, bytepos)
+		end
+		is_created = false
+		var pace = it.len
+		pos += 1
+		bytepos += pace
+	end
+end
+
 redef class FlatString
 
 	redef type OTHER: FlatString
 
 	# Length in bytes of the string (e.g. the length of the C string)
 	redef var bytelen: Int
+
+	# Cache for the last accessed character in the char
+	var cache = new CharCache(-1,-1)
 
 	redef var length = length_l is lazy
 
@@ -239,22 +335,57 @@ redef class FlatString
 	private fun byte_index(index: Int): Int do
 		assert index >= 0
 		assert index < length
-		var ns_i = index_from
-		var my_i = 0
-		while my_i != index do
-			if items[ns_i].ascii.bin_and(0x80) == 0 then
+
+		# Find best insertion point
+		var delta_begin = index
+		var delta_end = (length - 1) - index
+		var delta_cache = (cache.position - index).abs
+		var min = delta_begin
+
+		if delta_cache < min then min = delta_cache
+		if delta_end < min then min = delta_end
+
+		var ns_i: Int
+		var my_i: Int
+		var myits = items
+
+		if min == delta_begin then
+			ns_i = index_from
+			my_i = 0
+		else if min == delta_cache then
+			ns_i = cache.bytepos
+			my_i = cache.position
+		else
+			ns_i = index_to
+			my_i = length
+		end
+
+		while my_i < index do
+			if myits[ns_i].ascii.bin_and(0x80) == 0 then
 				ns_i += 1
-			else if items[ns_i].ascii.bin_and(0xE0) == 0xC0 then
+			else if myits[ns_i].ascii.bin_and(0xE0) == 0xC0 then
 				ns_i += 2
-			else if items[ns_i].ascii.bin_and(0xF0) == 0xE0 then
+			else if myits[ns_i].ascii.bin_and(0xF0) == 0xE0 then
 				ns_i += 3
-			else if items[ns_i].ascii.bin_and(0xF7) == 0xF0 then
+			else if myits[ns_i].ascii.bin_and(0xF7) == 0xF0 then
 				ns_i += 4
 			else
 				ns_i += 1
 			end
 			my_i += 1
 		end
+
+		while my_i > index do
+			if myits[ns_i].ascii.bin_and(0xC0) != 0x80 then
+				my_i -= 1
+				if my_i == index then break
+			end
+			ns_i -= 1
+		end
+
+		cache.position = index
+		cache.bytepos = ns_i
+
 		return ns_i
 	end
 

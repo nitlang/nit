@@ -46,6 +46,34 @@ for i in [0 .. xx.length[ do xx.char_at(i).output
 
 '\n'.output
 
+var it = new FlatStringReviter(x)
+for i in it do
+	i.output
+end
+
+'\n'.output
+
+var it2 = new FlatStringIter(x)
+for i in it2 do
+	i.output
+end
+
+'\n'.output
+
+it = new FlatStringReviter(str)
+for i in it do
+	i.output
+end
+
+'\n'.output
+
+it2 = new FlatStringIter(str)
+for i in it2 do
+	i.output
+end
+
+'\n'.output
+
 assert str * 2 == str + str
 
 assert x * 2 == x + x
