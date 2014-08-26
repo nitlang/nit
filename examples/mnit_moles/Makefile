@@ -23,4 +23,4 @@ pngs:
 	../mnit_dino/tools/svg-to-pngs art/drawing.svg assets/images
 
 clean:
-	rm -rf bin
+	rm -rf bin res

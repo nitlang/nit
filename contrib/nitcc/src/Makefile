@@ -36,4 +36,13 @@ minilang: nitcc ../examples/minilang.sablecc ../examples/minilang.nit
 tests:
 	cd ../tests && ./run
 
+clean:
+	rm -r .nit_compile \
+		*.dot *.out \
+		nitcc_lexer.nit nitcc_parser.nit nitcc_test_parser.nit nitcc_parser_gen \
+		nitcc0 nitcc1 \
+		calc \
+		../examples/*.dot ../examples/*.out ../examples/*_lexer.nit ../examples/*_parser.nit ../examples/*_test_parser.nit \
+		2>/dev/null || true
+
 .PHONY: tests

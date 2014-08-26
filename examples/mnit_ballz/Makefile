@@ -12,4 +12,4 @@ icon: ../../contrib/inkscape_tools/bin/svg_to_icons
 	../../contrib/inkscape_tools/bin/svg_to_icons art/ball.svg --android --out res/
 
 clean:
-	rm -rf bin
+	rm -rf bin res

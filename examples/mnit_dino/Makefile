@@ -24,4 +24,4 @@ pngs:
 	tools/svg-to-pngs art/drawing.svg assets/images
 
 clean:
-	rm -rf bin/ doc/
+	rm -rf bin/ doc/ res/
