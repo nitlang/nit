@@ -6,7 +6,7 @@ LDFLAGS ?=
 LDLIBS  ?= -lm -lgc
 
 NEED_LIBUNWIND := YesPlease
-uname_S := $(shell sh -c 'uname -s null || echo not')
+uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
 ifeq ($(uname_S),Darwin)
 	NEED_LIBUNWIND :=
 endif
