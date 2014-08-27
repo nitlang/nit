@@ -202,7 +202,7 @@ abstract class BufferedIStream
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer.chars[j])
+				s.add(_buffer[j])
 				j += 1
 			end
 			_buffer_pos = j
