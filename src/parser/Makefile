@@ -34,8 +34,6 @@ parser.nit: .nit.sablecc3 xss/*.xss
 clean:
 	rm -f -- .nit.sablecc3 .nit.sablecc3.dump .parser-nofact.nit || true
 
-distclean: clean
-
 maintainer-clean: clean
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."

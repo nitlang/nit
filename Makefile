@@ -16,7 +16,14 @@
 
 NITCOPT=
 
+# Additional program directories (contrib and examples) that are buildable
+PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
+
 all: tools
+
+# Compile all programs in $PROGS
+full: all
+	for m in $(PROGS); do $(MAKE) -C "$$m" || exit 1; done
 
 docs: doc/stdlib/index.html doc/nitc/index.html
 
@@ -61,14 +68,11 @@ doc/nitc/index.html: bin/nitdoc
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
+	rm -rf -- doc/stdlib doc/nitc || true
 	cd c_src; make clean
 	cd src; make clean
-	cd doc; make clean
 	cd tests; make clean
-
-distclean: clean
-	rm -rf -- bin/nitdoc bin/nits doc/stdlib 2> /dev/null || true
-	cd c_src; make distclean
-	cd src/parser; make distclean
-	cd doc; make distclean
-	cd tests; make distclean
+	for m in $(PROGS); do \
+		$(MAKE) clean -C "$$m"; \
+		test -d $$m/.nit_compile && rm -r $$m/.nit_compile; \
+		done || true

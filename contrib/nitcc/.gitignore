@@ -2,8 +2,7 @@
 *_parser.nit
 *_lexer.nit
 *_test_parser
-*.concrete_grammar.txt
-*.lr.txt
+*.out
 tests/alt
 tests/out
 tests/tap.output

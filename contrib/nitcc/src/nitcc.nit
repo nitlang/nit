@@ -91,18 +91,18 @@ end
 
 var nbalts = 0
 for prod in gram.prods do nbalts += prod.alts.length
-print "Concrete grammar: {gram.prods.length} productions, {nbalts} alternatives (see {name}.concrete_grammar.txt)"
+print "Concrete grammar: {gram.prods.length} productions, {nbalts} alternatives (see {name}.concrete_grammar.out)"
 
 var pretty = gram.pretty
-var f = new OFStream.open("{name}.concrete_grammar.txt")
+var f = new OFStream.open("{name}.concrete_grammar.out")
 f.write "// Concrete grammar of {name}\n"
 f.write pretty
 f.close
 
-print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.txt)"
+print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
 lr.to_dot("{name}.lr.dot")
 pretty = lr.pretty
-f = new OFStream.open("{name}.lr.txt")
+f = new OFStream.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"
 f.write pretty
 f.close
