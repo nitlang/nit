@@ -856,6 +856,15 @@ class FlatString
 
 	redef var chars: SequenceRead[Char] = new FlatStringCharView(self)
 
+	redef fun [](index)
+	do
+		# Check that the index (+ index_from) is not larger than indexTo
+		# In other terms, if the index is valid
+		assert index >= 0
+		assert (index + index_from) <= index_to
+		return items[index + index_from]
+	end
+
 	################################################
 	#       AbstractString specific methods        #
 	################################################
@@ -1277,6 +1286,13 @@ class FlatBuffer
 	private var capacity: Int = 0
 
 	redef fun substrings do return new FlatSubstringsIter(self)
+
+	redef fun [](index)
+	do
+		assert index >= 0
+		assert index  < length
+		return items[index]
+	end
 
 	redef fun []=(index, item)
 	do
