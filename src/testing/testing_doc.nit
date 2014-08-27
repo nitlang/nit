@@ -213,8 +213,7 @@ redef class ModelBuilder
 
 		ts.attr("package", mmodule.full_name)
 
-		var prefix = toolcontext.opt_dir.value
-		if prefix == null then prefix = ".nitunit"
+		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mmodule.to_s)
 		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
 

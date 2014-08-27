@@ -27,4 +27,11 @@ redef class ToolContext
 	var opt_dir = new OptionString("Working directory (default is '.nitunit')", "--dir")
 	# opt --no-act
 	var opt_noact = new OptionBool("Does not compile and run tests", "--no-act")
+
+	# Working directory for testing.
+	fun test_dir: String do
+		var dir = opt_dir.value
+		if dir == null then return ".nitunit"
+		return dir
+	end
 end
