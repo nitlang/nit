@@ -17,3 +17,4 @@ module testing
 
 import testing_doc
 import testing_suite
+import testing_gen

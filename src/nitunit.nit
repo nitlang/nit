@@ -19,17 +19,46 @@ import testing
 
 var toolcontext = new ToolContext
 
-toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file)
+toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
 toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
+
+if toolcontext.opt_gen_unit.value then
+	if toolcontext.opt_pattern.value != null then
+		print "Option --pattern cannot be used with --gen-suite"
+		exit(0)
+	end
+	if toolcontext.opt_file.value != null then
+		print "Option --target-file cannot be used with --gen-suite"
+		exit(0)
+	end
+else
+	if toolcontext.opt_gen_force.value then
+		print "Option --force must be used with --gen-suite"
+		exit(0)
+	end
+	if toolcontext.opt_gen_private.value then
+		print "Option --private must be used with --gen-suite"
+		exit(0)
+	end
+	if toolcontext.opt_gen_show.value then
+		print "Option --only-show must be used with --gen-suite"
+		exit(0)
+	end
+end
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var mmodules = modelbuilder.parse(args)
 modelbuilder.run_phases
+
+if toolcontext.opt_gen_unit.value then
+	modelbuilder.gen_test_unit(mmodules.first)
+	exit(0)
+end
 
 var page = new HTMLTag("testsuites")
 
