@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_opengles1
+module linux_opengles1 is pkgconfig("x11")
 
 import mnit::opengles1
 

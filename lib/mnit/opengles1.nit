@@ -15,16 +15,13 @@
 # limitations under the License.
 
 # OpenGL ES1 general support (most of it)
-module opengles1 is pkgconfig("glesv1_cm", "x11", "egl")
+module opengles1 is pkgconfig("glesv1_cm", "egl")
 
 import mnit_display
 
 in "C header" `{
 	#include <EGL/egl.h>
 	#include <GLES/gl.h>
-	#define GL_GLEXT_PROTOTYPES 1
-	#include <GLES/glext.h>
-	#include <errno.h>
 
 	EGLDisplay mnit_display;
 	EGLSurface mnit_surface;
