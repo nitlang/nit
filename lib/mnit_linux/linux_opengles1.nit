@@ -16,7 +16,7 @@
 
 module linux_opengles1 is pkgconfig("x11")
 
-import mnit::opengles1
+import mnit::opengles1_epoxy
 
 import sdl
 
