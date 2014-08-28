@@ -216,6 +216,7 @@ function process_result()
 		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
+		echo "$ii" >> "$ERRLIST"
 	else
 		# no sav but empty res
 		echo "[0k] out/$pattern.res is empty"
@@ -580,10 +581,11 @@ fi
 
 # write $ERRLIST
 if [ "x$ERRLIST" != "x" ]; then
-	if [ -x "$ERRLIST_TARGET" ]; then
+	if [ -f "$ERRLIST_TARGET" ]; then
 		mv "$ERRLIST_TARGET" "${ERRLIST_TARGET}.bak"
 	fi
-	mv $ERRLIST $ERRLIST_TARGET
+	uniq $ERRLIST > $ERRLIST_TARGET
+	rm $ERRLIST
 fi
 
 echo >>$xml "</testsuite></testsuites>"
