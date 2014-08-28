@@ -2,3 +2,4 @@ example_exec_ls
 leapfrog_curses
 websocket_server
 converter
+show_basedir
