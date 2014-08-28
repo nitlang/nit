@@ -551,7 +551,8 @@ END
 				done < $fargs
 			fi
 		elif [ -f "./$ff.bin" ]; then
-			echo "Not executable (platform?)" > "$ff.res"
+			#Not executable (platform?)"
+			> "$ff.res"
 			process_result $bf "$bf" $pack
 		else
 			echo -n "! "
