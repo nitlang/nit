@@ -14,6 +14,8 @@ printf "%s\n" "$@" *.nit \
 	../examples/*/src/*_linux.nit \
 	../examples/*/src/*_null.nit \
 	../examples/pnacl/converter/converter.nit \
+	../examples/nitcorn/src/*.nit \
+	../examples/mpi/src/*.nit \
 	../lib/*.nit $list \
 	../src/nit*.nit \
 	../src/test_*.nit \
