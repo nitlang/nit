@@ -96,7 +96,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description'>"
+	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat out/$pattern.time.out`' timestamp='`date -Iseconds`'>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -216,6 +216,7 @@ function process_result()
 		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
+		echo "$ii" >> "$ERRLIST"
 	else
 		# no sav but empty res
 		echo "[0k] out/$pattern.res is empty"
@@ -234,12 +235,12 @@ need_skip()
 	test "$noskip" = true && return 1
 	if echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip]"
-		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
+		echo >>$xml "<testcase classname='$3' name='$2' timestamp='`date -Iseconds`'><skipped/></testcase>"
 		return 0
 	fi
 	if test -n "$isinterpret" && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip exec]"
-		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
+		echo >>$xml "<testcase classname='$3' name='$2' timestamp='`date -Iseconds`'><skipped/></testcase>"
 		return 0
 	fi
 	return 1
@@ -450,7 +451,7 @@ END
 				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				$TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				/usr/bin/time -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -462,7 +463,7 @@ END
 			chmod +x "$ff.bin"
 			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
 				echo " [skip] do no not imports kernel"
-				echo >>$xml "<testcase classname='$pack' name='$bf'><skipped/></testcase>"
+				echo >>$xml "<testcase classname='$pack' name='$bf' timestamp='`date -Iseconds`'><skipped/></testcase>"
 				continue
 			fi
 		fi
@@ -532,7 +533,7 @@ END
 					echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" /usr/bin/time -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
@@ -580,10 +581,11 @@ fi
 
 # write $ERRLIST
 if [ "x$ERRLIST" != "x" ]; then
-	if [ -x "$ERRLIST_TARGET" ]; then
+	if [ -f "$ERRLIST_TARGET" ]; then
 		mv "$ERRLIST_TARGET" "${ERRLIST_TARGET}.bak"
 	fi
-	mv $ERRLIST $ERRLIST_TARGET
+	uniq $ERRLIST > $ERRLIST_TARGET
+	rm $ERRLIST
 fi
 
 echo >>$xml "</testsuite></testsuites>"

@@ -21,7 +21,6 @@ import mpi
 # Simple class transfered between processors
 class ProcessorInfo
 	auto_serializable
-	super Serializable
 
 	var rank: Int
 	var size: Int
