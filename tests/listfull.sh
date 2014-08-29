@@ -1,11 +1,4 @@
 #!/bin/sh
-list=""
-for x in ../lib/*
-do
-	bx=`basename $x`
-	y="$x/$bx.nit"
-	test -f $y && list="$list $y"
-done
 printf "%s\n" "$@" *.nit \
 	../examples/*.nit \
 	../examples/*/*.nit \
@@ -16,7 +9,9 @@ printf "%s\n" "$@" *.nit \
 	../examples/pnacl/converter/converter.nit \
 	../examples/nitcorn/src/*.nit \
 	../examples/mpi/src/*.nit \
-	../lib/*.nit $list \
+	../lib/*.nit \
+	../lib/*/*.nit \
+	../lib/*/*/*.nit  \
 	../src/nit*.nit \
 	../src/test_*.nit \
 	../contrib/*.nit \

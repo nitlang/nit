@@ -73,7 +73,7 @@ extern class UnicodeChar `{ uint32_t* `}
 	# Returns the Unicode code point representing the character
 	#
 	# Note : A unicode character might not be a visible glyph, but it will be used to determine canonical equivalence
-	fun code_point: Int `{
+	fun code_point: Int import UnicodeChar.len `{
 		uint32_t val = *recv;
 		uint32_t ret = 0;
 		switch(UnicodeChar_len(recv)){

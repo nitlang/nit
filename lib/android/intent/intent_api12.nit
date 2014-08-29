@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Refines intent module to add API 12 services
-module intent_api12
+module intent_api12 is min_api_version(12)
 
 import intent_api11
 

@@ -5,3 +5,7 @@ posix_ext
 physical_interface_for_mpd_on_rpi
 blink
 input
+android_app
+android_assets
+opengles1
+java_io
