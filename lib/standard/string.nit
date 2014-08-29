@@ -1874,8 +1874,9 @@ redef class Array[E]
 			else
 				for j in tmp.substrings do
 					var s = j.as(FlatString)
-					s.items.copy_to(ns, tpl, s.index_from, off)
-					off += tpl
+					var slen = s.length
+					s.items.copy_to(ns, slen, s.index_from, off)
+					off += slen
 				end
 			end
 			i += 1
