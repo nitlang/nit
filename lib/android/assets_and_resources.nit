@@ -25,8 +25,8 @@
 module assets_and_resources
 
 import native_app_glue
-import java_io
 import java
+import java::io
 
 in "Java" `{
 	import android.content.res.AssetManager;
