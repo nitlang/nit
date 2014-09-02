@@ -22,5 +22,39 @@ module test_nitunit
 class X
 	# a 'failure' unit test (does not compile)
 	#     assert undefined_identifier
-	fun toto do end
+	fun foo do end
+
+	fun foo1(a, b: Int) do end
+
+	private fun foo2: Bool do return true
+
+	var foo3: Y[X] = new Y[X]
+end
+
+class Y[E: X]
+	fun [](e: Int): Int do return e
+	fun []=(e, i: Int) do end
+
+	fun +(e: Int): Int do return e
+	fun -(e: Int): Int do return e
+	fun *(e: Int): Int do return e
+	fun /(e: Int): Int do return e
+	fun %(e: Int): Int do return e
+	fun -: Int do return -1
+
+	redef fun ==(e) do return true
+	redef fun !=(e) do return true
+
+	fun <(e: Int): Bool do return true
+	fun <=(e: Int): Bool do return true
+	fun <=>(e: Int): Bool do return true
+	fun >=(e: Int): Bool do return true
+	fun >(e: Int): Bool do return true
+end
+
+class Z
+	fun [](i, j: Int): Bool do return true
+	fun []=(i, j: Int, k: Bool) do end
+	fun foo=(i, j: Int) do end
+	fun bar=(i, j, k: Int) do end
 end

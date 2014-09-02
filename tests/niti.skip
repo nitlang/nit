@@ -20,3 +20,5 @@ nitcc_parser_gen
 mnit
 emscripten
 nitserial_args
+nitunit_args2
+nitunit_args3
