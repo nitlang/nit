@@ -386,5 +386,3 @@ class POSetBucketsColorer[H: Object, E: Object]
 		return true
 	end
 end
-
-

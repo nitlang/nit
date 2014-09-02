@@ -394,7 +394,7 @@ class MakefileToolchain
 			if f.compiles_to_o_file then ofiles.add(o)
 			if f.add_to_jar then java_files.add(f)
 		end
-		
+
 		if not java_files.is_empty then
 			var jar_file = "{outpath}.jar"
 
@@ -642,10 +642,12 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	end
 
 	# Generate the main C function.
+	#
 	# This function:
-	# 	* allocate the Sys object if it exists
-	# 	* call init if is exists
-	# 	* call main if it exists
+	#
+	# * allocate the Sys object if it exists
+	# * call init if is exists
+	# * call main if it exists
 	fun compile_main_function
 	do
 		var v = self.new_visitor
@@ -929,12 +931,13 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 	end
 
 	# Display stats about compilation process
+	#
 	# Metrics used:
-	#	* type tests against resolved types (`x isa Collection[Animal]`)
-	#	* type tests against unresolved types (`x isa Collection[E]`)
-	#	* type tests skipped
-	#	* type tests total
-	# 	*
+	#
+	# * type tests against resolved types (`x isa Collection[Animal]`)
+	# * type tests against unresolved types (`x isa Collection[E]`)
+	# * type tests skipped
+	# * type tests total
 	fun display_stats
 	do
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
@@ -1250,7 +1253,7 @@ abstract class AbstractCompilerVisitor
 	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
- 	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
+	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -1311,7 +1314,7 @@ abstract class AbstractCompilerVisitor
 		var mtype = recv.mtype
 		var finalizable_type = compiler.mainmodule.finalizable_type
 		if finalizable_type != null and not mtype.need_anchor and
-		   mtype.is_subtype(compiler.mainmodule, null, finalizable_type) then
+				mtype.is_subtype(compiler.mainmodule, null, finalizable_type) then
 			add "gc_register_finalizer({recv});"
 		end
 	end
@@ -3018,4 +3021,3 @@ for mmodule in mmodules do
 	end
 	toolcontext.run_global_phases(ms)
 end
-

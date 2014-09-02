@@ -1,3 +1,4 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #

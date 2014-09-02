@@ -136,7 +136,7 @@ redef class AAnnotation
 		else
 			for arg in args do
 				var format_error = "Annotation error: \"{name}\" expects its arguments to be of type Int or a call to `git_revision`"
-				
+
 				var value
 				value = arg.as_int
 				if value != null then
