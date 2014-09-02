@@ -29,9 +29,12 @@ shift
 /usr/bin/time -f%U -o "${name}.t.out" "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
 res=$?
 
+c=`echo "${name%-*}" | tr "-" "."`
+n=${name##*-}
+
 cat > "${name}.xml"<<END
 <testsuites><testsuite>
-<testcase classname='other' name='$name' time='`cat "${name}.t.out"`' timestamp='`date -Iseconds`'>
+<testcase classname='$c' name='$n' time='`cat "${name}.t.out"`' timestamp='`date -Iseconds`'>
 END
 if test "$res" != "0"; then
 echo >> "${name}.xml" "<error message='Command returned $res'/>"
