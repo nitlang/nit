@@ -24,7 +24,7 @@
 # of `Sys::jni_env`, and multiple JVM using `Sys::jvm`.
 #
 # The module `jvm` gives more control over the JVM instances and wraps
-# most of JNI functions. You can use it to further customize the behavior 
+# most of JNI functions. You can use it to further customize the behavior
 # of your code.
 module java is
 	c_compiler_option("-I $(JAVA_HOME)/include/")
@@ -173,7 +173,7 @@ redef extern class JavaObject
 		var jni_env = sys.jni_env
 		return pop_from_local_frame_with_env(jni_env)
 	end
-	
+
 	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
 		return (*jni_env)->PopLocalFrame(jni_env, recv);
 	`}

@@ -22,7 +22,7 @@
 module audio
 
 import java
-import java_io
+import java::io
 import assets_and_resources
 import app
 

@@ -1,4 +1,4 @@
-# this file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2014 Romain Chanoir <romain.chanoir@viacesi.fr>
 #
@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# java io services
+# Services from the `java.io` package
 #
-# this module is used by `assets_and_resources` and `audio` for advanced purposes
-module java_io
+# This module is used by `android::assets_and_resources` and `android::audio`.
+module io
 
 import java
 
@@ -28,7 +28,6 @@ in "Java" `{
 	import java.io.FileDescriptor;
 	import java.io.IOException;
 	import java.io.SyncFailedException;
-	import android.util.Log;
 `}
 
 extern class NativeFile in "Java" `{ java.io.File `}
@@ -42,7 +41,6 @@ extern class NativeFile in "Java" `{ java.io.File `}
 		try {
 			return recv.createNewFile();
 		}catch(IOException e){
-			Log.e("Can't create file", e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -56,7 +54,6 @@ extern class NativeFile in "Java" `{ java.io.File `}
 		try {
 			return recv.getCanonicalFile();
 		}catch(IOException e){
-			Log.e("Can't create file", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
