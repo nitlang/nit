@@ -364,7 +364,7 @@ abstract class Text
 			if iter.item.ascii > 32 then break
 			iter.next
 		end
-		if iter.index == length then return self.empty
+		if iter.index < 0 then return self.empty
 		return self.substring(0, iter.index + 1)
 	end
 
@@ -1136,7 +1136,7 @@ private class FlatStringReverseIterator
 		curr_pos = pos + tgt.index_from
 	end
 
-	redef fun is_ok do return curr_pos >= 0
+	redef fun is_ok do return curr_pos >= target.index_from
 
 	redef fun item do return target_items[curr_pos]
 
