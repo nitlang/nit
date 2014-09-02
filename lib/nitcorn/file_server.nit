@@ -48,6 +48,9 @@ class FileServer
 	# Error page template for a given `code`
 	fun error_page(code: Int): Streamable do return new ErrorTemplate(code)
 
+	# Header of each directory page
+	var header: nullable Streamable = null is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -91,6 +94,12 @@ class FileServer
 						links.add "<a href=\"{path}\">{file}</a>"
 					end
 
+					var header = self.header
+					var header_code
+					if header != null then
+						header_code = header.write_to_string
+					else header_code = ""
+
 					response.body = """
 <!DOCTYPE html>
 <head>
@@ -100,6 +109,7 @@ class FileServer
 	<title>{{{title}}}</title>
 </head>
 <body>
+	{{{header_code}}}
 	<div class="container">
 		<h1>{{{title}}}</h1>
 		<ul>
@@ -129,6 +139,7 @@ class FileServer
 
 		if response.status_code != 200 then
 			var tmpl = error_page(response.status_code)
+			if header != null and tmpl isa ErrorTemplate then tmpl.header = header
 			response.body = tmpl.to_s
 		end
 
