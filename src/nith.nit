@@ -21,7 +21,7 @@ import modelize
 import transform
 
 import rapid_type_analysis
-import separate_erasure_compiler
+import compiler::separate_erasure_compiler
 
 redef class ToolContext
 	redef fun process_options(args)

@@ -20,8 +20,8 @@ module debugger
 import breakpoint
 intrude import naive_interpreter
 import nitx
-intrude import local_var_init
-intrude import scope
+intrude import semantize::local_var_init
+intrude import semantize::scope
 intrude import toolcontext
 private import parser_util
 

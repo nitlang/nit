@@ -17,7 +17,7 @@
 # Implementation of the Nit virtual machine
 module vm
 
-intrude import naive_interpreter
+intrude import interpreter::naive_interpreter
 import model_utils
 import perfect_hashing
 
