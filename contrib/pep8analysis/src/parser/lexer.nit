@@ -6,14 +6,14 @@ intrude import parser_nodes
 private import tables
 
 redef class Token
-    var _text: nullable String
+    var text_cache: nullable String
 
     redef fun text
     do
-        var res = _text
+        var res = _text_cache
         if res != null then return res
         res = location.text
-	_text = res
+	_text_cache = res
 	return res
     end
 
@@ -245,7 +245,7 @@ redef class EOF
 
     init(loc: Location)
     do
-        _text = ""
+        _text_cache = ""
 		_location = loc
     end
 end
@@ -266,25 +266,25 @@ end
 class Lexer
 	super TablesCapable
 	# Last peeked token
-	var _token: nullable Token
+	var token: nullable Token
 
 	# Lexer current state
-	var _state: Int = 0
+	var state: Int = 0
 
 	# The source file
-	var _file: SourceFile
+	var file: SourceFile
 
 	# Current character in the stream
-	var _stream_pos: Int = 0
+	var stream_pos: Int = 0
 
 	# Current line number in the input stream
-	var _line: Int = 0
+	var line: Int = 0
 
 	# Current column in the input stream
-	var _pos: Int = 0
+	var pos: Int = 0
 
 	# Was the last character a cariage-return?
-	var _cr: Bool = false
+	var cr: Bool = false
 
 	# Constante state values
 	private fun state_initial: Int do return 0 end
