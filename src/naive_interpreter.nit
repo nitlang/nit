@@ -18,7 +18,6 @@
 module naive_interpreter
 
 import literal
-import common_ffi
 import semantize
 private import parser::tables
 
