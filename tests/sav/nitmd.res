@@ -1,0 +1,1 @@
+usage: nitmd <file.md>
