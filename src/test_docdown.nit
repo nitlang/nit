@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Program to test the `markdown` module on real source files.
-module test_markdown
+module test_docdown
 
 import modelize
 import highlight
