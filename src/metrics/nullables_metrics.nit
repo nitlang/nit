@@ -17,7 +17,7 @@
 # Statistics about the usage of nullables
 module nullables_metrics
 
-import model_utils
+import metrics_base
 import mclasses_metrics
 import semantize
 

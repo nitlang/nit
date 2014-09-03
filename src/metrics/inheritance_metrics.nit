@@ -17,11 +17,9 @@
 # Collect metrics about inheritance usage
 module inheritance_metrics
 
-import model
+import metrics_base
 import mmodules_metrics
 import mclasses_metrics
-import phase
-import frontend
 
 redef class ToolContext
 	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)

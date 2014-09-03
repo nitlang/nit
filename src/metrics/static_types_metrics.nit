@@ -17,8 +17,8 @@
 # Metrics on the usage of explicit static types.
 module static_types_metrics
 
-private import metrics_base
-import frontend
+import metrics_base
+import modelize
 
 redef class ToolContext
 	var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)

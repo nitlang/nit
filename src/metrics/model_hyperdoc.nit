@@ -17,10 +17,7 @@
 # Dump of Nit model into hypertext human-readable format.
 module model_hyperdoc
 
-import model
 import metrics_base
-import phase
-import frontend
 
 redef class ToolContext
 	var model_hyperdoc_phase: Phase = new ModelHyperdocPhase(self, null)

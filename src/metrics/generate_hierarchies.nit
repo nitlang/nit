@@ -18,9 +18,7 @@
 # See graphviz http://www.graphviz.org/
 module generate_hierarchies
 
-import model
-private import metrics_base
-import frontend
+import metrics_base
 import model_viz
 
 redef class ToolContext

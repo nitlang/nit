@@ -17,9 +17,7 @@
 # Metrics on table generation
 module tables_metrics
 
-import model
-private import metrics_base
-import frontend
+import metrics_base
 
 redef class ToolContext
 	var tables_metrics_phase: Phase = new TablesMetricsPhase(self, null)
