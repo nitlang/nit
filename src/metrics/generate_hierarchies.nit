@@ -19,7 +19,7 @@
 module generate_hierarchies
 
 import metrics_base
-import model_viz
+import model::model_viz
 
 redef class ToolContext
 	var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)
