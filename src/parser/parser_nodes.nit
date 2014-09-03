@@ -14,7 +14,7 @@
 
 # AST nodes of the Nit language
 # Was previously based on parser_abs.nit.
-module parser_nodes is old_style_init
+module parser_nodes
 
 import location
 
@@ -87,9 +87,6 @@ abstract class ANode
 			res += 1
 		end
 	end
-
-	# Protect from invalid instantiation of nodes
-	private init do end
 
 	# Replace a child with an other node in the AST
 	private fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
@@ -683,34 +680,20 @@ end
 class AModule
 	super Prod
 
-	var _n_moduledecl: nullable AModuledecl = null
-	fun n_moduledecl: nullable AModuledecl do return _n_moduledecl
-	fun n_moduledecl=(n_moduledecl: nullable AModuledecl) do _n_moduledecl = n_moduledecl
+	var n_moduledecl: nullable AModuledecl = null is writable
 	var n_imports: ANodes[AImport] = new ANodes[AImport](self)
 	var n_extern_code_blocks: ANodes[AExternCodeBlock] = new ANodes[AExternCodeBlock](self)
 	var n_classdefs: ANodes[AClassdef] = new ANodes[AClassdef](self)
-	init do end
 end
 
 # The declaration of the module with the documentation, name, and annotations
 class AModuledecl
 	super Prod
-	var _n_doc: nullable ADoc = null
-	fun n_doc: nullable ADoc do return _n_doc
-	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
-	var _n_kwredef: nullable TKwredef = null
-	fun n_kwredef: nullable TKwredef do return _n_kwredef
-	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
-	var _n_visibility: AVisibility
-	fun n_visibility: AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
-	var _n_kwmodule: TKwmodule
-	fun n_kwmodule: TKwmodule do return _n_kwmodule
-	fun n_kwmodule=(n_kwmodule: TKwmodule) do _n_kwmodule = n_kwmodule
-	var _n_name: AModuleName
-	fun n_name: AModuleName do return _n_name
-	fun n_name=(n_name: AModuleName) do _n_name = n_name
-	init do end
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwmodule: TKwmodule is writable, noinit
+	var n_name: AModuleName is writable, noinit
 end
 
 # A import clause of a module
@@ -721,31 +704,17 @@ end
 # A standard import clause. eg `import x`
 class AStdImport
 	super AImport
-	var _n_visibility: AVisibility
-	fun n_visibility: AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
-	var _n_kwimport: TKwimport
-	fun n_kwimport: TKwimport do return _n_kwimport
-	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
-	var _n_name: AModuleName
-	fun n_name: AModuleName do return _n_name
-	fun n_name=(n_name: AModuleName) do _n_name = n_name
-	init do end
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwimport: TKwimport is writable, noinit
+	var n_name: AModuleName is writable, noinit
 end
 
 # The special import clause of the kernel module. eg `import end`
 class ANoImport
 	super AImport
-	var _n_visibility: AVisibility
-	fun n_visibility: AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
-	var _n_kwimport: TKwimport
-	fun n_kwimport: TKwimport do return _n_kwimport
-	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
-	var _n_kwend: TKwend
-	fun n_kwend: TKwend do return _n_kwend
-	fun n_kwend=(n_kwend: TKwend) do _n_kwend = n_kwend
-	init do end
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwimport: TKwimport is writable, noinit
+	var n_kwend: TKwend is writable, noinit
 end
 
 # A visibility modifier
@@ -759,31 +728,19 @@ abstract class AVisibility
 end
 class APublicVisibility
 	super AVisibility
-	var _n_kwpublic: nullable TKwpublic
-	fun n_kwpublic: nullable TKwpublic do return _n_kwpublic
-	fun n_kwpublic=(n_kwpublic: nullable TKwpublic) do _n_kwpublic = n_kwpublic
-	init do end
+	var n_kwpublic: nullable TKwpublic is writable
 end
 class APrivateVisibility
 	super AVisibility
-	var _n_kwprivate: TKwprivate
-	fun n_kwprivate: TKwprivate do return _n_kwprivate
-	fun n_kwprivate=(n_kwprivate: TKwprivate) do _n_kwprivate = n_kwprivate
-	init do end
+	var n_kwprivate: TKwprivate is writable, noinit
 end
 class AProtectedVisibility
 	super AVisibility
-	var _n_kwprotected: TKwprotected
-	fun n_kwprotected: TKwprotected do return _n_kwprotected
-	fun n_kwprotected=(n_kwprotected: TKwprotected) do _n_kwprotected = n_kwprotected
-	init do end
+	var n_kwprotected: TKwprotected is writable, noinit
 end
 class AIntrudeVisibility
 	super AVisibility
-	var _n_kwintrude: TKwintrude
-	fun n_kwintrude: TKwintrude do return _n_kwintrude
-	fun n_kwintrude=(n_kwintrude: TKwintrude) do _n_kwintrude = n_kwintrude
-	init do end
+	var n_kwintrude: TKwintrude is writable, noinit
 end
 
 # A class definition
@@ -792,37 +749,21 @@ end
 abstract class AClassdef
 	super Prod
 	var n_propdefs: ANodes[APropdef] = new ANodes[APropdef](self)
-	init do end
 end
 
 # A standard class definition with a name, superclasses and properties
 class AStdClassdef
 	super AClassdef
-	var _n_doc: nullable ADoc = null
-	fun n_doc: nullable ADoc do return _n_doc
-	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
-	var _n_kwredef: nullable TKwredef = null
-	fun n_kwredef: nullable TKwredef do return _n_kwredef
-	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
-	var _n_visibility: AVisibility
-	fun n_visibility: AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: AVisibility) do _n_visibility = n_visibility
-	var _n_classkind: AClasskind
-	fun n_classkind: AClasskind do return _n_classkind
-	fun n_classkind=(n_classkind: AClasskind) do _n_classkind = n_classkind
-	var _n_id: nullable TClassid = null
-	fun n_id: nullable TClassid do return _n_id
-	fun n_id=(n_id: nullable TClassid) do _n_id = n_id
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: AVisibility is writable, noinit
+	var n_classkind: AClasskind is writable, noinit
+	var n_id: nullable TClassid = null is writable
 	var n_formaldefs: ANodes[AFormaldef] = new ANodes[AFormaldef](self)
-	var _n_extern_code_block: nullable AExternCodeBlock = null
-	fun n_extern_code_block: nullable AExternCodeBlock do return _n_extern_code_block
-	fun n_extern_code_block=(n_extern_code_block: nullable AExternCodeBlock) do _n_extern_code_block = n_extern_code_block
+	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 	var n_superclasses: ANodes[ASuperclass] = new ANodes[ASuperclass](self)
-	var _n_kwend: TKwend
-	fun n_kwend: TKwend do return _n_kwend
-	fun n_kwend=(n_kwend: TKwend) do _n_kwend = n_kwend
+	var n_kwend: TKwend is writable, noinit
 	redef fun hot_location do return n_id.location
-	init do end
 end
 
 # The implicit class definition of the implicit main method
@@ -841,154 +782,86 @@ abstract class AClasskind
 end
 class AConcreteClasskind
 	super AClasskind
-	var _n_kwclass: TKwclass
-	fun n_kwclass: TKwclass do return _n_kwclass
-	fun n_kwclass=(n_kwclass: TKwclass) do _n_kwclass = n_kwclass
-	init do end
+	var n_kwclass: TKwclass is writable, noinit
 end
 class AAbstractClasskind
 	super AClasskind
-	var _n_kwabstract: TKwabstract
-	fun n_kwabstract: TKwabstract do return _n_kwabstract
-	fun n_kwabstract=(n_kwabstract: TKwabstract) do _n_kwabstract = n_kwabstract
-	var _n_kwclass: TKwclass
-	fun n_kwclass: TKwclass do return _n_kwclass
-	fun n_kwclass=(n_kwclass: TKwclass) do _n_kwclass = n_kwclass
-	init do end
+	var n_kwabstract: TKwabstract is writable, noinit
+	var n_kwclass: TKwclass is writable, noinit
 end
 class AInterfaceClasskind
 	super AClasskind
-	var _n_kwinterface: TKwinterface
-	fun n_kwinterface: TKwinterface do return _n_kwinterface
-	fun n_kwinterface=(n_kwinterface: TKwinterface) do _n_kwinterface = n_kwinterface
-	init do end
+	var n_kwinterface: TKwinterface is writable, noinit
 end
 class AEnumClasskind
 	super AClasskind
-	var _n_kwenum: TKwenum
-	fun n_kwenum: TKwenum do return _n_kwenum
-	fun n_kwenum=(n_kwenum: TKwenum) do _n_kwenum = n_kwenum
-	init do end
+	var n_kwenum: TKwenum is writable, noinit
 end
 class AExternClasskind
 	super AClasskind
-	var _n_kwextern: TKwextern
-	fun n_kwextern: TKwextern do return _n_kwextern
-	fun n_kwextern=(n_kwextern: TKwextern) do _n_kwextern = n_kwextern
-	var _n_kwclass: nullable TKwclass = null
-	fun n_kwclass: nullable TKwclass do return _n_kwclass
-	fun n_kwclass=(n_kwclass: nullable TKwclass) do _n_kwclass = n_kwclass
-	init do end
+	var n_kwextern: TKwextern is writable, noinit
+	var n_kwclass: nullable TKwclass = null is writable
 end
 
 # The definition of a formal generic parameter type. eg `X: Y`
 class AFormaldef
 	super Prod
-	var _n_id: TClassid
-	fun n_id: TClassid do return _n_id
-	fun n_id=(n_id: TClassid) do _n_id = n_id
+	var n_id: TClassid is writable, noinit
 	# The bound of the parameter type
-	var _n_type: nullable AType = null
-	fun n_type: nullable AType do return _n_type
-	fun n_type=(n_type: nullable AType) do _n_type = n_type
-	init do end
+	var n_type: nullable AType = null is writable
 end
 
 # A super-class. eg `super X`
 class ASuperclass
 	super Prod
-	var _n_kwsuper: TKwsuper
-	fun n_kwsuper: TKwsuper do return _n_kwsuper
-	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_kwsuper: TKwsuper is writable, noinit
+	var n_type: AType is writable, noinit
 end
 
 # The definition of a property
 abstract class APropdef
 	super Prod
-	var _n_doc: nullable ADoc = null
-	fun n_doc: nullable ADoc do return _n_doc
-	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
-	var _n_kwredef: nullable TKwredef = null
-	fun n_kwredef: nullable TKwredef do return _n_kwredef
-	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
-	var _n_visibility: nullable AVisibility = null
-	fun n_visibility: nullable AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: nullable AVisibility = null is writable
 end
 
 # A definition of an attribute
 # For historical reason, old-syle and new-style attributes use the same `ANode` sub-class
 class AAttrPropdef
 	super APropdef
-	var _n_kwvar: TKwvar
-	fun n_kwvar: TKwvar do return _n_kwvar
-	fun n_kwvar=(n_kwvar: TKwvar) do _n_kwvar = n_kwvar
+	var n_kwvar: TKwvar is writable, noinit
 
 	# The identifier for an old-style attribute (null if new-style)
-	var _n_id: nullable TAttrid
-	fun n_id: nullable TAttrid do return _n_id
-	fun n_id=(n_id: nullable TAttrid) do _n_id = n_id
+	var n_id: nullable TAttrid is writable
 
 	# The identifier for a new-style attribute (null if old-style)
-	var _n_id2: nullable TId
-	fun n_id2: nullable TId do return _n_id2
-	fun n_id2=(n_id2: nullable TId) do _n_id2 = n_id2
+	var n_id2: nullable TId is writable
 
-	var _n_type: nullable AType = null
-	fun n_type: nullable AType do return _n_type
-	fun n_type=(n_type: nullable AType) do _n_type = n_type
-	var _n_readable: nullable AAble = null
-	fun n_readable: nullable AAble do return _n_readable
-	fun n_readable=(n_readable: nullable AAble) do _n_readable = n_readable
-	var _n_writable: nullable AAble = null
-	fun n_writable: nullable AAble do return _n_writable
-	fun n_writable=(n_writable: nullable AAble) do _n_writable = n_writable
+	var n_type: nullable AType = null is writable
+	var n_readable: nullable AAble = null is writable
+	var n_writable: nullable AAble = null is writable
 
 	# The initial value, if any
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
+	var n_expr: nullable AExpr = null is writable
 	redef fun hot_location
 	do
 		if n_id != null then return n_id.location else return n_id2.location
 	end
-	init do end
 end
 
 # A definition of all kind of method (including constructors)
 abstract class AMethPropdef
 	super APropdef
-	var _n_kwmeth: nullable TKwmeth = null
-	fun n_kwmeth: nullable TKwmeth do return _n_kwmeth
-	fun n_kwmeth=(n_kwmeth: nullable TKwmeth) do _n_kwmeth = n_kwmeth
-	var _n_kwinit: nullable TKwinit = null
-	fun n_kwinit: nullable TKwinit do return _n_kwinit
-	fun n_kwinit=(n_kwinit: nullable TKwinit) do _n_kwinit = n_kwinit
-	var _n_kwnew: nullable TKwnew = null
-	fun n_kwnew: nullable TKwnew do return _n_kwnew
-	fun n_kwnew=(n_kwnew: nullable TKwnew) do _n_kwnew = n_kwnew
-	var _n_methid: nullable AMethid = null
-	fun n_methid: nullable AMethid do return _n_methid
-	fun n_methid=(n_methid: nullable AMethid) do _n_methid = n_methid
-	var _n_signature: nullable ASignature = null
-	fun n_signature: nullable ASignature do return _n_signature
-	fun n_signature=(n_signature: nullable ASignature) do _n_signature = n_signature
-	var _n_block: nullable AExpr = null
-	fun n_block: nullable AExpr do return _n_block
-	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
-	var _n_extern: nullable TString = null
-	fun n_extern: nullable TString do return _n_extern
-	fun n_extern=(n_extern: nullable TString) do _n_extern = n_extern
-	var _n_extern_calls: nullable AExternCalls = null
-	fun n_extern_calls: nullable AExternCalls do return _n_extern_calls
-	fun n_extern_calls=(n_extern_calls: nullable AExternCalls) do _n_extern_calls = n_extern_calls
-	var _n_extern_code_block: nullable AExternCodeBlock = null
-	fun n_extern_code_block: nullable AExternCodeBlock do return _n_extern_code_block
-	fun n_extern_code_block=(n_extern_code_block: nullable AExternCodeBlock) do _n_extern_code_block = n_extern_code_block
+	var n_kwmeth: nullable TKwmeth = null is writable
+	var n_kwinit: nullable TKwinit = null is writable
+	var n_kwnew: nullable TKwnew = null is writable
+	var n_methid: nullable AMethid = null is writable
+	var n_signature: nullable ASignature = null is writable
+	var n_block: nullable AExpr = null is writable
+	var n_extern: nullable TString = null is writable
+	var n_extern_calls: nullable AExternCalls = null is writable
+	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 	redef fun hot_location
 	do
 		if n_methid != null then
@@ -1059,11 +932,8 @@ end
 # Declaration of callbacks for extern methods
 class AExternCalls
 	super Prod
-	var _n_kwimport: TKwimport
-	fun n_kwimport: TKwimport do return _n_kwimport
-	fun n_kwimport=(n_kwimport: TKwimport) do _n_kwimport = n_kwimport
+	var n_kwimport: TKwimport is writable, noinit
 	var n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
-	init do end
 end
 abstract class AExternCall
 	super Prod
@@ -1073,130 +943,71 @@ abstract class APropExternCall
 end
 class ALocalPropExternCall
 	super APropExternCall
-	var _n_methid: AMethid
-	fun n_methid: AMethid do return _n_methid
-	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
-	init do end
+	var n_methid: AMethid is writable, noinit
 end
 class AFullPropExternCall
 	super APropExternCall
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	var _n_dot: nullable TDot = null
-	fun n_dot: nullable TDot do return _n_dot
-	fun n_dot=(n_dot: nullable TDot) do _n_dot = n_dot
-	var _n_methid: AMethid
-	fun n_methid: AMethid do return _n_methid
-	fun n_methid=(n_methid: AMethid) do _n_methid = n_methid
-	init do end
+	var n_type: AType is writable, noinit
+	var n_dot: nullable TDot = null is writable
+	var n_methid: AMethid is writable, noinit
 end
 class AInitPropExternCall
 	super APropExternCall
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_type: AType is writable, noinit
 end
 class ASuperExternCall
 	super AExternCall
-	var _n_kwsuper: TKwsuper
-	fun n_kwsuper: TKwsuper do return _n_kwsuper
-	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
-	init do end
+	var n_kwsuper: TKwsuper is writable, noinit
 end
 abstract class ACastExternCall
 	super AExternCall
 end
 class ACastAsExternCall
 	super ACastExternCall
-	var _n_from_type: AType
-	fun n_from_type: AType do return _n_from_type
-	fun n_from_type=(n_from_type: AType) do _n_from_type = n_from_type
-	var _n_dot: nullable TDot = null
-	fun n_dot: nullable TDot do return _n_dot
-	fun n_dot=(n_dot: nullable TDot) do _n_dot = n_dot
-	var _n_kwas: TKwas
-	fun n_kwas: TKwas do return _n_kwas
-	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
-	var _n_to_type: AType
-	fun n_to_type: AType do return _n_to_type
-	fun n_to_type=(n_to_type: AType) do _n_to_type = n_to_type
-	init do end
+	var n_from_type: AType is writable, noinit
+	var n_dot: nullable TDot = null is writable
+	var n_kwas: TKwas is writable, noinit
+	var n_to_type: AType is writable, noinit
 end
 class AAsNullableExternCall
 	super ACastExternCall
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	var _n_kwas: TKwas
-	fun n_kwas: TKwas do return _n_kwas
-	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
-	var _n_kwnullable: TKwnullable
-	fun n_kwnullable: TKwnullable do return _n_kwnullable
-	fun n_kwnullable=(n_kwnullable: TKwnullable) do _n_kwnullable = n_kwnullable
-	init do end
+	var n_type: AType is writable, noinit
+	var n_kwas: TKwas is writable, noinit
+	var n_kwnullable: TKwnullable is writable, noinit
 end
 class AAsNotNullableExternCall
 	super ACastExternCall
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	var _n_kwas: TKwas
-	fun n_kwas: TKwas do return _n_kwas
-	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
-	var _n_kwnot: TKwnot
-	fun n_kwnot: TKwnot do return _n_kwnot
-	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
-	var _n_kwnullable: TKwnullable
-	fun n_kwnullable: TKwnullable do return _n_kwnullable
-	fun n_kwnullable=(n_kwnullable: TKwnullable) do _n_kwnullable = n_kwnullable
-	init do end
+	var n_type: AType is writable, noinit
+	var n_kwas: TKwas is writable, noinit
+	var n_kwnot: TKwnot is writable, noinit
+	var n_kwnullable: TKwnullable is writable, noinit
 end
 
 # A definition of a virtual type
 class ATypePropdef
 	super APropdef
-	var _n_kwtype: TKwtype
-	fun n_kwtype: TKwtype do return _n_kwtype
-	fun n_kwtype=(n_kwtype: TKwtype) do _n_kwtype = n_kwtype
-	var _n_id: TClassid
-	fun n_id: TClassid do return _n_id
-	fun n_id=(n_id: TClassid) do _n_id = n_id
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_kwtype: TKwtype is writable, noinit
+	var n_id: TClassid is writable, noinit
+	var n_type: AType is writable, noinit
 end
 
 # A `writable` or `readable` modifier
 abstract class AAble
 	super Prod
-	var _n_visibility: nullable AVisibility = null
-	fun n_visibility: nullable AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
-	var _n_kwredef: nullable TKwredef = null
-	fun n_kwredef: nullable TKwredef do return _n_kwredef
-	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
-	init do end
+	var n_visibility: nullable AVisibility = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
 end
 
 # A `readable` modifier
 class AReadAble
 	super AAble
-	var _n_kwreadable: TKwreadable
-	fun n_kwreadable: TKwreadable do return _n_kwreadable
-	fun n_kwreadable=(n_kwreadable: TKwreadable) do _n_kwreadable = n_kwreadable
-	init do end
+	var n_kwreadable: TKwreadable is writable, noinit
 end
 
 # A `writable` modifier
 class AWriteAble
 	super AAble
-	var _n_kwwritable: TKwwritable
-	fun n_kwwritable: TKwwritable do return _n_kwwritable
-	fun n_kwwritable=(n_kwwritable: TKwwritable) do _n_kwwritable = n_kwwritable
-	init do end
+	var n_kwwritable: TKwwritable is writable, noinit
 end
 
 # The identifier of a method in a method declaration.
@@ -1206,201 +1017,115 @@ abstract class AMethid
 end
 class AIdMethid
 	super AMethid
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	init do end
+	var n_id: TId is writable, noinit
 end
 class APlusMethid
 	super AMethid
-	var _n_plus: TPlus
-	fun n_plus: TPlus do return _n_plus
-	fun n_plus=(n_plus: TPlus) do _n_plus = n_plus
-	init do end
+	var n_plus: TPlus is writable, noinit
 end
 class AMinusMethid
 	super AMethid
-	var _n_minus: TMinus
-	fun n_minus: TMinus do return _n_minus
-	fun n_minus=(n_minus: TMinus) do _n_minus = n_minus
-	init do end
+	var n_minus: TMinus is writable, noinit
 end
 class AStarMethid
 	super AMethid
-	var _n_star: TStar
-	fun n_star: TStar do return _n_star
-	fun n_star=(n_star: TStar) do _n_star = n_star
-	init do end
+	var n_star: TStar is writable, noinit
 end
 class ASlashMethid
 	super AMethid
-	var _n_slash: TSlash
-	fun n_slash: TSlash do return _n_slash
-	fun n_slash=(n_slash: TSlash) do _n_slash = n_slash
-	init do end
+	var n_slash: TSlash is writable, noinit
 end
 class APercentMethid
 	super AMethid
-	var _n_percent: TPercent
-	fun n_percent: TPercent do return _n_percent
-	fun n_percent=(n_percent: TPercent) do _n_percent = n_percent
-	init do end
+	var n_percent: TPercent is writable, noinit
 end
 class AEqMethid
 	super AMethid
-	var _n_eq: TEq
-	fun n_eq: TEq do return _n_eq
-	fun n_eq=(n_eq: TEq) do _n_eq = n_eq
-	init do end
+	var n_eq: TEq is writable, noinit
 end
 class ANeMethid
 	super AMethid
-	var _n_ne: TNe
-	fun n_ne: TNe do return _n_ne
-	fun n_ne=(n_ne: TNe) do _n_ne = n_ne
-	init do end
+	var n_ne: TNe is writable, noinit
 end
 class ALeMethid
 	super AMethid
-	var _n_le: TLe
-	fun n_le: TLe do return _n_le
-	fun n_le=(n_le: TLe) do _n_le = n_le
-	init do end
+	var n_le: TLe is writable, noinit
 end
 class AGeMethid
 	super AMethid
-	var _n_ge: TGe
-	fun n_ge: TGe do return _n_ge
-	fun n_ge=(n_ge: TGe) do _n_ge = n_ge
-	init do end
+	var n_ge: TGe is writable, noinit
 end
 class ALtMethid
 	super AMethid
-	var _n_lt: TLt
-	fun n_lt: TLt do return _n_lt
-	fun n_lt=(n_lt: TLt) do _n_lt = n_lt
-	init do end
+	var n_lt: TLt is writable, noinit
 end
 class AGtMethid
 	super AMethid
-	var _n_gt: TGt
-	fun n_gt: TGt do return _n_gt
-	fun n_gt=(n_gt: TGt) do _n_gt = n_gt
-	init do end
+	var n_gt: TGt is writable, noinit
 end
 class ALlMethid
 	super AMethid
-	var _n_ll: TLl
-	fun n_ll: TLl do return _n_ll
-	fun n_ll=(n_ll: TLl) do _n_ll = n_ll
-	init do end
+	var n_ll: TLl is writable, noinit
 end
 class AGgMethid
 	super AMethid
-	var _n_gg: TGg
-	fun n_gg: TGg do return _n_gg
-	fun n_gg=(n_gg: TGg) do _n_gg = n_gg
-	init do end
+	var n_gg: TGg is writable, noinit
 end
 class ABraMethid
 	super AMethid
-	var _n_obra: TObra
-	fun n_obra: TObra do return _n_obra
-	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
-	var _n_cbra: TCbra
-	fun n_cbra: TCbra do return _n_cbra
-	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
-	init do end
+	var n_obra: TObra is writable, noinit
+	var n_cbra: TCbra is writable, noinit
 end
 class AStarshipMethid
 	super AMethid
-	var _n_starship: TStarship
-	fun n_starship: TStarship do return _n_starship
-	fun n_starship=(n_starship: TStarship) do _n_starship = n_starship
-	init do end
+	var n_starship: TStarship is writable, noinit
 end
 class AAssignMethid
 	super AMethid
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	var _n_assign: TAssign
-	fun n_assign: TAssign do return _n_assign
-	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
-	init do end
+	var n_id: TId is writable, noinit
+	var n_assign: TAssign is writable, noinit
 end
 class ABraassignMethid
 	super AMethid
-	var _n_obra: TObra
-	fun n_obra: TObra do return _n_obra
-	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
-	var _n_cbra: TCbra
-	fun n_cbra: TCbra do return _n_cbra
-	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
-	var _n_assign: TAssign
-	fun n_assign: TAssign do return _n_assign
-	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
-	init do end
+	var n_obra: TObra is writable, noinit
+	var n_cbra: TCbra is writable, noinit
+	var n_assign: TAssign is writable, noinit
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod
-	var _n_opar: nullable TOpar = null
-	fun n_opar: nullable TOpar do return _n_opar
-	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_opar: nullable TOpar = null is writable
 	var n_params: ANodes[AParam] = new ANodes[AParam](self)
-	var _n_cpar: nullable TCpar = null
-	fun n_cpar: nullable TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
-	var _n_type: nullable AType = null
-	fun n_type: nullable AType do return _n_type
-	fun n_type=(n_type: nullable AType) do _n_type = n_type
-	init do end
+	var n_cpar: nullable TCpar = null is writable
+	var n_type: nullable AType = null is writable
 end
 
 # A parameter definition in a signature. eg `x:X`
 class AParam
 	super Prod
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	var _n_type: nullable AType = null
-	fun n_type: nullable AType do return _n_type
-	fun n_type=(n_type: nullable AType) do _n_type = n_type
-	var _n_dotdotdot: nullable TDotdotdot = null
-	fun n_dotdotdot: nullable TDotdotdot do return _n_dotdotdot
-	fun n_dotdotdot=(n_dotdotdot: nullable TDotdotdot) do _n_dotdotdot = n_dotdotdot
-	init do end
+	var n_id: TId is writable, noinit
+	var n_type: nullable AType = null is writable
+	var n_dotdotdot: nullable TDotdotdot = null is writable
 end
 
 # A static type. eg `nullable X[Y]`
 class AType
 	super Prod
-	var _n_kwnullable: nullable TKwnullable = null
-	fun n_kwnullable: nullable TKwnullable do return _n_kwnullable
-	fun n_kwnullable=(n_kwnullable: nullable TKwnullable) do _n_kwnullable = n_kwnullable
+	var n_kwnullable: nullable TKwnullable = null is writable
 
 	# The name of the class or of the formal type
-	var _n_id: TClassid
-	fun n_id: TClassid do return _n_id
-	fun n_id=(n_id: TClassid) do _n_id = n_id
+	var n_id: TClassid is writable, noinit
 
 	# Type arguments for a generic type
 	var n_types: ANodes[AType] = new ANodes[AType](self)
-	init do end
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
 class ALabel
 	super Prod
-	var _n_kwlabel: TKwlabel
-	fun n_kwlabel: TKwlabel do return _n_kwlabel
-	fun n_kwlabel=(n_kwlabel: TKwlabel) do _n_kwlabel = n_kwlabel
-	var _n_id: nullable TId
-	fun n_id: nullable TId do return _n_id
-	fun n_id=(n_id: nullable TId) do _n_id = n_id
-	init do end
+	var n_kwlabel: TKwlabel is writable, noinit
+	var n_id: nullable TId is writable
 end
 
 # Expression and statements
@@ -1414,247 +1139,140 @@ end
 class ABlockExpr
 	super AExpr
 	var n_expr: ANodes[AExpr] = new ANodes[AExpr](self)
-	var _n_kwend: nullable TKwend = null
-	fun n_kwend: nullable TKwend do return _n_kwend
-	fun n_kwend=(n_kwend: nullable TKwend) do _n_kwend = n_kwend
-	init do end
+	var n_kwend: nullable TKwend = null is writable
 end
 
 # A declaration of a local variable. eg `var x: X = y`
 class AVardeclExpr
 	super AExpr
-	var _n_kwvar: TKwvar
-	fun n_kwvar: TKwvar do return _n_kwvar
-	fun n_kwvar=(n_kwvar: TKwvar) do _n_kwvar = n_kwvar
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	var _n_type: nullable AType = null
-	fun n_type: nullable AType do return _n_type
-	fun n_type=(n_type: nullable AType) do _n_type = n_type
-	var _n_assign: nullable TAssign = null
-	fun n_assign: nullable TAssign do return _n_assign
-	fun n_assign=(n_assign: nullable TAssign) do _n_assign = n_assign
+	var n_kwvar: TKwvar is writable, noinit
+	var n_id: TId is writable, noinit
+	var n_type: nullable AType = null is writable
+	var n_assign: nullable TAssign = null is writable
 
 	# The initial value, if any
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
-	init do end
+	var n_expr: nullable AExpr = null is writable
 end
 
 # A `return` statement. eg `return x`
 class AReturnExpr
 	super AExpr
-	var _n_kwreturn: nullable TKwreturn = null
-	fun n_kwreturn: nullable TKwreturn do return _n_kwreturn
-	fun n_kwreturn=(n_kwreturn: nullable TKwreturn) do _n_kwreturn = n_kwreturn
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
-	init do end
+	var n_kwreturn: nullable TKwreturn = null is writable
+	var n_expr: nullable AExpr = null is writable
 end
 
 # Something that has a label.
 abstract class ALabelable
 	super Prod
-	var _n_label: nullable ALabel = null
-	fun n_label: nullable ALabel do return _n_label
-	fun n_label=(n_label: nullable ALabel) do _n_label = n_label
-	init do end
+	var n_label: nullable ALabel = null is writable
 end
 
 # A `break` statement.
 class ABreakExpr
 	super AExpr
 	super ALabelable
-	var _n_kwbreak: TKwbreak
-	fun n_kwbreak: TKwbreak do return _n_kwbreak
-	fun n_kwbreak=(n_kwbreak: TKwbreak) do _n_kwbreak = n_kwbreak
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
-	init do end
+	var n_kwbreak: TKwbreak is writable, noinit
+	var n_expr: nullable AExpr = null is writable
 end
 
 # An `abort` statement
 class AAbortExpr
 	super AExpr
-	var _n_kwabort: TKwabort
-	fun n_kwabort: TKwabort do return _n_kwabort
-	fun n_kwabort=(n_kwabort: TKwabort) do _n_kwabort = n_kwabort
-	init do end
+	var n_kwabort: TKwabort is writable, noinit
 end
 
 # A `continue` statement
 class AContinueExpr
 	super AExpr
 	super ALabelable
-	var _n_kwcontinue: nullable TKwcontinue = null
-	fun n_kwcontinue: nullable TKwcontinue do return _n_kwcontinue
-	fun n_kwcontinue=(n_kwcontinue: nullable TKwcontinue) do _n_kwcontinue = n_kwcontinue
-	var _n_expr: nullable AExpr = null
-	fun n_expr: nullable AExpr do return _n_expr
-	fun n_expr=(n_expr: nullable AExpr) do _n_expr = n_expr
-	init do end
+	var n_kwcontinue: nullable TKwcontinue = null is writable
+	var n_expr: nullable AExpr = null is writable
 end
 
 # A `do` statement
 class ADoExpr
 	super AExpr
 	super ALabelable
-	var _n_kwdo: TKwdo
-	fun n_kwdo: TKwdo do return _n_kwdo
-	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
-	var _n_block: nullable AExpr = null
-	fun n_block: nullable AExpr do return _n_block
-	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
-	init do end
+	var n_kwdo: TKwdo is writable, noinit
+	var n_block: nullable AExpr = null is writable
 end
 
 # A `if` statement
 class AIfExpr
 	super AExpr
-	var _n_kwif: TKwif
-	fun n_kwif: TKwif do return _n_kwif
-	fun n_kwif=(n_kwif: TKwif) do _n_kwif = n_kwif
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_then: nullable AExpr = null
-	fun n_then: nullable AExpr do return _n_then
-	fun n_then=(n_then: nullable AExpr) do _n_then = n_then
-	var _n_else: nullable AExpr = null
-	fun n_else: nullable AExpr do return _n_else
-	fun n_else=(n_else: nullable AExpr) do _n_else = n_else
-	init do end
+	var n_kwif: TKwif is writable, noinit
+	var n_expr: AExpr is writable, noinit
+	var n_then: nullable AExpr = null is writable
+	var n_else: nullable AExpr = null is writable
 end
 
 # A `if` expression
 class AIfexprExpr
 	super AExpr
-	var _n_kwif: TKwif
-	fun n_kwif: TKwif do return _n_kwif
-	fun n_kwif=(n_kwif: TKwif) do _n_kwif = n_kwif
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_kwthen: TKwthen
-	fun n_kwthen: TKwthen do return _n_kwthen
-	fun n_kwthen=(n_kwthen: TKwthen) do _n_kwthen = n_kwthen
-	var _n_then: AExpr
-	fun n_then: AExpr do return _n_then
-	fun n_then=(n_then: AExpr) do _n_then = n_then
-	var _n_kwelse: TKwelse
-	fun n_kwelse: TKwelse do return _n_kwelse
-	fun n_kwelse=(n_kwelse: TKwelse) do _n_kwelse = n_kwelse
-	var _n_else: AExpr
-	fun n_else: AExpr do return _n_else
-	fun n_else=(n_else: AExpr) do _n_else = n_else
-	init do end
+	var n_kwif: TKwif is writable, noinit
+	var n_expr: AExpr is writable, noinit
+	var n_kwthen: TKwthen is writable, noinit
+	var n_then: AExpr is writable, noinit
+	var n_kwelse: TKwelse is writable, noinit
+	var n_else: AExpr is writable, noinit
 end
 
 # A `while` statement
 class AWhileExpr
 	super AExpr
 	super ALabelable
-	var _n_kwwhile:  TKwwhile
-	fun n_kwwhile:  TKwwhile do return _n_kwwhile
-	fun n_kwwhile=(n_kwwhile:  TKwwhile) do _n_kwwhile = n_kwwhile
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_kwdo: TKwdo
-	fun n_kwdo: TKwdo do return _n_kwdo
-	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
-	var _n_block: nullable AExpr = null
-	fun n_block: nullable AExpr do return _n_block
-	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
-	init do end
+	var n_kwwhile:  TKwwhile is writable, noinit
+	var n_expr: AExpr is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_block: nullable AExpr = null is writable
 end
 
 # A `loop` statement
 class ALoopExpr
 	super AExpr
 	super ALabelable
-	var _n_kwloop: TKwloop
-	fun n_kwloop: TKwloop do return _n_kwloop
-	fun n_kwloop=(n_kwloop: TKwloop) do _n_kwloop = n_kwloop
-	var _n_block: nullable AExpr = null
-	fun n_block: nullable AExpr do return _n_block
-	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
-	init do end
+	var n_kwloop: TKwloop is writable, noinit
+	var n_block: nullable AExpr = null is writable
 end
 
 # A `for` statement
 class AForExpr
 	super AExpr
 	super ALabelable
-	var _n_kwfor: TKwfor
-	fun n_kwfor: TKwfor do return _n_kwfor
-	fun n_kwfor=(n_kwfor: TKwfor) do _n_kwfor = n_kwfor
+	var n_kwfor: TKwfor is writable, noinit
 	var n_ids: ANodes[TId] = new ANodes[TId](self)
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_kwdo: TKwdo
-	fun n_kwdo: TKwdo do return _n_kwdo
-	fun n_kwdo=(n_kwdo: TKwdo) do _n_kwdo = n_kwdo
-	var _n_block: nullable AExpr = null
-	fun n_block: nullable AExpr do return _n_block
-	fun n_block=(n_block: nullable AExpr) do _n_block = n_block
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_block: nullable AExpr = null is writable
 end
 
 # An `assert` statement
 class AAssertExpr
 	super AExpr
-	var _n_kwassert: TKwassert
-	fun n_kwassert: TKwassert do return _n_kwassert
-	fun n_kwassert=(n_kwassert: TKwassert) do _n_kwassert = n_kwassert
-	var _n_id: nullable TId = null
-	fun n_id: nullable TId do return _n_id
-	fun n_id=(n_id: nullable TId) do _n_id = n_id
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_else: nullable AExpr = null
-	fun n_else: nullable AExpr do return _n_else
-	fun n_else=(n_else: nullable AExpr) do _n_else = n_else
-	init do end
+	var n_kwassert: TKwassert is writable, noinit
+	var n_id: nullable TId = null is writable
+	var n_expr: AExpr is writable, noinit
+	var n_else: nullable AExpr = null is writable
 end
 
 # Whatever is a simple assignment. eg `= something`
 abstract class AAssignFormExpr
 	super AExpr
-	var _n_assign: TAssign
-	fun n_assign: TAssign do return _n_assign
-	fun n_assign=(n_assign: TAssign) do _n_assign = n_assign
-	var _n_value: AExpr
-	fun n_value: AExpr do return _n_value
-	fun n_value=(n_value: AExpr) do _n_value = n_value
-	init do end
+	var n_assign: TAssign is writable, noinit
+	var n_value: AExpr is writable, noinit
 end
 
 # Whatever is a combined assignment. eg `+= something`
 abstract class AReassignFormExpr
 	super AExpr
-	var _n_assign_op: AAssignOp
-	fun n_assign_op: AAssignOp do return _n_assign_op
-	fun n_assign_op=(n_assign_op: AAssignOp) do _n_assign_op = n_assign_op
-	var _n_value: AExpr
-	fun n_value: AExpr do return _n_value
-	fun n_value=(n_value: AExpr) do _n_value = n_value
-	init do end
+	var n_assign_op: AAssignOp is writable, noinit
+	var n_value: AExpr is writable, noinit
 end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
 	super AProxyExpr
-	var _n_kwonce: TKwonce
-	fun n_kwonce: TKwonce do return _n_kwonce
-	fun n_kwonce=(n_kwonce: TKwonce) do _n_kwonce = n_kwonce
-	init do end
+	var n_kwonce: TKwonce is writable, noinit
 end
 
 # A polymorphic invocation of a method
@@ -1662,10 +1280,7 @@ end
 abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	init do end
+	var n_expr: AExpr is writable, noinit
 end
 
 # A binary operation on a method
@@ -1673,10 +1288,7 @@ abstract class ABinopExpr
 	super ASendExpr
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr2: AExpr is writable, noinit
 end
 
 # Something that is boolean expression
@@ -1687,61 +1299,36 @@ end
 # A `or` expression 
 class AOrExpr
 	super ABoolExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
 end
 
 # A `and` expression
 class AAndExpr
 	super ABoolExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
 end
 
 # A `or else` expression
 class AOrElseExpr
 	super ABoolExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
 end
 
 # A `implies` expression
 class AImpliesExpr
 	super ABoolExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
 end
 
 # A `not` expression
 class ANotExpr
 	super ABoolExpr
-	var _n_kwnot: TKwnot
-	fun n_kwnot: TKwnot do return _n_kwnot
-	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	init do end
+	var n_kwnot: TKwnot is writable, noinit
+	var n_expr: AExpr is writable, noinit
 end
 
 # A `==` expression
@@ -1787,13 +1374,8 @@ end
 # A type-ckeck expression. eg `x isa T`
 class AIsaExpr
 	super ABoolExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_type: AType is writable, noinit
 end
 
 # A `+` expression
@@ -1829,30 +1411,18 @@ end
 # A unary minus expression. eg `-x`
 class AUminusExpr
 	super ASendExpr
-	var _n_minus: TMinus
-	fun n_minus: TMinus do return _n_minus
-	fun n_minus=(n_minus: TMinus) do _n_minus = n_minus
-	init do end
+	var n_minus: TMinus is writable, noinit
 end
 
 # An explicit instantiation. eg `new T`
 class ANewExpr
 	super AExpr
-	var _n_kwnew: TKwnew
-	fun n_kwnew: TKwnew do return _n_kwnew
-	fun n_kwnew=(n_kwnew: TKwnew) do _n_kwnew = n_kwnew
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
+	var n_kwnew: TKwnew is writable, noinit
+	var n_type: AType is writable, noinit
 
 	# The name of the named-constructor, if any
-	var _n_id: nullable TId = null
-	fun n_id: nullable TId do return _n_id
-	fun n_id=(n_id: nullable TId) do _n_id = n_id
-	var _n_args: AExprs
-	fun n_args: AExprs do return _n_args
-	fun n_args=(n_args: AExprs) do _n_args = n_args
-	init do end
+	var n_id: nullable TId = null is writable
+	var n_args: AExprs is writable, noinit
 end
 
 # Whatever is a old-style attribute access
@@ -1860,16 +1430,11 @@ abstract class AAttrFormExpr
 	super AExpr
 
 	# The receiver of the attribute
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
+	var n_expr: AExpr is writable, noinit
 
 	# The name of the attribute
-	var _n_id: TAttrid
-	fun n_id: TAttrid do return _n_id
-	fun n_id=(n_id: TAttrid) do _n_id = n_id
+	var n_id: TAttrid is writable, noinit
 
-	init do end
 end
 
 # The read of an attribute. eg `x._a`
@@ -1888,15 +1453,10 @@ abstract class ACallFormExpr
 	super ASendExpr
 
 	# The name of the method
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
+	var n_id: TId is writable, noinit
 
 	# The arguments of the call
-	var _n_args: AExprs
-	fun n_args: AExprs do return _n_args
-	fun n_args=(n_args: AExprs) do _n_args = n_args
-	init do end
+	var n_args: AExprs is writable, noinit
 end
 
 # A complex setter call (standard or brackets)
@@ -1937,38 +1497,23 @@ end
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr
 	super AExpr
-	var _n_qualified: nullable AQualified = null
-	fun n_qualified: nullable AQualified do return _n_qualified
-	fun n_qualified=(n_qualified: nullable AQualified) do _n_qualified = n_qualified
-	var _n_kwsuper: TKwsuper
-	fun n_kwsuper: TKwsuper do return _n_kwsuper
-	fun n_kwsuper=(n_kwsuper: TKwsuper) do _n_kwsuper = n_kwsuper
-	var _n_args: AExprs
-	fun n_args: AExprs do return _n_args
-	fun n_args=(n_args: AExprs) do _n_args = n_args
-	init do end
+	var n_qualified: nullable AQualified = null is writable
+	var n_kwsuper: TKwsuper is writable, noinit
+	var n_args: AExprs is writable, noinit
 end
 
 # A call to the `init` constructor.
 # Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a ACallFormExpr.
 class AInitExpr
 	super ASendExpr
-	var _n_kwinit: TKwinit
-	fun n_kwinit: TKwinit do return _n_kwinit
-	fun n_kwinit=(n_kwinit: TKwinit) do _n_kwinit = n_kwinit
-	var _n_args: AExprs
-	fun n_args: AExprs do return _n_args
-	fun n_args=(n_args: AExprs) do _n_args = n_args
-	init do end
+	var n_kwinit: TKwinit is writable, noinit
+	var n_args: AExprs is writable, noinit
 end
 
 # Whatever looks-like a call of the brackets `[]` operator.
 abstract class ABraFormExpr
 	super ASendExpr
-	var _n_args: AExprs
-	fun n_args: AExprs do return _n_args
-	fun n_args=(n_args: AExprs) do _n_args = n_args
-	init do end
+	var n_args: AExprs is writable, noinit
 end
 
 # A call of the brackets operator. eg `x[y,z]`
@@ -1985,10 +1530,7 @@ end
 # Whatever is an access to a local variable
 abstract class AVarFormExpr
 	super AExpr
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	init do end
+	var n_id: TId is writable, noinit
 end
 
 # A complex setter call of the bracket operator. eg `x[y,z]+=t`
@@ -2020,55 +1562,34 @@ end
 # A literal range, open or closed
 abstract class ARangeExpr
 	super AExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_expr2: AExpr
-	fun n_expr2: AExpr do return _n_expr2
-	fun n_expr2=(n_expr2: AExpr) do _n_expr2 = n_expr2
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
 end
 
 # A closed literal range. eg `[x..y]`
 class ACrangeExpr
 	super ARangeExpr
-	var _n_obra: TObra
-	fun n_obra: TObra do return _n_obra
-	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
-	var _n_cbra: TCbra
-	fun n_cbra: TCbra do return _n_cbra
-	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
-	init do end
+	var n_obra: TObra is writable, noinit
+	var n_cbra: TCbra is writable, noinit
 end
 
 # An open literal range. eg `[x..y[`
 class AOrangeExpr
 	super ARangeExpr
-	var _n_obra: TObra
-	fun n_obra: TObra do return _n_obra
-	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
-	var _n_cbra: TObra
-	fun n_cbra: TObra do return _n_cbra
-	fun n_cbra=(n_cbra: TObra) do _n_cbra = n_cbra
-	init do end
+	var n_obra: TObra is writable, noinit
+	var n_cbra: TObra is writable, noinit
 end
 
 # A literal array. eg. `[x,y,z]`
 class AArrayExpr
 	super AExpr
-	var _n_exprs: AExprs
-	fun n_exprs: AExprs do return _n_exprs
-	fun n_exprs=(n_exprs: AExprs) do _n_exprs = n_exprs
-	init do end
+	var n_exprs: AExprs is writable, noinit
 end
 
 # A read of `self` 
 class ASelfExpr
 	super AExpr
-	var _n_kwself: nullable TKwself
-	fun n_kwself: nullable TKwself do return _n_kwself
-	fun n_kwself=(n_kwself: nullable TKwself) do _n_kwself = n_kwself
-	init do end
+	var n_kwself: nullable TKwself is writable
 end
 
 # When there is no explicit receiver, `self` is implicit
@@ -2079,26 +1600,17 @@ end
 # A `true` boolean literal constant
 class ATrueExpr
 	super ABoolExpr
-	var _n_kwtrue: TKwtrue
-	fun n_kwtrue: TKwtrue do return _n_kwtrue
-	fun n_kwtrue=(n_kwtrue: TKwtrue) do _n_kwtrue = n_kwtrue
-	init do end
+	var n_kwtrue: TKwtrue is writable, noinit
 end
 # A `false` boolean literal constant
 class AFalseExpr
 	super ABoolExpr
-	var _n_kwfalse: TKwfalse
-	fun n_kwfalse: TKwfalse do return _n_kwfalse
-	fun n_kwfalse=(n_kwfalse: TKwfalse) do _n_kwfalse = n_kwfalse
-	init do end
+	var n_kwfalse: TKwfalse is writable, noinit
 end
 # A `null` literal constant
 class ANullExpr
 	super AExpr
-	var _n_kwnull: TKwnull
-	fun n_kwnull: TKwnull do return _n_kwnull
-	fun n_kwnull=(n_kwnull: TKwnull) do _n_kwnull = n_kwnull
-	init do end
+	var n_kwnull: TKwnull is writable, noinit
 end
 # An integer literal
 class AIntExpr
@@ -2107,42 +1619,27 @@ end
 # An integer literal in decimal format
 class ADecIntExpr
 	super AIntExpr
-	var _n_number: TNumber
-	fun n_number: TNumber do return _n_number
-	fun n_number=(n_number: TNumber) do _n_number = n_number
-	init do end
+	var n_number: TNumber is writable, noinit
 end
 # An integer literal in hexadecimal format
 class AHexIntExpr
 	super AIntExpr
-	var _n_hex_number: THexNumber
-	fun n_hex_number: THexNumber do return _n_hex_number
-	fun n_hex_number=(n_hex_number: THexNumber) do _n_hex_number = n_hex_number
-	init do end
+	var n_hex_number: THexNumber is writable, noinit
 end
 # A float literal
 class AFloatExpr
 	super AExpr
-	var _n_float: TFloat
-	fun n_float: TFloat do return _n_float
-	fun n_float=(n_float: TFloat) do _n_float = n_float
-	init do end
+	var n_float: TFloat is writable, noinit
 end
 # A character literal
 class ACharExpr
 	super AExpr
-	var _n_char: TChar
-	fun n_char: TChar do return _n_char
-	fun n_char=(n_char: TChar) do _n_char = n_char
-	init do end
+	var n_char: TChar is writable, noinit
 end
 # A string literal
 abstract class AStringFormExpr
 	super AExpr
-	var _n_string: Token
-	fun n_string: Token do return _n_string
-	fun n_string=(n_string: Token) do _n_string = n_string
-	init do end
+	var n_string: Token is writable, noinit
 end
 
 # A simple string. eg. `"abc"`
@@ -2170,119 +1667,68 @@ end
 class ASuperstringExpr
 	super AExpr
 	var n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
-	init do end
 end
 
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AProxyExpr
-	var _n_opar: TOpar
-	fun n_opar: TOpar do return _n_opar
-	fun n_opar=(n_opar: TOpar) do _n_opar = n_opar
-	var _n_cpar: TCpar
-	fun n_cpar: TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_opar: TOpar is writable, noinit
+	var n_cpar: TCpar is writable, noinit
 end
 
 # Whatevej just contains (and mimic) an other expression
 abstract class AProxyExpr
 	super AExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	init do end
+	var n_expr: AExpr is writable, noinit
 end
 
 # A type cast. eg `x.as(T)`
 class AAsCastExpr
 	super AExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_kwas: TKwas
-	fun n_kwas: TKwas do return _n_kwas
-	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
-	var _n_opar: nullable TOpar = null
-	fun n_opar: nullable TOpar do return _n_opar
-	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	var _n_cpar: nullable TCpar = null
-	fun n_cpar: nullable TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_kwas: TKwas is writable, noinit
+	var n_opar: nullable TOpar = null is writable
+	var n_type: AType is writable, noinit
+	var n_cpar: nullable TCpar = null is writable
 end
 
 # A as-not-null cast. eg `x.as(not null)`
 class AAsNotnullExpr
 	super AExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_kwas: TKwas
-	fun n_kwas: TKwas do return _n_kwas
-	fun n_kwas=(n_kwas: TKwas) do _n_kwas = n_kwas
-	var _n_opar: nullable TOpar = null
-	fun n_opar: nullable TOpar do return _n_opar
-	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
-	var _n_kwnot: TKwnot
-	fun n_kwnot: TKwnot do return _n_kwnot
-	fun n_kwnot=(n_kwnot: TKwnot) do _n_kwnot = n_kwnot
-	var _n_kwnull: TKwnull
-	fun n_kwnull: TKwnull do return _n_kwnull
-	fun n_kwnull=(n_kwnull: TKwnull) do _n_kwnull = n_kwnull
-	var _n_cpar: nullable TCpar = null
-	fun n_cpar: nullable TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_kwas: TKwas is writable, noinit
+	var n_opar: nullable TOpar = null is writable
+	var n_kwnot: TKwnot is writable, noinit
+	var n_kwnull: TKwnull is writable, noinit
+	var n_cpar: nullable TCpar = null is writable
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
 class AIssetAttrExpr
 	super AAttrFormExpr
-	var _n_kwisset: TKwisset
-	fun n_kwisset: TKwisset do return _n_kwisset
-	fun n_kwisset=(n_kwisset: TKwisset) do _n_kwisset = n_kwisset
-	init do end
+	var n_kwisset: TKwisset is writable, noinit
 end
 
 # A elyspis notation used to pass an expression as it in a vararg parameter
 class AVarargExpr
 	super AExpr
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_dotdotdot: TDotdotdot
-	fun n_dotdotdot: TDotdotdot do return _n_dotdotdot
-	fun n_dotdotdot=(n_dotdotdot: TDotdotdot) do _n_dotdotdot = n_dotdotdot
-	init do end
+	var n_expr: AExpr is writable, noinit
+	var n_dotdotdot: TDotdotdot is writable, noinit
 end
 
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
 	var n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
-	init do end
 end
 
 
 class ADebugTypeExpr
 	super AExpr
-	var _n_kwdebug: TKwdebug
-	fun n_kwdebug: TKwdebug do return _n_kwdebug
-	fun n_kwdebug=(n_kwdebug: TKwdebug) do _n_kwdebug = n_kwdebug
-	var _n_kwtype: TKwtype
-	fun n_kwtype: TKwtype do return _n_kwtype
-	fun n_kwtype=(n_kwtype: TKwtype) do _n_kwtype = n_kwtype
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_kwdebug: TKwdebug is writable, noinit
+	var n_kwtype: TKwtype is writable, noinit
+	var n_expr: AExpr is writable, noinit
+	var n_type: AType is writable, noinit
 end
 
 # A simple list of expressions
@@ -2293,25 +1739,15 @@ end
 # A list of expressions enclosed in parentheses
 class AParExprs
 	super AExprs
-	var _n_opar: TOpar
-	fun n_opar: TOpar do return _n_opar
-	fun n_opar=(n_opar: TOpar) do _n_opar = n_opar
-	var _n_cpar: TCpar
-	fun n_cpar: TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_opar: TOpar is writable, noinit
+	var n_cpar: TCpar is writable, noinit
 end
 
 # A list of expressions enclosed in brackets
 class ABraExprs
 	super AExprs
-	var _n_obra: TObra
-	fun n_obra: TObra do return _n_obra
-	fun n_obra=(n_obra: TObra) do _n_obra = n_obra
-	var _n_cbra: TCbra
-	fun n_cbra: TCbra do return _n_cbra
-	fun n_cbra=(n_cbra: TCbra) do _n_cbra = n_cbra
-	init do end
+	var n_obra: TObra is writable, noinit
+	var n_cbra: TCbra is writable, noinit
 end
 
 # A complex assignment operator. eg `+=`
@@ -2320,60 +1756,34 @@ abstract class AAssignOp
 end
 class APlusAssignOp
 	super AAssignOp
-	var _n_pluseq: TPluseq
-	fun n_pluseq: TPluseq do return _n_pluseq
-	fun n_pluseq=(n_pluseq: TPluseq) do _n_pluseq = n_pluseq
-	init do end
+	var n_pluseq: TPluseq is writable, noinit
 end
 class AMinusAssignOp
 	super AAssignOp
-	var _n_minuseq: TMinuseq
-	fun n_minuseq: TMinuseq do return _n_minuseq
-	fun n_minuseq=(n_minuseq: TMinuseq) do _n_minuseq = n_minuseq
-	init do end
+	var n_minuseq: TMinuseq is writable, noinit
 end
 
 class AModuleName
 	super Prod
-	var _n_quad: nullable TQuad = null
-	fun n_quad: nullable TQuad do return _n_quad
-	fun n_quad=(n_quad: nullable TQuad) do _n_quad = n_quad
+	var n_quad: nullable TQuad = null is writable
 	var n_path: ANodes[TId] = new ANodes[TId](self)
-	var _n_id: TId
-	fun n_id: TId do return _n_id
-	fun n_id=(n_id: TId) do _n_id = n_id
-	init do end
+	var n_id: TId is writable, noinit
 end
 class AInLanguage
 	super Prod
-	var _n_kwin: TKwin
-	fun n_kwin: TKwin do return _n_kwin
-	fun n_kwin=(n_kwin: TKwin) do _n_kwin = n_kwin
-	var _n_string: TString
-	fun n_string: TString do return _n_string
-	fun n_string=(n_string: TString) do _n_string = n_string
-	init do end
+	var n_kwin: TKwin is writable, noinit
+	var n_string: TString is writable, noinit
 end
 class AExternCodeBlock
 	super Prod
-	var _n_in_language: nullable AInLanguage = null
-	fun n_in_language: nullable AInLanguage do return _n_in_language
-	fun n_in_language=(n_in_language: nullable AInLanguage) do _n_in_language = n_in_language
-	var _n_extern_code_segment: TExternCodeSegment
-	fun n_extern_code_segment: TExternCodeSegment do return _n_extern_code_segment
-	fun n_extern_code_segment=(n_extern_code_segment: TExternCodeSegment) do _n_extern_code_segment = n_extern_code_segment
-	init do end
+	var n_in_language: nullable AInLanguage = null is writable
+	var n_extern_code_segment: TExternCodeSegment is writable, noinit
 end
 class AQualified
 	super Prod
-	var _n_quad: nullable TQuad = null
-	fun n_quad: nullable TQuad do return _n_quad
-	fun n_quad=(n_quad: nullable TQuad) do _n_quad = n_quad
+	var n_quad: nullable TQuad = null is writable
 	var n_id: ANodes[TId] = new ANodes[TId](self)
-	var _n_classid: nullable TClassid = null
-	fun n_classid: nullable TClassid do return _n_classid
-	fun n_classid=(n_classid: nullable TClassid) do _n_classid = n_classid
-	init do end
+	var n_classid: nullable TClassid = null is writable
 end
 
 # A documentation of a definition
@@ -2381,72 +1791,42 @@ end
 class ADoc
 	super Prod
 	var n_comment: ANodes[TComment] = new ANodes[TComment](self)
-	init do end
 end
 
 class AAnnotations
 	super Prod
-	var _n_at: nullable TAt = null
-	fun n_at: nullable TAt do return _n_at
-	fun n_at=(n_at: nullable TAt) do _n_at = n_at
-	var _n_opar: nullable TOpar = null
-	fun n_opar: nullable TOpar do return _n_opar
-	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_at: nullable TAt = null is writable
+	var n_opar: nullable TOpar = null is writable
 	var n_items: ANodes[AAnnotation] = new ANodes[AAnnotation](self)
-	var _n_cpar: nullable TCpar = null
-	fun n_cpar: nullable TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_cpar: nullable TCpar = null is writable
 end
 class AAnnotation
 	super Prod
-	var _n_doc: nullable ADoc = null
-	fun n_doc: nullable ADoc do return _n_doc
-	fun n_doc=(n_doc: nullable ADoc) do _n_doc = n_doc
-	var _n_kwredef: nullable TKwredef = null
-	fun n_kwredef: nullable TKwredef do return _n_kwredef
-	fun n_kwredef=(n_kwredef: nullable TKwredef) do _n_kwredef = n_kwredef
-	var _n_visibility: nullable AVisibility
-	fun n_visibility: nullable AVisibility do return _n_visibility
-	fun n_visibility=(n_visibility: nullable AVisibility) do _n_visibility = n_visibility
-	var _n_atid: AAtid
-	fun n_atid: AAtid do return _n_atid
-	fun n_atid=(n_atid: AAtid) do _n_atid = n_atid
-	var _n_opar: nullable TOpar = null
-	fun n_opar: nullable TOpar do return _n_opar
-	fun n_opar=(n_opar: nullable TOpar) do _n_opar = n_opar
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: nullable AVisibility is writable
+	var n_atid: AAtid is writable, noinit
+	var n_opar: nullable TOpar = null is writable
 	var n_args: ANodes[AAtArg] = new ANodes[AAtArg](self)
-	var _n_cpar: nullable TCpar = null
-	fun n_cpar: nullable TCpar do return _n_cpar
-	fun n_cpar=(n_cpar: nullable TCpar) do _n_cpar = n_cpar
-	init do end
+	var n_cpar: nullable TCpar = null is writable
 end
 abstract class AAtArg
 	super Prod
 end
 class ATypeAtArg
 	super AAtArg
-	var _n_type: AType
-	fun n_type: AType do return _n_type
-	fun n_type=(n_type: AType) do _n_type = n_type
-	init do end
+	var n_type: AType is writable, noinit
 end
 class AExprAtArg
 	super AAtArg
-	var _n_expr: AExpr
-	fun n_expr: AExpr do return _n_expr
-	fun n_expr=(n_expr: AExpr) do _n_expr = n_expr
-	init do end
+	var n_expr: AExpr is writable, noinit
 end
 class AAtAtArg
 	super AAtArg
 end
 abstract class AAtid
 	super Prod
-	var _n_id: Token
-	fun n_id: Token do return _n_id
-	fun n_id=(n_id: Token) do _n_id = n_id
-	init do end
+	var n_id: Token is writable, noinit
 end
 class AIdAtid
 	super AAtid
@@ -2470,12 +1850,8 @@ end
 # The root of the AST
 class Start
 	super Prod
-	var _n_base: nullable AModule
-	fun n_base: nullable AModule do return _n_base
-	fun n_base=(n_base: nullable AModule) do _n_base = n_base
-	var _n_eof: EOF
-	fun n_eof: EOF do return _n_eof
-	fun n_eof=(n_eof: EOF) do _n_eof = n_eof
+	var n_base: nullable AModule is writable
+	var n_eof: EOF is writable, noinit
 	init(n_base: nullable AModule, n_eof: EOF)
 	do
 		self._n_base = n_base
