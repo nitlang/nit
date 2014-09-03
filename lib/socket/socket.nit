@@ -18,6 +18,7 @@
 module socket
 
 import socket_c
+intrude import standard::stream
 
 # Portal for communication between two machines
 class Socket

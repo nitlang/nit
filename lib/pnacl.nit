@@ -23,6 +23,10 @@
 #
 # Provides PNaCl support for Nit.
 module pnacl is platform
+
+import standard
+intrude import standard::stream
+
 `{
 	#include <unistd.h>
 	#include <stddef.h>

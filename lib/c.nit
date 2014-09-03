@@ -16,6 +16,8 @@
 
 # Utilities and performant structure for the FFI with C
 module c
+import standard
+intrude import standard::collection::array
 
 # A thin wrapper around a `NativeCArray` adding length information
 abstract class CArray[E]

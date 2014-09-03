@@ -125,7 +125,7 @@ redef class HashCollection[K,N]
 	redef fun node_at_idx(i,k)
 	do
 		sys.gt_count += 1
-		sys.gt_tot_length += _length
+		sys.gt_tot_length += _the_length
 		sys.gt_tot_cap += _capacity
 		var c = _array[i]
 		if c != null and c._next_in_bucklet != null then gt_collide(i,k)
@@ -150,7 +150,7 @@ redef class HashCollection[K,N]
 	do
 		sys.st_count += 1
 		if _array[i] != null then st_collide(i,n)
-		sys.st_tot_length += _length
+		sys.st_tot_length += _the_length
 		sys.st_tot_cap += _capacity
 
 		super

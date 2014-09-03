@@ -401,7 +401,7 @@ end
 redef class OFStream
 	redef fun write(s)
 	do
-		assert _writable
+		assert is_writable
 		if s isa FlatText then
 			if s isa FlatString then
 				write_native(s.to_cstring, s.bytelen)

@@ -19,18 +19,18 @@ import array
 private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	super ArrayCapable[nullable N]
 
-	var _array: nullable NativeArray[nullable N] = null # Used to store items
-	var _capacity: Int = 0 # Size of _array
-	var _length: Int = 0 # Number of items in the map
+	private var array: nullable NativeArray[nullable N] = null # Used to store items
+	private var capacity: Int = 0 # Size of _array
+	private var the_length: Int = 0 # Number of items in the map
 
-	var _first_item: nullable N = null # First added item (used to visit items in nice order)
-	var _last_item: nullable N = null # Last added item (same)
+	private var first_item: nullable N = null # First added item (used to visit items in nice order)
+	private var last_item: nullable N = null # Last added item (same)
 
 	# The last key accessed (used for cache)
-	var _last_accessed_key: nullable K = null
+	private var last_accessed_key: nullable K = null
 
 	# The last node accessed (used for cache)
-	var _last_accessed_node: nullable N = null
+	private var last_accessed_node: nullable N = null
 
 	# Return the index of the key k
 	fun index_at(k: K): Int
@@ -89,8 +89,8 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		_last_accessed_node = node
 
 		# Enlarge if needed
-		var l = _length
-		_length = l + 1
+		var l = _the_length
+		_the_length = l + 1
 
 		# Magic values determined empirically
 		# We do not want to enlarge too much
@@ -123,7 +123,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		end
 
 		# Remove the item in the array
-		_length -= 1
+		_the_length -= 1
 		prev = node._prev_in_bucklet
 		next = node._next_in_bucklet
 		if prev != null then
@@ -146,7 +146,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 			_array[i] = null
 			i -= 1
 		end
-		_length = 0
+		_the_length = 0
 		_first_item = null
 		_last_item = null
 		_last_accessed_key = null
@@ -157,7 +157,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	do
 		var old_cap = _capacity
 		# get a new capacity
-		if cap < _length + 1 then cap = _length + 1
+		if cap < _the_length + 1 then cap = _the_length + 1
 		if cap <= _capacity then return
 		_capacity = cap
 		_last_accessed_key = null
@@ -191,12 +191,12 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 end
 
 private abstract class HashNode[K: Object]
-	var _key: K
+	private var key: K
 	type N: HashNode[K]
-	var _next_item: nullable N = null
-	var _prev_item: nullable N = null
-	var _prev_in_bucklet: nullable N = null
-	var _next_in_bucklet: nullable N = null
+	private var next_item: nullable N = null
+	private var prev_item: nullable N = null
+	private var prev_in_bucklet: nullable N = null
+	private var next_in_bucklet: nullable N = null
 	init(k: K)
 	do
 		_key = k
@@ -221,9 +221,9 @@ class HashMap[K: Object, V]
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
-	redef fun length do return _length
+	redef fun length do return _the_length
 
-	redef fun is_empty do return _length == 0
+	redef fun is_empty do return _the_length == 0
 
 	redef fun []=(key, v)
 	do
@@ -242,7 +242,7 @@ class HashMap[K: Object, V]
 	init
 	do
 		_capacity = 0
-		_length = 0
+		_the_length = 0
 		enlarge(0)
 	end
 
@@ -345,7 +345,7 @@ end
 private class HashMapNode[K: Object, V]
 	super HashNode[K]
 	redef type N: HashMapNode[K, V]
-	var _value: V
+	private var value: V
 
 	init(k: K, v: V)
 	do
@@ -383,10 +383,10 @@ class HashMapIterator[K: Object, V]
 	end
 
 	# The map to iterate on
-	var _map: HashMap[K, V]
+	private var map: HashMap[K, V]
 
 	# The current node
-	var _node: nullable HashMapNode[K, V]
+	private var node: nullable HashMapNode[K, V]
 
 	init(map: HashMap[K, V])
 	do
@@ -401,13 +401,13 @@ class HashSet[E: Object]
 	super Set[E]
 	super HashCollection[E, HashSetNode[E]]
 
-	redef fun length do return _length
+	redef fun length do return _the_length
 
-	redef fun is_empty do return _length == 0
+	redef fun is_empty do return _the_length == 0
 
 	redef fun first
 	do
-		assert _length > 0
+		assert _the_length > 0
 		return _first_item._key
 	end
 
@@ -436,7 +436,7 @@ class HashSet[E: Object]
 	init
 	do
 		_capacity = 0
-		_length = 0
+		_the_length = 0
 		enlarge(0)
 	end
 
@@ -476,10 +476,10 @@ private class HashSetIterator[E: Object]
 	end
 
 	# The set to iterate on
-	var _set: HashSet[E]
+	private var set: HashSet[E]
 
 	# The position in the internal map storage
-	var _node: nullable HashSetNode[E]
+	private var node: nullable HashSetNode[E]
 
 	init(set: HashSet[E])
 	do
