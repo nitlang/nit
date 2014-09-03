@@ -15,14 +15,10 @@
 # Collect and orchestration of main frontend phases
 module frontend
 
-import phase
 import simple_misc_analysis
 import literal
-import scope
-import flow
-import local_var_init
-import typing
-import auto_super_init
+import modelize
+import semantize
 import div_by_zero
 import cached
 import serialization_phase

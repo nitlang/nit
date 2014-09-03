@@ -20,9 +20,9 @@ module android_annotations
 
 import parser_util
 import modelbuilder
-import modelize_property
+import modelize
 import literal
-import typing
+import semantize
 private import annotation
 
 # Metadata associated to an Android project

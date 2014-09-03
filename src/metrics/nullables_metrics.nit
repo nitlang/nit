@@ -17,11 +17,9 @@
 # Statistics about the usage of nullables
 module nullables_metrics
 
-import modelbuilder
-private import typing
 import model_utils
 import mclasses_metrics
-import frontend
+import semantize
 
 redef class ToolContext
 	var nullables_metrics_phase: Phase = new NullablesMetricsPhase(self, null)

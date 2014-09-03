@@ -17,17 +17,11 @@
 # A ligHt Nit compiler
 module nith
 
-import phase
-import literal
-import scope
-import flow
-import local_var_init
-import typing
-import auto_super_init
-import modelbuilder
+import modelize
+import transform
+
 import rapid_type_analysis
 import separate_erasure_compiler
-import transform
 
 redef class ToolContext
 	redef fun process_options(args)

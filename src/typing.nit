@@ -19,8 +19,8 @@
 module typing
 
 import flow
-import modelize_property
 import phase
+import modelize
 import local_var_init
 
 redef class ToolContext

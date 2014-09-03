@@ -16,9 +16,9 @@
 # to the target platform. Also detects conflicts between targetted platforms.
 module platform
 
-import modelize_property
 import parser_util
 import modelbuilder
+import modelize
 private import annotation
 
 redef class ToolContext

@@ -25,8 +25,7 @@ module rapid_type_analysis
 
 import model
 import modelbuilder
-import typing
-import auto_super_init
+import semantize
 
 import csv # for live_types_to_csv
 import ordered_tree # for live_methods_to_tree

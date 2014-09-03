@@ -18,7 +18,7 @@ module div_by_zero
 
 import phase
 import literal # Because we need the real value of literal in the AST
-import typing # Because we need the static type of receivers
+import semantize # Because we need the static type of receivers
 
 # Note, `ToolContext` is the main overlord class
 # Among its jobs, it orchestrates and executes the various phases

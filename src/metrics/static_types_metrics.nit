@@ -18,8 +18,6 @@
 module static_types_metrics
 
 private import metrics_base
-import modelbuilder
-import modelize_class
 import frontend
 
 redef class ToolContext
