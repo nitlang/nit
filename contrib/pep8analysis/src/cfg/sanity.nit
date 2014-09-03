@@ -64,13 +64,13 @@ redef class AnalysisManager
 			if i == len-1 or line.address + line.size != lines[i+1].address then
 				if error then
 					if first == line then
-						manager.notes.add(new Error(first.location, msg))
+						manager.notes.add(new P8Error(first.location, msg))
 					else
-						manager.notes.add(new Error.range(first.location, line.location, msg))
+						manager.notes.add(new P8Error.range(first.location, line.location, msg))
 					end
 				else
 					if first == line then
-						manager.notes.add(new Error(first.location, msg))
+						manager.notes.add(new P8Error(first.location, msg))
 					else
 						manager.notes.add(new Warn.range(first.location, line.location, msg))
 					end

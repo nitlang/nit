@@ -172,7 +172,7 @@ class CFG
 						b.successors.add(db)
 						db.predecessors.add(b)
 					else
-						manager.notes.add(new Error(line.location,
+						manager.notes.add(new P8Error(line.location,
 							"this instruction is not followed by valid code as it should (misplaced data or missing BR?)"))
 					end
 				end
@@ -181,7 +181,7 @@ class CFG
 					has_function_calls = true
 					var next_addr = line.address+4
 					if not addr_to_blocks.has_key(next_addr) then
-						manager.notes.add(new Error(line.location,
+						manager.notes.add(new P8Error(line.location,
 							"this CALL is not followed by valide code as it should"))
 					else
 						b.after_call = addr_to_blocks[next_addr]
@@ -345,7 +345,7 @@ class CFG
 
 				else if instr isa ARetInstruction then
 						if to_link.is_empty then
-							manager.notes.add( new Error(instr.location,"no CALL can be linked to this RET") )
+							manager.notes.add( new P8Error(instr.location,"no CALL can be linked to this RET") )
 							return false
 						else
 							var caller = to_link.pop
