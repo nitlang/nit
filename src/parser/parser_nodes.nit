@@ -20,11 +20,9 @@ import location
 
 # Root of the AST class-hierarchy
 abstract class ANode
-	var _location: nullable Location = null
-
 	# Location is set during AST building. Once built, location cannon be null.
 	# However, manual instantiated nodes may need more care.
-	fun location: Location do return _location.as(not null)
+	var location: Location is writable, noinit
 
 	# The location of the important part of the node (identifier or whatever)
 	fun hot_location: Location do return location
@@ -269,8 +267,6 @@ end
 abstract class Prod
 	super ANode
 
-	fun location=(l: Location) do _location = l
-
 	# All the annotations attached directly to the node
 	var _n_annotations: nullable AAnnotations = null
 	fun n_annotations: nullable AAnnotations do return _n_annotations
@@ -280,7 +276,7 @@ abstract class Prod
 	do
 		super
 		assert n isa Prod
-		if n._location == null then n._location = _location
+		if not isset n._location and isset _location then n._location = _location
 	end
 end
 

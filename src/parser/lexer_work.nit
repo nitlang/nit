@@ -127,7 +127,7 @@ class Lexer
 		t = get_token
 		while t == null do t = get_token
 
-		if t._location != null then
+		if isset t._location then
 			var l = last_token
 			if l != null then
 				l.next_token = t

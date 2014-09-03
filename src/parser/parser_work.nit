@@ -154,7 +154,7 @@ class Parser
 				return node
 			else if action_type == 3 then # ERROR
 				# skip injected tokens
-				while token._location == null do token = lexer.next
+				while not isset token._location do token = lexer.next
 				var node2 = new AParserError.init_parser_error("Syntax error: unexpected {token}.", token.location, token)
 				var node = new Start(null, node2)
 				return node
@@ -188,8 +188,8 @@ private class ComputeProdLocationVisitor
 	redef fun visit(n: ANode)
 	do
 		if n isa Token then
+			if not isset n._location then return
 			var loc = n._location
-			if loc == null then return
 			_last_location = loc
 
 			# Add a first token to productions that need one
