@@ -16,7 +16,7 @@
 module file
 
 intrude import stream
-intrude import ropes
+intrude import string
 import string_search
 import time
 
