@@ -16,7 +16,6 @@
 # This module is only an example of how to implements a simple phase in the nit tools
 module div_by_zero
 
-import phase
 import literal # Because we need the real value of literal in the AST
 import semantize # Because we need the static type of receivers
 

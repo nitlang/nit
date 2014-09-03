@@ -25,8 +25,6 @@
 # FIXME: better handling of the types
 module model
 
-import poset
-import location
 import mmodule
 import mdoc
 import ordered_tree

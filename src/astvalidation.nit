@@ -15,7 +15,6 @@
 # Check the consitency of AST
 module astvalidation
 
-private import typing
 intrude import parser
 import astbuilder
 

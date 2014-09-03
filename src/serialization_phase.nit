@@ -19,9 +19,9 @@
 # Phase generating methods to serialize Nit objects to different formats
 module serialization_phase
 
-import phase
-import parser_util
+private import parser_util
 import modelize
+private import annotation
 
 redef class ToolContext
 	var serialization_phase_pre_model: Phase = new SerializationPhasePreModel(self, null)

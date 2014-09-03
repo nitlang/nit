@@ -18,8 +18,7 @@
 # by calling `ModelBuilder::android_project_for`.
 module android_annotations
 
-import parser_util
-import modelbuilder
+private import parser_util
 import modelize
 import literal
 import semantize

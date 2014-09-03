@@ -23,6 +23,7 @@ import nitx
 intrude import local_var_init
 intrude import scope
 intrude import toolcontext
+private import parser_util
 
 redef class Model
 	# Cleans the model to remove a module and what it defines when semantic analysis fails on injected code

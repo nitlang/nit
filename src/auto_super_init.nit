@@ -19,8 +19,7 @@
 module auto_super_init
 
 import typing
-import modelbuilder
-import phase
+private import annotation
 
 redef class ToolContext
 	var auto_super_init_phase: Phase = new AutoSuperInitPhase(self, [typing_phase])

@@ -18,7 +18,7 @@
 module modelize_property
 
 import modelize_class
-import annotation
+private import annotation
 
 redef class ToolContext
 	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])

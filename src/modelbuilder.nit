@@ -22,11 +22,7 @@
 # FIXME add missing error checks
 module modelbuilder
 
-import parser
 import model
-import poset
-import opts
-import toolcontext
 import phase
 
 private import more_collections

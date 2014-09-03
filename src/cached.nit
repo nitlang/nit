@@ -18,8 +18,8 @@
 # complex annotation that modify both the model and the AST of a Nit program
 module cached
 
-import parser_util
 import modelize
+private import parser_util
 import simple_misc_analysis
 private import annotation
 

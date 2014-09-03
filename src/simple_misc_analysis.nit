@@ -21,8 +21,6 @@
 #  * use of "while true" instead of "loop"
 module simple_misc_analysis
 
-import toolcontext
-import parser
 import phase
 
 redef class ToolContext

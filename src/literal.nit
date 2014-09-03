@@ -17,8 +17,6 @@
 # Parsing of literal values in the abstract syntax tree.
 module literal
 
-import parser
-import toolcontext
 import phase
 
 redef class ToolContext

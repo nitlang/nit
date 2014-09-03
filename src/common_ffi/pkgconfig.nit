@@ -20,6 +20,7 @@ module pkgconfig
 
 import c
 private import annotation
+private import literal
 
 redef class ToolContext
 	var pkgconfig_phase: Phase = new PkgconfigPhase(self, [literal_phase])
