@@ -268,9 +268,7 @@ abstract class Prod
 	super ANode
 
 	# All the annotations attached directly to the node
-	var _n_annotations: nullable AAnnotations = null
-	fun n_annotations: nullable AAnnotations do return _n_annotations
-	fun n_annotations=(n_annotations: nullable AAnnotations) do _n_annotations = n_annotations
+	var n_annotations: nullable AAnnotations = null is writable
 
 	redef fun replace_with(n: ANode)
 	do
@@ -300,9 +298,7 @@ abstract class Visitor
 	end
 
 	# The current visited node
-	var _current_node: nullable ANode = null
-	fun current_node: nullable ANode do return _current_node
-	fun current_node=(current_node: nullable ANode) do _current_node = current_node
+	var current_node: nullable ANode = null is writable
 end
 
 # Token of end of line (basically `\n`)
