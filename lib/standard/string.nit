@@ -16,6 +16,7 @@ module string
 
 import math
 import collection
+intrude import collection::array
 
 `{
 #include <stdio.h>
@@ -1968,7 +1969,7 @@ interface StringCapable
 end
 
 redef class Sys
-	var _args_cache: nullable Sequence[String]
+	private var args_cache: nullable Sequence[String]
 
 	# The arguments of the program as given by the OS
 	fun program_args: Sequence[String]

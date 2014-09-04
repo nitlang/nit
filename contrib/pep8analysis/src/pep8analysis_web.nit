@@ -31,6 +31,7 @@ import ast
 import model
 import cfg
 import flow_analysis
+intrude import standard::stream
 
 in "C++" `{
 	#include <bind.h>

@@ -36,7 +36,7 @@ abstract class FStream
 	var path: nullable String = null
 
 	# The FILE *.
-	var _file: nullable NativeFile = null
+	private var file: nullable NativeFile = null
 
 	fun file_stat: FileStat do return _file.file_stat
 
@@ -103,7 +103,7 @@ class OFStream
 	
 	redef fun write(s)
 	do
-		assert _writable
+		assert _is_writable
 		if s isa FlatText then
 			write_native(s.to_cstring, s.length)
 		else
@@ -111,21 +111,18 @@ class OFStream
 		end
 	end
 
-	redef fun is_writable do return _writable
-	
 	redef fun close
 	do
 		var i = _file.io_close
-		_writable = false
+		_is_writable = false
 	end
 
-	# Is the file open in write mode
-	var _writable: Bool
+	redef var is_writable = false
 	
 	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
-		assert _writable
+		assert _is_writable
 		var err = _file.io_write(native, len)
 		if err != len then
 			# Big problem
@@ -141,7 +138,7 @@ class OFStream
 			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
 		end
 		self.path = path
-		_writable = true
+		_is_writable = true
 	end
 	
 	private init do end
@@ -168,7 +165,7 @@ class Stdout
 	private init do
 		_file = new NativeFile.native_stdout
 		path = "/dev/stdout"
-		_writable = true
+		_is_writable = true
 	end
 end
 
@@ -177,7 +174,7 @@ class Stderr
 	private init do
 		_file = new NativeFile.native_stderr
 		path = "/dev/stderr"
-		_writable = true
+		_is_writable = true
 	end
 end
 

@@ -149,10 +149,10 @@ class BM_Pattern
 	end
 
 	# searched motif
-	var _motif: String
+	private var motif: String
 
 	# length of the motif
-	var _length: Int
+	private var length: Int
 
 	private fun bc(e: Char): Int
 	do
@@ -164,10 +164,10 @@ class BM_Pattern
 	end
 
 	# good shifts
-	var _gs: Array[Int]
+	private var gs: Array[Int]
 	
 	# bad characters
-	var _bc_table: Map[Char, Int]
+	private var bc_table: Map[Char, Int]
 
 	private fun compute_bc
 	do

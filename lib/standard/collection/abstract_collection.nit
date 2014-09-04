@@ -202,7 +202,7 @@ private class ContainerIterator[E]
 
 	redef var is_ok: Bool = true
 
-	var _container: Container[E]
+	private var container: Container[E]
 end
 
 # Items can be removed from this collection
@@ -929,7 +929,7 @@ private class CoupleMapIterator[K: Object, E]
 		_iter.next
 	end
 
-	var _iter: Iterator[Couple[K,E]]
+	private var iter: Iterator[Couple[K,E]]
 
 	init(i: Iterator[Couple[K,E]]) do _iter = i
 end

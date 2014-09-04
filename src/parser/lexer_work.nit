@@ -19,20 +19,20 @@ intrude import parser_nodes
 private import tables
 
 redef class Token
-    var _text: nullable String
+    private var cached_text: nullable String
 
     redef fun text
     do
-        var res = _text
+        var res = _cached_text
         if res != null then return res
         res = location.text
-	_text = res
+	_cached_text = res
 	return res
     end
 
     redef fun text=(text)
     do
-        _text = text
+        _cached_text = text
     end
 
     fun parser_index: Int is abstract
@@ -46,7 +46,7 @@ redef class EOF
 
     init init_tk(loc: Location)
     do
-        _text = ""
+        _cached_text = ""
 		_location = loc
     end
 end
@@ -86,25 +86,25 @@ end
 class Lexer
 	super TablesCapable
 	# Last peeked token
-	var _token: nullable Token
+	var token: nullable Token
 
 	# Lexer current state
-	var _state: Int = 0
+	private var state: Int = 0
 
 	# The source file
 	var file: SourceFile
 
 	# Current character in the stream
-	var _stream_pos: Int = 0
+	var stream_pos: Int = 0
 
 	# Current line number in the input stream
-	var _line: Int = 0
+	var line: Int = 0
 
 	# Current column in the input stream
-	var _pos: Int = 0
+	var pos: Int = 0
 
 	# Was the last character a cariage-return?
-	var _cr: Bool = false
+	var cr: Bool = false
 
 	# Constante state values
 	private fun state_initial: Int do return 0 end
@@ -127,7 +127,7 @@ class Lexer
 		t = get_token
 		while t == null do t = get_token
 
-		if t._location != null then
+		if isset t._location then
 			var l = last_token
 			if l != null then
 				l.next_token = t

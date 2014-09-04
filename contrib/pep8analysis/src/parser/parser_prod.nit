@@ -8,9 +8,7 @@ private import tables
 
 redef class ANode
 	# Parent of the node in the AST
-	var _parent: nullable ANode
-	fun parent: nullable ANode do return _parent
-	fun parent=(p: nullable ANode) do _parent = p
+	var parent: nullable ANode is writable
 
 	# Remove a child from the AST
 	fun remove_child(child: ANode)

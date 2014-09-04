@@ -21,8 +21,7 @@ import abstract_collection
 abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
-	var _length: Int = 0
-	redef fun length do return _length
+	redef var length = 0
 
 	redef fun is_empty do return _length == 0
 
@@ -347,14 +346,14 @@ class Array[E]
 	end
 
 	# The internal storage.
-	var _items: nullable NativeArray[E] = null
+	private var items: nullable NativeArray[E] = null
 
 	# Do not use this method
 	# FIXME: Remove it once modules can intrude non local modules
 	fun intern_items: NativeArray[E] do return _items.as(not null)
 
 	# The size of `_items`.
-	var _capacity: Int = 0
+	private var capacity: Int = 0
 
 	redef fun ==(o)
 	do
@@ -391,9 +390,9 @@ private class ArrayIterator[E]
 		_index = 0
 	end
 
-	var _index: Int = 0
-	redef fun index do return _index
-	var _array: AbstractArrayRead[E]
+	redef var index = 0
+
+	private var array: AbstractArrayRead[E]
 end
 
 private class ArrayReverseIterator[E]
@@ -417,7 +416,7 @@ class ArraySet[E: Object]
 	super Set[E]
 
 	# The stored elements.
-	var _array: Array[E]
+	private var array: Array[E]
 
 	redef fun has(e) do return _array.has(e)
 
@@ -475,7 +474,7 @@ private class ArraySetIterator[E: Object]
 
 	init(iter: ArrayIterator[E]) do _iter = iter
 
-	var _iter: ArrayIterator[E]
+	private var iter: ArrayIterator[E]
 end
 
 
@@ -531,7 +530,7 @@ class ArrayMap[K: Object, E]
 	end
 
 	# Internal storage.
-	var _items = new Array[Couple[K,E]]
+	private var items = new Array[Couple[K,E]]
 
 	# fast remove the ith element of the array
 	private fun remove_at_index(i: Int)
@@ -541,7 +540,7 @@ class ArrayMap[K: Object, E]
 	end
 
 	# The last positive result given by a index(1) call
-	var _last_index: Int = 0
+	private var last_index: Int = 0
 
 	# Where is the `key` in `_item`?
 	# return -1 if not found
