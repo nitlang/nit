@@ -1,0 +1,4 @@
+INPUT:
+foo
+bar
+
