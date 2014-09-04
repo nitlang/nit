@@ -169,8 +169,8 @@ function bench_nitg-g_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-g_options "slower" --hardening
-bench_nitg-g_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other
+bench_nitg-g_options "slower" --hardening --no-shortcut-range
+bench_nitg-g_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
 function bench_nitg-s_options()
 {
@@ -196,9 +196,9 @@ function bench_nitg-s_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range "--no-gcc-directive likely" "--no-gcc-directive noreturn"
-bench_nitg-s_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other
-bench_nitg-s_options "faster" --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
+bench_nitg-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn"
+bench_nitg-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
+bench_nitg-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
 
 function bench_nitg-e_options()
 {
@@ -224,9 +224,9 @@ function bench_nitg-e_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-e_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
-bench_nitg-e_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
-bench_nitg-e_options "faster" --inline-coloring-numbers
+bench_nitg-e_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
+bench_nitg-e_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitg-e_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
 function bench_engines()
 {
