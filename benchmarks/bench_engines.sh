@@ -232,12 +232,18 @@ function bench_engines()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
-	run_compiler "nitg-g" ./nitg --global
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
 	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-sg.dat" "nitg-sg" "nitg with --separate --semi-global"
+	run_compiler "nitg-sg" ./nitg --separate --semi-global
+	prepare_res "$name-nitg-eg.dat" "nitg-eg" "nitg with --erasure --semi-global"
+	run_compiler "nitg-eg" ./nitg --erasure --semi-global
+	prepare_res "$name-nitg-egt.dat" "nitg-egt" "nitg with --erasure --semi-global --rta"
+	run_compiler "nitg-egt" ./nitg --erasure --semi-global --rta
+	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
+	run_compiler "nitg-g" ./nitg --global
 	plot "$name.gnu"
 }
 bench_engines
@@ -246,10 +252,12 @@ function bench_nitg-e_gc()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
-	NIT_GC_OPTION="malloc" run_compiler "nitg-e-malloc" ./nitg --erasure
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
+	NIT_GC_OPTION="malloc" run_compiler "nitg-e-malloc" ./nitg --erasure
+	prepare_res "$name-nitg-e-large.dat" "nitg-e-large" "nitg with --erasure and large"
+	NIT_GC_OPTION="large" run_compiler "nitg-e-large" ./nitg --erasure
 	plot "$name.gnu"
 }
 bench_nitg-e_gc
