@@ -15,7 +15,6 @@
 # Highliting of Nit AST
 module highlight
 
-import modelize_property
 import frontend
 import html
 import pipeline

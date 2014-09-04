@@ -18,10 +18,7 @@
 module naive_interpreter
 
 import literal
-import typing
-import auto_super_init
-import frontend
-import common_ffi
+import semantize
 private import parser::tables
 
 redef class ToolContext

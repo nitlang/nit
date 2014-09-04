@@ -17,10 +17,7 @@
 # Intraprocedural static flow.
 module flow
 
-import parser
-import toolcontext
 import scope
-import phase
 
 redef class ToolContext
 	var flow_phase: Phase = new FlowPhase(self, [scope_phase])

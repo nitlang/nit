@@ -17,6 +17,7 @@ module testing_suite
 
 import testing_base
 import html
+private import annotation
 
 redef class ToolContext
 	# -- target-file

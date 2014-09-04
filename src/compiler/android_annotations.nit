@@ -18,11 +18,10 @@
 # by calling `ModelBuilder::android_project_for`.
 module android_annotations
 
-import parser_util
-import modelbuilder
-import modelize_property
+private import parser_util
+import modelize
 import literal
-import typing
+import semantize
 private import annotation
 
 # Metadata associated to an Android project
@@ -137,7 +136,7 @@ redef class AAnnotation
 		else
 			for arg in args do
 				var format_error = "Annotation error: \"{name}\" expects its arguments to be of type Int or a call to `git_revision`"
-				
+
 				var value
 				value = arg.as_int
 				if value != null then

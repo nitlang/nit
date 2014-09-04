@@ -15,8 +15,8 @@
 # Base options for testing tools.
 module testing_base
 
-import modelize_property
-import parser_util
+import modelize
+private import parser_util
 
 redef class ToolContext
 	# opt --full

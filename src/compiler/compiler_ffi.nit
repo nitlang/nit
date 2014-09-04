@@ -342,7 +342,7 @@ redef class MNullableType
 		var base_cname = "null_{mtype.mangled_cname}"
 		var full_cname = "NIT_NULL___{base_cname}"
 
-		# In nitni files, declare internal function as extern 
+		# In nitni files, declare internal function as extern
 		var full_friendly_csignature = "{cname_blind} {full_cname}()"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
@@ -374,7 +374,7 @@ redef class MExplicitCall
 		var mproperty = mproperty
 		assert mproperty isa MMethod
 
-		# In nitni files, declare internal function as extern 
+		# In nitni files, declare internal function as extern
 		var full_friendly_csignature = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
@@ -489,7 +489,7 @@ redef class MExplicitCast
 		## check type
 		#
 
-		# In nitni files, declare internal function as extern 
+		# In nitni files, declare internal function as extern
 		var full_friendly_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname_blind})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 

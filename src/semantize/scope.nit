@@ -17,8 +17,6 @@
 # Identification and scping of local variables and labels.
 module scope
 
-import parser
-import toolcontext
 import phase
 
 redef class ToolContext

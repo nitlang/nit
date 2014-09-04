@@ -16,9 +16,7 @@
 
 # Metrics about the nodes and identifiers in the AST
 module ast_metrics
-import modelbuilder
-private import metrics_base
-import frontend
+import metrics_base
 
 redef class ToolContext
 	var ast_metrics_phase: Phase = new AstMetricsPhase(self, null)

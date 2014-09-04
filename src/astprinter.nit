@@ -17,10 +17,9 @@
 # print AST in an human form
 module astprinter
 
-import typing
-import phase
+import semantize
 intrude import parser
-import literal
+private import literal
 
 private class ASTPrinterVisitor
 	super Visitor

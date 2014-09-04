@@ -17,8 +17,8 @@
 # A version of the naive Nit interpreter for PNaCl.
 module pnacl_nit
 
-import naive_interpreter
-import debugger
+import interpreter::naive_interpreter
+import interpreter::debugger
 import pnacl
 intrude import toolcontext
 intrude import modelbuilder

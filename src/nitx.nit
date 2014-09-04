@@ -16,7 +16,7 @@
 module nitx
 
 import model_utils
-import modelize_property
+import modelize
 
 # Main class of the nit index tool
 # NitIndex build the model using the toolcontext argument

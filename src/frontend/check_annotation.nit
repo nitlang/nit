@@ -19,7 +19,7 @@
 module check_annotation
 
 import phase
-import annotation
+private import annotation
 
 redef class ToolContext
 	var check_annotation_phase: Phase = new CheckAnnotationPhase(self, null)

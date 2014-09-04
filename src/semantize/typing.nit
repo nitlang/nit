@@ -18,9 +18,7 @@
 # By OO-services we mean message sending, attribute access, instantiation, etc.
 module typing
 
-import flow
-import modelize_property
-import phase
+import modelize
 import local_var_init
 
 redef class ToolContext
