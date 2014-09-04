@@ -113,8 +113,8 @@ fi
 
 ## COMPILE ENGINES
 
-# force to use the last nitg, not the bootstraped one
-test -f ./nitg || ../bin/nitg ../src/nitg.nit -v
+# get the bootstrapped nitg
+cp ../bin/nitg .
 
 ## EFFECTIVE BENCHS ##
 
