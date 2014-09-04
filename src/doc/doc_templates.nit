@@ -742,9 +742,7 @@ class TplListItem
 	fun append(content: Streamable) do self.content.add content
 
 	redef fun rendering do
-		add "<li class='"
-		for cls in css_classes do add " {cls}"
-		add "'>"
+		add "<li class='{css_classes.join(" ")}'>"
 		add content
 		add "</li>"
 	end
@@ -755,12 +753,11 @@ class TplLabel
 	super Template
 
 	# Content of the label if any
-	var content: nullable Streamable
+	var content: nullable Streamable = null is writable
 
 	# CSS classes of the <span> element
 	var css_classes = new Array[String]
 
-	init do end
 	init with_content(content: Streamable) do self.content = content
 	init with_classes(classes: Array[String]) do self.css_classes = classes
 
