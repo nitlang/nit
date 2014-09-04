@@ -26,8 +26,6 @@ source ./bench_plot.sh
 # Can be overrided with 'the option -n'
 count=2
 
-pep8analysis=../../pep8analysis
-
 ### HELPER FUNCTIONS ##
 
 function die()
@@ -56,19 +54,27 @@ function run_compiler()
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg-g" "nitg --global --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitmetrics.nit
+		bench_command "nitg-g" "nitg --global --no-cc ../src/nitls.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitls.nit
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
-		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
+		bench_command "nit" "nit ../src/test_parser.nit ../src/nitls.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/nitls.nit
+		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
+		rm -r out 2> /dev/null
+		mkdir out 2> /dev/null
+		bench_command "nitdoc" "nitdoc ../src/nitls.nit" "./nitdoc.$title.bin" -v ../src/nitls.nit -d out
 		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
-		bench_command "shoot" "shoot_logic 30" "./shoot.$title.bin" 30
+		bench_command "shoot" "shoot_logic 15" "./shoot.$title.bin" 15
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
-		bench_command "bintrees" "bench_bintree_gen 18" "./bintrees.$title.bin" 18
-		if test -f "$pep8analysis/src/pep8analysis.nit"; then
-			run_command "$@" "$pep8analysis/src/pep8analysis.nit" -I "$pep8analysis/lib" -o "pep8a.$title.bin"
-			bench_command "pep8analisis" "bench_bintree_gen 18" "./pep8a.$title.bin" "$pep8analysis/tests/privat/"*.pep
-		fi
+		bench_command "bintrees" "bench_bintree_gen 17" "./bintrees.$title.bin" 17
+		#run_command "$@" "../contrib/pep8analysis/src/pep8analysis.nit" -o "pep8a.$title.bin"
+		#bench_command "pep8analisis" "bench_pep8analisis" "./pep8a.$title.bin" "../contrib/pep8analysis/tests/privat/"*.pep
+		run_command "$@" "../lib/ai/examples/queens.nit" -o "queens.$title.bin"
+		bench_command "queens" "bench_queens 13" "./queens.$title.bin" 13
+		run_command "$@" "../lib/ai/examples/puzzle.nit" -o "puzzle.$title.bin"
+		bench_command "puzzle" "puzzle 15-hard" "./puzzle.$title.bin" kleg.mondcafjhbi
 	fi
+
+	rm -r *.bin .nit_compile out
 }
 
 ## HANDLE OPTIONS ##
