@@ -103,6 +103,9 @@ while [ "$stop" = false ]; do
 	esac
 done
 
+xml="bench_engines.xml"
+echo "<testsuites><testsuite>" > "$xml"
+
 NOTSKIPED="$*"
 
 if test -z "$NOTSKIPED"; then
@@ -331,6 +334,8 @@ bench_compilation_time
 if test -n "$html"; then
 	echo >>"$html" "</body></html>"
 fi
+
+echo >>"$xml" "</testsuite></testsuites>"
 
 if test -n "$died"; then
 	echo "Some commands failed"
