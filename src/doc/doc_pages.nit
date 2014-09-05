@@ -350,7 +350,7 @@ abstract class NitdocPage
 	do
 		if location == null then return null
 		var source = ctx.opt_source.value
-		if source == null then return "{location.file.filename.simplify_path}"
+		if source == null then return location.file.filename.simplify_path
 		# THIS IS JUST UGLY ! (but there is no replace yet)
 		var x = source.split_with("%f")
 		source = x.join(location.file.filename.simplify_path)
@@ -646,7 +646,7 @@ class NitdocGroup
 	private var sidebar = new TplSidebar
 	redef fun tpl_sidebar do return sidebar
 
-	redef fun tpl_title do return "{mgroup.nitdoc_name}"
+	redef fun tpl_title do return mgroup.nitdoc_name
 
 	redef fun page_url do return mgroup.nitdoc_url
 
@@ -654,9 +654,9 @@ class NitdocGroup
 		var topmenu = super
 		var mproject = mgroup.mproject
 		if not mgroup.is_root then
-			topmenu.add_link new TplLink(mproject.nitdoc_url, "{mproject.nitdoc_name}")
+			topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
 		end
-		topmenu.add_link new TplLink(page_url, "{mproject.nitdoc_name}")
+		topmenu.add_link new TplLink(page_url, mproject.nitdoc_name)
 		return topmenu
 	end
 
@@ -779,7 +779,7 @@ class NitdocModule
 	private var sidebar = new TplSidebar
 	redef fun tpl_sidebar do return sidebar
 
-	redef fun tpl_title do return "{mmodule.nitdoc_name}"
+	redef fun tpl_title do return mmodule.nitdoc_name
 	redef fun page_url do return mmodule.nitdoc_url
 
 	redef fun tpl_topmenu do
@@ -1021,7 +1021,7 @@ class NitdocClass
 		var topmenu = super
 		var mproject = mclass.intro_mmodule.mgroup.mproject
 		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
-		topmenu.add_link new TplLink(page_url, "{mclass.nitdoc_name}")
+		topmenu.add_link new TplLink(page_url, mclass.nitdoc_name)
 		return topmenu
 	end
 
@@ -1373,7 +1373,7 @@ class NitdocProperty
 		var mclass = mproperty.intro_mclassdef.mclass
 		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
 		topmenu.add_link new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}")
-		topmenu.add_link new TplLink(page_url, "{mproperty.nitdoc_name}")
+		topmenu.add_link new TplLink(page_url, mproperty.nitdoc_name)
 		return topmenu
 	end
 
