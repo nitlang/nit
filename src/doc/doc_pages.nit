@@ -231,7 +231,9 @@ class QuickSearch
 			tpl.add "\"{mproperty}\":["
 			for mpropdef in mprops do
 				var full_name = mpropdef.mclassdef.mclass.full_name
-				tpl.add "\{txt:\"{full_name}\",url:\"{mpropdef.nitdoc_url}\"\},"
+				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
+				var def_url = "{cls_url}#{mpropdef.mproperty.nitdoc_id}"
+				tpl.add "\{txt:\"{full_name}\",url:\"{def_url}\"\},"
 			end
 			tpl.add "],"
 		end
