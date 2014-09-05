@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import string
-"NOT YET IMPLEMENTED".output
+if args.length == 0 then return
+"hello\n".write_to_file args.first

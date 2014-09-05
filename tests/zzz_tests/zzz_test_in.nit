@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import string
-"NOT YET IMPLEMENTED".output
+print "INPUT:"
+print stdin.read_all
