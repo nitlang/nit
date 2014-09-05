@@ -655,7 +655,7 @@ class TplLink
 	var href: String writable
 
 	# Text to display in the link
-	var text: String writable
+	var text: Streamable writable
 
 	# Optional title
 	var title: nullable String writable
