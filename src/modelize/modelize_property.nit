@@ -884,6 +884,7 @@ redef class AAttrPropdef
 
 			var writename = name + "="
 			var nwritable = self.n_writable
+			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
 			var atwritable = self.get_single_annotation("writable", modelbuilder)
 			if atwritable != null then
 				if not atwritable.n_args.is_empty then
@@ -892,13 +893,10 @@ redef class AAttrPropdef
 			end
 			var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
 			var nwkwredef: nullable Token = null
-			if nwritable != null then nwkwredef = nwritable.n_kwredef
 			if atwritable != null then nwkwredef = atwritable.n_kwredef
 			if mwriteprop == null then
 				var mvisibility
-				if nwritable != null then
-					mvisibility = new_property_visibility(modelbuilder, mclassdef, nwritable.n_visibility)
-				else if atwritable != null then
+				if atwritable != null then
 					mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
 				else
 					mvisibility = private_visibility
@@ -907,9 +905,7 @@ redef class AAttrPropdef
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
-				if nwritable != null then
-					check_redef_property_visibility(modelbuilder, nwritable.n_visibility, mwriteprop)
-				else if atwritable != null then
+				if atwritable != null then
 					check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
 				end
 			end
