@@ -19,11 +19,11 @@ class A
 	var d: Int = 10
 
 	# Test test...
-	var e: Int writable
+	var e: Int is writable
 
-	var f: Int protected writable
+	var f: Int is protected writable
 
 	# Adoc
-	var k: Int protected writable = 10
+	var k: Int = 10 is protected writable
 	# more comments
 end # end
