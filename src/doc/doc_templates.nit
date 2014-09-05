@@ -518,7 +518,7 @@ class TplArticle
 	end
 
 	redef fun is_empty: Bool do
-		return title == null and subtitle == null and content == null
+		return title == null and subtitle == null and content == null and children.is_empty
 	end
 end
 
