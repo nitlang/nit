@@ -815,27 +815,7 @@ redef class AAttrPropdef
 		var nid = self.n_id
 		if nid != null then
 			# Old attribute style
-			var mprop = modelbuilder.try_get_mproperty_by_name(nid, mclassdef, name)
-			if mprop == null then
-				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-				mprop = new MAttribute(mclassdef, name, mvisibility)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
-			else
-				assert mprop isa MAttribute
-				check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, true, mprop) then return
-			end
-			mclassdef.mprop2npropdef[mprop] = self
-
-			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
-			self.mpropdef = mpropdef
-			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef)
-
-			var nreadable = self.n_readable
-			if nreadable != null then modelbuilder.error(nreadable, "Error: old-style getter no more supported")
-			var nwritable = self.n_writable
-			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
+			modelbuilder.error(nid, "Error: old-style attribute no more supported")
 		else
 			# New attribute style
 			var nid2 = self.n_id2.as(not null)
