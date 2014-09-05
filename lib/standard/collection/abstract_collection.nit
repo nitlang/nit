@@ -188,7 +188,7 @@ class Container[E]
 	init(e: E) do item = e
 
 	# The stored item
-	var item: E writable
+	var item: E is writable
 end
 
 # This iterator is quite stupid since it is used for only one item.
@@ -940,10 +940,10 @@ end
 class Couple[F, S]
 
 	# The first element of the couple.
-	var first: F writable
+	var first: F is writable
 
 	# The second element of the couple.
-	var second: S writable
+	var second: S is writable
 
 	# Create a new instance with a first and a second object.
 	init(f: F, s: S)

@@ -224,7 +224,7 @@ class MModule
 	# Is the mmodule created for internal purpose?
 	# Fictive module are instantied internally but they should not be
 	# exposed to the final user
-	var is_fictive: Bool writable = false
+	var is_fictive: Bool = false is writable
 
 	redef fun parent_concern do return mgroup
 end

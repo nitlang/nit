@@ -27,13 +27,13 @@ class HighlightVisitor
 
 	# Is the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
 	# Used to have a really huge and verbose HTML (mainly for debug)
-	var with_ast writable = false
+	var with_ast = false is writable
 
 	# The first line to generate, null if start at the first line
-	var first_line: nullable Int writable = null
+	var first_line: nullable Int = null is writable
 
 	# The last line to generate, null if finish at the last line
-	var last_line: nullable Int writable = null
+	var last_line: nullable Int = null is writable
 
 	init
 	do

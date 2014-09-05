@@ -526,13 +526,13 @@ end
 redef class Sys
 
 	# Standard input
-	var stdin: PollableIStream protected writable = new Stdin
+	var stdin: PollableIStream = new Stdin is protected writable
 
 	# Standard output
-	var stdout: OStream protected writable = new Stdout
+	var stdout: OStream = new Stdout is protected writable
 
 	# Standard output for errors
-	var stderr: OStream protected writable = new Stderr
+	var stderr: OStream = new Stderr is protected writable
 
 end
 

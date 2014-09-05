@@ -274,11 +274,11 @@ class TplSideBox
 
 	# Content to display in the box
 	# box will not be rendered if the content is null
-	var content: nullable Streamable writable
+	var content: nullable Streamable is writable
 
 	# Is the box opened by default
 	# otherwise, the user will have to clic on the title to display the content
-	var is_open writable = false
+	var is_open = false is writable
 
 	init(title: String) do
 		self.title = title
@@ -383,14 +383,14 @@ class TplSectionElt
 	# Title to display if any
 	# if both `title` and `summary_title` are null then
 	# the section will not appear in the summary
-	var title: nullable Streamable writable
+	var title: nullable Streamable is writable
 
 	# Subtitle to display if any
-	var subtitle: nullable Streamable writable
+	var subtitle: nullable Streamable is writable
 
 	# Title that appear in the summary
 	# if null use `title` instead
-	var summary_title: nullable String writable
+	var summary_title: nullable String is writable
 
 	# CSS classes to apply on the section element
 	var css_classes = new Array[String]
@@ -471,8 +471,8 @@ class TplArticle
 	super TplSectionElt
 
 	# Content for this article
-	var content: nullable Streamable writable = null
-	var source_link: nullable Streamable writable = null
+	var content: nullable Streamable = null is writable
+	var source_link: nullable Streamable = null is writable
 
 	init with_content(id: String, title: Streamable, content: Streamable) do
 		with_title(id, title)
@@ -652,13 +652,13 @@ class TplLink
 	super Template
 
 	# Link href
-	var href: String writable
+	var href: String is writable
 
 	# Text to display in the link
-	var text: Streamable writable
+	var text: Streamable is writable
 
 	# Optional title
-	var title: nullable String writable
+	var title: nullable String is writable
 
 	init(href, text: String) do
 		self.href = href

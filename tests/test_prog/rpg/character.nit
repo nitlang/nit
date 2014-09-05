@@ -26,7 +26,7 @@ class Character
 
 	# The current `Career` of the character.
 	# Returns `null` if character is unemployed.
-	var career: nullable Career writable = null
+	var career: nullable Career = null is writable
 
 	fun quit do
 		career = null

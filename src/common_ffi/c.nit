@@ -72,8 +72,8 @@ redef class Location
 end
 
 redef class MModule
-	var c_compiler_options writable = ""
-	var c_linker_options writable = ""
+	var c_compiler_options = "" is writable
+	var c_linker_options = "" is writable
 end
 
 class ForeignCType

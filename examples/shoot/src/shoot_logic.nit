@@ -36,17 +36,17 @@ class Player
 	end
 
 	# Current forture of the player
-	var money: Int writable = 0
+	var money: Int = 0 is writable
 
 	# Number of basic bullets fired together
-	var nbshoots: Int writable = 1
+	var nbshoots: Int = 1 is writable
 
 	# Time bebore the player shoot again a basic bullet (cooldown)
 	# Shoot if 0
 	var shoot_ttl = 0
 
 	# Number of missiles
-	var nbmissiles: Int writable = 0
+	var nbmissiles: Int = 0 is writable
 
 	# Time bebore the player shoot again a missile (cooldown)
 	# Shoot if 0
@@ -152,7 +152,7 @@ class GoingTarget
 	super Hitable
 
 	# true in on move, false if player is at rest
-	var active writable = false
+	var active = false is writable
 
 	init do
 		self.width = 500
@@ -834,13 +834,13 @@ class ShotScene
 	super Scene
 
 	# When a scene need to be replaced, just assign the next_scene to a non null value
-	var next_scene: nullable ShotScene writable = null
+	var next_scene: nullable ShotScene = null is writable
 
 	# The width of the whole scene
-	var width: Int writable
+	var width: Int is writable
 
 	# The height of the whole scene
-	var height: Int writable
+	var height: Int is writable
 
 	init(w,h: Int)
 	do
@@ -1034,7 +1034,7 @@ class MenuScene
 		end
 	end
 
-	var play: Bool writable = false
+	var play: Bool = false is writable
 	var ttl: Int = 50
 
 	redef fun update

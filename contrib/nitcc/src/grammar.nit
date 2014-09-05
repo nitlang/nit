@@ -330,11 +330,11 @@ class Production
 
 	# Is self transformed to a other production for the AST
 	# FIXME: cleaup AST
-	var spe: nullable Production writable = null
+	var spe: nullable Production = null is writable
 
 	# Is self contains only a single alternative (then no need for a abstract production class in the AST)
 	# FIXME cleanup AST
-	var altone writable = false
+	var altone = false is writable
 
 	# The cname of the class in the AST
 	# FIXME: cleanup AST
@@ -396,7 +396,7 @@ class Alternative
 	var prod: Production
 
 	# The name of the alternative
-	var name: String writable
+	var name: String is writable
 
 	# The elements of the alternative
 	var elems: Array[Element]
@@ -424,13 +424,13 @@ class Alternative
 	end
 
 	# The code for the reduction
-	var codes: nullable Array[Code] writable = null
+	var codes: nullable Array[Code] = null is writable
 
 	# Is the alternative transformed (ie not in the AST)
-	var trans writable = false
+	var trans = false is writable
 
 	# Is the alternative unparsable? (ie not in the automaton)
-	var phony writable = false
+	var phony = false is writable
 
 	# Imitialize codes with the elements
 	fun make_codes

@@ -28,7 +28,7 @@ abstract class TreeMap[K: Comparable, E]
 	protected type N: TreeNode[K, E]
 
 	# The `root` node of the tree (null if tree is empty)
-	protected var root: nullable N protected writable = null
+	protected var root: nullable N = null is protected writable
 
 	# Display the tree in a gaphical windows
 	# Graphviz with a working -Txlib is expected
@@ -51,7 +51,7 @@ class TreeNode[K: Comparable, E]
 	var value: E
 
 	# Direct parent of this node (null if the node is root)
-	var parent: nullable SELF writable = null
+	var parent: nullable SELF = null is writable
 
 	redef fun to_s do return "\{{value or else ""}\}"
 

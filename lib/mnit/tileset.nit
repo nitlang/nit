@@ -80,11 +80,11 @@ class TileSetFont
 
 	# Additional space to insert horizontally between characters
 	# A negave value will display tile overlaped
-	var hspace: Int writable = 0
+	var hspace: Int = 0 is writable
 
 	# Additional space to insert vertically between characters
 	# A negave value will display tile overlaped
-	var vspace: Int writable = 0
+	var vspace: Int = 0 is writable
 
 	# The glyph (tile) associated to the caracter `c` according to `chars`
 	# Returns null if `c` is not in `chars`

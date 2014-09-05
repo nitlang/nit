@@ -104,14 +104,14 @@ end
 
 # Game logic on the client
 class ThinGame
-	var tick: Int protected writable = 0
+	var tick: Int = 0 is protected writable
 end
 
 # Game turn on the client
 class ThinGameTurn[G: ThinGame]
-	var tick: Int protected writable = 0
+	var tick: Int = 0 is protected writable
 
-	var events: List[GameEvent] protected writable = new List[GameEvent]
+	var events: List[GameEvent] = new List[GameEvent] is protected writable
 
 	init (t: Int) do tick = t
 end

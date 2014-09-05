@@ -337,7 +337,7 @@ end
 redef class MPropDef
 	# Does the MPropDef contains a call to super or a call of a super-constructor?
 	# Subsequent phases of the frontend (esp. typing) set it if required
-	var has_supercall: Bool writable = false
+	var has_supercall: Bool = false is writable
 end
 
 redef class AClassdef
@@ -383,7 +383,7 @@ redef class APropdef
 	type MPROPDEF: MPropDef
 
 	# The associated propdef once build by a `ModelBuilder`
-	var mpropdef: nullable MPROPDEF writable
+	var mpropdef: nullable MPROPDEF is writable
 
 	private fun build_property(modelbuilder: ModelBuilder, mclassdef: MClassDef) is abstract
 	private fun build_signature(modelbuilder: ModelBuilder) is abstract
@@ -789,9 +789,9 @@ redef class AAttrPropdef
 	var mlazypropdef: nullable MAttributeDef
 
 	# The associated getter (read accessor) if any
-	var mreadpropdef: nullable MMethodDef writable
+	var mreadpropdef: nullable MMethodDef is writable
 	# The associated setter (write accessor) if any
-	var mwritepropdef: nullable MMethodDef writable
+	var mwritepropdef: nullable MMethodDef is writable
 
 	redef fun build_property(modelbuilder, mclassdef)
 	do

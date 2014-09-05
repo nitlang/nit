@@ -40,7 +40,7 @@ end
 # CURL Request
 class CurlRequest
 
-	var verbose: Bool writable = false
+	var verbose: Bool = false is writable
 	private var curl: nullable Curl = null
 
 	# Launch request method
@@ -76,8 +76,8 @@ class CurlHTTPRequest
 	super CurlCallbacksRegisterIntern
 
 	var url: String
-	var datas: nullable HeaderMap writable = null
-	var headers: nullable HeaderMap writable = null
+	var datas: nullable HeaderMap = null is writable
+	var headers: nullable HeaderMap = null is writable
 
 	# Set the user agent for all following HTTP requests
 	fun user_agent=(name: String)
@@ -201,14 +201,14 @@ class CurlMailRequest
 	super CurlRequest
 	super CCurlCallbacks
 
-	var headers: nullable HeaderMap writable = null
-	var headers_body: nullable HeaderMap writable = null
-	var from: nullable String writable = null
-	var to: nullable Array[String] writable = null
-	var cc: nullable Array[String] writable = null
-	var bcc: nullable Array[String] writable = null
-	var subject: nullable String writable = ""
-	var body: nullable String writable = ""
+	var headers: nullable HeaderMap = null is writable
+	var headers_body: nullable HeaderMap = null is writable
+	var from: nullable String = null is writable
+	var to: nullable Array[String] = null is writable
+	var cc: nullable Array[String] = null is writable
+	var bcc: nullable Array[String] = null is writable
+	var subject: nullable String = "" is writable
+	var body: nullable String = "" is writable
 	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
 	init (curl: nullable Curl)
@@ -338,7 +338,7 @@ end
 
 # Callbacks attributes
 abstract class CurlCallbacksRegisterIntern
-	var delegate: nullable CurlCallbacks writable = null
+	var delegate: nullable CurlCallbacks = null is writable
 end
 
 # Abstract Curl request response
