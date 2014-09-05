@@ -37,9 +37,11 @@ function bench_command()
 	echo "** [$title] $desc **"
 	echo " $ $@"
 
+	failed=
+
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || die "$1: failed"
+		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || { failed=true; die "$1: failed"; }
 		echo -n "$i. "
 		tail -n 1 "$timeout"
 	done
@@ -47,6 +49,13 @@ function bench_command()
 	line=`compute_stats "$timeout"`
 	echo "$line ($res)"
 	echo $line >> "$res"
+
+	test -z "$xml" && return
+	echo >>"$xml" "<testcase classname='bench.`basename $res .dat`' name='$title' time='`echo $line | cut -f 1 -d " "`' timestamp='`date -Iseconds`'>"
+	if test -n "$failed"; then
+		echo >>"$xml" "<error message='Command failed'/>"
+	fi
+	echo >>"$xml" "</testcase>"
 }
 
 # Run a simble command witout storing the execution time
