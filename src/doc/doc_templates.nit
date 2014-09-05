@@ -108,7 +108,7 @@ class TplPage
 		add "<script src='{shareurl}/vendors/jquery/jquery-1.11.1.min.js'></script>"
 		add "<script src='{shareurl}/vendors/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
 		add "<script src='{shareurl}/vendors/bootstrap/js/bootstrap.min.js'></script>"
-		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'</script>"
+		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'></script>"
 		for script in scripts do add script
 		add """<script>
 			$(function () {
@@ -697,7 +697,7 @@ class TplList
 	var css_classes = new Array[String]
 
 	# Add content wrapped in a <li> element
-	fun add_li(content: Streamable) do elts.add new TplListItem.with_content(content)
+	fun add_li(item: TplListItem) do elts.add item
 
 	init do end
 

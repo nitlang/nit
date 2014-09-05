@@ -393,7 +393,7 @@ abstract class NitdocPage
 			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}_intros", "Introduces")
 			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mclassdef in intros do
-				intros_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
+				intros_lst.add_li mclassdef.tpl_list_item
 			end
 			if not intros_lst.is_empty then
 				intros_art.content = intros_lst
@@ -406,7 +406,7 @@ abstract class NitdocPage
 			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}_redefs", "Redefines")
 			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mclassdef in redefs do
-				redefs_lst.add_li new TplListItem.with_content(mclassdef.tpl_list_item)
+				redefs_lst.add_li mclassdef.tpl_list_item
 			end
 			if not redefs_lst.is_empty then
 				redefs_art.content = redefs_lst
@@ -435,7 +435,7 @@ abstract class NitdocPage
 			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}_intros", "Introduces")
 			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mpropdef in mclassdef.collect_intro_mpropdefs(ctx.min_visibility) do
-				intros_lst.add_li new TplListItem.with_content(mpropdef.tpl_list_item)
+				intros_lst.add_li mpropdef.tpl_list_item
 			end
 			if not intros_lst.is_empty then
 				intros.content = intros_lst
@@ -444,7 +444,7 @@ abstract class NitdocPage
 			var redefs = new TplArticle.with_title("{mclassdef.nitdoc_id}_redefs", "Redefines")
 			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mpropdef in mclassdef.collect_redef_mpropdefs(ctx.min_visibility) do
-				redefs_lst.add_li new TplListItem.with_content(mpropdef.tpl_list_item)
+				redefs_lst.add_li mpropdef.tpl_list_item
 			end
 			if not redefs_lst.is_empty then
 				redefs.content = redefs_lst
@@ -676,7 +676,7 @@ class NitdocGroup
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All classes", list)
 	end
 
-	private fun tpl_sidebar_item(def: MClass): Template do
+	private fun tpl_sidebar_item(def: MClass): TplListItem do
 		var classes = def.intro.tpl_css_classes.to_a
 		if intros.has(def) then
 			classes.add "intro"
@@ -686,7 +686,7 @@ class NitdocGroup
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
 		lnk.add def.tpl_link
-		return lnk
+		return new TplListItem.with_content(lnk)
 	end
 
 	# intro text
@@ -806,7 +806,7 @@ class NitdocModule
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All classes", list)
 	end
 
-	private fun tpl_sidebar_item(def: MClass): Template do
+	private fun tpl_sidebar_item(def: MClass): TplListItem do
 		var classes = def.intro.tpl_css_classes.to_a
 		if def.intro_mmodule == mmodule then
 			classes.add "intro"
@@ -816,7 +816,7 @@ class NitdocModule
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
 		lnk.add def.tpl_link
-		return lnk
+		return new TplListItem.with_content(lnk)
 	end
 
 	# intro text
@@ -1048,14 +1048,14 @@ class NitdocClass
 		summary.elts.add entry
 	end
 
-	private fun tpl_sidebar_item(mprop: MProperty): Template do
+	private fun tpl_sidebar_item(mprop: MProperty): TplListItem do
 		var classes = mprop.intro.tpl_css_classes.to_a
 		if not mprops2mdefs.has_key(mprop) then
 			classes.add "inherit"
 			var lnk = new Template
 			lnk.add new TplLabel.with_classes(classes)
 			lnk.add mprop.intro.tpl_link
-			return lnk
+			return new TplListItem.with_content(lnk)
 		end
 		var defs = mprops2mdefs[mprop]
 		if defs.has(mprop.intro) then
@@ -1066,7 +1066,7 @@ class NitdocClass
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
 		lnk.add mprop.intro.tpl_anchor
-		return lnk
+		return new TplListItem.with_content(lnk)
 	end
 
 	private fun tpl_intro: TplSection do
