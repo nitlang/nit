@@ -54,7 +54,7 @@ redef class MEntity
 	# URL of this entity Nitdoc page
 	fun nitdoc_url: String is abstract
 
-	# A template link to the mentity `nitdoc_anchor`
+	# A template link to the mentity `nitdoc_id`
 	fun tpl_anchor: TplLink do
 		var tpl = new TplLink("#{nitdoc_id}", nitdoc_name)
 		if mdoc != null then
