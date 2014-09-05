@@ -350,7 +350,10 @@ abstract class NitdocPage
 	do
 		if location == null then return null
 		var source = ctx.opt_source.value
-		if source == null then return location.file.filename.simplify_path
+		if source == null then
+			var url = location.file.filename.simplify_path
+			return "<a target='_blank' title='Show source' href=\"{url}\">View Source</a>"
+		end
 		# THIS IS JUST UGLY ! (but there is no replace yet)
 		var x = source.split_with("%f")
 		source = x.join(location.file.filename.simplify_path)
