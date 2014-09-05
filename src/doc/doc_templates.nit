@@ -748,6 +748,67 @@ class TplListItem
 	end
 end
 
+# A Bootstrap tab component that contains `TplTabPanel`.
+class TplTab
+	super Template
+
+	# Panels contained in the tab.
+	var panels = new Array[TplTabPanel]
+
+	# Add a new panel.
+	fun add_panel(panel: TplTabPanel) do panels.add panel
+
+	# CSS classes of the tab component.
+	var css_classes = new Array[String]
+
+	redef fun rendering do
+		add "<div class='tab-content'>"
+		for panel in panels do add panel
+		add "</div>"
+	end
+end
+
+# A panel that goes in a `TplTab`.
+class TplTabPanel
+	super Template
+
+	# CSS classes of the pane element.
+	var css_classes = new Array[String]
+
+	# The panel id.
+	#
+	# Used to show/hide panel.
+	var id: String
+
+	# The panel name.
+	#
+	# Displayed in the tab header or in the pointing link.
+	var name: Streamable
+
+	# Is the panel visible by default?
+	var is_active = false is writable
+
+	# Body of the panel
+	var content: nullable Streamable = null is writable
+
+	# Get a link pointing to this panel.
+	fun tpl_link_to: Streamable do
+		var lnk = new Template
+		lnk.add "<a data-target='#{id}' data-toggle='pill'>"
+		lnk.add name
+		lnk.add "</a>"
+		return lnk
+	end
+
+	redef fun rendering do
+		add "<div class='tab-pane {css_classes.join(" ")}"
+		if is_active then add "active"
+		add "' id='{id}'>"
+		if content != null then add content.as(not null)
+		add "</div>"
+	end
+end
+
 # A label with a text content
 class TplLabel
 	super Template
