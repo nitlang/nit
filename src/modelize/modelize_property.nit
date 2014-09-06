@@ -420,6 +420,18 @@ redef class APropdef
 			mpropdef.mdoc = mdoc
 			mdoc.original_mentity = mpropdef
 		end
+
+		var at_deprecated = get_single_annotation("deprecated", modelbuilder)
+		if at_deprecated != null then
+			if not mpropdef.is_intro then
+				modelbuilder.error(self, "Error: method redefinition cannot be deprecated.")
+			else
+				var info = new MDeprecationInfo
+				ndoc = at_deprecated.n_doc
+				if ndoc != null then info.mdoc = ndoc.to_mdoc
+				mpropdef.mproperty.deprecation = info
+			end
+		end
 	end
 
 	private fun check_redef_property_visibility(modelbuilder: ModelBuilder, nvisibility: nullable AVisibility, mprop: MProperty)
@@ -851,6 +863,7 @@ redef class AAttrPropdef
 				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 				mreadprop = new MMethod(mclassdef, readname, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
+				mreadprop.deprecation = mprop.deprecation
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
 				check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
@@ -905,6 +918,7 @@ redef class AAttrPropdef
 				end
 				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
+				mwriteprop.deprecation = mprop.deprecation
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 				if nwritable != null then
