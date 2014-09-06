@@ -23,12 +23,12 @@ let loaded_syntastic_nit_nitg_checker = 1
 if exists('g:syntastic_nitg')
 	let s:nitg = g:syntastic_nitg
 else
-	let s:nitg = "nitc"
+	let s:nitg = "nitpick"
 endif
 
 if !executable(s:nitg)
 	if exists('g:syntastic_nitg')
-		echo "Syntastic for Nit error: Custom nitg cannot be found at: " . g:syntastic_nitg
+		echo "Syntastic for Nit error: Custom tool cannot be found at: " . g:syntastic_nitg
 	endif
 	finish
 endif
