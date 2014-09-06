@@ -1,0 +1,3 @@
+Usage: nitpick [OPTION]... <file.nit>...
+Collect potential style and code issues.
+Use --help for help
