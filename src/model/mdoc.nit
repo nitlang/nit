@@ -30,6 +30,18 @@ class MDoc
 end
 
 redef class MEntity
-	# The documentation assiciated to the entity
+	# The documentation associated to the entity
 	var mdoc: nullable MDoc writable
+
+	# Is the entity deprecated?
+	#
+	# Used for warnings and in documentation.
+	# Has no other specific effect.
+	var deprecation: nullable MDeprecationInfo = null is writable
+end
+
+# Information about a deprecated entity
+class MDeprecationInfo
+	# Explanation about the deprecation
+	var mdoc: nullable MDoc = null is writable
 end
