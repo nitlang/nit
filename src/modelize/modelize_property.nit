@@ -412,7 +412,7 @@ redef class APropdef
 		return mvisibility
 	end
 
-	private fun set_doc(mpropdef: MPropDef)
+	private fun set_doc(mpropdef: MPropDef, modelbuilder: ModelBuilder)
 	do
 		var ndoc = self.n_doc
 		if ndoc != null then
@@ -624,7 +624,7 @@ redef class AMethPropdef
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
-		set_doc(mpropdef)
+		set_doc(mpropdef, modelbuilder)
 
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -830,7 +830,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef)
+			set_doc(mpropdef, modelbuilder)
 
 			var nreadable = self.n_readable
 			if nreadable != null then modelbuilder.error(nreadable, "Error: old-style getter no more supported")
@@ -843,7 +843,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef)
+			set_doc(mpropdef, modelbuilder)
 
 			var readname = name
 			var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
@@ -1134,7 +1134,7 @@ redef class ATypePropdef
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
-		set_doc(mpropdef)
+		set_doc(mpropdef, modelbuilder)
 
 		var atfixed = get_single_annotation("fixed", modelbuilder)
 		if atfixed != null then
