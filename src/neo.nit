@@ -105,10 +105,23 @@
 # * `(:MSignature)-[:PARAMETER]->(:MParameter)`
 # * `(:MSignature)-[:RETURNTYPE]->(:MType)`
 #
+# In order to maintain the correct parameters order, each `MSignature` node contains
+# an array of parameter names corresponding to the parameter order in the signature.
+#
+# For example, if the source code contains:
+#
+#     fun foo(a: A, b: B, c: C)
+#
+# The `MSignature` node will contain a property `parameter_names = ["a", "b", "c"]` so
+# the MSignature can be reconstructed with the parameters in the correct order.
+#
 # `MParameter`
 #
 # * labels: `model_name`, `MEntity`, `MParameter`
 # * `(:MParameter)-[:TYPE]->(:MType)`
+#
+# MParameters are also ranked by their position in the corresponding signature.
+# Rank 0 for the first parameter, 1 for the next one and etc.
 module neo
 
 import model
@@ -625,9 +638,15 @@ class NeoModel
 			node.out_edges.add(new NeoEdge(node, "TYPE", to_node(mtype.mtype)))
 		else if mtype isa MSignature then
 			node.labels.add "MSignature"
+			var names = new JsonArray
+			var rank = 0
 			for mparameter in mtype.mparameters do
-				node.out_edges.add(new NeoEdge(node, "PARAMETER", to_node(mparameter)))
+				names.add mparameter.name
+				var pnode = to_node(mparameter)
+				pnode["rank"] = rank
+				node.out_edges.add(new NeoEdge(node, "PARAMETER", pnode))
 			end
+			if not names.is_empty then node["parameter_names"] = names
 			var return_mtype = mtype.return_mtype
 			if return_mtype != null then
 				node.out_edges.add(new NeoEdge(node, "RETURNTYPE", to_node(return_mtype)))
@@ -668,9 +687,20 @@ class NeoModel
 			mentities[node] = mtype
 			return mtype
 		else if node.labels.has("MSignature") then
-			var mparameters = new Array[MParameter]
+			# Get all param nodes
+			var mparam_nodes = new HashMap[String, MParameter]
 			for pnode in node.out_nodes("PARAMETER") do
-				mparameters.add to_mparameter(model, pnode)
+				var mparam = to_mparameter(model, pnode)
+				mparam_nodes[mparam.name] = mparam
+			end
+			# Load params in the good order
+			var mparam_names = node["parameter_names"]
+			var mparameters = new Array[MParameter]
+			if mparam_names isa JsonArray then
+				for mparam_name in mparam_names do
+					var mparam = mparam_nodes[mparam_name.to_s]
+					mparameters.add mparam
+				end
 			end
 			var return_mtype: nullable MType = null
 			var ret_nodes = node.out_nodes("RETURNTYPE")
