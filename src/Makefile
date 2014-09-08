@@ -16,7 +16,7 @@
 
 NITCOPT=
 OLDNITCOPT=
-OBJS=nitdoc nitmetrics nitg nit nitx nitunit nitlight nitls nitdbg_client nitserial
+OBJS=nitg nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
