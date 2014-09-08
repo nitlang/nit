@@ -106,7 +106,7 @@ redef class ToolContext
 					phase.process_nclassdef(nclassdef)
 					for npropdef in nclassdef.n_propdefs do
 						assert phase.toolcontext == self
-						phase.process_npropdef(npropdef)
+						phase_process_npropdef(phase, npropdef)
 					end
 				end
 				if errcount != self.error_count then
@@ -126,6 +126,11 @@ redef class ToolContext
 
 		var time1 = get_time
 		self.info("*** END SEMANTIC ANALYSIS: {time1-time0} ***", 2)
+	end
+
+	fun phase_process_npropdef(phase: Phase, npropdef: APropdef)
+	do
+		phase.process_npropdef(npropdef)
 	end
 end
 
