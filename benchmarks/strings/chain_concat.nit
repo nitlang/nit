@@ -25,18 +25,6 @@ do
 	end
 end
 
-fun bench_rope(str_size: Int, nb_ccts: Int, loops: Int)
-do
-	var lft = "a" * str_size
-
-	for i in [0..loops] do
-		var str: String = new RopeString.from(lft)
-		for j in [0..nb_ccts] do
-			str += lft
-		end
-	end
-end
-
 fun bench_flatbuf(str_size: Int, nb_ccts: Int, loops: Int)
 do
 	var lft = "a" * str_size
@@ -51,7 +39,7 @@ do
 end
 
 var opts = new OptionContext
-var mode = new OptionEnum(["rope", "flatstr", "flatbuf"], "Mode", -1, "-m")
+var mode = new OptionEnum(["flatstr", "flatbuf"], "Mode", -1, "-m")
 var nb_ccts = new OptionInt("Number of concatenations per loop", -1, "--ccts")
 var loops = new OptionInt("Number of loops to be done", -1, "--loops")
 var strlen = new OptionInt("Length of the base string", -1, "--strlen")
@@ -67,10 +55,8 @@ end
 var modval = mode.value
 
 if modval == 0 then
-	bench_rope(strlen.value, nb_ccts.value, loops.value)
-else if modval == 1 then
 	bench_flatstr(strlen.value, nb_ccts.value, loops.value)
-else if modval == 2 then
+else if modval == 1 then
 	bench_flatbuf(strlen.value, nb_ccts.value, loops.value)
 else
 	opts.usage
