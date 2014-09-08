@@ -262,6 +262,16 @@ private class TypeVisitor
 			return null
 		end
 
+		var info = mproperty.deprecation
+		if info != null and self.mpropdef.mproperty.deprecation == null then
+			var mdoc = info.mdoc
+			if mdoc != null then
+				self.modelbuilder.warning(node, "Deprecation Warning: Method '{name}' is deprecated: {mdoc.content.first}")
+			else
+				self.modelbuilder.warning(node, "Deprecation Warning: Method '{name}' is deprecated.")
+			end
+		end
+
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
 		var mpropdef
 		if propdefs.length == 0 then

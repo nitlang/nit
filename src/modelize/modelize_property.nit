@@ -412,13 +412,25 @@ redef class APropdef
 		return mvisibility
 	end
 
-	private fun set_doc(mpropdef: MPropDef)
+	private fun set_doc(mpropdef: MPropDef, modelbuilder: ModelBuilder)
 	do
 		var ndoc = self.n_doc
 		if ndoc != null then
 			var mdoc = ndoc.to_mdoc
 			mpropdef.mdoc = mdoc
 			mdoc.original_mentity = mpropdef
+		end
+
+		var at_deprecated = get_single_annotation("deprecated", modelbuilder)
+		if at_deprecated != null then
+			if not mpropdef.is_intro then
+				modelbuilder.error(self, "Error: method redefinition cannot be deprecated.")
+			else
+				var info = new MDeprecationInfo
+				ndoc = at_deprecated.n_doc
+				if ndoc != null then info.mdoc = ndoc.to_mdoc
+				mpropdef.mproperty.deprecation = info
+			end
 		end
 	end
 
@@ -624,7 +636,7 @@ redef class AMethPropdef
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
-		set_doc(mpropdef)
+		set_doc(mpropdef, modelbuilder)
 
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -823,7 +835,7 @@ redef class AAttrPropdef
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef)
+			set_doc(mpropdef, modelbuilder)
 
 			var readname = name
 			var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
@@ -831,6 +843,7 @@ redef class AAttrPropdef
 				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 				mreadprop = new MMethod(mclassdef, readname, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
+				mreadprop.deprecation = mprop.deprecation
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
 				check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
@@ -883,6 +896,7 @@ redef class AAttrPropdef
 				end
 				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
+				mwriteprop.deprecation = mprop.deprecation
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 				if atwritable != null then
@@ -1110,7 +1124,7 @@ redef class ATypePropdef
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
-		set_doc(mpropdef)
+		set_doc(mpropdef, modelbuilder)
 
 		var atfixed = get_single_annotation("fixed", modelbuilder)
 		if atfixed != null then
