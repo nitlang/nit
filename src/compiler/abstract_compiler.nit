@@ -1862,6 +1862,18 @@ redef class AMethPropdef
 			v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 		end
 
+		# Try special compilation
+		if mpropdef.is_intern then
+			if compile_intern_to_c(v, mpropdef, arguments) then return
+		else if mpropdef.is_extern then
+			if mpropdef.mproperty.is_init then
+				if compile_externinit_to_c(v, mpropdef, arguments) then return
+			else
+				if compile_externmeth_to_c(v, mpropdef, arguments) then return
+			end
+		end
+
+		# Compile block if any
 		var n_block = n_block
 		if n_block != null then
 			for i in [0..mpropdef.msignature.arity[ do
@@ -1869,17 +1881,13 @@ redef class AMethPropdef
 				v.assign(v.variable(variable), arguments[i+1])
 			end
 			v.stmt(n_block)
-		else if mpropdef.is_intern then
-			compile_intern_to_c(v, mpropdef, arguments)
-		else if mpropdef.is_extern then
-			if mpropdef.mproperty.is_init then
-				compile_externinit_to_c(v, mpropdef, arguments)
-			else
-				compile_externmeth_to_c(v, mpropdef, arguments)
-			end
-		else
-			abort
+			return
 		end
+
+		# We have a problem
+		var cn = v.class_name_string(arguments.first)
+		v.add("PRINT_ERROR(\"Runtime error: uncompiled method `%s` called on `%s`. NOT YET IMPLEMENTED\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+		v.add_raw_abort
 	end
 
 	redef fun can_inline
@@ -1892,7 +1900,7 @@ redef class AMethPropdef
 		return false
 	end
 
-	fun compile_intern_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	fun compile_intern_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
@@ -1908,238 +1916,235 @@ redef class AMethPropdef
 		if cname == "Int" then
 			if pname == "output" then
 				v.add("printf(\"%ld\\n\", {arguments.first});")
-				return
+				return true
 			else if pname == "object_id" then
 				v.ret(arguments.first)
-				return
+				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "-" then
 				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "unary -" then
 				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "*" then
 				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "/" then
 				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "%" then
 				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "lshift" then
 				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "rshift" then
 				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
+				return true
 			else if pname == "!=" then
 				var res = v.equal_test(arguments[0], arguments[1])
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<" then
 				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">" then
 				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<=" then
 				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "ascii" then
 				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
-				return
+				return true
 			end
 		else if cname == "Char" then
 			if pname == "output" then
 				v.add("printf(\"%c\", {arguments.first});")
-				return
+				return true
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
-				return
+				return true
 			else if pname == "successor" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "predecessor" then
 				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
+				return true
 			else if pname == "!=" then
 				var res = v.equal_test(arguments[0], arguments[1])
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<" then
 				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">" then
 				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<=" then
 				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
-				return
+				return true
 			else if pname == "ascii" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
-				return
+				return true
 			end
 		else if cname == "Bool" then
 			if pname == "output" then
 				v.add("printf({arguments.first}?\"true\\n\":\"false\\n\");")
-				return
+				return true
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
-				return
+				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
+				return true
 			else if pname == "!=" then
 				var res = v.equal_test(arguments[0], arguments[1])
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
+				return true
 			end
 		else if cname == "Float" then
 			if pname == "output" then
 				v.add("printf(\"%f\\n\", {arguments.first});")
-				return
+				return true
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(double){arguments.first}", ret.as(not null)))
-				return
+				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "-" then
 				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "unary -" then
 				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "succ" then
 				v.ret(v.new_expr("{arguments[0]}+1", ret.as(not null)))
-				return
+				return true
 			else if pname == "prec" then
 				v.ret(v.new_expr("{arguments[0]}-1", ret.as(not null)))
-				return
+				return true
 			else if pname == "*" then
 				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "/" then
 				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
+				return true
 			else if pname == "!=" then
 				var res = v.equal_test(arguments[0], arguments[1])
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<" then
 				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">" then
 				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "<=" then
 				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
-				return
+				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
-				return
+				return true
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
 				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
-				return
+				return true
 			else if pname == "[]=" then
 				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
-				return
+				return true
 			else if pname == "copy_to" then
 				v.add("memmove({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
-				return
+				return true
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
-				return
+				return true
 			else if pname == "init" then
 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
-				return
+				return true
 			end
 		else if cname == "NativeArray" then
 			v.native_array_def(pname, ret, arguments)
-			return
+			return true
 		end
 		if pname == "exit" then
 			v.add("exit({arguments[1]});")
-			return
+			return true
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
-			return
+			return true
 		else if pname == "calloc_string" then
 			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
-			return
+			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
-			return
+			return true
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
-			return
+			return true
 		else if pname == "is_same_type" then
 			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
-			return
+			return true
 		else if pname == "is_same_instance" then
 			v.ret(v.equal_test(arguments[0], arguments[1]))
-			return
+			return true
 		else if pname == "output_class_name" then
 			var nat = v.class_name_string(arguments.first)
 			v.add("printf(\"%s\\n\", {nat});")
-			return
+			return true
 		else if pname == "native_class_name" then
 			var nat = v.class_name_string(arguments.first)
 			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
-			return
+			return true
 		else if pname == "force_garbage_collection" then
 			v.add("nit_gcollect();")
-			return
+			return true
 		else if pname == "native_argc" then
 			v.ret(v.new_expr("glob_argc", ret.as(not null)))
-			return
+			return true
 		else if pname == "native_argv" then
 			v.ret(v.new_expr("glob_argv[{arguments[1]}]", ret.as(not null)))
-			return
+			return true
 		end
-		v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
-		debug("Not implemented {mpropdef}")
+		return false
 	end
 
-	fun compile_externmeth_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	# Compile an extern method
+	# Return `true` if the compilation was successful, `false` if a fall-back is needed
+	fun compile_externmeth_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool
 	do
 		var externname
 		var nextern = self.n_extern
-		if nextern == null then
-			v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
-			v.add("show_backtrace(1);")
-			return
-		end
+		if nextern == null then return false
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
@@ -2159,17 +2164,16 @@ redef class AMethPropdef
 			v.add("{res} = {externname}({arguments.join(", ")});")
 			v.ret(res)
 		end
+		return true
 	end
 
-	fun compile_externinit_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	# Compile an extern factory
+	# Return `true` if the compilation was successful, `false` if a fall-back is needed
+	fun compile_externinit_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool
 	do
 		var externname
 		var nextern = self.n_extern
-		if nextern == null then
-			v.add("PRINT_ERROR(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
-			v.add("show_backtrace(1);")
-			return
-		end
+		if nextern == null then return false
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
@@ -2183,6 +2187,7 @@ redef class AMethPropdef
 
 		v.add("{res} = {externname}({arguments.join(", ")});")
 		v.ret(res)
+		return true
 	end
 end
 
