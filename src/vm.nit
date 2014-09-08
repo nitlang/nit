@@ -159,7 +159,7 @@ class VirtualMachine super NaiveInterpreter
 	# Creates the runtime structures for this class
 	fun create_class(mclass: MClass) do	mclass.make_vt(self)
 
-	# Return the value of the attribute `mproperty for the object `recv
+	# Return the value of the attribute `mproperty` for the object `recv`
 	redef fun read_attribute(mproperty: MAttribute, recv: Instance): Instance
 	do
 		assert recv isa MutableInstance
@@ -173,12 +173,12 @@ class VirtualMachine super NaiveInterpreter
 		return i
 	end
 
-	# Return the attribute value in `instance with a sequence of perfect_hashing
-	#     `instance is the attributes array of the receiver
-	#     `vtable is the pointer to the virtual table of the class (of the receiver)
-	#     `mask is the perfect hashing mask of the class
-	#     `id is the identifier of the class
-	#     `offset is the relative offset of this attribute
+	# Return the attribute value in `instance` with a sequence of perfect_hashing
+	#     `instance` is the attributes array of the receiver
+	#     `vtable` is the pointer to the virtual table of the class (of the receiver)
+	#     `mask` is the perfect hashing mask of the class
+	#     `id` is the identifier of the class
+	#     `offset` is the relative offset of this attribute
 	private fun read_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int): Instance `{
 		// Perfect hashing position
 		int hv = mask & id;
@@ -192,7 +192,7 @@ class VirtualMachine super NaiveInterpreter
 		return res;
 	`}
 
-	# Replace in `recv the value of the attribute `mproperty by `value
+	# Replace in `recv` the value of the attribute `mproperty` by `value`
 	redef fun write_attribute(mproperty: MAttribute, recv: Instance, value: Instance)
 	do
 		assert recv isa MutableInstance
@@ -205,12 +205,12 @@ class VirtualMachine super NaiveInterpreter
 	end
 
 	# Replace the value of an attribute in an instance
-	#     `instance is the attributes array of the receiver
-	#     `vtable is the pointer to the virtual table of the class (of the receiver)
-	#     `mask is the perfect hashing mask of the class
-	#     `id is the identifier of the class
-	#     `offset is the relative offset of this attribute
-	#     `value is the new value for this attribute
+	#     `instance` is the attributes array of the receiver
+	#     `vtable` is the pointer to the virtual table of the class (of the receiver)
+	#     `mask` is the perfect hashing mask of the class
+	#     `id` is the identifier of the class
+	#     `offset` is the relative offset of this attribute
+	#     `value` is the new value for this attribute
 	private fun write_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int, value: Instance) `{
 		// Perfect hashing position
 		int hv = mask & id;
@@ -244,19 +244,18 @@ redef class MClass
 	do
 		if loaded then return
 
-		# Superclasses contains all superclasses except self
-		var superclasses = new Array[MClass]
-		superclasses.add_all(ancestors)
+		# `superclasses` contains the order of superclasses for virtual tables
+		var superclasses = superclasses_ordering(v)
 		superclasses.remove(self)
-		v.mainmodule.linearize_mclasses(superclasses)
 
 		# Make_vt for super-classes
 		var ids = new Array[Int]
 		var nb_methods = new Array[Int]
 		var nb_attributes = new Array[Int]
 
-		# Represents the absolute offsets from the beginning of the table for attributes and methods
+		# Absolute offset of the beginning of the attributes table
 		var offset_attributes = 0
+		# Absolute offset of the beginning of the methods table
 		var offset_methods = 0
 
 		for parent in superclasses do
@@ -277,7 +276,7 @@ redef class MClass
 			nb_methods.push(methods)
 			nb_attributes.push(attributes)
 
-			# Update `positions_attributes and `positions_methods in `parent
+			# Update `positions_attributes` and `positions_methods` in `parent`
 			update_positions(offset_attributes, offset_methods, parent)
 
 			offset_attributes += attributes
@@ -346,7 +345,7 @@ redef class MClass
 
 	# Computes delta for each class
 	# A delta represents the offset for this group of attributes in the object
-	#     `nb_attributes : number of attributes for each class (classes are linearized from Object to current)
+	#     `nb_attributes` : number of attributes for each class (classes are linearized from Object to current)
 	#     return deltas for each class
 	private fun calculate_delta(nb_attributes: Array[Int]): Array[Int]
 	do
@@ -361,9 +360,85 @@ redef class MClass
 		return deltas
 	end
 
-	# Update positions of self class in `parent
-	#     `attributes_offset: absolute offset of introduced attributes
-	#     `methods_offset: absolute offset of introduced methods
+	# Order superclasses of self
+	# Return the order of superclasses in runtime structures of this class
+	private fun superclasses_ordering(v: VirtualMachine): Array[MClass]
+	do
+		var superclasses = new Array[MClass]
+		superclasses.add_all(ancestors)
+
+		var res = new Array[MClass]
+		if superclasses.length > 1 then
+			# Starting at self
+			var ordering = self.dfs(v, res)
+
+			return ordering
+		else
+			# There is no super-class, self is Object
+			return superclasses
+		end
+	end
+
+	# A kind of Depth-First-Search for superclasses ordering
+	#     `v` : the current executed instance of VirtualMachine
+	#     `res` : Result Array, ie current superclasses ordering
+	private fun dfs(v: VirtualMachine, res: Array[MClass]): Array[MClass]
+	do
+		# Add this class at the beginning
+		res.insert(self, 0)
+
+		var direct_parents = self.in_hierarchy(v.mainmodule).direct_greaters.to_a
+
+		if direct_parents.length > 1 then
+			# Prefix represents the class which has the most properties
+			# we try to choose it in first to reduce the number of potential recompilations
+			var prefix = null
+			var max = -1
+			for cl in direct_parents do
+				# If we never have visited this class
+				if not res.has(cl) then
+					var properties_length = cl.all_mproperties(v.mainmodule, none_visibility).length
+					if properties_length > max then
+						max = properties_length
+						prefix = cl
+					end
+				end
+			end
+
+			if prefix != null then
+				# Add the prefix class ordering at the beginning of our sequence
+				var prefix_res = new Array[MClass]
+				prefix_res = prefix.dfs(v, prefix_res)
+
+				# Then we recurse on other classes
+				for cl in direct_parents do
+					if cl != prefix then
+						res = new Array[MClass]
+						res = cl.dfs(v, res)
+
+						for cl_res in res do
+							if not prefix_res.has(cl_res) then prefix_res.push(cl_res)
+						end
+					end
+				end
+				res = prefix_res
+			end
+
+			res.push(self)
+		else
+			if direct_parents.length > 0 then
+				res = direct_parents.first.dfs(v, res)
+			end
+		end
+
+		if not res.has(self) then res.push(self)
+
+		return res
+	end
+
+	# Update positions of self class in `parent`
+	#     `attributes_offset`: absolute offset of introduced attributes
+	#     `methods_offset`: absolute offset of introduced methods
 	private fun update_positions(attributes_offsets: Int, methods_offset:Int, parent: MClass)
 	do
 		parent.positions_attributes[self] = attributes_offsets
