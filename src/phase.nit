@@ -71,6 +71,9 @@ redef class ToolContext
 		return phases
 	end
 
+	# Set of already analyzed modules.
+	private var phased_modules = new HashSet[AModule]
+
 	# Run all registered phases on a set of modules
 	fun run_phases(nmodules: Collection[AModule])
 	do
@@ -85,6 +88,9 @@ redef class ToolContext
 		end
 
 		for nmodule in nmodules do
+			if phased_modules.has(nmodule) then continue
+			phased_modules.add nmodule
+
 			self.info("Semantic analysis module {nmodule.location.file.filename}", 2)
 
 			var vannot = new AnnotationPhaseVisitor
