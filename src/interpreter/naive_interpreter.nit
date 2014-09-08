@@ -501,6 +501,10 @@ private class NaiveInterpreter
 	do
 		return mtype.anchor_to(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType))
 	end
+
+	# Placebo instance used to mark internal error result when `null` already have a meaning.
+	# TODO: replace with multiple return or something better
+	var error_instance = new MutableInstance(modelbuilder.model.null_type) is lazy
 end
 
 # An instance represents a value of the executed program.
@@ -671,14 +675,28 @@ redef class AMethPropdef
 			v.call_without_varargs(superpd, arguments)
 		end
 
+		if mpropdef.is_intern or mpropdef.is_extern then
+			var res = intern_call(v, mpropdef, arguments)
+			if res != v.error_instance then return res
+		end
+
 		if n_block != null then
 			v.stmt(self.n_block)
 			return null
-		else
-			return intern_call(v, mpropdef, arguments)
 		end
+
+		if mpropdef.is_intern then
+			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
+		else if mpropdef.is_extern then
+			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+		else
+			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
+		end
+		abort
 	end
 
+	# Interprets a intern or a shortcut extern method.
+	# Returns the result for a function, `null` for a procedure, or `error_instance` if the method is unknown.
 	private fun intern_call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		var pname = mpropdef.mproperty.name
@@ -986,14 +1004,7 @@ redef class AMethPropdef
 		else if pname == "address_is_null" then
 			return v.false_instance
 		end
-		if mpropdef.is_intern then
-			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
-		else if mpropdef.is_extern then
-			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
-		else
-			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
-		end
-		abort
+		return v.error_instance
 	end
 end
 
