@@ -84,6 +84,8 @@ interface Pattern
 		res.add(new Match(s.to_s, i, s.length - i))
 		return res
 	end
+
+	protected fun is_in(s: Text): Bool do return search_index_in(s, 0) != -1
 end
 
 # BM_Pattern are pre-compiled string motif for the Boyer-Moore algorithm.
@@ -374,4 +376,11 @@ redef class Text
 	do
 		return self.split_with(p).join(string)
 	end
+
+	# Does `self` contains at least one instance of `pattern`?
+	#
+	#     assert "hello".has('l')
+	#     assert "hello".has("ll")
+	#     assert not "hello".has("lll")
+	fun has(pattern: Pattern): Bool do return pattern.is_in(self)
 end
