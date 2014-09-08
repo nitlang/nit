@@ -57,34 +57,49 @@ read_model.load(neo_model)
 # Compare model
 var sorter = new MEntityNameSorter
 
-print "mprojects:"
+print "# mprojects:"
 var org_mprojects = org_model.mprojects.to_a
 sorter.sort org_mprojects
 print org_mprojects.join(" ")
+print "------------------------------------"
 var neo_mprojects = neo_model.mprojects.to_a
 sorter.sort neo_mprojects
 print neo_mprojects.join(" ")
 
-print "mmodules:"
+print "\n# mmodules:"
 var org_mmodules = org_model.mmodules.to_a
 sorter.sort org_mmodules
 print org_mmodules.join(" ")
+print "------------------------------------"
 var neo_mmodules = neo_model.mmodules.to_a
 sorter.sort neo_mmodules
 print neo_mmodules.join(" ")
 
-print "mclasses:"
+print "\n# mclasses:"
 var org_mclasses = org_model.mclasses.to_a
 sorter.sort org_mclasses
 print org_mclasses.join(" ")
+print "------------------------------------"
 var neo_mclasses = neo_model.mclasses.to_a
 sorter.sort neo_mclasses
 print neo_mclasses.join(" ")
 
-print "mproperties:"
+print "\n# mproperties:"
 var org_mproperties = org_model.mproperties.to_a
 sorter.sort org_mproperties
 print org_mproperties.join(" ")
+print "------------------------------------"
 var neo_mproperties = neo_model.mproperties.to_a
 sorter.sort neo_mproperties
 print neo_mproperties.join(" ")
+
+print "\n# msignatures:"
+for org_mprop in org_mproperties do
+	if not org_mprop isa MMethod then continue
+	print "{org_mprop.name}{org_mprop.intro.msignature or else ""}"
+end
+print "------------------------------------"
+for neo_mprop in neo_mproperties do
+	if not neo_mprop isa MMethod then continue
+	print "{neo_mprop.name}{neo_mprop.intro.msignature or else ""}"
+end
