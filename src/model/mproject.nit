@@ -30,7 +30,7 @@ class MProject
 	redef var model: Model
 
 	# The root of the group tree
-	var root: nullable MGroup writable = null
+	var root: nullable MGroup = null is writable
 
 	# The group tree, as a POSet
 	var mgroups = new POSet[MGroup]
@@ -81,7 +81,7 @@ class MGroup
 	fun is_root: Bool do return mproject.root == self
 
 	# The filepath (usualy a directory) of the group, if any
-	var filepath: nullable String writable
+	var filepath: nullable String is writable
 
 	init (name: String, mproject: MProject, parent: nullable MGroup)
 	do

@@ -26,10 +26,10 @@ class MDoc
 
 	# The entity where the documentation is originally attached to.
 	# This gives some context to resolve identifiers or to run examples.
-	var original_mentity: nullable MEntity writable = null
+	var original_mentity: nullable MEntity = null is writable
 end
 
 redef class MEntity
 	# The documentation assiciated to the entity
-	var mdoc: nullable MDoc writable
+	var mdoc: nullable MDoc is writable
 end

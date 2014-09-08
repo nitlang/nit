@@ -35,14 +35,14 @@ abstract class JsonCurlRequest
 	end
 
 	# OAuth token
-	var auth: nullable String writable
+	var auth: nullable String is writable
 
 	# User agent (is used by github to contact devs in case of problems)
 	# Eg. "Awesome-Octocat-App"
-	var user_agent: nullable String writable
+	var user_agent: nullable String is writable
 
 	# HTTP headers to send
-	var headers: nullable HeaderMap writable = null
+	var headers: nullable HeaderMap = null is writable
 
 
 	# init HTTP headers for Neo4j REST API
@@ -125,7 +125,7 @@ end
 class JsonPOST
 	super JsonCurlRequest
 
-	var data: nullable Jsonable writable = null
+	var data: nullable Jsonable = null is writable
 
 	redef fun init_headers do
 		super
@@ -160,7 +160,7 @@ end
 class JsonPUT
 	super JsonCurlRequest
 
-	var data: nullable Jsonable writable = null
+	var data: nullable Jsonable = null is writable
 
 	redef fun init_headers do
 		super

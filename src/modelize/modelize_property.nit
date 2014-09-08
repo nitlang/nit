@@ -337,7 +337,7 @@ end
 redef class MPropDef
 	# Does the MPropDef contains a call to super or a call of a super-constructor?
 	# Subsequent phases of the frontend (esp. typing) set it if required
-	var has_supercall: Bool writable = false
+	var has_supercall: Bool = false is writable
 end
 
 redef class AClassdef
@@ -383,7 +383,7 @@ redef class APropdef
 	type MPROPDEF: MPropDef
 
 	# The associated propdef once build by a `ModelBuilder`
-	var mpropdef: nullable MPROPDEF writable
+	var mpropdef: nullable MPROPDEF is writable
 
 	private fun build_property(modelbuilder: ModelBuilder, mclassdef: MClassDef) is abstract
 	private fun build_signature(modelbuilder: ModelBuilder) is abstract
@@ -789,9 +789,9 @@ redef class AAttrPropdef
 	var mlazypropdef: nullable MAttributeDef
 
 	# The associated getter (read accessor) if any
-	var mreadpropdef: nullable MMethodDef writable
+	var mreadpropdef: nullable MMethodDef is writable
 	# The associated setter (write accessor) if any
-	var mwritepropdef: nullable MMethodDef writable
+	var mwritepropdef: nullable MMethodDef is writable
 
 	redef fun build_property(modelbuilder, mclassdef)
 	do
@@ -815,27 +815,7 @@ redef class AAttrPropdef
 		var nid = self.n_id
 		if nid != null then
 			# Old attribute style
-			var mprop = modelbuilder.try_get_mproperty_by_name(nid, mclassdef, name)
-			if mprop == null then
-				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-				mprop = new MAttribute(mclassdef, name, mvisibility)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
-			else
-				assert mprop isa MAttribute
-				check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, true, mprop) then return
-			end
-			mclassdef.mprop2npropdef[mprop] = self
-
-			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
-			self.mpropdef = mpropdef
-			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef)
-
-			var nreadable = self.n_readable
-			if nreadable != null then modelbuilder.error(nreadable, "Error: old-style getter no more supported")
-			var nwritable = self.n_writable
-			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
+			modelbuilder.error(nid, "Error: old-style attribute no more supported")
 		else
 			# New attribute style
 			var nid2 = self.n_id2.as(not null)
@@ -884,6 +864,7 @@ redef class AAttrPropdef
 
 			var writename = name + "="
 			var nwritable = self.n_writable
+			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
 			var atwritable = self.get_single_annotation("writable", modelbuilder)
 			if atwritable != null then
 				if not atwritable.n_args.is_empty then
@@ -892,13 +873,10 @@ redef class AAttrPropdef
 			end
 			var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
 			var nwkwredef: nullable Token = null
-			if nwritable != null then nwkwredef = nwritable.n_kwredef
 			if atwritable != null then nwkwredef = atwritable.n_kwredef
 			if mwriteprop == null then
 				var mvisibility
-				if nwritable != null then
-					mvisibility = new_property_visibility(modelbuilder, mclassdef, nwritable.n_visibility)
-				else if atwritable != null then
+				if atwritable != null then
 					mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
 				else
 					mvisibility = private_visibility
@@ -907,9 +885,7 @@ redef class AAttrPropdef
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
 			else
 				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
-				if nwritable != null then
-					check_redef_property_visibility(modelbuilder, nwritable.n_visibility, mwriteprop)
-				else if atwritable != null then
+				if atwritable != null then
 					check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
 				end
 			end

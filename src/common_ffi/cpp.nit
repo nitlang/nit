@@ -27,7 +27,7 @@ end
 redef class MModule
 	private var cpp_file: nullable CPPCompilationUnit = null
 
-	var cpp_compiler_options writable = ""
+	var cpp_compiler_options = "" is writable
 end
 
 class CPPLanguage

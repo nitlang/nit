@@ -30,10 +30,10 @@ redef class App
 
 	# Display to use by apps
 	# Is null if the display is not available or not yet ready
-	var display: nullable D protected writable = null
+	var display: nullable D = null is protected writable
 
 	# Received quit order
-	var quit: Bool writable = false
+	var quit: Bool = false is writable
 
 	# App is visible? (vs minimized or in background)
 	fun visible: Bool is abstract

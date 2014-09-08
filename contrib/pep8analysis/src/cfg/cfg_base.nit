@@ -306,7 +306,7 @@ class CFG
 		end
 	end
 
-	var watchdog writable = 0
+	var watchdog = 0 is writable
 	fun link_ret_to_calls(b: BasicBlock, to_link_ori: List[BasicBlock], seq: List[BasicBlock], depth: Int): Bool
 	do
 		watchdog += 1

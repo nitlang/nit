@@ -19,7 +19,7 @@ module csv
 class CSVDocument
 	super Streamable
 
-	var header: Array[String] writable = new Array[String]
+	var header: Array[String] = new Array[String] is writable
 	var lines: Array[Array[String]] = new Array[Array[String]]
 
 	fun set_header(values: Object...) do

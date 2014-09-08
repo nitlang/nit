@@ -137,25 +137,25 @@ end
 class SoundPool
 	private var nsoundpool: NativeSoundPool is noinit
 	# The maximum number of simultaneous streams for this SoundPool
-	var max_streams writable = 10
+	var max_streams = 10 is writable
 
 	# The audio stream type, 3 is STREAM_MUSIC, default for game application
-	var stream_type writable = 3
+	var stream_type = 3 is writable
 
 	# The sample-rate converter quality, currently has no effect
-	var src_quality writable = 0
+	var src_quality = 0 is writable
 
 	# Left volume value, range 0.0 to 1.0
-	var left_volume writable = 1.0
+	var left_volume = 1.0 is writable
 
 	# Right volume value, range 0.0 to 1.0
-	var right_volume writable = 1.0
+	var right_volume = 1.0 is writable
 
 	# Playback rate, 1.0 = normal playback, range 0.5 to 2.0
-	var rate writable = 1.0
+	var rate = 1.0 is writable
 
 	# Loop mode, 0 = no loop, -1 = loop forever
-	var looping writable = 0
+	var looping = 0 is writable
 
 	# Stream priority
 	private var priority = 1

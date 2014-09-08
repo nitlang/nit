@@ -116,7 +116,7 @@ abstract class Parser
 
 	# Should the parser stop
 	# Used by generated parsers
-	var stop writable = true
+	var stop = true is writable
 
 	# Parse a full sequence of tokens and return a complete syntactic tree
 	fun parse: Node
@@ -318,7 +318,7 @@ abstract class Node
 	end
 
 	# The position of the node in the input stream
-	var position: nullable Position writable = null
+	var position: nullable Position = null is writable
 
 	# Produce a graphiz file for the syntaxtic tree rooted at `self`.
 	fun to_dot(filepath: String)
@@ -423,7 +423,7 @@ abstract class NToken
 	end
 
 	# The text associated with the token
-	var text: String writable = ""
+	var text: String = "" is writable
 
 	redef fun to_s do
 		var res = super

@@ -20,10 +20,10 @@ $ template make_parser()
 # State of the parser automata as stored in the parser stack.
 private class State
 	# The internal state number
-	readable writable var _state: Int
+	readable var _state: Int is writable
 
 	# The node stored with the state in the stack
-	readable writable var _nodes: nullable Object
+	readable var _nodes: nullable Object is writable
 
 	init(state: Int, nodes: nullable Object)
 	do

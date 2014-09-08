@@ -154,10 +154,10 @@ class MProjectDot
 	end
 
 	# Should groups be shown as clusters?
-	var cluster_group writable = true
+	var cluster_group = true is writable
 
 	# Should projects be shown as clusters?
-	var project_group writable = true
+	var project_group = true is writable
 
 	# Recursively generate noed ans clusters for a mroup
 	private fun dot_cluster(o: OStream, mgroup: MGroup)

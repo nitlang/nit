@@ -1818,18 +1818,18 @@ class MMethod
 
 	# Is the property defined at the top_level of the module?
 	# Currently such a property are stored in `Object`
-	var is_toplevel: Bool writable = false
+	var is_toplevel: Bool = false is writable
 
 	# Is the property a constructor?
 	# Warning, this property can be inherited by subclasses with or without being a constructor
 	# therefore, you should use `is_init_for` the verify if the property is a legal constructor for a given class
-	var is_init: Bool writable = false
+	var is_init: Bool = false is writable
 
 	# The constructor is a (the) root init with empty signature but a set of initializers
-	var is_root_init: Bool writable = false
+	var is_root_init: Bool = false is writable
 
 	# The the property a 'new' contructor?
-	var is_new: Bool writable = false
+	var is_new: Bool = false is writable
 
 	# Is the property a legal constructor for a given class?
 	# As usual, visibility is not considered.
@@ -1944,13 +1944,13 @@ class MMethodDef
 	end
 
 	# The signature attached to the property definition
-	var msignature: nullable MSignature writable = null
+	var msignature: nullable MSignature = null is writable
 
 	# The signature attached to the `new` call on a root-init
 	# This is a concatenation of the signatures of the initializers
 	#
 	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
-	var new_msignature: nullable MSignature writable = null
+	var new_msignature: nullable MSignature = null is writable
 
 	# List of initialisers to call in root-inits
 	#
@@ -1960,13 +1960,13 @@ class MMethodDef
 	var initializers = new Array[MProperty]
 
 	# Is the method definition abstract?
-	var is_abstract: Bool writable = false
+	var is_abstract: Bool = false is writable
 
 	# Is the method definition intern?
-	var is_intern writable = false
+	var is_intern = false is writable
 
 	# Is the method definition extern?
-	var is_extern writable = false
+	var is_extern = false is writable
 end
 
 # A local definition of an attribute
@@ -1982,7 +1982,7 @@ class MAttributeDef
 	end
 
 	# The static type of the attribute
-	var static_mtype: nullable MType writable = null
+	var static_mtype: nullable MType = null is writable
 end
 
 # A local definition of a virtual type
@@ -1998,10 +1998,10 @@ class MVirtualTypeDef
 	end
 
 	# The bound of the virtual type
-	var bound: nullable MType writable = null
+	var bound: nullable MType = null is writable
 
 	# Is the bound fixed?
-	var is_fixed writable = false
+	var is_fixed = false is writable
 end
 
 # A kind of class.

@@ -444,13 +444,13 @@ abstract class AbstractCompiler
 
 	# The main module of the program currently compiled
 	# Is assigned during the separate compilation
-	var mainmodule: MModule writable
+	var mainmodule: MModule is writable
 
 	# The real main module of the program
 	var realmainmodule: MModule
 
 	# The modeulbuilder used to know the model and the AST
-	var modelbuilder: ModelBuilder protected writable
+	var modelbuilder: ModelBuilder is protected writable
 
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
@@ -479,7 +479,7 @@ abstract class AbstractCompiler
 	fun new_visitor: VISITOR is abstract
 
 	# Where global declaration are stored (the main .h)
-	var header: CodeWriter writable
+	var header: CodeWriter is writable
 
 	# Provide a declaration that can be requested (before or latter) by a visitor
 	fun provide_declaration(key: String, s: String)
@@ -1017,10 +1017,10 @@ abstract class AbstractCompilerVisitor
 	var compiler: COMPILER
 
 	# The current visited AST node
-	var current_node: nullable ANode writable = null
+	var current_node: nullable ANode = null is writable
 
 	# The current `Frame`
-	var frame: nullable Frame writable
+	var frame: nullable Frame is writable
 
 	# Alias for self.compiler.mainmodule.object_type
 	fun object_type: MClassType do return self.compiler.mainmodule.object_type
@@ -1523,7 +1523,7 @@ abstract class AbstractRuntimeFunction
 	# Non cached version of `c_name`
 	protected fun build_c_name: String is abstract
 
-	protected var c_name_cache: nullable String writable = null
+	protected var c_name_cache: nullable String = null is writable
 
 	# Implements a call of the runtime_function
 	# May inline the body or generate a C function call
@@ -1546,11 +1546,11 @@ class RuntimeVariable
 	var mtype: MType
 
 	# The current casted type of the variable (as known in Nit)
-	var mcasttype: MType writable
+	var mcasttype: MType is writable
 
 	# If the variable exaclty a mcasttype?
 	# false (usual value) means that the variable is a mcasttype or a subtype.
-	var is_exact: Bool writable = false
+	var is_exact: Bool = false is writable
 
 	init(name: String, mtype: MType, mcasttype: MType)
 	do
@@ -1600,10 +1600,10 @@ class Frame
 	var arguments: Array[RuntimeVariable]
 
 	# The runtime_variable associated to the return (in a function)
-	var returnvar: nullable RuntimeVariable writable = null
+	var returnvar: nullable RuntimeVariable = null is writable
 
 	# The label at the end of the property
-	var returnlabel: nullable String writable = null
+	var returnlabel: nullable String = null is writable
 end
 
 redef class MType
@@ -1614,7 +1614,7 @@ redef class MType
 
 	# Return the name of the C structure associated to a Nit live type
 	fun c_name: String is abstract
-	protected var c_name_cache: nullable String protected writable
+	protected var c_name_cache: nullable String is protected writable
 end
 
 redef class MClassType
