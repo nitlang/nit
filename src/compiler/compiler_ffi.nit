@@ -144,15 +144,10 @@ redef class AMethPropdef
 
 	redef fun compile_externmeth_to_c(v, mpropdef, arguments)
 	do
-		var mmodule = mpropdef.mclassdef.mmodule
-
 		# if using the old native interface fallback on previous implementation
-		var nextern = self.n_extern
-		if nextern != null then
-			super
-			return
-		end
+		if n_extern_code_block == null then return super
 
+		var mmodule = mpropdef.mclassdef.mmodule
 		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
@@ -203,19 +198,15 @@ redef class AMethPropdef
 		end
 
 		compile_ffi_support_to_c(v)
+		return true
 	end
 
 	redef fun compile_externinit_to_c(v, mpropdef, arguments)
 	do
-		var mmodule = mpropdef.mclassdef.mmodule
-
 		# if using the old native interface fallback on previous implementation
-		var nextern = self.n_extern
-		if nextern != null then
-			super
-			return
-		end
+		if n_extern_code_block == null then return super
 
+		var mmodule = mpropdef.mclassdef.mmodule
 		mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
@@ -255,6 +246,7 @@ redef class AMethPropdef
 		v.ret(recv_var)
 
 		compile_ffi_support_to_c(v)
+		return true
 	end
 end
 
