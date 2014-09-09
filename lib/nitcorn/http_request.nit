@@ -54,6 +54,9 @@ class HttpRequest
 
 	# The arguments passed with the POST method
 	var post_args = new HashMap[String, String]
+
+	# The arguments passed with the POST or GET method (with a priority on POST)
+	var all_args = new HashMap[String, String]
 end
 
 # Utility class to parse a request string and build a `HttpRequest`
@@ -96,7 +99,10 @@ class HttpRequestParser
 		if http_request.url.has('?') then
 			http_request.uri = first_line[1].substring(0, first_line[1].index_of('?'))
 			http_request.query_string = first_line[1].substring_from(first_line[1].index_of('?')+1)
+
+			var parse_url = parse_url
 			http_request.get_args = parse_url
+			http_request.all_args.recover_with parse_url
 		else
 			http_request.uri = first_line[1]
 		end
@@ -113,6 +119,7 @@ class HttpRequestParser
 						continue
 					end
 					http_request.post_args[parts[0]] = decoded
+					http_request.all_args[parts[0]] = decoded
 				else
 					print "POST Error: {line} format error on {line}"
 				end

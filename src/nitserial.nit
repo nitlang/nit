@@ -149,7 +149,7 @@ for mmodule in mmodules do
 		module_name = "{mmodule.name}_serial"
 		module_path = null
 	else if module_path.has_suffix(".nit") then
-		module_name = mmodule.name.basename(".nit")
+		module_name = module_path.basename(".nit")
 	else
 		module_name = module_path.basename("")
 		module_path += ".nit"
