@@ -724,9 +724,9 @@ redef class AMethPropdef
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
-		mpropdef.is_abstract = self isa ADeferredMethPropdef
-		mpropdef.is_intern = self isa AInternMethPropdef
-		mpropdef.is_extern = self isa AExternPropdef
+		mpropdef.is_abstract = self isa ADeferredMethPropdef or self.get_single_annotation("abstract", modelbuilder) != null
+		mpropdef.is_intern = self isa AInternMethPropdef or self.get_single_annotation("intern", modelbuilder) != null
+		mpropdef.is_extern = self isa AExternPropdef or self.n_extern_code_block != null or self.get_single_annotation("extern", modelbuilder) != null
 	end
 
 	redef fun check_signature(modelbuilder)

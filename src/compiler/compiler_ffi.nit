@@ -110,8 +110,6 @@ redef class AMethPropdef
 		amodule.ensure_compile_ffi_wrapper
 		compile_ffi_method(mmodule)
 
-		assert self isa AExternPropdef
-
 		# nitni - Compile missing callbacks
 		mmodule.ensure_compile_nitni_base(v)
 		var ccu = mmodule.nitni_ccu.as(not null)

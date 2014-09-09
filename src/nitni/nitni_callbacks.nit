@@ -33,7 +33,10 @@ class VerifyNitniCallbacksPhase
 
 	redef fun process_npropdef(npropdef)
 	do
-		if not npropdef isa AExternPropdef then return
+		if not npropdef isa AMethPropdef then return
+		var mpropdef = npropdef.mpropdef
+		if mpropdef == null then return
+		if not mpropdef.is_extern then return
 
 		npropdef.verify_nitni_callbacks(toolcontext)
 	end
@@ -80,7 +83,7 @@ class ForeignCallbackSet
 	end
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	private var foreign_callbacks_cache: nullable ForeignCallbackSet = null
 
 	# All foreign callbacks from this method
@@ -139,6 +142,8 @@ redef class AExternPropdef
 
 	redef fun accept_rapid_type_visitor(v)
 	do
+		if foreign_callbacks_cache == null then return
+
 		for cb in foreign_callbacks.callbacks do v.add_send(cb.recv_mtype, cb.mproperty.as(MMethod))
 		for cast in foreign_callbacks.casts do v.add_cast_type(cast.to)
 		for sup in foreign_callbacks.supers do
