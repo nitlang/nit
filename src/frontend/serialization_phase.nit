@@ -122,7 +122,7 @@ private class SerializationPhasePreModel
 
 		code.add "end"
 
-		var npropdef = toolcontext.parse_propdef(code.join("\n")).as(AConcreteInitPropdef)
+		var npropdef = toolcontext.parse_propdef(code.join("\n")).as(AMethPropdef)
 		npropdefs.add npropdef
 		nclassdef.parent.as(AModule).inits_to_retype.add npropdef
 	end
@@ -186,11 +186,11 @@ end
 private class PreciseTypeVisitor
 	super Visitor
 
-	var npropdef: AConcreteInitPropdef
+	var npropdef: AMethPropdef
 	var mclassdef: MClassDef
 	var toolcontext: ToolContext
 
-	init(npropdef: AConcreteInitPropdef, mclassdef: MClassDef, toolcontext: ToolContext)
+	init(npropdef: AMethPropdef, mclassdef: MClassDef, toolcontext: ToolContext)
 	do
 		self.npropdef = npropdef
 		self.mclassdef = mclassdef
@@ -256,7 +256,7 @@ redef class AModule
 		return null
 	end
 
-	private var inits_to_retype = new Array[AConcreteInitPropdef]
+	private var inits_to_retype = new Array[AMethPropdef]
 end
 
 redef class AStdClassdef
