@@ -84,6 +84,9 @@ writable
 cached
 nosuper
 old_style_init
+abstract
+intern
+extern
 
 pkgconfig
 c_compiler_option

@@ -21,6 +21,7 @@ import literal
 import semantize
 import platform
 import c_tools
+private import annotation
 
 # Add compiling options
 redef class ToolContext
@@ -2143,9 +2144,15 @@ redef class AMethPropdef
 	fun compile_externmeth_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool
 	do
 		var externname
-		var nextern = self.n_extern
-		if nextern == null then return false
-		externname = nextern.text.substring(1, nextern.text.length-2)
+		var at = self.get_single_annotation("extern", v.compiler.modelbuilder)
+		if at != null then
+			externname = at.arg_as_string(v.compiler.modelbuilder)
+			if externname == null then return false
+		else
+			var nextern = self.n_extern
+			if nextern == null then return false
+			externname = nextern.text.substring(1, nextern.text.length-2)
+		end
 		if location.file != null then
 			var file = location.file.filename
 			v.add_extern(file)
@@ -2172,9 +2179,15 @@ redef class AMethPropdef
 	fun compile_externinit_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool
 	do
 		var externname
-		var nextern = self.n_extern
-		if nextern == null then return false
-		externname = nextern.text.substring(1, nextern.text.length-2)
+		var at = self.get_single_annotation("extern", v.compiler.modelbuilder)
+		if at != null then
+			externname = at.arg_as_string(v.compiler.modelbuilder)
+			if externname == null then return false
+		else
+			var nextern = self.n_extern
+			if nextern == null then return false
+			externname = nextern.text.substring(1, nextern.text.length-2)
+		end
 		if location.file != null then
 			var file = location.file.filename
 			v.add_extern(file)
