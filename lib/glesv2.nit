@@ -20,7 +20,7 @@
 # C library. If a method or class is not documented in Nit, refer to
 # the official documentation by the Khronos Group at:
 # http://www.khronos.org/opengles/sdk/docs/man/
-module glesv2 is pkgconfig("glesv2")
+module glesv2 is pkgconfig
 
 in "C Header" `{
 	#include <GLES2/gl2.h>

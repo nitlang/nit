@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Serices from the X11 library
-module x11 is pkgconfig("x11")
+module x11 is pkgconfig
 
 # Open the current display from the environment variables
 #

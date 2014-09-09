@@ -21,7 +21,7 @@
 # C library. If a method or class is not documented in Nit, refer to
 # the official documentation by the Khronos Group at:
 # http://www.khronos.org/registry/egl/sdk/docs/man/xhtml/
-module egl is pkgconfig("egl")
+module egl is pkgconfig
 
 in "C Header" `{
 	#include <EGL/egl.h>
