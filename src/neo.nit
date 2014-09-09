@@ -23,87 +23,123 @@
 #
 # Structure of the nit `Model` in base:
 #
+# For any `MEntity` (in addition to specific data):
+#
+# * Generic labels: model name (`model_name`) and `MEntity`.
+# * `name`: short (unqualified) name.
+# * `mdoc`: JSON array representing the associated Markdown documentation
+# (one item by line). Does not exist if there is no associated documentation.
+#
+# Note : All nodes in the model are `MEntity`.
+#
 # `MProject`
 #
-# * labels: `model_name`, `MEntity`, `MProject`
-# * `(:MProject)-[:ROOT]->(:MGroup)`
+# * Specific label: `MProject`
+# * `(:MProject)-[:ROOT]->(:MGroup)`: root of the group tree.
 #
 # `MGroup`
 #
-# * labels: `model_name`, `MEntity`, `MGroup`
-# * `(:MGroup)-[:PROJECT]->(:MProject)`
-# * `(:MGroup)-[:PARENT]->(:MGroup)`
+# * Specific label: `MGroup`
+# * `full_name`: fully qualified name.
+# * `(:MGroup)-[:PROJECT]->(:MProject)`: associated project.
+# * `(:MGroup)-[:PARENT]->(:MGroup)`: parent group. Does not exist for the root group.
+# * `(:MGroup)-[:DECLARES]->(:MModule)`: modules that are direct children of this group.
+# * `(:MGroup)-[:NESTS]->(:MGroup)`: subgroups that are direct children of this group.
 #
 # `MModule`
 #
-# * labels: `model_name`, `MEntity`, `MModule`
-# * `(:MModule)-[:IMPORTS]->(:MModule)`
-# * `(:MModule)-[:INTRODUCES]->(:MClass)`
-# * `(:MModule)-[:DEFINES]->(:MClassDef)`
+# * Specific label: `MModule`
+# * `full_name`: fully qualified name.
+# * `location`: origin of the definition. See `Location.to_s`.
+# * `(:MModule)-[:IMPORTS]->(:MModule)`: modules that are imported directly.
+# * `(:MModule)-[:INTRODUCES]->(:MClass)`: all by classes introduced by this module.
+# * `(:MModule)-[:DEFINES]->(:MClassDef)`: all class definitons contained in this module.
 #
 # `MClass`
 #
-# * labels: `model_name`, `MEntity`, `MClass`
-# * `(:MClass)-[:CLASSTYPE]->(:MClassType)`
+# * Specific label: `MClass`
+# * `full_name`: fully qualified name.
+# * `arity`: number of generic formal parameters. 0 if the class is not generic.
+# * `kind`: kind of the class (`interface`, `abstract class`, etc.)
+# * `visibility`: visibility of the class.
+# * `(:MClass)-[:CLASSTYPE]->(:MClassType)`: principal static type of the class.
 #
 # `MClassDef`
 #
-# * labels: `model_name`, `MEntity`, `MClassDef`
-# * `(:MClassDef)-[:BOUNDTYPE]->(:MClassType)`
-# * `(:MClassDef)-[:MCLASS]->(:MClass)`
-# * `(:MClassDef)-[:INTRODUCES]->(:MProperty)`
-# * `(:MClassDef)-[:DECLARES]->(:MPropDef)`
+# * Specific label: `MClassDef`
+# * `is_intro`: indicates if this definition introduces the class.
+# * `location`: origin of the definition. See `Location.to_s`.
+# * `parameter_names`: JSON array listing the name of each formal generic
+# parameter (in order of declaration). Does not exist if there is no formal
+# generic parameter.
+# * `(:MClassDef)-[:BOUNDTYPE]->(:MClassType)`: bounded type associated to the classdef.
+# * `(:MClassDef)-[:MCLASS]->(:MClass)`: associated `MClass`.
+# * `(:MClassDef)-[:INTRODUCES]->(:MProperty)`: all properties introduced by the classdef.
+# * `(:MClassDef)-[:DECLARES]->(:MPropDef)`: all property definitions in the classdef (introductions and redefinitions).
+# * `(:MClassDef)-[:INHERITS]->(:MClassType)`: all declared super-types
 #
 # `MProperty`
 #
-# * labels: `model_name`, `MEntity`, `MProperty`
-# * `(:MProperty)-[:INTRO_CLASSDEF]->(:MClassDef)`
-#
-# MProperties can also have labels `MMethod`, `MAttribute`, `MVirtualTypeProp`.
+# * Specific label: `MProperty`. Must also have `MMethod`, `MAttribute` or
+# `MVirtualTypeProp`, depending on the class of the represented entity.
+# * `full_name`: fully qualified name.
+# * `visibility`: visibility of the property.
+# * `is_init`: Indicates if the property is a constructor. Exists only if the node is a `MMethod`.
+# * `(:MProperty)-[:INTRO_CLASSDEF]->(:MClassDef)`: classdef that introduce the property.
 #
 # `MPropDef`
 #
-# * labels: `model_name`, `MEntity`, `MPropDef`
-# * `(:MPropDef)-[:DEFINES]->(:MProperty)`
+# * Specific label: `MPropDef`. Must also have `MMethodDef`, `MAttributeDef` or
+# `MVirtualTypeDef`, depending on the class of the represented entity.
+# * `is_intro`: indicates if this definition introduces the property.
+# * `location`: origin of the definition. See `Location.to_s`.
+# * `(:MPropDef)-[:DEFINES]->(:MProperty)`: associated property.
 #
-# MPropdefs can also have labels `MMethodDef`, `MAttributeDef`, `MVirtualTypeDef`.
+# Additional attributes and relationship for `MMethodDef`:
 #
-# `MMethodDef` are linked to a `MSignature`:
+# * `is_abstract`: Is the method definition abstract?
+# * `is_intern`: Is the method definition intern?
+# * `is_extern`: Is the method definition extern?
+# * `(:MMethodDef)-[:SIGNATURE]->(:MSignature)`: signature attached to the property definition.
 #
-# * `(:MMethodDef)-[:SIGNATURE]->(:MSignature)`
+# Additional relationship for `MVirtualTypeDef`:
 #
-# `MVirtualTypeDef` are linked to a `MType` (its `bound`):
-#
-# * `(:MVirtualTypeDef)-[:BOUND]->(:MType)`
+# * `(:MVirtualTypeDef)-[:BOUND]->(:MType)`: type to which the virtual type
+# is bound in this definition. Exists only if this definition bound the virtual
+# type to an effective type.
 #
 # `MType`
 #
-# * labels: `model_name`, `MEntity`, `MType`
+# * Specific label: `MType`. Must also have `MClassType`, `MNullableType`,
+# `MVirtualType` or `MSignature`, depending on the class of the represented
+# entity.
 #
-# MTypes can also have labels `MClassType`, `MGenericType`, `MNullableType`, `MVirtualType`
-# and `MSignature`.
+# Additional label and relationships for `MClassType`:
 #
-# `MClassType` and `MGenericType` both point to a `MClass` and have type `arguments`:
+# * If it is a `MGenericType`, has also the `MGenericType` label.
+# * `(:MClassType)-[:CLASS]->(:MClass)`: class.
+# * `(:MClassType)-[:ARGUMENT]->(:MType)`: type arguments.
 #
-# * `(:MClassType)-[:CLASS]->(:MClass)`
-# * `(:MClassType)-[:ARGUMENT]->(:MType)`
+# Additional relationship for `MVirtualType`:
 #
-# `MVirtualType` points to its introducing `MProperty`:
+# * `(:MVirtualType)-[:PROPERTY]->(:MProperty)`: associated property that
+# determines the type (usually a `MVirtualTypeProp`).
 #
-# * `(:MVirtualType)-[:PROPERTY]->(:MVirtualTypeDef)`
+# Additional attribute and relationship for `MParameterType`:
 #
-# `MParameterType` points to its introducing `MClass`:
+# * `rank`: position of the parameter (0 for the first parameter).
+# * `(:MParameterType)-[:CLASS]->(:MClass)`: generic class where the parameter belong.
 #
-# * `(:MParameterType)-[:CLASS]->(:MClass)`
+# Additional relationship for `MNullableType`:
 #
-# `MNullableType` points to its non-nullable `MType`:
+# * `(:MNullableType)-[:TYPE]->(:MType)`: base type of the nullable type.
 #
-# * `(:MNullableType)-[:TYPE]->(:MType)`
+# Additional attribute and relationships for `MSignature`:
 #
-# `MSignature` can have `parameters` and a `return_mtype`:
-#
-# * `(:MSignature)-[:PARAMETER]->(:MParameter)`
-# * `(:MSignature)-[:RETURNTYPE]->(:MType)`
+# * `parameter_names`: JSON array representing the list of the parameter names.
+# * `(:MSignature)-[:PARAMETER]->(:MParameter)`: parameters.
+# * `(:MSignature)-[:RETURNTYPE]->(:MType)`: return type. Does not exist for
+# procedures.
 #
 # In order to maintain the correct parameters order, each `MSignature` node contains
 # an array of parameter names corresponding to the parameter order in the signature.
@@ -117,8 +153,10 @@
 #
 # `MParameter`
 #
-# * labels: `model_name`, `MEntity`, `MParameter`
-# * `(:MParameter)-[:TYPE]->(:MType)`
+# * Specific label: `MParameter`
+# * `is_vararg`: Is the parameter a vararg?
+# * `rank`: position of the parameter (0 for the first parameter).
+# * `(:MParameter)-[:TYPE]->(:MType)`: static type of the parameter.
 #
 # MParameters are also ranked by their position in the corresponding signature.
 # Rank 0 for the first parameter, 1 for the next one and etc.
