@@ -11,3 +11,4 @@ clean:
 	rm -f bin/javap_test_parser bin/jwrapper
 	rm -f gen/*
 	rm -rf .nit_compile/
+	rm src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit

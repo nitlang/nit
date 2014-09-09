@@ -38,7 +38,7 @@ class Buckets[G: Game]
 	super Turnable[G]
 	type BUCKET: HashSet[Bucketable[G]]
 
-	private var buckets: Array[BUCKET]
+	private var buckets: Array[BUCKET] is noinit
 
 	private var next_bucket: nullable BUCKET = null
 	private var current_bucket_key: Int = -1

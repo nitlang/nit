@@ -60,21 +60,21 @@ extern class Timespec `{struct timespec*`}
 	fun destroy `{
 		free( recv );
 	`}
+
+	# Seconds in Float
+	# Loss of precision but great to print
+	fun to_f: Float do return sec.to_f + nanosec.to_f / 1000000000.0
+
+	redef fun to_s do return "{to_f}s"
 end
 
 # Keeps track of real time
 class Clock
 	# Time at instanciation
-	protected var time_at_beginning : Timespec
+	protected var time_at_beginning = new Timespec.monotonic_now
 
 	# Time at last time a lapse method was called
-	protected var time_at_last_lapse : Timespec
-
-	init
-	do
-		time_at_beginning = new Timespec.monotonic_now
-		time_at_last_lapse = new Timespec.monotonic_now
-	end
+	protected var time_at_last_lapse = new Timespec.monotonic_now
 
 	# Smallest time frame reported by clock
 	fun resolution : Timespec `{

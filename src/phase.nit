@@ -86,6 +86,10 @@ redef class ToolContext
 
 		for nmodule in nmodules do
 			self.info("Semantic analysis module {nmodule.location.file.filename}", 2)
+
+			var vannot = new AnnotationPhaseVisitor
+			vannot.enter_visit(nmodule)
+
 			for phase in phases do
 				if phase.disabled then continue
 				self.info(" phase: {phase}", 3)
@@ -98,7 +102,6 @@ redef class ToolContext
 				end
 				errcount = self.error_count
 				for nclassdef in nmodule.n_classdefs do
-					self.info(" phase: {phase} for {nclassdef.location}", 3)
 					assert phase.toolcontext == self
 					phase.process_nclassdef(nclassdef)
 					for npropdef in nclassdef.n_propdefs do
@@ -110,8 +113,9 @@ redef class ToolContext
 					self.check_errors
 					break
 				end
-				var v = new AnnotationPhaseVisitor(phase)
-				v.enter_visit(nmodule)
+				for na in vannot.annotations do
+					phase.process_annotated_node(na.parent.parent.as(not null), na)
+				end
 				if errcount != self.error_count then
 					self.check_errors
 					break
@@ -125,17 +129,17 @@ redef class ToolContext
 	end
 end
 
+# Collect all annotation
 private class AnnotationPhaseVisitor
 	super Visitor
 
-	var phase: Phase
-
-	init(phase: Phase) do self.phase = phase
+	# The collected annotations
+	var annotations = new Array[AAnnotation]
 
 	redef fun visit(n)
 	do
 		n.visit_all(self)
-		if n isa AAnnotation then phase.process_annotated_node(n.parent.parent.as(not null), n)
+		if n isa AAnnotation then annotations.add n
 	end
 end
 

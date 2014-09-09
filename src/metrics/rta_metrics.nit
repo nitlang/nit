@@ -17,12 +17,10 @@
 # Metrics from RTA
 module rta_metrics
 
-import modelbuilder
 private import rapid_type_analysis
-private import metrics_base
+import metrics_base
 import mmodules_metrics
 import mclasses_metrics
-import frontend
 
 redef class ToolContext
 	var rta_metrics_phase: Phase = new RTAMetricsPhase(self, null)

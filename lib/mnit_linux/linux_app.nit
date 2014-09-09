@@ -31,6 +31,7 @@ redef class App
 
 	redef fun setup
 	do
+		if "NIT_TESTING".environ == "true" then exit 0
 		display = new Opengles1Display
 
 		super

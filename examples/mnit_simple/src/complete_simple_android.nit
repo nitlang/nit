@@ -16,6 +16,7 @@
 
 module complete_simple_android is
 	java_package("org.nitlanguage.test_all")
+	target_api_version(19)
 end
 
 import test_bundle
@@ -24,3 +25,4 @@ import test_shared_preferences
 import test_assets_and_resources
 import test_target_api
 import test_data_store
+import test_intent

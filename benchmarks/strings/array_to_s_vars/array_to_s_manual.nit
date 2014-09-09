@@ -1,0 +1,59 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# This file is free software, which comes along with NIT.  This software is
+# distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
+# PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
+# is kept unaltered, and a notification of the changes is added.
+# You  are  allowed  to  redistribute it and sell it, alone or is a part of
+# another product.
+
+# Implementation of Array::to_s with manual management of the String
+#
+# To be used as a Mixin at compile-time for benchmarking purposes.
+module array_to_s_manual
+
+intrude import standard::string
+intrude import standard::collection::array
+
+redef class NativeArray[E]
+	new(length: Int) is intern
+end
+
+redef class Array[E]
+	super StringCapable
+
+	redef fun to_s: String do
+		var l = length
+		var its = _items
+		var na = new NativeArray[String](l)
+		var i = 0
+		var sl = 0
+		while i < l do
+			var tmp = its[i].to_s
+			sl += tmp.length
+			na[i] = tmp
+			i += 1
+		end
+		var ns = calloc_string(sl + 1)
+		ns[sl] = '\0'
+		i = 0
+		var off = 0
+		while i < l do
+			var tmp = na[i]
+			var tpl = tmp.length
+			if tmp isa FlatString then
+				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
+				off += tpl
+			else
+				for j in tmp.substrings do
+					var s = j.as(FlatString)
+					s.items.copy_to(ns, tpl, s.index_from, off)
+					off += tpl
+				end
+			end
+			i += 1
+		end
+		return ns.to_s_with_length(sl)
+	end
+end

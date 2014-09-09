@@ -290,6 +290,8 @@ universal Float
 	redef type OTHER: Float
 
 	redef fun object_id is intern
+	redef fun ==(i) is intern
+	redef fun !=(i) is intern
 	redef fun output is intern
 
 	redef fun <=(i): Bool is intern
@@ -308,6 +310,44 @@ universal Float
 
 	redef fun zero do return 0.0
 	redef fun value_of(val) do return val.to_f
+
+	redef fun <=>(other)
+	do
+		if self < other then
+			return -1
+		else if other < self then
+			return 1
+		else
+			return 0
+		end
+	end
+
+	redef fun is_between(c, d)
+	do
+		if self < c or d < self then
+			return false
+		else
+			return true
+		end
+	end
+
+	redef fun max(other)
+	do
+		if self < other then
+			return other
+		else
+			return self
+		end
+	end
+
+	redef fun min(c)
+	do
+		if c < self then
+			return c
+		else
+			return self
+		end
+	end
 end
 
 # Native integer numbers.

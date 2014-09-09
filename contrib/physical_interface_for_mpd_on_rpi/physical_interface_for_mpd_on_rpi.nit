@@ -34,18 +34,18 @@ class PhysicalInterface
 	fun server: String do return "localhost"
 	fun port: Int do return 6600
 
-	var but_play: Switch
-	var but_playlist_a: Switch
+	var but_play: Switch is noinit
+	var but_playlist_a: Switch is noinit
 
-	var vol: RotaryEncoder
+	var vol: RotaryEncoder is noinit
 	var vol_step = 2
 
-	var lcd: HD44780
+	var lcd: HD44780 is noinit
 
-	var lcd_backlight: RPiPin
+	var lcd_backlight: RPiPin is noinit
 	var lcd_backlight_delay = 1000
 
-	var buzzer: Buzzer
+	var buzzer: Buzzer is noinit
 
 	init
 	do

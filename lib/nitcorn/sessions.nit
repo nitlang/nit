@@ -31,7 +31,7 @@ import http_response
 class Session
 
 	# Hashed id used both client and server side to identify this `Session`
-	var id_hash: String
+	var id_hash: String is noinit
 
 	init
 	do

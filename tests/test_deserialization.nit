@@ -87,13 +87,43 @@ class D
 	redef fun to_s do return "<D: {super} {d != null}>"
 end
 
+# Class with generics
+class E
+	auto_serializable
+
+	var a = new Array[Object].with_items("hello", 1234, 123.4)
+	var b = new Array[nullable Serializable].with_items("hella", 2345, 234.5)
+	init do end
+
+	redef fun to_s do return "<E: a: {a.join(", ")}; b: {b.join(", ")}>"
+end
+
+# Class with generics
+class F[N: Numeric]
+	auto_serializable
+
+	var n: N
+	init(n: N) do self.n = n
+
+	redef fun to_s do return "<E: {n}>"
+end
+
 var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
 var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
 var c = new C(a, b)
 var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
 d.d = d
+var e = new E
+var fi = new F[Int](2222)
+var ff = new F[Float](33.33)
 
-for o in new Array[Serializable].with_items(a, b, c, d) do
+# Default works only with Nit serial
+var tests = new Array[Serializable].with_items(a, b, c, d, e, fi, ff)
+
+# Alt1 should work without nitserial
+#alt1# tests = new Array[Serializable].with_items(a, b, c, d)
+
+for o in tests do
 	var stream = new StringOStream
 	var serializer = new JsonSerializer(stream)
 	serializer.serialize(o)

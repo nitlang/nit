@@ -58,6 +58,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun put_byte(key: JavaString, value: Int) in "Java" `{ 
 		recv.putByte(key, (byte) value); 
 	`}
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun put_char(key: JavaString, value: Char) in "Java" `{ 
 		recv.putChar(key, value); 
 	`}
@@ -138,6 +139,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 
 		recv.putShortArray(key, java_array); 
 	`}
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun put_char_array(key: JavaString, value: Array[Char])
 	  import Array[Char].length, Array[Char].[] in "Java" `{
 		char[] java_array = new char[(int)Array_of_Char_length(value)];
@@ -212,7 +214,9 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_byte_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{ 
 		return recv.getByte(key, (byte) def_value); 
 	`}
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char(key: JavaString): Char in "Java" `{ return recv.getChar(key); `}
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char_with_def_value(key: JavaString, def_value: Char): Char in "Java" `{
 		return recv.getChar(key, def_value); 
 	`}
@@ -259,29 +263,29 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 
 		return nit_array;
 	`}
-	fun get_string_array_list(key: JavaString): Array[JavaString]
-		import Array[JavaString], Array[JavaString].add in "Java" `{
+	fun get_string_array_list(key: JavaString): Array[String]
+		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<String> java_array = recv.getStringArrayList(key); 
-		int nit_array = new_Array_of_JavaString();
+		int nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
 		for (String element: java_array)
-			Array_of_JavaString_add(nit_array, element);
+			StringCopyArray_add(nit_array, element);
 
-		return nit_array;
+		return StringCopyArray_collection(nit_array);
 	`}
-	fun get_char_sequence_array_list(key: JavaString): Array[JavaString]
-		import Array[JavaString], Array[JavaString].add in "Java" `{
+	fun get_char_sequence_array_list(key: JavaString): Array[String]
+		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<CharSequence> java_array = recv.getCharSequenceArrayList(key); 
-		int nit_array = new_Array_of_JavaString();
+		int nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
 		for (CharSequence element: java_array)
-			Array_of_JavaString_add(nit_array, (String) element);
+			StringCopyArray_add(nit_array, (String) element);
 
-		return nit_array;
+		return StringCopyArray_collection(nit_array);
 	`}
 	fun get_boolean_array(key: JavaString): Array[Bool]
 		import Array[Bool], Array[Bool].add in "Java" `{ 
@@ -319,6 +323,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 			
 		return nit_array;
 	`}
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char_array(key: JavaString): Array[Char]
 		import Array[Char], Array[Char].add in "Java" `{ 
 		char[] java_array = recv.getCharArray(key); 
@@ -380,29 +385,29 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 			
 		return nit_array;
 	`}
-	fun get_string_array(key: JavaString): Array[JavaString]
-		import Array[JavaString], Array[JavaString].add in "Java" `{ 
+	fun get_string_array(key: JavaString): Array[String]
+		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		String[] java_array = recv.getStringArray(key); 
-		int nit_array = new_Array_of_JavaString();
+		int nit_array = new_StringCopyArray();
 		
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_JavaString_add(nit_array, java_array[i]);
+			StringCopyArray_add(nit_array, java_array[i]);
 			
-		return nit_array;
+		return StringCopyArray_collection(nit_array);
 	`}
-	fun get_char_sequence_array(key: JavaString): Array[JavaString]
-		import Array[JavaString], Array[JavaString].add in "Java" `{ 
+	fun get_char_sequence_array(key: JavaString): Array[String]
+		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		CharSequence[] java_array = recv.getCharSequenceArray(key); 
-		int nit_array = new_Array_of_JavaString();
+		int nit_array = new_StringCopyArray();
 		
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_JavaString_add(nit_array, (String) java_array[i]);
+			StringCopyArray_add(nit_array, (String)java_array[i]);
 			
-		return nit_array;
+		return StringCopyArray_collection(nit_array);
 	`}
 	fun describe_contents: Int in "Java" `{ return recv.describeContents(); `}
 	fun to_string: JavaString in "Java" `{ return recv.toString(); `}
@@ -550,7 +555,7 @@ class Bundle
 
 		if return_value == "" then return null
 
-		return return_value.to_s
+		return return_value
 	end
 
 	# Retrieves the `Bool` value corresponding to the given key
@@ -566,6 +571,7 @@ class Bundle
 
 	# Retrieves the `Char` value corresponding to the given key
 	# Returns the `def_value` if none or if it's the wrong value type
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun char(key: String, def_value: Char): Char
 	do
 		sys.jni_env.push_local_frame(1)
@@ -612,6 +618,7 @@ class Bundle
 
 	# Retrieves the `Array[Char]` value corresponding to the given key
 	# Returns the `null` if none or if it's the wrong value type
+	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun array_of_char(key: String): nullable Array[Char]
 	do
 		sys.jni_env.push_local_frame(1)
@@ -654,18 +661,13 @@ class Bundle
 	do
 		var string_array = new Array[String]
 		sys.jni_env.push_local_frame(1)
+
 		var return_value = native_bundle.get_string_array(key.to_java_string)
-
-		for element in return_value 
-		do
-			string_array.add(element.to_s)
-		end
-
 		sys.jni_env.pop_local_frame
 		
 		if return_value.is_empty then return null
 
-		return string_array
+		return return_value
 	end
 end
 
@@ -754,4 +756,10 @@ redef class Array[E]
 			bundle.put_string_array(key, java_string_array)
 		end
 	end
+end
+
+# Allows JavaString collection copy through FFI with Java
+private class StringCopyArray
+	var collection = new Array[String]
+	fun add(element: JavaString) do collection.add element.to_s
 end

@@ -33,10 +33,6 @@ class A
 	do
 		0.output
 	end
-
-	init
-	do
-	end
 end
 
 class B

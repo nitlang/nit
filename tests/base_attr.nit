@@ -24,8 +24,8 @@ class Int
 end
 
 class Foo
-	var a1: Int
-	var a2: Int
+	var a1: Int is noinit
+	var a2: Int is noinit
 	fun run
 	do
 		_a1.output
@@ -41,7 +41,7 @@ end
 
 class Bar
 	super Foo
-	var a3: Int
+	var a3: Int is noinit
 	redef fun run
 	do
 		_a1.output

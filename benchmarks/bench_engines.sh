@@ -26,8 +26,6 @@ source ./bench_plot.sh
 # Can be overrided with 'the option -n'
 count=2
 
-pep8analysis=../../pep8analysis
-
 ### HELPER FUNCTIONS ##
 
 function die()
@@ -56,19 +54,27 @@ function run_compiler()
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg-g" "nitg --global --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitmetrics.nit
+		bench_command "nitg-g" "nitg --global --no-cc ../src/nitls.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitls.nit
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
-		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
+		bench_command "nit" "nit ../src/test_parser.nit ../src/nitls.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/nitls.nit
+		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
+		rm -r out 2> /dev/null
+		mkdir out 2> /dev/null
+		bench_command "nitdoc" "nitdoc ../src/nitls.nit" "./nitdoc.$title.bin" -v ../src/nitls.nit -d out
 		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
-		bench_command "shoot" "shoot_logic 30" "./shoot.$title.bin" 30
+		bench_command "shoot" "shoot_logic 15" "./shoot.$title.bin" 15
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
-		bench_command "bintrees" "bench_bintree_gen 18" "./bintrees.$title.bin" 18
-		if test -f "$pep8analysis/src/pep8analysis.nit"; then
-			run_command "$@" "$pep8analysis/src/pep8analysis.nit" -I "$pep8analysis/lib" -o "pep8a.$title.bin"
-			bench_command "pep8analisis" "bench_bintree_gen 18" "./pep8a.$title.bin" "$pep8analysis/tests/privat/"*.pep
-		fi
+		bench_command "bintrees" "bench_bintree_gen 17" "./bintrees.$title.bin" 17
+		#run_command "$@" "../contrib/pep8analysis/src/pep8analysis.nit" -o "pep8a.$title.bin"
+		#bench_command "pep8analisis" "bench_pep8analisis" "./pep8a.$title.bin" "../contrib/pep8analysis/tests/privat/"*.pep
+		run_command "$@" "../lib/ai/examples/queens.nit" -o "queens.$title.bin"
+		bench_command "queens" "bench_queens 13" "./queens.$title.bin" 13
+		run_command "$@" "../lib/ai/examples/puzzle.nit" -o "puzzle.$title.bin"
+		bench_command "puzzle" "puzzle 15-hard" "./puzzle.$title.bin" kleg.mondcafjhbi
 	fi
+
+	rm -r *.bin .nit_compile out
 }
 
 ## HANDLE OPTIONS ##
@@ -97,6 +103,9 @@ while [ "$stop" = false ]; do
 	esac
 done
 
+xml="bench_engines.xml"
+echo "<testsuites><testsuite>" > "$xml"
+
 NOTSKIPED="$*"
 
 if test -z "$NOTSKIPED"; then
@@ -107,8 +116,8 @@ fi
 
 ## COMPILE ENGINES
 
-# force to use the last nitg, not the bootstraped one
-test -f ./nitg || ../bin/nitg ../src/nitg.nit -v
+# get the bootstrapped nitg
+cp ../bin/nitg .
 
 ## EFFECTIVE BENCHS ##
 
@@ -163,8 +172,8 @@ function bench_nitg-g_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-g_options "slower" --hardening
-bench_nitg-g_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other
+bench_nitg-g_options "slower" --hardening --no-shortcut-range
+bench_nitg-g_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
 function bench_nitg-s_options()
 {
@@ -190,9 +199,9 @@ function bench_nitg-s_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range "--no-gcc-directive likely" "--no-gcc-directive noreturn"
-bench_nitg-s_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other
-bench_nitg-s_options "faster" --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
+bench_nitg-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn"
+bench_nitg-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
+bench_nitg-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
 
 function bench_nitg-e_options()
 {
@@ -218,20 +227,26 @@ function bench_nitg-e_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-e_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
-bench_nitg-e_options "nocheck" --no-check-covariance --no-check-attr-isset --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
-bench_nitg-e_options "faster" --inline-coloring-numbers
+bench_nitg-e_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
+bench_nitg-e_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitg-e_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
 function bench_engines()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
-	run_compiler "nitg-g" ./nitg --global
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
 	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-sg.dat" "nitg-sg" "nitg with --separate --semi-global"
+	run_compiler "nitg-sg" ./nitg --separate --semi-global
+	prepare_res "$name-nitg-eg.dat" "nitg-eg" "nitg with --erasure --semi-global"
+	run_compiler "nitg-eg" ./nitg --erasure --semi-global
+	prepare_res "$name-nitg-egt.dat" "nitg-egt" "nitg with --erasure --semi-global --rta"
+	run_compiler "nitg-egt" ./nitg --erasure --semi-global --rta
+	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
+	run_compiler "nitg-g" ./nitg --global
 	plot "$name.gnu"
 }
 bench_engines
@@ -240,10 +255,12 @@ function bench_nitg-e_gc()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
-	NIT_GC_OPTION="malloc" run_compiler "nitg-e-malloc" ./nitg --erasure
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
+	NIT_GC_OPTION="malloc" run_compiler "nitg-e-malloc" ./nitg --erasure
+	prepare_res "$name-nitg-e-large.dat" "nitg-e-large" "nitg with --erasure and large"
+	NIT_GC_OPTION="large" run_compiler "nitg-e-large" ./nitg --erasure
 	plot "$name.gnu"
 }
 bench_nitg-e_gc
@@ -317,6 +334,8 @@ bench_compilation_time
 if test -n "$html"; then
 	echo >>"$html" "</body></html>"
 fi
+
+echo >>"$xml" "</testsuite></testsuites>"
 
 if test -n "$died"; then
 	echo "Some commands failed"

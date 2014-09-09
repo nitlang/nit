@@ -16,7 +16,7 @@
 
 NITCOPT=
 OLDNITCOPT=
-OBJS=nitdoc nitmetrics nitg nit nitx nitunit nitlight nitls nitdbg_client
+OBJS=nitdoc nitmetrics nitg nit nitx nitunit nitlight nitls nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
@@ -53,8 +53,5 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* version.nit 2> /dev/null || true
+	rm -rf -- .nit_compile* version.nit nitg_0 2> /dev/null || true
 	cd parser; make clean
-
-distclean: clean
-	cd parser; make distclean

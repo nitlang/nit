@@ -1,10 +1,5 @@
 example_exec_ls
 leapfrog_curses
-dino_linux
-moles_linux
-simple_linux
-shoot_linux
 websocket_server
 converter
-mnit_linux
-friendz_linux
+show_basedir

@@ -149,10 +149,10 @@ class BM_Pattern
 	end
 
 	# searched motif
-	var _motif: String
+	private var motif: String
 
 	# length of the motif
-	var _length: Int
+	private var length: Int
 
 	private fun bc(e: Char): Int
 	do
@@ -164,10 +164,10 @@ class BM_Pattern
 	end
 
 	# good shifts
-	var _gs: Array[Int]
+	private var gs: Array[Int]
 	
 	# bad characters
-	var _bc_table: Map[Char, Int]
+	private var bc_table: Map[Char, Int]
 
 	private fun compute_bc
 	do
@@ -373,18 +373,5 @@ redef class Text
 	fun replace(p: Pattern, string: SELFTYPE): SELFTYPE
 	do
 		return self.split_with(p).join(string)
-	end
-
-	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
-	#
-	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
-	fun html_escape: SELFTYPE
-	do
-		var ret = self
-		if ret.chars.has('&') then ret = ret.replace('&', "&amp;")
-		if ret.chars.has('<') then ret = ret.replace('<', "&lt;")
-		if ret.chars.has('>') then ret = ret.replace('>', "&gt;")
-		if ret.chars.has('"') then ret = ret.replace('"', "&quot;")
-		return ret
 	end
 end

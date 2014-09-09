@@ -99,7 +99,7 @@ abstract class Parser
 
 	# The current state
 	# Used by generated parsers
-	var state: LRState
+	var state: LRState is noinit
 
 	init
 	do

@@ -15,7 +15,7 @@
 # Program to test the `markdown` module on real source files.
 module test_markdown
 
-import modelize_property
+import modelize
 import highlight
 import markdown
 

@@ -208,8 +208,8 @@ end
 
 class Rayon
 private
-	var stock: Array[Produit]		# Des produits en stock
-	var rubrique: String			# La catégorie des produits stockés
+	var stock: Array[Produit] is noinit		# Des produits en stock
+	var rubrique: String is noinit			# La catégorie des produits stockés
 
 	# Cette fonction est utilisé par to_s pour afficher un petit titre
 	fun to_s_head: String
@@ -300,8 +300,6 @@ private
 	# pour obtenir la quantité de clous dans le rayon, et :
 	#	r.quantite("clous") = 15
 	# pour mettre le nombre de clous à 15
-
-	init do end
 end
 
 class RayonNormal

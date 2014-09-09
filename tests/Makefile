@@ -46,6 +46,4 @@ store:
 	./store_save.sh *.nit
 
 clean:
-	rm -r -f -- out/ alt .nit_compile errlist 2> /dev/null || true
-
-distclean: clean
+	rm -r -f -- out/ alt .nit_compile errlist errlist.bak *.xml 2> /dev/null || true

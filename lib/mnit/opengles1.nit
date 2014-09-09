@@ -15,16 +15,13 @@
 # limitations under the License.
 
 # OpenGL ES1 general support (most of it)
-module opengles1 is pkgconfig("glesv1_cm", "x11", "egl")
+module opengles1 is pkgconfig("glesv1_cm", "egl")
 
 import mnit_display
 
 in "C header" `{
 	#include <EGL/egl.h>
 	#include <GLES/gl.h>
-	#define GL_GLEXT_PROTOTYPES 1
-	#include <GLES/glext.h>
-	#include <errno.h>
 
 	EGLDisplay mnit_display;
 	EGLSurface mnit_surface;
@@ -260,10 +257,6 @@ class Opengles1Display
 		eglSwapBuffers( mnit_display, mnit_surface );
 	`}
 
-	fun set_as_target is extern `{
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, 0);
-	`}
-
 	redef fun set_viewport( x, y, w, h ) is extern `{
 		glLoadIdentity();
 		glViewport(0,0, mnit_width, mnit_height );
@@ -473,97 +466,3 @@ extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 		return Opengles1Image_as_Image( image );
     `}
 end
-
-# FIXME this class is broken
-extern class Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
-	super DrawableImage
-    new ( w, h: Int ) is extern `{
-		struct mnit_opengles_DrawableTexture *image =
-			malloc( sizeof(struct mnit_opengles_DrawableTexture) );
-
-		/* texture */
-		glGenTextures(1, &image->super.texture);
-		glBindTexture(GL_TEXTURE_2D, image->super.texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		/* glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); // automatic mipmap generation included in OpenGL v1.4c */
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		/* fbo */
-		glGenFramebuffersOES( 1, &image->fbo );
-		glBindFramebufferOES( GL_FRAMEBUFFER_OES, image->fbo );
-		glFramebufferTexture2DOES(GL_FRAMEBUFFER_OES,
-				GL_COLOR_ATTACHMENT0_OES,
-				GL_TEXTURE_2D,
-				image->super.texture,
-				0 );
-
-		/* depth */
-		glGenRenderbuffersOES(1, &image->depth);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, image->depth);
-		glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES,
-					 w, h);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, 0);
-		glFramebufferRenderbufferOES( GL_FRAMEBUFFER_OES,
-			GL_DEPTH_ATTACHMENT_OES,
-			GL_RENDERBUFFER_OES,
-			image->depth );
-
-		/* tex framebuffer */
-		glGenRenderbuffersOES(1, &image->color);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, image->color);
-		glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_RGBA8_OES, w, h);
-		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, image->color );
-
-		if ( glCheckFramebufferStatusOES( GL_FRAMEBUFFER_OES ) != GL_FRAMEBUFFER_COMPLETE_OES )
-		{
-			LOGW("framebuffer not set", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
-			exit(1);
-		}
-
-		image->super.width = w;
-		image->super.height = h;
-		image->super.center_x = w/2;
-		image->super.center_y = h/2;
-		image->super.scale = 1.0f;
-		image->super.blended = 0;
-
-		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW("gl error in Opengles1DrawableImage::init", mnit_opengles_error_code);
-		   exit(1);
-		}
-
-		return image;
-	`}
-
-    fun set_as_target is extern `{
-		LOGI( "sat %i", recv->fbo );
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, recv->fbo);
-		if (glGetError() != GL_NO_ERROR) LOGW("gl error", 0);
-		/*glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES,&recv->fbo);
-		if (glGetError() != GL_NO_ERROR) LOGW( "gl error a");*/
-		glViewport(0, 0, recv->super.width, recv->super.height);
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrthof(0.0f, recv->super.width, recv->super.height, 0.0f, 0.0f, 1.0f);
-		glMatrixMode(GL_MODELVIEW);
-		glFrontFace( GL_CW );
-
-		glClearColor( 0.0f, 1.0f, 1.0f, 1.0f );
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	`}
-
-    fun unset_as_target is extern `{
-		glFlush();
-		/*glBindTexture(GL_TEXTURE_2D, recv->super.texture);
-		glGenerateMipmapOES(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, 0);*/
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, 0);
-		if (glGetError() != GL_NO_ERROR) LOGW("gl error", 0);
-	`}
-end
-

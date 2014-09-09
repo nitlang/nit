@@ -30,13 +30,9 @@ $   if @is_list
 	var n_@name: List[@etype] = new List[@etype]
 $   else
 $   if @modifier
-	var _n_@name: nullable @etype = null
-	fun n_@name: nullable @etype do return _n_@name
-	fun n_@name=(n_@name: nullable @etype) do _n_@name = n_@name
+	var n_@name: nullable @etype = null is writable
 $   else
-	var _n_@name: @etype = null
-	fun n_@name: @etype do return _n_@name
-	fun n_@name=(n_@name: @etype) do _n_@name = n_@name
+	var n_@name: @etype is writable, noinit
 $   end
 $   end
 $ end
@@ -45,12 +41,8 @@ $ end
 
 class Start
 	super Prod
-	var _n_base: nullable $baseprod
-	fun n_base: nullable $baseprod do return _n_base
-	fun n_base=(n_base: nullable $baseprod_ do _n_base = n_base
-	var _n_eof: EOF
-	fun n_eof: EOF do return _n_eof
-	fun n_eof=(n_eof: EOF) do _n_eof = n_eof
+	var n_base: nullable $baseprod is writable, noinit
+	var n_eof: EOF is writable, noinit
 	init(
 		n_base: nullable $baseprod,
 		n_eof: EOF)

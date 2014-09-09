@@ -1,0 +1,4 @@
+/gen
+src/javap_lexer.nit
+src/javap_parser.nit
+src/javap_test_parser.nit

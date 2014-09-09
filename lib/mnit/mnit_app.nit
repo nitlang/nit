@@ -61,7 +61,12 @@ redef class App
 	end
 
 	# Internal method to generate inputs
-	protected fun generate_input is abstract
+	protected fun generate_input
+	do
+		if "NIT_TESTING".environ == "true" then exit 0
+		print "Compiled without platform"
+		exit 1
+	end
 
 	# Main app loop
 	# Usually you want to redef frame_core instead of this

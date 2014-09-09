@@ -6,6 +6,7 @@ EIFGENs
 
 .nit_compile*
 .nitunit
+.nitpretty
 *.orig
 bin/nit*
 doc/stdlib
@@ -37,13 +38,14 @@ csrc2/
 lib/*.log
 lib/*.dot
 
-examples/mnit_*/doc
-examples/mnit_*/bin
+examples/*/doc
+examples/*/bin
 
 contrib/*/bin
 
 tests/alt
 tests/errlist
+tests/errlist.bak
 tests/out
 tests/*.xml
 tests/nitunit

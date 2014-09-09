@@ -23,13 +23,10 @@
 # It is quite efficient but the type set is global and pollutes each call site.
 module rapid_type_analysis
 
-import model
-import modelbuilder
-import typing
-import auto_super_init
+import semantize
 
-import csv # for live_types_to_csv
-import ordered_tree # for live_methods_to_tree
+private import csv # for live_types_to_csv
+private import ordered_tree # for live_methods_to_tree
 
 private import more_collections
 
@@ -196,6 +193,12 @@ class RapidTypeAnalysis
 			add_send(maintype, mainprop)
 		end
 
+		var finalizable_type = mainmodule.finalizable_type
+		if finalizable_type != null then
+			var finalize_meth = mainmodule.try_get_primitive_method("finalize", finalizable_type.mclass)
+			if finalize_meth != null then add_send(finalizable_type, finalize_meth)
+		end
+
 		# Force primitive types
 		force_alive("Bool")
 		force_alive("Int")
@@ -220,6 +223,7 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
+			# TODO? new_msignature
 			var sig = mmethoddef.msignature.as(not null)
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
@@ -233,6 +237,7 @@ class RapidTypeAnalysis
 				# It is an init for a class?
 				if mmeth.name == "init" then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
+					assert mmethoddef == nclassdef.mfree_init
 					var super_inits = nclassdef.super_inits
 					if super_inits != null then
 						#assert args.length == 1
@@ -241,6 +246,9 @@ class RapidTypeAnalysis
 						end
 					end
 
+					if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
+						self.add_super_send(v.receiver, mmethoddef)
+					end
 				else
 					abort
 				end
@@ -255,6 +263,9 @@ class RapidTypeAnalysis
 					for auto_super_init in auto_super_inits do
 						v.add_callsite(auto_super_init)
 					end
+				end
+				if npropdef.auto_super_call then
+					self.add_super_send(v.receiver, mmethoddef)
 				end
 			end
 
@@ -416,11 +427,12 @@ class RapidTypeAnalysis
 
 	fun add_super_send(recv: MType, mpropdef: MMethodDef)
 	do
+		assert mpropdef.has_supercall
 		if live_super_sends.has(mpropdef) then return
 		#print "new super prop: {mpropdef}"
 		live_super_sends.add(mpropdef)
-		for t in live_types do
-			try_super_send(t, mpropdef)
+		for c in live_classes do
+			try_super_send(c.intro.bound_mtype, mpropdef)
 		end
 	end
 end
@@ -489,6 +501,11 @@ class RapidTypeVisitor
 	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
 
 	fun add_callsite(callsite: nullable CallSite) do if callsite != null then
+		for m in callsite.mpropdef.initializers do
+			if m isa MMethod then
+				analysis.add_send(callsite.recv, m)
+			end
+		end
 		analysis.add_send(callsite.recv, callsite.mproperty)
 		analysis.live_callsites.add(callsite)
 	end

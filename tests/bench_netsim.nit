@@ -31,8 +31,7 @@ class WakeUpNode
 	do
 		_scheduler.add_event(self, d)
 	end
-	var scheduler: Scheduler
-	init do end
+	var scheduler: Scheduler is noinit
 end
 
 class NodeSource

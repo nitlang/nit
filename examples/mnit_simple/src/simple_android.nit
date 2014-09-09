@@ -65,7 +65,6 @@ end
 
 class Point
 	auto_serializable
-	super Serializable
 
 	var x: Int
 	var y: Int

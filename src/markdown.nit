@@ -18,6 +18,7 @@ module markdown
 private import parser
 import html
 private import highlight
+private import parser_util
 
 # The class that does the convertion from a `ADoc` to HTML
 private class Doc2Mdwn

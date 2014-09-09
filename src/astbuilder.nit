@@ -15,10 +15,10 @@
 # Instantiation and transformation of semantic nodes in the AST of expressions and statements
 module astbuilder
 
-intrude import typing
-intrude import literal
-intrude import parser
-intrude import scope
+intrude import semantize::typing
+intrude import semantize::literal
+intrude import semantize::parser
+intrude import semantize::scope
 
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder

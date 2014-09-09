@@ -15,9 +15,8 @@
 # Management and utilities on annotations
 module annotation
 
-import parser
 import modelbuilder
-import literal
+private import literal
 import model::mmodule_data
 
 redef class Prod

@@ -1,3 +1,4 @@
+Runtime error: Aborted (../lib/serialization.nit:72)
 # Nit:
 <A: true a 0.123 1234 asdf false>
 
@@ -36,3 +37,4 @@
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false> 1111 	f"\/> true>
 
+Error: doesn't know how to deserialize class "Array[Object]"

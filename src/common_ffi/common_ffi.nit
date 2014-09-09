@@ -19,7 +19,6 @@
 # to wrap foreign code in Nit methods.
 module common_ffi
 
-import parser
 import modelbuilder
 
 import nitni

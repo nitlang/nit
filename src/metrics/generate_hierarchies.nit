@@ -18,10 +18,8 @@
 # See graphviz http://www.graphviz.org/
 module generate_hierarchies
 
-import model
-private import metrics_base
-import frontend
-import model_viz
+import metrics_base
+import model::model_viz
 
 redef class ToolContext
 	var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)

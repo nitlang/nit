@@ -202,7 +202,7 @@ abstract class BufferedIStream
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer.chars[j])
+				s.add(_buffer[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -250,10 +250,10 @@ abstract class BufferedIStream
 	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	var _buffer: nullable FlatBuffer = null
+	private var buffer: nullable FlatBuffer = null
 
 	# The current position in the buffer
-	var _buffer_pos: Int = 0
+	private var buffer_pos: Int = 0
 
 	# Fill the buffer
 	protected fun fill_buffer is abstract

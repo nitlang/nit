@@ -15,9 +15,7 @@
 # Metrics about the various posets of the model of a Nit program
 module poset_metrics
 
-import poset
 import metrics_base
-import frontend
 
 redef class ToolContext
 	var poset_metrics_phase: Phase = new PosetMetricsPhase(self, null)

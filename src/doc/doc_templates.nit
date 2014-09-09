@@ -23,25 +23,28 @@ class TplPage
 	super Template
 
 	# Page title in HTML header
-	var title: String writable
+	var title: String is writable, noinit
+
+	# Page url
+	var url: String is writable, noinit
 
 	# Directory where css, js and other assets can be found
-	var shareurl: String writable
+	var shareurl: String is writable, noinit
 
 	# Attributes of the body tag element
 	var body_attrs = new Array[TagAttribute]
 
 	# Top menu template if any
-	var topmenu: TplTopMenu writable
+	var topmenu: TplTopMenu is writable, noinit
 
 	# Sidebar template if any
-	var sidebar: nullable TplSidebar writable
+	var sidebar: nullable TplSidebar = null is writable
 
 	# Content of the page in form a TplSection
 	var sections = new Array[TplSection]
 
 	# Footer content if any
-	var footer: nullable Streamable writable
+	var footer: nullable Streamable = null is writable
 
 	# JS scripts to append at the end of the body
 	var scripts = new Array[TplScript]
@@ -105,7 +108,7 @@ class TplPage
 		add "<script src='{shareurl}/vendors/jquery/jquery-1.11.1.min.js'></script>"
 		add "<script src='{shareurl}/vendors/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
 		add "<script src='{shareurl}/vendors/bootstrap/js/bootstrap.min.js'></script>"
-		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'</script>"
+		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'></script>"
 		for script in scripts do add script
 		add """<script>
 			$(function () {
@@ -150,11 +153,24 @@ class TplTopMenu
 	super Template
 
 	# Brand link to display in first position of the top menu
-	private var brand: nullable Streamable writable
+	private var brand: nullable Streamable = null is writable
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
-	init do end
+	# The page url where the top menu is displayed.
+	#
+	# Used to select the active link.
+	private var current_url: String
+
+	init(current_url: String) do
+		self.current_url = current_url
+	end
+
+	# Add a new link to the menu.
+	fun add_link(content: TplLink) do
+		var is_active = content.href == current_url
+		add_item(content, is_active)
+	end
 
 	# Add a content between `<li>` tags
 	fun add_item(content: Streamable, is_active: Bool) do
@@ -502,7 +518,7 @@ class TplArticle
 	end
 
 	redef fun is_empty: Bool do
-		return title == null and subtitle == null and content == null
+		return title == null and subtitle == null and content == null and children.is_empty
 	end
 end
 
@@ -511,15 +527,13 @@ class TplDefinition
 	super Template
 
 	# Comment to display
-	var comment: nullable Streamable writable
+	var comment: nullable Streamable = null is writable
 
 	# Namespace for this definition
-	var namespace: nullable Streamable writable
+	var namespace: nullable Streamable = null is writable
 
 	# Location link to display
-	var location: nullable Streamable writable
-
-	init do end
+	var location: nullable Streamable = null is writable
 
 	private fun render_info do
 		add "<div class='info text-right'>"
@@ -641,7 +655,7 @@ class TplLink
 	var href: String writable
 
 	# Text to display in the link
-	var text: String writable
+	var text: Streamable writable
 
 	# Optional title
 	var title: nullable String writable
@@ -683,7 +697,7 @@ class TplList
 	var css_classes = new Array[String]
 
 	# Add content wrapped in a <li> element
-	fun add_li(content: Streamable) do elts.add new TplListItem.with_content(content)
+	fun add_li(item: TplListItem) do elts.add item
 
 	init do end
 
@@ -728,9 +742,7 @@ class TplListItem
 	fun append(content: Streamable) do self.content.add content
 
 	redef fun rendering do
-		add "<li class='"
-		for cls in css_classes do add " {cls}"
-		add "'>"
+		add "<li class='{css_classes.join(" ")}'>"
 		add content
 		add "</li>"
 	end
@@ -741,12 +753,11 @@ class TplLabel
 	super Template
 
 	# Content of the label if any
-	var content: nullable Streamable
+	var content: nullable Streamable = null is writable
 
 	# CSS classes of the <span> element
 	var css_classes = new Array[String]
 
-	init do end
 	init with_content(content: Streamable) do self.content = content
 	init with_classes(classes: Array[String]) do self.css_classes = classes
 
@@ -802,7 +813,7 @@ class TplScript
 	super Template
 
 	var attrs = new Array[TagAttribute]
-	var content: nullable Streamable writable
+	var content: nullable Streamable = null is writable
 
 	init do
 		attrs.add(new TagAttribute("type", "text/javascript"))

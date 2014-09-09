@@ -18,6 +18,7 @@
 module socket
 
 import socket_c
+intrude import standard::stream
 
 # Portal for communication between two machines
 class Socket
@@ -211,8 +212,7 @@ class Socket
 end
 
 class SocketSet
-	var sset: FFSocketSet
-	init do sset = new FFSocketSet end
+	var sset = new FFSocketSet
 	fun set(s: Socket) do sset.set(s.socket) end
 	fun is_set(s: Socket): Bool do return sset.is_set(s.socket) end
 	fun zero do sset.zero end

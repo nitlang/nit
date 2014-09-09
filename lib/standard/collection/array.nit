@@ -21,8 +21,7 @@ import abstract_collection
 abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
-	var _length: Int = 0
-	redef fun length do return _length
+	redef var length = 0
 
 	redef fun is_empty do return _length == 0
 
@@ -186,6 +185,19 @@ abstract class AbstractArray[E]
 		self[pos] = item
 	end
 
+	redef fun insert_all(coll, pos)
+	do
+		var l = coll.length
+		if l == 0 then return
+		enlarge(length + l)
+		_length += l
+		copy_to(pos, length-pos-l, self, pos + l)
+		for c in coll do
+			self[pos] = c
+			pos += 1
+		end
+	end
+
 	redef fun add(item) do self[length] = item
 
 	redef fun clear do _length = 0
@@ -334,14 +346,30 @@ class Array[E]
 	end
 
 	# The internal storage.
-	var _items: nullable NativeArray[E] = null
+	private var items: nullable NativeArray[E] = null
 
 	# Do not use this method
 	# FIXME: Remove it once modules can intrude non local modules
 	fun intern_items: NativeArray[E] do return _items.as(not null)
 
 	# The size of `_items`.
-	var _capacity: Int = 0
+	private var capacity: Int = 0
+
+	redef fun ==(o)
+	do
+		if not o isa Array[nullable Object] then return super
+		# Efficient implementation
+		var l = length
+		if l != o.length then return false
+		var i = 0
+		var it = _items
+		var oit = o._items
+		while i < l do
+			if it[i] != oit[i] then return false
+			i += 1
+		end
+		return true
+	end
 end
 
 # An `Iterator` on `AbstractArray`
@@ -362,9 +390,9 @@ private class ArrayIterator[E]
 		_index = 0
 	end
 
-	var _index: Int = 0
-	redef fun index do return _index
-	var _array: AbstractArrayRead[E]
+	redef var index = 0
+
+	private var array: AbstractArrayRead[E]
 end
 
 private class ArrayReverseIterator[E]
@@ -388,7 +416,7 @@ class ArraySet[E: Object]
 	super Set[E]
 
 	# The stored elements.
-	var _array: Array[E]
+	private var array: Array[E]
 
 	redef fun has(e) do return _array.has(e)
 
@@ -446,7 +474,7 @@ private class ArraySetIterator[E: Object]
 
 	init(iter: ArrayIterator[E]) do _iter = iter
 
-	var _iter: ArrayIterator[E]
+	private var iter: ArrayIterator[E]
 end
 
 
@@ -502,7 +530,7 @@ class ArrayMap[K: Object, E]
 	end
 
 	# Internal storage.
-	var _items: Array[Couple[K,E]]
+	private var items = new Array[Couple[K,E]]
 
 	# fast remove the ith element of the array
 	private fun remove_at_index(i: Int)
@@ -512,7 +540,7 @@ class ArrayMap[K: Object, E]
 	end
 
 	# The last positive result given by a index(1) call
-	var _last_index: Int = 0
+	private var last_index: Int = 0
 
 	# Where is the `key` in `_item`?
 	# return -1 if not found
@@ -530,12 +558,6 @@ class ArrayMap[K: Object, E]
 			i += 1
 		end
 		return -1
-	end
-
-	# A new empty map.
-	init
-	do
-		_items = new Array[Couple[K,E]]
 	end
 end
 
@@ -618,6 +640,72 @@ private class ArrayMapValues[K: Object, E]
 	end
 end
 
+# Comparable array for comparable elements.
+#
+# For two arrays, if one is a prefix, then it is lower.
+#
+# ~~~
+# var a12 = new ArrayCmp[nullable Int].with_items(1,2)
+# var a123 = new ArrayCmp[nullable Int].with_items(1,2,3)
+# assert a12 < a123
+# ~~~
+#
+# Otherwise, the first element just after the longest
+# common prefix gives the order between the two arrays.
+#
+# ~~~
+# var a124 = new ArrayCmp[nullable Int].with_items(1,2,4)
+# var a13 = new ArrayCmp[nullable Int].with_items(1,3)
+# assert a12  < a123
+# assert a123 < a13
+# ~~~
+#
+# Obviously, two equal arrays are equal.
+#
+# ~~~
+# var b12 = new ArrayCmp[nullable Int].with_items(1,2)
+# assert (a12 <=> b12) == 0
+# ~~~
+#
+# `null` is considered lower than any other elements.
+# But is still greater than no element.
+#
+# ~~~
+# var a12n = new ArrayCmp[nullable Int].with_items(1,2,null)
+# assert a12n < a123
+# assert a12  < a12n
+# ~~~
+class ArrayCmp[E: nullable Comparable]
+	super Array[E]
+	super Comparable
+	redef type OTHER: ArrayCmp[E] is fixed
+
+	redef fun <(o) do return (self <=> o) < 0
+
+	redef fun <=>(o)
+	do
+		var it = _items
+		var oit = o._items
+		var i = 0
+		var l = length
+		var ol = o.length
+		var len
+		if l < ol then len = l else len = ol
+		while i < len do
+			var a = it[i]
+			var b = oit[i]
+			if a != null then
+				if b == null then return 1
+				var d = a <=> b.as(Comparable)
+				if d != 0 then return d
+			else
+				if b != null then return -1
+			end
+			i += 1
+		end
+		return l <=> ol
+	end
+end
 
 # Others tools ################################################################
 
@@ -656,6 +744,8 @@ end
 # Access are unchecked and it has a fixed size
 # Not for public use: may become private.
 universal NativeArray[E]
+	# Creates a new NativeArray of capacity `length`
+	new(length: Int) is intern
 	# The length of the array
 	fun length: Int is intern
 	# Use `self` to initialize a standard Nit Array.

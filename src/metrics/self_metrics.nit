@@ -16,9 +16,8 @@
 
 # Metrics about the usage of explicit and implicit self
 module self_metrics
-import modelbuilder
-private import metrics_base
-import frontend
+
+import metrics_base
 
 redef class ToolContext
 	var self_metrics_phase: Phase = new SelfMetricsPhase(self, null)

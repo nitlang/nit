@@ -13,11 +13,10 @@
 class DummyArray
 	super Set[Int]
 	super ArrayCapable[Int]
-	var _capacity: Int
-	var _length: Int
-	redef fun length do return _length
-	var _keys: NativeArray[Int]
-	var _values: NativeArray[Int]
+	private var capacity: Int
+	redef var length: Int
+	private var keys: NativeArray[Int]
+	private var values: NativeArray[Int]
 
 	redef fun add(value: Int)
 	do
@@ -87,8 +86,8 @@ end
 
 class DummyIterator
 	super Iterator[Int]
-	var _array: DummyArray
-	var _pos: Int
+	private var array: DummyArray
+	private var pos: Int
 
 	redef fun item: Int
 	do

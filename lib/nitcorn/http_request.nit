@@ -61,7 +61,7 @@ end
 # The main method is `parse_http_request`.
 class HttpRequestParser
 	# The current `HttpRequest` under construction
-	private var http_request: HttpRequest
+	private var http_request: HttpRequest is noinit
 
 	# Untreated body
 	private var body = ""

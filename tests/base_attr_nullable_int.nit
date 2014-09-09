@@ -18,15 +18,15 @@ import end
 
 interface Object
 end
-
+enum Bool end
 enum Int
 	fun output is intern
 	fun +(o: Int): Int is intern
 end
 
 class Foo
-	var a1: Int
-	var a2: Int
+	var a1: Int is noinit
+	var a2: Int is noinit
 	fun run
 	do
 		_a1.output
@@ -52,7 +52,7 @@ end
 
 class Bar
 	super Foo
-	var a3: Int
+	var a3: Int is noinit
 	redef fun run
 	do
 		_a1.output
@@ -62,7 +62,7 @@ class Bar
 
 	init
 	do
-		nop
+		if false then super # no auto super init call
 		#alt3#run
 		_a1 = 10
 		#alt4#run_other(self)

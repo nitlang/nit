@@ -25,8 +25,6 @@
 # FIXME: better handling of the types
 module model
 
-import poset
-import location
 import mmodule
 import mdoc
 import ordered_tree
@@ -234,6 +232,13 @@ redef class MModule
 		var clas = self.model.get_mclasses_by_name("Sys")
 		if clas == null then return null
 		return get_primitive_class("Sys").mclass_type
+	end
+
+	fun finalizable_type: nullable MClassType
+	do
+		var clas = self.model.get_mclasses_by_name("Finalizable")
+		if clas == null then return null
+		return get_primitive_class("Finalizable").mclass_type
 	end
 
 	# Force to get the primitive class named `name` or abort
@@ -1820,6 +1825,9 @@ class MMethod
 	# therefore, you should use `is_init_for` the verify if the property is a legal constructor for a given class
 	var is_init: Bool writable = false
 
+	# The constructor is a (the) root init with empty signature but a set of initializers
+	var is_root_init: Bool writable = false
+
 	# The the property a 'new' contructor?
 	var is_new: Bool writable = false
 
@@ -1937,6 +1945,19 @@ class MMethodDef
 
 	# The signature attached to the property definition
 	var msignature: nullable MSignature writable = null
+
+	# The signature attached to the `new` call on a root-init
+	# This is a concatenation of the signatures of the initializers
+	#
+	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
+	var new_msignature: nullable MSignature writable = null
+
+	# List of initialisers to call in root-inits
+	#
+	# They could be setters or attributes
+	#
+	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
+	var initializers = new Array[MProperty]
 
 	# Is the method definition abstract?
 	var is_abstract: Bool writable = false

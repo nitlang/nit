@@ -14,8 +14,8 @@ nitg_args5
 nitg_args6
 test_markdown_args1
 pep8analysis
-test_android_platform
-android
 nitcc_parser_gen
-mnit
 emscripten
+nitserial_args
+nitunit_args
+nitpretty_args
