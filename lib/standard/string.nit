@@ -157,13 +157,6 @@ abstract class Text
 		return self.chars.iterator
 	end
 
-	# Is 'c' contained in self ?
-	#
-	# DEPRECATED : Use self.chars.has instead
-	fun has(c: Char): Bool
-	do
-		return self.chars.has(c)
-	end
 
 	# Gets an Array containing the chars of self
 	#
