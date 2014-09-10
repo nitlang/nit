@@ -17,3 +17,5 @@ pep8analysis
 nitcc_parser_gen
 emscripten
 nitserial_args
+nitunit_args
+nitpretty_args

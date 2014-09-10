@@ -77,7 +77,7 @@ class NullImage
 	super Image
 	var path: String
 	redef fun to_s do return path
-	redef var scale redef writable = 1.0
+	redef var scale = 1.0 is redef writable
 	redef var width = 32
 	redef var height = 32
 end

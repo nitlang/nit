@@ -18,8 +18,7 @@
 module refinement_metrics
 
 import model
-private import metrics_base
-import frontend
+import metrics_base
 
 redef class ToolContext
 	var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)

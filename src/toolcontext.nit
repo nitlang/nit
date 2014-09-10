@@ -213,14 +213,14 @@ class ToolContext
 	# A multi-line string is recommmended.
 	#
 	# eg. `"Usage: tool [OPTION]... [FILE]...\nDo some things."`
-	var tooldescription: String writable = "Usage: [OPTION]... [ARG]..."
+	var tooldescription: String = "Usage: [OPTION]... [ARG]..." is writable
 
 	# Does `process_options` should accept an empty sequence of arguments.
 	# ie. nothing except options.
 	# Is `false` by default.
 	#
 	# If required, if should be set by the client before calling `process_options`
-	var accept_no_arguments writable = false
+	var accept_no_arguments = false is writable
 
 	# print the full usage of the tool.
 	# Is called by `process_option` on `--help`.

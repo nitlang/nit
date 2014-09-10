@@ -25,7 +25,7 @@ redef class MConcern
 	# see: `MConcernRankSorter`
 	# Use a positive booster to push down a result in the list
 	# A negative booster can be used to push up the result
-	var booster_rank: Int writable = 0
+	var booster_rank: Int = 0 is writable
 
 	# Concern ranking used for ordering
 	# see: `MConcernRankSorter`

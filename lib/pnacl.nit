@@ -24,6 +24,9 @@
 # Provides PNaCl support for Nit.
 module pnacl is platform
 
+import standard
+intrude import standard::stream
+
 in "C Header" `{
 	#include "ppapi/c/pp_errors.h"
 	#include "ppapi/c/ppp.h"

@@ -29,19 +29,19 @@ abstract class Option
 	var errors: Array[String] = new Array[String]
 
 	# Is this option mandatory?
-	var mandatory: Bool writable = false
+	var mandatory: Bool = false is writable
 
 	# Is this option hidden from `usage`?
-	var hidden: Bool writable = false
+	var hidden: Bool = false is writable
 
 	# Has this option been read?
-	var read: Bool writable = false
+	var read: Bool = false is writable
 
 	# Current value of this option
-	var value: VALUE writable
+	var value: VALUE is writable
 
 	# Default value of this option
-	var default_value: VALUE writable
+	var default_value: VALUE is writable
 
 	# Create a new option
 	init(help: String, default: VALUE, names: nullable Array[String])
@@ -138,7 +138,7 @@ abstract class OptionParameter
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
-	var parameter_mandatory: Bool writable = true
+	var parameter_mandatory: Bool = true is writable
 
 	redef fun read_param(it)
 	do

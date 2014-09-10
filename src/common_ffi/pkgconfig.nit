@@ -20,6 +20,7 @@ module pkgconfig
 
 import c
 private import annotation
+private import literal
 
 redef class ToolContext
 	var pkgconfig_phase: Phase = new PkgconfigPhase(self, [literal_phase])
@@ -42,26 +43,28 @@ class PkgconfigPhase
 			return
 		end
 
-		var args = nat.n_args
-		if args.is_empty then
-			modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects at least one argument.")
-			return
-		end
-
-		var pkgs = new Array[String]
-		for arg in args do
-			var pkg = arg.as_string
-			if pkg == null then
-				modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects its arguments to be the name of the package as String literals.")
-				return
-			end
-
-			pkgs.add(pkg)
-		end
-
 		# retreive module
 		var nmodule = nmoduledecl.parent.as(AModule)
 		var mmodule = nmodule.mmodule.as(not null)
+
+		# target pkgs
+		var pkgs = new Array[String]
+
+		var args = nat.n_args
+		if args.is_empty then
+			# use module name
+			pkgs.add(mmodule.name)
+		else
+			for arg in args do
+				var pkg = arg.as_string
+				if pkg == null then
+					modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects its arguments to be the name of the package as String literals.")
+					return
+				end
+
+				pkgs.add(pkg)
+			end
+		end
 
 		# check availability of pkg-config
 		var proc_which = new IProcess("which", "pkg-config")

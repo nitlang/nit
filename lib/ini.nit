@@ -284,7 +284,7 @@ end
 private class ConfigNode
 	var parent: nullable ConfigNode
 	var children = new HashMap[String, ConfigNode]
-	var name: String writable
+	var name: String is writable
 	var value: nullable String
 
 	init(name: String) do

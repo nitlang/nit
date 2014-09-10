@@ -18,6 +18,7 @@
 module nitvm
 
 import vm
+import frontend
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext

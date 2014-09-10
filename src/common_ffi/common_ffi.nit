@@ -19,7 +19,6 @@
 # to wrap foreign code in Nit methods.
 module common_ffi
 
-import parser
 import modelbuilder
 
 import nitni
@@ -136,7 +135,7 @@ redef class VerifyNitniCallbacksPhase
 	do
 		super
 
-		if not npropdef isa AExternPropdef then return
+		if not npropdef isa AMethPropdef then return
 
 		var code_block = npropdef.n_extern_code_block
 		if code_block == null then return

@@ -22,6 +22,8 @@ import socket
 import sha1
 import base64
 
+intrude import standard::stream
+
 # Websocket compatible server, works as an extra layer to the original Sockets
 class WebSocket
 	super BufferedIStream

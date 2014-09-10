@@ -73,7 +73,7 @@ class Warn
 	redef fun prefix do return "Warning: "
 end
 
-class Error
+class P8Error
 	super Note
 	init (line: Location, msg: String) do super
 	init range(from, to: Location, msg: String) do super

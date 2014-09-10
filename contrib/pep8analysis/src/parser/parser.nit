@@ -23,13 +23,13 @@ end
 class Parser
 	super TablesCapable
 	# Associated lexer
-	var _lexer: Lexer
+	var lexer: Lexer
 
 	# Stack of pushed states and productions
-	var _stack: Array[State]
+	private var stack: Array[State]
 
 	# Position in the stack
-	var _stack_pos: Int
+	private var stack_pos: Int
 
 	# Create a new parser based on a given lexer
 	init(lexer: Lexer)
@@ -148,10 +148,10 @@ class Parser
 		end
 	end
 
-	var _reduce_table: Array[ReduceAction]
+	private var reduce_table: Array[ReduceAction]
 	private fun build_reduce_table
 	do
-		_reduce_table = new Array[ReduceAction].with_items(
+		reduce_table = new Array[ReduceAction].with_items(
 			new ReduceAction0(0),
 			new ReduceAction1(0),
 			new ReduceAction2(0),
@@ -194,11 +194,11 @@ end
 redef class Prod
 	# Location on the first token after the start of a production
 	# So outside the production for epilon production
-	var _first_location: nullable Location
+	var first_location: nullable Location
 
 	# Location of the last token before the end of a production
 	# So outside the production for epilon production
-	var _last_location: nullable Location
+	var last_location: nullable Location
 end
 
 # Find location of production nodes
@@ -206,16 +206,16 @@ end
 private class ComputeProdLocationVisitor
 	super Visitor
 	# Currenlty visited productions that need a first token
-	var _need_first_prods: Array[Prod] = new Array[Prod]
+	var need_first_prods: Array[Prod] = new Array[Prod]
 
 	# Already visited epsilon productions that waits something after them
-	var _need_after_epsilons: Array[Prod] = new Array[Prod]
+	var need_after_epsilons: Array[Prod] = new Array[Prod]
 
 	# Already visited epsilon production that waits something before them
-	var _need_before_epsilons: Array[Prod] = new Array[Prod]
+	var need_before_epsilons: Array[Prod] = new Array[Prod]
 
 	# Location of the last visited token in the current production
-	var _last_location: nullable Location = null
+	var last_location: nullable Location = null
 
 	redef fun visit(n: nullable ANode)
 	do
@@ -305,7 +305,7 @@ private abstract class ReduceAction
 		l1.append(l2)
 		return l1
 	end
-	var _goto: Int
+	var goto: Int
 	init(g: Int) do _goto = g
 end
 

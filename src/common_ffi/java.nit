@@ -251,7 +251,7 @@ redef class MModule
 	private fun impl_java_class_name: String do return "Nit_{name}"
 end
 
-redef class AExternPropdef
+redef class AMethPropdef
 	redef fun verify_nitni_callbacks(toolcontext)
 	do
 		super

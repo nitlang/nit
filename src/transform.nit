@@ -17,8 +17,8 @@
 module transform
 
 import astbuilder
-import auto_super_init
 import astvalidation
+import semantize
 
 redef class ToolContext
 	var transform_phase: Phase = new TransformPhase(self, [typing_phase, auto_super_init_phase])

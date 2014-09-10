@@ -34,7 +34,7 @@ class Animal
 	# The value indicate the number of step that remain to be stunt
 	#
 	# If a animal is stunned, it cannot move horizontally
-	var stunt_ttl: Int writable = 0
+	var stunt_ttl: Int = 0 is writable
 
 	# Common update for animal
 	# handle stunt and edge collision

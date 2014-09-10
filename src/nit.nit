@@ -17,9 +17,8 @@
 # A naive Nit interpreter
 module nit
 
-import naive_interpreter
-import debugger
-import debugger_socket
+import interpreter
+import frontend
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext

@@ -38,7 +38,7 @@ end
 
 class StreamCat
 	super FilterIStream
-	var _streams: Iterator[IStream]
+	private var streams: Iterator[IStream]
 
 	redef fun eof: Bool
 	do
@@ -91,7 +91,7 @@ end
 
 class StreamDemux
 	super FilterOStream
-	var _streams: Array[OStream]
+	private var streams: Array[OStream]
 
 	redef fun is_writable: Bool
 	do

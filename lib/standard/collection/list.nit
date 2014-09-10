@@ -210,10 +210,10 @@ class List[E]
 	init from(coll: Collection[E]) do append(coll)
 
 	# The first node of the list
-	var _head: nullable ListNode[E]
+	private var head: nullable ListNode[E]
 
 	# The last node of the list
-	var _tail: nullable ListNode[E]
+	private var tail: nullable ListNode[E]
 
 	# Get the `i`th node. get `null` otherwise.
 	private fun get_node(i: Int): nullable ListNode[E]
@@ -295,15 +295,13 @@ class ListIterator[E]
 	end
 
 	# The current list
-	var _list: List[E]
+	private var list: List[E]
 
 	# The current node of the list
-	var _node: nullable ListNode[E]
+	private var node: nullable ListNode[E]
 
 	# The index of the current node
-	var _index: Int
-
-	redef fun index do return _index
+	redef var index
 
 	# Remove the current item
 	fun delete

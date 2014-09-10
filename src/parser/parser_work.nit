@@ -20,10 +20,10 @@ intrude import parser_prod
 # State of the parser automata as stored in the parser stack.
 private class State
 	# The internal state number
-	var _state: Int
+	var state: Int
 
 	# The node stored with the state in the stack
-	var _nodes: nullable Object
+	var nodes: nullable Object
 
 	init(state: Int, nodes: nullable Object)
 	do
@@ -35,13 +35,13 @@ end
 class Parser
 	super TablesCapable
 	# Associated lexer
-	var _lexer: Lexer
+	var lexer: Lexer
 
 	# Stack of pushed states and productions
-	var _stack: Array[State]
+	private var stack: Array[State]
 
 	# Position in the stack
-	var _stack_pos: Int
+	private var stack_pos: Int
 
 	# Create a new parser based on a given lexer
 	init(lexer: Lexer)
@@ -154,7 +154,7 @@ class Parser
 				return node
 			else if action_type == 3 then # ERROR
 				# skip injected tokens
-				while token._location == null do token = lexer.next
+				while not isset token._location do token = lexer.next
 				var node2 = new AParserError.init_parser_error("Syntax error: unexpected {token}.", token.location, token)
 				var node = new Start(null, node2)
 				return node
@@ -162,14 +162,14 @@ class Parser
 		end
 	end
 
-	var _reduce_table: Array[ReduceAction]
+	private var reduce_table: Array[ReduceAction]
 	private fun build_reduce_table is abstract
 end
 
 redef class Prod
 	# Location on the first token after the start of a production
 	# So outside the production for epilon production
-	var _first_location: nullable Location
+	var first_location: nullable Location
 end
 
 # Find location of production nodes
@@ -177,19 +177,19 @@ end
 private class ComputeProdLocationVisitor
 	super Visitor
 	# Currenlty visited productions that need a first token
-	var _need_first_prods: Array[Prod] = new Array[Prod]
+	var need_first_prods: Array[Prod] = new Array[Prod]
 
 	# Already visited epsilon productions that waits something after them
-	var _need_after_epsilons: Array[Prod] = new Array[Prod]
+	var need_after_epsilons: Array[Prod] = new Array[Prod]
 
 	# Location of the last visited token in the current production
-	var _last_location: nullable Location = null
+	var last_location: nullable Location = null
 
 	redef fun visit(n: ANode)
 	do
 		if n isa Token then
+			if not isset n._location then return
 			var loc = n._location
-			if loc == null then return
 			_last_location = loc
 
 			# Add a first token to productions that need one
@@ -249,6 +249,6 @@ private abstract class ReduceAction
 		l1.append(l2)
 		return l1
 	end
-	var _goto: Int
+	var goto: Int
 	init(g: Int) do _goto = g
 end

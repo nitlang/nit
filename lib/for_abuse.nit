@@ -79,7 +79,7 @@ class CompareQuery[E]
 	# The second element to compare
 	var b: E
 	# The result of the comparison (according to the user)
-	var res writable = 0
+	var res = 0 is writable
 end
 
 # Abuser for sorting array, see `sort_fa`

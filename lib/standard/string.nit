@@ -16,6 +16,7 @@ module string
 
 import math
 import collection
+intrude import collection::array
 
 `{
 #include <stdio.h>
@@ -156,13 +157,6 @@ abstract class Text
 		return self.chars.iterator
 	end
 
-	# Is 'c' contained in self ?
-	#
-	# DEPRECATED : Use self.chars.has instead
-	fun has(c: Char): Bool
-	do
-		return self.chars.has(c)
-	end
 
 	# Gets an Array containing the chars of self
 	#
@@ -178,7 +172,7 @@ abstract class Text
 	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): SELFTYPE
 	do
-		if from > self.length then return empty
+		if from >= self.length then return empty
 		if from < 0 then from = 0
 		return substring(from, length - from)
 	end
@@ -364,7 +358,7 @@ abstract class Text
 			if iter.item.ascii > 32 then break
 			iter.next
 		end
-		if iter.index == length then return self.empty
+		if iter.index < 0 then return self.empty
 		return self.substring(0, iter.index + 1)
 	end
 
@@ -1136,7 +1130,7 @@ private class FlatStringReverseIterator
 		curr_pos = pos + tgt.index_from
 	end
 
-	redef fun is_ok do return curr_pos >= 0
+	redef fun is_ok do return curr_pos >= target.index_from
 
 	redef fun item do return target_items[curr_pos]
 
@@ -1874,8 +1868,9 @@ redef class Array[E]
 			else
 				for j in tmp.substrings do
 					var s = j.as(FlatString)
-					s.items.copy_to(ns, tpl, s.index_from, off)
-					off += tpl
+					var slen = s.length
+					s.items.copy_to(ns, slen, s.index_from, off)
+					off += slen
 				end
 			end
 			i += 1
@@ -1967,7 +1962,7 @@ interface StringCapable
 end
 
 redef class Sys
-	var _args_cache: nullable Sequence[String]
+	private var args_cache: nullable Sequence[String]
 
 	# The arguments of the program as given by the OS
 	fun program_args: Sequence[String]

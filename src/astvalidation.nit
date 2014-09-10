@@ -15,7 +15,6 @@
 # Check the consitency of AST
 module astvalidation
 
-private import typing
 intrude import parser
 import astbuilder
 
@@ -52,7 +51,7 @@ redef class ANode
 		end
 		v.seen.add(self)
 
-		if _location == null then
+		if not isset _location then
 			#debug "LOCATION: unlocated node {v.path.join(", ")}"
 			_location = self.parent.location
 		end

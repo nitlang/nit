@@ -460,22 +460,6 @@ Number of property definitions: 20
 Number of redefined properties: 1 (5.55%)
 Average number of property redefinitions by property: 0.11
 Average number of property redefinitions by redefined property: 2.00
---- Metrics of the explitic static types ---
-Total number of explicit static types: 9
-Statistics of type usage:
- population: 4
- minimum value: 1
- maximum value: 6
- total value: 9
- average value: 2.25
- distribution:
-  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
-  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
- list:
-  Int: 6 (66.66%)
-  C: 1 (11.11%)
-  B: 1 (11.11%)
-  A: 1 (11.11%)
 --- Explicit vs. Implicit Self ---
 Total number of self: 5
 Total number of implicit self: 4 (80.00%)
@@ -485,49 +469,8 @@ Average number of composing class definition by runtime class: 2.00
 Total size of tables (classes and instances): 38 (not including stuff like info for subtyping or call-next-method)
 Average size of table by runtime class: 6.33
 Values never redefined: 32 (84.21%)
-
-# Mendel metrics
-	large mclasses (threshold: 2.291)
-	   B: 3
-	   C: 3
-	budding mclasses (threshold: 0.693)
-	   B: 0.75
-	   C: 0.75
-	blooming mclasses (threshold: 1.935)
-	   B: 2.25
-	   C: 2.25
-	blooming mclasses (threshold: 1.935)
-	   B: 2.25
-	   C: 2.25
 generating out/nitmetrics_args1.write/project_hierarchy.dot
 generating out/nitmetrics_args1.write/module_hierarchy.dot
-
-# Nullable metrics
-
- ## project base_simple3
-  `- group base_simple3
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
-	  sum: 0
-
- ## global metrics
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
-	  sum: 0
---- Sends on Nullable Receiver ---
-Total number of sends: 19
-Number of sends on a nullable receiver: 0 (0.0%)
-Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 
 # Inheritance metrics
 
@@ -715,6 +658,63 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 	  min: base_simple3 (0.143)
 	  std: 0.0
 	  sum: 0.143
+--- Metrics of the explitic static types ---
+Total number of explicit static types: 9
+Statistics of type usage:
+ population: 4
+ minimum value: 1
+ maximum value: 6
+ total value: 9
+ average value: 2.25
+ distribution:
+  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
+  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
+ list:
+  Int: 6 (66.66%)
+  C: 1 (11.11%)
+  B: 1 (11.11%)
+  A: 1 (11.11%)
+
+# Mendel metrics
+	large mclasses (threshold: 2.291)
+	   B: 3
+	   C: 3
+	budding mclasses (threshold: 0.693)
+	   B: 0.75
+	   C: 0.75
+	blooming mclasses (threshold: 1.935)
+	   B: 2.25
+	   C: 2.25
+	blooming mclasses (threshold: 1.935)
+	   B: 2.25
+	   C: 2.25
+
+# Nullable metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
+	  sum: 0
+
+ ## global metrics
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
+	  sum: 0
+--- Sends on Nullable Receiver ---
+Total number of sends: 19
+Number of sends on a nullable receiver: 0 (0.0%)
+Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 
 # RTA metrics
 

@@ -17,17 +17,9 @@
 # A global Nit compiler
 module nitg
 
-import modelbuilder
 import frontend
+import compiler
 import transform
-import rapid_type_analysis
-import global_compiler
-import separate_erasure_compiler
-import separate_compiler
-import android_platform
-import compiler_ffi
-import pnacl_platform
-import emscripten_platform
 
 redef class ToolContext
 	redef fun process_options(args)

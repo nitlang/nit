@@ -128,9 +128,9 @@ end
 # NIT representation of an Android Sensor used in android_app to initialize sensors
 class AndroidSensor
 
-	var asensor writable = new ASensor
-	var enabled writable = false
-	var event_rate writable = 100000
+	var asensor = new ASensor is writable
+	var enabled = false is writable
+	var event_rate = 100000 is writable
 
 	fun name: String do return asensor.name.to_s
 	fun vendor: String do return asensor.vendor.to_s
@@ -234,7 +234,7 @@ redef class App
 	var proximity = new AndroidSensor
 	var sensormanager: ASensorManager
 	var eventqueue: ASensorEventQueue
-	var sensors_support_enabled writable = false
+	var sensors_support_enabled = false is writable
 
 	private fun extern_input_sensor_accelerometer(event: ASensorAccelerometer) do input(event)
 	private fun extern_input_sensor_magnetic_field(event: ASensorMagneticField) do input(event)

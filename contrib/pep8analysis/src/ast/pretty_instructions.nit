@@ -23,7 +23,7 @@ end
 class ASTPrinter
 	super Visitor
 
-	var str writable = ""
+	var str = "" is writable
 
 	init do end
 	redef fun visit(n) do n.accept_ast_printer(self)

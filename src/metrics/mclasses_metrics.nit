@@ -17,10 +17,7 @@
 # Collect common metrics about mclasses
 module mclasses_metrics
 
-import model
 import metrics_base
-import phase
-import frontend
 
 redef class ToolContext
 	var mclasses_metrics_phase: Phase = new MClassesMetricsPhase(self, null)

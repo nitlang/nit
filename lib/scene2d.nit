@@ -23,7 +23,7 @@ abstract class LiveObject
 	fun update do end
 
 	# Controls whether `update' and `draw' are automatically called by `LiveGroup'
-	var exists writable = true
+	var exists = true is writable
 
 	# Redefine this method to asks how to draw on a view
 	fun draw(view: View) is abstract
@@ -37,16 +37,16 @@ class Sprite
 	super LiveObject
 
 	# x coordinate of the center point
-	var x: Int writable = 0
+	var x: Int = 0 is writable
 
 	# y coordinate of the center point
-	var y: Int writable = 0
+	var y: Int = 0 is writable
 
 	# width of the sprite
-	var width: Int writable = 100
+	var width: Int = 100 is writable
 
 	# height of the sprite
-	var height: Int writable = 100
+	var height: Int = 100 is writable
 
 	fun left: Int do return x - width/2
 	fun right: Int do return x + width/2
@@ -54,10 +54,10 @@ class Sprite
 	fun bottom: Int do return y + height/2
 
 	# x velocity (applied by `update')
-	var vx: Int writable = 0
+	var vx: Int = 0 is writable
 
 	# y velocity (applied by `update')
-	var vy: Int writable = 0
+	var vy: Int = 0 is writable
 
 	redef fun update
 	do

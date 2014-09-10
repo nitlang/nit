@@ -25,6 +25,9 @@ class TplPage
 	# Page title in HTML header
 	var title: String is writable, noinit
 
+	# Page url
+	var url: String is writable, noinit
+
 	# Directory where css, js and other assets can be found
 	var shareurl: String is writable, noinit
 
@@ -105,7 +108,7 @@ class TplPage
 		add "<script src='{shareurl}/vendors/jquery/jquery-1.11.1.min.js'></script>"
 		add "<script src='{shareurl}/vendors/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
 		add "<script src='{shareurl}/vendors/bootstrap/js/bootstrap.min.js'></script>"
-		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'</script>"
+		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'></script>"
 		for script in scripts do add script
 		add """<script>
 			$(function () {
@@ -154,7 +157,20 @@ class TplTopMenu
 	# Elements of the topmenu
 	private var elts = new Array[Streamable]
 
-	init do end
+	# The page url where the top menu is displayed.
+	#
+	# Used to select the active link.
+	private var current_url: String
+
+	init(current_url: String) do
+		self.current_url = current_url
+	end
+
+	# Add a new link to the menu.
+	fun add_link(content: TplLink) do
+		var is_active = content.href == current_url
+		add_item(content, is_active)
+	end
 
 	# Add a content between `<li>` tags
 	fun add_item(content: Streamable, is_active: Bool) do
@@ -258,11 +274,11 @@ class TplSideBox
 
 	# Content to display in the box
 	# box will not be rendered if the content is null
-	var content: nullable Streamable writable
+	var content: nullable Streamable is writable
 
 	# Is the box opened by default
 	# otherwise, the user will have to clic on the title to display the content
-	var is_open writable = false
+	var is_open = false is writable
 
 	init(title: String) do
 		self.title = title
@@ -367,14 +383,14 @@ class TplSectionElt
 	# Title to display if any
 	# if both `title` and `summary_title` are null then
 	# the section will not appear in the summary
-	var title: nullable Streamable writable
+	var title: nullable Streamable is writable
 
 	# Subtitle to display if any
-	var subtitle: nullable Streamable writable
+	var subtitle: nullable Streamable is writable
 
 	# Title that appear in the summary
 	# if null use `title` instead
-	var summary_title: nullable String writable
+	var summary_title: nullable String is writable
 
 	# CSS classes to apply on the section element
 	var css_classes = new Array[String]
@@ -455,8 +471,8 @@ class TplArticle
 	super TplSectionElt
 
 	# Content for this article
-	var content: nullable Streamable writable = null
-	var source_link: nullable Streamable writable = null
+	var content: nullable Streamable = null is writable
+	var source_link: nullable Streamable = null is writable
 
 	init with_content(id: String, title: Streamable, content: Streamable) do
 		with_title(id, title)
@@ -502,7 +518,7 @@ class TplArticle
 	end
 
 	redef fun is_empty: Bool do
-		return title == null and subtitle == null and content == null
+		return title == null and subtitle == null and content == null and children.is_empty
 	end
 end
 
@@ -636,13 +652,13 @@ class TplLink
 	super Template
 
 	# Link href
-	var href: String writable
+	var href: String is writable
 
 	# Text to display in the link
-	var text: String writable
+	var text: Streamable is writable
 
 	# Optional title
-	var title: nullable String writable
+	var title: nullable String is writable
 
 	init(href, text: String) do
 		self.href = href
@@ -681,7 +697,7 @@ class TplList
 	var css_classes = new Array[String]
 
 	# Add content wrapped in a <li> element
-	fun add_li(content: Streamable) do elts.add new TplListItem.with_content(content)
+	fun add_li(item: TplListItem) do elts.add item
 
 	init do end
 
@@ -726,9 +742,7 @@ class TplListItem
 	fun append(content: Streamable) do self.content.add content
 
 	redef fun rendering do
-		add "<li class='"
-		for cls in css_classes do add " {cls}"
-		add "'>"
+		add "<li class='{css_classes.join(" ")}'>"
 		add content
 		add "</li>"
 	end
@@ -739,12 +753,11 @@ class TplLabel
 	super Template
 
 	# Content of the label if any
-	var content: nullable Streamable
+	var content: nullable Streamable = null is writable
 
 	# CSS classes of the <span> element
 	var css_classes = new Array[String]
 
-	init do end
 	init with_content(content: Streamable) do self.content = content
 	init with_classes(classes: Array[String]) do self.css_classes = classes
 

@@ -36,17 +36,17 @@ class Player
 	end
 
 	# Current forture of the player
-	var money: Int writable = 0
+	var money: Int = 0 is writable
 
 	# Number of basic bullets fired together
-	var nbshoots: Int writable = 1
+	var nbshoots: Int = 1 is writable
 
 	# Time bebore the player shoot again a basic bullet (cooldown)
 	# Shoot if 0
 	var shoot_ttl = 0
 
 	# Number of missiles
-	var nbmissiles: Int writable = 0
+	var nbmissiles: Int = 0 is writable
 
 	# Time bebore the player shoot again a missile (cooldown)
 	# Shoot if 0
@@ -152,7 +152,7 @@ class GoingTarget
 	super Hitable
 
 	# true in on move, false if player is at rest
-	var active writable = false
+	var active = false is writable
 
 	init do
 		self.width = 500
@@ -319,11 +319,23 @@ class Enemy0
 	super Enemy
 
 	redef fun loot do return 3
+
+	redef init(scene)
+	do
+		self.width = 3600
+		self.height = 3600
+	end
 end
 
-# Simple shooter of paris of basic bullets
+# Simple shooter of pairs of basic bullets
 class Enemy1
 	super Enemy
+
+	redef init(scene)
+	do
+		self.width = 4400
+		self.height = 4400
+	end
 
 	redef fun shoot
 	do
@@ -348,6 +360,12 @@ end
 class Enemy2
 	super Enemy
 
+	redef init(scene)
+	do
+		self.width = 6000
+		self.height = 6000
+	end
+
 	redef fun shoot
 	do
 		# Next shoot
@@ -366,9 +384,15 @@ class Enemy2
 	redef fun loot do return 10
 end
 
-# Enem that shoot rings of basic bullets
+# Enemy that shoot rings of basic bullets
 class Enemy3
 	super Enemy
+
+	redef init(scene)
+	do
+		self.width = 5800
+		self.height = 5800
+	end
 
 	redef fun shoot
 	do
@@ -394,6 +418,12 @@ class Enemy4
 
 	# The angle of the turret
 	var angle: Float = 0.0
+
+	redef init(scene)
+	do
+		self.width = 4200
+		self.height = 4200
+	end
 
 	redef fun update
 	do
@@ -437,6 +467,12 @@ end
 class EnemyKamikaze
 	super Enemy
 
+	redef init(scene)
+	do
+		self.width = 3200
+		self.height = 3200
+	end
+
 	redef fun update
 	do
 		super
@@ -465,12 +501,12 @@ class Boss
 	init(scene)
 	do
 		super
-		self.width = 128 * 100
-		self.height = 100 * 100
+		self.width = 140 * 100
+		self.height = 96 * 100
 		self.x = scene.width / 2
 		self.y = -100 * 100
-		self.left_part = new BossPart(self, -48*100)
-		self.right_part = new BossPart(self, 48*100)
+		self.left_part = new BossPart(self, -66*100)
+		self.right_part = new BossPart(self, 66*100)
 	end
 
 	var flick_ttl: Int = 0
@@ -560,8 +596,8 @@ class BossPart
 		self.boss = boss
 		self.relx = relx
 		super(boss.scene)
-		self.width = 32 * 100
-		self.height = 60 * 100
+		self.width = 38 * 100
+		self.height = 48 * 100
 
 		# Alternate the shoots of the arms
 		if relx > 0 then
@@ -798,13 +834,13 @@ class ShotScene
 	super Scene
 
 	# When a scene need to be replaced, just assign the next_scene to a non null value
-	var next_scene: nullable ShotScene writable = null
+	var next_scene: nullable ShotScene = null is writable
 
 	# The width of the whole scene
-	var width: Int writable
+	var width: Int is writable
 
 	# The height of the whole scene
-	var height: Int writable
+	var height: Int is writable
 
 	init(w,h: Int)
 	do
@@ -998,7 +1034,7 @@ class MenuScene
 		end
 	end
 
-	var play: Bool writable = false
+	var play: Bool = false is writable
 	var ttl: Int = 50
 
 	redef fun update

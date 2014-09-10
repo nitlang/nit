@@ -43,11 +43,9 @@
 #  in Proceedings of the 16th IEEE International Conference on Program Comprehension (OCPC'08)
 module mendel_metrics
 
-import model
 import metrics_base
 import mclasses_metrics
-import phase
-import frontend
+import modelize
 
 redef class ToolContext
 	var mendel_metrics_phase: Phase = new MendelMetricsPhase(self, null)

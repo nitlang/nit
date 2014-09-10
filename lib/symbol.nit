@@ -31,7 +31,7 @@ end
 
 # A symbol is a unique immutable string
 class Symbol
-	var _string: String
+	private var string: String
 	redef fun to_s do return _string.to_s
 
 	# Only used by String::to_symbol

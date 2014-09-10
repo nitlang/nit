@@ -182,7 +182,7 @@ end
 class MovingEntity
 	super Entity
 
-	var going_to : nullable GamePos writable = null
+	var going_to : nullable GamePos = null is writable
 
 	fun speed : Int is abstract
 
