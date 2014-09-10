@@ -21,10 +21,11 @@ module server_config
 
 # Server instance configuration
 class ServerConfig
-	# Virtual hosts list
+	# `VirtualHost`s served by this server
 	var virtual_hosts = new VirtualHosts(self)
 
-	# TODO implement serialization or something like that
+	# Default `VirtualHost` to respond to requests not handled by any of the `virtual_hosts`
+	var default_virtual_host: nullable VirtualHost = null
 end
 
 # A `VirtualHost` configuration

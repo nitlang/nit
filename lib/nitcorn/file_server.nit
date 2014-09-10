@@ -128,7 +128,9 @@ class FileServer
 					var ext = local_file.file_extension
 					if ext != null then
 						var media_type = media_types[ext]
-						if media_type != null then response.header["Content-Type"] = media_type
+						if media_type != null then
+							response.header["Content-Type"] = media_type
+						else response.header["Content-Type"] = "application/octet-stream"
 					end
 
 					file.close
