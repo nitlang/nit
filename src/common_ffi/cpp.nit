@@ -218,7 +218,7 @@ redef class MExplicitCall
 
 		var cpp_signature = mproperty.build_csignature(recv_mtype, mainmodule, null, short_signature, from_cpp_call_context)
 		var ccall = mproperty.build_ccall(recv_mtype, mainmodule, null, long_signature, from_cpp_call_context, null)
-		var fc = new CFunction(cpp_signature)
+		var fc = new CFunction("static " + cpp_signature)
 		fc.exprs.add(ccall)
 		mmodule.cpp_file.add_local_function( fc )
 	end
