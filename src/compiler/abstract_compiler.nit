@@ -1150,11 +1150,21 @@ abstract class AbstractCompilerVisitor
 	# Generate a super call from a method definition
 	fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
+	# Adapt the arguments of a method according to targetted `MMethodDef`
 	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable]) is abstract
+
+	# Unbox all the arguments of a method when implemented `extern` or `intern`
+	fun unbox_signature_extern(m: MMethodDef, args: Array[RuntimeVariable]) is abstract
 
 	# Box or unbox a value to another type iff a C type conversion is needed
 	# ENSURE: `result.mtype.ctype == mtype.ctype`
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable is abstract
+
+	# Box extern classes to be used in the generated code
+	fun box_extern(value: RuntimeVariable, mtype: MType): RuntimeVariable is abstract
+
+	# Unbox extern classes to be used in extern code (legacy NI and FFI)
+	fun unbox_extern(value: RuntimeVariable, mtype: MType): RuntimeVariable is abstract
 
 	#  Generate a polymorphic subtype test
 	fun type_test(value: RuntimeVariable, mtype: MType, tag: String): RuntimeVariable is abstract
@@ -1284,6 +1294,16 @@ abstract class AbstractCompilerVisitor
 		var name = self.get_name("var")
 		var res = new RuntimeVariable(name, mtype, mtype)
 		self.add_decl("{mtype.ctype} {name} /* : {mtype} */;")
+		return res
+	end
+
+	# The difference with `new_var` is the C static type of the local variable
+	fun new_var_extern(mtype: MType): RuntimeVariable
+	do
+		mtype = self.anchor(mtype)
+		var name = self.get_name("var")
+		var res = new RuntimeVariable(name, mtype, mtype)
+		self.add_decl("{mtype.ctype_extern} {name} /* : {mtype} for extern */;")
 		return res
 	end
 
@@ -1611,6 +1631,10 @@ redef class MType
 	# Return the C type associated to a given Nit static type
 	fun ctype: String do return "val*"
 
+	# C type outside of the compiler code and in boxes
+	fun ctype_extern: String do return "val*"
+
+	# Short name of the `ctype` to use in unions
 	fun ctypename: String do return "val"
 
 	# Return the name of the C structure associated to a Nit live type
@@ -1642,10 +1666,17 @@ redef class MClassType
 			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
-		else if mclass.kind == extern_kind then
-			return "void*"
 		else
 			return "val*"
+		end
+	end
+
+	redef fun ctype_extern: String
+	do
+		if mclass.kind == extern_kind then
+			return "void*"
+		else
+			return ctype
 		end
 	end
 
@@ -1664,8 +1695,6 @@ redef class MClassType
 		else if mclass.name == "NativeArray" then
 			#return "{self.arguments.first.ctype}*"
 			return "val"
-		else if mclass.kind == extern_kind then
-			return "ptr"
 		else
 			return "val"
 		end
@@ -1913,6 +1942,7 @@ redef class AMethPropdef
 		end
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
+			v.unbox_signature_extern(mpropdef, arguments)
 		end
 		if cname == "Int" then
 			if pname == "output" then
@@ -2161,14 +2191,16 @@ redef class AMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
-			res = v.new_var(ret)
+			res = v.new_var_extern(ret)
 		end
 		v.adapt_signature(mpropdef, arguments)
+		v.unbox_signature_extern(mpropdef, arguments)
 
 		if res == null then
 			v.add("{externname}({arguments.join(", ")});")
 		else
 			v.add("{res} = {externname}({arguments.join(", ")});")
+			res = v.box_extern(res, ret.as(not null))
 			v.ret(res)
 		end
 		return true
@@ -2193,12 +2225,14 @@ redef class AMethPropdef
 			v.add_extern(file)
 		end
 		v.adapt_signature(mpropdef, arguments)
+		v.unbox_signature_extern(mpropdef, arguments)
 		var ret = arguments.first.mtype
-		var res = v.new_var(ret)
+		var res = v.new_var_extern(ret)
 
 		arguments.shift
 
 		v.add("{res} = {externname}({arguments.join(", ")});")
+		res = v.box_extern(res, ret)
 		v.ret(res)
 		return true
 	end
@@ -2893,7 +2927,7 @@ redef class ANewExpr
 			return v.native_array_instance(elttype, l)
 		else if ctype == "val*" then
 			recv = v.init_instance(mtype)
-		else if ctype == "void*" then
+		else if ctype == "char*" then
 			recv = v.new_expr("NULL/*special!*/", mtype)
 		else
 			recv = v.new_expr("({ctype})0/*special!*/", mtype)

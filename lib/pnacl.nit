@@ -27,13 +27,7 @@ module pnacl is platform
 import standard
 intrude import standard::stream
 
-`{
-	#include <unistd.h>
-	#include <stddef.h>
-	#include <stdio.h>
-	#include <string.h>
-	#include <stdlib.h>
-	#include <pthread.h>
+in "C Header" `{
 	#include "ppapi/c/pp_errors.h"
 	#include "ppapi/c/ppp.h"
 	#include "ppapi/c/ppp_instance.h"
@@ -43,6 +37,15 @@ intrude import standard::stream
 	#include "ppapi/c/ppp_messaging.h"
 	#include "ppapi/c/ppb_var_dictionary.h"
 	#include "ppapi/c/ppb_var_array.h"
+`}
+
+`{
+	#include <unistd.h>
+	#include <stddef.h>
+	#include <stdio.h>
+	#include <string.h>
+	#include <stdlib.h>
+	#include <pthread.h>
 
 	#define MAX_DICTIONARY_QUEUE_SIZE 200
 	#define MAX_MESSAGE_QUEUE_SIZE 10

@@ -19,7 +19,7 @@ module posix
 
 import string
 
-`{
+in "C Header" `{
 #include <sys/types.h>
 #include <unistd.h>
 #include <pwd.h>

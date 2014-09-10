@@ -160,6 +160,7 @@ redef class AMethPropdef
 		end
 
 		v.adapt_signature(mpropdef, arguments)
+		v.unbox_signature_extern(mpropdef, arguments)
 
 		var arguments_for_c = new Array[String]
 		for a in [0..arguments.length[ do
@@ -192,6 +193,7 @@ redef class AMethPropdef
 				v.add("ret_var = {externname}({arguments_for_c.join(", ")});")
 				v.add("{recv_var} = ret_var->value;")
 			end
+			recv_var = v.box_extern(recv_var, return_mtype)
 			v.ret(recv_var)
 		end
 
@@ -214,6 +216,7 @@ redef class AMethPropdef
 		var recv_var = v.new_var(return_mtype)
 
 		v.adapt_signature(mpropdef, arguments)
+		v.unbox_signature_extern(mpropdef, arguments)
 
 		arguments.shift
 
@@ -241,6 +244,7 @@ redef class AMethPropdef
 			v.add("ret_var = {externname}({arguments_for_c.join(", ")});")
 			v.add("{recv_var} = ret_var->value;")
 		end
+		recv_var = v.box_extern(recv_var, return_mtype)
 		v.ret(recv_var)
 
 		compile_ffi_support_to_c(v)
@@ -381,17 +385,14 @@ redef class MExplicitCall
 		var mtype: MType = recv_mtype
 		var recv_var = null
 		if mproperty.is_init then
-			if recv_mtype.mclass.kind == extern_kind then
-				recv_var = nitni_visitor.new_var(mtype)
-			else
-				var recv_mtype = recv_mtype
-				recv_var = nitni_visitor.init_instance(recv_mtype)
-				nitni_visitor.add("{mtype.ctype} recv /* var self: {mtype} */;")
-				nitni_visitor.add("recv = {recv_var};")
-			end
+			var recv_mtype = recv_mtype
+			recv_var = nitni_visitor.init_instance(recv_mtype)
+			nitni_visitor.add("{mtype.ctype} recv /* var self: {mtype} */;")
+			nitni_visitor.add("recv = {recv_var};")
 		else
 			mtype = mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
 			recv_var = nitni_visitor.var_from_c("recv", mtype)
+			recv_var = nitni_visitor.box_extern(recv_var, mtype)
 		end
 
 		vars.add(recv_var)
@@ -399,6 +400,7 @@ redef class MExplicitCall
 		for p in msignature.mparameters do
 			var arg_mtype = p.mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
 			var arg = nitni_visitor.var_from_c(p.name, arg_mtype)
+			arg = nitni_visitor.box_extern(arg, arg_mtype)
 			vars.add(arg)
 		end
 
@@ -413,6 +415,7 @@ redef class MExplicitCall
 			assert ret_var != null
 			return_mtype = return_mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
 			ret_var = nitni_visitor.autobox(ret_var, return_mtype)
+			ret_var = nitni_visitor.unbox_extern(ret_var, return_mtype)
 			nitni_visitor.ret_to_c(ret_var, return_mtype)
 		end
 		nitni_visitor.add("\}")
@@ -449,11 +452,13 @@ redef class MExplicitSuper
 		var vars = new Array[RuntimeVariable]
 
 		var recv_var = nitni_visitor.var_from_c("recv", mclass_type)
+		recv_var = nitni_visitor.box_extern(recv_var, mclass_type)
 		vars.add(recv_var)
 
 		for p in msignature.mparameters do
 			var arg_mtype = v.anchor(p.mtype)
 			var arg = nitni_visitor.var_from_c(p.name, arg_mtype)
+			arg = nitni_visitor.box_extern(arg, arg_mtype)
 			vars.add(arg)
 		end
 
@@ -463,6 +468,8 @@ redef class MExplicitSuper
 		if return_mtype != null then
 			assert ret_var != null
 			return_mtype = v.anchor(return_mtype)
+			ret_var = nitni_visitor.autobox(ret_var, return_mtype)
+			ret_var = nitni_visitor.unbox_extern(ret_var, return_mtype)
 			nitni_visitor.ret_to_c(ret_var, return_mtype)
 		end
 		nitni_visitor.add("\}")
@@ -490,11 +497,14 @@ redef class MExplicitCast
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
 
-		var full_internal_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname_blind} from)"
+		var full_internal_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
+
 		nitni_visitor.add_decl("/* nitni check for {from} to {to} */")
 		nitni_visitor.add_decl("{full_internal_csignature} \{")
 
-		var from_var = new RuntimeVariable("from->value", from, from)
+		#var from_var = new RuntimeVariable("from->value", from, from)
+		var from_var = nitni_visitor.var_from_c("from", from)
+		from_var = nitni_visitor.box_extern(from_var, from)
 		var recv_var = nitni_visitor.type_test(from_var, to, "FFI isa")
 		nitni_visitor.add("return {recv_var};")
 
@@ -521,11 +531,12 @@ redef class MExplicitCast
 		nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
 
-		full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind} from)"
+		full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
 		nitni_visitor.add_decl("/* nitni cast for {from} to {to} */")
 		nitni_visitor.add_decl("{full_internal_csignature} \{")
 
 		from_var = nitni_visitor.var_from_c("from", from)
+		from_var = nitni_visitor.box_extern(from_var, from)
 
 		## test type
 		var check = nitni_visitor.type_test(from_var, to, "FFI cast")
@@ -535,6 +546,7 @@ redef class MExplicitCast
 
 		## internal cast
 		recv_var = nitni_visitor.autobox(from_var, to)
+		recv_var = nitni_visitor.unbox_extern(recv_var, to)
 
 		nitni_visitor.ret_to_c(recv_var, to)
 

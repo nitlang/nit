@@ -219,7 +219,6 @@ class SeparateErasureCompiler
 	do
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
-		var c_instance_name = mclass.c_instance_name
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
@@ -290,24 +289,41 @@ class SeparateErasureCompiler
 		v.add_decl("\}")
 		v.add_decl("\};")
 
-		if mtype.ctype != "val*" then
-			if mtype.mclass.name == "Pointer" or mtype.mclass.kind != extern_kind then
-				#Build instance struct
-				self.header.add_decl("struct instance_{c_instance_name} \{")
-				self.header.add_decl("const struct class *class;")
-				self.header.add_decl("{mtype.ctype} value;")
-				self.header.add_decl("\};")
-			end
+		if mtype.ctype != "val*" or mtype.mclass.name == "Pointer" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("\};")
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_instance_name}*res = nit_alloc(sizeof(struct instance_{c_instance_name}));")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
 			v.require_declaration("class_{c_name}")
 			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
+			v.add("\}")
+
+			if mtype.mclass.name != "Pointer" then return
+
+			v = new_visitor
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{mtype.c_name}));")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{mtype.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
 			v.add("\}")
 			return
 		else if mclass.name == "NativeArray" then
@@ -330,6 +346,26 @@ class SeparateErasureCompiler
 			v.add("{res}->class = &class_{c_name};")
 			v.add("{res}->length = length;")
 			v.add("return (val*){res};")
+			v.add("\}")
+			return
+		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
+			var pointer_type = mainmodule.pointer_type
+
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{pointer_type.c_name}));")
+				#v.add("{res}->type = type;")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{pointer_type.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
 			v.add("\}")
 			return
 		end
@@ -577,6 +613,40 @@ class SeparateErasureCompilerVisitor
 		end
 
 		return res
+	end
+
+	redef fun unbox_extern(value, mtype)
+	do
+		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
+		   mtype.mclass.name != "NativeString" then
+			var pointer_type = compiler.mainmodule.pointer_type
+			var res = self.new_var_extern(mtype)
+			self.add "{res} = ((struct instance_{pointer_type.c_name}*){value})->value; /* unboxing {value.mtype} */"
+			return res
+		else
+			return value
+		end
+	end
+
+	redef fun box_extern(value, mtype)
+	do
+		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
+		   mtype.mclass.name != "NativeString" then
+			var valtype = compiler.mainmodule.pointer_type
+			var res = self.new_var(mtype)
+			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
+				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
+				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); show_backtrace(1);")
+				return res
+			end
+			self.require_declaration("BOX_{valtype.c_name}")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
+			self.require_declaration("class_{mtype.c_name}")
+			self.add("{res}->class = &class_{mtype.c_name};")
+			return res
+		else
+			return value
+		end
 	end
 
 	redef fun class_name_string(value)

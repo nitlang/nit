@@ -18,8 +18,6 @@
 module curl_c is pkgconfig("libcurl")
 
 in "C header" `{
-	#include <stdio.h>
-	#include <stdlib.h>
 	#include <curl/curl.h>
 
 	typedef enum {
@@ -42,6 +40,10 @@ in "C header" `{
 `}
 
 in "C body" `{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+
 	// Callbacks method for Header, Body, Stream.
 	size_t nit_curl_callback_func(void *buffer, size_t size, size_t count, CURLCallbackDatas *datas){
 		if(datas->type == CURLcallbackTypeHeader){
