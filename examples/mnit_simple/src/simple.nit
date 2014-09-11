@@ -24,7 +24,7 @@ import mnit
 
 redef class App
 
-	var img : nullable I = null
+	var img: nullable Opengles1Image = null
 
 	redef fun window_created
 	do
