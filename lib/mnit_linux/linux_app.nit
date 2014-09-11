@@ -25,9 +25,6 @@ in "C" `{
 `}
 
 redef class App
-	redef type D: Opengles1Display
-	redef type I: Opengles1Image
-
 	redef fun setup
 	do
 		if "NIT_TESTING".environ == "true" then exit 0

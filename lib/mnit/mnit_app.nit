@@ -18,19 +18,16 @@
 module mnit_app
 
 import ::app
-import mnit_display
+import opengles1
 
 # An App instance serves as base to every Mnit projects.
 #
 # This class is redefed by plateforme modules and so
 # App can be specialized directly in the user app.
 redef class App
-	type D: Display
-	type I: Image
-
 	# Display to use by apps
 	# Is null if the display is not available or not yet ready
-	var display: nullable D = null is protected writable
+	var display: nullable Opengles1Display = null is protected writable
 
 	# Received quit order
 	var quit: Bool = false is writable
@@ -52,7 +49,7 @@ redef class App
 
 	# Main frame method to redef
 	# Is called between readying display and flipping it
-	fun frame_core( display: D ) do end
+	fun frame_core(display: Opengles1Display) do end
 
 	# Receive and deal with all inputs
 	fun input( event: InputEvent ): Bool
