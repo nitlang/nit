@@ -1,0 +1,17 @@
+config
+config set neo.url http://localhost:7474
+config get neo.url
+config set neo.foo bar
+config unset neo.foo
+config list
+repo
+repo add test_prog test_prog/
+repo add foo bar
+repo set-dir foo baz
+repo list
+repo rm foo
+repo -l
+neo
+neo start -q
+neo push test_prog
+neo doc test_prog --no-dot -d $WRITE
