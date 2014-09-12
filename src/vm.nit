@@ -44,6 +44,16 @@ class VirtualMachine super NaiveInterpreter
 	# Handles memory and garbage collection
 	var memory_manager: MemoryManager = new MemoryManager
 
+	# The unique instance of the `MInit` value
+	var initialization_value: Instance
+
+	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
+	do
+		super
+		var init_type = new MInitType(mainmodule.model)
+		initialization_value = new MutableInstance(init_type)
+	end
+
 	# Subtyping test for the virtual machine
 	redef fun is_subtype(sub, sup: MType): Bool
 	do
@@ -456,6 +466,29 @@ redef class MutableInstance
 
 	# C-array to store pointers to attributes of this Object
 	var internal_attributes: Pointer
+end
+
+# Is the type of the initial value inside attributes
+class MInitType
+	super MType
+
+	redef var model: Model
+	protected init(model: Model)
+	do
+		self.model = model
+	end
+
+	redef fun to_s do return "InitType"
+	redef fun as_nullable do return self
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
 end
 
 # A VTable contains the virtual method table for the dispatch
