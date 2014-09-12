@@ -19,8 +19,8 @@ module android_platform
 
 import platform
 import abstract_compiler
-import common_ffi
-intrude import common_ffi::extra_java_files
+import ffi
+intrude import ffi::extra_java_files
 import android_annotations
 
 redef class ToolContext

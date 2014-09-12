@@ -53,7 +53,7 @@ redef class MModule
 
 			# does the super module has inherited dependancies?
 			var hd = m.header_dependencies
-			if not hd.is_empty then 
+			if not hd.is_empty then
 				header_dependencies.add_all(hd)
 			end
 
