@@ -148,21 +148,22 @@ class VirtualMachine super NaiveInterpreter
 
 		assert(recv isa MutableInstance)
 
-		recv.internal_attributes = init_internal_attributes(null_instance, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
+		recv.internal_attributes = init_internal_attributes(initialization_value, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
 		super
 	end
 
 	# Initialize the internal representation of an object (its attribute values)
-	private fun init_internal_attributes(null_instance: Instance, size: Int): Pointer
+	# `init_instance` is the initial value of attributes
+	private fun init_internal_attributes(init_instance: Instance, size: Int): Pointer
 		import Array[Instance].length, Array[Instance].[] `{
 
 		Instance* attributes = malloc(sizeof(Instance) * size);
 
 		int i;
 		for(i=0; i<size; i++)
-			attributes[i] = null_instance;
+			attributes[i] = init_instance;
 
-		Instance_incr_ref(null_instance);
+		Instance_incr_ref(init_instance);
 		return attributes;
 	`}
 
@@ -179,6 +180,12 @@ class VirtualMachine super NaiveInterpreter
 
 		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset)
+
+		# If we get a `MInit` value, throw an error
+		if i == initialization_value then
+			fatal("Uninitialized attribute {mproperty.name}")
+			abort
+		end
 
 		return i
 	end
