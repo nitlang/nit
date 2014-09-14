@@ -239,6 +239,21 @@ class VirtualMachine super NaiveInterpreter
 		((Instance *)instance)[absolute_offset + offset] = value;
 		Instance_incr_ref(value);
 	`}
+
+	# Is the attribute `mproperty` initialized in the instance `recv`?
+	redef fun isset_attribute(mproperty: MAttribute, recv: Instance): Bool
+	do
+		assert recv isa MutableInstance
+
+		# Read the attribute value with internal perfect hashing read
+		# because we do not want to throw an error if the value is `initialization_value`
+		var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+					recv.vtable.mask, id, mproperty.offset)
+
+		return i != initialization_value
+	end
 end
 
 redef class MClass
