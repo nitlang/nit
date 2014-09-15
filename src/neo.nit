@@ -72,6 +72,11 @@
 # * `visibility`: visibility of the class.
 # * `(:MClass)-[:CLASSTYPE]->(:MClassType)`: SEE: `MClass.mclass_type`
 #
+# Arguments in the `CLASSTYPE` are named following the `parameter_names`
+# attribute of the `MClassDef` that introduces the class. A class definition
+# introduces a class if and only if it has this class as `MCLASS` and
+# has `is_intro` set to `true`.
+#
 # `MClassDef`
 #
 # * labels: `MClassDef`, `model_name` and `MEntity`.
@@ -134,6 +139,9 @@
 # * If it is a `MGenericType`, also has the `MGenericType` label.
 # * `(:MClassType)-[:CLASS]->(:MClass)`: SEE: `MClassType.mclass`
 # * `(:MClassType)-[:ARGUMENT]->(:MType)`: type arguments.
+#
+# Arguments are named following the `parameter_names` attribute of the
+# `MClassDef` that introduces the class referred by `CLASS`.
 #
 # Additional relationship for `MVirtualType`:
 #
