@@ -99,7 +99,7 @@ interface SearchProblem[S: Object, A]
 	# An heuristic of the estimated `cost` going from `state` to a goal state.
 	#
 	# Is is expected that the heuristic is *admissible*, it means its is an
-	# optimistic estimation that never an over-estimate, thus is cannot be#
+	# optimistic estimation and never an over-estimate, thus is cannot be
 	# higher than the lowest possible remaining cost.
 	# See `SearchSolver::do_revisit` for details.
 	#
