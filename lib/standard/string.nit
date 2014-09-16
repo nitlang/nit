@@ -971,15 +971,15 @@ class FlatString
 
 	redef fun to_cstring: NativeString
 	do
-		if real_items != null then return real_items.as(not null)
-		if index_from > 0 or index_to != items.cstring_length - 1 then
+		if real_items != null then
+			return real_items.as(not null)
+		else
 			var newItems = calloc_string(length + 1)
 			self.items.copy_to(newItems, length, index_from, 0)
 			newItems[length] = '\0'
 			self.real_items = newItems
 			return newItems
 		end
-		return items
 	end
 
 	redef fun ==(other)
@@ -1201,6 +1201,14 @@ abstract class Buffer
 	# Specific implementations MUST set this to `true` in order to invalidate caches
 	protected var is_dirty = true
 
+	# Copy-On-Write flag
+	#
+	# If the `Buffer` was to_s'd, the next in-place altering
+	# operation will cause the current `Buffer` to be re-allocated.
+	#
+	# The flag will then be set at `false`.
+	protected var written = false
+
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
@@ -1287,6 +1295,17 @@ class FlatBuffer
 
 	redef fun substrings do return new FlatSubstringsIter(self)
 
+	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
+	#
+	# This happens when an operation modifies the current `Buffer` and
+	# the Copy-On-Write flag `written` is set at true.
+	private fun reset do
+		var nns = new NativeString(capacity)
+		items.copy_to(nns, length, 0, 0)
+		items = nns
+		written = false
+	end
+
 	redef fun [](index)
 	do
 		assert index >= 0
@@ -1301,6 +1320,7 @@ class FlatBuffer
 			add(item)
 			return
 		end
+		if written then reset
 		assert index >= 0 and index < length
 		items[index] = item
 	end
@@ -1315,6 +1335,7 @@ class FlatBuffer
 
 	redef fun clear do
 		is_dirty = true
+		if written then reset
 		length = 0
 	end
 
@@ -1325,6 +1346,9 @@ class FlatBuffer
 		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
+		# The COW flag can be set at false here, since
+		# it does a copy of the current `Buffer`
+		written = false
 		var a = calloc_string(c+1)
 		if length > 0 then items.copy_to(a, length, 0, 0)
 		items = a
@@ -1333,7 +1357,8 @@ class FlatBuffer
 
 	redef fun to_s: String
 	do
-		return to_cstring.to_s_with_length(length)
+		written = true
+		return new FlatString.with_infos(items, length, 0, length - 1)
 	end
 
 	redef fun to_cstring
@@ -1431,6 +1456,7 @@ class FlatBuffer
 
 	redef fun reverse
 	do
+		written = false
 		var ns = calloc_string(capacity)
 		var si = length - 1
 		var ni = 0
@@ -1453,6 +1479,7 @@ class FlatBuffer
 
 	redef fun upper
 	do
+		if written then reset
 		var it = items
 		var id = length - 1
 		while id >= 0 do
@@ -1463,6 +1490,7 @@ class FlatBuffer
 
 	redef fun lower
 	do
+		if written then reset
 		var it = items
 		var id = length - 1
 		while id >= 0 do

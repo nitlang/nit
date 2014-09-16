@@ -354,6 +354,20 @@ redef class FlatString
 
 end
 
+redef class FlatBuffer
+
+	# Fix for this particular implementation
+	#
+	# Since the to_s of a FlatBuffer now builds using
+	# the old String contructor, this breaks everything.
+	#
+	# This will disappear when UTF8 is fully-supported
+	redef fun to_s do
+		written = false
+		return to_cstring.to_s_with_length(length)
+	end
+end
+
 redef class NativeString
 
 	# Creates the index for said NativeString
