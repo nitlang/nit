@@ -1978,7 +1978,9 @@ extern class NativeString `{ char* `}
 	fun to_s_with_length(length: Int): FlatString
 	do
 		assert length >= 0
-		return new FlatString.with_infos(self, length, 0, length - 1)
+		var str = new FlatString.with_infos(self, length, 0, length - 1)
+		str.real_items = self
+		return str
 	end
 
 	fun to_s_with_copy: FlatString
@@ -1986,7 +1988,9 @@ extern class NativeString `{ char* `}
 		var length = cstring_length
 		var new_self = calloc_string(length + 1)
 		copy_to(new_self, length, 0, 0)
-		return new FlatString.with_infos(new_self, length, 0, length - 1)
+		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
+		str.real_items = self
+		return str
 	end
 end
 
