@@ -63,7 +63,7 @@ class CPPLanguage
 		var indirection_sig = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl_mid", long_signature, internal_call_context)
 
 		## In C file (__ffi.c)
-		
+
 		# Declare the indirection function in C
 		ecc.body_decl.add("{indirection_sig};\n")
 

@@ -408,7 +408,7 @@ redef class NitniCallback
 
 	# Returns the list of C functions to link with extern Java methods, as required
 	# to enable this callback from Java code.
-	# 
+	#
 	# Return used by `MModule::ensure_linking_callback_methods`
 	#
 	# TODO we return an Array to support cast and other features like that
@@ -462,7 +462,7 @@ redef class MType
 	private fun jni_type: String do return "jint"
 
 	# JNI short type name (for signatures)
-	# 
+	#
 	# Is used by `MMethod::build_jni_format` to pass a Java method signature
 	# to the JNI function `GetStaticMetodId`.
 	private fun jni_format: String do return "I"
@@ -543,7 +543,7 @@ end
 
 redef class MMethod
 	# Returns the JNI signature format of this Nit method
-	# 
+	#
 	# Example: a Nity signature `(Bool, Int, Float, JavaString)` is represented by
 	# the JNI format `(ZIDLjava/lang/string;)V"
 	private fun build_jni_format(recv_mtype: MClassType, from_mmodule: MModule): String

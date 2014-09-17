@@ -1245,8 +1245,8 @@ end
 # The type associated the a formal parameter generic type of a class
 #
 # Each parameter type is associated to a specific class.
-# It's mean that all refinements of a same class "share" the parameter type,
-# but that a generic subclass has its on parameter types.
+# It means that all refinements of a same class "share" the parameter type,
+# but that a generic subclass has its own parameter types.
 #
 # However, in the sense of the meta-model, a parameter type of a class is
 # a valid type in a subclass. The "in the sense of the meta-model" is

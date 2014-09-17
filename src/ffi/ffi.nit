@@ -17,7 +17,7 @@
 # FFI concers common between the compilers and the interpreter.
 # Offers services to compile modules using foreign code. Mainly allows
 # to wrap foreign code in Nit methods.
-module common_ffi
+module ffi
 
 import modelbuilder
 

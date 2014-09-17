@@ -18,7 +18,7 @@
 module compiler_ffi
 
 intrude import abstract_compiler
-intrude import common_ffi
+intrude import ffi
 import nitni
 
 redef class MModule
