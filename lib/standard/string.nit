@@ -818,6 +818,38 @@ abstract class String
 
 		return new_str.to_s
 	end
+
+	# Returns a capitalized `self`
+	#
+	# Letters that follow a letter are lowercased
+	# Letters that follow a non-letter are upcased.
+	#
+	# SEE : `Char::is_letter` for the definition of letter.
+	#
+	#    assert "jAVASCRIPT".capitalized == "Javascript"
+	#    assert "i am root".capitalized == "I Am Root"
+	#    assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
+	fun capitalized: SELFTYPE do
+		if length == 0 then return self
+
+		var buf = new FlatBuffer.with_capacity(length)
+
+		var curr = chars[0].to_upper
+		var prev = curr
+		buf[0] = curr
+
+		for i in [1 .. length[ do
+			prev = curr
+			curr = self[i]
+			if prev.is_letter then
+				buf[i] = curr.to_lower
+			else
+				buf[i] = curr.to_upper
+			end
+		end
+
+		return buf.to_s
+	end
 end
 
 private class FlatSubstringsIter
@@ -1256,6 +1288,38 @@ abstract class Buffer
 	#     b.lower
 	#     assert b == "hello world!"
 	fun lower is abstract
+
+	# Capitalizes each word in `self`
+	#
+	# Letters that follow a letter are lowercased
+	# Letters that follow a non-letter are upcased.
+	#
+	# SEE: `Char::is_letter` for the definition of a letter.
+	#
+	#    var b = new FlatBuffer.from("jAVAsCriPt")"
+	#    b.capitalize
+	#    assert b == "Javascript"
+	#    b = new FlatBuffer.from("i am root")
+	#    b.capitalize
+	#    assert b == "I Am Root"
+	#    b = new FlatBuffer.from("ab_c -ab0c ab\nc")
+	#    b.capitalize
+	#    assert b == "Ab_C -Ab0C Ab\nC"
+	fun capitalize do
+		if length == 0 then return
+		var c = self[0].to_upper
+		self[0] = c
+		var prev: Char = c
+		for i in [1 .. length[ do
+			prev = c
+			c = self[i]
+			if prev.is_letter then
+				self[i] = c.to_lower
+			else
+				self[i] = c.to_upper
+			end
+		end
+	end
 
 	redef fun hash
 	do
