@@ -106,14 +106,15 @@ class FileServer
 					var files = local_file.files
 
 					var links = new Array[String]
-					if local_file.length > 1 then
-						# The extra / is a hack
-						var path = "/" + (turi + "/..").simplify_path
-						links.add "<a href=\"{path}\">..</a>"
+					if turi.length > 1 then
+						var path = (request.uri + "/..").simplify_path
+						links.add "<a href=\"{path}/\">..</a>"
 					end
 					for file in files do
-						var path = (turi + "/" + file).simplify_path
-						links.add "<a href=\"{path}\">{file}</a>"
+						var local_path = local_file.join_path(file).simplify_path
+						var web_path = file.simplify_path
+						if local_path.file_stat.is_dir then web_path = web_path + "/"
+						links.add "<a href=\"{web_path}\">{file}</a>"
 					end
 
 					var header = self.header
