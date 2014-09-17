@@ -46,6 +46,7 @@ end
 #  * `public_visibility`
 #  * `protected_visibility`
 #  * `none_visibility`
+#  * `private_visiblity`
 #
 # Note this class is basically an enum.
 # FIXME: use a real enum once user-defined enums are available
