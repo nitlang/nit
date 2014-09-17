@@ -42,8 +42,22 @@ end
 class FileServer
 	super Action
 
-	# Root of `self` file system
+	# Root folder of `self` file system
 	var root: String
+
+	init
+	do
+		var root = self.root
+
+		# Simplify the root path as each file requested will also be simplified
+		root = root.simplify_path
+
+		# Make sure the root ends with '/', this makes a difference in the security
+		# check on each file access.
+		root = root + "/"
+
+		self.root = root
+	end
 
 	# Error page template for a given `code`
 	fun error_page(code: Int): Streamable do return new ErrorTemplate(code)
@@ -57,7 +71,6 @@ class FileServer
 
 		var local_file = root.join_path(turi.strip_start_slashes)
 		local_file = local_file.simplify_path
-
 
 		# Is it reachable?
 		#
