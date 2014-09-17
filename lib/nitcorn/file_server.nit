@@ -65,10 +65,18 @@ class FileServer
 		if local_file.has_prefix(root) then
 			# Does it exists?
 			if local_file.file_exists then
-				response = new HttpResponse(200)
-
 				if local_file.file_stat.is_dir then
-					# Show index.html instead of the directory listing
+					# If we target a directory without an ending `/`,
+					# redirect to the directory ending with `/`.
+					if not request.uri.is_empty and
+					   request.uri.chars.last != '/' then
+						response = new HttpResponse(303)
+						response.header["Location"] = request.uri + "/"
+						return response
+					end
+
+					# Show index file instead of the directory listing
+					# only if `index.html` or `index.htm` is available
 					var index_file = local_file.join_path("index.html")
 					if index_file.file_exists then
 						local_file = index_file
@@ -78,6 +86,7 @@ class FileServer
 					end
 				end
 
+				response = new HttpResponse(200)
 				if local_file.file_stat.is_dir then
 					# Show the directory listing
 					var title = turi
