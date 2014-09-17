@@ -192,18 +192,6 @@ class MModule
 		end
 	end
 
-	# placebo for old module nesting hierarchy
-	fun public_owner: nullable MModule
-	do
-		var mgroup = self.mgroup
-		if mgroup == null then return null
-		mgroup = mgroup.mproject.root
-		if mgroup.mmodules.is_empty then return null
-		var res = mgroup.fuzzy_owner
-		if res == self then return null
-		return res
-	end
-
 	# Return true if a class or a property introduced in `intro_mmodule` with a visibility of `visibility` is visible in self.
 	fun is_visible(intro_mmodule: MModule, visibility: MVisibility): Bool
 	do
