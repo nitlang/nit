@@ -58,11 +58,11 @@ class FileServer
 		var local_file = root.join_path(turi.strip_start_slashes)
 		local_file = local_file.simplify_path
 
-		# HACK
-		if turi == "/" then local_file = root
 
 		# Is it reachable?
-		if local_file.has_prefix(root) then
+		#
+		# This make sure that the requested file is within the root folder.
+		if (local_file + "/").has_prefix(root) then
 			# Does it exists?
 			if local_file.file_exists then
 				if local_file.file_stat.is_dir then
