@@ -1101,13 +1101,13 @@ class SeparateCompilerVisitor
 		return table_send(mmethod, arguments, mmethod.const_color)
 	end
 
-	# Handel common special cases before doing the effective method invocation
+	# Handle common special cases before doing the effective method invocation
 	# This methods handle the `==` and `!=` methods and the case of the null receiver.
 	# Note: a { is open in the generated C, that enclose and protect the effective method invocation.
 	# Client must not forget to close the } after them.
 	#
 	# The value returned is the result of the common special cases.
-	# If not null, client must compine it with the result of their own effective method invocation.
+	# If not null, client must compile it with the result of their own effective method invocation.
 	#
 	# If `before_send` can shortcut the whole message sending, a dummy `if(0){`
 	# is generated to cancel the effective method invocation that will follow
