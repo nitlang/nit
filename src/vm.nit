@@ -44,6 +44,16 @@ class VirtualMachine super NaiveInterpreter
 	# Handles memory and garbage collection
 	var memory_manager: MemoryManager = new MemoryManager
 
+	# The unique instance of the `MInit` value
+	var initialization_value: Instance
+
+	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
+	do
+		super
+		var init_type = new MInitType(mainmodule.model)
+		initialization_value = new MutableInstance(init_type)
+	end
+
 	# Subtyping test for the virtual machine
 	redef fun is_subtype(sub, sup: MType): Bool
 	do
@@ -138,21 +148,22 @@ class VirtualMachine super NaiveInterpreter
 
 		assert(recv isa MutableInstance)
 
-		recv.internal_attributes = init_internal_attributes(null_instance, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
+		recv.internal_attributes = init_internal_attributes(initialization_value, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
 		super
 	end
 
 	# Initialize the internal representation of an object (its attribute values)
-	private fun init_internal_attributes(null_instance: Instance, size: Int): Pointer
+	# `init_instance` is the initial value of attributes
+	private fun init_internal_attributes(init_instance: Instance, size: Int): Pointer
 		import Array[Instance].length, Array[Instance].[] `{
 
 		Instance* attributes = malloc(sizeof(Instance) * size);
 
 		int i;
 		for(i=0; i<size; i++)
-			attributes[i] = null_instance;
+			attributes[i] = init_instance;
 
-		Instance_incr_ref(null_instance);
+		Instance_incr_ref(init_instance);
 		return attributes;
 	`}
 
@@ -169,6 +180,12 @@ class VirtualMachine super NaiveInterpreter
 
 		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset)
+
+		# If we get a `MInit` value, throw an error
+		if i == initialization_value then
+			fatal("Uninitialized attribute {mproperty.name}")
+			abort
+		end
 
 		return i
 	end
@@ -222,6 +239,21 @@ class VirtualMachine super NaiveInterpreter
 		((Instance *)instance)[absolute_offset + offset] = value;
 		Instance_incr_ref(value);
 	`}
+
+	# Is the attribute `mproperty` initialized in the instance `recv`?
+	redef fun isset_attribute(mproperty: MAttribute, recv: Instance): Bool
+	do
+		assert recv isa MutableInstance
+
+		# Read the attribute value with internal perfect hashing read
+		# because we do not want to throw an error if the value is `initialization_value`
+		var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+					recv.vtable.mask, id, mproperty.offset)
+
+		return i != initialization_value
+	end
 end
 
 redef class MClass
@@ -456,6 +488,29 @@ redef class MutableInstance
 
 	# C-array to store pointers to attributes of this Object
 	var internal_attributes: Pointer
+end
+
+# Is the type of the initial value inside attributes
+class MInitType
+	super MType
+
+	redef var model: Model
+	protected init(model: Model)
+	do
+		self.model = model
+	end
+
+	redef fun to_s do return "InitType"
+	redef fun as_nullable do return self
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
 end
 
 # A VTable contains the virtual method table for the dispatch
