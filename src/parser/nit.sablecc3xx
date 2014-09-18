@@ -110,8 +110,6 @@ kwinit = 'init';
 kwredef = 'redef';
 kwis = 'is';
 kwdo = 'do';
-kwreadable = 'readable';
-kwwritable = 'writable';
 kwvar = 'var';
 kwintern = 'intern';
 kwextern = 'extern';
@@ -270,8 +268,6 @@ propdef~toplevel {-> propdef}
 	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string_o extern_calls extern_code_block_o {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, string_o.string, extern_calls, extern_code_block_o.extern_code_block)}
 	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature annotation_noend? extern_calls extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, annotation_noend.annotations, Null, extern_calls, extern_code_block)}
 !toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing_o {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, Null)}
-!toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing_o assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing_o.type, Null, expr)}
-!toplevel| {var3} [doc]:no redef visibility kwvar id typing_o writable? annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, Null)}
 !toplevel| {var4} [doc]:no redef visibility kwvar id typing_o writable? assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, Null, writable.able, redef.kwredef, visibility, kwvar, Null, id, typing_o.type, annotation_withend.annotations, expr.expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, annotation_noend.annotations, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
@@ -286,12 +282,6 @@ annotation_withend~nonull {-> annotations?}
 annotation_noend {-> annotations}
 	= {oneliner} kwis many_annotations {-> many_annotations.annotations}
 	| {more} kwis n1 line_annotations {-> line_annotations.annotations}
-	;
-readable {-> able}
-	= redef visibility kwreadable {-> New able.read(redef.kwredef, kwreadable)}
-	;
-writable {-> able}
-	= redef visibility kwwritable {-> New able.write(redef.kwredef, visibility, kwwritable)}
 	;
 
 visibility
@@ -671,8 +661,6 @@ atid~forclass {-> atid}
 	= {id}  id {-> New atid.id(id)}
 //!forclass	| {kwextern} kwextern {-> New atid.kwextern(kwextern)}
 //!forclass	| {kwintern} kwintern {-> New atid.kwintern(kwintern)}
-!forclass	| {kwreadable} kwreadable {-> New atid.kwreadable(kwreadable)}
-!forclass	| {kwwritable} kwwritable {-> New atid.kwwritable(kwwritable)}
 //	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
 	;
 
@@ -787,7 +775,7 @@ formaldef = [id]:classid type? annotations?;
 superclass = kwsuper type annotations?;
 
 
-propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwvar [id]:attrid? [id2]:id? type? annotations? expr?
+propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? expr? annotations?
 	| {meth} doc? kwredef? visibility methid signature
 	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature annotations?
 	| {intern_meth} doc? kwredef? visibility kwmeth methid signature
@@ -799,10 +787,6 @@ propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwva
 	| {extern_init} doc? kwredef? visibility kwnew methid? signature annotations? [extern]:string? extern_calls? extern_code_block?
 	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [id]:classid type annotations?
-	;
-
-able	= {read} kwredef? kwreadable
-	| {write} kwredef? visibility? kwwritable
 	;
 
 methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
@@ -931,7 +915,7 @@ at_arg
 	| {expr} expr
 	| {at} annotations
 	;
-atid = {id} id | {kwextern} [id]:kwextern | {kwintern} [id]:kwintern | {kwreadable} [id]:kwreadable | {kwwritable} [id]:kwwritable | {kwimport} [id]:kwimport;
+atid = {id} id | {kwextern} [id]:kwextern | {kwintern} [id]:kwintern | {kwimport} [id]:kwimport;
 
 /*****************************************************************************/
 
