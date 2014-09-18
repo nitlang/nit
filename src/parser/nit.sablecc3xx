@@ -617,7 +617,22 @@ many_annotations {-> annotations}
 	;
 
 annotation_list {-> annotation*}
-	= {many} one_annotation annotations_tail* {-> [one_annotation.annotation, annotations_tail.annotation] }
+	= {many} one_annotation_list annotations_tail* {-> [one_annotation_list.annotation, annotations_tail.annotation] }
+	;
+
+one_annotation_list~nopar {-> annotation}
+	= {alone} redef visibility atid annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [], Null, annotations_o~nopar.annotations)}
+// !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
+!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
+!nopar	| {nopar} redef visibility atid at_arg_single {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [at_arg_single.at_arg], Null, Null)}
+	;
+at_arg_single {-> at_arg}
+// FIXME: why expr_single but not expr_atom is not clear :(
+	= {expr} [expr]:expr_single_nopar {-> New at_arg.expr(expr.expr)}
+	;
+
+annotations_tail {-> annotation}
+	= comma no one_annotation_list {-> one_annotation_list.annotation}
 	;
 
 line_annotations {-> annotations}
@@ -635,10 +650,6 @@ line_annotation_forclass {-> annotation}
 	= [doc]:no atid_forclass annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [], Null, annotations)}
 	| {args} [doc]:no atid_forclass opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
 	| {nopar} [doc]:no atid_forclass at_args_nopar n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [at_args_nopar.at_arg], Null, Null)}
-	;
-
-annotations_tail {-> annotation}
-	= comma no one_annotation {-> one_annotation.annotation}
 	;
 
 at_args~nopar {-> at_arg* }
