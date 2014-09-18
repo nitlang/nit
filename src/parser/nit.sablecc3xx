@@ -547,17 +547,21 @@ expr_new~nopar~nobra {-> expr}
 	;
 
 expr_atom~nopar~nobra {-> expr}
-	= {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
+	= expr_single~nopar~nobra {-> expr_single~nopar~nobra.expr}
+	| {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
 	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
 	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid.id, args.exprs)}
-// !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
-!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
-!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
-!nobra!nopar	| {array} braargs annotations_o {-> New expr.array(braargs.exprs, annotations_o.annotations)}
-	| {self} kwself annotations_o {-> New expr.self(kwself, annotations_o.annotations)}
+        | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
+        | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
+        | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
+	| {vararg} [expr]:expr_atom~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
+	;
+
+expr_single~nopar~nobra {-> expr}
+	= {self} kwself annotations_o {-> New expr.self(kwself, annotations_o.annotations)}
 	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
 	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
 	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
@@ -568,10 +572,10 @@ expr_atom~nopar~nobra {-> expr}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
 	| {superstring} superstring  {-> superstring.expr}
 !nopar	| {par} opar no expr [n2]:no cpar annotations_o {-> New expr.par(opar, expr, cpar, annotations_o.annotations)}
-        | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
-        | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
-        | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
-	| {vararg} [expr]:expr_atom~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
+// !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
+!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
+!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
+!nobra!nopar	| {array} braargs annotations_o {-> New expr.array(braargs.exprs, annotations_o.annotations)}
 	;
 
 superstring {-> expr} 
