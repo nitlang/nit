@@ -72,12 +72,6 @@ class MModule
 	# The model considered
 	redef var model: Model
 
-	# placebo for old module nesting hierarchy
-	# return null if self is not nested (ie. is a top-level module)
-	#
-	# TODO REMOVE, rely on mgroup instead
-	var direct_owner: nullable MModule
-
 	# The group of module in the project if any
 	var mgroup: nullable MGroup
 
@@ -133,14 +127,12 @@ class MModule
 				# The module is the new owner of its own group, thus adopt the other modules
 				for m in mgroup.mmodules do
 					if m == self then continue
-					m.direct_owner = self
 					model.mmodule_nesting_hierarchy.add_edge(self, m)
 				end
 				# The potential owner is the default_mmodule of the parent group
 				if mgroup.parent != null then direct_owner = mgroup.parent.default_mmodule
 			end
 			if direct_owner != self and direct_owner != null then
-				self.direct_owner = direct_owner
 				model.mmodule_nesting_hierarchy.add_edge(direct_owner, self)
 			end
 		end
