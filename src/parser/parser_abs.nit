@@ -52,16 +52,7 @@ end
 class TKwdo
 	super Token
 end
-class TKwreadable
-	super Token
-end
-class TKwwritable
-	super Token
-end
 class TKwvar
-	super Token
-end
-class TKwintern
 	super Token
 end
 class TKwextern
@@ -214,6 +205,9 @@ end
 class TStar
 	super Token
 end
+class TStarstar
+	super Token
+end
 class TSlash
 	super Token
 end
@@ -317,7 +311,6 @@ class AClasskind super Prod end
 class AFormaldef super Prod end
 class ASuperclass super Prod end
 class APropdef super Prod end
-class AAble super Prod end
 class AMethid super Prod end
 class ASignature super Prod end
 class AParam super Prod end
@@ -442,100 +435,13 @@ end
 class AAttrPropdef
 	super APropdef
 	var n_doc: nullable ADoc = null is writable
-	var n_readable: nullable AAble = null is writable
-	var n_writable: nullable AAble = null is writable
 	var n_kwredef: nullable TKwredef = null is writable
 	var n_visibility: AVisibility is writable, noinit
 	var n_kwvar: TKwvar is writable, noinit
-	var n_id: nullable TAttrid = null is writable
-	var n_id2: nullable TId = null is writable
+	var n_id2: TId is writable, noinit
 	var n_type: nullable AType = null is writable
-	var n_annotations: nullable AAnnotations = null is writable
 	var n_expr: nullable AExpr = null is writable
-end
-class AMethPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_methid: AMethid is writable, noinit
-	var n_signature: ASignature is writable, noinit
-end
-class ADeferredMethPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwmeth: TKwmeth is writable, noinit
-	var n_methid: AMethid is writable, noinit
-	var n_signature: ASignature is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
-end
-class AInternMethPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwmeth: TKwmeth is writable, noinit
-	var n_methid: AMethid is writable, noinit
-	var n_signature: ASignature is writable, noinit
-end
-class AInternNewPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwnew: TKwnew is writable, noinit
-	var n_methid: nullable AMethid = null is writable
-	var n_signature: ASignature is writable, noinit
-end
-class AExternMethPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwmeth: TKwmeth is writable, noinit
-	var n_methid: AMethid is writable, noinit
-	var n_signature: ASignature is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-	var n_extern: nullable TString = null is writable
-	var n_extern_calls: nullable AExternCalls = null is writable
-	var n_extern_code_block: nullable AExternCodeBlock = null is writable
-end
-class AConcreteMethPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwmeth: TKwmeth is writable, noinit
-	var n_methid: AMethid is writable, noinit
-	var n_signature: ASignature is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-	var n_block: nullable AExpr = null is writable
-end
-class AConcreteInitPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwinit: TKwinit is writable, noinit
-	var n_methid: nullable AMethid = null is writable
-	var n_signature: ASignature is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-	var n_block: nullable AExpr = null is writable
-end
-class AExternInitPropdef
-	super APropdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwnew: TKwnew is writable, noinit
-	var n_methid: nullable AMethid = null is writable
-	var n_signature: ASignature is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-	var n_extern: nullable TString = null is writable
-	var n_extern_calls: nullable AExternCalls = null is writable
-	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 end
 class AMainMethPropdef
 	super APropdef
@@ -552,16 +458,20 @@ class ATypePropdef
 	var n_type: AType is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
-class AReadAble
-	super AAble
+class AMethPropdef
+	super APropdef
+	var n_doc: nullable ADoc = null is writable
 	var n_kwredef: nullable TKwredef = null is writable
-	var n_kwreadable: TKwreadable is writable, noinit
-end
-class AWriteAble
-	super AAble
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: nullable AVisibility = null is writable
-	var n_kwwritable: TKwwritable is writable, noinit
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwmeth: nullable TKwmeth = null is writable
+	var n_kwinit: nullable TKwinit = null is writable
+	var n_kwnew: nullable TKwnew = null is writable
+	var n_methid: nullable AMethid = null is writable
+	var n_signature: ASignature is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+	var n_extern_calls: nullable AExternCalls = null is writable
+	var n_extern_code_block: nullable AExternCodeBlock = null is writable
+	var n_block: nullable AExpr = null is writable
 end
 class AIdMethid
 	super AMethid
@@ -578,6 +488,10 @@ end
 class AStarMethid
 	super AMethid
 	var n_star: TStar is writable, noinit
+end
+class AStarstarMethid
+	super AMethid
+	var n_starstar: TStarstar is writable, noinit
 end
 class ASlashMethid
 	super AMethid
@@ -850,6 +764,11 @@ class AStarshipExpr
 	var n_expr2: AExpr is writable, noinit
 end
 class AStarExpr
+	super AExpr
+	var n_expr: AExpr is writable, noinit
+	var n_expr2: AExpr is writable, noinit
+end
+class AStarstarExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
 	var n_expr2: AExpr is writable, noinit
@@ -1231,17 +1150,9 @@ class AKwexternAtid
 	super AAtid
 	var n_id: TKwextern is writable, noinit
 end
-class AKwinternAtid
+class AKwabstractAtid
 	super AAtid
-	var n_id: TKwintern is writable, noinit
-end
-class AKwreadableAtid
-	super AAtid
-	var n_id: TKwreadable is writable, noinit
-end
-class AKwwritableAtid
-	super AAtid
-	var n_id: TKwwritable is writable, noinit
+	var n_id: TKwabstract is writable, noinit
 end
 class AKwimportAtid
 	super AAtid
