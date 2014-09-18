@@ -780,35 +780,6 @@ redef class MDoc
 	end
 end
 
-redef class AAttrPropdef
-	private fun read_accessor: String do
-		var ret = "fun "
-		#FIXME bug with standard::stream::FDStream::fd
-		var name = mreadpropdef.mproperty.name
-		if mpropdef.mproperty.visibility.to_s == "public" then ret = "{ret}{name.green}"
-		if mpropdef.mproperty.visibility.to_s == "private" then ret = "{ret}{name.red}"
-		if mpropdef.mproperty.visibility.to_s == "protected" then ret = "{ret}{name.yellow}"
-		ret = "{ret}: {n_type.to_s}"
-		if n_kwredef != null then ret = "redef {ret}"
-		return ret
-	end
-
-	private fun write_accessor: String do
-		var ret = "fun "
-		var name = "{mreadpropdef.mproperty.name}="
-		if n_readable != null and n_readable.n_visibility != null then
-			if n_readable.n_visibility isa APublicVisibility then ret = "{ret}{name.green}"
-			if n_readable.n_visibility isa APrivateVisibility then ret = "{ret}{name.red}"
-			if n_readable.n_visibility isa AProtectedVisibility then ret = "{ret}{name.yellow}"
-		else
-			ret = "{ret}{name.red}"
-		end
-		ret = "{ret}({mreadpropdef.mproperty.name}: {n_type.to_s})"
-		if n_kwredef != null then ret = "redef {ret}"
-		return ret
-	end
-end
-
 # Redef String class to add a function to color the string
 redef class String
 
