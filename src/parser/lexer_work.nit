@@ -39,11 +39,6 @@ redef class Token
 end
 
 redef class EOF
-    redef fun parser_index: Int
-    do
-	return 97
-    end
-
     init init_tk(loc: Location)
     do
         _cached_text = ""

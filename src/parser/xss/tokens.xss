@@ -54,4 +54,12 @@ end
 
 $ end if
 $ end foreach
+
+redef class EOF
+    redef fun parser_index: Int
+    do
+	return ${tokens/eof/@parser_index}
+    end
+end
+
 $ end template
