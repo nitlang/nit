@@ -57,13 +57,12 @@ redef class MGroup
 	# The loaded modules of this group
 	var mmodules = new Array[MModule]
 
-	# Placebo stuff to find the owner (module with same name)
-	# null is returned if there is no owner, or if it is not loaded yet
-	fun fuzzy_owner: nullable MModule
-	do
-		for m in mmodules do if m.name == name then return m
-		return null
-	end
+	# The default module of a group (if any, and if loaded)
+	#
+	# The default module of a group is the one that has the same name.
+	# Return `null` if the group has no default module or if the default
+	# module is not loaded.
+	var default_mmodule: nullable MModule = null
 end
 
 # A Nit module is usually associated with a Nit source file.
@@ -124,8 +123,12 @@ class MModule
 		self.mgroup = mgroup
 		if mgroup != null then
 			mgroup.mmodules.add(self)
+			if mgroup.name == name then
+				assert mgroup.default_mmodule == null
+				mgroup.default_mmodule = self
+			end
 			# placebo for old module nesting hierarchy
-			var direct_owner = mgroup.fuzzy_owner
+			var direct_owner = mgroup.default_mmodule
 			if direct_owner == self then
 				# The module is the new owner of its own group, thus adopt the other modules
 				for m in mgroup.mmodules do
@@ -133,8 +136,8 @@ class MModule
 					m.direct_owner = self
 					model.mmodule_nesting_hierarchy.add_edge(self, m)
 				end
-				# The potential owner is the the fuzzy_owner of the parent group
-				if mgroup.parent != null then direct_owner = mgroup.parent.fuzzy_owner
+				# The potential owner is the default_mmodule of the parent group
+				if mgroup.parent != null then direct_owner = mgroup.parent.default_mmodule
 			end
 			if direct_owner != self and direct_owner != null then
 				self.direct_owner = direct_owner
