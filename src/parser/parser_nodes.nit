@@ -851,7 +851,7 @@ class AAttrPropdef
 end
 
 # A definition of all kind of method (including constructors)
-abstract class AMethPropdef
+class AMethPropdef
 	super APropdef
 	var n_kwmeth: nullable TKwmeth = null is writable
 	var n_kwinit: nullable TKwinit = null is writable
@@ -1844,6 +1844,9 @@ class AKwwritableAtid
 	super AAtid
 end
 class AKwimportAtid
+	super AAtid
+end
+class AKwabstractAtid
 	super AAtid
 end
 
