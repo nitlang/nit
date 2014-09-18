@@ -724,9 +724,9 @@ redef class AMethPropdef
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
-		mpropdef.is_abstract = self isa ADeferredMethPropdef or self.get_single_annotation("abstract", modelbuilder) != null
-		mpropdef.is_intern = self isa AInternMethPropdef or self.get_single_annotation("intern", modelbuilder) != null
-		mpropdef.is_extern = self isa AExternPropdef or self.n_extern_code_block != null or self.get_single_annotation("extern", modelbuilder) != null
+		mpropdef.is_abstract = self.get_single_annotation("abstract", modelbuilder) != null
+		mpropdef.is_intern = self.get_single_annotation("intern", modelbuilder) != null
+		mpropdef.is_extern = self.n_extern_code_block != null or self.get_single_annotation("extern", modelbuilder) != null
 	end
 
 	redef fun check_signature(modelbuilder)
@@ -810,11 +810,7 @@ redef class AAttrPropdef
 		var mclass = mclassdef.mclass
 
 		var name: String
-		if self.n_id != null then
-			name = self.n_id.text
-		else
-			name = self.n_id2.text
-		end
+		name = self.n_id2.text
 
 		if mclass.kind == interface_kind or mclassdef.mclass.kind == enum_kind then
 			modelbuilder.error(self, "Error: Attempt to define attribute {name} in the interface {mclass}.")
@@ -824,92 +820,84 @@ redef class AAttrPropdef
 			modelbuilder.error(self, "Error: Attempt to define attribute {name} in the extern class {mclass}.")
 		end
 
-		var nid = self.n_id
-		if nid != null then
-			# Old attribute style
-			modelbuilder.error(nid, "Error: old-style attribute no more supported")
+		# New attribute style
+		var nid2 = self.n_id2
+		var mprop = new MAttribute(mclassdef, "_" + name, private_visibility)
+		var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
+		self.mpropdef = mpropdef
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
+		set_doc(mpropdef, modelbuilder)
+
+		var readname = name
+		var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
+		if mreadprop == null then
+			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
+			mreadprop = new MMethod(mclassdef, readname, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
+			mreadprop.deprecation = mprop.deprecation
 		else
-			# New attribute style
-			var nid2 = self.n_id2.as(not null)
-			var mprop = new MAttribute(mclassdef, "_" + name, private_visibility)
-			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
-			self.mpropdef = mpropdef
-			modelbuilder.mpropdef2npropdef[mpropdef] = self
-			set_doc(mpropdef, modelbuilder)
-
-			var readname = name
-			var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
-			if mreadprop == null then
-				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-				mreadprop = new MMethod(mclassdef, readname, mvisibility)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
-				mreadprop.deprecation = mprop.deprecation
-			else
-				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
-				check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
-			end
-			mclassdef.mprop2npropdef[mreadprop] = self
-
-			var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
-			self.mreadpropdef = mreadpropdef
-			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
-			mreadpropdef.mdoc = mpropdef.mdoc
-
-			var atlazy = self.get_single_annotation("lazy", modelbuilder)
-			if atlazy != null then
-				if n_expr == null then
-					modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
-				end
-				is_lazy = true
-				var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
-				var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
-				self.mlazypropdef = mlazypropdef
-			end
-
-			var atreadonly = self.get_single_annotation("readonly", modelbuilder)
-			if atreadonly != null then
-				if n_expr == null then
-					modelbuilder.error(atreadonly, "Error: a readonly attribute needs a value")
-				end
-				# No setter, so just leave
-				return
-			end
-
-			var writename = name + "="
-			var nwritable = self.n_writable
-			if nwritable != null then modelbuilder.error(nwritable, "Error: old-style setter no more supported")
-			var atwritable = self.get_single_annotation("writable", modelbuilder)
-			if atwritable != null then
-				if not atwritable.n_args.is_empty then
-					writename = atwritable.arg_as_id(modelbuilder) or else writename
-				end
-			end
-			var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
-			var nwkwredef: nullable Token = null
-			if atwritable != null then nwkwredef = atwritable.n_kwredef
-			if mwriteprop == null then
-				var mvisibility
-				if atwritable != null then
-					mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
-				else
-					mvisibility = private_visibility
-				end
-				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
-				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
-				mwriteprop.deprecation = mprop.deprecation
-			else
-				if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
-				if atwritable != null then
-					check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
-				end
-			end
-			mclassdef.mprop2npropdef[mwriteprop] = self
-
-			var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
-			self.mwritepropdef = mwritepropdef
-			modelbuilder.mpropdef2npropdef[mwritepropdef] = self
-			mwritepropdef.mdoc = mpropdef.mdoc
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
+			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
 		end
+		mclassdef.mprop2npropdef[mreadprop] = self
+
+		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
+		self.mreadpropdef = mreadpropdef
+		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+		mreadpropdef.mdoc = mpropdef.mdoc
+
+		var atlazy = self.get_single_annotation("lazy", modelbuilder)
+		if atlazy != null then
+			if n_expr == null then
+				modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
+			end
+			is_lazy = true
+			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
+			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
+			self.mlazypropdef = mlazypropdef
+		end
+
+		var atreadonly = self.get_single_annotation("readonly", modelbuilder)
+		if atreadonly != null then
+			if n_expr == null then
+				modelbuilder.error(atreadonly, "Error: a readonly attribute needs a value")
+			end
+			# No setter, so just leave
+			return
+		end
+
+		var writename = name + "="
+		var atwritable = self.get_single_annotation("writable", modelbuilder)
+		if atwritable != null then
+			if not atwritable.n_args.is_empty then
+				writename = atwritable.arg_as_id(modelbuilder) or else writename
+			end
+		end
+		var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
+		var nwkwredef: nullable Token = null
+		if atwritable != null then nwkwredef = atwritable.n_kwredef
+		if mwriteprop == null then
+			var mvisibility
+			if atwritable != null then
+				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
+			else
+				mvisibility = private_visibility
+			end
+			mwriteprop = new MMethod(mclassdef, writename, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
+			mwriteprop.deprecation = mprop.deprecation
+		else
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
+			if atwritable != null then
+				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
+			end
+		end
+		mclassdef.mprop2npropdef[mwriteprop] = self
+
+		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
+		self.mwritepropdef = mwritepropdef
+		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+		mwritepropdef.mdoc = mpropdef.mdoc
 	end
 
 	redef fun build_signature(modelbuilder)
@@ -988,11 +976,7 @@ redef class AAttrPropdef
 		var mwritepropdef = self.mwritepropdef
 		if mwritepropdef != null then
 			var name: String
-			if n_id != null then
-				name = n_id.text.substring_from(1)
-			else
-				name = n_id2.text
-			end
+			name = n_id2.text
 			var mparameter = new MParameter(name, mtype, false)
 			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature

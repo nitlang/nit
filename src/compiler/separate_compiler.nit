@@ -1972,7 +1972,12 @@ redef class MPropDef
 	fun const_color: String do return "COLOR_{c_name}"
 end
 
-redef class AExternInitPropdef
+redef class AMethPropdef
 	# The semi-global compilation does not support inlining calls to extern news
-	redef fun can_inline do return false
+	redef fun can_inline
+	do
+		var m = mpropdef
+		if m != null and m.mproperty.is_init and m.is_extern then return false
+		return super
+	end
 end

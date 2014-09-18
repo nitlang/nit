@@ -223,8 +223,7 @@ end
 redef class AAttrPropdef
 	private fun name: String
 	do
-		if n_id == null then return n_id2.text
-		return n_id.text
+		return n_id2.text
 	end
 end
 
