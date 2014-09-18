@@ -162,6 +162,7 @@ dot = '.';
 plus = '+';
 minus = '-';
 star = '*';
+starstar = '**';
 slash = '/';
 percent = '%';
 eq = '==';
@@ -292,6 +293,7 @@ methid {-> methid}
 	| {plus} plus {-> New methid.plus(plus)}
 	| {minus} minus {-> New methid.minus(minus)}
 	| {star} star {-> New methid.star(star)}
+	| {starstar} starstar {-> New methid.starstar(starstar)}
 	| {slash} slash {-> New methid.slash(slash)}
 	| {percent} percent {-> New methid.percent(percent)}
 	| {eq} eq {-> New methid.eq(eq)}
@@ -513,10 +515,15 @@ expr_add~nopar~nobra {-> expr}
 	;
 
 expr_mul~nopar~nobra {-> expr}
+	= expr_pow~nopar~nobra {-> expr_pow~nopar~nobra.expr}
+	| {:star} expr_mul~nopar~nobra :star :no [expr2]:expr_pow~nopar~nobra
+	| {:slash} expr_mul~nopar~nobra :slash :no [expr2]:expr_pow~nopar~nobra
+	| {:percent} expr_mul~nopar~nobra :percent :no [expr2]:expr_pow~nopar~nobra
+	;
+
+expr_pow~nopar~nobra {-> expr}
 	= expr_minus~nopar~nobra {-> expr_minus~nopar~nobra.expr}
-	| {:star} expr_mul~nopar~nobra :star :no [expr2]:expr_minus~nopar~nobra
-	| {:slash} expr_mul~nopar~nobra :slash :no [expr2]:expr_minus~nopar~nobra
-	| {:percent} expr_mul~nopar~nobra :percent :no [expr2]:expr_minus~nopar~nobra
+	| {:starstar} expr_minus~nopar~nobra :starstar :no [expr2]:expr_pow~nopar~nobra
 	;
 
 expr_minus~nopar~nobra {-> expr}
@@ -776,7 +783,7 @@ propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? expr? annotations
 	| {meth} doc? kwredef? visibility kwmeth? kwinit? kwnew? methid? signature annotations? extern_calls? extern_code_block? [block]:expr?
 	;
 
-methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
+methid = {id} id | {plus} plus | {minus} minus | {star} star | {starstar} starstar | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
 
 signature = opar? [params]:param* cpar? type?;
 
@@ -821,6 +828,7 @@ expr	= {block} expr* kwend?
 	| {minus} expr [expr2]:expr 
 	| {starship} expr [expr2]:expr 
 	| {star} expr [expr2]:expr 
+	| {starstar} expr [expr2]:expr
 	| {slash} expr [expr2]:expr 
 	| {percent} expr [expr2]:expr 
 	| {uminus} minus expr 

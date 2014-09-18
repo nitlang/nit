@@ -534,6 +534,9 @@ end
 class TStar
 	super TokenOperator
 end
+class TStarstar
+	super TokenOperator
+end
 class TSlash
 	super TokenOperator
 end
@@ -1031,6 +1034,10 @@ class AStarMethid
 	super AMethid
 	var n_star: TStar is writable, noinit
 end
+class AStarstarMethid
+	super AMethid
+	var n_starstar: TStarstar is writable, noinit
+end
 class ASlashMethid
 	super AMethid
 	var n_slash: TSlash is writable, noinit
@@ -1395,6 +1402,11 @@ end
 
 # A `*` expression
 class AStarExpr
+	super ABinopExpr
+end
+
+# A `**` expression
+class AStarstarExpr
 	super ABinopExpr
 end
 

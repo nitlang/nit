@@ -2228,6 +2228,10 @@ redef class AStarExpr
 	redef fun bin_op do return "*"
 end
 
+redef class AStarstarExpr
+	redef fun bin_op do return "**"
+end
+
 redef class AStarshipExpr
 	redef fun bin_op do return "<=>"
 end
