@@ -13,10 +13,10 @@
 # limitations under the License.
 
 class Foo
-	var _a: Int
-	private var _b: nullable Int
-	protected var _c = 10
-	var _d: Int = 10
+	var a: Int
+	private var b: nullable Int
+	protected var c = 10
+	var d: Int = 10
 end
 
 var foo = new Foo(1, 2)

@@ -616,7 +616,11 @@ redef class AAnnotation
 	redef fun accept_pretty_printer(v) do
 		v.visit n_atid
 		if not n_args.is_empty then
-			v.visit n_opar
+			if n_opar == null then
+				v.adds
+			else
+				v.visit n_opar
+			end
 			v.visit_list n_args
 			v.visit n_cpar
 		end
@@ -928,23 +932,12 @@ redef class AAttrPropdef
 		super
 		v.visit n_kwvar
 		v.adds
-		if n_id != null then v.visit n_id
-		if n_id2 != null then v.visit n_id2
+		v.visit n_id2
 
 		if n_type != null then
 			v.consume ":"
 			v.adds
 			v.visit n_type
-		end
-
-		if n_readable != null then
-			v.adds
-			v.visit n_readable
-		end
-
-		if n_writable != null then
-			v.adds
-			v.visit n_writable
 		end
 
 		if n_expr != null then
@@ -987,6 +980,10 @@ end
 
 redef class AMethPropdef
 	redef fun accept_pretty_printer(v) do
+		#  TODO: Handle extern annotations
+
+		var before = v.indent
+		var can_inline = v.can_inline(self)
 		super
 		if n_kwinit != null then v.visit n_kwinit
 		if n_kwmeth != null then v.visit n_kwmeth
@@ -1004,94 +1001,13 @@ redef class AMethPropdef
 		else
 			v.adds
 		end
-	end
 
-	# Can be inlined if:
-	# * block is empty or can be inlined
-	# * contains no comments
-	redef fun is_inlinable do
-		if not super then return false
-		if n_annotations != null and not n_annotations.is_inlinable then return false
-		if n_block != null and not n_block.is_inlinable then return false
-		if not collect_comments.is_empty then return false
-		return true
-	end
-end
-
-redef class AMainMethPropdef
-	redef fun accept_pretty_printer(v) do
-		v.visit n_block
-		v.addn
-	end
-end
-
-redef class ADeferredMethPropdef
-	redef fun accept_pretty_printer(v) do
-		super
-		if n_annotations == null then
-			while not v.current_token isa TKwis do v.skip
-			v.consume "is"
-			v.adds
-			while not v.current_token isa TKwabstract do v.skip
-			v.consume "abstract"
-		end
-		v.finish_line
-		v.addn
-	end
-end
-
-redef class AExternPropdef
-	redef fun accept_pretty_printer(v) do
-		super
-		while v.current_token isa TEol do v.skip
-
-		if v.current_token isa TKwis then
-			v.consume "is"
-			v.adds
+		if n_extern_calls != null or n_extern_code_block != null then
+			if n_annotations != null then v.adds
+			if n_extern_calls != null then v.visit n_extern_calls
+			if n_extern_code_block != null then v.visit n_extern_code_block
 		end
 
-		if v.current_token isa TKwextern then
-			v.consume "extern"
-			v.adds
-		end
-
-		if n_extern != null then v.visit n_extern
-		if n_extern_calls != null then v.visit n_extern_calls
-		if n_extern_code_block != null then v.visit n_extern_code_block
-		v.finish_line
-		v.addn
-	end
-
-	redef fun is_inlinable do
-		if not super then return false
-		if n_block != null and not n_block.is_inlinable then return false
-		if n_extern_calls != null and not n_extern_calls.is_inlinable then return false
-		if n_extern_code_block != null and not n_extern_code_block.is_inlinable then return false
-		return true
-	end
-
-	redef fun must_be_inline do
-		if super then return true
-		return n_extern != null
-	end
-end
-
-redef class AInternMethPropdef
-	redef fun accept_pretty_printer(v) do
-		super
-		v.consume "is"
-		v.adds
-		v.consume "intern"
-		v.finish_line
-		v.addn
-	end
-end
-
-redef class AConcreteMethPropdef
-	redef fun accept_pretty_printer(v) do
-		var before = v.indent
-		var can_inline = v.can_inline(self)
-		super
 		var n_block = self.n_block
 
 		if n_block != null then
@@ -1148,6 +1064,26 @@ redef class AConcreteMethPropdef
 		v.finish_line
 		v.addn
 		assert v.indent == before
+	end
+
+	# Can be inlined if:
+	# * block is empty or can be inlined
+	# * contains no comments
+	redef fun is_inlinable do
+		if not super then return false
+		if n_annotations != null and not n_annotations.is_inlinable then return false
+		if n_block != null and not n_block.is_inlinable then return false
+		if n_extern_calls != null and not n_extern_calls.is_inlinable then return false
+		if n_extern_code_block != null and not n_extern_code_block.is_inlinable then return false
+		if not collect_comments.is_empty then return false
+		return true
+	end
+end
+
+redef class AMainMethPropdef
+	redef fun accept_pretty_printer(v) do
+		v.visit n_block
+		v.addn
 	end
 end
 
@@ -1900,34 +1836,6 @@ redef class AAttrReassignExpr
 		v.visit n_assign_op
 		v.adds
 		v.visit n_value
-	end
-end
-
-redef class AAble
-	redef fun accept_pretty_printer(v) do
-		if n_kwredef != null then
-			v.visit n_kwredef
-			v.adds
-		end
-
-		if not n_visibility isa APublicVisibility then
-			v.visit n_visibility
-			v.adds
-		end
-	end
-end
-
-redef class AReadAble
-	redef fun accept_pretty_printer(v) do
-		super
-		v.visit n_kwreadable
-	end
-end
-
-redef class AWriteAble
-	redef fun accept_pretty_printer(v) do
-		super
-		v.visit n_kwwritable
 	end
 end
 
