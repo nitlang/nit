@@ -966,8 +966,8 @@ redef class AAttrPropdef
 		else if ntype != null then
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
-				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
-					modelbuilder.warning(ntype, "useless-type", "Warning: useless type definition")
+				if xmtype == mtype then
+					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
 			end
 		end
