@@ -617,6 +617,10 @@ redef class AMethPropdef
 		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
 		if mprop == null and look_like_a_root_init(modelbuilder) then
 			mprop = modelbuilder.the_root_init_mmethod
+			var nb = n_block
+			if nb isa ABlockExpr and nb.n_expr.is_empty and n_doc == null then
+				modelbuilder.advice(self, "useless-init", "Warning: useless empty init in {mclassdef}")
+			end
 		end
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
