@@ -33,6 +33,11 @@ class Message
 	# The origin of the message in the source code, if any.
 	var location: nullable Location
 
+	# The category of the message.
+	#
+	# Used by quality-control tool for statistics or to enable/disable things individually.
+	var tag: nullable String
+
 	# The human-readable description of the message.
 	#
 	# It should be short and fit on a single line.
@@ -67,13 +72,19 @@ class Message
 		var yellow = "{esc}[0;33m"
 		var def = "{esc}[0m"
 
+		var tag = tag
+		if tag != null then
+			tag = " ({tag})"
+		else
+			tag = ""
+		end
 		var l = location
 		if l == null then
-			return text
+			return "{text}{tag}"
 		else if l.file == null then
-			return "{yellow}{l}{def}: {text}"
+			return "{yellow}{l}{def}: {text}{tag}"
 		else
-			return "{yellow}{l}{def}: {text}\n{l.colored_line("1;31")}"
+			return "{yellow}{l}{def}: {text}{tag}\n{l.colored_line("1;31")}"
 		end
 	end
 end
@@ -115,7 +126,7 @@ class ToolContext
 	# Display an error
 	fun error(l: nullable Location, s: String)
 	do
-		messages.add(new Message(l,s))
+		messages.add(new Message(l,null,s))
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
@@ -128,10 +139,10 @@ class ToolContext
 	end
 
 	# Display a warning
-	fun warning(l: nullable Location, s: String)
+	fun warning(l: nullable Location, tag: String, text: String)
 	do
 		if opt_warn.value == 0 then return
-		messages.add(new Message(l,s))
+		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
