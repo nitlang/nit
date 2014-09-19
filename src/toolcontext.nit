@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common command-line tool infractructure than handle options and error messages
+# Common command-line tool infrastructure than handle options and error messages
 module toolcontext
 
 import opts
@@ -25,11 +25,19 @@ import location
 import version
 import template
 
+# A warning or an error
 class Message
 	super Comparable
 	redef type OTHER: Message
 
+	# The origin of the message in the source code, if any.
 	var location: nullable Location
+
+	# The human-readable description of the message.
+	#
+	# It should be short and fit on a single line.
+	# It should also have meaningful information first in case
+	# on truncation by an IDE for instance.
 	var text: String
 
 	# Comparisons are made on message locations.
