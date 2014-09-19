@@ -2179,9 +2179,7 @@ redef class AMethPropdef
 			externname = at.arg_as_string(v.compiler.modelbuilder)
 			if externname == null then return false
 		else
-			var nextern = self.n_extern
-			if nextern == null then return false
-			externname = nextern.text.substring(1, nextern.text.length-2)
+			return false
 		end
 		if location.file != null then
 			var file = location.file.filename
@@ -2216,9 +2214,7 @@ redef class AMethPropdef
 			externname = at.arg_as_string(v.compiler.modelbuilder)
 			if externname == null then return false
 		else
-			var nextern = self.n_extern
-			if nextern == null then return false
-			externname = nextern.text.substring(1, nextern.text.length-2)
+			return false
 		end
 		if location.file != null then
 			var file = location.file.filename

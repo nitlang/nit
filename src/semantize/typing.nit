@@ -1365,6 +1365,9 @@ end
 redef class AStarExpr
 	redef fun property_name do return "*"
 end
+redef class AStarstarExpr
+	redef fun property_name do return "**"
+end
 redef class ASlashExpr
 	redef fun property_name do return "/"
 end

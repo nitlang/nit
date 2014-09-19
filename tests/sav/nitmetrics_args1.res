@@ -372,73 +372,74 @@ Distribution of direct smallers
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 --- AST Metrics ---
 ## All nodes of the AST
- population: 47
+ population: 48
  minimum value: 1
- maximum value: 39
- total value: 256
- average value: 5.44
+ maximum value: 40
+ total value: 261
+ average value: 5.43
  distribution:
-  <=1: sub-population=13 (27.65%); cumulated value=13 (5.07%)
-  <=2: sub-population=6 (12.76%); cumulated value=12 (4.68%)
-  <=4: sub-population=10 (21.27%); cumulated value=32 (12.50%)
-  <=8: sub-population=10 (21.27%); cumulated value=61 (23.82%)
-  <=16: sub-population=4 (8.51%); cumulated value=44 (17.18%)
-  <=32: sub-population=3 (6.38%); cumulated value=55 (21.48%)
-  <=64: sub-population=1 (2.12%); cumulated value=39 (15.23%)
+  <=1: sub-population=15 (31.25%); cumulated value=15 (5.74%)
+  <=2: sub-population=5 (10.41%); cumulated value=10 (3.83%)
+  <=4: sub-population=10 (20.83%); cumulated value=32 (12.26%)
+  <=8: sub-population=10 (20.83%); cumulated value=64 (24.52%)
+  <=16: sub-population=4 (8.33%); cumulated value=44 (16.85%)
+  <=32: sub-population=3 (6.25%); cumulated value=56 (21.45%)
+  <=64: sub-population=1 (2.08%); cumulated value=40 (15.32%)
  list:
-  TId: 39 (15.23%)
-  AListExprs: 19 (7.42%)
-  APublicVisibility: 18 (7.03%)
-  ACallExpr: 18 (7.03%)
-  TClassid: 15 (5.85%)
-  TNumber: 10 (3.90%)
-  ADecIntExpr: 10 (3.90%)
-  AType: 9 (3.51%)
-  TKwend: 8 (3.12%)
-  ASignature: 8 (3.12%)
+  TId: 40 (15.32%)
+  APublicVisibility: 19 (7.27%)
+  AListExprs: 19 (7.27%)
+  ACallExpr: 18 (6.89%)
+  TClassid: 15 (5.74%)
+  TNumber: 10 (3.83%)
+  ADecIntExpr: 10 (3.83%)
+  AType: 9 (3.44%)
+  TKwend: 8 (3.06%)
+  ASignature: 8 (3.06%)
   ...
-  AModule: 1 (0.39%)
-  ACallAssignExpr: 1 (0.39%)
-  AMainClassdef: 1 (0.39%)
-  AReturnExpr: 1 (0.39%)
-  TKwreturn: 1 (0.39%)
-  TKwinterface: 1 (0.39%)
-  ANoImport: 1 (0.39%)
-  AInterfaceClasskind: 1 (0.39%)
-  AMainMethPropdef: 1 (0.39%)
-  TKwimport: 1 (0.39%)
+  ACallAssignExpr: 1 (0.38%)
+  AAnnotations: 1 (0.38%)
+  AReturnExpr: 1 (0.38%)
+  TKwreturn: 1 (0.38%)
+  AInterfaceClasskind: 1 (0.38%)
+  TKwinterface: 1 (0.38%)
+  ANoImport: 1 (0.38%)
+  AMainMethPropdef: 1 (0.38%)
+  AMainClassdef: 1 (0.38%)
+  TKwimport: 1 (0.38%)
 ## All identifiers of the AST
- population: 19
+ population: 20
  minimum value: 1
  maximum value: 11
- total value: 54
- average value: 2.84
+ total value: 55
+ average value: 2.75
  distribution:
-  <=1: sub-population=2 (10.52%); cumulated value=2 (3.70%)
-  <=2: sub-population=12 (63.15%); cumulated value=24 (44.44%)
-  <=4: sub-population=3 (15.78%); cumulated value=10 (18.51%)
-  <=8: sub-population=1 (5.26%); cumulated value=7 (12.96%)
-  <=16: sub-population=1 (5.26%); cumulated value=11 (20.37%)
+  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
+  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
+  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
+  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
+  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
  list:
-  output: 11 (20.37%)
-  Int: 7 (12.96%)
-  run: 4 (7.40%)
-  c: 3 (5.55%)
-  val: 3 (5.55%)
-  i: 2 (3.70%)
-  bar: 2 (3.70%)
-  foo: 2 (3.70%)
-  val2: 2 (3.70%)
-  val1: 2 (3.70%)
-  C: 2 (3.70%)
-  v: 2 (3.70%)
-  baz: 2 (3.70%)
-  a: 2 (3.70%)
-  A: 2 (3.70%)
-  B: 2 (3.70%)
-  b: 2 (3.70%)
-  Object: 1 (1.85%)
-  Bool: 1 (1.85%)
+  output: 11 (20.00%)
+  Int: 7 (12.72%)
+  run: 4 (7.27%)
+  c: 3 (5.45%)
+  val: 3 (5.45%)
+  i: 2 (3.63%)
+  bar: 2 (3.63%)
+  foo: 2 (3.63%)
+  val2: 2 (3.63%)
+  val1: 2 (3.63%)
+  C: 2 (3.63%)
+  v: 2 (3.63%)
+  baz: 2 (3.63%)
+  a: 2 (3.63%)
+  A: 2 (3.63%)
+  B: 2 (3.63%)
+  b: 2 (3.63%)
+  intern: 1 (1.81%)
+  Object: 1 (1.81%)
+  Bool: 1 (1.81%)
 --- Metrics of refinement usage ---
 Number of modules: 1
 

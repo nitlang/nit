@@ -363,16 +363,7 @@ end
 class TKwdo
 	super TokenKeyword
 end
-class TKwreadable
-	super TokenKeyword
-end
-class TKwwritable
-	super TokenKeyword
-end
 class TKwvar
-	super TokenKeyword
-end
-class TKwintern
 	super TokenKeyword
 end
 class TKwextern
@@ -532,6 +523,9 @@ class TMinus
 	super TokenOperator
 end
 class TStar
+	super TokenOperator
+end
+class TStarstar
 	super TokenOperator
 end
 class TSlash
@@ -832,26 +826,21 @@ class AAttrPropdef
 	super APropdef
 	var n_kwvar: TKwvar is writable, noinit
 
-	# The identifier for an old-style attribute (null if new-style)
-	var n_id: nullable TAttrid is writable
-
 	# The identifier for a new-style attribute (null if old-style)
-	var n_id2: nullable TId is writable
+	var n_id2: TId is writable, noinit
 
 	var n_type: nullable AType = null is writable
-	var n_readable: nullable AAble = null is writable
-	var n_writable: nullable AAble = null is writable
 
 	# The initial value, if any
 	var n_expr: nullable AExpr = null is writable
 	redef fun hot_location
 	do
-		if n_id != null then return n_id.location else return n_id2.location
+		return n_id2.location
 	end
 end
 
 # A definition of all kind of method (including constructors)
-abstract class AMethPropdef
+class AMethPropdef
 	super APropdef
 	var n_kwmeth: nullable TKwmeth = null is writable
 	var n_kwinit: nullable TKwinit = null is writable
@@ -859,7 +848,6 @@ abstract class AMethPropdef
 	var n_methid: nullable AMethid = null is writable
 	var n_signature: nullable ASignature = null is writable
 	var n_block: nullable AExpr = null is writable
-	var n_extern: nullable TString = null is writable
 	var n_extern_calls: nullable AExternCalls = null is writable
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 	redef fun hot_location
@@ -876,57 +864,9 @@ abstract class AMethPropdef
 	end
 end
 
-# A method marked abstract
-# *deferred* is a old synonynmous of *abstract* that comes from PRM, that comes from Eiffel.
-class ADeferredMethPropdef
-	super AMethPropdef
-end
-
-# A method marked intern
-class AInternMethPropdef
-	super AMethPropdef
-end
-
-# A method of a constructor marked extern
-abstract class AExternPropdef
-	super AMethPropdef
-end
-
-# A method marked extern
-class AExternMethPropdef
-	super AExternPropdef
-end
-
-# A method with a body
-class AConcreteMethPropdef
-	super AMethPropdef
-end
-
-# A constructor
-abstract class AInitPropdef
-	super AMethPropdef
-end
-
-# A constructor with a body
-class AConcreteInitPropdef
-	super AConcreteMethPropdef
-	super AInitPropdef
-end
-
-class AInternNewPropdef
-	super AInternMethPropdef
-	super AInitPropdef
-end
-
-# A constructor marked extern (defined with the `new` keyword)
-class AExternInitPropdef
-	super AExternPropdef
-	super AInitPropdef
-end
-
 # The implicit main method
 class AMainMethPropdef
-	super AConcreteMethPropdef
+	super AMethPropdef
 end
 
 # Declaration of callbacks for extern methods
@@ -991,25 +931,6 @@ class ATypePropdef
 	var n_type: AType is writable, noinit
 end
 
-# A `writable` or `readable` modifier
-abstract class AAble
-	super Prod
-	var n_visibility: nullable AVisibility = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-end
-
-# A `readable` modifier
-class AReadAble
-	super AAble
-	var n_kwreadable: TKwreadable is writable, noinit
-end
-
-# A `writable` modifier
-class AWriteAble
-	super AAble
-	var n_kwwritable: TKwwritable is writable, noinit
-end
-
 # The identifier of a method in a method declaration.
 # There is a specific class because of operator and setters.
 abstract class AMethid
@@ -1030,6 +951,10 @@ end
 class AStarMethid
 	super AMethid
 	var n_star: TStar is writable, noinit
+end
+class AStarstarMethid
+	super AMethid
+	var n_starstar: TStarstar is writable, noinit
 end
 class ASlashMethid
 	super AMethid
@@ -1395,6 +1320,11 @@ end
 
 # A `*` expression
 class AStarExpr
+	super ABinopExpr
+end
+
+# A `**` expression
+class AStarstarExpr
 	super ABinopExpr
 end
 
@@ -1834,16 +1764,10 @@ end
 class AKwexternAtid
 	super AAtid
 end
-class AKwinternAtid
-	super AAtid
-end
-class AKwreadableAtid
-	super AAtid
-end
-class AKwwritableAtid
-	super AAtid
-end
 class AKwimportAtid
+	super AAtid
+end
+class AKwabstractAtid
 	super AAtid
 end
 

@@ -26,7 +26,7 @@
       AListExprs 1,15
 --> AModule 1,1--12
   ATopClassdef 1,1--12
-    AConcreteMethPropdef 1,1--12
+    AMethPropdef 1,1--12
       APublicVisibility 1,1
       TKwmeth "fun" 1,1--3
       AIdMethid 1,5--7
@@ -53,7 +53,7 @@
       TKwend "end" 3,1--3
 --> ... ... ... ... AModule 1,1--5,3
   ATopClassdef 1,1--5,3
-    AConcreteMethPropdef 1,1--5,3
+    AMethPropdef 1,1--5,3
       APublicVisibility 1,1
       TKwmeth "fun" 1,1--3
       AIdMethid 1,5--7

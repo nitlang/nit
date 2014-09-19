@@ -35,7 +35,7 @@ Start ../src/test_parser.nit:17,1--147,1
           TClassid "Int" ../src/test_parser.nit:25,20--22
         ADecIntExpr ../src/test_parser.nit:25,26
           TNumber "0" ../src/test_parser.nit:25,26
-      AConcreteMethPropdef ../src/test_parser.nit:26,2--36,4
+      AMethPropdef ../src/test_parser.nit:26,2--36,4
         TKwredef "redef" ../src/test_parser.nit:26,2--6
         APublicVisibility ../src/test_parser.nit:26,8
         TKwmeth "fun" ../src/test_parser.nit:26,8--10

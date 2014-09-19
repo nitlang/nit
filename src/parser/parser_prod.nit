@@ -836,54 +836,37 @@ end
 redef class AAttrPropdef
 	init init_aattrpropdef (
 		n_doc: nullable ADoc,
-		n_readable: nullable AAble,
-		n_writable: nullable AAble,
 		n_kwredef: nullable TKwredef,
 		n_visibility: nullable AVisibility,
 		n_kwvar: nullable TKwvar,
-		n_id: nullable TAttrid,
 		n_id2: nullable TId,
 		n_type: nullable AType,
-		n_annotations: nullable AAnnotations,
-		n_expr: nullable AExpr
+		n_expr: nullable AExpr,
+		n_annotations: nullable AAnnotations
 	)
 	do
 		_n_doc = n_doc
 		if n_doc != null then n_doc.parent = self
-		_n_readable = n_readable
-		if n_readable != null then n_readable.parent = self
-		_n_writable = n_writable
-		if n_writable != null then n_writable.parent = self
 		_n_kwredef = n_kwredef
 		if n_kwredef != null then n_kwredef.parent = self
 		_n_visibility = n_visibility.as(not null)
 		n_visibility.parent = self
 		_n_kwvar = n_kwvar.as(not null)
 		n_kwvar.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
-		_n_id2 = n_id2
-		if n_id2 != null then n_id2.parent = self
+		_n_id2 = n_id2.as(not null)
+		n_id2.parent = self
 		_n_type = n_type
 		if n_type != null then n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
 		_n_expr = n_expr
 		if n_expr != null then n_expr.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
 		if _n_doc == old_child then
 			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_readable == old_child then
-			n_readable = new_child.as(nullable AAble)
-			return
-		end
-		if _n_writable == old_child then
-			n_writable = new_child.as(nullable AAble)
 			return
 		end
 		if _n_kwredef == old_child then
@@ -898,24 +881,20 @@ redef class AAttrPropdef
 			n_kwvar = new_child.as(TKwvar)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(nullable TAttrid)
-			return
-		end
 		if _n_id2 == old_child then
-			n_id2 = new_child.as(nullable TId)
+			n_id2 = new_child.as(TId)
 			return
 		end
 		if _n_type == old_child then
 			n_type = new_child.as(nullable AType)
 			return
 		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
 	end
@@ -923,16 +902,6 @@ redef class AAttrPropdef
 	redef fun n_doc=(node)
 	do
 		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_readable=(node)
-	do
-		_n_readable = node
-		if node != null then node.parent = self
-	end
-	redef fun n_writable=(node)
-	do
-		_n_writable = node
 		if node != null then node.parent = self
 	end
 	redef fun n_kwredef=(node)
@@ -950,24 +919,14 @@ redef class AAttrPropdef
 		_n_kwvar = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
-	do
-		_n_id = node
-		if node != null then node.parent = self
-	end
 	redef fun n_id2=(node)
 	do
 		_n_id2 = node
-		if node != null then node.parent = self
+		node.parent = self
 	end
 	redef fun n_type=(node)
 	do
 		_n_type = node
-		if node != null then node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
 		if node != null then node.parent = self
 	end
 	redef fun n_expr=(node)
@@ -975,929 +934,23 @@ redef class AAttrPropdef
 		_n_expr = node
 		if node != null then node.parent = self
 	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_doc)
-		v.enter_visit(_n_readable)
-		v.enter_visit(_n_writable)
 		v.enter_visit(_n_kwredef)
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_kwvar)
-		v.enter_visit(_n_id)
 		v.enter_visit(_n_id2)
 		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
 		v.enter_visit(_n_expr)
-	end
-end
-redef class AMethPropdef
-	init init_amethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-	end
-end
-redef class ADeferredMethPropdef
-	init init_adeferredmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwmeth == old_child then
-			n_kwmeth = new_child.as(TKwmeth)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwmeth=(node)
-	do
-		_n_kwmeth = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
 		v.enter_visit(_n_annotations)
-	end
-end
-redef class AInternMethPropdef
-	init init_ainternmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwmeth == old_child then
-			n_kwmeth = new_child.as(TKwmeth)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwmeth=(node)
-	do
-		_n_kwmeth = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-	end
-end
-redef class AInternNewPropdef
-	init init_ainternnewpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwnew: nullable TKwnew,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwnew = n_kwnew.as(not null)
-		n_kwnew.parent = self
-		_n_methid = n_methid
-		if n_methid != null then n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwnew == old_child then
-			n_kwnew = new_child.as(TKwnew)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(nullable AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwnew=(node)
-	do
-		_n_kwnew = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		if node != null then node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwnew)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-	end
-end
-redef class AExternMethPropdef
-	init init_aexternmethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_extern: nullable TString,
-		n_extern_calls: nullable AExternCalls,
-		n_extern_code_block: nullable AExternCodeBlock
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_extern = n_extern
-		if n_extern != null then n_extern.parent = self
-		_n_extern_calls = n_extern_calls
-		if n_extern_calls != null then n_extern_calls.parent = self
-		_n_extern_code_block = n_extern_code_block
-		if n_extern_code_block != null then n_extern_code_block.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwmeth == old_child then
-			n_kwmeth = new_child.as(TKwmeth)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-		if _n_extern == old_child then
-			n_extern = new_child.as(nullable TString)
-			return
-		end
-		if _n_extern_calls == old_child then
-			n_extern_calls = new_child.as(nullable AExternCalls)
-			return
-		end
-		if _n_extern_code_block == old_child then
-			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwmeth=(node)
-	do
-		_n_kwmeth = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern=(node)
-	do
-		_n_extern = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern_calls=(node)
-	do
-		_n_extern_calls = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern_code_block=(node)
-	do
-		_n_extern_code_block = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_extern)
-		v.enter_visit(_n_extern_calls)
-		v.enter_visit(_n_extern_code_block)
-	end
-end
-redef class AConcreteMethPropdef
-	init init_aconcretemethpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwmeth: nullable TKwmeth,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_block: nullable AExpr
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwmeth = n_kwmeth.as(not null)
-		n_kwmeth.parent = self
-		_n_methid = n_methid.as(not null)
-		n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwmeth == old_child then
-			n_kwmeth = new_child.as(TKwmeth)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-		if _n_block == old_child then
-			n_block = new_child.as(nullable AExpr)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwmeth=(node)
-	do
-		_n_kwmeth = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-	redef fun n_block=(node)
-	do
-		_n_block = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwmeth)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_block)
-	end
-end
-redef class AConcreteInitPropdef
-	init init_aconcreteinitpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwinit: nullable TKwinit,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_block: nullable AExpr
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwinit = n_kwinit.as(not null)
-		n_kwinit.parent = self
-		_n_methid = n_methid
-		if n_methid != null then n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_block = n_block
-		if n_block != null then n_block.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwinit == old_child then
-			n_kwinit = new_child.as(TKwinit)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(nullable AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-		if _n_block == old_child then
-			n_block = new_child.as(nullable AExpr)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwinit=(node)
-	do
-		_n_kwinit = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		if node != null then node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-	redef fun n_block=(node)
-	do
-		_n_block = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwinit)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_block)
-	end
-end
-redef class AExternInitPropdef
-	init init_aexterninitpropdef (
-		n_doc: nullable ADoc,
-		n_kwredef: nullable TKwredef,
-		n_visibility: nullable AVisibility,
-		n_kwnew: nullable TKwnew,
-		n_methid: nullable AMethid,
-		n_signature: nullable ASignature,
-		n_annotations: nullable AAnnotations,
-		n_extern: nullable TString,
-		n_extern_calls: nullable AExternCalls,
-		n_extern_code_block: nullable AExternCodeBlock
-	)
-	do
-		_n_doc = n_doc
-		if n_doc != null then n_doc.parent = self
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility.as(not null)
-		n_visibility.parent = self
-		_n_kwnew = n_kwnew.as(not null)
-		n_kwnew.parent = self
-		_n_methid = n_methid
-		if n_methid != null then n_methid.parent = self
-		_n_signature = n_signature.as(not null)
-		n_signature.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-		_n_extern = n_extern
-		if n_extern != null then n_extern.parent = self
-		_n_extern_calls = n_extern_calls
-		if n_extern_calls != null then n_extern_calls.parent = self
-		_n_extern_code_block = n_extern_code_block
-		if n_extern_code_block != null then n_extern_code_block.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_doc == old_child then
-			n_doc = new_child.as(nullable ADoc)
-			return
-		end
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_visibility == old_child then
-			n_visibility = new_child.as(AVisibility)
-			return
-		end
-		if _n_kwnew == old_child then
-			n_kwnew = new_child.as(TKwnew)
-			return
-		end
-		if _n_methid == old_child then
-			n_methid = new_child.as(nullable AMethid)
-			return
-		end
-		if _n_signature == old_child then
-			n_signature = new_child.as(ASignature)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-		if _n_extern == old_child then
-			n_extern = new_child.as(nullable TString)
-			return
-		end
-		if _n_extern_calls == old_child then
-			n_extern_calls = new_child.as(nullable AExternCalls)
-			return
-		end
-		if _n_extern_code_block == old_child then
-			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
-			return
-		end
-	end
-
-	redef fun n_doc=(node)
-	do
-		_n_doc = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_visibility=(node)
-	do
-		_n_visibility = node
-		node.parent = self
-	end
-	redef fun n_kwnew=(node)
-	do
-		_n_kwnew = node
-		node.parent = self
-	end
-	redef fun n_methid=(node)
-	do
-		_n_methid = node
-		if node != null then node.parent = self
-	end
-	redef fun n_signature=(node)
-	do
-		_n_signature = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern=(node)
-	do
-		_n_extern = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern_calls=(node)
-	do
-		_n_extern_calls = node
-		if node != null then node.parent = self
-	end
-	redef fun n_extern_code_block=(node)
-	do
-		_n_extern_code_block = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_doc)
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwnew)
-		v.enter_visit(_n_methid)
-		v.enter_visit(_n_signature)
-		v.enter_visit(_n_annotations)
-		v.enter_visit(_n_extern)
-		v.enter_visit(_n_extern_calls)
-		v.enter_visit(_n_extern_code_block)
 	end
 end
 redef class AMainMethPropdef
@@ -2049,79 +1102,105 @@ redef class ATypePropdef
 		v.enter_visit(_n_annotations)
 	end
 end
-redef class AReadAble
-	init init_areadable (
-		n_kwredef: nullable TKwredef,
-		n_kwreadable: nullable TKwreadable
-	)
-	do
-		_n_kwredef = n_kwredef
-		if n_kwredef != null then n_kwredef.parent = self
-		_n_kwreadable = n_kwreadable.as(not null)
-		n_kwreadable.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_kwredef == old_child then
-			n_kwredef = new_child.as(nullable TKwredef)
-			return
-		end
-		if _n_kwreadable == old_child then
-			n_kwreadable = new_child.as(TKwreadable)
-			return
-		end
-	end
-
-	redef fun n_kwredef=(node)
-	do
-		_n_kwredef = node
-		if node != null then node.parent = self
-	end
-	redef fun n_kwreadable=(node)
-	do
-		_n_kwreadable = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_kwredef)
-		v.enter_visit(_n_kwreadable)
-	end
-end
-redef class AWriteAble
-	init init_awriteable (
+redef class AMethPropdef
+	init init_amethpropdef (
+		n_doc: nullable ADoc,
 		n_kwredef: nullable TKwredef,
 		n_visibility: nullable AVisibility,
-		n_kwwritable: nullable TKwwritable
+		n_kwmeth: nullable TKwmeth,
+		n_kwinit: nullable TKwinit,
+		n_kwnew: nullable TKwnew,
+		n_methid: nullable AMethid,
+		n_signature: nullable ASignature,
+		n_annotations: nullable AAnnotations,
+		n_extern_calls: nullable AExternCalls,
+		n_extern_code_block: nullable AExternCodeBlock,
+		n_block: nullable AExpr
 	)
 	do
+		_n_doc = n_doc
+		if n_doc != null then n_doc.parent = self
 		_n_kwredef = n_kwredef
 		if n_kwredef != null then n_kwredef.parent = self
-		_n_visibility = n_visibility
-		if n_visibility != null then n_visibility.parent = self
-		_n_kwwritable = n_kwwritable.as(not null)
-		n_kwwritable.parent = self
+		_n_visibility = n_visibility.as(not null)
+		n_visibility.parent = self
+		_n_kwmeth = n_kwmeth
+		if n_kwmeth != null then n_kwmeth.parent = self
+		_n_kwinit = n_kwinit
+		if n_kwinit != null then n_kwinit.parent = self
+		_n_kwnew = n_kwnew
+		if n_kwnew != null then n_kwnew.parent = self
+		_n_methid = n_methid
+		if n_methid != null then n_methid.parent = self
+		_n_signature = n_signature.as(not null)
+		n_signature.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+		_n_extern_calls = n_extern_calls
+		if n_extern_calls != null then n_extern_calls.parent = self
+		_n_extern_code_block = n_extern_code_block
+		if n_extern_code_block != null then n_extern_code_block.parent = self
+		_n_block = n_block
+		if n_block != null then n_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
+		if _n_doc == old_child then
+			n_doc = new_child.as(nullable ADoc)
+			return
+		end
 		if _n_kwredef == old_child then
 			n_kwredef = new_child.as(nullable TKwredef)
 			return
 		end
 		if _n_visibility == old_child then
-			n_visibility = new_child.as(nullable AVisibility)
+			n_visibility = new_child.as(AVisibility)
 			return
 		end
-		if _n_kwwritable == old_child then
-			n_kwwritable = new_child.as(TKwwritable)
+		if _n_kwmeth == old_child then
+			n_kwmeth = new_child.as(nullable TKwmeth)
+			return
+		end
+		if _n_kwinit == old_child then
+			n_kwinit = new_child.as(nullable TKwinit)
+			return
+		end
+		if _n_kwnew == old_child then
+			n_kwnew = new_child.as(nullable TKwnew)
+			return
+		end
+		if _n_methid == old_child then
+			n_methid = new_child.as(nullable AMethid)
+			return
+		end
+		if _n_signature == old_child then
+			n_signature = new_child.as(ASignature)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+		if _n_extern_calls == old_child then
+			n_extern_calls = new_child.as(nullable AExternCalls)
+			return
+		end
+		if _n_extern_code_block == old_child then
+			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
+			return
+		end
+		if _n_block == old_child then
+			n_block = new_child.as(nullable AExpr)
 			return
 		end
 	end
 
+	redef fun n_doc=(node)
+	do
+		_n_doc = node
+		if node != null then node.parent = self
+	end
 	redef fun n_kwredef=(node)
 	do
 		_n_kwredef = node
@@ -2130,20 +1209,69 @@ redef class AWriteAble
 	redef fun n_visibility=(node)
 	do
 		_n_visibility = node
+		node.parent = self
+	end
+	redef fun n_kwmeth=(node)
+	do
+		_n_kwmeth = node
 		if node != null then node.parent = self
 	end
-	redef fun n_kwwritable=(node)
+	redef fun n_kwinit=(node)
 	do
-		_n_kwwritable = node
+		_n_kwinit = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwnew=(node)
+	do
+		_n_kwnew = node
+		if node != null then node.parent = self
+	end
+	redef fun n_methid=(node)
+	do
+		_n_methid = node
+		if node != null then node.parent = self
+	end
+	redef fun n_signature=(node)
+	do
+		_n_signature = node
 		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+	redef fun n_extern_calls=(node)
+	do
+		_n_extern_calls = node
+		if node != null then node.parent = self
+	end
+	redef fun n_extern_code_block=(node)
+	do
+		_n_extern_code_block = node
+		if node != null then node.parent = self
+	end
+	redef fun n_block=(node)
+	do
+		_n_block = node
+		if node != null then node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
+		v.enter_visit(_n_doc)
 		v.enter_visit(_n_kwredef)
 		v.enter_visit(_n_visibility)
-		v.enter_visit(_n_kwwritable)
+		v.enter_visit(_n_kwmeth)
+		v.enter_visit(_n_kwinit)
+		v.enter_visit(_n_kwnew)
+		v.enter_visit(_n_methid)
+		v.enter_visit(_n_signature)
+		v.enter_visit(_n_annotations)
+		v.enter_visit(_n_extern_calls)
+		v.enter_visit(_n_extern_code_block)
+		v.enter_visit(_n_block)
 	end
 end
 redef class AIdMethid
@@ -2260,6 +1388,35 @@ redef class AStarMethid
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_star)
+	end
+end
+redef class AStarstarMethid
+	init init_astarstarmethid (
+		n_starstar: nullable TStarstar
+	)
+	do
+		_n_starstar = n_starstar.as(not null)
+		n_starstar.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_starstar == old_child then
+			n_starstar = new_child.as(TStarstar)
+			return
+		end
+	end
+
+	redef fun n_starstar=(node)
+	do
+		_n_starstar = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_starstar)
 	end
 end
 redef class ASlashMethid
@@ -4565,6 +3722,48 @@ redef class AStarshipExpr
 end
 redef class AStarExpr
 	init init_astarexpr (
+		n_expr: nullable AExpr,
+		n_expr2: nullable AExpr
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_expr2 = n_expr2.as(not null)
+		n_expr2.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_expr2 == old_child then
+			n_expr2 = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_expr2=(node)
+	do
+		_n_expr2 = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_expr2)
+	end
+end
+redef class AStarstarExpr
+	init init_astarstarexpr (
 		n_expr: nullable AExpr,
 		n_expr2: nullable AExpr
 	)
@@ -7850,9 +7049,9 @@ redef class AKwexternAtid
 		v.enter_visit(_n_id)
 	end
 end
-redef class AKwinternAtid
-	init init_akwinternatid (
-		n_id: nullable TKwintern
+redef class AKwabstractAtid
+	init init_akwabstractatid (
+		n_id: nullable TKwabstract
 	)
 	do
 		_n_id = n_id.as(not null)
@@ -7862,65 +7061,7 @@ redef class AKwinternAtid
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
 		if _n_id == old_child then
-			n_id = new_child.as(TKwintern)
-			return
-		end
-	end
-
-	redef fun n_id=(node)
-	do
-		_n_id = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_id)
-	end
-end
-redef class AKwreadableAtid
-	init init_akwreadableatid (
-		n_id: nullable TKwreadable
-	)
-	do
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_id == old_child then
-			n_id = new_child.as(TKwreadable)
-			return
-		end
-	end
-
-	redef fun n_id=(node)
-	do
-		_n_id = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_id)
-	end
-end
-redef class AKwwritableAtid
-	init init_akwwritableatid (
-		n_id: nullable TKwwritable
-	)
-	do
-		_n_id = n_id.as(not null)
-		n_id.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_id == old_child then
-			n_id = new_child.as(TKwwritable)
+			n_id = new_child.as(TKwabstract)
 			return
 		end
 	end
