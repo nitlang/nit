@@ -715,9 +715,9 @@ class ModelBuilder
 
 	# Helper function to display a warning on a node.
 	# Alias for: `self.toolcontext.warning(n.hot_location, text)`
-	fun warning(n: ANode, text: String)
+	fun warning(n: ANode, tag, text: String)
 	do
-		self.toolcontext.warning(n.hot_location, text)
+		self.toolcontext.warning(n.hot_location, tag, text)
 	end
 
 	# Force to get the primitive method named `name` on the type `recv` or do a fatal error on `n`

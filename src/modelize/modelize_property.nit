@@ -405,7 +405,7 @@ redef class APropdef
 			else if mvisibility == private_visibility then
 				assert nvisibility != null
 				# Not yet
-				# modelbuilder.warning(nvisibility, "Warning: private is unrequired since the only legal visibility for properties in a private class is private.")
+				modelbuilder.warning(nvisibility, "useless-visibility", "Warning: private is superfluous since the only legal visibility for properties in a private class is private.")
 			end
 			mvisibility = private_visibility
 		end
@@ -968,7 +968,7 @@ redef class AAttrPropdef
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
-					modelbuilder.warning(ntype, "Warning: useless type definition")
+					modelbuilder.warning(ntype, "useless-type", "Warning: useless type definition")
 				end
 			end
 		end
@@ -1110,7 +1110,7 @@ redef class ATypePropdef
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
 			for c in name.chars do if c >= 'a' and c<= 'z' then
-				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
+				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type {name}")
 				break
 			end
 			if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
@@ -1189,7 +1189,7 @@ redef class ATypePropdef
 			end
 			if p.mclassdef.mclass == mclassdef.mclass then
 				# Still a warning to pass existing bad code
-				modelbuilder.warning(n_type, "Redef Error: a virtual type cannot be refined.")
+				modelbuilder.warning(n_type, "refine-type", "Redef Error: a virtual type cannot be refined.")
 				break
 			end
 			if not bound.is_subtype(mmodule, anchor, supbound) then

@@ -51,8 +51,8 @@ class NitUnitExecutor
 		# We want executable code
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
 			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
-				toolcontext.warning(ndoc.location, "Warning: There is a block of code that is not valid Nit, thus not considered a nitunit")
-				if ast isa AError then toolcontext.warning(ast.location, ast.message)
+				toolcontext.warning(ndoc.location, "invalid-block", "Warning: There is a block of code that is not valid Nit, thus not considered a nitunit")
+				if ast isa AError then toolcontext.warning(ast.location, "syntax-error", ast.message)
 				ndoc = null # To avoid multiple warning in the same node
 			end
 			return
@@ -63,7 +63,7 @@ class NitUnitExecutor
 		v.enter_visit(ast)
 		if not v.foundit then
 			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
-				toolcontext.warning(ndoc.location, "Warning: There is a block of Nit code without `assert`, thus not considered a nitunit")
+				toolcontext.warning(ndoc.location, "invalid-block", "Warning: There is a block of Nit code without `assert`, thus not considered a nitunit")
 				ndoc = null # To avoid multiple warning in the same node
 			end
 			return
@@ -156,13 +156,13 @@ class NitUnitExecutor
 			var ne = new HTMLTag("failure")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
