@@ -36,6 +36,12 @@ class Variable
 
 	# Alias of `name`
 	redef fun to_s do return self.name
+
+	# The declaration of the variable, if any
+	var location: nullable Location = null
+
+	# Is the local variable not read and need a warning?
+	var warn_unread = false is writable
 end
 
 # Mark where break and continue will branch.
@@ -77,6 +83,18 @@ private class ScopeVisitor
 	# All stacked scope. `scopes.first` is the current scope
 	private var scopes: List[Scope] = new List[Scope]
 
+	# Shift and check the last scope
+	fun shift_scope
+	do
+		assert not scopes.is_empty
+		var scope = scopes.shift
+		for v in scope.variables.values do
+			if v.warn_unread then
+				toolcontext.advice(v.location, "unread-variable", "Warning: local variable {v.name} is never read.")
+			end
+		end
+	end
+
 	# Regiter a local variable.
 	# Display an error on toolcontext if a variable with the same name is masked.
 	fun register_variable(node: ANode, variable: Variable): Bool
@@ -88,6 +106,7 @@ private class ScopeVisitor
 			return false
 		end
 		scopes.first.variables[name] = variable
+		variable.location = node.location
 		return true
 	end
 
@@ -118,7 +137,7 @@ private class ScopeVisitor
 		scope.escapemark = escapemark
 		scopes.unshift(scope)
 		enter_visit(node)
-		scopes.shift
+		shift_scope
 	end
 
 	# Look for a label `name`.
@@ -232,6 +251,7 @@ redef class APropdef
 	do
 		var v = new ScopeVisitor(toolcontext)
 		v.enter_visit(self)
+		v.shift_scope
 	end
 end
 
@@ -257,6 +277,7 @@ redef class AVardeclExpr
 		var nid = self.n_id
 		var variable = new Variable(nid.text)
 		v.register_variable(nid, variable)
+		variable.warn_unread = true # wait for some read mark.
 		self.variable = variable
 	end
 end
@@ -370,7 +391,7 @@ redef class AForExpr
 		self.escapemark = escapemark
 		v.enter_visit_block(n_block, escapemark)
 
-		v.scopes.shift
+		v.shift_scope
 	end
 end
 
@@ -409,6 +430,7 @@ end
 redef class ACallExpr
 	redef fun variable_create(variable)
 	do
+		variable.warn_unread = false
 		return new AVarExpr.init_avarexpr(n_id)
 	end
 end
@@ -423,6 +445,7 @@ end
 redef class ACallReassignExpr
 	redef fun variable_create(variable)
 	do
+		variable.warn_unread = false
 		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
 	end
 end
