@@ -404,8 +404,7 @@ redef class APropdef
 				modelbuilder.error(nvisibility, "Error: The only legal visibility for properties in a private class is private.")
 			else if mvisibility == private_visibility then
 				assert nvisibility != null
-				# Not yet
-				modelbuilder.warning(nvisibility, "useless-visibility", "Warning: private is superfluous since the only legal visibility for properties in a private class is private.")
+				modelbuilder.advice(nvisibility, "useless-visibility", "Warning: private is superfluous since the only legal visibility for properties in a private class is private.")
 			end
 			mvisibility = private_visibility
 		end
