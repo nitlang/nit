@@ -28,7 +28,7 @@ error_expr_not_ok.nit:64,30--33: Error: Method or variable 'fail' unknown in Sys
 error_expr_not_ok.nit:66,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:66,21: Type error: expected A, got Int
 error_expr_not_ok.nit:67,15--18: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
+error_expr_not_ok.nit:67,1--18: Warning: use `loop` instead of `while true do`.
 error_expr_not_ok.nit:69,10--13: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:70,20--23: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:71,8--11: Error: Method or variable 'fail' unknown in Sys.
