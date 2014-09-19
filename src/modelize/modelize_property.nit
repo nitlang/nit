@@ -418,6 +418,8 @@ redef class APropdef
 			var mdoc = ndoc.to_mdoc
 			mpropdef.mdoc = mdoc
 			mdoc.original_mentity = mpropdef
+		else if mpropdef.is_intro and mpropdef.mproperty.visibility >= protected_visibility then
+			modelbuilder.advice(self, "missing-doc", "Documentation warning: Undocumented property `{mpropdef.mproperty}`")
 		end
 
 		var at_deprecated = get_single_annotation("deprecated", modelbuilder)

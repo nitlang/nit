@@ -630,6 +630,8 @@ class ModelBuilder
 				var mdoc = ndoc.to_mdoc
 				mmodule.mdoc = mdoc
 				mdoc.original_mentity = mmodule
+			else
+				advice(decl, "missing-doc", "Documentation warning: Undocumented module `{mmodule}`")
 			end
 		end
 
