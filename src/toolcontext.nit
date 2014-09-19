@@ -120,7 +120,18 @@ class ToolContext
 			messages.clear
 		end
 
-		if error_count > 0 then exit(1)
+		if error_count > 0 then
+			errors_info
+			exit(1)
+		end
+	end
+
+	# Display total error informations
+	fun errors_info
+	do
+		if error_count == 0 and warning_count == 0 then return
+		if opt_no_color.value then return
+		sys.stderr.write "Errors: {error_count}. Warnings: {warning_count}.\n"
 	end
 
 	# Display an error
