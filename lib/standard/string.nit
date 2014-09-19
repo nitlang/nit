@@ -657,6 +657,10 @@ end
 abstract class FlatText
 	super Text
 
+	# Underlying C-String (`char*`)
+	#
+	# Warning : Might be void in some subclasses, be sure to check
+	# if set before using it.
 	private var items: NativeString
 
 	# Real items, used as cache for to_cstring is called
@@ -1358,6 +1362,7 @@ class FlatBuffer
 	redef fun to_s: String
 	do
 		written = true
+		if length == 0 then items = new NativeString(1)
 		return new FlatString.with_infos(items, length, 0, length - 1)
 	end
 
