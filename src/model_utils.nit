@@ -213,16 +213,6 @@ end
 
 redef class MClass
 
-	# Get the public owner of 'self'.
-	fun public_owner: MModule do
-		var public_owner = self.intro_mmodule.public_owner
-		if public_owner == null then
-			return self.intro_mmodule
-		else
-			return public_owner
-		end
-	end
-
 	# Get direct parents of 'self'.
 	fun parents: Set[MClass] do
 		var ret = new HashSet[MClass]

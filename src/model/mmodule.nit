@@ -57,13 +57,12 @@ redef class MGroup
 	# The loaded modules of this group
 	var mmodules = new Array[MModule]
 
-	# Placebo stuff to find the owner (module with same name)
-	# null is returned if there is no owner, or if it is not loaded yet
-	fun fuzzy_owner: nullable MModule
-	do
-		for m in mmodules do if m.name == name then return m
-		return null
-	end
+	# The default module of a group (if any, and if loaded)
+	#
+	# The default module of a group is the one that has the same name.
+	# Return `null` if the group has no default module or if the default
+	# module is not loaded.
+	var default_mmodule: nullable MModule = null
 end
 
 # A Nit module is usually associated with a Nit source file.
@@ -72,12 +71,6 @@ class MModule
 
 	# The model considered
 	redef var model: Model
-
-	# placebo for old module nesting hierarchy
-	# return null if self is not nested (ie. is a top-level module)
-	#
-	# TODO REMOVE, rely on mgroup instead
-	var direct_owner: nullable MModule
 
 	# The group of module in the project if any
 	var mgroup: nullable MGroup
@@ -124,20 +117,22 @@ class MModule
 		self.mgroup = mgroup
 		if mgroup != null then
 			mgroup.mmodules.add(self)
+			if mgroup.name == name then
+				assert mgroup.default_mmodule == null
+				mgroup.default_mmodule = self
+			end
 			# placebo for old module nesting hierarchy
-			var direct_owner = mgroup.fuzzy_owner
+			var direct_owner = mgroup.default_mmodule
 			if direct_owner == self then
 				# The module is the new owner of its own group, thus adopt the other modules
 				for m in mgroup.mmodules do
 					if m == self then continue
-					m.direct_owner = self
 					model.mmodule_nesting_hierarchy.add_edge(self, m)
 				end
-				# The potential owner is the the fuzzy_owner of the parent group
-				if mgroup.parent != null then direct_owner = mgroup.parent.fuzzy_owner
+				# The potential owner is the default_mmodule of the parent group
+				if mgroup.parent != null then direct_owner = mgroup.parent.default_mmodule
 			end
 			if direct_owner != self and direct_owner != null then
-				self.direct_owner = direct_owner
 				model.mmodule_nesting_hierarchy.add_edge(direct_owner, self)
 			end
 		end
@@ -190,18 +185,6 @@ class MModule
 			print "{self} visibility for {m} = {v}"
 			abort # invalid visibility
 		end
-	end
-
-	# placebo for old module nesting hierarchy
-	fun public_owner: nullable MModule
-	do
-		var mgroup = self.mgroup
-		if mgroup == null then return null
-		mgroup = mgroup.mproject.root
-		if mgroup.mmodules.is_empty then return null
-		var res = mgroup.fuzzy_owner
-		if res == self then return null
-		return res
 	end
 
 	# Return true if a class or a property introduced in `intro_mmodule` with a visibility of `visibility` is visible in self.
