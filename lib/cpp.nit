@@ -15,7 +15,9 @@
 # limitations under the License.
 
 # Offers features to interface with C++ code and libraries
-module cpp
+module cpp is
+	new_annotation cpp_compiler_option
+end
 
 # A pointer to a C++ std::string instance
 extern class CppString in "C++" `{ std::string* `}

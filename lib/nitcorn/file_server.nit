@@ -42,8 +42,22 @@ end
 class FileServer
 	super Action
 
-	# Root of `self` file system
+	# Root folder of `self` file system
 	var root: String
+
+	init
+	do
+		var root = self.root
+
+		# Simplify the root path as each file requested will also be simplified
+		root = root.simplify_path
+
+		# Make sure the root ends with '/', this makes a difference in the security
+		# check on each file access.
+		root = root + "/"
+
+		self.root = root
+	end
 
 	# Error page template for a given `code`
 	fun error_page(code: Int): Streamable do return new ErrorTemplate(code)
@@ -58,17 +72,24 @@ class FileServer
 		var local_file = root.join_path(turi.strip_start_slashes)
 		local_file = local_file.simplify_path
 
-		# HACK
-		if turi == "/" then local_file = root
-
 		# Is it reachable?
-		if local_file.has_prefix(root) then
+		#
+		# This make sure that the requested file is within the root folder.
+		if (local_file + "/").has_prefix(root) then
 			# Does it exists?
 			if local_file.file_exists then
-				response = new HttpResponse(200)
-
 				if local_file.file_stat.is_dir then
-					# Show index.html instead of the directory listing
+					# If we target a directory without an ending `/`,
+					# redirect to the directory ending with `/`.
+					if not request.uri.is_empty and
+					   request.uri.chars.last != '/' then
+						response = new HttpResponse(303)
+						response.header["Location"] = request.uri + "/"
+						return response
+					end
+
+					# Show index file instead of the directory listing
+					# only if `index.html` or `index.htm` is available
 					var index_file = local_file.join_path("index.html")
 					if index_file.file_exists then
 						local_file = index_file
@@ -78,20 +99,22 @@ class FileServer
 					end
 				end
 
+				response = new HttpResponse(200)
 				if local_file.file_stat.is_dir then
 					# Show the directory listing
 					var title = turi
 					var files = local_file.files
 
 					var links = new Array[String]
-					if local_file.length > 1 then
-						# The extra / is a hack
-						var path = "/" + (turi + "/..").simplify_path
-						links.add "<a href=\"{path}\">..</a>"
+					if turi.length > 1 then
+						var path = (request.uri + "/..").simplify_path
+						links.add "<a href=\"{path}/\">..</a>"
 					end
 					for file in files do
-						var path = (turi + "/" + file).simplify_path
-						links.add "<a href=\"{path}\">{file}</a>"
+						var local_path = local_file.join_path(file).simplify_path
+						var web_path = file.simplify_path
+						if local_path.file_stat.is_dir then web_path = web_path + "/"
+						links.add "<a href=\"{web_path}\">{file}</a>"
 					end
 
 					var header = self.header
