@@ -59,11 +59,11 @@ interface Drawable
 	fun set_viewport( x, y, w, h: Int ) is abstract
 
 	# Draw image on self, for top left position
-	fun blit( image: I, x, y: Int ) is abstract
+	fun blit(image: I, x, y: Numeric) is abstract
 
 	# Draw image on self, for top left position but scaled
 	# the width and height of the target rectangle is specified
-	fun blit_scaled(image: Image, x, y, w, h: Int)
+	fun blit_scaled(image: Image, x, y, w, h: Numeric)
 	do
 		var fx = x.to_f
 		var fy = y.to_f
@@ -73,13 +73,13 @@ interface Drawable
 	end
 
 	# Draw image, centered at position
-	fun blit_centered( image: I, x, y: Int ) is abstract
+	fun blit_centered(image: I, x, y: Numeric) is abstract
 
 	# Draw image, centered at position but rotated
-	fun blit_rotated( image: I, x, y, angle: Float ) is abstract
+	fun blit_rotated(image: I, x, y: Numeric, angle: Float) is abstract
 
 	# Draw image, centered, rotated and scaled
-	fun blit_rotated_scaled( image: I, x, y, angle, scale: Float ) is abstract
+	fun blit_rotated_scaled(image: I, x, y: Numeric, angle, scale: Float) is abstract
 
 	# Draw image by specifying the positon of each image corners
 	# Corners are in counter-clockwise order stating top left
@@ -89,7 +89,7 @@ interface Drawable
 	# | |
 	# b-c
 	# ~~~
-	fun blit_stretched( image: I, ax, ay, bx, by, cx, cy, dx, dy: Float )
+	fun blit_stretched(image: I, ax, ay, bx, by, cx, cy, dx, dy: Numeric)
 		is abstract
 
 	# Clear entire window with given color

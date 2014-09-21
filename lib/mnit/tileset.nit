@@ -99,7 +99,7 @@ end
 redef class Display
 	# Blit the text using a monospace bitmap font
 	# '\n' are rendered as carriage return
-	fun text(text: String, font: TileSetFont, x, y: Int)
+	fun text(text: String, font: TileSetFont, x, y: Numeric)
 	do
 		var cx = x
 		var cy = y
