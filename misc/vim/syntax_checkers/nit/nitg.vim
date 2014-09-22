@@ -38,7 +38,7 @@ function! SyntaxCheckers_nit_nitg_IsAvailable()
 endfunction
 
 function! SyntaxCheckers_nit_nitg_GetLocList()
-	let makeprg = s:nitg . " --no-color --only-metamodel "
+	let makeprg = s:nitg . " --no-color --only-metamodel -W "
 
 	" custom NIT_DIR
 	if exists('g:syntastic_nit_dir')
