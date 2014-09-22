@@ -149,10 +149,40 @@ class ToolContext
 		check_errors
 	end
 
-	# Display a warning
+	# Display a first-level warning.
+	#
+	# First-level warnings are warnings that SHOULD be corrected,
+	# and COULD usually be immediately corrected.
+	#
+	# * There is a simple correction
+	# * There is no reason to let the code this way (no reasonable @supresswarning-like annotation)
+	# * They always are real issues (no false positive)
+	#
+	# First-level warnings are displayed by default (except if option `-q` is given).
 	fun warning(l: nullable Location, tag: String, text: String)
 	do
 		if opt_warn.value == 0 then return
+		messages.add(new Message(l, tag, text))
+		warning_count = warning_count + 1
+		if opt_stop_on_first_error.value then check_errors
+	end
+
+	# Display a second-level warning.
+	#
+	# Second-level warnings are warnings that should require investigation,
+	# but cannot always be immediately corrected.
+	#
+	# * The correction could be complex. e.g. require a refactorisation or an API change.
+	# * The correction cannot be done. e.g. Code that use a deprecated API for some compatibility reason.
+	# * There is not a real issue (false positive). Note that this should be unlikely.
+	# * Transitional: While a real warning, it fires a lot in current code, so a transition is needed
+	#   in order to fix them before promoting the advice to a warning.
+	#
+	# In order to prevent warning inflation à la Java, second-level warnings are not displayed by
+	# default and require an additional option `-W`.
+	fun advice(l: nullable Location, tag: String, text: String)
+	do
+		if opt_warn.value <= 1 then return
 		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors

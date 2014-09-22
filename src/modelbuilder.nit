@@ -720,6 +720,13 @@ class ModelBuilder
 		self.toolcontext.warning(n.hot_location, tag, text)
 	end
 
+	# Helper function to display an advice on a node.
+	# Alias for: `self.toolcontext.advice(n.hot_location, text)`
+	fun advice(n: ANode, tag, text: String)
+	do
+		self.toolcontext.advice(n.hot_location, tag, text)
+	end
+
 	# Force to get the primitive method named `name` on the type `recv` or do a fatal error on `n`
 	fun force_get_primitive_method(n: ANode, name: String, recv: MClass, mmodule: MModule): MMethod
 	do
