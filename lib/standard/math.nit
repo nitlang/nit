@@ -51,6 +51,16 @@ redef class Int
 		if self > o then return (self - o).rshift(1).gcd(o)
 		return (o - self).rshift(1).gcd(self)
 	end
+
+	# Is `self` even ?
+	#
+	#    assert 12.is_even
+	fun is_even: Bool do return self % 2 == 0
+
+	# Is `self` odd ?
+	#
+	#    assert not 13.is_even
+	fun is_odd: Bool do return not is_even
 end
 
 redef class Float
