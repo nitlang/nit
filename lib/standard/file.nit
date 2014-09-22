@@ -6,7 +6,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -80,7 +80,7 @@ class IFStream
 		_buffer.length = nb
 		_buffer_pos = 0
 	end
-	
+
 	# End of file?
 	redef var end_reached: Bool = false
 
@@ -101,7 +101,7 @@ end
 class OFStream
 	super FStream
 	super OStream
-	
+
 	redef fun write(s)
 	do
 		assert _is_writable
@@ -119,7 +119,7 @@ class OFStream
 	end
 
 	redef var is_writable = false
-	
+
 	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
@@ -130,7 +130,7 @@ class OFStream
 			printn("Problem in writing : ", err, " ", len, "\n")
 		end
 	end
-	
+
 	# Open the file at `path` for writing.
 	init open(path: String)
 	do
@@ -587,7 +587,7 @@ extern class FileStat `{ struct stat * `}
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	# Returns the last access time
 	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
-	# Returns the last status change time 
+	# Returns the last status change time
 	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
 	# Returns the last modification time
 	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
