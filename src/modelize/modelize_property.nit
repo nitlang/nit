@@ -404,8 +404,7 @@ redef class APropdef
 				modelbuilder.error(nvisibility, "Error: The only legal visibility for properties in a private class is private.")
 			else if mvisibility == private_visibility then
 				assert nvisibility != null
-				# Not yet
-				# modelbuilder.warning(nvisibility, "Warning: private is unrequired since the only legal visibility for properties in a private class is private.")
+				modelbuilder.advice(nvisibility, "useless-visibility", "Warning: private is superfluous since the only legal visibility for properties in a private class is private.")
 			end
 			mvisibility = private_visibility
 		end
@@ -419,6 +418,8 @@ redef class APropdef
 			var mdoc = ndoc.to_mdoc
 			mpropdef.mdoc = mdoc
 			mdoc.original_mentity = mpropdef
+		else if mpropdef.is_intro and mpropdef.mproperty.visibility >= protected_visibility then
+			modelbuilder.advice(self, "missing-doc", "Documentation warning: Undocumented property `{mpropdef.mproperty}`")
 		end
 
 		var at_deprecated = get_single_annotation("deprecated", modelbuilder)
@@ -616,6 +617,10 @@ redef class AMethPropdef
 		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
 		if mprop == null and look_like_a_root_init(modelbuilder) then
 			mprop = modelbuilder.the_root_init_mmethod
+			var nb = n_block
+			if nb isa ABlockExpr and nb.n_expr.is_empty and n_doc == null then
+				modelbuilder.advice(self, "useless-init", "Warning: useless empty init in {mclassdef}")
+			end
 		end
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
@@ -955,8 +960,8 @@ redef class AAttrPropdef
 		else if ntype != null then
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
-				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
-					modelbuilder.warning(ntype, "Warning: useless type definition")
+				if xmtype == mtype then
+					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
 			end
 		end
@@ -1094,7 +1099,7 @@ redef class ATypePropdef
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
 			for c in name.chars do if c >= 'a' and c<= 'z' then
-				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
+				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type {name}")
 				break
 			end
 			if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
@@ -1173,7 +1178,7 @@ redef class ATypePropdef
 			end
 			if p.mclassdef.mclass == mclassdef.mclass then
 				# Still a warning to pass existing bad code
-				modelbuilder.warning(n_type, "Redef Error: a virtual type cannot be refined.")
+				modelbuilder.warning(n_type, "refine-type", "Redef Error: a virtual type cannot be refined.")
 				break
 			end
 			if not bound.is_subtype(mmodule, anchor, supbound) then

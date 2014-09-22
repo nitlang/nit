@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common command-line tool infractructure than handle options and error messages
+# Common command-line tool infrastructure than handle options and error messages
 module toolcontext
 
 import opts
@@ -25,11 +25,24 @@ import location
 import version
 import template
 
+# A warning or an error
 class Message
 	super Comparable
 	redef type OTHER: Message
 
+	# The origin of the message in the source code, if any.
 	var location: nullable Location
+
+	# The category of the message.
+	#
+	# Used by quality-control tool for statistics or to enable/disable things individually.
+	var tag: nullable String
+
+	# The human-readable description of the message.
+	#
+	# It should be short and fit on a single line.
+	# It should also have meaningful information first in case
+	# on truncation by an IDE for instance.
 	var text: String
 
 	# Comparisons are made on message locations.
@@ -59,13 +72,19 @@ class Message
 		var yellow = "{esc}[0;33m"
 		var def = "{esc}[0m"
 
+		var tag = tag
+		if tag != null then
+			tag = " ({tag})"
+		else
+			tag = ""
+		end
 		var l = location
 		if l == null then
-			return text
+			return "{text}{tag}"
 		else if l.file == null then
-			return "{yellow}{l}{def}: {text}"
+			return "{yellow}{l}{def}: {text}{tag}"
 		else
-			return "{yellow}{l}{def}: {text}\n{l.colored_line("1;31")}"
+			return "{yellow}{l}{def}: {text}{tag}\n{l.colored_line("1;31")}"
 		end
 	end
 end
@@ -101,13 +120,24 @@ class ToolContext
 			messages.clear
 		end
 
-		if error_count > 0 then exit(1)
+		if error_count > 0 then
+			errors_info
+			exit(1)
+		end
+	end
+
+	# Display total error informations
+	fun errors_info
+	do
+		if error_count == 0 and warning_count == 0 then return
+		if opt_no_color.value then return
+		sys.stderr.write "Errors: {error_count}. Warnings: {warning_count}.\n"
 	end
 
 	# Display an error
 	fun error(l: nullable Location, s: String)
 	do
-		messages.add(new Message(l,s))
+		messages.add(new Message(l,null,s))
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
@@ -119,11 +149,41 @@ class ToolContext
 		check_errors
 	end
 
-	# Display a warning
-	fun warning(l: nullable Location, s: String)
+	# Display a first-level warning.
+	#
+	# First-level warnings are warnings that SHOULD be corrected,
+	# and COULD usually be immediately corrected.
+	#
+	# * There is a simple correction
+	# * There is no reason to let the code this way (no reasonable @supresswarning-like annotation)
+	# * They always are real issues (no false positive)
+	#
+	# First-level warnings are displayed by default (except if option `-q` is given).
+	fun warning(l: nullable Location, tag: String, text: String)
 	do
 		if opt_warn.value == 0 then return
-		messages.add(new Message(l,s))
+		messages.add(new Message(l, tag, text))
+		warning_count = warning_count + 1
+		if opt_stop_on_first_error.value then check_errors
+	end
+
+	# Display a second-level warning.
+	#
+	# Second-level warnings are warnings that should require investigation,
+	# but cannot always be immediately corrected.
+	#
+	# * The correction could be complex. e.g. require a refactorisation or an API change.
+	# * The correction cannot be done. e.g. Code that use a deprecated API for some compatibility reason.
+	# * There is not a real issue (false positive). Note that this should be unlikely.
+	# * Transitional: While a real warning, it fires a lot in current code, so a transition is needed
+	#   in order to fix them before promoting the advice to a warning.
+	#
+	# In order to prevent warning inflation à la Java, second-level warnings are not displayed by
+	# default and require an additional option `-W`.
+	fun advice(l: nullable Location, tag: String, text: String)
+	do
+		if opt_warn.value <= 1 then return
+		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end

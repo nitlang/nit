@@ -133,7 +133,7 @@ redef class ModelBuilder
 					return
 				end
 				for c in ptname.chars do if c >= 'a' and c<= 'z' then
-					warning(nfd, "Warning: lowercase in the formal parameter type {ptname}")
+					warning(nfd, "formal-type-name", "Warning: lowercase in the formal parameter type {ptname}")
 					break
 				end
 				names.add(ptname)
@@ -155,7 +155,7 @@ redef class ModelBuilder
 						nfd.bound = bound
 					end
 					if bound isa MClassType and bound.mclass.kind == enum_kind then
-						warning(nfdt, "Warning: Useless formal parameter type since `{bound}` cannnot have subclasses.")
+						warning(nfdt, "useless-bound", "Warning: Useless formal parameter type since `{bound}` cannnot have subclasses.")
 					end
 				else if mclass.mclassdefs.is_empty then
 					# No bound, then implicitely bound by nullable Object
@@ -182,6 +182,8 @@ redef class ModelBuilder
 				var mdoc = ndoc.to_mdoc
 				mclassdef.mdoc = mdoc
 				mdoc.original_mentity = mclassdef
+			else if mclassdef.is_intro and mclass.visibility >= public_visibility then
+				advice(nclassdef, "missing-doc", "Documentation warning: Undocumented public class `{mclass}`")
 			end
 		end
 
@@ -385,12 +387,12 @@ redef class ModelBuilder
 				if not parents.has(sc) or sc == objectclass then
 					# Skip the warning on generated code
 					if ntype.location.file != null and not ntype.location.file.filename.is_empty then
-						warning(ntype, "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+						warning(ntype, "useless-superclass", "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
 					end
 				else if not seen_parents.has_key(sc) then
 					seen_parents[sc] = ntype
 				else
-					warning(ntype, "Warning: duplicated super-class {mtype} in class {mclassdef.mclass}.")
+					warning(ntype, "useless-superclass", "Warning: duplicated super-class {mtype} in class {mclassdef.mclass}.")
 				end
 			end
 		end

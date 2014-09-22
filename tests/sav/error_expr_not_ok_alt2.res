@@ -10,7 +10,7 @@ alt/error_expr_not_ok_alt2.nit:43,1--8: Error: Method 'fail' doesn't exists in I
 alt/error_expr_not_ok_alt2.nit:60,20: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:62,7--27: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:66,21: Type error: expected A, got Int
-alt/error_expr_not_ok_alt2.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
+alt/error_expr_not_ok_alt2.nit:67,1--18: Warning: use `loop` instead of `while true do`.
 alt/error_expr_not_ok_alt2.nit:73,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt2.nit:74,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt2.nit:75,7--18: Type error: expected A, got Bool

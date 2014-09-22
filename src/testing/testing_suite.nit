@@ -231,7 +231,7 @@ class TestCase
 		var loc = test_method.location
 		if res != 0 then
 			failure = msg
-			toolcontext.warning(loc, "FAILURE: {test_method.name} (in file {file}.nit): {msg}")
+			toolcontext.warning(loc, "failure", "FAILURE: {test_method.name} (in file {file}.nit): {msg}")
 			toolcontext.modelbuilder.failed_tests += 1
 		end
 		toolcontext.check_errors
@@ -252,7 +252,7 @@ class TestCase
 		var loc = test_method.location
 		if res != 0 then
 			error = msg
-			toolcontext.warning(loc, "ERROR: {test_method.name} (in file {file}.nit): {msg}")
+			toolcontext.warning(loc, "failure", "ERROR: {test_method.name} (in file {file}.nit): {msg}")
 			toolcontext.modelbuilder.failed_tests += 1
 		end
 		toolcontext.check_errors

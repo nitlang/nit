@@ -54,9 +54,9 @@ private class SimpleMiscVisitor
 
 	var toolcontext: ToolContext
 
-	fun warning(node: ANode, msg: String)
+	fun warning(node: ANode, tag, msg: String)
 	do
-		toolcontext.warning(node.hot_location, msg)
+		toolcontext.warning(node.hot_location, tag, msg)
 	end
 
 	init(toolcontext: ToolContext)
@@ -81,7 +81,7 @@ redef class ASignature
 	redef fun after_simple_misc(v)
 	do
 		if self.n_opar != null and self.n_params.is_empty then
-			v.warning(self, "Warning: superfluous parentheses.")
+			v.warning(self, "parentheses", "Warning: superfluous parentheses.")
 		end
 	end
 end
@@ -94,7 +94,7 @@ end
 redef class AParExpr
 	redef fun warn_parentheses(v)
 	do
-		v.warning(self, "Warning: superfluous parentheses.")
+		v.warning(self, "parentheses", "Warning: superfluous parentheses.")
 	end
 end
 
@@ -102,7 +102,7 @@ redef class AParExprs
 	redef fun after_simple_misc(v)
 	do
 		if n_exprs.is_empty then
-			v.warning(self, "Warning: superfluous parentheses.")
+			v.warning(self, "parentheses", "Warning: superfluous parentheses.")
 		end
 	end
 end
@@ -141,7 +141,7 @@ redef class AWhileExpr
 	redef fun after_simple_misc(v)
 	do
 		if n_expr isa ATrueExpr then
-			v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
+			v.warning(self, "loop", "Warning: use `loop` instead of `while true do`.")
 		else
 			n_expr.warn_parentheses(v)
 		end
@@ -173,7 +173,7 @@ redef class AOnceExpr
 	redef fun accept_simple_misc(v)
 	do
 		if v.once_count > 0 then
-			v.warning(self, "Useless once in a once expression.")
+			v.warning(self, "nested-once", "Warning: useless once in a once expression.")
 		end
 		v.once_count = v.once_count + 1
 

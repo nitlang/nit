@@ -60,7 +60,7 @@ private class CheckAnnotationPhase
 
 			for m in super_mmodules do
 				if declared_annotations[m].has(name) then
-					modelbuilder.warning(annot, "Warning: an annotation `{name}` is already declared in module `{m}`")
+					modelbuilder.warning(annot, "multiple-annotation-declarations", "Warning: an annotation `{name}` is already declared in module `{m}`")
 					break label
 				end
 			end
@@ -120,7 +120,7 @@ platform
 
 		if annots.has(name) then return
 
-		toolcontext.modelbuilder.warning(nat, "Warning: unknown annotation `{name}`")
+		toolcontext.modelbuilder.warning(nat, "unknown-annotation", "Warning: unknown annotation `{name}`")
 
 		annots.add(name) # to avoid multiple errors on the same name
 	end

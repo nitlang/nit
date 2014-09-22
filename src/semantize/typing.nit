@@ -188,9 +188,9 @@ private class TypeVisitor
 		if sup == null then return null # Forward error
 
 		if sup == sub then
-			self.modelbuilder.warning(node, "Warning: Expression is already a {sup}.")
+			self.modelbuilder.warning(node, "useless-type-test", "Warning: Expression is already a {sup}.")
 		else if self.is_subtype(sub, sup) then
-			self.modelbuilder.warning(node, "Warning: Expression is already a {sup} since it is a {sub}.")
+			self.modelbuilder.warning(node, "useless-type-test", "Warning: Expression is already a {sup} since it is a {sub}.")
 		end
 		return sup
 	end
@@ -266,9 +266,9 @@ private class TypeVisitor
 		if info != null and self.mpropdef.mproperty.deprecation == null then
 			var mdoc = info.mdoc
 			if mdoc != null then
-				self.modelbuilder.warning(node, "Deprecation Warning: Method '{name}' is deprecated: {mdoc.content.first}")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: Method '{name}' is deprecated: {mdoc.content.first}")
 			else
-				self.modelbuilder.warning(node, "Deprecation Warning: Method '{name}' is deprecated.")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: Method '{name}' is deprecated.")
 			end
 		end
 
@@ -280,7 +280,7 @@ private class TypeVisitor
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "Warning: confliting property definitions for property {name} in {unsafe_type}: {propdefs.join(" ")}")
+			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property {name} in {unsafe_type}: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 
@@ -1212,13 +1212,13 @@ redef class AAsNotnullExpr
 		self.mtype = mtype
 
 		if mtype isa MClassType then
-			v.modelbuilder.warning(self, "Warning: expression is already not null, since it is a `{mtype}`.")
+			v.modelbuilder.warning(self, "useless-type-test", "Warning: expression is already not null, since it is a `{mtype}`.")
 			return
 		end
 		assert mtype.need_anchor
 		var u = v.anchor_to(mtype)
 		if not u isa MNullableType then
-			v.modelbuilder.warning(self, "Warning: expression is already not null, since it is a `{mtype}: {u}`.")
+			v.modelbuilder.warning(self, "useless-type-test", "Warning: expression is already not null, since it is a `{mtype}: {u}`.")
 			return
 		end
 	end
@@ -1741,7 +1741,7 @@ redef class ADebugTypeExpr
 		var mtype = v.resolve_mtype(ntype)
 		if mtype != null and mtype != expr then
 			var umtype = v.anchor_to(mtype)
-			v.modelbuilder.warning(self, "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
+			v.modelbuilder.warning(self, "debug", "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
 		end
 		self.is_typed = true
 	end

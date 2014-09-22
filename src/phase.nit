@@ -132,6 +132,8 @@ redef class ToolContext
 
 		var time1 = get_time
 		self.info("*** END SEMANTIC ANALYSIS: {time1-time0} ***", 2)
+
+		errors_info
 	end
 
 	fun phase_process_npropdef(phase: Phase, npropdef: APropdef)
