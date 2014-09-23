@@ -468,28 +468,72 @@ abstract class NitdocPage
 	end
 
 	# MProp description template
-	fun tpl_mprop_article(mproperty: MProperty, mpropdefs: Array[MPropDef]): TplArticle do
-		var article = mproperty.tpl_article
-		if not mpropdefs.has(mproperty.intro) then
-			# add intro synopsys
-			var intro_article = mproperty.intro.tpl_short_article
-			intro_article.source_link = tpl_showsource(mproperty.intro.location)
-			article.add_child intro_article
+	#
+	# `main_mpropdef`: The most important mpropdef to display
+	# `local_mpropdefs`: List of other locally defined mpropdefs to display
+	# `lin`: full linearization from local_mpropdefs to intro (displayed in redef tree)
+	fun tpl_mprop_article(main_mpropdef: MPropDef, local_mpropdefs: Array[MPropDef],
+	   lin: Array[MPropDef]): TplArticle do
+		var mprop = main_mpropdef.mproperty
+		var article = new TplArticle(mprop.nitdoc_id)
+		var title = new Template
+		title.add mprop.tpl_icon
+		title.add "<span id='{main_mpropdef.nitdoc_id}'></span>"
+		if main_mpropdef.is_intro then
+			title.add mprop.tpl_link
+			title.add mprop.intro.tpl_signature
+		else
+			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
+			var def_url = "{cls_url}#{mprop.nitdoc_id}"
+			var lnk = new TplLink.with_title(def_url, mprop.name, "Go to introduction")
+			title.add "redef "
+			title.add lnk
 		end
-		mainmodule.linearize_mpropdefs(mpropdefs)
-		for mpropdef in mpropdefs do
-			# add mpropdef description
-			var redef_article = mpropdef.tpl_article
-			redef_article.source_link = tpl_showsource(mpropdef.location)
-			article.add_child redef_article
+		article.title = title
+		article.title_classes.add "signature"
+		article.summary_title = "{mprop.nitdoc_name}"
+		article.subtitle = main_mpropdef.tpl_namespace
+		if main_mpropdef.mdoc != null then
+			article.content = main_mpropdef.mdoc.tpl_comment
 		end
+		var subarticle = new TplArticle("{main_mpropdef.nitdoc_id}_redefs")
+		# Add redef in same `MClass`
+		if local_mpropdefs.length > 1 then
+			for mpropdef in local_mpropdefs do
+				if mpropdef == main_mpropdef then continue
+				var redef_article = new TplArticle("{mpropdef.nitdoc_id}")
+				var redef_title = new Template
+				redef_title.add "also redef in "
+				redef_title.add mpropdef.tpl_namespace
+				redef_article.title = redef_title
+				redef_article.title_classes.add "signature info"
+				redef_article.css_classes.add "nospace"
+				var redef_content = new Template
+				if mpropdef.mdoc != null then
+					redef_content.add mpropdef.mdoc.tpl_comment
+				end
+				redef_article.content = redef_content
+				subarticle.add_child redef_article
+			end
+		end
+		# Add linearization
+		if lin.length > 1 then
+			var lin_article = new TplArticle("{main_mpropdef.nitdoc_id}_lin")
+			lin_article.title = "Inheritance"
+			var lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
+			for mpropdef in lin do
+				lst.add_li mpropdef.tpl_inheritance_item
+			end
+			lin_article.content = lst
+			subarticle.add_child lin_article
+		end
+		article.add_child subarticle
 		return article
 	end
 
 	# MProperty description template
 	fun tpl_mpropdef_article(mpropdef: MPropDef): TplArticle do
 		var article = mpropdef.tpl_article
-		if mpropdef.is_intro then article.content = null
 		article.source_link = tpl_showsource(mpropdef.location)
 		return article
 	end
@@ -1057,10 +1101,14 @@ class NitdocClass
 		var classes = mprop.intro.tpl_css_classes.to_a
 		if not mprops2mdefs.has_key(mprop) then
 			classes.add "inherit"
-			var lnk = new Template
-			lnk.add new TplLabel.with_classes(classes)
-			lnk.add mprop.intro.tpl_link
-			return new TplListItem.with_content(lnk)
+			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
+			var def_url = "{cls_url}#{mprop.nitdoc_id}"
+			var lnk = new TplLink(def_url, mprop.name)
+			if mprop.intro.mdoc != null then lnk.title = mprop.intro.mdoc.short_comment
+			var item = new Template
+			item.add new TplLabel.with_classes(classes)
+			item.add lnk
+			return new TplListItem.with_content(item)
 		end
 		var defs = mprops2mdefs[mprop]
 		if defs.has(mprop.intro) then
@@ -1070,7 +1118,7 @@ class NitdocClass
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add mprop.intro.tpl_anchor
+		lnk.add mprop.tpl_anchor
 		return new TplListItem.with_content(lnk)
 	end
 
@@ -1210,31 +1258,46 @@ class NitdocClass
 				var kind_map = sort_by_kind(mprops)
 
 				# virtual types
-				var elts = kind_map["type"].to_a
-				name_sorter.sort(elts)
-				for elt in elts do
-					var defs = mprops2mdefs[elt].to_a
-					section.add_child tpl_mprop_article(elt, defs)
+				for article in tpl_mproperty_articles(kind_map, "type") do
+					section.add_child article
 				end
-
 				# constructors
-				elts = kind_map["init"].to_a
-				name_sorter.sort(elts)
-				for elt in elts do
-					var defs = mprops2mdefs[elt].to_a
-					section.add_child tpl_mprop_article(elt, defs)
+				for article in tpl_mproperty_articles(kind_map, "init") do
+					section.add_child article
 				end
-
 				# methods
-				elts = kind_map["fun"].to_a
-				name_sorter.sort(elts)
-				for elt in elts do
-					var defs = mprops2mdefs[elt].to_a
-					section.add_child tpl_mprop_article(elt, defs)
+				for article in tpl_mproperty_articles(kind_map, "fun") do
+					section.add_child article
 				end
 				parent.add_child section
 			end
 		end
+	end
+
+	private fun tpl_mproperty_articles(kind_map: Map[String, Set[MProperty]],
+		kind_name: String): Sequence[TplArticle] do
+		var articles = new List[TplArticle]
+		var elts = kind_map[kind_name].to_a
+		name_sorter.sort(elts)
+		for elt in elts do
+			var local_defs = mprops2mdefs[elt]
+			# var all_defs = elt.mpropdefs
+			var all_defs = new HashSet[MPropDef]
+			for local_def in local_defs do
+				all_defs.add local_def
+				var mpropdef = local_def
+				while not mpropdef.is_intro do
+					mpropdef = mpropdef.lookup_next_definition(mainmodule, mpropdef.mclassdef.bound_mtype)
+					all_defs.add mpropdef
+				end
+			end
+			var loc_lin = local_defs.to_a
+			mainmodule.linearize_mpropdefs(loc_lin)
+			var all_lin = all_defs.to_a
+			mainmodule.linearize_mpropdefs(all_lin)
+			articles.add tpl_mprop_article(loc_lin.first, loc_lin, all_lin)
+		end
+		return articles
 	end
 
 	redef fun tpl_content do
@@ -1407,13 +1470,12 @@ class NitdocProperty
 	end
 
 	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title("top", tpl_title)
-		section.subtitle = mproperty.tpl_declaration
-		var article = new TplArticle("comment")
-		if mproperty.intro.mdoc != null then
-			article.content = mproperty.intro.mdoc.tpl_comment
-		end
-		section.add_child article
+		var title = new Template
+		title.add mproperty.nitdoc_name
+		title.add mproperty.intro.tpl_signature
+		var section = new TplSection.with_title("top", title)
+		section.subtitle = mproperty.tpl_namespace
+		section.summary_title = mproperty.nitdoc_name
 		return section
 	end
 

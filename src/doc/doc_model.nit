@@ -482,7 +482,7 @@ redef class MPropDef
 		var tpl = new Template
 		tpl.add mclassdef.tpl_namespace
 		tpl.add "::"
-		tpl.add mproperty.name
+		tpl.add tpl_link
 		return tpl
 	end
 
@@ -498,14 +498,6 @@ redef class MPropDef
 			tpl.content = mdoc.tpl_comment
 		end
 		return tpl
-	end
-
-	redef fun tpl_title do
-		var title = new Template
-		title.add tpl_icon
-		title.add tpl_link
-		title.add tpl_signature
-		return title
 	end
 
 	redef fun tpl_definition do
@@ -547,7 +539,9 @@ redef class MPropDef
 	redef fun tpl_list_item do
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
-		lnk.add tpl_link
+		var anchor = tpl_link
+		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		lnk.add anchor
 		if mdoc != null then
 			lnk.add ": "
 			lnk.add mdoc.short_markdown
@@ -556,6 +550,23 @@ redef class MPropDef
 			lnk.add mproperty.intro.mdoc.short_markdown
 		end
 		return new TplListItem.with_content(lnk)
+	end
+
+	fun tpl_inheritance_item: TplListItem do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
+		lnk.add mclassdef.mmodule.tpl_namespace
+		lnk.add "::"
+		var anchor = mclassdef.tpl_link
+		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		lnk.add anchor
+		if mdoc != null then
+			lnk.add ": "
+			lnk.add mdoc.short_markdown
+		end
+		var li = new TplListItem.with_content(lnk)
+		li.css_classes.add "signature"
+		return li
 	end
 end
 

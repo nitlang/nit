@@ -33,6 +33,15 @@ h3 {
 	margin: 10px 0;
 }
 
+article {
+	padding: 10px 0px;
+}
+
+article.nospace {
+	padding: 0;
+	margin: 0;
+}
+
 /*
  * Sidebar
  */
@@ -178,10 +187,6 @@ h3 {
 	display: none;
 }
 
-#content article {
-	padding: 10px 0px;
-}
-
 #content article:target {
 	padding-left: 10px;
 	margin-left: -10px;
@@ -221,7 +226,7 @@ h3 {
 	vertical-align: middle;
 }
 
-.signature a, .list-definition a {
+.signature a, .list-definition a, .info.signature a {
 	color: #0d8921;
 }
 
