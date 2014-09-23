@@ -398,18 +398,46 @@ interface Decorator
 
 	# Render a line break
 	fun add_line_break(v: MarkdownEmitter) is abstract
+
+	# Generate a new html valid id from a `String`.
+	fun strip_id(txt: String): String is abstract
+
+	# Found headlines during the processing labeled by their ids.
+	fun headlines: ArrayMap[String, HeadLine] is abstract
+end
+
+# Class representing a markdown headline.
+class HeadLine
+	# Unique identifier of this headline.
+	var id: String
+
+	# Text of the headline.
+	var title: String
+
+	# Level of this headline.
+	#
+	# According toe the markdown specification, level must be in `[1..6]`.
+	var level: Int
 end
 
 # `Decorator` that outputs HTML.
 class HTMLDecorator
 	super Decorator
 
+	redef var headlines = new ArrayMap[String, HeadLine]
+
 	redef fun add_ruler(v, block) do v.add "<hr/>\n"
 
 	redef fun add_headline(v, block) do
-		v.add "<h{block.depth}>"
+		# save headline
+		var txt = block.block.first_line.value
+		var id = strip_id(txt)
+		var lvl = block.depth
+		headlines[id] = new HeadLine(id, txt, lvl)
+		# output it
+		v.add "<h{lvl} id=\"{id}\">"
 		v.emit_in block
-		v.add "</h{block.depth}>\n"
+		v.add "</h{lvl}>\n"
 	end
 
 	redef fun add_paragraph(v, block) do
@@ -544,6 +572,35 @@ class HTMLDecorator
 			end
 		end
 	end
+
+	redef fun strip_id(txt) do
+		# strip id
+		var b = new FlatBuffer
+		for c in txt do
+			if c == ' ' then
+				b.add '_'
+			else
+				if not c.is_letter and
+				   not c.is_digit and
+				   not allowed_id_chars.has(c) then continue
+				b.add c
+			end
+		end
+		var res = b.to_s
+		var key = res
+		# check for multiple id definitions
+		if headlines.has_key(key) then
+			var i = 1
+			key = "{res}_{i}"
+			while headlines.has_key(key) do
+				i += 1
+				key = "{res}_{i}"
+			end
+		end
+		return key
+	end
+
+	private var allowed_id_chars: Array[Char] = ['-', '_', ':', '.']
 end
 
 # A block of markdown lines.
@@ -1148,7 +1205,7 @@ class MDLine
 					pos += 1
 				end
 				if pos >= line.value.length then
-					if line.value[pos - 2] == '/' then
+					if pos - 2 >= 0 and line.value[pos - 2] == '/' then
 						tags.pop
 						if tags.is_empty then
 							xml_end_line = line
@@ -1412,8 +1469,6 @@ class LineHeadline
 		var block = v.current_block.split(line.as(not null))
 		var kind = new BlockHeadline(block)
 		block.kind = kind
-		# TODO block ID
-		# block.id = block.first_line.strip_id
 		kind.transform_headline(block)
 		v.current_block.remove_leading_empty_lines
 		v.current_line = v.current_block.first_line
@@ -1432,8 +1487,6 @@ class LineHeadline1
 		var block = v.current_block.split(line.as(not null))
 		var kind = new BlockHeadline(block)
 		kind.depth = 1
-		# TODO block ID
-		# block.id = block.first_line.strip_id
 		kind.transform_headline(block)
 		block.kind = kind
 		v.current_block.remove_leading_empty_lines
@@ -1453,8 +1506,6 @@ class LineHeadline2
 		var block = v.current_block.split(line.as(not null))
 		var kind = new BlockHeadline(block)
 		kind.depth = 2
-		# TODO block ID
-		# block.id = block.first_line.strip_id
 		kind.transform_headline(block)
 		block.kind = kind
 		v.current_block.remove_leading_empty_lines
