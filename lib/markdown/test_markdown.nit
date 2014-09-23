@@ -93,7 +93,10 @@ This is a H1
 This is a H2
 -------------
 """
-		var exp = "<h1>This is a H1</h1>\n<h2>This is a H2</h2>\n"
+		var exp = """
+<h1 id="This_is_a_H1">This is a H1</h1>
+<h2 id="This_is_a_H2">This is a H2</h2>
+"""
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
@@ -105,7 +108,11 @@ This is a H2
 ## This is a H2
 ###### This is a H6
 """
-		var exp = "<h1>This is a H1</h1>\n<h2>This is a H2</h2>\n<h6>This is a H6</h6>\n"
+		var exp = """
+<h1 id="This_is_a_H1">This is a H1</h1>
+<h2 id="This_is_a_H2">This is a H2</h2>
+<h6 id="This_is_a_H6">This is a H6</h6>
+"""
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
@@ -118,7 +125,11 @@ This is a H2
 
 ### This is a H3 ######
 """
-		var exp = "<h1>This is a H1</h1>\n<h2>This is a H2</h2>\n<h3>This is a H3</h3>\n"
+		var exp = """
+<h1 id="This_is_a_H1">This is a H1</h1>
+<h2 id="This_is_a_H2">This is a H2</h2>
+<h3 id="This_is_a_H3">This is a H3</h3>
+"""
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
@@ -450,7 +461,7 @@ end tell
 """
 		var exp = """
 <blockquote>
-<h2>This is a header.</h2>
+<h2 id="This_is_a_header.">This is a header.</h2>
 <ol>
 <li>This is the first list item.</li>
 <li>This is the second list item.</li>
@@ -1951,7 +1962,7 @@ Same thing but with paragraphs:
 """
 
 		var exp = """
-<h2>Unordered</h2>
+<h2 id="Unordered">Unordered</h2>
 <p>Asterisks tight:</p>
 <ul>
 <li>asterisk 1</li>
@@ -1999,7 +2010,7 @@ Same thing but with paragraphs:
 <li><p>Minus 3</p>
 </li>
 </ul>
-<h2>Ordered</h2>
+<h2 id="Ordered">Ordered</h2>
 <p>Tight:</p>
 <ol>
 <li>First</li>
@@ -2041,7 +2052,7 @@ back.</p>
 <li><p>Item 3.</p>
 </li>
 </ol>
-<h2>Nested</h2>
+<h2 id="Nested">Nested</h2>
 <ul>
 <li>Tab<ul>
 <li>Tab<ul>
@@ -2454,5 +2465,46 @@ class TestLine
 		assert subject.count_chars_start('*') == 3
 		subject = new MDLine("text ** ")
 		assert subject.count_chars_start('*') == 0
+	end
+end
+
+class TestHTMLDecorator
+	super TestSuite
+
+	fun test_headlines do
+		var test = """
+# **a**
+## a.a
+### a.a.b
+### a.a.b
+## a.b
+# [b](test)
+## b.a
+### b.a.c
+## b.b
+## b.c
+# c
+"""
+		var proc = new MarkdownProcessor
+		var decorator = proc.emitter.decorator.as(HTMLDecorator)
+		proc.process(test)
+		var res = ""
+		for id, headline in decorator.headlines do
+			res += "{headline.title}:{id}\n"
+		end
+		var exp = """
+**a**:a
+a.a:a.a
+a.a.b:a.a.b
+a.a.b:a.a.b_1
+a.b:a.b
+[b](test):btest
+b.a:b.a
+b.a.c:b.a.c
+b.b:b.b
+b.c:b.c
+c:c
+"""
+		assert res == exp
 	end
 end
