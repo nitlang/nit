@@ -34,4 +34,14 @@ do
 	print "I have {model.mmodules.length} modules"
 	var mclasses = mainmodule.flatten_mclass_hierarchy
 	print "I have also {mclasses.length} classes"
+
+	var meth_cpt = 0
+	for m in mainmodule.in_importation.greaters do
+		for cd in m.mclassdefs do
+			for pd in cd.mpropdefs do
+				if pd isa MMethodDef then meth_cpt += 1
+			end
+		end
+	end
+	print "And {meth_cpt} definitions of methods"
 end
