@@ -1205,7 +1205,7 @@ class MDLine
 					pos += 1
 				end
 				if pos >= line.value.length then
-					if line.value[pos - 2] == '/' then
+					if pos - 2 >= 0 and line.value[pos - 2] == '/' then
 						tags.pop
 						if tags.is_empty then
 							xml_end_line = line
