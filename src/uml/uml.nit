@@ -17,3 +17,4 @@ module uml
 
 import uml_base
 import uml_class
+import uml_module

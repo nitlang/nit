@@ -21,6 +21,13 @@ import uml
 
 redef class ToolContext
 	var umlphase: Phase = new UMLPhase(self, null)
+
+	var opt_gen = new OptionEnum(["class", "package"], "Choose which type of uml diagram to generate", 0, "--diagram")
+
+	redef init do
+		option_context.add_option opt_gen
+		super
+	end
 end
 
 private class UMLPhase
@@ -28,7 +35,11 @@ private class UMLPhase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
 		var d = new UMLModel(mainmodule.model, mainmodule, toolcontext)
-		print d.generate_class_uml.write_to_string
+		if toolcontext.opt_gen.value == 0 then
+			print d.generate_class_uml.write_to_string
+		else if toolcontext.opt_gen.value == 1 then
+			print d.generate_package_uml.write_to_string
+		end
 	end
 end
 
