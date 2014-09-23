@@ -41,7 +41,7 @@ private class ASTPrinterVisitor
 		has_eol = true
 	end
 
-	var last_current: nullable ANode
+	var last_current: nullable ANode = null
 
 	fun write(s: String)
 	do
@@ -109,7 +109,7 @@ end
 redef class ANewExpr
 	redef fun accept_printer(v)
 	do
-		v.write("new {mtype.as(not null)}.{mproperty.as(not null)}")
+		v.write("new {mtype.as(not null)}.{callsite.mproperty}")
 		if not n_args.n_exprs.is_empty then
 			v.write("(")
 			v.indent
@@ -128,12 +128,12 @@ redef class ASendExpr
 	redef fun accept_printer(v)
 	do
 		v.enter_visit(n_expr)
-		v.write(".{mproperty.name}")
+		v.write(".{callsite.mproperty.name}")
 		if not raw_arguments.is_empty then
 			v.write("(")
 			v.indent
 			var is_first = true
-			for a in raw_arguments.as(not null) do
+			for a in raw_arguments do
 				if is_first then is_first = false else v.write(",")
 				v.enter_visit(a)
 			end
