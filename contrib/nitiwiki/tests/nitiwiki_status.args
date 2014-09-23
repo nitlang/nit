@@ -1,0 +1,1 @@
+nitiwiki --config wiki1/config.ini --clean --status
