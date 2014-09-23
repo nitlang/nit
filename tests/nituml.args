@@ -1,0 +1,4 @@
+--diagram package --private ./base_prot_sig2.nit -I ../lib/standard
+--diagram package ./base_prot_sig2.nit -I ../lib/standard
+--diagram class --private ./base_prot_sig2.nit -I ../lib/standard
+--diagram class ./base_prot_sig2.nit -I ../lib/standard

@@ -624,6 +624,14 @@ abstract class Text
 		end
 	end
 
+	# Escape string used in labels for graphviz
+	#
+	#   assert ">><<".escape_to_dot == "\\>\\>\\<\\<"
+	fun escape_to_dot: String
+	do
+		return escape_more_to_c("|\{\}<>")
+	end
+
 	# Flat representation of self
 	fun flatten: FlatText is abstract
 
