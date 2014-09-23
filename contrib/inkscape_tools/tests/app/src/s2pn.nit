@@ -16,14 +16,13 @@
 
 import drawing
 
-class S2pnApp
-	super App
+redef class App
 
 	var img_set: DrawingImages
 
 	init do super
 
-	redef fun init_window
+	redef fun window_created
 	do
 		super
 
@@ -52,6 +51,3 @@ class S2pnApp
 		return false
 	end
 end
-
-var app = new S2pnApp
-app.main_loop
