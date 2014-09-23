@@ -620,14 +620,6 @@ class LRAutomaton
 	end
 end
 
-redef class String
-	# escape string used in labels for graphviz
-	fun escape_to_dot: String
-	do
-		return escape_more_to_c("|\{\}<>")
-	end
-end
-
 private class Generator
 	var out = new Array[String]
 	fun add(s: String) do out.add(s)
