@@ -1,8 +1,10 @@
+all: bins tests
+
 bins:
 	mkdir -p bin
 	../../bin/nitg --dir bin src/svg_to_png_and_nit.nit src/svg_to_icons.nit
 
-tests: test-dino
+tests: test-dino test-app
 
 test-app: bin/svg_to_png_and_nit
 	make -C tests/app
