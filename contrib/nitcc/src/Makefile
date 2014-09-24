@@ -1,6 +1,6 @@
 NITC=../../../bin/nitg
 
-all: nitcc calc
+all: nitcc calc minilang
 
 nitcc_parser_gen: nitcc_parser_gen.nit
 	@echo "*** Compile the nitcc bootstrap parser generator -- level 0"
@@ -41,7 +41,7 @@ clean:
 		*.dot *.out \
 		nitcc_lexer.nit nitcc_parser.nit nitcc_test_parser.nit nitcc_parser_gen \
 		nitcc0 nitcc1 \
-		calc \
+		calc minilang \
 		../examples/*.dot ../examples/*.out ../examples/*_lexer.nit ../examples/*_parser.nit ../examples/*_test_parser.nit \
 		2>/dev/null || true
 
