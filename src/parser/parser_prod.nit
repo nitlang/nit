@@ -5039,20 +5039,41 @@ redef class AOrangeExpr
 end
 redef class AArrayExpr
 	init init_aarrayexpr (
+		n_obra: nullable TObra,
 		n_exprs: nullable AExprs,
+		n_type: nullable AType,
+		n_cbra: nullable TCbra,
 		n_annotations: nullable AAnnotations
 	)
 	do
+		_n_obra = n_obra.as(not null)
+		n_obra.parent = self
 		_n_exprs = n_exprs.as(not null)
 		n_exprs.parent = self
+		_n_type = n_type
+		if n_type != null then n_type.parent = self
+		_n_cbra = n_cbra.as(not null)
+		n_cbra.parent = self
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
+		if _n_obra == old_child then
+			n_obra = new_child.as(TObra)
+			return
+		end
 		if _n_exprs == old_child then
 			n_exprs = new_child.as(AExprs)
+			return
+		end
+		if _n_type == old_child then
+			n_type = new_child.as(nullable AType)
+			return
+		end
+		if _n_cbra == old_child then
+			n_cbra = new_child.as(TCbra)
 			return
 		end
 		if _n_annotations == old_child then
@@ -5061,9 +5082,24 @@ redef class AArrayExpr
 		end
 	end
 
+	redef fun n_obra=(node)
+	do
+		_n_obra = node
+		node.parent = self
+	end
 	redef fun n_exprs=(node)
 	do
 		_n_exprs = node
+		node.parent = self
+	end
+	redef fun n_type=(node)
+	do
+		_n_type = node
+		if node != null then node.parent = self
+	end
+	redef fun n_cbra=(node)
+	do
+		_n_cbra = node
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
@@ -5075,7 +5111,10 @@ redef class AArrayExpr
 
 	redef fun visit_all(v: Visitor)
 	do
+		v.enter_visit(_n_obra)
 		v.enter_visit(_n_exprs)
+		v.enter_visit(_n_type)
+		v.enter_visit(_n_cbra)
 		v.enter_visit(_n_annotations)
 	end
 end

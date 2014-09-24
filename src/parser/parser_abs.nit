@@ -907,7 +907,10 @@ class AOrangeExpr
 end
 class AArrayExpr
 	super AExpr
+	var n_obra: TObra is writable, noinit
 	var n_exprs: AExprs is writable, noinit
+	var n_type: nullable AType = null is writable
+	var n_cbra: TCbra is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class ASelfExpr
