@@ -1097,18 +1097,36 @@ redef class AArrayExpr
 
 	redef fun accept_typing(v)
 	do
+		var mtype: nullable MType = null
+		var ntype = self.n_type
+		if ntype != null then
+			mtype = v.resolve_mtype(ntype)
+			if mtype == null then return # Skip error
+		end
 		var mtypes = new Array[nullable MType]
+		var useless = false
 		for e in self.n_exprs.n_exprs do
 			var t = v.visit_expr(e)
 			if t == null then
 				return # Skip error
 			end
-			mtypes.add(t)
+			if mtype != null then
+				if v.check_subtype(e, t, mtype) == null then return # Skip error
+				if t == mtype then useless = true
+			else
+				mtypes.add(t)
+			end
 		end
-		var mtype = v.merge_types(self, mtypes)
+		if mtype == null then
+			mtype = v.merge_types(self, mtypes)
+		end
 		if mtype == null then
 			v.error(self, "Type Error: ambiguous array type {mtypes.join(" ")}")
 			return
+		end
+		if useless then
+			assert ntype != null
+			v.modelbuilder.warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
 		end
 		var mclass = v.get_mclass(self, "Array")
 		if mclass == null then return # Forward error
