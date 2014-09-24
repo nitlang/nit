@@ -1,0 +1,5 @@
+tests/app/assets/
+tests/app/bin/
+tests/app/res2/
+tests/app/src/drawing.nit
+tests/dino/
