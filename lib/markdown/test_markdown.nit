@@ -2394,51 +2394,51 @@ class TestLine
 	fun test_line_type do
 		var v = new MarkdownProcessor
 		subject = new MDLine("")
-		assert subject.kind(v) isa LineEmpty
+		assert v.line_kind(subject) isa LineEmpty
 		subject = new MDLine("    ")
-		assert subject.kind(v) isa LineEmpty
+		assert v.line_kind(subject) isa LineEmpty
 		subject = new MDLine("text   ")
-		assert subject.kind(v) isa LineOther
+		assert v.line_kind(subject) isa LineOther
 		subject = new MDLine("  # Title")
-		assert subject.kind(v) isa LineHeadline
+		assert v.line_kind(subject) isa LineHeadline
 		subject = new MDLine("  ### Title")
-		assert subject.kind(v) isa LineHeadline
+		assert v.line_kind(subject) isa LineHeadline
 		subject = new MDLine("    code")
-		assert subject.kind(v) isa LineCode
+		assert v.line_kind(subject) isa LineCode
 		subject = new MDLine("  ~~~")
-		assert subject.kind(v) isa LineFence
+		assert v.line_kind(subject) isa LineFence
 		subject = new MDLine("  ```")
-		assert subject.kind(v) isa LineFence
+		assert v.line_kind(subject) isa LineFence
 		subject = new MDLine("   Title  ")
 		subject.next = new MDLine("== ")
-		assert subject.kind(v) isa LineHeadline1
+		assert v.line_kind(subject) isa LineHeadline1
 		subject = new MDLine("   Title  ")
 		subject.next = new MDLine("-- ")
-		assert subject.kind(v) isa LineHeadline2
+		assert v.line_kind(subject) isa LineHeadline2
 		subject = new MDLine("  *    *   * ")
-		assert subject.kind(v) isa LineHR
+		assert v.line_kind(subject) isa LineHR
 		subject = new MDLine("  *** ")
-		assert subject.kind(v) isa LineHR
+		assert v.line_kind(subject) isa LineHR
 		subject = new MDLine("- -- ")
-		assert subject.kind(v) isa LineHR
+		assert v.line_kind(subject) isa LineHR
 		subject = new MDLine("--------- ")
-		assert subject.kind(v) isa LineHR
+		assert v.line_kind(subject) isa LineHR
 		subject = new MDLine(" >")
-		assert subject.kind(v) isa LineBlockquote
+		assert v.line_kind(subject) isa LineBlockquote
 		subject = new MDLine("<p></p>")
-		assert subject.kind(v) isa LineXML
+		assert v.line_kind(subject) isa LineXML
 		subject = new MDLine("<p>")
-		assert subject.kind(v) isa LineOther
+		assert v.line_kind(subject) isa LineOther
 		subject = new MDLine("  * foo")
-		assert subject.kind(v) isa LineUList
+		assert v.line_kind(subject) isa LineUList
 		subject = new MDLine("- foo")
-		assert subject.kind(v) isa LineUList
+		assert v.line_kind(subject) isa LineUList
 		subject = new MDLine("+ foo")
-		assert subject.kind(v) isa LineUList
+		assert v.line_kind(subject) isa LineUList
 		subject = new MDLine("1. foo")
-		assert subject.kind(v) isa LineOList
+		assert v.line_kind(subject) isa LineOList
 		subject = new MDLine("   11111. foo")
-		assert subject.kind(v) isa LineOList
+		assert v.line_kind(subject) isa LineOList
 	end
 
 	fun test_count_chars do
