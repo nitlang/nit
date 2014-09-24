@@ -51,10 +51,10 @@ redef class App
 
 	# Load an Image assets
 	# Crashes if file not found or not an image
-	fun load_image( id: String ): Image
+	fun load_image( id: String ): Opengles1Image
 	do
 		var asset = load_asset( id )
-		if asset isa Image then
+		if asset isa Opengles1Image then
 			return asset
 		else
 			log_error( "asset <{id}> is not an image." )

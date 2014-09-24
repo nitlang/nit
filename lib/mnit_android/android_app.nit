@@ -206,8 +206,6 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 end
 
 redef class App
-	redef type D: Opengles1Display
-
 	redef fun init_window
 	do
 		set_as_input_handler native_app_glue
