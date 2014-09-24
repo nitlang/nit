@@ -205,7 +205,7 @@ for drawing in drawings do
 	# Nit class
 	var nit_class_name = drawing_name.chars.first.to_s.to_upper + drawing_name.substring_from(1) + "Images"
 	var nit_src = new ImageSetSrc(nit_class_name)
-	nit_src.attributes.add "\tprivate var main_image: Image\n"
+	nit_src.attributes.add "\tprivate var main_image: Image is noinit\n"
 	nit_src.load_exprs.add "\t\tmain_image = app.load_image(\"images/{drawing_name}.png\")\n"
 
 	# Sort images by name, it prevents Array errors and looks better
@@ -234,7 +234,7 @@ for drawing in drawings do
 			nit_src.load_exprs.add "\t\t{nit_name}.add(main_image.subimage({x}, {y}, {w}, {h}))\n"
 		else
 			# Single image
-			nit_src.attributes.add "\tvar {nit_name}: Image\n"
+			nit_src.attributes.add "\tvar {nit_name}: Image is noinit\n"
 			nit_src.load_exprs.add "\t\t{nit_name} = main_image.subimage({x}, {y}, {w}, {h})\n"
 		end
 	end
