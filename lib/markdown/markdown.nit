@@ -69,6 +69,26 @@ class MarkdownProcessor
 	#		end
 	#		```
 	#
+	# * Code blocks meta
+	#
+	#   If you want to use syntax highlighting tools, most of them need to know what kind
+	#   of language they are highlighting.
+	#   You can add an optional language identifier after the fence declaration to output
+	#   it in the HTML render.
+	#
+	#		```nit
+	#		import markdown
+	#
+	#		print "# Hello World!".md_to_html
+	#		```
+	#
+	#   Becomes
+	#
+	#		<pre class="nit"><code>import markdown
+	#
+	#		print "Hello World!".md_to_html
+	#		</code></pre>
+	#
 	# * Underscores (Emphasis)
 	#
 	#   Underscores in the middle of a word like:
@@ -667,7 +687,11 @@ class HTMLDecorator
 	end
 
 	redef fun add_code(v, block) do
-		v.add "<pre><code>"
+		if block isa BlockFence and block.meta != null then
+			v.add "<pre class=\"{block.meta.to_s}\"><code>"
+		else
+			v.add "<pre><code>"
+		end
 		v.emit_in block
 		v.add "</code></pre>\n"
 	end
@@ -1104,6 +1128,9 @@ end
 # this class is only used for typing purposes.
 class BlockFence
 	super BlockCode
+
+	# Any string found after fence token.
+	var meta: nullable Text
 
 	# Fence code lines start at 0 spaces.
 	redef var line_start = 0
@@ -1624,7 +1651,8 @@ class LineFence
 		else
 			block = v.current_block.split(v.current_block.last_line.as(not null))
 		end
-		block.kind = new BlockFence(block)
+		var meta = block.first_line.value.meta_from_fence
+		block.kind = new BlockFence(block, meta)
 		block.first_line.clear
 		var last = block.last_line
 		if last != null and v.line_kind(last) isa LineFence then
@@ -2361,6 +2389,18 @@ redef class Text
 		end
 		out.add '\\'
 		return pos
+	end
+
+	# Extract string found at end of fence opening.
+	private fun meta_from_fence: nullable Text do
+		for i in [0..chars.length[ do
+			var c = chars[i]
+			print c
+			if c != ' ' and c != '`' and c != '~' then
+				return substring_from(i).trim
+			end
+		end
+		return null
 	end
 
 	# Is `self` an unsafe HTML element?

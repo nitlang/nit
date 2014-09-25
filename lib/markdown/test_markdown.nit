@@ -567,6 +567,22 @@ Here is an example of AppleScript:
 		assert res == exp
 	end
 
+	fun test_process_code_ext5 do
+		var processor = new MarkdownProcessor
+		processor.ext_mode = true
+		var test = """
+```nit
+print "Hello World!"
+```
+"""
+		var exp = """
+<pre class="nit"><code>print "Hello World!"
+</code></pre>
+"""
+		var res = processor.process(test).write_to_string
+		assert res == exp
+	end
+
 	fun test_process_nesting1 do
 		var test = """
 > ## This is a header.
