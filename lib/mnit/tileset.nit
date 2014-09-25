@@ -51,7 +51,7 @@ class TileSet
 	var nb_rows: Int
 
 	# Cache for images of tiles
-	private var subimages = new Array[Image]
+	var subimages = new Array[Image]
 
 	# The subimage of given tile
 	# Aborts if x or y are out of bound
@@ -99,7 +99,7 @@ end
 redef class Display
 	# Blit the text using a monospace bitmap font
 	# '\n' are rendered as carriage return
-	fun text(text: String, font: TileSetFont, x, y: Int)
+	fun text(text: String, font: TileSetFont, x, y: Numeric)
 	do
 		var cx = x
 		var cy = y

@@ -155,12 +155,12 @@ class AndroidPointerEvent
 
 	redef fun x: Float do return extern_x(motion_event.inner_event, pointer_id)
 	private fun extern_x(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
-		return ((int) AMotionEvent_getX(motion_event, pointer_id) * mnit_zoom);
+		return ((int) AMotionEvent_getX(motion_event, pointer_id));
 	`}
 
 	redef fun y: Float do return extern_y(motion_event.inner_event, pointer_id)
 	private fun extern_y(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
-		return ((int) AMotionEvent_getY(motion_event, pointer_id) * mnit_zoom);
+		return ((int) AMotionEvent_getY(motion_event, pointer_id));
 	`}
 
 	fun pressure: Float do return extern_pressure(motion_event.inner_event, pointer_id)
@@ -191,7 +191,7 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 		return AKeyEvent_getKeyCode(recv);
 	`}
 
-	fun key_char: Char is extern `{
+	redef fun to_c `{
 		int code = AKeyEvent_getKeyCode(recv);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;
@@ -203,6 +203,9 @@ extern class AndroidKeyEvent in "C" `{AInputEvent *`}
 	fun is_back_key: Bool do return key_code == 4
 	fun is_menu_key: Bool do return key_code == 82
 	fun is_search_key: Bool do return key_code == 84
+
+	fun is_volume_up: Bool do return key_code == 24
+	fun is_volume_down: Bool do return key_code == 25
 end
 
 redef class App

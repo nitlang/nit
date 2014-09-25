@@ -172,7 +172,8 @@ extern class SDLDrawable `{SDL_Surface*`}
 
 	redef type I: SDLImage
 
-	redef fun blit(img, x, y) `{
+	redef fun blit(img, x, y) do native_blit(img, x.to_i, y.to_i)
+	fun native_blit(img: I, x, y: Int) `{
 		SDL_Rect dst;
 		dst.x = x;
 		dst.y = y;

@@ -268,7 +268,9 @@ class Opengles1Display
 		glFrontFace( GL_CW );
 	`}
 
-	redef fun blit( image, x, y ) is extern  `{
+	redef fun blit(image, x, y) do native_blit(image, x.to_f, y.to_f)
+
+	private fun native_blit(image: Opengles1Image, x, y: Float)  `{
 		GLfloat texture_coord[4][2] =
 		{
 			{image->src_xo, image->src_yi},
@@ -309,14 +311,16 @@ class Opengles1Display
 		}
 	`}
 
-    redef fun blit_centered( img, x, y )
+    redef fun blit_centered(img, x, y)
     do
-		x = x - img.center_x
-		y = y - img.center_y
-		blit( img, x, y )
+		x = x.sub(img.center_x)
+		y = y.sub(img.center_y)
+		blit(img, x, y)
     end
 
-	redef fun blit_rotated( image, x, y, angle ) is extern  `{
+	redef fun blit_rotated(image, x, y, angle) do native_blit_rotated(image, x.to_f, y.to_f, angle)
+
+	private fun native_blit_rotated(image: Opengles1Image, x, y, angle: Float) `{
 		GLfloat texture_coord[4][2] =
 		{
 			{image->src_xo, image->src_yi},
@@ -358,7 +362,14 @@ class Opengles1Display
 	`}
 
 	# a = top left, b = bottom left, c = bottom right, d = top right
-	redef fun blit_stretched( image, ax, ay, bx, by, cx, cy, dx, dy ) is extern  `{
+	redef fun blit_stretched(image, ax, ay, bx, by, cx, cy, dx, dy)
+	do
+		native_blit_stretched(image,
+			ax.to_f, ay.to_f, bx.to_f, by.to_f,
+			cx.to_f, cy.to_f, dx.to_f, dy.to_f)
+	end
+
+	private fun native_blit_stretched(image: I, ax, ay, bx, by, cx, cy, dx, dy: Float) `{
 		GLfloat texture_coord[4][2] =
 		{
 			{image->src_xo, image->src_yi},
