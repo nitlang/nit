@@ -189,7 +189,7 @@ class MarkdownProcessor
 		current_line = line
 		current_block = root
 		while current_line != null do
-			current_line.kind(self).process(self)
+			line_kind(current_line.as(not null)).process(self)
 		end
 		self.in_list = old_mode
 		self.current_block = old_root
@@ -206,6 +206,61 @@ class MarkdownProcessor
 	# Is the current recursion in list mode?
 	# Used when visiting blocks with `recurse`
 	private var in_list = false
+
+	# The type of line.
+	# see: `md_line_*`
+	fun line_kind(md: MDLine): Line do
+		var value = md.value
+		var leading = md.leading
+		var trailing = md.trailing
+		if md.is_empty then return new LineEmpty
+		if md.leading > 3 then return new LineCode
+		if value[leading] == '#' then return new LineHeadline
+		if value[leading] == '>' then return new LineBlockquote
+
+		if value.length - leading - trailing > 2 then
+			if value[leading] == '`' and md.count_chars_start('`') >= 3 then
+				return new LineFence
+			end
+			if value[leading] == '~' and md.count_chars_start('~') >= 3 then
+				return new LineFence
+			end
+		end
+
+		if value.length - leading - trailing > 2 and
+		   (value[leading] == '*' or value[leading] == '-' or value[leading] == '_') then
+		   if md.count_chars(value[leading]) >= 3 then
+				return new LineHR
+		   end
+		end
+
+		if value.length - leading >= 2 and value[leading + 1] == ' ' then
+			var c = value[leading]
+			if c == '*' or c == '-' or c == '+' then return new LineUList
+		end
+
+		if value.length - leading >= 3 and value[leading].is_digit then
+			var i = leading + 1
+			while i < value.length and value[i].is_digit do i += 1
+			if i + 1 < value.length and value[i] == '.' and value[i + 1] == ' ' then
+				return new LineOList
+			end
+		end
+
+		if value[leading] == '<' and md.check_html then return new LineXML
+
+		var next = md.next
+		if next != null and not next.is_empty then
+			if next.count_chars('=') > 0 then
+				return new LineHeadline1
+			end
+			if next.count_chars('-') > 0 then
+				return new LineHeadline2
+			end
+		end
+		return new LineOther
+	end
+
 end
 
 # Emit output corresponding to blocks content.
@@ -332,6 +387,7 @@ class LinkRef
 	# Is the link an abreviation?
 	var is_abbrev = false
 
+	# Create a link with a title.
 	init with_title(link: String, title: nullable String) do
 		self.link = link
 		self.title = title
@@ -746,7 +802,7 @@ class MDBlock
 		var line = first_line
 		while line != null do
 			if not line.is_empty then
-				var kind = line.kind(v)
+				var kind = v.line_kind(line)
 				if kind isa LineList then
 					line.value = kind.extract_value(line)
 				else
@@ -859,13 +915,18 @@ end
 class BlockCode
 	super Block
 
+	# Number of char to skip at the beginning of the line.
+	#
+	# Block code lines start at 4 spaces.
+	protected var line_start = 4
+
 	redef fun emit(v) do v.decorator.add_code(v, self)
 
 	redef fun emit_lines(v) do
 		var line = block.first_line
 		while line != null do
 			if not line.is_empty then
-				v.decorator.append_code(v, line.value, 4, line.value.length)
+				v.decorator.append_code(v, line.value, line_start, line.value.length)
 			end
 			v.addn
 			line = line.next
@@ -879,6 +940,9 @@ end
 # this class is only used for typing purposes.
 class BlockFence
 	super BlockCode
+
+	# Fence code lines start at 0 spaces.
+	redef var line_start = 0
 end
 
 # A markdown headline.
@@ -935,7 +999,7 @@ abstract class BlockList
 		var line = block.first_line
 		line = line.next
 		while line != null do
-			var t = line.kind(v)
+			var t = v.line_kind(line)
 			if t isa LineList or
 			   (not line.is_empty and (line.prev_empty and line.leading == 0 and
 			   not (t isa LineList))) then
@@ -1047,6 +1111,7 @@ class MDLine
 	# Is the next line empty?
 	var next_empty: Bool = false is writable
 
+	# Initialize a new MDLine from its string value
 	init(value: String) do
 		self.value = value
 		self.leading = process_leading
@@ -1064,57 +1129,6 @@ class MDLine
 		is_empty = true
 		if prev != null then prev.next_empty = true
 		if next != null then next.prev_empty = true
-	end
-
-	# The type of line.
-	# see `md_line_*`
-	fun kind(v: MarkdownProcessor): Line do
-		var value = self.value
-		if is_empty then return new LineEmpty
-		if leading > 3 then return new LineCode
-		if value[leading] == '#' then return new LineHeadline
-		if value[leading] == '>' then return new LineBlockquote
-
-		if value.length - leading - trailing > 2 then
-			if value[leading] == '`' and count_chars_start('`') >= 3 then
-				return new LineFence
-			end
-			if value[leading] == '~' and count_chars_start('~') >= 3 then
-				return new LineFence
-			end
-		end
-
-		if value.length - leading - trailing > 2 and
-		   (value[leading] == '*' or value[leading] == '-' or value[leading] == '_') then
-		   if count_chars(value[leading]) >= 3 then
-				return new LineHR
-		   end
-		end
-
-		if value.length - leading >= 2 and value[leading + 1] == ' ' then
-			var c = value[leading]
-			if c == '*' or c == '-' or c == '+' then return new LineUList
-		end
-
-		if value.length - leading >= 3 and value[leading].is_digit then
-			var i = leading + 1
-			while i < value.length and value[i].is_digit do i += 1
-			if i + 1 < value.length and value[i] == '.' and value[i + 1] == ' ' then
-				return new LineOList
-			end
-		end
-
-		if value[leading] == '<' and check_html then return new LineXML
-
-		if next != null and not next.is_empty then
-			if next.count_chars('=') > 0 then
-				return new LineHeadline1
-			end
-			if next.count_chars('-') > 0 then
-				return new LineHeadline2
-			end
-		end
-		return new LineOther
 	end
 
 	# Number or leading spaces on this line.
@@ -1304,7 +1318,7 @@ class LineOther
 		# go to block end
 		var was_empty = line.prev_empty
 		while line != null and not line.is_empty do
-			var t = line.kind(v)
+			var t = v.line_kind(line)
 			if v.in_list and t isa LineList then
 				break
 			end
@@ -1318,7 +1332,6 @@ class LineOther
 			line = line.next
 		end
 		# build block
-		var bk: Block
 		if line != null and not line.is_empty then
 			var block = v.current_block.split(line.prev.as(not null))
 			if v.in_list and not was_empty then
@@ -1352,7 +1365,7 @@ class LineCode
 	redef fun process(v) do
 		var line = v.current_line
 		# lookup block end
-		while line != null and (line.is_empty or line.kind(v) isa LineCode) do
+		while line != null and (line.is_empty or v.line_kind(line) isa LineCode) do
 			line = line.next
 		end
 		# split at block end line
@@ -1393,7 +1406,7 @@ class LineBlockquote
 		while line != null do
 			if not line.is_empty and (line.prev_empty and
 			   line.leading == 0 and
-			   not line.kind(v) isa LineBlockquote) then break
+			   not v.line_kind(line) isa LineBlockquote) then break
 			line = line.next
 		end
 		# build sub block
@@ -1435,7 +1448,7 @@ class LineFence
 		# go to fence end
 		var line = v.current_line.next
 		while line != null do
-			if line.kind(v) isa LineFence then break
+			if v.line_kind(line) isa LineFence then break
 			line = line.next
 		end
 		if line != null then
@@ -1450,7 +1463,8 @@ class LineFence
 		end
 		block.kind = new BlockFence(block)
 		block.first_line.clear
-		if block.last_line.kind(v) isa LineFence then
+		var last = block.last_line
+		if last != null and v.line_kind(last) isa LineFence then
 			block.last_line.clear
 		end
 		block.remove_surrounding_empty_lines
@@ -1522,7 +1536,7 @@ class LineList
 		var line = v.current_line
 		# go to list end
 		while line != null do
-			var t = line.kind(v)
+			var t = v.line_kind(line)
 			if not line.is_empty and (line.prev_empty and line.leading == 0 and
 			   not t isa LineList) then break
 			line = line.next
@@ -1555,6 +1569,7 @@ class LineList
 	# Create a new block kind based on this line.
 	protected fun block_kind(block: MDBlock): BlockList is abstract
 
+	# Extract string value from `MDLine`.
 	protected fun extract_value(line: MDLine): String is abstract
 end
 
@@ -1957,7 +1972,6 @@ redef class Text
 		var c0: Char
 		var c1: Char
 		var c2: Char
-		var c3: Char
 
 		if pos > 0 then
 			c0 = self[pos - 1]
@@ -1975,11 +1989,6 @@ redef class Text
 			c2 = self[pos + 2]
 		else
 			c2 = ' '
-		end
-		if pos + 3 < length then
-			c3 = self[pos + 3]
-		else
-			c3 = ' '
 		end
 
 		if c == '*' then
