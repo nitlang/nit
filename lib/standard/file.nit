@@ -348,6 +348,22 @@ redef class String
 		return "{self}/{path}"
 	end
 
+	# Alias for `join_path`
+	#
+	#     assert "hello" / "world"      ==  "hello/world"
+	#     assert "hel/lo" / "wor/ld"    ==  "hel/lo/wor/ld"
+	#     assert "" / "world"           ==  "world"
+	#     assert "/hello" / "/world"    ==  "/world"
+	#
+	# This operator is quite useful for chaining changes of path.
+	# The next one being relative to the previous one.
+	#
+	#     var a = "foo"
+	#     var b = "/bar"
+	#     var c = "baz/foobar"
+	#     assert a/b/c == "/bar/baz/foobar"
+	fun /(path: String): String do return join_path(path)
+
 	# Create a directory (and all intermediate directories if needed)
 	fun mkdir
 	do
