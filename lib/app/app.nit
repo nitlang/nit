@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2011-2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,35 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_app
+# app.nit is a framework to create cross-platform applications
+#
+# The features offered by this modules are common to all platforms, but
+# may not be available on all devices.
+module app
 
-import mnit
-import sdl
-import linux_opengles1
-import linux
-
-in "C" `{
-	#include <EGL/egl.h>
-`}
-
-redef class App
-	redef type D: Opengles1Display
-	redef type I: Opengles1Image
-
-	redef fun setup
-	do
-		if "NIT_TESTING".environ == "true" then exit 0
-		display = new Opengles1Display
-
-		super
-
-		window_created
-	end
-
-	redef fun generate_input
-	do
-		for event in display.sdl_display.events do
-			input( event )
-		end
-	end
-end
+import app_base

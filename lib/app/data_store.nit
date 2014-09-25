@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,35 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_app
+# Simple data storage services
+#
+# The implementation varies per platform.
+module data_store
 
-import mnit
-import sdl
-import linux_opengles1
-import linux
-
-in "C" `{
-	#include <EGL/egl.h>
-`}
+import app_base
+import serialization
 
 redef class App
-	redef type D: Opengles1Display
-	redef type I: Opengles1Image
+	# Services to store and load data
+	fun data_store: DataStore is abstract
+end
 
-	redef fun setup
-	do
-		if "NIT_TESTING".environ == "true" then exit 0
-		display = new Opengles1Display
+# Simple data storage facility
+interface DataStore
 
-		super
+	# Get the object stored at `key`, or null if nothing is available
+	fun [](key: String): nullable Object is abstract
 
-		window_created
-	end
-
-	redef fun generate_input
-	do
-		for event in display.sdl_display.events do
-			input( event )
-		end
-	end
+	# Store `value` at `key`
+	fun []=(key: String, value: Serializable) is abstract
 end

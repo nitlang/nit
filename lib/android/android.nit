@@ -28,6 +28,7 @@ import platform
 import native_app_glue
 import dalvik
 private import log
+private import android_data_store
 
 # Uses Android logs to print everything
 redef fun print(text) do log_write(priority_info, app.log_prefix.to_cstring, text.to_s.to_cstring)

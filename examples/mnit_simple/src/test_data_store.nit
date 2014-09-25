@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,35 +14,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_app
+# Test for the shared_preferences module of App.nit framework
+module test_data_store
 
-import mnit
-import sdl
-import linux_opengles1
-import linux
-
-in "C" `{
-	#include <EGL/egl.h>
-`}
+import simple
+import app::data_store
 
 redef class App
-	redef type D: Opengles1Display
-	redef type I: Opengles1Image
-
-	redef fun setup
+	redef fun window_created
 	do
-		if "NIT_TESTING".environ == "true" then exit 0
-		display = new Opengles1Display
-
 		super
 
-		window_created
+		# load colors from data store
+		var r = data_store["r"]
+		if r isa Float then
+			self.r = r
+			print "r {r}"
+		else assert r == null
+
+		var g = data_store["g"]
+		if g isa Float then
+			self.g = g
+			print "g {g}"
+		else assert g == null
 	end
 
-	redef fun generate_input
+	redef fun input(ie)
 	do
-		for event in display.sdl_display.events do
-			input( event )
+		if ie isa PointerEvent then
+			# save color for next execution
+			data_store["r"] = r
+			data_store["g"] = g
 		end
+
+		return super
 	end
 end
