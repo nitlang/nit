@@ -32,6 +32,7 @@ import model
 import cfg
 import flow_analysis
 intrude import standard::stream
+import cpp
 
 in "C++" `{
 	#include <bind.h>

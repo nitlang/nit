@@ -77,7 +77,7 @@ THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 NACL_SDK_ROOT ?= $(abspath $(dir $(THIS_MAKEFILE))../../../..)
 
 # Project Build flags
-WARNINGS := -Wall -pedantic -Wno-long-long -Wno-unused-value -Wno-unused-label -Wno-duplicate-decl-specifier -Wno-switch -Wno-embedded-directive
+WARNINGS := -Wno-long-long -Wno-unused-value -Wno-unused-label -Wno-duplicate-decl-specifier -Wno-switch -Wno-embedded-directive
 CXXFLAGS := -pthread $(WARNINGS)
 
 CXXFLAGS += -g -O0 # Debug

@@ -146,7 +146,7 @@ class Pnacl_nit
 			# We need a model to collect stufs
 			var model = new Model
 			# An a model builder to parse files
-			var modelbuilder = new ModelBuilder(model, toolcontext.as(not null))
+			var modelbuilder = new ModelBuilder(model, toolcontext)
 
 			var arguments = toolcontext.option_context.rest
 			var progname = arguments.first
@@ -169,8 +169,8 @@ class Pnacl_nit
 				mainmodule.set_imported_mmodules(mmodules)
 			end
 
-			var self_mm = mainmodule.as(not null)
-			var self_args = arguments.as(not null)
+			var self_mm = mainmodule
+			var self_args = arguments
 
 			if toolcontext.opt_debugger_autorun.value then
 				modelbuilder.run_debugger_autorun(self_mm, self_args)

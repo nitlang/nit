@@ -49,7 +49,7 @@ redef class Text
 
 	# Return an `Array` of the non-empty lines in `self`
 	#
-	#     assert ["a", "asdf", "", "  ", "&nbsp;", "b"].to_clean_lines == ["a", "asdf", "b"]
+	#     assert ["a", "asdf", "", "  ", "&nbsp;", "b"].join("\n").to_clean_lines == ["a", "asdf", "b"]
 	fun to_clean_lines: Array[String]
 	do
 		var orig_lines = split_with("\n")

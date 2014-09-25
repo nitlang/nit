@@ -1489,14 +1489,16 @@ redef class ASuperExpr
 
 	redef fun accept_typing(v)
 	do
-		var recvtype = v.anchor
+		var anchor = v.anchor
+		assert anchor != null
+		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mproperty = v.mpropdef.mproperty
 		if not mproperty isa MMethod then
 			v.error(self, "Error: super only usable in a method")
 			return
 		end
-		var superprops = mproperty.lookup_super_definitions(v.mmodule, recvtype)
+		var superprops = mproperty.lookup_super_definitions(v.mmodule, anchor)
 		if superprops.length == 0 then
 			if mproperty.is_init and v.mpropdef.is_intro then
 				process_superinit(v)
@@ -1522,14 +1524,16 @@ redef class ASuperExpr
 
 	private fun process_superinit(v: TypeVisitor)
 	do
-		var recvtype = v.anchor
+		var anchor = v.anchor
+		assert anchor != null
+		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mpropdef = v.mpropdef
 		assert mpropdef isa MMethodDef
 		var mproperty = mpropdef.mproperty
 		var superprop: nullable MMethodDef = null
 		for msupertype in mpropdef.mclassdef.supertypes do
-			msupertype = msupertype.anchor_to(v.mmodule, recvtype)
+			msupertype = msupertype.anchor_to(v.mmodule, anchor)
 			var errcount = v.modelbuilder.toolcontext.error_count
 			var candidate = v.try_get_mproperty_by_name2(self, msupertype, mproperty.name).as(nullable MMethod)
 			if candidate == null then
@@ -1543,7 +1547,7 @@ redef class ASuperExpr
 				v.error(self, "Error: conflicting super constructor to call for {mproperty}: {candidate.full_name}, {superprop.mproperty.full_name}")
 				return
 			end
-			var candidatedefs = candidate.lookup_definitions(v.mmodule, recvtype)
+			var candidatedefs = candidate.lookup_definitions(v.mmodule, anchor)
 			if superprop != null and superprop.mproperty == candidate then
 				if superprop == candidatedefs.first then continue
 				candidatedefs.add(superprop)
