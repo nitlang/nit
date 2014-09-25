@@ -21,13 +21,11 @@ import github_api
 
 # The proprieties introduced by this redef are to be used only on HashMap
 # representing a Github repository.
-#
-# REQUIRE `assert self isa HashMap[String, nullable Object]`
-# REQUIRE `for v in self.values do assert v isa Int
 redef class HashMap[K, V]
 	# The repository has at least 50% Java code
 	fun has_lots_of_java: Bool
 	do
+		assert self isa HashMap[String, nullable Object]
 		var java_count = 0
 		if keys.has("Java") then java_count = self["Java"].as(Int)
 
@@ -35,7 +33,6 @@ redef class HashMap[K, V]
 
 		var total = 0
 		for k, v in self do
-			assert k isa String
 			assert v isa Int
 			total += v
 		end
@@ -46,6 +43,7 @@ redef class HashMap[K, V]
 	# The repository has at least 100 lines of C code
 	fun has_some_c: Bool
 	do
+		assert self isa HashMap[String, nullable Object]
 		var c_count = 0
 		if keys.has("C") then c_count = self["C"].as(Int)
 		return c_count > 100
