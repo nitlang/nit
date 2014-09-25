@@ -1332,7 +1332,6 @@ class LineOther
 			line = line.next
 		end
 		# build block
-		var bk: Block
 		if line != null and not line.is_empty then
 			var block = v.current_block.split(line.prev.as(not null))
 			if v.in_list and not was_empty then
@@ -1973,7 +1972,6 @@ redef class Text
 		var c0: Char
 		var c1: Char
 		var c2: Char
-		var c3: Char
 
 		if pos > 0 then
 			c0 = self[pos - 1]
@@ -1991,11 +1989,6 @@ redef class Text
 			c2 = self[pos + 2]
 		else
 			c2 = ' '
-		end
-		if pos + 3 < length then
-			c3 = self[pos + 3]
-		else
-			c3 = ' '
 		end
 
 		if c == '*' then
