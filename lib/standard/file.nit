@@ -364,6 +364,70 @@ redef class String
 	#     assert a/b/c == "/bar/baz/foobar"
 	fun /(path: String): String do return join_path(path)
 
+	# Returns the relative path needed to go from `self` to `dest`.
+	#
+	#     assert "/foo/bar".relpath("/foo/baz") == "../baz"
+	#     assert "/foo/bar".relpath("/baz/bar") == "../../baz/bar"
+	#
+	# If `self` or `dest` is relative, they are considered relatively to `getcwd`.
+	#
+	# In some cases, the result is still independent of the current directory:
+	#
+	#     assert "foo/bar".relpath("..") == "../../.."
+	#
+	# In other cases, parts of the current directory may be exhibited:
+	#
+	#     var p = "../foo/bar".relpath("baz")
+	#     var c = getcwd.basename("")
+	#     assert p == "../../{c}/baz"
+	#
+	# For path resolution independent of the current directory (eg. for paths in URL),
+	# or to use an other starting directory than the current directory,
+	# just force absolute paths:
+	#
+	#     var start = "/a/b/c/d"
+	#     var p2 = (start/"../foo/bar").relpath(start/"baz")
+	#     assert p2 == "../../d/baz"
+	#
+	#
+	# Neither `self` or `dest` has to be real paths or to exist in directories since
+	# the resolution is only done with string manipulations and without any access to
+	# the underlying file system.
+	#
+	# If `self` and `dest` are the same directory, the empty string is returned:
+	#
+	#     assert "foo".relpath("foo") == ""
+	#     assert "foo/../bar".relpath("bar") == ""
+	#
+	# The empty string and "." designate both the current directory:
+	#
+	#     assert "".relpath("foo/bar")  == "foo/bar"
+	#     assert ".".relpath("foo/bar") == "foo/bar"
+	#     assert "foo/bar".relpath("")  == "../.."
+	#     assert "/" + "/".relpath(".") == getcwd
+	fun relpath(dest: String): String
+	do
+		var cwd = getcwd
+		var from = (cwd/self).simplify_path.split("/")
+		if from.last.is_empty then from.pop # case for the root directory
+		var to = (cwd/dest).simplify_path.split("/")
+		if to.last.is_empty then to.pop # case for the root directory
+
+		# Remove common prefixes
+		while not from.is_empty and not to.is_empty and from.first == to.first do
+			from.shift
+			to.shift
+		end
+
+		# Result is going up in `from` with ".." then going down following `to`
+		var from_len = from.length
+		if from_len == 0 then return to.join("/")
+		var up = "../"*(from_len-1) + ".."
+		if to.is_empty then return up
+		var res = up + "/" + to.join("/")
+		return res
+	end
+
 	# Create a directory (and all intermediate directories if needed)
 	fun mkdir
 	do
