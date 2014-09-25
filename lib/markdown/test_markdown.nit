@@ -448,6 +448,63 @@ end tell
 		assert res == exp
 	end
 
+	fun test_process_code3 do
+		var test = """
+Here is an example of AppleScript:
+~~~
+tell application "Foo"
+    beep
+end tell
+
+<div class="footer">
+    &copy; 2004 Foo Corporation
+</div>
+~~~
+"""
+		var exp = """
+<p>Here is an example of AppleScript:</p>
+<pre><code>tell application "Foo"
+    beep
+end tell
+
+&lt;div class="footer"&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+	fun test_process_code4 do
+		var test = """
+Here is an example of AppleScript:
+```
+tell application "Foo"
+    beep
+end tell
+
+<div class="footer">
+    &copy; 2004 Foo Corporation
+</div>
+```
+"""
+		var exp = """
+<p>Here is an example of AppleScript:</p>
+<pre><code>tell application "Foo"
+    beep
+end tell
+
+&lt;div class="footer"&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+
 	fun test_process_nesting1 do
 		var test = """
 > ## This is a header.

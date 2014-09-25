@@ -914,13 +914,18 @@ end
 class BlockCode
 	super Block
 
+	# Number of char to skip at the beginning of the line.
+	#
+	# Block code lines start at 4 spaces.
+	protected var line_start = 4
+
 	redef fun emit(v) do v.decorator.add_code(v, self)
 
 	redef fun emit_lines(v) do
 		var line = block.first_line
 		while line != null do
 			if not line.is_empty then
-				v.decorator.append_code(v, line.value, 4, line.value.length)
+				v.decorator.append_code(v, line.value, line_start, line.value.length)
 			end
 			v.addn
 			line = line.next
@@ -934,6 +939,9 @@ end
 # this class is only used for typing purposes.
 class BlockFence
 	super BlockCode
+
+	# Fence code lines start at 0 spaces.
+	redef var line_start = 0
 end
 
 # A markdown headline.
