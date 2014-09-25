@@ -387,6 +387,7 @@ class LinkRef
 	# Is the link an abreviation?
 	var is_abbrev = false
 
+	# Create a link with a title.
 	init with_title(link: String, title: nullable String) do
 		self.link = link
 		self.title = title
@@ -1110,6 +1111,7 @@ class MDLine
 	# Is the next line empty?
 	var next_empty: Bool = false is writable
 
+	# Initialize a new MDLine from its string value
 	init(value: String) do
 		self.value = value
 		self.leading = process_leading
@@ -1568,6 +1570,7 @@ class LineList
 	# Create a new block kind based on this line.
 	protected fun block_kind(block: MDBlock): BlockList is abstract
 
+	# Extract string value from `MDLine`.
 	protected fun extract_value(line: MDLine): String is abstract
 end
 
