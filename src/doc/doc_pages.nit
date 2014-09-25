@@ -163,6 +163,7 @@ class Nitdoc
 
 	private fun classes do
 		for mclass in model.mclasses do
+			if mclass.visibility <= ctx.min_visibility then continue
 			var page = new NitdocClass(ctx, model, mainmodule, mclass)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -170,6 +171,7 @@ class Nitdoc
 
 	private fun properties do
 		for mproperty in model.mproperties do
+			if mproperty.visibility <= ctx.min_visibility then continue
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
