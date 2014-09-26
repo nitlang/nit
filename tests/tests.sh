@@ -439,6 +439,7 @@ END
 			> "$ff.cmp.err"
 			> "$ff.compile.log"
 			ERR=0
+			echo 0.0 > "$ff.time.out"
 		else
 			if skip_cc "$bf"; then
 				nocc="--no-cc"
