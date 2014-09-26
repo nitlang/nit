@@ -291,7 +291,11 @@ redef class MClass
 		var tpl = new Template
 		if arity > 0 then
 			tpl.add "["
-			tpl.add intro.parameter_names.join(", ")
+			var parameter_names = new Array[String]
+			for p in mparameters do
+				parameter_names.add(p.name)
+			end
+			tpl.add parameter_names.join(", ")
 			tpl.add "]"
 		end
 		return tpl
@@ -353,12 +357,13 @@ redef class MClassDef
 
 	fun tpl_signature: Template do
 		var tpl = new Template
-		if not parameter_names.is_empty then
+		var mparameters = mclass.mparameters
+		if not mparameters.is_empty then
 			tpl.add "["
-			for i in [0..parameter_names.length[ do
-				tpl.add "{parameter_names[i]}: "
+			for i in [0..mparameters.length[ do
+				tpl.add "{mparameters[i].name}: "
 				tpl.add bound_mtype.arguments[i].tpl_signature
-				if i < parameter_names.length - 1 then tpl.add ", "
+				if i < mparameters.length - 1 then tpl.add ", "
 			end
 			tpl.add "]"
 		end
@@ -638,7 +643,6 @@ end
 
 redef class MParameterType
 	redef fun tpl_link do
-		var name = mclass.intro.parameter_names[rank]
 		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name}", name, "formal type")
 	end
 	redef fun tpl_signature do return tpl_link
