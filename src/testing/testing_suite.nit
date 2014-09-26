@@ -272,7 +272,7 @@ class TestCase
 		var mclassdef = test_method.mclassdef
 		var tc = new HTMLTag("testcase")
 		# NOTE: jenkins expects a '.' in the classname attr
-		tc.attr("classname", mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
+		tc.attr("classname", "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
 		tc.attr("name", test_method.mproperty.full_name)
 		if was_exec then
 			tc.add  new HTMLTag("system-err")

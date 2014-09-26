@@ -9,11 +9,8 @@ printf "%s\n" "$@" *.nit \
 	../examples/pnacl/converter/converter.nit \
 	../examples/nitcorn/src/*.nit \
 	../examples/mpi/src/*.nit \
-	../lib/*.nit \
-	../lib/*/*.nit \
-	../lib/*/*/*.nit  \
+	../lib/*/examples/*.nit \
+	../contrib/friendz/src/solver_cmd.nit \
+	../contrib/pep8analysis/src/pep8analysis.nit \
 	../src/nit*.nit \
-	../src/test_*.nit \
-	../contrib/*.nit \
-	../contrib/*/*.nit \
-	../contrib/*/src/*.nit
+	../src/test_*.nit

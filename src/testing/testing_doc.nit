@@ -228,7 +228,7 @@ redef class ModelBuilder
 			doc_entities += 1
 			tc = new HTMLTag("testcase")
 			# NOTE: jenkins expects a '.' in the classname attr
-			tc.attr("classname", mmodule.full_name + ".<module>")
+			tc.attr("classname", "nitunit." + mmodule.full_name + ".<module>")
 			tc.attr("name", "<module>")
 			d2m.extract(ndoc, tc)
 		end label x
@@ -241,7 +241,7 @@ redef class ModelBuilder
 				if ndoc != null then
 					doc_entities += 1
 					tc = new HTMLTag("testcase")
-					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
+					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", "<class>")
 					d2m.extract(ndoc, tc)
 				end
@@ -254,7 +254,7 @@ redef class ModelBuilder
 				if ndoc != null then
 					doc_entities += 1
 					tc = new HTMLTag("testcase")
-					tc.attr("classname", mmodule.full_name + "." + mclassdef.mclass.full_name)
+					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", mpropdef.mproperty.full_name)
 					d2m.extract(ndoc, tc)
 				end

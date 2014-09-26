@@ -397,7 +397,7 @@ for ii in "$@"; do
 	fi
 	f=`basename "$ii" .nit`
 
-	pack=`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
+	pack="tests.${engine}".`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
 
 	# Sould we skip the file for this engine?
 	need_skip $f $f $pack && continue
@@ -439,6 +439,7 @@ END
 			> "$ff.cmp.err"
 			> "$ff.compile.log"
 			ERR=0
+			echo 0.0 > "$ff.time.out"
 		else
 			if skip_cc "$bf"; then
 				nocc="--no-cc"
@@ -451,7 +452,7 @@ END
 				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				/usr/bin/time -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				/usr/bin/time --quiet -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -491,7 +492,10 @@ END
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi	
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
-				$TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+				/usr/bin/time --quiet -f%U -a -o "$ff.time.out" $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+			mv $ff.time.out $ff.times.out
+			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
+
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
@@ -533,7 +537,7 @@ END
 					echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					WRITE="$fff.write" /usr/bin/time -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" /usr/bin/time --quiet -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
