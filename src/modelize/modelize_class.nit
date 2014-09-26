@@ -436,19 +436,19 @@ redef class ModelBuilder
 		end
 
 		# Check parameter type
-		if mclassdef != null and mclassdef.parameter_names.has(name) then
-			if not ntype.n_types.is_empty then
-				error(ntype, "Type error: formal type {name} cannot have formal parameters.")
-			end
-			for i in [0..mclassdef.parameter_names.length[ do
-				if mclassdef.parameter_names[i] == name then
-					res = mclassdef.mclass.mclass_type.arguments[i]
-					if ntype.n_kwnullable != null then res = res.as_nullable
-					ntype.mtype = res
-					return res
+		if mclassdef != null then
+			for p in mclassdef.mclass.mparameters do
+				if p.name != name then continue
+
+				if not ntype.n_types.is_empty then
+					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
 				end
+
+				res = p
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
 			end
-			abort
 		end
 
 		# Check class
