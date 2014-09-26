@@ -1762,7 +1762,7 @@ class SeparateCompilerVisitor
 	redef fun calloc_array(ret_type, arguments)
 	do
 		var mclass = self.get_class("ArrayCapable")
-		var ft = mclass.mclass_type.arguments.first.as(MParameterType)
+		var ft = mclass.mparameters.first
 		var res = self.native_array_instance(ft, arguments[1])
 		self.ret(res)
 	end
