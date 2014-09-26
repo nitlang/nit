@@ -104,7 +104,7 @@ redef class ModelBuilder
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
-		else if mclass.arity != arity then
+		else if arity != 0 and mclass.arity != arity then
 			error(nclassdef, "Redef error: Formal parameter arity missmatch; got {arity}, expected {mclass.arity}.")
 			return
 		else if nkind != null and mkind != concrete_kind and mclass.kind != mkind then
@@ -141,6 +141,12 @@ redef class ModelBuilder
 		if nclassdef isa AStdClassdef and mclass.arity > 0 then
 			# Revolve bound for formal parameters
 			for i in [0..mclass.arity[ do
+				if nclassdef.n_formaldefs.is_empty then
+					# Inherit the bound
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					continue
+				end
 
 				var nfd = nclassdef.n_formaldefs[i]
 				var pname = mclass.mparameters[i].name
