@@ -26,7 +26,7 @@ shift
 
 # Magic here! This tee and save both stdout and stderr in distinct files without messing with them
 # Time  just get the user time
-/usr/bin/time -f%U -o "${name}.t.out" "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
+/usr/bin/time -f%U --quiet -o "${name}.t.out" "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
 res=$?
 
 c=`echo "${name%-*}" | tr "-" "."`
