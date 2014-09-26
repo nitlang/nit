@@ -397,7 +397,7 @@ for ii in "$@"; do
 	fi
 	f=`basename "$ii" .nit`
 
-	pack=`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
+	pack="tests.${engine}".`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
 
 	# Sould we skip the file for this engine?
 	need_skip $f $f $pack && continue
