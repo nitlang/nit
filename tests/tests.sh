@@ -492,7 +492,10 @@ END
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi	
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
-				$TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+				/usr/bin/time --quiet -f%U -a -o "$ff.time.out" $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+			mv $ff.time.out $ff.times.out
+			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
+
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
