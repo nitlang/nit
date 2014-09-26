@@ -42,7 +42,7 @@ private
 		end
 end
 
-class Pair[E: Comparable, E: Comparable]
+class Pair[E: Comparable, F: Comparable]
 
 	fun >(p: Pair[Comparable, Comparable]): Bool
 		do
@@ -51,7 +51,7 @@ class Pair[E: Comparable, E: Comparable]
 		end
 end
 
-class Pair[E: Int, E: Int]
+class Pair[E: Int, F: Int]
 
 	fun sum: Int
 		do
