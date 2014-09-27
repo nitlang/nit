@@ -62,8 +62,8 @@ private
 # receveur ("self")
 
 # Les attributs sont déclarés par le mot clé "fun" et commencent par un "@"
-	var nom_: String 		# Un entrepôt a un nom (de type chaîne).
-	var rayons: Array[Rayon] 	# Il est composé d'un ensemble de rayon.
+	var nom_: String is noinit 		# Un entrepôt a un nom (de type chaîne).
+	var rayons: Array[Rayon] is noinit 	# Il est composé d'un ensemble de rayon.
 	# "Array" est une classe paramétrée, les crochets en sont la marque.
 	# La classe "Rayon" est définie plus loin
 
