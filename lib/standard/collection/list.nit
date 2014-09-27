@@ -210,10 +210,10 @@ class List[E]
 	init from(coll: Collection[E]) do append(coll)
 
 	# The first node of the list
-	private var head: nullable ListNode[E]
+	private var head: nullable ListNode[E] = null
 
 	# The last node of the list
-	private var tail: nullable ListNode[E]
+	private var tail: nullable ListNode[E] = null
 
 	# Get the `i`th node. get `null` otherwise.
 	private fun get_node(i: Int): nullable ListNode[E]

@@ -114,7 +114,7 @@ abstract class Rope
 	super Text
 
 	# Root node, entry point of a Rope.
-	private var root: RopeNode
+	private var root: RopeNode is noinit
 
 	# Cached version of self as a flat String
 	private var str_representation: nullable NativeString = null

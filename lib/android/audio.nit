@@ -232,10 +232,10 @@ end
 # The Android MediaPlayer has a complex state diagram that you'll need to
 # respect if you want your MediaPlayer to work fine, see the android doc
 class MediaPlayer
-	private var nmedia_player: NativeMediaPlayer
+	private var nmedia_player: NativeMediaPlayer is noinit
 
 	# The sound associated with this mediaplayer
-	var sound: nullable Sound
+	var sound: nullable Sound = null
 
 	# Create a new MediaPlayer, but no sound is attached, you'll need
 	# to use `load_sound` before using it

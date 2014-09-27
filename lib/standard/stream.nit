@@ -288,8 +288,6 @@ abstract class FDStream
 	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
 	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
 	private fun native_write_char(i: Int, c: Char): Int is extern "stream_FDStream_FDStream_native_write_char_2"
-
-	init(fd: Int) do self.fd = fd
 end
 
 class FDIStream
@@ -303,24 +301,17 @@ class FDIStream
 		if nb == -1 then eof = true
 		return nb
 	end
-
-	init(fd: Int) do end 
 end
 
 class FDOStream
 	super FDStream
 	super OStream
-	redef var is_writable: Bool
+	redef var is_writable = true
 
 	redef fun write(s)
 	do
 		var nb = native_write(fd, s.to_cstring, s.length)
 		if nb < s.length then is_writable = false
-	end
-
-	init(fd: Int)
-	do
-		is_writable = true
 	end
 end
 
@@ -328,11 +319,6 @@ class FDIOStream
 	super FDIStream
 	super FDOStream
 	super IOStream
-	init(fd: Int)
-	do
-		self.fd = fd
-		is_writable = true
-	end
 end
 
 redef interface Object
