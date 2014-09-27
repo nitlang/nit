@@ -46,9 +46,10 @@ end
 # Abuser iterator to read a file, see `file_open`
 private class ReadFileForAbuserIterator
 	super Iterator[IFStream]
-	redef var item: IFStream
+	var path: String
+	redef var item: IFStream is noinit
 	redef var is_ok = true
-	init(path: String)
+	init
 	do
 		# start of service is to open the file, and return in
 		item = new IFStream.open(path)
@@ -94,21 +95,18 @@ end
 private class SortAbuserIterator[E]
 	super Iterator[CompareQuery[E]]
 	# The index of the big loop
-	var i: Int
+	var i: Int = 0
 	# The index of the small loop
-	var j: Int
+	var j: Int = 0
 	# The array to sort
 	var array: Array[E]
 	# The query used to communicate with the user.
 	# For ecological concerns, a unique CompareQuery is instatiated.
-	var query: nullable CompareQuery[E]
+	var query: nullable CompareQuery[E] = null
 	redef fun item do return query.as(not null)
-	init(array: Array[E])
+	init
 	do
-		self.array = array
 		# Initialize the algorithm, see `next` for the rest
-		i = 0
-		j = 0
 		if not is_ok then return
 		query = new CompareQuery[E](array[i], array[j])
 	end
