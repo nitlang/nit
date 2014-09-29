@@ -1,0 +1,16 @@
+Ao1
+Aa
+A
+
+Ao10
+Bo10
+Ba
+Bu20
+A
+B
+
+Ao100
+Aa
+Ce200
+300
+A
