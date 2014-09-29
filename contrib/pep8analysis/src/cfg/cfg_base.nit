@@ -376,7 +376,7 @@ class CFG
 end
 
 class BasicBlock
-	var name : String
+	var name: String is noinit
 	var lines = new Array[ANonEmptyLine]
 	var successors = new Array[BasicBlock]
 	var predecessors = new Array[BasicBlock]

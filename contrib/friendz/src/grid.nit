@@ -13,13 +13,13 @@ module grid
 # Grid of monsters.
 class Grid
 	# width of the current grid
-	var width: Int
+	var width: Int is noinit
 
 	# maximum width of the grid
 	var max_width: Int
 
 	# height of the current grid
-	var height: Int
+	var height: Int is noinit
 
 	# maximum height of the grid
 	var max_height: Int
@@ -30,13 +30,7 @@ class Grid
 	# the data grid
 	private var grid = new Array[Array[Tile]]
 
-	init(mw,mh,nm: Int)
-	do
-		self.max_width = mw
-		self.max_height = mh
-		self.nb_monsters = mh
-		clear
-	end
+	init do clear
 
 	# Reinitialize the grid with new empty tiles and monsters info
 	fun clear

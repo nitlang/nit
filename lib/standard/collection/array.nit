@@ -416,7 +416,7 @@ class ArraySet[E: Object]
 	super Set[E]
 
 	# The stored elements.
-	private var array: Array[E]
+	private var array: Array[E] is noinit
 
 	redef fun has(e) do return _array.has(e)
 

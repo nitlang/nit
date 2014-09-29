@@ -663,7 +663,7 @@ abstract class FlatText
 	#
 	# Warning : Might be void in some subclasses, be sure to check
 	# if set before using it.
-	private var items: NativeString
+	private var items: NativeString is noinit
 
 	# Real items, used as cache for to_cstring is called
 	private var real_items: nullable NativeString = null
@@ -887,10 +887,10 @@ class FlatString
 	super String
 
 	# Index in _items of the start of the string
-	private var index_from: Int
+	private var index_from: Int is noinit
 
 	# Indes in _items of the last item of the string
-	private var index_to: Int
+	private var index_to: Int is noinit
 
 	redef var chars: SequenceRead[Char] = new FlatStringCharView(self)
 

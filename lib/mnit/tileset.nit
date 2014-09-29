@@ -28,12 +28,8 @@ class TileSet
 	# The height of a tile
 	var height: Int
 
-	init(image: Image, width: Int, height: Int)
+	init
 	do
-		self.image = image
-		self.width = width
-		self.height = height
-
 		self.nb_cols = image.width / width
 		self.nb_rows = image.height / height
 
@@ -45,10 +41,10 @@ class TileSet
 	end
 
 	# The number of columns of tiles in the image
-	var nb_cols: Int
+	var nb_cols: Int is noinit
 
 	# The number of rows of tiles in the image
-	var nb_rows: Int
+	var nb_rows: Int is noinit
 
 	# Cache for images of tiles
 	var subimages = new Array[Image]
@@ -71,12 +67,6 @@ class TileSetFont
 	# in left->right, then top->bottom order
 	# Use space (' ') for holes in the tileset
 	var chars: String
-
-	init(image: Image, width: Int, height: Int, chars: String)
-	do
-		super
-		self.chars = chars
-	end
 
 	# Additional space to insert horizontally between characters
 	# A negave value will display tile overlaped

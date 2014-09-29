@@ -24,7 +24,7 @@ redef class Object
 end
 
 class Toto
-	var a: Int
+	var a: Int is noinit
 	redef fun output
 	do
 		printn(_a)

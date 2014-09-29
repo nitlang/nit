@@ -294,13 +294,7 @@ private class PipeSkip[E]
 	var source: Iterator[E]
 	var skip_item: E
 
-	init(source: Iterator[E], skip_item: E)
-	do
-		self.source = source
-		self.skip_item = skip_item
-
-		do_skip
-	end
+	init do do_skip
 
 	fun do_skip
 	do
@@ -345,10 +339,8 @@ private class PipeSkipTail[E]
 
 	var lasts = new List[E]
 
-	init(source: Iterator[E], length: Int)
+	init
 	do
-		self.source = source
-		self.length = length
 		var lasts = self.lasts
 		while source.is_ok and lasts.length < length do
 			lasts.push(source.item)
@@ -375,13 +367,7 @@ private class PipeSelect[E]
 
 	var predicate: Function[E, Bool]
 
-	init(source: Iterator[E], predicate: Function[E, Bool])
-	do
-		self.source = source
-		self.predicate = predicate
-
-		do_skip
-	end
+	init do do_skip
 
 	fun do_skip
 	do

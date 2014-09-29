@@ -28,20 +28,20 @@ class Socket
 
 	# IPv4 address the socket is connected to
 	# Formatted as xxx.xxx.xxx.xxx
-	var address: String
+	var address: String is noinit
 
 	# Hostname of the socket connected to self
 	# In C : The real canonical host name (e.g. example.org)
-	var host: nullable String
+	var host: nullable String = null
 
 	# Port open for the socket
-	var port: Int
+	var port: Int is noinit
 
 	# Underlying C socket
-	private var socket: FFSocket
+	private var socket: FFSocket is noinit
 
 	# Underlying C socket
-	private var addrin: FFSocketAddrIn
+	private var addrin: FFSocketAddrIn is noinit
 
 	redef var end_reached = false
 

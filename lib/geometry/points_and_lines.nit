@@ -33,12 +33,6 @@ class Point[N: Numeric]
 
 	redef var x: N
 	redef var y: N
-
-	init(x, y: N)
-	do
-		self.x = x
-		self.y = y
-	end
 end
 
 # An abstract 3d point, strongly linked to its implementation `Point3d`
@@ -57,12 +51,6 @@ class Point3d[N: Numeric]
 	super Point[N]
 
 	redef var z: N
-
-	init(x, y, z: N)
-	do
-		super
-		self.z = z
-	end
 end
 
 # An abstract 2d line segment
@@ -82,12 +70,11 @@ class Line[N: Numeric]
 	redef var point_left: P
 	redef var point_right: P
 
-	init(a, b: P)
+	init
 	do
-		if a.x < b.x then
-			point_left = a
-			point_right = b
-		else
+		var a = point_left
+		var b = point_right
+		if a.x > b.x then
 			point_left = b
 			point_right = a
 		end

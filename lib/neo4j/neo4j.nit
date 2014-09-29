@@ -384,14 +384,12 @@ end
 # For more details, see: http://docs.neo4j.org/chunked/milestone/rest-api-cypher.html
 class CypherQuery
 	# Query string to perform
-	private var query: String
+	private var query: String = ""
 
 	# `params` to embed in the query like in prepared statements
 	var params = new JsonObject
 
-	init do
-		self.query = ""
-	end
+	init do end
 
 	# init the query from a query string
 	init from_string(query: String) do
@@ -488,10 +486,10 @@ end
 #     assert node["name"] == "Andres"	# loaded lazily from base
 abstract class NeoEntity
 	# Neo4j client connector
-	private var neo: Neo4jClient
+	private var neo: Neo4jClient is noinit
 
 	# Entity unique URL in Neo4j REST API
-	var url: nullable String
+	var url: nullable String = null
 
 	# Temp id used in batch mode to update the entity
 	private var batch_id: nullable Int = null

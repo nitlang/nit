@@ -276,7 +276,6 @@ class TreePrinterVisitor
 	super Visitor
 	var writer: OStream
 	private var indent = 0
-	init(writer: OStream) do self.writer = writer
 	redef fun visit(n)
 	do
 		for i in [0..indent[ do writer.write("  ")

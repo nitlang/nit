@@ -16,8 +16,8 @@
 
 class Point
 private
-	var x: Int	# Abscisse
-	var y: Int	# Ordonnée
+	var x: Int = 0	# Abscisse
+	var y: Int = 0	# Ordonnée
 
 	# Change la position d'un point
 	fun moveto(x: Int, y: Int)
@@ -37,11 +37,6 @@ private
 		return p isa Point and _x == p.x and _y == p.y
 	end
 
-
-	init
-	do
-		moveto(0, 0)
-	end
 
 	init at(x: Int, y: Int)
 	do

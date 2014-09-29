@@ -92,7 +92,7 @@ end
 class IProcess
 	super Process
 	super IStream
-	var stream_in: FDIStream
+	var stream_in: FDIStream is noinit
 
 	redef fun close do stream_in.close
 
@@ -101,8 +101,6 @@ class IProcess
 	redef fun eof do return stream_in.eof
 
 	redef fun pipeflags do return 2
-
-	redef init(command: String, arguments: String...) do super
 
 	redef fun execute
 	do
@@ -115,7 +113,7 @@ end
 class OProcess
 	super Process
 	super OStream
-	var stream_out: OStream
+	var stream_out: OStream is noinit
 
 	redef fun close do stream_out.close
 
@@ -124,8 +122,6 @@ class OProcess
 	redef fun write(s) do stream_out.write(s)
 
 	redef fun pipeflags do return 1
-
-	redef init(command: String, arguments: String...) do super
 
 	redef fun execute
 	do
@@ -147,8 +143,6 @@ class IOProcess
 	end
 
 	redef fun pipeflags do return 3
-
-	redef init(command: String, arguments: String...) do super
 
 	redef fun execute
 	do

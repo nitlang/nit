@@ -120,11 +120,11 @@ end
 private class CircularListIterator[E]
 	super IndexedIterator[E]
 
-	redef var index: Int
+	redef var index: Int = 0
 
 	# The current node pointed.
 	# Is null if the list is empty.
-	var node: nullable CLNode[E]
+	var node: nullable CLNode[E] is noinit
 
 	# The list iterated.
 	var list: CircularList[E]
@@ -144,11 +144,9 @@ private class CircularListIterator[E]
 
 	redef fun item do return self.node.item
 
-	init(list: CircularList[E])
+	init
 	do
 		self.node = list.node
-		self.list = list
-		self.index = 0
 	end
 end
 

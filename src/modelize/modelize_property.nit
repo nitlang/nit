@@ -82,8 +82,6 @@ redef class ModelBuilder
 		# Are we a refinement
 		if not mclassdef.is_intro then return
 
-		var mmodule = nclassdef.mclassdef.mmodule
-
 		# Look for the init in Object, or create it
 		if mclassdef.mclass.name == "Object" and the_root_init_mmethod == null then
 			# Create the implicit root-init method
@@ -112,40 +110,13 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			else
-				# An explicit old-style init, so return
+			else if mpropdef.mproperty.name == "init" then
+				# An explicit old-style init named "init", so return
 				return
 			end
 		end
 
 		if not nclassdef isa AStdClassdef then return
-
-		# Do we inherit a old-style constructor?
-		var combine = new Array[MMethod] # old-style constructors without arguments
-		var inhc: nullable MClass = null # single super-class with a constructor with arguments
-		if defined_init == null then for st in mclassdef.supertypes do
-			var c = st.mclass
-			if not c.kind.need_init then continue
-			st = st.anchor_to(mmodule, mclassdef.bound_mtype)
-			var candidate = self.try_get_mproperty_by_name2(nclassdef, mmodule, st, "init").as(nullable MMethod)
-			if candidate != null then
-				if candidate.is_root_init then continue
-				if candidate.intro.msignature != null then
-					if candidate.intro.msignature.arity == 0 then
-						combine.add(candidate)
-						continue
-					end
-				end
-			end
-			var inhc2 = c.inherit_init_from
-			if inhc2 == null then inhc2 = c
-			if inhc2 == inhc then continue
-			if inhc != null then
-				self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {inhc} and {c}")
-			else
-				inhc = inhc2
-			end
-		end
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
@@ -181,44 +152,9 @@ redef class ModelBuilder
 		end
 		if anode == null then anode = nclassdef
 
-		if combine.is_empty and inhc != null then
-			if not mparameters.is_empty then
-				self.error(anode,"Error: {mclassdef} cannot inherit constructors from {inhc} because there is attributes without initial values: {mparameters.join(", ")}")
-				return
-			end
-
-			# TODO: actively inherit the consturctor
-			self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
-			#mclassdef.mclass.inherit_init_from = inhc
-			#return
-		end
-
-		if not combine.is_empty and inhc != null then
-			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
-			return
-		end
-		if not combine.is_empty then
-			if mparameters.is_empty and combine.length == 1 then
-				# No need to create a local init, the inherited one is enough
-				inhc = combine.first.intro_mclassdef.mclass
-				mclassdef.mclass.inherit_init_from = inhc
-				self.toolcontext.info("{mclassdef} inherits all constructors from {inhc}", 3)
-				return
-			end
-			nclassdef.super_inits = combine
-			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
-			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-			var msignature = new MSignature(mparameters, null)
-			mpropdef.msignature = msignature
-			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
-			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
-			return
-		end
-
 		if the_root_init_mmethod == null then return
 
-		# Look for nost-specific new-stype init definitions
+		# Look for most-specific new-stype init definitions
 		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
 		if spropdefs.is_empty then
 			toolcontext.fatal_error(nclassdef.location, "Fatal error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
@@ -326,12 +262,6 @@ redef class ModelBuilder
 			for t in mtype.arguments do check_visibility(node, t, mpropdef)
 		end
 	end
-end
-
-redef class MClass
-	# The class whose self inherit all the constructors.
-	# FIXME: this is needed to implement the crazy constructor mixin thing of the of old compiler. We need to think what to do with since this cannot stay in the modelbuilder
-	var inherit_init_from: nullable MClass = null
 end
 
 redef class MPropDef

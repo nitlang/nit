@@ -15,8 +15,8 @@
 # limitations under the License.
 
 class A
-	var attribute: nullable A
-	var num: Char
+	var attribute: nullable A is noinit
+	var num: Char is noinit
 
 	fun foo=(a: nullable A)
 	do
