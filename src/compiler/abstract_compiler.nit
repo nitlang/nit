@@ -1053,16 +1053,21 @@ abstract class AbstractCompilerVisitor
 		if not initializers.is_empty then
 			var recv = arguments.first
 
-			assert initializers.length == arguments.length - 1 else debug("expected {initializers.length}, got {arguments.length - 1}")
 			var i = 1
 			for p in initializers do
 				if p isa MMethod then
-					self.send(p, [recv, arguments[i]])
+					var args = [recv]
+					for x in p.intro.msignature.mparameters do
+						args.add arguments[i]
+						i += 1
+					end
+					self.send(p, args)
 				else if p isa MAttribute then
 					self.write_attribute(p, recv, arguments[i])
+					i += 1
 				else abort
-				i += 1
 			end
+			assert i == arguments.length
 
 			return self.send(callsite.mproperty, [recv])
 		end

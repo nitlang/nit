@@ -407,18 +407,24 @@ private class NaiveInterpreter
 	do
 		var initializers = callsite.mpropdef.initializers
 		if not initializers.is_empty then
-			assert initializers.length == arguments.length - 1 else debug("expected {initializers.length} got {arguments.length - 1}")
 			var recv = arguments.first
 			var i = 1
 			for p in initializers do
 				if p isa MMethod then
-					self.send(p, [recv, arguments[i]])
+					var args = [recv]
+					for x in p.intro.msignature.mparameters do
+						args.add arguments[i]
+						i += 1
+					end
+					self.send(p, args)
 				else if p isa MAttribute then
 					assert recv isa MutableInstance
 					recv.attributes[p] = arguments[i]
+					i += 1
 				else abort
-				i += 1
 			end
+			assert i == arguments.length
+
 			return send(callsite.mproperty, [recv])
 		end
 		return send(callsite.mproperty, arguments)
