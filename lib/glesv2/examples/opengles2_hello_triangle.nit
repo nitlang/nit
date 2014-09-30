@@ -17,7 +17,7 @@
 # Basic example of OpenGL ES 2.0 usage from the book OpenGL ES 2.0 Programming Guide.
 #
 # Code reference:
-# https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c 
+# https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c
 module opengles2_hello_triangle
 
 import glesv2
@@ -127,10 +127,10 @@ assert_no_gl_error
 var vertex_shader = new GLVertexShader
 assert vertex_shader.is_ok else print "Vertex shader is not ok: {gl_error}"
 vertex_shader.source = """
-attribute vec4 vPosition;   
-void main()                 
-{                           
-  gl_Position = vPosition;  
+attribute vec4 vPosition;
+void main()
+{
+  gl_Position = vPosition;
 }                           """
 vertex_shader.compile
 assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
