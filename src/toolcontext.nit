@@ -161,7 +161,8 @@ class ToolContext
 	# First-level warnings are displayed by default (except if option `-q` is given).
 	fun warning(l: nullable Location, tag: String, text: String)
 	do
-		if opt_warn.value == 0 then return
+		if opt_warning.value.has("no-{tag}") then return
+		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return
 		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -182,7 +183,8 @@ class ToolContext
 	# default and require an additional option `-W`.
 	fun advice(l: nullable Location, tag: String, text: String)
 	do
-		if opt_warn.value <= 1 then return
+		if opt_warning.value.has("no-{tag}") then return
+		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return
 		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -227,7 +229,10 @@ class ToolContext
 	var option_context: OptionContext = new OptionContext
 
 	# Option --warn
-	var opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
+	var opt_warn: OptionCount = new OptionCount("Show more warnings", "-W", "--warn")
+
+	# Option --warning
+	var opt_warning = new OptionArray("Show/hide a specific warning", "-w", "--warning")
 
 	# Option --quiet
 	var opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
@@ -264,7 +269,7 @@ class ToolContext
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
 	end
 
 	# Name, usage and synopsis of the tool.
