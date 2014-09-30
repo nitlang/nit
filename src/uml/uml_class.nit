@@ -74,11 +74,10 @@ redef class MClass
 		end
 		if arity > 0 then
 			t.add "["
-			var formal = intro.parameter_names
-			t.add formal.first
-			for i in [1 .. formal.length[ do
+			t.add mparameters.first.name
+			for i in [1 .. mparameters.length[ do
 				t.add ", "
-				t.add formal[i]
+				t.add mparameters[i].name
 			end
 			t.add "]"
 		end
@@ -211,8 +210,7 @@ end
 
 redef class MParameterType
 	redef fun tpl_class(c, m) do
-		var n = mclass.intro.parameter_names
-		return n[rank]
+		return name
 	end
 end
 

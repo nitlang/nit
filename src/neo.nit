@@ -487,10 +487,14 @@ class NeoModel
 	private fun mclass_node(mclass: MClass): NeoNode do
 		var node = make_node(mclass)
 		node.labels.add "MClass"
-		node["arity"] = mclass.arity
 		node["full_name"] = mclass.full_name
 		node["kind"] = mclass.kind.to_s
 		node["visibility"] = mclass.visibility.to_s
+		if not mclass.mparameters.is_empty then
+			var parameter_names = new Array[String]
+			for p in mclass.mparameters do parameter_names.add(p.name)
+			node["parameter_names"] = new JsonArray.from(parameter_names)
+		end
 		node.out_edges.add(new NeoEdge(node, "CLASSTYPE", to_node(mclass.mclass_type)))
 		return node
 	end
@@ -503,10 +507,15 @@ class NeoModel
 		assert node.labels.has("MClass")
 		var mmodule = to_mmodule(model, node.in_nodes("INTRODUCES").first)
 		var name = node["name"].to_s
-		var arity = node["arity"].to_s.to_i
 		var kind = to_kind(node["kind"].to_s)
 		var visibility = to_visibility(node["visibility"].to_s)
-		var mclass = new MClass(mmodule, name, arity, kind, visibility)
+		var parameter_names = new Array[String]
+		if node.has_key("parameter_names") then
+			for e in node["parameter_names"].as(JsonArray) do
+				parameter_names.add e.to_s
+			end
+		end
+		var mclass = new MClass(mmodule, name, parameter_names, kind, visibility)
 		mentities[node] = mclass
 		set_doc(node, mclass)
 		return mclass
@@ -518,9 +527,6 @@ class NeoModel
 		node.labels.add "MClassDef"
 		node["is_intro"] = mclassdef.is_intro
 		node["location"] = mclassdef.location.to_s
-		if not mclassdef.parameter_names.is_empty then
-			node["parameter_names"] = new JsonArray.from(mclassdef.parameter_names)
-		end
 		node.out_edges.add(new NeoEdge(node, "BOUNDTYPE", to_node(mclassdef.bound_mtype)))
 		node.out_edges.add(new NeoEdge(node, "MCLASS", to_node(mclassdef.mclass)))
 		for mproperty in mclassdef.intro_mproperties do
@@ -544,13 +550,7 @@ class NeoModel
 		var mmodule = to_mmodule(model, node.in_nodes("DEFINES").first)
 		var mtype = to_mtype(model, node.out_nodes("BOUNDTYPE").first).as(MClassType)
 		var location = to_location(node["location"].to_s)
-		var parameter_names = new Array[String]
-		if node.has_key("parameter_names") then
-			for e in node["parameter_names"].as(JsonArray) do
-				parameter_names.add e.to_s
-			end
-		end
-		var mclassdef = new MClassDef(mmodule, mtype, location, parameter_names)
+		var mclassdef = new MClassDef(mmodule, mtype, location)
 		mentities[node] = mclassdef
 		set_doc(node, mclassdef)
 		var supertypes = new Array[MClassType]
@@ -737,7 +737,7 @@ class NeoModel
 		else if node.labels.has("MParameterType") then
 			var mclass = to_mclass(model, node.out_nodes("CLASS").first)
 			var rank = node["rank"].to_s.to_i
-			var mtype = new MParameterType(mclass, rank)
+			var mtype = mclass.mparameters[rank]
 			mentities[node] = mtype
 			return  mtype
 		else if node.labels.has("MNullableType") then

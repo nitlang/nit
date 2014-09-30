@@ -250,8 +250,8 @@ redef class MModule
 		var cla = self.model.get_mclasses_by_name(name)
 		if cla == null then
 			if name == "Bool" then
-				var c = new MClass(self, name, 0, enum_kind, public_visibility)
-				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0), new Array[String])
+				var c = new MClass(self, name, null, enum_kind, public_visibility)
+				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0))
 				return c
 			end
 			print("Fatal Error: no primitive class {name}")
@@ -360,6 +360,10 @@ class MClass
 	# 0 if the class is not generic
 	var arity: Int
 
+	# Each generic formal parameters in order.
+	# is empty if the class is not generic
+	var mparameters = new Array[MParameterType]
+
 	# The kind of the class (interface, abstract class, etc.)
 	# In Nit, the kind of a class cannot evolve in refinements
 	var kind: MClassKind
@@ -368,11 +372,15 @@ class MClass
 	# In Nit, the visibility of a class cannot evolve in refinements
 	var visibility: MVisibility
 
-	init(intro_mmodule: MModule, name: String, arity: Int, kind: MClassKind, visibility: MVisibility)
+	init(intro_mmodule: MModule, name: String, parameter_names: nullable Array[String], kind: MClassKind, visibility: MVisibility)
 	do
 		self.intro_mmodule = intro_mmodule
 		self.name = name
-		self.arity = arity
+		if parameter_names == null then
+			self.arity = 0
+		else
+			self.arity = parameter_names.length
+		end
 		self.kind = kind
 		self.visibility = visibility
 		intro_mmodule.intro_mclasses.add(self)
@@ -382,11 +390,13 @@ class MClass
 
 		# Create the formal parameter types
 		if arity > 0 then
+			assert parameter_names != null
 			var mparametertypes = new Array[MParameterType]
 			for i in [0..arity[ do
-				var mparametertype = new MParameterType(self, i)
+				var mparametertype = new MParameterType(self, i, parameter_names[i])
 				mparametertypes.add(mparametertype)
 			end
+			self.mparameters = mparametertypes
 			var mclass_type = new MGenericType(self, mparametertypes)
 			self.mclass_type = mclass_type
 			self.get_mtype_cache.add(mclass_type)
@@ -494,9 +504,6 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	# Name of each formal generic parameter (in order of declaration)
-	var parameter_names: Array[String]
-
 	# The origin of the definition
 	var location: Location
 
@@ -504,16 +511,14 @@ class MClassDef
 	# Example: "mymodule#MyClass"
 	redef var to_s: String
 
-	init(mmodule: MModule, bound_mtype: MClassType, location: Location, parameter_names: Array[String])
+	init(mmodule: MModule, bound_mtype: MClassType, location: Location)
 	do
-		assert bound_mtype.mclass.arity == parameter_names.length
 		self.bound_mtype = bound_mtype
 		self.mmodule = mmodule
 		self.mclass = bound_mtype.mclass
 		self.location = location
 		mmodule.mclassdefs.add(self)
 		mclass.mclassdefs.add(self)
-		self.parameter_names = parameter_names
 		self.to_s = "{mmodule}#{mclass}"
 	end
 
@@ -1279,12 +1284,9 @@ class MParameterType
 	# FIXME: is `position` a better name?
 	var rank: Int
 
-	# Internal name of the parameter type
-	# Names of parameter types changes in each class definition
-	# Therefore, this method return an internal name.
-	# Example: return "G#1" for the second parameter of the class G
-	# FIXME: add a way to get the real name in a classdef
-	redef fun to_s do return "{mclass}#{rank}"
+	redef var name
+
+	redef fun to_s do return name
 
 	# Resolve the bound for a given resolved_receiver
 	# The result may be a other virtual type (or a parameter type)
@@ -1369,10 +1371,11 @@ class MParameterType
 		return mtype.collect_mclassdefs(mmodule).has(mclass.intro)
 	end
 
-	init(mclass: MClass, rank: Int)
+	init(mclass: MClass, rank: Int, name: String)
 	do
 		self.mclass = mclass
 		self.rank = rank
+		self.name = name
 	end
 end
 

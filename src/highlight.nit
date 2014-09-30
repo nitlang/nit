@@ -473,13 +473,11 @@ redef class MParameterType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		var name = mclass.intro.parameter_names[rank]
 		res.new_field("parameter type").append("{name} from class ").add mclass.intro.linkto
 		return res
 	end
 	redef fun linkto
 	do
-		var name = mclass.intro.parameter_names[rank]
 		return (new HTMLTag("span")).text(name)
 	end
 end

@@ -44,6 +44,7 @@ redef class ModelBuilder
 		var nvisibility: nullable AVisibility
 		var mvisibility: nullable MVisibility
 		var arity = 0
+		var names = new Array[String]
 		if nclassdef isa AStdClassdef then
 			name = nclassdef.n_id.text
 			nkind = nclassdef.n_classkind
@@ -58,6 +59,21 @@ redef class ModelBuilder
 				error(nvisibility, "Error: intrude is not a legal visibility for classes.")
 				return
 			end
+			# Collect formal parameter names
+			for i in [0..arity[ do
+				var nfd = nclassdef.n_formaldefs[i]
+				var ptname = nfd.n_id.text
+				if names.has(ptname) then
+					error(nfd, "Error: A formal parameter type `{ptname}' already exists")
+					return
+				end
+				for c in ptname.chars do if c >= 'a' and c<= 'z' then
+					warning(nfd, "formal-type-name", "Warning: lowercase in the formal parameter type {ptname}")
+					break
+				end
+				names.add(ptname)
+			end
+
 		else if nclassdef isa ATopClassdef then
 			name = "Object"
 			nkind = null
@@ -80,7 +96,7 @@ redef class ModelBuilder
 				error(nclassdef, "Redef error: No imported class {name} to refine.")
 				return
 			end
-			mclass = new MClass(mmodule, name, arity, mkind, mvisibility)
+			mclass = new MClass(mmodule, name, names, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
 			error(nclassdef, "Error: A class {name} is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
@@ -88,7 +104,7 @@ redef class ModelBuilder
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
-		else if mclass.arity != arity then
+		else if arity != 0 and mclass.arity != arity then
 			error(nclassdef, "Redef error: Formal parameter arity missmatch; got {arity}, expected {mclass.arity}.")
 			return
 		else if nkind != null and mkind != concrete_kind and mclass.kind != mkind then
@@ -121,35 +137,29 @@ redef class ModelBuilder
 			return
 		end
 
-		var names = new Array[String]
 		var bounds = new Array[MType]
 		if nclassdef isa AStdClassdef and mclass.arity > 0 then
-			# Collect formal parameter names
+			# Revolve bound for formal parameters
 			for i in [0..mclass.arity[ do
-				var nfd = nclassdef.n_formaldefs[i]
-				var ptname = nfd.n_id.text
-				if names.has(ptname) then
-					error(nfd, "Error: A formal parameter type `{ptname}' already exists")
-					return
+				if nclassdef.n_formaldefs.is_empty then
+					# Inherit the bound
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					continue
 				end
-				for c in ptname.chars do if c >= 'a' and c<= 'z' then
-					warning(nfd, "formal-type-name", "Warning: lowercase in the formal parameter type {ptname}")
-					break
-				end
-				names.add(ptname)
-				nfd.mtype = mclass.mclass_type.arguments[i].as(MParameterType)
-			end
 
-			# Revolve bound for formal parameter names
-			for i in [0..mclass.arity[ do
 				var nfd = nclassdef.n_formaldefs[i]
+				var pname = mclass.mparameters[i].name
+				if nfd.n_id.text != pname then
+					error(nfd.n_id, "Error: Formal parameter type #{i} `{nfd.n_id.text}` must be named `{pname}' as in the original definition in module `{mclass.intro.mmodule}`.")
+				end
 				var nfdt = nfd.n_type
 				if nfdt != null then
 					var bound = resolve_mtype_unchecked(mmodule, null, nfdt, false)
 					if bound == null then return # Forward error
 					if bound.need_anchor then
 						# No F-bounds!
-						error(nfd, "Error: Formal parameter type `{names[i]}' bounded with a formal parameter type")
+						error(nfd, "Error: Formal parameter type `{pname}' bounded with a formal parameter type")
 					else
 						bounds.add(bound)
 						nfd.bound = bound
@@ -172,7 +182,7 @@ redef class ModelBuilder
 		end
 
 		var bound_mtype = mclass.get_mtype(bounds)
-		var mclassdef = new MClassDef(mmodule, bound_mtype, nclassdef.location, names)
+		var mclassdef = new MClassDef(mmodule, bound_mtype, nclassdef.location)
 		nclassdef.mclassdef = mclassdef
 		self.mclassdef2nclassdef[mclassdef] = nclassdef
 
@@ -426,19 +436,19 @@ redef class ModelBuilder
 		end
 
 		# Check parameter type
-		if mclassdef != null and mclassdef.parameter_names.has(name) then
-			if not ntype.n_types.is_empty then
-				error(ntype, "Type error: formal type {name} cannot have formal parameters.")
-			end
-			for i in [0..mclassdef.parameter_names.length[ do
-				if mclassdef.parameter_names[i] == name then
-					res = mclassdef.mclass.mclass_type.arguments[i]
-					if ntype.n_kwnullable != null then res = res.as_nullable
-					ntype.mtype = res
-					return res
+		if mclassdef != null then
+			for p in mclassdef.mclass.mparameters do
+				if p.name != name then continue
+
+				if not ntype.n_types.is_empty then
+					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
 				end
+
+				res = p
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
 			end
-			abort
 		end
 
 		# Check class

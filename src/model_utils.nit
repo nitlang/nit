@@ -417,8 +417,8 @@ redef class MClass
 	# Get the list of all parameter types in 'self'.
 	fun parameter_types: Map[String, MType] do
 		var res = new HashMap[String, MType]
-		for i in [0..intro.parameter_names.length[ do
-			res[intro.parameter_names[i]] = intro.bound_mtype.arguments[i]
+		for p in mparameters do
+			res[p.name] = p
 		end
 		return res
 	end

@@ -456,9 +456,9 @@ redef class MClass
 		var res = new FlatBuffer
 		if arity > 0 then
 			res.append("[")
-			for i in [0..intro.parameter_names.length[ do
-				res.append(intro.parameter_names[i])
-				if i < intro.parameter_names.length - 1 then res.append(", ")
+			for i in [0..mparameters.length[ do
+				res.append(mparameters[i].name)
+				if i < mparameters.length - 1 then res.append(", ")
 			end
 			res.append("]")
 		end
@@ -767,7 +767,7 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun to_console do return mclass.intro.parameter_names[rank]
+	redef fun to_console do return name
 end
 
 redef class MVirtualType

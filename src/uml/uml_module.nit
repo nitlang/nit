@@ -90,11 +90,11 @@ redef class MClassDef
 		end
 		if mclass.arity > 0 then
 			t.add "["
-			var formal = mclass.intro.parameter_names
-			t.add formal.first
-			for i in [1 .. formal.length[ do
+			var mparameters = mclass.mparameters
+			t.add mparameters.first.name
+			for i in [1 .. mparameters.length[ do
 				t.add ", "
-				t.add formal[i]
+				t.add mparameters[i].name
 			end
 			t.add "]"
 		end

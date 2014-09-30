@@ -333,7 +333,7 @@ interface Set[E: Object]
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
-interface MapRead[K: Object, E]
+interface MapRead[K: Object, V]
 	# Get the item at `key`
 	#
 	#     var x = new HashMap[String, Int]
@@ -343,7 +343,7 @@ interface MapRead[K: Object, E]
 	#
 	# If the key is not in the map, `provide_default_value` is called (that aborts by default)
 	# See `get_or_null` and `get_or_default` for safe variations.
-	fun [](key: K): E is abstract
+	fun [](key: K): V is abstract
 
 	# Get the item at `key` or null if `key` is not in the map.
 	#
@@ -352,8 +352,8 @@ interface MapRead[K: Object, E]
 	#     assert x.get_or_null("four") == 4
 	#     assert x.get_or_null("five") == null
 	#
-	# Note: use `has_key` and `[]` if you need the distinction bewteen a key associated with null, and no key.
-	fun get_or_null(key: K): nullable E
+	# Note: use `has_key` and `[]` if you need the distinction between a key associated with null, and no key.
+	fun get_or_null(key: K): nullable V
 	do
 		if has_key(key) then return self[key]
 		return null
@@ -366,17 +366,17 @@ interface MapRead[K: Object, E]
 	#     assert x.get_or_default("four", 40) == 4
 	#     assert x.get_or_default("five", 50) == 50
 	#
-	fun get_or_default(key: K, default: E): E
+	fun get_or_default(key: K, default: V): V
 	do
 		if has_key(key) then return self[key]
 		return default
 	end
 
-	# Depreciated alias for `keys.has`
+	# Alias for `keys.has`
 	fun has_key(key: K): Bool do return self.keys.has(key)
 
 	# Get a new iterator on the map.
-	fun iterator: MapIterator[K, E] is abstract
+	fun iterator: MapIterator[K, V] is abstract
 
 	# Return the point of view of self on the values only.
 	# Note that `self` and `values` are views on the same data;
@@ -386,7 +386,7 @@ interface MapRead[K: Object, E]
 	#     x["four"] = 4
 	#     assert x.values.has(4) == true
 	#     assert x.values.has(5) == false
-	fun values: Collection[E] is abstract
+	fun values: Collection[V] is abstract
 
 	# Return the point of view of self on the keys only.
 	# Note that `self` and `keys` are views on the same data;
@@ -421,7 +421,7 @@ interface MapRead[K: Object, E]
 	#
 	# Note: the value is returned *as is*, implementations may want to store the value in the map before returning it
 	# @toimplement
-	protected fun provide_default_value(key: K): E do abort
+	protected fun provide_default_value(key: K): V do abort
 end
 
 # Maps are associative collections: `key` -> `item`.
@@ -448,8 +448,8 @@ end
 #     assert map.values.has(1)      ==  true
 #     assert map.values.has(3)      ==  false
 #
-interface Map[K: Object, E]
-	super MapRead[K, E]
+interface Map[K: Object, V]
+	super MapRead[K, V]
 
 	# Set the `value` at `key`.
 	#
@@ -459,14 +459,14 @@ interface Map[K: Object, E]
 	#     x["four"] = 4
 	#     assert x["four"]   == 4
 	#
-	# If the key was associated with a value, this old value is discarted
+	# If the key was associated with a value, this old value is discarded
 	# and replaced with the new one.
 	#
 	#     x["four"] = 40
 	#     assert x["four"]         == 40
 	#     assert x.values.has(4)   == false
 	#
-	fun []=(key: K, value: E) is abstract
+	fun []=(key: K, value: V) is abstract
 
 	# Add each (key,value) of `map` into `self`.
 	# If a same key exists in `map` and `self`, then the value in self is discarded.
@@ -483,7 +483,7 @@ interface Map[K: Object, E]
 	#     assert x["four"]  == 40
 	#     assert x["five"]  == 5
 	#     assert x["nine"]  == 90
-	fun recover_with(map: Map[K, E])
+	fun recover_with(map: MapRead[K, V])
 	do
 		var i = map.iterator
 		while i.is_ok do
@@ -502,16 +502,16 @@ interface Map[K: Object, E]
 	# ENSURE `is_empty`
 	fun clear is abstract
 
-	redef fun values: RemovableCollection[E] is abstract
+	redef fun values: RemovableCollection[V] is abstract
 
 	redef fun keys: RemovableCollection[K] is abstract
 end
 
 # Iterators for Map.
-interface MapIterator[K: Object, E]
+interface MapIterator[K: Object, V]
 	# The current item.
 	# Require `is_ok`.
-	fun item: E is abstract
+	fun item: V is abstract
 
 	# The key of the current item.
 	# Require `is_ok`.
@@ -887,18 +887,18 @@ end
 
 # Associative arrays that internally uses couples to represent each (key, value) pairs.
 # This is an helper class that some specific implementation of Map may implements.
-interface CoupleMap[K: Object, E]
-	super Map[K, E]
+interface CoupleMap[K: Object, V]
+	super Map[K, V]
 
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
-	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
+	protected fun couple_at(key: K): nullable Couple[K, V] is abstract
 
 	# Return a new iteralot on all couples
 	# Used to provide `iterator` and others
-	protected fun couple_iterator: Iterator[Couple[K,E]] is abstract
+	protected fun couple_iterator: Iterator[Couple[K,V]] is abstract
 
-	redef fun iterator do return new CoupleMapIterator[K,E](couple_iterator)
+	redef fun iterator do return new CoupleMapIterator[K,V](couple_iterator)
 
 	redef fun [](key)
 	do
@@ -914,8 +914,8 @@ end
 # Iterator on CoupleMap
 #
 # Actually it is a wrapper around an iterator of the internal array of the map.
-private class CoupleMapIterator[K: Object, E]
-	super MapIterator[K, E]
+private class CoupleMapIterator[K: Object, V]
+	super MapIterator[K, V]
 	redef fun item do return _iter.item.second
 	
 	#redef fun item=(e) do _iter.item.second = e
@@ -929,9 +929,9 @@ private class CoupleMapIterator[K: Object, E]
 		_iter.next
 	end
 
-	private var iter: Iterator[Couple[K,E]]
+	private var iter: Iterator[Couple[K,V]]
 
-	init(i: Iterator[Couple[K,E]]) do _iter = i
+	init(i: Iterator[Couple[K,V]]) do _iter = i
 end
 
 # Some tools ###################################################################
