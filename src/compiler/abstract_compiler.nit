@@ -330,7 +330,7 @@ class MakefileToolchain
 
 		var outname = outfile(mainmodule)
 
-		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
+		var orig_dir = compile_dir.relpath(".")
 		var outpath = orig_dir.join_path(outname).simplify_path
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
