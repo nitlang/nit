@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check missing signed-off-by in commits
+# Check missing "This file is part of NIT…" comment in committed scripts.
 
 if test "$#" -lt 2; then
 	echo "Usage: checklicense from to"
@@ -28,5 +28,5 @@ err=0
 
 git diff --name-status $from..$to -- "*.nit" "*.sh" | sed -n 's/^A\s*//p' > checklicense_new_files.out
 test -s checklicense_new_files.out || exit 0
-grep -L 'his file is part of NIT' `cat checklicense_new_files.out` 2>/dev/null | tee checklicense_missing.out
+grep -L '\(^\|\b\)# [Tt]his file is part of NIT ' `cat checklicense_new_files.out` 2>/dev/null | tee checklicense_missing.out
 test \! -s checklicense_missing.out
