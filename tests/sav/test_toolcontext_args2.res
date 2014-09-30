@@ -1,6 +1,7 @@
 Usage: test_toolcontext [OPTION]...
 Test for ToolContext, try --bash-completion.
-  -W, --warn              Show warnings
+  -W, --warn              Show more warnings
+  -w, --warning           Show/hide a specific warning
   -q, --quiet             Do not show warnings
   --stop-on-first-error   Stop on first error
   --no-color              Do not use color to display errors and warnings

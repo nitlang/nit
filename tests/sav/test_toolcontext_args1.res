@@ -5,7 +5,7 @@ _DUMMY_TOOL()
 	COMPREPLY=()
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
-	opts="--warn --quiet --stop-on-first-error --no-color --log --log-dir --help --version --set-dummy-tool --verbose --bash-completion --option-a --option-b"
+	opts="--warn --warning --quiet --stop-on-first-error --no-color --log --log-dir --help --version --set-dummy-tool --verbose --bash-completion --option-a --option-b"
 	if [[ ${cur} == -* ]] ; then
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
