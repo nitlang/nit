@@ -81,6 +81,7 @@ lazy
 noinit
 readonly
 writable
+autoinit
 cached
 nosuper
 old_style_init

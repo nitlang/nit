@@ -121,8 +121,27 @@ redef class ModelBuilder
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
 		var initializers = new Array[MProperty]
-		var anode: nullable ANode = null
 		for npropdef in nclassdef.n_propdefs do
+			if npropdef isa AMethPropdef then
+				if npropdef.mpropdef == null then return # Skip broken attribute
+				var at = npropdef.get_single_annotation("autoinit", self)
+				if at == null then continue # Skip non tagged init
+
+				var sig = npropdef.mpropdef.msignature
+				if sig == null then continue # Skip broken method
+
+				if not npropdef.mpropdef.is_intro then
+					self.error(at, "Error: `autoinit` cannot be set on redefinitions")
+					continue
+				end
+
+				for param in sig.mparameters do
+					var ret_type = param.mtype
+					var mparameter = new MParameter(param.name, ret_type, false)
+					mparameters.add(mparameter)
+				end
+				initializers.add(npropdef.mpropdef.mproperty)
+			end
 			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
 				var at = npropdef.get_single_annotation("noinit", self)
@@ -147,10 +166,8 @@ redef class ModelBuilder
 					# Add the setter to the list
 					initializers.add(msetter.mproperty)
 				end
-				if anode == null then anode = npropdef
 			end
 		end
-		if anode == null then anode = nclassdef
 
 		if the_root_init_mmethod == null then return
 

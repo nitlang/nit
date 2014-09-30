@@ -20,7 +20,7 @@ module clock
 # A simple wall clock with 60 minutes and 12 hours.
 class Clock
 	# total number of minutes from 0 to 719
-	var total_minutes: Int
+	var total_minutes: Int is noinit
 	# Note: only the read acces is public, the write access is private.
 
 	# number of minutes in the current hour (from 0 to 59)
@@ -46,9 +46,7 @@ class Clock
 
 	redef fun to_s do return "{hours}:{minutes}"
 
-	fun reset(hours, minutes: Int) do self.total_minutes = hours*60 + minutes
-
-	init(hours, minutes: Int) do self.reset(hours, minutes)
+	fun reset(hours, minutes: Int) is autoinit do self.total_minutes = hours*60 + minutes
 
 	redef fun ==(o)
 	do
