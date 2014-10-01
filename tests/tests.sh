@@ -439,10 +439,10 @@ for ii in "$@"; do
 		fi
 
 		if [ -n "$isinterpret" ]; then
-			cat > "./$ff.bin" <<END
+			cat > "$ff.bin" <<END
 exec $NITC --no-color $OPT "$i" $includes -- "\$@"
 END
-			chmod +x "./$ff.bin"
+			chmod +x "$ff.bin"
 			> "$ff.cmp.err"
 			> "$ff.compile.log"
 			ERR=0
@@ -467,7 +467,7 @@ END
 			fi
 		fi
 		if [ "$engine" = "emscripten" ]; then
-			echo > "./$ff.bin" "nodejs $ffout \"\$@\""
+			echo > "$ff.bin" "nodejs $ffout \"\$@\""
 			chmod +x "$ff.bin"
 			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
 				echo " [skip] do no not imports kernel"
@@ -484,7 +484,7 @@ END
 			echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
-		elif [ -x "./$ff.bin" ]; then
+		elif [ -x "$ff.bin" ]; then
 			if skip_exec "$bf"; then
 				# No exec
 				> "$ff.res"
@@ -496,7 +496,7 @@ END
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo "NIT_NO_STACK=1 ./$ff.bin" $args
+				echo "NIT_NO_STACK=1 $ff.bin" $args
 			fi	
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
 				/usr/bin/time --quiet -f%U -a -o "$ff.time.out" $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
@@ -539,11 +539,11 @@ END
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
-						echo "NIT_NO_STACK=1 ./$ff.bin" $args
+						echo "NIT_NO_STACK=1 $ff.bin" $args
 					fi
 					echo -n "==> $name "
-					echo "./$ff.bin $args" > "./$fff.bin"
-					chmod +x "./$fff.bin"
+					echo "$ff.bin $args" > "$fff.bin"
+					chmod +x "$fff.bin"
 					WRITE="$fff.write" /usr/bin/time --quiet -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
@@ -561,7 +561,7 @@ END
 					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
-		elif [ -f "./$ff.bin" ]; then
+		elif [ -f "$ff.bin" ]; then
 			#Not executable (platform?)"
 			> "$ff.res"
 			process_result $bf "$bf" $pack
