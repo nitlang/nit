@@ -31,16 +31,16 @@ private import more_collections
 
 redef class ToolContext
 	# Option --path
-	var opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
+	var opt_path = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
 
 	# Option --only-metamodel
-	var opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
+	var opt_only_metamodel = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
 	# Option --only-parse
-	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
+	var opt_only_parse = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
 	# Option --ignore-visibility
-	var opt_ignore_visibility: OptionBool = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+	var opt_ignore_visibility = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
 
 	redef init
 	do
@@ -48,7 +48,9 @@ redef class ToolContext
 		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel, opt_ignore_visibility)
 	end
 
+	# The modelbuilder 1-to-1 associated with the toolcontext
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
+
 	private var modelbuilder_real: nullable ModelBuilder = null
 
 	# Run `process_mainmodule` on all phases
@@ -273,7 +275,7 @@ class ModelBuilder
 		return res
 	end
 
-	private var try_get_mproperty_by_name2_cache: HashMap3[MModule, MType, String, nullable MProperty] = new HashMap3[MModule, MType, String, nullable MProperty]
+	private var try_get_mproperty_by_name2_cache = new HashMap3[MModule, MType, String, nullable MProperty]
 
 
 	# Alias for try_get_mproperty_by_name2(anode, mclassdef.mmodule, mclassdef.mtype, name)
@@ -288,7 +290,7 @@ class ModelBuilder
 	#   * the NIT_PATH environment variable
 	#   * `toolcontext.nit_dir`
 	# Path can be added (or removed) by the client
-	var paths: Array[String] = new Array[String]
+	var paths = new Array[String]
 
 	# Like (an used by) `get_mmodule_by_name` but just return the ModulePath
 	private fun search_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
@@ -539,7 +541,6 @@ class ModelBuilder
 		var parser = new Parser(lexer)
 		var tree = parser.parse
 		file.close
-		var mod_name = filename.basename(".nit")
 
 		# Handle lexer and parser error
 		var nmodule = tree.n_base
@@ -586,6 +587,8 @@ class ModelBuilder
 		return nmodule
 	end
 
+	# Injection of a new module without source.
+	# Used by the interpreted
 	fun load_rt_module(parent: MModule, nmodule: AModule, mod_name: String): nullable AModule
 	do
 		# Create the module
@@ -702,11 +705,11 @@ class ModelBuilder
 	end
 
 	# All the loaded modules
-	var nmodules: Array[AModule] = new Array[AModule]
+	var nmodules = new Array[AModule]
 
 	# Register the nmodule associated to each mmodule
 	# FIXME: why not refine the `MModule` class with a nullable attribute?
-	var mmodule2nmodule: HashMap[MModule, AModule] = new HashMap[MModule, AModule]
+	var mmodule2nmodule = new HashMap[MModule, AModule]
 
 	# Helper function to display an error on a node.
 	# Alias for `self.toolcontext.error(n.hot_location, text)`

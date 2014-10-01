@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Verify that local variables are initialized before their usage
-# Require that the scope and the flow analaysis are already performed
+# Require that the scope and the flow analysis are already performed
 module local_var_init
 
 import flow
@@ -49,7 +49,7 @@ private class LocalVarInitVisitor
 		self.toolcontext = toolcontext
 	end
 
-	# Local variables that are possibily unset (ie local variable without an initial value)
+	# Local variables that are possibly unset (ie local variable without an initial value)
 	var maybe_unset_vars: Set[Variable] = new HashSet[Variable]
 
 	fun mark_is_unset(node: AExpr, variable: nullable Variable)
@@ -75,7 +75,7 @@ private class LocalVarInitVisitor
 		var flow = node.after_flow_context.as(not null)
 		if not flow.is_variable_set(variable) then
 			self.toolcontext.error(node.hot_location, "Error: variable '{variable}' is possibly unset.")
-			# Remove the variable to avoid repetting errors
+			# Remove the variable to avoid repeating errors
 			self.maybe_unset_vars.remove(variable)
 		end
 	end
@@ -116,7 +116,7 @@ redef class AVardeclExpr
 		super
 		# The variable is unset only if there is no initial value.
 
-		# Note: loops in inital value are not a problem
+		# Note: loops in initial value are not a problem
 		# Example:
 		#
 		#     var foo = foo + 1 #-> Error during typing: "self.foo" unknown

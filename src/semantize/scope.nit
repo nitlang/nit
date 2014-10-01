@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Identification and scping of local variables and labels.
+# Identification and scoping of local variables and labels.
 module scope
 
 import phase
@@ -50,15 +50,15 @@ class EscapeMark
 	# The name of the label (unless the mark is an anonymous loop mark)
 	var name: nullable String
 
-	# Is the mark atached to a loop (loop, while, for)
+	# Is the mark attached to a loop (loop, while, for)
 	# Such a mark is a candidate to a labelless 'continue' or 'break'
 	var for_loop: Bool
 
 	# Each 'continue' attached to the mark
-	var continues: Array[AContinueExpr] = new Array[AContinueExpr]
+	var continues = new Array[AContinueExpr]
 
 	# Each 'break' attached to the mark
-	var breaks: Array[ABreakExpr] = new Array[ABreakExpr]
+	var breaks = new Array[ABreakExpr]
 end
 
 # Visit a npropdef and:
@@ -72,7 +72,7 @@ private class ScopeVisitor
 	# The tool context used to display errors
 	var toolcontext: ToolContext
 
-	var selfvariable: Variable = new Variable("self")
+	var selfvariable = new Variable("self")
 
 	init(toolcontext: ToolContext)
 	do
@@ -81,7 +81,7 @@ private class ScopeVisitor
 	end
 
 	# All stacked scope. `scopes.first` is the current scope
-	private var scopes: List[Scope] = new List[Scope]
+	private var scopes = new List[Scope]
 
 	# Shift and check the last scope
 	fun shift_scope
@@ -95,7 +95,7 @@ private class ScopeVisitor
 		end
 	end
 
-	# Regiter a local variable.
+	# Register a local variable.
 	# Display an error on toolcontext if a variable with the same name is masked.
 	fun register_variable(node: ANode, variable: Variable): Bool
 	do
@@ -130,7 +130,7 @@ private class ScopeVisitor
 
 	# Enter in a statement block `node` as inside a new scope.
 	# The block can be optionally attached to an `escapemark`.
-	private fun enter_visit_block(node: nullable AExpr, escapemark: nullable EscapeMark)
+	fun enter_visit_block(node: nullable AExpr, escapemark: nullable EscapeMark)
 	do
 		if node == null then return
 		var scope = new Scope
@@ -141,8 +141,8 @@ private class ScopeVisitor
 	end
 
 	# Look for a label `name`.
-	# Return nulll if no such a label is found.
-	private fun search_label(name: String): nullable EscapeMark
+	# Return null if no such a label is found.
+	fun search_label(name: String): nullable EscapeMark
 	do
 		for scope in scopes do
 			var res = scope.escapemark
@@ -155,7 +155,7 @@ private class ScopeVisitor
 
 	# Create a new escape mark (possibly with a label)
 	# Display an error on toolcontext if a label with the same name is masked.
-	private fun make_escape_mark(nlabel: nullable ALabel, for_loop: Bool): EscapeMark
+	fun make_escape_mark(nlabel: nullable ALabel, for_loop: Bool): EscapeMark
 	do
 		var name: nullable String
 		if nlabel != null then
@@ -181,11 +181,11 @@ private class ScopeVisitor
 	end
 
 	# Look for an escape mark optionally associated with a label.
-	# If a label is given, the the escapemark of this label is returned.
+	# If a label is given, the escapemark of this label is returned.
 	# If there is no label, the nearest escapemark that is `for loop` is returned.
 	# If there is no valid escapemark, then an error is displayed ans null is returned.
-	# Return nulll if no such a label is found.
-	private fun get_escapemark(node: ANode, nlabel: nullable ALabel): nullable EscapeMark
+	# Return null if no such a label is found.
+	fun get_escapemark(node: ANode, nlabel: nullable ALabel): nullable EscapeMark
 	do
 		if nlabel != null then
 			var nid = nlabel.n_id
@@ -211,20 +211,20 @@ private class ScopeVisitor
 					return res
 				end
 			end
-			self.error(node, "Syntax Error: 'break' statment outside block.")
+			self.error(node, "Syntax Error: 'break' statement outside block.")
 			return null
 		end
 	end
 
 	# Display an error
-	private fun error(node: ANode, message: String)
+	fun error(node: ANode, message: String)
 	do
 		self.toolcontext.error(node.hot_location, message)
 	end
 end
 
 private class Scope
-	var variables: HashMap[String, Variable] = new HashMap[String, Variable]
+	var variables = new HashMap[String, Variable]
 
 	var escapemark: nullable EscapeMark = null
 
@@ -283,7 +283,7 @@ redef class AVardeclExpr
 end
 
 redef class ASelfExpr
-	# The variable associated with the self reciever
+	# The variable associated with the self receiver
 	var variable: nullable Variable
 	redef fun accept_scope_visitor(v)
 	do
@@ -423,7 +423,7 @@ redef class ACallFormExpr
 		super
 	end
 
-	# Create a variable acces corresponding to the call form
+	# Create a variable access corresponding to the call form
 	private fun variable_create(variable: Variable): AVarFormExpr is abstract
 end
 

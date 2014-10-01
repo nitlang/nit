@@ -23,7 +23,7 @@ class Model
 end
 
 # A named and possibly documented entity in the model.
-# This class is usefull to generalize presentation of entities to the human.
+# This class is useful to generalize presentation of entities to the human.
 abstract class MEntity
 	# The short (unqualified) name of this model entity
 	fun name: String is abstract
@@ -72,8 +72,13 @@ class MVisibility
 	end
 end
 
+# The visibility level `intrude`
 fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 5)
+# The visibility level `public`
 fun public_visibility: MVisibility do return once new MVisibility("public", 4)
+# The visibility level `protected`
 fun protected_visibility: MVisibility do return once new MVisibility("protected", 3)
+# The visibility level `private`
 fun private_visibility: MVisibility do return once new MVisibility("private", 2)
+# The visibility level `none` (no visibility)
 fun none_visibility: MVisibility do return once new MVisibility("none", 1)

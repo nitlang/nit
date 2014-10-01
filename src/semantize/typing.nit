@@ -101,9 +101,9 @@ private class TypeVisitor
 	end
 
 	# Check that `sub` is a subtype of `sup`.
-	# If `sub` is not a valud suptype, then display an error on `node` an return null.
+	# If `sub` is not a valid suptype, then display an error on `node` an return null.
 	# If `sub` is a safe subtype of `sup` then return `sub`.
-	# If `sub` is an insafe subtype (ie an imlicit cast is required), then return `sup`.
+	# If `sub` is an unsafe subtype (ie an implicit cast is required), then return `sup`.
 	#
 	# The point of the return type is to determinate the usable type on an expression:
 	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
@@ -112,7 +112,7 @@ private class TypeVisitor
 	do
 		if self.is_subtype(sub, sup) then return sub
 		if self.is_subtype(sub, self.anchor_to(sup)) then
-			# FIXME workarround to the current unsafe typing policy. To remove once fixed virtual types exists.
+			# FIXME workaround to the current unsafe typing policy. To remove once fixed virtual types exists.
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
@@ -304,7 +304,7 @@ private class TypeVisitor
 		return callsite
 	end
 
-	# Visit the expressions of args and cheik their conformity with the corresponding typi in signature
+	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
 	fun check_signature(node: ANode, args: Array[AExpr], name: String, msignature: MSignature): Bool
@@ -409,7 +409,7 @@ end
 
 # A specific method call site with its associated informations.
 class CallSite
-	# The assiciated node for location
+	# The associated node for location
 	var node: ANode
 
 	# The static type of the receiver (possibly unresolved)
@@ -422,7 +422,7 @@ class CallSite
 	var anchor: nullable MClassType
 
 	# Is the receiver self?
-	# If "for_self", virtual types of the signature are keeped
+	# If "for_self", virtual types of the signature are kept
 	# If "not_for_self", virtual type are erased
 	var recv_is_self: Bool
 
@@ -457,7 +457,7 @@ redef class FlowContext
 
 	# Adapt the variable to a static type
 	# Warning1: do not modify vars directly.
-	# Warning2: sub-flow may have cached a unadapted variabial
+	# Warning2: sub-flow may have cached a unadapted variable
 	private fun set_var(variable: Variable, mtype: nullable MType)
 	do
 		self.vars[variable] = mtype
@@ -501,7 +501,7 @@ redef class APropdef
 	do
 	end
 
-	# The variable associated to the reciever (if any)
+	# The variable associated to the receiver (if any)
 	var selfvariable: nullable Variable
 end
 
@@ -1555,7 +1555,7 @@ redef class ASuperExpr
 			var errcount = v.modelbuilder.toolcontext.error_count
 			var candidate = v.try_get_mproperty_by_name2(self, msupertype, mproperty.name).as(nullable MMethod)
 			if candidate == null then
-				if v.modelbuilder.toolcontext.error_count > errcount then return # Forard error
+				if v.modelbuilder.toolcontext.error_count > errcount then return # Forward error
 				continue # Try next super-class
 			end
 			if superprop != null and candidate.is_root_init then
@@ -1571,7 +1571,7 @@ redef class ASuperExpr
 				candidatedefs.add(superprop)
 			end
 			if candidatedefs.length > 1 then
-				v.error(self, "Error: confliting property definitions for property {mproperty} in {recvtype}: {candidatedefs.join(", ")}")
+				v.error(self, "Error: conflicting property definitions for property {mproperty} in {recvtype}: {candidatedefs.join(", ")}")
 				return
 			end
 			superprop = candidatedefs.first

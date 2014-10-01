@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Platform system, used to customize the behavior of the compiler according
-# to the target platform. Also detects conflicts between targetted platforms.
+# Platform system, used to customize the behavior of the compiler.
+#
+# Customisation is done accordingly to the target platform.
+# Also detects conflicts between targeted platforms.
 module platform
 
 import modelize
@@ -83,7 +85,7 @@ end
 redef class MModule
 	private var local_target_platform: nullable Platform = null
 
-	# Recusively get the platform targetted by this module or imported modules
+	# Recursively get the platform targeted by this module or imported modules
 	fun target_platform: nullable Platform
 	do
 		var ltp = local_target_platform
@@ -102,8 +104,10 @@ end
 #
 # Services will be added to this class in other modules.
 abstract class Platform
+	# Does the platform provide and support the library `unwind`?
 	fun supports_libunwind: Bool do return true
 
+	# Does the platform provide and supports the Boehm's GC library?
 	fun supports_libgc: Bool do return true
 
 	# Does this platform declare its own main function? If so, we won't generate one in Nit.

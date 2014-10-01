@@ -19,7 +19,7 @@ import model_base
 private import more_collections
 import poset
 
-# A Nit project, thas encompass a product
+# A Nit project, that encompass a product
 class MProject
 	super MConcern
 
@@ -57,7 +57,7 @@ class MGroup
 	# empty name for a default group in a single-module project
 	redef var name: String
 
-	# The englobing project
+	# The enclosing project
 	var mproject: MProject
 
 	# The parent group if any
@@ -73,14 +73,14 @@ class MGroup
 	end
 
 	# The group is the group tree on the project (`mproject.mgroups`)
-	# nested groups (children) are smallers
+	# nested groups (children) are smaller
 	# nesting group (see `parent`) is bigger
 	var in_nesting: POSetElement[MGroup]
 
 	# Is `self` the root of its project?
 	fun is_root: Bool do return mproject.root == self
 
-	# The filepath (usualy a directory) of the group, if any
+	# The filepath (usually a directory) of the group, if any
 	var filepath: nullable String is writable
 
 	init (name: String, mproject: MProject, parent: nullable MGroup)
@@ -110,7 +110,7 @@ redef class Model
 	var mprojects = new Array[MProject]
 
 	# Collections of project grouped by their names
-	private var mproject_by_name: MultiHashMap[String, MProject] = new MultiHashMap[String, MProject]
+	private var mproject_by_name = new MultiHashMap[String, MProject]
 
 	# Return all project named `name`
 	# If such a project is not yet loaded, null is returned (instead of an empty array)
