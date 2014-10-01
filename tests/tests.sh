@@ -374,15 +374,19 @@ fi
 # Mark to distinguish files among tests
 # MARK=
 
-# File where error tests are outputed
-# Old ERRLIST is backuped
-ERRLIST=${ERRLIST:-errlist}
-ERRLIST_TARGET=$ERRLIST
-
 if [ $# = 0 ]; then
 	usage;
 	exit
 fi
+
+# CLEAN the out directory
+rm -rf "$outdir/" 2>/dev/null
+mkdir "$outdir" 2>/dev/null
+
+# File where error tests are outputed
+# Old ERRLIST is backuped
+ERRLIST=${ERRLIST:-errlist}
+ERRLIST_TARGET=$ERRLIST
 
 # Initiate new ERRLIST
 if [ "x$ERRLIST" = "x" ]; then
@@ -397,10 +401,6 @@ nok=""
 todos=""
 xml="tests-$engine.xml"
 echo >$xml "<testsuites><testsuite>"
-
-# CLEAN the out directory
-rm -rf "$outdir/" 2>/dev/null
-mkdir "$outdir" 2>/dev/null
 
 for ii in "$@"; do
 	if [ ! -f $ii ]; then
