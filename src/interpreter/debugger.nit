@@ -1432,7 +1432,7 @@ redef class ANode
 
 	# Breaks automatically when encountering an error
 	# Permits the injunction of commands before crashing
-	redef private fun fatal(v: NaiveInterpreter, message: String)
+	redef fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v isa Debugger then
 			print "An error was encountered, the program will stop now."

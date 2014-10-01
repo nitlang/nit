@@ -53,7 +53,7 @@ redef class ModelBuilder
 end
 
 # The visitor that interprets the Nit Program by walking on the AST
-private class NaiveInterpreter
+class NaiveInterpreter
 	# The modelbuilder that know the AST and its associations with the model
 	var modelbuilder: ModelBuilder
 
@@ -608,7 +608,7 @@ class PrimitiveInstance[E: Object]
 end
 
 # Information about local variables in a running method
-private class Frame
+class Frame
 	# The current visited node
 	# The node is stored by frame to keep a stack trace
 	var current_node: ANode
@@ -618,13 +618,13 @@ private class Frame
 	# Arguments of the method (the first is the receiver)
 	var arguments: Array[Instance]
 	# Mapping between a variable and the current value
-	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
 end
 
 redef class ANode
 	# Aborts the program with a message
 	# `v` is used to know if a colored message is displayed or not
-	private fun fatal(v: NaiveInterpreter, message: String)
+	fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
