@@ -742,12 +742,13 @@ class NeoModel
 			return  mtype
 		else if node.labels.has("MNullableType") then
 			var intype = to_mtype(model, node.out_nodes("TYPE").first)
-			var mtype = new MNullableType(intype)
+			var mtype = intype.as_nullable
 			mentities[node] = mtype
 			return mtype
 		else if node.labels.has("MVirtualType") then
 			var mproperty = to_mproperty(model, node.out_nodes("PROPERTY").first)
-			var mtype = new MVirtualType(mproperty)
+			assert mproperty isa MVirtualTypeProp
+			var mtype = mproperty.mvirtualtype
 			mentities[node] = mtype
 			return mtype
 		else if node.labels.has("MSignature") then
