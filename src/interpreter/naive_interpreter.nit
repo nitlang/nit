@@ -45,27 +45,10 @@ redef class ModelBuilder
 		self.toolcontext.info("*** START INTERPRETING ***", 1)
 
 		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
-	end
-
-	private fun init_naive_interpreter(interpreter: NaiveInterpreter, mainmodule: MModule) do
-		var sys_type = mainmodule.sys_type
-		if sys_type == null then return # no class Sys
-		var mainobj = new MutableInstance(sys_type)
-		interpreter.mainobj = mainobj
-		interpreter.init_instance(mainobj)
-		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
-		if initprop != null then
-			interpreter.send(initprop, [mainobj])
-		end
-		var mainprop = mainmodule.try_get_primitive_method("run", sys_type.mclass) or else
-			mainmodule.try_get_primitive_method("main", sys_type.mclass)
-		if mainprop != null then
-			interpreter.send(mainprop, [mainobj])
-		end
 	end
 end
 
@@ -92,6 +75,25 @@ private class NaiveInterpreter
 		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		self.null_instance = new MutableInstance(mainmodule.model.null_type)
+	end
+
+	# Starts the interpreter on the main module of a program
+	fun start(mainmodule: MModule) do
+		var interpreter = self
+		var sys_type = mainmodule.sys_type
+		if sys_type == null then return # no class Sys
+		var mainobj = new MutableInstance(sys_type)
+		interpreter.mainobj = mainobj
+		interpreter.init_instance(mainobj)
+		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
+		if initprop != null then
+			interpreter.send(initprop, [mainobj])
+		end
+		var mainprop = mainmodule.try_get_primitive_method("run", sys_type.mclass) or else
+			mainmodule.try_get_primitive_method("main", sys_type.mclass)
+		if mainprop != null then
+			interpreter.send(mainprop, [mainobj])
+		end
 	end
 
 	# Subtype test in the context of the mainmodule

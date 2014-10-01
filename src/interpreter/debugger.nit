@@ -146,7 +146,7 @@ redef class ModelBuilder
 
 		var interpreter = new Debugger(self, mainmodule, arguments)
 
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
@@ -160,7 +160,7 @@ redef class ModelBuilder
 		var interpreter = new Debugger(self, mainmodule, arguments)
 		interpreter.autocontinue = true
 
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
