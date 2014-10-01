@@ -778,7 +778,6 @@ redef class AAttrPropdef
 		var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
-		set_doc(mpropdef, modelbuilder)
 
 		var readname = name
 		var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
@@ -796,7 +795,8 @@ redef class AAttrPropdef
 		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 		self.mreadpropdef = mreadpropdef
 		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
-		mreadpropdef.mdoc = mpropdef.mdoc
+		set_doc(mreadpropdef, modelbuilder)
+		mpropdef.mdoc = mreadpropdef.mdoc
 
 		var atlazy = self.get_single_annotation("lazy", modelbuilder)
 		if atlazy != null then
