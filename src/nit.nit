@@ -29,7 +29,8 @@ var opt = new OptionString("compatibility (does noting)", "-o")
 toolcontext.option_context.add_option(opt)
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 var opt_eval = new OptionBool("Specifies the program from command-line", "-e")
-toolcontext.option_context.add_option(opt_mixins, opt_eval)
+var opt_loop = new OptionBool("Repeatedly run the program for each line in file-name arguments", "-n")
+toolcontext.option_context.add_option(opt_mixins, opt_eval, opt_loop)
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
 
@@ -49,6 +50,14 @@ if opt_eval.value then
 	toolcontext.check_errors
 
 	var parent = null
+	if opt_loop.value then
+		var nruntime = modelbuilder.load_module("niti_runtime")
+		if nruntime == null then
+			toolcontext.check_errors
+			abort
+		end
+		parent = nruntime.mmodule
+	end
 
 	modelbuilder.load_rt_module(parent, amodule, "-")
 
