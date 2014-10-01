@@ -19,6 +19,7 @@ module nit
 
 import interpreter
 import frontend
+import parser_util
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -27,7 +28,8 @@ toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets 
 var opt = new OptionString("compatibility (does noting)", "-o")
 toolcontext.option_context.add_option(opt)
 var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
-toolcontext.option_context.add_option(opt_mixins)
+var opt_eval = new OptionBool("Specifies the program from command-line", "-e")
+toolcontext.option_context.add_option(opt_mixins, opt_eval)
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
 
@@ -40,7 +42,21 @@ var arguments = toolcontext.option_context.rest
 var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse([progname])
+var mmodules: Array[MModule]
+
+if opt_eval.value then
+	var amodule = toolcontext.parse_module(progname)
+	toolcontext.check_errors
+
+	var parent = null
+
+	modelbuilder.load_rt_module(parent, amodule, "-")
+
+	mmodules = [amodule.mmodule.as(not null)]
+else
+	mmodules = modelbuilder.parse([progname])
+end
+
 mmodules.add_all modelbuilder.parse(opt_mixins.value)
 modelbuilder.run_phases
 
