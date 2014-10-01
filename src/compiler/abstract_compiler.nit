@@ -2324,33 +2324,12 @@ redef class AClassdef
 	private fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		if mpropdef == self.mfree_init then
-			if mpropdef.mproperty.is_root_init then
-				assert self.super_inits == null
-				assert arguments.length == 1
-				if not mpropdef.is_intro then
-					v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
-				end
-				return
+			assert mpropdef.mproperty.is_root_init
+			assert arguments.length == 1
+			if not mpropdef.is_intro then
+				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 			end
-
-			var super_inits = self.super_inits
-			if super_inits != null then
-				var args_of_super = arguments
-				if arguments.length > 1 then args_of_super = [arguments.first]
-				for su in super_inits do
-					v.send(su, args_of_super)
-				end
-			end
-
-			var recv = arguments.first
-			var i = 1
-			# Collect undefined attributes
-			for npropdef in self.n_propdefs do
-				if npropdef isa AAttrPropdef and npropdef.n_expr == null and not npropdef.noinit then
-					v.write_attribute(npropdef.mpropdef.mproperty, recv, arguments[i])
-					i += 1
-				end
-			end
+			return
 		else
 			abort
 		end

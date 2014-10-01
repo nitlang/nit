@@ -1077,7 +1077,6 @@ redef class AClassdef
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		if mpropdef.mproperty.is_root_init then
-			assert self.super_inits == null
 			assert args.length == 1
 			if not mpropdef.is_intro then
 				# standard call-next-method
@@ -1085,27 +1084,9 @@ redef class AClassdef
 				v.call_without_varargs(superpd, args)
 			end
 			return null
+		else
+			abort
 		end
-
-		var super_inits = self.super_inits
-		if super_inits != null then
-			var args_of_super = args
-			if args.length > 1 then args_of_super = [args.first]
-			for su in super_inits do
-				v.send(su, args_of_super)
-			end
-		end
-		var recv = args.first
-		assert recv isa MutableInstance
-		var i = 1
-		# Collect undefined attributes
-		for npropdef in self.n_propdefs do
-			if npropdef isa AAttrPropdef and not npropdef.noinit and npropdef.n_expr == null then
-				v.write_attribute(npropdef.mpropdef.mproperty, recv, args[i])
-				i += 1
-			end
-		end
-		return null
 	end
 end
 
