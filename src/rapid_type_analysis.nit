@@ -239,13 +239,6 @@ class RapidTypeAnalysis
 				if mmeth.name == "init" then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					assert mmethoddef == nclassdef.mfree_init
-					var super_inits = nclassdef.super_inits
-					if super_inits != null then
-						#assert args.length == 1
-						for su in super_inits do
-							v.add_monomorphic_send(v.receiver, su)
-						end
-					end
 
 					if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)

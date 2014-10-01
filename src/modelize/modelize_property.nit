@@ -289,9 +289,6 @@ end
 
 redef class AClassdef
 	var build_properties_is_done: Bool = false
-	# The list of super-constructor to call at the start of the free constructor
-	# FIXME: this is needed to implement the crazy constructor thing of the of old compiler. We need to think what to do with since this cannot stay in the modelbuilder
-	var super_inits: nullable Collection[MMethod] = null
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
