@@ -36,6 +36,9 @@ paths=($paths)
 JNI_LIB_PATH=${paths[0]}
 shopt -u nullglob
 
+outdir="out"
+compdir=".nit_compile"
+
 usage()
 {
 	e=`basename "$0"`
@@ -46,6 +49,8 @@ Usage: $e [options] modulenames
 -h          This help
 --engine    Use a specific engine (default=nitg)
 --noskip    Do not skip a test even if the .skip file matches
+--outdir    Use a specific output folder (default=out/)
+--compdir   Use a specific temporary compilation folder (default=.nit_compile)
 END
 }
 
@@ -62,15 +67,15 @@ function compare_to_result()
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
 	test "`cat "$sav"`" = "UNDEFINED" && return 1
-	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
+	diff -u "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
-	sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
-	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log2"
+	sed '/[Ww]arning/d;/[Ee]rror/d' "$outdir/$pattern.res" > "$outdir/$pattern.res2"
+	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "$outdir/$pattern.sav2"
+	grep '[Ee]rror' "$outdir/$pattern.res" >/dev/null && echo "Error" >> "$outdir/$pattern.res2"
+	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "$outdir/$pattern.sav2"
+	diff -u "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -96,7 +101,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat out/$pattern.time.out`' timestamp='`date -Iseconds`'>"
+	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat $outdir/$pattern.time.out`' timestamp='`date -Iseconds`'>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -152,79 +157,79 @@ function process_result()
 		esac
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
-	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
+	grep 'NOT YET IMPLEMENTED' "$outdir/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$OLD" ]; then
-			echo "[*ok*] out/$pattern.res $SAV - but $OLD remains!"
-			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			echo "[*ok*] $outdir/$pattern.res $SAV - but $OLD remains!"
+			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
 		else
-			echo "[ok] out/$pattern.res $SAV"
+			echo "[ok] $outdir/$pattern.res $SAV"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$FIXME" ]; then
 		if [ -n "$OLD" ]; then
-			echo "[*fixme*] out/$pattern.res $FIXME - but $OLD remains!"
-			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			echo "[*fixme*] $outdir/$pattern.res $FIXME - but $OLD remains!"
+			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
 		else
-			echo "[fixme] out/$pattern.res $FIXME"
+			echo "[fixme] $outdir/$pattern.res $FIXME"
 			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ "x$NYI" = "x0" ]; then
-		echo "[todo] out/$pattern.res -> not yet implemented"
+		echo "[todo] $outdir/$pattern.res -> not yet implemented"
 		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
-		echo "[======= soso out/$pattern.res $SOSO =======]"
-		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo "[======= soso $outdir/$pattern.res $SOSO =======]"
+		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$SOSOF" ]; then
-		echo "[======= fixme soso out/$pattern.res $SOSOF =======]"
-		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo "[======= fixme soso $outdir/$pattern.res $SOSOF =======]"
+		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NSAV" ]; then
-		echo "[======= fail out/$pattern.res $NSAV =======]"
-		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
+		echo "[======= fail $outdir/$pattern.res $NSAV =======]"
+		echo >>$xml "<error message='fail $outdir/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
-		echo "[======= changed out/$pattern.res $NFIXME ======]"
-		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
+		echo "[======= changed $outdir/$pattern.res $NFIXME ======]"
+		echo >>$xml "<error message='changed $outdir/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ -s out/$pattern.res ]; then
-		echo "[=== no sav ===] out/$pattern.res is not empty"
+	elif [ -s $outdir/$pattern.res ]; then
+		echo "[=== no sav ===] $outdir/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v >>$xml out/$pattern.res
+		cat -v >>$xml $outdir/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
 		# no sav but empty res
-		echo "[0k] out/$pattern.res is empty"
+		echo "[0k] $outdir/$pattern.res is empty"
 		ok="$ok $pattern"
 	fi
-	if test -s out/$pattern.cmp.err; then
+	if test -s $outdir/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
-		cat -v >>$xml out/$pattern.cmp.err
+		cat -v >>$xml $outdir/$pattern.cmp.err
 		echo >>$xml "]]></system-err>"
 	fi
 	echo >>$xml "</testcase>"
@@ -289,6 +294,8 @@ while [ $stop = false ]; do
 		-h) usage; exit;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
+		--outdir) outdir="$2"; shift; shift;;
+		--compdir) compdir="$2"; shift; shift;;
 		*) stop=true
 	esac
 done
@@ -298,23 +305,23 @@ case $engine in
 	nitg)
 		engine=nitg-s;
 		enginebinname=nitg;
-		OPT="--separate $OPT"
+		OPT="--separate $OPT --compile-dir $compdir"
 		;;
 	nitg-s)
 		enginebinname=nitg;
-		OPT="--separate $OPT"
+		OPT="--separate $OPT --compile-dir $compdir"
 		;;
 	nitg-e)
 		enginebinname=nitg;
-		OPT="--erasure $OPT"
+		OPT="--erasure $OPT --compile-dir $compdir"
 		;;
 	nitg-sg)
 		enginebinname=nitg;
-		OPT="--semi-global $OPT"
+		OPT="--semi-global $OPT --compile-dir $compdir"
 		;;
 	nitg-g)
 		enginebinname=nitg;
-		OPT="--global $OPT"
+		OPT="--global $OPT --compile-dir $compdir"
 		;;
 	nit)
 		engine=niti
@@ -330,7 +337,7 @@ case $engine in
 		;;
 	emscripten)
 		enginebinname=nitg
-		OPT="-m emscripten_nodejs.nit --semi-global $OPT"
+		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-sg/"
 		;;
 	nitc)
@@ -387,8 +394,8 @@ xml="tests-$engine.xml"
 echo >$xml "<testsuites><testsuite>"
 
 # CLEAN the out directory
-rm -rf out/ 2>/dev/null
-mkdir out 2>/dev/null
+rm -rf "$outdir/" 2>/dev/null
+mkdir "$outdir" 2>/dev/null
 
 for ii in "$@"; do
 	if [ ! -f $ii ]; then
@@ -411,7 +418,7 @@ for ii in "$@"; do
 
 	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
-		ff="out/$bf"
+		ff="$outdir/$bf"
 
 		# Sould we skip the alternative for this engine?
 		need_skip $bf $bf $pack && continue
