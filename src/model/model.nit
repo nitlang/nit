@@ -32,16 +32,16 @@ private import more_collections
 
 redef class Model
 	# All known classes
-	var mclasses: Array[MClass] = new Array[MClass]
+	var mclasses = new Array[MClass]
 
 	# All known properties
-	var mproperties: Array[MProperty] = new Array[MProperty]
+	var mproperties = new Array[MProperty]
 
 	# Hierarchy of class definition.
 	#
 	# Each classdef is associated with its super-classdefs in regard to
 	# its module of definition.
-	var mclassdef_hierarchy: POSet[MClassDef] = new POSet[MClassDef]
+	var mclassdef_hierarchy = new POSet[MClassDef]
 
 	# Class-type hierarchy restricted to the introduction.
 	#
@@ -52,7 +52,7 @@ redef class Model
 	# This poset will evolve in a monotonous way:
 	# * Two non connected nodes will remain unconnected
 	# * New nodes can appear with new edges
-	private var intro_mtype_specialization_hierarchy: POSet[MClassType] = new POSet[MClassType]
+	private var intro_mtype_specialization_hierarchy = new POSet[MClassType]
 
 	# Global overlapped class-type hierarchy.
 	# The hierarchy when all modules are combined.
@@ -61,10 +61,10 @@ redef class Model
 	# This poset will evolve in an anarchic way. Loops can even be created.
 	#
 	# FIXME decide what to do on loops
-	private var full_mtype_specialization_hierarchy: POSet[MClassType] = new POSet[MClassType]
+	private var full_mtype_specialization_hierarchy = new POSet[MClassType]
 
 	# Collections of classes grouped by their short name
-	private var mclasses_by_name: MultiHashMap[String, MClass] = new MultiHashMap[String, MClass]
+	private var mclasses_by_name = new MultiHashMap[String, MClass]
 
 	# Return all class named `name`.
 	#
@@ -82,7 +82,7 @@ redef class Model
 	end
 
 	# Collections of properties grouped by their short name
-	private var mproperties_by_name: MultiHashMap[String, MProperty] = new MultiHashMap[String, MProperty]
+	private var mproperties_by_name = new MultiHashMap[String, MProperty]
 
 	# Return all properties named `name`.
 	#
@@ -100,7 +100,7 @@ redef class Model
 	end
 
 	# The only null type
-	var null_type: MNullType = new MNullType(self)
+	var null_type = new MNullType(self)
 
 	# Build an ordered tree with from `concerns`
 	fun concerns_tree(mconcerns: Collection[MConcern]): ConcernsTree do
@@ -134,11 +134,11 @@ end
 
 redef class MModule
 	# All the classes introduced in the module
-	var intro_mclasses: Array[MClass] = new Array[MClass]
+	var intro_mclasses = new Array[MClass]
 
 	# All the class definitions of the module
 	# (introduction and refinement)
-	var mclassdefs: Array[MClassDef] = new Array[MClassDef]
+	var mclassdefs = new Array[MClassDef]
 
 	# Does the current module has a given class `mclass`?
 	# Return true if the mmodule introduces, refines or imports a class.
@@ -175,14 +175,14 @@ redef class MModule
 		return res
 	end
 
-	# Sort a given array of classes using the linerarization order of the module
+	# Sort a given array of classes using the linearization order of the module
 	# The most general is first, the most specific is last
 	fun linearize_mclasses(mclasses: Array[MClass])
 	do
 		self.flatten_mclass_hierarchy.sort(mclasses)
 	end
 
-	# Sort a given array of class definitions using the linerarization order of the module
+	# Sort a given array of class definitions using the linearization order of the module
 	# the refinement link is stronger than the specialisation link
 	# The most general is first, the most specific is last
 	fun linearize_mclassdefs(mclassdefs: Array[MClassDef])
@@ -191,7 +191,7 @@ redef class MModule
 		sorter.sort(mclassdefs)
 	end
 
-	# Sort a given array of property definitions using the linerarization order of the module
+	# Sort a given array of property definitions using the linearization order of the module
 	# the refinement link is stronger than the specialisation link
 	# The most general is first, the most specific is last
 	fun linearize_mpropdefs(mpropdefs: Array[MPropDef])
@@ -237,6 +237,8 @@ redef class MModule
 		return get_primitive_class("Sys").mclass_type
 	end
 
+	# The primitive type `Finalizable`
+	# Used to tag classes that need to be finalized.
 	fun finalizable_type: nullable MClassType
 	do
 		var clas = self.model.get_mclasses_by_name("Finalizable")
@@ -408,7 +410,7 @@ class MClass
 	redef fun model do return intro_mmodule.model
 
 	# All class definitions (introduction and refinements)
-	var mclassdefs: Array[MClassDef] = new Array[MClassDef]
+	var mclassdefs = new Array[MClassDef]
 
 	# Alias for `name`
 	redef fun to_s do return self.name
@@ -467,7 +469,7 @@ class MClass
 		return res
 	end
 
-	private var get_mtype_cache: Array[MGenericType] = new Array[MGenericType]
+	private var get_mtype_cache = new Array[MGenericType]
 end
 
 
@@ -529,7 +531,7 @@ class MClassDef
 
 	# All declared super-types
 	# FIXME: quite ugly but not better idea yet
-	var supertypes: Array[MClassType] = new Array[MClassType]
+	var supertypes = new Array[MClassType]
 
 	# Register some super-types for the class (ie "super SomeType")
 	#
@@ -582,10 +584,10 @@ class MClassDef
 	fun is_intro: Bool do return mclass.intro == self
 
 	# All properties introduced by the classdef
-	var intro_mproperties: Array[MProperty] = new Array[MProperty]
+	var intro_mproperties = new Array[MProperty]
 
 	# All property definitions in the class (introductions and redefinitions)
-	var mpropdefs: Array[MPropDef] = new Array[MPropDef]
+	var mpropdefs = new Array[MPropDef]
 end
 
 # A global static type
@@ -638,8 +640,8 @@ abstract class MType
 		end
 
 		# First, resolve the formal types to a common version in the receiver
-		# The trick here is that fixed formal type will be associed to the bound
-		# And unfixed formal types will be associed to a canonical formal type.
+		# The trick here is that fixed formal type will be associated to the bound
+		# And unfixed formal types will be associated to a canonical formal type.
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
 			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
@@ -904,7 +906,7 @@ abstract class MType
 	# Is the type is already not nullable, then self is returned.
 	#
 	# Note: this just remove the `nullable` notation, but the result can still contains null.
-	# For instance if `self isa MNullType` or self is a a formal type bounded by a nullable type.
+	# For instance if `self isa MNullType` or self is a formal type bounded by a nullable type.
 	fun as_notnullable: MType
 	do
 		return self
@@ -913,7 +915,7 @@ abstract class MType
 	private var as_nullable_cache: nullable MType = null
 
 
-	# The deph of the type seen as a tree.
+	# The depth of the type seen as a tree.
 	#
 	# * A -> 1
 	# * G[A] -> 2
@@ -991,7 +993,7 @@ class MClassType
 
 	# The formal arguments of the type
 	# ENSURE: `result.length == self.mclass.arity`
-	var arguments: Array[MType] = new Array[MType]
+	var arguments = new Array[MType]
 
 	redef fun to_s do return mclass.to_s
 
@@ -1066,9 +1068,9 @@ class MClassType
 		collect_mtypes_cache[mmodule] = types
 	end
 
-	private var collect_mclassdefs_cache: HashMap[MModule, Set[MClassDef]] = new HashMap[MModule, Set[MClassDef]]
-	private var collect_mclasses_cache: HashMap[MModule, Set[MClass]] = new HashMap[MModule, Set[MClass]]
-	private var collect_mtypes_cache: HashMap[MModule, Set[MClassType]] = new HashMap[MModule, Set[MClassType]]
+	private var collect_mclassdefs_cache = new HashMap[MModule, Set[MClassDef]]
+	private var collect_mclasses_cache = new HashMap[MModule, Set[MClass]]
+	private var collect_mtypes_cache = new HashMap[MModule, Set[MClassType]]
 
 end
 
@@ -1208,19 +1210,19 @@ class MVirtualType
 		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
 		var res = verbatim_bound.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		#print "{class_name}: {self}/{mtype}/{anchor} -> {self}/{resolved_reciever}/{anchor} -> {verbatim_bound}/{mtype}/{anchor} -> {res}"
+		#print "{class_name}: {self}/{mtype}/{anchor} -> {self}/{resolved_receiver}/{anchor} -> {verbatim_bound}/{mtype}/{anchor} -> {res}"
 
 		# What to return here? There is a bunch a special cases:
 		# If 'cleanup_virtual' we must return the resolved type, since we cannot return self
 		if cleanup_virtual then return res
-		# If the reciever is a intern class, then the virtual type cannot be redefined since there is no possible subclass. self is just fixed. so simply return the resolution
+		# If the receiver is a intern class, then the virtual type cannot be redefined since there is no possible subclass. self is just fixed. so simply return the resolution
 		if resolved_reciever isa MNullableType then resolved_reciever = resolved_reciever.mtype
 		if resolved_reciever.as(MClassType).mclass.kind == enum_kind then return res
 		# If the resolved type isa MVirtualType, it means that self was bound to it, and cannot be unbound. self is just fixed. so return the resolution.
 		if res isa MVirtualType then return res
 		# If we are final, just return the resolution
 		if is_fixed(mmodule, resolved_reciever) then return res
-		# It the resolved type isa intern class, then there is no possible valid redefinition is any potentiel subclass. self is just fixed. so simply return the resolution
+		# If the resolved type isa intern class, then there is no possible valid redefinition in any potential subclass. self is just fixed. so simply return the resolution
 		if res isa MClassType and res.mclass.kind == enum_kind then return res
 		# TODO: Add 'fixed' virtual type in the specification.
 		# TODO: What if bound to a MParameterType?
@@ -1247,7 +1249,7 @@ class MVirtualType
 	end
 end
 
-# The type associated the a formal parameter generic type of a class
+# The type associated to a formal parameter generic type of a class
 #
 # Each parameter type is associated to a specific class.
 # It means that all refinements of a same class "share" the parameter type,
@@ -1324,7 +1326,7 @@ class MParameterType
 		# self is a parameter type of mtype (or of a super-class of mtype)
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
-		# FIXME: What happend here is far from clear. Thus this part must be validated and clarified
+		# FIXME: What happens here is far from clear. Thus this part must be validated and clarified
 		var resolved_receiver
 		if mtype.need_anchor then
 			assert anchor != null
@@ -1642,7 +1644,7 @@ abstract class MProperty
 	# All definitions of the property.
 	# The first is the introduction,
 	# The other are redefinitions (in refinements and in subclasses)
-	var mpropdefs: Array[MPROPDEF] = new Array[MPROPDEF]
+	var mpropdefs = new Array[MPROPDEF]
 
 	# The definition that introduced the property
 	# Warning: the introduction is the first `MPropDef` object
@@ -1690,7 +1692,7 @@ abstract class MProperty
 		return select_most_specific(mmodule, candidates)
 	end
 
-	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
+	private var lookup_definitions_cache = new HashMap2[MModule, MType, Array[MPROPDEF]]
 
 	# Return the most specific property definitions inherited by a type.
 	# The selection knows that refinement is stronger than specialization;
@@ -1765,7 +1767,7 @@ abstract class MProperty
 	# If you want to know the next properties in the linearization,
 	# look at `MPropDef::lookup_next_definition`.
 	#
-	# FIXME: the linearisation is still unspecified
+	# FIXME: the linearization is still unspecified
 	#
 	# REQUIRE: `not mtype.need_anchor`
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
@@ -1775,8 +1777,8 @@ abstract class MProperty
 		return lookup_all_definitions(mmodule, mtype).first
 	end
 
-	# Return all definitions in a linearisation order
-	# Most speficic first, most general last
+	# Return all definitions in a linearization order
+	# Most specific first, most general last
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
@@ -1808,7 +1810,7 @@ abstract class MProperty
 		return candidates
 	end
 
-	private var lookup_all_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
+	private var lookup_all_definitions_cache = new HashMap2[MModule, MType, Array[MPROPDEF]]
 end
 
 # A global method
@@ -1834,7 +1836,7 @@ class MMethod
 	# The constructor is a (the) root init with empty signature but a set of initializers
 	var is_root_init: Bool = false is writable
 
-	# The the property a 'new' contructor?
+	# Is the property a 'new' constructor?
 	var is_new: Bool = false is writable
 
 	# Is the property a legal constructor for a given class?
@@ -1870,7 +1872,7 @@ class MVirtualTypeProp
 	end
 
 	# The formal type associated to the virtual type property
-	var mvirtualtype: MVirtualType = new MVirtualType(self)
+	var mvirtualtype = new MVirtualType(self)
 end
 
 # A definition of a property (local property)
@@ -2039,7 +2041,7 @@ class MClassKind
 			# no other case for interfaces
 			return false
 		else if self == extern_kind then
-			# only compatible with themselve
+			# only compatible with themselves
 			return self == other
 		else if other == enum_kind or other == extern_kind then
 			# abstract_kind and concrete_kind are incompatible
@@ -2050,8 +2052,13 @@ class MClassKind
 	end
 end
 
+# The class kind `abstract`
 fun abstract_kind: MClassKind do return once new MClassKind("abstract class", true)
+# The class kind `concrete`
 fun concrete_kind: MClassKind do return once new MClassKind("class", true)
+# The class kind `interface`
 fun interface_kind: MClassKind do return once new MClassKind("interface", false)
+# The class kind `enum`
 fun enum_kind: MClassKind do return once new MClassKind("enum", false)
+# The class kind `extern`
 fun extern_kind: MClassKind do return once new MClassKind("extern class", false)

@@ -63,12 +63,13 @@ class Message
 		end
 	end
 
+	# A colored version of the message including the original source line
 	fun to_color_string: String
 	do
 		var esc = 27.ascii
-		var red = "{esc}[0;31m"
-		var bred = "{esc}[1;31m"
-		var green = "{esc}[0;32m"
+		#var red = "{esc}[0;31m"
+		#var bred = "{esc}[1;31m"
+		#var green = "{esc}[0;32m"
 		var yellow = "{esc}[0;33m"
 		var def = "{esc}[0m"
 
@@ -101,9 +102,11 @@ class ToolContext
 	var log_directory: String = "logs"
 
 	# Messages
-	private var messages: Array[Message] = new Array[Message]
-	private var message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
+	private var messages = new Array[Message]
+	private var message_sorter = new ComparableSorter[Message]
 
+	# Output all current stacked messages.
+	# If some errors occurred, exits the program.
 	fun check_errors
 	do
 		if messages.length > 0 then
@@ -226,43 +229,43 @@ class ToolContext
         end
 
 	# Global OptionContext
-	var option_context: OptionContext = new OptionContext
+	var option_context = new OptionContext
 
 	# Option --warn
-	var opt_warn: OptionCount = new OptionCount("Show more warnings", "-W", "--warn")
+	var opt_warn = new OptionCount("Show more warnings", "-W", "--warn")
 
 	# Option --warning
 	var opt_warning = new OptionArray("Show/hide a specific warning", "-w", "--warning")
 
 	# Option --quiet
-	var opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
+	var opt_quiet = new OptionBool("Do not show warnings", "-q", "--quiet")
 
 	# Option --log
-	var opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
+	var opt_log = new OptionBool("Generate various log files", "--log")
 
 	# Option --log-dir
-	var opt_log_dir: OptionString = new OptionString("Directory where to generate log files", "--log-dir")
+	var opt_log_dir = new OptionString("Directory where to generate log files", "--log-dir")
 
 	# Option --help
-	var opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
+	var opt_help = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
 	# Option --version
-	var opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
+	var opt_version = new OptionBool("Show version and exit", "--version")
 
 	# Option --set-dummy-tool
-	var opt_set_dummy_tool: OptionBool = new OptionBool("Set toolname and version to DUMMY. Useful for testing", "--set-dummy-tool")
+	var opt_set_dummy_tool = new OptionBool("Set toolname and version to DUMMY. Useful for testing", "--set-dummy-tool")
 
 	# Option --verbose
-	var opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
+	var opt_verbose = new OptionCount("Verbose", "-v", "--verbose")
 
 	# Option --stop-on-first-error
-	var opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
+	var opt_stop_on_first_error = new OptionBool("Stop on first error", "--stop-on-first-error")
 
 	# Option --no-color
-	var opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
+	var opt_no_color = new OptionBool("Do not use color to display errors and warnings", "--no-color")
 
 	# Option --bash-completion
-	var opt_bash_completion: OptionBool = new OptionBool("Generate bash_completion file for this program", "--bash-completion")
+	var opt_bash_completion = new OptionBool("Generate bash_completion file for this program", "--bash-completion")
 
 	# Verbose level
 	var verbose_level: Int = 0

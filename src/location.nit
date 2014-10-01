@@ -42,7 +42,7 @@ class SourceFile
 	end
 
 	# Position of each line start
-	var line_starts: Array[Int] = new Array[Int]
+	var line_starts = new Array[Int]
 end
 
 # A location inside a source file
@@ -100,6 +100,7 @@ class Location
 		return true
 	end
 
+	# Is `self` included (or equals) to `loc`?
 	fun located_in(loc: nullable Location): Bool do
 		if loc == null then return false
 
@@ -136,6 +137,9 @@ class Location
 		end
 	end
 
+	# Return a location message according to an observer.
+	#
+	# Currently, if both are in the same file, the file information is not present in the result.
 	fun relative_to(loc: nullable Location): String do
 		var relative: Location
 		if loc != null and loc.file == self.file then
@@ -158,7 +162,7 @@ class Location
 		return column_end < other.column_end
 	end
 
-	# Return the associated line with the location highlihted with color and a carret under the starting position
+	# Return the associated line with the location highlighted with color and a caret under the starting position
 	# `color` must be and terminal escape sequence used as `"{escape}[{color}m;"`
 	# * `"0;31"` for red
 	# * `"1;31"` for bright red
@@ -204,4 +208,3 @@ class Location
 		return "\t{lstart}{col}{lmid}{def}{lend}\n\t{indent}^"
 	end
 end
-

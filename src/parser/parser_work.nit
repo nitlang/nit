@@ -32,6 +32,7 @@ private class State
 	end
 end
 
+# The parser of the Nit language.
 class Parser
 	super TablesCapable
 	# Associated lexer
@@ -168,7 +169,7 @@ end
 
 redef class Prod
 	# Location on the first token after the start of a production
-	# So outside the production for epilon production
+	# So outside the production for epsilon production
 	var first_location: nullable Location
 end
 
@@ -176,11 +177,11 @@ end
 # Uses existing token locations to infer location of productions.
 private class ComputeProdLocationVisitor
 	super Visitor
-	# Currenlty visited productions that need a first token
-	var need_first_prods: Array[Prod] = new Array[Prod]
+	# Currently visited productions that need a first token
+	var need_first_prods = new Array[Prod]
 
 	# Already visited epsilon productions that waits something after them
-	var need_after_epsilons: Array[Prod] = new Array[Prod]
+	var need_after_epsilons = new Array[Prod]
 
 	# Location of the last visited token in the current production
 	var last_location: nullable Location = null
@@ -240,7 +241,7 @@ private class ComputeProdLocationVisitor
 	init do end
 end
 
-# Each reduca action has its own class, this one is the root of the hierarchy.
+# Each reduce action has its own class, this one is the root of the hierarchy.
 private abstract class ReduceAction
 	fun action(p: Parser) is abstract
 	fun concat(l1, l2 : Array[Object]): Array[Object]

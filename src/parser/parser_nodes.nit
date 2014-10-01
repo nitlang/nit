@@ -92,7 +92,7 @@ abstract class ANode
 	private fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
 
 	# Detach a node from its parent
-	# Aborts if the node is not detashable. use `replace_with` instead
+	# Aborts if the node is not detachable. use `replace_with` instead
 	# REQUIRE: parent != null
 	# REQUIRE: is_detachable
 	# ENDURE: parent == null
@@ -120,7 +120,7 @@ abstract class ANode
 end
 
 # A sequence of nodes
-# There is a specifc class (instead of a using Array) to track the parent/child relation when nodes are added or removed
+# It is a specific class (instead of using a Array) to track the parent/child relation when nodes are added or removed
 class ANodes[E: ANode]
 	super Sequence[E]
 	private var parent: ANode
@@ -180,7 +180,7 @@ class ANodes[E: ANode]
 		e.parent = null
 	end
 
-	# Used in parent contructor to fill elements
+	# Used in parent constructor to fill elements
 	private fun unsafe_add_all(nodes: Collection[Object])
 	do
 		var parent = self.parent
@@ -222,14 +222,16 @@ abstract class Token
 
 	# The raw content on the token
 	fun text: String is abstract
+
+	# The raw content on the token
 	fun text=(text: String) is abstract
 
 	# The previous token in the Lexer.
-	# May have disapeared in the AST
+	# May have disappeared in the AST
 	var prev_token: nullable Token = null
 
 	# The next token in the Lexer.
-	# May have disapeared in the AST
+	# May have disappeared in the AST
 	var next_token: nullable Token = null
 
 	# The verbatim blank text between `prev_token` and `self`
@@ -251,11 +253,11 @@ end
 
 redef class SourceFile
 	# The first token parser by the lexer
-	# May have disapeared in the final AST
+	# May have disappeared in the final AST
 	var first_token: nullable Token = null
 
 	# The first token parser by the lexer
-	# May have disapeared in the final AST
+	# May have disappeared in the final AST
 	var last_token: nullable Token = null
 end
 
@@ -321,174 +323,288 @@ abstract class TokenKeyword
 		return "keyword '{text}'"
 	end
 end
+
+# The deprecated keyword `package`.
 class TKwpackage
 	super TokenKeyword
 end
+
+# The keyword `module`
 class TKwmodule
 	super TokenKeyword
 end
+
+# The keyword `import`
 class TKwimport
 	super TokenKeyword
 end
+
+# The keyword `class`
 class TKwclass
 	super TokenKeyword
 end
+
+# The keyword `abstract`
 class TKwabstract
 	super TokenKeyword
 end
+
+# The keyword `interface`
 class TKwinterface
 	super TokenKeyword
 end
+
+# The keywords `enum` ane `universal`
 class TKwenum
 	super TokenKeyword
 end
+
+# The keyword `end`
 class TKwend
 	super TokenKeyword
 end
+
+# The keyword `fun`
 class TKwmeth
 	super TokenKeyword
 end
+
+# The keyword `type`
 class TKwtype
 	super TokenKeyword
 end
+
+# The keyword `init`
 class TKwinit
 	super TokenKeyword
 end
+
+# The keyword `redef`
 class TKwredef
 	super TokenKeyword
 end
+
+# The keyword `is`
 class TKwis
 	super TokenKeyword
 end
+
+# The keyword `do`
 class TKwdo
 	super TokenKeyword
 end
+
+# The keyword `var`
 class TKwvar
 	super TokenKeyword
 end
+
+# The keyword `extern`
 class TKwextern
 	super TokenKeyword
 end
+
+# The keyword `public`
 class TKwpublic
 	super TokenKeyword
 end
+
+# The keyword `protected`
 class TKwprotected
 	super TokenKeyword
 end
+
+# The keyword `private`
 class TKwprivate
 	super TokenKeyword
 end
+
+# The keyword `intrude`
 class TKwintrude
 	super TokenKeyword
 end
+
+# The keyword `if`
 class TKwif
 	super TokenKeyword
 end
+
+# The keyword `then`
 class TKwthen
 	super TokenKeyword
 end
+
+# The keyword `else`
 class TKwelse
 	super TokenKeyword
 end
+
+# The keyword `while`
 class TKwwhile
 	super TokenKeyword
 end
+
+# The keyword `loop`
 class TKwloop
 	super TokenKeyword
 end
+
+# The keyword `for`
 class TKwfor
 	super TokenKeyword
 end
+
+# The keyword `in`
 class TKwin
 	super TokenKeyword
 end
+
+# The keyword `and`
 class TKwand
 	super TokenKeyword
 end
+
+# The keyword `or`
 class TKwor
 	super TokenKeyword
 end
+
+# The keyword `implies`
 class TKwimplies
 	super TokenKeyword
 end
+
+# The keyword `not`
 class TKwnot
 	super TokenKeyword
 end
+
+# The keyword `return`
 class TKwreturn
 	super TokenKeyword
 end
+
+# The keyword `continue`
 class TKwcontinue
 	super TokenKeyword
 end
+
+# The keyword `break`
 class TKwbreak
 	super TokenKeyword
 end
+
+# The keyword `abort`
 class TKwabort
 	super TokenKeyword
 end
+
+# The keyword `assert`
 class TKwassert
 	super TokenKeyword
 end
+
+# The keyword `new`
 class TKwnew
 	super TokenKeyword
 end
+
+# The keyword `isa`
 class TKwisa
 	super TokenKeyword
 end
+
+# The keyword `once`
 class TKwonce
 	super TokenKeyword
 end
+
+# The keyword `super`
 class TKwsuper
 	super TokenKeyword
 end
+
+# The keyword `self`
 class TKwself
 	super TokenKeyword
 end
+
+# The keyword `true`
 class TKwtrue
 	super TokenKeyword
 end
+
+# The keyword `false`
 class TKwfalse
 	super TokenKeyword
 end
+
+# The keyword `null`
 class TKwnull
 	super TokenKeyword
 end
+
+# The keyword `as`
 class TKwas
 	super TokenKeyword
 end
+
+# The keyword `nullable`
 class TKwnullable
 	super TokenKeyword
 end
+
+# The keyword `isset`
 class TKwisset
 	super TokenKeyword
 end
+
+# The keyword `label`
 class TKwlabel
 	super TokenKeyword
 end
+
+# The special keyword `__DEBUG__`
 class TKwdebug
 	super Token
 end
+
+# The symbol `(`
 class TOpar
 	super Token
 end
+
+# The symbol `)`
 class TCpar
 	super Token
 end
+
+# The symbol `[`
 class TObra
 	super Token
 end
+
+# The symbol `]`
 class TCbra
 	super Token
 end
+
+# The symbol `,`
 class TComma
 	super Token
 end
+
+# The symbol `:`
 class TColumn
 	super Token
 end
+
+# The symbol `::`
 class TQuad
 	super Token
 end
+
+# The symbol `=`
 class TAssign
 	super Token
 end
@@ -501,69 +617,113 @@ abstract class TokenOperator
 		return "operator '{text}'"
 	end
 end
+
+# The operator `+=`
 class TPluseq
 	super TokenOperator
 end
+
+# The operator `-=`
 class TMinuseq
 	super TokenOperator
 end
+
+# The symbol `...`
 class TDotdotdot
 	super Token
 end
+
+# The symbol `..`
 class TDotdot
 	super Token
 end
+
+# The symbol `.`
 class TDot
 	super Token
 end
+
+# The operator `+`
 class TPlus
 	super TokenOperator
 end
+
+# The operator `-`
 class TMinus
 	super TokenOperator
 end
+
+# The operator `*`
 class TStar
 	super TokenOperator
 end
+
+# The operator `**`
 class TStarstar
 	super TokenOperator
 end
+
+# The operator `/`
 class TSlash
 	super TokenOperator
 end
+
+# The operator `+%
 class TPercent
 	super TokenOperator
 end
+
+# The operator `==`
 class TEq
 	super TokenOperator
 end
+
+# The operator `!=`
 class TNe
 	super TokenOperator
 end
+
+# The operator `<`
 class TLt
 	super TokenOperator
 end
+
+# The operator `<=`
 class TLe
 	super TokenOperator
 end
+
+# The operator `<<`
 class TLl
 	super TokenOperator
 end
+
+# The operator `>`
 class TGt
 	super TokenOperator
 end
+
+# The operator `>=`
 class TGe
 	super TokenOperator
 end
+
+# The operator `>>`
 class TGg
 	super TokenOperator
 end
+
+# The operator `<=>`
 class TStarship
 	super TokenOperator
 end
+
+# The operator `!`
 class TBang
 	super TokenOperator
 end
+
+# The symbol `@`
 class TAt
 	super Token
 end
@@ -603,27 +763,43 @@ abstract class TokenLiteral
 		do return "literal value '{text}'"
 	end
 end
+
+# A literal decimal integer
 class TNumber
 	super TokenLiteral
 end
+
+# A literal hexadecimal integer
 class THexNumber
 	super TokenLiteral
 end
+
+# A literal floating point number
 class TFloat
 	super TokenLiteral
 end
+
+# A literal character
 class TChar
 	super TokenLiteral
 end
+
+# A literal string
 class TString
 	super TokenLiteral
 end
+
+# The starting part of a super string (between `"` and `{`)
 class TStartString
 	super TokenLiteral
 end
+
+# The middle part of a super string (between `}` and `{`)
 class TMidString
 	super TokenLiteral
 end
+
+# The final part of a super string (between `}` and `"`)
 class TEndString
 	super TokenLiteral
 end
@@ -646,6 +822,7 @@ class TBadChar
 	end
 end
 
+# A extern code block
 class TExternCodeSegment
 	super Token
 end
@@ -663,9 +840,11 @@ end
 class AError
 	super EOF
 end
+# A lexical error (unexpected character)
 class ALexerError
 	super AError
 end
+# A syntactic error (unexpected token)
 class AParserError
 	super AError
 end
@@ -675,9 +854,9 @@ class AModule
 	super Prod
 
 	var n_moduledecl: nullable AModuledecl = null is writable
-	var n_imports: ANodes[AImport] = new ANodes[AImport](self)
-	var n_extern_code_blocks: ANodes[AExternCodeBlock] = new ANodes[AExternCodeBlock](self)
-	var n_classdefs: ANodes[AClassdef] = new ANodes[AClassdef](self)
+	var n_imports = new ANodes[AImport](self)
+	var n_extern_code_blocks = new ANodes[AExternCodeBlock](self)
+	var n_classdefs = new ANodes[AClassdef](self)
 end
 
 # The declaration of the module with the documentation, name, and annotations
@@ -720,18 +899,23 @@ end
 abstract class AVisibility
 	super Prod
 end
+
+# An implicit or explicit public visibility modifier
 class APublicVisibility
 	super AVisibility
 	var n_kwpublic: nullable TKwpublic is writable
 end
+# An explicit private visibility modifier
 class APrivateVisibility
 	super AVisibility
 	var n_kwprivate: TKwprivate is writable, noinit
 end
+# An explicit protected visibility modifier
 class AProtectedVisibility
 	super AVisibility
 	var n_kwprotected: TKwprotected is writable, noinit
 end
+# An explicit intrude visibility modifier
 class AIntrudeVisibility
 	super AVisibility
 	var n_kwintrude: TKwintrude is writable, noinit
@@ -742,7 +926,7 @@ end
 # There is tow special case of class definition
 abstract class AClassdef
 	super Prod
-	var n_propdefs: ANodes[APropdef] = new ANodes[APropdef](self)
+	var n_propdefs = new ANodes[APropdef](self)
 end
 
 # A standard class definition with a name, superclasses and properties
@@ -753,9 +937,9 @@ class AStdClassdef
 	var n_visibility: AVisibility is writable, noinit
 	var n_classkind: AClasskind is writable, noinit
 	var n_id: nullable TClassid = null is writable
-	var n_formaldefs: ANodes[AFormaldef] = new ANodes[AFormaldef](self)
+	var n_formaldefs = new ANodes[AFormaldef](self)
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
-	var n_superclasses: ANodes[ASuperclass] = new ANodes[ASuperclass](self)
+	var n_superclasses = new ANodes[ASuperclass](self)
 	var n_kwend: TKwend is writable, noinit
 	redef fun hot_location do return n_id.location
 end
@@ -774,23 +958,33 @@ end
 abstract class AClasskind
 	super Prod
 end
+
+# A default, or concrete class modifier (just `class`)
 class AConcreteClasskind
 	super AClasskind
 	var n_kwclass: TKwclass is writable, noinit
 end
+
+# An abstract class modifier (`abstract class`)
 class AAbstractClasskind
 	super AClasskind
 	var n_kwabstract: TKwabstract is writable, noinit
 	var n_kwclass: TKwclass is writable, noinit
 end
+
+# An interface class modifier (`interface`)
 class AInterfaceClasskind
 	super AClasskind
 	var n_kwinterface: TKwinterface is writable, noinit
 end
+
+# An enum/universal class modifier (`enum class`)
 class AEnumClasskind
 	super AClasskind
 	var n_kwenum: TKwenum is writable, noinit
 end
+
+# An extern class modifier (`extern class`)
 class AExternClasskind
 	super AClasskind
 	var n_kwextern: TKwextern is writable, noinit
@@ -875,33 +1069,49 @@ class AExternCalls
 	var n_kwimport: TKwimport is writable, noinit
 	var n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
 end
+
+# A single callback declaration
 abstract class AExternCall
 	super Prod
 end
+
+# A single callback declaration on a method
 abstract class APropExternCall
 	super AExternCall
 end
+
+# A single callback declaration on a method on the current receiver
 class ALocalPropExternCall
 	super APropExternCall
 	var n_methid: AMethid is writable, noinit
 end
+
+# A single callback declaration on a method on an explicit receiver type.
 class AFullPropExternCall
 	super APropExternCall
 	var n_type: AType is writable, noinit
 	var n_dot: nullable TDot = null is writable
 	var n_methid: AMethid is writable, noinit
 end
+
+# A single callback declaration on a method on a constructor
 class AInitPropExternCall
 	super APropExternCall
 	var n_type: AType is writable, noinit
 end
+
+# A single callback declaration on a `super` call
 class ASuperExternCall
 	super AExternCall
 	var n_kwsuper: TKwsuper is writable, noinit
 end
+
+# A single callback declaration on a cast
 abstract class ACastExternCall
 	super AExternCall
 end
+
+# A single callback declaration on a cast to a given type
 class ACastAsExternCall
 	super ACastExternCall
 	var n_from_type: AType is writable, noinit
@@ -909,12 +1119,16 @@ class ACastAsExternCall
 	var n_kwas: TKwas is writable, noinit
 	var n_to_type: AType is writable, noinit
 end
+
+# A single callback declaration on a cast to a nullable type
 class AAsNullableExternCall
 	super ACastExternCall
 	var n_type: AType is writable, noinit
 	var n_kwas: TKwas is writable, noinit
 	var n_kwnullable: TKwnullable is writable, noinit
 end
+
+# A single callback declaration on a cast to a non-nullable type
 class AAsNotNullableExternCall
 	super ACastExternCall
 	var n_type: AType is writable, noinit
@@ -936,80 +1150,118 @@ end
 abstract class AMethid
 	super Prod
 end
+
+# A method name with a simple identifier
 class AIdMethid
 	super AMethid
 	var n_id: TId is writable, noinit
 end
+
+# A method name `+`
 class APlusMethid
 	super AMethid
 	var n_plus: TPlus is writable, noinit
 end
+
+# A method name `-`
 class AMinusMethid
 	super AMethid
 	var n_minus: TMinus is writable, noinit
 end
+
+# A method name `*`
 class AStarMethid
 	super AMethid
 	var n_star: TStar is writable, noinit
 end
+
+# A method name `**`
 class AStarstarMethid
 	super AMethid
 	var n_starstar: TStarstar is writable, noinit
 end
+
+# A method name `/`
 class ASlashMethid
 	super AMethid
 	var n_slash: TSlash is writable, noinit
 end
+
+# A method name `%`
 class APercentMethid
 	super AMethid
 	var n_percent: TPercent is writable, noinit
 end
+
+# A method name `==`
 class AEqMethid
 	super AMethid
 	var n_eq: TEq is writable, noinit
 end
+
+# A method name `!=`
 class ANeMethid
 	super AMethid
 	var n_ne: TNe is writable, noinit
 end
+
+# A method name `<=`
 class ALeMethid
 	super AMethid
 	var n_le: TLe is writable, noinit
 end
+
+# A method name `>=`
 class AGeMethid
 	super AMethid
 	var n_ge: TGe is writable, noinit
 end
+
+# A method name `<`
 class ALtMethid
 	super AMethid
 	var n_lt: TLt is writable, noinit
 end
+
+# A method name `>`
 class AGtMethid
 	super AMethid
 	var n_gt: TGt is writable, noinit
 end
+
+# A method name `<<`
 class ALlMethid
 	super AMethid
 	var n_ll: TLl is writable, noinit
 end
+
+# A method name `>>`
 class AGgMethid
 	super AMethid
 	var n_gg: TGg is writable, noinit
 end
+
+# A method name `[]`
 class ABraMethid
 	super AMethid
 	var n_obra: TObra is writable, noinit
 	var n_cbra: TCbra is writable, noinit
 end
+
+# A method name `<=>`
 class AStarshipMethid
 	super AMethid
 	var n_starship: TStarship is writable, noinit
 end
+
+# A setter method name with a simple identifier (with a `=`)
 class AAssignMethid
 	super AMethid
 	var n_id: TId is writable, noinit
 	var n_assign: TAssign is writable, noinit
 end
+
+# A method name `[]=`
 class ABraassignMethid
 	super AMethid
 	var n_obra: TObra is writable, noinit
@@ -1021,7 +1273,7 @@ end
 class ASignature
 	super Prod
 	var n_opar: nullable TOpar = null is writable
-	var n_params: ANodes[AParam] = new ANodes[AParam](self)
+	var n_params = new ANodes[AParam](self)
 	var n_cpar: nullable TCpar = null is writable
 	var n_type: nullable AType = null is writable
 end
@@ -1043,7 +1295,7 @@ class AType
 	var n_id: TClassid is writable, noinit
 
 	# Type arguments for a generic type
-	var n_types: ANodes[AType] = new ANodes[AType](self)
+	var n_types = new ANodes[AType](self)
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
@@ -1059,11 +1311,11 @@ abstract class AExpr
 	super Prod
 end
 
-# A sequence of AExpr (usually statements)
-# The last AExpr gives the value of the whole block
+# A sequence of `AExpr` (usually statements)
+# The last `AExpr` gives the value of the whole block
 class ABlockExpr
 	super AExpr
-	var n_expr: ANodes[AExpr] = new ANodes[AExpr](self)
+	var n_expr = new ANodes[AExpr](self)
 	var n_kwend: nullable TKwend = null is writable
 end
 
@@ -1165,7 +1417,7 @@ class AForExpr
 	super AExpr
 	super ALabelable
 	var n_kwfor: TKwfor is writable, noinit
-	var n_ids: ANodes[TId] = new ANodes[TId](self)
+	var n_ids = new ANodes[TId](self)
 	var n_expr: AExpr is writable, noinit
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
@@ -1201,7 +1453,7 @@ class AOnceExpr
 end
 
 # A polymorphic invocation of a method
-# The form of the invocation (name, arguments, etc) are specific
+# The form of the invocation (name, arguments, etc.) are specific
 abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
@@ -1417,7 +1669,7 @@ class ACallAssignExpr
 end
 
 # A complex setter call with a standard method-name and any number of arguments. eg `x.m(y)+=z`. OR just a simple complex assignment.
-# Note: because the parser cannot distinguish a variable write with a compex setter call with an implicit receiver and no arguments, it always returns a `ACallReassignExpr`.
+# Note: because the parser cannot distinguish a variable write with a complex setter call with an implicit receiver and no arguments, it always returns a `ACallReassignExpr`.
 # Semantic analysis have to transform them to instance of `AVarReassignExpr`.
 class ACallReassignExpr
 	super ACallFormExpr
@@ -1433,7 +1685,7 @@ class ASuperExpr
 end
 
 # A call to the `init` constructor.
-# Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a ACallFormExpr.
+# Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a `ACallFormExpr`.
 class AInitExpr
 	super ASendExpr
 	var n_kwinit: TKwinit is writable, noinit
@@ -1475,7 +1727,7 @@ class AVarExpr
 	super AVarFormExpr
 end
 
-# A local variable simple assigment access
+# A local variable simple assignment access
 # The parser cannot instantiate them, see `ACallAssignExpr`.
 class AVarAssignExpr
 	super AVarFormExpr
@@ -1596,10 +1848,10 @@ class AEndStringExpr
 end
 
 # A superstring literal. eg `"a{x}b{y}c"`
-# Each part is modelized a sequence of expression. eg. `["a{, x, }b{, y, }c"]`
+# Each part is modeled a sequence of expression. eg. `["a{, x, }b{, y, }c"]`
 class ASuperstringExpr
 	super AExpr
-	var n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
+	var n_exprs = new ANodes[AExpr](self)
 end
 
 # A simple parenthesis. eg `(x)`
@@ -1609,7 +1861,7 @@ class AParExpr
 	var n_cpar: TCpar is writable, noinit
 end
 
-# Whatevej just contains (and mimic) an other expression
+# Whatever just contains (and mimic) an other expression
 abstract class AProxyExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
@@ -1642,7 +1894,7 @@ class AIssetAttrExpr
 	var n_kwisset: TKwisset is writable, noinit
 end
 
-# A elyspis notation used to pass an expression as it in a vararg parameter
+# An ellipsis notation used to pass an expression as it, in a vararg parameter
 class AVarargExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
@@ -1652,10 +1904,10 @@ end
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
-	var n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
+	var n_exprs = new ANodes[AExpr](self)
 end
 
-
+# A special expression to debug types
 class ADebugTypeExpr
 	super AExpr
 	var n_kwdebug: TKwdebug is writable, noinit
@@ -1683,39 +1935,50 @@ class ABraExprs
 	var n_cbra: TCbra is writable, noinit
 end
 
-# A complex assignment operator. eg `+=`
+# A complex assignment operator. (`+=` and `-=`)
 abstract class AAssignOp
 	super Prod
 end
+
+# The `+=` assignment operation
 class APlusAssignOp
 	super AAssignOp
 	var n_pluseq: TPluseq is writable, noinit
 end
+
+# The `-=` assignment operator
 class AMinusAssignOp
 	super AAssignOp
 	var n_minuseq: TMinuseq is writable, noinit
 end
 
+# A possibly fully-qualified module identifier
 class AModuleName
 	super Prod
 	var n_quad: nullable TQuad = null is writable
-	var n_path: ANodes[TId] = new ANodes[TId](self)
+	var n_path = new ANodes[TId](self)
 	var n_id: TId is writable, noinit
 end
+
+# A language declaration for an extern block
 class AInLanguage
 	super Prod
 	var n_kwin: TKwin is writable, noinit
 	var n_string: TString is writable, noinit
 end
+
+# An full extern block
 class AExternCodeBlock
 	super Prod
 	var n_in_language: nullable AInLanguage = null is writable
 	var n_extern_code_segment: TExternCodeSegment is writable, noinit
 end
+
+# A possible full method qualifier.
 class AQualified
 	super Prod
 	var n_quad: nullable TQuad = null is writable
-	var n_id: ANodes[TId] = new ANodes[TId](self)
+	var n_id = new ANodes[TId](self)
 	var n_classid: nullable TClassid = null is writable
 end
 
@@ -1723,16 +1986,19 @@ end
 # It contains the block of comments just above the declaration
 class ADoc
 	super Prod
-	var n_comment: ANodes[TComment] = new ANodes[TComment](self)
+	var n_comment = new ANodes[TComment](self)
 end
 
+# A group of annotation on a node
 class AAnnotations
 	super Prod
 	var n_at: nullable TAt = null is writable
 	var n_opar: nullable TOpar = null is writable
-	var n_items: ANodes[AAnnotation] = new ANodes[AAnnotation](self)
+	var n_items = new ANodes[AAnnotation](self)
 	var n_cpar: nullable TCpar = null is writable
 end
+
+# A single annotation
 class AAnnotation
 	super Prod
 	var n_doc: nullable ADoc = null is writable
@@ -1740,36 +2006,54 @@ class AAnnotation
 	var n_visibility: nullable AVisibility is writable
 	var n_atid: AAtid is writable, noinit
 	var n_opar: nullable TOpar = null is writable
-	var n_args: ANodes[AAtArg] = new ANodes[AAtArg](self)
+	var n_args = new ANodes[AAtArg](self)
 	var n_cpar: nullable TCpar = null is writable
 end
+
+# A single argument of an annotation
 abstract class AAtArg
 	super Prod
 end
+
+# A type-like argument of an annotation
 class ATypeAtArg
 	super AAtArg
 	var n_type: AType is writable, noinit
 end
+
+# An expression-like argument of an annotation
 class AExprAtArg
 	super AAtArg
 	var n_expr: AExpr is writable, noinit
 end
+
+# An annotation-like argument of an annotation
 class AAtAtArg
 	super AAtArg
 end
+
+# An annotation name
 abstract class AAtid
 	super Prod
 	var n_id: Token is writable, noinit
 end
+
+# An annotation name based on an identifier
 class AIdAtid
 	super AAtid
 end
+
+# An annotation name based on the keyword `extern`
 class AKwexternAtid
 	super AAtid
 end
+
+# An annotation name based on the keyword `import`
 class AKwimportAtid
 	super AAtid
 end
+
+# An annotation name based on the keyword `abstract`
 class AKwabstractAtid
 	super AAtid
 end

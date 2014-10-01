@@ -29,7 +29,7 @@ private class FlowPhase
 	redef fun process_npropdef(npropdef) do npropdef.do_flow(toolcontext)
 end
 
-# The visitor that derermine flowcontext for nodes
+# The visitor that determine flowcontext for nodes
 private class FlowVisitor
 	super Visitor
 
@@ -74,7 +74,7 @@ private class FlowVisitor
 		return node.after_flow_context.as(not null)
 	end
 
-	var flows: Array[FlowContext] = new Array[FlowContext]
+	var flows = new Array[FlowContext]
 
 	fun printflow
 	do
@@ -187,18 +187,18 @@ end
 # A same `FlowContext` can be shared by more than one `ANode`.
 class FlowContext
 	# The reachable previous flow
-	var previous: Array[FlowContext] = new Array[FlowContext]
+	var previous = new Array[FlowContext]
 
 	# Additional reachable flow that loop up to self.
-	# Loops apears in `loop`, `while`, `for`, and with `continue`
-	var loops: Array[FlowContext] = new Array[FlowContext]
+	# Loops appears in `loop`, `while`, `for`, and with `continue`
+	var loops = new Array[FlowContext]
 
 	private var is_marked_unreachable: Bool = false
 
 	# Is the flow dead?
 	fun is_unreachable: Bool
 	do
-		# Are we explicitely marked unreachable?
+		# Are we explicitly marked unreachable?
 		if self.is_marked_unreachable then return true
 
 		# Are we the starting flow context?
@@ -209,17 +209,17 @@ class FlowContext
 		return false
 	end
 
-	# Flag to avoid repeaed errors
+	# Flag to avoid repeated errors
 	var is_already_unreachable: Bool = false
 
 	# Mark that self is the starting flow context.
 	# Such a context is reachable even if there is no previous flow
 	var is_start: Bool = false
 
-	# The node that introduce the flow (for debuging)
+	# The node that introduce the flow (for debugging)
 	var node: nullable ANode = null
 
-	# Additional information for the flor (for debuging)
+	# Additional information for the flow (for debugging)
 	var name: String = ""
 
 	# The sub-flow to use if the associated expr is true

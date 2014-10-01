@@ -98,7 +98,7 @@ class Lexer
 	# Current column in the input stream
 	var pos: Int = 0
 
-	# Was the last character a cariage-return?
+	# Was the last character a carriage-return?
 	var cr: Bool = false
 
 	# Constante state values

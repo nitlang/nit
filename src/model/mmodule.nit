@@ -25,19 +25,19 @@ private import more_collections
 # A model knows modules, classes and properties and can retrieve them.
 redef class Model
 	# All known modules
-	var mmodules: Array[MModule] = new Array[MModule]
+	var mmodules = new Array[MModule]
 
 	# placebo for old module nesting hierarchy.
 	# where mainmodule < mainmodule::nestedmodule
 	#
 	# TODO REMOVE, rely on mgroup instead
-	var mmodule_nesting_hierarchy: POSet[MModule] = new POSet[MModule]
+	var mmodule_nesting_hierarchy = new POSet[MModule]
 
 	# Full module importation hierarchy including private or nested links.
-	var mmodule_importation_hierarchy: POSet[MModule] = new POSet[MModule]
+	var mmodule_importation_hierarchy = new POSet[MModule]
 
 	# Collections of modules grouped by their short names
-	private var mmodules_by_name: MultiHashMap[String, MModule] = new MultiHashMap[String, MModule]
+	private var mmodules_by_name = new MultiHashMap[String, MModule]
 
 	# Return all module named `name`
 	# If such a module does not exist, null is returned (instead of an empty array)
@@ -150,9 +150,9 @@ class MModule
 		end
 	end
 
-	private var intrude_mmodules: HashSet[MModule] = new HashSet[MModule]
-	private var public_mmodules: HashSet[MModule] = new HashSet[MModule]
-	private var private_mmodules: HashSet[MModule] = new HashSet[MModule]
+	private var intrude_mmodules = new HashSet[MModule]
+	private var public_mmodules = new HashSet[MModule]
+	private var private_mmodules = new HashSet[MModule]
 
 	# Return the visibility level of an imported module `m`
 	fun visibility_for(m: MModule): MVisibility
@@ -204,9 +204,9 @@ class MModule
 		end
 	end
 
-	# Is the mmodule created for internal purpose?
-	# Fictive module are instantied internally but they should not be
-	# exposed to the final user
+	# Is `self` created for internal purpose?
+	# Fictive modules are instantiated internally but they should not be
+	# exposed to the final user.
 	var is_fictive: Bool = false is writable
 
 	redef fun parent_concern do return mgroup

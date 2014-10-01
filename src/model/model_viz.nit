@@ -47,7 +47,7 @@ class MProjectTree
 		sort_with(alpha_comparator)
 	end
 
-	# Sort modules and groups with a loosly adaptation of the linerarisation of modules
+	# Sort modules and groups with a loosely adaptation of the linearization of modules
 	fun sort_with_linex
 	do
 		var c = linex_comparator
@@ -132,7 +132,7 @@ end
 
 # Generate graphiz files based on projects, groups and modules
 #
-# Interessing elements must be selected. See `mmodules`, ``
+# Interesting elements must be selected. See `mmodules`, ``
 # Display configuration can be set. See `cluster_group`, `project_group`
 class MProjectDot
 	super Streamable
@@ -159,7 +159,7 @@ class MProjectDot
 	# Should projects be shown as clusters?
 	var project_group = true is writable
 
-	# Recursively generate noed ans clusters for a mroup
+	# Recursively generate node and clusters for a mgroup
 	private fun dot_cluster(o: OStream, mgroup: MGroup)
 	do
 		# Open the cluster, if required
@@ -180,7 +180,7 @@ class MProjectDot
 			o.write("\t{node_for(mmodule)} [label=\"{mmodule.name}\",color=green]\n")
 		end
 
-		# recusively progress on sub-clusters
+		# recursively progress on sub-clusters
 		for d in mgroup.in_nesting.direct_smallers do
 			dot_cluster(o, d)
 		end
@@ -193,7 +193,7 @@ class MProjectDot
 		end
 	end
 
-	# Extends the set of `mmodules` by recurdively adding the most specific imported modules of foreign projects
+	# Extends the set of `mmodules` by recursively adding the most specific imported modules of foreign projects
 	fun collect_important_importation
 	do
 		var todo = new List[MModule]
@@ -215,7 +215,7 @@ class MProjectDot
 	# Generate the dot content with the current configuration
 	redef fun write_to(stream)
 	do
-		# Collect interessing nodes
+		# Collect interesting nodes
 		for m in model.mmodules do
 			# filter out modules outside wanted projects
 			if m.mgroup == null then continue
@@ -226,7 +226,7 @@ class MProjectDot
 
 		collect_important_importation
 
-		# Collect interessing edges
+		# Collect interesting edges
 		var sub_hierarchy = new POSet[MModule]
 		for m in mmodules do
 			sub_hierarchy.add_node(m)

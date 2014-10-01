@@ -31,6 +31,7 @@ private import ordered_tree # for live_methods_to_tree
 private import more_collections
 
 redef class ModelBuilder
+	# Performs a rapid-type-analysis on the program associated with `mainmodule`.
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
 		var analysis = new RapidTypeAnalysis(self, mainmodule)

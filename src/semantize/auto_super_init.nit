@@ -53,6 +53,7 @@ redef class AMethPropdef
 	# In case of redefined constructors, is an implicit call-to-super required?
 	var auto_super_call = false
 
+	# Collect initializers and build the auto-init
 	fun do_auto_super_init(modelbuilder: ModelBuilder)
 	do
 		var mclassdef = self.parent.as(AClassdef).mclassdef.as(not null)
