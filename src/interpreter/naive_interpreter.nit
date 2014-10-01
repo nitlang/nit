@@ -293,6 +293,20 @@ private class NaiveInterpreter
 		end
 	end
 
+	# Retrieve the value of the variable in the current frame
+	fun read_variable(v: Variable): Instance
+	do
+		var f = frames.first
+		return f.map[v]
+	end
+
+	# Assign the value of the variable in the current frame
+	fun write_variable(v: Variable, value: Instance)
+	do
+		var f = frames.first
+		f.map[v] = value
+	end
+
 	# Store known method, used to trace methods as thez are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
@@ -599,9 +613,9 @@ private class Frame
 	# The executed property.
 	# A Method in case of a call, an attribute in case of a default initialization.
 	var mpropdef: MPropDef
-	# Arguments of the method (the first is te receiver
+	# Arguments of the method (the first is the receiver)
 	var arguments: Array[Instance]
-	# Mapping betwen a variable an the current value
+	# Mapping between a variable and the current value
 	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
 end
 
@@ -649,13 +663,13 @@ redef class AMethPropdef
 
 	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
+		v.frames.unshift(f)
+
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
-			f.map[variable] = arguments[i+1]
+			v.write_variable(variable, arguments[i+1])
 		end
-
-		v.frames.unshift(f)
 
 		if mpropdef.is_abstract then
 			v.fatal("Abstract method `{mpropdef.mproperty.name}` called on `{arguments.first.mtype}`")
@@ -1158,7 +1172,7 @@ redef class AVardeclExpr
 		if ne != null then
 			var i = v.expr(ne)
 			if i == null then return
-			v.frame.map[self.variable.as(not null)] = i
+			v.write_variable(self.variable.as(not null), i)
 		end
 	end
 end
@@ -1166,7 +1180,7 @@ end
 redef class AVarExpr
 	redef fun expr(v)
 	do
-		return v.frame.map[self.variable.as(not null)]
+		return v.read_variable(self.variable.as(not null))
 	end
 end
 
@@ -1175,7 +1189,7 @@ redef class AVarAssignExpr
 	do
 		var i = v.expr(self.n_value)
 		if i == null then return null
-		v.frame.map[self.variable.as(not null)] = i
+		v.write_variable(self.variable.as(not null), i)
 		return i
 	end
 end
@@ -1183,12 +1197,13 @@ end
 redef class AVarReassignExpr
 	redef fun stmt(v)
 	do
-		var vari = v.frame.map[self.variable.as(not null)]
+		var variable = self.variable.as(not null)
+		var vari = v.read_variable(variable)
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var res = v.callsite(reassign_callsite, [vari, value])
 		assert res != null
-		v.frame.map[self.variable.as(not null)] = res
+		v.write_variable(variable, res)
 	end
 end
 
@@ -1334,12 +1349,12 @@ redef class AForExpr
 			if self.variables.length == 1 then
 				var item = v.callsite(method_item, [iter]).as(not null)
 				#self.debug("item {item}")
-				v.frame.map[self.variables.first] = item
+				v.write_variable(self.variables.first, item)
 			else if self.variables.length == 2 then
 				var key = v.callsite(method_key, [iter]).as(not null)
-				v.frame.map[self.variables[0]] = key
+				v.write_variable(self.variables[0], key)
 				var item = v.callsite(method_item, [iter]).as(not null)
-				v.frame.map[self.variables[1]] = item
+				v.write_variable(self.variables[1], item)
 			else
 				abort
 			end
