@@ -51,6 +51,7 @@ Usage: $e [options] modulenames
 --noskip    Do not skip a test even if the .skip file matches
 --outdir    Use a specific output folder (default=out/)
 --compdir   Use a specific temporary compilation folder (default=.nit_compile)
+--node      Run as a node in parallel, will not output context information
 END
 }
 
@@ -278,11 +279,14 @@ find_nitc()
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
 	fi
-	echo "Find binary for engine $engine: $recent $OPT"
+	if [ "x$isnode" = "xfalse" ]; then
+		echo "Found binary for engine $engine: $recent $OPT"
+	fi
 	NITC=$recent
 }
 
 verbose=false
+isnode=false
 stop=false
 engine=nitg
 noskip=
@@ -296,6 +300,7 @@ while [ $stop = false ]; do
 		--noskip) noskip=true; shift;;
 		--outdir) outdir="$2"; shift; shift;;
 		--compdir) compdir="$2"; shift; shift;;
+		--node) isnode=true; shift;;
 		*) stop=true
 	esac
 done
@@ -574,21 +579,23 @@ END
 	done
 done
 
-echo "engine: $engine ($enginebinname $OPT)"
-echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
+if [ "x$isnode" = "xfalse" ]; then
+	echo "engine: $engine ($enginebinname $OPT)"
+	echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
 
-if [ -n "$nok" ]; then
-	echo "fail: $nok"
-	echo "There were $(echo $nok | wc -w) errors ! (see file $ERRLIST)"
-fi
-if [ -n "$nos" ]; then
-	echo "no sav: $nos"
-fi
-if [ -n "$todos" ]; then
-	echo "todo/fixme: $todos"
-fi
-if [ -n "$remains" ]; then
-	echo "sav that remains: $remains"
+	if [ -n "$nok" ]; then
+		echo "fail: $nok"
+		echo "There were $(echo $nok | wc -w) errors ! (see file $ERRLIST)"
+	fi
+	if [ -n "$nos" ]; then
+		echo "no sav: $nos"
+	fi
+	if [ -n "$todos" ]; then
+		echo "todo/fixme: $todos"
+	fi
+	if [ -n "$remains" ]; then
+		echo "sav that remains: $remains"
+	fi
 fi
 
 # write $ERRLIST
