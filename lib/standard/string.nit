@@ -2119,7 +2119,8 @@ end
 #
 # Note: it caching is not usefull, see `alpha_comparator`
 class CachedAlphaComparator
-	super Comparator[Object]
+	super Comparator
+	redef type COMPARED: Object
 
 	private var cache = new HashMap[Object, String]
 
@@ -2137,7 +2138,7 @@ end
 
 # see `alpha_comparator`
 private class AlphaComparator
-	super Comparator[Object]
+	super Comparator
 	redef fun compare(a, b) do return a.to_s <=> b.to_s
 end
 
@@ -2149,7 +2150,7 @@ end
 #     var a = [1, 2, 3, 10, 20]
 #     alpha_comparator.sort(a)
 #     assert a == [1, 10, 2, 20, 3]
-fun alpha_comparator: Comparator[Object] do return once new AlphaComparator
+fun alpha_comparator: Comparator do return once new AlphaComparator
 
 # The arguments of the program as given by the OS
 fun args: Sequence[String]

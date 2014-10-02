@@ -103,7 +103,7 @@ class ToolContext
 
 	# Messages
 	private var messages = new Array[Message]
-	private var message_sorter = new ComparableSorter[Message]
+	private var message_sorter: Comparator = default_comparator
 
 	# Output all current stacked messages.
 	# If some errors occurred, exits the program.

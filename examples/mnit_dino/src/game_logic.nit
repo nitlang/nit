@@ -386,7 +386,8 @@ class Bush super Entity end
 
 # Sort entities on screen in order of Y, entities in the back are drawn first
 class EntitiesSorter
-	super AbstractSorter[Entity]
+	super Comparator
+	redef type COMPARED: Entity
 
 	redef fun compare(a, b) do return b.pos.y <=> a.pos.y
 end

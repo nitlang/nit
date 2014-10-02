@@ -24,7 +24,9 @@ module poset
 #  * transitivity: `(self.has_edge(e,f) and self.has_edge(f,g)) implies self.has_edge(e,g)`
 class POSet[E: Object]
 	super Collection[E]
-	super Comparator[E]
+	super Comparator
+
+	redef type COMPARED: E is fixed
 
 	redef fun iterator do return elements.keys.iterator
 

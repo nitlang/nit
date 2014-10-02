@@ -19,24 +19,29 @@ import range
 import array
 
 # This abstract class generalizes ways to sort an array
-interface Comparator[E]
+interface Comparator
+	# What to compare to
+	#
+	# The type is virtual, instead of generic, to allow a contravariant
+	# subtyping of the comparator.
+	type COMPARED: nullable Object
+
 	# Compare `a` and `b`.
 	# Returns:
 	#	-1 if a < b
 	#	0  if a = b
 	#	1  if a > b
-	fun compare(a: E, b: E): Int is abstract
+	fun compare(a: COMPARED, b: COMPARED): Int is abstract
 
 	# Sort `array` using the `compare` function.
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.sort(a)
+	#     default_comparator.sort(a)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun sort(array: Array[E]) do sub_sort(array, 0, array.length-1)
+	fun sort(array: Array[COMPARED]) do sub_sort(array, 0, array.length-1)
 
 	# Sort `array` between `from` and `to` indices
-	private fun sub_sort(array: Array[E], from: Int, to: Int)
+	private fun sub_sort(array: Array[COMPARED], from: Int, to: Int)
 	do
 		if from >= to then
 			return
@@ -50,11 +55,10 @@ interface Comparator[E]
 	# Quick-sort `array` between `from` and `to` indices
 	# Worst case: O(n^2), Average case: O(n lg n)
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.quick_sort(a, 0, a.length - 1)
+	#     default_comparator.quick_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun quick_sort(array: Array[E], from: Int, to: Int) do
+	fun quick_sort(array: Array[COMPARED], from: Int, to: Int) do
 		var pivot = array[from]
 		var i = from
 		var j = to
@@ -76,11 +80,10 @@ interface Comparator[E]
 	# Bubble-sort `array` between `from` and `to` indices
 	# Worst case: O(n^2), average case: O(n^2)
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.bubble_sort(a, 0, a.length - 1)
+	#     default_comparator.bubble_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun bubble_sort(array: Array[E], from: Int, to: Int)
+	fun bubble_sort(array: Array[COMPARED], from: Int, to: Int)
 	do
 		var i = from
 		while i < to do
@@ -105,12 +108,10 @@ interface Comparator[E]
 	# Insertion-sort `array` between `from` and `to` indices
 	# Worst case: O(n^2), average case: O(n^2)
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.insertion_sort(a, 0, a.length - 1)
+	#     default_comparator.insertion_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun insertion_sort(array: Array[E], from: Int, to: Int) do
-		var last = array.length
+	fun insertion_sort(array: Array[COMPARED], from: Int, to: Int) do
 		for i in [from..to] do
 			var j = i
 			while j > 0 and compare(array[j], array[j - 1]) < 0 do
@@ -123,11 +124,10 @@ interface Comparator[E]
 	# Merge-sort `array` between `from` and `to` indices
 	# Worst case: O(n lg n), average: O(n lg n)
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.merge_sort(a, 0, a.length - 1)
+	#     default_comparator.merge_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun merge_sort(array: Array[E], from, to: Int) do
+	fun merge_sort(array: Array[COMPARED], from, to: Int) do
 		if from >= to then return
 		var mid = (to + from) / 2
 		merge_sort(array, from, mid)
@@ -135,10 +135,10 @@ interface Comparator[E]
 		merge(array, from, mid, to)
 	end
 
-	private fun merge(array: Array[E], from, mid, to: Int) do
-		var l = new Array[E]
+	private fun merge(array: Array[COMPARED], from, mid, to: Int) do
+		var l = new Array[COMPARED]
 		for i in [from..mid] do l.add array[i]
-		var r = new Array[E]
+		var r = new Array[COMPARED]
 		for i in [mid + 1..to] do r.add array[i]
 		var i = 0
 		var j = 0
@@ -162,11 +162,10 @@ interface Comparator[E]
 	# Heap-sort `array` between `from` and `to` indices
 	# Worst case: O(n lg n), average: O(n lg n)
 	#
-	#     var s = new DefaultComparator[Int]
 	#     var a = [5, 2, 3, 1, 4]
-	#     s.heap_sort(a, 0, a.length - 1)
+	#     default_comparator.heap_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
-	fun heap_sort(array: Array[E], from, to: Int) do
+	fun heap_sort(array: Array[COMPARED], from, to: Int) do
 		var size = build_heap(array)
 		for j in [from..to[ do
 			array.swap_at(0, size)
@@ -175,7 +174,7 @@ interface Comparator[E]
 		end
 	end
 
-	private fun build_heap(array: Array[E]): Int do
+	private fun build_heap(array: Array[COMPARED]): Int do
 		var size = array.length - 1
 		var i = size / 2
 		while i >= 0 do
@@ -185,7 +184,7 @@ interface Comparator[E]
 		return size
 	end
 
-	private fun heapify(array: Array[E], from, to: Int) do
+	private fun heapify(array: Array[COMPARED], from, to: Int) do
 		var l = from * 2
 		var r = l + 1
 		var largest: Int
@@ -205,25 +204,14 @@ interface Comparator[E]
 
 end
 
-# Deprecated class, use `Comparator` instead
-interface AbstractSorter[E]
-	super Comparator[E]
-end
-
 # This comparator uses the operator `<=>` to compare objects.
 # see `default_comparator` for an easy-to-use general stateless default comparator.
-class DefaultComparator[E: Comparable]
-	super Comparator[E]
+class DefaultComparator
+	super Comparator
+	redef type COMPARED: Comparable
 	# Return a <=> b
 	redef fun compare(a, b) do return a <=> b
-
-	init do end
-end
-
-# Deprecated class, use `DefaultComparator` instead
-class ComparableSorter[E: Comparable]
-	super DefaultComparator[E]
 end
 
 # Easy-to-use general stateless default comparator that uses `<=>` to compare things.
-fun default_comparator: Comparator[Comparable] do return once new DefaultComparator[Comparable]
+fun default_comparator: DefaultComparator do return once new DefaultComparator

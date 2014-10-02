@@ -174,7 +174,8 @@ class Counter[E: Object]
 end
 
 private class CounterComparator[E: Object]
-	super Comparator[E]
+	super Comparator
+	redef type COMPARED: E
 	var counter: Counter[E]
 	redef fun compare(a,b) do return self.counter.map[a] <=> self.counter.map[b]
 end

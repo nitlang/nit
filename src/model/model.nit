@@ -293,7 +293,8 @@ redef class MModule
 end
 
 private class MClassDefSorter
-	super AbstractSorter[MClassDef]
+	super Comparator
+	redef type COMPARED: MClassDef
 	var mmodule: MModule
 	redef fun compare(a, b)
 	do
@@ -305,7 +306,8 @@ private class MClassDefSorter
 end
 
 private class MPropDefSorter
-	super AbstractSorter[MPropDef]
+	super Comparator
+	redef type COMPARED: MPropDef
 	var mmodule: MModule
 	redef fun compare(pa, pb)
 	do

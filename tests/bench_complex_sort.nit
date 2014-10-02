@@ -74,8 +74,9 @@ class E
 end
 
 class EltComparator
-	super Comparator[Elt]
-	redef fun compare(a: Elt, b: Elt): Int
+	super Comparator
+	redef type COMPARED: Elt
+	redef fun compare(a, b)
 	do
 		if _is_val1 then
 			return a.val1 <=> b.val1
