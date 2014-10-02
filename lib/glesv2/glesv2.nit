@@ -109,7 +109,7 @@ extern class GLShader `{GLuint`}
 
 end
 
-extern class GLFragmentShader 
+extern class GLFragmentShader
 	super GLShader
 
 	new `{ return glCreateShader(GL_FRAGMENT_SHADER); `}
@@ -117,7 +117,7 @@ end
 
 extern class GLVertexShader
 	super GLShader
-	
+
 	new `{ return glCreateShader(GL_VERTEX_SHADER); `}
 end
 
@@ -181,7 +181,7 @@ extern class GLError `{ GLenum `}
 end
 
 protected fun gl_clear_color(r, g, b, a: Float) `{ glClearColor(r, g, b, a); `}
-protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `} 
+protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 protected fun gl_vertex_attrib_pointer_int(index, length: Int, normalize: Bool, stride: Int, vertex: Array[Int]) import Array[Int].length, Array[Int].intern_items `{
 	int* c_vertex = Array_of_Int_intern_items(vertex);
 	glVertexAttribPointer(index, length, GL_INT, normalize, stride, c_vertex);

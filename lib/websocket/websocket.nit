@@ -241,6 +241,4 @@ class WebSocket
 	fun can_read(timeout: Int): Bool do return client.ready_to_read(timeout)
 
 	redef fun poll_in do return client.poll_in
-
 end
-

@@ -49,4 +49,3 @@ loop
 		ns.close
 	end
 end
-

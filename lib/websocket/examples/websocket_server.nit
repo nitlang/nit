@@ -43,4 +43,3 @@ while not sock.listener.eof do
 		if msg != "" then print msg
 	end
 end
-
