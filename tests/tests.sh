@@ -399,7 +399,13 @@ fi
 ok=""
 nok=""
 todos=""
-xml="tests-$engine.xml"
+
+if [ "x$XMLDIR" = "x" ]; then
+	xml="tests-$engine.xml"
+else
+	xml="$XMLDIR/tests-$engine.xml"
+fi
+
 echo >$xml "<testsuites><testsuite>"
 
 for ii in "$@"; do
