@@ -17,7 +17,7 @@
 # Implementation of the Nit virtual machine
 module vm
 
-intrude import interpreter::naive_interpreter
+import interpreter::naive_interpreter
 import model_utils
 import perfect_hashing
 
@@ -28,7 +28,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** NITVM STARTING ***", 1)
 
 		var interpreter = new VirtualMachine(self, mainmodule, arguments)
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		var time1 = get_time
 		self.toolcontext.info("*** NITVM STOPPING : {time1-time0} ***", 2)

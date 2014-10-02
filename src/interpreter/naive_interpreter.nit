@@ -45,32 +45,15 @@ redef class ModelBuilder
 		self.toolcontext.info("*** START INTERPRETING ***", 1)
 
 		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
 	end
-
-	private fun init_naive_interpreter(interpreter: NaiveInterpreter, mainmodule: MModule) do
-		var sys_type = mainmodule.sys_type
-		if sys_type == null then return # no class Sys
-		var mainobj = new MutableInstance(sys_type)
-		interpreter.mainobj = mainobj
-		interpreter.init_instance(mainobj)
-		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
-		if initprop != null then
-			interpreter.send(initprop, [mainobj])
-		end
-		var mainprop = mainmodule.try_get_primitive_method("run", sys_type.mclass) or else
-			mainmodule.try_get_primitive_method("main", sys_type.mclass)
-		if mainprop != null then
-			interpreter.send(mainprop, [mainobj])
-		end
-	end
 end
 
 # The visitor that interprets the Nit Program by walking on the AST
-private class NaiveInterpreter
+class NaiveInterpreter
 	# The modelbuilder that know the AST and its associations with the model
 	var modelbuilder: ModelBuilder
 
@@ -92,6 +75,25 @@ private class NaiveInterpreter
 		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		self.null_instance = new MutableInstance(mainmodule.model.null_type)
+	end
+
+	# Starts the interpreter on the main module of a program
+	fun start(mainmodule: MModule) do
+		var interpreter = self
+		var sys_type = mainmodule.sys_type
+		if sys_type == null then return # no class Sys
+		var mainobj = new MutableInstance(sys_type)
+		interpreter.mainobj = mainobj
+		interpreter.init_instance(mainobj)
+		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
+		if initprop != null then
+			interpreter.send(initprop, [mainobj])
+		end
+		var mainprop = mainmodule.try_get_primitive_method("run", sys_type.mclass) or else
+			mainmodule.try_get_primitive_method("main", sys_type.mclass)
+		if mainprop != null then
+			interpreter.send(mainprop, [mainobj])
+		end
 	end
 
 	# Subtype test in the context of the mainmodule
@@ -291,6 +293,20 @@ private class NaiveInterpreter
 		else
 			self.frame.current_node.debug(message)
 		end
+	end
+
+	# Retrieve the value of the variable in the current frame
+	fun read_variable(v: Variable): Instance
+	do
+		var f = frames.first
+		return f.map[v]
+	end
+
+	# Assign the value of the variable in the current frame
+	fun write_variable(v: Variable, value: Instance)
+	do
+		var f = frames.first
+		f.map[v] = value
 	end
 
 	# Store known method, used to trace methods as thez are reached
@@ -592,23 +608,23 @@ class PrimitiveInstance[E: Object]
 end
 
 # Information about local variables in a running method
-private class Frame
+class Frame
 	# The current visited node
 	# The node is stored by frame to keep a stack trace
 	var current_node: ANode
 	# The executed property.
 	# A Method in case of a call, an attribute in case of a default initialization.
 	var mpropdef: MPropDef
-	# Arguments of the method (the first is te receiver
+	# Arguments of the method (the first is the receiver)
 	var arguments: Array[Instance]
-	# Mapping betwen a variable an the current value
-	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	# Mapping between a variable and the current value
+	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
 end
 
 redef class ANode
 	# Aborts the program with a message
 	# `v` is used to know if a colored message is displayed or not
-	private fun fatal(v: NaiveInterpreter, message: String)
+	fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
@@ -649,13 +665,13 @@ redef class AMethPropdef
 
 	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
+		v.frames.unshift(f)
+
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
-			f.map[variable] = arguments[i+1]
+			v.write_variable(variable, arguments[i+1])
 		end
-
-		v.frames.unshift(f)
 
 		if mpropdef.is_abstract then
 			v.fatal("Abstract method `{mpropdef.mproperty.name}` called on `{arguments.first.mtype}`")
@@ -1139,7 +1155,7 @@ redef class AVardeclExpr
 		if ne != null then
 			var i = v.expr(ne)
 			if i == null then return
-			v.frame.map[self.variable.as(not null)] = i
+			v.write_variable(self.variable.as(not null), i)
 		end
 	end
 end
@@ -1147,7 +1163,7 @@ end
 redef class AVarExpr
 	redef fun expr(v)
 	do
-		return v.frame.map[self.variable.as(not null)]
+		return v.read_variable(self.variable.as(not null))
 	end
 end
 
@@ -1156,7 +1172,7 @@ redef class AVarAssignExpr
 	do
 		var i = v.expr(self.n_value)
 		if i == null then return null
-		v.frame.map[self.variable.as(not null)] = i
+		v.write_variable(self.variable.as(not null), i)
 		return i
 	end
 end
@@ -1164,12 +1180,13 @@ end
 redef class AVarReassignExpr
 	redef fun stmt(v)
 	do
-		var vari = v.frame.map[self.variable.as(not null)]
+		var variable = self.variable.as(not null)
+		var vari = v.read_variable(variable)
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var res = v.callsite(reassign_callsite, [vari, value])
 		assert res != null
-		v.frame.map[self.variable.as(not null)] = res
+		v.write_variable(variable, res)
 	end
 end
 
@@ -1315,12 +1332,12 @@ redef class AForExpr
 			if self.variables.length == 1 then
 				var item = v.callsite(method_item, [iter]).as(not null)
 				#self.debug("item {item}")
-				v.frame.map[self.variables.first] = item
+				v.write_variable(self.variables.first, item)
 			else if self.variables.length == 2 then
 				var key = v.callsite(method_key, [iter]).as(not null)
-				v.frame.map[self.variables[0]] = key
+				v.write_variable(self.variables[0], key)
 				var item = v.callsite(method_item, [iter]).as(not null)
-				v.frame.map[self.variables[1]] = item
+				v.write_variable(self.variables[1], item)
 			else
 				abort
 			end

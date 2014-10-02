@@ -55,7 +55,7 @@ redef class ModelBuilder
 
 		set_stdstreams
 
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		close_stdstreams
 
@@ -73,7 +73,7 @@ redef class ModelBuilder
 
 		set_stdstreams
 
-		init_naive_interpreter(interpreter, mainmodule)
+		interpreter.start(mainmodule)
 
 		close_stdstreams
 
