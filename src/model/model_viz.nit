@@ -68,13 +68,13 @@ private class LinexComparator
 
 	var mins = new HashMap [MGroup, nullable MModule]
 	var maxs = new HashMap [MGroup, nullable MModule]
-	fun min(o: Object): nullable MModule do
+	fun mini(o: Object): nullable MModule do
 		if o isa MModule then return o
 		assert o isa MGroup
 		if not mins.has_key(o) then computeminmax(o)
 		return mins[o]
 	end
-	fun max(o: Object): nullable MModule do
+	fun maxi(o: Object): nullable MModule do
 		if o isa MModule then return o
 		assert o isa MGroup
 		if not maxs.has_key(o) then computeminmax(o)
@@ -87,14 +87,14 @@ private class LinexComparator
 			return
 		end
 		var subs = tree.sub[o]
-		var minres = min(subs.first)
-		var maxres = max(subs.first)
+		var minres = mini(subs.first)
+		var maxres = maxi(subs.first)
 		var order = minres.model.mmodule_importation_hierarchy
 		for o2 in subs do
-			var c = min(o2)
+			var c = mini(o2)
 			if c == null then continue
 			if minres == null or order.compare(minres, c) > 0 then minres = c
-			c = max(o2)
+			c = maxi(o2)
 			if c == null then continue
 			if maxres == null or order.compare(maxres, c) < 0 then maxres = c
 		end
@@ -103,8 +103,8 @@ private class LinexComparator
 		#if minres != maxres then print "* {o} {minres}..{maxres}"
 	end
 	redef fun compare(a,b) do
-		var ma = min(a)
-		var mb = min(b)
+		var ma = mini(a)
+		var mb = mini(b)
 		if ma == null then
 			if mb == null then return 0 else return -1
 		else if mb == null then
