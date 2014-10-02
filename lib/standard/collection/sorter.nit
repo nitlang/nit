@@ -10,9 +10,10 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module contains classes used to sorts arrays.
+# This module contains classes used to compare things and sorts arrays.
+#
 # In order to provide your own sort class you should define a subclass of `Comparator` with
-# a custom `Comparator::compare` function.
+# a custom `Comparator::compare` function and a specific `COMPARED` virtual type.
 module sorter
 
 import range
@@ -21,9 +22,6 @@ import array
 # This abstract class generalizes ways to sort an array
 interface Comparator
 	# What to compare to
-	#
-	# The type is virtual, instead of generic, to allow a contravariant
-	# subtyping of the comparator.
 	type COMPARED: nullable Object
 
 	# Compare `a` and `b`.
@@ -33,11 +31,59 @@ interface Comparator
 	#	1  if a > b
 	fun compare(a: COMPARED, b: COMPARED): Int is abstract
 
+	# Is `seq` sorted?
+	#
+	#     assert default_comparator.is_sorted([1,2,2,3])   == true
+	#     assert default_comparator.is_sorted([1,10,2,3])  == false
+	#     assert alpha_comparator.is_sorted([1,10,2,3])    == true
+	fun is_sorted(seq: SequenceRead[COMPARED]): Bool
+	do
+		if seq.length <= 1 then return true
+		var prev = seq.first
+		for e in seq do
+			if compare(prev, e) > 0 then return false
+			prev = e
+		end
+		return true
+	end
+
+	# Returns the minimum between `a` and `b`.
+	#
+	#     assert default_comparator.min(2,10) == 2
+	#     assert alpha_comparator.min(2,10)   == 10
+	#
+	# If both are equivalent, then returns `a`.
+	#
+	#     var m = alpha_comparator.min(1, "1")
+	#     assert m == 1
+	#     assert m != "1"
+	fun min(a,b: COMPARED): COMPARED
+	do
+		if compare(a,b) > 0 then return b else return a
+	end
+
+	# Returns the maximum between `a` and `b`.
+	#
+	#     assert default_comparator.max(2,10) == 10
+	#     assert alpha_comparator.max(2,10)   == 2
+	#
+	# If both are equivalent, then returns `a`.
+	#
+	#     var m = alpha_comparator.max(1, "1")
+	#     assert m == 1
+	#     assert m != "1"
+	fun max(a,b: COMPARED): COMPARED
+	do
+		if compare(a,b) < 0 then return b else return a
+	end
+
 	# Sort `array` using the `compare` function.
 	#
-	#     var a = [5, 2, 3, 1, 4]
+	#     var a = [10, 2, 3, 1, 4]
 	#     default_comparator.sort(a)
-	#     assert a == [1, 2, 3, 4, 5]
+	#     assert a == [1, 2, 3, 4, 10]
+	#     alpha_comparator.sort(a)
+	#     assert a == [1, 10, 2, 3, 4]
 	fun sort(array: Array[COMPARED]) do sub_sort(array, 0, array.length-1)
 
 	# Sort `array` between `from` and `to` indices
