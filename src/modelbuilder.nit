@@ -589,20 +589,25 @@ class ModelBuilder
 
 	# Injection of a new module without source.
 	# Used by the interpreted
-	fun load_rt_module(parent: MModule, nmodule: AModule, mod_name: String): nullable AModule
+	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable AModule
 	do
 		# Create the module
-		var mmodule = new MModule(model, parent.mgroup, mod_name, nmodule.location)
+
+		var mgroup = null
+		if parent != null then mgroup = parent.mgroup
+		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
-		var imported_modules = new Array[MModule]
-
-		imported_modules.add(parent)
-		mmodule.set_visibility_for(parent, intrude_visibility)
-
-		mmodule.set_imported_mmodules(imported_modules)
+		if parent!= null then
+			var imported_modules = new Array[MModule]
+			imported_modules.add(parent)
+			mmodule.set_visibility_for(parent, intrude_visibility)
+			mmodule.set_imported_mmodules(imported_modules)
+		else
+			build_module_importation(nmodule)
+		end
 
 		return nmodule
 	end

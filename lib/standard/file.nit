@@ -48,6 +48,7 @@ end
 class IFStream
 	super FStream
 	super BufferedIStream
+	super PollableIStream
 	# Misc
 
 	# Open the same file again.
@@ -149,7 +150,6 @@ end
 
 class Stdin
 	super IFStream
-	super PollableIStream
 
 	private init do
 		_file = new NativeFile.native_stdin
