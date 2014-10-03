@@ -459,7 +459,7 @@ END
 				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				/usr/bin/time --quiet -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				/usr/bin/time -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -497,9 +497,9 @@ END
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
 				echo "NIT_NO_STACK=1 $ff.bin" $args
-			fi	
+			fi
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
-				/usr/bin/time --quiet -f%U -a -o "$ff.time.out" $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+				/usr/bin/time -f%U -a -o "$ff.time.out" $TIMEOUT "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			mv $ff.time.out $ff.times.out
 			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
 
@@ -544,7 +544,7 @@ END
 					echo -n "==> $name "
 					echo "$ff.bin $args" > "$fff.bin"
 					chmod +x "$fff.bin"
-					WRITE="$fff.write" /usr/bin/time --quiet -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" /usr/bin/time -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT $fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
