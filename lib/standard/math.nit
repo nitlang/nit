@@ -26,6 +26,10 @@ redef class Int
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
+	# Returns the 1's complement of `self`
+	#
+	#    assert 0x2F.bin_not == -48
+	fun bin_not: Int is extern "kernel_Int_Int_binnot_0"
 	fun sqrt: Int `{ return sqrt(recv); `}
 	# Returns the greatest common divisor of `self` and `o`
 	#
