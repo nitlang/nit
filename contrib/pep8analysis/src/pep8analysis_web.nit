@@ -108,15 +108,6 @@ redef class AnalysisManager
 	fun show_graph(content: String) do "show_graph('{content.escape_to_c}');".run_js
 end
 
-class StringIStream
-	super BufferedIStream
-
-	init(str: String) do _buffer = new FlatBuffer.from(str)
-
-	redef fun fill_buffer do end_reached = true
-	redef var end_reached: Bool = false
-end
-
 redef class NativeString
 	fun run_analysis do manager.run to_s
 end
