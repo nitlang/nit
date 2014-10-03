@@ -374,7 +374,7 @@ fi
 
 # Initiate new ERRLIST
 if [ "x$ERRLIST" = "x" ]; then
-	ERRLIST=/dev=null
+	ERRLIST=/dev/null
 else
 	ERRLIST=$ERRLIST.tmp
 	> "$ERRLIST"
