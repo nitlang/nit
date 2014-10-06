@@ -57,6 +57,41 @@ class HttpRequest
 
 	# The arguments passed with the POST or GET method (with a priority on POST)
 	var all_args = new HashMap[String, String]
+
+	# Returns argument `arg_name` in the request as a String
+	# or null if it was not found.
+	# Also cleans the String by trimming it.
+	# If the Strings happens to be empty after trimming,
+	# the method will return `null`
+	#
+	# NOTE: Prioritizes POST before GET
+	fun string_arg(arg_name: String): nullable String do
+		if not all_args.has_key(arg_name) then return null
+		var s = all_args[arg_name].trim
+		if s.is_empty then return null
+		return s
+	end
+
+	# Returns argument `arg_name` as an Int or `null` if not found or not a number.
+	#
+	# NOTE: Prioritizes POST before GET
+	fun int_arg(arg_name: String): nullable Int do
+		if not all_args.has_key(arg_name) then return null
+		var i = all_args[arg_name]
+		if not i.is_numeric then return null
+		return i.to_i
+	end
+
+	# Returns argument `arg_name` as a Bool or `null` if not found or not a boolean.
+	#
+	# NOTE: Prioritizes POST before GET
+	fun bool_arg(arg_name: String): nullable Bool do
+		if not all_args.has_key(arg_name) then return null
+		var i = all_args[arg_name]
+		if i == "true" then return true
+		if i == "false" then return false
+		return null
+	end
 end
 
 # Utility class to parse a request string and build a `HttpRequest`
