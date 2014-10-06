@@ -1,13 +1,11 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-#
-# This file is free software, which comes along with NIT.  This software is
+# This file is free software, which comes along with NIT. This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
-# PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. You can modify it is you want, provided this header
 # is kept unaltered, and a notification of the changes is added.
-# You  are  allowed  to  redistribute it and sell it, alone or is a part of
+# You are allowed to redistribute it and sell it, alone or is a part of
 # another product.
 
 # Input and output streams of characters
@@ -209,7 +207,7 @@ abstract class BufferedIStream
 			fill_buffer
 		end
 		return s.to_s
-	end   
+	end
 
 	redef fun append_line_to(s)
 	do
@@ -258,7 +256,7 @@ abstract class BufferedIStream
 	# Fill the buffer
 	protected fun fill_buffer is abstract
 
-	# Is the last fill_buffer reach the end 
+	# Is the last fill_buffer reach the end
 	protected fun end_reached: Bool is abstract
 
 	# Allocate a `_buffer` for a given `capacity`.
@@ -399,7 +397,9 @@ redef interface Object
 	`}
 end
 
-# Stream to a String. Mainly used for compatibility with OStream type and tests.
+# Stream to a String.
+#
+# Mainly used for compatibility with OStream type and tests.
 class StringOStream
 	super OStream
 
@@ -414,4 +414,34 @@ class StringOStream
 
 	protected var closed = false
 	redef fun close do closed = true
+end
+
+# Stream from a String.
+#
+# Mainly used for compatibility with IStream type and tests.
+class StringIStream
+	super IStream
+
+	# The string to read from.
+	var source: String
+
+	# The current position in the string.
+	private var cursor: Int = 0
+
+	redef fun read_char do
+		if cursor < source.length then
+			var c = source[cursor].ascii
+
+			cursor += 1
+			return c
+		else
+			return -1
+		end
+	end
+
+	redef fun close do
+		source = ""
+	end
+
+	redef fun eof do return cursor >= source.length
 end
