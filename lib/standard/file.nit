@@ -348,6 +348,22 @@ redef class String
 		return "{self}/{path}"
 	end
 
+	# Convert the path (`self`) to a program name.
+	#
+	# Ensure the path (`self`) will be treated as-is by POSIX shells when it is
+	# used as a program name. In order to do that, prepend `./` if needed.
+	#
+	#     assert "foo".to_program_name == "./foo"
+	#     assert "/foo".to_program_name == "/foo"
+	#     assert "".to_program_name == "./" # At least, your shell will detect the error.
+	fun to_program_name: String do
+		if self.has_prefix("/") then
+			return self
+		else
+			return "./{self}"
+		end
+	end
+
 	# Alias for `join_path`
 	#
 	#     assert "hello" / "world"      ==  "hello/world"
