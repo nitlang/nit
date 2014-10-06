@@ -608,7 +608,8 @@ end
 # Used to compare nodes with their score.
 # Smaller is score, smaller is the node.
 private class NodeComparator[S: Object, A]
-	super Comparator[SearchNode[S, A]]
+	super Comparator
+	redef type COMPARED: SearchNode[S, A]
 	redef fun compare(a,b) do return a.score <=> b.score
 end
 

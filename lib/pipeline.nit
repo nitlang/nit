@@ -35,7 +35,7 @@ redef interface Iterator[E]
 
 	# Filter: sort with a given `comparator`.
 	# Important: require O(n) memory.
-	fun sort_with(comparator: Comparator[E]): Iterator[E]
+	fun sort_with(comparator: Comparator): Iterator[E]
 	do
 		var a = self.to_a
 		comparator.sort(a)

@@ -240,7 +240,9 @@ end
 
 # Comparator used to sort boxes by order
 private class OrderComparator
-	super Comparator[TplSidebarElt]
+	super Comparator
+
+	redef type COMPARED: TplSidebarElt
 
 	redef fun compare(a, b) do
 		if a.order < b.order then return -1

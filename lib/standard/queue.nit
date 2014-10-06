@@ -47,7 +47,7 @@ interface Queue[E]
 	# assert a.take == 2
 	# assert a.take == 1
 	#
-	# var h = new MinHeapCmp[Int]
+	# var h = new MinHeap[Int].default
 	# h.add 2
 	# h.add 1
 	# h.add 10
@@ -206,11 +206,10 @@ end
 # A min-heap implemented over an array
 #
 # The order is given by the `comparator`.
-# If `E` is Comparable, then the subclass `MinHeapCmp` can be used instead.
 #
 # ~~~
 # var a = [3,4,1,2]
-# var h = new MinHeap[Int](new DefaultComparator[Int])
+# var h = new MinHeap[Int].default
 # h.add_all(a)
 # assert h.peek == 1
 # var b = h.take_all
@@ -220,7 +219,20 @@ class MinHeap[E: Object]
 	super Queue[E]
 
 	private var items = new Array[E]
-	var comparator: Comparator[E]
+
+	# The comparator used to order the Heap
+	var comparator: Comparator
+
+	# Use the `default_comparator` on Comparable elements
+	#
+	# Require self isa MinHeap[Comparable]
+	init default
+	do
+		assert self isa MinHeap[Comparable]
+		init(default_comparator)
+	end
+
+	init(comparator: Comparator) do self.comparator = comparator
 
 	redef fun is_empty do return items.is_empty
 	redef fun length do return items.length
@@ -306,19 +318,4 @@ class MinHeap[E: Object]
 		end
 		return true
 	end
-end
-
-# A `MinHeap` for `Comparable` that does not need a specific `Comparator`
-#
-# ~~~
-# var a = [3,4,1,2]
-# var h = new MinHeapCmp[Int]
-# h.add_all(a)
-# assert h.peek == 1
-# var b = h.take_all
-# assert b == [1, 2, 3, 4]
-# ~~~
-class MinHeapCmp[E: Comparable]
-	super MinHeap[E]
-	init is old_style_init do super(new DefaultComparator[E])
 end

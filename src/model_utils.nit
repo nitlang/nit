@@ -525,7 +525,8 @@ end
 
 # Sort mentities by their name
 class MEntityNameSorter
-	super AbstractSorter[MEntity]
+	super Comparator
+	redef type COMPARED: MEntity
 	redef fun compare(a, b) do return a.name <=> b.name
 	init do end
 end
@@ -540,7 +541,8 @@ end
 # If both `a` and `b` have the same ranking,
 # ordering is based on lexicographic comparison of `a.name` and `b.name`
 class MConcernRankSorter
-	super AbstractSorter[MConcern]
+	super Comparator
+	redef type COMPARED: MConcern
 
 	init do end
 

@@ -16,7 +16,8 @@
 
 
 class BackIntComparator
-	super Comparator[Int]
+	super Comparator
+	redef type COMPARED: Int
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return b <=> a
@@ -26,7 +27,8 @@ class BackIntComparator
 end
 
 class DecimalComparator
-	super Comparator[Int]
+	super Comparator
+	redef type COMPARED: Int
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return (a%10) <=> (b%10)
@@ -51,7 +53,7 @@ end
 
 var q = get_an_array(50)
 print(q.join(" "))
-(new DefaultComparator[Int]).sort(q)
+(default_comparator).sort(q)
 print(q.join(" "))
 (new DecimalComparator).sort(q)
 print(q.join(" "))

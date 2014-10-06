@@ -536,7 +536,7 @@ class Automaton
 
 			# From the important values, build a sequence of TSymbols
 			var a = alphabet.to_a
-			(new ComparableSorter[Int]).sort(a)
+			default_comparator.sort(a)
 			var tsyms = new Array[TSymbol]
 			var last = 0
 			for i in a do
