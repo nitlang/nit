@@ -244,7 +244,7 @@ class TestCase
 		if toolcontext.opt_noact.value then return
 		# execute
 		var file = test_file
-		var res = sys.system("./{file}.bin > '{file}.out1' 2>&1 </dev/null")
+		var res = sys.system("{file.to_program_name}.bin > '{file}.out1' 2>&1 </dev/null")
 		var f = new IFStream.open("{file}.out1")
 		var msg = f.read_all
 		f.close

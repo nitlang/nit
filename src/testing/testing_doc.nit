@@ -136,7 +136,7 @@ class NitUnitExecutor
 		var res = sys.system(cmd)
 		var res2 = 0
 		if res == 0 then
-			res2 = sys.system("./{file}.bin >>'{file}.out1' 2>&1 </dev/null")
+			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
 		end
 
 		var msg
