@@ -202,6 +202,7 @@ redef class ModelBuilder
 		# Can we just inherit?
 		if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
 			self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
+			mclassdef.mclass.root_init = longest
 			return
 		end
 
@@ -217,6 +218,7 @@ redef class ModelBuilder
 			var msignature = new MSignature(mparameters, null)
 			defined_init.new_msignature = msignature
 			self.toolcontext.info("{mclassdef} extends its basic constructor signature to {defined_init}{msignature}", 3)
+			mclassdef.mclass.root_init = defined_init
 			return
 		end
 
@@ -230,6 +232,7 @@ redef class ModelBuilder
 		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
 		nclassdef.mfree_init = mpropdef
 		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
+		mclassdef.mclass.root_init = mpropdef
 	end
 
 	# Check the visibility of `mtype` as an element of the signature of `mpropdef`.
@@ -292,6 +295,15 @@ redef class AClassdef
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
+end
+
+redef class MClass
+	# The base init of the class.
+	# Used to get the common new_msignature and initializers
+	#
+	# TODO: Where to put this information is not clear because unlike other
+	# informations, the initialisers are stable in a same class.
+	var root_init: nullable MMethodDef = null
 end
 
 redef class MClassDef
@@ -603,6 +615,16 @@ redef class AMethPropdef
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
+
+		if mpropdef.mproperty.is_root_init and not mclassdef.is_intro then
+			var root_init = mclassdef.mclass.root_init
+			if root_init != null then
+				# Inherit the initializers by refinement
+				mpropdef.new_msignature = root_init.new_msignature
+				assert mpropdef.initializers.is_empty
+				mpropdef.initializers.add_all root_init.initializers
+			end
+		end
 
 		# Retrieve info from the signature AST
 		var param_names = new Array[String] # Names of parameters from the AST
