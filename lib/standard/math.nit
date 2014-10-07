@@ -23,10 +23,32 @@ in "C header" `{
 redef class Int
 	# Returns a random `Int` in `[0 .. self[`.
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
+
+	# Returns the result of a binary AND operation on `self` and `i`
+	#
+	#    assert 0x10.bin_and(0x01) == 0
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
+
+	# Returns the result of a binary OR operation on `self` and `i`
+	#
+	#    assert 0x10.bin_or(0x01) == 0x11
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
+
+	# Returns the result of a binary XOR operation on `self` and `i`
+	#
+	#    assert 0x101.bin_xor(0x110) == 0x11
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
+
+	# Returns the 1's complement of `self`
+	#
+	#    assert 0x2F.bin_not == -48
+	fun bin_not: Int is extern "kernel_Int_Int_binnot_0"
+
+	# Returns the square root of `self`
+	#
+	#    assert 16.sqrt == 4
 	fun sqrt: Int `{ return sqrt(recv); `}
+
 	# Returns the greatest common divisor of `self` and `o`
 	#
 	#     assert 54.gcd(24)   == 6
