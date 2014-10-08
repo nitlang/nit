@@ -12,25 +12,185 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Simple numerical statistical analysis and presentation
+# Defines some ANSI Terminal Control Escape Sequences.
 module console
 
-# Redef String class to add a function to color the string
-redef class String
-	private fun add_escape_char(escapechar: String): String do
-		return "{escapechar}{self}{esc}[0m"
-	end
-
-	private fun esc: Char do return 27.ascii
-	fun gray: String do return add_escape_char("{esc}[30m")
-	fun red: String do return add_escape_char("{esc}[31m")
-	fun green: String do return add_escape_char("{esc}[32m")
-	fun yellow: String do return add_escape_char("{esc}[33m")
-	fun blue: String do return add_escape_char("{esc}[34m")
-	fun purple: String do return add_escape_char("{esc}[35m")
-	fun cyan: String do return add_escape_char("{esc}[36m")
-	fun light_gray: String do return add_escape_char("{esc}[37m")
-	fun bold: String do return add_escape_char("{esc}[1m")
-	fun underline: String do return add_escape_char("{esc}[4m")
+# A ANSI/VT100 escape sequence.
+abstract class TermEscape
+	# The US-ASCII ESC character.
+	protected fun esc: Char do return 27.ascii
 end
 
+# ANSI/VT100 code to switch character attributes (SGR).
+#
+# By default, resets everything to the terminal’s defaults.
+#
+# Note:
+#
+# The escape sequence inserted at the end of the string by terminal-related
+# methods of `String` resets all character attributes to the terminal’s
+# defaults. So, when combining format `a` and `b`, something like
+# `("foo".a + " bar").b` will not work as expected, but `"foo".a.b + " bar".b`
+# will. You may also use `TermCharFormat` (this class).
+#
+# Usage example:
+#
+#     print "{(new TermCharFormat).yellow_fg.bold}a{(new TermCharFormat).yellow_fg}b{new TermCharFormat}"
+class TermCharFormat
+	super TermEscape
+
+	private var attributes: Array[String] = new Array[String]
+
+	# Copies the attributes from the specified format.
+	init from(format: TermCharFormat) do
+		attributes.add_all(format.attributes)
+	end
+
+	redef fun to_s: String do return "{esc}[{attributes.join(";")}m"
+
+	# Apply the specified SGR and return `self`.
+	private fun apply(sgr: String): TermCharFormat do
+		attributes.add(sgr)
+		return self
+	end
+
+	# Apply normal (default) format and return `self`.
+	fun default: TermCharFormat do return apply("0")
+
+	# Apply bold weight and return `self`.
+	fun bold: TermCharFormat do return apply("1")
+
+	# Apply underlining and return `self`.
+	fun underline: TermCharFormat do return apply("4")
+
+	# Apply blinking or bold weight and return `self`.
+	fun blink: TermCharFormat do return apply("5")
+
+	# Apply reverse video and return `self`.
+	fun inverse: TermCharFormat do return apply("7")
+
+	# Apply normal weight and return `self`.
+	fun normalWeight: TermCharFormat do return apply("22")
+
+	# Add the attribute that disable inderlining and return `self`.
+	fun not_underlined: TermCharFormat do return apply("24")
+
+	# Add the attribute that disable blinking and return `self`.
+	fun steady: TermCharFormat do return apply("25")
+
+	# Add the attribute that disable reverse video and return `self`.
+	fun positive: TermCharFormat do return apply("27")
+
+	# Apply a black foreground and return `self`.
+	fun black_fg: TermCharFormat do return apply("30")
+
+	# Apply a red foreground and return `self`.
+	fun red_fg: TermCharFormat do return apply("31")
+
+	# Apply a green foreground and return `self`.
+	fun green_fg: TermCharFormat do return apply("32")
+
+	# Apply a yellow foreground and return `self`.
+	fun yellow_fg: TermCharFormat do return apply("33")
+
+	# Apply a blue foreground and return `self`.
+	fun blue_fg: TermCharFormat do return apply("34")
+
+	# Apply a mangenta foreground and return `self`.
+	fun magenta_fg: TermCharFormat do return apply("35")
+
+	# Apply a cyan foreground and return `self`.
+	fun cyan_fg: TermCharFormat do return apply("36")
+
+	# Apply a white foreground and return `self`.
+	fun white_fg: TermCharFormat do return apply("37")
+
+	# Apply the default foreground and return `self`.
+	fun default_fg: TermCharFormat do return apply("39")
+
+	# Apply a black backgroud and return `self`.
+	fun black_bg: TermCharFormat do return apply("40")
+
+	# Apply a red backgroud and return `self`.
+	fun red_bg: TermCharFormat do return apply("41")
+
+	# Apply a green backgroud and return `self`.
+	fun green_bg: TermCharFormat do return apply("42")
+
+	# Apply a yellow backgroud and return `self`.
+	fun yellow_bg: TermCharFormat do return apply("43")
+
+	# Apply a blue backgroud and return `self`.
+	fun blue_bg: TermCharFormat do return apply("44")
+
+	# Apply a mangenta backgroud and return `self`.
+	fun magenta_bg: TermCharFormat do return apply("45")
+
+	# Apply a cyan backgroud and return `self`.
+	fun cyan_bg: TermCharFormat do return apply("46")
+
+	# Apply a white backgroud and return `self`.
+	fun white_bg: TermCharFormat do return apply("47")
+
+	# Apply the default backgroud and return `self`.
+	fun default_bg: TermCharFormat do return apply("49")
+end
+
+# Redefine the `String` class to add functions to color the string.
+redef class String
+	private fun apply_format(f: TermCharFormat): String do
+		return "{f}{self}{normal}"
+	end
+
+	private fun normal: TermCharFormat do return new TermCharFormat
+
+	# Make the text appear in dark gray (or black) in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun gray: String do return apply_format(normal.black_fg)
+
+	# Make the text appear in red in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun red: String do return apply_format(normal.red_fg)
+
+	# Make the text appear in green in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun green: String do return apply_format(normal.green_fg)
+
+	# Make the text appear in yellow in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun yellow: String do return apply_format(normal.yellow_fg)
+
+	# Make the text appear in blue in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun blue: String do return apply_format(normal.blue_fg)
+
+	# Make the text appear in mangenta in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun purple: String do return apply_format(normal.magenta_fg)
+
+	# Make the text appear in cyan in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun cyan: String do return apply_format(normal.cyan_fg)
+
+	# Make the text appear in light gray (or white) in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun light_gray: String do return apply_format(normal.white_fg)
+
+	# Make the text appear in bold in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun bold: String do return apply_format(normal.bold)
+
+	# Make the text underlined in a ANSI/VT100 terminal.
+	#
+	# WARNING: SEE: `TermCharFormat`
+	fun underline: String do return apply_format(normal.underline)
+end
