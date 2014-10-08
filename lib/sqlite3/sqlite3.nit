@@ -105,6 +105,9 @@ class Sqlite3DB
 		if err.is_ok then return null
 		return err.to_s
 	end
+
+	# Returns the id for the last successful insert on the current connection.
+	fun last_insert_rowid: Int do return native_connection.last_insert_rowid
 end
 
 # A prepared Sqlite3 statement, created from `Sqlite3DB::prepare` or `Sqlite3DB::select`

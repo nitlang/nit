@@ -26,7 +26,7 @@
 exclude="parser_abs.nit\|nitcc_lexer0"
 
 # Directories needed for explicit -I options.
-includedirs="src contrib/tnitter/src/ contrib/benitlux/src/ examples/ contrib/wiringPi/lib/"
+includedirs="src contrib/tnitter/src/ contrib/benitlux/src/ examples/ contrib/wiringPi/lib/ contrib/opportunity/src/"
 
 # Flag -I
 incl=""
