@@ -65,6 +65,7 @@ class IFStream
 	redef fun close
 	do
 		var i = _file.io_close
+		_buffer.clear
 		end_reached = true
 	end
 
