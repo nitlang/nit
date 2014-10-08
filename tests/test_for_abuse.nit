@@ -14,12 +14,21 @@
 
 import for_abuse
 
+var escape_f: nullable IStream = null
 for f in file_open("test_for_abuse.nit") do
+	escape_f = f
 	print f.read_line
+	print "f is closed? {f.eof}"
 end
+print "f is closed? {escape_f.eof}"
 
 var array = ["*", "****", "**", "*******"]
 for q in array.sort_fa do
-	q.res = q.b.length <=> q.b.length
+	# IN:
+	#     q.a
+	#     q-b
+	# OUT
+	#     q.res
+	q.res = q.a.length <=> q.b.length
 end
-
+print array.join(" ")
