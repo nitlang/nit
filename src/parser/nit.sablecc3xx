@@ -395,9 +395,9 @@ stmtsnend {-> expr}
 stmts_tail {-> expr}
 	= n stmt {-> stmt.expr};
 stmt~withelse~noexpr~nopar {-> expr}
-	= {vardecl} vardecl~withelse {-> vardecl~withelse.expr}
-	| {assign} assignment~withelse~nopar {-> assignment~withelse~nopar.expr}
-	| {return} kwreturn expr_final~withelse? {-> New expr.return(kwreturn, expr_final~withelse.expr)}
+	= {vardecl} vardecl {-> vardecl.expr}
+	| {assign} assignment~nopar {-> assignment~nopar.expr}
+	| {return} kwreturn expr? {-> New expr.return(kwreturn, expr)}
 	| {break} kwbreak label? {-> New expr.break(kwbreak, label)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
 	| {continue} kwcontinue label? {-> New expr.continue(kwcontinue, label)}
@@ -410,23 +410,23 @@ stmt~withelse~noexpr~nopar {-> expr}
 !noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid.id, args_nopar.exprs)}
 !noexpr	| {super} qualified_o kwsuper args_nopar {-> New expr.super(qualified_o.qualified, kwsuper, args_nopar.exprs)}
 !noexpr	| {init} recv qualified? kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
-	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
+	| {debug_type_is} kwdebug kwtype type column expr {-> New expr.debug_type(kwdebug, kwtype, expr.expr, type) }
 	;
 
 label= kwlabel id?;
 
-vardecl~withelse{-> expr}
+vardecl{-> expr}
 	= kwvar id annotations? typing_o {-> New expr.vardecl(kwvar, id, typing_o.type, Null, Null, annotations)}
-	| {assign} kwvar id annotations? typing_o assign no expr_final~withelse {-> New expr.vardecl(kwvar, id, typing_o.type, assign, expr_final~withelse.expr, annotations)}
+	| {assign} kwvar id annotations? typing_o assign no expr {-> New expr.vardecl(kwvar, id, typing_o.type, assign, expr.expr, annotations)}
 	;
 
-assignment~withelse~nopar {-> expr}
-	= {attr} recv~nopar qualified_o attrid assign expr_final~withelse {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr_final~withelse.expr)}
-	| {call} recv~nopar qid args assign expr_final~withelse {-> New expr.call_assign(recv~nopar.expr, qid.id, args.exprs, assign,  expr_final~withelse.expr)}
-	| {bra} expr_atom~nopar braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr_final~withelse.expr)}
-	| {attr_re} recv~nopar qualified_o attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr_final~withelse.expr)}
-	| {call_re} recv~nopar qid args assign_op expr_final~withelse {-> New expr.call_reassign(recv~nopar.expr, qid.id, args.exprs, assign_op,  expr_final~withelse.expr)}
-	| {bra_re} expr_atom~nopar braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr_final~withelse.expr)}
+assignment~nopar {-> expr}
+	= {attr} recv~nopar qualified_o attrid assign expr {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr)}
+	| {call} recv~nopar qid args assign expr {-> New expr.call_assign(recv~nopar.expr, qid.id, args.exprs, assign,  expr)}
+	| {bra} expr_atom~nopar braargs assign expr {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr)}
+	| {attr_re} recv~nopar qualified_o attrid assign_op expr {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr)}
+	| {call_re} recv~nopar qid args assign_op expr {-> New expr.call_reassign(recv~nopar.expr, qid.id, args.exprs, assign_op,  expr)}
+	| {bra_re} expr_atom~nopar braargs assign_op expr {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr)}
 	;
 assign_op
 	= {plus} pluseq
@@ -465,17 +465,13 @@ for~withelse {-> expr}
 	;
 
 assert~withelse {-> expr}
-	= {else} kwassert assertid? expr_final_withelse kwelse stmtso~withelse {-> New expr.assert(kwassert, assertid.id, expr_final_withelse.expr, stmtso~withelse.expr)}
-!withelse| {noelse} kwassert assertid? expr_final {-> New expr.assert(kwassert, assertid.id, expr_final.expr, Null)}
+	= {else} kwassert assertid? expr kwelse stmtso~withelse {-> New expr.assert(kwassert, assertid.id, expr, stmtso~withelse.expr)}
+!withelse| {noelse} kwassert assertid? expr {-> New expr.assert(kwassert, assertid.id, expr, Null)}
 	;
 assertid {-> id}
 	= id column {-> id};
 
 /* EXPRESSIONS ***************************************************************/
-expr_final~nopar~withelse~nobra {-> expr}
-	= expr~nopar~nobra {-> expr~nopar~nobra.expr}
-	;
-
 expr~nopar~nobra {-> expr}
 	= expr_and~nopar~nobra {-> expr_and~nopar~nobra.expr}
 	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nopar~nobra {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
