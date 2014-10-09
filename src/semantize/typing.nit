@@ -1242,7 +1242,14 @@ redef class AAsNotnullExpr
 	end
 end
 
-redef class AProxyExpr
+redef class AParExpr
+	redef fun accept_typing(v)
+	do
+		self.mtype = v.visit_expr(self.n_expr)
+	end
+end
+
+redef class AOnceExpr
 	redef fun accept_typing(v)
 	do
 		self.mtype = v.visit_expr(self.n_expr)

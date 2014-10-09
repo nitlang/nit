@@ -1448,8 +1448,9 @@ end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
-	super AProxyExpr
+	super AExpr
 	var n_kwonce: TKwonce is writable, noinit
+	var n_expr: AExpr is writable, noinit
 end
 
 # A polymorphic invocation of a method
@@ -1856,15 +1857,10 @@ end
 
 # A simple parenthesis. eg `(x)`
 class AParExpr
-	super AProxyExpr
-	var n_opar: TOpar is writable, noinit
-	var n_cpar: TCpar is writable, noinit
-end
-
-# Whatever just contains (and mimic) an other expression
-abstract class AProxyExpr
 	super AExpr
+	var n_opar: TOpar is writable, noinit
 	var n_expr: AExpr is writable, noinit
+	var n_cpar: TCpar is writable, noinit
 end
 
 # A type cast. eg `x.as(T)`
