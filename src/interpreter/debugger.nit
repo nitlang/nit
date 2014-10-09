@@ -539,6 +539,42 @@ class Debugger
 		return true
 	end
 
+	# Produces help for the commands of the debugger
+	fun help do
+		print ""
+		print "Help :"
+		print "-----------------------------------"
+		print ""
+		print "Variables"
+		print " * Modification: var_name = value (Warning: var_name must be primitive)"
+		print " * Alias: var_name as alias"
+		print ""
+		print "Printing"
+		print " * Variables: p(rint) var_name (Use * to print all local variables)"
+		print " * Collections: p(rint) var_name '[' start_index (.. end_index) ']'"
+		print ""
+		print "Breakpoints"
+		print " * File/line: b(reak) file_name line_number"
+		print " * Remove: d(elete) id"
+		print ""
+		print "Tracepoints"
+		print " * Variable: trace var_name break/print"
+		print " * Untrace variable: untrace var_name"
+		print ""
+		print "Flow control"
+		print " * Next instruction (same-level): n"
+		print " * Next instruction: s"
+		print " * Finish current method: finish"
+		print " * Continue until next breakpoint or end: c"
+		print ""
+		print "General commands"
+		print " * quit: Quits the debugger"
+		print " * abort: Aborts the interpretation, prints the stack trace before leaving"
+		print " * nitx: Ask questions to the model about its entities (classes, methods, etc.)"
+		print " * nit: Inject dynamic code for interpretation"
+		print ""
+	end
+
 	#######################################################################
 	##               Processing specific command functions               ##
 	#######################################################################
@@ -579,6 +615,10 @@ class Debugger
 		self.stop_after_step_out_trigger = false
 		self.step_in_trigger = false
 		return false
+	end
+
+	fun bad_command(cmd: String) do
+		print "Unrecognized command {cmd}. Use 'help' to show help."
 	end
 
 	# Prints the demanded variable in the command
