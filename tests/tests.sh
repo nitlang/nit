@@ -55,6 +55,68 @@ Usage: $e [options] modulenames
 END
 }
 
+# Run a command with a timeout and a time count.
+# Options:
+#   -o file    write the user time into file (REQUIRED). see `-o` in `man time`
+#   -a         append the time to the file (instead of overwriting it). see `-a` in `man time`
+saferun()
+{
+	local stop=false
+	local o=
+	local a=
+	while [ $stop = false ]; do
+		case $1 in
+			-o) o="$2"; shift; shift;;
+			-a) a="-a"; shift;;
+			*) stop=true
+		esac
+	done
+	if test -n "$TIME"; then
+		$TIME -o "$o" $a $TIMEOUT "$@"
+	else
+		$TIMEOUT "$@"
+		if test -n "$a"; then echo 0 >> "$o"; else echo 0 > "$o"; fi
+	fi
+}
+
+# Output a timestamp attribute for XML, or an empty line
+timestamp()
+{
+	if test -n "$TIMESTAMP"; then
+		echo "timestamp='`$TIMESTAMP`'"
+	else
+		echo ""
+	fi
+
+}
+
+# Get platform specific commands ##########################
+
+# Detect a working timeout
+if sh -c "timelimit echo" 1>/dev/null 2>&1; then
+	TIMEOUT="timelimit -t 600"
+elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
+	TIMEOUT="timeout 600s"
+else
+	echo "No timelimit or timeout command detected. Tests may hang :("
+fi
+
+# Detect a working time command
+if env time --quiet -f%U true 2>/dev/null; then
+	TIME="env time --quiet -f%U"
+elif env time -f%U true 2>/dev/null; then
+	TIME="env time -f%U"
+else
+	TIME=
+fi
+
+# Detect a working date command
+if date -Iseconds >/dev/null 2>&1; then
+	TIMESTAMP="date -Iseconds"
+else
+	TIMESTAMP=
+fi
+
 # $1 is the pattern of the test
 # $2 is the file to compare to
 # the result is:
@@ -102,7 +164,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat $outdir/$pattern.time.out`' timestamp='`date -Iseconds`'>"
+	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat $outdir/$pattern.time.out`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -241,12 +303,12 @@ need_skip()
 	test "$noskip" = true && return 1
 	if echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip]"
-		echo >>$xml "<testcase classname='$3' name='$2' timestamp='`date -Iseconds`'><skipped/></testcase>"
+		echo >>$xml "<testcase classname='$3' name='$2' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
 	if test -n "$isinterpret" && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip exec]"
-		echo >>$xml "<testcase classname='$3' name='$2' timestamp='`date -Iseconds`'><skipped/></testcase>"
+		echo >>$xml "<testcase classname='$3' name='$2' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
 	return 1
@@ -363,14 +425,6 @@ savdirs="sav/$engine $savdirs sav/"
 # Set NIT_DIR if needed
 [ -z "$NIT_DIR" ] && export NIT_DIR=..
 
-if sh -c "timelimit echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timelimit -t 600"
-elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timeout 600s"
-else
-	echo "No timelimit or timeout command detected. Tests may hang :("
-fi
-
 # Mark to distinguish files among tests
 # MARK=
 
@@ -470,7 +524,7 @@ END
 				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				/usr/bin/time -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				saferun -o "$ff.time.out" $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -482,7 +536,7 @@ END
 			chmod +x "$ff.bin"
 			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
 				echo " [skip] do no not imports kernel"
-				echo >>$xml "<testcase classname='$pack' name='$bf' timestamp='`date -Iseconds`'><skipped/></testcase>"
+				echo >>$xml "<testcase classname='$pack' name='$bf' `timestamp`><skipped/></testcase>"
 				continue
 			fi
 		fi
@@ -510,7 +564,7 @@ END
 				echo "NIT_NO_STACK=1 $ff.bin" $args
 			fi
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
-				/usr/bin/time -f%U -a -o "$ff.time.out" $TIMEOUT "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+				saferun -a -o "$ff.time.out" "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			mv $ff.time.out $ff.times.out
 			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
 
@@ -555,7 +609,7 @@ END
 					echo -n "==> $name "
 					echo "$ff.bin $args" > "$fff.bin"
 					chmod +x "$fff.bin"
-					WRITE="$fff.write" /usr/bin/time -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT $fff.bin < $ffinputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" saferun -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
