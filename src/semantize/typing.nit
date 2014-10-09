@@ -304,6 +304,15 @@ private class TypeVisitor
 		return callsite
 	end
 
+	fun try_get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	do
+		var unsafe_type = self.anchor_to(recvtype)
+		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		if mproperty == null then return null
+		return get_method(node, recvtype, name, recv_is_self)
+	end
+
+
 	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
