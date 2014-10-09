@@ -17,7 +17,6 @@
 # Debugging of a nit program using the NaiveInterpreter
 module debugger
 
-import breakpoint
 intrude import naive_interpreter
 import nitx
 intrude import semantize::local_var_init
@@ -164,6 +163,20 @@ redef class ModelBuilder
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
+	end
+end
+
+# Contains all the informations of a Breakpoint for the Debugger
+class Breakpoint
+
+	# Line to break on
+	var line: Int
+
+	# File concerned by the breakpoint
+	var file: String
+
+	redef init do
+		if not file.has_suffix(".nit") then file += ".nit"
 	end
 end
 
@@ -379,14 +392,6 @@ class Debugger
 		var breakpoint = find_breakpoint(curr_file, n.location.line_start)
 
 		if breakpoints.keys.has(curr_file) and breakpoint != null then
-
-			breakpoint.check_in
-
-			if not breakpoint.is_valid
-			then
-				remove_breakpoint(curr_file, n.location.line_start)
-			end
-
 			n.debug("Execute stmt {n.to_s}")
 			while read_cmd do end
 		end
@@ -511,10 +516,6 @@ class Debugger
 			else if parts_of_command[0] == "break" or parts_of_command[0] == "b"
 			then
 				process_place_break_fun(parts_of_command)
-			# Places a temporary breakpoint on line x of file y
-			else if parts_of_command[0] == "tbreak" and (parts_of_command.length == 2 or parts_of_command.length == 3)
-			then
-				process_place_tbreak_fun(parts_of_command)
 			# Removes a breakpoint on line x of file y
 			else if parts_of_command[0] == "d" or parts_of_command[0] == "delete" then
 				process_remove_break_fun(parts_of_command)
@@ -1212,17 +1213,6 @@ class Debugger
 			print "Breakpoint added on line {breakpoint.line} for file {breakpoint.file}"
 		else
 			print "Breakpoint already present on line {breakpoint.line} for file {breakpoint.file}"
-		end
-	end
-
-	#Places a breakpoint that will trigger once and be destroyed afterwards
-	fun process_place_tbreak_fun(parts_of_command: Array[String])
-	do
-		var bp = get_breakpoint_from_command(parts_of_command)
-		if bp != null
-		then
-			bp.set_max_breaks(1)
-			place_breakpoint(bp)
 		end
 	end
 
