@@ -698,7 +698,7 @@ idlist {-> id*}
 	;
 idlist_nopar {-> id*}
 	= {single} id {-> [id]}
-	| {more} idlist_nopar no comma [n2]:no id {-> [idlist_nopar.id, id]}
+	| {more} idlist_nopar comma [n2]:no id {-> [idlist_nopar.id, id]}
 	;
 
 module_name {-> module_name}
