@@ -855,6 +855,7 @@ redef class AForExpr
 	var method_item: nullable CallSite
 	var method_next: nullable CallSite
 	var method_key: nullable CallSite
+	var method_finish: nullable CallSite
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
@@ -945,6 +946,8 @@ redef class AForExpr
 			return
 		end
 		self.method_next = nextdef
+
+		self.method_finish = v.try_get_method(self, ittype, "finish", false)
 
 		if is_map then
 			var keydef = v.get_method(self, ittype, "key", false)
