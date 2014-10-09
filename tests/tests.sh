@@ -36,6 +36,9 @@ paths=($paths)
 JNI_LIB_PATH=${paths[0]}
 shopt -u nullglob
 
+outdir="out"
+compdir=".nit_compile"
+
 usage()
 {
 	e=`basename "$0"`
@@ -46,6 +49,9 @@ Usage: $e [options] modulenames
 -h          This help
 --engine    Use a specific engine (default=nitg)
 --noskip    Do not skip a test even if the .skip file matches
+--outdir    Use a specific output folder (default=out/)
+--compdir   Use a specific temporary compilation folder (default=.nit_compile)
+--node      Run as a node in parallel, will not output context information
 END
 }
 
@@ -62,15 +68,15 @@ function compare_to_result()
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
 	test "`cat "$sav"`" = "UNDEFINED" && return 1
-	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
+	diff -u "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
-	sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
-	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log2"
+	sed '/[Ww]arning/d;/[Ee]rror/d' "$outdir/$pattern.res" > "$outdir/$pattern.res2"
+	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "$outdir/$pattern.sav2"
+	grep '[Ee]rror' "$outdir/$pattern.res" >/dev/null && echo "Error" >> "$outdir/$pattern.res2"
+	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "$outdir/$pattern.sav2"
+	diff -u "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -96,7 +102,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat out/$pattern.time.out`' timestamp='`date -Iseconds`'>"
+	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat $outdir/$pattern.time.out`' timestamp='`date -Iseconds`'>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -152,79 +158,79 @@ function process_result()
 		esac
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
-	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
+	grep 'NOT YET IMPLEMENTED' "$outdir/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$OLD" ]; then
-			echo "[*ok*] out/$pattern.res $SAV - but $OLD remains!"
-			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			echo "[*ok*] $outdir/$pattern.res $SAV - but $OLD remains!"
+			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
 		else
-			echo "[ok] out/$pattern.res $SAV"
+			echo "[ok] $outdir/$pattern.res $SAV"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$FIXME" ]; then
 		if [ -n "$OLD" ]; then
-			echo "[*fixme*] out/$pattern.res $FIXME - but $OLD remains!"
-			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			echo "[*fixme*] $outdir/$pattern.res $FIXME - but $OLD remains!"
+			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
 			remains="$remains $OLD"
 		else
-			echo "[fixme] out/$pattern.res $FIXME"
+			echo "[fixme] $outdir/$pattern.res $FIXME"
 			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ "x$NYI" = "x0" ]; then
-		echo "[todo] out/$pattern.res -> not yet implemented"
+		echo "[todo] $outdir/$pattern.res -> not yet implemented"
 		echo >>$xml "<skipped/>"
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
-		echo "[======= soso out/$pattern.res $SOSO =======]"
-		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo "[======= soso $outdir/$pattern.res $SOSO =======]"
+		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$SOSOF" ]; then
-		echo "[======= fixme soso out/$pattern.res $SOSOF =======]"
-		echo >>$xml "<error message='soso out/$pattern.res $SOSO'/>"
+		echo "[======= fixme soso $outdir/$pattern.res $SOSOF =======]"
+		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NSAV" ]; then
-		echo "[======= fail out/$pattern.res $NSAV =======]"
-		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
+		echo "[======= fail $outdir/$pattern.res $NSAV =======]"
+		echo >>$xml "<error message='fail $outdir/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
-		echo "[======= changed out/$pattern.res $NFIXME ======]"
-		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
+		echo "[======= changed $outdir/$pattern.res $NFIXME ======]"
+		echo >>$xml "<error message='changed $outdir/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ -s out/$pattern.res ]; then
-		echo "[=== no sav ===] out/$pattern.res is not empty"
+	elif [ -s $outdir/$pattern.res ]; then
+		echo "[=== no sav ===] $outdir/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v >>$xml out/$pattern.res
+		cat -v >>$xml $outdir/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
 		# no sav but empty res
-		echo "[0k] out/$pattern.res is empty"
+		echo "[0k] $outdir/$pattern.res is empty"
 		ok="$ok $pattern"
 	fi
-	if test -s out/$pattern.cmp.err; then
+	if test -s $outdir/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
-		cat -v >>$xml out/$pattern.cmp.err
+		cat -v >>$xml $outdir/$pattern.cmp.err
 		echo >>$xml "]]></system-err>"
 	fi
 	echo >>$xml "</testcase>"
@@ -273,11 +279,14 @@ find_nitc()
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
 	fi
-	echo "Find binary for engine $engine: $recent $OPT"
+	if [ "x$isnode" = "xfalse" ]; then
+		echo "Found binary for engine $engine: $recent $OPT"
+	fi
 	NITC=$recent
 }
 
 verbose=false
+isnode=false
 stop=false
 engine=nitg
 noskip=
@@ -289,6 +298,9 @@ while [ $stop = false ]; do
 		-h) usage; exit;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
+		--outdir) outdir="$2"; shift; shift;;
+		--compdir) compdir="$2"; shift; shift;;
+		--node) isnode=true; shift;;
 		*) stop=true
 	esac
 done
@@ -298,23 +310,23 @@ case $engine in
 	nitg)
 		engine=nitg-s;
 		enginebinname=nitg;
-		OPT="--separate $OPT"
+		OPT="--separate $OPT --compile-dir $compdir"
 		;;
 	nitg-s)
 		enginebinname=nitg;
-		OPT="--separate $OPT"
+		OPT="--separate $OPT --compile-dir $compdir"
 		;;
 	nitg-e)
 		enginebinname=nitg;
-		OPT="--erasure $OPT"
+		OPT="--erasure $OPT --compile-dir $compdir"
 		;;
 	nitg-sg)
 		enginebinname=nitg;
-		OPT="--semi-global $OPT"
+		OPT="--semi-global $OPT --compile-dir $compdir"
 		;;
 	nitg-g)
 		enginebinname=nitg;
-		OPT="--global $OPT"
+		OPT="--global $OPT --compile-dir $compdir"
 		;;
 	nit)
 		engine=niti
@@ -330,7 +342,7 @@ case $engine in
 		;;
 	emscripten)
 		enginebinname=nitg
-		OPT="-m emscripten_nodejs.nit --semi-global $OPT"
+		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-sg/"
 		;;
 	nitc)
@@ -362,19 +374,23 @@ fi
 # Mark to distinguish files among tests
 # MARK=
 
-# File where error tests are outputed
-# Old ERRLIST is backuped
-ERRLIST=${ERRLIST:-errlist}
-ERRLIST_TARGET=$ERRLIST
-
 if [ $# = 0 ]; then
 	usage;
 	exit
 fi
 
+# CLEAN the out directory
+rm -rf "$outdir/" 2>/dev/null
+mkdir "$outdir" 2>/dev/null
+
+# File where error tests are outputed
+# Old ERRLIST is backuped
+ERRLIST=${ERRLIST:-errlist}
+ERRLIST_TARGET=$ERRLIST
+
 # Initiate new ERRLIST
 if [ "x$ERRLIST" = "x" ]; then
-	ERRLIST=/dev=null
+	ERRLIST=/dev/null
 else
 	ERRLIST=$ERRLIST.tmp
 	> "$ERRLIST"
@@ -383,12 +399,14 @@ fi
 ok=""
 nok=""
 todos=""
-xml="tests-$engine.xml"
-echo >$xml "<testsuites><testsuite>"
 
-# CLEAN the out directory
-rm -rf out/ 2>/dev/null
-mkdir out 2>/dev/null
+if [ "x$XMLDIR" = "x" ]; then
+	xml="tests-$engine.xml"
+else
+	xml="$XMLDIR/tests-$engine.xml"
+fi
+
+echo >$xml "<testsuites><testsuite>"
 
 for ii in "$@"; do
 	if [ ! -f $ii ]; then
@@ -411,7 +429,7 @@ for ii in "$@"; do
 
 	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
-		ff="out/$bf"
+		ff="$outdir/$bf"
 
 		# Sould we skip the alternative for this engine?
 		need_skip $bf $bf $pack && continue
@@ -432,10 +450,10 @@ for ii in "$@"; do
 		fi
 
 		if [ -n "$isinterpret" ]; then
-			cat > "./$ff.bin" <<END
+			cat > "$ff.bin" <<END
 exec $NITC --no-color $OPT "$i" $includes -- "\$@"
 END
-			chmod +x "./$ff.bin"
+			chmod +x "$ff.bin"
 			> "$ff.cmp.err"
 			> "$ff.compile.log"
 			ERR=0
@@ -452,7 +470,7 @@ END
 				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				/usr/bin/time --quiet -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				/usr/bin/time -f%U -o "$ff.time.out" $TIMEOUT $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -460,7 +478,7 @@ END
 			fi
 		fi
 		if [ "$engine" = "emscripten" ]; then
-			echo > "./$ff.bin" "nodejs $ffout \"\$@\""
+			echo > "$ff.bin" "nodejs $ffout \"\$@\""
 			chmod +x "$ff.bin"
 			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
 				echo " [skip] do no not imports kernel"
@@ -477,7 +495,7 @@ END
 			echo -n "nocc "
 			> "$ff.res"
 			process_result $bf $bf $pack
-		elif [ -x "./$ff.bin" ]; then
+		elif [ -x "$ff.bin" ]; then
 			if skip_exec "$bf"; then
 				# No exec
 				> "$ff.res"
@@ -489,10 +507,10 @@ END
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo "NIT_NO_STACK=1 ./$ff.bin" $args
-			fi	
+				echo "NIT_NO_STACK=1 $ff.bin" $args
+			fi
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
-				/usr/bin/time --quiet -f%U -a -o "$ff.time.out" $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+				/usr/bin/time -f%U -a -o "$ff.time.out" $TIMEOUT "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			mv $ff.time.out $ff.times.out
 			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
 
@@ -532,12 +550,12 @@ END
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
-						echo "NIT_NO_STACK=1 ./$ff.bin" $args
+						echo "NIT_NO_STACK=1 $ff.bin" $args
 					fi
 					echo -n "==> $name "
-					echo "./$ff.bin $args" > "./$fff.bin"
-					chmod +x "./$fff.bin"
-					WRITE="$fff.write" /usr/bin/time --quiet -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
+					echo "$ff.bin $args" > "$fff.bin"
+					chmod +x "$fff.bin"
+					WRITE="$fff.write" /usr/bin/time -f%U -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $TIMEOUT $fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
@@ -554,7 +572,7 @@ END
 					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
-		elif [ -f "./$ff.bin" ]; then
+		elif [ -f "$ff.bin" ]; then
 			#Not executable (platform?)"
 			> "$ff.res"
 			process_result $bf "$bf" $pack
@@ -567,21 +585,23 @@ END
 	done
 done
 
-echo "engine: $engine ($enginebinname $OPT)"
-echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
+if [ "x$isnode" = "xfalse" ]; then
+	echo "engine: $engine ($enginebinname $OPT)"
+	echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
 
-if [ -n "$nok" ]; then
-	echo "fail: $nok"
-	echo "There were $(echo $nok | wc -w) errors ! (see file $ERRLIST)"
-fi
-if [ -n "$nos" ]; then
-	echo "no sav: $nos"
-fi
-if [ -n "$todos" ]; then
-	echo "todo/fixme: $todos"
-fi
-if [ -n "$remains" ]; then
-	echo "sav that remains: $remains"
+	if [ -n "$nok" ]; then
+		echo "fail: $nok"
+		echo "There were $(echo $nok | wc -w) errors ! (see file $ERRLIST)"
+	fi
+	if [ -n "$nos" ]; then
+		echo "no sav: $nos"
+	fi
+	if [ -n "$todos" ]; then
+		echo "todo/fixme: $todos"
+	fi
+	if [ -n "$remains" ]; then
+		echo "sav that remains: $remains"
+	fi
 fi
 
 # write $ERRLIST
