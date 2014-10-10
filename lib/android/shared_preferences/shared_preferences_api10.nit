@@ -102,6 +102,13 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 
 		return return_value;
 	`}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeSharedPreferences_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences$Editor `}
@@ -127,6 +134,13 @@ extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPr
 	`}
 	fun remove(key: JavaString): NativeSharedPreferencesEditor in "Java" `{ 
 		return recv.remove(key); 
+	`}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeSharedPreferencesEditor_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
 	`}
 end
 
