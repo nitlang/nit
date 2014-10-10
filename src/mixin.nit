@@ -22,11 +22,13 @@ import modelbuilder
 redef class ToolContext
 	# --mixin
 	var opt_mixins = new OptionArray("Additionals module to min-in", "-m", "--mixin")
+	# --define
+	var opt_defines = new OptionArray("Define a specific property", "-D", "--define")
 
 	redef init
 	do
 		super
-		option_context.add_option(opt_mixins)
+		option_context.add_option(opt_mixins, opt_defines)
 	end
 
 	redef fun make_main_module(mmodules)
@@ -38,6 +40,70 @@ redef class ToolContext
 		end
 
 		var mainmodule = super
+
+		var defines = opt_defines.value
+		if not defines.is_empty then
+			var location = mainmodule.location
+			var model = mainmodule.model
+
+			if mainmodule == mmodules.first then
+				mainmodule = new MModule(model, null, mainmodule.name + "-d", location)
+				mainmodule.set_imported_mmodules(mmodules)
+				mainmodule.is_fictive = true
+			end
+
+			var recv = mainmodule.object_type
+			var mclassdef = new MClassDef(mainmodule, recv, location)
+			mclassdef.add_in_hierarchy
+
+			for define in defines do
+				var spl = define.split_once_on('=')
+				var name = spl.first
+				var val = null
+				if spl.length > 1 then val = spl[1]
+				var prop = mainmodule.try_get_primitive_method(name, recv.mclass)
+				if prop == null then
+					error(null, "Error: --define: no top-level function `{name}`")
+					continue
+				end
+				var ret = prop.intro.msignature.return_mtype
+				var v
+				if ret == null then
+					error(null, "Error: --define: Method `{prop}` is not a function")
+					continue
+				else if ret.to_s == "Bool" then
+					if val == null or val == "true" then
+						v = true
+					else if val == "false" then
+						v = false
+					else
+						error(null, "Error: --define: Method `{prop}` need a Bool.")
+						continue
+					end
+				else if ret.to_s == "Int" then
+					if val != null and val.is_numeric then
+						v = val.to_i
+					else
+						error(null, "Error: --define: Method `{prop}` need a Int.")
+						continue
+					end
+				else if ret.to_s == "String" then
+					if val != null then
+						v = val
+					else
+						error(null, "Error: --define: Method `{prop}` need a String.")
+						continue
+					end
+				else
+					error(null, "Error: --define: Method `{prop}` return an unmanaged type {ret}.")
+					continue
+				end
+				var pd = new MMethodDef(mclassdef, prop, location)
+				pd.msignature = prop.intro.msignature
+				pd.constant_value = v
+			end
+			check_errors
+		end
 
 		return mainmodule
 	end

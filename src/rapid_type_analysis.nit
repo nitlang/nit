@@ -244,6 +244,9 @@ class RapidTypeAnalysis
 					if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)
 					end
+				else if mmethoddef.constant_value != null then
+					# Make the return type live
+					v.add_type(mmethoddef.msignature.return_mtype.as(MClassType))
 				else
 					abort
 				end

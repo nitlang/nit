@@ -248,6 +248,19 @@ class NaiveInterpreter
 		return res
 	end
 
+	fun value_instance(object: Object): Instance
+	do
+		if object isa Int then
+			return int_instance(object)
+		else if object isa Bool then
+			return bool_instance(object)
+		else if object isa String then
+			return string_instance(object)
+		else
+			abort
+		end
+	end
+
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
@@ -376,6 +389,7 @@ class NaiveInterpreter
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
+		var val = mpropdef.constant_value
 		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
 			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
 			self.parameter_check(npropdef, mpropdef, args)
@@ -384,6 +398,8 @@ class NaiveInterpreter
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
 			self.parameter_check(nclassdef, mpropdef, args)
 			return nclassdef.call(self, mpropdef, args)
+		else if val != null then
+			return value_instance(val)
 		else
 			fatal("Fatal Error: method {mpropdef} not found in the AST")
 			abort

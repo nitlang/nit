@@ -1397,6 +1397,19 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	fun value_instance(object: Object): RuntimeVariable
+	do
+		if object isa Int then
+			return int_instance(object)
+		else if object isa Bool then
+			return bool_instance(object)
+		else if object isa String then
+			return string_instance(object)
+		else
+			abort
+		end
+	end
+
 	# Generate an array value
 	fun array_instance(array: Array[RuntimeVariable], elttype: MType): RuntimeVariable is abstract
 
@@ -1837,6 +1850,7 @@ redef class MMethodDef
 	fun compile_inside_to_c(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var modelbuilder = v.compiler.modelbuilder
+		var val = constant_value
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			var oldnode = v.current_node
@@ -1851,6 +1865,8 @@ redef class MMethodDef
 			self.compile_parameter_check(v, arguments)
 			nclassdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
+		else if val != null then
+			v.ret(v.value_instance(val))
 		else
 			abort
 		end
