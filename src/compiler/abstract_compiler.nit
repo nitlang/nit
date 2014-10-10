@@ -1355,6 +1355,18 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate an integer value
+	fun bool_instance(value: Bool): RuntimeVariable
+	do
+		var res = self.new_var(self.get_class("Bool").mclass_type)
+		if value then
+			self.add("{res} = 1;")
+		else
+			self.add("{res} = 0;")
+		end
+		return res
+	end
+
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
