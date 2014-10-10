@@ -22,6 +22,7 @@ import semantize
 import platform
 import c_tools
 private import annotation
+import mixin
 
 # Add compiling options
 redef class ToolContext
@@ -3042,9 +3043,6 @@ end
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 
-var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
-toolcontext.option_context.add_option(opt_mixins)
-
 toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
@@ -3063,7 +3061,6 @@ end
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
-var mixins = modelbuilder.parse(opt_mixins.value)
 
 if mmodules.is_empty then return
 modelbuilder.run_phases
@@ -3071,8 +3068,5 @@ modelbuilder.run_phases
 for mmodule in mmodules do
 	toolcontext.info("*** PROCESS {mmodule} ***", 1)
 	var ms = [mmodule]
-	if not mixins.is_empty then
-		ms.add_all mixins
-	end
 	toolcontext.run_global_phases(ms)
 end

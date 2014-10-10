@@ -20,6 +20,7 @@ module naive_interpreter
 import literal
 import semantize
 private import parser::tables
+import mixin
 
 redef class ToolContext
 	# --discover-call-trace
