@@ -413,6 +413,13 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	`}
 	fun to_native_s: JavaString in "Java" `{ return recv.toString(); `}
 	fun to_uri(flags: Int): JavaString in "Java" `{ return recv.toUri((int)flags); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeIntent_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 extern class NativePackageManager in "Java" `{ android.content.pm.PackageManager `}

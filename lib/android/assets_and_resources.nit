@@ -186,6 +186,13 @@ extern class NativeResources in "Java" `{ android.content.res.Resources `}
 	fun get_resource_name(resid: Int): JavaString in "Java" `{ return recv.getResourceName((int)resid); `}
 	fun get_resource_pakage_name(resid: Int): JavaString in "Java" `{ return recv.getResourcePackageName((int)resid); `}
 	fun get_resource_type_name(resid: Int): JavaString in "Java" `{ return recv.getResourceTypeName((int)resid); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeResources_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 # Resource manager for android resources placed in the `res` folder of your app

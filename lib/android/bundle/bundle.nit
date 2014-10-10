@@ -411,6 +411,13 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun describe_contents: Int in "Java" `{ return recv.describeContents(); `}
 	fun to_string: JavaString in "Java" `{ return recv.toString(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeBundle_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 # A class mapping `String` keys to various value types

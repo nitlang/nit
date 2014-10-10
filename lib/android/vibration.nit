@@ -38,6 +38,13 @@ extern class Vibrator in "Java" `{ android.os.Vibrator `}
 
 	# Turn off the vibration
 	fun cancel in "Java" `{ recv.cancel(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = Vibrator_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 redef class App
