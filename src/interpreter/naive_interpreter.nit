@@ -256,6 +256,15 @@ class NaiveInterpreter
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
 	end
 
+	# Return a new String instance for `txt`
+	fun string_instance(txt: String): Instance
+	do
+		var nat = native_string_instance(txt)
+		var res = self.send(self.force_get_primitive_method("to_s_with_length", nat.mtype), [nat, self.int_instance(txt.length)])
+		assert res != null
+		return res
+	end
+
 	# The current frame used to store local variables of the current method executed
 	fun frame: Frame do return frames.first
 
@@ -1460,9 +1469,7 @@ redef class AStringFormExpr
 	redef fun expr(v)
 	do
 		var txt = self.value.as(not null)
-		var nat = v.native_string_instance(txt)
-		var res = v.send(v.force_get_primitive_method("to_s", nat.mtype), [nat]).as(not null)
-		return res
+		return v.string_instance(txt)
 	end
 end
 
