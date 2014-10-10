@@ -152,6 +152,16 @@ interface Iterator[E]
 
 	# Iterate over `self`
 	fun iterator: Iterator[E] do return self
+
+	# Post-iteration hook.
+	#
+	# Used to inform `self` that the iteration is over.
+	# Specific iterators can use this to free some resources.
+	#
+	# Is automatically invoked at the end of `for` structures.
+	#
+	# Do nothing by default.
+	fun finish do end
 end
 
 # A collection that contains only one item.
@@ -526,6 +536,16 @@ interface MapIterator[K: Object, V]
 
 	# Set a new `item` at `key`.
 	#fun item=(item: E) is abstract
+
+	# Post-iteration hook.
+	#
+	# Used to inform `self` that the iteration is over.
+	# Specific iterators can use this to free some resources.
+	#
+	# Is automatically invoked at the end of `for` structures.
+	#
+	# Do nothing by default.
+	fun finish do end
 end
 
 # Iterator on a 'keys' point of view of a map

@@ -2601,6 +2601,12 @@ redef class AForExpr
 		v.compile_callsite(next_meth, [it])
 		v.add("\}")
 		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+
+		var method_finish = self.method_finish
+		if method_finish != null then
+			# TODO: Find a way to call this also in long escape (e.g. return)
+			v.compile_callsite(method_finish, [it])
+		end
 	end
 end
 

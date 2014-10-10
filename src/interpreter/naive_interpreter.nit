@@ -1330,7 +1330,7 @@ redef class AForExpr
 		#self.debug("iter {iter}")
 		loop
 			var isok = v.callsite(method_is_ok, [iter]).as(not null)
-			if not isok.is_true then return
+			if not isok.is_true then break
 			if self.variables.length == 1 then
 				var item = v.callsite(method_item, [iter]).as(not null)
 				#self.debug("item {item}")
@@ -1344,10 +1344,14 @@ redef class AForExpr
 				abort
 			end
 			v.stmt(self.n_block)
-			if v.is_break(self.escapemark) then return
+			if v.is_break(self.escapemark) then break
 			v.is_continue(self.escapemark) # Clear the break
-			if v.is_escaping then return
+			if v.is_escaping then break
 			v.callsite(method_next, [iter])
+		end
+		var method_finish = self.method_finish
+		if method_finish != null then
+			v.callsite(method_finish, [iter])
 		end
 	end
 end

@@ -675,6 +675,8 @@ redef class AForExpr
 			abort
 		end
 		v.add_callsite(self.method_next)
+		var mf = self.method_finish
+		if mf != null then v.add_callsite(mf)
 	end
 end
 
