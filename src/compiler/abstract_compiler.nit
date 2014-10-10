@@ -1046,7 +1046,7 @@ abstract class AbstractCompilerVisitor
 	fun get_property(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv.mclass, self.compiler.mainmodule)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
