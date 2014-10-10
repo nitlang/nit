@@ -310,7 +310,16 @@ class MakefileToolchain
 
 	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
 
-	fun default_outname(mainmodule: MModule): String do return mainmodule.name
+	fun default_outname(mainmodule: MModule): String
+	do
+		# Search a non fictive module
+		var res = mainmodule.name
+		while mainmodule.is_fictive do
+			mainmodule = mainmodule.in_importation.direct_greaters.first
+			res = mainmodule.name
+		end
+		return res
+	end
 
 	# Combine options and platform informations to get the final path of the outfile
 	fun outfile(mainmodule: MModule): String
