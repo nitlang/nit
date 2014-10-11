@@ -53,8 +53,8 @@ redef class ToolContext
 
 	private var modelbuilder_real: nullable ModelBuilder = null
 
-	# Run `process_mainmodule` on all phases
-	fun run_global_phases(mmodules: Array[MModule])
+	# Combine module to make a single one if required.
+	fun make_main_module(mmodules: Array[MModule]): MModule
 	do
 		assert not mmodules.is_empty
 		var mainmodule
@@ -62,10 +62,17 @@ redef class ToolContext
 			mainmodule = mmodules.first
 		else
 			# We need a main module, so we build it by importing all modules
-			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name, new Location(mmodules.first.location.file, 0, 0, 0, 0))
+			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
 			mainmodule.is_fictive = true
 			mainmodule.set_imported_mmodules(mmodules)
 		end
+		return mainmodule
+	end
+
+	# Run `process_mainmodule` on all phases
+	fun run_global_phases(mmodules: Array[MModule])
+	do
+		var mainmodule = make_main_module(mmodules)
 		for phase in phases_list do
 			if phase.disabled then continue
 			phase.process_mainmodule(mainmodule, mmodules)
@@ -738,11 +745,13 @@ class ModelBuilder
 	end
 
 	# Force to get the primitive method named `name` on the type `recv` or do a fatal error on `n`
-	fun force_get_primitive_method(n: ANode, name: String, recv: MClass, mmodule: MModule): MMethod
+	fun force_get_primitive_method(n: nullable ANode, name: String, recv: MClass, mmodule: MModule): MMethod
 	do
 		var res = mmodule.try_get_primitive_method(name, recv)
 		if res == null then
-			self.toolcontext.fatal_error(n.hot_location, "Fatal Error: {recv} must have a property named {name}.")
+			var l = null
+			if n != null then l = n.hot_location
+			self.toolcontext.fatal_error(l, "Fatal Error: {recv} must have a property named {name}.")
 			abort
 		end
 		return res

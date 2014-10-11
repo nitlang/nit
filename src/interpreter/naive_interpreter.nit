@@ -20,6 +20,7 @@ module naive_interpreter
 import literal
 import semantize
 private import parser::tables
+import mixin
 
 redef class ToolContext
 	# --discover-call-trace
@@ -247,6 +248,19 @@ class NaiveInterpreter
 		return res
 	end
 
+	fun value_instance(object: Object): Instance
+	do
+		if object isa Int then
+			return int_instance(object)
+		else if object isa Bool then
+			return bool_instance(object)
+		else if object isa String then
+			return string_instance(object)
+		else
+			abort
+		end
+	end
+
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
@@ -254,6 +268,15 @@ class NaiveInterpreter
 		val.add('\0')
 		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
+	end
+
+	# Return a new String instance for `txt`
+	fun string_instance(txt: String): Instance
+	do
+		var nat = native_string_instance(txt)
+		var res = self.send(self.force_get_primitive_method("to_s_with_length", nat.mtype), [nat, self.int_instance(txt.length)])
+		assert res != null
+		return res
 	end
 
 	# The current frame used to store local variables of the current method executed
@@ -366,6 +389,7 @@ class NaiveInterpreter
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
+		var val = mpropdef.constant_value
 		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
 			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
 			self.parameter_check(npropdef, mpropdef, args)
@@ -374,6 +398,8 @@ class NaiveInterpreter
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
 			self.parameter_check(nclassdef, mpropdef, args)
 			return nclassdef.call(self, mpropdef, args)
+		else if val != null then
+			return value_instance(val)
 		else
 			fatal("Fatal Error: method {mpropdef} not found in the AST")
 			abort
@@ -495,6 +521,7 @@ class NaiveInterpreter
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
+			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
@@ -1464,9 +1491,7 @@ redef class AStringFormExpr
 	redef fun expr(v)
 	do
 		var txt = self.value.as(not null)
-		var nat = v.native_string_instance(txt)
-		var res = v.send(v.force_get_primitive_method("to_s", nat.mtype), [nat]).as(not null)
-		return res
+		return v.string_instance(txt)
 	end
 end
 

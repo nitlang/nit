@@ -1977,6 +1977,16 @@ class MMethodDef
 
 	# Is the method definition extern?
 	var is_extern = false is writable
+
+	# An optional constant value returned in functions.
+	#
+	# Only some specific primitife value are accepted by engines.
+	# Is used when there is no better implementation available.
+	#
+	# Currently used only for the implementation of the `--define`
+	# command-line option.
+	# SEE: module `mixin`.
+	var constant_value: nullable Object = null is writable
 end
 
 # A local definition of an attribute

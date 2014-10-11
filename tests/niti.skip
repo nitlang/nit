@@ -5,6 +5,7 @@ shoot_logic
 bench_
 nit_args1
 nit_args3
+nit_args4
 nitvm_args1
 nitvm_args3
 nitc_args1
@@ -12,6 +13,7 @@ nitg_args1
 nitg_args3
 nitg_args5
 nitg_args6
+nitg_args8
 test_markdown_args1
 pep8analysis
 nitcc_parser_gen

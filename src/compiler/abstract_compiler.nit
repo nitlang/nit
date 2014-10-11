@@ -22,6 +22,7 @@ import semantize
 import platform
 import c_tools
 private import annotation
+import mixin
 
 # Add compiling options
 redef class ToolContext
@@ -310,7 +311,16 @@ class MakefileToolchain
 
 	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
 
-	fun default_outname(mainmodule: MModule): String do return mainmodule.name
+	fun default_outname(mainmodule: MModule): String
+	do
+		# Search a non fictive module
+		var res = mainmodule.name
+		while mainmodule.is_fictive do
+			mainmodule = mainmodule.in_importation.direct_greaters.first
+			res = mainmodule.name
+		end
+		return res
+	end
 
 	# Combine options and platform informations to get the final path of the outfile
 	fun outfile(mainmodule: MModule): String
@@ -891,6 +901,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
+			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
@@ -906,6 +917,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
+			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
@@ -1044,7 +1056,7 @@ abstract class AbstractCompilerVisitor
 	fun get_property(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv.mclass, self.compiler.mainmodule)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -1353,6 +1365,18 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate an integer value
+	fun bool_instance(value: Bool): RuntimeVariable
+	do
+		var res = self.new_var(self.get_class("Bool").mclass_type)
+		if value then
+			self.add("{res} = 1;")
+		else
+			self.add("{res} = 0;")
+		end
+		return res
+	end
+
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
@@ -1371,6 +1395,19 @@ abstract class AbstractCompilerVisitor
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
+	end
+
+	fun value_instance(object: Object): RuntimeVariable
+	do
+		if object isa Int then
+			return int_instance(object)
+		else if object isa Bool then
+			return bool_instance(object)
+		else if object isa String then
+			return string_instance(object)
+		else
+			abort
+		end
 	end
 
 	# Generate an array value
@@ -1813,6 +1850,7 @@ redef class MMethodDef
 	fun compile_inside_to_c(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var modelbuilder = v.compiler.modelbuilder
+		var val = constant_value
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			var oldnode = v.current_node
@@ -1827,6 +1865,8 @@ redef class MMethodDef
 			self.compile_parameter_check(v, arguments)
 			nclassdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
+		else if val != null then
+			v.ret(v.value_instance(val))
 		else
 			abort
 		end
@@ -3025,9 +3065,6 @@ end
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 
-var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
-toolcontext.option_context.add_option(opt_mixins)
-
 toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
@@ -3046,7 +3083,6 @@ end
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
-var mixins = modelbuilder.parse(opt_mixins.value)
 
 if mmodules.is_empty then return
 modelbuilder.run_phases
@@ -3054,8 +3090,5 @@ modelbuilder.run_phases
 for mmodule in mmodules do
 	toolcontext.info("*** PROCESS {mmodule} ***", 1)
 	var ms = [mmodule]
-	if not mixins.is_empty then
-		ms.add_all mixins
-	end
 	toolcontext.run_global_phases(ms)
 end

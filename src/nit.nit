@@ -27,10 +27,9 @@ toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets 
 # Add an option "-o" to enable compatibilit with the tests.sh script
 var opt = new OptionString("compatibility (does noting)", "-o")
 toolcontext.option_context.add_option(opt)
-var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
 var opt_eval = new OptionBool("Specifies the program from command-line", "-e")
 var opt_loop = new OptionBool("Repeatedly run the program for each line in file-name arguments", "-n")
-toolcontext.option_context.add_option(opt_mixins, opt_eval, opt_loop)
+toolcontext.option_context.add_option(opt_eval, opt_loop)
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
 
@@ -66,20 +65,11 @@ else
 	mmodules = modelbuilder.parse([progname])
 end
 
-mmodules.add_all modelbuilder.parse(opt_mixins.value)
 modelbuilder.run_phases
 
 if toolcontext.opt_only_metamodel.value then exit(0)
 
-var mainmodule: nullable MModule
-
-# Here we launch the interpreter on the main module
-if mmodules.length == 1 then
-	mainmodule = mmodules.first
-else
-	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
-	mainmodule.set_imported_mmodules(mmodules)
-end
+var mainmodule = toolcontext.make_main_module(mmodules)
 
 var self_mm = mainmodule
 var self_args = arguments
