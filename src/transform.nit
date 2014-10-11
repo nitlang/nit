@@ -23,6 +23,15 @@ intrude import semantize::scope
 
 redef class ToolContext
 	var transform_phase: Phase = new TransformPhase(self, [typing_phase, auto_super_init_phase])
+
+	# --no-shortcut-range
+	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
+
+	redef init
+	do
+		super
+		self.option_context.add_option(self.opt_no_shortcut_range)
+	end
 end
 
 private class TransformPhase
@@ -182,7 +191,7 @@ redef class AForExpr
 
 		# Shortcut on explicit range
 		# Avoid the instantiation of the range and the iterator
-		if self.variables.length == 1 and nexpr isa ARangeExpr then
+		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.phase.toolcontext.opt_no_shortcut_range.value then
 			var variable = variables.first
 			nblock.add v.builder.make_var_assign(variable, nexpr.n_expr)
 			var to = nexpr.n_expr2

@@ -41,8 +41,6 @@ redef class ToolContext
 	var opt_compile_dir: OptionString = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
-	# --no-shortcut-range
-	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
 	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
 	# --no-check-attr-isset
@@ -71,7 +69,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
@@ -2532,38 +2530,6 @@ end
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		# Shortcut on explicit range
-		# Avoid the instantiation of the range and the iterator
-		var nexpr = self.n_expr
-		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
-			var from = v.expr(nexpr.n_expr, null)
-			var to = v.expr(nexpr.n_expr2, null)
-			var variable = v.variable(variables.first)
-			var one = v.new_expr("1", v.get_class("Int").mclass_type)
-
-			v.assign(variable, from)
-			v.add("for(;;) \{ /* shortcut range */")
-
-			var ok
-			if nexpr isa AOrangeExpr then
-				ok = v.send(v.get_property("<", variable.mtype), [variable, to])
-			else
-				ok = v.send(v.get_property("<=", variable.mtype), [variable, to])
-			end
-			assert ok != null
-			v.add("if(!{ok}) break;")
-
-			v.stmt(self.n_block)
-
-			v.add_escape_label(continue_mark)
-			var succ = v.send(v.get_property("successor", variable.mtype), [variable, one])
-			assert succ != null
-			v.assign(variable, succ)
-			v.add("\}")
-			v.add_escape_label(break_mark)
-			return
-		end
-
 		var cl = v.expr(self.n_expr, null)
 		var it_meth = self.method_iterator
 		assert it_meth != null
