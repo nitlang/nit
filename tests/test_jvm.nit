@@ -128,15 +128,10 @@ if test.address_is_null then env.print_error("object test not initialized")
 
 # Retrieve field value with field ids
 var v_bool = env.get_boolean_field(test, f_bool)
-if v_bool == null then env.print_error("vbool not found")
 var v_char = env.get_char_field(test, f_char)
-if v_char == null then env.print_error("vchar not found")
 var v_i = env.get_int_field(test, f_i)
-if v_i == null then env.print_error("vi not found")
 var v_f = env.get_float_field(test, f_f)
-if v_f == null then env.print_error("vf not found")
 var v_test1 = env.get_object_field(test, f_test)
-if v_test1 == null then env.print_error("vtest1 not found")
 
 # Set the new values for the fields
 env.set_boolean_field(test, f_bool, true)
@@ -151,7 +146,6 @@ v_char = env.call_char_method(test, m_char, null)
 v_i = env.call_int_method(test, m_i, null)
 v_f = env.call_float_method(test, m_f, null)
 var v_test2 = env.call_object_method(test, m_test, null)
-if v_test2 == null then env.print_error("vtest2 not found")
 
 # assert the values of the fields
 print v_bool
