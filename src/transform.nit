@@ -180,6 +180,41 @@ redef class AForExpr
 
 		var nexpr = n_expr
 
+		# Shortcut on explicit range
+		# Avoid the instantiation of the range and the iterator
+		if self.variables.length == 1 and nexpr isa ARangeExpr then
+			var variable = variables.first
+			nblock.add v.builder.make_var_assign(variable, nexpr.n_expr)
+			var to = nexpr.n_expr2
+			nblock.add to
+
+			var nloop = v.builder.make_loop
+			nloop.break_mark = escapemark
+			nblock.add nloop
+
+			var is_ok = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_lt.as(not null), [to.make_var_read])
+
+			var nif = v.builder.make_if(is_ok, null)
+			nloop.add nif
+
+			var nthen = nif.n_then
+			var ndo = v.builder.make_do
+			ndo.break_mark = escapemark.continue_mark
+			nthen.add ndo
+
+			ndo.add self.n_block.as(not null)
+
+			var one = v.builder.make_int(1)
+			var succ = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_successor.as(not null), [one])
+			nthen.add v.builder.make_var_assign(variable, succ)
+
+			var nbreak = v.builder.make_break(escapemark)
+			nif.n_else.add nbreak
+
+			replace_with(nblock)
+			return
+		end
+
 		nblock.add nexpr
 
 		var iter = v.builder.make_call(nexpr.make_var_read, method_iterator.as(not null), null)
