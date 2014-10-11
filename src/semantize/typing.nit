@@ -195,6 +195,36 @@ private class TypeVisitor
 		return sup
 	end
 
+	# Special verification on != and == for null
+	# Return true
+	fun null_test(anode: ABinopExpr)
+	do
+		var mtype = anode.n_expr.mtype
+		var mtype2 = anode.n_expr2.mtype
+
+		if mtype == null or mtype2 == null then return
+
+		if not mtype2 isa MNullType then return
+
+		if not mtype isa MNullableType then
+			return
+		end
+
+		# Check for type adaptation
+		var variable = anode.n_expr.its_variable
+		if variable == null then return
+
+		if anode isa AEqExpr then
+			anode.after_flow_context.when_true.set_var(variable, mtype2)
+			anode.after_flow_context.when_false.set_var(variable, mtype.mtype)
+		else if anode isa ANeExpr then
+			anode.after_flow_context.when_false.set_var(variable, mtype2)
+			anode.after_flow_context.when_true.set_var(variable, mtype.mtype)
+		else
+			abort
+		end
+	end
+
 	fun try_get_mproperty_by_name2(anode: ANode, mtype: MType, name: String): nullable MProperty
 	do
 		return self.modelbuilder.try_get_mproperty_by_name2(anode, mmodule, mtype, name)
@@ -1336,16 +1366,7 @@ redef class AEqExpr
 	redef fun accept_typing(v)
 	do
 		super
-
-		var variable = self.n_expr.its_variable
-		if variable == null then return
-		var mtype = self.n_expr2.mtype
-		if not mtype isa MNullType then return
-		var vartype = v.get_variable(self, variable)
-		if not vartype isa MNullableType then return
-		self.after_flow_context.when_true.set_var(variable, mtype)
-		self.after_flow_context.when_false.set_var(variable, vartype.mtype)
-		#debug("adapt {variable}:{vartype} ; true->{mtype} false->{vartype.mtype}")
+		v.null_test(self)
 	end
 end
 redef class ANeExpr
@@ -1353,16 +1374,7 @@ redef class ANeExpr
 	redef fun accept_typing(v)
 	do
 		super
-
-		var variable = self.n_expr.its_variable
-		if variable == null then return
-		var mtype = self.n_expr2.mtype
-		if not mtype isa MNullType then return
-		var vartype = v.get_variable(self, variable)
-		if not vartype isa MNullableType then return
-		self.after_flow_context.when_false.set_var(variable, mtype)
-		self.after_flow_context.when_true.set_var(variable, vartype.mtype)
-		#debug("adapt {variable}:{vartype} ; true->{vartype.mtype} false->{mtype}")
+		v.null_test(self)
 	end
 end
 redef class ALtExpr
