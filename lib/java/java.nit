@@ -178,4 +178,16 @@ redef extern class JavaObject
 	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
 		return (*jni_env)->PopLocalFrame(jni_env, recv);
 	`}
+
+	# Is `self` null in Java?
+	#
+	# Since Java type system doesn't have the same `nullable` concept as Nit's,
+	# the two systems are not directly compatible. Any Nit instances of
+	# `JavaObject` may hold a Java null.
+	#
+	# To benefit from the safer type system of Nit, it is recommended to check
+	# the return of all extern methods implemented in Java to ensure the value
+	# is not a Java null. In case it is, you should replace it by a normal Nit
+	# `null`.
+	fun is_java_null: Bool in "Java" `{ return recv == null; `}
 end
