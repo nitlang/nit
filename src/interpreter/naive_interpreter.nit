@@ -112,43 +112,26 @@ class NaiveInterpreter
 	# Set this mark to skip the evaluation until the end of the specified method frame
 	var returnmark: nullable Frame = null
 
-	# Is a break executed?
-	# Set this mark to skip the evaluation until a labeled statement catch it with `is_break`
-	var breakmark: nullable EscapeMark = null
-
-	# Is a continue executed?
-	# Set this mark to skip the evaluation until a labeled statement catch it with `is_continue`
-	var continuemark: nullable EscapeMark = null
+	# Is a break or a continue executed?
+	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
+	var escapemark: nullable EscapeMark = null
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
-	fun is_escaping: Bool do return returnmark != null or breakmark != null or continuemark != null
+	fun is_escaping: Bool do return returnmark != null or escapemark != null
 
 	# The value associated with the current return/break/continue, if any.
 	# Set the value when you set a escapemark.
 	# Read the value when you catch a mark or reach the end of a method
 	var escapevalue: nullable Instance = null
 
-	# If there is a break and is associated with `escapemark`, then return true an clear the mark.
-	# If there is no break or if `escapemark` is null then return false.
-	# Use this function to catch a potential break.
-	fun is_break(escapemark: nullable EscapeMark): Bool
+	# If there is a break/continue and is associated with `escapemark`, then return true and clear the mark.
+	# If there is no break/continue or if `escapemark` is null then return false.
+	# Use this function to catch a potential break/continue.
+	fun is_escape(escapemark: nullable EscapeMark): Bool
 	do
-		if escapemark != null and self.breakmark == escapemark then
-			self.breakmark = null
-			return true
-		else
-			return false
-		end
-	end
-
-	# If there is a continue and is associated with `escapemark`, then return true an clear the mark.
-	# If there is no continue or if `escapemark` is null then return false.
-	# Use this function to catch a potential continue.
-	fun is_continue(escapemark: nullable EscapeMark): Bool
-	do
-		if escapemark != null and self.continuemark == escapemark then
-			self.continuemark = null
+		if escapemark != null and self.escapemark == escapemark then
+			self.escapemark = null
 			return true
 		else
 			return false
@@ -1199,7 +1182,7 @@ redef class ASelfExpr
 	end
 end
 
-redef class AContinueExpr
+redef class AEscapeExpr
 	redef fun stmt(v)
 	do
 		var ne = self.n_expr
@@ -1208,20 +1191,7 @@ redef class AContinueExpr
 			if i == null then return
 			v.escapevalue = i
 		end
-		v.continuemark = self.escapemark
-	end
-end
-
-redef class ABreakExpr
-	redef fun stmt(v)
-	do
-		var ne = self.n_expr
-		if ne != null then
-			var i = v.expr(ne)
-			if i == null then return
-			v.escapevalue = i
-		end
-		v.breakmark = self.escapemark
+		v.escapemark = self.escapemark
 	end
 end
 
@@ -1287,7 +1257,7 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		v.stmt(self.n_block)
-		v.is_break(self.escapemark) # Clear the break (if any)
+		v.is_escape(self.break_mark) # Clear the break (if any)
 	end
 end
 
@@ -1299,8 +1269,8 @@ redef class AWhileExpr
 			if cond == null then return
 			if not cond.is_true then return
 			v.stmt(self.n_block)
-			if v.is_break(self.escapemark) then return
-			v.is_continue(self.escapemark) # Clear the break
+			if v.is_escape(self.break_mark) then return
+			v.is_escape(self.continue_mark) # Clear the break
 			if v.is_escaping then return
 		end
 	end
@@ -1311,8 +1281,8 @@ redef class ALoopExpr
 	do
 		loop
 			v.stmt(self.n_block)
-			if v.is_break(self.escapemark) then return
-			v.is_continue(self.escapemark) # Clear the break
+			if v.is_escape(self.break_mark) then return
+			v.is_escape(self.continue_mark) # Clear the break
 			if v.is_escaping then return
 		end
 	end
@@ -1344,8 +1314,8 @@ redef class AForExpr
 				abort
 			end
 			v.stmt(self.n_block)
-			if v.is_break(self.escapemark) then break
-			v.is_continue(self.escapemark) # Clear the break
+			if v.is_escape(self.break_mark) then break
+			v.is_escape(self.continue_mark) # Clear the break
 			if v.is_escaping then break
 			v.callsite(method_next, [iter])
 		end

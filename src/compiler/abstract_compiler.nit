@@ -1266,6 +1266,14 @@ abstract class AbstractCompilerVisitor
 		return name
 	end
 
+	# Insert a C label for associated with an escapemark
+	fun add_escape_label(e: nullable EscapeMark)
+	do
+		if e == null then return
+		if e.escapes.is_empty then return
+		add("BREAK_{escapemark_name(e)}: (void)0;")
+	end
+
 	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
@@ -2430,11 +2438,7 @@ redef class ASelfExpr
 	redef fun expr(v) do return v.frame.arguments.first
 end
 
-redef class AContinueExpr
-	redef fun stmt(v) do v.add("goto CONTINUE_{v.escapemark_name(self.escapemark)};")
-end
-
-redef class ABreakExpr
+redef class AEscapeExpr
 	redef fun stmt(v) do v.add("goto BREAK_{v.escapemark_name(self.escapemark)};")
 end
 
@@ -2497,10 +2501,7 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		v.stmt(self.n_block)
-		var escapemark = self.escapemark
-		if escapemark != null then
-			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
-		end
+		v.add_escape_label(break_mark)
 	end
 end
 
@@ -2511,9 +2512,9 @@ redef class AWhileExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) break;")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 	end
 end
 
@@ -2522,9 +2523,9 @@ redef class ALoopExpr
 	do
 		v.add("for(;;) \{")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 	end
 end
 
@@ -2554,12 +2555,12 @@ redef class AForExpr
 
 			v.stmt(self.n_block)
 
-			v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+			v.add_escape_label(continue_mark)
 			var succ = v.send(v.get_property("successor", variable.mtype), [variable, one])
 			assert succ != null
 			v.assign(variable, succ)
 			v.add("\}")
-			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+			v.add_escape_label(break_mark)
 			return
 		end
 
@@ -2595,12 +2596,12 @@ redef class AForExpr
 			abort
 		end
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		var next_meth = self.method_next
 		assert next_meth != null
 		v.compile_callsite(next_meth, [it])
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 
 		var method_finish = self.method_finish
 		if method_finish != null then

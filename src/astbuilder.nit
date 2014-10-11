@@ -176,7 +176,7 @@ redef class ADoExpr
 	private init make
 	do
 		_n_kwdo = new TKwdo
-		escapemark = new EscapeMark(null, false)
+		escapemark = new EscapeMark(null)
 	end
 
 	# Make a new break expression of the given do
@@ -184,7 +184,7 @@ redef class ADoExpr
 	do
 		var escapemark = self.escapemark
 		if escapemark == null then
-			escapemark = new EscapeMark(null, false)
+			escapemark = new EscapeMark(null)
 			self.escapemark = escapemark
 		end
 		return new ABreakExpr.make(escapemark)
