@@ -190,4 +190,14 @@ redef extern class JavaObject
 	# is not a Java null. In case it is, you should replace it by a normal Nit
 	# `null`.
 	fun is_java_null: Bool in "Java" `{ return recv == null; `}
+
+	# `JavaString` representation of `self` using Java's `toString`
+	fun to_java_string: JavaString in "Java" `{ return recv.toString(); `}
+
+	# Use Java's `toString` for any `JavaObject`
+	redef fun to_s
+	do
+		if is_java_null then return super
+		return to_java_string.to_s
+	end
 end
