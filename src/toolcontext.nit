@@ -438,7 +438,7 @@ class BashCompletion
 		addn "	COMPREPLY=()"
 		addn "	cur=\"$\{COMP_WORDS[COMP_CWORD]\}\""
 		addn "	prev=\"$\{COMP_WORDS[COMP_CWORD-1]\}\""
-		if option_names != null then
+		if not option_names.is_empty then
 			addn "	opts=\"{option_names.join(" ")}\""
 			addn "	if [[ $\{cur\} == -* ]] ; then"
 			addn "		COMPREPLY=( $(compgen -W \"$\{opts\}\" -- $\{cur\}) )"

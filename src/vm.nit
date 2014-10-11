@@ -106,7 +106,6 @@ class VirtualMachine super NaiveInterpreter
 		# Sub can be discovered inside a Generic type during the subtyping test
 		if not sub.mclass.loaded then create_class(sub.mclass)
 
-		if anchor == null then anchor = sub
 		if sup isa MGenericType then
 			var sub2 = sub.supertype_to(mainmodule, anchor, sup.mclass)
 			assert sub2.mclass == sup.mclass

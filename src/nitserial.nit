@@ -53,7 +53,7 @@ class NitModule
 		if header != null then add header
 
 		var name = name
-		if name != null then add "module {name}\n\n"
+		add "module {name}\n\n"
 
 		for i in imports do add "import {i}\n"
 		add "\n"

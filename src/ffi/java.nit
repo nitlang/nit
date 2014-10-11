@@ -271,7 +271,6 @@ redef class AMethPropdef
 	private fun insert_artificial_callbacks(toolcontext: ToolContext)
 	do
 		var fcc = foreign_callbacks
-		assert fcc != null
 
 		var modelbuilder = toolcontext.modelbuilder
 		var mmodule = mpropdef.mclassdef.mmodule

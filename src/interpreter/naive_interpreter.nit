@@ -750,7 +750,7 @@ redef class AMethPropdef
 		else if pname == "is_same_type" then
 			return v.bool_instance(args[0].mtype == args[1].mtype)
 		else if pname == "is_same_instance" then
-			return v.bool_instance(args[1] != null and args[0].eq_is(args[1]))
+			return v.bool_instance(args[0].eq_is(args[1]))
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort

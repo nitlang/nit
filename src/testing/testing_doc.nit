@@ -200,7 +200,6 @@ redef class ModelBuilder
 		if not mmodule2nmodule.has_key(mmodule) then return ts
 
 		var nmodule = mmodule2nmodule[mmodule]
-		assert nmodule != null
 
 		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule

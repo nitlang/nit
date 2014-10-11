@@ -190,12 +190,8 @@ redef class MGroup
 
 	redef fun tpl_namespace do
 		var tpl = new Template
-		if mproject != null then
-			tpl.add mproject.tpl_namespace
-		else if parent != null then
-			tpl.add parent.tpl_namespace
-		end
-		if mproject != null and mproject.root != self then
+		tpl.add mproject.tpl_namespace
+		if mproject.root != self then
 			tpl.add "::"
 			tpl.add tpl_link
 		end
