@@ -319,22 +319,7 @@ redef class AReturnExpr
 	end
 end
 
-redef class AContinueExpr
-	# The flow just before it become unreachable
-	fun before_flow_context: nullable FlowContext
-	do
-		var after = self.after_flow_context
-		if after == null then return null
-		return after.previous.first
-	end
-	redef fun accept_flow_visitor(v)
-	do
-		super
-		v.make_unreachable_flow
-	end
-end
-
-redef class ABreakExpr
+redef class AEscapeExpr
 	# The flow just before it become unreachable
 	fun before_flow_context: nullable FlowContext
 	do

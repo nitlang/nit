@@ -292,9 +292,12 @@ redef class ASelfExpr
 	end
 end
 
-redef class AContinueExpr
-	# The escape mark associated with the continue
+redef class AEscapeExpr
+	# The escape mark associated with the break/continue
 	var escapemark: nullable EscapeMark
+end
+
+redef class AContinueExpr
 	redef fun accept_scope_visitor(v)
 	do
 		super
@@ -309,8 +312,6 @@ redef class AContinueExpr
 end
 
 redef class ABreakExpr
-	# The escape mark associated with the break
-	var escapemark: nullable EscapeMark
 	redef fun accept_scope_visitor(v)
 	do
 		super
