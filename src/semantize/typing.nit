@@ -206,7 +206,11 @@ private class TypeVisitor
 
 		if not mtype2 isa MNullType then return
 
+		# Check of useless null
 		if not mtype isa MNullableType then
+			if not anchor_to(mtype) isa MNullableType then
+				modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
+			end
 			return
 		end
 
