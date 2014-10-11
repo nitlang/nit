@@ -47,7 +47,7 @@ private class TypeVisitor
 	# The analyzed property
 	var mpropdef: nullable MPropDef
 
-	var selfvariable: Variable = new Variable("self")
+	var selfvariable = new Variable("self")
 
 	# Is `self` use restricted?
 	# * no explicit `self`
@@ -395,7 +395,6 @@ private class TypeVisitor
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
 	do
 		if col.length == 1 then return col.first
-		var res = new Array[nullable MType]
 		for t1 in col do
 			if t1 == null then continue # return null
 			var found = true
@@ -461,8 +460,8 @@ end
 
 redef class FlowContext
 	# Store changes of types because of type evolution
-	private var vars: HashMap[Variable, nullable MType] = new HashMap[Variable, nullable MType]
-	private var cache: HashMap[Variable, nullable Array[nullable MType]] = new HashMap[Variable, nullable Array[nullable MType]]
+	private var vars = new HashMap[Variable, nullable MType]
+	private var cache = new HashMap[Variable, nullable Array[nullable MType]]
 
 	# Adapt the variable to a static type
 	# Warning1: do not modify vars directly.
@@ -747,7 +746,7 @@ redef class AContinueExpr
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = v.visit_expr(nexpr)
+			v.visit_expr(nexpr)
 		end
 		self.is_typed = true
 	end
@@ -758,7 +757,7 @@ redef class ABreakExpr
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = v.visit_expr(nexpr)
+			v.visit_expr(nexpr)
 		end
 		self.is_typed = true
 	end
@@ -771,9 +770,9 @@ redef class AReturnExpr
 		var ret_type = v.mpropdef.as(MMethodDef).msignature.return_mtype
 		if nexpr != null then
 			if ret_type != null then
-				var mtype = v.visit_expr_subtype(nexpr, ret_type)
+				v.visit_expr_subtype(nexpr, ret_type)
 			else
-				var mtype = v.visit_expr(nexpr)
+				v.visit_expr(nexpr)
 				v.error(self, "Error: Return with value in a procedure.")
 			end
 		else if ret_type != null then
@@ -1207,9 +1206,9 @@ redef class AIsaExpr
 
 		var variable = self.n_expr.its_variable
 		if variable != null then
-			var orig = self.n_expr.mtype
-			var from = if orig != null then orig.to_s else "invalid"
-			var to = if mtype != null then mtype.to_s else "invalid"
+			#var orig = self.n_expr.mtype
+			#var from = if orig != null then orig.to_s else "invalid"
+			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
 			self.after_flow_context.when_true.set_var(variable, mtype)
 		end

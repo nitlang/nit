@@ -528,7 +528,6 @@ class MEntityNameSorter
 	super Comparator
 	redef type COMPARED: MEntity
 	redef fun compare(a, b) do return a.name <=> b.name
-	init do end
 end
 
 # Sort MConcerns based on the module importation hierarchy ranking
@@ -543,8 +542,6 @@ end
 class MConcernRankSorter
 	super Comparator
 	redef type COMPARED: MConcern
-
-	init do end
 
 	redef fun compare(a, b) do
 		if a.concern_rank == b.concern_rank then

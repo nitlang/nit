@@ -446,7 +446,6 @@ class NeoModel
 		node.labels.add "MModule"
 		node["full_name"] = mmodule.full_name
 		node["location"] = mmodule.location.to_s
-		var mgroup = mmodule.mgroup
 		for parent in mmodule.in_importation.direct_greaters do
 			node.out_edges.add(new NeoEdge(node, "IMPORTS", to_node(parent)))
 		end

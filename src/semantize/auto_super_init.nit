@@ -32,10 +32,6 @@ end
 
 private class AutoSuperInitVisitor
 	super Visitor
-	init
-	do
-	end
-
 	redef fun visit(n)
 	do
 		n.accept_auto_super_init(self)

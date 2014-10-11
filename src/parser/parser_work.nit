@@ -237,8 +237,6 @@ private class ComputeProdLocationVisitor
 			end
 		end
 	end
-
-	init do end
 end
 
 # Each reduce action has its own class, this one is the root of the hierarchy.

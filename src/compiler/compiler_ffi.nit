@@ -82,7 +82,7 @@ extern void nitni_global_ref_decr(void*);
 		return res
 	end
 
-	private var compiled_callbacks: Array[NitniCallback] = new Array[NitniCallback]
+	private var compiled_callbacks = new Array[NitniCallback]
 
 	# Returns true if callbacks has yet to be generated and register it as being generated
 	private fun check_callback_compilation(cb: NitniCallback): Bool
@@ -98,7 +98,6 @@ redef class AMethPropdef
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var mainmodule = v.compiler.mainmodule
-		var amainmodule = v.compiler.modelbuilder.mmodule2nmodule[mainmodule]
 		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -428,7 +427,6 @@ redef class MExplicitSuper
 		var mproperty = from.mproperty
 		assert mproperty isa MMethod
 		var mclass_type = from.mclassdef.mclass.mclass_type
-		var mmodule = from.mclassdef.mmodule
 
 		# In nitni files, declare internal function as extern
 		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)

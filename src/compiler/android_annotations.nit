@@ -125,11 +125,9 @@ redef class AAnnotation
 	# revision number. If the working tree is dirty, it will append another field with "d" for dirty.
 	private fun as_version(modelbuilder: ModelBuilder): String
 	do
-		var annotation_name = n_atid.n_id.text
 		var version_fields = new Array[Object]
 
 		var args = n_args
-		var platform_name
 		if args.length < 1 then
 			modelbuilder.error(self, "Annotation error: \"{name}\" expects at least a single argument.")
 			return ""

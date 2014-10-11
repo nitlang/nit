@@ -22,19 +22,19 @@ import rapid_type_analysis
 # Add separate compiler specific options
 redef class ToolContext
 	# --separate
-	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
+	var opt_separate = new OptionBool("Use separate compilation", "--separate")
 	# --no-inline-intern
-	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
+	var opt_no_inline_intern = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 	# --no-union-attribute
-	var opt_no_union_attribute: OptionBool = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
+	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
-	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
-	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
+	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
 	# --inline-some-methods
-	var opt_inline_some_methods: OptionBool = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
+	var opt_inline_some_methods = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
-	var opt_direct_call_monomorph: OptionBool = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
@@ -42,7 +42,7 @@ redef class ToolContext
 	# --no-colo-dead-methods
 	var opt_colo_dead_methods = new OptionBool("Force colorization of dead methods", "--colo-dead-methods")
 	# --tables-metrics
-	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
+	var opt_tables_metrics = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
 	redef init
 	do
@@ -963,7 +963,6 @@ class SeparateCompilerVisitor
 	redef fun unbox_signature_extern(m, args)
 	do
 		var msignature = m.msignature.resolve_for(m.mclassdef.bound_mtype, m.mclassdef.bound_mtype, m.mclassdef.mmodule, true)
-		var recv = args.first
 		if not m.mproperty.is_init and m.is_extern then
 			args.first = self.unbox_extern(args.first, m.mclassdef.mclass.mclass_type)
 		end
@@ -1063,7 +1062,6 @@ class SeparateCompilerVisitor
 	redef fun compile_callsite(callsite, args)
 	do
 		var rta = compiler.runtime_type_analysis
-		var recv = args.first.mtype
 		var mmethod = callsite.mproperty
 		# TODO: Inlining of new-style constructors
 		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and not mmethod.is_root_init then

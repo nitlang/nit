@@ -2252,7 +2252,6 @@ end
 
 redef class ASuperstringExpr
 	redef fun accept_pretty_printer(v) do
-		var force_inline = self.force_inline
 		for n_expr in n_exprs do v.visit n_expr
 	end
 

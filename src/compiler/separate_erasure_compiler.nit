@@ -20,11 +20,11 @@ intrude import separate_compiler
 # Add separate erased compiler specific options
 redef class ToolContext
 	# --erasure
-	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
+	var opt_erasure = new OptionBool("Erase generic types", "--erasure")
 	# --rta
 	var opt_rta = new OptionBool("Activate RTA (implicit with --global and --separate)", "--rta")
 	# --no-check-erasure-cast
-	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
+	var opt_no_check_erasure_cast = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
 
 	redef init
 	do
@@ -549,7 +549,6 @@ class SeparateErasureCompilerVisitor
 		end
 
 		var class_ptr
-		var type_table
 		if value.mtype.ctype == "val*" then
 			class_ptr = "{value}->class->"
 		else

@@ -279,8 +279,6 @@ class BucketsColorer[H: Object, E: Object]
 	private var colors = new HashMap[E, Int]
 	private var conflicts = new HashMap[E, Set[E]]
 
-	init do end
-
 	# Start bucket coloring
 	fun colorize(buckets: Map[H, Set[E]]): Map[E, Int] do
 		compute_conflicts(buckets)
