@@ -1775,12 +1775,12 @@ redef class Int
 end
 
 redef class Float
-	# Pretty print self, print needoed decimals up to a max of 3.
+	# Pretty representation of `self`, with decimals as needed from 1 to a maximum of 3
 	#
-	#     assert 12.34.to_s        == "12.34"
-	#     assert (-0120.03450).to_s  == "-120.035"
+	#     assert 12.34.to_s       == "12.34"
+	#     assert (-0120.030).to_s == "-120.03"
 	#
-	# see `to_precision` for a different precision.
+	# see `to_precision` for a custom precision.
 	redef fun to_s do
 		var str = to_precision( 3 )
 		if is_inf != 0 or is_nan then return str
