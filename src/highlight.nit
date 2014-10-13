@@ -52,7 +52,6 @@ class HighlightVisitor
 	do
 		var stack2 = new Array[HTMLTag]
 		var stack = new Array[Prod]
-		var closes = new Array[Prod]
 		var line = 0
 		var c: nullable Token = first_token
 		var hv = new HighlightVisitor
@@ -932,4 +931,3 @@ redef class AExpr
 		return t.infobox(v)
 	end
 end
-

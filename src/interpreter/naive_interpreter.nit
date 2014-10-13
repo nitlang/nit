@@ -24,7 +24,7 @@ import mixin
 
 redef class ToolContext
 	# --discover-call-trace
-	var opt_discover_call_trace: OptionBool = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
+	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
 
 	redef init
 	do
@@ -58,7 +58,7 @@ class NaiveInterpreter
 	# The modelbuilder that know the AST and its associations with the model
 	var modelbuilder: ModelBuilder
 
-	# The main moduleof the program (used to lookup methoda
+	# The main module of the program (used to lookup method)
 	var mainmodule: MModule
 
 	# The command line arguments of the interpreted program
@@ -66,6 +66,7 @@ class NaiveInterpreter
 	# arguments[1] is the first argument
 	var arguments: Array[String]
 
+	# The main Sys instance
 	var mainobj: nullable Instance
 
 	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
@@ -226,13 +227,13 @@ class NaiveInterpreter
 		return new PrimitiveInstance[Float](ic.mclass_type, val)
 	end
 
-	# The unique intance of the `true` value.
+	# The unique instance of the `true` value.
 	var true_instance: Instance
 
-	# The unique intance of the `false` value.
+	# The unique instance of the `false` value.
 	var false_instance: Instance
 
-	# The unique intance of the `null` value.
+	# The unique instance of the `null` value.
 	var null_instance: Instance
 
 	# Return a new array made of `values`.
@@ -283,9 +284,9 @@ class NaiveInterpreter
 	fun frame: Frame do return frames.first
 
 	# The stack of all frames. The first one is the current one.
-	var frames: List[Frame] = new List[Frame]
+	var frames = new List[Frame]
 
-	# Return a stack stace. One line per function
+	# Return a stack trace. One line per function
 	fun stack_trace: String
 	do
 		var b = new FlatBuffer
@@ -332,7 +333,7 @@ class NaiveInterpreter
 		f.map[v] = value
 	end
 
-	# Store known method, used to trace methods as thez are reached
+	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
 	# Common code for calls to injected methods and normal methods
@@ -367,8 +368,8 @@ class NaiveInterpreter
 	end
 
 	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
-	# Return a falue if `mpropdef` is a function, or null if it is a procedure.
-	# The call is direct/static. There is no message-seding/late-binding.
+	# Return a value if `mpropdef` is a function, or null if it is a procedure.
+	# The call is direct/static. There is no message-sending/late-binding.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		args = call_commons(mpropdef, args)
@@ -444,7 +445,7 @@ class NaiveInterpreter
 	end
 
 	# Execute a full `callsite` for given `args`
-	# Use this method, instead of `send` to execute and control the aditionnal behavior of the call-sites
+	# Use this method, instead of `send` to execute and control the additional behavior of the call-sites
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
 		var initializers = callsite.mpropdef.initializers
@@ -473,8 +474,8 @@ class NaiveInterpreter
 	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
-	# Return a falue if `mproperty` is a function, or null if it is a procedure.
-	# The call is polimotphic. There is a message-seding/late-bindng according to te receiver (args[0]).
+	# Return a value if `mproperty` is a function, or null if it is a procedure.
+	# The call is polymorphic. There is a message-sending/late-binding according to the receiver (args[0]).
 	fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
 	do
 		var recv = args.first
@@ -534,7 +535,7 @@ class NaiveInterpreter
 		return res
 	end
 
-	var collect_attr_propdef_cache = new HashMap[MType, Array[AAttrPropdef]]
+	private var collect_attr_propdef_cache = new HashMap[MType, Array[AAttrPropdef]]
 
 	# Fill the initial values of the newly created instance `recv`.
 	# `recv.mtype` is used to know what must be filled.
@@ -770,7 +771,7 @@ redef class AMethPropdef
 			var txt = recv.mtype.to_s
 			return v.native_string_instance(txt)
 		else if pname == "==" then
-			# == is correclt redefined for instances
+			# == is correctly redefined for instances
 			return v.bool_instance(args[0] == args[1])
 		else if pname == "!=" then
 			return v.bool_instance(args[0] != args[1])
@@ -1591,7 +1592,6 @@ redef class AAsNotnullExpr
 	do
 		var i = v.expr(self.n_expr)
 		if i == null then return null
-		var mtype = v.unanchor_type(self.mtype.as(not null))
 		if i.mtype isa MNullType then
 			fatal(v, "Cast failed")
 		end
@@ -1676,7 +1676,7 @@ redef class ASuperExpr
 
 		var callsite = self.callsite
 		if callsite != null then
-			# Add additionnals arguments for the super init call
+			# Add additional arguments for the super init call
 			if args.length == 1 then
 				for i in [0..callsite.msignature.arity[ do
 					args.add(v.frame.arguments[i+1])
@@ -1691,7 +1691,7 @@ redef class ASuperExpr
 			args = v.frame.arguments
 		end
 
-		# stantard call-next-method
+		# standard call-next-method
 		var mpropdef = self.mpropdef
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
 		var res = v.call_without_varargs(mpropdef, args)

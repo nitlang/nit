@@ -120,9 +120,9 @@ redef class ToolContext
 	end
 
 	# -d
-	var opt_debugger_mode: OptionBool = new OptionBool("Launches the target program with the debugger attached to it", "-d")
+	var opt_debugger_mode = new OptionBool("Launches the target program with the debugger attached to it", "-d")
 	# -c
-	var opt_debugger_autorun: OptionBool = new OptionBool("Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned", "-c")
+	var opt_debugger_autorun = new OptionBool("Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned", "-c")
 
 	redef init
 	do
@@ -324,7 +324,6 @@ class Debugger
 			var mmod = e.mmodule
 			if mmod != null then
 				self.mainmodule = mmod
-				var local_classdefs = mmod.mclassdefs
 				var sys_type = mmod.sys_type
 				if sys_type == null then
 					print "Fatal error, cannot find Class Sys !\nAborting"
@@ -399,7 +398,6 @@ class Debugger
 		var identifiers_in_instruction = get_identifiers_in_current_instruction(n.location.text)
 
 		for i in identifiers_in_instruction do
-			var variable = seek_variable(i, frame)
 			for j in self.traces do
 				if j.is_variable_traced_in_frame(i, frame) then
 					n.debug("Traced variable {i} used")
@@ -587,8 +585,6 @@ class Debugger
 	do
 		if parts_of_command[1] == "*" then
 			var map_of_instances = frame.map
-
-			var keys = map_of_instances.iterator
 
 			var self_var = seek_variable("self", frame)
 			print "self: {self_var.to_s}"
@@ -832,14 +828,12 @@ class Debugger
 
 		var trigger_char_escape = false
 		var trigger_string_escape = false
-		var trigger_concat_in_string = false
 
 		for i in instruction.chars do
 			if trigger_char_escape then
 				if i == '\'' then trigger_char_escape = false
 			else if trigger_string_escape then
 				if i == '{' then
-					trigger_concat_in_string = true
 					trigger_string_escape = false
 				else if i == '\"' then trigger_string_escape = false
 			else
@@ -857,7 +851,6 @@ class Debugger
 				else if i == '\"' then
 					trigger_string_escape = true
 				else if i == '}' then
-					trigger_concat_in_string = false
 					trigger_string_escape = true
 				else
 					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
@@ -1083,8 +1076,6 @@ class Debugger
 	fun get_collection_instance_real_length(collection: MutableInstance): nullable Int
 	do
 		var collection_length_attribute = get_attribute_in_mutable_instance(collection, "length")
-
-		var real_collection_length: nullable Int = null
 
 		if collection_length_attribute != null then
 			var primitive_length_instance = collection.attributes[collection_length_attribute]

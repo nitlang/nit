@@ -38,7 +38,7 @@ end
 redef class ModelBuilder
 	# Register the npropdef associated to each mpropdef
 	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
-	var mpropdef2npropdef: HashMap[MPropDef, APropdef] = new HashMap[MPropDef, APropdef]
+	var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
 
 	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.
@@ -244,7 +244,7 @@ redef class ModelBuilder
 		# Extract visibility information of the main part of `mtype`
 		# It is a case-by case
 		var vis_type: nullable MVisibility = null # The own visibility of the type
-		var mmodule_type: nullable MModule = null # The origial module of the type
+		var mmodule_type: nullable MModule = null # The original module of the type
 		mtype = mtype.as_notnullable
 		if mtype isa MClassType then
 			vis_type = mtype.mclass.visibility
@@ -291,7 +291,7 @@ redef class MPropDef
 end
 
 redef class AClassdef
-	var build_properties_is_done: Bool = false
+	var build_properties_is_done = false
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
@@ -474,7 +474,7 @@ redef class ASignature
 		var ntype = self.n_type
 		if ntype != null then
 			self.ret_type = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
-			if self.ret_type == null then return false # Skip errir
+			if self.ret_type == null then return false # Skip error
 		end
 
 		self.is_visited = true
@@ -762,12 +762,12 @@ redef class AAttrPropdef
 	# Is the node tagged `noinit`?
 	var noinit = false
 
-	# Is the node taggeg lazy?
+	# Is the node tagged lazy?
 	var is_lazy = false
 
-	# The guard associated to a lasy attribute.
+	# The guard associated to a lazy attribute.
 	# Because some engines does not have a working `isset`,
-	# this additionnal attribute is used to guard the lazy initialization.
+	# this additional attribute is used to guard the lazy initialization.
 	# TODO: to remove once isset is correctly implemented
 	var mlazypropdef: nullable MAttributeDef
 
@@ -874,7 +874,7 @@ redef class AAttrPropdef
 	redef fun build_signature(modelbuilder)
 	do
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # Error thus skiped
+		if mpropdef == null then return # Error thus skipped
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
@@ -887,10 +887,10 @@ redef class AAttrPropdef
 			if mtype == null then return
 		end
 
-		# Inherit the type from the getter (usually an abstact getter)
+		# Inherit the type from the getter (usually an abstract getter)
 		if mtype == null and mreadpropdef != null and not mreadpropdef.is_intro then
 			var msignature = mreadpropdef.mproperty.intro.msignature
-			if msignature == null then return # Error, thus skiped
+			if msignature == null then return # Error, thus skipped
 			mtype = msignature.return_mtype
 		end
 
@@ -962,12 +962,10 @@ redef class AAttrPropdef
 	redef fun check_signature(modelbuilder)
 	do
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # Error thus skiped
-		var mclassdef = mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
+		if mpropdef == null then return # Error thus skipped
 		var ntype = self.n_type
 		var mtype = self.mpropdef.static_mtype
-		if mtype == null then return # Error thus skiped
+		if mtype == null then return # Error thus skipped
 
 		# Lookup for signature in the precursor
 		# FIXME all precursors should be considered
@@ -1090,7 +1088,7 @@ redef class ATypePropdef
 	redef fun build_signature(modelbuilder)
 	do
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # Error thus skiped
+		if mpropdef == null then return # Error thus skipped
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
@@ -1106,10 +1104,10 @@ redef class ATypePropdef
 	redef fun check_signature(modelbuilder)
 	do
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # Error thus skiped
+		if mpropdef == null then return # Error thus skipped
 
 		var bound = self.mpropdef.bound
-		if bound == null then return # Error thus skiped
+		if bound == null then return # Error thus skipped
 
 		modelbuilder.check_visibility(n_type, bound, mpropdef)
 

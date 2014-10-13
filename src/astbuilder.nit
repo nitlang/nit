@@ -251,7 +251,6 @@ redef class ACallExpr
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end
-		var mtype = recv.mtype.as(not null)
 		self.callsite = callsite
 		self.mtype = callsite.msignature.return_mtype
 		self.is_typed = true

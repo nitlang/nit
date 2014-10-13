@@ -96,7 +96,6 @@ class JavaLanguage
 
 		var jni_signature_alt
 		var return_type
-		var c_return_type
 		var params = new Array[String]
 		params.add "nit_ffi_jni_env"
 		params.add "java_class"
@@ -105,19 +104,16 @@ class JavaLanguage
 		if mproperty.is_init then
 			jni_signature_alt = mclass_type.jni_signature_alt
 			return_type = mclass_type
-			c_return_type = mclass_type.cname
 		else
 			params.add "recv"
 			if signature.return_mtype != null then
 				var ret_mtype = signature.return_mtype
 				ret_mtype = ret_mtype.resolve_for(mclass_type, mclass_type, mmodule, true)
 				return_type = signature.return_mtype
-				c_return_type = mclass_type.cname
 				jni_signature_alt = return_type.jni_signature_alt
 			else
 				jni_signature_alt = "Void"
 				return_type = null
-				c_return_type = null
 			end
 		end
 
@@ -262,12 +258,12 @@ redef class AMethPropdef
 		end
 	end
 
-	# Insert additionnal explicit calls to get the current `JNIEnv`
+	# Insert additional explicit calls to get the current `JNIEnv`
 	#
 	# This forces declaration of callbacks to Nit. The callbacks will be available in Java
 	# but will be used mainly by the FFI itself.
 	#
-	# The developper can aso customize the JNIEnv used by the FFI by redefing `Sys::jni_env`.
+	# The developer can also customize the JNIEnv used by the FFI by redefining `Sys::jni_env`.
 	private fun insert_artificial_callbacks(toolcontext: ToolContext)
 	do
 		var fcc = foreign_callbacks
@@ -449,7 +445,7 @@ redef class MType
 	# Type name in Java
 	#
 	# * Primitives common to both languages use their Java primitive type
-	# * Nit extern Java classes are reprensented by their full Java type
+	# * Nit extern Java classes are represented by their full Java type
 	# * Other Nit objects are represented by `int` in Java. It holds the
 	#	pointer to the underlying C structure.
 	#	TODO create static Java types to store and hide the pointer
@@ -501,7 +497,6 @@ redef class MClassType
 	do
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then
-			var ori_jni_type = jni_type
 			var jni_type = ftype.java_type.
 				replace('.', "/").replace(' ', "").replace('\n', "")
 

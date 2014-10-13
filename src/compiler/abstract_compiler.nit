@@ -27,43 +27,43 @@ import mixin
 # Add compiling options
 redef class ToolContext
 	# --output
-	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
+	var opt_output = new OptionString("Output file", "-o", "--output")
 	# --dir
-	var opt_dir: OptionString = new OptionString("Output directory", "--dir")
+	var opt_dir = new OptionString("Output directory", "--dir")
 	# --no-cc
-	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	var opt_no_cc = new OptionBool("Do not invoke C compiler", "--no-cc")
 	# --no-main
-	var opt_no_main: OptionBool = new OptionBool("Do not generate main entry point", "--no-main")
+	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
 	# --cc-paths
-	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
+	var opt_cc_path = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
-	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
+	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
 	# --compile-dir
-	var opt_compile_dir: OptionString = new OptionString("Directory used to generate temporary files", "--compile-dir")
+	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
-	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
+	var opt_hardening = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 	# --no-shortcut-range
-	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
+	var opt_no_shortcut_range = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
-	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
+	var opt_no_check_covariance = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
 	# --no-check-attr-isset
-	var opt_no_check_attr_isset: OptionBool = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
+	var opt_no_check_attr_isset = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
-	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+	var opt_no_check_assert = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 	# --no-check-autocast
-	var opt_no_check_autocast: OptionBool = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
+	var opt_no_check_autocast = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
 	# --no-check-null
-	var opt_no_check_null: OptionBool = new OptionBool("Disable tests of null receiver (dangerous)", "--no-check-null")
+	var opt_no_check_null = new OptionBool("Disable tests of null receiver (dangerous)", "--no-check-null")
 	# --no-check-all
-	var opt_no_check_all: OptionBool = new OptionBool("Disable all tests (dangerous)", "--no-check-all")
+	var opt_no_check_all = new OptionBool("Disable all tests (dangerous)", "--no-check-all")
 	# --typing-test-metrics
-	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	var opt_typing_test_metrics = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
 	# --invocation-metrics
-	var opt_invocation_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
+	var opt_invocation_metrics = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --isset-checks-metrics
-	var opt_isset_checks_metrics: OptionBool = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
+	var opt_isset_checks_metrics = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
 	# --stacktrace
-	var opt_stacktrace: OptionString = new OptionString("Control the generation of stack traces", "--stacktrace")
+	var opt_stacktrace = new OptionString("Control the generation of stack traces", "--stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
@@ -182,7 +182,6 @@ class MakefileToolchain
 	do
 		gather_cc_paths
 
-		var mainmodule = compiler.mainmodule
 		var compile_dir = compile_dir
 
 		# Generate the .h and .c files
@@ -230,7 +229,6 @@ class MakefileToolchain
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
 
 		# FFI
-		var m2m = toolcontext.modelbuilder.mmodule2nmodule
 		for m in compiler.mainmodule.in_importation.greaters do
 			compiler.finalize_ffi_for_module(m)
 		end
@@ -352,7 +350,6 @@ class MakefileToolchain
 		end
 
 		var linker_options = new HashSet[String]
-		var m2m = toolcontext.modelbuilder.mmodule2nmodule
 		for m in mainmodule.in_importation.greaters do
 			var libs = m.collect_linker_libs
 			if libs != null then linker_options.add_all(libs)
@@ -460,7 +457,7 @@ abstract class AbstractCompiler
 	# The real main module of the program
 	var realmainmodule: MModule
 
-	# The modeulbuilder used to know the model and the AST
+	# The modelbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder is protected writable
 
 	# Is hardening asked? (see --hardening)
@@ -484,7 +481,7 @@ abstract class AbstractCompiler
 
 	# The list of all associated files
 	# Used to generate .c files
-	var files: List[CodeFile] = new List[CodeFile]
+	var files = new List[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
@@ -551,8 +548,6 @@ abstract class AbstractCompiler
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
 	fun compile_header do
-		var v = self.header
-		var toolctx = modelbuilder.toolcontext
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
@@ -1229,7 +1224,7 @@ abstract class AbstractCompilerVisitor
 
 	# Checks
 
-	# Add a check and an abort for a null reciever if needed
+	# Add a check and an abort for a null receiver if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
@@ -1244,7 +1239,7 @@ abstract class AbstractCompilerVisitor
 
 	# Names handling
 
-	private var names: HashSet[String] = new HashSet[String]
+	private var names = new HashSet[String]
 	private var last: Int = 0
 
 	# Return a new name based on `s` and unique in the visitor
@@ -1286,7 +1281,7 @@ abstract class AbstractCompilerVisitor
 
 	# Variables handling
 
-	protected var variables: HashMap[Variable, RuntimeVariable] = new HashMap[Variable, RuntimeVariable]
+	protected var variables = new HashMap[Variable, RuntimeVariable]
 
 	# Return the local runtime_variable associated to a Nit local variable
 	fun variable(variable: Variable): RuntimeVariable
@@ -2787,7 +2782,7 @@ redef class ACrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
+		v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end
@@ -2799,7 +2794,7 @@ redef class AOrangeExpr
 		var i2 = v.expr(self.n_expr2, null)
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
-		var it = v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
+		v.compile_callsite(init_callsite.as(not null), [res, i1, i2])
 		return res
 	end
 end

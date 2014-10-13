@@ -35,8 +35,6 @@ end
 # Print class tables metrics for the classes of the program main
 fun compute_tables_metrics(main: MModule)
 do
-	var model = main.model
-
 	var nc = 0 # Number of runtime classes
 	var nl = 0 # Number of usages of class definitions (a class definition can be used more than once)
 	var nhp = 0 # Number of usages of properties (a property can be used more than once)
