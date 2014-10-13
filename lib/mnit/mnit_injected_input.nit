@@ -76,12 +76,12 @@ redef class App
 	redef fun setup
 	do
 		var env = "MNIT_SRAND".environ
-		if env != null and env != "" then
+		if env != "" then
 			srand_from(env.to_i)
 		end
 
 		var input = "MNIT_READ_INPUT".environ
-		if input != null and input != "" then
+		if input != "" then
 			injected_input_stream = new IFStream.open(input)
 			print "GET injected_input_stream {input}"
 		end

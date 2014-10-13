@@ -194,11 +194,7 @@ class OptionEnum
 
 	redef fun pretty_default
 	do
-		if default_value != null then
-			return " ({values[default_value]})"
-		else
-			return ""
-		end
+		return " ({values[default_value]})"
 	end
 end
 

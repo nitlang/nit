@@ -149,10 +149,6 @@ class HttpRequestParser
 				var parts = line.split_once_on('=')
 				if parts.length > 1 then
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
-					if decoded == null then
-						print "decode error"
-						continue
-					end
 					http_request.post_args[parts[0]] = decoded
 					http_request.all_args[parts[0]] = decoded
 				else
