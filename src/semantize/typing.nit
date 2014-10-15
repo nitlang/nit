@@ -890,6 +890,9 @@ redef class AForExpr
 	var method_key: nullable CallSite
 	var method_finish: nullable CallSite
 
+	var method_lt: nullable CallSite
+	var method_successor: nullable CallSite
+
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
 		if mtype isa MNullType then
@@ -989,6 +992,19 @@ redef class AForExpr
 				return
 			end
 			self.method_key = keydef
+		end
+
+		if self.variables.length == 1 and n_expr isa ARangeExpr then
+			var variable = variables.first
+			var vtype = variable.declared_type.as(not null)
+
+			if n_expr isa AOrangeExpr then
+				self.method_lt = v.get_method(self, vtype, "<", false)
+			else
+				self.method_lt = v.get_method(self, vtype, "<=", false)
+			end
+
+			self.method_successor = v.get_method(self, vtype, "successor", false)
 		end
 	end
 

@@ -50,15 +50,12 @@ class EscapeMark
 	# The name of the label (unless the mark is an anonymous loop mark)
 	var name: nullable String
 
-	# Is the mark attached to a loop (loop, while, for)
-	# Such a mark is a candidate to a labelless 'continue' or 'break'
-	var for_loop: Bool
+	# The associated `continue` mark, if any.
+	# If the mark attached to a loop (loop, while, for), a distinct mark is used.
+	private var continue_mark: nullable EscapeMark = null
 
-	# Each 'continue' attached to the mark
-	var continues = new Array[AContinueExpr]
-
-	# Each 'break' attached to the mark
-	var breaks = new Array[ABreakExpr]
+	# Each break/continue attached to the mark
+	var escapes = new Array[AEscapeExpr]
 end
 
 # Visit a npropdef and:
@@ -81,7 +78,7 @@ private class ScopeVisitor
 	end
 
 	# All stacked scope. `scopes.first` is the current scope
-	private var scopes = new List[Scope]
+	var scopes = new List[Scope]
 
 	# Shift and check the last scope
 	fun shift_scope
@@ -176,7 +173,8 @@ private class ScopeVisitor
 		else
 			name = null
 		end
-		var res = new EscapeMark(name, for_loop)
+		var res = new EscapeMark(name)
+		if for_loop then res.continue_mark = new EscapeMark(name)
 		return res
 	end
 
@@ -292,43 +290,47 @@ redef class ASelfExpr
 	end
 end
 
-redef class AContinueExpr
-	# The escape mark associated with the continue
+redef class AEscapeExpr
+	# The escape mark associated with the break/continue
 	var escapemark: nullable EscapeMark
+end
+
+redef class AContinueExpr
 	redef fun accept_scope_visitor(v)
 	do
 		super
 		var escapemark = v.get_escapemark(self, self.n_label)
 		if escapemark == null then return # Skip error
-		if not escapemark.for_loop then
+		escapemark = escapemark.continue_mark
+		if escapemark == null then
 			v.error(self, "Error: cannot 'continue', only 'break'.")
+			return
 		end
-		escapemark.continues.add(self)
+		escapemark.escapes.add(self)
 		self.escapemark = escapemark
 	end
 end
 
 redef class ABreakExpr
-	# The escape mark associated with the break
-	var escapemark: nullable EscapeMark
 	redef fun accept_scope_visitor(v)
 	do
 		super
 		var escapemark = v.get_escapemark(self, self.n_label)
 		if escapemark == null then return # Skip error
-		escapemark.breaks.add(self)
+		escapemark.escapes.add(self)
 		self.escapemark = escapemark
 	end
 end
 
 
 redef class ADoExpr
-	# The escape mark associated with the 'do' block
-	var escapemark: nullable EscapeMark
+	# The break escape mark associated with the 'do' block
+	var break_mark: nullable EscapeMark
+
 	redef fun accept_scope_visitor(v)
 	do
-		self.escapemark = v.make_escape_mark(n_label, false)
-		v.enter_visit_block(n_block, self.escapemark)
+		self.break_mark = v.make_escape_mark(n_label, false)
+		v.enter_visit_block(n_block, self.break_mark)
 	end
 end
 
@@ -342,24 +344,34 @@ redef class AIfExpr
 end
 
 redef class AWhileExpr
-	# The escape mark associated with the 'while'
-	var escapemark: nullable EscapeMark
+	# The break escape mark associated with the 'while'
+	var break_mark: nullable EscapeMark
+
+	# The continue escape mark associated with the 'while'
+	var continue_mark: nullable EscapeMark
+
 	redef fun accept_scope_visitor(v)
 	do
 		var escapemark = v.make_escape_mark(n_label, true)
-		self.escapemark = escapemark
+		self.break_mark = escapemark
+		self.continue_mark = escapemark.continue_mark
 		v.enter_visit(n_expr)
 		v.enter_visit_block(n_block, escapemark)
 	end
 end
 
 redef class ALoopExpr
-	# The escape mark associated with the 'loop'
-	var escapemark: nullable EscapeMark
+	# The break escape mark associated with the 'loop'
+	var break_mark: nullable EscapeMark
+
+	# The continue escape mark associated with the 'loop'
+	var continue_mark: nullable EscapeMark
+
 	redef fun accept_scope_visitor(v)
 	do
 		var escapemark = v.make_escape_mark(n_label, true)
-		self.escapemark = escapemark
+		self.break_mark = escapemark
+		self.continue_mark = escapemark.continue_mark
 		v.enter_visit_block(n_block, escapemark)
 	end
 end
@@ -368,8 +380,11 @@ redef class AForExpr
 	# The automatic variables in order
 	var variables: nullable Array[Variable]
 
-	# The escape mark associated with the 'for'
-	var escapemark: nullable EscapeMark
+	# The break escape mark associated with the 'for'
+	var break_mark: nullable EscapeMark
+
+	# The continue escape mark associated with the 'for'
+	var continue_mark: nullable EscapeMark
 
 	redef fun accept_scope_visitor(v)
 	do
@@ -388,7 +403,8 @@ redef class AForExpr
 		end
 
 		var escapemark = v.make_escape_mark(n_label, true)
-		self.escapemark = escapemark
+		self.break_mark = escapemark
+		self.continue_mark = escapemark.continue_mark
 		v.enter_visit_block(n_block, escapemark)
 
 		v.shift_scope

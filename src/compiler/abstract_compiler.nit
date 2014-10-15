@@ -42,8 +42,6 @@ redef class ToolContext
 	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
 	var opt_hardening = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
-	# --no-shortcut-range
-	var opt_no_shortcut_range = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 	# --no-check-covariance
 	var opt_no_check_covariance = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
 	# --no-check-attr-isset
@@ -72,7 +70,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
@@ -1273,6 +1271,14 @@ abstract class AbstractCompilerVisitor
 		return name
 	end
 
+	# Insert a C label for associated with an escapemark
+	fun add_escape_label(e: nullable EscapeMark)
+	do
+		if e == null then return
+		if e.escapes.is_empty then return
+		add("BREAK_{escapemark_name(e)}: (void)0;")
+	end
+
 	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
@@ -2465,11 +2471,7 @@ redef class ASelfExpr
 	redef fun expr(v) do return v.frame.arguments.first
 end
 
-redef class AContinueExpr
-	redef fun stmt(v) do v.add("goto CONTINUE_{v.escapemark_name(self.escapemark)};")
-end
-
-redef class ABreakExpr
+redef class AEscapeExpr
 	redef fun stmt(v) do v.add("goto BREAK_{v.escapemark_name(self.escapemark)};")
 end
 
@@ -2532,10 +2534,7 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		v.stmt(self.n_block)
-		var escapemark = self.escapemark
-		if escapemark != null then
-			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
-		end
+		v.add_escape_label(break_mark)
 	end
 end
 
@@ -2546,9 +2545,9 @@ redef class AWhileExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) break;")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 	end
 end
 
@@ -2557,47 +2556,15 @@ redef class ALoopExpr
 	do
 		v.add("for(;;) \{")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 	end
 end
 
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		# Shortcut on explicit range
-		# Avoid the instantiation of the range and the iterator
-		var nexpr = self.n_expr
-		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.compiler.modelbuilder.toolcontext.opt_no_shortcut_range.value then
-			var from = v.expr(nexpr.n_expr, null)
-			var to = v.expr(nexpr.n_expr2, null)
-			var variable = v.variable(variables.first)
-			var one = v.new_expr("1", v.get_class("Int").mclass_type)
-
-			v.assign(variable, from)
-			v.add("for(;;) \{ /* shortcut range */")
-
-			var ok
-			if nexpr isa AOrangeExpr then
-				ok = v.send(v.get_property("<", variable.mtype), [variable, to])
-			else
-				ok = v.send(v.get_property("<=", variable.mtype), [variable, to])
-			end
-			assert ok != null
-			v.add("if(!{ok}) break;")
-
-			v.stmt(self.n_block)
-
-			v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
-			var succ = v.send(v.get_property("successor", variable.mtype), [variable, one])
-			assert succ != null
-			v.assign(variable, succ)
-			v.add("\}")
-			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
-			return
-		end
-
 		var cl = v.expr(self.n_expr, null)
 		var it_meth = self.method_iterator
 		assert it_meth != null
@@ -2630,12 +2597,12 @@ redef class AForExpr
 			abort
 		end
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(continue_mark)
 		var next_meth = self.method_next
 		assert next_meth != null
 		v.compile_callsite(next_meth, [it])
 		v.add("\}")
-		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
+		v.add_escape_label(break_mark)
 
 		var method_finish = self.method_finish
 		if method_finish != null then

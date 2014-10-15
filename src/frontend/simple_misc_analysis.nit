@@ -117,17 +117,7 @@ redef class AReturnExpr
 	end
 end
 
-redef class AContinueExpr
-	redef fun after_simple_misc(v)
-	do
-		var e = n_expr
-		if e != null then
-			e.warn_parentheses(v)
-		end
-	end
-end
-
-redef class ABreakExpr
+redef class AEscapeExpr
 	redef fun after_simple_misc(v)
 	do
 		var e = n_expr

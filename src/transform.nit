@@ -19,9 +19,19 @@ module transform
 import astbuilder
 import astvalidation
 import semantize
+intrude import semantize::scope
 
 redef class ToolContext
 	var transform_phase: Phase = new TransformPhase(self, [typing_phase, auto_super_init_phase])
+
+	# --no-shortcut-range
+	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
+
+	redef init
+	do
+		super
+		self.option_context.add_option(self.opt_no_shortcut_range)
+	end
 end
 
 private class TransformPhase
@@ -151,14 +161,113 @@ end
 redef class AWhileExpr
 	redef fun accept_transform_visitor(v)
 	do
-		# TODO
+		var nloop = v.builder.make_loop
+		var nif = v.builder.make_if(n_expr, null)
+		nloop.add nif
+
+		var nblock = n_block
+		if nblock != null then nif.n_then.add nblock
+
+		var escapemark = self.break_mark.as(not null)
+		var nbreak = v.builder.make_break(escapemark)
+		nif.n_else.add nbreak
+
+		nloop.break_mark = self.break_mark
+		nloop.continue_mark = self.continue_mark
+
+		replace_with(nloop)
 	end
 end
 
 redef class AForExpr
 	redef fun accept_transform_visitor(v)
 	do
-		# TODO
+		var escapemark = self.break_mark
+		assert escapemark != null
+
+		var nblock = v.builder.make_block
+
+		var nexpr = n_expr
+
+		# Shortcut on explicit range
+		# Avoid the instantiation of the range and the iterator
+		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.phase.toolcontext.opt_no_shortcut_range.value then
+			var variable = variables.first
+			nblock.add v.builder.make_var_assign(variable, nexpr.n_expr)
+			var to = nexpr.n_expr2
+			nblock.add to
+
+			var nloop = v.builder.make_loop
+			nloop.break_mark = escapemark
+			nblock.add nloop
+
+			var is_ok = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_lt.as(not null), [to.make_var_read])
+
+			var nif = v.builder.make_if(is_ok, null)
+			nloop.add nif
+
+			var nthen = nif.n_then
+			var ndo = v.builder.make_do
+			ndo.break_mark = escapemark.continue_mark
+			nthen.add ndo
+
+			ndo.add self.n_block.as(not null)
+
+			var one = v.builder.make_int(1)
+			var succ = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_successor.as(not null), [one])
+			nthen.add v.builder.make_var_assign(variable, succ)
+
+			var nbreak = v.builder.make_break(escapemark)
+			nif.n_else.add nbreak
+
+			replace_with(nblock)
+			return
+		end
+
+		nblock.add nexpr
+
+		var iter = v.builder.make_call(nexpr.make_var_read, method_iterator.as(not null), null)
+		nblock.add iter
+
+		var nloop = v.builder.make_loop
+		nloop.break_mark = escapemark
+		nblock.add nloop
+
+		var is_ok = v.builder.make_call(iter.make_var_read, method_is_ok.as(not null), null)
+
+		var nif = v.builder.make_if(is_ok, null)
+		nloop.add nif
+
+		var nthen = nif.n_then
+		var ndo = v.builder.make_do
+		ndo.break_mark = escapemark.continue_mark
+		nthen.add ndo
+
+		if self.variables.length == 1 then
+			var item = v.builder.make_call(iter.make_var_read, method_item.as(not null), null)
+			ndo.add v.builder.make_var_assign(variables.first, item)
+		else if self.variables.length == 2 then
+			var key = v.builder.make_call(iter.make_var_read, method_key.as(not null), null)
+			ndo.add v.builder.make_var_assign(variables[0], key)
+			var item = v.builder.make_call(iter.make_var_read, method_item.as(not null), null)
+			ndo.add v.builder.make_var_assign(variables[1], item)
+		else
+			abort
+		end
+
+		ndo.add self.n_block.as(not null)
+
+		nthen.add v.builder.make_call(iter.make_var_read, method_next.as(not null), null)
+
+		var nbreak = v.builder.make_break(escapemark)
+		nif.n_else.add nbreak
+
+		var method_finish = self.method_finish
+		if method_finish != null then
+			nblock.add v.builder.make_call(iter.make_var_read, method_finish, null)
+		end
+
+		replace_with(nblock)
 	end
 end
 

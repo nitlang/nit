@@ -165,7 +165,7 @@ private class FlowVisitor
 	fun merge_continues_to(before_loop: FlowContext, escapemark: nullable EscapeMark)
 	do
 		if escapemark == null then return
-		for b in escapemark.continues do
+		for b in escapemark.escapes do
 			var before = b.before_flow_context
 			if before == null then continue # Forward error
 			before_loop.add_loop(before)
@@ -175,7 +175,7 @@ private class FlowVisitor
 	fun merge_breaks(escapemark: nullable EscapeMark)
 	do
 		if escapemark == null then return
-		for b in escapemark.breaks do
+		for b in escapemark.escapes do
 			var before = b.before_flow_context
 			if before == null then continue # Forward error
 			self.make_merge_flow(self.current_flow_context, before)
@@ -319,22 +319,7 @@ redef class AReturnExpr
 	end
 end
 
-redef class AContinueExpr
-	# The flow just before it become unreachable
-	fun before_flow_context: nullable FlowContext
-	do
-		var after = self.after_flow_context
-		if after == null then return null
-		return after.previous.first
-	end
-	redef fun accept_flow_visitor(v)
-	do
-		super
-		v.make_unreachable_flow
-	end
-end
-
-redef class ABreakExpr
+redef class AEscapeExpr
 	# The flow just before it become unreachable
 	fun before_flow_context: nullable FlowContext
 	do
@@ -361,7 +346,7 @@ redef class ADoExpr
 	redef fun accept_flow_visitor(v)
 	do
 		super
-		v.merge_breaks(self.escapemark)
+		v.merge_breaks(self.break_mark)
 	end
 end
 
@@ -411,10 +396,10 @@ redef class AWhileExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.escapemark)
+		v.merge_continues_to(after_block, self.continue_mark)
 
 		v.current_flow_context = after_expr.when_false
-		v.merge_breaks(self.escapemark)
+		v.merge_breaks(self.break_mark)
 	end
 end
 
@@ -428,10 +413,10 @@ redef class ALoopExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.escapemark)
+		v.merge_continues_to(after_block, self.continue_mark)
 
 		v.make_unreachable_flow
-		v.merge_breaks(self.escapemark)
+		v.merge_breaks(self.break_mark)
 	end
 end
 
@@ -447,10 +432,10 @@ redef class AForExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.escapemark)
+		v.merge_continues_to(after_block, self.continue_mark)
 
 		v.make_merge_flow(v.current_flow_context, before_loop)
-		v.merge_breaks(self.escapemark)
+		v.merge_breaks(self.break_mark)
 	end
 end
 

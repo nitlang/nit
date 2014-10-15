@@ -1344,12 +1344,17 @@ abstract class ALabelable
 	var n_label: nullable ALabel = null is writable
 end
 
-# A `break` statement.
-class ABreakExpr
+# A `break` or a `continue`
+abstract class AEscapeExpr
 	super AExpr
 	super ALabelable
-	var n_kwbreak: TKwbreak is writable, noinit
 	var n_expr: nullable AExpr = null is writable
+end
+
+# A `break` statement.
+class ABreakExpr
+	super AEscapeExpr
+	var n_kwbreak: TKwbreak is writable, noinit
 end
 
 # An `abort` statement
@@ -1360,10 +1365,8 @@ end
 
 # A `continue` statement
 class AContinueExpr
-	super AExpr
-	super ALabelable
+	super AEscapeExpr
 	var n_kwcontinue: nullable TKwcontinue = null is writable
-	var n_expr: nullable AExpr = null is writable
 end
 
 # A `do` statement
