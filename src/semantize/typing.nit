@@ -377,11 +377,18 @@ private class TypeVisitor
 			self.visit_expr_subtype(args[j], paramtype)
 		end
 		if vararg_rank >= 0 then
-			var varargs = new Array[AExpr]
 			var paramtype = msignature.mparameters[vararg_rank].mtype
-			for j in [vararg_rank..vararg_rank+vararg_decl] do
-				varargs.add(args[j])
-				self.visit_expr_subtype(args[j], paramtype)
+			var first = args[vararg_rank]
+			if vararg_decl == 0 and first isa AVarargExpr then
+				var mclass = get_mclass(node, "Array")
+				if mclass == null then return false # Forward error
+				var array_mtype = mclass.get_mtype([paramtype])
+				self.visit_expr_subtype(first.n_expr, array_mtype)
+				first.mtype  = first.n_expr.mtype
+			else
+				for j in [vararg_rank..vararg_rank+vararg_decl] do
+					self.visit_expr_subtype(args[j], paramtype)
+				end
 			end
 		end
 		return true
@@ -1775,6 +1782,16 @@ redef class AIssetAttrExpr
 			v.error(self, "Error: isset on a nullable attribute.")
 		end
 		self.mtype = v.type_bool(self)
+	end
+end
+
+redef class AVarargExpr
+	redef fun accept_typing(v)
+	do
+		# This kind of pseudo-expression can be only processed trough a signature
+		# See `check_signature`
+		# Other cases are a syntax error.
+		v.error(self, "Syntax error: unexpected `...`")
 	end
 end
 

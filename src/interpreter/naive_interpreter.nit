@@ -354,6 +354,13 @@ class NaiveInterpreter
 
 		for i in [0..msignature.arity[ do
 			if i == vararg_rank then
+				var ne = args[i]
+				if ne isa AVarargExpr then
+					var e = self.expr(ne.n_expr)
+					if e == null then return null
+					res.add(e)
+					continue
+				end
 				var vararg = new Array[Instance]
 				for j in [vararg_rank..vararg_rank+vararg_len] do
 					var e = self.expr(args[j])

@@ -1105,6 +1105,12 @@ abstract class AbstractCompilerVisitor
 
 		for i in [0..msignature.arity[ do
 			if i == vararg_rank then
+				var ne = args[i]
+				if ne isa AVarargExpr then
+					var e = self.expr(ne.n_expr, null)
+					res.add(e)
+					continue
+				end
 				var vararg = new Array[RuntimeVariable]
 				for j in [vararg_rank..vararg_rank+vararg_len] do
 					var e = self.expr(args[j], null)
