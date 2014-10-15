@@ -267,12 +267,15 @@ class ToolContext
 	# Option --bash-completion
 	var opt_bash_completion = new OptionBool("Generate bash_completion file for this program", "--bash-completion")
 
+	# Option --stub-man
+	var opt_stub_man = new OptionBool("Generate a stub manpage in pandoc markdown format", "--stub-man")
+
 	# Verbose level
 	var verbose_level: Int = 0
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
 	end
 
 	# Name, usage and synopsis of the tool.
@@ -320,6 +323,37 @@ class ToolContext
 		if opt_bash_completion.value then
 			var bash_completion = new BashCompletion(self)
 			bash_completion.write_to(sys.stdout)
+			exit 0
+		end
+
+		if opt_stub_man.value then
+			print """
+% {{{toolname.to_upper}}}(1)
+
+# NAME
+
+{{{tooldescription.split("\n")[1]}}}
+
+# SYNOPSYS
+
+{{{toolname}}} [*options*]...
+
+# OPTIONS
+"""
+			for o in option_context.options do
+				var first = true
+				for n in o.names do
+					if first then first = false else printn ", "
+					printn "`{n}`"
+				end
+				print ""
+				print ":   {o.helptext}"
+				print ""
+			end
+			print """
+# SEE ALSO
+
+The Nit language documentation and the source code of its tools and libraries may be downloaded from <http://nitlanguage.org>"""
 			exit 0
 		end
 
