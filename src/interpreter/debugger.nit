@@ -260,7 +260,6 @@ class Debugger
 	#
 	fun rt_call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		args = call_commons(mpropdef, args)
 		return rt_call_without_varargs(mpropdef, args)
 	end
 
