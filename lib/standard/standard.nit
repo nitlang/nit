@@ -24,6 +24,7 @@ import exec
 import stream
 import collection
 import math
+import ropes
 import kernel
 import gc
 import bitset

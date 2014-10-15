@@ -11,7 +11,7 @@
 # Input and output streams of characters
 module stream
 
-intrude import string
+intrude import ropes
 
 in "C" `{
 	#include <unistd.h>
