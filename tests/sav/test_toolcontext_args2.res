@@ -12,6 +12,7 @@ Test for ToolContext, try --bash-completion.
   --set-dummy-tool        Set toolname and version to DUMMY. Useful for testing
   -v, --verbose           Verbose
   --bash-completion       Generate bash_completion file for this program
+  --stub-man              Generate a stub manpage in pandoc markdown format
   -a, --option-a          option a, do nothing
   -b, --option-b          option b, do nothing
   -c                      option c, do nothing
