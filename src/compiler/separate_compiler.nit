@@ -1068,7 +1068,6 @@ class SeparateCompilerVisitor
 			var tgs = rta.live_targets(callsite)
 			if tgs.length == 1 then
 				# DIRECT CALL
-				self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), args)
 				var res0 = before_send(mmethod, args)
 				var res = call(tgs.first, tgs.first.mclassdef.bound_mtype, args)
 				if res0 != null then
@@ -1084,8 +1083,6 @@ class SeparateCompilerVisitor
 	end
 	redef fun send(mmethod, arguments)
 	do
-		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
-
 		if arguments.first.mcasttype.ctype != "val*" then
 			# In order to shortcut the primitive, we need to find the most specific method
 			# Howverr, because of performance (no flattening), we always work on the realmainmodule

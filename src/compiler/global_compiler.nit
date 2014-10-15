@@ -542,7 +542,6 @@ class GlobalCompilerVisitor
 		var recv = get_recv(recv_type, args)
 		if m.is_extern then recv = unbox_extern(recv, recv_type)
 		var new_args = args.to_a
-		self.varargize(m, m.msignature.as(not null), new_args)
 		new_args.first = recv
 		return finalize_call(m, recv_type, new_args)
 	end
