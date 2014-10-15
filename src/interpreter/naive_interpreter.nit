@@ -378,15 +378,6 @@ class NaiveInterpreter
 	# The call is direct/static. There is no message-sending/late-binding.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		return call_without_varargs(mpropdef, args)
-	end
-
-	# Common code to call and this function
-	#
-	# Call only executes the variadic part, this avoids
-	# double encapsulation of variadic parameters into an Array
-	fun call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
-	do
 		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
@@ -727,7 +718,7 @@ redef class AMethPropdef
 		if auto_super_call then
 			# standard call-next-method
 			var superpd = mpropdef.lookup_next_definition(v.mainmodule, arguments.first.mtype)
-			v.call_without_varargs(superpd, arguments)
+			v.call(superpd, arguments)
 		end
 
 		if mpropdef.is_intern or mpropdef.is_extern then
@@ -1132,7 +1123,7 @@ redef class AClassdef
 			if not mpropdef.is_intro then
 				# standard call-next-method
 				var superpd = mpropdef.lookup_next_definition(v.mainmodule, args.first.mtype)
-				v.call_without_varargs(superpd, args)
+				v.call(superpd, args)
 			end
 			return null
 		else
