@@ -70,7 +70,7 @@ class TermCharFormat
 	fun inverse: TermCharFormat do return apply("7")
 
 	# Apply normal weight and return `self`.
-	fun normalWeight: TermCharFormat do return apply("22")
+	fun normal_weight: TermCharFormat do return apply("22")
 
 	# Add the attribute that disable inderlining and return `self`.
 	fun not_underlined: TermCharFormat do return apply("24")
