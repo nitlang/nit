@@ -328,24 +328,30 @@ redef class String
 
 	# Correctly join two path using the directory separator.
 	#
-	# Using a standard "{self}/{path}" does not work when `self` is the empty string.
-	# This method ensure that the join is valid.
+	# Using a standard "{self}/{path}" does not work in the following cases:
 	#
-	#     assert "hello".join_path("world")      ==  "hello/world"
-	#     assert "hel/lo".join_path("wor/ld")      ==  "hel/lo/wor/ld"
-	#     assert "".join_path("world")      ==  "world"
-	#     assert "/hello".join_path("/world")      ==  "/world"
+	# * `self` is empty.
+	# * `path` ends with `'/'`.
+	# * `path` starts with `'/'`.
 	#
-	# Note: you may want to use `simplify_path` on the result
+	# This method ensures that the join is valid.
 	#
-	# Note: I you want to join a great number of path, you can write
+	#     assert "hello".join_path("world")   == "hello/world"
+	#     assert "hel/lo".join_path("wor/ld") == "hel/lo/wor/ld"
+	#     assert "".join_path("world")        == "world"
+	#     assert "hello".join_path("/world")  == "/world"
+	#     assert "hello/".join_path("world")  == "hello/world"
+	#     assert "hello/".join_path("/world") == "/world"
 	#
-	#     [p1, p2, p3, p4].join("/")
+	# Note: You may want to use `simplify_path` on the result.
+	#
+	# Note: This method works only with POSIX paths.
 	fun join_path(path: String): String
 	do
 		if path.is_empty then return self
 		if self.is_empty then return path
 		if path.chars[0] == '/' then return path
+		if self.last == '/' then return "{self}{path}"
 		return "{self}/{path}"
 	end
 
