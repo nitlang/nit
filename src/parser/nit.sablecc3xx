@@ -524,8 +524,8 @@ expr_pow~nopar~nobra {-> expr}
 
 expr_minus~nopar~nobra {-> expr}
 	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
-	| {:uminus} minus :no expr_minus~nopar~nobra
-	| {:once} kwonce :no expr_minus~nopar~nobra
+	| {:uminus} minus :no expr_minus~nobra
+	| {:once} kwonce :no expr_minus~nobra
 	;
 
 expr_new~nopar~nobra {-> expr}
