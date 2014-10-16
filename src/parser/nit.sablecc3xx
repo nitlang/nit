@@ -559,11 +559,24 @@ expr_single~nopar~nobra {-> expr}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
 	| {superstring} superstring  {-> superstring.expr}
-!nopar	| {par} opar no any_expr [n2]:no cpar annotations_o {-> New expr.par(opar, any_expr.expr, cpar, annotations_o.annotations)}
+!nopar	| {par} expr_par {-> expr_par.expr}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
 !nobra!nopar	| {array} obra no args_list typing_o cbra annotations_o {-> New expr.array(obra, args_list.exprs, typing_o.type, cbra, annotations_o.annotations)}
+	;
+
+expr_par {-> expr}
+	= {par} opar no any_expr [n2]:no cpar annotations_o {-> New expr.par(opar, any_expr.expr, cpar, annotations_o.annotations)}
+	| {tuple} opar no many_expr [n2]:no cpar annotations_o {-> New expr.par(opar, many_expr.expr, cpar, annotations_o.annotations)}
+	;
+
+many_expr {->expr}
+	= any_expr many_expr_tail+ {-> New expr.many([any_expr.expr, many_expr_tail.expr])}
+	;
+
+many_expr_tail {->expr}
+	= comma no any_expr {-> any_expr.expr}
 	;
 
 superstring {-> expr} 
@@ -871,6 +884,7 @@ expr	= {block} expr* kwend?
 	| {vararg} expr dotdotdot
 	| {type} type
 	| {at} annotations
+	| {many} [exprs]:expr*
 	;
 exprs
 	= {list} [exprs]:expr*

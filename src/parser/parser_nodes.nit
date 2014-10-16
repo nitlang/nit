@@ -1897,6 +1897,12 @@ class AVarargExpr
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
 
+# A list of expression separated with commas (arguments for instance)
+class AManyExpr
+	super AExpr
+	var n_exprs = new ANodes[AExpr](self)
+end
+
 # A special expression that encapsulates a static type
 # Can only be found in special construction like arguments of annotations.
 class ATypeExpr
