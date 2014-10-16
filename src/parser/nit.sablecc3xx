@@ -559,7 +559,7 @@ expr_single~nopar~nobra {-> expr}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
 	| {superstring} superstring  {-> superstring.expr}
-!nopar	| {par} opar no expr [n2]:no cpar annotations_o {-> New expr.par(opar, expr, cpar, annotations_o.annotations)}
+!nopar	| {par} opar no any_expr [n2]:no cpar annotations_o {-> New expr.par(opar, any_expr.expr, cpar, annotations_o.annotations)}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
@@ -597,7 +597,7 @@ annotations_o~nopar {-> annotations?}
 one_annotation~nopar {-> annotation}
 	= {alone} redef visibility atid annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [], Null, annotations_o~nopar.annotations)}
 // !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
-!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
+!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.expr], cpar, annotations_o~nopar.annotations)}
 	;
 
 many_annotations {-> annotations}
@@ -611,12 +611,12 @@ annotation_list {-> annotation*}
 one_annotation_list~nopar {-> annotation}
 	= {alone} redef visibility atid annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [], Null, annotations_o~nopar.annotations)}
 // !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
-!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.at_arg], cpar, annotations_o~nopar.annotations)}
-!nopar	| {nopar} redef visibility atid at_arg_single {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [at_arg_single.at_arg], Null, Null)}
+!nopar	| {args} redef visibility atid opar no at_args [n2]:no cpar annotations_o~nopar {-> New annotation(Null, redef.kwredef, visibility, atid, opar, [at_args.expr], cpar, annotations_o~nopar.annotations)}
+!nopar	| {nopar} redef visibility atid at_arg_single {-> New annotation(Null, redef.kwredef, visibility, atid, Null, [at_arg_single.expr], Null, Null)}
 	;
-at_arg_single {-> at_arg}
+at_arg_single {-> expr}
 // FIXME: why expr_single but not expr_atom is not clear :(
-	= {expr} [expr]:expr_single_nopar {-> New at_arg.expr(expr.expr)}
+	= {expr} [expr]:expr_single_nopar {-> expr.expr}
 	;
 
 annotations_tail {-> annotation}
@@ -628,31 +628,31 @@ line_annotations {-> annotations}
 	;
 line_annotation {-> annotation}
 	= [doc]:no redef visibility atid annotations? n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, Null, [], Null, annotations)}
-	| {args} [doc]:no redef visibility atid opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, opar, [at_args.at_arg], cpar, annotations)}
-	| {nopar} [doc]:no redef visibility atid at_args_nopar n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, Null, [at_args_nopar.at_arg], Null, Null)}
+	| {args} [doc]:no redef visibility atid opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, opar, [at_args.expr], cpar, annotations)}
+	| {nopar} [doc]:no redef visibility atid at_args_nopar n1 {-> New annotation(doc.doc, redef.kwredef, visibility, atid.atid, Null, [at_args_nopar.expr], Null, Null)}
 	;
 line_annotations_forclass {-> annotations}
 	= line_annotation_forclass+ {-> New annotations(Null, Null, [line_annotation_forclass.annotation], Null) }
 	;
 line_annotation_forclass {-> annotation}
 	= [doc]:no atid_forclass annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [], Null, annotations)}
-	| {args} [doc]:no atid_forclass opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
-	| {nopar} [doc]:no atid_forclass at_args_nopar n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [at_args_nopar.at_arg], Null, Null)}
+	| {args} [doc]:no atid_forclass opar no at_args cpar annotations? n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, opar, [at_args.expr], cpar, annotations)}
+	| {nopar} [doc]:no atid_forclass at_args_nopar n1 {-> New annotation(doc.doc, Null, Null, atid_forclass.atid, Null, [at_args_nopar.expr], Null, Null)}
 	;
 
-at_args~nopar {-> at_arg* }
-	= {many} at_arg~nopar at_args_tail* {-> [at_arg~nopar.at_arg, at_args_tail.at_arg]}
+at_args~nopar {-> expr* }
+	= {many} any_expr~nopar at_args_tail* {-> [any_expr~nopar.expr, at_args_tail.expr]}
 	;
 
-at_args_tail {-> at_arg}
-	= comma no at_arg {-> at_arg}
+at_args_tail {-> expr}
+	= comma no any_expr {-> any_expr.expr}
 	;
 
-at_arg~nopar {-> at_arg}
-	= {type} type {-> New at_arg.type(type)}
-	| {expr} expr~nopar {-> New at_arg.expr(expr~nopar.expr)}
-	| {stmt} stmt_noexpr~nopar {-> New at_arg.expr(stmt_noexpr~nopar.expr)}
-!nopar	| {at} annotations {-> New at_arg.at(annotations.annotations)}
+any_expr~nopar {-> expr}
+	= {type} type {-> New expr.type(type)}
+	| {expr} expr~nopar {-> expr~nopar.expr}
+	| {stmt} stmt_noexpr~nopar {-> stmt_noexpr~nopar.expr}
+!nopar	| {at} annotations {-> New expr.at(annotations.annotations)}
 	;
 
 atid~forclass {-> atid}
@@ -869,6 +869,8 @@ expr	= {block} expr* kwend?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
+	| {type} type
+	| {at} annotations
 	;
 exprs
 	= {list} [exprs]:expr*
@@ -901,13 +903,8 @@ doc = comment+;
 
 annotations = at? opar? [items]:annotation* cpar?;
 
-annotation = doc? kwredef? visibility? atid opar? [args]:at_arg* cpar? annotations?;
+annotation = doc? kwredef? visibility? atid opar? [args]:expr* cpar? annotations?;
 
-at_arg
-	= {type} type
-	| {expr} expr
-	| {at} annotations
-	;
 atid = {id} id | {kwextern} [id]:kwextern | {kwabstract} [id]:kwabstract | {kwimport} [id]:kwimport;
 
 /*****************************************************************************/

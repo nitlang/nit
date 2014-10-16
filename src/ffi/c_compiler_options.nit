@@ -57,13 +57,7 @@ private class CCompilerOptionsPhase
 		end
 
 		var options = new Array[CCompilerOption]
-		for arg in args do
-			if not arg isa AExprAtArg then
-				modelbuilder.error(nat, "Syntax error: \"{annotation_name}\" expects its arguments to be the name of the package as String literals or a call to `exex(\"local_program\")`.")
-				return
-			end
-
-			var expr = arg.n_expr
+		for expr in args do
 			if expr isa AStringFormExpr then
 				var text = expr.collect_text
 				text = text.substring(1, text.length-2)

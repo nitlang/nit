@@ -1897,10 +1897,17 @@ class AVarargExpr
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
 
-# A list of expression separated with commas (arguments for instance)
-abstract class AExprs
-	super Prod 
-	var n_exprs = new ANodes[AExpr](self)
+# A special expression that encapsulates a static type
+# Can only be found in special construction like arguments of annotations.
+class ATypeExpr
+	super AExpr
+	var n_type: AType is writable, noinit
+end
+
+# A special expression that encapsulate an annotation
+# Can only be found in special construction like arguments of annotations.
+class AAtExpr
+	super AExpr
 end
 
 # A special expression to debug types
@@ -1910,6 +1917,12 @@ class ADebugTypeExpr
 	var n_kwtype: TKwtype is writable, noinit
 	var n_expr: AExpr is writable, noinit
 	var n_type: AType is writable, noinit
+end
+
+# A list of expression separated with commas (arguments for instance)
+abstract class AExprs
+	super Prod
+	var n_exprs = new ANodes[AExpr](self)
 end
 
 # A simple list of expressions
@@ -2002,30 +2015,8 @@ class AAnnotation
 	var n_visibility: nullable AVisibility is writable
 	var n_atid: AAtid is writable, noinit
 	var n_opar: nullable TOpar = null is writable
-	var n_args = new ANodes[AAtArg](self)
+	var n_args = new ANodes[AExpr](self)
 	var n_cpar: nullable TCpar = null is writable
-end
-
-# A single argument of an annotation
-abstract class AAtArg
-	super Prod
-end
-
-# A type-like argument of an annotation
-class ATypeAtArg
-	super AAtArg
-	var n_type: AType is writable, noinit
-end
-
-# An expression-like argument of an annotation
-class AExprAtArg
-	super AAtArg
-	var n_expr: AExpr is writable, noinit
-end
-
-# An annotation-like argument of an annotation
-class AAtAtArg
-	super AAtArg
 end
 
 # An annotation name

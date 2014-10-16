@@ -100,37 +100,31 @@ redef class AAnnotation
 	end
 end
 
-redef class AAtArg
+redef class AExpr
 	# Get `self` as a `String`.
 	# Return null if not a string.
 	fun as_string: nullable String
 	do
-		if not self isa AExprAtArg then return null
-		var nexpr = n_expr
-		if not nexpr isa AStringFormExpr then return null
-		return nexpr.value.as(not null)
+		if not self isa AStringFormExpr then return null
+		return self.value.as(not null)
 	end
 
 	# Get `self` as an `Int`.
 	# Return null if not an integer.
 	fun as_int: nullable Int
 	do
-		if not self isa AExprAtArg then return null
-		var nexpr = n_expr
-		if not nexpr isa AIntExpr then return null
-		return nexpr.value.as(not null)
+		if not self isa AIntExpr then return null
+		return self.value.as(not null)
 	end
 
 	# Get `self` as a single identifier.
 	# Return null if not a single identifier.
 	fun as_id: nullable String
 	do
-		if not self isa AExprAtArg then return null
-		var nexpr = n_expr
-		if not nexpr isa ACallExpr then return null
-		if not nexpr.n_expr isa AImplicitSelfExpr then return null
-		if not nexpr.n_args.n_exprs.is_empty then return null
-		return nexpr.n_id.text
+		if not self isa ACallExpr then return null
+		if not self.n_expr isa AImplicitSelfExpr then return null
+		if not self.n_args.n_exprs.is_empty then return null
+		return self.n_id.text
 	end
 end
 
