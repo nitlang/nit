@@ -288,9 +288,8 @@ visibility
 	| {intrude} kwintrude no {-> New visibility.intrude(kwintrude)}
 	;
 
-methid {-> methid}
-	= {id} id {-> New methid.id(id)}
-	| {plus} plus {-> New methid.plus(plus)}
+methid~noid {-> methid}
+	= {plus} plus {-> New methid.plus(plus)}
 	| {minus} minus {-> New methid.minus(minus)}
 	| {star} star {-> New methid.star(star)}
 	| {starstar} starstar {-> New methid.starstar(starstar)}
@@ -308,6 +307,7 @@ methid {-> methid}
 	| {starship} starship {-> New methid.starship(starship)}
 	| {assign} id assign {-> New methid.assign(id, assign)}
 	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
+!noid	| {id} id {-> New methid.id(id)}
 	;
 
 signature {-> signature}
@@ -524,7 +524,7 @@ expr_pow~nopar~nobra {-> expr}
 
 expr_minus~nopar~nobra {-> expr}
 	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
-	| {:uminus} minus :no expr_minus~nobra
+	| {:uminus} minus expr_minus~nobra
 	| {:once} kwonce :no expr_minus~nobra
 	;
 
@@ -665,6 +665,7 @@ any_expr~nopar {-> expr}
 	= {type} type {-> New expr.type(type)}
 	| {expr} expr~nopar {-> expr~nopar.expr}
 	| {stmt} stmt_noexpr~nopar {-> stmt_noexpr~nopar.expr}
+	| {methid} recv~nopar qmethid_noid {-> New expr.methid(recv~nopar.expr, qmethid_noid.methid)}
 !nopar	| {at} annotations {-> New expr.at(annotations.annotations)}
 	;
 
@@ -683,9 +684,12 @@ recv~nopar~nobra {-> expr}
 	;
 
 args {-> exprs}
+	= args_n {-> args_n.exprs}
+	| {empty} {-> New exprs.list([])}
+	;
+args_n {-> exprs}
 	= opar no expr_list cpar {-> New exprs.par(opar, [expr_list.expr], cpar) }
 	| {emptypar} opar no cpar {-> New exprs.par(opar, [], cpar) }
-	| {empty} {-> New exprs.list([])}
 	;
 args_nopar {-> exprs}
 	= opar no expr_list cpar {-> New exprs.par(opar, [expr_list.expr], cpar) }
@@ -851,7 +855,7 @@ expr	= {block} expr* kwend?
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr 
 	| {call} expr id [args]:exprs
-	| {call_assign} expr id [args]:exprs assign [value]:expr 
+	| {call_assign} expr id [args]:exprs assign [value]:expr
 	| {call_reassign} expr id [args]:exprs assign_op [value]:expr 
 	| {super} qualified? kwsuper [args]:exprs
 	| {init} expr kwinit [args]:exprs 
@@ -886,6 +890,7 @@ expr	= {block} expr* kwend?
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
 	| {type} type
+	| {methid} expr [id]:methid
 	| {at} annotations
 	| {many} [exprs]:expr*
 	;

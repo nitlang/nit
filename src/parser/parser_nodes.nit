@@ -1910,6 +1910,15 @@ class ATypeExpr
 	var n_type: AType is writable, noinit
 end
 
+# A special expression that encapsulates a method identifier
+# Can only be found in special construction like arguments of annotations.
+class AMethidExpr
+	super AExpr
+	# The receiver, is any
+	var n_expr: AExpr is writable, noinit
+	var n_id: AMethid is writable, noinit
+end
+
 # A special expression that encapsulate an annotation
 # Can only be found in special construction like arguments of annotations.
 class AAtExpr
