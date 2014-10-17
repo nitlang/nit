@@ -121,6 +121,9 @@ redef class AExpr
 	# Return null if not a single identifier.
 	fun as_id: nullable String
 	do
+		if self isa AMethidExpr then
+			return self.collect_text
+		end
 		if not self isa ACallExpr then return null
 		if not self.n_expr isa AImplicitSelfExpr then return null
 		if not self.n_args.n_exprs.is_empty then return null
