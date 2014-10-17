@@ -1845,7 +1845,7 @@ redef class MMethodDef
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			return npropdef.can_inline
-		else if self.mproperty.name == "init" then
+		else if self.mproperty.is_root_init then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
 			return true
 		else
@@ -1865,7 +1865,7 @@ redef class MMethodDef
 			self.compile_parameter_check(v, arguments)
 			npropdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
-		else if self.mproperty.name == "init" then
+		else if self.mproperty.is_root_init then
 			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
 			var oldnode = v.current_node
 			v.current_node = nclassdef

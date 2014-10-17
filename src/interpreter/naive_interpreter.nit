@@ -381,7 +381,7 @@ class NaiveInterpreter
 			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
 			self.parameter_check(npropdef, mpropdef, args)
 			return npropdef.call(self, mpropdef, args)
-		else if mproperty.name == "init" then
+		else if mproperty.is_root_init then
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
 			self.parameter_check(nclassdef, mpropdef, args)
 			return nclassdef.call(self, mpropdef, args)

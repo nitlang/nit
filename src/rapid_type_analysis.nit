@@ -237,7 +237,7 @@ class RapidTypeAnalysis
 
 			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
 				# It is an init for a class?
-				if mmeth.name == "init" then
+				if mmeth.is_root_init then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					assert mmethoddef == nclassdef.mfree_init
 
