@@ -2397,8 +2397,7 @@ redef class AExpr
 	# Do not call this method directly, use `v.stmt` instead
 	private fun stmt(v: AbstractCompilerVisitor)
 	do
-		var res = expr(v)
-		if res != null then v.add("{res};")
+		expr(v)
 	end
 end
 
