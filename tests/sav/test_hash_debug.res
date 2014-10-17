@@ -6,9 +6,9 @@ false
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 1
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity of considered collections: 1.00 (NA%)
 
 STORE:
@@ -21,47 +21,47 @@ average capacity or considered collections: NA (NA%)
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 2
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity of considered collections: 1.00 (NA%)
 
 STORE:
 number of stores: 1
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity or considered collections: 1.00 (NA%)
 ~~~~~~
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 3
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
 average length of considered collections: 0.33
 average capacity of considered collections: 6.33 (1900.00%)
 
 STORE:
 number of stores: 1
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity or considered collections: 1.00 (NA%)
 ~~~~~~
 true
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 4
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
 average length of considered collections: 0.50
 average capacity of considered collections: 9.00 (1800.00%)
 
 STORE:
 number of stores: 1
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity or considered collections: 1.00 (NA%)
 ~~~~~~
 
@@ -70,22 +70,22 @@ false
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 5
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
 average length of considered collections: 0.60
 average capacity of considered collections: 10.60 (1766.67%)
 
 STORE:
 number of stores: 1
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
-average length of considered collections: 0.0
+average length of considered collections: 0.00
 average capacity or considered collections: 1.00 (NA%)
 ~~~~~~
 ~~~Hash statistics~~~
 GET:
 number of get and has_key: 6
-number of collisions: 0 (0.0%)
+number of collisions: 0 (0.00%)
 average length of collisions: NA
 average length of considered collections: 0.67
 average capacity of considered collections: 11.67 (1750.00%)
