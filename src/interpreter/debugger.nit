@@ -17,7 +17,6 @@
 # Debugging of a nit program using the NaiveInterpreter
 module debugger
 
-import breakpoint
 intrude import naive_interpreter
 import nitx
 intrude import semantize::local_var_init
@@ -164,6 +163,20 @@ redef class ModelBuilder
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
+	end
+end
+
+# Contains all the informations of a Breakpoint for the Debugger
+class Breakpoint
+
+	# Line to break on
+	var line: Int
+
+	# File concerned by the breakpoint
+	var file: String
+
+	redef init do
+		if not file.has_suffix(".nit") then file += ".nit"
 	end
 end
 
@@ -367,14 +380,6 @@ class Debugger
 		var breakpoint = find_breakpoint(curr_file, n.location.line_start)
 
 		if breakpoints.keys.has(curr_file) and breakpoint != null then
-
-			breakpoint.check_in
-
-			if not breakpoint.is_valid
-			then
-				remove_breakpoint(curr_file, n.location.line_start)
-			end
-
 			n.debug("Execute stmt {n.to_s}")
 			while read_cmd do end
 		end
@@ -452,7 +457,7 @@ class Debugger
 	#
 	# Returns a boolean value, representing whether or not to
 	# continue reading commands from the console input
-	fun process_debug_command(command:String): Bool
+	fun process_debug_command(command: String): Bool
 	do
 		# Step-out command
 		if command == "finish"
@@ -465,9 +470,16 @@ class Debugger
 		# Step-over command
 		else if command == "n" then
 			return step_over
+		# Shows help
+		else if command == "help" then
+			help
+			return true
 		# Opens a new NitIndex prompt on current model
 		else if command == "nitx" then
 			new NitIndex.with_infos(modelbuilder, self.mainmodule).prompt
+			return true
+		else if command == "bt" or command == "backtrack" then
+			print stack_trace
 			return true
 		# Continues execution until the end
 		else if command == "c" then
@@ -490,39 +502,70 @@ class Debugger
 			print stack_trace
 			exit(0)
 		else
-			var parts_of_command = command.split_with(' ')
+			var parts = command.split_with(' ')
+			var cname = parts.first
 			# Shows the value of a variable in the current frame
-			if parts_of_command[0] == "p" or parts_of_command[0] == "print" then
-				print_command(parts_of_command)
+			if cname == "p" or cname == "print" then
+				print_command(parts)
 			# Places a breakpoint on line x of file y
-			else if parts_of_command[0] == "break" or parts_of_command[0] == "b"
-			then
-				process_place_break_fun(parts_of_command)
-			# Places a temporary breakpoint on line x of file y
-			else if parts_of_command[0] == "tbreak" and (parts_of_command.length == 2 or parts_of_command.length == 3)
-			then
-				process_place_tbreak_fun(parts_of_command)
+			else if cname == "break" or cname == "b" then
+				process_place_break_fun(parts)
 			# Removes a breakpoint on line x of file y
-			else if parts_of_command[0] == "d" or parts_of_command[0] == "delete" then
-				process_remove_break_fun(parts_of_command)
+			else if cname == "d" or cname == "delete" then
+				process_remove_break_fun(parts)
 			# Sets an alias for a variable
-			else if parts_of_command.length == 3 and parts_of_command[1] == "as"
-			then
-				add_alias(parts_of_command[0], parts_of_command[2])
+			else if parts.length == 2 and parts[1] == "as" then
+				process_alias(parts)
 			# Modifies the value of a variable in the current frame
-			else if parts_of_command.length >= 3 and parts_of_command[1] == "=" then
-				process_mod_function(parts_of_command)
+			else if parts.length == 3 and parts[1] == "=" then
+				process_mod_function(parts)
 			# Traces the modifications on a variable
-			else if parts_of_command.length >= 2 and parts_of_command[0] == "trace" then
-				process_trace_command(parts_of_command)
+			else if cname == "trace" then
+				process_trace_command(parts)
 			# Untraces the modifications on a variable
-			else if parts_of_command.length == 2 and parts_of_command[0] == "untrace" then
-				process_untrace_command(parts_of_command)
+			else if cname == "untrace" then
+				process_untrace_command(parts)
 			else
-				print "Unknown command \"{command}\""
+				bad_command(command)
 			end
 		end
 		return true
+	end
+
+	# Produces help for the commands of the debugger
+	fun help do
+		print ""
+		print "Help :"
+		print "-----------------------------------"
+		print ""
+		print "Variables"
+		print " * Modification: var_name = value (Warning: var_name must be primitive)"
+		print " * Alias: var_name as alias"
+		print ""
+		print "Printing"
+		print " * Variables: p(rint) var_name (Use * to print all local variables)"
+		print " * Collections: p(rint) var_name '[' start_index (.. end_index) ']'"
+		print ""
+		print "Breakpoints"
+		print " * File/line: b(reak) file_name line_number"
+		print " * Remove: d(elete) id"
+		print ""
+		print "Tracepoints"
+		print " * Variable: trace var_name break/print"
+		print " * Untrace variable: untrace var_name"
+		print ""
+		print "Flow control"
+		print " * Next instruction (same-level): n"
+		print " * Next instruction: s"
+		print " * Finish current method: finish"
+		print " * Continue until next breakpoint or end: c"
+		print ""
+		print "General commands"
+		print " * quit: Quits the debugger"
+		print " * abort: Aborts the interpretation, prints the stack trace before leaving"
+		print " * nitx: Ask questions to the model about its entities (classes, methods, etc.)"
+		print " * nit: Inject dynamic code for interpretation"
+		print ""
 	end
 
 	#######################################################################
@@ -567,12 +610,20 @@ class Debugger
 		return false
 	end
 
+	fun bad_command(cmd: String) do
+		print "Unrecognized command {cmd}. Use 'help' to show help."
+	end
+
 	# Prints the demanded variable in the command
 	#
 	# The name of the variable in in position 1 of the array 'parts_of_command'
-	fun print_command(parts_of_command: Array[String])
+	fun print_command(parts: Array[String])
 	do
-		if parts_of_command[1] == "*" then
+		if parts.length != 2 then
+			bad_command(parts.join(" "))
+			return
+		end
+		if parts[1] == "*" then
 			var map_of_instances = frame.map
 
 			var self_var = seek_variable("self", frame)
@@ -581,59 +632,74 @@ class Debugger
 			for instance in map_of_instances.keys do
 				print "{instance.to_s}: {map_of_instances[instance].to_s}"
 			end
-		else if parts_of_command[1] == "stack" then
-			print self.stack_trace
-		else if parts_of_command[1].chars.has('[') and parts_of_command[1].chars.has(']') then
-			process_array_command(parts_of_command)
+		else if parts[1].chars.has('[') and parts[1].chars.has(']') then
+			process_array_command(parts)
 		else
-			var instance = seek_variable(get_real_variable_name(parts_of_command[1]), frame)
+			var instance = seek_variable(get_real_variable_name(parts[1]), frame)
 
 			if instance != null
 			then
 				print_instance(instance)
 			else
-				print "Cannot find variable {parts_of_command[1]}"
+				print "Cannot find variable {parts[1]}"
 			end
 		end
 	end
 
+	# Process the input command to set an alias for a variable
+	fun process_alias(parts: Array[String]) do
+		if parts.length != 3 then
+			bad_command(parts.join(" "))
+			return
+		end
+		add_alias(parts.first, parts.last)
+	end
+
 	# Processes the input string to know where to put a breakpoint
-	fun process_place_break_fun(parts_of_command: Array[String])
+	fun process_place_break_fun(parts: Array[String])
 	do
-		var bp = get_breakpoint_from_command(parts_of_command)
+		if parts.length != 3 then
+			bad_command(parts.join(" "))
+			return
+		end
+		var bp = get_breakpoint_from_command(parts)
 		if bp != null then
 			place_breakpoint(bp)
 		end
 	end
 
 	# Returns a breakpoint containing the informations stored in the command
-	fun get_breakpoint_from_command(parts_of_command: Array[String]): nullable Breakpoint
+	fun get_breakpoint_from_command(parts: Array[String]): nullable Breakpoint
 	do
-		if parts_of_command[1].is_numeric then
-			return new Breakpoint(parts_of_command[1].to_i, curr_file)
-		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
-			return new Breakpoint(parts_of_command[2].to_i, parts_of_command[1])
+		if parts[1].is_numeric then
+			return new Breakpoint(parts[1].to_i, curr_file)
+		else if parts.length >= 3 and parts[2].is_numeric then
+			return new Breakpoint(parts[2].to_i, parts[1])
 		else
 			return null
 		end
 	end
 
 	# Processes the command of removing a breakpoint on specified line and file
-	fun process_remove_break_fun(parts_of_command: Array[String])
+	fun process_remove_break_fun(parts: Array[String])
 	do
-		if parts_of_command[1].is_numeric then
-			remove_breakpoint(self.curr_file, parts_of_command[1].to_i)
-		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
-			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
+		if parts.length != 2 then
+			bad_command(parts.join(" "))
+			return
+		end
+		if parts[1].is_numeric then
+			remove_breakpoint(self.curr_file, parts[1].to_i)
+		else if parts.length >= 3 and parts[2].is_numeric then
+			remove_breakpoint(parts[1], parts[2].to_i)
 		end
 	end
 
 	# Processes an array print command
-	fun process_array_command(parts_of_command: Array[String])
+	fun process_array_command(parts: Array[String])
 	do
-		var index_of_first_brace = parts_of_command[1].chars.index_of('[')
-		var variable_name = get_real_variable_name(parts_of_command[1].substring(0,index_of_first_brace))
-		var braces = parts_of_command[1].substring_from(index_of_first_brace)
+		var index_of_first_brace = parts[1].chars.index_of('[')
+		var variable_name = get_real_variable_name(parts[1].substring(0,index_of_first_brace))
+		var braces = parts[1].substring_from(index_of_first_brace)
 
 		var indexes = remove_braces(braces)
 
@@ -661,27 +727,32 @@ class Debugger
 	# Processes the modification function to modify a variable dynamically
 	#
 	# Command of type variable = value
-	fun process_mod_function(parts_of_command: Array[String])
+	fun process_mod_function(parts: Array[String])
 	do
-		parts_of_command[0] = get_real_variable_name(parts_of_command[0])
-		var parts_of_variable = parts_of_command[0].split_with(".")
+		if parts.length != 3 then
+			bad_command(parts.join(" "))
+			return
+		end
+		var p0 = parts[0]
+		p0 = get_real_variable_name(p0)
+		var parts_of_variable = p0.split_with(".")
 
 		if parts_of_variable.length > 1 then
 			var last_part = parts_of_variable.pop
-			var first_part = parts_of_command[0].substring(0,parts_of_command[0].length - last_part.length - 1)
+			var first_part = p0.substring(0,p0.length - last_part.length - 1)
 			var papa = seek_variable(first_part, frame)
 
 			if papa != null and papa isa MutableInstance then
 				var attribute = get_attribute_in_mutable_instance(papa, last_part)
 
 				if attribute != null then
-					modify_argument_of_complex_type(papa, attribute, parts_of_command[2])
+					modify_argument_of_complex_type(papa, attribute, parts[2])
 				end
 			end
 		else
 			var target = seek_variable(parts_of_variable[0], frame)
 			if target != null then
-				modify_in_frame(target, parts_of_command[2])
+				modify_in_frame(target, parts[2])
 			end
 		end
 	end
@@ -689,42 +760,46 @@ class Debugger
 	# Processes the untrace variable command
 	#
 	# Command pattern : "untrace variable"
-	fun process_untrace_command(parts_of_command: Array[String])
+	fun process_untrace_command(parts: Array[String])
 	do
-		var variable_name = get_real_variable_name(parts_of_command[1])
+		if parts.length != 2 then
+			bad_command(parts.join(" "))
+			return
+		end
+		var variable_name = get_real_variable_name(parts[1])
 		if untrace_variable(variable_name) then
-			print "Untraced variable {parts_of_command[1]}"
+			print "Untraced variable {parts[1]}"
 		else
-			print "{parts_of_command[1]} is not traced"
+			print "{parts[1]} is not traced"
 		end
 	end
 
 	# Processes the trace variable command
 	#
 	# Command pattern : "trace variable [break/print]"
-	fun process_trace_command(parts_of_command: Array[String])
+	fun process_trace_command(parts: Array[String])
 	do
-		var variable_name = get_real_variable_name(parts_of_command[1])
+		if parts.length != 3 then
+			bad_command(parts.join(" "))
+			return
+		end
+		var variable_name = get_real_variable_name(parts[1])
 		var breaker:Bool
 
 		if seek_variable(variable_name, frame) == null then
-			print "Cannot find a variable called {parts_of_command[1]}"
+			print "Cannot find a variable called {parts[1]}"
 			return
 		end
 
-		if parts_of_command.length == 3 then
-			if parts_of_command[2] == "break" then
-				breaker = true
-			else
-				breaker = false
-			end
+		if parts[2] == "break" then
+			breaker = true
 		else
 			breaker = false
 		end
 
 		trace_variable(variable_name, breaker)
 
-		print "Successfully tracing {parts_of_command[1]}"
+		print "Successfully tracing {parts[1]}"
 	end
 
 	#######################################################################
@@ -1192,17 +1267,6 @@ class Debugger
 			print "Breakpoint added on line {breakpoint.line} for file {breakpoint.file}"
 		else
 			print "Breakpoint already present on line {breakpoint.line} for file {breakpoint.file}"
-		end
-	end
-
-	#Places a breakpoint that will trigger once and be destroyed afterwards
-	fun process_place_tbreak_fun(parts_of_command: Array[String])
-	do
-		var bp = get_breakpoint_from_command(parts_of_command)
-		if bp != null
-		then
-			bp.set_max_breaks(1)
-			place_breakpoint(bp)
 		end
 	end
 
