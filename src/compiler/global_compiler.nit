@@ -520,43 +520,19 @@ class GlobalCompilerVisitor
 		return recvtype
 	end
 
-	# Subpart of old call function
-	# Gets the receiver boxed and casted if necessary
-	private fun get_recv(recvtype: MClassType, args: Array[RuntimeVariable]): RuntimeVariable
+	redef fun call(m, recvtype, args)
 	do
-		return self.autoadapt(self.autobox(args.first, recvtype), recvtype)
-	end
+		var recv_type = get_recvtype(m, recvtype, args)
+		var recv = self.autoadapt(self.autobox(args.first, recvtype), recvtype)
+		if m.is_extern then recv = unbox_extern(recv, recv_type)
 
-	# Finalizes a call to a method ´m´ on type ´recvtype´ with arguments ´args´
-	private fun finalize_call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
-	do
+		args = args.to_a
+		args.first = recv
+
 		assert args.length == m.msignature.arity + 1 else debug("Invalid arity for {m}. {args.length} arguments given.")
 
 		var rm = new CustomizedRuntimeFunction(m, recvtype)
 		return rm.call(self, args)
-	end
-
-	redef fun call(m, recvtype, args)
-	do
-		var recv_type = get_recvtype(m, recvtype, args)
-		var recv = get_recv(recv_type, args)
-		if m.is_extern then recv = unbox_extern(recv, recv_type)
-		var new_args = args.to_a
-		self.varargize(m, m.msignature.as(not null), new_args)
-		new_args.first = recv
-		return finalize_call(m, recv_type, new_args)
-	end
-
-	# Does a call without encapsulating varargs into an array
-	# Avoids multiple encapsulation when calling a super in a variadic function
-	fun call_without_varargize(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
-	do
-		var recv_type = get_recvtype(m, recvtype, args)
-		var recv = get_recv(recv_type, args)
-		if m.is_extern then recv = unbox_extern(recv, recv_type)
-		var new_args = args.to_a
-		new_args.first = recv
-		return finalize_call(m, recv_type, new_args)
 	end
 
 	redef fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -580,7 +556,7 @@ class GlobalCompilerVisitor
 				return res
 			end
 			var propdef = m.lookup_next_definition(self.compiler.mainmodule, mclasstype)
-			var res2 = self.call_without_varargize(propdef, mclasstype, args)
+			var res2 = self.call(propdef, mclasstype, args)
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
@@ -602,7 +578,7 @@ class GlobalCompilerVisitor
 			else
 				self.add("case {self.compiler.classid(t)}: /* test {t} */")
 			end
-			var res2 = self.call_without_varargize(propdef, t, args)
+			var res2 = self.call(propdef, t, args)
 			if res != null then self.assign(res, res2.as(not null))
 			self.add "break;"
 		end

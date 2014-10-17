@@ -319,51 +319,54 @@ class NaiveInterpreter
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
-	# Common code for calls to injected methods and normal methods
-	fun call_commons(mpropdef: MMethodDef, args: Array[Instance]): Array[Instance]
+	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
+	# This method is used to manage varargs in signatures and returns the real array
+	# of instances to use in the call.
+	# Return `null` if one of the evaluation of the arguments return null.
+	fun varargize(mpropdef: MMethodDef, recv: Instance, args: SequenceRead[AExpr]): nullable Array[Instance]
 	do
-		var vararg_rank = mpropdef.msignature.vararg_rank
-		if vararg_rank >= 0 then
-			assert args.length >= mpropdef.msignature.arity + 1 # because of self
-			var rawargs = args
-			args = new Array[Instance]
+		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var res = new Array[Instance]
+		res.add(recv)
 
-			args.add(rawargs.first) # recv
+		if args.is_empty then return res
 
-			for i in [0..vararg_rank[ do
-				args.add(rawargs[i+1])
-			end
+		var vararg_rank = msignature.vararg_rank
+		var vararg_len = args.length - msignature.arity
+		if vararg_len < 0 then vararg_len = 0
 
-			var vararg_lastrank = vararg_rank + rawargs.length-1-mpropdef.msignature.arity
-			var vararg = new Array[Instance]
-			for i in [vararg_rank..vararg_lastrank] do
-				vararg.add(rawargs[i+1])
-			end
-			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = mpropdef.msignature.mparameters[vararg_rank].mtype.anchor_to(self.mainmodule, args.first.mtype.as(MClassType))
-			args.add(self.array_instance(vararg, elttype))
-
-			for i in [vararg_lastrank+1..rawargs.length-1[ do
-				args.add(rawargs[i+1])
+		for i in [0..msignature.arity[ do
+			if i == vararg_rank then
+				var ne = args[i]
+				if ne isa AVarargExpr then
+					var e = self.expr(ne.n_expr)
+					if e == null then return null
+					res.add(e)
+					continue
+				end
+				var vararg = new Array[Instance]
+				for j in [vararg_rank..vararg_rank+vararg_len] do
+					var e = self.expr(args[j])
+					if e == null then return null
+					vararg.add(e)
+				end
+				var elttype = msignature.mparameters[vararg_rank].mtype.anchor_to(self.mainmodule, recv.mtype.as(MClassType))
+				res.add(self.array_instance(vararg, elttype))
+			else
+				var j = i
+				if i > vararg_rank then j += vararg_len
+				var e = self.expr(args[j])
+				if e == null then return null
+				res.add(e)
 			end
 		end
-		return args
+		return res
 	end
 
 	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
 	# Return a value if `mpropdef` is a function, or null if it is a procedure.
 	# The call is direct/static. There is no message-sending/late-binding.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
-	do
-		args = call_commons(mpropdef, args)
-		return call_without_varargs(mpropdef, args)
-	end
-
-	# Common code to call and this function
-	#
-	# Call only executes the variadic part, this avoids
-	# double encapsulation of variadic parameters into an Array
-	fun call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
 			self.discover_call_trace.add mpropdef
@@ -705,7 +708,7 @@ redef class AMethPropdef
 		if auto_super_call then
 			# standard call-next-method
 			var superpd = mpropdef.lookup_next_definition(v.mainmodule, arguments.first.mtype)
-			v.call_without_varargs(superpd, arguments)
+			v.call(superpd, arguments)
 		end
 
 		if mpropdef.is_intern or mpropdef.is_extern then
@@ -1110,7 +1113,7 @@ redef class AClassdef
 			if not mpropdef.is_intro then
 				# standard call-next-method
 				var superpd = mpropdef.lookup_next_definition(v.mainmodule, args.first.mtype)
-				v.call_without_varargs(superpd, args)
+				v.call(superpd, args)
 			end
 			return null
 		else
@@ -1595,12 +1598,8 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		var args = [recv]
-		for a in self.raw_arguments do
-			var i = v.expr(a)
-			if i == null then return null
-			args.add(i)
-		end
+		var args = v.varargize(callsite.mpropdef, recv, self.raw_arguments)
+		if args == null then return null
 
 		var res = v.callsite(callsite, args)
 		return res
@@ -1612,12 +1611,8 @@ redef class ASendReassignFormExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		var args = [recv]
-		for a in self.raw_arguments do
-			var i = v.expr(a)
-			if i == null then return
-			args.add(i)
-		end
+		var args = v.varargize(callsite.mpropdef, recv, self.raw_arguments)
+		if args == null then return
 		var value = v.expr(self.n_value)
 		if value == null then return
 
@@ -1637,15 +1632,11 @@ redef class ASuperExpr
 	redef fun expr(v)
 	do
 		var recv = v.frame.arguments.first
-		var args = [recv]
-		for a in self.n_args.n_exprs do
-			var i = v.expr(a)
-			if i == null then return null
-			args.add(i)
-		end
 
 		var callsite = self.callsite
 		if callsite != null then
+			var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
+			if args == null then return null
 			# Add additional arguments for the super init call
 			if args.length == 1 then
 				for i in [0..callsite.msignature.arity[ do
@@ -1657,14 +1648,17 @@ redef class ASuperExpr
 			return res
 		end
 
-		if args.length == 1 then
-			args = v.frame.arguments
-		end
-
 		# standard call-next-method
 		var mpropdef = self.mpropdef
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
-		var res = v.call_without_varargs(mpropdef, args)
+
+		var args = v.varargize(mpropdef, recv, self.n_args.n_exprs)
+		if args == null then return null
+
+		if args.length == 1 then
+			args = v.frame.arguments
+		end
+		var res = v.call(mpropdef, args)
 		return res
 	end
 end
@@ -1675,12 +1669,8 @@ redef class ANewExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var recv: Instance = new MutableInstance(mtype)
 		v.init_instance(recv)
-		var args = [recv]
-		for a in self.n_args.n_exprs do
-			var i = v.expr(a)
-			if i == null then return null
-			args.add(i)
-		end
+		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
+		if args == null then return null
 		var res2 = v.callsite(callsite, args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")

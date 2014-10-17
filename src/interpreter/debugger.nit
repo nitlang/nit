@@ -257,18 +257,7 @@ class Debugger
 	end
 
 	# Same as a regular call but for a runtime injected module
-	#
 	fun rt_call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
-	do
-		args = call_commons(mpropdef, args)
-		return rt_call_without_varargs(mpropdef, args)
-	end
-
-	# Common code to call and this function
-	#
-	# Call only executes the variadic part, this avoids
-	# double encapsulation of variadic parameters into an Array
-	fun rt_call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
 			self.discover_call_trace.add mpropdef

@@ -1086,39 +1086,45 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
 
-	# Transform varargs, in raw arguments, into a single argument of type `Array`
-	# Note: this method modify the given `args`
-	# If there is no vararg, then `args` is not modified.
-	fun varargize(mpropdef: MPropDef, msignature: MSignature, args: Array[RuntimeVariable])
+	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
+	# This method is used to manage varargs in signatures and returns the real array
+	# of runtime variables to use in the call.
+	fun varargize(mpropdef: MMethodDef, recv: RuntimeVariable, args: SequenceRead[AExpr]): Array[RuntimeVariable]
 	do
-		var recv = args.first
+		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var res = new Array[RuntimeVariable]
+		res.add(recv)
+
+		if args.is_empty then return res
+
 		var vararg_rank = msignature.vararg_rank
-		if vararg_rank >= 0 then
-			assert args.length >= msignature.arity + 1 # because of self
-			var rawargs = args
-			args = new Array[RuntimeVariable]
+		var vararg_len = args.length - msignature.arity
+		if vararg_len < 0 then vararg_len = 0
 
-			args.add(rawargs.first) # recv
-
-			for i in [0..vararg_rank[ do
-				args.add(rawargs[i+1])
+		for i in [0..msignature.arity[ do
+			if i == vararg_rank then
+				var ne = args[i]
+				if ne isa AVarargExpr then
+					var e = self.expr(ne.n_expr, null)
+					res.add(e)
+					continue
+				end
+				var vararg = new Array[RuntimeVariable]
+				for j in [vararg_rank..vararg_rank+vararg_len] do
+					var e = self.expr(args[j], null)
+					vararg.add(e)
+				end
+				var elttype = msignature.mparameters[vararg_rank].mtype
+				var arg = self.vararg_instance(mpropdef, recv, vararg, elttype)
+				res.add(arg)
+			else
+				var j = i
+				if i > vararg_rank then j += vararg_len
+				var e = self.expr(args[j], null)
+				res.add(e)
 			end
-
-			var vararg_lastrank = vararg_rank + rawargs.length-1-msignature.arity
-			var vararg = new Array[RuntimeVariable]
-			for i in [vararg_rank..vararg_lastrank] do
-				vararg.add(rawargs[i+1])
-			end
-
-			var elttype = msignature.mparameters[vararg_rank].mtype
-			args.add(self.vararg_instance(mpropdef, recv, vararg, elttype))
-
-			for i in [vararg_lastrank+1..rawargs.length-1[ do
-				args.add(rawargs[i+1])
-			end
-			rawargs.clear
-			rawargs.add_all(args)
 		end
+		return res
 	end
 
 	# Type handling
@@ -2841,11 +2847,9 @@ redef class ASendExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr, null)
-		var args = [recv]
-		for a in self.raw_arguments do
-			args.add(v.expr(a, null))
-		end
-		return v.compile_callsite(self.callsite.as(not null), args)
+		var callsite = self.callsite.as(not null)
+		var args = v.varargize(callsite.mpropdef, recv, self.raw_arguments)
+		return v.compile_callsite(callsite, args)
 	end
 end
 
@@ -2853,13 +2857,12 @@ redef class ASendReassignFormExpr
 	redef fun stmt(v)
 	do
 		var recv = v.expr(self.n_expr, null)
-		var args = [recv]
-		for a in self.raw_arguments do
-			args.add(v.expr(a, null))
-		end
+		var callsite = self.callsite.as(not null)
+		var args = v.varargize(callsite.mpropdef, recv, self.raw_arguments)
+
 		var value = v.expr(self.n_value, null)
 
-		var left = v.compile_callsite(self.callsite.as(not null), args)
+		var left = v.compile_callsite(callsite, args)
 		assert left != null
 
 		var res = v.compile_callsite(self.reassign_callsite.as(not null), [left, value])
@@ -2874,14 +2877,12 @@ redef class ASuperExpr
 	redef fun expr(v)
 	do
 		var recv = v.frame.arguments.first
-		var args = [recv]
-		for a in self.n_args.n_exprs do
-			args.add(v.expr(a, null))
-		end
 
 		var callsite = self.callsite
 		if callsite != null then
-			# Add additionnals arguments for the super init call
+			var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
+
+			# Add additional arguments for the super init call
 			if args.length == 1 then
 				for i in [0..callsite.msignature.arity[ do
 					args.add(v.frame.arguments[i+1])
@@ -2892,12 +2893,14 @@ redef class ASuperExpr
 			return res
 		end
 
+		var mpropdef = self.mpropdef.as(not null)
+		var args = v.varargize(mpropdef, recv, self.n_args.n_exprs)
 		if args.length == 1 then
 			args = v.frame.arguments
 		end
 
 		# stantard call-next-method
-		return v.supercall(mpropdef.as(not null), recv.mtype.as(MClassType), args)
+		return v.supercall(mpropdef, recv.mtype.as(MClassType), args)
 	end
 end
 
@@ -2920,11 +2923,10 @@ redef class ANewExpr
 		else
 			recv = v.new_expr("({ctype})0/*special!*/", mtype)
 		end
-		var args = [recv]
-		for a in self.n_args.n_exprs do
-			args.add(v.expr(a, null))
-		end
-		var res2 = v.compile_callsite(self.callsite.as(not null), args)
+
+		var callsite = self.callsite.as(not null)
+		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
+		var res2 = v.compile_callsite(callsite, args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
