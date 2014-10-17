@@ -171,6 +171,15 @@ redef class Prod
 	# Location on the first token after the start of a production
 	# So outside the production for epsilon production
 	var first_location: nullable Location
+
+	# Join the text of all visited tokens
+	fun collect_text: String
+	do
+		var v = new TextCollectorVisitor
+		v.enter_visit(self)
+		assert v.text != ""
+		return v.text
+	end
 end
 
 # Find location of production nodes
@@ -240,6 +249,17 @@ private class ComputeProdLocationVisitor
 
 	init do end
 end
+
+private class TextCollectorVisitor
+	super Visitor
+	var text: String = ""
+	redef fun visit(n)
+	do
+		if n isa Token then text += n.text
+		n.visit_all(self)
+	end
+end
+
 
 # Each reduce action has its own class, this one is the root of the hierarchy.
 private abstract class ReduceAction
