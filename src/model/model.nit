@@ -1226,7 +1226,6 @@ class MVirtualType
 		if is_fixed(mmodule, resolved_reciever) then return res
 		# If the resolved type isa intern class, then there is no possible valid redefinition in any potential subclass. self is just fixed. so simply return the resolution
 		if res isa MClassType and res.mclass.kind == enum_kind then return res
-		# TODO: Add 'fixed' virtual type in the specification.
 		# TODO: What if bound to a MParameterType?
 		# Note that Nullable types can always be redefined by the non nullable version, so there is no specific case on it.
 
@@ -1275,7 +1274,6 @@ end
 #
 # Note that parameter types are shared among class refinements.
 # Therefore parameter only have an internal name (see `to_s` for details).
-# TODO: Add a `name_for` to get better messages.
 class MParameterType
 	super MType
 
