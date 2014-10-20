@@ -257,7 +257,7 @@
 ## Module importation hierarchy
 Number of nodes: 1
 Number of edges: 1 (1.00 per node)
-Number of direct edges: 0 (0.0 per node)
+Number of direct edges: 0 (0.00 per node)
 Distribution of greaters
  population: 1
  minimum value: 1
@@ -271,7 +271,7 @@ Distribution of direct greaters
  minimum value: 0
  maximum value: 0
  total value: 0
- average value: 0.0
+ average value: 0.00
  distribution:
   <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
 Distribution of smallers
@@ -287,7 +287,7 @@ Distribution of direct smallers
  minimum value: 0
  maximum value: 0
  total value: 0
- average value: 0.0
+ average value: 0.00
  distribution:
   <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
 ## Classdef hierarchy
@@ -310,7 +310,7 @@ Distribution of direct greaters
  total value: 6
  average value: 0.85
  distribution:
-  <=0: sub-population=1 (14.28%); cumulated value=0 (0.0%)
+  <=0: sub-population=1 (14.28%); cumulated value=0 (0.00%)
   <=1: sub-population=6 (85.71%); cumulated value=6 (100.00%)
 Distribution of smallers
  population: 7
@@ -328,7 +328,7 @@ Distribution of direct smallers
  total value: 6
  average value: 0.85
  distribution:
-  <=0: sub-population=6 (85.71%); cumulated value=0 (0.0%)
+  <=0: sub-population=6 (85.71%); cumulated value=0 (0.00%)
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 ## Class hierarchy
 Number of nodes: 7
@@ -350,7 +350,7 @@ Distribution of direct greaters
  total value: 6
  average value: 0.85
  distribution:
-  <=0: sub-population=1 (14.28%); cumulated value=0 (0.0%)
+  <=0: sub-population=1 (14.28%); cumulated value=0 (0.00%)
   <=1: sub-population=6 (85.71%); cumulated value=6 (100.00%)
 Distribution of smallers
  population: 7
@@ -368,7 +368,7 @@ Distribution of direct smallers
  total value: 6
  average value: 0.85
  distribution:
-  <=0: sub-population=6 (85.71%); cumulated value=0 (0.0%)
+  <=0: sub-population=6 (85.71%); cumulated value=0 (0.00%)
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 --- AST Metrics ---
 ## All nodes of the AST
@@ -449,8 +449,8 @@ Number of classes: 7
   Number of class kind: 4 (57.14%)
 
 Number of class definitions: 7
-Number of refined classes: 0 (0.0%)
-Average number of class refinments by classes: 0.0
+Number of refined classes: 0 (0.00%)
+Average number of class refinments by classes: 0.00
 Average number of class refinments by refined classes: na
 
 Number of properties: 18
@@ -714,8 +714,8 @@ Statistics of type usage:
 	  sum: 0
 --- Sends on Nullable Receiver ---
 Total number of sends: 19
-Number of sends on a nullable receiver: 0 (0.0%)
-Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
+Number of sends on a nullable receiver: 0 (0.00%)
+Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 
 # RTA metrics
 

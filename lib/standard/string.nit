@@ -1775,12 +1775,12 @@ redef class Int
 end
 
 redef class Float
-	# Pretty print self, print needoed decimals up to a max of 3.
+	# Pretty representation of `self`, with decimals as needed from 1 to a maximum of 3
 	#
-	#     assert 12.34.to_s        == "12.34"
-	#     assert (-0120.03450).to_s  == "-120.035"
+	#     assert 12.34.to_s       == "12.34"
+	#     assert (-0120.030).to_s == "-120.03"
 	#
-	# see `to_precision` for a different precision.
+	# see `to_precision` for a custom precision.
 	redef fun to_s do
 		var str = to_precision( 3 )
 		if is_inf != 0 or is_nan then return str
@@ -1799,13 +1799,15 @@ redef class Float
 		return str
 	end
 
-	# `self` representation with `nb` digits after the '.'.
+	# `String` representation of `self` with the given number of `decimals`
 	#
-	#     assert 12.345.to_precision(1) == "12.3"
-	#     assert 12.345.to_precision(2) == "12.35"
-	#     assert 12.345.to_precision(3) == "12.345"
-	#     assert 12.345.to_precision(4) == "12.3450"
-	fun to_precision(nb: Int): String
+	#     assert 12.345.to_precision(0)    == "12"
+	#     assert 12.345.to_precision(3)    == "12.345"
+	#     assert (-12.345).to_precision(3) == "-12.345"
+	#     assert (-0.123).to_precision(3)  == "-0.123"
+	#     assert 0.999.to_precision(2)     == "1.00"
+	#     assert 0.999.to_precision(4)     == "0.9990"
+	fun to_precision(decimals: Int): String
 	do
 		if is_nan then return "nan"
 
@@ -1816,25 +1818,34 @@ redef class Float
 			return  "-inf"
 		end
 
-		if nb == 0 then return self.to_i.to_s
+		if decimals == 0 then return self.to_i.to_s
 		var f = self
-		for i in [0..nb[ do f = f * 10.0
+		for i in [0..decimals[ do f = f * 10.0
 		if self > 0.0 then
 			f = f + 0.5
 		else
 			f = f - 0.5
 		end
 		var i = f.to_i
-		if i == 0 then return "0.0"
-		var s = i.to_s
+		if i == 0 then return "0." + "0"*decimals
+
+		# Prepare both parts of the float, before and after the "."
+		var s = i.abs.to_s
 		var sl = s.length
-		if sl > nb then
-			var p1 = s.substring(0, s.length-nb)
-			var p2 = s.substring(s.length-nb, nb)
-			return p1 + "." + p2
+		var p1
+		var p2
+		if sl > decimals then
+			# Has something before the "."
+			p1 = s.substring(0, sl-decimals)
+			p2 = s.substring(sl-decimals, decimals)
 		else
-			return "0." + ("0"*(nb-sl)) + s
+			p1 = "0"
+			p2 = "0"*(decimals-sl) + s
 		end
+
+		if i < 0 then p1 = "-" + p1
+
+		return p1 + "." + p2
 	end
 
 	# `self` representation with `nb` digits after the '.'.
