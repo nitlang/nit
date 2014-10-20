@@ -2403,8 +2403,7 @@ redef class AExpr
 	# Do not call this method directly, use `v.stmt` instead
 	private fun stmt(v: AbstractCompilerVisitor)
 	do
-		var res = expr(v)
-		if res != null then v.add("{res};")
+		expr(v)
 	end
 end
 
@@ -2446,12 +2445,6 @@ redef class AVarExpr
 end
 
 redef class AVarAssignExpr
-	redef fun stmt(v)
-	do
-		var variable = self.variable.as(not null)
-		var i = v.expr(self.n_value, variable.declared_type)
-		v.assign(v.variable(variable), i)
-	end
 	redef fun expr(v)
 	do
 		var variable = self.variable.as(not null)
@@ -2945,12 +2938,13 @@ redef class AAttrExpr
 end
 
 redef class AAttrAssignExpr
-	redef fun stmt(v)
+	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr, null)
 		var i = v.expr(self.n_value, null)
 		var mproperty = self.mproperty.as(not null)
 		v.write_attribute(mproperty, recv, i)
+		return i
 	end
 end
 
