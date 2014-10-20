@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Save and load `Model` from/to Neo4j base.
+# Save and load a `Model` to/from a Neo4j graph.
 #
 # Nit models are composed by MEntities.
 # This module creates NeoNode for each MEntity found in a `Model` and save them
 # into Neo4j database.
 #
-# see `Neo4jClient`.
+# SEE: `Neo4jClient`
 #
 # NeoNodes can also be translated back to MEntities to rebuild a Nit `Model`.
 #
-# Structure of the nit `Model` in base:
+# Structure of the nit `Model` in the graph:
 #
 # Note : Any null or empty attribute will not be saved in the database.
 #
@@ -67,9 +67,10 @@
 #
 # * labels: `MClass`, `model_name` and `MEntity`.
 # * `full_name`: fully qualified name.
-# * `arity`: number of generic formal parameters. 0 if the class is not generic.
 # * `kind`: kind of the class (`interface`, `abstract class`, etc.)
 # * `visibility`: visibility of the class.
+# * `parameter_names`: JSON array listing the name of each formal generic
+# parameter (in order of declaration).
 # * `(:MClass)-[:CLASSTYPE]->(:MClassType)`: SEE: `MClass.mclass_type`
 #
 # Arguments in the `CLASSTYPE` are named following the `parameter_names`
@@ -82,8 +83,6 @@
 # * labels: `MClassDef`, `model_name` and `MEntity`.
 # * `is_intro`: Does this definition introduce the class?
 # * `location`: origin of the definition. SEE: `Location.to_s`
-# * `parameter_names`: JSON array listing the name of each formal generic
-# parameter (in order of declaration).
 # * `(:MClassDef)-[:BOUNDTYPE]->(:MClassType)`: bounded type associated to the
 # classdef.
 # * `(:MClassDef)-[:MCLASS]->(:MClass)`: associated `MClass`.
@@ -141,7 +140,7 @@
 # * `(:MClassType)-[:ARGUMENT]->(:MType)`: type arguments.
 #
 # Arguments are named following the `parameter_names` attribute of the
-# `MClassDef` that introduces the class referred by `CLASS`.
+# `MClass` referred by `CLASS`.
 #
 # Additional relationship for `MVirtualType`:
 #
