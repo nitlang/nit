@@ -122,6 +122,11 @@
 # * `(:MMethodDef)-[:SIGNATURE]->(:MSignature)`: signature attached to the
 # property definition.
 #
+# Additional relationship for `MAttributeDef`:
+#
+# * `(:MAttributeDef)-[:TYPE]->(:MType)`: static type of the attribute,
+# if specified.
+#
 # Additional relationship for `MVirtualTypeDef`:
 #
 # * `(:MVirtualTypeDef)-[:BOUND]->(:MType)`: type to which the virtual type
@@ -632,6 +637,10 @@ class NeoModel
 			end
 		else if mpropdef isa MAttributeDef then
 			node.labels.add "MAttributeDef"
+			var static_mtype = mpropdef.static_mtype
+			if static_mtype != null then
+				node.out_edges.add(new NeoEdge(node, "TYPE", to_node(static_mtype)))
+			end
 		else if mpropdef isa MVirtualTypeDef then
 			node.labels.add "MVirtualTypeDef"
 			var bound = mpropdef.bound
@@ -662,6 +671,8 @@ class NeoModel
 		else if node.labels.has("MAttributeDef") then
 			mpropdef = new MAttributeDef(mclassdef, mproperty.as(MAttribute), location)
 			mentities[node] = mpropdef
+			var static_mtype = node.out_nodes("TYPE")
+			if not static_mtype.is_empty then mpropdef.static_mtype = to_mtype(model, static_mtype.first)
 		else if node.labels.has("MVirtualTypeDef") then
 			mpropdef = new MVirtualTypeDef(mclassdef, mproperty.as(MVirtualTypeProp), location)
 			mentities[node] = mpropdef
