@@ -842,7 +842,8 @@ redef class AAttrPropdef
 		n_id2: nullable TId,
 		n_type: nullable AType,
 		n_expr: nullable AExpr,
-		n_annotations: nullable AAnnotations
+		n_annotations: nullable AAnnotations,
+		n_block: nullable AExpr
 	)
 	do
 		_n_doc = n_doc
@@ -861,6 +862,8 @@ redef class AAttrPropdef
 		if n_expr != null then n_expr.parent = self
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
+		_n_block = n_block
+		if n_block != null then n_block.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -895,6 +898,10 @@ redef class AAttrPropdef
 		end
 		if _n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+		if _n_block == old_child then
+			n_block = new_child.as(nullable AExpr)
 			return
 		end
 	end
@@ -939,6 +946,11 @@ redef class AAttrPropdef
 		_n_annotations = node
 		if node != null then node.parent = self
 	end
+	redef fun n_block=(node)
+	do
+		_n_block = node
+		if node != null then node.parent = self
+	end
 
 
 	redef fun visit_all(v: Visitor)
@@ -951,6 +963,7 @@ redef class AAttrPropdef
 		v.enter_visit(_n_type)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_annotations)
+		v.enter_visit(_n_block)
 	end
 end
 redef class AMainMethPropdef
@@ -6039,6 +6052,126 @@ redef class AVarargExpr
 		v.enter_visit(_n_dotdotdot)
 	end
 end
+redef class ATypeExpr
+	init init_atypeexpr (
+		n_type: nullable AType
+	)
+	do
+		_n_type = n_type.as(not null)
+		n_type.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_type == old_child then
+			n_type = new_child.as(AType)
+			return
+		end
+	end
+
+	redef fun n_type=(node)
+	do
+		_n_type = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_type)
+	end
+end
+redef class AMethidExpr
+	init init_amethidexpr (
+		n_expr: nullable AExpr,
+		n_id: nullable AMethid
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_id = n_id.as(not null)
+		n_id.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_id == old_child then
+			n_id = new_child.as(AMethid)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_id=(node)
+	do
+		_n_id = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_id)
+	end
+end
+redef class AAtExpr
+	init init_aatexpr (
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_annotations = n_annotations.as(not null)
+		n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AManyExpr
+	init init_amanyexpr (
+		n_exprs: Collection[Object] # Should be Collection[AExpr]
+	)
+	do
+		self.n_exprs.unsafe_add_all(n_exprs)
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if n_exprs.replace_child(old_child, new_child) then return
+	end
+
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		n_exprs.visit_all(v)
+	end
+end
 redef class AListExprs
 	init init_alistexprs (
 		n_exprs: Collection[Object] # Should be Collection[AExpr]
@@ -6839,7 +6972,7 @@ redef class AAnnotation
 		n_visibility: nullable AVisibility,
 		n_atid: nullable AAtid,
 		n_opar: nullable TOpar,
-		n_args: Collection[Object], # Should be Collection[AAtArg]
+		n_args: Collection[Object], # Should be Collection[AExpr]
 		n_cpar: nullable TCpar,
 		n_annotations: nullable AAnnotations
 	)
@@ -6940,93 +7073,6 @@ redef class AAnnotation
 		v.enter_visit(_n_opar)
 		n_args.visit_all(v)
 		v.enter_visit(_n_cpar)
-		v.enter_visit(_n_annotations)
-	end
-end
-redef class ATypeAtArg
-	init init_atypeatarg (
-		n_type: nullable AType
-	)
-	do
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_type == old_child then
-			n_type = new_child.as(AType)
-			return
-		end
-	end
-
-	redef fun n_type=(node)
-	do
-		_n_type = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_type)
-	end
-end
-redef class AExprAtArg
-	init init_aexpratarg (
-		n_expr: nullable AExpr
-	)
-	do
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_expr == old_child then
-			n_expr = new_child.as(AExpr)
-			return
-		end
-	end
-
-	redef fun n_expr=(node)
-	do
-		_n_expr = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_expr)
-	end
-end
-redef class AAtAtArg
-	init init_aatatarg (
-		n_annotations: nullable AAnnotations
-	)
-	do
-		_n_annotations = n_annotations.as(not null)
-		n_annotations.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(AAnnotations)
-			return
-		end
-	end
-
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
 		v.enter_visit(_n_annotations)
 	end
 end
