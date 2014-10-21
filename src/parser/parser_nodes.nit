@@ -1027,6 +1027,9 @@ class AAttrPropdef
 
 	# The initial value, if any
 	var n_expr: nullable AExpr = null is writable
+
+	var n_block: nullable AExpr = null is writable
+
 	redef fun hot_location
 	do
 		return n_id2.location
