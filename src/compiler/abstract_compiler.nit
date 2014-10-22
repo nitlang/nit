@@ -2171,7 +2171,7 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
 				return true
-			else if pname == "init" then
+			else if pname == "new" then
 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end

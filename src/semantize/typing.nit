@@ -272,6 +272,11 @@ private class TypeVisitor
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		if name == "new" and mproperty == null then
+			name = "init"
+			mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		end
+
 		if mproperty == null then
 			#self.modelbuilder.error(node, "Type error: property {name} not found in {unsafe_type} (ie {recvtype})")
 			if recv_is_self then
@@ -1704,7 +1709,7 @@ redef class ANewExpr
 		if nid != null then
 			name = nid.text
 		else
-			name = "init"
+			name = "new"
 		end
 		var callsite = v.get_method(self, recvtype, name, false)
 		if callsite == null then return

@@ -891,7 +891,7 @@ redef class AMethPropdef
 				return v.bool_instance(args[0].to_f.is_inf != 0)
 			end
 		else if cname == "NativeString" then
-			if pname == "init" then
+			if pname == "new" then
 				return v.native_string_instance("!" * args[1].to_i)
 			end
 			var recvval = args.first.val.as(Buffer)
@@ -952,7 +952,7 @@ redef class AMethPropdef
 		else if pname == "calloc_string" then
 			return v.native_string_instance("!" * args[1].to_i)
 		else if cname == "NativeArray" then
-			if pname == "init" then
+			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
 				return new PrimitiveInstance[Array[Instance]](args[0].mtype, val)
 			end

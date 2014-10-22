@@ -529,7 +529,7 @@ redef class AMethPropdef
 				name = "init"
 				name_node = n_kwinit
 			else if n_kwnew != null then
-				name = "init"
+				name = "new"
 				name_node = n_kwnew
 			else
 				abort
