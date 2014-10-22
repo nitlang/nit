@@ -275,7 +275,11 @@ redef class ANewExpr
 			n_args.n_exprs.add_all(args)
 		end
 		self.callsite = callsite
-		self.mtype = callsite.recv
+		if callsite.mproperty.is_new then
+			self.mtype = callsite.msignature.return_mtype
+		else
+			self.mtype = callsite.recv
+		end
 		self.is_typed = true
 	end
 end

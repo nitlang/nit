@@ -1172,10 +1172,7 @@ class SeparateCompilerVisitor
 		var res: nullable RuntimeVariable
 		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
 		var ret = msignature.return_mtype
-		if mmethod.is_new then
-			ret = arguments.first.mtype
-			res = self.new_var(ret)
-		else if ret == null then
+		if ret == null then
 			res = null
 		else
 			res = self.new_var(ret)
@@ -1226,10 +1223,7 @@ class SeparateCompilerVisitor
 
 		var res: nullable RuntimeVariable
 		var ret = mmethoddef.msignature.return_mtype
-		if mmethoddef.mproperty.is_new then
-			ret = arguments.first.mtype
-			res = self.new_var(ret)
-		else if ret == null then
+		if ret == null then
 			res = null
 		else
 			ret = ret.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
@@ -1822,9 +1816,6 @@ class SeparateRuntimeFunction
 		var ret = msignature.return_mtype
 		if ret != null then
 			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
 		else
 			sig.append("void ")
 		end
@@ -1898,9 +1889,6 @@ class VirtualRuntimeFunction
 		var msignature = mmethoddef.mproperty.intro.msignature.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 		var ret = msignature.return_mtype
 		if ret != null then
-			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
 			sig.append("{ret.ctype} ")
 		else
 			sig.append("void ")

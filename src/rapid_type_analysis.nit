@@ -267,9 +267,7 @@ class RapidTypeAnalysis
 				end
 			end
 
-			if mmeth.is_new then
-				v.add_type(v.receiver)
-			else if mmethoddef.is_intern or mmethoddef.is_extern then
+			if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
