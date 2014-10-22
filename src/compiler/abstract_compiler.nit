@@ -2898,7 +2898,8 @@ end
 redef class ANewExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.recvtype
+		assert mtype != null
 		var recv
 		var ctype = mtype.ctype
 		if mtype.mclass.name == "NativeArray" then

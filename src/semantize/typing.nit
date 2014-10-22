@@ -1680,11 +1680,13 @@ redef class ANewExpr
 	# The constructor invoked by the new.
 	var callsite: nullable CallSite
 
+	# The designated type
+	var recvtype: nullable MClassType
+
 	redef fun accept_typing(v)
 	do
 		var recvtype = v.resolve_mtype(self.n_type)
 		if recvtype == null then return
-		self.mtype = recvtype
 
 		if not recvtype isa MClassType then
 			if recvtype isa MNullableType then
@@ -1704,6 +1706,8 @@ redef class ANewExpr
 			end
 		end
 
+		self.recvtype = recvtype
+
 		var name: String
 		var nid = self.n_id
 		if nid != null then
@@ -1713,6 +1717,13 @@ redef class ANewExpr
 		end
 		var callsite = v.get_method(self, recvtype, name, false)
 		if callsite == null then return
+
+		if not callsite.mproperty.is_new then
+			self.mtype = recvtype
+		else
+			self.mtype = callsite.msignature.return_mtype
+			assert self.mtype != null
+		end
 
 		self.callsite = callsite
 

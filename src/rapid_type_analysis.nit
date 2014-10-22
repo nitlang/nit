@@ -684,7 +684,7 @@ end
 redef class ANewExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.recvtype.as(not null)
 		v.add_type(mtype)
 		v.add_callsite(callsite)
 	end

@@ -1666,7 +1666,7 @@ end
 redef class ANewExpr
 	redef fun expr(v)
 	do
-		var mtype = v.unanchor_type(self.mtype.as(not null))
+		var mtype = v.unanchor_type(self.recvtype.as(not null))
 		var recv: Instance = new MutableInstance(mtype)
 		v.init_instance(recv)
 		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
