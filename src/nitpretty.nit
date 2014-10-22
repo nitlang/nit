@@ -627,12 +627,8 @@ redef class AAnnotation
 	end
 end
 
-redef class ATypeAtArg
+redef class ATypeExpr
 	redef fun accept_pretty_printer(v) do v.visit n_type
-end
-
-redef class AExprAtArg
-	redef fun accept_pretty_printer(v) do v.visit n_expr
 end
 
 # Modules

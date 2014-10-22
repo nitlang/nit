@@ -312,28 +312,6 @@ redef class MClassDef
 	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
 end
 
-redef class Prod
-	# Join the text of all tokens
-	# Used to get the 'real name' of method definitions.
-	fun collect_text: String
-	do
-		var v = new TextCollectorVisitor
-		v.enter_visit(self)
-		assert v.text != ""
-		return v.text
-	end
-end
-
-private class TextCollectorVisitor
-	super Visitor
-	var text: String = ""
-	redef fun visit(n)
-	do
-		if n isa Token then text += n.text
-		n.visit_all(self)
-	end
-end
-
 redef class APropdef
 	# The associated main model entity
 	type MPROPDEF: MPropDef

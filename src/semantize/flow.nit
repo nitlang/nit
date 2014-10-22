@@ -538,7 +538,15 @@ redef class AIsaExpr
 	end
 end
 
-redef class AProxyExpr
+redef class AParExpr
+	redef fun accept_flow_visitor(v)
+	do
+		var after_expr = v.visit_expr(self.n_expr)
+		v.current_flow_context = after_expr
+	end
+end
+
+redef class AOnceExpr
 	redef fun accept_flow_visitor(v)
 	do
 		var after_expr = v.visit_expr(self.n_expr)

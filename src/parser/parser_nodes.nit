@@ -1027,6 +1027,9 @@ class AAttrPropdef
 
 	# The initial value, if any
 	var n_expr: nullable AExpr = null is writable
+
+	var n_block: nullable AExpr = null is writable
+
 	redef fun hot_location
 	do
 		return n_id2.location
@@ -1451,8 +1454,9 @@ end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
-	super AProxyExpr
+	super AExpr
 	var n_kwonce: TKwonce is writable, noinit
+	var n_expr: AExpr is writable, noinit
 end
 
 # A polymorphic invocation of a method
@@ -1859,15 +1863,10 @@ end
 
 # A simple parenthesis. eg `(x)`
 class AParExpr
-	super AProxyExpr
-	var n_opar: TOpar is writable, noinit
-	var n_cpar: TCpar is writable, noinit
-end
-
-# Whatever just contains (and mimic) an other expression
-abstract class AProxyExpr
 	super AExpr
+	var n_opar: TOpar is writable, noinit
 	var n_expr: AExpr is writable, noinit
+	var n_cpar: TCpar is writable, noinit
 end
 
 # A type cast. eg `x.as(T)`
@@ -1905,9 +1904,31 @@ class AVarargExpr
 end
 
 # A list of expression separated with commas (arguments for instance)
-abstract class AExprs
-	super Prod 
+class AManyExpr
+	super AExpr
 	var n_exprs = new ANodes[AExpr](self)
+end
+
+# A special expression that encapsulates a static type
+# Can only be found in special construction like arguments of annotations.
+class ATypeExpr
+	super AExpr
+	var n_type: AType is writable, noinit
+end
+
+# A special expression that encapsulates a method identifier
+# Can only be found in special construction like arguments of annotations.
+class AMethidExpr
+	super AExpr
+	# The receiver, is any
+	var n_expr: AExpr is writable, noinit
+	var n_id: AMethid is writable, noinit
+end
+
+# A special expression that encapsulate an annotation
+# Can only be found in special construction like arguments of annotations.
+class AAtExpr
+	super AExpr
 end
 
 # A special expression to debug types
@@ -1917,6 +1938,12 @@ class ADebugTypeExpr
 	var n_kwtype: TKwtype is writable, noinit
 	var n_expr: AExpr is writable, noinit
 	var n_type: AType is writable, noinit
+end
+
+# A list of expression separated with commas (arguments for instance)
+abstract class AExprs
+	super Prod
+	var n_exprs = new ANodes[AExpr](self)
 end
 
 # A simple list of expressions
@@ -2009,30 +2036,8 @@ class AAnnotation
 	var n_visibility: nullable AVisibility is writable
 	var n_atid: AAtid is writable, noinit
 	var n_opar: nullable TOpar = null is writable
-	var n_args = new ANodes[AAtArg](self)
+	var n_args = new ANodes[AExpr](self)
 	var n_cpar: nullable TCpar = null is writable
-end
-
-# A single argument of an annotation
-abstract class AAtArg
-	super Prod
-end
-
-# A type-like argument of an annotation
-class ATypeAtArg
-	super AAtArg
-	var n_type: AType is writable, noinit
-end
-
-# An expression-like argument of an annotation
-class AExprAtArg
-	super AAtArg
-	var n_expr: AExpr is writable, noinit
-end
-
-# An annotation-like argument of an annotation
-class AAtAtArg
-	super AAtArg
 end
 
 # An annotation name

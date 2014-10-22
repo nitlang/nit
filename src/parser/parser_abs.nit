@@ -328,7 +328,6 @@ class AQualified super Prod end
 class ADoc super Prod end
 class AAnnotations super Prod end
 class AAnnotation super Prod end
-class AAtArg super Prod end
 class AAtid super Prod end
 
 class AModule
@@ -442,6 +441,7 @@ class AAttrPropdef
 	var n_type: nullable AType = null is writable
 	var n_expr: nullable AExpr = null is writable
 	var n_annotations: nullable AAnnotations = null is writable
+	var n_block: nullable AExpr = null is writable
 end
 class AMainMethPropdef
 	super APropdef
@@ -1020,6 +1020,23 @@ class AVarargExpr
 	var n_expr: AExpr is writable, noinit
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
+class ATypeExpr
+	super AExpr
+	var n_type: AType is writable, noinit
+end
+class AMethidExpr
+	super AExpr
+	var n_expr: AExpr is writable, noinit
+	var n_id: AMethid is writable, noinit
+end
+class AAtExpr
+	super AExpr
+	var n_annotations: AAnnotations is writable, noinit
+end
+class AManyExpr
+	super AExpr
+	var n_exprs: List[AExpr] = new List[AExpr]
+end
 class AListExprs
 	super AExprs
 	var n_exprs: List[AExpr] = new List[AExpr]
@@ -1129,21 +1146,9 @@ class AAnnotation
 	var n_visibility: nullable AVisibility = null is writable
 	var n_atid: AAtid is writable, noinit
 	var n_opar: nullable TOpar = null is writable
-	var n_args: List[AAtArg] = new List[AAtArg]
+	var n_args: List[AExpr] = new List[AExpr]
 	var n_cpar: nullable TCpar = null is writable
 	var n_annotations: nullable AAnnotations = null is writable
-end
-class ATypeAtArg
-	super AAtArg
-	var n_type: AType is writable, noinit
-end
-class AExprAtArg
-	super AAtArg
-	var n_expr: AExpr is writable, noinit
-end
-class AAtAtArg
-	super AAtArg
-	var n_annotations: AAnnotations is writable, noinit
 end
 class AIdAtid
 	super AAtid

@@ -11,19 +11,18 @@
         AListExprs 1,11
 --> AStringExpr 1,1--13
   TString "\"hello world\"" 1,1--13
---> ABlockExpr 1,1--15
-  AForExpr 1,1--15
-    TKwfor "for" 1,1--3
-    TId "i" 1,5
-    ACallExpr 1,10
-      AImplicitSelfExpr 1,10
-      TId "x" 1,10
-      AListExprs 1,10
-    TKwdo "do" 1,12--13
-    ACallExpr 1,15
-      AImplicitSelfExpr 1,15
-      TId "p" 1,15
-      AListExprs 1,15
+--> AForExpr 1,1--15
+  TKwfor "for" 1,1--3
+  TId "i" 1,5
+  ACallExpr 1,10
+    AImplicitSelfExpr 1,10
+    TId "x" 1,10
+    AListExprs 1,10
+  TKwdo "do" 1,12--13
+  ACallExpr 1,15
+    AImplicitSelfExpr 1,15
+    TId "p" 1,15
+    AListExprs 1,15
 --> AModule 1,1--12
   ATopClassdef 1,1--12
     AMethPropdef 1,1--12
@@ -36,21 +35,20 @@
         AImplicitSelfExpr 1,12
         TId "z" 1,12
         AListExprs 1,12
---> ... ... ABlockExpr 1,1--3,3
-  AForExpr 1,1--3,3
-    TKwfor "for" 1,1--3
-    TId "i" 1,5
-    ACallExpr 1,10
-      AImplicitSelfExpr 1,10
-      TId "x" 1,10
-      AListExprs 1,10
-    TKwdo "do" 1,12--13
-    ABlockExpr 2,1--3,3
-      ACallExpr 2,1
-        AImplicitSelfExpr 2,1
-        TId "p" 2,1
-        AListExprs 2,1
-      TKwend "end" 3,1--3
+--> ... ... AForExpr 1,1--3,3
+  TKwfor "for" 1,1--3
+  TId "i" 1,5
+  ACallExpr 1,10
+    AImplicitSelfExpr 1,10
+    TId "x" 1,10
+    AListExprs 1,10
+  TKwdo "do" 1,12--13
+  ABlockExpr 2,1--3,3
+    ACallExpr 2,1
+      AImplicitSelfExpr 2,1
+      TId "p" 2,1
+      AListExprs 2,1
+    TKwend "end" 3,1--3
 --> ... ... ... ... AModule 1,1--5,3
   ATopClassdef 1,1--5,3
     AMethPropdef 1,1--5,3
@@ -77,6 +75,6 @@
         TKwend "end" 5,1--3
 --> ... 	[0;31mfun[0m fun fun fu
 	^: Syntax error: unexpected keyword 'fun'.
---> 	[0;31m%[0m$&^*
-	^: Syntax error: unexpected operator '%'.
+--> 	%[0;31m$[0m&^*
+	 ^: Syntax error: unknown token $.
 --> 
