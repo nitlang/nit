@@ -1696,14 +1696,6 @@ redef class ANewExpr
 				v.error(self, "Type error: cannot instantiate the formal type {recvtype}.")
 				return
 			end
-		else
-			if recvtype.mclass.kind == abstract_kind then
-				v.error(self, "Cannot instantiate abstract class {recvtype}.")
-				return
-			else if recvtype.mclass.kind == interface_kind then
-				v.error(self, "Cannot instantiate interface {recvtype}.")
-				return
-			end
 		end
 
 		self.recvtype = recvtype
@@ -1719,6 +1711,13 @@ redef class ANewExpr
 		if callsite == null then return
 
 		if not callsite.mproperty.is_new then
+			if recvtype.mclass.kind == abstract_kind then
+				v.error(self, "Cannot instantiate abstract class {recvtype}.")
+				return
+			else if recvtype.mclass.kind == interface_kind then
+				v.error(self, "Cannot instantiate interface {recvtype}.")
+				return
+			end
 			self.mtype = recvtype
 		else
 			self.mtype = callsite.msignature.return_mtype

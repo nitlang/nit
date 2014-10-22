@@ -226,7 +226,7 @@ class SeparateErasureCompiler
 		var v = self.new_visitor
 
 		var rta = runtime_type_analysis
-		var is_dead = mclass.kind == abstract_kind or mclass.kind == interface_kind
+		var is_dead = false # mclass.kind == abstract_kind or mclass.kind == interface_kind
 		if not is_dead and rta != null and not rta.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray" then
 			is_dead = true
 		end

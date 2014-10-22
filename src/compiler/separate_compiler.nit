@@ -98,7 +98,7 @@ redef class ModelBuilder
 		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
-				if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
+				#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
 				compiler.compile_class_to_c(mclass)
 			end
 		end
