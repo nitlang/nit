@@ -158,6 +158,271 @@ private class Concat
 	end
 end
 
+# Mutable `Rope`, optimized for concatenation operations
+#
+# A `RopeBuffer` is an efficient way of building a `String` when
+# concatenating small strings.
+#
+# It does concatenations in an optimized way by having a
+# mutable part and an immutable part built by efficiently
+# concatenating strings in chain.
+#
+# Every concatenation operation is done by copying a string to
+# the mutable part and flushing it when full.
+#
+# However, when a long string is appended to the `Buffer`,
+# the concatenation is done at it would be in a `Rope`.
+class RopeBuffer
+	super Rope
+	super Buffer
+
+	redef fun chars: Sequence[Char] is cached do return new RopeBufferChars(self)
+
+	# The final string being built on the fly
+	private var str: String is noinit
+
+	# Current concatenation buffer
+	private var ns: NativeString is noinit
+
+	# Next available (e.g. unset) character in the `Buffer`
+	private var rpos = 0
+
+	# Keeps track of the buffer's currently dumped part
+	#
+	# This might happen if for instance, a String was being
+	# built by concatenating small parts of string and suddenly
+	# a long string (length > maxlen) is appended.
+	private var dumped: Int is noinit
+
+	# Length of the complete rope
+	redef var length = 0
+
+	# Length of the mutable part
+	#
+	# Is also used as base to compute the size of the next
+	# mutable native string (`ns`)
+	private var buf_size: Int is noinit
+
+	redef fun substrings: Iterator[String] do return new RopeBufSubstringIterator(self)
+
+	# Builds an empty `RopeBuffer`
+	init do
+		str = ""
+		ns = new NativeString(maxlen)
+		buf_size = maxlen
+		dumped = 0
+	end
+
+	# Builds a new `RopeBuffer` with `str` in it.
+	init from(str: String) do
+		self.str = str
+		ns = new NativeString(maxlen)
+		buf_size = maxlen
+		length = str.length
+		dumped = 0
+	end
+
+	# Resets the informations of the `Buffer`
+	#
+	# This is called when doing in-place modifications
+	# on a previously to_s'd `RopeBuffer`
+	private fun reset do
+		var nns = new NativeString(buf_size)
+		var blen = rpos - dumped
+		ns.copy_to(nns, blen, dumped, 0)
+		dumped = 0
+		rpos = blen
+		written = false
+	end
+
+	redef fun empty do return new RopeBuffer
+
+	redef fun clear do
+		str = ""
+		length = 0
+		rpos = 0
+	end
+
+	redef fun substring(from, count) do
+		var strlen = str.length
+
+		if from < 0 then
+			count += from
+			if count < 0 then count = 0
+			from = 0
+		end
+
+		if count > length then count = length - from
+
+		if count == 0 then return empty
+
+		if from < strlen then
+			var subpos = strlen - from
+			if count <= subpos then
+				return new RopeBuffer.from(str.substring(from, count))
+			else
+				var l = str.substring_from(from)
+				var rem = count - subpos
+				var nns = new NativeString(rem)
+				ns.copy_to(nns, rem, dumped, 0)
+				return new RopeBuffer.from(l + nns.to_s_with_length(rem))
+			end
+		else
+			var nns = new NativeString(count)
+			ns.copy_to(nns, count, dumped, 0)
+			return new RopeBuffer.from(nns.to_s_with_length(count))
+		end
+	end
+
+	redef fun append(s) do
+		var slen = s.length
+		length += slen
+		var rp = rpos
+		if s isa Rope then
+			if rp > 0 and dumped != rp then
+				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
+				dumped = rp
+			end
+			str = str + s
+			return
+		end
+		if slen > maxlen then
+			if rp > 0 and dumped != rp then
+				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
+				dumped = rp
+			end
+			str = str + s
+			return
+		end
+		var remsp = buf_size - rp
+		var sits: NativeString
+		var begin: Int
+		if s isa FlatString then
+			begin = s.index_from
+			sits = s.items
+		else if s isa FlatBuffer then
+			begin = 0
+			sits = s.items
+		else
+			if slen <= remsp then
+				for i in s.chars do
+					ns[rpos] = i
+					rpos += 1
+				end
+			else
+				var spos = 0
+				for i in [0..remsp[ do
+					ns[rpos] = s[spos]
+					rpos += 1
+					spos += 1
+				end
+				dump_buffer
+				while spos < slen do
+					ns[rpos] = s[spos]
+					spos += 1
+					rpos += 1
+				end
+			end
+			return
+		end
+		if slen <= remsp then
+			sits.copy_to(ns, slen, begin, rp)
+			if rp == buf_size then
+				rpos = buf_size
+				dump_buffer
+				rpos = 0
+			else
+				rpos += slen
+			end
+		else
+			sits.copy_to(ns, remsp, begin, rp)
+			rpos = buf_size
+			dump_buffer
+			var nlen = slen - remsp
+			sits.copy_to(ns, nlen, begin + remsp, 0)
+			rpos = nlen
+		end
+	end
+
+	redef fun add(c) do
+		var rp = rpos
+		length += 1
+		ns[rp] = c
+		rp += 1
+		if rp == buf_size then
+			rpos = rp
+			dump_buffer
+			rp = 0
+		end
+		rpos = rp
+	end
+
+	# Converts the Buffer to a FlatString, appends it to
+	# the final String and re-allocates a new larger Buffer.
+	private fun dump_buffer do
+		written = false
+		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		str += nstr
+		var bs = buf_size
+		bs = bs * 2
+		ns = new NativeString(bs)
+		buf_size = bs
+		dumped = 0
+	end
+
+	redef fun output do
+		str.output
+		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
+	end
+
+	# Enlarge is useless here since the `Buffer`
+	# part is automatically dumped when necessary.
+	#
+	# Also, since the buffer can not be overused by a
+	# single string, there is no need for manual
+	# resizing.
+	#
+	# "You have no power here !"
+	redef fun enlarge(i) do end
+
+	redef fun to_s do
+		written = true
+		var nnslen = rpos - dumped
+		if nnslen == 0 then return str
+		return str + new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+	end
+
+	redef fun reverse do
+		str = str.reversed
+		var nns = new NativeString(buf_size)
+		var j = rpos
+		var mits = ns
+		for i in [0 .. rpos[ do
+			nns[i] = mits[j]
+			j -= 1
+		end
+		ns = nns
+	end
+
+	redef fun upper do
+		if written then reset
+		str = str.to_upper
+		var mits = ns
+		for i in [0 .. rpos[ do
+			mits[i] = mits[i].to_upper
+		end
+	end
+
+	redef fun lower do
+		if written then reset
+		str = str.to_lower
+		var mits = ns
+		for i in [0 .. rpos[ do
+			mits[i] = mits[i].to_lower
+		end
+	end
+end
+
 redef class FlatString
 
 	redef fun insert_at(s, pos) do
@@ -388,6 +653,39 @@ private class ReverseRopeSubstrings
 	end
 end
 
+private class RopeBufSubstringIterator
+	super Iterator[String]
+
+	# Iterator on the substrings of the building string
+	var iter: Iterator[String]
+	# Makes a String out of the buffered part of the Ropebuffer
+	var nsstr: String
+	# Did we attain the buffered part ?
+	var nsstr_done = false
+
+	init(str: RopeBuffer) do
+		iter = str.str.substrings
+		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
+		if str.length == 0 then nsstr_done = true
+	end
+
+	redef fun is_ok do return iter.is_ok or not nsstr_done
+
+	redef fun item do
+		assert is_ok
+		if iter.is_ok then return iter.item
+		return nsstr
+	end
+
+	redef fun next do
+		if iter.is_ok then
+			iter.next
+			return
+		end
+		nsstr_done = true
+	end
+end
+
 # Substrings of a Rope (i.e. Postfix iterator on leaves)
 private class RopeSubstrings
 	super IndexedIterator[String]
@@ -498,4 +796,127 @@ private class RopeChars
 
 	redef fun reverse_iterator_from(i) do return new RopeReviter.from(tgt, i)
 
+end
+
+class RopeBufferIter
+	super IndexedIterator[Char]
+
+	var sit: IndexedIterator[Char]
+
+	var ns: NativeString
+
+	var pns: Int
+
+	var maxpos: Int
+
+	redef var index: Int
+
+	init(t: RopeBuffer) do
+		ns = t.ns
+		maxpos = t.rpos
+		sit = t.str.chars.iterator
+		pns = t.dumped
+		index = 0
+	end
+
+	init from(t: RopeBuffer, pos: Int) do
+		ns = t.ns
+		maxpos = t.length
+		sit = t.str.chars.iterator_from(pos)
+		pns = pos - t.str.length
+		index = pos
+	end
+
+	redef fun is_ok do return index < maxpos
+
+	redef fun item do
+		if sit.is_ok then return sit.item
+		return ns[pns]
+	end
+
+	redef fun next do
+		index += 1
+		if sit.is_ok then
+			sit.next
+		else
+			pns += 1
+		end
+	end
+end
+
+class RopeBufferReviter
+	super IndexedIterator[Char]
+
+	var sit: IndexedIterator[Char]
+
+	var ns: NativeString
+
+	var pns: Int
+
+	redef var index: Int
+
+	init(tgt: RopeBuffer) do
+		sit = tgt.str.chars.reverse_iterator
+		pns = tgt.rpos - 1
+		index = tgt.length - 1
+		ns = tgt.ns
+	end
+
+	init from(tgt: RopeBuffer, pos: Int) do
+		sit = tgt.str.chars.reverse_iterator_from(pos - tgt.rpos - tgt.dumped)
+		pns = pos - tgt.str.length
+		index = pos
+		ns = tgt.ns
+	end
+
+	redef fun is_ok do return index > 0
+
+	redef fun item do
+		if pns >= 0 then return ns[pns]
+		return sit.item
+	end
+
+	redef fun next do
+		index -= 1
+		if pns >= 0 then
+			pns -= 1
+		else
+			sit.next
+		end
+	end
+end
+
+# View on the chars of a `RopeBuffer`
+class RopeBufferChars
+	super BufferCharView
+
+	redef type SELFTYPE: RopeBuffer
+
+	redef fun [](i) do
+		if i < target.str.length then
+			return target.str[i]
+		else
+			return target.ns[i - target.str.length]
+		end
+	end
+
+	redef fun []=(i,c) do
+		if i == target.length then target.add c
+		if i < target.str.length then
+			var s = target.str
+			var l = s.substring(0, i)
+			var r = s.substring_from(i + 1)
+			target.str = l + c.to_s + r
+		else
+			target.ns[i - target.str.length] = c
+		end
+	end
+
+	redef fun add(c) do target.add c
+
+	redef fun push(c) do target.add c
+
+	redef fun iterator_from(i) do return new RopeBufferIter.from(target, i)
+
+	redef fun reverse_iterator_from(i) do return new RopeBufferReviter.from(target, i)
 end
