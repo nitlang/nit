@@ -72,7 +72,7 @@ private class TypeVisitor
 			selfvariable.declared_type = mclass.mclass_type
 
 			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and mprop.is_toplevel then
+			if mprop isa MMethod and (mprop.is_toplevel or mprop.is_new) then
 				is_toplevel_context = true
 			end
 		end
