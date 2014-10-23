@@ -603,14 +603,6 @@ class NeoModel
 		end
 		mentities[node] = mprop
 		set_doc(node, mprop)
-		for npropdef in node.in_nodes("DEFINES") do
-			var mpropdef = to_mpropdef(model, npropdef)
-			if npropdef["is_intro"].as(Bool) then
-				mprop.mpropdefs.unshift mpropdef
-			else
-				mprop.mpropdefs.add mpropdef
-			end
-		end
 		return mprop
 	end
 
