@@ -225,6 +225,12 @@ class ModelBuilder
 		for mprop in props do
 			if not mtype.has_mproperty(mmodule, mprop) then continue
 			if not mmodule.is_visible(mprop.intro_mclassdef.mmodule, mprop.visibility) then continue
+
+			# new-factories are invisible outside of the class
+			if mprop isa MMethod and mprop.is_new and (not mtype isa MClassType or mprop.intro_mclassdef.mclass != mtype.mclass) then
+				continue
+			end
+
 			if res == null then
 				res = mprop
 				continue

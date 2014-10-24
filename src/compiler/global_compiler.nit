@@ -412,10 +412,7 @@ class GlobalCompilerVisitor
 
 		var res: nullable RuntimeVariable
 		var ret = m.intro.msignature.return_mtype
-		if m.is_new then
-			ret = args.first.mtype
-			res = self.new_var(ret)
-		else if ret == null then
+		if ret == null then
 			res = null
 		else
 			ret = self.resolve_for(ret, args.first)
@@ -984,9 +981,6 @@ private class CustomizedRuntimeFunction
 		if ret != null then
 			ret = v.resolve_for(ret, selfvar)
 			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
 		else
 			sig.append("void ")
 		end
@@ -1033,9 +1027,6 @@ private class CustomizedRuntimeFunction
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var ret = self.mmethoddef.msignature.return_mtype
-		if self.mmethoddef.mproperty.is_new then
-			ret = recv
-		end
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end

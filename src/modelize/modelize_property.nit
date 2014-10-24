@@ -529,7 +529,7 @@ redef class AMethPropdef
 				name = "init"
 				name_node = n_kwinit
 			else if n_kwnew != null then
-				name = "init"
+				name = "new"
 				name_node = n_kwnew
 			else
 				abort
@@ -631,7 +631,7 @@ redef class AMethPropdef
 				modelbuilder.error(node, "Redef error: {mpropdef} redefines {mpropdef.mproperty.intro} with {param_names.length} parameter(s), {msignature.arity} expected. Signature is {mpropdef}{msignature}")
 				return
 			end
-		else if mpropdef.mproperty.is_init then
+		else if mpropdef.mproperty.is_init and not mpropdef.mproperty.is_new then
 			# FIXME UGLY: inherit signature from a super-constructor
 			for msupertype in mclassdef.supertypes do
 				msupertype = msupertype.anchor_to(mmodule, mclassdef.bound_mtype)
@@ -670,6 +670,9 @@ redef class AMethPropdef
 			if nsig != null then nsig.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
+
+		# In `new`-factories, the return type is by default the classtype.
+		if ret_type == null and mpropdef.mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature

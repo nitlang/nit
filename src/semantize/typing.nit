@@ -72,7 +72,7 @@ private class TypeVisitor
 			selfvariable.declared_type = mclass.mclass_type
 
 			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and mprop.is_toplevel then
+			if mprop isa MMethod and (mprop.is_toplevel or mprop.is_new) then
 				is_toplevel_context = true
 			end
 		end
@@ -272,6 +272,11 @@ private class TypeVisitor
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		if name == "new" and mproperty == null then
+			name = "init"
+			mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		end
+
 		if mproperty == null then
 			#self.modelbuilder.error(node, "Type error: property {name} not found in {unsafe_type} (ie {recvtype})")
 			if recv_is_self then
@@ -1675,11 +1680,13 @@ redef class ANewExpr
 	# The constructor invoked by the new.
 	var callsite: nullable CallSite
 
+	# The designated type
+	var recvtype: nullable MClassType
+
 	redef fun accept_typing(v)
 	do
 		var recvtype = v.resolve_mtype(self.n_type)
 		if recvtype == null then return
-		self.mtype = recvtype
 
 		if not recvtype isa MClassType then
 			if recvtype isa MNullableType then
@@ -1689,25 +1696,31 @@ redef class ANewExpr
 				v.error(self, "Type error: cannot instantiate the formal type {recvtype}.")
 				return
 			end
-		else
-			if recvtype.mclass.kind == abstract_kind then
-				v.error(self, "Cannot instantiate abstract class {recvtype}.")
-				return
-			else if recvtype.mclass.kind == interface_kind then
-				v.error(self, "Cannot instantiate interface {recvtype}.")
-				return
-			end
 		end
+
+		self.recvtype = recvtype
 
 		var name: String
 		var nid = self.n_id
 		if nid != null then
 			name = nid.text
 		else
-			name = "init"
+			name = "new"
 		end
 		var callsite = v.get_method(self, recvtype, name, false)
 		if callsite == null then return
+
+		if not callsite.mproperty.is_new then
+			var kind = recvtype.mclass.kind
+			if kind != concrete_kind then
+				v.error(self, "Cannot instantiate {kind} {recvtype}.")
+				return
+			end
+			self.mtype = recvtype
+		else
+			self.mtype = callsite.msignature.return_mtype
+			assert self.mtype != null
+		end
 
 		self.callsite = callsite
 

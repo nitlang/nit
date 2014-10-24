@@ -289,7 +289,7 @@ class Debugger
 				print "Error, invalid propdef to call at runtime !"
 				return null
 			end
-		else if mproperty.name == "init" then
+		else if mproperty.is_root_init then
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
 			self.parameter_check(nclassdef, mpropdef, args)
 			return nclassdef.call(self, mpropdef, args)

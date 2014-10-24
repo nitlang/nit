@@ -1845,7 +1845,7 @@ redef class MMethodDef
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			return npropdef.can_inline
-		else if self.mproperty.name == "init" then
+		else if self.mproperty.is_root_init then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
 			return true
 		else
@@ -1865,7 +1865,7 @@ redef class MMethodDef
 			self.compile_parameter_check(v, arguments)
 			npropdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
-		else if self.mproperty.name == "init" then
+		else if self.mproperty.is_root_init then
 			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
 			var oldnode = v.current_node
 			v.current_node = nclassdef
@@ -1989,8 +1989,6 @@ redef class AMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
-		else if mpropdef.mproperty.is_new then
-			ret = arguments.first.mcasttype
 		end
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
@@ -2171,7 +2169,7 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				v.ret(v.new_expr("atoi({arguments[0]});", ret.as(not null)))
 				return true
-			else if pname == "init" then
+			else if pname == "new" then
 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end
@@ -2900,7 +2898,8 @@ end
 redef class ANewExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.recvtype
+		assert mtype != null
 		var recv
 		var ctype = mtype.ctype
 		if mtype.mclass.name == "NativeArray" then

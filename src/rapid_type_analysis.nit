@@ -237,7 +237,7 @@ class RapidTypeAnalysis
 
 			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
 				# It is an init for a class?
-				if mmeth.name == "init" then
+				if mmeth.is_root_init then
 					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					assert mmethoddef == nclassdef.mfree_init
 
@@ -267,9 +267,7 @@ class RapidTypeAnalysis
 				end
 			end
 
-			if mmeth.is_new then
-				v.add_type(v.receiver)
-			else if mmethoddef.is_intern or mmethoddef.is_extern then
+			if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
@@ -686,7 +684,7 @@ end
 redef class ANewExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.recvtype.as(not null)
 		v.add_type(mtype)
 		v.add_callsite(callsite)
 	end

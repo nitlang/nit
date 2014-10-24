@@ -345,9 +345,15 @@ redef class AInitPropExternCall
 			return
 		end
 
-		var meth_name = "init"
+		var meth_name = "new"
 		var meth = toolcontext.modelbuilder.try_get_mproperty_by_name2( self,
 			mmodule, mtype, meth_name )
+
+		if meth == null then
+			meth_name = "init"
+			meth = toolcontext.modelbuilder.try_get_mproperty_by_name2( self,
+				mmodule, mtype, meth_name )
+		end
 
 		if meth == null then
 			toolcontext.error(location, "Method {meth_name} not found in {n_type.collect_text}." )
