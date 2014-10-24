@@ -332,6 +332,9 @@ class Worker
 	# Output file directory
 	var out_dir = "/dev/shm/nit_out{rank}" is lazy
 
+	# Directory to store the xml files produced for Jenkins
+	var xml_dir = "~/jenkins_xml/"
+
 	# Output file of the `tests.sh` script
 	var tests_sh_out = "/dev/shm/nit_local_out{rank}" is lazy
 
@@ -402,7 +405,7 @@ class Worker
 					var task = tasks[task_id]
 
 					# Command line to execute test
-					var cmd = "XMLDIR={out_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
+					var cmd = "XMLDIR={xml_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
 						"CCACHE_DIR={ccache_dir} CCACHE_TEMPDIR={ccache_dir} CCACHE_BASEDIR={comp_dir} " +
 						"./tests.sh --compdir {comp_dir} --outdir {out_dir} -o \"--make-flags '-j1'\"" +
 						" --node --engine {task.engine} {nit_copy_dir / "tests" / task.test_program} > {tests_sh_out}"

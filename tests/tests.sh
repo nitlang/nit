@@ -458,6 +458,7 @@ if [ "x$XMLDIR" = "x" ]; then
 	xml="tests-$engine.xml"
 else
 	xml="$XMLDIR/tests-$engine.xml"
+	mkdir -p "$XMLDIR"
 fi
 
 echo >$xml "<testsuites><testsuite>"
