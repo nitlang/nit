@@ -45,6 +45,18 @@ class ClassCompound
 		class_def.name = name
 	end
 
+	redef fun full_name=(full_name: String) do
+		super
+		class_type.full_name = full_name
+		class_def.full_name = full_name
+	end
+
+	redef fun parent_name=(parent_name: String) do
+		super
+		class_type.parent_name = parent_name
+		class_def.parent_name = parent_name
+	end
+
 	redef fun location=(location: nullable Location) do
 		super
 		class_def.location = location
