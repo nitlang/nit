@@ -70,7 +70,7 @@ class FileCompound
 
 		if inner_namespaces.keys.has(name) then
 			m = inner_namespaces[name]
-			m.parent = id
+			if id != "" then m.parent = id
 		else
 			m = new Module(graph)
 			m.full_name = "{name}{ns_separator}{basename}"
