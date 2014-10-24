@@ -24,9 +24,18 @@ fi
 name=$1
 shift
 
+# Detect a working time command
+if env time --quiet -f%U true 2>/dev/null; then
+	TIME="env time --quiet -f%U -o '${name}.t.out'"
+elif env time -f%U true 2>/dev/null; then
+	TIME="env time -f%U -o '${name}.t.out'"
+else
+	TIME=
+fi
+
 # Magic here! This tee and save both stdout and stderr in distinct files without messing with them
 # Time  just get the user time
-/usr/bin/time -f%U --quiet -o "${name}.t.out" "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
+$TIME "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
 res=$?
 
 c=`echo "${name%-*}" | tr "-" "."`
