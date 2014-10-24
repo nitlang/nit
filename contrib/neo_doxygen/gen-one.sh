@@ -27,10 +27,12 @@ NEO_DOXYGEN="${PWD}/bin/neo_doxygen"
 NX="${PWD}/../../bin/nx"
 dir=$1
 
+. sh-lib/errors.sh
+
 echo "$0: Documenting \"${dir##*/}\"..."
 pushd "$dir"
-"$NEO_DOXYGEN" "${dir##*/}" "$dir/doxygen/xml" http://localhost:7474 > neo_doxygen.out \
-&& echo "$0: [done] neo_doxygen" \
-&& "$NX" neo doc "${dir##*/}" \
-&& echo "$0: [done] nx"
+try "$NEO_DOXYGEN" "${dir##*/}" "$dir/doxygen/xml" http://localhost:7474 > neo_doxygen.out
+try echo "$0: [done] neo_doxygen"
+try "$NX" neo doc "${dir##*/}"
+try echo "$0: [done] nx"
 popd
