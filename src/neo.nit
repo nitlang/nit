@@ -81,7 +81,6 @@
 # `MClassDef`
 #
 # * labels: `MClassDef`, `model_name` and `MEntity`.
-# * `is_intro`: Does this definition introduce the class?
 # * `location`: origin of the definition. SEE: `Location.to_s`
 # * `(:MClassDef)-[:BOUNDTYPE]->(:MClassType)`: bounded type associated to the
 # classdef.
@@ -109,7 +108,6 @@
 # * labels: `MPropDef`, `model_name` and `MEntity`. Must also have `MMethodDef`,
 # `MAttributeDef` or `MVirtualTypeDef`, depending on the class of the
 # represented entity.
-# * `is_intro`: Does this definition introduce the property?
 # * `location`: origin of the definition. SEE: `Location.to_s`.
 # * `(:MPropDef)-[:DEFINES]->(:MProperty)`: associated property.
 #
@@ -528,7 +526,6 @@ class NeoModel
 	private fun mclassdef_node(mclassdef: MClassDef): NeoNode do
 		var node = make_node(mclassdef)
 		node.labels.add "MClassDef"
-		node["is_intro"] = mclassdef.is_intro
 		node["location"] = mclassdef.location.to_s
 		node.out_edges.add(new NeoEdge(node, "BOUNDTYPE", to_node(mclassdef.bound_mtype)))
 		node.out_edges.add(new NeoEdge(node, "MCLASS", to_node(mclassdef.mclass)))
@@ -607,14 +604,6 @@ class NeoModel
 		end
 		mentities[node] = mprop
 		set_doc(node, mprop)
-		for npropdef in node.in_nodes("DEFINES") do
-			var mpropdef = to_mpropdef(model, npropdef)
-			if npropdef["is_intro"].as(Bool) then
-				mprop.mpropdefs.unshift mpropdef
-			else
-				mprop.mpropdefs.add mpropdef
-			end
-		end
 		return mprop
 	end
 
@@ -622,7 +611,6 @@ class NeoModel
 	private fun mpropdef_node(mpropdef: MPropDef): NeoNode do
 		var node = make_node(mpropdef)
 		node.labels.add "MPropDef"
-		node["is_intro"] = mpropdef.is_intro
 		node["location"] = mpropdef.location.to_s
 		node.out_edges.add(new NeoEdge(node, "DEFINES", to_node(mpropdef.mproperty)))
 		if mpropdef isa MMethodDef then
