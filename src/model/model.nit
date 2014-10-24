@@ -417,15 +417,11 @@ class MClass
 	# Alias for `name`
 	redef fun to_s do return self.name
 
-	# The definition that introduced the class
-	# Warning: the introduction is the first `MClassDef` object associated
-	# to self.  If self is just created without having any associated
-	# definition, this method will abort
-	fun intro: MClassDef
-	do
-		assert has_a_first_definition: not mclassdefs.is_empty
-		return mclassdefs.first
-	end
+	# The definition that introduces the class.
+	#
+	# Warning: such a definition may not exist in the early life of the object.
+	# In this case, the method will abort.
+	var intro: MClassDef
 
 	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
@@ -523,6 +519,10 @@ class MClassDef
 		self.location = location
 		mmodule.mclassdefs.add(self)
 		mclass.mclassdefs.add(self)
+		if mclass.intro_mmodule == mmodule then
+			assert not isset mclass._intro
+			mclass.intro = self
+		end
 		self.to_s = "{mmodule}#{mclass}"
 	end
 
@@ -1646,11 +1646,11 @@ abstract class MProperty
 	# The other are redefinitions (in refinements and in subclasses)
 	var mpropdefs = new Array[MPROPDEF]
 
-	# The definition that introduced the property
-	# Warning: the introduction is the first `MPropDef` object
-	# associated to self. If self is just created without having any
-	# associated definition, this method will abort
-	fun intro: MPROPDEF do return mpropdefs.first
+	# The definition that introduces the property.
+	#
+	# Warning: such a definition may not exist in the early life of the object.
+	# In this case, the method will abort.
+	var intro: MPROPDEF
 
 	redef fun model do return intro.model
 
@@ -1905,6 +1905,10 @@ abstract class MPropDef
 		self.location = location
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		if mproperty.intro_mclassdef == mclassdef then
+			assert not isset mproperty._intro
+			mproperty.intro = self
+		end
 		self.to_s = "{mclassdef}#{mproperty}"
 	end
 
