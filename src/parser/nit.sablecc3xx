@@ -78,6 +78,7 @@ long_sstr_body = long_sstr_part*;
 extern_code_char
 	= [all - ['`' + '\']]
 	| '\' all
+	| '`' [all - '}']
 	;
 extern_code_body = extern_code_char*;
 
