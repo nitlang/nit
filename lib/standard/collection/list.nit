@@ -18,7 +18,9 @@ import abstract_collection
 # Double linked lists.
 class List[E]
 	super Sequence[E]
+
 # Access
+
 	redef fun [](index) do return get_node(index).item
 
 	redef fun []=(index, item) do get_node(index).item = item
