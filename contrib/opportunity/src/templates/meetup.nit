@@ -82,7 +82,7 @@ class OpportunityMeetupPage
 			ansmap = {};
 			for(i=0;i<ans.length;i++){
 				var curr = ans.eq(i)
-				if(curr[0].innerHTML === "✔"){
+				if(curr[0].innerHTML === "<center>✔</center>"){
 					ansmap[curr.attr('id')] = true
 				}else{
 					ansmap[curr.attr('id')] = false
