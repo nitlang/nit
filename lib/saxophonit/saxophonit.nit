@@ -30,6 +30,38 @@ private import lexer
 #
 # Also note that this XML processor is unable to retrieve a file from an URL
 # (only local paths are supported).
+#
+# Usage example:
+#
+#     # Retrieve all text nodes.
+#     class TextListener
+#     	super ContentHandler
+#     #
+#     	private var buf: Buffer = new FlatBuffer
+#     	private var sp: Bool = false
+#     #
+#     	redef fun characters(str: String) do
+#     		if sp then
+#     			if buf.length > 0 then buf.append(" ")
+#     			sp = false
+#     		end
+#     		buf.append(str)
+#     	end
+#     #
+#     	redef fun ignorable_whitespace(str: String) do
+#     		sp = true
+#     	end
+#     #
+#     	# Return the concatenation of all text nodes.
+#     	redef fun to_s do return buf.to_s
+#     end
+#     #
+#     var text = new TextListener
+#     var reader = new XophonReader
+#     #
+#     reader.content_handler = text
+#     reader.parse(new InputSource.with_stream(new StringIStream("<foo>bar baz <n>42</n>.</foo>")))
+#     assert text.to_s == "bar baz 42."
 class XophonReader
 	super XMLReader
 
