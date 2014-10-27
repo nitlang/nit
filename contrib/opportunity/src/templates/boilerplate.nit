@@ -75,7 +75,7 @@ class OpportunityHeader
 		</div>
 	</div>
 </nav>
-<div class="container-fluid">
+<div class="container">
 """
 	end
 
