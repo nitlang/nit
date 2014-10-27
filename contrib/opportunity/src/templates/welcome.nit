@@ -27,7 +27,7 @@ class OpportunityHomePage
 		<h1 class="text-center">Welcome to opportunity !</h1>
 			</div>
 			<p class="text-center">
-				<p class="text-center">Opportunity is a free (as in free software), easy-to-use, meetup planifier.</p>
+				<p class="text-center">Opportunity is a free (as in free software), easy-to-use, meetup planner.</p>
 				<p class="text-center">You can start using it right now by creating a new Meetup and sharing it with your friends!</p>
 				<p class="text-center">
 				<form action="new_meetup">
