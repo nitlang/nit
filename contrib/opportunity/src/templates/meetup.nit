@@ -156,7 +156,7 @@ redef class Meetup
 		t.add "</tr>"
 		for i in participants(db) do
 			t.add "<tr>"
-			t.add """<td class="opportunity-action" style="color: red;" onclick="remove_people(this)" id="remove_{{{i.id}}}"><center>❌</center></td>"""
+			t.add """<td class="opportunity-action" style="color: red;" onclick="remove_people(this)" id="remove_{{{i.id}}}"><center><button class="btn btn-xs btn-danger" type="button">Remove</button></center></td>"""
 			i.load_answers(db, self)
 			t.add "<td>"
 			t.add i.to_s
@@ -180,7 +180,7 @@ redef class Meetup
 		end
 		t.add """
 <tr id="newrow">
-<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><strong>+</strong></span></center></td>
+<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Add</button></span></center></td>
 	<td><input id="new_name" type="text" placeholder="Your name" class="input-large"></td>
 		"""
 		for i in answers(db) do
