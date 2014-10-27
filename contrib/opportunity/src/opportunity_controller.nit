@@ -46,34 +46,66 @@ class OpportunityWelcome
 		var get = request.get_args
 		var rq = url.split("/")
 		if rq.has("meetup_create") then
-			var mname = request.string_arg("meetup_name")
-			var mdate = request.string_arg("meetup_date")
-			var mplace = request.string_arg("meetup_place")
-			if mname == null or mdate == null or mplace == null then return bad_req
-			var db = new OpportunityDB.open(db_path)
-			var meet = new Meetup(mname, mdate, mplace)
-			if meet == null then
-				db.close
-				return bad_req
-			end
-			meet.commit(db)
+			var ansset = new HashSet[String]
 			var ans_tmp = "answer_"
 			var cnt = 1
 			loop
 				var anss = request.string_arg(ans_tmp + cnt.to_s)
+				cnt += 1
 				if anss == null then break
-				var ans = new Answer(anss)
+				if ansset.has(anss) then continue
+				ansset.add anss
+			end
+
+			var mname = request.string_arg("meetup_name")
+			var mdate = request.string_arg("meetup_date")
+			var mplace = request.string_arg("meetup_place")
+			if mname == null or mdate == null or mplace == null then
+				if mname == null then mname = ""
+				if mdate == null then mdate = ""
+				if mplace == null then mplace = ""
+				var rsp = new HttpResponse(200)
+				var meetpage = new MeetupCreationPage
+				var meet = new Meetup(mname, mdate, mplace)
+				meetpage.ans = ansset
+				meetpage.meet = meet
+				meetpage.error = "Name, Date and Place are mandatory fields."
+				rsp.body = meetpage.write_to_string
+				return rsp
+
+			end
+			var db = new OpportunityDB.open(db_path)
+			var meet = new Meetup(mname, mdate, mplace)
+			if ansset.is_empty then
+				db.close
+				var rsp = new HttpResponse(200)
+				var meetpage = new MeetupCreationPage
+				meetpage.meet = meet
+				meetpage.error = "You need to input at least one answer."
+				rsp.body = meetpage.write_to_string
+				return rsp
+			end
+			if not meet.commit(db) then
+				db.close
+				var meetid = (mname + mdate + mplace).sha1_to_s
+				var rsp = new HttpResponse(200)
+				var meetpage = new MeetupCreationPage
+				meetpage.meet = meet
+				meetpage.ans = ansset
+				meetpage.error = """<p>Could not create Meetup.</p>
+				<p>Hmm, that's embarassing, there already seems to be a Meetup like yours <a href="/?meetup_id={{{meetid}}}">here</a>.</p>
+				<p>If this is not yours, please contact the mainainers of the website, you might have found a bug !</p>"""
+				rsp.body = meetpage.write_to_string
+				return rsp
+			end
+			for v in ansset do
+				var ans = new Answer(v)
 				ans.meetup = meet
 				ans.commit(db)
-				cnt += 1
 			end
 			db.close
 			var rsp = new HttpResponse(200)
-			if meet.id == "" then
-				rsp.body = (new MeetupCreationPage).write_to_string
-			else
-				rsp.body = (new MeetupConfirmation(meet)).write_to_string
-			end
+			rsp.body = (new MeetupConfirmation(meet)).write_to_string
 			return rsp
 		end
 		if rq.has("new_meetup") then
