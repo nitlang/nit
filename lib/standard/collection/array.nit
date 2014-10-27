@@ -370,6 +370,30 @@ class Array[E]
 		end
 		return true
 	end
+
+	# Concatenation of arrays.
+	#
+	# Returns a new array built by concatenating `self` and `other` together.
+	#
+	#     var a1 = [1,2,3]
+	#     var a2 = [4,5,6]
+	#     var a3 = a1 + a2
+	#     assert a3 == [1,2,3,4,5,6]
+	#
+	# Because a new array is always created, future modification on `self` and `other`
+	# does not impact the previously computed result.
+	#
+	#     a1.add(30)
+	#     a2.add(60)
+	#     assert a3      == [1,2,3,4,5,6] # unchanged
+	#     assert a1 + a2 == [1,2,3,30,4,5,6,60]
+	fun +(other: Array[E]): Array[E]
+	do
+		var res = new Array[E].with_capacity(length + other.length)
+		res.append(self)
+		res.append(other)
+		return res
+	end
 end
 
 # An `Iterator` on `AbstractArray`
