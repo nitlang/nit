@@ -73,7 +73,9 @@ class NaiveInterpreter
 		self.mainmodule = mainmodule
 		self.arguments = arguments
 		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
+		init_instance_primitive(self.true_instance)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
+		init_instance_primitive(self.false_instance)
 		self.null_instance = new MutableInstance(mainmodule.model.null_type)
 	end
 
@@ -207,22 +209,28 @@ class NaiveInterpreter
 	# Return the integer instance associated with `val`.
 	fun int_instance(val: Int): Instance
 	do
-		var ic = self.mainmodule.get_primitive_class("Int")
-		return new PrimitiveInstance[Int](ic.mclass_type, val)
+		var ic = get_primitive_class("Int")
+		var instance = new PrimitiveInstance[Int](ic.mclass_type, val)
+		init_instance_primitive(instance)
+		return instance
 	end
 
 	# Return the char instance associated with `val`.
 	fun char_instance(val: Char): Instance
 	do
-		var ic = self.mainmodule.get_primitive_class("Char")
-		return new PrimitiveInstance[Char](ic.mclass_type, val)
+		var ic = get_primitive_class("Char")
+		var instance = new PrimitiveInstance[Char](ic.mclass_type, val)
+		init_instance_primitive(instance)
+		return instance
 	end
 
 	# Return the float instance associated with `val`.
 	fun float_instance(val: Float): Instance
 	do
-		var ic = self.mainmodule.get_primitive_class("Float")
-		return new PrimitiveInstance[Float](ic.mclass_type, val)
+		var ic = get_primitive_class("Float")
+		var instance = new PrimitiveInstance[Float](ic.mclass_type, val)
+		init_instance_primitive(instance)
+		return instance
 	end
 
 	# The unique intance of the `true` value.
@@ -239,8 +247,9 @@ class NaiveInterpreter
 	fun array_instance(values: Array[Instance], elttype: MType): Instance
 	do
 		assert not elttype.need_anchor
-		var nat = new PrimitiveInstance[Array[Instance]](self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype]), values)
-		var mtype = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
+		var nat = new PrimitiveInstance[Array[Instance]](get_primitive_class("NativeArray").get_mtype([elttype]), values)
+		init_instance_primitive(nat)
+		var mtype = get_primitive_class("Array").get_mtype([elttype])
 		var res = new MutableInstance(mtype)
 		self.init_instance(res)
 		self.send(self.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
@@ -252,8 +261,10 @@ class NaiveInterpreter
 	do
 		var val = new FlatBuffer.from(txt)
 		val.add('\0')
-		var ic = self.mainmodule.get_primitive_class("NativeString")
-		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
+		var ic = get_primitive_class("NativeString")
+		var instance = new PrimitiveInstance[Buffer](ic.mclass_type, val)
+		init_instance_primitive(instance)
+		return instance
 	end
 
 	# The current frame used to store local variables of the current method executed
@@ -516,6 +527,16 @@ class NaiveInterpreter
 		for npropdef in collect_attr_propdef(recv.mtype) do
 			npropdef.init_expr(self, recv)
 		end
+	end
+
+	# A hook to initialize a `PrimitiveInstance`
+	fun init_instance_primitive(recv: Instance) do end
+
+	# Return the primitive `MClass` corresponding to the `name` given in parameter
+	# `name` : name of the primitive class
+	fun get_primitive_class(name: String): MClass
+	do
+		return mainmodule.get_primitive_class(name)
 	end
 
 	# This function determine the correct type according the reciever of the current definition (self).
@@ -940,7 +961,9 @@ redef class AMethPropdef
 		else if cname == "NativeArray" then
 			if pname == "init" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
-				return new PrimitiveInstance[Array[Instance]](args[0].mtype, val)
+				var instance = new PrimitiveInstance[Array[Instance]](args[0].mtype, val)
+				v.init_instance_primitive(instance)
+				return instance
 			end
 			var recvval = args.first.val.as(Array[Instance])
 			if pname == "[]" then
@@ -959,17 +982,27 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeFile" then
 			if pname == "native_stdout" then
-				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdout)
+				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdout)
+				v.init_instance_primitive(instance)
+				return instance
 			else if pname == "native_stdin" then
-				return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdin)
+				var instance = new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdin)
+				v.init_instance_primitive(instance)
+				return instance
 			else if pname == "native_stderr" then
-				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stderr)
+				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stderr)
+				v.init_instance_primitive(instance)
+				return instance
 			else if pname == "io_open_read" then
 				var a1 = args[1].val.as(Buffer)
-				return new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))
+				var instance = new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))
+				v.init_instance_primitive(instance)
+				return instance
 			else if pname == "io_open_write" then
 				var a1 = args[1].val.as(Buffer)
-				return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
+				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
+				v.init_instance_primitive(instance)
+				return instance
 			end
 			var recvval = args.first.val
 			if pname == "io_write" then
@@ -990,10 +1023,12 @@ redef class AMethPropdef
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)
 			var mtype: MType
-			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
+			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.get_primitive_class("ArrayCapable"))
 			mtype = mtype.arguments.first
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
-			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
+			var instance = new PrimitiveInstance[Array[Instance]](v.get_primitive_class("NativeArray").get_mtype([mtype]), val)
+			v.init_instance_primitive(instance)
+			return instance
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
@@ -1475,7 +1510,7 @@ redef class ASuperstringExpr
 			if i == null then return null
 			array.add(i)
 		end
-		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
+		var i = v.array_instance(array, v.get_primitive_class("Object").mclass_type)
 		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
 		assert res != null
 		return res
