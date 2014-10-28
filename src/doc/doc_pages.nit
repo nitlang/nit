@@ -324,7 +324,7 @@ abstract class NitdocPage
 
 	# Clickable graphviz image using dot format
 	# return null if no graph for this page
-	fun tpl_graph(dot: FlatBuffer, name: String, title: nullable String): nullable TplArticle do
+	fun tpl_graph(dot: Buffer, name: String, title: nullable String): nullable TplArticle do
 		if ctx.opt_nodot.value then return null
 		var output_dir = ctx.output_dir
 		var file = new OFStream.open("{output_dir}/{name}.dot")
@@ -1009,7 +1009,7 @@ class NitdocModule
 			end
 		end
 		# build graph
-		var op = new FlatBuffer
+		var op = new RopeBuffer
 		var name = "dep_{mmodule.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
@@ -1392,7 +1392,7 @@ class NitdocClass
 			end
 		end
 
-		var op = new FlatBuffer
+		var op = new RopeBuffer
 		var name = "dep_{mclass.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		var classes = poset.to_a
