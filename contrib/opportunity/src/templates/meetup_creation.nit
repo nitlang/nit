@@ -65,11 +65,11 @@ class MeetupCreationPage
 		"""
 		bdy.add """<form action="meetup_create" method="POST" role="form">
 			<div class = "form-group">
-				<label for="meetup_name">Meetup Name : </label>
+				<label for="meetup_name">Meetup Name: </label>
 				<input name="meetup_name" id="meetup_name" type="text" class="form-control" placeholder="Meetup Name" value="{{{if meet != null then meet.name else ""}}}" />
-				<label for="meetup_date">When ? </label>
+				<label for="meetup_date">When? </label>
 				<input name="meetup_date" id="meetup_date" type="text" class="form-control" placeholder="Time of the event" value="{{{if meet != null then meet.date else ""}}}">
-				<label for="meetup=place">Where ? </label>
+				<label for="meetup=place">Where? </label>
 				<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="Place of the event" value="{{{if meet != null then meet.place else ""}}}">
 			</div>
 			<div id="answers" class="form-group">
