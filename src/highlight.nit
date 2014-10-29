@@ -165,9 +165,9 @@ class HighlightVisitor
 		return """
 .nitcode a { color: inherit; cursor:pointer; }
 .nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
-pre.nitcode .foldable { display: block } /* for block productions*/
-pre.nitcode .line{ display: block } /* for lines */
-pre.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
+.nitcode .foldable { display: block } /* for block productions*/
+.nitcode .line{ display: block } /* for lines */
+.nitcode .line:hover{ background-color: #FFFFE0; } /* current line */
 .nitcode :target { background-color: #FFF3C2 } /* target highlight*/
 /* lexical raw tokens. independent of usage or semantic: */
 .nitcode .nc_c { color: gray; font-style: italic; } /* comment */
