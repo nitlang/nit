@@ -152,17 +152,16 @@ redef class Meetup
 </div>
 <table class="table">
 """
-		t.add "<th></th>"
-		t.add "<th>Participating</th>"
+		t.add "<th>Participant name</th>"
 		for i in answers(db) do
-			t.add "<th>"
+			t.add "<th class=\"text-center\">"
 			t.add i.to_s
 			t.add "</th>"
 		end
+		t.add "<th></th>"
 		t.add "</tr>"
 		for i in participants(db) do
 			t.add "<tr>"
-			t.add """<td class="opportunity-action" style="color: red;" onclick="remove_people(this)" id="remove_{{{i.id}}}"><center><button class="btn btn-xs btn-danger" type="button">Remove</button></center></td>"""
 			i.load_answers(db, self)
 			t.add "<td>"
 			t.add i.to_s
@@ -182,16 +181,18 @@ redef class Meetup
 				end
 				t.add "</center></td>"
 			end
+			t.add """<td class="opportunity-action" style="color: red;" onclick="remove_people(this)" id="remove_{{{i.id}}}"><center><button class="btn btn-xs btn-danger" type="button">Remove</button></center></td>"""
 			t.add "</tr>"
 		end
 		t.add """
 <tr id="newrow">
-<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Add</button></span></center></td>
 	<td><input id="new_name" type="text" placeholder="Your name" class="input-large"></td>
 		"""
 		for i in answers(db) do
 			t.add "<td class=\"answer\" id=\"newans_{i.id}\" onclick=\"change_temp_answer(this)\" style=\"color:red;\"><center>✘</center></td>"
 		end
+		t.add """
+	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Done</button></span></center></td>"""
 		t.add "</tr>"
 		t.add "</table>"
 		return t
