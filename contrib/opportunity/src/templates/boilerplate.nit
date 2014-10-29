@@ -59,8 +59,6 @@ class OpportunityHeader
 		}
 		.answer:hover {
 			cursor:pointer;
-			background-color:#0d8921;
-			color:white;
 		}
 		.opportunity-action:hover {
 			cursor:pointer;
@@ -75,7 +73,7 @@ class OpportunityHeader
 		</div>
 	</div>
 </nav>
-<div class="container-fluid">
+<div class="container">
 """
 	end
 

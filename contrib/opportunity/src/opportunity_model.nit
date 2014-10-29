@@ -262,7 +262,7 @@ class Answer
 	#
 	# REQUIRE: is loaded in database
 	fun load_meetup(db: OpportunityDB): Meetup do
-		assert id != null
+		assert id != -1
 		var res = db.select("meetups.* FROM meetups, answers WHERE answers.id={id} AND answers.meetup_id=meetups.id;")
 		for i in res do
 			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s)
