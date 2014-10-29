@@ -60,16 +60,16 @@ class OpportunityWelcome
 			var mname = request.string_arg("meetup_name")
 			var mdate = request.string_arg("meetup_date")
 			var mplace = request.string_arg("meetup_place")
-			if mname == null or mdate == null or mplace == null then
-				if mname == null then mname = ""
-				if mdate == null then mdate = ""
-				if mplace == null then mplace = ""
+			if mdate == null then mdate = ""
+			if mplace == null then mplace = ""
+			if mname == null then
+				mname = ""
 				var rsp = new HttpResponse(200)
 				var meetpage = new MeetupCreationPage
 				var meet = new Meetup(mname, mdate, mplace)
 				meetpage.ans = ansset
 				meetpage.meet = meet
-				meetpage.error = "Name, Date and Place are mandatory fields."
+				meetpage.error = "'Meetup name' is a mandatory fields."
 				rsp.body = meetpage.write_to_string
 				return rsp
 

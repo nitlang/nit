@@ -141,8 +141,14 @@ redef class Meetup
 		t.add """
 <div class="page-header">
 	<center><h1>{{{name}}}</h1></center>
-	<center><h4>When : {{{date}}}</h4></center>
-	<center><h4>Where : {{{place}}}</h4></center>
+"""
+		if not date.is_empty then t.add """
+	<center><h4>When: {{{date}}}</h4></center>"""
+
+		if not place.is_empty then t.add """
+	<center><h4>Where: {{{place}}}</h4></center>"""
+
+		t.add """
 </div>
 <table class="table">
 """
