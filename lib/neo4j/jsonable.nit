@@ -177,11 +177,16 @@ class JsonArray
 
 	redef fun [](key) do return array[key]
 	redef fun []=(key, value) do array[key] = value
-	redef fun add(value) do array.add(value)
 	redef fun clear do array.clear
+	redef fun insert(item, index) do array.insert(item, index)
 	redef fun is_empty do return array.is_empty
 	redef fun iterator do return array.iterator
 	redef fun length do return array.length
+	redef fun pop do return array.pop
+	redef fun push(value) do array.push(value)
+	redef fun remove_at(index) do array.remove_at(index)
+	redef fun shift do return array.shift
+	redef fun unshift(e) do array.unshift(e)
 
 	redef fun to_json do
 		var tpl = new Array[String]
