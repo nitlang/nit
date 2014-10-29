@@ -2351,8 +2351,17 @@ redef class AAttrPropdef
 		assert mtype != null
 
 		var nexpr = self.n_expr
+		var nblock = self.n_block
 		if nexpr != null then
 			value = v.expr(nexpr, mtype)
+		else if nblock != null then
+			value = v.new_var(mtype)
+			frame.returnvar = value
+			frame.returnlabel = v.get_name("RET_LABEL")
+			v.add("\{")
+			v.stmt(nblock)
+			v.add("{frame.returnlabel.as(not null)}:(void)0;")
+			v.add("\}")
 		else
 			abort
 		end

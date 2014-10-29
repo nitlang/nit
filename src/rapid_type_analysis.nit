@@ -349,11 +349,12 @@ class RapidTypeAnalysis
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in nclassdef.n_propdefs do
 				if not npropdef isa AAttrPropdef then continue
-				var nexpr = npropdef.n_expr
-				if nexpr == null then continue
+				if not npropdef.has_value then continue
+
 				var mpropdef = npropdef.mpropdef.as(not null)
 				var v = new RapidTypeVisitor(self, bound_mtype, mpropdef)
-				v.enter_visit(nexpr)
+				v.enter_visit(npropdef.n_expr)
+				v.enter_visit(npropdef.n_block)
 			end
 		end
 

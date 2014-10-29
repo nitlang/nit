@@ -602,6 +602,10 @@ redef class AAttrPropdef
 			var mtype = self.mpropdef.static_mtype
 			v.visit_expr_subtype(nexpr, mtype)
 		end
+		var nblock = self.n_block
+		if nblock != null then
+			v.visit_stmt(nblock)
+		end
 	end
 end
 
@@ -813,7 +817,15 @@ redef class AReturnExpr
 	redef fun accept_typing(v)
 	do
 		var nexpr = self.n_expr
-		var ret_type = v.mpropdef.as(MMethodDef).msignature.return_mtype
+		var ret_type
+		var mpropdef = v.mpropdef
+		if mpropdef isa MMethodDef then
+			ret_type = mpropdef.msignature.return_mtype
+		else if mpropdef isa MAttributeDef then
+			ret_type = mpropdef.static_mtype
+		else
+			abort
+		end
 		if nexpr != null then
 			if ret_type != null then
 				v.visit_expr_subtype(nexpr, ret_type)
