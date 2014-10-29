@@ -369,6 +369,33 @@ abstract class Text
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
+	# Justify a self in a space of `length`
+	#
+	# `left` is the space ratio on the left side.
+	# * 0.0 for left-justified (no space at the left)
+	# * 1.0 for right-justified (all spaces at the left)
+	# * 0.5 for centered (half the spaces at the left)
+	#
+	#     assert "hello".justify(10, 0.0)  == "hello     "
+	#     assert "hello".justify(10, 1.0)  == "     hello"
+	#     assert "hello".justify(10, 0.5)  == "  hello   "
+	#
+	# If `length` is not enough, `self` is returned as is.
+	#
+	#     assert "hello".justify(2, 0.0)   == "hello"
+	#
+	# REQUIRE: left >= 0.0 and left <= 1.0
+	# ENSURE: `self.length <= length implies result.length == length`
+	# ENSURE: `self.length >= length implies result == self
+	fun justify(length: Int, left: Float): SELFTYPE
+	do
+		var diff = length - self.length
+		if diff <= 0 then return self
+		assert left >= 0.0 and left <= 1.0
+		var before = (diff.to_f * left).to_i
+		return " " * before + self + " " * (diff-before)
+	end
+
 	# Mangle a string to be a unique string only made of alphanumeric characters
 	fun to_cmangle: String
 	do
