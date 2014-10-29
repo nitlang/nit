@@ -23,6 +23,7 @@ import privileges
 # Use actions defined by contribs
 import tnitter
 import benitlux_controller
+import opportunity_controller
 
 # Header for the whole site
 class MasterHeader
@@ -132,6 +133,11 @@ default_vh.routes.add new Route("/benitlux/rest/", benitlux_rest)
 default_vh.routes.add new Route("/benitlux/", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
+
+var opportunity = new OpportunityWelcome
+var opportunity_rest = new OpportunityRESTAction
+default_vh.routes.add new Route("/opportunity/rest/", opportunity_rest)
+default_vh.routes.add new Route("/opportunity/", opportunity)
 
 # We use a special file server for the path `xymus.net/ens` only to display
 # a different header.

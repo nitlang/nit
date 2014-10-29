@@ -4,4 +4,4 @@ all:
 
 xymus.net:
 	mkdir -p bin/
-	../../bin/nitg --dir bin/ -I ../../contrib/tnitter/src/ -I ../../contrib/benitlux/src/ src/xymus_net.nit
+	../../bin/nitg --dir bin/ -I ../../contrib/tnitter/src/ -I ../../contrib/benitlux/src/ -I ../../contrib/opportunity/src/ src/xymus_net.nit
