@@ -87,14 +87,13 @@ class OpportunityWelcome
 			end
 			if not meet.commit(db) then
 				db.close
-				var meetid = (mname + mdate + mplace).sha1_to_s
 				var rsp = new HttpResponse(200)
 				var meetpage = new MeetupCreationPage
 				meetpage.meet = meet
 				meetpage.ans = ansset
 				meetpage.error = """<p>Could not create Meetup.</p>
-				<p>Hmm, that's embarassing, there already seems to be a Meetup like yours <a href="/?meetup_id={{{meetid}}}">here</a>.</p>
-				<p>If this is not yours, please contact the mainainers of the website, you might have found a bug !</p>"""
+				<p>Hmm, that's embarassing, the database indicates that your meetup already exists.</p>
+				<p>If this is not a duplicated submission, please contact the mainainers of the website, you might have found a bug !</p>"""
 				rsp.body = meetpage.write_to_string
 				return rsp
 			end
