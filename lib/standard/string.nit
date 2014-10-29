@@ -181,8 +181,25 @@ abstract class Text
 	#
 	#     assert "abcd".has_substring("bc",1)	     ==  true
 	#     assert "abcd".has_substring("bc",2)	     ==  false
+	#
+	# Returns true iff all characters of `str` are presents
+	# at the expected index in `self.`
+	# The first character of `str` being at `pos`, the second
+	# character being at `pos+1` and so on...
+	#
+	# This means that all characters of `str` need to be inside `self`.
+	#
+	#     assert "abcd".has_substring("xab", -1)         == false
+	#     assert "abcd".has_substring("cdx", 2)          == false
+	#
+	# And that the empty string is always a valid substring.
+	#
+	#     assert "abcd".has_substring("", 2)             == true
+	#     assert "abcd".has_substring("", 200)           == true
 	fun has_substring(str: String, pos: Int): Bool
 	do
+		if str.is_empty then return true
+		if pos < 0 or pos + str.length > length then return false
 		var myiter = self.chars.iterator_from(pos)
 		var itsiter = str.chars.iterator
 		while myiter.is_ok and itsiter.is_ok do
