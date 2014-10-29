@@ -139,6 +139,7 @@ redef class Meetup
 	fun to_html(db: OpportunityDB): Streamable do
 		var t = new Template
 		t.add """
+<div class="container">
 <div class="page-header">
 	<center><h1>{{{name}}}</h1></center>
 """
@@ -195,6 +196,7 @@ redef class Meetup
 	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Done</button></span></center></td>"""
 		t.add "</tr>"
 		t.add "</table>"
+		t.add "</div>"
 		return t
 	end
 end

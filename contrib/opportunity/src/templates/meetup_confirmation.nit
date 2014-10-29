@@ -29,6 +29,7 @@ class MeetupConfirmation
 		<div class="page-header">
 			<center><h1>Congratulations !</h1></center>
 		</div>
+		<div class="container">
 		<p class="text-center">
 			<h2> Your meetup was successfully created. </h2>
 			<p>
@@ -38,6 +39,7 @@ class MeetupConfirmation
 			See you soon for more Opportunities !
 			</p>
 		</p>
+		</div>
 		"""
 	end
 
