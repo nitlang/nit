@@ -182,7 +182,9 @@ abstract class Phase
 
 	# Is the phase globally disabled?
 	# A disabled phase is not called automatically called by `ToolContext::run_phases` and cie.
-	var disabled = false
+	#
+	# Warning: disabling a phase may cause subsequent phases to work in a degraded way or to fail.
+	var disabled = false is writable
 
 	# Specific actions to execute on the whole tree of a module
 	# @toimplement
