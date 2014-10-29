@@ -145,6 +145,13 @@ redef class ModelBuilder
 			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
 				if npropdef.noinit then continue # Skip noinit attribute
+				var atautoinit = npropdef.get_single_annotation("autoinit", self)
+				if atautoinit != null then
+					# For autoinit attributes, call the reader to force
+					# the lazy initialization of the attribute.
+					initializers.add(npropdef.mreadpropdef.mproperty)
+					continue
+				end
 				if npropdef.has_value then continue
 				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
@@ -807,9 +814,19 @@ redef class AAttrPropdef
 		end
 
 		var atlazy = self.get_single_annotation("lazy", modelbuilder)
-		if atlazy != null then
+		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
+		if atlazy != null or atautoinit != null then
+			if atlazy != null and atautoinit != null then
+				modelbuilder.error(atlazy, "Error: lazy incompatible with autoinit")
+				return
+			end
 			if not has_value then
-				modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
+				if atlazy != null then
+					modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
+				else if atautoinit != null then
+					modelbuilder.error(atautoinit, "Error: a autoinit attribute needs a value")
+				end
+				return
 			end
 			is_lazy = true
 			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
