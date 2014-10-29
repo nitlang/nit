@@ -144,14 +144,7 @@ redef class ModelBuilder
 			end
 			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
-				var at = npropdef.get_single_annotation("noinit", self)
-				if at != null then
-					npropdef.noinit = true
-					if npropdef.has_value then
-						self.error(at, "Error: `noinit` attributes cannot have an initial value")
-					end
-					continue # Skip noinit attributes
-				end
+				if npropdef.noinit then continue # Skip noinit attribute
 				if npropdef.has_value then continue
 				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
@@ -803,6 +796,15 @@ redef class AAttrPropdef
 		mpropdef.mdoc = mreadpropdef.mdoc
 
 		has_value = n_expr != null or n_block != null
+
+		var atnoinit = self.get_single_annotation("noinit", modelbuilder)
+		if atnoinit != null then
+			noinit = true
+			if has_value then
+				modelbuilder.error(atnoinit, "Error: `noinit` attributes cannot have an initial value")
+				return
+			end
+		end
 
 		var atlazy = self.get_single_annotation("lazy", modelbuilder)
 		if atlazy != null then
