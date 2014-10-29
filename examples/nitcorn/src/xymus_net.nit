@@ -60,6 +60,7 @@ class MasterHeader
         <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
         <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
         <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
+        <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunity</a></li>
         <li><a href="http://nitlanguage.org/">Nit</a></li>
       </ul>
 
@@ -77,6 +78,40 @@ class MasterHeader
 	redef fun to_s do return write_to_string
 end
 
+class OpportunityMasterHeader
+	super OpportunityHeader
+
+	var master_header: MasterHeader
+
+	redef fun rendering
+	do
+		add """
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Opportunity - The meetup planner</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script>
+		{{{page_js}}}
+	</script>
+	<style>
+		.answer:hover {
+			cursor:pointer;
+		}
+		.opportunity-action:hover {
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>"""
+		add master_header
+	end
+end
+
 redef class Tnitter
 	redef var header: String = (new MasterHeader("tnitter", true)).to_s
 end
@@ -87,6 +122,10 @@ end
 
 redef class ErrorTemplate
 	redef var header = new MasterHeader(null, false)
+end
+
+redef class OpportunityPage
+	redef var header = new OpportunityMasterHeader(new MasterHeader("opportunity", false))
 end
 
 # Avoid executing when running tests
