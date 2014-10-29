@@ -39,6 +39,9 @@ private class AutoSuperInitVisitor
 	end
 
 	var has_explicit_super_init: nullable ANode = null
+
+	# The method is broken, so avoid to display additional errors
+	var is_broken = false
 end
 
 
@@ -89,6 +92,7 @@ redef class AMethPropdef
 				if nosuper != null then modelbuilder.error(anode, "Error: method is annotated nosuper but a constructor call is present")
 				return
 			end
+			if v.is_broken then return # skip
 		end
 
 		if nosuper != null then return
@@ -205,8 +209,12 @@ end
 redef class ASendExpr
 	redef fun accept_auto_super_init(v)
 	do
-		var mproperty = self.callsite.mproperty
-		if mproperty.is_init then
+		var callsite = self.callsite
+		if callsite == null then
+			v.is_broken = true
+			return
+		end
+		if callsite.mproperty.is_init then
 			v.has_explicit_super_init = self
 		end
 	end
