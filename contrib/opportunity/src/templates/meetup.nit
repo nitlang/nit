@@ -35,7 +35,10 @@ class OpportunityMeetupPage
 
 	init do
 		header.page_js = """
-		function change_answer(ele){
+		function change_answer(ele, id){
+			// modify only the currently selected entry
+			if (in_modification_id != id) return;
+
 			var e = document.getElementById(ele.id);
 			var i = e.innerHTML;
 			var ans = true;
@@ -107,7 +110,7 @@ class OpportunityMeetupPage
 		function remove_people(ele){
 			var arr = ele.id.split("_")
 			var pid = arr[1]
-			$('#' + ele.id).parent().remove();
+			$('#' + ele.id).parent().parent().parent().remove();
 			$.ajax({
 				type: "POST",
 				url: "./rest/people",
@@ -117,9 +120,31 @@ class OpportunityMeetupPage
 				}
 			});
 		}
+
+		// ID of line currently open for modification
+		var in_modification_id = null;
+		function modify_people(ele, id){
+			if (in_modification_id != null) {
+				// reset to normal values
+				$('#modify_'+in_modification_id).text("Modify or delete");
+				$('#modify_'+in_modification_id).attr("class", "btn btn-xs btn-warning");
+				$('#line_'+in_modification_id).css("background-color", "");
+				$('#delete_'+in_modification_id).css("display", "none");
+			}
+			if (in_modification_id != id) {
+				// activate modifiable mode
+				$('#modify_'+id).text("Done");
+				$('#modify_'+id).attr("class", "btn btn-xs btn-success");
+				$('#line_'+id).css("background-color", "LightYellow");
+				$('#delete_'+id).show();
+
+				in_modification_id = id;
+			} else {
+				in_modification_id = null;
+			}
+		}
 		"""
 	end
-
 
 	redef fun rendering do
 		if meetup == null then
@@ -162,19 +187,19 @@ redef class Meetup
 		t.add "<th></th>"
 		t.add "</tr>"
 		for i in participants(db) do
-			t.add "<tr>"
 			i.load_answers(db, self)
+			t.add "<tr id=\"line_{i.id}\">"
 			t.add "<td>"
 			t.add i.to_s
 			t.add "</td>"
 			for j,k in i.answers do
-				t.add """<td class="answer" onclick="change_answer(this)" id="answer_{{{j.id}}}_{{{i.id}}}""""
+				var color
 				if k then
-					t.add " style=\"color:green;\""
-				else
-					t.add " style=\"color:red;\""
-				end
-				t.add"><center>"
+					color = "green"
+				else color = "red"
+
+				t.add """<td class="answer" onclick="change_answer(this, {{{i.id}}})" id="answer_{{{j.id}}}_{{{i.id}}}" style="color:{{{color}}}">"""
+				t.add "<center>"
 				if k then
 					t.add "✔"
 				else
@@ -182,11 +207,12 @@ redef class Meetup
 				end
 				t.add "</center></td>"
 			end
-			t.add """<td class="opportunity-action" style="color: red;" onclick="remove_people(this)" id="remove_{{{i.id}}}"><center><button class="btn btn-xs btn-danger" type="button">Remove</button></center></td>"""
+			t.add """<td class="opportunity-action"><center><button class="btn btn-xs btn-warning" type="button" onclick="modify_people(this, {{{i.id}}})" id="modify_{{{i.id}}}">Modify or delete</button>&nbsp;"""
+			t.add """<button class="btn btn-xs btn-danger" type="button" onclick="remove_people(this)" id="delete_{{{i.id}}}" style="display: none;">Delete</button></center></td>"""
 			t.add "</tr>"
 		end
 		t.add """
-<tr id="newrow">
+<tr id="newrow" style="background-color: LightYellow">
 	<td><input id="new_name" type="text" placeholder="Your name" class="input-large"></td>
 		"""
 		for i in answers(db) do
