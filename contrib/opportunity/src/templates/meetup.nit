@@ -52,7 +52,7 @@ class OpportunityMeetupPage
 			var aid = a[2]
 			$.ajax({
 				type: "POST",
-				url: "/rest/answer",
+				url: "./rest/answer",
 				data: {
 					answer_id: aid,
 					pers_id: pid,
@@ -90,7 +90,7 @@ class OpportunityMeetupPage
 			}
 			$.ajax({
 				type: "POST",
-				url: "/rest/meetup/new_pers",
+				url: "./rest/meetup/new_pers",
 				data: {
 					meetup_id: mid,
 					persname: pname,
@@ -110,7 +110,7 @@ class OpportunityMeetupPage
 			$('#' + ele.id).parent().remove();
 			$.ajax({
 				type: "POST",
-				url: "/rest/people",
+				url: "./rest/people",
 				data: {
 					method: "DELETE",
 					p_id: pid
