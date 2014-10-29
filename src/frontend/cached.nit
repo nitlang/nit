@@ -22,6 +22,7 @@ import modelize
 private import parser_util
 import simple_misc_analysis
 private import annotation
+intrude import modelize::modelize_property
 
 redef class ToolContext
 	var cached_phase: Phase = new CachedPhase(self, [modelize_property_phase])
@@ -142,6 +143,10 @@ private class CachedPhase
 		var nclassdef = toolcontext.modelbuilder.mclassdef2nclassdef[mclassdef]
 		# Sanity checks
 		assert nclassdef.mclassdef == mclassdef
+
+		if n isa AAttrPropdef then
+			n.has_value = n.n_expr != null or n.n_block != null
+		end
 
 		# Required so that propdef are visited in visitors
 		if not nclassdef.n_propdefs.has(n) then nclassdef.n_propdefs.add(n)

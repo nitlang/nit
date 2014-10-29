@@ -147,12 +147,12 @@ redef class ModelBuilder
 				var at = npropdef.get_single_annotation("noinit", self)
 				if at != null then
 					npropdef.noinit = true
-					if npropdef.n_expr != null then
+					if npropdef.has_value then
 						self.error(at, "Error: `noinit` attributes cannot have an initial value")
 					end
 					continue # Skip noinit attributes
 				end
-				if npropdef.n_expr != null then continue
+				if npropdef.has_value then continue
 				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
 				if ret_type == null then return
@@ -746,6 +746,10 @@ redef class AAttrPropdef
 	# Is the node tagged lazy?
 	var is_lazy = false
 
+	# Has the node a default value?
+	# Could be through `n_expr` or `n_block`
+	var has_value = false
+
 	# The guard associated to a lazy attribute.
 	# Because some engines does not have a working `isset`,
 	# this additional attribute is used to guard the lazy initialization.
@@ -798,9 +802,11 @@ redef class AAttrPropdef
 		set_doc(mreadpropdef, modelbuilder)
 		mpropdef.mdoc = mreadpropdef.mdoc
 
+		has_value = n_expr != null or n_block != null
+
 		var atlazy = self.get_single_annotation("lazy", modelbuilder)
 		if atlazy != null then
-			if n_expr == null then
+			if not has_value then
 				modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
 			end
 			is_lazy = true
@@ -811,7 +817,7 @@ redef class AAttrPropdef
 
 		var atreadonly = self.get_single_annotation("readonly", modelbuilder)
 		if atreadonly != null then
-			if n_expr == null then
+			if not has_value then
 				modelbuilder.error(atreadonly, "Error: a readonly attribute needs a value")
 			end
 			# No setter, so just leave
