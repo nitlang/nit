@@ -40,6 +40,8 @@ redef class ToolContext
 	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
 	# --max-c-lines
 	var opt_max_c_lines = new OptionInt("Maximum number of lines in generated C files. Use 0 for unlimited", 10000, "--max-c-lines")
+	# --group-c-files
+	var opt_group_c_files = new OptionBool("Group all generated code in the same series of files", "--group-c-files")
 	# --compile-dir
 	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
@@ -78,7 +80,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
-		self.option_context.add_option(self.opt_max_c_lines)
+		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
 	end
 
 	redef fun process_options(args)
@@ -480,6 +482,13 @@ abstract class AbstractCompiler
 	# The point is to avoid contamination between must-be-compiled-separately files
 	fun new_file(name: String): CodeFile
 	do
+		if modelbuilder.toolcontext.opt_group_c_files.value then
+			if self.files.is_empty then
+				var f = new CodeFile(mainmodule.name)
+				self.files.add(f)
+			end
+			return self.files.first
+		end
 		var f = new CodeFile(name)
 		self.files.add(f)
 		return f
