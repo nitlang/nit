@@ -253,10 +253,39 @@ class MakefileToolchain
 
 		for f in compiler.files do
 			var i = 0
-			var hfile: nullable OFStream = null
 			var count = 0
+			var file: nullable OFStream = null
+			for vis in f.writers do
+				if vis == compiler.header then continue
+				var total_lines = vis.lines.length + vis.decl_lines.length
+				if total_lines == 0 then continue
+				count += total_lines
+				if file == null or count > 10000  then
+					i += 1
+					if file != null then file.close
+					var cfilename = "{f.name}.{i}.c"
+					var cfilepath = "{compile_dir}/{cfilename}"
+					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
+					cfiles.add(cfilename)
+					file = new OFStream.open(cfilepath)
+					file.write "#include \"{f.name}.0.h\"\n"
+					count = total_lines
+				end
+				for l in vis.decl_lines do
+					file.write l
+					file.write "\n"
+				end
+				for l in vis.lines do
+					file.write l
+					file.write "\n"
+				end
+			end
+			if file == null then continue
+			file.close
+
 			var cfilename = "{f.name}.0.h"
 			var cfilepath = "{compile_dir}/{cfilename}"
+			var hfile: nullable OFStream = null
 			hfile = new OFStream.open(cfilepath)
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
@@ -273,33 +302,6 @@ class MakefileToolchain
 				hfile.write "\n"
 			end
 			hfile.close
-			var file: nullable OFStream = null
-			for vis in f.writers do
-				if vis == compiler.header then continue
-				var total_lines = vis.lines.length + vis.decl_lines.length
-				if total_lines == 0 then continue
-				count += total_lines
-				if file == null or count > 10000  then
-					i += 1
-					if file != null then file.close
-					cfilename = "{f.name}.{i}.c"
-					cfilepath = "{compile_dir}/{cfilename}"
-					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
-					cfiles.add(cfilename)
-					file = new OFStream.open(cfilepath)
-					file.write "#include \"{f.name}.0.h\"\n"
-					count = total_lines
-				end
-				for l in vis.decl_lines do
-					file.write l
-					file.write "\n"
-				end
-				for l in vis.lines do
-					file.write l
-					file.write "\n"
-				end
-			end
-			if file != null then file.close
 		end
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
