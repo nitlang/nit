@@ -80,6 +80,11 @@ class ClassCompound
 		class_def.declare_member(member)
 	end
 
+	# Append the specified type parameter.
+	fun add_type_parameter(parameter: TypeParameter) do
+		class_type.arguments.add(parameter)
+	end
+
 	redef fun put_in_graph do
 		super
 		class_type.put_in_graph
@@ -176,6 +181,7 @@ class ClassType
 	# You may use this attribute or `class_compound` to specify the class.
 	var class_compound_id: String = "" is writable
 
+	# The type arguments or the type parameters.
 	var arguments = new Array[TypeEntity]
 
 	init do
@@ -184,7 +190,7 @@ class ClassType
 	end
 
 	# Return the number of arguments.
-	fun arity: Int do return 0 # TODO
+	fun arity: Int do return arguments.length
 
 	fun is_generic: Bool do return arity > 0
 

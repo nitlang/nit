@@ -120,3 +120,10 @@ abstract class ParamListener[T: Parameter]
 		end
 	end
 end
+
+# Processes the content of a `<param>` element in a `<templateparamlist>` element.
+class TypeParamListener
+	super ParamListener[TypeParameter]
+
+	redef fun create_parameter do return new TypeParameter(graph)
+end

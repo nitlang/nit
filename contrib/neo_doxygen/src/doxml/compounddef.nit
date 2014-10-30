@@ -24,6 +24,7 @@ class CompoundDefListener
 
 	var compound: Compound is writable, noinit
 	private var memberdef: MemberDefListener is noinit
+	private var param_listener: TypeParamListener is noinit
 
 	# Default attributes for members in the current section.
 	private var member_defaults: MemberDefaults is noinit
@@ -44,6 +45,7 @@ class CompoundDefListener
 		var defaults = new MemberDefaults("public", false, false)
 
 		memberdef = new MemberDefListener(reader, self)
+		param_listener = new TypeParamListener(reader, self)
 
 		member_defaults = defaults
 		section_kinds = new DefaultMap[String, MemberDefaults](defaults)
@@ -107,7 +109,9 @@ class CompoundDefListener
 			if member_defaults.is_special then
 				super # TODO
 			end
-		else
+		else if "param" == local_name then
+			param_listener.listen_until(dox_uri, local_name)
+		else if "templateparamlist" != local_name then
 			super
 		end
 	end
@@ -125,6 +129,8 @@ class CompoundDefListener
 			end
 		else if local_name == "basecompoundref" then
 			compound.declare_super(refid, text.to_s, prot, virt)
+		else if "param" == local_name and compound isa ClassCompound then
+			compound.as(ClassCompound).add_type_parameter(param_listener.parameter)
 		else
 			super
 		end
