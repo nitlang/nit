@@ -157,17 +157,20 @@ class MakefileToolchain
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
+	# The clib directory of Nit
+	# Used to found some common runtime
+	var clib: String is noinit
+
 	protected fun gather_cc_paths
 	do
 		# Look for the the Nit clib path
 		var path_env = toolcontext.nit_dir
 		if path_env != null then
 			var libname = "{path_env}/clib"
-			if libname.file_exists then cc_paths.add(libname)
-		end
-
-		if cc_paths.is_empty then
-			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+			if not libname.file_exists then
+				toolcontext.fatal_error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+			end
+			clib = libname
 		end
 
 		# Add user defined cc_paths
@@ -226,8 +229,8 @@ class MakefileToolchain
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
-		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
-		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
+		compiler.files_to_copy.add "{clib}/gc_chooser.c"
+		compiler.files_to_copy.add "{clib}/gc_chooser.h"
 
 		# FFI
 		for m in compiler.mainmodule.in_importation.greaters do
