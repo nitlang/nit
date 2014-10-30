@@ -3,7 +3,6 @@ parser.nit		-diff
 parser_prod.nit		-diff
 lexer.nit		-diff
 tables_nit.c		-diff
-c_src/**/*.[ch]		-diff
-c_src/Makefile		-diff
+c_src/**		-diff
 
 tests/sav/**/*.res	-whitespace
