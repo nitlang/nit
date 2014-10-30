@@ -1,26 +1,9 @@
-#!/bin/bash
-cd ..
-out=c_src
-rm -r "$out/" 2> /dev/null
-set -e
-set -x
-src/nitg src/nith.nit --semi-global -v "$@" --compile-dir "$out" -o "$out/nitg" --no-cc
-cp "$out/nith.mk" "$out/Makefile"
-sed -i -e "s#../$out/##g" "$out/Makefile"
+#!/bin/sh
 
-# Copy all direct dependencies
-for f in `grep -h -o '[^ ]*/[^ /]*\.c' "$out/Makefile" | sort -u`; do
-	cp "$out/$f" "$out/"
-	cp "$out/${f%c}h" "$out/"
-done
-for f in `grep -h -o '\.\..*\.h' "$out"/*.[ch] | sort -u`; do
-	cp "$out/$f" "$out/"
-done
+# Regeneration of c_src from the current nitg
 
-# Update references in file
-perl -i -npe 's#"\.\./.*?([^/]*.h)"#"\1"#' "$out"/*.[ch]
-perl -i -npe 's#\S*/([^/]*.[ch])#\1#' "$out/Makefile"
-perl -i -npe 's#\.\./clib#.#' "$out/Makefile"
+rm -r ../c_src
+./nitg nith.nit --semi-global --compile-dir ../c_src --output ../c_src/nitg --no-cc
 
 # Remove old compilation flags
-sed -i -e 's/OLDNITCOPT=.*/OLDNITCOPT=/' src/Makefile
+sed -i -e 's/OLDNITCOPT=.*/OLDNITCOPT=/' Makefile
