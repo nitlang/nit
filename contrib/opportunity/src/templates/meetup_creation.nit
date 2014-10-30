@@ -26,23 +26,25 @@ class MeetupCreationPage
 
 	var ans: Set[String] = new HashSet[String] is writable
 
+	# Minimum number of input fields for answer
+	var min_answer_fields = 5
+
 	init do
 		header.page_js = """
 """
 	end
 
 	redef fun rendering do
-		var n_answers = ans.length + 1
-		if n_answers == 1 then n_answers = 2
+		var n_answers = ans.length
 
 		header.page_js = """
-var nb_answers = {{{n_answers}}};
+var nb_answers = {{{n_answers.max(min_answer_fields)}}};
 
 function new_answer(sender){
 	var ansdiv = $('#answers')
 
-	var nb = nb_answers
 	nb_answers += 1
+	var nb = nb_answers
 
 	ansdiv.append('<div class="form-group">' +
 		'<label for="answer_' + nb + '" class="col-sm-4 control-label">' + nb + '</label>' +
@@ -95,23 +97,32 @@ function new_answer(sender){
 <div id="answers">
 """
 
-		if ans.is_empty then
+		var cnt = 1
+		for v in ans do
 			bdy.add """
-<div class="form-group">
-	<label for="answer_1" class="col-sm-4 control-label">1</label>
-	<div class="col-sm-8">
-		<input name="answer_1" id="answer_1" type="text" class="form-control" placeholder="First opportunity">
-	</div>
-</div>
-"""
-		else
-			var cnt = 1
-			for v in ans do
-				bdy.add """
 <div class="form-group">
 	<label for="answer_{{{cnt}}}" class="col-sm-4 control-label">{{{cnt}}}</label>
 	<div class="col-sm-8">
 		<input name="answer_{{{cnt}}}" id="answer_{{{cnt}}}" type="text" class="form-control" value="{{{v}}}"/>
+	</div>
+</div>
+"""
+			cnt += 1
+		end
+
+		var empties_to_show = min_answer_fields - ans.length
+		if empties_to_show > 0 then
+			for e in [0..empties_to_show[ do
+				var placeholder
+				if cnt == 1 then
+					placeholder = "First opportunity"
+				else placeholder = "Another opportunity"
+
+				bdy.add """
+<div class="form-group">
+	<label for="answer_{{{cnt}}}" class="col-sm-4 control-label">{{{cnt}}}</label>
+	<div class="col-sm-8">
+		<input name="answer_{{{cnt}}}" id="answer_{{{cnt}}}" type="text" class="form-control" placeholder="{{{placeholder}}}"/>
 	</div>
 </div>
 """
