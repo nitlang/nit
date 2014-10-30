@@ -429,6 +429,8 @@ class MakefileToolchain
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
+
+		makepath.file_copy_to "{compile_dir}/Makefile"
 	end
 
 	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
