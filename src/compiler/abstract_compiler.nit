@@ -342,8 +342,7 @@ class MakefileToolchain
 
 		var outname = outfile(mainmodule)
 
-		var orig_dir = compile_dir.relpath(".")
-		var outpath = orig_dir.join_path(outname).simplify_path
+		var outpath = compile_dir.relpath(outname)
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
