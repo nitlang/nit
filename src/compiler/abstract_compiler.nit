@@ -38,6 +38,8 @@ redef class ToolContext
 	var opt_cc_path = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
+	# --max-c-lines
+	var opt_max_c_lines = new OptionInt("Maximum number of lines in generated C files. Use 0 for unlimited", 10000, "--max-c-lines")
 	# --compile-dir
 	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
@@ -76,6 +78,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
+		self.option_context.add_option(self.opt_max_c_lines)
 	end
 
 	redef fun process_options(args)
@@ -251,6 +254,7 @@ class MakefileToolchain
 		end
 		h.close
 
+		var max_c_lines = toolcontext.opt_max_c_lines.value
 		for f in compiler.files do
 			var i = 0
 			var count = 0
@@ -260,7 +264,7 @@ class MakefileToolchain
 				var total_lines = vis.lines.length + vis.decl_lines.length
 				if total_lines == 0 then continue
 				count += total_lines
-				if file == null or count > 10000  then
+				if file == null or (count > max_c_lines and max_c_lines > 0) then
 					i += 1
 					if file != null then file.close
 					var cfilename = "{f.name}.{i}.c"
