@@ -115,9 +115,8 @@ class Neo4jClient
 	init(base_url: String) do
 		self.base_url = base_url
 		var root = service_root
-		if not root isa JsonObject then
-			print "Neo4jClientError: cannot connect to server at {base_url}"
-			abort
+		assert root isa JsonObject else
+			sys.stderr.write "Neo4jClientError: cannot connect to server at <{base_url}>.\n"
 		end
 		self.node_url = root["node"].to_s
 		self.batch_url = root["batch"].to_s
