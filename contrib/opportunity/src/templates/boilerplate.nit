@@ -69,7 +69,7 @@ class OpportunityHeader
 <nav class="menu" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/" >Opportunity</a>
+			<a class="navbar-brand" href="./" >Opportunity</a>
 		</div>
 	</div>
 </nav>

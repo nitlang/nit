@@ -223,7 +223,8 @@ class Meetup
 
 	redef fun commit(db) do
 		if id == "" then
-			var tmpid = (name + date + place).sha1_to_s
+			var time = get_time
+			var tmpid = (name + date + place + time.to_s).sha1_to_s
 			if not db.execute("INSERT INTO meetups (id, name, date, place) VALUES({tmpid.to_sql_string}, {name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string});") then
 				print "Error recording entry Meetup {self}"
 				print db.error or else "Null error"

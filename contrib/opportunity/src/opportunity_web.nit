@@ -22,7 +22,7 @@ import privileges
 # Avoids a crash when running automatic tests
 if "NIT_TESTING".environ == "true" then exit 0
 
-var iface = "localhost:80"
+var iface = "localhost:8080"
 
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new OpportunityRESTAction)

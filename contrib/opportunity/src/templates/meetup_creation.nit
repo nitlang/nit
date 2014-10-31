@@ -26,27 +26,38 @@ class MeetupCreationPage
 
 	var ans: Set[String] = new HashSet[String] is writable
 
+	# Minimum number of input fields for answer
+	var min_answer_fields = 5
+
 	init do
 		header.page_js = """
-			function new_answer(sender){
-				var ansdiv = $('#answers');
-				var nb = ansdiv.children()
-				var s = nb.last();
-				var ss = s.attr("id").split('_');
-				var l = ss[ss.length - 1];
-				nb = parseInt(l) + 1;
-				var ch = ansdiv.children();
-				ch.last().after('<input name="answer_' + nb + '" id="answer_' + nb + '" class="form-control" type="text" placeholder="Answer">')
-				ch.last().after('<label for="answer_' + nb + '">' + nb + '</label>');
-			}
-		"""
-
+"""
 	end
 
 	redef fun rendering do
+		var n_answers = ans.length
+
+		header.page_js = """
+var nb_answers = {{{n_answers.max(min_answer_fields)}}};
+
+function new_answer(sender){
+	var ansdiv = $('#answers')
+
+	nb_answers += 1
+	var nb = nb_answers
+
+	ansdiv.append('<div class="form-group">' +
+		'<label for="answer_' + nb + '" class="col-sm-4 control-label">' + nb + '</label>' +
+		'<div class="col-sm-8">' +
+			'<input name="answer_' + nb + '" id="answer_' + nb + '" class="form-control" type="text" placeholder="Another opportunity">' +
+		'</div></div>')
+}
+"""
+
 		# Do stuff with body before rendering
 		var bdy = new Template
 
+		bdy.add "<div class=\"container\">"
 		bdy.add "<center>"
 
 		if error != null then
@@ -60,45 +71,74 @@ class MeetupCreationPage
 
 		bdy.add """
 		<div class="page-header">
-			<center><h1>New meetup</h1></center>
+			<center><h1>Create a meetup</h1></center>
 		</div>
 		"""
-		bdy.add """<form action="meetup_create" method="POST" role="form">
+		bdy.add """<form class="form-horizontal" action="meetup_create" method="POST" role="form">
 			<div class = "form-group">
-				<label for="meetup_name">Meetup Name: </label>
-				<input name="meetup_name" id="meetup_name" type="text" class="form-control" placeholder="Meetup Name" value="{{{if meet != null then meet.name else ""}}}" />
-				<label for="meetup_date">When? </label>
-				<input name="meetup_date" id="meetup_date" type="text" class="form-control" placeholder="Time of the event" value="{{{if meet != null then meet.date else ""}}}">
-				<label for="meetup=place">Where? </label>
-				<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="Place of the event" value="{{{if meet != null then meet.place else ""}}}">
+				<label for="meetup_name" class="col-sm-4 control-label">Meetup name</label>
+				<div class="col-sm-8">
+					<input name="meetup_name" id="meetup_name" type="text" class="form-control" placeholder="My Event" value="{{{if meet != null then meet.name else ""}}}" />
+				</div>
 			</div>
-			<div id="answers" class="form-group">
-				<h2>Answers</h2>
+			<div class = "form-group">
+				<label for="meetup_date" class="col-sm-4 control-label">When?</label>
+				<div class="col-sm-8">
+					<input name="meetup_date" id="meetup_date" type="text" class="form-control" placeholder="Time of the event" value="{{{if meet != null then meet.date else ""}}}">
+				</div>
+			</div>
+			<div class = "form-group">
+				<label for="meetup=place" class="col-sm-4 control-label">Where?</label>
+				<div class="col-sm-8">
+					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="Place of the event" value="{{{if meet != null then meet.place else ""}}}">
+				</div>
+			</div>
+				<h2>Opportunities</h2>
+<div id="answers">
 """
 
-		if ans.is_empty then
-			bdy.add """<label for="answer_1">1</label>
-				<input name="answer_1" id="answer_1" type="text" class="form-control" placeholder="Answer">"""
-		else
-			var cnt = 1
-			for v in ans do
+		var cnt = 1
+		for v in ans do
+			bdy.add """
+<div class="form-group">
+	<label for="answer_{{{cnt}}}" class="col-sm-4 control-label">{{{cnt}}}</label>
+	<div class="col-sm-8">
+		<input name="answer_{{{cnt}}}" id="answer_{{{cnt}}}" type="text" class="form-control" value="{{{v}}}"/>
+	</div>
+</div>
+"""
+			cnt += 1
+		end
+
+		var empties_to_show = min_answer_fields - ans.length
+		if empties_to_show > 0 then
+			for e in [0..empties_to_show[ do
+				var placeholder
+				if cnt == 1 then
+					placeholder = "First opportunity"
+				else placeholder = "Another opportunity"
+
 				bdy.add """
-				<label for="answer_{{{cnt}}}">{{{cnt}}}</label>
-				<input name="answer_{{{cnt}}}" id="answer_{{{cnt}}}" type="text" class="form-control" value="{{{v}}}"/>
-				"""
+<div class="form-group">
+	<label for="answer_{{{cnt}}}" class="col-sm-4 control-label">{{{cnt}}}</label>
+	<div class="col-sm-8">
+		<input name="answer_{{{cnt}}}" id="answer_{{{cnt}}}" type="text" class="form-control" placeholder="{{{placeholder}}}"/>
+	</div>
+</div>
+"""
 				cnt += 1
 			end
 		end
 
-		bdy.add """</div>
-			<div class="form-group">
-				<button type="button" class="btn btn-lg" onclick="new_answer(this)">Add answer</button>
+		bdy.add """
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-lg btn-success">Finish</button>
+				<button type="button" class="btn btn-lg" onclick="new_answer(this)">Add an opportunity</button>
+				<button type="submit" class="btn btn-lg btn-success">Create meetup</button>
 			</div>
 		</form>
 		</center>
+		</div>
 """
 		body = bdy
 		super

@@ -18,7 +18,7 @@ module meetup_confirmation
 import boilerplate
 import opportunity_model
 
-# Show this page when a `Meetup` is sucessfully created.
+# Show this page when a `Meetup` is successfully created.
 class MeetupConfirmation
 	super OpportunityPage
 
@@ -27,17 +27,16 @@ class MeetupConfirmation
 	init do
 		body = """
 		<div class="page-header">
-			<center><h1>Congratulations !</h1></center>
+			<center><h1>Your meetup was successfully created</h1></center>
 		</div>
-		<p class="text-center">
-			<h2> Your meetup was successfully created. </h2>
-			<p>
-			You can invite people to participate to your event by sharing them this link : <a href="/?meetup_id={{{meetup.id}}}">{{{meetup.name}}}</a>
+		<div class="container">
+			<div class="alert alert-success text-center" role="alert">
+			Invite participants by sharing this link: <a href="./?meetup_id={{{meetup.id}}}">{{{meetup.name}}}</a>
+			</div>
+			<p class="text-center">
+			See you soon for more Opportunities!
 			</p>
-			<p>
-			See you soon for more Opportunities !
-			</p>
-		</p>
+		</div>
 		"""
 	end
 

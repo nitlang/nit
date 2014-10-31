@@ -24,7 +24,7 @@ class OpportunityHomePage
 	init do
 		body = """
 		<div class="page-header">
-		<h1 class="text-center">Welcome to opportunity !</h1>
+		<h1 class="text-center">Welcome to Opportunity!</h1>
 			</div>
 			<p class="text-center">
 				<p class="text-center">Opportunity is a free (as in free software), easy-to-use, meetup planner.</p>

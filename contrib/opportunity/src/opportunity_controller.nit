@@ -60,16 +60,16 @@ class OpportunityWelcome
 			var mname = request.string_arg("meetup_name")
 			var mdate = request.string_arg("meetup_date")
 			var mplace = request.string_arg("meetup_place")
-			if mname == null or mdate == null or mplace == null then
-				if mname == null then mname = ""
-				if mdate == null then mdate = ""
-				if mplace == null then mplace = ""
+			if mdate == null then mdate = ""
+			if mplace == null then mplace = ""
+			if mname == null then
+				mname = ""
 				var rsp = new HttpResponse(200)
 				var meetpage = new MeetupCreationPage
 				var meet = new Meetup(mname, mdate, mplace)
 				meetpage.ans = ansset
 				meetpage.meet = meet
-				meetpage.error = "Name, Date and Place are mandatory fields."
+				meetpage.error = "'Meetup name' is a mandatory fields."
 				rsp.body = meetpage.write_to_string
 				return rsp
 
@@ -87,14 +87,13 @@ class OpportunityWelcome
 			end
 			if not meet.commit(db) then
 				db.close
-				var meetid = (mname + mdate + mplace).sha1_to_s
 				var rsp = new HttpResponse(200)
 				var meetpage = new MeetupCreationPage
 				meetpage.meet = meet
 				meetpage.ans = ansset
 				meetpage.error = """<p>Could not create Meetup.</p>
-				<p>Hmm, that's embarassing, there already seems to be a Meetup like yours <a href="/?meetup_id={{{meetid}}}">here</a>.</p>
-				<p>If this is not yours, please contact the mainainers of the website, you might have found a bug !</p>"""
+				<p>Hmm, that's embarassing, the database indicates that your meetup already exists.</p>
+				<p>If this is not a duplicated submission, please contact the mainainers of the website, you might have found a bug !</p>"""
 				rsp.body = meetpage.write_to_string
 				return rsp
 			end
