@@ -1076,8 +1076,7 @@ redef class AAttrPropdef
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
 		if is_lazy then return
-		var nexpr = self.n_expr
-		if nexpr != null then
+		if has_value then
 			evaluate_expr(v, recv)
 			return
 		end
@@ -1091,12 +1090,26 @@ redef class AAttrPropdef
 	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance): Instance
 	do
 		assert recv isa MutableInstance
-		var nexpr = self.n_expr
-		assert nexpr != null
 		var f = new Frame(self, self.mpropdef.as(not null), [recv])
 		v.frames.unshift(f)
-		var val = v.expr(nexpr)
+
+		var val
+
+		var nexpr = self.n_expr
+		var nblock = self.n_block
+		if nexpr != null then
+			val = v.expr(nexpr)
+		else if nblock != null then
+			v.stmt(nblock)
+			assert v.returnmark == f
+			val = v.escapevalue
+			v.returnmark = null
+			v.escapevalue = null
+		else
+			abort
+		end
 		assert val != null
+
 		v.frames.shift
 		assert not v.is_escaping
 		v.write_attribute(self.mpropdef.mproperty, recv, val)

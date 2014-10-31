@@ -2289,24 +2289,24 @@ redef class AAttrPropdef
 	do
 		if mpropdef == mreadpropdef then
 			assert arguments.length == 1
+			var recv = arguments.first
 			var res
 			if is_lazy then
-				var nexpr = n_expr
-				assert nexpr != null
 				var set
 				var ret = self.mpropdef.static_mtype
 				var useiset = ret.ctype == "val*" and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
-					set = v.isset_attribute(self.mpropdef.mproperty, arguments.first)
+					set = v.isset_attribute(self.mpropdef.mproperty, recv)
 				else
-					set = v.read_attribute(guard, arguments.first)
+					set = v.read_attribute(guard, recv)
 				end
 				v.add("if(likely({set})) \{")
-				res = v.read_attribute(self.mpropdef.mproperty, arguments.first)
+				res = v.read_attribute(self.mpropdef.mproperty, recv)
 				v.add("\} else \{")
-				var value = v.expr(nexpr, self.mpropdef.static_mtype)
-				v.write_attribute(self.mpropdef.mproperty, arguments.first, value)
+
+				var value = evaluate_expr(v, recv)
+
 				v.assign(res, value)
 				if not useiset then
 					var true_v = v.new_expr("1", v.bool_type)
@@ -2334,18 +2334,44 @@ redef class AAttrPropdef
 
 	fun init_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
+		if has_value and not is_lazy then evaluate_expr(v, recv)
+	end
+
+	# Evaluate, store and return the default value of the attribute
+	private fun evaluate_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable): RuntimeVariable
+	do
+		var oldnode = v.current_node
+		v.current_node = self
+		var old_frame = v.frame
+		var frame = new Frame(v, self.mpropdef.as(not null), recv.mcasttype.as(MClassType), [recv])
+		v.frame = frame
+
+		var value
+		var mtype = self.mpropdef.static_mtype
+		assert mtype != null
+
 		var nexpr = self.n_expr
-		if nexpr != null and not is_lazy then
-			var oldnode = v.current_node
-			v.current_node = self
-			var old_frame = v.frame
-			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
-			v.frame = frame
-			var value = v.expr(nexpr, self.mpropdef.static_mtype)
-			v.write_attribute(self.mpropdef.mproperty, recv, value)
-			v.frame = old_frame
-			v.current_node = oldnode
+		var nblock = self.n_block
+		if nexpr != null then
+			value = v.expr(nexpr, mtype)
+		else if nblock != null then
+			value = v.new_var(mtype)
+			frame.returnvar = value
+			frame.returnlabel = v.get_name("RET_LABEL")
+			v.add("\{")
+			v.stmt(nblock)
+			v.add("{frame.returnlabel.as(not null)}:(void)0;")
+			v.add("\}")
+		else
+			abort
 		end
+
+		v.write_attribute(self.mpropdef.mproperty, recv, value)
+
+		v.frame = old_frame
+		v.current_node = oldnode
+
+		return value
 	end
 
 	fun check_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
