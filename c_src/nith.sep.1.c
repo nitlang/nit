@@ -56,7 +56,7 @@ var_args = p0;
 var2 = self->attrs[COLOR_separate_compiler__ToolContext___opt_separate].val; /* _opt_separate on <self:ToolContext> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_separate");
-PRINT_ERROR(" (%s:%d)\n", "src/separate_compiler.nit", 24);
+PRINT_ERROR(" (%s:%d)\n", "compiler/separate_compiler.nit", 24);
 show_backtrace(1);
 }
 var = var2;
@@ -79,7 +79,7 @@ var6 = kernel__Bool__to_i(var7);
 var10 = self->attrs[COLOR_separate_erasure_compiler__ToolContext___opt_erasure].val; /* _opt_erasure on <self:ToolContext> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_erasure");
-PRINT_ERROR(" (%s:%d)\n", "src/separate_erasure_compiler.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "compiler/separate_erasure_compiler.nit", 22);
 show_backtrace(1);
 }
 var8 = var10;
@@ -105,7 +105,7 @@ var18 = 1; /* easy <var14:Int> isa OTHER*/
 if (unlikely(!var18)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var19 = var6 + var14;
@@ -124,7 +124,7 @@ var23 = 1; /* easy <var20:Int> isa OTHER*/
 if (unlikely(!var23)) {
 var_class_name26 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var27 = var_sum > var20;
@@ -170,7 +170,7 @@ if (var35){
 var41 = self->attrs[COLOR_separate_compiler__ToolContext___opt_separate].val; /* _opt_separate on <self:ToolContext> */
 if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_separate");
-PRINT_ERROR(" (%s:%d)\n", "src/separate_compiler.nit", 24);
+PRINT_ERROR(" (%s:%d)\n", "compiler/separate_compiler.nit", 24);
 show_backtrace(1);
 }
 var39 = var41;
@@ -193,7 +193,7 @@ var44 = (&type_kernel__Bool)->type_table[cltype45] == idtype46;
 if (unlikely(!var44)) {
 var_class_name47 = type_kernel__Bool.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "VALUE", var_class_name47);
-PRINT_ERROR(" (%s:%d)\n", "lib/opts.nit", 40);
+PRINT_ERROR(" (%s:%d)\n", "../lib/opts.nit", 40);
 show_backtrace(1);
 }
 var48 = BOX_kernel__Bool(var42); /* autobox from Bool to nullable Object */

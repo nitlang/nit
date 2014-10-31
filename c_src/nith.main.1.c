@@ -105,10 +105,17 @@ initialize_nitni_global_refs();
 var = NEW_kernel__Sys(&type_kernel__Sys);
 glob_sys = var;
 {
-((void (*)(val*))(var->class->vft[COLOR_kernel__Sys__init]))(var) /* init on <var:Sys>*/;
+((void (*)(val*))(var->class->vft[COLOR_kernel__Object__init]))(var) /* init on <var:Sys>*/;
 }
 {
-((void (*)(val*))(var->class->vft[COLOR_kernel__Sys__main]))(var) /* main on <var:Sys>*/;
+((void (*)(val*))(var->class->vft[COLOR_kernel__Sys__run]))(var) /* run on <var:Sys>*/;
 }
 return 0;
+}
+void gc_finalize (void *obj, void *client_data) {
+val* var /* : Finalizable */;
+var = obj;
+{
+((void (*)(val*))(var->class->vft[COLOR_gc__Finalizable__finalize]))(var) /* finalize on <var:Finalizable>*/;
+}
 }

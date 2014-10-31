@@ -1,6 +1,9 @@
 #include "nit.common.h"
 #define COLOR_c_tools__ExternFile___filename 0
 short int c_tools__ExternFile__add_to_jar(val* self);
+#define COLOR_c_tools__ExternFile__init 37
+#define COLOR_c_tools__ExternFile__filename_61d 32
+#define COLOR_kernel__Object__init 7
 #define COLOR_c_tools__ExternCFile___cflags 1
 void c_tools__ExternCFile__init(val* self, val* p0, val* p1);
 long string__FlatString__hash(val* self);
@@ -14,8 +17,8 @@ val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-#define COLOR_array__Array__with_native 65
-#define COLOR_string__Object__to_s 7
+#define COLOR_array__Array__with_native 74
+#define COLOR_string__Object__to_s 9
 val* c_tools__ExternCFile__makefile_rule_name(val* self);
 val* c_tools__ExternCFile__makefile_rule_content(val* self);
 short int c_tools__ExternCFile__compiles_to_o_file(val* self);

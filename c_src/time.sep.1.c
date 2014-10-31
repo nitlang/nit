@@ -2,7 +2,7 @@
 /* method time#Object#get_time for (self: Object): Int */
 long time__Object__get_time(val* self) {
 long var /* : Int */;
-long var1 /* : Int */;
+long var1 /* : Int for extern */;
 var1 = kernel_Any_Any_get_time_0(self);
 var = var1;
 goto RET_LABEL;
@@ -13,7 +13,7 @@ return var;
 long VIRTUAL_time__Object__get_time(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-long var3 /* : Int */;
+long var3 /* : Int for extern */;
 { /* Inline time#Object#get_time (self) on <self:Object> */
 var3 = kernel_Any_Any_get_time_0(self);
 var1 = var3;

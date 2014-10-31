@@ -1,4 +1,1126 @@
 #include "model.sep.0.h"
+/* method model#MParameterType#resolve_for for (self: MParameterType, MType, nullable MClassType, MModule, Bool): MType */
+val* model__MParameterType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3) {
+val* var /* : MType */;
+val* var_mtype /* var mtype: MType */;
+val* var_anchor /* var anchor: nullable MClassType */;
+val* var_mmodule /* var mmodule: MModule */;
+short int var_cleanup_virtual /* var cleanup_virtual: Bool */;
+short int var1 /* : Bool */;
+short int var2 /* : Bool */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+short int var_ /* var : Bool */;
+val* var4 /* : MClass */;
+val* var6 /* : MClass */;
+val* var7 /* : MClass */;
+val* var9 /* : MClass */;
+short int var10 /* : Bool */;
+short int var11 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var13 /* : Bool */;
+short int var15 /* : Bool */;
+val* var16 /* : Array[MType] */;
+val* var18 /* : Array[MType] */;
+long var19 /* : Int */;
+long var21 /* : Int */;
+val* var22 /* : nullable Object */;
+val* var_res /* var res: MType */;
+short int var23 /* : Bool */;
+val* var24 /* : null */;
+short int var25 /* : Bool */;
+short int var26 /* : Bool */;
+val* var_other28 /* var other: nullable Object */;
+short int var29 /* : Bool */;
+short int var30 /* : Bool */;
+short int var31 /* : Bool */;
+short int var_32 /* var : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : MType */;
+val* var_r2 /* var r2: MType */;
+short int var35 /* : Bool */;
+short int var36 /* : Bool */;
+int cltype37;
+int idtype38;
+short int var_39 /* var : Bool */;
+val* var40 /* : MClass */;
+val* var42 /* : MClass */;
+val* var43 /* : MClassKind */;
+val* var45 /* : MClassKind */;
+val* var46 /* : MClassKind */;
+short int var47 /* : Bool */;
+short int var48 /* : Bool */;
+short int var50 /* : Bool */;
+short int var52 /* : Bool */;
+short int var53 /* : Bool */;
+val* var54 /* : null */;
+short int var55 /* : Bool */;
+short int var56 /* : Bool */;
+short int var58 /* : Bool */;
+short int var59 /* : Bool */;
+short int var60 /* : Bool */;
+val* var61 /* : MClass */;
+val* var63 /* : MClass */;
+val* var64 /* : MClassType */;
+val* var66 /* : MClassType */;
+short int var67 /* : Bool */;
+val* var68 /* : MType */;
+val* var_resolved_receiver /* var resolved_receiver: nullable Object */;
+short int var69 /* : Bool */;
+int cltype70;
+int idtype71;
+val* var72 /* : MType */;
+val* var74 /* : MType */;
+short int var75 /* : Bool */;
+int cltype76;
+int idtype77;
+val* var78 /* : MClass */;
+val* var80 /* : MClass */;
+val* var81 /* : MClass */;
+val* var83 /* : MClass */;
+short int var84 /* : Bool */;
+short int var85 /* : Bool */;
+short int var87 /* : Bool */;
+short int var89 /* : Bool */;
+val* var90 /* : Array[MType] */;
+val* var92 /* : Array[MType] */;
+long var93 /* : Int */;
+long var95 /* : Int */;
+val* var96 /* : nullable Object */;
+short int var97 /* : Bool */;
+int cltype98;
+int idtype99;
+val* var100 /* : MType */;
+val* var102 /* : MType */;
+short int var103 /* : Bool */;
+int cltype104;
+int idtype105;
+val* var106 /* : MClass */;
+val* var108 /* : MClass */;
+val* var109 /* : MClass */;
+val* var111 /* : MClass */;
+short int var112 /* : Bool */;
+short int var113 /* : Bool */;
+short int var115 /* : Bool */;
+short int var117 /* : Bool */;
+val* var118 /* : Array[MType] */;
+val* var120 /* : Array[MType] */;
+long var121 /* : Int */;
+long var123 /* : Int */;
+val* var124 /* : nullable Object */;
+val* var_res125 /* var res: MType */;
+short int var126 /* : Bool */;
+val* var127 /* : null */;
+short int var128 /* : Bool */;
+short int var129 /* : Bool */;
+short int var131 /* : Bool */;
+short int var132 /* : Bool */;
+short int var133 /* : Bool */;
+val* var134 /* : null */;
+short int var135 /* : Bool */;
+val* var136 /* : MType */;
+val* var137 /* : MType */;
+val* var_verbatim_bound /* var verbatim_bound: MType */;
+val* var138 /* : MType */;
+val* var_res139 /* var res: MType */;
+var_mtype = p0;
+var_anchor = p1;
+var_mmodule = p2;
+var_cleanup_virtual = p3;
+{
+var1 = model__MParameterType__can_resolve_for(self, var_mtype, var_anchor, var_mmodule);
+}
+if (unlikely(!var1)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1313);
+show_backtrace(1);
+}
+/* <var_mtype:MType> isa MGenericType */
+cltype = type_model__MGenericType.color;
+idtype = type_model__MGenericType.id;
+if(cltype >= var_mtype->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_mtype->type->type_table[cltype] == idtype;
+}
+var_ = var3;
+if (var3){
+{
+{ /* Inline model#MClassType#mclass (var_mtype) on <var_mtype:MType(MGenericType)> */
+var6 = var_mtype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_mtype:MType(MGenericType)> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var4 = var6;
+RET_LABEL5:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#mclass (self) on <self:MParameterType> */
+var9 = self->attrs[COLOR_model__MParameterType___mclass].val; /* _mclass on <self:MParameterType> */
+if (unlikely(var9 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1280);
+show_backtrace(1);
+}
+var7 = var9;
+RET_LABEL8:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var4,var7) on <var4:MClass> */
+var_other = var7;
+{
+{ /* Inline kernel#Object#is_same_instance (var4,var_other) on <var4:MClass> */
+var15 = var4 == var_other;
+var13 = var15;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
+}
+}
+var11 = var13;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
+}
+var10 = var11;
+}
+var2 = var10;
+} else {
+var2 = var_;
+}
+if (var2){
+{
+{ /* Inline model#MClassType#arguments (var_mtype) on <var_mtype:MType(MGenericType)> */
+var18 = var_mtype->attrs[COLOR_model__MClassType___arguments].val; /* _arguments on <var_mtype:MType(MGenericType)> */
+if (unlikely(var18 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _arguments");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 996);
+show_backtrace(1);
+}
+var16 = var18;
+RET_LABEL17:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#rank (self) on <self:MParameterType> */
+var21 = self->attrs[COLOR_model__MParameterType___rank].l; /* _rank on <self:MParameterType> */
+var19 = var21;
+RET_LABEL20:(void)0;
+}
+}
+{
+var22 = array__Array___91d_93d(var16, var19);
+}
+var_res = var22;
+var24 = NULL;
+if (var_anchor == NULL) {
+var25 = 0; /* is null */
+} else {
+var25 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_anchor,var24) on <var_anchor:nullable MClassType> */
+var_other28 = var24;
+{
+var30 = ((short int (*)(val*, val*))(var_anchor->class->vft[COLOR_kernel__Object___61d_61d]))(var_anchor, var_other28) /* == on <var_anchor:nullable MClassType(MClassType)>*/;
+var29 = var30;
+}
+var31 = !var29;
+var26 = var31;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
+}
+var25 = var26;
+}
+var_32 = var25;
+if (var25){
+{
+var33 = ((short int (*)(val*))(var_res->class->vft[COLOR_model__MType__need_anchor]))(var_res) /* need_anchor on <var_res:MType>*/;
+}
+var23 = var33;
+} else {
+var23 = var_32;
+}
+if (var23){
+{
+var34 = ((val* (*)(val*, val*, val*))(var_res->class->vft[COLOR_model__MType__anchor_to]))(var_res, var_mmodule, var_anchor) /* anchor_to on <var_res:MType>*/;
+}
+var_r2 = var34;
+/* <var_r2:MType> isa MClassType */
+cltype37 = type_model__MClassType.color;
+idtype38 = type_model__MClassType.id;
+if(cltype37 >= var_r2->type->table_size) {
+var36 = 0;
+} else {
+var36 = var_r2->type->type_table[cltype37] == idtype38;
+}
+var_39 = var36;
+if (var36){
+{
+{ /* Inline model#MClassType#mclass (var_r2) on <var_r2:MType(MClassType)> */
+var42 = var_r2->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_r2:MType(MClassType)> */
+if (unlikely(var42 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var40 = var42;
+RET_LABEL41:(void)0;
+}
+}
+{
+{ /* Inline model#MClass#kind (var40) on <var40:MClass> */
+var45 = var40->attrs[COLOR_model__MClass___kind].val; /* _kind on <var40:MClass> */
+if (unlikely(var45 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _kind");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 371);
+show_backtrace(1);
+}
+var43 = var45;
+RET_LABEL44:(void)0;
+}
+}
+{
+var46 = model__Object__enum_kind(self);
+}
+{
+{ /* Inline kernel#Object#== (var43,var46) on <var43:MClassKind> */
+var_other = var46;
+{
+{ /* Inline kernel#Object#is_same_instance (var43,var_other) on <var43:MClassKind> */
+var52 = var43 == var_other;
+var50 = var52;
+goto RET_LABEL51;
+RET_LABEL51:(void)0;
+}
+}
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
+}
+var47 = var48;
+}
+var35 = var47;
+} else {
+var35 = var_39;
+}
+if (var35){
+var = var_r2;
+goto RET_LABEL;
+} else {
+}
+} else {
+}
+var = var_res;
+goto RET_LABEL;
+} else {
+}
+{
+var53 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MType>*/;
+}
+if (var53){
+var54 = NULL;
+if (var_anchor == NULL) {
+var55 = 0; /* is null */
+} else {
+var55 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_anchor,var54) on <var_anchor:nullable MClassType> */
+var_other28 = var54;
+{
+var59 = ((short int (*)(val*, val*))(var_anchor->class->vft[COLOR_kernel__Object___61d_61d]))(var_anchor, var_other28) /* == on <var_anchor:nullable MClassType(MClassType)>*/;
+var58 = var59;
+}
+var60 = !var58;
+var56 = var60;
+goto RET_LABEL57;
+RET_LABEL57:(void)0;
+}
+var55 = var56;
+}
+if (unlikely(!var55)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1332);
+show_backtrace(1);
+}
+{
+{ /* Inline model#MClassType#mclass (var_anchor) on <var_anchor:nullable MClassType(MClassType)> */
+var63 = var_anchor->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_anchor:nullable MClassType(MClassType)> */
+if (unlikely(var63 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var61 = var63;
+RET_LABEL62:(void)0;
+}
+}
+{
+{ /* Inline model#MClass#mclass_type (var61) on <var61:MClass> */
+var66 = var61->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var61:MClass> */
+if (unlikely(var66 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
+show_backtrace(1);
+}
+var64 = var66;
+RET_LABEL65:(void)0;
+}
+}
+var67 = 1;
+{
+var68 = ((val* (*)(val*, val*, val*, val*, short int))(var_mtype->class->vft[COLOR_model__MType__resolve_for]))(var_mtype, var64, var_anchor, var_mmodule, var67) /* resolve_for on <var_mtype:MType>*/;
+}
+var_resolved_receiver = var68;
+} else {
+var_resolved_receiver = var_mtype;
+}
+/* <var_resolved_receiver:nullable Object(MType)> isa MNullableType */
+cltype70 = type_model__MNullableType.color;
+idtype71 = type_model__MNullableType.id;
+if(cltype70 >= var_resolved_receiver->type->table_size) {
+var69 = 0;
+} else {
+var69 = var_resolved_receiver->type->type_table[cltype70] == idtype71;
+}
+if (var69){
+{
+{ /* Inline model#MNullableType#mtype (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MNullableType)> */
+var74 = var_resolved_receiver->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <var_resolved_receiver:nullable Object(MNullableType)> */
+if (unlikely(var74 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var72 = var74;
+RET_LABEL73:(void)0;
+}
+}
+var_resolved_receiver = var72;
+} else {
+}
+/* <var_resolved_receiver:nullable Object(MType)> isa MParameterType */
+cltype76 = type_model__MParameterType.color;
+idtype77 = type_model__MParameterType.id;
+if(cltype76 >= var_resolved_receiver->type->table_size) {
+var75 = 0;
+} else {
+var75 = var_resolved_receiver->type->type_table[cltype76] == idtype77;
+}
+if (var75){
+{
+{ /* Inline model#MParameterType#mclass (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MParameterType)> */
+var80 = var_resolved_receiver->attrs[COLOR_model__MParameterType___mclass].val; /* _mclass on <var_resolved_receiver:nullable Object(MParameterType)> */
+if (unlikely(var80 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1280);
+show_backtrace(1);
+}
+var78 = var80;
+RET_LABEL79:(void)0;
+}
+}
+if (var_anchor == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1339);
+show_backtrace(1);
+} else {
+{ /* Inline model#MClassType#mclass (var_anchor) on <var_anchor:nullable MClassType> */
+if (unlikely(var_anchor == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var83 = var_anchor->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_anchor:nullable MClassType> */
+if (unlikely(var83 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var81 = var83;
+RET_LABEL82:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var78,var81) on <var78:MClass> */
+var_other = var81;
+{
+{ /* Inline kernel#Object#is_same_instance (var78,var_other) on <var78:MClass> */
+var89 = var78 == var_other;
+var87 = var89;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
+}
+}
+var85 = var87;
+goto RET_LABEL86;
+RET_LABEL86:(void)0;
+}
+var84 = var85;
+}
+if (unlikely(!var84)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1339);
+show_backtrace(1);
+}
+if (var_anchor == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1340);
+show_backtrace(1);
+} else {
+{ /* Inline model#MClassType#arguments (var_anchor) on <var_anchor:nullable MClassType> */
+if (unlikely(var_anchor == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 996);
+show_backtrace(1);
+}
+var92 = var_anchor->attrs[COLOR_model__MClassType___arguments].val; /* _arguments on <var_anchor:nullable MClassType> */
+if (unlikely(var92 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _arguments");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 996);
+show_backtrace(1);
+}
+var90 = var92;
+RET_LABEL91:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#rank (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MParameterType)> */
+var95 = var_resolved_receiver->attrs[COLOR_model__MParameterType___rank].l; /* _rank on <var_resolved_receiver:nullable Object(MParameterType)> */
+var93 = var95;
+RET_LABEL94:(void)0;
+}
+}
+{
+var96 = array__Array___91d_93d(var90, var93);
+}
+var_resolved_receiver = var96;
+/* <var_resolved_receiver:nullable Object(MType)> isa MNullableType */
+cltype98 = type_model__MNullableType.color;
+idtype99 = type_model__MNullableType.id;
+if(cltype98 >= var_resolved_receiver->type->table_size) {
+var97 = 0;
+} else {
+var97 = var_resolved_receiver->type->type_table[cltype98] == idtype99;
+}
+if (var97){
+{
+{ /* Inline model#MNullableType#mtype (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MNullableType)> */
+var102 = var_resolved_receiver->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <var_resolved_receiver:nullable Object(MNullableType)> */
+if (unlikely(var102 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var100 = var102;
+RET_LABEL101:(void)0;
+}
+}
+var_resolved_receiver = var100;
+} else {
+}
+} else {
+}
+/* <var_resolved_receiver:nullable Object(MType)> isa MClassType */
+cltype104 = type_model__MClassType.color;
+idtype105 = type_model__MClassType.id;
+if(cltype104 >= var_resolved_receiver->type->table_size) {
+var103 = 0;
+} else {
+var103 = var_resolved_receiver->type->type_table[cltype104] == idtype105;
+}
+if (unlikely(!var103)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1343);
+show_backtrace(1);
+}
+{
+{ /* Inline model#MClassType#mclass (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MClassType)> */
+var108 = var_resolved_receiver->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_resolved_receiver:nullable Object(MClassType)> */
+if (unlikely(var108 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var106 = var108;
+RET_LABEL107:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#mclass (self) on <self:MParameterType> */
+var111 = self->attrs[COLOR_model__MParameterType___mclass].val; /* _mclass on <self:MParameterType> */
+if (unlikely(var111 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1280);
+show_backtrace(1);
+}
+var109 = var111;
+RET_LABEL110:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var106,var109) on <var106:MClass> */
+var_other = var109;
+{
+{ /* Inline kernel#Object#is_same_instance (var106,var_other) on <var106:MClass> */
+var117 = var106 == var_other;
+var115 = var117;
+goto RET_LABEL116;
+RET_LABEL116:(void)0;
+}
+}
+var113 = var115;
+goto RET_LABEL114;
+RET_LABEL114:(void)0;
+}
+var112 = var113;
+}
+if (var112){
+{
+{ /* Inline model#MClassType#arguments (var_resolved_receiver) on <var_resolved_receiver:nullable Object(MClassType)> */
+var120 = var_resolved_receiver->attrs[COLOR_model__MClassType___arguments].val; /* _arguments on <var_resolved_receiver:nullable Object(MClassType)> */
+if (unlikely(var120 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _arguments");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 996);
+show_backtrace(1);
+}
+var118 = var120;
+RET_LABEL119:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#rank (self) on <self:MParameterType> */
+var123 = self->attrs[COLOR_model__MParameterType___rank].l; /* _rank on <self:MParameterType> */
+var121 = var123;
+RET_LABEL122:(void)0;
+}
+}
+{
+var124 = array__Array___91d_93d(var118, var121);
+}
+var_res125 = var124;
+var = var_res125;
+goto RET_LABEL;
+} else {
+}
+{
+var126 = ((short int (*)(val*))(var_resolved_receiver->class->vft[COLOR_model__MType__need_anchor]))(var_resolved_receiver) /* need_anchor on <var_resolved_receiver:nullable Object(MClassType)>*/;
+}
+if (var126){
+var127 = NULL;
+if (var_anchor == NULL) {
+var128 = 0; /* is null */
+} else {
+var128 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_anchor,var127) on <var_anchor:nullable MClassType> */
+var_other28 = var127;
+{
+var132 = ((short int (*)(val*, val*))(var_anchor->class->vft[COLOR_kernel__Object___61d_61d]))(var_anchor, var_other28) /* == on <var_anchor:nullable MClassType(MClassType)>*/;
+var131 = var132;
+}
+var133 = !var131;
+var129 = var133;
+goto RET_LABEL130;
+RET_LABEL130:(void)0;
+}
+var128 = var129;
+}
+if (unlikely(!var128)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1354);
+show_backtrace(1);
+}
+var134 = NULL;
+var135 = 0;
+{
+var136 = ((val* (*)(val*, val*, val*, val*, short int))(var_resolved_receiver->class->vft[COLOR_model__MType__resolve_for]))(var_resolved_receiver, var_anchor, var134, var_mmodule, var135) /* resolve_for on <var_resolved_receiver:nullable Object(MClassType)>*/;
+}
+var_resolved_receiver = var136;
+} else {
+}
+{
+var137 = model__MParameterType__lookup_bound(self, var_mmodule, var_resolved_receiver);
+}
+var_verbatim_bound = var137;
+{
+var138 = ((val* (*)(val*, val*, val*, val*, short int))(var_verbatim_bound->class->vft[COLOR_model__MType__resolve_for]))(var_verbatim_bound, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual) /* resolve_for on <var_verbatim_bound:MType>*/;
+}
+var_res139 = var138;
+var = var_res139;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MParameterType#resolve_for for (self: Object, MType, nullable MClassType, MModule, Bool): MType */
+val* VIRTUAL_model__MParameterType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+var1 = model__MParameterType__resolve_for(self, p0, p1, p2, p3);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MParameterType#can_resolve_for for (self: MParameterType, MType, nullable MClassType, MModule): Bool */
+short int model__MParameterType__can_resolve_for(val* self, val* p0, val* p1, val* p2) {
+short int var /* : Bool */;
+val* var_mtype /* var mtype: MType */;
+val* var_anchor /* var anchor: nullable MClassType */;
+val* var_mmodule /* var mmodule: MModule */;
+short int var1 /* : Bool */;
+val* var2 /* : null */;
+short int var3 /* : Bool */;
+short int var4 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var6 /* : Bool */;
+short int var7 /* : Bool */;
+short int var8 /* : Bool */;
+val* var9 /* : MType */;
+val* var10 /* : Set[MClassDef] */;
+val* var11 /* : MClass */;
+val* var13 /* : MClass */;
+val* var14 /* : MClassDef */;
+val* var16 /* : MClassDef */;
+short int var17 /* : Bool */;
+var_mtype = p0;
+var_anchor = p1;
+var_mmodule = p2;
+{
+var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MType>*/;
+}
+if (var1){
+var2 = NULL;
+if (var_anchor == NULL) {
+var3 = 0; /* is null */
+} else {
+var3 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_anchor,var2) on <var_anchor:nullable MClassType> */
+var_other = var2;
+{
+var7 = ((short int (*)(val*, val*))(var_anchor->class->vft[COLOR_kernel__Object___61d_61d]))(var_anchor, var_other) /* == on <var_anchor:nullable MClassType(MClassType)>*/;
+var6 = var7;
+}
+var8 = !var6;
+var4 = var8;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
+}
+var3 = var4;
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1370);
+show_backtrace(1);
+}
+{
+var9 = ((val* (*)(val*, val*, val*))(var_mtype->class->vft[COLOR_model__MType__anchor_to]))(var_mtype, var_mmodule, var_anchor) /* anchor_to on <var_mtype:MType>*/;
+}
+var_mtype = var9;
+} else {
+}
+{
+var10 = ((val* (*)(val*, val*))(var_mtype->class->vft[COLOR_model__MType__collect_mclassdefs]))(var_mtype, var_mmodule) /* collect_mclassdefs on <var_mtype:MType>*/;
+}
+{
+{ /* Inline model#MParameterType#mclass (self) on <self:MParameterType> */
+var13 = self->attrs[COLOR_model__MParameterType___mclass].val; /* _mclass on <self:MParameterType> */
+if (unlikely(var13 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1280);
+show_backtrace(1);
+}
+var11 = var13;
+RET_LABEL12:(void)0;
+}
+}
+{
+{ /* Inline model#MClass#intro (var11) on <var11:MClass> */
+var16 = var11->attrs[COLOR_model__MClass___intro].val; /* _intro on <var11:MClass> */
+if (unlikely(var16 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
+show_backtrace(1);
+}
+var14 = var16;
+RET_LABEL15:(void)0;
+}
+}
+{
+var17 = ((short int (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__Collection__has]))(var10, var14) /* has on <var10:Set[MClassDef]>*/;
+}
+var = var17;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MParameterType#can_resolve_for for (self: Object, MType, nullable MClassType, MModule): Bool */
+short int VIRTUAL_model__MParameterType__can_resolve_for(val* self, val* p0, val* p1, val* p2) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = model__MParameterType__can_resolve_for(self, p0, p1, p2);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MParameterType#init for (self: MParameterType, MClass, Int, String) */
+void model__MParameterType__init(val* self, val* p0, long p1, val* p2) {
+val* var_mclass /* var mclass: MClass */;
+long var_rank /* var rank: Int */;
+val* var_name /* var name: String */;
+{
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MParameterType>*/;
+}
+var_mclass = p0;
+var_rank = p1;
+var_name = p2;
+{
+{ /* Inline model#MParameterType#mclass= (self,var_mclass) on <self:MParameterType> */
+self->attrs[COLOR_model__MParameterType___mclass].val = var_mclass; /* _mclass on <self:MParameterType> */
+RET_LABEL1:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#rank= (self,var_rank) on <self:MParameterType> */
+self->attrs[COLOR_model__MParameterType___rank].l = var_rank; /* _rank on <self:MParameterType> */
+RET_LABEL2:(void)0;
+}
+}
+{
+{ /* Inline model#MParameterType#name= (self,var_name) on <self:MParameterType> */
+self->attrs[COLOR_model__MParameterType___name].val = var_name; /* _name on <self:MParameterType> */
+RET_LABEL3:(void)0;
+}
+}
+RET_LABEL:;
+}
+/* method model#MParameterType#init for (self: Object, MClass, Int, String) */
+void VIRTUAL_model__MParameterType__init(val* self, val* p0, long p1, val* p2) {
+model__MParameterType__init(self, p0, p1, p2); /* Direct call model#MParameterType#init on <self:Object(MParameterType)>*/
+RET_LABEL:;
+}
+/* method model#MNullableType#mtype for (self: MNullableType): MType */
+val* model__MNullableType__mtype(val* self) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+var1 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#mtype for (self: Object): MType */
+val* VIRTUAL_model__MNullableType__mtype(val* self) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+val* var3 /* : MType */;
+{ /* Inline model#MNullableType#mtype (self) on <self:Object(MNullableType)> */
+var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:Object(MNullableType)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#mtype= for (self: MNullableType, MType) */
+void model__MNullableType__mtype_61d(val* self, val* p0) {
+self->attrs[COLOR_model__MNullableType___mtype].val = p0; /* _mtype on <self:MNullableType> */
+RET_LABEL:;
+}
+/* method model#MNullableType#mtype= for (self: Object, MType) */
+void VIRTUAL_model__MNullableType__mtype_61d(val* self, val* p0) {
+{ /* Inline model#MNullableType#mtype= (self,p0) on <self:Object(MNullableType)> */
+self->attrs[COLOR_model__MNullableType___mtype].val = p0; /* _mtype on <self:Object(MNullableType)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
+/* method model#MNullableType#model for (self: MNullableType): Model */
+val* model__MNullableType__model(val* self) {
+val* var /* : Model */;
+val* var1 /* : MType */;
+val* var3 /* : MType */;
+val* var4 /* : Model */;
+{
+{ /* Inline model#MNullableType#mtype (self) on <self:MNullableType> */
+var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+{
+var4 = ((val* (*)(val*))(var1->class->vft[COLOR_model_base__MEntity__model]))(var1) /* model on <var1:MType>*/;
+}
+var = var4;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#model for (self: Object): Model */
+val* VIRTUAL_model__MNullableType__model(val* self) {
+val* var /* : Model */;
+val* var1 /* : Model */;
+var1 = model__MNullableType__model(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#init for (self: MNullableType, MType) */
+void model__MNullableType__init(val* self, val* p0) {
+val* var_mtype /* var mtype: MType */;
+static val* varonce;
+val* var /* : String */;
+char* var2 /* : NativeString */;
+long var3 /* : Int */;
+val* var4 /* : FlatString */;
+val* var5 /* : Array[Object] */;
+long var6 /* : Int */;
+val* var7 /* : NativeArray[Object] */;
+val* var8 /* : String */;
+{
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MNullableType>*/;
+}
+var_mtype = p0;
+{
+{ /* Inline model#MNullableType#mtype= (self,var_mtype) on <self:MNullableType> */
+self->attrs[COLOR_model__MNullableType___mtype].val = var_mtype; /* _mtype on <self:MNullableType> */
+RET_LABEL1:(void)0;
+}
+}
+if (varonce) {
+var = varonce;
+} else {
+var2 = "nullable ";
+var3 = 9;
+var4 = string__NativeString__to_s_with_length(var2, var3);
+var = var4;
+varonce = var;
+}
+var5 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var5 = array_instance Array[Object] */
+var6 = 2;
+var7 = NEW_array__NativeArray(var6, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var7)->values[0] = (val*) var;
+((struct instance_array__NativeArray*)var7)->values[1] = (val*) var_mtype;
+{
+((void (*)(val*, val*, long))(var5->class->vft[COLOR_array__Array__with_native]))(var5, var7, var6) /* with_native on <var5:Array[Object]>*/;
+}
+}
+{
+var8 = ((val* (*)(val*))(var5->class->vft[COLOR_string__Object__to_s]))(var5) /* to_s on <var5:Array[Object]>*/;
+}
+{
+{ /* Inline model#MNullableType#to_s= (self,var8) on <self:MNullableType> */
+self->attrs[COLOR_model__MNullableType___to_s].val = var8; /* _to_s on <self:MNullableType> */
+RET_LABEL9:(void)0;
+}
+}
+RET_LABEL:;
+}
+/* method model#MNullableType#init for (self: Object, MType) */
+void VIRTUAL_model__MNullableType__init(val* self, val* p0) {
+model__MNullableType__init(self, p0); /* Direct call model#MNullableType#init on <self:Object(MNullableType)>*/
+RET_LABEL:;
+}
+/* method model#MNullableType#to_s for (self: MNullableType): String */
+val* model__MNullableType__to_s(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = self->attrs[COLOR_model__MNullableType___to_s].val; /* _to_s on <self:MNullableType> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1399);
+show_backtrace(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#to_s for (self: Object): String */
+val* VIRTUAL_model__MNullableType__to_s(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+val* var3 /* : String */;
+{ /* Inline model#MNullableType#to_s (self) on <self:Object(MNullableType)> */
+var3 = self->attrs[COLOR_model__MNullableType___to_s].val; /* _to_s on <self:Object(MNullableType)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1399);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#to_s= for (self: MNullableType, String) */
+void model__MNullableType__to_s_61d(val* self, val* p0) {
+self->attrs[COLOR_model__MNullableType___to_s].val = p0; /* _to_s on <self:MNullableType> */
+RET_LABEL:;
+}
+/* method model#MNullableType#to_s= for (self: Object, String) */
+void VIRTUAL_model__MNullableType__to_s_61d(val* self, val* p0) {
+{ /* Inline model#MNullableType#to_s= (self,p0) on <self:Object(MNullableType)> */
+self->attrs[COLOR_model__MNullableType___to_s].val = p0; /* _to_s on <self:Object(MNullableType)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
+/* method model#MNullableType#need_anchor for (self: MNullableType): Bool */
+short int model__MNullableType__need_anchor(val* self) {
+short int var /* : Bool */;
+val* var1 /* : MType */;
+val* var3 /* : MType */;
+short int var4 /* : Bool */;
+{
+{ /* Inline model#MNullableType#mtype (self) on <self:MNullableType> */
+var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+{
+var4 = ((short int (*)(val*))(var1->class->vft[COLOR_model__MType__need_anchor]))(var1) /* need_anchor on <var1:MType>*/;
+}
+var = var4;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#need_anchor for (self: Object): Bool */
+short int VIRTUAL_model__MNullableType__need_anchor(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = model__MNullableType__need_anchor(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#as_nullable for (self: MNullableType): MType */
+val* model__MNullableType__as_nullable(val* self) {
+val* var /* : MType */;
+var = self;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#as_nullable for (self: Object): MType */
+val* VIRTUAL_model__MNullableType__as_nullable(val* self) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+var1 = model__MNullableType__as_nullable(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#as_notnullable for (self: MNullableType): MType */
+val* model__MNullableType__as_notnullable(val* self) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+val* var3 /* : MType */;
+{
+{ /* Inline model#MNullableType#mtype (self) on <self:MNullableType> */
+var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#as_notnullable for (self: Object): MType */
+val* VIRTUAL_model__MNullableType__as_notnullable(val* self) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+var1 = model__MNullableType__as_notnullable(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#resolve_for for (self: MNullableType, MType, nullable MClassType, MModule, Bool): MType */
+val* model__MNullableType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3) {
+val* var /* : MType */;
+val* var_mtype /* var mtype: MType */;
+val* var_anchor /* var anchor: nullable MClassType */;
+val* var_mmodule /* var mmodule: MModule */;
+short int var_cleanup_virtual /* var cleanup_virtual: Bool */;
+val* var1 /* : MType */;
+val* var3 /* : MType */;
+val* var4 /* : MType */;
+val* var_res /* var res: MType */;
+val* var5 /* : MType */;
+var_mtype = p0;
+var_anchor = p1;
+var_mmodule = p2;
+var_cleanup_virtual = p3;
+{
+{ /* Inline model#MNullableType#mtype (self) on <self:MNullableType> */
+var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+{
+var4 = ((val* (*)(val*, val*, val*, val*, short int))(var1->class->vft[COLOR_model__MType__resolve_for]))(var1, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual) /* resolve_for on <var1:MType>*/;
+}
+var_res = var4;
+{
+var5 = ((val* (*)(val*))(var_res->class->vft[COLOR_model__MType__as_nullable]))(var_res) /* as_nullable on <var_res:MType>*/;
+}
+var = var5;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method model#MNullableType#resolve_for for (self: Object, MType, nullable MClassType, MModule, Bool): MType */
+val* VIRTUAL_model__MNullableType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3) {
+val* var /* : MType */;
+val* var1 /* : MType */;
+var1 = model__MNullableType__resolve_for(self, p0, p1, p2, p3);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method model#MNullableType#can_resolve_for for (self: MNullableType, MType, nullable MClassType, MModule): Bool */
 short int model__MNullableType__can_resolve_for(val* self, val* p0, val* p1, val* p2) {
 short int var /* : Bool */;
@@ -16,7 +1138,7 @@ var_mmodule = p2;
 var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1375);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
 show_backtrace(1);
 }
 var1 = var3;
@@ -51,7 +1173,7 @@ long var4 /* : Int */;
 var3 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1375);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
 show_backtrace(1);
 }
 var1 = var3;
@@ -91,7 +1213,7 @@ var1 = model__MNullableType__need_anchor(self);
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1408);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1421);
 show_backtrace(1);
 }
 {
@@ -99,7 +1221,7 @@ show_backtrace(1);
 var5 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1375);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
 show_backtrace(1);
 }
 var3 = var5;
@@ -139,7 +1261,7 @@ var1 = model__MNullableType__need_anchor(self);
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1414);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1427);
 show_backtrace(1);
 }
 {
@@ -147,7 +1269,7 @@ show_backtrace(1);
 var5 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1375);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
 show_backtrace(1);
 }
 var3 = var5;
@@ -187,7 +1309,7 @@ var1 = model__MNullableType__need_anchor(self);
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1420);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1433);
 show_backtrace(1);
 }
 {
@@ -195,7 +1317,7 @@ show_backtrace(1);
 var5 = self->attrs[COLOR_model__MNullableType___mtype].val; /* _mtype on <self:MNullableType> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1375);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1388);
 show_backtrace(1);
 }
 var3 = var5;
@@ -226,7 +1348,7 @@ val* var1 /* : Model */;
 var1 = self->attrs[COLOR_model__MNullType___model].val; /* _model on <self:MNullType> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1430);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1443);
 show_backtrace(1);
 }
 var = var1;
@@ -242,7 +1364,7 @@ val* var3 /* : Model */;
 var3 = self->attrs[COLOR_model__MNullType___model].val; /* _model on <self:Object(MNullType)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1430);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1443);
 show_backtrace(1);
 }
 var1 = var3;
@@ -269,15 +1391,13 @@ RET_LABEL:;
 void model__MNullType__init(val* self, val* p0) {
 val* var_model /* var model: Model */;
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MNullType> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MNullType>*/;
 }
 var_model = p0;
 {
 { /* Inline model#MNullType#model= (self,var_model) on <self:MNullType> */
 self->attrs[COLOR_model__MNullType___model].val = var_model; /* _model on <self:MNullType> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 RET_LABEL:;
@@ -412,7 +1532,7 @@ val* var1 /* : HashSet[MClassDef] */;
 var_mmodule = p0;
 var1 = NEW_hash_collection__HashSet(&type_hash_collection__HashSetmodel__MClassDef);
 {
-hash_collection__HashSet__init(var1); /* Direct call hash_collection#HashSet#init on <var1:HashSet[MClassDef]>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:HashSet[MClassDef]>*/;
 }
 var = var1;
 goto RET_LABEL;
@@ -436,7 +1556,7 @@ val* var1 /* : HashSet[MClass] */;
 var_mmodule = p0;
 var1 = NEW_hash_collection__HashSet(&type_hash_collection__HashSetmodel__MClass);
 {
-hash_collection__HashSet__init(var1); /* Direct call hash_collection#HashSet#init on <var1:HashSet[MClass]>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:HashSet[MClass]>*/;
 }
 var = var1;
 goto RET_LABEL;
@@ -460,7 +1580,7 @@ val* var1 /* : HashSet[MClassType] */;
 var_mmodule = p0;
 var1 = NEW_hash_collection__HashSet(&type_hash_collection__HashSetmodel__MClassType);
 {
-hash_collection__HashSet__init(var1); /* Direct call hash_collection#HashSet#init on <var1:HashSet[MClassType]>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:HashSet[MClassType]>*/;
 }
 var = var1;
 goto RET_LABEL;
@@ -483,7 +1603,7 @@ val* var1 /* : Array[MParameter] */;
 var1 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var = var1;
@@ -499,7 +1619,7 @@ val* var3 /* : Array[MParameter] */;
 var3 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:Object(MSignature)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var1 = var3;
@@ -582,19 +1702,21 @@ const char* var_class_name;
 long var16 /* : Int */;
 val* var17 /* : Array[MParameter] */;
 val* var19 /* : Array[MParameter] */;
+val* var_ /* var : Array[MParameter] */;
 val* var20 /* : ArrayIterator[nullable Object] */;
-short int var21 /* : Bool */;
-val* var22 /* : nullable Object */;
+val* var_21 /* var : ArrayIterator[MParameter] */;
+short int var22 /* : Bool */;
+val* var23 /* : nullable Object */;
 val* var_p /* var p: MParameter */;
-val* var23 /* : MType */;
-val* var25 /* : MType */;
-long var26 /* : Int */;
+val* var24 /* : MType */;
+val* var26 /* : MType */;
 long var27 /* : Int */;
-short int var29 /* : Bool */;
-int cltype30;
-int idtype31;
-const char* var_class_name32;
-long var33 /* : Int */;
+long var28 /* : Int */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+const char* var_class_name33;
+long var34 /* : Int */;
 var1 = 1;
 var_res = var1;
 {
@@ -637,7 +1759,7 @@ var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (unlikely(!var15)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var16 = var_res + var12;
@@ -654,64 +1776,73 @@ var_res = var13;
 var19 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
 if (unlikely(var19 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var17 = var19;
 RET_LABEL18:(void)0;
 }
 }
+var_ = var17;
 {
-var20 = array__AbstractArrayRead__iterator(var17);
+var20 = array__AbstractArrayRead__iterator(var_);
 }
+var_21 = var20;
 for(;;) {
 {
-var21 = array__ArrayIterator__is_ok(var20);
+var22 = array__ArrayIterator__is_ok(var_21);
 }
-if(!var21) break;
+if (var22){
 {
-var22 = array__ArrayIterator__item(var20);
+var23 = array__ArrayIterator__item(var_21);
 }
-var_p = var22;
+var_p = var23;
 {
 { /* Inline model#MParameter#mtype (var_p) on <var_p:MParameter> */
-var25 = var_p->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var_p:MParameter> */
-if (unlikely(var25 == NULL)) {
+var26 = var_p->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var_p:MParameter> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
-var23 = var25;
-RET_LABEL24:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var26 = ((long (*)(val*))(var23->class->vft[COLOR_model__MType__length]))(var23) /* length on <var23:MType>*/;
+var27 = ((long (*)(val*))(var24->class->vft[COLOR_model__MType__length]))(var24) /* length on <var24:MType>*/;
 }
 {
-{ /* Inline kernel#Int#+ (var_res,var26) on <var_res:Int> */
-/* Covariant cast for argument 0 (i) <var26:Int> isa OTHER */
-/* <var26:Int> isa OTHER */
-var29 = 1; /* easy <var26:Int> isa OTHER*/
-if (unlikely(!var29)) {
-var_class_name32 = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+{ /* Inline kernel#Int#+ (var_res,var27) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
+/* <var27:Int> isa OTHER */
+var30 = 1; /* easy <var27:Int> isa OTHER*/
+if (unlikely(!var30)) {
+var_class_name33 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
-var33 = var_res + var26;
-var27 = var33;
-goto RET_LABEL28;
-RET_LABEL28:(void)0;
+var34 = var_res + var27;
+var28 = var34;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
 }
-var_res = var27;
-CONTINUE_label: (void)0;
+var_res = var28;
 {
-array__ArrayIterator__next(var20); /* Direct call array#ArrayIterator#next on <var20:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_21); /* Direct call array#ArrayIterator#next on <var_21:ArrayIterator[MParameter]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_21) on <var_21:ArrayIterator[MParameter]> */
+RET_LABEL35:(void)0;
+}
+}
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
@@ -731,110 +1862,121 @@ void model__MSignature__init(val* self, val* p0, val* p1) {
 val* var_mparameters /* var mparameters: Array[MParameter] */;
 val* var_return_mtype /* var return_mtype: nullable MType */;
 long var /* : Int */;
-long var2 /* : Int */;
-long var4 /* : Int */;
+long var1 /* : Int */;
+long var3 /* : Int */;
 long var_vararg_rank /* var vararg_rank: Int */;
-val* var5 /* : Range[Int] */;
-long var6 /* : Int */;
+long var4 /* : Int */;
+long var_i /* var i: Int */;
+long var5 /* : Int */;
 long var7 /* : Int */;
-val* var8 /* : Discrete */;
-val* var9 /* : Discrete */;
-val* var10 /* : Iterator[Discrete] */;
+long var_ /* var : Int */;
+short int var8 /* : Bool */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
 short int var11 /* : Bool */;
 val* var12 /* : nullable Object */;
-long var_i /* var i: Int */;
-long var13 /* : Int */;
-val* var14 /* : nullable Object */;
 val* var_parameter /* var parameter: MParameter */;
+short int var13 /* : Bool */;
 short int var15 /* : Bool */;
-short int var17 /* : Bool */;
-long var18 /* : Int */;
+long var16 /* : Int */;
+long var17 /* : Int */;
 long var19 /* : Int */;
-long var21 /* : Int */;
-short int var22 /* : Bool */;
+short int var20 /* : Bool */;
+short int var21 /* : Bool */;
 short int var23 /* : Bool */;
-short int var25 /* : Bool */;
+long var24 /* : Int */;
+long var25 /* : Int */;
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MSignature> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MSignature>*/;
 }
 var_mparameters = p0;
 var_return_mtype = p1;
 var = 1;
 {
 { /* Inline kernel#Int#unary - (var) on <var:Int> */
-var4 = -var;
-var2 = var4;
-goto RET_LABEL3;
-RET_LABEL3:(void)0;
+var3 = -var;
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
 }
-var_vararg_rank = var2;
-var5 = NEW_range__Range(&type_range__Rangekernel__Int);
-var6 = 0;
+var_vararg_rank = var1;
+var4 = 0;
+var_i = var4;
 {
-var7 = array__AbstractArrayRead__length(var_mparameters);
+{ /* Inline array#AbstractArrayRead#length (var_mparameters) on <var_mparameters:Array[MParameter]> */
+var7 = var_mparameters->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_mparameters:Array[MParameter]> */
+var5 = var7;
+RET_LABEL6:(void)0;
 }
-{
-var8 = BOX_kernel__Int(var6); /* autobox from Int to Discrete */
-var9 = BOX_kernel__Int(var7); /* autobox from Int to Discrete */
-range__Range__without_last(var5, var8, var9); /* Direct call range#Range#without_last on <var5:Range[Int]>*/
 }
-{
-var10 = range__Range__iterator(var5);
-}
+var_ = var5;
 for(;;) {
 {
-var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var10) /* is_ok on <var10:Iterator[Discrete]>*/;
+{ /* Inline kernel#Int#< (var_i,var_) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_:Int> isa OTHER */
+/* <var_:Int> isa OTHER */
+var10 = 1; /* easy <var_:Int> isa OTHER*/
+if (unlikely(!var10)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
+show_backtrace(1);
 }
-if(!var11) break;
+var11 = var_i < var_;
+var8 = var11;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
+}
+}
+if (var8){
 {
-var12 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__item]))(var10) /* item on <var10:Iterator[Discrete]>*/;
+var12 = array__Array___91d_93d(var_mparameters, var_i);
 }
-var13 = ((struct instance_kernel__Int*)var12)->value; /* autounbox from nullable Object to Int */;
-var_i = var13;
-{
-var14 = array__Array___91d_93d(var_mparameters, var_i);
-}
-var_parameter = var14;
+var_parameter = var12;
 {
 { /* Inline model#MParameter#is_vararg (var_parameter) on <var_parameter:MParameter> */
-var17 = var_parameter->attrs[COLOR_model__MParameter___is_vararg].s; /* _is_vararg on <var_parameter:MParameter> */
-var15 = var17;
-RET_LABEL16:(void)0;
+var15 = var_parameter->attrs[COLOR_model__MParameter___is_vararg].s; /* _is_vararg on <var_parameter:MParameter> */
+var13 = var15;
+RET_LABEL14:(void)0;
 }
 }
-if (var15){
-var18 = 1;
+if (var13){
+var16 = 1;
 {
-{ /* Inline kernel#Int#unary - (var18) on <var18:Int> */
-var21 = -var18;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+{ /* Inline kernel#Int#unary - (var16) on <var16:Int> */
+var19 = -var16;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#== (var_vararg_rank,var19) on <var_vararg_rank:Int> */
-var25 = var_vararg_rank == var19;
-var23 = var25;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
+{ /* Inline kernel#Int#== (var_vararg_rank,var17) on <var_vararg_rank:Int> */
+var23 = var_vararg_rank == var17;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-var22 = var23;
+var20 = var21;
 }
-if (unlikely(!var22)) {
+if (unlikely(!var20)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1488);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1501);
 show_backtrace(1);
 }
 var_vararg_rank = var_i;
 } else {
 }
-CONTINUE_label: (void)0;
+var24 = 1;
 {
-((void (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__next]))(var10) /* next on <var10:Iterator[Discrete]>*/;
+var25 = kernel__Int__successor(var_i, var24);
+}
+var_i = var25;
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
@@ -905,12 +2047,13 @@ long var /* : Int */;
 val* var1 /* : Array[MParameter] */;
 val* var3 /* : Array[MParameter] */;
 long var4 /* : Int */;
+long var6 /* : Int */;
 {
 { /* Inline model#MSignature#mparameters (self) on <self:MSignature> */
 var3 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var1 = var3;
@@ -918,7 +2061,11 @@ RET_LABEL2:(void)0;
 }
 }
 {
-var4 = array__AbstractArrayRead__length(var1);
+{ /* Inline array#AbstractArrayRead#length (var1) on <var1:Array[MParameter]> */
+var6 = var1->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var1:Array[MParameter]> */
+var4 = var6;
+RET_LABEL5:(void)0;
+}
 }
 var = var4;
 goto RET_LABEL;
@@ -948,76 +2095,79 @@ val* var7 /* : String */;
 char* var8 /* : NativeString */;
 long var9 /* : Int */;
 val* var10 /* : FlatString */;
-val* var11 /* : Range[Int] */;
-long var12 /* : Int */;
-val* var13 /* : Array[MParameter] */;
-val* var15 /* : Array[MParameter] */;
-long var16 /* : Int */;
-val* var17 /* : Discrete */;
-val* var18 /* : Discrete */;
-val* var19 /* : Iterator[Discrete] */;
-short int var20 /* : Bool */;
-val* var21 /* : nullable Object */;
+long var11 /* : Int */;
 long var_i /* var i: Int */;
-long var22 /* : Int */;
-val* var23 /* : Array[MParameter] */;
-val* var25 /* : Array[MParameter] */;
-val* var26 /* : nullable Object */;
-val* var_mparameter /* var mparameter: MParameter */;
-long var27 /* : Int */;
-short int var28 /* : Bool */;
-short int var30 /* : Bool */;
+val* var12 /* : Array[MParameter] */;
+val* var14 /* : Array[MParameter] */;
+long var15 /* : Int */;
+long var17 /* : Int */;
+long var_ /* var : Int */;
+short int var18 /* : Bool */;
+short int var20 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var31 /* : Bool */;
-static val* varonce32;
-val* var33 /* : String */;
-char* var34 /* : NativeString */;
-long var35 /* : Int */;
-val* var36 /* : FlatString */;
-val* var37 /* : String */;
+short int var21 /* : Bool */;
+val* var22 /* : Array[MParameter] */;
+val* var24 /* : Array[MParameter] */;
+val* var25 /* : nullable Object */;
+val* var_mparameter /* var mparameter: MParameter */;
+long var26 /* : Int */;
+short int var27 /* : Bool */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+const char* var_class_name32;
+short int var33 /* : Bool */;
+static val* varonce34;
+val* var35 /* : String */;
+char* var36 /* : NativeString */;
+long var37 /* : Int */;
+val* var38 /* : FlatString */;
 val* var39 /* : String */;
-static val* varonce40;
 val* var41 /* : String */;
-char* var42 /* : NativeString */;
-long var43 /* : Int */;
-val* var44 /* : FlatString */;
-val* var45 /* : MType */;
+static val* varonce42;
+val* var43 /* : String */;
+char* var44 /* : NativeString */;
+long var45 /* : Int */;
+val* var46 /* : FlatString */;
 val* var47 /* : MType */;
-val* var48 /* : String */;
-short int var49 /* : Bool */;
+val* var49 /* : MType */;
+val* var50 /* : String */;
 short int var51 /* : Bool */;
-static val* varonce52;
-val* var53 /* : String */;
-char* var54 /* : NativeString */;
-long var55 /* : Int */;
-val* var56 /* : FlatString */;
-static val* varonce57;
-val* var58 /* : String */;
-char* var59 /* : NativeString */;
+short int var53 /* : Bool */;
+static val* varonce54;
+val* var55 /* : String */;
+char* var56 /* : NativeString */;
+long var57 /* : Int */;
+val* var58 /* : FlatString */;
+long var59 /* : Int */;
 long var60 /* : Int */;
-val* var61 /* : FlatString */;
-val* var62 /* : nullable MType */;
-val* var64 /* : nullable MType */;
+static val* varonce61;
+val* var62 /* : String */;
+char* var63 /* : NativeString */;
+long var64 /* : Int */;
+val* var65 /* : FlatString */;
+val* var66 /* : nullable MType */;
+val* var68 /* : nullable MType */;
 val* var_ret /* var ret: nullable MType */;
-val* var65 /* : null */;
-short int var66 /* : Bool */;
-short int var67 /* : Bool */;
-val* var_other /* var other: nullable Object */;
-short int var69 /* : Bool */;
+val* var69 /* : null */;
 short int var70 /* : Bool */;
 short int var71 /* : Bool */;
-static val* varonce72;
-val* var73 /* : String */;
-char* var74 /* : NativeString */;
-long var75 /* : Int */;
-val* var76 /* : FlatString */;
+val* var_other /* var other: nullable Object */;
+short int var73 /* : Bool */;
+short int var74 /* : Bool */;
+short int var75 /* : Bool */;
+static val* varonce76;
 val* var77 /* : String */;
-val* var78 /* : String */;
+char* var78 /* : NativeString */;
+long var79 /* : Int */;
+val* var80 /* : FlatString */;
+val* var81 /* : String */;
+val* var82 /* : String */;
 var1 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
 {
-string__FlatBuffer__init(var1); /* Direct call string#FlatBuffer#init on <var1:FlatBuffer>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlatBuffer>*/;
 }
 var_b = var1;
 {
@@ -1025,7 +2175,7 @@ var_b = var1;
 var4 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var2 = var4;
@@ -1049,230 +2199,240 @@ varonce = var7;
 {
 string__FlatBuffer__append(var_b, var7); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
-var11 = NEW_range__Range(&type_range__Rangekernel__Int);
-var12 = 0;
+var11 = 0;
+var_i = var11;
 {
 { /* Inline model#MSignature#mparameters (self) on <self:MSignature> */
-var15 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
-if (unlikely(var15 == NULL)) {
+var14 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
-var13 = var15;
-RET_LABEL14:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-var16 = array__AbstractArrayRead__length(var13);
+{ /* Inline array#AbstractArrayRead#length (var12) on <var12:Array[MParameter]> */
+var17 = var12->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var12:Array[MParameter]> */
+var15 = var17;
+RET_LABEL16:(void)0;
 }
-{
-var17 = BOX_kernel__Int(var12); /* autobox from Int to Discrete */
-var18 = BOX_kernel__Int(var16); /* autobox from Int to Discrete */
-range__Range__without_last(var11, var17, var18); /* Direct call range#Range#without_last on <var11:Range[Int]>*/
 }
-{
-var19 = range__Range__iterator(var11);
-}
+var_ = var15;
 for(;;) {
 {
-var20 = ((short int (*)(val*))(var19->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var19) /* is_ok on <var19:Iterator[Discrete]>*/;
-}
-if(!var20) break;
-{
-var21 = ((val* (*)(val*))(var19->class->vft[COLOR_abstract_collection__Iterator__item]))(var19) /* item on <var19:Iterator[Discrete]>*/;
-}
-var22 = ((struct instance_kernel__Int*)var21)->value; /* autounbox from nullable Object to Int */;
-var_i = var22;
-{
-{ /* Inline model#MSignature#mparameters (self) on <self:MSignature> */
-var25 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
-if (unlikely(var25 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
-show_backtrace(1);
-}
-var23 = var25;
-RET_LABEL24:(void)0;
-}
-}
-{
-var26 = array__Array___91d_93d(var23, var_i);
-}
-var_mparameter = var26;
-var27 = 0;
-{
-{ /* Inline kernel#Int#> (var_i,var27) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
-/* <var27:Int> isa OTHER */
-var30 = 1; /* easy <var27:Int> isa OTHER*/
-if (unlikely(!var30)) {
+{ /* Inline kernel#Int#< (var_i,var_) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_:Int> isa OTHER */
+/* <var_:Int> isa OTHER */
+var20 = 1; /* easy <var_:Int> isa OTHER*/
+if (unlikely(!var20)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
-var31 = var_i > var27;
-var28 = var31;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var21 = var_i < var_;
+var18 = var21;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
 }
-if (var28){
-if (varonce32) {
-var33 = varonce32;
-} else {
-var34 = ", ";
-var35 = 2;
-var36 = string__NativeString__to_s_with_length(var34, var35);
-var33 = var36;
-varonce32 = var33;
+if (var18){
+{
+{ /* Inline model#MSignature#mparameters (self) on <self:MSignature> */
+var24 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
+if (unlikely(var24 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
+show_backtrace(1);
+}
+var22 = var24;
+RET_LABEL23:(void)0;
+}
 }
 {
-string__FlatBuffer__append(var_b, var33); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+var25 = array__Array___91d_93d(var22, var_i);
+}
+var_mparameter = var25;
+var26 = 0;
+{
+{ /* Inline kernel#Int#> (var_i,var26) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var26:Int> isa OTHER */
+/* <var26:Int> isa OTHER */
+var29 = 1; /* easy <var26:Int> isa OTHER*/
+if (unlikely(!var29)) {
+var_class_name32 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
+show_backtrace(1);
+}
+var33 = var_i > var26;
+var27 = var33;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
+}
+}
+if (var27){
+if (varonce34) {
+var35 = varonce34;
+} else {
+var36 = ", ";
+var37 = 2;
+var38 = string__NativeString__to_s_with_length(var36, var37);
+var35 = var38;
+varonce34 = var35;
+}
+{
+string__FlatBuffer__append(var_b, var35); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
 } else {
 }
 {
 { /* Inline model#MParameter#name (var_mparameter) on <var_mparameter:MParameter> */
-var39 = var_mparameter->attrs[COLOR_model__MParameter___name].val; /* _name on <var_mparameter:MParameter> */
-if (unlikely(var39 == NULL)) {
+var41 = var_mparameter->attrs[COLOR_model__MParameter___name].val; /* _name on <var_mparameter:MParameter> */
+if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
+var39 = var41;
+RET_LABEL40:(void)0;
 }
 }
 {
-string__FlatBuffer__append(var_b, var37); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+string__FlatBuffer__append(var_b, var39); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
-if (varonce40) {
-var41 = varonce40;
+if (varonce42) {
+var43 = varonce42;
 } else {
-var42 = ": ";
-var43 = 2;
-var44 = string__NativeString__to_s_with_length(var42, var43);
-var41 = var44;
-varonce40 = var41;
+var44 = ": ";
+var45 = 2;
+var46 = string__NativeString__to_s_with_length(var44, var45);
+var43 = var46;
+varonce42 = var43;
 }
 {
-string__FlatBuffer__append(var_b, var41); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+string__FlatBuffer__append(var_b, var43); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
 {
 { /* Inline model#MParameter#mtype (var_mparameter) on <var_mparameter:MParameter> */
-var47 = var_mparameter->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var_mparameter:MParameter> */
-if (unlikely(var47 == NULL)) {
+var49 = var_mparameter->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var_mparameter:MParameter> */
+if (unlikely(var49 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
-var45 = var47;
-RET_LABEL46:(void)0;
+var47 = var49;
+RET_LABEL48:(void)0;
 }
 }
 {
-var48 = ((val* (*)(val*))(var45->class->vft[COLOR_string__Object__to_s]))(var45) /* to_s on <var45:MType>*/;
+var50 = ((val* (*)(val*))(var47->class->vft[COLOR_string__Object__to_s]))(var47) /* to_s on <var47:MType>*/;
 }
 {
-string__FlatBuffer__append(var_b, var48); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+string__FlatBuffer__append(var_b, var50); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
 {
 { /* Inline model#MParameter#is_vararg (var_mparameter) on <var_mparameter:MParameter> */
-var51 = var_mparameter->attrs[COLOR_model__MParameter___is_vararg].s; /* _is_vararg on <var_mparameter:MParameter> */
-var49 = var51;
-RET_LABEL50:(void)0;
+var53 = var_mparameter->attrs[COLOR_model__MParameter___is_vararg].s; /* _is_vararg on <var_mparameter:MParameter> */
+var51 = var53;
+RET_LABEL52:(void)0;
 }
 }
-if (var49){
-if (varonce52) {
-var53 = varonce52;
+if (var51){
+if (varonce54) {
+var55 = varonce54;
 } else {
-var54 = "...";
-var55 = 3;
-var56 = string__NativeString__to_s_with_length(var54, var55);
-var53 = var56;
-varonce52 = var53;
+var56 = "...";
+var57 = 3;
+var58 = string__NativeString__to_s_with_length(var56, var57);
+var55 = var58;
+varonce54 = var55;
 }
 {
-string__FlatBuffer__append(var_b, var53); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+string__FlatBuffer__append(var_b, var55); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
 } else {
 }
-CONTINUE_label: (void)0;
+var59 = 1;
 {
-((void (*)(val*))(var19->class->vft[COLOR_abstract_collection__Iterator__next]))(var19) /* next on <var19:Iterator[Discrete]>*/;
+var60 = kernel__Int__successor(var_i, var59);
+}
+var_i = var60;
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-if (varonce57) {
-var58 = varonce57;
+if (varonce61) {
+var62 = varonce61;
 } else {
-var59 = ")";
-var60 = 1;
-var61 = string__NativeString__to_s_with_length(var59, var60);
-var58 = var61;
-varonce57 = var58;
+var63 = ")";
+var64 = 1;
+var65 = string__NativeString__to_s_with_length(var63, var64);
+var62 = var65;
+varonce61 = var62;
 }
 {
-string__FlatBuffer__append(var_b, var58); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+string__FlatBuffer__append(var_b, var62); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
 } else {
 }
 {
 { /* Inline model#MSignature#return_mtype (self) on <self:MSignature> */
-var64 = self->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <self:MSignature> */
-var62 = var64;
-RET_LABEL63:(void)0;
+var68 = self->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <self:MSignature> */
+var66 = var68;
+RET_LABEL67:(void)0;
 }
 }
-var_ret = var62;
-var65 = NULL;
+var_ret = var66;
+var69 = NULL;
 if (var_ret == NULL) {
-var66 = 0; /* is null */
+var70 = 0; /* is null */
 } else {
-var66 = 1; /* arg is null and recv is not */
+var70 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_ret,var65) on <var_ret:nullable MType> */
-var_other = var65;
+{ /* Inline kernel#Object#!= (var_ret,var69) on <var_ret:nullable MType> */
+var_other = var69;
 {
-var70 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other) /* == on <var_ret:nullable MType(MType)>*/;
-var69 = var70;
+var74 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other) /* == on <var_ret:nullable MType(MType)>*/;
+var73 = var74;
 }
-var71 = !var69;
-var67 = var71;
-goto RET_LABEL68;
-RET_LABEL68:(void)0;
+var75 = !var73;
+var71 = var75;
+goto RET_LABEL72;
+RET_LABEL72:(void)0;
 }
-var66 = var67;
+var70 = var71;
 }
-if (var66){
-if (varonce72) {
-var73 = varonce72;
+if (var70){
+if (varonce76) {
+var77 = varonce76;
 } else {
-var74 = ": ";
-var75 = 2;
-var76 = string__NativeString__to_s_with_length(var74, var75);
-var73 = var76;
-varonce72 = var73;
-}
-{
-string__FlatBuffer__append(var_b, var73); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
-}
-{
-var77 = ((val* (*)(val*))(var_ret->class->vft[COLOR_string__Object__to_s]))(var_ret) /* to_s on <var_ret:nullable MType(MType)>*/;
+var78 = ": ";
+var79 = 2;
+var80 = string__NativeString__to_s_with_length(var78, var79);
+var77 = var80;
+varonce76 = var77;
 }
 {
 string__FlatBuffer__append(var_b, var77); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
 }
+{
+var81 = ((val* (*)(val*))(var_ret->class->vft[COLOR_string__Object__to_s]))(var_ret) /* to_s on <var_ret:nullable MType(MType)>*/;
+}
+{
+string__FlatBuffer__append(var_b, var81); /* Direct call string#FlatBuffer#append on <var_b:FlatBuffer>*/
+}
 } else {
 }
 {
-var78 = string__FlatBuffer__to_s(var_b);
+var82 = string__FlatBuffer__to_s(var_b);
 }
-var = var78;
+var = var82;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1297,23 +2457,25 @@ val* var1 /* : Array[MParameter] */;
 val* var_params /* var params: Array[MParameter] */;
 val* var2 /* : Array[MParameter] */;
 val* var4 /* : Array[MParameter] */;
+val* var_ /* var : Array[MParameter] */;
 val* var5 /* : ArrayIterator[nullable Object] */;
-short int var6 /* : Bool */;
-val* var7 /* : nullable Object */;
+val* var_6 /* var : ArrayIterator[MParameter] */;
+short int var7 /* : Bool */;
+val* var8 /* : nullable Object */;
 val* var_p /* var p: MParameter */;
-val* var8 /* : MParameter */;
-val* var9 /* : nullable MType */;
+val* var9 /* : MParameter */;
 val* var11 /* : nullable MType */;
+val* var13 /* : nullable MType */;
 val* var_ret /* var ret: nullable MType */;
-val* var12 /* : null */;
-short int var13 /* : Bool */;
-short int var14 /* : Bool */;
-val* var_other /* var other: nullable Object */;
+val* var14 /* : null */;
+short int var15 /* : Bool */;
 short int var16 /* : Bool */;
-short int var17 /* : Bool */;
+val* var_other /* var other: nullable Object */;
 short int var18 /* : Bool */;
-val* var19 /* : MType */;
-val* var20 /* : MSignature */;
+short int var19 /* : Bool */;
+short int var20 /* : Bool */;
+val* var21 /* : MType */;
+val* var22 /* : MSignature */;
 val* var_res /* var res: MSignature */;
 var_mtype = p0;
 var_anchor = p1;
@@ -1321,7 +2483,7 @@ var_mmodule = p2;
 var_cleanup_virtual = p3;
 var1 = NEW_array__Array(&type_array__Arraymodel__MParameter);
 {
-array__Array__init(var1); /* Direct call array#Array#init on <var1:Array[MParameter]>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:Array[MParameter]>*/;
 }
 var_params = var1;
 {
@@ -1329,77 +2491,86 @@ var_params = var1;
 var4 = self->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <self:MSignature> */
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
 var2 = var4;
 RET_LABEL3:(void)0;
 }
 }
+var_ = var2;
 {
-var5 = array__AbstractArrayRead__iterator(var2);
+var5 = array__AbstractArrayRead__iterator(var_);
 }
+var_6 = var5;
 for(;;) {
 {
-var6 = array__ArrayIterator__is_ok(var5);
+var7 = array__ArrayIterator__is_ok(var_6);
 }
-if(!var6) break;
+if (var7){
 {
-var7 = array__ArrayIterator__item(var5);
+var8 = array__ArrayIterator__item(var_6);
 }
-var_p = var7;
+var_p = var8;
 {
-var8 = model__MParameter__resolve_for(var_p, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual);
+var9 = model__MParameter__resolve_for(var_p, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual);
 }
 {
-array__Array__add(var_params, var8); /* Direct call array#Array#add on <var_params:Array[MParameter]>*/
+array__Array__add(var_params, var9); /* Direct call array#Array#add on <var_params:Array[MParameter]>*/
 }
-CONTINUE_label: (void)0;
 {
-array__ArrayIterator__next(var5); /* Direct call array#ArrayIterator#next on <var5:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_6); /* Direct call array#ArrayIterator#next on <var_6:ArrayIterator[MParameter]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
 {
-{ /* Inline model#MSignature#return_mtype (self) on <self:MSignature> */
-var11 = self->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <self:MSignature> */
-var9 = var11;
+{ /* Inline abstract_collection#Iterator#finish (var_6) on <var_6:ArrayIterator[MParameter]> */
 RET_LABEL10:(void)0;
 }
 }
-var_ret = var9;
-var12 = NULL;
+{
+{ /* Inline model#MSignature#return_mtype (self) on <self:MSignature> */
+var13 = self->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <self:MSignature> */
+var11 = var13;
+RET_LABEL12:(void)0;
+}
+}
+var_ret = var11;
+var14 = NULL;
 if (var_ret == NULL) {
-var13 = 0; /* is null */
+var15 = 0; /* is null */
 } else {
-var13 = 1; /* arg is null and recv is not */
+var15 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_ret,var12) on <var_ret:nullable MType> */
-var_other = var12;
+{ /* Inline kernel#Object#!= (var_ret,var14) on <var_ret:nullable MType> */
+var_other = var14;
 {
-var17 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other) /* == on <var_ret:nullable MType(MType)>*/;
-var16 = var17;
+var19 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other) /* == on <var_ret:nullable MType(MType)>*/;
+var18 = var19;
 }
-var18 = !var16;
-var14 = var18;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
+var20 = !var18;
+var16 = var20;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
 }
-var13 = var14;
+var15 = var16;
 }
-if (var13){
+if (var15){
 {
-var19 = ((val* (*)(val*, val*, val*, val*, short int))(var_ret->class->vft[COLOR_model__MType__resolve_for]))(var_ret, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual) /* resolve_for on <var_ret:nullable MType(MType)>*/;
+var21 = ((val* (*)(val*, val*, val*, val*, short int))(var_ret->class->vft[COLOR_model__MType__resolve_for]))(var_ret, var_mtype, var_anchor, var_mmodule, var_cleanup_virtual) /* resolve_for on <var_ret:nullable MType(MType)>*/;
 }
-var_ret = var19;
+var_ret = var21;
 } else {
 }
-var20 = NEW_model__MSignature(&type_model__MSignature);
+var22 = NEW_model__MSignature(&type_model__MSignature);
 {
-model__MSignature__init(var20, var_params, var_ret); /* Direct call model#MSignature#init on <var20:MSignature>*/
+model__MSignature__init(var22, var_params, var_ret); /* Direct call model#MSignature#init on <var22:MSignature>*/
 }
-var_res = var20;
+var_res = var22;
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1421,7 +2592,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MParameter___name].val; /* _name on <self:MParameter> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
 var = var1;
@@ -1437,7 +2608,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model__MParameter___name].val; /* _name on <self:Object(MParameter)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1467,7 +2638,7 @@ val* var1 /* : MType */;
 var1 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var = var1;
@@ -1483,7 +2654,7 @@ val* var3 /* : MType */;
 var3 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:Object(MParameter)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1548,9 +2719,7 @@ val* var_name /* var name: String */;
 val* var_mtype /* var mtype: MType */;
 short int var_is_vararg /* var is_vararg: Bool */;
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MParameter> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MParameter>*/;
 }
 var_name = p0;
 var_mtype = p1;
@@ -1558,19 +2727,19 @@ var_is_vararg = p2;
 {
 { /* Inline model#MParameter#name= (self,var_name) on <self:MParameter> */
 self->attrs[COLOR_model__MParameter___name].val = var_name; /* _name on <self:MParameter> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 {
 { /* Inline model#MParameter#mtype= (self,var_mtype) on <self:MParameter> */
 self->attrs[COLOR_model__MParameter___mtype].val = var_mtype; /* _mtype on <self:MParameter> */
-RET_LABEL3:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline model#MParameter#is_vararg= (self,var_is_vararg) on <self:MParameter> */
 self->attrs[COLOR_model__MParameter___is_vararg].s = var_is_vararg; /* _is_vararg on <self:MParameter> */
-RET_LABEL4:(void)0;
+RET_LABEL3:(void)0;
 }
 }
 RET_LABEL:;
@@ -1629,7 +2798,7 @@ if (var1){
 var6 = self->attrs[COLOR_model__MParameter___name].val; /* _name on <self:MParameter> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
 var4 = var6;
@@ -1650,7 +2819,7 @@ varonce = var7;
 var13 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var11 = var13;
@@ -1689,7 +2858,7 @@ goto RET_LABEL;
 var25 = self->attrs[COLOR_model__MParameter___name].val; /* _name on <self:MParameter> */
 if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
 var23 = var25;
@@ -1710,7 +2879,7 @@ varonce26 = var27;
 var33 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var31 = var33;
@@ -1776,7 +2945,7 @@ var_cleanup_virtual = p3;
 var3 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1797,7 +2966,7 @@ goto RET_LABEL;
 var8 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var6 = var8;
@@ -1814,7 +2983,7 @@ var10 = NEW_model__MParameter(&type_model__MParameter);
 var13 = self->attrs[COLOR_model__MParameter___name].val; /* _name on <self:MParameter> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1549);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1562);
 show_backtrace(1);
 }
 var11 = var13;
@@ -1857,7 +3026,7 @@ val* var4 /* : Model */;
 var3 = self->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <self:MParameter> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1888,7 +3057,7 @@ val* var1 /* : MClassDef */;
 var1 = self->attrs[COLOR_model__MProperty___intro_mclassdef].val; /* _intro_mclassdef on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1602);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1615);
 show_backtrace(1);
 }
 var = var1;
@@ -1904,7 +3073,7 @@ val* var3 /* : MClassDef */;
 var3 = self->attrs[COLOR_model__MProperty___intro_mclassdef].val; /* _intro_mclassdef on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1602);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1615);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1934,7 +3103,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MProperty___name].val; /* _name on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1620);
 show_backtrace(1);
 }
 var = var1;
@@ -1950,7 +3119,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model__MProperty___name].val; /* _name on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1620);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2008,7 +3177,7 @@ val* var32 /* : String */;
 var3 = self->attrs[COLOR_model__MProperty___intro_mclassdef].val; /* _intro_mclassdef on <self:MProperty> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1602);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1615);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2020,7 +3189,7 @@ RET_LABEL2:(void)0;
 var6 = var1->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var1:MClassDef> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
 var4 = var6;
@@ -2044,7 +3213,7 @@ varonce = var8;
 var14 = self->attrs[COLOR_model__MProperty___intro_mclassdef].val; /* _intro_mclassdef on <self:MProperty> */
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1602);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1615);
 show_backtrace(1);
 }
 var12 = var14;
@@ -2056,7 +3225,7 @@ RET_LABEL13:(void)0;
 var17 = var12->attrs[COLOR_model__MClassDef___mclass].val; /* _mclass on <var12:MClassDef> */
 if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 474);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 492);
 show_backtrace(1);
 }
 var15 = var17;
@@ -2068,7 +3237,7 @@ RET_LABEL16:(void)0;
 var20 = var15->attrs[COLOR_model__MClass___name].val; /* _name on <var15:MClass> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 340);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 352);
 show_backtrace(1);
 }
 var18 = var20;
@@ -2089,7 +3258,7 @@ varonce21 = var22;
 var28 = self->attrs[COLOR_model__MProperty___name].val; /* _name on <self:MProperty> */
 if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1620);
 show_backtrace(1);
 }
 var26 = var28;
@@ -2133,7 +3302,7 @@ val* var1 /* : MVisibility */;
 var1 = self->attrs[COLOR_model__MProperty___visibility].val; /* _visibility on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _visibility");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1617);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1630);
 show_backtrace(1);
 }
 var = var1;
@@ -2149,7 +3318,7 @@ val* var3 /* : MVisibility */;
 var3 = self->attrs[COLOR_model__MProperty___visibility].val; /* _visibility on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _visibility");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1617);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1630);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2178,20 +3347,18 @@ val* var_intro_mclassdef /* var intro_mclassdef: MClassDef */;
 val* var_name /* var name: String */;
 val* var_visibility /* var visibility: MVisibility */;
 val* var /* : Array[MProperty] */;
-val* var6 /* : Array[MProperty] */;
-val* var7 /* : MModule */;
-val* var9 /* : MModule */;
-val* var10 /* : Model */;
-val* var12 /* : Model */;
+val* var5 /* : Array[MProperty] */;
+val* var6 /* : MModule */;
+val* var8 /* : MModule */;
+val* var9 /* : Model */;
+val* var11 /* : Model */;
 val* var_model /* var model: Model */;
-val* var13 /* : MultiHashMap[String, MProperty] */;
-val* var15 /* : MultiHashMap[String, MProperty] */;
-val* var16 /* : Array[MProperty] */;
-val* var18 /* : Array[MProperty] */;
+val* var12 /* : MultiHashMap[String, MProperty] */;
+val* var14 /* : MultiHashMap[String, MProperty] */;
+val* var15 /* : Array[MProperty] */;
+val* var17 /* : Array[MProperty] */;
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MProperty> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MProperty>*/;
 }
 var_intro_mclassdef = p0;
 var_name = p1;
@@ -2199,31 +3366,31 @@ var_visibility = p2;
 {
 { /* Inline model#MProperty#intro_mclassdef= (self,var_intro_mclassdef) on <self:MProperty> */
 self->attrs[COLOR_model__MProperty___intro_mclassdef].val = var_intro_mclassdef; /* _intro_mclassdef on <self:MProperty> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 {
 { /* Inline model#MProperty#name= (self,var_name) on <self:MProperty> */
 self->attrs[COLOR_model__MProperty___name].val = var_name; /* _name on <self:MProperty> */
-RET_LABEL3:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline model#MProperty#visibility= (self,var_visibility) on <self:MProperty> */
 self->attrs[COLOR_model__MProperty___visibility].val = var_visibility; /* _visibility on <self:MProperty> */
-RET_LABEL4:(void)0;
+RET_LABEL3:(void)0;
 }
 }
 {
 { /* Inline model#MClassDef#intro_mproperties (var_intro_mclassdef) on <var_intro_mclassdef:MClassDef> */
-var6 = var_intro_mclassdef->attrs[COLOR_model__MClassDef___intro_mproperties].val; /* _intro_mproperties on <var_intro_mclassdef:MClassDef> */
-if (unlikely(var6 == NULL)) {
+var5 = var_intro_mclassdef->attrs[COLOR_model__MClassDef___intro_mproperties].val; /* _intro_mproperties on <var_intro_mclassdef:MClassDef> */
+if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mproperties");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 571);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 588);
 show_backtrace(1);
 }
-var = var6;
-RET_LABEL5:(void)0;
+var = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
@@ -2231,58 +3398,58 @@ array__Array__add(var, self); /* Direct call array#Array#add on <var:Array[MProp
 }
 {
 { /* Inline model#MClassDef#mmodule (var_intro_mclassdef) on <var_intro_mclassdef:MClassDef> */
-var9 = var_intro_mclassdef->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_intro_mclassdef:MClassDef> */
-if (unlikely(var9 == NULL)) {
+var8 = var_intro_mclassdef->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_intro_mclassdef:MClassDef> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
 {
-{ /* Inline mmodule#MModule#model (var7) on <var7:MModule> */
-var12 = var7->attrs[COLOR_mmodule__MModule___model].val; /* _model on <var7:MModule> */
-if (unlikely(var12 == NULL)) {
+{ /* Inline mmodule#MModule#model (var6) on <var6:MModule> */
+var11 = var6->attrs[COLOR_mmodule__MModule___model].val; /* _model on <var6:MModule> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 72);
 show_backtrace(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
-var_model = var10;
+var_model = var9;
 {
 { /* Inline model#Model#mproperties_by_name (var_model) on <var_model:Model> */
-var15 = var_model->attrs[COLOR_model__Model___mproperties_by_name].val; /* _mproperties_by_name on <var_model:Model> */
-if (unlikely(var15 == NULL)) {
+var14 = var_model->attrs[COLOR_model__Model___mproperties_by_name].val; /* _mproperties_by_name on <var_model:Model> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperties_by_name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 84);
 show_backtrace(1);
 }
-var13 = var15;
-RET_LABEL14:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-more_collections__MultiHashMap__add_one(var13, var_name, self); /* Direct call more_collections#MultiHashMap#add_one on <var13:MultiHashMap[String, MProperty]>*/
+more_collections__MultiHashMap__add_one(var12, var_name, self); /* Direct call more_collections#MultiHashMap#add_one on <var12:MultiHashMap[String, MProperty]>*/
 }
 {
 { /* Inline model#Model#mproperties (var_model) on <var_model:Model> */
-var18 = var_model->attrs[COLOR_model__Model___mproperties].val; /* _mproperties on <var_model:Model> */
-if (unlikely(var18 == NULL)) {
+var17 = var_model->attrs[COLOR_model__Model___mproperties].val; /* _mproperties on <var_model:Model> */
+if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperties");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 37);
 show_backtrace(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var15 = var17;
+RET_LABEL16:(void)0;
 }
 }
 {
-array__Array__add(var16, self); /* Direct call array#Array#add on <var16:Array[MProperty]>*/
+array__Array__add(var15, self); /* Direct call array#Array#add on <var15:Array[MProperty]>*/
 }
 RET_LABEL:;
 }
@@ -2298,7 +3465,7 @@ val* var1 /* : Array[MPropDef] */;
 var1 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var = var1;
@@ -2314,7 +3481,7 @@ val* var3 /* : Array[MPropDef] */;
 var3 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2327,26 +3494,14 @@ return var;
 /* method model#MProperty#intro for (self: MProperty): MPropDef */
 val* model__MProperty__intro(val* self) {
 val* var /* : MPropDef */;
-val* var1 /* : Array[MPropDef] */;
-val* var3 /* : Array[MPropDef] */;
-val* var4 /* : nullable Object */;
-{
-{ /* Inline model#MProperty#mpropdefs (self) on <self:MProperty> */
-var3 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:MProperty> */
-if (unlikely(var3 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+val* var1 /* : MPropDef */;
+var1 = self->attrs[COLOR_model__MProperty___intro].val; /* _intro on <self:MProperty> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
 show_backtrace(1);
 }
-var1 = var3;
-RET_LABEL2:(void)0;
-}
-}
-{
-var4 = abstract_collection__SequenceRead__first(var1);
-}
-var = var4;
-goto RET_LABEL;
+var = var1;
 RET_LABEL:;
 return var;
 }
@@ -2354,23 +3509,98 @@ return var;
 val* VIRTUAL_model__MProperty__intro(val* self) {
 val* var /* : MPropDef */;
 val* var1 /* : MPropDef */;
-var1 = model__MProperty__intro(self);
+val* var3 /* : MPropDef */;
+{ /* Inline model#MProperty#intro (self) on <self:Object(MProperty)> */
+var3 = self->attrs[COLOR_model__MProperty___intro].val; /* _intro on <self:Object(MProperty)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;
+}
+/* method model#MProperty#intro= for (self: MProperty, MPropDef) */
+void model__MProperty__intro_61d(val* self, val* p0) {
+short int var /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+/* Covariant cast for argument 0 (intro) <p0:MPropDef> isa MPROPDEF */
+/* <p0:MPropDef> isa MPROPDEF */
+type_struct = self->type->resolution_table->types[COLOR_model__MProperty_VTMPROPDEF];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p0->type->table_size) {
+var = 0;
+} else {
+var = p0->type->type_table[cltype] == idtype;
+}
+if (unlikely(!var)) {
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPDEF", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+self->attrs[COLOR_model__MProperty___intro].val = p0; /* _intro on <self:MProperty> */
+RET_LABEL:;
+}
+/* method model#MProperty#intro= for (self: Object, MPropDef) */
+void VIRTUAL_model__MProperty__intro_61d(val* self, val* p0) {
+short int var /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+const char* var_class_name;
+{ /* Inline model#MProperty#intro= (self,p0) on <self:Object(MProperty)> */
+/* Covariant cast for argument 0 (intro) <p0:MPropDef> isa MPROPDEF */
+/* <p0:MPropDef> isa MPROPDEF */
+type_struct = self->type->resolution_table->types[COLOR_model__MProperty_VTMPROPDEF];
+cltype = type_struct->color;
+idtype = type_struct->id;
+if(cltype >= p0->type->table_size) {
+var = 0;
+} else {
+var = p0->type->type_table[cltype] == idtype;
+}
+if (unlikely(!var)) {
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPDEF", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+self->attrs[COLOR_model__MProperty___intro].val = p0; /* _intro on <self:Object(MProperty)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
 }
 /* method model#MProperty#model for (self: MProperty): Model */
 val* model__MProperty__model(val* self) {
 val* var /* : Model */;
 val* var1 /* : MPropDef */;
-val* var2 /* : Model */;
+val* var3 /* : MPropDef */;
+val* var4 /* : Model */;
 {
-var1 = model__MProperty__intro(self);
+{ /* Inline model#MProperty#intro (self) on <self:MProperty> */
+var3 = self->attrs[COLOR_model__MProperty___intro].val; /* _intro on <self:MProperty> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 }
 {
-var2 = model__MPropDef__model(var1);
+var4 = model__MPropDef__model(var1);
 }
-var = var2;
+var = var4;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2394,7 +3624,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model__MProperty___name].val; /* _name on <self:MProperty> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1620);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2438,36 +3668,39 @@ val* var15 /* : Array[MPropDef] */;
 val* var_candidates /* var candidates: Array[MPropDef] */;
 val* var16 /* : Array[MPropDef] */;
 val* var18 /* : Array[MPropDef] */;
+val* var_ /* var : Array[MPropDef] */;
 val* var19 /* : ArrayIterator[nullable Object] */;
-short int var20 /* : Bool */;
-val* var21 /* : nullable Object */;
+val* var_20 /* var : ArrayIterator[MPropDef] */;
+short int var21 /* : Bool */;
+val* var22 /* : nullable Object */;
 val* var_mpropdef /* var mpropdef: MPropDef */;
-val* var22 /* : POSetElement[MModule] */;
-val* var24 /* : POSetElement[MModule] */;
-val* var25 /* : MClassDef */;
-val* var27 /* : MClassDef */;
-val* var28 /* : MModule */;
-val* var30 /* : MModule */;
-short int var31 /* : Bool */;
+val* var23 /* : POSetElement[MModule] */;
+val* var25 /* : POSetElement[MModule] */;
+val* var26 /* : MClassDef */;
+val* var28 /* : MClassDef */;
+val* var29 /* : MModule */;
+val* var31 /* : MModule */;
 short int var32 /* : Bool */;
-val* var33 /* : null */;
-val* var34 /* : MClassDef */;
-val* var36 /* : MClassDef */;
-val* var37 /* : MClassType */;
-val* var39 /* : MClassType */;
-short int var40 /* : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : null */;
+val* var35 /* : MClassDef */;
+val* var37 /* : MClassDef */;
+val* var38 /* : MClassType */;
+val* var40 /* : MClassType */;
 short int var41 /* : Bool */;
-long var42 /* : Int */;
-long var43 /* : Int */;
-short int var44 /* : Bool */;
-short int var46 /* : Bool */;
+short int var42 /* : Bool */;
+long var45 /* : Int */;
+long var47 /* : Int */;
+long var48 /* : Int */;
+short int var49 /* : Bool */;
+short int var51 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var47 /* : Bool */;
-val* var48 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
-val* var50 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
-val* var51 /* : Array[MPropDef] */;
+short int var52 /* : Bool */;
+val* var53 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+val* var55 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+val* var56 /* : Array[MPropDef] */;
 var_mmodule = p0;
 var_mtype = p1;
 {
@@ -2476,7 +3709,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1655);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1668);
 show_backtrace(1);
 }
 {
@@ -2488,7 +3721,7 @@ var_mtype = var3;
 var6 = self->attrs[COLOR_model__MProperty___lookup_definitions_cache].val; /* _lookup_definitions_cache on <self:MProperty> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1682);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1695);
 show_backtrace(1);
 }
 var4 = var6;
@@ -2526,7 +3759,7 @@ goto RET_LABEL;
 }
 var15 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
 {
-array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[MPropDef]>*/
+((void (*)(val*))(var15->class->vft[COLOR_kernel__Object__init]))(var15) /* init on <var15:Array[MPropDef]>*/;
 }
 var_candidates = var15;
 {
@@ -2534,156 +3767,170 @@ var_candidates = var15;
 var18 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:MProperty> */
 if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var16 = var18;
 RET_LABEL17:(void)0;
 }
 }
+var_ = var16;
 {
-var19 = array__AbstractArrayRead__iterator(var16);
+var19 = array__AbstractArrayRead__iterator(var_);
 }
+var_20 = var19;
 for(;;) {
 {
-var20 = array__ArrayIterator__is_ok(var19);
+var21 = array__ArrayIterator__is_ok(var_20);
 }
-if(!var20) break;
+if (var21){
 {
-var21 = array__ArrayIterator__item(var19);
+var22 = array__ArrayIterator__item(var_20);
 }
-var_mpropdef = var21;
+var_mpropdef = var22;
 {
 { /* Inline mmodule#MModule#in_importation (var_mmodule) on <var_mmodule:MModule> */
-var24 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
-if (unlikely(var24 == NULL)) {
+var25 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
+if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
-var22 = var24;
-RET_LABEL23:(void)0;
+var23 = var25;
+RET_LABEL24:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var27 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var27 == NULL)) {
+var28 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var25 = var27;
-RET_LABEL26:(void)0;
+var26 = var28;
+RET_LABEL27:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#mmodule (var25) on <var25:MClassDef> */
-var30 = var25->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var25:MClassDef> */
-if (unlikely(var30 == NULL)) {
+{ /* Inline model#MClassDef#mmodule (var26) on <var26:MClassDef> */
+var31 = var26->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var26:MClassDef> */
+if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
-var28 = var30;
-RET_LABEL29:(void)0;
+var29 = var31;
+RET_LABEL30:(void)0;
 }
 }
 {
-var31 = poset__POSetElement___60d_61d(var22, var28);
+var32 = poset__POSetElement___60d_61d(var23, var29);
 }
-var32 = !var31;
-if (var32){
-goto CONTINUE_label;
+var33 = !var32;
+if (var33){
+goto BREAK_label;
 } else {
 }
-var33 = NULL;
+var34 = NULL;
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var36 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var36 == NULL)) {
+var37 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var37 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var34 = var36;
-RET_LABEL35:(void)0;
+var35 = var37;
+RET_LABEL36:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var34) on <var34:MClassDef> */
-var39 = var34->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var34:MClassDef> */
-if (unlikely(var39 == NULL)) {
+{ /* Inline model#MClassDef#bound_mtype (var35) on <var35:MClassDef> */
+var40 = var35->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var35:MClassDef> */
+if (unlikely(var40 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
+var38 = var40;
+RET_LABEL39:(void)0;
 }
 }
 {
-var40 = model__MType__is_subtype(var_mtype, var_mmodule, var33, var37);
+var41 = model__MType__is_subtype(var_mtype, var_mmodule, var34, var38);
 }
-var41 = !var40;
-if (var41){
-goto CONTINUE_label;
+var42 = !var41;
+if (var42){
+goto BREAK_label;
 } else {
 }
 {
 array__Array__add(var_candidates, var_mpropdef); /* Direct call array#Array#add on <var_candidates:Array[MPropDef]>*/
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var19); /* Direct call array#ArrayIterator#next on <var19:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
 {
-var42 = array__AbstractArrayRead__length(var_candidates);
+array__ArrayIterator__next(var_20); /* Direct call array#ArrayIterator#next on <var_20:ArrayIterator[MPropDef]>*/
 }
-var43 = 1;
+} else {
+goto BREAK_label43;
+}
+}
+BREAK_label43: (void)0;
 {
-{ /* Inline kernel#Int#<= (var42,var43) on <var42:Int> */
-/* Covariant cast for argument 0 (i) <var43:Int> isa OTHER */
-/* <var43:Int> isa OTHER */
-var46 = 1; /* easy <var43:Int> isa OTHER*/
-if (unlikely(!var46)) {
+{ /* Inline abstract_collection#Iterator#finish (var_20) on <var_20:ArrayIterator[MPropDef]> */
+RET_LABEL44:(void)0;
+}
+}
+{
+{ /* Inline array#AbstractArrayRead#length (var_candidates) on <var_candidates:Array[MPropDef]> */
+var47 = var_candidates->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_candidates:Array[MPropDef]> */
+var45 = var47;
+RET_LABEL46:(void)0;
+}
+}
+var48 = 1;
+{
+{ /* Inline kernel#Int#<= (var45,var48) on <var45:Int> */
+/* Covariant cast for argument 0 (i) <var48:Int> isa OTHER */
+/* <var48:Int> isa OTHER */
+var51 = 1; /* easy <var48:Int> isa OTHER*/
+if (unlikely(!var51)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
-var47 = var42 <= var43;
-var44 = var47;
-goto RET_LABEL45;
-RET_LABEL45:(void)0;
+var52 = var45 <= var48;
+var49 = var52;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
 }
 }
-if (var44){
+if (var49){
 {
 { /* Inline model#MProperty#lookup_definitions_cache (self) on <self:MProperty> */
-var50 = self->attrs[COLOR_model__MProperty___lookup_definitions_cache].val; /* _lookup_definitions_cache on <self:MProperty> */
-if (unlikely(var50 == NULL)) {
+var55 = self->attrs[COLOR_model__MProperty___lookup_definitions_cache].val; /* _lookup_definitions_cache on <self:MProperty> */
+if (unlikely(var55 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1682);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1695);
 show_backtrace(1);
 }
-var48 = var50;
-RET_LABEL49:(void)0;
+var53 = var55;
+RET_LABEL54:(void)0;
 }
 }
 {
-more_collections__HashMap2___91d_93d_61d(var48, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var48:HashMap2[MModule, MType, Array[MPropDef]]>*/
+more_collections__HashMap2___91d_93d_61d(var53, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var53:HashMap2[MModule, MType, Array[MPropDef]]>*/
 }
 var = var_candidates;
 goto RET_LABEL;
 } else {
 }
 {
-var51 = model__MProperty__select_most_specific(self, var_mmodule, var_candidates);
+var56 = model__MProperty__select_most_specific(self, var_mmodule, var_candidates);
 }
-var = var51;
+var = var56;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2704,7 +3951,7 @@ val* var1 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var1 = self->attrs[COLOR_model__MProperty___lookup_definitions_cache].val; /* _lookup_definitions_cache on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1682);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1695);
 show_backtrace(1);
 }
 var = var1;
@@ -2720,7 +3967,7 @@ val* var3 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var3 = self->attrs[COLOR_model__MProperty___lookup_definitions_cache].val; /* _lookup_definitions_cache on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1682);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1695);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2742,53 +3989,56 @@ val* var4 /* : Array[MPropDef] */;
 val* var_candidates /* var candidates: Array[MPropDef] */;
 val* var5 /* : Array[MPropDef] */;
 val* var7 /* : Array[MPropDef] */;
+val* var_ /* var : Array[MPropDef] */;
 val* var8 /* : ArrayIterator[nullable Object] */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable Object */;
+val* var_9 /* var : ArrayIterator[MPropDef] */;
+short int var10 /* : Bool */;
+val* var11 /* : nullable Object */;
 val* var_mpropdef /* var mpropdef: MPropDef */;
-val* var11 /* : POSetElement[MModule] */;
-val* var13 /* : POSetElement[MModule] */;
-val* var14 /* : MClassDef */;
-val* var16 /* : MClassDef */;
-val* var17 /* : MModule */;
-val* var19 /* : MModule */;
-short int var20 /* : Bool */;
+val* var12 /* : POSetElement[MModule] */;
+val* var14 /* : POSetElement[MModule] */;
+val* var15 /* : MClassDef */;
+val* var17 /* : MClassDef */;
+val* var18 /* : MModule */;
+val* var20 /* : MModule */;
 short int var21 /* : Bool */;
-val* var22 /* : null */;
-val* var23 /* : MClassDef */;
-val* var25 /* : MClassDef */;
-val* var26 /* : MClassType */;
-val* var28 /* : MClassType */;
-short int var29 /* : Bool */;
+short int var22 /* : Bool */;
+val* var23 /* : null */;
+val* var24 /* : MClassDef */;
+val* var26 /* : MClassDef */;
+val* var27 /* : MClassType */;
+val* var29 /* : MClassType */;
 short int var30 /* : Bool */;
 short int var31 /* : Bool */;
-val* var32 /* : MClassDef */;
-val* var34 /* : MClassDef */;
-val* var35 /* : MClassType */;
-val* var37 /* : MClassType */;
-short int var38 /* : Bool */;
+short int var32 /* : Bool */;
+val* var33 /* : MClassDef */;
+val* var35 /* : MClassDef */;
+val* var36 /* : MClassType */;
+val* var38 /* : MClassType */;
 short int var39 /* : Bool */;
+short int var40 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var41 /* : Bool */;
-short int var43 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var44 /* : MClassDef */;
+short int var42 /* : Bool */;
+short int var44 /* : Bool */;
+short int var_45 /* var : Bool */;
 val* var46 /* : MClassDef */;
-val* var47 /* : MModule */;
+val* var48 /* : MClassDef */;
 val* var49 /* : MModule */;
-short int var50 /* : Bool */;
-short int var51 /* : Bool */;
+val* var51 /* : MModule */;
+short int var52 /* : Bool */;
 short int var53 /* : Bool */;
 short int var55 /* : Bool */;
-long var56 /* : Int */;
-long var57 /* : Int */;
-short int var58 /* : Bool */;
-short int var60 /* : Bool */;
+short int var57 /* : Bool */;
+long var60 /* : Int */;
+long var62 /* : Int */;
+long var63 /* : Int */;
+short int var64 /* : Bool */;
+short int var66 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var61 /* : Bool */;
-val* var62 /* : Array[MPropDef] */;
+short int var67 /* : Bool */;
+val* var68 /* : Array[MPropDef] */;
 var_mmodule = p0;
 var_mtype = p1;
 {
@@ -2797,7 +4047,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1694);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1707);
 show_backtrace(1);
 }
 {
@@ -2806,7 +4056,7 @@ var3 = ((val* (*)(val*))(var_mtype->class->vft[COLOR_model__MType__as_notnullabl
 var_mtype = var3;
 var4 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
 {
-array__Array__init(var4); /* Direct call array#Array#init on <var4:Array[MPropDef]>*/
+((void (*)(val*))(var4->class->vft[COLOR_kernel__Object__init]))(var4) /* init on <var4:Array[MPropDef]>*/;
 }
 var_candidates = var4;
 {
@@ -2814,233 +4064,247 @@ var_candidates = var4;
 var7 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:MProperty> */
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var5 = var7;
 RET_LABEL6:(void)0;
 }
 }
+var_ = var5;
 {
-var8 = array__AbstractArrayRead__iterator(var5);
+var8 = array__AbstractArrayRead__iterator(var_);
 }
+var_9 = var8;
 for(;;) {
 {
-var9 = array__ArrayIterator__is_ok(var8);
+var10 = array__ArrayIterator__is_ok(var_9);
 }
-if(!var9) break;
+if (var10){
 {
-var10 = array__ArrayIterator__item(var8);
+var11 = array__ArrayIterator__item(var_9);
 }
-var_mpropdef = var10;
+var_mpropdef = var11;
 {
 { /* Inline mmodule#MModule#in_importation (var_mmodule) on <var_mmodule:MModule> */
-var13 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
-if (unlikely(var13 == NULL)) {
+var14 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var16 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var16 == NULL)) {
+var17 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var14 = var16;
-RET_LABEL15:(void)0;
+var15 = var17;
+RET_LABEL16:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#mmodule (var14) on <var14:MClassDef> */
-var19 = var14->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var14:MClassDef> */
-if (unlikely(var19 == NULL)) {
+{ /* Inline model#MClassDef#mmodule (var15) on <var15:MClassDef> */
+var20 = var15->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var15:MClassDef> */
+if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
-var17 = var19;
-RET_LABEL18:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-var20 = poset__POSetElement___60d_61d(var11, var17);
+var21 = poset__POSetElement___60d_61d(var12, var18);
 }
-var21 = !var20;
-if (var21){
-goto CONTINUE_label;
+var22 = !var21;
+if (var22){
+goto BREAK_label;
 } else {
 }
-var22 = NULL;
+var23 = NULL;
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var25 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var25 == NULL)) {
+var26 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var23 = var25;
-RET_LABEL24:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var23) on <var23:MClassDef> */
-var28 = var23->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var23:MClassDef> */
-if (unlikely(var28 == NULL)) {
+{ /* Inline model#MClassDef#bound_mtype (var24) on <var24:MClassDef> */
+var29 = var24->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var24:MClassDef> */
+if (unlikely(var29 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var26 = var28;
-RET_LABEL27:(void)0;
+var27 = var29;
+RET_LABEL28:(void)0;
 }
 }
 {
-var29 = model__MType__is_subtype(var_mtype, var_mmodule, var22, var26);
+var30 = model__MType__is_subtype(var_mtype, var_mmodule, var23, var27);
 }
-var30 = !var29;
-if (var30){
-goto CONTINUE_label;
+var31 = !var30;
+if (var31){
+goto BREAK_label;
 } else {
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var34 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var34 == NULL)) {
+var35 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var35 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var32 = var34;
-RET_LABEL33:(void)0;
+var33 = var35;
+RET_LABEL34:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var32) on <var32:MClassDef> */
-var37 = var32->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var32:MClassDef> */
-if (unlikely(var37 == NULL)) {
+{ /* Inline model#MClassDef#bound_mtype (var33) on <var33:MClassDef> */
+var38 = var33->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var33:MClassDef> */
+if (unlikely(var38 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var35 = var37;
-RET_LABEL36:(void)0;
+var36 = var38;
+RET_LABEL37:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var_mtype,var35) on <var_mtype:MType> */
-var_other = var35;
+{ /* Inline kernel#Object#== (var_mtype,var36) on <var_mtype:MType> */
+var_other = var36;
 {
 { /* Inline kernel#Object#is_same_instance (var_mtype,var_other) on <var_mtype:MType> */
-var43 = var_mtype == var_other;
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var44 = var_mtype == var_other;
+var42 = var44;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
 }
 }
-var39 = var41;
-goto RET_LABEL40;
-RET_LABEL40:(void)0;
+var40 = var42;
+goto RET_LABEL41;
+RET_LABEL41:(void)0;
 }
-var38 = var39;
+var39 = var40;
 }
-var_ = var38;
-if (var38){
+var_45 = var39;
+if (var39){
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var46 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var46 == NULL)) {
+var48 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var48 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var44 = var46;
-RET_LABEL45:(void)0;
+var46 = var48;
+RET_LABEL47:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#mmodule (var44) on <var44:MClassDef> */
-var49 = var44->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var44:MClassDef> */
-if (unlikely(var49 == NULL)) {
+{ /* Inline model#MClassDef#mmodule (var46) on <var46:MClassDef> */
+var51 = var46->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var46:MClassDef> */
+if (unlikely(var51 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
-var47 = var49;
-RET_LABEL48:(void)0;
+var49 = var51;
+RET_LABEL50:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var_mmodule,var47) on <var_mmodule:MModule> */
-var_other = var47;
+{ /* Inline kernel#Object#== (var_mmodule,var49) on <var_mmodule:MModule> */
+var_other = var49;
 {
 { /* Inline kernel#Object#is_same_instance (var_mmodule,var_other) on <var_mmodule:MModule> */
-var55 = var_mmodule == var_other;
+var57 = var_mmodule == var_other;
+var55 = var57;
+goto RET_LABEL56;
+RET_LABEL56:(void)0;
+}
+}
 var53 = var55;
 goto RET_LABEL54;
 RET_LABEL54:(void)0;
 }
+var52 = var53;
 }
-var51 = var53;
-goto RET_LABEL52;
-RET_LABEL52:(void)0;
-}
-var50 = var51;
-}
-var31 = var50;
+var32 = var52;
 } else {
-var31 = var_;
+var32 = var_45;
 }
-if (var31){
-goto CONTINUE_label;
+if (var32){
+goto BREAK_label;
 } else {
 }
 {
 array__Array__add(var_candidates, var_mpropdef); /* Direct call array#Array#add on <var_candidates:Array[MPropDef]>*/
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var8); /* Direct call array#ArrayIterator#next on <var8:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
 {
-var56 = array__AbstractArrayRead__length(var_candidates);
+array__ArrayIterator__next(var_9); /* Direct call array#ArrayIterator#next on <var_9:ArrayIterator[MPropDef]>*/
 }
-var57 = 1;
+} else {
+goto BREAK_label58;
+}
+}
+BREAK_label58: (void)0;
 {
-{ /* Inline kernel#Int#<= (var56,var57) on <var56:Int> */
-/* Covariant cast for argument 0 (i) <var57:Int> isa OTHER */
-/* <var57:Int> isa OTHER */
-var60 = 1; /* easy <var57:Int> isa OTHER*/
-if (unlikely(!var60)) {
-var_class_name = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
-show_backtrace(1);
-}
-var61 = var56 <= var57;
-var58 = var61;
-goto RET_LABEL59;
+{ /* Inline abstract_collection#Iterator#finish (var_9) on <var_9:ArrayIterator[MPropDef]> */
 RET_LABEL59:(void)0;
 }
 }
-if (var58){
+{
+{ /* Inline array#AbstractArrayRead#length (var_candidates) on <var_candidates:Array[MPropDef]> */
+var62 = var_candidates->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_candidates:Array[MPropDef]> */
+var60 = var62;
+RET_LABEL61:(void)0;
+}
+}
+var63 = 1;
+{
+{ /* Inline kernel#Int#<= (var60,var63) on <var60:Int> */
+/* Covariant cast for argument 0 (i) <var63:Int> isa OTHER */
+/* <var63:Int> isa OTHER */
+var66 = 1; /* easy <var63:Int> isa OTHER*/
+if (unlikely(!var66)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
+show_backtrace(1);
+}
+var67 = var60 <= var63;
+var64 = var67;
+goto RET_LABEL65;
+RET_LABEL65:(void)0;
+}
+}
+if (var64){
 var = var_candidates;
 goto RET_LABEL;
 } else {
 }
 {
-var62 = model__MProperty__select_most_specific(self, var_mmodule, var_candidates);
+var68 = model__MProperty__select_most_specific(self, var_mmodule, var_candidates);
 }
-var = var62;
+var = var68;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -3066,84 +4330,88 @@ val* var_mmodule /* var mmodule: MModule */;
 val* var_candidates /* var candidates: Array[MPropDef] */;
 val* var2 /* : Array[MPropDef] */;
 val* var_res /* var res: Array[MPropDef] */;
+val* var_ /* var : Array[MPropDef] */;
 val* var3 /* : ArrayIterator[nullable Object] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
+val* var_4 /* var : ArrayIterator[MPropDef] */;
+short int var5 /* : Bool */;
+val* var6 /* : nullable Object */;
 val* var_pd1 /* var pd1: MPropDef */;
-val* var6 /* : MClassDef */;
-val* var8 /* : MClassDef */;
+val* var7 /* : MClassDef */;
+val* var9 /* : MClassDef */;
 val* var_cd1 /* var cd1: MClassDef */;
-val* var9 /* : MClass */;
-val* var11 /* : MClass */;
+val* var10 /* : MClass */;
+val* var12 /* : MClass */;
 val* var_c1 /* var c1: MClass */;
-short int var12 /* : Bool */;
+short int var13 /* : Bool */;
 short int var_keep /* var keep: Bool */;
-val* var13 /* : ArrayIterator[nullable Object] */;
-short int var14 /* : Bool */;
-val* var15 /* : nullable Object */;
-val* var_pd2 /* var pd2: MPropDef */;
-short int var16 /* : Bool */;
+val* var_14 /* var : Array[MPropDef] */;
+val* var15 /* : ArrayIterator[nullable Object] */;
+val* var_16 /* var : ArrayIterator[MPropDef] */;
 short int var17 /* : Bool */;
-val* var_other /* var other: nullable Object */;
+val* var18 /* : nullable Object */;
+val* var_pd2 /* var pd2: MPropDef */;
 short int var19 /* : Bool */;
-short int var21 /* : Bool */;
-val* var22 /* : MClassDef */;
-val* var24 /* : MClassDef */;
+short int var20 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var22 /* : Bool */;
+short int var24 /* : Bool */;
+val* var25 /* : MClassDef */;
+val* var27 /* : MClassDef */;
 val* var_cd2 /* var cd2: MClassDef */;
-val* var25 /* : MClass */;
-val* var27 /* : MClass */;
+val* var28 /* : MClass */;
+val* var30 /* : MClass */;
 val* var_c2 /* var c2: MClass */;
-val* var28 /* : MClassType */;
-val* var30 /* : MClassType */;
 val* var31 /* : MClassType */;
 val* var33 /* : MClassType */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
+val* var34 /* : MClassType */;
+val* var36 /* : MClassType */;
 short int var37 /* : Bool */;
-short int var39 /* : Bool */;
-val* var40 /* : MModule */;
-val* var42 /* : MModule */;
-val* var43 /* : POSetElement[MModule] */;
-val* var45 /* : POSetElement[MModule] */;
-val* var46 /* : MModule */;
-val* var48 /* : MModule */;
-short int var49 /* : Bool */;
-short int var50 /* : Bool */;
-short int var51 /* : Bool */;
-val* var52 /* : MClassType */;
-val* var54 /* : MClassType */;
-val* var55 /* : null */;
+short int var38 /* : Bool */;
+short int var40 /* : Bool */;
+short int var42 /* : Bool */;
+val* var43 /* : MModule */;
+val* var45 /* : MModule */;
+val* var46 /* : POSetElement[MModule] */;
+val* var48 /* : POSetElement[MModule] */;
+val* var49 /* : MModule */;
+val* var51 /* : MModule */;
+short int var52 /* : Bool */;
+short int var53 /* : Bool */;
+short int var55 /* : Bool */;
 val* var56 /* : MClassType */;
 val* var58 /* : MClassType */;
-short int var59 /* : Bool */;
-short int var_ /* var : Bool */;
+val* var59 /* : null */;
 val* var60 /* : MClassType */;
 val* var62 /* : MClassType */;
-val* var63 /* : MClassType */;
+short int var63 /* : Bool */;
+short int var_64 /* var : Bool */;
 val* var65 /* : MClassType */;
-short int var66 /* : Bool */;
-short int var67 /* : Bool */;
-val* var_other69 /* var other: nullable Object */;
-short int var70 /* : Bool */;
+val* var67 /* : MClassType */;
+val* var68 /* : MClassType */;
+val* var70 /* : MClassType */;
 short int var71 /* : Bool */;
 short int var72 /* : Bool */;
-short int var73 /* : Bool */;
+val* var_other74 /* var other: nullable Object */;
 short int var75 /* : Bool */;
+short int var76 /* : Bool */;
+short int var77 /* : Bool */;
+short int var78 /* : Bool */;
+short int var82 /* : Bool */;
 static val* varonce;
-val* var76 /* : String */;
-char* var77 /* : NativeString */;
-long var78 /* : Int */;
-val* var79 /* : FlatString */;
-static val* varonce80;
-val* var81 /* : String */;
-char* var82 /* : NativeString */;
-long var83 /* : Int */;
-val* var84 /* : FlatString */;
-val* var85 /* : String */;
-val* var86 /* : Array[Object] */;
-long var87 /* : Int */;
-val* var88 /* : NativeArray[Object] */;
-val* var89 /* : String */;
+val* var83 /* : String */;
+char* var84 /* : NativeString */;
+long var85 /* : Int */;
+val* var86 /* : FlatString */;
+static val* varonce87;
+val* var88 /* : String */;
+char* var89 /* : NativeString */;
+long var90 /* : Int */;
+val* var91 /* : FlatString */;
+val* var92 /* : String */;
+val* var93 /* : Array[Object] */;
+long var94 /* : Int */;
+val* var95 /* : NativeArray[Object] */;
+val* var96 /* : String */;
 /* Covariant cast for argument 1 (candidates) <p1:Array[MPropDef]> isa Array[MPROPDEF] */
 /* <p1:Array[MPropDef]> isa Array[MPROPDEF] */
 type_struct = self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF];
@@ -3157,133 +4425,125 @@ var1 = p1->type->type_table[cltype] == idtype;
 if (unlikely(!var1)) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[MPROPDEF]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1716);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1729);
 show_backtrace(1);
 }
 var_mmodule = p0;
 var_candidates = p1;
 var2 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
 {
-array__Array__init(var2); /* Direct call array#Array#init on <var2:Array[MPropDef]>*/
+((void (*)(val*))(var2->class->vft[COLOR_kernel__Object__init]))(var2) /* init on <var2:Array[MPropDef]>*/;
 }
 var_res = var2;
+var_ = var_candidates;
 {
-var3 = array__AbstractArrayRead__iterator(var_candidates);
+var3 = array__AbstractArrayRead__iterator(var_);
 }
+var_4 = var3;
 for(;;) {
 {
-var4 = array__ArrayIterator__is_ok(var3);
+var5 = array__ArrayIterator__is_ok(var_4);
 }
-if(!var4) break;
+if (var5){
 {
-var5 = array__ArrayIterator__item(var3);
+var6 = array__ArrayIterator__item(var_4);
 }
-var_pd1 = var5;
+var_pd1 = var6;
 {
 { /* Inline model#MPropDef#mclassdef (var_pd1) on <var_pd1:MPropDef> */
-var8 = var_pd1->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_pd1:MPropDef> */
-if (unlikely(var8 == NULL)) {
+var9 = var_pd1->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_pd1:MPropDef> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
-var_cd1 = var6;
+var_cd1 = var7;
 {
 { /* Inline model#MClassDef#mclass (var_cd1) on <var_cd1:MClassDef> */
-var11 = var_cd1->attrs[COLOR_model__MClassDef___mclass].val; /* _mclass on <var_cd1:MClassDef> */
-if (unlikely(var11 == NULL)) {
+var12 = var_cd1->attrs[COLOR_model__MClassDef___mclass].val; /* _mclass on <var_cd1:MClassDef> */
+if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 474);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 492);
 show_backtrace(1);
 }
-var9 = var11;
-RET_LABEL10:(void)0;
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
-var_c1 = var9;
-var12 = 1;
-var_keep = var12;
+var_c1 = var10;
+var13 = 1;
+var_keep = var13;
+var_14 = var_candidates;
 {
-var13 = array__AbstractArrayRead__iterator(var_candidates);
+var15 = array__AbstractArrayRead__iterator(var_14);
 }
+var_16 = var15;
 for(;;) {
 {
-var14 = array__ArrayIterator__is_ok(var13);
+var17 = array__ArrayIterator__is_ok(var_16);
 }
-if(!var14) break;
+if (var17){
 {
-var15 = array__ArrayIterator__item(var13);
+var18 = array__ArrayIterator__item(var_16);
 }
-var_pd2 = var15;
+var_pd2 = var18;
 {
 { /* Inline kernel#Object#== (var_pd2,var_pd1) on <var_pd2:MPropDef> */
 var_other = var_pd1;
 {
 { /* Inline kernel#Object#is_same_instance (var_pd2,var_other) on <var_pd2:MPropDef> */
-var21 = var_pd2 == var_other;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var24 = var_pd2 == var_other;
+var22 = var24;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
 }
 }
-var17 = var19;
-goto RET_LABEL18;
-RET_LABEL18:(void)0;
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
-var16 = var17;
+var19 = var20;
 }
-if (var16){
-goto CONTINUE_label;
+if (var19){
+goto BREAK_label;
 } else {
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_pd2) on <var_pd2:MPropDef> */
-var24 = var_pd2->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_pd2:MPropDef> */
-if (unlikely(var24 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
-show_backtrace(1);
-}
-var22 = var24;
-RET_LABEL23:(void)0;
-}
-}
-var_cd2 = var22;
-{
-{ /* Inline model#MClassDef#mclass (var_cd2) on <var_cd2:MClassDef> */
-var27 = var_cd2->attrs[COLOR_model__MClassDef___mclass].val; /* _mclass on <var_cd2:MClassDef> */
+var27 = var_pd2->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_pd2:MPropDef> */
 if (unlikely(var27 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 474);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
 var25 = var27;
 RET_LABEL26:(void)0;
 }
 }
-var_c2 = var25;
+var_cd2 = var25;
 {
-{ /* Inline model#MClass#mclass_type (var_c2) on <var_c2:MClass> */
-var30 = var_c2->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c2:MClass> */
+{ /* Inline model#MClassDef#mclass (var_cd2) on <var_cd2:MClassDef> */
+var30 = var_cd2->attrs[COLOR_model__MClassDef___mclass].val; /* _mclass on <var_cd2:MClassDef> */
 if (unlikely(var30 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 492);
 show_backtrace(1);
 }
 var28 = var30;
 RET_LABEL29:(void)0;
 }
 }
+var_c2 = var28;
 {
-{ /* Inline model#MClass#mclass_type (var_c1) on <var_c1:MClass> */
-var33 = var_c1->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c1:MClass> */
+{ /* Inline model#MClass#mclass_type (var_c2) on <var_c2:MClass> */
+var33 = var_c2->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c2:MClass> */
 if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
 var31 = var33;
@@ -3291,41 +4551,41 @@ RET_LABEL32:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var28,var31) on <var28:MClassType> */
-var_other = var31;
-{
-{ /* Inline kernel#Object#is_same_instance (var28,var_other) on <var28:MClassType> */
-var39 = var28 == var_other;
-var37 = var39;
-goto RET_LABEL38;
-RET_LABEL38:(void)0;
-}
-}
-var35 = var37;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
-}
-var34 = var35;
-}
-if (var34){
-{
-{ /* Inline model#MClassDef#mmodule (var_cd2) on <var_cd2:MClassDef> */
-var42 = var_cd2->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_cd2:MClassDef> */
-if (unlikely(var42 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+{ /* Inline model#MClass#mclass_type (var_c1) on <var_c1:MClass> */
+var36 = var_c1->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c1:MClass> */
+if (unlikely(var36 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
+var34 = var36;
+RET_LABEL35:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var31,var34) on <var31:MClassType> */
+var_other = var34;
+{
+{ /* Inline kernel#Object#is_same_instance (var31,var_other) on <var31:MClassType> */
+var42 = var31 == var_other;
 var40 = var42;
+goto RET_LABEL41;
 RET_LABEL41:(void)0;
 }
 }
+var38 = var40;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
+}
+var37 = var38;
+}
+if (var37){
 {
-{ /* Inline mmodule#MModule#in_importation (var40) on <var40:MModule> */
-var45 = var40->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var40:MModule> */
+{ /* Inline model#MClassDef#mmodule (var_cd2) on <var_cd2:MClassDef> */
+var45 = var_cd2->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_cd2:MClassDef> */
 if (unlikely(var45 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
 var43 = var45;
@@ -3333,11 +4593,11 @@ RET_LABEL44:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#mmodule (var_cd1) on <var_cd1:MClassDef> */
-var48 = var_cd1->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_cd1:MClassDef> */
+{ /* Inline mmodule#MModule#in_importation (var43) on <var43:MModule> */
+var48 = var43->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var43:MModule> */
 if (unlikely(var48 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
 var46 = var48;
@@ -3345,51 +4605,46 @@ RET_LABEL47:(void)0;
 }
 }
 {
-var49 = poset__POSetElement___60d(var43, var46);
+{ /* Inline model#MClassDef#mmodule (var_cd1) on <var_cd1:MClassDef> */
+var51 = var_cd1->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var_cd1:MClassDef> */
+if (unlikely(var51 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
+show_backtrace(1);
 }
-if (var49){
-var50 = 0;
-var_keep = var50;
-goto BREAK_label;
+var49 = var51;
+RET_LABEL50:(void)0;
+}
+}
+{
+var52 = poset__POSetElement___60d(var46, var49);
+}
+if (var52){
+var53 = 0;
+var_keep = var53;
+goto BREAK_label54;
 } else {
 }
 } else {
 {
 { /* Inline model#MClassDef#bound_mtype (var_cd2) on <var_cd2:MClassDef> */
-var54 = var_cd2->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd2:MClassDef> */
-if (unlikely(var54 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
-show_backtrace(1);
-}
-var52 = var54;
-RET_LABEL53:(void)0;
-}
-}
-var55 = NULL;
-{
-{ /* Inline model#MClassDef#bound_mtype (var_cd1) on <var_cd1:MClassDef> */
-var58 = var_cd1->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd1:MClassDef> */
+var58 = var_cd2->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd2:MClassDef> */
 if (unlikely(var58 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
 var56 = var58;
 RET_LABEL57:(void)0;
 }
 }
+var59 = NULL;
 {
-var59 = model__MType__is_subtype(var52, var_mmodule, var55, var56);
-}
-var_ = var59;
-if (var59){
-{
-{ /* Inline model#MClassDef#bound_mtype (var_cd2) on <var_cd2:MClassDef> */
-var62 = var_cd2->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd2:MClassDef> */
+{ /* Inline model#MClassDef#bound_mtype (var_cd1) on <var_cd1:MClassDef> */
+var62 = var_cd1->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd1:MClassDef> */
 if (unlikely(var62 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
 var60 = var62;
@@ -3397,100 +4652,132 @@ RET_LABEL61:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var_cd1) on <var_cd1:MClassDef> */
-var65 = var_cd1->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd1:MClassDef> */
-if (unlikely(var65 == NULL)) {
+var63 = model__MType__is_subtype(var56, var_mmodule, var59, var60);
+}
+var_64 = var63;
+if (var63){
+{
+{ /* Inline model#MClassDef#bound_mtype (var_cd2) on <var_cd2:MClassDef> */
+var67 = var_cd2->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd2:MClassDef> */
+if (unlikely(var67 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var63 = var65;
-RET_LABEL64:(void)0;
+var65 = var67;
+RET_LABEL66:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#!= (var60,var63) on <var60:MClassType> */
-var_other69 = var63;
+{ /* Inline model#MClassDef#bound_mtype (var_cd1) on <var_cd1:MClassDef> */
+var70 = var_cd1->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var_cd1:MClassDef> */
+if (unlikely(var70 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
+show_backtrace(1);
+}
+var68 = var70;
+RET_LABEL69:(void)0;
+}
+}
 {
-var71 = ((short int (*)(val*, val*))(var60->class->vft[COLOR_kernel__Object___61d_61d]))(var60, var_other69) /* == on <var60:MClassType>*/;
-var70 = var71;
+{ /* Inline kernel#Object#!= (var65,var68) on <var65:MClassType> */
+var_other74 = var68;
+{
+var76 = ((short int (*)(val*, val*))(var65->class->vft[COLOR_kernel__Object___61d_61d]))(var65, var_other74) /* == on <var65:MClassType>*/;
+var75 = var76;
 }
-var72 = !var70;
-var67 = var72;
-goto RET_LABEL68;
-RET_LABEL68:(void)0;
+var77 = !var75;
+var72 = var77;
+goto RET_LABEL73;
+RET_LABEL73:(void)0;
 }
-var66 = var67;
+var71 = var72;
 }
-var51 = var66;
+var55 = var71;
 } else {
-var51 = var_;
+var55 = var_64;
 }
-if (var51){
-var73 = 0;
-var_keep = var73;
-goto BREAK_label;
+if (var55){
+var78 = 0;
+var_keep = var78;
+goto BREAK_label54;
 } else {
-}
-}
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var13); /* Direct call array#ArrayIterator#next on <var13:ArrayIterator[nullable Object]>*/
 }
 }
 BREAK_label: (void)0;
+{
+array__ArrayIterator__next(var_16); /* Direct call array#ArrayIterator#next on <var_16:ArrayIterator[MPropDef]>*/
+}
+} else {
+goto BREAK_label54;
+}
+}
+BREAK_label54: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_16) on <var_16:ArrayIterator[MPropDef]> */
+RET_LABEL79:(void)0;
+}
+}
 if (var_keep){
 {
 array__Array__add(var_res, var_pd1); /* Direct call array#Array#add on <var_res:Array[MPropDef]>*/
 }
 } else {
 }
-CONTINUE_label74: (void)0;
 {
-array__ArrayIterator__next(var3); /* Direct call array#ArrayIterator#next on <var3:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_4); /* Direct call array#ArrayIterator#next on <var_4:ArrayIterator[MPropDef]>*/
+}
+} else {
+goto BREAK_label80;
 }
 }
-BREAK_label74: (void)0;
+BREAK_label80: (void)0;
 {
-var75 = array__AbstractArrayRead__is_empty(var_res);
+{ /* Inline abstract_collection#Iterator#finish (var_4) on <var_4:ArrayIterator[MPropDef]> */
+RET_LABEL81:(void)0;
 }
-if (var75){
+}
+{
+var82 = array__AbstractArrayRead__is_empty(var_res);
+}
+if (var82){
 if (varonce) {
-var76 = varonce;
+var83 = varonce;
 } else {
-var77 = "All lost! ";
-var78 = 10;
-var79 = string__NativeString__to_s_with_length(var77, var78);
-var76 = var79;
-varonce = var76;
+var84 = "All lost! ";
+var85 = 10;
+var86 = string__NativeString__to_s_with_length(var84, var85);
+var83 = var86;
+varonce = var83;
 }
-if (varonce80) {
-var81 = varonce80;
+if (varonce87) {
+var88 = varonce87;
 } else {
-var82 = ", ";
-var83 = 2;
-var84 = string__NativeString__to_s_with_length(var82, var83);
-var81 = var84;
-varonce80 = var81;
+var89 = ", ";
+var90 = 2;
+var91 = string__NativeString__to_s_with_length(var89, var90);
+var88 = var91;
+varonce87 = var88;
 }
 {
-var85 = string__Collection__join(var_candidates, var81);
+var92 = string__Collection__join(var_candidates, var88);
 }
-var86 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var86 = array_instance Array[Object] */
-var87 = 2;
-var88 = NEW_array__NativeArray(var87, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var88)->values[0] = (val*) var76;
-((struct instance_array__NativeArray*)var88)->values[1] = (val*) var85;
+var93 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var93 = array_instance Array[Object] */
+var94 = 2;
+var95 = NEW_array__NativeArray(var94, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var95)->values[0] = (val*) var83;
+((struct instance_array__NativeArray*)var95)->values[1] = (val*) var92;
 {
-((void (*)(val*, val*, long))(var86->class->vft[COLOR_array__Array__with_native]))(var86, var88, var87) /* with_native on <var86:Array[Object]>*/;
+((void (*)(val*, val*, long))(var93->class->vft[COLOR_array__Array__with_native]))(var93, var95, var94) /* with_native on <var93:Array[Object]>*/;
 }
-}
-{
-var89 = ((val* (*)(val*))(var86->class->vft[COLOR_string__Object__to_s]))(var86) /* to_s on <var86:Array[Object]>*/;
 }
 {
-file__Object__print(self, var89); /* Direct call file#Object#print on <self:MProperty>*/
+var96 = ((val* (*)(val*))(var93->class->vft[COLOR_string__Object__to_s]))(var93) /* to_s on <var93:Array[Object]>*/;
+}
+{
+file__Object__print(self, var96); /* Direct call file#Object#print on <self:MProperty>*/
 }
 } else {
 }
@@ -3523,7 +4810,7 @@ var1 = model__MType__has_mproperty(var_mtype, var_mmodule, self);
 }
 if (unlikely(!var1)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1763);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1776);
 show_backtrace(1);
 }
 {
@@ -3569,38 +4856,41 @@ val* var15 /* : Array[MPropDef] */;
 val* var_candidates /* var candidates: Array[MPropDef] */;
 val* var16 /* : Array[MPropDef] */;
 val* var18 /* : Array[MPropDef] */;
+val* var_ /* var : Array[MPropDef] */;
 val* var19 /* : ArrayIterator[nullable Object] */;
-short int var20 /* : Bool */;
-val* var21 /* : nullable Object */;
+val* var_20 /* var : ArrayIterator[MPropDef] */;
+short int var21 /* : Bool */;
+val* var22 /* : nullable Object */;
 val* var_mpropdef /* var mpropdef: MPropDef */;
-val* var22 /* : POSetElement[MModule] */;
-val* var24 /* : POSetElement[MModule] */;
-val* var25 /* : MClassDef */;
-val* var27 /* : MClassDef */;
-val* var28 /* : MModule */;
-val* var30 /* : MModule */;
-short int var31 /* : Bool */;
+val* var23 /* : POSetElement[MModule] */;
+val* var25 /* : POSetElement[MModule] */;
+val* var26 /* : MClassDef */;
+val* var28 /* : MClassDef */;
+val* var29 /* : MModule */;
+val* var31 /* : MModule */;
 short int var32 /* : Bool */;
-val* var33 /* : null */;
-val* var34 /* : MClassDef */;
-val* var36 /* : MClassDef */;
-val* var37 /* : MClassType */;
-val* var39 /* : MClassType */;
-short int var40 /* : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : null */;
+val* var35 /* : MClassDef */;
+val* var37 /* : MClassDef */;
+val* var38 /* : MClassType */;
+val* var40 /* : MClassType */;
 short int var41 /* : Bool */;
-long var42 /* : Int */;
-long var43 /* : Int */;
-short int var44 /* : Bool */;
-short int var46 /* : Bool */;
+short int var42 /* : Bool */;
+long var45 /* : Int */;
+long var47 /* : Int */;
+long var48 /* : Int */;
+short int var49 /* : Bool */;
+short int var51 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var47 /* : Bool */;
-val* var48 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
-val* var50 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
-val* var51 /* : Array[nullable Object] */;
-val* var52 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
-val* var54 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+short int var52 /* : Bool */;
+val* var53 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+val* var55 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+val* var56 /* : Array[nullable Object] */;
+val* var57 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
+val* var59 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var_mmodule = p0;
 var_mtype = p1;
 {
@@ -3609,7 +4899,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1771);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1784);
 show_backtrace(1);
 }
 {
@@ -3621,7 +4911,7 @@ var_mtype = var3;
 var6 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_all_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1800);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1813);
 show_backtrace(1);
 }
 var4 = var6;
@@ -3659,7 +4949,7 @@ goto RET_LABEL;
 }
 var15 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymodel__MProperty_VTMPROPDEF]);
 {
-array__Array__init(var15); /* Direct call array#Array#init on <var15:Array[MPropDef]>*/
+((void (*)(val*))(var15->class->vft[COLOR_kernel__Object__init]))(var15) /* init on <var15:Array[MPropDef]>*/;
 }
 var_candidates = var15;
 {
@@ -3667,147 +4957,161 @@ var_candidates = var15;
 var18 = self->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <self:MProperty> */
 if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var16 = var18;
 RET_LABEL17:(void)0;
 }
 }
+var_ = var16;
 {
-var19 = array__AbstractArrayRead__iterator(var16);
+var19 = array__AbstractArrayRead__iterator(var_);
 }
+var_20 = var19;
 for(;;) {
 {
-var20 = array__ArrayIterator__is_ok(var19);
+var21 = array__ArrayIterator__is_ok(var_20);
 }
-if(!var20) break;
+if (var21){
 {
-var21 = array__ArrayIterator__item(var19);
+var22 = array__ArrayIterator__item(var_20);
 }
-var_mpropdef = var21;
+var_mpropdef = var22;
 {
 { /* Inline mmodule#MModule#in_importation (var_mmodule) on <var_mmodule:MModule> */
-var24 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
-if (unlikely(var24 == NULL)) {
+var25 = var_mmodule->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <var_mmodule:MModule> */
+if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
-var22 = var24;
-RET_LABEL23:(void)0;
+var23 = var25;
+RET_LABEL24:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var27 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var27 == NULL)) {
+var28 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var25 = var27;
-RET_LABEL26:(void)0;
+var26 = var28;
+RET_LABEL27:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#mmodule (var25) on <var25:MClassDef> */
-var30 = var25->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var25:MClassDef> */
-if (unlikely(var30 == NULL)) {
+{ /* Inline model#MClassDef#mmodule (var26) on <var26:MClassDef> */
+var31 = var26->attrs[COLOR_model__MClassDef___mmodule].val; /* _mmodule on <var26:MClassDef> */
+if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 471);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 489);
 show_backtrace(1);
 }
-var28 = var30;
-RET_LABEL29:(void)0;
+var29 = var31;
+RET_LABEL30:(void)0;
 }
 }
 {
-var31 = poset__POSetElement___60d_61d(var22, var28);
+var32 = poset__POSetElement___60d_61d(var23, var29);
 }
-var32 = !var31;
-if (var32){
-goto CONTINUE_label;
+var33 = !var32;
+if (var33){
+goto BREAK_label;
 } else {
 }
-var33 = NULL;
+var34 = NULL;
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MPropDef> */
-var36 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
-if (unlikely(var36 == NULL)) {
+var37 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MPropDef> */
+if (unlikely(var37 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var34 = var36;
-RET_LABEL35:(void)0;
+var35 = var37;
+RET_LABEL36:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var34) on <var34:MClassDef> */
-var39 = var34->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var34:MClassDef> */
-if (unlikely(var39 == NULL)) {
+{ /* Inline model#MClassDef#bound_mtype (var35) on <var35:MClassDef> */
+var40 = var35->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var35:MClassDef> */
+if (unlikely(var40 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
+var38 = var40;
+RET_LABEL39:(void)0;
 }
 }
 {
-var40 = model__MType__is_subtype(var_mtype, var_mmodule, var33, var37);
+var41 = model__MType__is_subtype(var_mtype, var_mmodule, var34, var38);
 }
-var41 = !var40;
-if (var41){
-goto CONTINUE_label;
+var42 = !var41;
+if (var42){
+goto BREAK_label;
 } else {
 }
 {
 array__Array__add(var_candidates, var_mpropdef); /* Direct call array#Array#add on <var_candidates:Array[MPropDef]>*/
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var19); /* Direct call array#ArrayIterator#next on <var19:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
 {
-var42 = array__AbstractArrayRead__length(var_candidates);
+array__ArrayIterator__next(var_20); /* Direct call array#ArrayIterator#next on <var_20:ArrayIterator[MPropDef]>*/
 }
-var43 = 1;
+} else {
+goto BREAK_label43;
+}
+}
+BREAK_label43: (void)0;
 {
-{ /* Inline kernel#Int#<= (var42,var43) on <var42:Int> */
-/* Covariant cast for argument 0 (i) <var43:Int> isa OTHER */
-/* <var43:Int> isa OTHER */
-var46 = 1; /* easy <var43:Int> isa OTHER*/
-if (unlikely(!var46)) {
+{ /* Inline abstract_collection#Iterator#finish (var_20) on <var_20:ArrayIterator[MPropDef]> */
+RET_LABEL44:(void)0;
+}
+}
+{
+{ /* Inline array#AbstractArrayRead#length (var_candidates) on <var_candidates:Array[MPropDef]> */
+var47 = var_candidates->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_candidates:Array[MPropDef]> */
+var45 = var47;
+RET_LABEL46:(void)0;
+}
+}
+var48 = 1;
+{
+{ /* Inline kernel#Int#<= (var45,var48) on <var45:Int> */
+/* Covariant cast for argument 0 (i) <var48:Int> isa OTHER */
+/* <var48:Int> isa OTHER */
+var51 = 1; /* easy <var48:Int> isa OTHER*/
+if (unlikely(!var51)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
-var47 = var42 <= var43;
-var44 = var47;
-goto RET_LABEL45;
-RET_LABEL45:(void)0;
+var52 = var45 <= var48;
+var49 = var52;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
 }
 }
-if (var44){
+if (var49){
 {
 { /* Inline model#MProperty#lookup_all_definitions_cache (self) on <self:MProperty> */
-var50 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
-if (unlikely(var50 == NULL)) {
+var55 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
+if (unlikely(var55 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_all_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1800);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1813);
 show_backtrace(1);
 }
-var48 = var50;
-RET_LABEL49:(void)0;
+var53 = var55;
+RET_LABEL54:(void)0;
 }
 }
 {
-more_collections__HashMap2___91d_93d_61d(var48, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var48:HashMap2[MModule, MType, Array[MPropDef]]>*/
+more_collections__HashMap2___91d_93d_61d(var53, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var53:HashMap2[MModule, MType, Array[MPropDef]]>*/
 }
 var = var_candidates;
 goto RET_LABEL;
@@ -3817,23 +5121,23 @@ goto RET_LABEL;
 model__MModule__linearize_mpropdefs(var_mmodule, var_candidates); /* Direct call model#MModule#linearize_mpropdefs on <var_mmodule:MModule>*/
 }
 {
-var51 = array__AbstractArrayRead__reversed(var_candidates);
+var56 = array__AbstractArrayRead__reversed(var_candidates);
 }
-var_candidates = var51;
+var_candidates = var56;
 {
 { /* Inline model#MProperty#lookup_all_definitions_cache (self) on <self:MProperty> */
-var54 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
-if (unlikely(var54 == NULL)) {
+var59 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
+if (unlikely(var59 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_all_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1800);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1813);
 show_backtrace(1);
 }
-var52 = var54;
-RET_LABEL53:(void)0;
+var57 = var59;
+RET_LABEL58:(void)0;
 }
 }
 {
-more_collections__HashMap2___91d_93d_61d(var52, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var52:HashMap2[MModule, MType, Array[MPropDef]]>*/
+more_collections__HashMap2___91d_93d_61d(var57, var_mmodule, var_mtype, var_candidates); /* Direct call more_collections#HashMap2#[]= on <var57:HashMap2[MModule, MType, Array[MPropDef]]>*/
 }
 var = var_candidates;
 goto RET_LABEL;
@@ -3856,7 +5160,7 @@ val* var1 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var1 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:MProperty> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_all_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1800);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1813);
 show_backtrace(1);
 }
 var = var1;
@@ -3872,7 +5176,7 @@ val* var3 /* : HashMap2[MModule, MType, Array[MPropDef]] */;
 var3 = self->attrs[COLOR_model__MProperty___lookup_all_definitions_cache].val; /* _lookup_all_definitions_cache on <self:Object(MProperty)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lookup_all_definitions_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1800);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1813);
 show_backtrace(1);
 }
 var1 = var3;
@@ -3968,6 +5272,42 @@ RET_LABEL:;
 void VIRTUAL_model__MMethod__is_init_61d(val* self, short int p0) {
 { /* Inline model#MMethod#is_init= (self,p0) on <self:Object(MMethod)> */
 self->attrs[COLOR_model__MMethod___is_init].s = p0; /* _is_init on <self:Object(MMethod)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
+/* method model#MMethod#is_root_init for (self: MMethod): Bool */
+short int model__MMethod__is_root_init(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = self->attrs[COLOR_model__MMethod___is_root_init].s; /* _is_root_init on <self:MMethod> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethod#is_root_init for (self: Object): Bool */
+short int VIRTUAL_model__MMethod__is_root_init(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+short int var3 /* : Bool */;
+{ /* Inline model#MMethod#is_root_init (self) on <self:Object(MMethod)> */
+var3 = self->attrs[COLOR_model__MMethod___is_root_init].s; /* _is_root_init on <self:Object(MMethod)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethod#is_root_init= for (self: MMethod, Bool) */
+void model__MMethod__is_root_init_61d(val* self, short int p0) {
+self->attrs[COLOR_model__MMethod___is_root_init].s = p0; /* _is_root_init on <self:MMethod> */
+RET_LABEL:;
+}
+/* method model#MMethod#is_root_init= for (self: Object, Bool) */
+void VIRTUAL_model__MMethod__is_root_init_61d(val* self, short int p0) {
+{ /* Inline model#MMethod#is_root_init= (self,p0) on <self:Object(MMethod)> */
+self->attrs[COLOR_model__MMethod___is_root_init].s = p0; /* _is_root_init on <self:Object(MMethod)> */
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;
@@ -4079,7 +5419,7 @@ val* var1 /* : MVirtualType */;
 var1 = self->attrs[COLOR_model__MVirtualTypeProp___mvirtualtype].val; /* _mvirtualtype on <self:MVirtualTypeProp> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mvirtualtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1858);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1874);
 show_backtrace(1);
 }
 var = var1;
@@ -4095,7 +5435,7 @@ val* var3 /* : MVirtualType */;
 var3 = self->attrs[COLOR_model__MVirtualTypeProp___mvirtualtype].val; /* _mvirtualtype on <self:Object(MVirtualTypeProp)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mvirtualtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1858);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1874);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4112,7 +5452,7 @@ val* var1 /* : Location */;
 var1 = self->attrs[COLOR_model__MPropDef___location].val; /* _location on <self:MPropDef> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1876);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1892);
 show_backtrace(1);
 }
 var = var1;
@@ -4128,7 +5468,7 @@ val* var3 /* : Location */;
 var3 = self->attrs[COLOR_model__MPropDef___location].val; /* _location on <self:Object(MPropDef)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1876);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1892);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4158,7 +5498,7 @@ val* var1 /* : MClassDef */;
 var1 = self->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <self:MPropDef> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
 var = var1;
@@ -4174,7 +5514,7 @@ val* var3 /* : MClassDef */;
 var3 = self->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <self:Object(MPropDef)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4204,7 +5544,7 @@ val* var1 /* : MProperty */;
 var1 = self->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <self:MPropDef> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var = var1;
@@ -4220,7 +5560,7 @@ val* var3 /* : MProperty */;
 var3 = self->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <self:Object(MPropDef)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4250,7 +5590,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MPropDef___mproperty].val = p0; /* _mproperty on <self:MPropDef> */
@@ -4277,7 +5617,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MPropDef___mproperty].val = p0; /* _mproperty on <self:Object(MPropDef)> */
@@ -4295,24 +5635,38 @@ const char* var_class_name;
 val* var_mclassdef /* var mclassdef: MClassDef */;
 val* var_mproperty /* var mproperty: MProperty */;
 val* var_location /* var location: Location */;
-short int var4 /* : Bool */;
-int cltype5;
-int idtype6;
-const struct type* type_struct7;
-const char* var_class_name8;
-val* var10 /* : Array[MPropDef] */;
+short int var3 /* : Bool */;
+int cltype4;
+int idtype5;
+const struct type* type_struct6;
+const char* var_class_name7;
+val* var9 /* : Array[MPropDef] */;
+val* var11 /* : Array[MPropDef] */;
 val* var12 /* : Array[MPropDef] */;
-val* var13 /* : Array[MPropDef] */;
-val* var15 /* : Array[MPropDef] */;
+val* var14 /* : Array[MPropDef] */;
+val* var15 /* : MClassDef */;
+val* var17 /* : MClassDef */;
+short int var18 /* : Bool */;
+short int var19 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var21 /* : Bool */;
+short int var23 /* : Bool */;
+short int var24 /* : Bool */;
+short int var25 /* : Bool */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+const struct type* type_struct30;
+const char* var_class_name31;
 static val* varonce;
-val* var16 /* : String */;
-char* var17 /* : NativeString */;
-long var18 /* : Int */;
-val* var19 /* : FlatString */;
-val* var20 /* : Array[Object] */;
-long var21 /* : Int */;
-val* var22 /* : NativeArray[Object] */;
-val* var23 /* : String */;
+val* var32 /* : String */;
+char* var33 /* : NativeString */;
+long var34 /* : Int */;
+val* var35 /* : FlatString */;
+val* var36 /* : Array[Object] */;
+long var37 /* : Int */;
+val* var38 /* : NativeArray[Object] */;
+val* var39 /* : String */;
 /* Covariant cast for argument 1 (mproperty) <p1:MProperty> isa MPROPERTY */
 /* <p1:MProperty> isa MPROPERTY */
 type_struct = self->type->resolution_table->types[COLOR_model__MPropDef_VTMPROPERTY];
@@ -4326,13 +5680,11 @@ var = p1->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1885);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1901);
 show_backtrace(1);
 }
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MPropDef> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MPropDef>*/;
 }
 var_mclassdef = p0;
 var_mproperty = p1;
@@ -4340,94 +5692,155 @@ var_location = p2;
 {
 { /* Inline model#MPropDef#mclassdef= (self,var_mclassdef) on <self:MPropDef> */
 self->attrs[COLOR_model__MPropDef___mclassdef].val = var_mclassdef; /* _mclassdef on <self:MPropDef> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#mproperty= (self,var_mproperty) on <self:MPropDef> */
 /* Covariant cast for argument 0 (mproperty) <var_mproperty:MProperty> isa MPROPERTY */
 /* <var_mproperty:MProperty> isa MPROPERTY */
-type_struct7 = self->type->resolution_table->types[COLOR_model__MPropDef_VTMPROPERTY];
-cltype5 = type_struct7->color;
-idtype6 = type_struct7->id;
-if(cltype5 >= var_mproperty->type->table_size) {
-var4 = 0;
+type_struct6 = self->type->resolution_table->types[COLOR_model__MPropDef_VTMPROPERTY];
+cltype4 = type_struct6->color;
+idtype5 = type_struct6->id;
+if(cltype4 >= var_mproperty->type->table_size) {
+var3 = 0;
 } else {
-var4 = var_mproperty->type->type_table[cltype5] == idtype6;
+var3 = var_mproperty->type->type_table[cltype4] == idtype5;
 }
-if (unlikely(!var4)) {
-var_class_name8 = var_mproperty == NULL ? "null" : var_mproperty->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name8);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+if (unlikely(!var3)) {
+var_class_name7 = var_mproperty == NULL ? "null" : var_mproperty->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name7);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 self->attrs[COLOR_model__MPropDef___mproperty].val = var_mproperty; /* _mproperty on <self:MPropDef> */
-RET_LABEL3:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#location= (self,var_location) on <self:MPropDef> */
 self->attrs[COLOR_model__MPropDef___location].val = var_location; /* _location on <self:MPropDef> */
-RET_LABEL9:(void)0;
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline model#MClassDef#mpropdefs (var_mclassdef) on <var_mclassdef:MClassDef> */
-var12 = var_mclassdef->attrs[COLOR_model__MClassDef___mpropdefs].val; /* _mpropdefs on <var_mclassdef:MClassDef> */
-if (unlikely(var12 == NULL)) {
+var11 = var_mclassdef->attrs[COLOR_model__MClassDef___mpropdefs].val; /* _mpropdefs on <var_mclassdef:MClassDef> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 574);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 591);
 show_backtrace(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-array__Array__add(var10, self); /* Direct call array#Array#add on <var10:Array[MPropDef]>*/
+array__Array__add(var9, self); /* Direct call array#Array#add on <var9:Array[MPropDef]>*/
 }
 {
 { /* Inline model#MProperty#mpropdefs (var_mproperty) on <var_mproperty:MProperty> */
-var15 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MProperty> */
-if (unlikely(var15 == NULL)) {
+var14 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MProperty> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
-var13 = var15;
-RET_LABEL14:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-array__Array__add(var13, self); /* Direct call array#Array#add on <var13:Array[MPropDef]>*/
+array__Array__add(var12, self); /* Direct call array#Array#add on <var12:Array[MPropDef]>*/
+}
+{
+{ /* Inline model#MProperty#intro_mclassdef (var_mproperty) on <var_mproperty:MProperty> */
+var17 = var_mproperty->attrs[COLOR_model__MProperty___intro_mclassdef].val; /* _intro_mclassdef on <var_mproperty:MProperty> */
+if (unlikely(var17 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro_mclassdef");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1615);
+show_backtrace(1);
+}
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var15,var_mclassdef) on <var15:MClassDef> */
+var_other = var_mclassdef;
+{
+{ /* Inline kernel#Object#is_same_instance (var15,var_other) on <var15:MClassDef> */
+var23 = var15 == var_other;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
+}
+}
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+var18 = var19;
+}
+if (var18){
+var24 = var_mproperty->attrs[COLOR_model__MProperty___intro].val != NULL; /* _intro on <var_mproperty:MProperty> */
+var25 = !var24;
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1909);
+show_backtrace(1);
+}
+{
+{ /* Inline model#MProperty#intro= (var_mproperty,self) on <var_mproperty:MProperty> */
+/* Covariant cast for argument 0 (intro) <self:MPropDef> isa MPROPDEF */
+/* <self:MPropDef> isa MPROPDEF */
+type_struct30 = var_mproperty->type->resolution_table->types[COLOR_model__MProperty_VTMPROPDEF];
+cltype28 = type_struct30->color;
+idtype29 = type_struct30->id;
+if(cltype28 >= self->type->table_size) {
+var27 = 0;
+} else {
+var27 = self->type->type_table[cltype28] == idtype29;
+}
+if (unlikely(!var27)) {
+var_class_name31 = self == NULL ? "null" : self->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPDEF", var_class_name31);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+var_mproperty->attrs[COLOR_model__MProperty___intro].val = self; /* _intro on <var_mproperty:MProperty> */
+RET_LABEL26:(void)0;
+}
+}
+} else {
 }
 if (varonce) {
-var16 = varonce;
+var32 = varonce;
 } else {
-var17 = "#";
-var18 = 1;
-var19 = string__NativeString__to_s_with_length(var17, var18);
-var16 = var19;
-varonce = var16;
+var33 = "#";
+var34 = 1;
+var35 = string__NativeString__to_s_with_length(var33, var34);
+var32 = var35;
+varonce = var32;
 }
-var20 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var20 = array_instance Array[Object] */
-var21 = 3;
-var22 = NEW_array__NativeArray(var21, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var22)->values[0] = (val*) var_mclassdef;
-((struct instance_array__NativeArray*)var22)->values[1] = (val*) var16;
-((struct instance_array__NativeArray*)var22)->values[2] = (val*) var_mproperty;
+var36 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var36 = array_instance Array[Object] */
+var37 = 3;
+var38 = NEW_array__NativeArray(var37, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var38)->values[0] = (val*) var_mclassdef;
+((struct instance_array__NativeArray*)var38)->values[1] = (val*) var32;
+((struct instance_array__NativeArray*)var38)->values[2] = (val*) var_mproperty;
 {
-((void (*)(val*, val*, long))(var20->class->vft[COLOR_array__Array__with_native]))(var20, var22, var21) /* with_native on <var20:Array[Object]>*/;
+((void (*)(val*, val*, long))(var36->class->vft[COLOR_array__Array__with_native]))(var36, var38, var37) /* with_native on <var36:Array[Object]>*/;
 }
-}
-{
-var23 = ((val* (*)(val*))(var20->class->vft[COLOR_string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
 }
 {
-{ /* Inline model#MPropDef#to_s= (self,var23) on <self:MPropDef> */
-self->attrs[COLOR_model__MPropDef___to_s].val = var23; /* _to_s on <self:MPropDef> */
-RET_LABEL24:(void)0;
+var39 = ((val* (*)(val*))(var36->class->vft[COLOR_string__Object__to_s]))(var36) /* to_s on <var36:Array[Object]>*/;
+}
+{
+{ /* Inline model#MPropDef#to_s= (self,var39) on <self:MPropDef> */
+self->attrs[COLOR_model__MPropDef___to_s].val = var39; /* _to_s on <self:MPropDef> */
+RET_LABEL40:(void)0;
 }
 }
 RET_LABEL:;
@@ -4449,7 +5862,7 @@ val* var6 /* : String */;
 var3 = self->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <self:MPropDef> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4461,7 +5874,7 @@ RET_LABEL2:(void)0;
 var6 = var1->attrs[COLOR_model__MProperty___name].val; /* _name on <var1:MProperty> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1620);
 show_backtrace(1);
 }
 var4 = var6;
@@ -4493,7 +5906,7 @@ val* var4 /* : Model */;
 var3 = self->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <self:MPropDef> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4524,7 +5937,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MPropDef___to_s].val; /* _to_s on <self:MPropDef> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1900);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1920);
 show_backtrace(1);
 }
 var = var1;
@@ -4540,7 +5953,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model__MPropDef___to_s].val; /* _to_s on <self:Object(MPropDef)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1900);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1920);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4569,17 +5982,18 @@ short int var /* : Bool */;
 val* var1 /* : MProperty */;
 val* var3 /* : MProperty */;
 val* var4 /* : MPropDef */;
-short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-val* var_other /* var other: nullable Object */;
+val* var6 /* : MPropDef */;
+short int var7 /* : Bool */;
 short int var8 /* : Bool */;
+val* var_other /* var other: nullable Object */;
 short int var10 /* : Bool */;
+short int var12 /* : Bool */;
 {
 { /* Inline model#MPropDef#mproperty (self) on <self:MPropDef> */
 var3 = self->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <self:MPropDef> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4587,26 +6001,35 @@ RET_LABEL2:(void)0;
 }
 }
 {
-var4 = model__MProperty__intro(var1);
+{ /* Inline model#MProperty#intro (var1) on <var1:MProperty> */
+var6 = var1->attrs[COLOR_model__MProperty___intro].val; /* _intro on <var1:MProperty> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+var4 = var6;
+RET_LABEL5:(void)0;
+}
 }
 {
 { /* Inline kernel#Object#== (var4,self) on <var4:MPropDef> */
 var_other = self;
 {
 { /* Inline kernel#Object#is_same_instance (var4,var_other) on <var4:MPropDef> */
-var10 = var4 == var_other;
+var12 = var4 == var_other;
+var10 = var12;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
+}
+}
 var8 = var10;
 goto RET_LABEL9;
 RET_LABEL9:(void)0;
 }
+var7 = var8;
 }
-var6 = var8;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
-}
-var5 = var6;
-}
-var = var5;
+var = var7;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -4659,7 +6082,7 @@ var1 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anc
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1914);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1934);
 show_backtrace(1);
 }
 {
@@ -4667,7 +6090,7 @@ show_backtrace(1);
 var5 = self->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <self:MPropDef> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var3 = var5;
@@ -4709,11 +6132,13 @@ var8 = var11;
 } else {
 var8 = var_;
 }
-if (!var8) break;
+if (var8){
 {
 array__ArrayIterator__next(var_i); /* Direct call array#ArrayIterator#next on <var_i:ArrayIterator[MPropDef]>*/
 }
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 {
@@ -4721,7 +6146,7 @@ var17 = array__ArrayIterator__is_ok(var_i);
 }
 if (unlikely(!var17)) {
 PRINT_ERROR("Runtime error: %s", "Assert \'has_property\' failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1919);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1939);
 show_backtrace(1);
 }
 {
@@ -4732,7 +6157,7 @@ var18 = array__ArrayIterator__is_ok(var_i);
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert \'has_next_property\' failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1921);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1941);
 show_backtrace(1);
 }
 {
@@ -4750,7 +6175,7 @@ var20 = var19->type->type_table[cltype] == idtype;
 if (unlikely(!var20)) {
 var_class_name = var19 == NULL ? "null" : var19->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPDEF", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1922);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1942);
 show_backtrace(1);
 }
 var = var19;
@@ -4790,7 +6215,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1933);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1953);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -4841,6 +6266,75 @@ self->attrs[COLOR_model__MMethodDef___msignature].val = p0; /* _msignature on <s
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;
+}
+/* method model#MMethodDef#new_msignature for (self: MMethodDef): nullable MSignature */
+val* model__MMethodDef__new_msignature(val* self) {
+val* var /* : nullable MSignature */;
+val* var1 /* : nullable MSignature */;
+var1 = self->attrs[COLOR_model__MMethodDef___new_msignature].val; /* _new_msignature on <self:MMethodDef> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethodDef#new_msignature for (self: Object): nullable MSignature */
+val* VIRTUAL_model__MMethodDef__new_msignature(val* self) {
+val* var /* : nullable MSignature */;
+val* var1 /* : nullable MSignature */;
+val* var3 /* : nullable MSignature */;
+{ /* Inline model#MMethodDef#new_msignature (self) on <self:Object(MMethodDef)> */
+var3 = self->attrs[COLOR_model__MMethodDef___new_msignature].val; /* _new_msignature on <self:Object(MMethodDef)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethodDef#new_msignature= for (self: MMethodDef, nullable MSignature) */
+void model__MMethodDef__new_msignature_61d(val* self, val* p0) {
+self->attrs[COLOR_model__MMethodDef___new_msignature].val = p0; /* _new_msignature on <self:MMethodDef> */
+RET_LABEL:;
+}
+/* method model#MMethodDef#new_msignature= for (self: Object, nullable MSignature) */
+void VIRTUAL_model__MMethodDef__new_msignature_61d(val* self, val* p0) {
+{ /* Inline model#MMethodDef#new_msignature= (self,p0) on <self:Object(MMethodDef)> */
+self->attrs[COLOR_model__MMethodDef___new_msignature].val = p0; /* _new_msignature on <self:Object(MMethodDef)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
+/* method model#MMethodDef#initializers for (self: MMethodDef): Array[MProperty] */
+val* model__MMethodDef__initializers(val* self) {
+val* var /* : Array[MProperty] */;
+val* var1 /* : Array[MProperty] */;
+var1 = self->attrs[COLOR_model__MMethodDef___initializers].val; /* _initializers on <self:MMethodDef> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _initializers");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1967);
+show_backtrace(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethodDef#initializers for (self: Object): Array[MProperty] */
+val* VIRTUAL_model__MMethodDef__initializers(val* self) {
+val* var /* : Array[MProperty] */;
+val* var1 /* : Array[MProperty] */;
+val* var3 /* : Array[MProperty] */;
+{ /* Inline model#MMethodDef#initializers (self) on <self:Object(MMethodDef)> */
+var3 = self->attrs[COLOR_model__MMethodDef___initializers].val; /* _initializers on <self:Object(MMethodDef)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _initializers");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1967);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
 }
 /* method model#MMethodDef#is_abstract for (self: MMethodDef): Bool */
 short int model__MMethodDef__is_abstract(val* self) {
@@ -4950,6 +6444,42 @@ RET_LABEL1:(void)0;
 }
 RET_LABEL:;
 }
+/* method model#MMethodDef#constant_value for (self: MMethodDef): nullable Object */
+val* model__MMethodDef__constant_value(val* self) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable Object */;
+var1 = self->attrs[COLOR_model__MMethodDef___constant_value].val; /* _constant_value on <self:MMethodDef> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethodDef#constant_value for (self: Object): nullable Object */
+val* VIRTUAL_model__MMethodDef__constant_value(val* self) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable Object */;
+val* var3 /* : nullable Object */;
+{ /* Inline model#MMethodDef#constant_value (self) on <self:Object(MMethodDef)> */
+var3 = self->attrs[COLOR_model__MMethodDef___constant_value].val; /* _constant_value on <self:Object(MMethodDef)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method model#MMethodDef#constant_value= for (self: MMethodDef, nullable Object) */
+void model__MMethodDef__constant_value_61d(val* self, val* p0) {
+self->attrs[COLOR_model__MMethodDef___constant_value].val = p0; /* _constant_value on <self:MMethodDef> */
+RET_LABEL:;
+}
+/* method model#MMethodDef#constant_value= for (self: Object, nullable Object) */
+void VIRTUAL_model__MMethodDef__constant_value_61d(val* self, val* p0) {
+{ /* Inline model#MMethodDef#constant_value= (self,p0) on <self:Object(MMethodDef)> */
+self->attrs[COLOR_model__MMethodDef___constant_value].val = p0; /* _constant_value on <self:Object(MMethodDef)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
 /* method model#MAttributeDef#init for (self: MAttributeDef, MClassDef, MAttribute, Location) */
 void model__MAttributeDef__init(val* self, val* p0, val* p1, val* p2) {
 short int var /* : Bool */;
@@ -4973,7 +6503,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1958);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 2001);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -5048,7 +6578,7 @@ var = p1->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MPROPERTY", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1974);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 2017);
 show_backtrace(1);
 }
 var_mclassdef = p0;
@@ -5143,7 +6673,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model__MClassKind___to_s].val; /* _to_s on <self:MClassKind> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1997);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 2040);
 show_backtrace(1);
 }
 var = var1;
@@ -5159,7 +6689,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model__MClassKind___to_s].val; /* _to_s on <self:Object(MClassKind)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1997);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 2040);
 show_backtrace(1);
 }
 var1 = var3;

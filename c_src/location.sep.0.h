@@ -30,24 +30,18 @@ val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
-#define COLOR_array__Array__with_native 65
-#define COLOR_string__Object__to_s 7
+#define COLOR_array__Array__with_native 74
+#define COLOR_string__Object__to_s 9
 val* location__Location__to_s(val* self);
 #define COLOR_kernel__Comparable_VTOTHER 0
 short int location__Location___60d(val* self, val* p0);
 val* BOX_kernel__Char(char);
 #define COLOR_string__FlatString___chars 6
-#define COLOR_abstract_collection__SequenceRead___91d_93d 39
+#define COLOR_abstract_collection__SequenceRead___91d_93d 46
 extern const struct class class_kernel__Char;
 val* NEW_string__FlatBuffer(const struct type* type);
 extern const struct type type_string__FlatBuffer;
-void string__FlatBuffer__init(val* self);
-val* NEW_range__Range(const struct type* type);
-extern const struct type type_range__Rangekernel__Int;
-void range__Range__without_last(val* self, val* p0, val* p1);
-val* range__Range__iterator(val* self);
-#define COLOR_abstract_collection__Iterator__is_ok 31
-#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_kernel__Object__init 7
 void string__FlatBuffer__add(val* self, char p0);
-#define COLOR_abstract_collection__Iterator__next 30
+long kernel__Int__successor(long self, long p0);
 val* location__Location__colored_line(val* self, val* p0);

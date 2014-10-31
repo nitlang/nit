@@ -6,7 +6,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <self:SourceFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var = var1;
@@ -22,7 +22,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <self:Object(SourceFile)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var1 = var3;
@@ -52,7 +52,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_location__SourceFile___string].val; /* _string on <self:SourceFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var = var1;
@@ -68,7 +68,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_location__SourceFile___string].val; /* _string on <self:Object(SourceFile)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var1 = var3;
@@ -123,7 +123,7 @@ RET_LABEL2:(void)0;
 var5 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:SourceFile> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var3 = var5;
@@ -150,7 +150,7 @@ val* var1 /* : Array[Int] */;
 var1 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:SourceFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var = var1;
@@ -166,7 +166,7 @@ val* var3 /* : Array[Int] */;
 var3 = self->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <self:Object(SourceFile)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var1 = var3;
@@ -447,19 +447,19 @@ RET_LABEL2:(void)0;
 }
 if (var1 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 68);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 68);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#line_starts (var1) on <var1:nullable SourceFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var6 = var1->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var1:nullable SourceFile> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var4 = var6;
@@ -482,7 +482,7 @@ var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var14 = var7 - var10;
@@ -509,7 +509,7 @@ var21 = 1; /* easy <var16:Int> isa OTHER*/
 if (unlikely(!var21)) {
 var_class_name24 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var25 = ((struct instance_kernel__Int*)var15)->value; /* autounbox from nullable Object to Int */;
@@ -528,7 +528,7 @@ var30 = 1; /* easy <var27:Int> isa OTHER*/
 if (unlikely(!var30)) {
 var_class_name33 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var34 = var19 - var27;
@@ -593,19 +593,19 @@ RET_LABEL2:(void)0;
 }
 if (var1 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 71);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 71);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#line_starts (var1) on <var1:nullable SourceFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var6 = var1->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var1:nullable SourceFile> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var4 = var6;
@@ -628,7 +628,7 @@ var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var14 = var7 - var10;
@@ -655,7 +655,7 @@ var21 = 1; /* easy <var16:Int> isa OTHER*/
 if (unlikely(!var21)) {
 var_class_name24 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var25 = ((struct instance_kernel__Int*)var15)->value; /* autounbox from nullable Object to Int */;
@@ -674,7 +674,7 @@ var30 = 1; /* easy <var27:Int> isa OTHER*/
 if (unlikely(!var30)) {
 var_class_name33 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var34 = var19 - var27;
@@ -784,19 +784,19 @@ RET_LABEL14:(void)0;
 }
 if (var13 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 81);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 81);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#string (var13) on <var13:nullable SourceFile> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var18 = var13->attrs[COLOR_location__SourceFile___string].val; /* _string on <var13:nullable SourceFile> */
 if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var16 = var18;
@@ -811,7 +811,7 @@ var21 = 1; /* easy <var_pstart:Int> isa OTHER*/
 if (unlikely(!var21)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var22 = var_pend - var_pstart;
@@ -829,7 +829,7 @@ var26 = 1; /* easy <var23:Int> isa OTHER*/
 if (unlikely(!var26)) {
 var_class_name29 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var30 = var19 + var23;
@@ -1292,7 +1292,7 @@ var13 = 1; /* easy <var8:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var14 = var5 < var8;
@@ -1329,7 +1329,7 @@ var24 = 1; /* easy <var19:Int> isa OTHER*/
 if (unlikely(!var24)) {
 var_class_name27 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var28 = var16 > var19;
@@ -1366,7 +1366,7 @@ var38 = 1; /* easy <var33:Int> isa OTHER*/
 if (unlikely(!var38)) {
 var_class_name41 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name41);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var42 = var30 > var33;
@@ -1427,7 +1427,7 @@ var62 = 1; /* easy <var57:Int> isa OTHER*/
 if (unlikely(!var62)) {
 var_class_name65 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name65);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var66 = var54 < var57;
@@ -1464,7 +1464,7 @@ var76 = 1; /* easy <var71:Int> isa OTHER*/
 if (unlikely(!var76)) {
 var_class_name79 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name79);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var80 = var68 > var71;
@@ -1528,7 +1528,7 @@ var101 = 1; /* easy <var96:Int> isa OTHER*/
 if (unlikely(!var101)) {
 var_class_name104 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name104);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var105 = var93 > var96;
@@ -1733,19 +1733,19 @@ RET_LABEL16:(void)0;
 }
 if (var15 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 124);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 125);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#filename (var15) on <var15:nullable SourceFile> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var20 = var15->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <var15:nullable SourceFile> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1762,19 +1762,19 @@ RET_LABEL22:(void)0;
 }
 if (var21 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 125);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 126);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#filename (var21) on <var21:nullable SourceFile> */
 if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var26 = var21->attrs[COLOR_location__SourceFile___filename].val; /* _filename on <var21:nullable SourceFile> */
 if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 22);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 22);
 show_backtrace(1);
 }
 var24 = var26;
@@ -1797,7 +1797,7 @@ var33 = 1; /* easy <var30:Int> isa OTHER*/
 if (unlikely(!var33)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var34 = var27 > var30;
@@ -2164,7 +2164,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 149);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 153);
 show_backtrace(1);
 }
 var_other = p0;
@@ -2243,7 +2243,7 @@ var28 = 1; /* easy <var23:Int> isa OTHER*/
 if (unlikely(!var28)) {
 var_class_name31 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var32 = var20 < var23;
@@ -2303,7 +2303,7 @@ var52 = 1; /* easy <var47:Int> isa OTHER*/
 if (unlikely(!var52)) {
 var_class_name55 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var56 = var44 < var47;
@@ -2363,7 +2363,7 @@ var76 = 1; /* easy <var71:Int> isa OTHER*/
 if (unlikely(!var76)) {
 var_class_name79 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name79);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var80 = var68 < var71;
@@ -2398,7 +2398,7 @@ var89 = 1; /* easy <var84:Int> isa OTHER*/
 if (unlikely(!var89)) {
 var_class_name92 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name92);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var93 = var81 < var84;
@@ -2662,58 +2662,60 @@ long var254 /* : Int */;
 val* var255 /* : FlatString */;
 val* var256 /* : FlatBuffer */;
 val* var_indent /* var indent: FlatBuffer */;
-val* var257 /* : Range[Int] */;
-long var258 /* : Int */;
+long var_j /* var j: Int */;
+long var257 /* : Int */;
+long var259 /* : Int */;
 long var260 /* : Int */;
-long var261 /* : Int */;
-short int var263 /* : Bool */;
-int cltype264;
-int idtype265;
-const char* var_class_name266;
+short int var262 /* : Bool */;
+int cltype263;
+int idtype264;
+const char* var_class_name265;
+long var266 /* : Int */;
 long var267 /* : Int */;
 long var268 /* : Int */;
-long var269 /* : Int */;
-short int var271 /* : Bool */;
-int cltype272;
-int idtype273;
-const char* var_class_name274;
-long var275 /* : Int */;
-val* var276 /* : Discrete */;
-val* var277 /* : Discrete */;
-val* var278 /* : Iterator[Discrete] */;
-short int var279 /* : Bool */;
-val* var280 /* : nullable Object */;
-long var_j /* var j: Int */;
-long var281 /* : Int */;
-val* var282 /* : SequenceRead[Char] */;
-val* var284 /* : SequenceRead[Char] */;
-val* var285 /* : nullable Object */;
-char var286 /* : Char */;
-short int var287 /* : Bool */;
+short int var270 /* : Bool */;
+int cltype271;
+int idtype272;
+const char* var_class_name273;
+long var274 /* : Int */;
+long var_275 /* var : Int */;
+short int var276 /* : Bool */;
+short int var278 /* : Bool */;
+int cltype279;
+int idtype280;
+const char* var_class_name281;
+short int var282 /* : Bool */;
+val* var283 /* : SequenceRead[Char] */;
+val* var285 /* : SequenceRead[Char] */;
+val* var286 /* : nullable Object */;
+char var287 /* : Char */;
 short int var288 /* : Bool */;
-short int var290 /* : Bool */;
-char var291 /* : Char */;
+short int var289 /* : Bool */;
+short int var291 /* : Bool */;
 char var292 /* : Char */;
 char var293 /* : Char */;
-static val* varonce295;
-val* var296 /* : String */;
-char* var297 /* : NativeString */;
-long var298 /* : Int */;
-val* var299 /* : FlatString */;
-static val* varonce300;
-val* var301 /* : String */;
-char* var302 /* : NativeString */;
-long var303 /* : Int */;
-val* var304 /* : FlatString */;
-static val* varonce305;
-val* var306 /* : String */;
-char* var307 /* : NativeString */;
-long var308 /* : Int */;
-val* var309 /* : FlatString */;
-val* var310 /* : Array[Object] */;
+char var294 /* : Char */;
+long var295 /* : Int */;
+long var296 /* : Int */;
+static val* varonce298;
+val* var299 /* : String */;
+char* var300 /* : NativeString */;
+long var301 /* : Int */;
+val* var302 /* : FlatString */;
+static val* varonce303;
+val* var304 /* : String */;
+char* var305 /* : NativeString */;
+long var306 /* : Int */;
+val* var307 /* : FlatString */;
+static val* varonce308;
+val* var309 /* : String */;
+char* var310 /* : NativeString */;
 long var311 /* : Int */;
-val* var312 /* : NativeArray[Object] */;
-val* var313 /* : String */;
+val* var312 /* : FlatString */;
+val* var313 /* : Array[Object] */;
+long var314 /* : Int */;
+val* var315 /* : NativeArray[Object] */;
+val* var316 /* : String */;
 var_color = p0;
 var1 = 27;
 {
@@ -2802,19 +2804,19 @@ RET_LABEL33:(void)0;
 }
 if (var32 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 178);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#line_starts (var32) on <var32:nullable SourceFile> */
 if (unlikely(var32 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var37 = var32->attrs[COLOR_location__SourceFile___line_starts].val; /* _line_starts on <var32:nullable SourceFile> */
 if (unlikely(var37 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _line_starts");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 44);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 44);
 show_backtrace(1);
 }
 var35 = var37;
@@ -2830,7 +2832,7 @@ var41 = 1; /* easy <var38:Int> isa OTHER*/
 if (unlikely(!var41)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var42 = var_i - var38;
@@ -2854,19 +2856,19 @@ RET_LABEL46:(void)0;
 }
 if (var45 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 176);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 180);
 show_backtrace(1);
 } else {
 { /* Inline location#SourceFile#string (var45) on <var45:nullable SourceFile> */
 if (unlikely(var45 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var50 = var45->attrs[COLOR_location__SourceFile___string].val; /* _string on <var45:nullable SourceFile> */
 if (unlikely(var50 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
-PRINT_ERROR(" (%s:%d)\n", "src/location.nit", 25);
+PRINT_ERROR(" (%s:%d)\n", "location.nit", 25);
 show_backtrace(1);
 }
 var48 = var50;
@@ -2884,7 +2886,7 @@ var56 = 1; /* easy <var53:Int> isa OTHER*/
 if (unlikely(!var56)) {
 var_class_name59 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name59);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var60 = var_line_end + var53;
@@ -2908,7 +2910,7 @@ var66 = 1; /* easy <var61:Int> isa OTHER*/
 if (unlikely(!var66)) {
 var_class_name69 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var70 = var54 < var61;
@@ -2924,7 +2926,7 @@ if (var64){
 var73 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
 if (unlikely(var73 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var71 = var73;
@@ -2940,7 +2942,7 @@ var77 = 1; /* easy <var74:Int> isa OTHER*/
 if (unlikely(!var77)) {
 var_class_name80 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name80);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var81 = var_line_end + var74;
@@ -2978,7 +2980,7 @@ if (var52){
 var93 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
 if (unlikely(var93 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var91 = var93;
@@ -2994,7 +2996,7 @@ var97 = 1; /* easy <var94:Int> isa OTHER*/
 if (unlikely(!var97)) {
 var_class_name100 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name100);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var101 = var_line_end + var94;
@@ -3025,7 +3027,7 @@ var51 = var104;
 } else {
 var51 = var_90;
 }
-if (!var51) break;
+if (var51){
 var110 = 1;
 {
 { /* Inline kernel#Int#+ (var_line_end,var110) on <var_line_end:Int> */
@@ -3035,7 +3037,7 @@ var113 = 1; /* easy <var110:Int> isa OTHER*/
 if (unlikely(!var113)) {
 var_class_name116 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name116);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var117 = var_line_end + var110;
@@ -3045,7 +3047,9 @@ RET_LABEL112:(void)0;
 }
 }
 var_line_end = var111;
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 {
@@ -3064,7 +3068,7 @@ var124 = 1; /* easy <var121:Int> isa OTHER*/
 if (unlikely(!var124)) {
 var_class_name127 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name127);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var128 = var118 - var121;
@@ -3103,7 +3107,7 @@ var140 = 1; /* easy <var_line_start:Int> isa OTHER*/
 if (unlikely(!var140)) {
 var_class_name143 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name143);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var144 = var_line_end - var_line_start;
@@ -3121,7 +3125,7 @@ var148 = 1; /* easy <var145:Int> isa OTHER*/
 if (unlikely(!var148)) {
 var_class_name151 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name151);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var152 = var138 + var145;
@@ -3151,7 +3155,7 @@ var160 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
 if (unlikely(!var160)) {
 var_class_name163 = var_cend == NULL ? "null" : var_cend->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name163);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var164 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
@@ -3176,7 +3180,7 @@ var171 = 1; /* easy <var166:Int> isa OTHER*/
 if (unlikely(!var171)) {
 var_class_name174 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name174);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
 var175 = var158 <= var166;
@@ -3201,7 +3205,7 @@ var181 = 1; /* easy <var176:Int> isa OTHER*/
 if (unlikely(!var181)) {
 var_class_name184 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name184);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var185 = var_line_start + var176;
@@ -3219,7 +3223,7 @@ var189 = 1; /* easy <var186:Int> isa OTHER*/
 if (unlikely(!var189)) {
 var_class_name192 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name192);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var193 = var179 - var186;
@@ -3243,7 +3247,7 @@ var199 = 1; /* easy <var194:Int> isa OTHER*/
 if (unlikely(!var199)) {
 var_class_name202 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name202);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var203 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
@@ -3262,7 +3266,7 @@ var208 = 1; /* easy <var205:Int> isa OTHER*/
 if (unlikely(!var208)) {
 var_class_name211 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name211);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var212 = var197 + var205;
@@ -3283,7 +3287,7 @@ var216 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
 if (unlikely(!var216)) {
 var_class_name219 = var_cend == NULL ? "null" : var_cend->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name219);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var220 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
@@ -3301,7 +3305,7 @@ var224 = 1; /* easy <var_line_start:Int> isa OTHER*/
 if (unlikely(!var224)) {
 var_class_name227 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name227);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var228 = var_line_end - var_line_start;
@@ -3318,7 +3322,7 @@ var231 = 1; /* easy <var_cend:nullable Object(Int)> isa OTHER*/
 if (unlikely(!var231)) {
 var_class_name234 = var_cend == NULL ? "null" : var_cend->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name234);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var235 = ((struct instance_kernel__Int*)var_cend)->value; /* autounbox from nullable Object to Int */;
@@ -3337,7 +3341,7 @@ var240 = 1; /* easy <var237:Int> isa OTHER*/
 if (unlikely(!var240)) {
 var_class_name243 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name243);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var244 = var229 + var237;
@@ -3374,164 +3378,170 @@ var_lend = var252;
 }
 var256 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
 {
-string__FlatBuffer__init(var256); /* Direct call string#FlatBuffer#init on <var256:FlatBuffer>*/
+((void (*)(val*))(var256->class->vft[COLOR_kernel__Object__init]))(var256) /* init on <var256:FlatBuffer>*/;
 }
 var_indent = var256;
-var257 = NEW_range__Range(&type_range__Rangekernel__Int);
+var_j = var_line_start;
 {
 { /* Inline location#Location#column_start (var_l) on <var_l:Location> */
-var260 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
-var258 = var260;
-RET_LABEL259:(void)0;
+var259 = var_l->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_l:Location> */
+var257 = var259;
+RET_LABEL258:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var_line_start,var258) on <var_line_start:Int> */
-/* Covariant cast for argument 0 (i) <var258:Int> isa OTHER */
-/* <var258:Int> isa OTHER */
-var263 = 1; /* easy <var258:Int> isa OTHER*/
-if (unlikely(!var263)) {
-var_class_name266 = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name266);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+{ /* Inline kernel#Int#+ (var_line_start,var257) on <var_line_start:Int> */
+/* Covariant cast for argument 0 (i) <var257:Int> isa OTHER */
+/* <var257:Int> isa OTHER */
+var262 = 1; /* easy <var257:Int> isa OTHER*/
+if (unlikely(!var262)) {
+var_class_name265 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name265);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
-var267 = var_line_start + var258;
-var261 = var267;
-goto RET_LABEL262;
-RET_LABEL262:(void)0;
+var266 = var_line_start + var257;
+var260 = var266;
+goto RET_LABEL261;
+RET_LABEL261:(void)0;
 }
 }
-var268 = 1;
+var267 = 1;
 {
-{ /* Inline kernel#Int#- (var261,var268) on <var261:Int> */
-/* Covariant cast for argument 0 (i) <var268:Int> isa OTHER */
-/* <var268:Int> isa OTHER */
-var271 = 1; /* easy <var268:Int> isa OTHER*/
-if (unlikely(!var271)) {
-var_class_name274 = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name274);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+{ /* Inline kernel#Int#- (var260,var267) on <var260:Int> */
+/* Covariant cast for argument 0 (i) <var267:Int> isa OTHER */
+/* <var267:Int> isa OTHER */
+var270 = 1; /* easy <var267:Int> isa OTHER*/
+if (unlikely(!var270)) {
+var_class_name273 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name273);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
-var275 = var261 - var268;
-var269 = var275;
-goto RET_LABEL270;
-RET_LABEL270:(void)0;
+var274 = var260 - var267;
+var268 = var274;
+goto RET_LABEL269;
+RET_LABEL269:(void)0;
 }
 }
-{
-var276 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
-var277 = BOX_kernel__Int(var269); /* autobox from Int to Discrete */
-range__Range__without_last(var257, var276, var277); /* Direct call range#Range#without_last on <var257:Range[Int]>*/
-}
-{
-var278 = range__Range__iterator(var257);
-}
+var_275 = var268;
 for(;;) {
 {
-var279 = ((short int (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var278) /* is_ok on <var278:Iterator[Discrete]>*/;
-}
-if(!var279) break;
-{
-var280 = ((val* (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__item]))(var278) /* item on <var278:Iterator[Discrete]>*/;
-}
-var281 = ((struct instance_kernel__Int*)var280)->value; /* autounbox from nullable Object to Int */;
-var_j = var281;
-{
-{ /* Inline string#FlatString#chars (var_string) on <var_string:String> */
-var284 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
-if (unlikely(var284 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+{ /* Inline kernel#Int#< (var_j,var_275) on <var_j:Int> */
+/* Covariant cast for argument 0 (i) <var_275:Int> isa OTHER */
+/* <var_275:Int> isa OTHER */
+var278 = 1; /* easy <var_275:Int> isa OTHER*/
+if (unlikely(!var278)) {
+var_class_name281 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name281);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
-var282 = var284;
-RET_LABEL283:(void)0;
+var282 = var_j < var_275;
+var276 = var282;
+goto RET_LABEL277;
+RET_LABEL277:(void)0;
+}
+}
+if (var276){
+{
+{ /* Inline string#FlatString#chars (var_string) on <var_string:String> */
+var285 = var_string->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_string:String> */
+if (unlikely(var285 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
+show_backtrace(1);
+}
+var283 = var285;
+RET_LABEL284:(void)0;
 }
 }
 {
-var285 = ((val* (*)(val*, long))(var282->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var282, var_j) /* [] on <var282:SequenceRead[Char]>*/;
+var286 = ((val* (*)(val*, long))(var283->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var283, var_j) /* [] on <var283:SequenceRead[Char]>*/;
 }
-var286 = '\11';
+var287 = '\11';
 {
-{ /* Inline kernel#Char#== (var285,var286) on <var285:nullable Object(Char)> */
-var290 = (var285 != NULL) && (var285->class == &class_kernel__Char);
-if (var290) {
-var291 = ((struct instance_kernel__Char*)var285)->value; /* autounbox from nullable Object to Char */;
-var290 = (var291 == var286);
+{ /* Inline kernel#Char#== (var286,var287) on <var286:nullable Object(Char)> */
+var291 = (var286 != NULL) && (var286->class == &class_kernel__Char);
+if (var291) {
+var292 = ((struct instance_kernel__Char*)var286)->value; /* autounbox from nullable Object to Char */;
+var291 = (var292 == var287);
 }
-var288 = var290;
-goto RET_LABEL289;
-RET_LABEL289:(void)0;
+var289 = var291;
+goto RET_LABEL290;
+RET_LABEL290:(void)0;
 }
-var287 = var288;
+var288 = var289;
 }
-if (var287){
-var292 = '\11';
-{
-string__FlatBuffer__add(var_indent, var292); /* Direct call string#FlatBuffer#add on <var_indent:FlatBuffer>*/
-}
-} else {
-var293 = ' ';
+if (var288){
+var293 = '\11';
 {
 string__FlatBuffer__add(var_indent, var293); /* Direct call string#FlatBuffer#add on <var_indent:FlatBuffer>*/
 }
-}
-CONTINUE_label294: (void)0;
-{
-((void (*)(val*))(var278->class->vft[COLOR_abstract_collection__Iterator__next]))(var278) /* next on <var278:Iterator[Discrete]>*/;
-}
-}
-BREAK_label294: (void)0;
-if (varonce295) {
-var296 = varonce295;
 } else {
-var297 = "\11";
-var298 = 1;
-var299 = string__NativeString__to_s_with_length(var297, var298);
-var296 = var299;
-varonce295 = var296;
-}
-if (varonce300) {
-var301 = varonce300;
-} else {
-var302 = "\n\11";
-var303 = 2;
-var304 = string__NativeString__to_s_with_length(var302, var303);
-var301 = var304;
-varonce300 = var301;
-}
-if (varonce305) {
-var306 = varonce305;
-} else {
-var307 = "^";
-var308 = 1;
-var309 = string__NativeString__to_s_with_length(var307, var308);
-var306 = var309;
-varonce305 = var306;
-}
-var310 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var310 = array_instance Array[Object] */
-var311 = 9;
-var312 = NEW_array__NativeArray(var311, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var312)->values[0] = (val*) var296;
-((struct instance_array__NativeArray*)var312)->values[1] = (val*) var_lstart;
-((struct instance_array__NativeArray*)var312)->values[2] = (val*) var_col;
-((struct instance_array__NativeArray*)var312)->values[3] = (val*) var_lmid;
-((struct instance_array__NativeArray*)var312)->values[4] = (val*) var_def;
-((struct instance_array__NativeArray*)var312)->values[5] = (val*) var_lend;
-((struct instance_array__NativeArray*)var312)->values[6] = (val*) var301;
-((struct instance_array__NativeArray*)var312)->values[7] = (val*) var_indent;
-((struct instance_array__NativeArray*)var312)->values[8] = (val*) var306;
+var294 = ' ';
 {
-((void (*)(val*, val*, long))(var310->class->vft[COLOR_array__Array__with_native]))(var310, var312, var311) /* with_native on <var310:Array[Object]>*/;
+string__FlatBuffer__add(var_indent, var294); /* Direct call string#FlatBuffer#add on <var_indent:FlatBuffer>*/
+}
+}
+var295 = 1;
+{
+var296 = kernel__Int__successor(var_j, var295);
+}
+var_j = var296;
+} else {
+goto BREAK_label297;
+}
+}
+BREAK_label297: (void)0;
+if (varonce298) {
+var299 = varonce298;
+} else {
+var300 = "\11";
+var301 = 1;
+var302 = string__NativeString__to_s_with_length(var300, var301);
+var299 = var302;
+varonce298 = var299;
+}
+if (varonce303) {
+var304 = varonce303;
+} else {
+var305 = "\n\11";
+var306 = 2;
+var307 = string__NativeString__to_s_with_length(var305, var306);
+var304 = var307;
+varonce303 = var304;
+}
+if (varonce308) {
+var309 = varonce308;
+} else {
+var310 = "^";
+var311 = 1;
+var312 = string__NativeString__to_s_with_length(var310, var311);
+var309 = var312;
+varonce308 = var309;
+}
+var313 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var313 = array_instance Array[Object] */
+var314 = 9;
+var315 = NEW_array__NativeArray(var314, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var315)->values[0] = (val*) var299;
+((struct instance_array__NativeArray*)var315)->values[1] = (val*) var_lstart;
+((struct instance_array__NativeArray*)var315)->values[2] = (val*) var_col;
+((struct instance_array__NativeArray*)var315)->values[3] = (val*) var_lmid;
+((struct instance_array__NativeArray*)var315)->values[4] = (val*) var_def;
+((struct instance_array__NativeArray*)var315)->values[5] = (val*) var_lend;
+((struct instance_array__NativeArray*)var315)->values[6] = (val*) var304;
+((struct instance_array__NativeArray*)var315)->values[7] = (val*) var_indent;
+((struct instance_array__NativeArray*)var315)->values[8] = (val*) var309;
+{
+((void (*)(val*, val*, long))(var313->class->vft[COLOR_array__Array__with_native]))(var313, var315, var314) /* with_native on <var313:Array[Object]>*/;
 }
 }
 {
-var313 = ((val* (*)(val*))(var310->class->vft[COLOR_string__Object__to_s]))(var310) /* to_s on <var310:Array[Object]>*/;
+var316 = ((val* (*)(val*))(var313->class->vft[COLOR_string__Object__to_s]))(var313) /* to_s on <var313:Array[Object]>*/;
 }
-var = var313;
+var = var316;
 goto RET_LABEL;
 RET_LABEL:;
 return var;

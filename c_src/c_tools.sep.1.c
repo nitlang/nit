@@ -6,7 +6,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:ExternFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var = var1;
@@ -22,7 +22,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:Object(ExternFile)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var1 = var3;
@@ -31,6 +31,19 @@ RET_LABEL2:(void)0;
 var = var1;
 RET_LABEL:;
 return var;
+}
+/* method c_tools#ExternFile#filename= for (self: ExternFile, String) */
+void c_tools__ExternFile__filename_61d(val* self, val* p0) {
+self->attrs[COLOR_c_tools__ExternFile___filename].val = p0; /* _filename on <self:ExternFile> */
+RET_LABEL:;
+}
+/* method c_tools#ExternFile#filename= for (self: Object, String) */
+void VIRTUAL_c_tools__ExternFile__filename_61d(val* self, val* p0) {
+{ /* Inline c_tools#ExternFile#filename= (self,p0) on <self:Object(ExternFile)> */
+self->attrs[COLOR_c_tools__ExternFile___filename].val = p0; /* _filename on <self:Object(ExternFile)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
 }
 /* method c_tools#ExternFile#add_to_jar for (self: ExternFile): Bool */
 short int c_tools__ExternFile__add_to_jar(val* self) {
@@ -51,15 +64,19 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method c_tools#ExternFile#init for (self: ExternFile, String) */
-void c_tools__ExternFile__init(val* self, val* p0) {
-self->attrs[COLOR_c_tools__ExternFile___filename].val = p0; /* _filename on <self:ExternFile> */
+/* method c_tools#ExternFile#init for (self: ExternFile) */
+void c_tools__ExternFile__init(val* self) {
+{
+((void (*)(val*))(self->class->vft[COLOR_c_tools__ExternFile__init]))(self) /* init on <self:ExternFile>*/;
+}
 RET_LABEL:;
 }
-/* method c_tools#ExternFile#init for (self: Object, String) */
-void VIRTUAL_c_tools__ExternFile__init(val* self, val* p0) {
-{ /* Inline c_tools#ExternFile#init (self,p0) on <self:Object(ExternFile)> */
-self->attrs[COLOR_c_tools__ExternFile___filename].val = p0; /* _filename on <self:Object(ExternFile)> */
+/* method c_tools#ExternFile#init for (self: Object) */
+void VIRTUAL_c_tools__ExternFile__init(val* self) {
+{ /* Inline c_tools#ExternFile#init (self) on <self:Object(ExternFile)> */
+{
+((void (*)(val*))(self->class->vft[COLOR_c_tools__ExternFile__init]))(self) /* init on <self:Object(ExternFile)>*/;
+}
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;
@@ -71,15 +88,15 @@ val* var_cflags /* var cflags: String */;
 var_filename = p0;
 var_cflags = p1;
 {
-{ /* Inline c_tools#ExternFile#init (self,var_filename) on <self:ExternCFile> */
-self->attrs[COLOR_c_tools__ExternFile___filename].val = var_filename; /* _filename on <self:ExternCFile> */
-RET_LABEL1:(void)0;
+((void (*)(val*, val*))(self->class->vft[COLOR_c_tools__ExternFile__filename_61d]))(self, var_filename) /* filename= on <self:ExternCFile>*/;
 }
+{
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:ExternCFile>*/;
 }
 {
 { /* Inline c_tools#ExternCFile#cflags= (self,var_cflags) on <self:ExternCFile> */
 self->attrs[COLOR_c_tools__ExternCFile___cflags].val = var_cflags; /* _cflags on <self:ExternCFile> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 RET_LABEL:;
@@ -96,7 +113,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_c_tools__ExternCFile___cflags].val; /* _cflags on <self:ExternCFile> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _cflags");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 131);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 131);
 show_backtrace(1);
 }
 var = var1;
@@ -112,7 +129,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_c_tools__ExternCFile___cflags].val; /* _cflags on <self:Object(ExternCFile)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _cflags");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 131);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 131);
 show_backtrace(1);
 }
 var1 = var3;
@@ -146,7 +163,7 @@ long var4 /* : Int */;
 var3 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:ExternCFile> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var1 = var3;
@@ -205,7 +222,7 @@ if (var2){
 var5 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:ExternCFile> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var3 = var5;
@@ -217,7 +234,7 @@ RET_LABEL4:(void)0;
 var8 = var_o->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <var_o:nullable Object(ExternCFile)> */
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var6 = var8;
@@ -273,7 +290,7 @@ val* var_res /* var res: String */;
 var3 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:ExternCFile> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var1 = var3;
@@ -370,7 +387,7 @@ val* var31 /* : String */;
 var3 = self->attrs[COLOR_c_tools__ExternFile___filename].val; /* _filename on <self:ExternCFile> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 104);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 104);
 show_backtrace(1);
 }
 var1 = var3;
@@ -408,7 +425,7 @@ varonce10 = var11;
 var17 = self->attrs[COLOR_c_tools__ExternCFile___cflags].val; /* _cflags on <self:ExternCFile> */
 if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _cflags");
-PRINT_ERROR(" (%s:%d)\n", "src/c_tools.nit", 131);
+PRINT_ERROR(" (%s:%d)\n", "c_tools.nit", 131);
 show_backtrace(1);
 }
 var15 = var17;

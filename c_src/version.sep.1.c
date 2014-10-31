@@ -10,8 +10,8 @@ val* var4 /* : FlatString */;
 if (varonce) {
 var1 = varonce;
 } else {
-var2 = "v0.6.6-321-g6277c0a";
-var3 = 19;
+var2 = "v0.6.10";
+var3 = 7;
 var4 = string__NativeString__to_s_with_length(var2, var3);
 var1 = var4;
 varonce = var1;

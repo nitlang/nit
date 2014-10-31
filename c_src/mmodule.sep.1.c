@@ -6,7 +6,7 @@ val* var1 /* : Array[MModule] */;
 var1 = self->attrs[COLOR_mmodule__Model___mmodules].val; /* _mmodules on <self:Model> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 28);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 27);
 show_backtrace(1);
 }
 var = var1;
@@ -22,7 +22,7 @@ val* var3 /* : Array[MModule] */;
 var3 = self->attrs[COLOR_mmodule__Model___mmodules].val; /* _mmodules on <self:Object(Model)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 28);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 27);
 show_backtrace(1);
 }
 var1 = var3;
@@ -39,7 +39,7 @@ val* var1 /* : POSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <self:Model> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 30);
 show_backtrace(1);
 }
 var = var1;
@@ -55,7 +55,7 @@ val* var3 /* : POSet[MModule] */;
 var3 = self->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <self:Object(Model)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 30);
 show_backtrace(1);
 }
 var1 = var3;
@@ -72,7 +72,7 @@ val* var1 /* : POSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <self:Model> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_importation_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 37);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 36);
 show_backtrace(1);
 }
 var = var1;
@@ -88,7 +88,7 @@ val* var3 /* : POSet[MModule] */;
 var3 = self->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <self:Object(Model)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_importation_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 37);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 36);
 show_backtrace(1);
 }
 var1 = var3;
@@ -105,7 +105,7 @@ val* var1 /* : MultiHashMap[String, MModule] */;
 var1 = self->attrs[COLOR_mmodule__Model___mmodules_by_name].val; /* _mmodules_by_name on <self:Model> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules_by_name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 40);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 39);
 show_backtrace(1);
 }
 var = var1;
@@ -121,7 +121,7 @@ val* var3 /* : MultiHashMap[String, MModule] */;
 var3 = self->attrs[COLOR_mmodule__Model___mmodules_by_name].val; /* _mmodules_by_name on <self:Object(Model)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules_by_name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 40);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 39);
 show_backtrace(1);
 }
 var1 = var3;
@@ -138,7 +138,7 @@ val* var1 /* : Array[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <self:MGroup> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 58);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 57);
 show_backtrace(1);
 }
 var = var1;
@@ -154,7 +154,7 @@ val* var3 /* : Array[MModule] */;
 var3 = self->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <self:Object(MGroup)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 58);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 57);
 show_backtrace(1);
 }
 var1 = var3;
@@ -164,99 +164,41 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method mmodule#MGroup#fuzzy_owner for (self: MGroup): nullable MModule */
-val* mmodule__MGroup__fuzzy_owner(val* self) {
-val* var /* : nullable MModule */;
-val* var1 /* : Array[MModule] */;
-val* var3 /* : Array[MModule] */;
-val* var4 /* : ArrayIterator[nullable Object] */;
-short int var5 /* : Bool */;
-val* var6 /* : nullable Object */;
-val* var_m /* var m: MModule */;
-val* var7 /* : String */;
-val* var9 /* : String */;
-val* var10 /* : String */;
-val* var12 /* : String */;
-short int var13 /* : Bool */;
-short int var14 /* : Bool */;
-val* var15 /* : null */;
-{
-{ /* Inline mmodule#MGroup#mmodules (self) on <self:MGroup> */
-var3 = self->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <self:MGroup> */
-if (unlikely(var3 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 58);
-show_backtrace(1);
-}
-var1 = var3;
-RET_LABEL2:(void)0;
-}
-}
-{
-var4 = array__AbstractArrayRead__iterator(var1);
-}
-for(;;) {
-{
-var5 = array__ArrayIterator__is_ok(var4);
-}
-if(!var5) break;
-{
-var6 = array__ArrayIterator__item(var4);
-}
-var_m = var6;
-{
-{ /* Inline mmodule#MModule#name (var_m) on <var_m:MModule> */
-var9 = var_m->attrs[COLOR_mmodule__MModule___name].val; /* _name on <var_m:MModule> */
-if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
-show_backtrace(1);
-}
-var7 = var9;
-RET_LABEL8:(void)0;
-}
-}
-{
-{ /* Inline mproject#MGroup#name (self) on <self:MGroup> */
-var12 = self->attrs[COLOR_mproject__MGroup___name].val; /* _name on <self:MGroup> */
-if (unlikely(var12 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mproject.nit", 56);
-show_backtrace(1);
-}
-var10 = var12;
-RET_LABEL11:(void)0;
-}
-}
-{
-var14 = string__FlatString___61d_61d(var7, var10);
-var13 = var14;
-}
-if (var13){
-var = var_m;
-goto RET_LABEL;
-} else {
-}
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var4); /* Direct call array#ArrayIterator#next on <var4:ArrayIterator[nullable Object]>*/
-}
-}
-BREAK_label: (void)0;
-var15 = NULL;
-var = var15;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method mmodule#MGroup#fuzzy_owner for (self: Object): nullable MModule */
-val* VIRTUAL_mmodule__MGroup__fuzzy_owner(val* self) {
+/* method mmodule#MGroup#default_mmodule for (self: MGroup): nullable MModule */
+val* mmodule__MGroup__default_mmodule(val* self) {
 val* var /* : nullable MModule */;
 val* var1 /* : nullable MModule */;
-var1 = mmodule__MGroup__fuzzy_owner(self);
+var1 = self->attrs[COLOR_mmodule__MGroup___default_mmodule].val; /* _default_mmodule on <self:MGroup> */
 var = var1;
 RET_LABEL:;
 return var;
+}
+/* method mmodule#MGroup#default_mmodule for (self: Object): nullable MModule */
+val* VIRTUAL_mmodule__MGroup__default_mmodule(val* self) {
+val* var /* : nullable MModule */;
+val* var1 /* : nullable MModule */;
+val* var3 /* : nullable MModule */;
+{ /* Inline mmodule#MGroup#default_mmodule (self) on <self:Object(MGroup)> */
+var3 = self->attrs[COLOR_mmodule__MGroup___default_mmodule].val; /* _default_mmodule on <self:Object(MGroup)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method mmodule#MGroup#default_mmodule= for (self: MGroup, nullable MModule) */
+void mmodule__MGroup__default_mmodule_61d(val* self, val* p0) {
+self->attrs[COLOR_mmodule__MGroup___default_mmodule].val = p0; /* _default_mmodule on <self:MGroup> */
+RET_LABEL:;
+}
+/* method mmodule#MGroup#default_mmodule= for (self: Object, nullable MModule) */
+void VIRTUAL_mmodule__MGroup__default_mmodule_61d(val* self, val* p0) {
+{ /* Inline mmodule#MGroup#default_mmodule= (self,p0) on <self:Object(MGroup)> */
+self->attrs[COLOR_mmodule__MGroup___default_mmodule].val = p0; /* _default_mmodule on <self:Object(MGroup)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
 }
 /* method mmodule#MModule#model for (self: MModule): Model */
 val* mmodule__MModule__model(val* self) {
@@ -265,7 +207,7 @@ val* var1 /* : Model */;
 var1 = self->attrs[COLOR_mmodule__MModule___model].val; /* _model on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 72);
 show_backtrace(1);
 }
 var = var1;
@@ -281,7 +223,7 @@ val* var3 /* : Model */;
 var3 = self->attrs[COLOR_mmodule__MModule___model].val; /* _model on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 72);
 show_backtrace(1);
 }
 var1 = var3;
@@ -300,19 +242,6 @@ RET_LABEL:;
 void VIRTUAL_mmodule__MModule__model_61d(val* self, val* p0) {
 { /* Inline mmodule#MModule#model= (self,p0) on <self:Object(MModule)> */
 self->attrs[COLOR_mmodule__MModule___model].val = p0; /* _model on <self:Object(MModule)> */
-RET_LABEL1:(void)0;
-}
-RET_LABEL:;
-}
-/* method mmodule#MModule#direct_owner= for (self: MModule, nullable MModule) */
-void mmodule__MModule__direct_owner_61d(val* self, val* p0) {
-self->attrs[COLOR_mmodule__MModule___direct_owner].val = p0; /* _direct_owner on <self:MModule> */
-RET_LABEL:;
-}
-/* method mmodule#MModule#direct_owner= for (self: Object, nullable MModule) */
-void VIRTUAL_mmodule__MModule__direct_owner_61d(val* self, val* p0) {
-{ /* Inline mmodule#MModule#direct_owner= (self,p0) on <self:Object(MModule)> */
-self->attrs[COLOR_mmodule__MModule___direct_owner].val = p0; /* _direct_owner on <self:Object(MModule)> */
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;
@@ -360,7 +289,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var = var1;
@@ -376,7 +305,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var1 = var3;
@@ -406,7 +335,7 @@ val* var1 /* : Location */;
 var1 = self->attrs[COLOR_mmodule__MModule___location].val; /* _location on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 89);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 81);
 show_backtrace(1);
 }
 var = var1;
@@ -422,7 +351,7 @@ val* var3 /* : Location */;
 var3 = self->attrs[COLOR_mmodule__MModule___location].val; /* _location on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 89);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 81);
 show_backtrace(1);
 }
 var1 = var3;
@@ -455,7 +384,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:MModule> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var1 = var3;
@@ -496,7 +425,7 @@ val* var1 /* : POSetElement[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
 var = var1;
@@ -512,7 +441,7 @@ val* var3 /* : POSetElement[MModule] */;
 var3 = self->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
 var1 = var3;
@@ -614,7 +543,7 @@ var4 = var_;
 var14 = var_mgroup->attrs[COLOR_mproject__MGroup___mproject].val; /* _mproject on <var_mgroup:nullable MGroup(MGroup)> */
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mproject.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "model/mproject.nit", 60);
 show_backtrace(1);
 }
 var12 = var14;
@@ -626,7 +555,7 @@ RET_LABEL13:(void)0;
 var17 = var12->attrs[COLOR_mproject__MProject___name].val; /* _name on <var12:MProject> */
 if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mproject.nit", 26);
+PRINT_ERROR(" (%s:%d)\n", "model/mproject.nit", 26);
 show_backtrace(1);
 }
 var15 = var17;
@@ -638,7 +567,7 @@ RET_LABEL16:(void)0;
 var20 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:MModule> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var18 = var20;
@@ -657,7 +586,7 @@ if (var4){
 var25 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:MModule> */
 if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var23 = var25;
@@ -672,7 +601,7 @@ goto RET_LABEL;
 var28 = var_mgroup->attrs[COLOR_mproject__MGroup___mproject].val; /* _mproject on <var_mgroup:nullable MGroup(MGroup)> */
 if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mproject.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "model/mproject.nit", 60);
 show_backtrace(1);
 }
 var26 = var28;
@@ -684,7 +613,7 @@ RET_LABEL27:(void)0;
 var31 = var26->attrs[COLOR_mproject__MProject___name].val; /* _name on <var26:MProject> */
 if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mproject.nit", 26);
+PRINT_ERROR(" (%s:%d)\n", "model/mproject.nit", 26);
 show_backtrace(1);
 }
 var29 = var31;
@@ -705,7 +634,7 @@ varonce = var32;
 var38 = self->attrs[COLOR_mmodule__MModule___name].val; /* _name on <self:MModule> */
 if (unlikely(var38 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 86);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 78);
 show_backtrace(1);
 }
 var36 = var38;
@@ -748,73 +677,86 @@ val* var_mgroup /* var mgroup: nullable MGroup */;
 val* var_name /* var name: String */;
 val* var_location /* var location: Location */;
 val* var /* : MultiHashMap[String, MModule] */;
-val* var6 /* : MultiHashMap[String, MModule] */;
-val* var7 /* : Array[MModule] */;
-val* var9 /* : Array[MModule] */;
-val* var10 /* : POSet[MModule] */;
-val* var12 /* : POSet[MModule] */;
-val* var13 /* : POSetElement[Object] */;
-val* var16 /* : null */;
+val* var5 /* : MultiHashMap[String, MModule] */;
+val* var6 /* : Array[MModule] */;
+val* var8 /* : Array[MModule] */;
+val* var9 /* : POSet[MModule] */;
+val* var11 /* : POSet[MModule] */;
+val* var12 /* : POSetElement[Object] */;
+val* var15 /* : null */;
+short int var16 /* : Bool */;
 short int var17 /* : Bool */;
-short int var18 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var19 /* : Bool */;
 short int var20 /* : Bool */;
 short int var21 /* : Bool */;
-short int var22 /* : Bool */;
-val* var23 /* : Array[MModule] */;
-val* var25 /* : Array[MModule] */;
-val* var26 /* : nullable MModule */;
-val* var_direct_owner /* var direct_owner: nullable MModule */;
-short int var27 /* : Bool */;
+val* var22 /* : Array[MModule] */;
+val* var24 /* : Array[MModule] */;
+val* var25 /* : String */;
+val* var27 /* : String */;
 short int var28 /* : Bool */;
-val* var_other30 /* var other: nullable Object */;
-short int var31 /* : Bool */;
-short int var33 /* : Bool */;
-val* var34 /* : Array[MModule] */;
-val* var36 /* : Array[MModule] */;
-val* var37 /* : ArrayIterator[nullable Object] */;
+short int var29 /* : Bool */;
+val* var30 /* : nullable MModule */;
+val* var32 /* : nullable MModule */;
+val* var33 /* : null */;
+short int var34 /* : Bool */;
+short int var35 /* : Bool */;
+val* var_other37 /* var other: nullable Object */;
 short int var38 /* : Bool */;
-val* var39 /* : nullable Object */;
-val* var_m /* var m: MModule */;
 short int var40 /* : Bool */;
-short int var41 /* : Bool */;
-short int var43 /* : Bool */;
+val* var42 /* : nullable MModule */;
+val* var44 /* : nullable MModule */;
+val* var_direct_owner /* var direct_owner: nullable MModule */;
 short int var45 /* : Bool */;
-val* var47 /* : POSet[MModule] */;
-val* var49 /* : POSet[MModule] */;
-val* var50 /* : nullable MGroup */;
-val* var52 /* : nullable MGroup */;
-val* var53 /* : null */;
-short int var54 /* : Bool */;
-short int var55 /* : Bool */;
-short int var57 /* : Bool */;
+short int var46 /* : Bool */;
+short int var48 /* : Bool */;
+short int var50 /* : Bool */;
+val* var51 /* : Array[MModule] */;
+val* var53 /* : Array[MModule] */;
+val* var_ /* var : Array[MModule] */;
+val* var54 /* : ArrayIterator[nullable Object] */;
+val* var_55 /* var : ArrayIterator[MModule] */;
+short int var56 /* : Bool */;
+val* var57 /* : nullable Object */;
+val* var_m /* var m: MModule */;
 short int var58 /* : Bool */;
 short int var59 /* : Bool */;
-val* var60 /* : nullable MGroup */;
-val* var62 /* : nullable MGroup */;
-val* var63 /* : nullable MModule */;
-short int var64 /* : Bool */;
-short int var65 /* : Bool */;
-short int var66 /* : Bool */;
-short int var68 /* : Bool */;
-short int var69 /* : Bool */;
-short int var70 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var71 /* : null */;
-short int var72 /* : Bool */;
+short int var61 /* : Bool */;
+short int var63 /* : Bool */;
+val* var64 /* : POSet[MModule] */;
+val* var66 /* : POSet[MModule] */;
+val* var69 /* : nullable MGroup */;
+val* var71 /* : nullable MGroup */;
+val* var72 /* : null */;
 short int var73 /* : Bool */;
-short int var75 /* : Bool */;
+short int var74 /* : Bool */;
 short int var76 /* : Bool */;
 short int var77 /* : Bool */;
-val* var79 /* : POSet[MModule] */;
-val* var81 /* : POSet[MModule] */;
-val* var82 /* : POSet[MModule] */;
-val* var84 /* : POSet[MModule] */;
-val* var85 /* : POSetElement[Object] */;
+short int var78 /* : Bool */;
+val* var79 /* : nullable MGroup */;
+val* var81 /* : nullable MGroup */;
+val* var82 /* : nullable MModule */;
+val* var84 /* : nullable MModule */;
+short int var85 /* : Bool */;
+short int var86 /* : Bool */;
+short int var87 /* : Bool */;
+short int var89 /* : Bool */;
+short int var90 /* : Bool */;
+short int var91 /* : Bool */;
+short int var_92 /* var : Bool */;
+val* var93 /* : null */;
+short int var94 /* : Bool */;
+short int var95 /* : Bool */;
+short int var97 /* : Bool */;
+short int var98 /* : Bool */;
+short int var99 /* : Bool */;
+val* var100 /* : POSet[MModule] */;
+val* var102 /* : POSet[MModule] */;
+val* var103 /* : POSet[MModule] */;
+val* var105 /* : POSet[MModule] */;
+val* var106 /* : POSetElement[Object] */;
 {
-{ /* Inline model_base#MEntity#init (self) on <self:MModule> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:MModule>*/;
 }
 var_model = p0;
 var_mgroup = p1;
@@ -823,31 +765,31 @@ var_location = p3;
 {
 { /* Inline mmodule#MModule#model= (self,var_model) on <self:MModule> */
 self->attrs[COLOR_mmodule__MModule___model].val = var_model; /* _model on <self:MModule> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 {
 { /* Inline mmodule#MModule#name= (self,var_name) on <self:MModule> */
 self->attrs[COLOR_mmodule__MModule___name].val = var_name; /* _name on <self:MModule> */
-RET_LABEL3:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline mmodule#MModule#location= (self,var_location) on <self:MModule> */
 self->attrs[COLOR_mmodule__MModule___location].val = var_location; /* _location on <self:MModule> */
-RET_LABEL4:(void)0;
+RET_LABEL3:(void)0;
 }
 }
 {
 { /* Inline mmodule#Model#mmodules_by_name (var_model) on <var_model:Model> */
-var6 = var_model->attrs[COLOR_mmodule__Model___mmodules_by_name].val; /* _mmodules_by_name on <var_model:Model> */
-if (unlikely(var6 == NULL)) {
+var5 = var_model->attrs[COLOR_mmodule__Model___mmodules_by_name].val; /* _mmodules_by_name on <var_model:Model> */
+if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules_by_name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 40);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 39);
 show_backtrace(1);
 }
-var = var6;
-RET_LABEL5:(void)0;
+var = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
@@ -855,288 +797,359 @@ more_collections__MultiHashMap__add_one(var, var_name, self); /* Direct call mor
 }
 {
 { /* Inline mmodule#Model#mmodules (var_model) on <var_model:Model> */
-var9 = var_model->attrs[COLOR_mmodule__Model___mmodules].val; /* _mmodules on <var_model:Model> */
-if (unlikely(var9 == NULL)) {
+var8 = var_model->attrs[COLOR_mmodule__Model___mmodules].val; /* _mmodules on <var_model:Model> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 28);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 27);
 show_backtrace(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
 {
-array__Array__add(var7, self); /* Direct call array#Array#add on <var7:Array[MModule]>*/
+array__Array__add(var6, self); /* Direct call array#Array#add on <var6:Array[MModule]>*/
 }
 {
 { /* Inline mmodule#Model#mmodule_nesting_hierarchy (var_model) on <var_model:Model> */
-var12 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
-if (unlikely(var12 == NULL)) {
+var11 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 30);
 show_backtrace(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-var13 = poset__POSet__add_node(var10, self);
+var12 = poset__POSet__add_node(var9, self);
 }
 {
-{ /* Inline mmodule#MModule#in_nesting= (self,var13) on <self:MModule> */
-self->attrs[COLOR_mmodule__MModule___in_nesting].val = var13; /* _in_nesting on <self:MModule> */
-RET_LABEL14:(void)0;
+{ /* Inline mmodule#MModule#in_nesting= (self,var12) on <self:MModule> */
+self->attrs[COLOR_mmodule__MModule___in_nesting].val = var12; /* _in_nesting on <self:MModule> */
+RET_LABEL13:(void)0;
 }
 }
 {
 { /* Inline mmodule#MModule#mgroup= (self,var_mgroup) on <self:MModule> */
 self->attrs[COLOR_mmodule__MModule___mgroup].val = var_mgroup; /* _mgroup on <self:MModule> */
-RET_LABEL15:(void)0;
+RET_LABEL14:(void)0;
 }
 }
-var16 = NULL;
+var15 = NULL;
 if (var_mgroup == NULL) {
-var17 = 0; /* is null */
+var16 = 0; /* is null */
 } else {
-var17 = 1; /* arg is null and recv is not */
+var16 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_mgroup,var16) on <var_mgroup:nullable MGroup> */
-var_other = var16;
+{ /* Inline kernel#Object#!= (var_mgroup,var15) on <var_mgroup:nullable MGroup> */
+var_other = var15;
 {
-var21 = ((short int (*)(val*, val*))(var_mgroup->class->vft[COLOR_kernel__Object___61d_61d]))(var_mgroup, var_other) /* == on <var_mgroup:nullable MGroup(MGroup)>*/;
-var20 = var21;
+var20 = ((short int (*)(val*, val*))(var_mgroup->class->vft[COLOR_kernel__Object___61d_61d]))(var_mgroup, var_other) /* == on <var_mgroup:nullable MGroup(MGroup)>*/;
+var19 = var20;
 }
-var22 = !var20;
-var18 = var22;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var21 = !var19;
+var17 = var21;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
-var17 = var18;
+var16 = var17;
 }
-if (var17){
+if (var16){
 {
 { /* Inline mmodule#MGroup#mmodules (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
-var25 = var_mgroup->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <var_mgroup:nullable MGroup(MGroup)> */
-if (unlikely(var25 == NULL)) {
+var24 = var_mgroup->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <var_mgroup:nullable MGroup(MGroup)> */
+if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 58);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 57);
 show_backtrace(1);
 }
-var23 = var25;
-RET_LABEL24:(void)0;
+var22 = var24;
+RET_LABEL23:(void)0;
 }
 }
 {
-array__Array__add(var23, self); /* Direct call array#Array#add on <var23:Array[MModule]>*/
+array__Array__add(var22, self); /* Direct call array#Array#add on <var22:Array[MModule]>*/
 }
 {
-var26 = mmodule__MGroup__fuzzy_owner(var_mgroup);
+{ /* Inline mproject#MGroup#name (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
+var27 = var_mgroup->attrs[COLOR_mproject__MGroup___name].val; /* _name on <var_mgroup:nullable MGroup(MGroup)> */
+if (unlikely(var27 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
+PRINT_ERROR(" (%s:%d)\n", "model/mproject.nit", 56);
+show_backtrace(1);
 }
-var_direct_owner = var26;
+var25 = var27;
+RET_LABEL26:(void)0;
+}
+}
+{
+var29 = string__FlatString___61d_61d(var25, var_name);
+var28 = var29;
+}
+if (var28){
+{
+{ /* Inline mmodule#MGroup#default_mmodule (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
+var32 = var_mgroup->attrs[COLOR_mmodule__MGroup___default_mmodule].val; /* _default_mmodule on <var_mgroup:nullable MGroup(MGroup)> */
+var30 = var32;
+RET_LABEL31:(void)0;
+}
+}
+var33 = NULL;
+if (var30 == NULL) {
+var34 = 1; /* is null */
+} else {
+var34 = 0; /* arg is null but recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#== (var30,var33) on <var30:nullable MModule> */
+var_other37 = var33;
+{
+{ /* Inline kernel#Object#is_same_instance (var30,var_other37) on <var30:nullable MModule(MModule)> */
+var40 = var30 == var_other37;
+var38 = var40;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
+}
+}
+var35 = var38;
+goto RET_LABEL36;
+RET_LABEL36:(void)0;
+}
+var34 = var35;
+}
+if (unlikely(!var34)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 121);
+show_backtrace(1);
+}
+{
+{ /* Inline mmodule#MGroup#default_mmodule= (var_mgroup,self) on <var_mgroup:nullable MGroup(MGroup)> */
+var_mgroup->attrs[COLOR_mmodule__MGroup___default_mmodule].val = self; /* _default_mmodule on <var_mgroup:nullable MGroup(MGroup)> */
+RET_LABEL41:(void)0;
+}
+}
+} else {
+}
+{
+{ /* Inline mmodule#MGroup#default_mmodule (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
+var44 = var_mgroup->attrs[COLOR_mmodule__MGroup___default_mmodule].val; /* _default_mmodule on <var_mgroup:nullable MGroup(MGroup)> */
+var42 = var44;
+RET_LABEL43:(void)0;
+}
+}
+var_direct_owner = var42;
 if (var_direct_owner == NULL) {
-var27 = 0; /* <self:MModule> cannot be null */
+var45 = 0; /* <self:MModule> cannot be null */
 } else {
 { /* Inline kernel#Object#== (var_direct_owner,self) on <var_direct_owner:nullable MModule> */
-var_other30 = self;
+var_other37 = self;
 {
-{ /* Inline kernel#Object#is_same_instance (var_direct_owner,var_other30) on <var_direct_owner:nullable MModule(MModule)> */
-var33 = var_direct_owner == var_other30;
-var31 = var33;
-goto RET_LABEL32;
-RET_LABEL32:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_direct_owner,var_other37) on <var_direct_owner:nullable MModule(MModule)> */
+var50 = var_direct_owner == var_other37;
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
 }
 }
-var28 = var31;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var46 = var48;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-var27 = var28;
+var45 = var46;
 }
-if (var27){
+if (var45){
 {
 { /* Inline mmodule#MGroup#mmodules (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
-var36 = var_mgroup->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <var_mgroup:nullable MGroup(MGroup)> */
-if (unlikely(var36 == NULL)) {
+var53 = var_mgroup->attrs[COLOR_mmodule__MGroup___mmodules].val; /* _mmodules on <var_mgroup:nullable MGroup(MGroup)> */
+if (unlikely(var53 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 58);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 57);
 show_backtrace(1);
 }
-var34 = var36;
-RET_LABEL35:(void)0;
+var51 = var53;
+RET_LABEL52:(void)0;
 }
 }
+var_ = var51;
 {
-var37 = array__AbstractArrayRead__iterator(var34);
+var54 = array__AbstractArrayRead__iterator(var_);
 }
+var_55 = var54;
 for(;;) {
 {
-var38 = array__ArrayIterator__is_ok(var37);
+var56 = array__ArrayIterator__is_ok(var_55);
 }
-if(!var38) break;
+if (var56){
 {
-var39 = array__ArrayIterator__item(var37);
+var57 = array__ArrayIterator__item(var_55);
 }
-var_m = var39;
+var_m = var57;
 {
 { /* Inline kernel#Object#== (var_m,self) on <var_m:MModule> */
-var_other30 = self;
+var_other37 = self;
 {
-{ /* Inline kernel#Object#is_same_instance (var_m,var_other30) on <var_m:MModule> */
-var45 = var_m == var_other30;
-var43 = var45;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_m,var_other37) on <var_m:MModule> */
+var63 = var_m == var_other37;
+var61 = var63;
+goto RET_LABEL62;
+RET_LABEL62:(void)0;
 }
 }
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var59 = var61;
+goto RET_LABEL60;
+RET_LABEL60:(void)0;
 }
-var40 = var41;
+var58 = var59;
 }
-if (var40){
-goto CONTINUE_label;
+if (var58){
+goto BREAK_label;
 } else {
-}
-{
-{ /* Inline mmodule#MModule#direct_owner= (var_m,self) on <var_m:MModule> */
-var_m->attrs[COLOR_mmodule__MModule___direct_owner].val = self; /* _direct_owner on <var_m:MModule> */
-RET_LABEL46:(void)0;
-}
 }
 {
 { /* Inline mmodule#Model#mmodule_nesting_hierarchy (var_model) on <var_model:Model> */
-var49 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
-if (unlikely(var49 == NULL)) {
+var66 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
+if (unlikely(var66 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 30);
 show_backtrace(1);
 }
-var47 = var49;
-RET_LABEL48:(void)0;
+var64 = var66;
+RET_LABEL65:(void)0;
 }
 }
 {
-poset__POSet__add_edge(var47, self, var_m); /* Direct call poset#POSet#add_edge on <var47:POSet[MModule]>*/
-}
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var37); /* Direct call array#ArrayIterator#next on <var37:ArrayIterator[nullable Object]>*/
-}
+poset__POSet__add_edge(var64, self, var_m); /* Direct call poset#POSet#add_edge on <var64:POSet[MModule]>*/
 }
 BREAK_label: (void)0;
 {
-{ /* Inline mproject#MGroup#parent (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
-var52 = var_mgroup->attrs[COLOR_mproject__MGroup___parent].val; /* _parent on <var_mgroup:nullable MGroup(MGroup)> */
-var50 = var52;
-RET_LABEL51:(void)0;
+array__ArrayIterator__next(var_55); /* Direct call array#ArrayIterator#next on <var_55:ArrayIterator[MModule]>*/
 }
-}
-var53 = NULL;
-if (var50 == NULL) {
-var54 = 0; /* is null */
 } else {
-var54 = 1; /* arg is null and recv is not */
+goto BREAK_label67;
+}
+}
+BREAK_label67: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_55) on <var_55:ArrayIterator[MModule]> */
+RET_LABEL68:(void)0;
+}
+}
+{
+{ /* Inline mproject#MGroup#parent (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
+var71 = var_mgroup->attrs[COLOR_mproject__MGroup___parent].val; /* _parent on <var_mgroup:nullable MGroup(MGroup)> */
+var69 = var71;
+RET_LABEL70:(void)0;
+}
+}
+var72 = NULL;
+if (var69 == NULL) {
+var73 = 0; /* is null */
+} else {
+var73 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var50,var53) on <var50:nullable MGroup> */
-var_other = var53;
+{ /* Inline kernel#Object#!= (var69,var72) on <var69:nullable MGroup> */
+var_other = var72;
 {
-var58 = ((short int (*)(val*, val*))(var50->class->vft[COLOR_kernel__Object___61d_61d]))(var50, var_other) /* == on <var50:nullable MGroup(MGroup)>*/;
-var57 = var58;
+var77 = ((short int (*)(val*, val*))(var69->class->vft[COLOR_kernel__Object___61d_61d]))(var69, var_other) /* == on <var69:nullable MGroup(MGroup)>*/;
+var76 = var77;
 }
-var59 = !var57;
-var55 = var59;
-goto RET_LABEL56;
-RET_LABEL56:(void)0;
+var78 = !var76;
+var74 = var78;
+goto RET_LABEL75;
+RET_LABEL75:(void)0;
 }
-var54 = var55;
+var73 = var74;
 }
-if (var54){
+if (var73){
 {
 { /* Inline mproject#MGroup#parent (var_mgroup) on <var_mgroup:nullable MGroup(MGroup)> */
-var62 = var_mgroup->attrs[COLOR_mproject__MGroup___parent].val; /* _parent on <var_mgroup:nullable MGroup(MGroup)> */
-var60 = var62;
-RET_LABEL61:(void)0;
-}
-}
-if (var60 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 138);
-show_backtrace(1);
-} else {
-var63 = mmodule__MGroup__fuzzy_owner(var60);
-}
-var_direct_owner = var63;
-} else {
-}
-} else {
-}
-if (var_direct_owner == NULL) {
-var65 = 1; /* <self:MModule> cannot be null */
-} else {
-{ /* Inline kernel#Object#!= (var_direct_owner,self) on <var_direct_owner:nullable MModule> */
-var_other = self;
-{
-var69 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, var_other) /* == on <var_direct_owner:nullable MModule(MModule)>*/;
-var68 = var69;
-}
-var70 = !var68;
-var66 = var70;
-goto RET_LABEL67;
-RET_LABEL67:(void)0;
-}
-var65 = var66;
-}
-var_ = var65;
-if (var65){
-var71 = NULL;
-if (var_direct_owner == NULL) {
-var72 = 0; /* is null */
-} else {
-var72 = 1; /* arg is null and recv is not */
-}
-if (0) {
-{ /* Inline kernel#Object#!= (var_direct_owner,var71) on <var_direct_owner:nullable MModule> */
-var_other = var71;
-{
-var76 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, var_other) /* == on <var_direct_owner:nullable MModule(MModule)>*/;
-var75 = var76;
-}
-var77 = !var75;
-var73 = var77;
-goto RET_LABEL74;
-RET_LABEL74:(void)0;
-}
-var72 = var73;
-}
-var64 = var72;
-} else {
-var64 = var_;
-}
-if (var64){
-{
-{ /* Inline mmodule#MModule#direct_owner= (self,var_direct_owner) on <self:MModule> */
-self->attrs[COLOR_mmodule__MModule___direct_owner].val = var_direct_owner; /* _direct_owner on <self:MModule> */
-RET_LABEL78:(void)0;
-}
-}
-{
-{ /* Inline mmodule#Model#mmodule_nesting_hierarchy (var_model) on <var_model:Model> */
-var81 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
-if (unlikely(var81 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 31);
-show_backtrace(1);
-}
+var81 = var_mgroup->attrs[COLOR_mproject__MGroup___parent].val; /* _parent on <var_mgroup:nullable MGroup(MGroup)> */
 var79 = var81;
 RET_LABEL80:(void)0;
 }
 }
+if (var79 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 133);
+show_backtrace(1);
+} else {
+{ /* Inline mmodule#MGroup#default_mmodule (var79) on <var79:nullable MGroup> */
+if (unlikely(var79 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 60);
+show_backtrace(1);
+}
+var84 = var79->attrs[COLOR_mmodule__MGroup___default_mmodule].val; /* _default_mmodule on <var79:nullable MGroup> */
+var82 = var84;
+RET_LABEL83:(void)0;
+}
+}
+var_direct_owner = var82;
+} else {
+}
+} else {
+}
+if (var_direct_owner == NULL) {
+var86 = 1; /* <self:MModule> cannot be null */
+} else {
+{ /* Inline kernel#Object#!= (var_direct_owner,self) on <var_direct_owner:nullable MModule> */
+var_other = self;
 {
-poset__POSet__add_edge(var79, var_direct_owner, self); /* Direct call poset#POSet#add_edge on <var79:POSet[MModule]>*/
+var90 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, var_other) /* == on <var_direct_owner:nullable MModule(MModule)>*/;
+var89 = var90;
+}
+var91 = !var89;
+var87 = var91;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
+}
+var86 = var87;
+}
+var_92 = var86;
+if (var86){
+var93 = NULL;
+if (var_direct_owner == NULL) {
+var94 = 0; /* is null */
+} else {
+var94 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_direct_owner,var93) on <var_direct_owner:nullable MModule> */
+var_other = var93;
+{
+var98 = ((short int (*)(val*, val*))(var_direct_owner->class->vft[COLOR_kernel__Object___61d_61d]))(var_direct_owner, var_other) /* == on <var_direct_owner:nullable MModule(MModule)>*/;
+var97 = var98;
+}
+var99 = !var97;
+var95 = var99;
+goto RET_LABEL96;
+RET_LABEL96:(void)0;
+}
+var94 = var95;
+}
+var85 = var94;
+} else {
+var85 = var_92;
+}
+if (var85){
+{
+{ /* Inline mmodule#Model#mmodule_nesting_hierarchy (var_model) on <var_model:Model> */
+var102 = var_model->attrs[COLOR_mmodule__Model___mmodule_nesting_hierarchy].val; /* _mmodule_nesting_hierarchy on <var_model:Model> */
+if (unlikely(var102 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_nesting_hierarchy");
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 30);
+show_backtrace(1);
+}
+var100 = var102;
+RET_LABEL101:(void)0;
+}
+}
+{
+poset__POSet__add_edge(var100, var_direct_owner, self); /* Direct call poset#POSet#add_edge on <var100:POSet[MModule]>*/
 }
 } else {
 }
@@ -1144,23 +1157,23 @@ poset__POSet__add_edge(var79, var_direct_owner, self); /* Direct call poset#POSe
 }
 {
 { /* Inline mmodule#Model#mmodule_importation_hierarchy (var_model) on <var_model:Model> */
-var84 = var_model->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <var_model:Model> */
-if (unlikely(var84 == NULL)) {
+var105 = var_model->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <var_model:Model> */
+if (unlikely(var105 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_importation_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 37);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 36);
 show_backtrace(1);
 }
-var82 = var84;
-RET_LABEL83:(void)0;
+var103 = var105;
+RET_LABEL104:(void)0;
 }
 }
 {
-var85 = poset__POSet__add_node(var82, self);
+var106 = poset__POSet__add_node(var103, self);
 }
 {
-{ /* Inline mmodule#MModule#in_importation= (self,var85) on <self:MModule> */
-self->attrs[COLOR_mmodule__MModule___in_importation].val = var85; /* _in_importation on <self:MModule> */
-RET_LABEL86:(void)0;
+{ /* Inline mmodule#MModule#in_importation= (self,var106) on <self:MModule> */
+self->attrs[COLOR_mmodule__MModule___in_importation].val = var106; /* _in_importation on <self:MModule> */
+RET_LABEL107:(void)0;
 }
 }
 RET_LABEL:;
@@ -1177,21 +1190,23 @@ val* var /* : POSetElement[MModule] */;
 val* var2 /* : POSetElement[MModule] */;
 val* var3 /* : Collection[Object] */;
 short int var4 /* : Bool */;
+val* var_ /* var : Array[MModule] */;
 val* var5 /* : ArrayIterator[nullable Object] */;
-short int var6 /* : Bool */;
-val* var7 /* : nullable Object */;
+val* var_6 /* var : ArrayIterator[MModule] */;
+short int var7 /* : Bool */;
+val* var8 /* : nullable Object */;
 val* var_m /* var m: MModule */;
-val* var8 /* : Model */;
-val* var10 /* : Model */;
-val* var11 /* : POSet[MModule] */;
-val* var13 /* : POSet[MModule] */;
+val* var9 /* : Model */;
+val* var11 /* : Model */;
+val* var12 /* : POSet[MModule] */;
+val* var14 /* : POSet[MModule] */;
 var_imported_mmodules = p0;
 {
 { /* Inline mmodule#MModule#in_importation (self) on <self:MModule> */
 var2 = self->attrs[COLOR_mmodule__MModule___in_importation].val; /* _in_importation on <self:MModule> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_importation");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 93);
 show_backtrace(1);
 }
 var = var2;
@@ -1206,54 +1221,63 @@ var4 = ((short int (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collec
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert \'unique_invocation\' failed");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 153);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 147);
 show_backtrace(1);
 }
+var_ = var_imported_mmodules;
 {
-var5 = array__AbstractArrayRead__iterator(var_imported_mmodules);
+var5 = array__AbstractArrayRead__iterator(var_);
 }
+var_6 = var5;
 for(;;) {
 {
-var6 = array__ArrayIterator__is_ok(var5);
+var7 = array__ArrayIterator__is_ok(var_6);
 }
-if(!var6) break;
+if (var7){
 {
-var7 = array__ArrayIterator__item(var5);
+var8 = array__ArrayIterator__item(var_6);
 }
-var_m = var7;
+var_m = var8;
 {
 { /* Inline mmodule#MModule#model (self) on <self:MModule> */
-var10 = self->attrs[COLOR_mmodule__MModule___model].val; /* _model on <self:MModule> */
-if (unlikely(var10 == NULL)) {
+var11 = self->attrs[COLOR_mmodule__MModule___model].val; /* _model on <self:MModule> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 72);
 show_backtrace(1);
 }
-var8 = var10;
-RET_LABEL9:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-{ /* Inline mmodule#Model#mmodule_importation_hierarchy (var8) on <var8:Model> */
-var13 = var8->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <var8:Model> */
-if (unlikely(var13 == NULL)) {
+{ /* Inline mmodule#Model#mmodule_importation_hierarchy (var9) on <var9:Model> */
+var14 = var9->attrs[COLOR_mmodule__Model___mmodule_importation_hierarchy].val; /* _mmodule_importation_hierarchy on <var9:Model> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule_importation_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 37);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 36);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-poset__POSet__add_edge(var11, self, var_m); /* Direct call poset#POSet#add_edge on <var11:POSet[MModule]>*/
+poset__POSet__add_edge(var12, self, var_m); /* Direct call poset#POSet#add_edge on <var12:POSet[MModule]>*/
 }
-CONTINUE_label: (void)0;
 {
-array__ArrayIterator__next(var5); /* Direct call array#ArrayIterator#next on <var5:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_6); /* Direct call array#ArrayIterator#next on <var_6:ArrayIterator[MModule]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_6) on <var_6:ArrayIterator[MModule]> */
+RET_LABEL15:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method mmodule#MModule#set_imported_mmodules for (self: Object, Array[MModule]) */
@@ -1268,7 +1292,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var = var1;
@@ -1284,7 +1308,7 @@ val* var3 /* : HashSet[MModule] */;
 var3 = self->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1301,7 +1325,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var = var1;
@@ -1317,7 +1341,7 @@ val* var3 /* : HashSet[MModule] */;
 var3 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1334,7 +1358,7 @@ val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var = var1;
@@ -1350,7 +1374,7 @@ val* var3 /* : HashSet[MModule] */;
 var3 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:Object(MModule)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1414,7 +1438,7 @@ goto RET_LABEL;
 var10 = self->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <self:MModule> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var8 = var10;
@@ -1437,7 +1461,7 @@ goto RET_LABEL;
 var15 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var13 = var15;
@@ -1460,7 +1484,7 @@ goto RET_LABEL;
 var20 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1591,7 +1615,7 @@ if (var1){
 var9 = self->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <self:MModule> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var7 = var9;
@@ -1606,7 +1630,7 @@ hash_collection__HashSet__add(var7, var_m); /* Direct call hash_collection#HashS
 var12 = self->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <self:MModule> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var10 = var12;
@@ -1618,7 +1642,7 @@ RET_LABEL11:(void)0;
 var15 = var_m->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <var_m:MModule> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var13 = var15;
@@ -1633,7 +1657,7 @@ abstract_collection__SimpleCollection__add_all(var10, var13); /* Direct call abs
 var18 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var16 = var18;
@@ -1645,7 +1669,7 @@ RET_LABEL17:(void)0;
 var21 = var_m->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <var_m:MModule> */
 if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var19 = var21;
@@ -1660,7 +1684,7 @@ abstract_collection__SimpleCollection__add_all(var16, var19); /* Direct call abs
 var24 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var22 = var24;
@@ -1672,7 +1696,7 @@ RET_LABEL23:(void)0;
 var27 = var_m->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <var_m:MModule> */
 if (unlikely(var27 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var25 = var27;
@@ -1709,7 +1733,7 @@ if (var29){
 var37 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var37 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var35 = var37;
@@ -1724,7 +1748,7 @@ hash_collection__HashSet__add(var35, var_m); /* Direct call hash_collection#Hash
 var40 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var40 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var38 = var40;
@@ -1736,7 +1760,7 @@ RET_LABEL39:(void)0;
 var43 = var_m->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <var_m:MModule> */
 if (unlikely(var43 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var41 = var43;
@@ -1751,7 +1775,7 @@ abstract_collection__SimpleCollection__add_all(var38, var41); /* Direct call abs
 var46 = self->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <self:MModule> */
 if (unlikely(var46 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var44 = var46;
@@ -1763,7 +1787,7 @@ RET_LABEL45:(void)0;
 var49 = var_m->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <var_m:MModule> */
 if (unlikely(var49 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var47 = var49;
@@ -1800,7 +1824,7 @@ if (var51){
 var59 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var59 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var57 = var59;
@@ -1815,7 +1839,7 @@ hash_collection__HashSet__add(var57, var_m); /* Direct call hash_collection#Hash
 var62 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var62 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var60 = var62;
@@ -1827,7 +1851,7 @@ RET_LABEL61:(void)0;
 var65 = var_m->attrs[COLOR_mmodule__MModule___intrude_mmodules].val; /* _intrude_mmodules on <var_m:MModule> */
 if (unlikely(var65 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intrude_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 159);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 153);
 show_backtrace(1);
 }
 var63 = var65;
@@ -1842,7 +1866,7 @@ abstract_collection__SimpleCollection__add_all(var60, var63); /* Direct call abs
 var68 = self->attrs[COLOR_mmodule__MModule___private_mmodules].val; /* _private_mmodules on <self:MModule> */
 if (unlikely(var68 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _private_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 161);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 155);
 show_backtrace(1);
 }
 var66 = var68;
@@ -1854,7 +1878,7 @@ RET_LABEL67:(void)0;
 var71 = var_m->attrs[COLOR_mmodule__MModule___public_mmodules].val; /* _public_mmodules on <var_m:MModule> */
 if (unlikely(var71 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _public_mmodules");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 160);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 154);
 show_backtrace(1);
 }
 var69 = var71;
@@ -1903,7 +1927,7 @@ var84 = ((val* (*)(val*))(var81->class->vft[COLOR_string__Object__to_s]))(var81)
 file__Object__print(self, var84); /* Direct call file#Object#print on <self:MModule>*/
 }
 PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 186);
 show_backtrace(1);
 }
 }
@@ -2072,7 +2096,7 @@ var = var36;
 goto RET_LABEL;
 } else {
 PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", "src/model/mmodule.nit", 221);
+PRINT_ERROR(" (%s:%d)\n", "model/mmodule.nit", 203);
 show_backtrace(1);
 }
 }
@@ -2086,6 +2110,29 @@ short int VIRTUAL_mmodule__MModule__is_visible(val* self, val* p0, val* p1) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
 var1 = mmodule__MModule__is_visible(self, p0, p1);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method mmodule#MModule#is_fictive for (self: MModule): Bool */
+short int mmodule__MModule__is_fictive(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+var1 = self->attrs[COLOR_mmodule__MModule___is_fictive].s; /* _is_fictive on <self:MModule> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method mmodule#MModule#is_fictive for (self: Object): Bool */
+short int VIRTUAL_mmodule__MModule__is_fictive(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+short int var3 /* : Bool */;
+{ /* Inline mmodule#MModule#is_fictive (self) on <self:Object(MModule)> */
+var3 = self->attrs[COLOR_mmodule__MModule___is_fictive].s; /* _is_fictive on <self:Object(MModule)> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 var = var1;
 RET_LABEL:;
 return var;

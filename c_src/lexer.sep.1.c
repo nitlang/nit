@@ -495,73 +495,11 @@ void VIRTUAL_lexer__TKwdo__init_tk(val* self, val* p0) {
 lexer__TKwdo__init_tk(self, p0); /* Direct call lexer#TKwdo#init_tk on <self:Object(TKwdo)>*/
 RET_LABEL:;
 }
-/* method lexer#TKwreadable#parser_index for (self: TKwreadable): Int */
-long lexer__TKwreadable__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = 16;
-var = var1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwreadable#parser_index for (self: Object): Int */
-long VIRTUAL_lexer__TKwreadable__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = lexer__TKwreadable__parser_index(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwreadable#init_tk for (self: TKwreadable, Location) */
-void lexer__TKwreadable__init_tk(val* self, val* p0) {
-val* var_loc /* var loc: Location */;
-var_loc = p0;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var_loc; /* _location on <self:TKwreadable> */
-RET_LABEL:;
-}
-/* method lexer#TKwreadable#init_tk for (self: Object, Location) */
-void VIRTUAL_lexer__TKwreadable__init_tk(val* self, val* p0) {
-lexer__TKwreadable__init_tk(self, p0); /* Direct call lexer#TKwreadable#init_tk on <self:Object(TKwreadable)>*/
-RET_LABEL:;
-}
-/* method lexer#TKwwritable#parser_index for (self: TKwwritable): Int */
-long lexer__TKwwritable__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = 17;
-var = var1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwwritable#parser_index for (self: Object): Int */
-long VIRTUAL_lexer__TKwwritable__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = lexer__TKwwritable__parser_index(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwwritable#init_tk for (self: TKwwritable, Location) */
-void lexer__TKwwritable__init_tk(val* self, val* p0) {
-val* var_loc /* var loc: Location */;
-var_loc = p0;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var_loc; /* _location on <self:TKwwritable> */
-RET_LABEL:;
-}
-/* method lexer#TKwwritable#init_tk for (self: Object, Location) */
-void VIRTUAL_lexer__TKwwritable__init_tk(val* self, val* p0) {
-lexer__TKwwritable__init_tk(self, p0); /* Direct call lexer#TKwwritable#init_tk on <self:Object(TKwwritable)>*/
-RET_LABEL:;
-}
 /* method lexer#TKwvar#parser_index for (self: TKwvar): Int */
 long lexer__TKwvar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 18;
+var1 = 16;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -588,42 +526,11 @@ void VIRTUAL_lexer__TKwvar__init_tk(val* self, val* p0) {
 lexer__TKwvar__init_tk(self, p0); /* Direct call lexer#TKwvar#init_tk on <self:Object(TKwvar)>*/
 RET_LABEL:;
 }
-/* method lexer#TKwintern#parser_index for (self: TKwintern): Int */
-long lexer__TKwintern__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = 19;
-var = var1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwintern#parser_index for (self: Object): Int */
-long VIRTUAL_lexer__TKwintern__parser_index(val* self) {
-long var /* : Int */;
-long var1 /* : Int */;
-var1 = lexer__TKwintern__parser_index(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method lexer#TKwintern#init_tk for (self: TKwintern, Location) */
-void lexer__TKwintern__init_tk(val* self, val* p0) {
-val* var_loc /* var loc: Location */;
-var_loc = p0;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var_loc; /* _location on <self:TKwintern> */
-RET_LABEL:;
-}
-/* method lexer#TKwintern#init_tk for (self: Object, Location) */
-void VIRTUAL_lexer__TKwintern__init_tk(val* self, val* p0) {
-lexer__TKwintern__init_tk(self, p0); /* Direct call lexer#TKwintern#init_tk on <self:Object(TKwintern)>*/
-RET_LABEL:;
-}
 /* method lexer#TKwextern#parser_index for (self: TKwextern): Int */
 long lexer__TKwextern__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 20;
+var1 = 17;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -654,7 +561,7 @@ RET_LABEL:;
 long lexer__TKwpublic__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 21;
+var1 = 18;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -685,7 +592,7 @@ RET_LABEL:;
 long lexer__TKwprotected__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 22;
+var1 = 19;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -716,7 +623,7 @@ RET_LABEL:;
 long lexer__TKwprivate__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 23;
+var1 = 20;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -747,7 +654,7 @@ RET_LABEL:;
 long lexer__TKwintrude__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 24;
+var1 = 21;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -778,7 +685,7 @@ RET_LABEL:;
 long lexer__TKwif__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 25;
+var1 = 22;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -809,7 +716,7 @@ RET_LABEL:;
 long lexer__TKwthen__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 26;
+var1 = 23;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -840,7 +747,7 @@ RET_LABEL:;
 long lexer__TKwelse__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 27;
+var1 = 24;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -871,7 +778,7 @@ RET_LABEL:;
 long lexer__TKwwhile__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 28;
+var1 = 25;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -902,7 +809,7 @@ RET_LABEL:;
 long lexer__TKwloop__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 29;
+var1 = 26;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -933,7 +840,7 @@ RET_LABEL:;
 long lexer__TKwfor__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 30;
+var1 = 27;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -964,7 +871,7 @@ RET_LABEL:;
 long lexer__TKwin__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 31;
+var1 = 28;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -995,7 +902,7 @@ RET_LABEL:;
 long lexer__TKwand__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 32;
+var1 = 29;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1026,7 +933,7 @@ RET_LABEL:;
 long lexer__TKwor__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 33;
+var1 = 30;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1057,7 +964,7 @@ RET_LABEL:;
 long lexer__TKwnot__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 34;
+var1 = 31;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1088,7 +995,7 @@ RET_LABEL:;
 long lexer__TKwimplies__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 35;
+var1 = 32;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1119,7 +1026,7 @@ RET_LABEL:;
 long lexer__TKwreturn__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 36;
+var1 = 33;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1150,7 +1057,7 @@ RET_LABEL:;
 long lexer__TKwcontinue__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 37;
+var1 = 34;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1181,7 +1088,7 @@ RET_LABEL:;
 long lexer__TKwbreak__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 38;
+var1 = 35;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1212,7 +1119,7 @@ RET_LABEL:;
 long lexer__TKwabort__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 39;
+var1 = 36;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1243,7 +1150,7 @@ RET_LABEL:;
 long lexer__TKwassert__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 40;
+var1 = 37;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1274,7 +1181,7 @@ RET_LABEL:;
 long lexer__TKwnew__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 41;
+var1 = 38;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1305,7 +1212,7 @@ RET_LABEL:;
 long lexer__TKwisa__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 42;
+var1 = 39;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1336,7 +1243,7 @@ RET_LABEL:;
 long lexer__TKwonce__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 43;
+var1 = 40;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1367,7 +1274,7 @@ RET_LABEL:;
 long lexer__TKwsuper__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 44;
+var1 = 41;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1398,7 +1305,7 @@ RET_LABEL:;
 long lexer__TKwself__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 45;
+var1 = 42;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1429,7 +1336,7 @@ RET_LABEL:;
 long lexer__TKwtrue__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 46;
+var1 = 43;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1460,7 +1367,7 @@ RET_LABEL:;
 long lexer__TKwfalse__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 47;
+var1 = 44;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1491,7 +1398,7 @@ RET_LABEL:;
 long lexer__TKwnull__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 48;
+var1 = 45;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1522,7 +1429,7 @@ RET_LABEL:;
 long lexer__TKwas__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 49;
+var1 = 46;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1553,7 +1460,7 @@ RET_LABEL:;
 long lexer__TKwnullable__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 50;
+var1 = 47;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1584,7 +1491,7 @@ RET_LABEL:;
 long lexer__TKwisset__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 51;
+var1 = 48;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1615,7 +1522,7 @@ RET_LABEL:;
 long lexer__TKwlabel__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 52;
+var1 = 49;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1646,7 +1553,7 @@ RET_LABEL:;
 long lexer__TKwdebug__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 53;
+var1 = 50;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1677,7 +1584,7 @@ RET_LABEL:;
 long lexer__TOpar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 54;
+var1 = 51;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1708,7 +1615,7 @@ RET_LABEL:;
 long lexer__TCpar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 55;
+var1 = 52;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1739,7 +1646,7 @@ RET_LABEL:;
 long lexer__TObra__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 56;
+var1 = 53;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1770,7 +1677,7 @@ RET_LABEL:;
 long lexer__TCbra__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 57;
+var1 = 54;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1801,7 +1708,7 @@ RET_LABEL:;
 long lexer__TComma__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 58;
+var1 = 55;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1832,7 +1739,7 @@ RET_LABEL:;
 long lexer__TColumn__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 59;
+var1 = 56;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1863,7 +1770,7 @@ RET_LABEL:;
 long lexer__TQuad__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 60;
+var1 = 57;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1894,7 +1801,7 @@ RET_LABEL:;
 long lexer__TAssign__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 61;
+var1 = 58;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1925,7 +1832,7 @@ RET_LABEL:;
 long lexer__TPluseq__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 62;
+var1 = 59;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1956,7 +1863,7 @@ RET_LABEL:;
 long lexer__TMinuseq__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 63;
+var1 = 60;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -1987,7 +1894,7 @@ RET_LABEL:;
 long lexer__TDotdotdot__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 64;
+var1 = 61;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2018,7 +1925,7 @@ RET_LABEL:;
 long lexer__TDotdot__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 65;
+var1 = 62;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2049,7 +1956,7 @@ RET_LABEL:;
 long lexer__TDot__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 66;
+var1 = 63;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2080,7 +1987,7 @@ RET_LABEL:;
 long lexer__TPlus__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 67;
+var1 = 64;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2111,7 +2018,7 @@ RET_LABEL:;
 long lexer__TMinus__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 68;
+var1 = 65;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2142,7 +2049,7 @@ RET_LABEL:;
 long lexer__TStar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 69;
+var1 = 66;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2169,11 +2076,42 @@ void VIRTUAL_lexer__TStar__init_tk(val* self, val* p0) {
 lexer__TStar__init_tk(self, p0); /* Direct call lexer#TStar#init_tk on <self:Object(TStar)>*/
 RET_LABEL:;
 }
+/* method lexer#TStarstar#parser_index for (self: TStarstar): Int */
+long lexer__TStarstar__parser_index(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+var1 = 67;
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method lexer#TStarstar#parser_index for (self: Object): Int */
+long VIRTUAL_lexer__TStarstar__parser_index(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+var1 = lexer__TStarstar__parser_index(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method lexer#TStarstar#init_tk for (self: TStarstar, Location) */
+void lexer__TStarstar__init_tk(val* self, val* p0) {
+val* var_loc /* var loc: Location */;
+var_loc = p0;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var_loc; /* _location on <self:TStarstar> */
+RET_LABEL:;
+}
+/* method lexer#TStarstar#init_tk for (self: Object, Location) */
+void VIRTUAL_lexer__TStarstar__init_tk(val* self, val* p0) {
+lexer__TStarstar__init_tk(self, p0); /* Direct call lexer#TStarstar#init_tk on <self:Object(TStarstar)>*/
+RET_LABEL:;
+}
 /* method lexer#TSlash#parser_index for (self: TSlash): Int */
 long lexer__TSlash__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 70;
+var1 = 68;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2204,7 +2142,7 @@ RET_LABEL:;
 long lexer__TPercent__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 71;
+var1 = 69;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2235,7 +2173,7 @@ RET_LABEL:;
 long lexer__TEq__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 72;
+var1 = 70;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2266,7 +2204,7 @@ RET_LABEL:;
 long lexer__TNe__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 73;
+var1 = 71;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2297,7 +2235,7 @@ RET_LABEL:;
 long lexer__TLt__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 74;
+var1 = 72;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2328,7 +2266,7 @@ RET_LABEL:;
 long lexer__TLe__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 75;
+var1 = 73;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2359,7 +2297,7 @@ RET_LABEL:;
 long lexer__TLl__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 76;
+var1 = 74;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2390,7 +2328,7 @@ RET_LABEL:;
 long lexer__TGt__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 77;
+var1 = 75;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2421,7 +2359,7 @@ RET_LABEL:;
 long lexer__TGe__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 78;
+var1 = 76;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2452,7 +2390,7 @@ RET_LABEL:;
 long lexer__TGg__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 79;
+var1 = 77;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2483,7 +2421,7 @@ RET_LABEL:;
 long lexer__TStarship__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 80;
+var1 = 78;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2514,7 +2452,7 @@ RET_LABEL:;
 long lexer__TBang__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 81;
+var1 = 79;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2545,7 +2483,7 @@ RET_LABEL:;
 long lexer__TAt__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 82;
+var1 = 80;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2576,7 +2514,7 @@ RET_LABEL:;
 long lexer__TClassid__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 83;
+var1 = 81;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2607,7 +2545,7 @@ RET_LABEL:;
 long lexer__TId__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 84;
+var1 = 82;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2638,7 +2576,7 @@ RET_LABEL:;
 long lexer__TAttrid__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 85;
+var1 = 83;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2669,7 +2607,7 @@ RET_LABEL:;
 long lexer__TNumber__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 86;
+var1 = 84;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2700,7 +2638,7 @@ RET_LABEL:;
 long lexer__THexNumber__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 87;
+var1 = 85;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2731,7 +2669,7 @@ RET_LABEL:;
 long lexer__TFloat__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 88;
+var1 = 86;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2762,7 +2700,7 @@ RET_LABEL:;
 long lexer__TString__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 89;
+var1 = 87;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2793,7 +2731,7 @@ RET_LABEL:;
 long lexer__TStartString__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 90;
+var1 = 88;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2824,7 +2762,7 @@ RET_LABEL:;
 long lexer__TMidString__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 91;
+var1 = 89;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2855,7 +2793,7 @@ RET_LABEL:;
 long lexer__TEndString__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 92;
+var1 = 90;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2886,7 +2824,7 @@ RET_LABEL:;
 long lexer__TChar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 93;
+var1 = 91;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2917,7 +2855,7 @@ RET_LABEL:;
 long lexer__TBadString__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 94;
+var1 = 92;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2948,7 +2886,7 @@ RET_LABEL:;
 long lexer__TBadChar__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 95;
+var1 = 93;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2979,7 +2917,7 @@ RET_LABEL:;
 long lexer__TExternCodeSegment__parser_index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-var1 = 96;
+var1 = 94;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3005,6 +2943,25 @@ RET_LABEL:;
 void VIRTUAL_lexer__TExternCodeSegment__init_tk(val* self, val* p0) {
 lexer__TExternCodeSegment__init_tk(self, p0); /* Direct call lexer#TExternCodeSegment#init_tk on <self:Object(TExternCodeSegment)>*/
 RET_LABEL:;
+}
+/* method lexer#EOF#parser_index for (self: EOF): Int */
+long lexer__EOF__parser_index(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+var1 = 95;
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method lexer#EOF#parser_index for (self: Object): Int */
+long VIRTUAL_lexer__EOF__parser_index(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+var1 = lexer__EOF__parser_index(self);
+var = var1;
+RET_LABEL:;
+return var;
 }
 /* method lexer#Lexer#make_token for (self: Lexer, Int, Location): Token */
 val* lexer__Lexer__make_token(val* self, long p0, val* p1) {
@@ -3095,407 +3052,397 @@ long var97 /* : Int */;
 short int var98 /* : Bool */;
 short int var99 /* : Bool */;
 short int var101 /* : Bool */;
-val* var102 /* : TKwreadable */;
+val* var102 /* : TKwvar */;
 long var103 /* : Int */;
 short int var104 /* : Bool */;
 short int var105 /* : Bool */;
 short int var107 /* : Bool */;
-val* var108 /* : TKwwritable */;
+val* var108 /* : TKwextern */;
 long var109 /* : Int */;
 short int var110 /* : Bool */;
 short int var111 /* : Bool */;
 short int var113 /* : Bool */;
-val* var114 /* : TKwvar */;
+val* var114 /* : TKwpublic */;
 long var115 /* : Int */;
 short int var116 /* : Bool */;
 short int var117 /* : Bool */;
 short int var119 /* : Bool */;
-val* var120 /* : TKwintern */;
+val* var120 /* : TKwprotected */;
 long var121 /* : Int */;
 short int var122 /* : Bool */;
 short int var123 /* : Bool */;
 short int var125 /* : Bool */;
-val* var126 /* : TKwextern */;
+val* var126 /* : TKwprivate */;
 long var127 /* : Int */;
 short int var128 /* : Bool */;
 short int var129 /* : Bool */;
 short int var131 /* : Bool */;
-val* var132 /* : TKwpublic */;
+val* var132 /* : TKwintrude */;
 long var133 /* : Int */;
 short int var134 /* : Bool */;
 short int var135 /* : Bool */;
 short int var137 /* : Bool */;
-val* var138 /* : TKwprotected */;
+val* var138 /* : TKwif */;
 long var139 /* : Int */;
 short int var140 /* : Bool */;
 short int var141 /* : Bool */;
 short int var143 /* : Bool */;
-val* var144 /* : TKwprivate */;
+val* var144 /* : TKwthen */;
 long var145 /* : Int */;
 short int var146 /* : Bool */;
 short int var147 /* : Bool */;
 short int var149 /* : Bool */;
-val* var150 /* : TKwintrude */;
+val* var150 /* : TKwelse */;
 long var151 /* : Int */;
 short int var152 /* : Bool */;
 short int var153 /* : Bool */;
 short int var155 /* : Bool */;
-val* var156 /* : TKwif */;
+val* var156 /* : TKwwhile */;
 long var157 /* : Int */;
 short int var158 /* : Bool */;
 short int var159 /* : Bool */;
 short int var161 /* : Bool */;
-val* var162 /* : TKwthen */;
+val* var162 /* : TKwloop */;
 long var163 /* : Int */;
 short int var164 /* : Bool */;
 short int var165 /* : Bool */;
 short int var167 /* : Bool */;
-val* var168 /* : TKwelse */;
+val* var168 /* : TKwfor */;
 long var169 /* : Int */;
 short int var170 /* : Bool */;
 short int var171 /* : Bool */;
 short int var173 /* : Bool */;
-val* var174 /* : TKwwhile */;
+val* var174 /* : TKwin */;
 long var175 /* : Int */;
 short int var176 /* : Bool */;
 short int var177 /* : Bool */;
 short int var179 /* : Bool */;
-val* var180 /* : TKwloop */;
+val* var180 /* : TKwand */;
 long var181 /* : Int */;
 short int var182 /* : Bool */;
 short int var183 /* : Bool */;
 short int var185 /* : Bool */;
-val* var186 /* : TKwfor */;
+val* var186 /* : TKwor */;
 long var187 /* : Int */;
 short int var188 /* : Bool */;
 short int var189 /* : Bool */;
 short int var191 /* : Bool */;
-val* var192 /* : TKwin */;
+val* var192 /* : TKwnot */;
 long var193 /* : Int */;
 short int var194 /* : Bool */;
 short int var195 /* : Bool */;
 short int var197 /* : Bool */;
-val* var198 /* : TKwand */;
+val* var198 /* : TKwimplies */;
 long var199 /* : Int */;
 short int var200 /* : Bool */;
 short int var201 /* : Bool */;
 short int var203 /* : Bool */;
-val* var204 /* : TKwor */;
+val* var204 /* : TKwreturn */;
 long var205 /* : Int */;
 short int var206 /* : Bool */;
 short int var207 /* : Bool */;
 short int var209 /* : Bool */;
-val* var210 /* : TKwnot */;
+val* var210 /* : TKwcontinue */;
 long var211 /* : Int */;
 short int var212 /* : Bool */;
 short int var213 /* : Bool */;
 short int var215 /* : Bool */;
-val* var216 /* : TKwimplies */;
+val* var216 /* : TKwbreak */;
 long var217 /* : Int */;
 short int var218 /* : Bool */;
 short int var219 /* : Bool */;
 short int var221 /* : Bool */;
-val* var222 /* : TKwreturn */;
+val* var222 /* : TKwabort */;
 long var223 /* : Int */;
 short int var224 /* : Bool */;
 short int var225 /* : Bool */;
 short int var227 /* : Bool */;
-val* var228 /* : TKwcontinue */;
+val* var228 /* : TKwassert */;
 long var229 /* : Int */;
 short int var230 /* : Bool */;
 short int var231 /* : Bool */;
 short int var233 /* : Bool */;
-val* var234 /* : TKwbreak */;
+val* var234 /* : TKwnew */;
 long var235 /* : Int */;
 short int var236 /* : Bool */;
 short int var237 /* : Bool */;
 short int var239 /* : Bool */;
-val* var240 /* : TKwabort */;
+val* var240 /* : TKwisa */;
 long var241 /* : Int */;
 short int var242 /* : Bool */;
 short int var243 /* : Bool */;
 short int var245 /* : Bool */;
-val* var246 /* : TKwassert */;
+val* var246 /* : TKwonce */;
 long var247 /* : Int */;
 short int var248 /* : Bool */;
 short int var249 /* : Bool */;
 short int var251 /* : Bool */;
-val* var252 /* : TKwnew */;
+val* var252 /* : TKwsuper */;
 long var253 /* : Int */;
 short int var254 /* : Bool */;
 short int var255 /* : Bool */;
 short int var257 /* : Bool */;
-val* var258 /* : TKwisa */;
+val* var258 /* : TKwself */;
 long var259 /* : Int */;
 short int var260 /* : Bool */;
 short int var261 /* : Bool */;
 short int var263 /* : Bool */;
-val* var264 /* : TKwonce */;
+val* var264 /* : TKwtrue */;
 long var265 /* : Int */;
 short int var266 /* : Bool */;
 short int var267 /* : Bool */;
 short int var269 /* : Bool */;
-val* var270 /* : TKwsuper */;
+val* var270 /* : TKwfalse */;
 long var271 /* : Int */;
 short int var272 /* : Bool */;
 short int var273 /* : Bool */;
 short int var275 /* : Bool */;
-val* var276 /* : TKwself */;
+val* var276 /* : TKwnull */;
 long var277 /* : Int */;
 short int var278 /* : Bool */;
 short int var279 /* : Bool */;
 short int var281 /* : Bool */;
-val* var282 /* : TKwtrue */;
+val* var282 /* : TKwas */;
 long var283 /* : Int */;
 short int var284 /* : Bool */;
 short int var285 /* : Bool */;
 short int var287 /* : Bool */;
-val* var288 /* : TKwfalse */;
+val* var288 /* : TKwnullable */;
 long var289 /* : Int */;
 short int var290 /* : Bool */;
 short int var291 /* : Bool */;
 short int var293 /* : Bool */;
-val* var294 /* : TKwnull */;
+val* var294 /* : TKwisset */;
 long var295 /* : Int */;
 short int var296 /* : Bool */;
 short int var297 /* : Bool */;
 short int var299 /* : Bool */;
-val* var300 /* : TKwas */;
+val* var300 /* : TKwlabel */;
 long var301 /* : Int */;
 short int var302 /* : Bool */;
 short int var303 /* : Bool */;
 short int var305 /* : Bool */;
-val* var306 /* : TKwnullable */;
+val* var306 /* : TKwdebug */;
 long var307 /* : Int */;
 short int var308 /* : Bool */;
 short int var309 /* : Bool */;
 short int var311 /* : Bool */;
-val* var312 /* : TKwisset */;
+val* var312 /* : TOpar */;
 long var313 /* : Int */;
 short int var314 /* : Bool */;
 short int var315 /* : Bool */;
 short int var317 /* : Bool */;
-val* var318 /* : TKwlabel */;
+val* var318 /* : TCpar */;
 long var319 /* : Int */;
 short int var320 /* : Bool */;
 short int var321 /* : Bool */;
 short int var323 /* : Bool */;
-val* var324 /* : TKwdebug */;
+val* var324 /* : TObra */;
 long var325 /* : Int */;
 short int var326 /* : Bool */;
 short int var327 /* : Bool */;
 short int var329 /* : Bool */;
-val* var330 /* : TOpar */;
+val* var330 /* : TCbra */;
 long var331 /* : Int */;
 short int var332 /* : Bool */;
 short int var333 /* : Bool */;
 short int var335 /* : Bool */;
-val* var336 /* : TCpar */;
+val* var336 /* : TComma */;
 long var337 /* : Int */;
 short int var338 /* : Bool */;
 short int var339 /* : Bool */;
 short int var341 /* : Bool */;
-val* var342 /* : TObra */;
+val* var342 /* : TColumn */;
 long var343 /* : Int */;
 short int var344 /* : Bool */;
 short int var345 /* : Bool */;
 short int var347 /* : Bool */;
-val* var348 /* : TCbra */;
+val* var348 /* : TQuad */;
 long var349 /* : Int */;
 short int var350 /* : Bool */;
 short int var351 /* : Bool */;
 short int var353 /* : Bool */;
-val* var354 /* : TComma */;
+val* var354 /* : TAssign */;
 long var355 /* : Int */;
 short int var356 /* : Bool */;
 short int var357 /* : Bool */;
 short int var359 /* : Bool */;
-val* var360 /* : TColumn */;
+val* var360 /* : TPluseq */;
 long var361 /* : Int */;
 short int var362 /* : Bool */;
 short int var363 /* : Bool */;
 short int var365 /* : Bool */;
-val* var366 /* : TQuad */;
+val* var366 /* : TMinuseq */;
 long var367 /* : Int */;
 short int var368 /* : Bool */;
 short int var369 /* : Bool */;
 short int var371 /* : Bool */;
-val* var372 /* : TAssign */;
+val* var372 /* : TDotdotdot */;
 long var373 /* : Int */;
 short int var374 /* : Bool */;
 short int var375 /* : Bool */;
 short int var377 /* : Bool */;
-val* var378 /* : TPluseq */;
+val* var378 /* : TDotdot */;
 long var379 /* : Int */;
 short int var380 /* : Bool */;
 short int var381 /* : Bool */;
 short int var383 /* : Bool */;
-val* var384 /* : TMinuseq */;
+val* var384 /* : TDot */;
 long var385 /* : Int */;
 short int var386 /* : Bool */;
 short int var387 /* : Bool */;
 short int var389 /* : Bool */;
-val* var390 /* : TDotdotdot */;
+val* var390 /* : TPlus */;
 long var391 /* : Int */;
 short int var392 /* : Bool */;
 short int var393 /* : Bool */;
 short int var395 /* : Bool */;
-val* var396 /* : TDotdot */;
+val* var396 /* : TMinus */;
 long var397 /* : Int */;
 short int var398 /* : Bool */;
 short int var399 /* : Bool */;
 short int var401 /* : Bool */;
-val* var402 /* : TDot */;
+val* var402 /* : TStar */;
 long var403 /* : Int */;
 short int var404 /* : Bool */;
 short int var405 /* : Bool */;
 short int var407 /* : Bool */;
-val* var408 /* : TPlus */;
+val* var408 /* : TStarstar */;
 long var409 /* : Int */;
 short int var410 /* : Bool */;
 short int var411 /* : Bool */;
 short int var413 /* : Bool */;
-val* var414 /* : TMinus */;
+val* var414 /* : TSlash */;
 long var415 /* : Int */;
 short int var416 /* : Bool */;
 short int var417 /* : Bool */;
 short int var419 /* : Bool */;
-val* var420 /* : TStar */;
+val* var420 /* : TPercent */;
 long var421 /* : Int */;
 short int var422 /* : Bool */;
 short int var423 /* : Bool */;
 short int var425 /* : Bool */;
-val* var426 /* : TSlash */;
+val* var426 /* : TEq */;
 long var427 /* : Int */;
 short int var428 /* : Bool */;
 short int var429 /* : Bool */;
 short int var431 /* : Bool */;
-val* var432 /* : TPercent */;
+val* var432 /* : TNe */;
 long var433 /* : Int */;
 short int var434 /* : Bool */;
 short int var435 /* : Bool */;
 short int var437 /* : Bool */;
-val* var438 /* : TEq */;
+val* var438 /* : TLt */;
 long var439 /* : Int */;
 short int var440 /* : Bool */;
 short int var441 /* : Bool */;
 short int var443 /* : Bool */;
-val* var444 /* : TNe */;
+val* var444 /* : TLe */;
 long var445 /* : Int */;
 short int var446 /* : Bool */;
 short int var447 /* : Bool */;
 short int var449 /* : Bool */;
-val* var450 /* : TLt */;
+val* var450 /* : TLl */;
 long var451 /* : Int */;
 short int var452 /* : Bool */;
 short int var453 /* : Bool */;
 short int var455 /* : Bool */;
-val* var456 /* : TLe */;
+val* var456 /* : TGt */;
 long var457 /* : Int */;
 short int var458 /* : Bool */;
 short int var459 /* : Bool */;
 short int var461 /* : Bool */;
-val* var462 /* : TLl */;
+val* var462 /* : TGe */;
 long var463 /* : Int */;
 short int var464 /* : Bool */;
 short int var465 /* : Bool */;
 short int var467 /* : Bool */;
-val* var468 /* : TGt */;
+val* var468 /* : TGg */;
 long var469 /* : Int */;
 short int var470 /* : Bool */;
 short int var471 /* : Bool */;
 short int var473 /* : Bool */;
-val* var474 /* : TGe */;
+val* var474 /* : TStarship */;
 long var475 /* : Int */;
 short int var476 /* : Bool */;
 short int var477 /* : Bool */;
 short int var479 /* : Bool */;
-val* var480 /* : TGg */;
+val* var480 /* : TBang */;
 long var481 /* : Int */;
 short int var482 /* : Bool */;
 short int var483 /* : Bool */;
 short int var485 /* : Bool */;
-val* var486 /* : TStarship */;
+val* var486 /* : TAt */;
 long var487 /* : Int */;
 short int var488 /* : Bool */;
 short int var489 /* : Bool */;
 short int var491 /* : Bool */;
-val* var492 /* : TBang */;
+val* var492 /* : TClassid */;
 long var493 /* : Int */;
 short int var494 /* : Bool */;
 short int var495 /* : Bool */;
 short int var497 /* : Bool */;
-val* var498 /* : TAt */;
+val* var498 /* : TId */;
 long var499 /* : Int */;
 short int var500 /* : Bool */;
 short int var501 /* : Bool */;
 short int var503 /* : Bool */;
-val* var504 /* : TClassid */;
+val* var504 /* : TAttrid */;
 long var505 /* : Int */;
 short int var506 /* : Bool */;
 short int var507 /* : Bool */;
 short int var509 /* : Bool */;
-val* var510 /* : TId */;
+val* var510 /* : TNumber */;
 long var511 /* : Int */;
 short int var512 /* : Bool */;
 short int var513 /* : Bool */;
 short int var515 /* : Bool */;
-val* var516 /* : TAttrid */;
+val* var516 /* : THexNumber */;
 long var517 /* : Int */;
 short int var518 /* : Bool */;
 short int var519 /* : Bool */;
 short int var521 /* : Bool */;
-val* var522 /* : TNumber */;
+val* var522 /* : TFloat */;
 long var523 /* : Int */;
 short int var524 /* : Bool */;
 short int var525 /* : Bool */;
 short int var527 /* : Bool */;
-val* var528 /* : THexNumber */;
+val* var528 /* : TString */;
 long var529 /* : Int */;
 short int var530 /* : Bool */;
 short int var531 /* : Bool */;
 short int var533 /* : Bool */;
-val* var534 /* : TFloat */;
+val* var534 /* : TStartString */;
 long var535 /* : Int */;
 short int var536 /* : Bool */;
 short int var537 /* : Bool */;
 short int var539 /* : Bool */;
-val* var540 /* : TString */;
+val* var540 /* : TMidString */;
 long var541 /* : Int */;
 short int var542 /* : Bool */;
 short int var543 /* : Bool */;
 short int var545 /* : Bool */;
-val* var546 /* : TStartString */;
+val* var546 /* : TEndString */;
 long var547 /* : Int */;
 short int var548 /* : Bool */;
 short int var549 /* : Bool */;
 short int var551 /* : Bool */;
-val* var552 /* : TMidString */;
+val* var552 /* : TChar */;
 long var553 /* : Int */;
 short int var554 /* : Bool */;
 short int var555 /* : Bool */;
 short int var557 /* : Bool */;
-val* var558 /* : TEndString */;
+val* var558 /* : TBadString */;
 long var559 /* : Int */;
 short int var560 /* : Bool */;
 short int var561 /* : Bool */;
 short int var563 /* : Bool */;
-val* var564 /* : TChar */;
+val* var564 /* : TBadChar */;
 long var565 /* : Int */;
 short int var566 /* : Bool */;
 short int var567 /* : Bool */;
 short int var569 /* : Bool */;
-val* var570 /* : TBadString */;
-long var571 /* : Int */;
-short int var572 /* : Bool */;
-short int var573 /* : Bool */;
-short int var575 /* : Bool */;
-val* var576 /* : TBadChar */;
-long var577 /* : Int */;
-short int var578 /* : Bool */;
-short int var579 /* : Bool */;
-short int var581 /* : Bool */;
-val* var582 /* : TExternCodeSegment */;
+val* var570 /* : TExternCodeSegment */;
 var_accept_token = p0;
 var_location = p1;
 var1 = 1;
@@ -3813,9 +3760,9 @@ RET_LABEL100:(void)0;
 var98 = var99;
 }
 if (var98){
-var102 = NEW_parser_nodes__TKwreadable(&type_parser_nodes__TKwreadable);
+var102 = NEW_parser_nodes__TKwvar(&type_parser_nodes__TKwvar);
 {
-lexer__TKwreadable__init_tk(var102, var_location); /* Direct call lexer#TKwreadable#init_tk on <var102:TKwreadable>*/
+lexer__TKwvar__init_tk(var102, var_location); /* Direct call lexer#TKwvar#init_tk on <var102:TKwvar>*/
 }
 var = var102;
 goto RET_LABEL;
@@ -3832,9 +3779,9 @@ RET_LABEL106:(void)0;
 var104 = var105;
 }
 if (var104){
-var108 = NEW_parser_nodes__TKwwritable(&type_parser_nodes__TKwwritable);
+var108 = NEW_parser_nodes__TKwextern(&type_parser_nodes__TKwextern);
 {
-lexer__TKwwritable__init_tk(var108, var_location); /* Direct call lexer#TKwwritable#init_tk on <var108:TKwwritable>*/
+lexer__TKwextern__init_tk(var108, var_location); /* Direct call lexer#TKwextern#init_tk on <var108:TKwextern>*/
 }
 var = var108;
 goto RET_LABEL;
@@ -3851,9 +3798,9 @@ RET_LABEL112:(void)0;
 var110 = var111;
 }
 if (var110){
-var114 = NEW_parser_nodes__TKwvar(&type_parser_nodes__TKwvar);
+var114 = NEW_parser_nodes__TKwpublic(&type_parser_nodes__TKwpublic);
 {
-lexer__TKwvar__init_tk(var114, var_location); /* Direct call lexer#TKwvar#init_tk on <var114:TKwvar>*/
+lexer__TKwpublic__init_tk(var114, var_location); /* Direct call lexer#TKwpublic#init_tk on <var114:TKwpublic>*/
 }
 var = var114;
 goto RET_LABEL;
@@ -3870,9 +3817,9 @@ RET_LABEL118:(void)0;
 var116 = var117;
 }
 if (var116){
-var120 = NEW_parser_nodes__TKwintern(&type_parser_nodes__TKwintern);
+var120 = NEW_parser_nodes__TKwprotected(&type_parser_nodes__TKwprotected);
 {
-lexer__TKwintern__init_tk(var120, var_location); /* Direct call lexer#TKwintern#init_tk on <var120:TKwintern>*/
+lexer__TKwprotected__init_tk(var120, var_location); /* Direct call lexer#TKwprotected#init_tk on <var120:TKwprotected>*/
 }
 var = var120;
 goto RET_LABEL;
@@ -3889,9 +3836,9 @@ RET_LABEL124:(void)0;
 var122 = var123;
 }
 if (var122){
-var126 = NEW_parser_nodes__TKwextern(&type_parser_nodes__TKwextern);
+var126 = NEW_parser_nodes__TKwprivate(&type_parser_nodes__TKwprivate);
 {
-lexer__TKwextern__init_tk(var126, var_location); /* Direct call lexer#TKwextern#init_tk on <var126:TKwextern>*/
+lexer__TKwprivate__init_tk(var126, var_location); /* Direct call lexer#TKwprivate#init_tk on <var126:TKwprivate>*/
 }
 var = var126;
 goto RET_LABEL;
@@ -3908,9 +3855,9 @@ RET_LABEL130:(void)0;
 var128 = var129;
 }
 if (var128){
-var132 = NEW_parser_nodes__TKwpublic(&type_parser_nodes__TKwpublic);
+var132 = NEW_parser_nodes__TKwintrude(&type_parser_nodes__TKwintrude);
 {
-lexer__TKwpublic__init_tk(var132, var_location); /* Direct call lexer#TKwpublic#init_tk on <var132:TKwpublic>*/
+lexer__TKwintrude__init_tk(var132, var_location); /* Direct call lexer#TKwintrude#init_tk on <var132:TKwintrude>*/
 }
 var = var132;
 goto RET_LABEL;
@@ -3927,9 +3874,9 @@ RET_LABEL136:(void)0;
 var134 = var135;
 }
 if (var134){
-var138 = NEW_parser_nodes__TKwprotected(&type_parser_nodes__TKwprotected);
+var138 = NEW_parser_nodes__TKwif(&type_parser_nodes__TKwif);
 {
-lexer__TKwprotected__init_tk(var138, var_location); /* Direct call lexer#TKwprotected#init_tk on <var138:TKwprotected>*/
+lexer__TKwif__init_tk(var138, var_location); /* Direct call lexer#TKwif#init_tk on <var138:TKwif>*/
 }
 var = var138;
 goto RET_LABEL;
@@ -3946,9 +3893,9 @@ RET_LABEL142:(void)0;
 var140 = var141;
 }
 if (var140){
-var144 = NEW_parser_nodes__TKwprivate(&type_parser_nodes__TKwprivate);
+var144 = NEW_parser_nodes__TKwthen(&type_parser_nodes__TKwthen);
 {
-lexer__TKwprivate__init_tk(var144, var_location); /* Direct call lexer#TKwprivate#init_tk on <var144:TKwprivate>*/
+lexer__TKwthen__init_tk(var144, var_location); /* Direct call lexer#TKwthen#init_tk on <var144:TKwthen>*/
 }
 var = var144;
 goto RET_LABEL;
@@ -3965,9 +3912,9 @@ RET_LABEL148:(void)0;
 var146 = var147;
 }
 if (var146){
-var150 = NEW_parser_nodes__TKwintrude(&type_parser_nodes__TKwintrude);
+var150 = NEW_parser_nodes__TKwelse(&type_parser_nodes__TKwelse);
 {
-lexer__TKwintrude__init_tk(var150, var_location); /* Direct call lexer#TKwintrude#init_tk on <var150:TKwintrude>*/
+lexer__TKwelse__init_tk(var150, var_location); /* Direct call lexer#TKwelse#init_tk on <var150:TKwelse>*/
 }
 var = var150;
 goto RET_LABEL;
@@ -3984,9 +3931,9 @@ RET_LABEL154:(void)0;
 var152 = var153;
 }
 if (var152){
-var156 = NEW_parser_nodes__TKwif(&type_parser_nodes__TKwif);
+var156 = NEW_parser_nodes__TKwwhile(&type_parser_nodes__TKwwhile);
 {
-lexer__TKwif__init_tk(var156, var_location); /* Direct call lexer#TKwif#init_tk on <var156:TKwif>*/
+lexer__TKwwhile__init_tk(var156, var_location); /* Direct call lexer#TKwwhile#init_tk on <var156:TKwwhile>*/
 }
 var = var156;
 goto RET_LABEL;
@@ -4003,9 +3950,9 @@ RET_LABEL160:(void)0;
 var158 = var159;
 }
 if (var158){
-var162 = NEW_parser_nodes__TKwthen(&type_parser_nodes__TKwthen);
+var162 = NEW_parser_nodes__TKwloop(&type_parser_nodes__TKwloop);
 {
-lexer__TKwthen__init_tk(var162, var_location); /* Direct call lexer#TKwthen#init_tk on <var162:TKwthen>*/
+lexer__TKwloop__init_tk(var162, var_location); /* Direct call lexer#TKwloop#init_tk on <var162:TKwloop>*/
 }
 var = var162;
 goto RET_LABEL;
@@ -4022,9 +3969,9 @@ RET_LABEL166:(void)0;
 var164 = var165;
 }
 if (var164){
-var168 = NEW_parser_nodes__TKwelse(&type_parser_nodes__TKwelse);
+var168 = NEW_parser_nodes__TKwfor(&type_parser_nodes__TKwfor);
 {
-lexer__TKwelse__init_tk(var168, var_location); /* Direct call lexer#TKwelse#init_tk on <var168:TKwelse>*/
+lexer__TKwfor__init_tk(var168, var_location); /* Direct call lexer#TKwfor#init_tk on <var168:TKwfor>*/
 }
 var = var168;
 goto RET_LABEL;
@@ -4041,9 +3988,9 @@ RET_LABEL172:(void)0;
 var170 = var171;
 }
 if (var170){
-var174 = NEW_parser_nodes__TKwwhile(&type_parser_nodes__TKwwhile);
+var174 = NEW_parser_nodes__TKwin(&type_parser_nodes__TKwin);
 {
-lexer__TKwwhile__init_tk(var174, var_location); /* Direct call lexer#TKwwhile#init_tk on <var174:TKwwhile>*/
+lexer__TKwin__init_tk(var174, var_location); /* Direct call lexer#TKwin#init_tk on <var174:TKwin>*/
 }
 var = var174;
 goto RET_LABEL;
@@ -4060,9 +4007,9 @@ RET_LABEL178:(void)0;
 var176 = var177;
 }
 if (var176){
-var180 = NEW_parser_nodes__TKwloop(&type_parser_nodes__TKwloop);
+var180 = NEW_parser_nodes__TKwand(&type_parser_nodes__TKwand);
 {
-lexer__TKwloop__init_tk(var180, var_location); /* Direct call lexer#TKwloop#init_tk on <var180:TKwloop>*/
+lexer__TKwand__init_tk(var180, var_location); /* Direct call lexer#TKwand#init_tk on <var180:TKwand>*/
 }
 var = var180;
 goto RET_LABEL;
@@ -4079,9 +4026,9 @@ RET_LABEL184:(void)0;
 var182 = var183;
 }
 if (var182){
-var186 = NEW_parser_nodes__TKwfor(&type_parser_nodes__TKwfor);
+var186 = NEW_parser_nodes__TKwor(&type_parser_nodes__TKwor);
 {
-lexer__TKwfor__init_tk(var186, var_location); /* Direct call lexer#TKwfor#init_tk on <var186:TKwfor>*/
+lexer__TKwor__init_tk(var186, var_location); /* Direct call lexer#TKwor#init_tk on <var186:TKwor>*/
 }
 var = var186;
 goto RET_LABEL;
@@ -4098,9 +4045,9 @@ RET_LABEL190:(void)0;
 var188 = var189;
 }
 if (var188){
-var192 = NEW_parser_nodes__TKwin(&type_parser_nodes__TKwin);
+var192 = NEW_parser_nodes__TKwnot(&type_parser_nodes__TKwnot);
 {
-lexer__TKwin__init_tk(var192, var_location); /* Direct call lexer#TKwin#init_tk on <var192:TKwin>*/
+lexer__TKwnot__init_tk(var192, var_location); /* Direct call lexer#TKwnot#init_tk on <var192:TKwnot>*/
 }
 var = var192;
 goto RET_LABEL;
@@ -4117,9 +4064,9 @@ RET_LABEL196:(void)0;
 var194 = var195;
 }
 if (var194){
-var198 = NEW_parser_nodes__TKwand(&type_parser_nodes__TKwand);
+var198 = NEW_parser_nodes__TKwimplies(&type_parser_nodes__TKwimplies);
 {
-lexer__TKwand__init_tk(var198, var_location); /* Direct call lexer#TKwand#init_tk on <var198:TKwand>*/
+lexer__TKwimplies__init_tk(var198, var_location); /* Direct call lexer#TKwimplies#init_tk on <var198:TKwimplies>*/
 }
 var = var198;
 goto RET_LABEL;
@@ -4136,9 +4083,9 @@ RET_LABEL202:(void)0;
 var200 = var201;
 }
 if (var200){
-var204 = NEW_parser_nodes__TKwor(&type_parser_nodes__TKwor);
+var204 = NEW_parser_nodes__TKwreturn(&type_parser_nodes__TKwreturn);
 {
-lexer__TKwor__init_tk(var204, var_location); /* Direct call lexer#TKwor#init_tk on <var204:TKwor>*/
+lexer__TKwreturn__init_tk(var204, var_location); /* Direct call lexer#TKwreturn#init_tk on <var204:TKwreturn>*/
 }
 var = var204;
 goto RET_LABEL;
@@ -4155,9 +4102,9 @@ RET_LABEL208:(void)0;
 var206 = var207;
 }
 if (var206){
-var210 = NEW_parser_nodes__TKwnot(&type_parser_nodes__TKwnot);
+var210 = NEW_parser_nodes__TKwcontinue(&type_parser_nodes__TKwcontinue);
 {
-lexer__TKwnot__init_tk(var210, var_location); /* Direct call lexer#TKwnot#init_tk on <var210:TKwnot>*/
+lexer__TKwcontinue__init_tk(var210, var_location); /* Direct call lexer#TKwcontinue#init_tk on <var210:TKwcontinue>*/
 }
 var = var210;
 goto RET_LABEL;
@@ -4174,9 +4121,9 @@ RET_LABEL214:(void)0;
 var212 = var213;
 }
 if (var212){
-var216 = NEW_parser_nodes__TKwimplies(&type_parser_nodes__TKwimplies);
+var216 = NEW_parser_nodes__TKwbreak(&type_parser_nodes__TKwbreak);
 {
-lexer__TKwimplies__init_tk(var216, var_location); /* Direct call lexer#TKwimplies#init_tk on <var216:TKwimplies>*/
+lexer__TKwbreak__init_tk(var216, var_location); /* Direct call lexer#TKwbreak#init_tk on <var216:TKwbreak>*/
 }
 var = var216;
 goto RET_LABEL;
@@ -4193,9 +4140,9 @@ RET_LABEL220:(void)0;
 var218 = var219;
 }
 if (var218){
-var222 = NEW_parser_nodes__TKwreturn(&type_parser_nodes__TKwreturn);
+var222 = NEW_parser_nodes__TKwabort(&type_parser_nodes__TKwabort);
 {
-lexer__TKwreturn__init_tk(var222, var_location); /* Direct call lexer#TKwreturn#init_tk on <var222:TKwreturn>*/
+lexer__TKwabort__init_tk(var222, var_location); /* Direct call lexer#TKwabort#init_tk on <var222:TKwabort>*/
 }
 var = var222;
 goto RET_LABEL;
@@ -4212,9 +4159,9 @@ RET_LABEL226:(void)0;
 var224 = var225;
 }
 if (var224){
-var228 = NEW_parser_nodes__TKwcontinue(&type_parser_nodes__TKwcontinue);
+var228 = NEW_parser_nodes__TKwassert(&type_parser_nodes__TKwassert);
 {
-lexer__TKwcontinue__init_tk(var228, var_location); /* Direct call lexer#TKwcontinue#init_tk on <var228:TKwcontinue>*/
+lexer__TKwassert__init_tk(var228, var_location); /* Direct call lexer#TKwassert#init_tk on <var228:TKwassert>*/
 }
 var = var228;
 goto RET_LABEL;
@@ -4231,9 +4178,9 @@ RET_LABEL232:(void)0;
 var230 = var231;
 }
 if (var230){
-var234 = NEW_parser_nodes__TKwbreak(&type_parser_nodes__TKwbreak);
+var234 = NEW_parser_nodes__TKwnew(&type_parser_nodes__TKwnew);
 {
-lexer__TKwbreak__init_tk(var234, var_location); /* Direct call lexer#TKwbreak#init_tk on <var234:TKwbreak>*/
+lexer__TKwnew__init_tk(var234, var_location); /* Direct call lexer#TKwnew#init_tk on <var234:TKwnew>*/
 }
 var = var234;
 goto RET_LABEL;
@@ -4250,9 +4197,9 @@ RET_LABEL238:(void)0;
 var236 = var237;
 }
 if (var236){
-var240 = NEW_parser_nodes__TKwabort(&type_parser_nodes__TKwabort);
+var240 = NEW_parser_nodes__TKwisa(&type_parser_nodes__TKwisa);
 {
-lexer__TKwabort__init_tk(var240, var_location); /* Direct call lexer#TKwabort#init_tk on <var240:TKwabort>*/
+lexer__TKwisa__init_tk(var240, var_location); /* Direct call lexer#TKwisa#init_tk on <var240:TKwisa>*/
 }
 var = var240;
 goto RET_LABEL;
@@ -4269,9 +4216,9 @@ RET_LABEL244:(void)0;
 var242 = var243;
 }
 if (var242){
-var246 = NEW_parser_nodes__TKwassert(&type_parser_nodes__TKwassert);
+var246 = NEW_parser_nodes__TKwonce(&type_parser_nodes__TKwonce);
 {
-lexer__TKwassert__init_tk(var246, var_location); /* Direct call lexer#TKwassert#init_tk on <var246:TKwassert>*/
+lexer__TKwonce__init_tk(var246, var_location); /* Direct call lexer#TKwonce#init_tk on <var246:TKwonce>*/
 }
 var = var246;
 goto RET_LABEL;
@@ -4288,9 +4235,9 @@ RET_LABEL250:(void)0;
 var248 = var249;
 }
 if (var248){
-var252 = NEW_parser_nodes__TKwnew(&type_parser_nodes__TKwnew);
+var252 = NEW_parser_nodes__TKwsuper(&type_parser_nodes__TKwsuper);
 {
-lexer__TKwnew__init_tk(var252, var_location); /* Direct call lexer#TKwnew#init_tk on <var252:TKwnew>*/
+lexer__TKwsuper__init_tk(var252, var_location); /* Direct call lexer#TKwsuper#init_tk on <var252:TKwsuper>*/
 }
 var = var252;
 goto RET_LABEL;
@@ -4307,9 +4254,9 @@ RET_LABEL256:(void)0;
 var254 = var255;
 }
 if (var254){
-var258 = NEW_parser_nodes__TKwisa(&type_parser_nodes__TKwisa);
+var258 = NEW_parser_nodes__TKwself(&type_parser_nodes__TKwself);
 {
-lexer__TKwisa__init_tk(var258, var_location); /* Direct call lexer#TKwisa#init_tk on <var258:TKwisa>*/
+lexer__TKwself__init_tk(var258, var_location); /* Direct call lexer#TKwself#init_tk on <var258:TKwself>*/
 }
 var = var258;
 goto RET_LABEL;
@@ -4326,9 +4273,9 @@ RET_LABEL262:(void)0;
 var260 = var261;
 }
 if (var260){
-var264 = NEW_parser_nodes__TKwonce(&type_parser_nodes__TKwonce);
+var264 = NEW_parser_nodes__TKwtrue(&type_parser_nodes__TKwtrue);
 {
-lexer__TKwonce__init_tk(var264, var_location); /* Direct call lexer#TKwonce#init_tk on <var264:TKwonce>*/
+lexer__TKwtrue__init_tk(var264, var_location); /* Direct call lexer#TKwtrue#init_tk on <var264:TKwtrue>*/
 }
 var = var264;
 goto RET_LABEL;
@@ -4345,9 +4292,9 @@ RET_LABEL268:(void)0;
 var266 = var267;
 }
 if (var266){
-var270 = NEW_parser_nodes__TKwsuper(&type_parser_nodes__TKwsuper);
+var270 = NEW_parser_nodes__TKwfalse(&type_parser_nodes__TKwfalse);
 {
-lexer__TKwsuper__init_tk(var270, var_location); /* Direct call lexer#TKwsuper#init_tk on <var270:TKwsuper>*/
+lexer__TKwfalse__init_tk(var270, var_location); /* Direct call lexer#TKwfalse#init_tk on <var270:TKwfalse>*/
 }
 var = var270;
 goto RET_LABEL;
@@ -4364,9 +4311,9 @@ RET_LABEL274:(void)0;
 var272 = var273;
 }
 if (var272){
-var276 = NEW_parser_nodes__TKwself(&type_parser_nodes__TKwself);
+var276 = NEW_parser_nodes__TKwnull(&type_parser_nodes__TKwnull);
 {
-lexer__TKwself__init_tk(var276, var_location); /* Direct call lexer#TKwself#init_tk on <var276:TKwself>*/
+lexer__TKwnull__init_tk(var276, var_location); /* Direct call lexer#TKwnull#init_tk on <var276:TKwnull>*/
 }
 var = var276;
 goto RET_LABEL;
@@ -4383,9 +4330,9 @@ RET_LABEL280:(void)0;
 var278 = var279;
 }
 if (var278){
-var282 = NEW_parser_nodes__TKwtrue(&type_parser_nodes__TKwtrue);
+var282 = NEW_parser_nodes__TKwas(&type_parser_nodes__TKwas);
 {
-lexer__TKwtrue__init_tk(var282, var_location); /* Direct call lexer#TKwtrue#init_tk on <var282:TKwtrue>*/
+lexer__TKwas__init_tk(var282, var_location); /* Direct call lexer#TKwas#init_tk on <var282:TKwas>*/
 }
 var = var282;
 goto RET_LABEL;
@@ -4402,9 +4349,9 @@ RET_LABEL286:(void)0;
 var284 = var285;
 }
 if (var284){
-var288 = NEW_parser_nodes__TKwfalse(&type_parser_nodes__TKwfalse);
+var288 = NEW_parser_nodes__TKwnullable(&type_parser_nodes__TKwnullable);
 {
-lexer__TKwfalse__init_tk(var288, var_location); /* Direct call lexer#TKwfalse#init_tk on <var288:TKwfalse>*/
+lexer__TKwnullable__init_tk(var288, var_location); /* Direct call lexer#TKwnullable#init_tk on <var288:TKwnullable>*/
 }
 var = var288;
 goto RET_LABEL;
@@ -4421,9 +4368,9 @@ RET_LABEL292:(void)0;
 var290 = var291;
 }
 if (var290){
-var294 = NEW_parser_nodes__TKwnull(&type_parser_nodes__TKwnull);
+var294 = NEW_parser_nodes__TKwisset(&type_parser_nodes__TKwisset);
 {
-lexer__TKwnull__init_tk(var294, var_location); /* Direct call lexer#TKwnull#init_tk on <var294:TKwnull>*/
+lexer__TKwisset__init_tk(var294, var_location); /* Direct call lexer#TKwisset#init_tk on <var294:TKwisset>*/
 }
 var = var294;
 goto RET_LABEL;
@@ -4440,9 +4387,9 @@ RET_LABEL298:(void)0;
 var296 = var297;
 }
 if (var296){
-var300 = NEW_parser_nodes__TKwas(&type_parser_nodes__TKwas);
+var300 = NEW_parser_nodes__TKwlabel(&type_parser_nodes__TKwlabel);
 {
-lexer__TKwas__init_tk(var300, var_location); /* Direct call lexer#TKwas#init_tk on <var300:TKwas>*/
+lexer__TKwlabel__init_tk(var300, var_location); /* Direct call lexer#TKwlabel#init_tk on <var300:TKwlabel>*/
 }
 var = var300;
 goto RET_LABEL;
@@ -4459,9 +4406,9 @@ RET_LABEL304:(void)0;
 var302 = var303;
 }
 if (var302){
-var306 = NEW_parser_nodes__TKwnullable(&type_parser_nodes__TKwnullable);
+var306 = NEW_parser_nodes__TKwdebug(&type_parser_nodes__TKwdebug);
 {
-lexer__TKwnullable__init_tk(var306, var_location); /* Direct call lexer#TKwnullable#init_tk on <var306:TKwnullable>*/
+lexer__TKwdebug__init_tk(var306, var_location); /* Direct call lexer#TKwdebug#init_tk on <var306:TKwdebug>*/
 }
 var = var306;
 goto RET_LABEL;
@@ -4478,9 +4425,9 @@ RET_LABEL310:(void)0;
 var308 = var309;
 }
 if (var308){
-var312 = NEW_parser_nodes__TKwisset(&type_parser_nodes__TKwisset);
+var312 = NEW_parser_nodes__TOpar(&type_parser_nodes__TOpar);
 {
-lexer__TKwisset__init_tk(var312, var_location); /* Direct call lexer#TKwisset#init_tk on <var312:TKwisset>*/
+lexer__TOpar__init_tk(var312, var_location); /* Direct call lexer#TOpar#init_tk on <var312:TOpar>*/
 }
 var = var312;
 goto RET_LABEL;
@@ -4497,9 +4444,9 @@ RET_LABEL316:(void)0;
 var314 = var315;
 }
 if (var314){
-var318 = NEW_parser_nodes__TKwlabel(&type_parser_nodes__TKwlabel);
+var318 = NEW_parser_nodes__TCpar(&type_parser_nodes__TCpar);
 {
-lexer__TKwlabel__init_tk(var318, var_location); /* Direct call lexer#TKwlabel#init_tk on <var318:TKwlabel>*/
+lexer__TCpar__init_tk(var318, var_location); /* Direct call lexer#TCpar#init_tk on <var318:TCpar>*/
 }
 var = var318;
 goto RET_LABEL;
@@ -4516,9 +4463,9 @@ RET_LABEL322:(void)0;
 var320 = var321;
 }
 if (var320){
-var324 = NEW_parser_nodes__TKwdebug(&type_parser_nodes__TKwdebug);
+var324 = NEW_parser_nodes__TObra(&type_parser_nodes__TObra);
 {
-lexer__TKwdebug__init_tk(var324, var_location); /* Direct call lexer#TKwdebug#init_tk on <var324:TKwdebug>*/
+lexer__TObra__init_tk(var324, var_location); /* Direct call lexer#TObra#init_tk on <var324:TObra>*/
 }
 var = var324;
 goto RET_LABEL;
@@ -4535,9 +4482,9 @@ RET_LABEL328:(void)0;
 var326 = var327;
 }
 if (var326){
-var330 = NEW_parser_nodes__TOpar(&type_parser_nodes__TOpar);
+var330 = NEW_parser_nodes__TCbra(&type_parser_nodes__TCbra);
 {
-lexer__TOpar__init_tk(var330, var_location); /* Direct call lexer#TOpar#init_tk on <var330:TOpar>*/
+lexer__TCbra__init_tk(var330, var_location); /* Direct call lexer#TCbra#init_tk on <var330:TCbra>*/
 }
 var = var330;
 goto RET_LABEL;
@@ -4554,9 +4501,9 @@ RET_LABEL334:(void)0;
 var332 = var333;
 }
 if (var332){
-var336 = NEW_parser_nodes__TCpar(&type_parser_nodes__TCpar);
+var336 = NEW_parser_nodes__TComma(&type_parser_nodes__TComma);
 {
-lexer__TCpar__init_tk(var336, var_location); /* Direct call lexer#TCpar#init_tk on <var336:TCpar>*/
+lexer__TComma__init_tk(var336, var_location); /* Direct call lexer#TComma#init_tk on <var336:TComma>*/
 }
 var = var336;
 goto RET_LABEL;
@@ -4573,9 +4520,9 @@ RET_LABEL340:(void)0;
 var338 = var339;
 }
 if (var338){
-var342 = NEW_parser_nodes__TObra(&type_parser_nodes__TObra);
+var342 = NEW_parser_nodes__TColumn(&type_parser_nodes__TColumn);
 {
-lexer__TObra__init_tk(var342, var_location); /* Direct call lexer#TObra#init_tk on <var342:TObra>*/
+lexer__TColumn__init_tk(var342, var_location); /* Direct call lexer#TColumn#init_tk on <var342:TColumn>*/
 }
 var = var342;
 goto RET_LABEL;
@@ -4592,9 +4539,9 @@ RET_LABEL346:(void)0;
 var344 = var345;
 }
 if (var344){
-var348 = NEW_parser_nodes__TCbra(&type_parser_nodes__TCbra);
+var348 = NEW_parser_nodes__TQuad(&type_parser_nodes__TQuad);
 {
-lexer__TCbra__init_tk(var348, var_location); /* Direct call lexer#TCbra#init_tk on <var348:TCbra>*/
+lexer__TQuad__init_tk(var348, var_location); /* Direct call lexer#TQuad#init_tk on <var348:TQuad>*/
 }
 var = var348;
 goto RET_LABEL;
@@ -4611,9 +4558,9 @@ RET_LABEL352:(void)0;
 var350 = var351;
 }
 if (var350){
-var354 = NEW_parser_nodes__TComma(&type_parser_nodes__TComma);
+var354 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
 {
-lexer__TComma__init_tk(var354, var_location); /* Direct call lexer#TComma#init_tk on <var354:TComma>*/
+lexer__TAssign__init_tk(var354, var_location); /* Direct call lexer#TAssign#init_tk on <var354:TAssign>*/
 }
 var = var354;
 goto RET_LABEL;
@@ -4630,9 +4577,9 @@ RET_LABEL358:(void)0;
 var356 = var357;
 }
 if (var356){
-var360 = NEW_parser_nodes__TColumn(&type_parser_nodes__TColumn);
+var360 = NEW_parser_nodes__TPluseq(&type_parser_nodes__TPluseq);
 {
-lexer__TColumn__init_tk(var360, var_location); /* Direct call lexer#TColumn#init_tk on <var360:TColumn>*/
+lexer__TPluseq__init_tk(var360, var_location); /* Direct call lexer#TPluseq#init_tk on <var360:TPluseq>*/
 }
 var = var360;
 goto RET_LABEL;
@@ -4649,9 +4596,9 @@ RET_LABEL364:(void)0;
 var362 = var363;
 }
 if (var362){
-var366 = NEW_parser_nodes__TQuad(&type_parser_nodes__TQuad);
+var366 = NEW_parser_nodes__TMinuseq(&type_parser_nodes__TMinuseq);
 {
-lexer__TQuad__init_tk(var366, var_location); /* Direct call lexer#TQuad#init_tk on <var366:TQuad>*/
+lexer__TMinuseq__init_tk(var366, var_location); /* Direct call lexer#TMinuseq#init_tk on <var366:TMinuseq>*/
 }
 var = var366;
 goto RET_LABEL;
@@ -4668,9 +4615,9 @@ RET_LABEL370:(void)0;
 var368 = var369;
 }
 if (var368){
-var372 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
+var372 = NEW_parser_nodes__TDotdotdot(&type_parser_nodes__TDotdotdot);
 {
-lexer__TAssign__init_tk(var372, var_location); /* Direct call lexer#TAssign#init_tk on <var372:TAssign>*/
+lexer__TDotdotdot__init_tk(var372, var_location); /* Direct call lexer#TDotdotdot#init_tk on <var372:TDotdotdot>*/
 }
 var = var372;
 goto RET_LABEL;
@@ -4687,9 +4634,9 @@ RET_LABEL376:(void)0;
 var374 = var375;
 }
 if (var374){
-var378 = NEW_parser_nodes__TPluseq(&type_parser_nodes__TPluseq);
+var378 = NEW_parser_nodes__TDotdot(&type_parser_nodes__TDotdot);
 {
-lexer__TPluseq__init_tk(var378, var_location); /* Direct call lexer#TPluseq#init_tk on <var378:TPluseq>*/
+lexer__TDotdot__init_tk(var378, var_location); /* Direct call lexer#TDotdot#init_tk on <var378:TDotdot>*/
 }
 var = var378;
 goto RET_LABEL;
@@ -4706,9 +4653,9 @@ RET_LABEL382:(void)0;
 var380 = var381;
 }
 if (var380){
-var384 = NEW_parser_nodes__TMinuseq(&type_parser_nodes__TMinuseq);
+var384 = NEW_parser_nodes__TDot(&type_parser_nodes__TDot);
 {
-lexer__TMinuseq__init_tk(var384, var_location); /* Direct call lexer#TMinuseq#init_tk on <var384:TMinuseq>*/
+lexer__TDot__init_tk(var384, var_location); /* Direct call lexer#TDot#init_tk on <var384:TDot>*/
 }
 var = var384;
 goto RET_LABEL;
@@ -4725,9 +4672,9 @@ RET_LABEL388:(void)0;
 var386 = var387;
 }
 if (var386){
-var390 = NEW_parser_nodes__TDotdotdot(&type_parser_nodes__TDotdotdot);
+var390 = NEW_parser_nodes__TPlus(&type_parser_nodes__TPlus);
 {
-lexer__TDotdotdot__init_tk(var390, var_location); /* Direct call lexer#TDotdotdot#init_tk on <var390:TDotdotdot>*/
+lexer__TPlus__init_tk(var390, var_location); /* Direct call lexer#TPlus#init_tk on <var390:TPlus>*/
 }
 var = var390;
 goto RET_LABEL;
@@ -4744,9 +4691,9 @@ RET_LABEL394:(void)0;
 var392 = var393;
 }
 if (var392){
-var396 = NEW_parser_nodes__TDotdot(&type_parser_nodes__TDotdot);
+var396 = NEW_parser_nodes__TMinus(&type_parser_nodes__TMinus);
 {
-lexer__TDotdot__init_tk(var396, var_location); /* Direct call lexer#TDotdot#init_tk on <var396:TDotdot>*/
+lexer__TMinus__init_tk(var396, var_location); /* Direct call lexer#TMinus#init_tk on <var396:TMinus>*/
 }
 var = var396;
 goto RET_LABEL;
@@ -4763,9 +4710,9 @@ RET_LABEL400:(void)0;
 var398 = var399;
 }
 if (var398){
-var402 = NEW_parser_nodes__TDot(&type_parser_nodes__TDot);
+var402 = NEW_parser_nodes__TStar(&type_parser_nodes__TStar);
 {
-lexer__TDot__init_tk(var402, var_location); /* Direct call lexer#TDot#init_tk on <var402:TDot>*/
+lexer__TStar__init_tk(var402, var_location); /* Direct call lexer#TStar#init_tk on <var402:TStar>*/
 }
 var = var402;
 goto RET_LABEL;
@@ -4782,9 +4729,9 @@ RET_LABEL406:(void)0;
 var404 = var405;
 }
 if (var404){
-var408 = NEW_parser_nodes__TPlus(&type_parser_nodes__TPlus);
+var408 = NEW_parser_nodes__TStarstar(&type_parser_nodes__TStarstar);
 {
-lexer__TPlus__init_tk(var408, var_location); /* Direct call lexer#TPlus#init_tk on <var408:TPlus>*/
+lexer__TStarstar__init_tk(var408, var_location); /* Direct call lexer#TStarstar#init_tk on <var408:TStarstar>*/
 }
 var = var408;
 goto RET_LABEL;
@@ -4801,9 +4748,9 @@ RET_LABEL412:(void)0;
 var410 = var411;
 }
 if (var410){
-var414 = NEW_parser_nodes__TMinus(&type_parser_nodes__TMinus);
+var414 = NEW_parser_nodes__TSlash(&type_parser_nodes__TSlash);
 {
-lexer__TMinus__init_tk(var414, var_location); /* Direct call lexer#TMinus#init_tk on <var414:TMinus>*/
+lexer__TSlash__init_tk(var414, var_location); /* Direct call lexer#TSlash#init_tk on <var414:TSlash>*/
 }
 var = var414;
 goto RET_LABEL;
@@ -4820,9 +4767,9 @@ RET_LABEL418:(void)0;
 var416 = var417;
 }
 if (var416){
-var420 = NEW_parser_nodes__TStar(&type_parser_nodes__TStar);
+var420 = NEW_parser_nodes__TPercent(&type_parser_nodes__TPercent);
 {
-lexer__TStar__init_tk(var420, var_location); /* Direct call lexer#TStar#init_tk on <var420:TStar>*/
+lexer__TPercent__init_tk(var420, var_location); /* Direct call lexer#TPercent#init_tk on <var420:TPercent>*/
 }
 var = var420;
 goto RET_LABEL;
@@ -4839,9 +4786,9 @@ RET_LABEL424:(void)0;
 var422 = var423;
 }
 if (var422){
-var426 = NEW_parser_nodes__TSlash(&type_parser_nodes__TSlash);
+var426 = NEW_parser_nodes__TEq(&type_parser_nodes__TEq);
 {
-lexer__TSlash__init_tk(var426, var_location); /* Direct call lexer#TSlash#init_tk on <var426:TSlash>*/
+lexer__TEq__init_tk(var426, var_location); /* Direct call lexer#TEq#init_tk on <var426:TEq>*/
 }
 var = var426;
 goto RET_LABEL;
@@ -4858,9 +4805,9 @@ RET_LABEL430:(void)0;
 var428 = var429;
 }
 if (var428){
-var432 = NEW_parser_nodes__TPercent(&type_parser_nodes__TPercent);
+var432 = NEW_parser_nodes__TNe(&type_parser_nodes__TNe);
 {
-lexer__TPercent__init_tk(var432, var_location); /* Direct call lexer#TPercent#init_tk on <var432:TPercent>*/
+lexer__TNe__init_tk(var432, var_location); /* Direct call lexer#TNe#init_tk on <var432:TNe>*/
 }
 var = var432;
 goto RET_LABEL;
@@ -4877,9 +4824,9 @@ RET_LABEL436:(void)0;
 var434 = var435;
 }
 if (var434){
-var438 = NEW_parser_nodes__TEq(&type_parser_nodes__TEq);
+var438 = NEW_parser_nodes__TLt(&type_parser_nodes__TLt);
 {
-lexer__TEq__init_tk(var438, var_location); /* Direct call lexer#TEq#init_tk on <var438:TEq>*/
+lexer__TLt__init_tk(var438, var_location); /* Direct call lexer#TLt#init_tk on <var438:TLt>*/
 }
 var = var438;
 goto RET_LABEL;
@@ -4896,9 +4843,9 @@ RET_LABEL442:(void)0;
 var440 = var441;
 }
 if (var440){
-var444 = NEW_parser_nodes__TNe(&type_parser_nodes__TNe);
+var444 = NEW_parser_nodes__TLe(&type_parser_nodes__TLe);
 {
-lexer__TNe__init_tk(var444, var_location); /* Direct call lexer#TNe#init_tk on <var444:TNe>*/
+lexer__TLe__init_tk(var444, var_location); /* Direct call lexer#TLe#init_tk on <var444:TLe>*/
 }
 var = var444;
 goto RET_LABEL;
@@ -4915,9 +4862,9 @@ RET_LABEL448:(void)0;
 var446 = var447;
 }
 if (var446){
-var450 = NEW_parser_nodes__TLt(&type_parser_nodes__TLt);
+var450 = NEW_parser_nodes__TLl(&type_parser_nodes__TLl);
 {
-lexer__TLt__init_tk(var450, var_location); /* Direct call lexer#TLt#init_tk on <var450:TLt>*/
+lexer__TLl__init_tk(var450, var_location); /* Direct call lexer#TLl#init_tk on <var450:TLl>*/
 }
 var = var450;
 goto RET_LABEL;
@@ -4934,9 +4881,9 @@ RET_LABEL454:(void)0;
 var452 = var453;
 }
 if (var452){
-var456 = NEW_parser_nodes__TLe(&type_parser_nodes__TLe);
+var456 = NEW_parser_nodes__TGt(&type_parser_nodes__TGt);
 {
-lexer__TLe__init_tk(var456, var_location); /* Direct call lexer#TLe#init_tk on <var456:TLe>*/
+lexer__TGt__init_tk(var456, var_location); /* Direct call lexer#TGt#init_tk on <var456:TGt>*/
 }
 var = var456;
 goto RET_LABEL;
@@ -4953,9 +4900,9 @@ RET_LABEL460:(void)0;
 var458 = var459;
 }
 if (var458){
-var462 = NEW_parser_nodes__TLl(&type_parser_nodes__TLl);
+var462 = NEW_parser_nodes__TGe(&type_parser_nodes__TGe);
 {
-lexer__TLl__init_tk(var462, var_location); /* Direct call lexer#TLl#init_tk on <var462:TLl>*/
+lexer__TGe__init_tk(var462, var_location); /* Direct call lexer#TGe#init_tk on <var462:TGe>*/
 }
 var = var462;
 goto RET_LABEL;
@@ -4972,9 +4919,9 @@ RET_LABEL466:(void)0;
 var464 = var465;
 }
 if (var464){
-var468 = NEW_parser_nodes__TGt(&type_parser_nodes__TGt);
+var468 = NEW_parser_nodes__TGg(&type_parser_nodes__TGg);
 {
-lexer__TGt__init_tk(var468, var_location); /* Direct call lexer#TGt#init_tk on <var468:TGt>*/
+lexer__TGg__init_tk(var468, var_location); /* Direct call lexer#TGg#init_tk on <var468:TGg>*/
 }
 var = var468;
 goto RET_LABEL;
@@ -4991,9 +4938,9 @@ RET_LABEL472:(void)0;
 var470 = var471;
 }
 if (var470){
-var474 = NEW_parser_nodes__TGe(&type_parser_nodes__TGe);
+var474 = NEW_parser_nodes__TStarship(&type_parser_nodes__TStarship);
 {
-lexer__TGe__init_tk(var474, var_location); /* Direct call lexer#TGe#init_tk on <var474:TGe>*/
+lexer__TStarship__init_tk(var474, var_location); /* Direct call lexer#TStarship#init_tk on <var474:TStarship>*/
 }
 var = var474;
 goto RET_LABEL;
@@ -5010,9 +4957,9 @@ RET_LABEL478:(void)0;
 var476 = var477;
 }
 if (var476){
-var480 = NEW_parser_nodes__TGg(&type_parser_nodes__TGg);
+var480 = NEW_parser_nodes__TBang(&type_parser_nodes__TBang);
 {
-lexer__TGg__init_tk(var480, var_location); /* Direct call lexer#TGg#init_tk on <var480:TGg>*/
+lexer__TBang__init_tk(var480, var_location); /* Direct call lexer#TBang#init_tk on <var480:TBang>*/
 }
 var = var480;
 goto RET_LABEL;
@@ -5029,9 +4976,9 @@ RET_LABEL484:(void)0;
 var482 = var483;
 }
 if (var482){
-var486 = NEW_parser_nodes__TStarship(&type_parser_nodes__TStarship);
+var486 = NEW_parser_nodes__TAt(&type_parser_nodes__TAt);
 {
-lexer__TStarship__init_tk(var486, var_location); /* Direct call lexer#TStarship#init_tk on <var486:TStarship>*/
+lexer__TAt__init_tk(var486, var_location); /* Direct call lexer#TAt#init_tk on <var486:TAt>*/
 }
 var = var486;
 goto RET_LABEL;
@@ -5048,9 +4995,9 @@ RET_LABEL490:(void)0;
 var488 = var489;
 }
 if (var488){
-var492 = NEW_parser_nodes__TBang(&type_parser_nodes__TBang);
+var492 = NEW_parser_nodes__TClassid(&type_parser_nodes__TClassid);
 {
-lexer__TBang__init_tk(var492, var_location); /* Direct call lexer#TBang#init_tk on <var492:TBang>*/
+lexer__TClassid__init_tk(var492, var_location); /* Direct call lexer#TClassid#init_tk on <var492:TClassid>*/
 }
 var = var492;
 goto RET_LABEL;
@@ -5067,9 +5014,9 @@ RET_LABEL496:(void)0;
 var494 = var495;
 }
 if (var494){
-var498 = NEW_parser_nodes__TAt(&type_parser_nodes__TAt);
+var498 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 {
-lexer__TAt__init_tk(var498, var_location); /* Direct call lexer#TAt#init_tk on <var498:TAt>*/
+lexer__TId__init_tk(var498, var_location); /* Direct call lexer#TId#init_tk on <var498:TId>*/
 }
 var = var498;
 goto RET_LABEL;
@@ -5086,9 +5033,9 @@ RET_LABEL502:(void)0;
 var500 = var501;
 }
 if (var500){
-var504 = NEW_parser_nodes__TClassid(&type_parser_nodes__TClassid);
+var504 = NEW_parser_nodes__TAttrid(&type_parser_nodes__TAttrid);
 {
-lexer__TClassid__init_tk(var504, var_location); /* Direct call lexer#TClassid#init_tk on <var504:TClassid>*/
+lexer__TAttrid__init_tk(var504, var_location); /* Direct call lexer#TAttrid#init_tk on <var504:TAttrid>*/
 }
 var = var504;
 goto RET_LABEL;
@@ -5105,9 +5052,9 @@ RET_LABEL508:(void)0;
 var506 = var507;
 }
 if (var506){
-var510 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
+var510 = NEW_parser_nodes__TNumber(&type_parser_nodes__TNumber);
 {
-lexer__TId__init_tk(var510, var_location); /* Direct call lexer#TId#init_tk on <var510:TId>*/
+lexer__TNumber__init_tk(var510, var_location); /* Direct call lexer#TNumber#init_tk on <var510:TNumber>*/
 }
 var = var510;
 goto RET_LABEL;
@@ -5124,9 +5071,9 @@ RET_LABEL514:(void)0;
 var512 = var513;
 }
 if (var512){
-var516 = NEW_parser_nodes__TAttrid(&type_parser_nodes__TAttrid);
+var516 = NEW_parser_nodes__THexNumber(&type_parser_nodes__THexNumber);
 {
-lexer__TAttrid__init_tk(var516, var_location); /* Direct call lexer#TAttrid#init_tk on <var516:TAttrid>*/
+lexer__THexNumber__init_tk(var516, var_location); /* Direct call lexer#THexNumber#init_tk on <var516:THexNumber>*/
 }
 var = var516;
 goto RET_LABEL;
@@ -5143,9 +5090,9 @@ RET_LABEL520:(void)0;
 var518 = var519;
 }
 if (var518){
-var522 = NEW_parser_nodes__TNumber(&type_parser_nodes__TNumber);
+var522 = NEW_parser_nodes__TFloat(&type_parser_nodes__TFloat);
 {
-lexer__TNumber__init_tk(var522, var_location); /* Direct call lexer#TNumber#init_tk on <var522:TNumber>*/
+lexer__TFloat__init_tk(var522, var_location); /* Direct call lexer#TFloat#init_tk on <var522:TFloat>*/
 }
 var = var522;
 goto RET_LABEL;
@@ -5162,9 +5109,9 @@ RET_LABEL526:(void)0;
 var524 = var525;
 }
 if (var524){
-var528 = NEW_parser_nodes__THexNumber(&type_parser_nodes__THexNumber);
+var528 = NEW_parser_nodes__TString(&type_parser_nodes__TString);
 {
-lexer__THexNumber__init_tk(var528, var_location); /* Direct call lexer#THexNumber#init_tk on <var528:THexNumber>*/
+lexer__TString__init_tk(var528, var_location); /* Direct call lexer#TString#init_tk on <var528:TString>*/
 }
 var = var528;
 goto RET_LABEL;
@@ -5181,9 +5128,9 @@ RET_LABEL532:(void)0;
 var530 = var531;
 }
 if (var530){
-var534 = NEW_parser_nodes__TFloat(&type_parser_nodes__TFloat);
+var534 = NEW_parser_nodes__TStartString(&type_parser_nodes__TStartString);
 {
-lexer__TFloat__init_tk(var534, var_location); /* Direct call lexer#TFloat#init_tk on <var534:TFloat>*/
+lexer__TStartString__init_tk(var534, var_location); /* Direct call lexer#TStartString#init_tk on <var534:TStartString>*/
 }
 var = var534;
 goto RET_LABEL;
@@ -5200,9 +5147,9 @@ RET_LABEL538:(void)0;
 var536 = var537;
 }
 if (var536){
-var540 = NEW_parser_nodes__TString(&type_parser_nodes__TString);
+var540 = NEW_parser_nodes__TMidString(&type_parser_nodes__TMidString);
 {
-lexer__TString__init_tk(var540, var_location); /* Direct call lexer#TString#init_tk on <var540:TString>*/
+lexer__TMidString__init_tk(var540, var_location); /* Direct call lexer#TMidString#init_tk on <var540:TMidString>*/
 }
 var = var540;
 goto RET_LABEL;
@@ -5219,9 +5166,9 @@ RET_LABEL544:(void)0;
 var542 = var543;
 }
 if (var542){
-var546 = NEW_parser_nodes__TStartString(&type_parser_nodes__TStartString);
+var546 = NEW_parser_nodes__TEndString(&type_parser_nodes__TEndString);
 {
-lexer__TStartString__init_tk(var546, var_location); /* Direct call lexer#TStartString#init_tk on <var546:TStartString>*/
+lexer__TEndString__init_tk(var546, var_location); /* Direct call lexer#TEndString#init_tk on <var546:TEndString>*/
 }
 var = var546;
 goto RET_LABEL;
@@ -5238,9 +5185,9 @@ RET_LABEL550:(void)0;
 var548 = var549;
 }
 if (var548){
-var552 = NEW_parser_nodes__TMidString(&type_parser_nodes__TMidString);
+var552 = NEW_parser_nodes__TChar(&type_parser_nodes__TChar);
 {
-lexer__TMidString__init_tk(var552, var_location); /* Direct call lexer#TMidString#init_tk on <var552:TMidString>*/
+lexer__TChar__init_tk(var552, var_location); /* Direct call lexer#TChar#init_tk on <var552:TChar>*/
 }
 var = var552;
 goto RET_LABEL;
@@ -5257,9 +5204,9 @@ RET_LABEL556:(void)0;
 var554 = var555;
 }
 if (var554){
-var558 = NEW_parser_nodes__TEndString(&type_parser_nodes__TEndString);
+var558 = NEW_parser_nodes__TBadString(&type_parser_nodes__TBadString);
 {
-lexer__TEndString__init_tk(var558, var_location); /* Direct call lexer#TEndString#init_tk on <var558:TEndString>*/
+lexer__TBadString__init_tk(var558, var_location); /* Direct call lexer#TBadString#init_tk on <var558:TBadString>*/
 }
 var = var558;
 goto RET_LABEL;
@@ -5276,9 +5223,9 @@ RET_LABEL562:(void)0;
 var560 = var561;
 }
 if (var560){
-var564 = NEW_parser_nodes__TChar(&type_parser_nodes__TChar);
+var564 = NEW_parser_nodes__TBadChar(&type_parser_nodes__TBadChar);
 {
-lexer__TChar__init_tk(var564, var_location); /* Direct call lexer#TChar#init_tk on <var564:TChar>*/
+lexer__TBadChar__init_tk(var564, var_location); /* Direct call lexer#TBadChar#init_tk on <var564:TBadChar>*/
 }
 var = var564;
 goto RET_LABEL;
@@ -5295,54 +5242,16 @@ RET_LABEL568:(void)0;
 var566 = var567;
 }
 if (var566){
-var570 = NEW_parser_nodes__TBadString(&type_parser_nodes__TBadString);
+var570 = NEW_parser_nodes__TExternCodeSegment(&type_parser_nodes__TExternCodeSegment);
 {
-lexer__TBadString__init_tk(var570, var_location); /* Direct call lexer#TBadString#init_tk on <var570:TBadString>*/
+lexer__TExternCodeSegment__init_tk(var570, var_location); /* Direct call lexer#TExternCodeSegment#init_tk on <var570:TExternCodeSegment>*/
 }
 var = var570;
 goto RET_LABEL;
 } else {
 }
-var571 = 96;
-{
-{ /* Inline kernel#Int#== (var_accept_token,var571) on <var_accept_token:Int> */
-var575 = var_accept_token == var571;
-var573 = var575;
-goto RET_LABEL574;
-RET_LABEL574:(void)0;
-}
-var572 = var573;
-}
-if (var572){
-var576 = NEW_parser_nodes__TBadChar(&type_parser_nodes__TBadChar);
-{
-lexer__TBadChar__init_tk(var576, var_location); /* Direct call lexer#TBadChar#init_tk on <var576:TBadChar>*/
-}
-var = var576;
-goto RET_LABEL;
-} else {
-}
-var577 = 97;
-{
-{ /* Inline kernel#Int#== (var_accept_token,var577) on <var_accept_token:Int> */
-var581 = var_accept_token == var577;
-var579 = var581;
-goto RET_LABEL580;
-RET_LABEL580:(void)0;
-}
-var578 = var579;
-}
-if (var578){
-var582 = NEW_parser_nodes__TExternCodeSegment(&type_parser_nodes__TExternCodeSegment);
-{
-lexer__TExternCodeSegment__init_tk(var582, var_location); /* Direct call lexer#TExternCodeSegment#init_tk on <var582:TExternCodeSegment>*/
-}
-var = var582;
-goto RET_LABEL;
-} else {
-}
 PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/lexer.nit", 1467);
+PRINT_ERROR(" (%s:%d)\n", "parser/lexer.nit", 1445);
 show_backtrace(1);
 RET_LABEL:;
 return var;

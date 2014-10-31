@@ -12,32 +12,32 @@ void coloring__POSetConflictGraph__compute_conflicts(val* self);
 void coloring__POSetConflictGraph__init(val* self, val* p0);
 void hash_collection__HashSet__clear(val* self);
 val* poset__POSet__iterator(val* self);
-#define COLOR_abstract_collection__Iterator__is_ok 31
-#define COLOR_abstract_collection__Iterator__item 29
+#define COLOR_abstract_collection__Iterator__is_ok 33
+#define COLOR_abstract_collection__Iterator__item 31
 val* poset__POSet___91d_93d(val* self, val* p0);
 val* poset__POSetElement__direct_greaters(val* self);
-#define COLOR_abstract_collection__Collection__length 31
+#define COLOR_abstract_collection__Collection__length 39
 extern const struct type type_kernel__Int;
 val* poset__POSetElement__greaters(val* self);
 void abstract_collection__SimpleCollection__add_all(val* self, val* p0);
-#define COLOR_abstract_collection__Iterator__next 30
+#define COLOR_abstract_collection__Iterator__next 32
 val* hash_collection__HashSet__iterator(val* self);
 short int coloring__POSetConflictGraph__is_border(val* self, val* p0);
 void hash_collection__HashSet__add(val* self, val* p0);
 void hash_collection__HashSet__remove(val* self, val* p0);
 #define COLOR_coloring__POSetConflictGraph_FT0 3
 val* poset__POSetElement__direct_smallers(val* self);
-#define COLOR_abstract_collection__Collection__iterator 29
+#define COLOR_abstract_collection__Collection__iterator 37
 short int hash_collection__HashSet__has(val* self, val* p0);
 void hash_collection__HashMap__clear(val* self);
 void coloring__POSetConflictGraph__add_conflicts(val* self, val* p0);
 short int abstract_collection__MapRead__has_key(val* self, val* p0);
 val* NEW_hash_collection__HashSet(const struct type* type);
 #define COLOR_hash_collection__HashSetcoloring__POSetConflictGraph_FT0 0
-void hash_collection__HashSet__init(val* self);
+#define COLOR_kernel__Object__init 7
 void hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
 val* hash_collection__HashMap___91d_93d(val* self, val* p0);
-#define COLOR_abstract_collection__SimpleCollection__add 51
+#define COLOR_abstract_collection__SimpleCollection__add 58
 void coloring__POSetConflictGraph__add_conflict(val* self, val* p0, val* p1);
 #define COLOR_abstract_collection__Collectioncoloring__POSetConflictGraph_FT0 4
 #define COLOR_coloring__POSetColorer___is_colored 0
@@ -78,12 +78,12 @@ extern const struct class class_kernel__Int;
 #define COLOR_coloring__BucketsColorer___conflicts 1
 #define COLOR_abstract_collection__Mapcoloring__BucketsColorer_FT0abstract_collection__Setcoloring__BucketsColorer_FT1 2
 void coloring__BucketsColorer__compute_conflicts(val* self, val* p0);
-#define COLOR_abstract_collection__MapRead__iterator 32
-#define COLOR_abstract_collection__MapIterator__is_ok 32
-#define COLOR_abstract_collection__MapIterator__key 30
-#define COLOR_abstract_collection__MapIterator__item 29
+#define COLOR_abstract_collection__MapRead__iterator 34
+#define COLOR_abstract_collection__MapIterator__is_ok 34
+#define COLOR_abstract_collection__MapIterator__key 32
+#define COLOR_abstract_collection__MapIterator__item 31
 short int coloring__BucketsColorer__is_color_free(val* self, val* p0, long p1);
-#define COLOR_abstract_collection__MapIterator__next 31
+#define COLOR_abstract_collection__MapIterator__next 33
 val* coloring__BucketsColorer__colorize(val* self, val* p0);
 #define COLOR_coloring__BucketsColorer_FT1 3
 #define COLOR_hash_collection__HashSetcoloring__BucketsColorer_FT1 4
@@ -95,9 +95,9 @@ val* coloring__BucketsColorer__colorize(val* self, val* p0);
 #define COLOR_abstract_collection__Mapcoloring__POSetBucketsColorer_FT0abstract_collection__Setcoloring__POSetBucketsColorer_FT0 2
 void coloring__POSetBucketsColorer__init(val* self, val* p0, val* p1);
 #define COLOR_abstract_collection__Mapcoloring__POSetBucketsColorer_FT0abstract_collection__Setcoloring__POSetBucketsColorer_FT1 3
-#define COLOR_abstract_collection__MapRead__keys 34
+#define COLOR_abstract_collection__MapRead__keys 36
 long coloring__POSetBucketsColorer__min_color(val* self, val* p0, val* p1);
-#define COLOR_abstract_collection__MapRead___91d_93d 29
+#define COLOR_abstract_collection__MapRead___91d_93d 31
 short int coloring__POSetBucketsColorer__is_color_free(val* self, long p0, val* p1, val* p2);
 val* coloring__POSetBucketsColorer__colorize(val* self, val* p0);
 #define COLOR_abstract_collection__Collectioncoloring__POSetBucketsColorer_FT0 4

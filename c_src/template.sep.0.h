@@ -13,6 +13,6 @@ void template__Template__force_render(val* self);
 val* array__AbstractArrayRead__iterator(val* self);
 short int array__ArrayIterator__is_ok(val* self);
 val* array__ArrayIterator__item(val* self);
-#define COLOR_stream__Streamable__write_to 38
+#define COLOR_stream__Streamable__write_to 45
 void array__ArrayIterator__next(val* self);
 void template__Template__write_to(val* self, val* p0);

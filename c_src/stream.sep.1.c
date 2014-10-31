@@ -13,12 +13,12 @@ var1 = stream__BufferedIStream__eof(self);
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 53);
 show_backtrace(1);
 }
 var3 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
 {
-string__FlatBuffer__init(var3); /* Direct call string#FlatBuffer#init on <var3:FlatBuffer>*/
+((void (*)(val*))(var3->class->vft[COLOR_kernel__Object__init]))(var3) /* init on <var3:FlatBuffer>*/;
 }
 var_s = var3;
 {
@@ -120,13 +120,13 @@ var_i = p0;
 var1 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var1 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 182);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 180);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var1) on <var1:nullable FlatBuffer> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var4 = var1->attrs[COLOR_string__FlatText___length].l; /* _length on <var1:nullable FlatBuffer> */
@@ -182,7 +182,7 @@ var20 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var20)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var21 = var17 + var_i;
@@ -194,13 +194,13 @@ RET_LABEL19:(void)0;
 var22 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var22 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 189);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 187);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var22) on <var22:nullable FlatBuffer> */
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var25 = var22->attrs[COLOR_string__FlatText___length].l; /* _length on <var22:nullable FlatBuffer> */
@@ -216,7 +216,7 @@ var28 = 1; /* easy <var23:Int> isa OTHER*/
 if (unlikely(!var28)) {
 var_class_name31 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 326);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 372);
 show_backtrace(1);
 }
 var32 = var18 >= var23;
@@ -231,13 +231,13 @@ var_from = var33;
 var34 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var34 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 191);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 189);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var34) on <var34:nullable FlatBuffer> */
 if (unlikely(var34 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var37 = var34->attrs[COLOR_string__FlatText___length].l; /* _length on <var34:nullable FlatBuffer> */
@@ -249,7 +249,7 @@ self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var35; /* _buffer_po
 var38 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var38 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 190);
 show_backtrace(1);
 } else {
 var39 = string__Text__substring_from(var38, var_from);
@@ -271,7 +271,7 @@ var44 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var44)) {
 var_class_name47 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name47);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var48 = var41 + var_i;
@@ -291,7 +291,7 @@ var53 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var53)) {
 var_class_name56 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name56);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var57 = var50 - var_i;
@@ -302,7 +302,7 @@ RET_LABEL52:(void)0;
 }
 if (var49 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 195);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 193);
 show_backtrace(1);
 } else {
 var58 = string__FlatBuffer__substring(var49, var51, var_i);
@@ -344,21 +344,18 @@ int idtype;
 const char* var_class_name;
 short int var12 /* : Bool */;
 val* var13 /* : nullable FlatBuffer */;
-val* var14 /* : Sequence[Char] */;
-val* var16 /* : Sequence[Char] */;
-val* var17 /* : nullable Object */;
-char var18 /* : Char */;
-long var19 /* : Int */;
-long var20 /* : Int */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-const char* var_class_name25;
-long var26 /* : Int */;
-val* var28 /* : String */;
+char var14 /* : Char */;
+long var15 /* : Int */;
+long var16 /* : Int */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+const char* var_class_name21;
+long var22 /* : Int */;
+val* var24 /* : String */;
 var1 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
 {
-string__FlatBuffer__init(var1); /* Direct call string#FlatBuffer#init on <var1:FlatBuffer>*/
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlatBuffer>*/;
 }
 var_s = var1;
 for(;;) {
@@ -366,19 +363,19 @@ for(;;) {
 var2 = stream__BufferedIStream__eof(self);
 }
 var3 = !var2;
-if (!var3) break;
+if (var3){
 var4 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 var_j = var4;
 var5 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var5 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 203);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 201);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var5) on <var5:nullable FlatBuffer> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var8 = var5->attrs[COLOR_string__FlatText___length].l; /* _length on <var5:nullable FlatBuffer> */
@@ -396,7 +393,7 @@ var11 = 1; /* easy <var_k:Int> isa OTHER*/
 if (unlikely(!var11)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var12 = var_j < var_k;
@@ -405,69 +402,55 @@ goto RET_LABEL10;
 RET_LABEL10:(void)0;
 }
 }
-if (!var9) break;
+if (var9){
 var13 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var13 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 205);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 203);
 show_backtrace(1);
 } else {
-{ /* Inline string#FlatBuffer#chars (var13) on <var13:nullable FlatBuffer> */
-if (unlikely(var13 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
-show_backtrace(1);
-}
-var16 = var13->attrs[COLOR_string__FlatBuffer___chars].val; /* _chars on <var13:nullable FlatBuffer> */
-if (unlikely(var16 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
-show_backtrace(1);
-}
-var14 = var16;
-RET_LABEL15:(void)0;
-}
+var14 = string__FlatBuffer___91d_93d(var13, var_j);
 }
 {
-var17 = ((val* (*)(val*, long))(var14->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var14, var_j) /* [] on <var14:Sequence[Char]>*/;
+string__FlatBuffer__add(var_s, var14); /* Direct call string#FlatBuffer#add on <var_s:FlatBuffer>*/
 }
+var15 = 1;
 {
-var18 = ((struct instance_kernel__Char*)var17)->value; /* autounbox from nullable Object to Char */;
-string__FlatBuffer__add(var_s, var18); /* Direct call string#FlatBuffer#add on <var_s:FlatBuffer>*/
-}
-var19 = 1;
-{
-{ /* Inline kernel#Int#+ (var_j,var19) on <var_j:Int> */
-/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
-/* <var19:Int> isa OTHER */
-var22 = 1; /* easy <var19:Int> isa OTHER*/
-if (unlikely(!var22)) {
-var_class_name25 = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+{ /* Inline kernel#Int#+ (var_j,var15) on <var_j:Int> */
+/* Covariant cast for argument 0 (i) <var15:Int> isa OTHER */
+/* <var15:Int> isa OTHER */
+var18 = 1; /* easy <var15:Int> isa OTHER*/
+if (unlikely(!var18)) {
+var_class_name21 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
-var26 = var_j + var19;
-var20 = var26;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var22 = var_j + var15;
+var16 = var22;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
 }
 }
-var_j = var20;
-CONTINUE_label: (void)0;
+var_j = var16;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var_j; /* _buffer_pos on <self:BufferedIStream> */
 {
 file__IFStream__fill_buffer(self); /* Direct call file#IFStream#fill_buffer on <self:BufferedIStream>*/
 }
-CONTINUE_label27: (void)0;
+} else {
+goto BREAK_label23;
 }
-BREAK_label27: (void)0;
+}
+BREAK_label23: (void)0;
 {
-var28 = string__FlatBuffer__to_s(var_s);
+var24 = string__FlatBuffer__to_s(var_s);
 }
-var = var28;
+var = var24;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -582,13 +565,13 @@ for(;;) {
 var2 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var2 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 219);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 217);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var2) on <var2:nullable FlatBuffer> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var5 = var2->attrs[COLOR_string__FlatText___length].l; /* _length on <var2:nullable FlatBuffer> */
@@ -604,7 +587,7 @@ var8 = 1; /* easy <var3:Int> isa OTHER*/
 if (unlikely(!var8)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var9 = var_i < var3;
@@ -618,19 +601,19 @@ if (var6){
 var10 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var10 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 219);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 217);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatBuffer#chars (var10) on <var10:nullable FlatBuffer> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 1406);
 show_backtrace(1);
 }
 var13 = var10->attrs[COLOR_string__FlatBuffer___chars].val; /* _chars on <var10:nullable FlatBuffer> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 1406);
 show_backtrace(1);
 }
 var11 = var13;
@@ -659,7 +642,7 @@ var1 = var16;
 } else {
 var1 = var_;
 }
-if (!var1) break;
+if (var1){
 var22 = 1;
 {
 { /* Inline kernel#Int#+ (var_i,var22) on <var_i:Int> */
@@ -669,7 +652,7 @@ var25 = 1; /* easy <var22:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var29 = var_i + var22;
@@ -679,7 +662,9 @@ RET_LABEL24:(void)0;
 }
 }
 var_i = var23;
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 var30 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
@@ -691,7 +676,7 @@ var33 = 1; /* easy <var30:Int> isa OTHER*/
 if (unlikely(!var33)) {
 var_class_name36 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var37 = var_i > var30;
@@ -716,7 +701,7 @@ var43 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var43)) {
 var_class_name46 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var47 = var38 + var_i;
@@ -734,7 +719,7 @@ var51 = 1; /* easy <var48:Int> isa OTHER*/
 if (unlikely(!var51)) {
 var_class_name54 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name54);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var55 = var41 - var48;
@@ -757,7 +742,7 @@ var59 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var59)) {
 var_class_name62 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name62);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var63 = var_j < var_i;
@@ -766,23 +751,23 @@ goto RET_LABEL58;
 RET_LABEL58:(void)0;
 }
 }
-if (!var57) break;
+if (var57){
 var64 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var64 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 229);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 227);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatBuffer#chars (var64) on <var64:nullable FlatBuffer> */
 if (unlikely(var64 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 1406);
 show_backtrace(1);
 }
 var67 = var64->attrs[COLOR_string__FlatBuffer___chars].val; /* _chars on <var64:nullable FlatBuffer> */
 if (unlikely(var67 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1163);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 1406);
 show_backtrace(1);
 }
 var65 = var67;
@@ -805,7 +790,7 @@ var73 = 1; /* easy <var70:Int> isa OTHER*/
 if (unlikely(!var73)) {
 var_class_name76 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name76);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var77 = var_j + var70;
@@ -815,7 +800,9 @@ RET_LABEL72:(void)0;
 }
 }
 var_j = var71;
-CONTINUE_label78: (void)0;
+} else {
+goto BREAK_label78;
+}
 }
 BREAK_label78: (void)0;
 } else {
@@ -823,13 +810,13 @@ BREAK_label78: (void)0;
 var79 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var79 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 234);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 232);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var79) on <var79:nullable FlatBuffer> */
 if (unlikely(var79 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var82 = var79->attrs[COLOR_string__FlatText___length].l; /* _length on <var79:nullable FlatBuffer> */
@@ -845,7 +832,7 @@ var85 = 1; /* easy <var80:Int> isa OTHER*/
 if (unlikely(!var85)) {
 var_class_name88 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name88);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var89 = var_i < var80;
@@ -864,7 +851,7 @@ var93 = 1; /* easy <var90:Int> isa OTHER*/
 if (unlikely(!var93)) {
 var_class_name96 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name96);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var97 = var_i + var90;
@@ -892,9 +879,7 @@ file__IFStream__fill_buffer(self); /* Direct call file#IFStream#fill_buffer on <
 }
 }
 }
-CONTINUE_label101: (void)0;
 }
-BREAK_label101: (void)0;
 RET_LABEL:;
 }
 /* method stream#BufferedIStream#append_line_to for (self: Object, Buffer) */
@@ -923,13 +908,13 @@ var2 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var3 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/stream.nit", 250);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/stream.nit", 248);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length (var3) on <var3:nullable FlatBuffer> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var6 = var3->attrs[COLOR_string__FlatText___length].l; /* _length on <var3:nullable FlatBuffer> */
@@ -945,7 +930,7 @@ var9 = 1; /* easy <var4:Int> isa OTHER*/
 if (unlikely(!var9)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 326);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 372);
 show_backtrace(1);
 }
 var10 = var2 >= var4;
@@ -999,16 +984,5 @@ RET_LABEL:;
 /* method stream#BufferedIStream#prepare_buffer for (self: Object, Int) */
 void VIRTUAL_stream__BufferedIStream__prepare_buffer(val* self, long p0) {
 stream__BufferedIStream__prepare_buffer(self, p0); /* Direct call stream#BufferedIStream#prepare_buffer on <self:Object(BufferedIStream)>*/
-RET_LABEL:;
-}
-/* method stream#BufferedIStream#init for (self: BufferedIStream) */
-void stream__BufferedIStream__init(val* self) {
-RET_LABEL:;
-}
-/* method stream#BufferedIStream#init for (self: Object) */
-void VIRTUAL_stream__BufferedIStream__init(val* self) {
-{ /* Inline stream#BufferedIStream#init (self) on <self:Object(BufferedIStream)> */
-RET_LABEL1:(void)0;
-}
 RET_LABEL:;
 }

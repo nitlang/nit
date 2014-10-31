@@ -1,22 +1,11 @@
 #include "model_base.sep.0.h"
-/* method model_base#Model#init for (self: Model) */
-void model_base__Model__init(val* self) {
-RET_LABEL:;
-}
-/* method model_base#Model#init for (self: Object) */
-void VIRTUAL_model_base__Model__init(val* self) {
-{ /* Inline model_base#Model#init (self) on <self:Object(Model)> */
-RET_LABEL1:(void)0;
-}
-RET_LABEL:;
-}
 /* method model_base#MEntity#model for (self: MEntity): Model */
 val* model_base__MEntity__model(val* self) {
 val* var /* : Model */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "model", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/model_base.nit", 31);
 show_backtrace(1);
 RET_LABEL:;
 return var;
@@ -29,24 +18,13 @@ const char* var_class_name;
 { /* Inline model_base#MEntity#model (self) on <self:Object(MEntity)> */
 var_class_name = self == NULL ? "null" : self->type->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "model", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "model/model_base.nit", 31);
 show_backtrace(1);
 RET_LABEL2:(void)0;
 }
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method model_base#MEntity#init for (self: MEntity) */
-void model_base__MEntity__init(val* self) {
-RET_LABEL:;
-}
-/* method model_base#MEntity#init for (self: Object) */
-void VIRTUAL_model_base__MEntity__init(val* self) {
-{ /* Inline model_base#MEntity#init (self) on <self:Object(MEntity)> */
-RET_LABEL1:(void)0;
-}
-RET_LABEL:;
 }
 /* method model_base#MVisibility#to_s for (self: MVisibility): String */
 val* model_base__MVisibility__to_s(val* self) {
@@ -55,7 +33,7 @@ val* var1 /* : String */;
 var1 = self->attrs[COLOR_model_base__MVisibility___to_s].val; /* _to_s on <self:MVisibility> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 56);
+PRINT_ERROR(" (%s:%d)\n", "model/model_base.nit", 57);
 show_backtrace(1);
 }
 var = var1;
@@ -71,7 +49,7 @@ val* var3 /* : String */;
 var3 = self->attrs[COLOR_model_base__MVisibility___to_s].val; /* _to_s on <self:Object(MVisibility)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _to_s");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 56);
+PRINT_ERROR(" (%s:%d)\n", "model/model_base.nit", 57);
 show_backtrace(1);
 }
 var1 = var3;
@@ -187,7 +165,7 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/model/model_base.nit", 66);
+PRINT_ERROR(" (%s:%d)\n", "model/model_base.nit", 67);
 show_backtrace(1);
 }
 var_other = p0;
@@ -213,7 +191,7 @@ var10 = 1; /* easy <var5:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name13 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var14 = var2 < var5;

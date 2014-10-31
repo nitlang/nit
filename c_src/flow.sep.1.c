@@ -6,7 +6,7 @@ val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_flow__ToolContext___flow_phase].val; /* _flow_phase on <self:ToolContext> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flow_phase");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 26);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 23);
 show_backtrace(1);
 }
 var = var1;
@@ -22,7 +22,7 @@ val* var3 /* : Phase */;
 var3 = self->attrs[COLOR_flow__ToolContext___flow_phase].val; /* _flow_phase on <self:Object(ToolContext)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flow_phase");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 26);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 23);
 show_backtrace(1);
 }
 var1 = var3;
@@ -43,7 +43,7 @@ var_npropdef = p0;
 var2 = self->attrs[COLOR_phase__Phase___toolcontext].val; /* _toolcontext on <self:FlowPhase> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", "src/phase.nit", 145);
+PRINT_ERROR(" (%s:%d)\n", "phase.nit", 162);
 show_backtrace(1);
 }
 var = var2;
@@ -67,7 +67,7 @@ val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var = var1;
@@ -83,7 +83,7 @@ val* var3 /* : FlowContext */;
 var3 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:Object(FlowVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var1 = var3;
@@ -113,7 +113,7 @@ val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___toolcontext].val; /* _toolcontext on <self:FlowVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 41);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 38);
 show_backtrace(1);
 }
 var = var1;
@@ -129,7 +129,7 @@ val* var3 /* : ToolContext */;
 var3 = self->attrs[COLOR_flow__FlowVisitor___toolcontext].val; /* _toolcontext on <self:Object(FlowVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 41);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 38);
 show_backtrace(1);
 }
 var1 = var3;
@@ -156,81 +156,77 @@ RET_LABEL:;
 void flow__FlowVisitor__init(val* self, val* p0) {
 val* var_toolcontext /* var toolcontext: ToolContext */;
 val* var /* : FlowContext */;
+val* var3 /* : Array[FlowContext] */;
 val* var5 /* : Array[FlowContext] */;
-val* var7 /* : Array[FlowContext] */;
+val* var6 /* : FlowContext */;
 val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
+val* var9 /* : FlowContext */;
 val* var11 /* : FlowContext */;
-val* var13 /* : FlowContext */;
-short int var14 /* : Bool */;
+short int var12 /* : Bool */;
 {
-{ /* Inline parser_nodes#Visitor#init (self) on <self:FlowVisitor> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:FlowVisitor>*/;
 }
 var_toolcontext = p0;
 {
 { /* Inline flow#FlowVisitor#toolcontext= (self,var_toolcontext) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___toolcontext].val = var_toolcontext; /* _toolcontext on <self:FlowVisitor> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 var = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var) on <var:FlowContext> */
-RET_LABEL3:(void)0;
-}
+((void (*)(val*))(var->class->vft[COLOR_kernel__Object__init]))(var) /* init on <var:FlowContext>*/;
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (self,var) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var; /* _current_flow_context on <self:FlowVisitor> */
-RET_LABEL4:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var7 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var7 == NULL)) {
+var5 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var5 = var7;
-RET_LABEL6:(void)0;
+var3 = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
-var10 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
-if (unlikely(var10 == NULL)) {
+var8 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var8 = var10;
-RET_LABEL9:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
 {
-array__Array__add(var5, var8); /* Direct call array#Array#add on <var5:Array[FlowContext]>*/
+array__Array__add(var3, var6); /* Direct call array#Array#add on <var3:Array[FlowContext]>*/
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
-var13 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
-if (unlikely(var13 == NULL)) {
+var11 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
-var14 = 1;
+var12 = 1;
 {
-{ /* Inline flow#FlowContext#is_start= (var11,var14) on <var11:FlowContext> */
-var11->attrs[COLOR_flow__FlowContext___is_start].s = var14; /* _is_start on <var11:FlowContext> */
-RET_LABEL15:(void)0;
+{ /* Inline flow#FlowContext#is_start= (var9,var12) on <var9:FlowContext> */
+var9->attrs[COLOR_flow__FlowContext___is_start].s = var12; /* _is_start on <var9:FlowContext> */
+RET_LABEL13:(void)0;
 }
 }
 RET_LABEL:;
@@ -380,7 +376,7 @@ RET_LABEL10:(void)0;
 var13 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var11 = var13;
@@ -423,7 +419,7 @@ if (var18){
 var26 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var24 = var26;
@@ -455,7 +451,7 @@ if (var28){
 var31 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var29 = var31;
@@ -474,7 +470,7 @@ RET_LABEL32:(void)0;
 var36 = var_flow->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_flow:FlowContext> */
 if (unlikely(var36 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
 var34 = var36;
@@ -504,7 +500,7 @@ var33 = var_;
 var46 = var_flow->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_flow:FlowContext> */
 if (unlikely(var46 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
 var44 = var46;
@@ -531,13 +527,12 @@ if (var33){
 {
 var53 = flow__FlowVisitor__make_sub_flow(self);
 }
-var53;
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
 var56 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var56 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var54 = var56;
@@ -618,7 +613,7 @@ RET_LABEL2:(void)0;
 }
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 77);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 74);
 show_backtrace(1);
 }
 var = var1;
@@ -642,7 +637,7 @@ val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
 var = var1;
@@ -658,7 +653,7 @@ val* var3 /* : Array[FlowContext] */;
 var3 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:Object(FlowVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
 var1 = var3;
@@ -673,61 +668,64 @@ val* flow__FlowVisitor__make_sub_flow(val* self) {
 val* var /* : FlowContext */;
 val* var1 /* : FlowContext */;
 val* var_flow /* var flow: FlowContext */;
-val* var3 /* : Array[FlowContext] */;
-val* var5 /* : Array[FlowContext] */;
-val* var6 /* : nullable ANode */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
+val* var2 /* : Array[FlowContext] */;
+val* var4 /* : Array[FlowContext] */;
+val* var5 /* : nullable ANode */;
+val* var7 /* : nullable ANode */;
+val* var9 /* : FlowContext */;
+val* var11 /* : FlowContext */;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var1) on <var1:FlowContext> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlowContext>*/;
 }
 var_flow = var1;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var5 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var5 == NULL)) {
+var4 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var2 = var4;
+RET_LABEL3:(void)0;
 }
 }
 {
-array__Array__add(var3, var_flow); /* Direct call array#Array#add on <var3:Array[FlowContext]>*/
+array__Array__add(var2, var_flow); /* Direct call array#Array#add on <var2:Array[FlowContext]>*/
 }
 {
-var6 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var7 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
 }
 {
-{ /* Inline flow#FlowContext#node= (var_flow,var6) on <var_flow:FlowContext> */
-var_flow->attrs[COLOR_flow__FlowContext___node].val = var6; /* _node on <var_flow:FlowContext> */
-RET_LABEL7:(void)0;
+{ /* Inline flow#FlowContext#node= (var_flow,var5) on <var_flow:FlowContext> */
+var_flow->attrs[COLOR_flow__FlowContext___node].val = var5; /* _node on <var_flow:FlowContext> */
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
-var10 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
-if (unlikely(var10 == NULL)) {
+var11 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var8 = var10;
-RET_LABEL9:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-flow__FlowContext__add_previous(var_flow, var8); /* Direct call flow#FlowContext#add_previous on <var_flow:FlowContext>*/
+flow__FlowContext__add_previous(var_flow, var9); /* Direct call flow#FlowContext#add_previous on <var_flow:FlowContext>*/
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (self,var_flow) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_flow; /* _current_flow_context on <self:FlowVisitor> */
-RET_LABEL11:(void)0;
+RET_LABEL12:(void)0;
 }
 }
 var = var_flow;
@@ -751,40 +749,43 @@ val* var_flow1 /* var flow1: FlowContext */;
 val* var_flow2 /* var flow2: FlowContext */;
 val* var1 /* : FlowContext */;
 val* var_flow /* var flow: FlowContext */;
-val* var3 /* : Array[FlowContext] */;
-val* var5 /* : Array[FlowContext] */;
-val* var6 /* : nullable ANode */;
+val* var2 /* : Array[FlowContext] */;
+val* var4 /* : Array[FlowContext] */;
+val* var5 /* : nullable ANode */;
+val* var7 /* : nullable ANode */;
 var_flow1 = p0;
 var_flow2 = p1;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var1) on <var1:FlowContext> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlowContext>*/;
 }
 var_flow = var1;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var5 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var5 == NULL)) {
+var4 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var2 = var4;
+RET_LABEL3:(void)0;
 }
 }
 {
-array__Array__add(var3, var_flow); /* Direct call array#Array#add on <var3:Array[FlowContext]>*/
+array__Array__add(var2, var_flow); /* Direct call array#Array#add on <var2:Array[FlowContext]>*/
 }
 {
-var6 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var7 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
 }
 {
-{ /* Inline flow#FlowContext#node= (var_flow,var6) on <var_flow:FlowContext> */
-var_flow->attrs[COLOR_flow__FlowContext___node].val = var6; /* _node on <var_flow:FlowContext> */
-RET_LABEL7:(void)0;
+{ /* Inline flow#FlowContext#node= (var_flow,var5) on <var_flow:FlowContext> */
+var_flow->attrs[COLOR_flow__FlowContext___node].val = var5; /* _node on <var_flow:FlowContext> */
+RET_LABEL8:(void)0;
 }
 }
 {
@@ -796,7 +797,7 @@ flow__FlowContext__add_previous(var_flow, var_flow2); /* Direct call flow#FlowCo
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (self,var_flow) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_flow; /* _current_flow_context on <self:FlowVisitor> */
-RET_LABEL8:(void)0;
+RET_LABEL9:(void)0;
 }
 }
 var = var_flow;
@@ -820,40 +821,43 @@ val* var_true_flow /* var true_flow: FlowContext */;
 val* var_false_flow /* var false_flow: FlowContext */;
 val* var1 /* : FlowContext */;
 val* var_flow /* var flow: FlowContext */;
-val* var3 /* : Array[FlowContext] */;
-val* var5 /* : Array[FlowContext] */;
-val* var6 /* : nullable ANode */;
+val* var2 /* : Array[FlowContext] */;
+val* var4 /* : Array[FlowContext] */;
+val* var5 /* : nullable ANode */;
+val* var7 /* : nullable ANode */;
 var_true_flow = p0;
 var_false_flow = p1;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var1) on <var1:FlowContext> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlowContext>*/;
 }
 var_flow = var1;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var5 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var5 == NULL)) {
+var4 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var2 = var4;
+RET_LABEL3:(void)0;
 }
 }
 {
-array__Array__add(var3, var_flow); /* Direct call array#Array#add on <var3:Array[FlowContext]>*/
+array__Array__add(var2, var_flow); /* Direct call array#Array#add on <var2:Array[FlowContext]>*/
 }
 {
-var6 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var7 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
 }
 {
-{ /* Inline flow#FlowContext#node= (var_flow,var6) on <var_flow:FlowContext> */
-var_flow->attrs[COLOR_flow__FlowContext___node].val = var6; /* _node on <var_flow:FlowContext> */
-RET_LABEL7:(void)0;
+{ /* Inline flow#FlowContext#node= (var_flow,var5) on <var_flow:FlowContext> */
+var_flow->attrs[COLOR_flow__FlowContext___node].val = var5; /* _node on <var_flow:FlowContext> */
+RET_LABEL8:(void)0;
 }
 }
 {
@@ -865,19 +869,19 @@ flow__FlowContext__add_previous(var_flow, var_false_flow); /* Direct call flow#F
 {
 { /* Inline flow#FlowContext#when_true= (var_flow,var_true_flow) on <var_flow:FlowContext> */
 var_flow->attrs[COLOR_flow__FlowContext___when_true].val = var_true_flow; /* _when_true on <var_flow:FlowContext> */
-RET_LABEL8:(void)0;
+RET_LABEL9:(void)0;
 }
 }
 {
 { /* Inline flow#FlowContext#when_false= (var_flow,var_false_flow) on <var_flow:FlowContext> */
 var_flow->attrs[COLOR_flow__FlowContext___when_false].val = var_false_flow; /* _when_false on <var_flow:FlowContext> */
-RET_LABEL9:(void)0;
+RET_LABEL10:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (self,var_flow) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_flow; /* _current_flow_context on <self:FlowVisitor> */
-RET_LABEL10:(void)0;
+RET_LABEL11:(void)0;
 }
 }
 var = var_flow;
@@ -902,31 +906,33 @@ val* var3 /* : FlowContext */;
 val* var_orig_flow /* var orig_flow: FlowContext */;
 val* var4 /* : FlowContext */;
 val* var_true_flow /* var true_flow: FlowContext */;
-val* var6 /* : Array[FlowContext] */;
-val* var8 /* : Array[FlowContext] */;
-val* var9 /* : nullable ANode */;
+val* var5 /* : Array[FlowContext] */;
+val* var7 /* : Array[FlowContext] */;
+val* var8 /* : nullable ANode */;
+val* var10 /* : nullable ANode */;
 static val* varonce;
-val* var11 /* : String */;
-char* var12 /* : NativeString */;
-long var13 /* : Int */;
-val* var14 /* : FlatString */;
-val* var16 /* : FlowContext */;
+val* var12 /* : String */;
+char* var13 /* : NativeString */;
+long var14 /* : Int */;
+val* var15 /* : FlatString */;
+val* var17 /* : FlowContext */;
 val* var_false_flow /* var false_flow: FlowContext */;
 val* var18 /* : Array[FlowContext] */;
 val* var20 /* : Array[FlowContext] */;
 val* var21 /* : nullable ANode */;
-static val* varonce23;
-val* var24 /* : String */;
-char* var25 /* : NativeString */;
-long var26 /* : Int */;
-val* var27 /* : FlatString */;
-val* var29 /* : FlowContext */;
+val* var23 /* : nullable ANode */;
+static val* varonce25;
+val* var26 /* : String */;
+char* var27 /* : NativeString */;
+long var28 /* : Int */;
+val* var29 /* : FlatString */;
+val* var31 /* : FlowContext */;
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
 var3 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var1 = var3;
@@ -936,66 +942,66 @@ RET_LABEL2:(void)0;
 var_orig_flow = var1;
 var4 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var4) on <var4:FlowContext> */
-RET_LABEL5:(void)0;
-}
+((void (*)(val*))(var4->class->vft[COLOR_kernel__Object__init]))(var4) /* init on <var4:FlowContext>*/;
 }
 var_true_flow = var4;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var8 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var8 == NULL)) {
+var7 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-array__Array__add(var6, var_true_flow); /* Direct call array#Array#add on <var6:Array[FlowContext]>*/
+array__Array__add(var5, var_true_flow); /* Direct call array#Array#add on <var5:Array[FlowContext]>*/
 }
 {
-var9 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var10 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var8 = var10;
+RET_LABEL9:(void)0;
+}
 }
 {
-{ /* Inline flow#FlowContext#node= (var_true_flow,var9) on <var_true_flow:FlowContext> */
-var_true_flow->attrs[COLOR_flow__FlowContext___node].val = var9; /* _node on <var_true_flow:FlowContext> */
-RET_LABEL10:(void)0;
+{ /* Inline flow#FlowContext#node= (var_true_flow,var8) on <var_true_flow:FlowContext> */
+var_true_flow->attrs[COLOR_flow__FlowContext___node].val = var8; /* _node on <var_true_flow:FlowContext> */
+RET_LABEL11:(void)0;
 }
 }
 {
 flow__FlowContext__add_previous(var_true_flow, var_orig_flow); /* Direct call flow#FlowContext#add_previous on <var_true_flow:FlowContext>*/
 }
 if (varonce) {
-var11 = varonce;
+var12 = varonce;
 } else {
-var12 = "TRUE";
-var13 = 4;
-var14 = string__NativeString__to_s_with_length(var12, var13);
-var11 = var14;
-varonce = var11;
+var13 = "TRUE";
+var14 = 4;
+var15 = string__NativeString__to_s_with_length(var13, var14);
+var12 = var15;
+varonce = var12;
 }
 {
-{ /* Inline flow#FlowContext#name= (var_true_flow,var11) on <var_true_flow:FlowContext> */
-var_true_flow->attrs[COLOR_flow__FlowContext___name].val = var11; /* _name on <var_true_flow:FlowContext> */
-RET_LABEL15:(void)0;
+{ /* Inline flow#FlowContext#name= (var_true_flow,var12) on <var_true_flow:FlowContext> */
+var_true_flow->attrs[COLOR_flow__FlowContext___name].val = var12; /* _name on <var_true_flow:FlowContext> */
+RET_LABEL16:(void)0;
 }
 }
-var16 = NEW_flow__FlowContext(&type_flow__FlowContext);
+var17 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var16) on <var16:FlowContext> */
-RET_LABEL17:(void)0;
+((void (*)(val*))(var17->class->vft[COLOR_kernel__Object__init]))(var17) /* init on <var17:FlowContext>*/;
 }
-}
-var_false_flow = var16;
+var_false_flow = var17;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
 var20 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1006,36 +1012,40 @@ RET_LABEL19:(void)0;
 array__Array__add(var18, var_false_flow); /* Direct call array#Array#add on <var18:Array[FlowContext]>*/
 }
 {
-var21 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var23 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var21 = var23;
+RET_LABEL22:(void)0;
+}
 }
 {
 { /* Inline flow#FlowContext#node= (var_false_flow,var21) on <var_false_flow:FlowContext> */
 var_false_flow->attrs[COLOR_flow__FlowContext___node].val = var21; /* _node on <var_false_flow:FlowContext> */
-RET_LABEL22:(void)0;
+RET_LABEL24:(void)0;
 }
 }
 {
 flow__FlowContext__add_previous(var_false_flow, var_orig_flow); /* Direct call flow#FlowContext#add_previous on <var_false_flow:FlowContext>*/
 }
-if (varonce23) {
-var24 = varonce23;
+if (varonce25) {
+var26 = varonce25;
 } else {
-var25 = "FALSE";
-var26 = 5;
-var27 = string__NativeString__to_s_with_length(var25, var26);
-var24 = var27;
-varonce23 = var24;
+var27 = "FALSE";
+var28 = 5;
+var29 = string__NativeString__to_s_with_length(var27, var28);
+var26 = var29;
+varonce25 = var26;
 }
 {
-{ /* Inline flow#FlowContext#name= (var_false_flow,var24) on <var_false_flow:FlowContext> */
-var_false_flow->attrs[COLOR_flow__FlowContext___name].val = var24; /* _name on <var_false_flow:FlowContext> */
-RET_LABEL28:(void)0;
+{ /* Inline flow#FlowContext#name= (var_false_flow,var26) on <var_false_flow:FlowContext> */
+var_false_flow->attrs[COLOR_flow__FlowContext___name].val = var26; /* _name on <var_false_flow:FlowContext> */
+RET_LABEL30:(void)0;
 }
 }
 {
-var29 = flow__FlowVisitor__make_true_false_flow(self, var_true_flow, var_false_flow);
+var31 = flow__FlowVisitor__make_true_false_flow(self, var_true_flow, var_false_flow);
 }
-var = var29;
+var = var31;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1054,69 +1064,72 @@ val* flow__FlowVisitor__make_unreachable_flow(val* self) {
 val* var /* : FlowContext */;
 val* var1 /* : FlowContext */;
 val* var_flow /* var flow: FlowContext */;
-val* var3 /* : Array[FlowContext] */;
-val* var5 /* : Array[FlowContext] */;
-val* var6 /* : nullable ANode */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
-short int var11 /* : Bool */;
+val* var2 /* : Array[FlowContext] */;
+val* var4 /* : Array[FlowContext] */;
+val* var5 /* : nullable ANode */;
+val* var7 /* : nullable ANode */;
+val* var9 /* : FlowContext */;
+val* var11 /* : FlowContext */;
+short int var12 /* : Bool */;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 {
-{ /* Inline flow#FlowContext#init (var1) on <var1:FlowContext> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:FlowContext>*/;
 }
 var_flow = var1;
 {
 { /* Inline flow#FlowVisitor#flows (self) on <self:FlowVisitor> */
-var5 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
-if (unlikely(var5 == NULL)) {
+var4 = self->attrs[COLOR_flow__FlowVisitor___flows].val; /* _flows on <self:FlowVisitor> */
+if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _flows");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 77);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var2 = var4;
+RET_LABEL3:(void)0;
 }
 }
 {
-array__Array__add(var3, var_flow); /* Direct call array#Array#add on <var3:Array[FlowContext]>*/
+array__Array__add(var2, var_flow); /* Direct call array#Array#add on <var2:Array[FlowContext]>*/
 }
 {
-var6 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:FlowVisitor> */
+var7 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:FlowVisitor> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
 }
 {
-{ /* Inline flow#FlowContext#node= (var_flow,var6) on <var_flow:FlowContext> */
-var_flow->attrs[COLOR_flow__FlowContext___node].val = var6; /* _node on <var_flow:FlowContext> */
-RET_LABEL7:(void)0;
+{ /* Inline flow#FlowContext#node= (var_flow,var5) on <var_flow:FlowContext> */
+var_flow->attrs[COLOR_flow__FlowContext___node].val = var5; /* _node on <var_flow:FlowContext> */
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
-var10 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
-if (unlikely(var10 == NULL)) {
+var11 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var8 = var10;
-RET_LABEL9:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-flow__FlowContext__add_previous(var_flow, var8); /* Direct call flow#FlowContext#add_previous on <var_flow:FlowContext>*/
+flow__FlowContext__add_previous(var_flow, var9); /* Direct call flow#FlowContext#add_previous on <var_flow:FlowContext>*/
 }
-var11 = 1;
+var12 = 1;
 {
-{ /* Inline flow#FlowContext#is_marked_unreachable= (var_flow,var11) on <var_flow:FlowContext> */
-var_flow->attrs[COLOR_flow__FlowContext___is_marked_unreachable].s = var11; /* _is_marked_unreachable on <var_flow:FlowContext> */
-RET_LABEL12:(void)0;
+{ /* Inline flow#FlowContext#is_marked_unreachable= (var_flow,var12) on <var_flow:FlowContext> */
+var_flow->attrs[COLOR_flow__FlowContext___is_marked_unreachable].s = var12; /* _is_marked_unreachable on <var_flow:FlowContext> */
+RET_LABEL13:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (self,var_flow) on <self:FlowVisitor> */
 self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_flow; /* _current_flow_context on <self:FlowVisitor> */
-RET_LABEL13:(void)0;
+RET_LABEL14:(void)0;
 }
 }
 var = var_flow;
@@ -1143,19 +1156,21 @@ short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
 short int var4 /* : Bool */;
 short int var6 /* : Bool */;
-val* var7 /* : Array[AContinueExpr] */;
-val* var9 /* : Array[AContinueExpr] */;
+val* var7 /* : Array[AEscapeExpr] */;
+val* var9 /* : Array[AEscapeExpr] */;
+val* var_ /* var : Array[AEscapeExpr] */;
 val* var10 /* : ArrayIterator[nullable Object] */;
-short int var11 /* : Bool */;
-val* var12 /* : nullable Object */;
-val* var_b /* var b: AContinueExpr */;
-val* var13 /* : nullable FlowContext */;
+val* var_11 /* var : ArrayIterator[AEscapeExpr] */;
+short int var12 /* : Bool */;
+val* var13 /* : nullable Object */;
+val* var_b /* var b: AEscapeExpr */;
+val* var14 /* : nullable FlowContext */;
 val* var_before /* var before: nullable FlowContext */;
-val* var14 /* : null */;
-short int var15 /* : Bool */;
+val* var15 /* : null */;
 short int var16 /* : Bool */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
+short int var17 /* : Bool */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
 var_before_loop = p0;
 var_escapemark = p1;
 var = NULL;
@@ -1186,69 +1201,79 @@ goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline scope#EscapeMark#continues (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var9 = var_escapemark->attrs[COLOR_scope__EscapeMark___continues].val; /* _continues on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+{ /* Inline scope#EscapeMark#escapes (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+var9 = var_escapemark->attrs[COLOR_scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
 if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _continues");
-PRINT_ERROR(" (%s:%d)\n", "src/scope.nit", 53);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escapes");
+PRINT_ERROR(" (%s:%d)\n", "semantize/scope.nit", 57);
 show_backtrace(1);
 }
 var7 = var9;
 RET_LABEL8:(void)0;
 }
 }
+var_ = var7;
 {
-var10 = array__AbstractArrayRead__iterator(var7);
+var10 = array__AbstractArrayRead__iterator(var_);
 }
+var_11 = var10;
 for(;;) {
 {
-var11 = array__ArrayIterator__is_ok(var10);
+var12 = array__ArrayIterator__is_ok(var_11);
 }
-if(!var11) break;
+if (var12){
 {
-var12 = array__ArrayIterator__item(var10);
+var13 = array__ArrayIterator__item(var_11);
 }
-var_b = var12;
+var_b = var13;
 {
-var13 = flow__AContinueExpr__before_flow_context(var_b);
+var14 = flow__AEscapeExpr__before_flow_context(var_b);
 }
-var_before = var13;
-var14 = NULL;
+var_before = var14;
+var15 = NULL;
 if (var_before == NULL) {
-var15 = 1; /* is null */
+var16 = 1; /* is null */
 } else {
-var15 = 0; /* arg is null but recv is not */
+var16 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_before,var14) on <var_before:nullable FlowContext> */
-var_other = var14;
+{ /* Inline kernel#Object#== (var_before,var15) on <var_before:nullable FlowContext> */
+var_other = var15;
 {
 { /* Inline kernel#Object#is_same_instance (var_before,var_other) on <var_before:nullable FlowContext(FlowContext)> */
-var20 = var_before == var_other;
-var18 = var20;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var21 = var_before == var_other;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-var16 = var18;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
-var15 = var16;
+var16 = var17;
 }
-if (var15){
-goto CONTINUE_label;
+if (var16){
+goto BREAK_label;
 } else {
 }
 {
 flow__FlowContext__add_loop(var_before_loop, var_before); /* Direct call flow#FlowContext#add_loop on <var_before_loop:FlowContext>*/
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var10); /* Direct call array#ArrayIterator#next on <var10:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
+{
+array__ArrayIterator__next(var_11); /* Direct call array#ArrayIterator#next on <var_11:ArrayIterator[AEscapeExpr]>*/
+}
+} else {
+goto BREAK_label22;
+}
+}
+BREAK_label22: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_11) on <var_11:ArrayIterator[AEscapeExpr]> */
+RET_LABEL23:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method flow#FlowVisitor#merge_continues_to for (self: Object, FlowContext, nullable EscapeMark) */
@@ -1265,22 +1290,24 @@ short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
 short int var4 /* : Bool */;
 short int var6 /* : Bool */;
-val* var7 /* : Array[ABreakExpr] */;
-val* var9 /* : Array[ABreakExpr] */;
+val* var7 /* : Array[AEscapeExpr] */;
+val* var9 /* : Array[AEscapeExpr] */;
+val* var_ /* var : Array[AEscapeExpr] */;
 val* var10 /* : ArrayIterator[nullable Object] */;
-short int var11 /* : Bool */;
-val* var12 /* : nullable Object */;
-val* var_b /* var b: ABreakExpr */;
-val* var13 /* : nullable FlowContext */;
+val* var_11 /* var : ArrayIterator[AEscapeExpr] */;
+short int var12 /* : Bool */;
+val* var13 /* : nullable Object */;
+val* var_b /* var b: AEscapeExpr */;
+val* var14 /* : nullable FlowContext */;
 val* var_before /* var before: nullable FlowContext */;
-val* var14 /* : null */;
-short int var15 /* : Bool */;
+val* var15 /* : null */;
 short int var16 /* : Bool */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
-val* var21 /* : FlowContext */;
-val* var23 /* : FlowContext */;
+short int var17 /* : Bool */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+val* var22 /* : FlowContext */;
 val* var24 /* : FlowContext */;
+val* var25 /* : FlowContext */;
 var_escapemark = p0;
 var = NULL;
 if (var_escapemark == NULL) {
@@ -1310,82 +1337,91 @@ goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline scope#EscapeMark#breaks (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var9 = var_escapemark->attrs[COLOR_scope__EscapeMark___breaks].val; /* _breaks on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+{ /* Inline scope#EscapeMark#escapes (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+var9 = var_escapemark->attrs[COLOR_scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
 if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _breaks");
-PRINT_ERROR(" (%s:%d)\n", "src/scope.nit", 56);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escapes");
+PRINT_ERROR(" (%s:%d)\n", "semantize/scope.nit", 57);
 show_backtrace(1);
 }
 var7 = var9;
 RET_LABEL8:(void)0;
 }
 }
+var_ = var7;
 {
-var10 = array__AbstractArrayRead__iterator(var7);
+var10 = array__AbstractArrayRead__iterator(var_);
 }
+var_11 = var10;
 for(;;) {
 {
-var11 = array__ArrayIterator__is_ok(var10);
+var12 = array__ArrayIterator__is_ok(var_11);
 }
-if(!var11) break;
+if (var12){
 {
-var12 = array__ArrayIterator__item(var10);
+var13 = array__ArrayIterator__item(var_11);
 }
-var_b = var12;
+var_b = var13;
 {
-var13 = flow__ABreakExpr__before_flow_context(var_b);
+var14 = flow__AEscapeExpr__before_flow_context(var_b);
 }
-var_before = var13;
-var14 = NULL;
+var_before = var14;
+var15 = NULL;
 if (var_before == NULL) {
-var15 = 1; /* is null */
+var16 = 1; /* is null */
 } else {
-var15 = 0; /* arg is null but recv is not */
+var16 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_before,var14) on <var_before:nullable FlowContext> */
-var_other = var14;
+{ /* Inline kernel#Object#== (var_before,var15) on <var_before:nullable FlowContext> */
+var_other = var15;
 {
 { /* Inline kernel#Object#is_same_instance (var_before,var_other) on <var_before:nullable FlowContext(FlowContext)> */
-var20 = var_before == var_other;
-var18 = var20;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var21 = var_before == var_other;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-var16 = var18;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
-var15 = var16;
+var16 = var17;
 }
-if (var15){
-goto CONTINUE_label;
+if (var16){
+goto BREAK_label;
 } else {
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (self) on <self:FlowVisitor> */
-var23 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
-if (unlikely(var23 == NULL)) {
+var24 = self->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <self:FlowVisitor> */
+if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var21 = var23;
-RET_LABEL22:(void)0;
+var22 = var24;
+RET_LABEL23:(void)0;
 }
 }
 {
-var24 = flow__FlowVisitor__make_merge_flow(self, var21, var_before);
-}
-var24;
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var10); /* Direct call array#ArrayIterator#next on <var10:ArrayIterator[nullable Object]>*/
-}
+var25 = flow__FlowVisitor__make_merge_flow(self, var22, var_before);
 }
 BREAK_label: (void)0;
+{
+array__ArrayIterator__next(var_11); /* Direct call array#ArrayIterator#next on <var_11:ArrayIterator[AEscapeExpr]>*/
+}
+} else {
+goto BREAK_label26;
+}
+}
+BREAK_label26: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_11) on <var_11:ArrayIterator[AEscapeExpr]> */
+RET_LABEL27:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method flow#FlowVisitor#merge_breaks for (self: Object, nullable EscapeMark) */
@@ -1400,7 +1436,7 @@ val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var = var1;
@@ -1416,7 +1452,7 @@ val* var3 /* : Array[FlowContext] */;
 var3 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:Object(FlowContext)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1433,7 +1469,7 @@ val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowContext___loops].val; /* _loops on <self:FlowContext> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _loops");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 195);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 192);
 show_backtrace(1);
 }
 var = var1;
@@ -1449,7 +1485,7 @@ val* var3 /* : Array[FlowContext] */;
 var3 = self->attrs[COLOR_flow__FlowContext___loops].val; /* _loops on <self:Object(FlowContext)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _loops");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 195);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 192);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1507,12 +1543,13 @@ short int var8 /* : Bool */;
 val* var9 /* : Array[FlowContext] */;
 val* var11 /* : Array[FlowContext] */;
 long var12 /* : Int */;
-long var13 /* : Int */;
-short int var14 /* : Bool */;
-short int var15 /* : Bool */;
+long var14 /* : Int */;
+long var15 /* : Int */;
+short int var16 /* : Bool */;
 short int var17 /* : Bool */;
-short int var18 /* : Bool */;
 short int var19 /* : Bool */;
+short int var20 /* : Bool */;
+short int var21 /* : Bool */;
 {
 { /* Inline flow#FlowContext#is_marked_unreachable (self) on <self:FlowContext> */
 var3 = self->attrs[COLOR_flow__FlowContext___is_marked_unreachable].s; /* _is_marked_unreachable on <self:FlowContext> */
@@ -1544,7 +1581,7 @@ goto RET_LABEL;
 var11 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var9 = var11;
@@ -1552,26 +1589,30 @@ RET_LABEL10:(void)0;
 }
 }
 {
-var12 = array__AbstractArrayRead__length(var9);
+{ /* Inline array#AbstractArrayRead#length (var9) on <var9:Array[FlowContext]> */
+var14 = var9->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var9:Array[FlowContext]> */
+var12 = var14;
+RET_LABEL13:(void)0;
 }
-var13 = 0;
+}
+var15 = 0;
 {
-{ /* Inline kernel#Int#== (var12,var13) on <var12:Int> */
-var17 = var12 == var13;
-var15 = var17;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
+{ /* Inline kernel#Int#== (var12,var15) on <var12:Int> */
+var19 = var12 == var15;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
-var14 = var15;
+var16 = var17;
 }
-if (var14){
-var18 = 1;
-var = var18;
+if (var16){
+var20 = 1;
+var = var20;
 goto RET_LABEL;
 } else {
 }
-var19 = 0;
-var = var19;
+var21 = 0;
+var = var21;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1713,7 +1754,7 @@ val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <self:FlowContext> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
 var = var1;
@@ -1729,7 +1770,7 @@ val* var3 /* : FlowContext */;
 var3 = self->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <self:Object(FlowContext)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1759,7 +1800,7 @@ val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <self:FlowContext> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
 var = var1;
@@ -1775,7 +1816,7 @@ val* var3 /* : FlowContext */;
 var3 = self->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <self:Object(FlowContext)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
 var1 = var3;
@@ -1823,7 +1864,7 @@ if (var2){
 var5 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var3 = var5;
@@ -1844,7 +1885,7 @@ if (var){
 var10 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var8 = var10;
@@ -1888,7 +1929,7 @@ if (var2){
 var5 = self->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var3 = var5;
@@ -1909,7 +1950,7 @@ if (var){
 var10 = self->attrs[COLOR_flow__FlowContext___loops].val; /* _loops on <self:FlowContext> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _loops");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 195);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 192);
 show_backtrace(1);
 }
 var8 = var10;
@@ -1926,17 +1967,6 @@ RET_LABEL:;
 /* method flow#FlowContext#add_loop for (self: Object, FlowContext) */
 void VIRTUAL_flow__FlowContext__add_loop(val* self, val* p0) {
 flow__FlowContext__add_loop(self, p0); /* Direct call flow#FlowContext#add_loop on <self:Object(FlowContext)>*/
-RET_LABEL:;
-}
-/* method flow#FlowContext#init for (self: FlowContext) */
-void flow__FlowContext__init(val* self) {
-RET_LABEL:;
-}
-/* method flow#FlowContext#init for (self: Object) */
-void VIRTUAL_flow__FlowContext__init(val* self) {
-{ /* Inline flow#FlowContext#init (self) on <self:Object(FlowContext)> */
-RET_LABEL1:(void)0;
-}
 RET_LABEL:;
 }
 /* method flow#ANode#accept_flow_visitor for (self: ANode, FlowVisitor) */
@@ -2013,7 +2043,7 @@ var_v = p0;
 var2 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var = var2;
@@ -2034,7 +2064,7 @@ RET_LABEL3:(void)0;
 var6 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
 var4 = var6;
@@ -2143,152 +2173,163 @@ void flow__ABlockExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : ANodes[AExpr] */;
 val* var2 /* : ANodes[AExpr] */;
+val* var_ /* var : ANodes[AExpr] */;
 val* var3 /* : Iterator[ANode] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
+val* var_4 /* var : Iterator[AExpr] */;
+short int var5 /* : Bool */;
+val* var6 /* : nullable Object */;
 val* var_e /* var e: AExpr */;
-val* var6 /* : FlowContext */;
-val* var8 /* : FlowContext */;
-short int var9 /* : Bool */;
+val* var7 /* : FlowContext */;
+val* var9 /* : FlowContext */;
 short int var10 /* : Bool */;
-val* var11 /* : FlowContext */;
-val* var13 /* : FlowContext */;
-short int var14 /* : Bool */;
-short int var16 /* : Bool */;
+short int var11 /* : Bool */;
+val* var12 /* : FlowContext */;
+val* var14 /* : FlowContext */;
+short int var15 /* : Bool */;
 short int var17 /* : Bool */;
-val* var18 /* : FlowContext */;
-val* var20 /* : FlowContext */;
-short int var21 /* : Bool */;
-val* var23 /* : ToolContext */;
-val* var25 /* : ToolContext */;
-val* var26 /* : Location */;
+short int var18 /* : Bool */;
+val* var19 /* : FlowContext */;
+val* var21 /* : FlowContext */;
+short int var22 /* : Bool */;
+val* var24 /* : ToolContext */;
+val* var26 /* : ToolContext */;
+val* var27 /* : Location */;
 static val* varonce;
-val* var27 /* : String */;
-char* var28 /* : NativeString */;
-long var29 /* : Int */;
-val* var30 /* : FlatString */;
+val* var28 /* : String */;
+char* var29 /* : NativeString */;
+long var30 /* : Int */;
+val* var31 /* : FlatString */;
 var_v = p0;
 {
 { /* Inline parser_nodes#ABlockExpr#n_expr (self) on <self:ABlockExpr> */
 var2 = self->attrs[COLOR_parser_nodes__ABlockExpr___n_expr].val; /* _n_expr on <self:ABlockExpr> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_nodes.nit", 1424);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1321);
 show_backtrace(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
+var_ = var;
 {
-var3 = parser_nodes__ANodes__iterator(var);
+var3 = parser_nodes__ANodes__iterator(var_);
 }
+var_4 = var3;
 for(;;) {
 {
-var4 = ((short int (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var3) /* is_ok on <var3:Iterator[ANode]>*/;
+var5 = ((short int (*)(val*))(var_4->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_4) /* is_ok on <var_4:Iterator[AExpr]>*/;
 }
-if(!var4) break;
+if (var5){
 {
-var5 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__item]))(var3) /* item on <var3:Iterator[ANode]>*/;
+var6 = ((val* (*)(val*))(var_4->class->vft[COLOR_abstract_collection__Iterator__item]))(var_4) /* item on <var_4:Iterator[AExpr]>*/;
 }
-var_e = var5;
+var_e = var6;
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var8 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var8 == NULL)) {
+var9 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
 {
-var9 = flow__FlowContext__is_unreachable(var6);
+var10 = flow__FlowContext__is_unreachable(var7);
 }
-var10 = !var9;
-if (var10){
+var11 = !var10;
+if (var11){
 {
 parser_nodes__Visitor__enter_visit(var_v, var_e); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 } else {
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var13 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var13 == NULL)) {
+var14 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowContext#is_already_unreachable (var11) on <var11:FlowContext> */
-var16 = var11->attrs[COLOR_flow__FlowContext___is_already_unreachable].s; /* _is_already_unreachable on <var11:FlowContext> */
-var14 = var16;
-RET_LABEL15:(void)0;
+{ /* Inline flow#FlowContext#is_already_unreachable (var12) on <var12:FlowContext> */
+var17 = var12->attrs[COLOR_flow__FlowContext___is_already_unreachable].s; /* _is_already_unreachable on <var12:FlowContext> */
+var15 = var17;
+RET_LABEL16:(void)0;
 }
 }
-var17 = !var14;
-if (var17){
+var18 = !var15;
+if (var18){
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var20 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var20 == NULL)) {
+var21 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var18 = var20;
-RET_LABEL19:(void)0;
+var19 = var21;
+RET_LABEL20:(void)0;
 }
 }
-var21 = 1;
+var22 = 1;
 {
-{ /* Inline flow#FlowContext#is_already_unreachable= (var18,var21) on <var18:FlowContext> */
-var18->attrs[COLOR_flow__FlowContext___is_already_unreachable].s = var21; /* _is_already_unreachable on <var18:FlowContext> */
-RET_LABEL22:(void)0;
+{ /* Inline flow#FlowContext#is_already_unreachable= (var19,var22) on <var19:FlowContext> */
+var19->attrs[COLOR_flow__FlowContext___is_already_unreachable].s = var22; /* _is_already_unreachable on <var19:FlowContext> */
+RET_LABEL23:(void)0;
 }
 }
 {
 { /* Inline flow#FlowVisitor#toolcontext (var_v) on <var_v:FlowVisitor> */
-var25 = var_v->attrs[COLOR_flow__FlowVisitor___toolcontext].val; /* _toolcontext on <var_v:FlowVisitor> */
-if (unlikely(var25 == NULL)) {
+var26 = var_v->attrs[COLOR_flow__FlowVisitor___toolcontext].val; /* _toolcontext on <var_v:FlowVisitor> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 41);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 38);
 show_backtrace(1);
 }
-var23 = var25;
-RET_LABEL24:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var26 = parser_nodes__ANode__hot_location(var_e);
+var27 = parser_nodes__ANode__hot_location(var_e);
 }
 if (varonce) {
-var27 = varonce;
+var28 = varonce;
 } else {
-var28 = "Error: unreachable statement.";
-var29 = 29;
-var30 = string__NativeString__to_s_with_length(var28, var29);
-var27 = var30;
-varonce = var27;
+var29 = "Error: unreachable statement.";
+var30 = 29;
+var31 = string__NativeString__to_s_with_length(var29, var30);
+var28 = var31;
+varonce = var28;
 }
 {
-toolcontext__ToolContext__error(var23, var26, var27); /* Direct call toolcontext#ToolContext#error on <var23:ToolContext>*/
+toolcontext__ToolContext__error(var24, var27, var28); /* Direct call toolcontext#ToolContext#error on <var24:ToolContext>*/
 }
 } else {
 }
 }
-CONTINUE_label: (void)0;
 {
-((void (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__next]))(var3) /* next on <var3:Iterator[ANode]>*/;
+((void (*)(val*))(var_4->class->vft[COLOR_abstract_collection__Iterator__next]))(var_4) /* next on <var_4:Iterator[AExpr]>*/;
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_4) on <var_4:Iterator[AExpr]> */
+RET_LABEL32:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method flow#ABlockExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -2307,7 +2348,6 @@ var_v = p0;
 {
 var = flow__FlowVisitor__make_unreachable_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
 /* method flow#AReturnExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -2315,8 +2355,8 @@ void VIRTUAL_flow__AReturnExpr__accept_flow_visitor(val* self, val* p0) {
 flow__AReturnExpr__accept_flow_visitor(self, p0); /* Direct call flow#AReturnExpr#accept_flow_visitor on <self:Object(AReturnExpr)>*/
 RET_LABEL:;
 }
-/* method flow#AContinueExpr#before_flow_context for (self: AContinueExpr): nullable FlowContext */
-val* flow__AContinueExpr__before_flow_context(val* self) {
+/* method flow#AEscapeExpr#before_flow_context for (self: AEscapeExpr): nullable FlowContext */
+val* flow__AEscapeExpr__before_flow_context(val* self) {
 val* var /* : nullable FlowContext */;
 val* var1 /* : nullable FlowContext */;
 val* var3 /* : nullable FlowContext */;
@@ -2332,8 +2372,8 @@ val* var12 /* : Array[FlowContext] */;
 val* var14 /* : Array[FlowContext] */;
 val* var15 /* : nullable Object */;
 {
-{ /* Inline flow#AExpr#after_flow_context (self) on <self:AContinueExpr> */
-var3 = self->attrs[COLOR_flow__AExpr___after_flow_context].val; /* _after_flow_context on <self:AContinueExpr> */
+{ /* Inline flow#AExpr#after_flow_context (self) on <self:AEscapeExpr> */
+var3 = self->attrs[COLOR_flow__AExpr___after_flow_context].val; /* _after_flow_context on <self:AEscapeExpr> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
@@ -2373,7 +2413,7 @@ goto RET_LABEL;
 var14 = var_after->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <var_after:nullable FlowContext(FlowContext)> */
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 189);
 show_backtrace(1);
 }
 var12 = var14;
@@ -2388,133 +2428,31 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method flow#AContinueExpr#before_flow_context for (self: Object): nullable FlowContext */
-val* VIRTUAL_flow__AContinueExpr__before_flow_context(val* self) {
+/* method flow#AEscapeExpr#before_flow_context for (self: Object): nullable FlowContext */
+val* VIRTUAL_flow__AEscapeExpr__before_flow_context(val* self) {
 val* var /* : nullable FlowContext */;
 val* var1 /* : nullable FlowContext */;
-var1 = flow__AContinueExpr__before_flow_context(self);
+var1 = flow__AEscapeExpr__before_flow_context(self);
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method flow#AContinueExpr#accept_flow_visitor for (self: AContinueExpr, FlowVisitor) */
-void flow__AContinueExpr__accept_flow_visitor(val* self, val* p0) {
+/* method flow#AEscapeExpr#accept_flow_visitor for (self: AEscapeExpr, FlowVisitor) */
+void flow__AEscapeExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : FlowContext */;
 var_v = p0;
 {
-((void (*)(val*, val*))(self->class->vft[COLOR_flow__AContinueExpr__accept_flow_visitor]))(self, p0) /* accept_flow_visitor on <self:AContinueExpr>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_flow__AEscapeExpr__accept_flow_visitor]))(self, p0) /* accept_flow_visitor on <self:AEscapeExpr>*/;
 }
 {
 var = flow__FlowVisitor__make_unreachable_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
-/* method flow#AContinueExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AContinueExpr__accept_flow_visitor(val* self, val* p0) {
-flow__AContinueExpr__accept_flow_visitor(self, p0); /* Direct call flow#AContinueExpr#accept_flow_visitor on <self:Object(AContinueExpr)>*/
-RET_LABEL:;
-}
-/* method flow#ABreakExpr#before_flow_context for (self: ABreakExpr): nullable FlowContext */
-val* flow__ABreakExpr__before_flow_context(val* self) {
-val* var /* : nullable FlowContext */;
-val* var1 /* : nullable FlowContext */;
-val* var3 /* : nullable FlowContext */;
-val* var_after /* var after: nullable FlowContext */;
-val* var4 /* : null */;
-short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-val* var_other /* var other: nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : null */;
-val* var12 /* : Array[FlowContext] */;
-val* var14 /* : Array[FlowContext] */;
-val* var15 /* : nullable Object */;
-{
-{ /* Inline flow#AExpr#after_flow_context (self) on <self:ABreakExpr> */
-var3 = self->attrs[COLOR_flow__AExpr___after_flow_context].val; /* _after_flow_context on <self:ABreakExpr> */
-var1 = var3;
-RET_LABEL2:(void)0;
-}
-}
-var_after = var1;
-var4 = NULL;
-if (var_after == NULL) {
-var5 = 1; /* is null */
-} else {
-var5 = 0; /* arg is null but recv is not */
-}
-if (0) {
-{ /* Inline kernel#Object#== (var_after,var4) on <var_after:nullable FlowContext> */
-var_other = var4;
-{
-{ /* Inline kernel#Object#is_same_instance (var_after,var_other) on <var_after:nullable FlowContext(FlowContext)> */
-var10 = var_after == var_other;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
-}
-}
-var6 = var8;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
-}
-var5 = var6;
-}
-if (var5){
-var11 = NULL;
-var = var11;
-goto RET_LABEL;
-} else {
-}
-{
-{ /* Inline flow#FlowContext#previous (var_after) on <var_after:nullable FlowContext(FlowContext)> */
-var14 = var_after->attrs[COLOR_flow__FlowContext___previous].val; /* _previous on <var_after:nullable FlowContext(FlowContext)> */
-if (unlikely(var14 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 192);
-show_backtrace(1);
-}
-var12 = var14;
-RET_LABEL13:(void)0;
-}
-}
-{
-var15 = abstract_collection__SequenceRead__first(var12);
-}
-var = var15;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method flow#ABreakExpr#before_flow_context for (self: Object): nullable FlowContext */
-val* VIRTUAL_flow__ABreakExpr__before_flow_context(val* self) {
-val* var /* : nullable FlowContext */;
-val* var1 /* : nullable FlowContext */;
-var1 = flow__ABreakExpr__before_flow_context(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method flow#ABreakExpr#accept_flow_visitor for (self: ABreakExpr, FlowVisitor) */
-void flow__ABreakExpr__accept_flow_visitor(val* self, val* p0) {
-val* var_v /* var v: FlowVisitor */;
-val* var /* : FlowContext */;
-var_v = p0;
-{
-((void (*)(val*, val*))(self->class->vft[COLOR_flow__ABreakExpr__accept_flow_visitor]))(self, p0) /* accept_flow_visitor on <self:ABreakExpr>*/;
-}
-{
-var = flow__FlowVisitor__make_unreachable_flow(var_v);
-}
-var;
-RET_LABEL:;
-}
-/* method flow#ABreakExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__ABreakExpr__accept_flow_visitor(val* self, val* p0) {
-flow__ABreakExpr__accept_flow_visitor(self, p0); /* Direct call flow#ABreakExpr#accept_flow_visitor on <self:Object(ABreakExpr)>*/
+/* method flow#AEscapeExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
+void VIRTUAL_flow__AEscapeExpr__accept_flow_visitor(val* self, val* p0) {
+flow__AEscapeExpr__accept_flow_visitor(self, p0); /* Direct call flow#AEscapeExpr#accept_flow_visitor on <self:Object(AEscapeExpr)>*/
 RET_LABEL:;
 }
 /* method flow#AAbortExpr#accept_flow_visitor for (self: AAbortExpr, FlowVisitor) */
@@ -2528,7 +2466,6 @@ var_v = p0;
 {
 var = flow__FlowVisitor__make_unreachable_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
 /* method flow#AAbortExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -2546,8 +2483,8 @@ var_v = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_flow__ADoExpr__accept_flow_visitor]))(self, p0) /* accept_flow_visitor on <self:ADoExpr>*/;
 }
 {
-{ /* Inline scope#ADoExpr#escapemark (self) on <self:ADoExpr> */
-var2 = self->attrs[COLOR_scope__ADoExpr___escapemark].val; /* _escapemark on <self:ADoExpr> */
+{ /* Inline scope#ADoExpr#break_mark (self) on <self:ADoExpr> */
+var2 = self->attrs[COLOR_scope__ADoExpr___break_mark].val; /* _break_mark on <self:ADoExpr> */
 var = var2;
 RET_LABEL1:(void)0;
 }
@@ -2566,314 +2503,88 @@ RET_LABEL:;
 void flow__AIfExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
-val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
-val* var4 /* : FlowContext */;
-val* var6 /* : nullable AExpr */;
-val* var7 /* : FlowContext */;
-val* var9 /* : FlowContext */;
-val* var_after_then /* var after_then: FlowContext */;
-val* var10 /* : FlowContext */;
-val* var12 /* : FlowContext */;
-val* var14 /* : nullable AExpr */;
-val* var15 /* : FlowContext */;
-val* var17 /* : FlowContext */;
-val* var_after_else /* var after_else: FlowContext */;
-val* var18 /* : FlowContext */;
-var_v = p0;
-{
-var = parser_nodes__AIfExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
-show_backtrace(1);
-}
-var2 = var4;
-RET_LABEL3:(void)0;
-}
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL5:(void)0;
-}
-}
-{
-var6 = parser_nodes__AIfExpr__n_then(self);
-}
-{
-parser_nodes__Visitor__enter_visit(var_v, var6); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var9 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
-show_backtrace(1);
-}
-var7 = var9;
-RET_LABEL8:(void)0;
-}
-}
-var_after_then = var7;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var12 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
-if (unlikely(var12 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
-show_backtrace(1);
-}
-var10 = var12;
-RET_LABEL11:(void)0;
-}
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var10) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var10; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL13:(void)0;
-}
-}
-{
-var14 = parser_nodes__AIfExpr__n_else(self);
-}
-{
-parser_nodes__Visitor__enter_visit(var_v, var14); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var17 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var17 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
-show_backtrace(1);
-}
-var15 = var17;
-RET_LABEL16:(void)0;
-}
-}
-var_after_else = var15;
-{
-var18 = flow__FlowVisitor__make_merge_flow(var_v, var_after_then, var_after_else);
-}
-var18;
-RET_LABEL:;
-}
-/* method flow#AIfExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AIfExpr__accept_flow_visitor(val* self, val* p0) {
-flow__AIfExpr__accept_flow_visitor(self, p0); /* Direct call flow#AIfExpr#accept_flow_visitor on <self:Object(AIfExpr)>*/
-RET_LABEL:;
-}
-/* method flow#AIfexprExpr#accept_flow_visitor for (self: AIfexprExpr, FlowVisitor) */
-void flow__AIfexprExpr__accept_flow_visitor(val* self, val* p0) {
-val* var_v /* var v: FlowVisitor */;
-val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
-val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
-val* var4 /* : FlowContext */;
-val* var6 /* : AExpr */;
-val* var7 /* : FlowContext */;
-val* var9 /* : FlowContext */;
-val* var_after_then /* var after_then: FlowContext */;
-val* var10 /* : FlowContext */;
-val* var12 /* : FlowContext */;
-val* var14 /* : AExpr */;
-val* var15 /* : FlowContext */;
-val* var17 /* : FlowContext */;
-val* var_after_else /* var after_else: FlowContext */;
-val* var18 /* : FlowContext */;
-var_v = p0;
-{
-var = parser_nodes__AIfexprExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
-show_backtrace(1);
-}
-var2 = var4;
-RET_LABEL3:(void)0;
-}
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL5:(void)0;
-}
-}
-{
-var6 = parser_nodes__AIfexprExpr__n_then(self);
-}
-{
-parser_nodes__Visitor__enter_visit(var_v, var6); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var9 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
-show_backtrace(1);
-}
-var7 = var9;
-RET_LABEL8:(void)0;
-}
-}
-var_after_then = var7;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var12 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
-if (unlikely(var12 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
-show_backtrace(1);
-}
-var10 = var12;
-RET_LABEL11:(void)0;
-}
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var10) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var10; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL13:(void)0;
-}
-}
-{
-var14 = parser_nodes__AIfexprExpr__n_else(self);
-}
-{
-parser_nodes__Visitor__enter_visit(var_v, var14); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var17 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var17 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
-show_backtrace(1);
-}
-var15 = var17;
-RET_LABEL16:(void)0;
-}
-}
-var_after_else = var15;
-{
-var18 = flow__FlowVisitor__make_merge_flow(var_v, var_after_then, var_after_else);
-}
-var18;
-RET_LABEL:;
-}
-/* method flow#AIfexprExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AIfexprExpr__accept_flow_visitor(val* self, val* p0) {
-flow__AIfexprExpr__accept_flow_visitor(self, p0); /* Direct call flow#AIfexprExpr#accept_flow_visitor on <self:Object(AIfexprExpr)>*/
-RET_LABEL:;
-}
-/* method flow#AWhileExpr#accept_flow_visitor for (self: AWhileExpr, FlowVisitor) */
-void flow__AWhileExpr__accept_flow_visitor(val* self, val* p0) {
-val* var_v /* var v: FlowVisitor */;
-val* var /* : FlowContext */;
-val* var_before_loop /* var before_loop: FlowContext */;
-val* var1 /* : AExpr */;
-val* var2 /* : FlowContext */;
-val* var_after_expr /* var after_expr: FlowContext */;
+val* var2 /* : AExpr */;
 val* var3 /* : FlowContext */;
-val* var5 /* : FlowContext */;
-val* var7 /* : nullable AExpr */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
-val* var_after_block /* var after_block: FlowContext */;
-val* var11 /* : nullable EscapeMark */;
-val* var13 /* : nullable EscapeMark */;
+val* var_after_expr /* var after_expr: FlowContext */;
+val* var4 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : nullable AExpr */;
+val* var10 /* : nullable AExpr */;
+val* var11 /* : FlowContext */;
+val* var13 /* : FlowContext */;
+val* var_after_then /* var after_then: FlowContext */;
 val* var14 /* : FlowContext */;
 val* var16 /* : FlowContext */;
-val* var18 /* : nullable EscapeMark */;
-val* var20 /* : nullable EscapeMark */;
+val* var18 /* : nullable AExpr */;
+val* var20 /* : nullable AExpr */;
+val* var21 /* : FlowContext */;
+val* var23 /* : FlowContext */;
+val* var_after_else /* var after_else: FlowContext */;
+val* var24 /* : FlowContext */;
 var_v = p0;
 {
-var = flow__FlowVisitor__make_sub_flow(var_v);
+{ /* Inline parser_nodes#AIfExpr#n_expr (self) on <self:AIfExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val; /* _n_expr on <self:AIfExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1387);
+show_backtrace(1);
 }
-var_before_loop = var;
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
 {
-var1 = parser_nodes__AWhileExpr__n_expr(self);
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
 }
-{
-var2 = flow__FlowVisitor__visit_expr(var_v, var1);
-}
-var_after_expr = var2;
+var_after_expr = var3;
 {
 { /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var5 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var5 == NULL)) {
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var4 = var6;
+RET_LABEL5:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var3) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var3; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL6:(void)0;
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
 }
 }
 {
-var7 = parser_nodes__AWhileExpr__n_block(self);
-}
-{
-parser_nodes__Visitor__enter_visit(var_v, var7); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
-}
-{
-{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var10 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var10 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
-show_backtrace(1);
-}
+{ /* Inline parser_nodes#AIfExpr#n_then (self) on <self:AIfExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AIfExpr___n_then].val; /* _n_then on <self:AIfExpr> */
 var8 = var10;
 RET_LABEL9:(void)0;
 }
 }
-var_after_block = var8;
 {
-flow__FlowContext__add_loop(var_before_loop, var_after_block); /* Direct call flow#FlowContext#add_loop on <var_before_loop:FlowContext>*/
+parser_nodes__Visitor__enter_visit(var_v, var8); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 {
-{ /* Inline scope#AWhileExpr#escapemark (self) on <self:AWhileExpr> */
-var13 = self->attrs[COLOR_scope__AWhileExpr___escapemark].val; /* _escapemark on <self:AWhileExpr> */
+{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
+var13 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var13 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
+show_backtrace(1);
+}
 var11 = var13;
 RET_LABEL12:(void)0;
 }
 }
-{
-flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var11); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
-}
+var_after_then = var11;
 {
 { /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
 var16 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
 if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
 var14 = var16;
@@ -2887,14 +2598,303 @@ RET_LABEL17:(void)0;
 }
 }
 {
-{ /* Inline scope#AWhileExpr#escapemark (self) on <self:AWhileExpr> */
-var20 = self->attrs[COLOR_scope__AWhileExpr___escapemark].val; /* _escapemark on <self:AWhileExpr> */
+{ /* Inline parser_nodes#AIfExpr#n_else (self) on <self:AIfExpr> */
+var20 = self->attrs[COLOR_parser_nodes__AIfExpr___n_else].val; /* _n_else on <self:AIfExpr> */
 var18 = var20;
 RET_LABEL19:(void)0;
 }
 }
 {
-flow__FlowVisitor__merge_breaks(var_v, var18); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
+parser_nodes__Visitor__enter_visit(var_v, var18); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
+var23 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var23 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
+show_backtrace(1);
+}
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
+var_after_else = var21;
+{
+var24 = flow__FlowVisitor__make_merge_flow(var_v, var_after_then, var_after_else);
+}
+RET_LABEL:;
+}
+/* method flow#AIfExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
+void VIRTUAL_flow__AIfExpr__accept_flow_visitor(val* self, val* p0) {
+flow__AIfExpr__accept_flow_visitor(self, p0); /* Direct call flow#AIfExpr#accept_flow_visitor on <self:Object(AIfExpr)>*/
+RET_LABEL:;
+}
+/* method flow#AIfexprExpr#accept_flow_visitor for (self: AIfexprExpr, FlowVisitor) */
+void flow__AIfexprExpr__accept_flow_visitor(val* self, val* p0) {
+val* var_v /* var v: FlowVisitor */;
+val* var /* : AExpr */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
+val* var_after_expr /* var after_expr: FlowContext */;
+val* var4 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : AExpr */;
+val* var10 /* : AExpr */;
+val* var11 /* : FlowContext */;
+val* var13 /* : FlowContext */;
+val* var_after_then /* var after_then: FlowContext */;
+val* var14 /* : FlowContext */;
+val* var16 /* : FlowContext */;
+val* var18 /* : AExpr */;
+val* var20 /* : AExpr */;
+val* var21 /* : FlowContext */;
+val* var23 /* : FlowContext */;
+val* var_after_else /* var after_else: FlowContext */;
+val* var24 /* : FlowContext */;
+var_v = p0;
+{
+{ /* Inline parser_nodes#AIfexprExpr#n_expr (self) on <self:AIfexprExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_expr].val; /* _n_expr on <self:AIfexprExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1396);
+show_backtrace(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+{
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
+}
+var4 = var6;
+RET_LABEL5:(void)0;
+}
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
+}
+}
+{
+{ /* Inline parser_nodes#AIfexprExpr#n_then (self) on <self:AIfexprExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_then].val; /* _n_then on <self:AIfexprExpr> */
+if (unlikely(var10 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_then");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1398);
+show_backtrace(1);
+}
+var8 = var10;
+RET_LABEL9:(void)0;
+}
+}
+{
+parser_nodes__Visitor__enter_visit(var_v, var8); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
+var13 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var13 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
+show_backtrace(1);
+}
+var11 = var13;
+RET_LABEL12:(void)0;
+}
+}
+var_after_then = var11;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var16 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var16 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
+}
+var14 = var16;
+RET_LABEL15:(void)0;
+}
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var14) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var14; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL17:(void)0;
+}
+}
+{
+{ /* Inline parser_nodes#AIfexprExpr#n_else (self) on <self:AIfexprExpr> */
+var20 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_else].val; /* _n_else on <self:AIfexprExpr> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_else");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1400);
+show_backtrace(1);
+}
+var18 = var20;
+RET_LABEL19:(void)0;
+}
+}
+{
+parser_nodes__Visitor__enter_visit(var_v, var18); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
+var23 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var23 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
+show_backtrace(1);
+}
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
+var_after_else = var21;
+{
+var24 = flow__FlowVisitor__make_merge_flow(var_v, var_after_then, var_after_else);
+}
+RET_LABEL:;
+}
+/* method flow#AIfexprExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
+void VIRTUAL_flow__AIfexprExpr__accept_flow_visitor(val* self, val* p0) {
+flow__AIfexprExpr__accept_flow_visitor(self, p0); /* Direct call flow#AIfexprExpr#accept_flow_visitor on <self:Object(AIfexprExpr)>*/
+RET_LABEL:;
+}
+/* method flow#AWhileExpr#accept_flow_visitor for (self: AWhileExpr, FlowVisitor) */
+void flow__AWhileExpr__accept_flow_visitor(val* self, val* p0) {
+val* var_v /* var v: FlowVisitor */;
+val* var /* : FlowContext */;
+val* var_before_loop /* var before_loop: FlowContext */;
+val* var1 /* : AExpr */;
+val* var3 /* : AExpr */;
+val* var4 /* : FlowContext */;
+val* var_after_expr /* var after_expr: FlowContext */;
+val* var5 /* : FlowContext */;
+val* var7 /* : FlowContext */;
+val* var9 /* : nullable AExpr */;
+val* var11 /* : nullable AExpr */;
+val* var12 /* : FlowContext */;
+val* var14 /* : FlowContext */;
+val* var_after_block /* var after_block: FlowContext */;
+val* var15 /* : nullable EscapeMark */;
+val* var17 /* : nullable EscapeMark */;
+val* var18 /* : FlowContext */;
+val* var20 /* : FlowContext */;
+val* var22 /* : nullable EscapeMark */;
+val* var24 /* : nullable EscapeMark */;
+var_v = p0;
+{
+var = flow__FlowVisitor__make_sub_flow(var_v);
+}
+var_before_loop = var;
+{
+{ /* Inline parser_nodes#AWhileExpr#n_expr (self) on <self:AWhileExpr> */
+var3 = self->attrs[COLOR_parser_nodes__AWhileExpr___n_expr].val; /* _n_expr on <self:AWhileExpr> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1408);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+{
+var4 = flow__FlowVisitor__visit_expr(var_v, var1);
+}
+var_after_expr = var4;
+{
+{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
+var7 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var7 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
+}
+var5 = var7;
+RET_LABEL6:(void)0;
+}
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var5) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var5; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL8:(void)0;
+}
+}
+{
+{ /* Inline parser_nodes#AWhileExpr#n_block (self) on <self:AWhileExpr> */
+var11 = self->attrs[COLOR_parser_nodes__AWhileExpr___n_block].val; /* _n_block on <self:AWhileExpr> */
+var9 = var11;
+RET_LABEL10:(void)0;
+}
+}
+{
+parser_nodes__Visitor__enter_visit(var_v, var9); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
+var14 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var14 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
+show_backtrace(1);
+}
+var12 = var14;
+RET_LABEL13:(void)0;
+}
+}
+var_after_block = var12;
+{
+flow__FlowContext__add_loop(var_before_loop, var_after_block); /* Direct call flow#FlowContext#add_loop on <var_before_loop:FlowContext>*/
+}
+{
+{ /* Inline scope#AWhileExpr#continue_mark (self) on <self:AWhileExpr> */
+var17 = self->attrs[COLOR_scope__AWhileExpr___continue_mark].val; /* _continue_mark on <self:AWhileExpr> */
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+{
+flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var15); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
+}
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var20 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
+}
+var18 = var20;
+RET_LABEL19:(void)0;
+}
+}
+{
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var18) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var18; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL21:(void)0;
+}
+}
+{
+{ /* Inline scope#AWhileExpr#break_mark (self) on <self:AWhileExpr> */
+var24 = self->attrs[COLOR_scope__AWhileExpr___break_mark].val; /* _break_mark on <self:AWhileExpr> */
+var22 = var24;
+RET_LABEL23:(void)0;
+}
+}
+{
+flow__FlowVisitor__merge_breaks(var_v, var22); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2909,64 +2909,68 @@ val* var_v /* var v: FlowVisitor */;
 val* var /* : FlowContext */;
 val* var_before_loop /* var before_loop: FlowContext */;
 val* var1 /* : nullable AExpr */;
-val* var2 /* : FlowContext */;
+val* var3 /* : nullable AExpr */;
 val* var4 /* : FlowContext */;
+val* var6 /* : FlowContext */;
 val* var_after_block /* var after_block: FlowContext */;
-val* var5 /* : nullable EscapeMark */;
 val* var7 /* : nullable EscapeMark */;
-val* var8 /* : FlowContext */;
 val* var9 /* : nullable EscapeMark */;
+val* var10 /* : FlowContext */;
 val* var11 /* : nullable EscapeMark */;
+val* var13 /* : nullable EscapeMark */;
 var_v = p0;
 {
 var = flow__FlowVisitor__make_sub_flow(var_v);
 }
 var_before_loop = var;
 {
-var1 = parser_nodes__ALoopExpr__n_block(self);
+{ /* Inline parser_nodes#ALoopExpr#n_block (self) on <self:ALoopExpr> */
+var3 = self->attrs[COLOR_parser_nodes__ALoopExpr___n_block].val; /* _n_block on <self:ALoopExpr> */
+var1 = var3;
+RET_LABEL2:(void)0;
+}
 }
 {
 parser_nodes__Visitor__enter_visit(var_v, var1); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var4 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var4 == NULL)) {
+var6 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var4 = var6;
+RET_LABEL5:(void)0;
 }
 }
-var_after_block = var2;
+var_after_block = var4;
 {
 flow__FlowContext__add_loop(var_before_loop, var_after_block); /* Direct call flow#FlowContext#add_loop on <var_before_loop:FlowContext>*/
 }
 {
-{ /* Inline scope#ALoopExpr#escapemark (self) on <self:ALoopExpr> */
-var7 = self->attrs[COLOR_scope__ALoopExpr___escapemark].val; /* _escapemark on <self:ALoopExpr> */
-var5 = var7;
-RET_LABEL6:(void)0;
+{ /* Inline scope#ALoopExpr#continue_mark (self) on <self:ALoopExpr> */
+var9 = self->attrs[COLOR_scope__ALoopExpr___continue_mark].val; /* _continue_mark on <self:ALoopExpr> */
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
 {
-flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var5); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
+flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var7); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
 }
 {
-var8 = flow__FlowVisitor__make_unreachable_flow(var_v);
-}
-var8;
-{
-{ /* Inline scope#ALoopExpr#escapemark (self) on <self:ALoopExpr> */
-var11 = self->attrs[COLOR_scope__ALoopExpr___escapemark].val; /* _escapemark on <self:ALoopExpr> */
-var9 = var11;
-RET_LABEL10:(void)0;
-}
+var10 = flow__FlowVisitor__make_unreachable_flow(var_v);
 }
 {
-flow__FlowVisitor__merge_breaks(var_v, var9); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
+{ /* Inline scope#ALoopExpr#break_mark (self) on <self:ALoopExpr> */
+var13 = self->attrs[COLOR_scope__ALoopExpr___break_mark].val; /* _break_mark on <self:ALoopExpr> */
+var11 = var13;
+RET_LABEL12:(void)0;
+}
+}
+{
+flow__FlowVisitor__merge_breaks(var_v, var11); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2979,87 +2983,101 @@ RET_LABEL:;
 void flow__AForExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
-val* var_before_loop /* var before_loop: FlowContext */;
-val* var2 /* : nullable AExpr */;
+val* var2 /* : AExpr */;
 val* var3 /* : FlowContext */;
-val* var5 /* : FlowContext */;
-val* var_after_block /* var after_block: FlowContext */;
-val* var6 /* : nullable EscapeMark */;
-val* var8 /* : nullable EscapeMark */;
+val* var_before_loop /* var before_loop: FlowContext */;
+val* var4 /* : nullable AExpr */;
+val* var6 /* : nullable AExpr */;
+val* var7 /* : FlowContext */;
 val* var9 /* : FlowContext */;
-val* var11 /* : FlowContext */;
-val* var12 /* : FlowContext */;
-val* var13 /* : nullable EscapeMark */;
-val* var15 /* : nullable EscapeMark */;
+val* var_after_block /* var after_block: FlowContext */;
+val* var10 /* : nullable EscapeMark */;
+val* var12 /* : nullable EscapeMark */;
+val* var13 /* : FlowContext */;
+val* var15 /* : FlowContext */;
+val* var16 /* : FlowContext */;
+val* var17 /* : nullable EscapeMark */;
+val* var19 /* : nullable EscapeMark */;
 var_v = p0;
 {
-var = parser_nodes__AForExpr__n_expr(self);
+{ /* Inline parser_nodes#AForExpr#n_expr (self) on <self:AForExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AForExpr___n_expr].val; /* _n_expr on <self:AForExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1427);
+show_backtrace(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
 }
 {
 parser_nodes__Visitor__enter_visit(var_v, var); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 {
-var1 = flow__FlowVisitor__make_sub_flow(var_v);
+var3 = flow__FlowVisitor__make_sub_flow(var_v);
 }
-var_before_loop = var1;
+var_before_loop = var3;
 {
-var2 = parser_nodes__AForExpr__n_block(self);
+{ /* Inline parser_nodes#AForExpr#n_block (self) on <self:AForExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AForExpr___n_block].val; /* _n_block on <self:AForExpr> */
+var4 = var6;
+RET_LABEL5:(void)0;
+}
 }
 {
-parser_nodes__Visitor__enter_visit(var_v, var2); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+parser_nodes__Visitor__enter_visit(var_v, var4); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var5 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var5 == NULL)) {
+var9 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var3 = var5;
-RET_LABEL4:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
-var_after_block = var3;
+var_after_block = var7;
 {
 flow__FlowContext__add_loop(var_before_loop, var_after_block); /* Direct call flow#FlowContext#add_loop on <var_before_loop:FlowContext>*/
 }
 {
-{ /* Inline scope#AForExpr#escapemark (self) on <self:AForExpr> */
-var8 = self->attrs[COLOR_scope__AForExpr___escapemark].val; /* _escapemark on <self:AForExpr> */
-var6 = var8;
-RET_LABEL7:(void)0;
+{ /* Inline scope#AForExpr#continue_mark (self) on <self:AForExpr> */
+var12 = self->attrs[COLOR_scope__AForExpr___continue_mark].val; /* _continue_mark on <self:AForExpr> */
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
 {
-flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var6); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
+flow__FlowVisitor__merge_continues_to(var_v, var_after_block, var10); /* Direct call flow#FlowVisitor#merge_continues_to on <var_v:FlowVisitor>*/
 }
 {
 { /* Inline flow#FlowVisitor#current_flow_context (var_v) on <var_v:FlowVisitor> */
-var11 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
-if (unlikely(var11 == NULL)) {
+var15 = var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val; /* _current_flow_context on <var_v:FlowVisitor> */
+if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _current_flow_context");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 36);
 show_backtrace(1);
 }
-var9 = var11;
-RET_LABEL10:(void)0;
-}
-}
-{
-var12 = flow__FlowVisitor__make_merge_flow(var_v, var9, var_before_loop);
-}
-var12;
-{
-{ /* Inline scope#AForExpr#escapemark (self) on <self:AForExpr> */
-var15 = self->attrs[COLOR_scope__AForExpr___escapemark].val; /* _escapemark on <self:AForExpr> */
 var13 = var15;
 RET_LABEL14:(void)0;
 }
 }
 {
-flow__FlowVisitor__merge_breaks(var_v, var13); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
+var16 = flow__FlowVisitor__make_merge_flow(var_v, var13, var_before_loop);
+}
+{
+{ /* Inline scope#AForExpr#break_mark (self) on <self:AForExpr> */
+var19 = self->attrs[COLOR_scope__AForExpr___break_mark].val; /* _break_mark on <self:AForExpr> */
+var17 = var19;
+RET_LABEL18:(void)0;
+}
+}
+{
+flow__FlowVisitor__merge_breaks(var_v, var17); /* Direct call flow#FlowVisitor#merge_breaks on <var_v:FlowVisitor>*/
 }
 RET_LABEL:;
 }
@@ -3072,61 +3090,76 @@ RET_LABEL:;
 void flow__AAssertExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
 val* var4 /* : FlowContext */;
-val* var6 /* : nullable AExpr */;
-val* var7 /* : FlowContext */;
-val* var9 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : nullable AExpr */;
+val* var10 /* : nullable AExpr */;
+val* var11 /* : FlowContext */;
+val* var13 /* : FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__AAssertExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+{ /* Inline parser_nodes#AAssertExpr#n_expr (self) on <self:AAssertExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AAssertExpr___n_expr].val; /* _n_expr on <self:AAssertExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1437);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var = var2;
+RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
+}
+var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-var6 = parser_nodes__AAssertExpr__n_else(self);
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
+}
 }
 {
-parser_nodes__Visitor__enter_visit(var_v, var6); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
+{ /* Inline parser_nodes#AAssertExpr#n_else (self) on <self:AAssertExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AAssertExpr___n_else].val; /* _n_else on <self:AAssertExpr> */
+var8 = var10;
+RET_LABEL9:(void)0;
+}
+}
+{
+parser_nodes__Visitor__enter_visit(var_v, var8); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:FlowVisitor>*/
 }
 {
 { /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var9 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var9 == NULL)) {
+var13 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var11 = var13;
+RET_LABEL12:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var7) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var7; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL10:(void)0;
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var11) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var11; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL14:(void)0;
 }
 }
 RET_LABEL:;
@@ -3140,66 +3173,70 @@ RET_LABEL:;
 void flow__AOrExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
 val* var4 /* : FlowContext */;
-val* var6 /* : AExpr */;
-val* var7 /* : FlowContext */;
-val* var_after_expr2 /* var after_expr2: FlowContext */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : AExpr */;
+val* var10 /* : AExpr */;
 val* var11 /* : FlowContext */;
-val* var13 /* : FlowContext */;
+val* var_after_expr2 /* var after_expr2: FlowContext */;
+val* var12 /* : FlowContext */;
 val* var14 /* : FlowContext */;
+val* var15 /* : FlowContext */;
+val* var17 /* : FlowContext */;
+val* var18 /* : FlowContext */;
 val* var_merge_true /* var merge_true: FlowContext */;
 static val* varonce;
-val* var15 /* : String */;
-char* var16 /* : NativeString */;
-long var17 /* : Int */;
-val* var18 /* : FlatString */;
-val* var20 /* : FlowContext */;
-val* var22 /* : FlowContext */;
-val* var23 /* : FlowContext */;
+val* var19 /* : String */;
+char* var20 /* : NativeString */;
+long var21 /* : Int */;
+val* var22 /* : FlatString */;
+val* var24 /* : FlowContext */;
+val* var26 /* : FlowContext */;
+val* var27 /* : FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__AOrExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+{ /* Inline parser_nodes#AOrExpr#n_expr (self) on <self:AOrExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AOrExpr___n_expr].val; /* _n_expr on <self:AOrExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1486);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var = var2;
+RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
+}
+var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-var6 = parser_nodes__AOrExpr__n_expr2(self);
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
+}
 }
 {
-var7 = flow__FlowVisitor__visit_expr(var_v, var6);
-}
-var_after_expr2 = var7;
-{
-{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var10 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+{ /* Inline parser_nodes#AOrExpr#n_expr2 (self) on <self:AOrExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AOrExpr___n_expr2].val; /* _n_expr2 on <self:AOrExpr> */
 if (unlikely(var10 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr2");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1487);
 show_backtrace(1);
 }
 var8 = var10;
@@ -3207,52 +3244,67 @@ RET_LABEL9:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowContext#when_true (var_after_expr2) on <var_after_expr2:FlowContext> */
-var13 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
-if (unlikely(var13 == NULL)) {
+var11 = flow__FlowVisitor__visit_expr(var_v, var8);
+}
+var_after_expr2 = var11;
+{
+{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
+var14 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-var14 = flow__FlowVisitor__make_merge_flow(var_v, var8, var11);
+{ /* Inline flow#FlowContext#when_true (var_after_expr2) on <var_after_expr2:FlowContext> */
+var17 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
+if (unlikely(var17 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
 }
-var_merge_true = var14;
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+{
+var18 = flow__FlowVisitor__make_merge_flow(var_v, var12, var15);
+}
+var_merge_true = var18;
 if (varonce) {
-var15 = varonce;
+var19 = varonce;
 } else {
-var16 = "OR TRUE";
-var17 = 7;
-var18 = string__NativeString__to_s_with_length(var16, var17);
-var15 = var18;
-varonce = var15;
+var20 = "OR TRUE";
+var21 = 7;
+var22 = string__NativeString__to_s_with_length(var20, var21);
+var19 = var22;
+varonce = var19;
 }
 {
-{ /* Inline flow#FlowContext#name= (var_merge_true,var15) on <var_merge_true:FlowContext> */
-var_merge_true->attrs[COLOR_flow__FlowContext___name].val = var15; /* _name on <var_merge_true:FlowContext> */
-RET_LABEL19:(void)0;
+{ /* Inline flow#FlowContext#name= (var_merge_true,var19) on <var_merge_true:FlowContext> */
+var_merge_true->attrs[COLOR_flow__FlowContext___name].val = var19; /* _name on <var_merge_true:FlowContext> */
+RET_LABEL23:(void)0;
 }
 }
 {
 { /* Inline flow#FlowContext#when_false (var_after_expr2) on <var_after_expr2:FlowContext> */
-var22 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
-if (unlikely(var22 == NULL)) {
+var26 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
-var20 = var22;
-RET_LABEL21:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var23 = flow__FlowVisitor__make_true_false_flow(var_v, var_merge_true, var20);
+var27 = flow__FlowVisitor__make_true_false_flow(var_v, var_merge_true, var24);
 }
-var23;
 RET_LABEL:;
 }
 /* method flow#AOrExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3264,66 +3316,70 @@ RET_LABEL:;
 void flow__AImpliesExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
 val* var4 /* : FlowContext */;
-val* var6 /* : AExpr */;
-val* var7 /* : FlowContext */;
-val* var_after_expr2 /* var after_expr2: FlowContext */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : AExpr */;
+val* var10 /* : AExpr */;
 val* var11 /* : FlowContext */;
-val* var13 /* : FlowContext */;
+val* var_after_expr2 /* var after_expr2: FlowContext */;
+val* var12 /* : FlowContext */;
 val* var14 /* : FlowContext */;
+val* var15 /* : FlowContext */;
+val* var17 /* : FlowContext */;
+val* var18 /* : FlowContext */;
 val* var_merge_true /* var merge_true: FlowContext */;
 static val* varonce;
-val* var15 /* : String */;
-char* var16 /* : NativeString */;
-long var17 /* : Int */;
-val* var18 /* : FlatString */;
-val* var20 /* : FlowContext */;
-val* var22 /* : FlowContext */;
-val* var23 /* : FlowContext */;
+val* var19 /* : String */;
+char* var20 /* : NativeString */;
+long var21 /* : Int */;
+val* var22 /* : FlatString */;
+val* var24 /* : FlowContext */;
+val* var26 /* : FlowContext */;
+val* var27 /* : FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__AImpliesExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+{ /* Inline parser_nodes#AImpliesExpr#n_expr (self) on <self:AImpliesExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AImpliesExpr___n_expr].val; /* _n_expr on <self:AImpliesExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1507);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var = var2;
+RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
+}
+var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-var6 = parser_nodes__AImpliesExpr__n_expr2(self);
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
+}
 }
 {
-var7 = flow__FlowVisitor__visit_expr(var_v, var6);
-}
-var_after_expr2 = var7;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var10 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+{ /* Inline parser_nodes#AImpliesExpr#n_expr2 (self) on <self:AImpliesExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AImpliesExpr___n_expr2].val; /* _n_expr2 on <self:AImpliesExpr> */
 if (unlikely(var10 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr2");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1508);
 show_backtrace(1);
 }
 var8 = var10;
@@ -3331,52 +3387,67 @@ RET_LABEL9:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowContext#when_true (var_after_expr2) on <var_after_expr2:FlowContext> */
-var13 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
-if (unlikely(var13 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+var11 = flow__FlowVisitor__visit_expr(var_v, var8);
+}
+var_after_expr2 = var11;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var14 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var14 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-var14 = flow__FlowVisitor__make_merge_flow(var_v, var8, var11);
+{ /* Inline flow#FlowContext#when_true (var_after_expr2) on <var_after_expr2:FlowContext> */
+var17 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
+if (unlikely(var17 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
 }
-var_merge_true = var14;
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+{
+var18 = flow__FlowVisitor__make_merge_flow(var_v, var12, var15);
+}
+var_merge_true = var18;
 if (varonce) {
-var15 = varonce;
+var19 = varonce;
 } else {
-var16 = "OR TRUE";
-var17 = 7;
-var18 = string__NativeString__to_s_with_length(var16, var17);
-var15 = var18;
-varonce = var15;
+var20 = "OR TRUE";
+var21 = 7;
+var22 = string__NativeString__to_s_with_length(var20, var21);
+var19 = var22;
+varonce = var19;
 }
 {
-{ /* Inline flow#FlowContext#name= (var_merge_true,var15) on <var_merge_true:FlowContext> */
-var_merge_true->attrs[COLOR_flow__FlowContext___name].val = var15; /* _name on <var_merge_true:FlowContext> */
-RET_LABEL19:(void)0;
+{ /* Inline flow#FlowContext#name= (var_merge_true,var19) on <var_merge_true:FlowContext> */
+var_merge_true->attrs[COLOR_flow__FlowContext___name].val = var19; /* _name on <var_merge_true:FlowContext> */
+RET_LABEL23:(void)0;
 }
 }
 {
 { /* Inline flow#FlowContext#when_false (var_after_expr2) on <var_after_expr2:FlowContext> */
-var22 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
-if (unlikely(var22 == NULL)) {
+var26 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
-var20 = var22;
-RET_LABEL21:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var23 = flow__FlowVisitor__make_true_false_flow(var_v, var_merge_true, var20);
+var27 = flow__FlowVisitor__make_true_false_flow(var_v, var_merge_true, var24);
 }
-var23;
 RET_LABEL:;
 }
 /* method flow#AImpliesExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3388,66 +3459,70 @@ RET_LABEL:;
 void flow__AAndExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
 val* var4 /* : FlowContext */;
-val* var6 /* : AExpr */;
-val* var7 /* : FlowContext */;
-val* var_after_expr2 /* var after_expr2: FlowContext */;
-val* var8 /* : FlowContext */;
-val* var10 /* : FlowContext */;
+val* var6 /* : FlowContext */;
+val* var8 /* : AExpr */;
+val* var10 /* : AExpr */;
 val* var11 /* : FlowContext */;
-val* var13 /* : FlowContext */;
+val* var_after_expr2 /* var after_expr2: FlowContext */;
+val* var12 /* : FlowContext */;
 val* var14 /* : FlowContext */;
+val* var15 /* : FlowContext */;
+val* var17 /* : FlowContext */;
+val* var18 /* : FlowContext */;
 val* var_merge_false /* var merge_false: FlowContext */;
 static val* varonce;
-val* var15 /* : String */;
-char* var16 /* : NativeString */;
-long var17 /* : Int */;
-val* var18 /* : FlatString */;
-val* var20 /* : FlowContext */;
-val* var22 /* : FlowContext */;
-val* var23 /* : FlowContext */;
+val* var19 /* : String */;
+char* var20 /* : NativeString */;
+long var21 /* : Int */;
+val* var22 /* : FlatString */;
+val* var24 /* : FlowContext */;
+val* var26 /* : FlowContext */;
+val* var27 /* : FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__AAndExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+{ /* Inline parser_nodes#AAndExpr#n_expr (self) on <self:AAndExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AAndExpr___n_expr].val; /* _n_expr on <self:AAndExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1493);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var = var2;
+RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var2) on <var_v:FlowVisitor> */
-var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var2; /* _current_flow_context on <var_v:FlowVisitor> */
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
+show_backtrace(1);
+}
+var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-var6 = parser_nodes__AAndExpr__n_expr2(self);
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var4) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var4; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL7:(void)0;
+}
 }
 {
-var7 = flow__FlowVisitor__visit_expr(var_v, var6);
-}
-var_after_expr2 = var7;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var10 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+{ /* Inline parser_nodes#AAndExpr#n_expr2 (self) on <self:AAndExpr> */
+var10 = self->attrs[COLOR_parser_nodes__AAndExpr___n_expr2].val; /* _n_expr2 on <self:AAndExpr> */
 if (unlikely(var10 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr2");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1494);
 show_backtrace(1);
 }
 var8 = var10;
@@ -3455,52 +3530,67 @@ RET_LABEL9:(void)0;
 }
 }
 {
-{ /* Inline flow#FlowContext#when_false (var_after_expr2) on <var_after_expr2:FlowContext> */
-var13 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
-if (unlikely(var13 == NULL)) {
+var11 = flow__FlowVisitor__visit_expr(var_v, var8);
+}
+var_after_expr2 = var11;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var14 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-var14 = flow__FlowVisitor__make_merge_flow(var_v, var8, var11);
+{ /* Inline flow#FlowContext#when_false (var_after_expr2) on <var_after_expr2:FlowContext> */
+var17 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr2:FlowContext> */
+if (unlikely(var17 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
 }
-var_merge_false = var14;
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+{
+var18 = flow__FlowVisitor__make_merge_flow(var_v, var12, var15);
+}
+var_merge_false = var18;
 if (varonce) {
-var15 = varonce;
+var19 = varonce;
 } else {
-var16 = "AND FALSE";
-var17 = 9;
-var18 = string__NativeString__to_s_with_length(var16, var17);
-var15 = var18;
-varonce = var15;
+var20 = "AND FALSE";
+var21 = 9;
+var22 = string__NativeString__to_s_with_length(var20, var21);
+var19 = var22;
+varonce = var19;
 }
 {
-{ /* Inline flow#FlowContext#name= (var_merge_false,var15) on <var_merge_false:FlowContext> */
-var_merge_false->attrs[COLOR_flow__FlowContext___name].val = var15; /* _name on <var_merge_false:FlowContext> */
-RET_LABEL19:(void)0;
+{ /* Inline flow#FlowContext#name= (var_merge_false,var19) on <var_merge_false:FlowContext> */
+var_merge_false->attrs[COLOR_flow__FlowContext___name].val = var19; /* _name on <var_merge_false:FlowContext> */
+RET_LABEL23:(void)0;
 }
 }
 {
 { /* Inline flow#FlowContext#when_true (var_after_expr2) on <var_after_expr2:FlowContext> */
-var22 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
-if (unlikely(var22 == NULL)) {
+var26 = var_after_expr2->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr2:FlowContext> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
-var20 = var22;
-RET_LABEL21:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var23 = flow__FlowVisitor__make_true_false_flow(var_v, var20, var_merge_false);
+var27 = flow__FlowVisitor__make_true_false_flow(var_v, var24, var_merge_false);
 }
-var23;
 RET_LABEL:;
 }
 /* method flow#AAndExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3512,49 +3602,58 @@ RET_LABEL:;
 void flow__ANotExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
-val* var2 /* : FlowContext */;
 val* var4 /* : FlowContext */;
-val* var5 /* : FlowContext */;
+val* var6 /* : FlowContext */;
 val* var7 /* : FlowContext */;
-val* var8 /* : FlowContext */;
+val* var9 /* : FlowContext */;
+val* var10 /* : FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__ANotExpr__n_expr(self);
-}
-{
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
-}
-var_after_expr = var1;
-{
-{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
-var4 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
-if (unlikely(var4 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 231);
+{ /* Inline parser_nodes#ANotExpr#n_expr (self) on <self:ANotExpr> */
+var2 = self->attrs[COLOR_parser_nodes__ANotExpr___n_expr].val; /* _n_expr on <self:ANotExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1515);
 show_backtrace(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+{
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowContext#when_false (var_after_expr) on <var_after_expr:FlowContext> */
+var6 = var_after_expr->attrs[COLOR_flow__FlowContext___when_false].val; /* _when_false on <var_after_expr:FlowContext> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_false");
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 228);
+show_backtrace(1);
+}
+var4 = var6;
+RET_LABEL5:(void)0;
 }
 }
 {
 { /* Inline flow#FlowContext#when_true (var_after_expr) on <var_after_expr:FlowContext> */
-var7 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
-if (unlikely(var7 == NULL)) {
+var9 = var_after_expr->attrs[COLOR_flow__FlowContext___when_true].val; /* _when_true on <var_after_expr:FlowContext> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _when_true");
-PRINT_ERROR(" (%s:%d)\n", "src/flow.nit", 228);
+PRINT_ERROR(" (%s:%d)\n", "semantize/flow.nit", 225);
 show_backtrace(1);
 }
-var5 = var7;
-RET_LABEL6:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
 {
-var8 = flow__FlowVisitor__make_true_false_flow(var_v, var2, var5);
+var10 = flow__FlowVisitor__make_true_false_flow(var_v, var4, var7);
 }
-var8;
 RET_LABEL:;
 }
 /* method flow#ANotExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3587,7 +3686,6 @@ var_v = p0;
 {
 var = flow__FlowVisitor__make_sub_true_false_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
 /* method flow#AEqExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3606,7 +3704,6 @@ var_v = p0;
 {
 var = flow__FlowVisitor__make_sub_true_false_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
 /* method flow#ANeExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3625,7 +3722,6 @@ var_v = p0;
 {
 var = flow__FlowVisitor__make_sub_true_false_flow(var_v);
 }
-var;
 RET_LABEL:;
 }
 /* method flow#AIsaExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
@@ -3633,30 +3729,77 @@ void VIRTUAL_flow__AIsaExpr__accept_flow_visitor(val* self, val* p0) {
 flow__AIsaExpr__accept_flow_visitor(self, p0); /* Direct call flow#AIsaExpr#accept_flow_visitor on <self:Object(AIsaExpr)>*/
 RET_LABEL:;
 }
-/* method flow#AProxyExpr#accept_flow_visitor for (self: AProxyExpr, FlowVisitor) */
-void flow__AProxyExpr__accept_flow_visitor(val* self, val* p0) {
+/* method flow#AParExpr#accept_flow_visitor for (self: AParExpr, FlowVisitor) */
+void flow__AParExpr__accept_flow_visitor(val* self, val* p0) {
 val* var_v /* var v: FlowVisitor */;
 val* var /* : AExpr */;
-val* var1 /* : FlowContext */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
 val* var_after_expr /* var after_expr: FlowContext */;
 var_v = p0;
 {
-var = parser_nodes__AProxyExpr__n_expr(self);
+{ /* Inline parser_nodes#AParExpr#n_expr (self) on <self:AParExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AParExpr___n_expr].val; /* _n_expr on <self:AParExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1868);
+show_backtrace(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
 }
 {
-var1 = flow__FlowVisitor__visit_expr(var_v, var);
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
 }
-var_after_expr = var1;
+var_after_expr = var3;
 {
 { /* Inline flow#FlowVisitor#current_flow_context= (var_v,var_after_expr) on <var_v:FlowVisitor> */
 var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_after_expr; /* _current_flow_context on <var_v:FlowVisitor> */
-RET_LABEL2:(void)0;
+RET_LABEL4:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method flow#AProxyExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AProxyExpr__accept_flow_visitor(val* self, val* p0) {
-flow__AProxyExpr__accept_flow_visitor(self, p0); /* Direct call flow#AProxyExpr#accept_flow_visitor on <self:Object(AProxyExpr)>*/
+/* method flow#AParExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
+void VIRTUAL_flow__AParExpr__accept_flow_visitor(val* self, val* p0) {
+flow__AParExpr__accept_flow_visitor(self, p0); /* Direct call flow#AParExpr#accept_flow_visitor on <self:Object(AParExpr)>*/
+RET_LABEL:;
+}
+/* method flow#AOnceExpr#accept_flow_visitor for (self: AOnceExpr, FlowVisitor) */
+void flow__AOnceExpr__accept_flow_visitor(val* self, val* p0) {
+val* var_v /* var v: FlowVisitor */;
+val* var /* : AExpr */;
+val* var2 /* : AExpr */;
+val* var3 /* : FlowContext */;
+val* var_after_expr /* var after_expr: FlowContext */;
+var_v = p0;
+{
+{ /* Inline parser_nodes#AOnceExpr#n_expr (self) on <self:AOnceExpr> */
+var2 = self->attrs[COLOR_parser_nodes__AOnceExpr___n_expr].val; /* _n_expr on <self:AOnceExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 1459);
+show_backtrace(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+{
+var3 = flow__FlowVisitor__visit_expr(var_v, var);
+}
+var_after_expr = var3;
+{
+{ /* Inline flow#FlowVisitor#current_flow_context= (var_v,var_after_expr) on <var_v:FlowVisitor> */
+var_v->attrs[COLOR_flow__FlowVisitor___current_flow_context].val = var_after_expr; /* _current_flow_context on <var_v:FlowVisitor> */
+RET_LABEL4:(void)0;
+}
+}
+RET_LABEL:;
+}
+/* method flow#AOnceExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
+void VIRTUAL_flow__AOnceExpr__accept_flow_visitor(val* self, val* p0) {
+flow__AOnceExpr__accept_flow_visitor(self, p0); /* Direct call flow#AOnceExpr#accept_flow_visitor on <self:Object(AOnceExpr)>*/
 RET_LABEL:;
 }

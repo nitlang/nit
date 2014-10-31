@@ -4,7 +4,7 @@ val* environ__String__environ(val* self) {
 val* var /* : String */;
 char* var1 /* : NativeString */;
 char* var2 /* : NativeString */;
-char* var4 /* : NativeString */;
+void* var4 /* : NativeString for extern */;
 char* var_res /* var res: NativeString */;
 static char* varonce;
 static int varonce_guard;
@@ -16,7 +16,7 @@ long var9 /* : Int */;
 val* var10 /* : FlatString */;
 char* var11 /* : NativeString */;
 char* var12 /* : NativeString */;
-char* var14 /* : NativeString */;
+void* var14 /* : NativeString for extern */;
 char* var_nulstr /* var nulstr: NativeString */;
 short int var15 /* : Bool */;
 short int var16 /* : Bool */;
@@ -83,7 +83,7 @@ var_other21 = var_other;
 {
 { /* Inline kernel#Object#is_same_instance (var_res,var_other21) on <var_res:NativeString> */
 var24 = BOX_string__NativeString(var_res); /* autobox from NativeString to Object */
-var25 = var24 == var_other21 || (var_other21 != NULL && var24->class == var_other21->class && ((var24->class->box_kind == 1 && ((struct instance_kernel__Int*)var24)->value == ((struct instance_kernel__Int*)var_other21)->value) || (var24->class->box_kind == 2 && ((struct instance_kernel__Bool*)var24)->value == ((struct instance_kernel__Bool*)var_other21)->value) || (var24->class->box_kind == 3 && ((struct instance_kernel__Char*)var24)->value == ((struct instance_kernel__Char*)var_other21)->value) || (var24->class->box_kind == 4 && ((struct instance_kernel__Float*)var24)->value == ((struct instance_kernel__Float*)var_other21)->value) || (var24->class->box_kind == 5 && ((struct instance_kernel__Pointer*)var24)->value == ((struct instance_kernel__Pointer*)var_other21)->value) || (var24->class->box_kind == 6 && ((struct instance_kernel__Pointer*)var24)->value == ((struct instance_kernel__Pointer*)var_other21)->value)));
+var25 = var24 == var_other21 || (var_other21 != NULL && var24->class == var_other21->class && ((var24->class->box_kind == 1 && ((struct instance_kernel__Int*)var24)->value == ((struct instance_kernel__Int*)var_other21)->value) || (var24->class->box_kind == 2 && ((struct instance_kernel__Bool*)var24)->value == ((struct instance_kernel__Bool*)var_other21)->value) || (var24->class->box_kind == 3 && ((struct instance_kernel__Char*)var24)->value == ((struct instance_kernel__Char*)var_other21)->value) || (var24->class->box_kind == 4 && ((struct instance_kernel__Float*)var24)->value == ((struct instance_kernel__Float*)var_other21)->value) || (var24->class->box_kind == 5 && ((struct instance_string__NativeString*)var24)->value == ((struct instance_string__NativeString*)var_other21)->value) || (var24->class->box_kind == 6 && ((struct instance_kernel__Pointer*)var24)->value == ((struct instance_kernel__Pointer*)var_other21)->value)));
 var22 = var25;
 goto RET_LABEL23;
 RET_LABEL23:(void)0;
@@ -134,7 +134,7 @@ return var;
 /* method environ#NativeString#get_environ for (self: NativeString): NativeString */
 char* environ__NativeString__get_environ(char* self) {
 char* var /* : NativeString */;
-char* var1 /* : NativeString */;
+void* var1 /* : NativeString for extern */;
 var1 = string_NativeString_NativeString_get_environ_0(self);
 var = var1;
 goto RET_LABEL;
@@ -145,10 +145,10 @@ return var;
 char* VIRTUAL_environ__NativeString__get_environ(val* self) {
 char* var /* : NativeString */;
 char* var1 /* : NativeString */;
-char* var3 /* : NativeString */;
+void* var3 /* : NativeString for extern */;
 char* var4 /* : NativeString */;
 { /* Inline environ#NativeString#get_environ (self) on <self:Object(NativeString)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var4 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
 var3 = string_NativeString_NativeString_get_environ_0(var4);
 var1 = var3;
 goto RET_LABEL2;

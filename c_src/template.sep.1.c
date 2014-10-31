@@ -18,7 +18,7 @@ RET_LABEL1:(void)0;
 var3 = !var;
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 110);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 110);
 show_backtrace(1);
 }
 {
@@ -26,7 +26,7 @@ show_backtrace(1);
 var6 = self->attrs[COLOR_template__Template___content].val; /* _content on <self:Template> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _content");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 183);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 183);
 show_backtrace(1);
 }
 var4 = var6;
@@ -147,7 +147,7 @@ val* var1 /* : Array[Streamable] */;
 var1 = self->attrs[COLOR_template__Template___content].val; /* _content on <self:Template> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _content");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 183);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 183);
 show_backtrace(1);
 }
 var = var1;
@@ -163,7 +163,7 @@ val* var3 /* : Array[Streamable] */;
 var3 = self->attrs[COLOR_template__Template___content].val; /* _content on <self:Object(Template)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _content");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 183);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 183);
 show_backtrace(1);
 }
 var1 = var3;
@@ -254,11 +254,13 @@ short int var3 /* : Bool */;
 short int var4 /* : Bool */;
 val* var6 /* : Array[Streamable] */;
 val* var8 /* : Array[Streamable] */;
+val* var_ /* var : Array[Streamable] */;
 val* var9 /* : ArrayIterator[nullable Object] */;
-short int var10 /* : Bool */;
-val* var11 /* : nullable Object */;
+val* var_10 /* var : ArrayIterator[Streamable] */;
+short int var11 /* : Bool */;
+val* var12 /* : nullable Object */;
 val* var_e /* var e: Streamable */;
-short int var12 /* : Bool */;
+short int var14 /* : Bool */;
 var_stream = p0;
 {
 { /* Inline template#Template#is_writing (self) on <self:Template> */
@@ -270,7 +272,7 @@ RET_LABEL1:(void)0;
 var3 = !var;
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 205);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 205);
 show_backtrace(1);
 }
 var4 = 1;
@@ -288,39 +290,48 @@ template__Template__force_render(self); /* Direct call template#Template#force_r
 var8 = self->attrs[COLOR_template__Template___content].val; /* _content on <self:Template> */
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _content");
-PRINT_ERROR(" (%s:%d)\n", "lib/template.nit", 183);
+PRINT_ERROR(" (%s:%d)\n", "../lib/template/template.nit", 183);
 show_backtrace(1);
 }
 var6 = var8;
 RET_LABEL7:(void)0;
 }
 }
+var_ = var6;
 {
-var9 = array__AbstractArrayRead__iterator(var6);
+var9 = array__AbstractArrayRead__iterator(var_);
 }
+var_10 = var9;
 for(;;) {
 {
-var10 = array__ArrayIterator__is_ok(var9);
+var11 = array__ArrayIterator__is_ok(var_10);
 }
-if(!var10) break;
+if (var11){
 {
-var11 = array__ArrayIterator__item(var9);
+var12 = array__ArrayIterator__item(var_10);
 }
-var_e = var11;
+var_e = var12;
 {
 ((void (*)(val*, val*))(var_e->class->vft[COLOR_stream__Streamable__write_to]))(var_e, var_stream) /* write_to on <var_e:Streamable>*/;
 }
-CONTINUE_label: (void)0;
 {
-array__ArrayIterator__next(var9); /* Direct call array#ArrayIterator#next on <var9:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_10); /* Direct call array#ArrayIterator#next on <var_10:ArrayIterator[Streamable]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var12 = 0;
 {
-{ /* Inline template#Template#is_writing= (self,var12) on <self:Template> */
-self->attrs[COLOR_template__Template___is_writing].s = var12; /* _is_writing on <self:Template> */
+{ /* Inline abstract_collection#Iterator#finish (var_10) on <var_10:ArrayIterator[Streamable]> */
 RET_LABEL13:(void)0;
+}
+}
+var14 = 0;
+{
+{ /* Inline template#Template#is_writing= (self,var14) on <self:Template> */
+self->attrs[COLOR_template__Template___is_writing].s = var14; /* _is_writing on <self:Template> */
+RET_LABEL15:(void)0;
 }
 }
 RET_LABEL:;
@@ -362,17 +373,6 @@ RET_LABEL:;
 void VIRTUAL_template__Template__is_writing_61d(val* self, short int p0) {
 { /* Inline template#Template#is_writing= (self,p0) on <self:Object(Template)> */
 self->attrs[COLOR_template__Template___is_writing].s = p0; /* _is_writing on <self:Object(Template)> */
-RET_LABEL1:(void)0;
-}
-RET_LABEL:;
-}
-/* method template#Template#init for (self: Template) */
-void template__Template__init(val* self) {
-RET_LABEL:;
-}
-/* method template#Template#init for (self: Object) */
-void VIRTUAL_template__Template__init(val* self) {
-{ /* Inline template#Template#init (self) on <self:Object(Template)> */
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;

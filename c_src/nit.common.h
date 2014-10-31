@@ -15,8 +15,7 @@ long l;
 short int s;
 char c;
 double d;
-char* str;
-void* ptr;
+void* str;
 } nitattribute_t; /* general C type representing a Nit attribute. */
 struct class { int box_kind; nitmethod_t vft[]; }; /* general C type representing a Nit class. */
 struct type { int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; }; /* general C type representing a Nit type. */
@@ -66,6 +65,11 @@ void show_backtrace(int) __attribute__ ((noreturn));
 extern int glob_argc;
 extern char **glob_argv;
 extern val *glob_sys;
+struct instance_string__NativeString {
+const struct type *type;
+const struct class *class;
+void* value;
+};
 struct instance_kernel__Bool {
 const struct type *type;
 const struct class *class;

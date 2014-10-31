@@ -10,13 +10,13 @@
 #else
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
-#line 20 "lib/standard/kernel.nit"
+#line 20 "../lib/standard/kernel.nit"
 
 #include <errno.h>
 
 long kernel___Sys_errno___impl( Sys recv )
 {
-#line 93 "lib/standard/kernel.nit"
+#line 92 "../lib/standard/kernel.nit"
 
 
 		return errno;

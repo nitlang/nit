@@ -12,33 +12,23 @@ RET_LABEL1:(void)0;
 }
 RET_LABEL:;
 }
-/* method file#FStream#init for (self: FStream) */
-void file__FStream__init(val* self) {
-RET_LABEL:;
-}
-/* method file#FStream#init for (self: Object) */
-void VIRTUAL_file__FStream__init(val* self) {
-{ /* Inline file#FStream#init (self) on <self:Object(FStream)> */
-RET_LABEL1:(void)0;
-}
-RET_LABEL:;
-}
 /* method file#IFStream#close for (self: IFStream) */
 void file__IFStream__close(val* self) {
 val* var /* : nullable NativeFile */;
 long var1 /* : Int */;
-long var3 /* : Int */;
-void* var4 /* : NativeFile */;
+long var3 /* : Int for extern */;
+void* var4 /* : NativeFile for extern */;
 long var_i /* var i: Int */;
-short int var5 /* : Bool */;
+val* var5 /* : nullable FlatBuffer */;
+short int var6 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
 if (var == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 63);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 67);
 show_backtrace(1);
 } else {
 { /* Inline file#NativeFile#io_close (var) on <var:nullable NativeFile> */
-var4 = ((struct instance_kernel__Pointer*)var)->value; /* autounbox from nullable NativeFile to NativeFile */;
+var4 = ((struct instance_kernel__Pointer*)var)->value; /* unboxing nullable NativeFile */
 var3 = file_NativeFile_NativeFile_io_close_0(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -46,11 +36,19 @@ RET_LABEL2:(void)0;
 }
 }
 var_i = var1;
-var5 = 1;
+var5 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
+if (var5 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 68);
+show_backtrace(1);
+} else {
+string__FlatBuffer__clear(var5); /* Direct call string#FlatBuffer#clear on <var5:nullable FlatBuffer>*/
+}
+var6 = 1;
 {
-{ /* Inline file#IFStream#end_reached= (self,var5) on <self:IFStream> */
-self->attrs[COLOR_file__IFStream___end_reached].s = var5; /* _end_reached on <self:IFStream> */
-RET_LABEL6:(void)0;
+{ /* Inline file#IFStream#end_reached= (self,var6) on <self:IFStream> */
+self->attrs[COLOR_file__IFStream___end_reached].s = var6; /* _end_reached on <self:IFStream> */
+RET_LABEL7:(void)0;
 }
 }
 RET_LABEL:;
@@ -70,8 +68,8 @@ val* var5 /* : nullable FlatBuffer */;
 long var6 /* : Int */;
 long var8 /* : Int */;
 long var9 /* : Int */;
-long var11 /* : Int */;
-void* var12 /* : NativeFile */;
+long var11 /* : Int for extern */;
+void* var12 /* : NativeFile for extern */;
 long var_nb /* var nb: Int */;
 long var13 /* : Int */;
 short int var14 /* : Bool */;
@@ -88,13 +86,13 @@ var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> *
 var1 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var1 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 69);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 74);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#items (var1) on <var1:nullable FlatBuffer> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 551);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 706);
 show_backtrace(1);
 }
 var4 = var1->attrs[COLOR_string__FlatText___items].str; /* _items on <var1:nullable FlatBuffer> */
@@ -105,13 +103,13 @@ RET_LABEL3:(void)0;
 var5 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var5 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 69);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 74);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatBuffer#capacity (var5) on <var5:nullable FlatBuffer> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 1165);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 1408);
 show_backtrace(1);
 }
 var8 = var5->attrs[COLOR_string__FlatBuffer___capacity].l; /* _capacity on <var5:nullable FlatBuffer> */
@@ -121,11 +119,11 @@ RET_LABEL7:(void)0;
 }
 if (var == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 69);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 74);
 show_backtrace(1);
 } else {
 { /* Inline file#NativeFile#io_read (var,var2,var6) on <var:nullable NativeFile> */
-var12 = ((struct instance_kernel__Pointer*)var)->value; /* autounbox from nullable NativeFile to NativeFile */;
+var12 = ((struct instance_kernel__Pointer*)var)->value; /* unboxing nullable NativeFile */
 var11 = file_NativeFile_NativeFile_io_read_2(var12, var2, var6);
 var9 = var11;
 goto RET_LABEL10;
@@ -142,7 +140,7 @@ var16 = 1; /* easy <var13:Int> isa OTHER*/
 if (unlikely(!var16)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
 var17 = var_nb <= var13;
@@ -166,13 +164,13 @@ var_nb = var20;
 var21 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var21 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 79);
 show_backtrace(1);
 } else {
 { /* Inline string#FlatText#length= (var21,var_nb) on <var21:nullable FlatBuffer> */
 if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 556);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 715);
 show_backtrace(1);
 }
 var21->attrs[COLOR_string__FlatText___length].l = var_nb; /* _length on <var21:nullable FlatBuffer> */
@@ -228,161 +226,146 @@ RET_LABEL:;
 void file__IFStream__open(val* self, val* p0) {
 val* var_path /* var path: String */;
 long var /* : Int */;
-void* var4 /* : NativeFile */;
-char* var5 /* : NativeString */;
-void* var6 /* : NativeFile */;
-void* var8 /* : NativeFile */;
-val* var9 /* : nullable NativeFile */;
-val* var10 /* : nullable NativeFile */;
-short int var11 /* : Bool */;
-short int var13 /* : Bool */;
-void* var14 /* : Pointer */;
-short int var15 /* : Bool */;
+val* var2 /* : NativeFile */;
+char* var3 /* : NativeString */;
+val* var4 /* : NativeFile */;
+val* var5 /* : nullable NativeFile */;
+short int var6 /* : Bool */;
+short int var8 /* : Bool for extern */;
+void* var9 /* : Pointer for extern */;
+short int var10 /* : Bool */;
 static val* varonce;
+val* var11 /* : String */;
+char* var12 /* : NativeString */;
+long var13 /* : Int */;
+val* var14 /* : FlatString */;
+static val* varonce15;
 val* var16 /* : String */;
 char* var17 /* : NativeString */;
 long var18 /* : Int */;
 val* var19 /* : FlatString */;
-static val* varonce20;
-val* var21 /* : String */;
-char* var22 /* : NativeString */;
+val* var20 /* : Sys */;
+val* var22 /* : Sys */;
 long var23 /* : Int */;
-val* var24 /* : FlatString */;
-val* var25 /* : Sys */;
-val* var27 /* : Sys */;
-long var28 /* : Int */;
+long var25 /* : Int */;
+val* var26 /* : String */;
+static val* varonce27;
+val* var28 /* : String */;
+char* var29 /* : NativeString */;
 long var30 /* : Int */;
-val* var31 /* : String */;
-static val* varonce32;
-val* var33 /* : String */;
-char* var34 /* : NativeString */;
-long var35 /* : Int */;
-val* var36 /* : FlatString */;
-val* var37 /* : Array[Object] */;
-long var38 /* : Int */;
-val* var39 /* : NativeArray[Object] */;
-val* var40 /* : String */;
+val* var31 /* : FlatString */;
+val* var32 /* : Array[Object] */;
+long var33 /* : Int */;
+val* var34 /* : NativeArray[Object] */;
+val* var35 /* : String */;
 {
-{ /* Inline file#FStream#init (self) on <self:IFStream> */
-RET_LABEL1:(void)0;
-}
-}
-{
-{ /* Inline stream#BufferedIStream#init (self) on <self:IFStream> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:IFStream>*/;
 }
 var_path = p0;
 {
 { /* Inline file#FStream#path= (self,var_path) on <self:IFStream> */
 self->attrs[COLOR_file__FStream___path].val = var_path; /* _path on <self:IFStream> */
-RET_LABEL3:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 var = 10;
 {
 stream__BufferedIStream__prepare_buffer(self, var); /* Direct call stream#BufferedIStream#prepare_buffer on <self:IFStream>*/
 }
-var4 = NULL/*special!*/;
+var2 = NEW_file__NativeFile(&type_file__NativeFile);
 {
-var5 = string__FlatString__to_cstring(var_path);
+var3 = string__FlatString__to_cstring(var_path);
 }
 {
-{ /* Inline file#NativeFile#io_open_read (var4,var5) on <var4:NativeFile> */
-var8 = file_NativeFileCapable_NativeFileCapable_io_open_read_1(var5);
+var4 = file__NativeFile__io_open_read(var2, var3);
+}
+self->attrs[COLOR_file__FStream___file].val = var4; /* _file on <self:IFStream> */
+var5 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
+if (var5 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 92);
+show_backtrace(1);
+} else {
+{ /* Inline kernel#Pointer#address_is_null (var5) on <var5:nullable NativeFile> */
+var9 = ((struct instance_kernel__Pointer*)var5)->value; /* unboxing nullable NativeFile */
+var8 = address_is_null(var9);
 var6 = var8;
 goto RET_LABEL7;
 RET_LABEL7:(void)0;
 }
 }
-var9 = BOX_file__NativeFile(var6); /* autobox from NativeFile to nullable NativeFile */
-self->attrs[COLOR_file__FStream___file].val = var9; /* _file on <self:IFStream> */
-var10 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
-if (var10 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 87);
-show_backtrace(1);
-} else {
-{ /* Inline kernel#Pointer#address_is_null (var10) on <var10:nullable NativeFile> */
-var14 = ((struct instance_kernel__Pointer*)var10)->value; /* autounbox from nullable NativeFile to Pointer */;
-var13 = address_is_null(var14);
-var11 = var13;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
-}
-}
-var15 = !var11;
-if (unlikely(!var15)) {
+var10 = !var6;
+if (unlikely(!var10)) {
 if (varonce) {
-var16 = varonce;
+var11 = varonce;
 } else {
-var17 = "Error: Opening file at \'";
-var18 = 24;
+var12 = "Error: Opening file at \'";
+var13 = 24;
+var14 = string__NativeString__to_s_with_length(var12, var13);
+var11 = var14;
+varonce = var11;
+}
+if (varonce15) {
+var16 = varonce15;
+} else {
+var17 = "\' failed with \'";
+var18 = 15;
 var19 = string__NativeString__to_s_with_length(var17, var18);
 var16 = var19;
-varonce = var16;
-}
-if (varonce20) {
-var21 = varonce20;
-} else {
-var22 = "\' failed with \'";
-var23 = 15;
-var24 = string__NativeString__to_s_with_length(var22, var23);
-var21 = var24;
-varonce20 = var21;
+varonce15 = var16;
 }
 {
 { /* Inline kernel#Object#sys (self) on <self:IFStream> */
-var27 = glob_sys;
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var22 = glob_sys;
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline kernel#Sys#errno (var25) on <var25:Sys> */
+{ /* Inline kernel#Sys#errno (var20) on <var20:Sys> */
 struct nitni_instance* var_for_c_0;
 var_for_c_0 = nit_alloc(sizeof(struct nitni_instance));
-var_for_c_0->value = var25;
-var30 = kernel___Sys_errno___impl(var_for_c_0);
-var28 = var30;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var_for_c_0->value = var20;
+var25 = kernel___Sys_errno___impl(var_for_c_0);
+var23 = var25;
+goto RET_LABEL24;
+RET_LABEL24:(void)0;
 }
 }
 {
-var31 = string__Int__strerror(var28);
+var26 = string__Int__strerror(var23);
 }
-if (varonce32) {
-var33 = varonce32;
+if (varonce27) {
+var28 = varonce27;
 } else {
-var34 = "\'";
-var35 = 1;
-var36 = string__NativeString__to_s_with_length(var34, var35);
-var33 = var36;
-varonce32 = var33;
+var29 = "\'";
+var30 = 1;
+var31 = string__NativeString__to_s_with_length(var29, var30);
+var28 = var31;
+varonce27 = var28;
 }
-var37 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var37 = array_instance Array[Object] */
-var38 = 5;
-var39 = NEW_array__NativeArray(var38, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var39)->values[0] = (val*) var16;
-((struct instance_array__NativeArray*)var39)->values[1] = (val*) var_path;
-((struct instance_array__NativeArray*)var39)->values[2] = (val*) var21;
-((struct instance_array__NativeArray*)var39)->values[3] = (val*) var31;
-((struct instance_array__NativeArray*)var39)->values[4] = (val*) var33;
+var32 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var32 = array_instance Array[Object] */
+var33 = 5;
+var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var34)->values[0] = (val*) var11;
+((struct instance_array__NativeArray*)var34)->values[1] = (val*) var_path;
+((struct instance_array__NativeArray*)var34)->values[2] = (val*) var16;
+((struct instance_array__NativeArray*)var34)->values[3] = (val*) var26;
+((struct instance_array__NativeArray*)var34)->values[4] = (val*) var28;
 {
-((void (*)(val*, val*, long))(var37->class->vft[COLOR_array__Array__with_native]))(var37, var39, var38) /* with_native on <var37:Array[Object]>*/;
+((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
 }
-}
-{
-var40 = ((val* (*)(val*))(var37->class->vft[COLOR_string__Object__to_s]))(var37) /* to_s on <var37:Array[Object]>*/;
 }
 {
-file__Object__print(self, var40); /* Direct call file#Object#print on <self:IFStream>*/
+var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
+}
+{
+file__Object__print(self, var35); /* Direct call file#Object#print on <self:IFStream>*/
 }
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 87);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 92);
 show_backtrace(1);
 }
 RET_LABEL:;
@@ -395,14 +378,7 @@ RET_LABEL:;
 /* method file#IFStream#init for (self: IFStream) */
 void file__IFStream__init(val* self) {
 {
-{ /* Inline file#FStream#init (self) on <self:IFStream> */
-RET_LABEL1:(void)0;
-}
-}
-{
-{ /* Inline stream#BufferedIStream#init (self) on <self:IFStream> */
-RET_LABEL2:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:IFStream>*/;
 }
 RET_LABEL:;
 }
@@ -422,18 +398,20 @@ char* var2 /* : NativeString */;
 long var3 /* : Int */;
 long var5 /* : Int */;
 val* var6 /* : Iterator[Text] */;
+val* var_ /* var : Iterator[Text] */;
 val* var7 /* : Iterator[nullable Object] */;
-short int var8 /* : Bool */;
-val* var9 /* : nullable Object */;
+val* var_8 /* var : Iterator[Text] */;
+short int var9 /* : Bool */;
+val* var10 /* : nullable Object */;
 val* var_i /* var i: Text */;
-char* var10 /* : NativeString */;
-long var11 /* : Int */;
-long var13 /* : Int */;
+char* var11 /* : NativeString */;
+long var12 /* : Int */;
+long var14 /* : Int */;
 var_s = p0;
-var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
+var = self->attrs[COLOR_file__OFStream___is_writable].s; /* _is_writable on <self:OFStream> */
 if (unlikely(!var)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 103);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 108);
 show_backtrace(1);
 }
 /* <var_s:Text> isa FlatText */
@@ -462,37 +440,46 @@ file__OFStream__write_native(self, var2, var3); /* Direct call file#OFStream#wri
 {
 var6 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Text__substrings]))(var_s) /* substrings on <var_s:Text>*/;
 }
+var_ = var6;
 {
-var7 = abstract_collection__Iterator__iterator(var6);
+var7 = abstract_collection__Iterator__iterator(var_);
 }
+var_8 = var7;
 for(;;) {
 {
-var8 = ((short int (*)(val*))(var7->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var7) /* is_ok on <var7:Iterator[nullable Object]>*/;
+var9 = ((short int (*)(val*))(var_8->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_8) /* is_ok on <var_8:Iterator[Text]>*/;
 }
-if(!var8) break;
+if (var9){
 {
-var9 = ((val* (*)(val*))(var7->class->vft[COLOR_abstract_collection__Iterator__item]))(var7) /* item on <var7:Iterator[nullable Object]>*/;
+var10 = ((val* (*)(val*))(var_8->class->vft[COLOR_abstract_collection__Iterator__item]))(var_8) /* item on <var_8:Iterator[Text]>*/;
 }
-var_i = var9;
+var_i = var10;
 {
-var10 = ((char* (*)(val*))(var_i->class->vft[COLOR_string__Text__to_cstring]))(var_i) /* to_cstring on <var_i:Text>*/;
+var11 = ((char* (*)(val*))(var_i->class->vft[COLOR_string__Text__to_cstring]))(var_i) /* to_cstring on <var_i:Text>*/;
 }
 {
 { /* Inline string#FlatText#length (var_i) on <var_i:Text> */
-var13 = var_i->attrs[COLOR_string__FlatText___length].l; /* _length on <var_i:Text> */
-var11 = var13;
-RET_LABEL12:(void)0;
+var14 = var_i->attrs[COLOR_string__FlatText___length].l; /* _length on <var_i:Text> */
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-file__OFStream__write_native(self, var10, var11); /* Direct call file#OFStream#write_native on <self:OFStream>*/
+file__OFStream__write_native(self, var11, var12); /* Direct call file#OFStream#write_native on <self:OFStream>*/
 }
-CONTINUE_label: (void)0;
 {
-((void (*)(val*))(var7->class->vft[COLOR_abstract_collection__Iterator__next]))(var7) /* next on <var7:Iterator[nullable Object]>*/;
+((void (*)(val*))(var_8->class->vft[COLOR_abstract_collection__Iterator__next]))(var_8) /* next on <var_8:Iterator[Text]>*/;
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_8) on <var_8:Iterator[Text]> */
+RET_LABEL15:(void)0;
+}
+}
 }
 RET_LABEL:;
 }
@@ -505,18 +492,18 @@ RET_LABEL:;
 void file__OFStream__close(val* self) {
 val* var /* : nullable NativeFile */;
 long var1 /* : Int */;
-long var3 /* : Int */;
-void* var4 /* : NativeFile */;
+long var3 /* : Int for extern */;
+void* var4 /* : NativeFile for extern */;
 long var_i /* var i: Int */;
 short int var5 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 115);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 118);
 show_backtrace(1);
 } else {
 { /* Inline file#NativeFile#io_close (var) on <var:nullable NativeFile> */
-var4 = ((struct instance_kernel__Pointer*)var)->value; /* autounbox from nullable NativeFile to NativeFile */;
+var4 = ((struct instance_kernel__Pointer*)var)->value; /* unboxing nullable NativeFile */
 var3 = file_NativeFile_NativeFile_io_close_0(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -525,7 +512,7 @@ RET_LABEL2:(void)0;
 }
 var_i = var1;
 var5 = 0;
-self->attrs[COLOR_file__OFStream___writable].s = var5; /* _writable on <self:OFStream> */
+self->attrs[COLOR_file__OFStream___is_writable].s = var5; /* _is_writable on <self:OFStream> */
 RET_LABEL:;
 }
 /* method file#OFStream#close for (self: Object) */
@@ -540,8 +527,8 @@ long var_len /* var len: Int */;
 short int var /* : Bool */;
 val* var1 /* : nullable NativeFile */;
 long var2 /* : Int */;
-long var4 /* : Int */;
-void* var5 /* : NativeFile */;
+long var4 /* : Int for extern */;
+void* var5 /* : NativeFile for extern */;
 long var_err /* var err: Int */;
 short int var6 /* : Bool */;
 short int var7 /* : Bool */;
@@ -569,20 +556,20 @@ val* var28 /* : Object */;
 val* var29 /* : Object */;
 var_native = p0;
 var_len = p1;
-var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
+var = self->attrs[COLOR_file__OFStream___is_writable].s; /* _is_writable on <self:OFStream> */
 if (unlikely(!var)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 125);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 127);
 show_backtrace(1);
 }
 var1 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var1 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 126);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 128);
 show_backtrace(1);
 } else {
 { /* Inline file#NativeFile#io_write (var1,var_native,var_len) on <var1:nullable NativeFile> */
-var5 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from nullable NativeFile to NativeFile */;
+var5 = ((struct instance_kernel__Pointer*)var1)->value; /* unboxing nullable NativeFile */
 var4 = file_NativeFile_NativeFile_io_write_2(var5, var_native, var_len);
 var2 = var4;
 goto RET_LABEL3;
@@ -658,157 +645,147 @@ RET_LABEL:;
 /* method file#OFStream#open for (self: OFStream, String) */
 void file__OFStream__open(val* self, val* p0) {
 val* var_path /* var path: String */;
-void* var /* : NativeFile */;
-char* var2 /* : NativeString */;
-void* var3 /* : NativeFile */;
-void* var5 /* : NativeFile */;
-val* var6 /* : nullable NativeFile */;
-val* var7 /* : nullable NativeFile */;
+val* var /* : NativeFile */;
+char* var1 /* : NativeString */;
+val* var2 /* : NativeFile */;
+val* var3 /* : nullable NativeFile */;
+short int var4 /* : Bool */;
+short int var6 /* : Bool for extern */;
+void* var7 /* : Pointer for extern */;
 short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-void* var11 /* : Pointer */;
-short int var12 /* : Bool */;
 static val* varonce;
-val* var13 /* : String */;
-char* var14 /* : NativeString */;
-long var15 /* : Int */;
-val* var16 /* : FlatString */;
-static val* varonce17;
-val* var18 /* : String */;
-char* var19 /* : NativeString */;
-long var20 /* : Int */;
-val* var21 /* : FlatString */;
-val* var22 /* : Sys */;
-val* var24 /* : Sys */;
-long var25 /* : Int */;
-long var27 /* : Int */;
-val* var28 /* : String */;
-static val* varonce29;
-val* var30 /* : String */;
-char* var31 /* : NativeString */;
-long var32 /* : Int */;
-val* var33 /* : FlatString */;
-val* var34 /* : Array[Object] */;
-long var35 /* : Int */;
-val* var36 /* : NativeArray[Object] */;
-val* var37 /* : String */;
-short int var39 /* : Bool */;
+val* var9 /* : String */;
+char* var10 /* : NativeString */;
+long var11 /* : Int */;
+val* var12 /* : FlatString */;
+static val* varonce13;
+val* var14 /* : String */;
+char* var15 /* : NativeString */;
+long var16 /* : Int */;
+val* var17 /* : FlatString */;
+val* var18 /* : Sys */;
+val* var20 /* : Sys */;
+long var21 /* : Int */;
+long var23 /* : Int */;
+val* var24 /* : String */;
+static val* varonce25;
+val* var26 /* : String */;
+char* var27 /* : NativeString */;
+long var28 /* : Int */;
+val* var29 /* : FlatString */;
+val* var30 /* : Array[Object] */;
+long var31 /* : Int */;
+val* var32 /* : NativeArray[Object] */;
+val* var33 /* : String */;
+short int var35 /* : Bool */;
 {
-{ /* Inline file#FStream#init (self) on <self:OFStream> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:OFStream>*/;
 }
 var_path = p0;
-var = NULL/*special!*/;
+var = NEW_file__NativeFile(&type_file__NativeFile);
 {
-var2 = string__FlatString__to_cstring(var_path);
+var1 = string__FlatString__to_cstring(var_path);
 }
 {
-{ /* Inline file#NativeFile#io_open_write (var,var2) on <var:NativeFile> */
-var5 = file_NativeFileCapable_NativeFileCapable_io_open_write_1(var2);
-var3 = var5;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var2 = file__NativeFile__io_open_write(var, var1);
 }
-}
-var6 = BOX_file__NativeFile(var3); /* autobox from NativeFile to nullable NativeFile */
-self->attrs[COLOR_file__FStream___file].val = var6; /* _file on <self:OFStream> */
-var7 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
-if (var7 == NULL) {
+self->attrs[COLOR_file__FStream___file].val = var2; /* _file on <self:OFStream> */
+var3 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
+if (var3 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 137);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 139);
 show_backtrace(1);
 } else {
-{ /* Inline kernel#Pointer#address_is_null (var7) on <var7:nullable NativeFile> */
-var11 = ((struct instance_kernel__Pointer*)var7)->value; /* autounbox from nullable NativeFile to Pointer */;
-var10 = address_is_null(var11);
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+{ /* Inline kernel#Pointer#address_is_null (var3) on <var3:nullable NativeFile> */
+var7 = ((struct instance_kernel__Pointer*)var3)->value; /* unboxing nullable NativeFile */
+var6 = address_is_null(var7);
+var4 = var6;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
 }
 }
-var12 = !var8;
-if (unlikely(!var12)) {
+var8 = !var4;
+if (unlikely(!var8)) {
 if (varonce) {
-var13 = varonce;
+var9 = varonce;
 } else {
-var14 = "Error: Opening file at \'";
-var15 = 24;
-var16 = string__NativeString__to_s_with_length(var14, var15);
-var13 = var16;
-varonce = var13;
+var10 = "Error: Opening file at \'";
+var11 = 24;
+var12 = string__NativeString__to_s_with_length(var10, var11);
+var9 = var12;
+varonce = var9;
 }
-if (varonce17) {
-var18 = varonce17;
+if (varonce13) {
+var14 = varonce13;
 } else {
-var19 = "\' failed with \'";
-var20 = 15;
-var21 = string__NativeString__to_s_with_length(var19, var20);
-var18 = var21;
-varonce17 = var18;
+var15 = "\' failed with \'";
+var16 = 15;
+var17 = string__NativeString__to_s_with_length(var15, var16);
+var14 = var17;
+varonce13 = var14;
 }
 {
 { /* Inline kernel#Object#sys (self) on <self:OFStream> */
-var24 = glob_sys;
-var22 = var24;
-goto RET_LABEL23;
-RET_LABEL23:(void)0;
+var20 = glob_sys;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
 }
 {
-{ /* Inline kernel#Sys#errno (var22) on <var22:Sys> */
+{ /* Inline kernel#Sys#errno (var18) on <var18:Sys> */
 struct nitni_instance* var_for_c_0;
 var_for_c_0 = nit_alloc(sizeof(struct nitni_instance));
-var_for_c_0->value = var22;
-var27 = kernel___Sys_errno___impl(var_for_c_0);
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var_for_c_0->value = var18;
+var23 = kernel___Sys_errno___impl(var_for_c_0);
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
 }
 {
-var28 = string__Int__strerror(var25);
+var24 = string__Int__strerror(var21);
 }
-if (varonce29) {
-var30 = varonce29;
+if (varonce25) {
+var26 = varonce25;
 } else {
-var31 = "\'";
-var32 = 1;
-var33 = string__NativeString__to_s_with_length(var31, var32);
-var30 = var33;
-varonce29 = var30;
+var27 = "\'";
+var28 = 1;
+var29 = string__NativeString__to_s_with_length(var27, var28);
+var26 = var29;
+varonce25 = var26;
 }
-var34 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var34 = array_instance Array[Object] */
-var35 = 5;
-var36 = NEW_array__NativeArray(var35, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var36)->values[0] = (val*) var13;
-((struct instance_array__NativeArray*)var36)->values[1] = (val*) var_path;
-((struct instance_array__NativeArray*)var36)->values[2] = (val*) var18;
-((struct instance_array__NativeArray*)var36)->values[3] = (val*) var28;
-((struct instance_array__NativeArray*)var36)->values[4] = (val*) var30;
+var30 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var30 = array_instance Array[Object] */
+var31 = 5;
+var32 = NEW_array__NativeArray(var31, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var32)->values[0] = (val*) var9;
+((struct instance_array__NativeArray*)var32)->values[1] = (val*) var_path;
+((struct instance_array__NativeArray*)var32)->values[2] = (val*) var14;
+((struct instance_array__NativeArray*)var32)->values[3] = (val*) var24;
+((struct instance_array__NativeArray*)var32)->values[4] = (val*) var26;
 {
-((void (*)(val*, val*, long))(var34->class->vft[COLOR_array__Array__with_native]))(var34, var36, var35) /* with_native on <var34:Array[Object]>*/;
+((void (*)(val*, val*, long))(var30->class->vft[COLOR_array__Array__with_native]))(var30, var32, var31) /* with_native on <var30:Array[Object]>*/;
 }
-}
-{
-var37 = ((val* (*)(val*))(var34->class->vft[COLOR_string__Object__to_s]))(var34) /* to_s on <var34:Array[Object]>*/;
 }
 {
-file__Object__print(self, var37); /* Direct call file#Object#print on <self:OFStream>*/
+var33 = ((val* (*)(val*))(var30->class->vft[COLOR_string__Object__to_s]))(var30) /* to_s on <var30:Array[Object]>*/;
+}
+{
+file__Object__print(self, var33); /* Direct call file#Object#print on <self:OFStream>*/
 }
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 137);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 139);
 show_backtrace(1);
 }
 {
 { /* Inline file#FStream#path= (self,var_path) on <self:OFStream> */
 self->attrs[COLOR_file__FStream___path].val = var_path; /* _path on <self:OFStream> */
-RET_LABEL38:(void)0;
+RET_LABEL34:(void)0;
 }
 }
-var39 = 1;
-self->attrs[COLOR_file__OFStream___writable].s = var39; /* _writable on <self:OFStream> */
+var35 = 1;
+self->attrs[COLOR_file__OFStream___is_writable].s = var35; /* _is_writable on <self:OFStream> */
 RET_LABEL:;
 }
 /* method file#OFStream#open for (self: Object, String) */
@@ -819,9 +796,7 @@ RET_LABEL:;
 /* method file#OFStream#init for (self: OFStream) */
 void file__OFStream__init(val* self) {
 {
-{ /* Inline file#FStream#init (self) on <self:OFStream> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:OFStream>*/;
 }
 RET_LABEL:;
 }
@@ -832,48 +807,40 @@ RET_LABEL:;
 }
 /* method file#Stdin#init for (self: Stdin) */
 void file__Stdin__init(val* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
-void* var3 /* : NativeFile */;
-val* var4 /* : nullable NativeFile */;
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
 static val* varonce;
-val* var5 /* : String */;
-char* var6 /* : NativeString */;
+val* var2 /* : String */;
+char* var3 /* : NativeString */;
+long var4 /* : Int */;
+val* var5 /* : FlatString */;
 long var7 /* : Int */;
-val* var8 /* : FlatString */;
-long var10 /* : Int */;
 {
 file__IFStream__init(self); /* Direct call file#IFStream#init on <self:Stdin>*/
 }
-var = NULL/*special!*/;
+var = NEW_file__NativeFile(&type_file__NativeFile);
 {
-{ /* Inline file#NativeFile#native_stdin (var) on <var:NativeFile> */
-var3 = file_NativeFileCapable_NativeFileCapable_native_stdin_0();
-var1 = var3;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
+var1 = file__NativeFile__native_stdin(var);
 }
-}
-var4 = BOX_file__NativeFile(var1); /* autobox from NativeFile to nullable NativeFile */
-self->attrs[COLOR_file__FStream___file].val = var4; /* _file on <self:Stdin> */
+self->attrs[COLOR_file__FStream___file].val = var1; /* _file on <self:Stdin> */
 if (varonce) {
-var5 = varonce;
+var2 = varonce;
 } else {
-var6 = "/dev/stdin";
-var7 = 10;
-var8 = string__NativeString__to_s_with_length(var6, var7);
-var5 = var8;
-varonce = var5;
+var3 = "/dev/stdin";
+var4 = 10;
+var5 = string__NativeString__to_s_with_length(var3, var4);
+var2 = var5;
+varonce = var2;
 }
 {
-{ /* Inline file#FStream#path= (self,var5) on <self:Stdin> */
-self->attrs[COLOR_file__FStream___path].val = var5; /* _path on <self:Stdin> */
-RET_LABEL9:(void)0;
+{ /* Inline file#FStream#path= (self,var2) on <self:Stdin> */
+self->attrs[COLOR_file__FStream___path].val = var2; /* _path on <self:Stdin> */
+RET_LABEL6:(void)0;
 }
 }
-var10 = 1;
+var7 = 1;
 {
-stream__BufferedIStream__prepare_buffer(self, var10); /* Direct call stream#BufferedIStream#prepare_buffer on <self:Stdin>*/
+stream__BufferedIStream__prepare_buffer(self, var7); /* Direct call stream#BufferedIStream#prepare_buffer on <self:Stdin>*/
 }
 RET_LABEL:;
 }
@@ -884,47 +851,39 @@ RET_LABEL:;
 }
 /* method file#Stdout#init for (self: Stdout) */
 void file__Stdout__init(val* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
-void* var3 /* : NativeFile */;
-val* var4 /* : nullable NativeFile */;
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
 static val* varonce;
-val* var5 /* : String */;
-char* var6 /* : NativeString */;
-long var7 /* : Int */;
-val* var8 /* : FlatString */;
-short int var10 /* : Bool */;
+val* var2 /* : String */;
+char* var3 /* : NativeString */;
+long var4 /* : Int */;
+val* var5 /* : FlatString */;
+short int var7 /* : Bool */;
 {
 file__OFStream__init(self); /* Direct call file#OFStream#init on <self:Stdout>*/
 }
-var = NULL/*special!*/;
+var = NEW_file__NativeFile(&type_file__NativeFile);
 {
-{ /* Inline file#NativeFile#native_stdout (var) on <var:NativeFile> */
-var3 = file_NativeFileCapable_NativeFileCapable_native_stdout_0();
-var1 = var3;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
+var1 = file__NativeFile__native_stdout(var);
 }
-}
-var4 = BOX_file__NativeFile(var1); /* autobox from NativeFile to nullable NativeFile */
-self->attrs[COLOR_file__FStream___file].val = var4; /* _file on <self:Stdout> */
+self->attrs[COLOR_file__FStream___file].val = var1; /* _file on <self:Stdout> */
 if (varonce) {
-var5 = varonce;
+var2 = varonce;
 } else {
-var6 = "/dev/stdout";
-var7 = 11;
-var8 = string__NativeString__to_s_with_length(var6, var7);
-var5 = var8;
-varonce = var5;
+var3 = "/dev/stdout";
+var4 = 11;
+var5 = string__NativeString__to_s_with_length(var3, var4);
+var2 = var5;
+varonce = var2;
 }
 {
-{ /* Inline file#FStream#path= (self,var5) on <self:Stdout> */
-self->attrs[COLOR_file__FStream___path].val = var5; /* _path on <self:Stdout> */
-RET_LABEL9:(void)0;
+{ /* Inline file#FStream#path= (self,var2) on <self:Stdout> */
+self->attrs[COLOR_file__FStream___path].val = var2; /* _path on <self:Stdout> */
+RET_LABEL6:(void)0;
 }
 }
-var10 = 1;
-self->attrs[COLOR_file__OFStream___writable].s = var10; /* _writable on <self:Stdout> */
+var7 = 1;
+self->attrs[COLOR_file__OFStream___is_writable].s = var7; /* _is_writable on <self:Stdout> */
 RET_LABEL:;
 }
 /* method file#Stdout#init for (self: Object) */
@@ -934,47 +893,39 @@ RET_LABEL:;
 }
 /* method file#Stderr#init for (self: Stderr) */
 void file__Stderr__init(val* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
-void* var3 /* : NativeFile */;
-val* var4 /* : nullable NativeFile */;
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
 static val* varonce;
-val* var5 /* : String */;
-char* var6 /* : NativeString */;
-long var7 /* : Int */;
-val* var8 /* : FlatString */;
-short int var10 /* : Bool */;
+val* var2 /* : String */;
+char* var3 /* : NativeString */;
+long var4 /* : Int */;
+val* var5 /* : FlatString */;
+short int var7 /* : Bool */;
 {
 file__OFStream__init(self); /* Direct call file#OFStream#init on <self:Stderr>*/
 }
-var = NULL/*special!*/;
+var = NEW_file__NativeFile(&type_file__NativeFile);
 {
-{ /* Inline file#NativeFile#native_stderr (var) on <var:NativeFile> */
-var3 = file_NativeFileCapable_NativeFileCapable_native_stderr_0();
-var1 = var3;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
+var1 = file__NativeFile__native_stderr(var);
 }
-}
-var4 = BOX_file__NativeFile(var1); /* autobox from NativeFile to nullable NativeFile */
-self->attrs[COLOR_file__FStream___file].val = var4; /* _file on <self:Stderr> */
+self->attrs[COLOR_file__FStream___file].val = var1; /* _file on <self:Stderr> */
 if (varonce) {
-var5 = varonce;
+var2 = varonce;
 } else {
-var6 = "/dev/stderr";
-var7 = 11;
-var8 = string__NativeString__to_s_with_length(var6, var7);
-var5 = var8;
-varonce = var5;
+var3 = "/dev/stderr";
+var4 = 11;
+var5 = string__NativeString__to_s_with_length(var3, var4);
+var2 = var5;
+varonce = var2;
 }
 {
-{ /* Inline file#FStream#path= (self,var5) on <self:Stderr> */
-self->attrs[COLOR_file__FStream___path].val = var5; /* _path on <self:Stderr> */
-RET_LABEL9:(void)0;
+{ /* Inline file#FStream#path= (self,var2) on <self:Stderr> */
+self->attrs[COLOR_file__FStream___path].val = var2; /* _path on <self:Stderr> */
+RET_LABEL6:(void)0;
 }
 }
-var10 = 1;
-self->attrs[COLOR_file__OFStream___writable].s = var10; /* _writable on <self:Stderr> */
+var7 = 1;
+self->attrs[COLOR_file__OFStream___is_writable].s = var7; /* _is_writable on <self:Stderr> */
 RET_LABEL:;
 }
 /* method file#Stderr#init for (self: Object) */
@@ -987,7 +938,7 @@ short int file__String__file_exists(val* self) {
 short int var /* : Bool */;
 char* var1 /* : NativeString */;
 short int var2 /* : Bool */;
-short int var4 /* : Bool */;
+short int var4 /* : Bool for extern */;
 {
 var1 = string__FlatString__to_cstring(self);
 }
@@ -1041,7 +992,7 @@ for(;;) {
 var2 = stream__BufferedIStream__eof(var_input);
 }
 var3 = !var2;
-if (!var3) break;
+if (var3){
 var4 = 1024;
 {
 var5 = stream__BufferedIStream__read(var_input, var4);
@@ -1050,7 +1001,9 @@ var_buffer = var5;
 {
 file__OFStream__write(var_output, var_buffer); /* Direct call file#OFStream#write on <var_output:OFStream>*/
 }
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 {
@@ -1111,7 +1064,7 @@ var11 = 1; /* easy <var6:Int> isa OTHER*/
 if (unlikely(!var11)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var12 = var3 - var6;
@@ -1234,7 +1187,7 @@ var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var8 = var1 - var4;
@@ -1254,7 +1207,7 @@ var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name16 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var17 = var_l > var10;
@@ -1270,7 +1223,7 @@ if (var11){
 var20 = self->attrs[COLOR_string__FlatString___chars].val; /* _chars on <self:String> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1298,7 +1251,7 @@ var9 = var23;
 } else {
 var9 = var_;
 }
-if (!var9) break;
+if (var9){
 var28 = 1;
 {
 { /* Inline kernel#Int#- (var_l,var28) on <var_l:Int> */
@@ -1308,7 +1261,7 @@ var31 = 1; /* easy <var28:Int> isa OTHER*/
 if (unlikely(!var31)) {
 var_class_name34 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var35 = var_l - var28;
@@ -1318,7 +1271,9 @@ RET_LABEL30:(void)0;
 }
 }
 var_l = var29;
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 var36 = 0;
@@ -1350,7 +1305,7 @@ goto RET_LABEL;
 var47 = self->attrs[COLOR_string__FlatString___chars].val; /* _chars on <self:String> */
 if (unlikely(var47 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var45 = var47;
@@ -1373,7 +1328,7 @@ var54 = 1; /* easy <var51:Int> isa OTHER*/
 if (unlikely(!var54)) {
 var_class_name57 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name57);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 326);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 372);
 show_backtrace(1);
 }
 var58 = var_pos >= var51;
@@ -1392,7 +1347,7 @@ var62 = 1; /* easy <var59:Int> isa OTHER*/
 if (unlikely(!var62)) {
 var_class_name65 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name65);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var66 = var_pos + var59;
@@ -1409,7 +1364,7 @@ var69 = 1; /* easy <var_pos:Int> isa OTHER*/
 if (unlikely(!var69)) {
 var_class_name72 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name72);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var73 = var_l - var_pos;
@@ -1523,7 +1478,7 @@ var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var8 = var1 - var4;
@@ -1543,7 +1498,7 @@ var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name16 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var17 = var_l > var10;
@@ -1559,7 +1514,7 @@ if (var11){
 var20 = self->attrs[COLOR_string__FlatString___chars].val; /* _chars on <self:String> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1587,7 +1542,7 @@ var9 = var23;
 } else {
 var9 = var_;
 }
-if (!var9) break;
+if (var9){
 var28 = 1;
 {
 { /* Inline kernel#Int#- (var_l,var28) on <var_l:Int> */
@@ -1597,7 +1552,7 @@ var31 = 1; /* easy <var28:Int> isa OTHER*/
 if (unlikely(!var31)) {
 var_class_name34 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var35 = var_l - var28;
@@ -1607,7 +1562,9 @@ RET_LABEL30:(void)0;
 }
 }
 var_l = var29;
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 {
@@ -1615,7 +1572,7 @@ BREAK_label: (void)0;
 var38 = self->attrs[COLOR_string__FlatString___chars].val; /* _chars on <self:String> */
 if (unlikely(var38 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var36 = var38;
@@ -1637,7 +1594,7 @@ var45 = 1; /* easy <var42:Int> isa OTHER*/
 if (unlikely(!var45)) {
 var_class_name48 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var49 = var_pos > var42;
@@ -1707,7 +1664,7 @@ val* file__String__realpath(val* self) {
 val* var /* : String */;
 char* var1 /* : NativeString */;
 char* var2 /* : NativeString */;
-char* var4 /* : NativeString */;
+void* var4 /* : NativeString for extern */;
 char* var_cs /* var cs: NativeString */;
 val* var5 /* : FlatString */;
 val* var_res /* var res: FlatString */;
@@ -1753,86 +1710,89 @@ val* var5 /* : Array[Text] */;
 val* var_a /* var a: Array[String] */;
 val* var6 /* : Array[String] */;
 val* var_a2 /* var a2: Array[String] */;
+val* var_ /* var : Array[String] */;
 val* var7 /* : ArrayIterator[nullable Object] */;
-short int var8 /* : Bool */;
-val* var9 /* : nullable Object */;
+val* var_8 /* var : ArrayIterator[String] */;
+short int var9 /* : Bool */;
+val* var10 /* : nullable Object */;
 val* var_x /* var x: String */;
-static val* varonce10;
-val* var11 /* : String */;
-char* var12 /* : NativeString */;
-long var13 /* : Int */;
-val* var14 /* : FlatString */;
-short int var15 /* : Bool */;
+static val* varonce11;
+val* var12 /* : String */;
+char* var13 /* : NativeString */;
+long var14 /* : Int */;
+val* var15 /* : FlatString */;
 short int var16 /* : Bool */;
 short int var17 /* : Bool */;
-static val* varonce18;
-val* var19 /* : String */;
-char* var20 /* : NativeString */;
-long var21 /* : Int */;
-val* var22 /* : FlatString */;
-short int var23 /* : Bool */;
+short int var18 /* : Bool */;
+static val* varonce19;
+val* var20 /* : String */;
+char* var21 /* : NativeString */;
+long var22 /* : Int */;
+val* var23 /* : FlatString */;
 short int var24 /* : Bool */;
-short int var_ /* var : Bool */;
 short int var25 /* : Bool */;
-short int var26 /* : Bool */;
+short int var_26 /* var : Bool */;
 short int var27 /* : Bool */;
 short int var28 /* : Bool */;
-static val* varonce29;
-val* var30 /* : String */;
-char* var31 /* : NativeString */;
-long var32 /* : Int */;
-val* var33 /* : FlatString */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
-short int var_36 /* var : Bool */;
+short int var29 /* : Bool */;
+short int var30 /* : Bool */;
+static val* varonce31;
+val* var32 /* : String */;
+char* var33 /* : NativeString */;
+long var34 /* : Int */;
+val* var35 /* : FlatString */;
+short int var36 /* : Bool */;
 short int var37 /* : Bool */;
-short int var38 /* : Bool */;
-short int var_39 /* var : Bool */;
-val* var40 /* : nullable Object */;
-static val* varonce41;
-val* var42 /* : String */;
-char* var43 /* : NativeString */;
-long var44 /* : Int */;
-val* var45 /* : FlatString */;
-short int var46 /* : Bool */;
-short int var47 /* : Bool */;
-val* var_other /* var other: nullable Object */;
+short int var_38 /* var : Bool */;
+short int var39 /* : Bool */;
+short int var40 /* : Bool */;
+short int var_41 /* var : Bool */;
+val* var42 /* : nullable Object */;
+static val* varonce43;
+val* var44 /* : String */;
+char* var45 /* : NativeString */;
+long var46 /* : Int */;
+val* var47 /* : FlatString */;
+short int var48 /* : Bool */;
 short int var49 /* : Bool */;
-short int var50 /* : Bool */;
+val* var_other /* var other: nullable Object */;
 short int var51 /* : Bool */;
-val* var52 /* : nullable Object */;
+short int var52 /* : Bool */;
 short int var53 /* : Bool */;
-static val* varonce54;
-val* var55 /* : String */;
-char* var56 /* : NativeString */;
-long var57 /* : Int */;
-val* var58 /* : FlatString */;
-short int var59 /* : Bool */;
-long var60 /* : Int */;
+val* var54 /* : nullable Object */;
+short int var57 /* : Bool */;
+static val* varonce58;
+val* var59 /* : String */;
+char* var60 /* : NativeString */;
 long var61 /* : Int */;
-short int var62 /* : Bool */;
+val* var62 /* : FlatString */;
 short int var63 /* : Bool */;
-short int var65 /* : Bool */;
-short int var_66 /* var : Bool */;
-val* var67 /* : nullable Object */;
-static val* varonce68;
-val* var69 /* : String */;
-char* var70 /* : NativeString */;
-long var71 /* : Int */;
-val* var72 /* : FlatString */;
-short int var73 /* : Bool */;
-short int var74 /* : Bool */;
-static val* varonce75;
-val* var76 /* : String */;
-char* var77 /* : NativeString */;
-long var78 /* : Int */;
-val* var79 /* : FlatString */;
-static val* varonce80;
-val* var81 /* : String */;
-char* var82 /* : NativeString */;
-long var83 /* : Int */;
-val* var84 /* : FlatString */;
-val* var85 /* : String */;
+long var64 /* : Int */;
+long var66 /* : Int */;
+long var67 /* : Int */;
+short int var68 /* : Bool */;
+short int var69 /* : Bool */;
+short int var71 /* : Bool */;
+short int var_72 /* var : Bool */;
+val* var73 /* : nullable Object */;
+static val* varonce74;
+val* var75 /* : String */;
+char* var76 /* : NativeString */;
+long var77 /* : Int */;
+val* var78 /* : FlatString */;
+short int var79 /* : Bool */;
+short int var80 /* : Bool */;
+static val* varonce81;
+val* var82 /* : String */;
+char* var83 /* : NativeString */;
+long var84 /* : Int */;
+val* var85 /* : FlatString */;
+static val* varonce86;
+val* var87 /* : String */;
+char* var88 /* : NativeString */;
+long var89 /* : Int */;
+val* var90 /* : FlatString */;
+val* var91 /* : String */;
 if (varonce) {
 var1 = varonce;
 } else {
@@ -1848,216 +1808,229 @@ var5 = string_search__Text__split_with(self, var1);
 var_a = var5;
 var6 = NEW_array__Array(&type_array__Arraystring__String);
 {
-array__Array__init(var6); /* Direct call array#Array#init on <var6:Array[String]>*/
+((void (*)(val*))(var6->class->vft[COLOR_kernel__Object__init]))(var6) /* init on <var6:Array[String]>*/;
 }
 var_a2 = var6;
+var_ = var_a;
 {
-var7 = array__AbstractArrayRead__iterator(var_a);
+var7 = array__AbstractArrayRead__iterator(var_);
 }
+var_8 = var7;
 for(;;) {
 {
-var8 = array__ArrayIterator__is_ok(var7);
+var9 = array__ArrayIterator__is_ok(var_8);
 }
-if(!var8) break;
+if (var9){
 {
-var9 = array__ArrayIterator__item(var7);
+var10 = array__ArrayIterator__item(var_8);
 }
-var_x = var9;
-if (varonce10) {
-var11 = varonce10;
+var_x = var10;
+if (varonce11) {
+var12 = varonce11;
 } else {
-var12 = ".";
-var13 = 1;
-var14 = string__NativeString__to_s_with_length(var12, var13);
-var11 = var14;
-varonce10 = var11;
-}
-{
-var16 = string__FlatString___61d_61d(var_x, var11);
-var15 = var16;
-}
-if (var15){
-goto CONTINUE_label;
-} else {
-}
-if (varonce18) {
-var19 = varonce18;
-} else {
-var20 = "";
-var21 = 0;
-var22 = string__NativeString__to_s_with_length(var20, var21);
-var19 = var22;
-varonce18 = var19;
+var13 = ".";
+var14 = 1;
+var15 = string__NativeString__to_s_with_length(var13, var14);
+var12 = var15;
+varonce11 = var12;
 }
 {
-var24 = string__FlatString___61d_61d(var_x, var19);
-var23 = var24;
+var17 = string__FlatString___61d_61d(var_x, var12);
+var16 = var17;
 }
-var_ = var23;
-if (var23){
-{
-var25 = array__AbstractArrayRead__is_empty(var_a2);
-}
-var26 = !var25;
-var17 = var26;
-} else {
-var17 = var_;
-}
-if (var17){
-goto CONTINUE_label;
+if (var16){
+goto BREAK_label;
 } else {
 }
-if (varonce29) {
-var30 = varonce29;
+if (varonce19) {
+var20 = varonce19;
 } else {
-var31 = "..";
-var32 = 2;
-var33 = string__NativeString__to_s_with_length(var31, var32);
-var30 = var33;
-varonce29 = var30;
+var21 = "";
+var22 = 0;
+var23 = string__NativeString__to_s_with_length(var21, var22);
+var20 = var23;
+varonce19 = var20;
 }
 {
-var35 = string__FlatString___61d_61d(var_x, var30);
-var34 = var35;
+var25 = string__FlatString___61d_61d(var_x, var20);
+var24 = var25;
 }
-var_36 = var34;
-if (var34){
+var_26 = var24;
+if (var24){
 {
-var37 = array__AbstractArrayRead__is_empty(var_a2);
+var27 = array__AbstractArrayRead__is_empty(var_a2);
 }
-var38 = !var37;
-var28 = var38;
+var28 = !var27;
+var18 = var28;
 } else {
-var28 = var_36;
+var18 = var_26;
 }
-var_39 = var28;
-if (var28){
-{
-var40 = abstract_collection__SequenceRead__last(var_a2);
-}
-if (varonce41) {
-var42 = varonce41;
+if (var18){
+goto BREAK_label;
 } else {
-var43 = "..";
-var44 = 2;
-var45 = string__NativeString__to_s_with_length(var43, var44);
-var42 = var45;
-varonce41 = var42;
 }
-{
-{ /* Inline kernel#Object#!= (var40,var42) on <var40:nullable Object(String)> */
-var_other = var42;
-{
-var50 = ((short int (*)(val*, val*))(var40->class->vft[COLOR_kernel__Object___61d_61d]))(var40, var_other) /* == on <var40:nullable Object(String)>*/;
-var49 = var50;
-}
-var51 = !var49;
-var47 = var51;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
-}
-var46 = var47;
-}
-var27 = var46;
+if (varonce31) {
+var32 = varonce31;
 } else {
-var27 = var_39;
+var33 = "..";
+var34 = 2;
+var35 = string__NativeString__to_s_with_length(var33, var34);
+var32 = var35;
+varonce31 = var32;
 }
-if (var27){
 {
-var52 = array__AbstractArray__pop(var_a2);
+var37 = string__FlatString___61d_61d(var_x, var32);
+var36 = var37;
 }
-var52;
-goto CONTINUE_label;
+var_38 = var36;
+if (var36){
+{
+var39 = array__AbstractArrayRead__is_empty(var_a2);
+}
+var40 = !var39;
+var30 = var40;
+} else {
+var30 = var_38;
+}
+var_41 = var30;
+if (var30){
+{
+var42 = abstract_collection__SequenceRead__last(var_a2);
+}
+if (varonce43) {
+var44 = varonce43;
+} else {
+var45 = "..";
+var46 = 2;
+var47 = string__NativeString__to_s_with_length(var45, var46);
+var44 = var47;
+varonce43 = var44;
+}
+{
+{ /* Inline kernel#Object#!= (var42,var44) on <var42:nullable Object(String)> */
+var_other = var44;
+{
+var52 = ((short int (*)(val*, val*))(var42->class->vft[COLOR_kernel__Object___61d_61d]))(var42, var_other) /* == on <var42:nullable Object(String)>*/;
+var51 = var52;
+}
+var53 = !var51;
+var49 = var53;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
+}
+var48 = var49;
+}
+var29 = var48;
+} else {
+var29 = var_41;
+}
+if (var29){
+{
+var54 = array__AbstractArray__pop(var_a2);
+}
+goto BREAK_label;
 } else {
 }
 {
 array__AbstractArray__push(var_a2, var_x); /* Direct call array#AbstractArray#push on <var_a2:Array[String]>*/
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var7); /* Direct call array#ArrayIterator#next on <var7:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
 {
-var53 = array__AbstractArrayRead__is_empty(var_a2);
+array__ArrayIterator__next(var_8); /* Direct call array#ArrayIterator#next on <var_8:ArrayIterator[String]>*/
 }
-if (var53){
-if (varonce54) {
-var55 = varonce54;
 } else {
-var56 = ".";
-var57 = 1;
-var58 = string__NativeString__to_s_with_length(var56, var57);
-var55 = var58;
-varonce54 = var55;
+goto BREAK_label55;
 }
-var = var55;
-goto RET_LABEL;
-} else {
+}
+BREAK_label55: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_8) on <var_8:ArrayIterator[String]> */
+RET_LABEL56:(void)0;
+}
 }
 {
-var60 = array__AbstractArrayRead__length(var_a2);
+var57 = array__AbstractArrayRead__is_empty(var_a2);
 }
+if (var57){
+if (varonce58) {
+var59 = varonce58;
+} else {
+var60 = ".";
 var61 = 1;
-{
-{ /* Inline kernel#Int#== (var60,var61) on <var60:Int> */
-var65 = var60 == var61;
-var63 = var65;
-goto RET_LABEL64;
-RET_LABEL64:(void)0;
+var62 = string__NativeString__to_s_with_length(var60, var61);
+var59 = var62;
+varonce58 = var59;
 }
-var62 = var63;
-}
-var_66 = var62;
-if (var62){
-{
-var67 = abstract_collection__SequenceRead__first(var_a2);
-}
-if (varonce68) {
-var69 = varonce68;
-} else {
-var70 = "";
-var71 = 0;
-var72 = string__NativeString__to_s_with_length(var70, var71);
-var69 = var72;
-varonce68 = var69;
-}
-{
-var74 = string__FlatString___61d_61d(var67, var69);
-var73 = var74;
-}
-var59 = var73;
-} else {
-var59 = var_66;
-}
-if (var59){
-if (varonce75) {
-var76 = varonce75;
-} else {
-var77 = "/";
-var78 = 1;
-var79 = string__NativeString__to_s_with_length(var77, var78);
-var76 = var79;
-varonce75 = var76;
-}
-var = var76;
+var = var59;
 goto RET_LABEL;
 } else {
 }
-if (varonce80) {
-var81 = varonce80;
+{
+{ /* Inline array#AbstractArrayRead#length (var_a2) on <var_a2:Array[String]> */
+var66 = var_a2->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_a2:Array[String]> */
+var64 = var66;
+RET_LABEL65:(void)0;
+}
+}
+var67 = 1;
+{
+{ /* Inline kernel#Int#== (var64,var67) on <var64:Int> */
+var71 = var64 == var67;
+var69 = var71;
+goto RET_LABEL70;
+RET_LABEL70:(void)0;
+}
+var68 = var69;
+}
+var_72 = var68;
+if (var68){
+{
+var73 = abstract_collection__SequenceRead__first(var_a2);
+}
+if (varonce74) {
+var75 = varonce74;
 } else {
-var82 = "/";
-var83 = 1;
-var84 = string__NativeString__to_s_with_length(var82, var83);
-var81 = var84;
-varonce80 = var81;
+var76 = "";
+var77 = 0;
+var78 = string__NativeString__to_s_with_length(var76, var77);
+var75 = var78;
+varonce74 = var75;
 }
 {
-var85 = string__Collection__join(var_a2, var81);
+var80 = string__FlatString___61d_61d(var73, var75);
+var79 = var80;
 }
-var = var85;
+var63 = var79;
+} else {
+var63 = var_72;
+}
+if (var63){
+if (varonce81) {
+var82 = varonce81;
+} else {
+var83 = "/";
+var84 = 1;
+var85 = string__NativeString__to_s_with_length(var83, var84);
+var82 = var85;
+varonce81 = var82;
+}
+var = var82;
+goto RET_LABEL;
+} else {
+}
+if (varonce86) {
+var87 = varonce86;
+} else {
+var88 = "/";
+var89 = 1;
+var90 = string__NativeString__to_s_with_length(var88, var89);
+var87 = var90;
+varonce86 = var87;
+}
+{
+var91 = string__Collection__join(var_a2, var87);
+}
+var = var91;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2086,15 +2059,24 @@ short int var9 /* : Bool */;
 short int var10 /* : Bool */;
 short int var12 /* : Bool */;
 char var13 /* : Char */;
+char var14 /* : Char */;
+char var15 /* : Char */;
+short int var16 /* : Bool */;
+short int var17 /* : Bool */;
+short int var19 /* : Bool */;
+val* var20 /* : Array[Object] */;
+long var21 /* : Int */;
+val* var22 /* : NativeArray[Object] */;
+val* var23 /* : String */;
 static val* varonce;
-val* var14 /* : String */;
-char* var15 /* : NativeString */;
-long var16 /* : Int */;
-val* var17 /* : FlatString */;
-val* var18 /* : Array[Object] */;
-long var19 /* : Int */;
-val* var20 /* : NativeArray[Object] */;
-val* var21 /* : String */;
+val* var24 /* : String */;
+char* var25 /* : NativeString */;
+long var26 /* : Int */;
+val* var27 /* : FlatString */;
+val* var28 /* : Array[Object] */;
+long var29 /* : Int */;
+val* var30 /* : NativeArray[Object] */;
+val* var31 /* : String */;
 var_path = p0;
 {
 var1 = string__Text__is_empty(var_path);
@@ -2117,7 +2099,7 @@ goto RET_LABEL;
 var5 = var_path->attrs[COLOR_string__FlatString___chars].val; /* _chars on <var_path:String> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var3 = var5;
@@ -2147,30 +2129,61 @@ var = var_path;
 goto RET_LABEL;
 } else {
 }
-if (varonce) {
-var14 = varonce;
+{
+var14 = string__Text__last(self);
+}
+var15 = '/';
+{
+{ /* Inline kernel#Char#== (var14,var15) on <var14:Char> */
+var19 = var14 == var15;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
+}
+var16 = var17;
+}
+if (var16){
+var20 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var20 = array_instance Array[Object] */
+var21 = 2;
+var22 = NEW_array__NativeArray(var21, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var22)->values[0] = (val*) self;
+((struct instance_array__NativeArray*)var22)->values[1] = (val*) var_path;
+{
+((void (*)(val*, val*, long))(var20->class->vft[COLOR_array__Array__with_native]))(var20, var22, var21) /* with_native on <var20:Array[Object]>*/;
+}
+}
+{
+var23 = ((val* (*)(val*))(var20->class->vft[COLOR_string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
+}
+var = var23;
+goto RET_LABEL;
 } else {
-var15 = "/";
-var16 = 1;
-var17 = string__NativeString__to_s_with_length(var15, var16);
-var14 = var17;
-varonce = var14;
 }
-var18 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var18 = array_instance Array[Object] */
-var19 = 3;
-var20 = NEW_array__NativeArray(var19, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var20)->values[0] = (val*) self;
-((struct instance_array__NativeArray*)var20)->values[1] = (val*) var14;
-((struct instance_array__NativeArray*)var20)->values[2] = (val*) var_path;
+if (varonce) {
+var24 = varonce;
+} else {
+var25 = "/";
+var26 = 1;
+var27 = string__NativeString__to_s_with_length(var25, var26);
+var24 = var27;
+varonce = var24;
+}
+var28 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var28 = array_instance Array[Object] */
+var29 = 3;
+var30 = NEW_array__NativeArray(var29, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var30)->values[0] = (val*) self;
+((struct instance_array__NativeArray*)var30)->values[1] = (val*) var24;
+((struct instance_array__NativeArray*)var30)->values[2] = (val*) var_path;
 {
-((void (*)(val*, val*, long))(var18->class->vft[COLOR_array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
+((void (*)(val*, val*, long))(var28->class->vft[COLOR_array__Array__with_native]))(var28, var30, var29) /* with_native on <var28:Array[Object]>*/;
 }
 }
 {
-var21 = ((val* (*)(val*))(var18->class->vft[COLOR_string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
+var31 = ((val* (*)(val*))(var28->class->vft[COLOR_string__Object__to_s]))(var28) /* to_s on <var28:Array[Object]>*/;
 }
-var = var21;
+var = var31;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2180,6 +2193,359 @@ val* VIRTUAL_file__String__join_path(val* self, val* p0) {
 val* var /* : String */;
 val* var1 /* : String */;
 var1 = file__String__join_path(self, p0);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method file#String#/ for (self: String, String): String */
+val* file__String___47d(val* self, val* p0) {
+val* var /* : String */;
+val* var_path /* var path: String */;
+val* var1 /* : String */;
+var_path = p0;
+{
+var1 = file__String__join_path(self, var_path);
+}
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method file#String#/ for (self: Object, String): String */
+val* VIRTUAL_file__String___47d(val* self, val* p0) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = file__String___47d(self, p0);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method file#String#relpath for (self: String, String): String */
+val* file__String__relpath(val* self, val* p0) {
+val* var /* : String */;
+val* var_dest /* var dest: String */;
+val* var1 /* : String */;
+val* var_cwd /* var cwd: String */;
+val* var2 /* : String */;
+val* var3 /* : String */;
+static val* varonce;
+val* var4 /* : String */;
+char* var5 /* : NativeString */;
+long var6 /* : Int */;
+val* var7 /* : FlatString */;
+val* var8 /* : Array[Text] */;
+val* var_from /* var from: Array[String] */;
+val* var9 /* : nullable Object */;
+short int var10 /* : Bool */;
+val* var11 /* : nullable Object */;
+val* var12 /* : String */;
+val* var13 /* : String */;
+static val* varonce14;
+val* var15 /* : String */;
+char* var16 /* : NativeString */;
+long var17 /* : Int */;
+val* var18 /* : FlatString */;
+val* var19 /* : Array[Text] */;
+val* var_to /* var to: Array[String] */;
+val* var20 /* : nullable Object */;
+short int var21 /* : Bool */;
+val* var22 /* : nullable Object */;
+short int var23 /* : Bool */;
+short int var24 /* : Bool */;
+short int var25 /* : Bool */;
+short int var26 /* : Bool */;
+short int var_ /* var : Bool */;
+short int var27 /* : Bool */;
+short int var28 /* : Bool */;
+short int var_29 /* var : Bool */;
+val* var30 /* : nullable Object */;
+val* var31 /* : nullable Object */;
+short int var32 /* : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : nullable Object */;
+val* var35 /* : nullable Object */;
+long var36 /* : Int */;
+long var38 /* : Int */;
+long var_from_len /* var from_len: Int */;
+long var39 /* : Int */;
+short int var40 /* : Bool */;
+short int var41 /* : Bool */;
+short int var43 /* : Bool */;
+static val* varonce44;
+val* var45 /* : String */;
+char* var46 /* : NativeString */;
+long var47 /* : Int */;
+val* var48 /* : FlatString */;
+val* var49 /* : String */;
+static val* varonce50;
+val* var51 /* : String */;
+char* var52 /* : NativeString */;
+long var53 /* : Int */;
+val* var54 /* : FlatString */;
+long var55 /* : Int */;
+long var56 /* : Int */;
+short int var58 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var59 /* : Int */;
+val* var60 /* : String */;
+static val* varonce61;
+val* var62 /* : String */;
+char* var63 /* : NativeString */;
+long var64 /* : Int */;
+val* var65 /* : FlatString */;
+val* var66 /* : String */;
+val* var_up /* var up: String */;
+short int var67 /* : Bool */;
+static val* varonce68;
+val* var69 /* : String */;
+char* var70 /* : NativeString */;
+long var71 /* : Int */;
+val* var72 /* : FlatString */;
+val* var73 /* : String */;
+static val* varonce74;
+val* var75 /* : String */;
+char* var76 /* : NativeString */;
+long var77 /* : Int */;
+val* var78 /* : FlatString */;
+val* var79 /* : String */;
+val* var80 /* : String */;
+val* var_res /* var res: String */;
+var_dest = p0;
+{
+var1 = file__Object__getcwd(self);
+}
+var_cwd = var1;
+{
+var2 = file__String___47d(var_cwd, self);
+}
+{
+var3 = file__String__simplify_path(var2);
+}
+if (varonce) {
+var4 = varonce;
+} else {
+var5 = "/";
+var6 = 1;
+var7 = string__NativeString__to_s_with_length(var5, var6);
+var4 = var7;
+varonce = var4;
+}
+{
+var8 = string_search__Text__split(var3, var4);
+}
+var_from = var8;
+{
+var9 = abstract_collection__SequenceRead__last(var_from);
+}
+{
+var10 = string__Text__is_empty(var9);
+}
+if (var10){
+{
+var11 = array__AbstractArray__pop(var_from);
+}
+} else {
+}
+{
+var12 = file__String___47d(var_cwd, var_dest);
+}
+{
+var13 = file__String__simplify_path(var12);
+}
+if (varonce14) {
+var15 = varonce14;
+} else {
+var16 = "/";
+var17 = 1;
+var18 = string__NativeString__to_s_with_length(var16, var17);
+var15 = var18;
+varonce14 = var15;
+}
+{
+var19 = string_search__Text__split(var13, var15);
+}
+var_to = var19;
+{
+var20 = abstract_collection__SequenceRead__last(var_to);
+}
+{
+var21 = string__Text__is_empty(var20);
+}
+if (var21){
+{
+var22 = array__AbstractArray__pop(var_to);
+}
+} else {
+}
+for(;;) {
+{
+var25 = array__AbstractArrayRead__is_empty(var_from);
+}
+var26 = !var25;
+var_ = var26;
+if (var26){
+{
+var27 = array__AbstractArrayRead__is_empty(var_to);
+}
+var28 = !var27;
+var24 = var28;
+} else {
+var24 = var_;
+}
+var_29 = var24;
+if (var24){
+{
+var30 = abstract_collection__SequenceRead__first(var_from);
+}
+{
+var31 = abstract_collection__SequenceRead__first(var_to);
+}
+{
+var33 = string__FlatString___61d_61d(var30, var31);
+var32 = var33;
+}
+var23 = var32;
+} else {
+var23 = var_29;
+}
+if (var23){
+{
+var34 = array__AbstractArray__shift(var_from);
+}
+{
+var35 = array__AbstractArray__shift(var_to);
+}
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+{
+{ /* Inline array#AbstractArrayRead#length (var_from) on <var_from:Array[String]> */
+var38 = var_from->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_from:Array[String]> */
+var36 = var38;
+RET_LABEL37:(void)0;
+}
+}
+var_from_len = var36;
+var39 = 0;
+{
+{ /* Inline kernel#Int#== (var_from_len,var39) on <var_from_len:Int> */
+var43 = var_from_len == var39;
+var41 = var43;
+goto RET_LABEL42;
+RET_LABEL42:(void)0;
+}
+var40 = var41;
+}
+if (var40){
+if (varonce44) {
+var45 = varonce44;
+} else {
+var46 = "/";
+var47 = 1;
+var48 = string__NativeString__to_s_with_length(var46, var47);
+var45 = var48;
+varonce44 = var45;
+}
+{
+var49 = string__Collection__join(var_to, var45);
+}
+var = var49;
+goto RET_LABEL;
+} else {
+}
+if (varonce50) {
+var51 = varonce50;
+} else {
+var52 = "../";
+var53 = 3;
+var54 = string__NativeString__to_s_with_length(var52, var53);
+var51 = var54;
+varonce50 = var51;
+}
+var55 = 1;
+{
+{ /* Inline kernel#Int#- (var_from_len,var55) on <var_from_len:Int> */
+/* Covariant cast for argument 0 (i) <var55:Int> isa OTHER */
+/* <var55:Int> isa OTHER */
+var58 = 1; /* easy <var55:Int> isa OTHER*/
+if (unlikely(!var58)) {
+var_class_name = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
+show_backtrace(1);
+}
+var59 = var_from_len - var55;
+var56 = var59;
+goto RET_LABEL57;
+RET_LABEL57:(void)0;
+}
+}
+{
+var60 = string__FlatString___42d(var51, var56);
+}
+if (varonce61) {
+var62 = varonce61;
+} else {
+var63 = "..";
+var64 = 2;
+var65 = string__NativeString__to_s_with_length(var63, var64);
+var62 = var65;
+varonce61 = var62;
+}
+{
+var66 = string__FlatString___43d(var60, var62);
+}
+var_up = var66;
+{
+var67 = array__AbstractArrayRead__is_empty(var_to);
+}
+if (var67){
+var = var_up;
+goto RET_LABEL;
+} else {
+}
+if (varonce68) {
+var69 = varonce68;
+} else {
+var70 = "/";
+var71 = 1;
+var72 = string__NativeString__to_s_with_length(var70, var71);
+var69 = var72;
+varonce68 = var69;
+}
+{
+var73 = string__FlatString___43d(var_up, var69);
+}
+if (varonce74) {
+var75 = varonce74;
+} else {
+var76 = "/";
+var77 = 1;
+var78 = string__NativeString__to_s_with_length(var76, var77);
+var75 = var78;
+varonce74 = var75;
+}
+{
+var79 = string__Collection__join(var_to, var75);
+}
+{
+var80 = string__FlatString___43d(var73, var79);
+}
+var_res = var80;
+var = var_res;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method file#String#relpath for (self: Object, String): String */
+val* VIRTUAL_file__String__relpath(val* self, val* p0) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = file__String__relpath(self, p0);
 var = var1;
 RET_LABEL:;
 return var;
@@ -2200,16 +2566,18 @@ long var7 /* : Int */;
 val* var8 /* : nullable Object */;
 short int var9 /* : Bool */;
 char var10 /* : Char */;
+val* var_ /* var : Array[String] */;
 val* var11 /* : ArrayIterator[nullable Object] */;
-short int var12 /* : Bool */;
-val* var13 /* : nullable Object */;
+val* var_12 /* var : ArrayIterator[String] */;
+short int var13 /* : Bool */;
+val* var14 /* : nullable Object */;
 val* var_d /* var d: String */;
-short int var14 /* : Bool */;
-char var15 /* : Char */;
-val* var16 /* : String */;
-char* var17 /* : NativeString */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
+short int var15 /* : Bool */;
+char var16 /* : Char */;
+val* var17 /* : String */;
+char* var18 /* : NativeString */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool for extern */;
 if (varonce) {
 var = varonce;
 } else {
@@ -2225,7 +2593,7 @@ var4 = string_search__Text__split_with(self, var);
 var_dirs = var4;
 var5 = NEW_string__FlatBuffer(&type_string__FlatBuffer);
 {
-string__FlatBuffer__init(var5); /* Direct call string#FlatBuffer#init on <var5:FlatBuffer>*/
+((void (*)(val*))(var5->class->vft[COLOR_kernel__Object__init]))(var5) /* init on <var5:FlatBuffer>*/;
 }
 var_path = var5;
 {
@@ -2249,53 +2617,62 @@ string__FlatBuffer__add(var_path, var10); /* Direct call string#FlatBuffer#add o
 }
 } else {
 }
+var_ = var_dirs;
 {
-var11 = array__AbstractArrayRead__iterator(var_dirs);
+var11 = array__AbstractArrayRead__iterator(var_);
 }
+var_12 = var11;
 for(;;) {
 {
-var12 = array__ArrayIterator__is_ok(var11);
+var13 = array__ArrayIterator__is_ok(var_12);
 }
-if(!var12) break;
+if (var13){
 {
-var13 = array__ArrayIterator__item(var11);
+var14 = array__ArrayIterator__item(var_12);
 }
-var_d = var13;
+var_d = var14;
 {
-var14 = string__Text__is_empty(var_d);
+var15 = string__Text__is_empty(var_d);
 }
-if (var14){
-goto CONTINUE_label;
+if (var15){
+goto BREAK_label;
 } else {
 }
 {
 string__FlatBuffer__append(var_path, var_d); /* Direct call string#FlatBuffer#append on <var_path:FlatBuffer>*/
 }
-var15 = '/';
+var16 = '/';
 {
-string__FlatBuffer__add(var_path, var15); /* Direct call string#FlatBuffer#add on <var_path:FlatBuffer>*/
+string__FlatBuffer__add(var_path, var16); /* Direct call string#FlatBuffer#add on <var_path:FlatBuffer>*/
 }
 {
-var16 = string__FlatBuffer__to_s(var_path);
+var17 = string__FlatBuffer__to_s(var_path);
 }
 {
-var17 = string__FlatString__to_cstring(var16);
+var18 = string__FlatString__to_cstring(var17);
 }
 {
-{ /* Inline file#NativeString#file_mkdir (var17) on <var17:NativeString> */
-var20 = string_NativeString_NativeString_file_mkdir_0(var17);
-var18 = var20;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
-}
-}
-var18;
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var11); /* Direct call array#ArrayIterator#next on <var11:ArrayIterator[nullable Object]>*/
+{ /* Inline file#NativeString#file_mkdir (var18) on <var18:NativeString> */
+var21 = string_NativeString_NativeString_file_mkdir_0(var18);
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
 BREAK_label: (void)0;
+{
+array__ArrayIterator__next(var_12); /* Direct call array#ArrayIterator#next on <var_12:ArrayIterator[String]>*/
+}
+} else {
+goto BREAK_label22;
+}
+}
+BREAK_label22: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_12) on <var_12:ArrayIterator[String]> */
+RET_LABEL23:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method file#String#mkdir for (self: Object) */
@@ -2335,7 +2712,7 @@ val* var24 /* : null */;
 var3 = self->attrs[COLOR_string__FlatString___chars].val; /* _chars on <self:String> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _chars");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/string.nit", 746);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/string.nit", 939);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2357,7 +2734,7 @@ var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var11 = var_last_slash > var7;
@@ -2376,7 +2753,7 @@ var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (unlikely(!var15)) {
 var_class_name18 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var19 = var_last_slash + var12;
@@ -2417,7 +2794,7 @@ return var;
 /* method file#NativeString#file_exists for (self: NativeString): Bool */
 short int file__NativeString__file_exists(char* self) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
+short int var1 /* : Bool for extern */;
 var1 = string_NativeString_NativeString_file_exists_0(self);
 var = var1;
 goto RET_LABEL;
@@ -2428,10 +2805,10 @@ return var;
 short int VIRTUAL_file__NativeString__file_exists(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var3 /* : Bool */;
+short int var3 /* : Bool for extern */;
 char* var4 /* : NativeString */;
 { /* Inline file#NativeString#file_exists (self) on <self:Object(NativeString)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var4 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
 var3 = string_NativeString_NativeString_file_exists_0(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -2444,7 +2821,7 @@ return var;
 /* method file#NativeString#file_mkdir for (self: NativeString): Bool */
 short int file__NativeString__file_mkdir(char* self) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
+short int var1 /* : Bool for extern */;
 var1 = string_NativeString_NativeString_file_mkdir_0(self);
 var = var1;
 goto RET_LABEL;
@@ -2455,10 +2832,10 @@ return var;
 short int VIRTUAL_file__NativeString__file_mkdir(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var3 /* : Bool */;
+short int var3 /* : Bool for extern */;
 char* var4 /* : NativeString */;
 { /* Inline file#NativeString#file_mkdir (self) on <self:Object(NativeString)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var4 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
 var3 = string_NativeString_NativeString_file_mkdir_0(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -2471,7 +2848,7 @@ return var;
 /* method file#NativeString#file_realpath for (self: NativeString): NativeString */
 char* file__NativeString__file_realpath(char* self) {
 char* var /* : NativeString */;
-char* var1 /* : NativeString */;
+void* var1 /* : NativeString for extern */;
 var1 = file_NativeString_realpath(self);
 var = var1;
 goto RET_LABEL;
@@ -2482,10 +2859,10 @@ return var;
 char* VIRTUAL_file__NativeString__file_realpath(val* self) {
 char* var /* : NativeString */;
 char* var1 /* : NativeString */;
-char* var3 /* : NativeString */;
+void* var3 /* : NativeString for extern */;
 char* var4 /* : NativeString */;
 { /* Inline file#NativeString#file_realpath (self) on <self:Object(NativeString)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var4 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
 var3 = file_NativeString_realpath(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -2496,10 +2873,12 @@ RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_read for (self: NativeFile, NativeString, Int): Int */
-long file__NativeFile__io_read(void* self, char* p0, long p1) {
+long file__NativeFile__io_read(val* self, char* p0, long p1) {
 long var /* : Int */;
-long var1 /* : Int */;
-var1 = file_NativeFile_NativeFile_io_read_2(self, p0, p1);
+long var1 /* : Int for extern */;
+void* var2 /* : NativeFile for extern */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing NativeFile */
+var1 = file_NativeFile_NativeFile_io_read_2(var2, p0, p1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2509,10 +2888,10 @@ return var;
 long VIRTUAL_file__NativeFile__io_read(val* self, char* p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
-long var3 /* : Int */;
-void* var4 /* : NativeFile */;
+long var3 /* : Int for extern */;
+void* var4 /* : NativeFile for extern */;
 { /* Inline file#NativeFile#io_read (self,p0,p1) on <self:Object(NativeFile)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
+var4 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing Object */
 var3 = file_NativeFile_NativeFile_io_read_2(var4, p0, p1);
 var1 = var3;
 goto RET_LABEL2;
@@ -2523,10 +2902,12 @@ RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_write for (self: NativeFile, NativeString, Int): Int */
-long file__NativeFile__io_write(void* self, char* p0, long p1) {
+long file__NativeFile__io_write(val* self, char* p0, long p1) {
 long var /* : Int */;
-long var1 /* : Int */;
-var1 = file_NativeFile_NativeFile_io_write_2(self, p0, p1);
+long var1 /* : Int for extern */;
+void* var2 /* : NativeFile for extern */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing NativeFile */
+var1 = file_NativeFile_NativeFile_io_write_2(var2, p0, p1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2536,10 +2917,10 @@ return var;
 long VIRTUAL_file__NativeFile__io_write(val* self, char* p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
-long var3 /* : Int */;
-void* var4 /* : NativeFile */;
+long var3 /* : Int for extern */;
+void* var4 /* : NativeFile for extern */;
 { /* Inline file#NativeFile#io_write (self,p0,p1) on <self:Object(NativeFile)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
+var4 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing Object */
 var3 = file_NativeFile_NativeFile_io_write_2(var4, p0, p1);
 var1 = var3;
 goto RET_LABEL2;
@@ -2550,10 +2931,12 @@ RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_close for (self: NativeFile): Int */
-long file__NativeFile__io_close(void* self) {
+long file__NativeFile__io_close(val* self) {
 long var /* : Int */;
-long var1 /* : Int */;
-var1 = file_NativeFile_NativeFile_io_close_0(self);
+long var1 /* : Int for extern */;
+void* var2 /* : NativeFile for extern */;
+var2 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing NativeFile */
+var1 = file_NativeFile_NativeFile_io_close_0(var2);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2563,10 +2946,10 @@ return var;
 long VIRTUAL_file__NativeFile__io_close(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-long var3 /* : Int */;
-void* var4 /* : NativeFile */;
+long var3 /* : Int for extern */;
+void* var4 /* : NativeFile for extern */;
 { /* Inline file#NativeFile#io_close (self) on <self:Object(NativeFile)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
+var4 = ((struct instance_kernel__Pointer*)self)->value; /* unboxing Object */
 var3 = file_NativeFile_NativeFile_io_close_0(var4);
 var1 = var3;
 goto RET_LABEL2;
@@ -2577,157 +2960,117 @@ RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_open_read for (self: NativeFile, NativeString): NativeFile */
-void* file__NativeFile__io_open_read(void* self, char* p0) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
+val* file__NativeFile__io_open_read(val* self, char* p0) {
+val* var /* : NativeFile */;
+void* var1 /* : NativeFile for extern */;
+val* var2 /* : NativeFile */;
 var1 = file_NativeFileCapable_NativeFileCapable_io_open_read_1(p0);
-var = var1;
+var2 = BOX_kernel__Pointer(var1); /* boxing NativeFile */
+var2->type = &type_file__NativeFile;
+var2->class = &class_file__NativeFile;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_open_read for (self: Object, NativeString): NativeFile */
-void* VIRTUAL_file__NativeFile__io_open_read(val* self, char* p0) {
-void* var /* : NativeFile */;
-val* var1 /* : Object */;
-void* var3 /* : NativeFile */;
-void* var4 /* : NativeFile */;
-val* var5 /* : Object */;
-void* var6 /* : NativeFile */;
-{ /* Inline file#NativeFile#io_open_read (self,p0) on <self:Object(NativeFile)> */
-var3 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
-var4 = file_NativeFileCapable_NativeFileCapable_io_open_read_1(p0);
-var5 = BOX_file__NativeFile(var4); /* autobox from NativeFile to Object */
-var1 = var5;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
-}
-var6 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from Object to NativeFile */;
-var = var6;
+val* VIRTUAL_file__NativeFile__io_open_read(val* self, char* p0) {
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
+var1 = file__NativeFile__io_open_read(self, p0);
+var = var1;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_open_write for (self: NativeFile, NativeString): NativeFile */
-void* file__NativeFile__io_open_write(void* self, char* p0) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
+val* file__NativeFile__io_open_write(val* self, char* p0) {
+val* var /* : NativeFile */;
+void* var1 /* : NativeFile for extern */;
+val* var2 /* : NativeFile */;
 var1 = file_NativeFileCapable_NativeFileCapable_io_open_write_1(p0);
-var = var1;
+var2 = BOX_kernel__Pointer(var1); /* boxing NativeFile */
+var2->type = &type_file__NativeFile;
+var2->class = &class_file__NativeFile;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#io_open_write for (self: Object, NativeString): NativeFile */
-void* VIRTUAL_file__NativeFile__io_open_write(val* self, char* p0) {
-void* var /* : NativeFile */;
-val* var1 /* : Object */;
-void* var3 /* : NativeFile */;
-void* var4 /* : NativeFile */;
-val* var5 /* : Object */;
-void* var6 /* : NativeFile */;
-{ /* Inline file#NativeFile#io_open_write (self,p0) on <self:Object(NativeFile)> */
-var3 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
-var4 = file_NativeFileCapable_NativeFileCapable_io_open_write_1(p0);
-var5 = BOX_file__NativeFile(var4); /* autobox from NativeFile to Object */
-var1 = var5;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
-}
-var6 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from Object to NativeFile */;
-var = var6;
+val* VIRTUAL_file__NativeFile__io_open_write(val* self, char* p0) {
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
+var1 = file__NativeFile__io_open_write(self, p0);
+var = var1;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stdin for (self: NativeFile): NativeFile */
-void* file__NativeFile__native_stdin(void* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
+val* file__NativeFile__native_stdin(val* self) {
+val* var /* : NativeFile */;
+void* var1 /* : NativeFile for extern */;
+val* var2 /* : NativeFile */;
 var1 = file_NativeFileCapable_NativeFileCapable_native_stdin_0();
-var = var1;
+var2 = BOX_kernel__Pointer(var1); /* boxing NativeFile */
+var2->type = &type_file__NativeFile;
+var2->class = &class_file__NativeFile;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stdin for (self: Object): NativeFile */
-void* VIRTUAL_file__NativeFile__native_stdin(val* self) {
-void* var /* : NativeFile */;
-val* var1 /* : Object */;
-void* var3 /* : NativeFile */;
-void* var4 /* : NativeFile */;
-val* var5 /* : Object */;
-void* var6 /* : NativeFile */;
-{ /* Inline file#NativeFile#native_stdin (self) on <self:Object(NativeFile)> */
-var3 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
-var4 = file_NativeFileCapable_NativeFileCapable_native_stdin_0();
-var5 = BOX_file__NativeFile(var4); /* autobox from NativeFile to Object */
-var1 = var5;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
-}
-var6 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from Object to NativeFile */;
-var = var6;
+val* VIRTUAL_file__NativeFile__native_stdin(val* self) {
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
+var1 = file__NativeFile__native_stdin(self);
+var = var1;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stdout for (self: NativeFile): NativeFile */
-void* file__NativeFile__native_stdout(void* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
+val* file__NativeFile__native_stdout(val* self) {
+val* var /* : NativeFile */;
+void* var1 /* : NativeFile for extern */;
+val* var2 /* : NativeFile */;
 var1 = file_NativeFileCapable_NativeFileCapable_native_stdout_0();
-var = var1;
+var2 = BOX_kernel__Pointer(var1); /* boxing NativeFile */
+var2->type = &type_file__NativeFile;
+var2->class = &class_file__NativeFile;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stdout for (self: Object): NativeFile */
-void* VIRTUAL_file__NativeFile__native_stdout(val* self) {
-void* var /* : NativeFile */;
-val* var1 /* : Object */;
-void* var3 /* : NativeFile */;
-void* var4 /* : NativeFile */;
-val* var5 /* : Object */;
-void* var6 /* : NativeFile */;
-{ /* Inline file#NativeFile#native_stdout (self) on <self:Object(NativeFile)> */
-var3 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
-var4 = file_NativeFileCapable_NativeFileCapable_native_stdout_0();
-var5 = BOX_file__NativeFile(var4); /* autobox from NativeFile to Object */
-var1 = var5;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
-}
-var6 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from Object to NativeFile */;
-var = var6;
+val* VIRTUAL_file__NativeFile__native_stdout(val* self) {
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
+var1 = file__NativeFile__native_stdout(self);
+var = var1;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stderr for (self: NativeFile): NativeFile */
-void* file__NativeFile__native_stderr(void* self) {
-void* var /* : NativeFile */;
-void* var1 /* : NativeFile */;
+val* file__NativeFile__native_stderr(val* self) {
+val* var /* : NativeFile */;
+void* var1 /* : NativeFile for extern */;
+val* var2 /* : NativeFile */;
 var1 = file_NativeFileCapable_NativeFileCapable_native_stderr_0();
-var = var1;
+var2 = BOX_kernel__Pointer(var1); /* boxing NativeFile */
+var2->type = &type_file__NativeFile;
+var2->class = &class_file__NativeFile;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
 /* method file#NativeFile#native_stderr for (self: Object): NativeFile */
-void* VIRTUAL_file__NativeFile__native_stderr(val* self) {
-void* var /* : NativeFile */;
-val* var1 /* : Object */;
-void* var3 /* : NativeFile */;
-void* var4 /* : NativeFile */;
-val* var5 /* : Object */;
-void* var6 /* : NativeFile */;
-{ /* Inline file#NativeFile#native_stderr (self) on <self:Object(NativeFile)> */
-var3 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeFile */;
-var4 = file_NativeFileCapable_NativeFileCapable_native_stderr_0();
-var5 = BOX_file__NativeFile(var4); /* autobox from NativeFile to Object */
-var1 = var5;
-goto RET_LABEL2;
-RET_LABEL2:(void)0;
-}
-var6 = ((struct instance_kernel__Pointer*)var1)->value; /* autounbox from Object to NativeFile */;
-var = var6;
+val* VIRTUAL_file__NativeFile__native_stderr(val* self) {
+val* var /* : NativeFile */;
+val* var1 /* : NativeFile */;
+var1 = file__NativeFile__native_stderr(self);
+var = var1;
 RET_LABEL:;
 return var;
 }
@@ -2738,7 +3081,7 @@ val* var1 /* : OStream */;
 var1 = self->attrs[COLOR_file__Sys___stdout].val; /* _stdout on <self:Sys> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stdout");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 530);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 634);
 show_backtrace(1);
 }
 var = var1;
@@ -2754,7 +3097,7 @@ val* var3 /* : OStream */;
 var3 = self->attrs[COLOR_file__Sys___stdout].val; /* _stdout on <self:Object(Sys)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stdout");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 530);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 634);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2771,7 +3114,7 @@ val* var1 /* : OStream */;
 var1 = self->attrs[COLOR_file__Sys___stderr].val; /* _stderr on <self:Sys> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stderr");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 533);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 637);
 show_backtrace(1);
 }
 var = var1;
@@ -2787,7 +3130,7 @@ val* var3 /* : OStream */;
 var3 = self->attrs[COLOR_file__Sys___stderr].val; /* _stderr on <self:Object(Sys)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stderr");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 533);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 637);
 show_backtrace(1);
 }
 var1 = var3;
@@ -2819,7 +3162,7 @@ RET_LABEL1:(void)0;
 var5 = var->attrs[COLOR_file__Sys___stdout].val; /* _stdout on <var:Sys> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stdout");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 530);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 634);
 show_backtrace(1);
 }
 var3 = var5;
@@ -2870,7 +3213,7 @@ RET_LABEL1:(void)0;
 var5 = var->attrs[COLOR_file__Sys___stdout].val; /* _stdout on <var:Sys> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stdout");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 530);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 634);
 show_backtrace(1);
 }
 var3 = var5;
@@ -2896,7 +3239,7 @@ RET_LABEL8:(void)0;
 var12 = var7->attrs[COLOR_file__Sys___stdout].val; /* _stdout on <var7:Sys> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stdout");
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/file.nit", 530);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/file.nit", 634);
 show_backtrace(1);
 }
 var10 = var12;
@@ -2926,7 +3269,7 @@ RET_LABEL:;
 val* file__Object__getcwd(val* self) {
 val* var /* : String */;
 char* var1 /* : NativeString */;
-char* var3 /* : NativeString */;
+void* var3 /* : NativeString for extern */;
 val* var4 /* : String */;
 {
 { /* Inline file#Object#file_getcwd (self) on <self:Object> */
@@ -2956,7 +3299,7 @@ return var;
 /* method file#Object#file_getcwd for (self: Object): NativeString */
 char* file__Object__file_getcwd(val* self) {
 char* var /* : NativeString */;
-char* var1 /* : NativeString */;
+void* var1 /* : NativeString for extern */;
 var1 = string_NativeString_NativeString_file_getcwd_0(self);
 var = var1;
 goto RET_LABEL;
@@ -2967,7 +3310,7 @@ return var;
 char* VIRTUAL_file__Object__file_getcwd(val* self) {
 char* var /* : NativeString */;
 char* var1 /* : NativeString */;
-char* var3 /* : NativeString */;
+void* var3 /* : NativeString for extern */;
 { /* Inline file#Object#file_getcwd (self) on <self:Object> */
 var3 = string_NativeString_NativeString_file_getcwd_0(self);
 var1 = var3;

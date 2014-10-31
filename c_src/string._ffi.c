@@ -11,14 +11,14 @@
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
 #define NativeString_to_s string___NativeString_to_s
-#line 20 "lib/standard/string.nit"
+#line 21 "../lib/standard/string.nit"
 
 #include <stdio.h>
 #include <string.h>
 
 char* string___Int_strerror_ext___impl( long recv )
 {
-#line 1490 "lib/standard/string.nit"
+#line 1763 "../lib/standard/string.nit"
 
 
 		return strerror(recv);

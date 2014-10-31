@@ -2,7 +2,7 @@
 /* method math#Float#is_nan for (self: Float): Bool */
 short int math__Float__is_nan(double self) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
+short int var1 /* : Bool for extern */;
 var1 = isnan(self);
 var = var1;
 goto RET_LABEL;
@@ -13,7 +13,7 @@ return var;
 short int VIRTUAL_math__Float__is_nan(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var3 /* : Bool */;
+short int var3 /* : Bool for extern */;
 double var4 /* : Float */;
 { /* Inline math#Float#is_nan (self) on <self:Object(Float)> */
 var4 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
@@ -30,7 +30,7 @@ return var;
 long math__Float__is_inf(double self) {
 long var /* : Int */;
 short int var1 /* : Bool */;
-short int var3 /* : Bool */;
+short int var3 /* : Bool for extern */;
 double var4 /* : Float */;
 short int var5 /* : Bool */;
 short int var7 /* : Bool */;
@@ -61,7 +61,7 @@ var7 = 1; /* easy <var4:Float> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name = type_kernel__Float.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 290);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 298);
 show_backtrace(1);
 }
 var8 = self < var4;
@@ -109,7 +109,7 @@ return var;
 /* method math#Float#is_inf_extern for (self: Float): Bool */
 short int math__Float__is_inf_extern(double self) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
+short int var1 /* : Bool for extern */;
 var1 = isinf(self);
 var = var1;
 goto RET_LABEL;
@@ -120,7 +120,7 @@ return var;
 short int VIRTUAL_math__Float__is_inf_extern(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var3 /* : Bool */;
+short int var3 /* : Bool for extern */;
 double var4 /* : Float */;
 { /* Inline math#Float#is_inf_extern (self) on <self:Object(Float)> */
 var4 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;

@@ -8,11 +8,13 @@ val* var_analysis /* var analysis: RapidTypeAnalysis */;
 var_mainmodule = p0;
 var1 = NEW_rapid_type_analysis__RapidTypeAnalysis(&type_rapid_type_analysis__RapidTypeAnalysis);
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#init (var1,self,var_mainmodule) on <var1:RapidTypeAnalysis> */
-var1->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val = self; /* _modelbuilder on <var1:RapidTypeAnalysis> */
-var1->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val = var_mainmodule; /* _mainmodule on <var1:RapidTypeAnalysis> */
-RET_LABEL2:(void)0;
+((void (*)(val*, val*))(var1->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__modelbuilder_61d]))(var1, self) /* modelbuilder= on <var1:RapidTypeAnalysis>*/;
 }
+{
+((void (*)(val*, val*))(var1->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule_61d]))(var1, var_mainmodule) /* mainmodule= on <var1:RapidTypeAnalysis>*/;
+}
+{
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:RapidTypeAnalysis>*/;
 }
 var_analysis = var1;
 {
@@ -39,7 +41,7 @@ val* var1 /* : ModelBuilder */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
 var = var1;
@@ -55,7 +57,7 @@ val* var3 /* : ModelBuilder */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
 var1 = var3;
@@ -65,6 +67,19 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method rapid_type_analysis#RapidTypeAnalysis#modelbuilder= for (self: RapidTypeAnalysis, ModelBuilder) */
+void rapid_type_analysis__RapidTypeAnalysis__modelbuilder_61d(val* self, val* p0) {
+self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val = p0; /* _modelbuilder on <self:RapidTypeAnalysis> */
+RET_LABEL:;
+}
+/* method rapid_type_analysis#RapidTypeAnalysis#modelbuilder= for (self: Object, ModelBuilder) */
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__modelbuilder_61d(val* self, val* p0) {
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder= (self,p0) on <self:Object(RapidTypeAnalysis)> */
+self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val = p0; /* _modelbuilder on <self:Object(RapidTypeAnalysis)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
 /* method rapid_type_analysis#RapidTypeAnalysis#mainmodule for (self: RapidTypeAnalysis): MModule */
 val* rapid_type_analysis__RapidTypeAnalysis__mainmodule(val* self) {
 val* var /* : MModule */;
@@ -72,7 +87,7 @@ val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var = var1;
@@ -88,7 +103,7 @@ val* var3 /* : MModule */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var1 = var3;
@@ -98,6 +113,19 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method rapid_type_analysis#RapidTypeAnalysis#mainmodule= for (self: RapidTypeAnalysis, MModule) */
+void rapid_type_analysis__RapidTypeAnalysis__mainmodule_61d(val* self, val* p0) {
+self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val = p0; /* _mainmodule on <self:RapidTypeAnalysis> */
+RET_LABEL:;
+}
+/* method rapid_type_analysis#RapidTypeAnalysis#mainmodule= for (self: Object, MModule) */
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__mainmodule_61d(val* self, val* p0) {
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule= (self,p0) on <self:Object(RapidTypeAnalysis)> */
+self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val = p0; /* _mainmodule on <self:Object(RapidTypeAnalysis)> */
+RET_LABEL1:(void)0;
+}
+RET_LABEL:;
+}
 /* method rapid_type_analysis#RapidTypeAnalysis#live_types for (self: RapidTypeAnalysis): HashSet[MClassType] */
 val* rapid_type_analysis__RapidTypeAnalysis__live_types(val* self) {
 val* var /* : HashSet[MClassType] */;
@@ -105,7 +133,7 @@ val* var1 /* : HashSet[MClassType] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
 var = var1;
@@ -121,7 +149,7 @@ val* var3 /* : HashSet[MClassType] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
 var1 = var3;
@@ -138,7 +166,7 @@ val* var1 /* : HashSet[MClassType] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 58);
 show_backtrace(1);
 }
 var = var1;
@@ -154,7 +182,7 @@ val* var3 /* : HashSet[MClassType] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 58);
 show_backtrace(1);
 }
 var1 = var3;
@@ -171,7 +199,7 @@ val* var1 /* : HashSet[MClass] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
 var = var1;
@@ -187,7 +215,7 @@ val* var3 /* : HashSet[MClass] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
 var1 = var3;
@@ -204,7 +232,7 @@ val* var1 /* : HashSet[MType] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types].val; /* _live_cast_types on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 67);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 65);
 show_backtrace(1);
 }
 var = var1;
@@ -220,7 +248,7 @@ val* var3 /* : HashSet[MType] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types].val; /* _live_cast_types on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 67);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 65);
 show_backtrace(1);
 }
 var1 = var3;
@@ -237,7 +265,7 @@ val* var1 /* : HashSet[MType] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types].val; /* _live_open_cast_types on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 70);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 68);
 show_backtrace(1);
 }
 var = var1;
@@ -253,7 +281,7 @@ val* var3 /* : HashSet[MType] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types].val; /* _live_open_cast_types on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 70);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 68);
 show_backtrace(1);
 }
 var1 = var3;
@@ -270,7 +298,7 @@ val* var1 /* : HashSet[MMethodDef] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 72);
 show_backtrace(1);
 }
 var = var1;
@@ -286,7 +314,7 @@ val* var3 /* : HashSet[MMethodDef] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 72);
 show_backtrace(1);
 }
 var1 = var3;
@@ -303,7 +331,7 @@ val* var1 /* : HashSet[MMethod] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods].val; /* _live_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 77);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 75);
 show_backtrace(1);
 }
 var = var1;
@@ -319,7 +347,7 @@ val* var3 /* : HashSet[MMethod] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods].val; /* _live_methods on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 77);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 75);
 show_backtrace(1);
 }
 var1 = var3;
@@ -336,7 +364,7 @@ val* var1 /* : HashSet[CallSite] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_callsites].val; /* _live_callsites on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_callsites");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 78);
 show_backtrace(1);
 }
 var = var1;
@@ -352,7 +380,7 @@ val* var3 /* : HashSet[CallSite] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_callsites].val; /* _live_callsites on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_callsites");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 78);
 show_backtrace(1);
 }
 var1 = var3;
@@ -369,7 +397,7 @@ val* var1 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_targets_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 83);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 81);
 show_backtrace(1);
 }
 var = var1;
@@ -385,7 +413,7 @@ val* var3 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_targets_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 83);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 81);
 show_backtrace(1);
 }
 var1 = var3;
@@ -422,42 +450,46 @@ int idtype;
 val* var20 /* : MClass */;
 val* var22 /* : MClass */;
 val* var23 /* : MClassDef */;
-val* var24 /* : MClassType */;
+val* var25 /* : MClassDef */;
 val* var26 /* : MClassType */;
-val* var27 /* : MMethod */;
+val* var28 /* : MClassType */;
 val* var29 /* : MMethod */;
+val* var31 /* : MMethod */;
 val* var_mproperty /* var mproperty: MMethod */;
-val* var30 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
 val* var32 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
-val* var33 /* : nullable Object */;
+val* var34 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
+val* var35 /* : nullable Object */;
 val* var_res /* var res: nullable Set[MMethodDef] */;
-val* var34 /* : null */;
-short int var35 /* : Bool */;
-short int var36 /* : Bool */;
+val* var36 /* : null */;
+short int var37 /* : Bool */;
 short int var38 /* : Bool */;
-short int var39 /* : Bool */;
 short int var40 /* : Bool */;
-val* var41 /* : ArraySet[MMethodDef] */;
-val* var42 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
+short int var41 /* : Bool */;
+short int var42 /* : Bool */;
+val* var43 /* : ArraySet[MMethodDef] */;
 val* var44 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
-val* var45 /* : HashSet[MClass] */;
+val* var46 /* : HashMap2[MType, MProperty, Set[MMethodDef]] */;
 val* var47 /* : HashSet[MClass] */;
-val* var48 /* : Iterator[Object] */;
-short int var49 /* : Bool */;
-val* var50 /* : nullable Object */;
+val* var49 /* : HashSet[MClass] */;
+val* var_ /* var : HashSet[MClass] */;
+val* var50 /* : Iterator[Object] */;
+val* var_51 /* var : Iterator[MClass] */;
+short int var52 /* : Bool */;
+val* var53 /* : nullable Object */;
 val* var_c /* var c: MClass */;
-val* var51 /* : MClassDef */;
-val* var52 /* : MClassType */;
-val* var54 /* : MClassType */;
+val* var54 /* : MClassDef */;
+val* var56 /* : MClassDef */;
+val* var57 /* : MClassType */;
+val* var59 /* : MClassType */;
 val* var_tc /* var tc: MClassType */;
-val* var55 /* : MModule */;
-val* var57 /* : MModule */;
-val* var58 /* : null */;
-short int var59 /* : Bool */;
-short int var60 /* : Bool */;
-val* var61 /* : MModule */;
-val* var63 /* : MModule */;
-val* var64 /* : MPropDef */;
+val* var60 /* : MModule */;
+val* var62 /* : MModule */;
+val* var63 /* : null */;
+short int var64 /* : Bool */;
+short int var65 /* : Bool */;
+val* var66 /* : MModule */;
+val* var68 /* : MModule */;
+val* var69 /* : MPropDef */;
 val* var_d /* var d: MMethodDef */;
 var_callsite = p0;
 {
@@ -465,7 +497,7 @@ var_callsite = p0;
 var3 = var_callsite->attrs[COLOR_typing__CallSite___recv].val; /* _recv on <var_callsite:CallSite> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _recv");
-PRINT_ERROR(" (%s:%d)\n", "src/typing.nit", 408);
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 469);
 show_backtrace(1);
 }
 var1 = var3;
@@ -507,7 +539,7 @@ if (var8){
 var16 = var_callsite->attrs[COLOR_typing__CallSite___mmodule].val; /* _mmodule on <var_callsite:CallSite> */
 if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/typing.nit", 411);
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 472);
 show_backtrace(1);
 }
 var14 = var16;
@@ -534,7 +566,7 @@ var19 = var_mtype->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 92);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 90);
 show_backtrace(1);
 }
 {
@@ -542,7 +574,7 @@ show_backtrace(1);
 var22 = var_mtype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_mtype:MType(MClassType)> */
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
 var20 = var22;
@@ -550,181 +582,209 @@ RET_LABEL21:(void)0;
 }
 }
 {
-var23 = model__MClass__intro(var20);
+{ /* Inline model#MClass#intro (var20) on <var20:MClass> */
+var25 = var20->attrs[COLOR_model__MClass___intro].val; /* _intro on <var20:MClass> */
+if (unlikely(var25 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
+show_backtrace(1);
+}
+var23 = var25;
+RET_LABEL24:(void)0;
+}
 }
 {
 { /* Inline model#MClassDef#bound_mtype (var23) on <var23:MClassDef> */
-var26 = var23->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var23:MClassDef> */
-if (unlikely(var26 == NULL)) {
+var28 = var23->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var23:MClassDef> */
+if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var24 = var26;
-RET_LABEL25:(void)0;
+var26 = var28;
+RET_LABEL27:(void)0;
 }
 }
-var_mtype = var24;
+var_mtype = var26;
 {
 { /* Inline typing#CallSite#mproperty (var_callsite) on <var_callsite:CallSite> */
-var29 = var_callsite->attrs[COLOR_typing__CallSite___mproperty].val; /* _mproperty on <var_callsite:CallSite> */
-if (unlikely(var29 == NULL)) {
+var31 = var_callsite->attrs[COLOR_typing__CallSite___mproperty].val; /* _mproperty on <var_callsite:CallSite> */
+if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/typing.nit", 422);
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 483);
 show_backtrace(1);
 }
-var27 = var29;
-RET_LABEL28:(void)0;
+var29 = var31;
+RET_LABEL30:(void)0;
 }
 }
-var_mproperty = var27;
+var_mproperty = var29;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_targets_cache (self) on <self:RapidTypeAnalysis> */
-var32 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:RapidTypeAnalysis> */
-if (unlikely(var32 == NULL)) {
+var34 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:RapidTypeAnalysis> */
+if (unlikely(var34 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_targets_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 83);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 81);
 show_backtrace(1);
 }
-var30 = var32;
-RET_LABEL31:(void)0;
+var32 = var34;
+RET_LABEL33:(void)0;
 }
 }
 {
-var33 = more_collections__HashMap2___91d_93d(var30, var_mtype, var_mproperty);
+var35 = more_collections__HashMap2___91d_93d(var32, var_mtype, var_mproperty);
 }
-var_res = var33;
-var34 = NULL;
+var_res = var35;
+var36 = NULL;
 if (var_res == NULL) {
-var35 = 0; /* is null */
+var37 = 0; /* is null */
 } else {
-var35 = 1; /* arg is null and recv is not */
+var37 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_res,var34) on <var_res:nullable Set[MMethodDef]> */
-var_other = var34;
+{ /* Inline kernel#Object#!= (var_res,var36) on <var_res:nullable Set[MMethodDef]> */
+var_other = var36;
 {
-var39 = ((short int (*)(val*, val*))(var_res->class->vft[COLOR_kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable Set[MMethodDef](Set[MMethodDef])>*/;
-var38 = var39;
+var41 = ((short int (*)(val*, val*))(var_res->class->vft[COLOR_kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable Set[MMethodDef](Set[MMethodDef])>*/;
+var40 = var41;
 }
-var40 = !var38;
-var36 = var40;
-goto RET_LABEL37;
-RET_LABEL37:(void)0;
+var42 = !var40;
+var38 = var42;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
 }
-var35 = var36;
+var37 = var38;
 }
-if (var35){
+if (var37){
 var = var_res;
 goto RET_LABEL;
 } else {
 }
-var41 = NEW_array__ArraySet(&type_array__ArraySetmodel__MMethodDef);
+var43 = NEW_array__ArraySet(&type_array__ArraySetmodel__MMethodDef);
 {
-array__ArraySet__init(var41); /* Direct call array#ArraySet#init on <var41:ArraySet[MMethodDef]>*/
+((void (*)(val*))(var43->class->vft[COLOR_kernel__Object__init]))(var43) /* init on <var43:ArraySet[MMethodDef]>*/;
 }
-var_res = var41;
+var_res = var43;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_targets_cache (self) on <self:RapidTypeAnalysis> */
-var44 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:RapidTypeAnalysis> */
-if (unlikely(var44 == NULL)) {
+var46 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_targets_cache].val; /* _live_targets_cache on <self:RapidTypeAnalysis> */
+if (unlikely(var46 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_targets_cache");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 83);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 81);
 show_backtrace(1);
 }
-var42 = var44;
-RET_LABEL43:(void)0;
+var44 = var46;
+RET_LABEL45:(void)0;
 }
 }
 {
-more_collections__HashMap2___91d_93d_61d(var42, var_mtype, var_mproperty, var_res); /* Direct call more_collections#HashMap2#[]= on <var42:HashMap2[MType, MProperty, Set[MMethodDef]]>*/
+more_collections__HashMap2___91d_93d_61d(var44, var_mtype, var_mproperty, var_res); /* Direct call more_collections#HashMap2#[]= on <var44:HashMap2[MType, MProperty, Set[MMethodDef]]>*/
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_classes (self) on <self:RapidTypeAnalysis> */
-var47 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
-if (unlikely(var47 == NULL)) {
+var49 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
+if (unlikely(var49 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
-var45 = var47;
-RET_LABEL46:(void)0;
+var47 = var49;
+RET_LABEL48:(void)0;
 }
 }
+var_ = var47;
 {
-var48 = hash_collection__HashSet__iterator(var45);
+var50 = hash_collection__HashSet__iterator(var_);
 }
+var_51 = var50;
 for(;;) {
 {
-var49 = ((short int (*)(val*))(var48->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var48) /* is_ok on <var48:Iterator[Object]>*/;
+var52 = ((short int (*)(val*))(var_51->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_51) /* is_ok on <var_51:Iterator[MClass]>*/;
 }
-if(!var49) break;
+if (var52){
 {
-var50 = ((val* (*)(val*))(var48->class->vft[COLOR_abstract_collection__Iterator__item]))(var48) /* item on <var48:Iterator[Object]>*/;
+var53 = ((val* (*)(val*))(var_51->class->vft[COLOR_abstract_collection__Iterator__item]))(var_51) /* item on <var_51:Iterator[MClass]>*/;
 }
-var_c = var50;
+var_c = var53;
 {
-var51 = model__MClass__intro(var_c);
-}
-{
-{ /* Inline model#MClassDef#bound_mtype (var51) on <var51:MClassDef> */
-var54 = var51->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var51:MClassDef> */
-if (unlikely(var54 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+{ /* Inline model#MClass#intro (var_c) on <var_c:MClass> */
+var56 = var_c->attrs[COLOR_model__MClass___intro].val; /* _intro on <var_c:MClass> */
+if (unlikely(var56 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
 show_backtrace(1);
 }
-var52 = var54;
-RET_LABEL53:(void)0;
+var54 = var56;
+RET_LABEL55:(void)0;
 }
 }
-var_tc = var52;
+{
+{ /* Inline model#MClassDef#bound_mtype (var54) on <var54:MClassDef> */
+var59 = var54->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var54:MClassDef> */
+if (unlikely(var59 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
+show_backtrace(1);
+}
+var57 = var59;
+RET_LABEL58:(void)0;
+}
+}
+var_tc = var57;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var57 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var57 == NULL)) {
+var62 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var62 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var55 = var57;
-RET_LABEL56:(void)0;
+var60 = var62;
+RET_LABEL61:(void)0;
 }
 }
-var58 = NULL;
+var63 = NULL;
 {
-var59 = model__MType__is_subtype(var_tc, var55, var58, var_mtype);
+var64 = model__MType__is_subtype(var_tc, var60, var63, var_mtype);
 }
-var60 = !var59;
-if (var60){
-goto CONTINUE_label;
+var65 = !var64;
+if (var65){
+goto BREAK_label;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var63 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var63 == NULL)) {
+var68 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var68 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var61 = var63;
-RET_LABEL62:(void)0;
+var66 = var68;
+RET_LABEL67:(void)0;
 }
 }
 {
-var64 = model__MProperty__lookup_first_definition(var_mproperty, var61, var_tc);
+var69 = model__MProperty__lookup_first_definition(var_mproperty, var66, var_tc);
 }
-var_d = var64;
+var_d = var69;
 {
 array__ArraySet__add(var_res, var_d); /* Direct call array#ArraySet#add on <var_res:nullable Set[MMethodDef](ArraySet[MMethodDef])>*/
 }
-CONTINUE_label: (void)0;
-{
-((void (*)(val*))(var48->class->vft[COLOR_abstract_collection__Iterator__next]))(var48) /* next on <var48:Iterator[Object]>*/;
-}
-}
 BREAK_label: (void)0;
+{
+((void (*)(val*))(var_51->class->vft[COLOR_abstract_collection__Iterator__next]))(var_51) /* next on <var_51:Iterator[MClass]>*/;
+}
+} else {
+goto BREAK_label70;
+}
+}
+BREAK_label70: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_51) on <var_51:Iterator[MClass]> */
+RET_LABEL71:(void)0;
+}
+}
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
@@ -746,7 +806,7 @@ val* var1 /* : HashSet[MMethodDef] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 110);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 108);
 show_backtrace(1);
 }
 var = var1;
@@ -762,7 +822,7 @@ val* var3 /* : HashSet[MMethodDef] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 110);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 108);
 show_backtrace(1);
 }
 var1 = var3;
@@ -779,7 +839,7 @@ val* var1 /* : HashSet[MMethod] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 162);
 show_backtrace(1);
 }
 var = var1;
@@ -795,7 +855,7 @@ val* var3 /* : HashSet[MMethod] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 162);
 show_backtrace(1);
 }
 var1 = var3;
@@ -812,7 +872,7 @@ val* var1 /* : Array[MMethod] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 167);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 165);
 show_backtrace(1);
 }
 var = var1;
@@ -828,7 +888,7 @@ val* var3 /* : Array[MMethod] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 167);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 165);
 show_backtrace(1);
 }
 var1 = var3;
@@ -845,7 +905,7 @@ val* var1 /* : HashSet[MMethod] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___try_methods].val; /* _try_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _try_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 170);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 168);
 show_backtrace(1);
 }
 var = var1;
@@ -861,7 +921,7 @@ val* var3 /* : HashSet[MMethod] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___try_methods].val; /* _try_methods on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _try_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 170);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 168);
 show_backtrace(1);
 }
 var1 = var3;
@@ -878,7 +938,7 @@ val* var1 /* : List[MMethodDef] */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _todo");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 172);
 show_backtrace(1);
 }
 var = var1;
@@ -894,7 +954,7 @@ val* var3 /* : List[MMethodDef] */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:Object(RapidTypeAnalysis)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _todo");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 172);
 show_backtrace(1);
 }
 var1 = var3;
@@ -920,21 +980,23 @@ val* var_other /* var other: nullable Object */;
 short int var11 /* : Bool */;
 short int var12 /* : Bool */;
 short int var13 /* : Bool */;
+val* var_ /* var : Array[MClass] */;
 val* var14 /* : ArrayIterator[nullable Object] */;
-short int var15 /* : Bool */;
-val* var16 /* : nullable Object */;
+val* var_15 /* var : ArrayIterator[MClass] */;
+short int var16 /* : Bool */;
+val* var17 /* : nullable Object */;
 val* var_c /* var c: MClass */;
-val* var17 /* : MClassType */;
-val* var19 /* : MClassType */;
+val* var18 /* : MClassType */;
 val* var20 /* : MClassType */;
-val* var22 /* : MClassType */;
+val* var21 /* : MClassType */;
+val* var23 /* : MClassType */;
 var_classname = p0;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
 var = var2;
@@ -946,7 +1008,7 @@ RET_LABEL1:(void)0;
 var5 = var->attrs[COLOR_modelbuilder__ModelBuilder___model].val; /* _model on <var:ModelBuilder> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
-PRINT_ERROR(" (%s:%d)\n", "src/modelbuilder.nit", 98);
+PRINT_ERROR(" (%s:%d)\n", "modelbuilder.nit", 103);
 show_backtrace(1);
 }
 var3 = var5;
@@ -978,51 +1040,60 @@ RET_LABEL10:(void)0;
 var8 = var9;
 }
 if (var8){
+var_ = var_classes;
 {
-var14 = array__AbstractArrayRead__iterator(var_classes);
+var14 = array__AbstractArrayRead__iterator(var_);
 }
+var_15 = var14;
 for(;;) {
 {
-var15 = array__ArrayIterator__is_ok(var14);
+var16 = array__ArrayIterator__is_ok(var_15);
 }
-if(!var15) break;
+if (var16){
 {
-var16 = array__ArrayIterator__item(var14);
+var17 = array__ArrayIterator__item(var_15);
 }
-var_c = var16;
-{
-{ /* Inline model#MClass#mclass_type (var_c) on <var_c:MClass> */
-var19 = var_c->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c:MClass> */
-if (unlikely(var19 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
-show_backtrace(1);
-}
-var17 = var19;
-RET_LABEL18:(void)0;
-}
-}
+var_c = var17;
 {
 { /* Inline model#MClass#mclass_type (var_c) on <var_c:MClass> */
-var22 = var_c->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c:MClass> */
-if (unlikely(var22 == NULL)) {
+var20 = var_c->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c:MClass> */
+if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
-var20 = var22;
-RET_LABEL21:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__add_new(self, var17, var20); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_new on <self:RapidTypeAnalysis>*/
+{ /* Inline model#MClass#mclass_type (var_c) on <var_c:MClass> */
+var23 = var_c->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var_c:MClass> */
+if (unlikely(var23 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
+show_backtrace(1);
 }
-CONTINUE_label: (void)0;
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
 {
-array__ArrayIterator__next(var14); /* Direct call array#ArrayIterator#next on <var14:ArrayIterator[nullable Object]>*/
+rapid_type_analysis__RapidTypeAnalysis__add_new(self, var18, var21); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_new on <self:RapidTypeAnalysis>*/
+}
+{
+array__ArrayIterator__next(var_15); /* Direct call array#ArrayIterator#next on <var_15:ArrayIterator[MClass]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_15) on <var_15:ArrayIterator[MClass]> */
+RET_LABEL24:(void)0;
+}
+}
 } else {
 }
 RET_LABEL:;
@@ -1062,322 +1133,383 @@ val* var_other26 /* var other: nullable Object */;
 short int var27 /* : Bool */;
 short int var28 /* : Bool */;
 short int var29 /* : Bool */;
-val* var30 /* : MModule */;
-val* var32 /* : MModule */;
-static val* varonce33;
-val* var34 /* : String */;
-char* var35 /* : NativeString */;
-long var36 /* : Int */;
-val* var37 /* : FlatString */;
-val* var38 /* : MClass */;
-val* var40 /* : MClass */;
-val* var41 /* : nullable MMethod */;
+val* var30 /* : nullable MMethod */;
+val* var31 /* : MModule */;
+val* var33 /* : MModule */;
+static val* varonce34;
+val* var35 /* : String */;
+char* var36 /* : NativeString */;
+long var37 /* : Int */;
+val* var38 /* : FlatString */;
+val* var39 /* : MClass */;
+val* var41 /* : MClass */;
+val* var42 /* : nullable MMethod */;
+val* var43 /* : MModule */;
+val* var45 /* : MModule */;
+static val* varonce46;
+val* var47 /* : String */;
+char* var48 /* : NativeString */;
+long var49 /* : Int */;
+val* var50 /* : FlatString */;
+val* var51 /* : MClass */;
+val* var53 /* : MClass */;
+val* var54 /* : nullable MMethod */;
 val* var_mainprop /* var mainprop: nullable MMethod */;
-val* var42 /* : null */;
-short int var43 /* : Bool */;
-short int var44 /* : Bool */;
-short int var46 /* : Bool */;
-short int var47 /* : Bool */;
-short int var48 /* : Bool */;
-static val* varonce49;
-val* var50 /* : String */;
-char* var51 /* : NativeString */;
-long var52 /* : Int */;
-val* var53 /* : FlatString */;
-static val* varonce54;
-val* var55 /* : String */;
-char* var56 /* : NativeString */;
-long var57 /* : Int */;
-val* var58 /* : FlatString */;
-static val* varonce59;
-val* var60 /* : String */;
-char* var61 /* : NativeString */;
-long var62 /* : Int */;
-val* var63 /* : FlatString */;
-static val* varonce64;
-val* var65 /* : String */;
-char* var66 /* : NativeString */;
-long var67 /* : Int */;
-val* var68 /* : FlatString */;
-val* var69 /* : List[MMethodDef] */;
-val* var71 /* : List[MMethodDef] */;
+val* var55 /* : null */;
+short int var56 /* : Bool */;
+short int var57 /* : Bool */;
+short int var59 /* : Bool */;
+short int var60 /* : Bool */;
+short int var61 /* : Bool */;
+val* var62 /* : MModule */;
+val* var64 /* : MModule */;
+val* var65 /* : nullable MClassType */;
+val* var_finalizable_type /* var finalizable_type: nullable MClassType */;
+val* var66 /* : null */;
+short int var67 /* : Bool */;
+short int var68 /* : Bool */;
+short int var70 /* : Bool */;
+short int var71 /* : Bool */;
 short int var72 /* : Bool */;
-short int var73 /* : Bool */;
-val* var74 /* : List[MMethodDef] */;
-val* var76 /* : List[MMethodDef] */;
-val* var77 /* : nullable Object */;
-val* var_mmethoddef /* var mmethoddef: MMethodDef */;
-val* var78 /* : MProperty */;
-val* var80 /* : MProperty */;
-val* var_mmeth /* var mmeth: MMethod */;
-val* var81 /* : RapidTypeVisitor */;
-val* var82 /* : MClassDef */;
-val* var84 /* : MClassDef */;
-val* var85 /* : MClassType */;
-val* var87 /* : MClassType */;
-val* var_v /* var v: RapidTypeVisitor */;
-val* var88 /* : nullable MSignature */;
-val* var90 /* : nullable MSignature */;
-long var91 /* : Int */;
-long var93 /* : Int */;
-long var_vararg_rank /* var vararg_rank: Int */;
-long var94 /* : Int */;
+val* var73 /* : MModule */;
+val* var75 /* : MModule */;
+static val* varonce76;
+val* var77 /* : String */;
+char* var78 /* : NativeString */;
+long var79 /* : Int */;
+val* var80 /* : FlatString */;
+val* var81 /* : MClass */;
+val* var83 /* : MClass */;
+val* var84 /* : nullable MMethod */;
+val* var_finalize_meth /* var finalize_meth: nullable MMethod */;
+val* var85 /* : null */;
+short int var86 /* : Bool */;
+short int var87 /* : Bool */;
+short int var89 /* : Bool */;
+short int var90 /* : Bool */;
+short int var91 /* : Bool */;
+static val* varonce92;
+val* var93 /* : String */;
+char* var94 /* : NativeString */;
 long var95 /* : Int */;
-long var97 /* : Int */;
-short int var98 /* : Bool */;
-short int var100 /* : Bool */;
+val* var96 /* : FlatString */;
+static val* varonce97;
+val* var98 /* : String */;
+char* var99 /* : NativeString */;
+long var100 /* : Int */;
+val* var101 /* : FlatString */;
+static val* varonce102;
+val* var103 /* : String */;
+char* var104 /* : NativeString */;
+long var105 /* : Int */;
+val* var106 /* : FlatString */;
+static val* varonce107;
+val* var108 /* : String */;
+char* var109 /* : NativeString */;
+long var110 /* : Int */;
+val* var111 /* : FlatString */;
+static val* varonce112;
+val* var113 /* : String */;
+char* var114 /* : NativeString */;
+long var115 /* : Int */;
+val* var116 /* : FlatString */;
+val* var117 /* : List[MMethodDef] */;
+val* var119 /* : List[MMethodDef] */;
+short int var120 /* : Bool */;
+short int var121 /* : Bool */;
+val* var122 /* : List[MMethodDef] */;
+val* var124 /* : List[MMethodDef] */;
+val* var125 /* : nullable Object */;
+val* var_mmethoddef /* var mmethoddef: MMethodDef */;
+val* var126 /* : MProperty */;
+val* var128 /* : MProperty */;
+val* var_mmeth /* var mmeth: MMethod */;
+val* var129 /* : RapidTypeVisitor */;
+val* var130 /* : MClassDef */;
+val* var132 /* : MClassDef */;
+val* var133 /* : MClassType */;
+val* var135 /* : MClassType */;
+val* var_v /* var v: RapidTypeVisitor */;
+val* var136 /* : nullable MSignature */;
+val* var138 /* : nullable MSignature */;
+long var139 /* : Int */;
+long var141 /* : Int */;
+long var_vararg_rank /* var vararg_rank: Int */;
+long var142 /* : Int */;
+long var143 /* : Int */;
+long var145 /* : Int */;
+short int var146 /* : Bool */;
+short int var148 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var101 /* : Bool */;
-val* var102 /* : ModelBuilder */;
-val* var104 /* : ModelBuilder */;
-val* var105 /* : HashMap[MPropDef, APropdef] */;
-val* var107 /* : HashMap[MPropDef, APropdef] */;
-val* var108 /* : nullable Object */;
+short int var149 /* : Bool */;
+val* var150 /* : ModelBuilder */;
+val* var152 /* : ModelBuilder */;
+val* var153 /* : HashMap[MPropDef, APropdef] */;
+val* var155 /* : HashMap[MPropDef, APropdef] */;
+val* var156 /* : nullable Object */;
 val* var_node /* var node: APropdef */;
-val* var109 /* : nullable MSignature */;
-val* var111 /* : nullable MSignature */;
-val* var112 /* : Array[MParameter] */;
-val* var114 /* : Array[MParameter] */;
-val* var115 /* : nullable Object */;
-val* var116 /* : MType */;
-val* var118 /* : MType */;
-val* var_elttype /* var elttype: MType */;
-val* var119 /* : MModule */;
-val* var121 /* : MModule */;
-static val* varonce122;
-val* var123 /* : String */;
-char* var124 /* : NativeString */;
-long var125 /* : Int */;
-val* var126 /* : FlatString */;
-val* var127 /* : MClass */;
-val* var128 /* : Array[MType] */;
-long var129 /* : Int */;
-val* var_ /* var : Array[MType] */;
-val* var130 /* : MClassType */;
-val* var_vararg /* var vararg: MClassType */;
-val* var131 /* : MModule */;
-val* var133 /* : MModule */;
-static val* varonce134;
-val* var135 /* : String */;
-char* var136 /* : NativeString */;
-long var137 /* : Int */;
-val* var138 /* : FlatString */;
-val* var139 /* : MClass */;
-val* var140 /* : Array[MType] */;
-long var141 /* : Int */;
-val* var_142 /* var : Array[MType] */;
-val* var143 /* : MClassType */;
-val* var_native /* var native: MClassType */;
-val* var144 /* : ModelBuilder */;
-val* var146 /* : ModelBuilder */;
-static val* varonce147;
-val* var148 /* : String */;
-char* var149 /* : NativeString */;
-long var150 /* : Int */;
-val* var151 /* : FlatString */;
-val* var152 /* : MClass */;
-val* var154 /* : MClass */;
-val* var155 /* : MModule */;
-val* var157 /* : MModule */;
-val* var158 /* : MMethod */;
+val* var157 /* : nullable MSignature */;
 val* var159 /* : nullable MSignature */;
-val* var161 /* : nullable MSignature */;
+val* var160 /* : Array[MParameter] */;
+val* var162 /* : Array[MParameter] */;
+val* var163 /* : nullable Object */;
+val* var164 /* : MType */;
+val* var166 /* : MType */;
+val* var_elttype /* var elttype: MType */;
+val* var167 /* : MModule */;
+val* var169 /* : MModule */;
+static val* varonce170;
+val* var171 /* : String */;
+char* var172 /* : NativeString */;
+long var173 /* : Int */;
+val* var174 /* : FlatString */;
+val* var175 /* : MClass */;
+val* var176 /* : Array[MType] */;
+long var177 /* : Int */;
+val* var_ /* var : Array[MType] */;
+val* var178 /* : MClassType */;
+val* var_vararg /* var vararg: MClassType */;
+val* var179 /* : MModule */;
+val* var181 /* : MModule */;
+static val* varonce182;
+val* var183 /* : String */;
+char* var184 /* : NativeString */;
+long var185 /* : Int */;
+val* var186 /* : FlatString */;
+val* var187 /* : MClass */;
+val* var188 /* : Array[MType] */;
+long var189 /* : Int */;
+val* var_190 /* var : Array[MType] */;
+val* var191 /* : MClassType */;
+val* var_native /* var native: MClassType */;
+val* var192 /* : ModelBuilder */;
+val* var194 /* : ModelBuilder */;
+static val* varonce195;
+val* var196 /* : String */;
+char* var197 /* : NativeString */;
+long var198 /* : Int */;
+val* var199 /* : FlatString */;
+val* var200 /* : MClass */;
+val* var202 /* : MClass */;
+val* var203 /* : MModule */;
+val* var205 /* : MModule */;
+val* var206 /* : MMethod */;
+val* var207 /* : nullable MSignature */;
+val* var209 /* : nullable MSignature */;
 val* var_sig /* var sig: MSignature */;
-val* var162 /* : MPropDef */;
-val* var163 /* : nullable MSignature */;
-val* var165 /* : nullable MSignature */;
+val* var210 /* : MPropDef */;
+val* var212 /* : MPropDef */;
+val* var213 /* : nullable MSignature */;
+val* var215 /* : nullable MSignature */;
 val* var_osig /* var osig: MSignature */;
-val* var166 /* : Range[Int] */;
-long var167 /* : Int */;
-long var168 /* : Int */;
-val* var169 /* : Discrete */;
-val* var170 /* : Discrete */;
-val* var171 /* : Iterator[Discrete] */;
-short int var172 /* : Bool */;
-val* var173 /* : nullable Object */;
+long var216 /* : Int */;
 long var_i /* var i: Int */;
-long var174 /* : Int */;
-val* var175 /* : Array[MParameter] */;
-val* var177 /* : Array[MParameter] */;
-val* var178 /* : nullable Object */;
-val* var179 /* : MType */;
-val* var181 /* : MType */;
+long var217 /* : Int */;
+long var_218 /* var : Int */;
+short int var219 /* : Bool */;
+short int var221 /* : Bool */;
+int cltype222;
+int idtype223;
+const char* var_class_name224;
+short int var225 /* : Bool */;
+val* var226 /* : Array[MParameter] */;
+val* var228 /* : Array[MParameter] */;
+val* var229 /* : nullable Object */;
+val* var230 /* : MType */;
+val* var232 /* : MType */;
 val* var_origtype /* var origtype: MType */;
-short int var182 /* : Bool */;
-short int var183 /* : Bool */;
-val* var184 /* : Array[MParameter] */;
-val* var186 /* : Array[MParameter] */;
-val* var187 /* : nullable Object */;
-val* var188 /* : MType */;
-val* var190 /* : MType */;
+short int var233 /* : Bool */;
+short int var234 /* : Bool */;
+val* var235 /* : Array[MParameter] */;
+val* var237 /* : Array[MParameter] */;
+val* var238 /* : nullable Object */;
+val* var239 /* : MType */;
+val* var241 /* : MType */;
 val* var_paramtype /* var paramtype: MType */;
-val* var191 /* : ModelBuilder */;
-val* var193 /* : ModelBuilder */;
-val* var194 /* : HashMap[MPropDef, APropdef] */;
-val* var196 /* : HashMap[MPropDef, APropdef] */;
-short int var197 /* : Bool */;
-short int var198 /* : Bool */;
-val* var199 /* : String */;
-val* var201 /* : String */;
-static val* varonce202;
-val* var203 /* : String */;
-char* var204 /* : NativeString */;
-long var205 /* : Int */;
-val* var206 /* : FlatString */;
-short int var207 /* : Bool */;
-short int var208 /* : Bool */;
-val* var209 /* : ModelBuilder */;
-val* var211 /* : ModelBuilder */;
-val* var212 /* : HashMap[MClassDef, AClassdef] */;
-val* var214 /* : HashMap[MClassDef, AClassdef] */;
-val* var215 /* : MClassDef */;
-val* var217 /* : MClassDef */;
-val* var218 /* : nullable Object */;
-val* var_nclassdef /* var nclassdef: AClassdef */;
-val* var219 /* : nullable Collection[MMethod] */;
-val* var221 /* : nullable Collection[MMethod] */;
-val* var_super_inits /* var super_inits: nullable Collection[MMethod] */;
-val* var222 /* : null */;
-short int var223 /* : Bool */;
-short int var224 /* : Bool */;
-short int var226 /* : Bool */;
-short int var227 /* : Bool */;
-short int var228 /* : Bool */;
-val* var229 /* : Iterator[nullable Object] */;
-short int var230 /* : Bool */;
-val* var231 /* : nullable Object */;
-val* var_su /* var su: MMethod */;
-val* var232 /* : MClassType */;
-val* var234 /* : MClassType */;
-val* var237 /* : ModelBuilder */;
-val* var239 /* : ModelBuilder */;
-val* var240 /* : HashMap[MPropDef, APropdef] */;
-val* var242 /* : HashMap[MPropDef, APropdef] */;
-val* var243 /* : nullable Object */;
-val* var_npropdef /* var npropdef: APropdef */;
-short int var244 /* : Bool */;
-int cltype245;
-int idtype246;
-val* var247 /* : nullable Array[CallSite] */;
-val* var249 /* : nullable Array[CallSite] */;
-val* var_auto_super_inits /* var auto_super_inits: nullable Array[CallSite] */;
-val* var250 /* : null */;
+long var242 /* : Int */;
+long var243 /* : Int */;
+val* var245 /* : ModelBuilder */;
+val* var247 /* : ModelBuilder */;
+val* var248 /* : HashMap[MPropDef, APropdef] */;
+val* var250 /* : HashMap[MPropDef, APropdef] */;
 short int var251 /* : Bool */;
 short int var252 /* : Bool */;
-short int var254 /* : Bool */;
+short int var253 /* : Bool */;
 short int var255 /* : Bool */;
-short int var256 /* : Bool */;
-val* var257 /* : ArrayIterator[nullable Object] */;
-short int var258 /* : Bool */;
-val* var259 /* : nullable Object */;
-val* var_auto_super_init /* var auto_super_init: CallSite */;
-short int var261 /* : Bool */;
-short int var263 /* : Bool */;
-val* var264 /* : MClassType */;
-val* var266 /* : MClassType */;
-short int var267 /* : Bool */;
-short int var268 /* : Bool */;
+val* var256 /* : ModelBuilder */;
+val* var258 /* : ModelBuilder */;
+val* var259 /* : HashMap[MClassDef, AClassdef] */;
+val* var261 /* : HashMap[MClassDef, AClassdef] */;
+val* var262 /* : MClassDef */;
+val* var264 /* : MClassDef */;
+val* var265 /* : nullable Object */;
+val* var_nclassdef /* var nclassdef: AClassdef */;
+val* var266 /* : nullable MMethodDef */;
+val* var268 /* : nullable MMethodDef */;
+short int var269 /* : Bool */;
 short int var270 /* : Bool */;
-short int var_271 /* var : Bool */;
 short int var272 /* : Bool */;
 short int var274 /* : Bool */;
-val* var275 /* : nullable MSignature */;
-val* var277 /* : nullable MSignature */;
-val* var278 /* : nullable MType */;
-val* var280 /* : nullable MType */;
-val* var_ret /* var ret: nullable MType */;
+short int var275 /* : Bool */;
+val* var276 /* : MProperty */;
+val* var278 /* : MProperty */;
+short int var279 /* : Bool */;
 short int var281 /* : Bool */;
-short int var282 /* : Bool */;
+short int var_282 /* var : Bool */;
 short int var283 /* : Bool */;
-val* var284 /* : null */;
-short int var285 /* : Bool */;
-short int var286 /* : Bool */;
-short int var288 /* : Bool */;
-short int var289 /* : Bool */;
-short int var290 /* : Bool */;
-short int var_291 /* var : Bool */;
+short int var284 /* : Bool */;
+val* var285 /* : MClassType */;
+val* var287 /* : MClassType */;
+val* var288 /* : nullable Object */;
+val* var290 /* : nullable Object */;
+val* var291 /* : null */;
 short int var292 /* : Bool */;
-int cltype293;
-int idtype294;
-short int var_295 /* var : Bool */;
-val* var296 /* : MClass */;
-val* var298 /* : MClass */;
-val* var299 /* : MClassKind */;
-val* var301 /* : MClassKind */;
-val* var302 /* : MClassKind */;
-short int var303 /* : Bool */;
-short int var304 /* : Bool */;
-short int var306 /* : Bool */;
-short int var307 /* : Bool */;
-short int var308 /* : Bool */;
-short int var_309 /* var : Bool */;
-val* var310 /* : MClass */;
-val* var312 /* : MClass */;
-val* var313 /* : MClassKind */;
-val* var315 /* : MClassKind */;
-val* var316 /* : MClassKind */;
-short int var317 /* : Bool */;
-short int var318 /* : Bool */;
+short int var293 /* : Bool */;
+val* var294 /* : nullable MSignature */;
+val* var296 /* : nullable MSignature */;
+val* var297 /* : nullable MType */;
+val* var299 /* : nullable MType */;
+short int var300 /* : Bool */;
+int cltype301;
+int idtype302;
+const char* var_class_name303;
+val* var305 /* : ModelBuilder */;
+val* var307 /* : ModelBuilder */;
+val* var308 /* : HashMap[MPropDef, APropdef] */;
+val* var310 /* : HashMap[MPropDef, APropdef] */;
+val* var311 /* : nullable Object */;
+val* var_npropdef /* var npropdef: APropdef */;
+short int var312 /* : Bool */;
+int cltype313;
+int idtype314;
+val* var315 /* : nullable Array[CallSite] */;
+val* var317 /* : nullable Array[CallSite] */;
+val* var_auto_super_inits /* var auto_super_inits: nullable Array[CallSite] */;
+val* var318 /* : null */;
+short int var319 /* : Bool */;
 short int var320 /* : Bool */;
-short int var321 /* : Bool */;
 short int var322 /* : Bool */;
-val* var323 /* : List[MClassType] */;
-val* var_todo_types /* var todo_types: List[MClassType] */;
-val* var325 /* : HashSet[MClassType] */;
-val* var327 /* : HashSet[MClassType] */;
+short int var323 /* : Bool */;
+short int var324 /* : Bool */;
+val* var_325 /* var : Array[CallSite] */;
+val* var326 /* : ArrayIterator[nullable Object] */;
+val* var_327 /* var : ArrayIterator[CallSite] */;
 short int var328 /* : Bool */;
-short int var329 /* : Bool */;
-val* var330 /* : nullable Object */;
-val* var_t /* var t: MClassType */;
-val* var331 /* : HashSet[MClassType] */;
-val* var333 /* : HashSet[MClassType] */;
-val* var334 /* : Iterator[Object] */;
-short int var335 /* : Bool */;
-val* var336 /* : nullable Object */;
-val* var_ot /* var ot: MClassType */;
-val* var337 /* : MModule */;
-val* var339 /* : MModule */;
-short int var340 /* : Bool */;
+val* var329 /* : nullable Object */;
+val* var_auto_super_init /* var auto_super_init: CallSite */;
+short int var332 /* : Bool */;
+short int var334 /* : Bool */;
+val* var335 /* : MClassType */;
+val* var337 /* : MClassType */;
+short int var338 /* : Bool */;
+short int var339 /* : Bool */;
 short int var341 /* : Bool */;
-val* var343 /* : MModule */;
-val* var345 /* : MModule */;
-val* var346 /* : MClassType */;
-val* var_rt /* var rt: MClassType */;
-val* var347 /* : HashSet[MClassType] */;
-val* var349 /* : HashSet[MClassType] */;
-short int var350 /* : Bool */;
-val* var351 /* : HashSet[MClassType] */;
-val* var353 /* : HashSet[MClassType] */;
-val* var355 /* : HashSet[MType] */;
-val* var357 /* : HashSet[MType] */;
-val* var358 /* : Iterator[Object] */;
+short int var_342 /* var : Bool */;
+short int var343 /* : Bool */;
+short int var345 /* : Bool */;
+val* var346 /* : nullable MSignature */;
+val* var348 /* : nullable MSignature */;
+val* var349 /* : nullable MType */;
+val* var351 /* : nullable MType */;
+val* var_ret /* var ret: nullable MType */;
+short int var352 /* : Bool */;
+short int var353 /* : Bool */;
+short int var354 /* : Bool */;
+val* var355 /* : null */;
+short int var356 /* : Bool */;
+short int var357 /* : Bool */;
 short int var359 /* : Bool */;
-val* var360 /* : nullable Object */;
-val* var_ot361 /* var ot: MType */;
-val* var362 /* : HashSet[MClassType] */;
-val* var364 /* : HashSet[MClassType] */;
-val* var365 /* : Iterator[Object] */;
-short int var366 /* : Bool */;
-val* var367 /* : nullable Object */;
-val* var_t368 /* var t: MClassType */;
-val* var369 /* : MModule */;
-val* var371 /* : MModule */;
-short int var372 /* : Bool */;
-short int var373 /* : Bool */;
-val* var375 /* : MModule */;
-val* var377 /* : MModule */;
-val* var378 /* : MType */;
-val* var_rt379 /* var rt: MType */;
-val* var380 /* : HashSet[MType] */;
-val* var382 /* : HashSet[MType] */;
+short int var360 /* : Bool */;
+short int var361 /* : Bool */;
+short int var_362 /* var : Bool */;
+short int var363 /* : Bool */;
+int cltype364;
+int idtype365;
+short int var_366 /* var : Bool */;
+val* var367 /* : MClass */;
+val* var369 /* : MClass */;
+val* var370 /* : MClassKind */;
+val* var372 /* : MClassKind */;
+val* var373 /* : MClassKind */;
+short int var374 /* : Bool */;
+short int var375 /* : Bool */;
+short int var377 /* : Bool */;
+short int var378 /* : Bool */;
+short int var379 /* : Bool */;
+short int var_380 /* var : Bool */;
+val* var381 /* : MClass */;
+val* var383 /* : MClass */;
+val* var384 /* : MClassKind */;
+val* var386 /* : MClassKind */;
+val* var387 /* : MClassKind */;
+short int var388 /* : Bool */;
+short int var389 /* : Bool */;
+short int var391 /* : Bool */;
+short int var392 /* : Bool */;
+short int var393 /* : Bool */;
+val* var395 /* : List[MClassType] */;
+val* var_todo_types /* var todo_types: List[MClassType] */;
+val* var396 /* : HashSet[MClassType] */;
+val* var398 /* : HashSet[MClassType] */;
+short int var399 /* : Bool */;
+short int var400 /* : Bool */;
+val* var401 /* : nullable Object */;
+val* var_t /* var t: MClassType */;
+val* var402 /* : HashSet[MClassType] */;
+val* var404 /* : HashSet[MClassType] */;
+val* var_405 /* var : HashSet[MClassType] */;
+val* var406 /* : Iterator[Object] */;
+val* var_407 /* var : Iterator[MClassType] */;
+short int var408 /* : Bool */;
+val* var409 /* : nullable Object */;
+val* var_ot /* var ot: MClassType */;
+val* var410 /* : MModule */;
+val* var412 /* : MModule */;
+short int var413 /* : Bool */;
+short int var414 /* : Bool */;
+val* var416 /* : MModule */;
+val* var418 /* : MModule */;
+val* var419 /* : MClassType */;
+val* var_rt /* var rt: MClassType */;
+val* var420 /* : HashSet[MClassType] */;
+val* var422 /* : HashSet[MClassType] */;
+short int var423 /* : Bool */;
+val* var424 /* : HashSet[MClassType] */;
+val* var426 /* : HashSet[MClassType] */;
+val* var430 /* : HashSet[MType] */;
+val* var432 /* : HashSet[MType] */;
+val* var_433 /* var : HashSet[MType] */;
+val* var434 /* : Iterator[Object] */;
+val* var_435 /* var : Iterator[MType] */;
+short int var436 /* : Bool */;
+val* var437 /* : nullable Object */;
+val* var_ot438 /* var ot: MType */;
+val* var439 /* : HashSet[MClassType] */;
+val* var441 /* : HashSet[MClassType] */;
+val* var_442 /* var : HashSet[MClassType] */;
+val* var443 /* : Iterator[Object] */;
+val* var_444 /* var : Iterator[MClassType] */;
+short int var445 /* : Bool */;
+val* var446 /* : nullable Object */;
+val* var_t447 /* var t: MClassType */;
+val* var448 /* : MModule */;
+val* var450 /* : MModule */;
+short int var451 /* : Bool */;
+short int var452 /* : Bool */;
+val* var454 /* : MModule */;
+val* var456 /* : MModule */;
+val* var457 /* : MType */;
+val* var_rt458 /* var rt: MType */;
+val* var459 /* : HashSet[MType] */;
+val* var461 /* : HashSet[MType] */;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var = var2;
@@ -1423,7 +1555,7 @@ rapid_type_analysis__RapidTypeAnalysis__add_new(self, var_maintype, var_maintype
 var13 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
 if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var11 = var13;
@@ -1444,7 +1576,7 @@ varonce = var14;
 var20 = var_maintype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_maintype:nullable MClassType(MClassType)> */
 if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
 var18 = var20;
@@ -1483,1028 +1615,1267 @@ rapid_type_analysis__RapidTypeAnalysis__add_send(self, var_maintype, var_initpro
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var32 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var32 == NULL)) {
+var33 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var30 = var32;
-RET_LABEL31:(void)0;
+var31 = var33;
+RET_LABEL32:(void)0;
 }
 }
-if (varonce33) {
-var34 = varonce33;
+if (varonce34) {
+var35 = varonce34;
 } else {
-var35 = "main";
-var36 = 4;
-var37 = string__NativeString__to_s_with_length(var35, var36);
-var34 = var37;
-varonce33 = var34;
+var36 = "run";
+var37 = 3;
+var38 = string__NativeString__to_s_with_length(var36, var37);
+var35 = var38;
+varonce34 = var35;
 }
 {
 { /* Inline model#MClassType#mclass (var_maintype) on <var_maintype:nullable MClassType(MClassType)> */
-var40 = var_maintype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_maintype:nullable MClassType(MClassType)> */
-if (unlikely(var40 == NULL)) {
+var41 = var_maintype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_maintype:nullable MClassType(MClassType)> */
+if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
-var38 = var40;
-RET_LABEL39:(void)0;
+var39 = var41;
+RET_LABEL40:(void)0;
 }
 }
 {
-var41 = model__MModule__try_get_primitive_method(var30, var34, var38);
+var42 = model__MModule__try_get_primitive_method(var31, var35, var39);
 }
-var_mainprop = var41;
-var42 = NULL;
-if (var_mainprop == NULL) {
-var43 = 0; /* is null */
+if (var42!=NULL) {
+var30 = var42;
 } else {
-var43 = 1; /* arg is null and recv is not */
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
+var45 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var45 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
+show_backtrace(1);
+}
+var43 = var45;
+RET_LABEL44:(void)0;
+}
+}
+if (varonce46) {
+var47 = varonce46;
+} else {
+var48 = "main";
+var49 = 4;
+var50 = string__NativeString__to_s_with_length(var48, var49);
+var47 = var50;
+varonce46 = var47;
+}
+{
+{ /* Inline model#MClassType#mclass (var_maintype) on <var_maintype:nullable MClassType(MClassType)> */
+var53 = var_maintype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_maintype:nullable MClassType(MClassType)> */
+if (unlikely(var53 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var51 = var53;
+RET_LABEL52:(void)0;
+}
+}
+{
+var54 = model__MModule__try_get_primitive_method(var43, var47, var51);
+}
+var30 = var54;
+}
+var_mainprop = var30;
+var55 = NULL;
+if (var_mainprop == NULL) {
+var56 = 0; /* is null */
+} else {
+var56 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_mainprop,var42) on <var_mainprop:nullable MMethod> */
-var_other26 = var42;
+{ /* Inline kernel#Object#!= (var_mainprop,var55) on <var_mainprop:nullable MMethod> */
+var_other26 = var55;
 {
-var47 = ((short int (*)(val*, val*))(var_mainprop->class->vft[COLOR_kernel__Object___61d_61d]))(var_mainprop, var_other26) /* == on <var_mainprop:nullable MMethod(MMethod)>*/;
-var46 = var47;
+var60 = ((short int (*)(val*, val*))(var_mainprop->class->vft[COLOR_kernel__Object___61d_61d]))(var_mainprop, var_other26) /* == on <var_mainprop:nullable MMethod(MMethod)>*/;
+var59 = var60;
 }
-var48 = !var46;
-var44 = var48;
-goto RET_LABEL45;
-RET_LABEL45:(void)0;
+var61 = !var59;
+var57 = var61;
+goto RET_LABEL58;
+RET_LABEL58:(void)0;
 }
-var43 = var44;
+var56 = var57;
 }
-if (var43){
+if (var56){
 {
 rapid_type_analysis__RapidTypeAnalysis__add_send(self, var_maintype, var_mainprop); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_send on <self:RapidTypeAnalysis>*/
 }
 } else {
 }
-if (varonce49) {
-var50 = varonce49;
-} else {
-var51 = "Bool";
-var52 = 4;
-var53 = string__NativeString__to_s_with_length(var51, var52);
-var50 = var53;
-varonce49 = var50;
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
+var64 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var64 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
+show_backtrace(1);
+}
+var62 = var64;
+RET_LABEL63:(void)0;
+}
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var50); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+var65 = model__MModule__finalizable_type(var62);
 }
-if (varonce54) {
-var55 = varonce54;
+var_finalizable_type = var65;
+var66 = NULL;
+if (var_finalizable_type == NULL) {
+var67 = 0; /* is null */
 } else {
-var56 = "Int";
-var57 = 3;
-var58 = string__NativeString__to_s_with_length(var56, var57);
-var55 = var58;
-varonce54 = var55;
+var67 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_finalizable_type,var66) on <var_finalizable_type:nullable MClassType> */
+var_other26 = var66;
+{
+var71 = ((short int (*)(val*, val*))(var_finalizable_type->class->vft[COLOR_kernel__Object___61d_61d]))(var_finalizable_type, var_other26) /* == on <var_finalizable_type:nullable MClassType(MClassType)>*/;
+var70 = var71;
+}
+var72 = !var70;
+var68 = var72;
+goto RET_LABEL69;
+RET_LABEL69:(void)0;
+}
+var67 = var68;
+}
+if (var67){
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
+var75 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var75 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
+show_backtrace(1);
+}
+var73 = var75;
+RET_LABEL74:(void)0;
+}
+}
+if (varonce76) {
+var77 = varonce76;
+} else {
+var78 = "finalize";
+var79 = 8;
+var80 = string__NativeString__to_s_with_length(var78, var79);
+var77 = var80;
+varonce76 = var77;
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var55); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+{ /* Inline model#MClassType#mclass (var_finalizable_type) on <var_finalizable_type:nullable MClassType(MClassType)> */
+var83 = var_finalizable_type->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_finalizable_type:nullable MClassType(MClassType)> */
+if (unlikely(var83 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
 }
-if (varonce59) {
-var60 = varonce59;
-} else {
-var61 = "Float";
-var62 = 5;
-var63 = string__NativeString__to_s_with_length(var61, var62);
-var60 = var63;
-varonce59 = var60;
+var81 = var83;
+RET_LABEL82:(void)0;
 }
-{
-rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var60); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
-}
-if (varonce64) {
-var65 = varonce64;
-} else {
-var66 = "Char";
-var67 = 4;
-var68 = string__NativeString__to_s_with_length(var66, var67);
-var65 = var68;
-varonce64 = var65;
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var65); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+var84 = model__MModule__try_get_primitive_method(var73, var77, var81);
+}
+var_finalize_meth = var84;
+var85 = NULL;
+if (var_finalize_meth == NULL) {
+var86 = 0; /* is null */
+} else {
+var86 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_finalize_meth,var85) on <var_finalize_meth:nullable MMethod> */
+var_other26 = var85;
+{
+var90 = ((short int (*)(val*, val*))(var_finalize_meth->class->vft[COLOR_kernel__Object___61d_61d]))(var_finalize_meth, var_other26) /* == on <var_finalize_meth:nullable MMethod(MMethod)>*/;
+var89 = var90;
+}
+var91 = !var89;
+var87 = var91;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
+}
+var86 = var87;
+}
+if (var86){
+{
+rapid_type_analysis__RapidTypeAnalysis__add_send(self, var_finalizable_type, var_finalize_meth); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_send on <self:RapidTypeAnalysis>*/
+}
+} else {
+}
+} else {
+}
+if (varonce92) {
+var93 = varonce92;
+} else {
+var94 = "Bool";
+var95 = 4;
+var96 = string__NativeString__to_s_with_length(var94, var95);
+var93 = var96;
+varonce92 = var93;
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var93); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+}
+if (varonce97) {
+var98 = varonce97;
+} else {
+var99 = "Int";
+var100 = 3;
+var101 = string__NativeString__to_s_with_length(var99, var100);
+var98 = var101;
+varonce97 = var98;
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var98); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+}
+if (varonce102) {
+var103 = varonce102;
+} else {
+var104 = "Float";
+var105 = 5;
+var106 = string__NativeString__to_s_with_length(var104, var105);
+var103 = var106;
+varonce102 = var103;
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var103); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+}
+if (varonce107) {
+var108 = varonce107;
+} else {
+var109 = "Char";
+var110 = 4;
+var111 = string__NativeString__to_s_with_length(var109, var110);
+var108 = var111;
+varonce107 = var108;
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var108); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
+}
+if (varonce112) {
+var113 = varonce112;
+} else {
+var114 = "Pointer";
+var115 = 7;
+var116 = string__NativeString__to_s_with_length(var114, var115);
+var113 = var116;
+varonce112 = var113;
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__force_alive(self, var113); /* Direct call rapid_type_analysis#RapidTypeAnalysis#force_alive on <self:RapidTypeAnalysis>*/
 }
 for(;;) {
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#todo (self) on <self:RapidTypeAnalysis> */
-var71 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
-if (unlikely(var71 == NULL)) {
+var119 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
+if (unlikely(var119 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _todo");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 172);
 show_backtrace(1);
 }
-var69 = var71;
-RET_LABEL70:(void)0;
+var117 = var119;
+RET_LABEL118:(void)0;
 }
 }
 {
-var72 = list__List__is_empty(var69);
+var120 = list__List__is_empty(var117);
 }
-var73 = !var72;
-if (!var73) break;
+var121 = !var120;
+if (var121){
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#todo (self) on <self:RapidTypeAnalysis> */
-var76 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
-if (unlikely(var76 == NULL)) {
+var124 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
+if (unlikely(var124 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _todo");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 172);
 show_backtrace(1);
 }
-var74 = var76;
-RET_LABEL75:(void)0;
+var122 = var124;
+RET_LABEL123:(void)0;
 }
 }
 {
-var77 = list__List__shift(var74);
+var125 = list__List__shift(var122);
 }
-var_mmethoddef = var77;
+var_mmethoddef = var125;
 {
 { /* Inline model#MPropDef#mproperty (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var80 = var_mmethoddef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mmethoddef:MMethodDef> */
-if (unlikely(var80 == NULL)) {
+var128 = var_mmethoddef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mmethoddef:MMethodDef> */
+if (unlikely(var128 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
-var78 = var80;
-RET_LABEL79:(void)0;
+var126 = var128;
+RET_LABEL127:(void)0;
 }
 }
-var_mmeth = var78;
-var81 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__RapidTypeVisitor);
+var_mmeth = var126;
+var129 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__RapidTypeVisitor);
 {
 { /* Inline model#MPropDef#mclassdef (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var84 = var_mmethoddef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mmethoddef:MMethodDef> */
-if (unlikely(var84 == NULL)) {
+var132 = var_mmethoddef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mmethoddef:MMethodDef> */
+if (unlikely(var132 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var82 = var84;
-RET_LABEL83:(void)0;
+var130 = var132;
+RET_LABEL131:(void)0;
 }
 }
 {
-{ /* Inline model#MClassDef#bound_mtype (var82) on <var82:MClassDef> */
-var87 = var82->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var82:MClassDef> */
-if (unlikely(var87 == NULL)) {
+{ /* Inline model#MClassDef#bound_mtype (var130) on <var130:MClassDef> */
+var135 = var130->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var130:MClassDef> */
+if (unlikely(var135 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var85 = var87;
-RET_LABEL86:(void)0;
+var133 = var135;
+RET_LABEL134:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__init(var81, self, var85, var_mmethoddef); /* Direct call rapid_type_analysis#RapidTypeVisitor#init on <var81:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__init(var129, self, var133, var_mmethoddef); /* Direct call rapid_type_analysis#RapidTypeVisitor#init on <var129:RapidTypeVisitor>*/
 }
-var_v = var81;
+var_v = var129;
 {
 { /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var90 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
-var88 = var90;
-RET_LABEL89:(void)0;
+var138 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
+var136 = var138;
+RET_LABEL137:(void)0;
 }
 }
-if (var88 == NULL) {
+if (var136 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 210);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 216);
 show_backtrace(1);
 } else {
-{ /* Inline model#MSignature#vararg_rank (var88) on <var88:nullable MSignature> */
-if (unlikely(var88 == NULL)) {
+{ /* Inline model#MSignature#vararg_rank (var136) on <var136:nullable MSignature> */
+if (unlikely(var136 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1497);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1510);
 show_backtrace(1);
 }
-var93 = var88->attrs[COLOR_model__MSignature___vararg_rank].l; /* _vararg_rank on <var88:nullable MSignature> */
-var91 = var93;
-RET_LABEL92:(void)0;
+var141 = var136->attrs[COLOR_model__MSignature___vararg_rank].l; /* _vararg_rank on <var136:nullable MSignature> */
+var139 = var141;
+RET_LABEL140:(void)0;
 }
 }
-var_vararg_rank = var91;
-var94 = 1;
+var_vararg_rank = var139;
+var142 = 1;
 {
-{ /* Inline kernel#Int#unary - (var94) on <var94:Int> */
-var97 = -var94;
-var95 = var97;
-goto RET_LABEL96;
-RET_LABEL96:(void)0;
+{ /* Inline kernel#Int#unary - (var142) on <var142:Int> */
+var145 = -var142;
+var143 = var145;
+goto RET_LABEL144;
+RET_LABEL144:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#> (var_vararg_rank,var95) on <var_vararg_rank:Int> */
-/* Covariant cast for argument 0 (i) <var95:Int> isa OTHER */
-/* <var95:Int> isa OTHER */
-var100 = 1; /* easy <var95:Int> isa OTHER*/
-if (unlikely(!var100)) {
+{ /* Inline kernel#Int#> (var_vararg_rank,var143) on <var_vararg_rank:Int> */
+/* Covariant cast for argument 0 (i) <var143:Int> isa OTHER */
+/* <var143:Int> isa OTHER */
+var148 = 1; /* easy <var143:Int> isa OTHER*/
+if (unlikely(!var148)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
-var101 = var_vararg_rank > var95;
-var98 = var101;
-goto RET_LABEL99;
-RET_LABEL99:(void)0;
+var149 = var_vararg_rank > var143;
+var146 = var149;
+goto RET_LABEL147;
+RET_LABEL147:(void)0;
 }
 }
-if (var98){
+if (var146){
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var104 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var104 == NULL)) {
+var152 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var152 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
-var102 = var104;
-RET_LABEL103:(void)0;
+var150 = var152;
+RET_LABEL151:(void)0;
 }
 }
 {
-{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var102) on <var102:ModelBuilder> */
-var107 = var102->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var102:ModelBuilder> */
-if (unlikely(var107 == NULL)) {
+{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var150) on <var150:ModelBuilder> */
+var155 = var150->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var150:ModelBuilder> */
+if (unlikely(var155 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdef2npropdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_property.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_property.nit", 39);
 show_backtrace(1);
 }
-var105 = var107;
-RET_LABEL106:(void)0;
+var153 = var155;
+RET_LABEL154:(void)0;
 }
 }
 {
-var108 = hash_collection__HashMap___91d_93d(var105, var_mmethoddef);
+var156 = hash_collection__HashMap___91d_93d(var153, var_mmethoddef);
 }
-var_node = var108;
+var_node = var156;
 {
 { /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var111 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
-var109 = var111;
-RET_LABEL110:(void)0;
+var159 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
+var157 = var159;
+RET_LABEL158:(void)0;
 }
 }
-if (var109 == NULL) {
+if (var157 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 213);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 219);
 show_backtrace(1);
 } else {
-{ /* Inline model#MSignature#mparameters (var109) on <var109:nullable MSignature> */
-if (unlikely(var109 == NULL)) {
+{ /* Inline model#MSignature#mparameters (var157) on <var157:nullable MSignature> */
+if (unlikely(var157 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
-var114 = var109->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var109:nullable MSignature> */
-if (unlikely(var114 == NULL)) {
+var162 = var157->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var157:nullable MSignature> */
+if (unlikely(var162 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
-var112 = var114;
-RET_LABEL113:(void)0;
+var160 = var162;
+RET_LABEL161:(void)0;
 }
 }
 {
-var115 = array__Array___91d_93d(var112, var_vararg_rank);
+var163 = array__Array___91d_93d(var160, var_vararg_rank);
 }
 {
-{ /* Inline model#MParameter#mtype (var115) on <var115:nullable Object(MParameter)> */
-var118 = var115->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var115:nullable Object(MParameter)> */
-if (unlikely(var118 == NULL)) {
+{ /* Inline model#MParameter#mtype (var163) on <var163:nullable Object(MParameter)> */
+var166 = var163->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var163:nullable Object(MParameter)> */
+if (unlikely(var166 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
-var116 = var118;
-RET_LABEL117:(void)0;
+var164 = var166;
+RET_LABEL165:(void)0;
 }
 }
-var_elttype = var116;
+var_elttype = var164;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var121 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var121 == NULL)) {
+var169 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var169 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var119 = var121;
-RET_LABEL120:(void)0;
+var167 = var169;
+RET_LABEL168:(void)0;
 }
 }
-if (varonce122) {
-var123 = varonce122;
+if (varonce170) {
+var171 = varonce170;
 } else {
-var124 = "Array";
-var125 = 5;
-var126 = string__NativeString__to_s_with_length(var124, var125);
-var123 = var126;
-varonce122 = var123;
+var172 = "Array";
+var173 = 5;
+var174 = string__NativeString__to_s_with_length(var172, var173);
+var171 = var174;
+varonce170 = var171;
 }
 {
-var127 = model__MModule__get_primitive_class(var119, var123);
+var175 = model__MModule__get_primitive_class(var167, var171);
 }
-var128 = NEW_array__Array(&type_array__Arraymodel__MType);
-var129 = 1;
+var176 = NEW_array__Array(&type_array__Arraymodel__MType);
+var177 = 1;
 {
-array__Array__with_capacity(var128, var129); /* Direct call array#Array#with_capacity on <var128:Array[MType]>*/
+array__Array__with_capacity(var176, var177); /* Direct call array#Array#with_capacity on <var176:Array[MType]>*/
 }
-var_ = var128;
+var_ = var176;
 {
 array__AbstractArray__push(var_, var_elttype); /* Direct call array#AbstractArray#push on <var_:Array[MType]>*/
 }
 {
-var130 = model__MClass__get_mtype(var127, var_);
+var178 = model__MClass__get_mtype(var175, var_);
 }
-var_vararg = var130;
+var_vararg = var178;
 {
 rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_vararg); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var133 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var133 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
-show_backtrace(1);
-}
-var131 = var133;
-RET_LABEL132:(void)0;
-}
-}
-if (varonce134) {
-var135 = varonce134;
-} else {
-var136 = "NativeArray";
-var137 = 11;
-var138 = string__NativeString__to_s_with_length(var136, var137);
-var135 = var138;
-varonce134 = var135;
-}
-{
-var139 = model__MModule__get_primitive_class(var131, var135);
-}
-var140 = NEW_array__Array(&type_array__Arraymodel__MType);
-var141 = 1;
-{
-array__Array__with_capacity(var140, var141); /* Direct call array#Array#with_capacity on <var140:Array[MType]>*/
-}
-var_142 = var140;
-{
-array__AbstractArray__push(var_142, var_elttype); /* Direct call array#AbstractArray#push on <var_142:Array[MType]>*/
-}
-{
-var143 = model__MClass__get_mtype(var139, var_142);
-}
-var_native = var143;
-{
-rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_native); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
-}
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var146 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var146 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
-show_backtrace(1);
-}
-var144 = var146;
-RET_LABEL145:(void)0;
-}
-}
-if (varonce147) {
-var148 = varonce147;
-} else {
-var149 = "with_native";
-var150 = 11;
-var151 = string__NativeString__to_s_with_length(var149, var150);
-var148 = var151;
-varonce147 = var148;
-}
-{
-{ /* Inline model#MClassType#mclass (var_vararg) on <var_vararg:MClassType> */
-var154 = var_vararg->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_vararg:MClassType> */
-if (unlikely(var154 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
-show_backtrace(1);
-}
-var152 = var154;
-RET_LABEL153:(void)0;
-}
-}
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var157 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var157 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
-show_backtrace(1);
-}
-var155 = var157;
-RET_LABEL156:(void)0;
-}
-}
-{
-var158 = modelbuilder__ModelBuilder__force_get_primitive_method(var144, var_node, var148, var152, var155);
-}
-{
-rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send(var_v, var_vararg, var158); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_monomorphic_send on <var_v:RapidTypeVisitor>*/
-}
-} else {
-}
-{
-{ /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var161 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
-var159 = var161;
-RET_LABEL160:(void)0;
-}
-}
-if (unlikely(var159 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 222);
-show_backtrace(1);
-}
-var_sig = var159;
-{
-var162 = model__MProperty__intro(var_mmeth);
-}
-{
-{ /* Inline model#MMethodDef#msignature (var162) on <var162:MPropDef(MMethodDef)> */
-var165 = var162->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var162:MPropDef(MMethodDef)> */
-var163 = var165;
-RET_LABEL164:(void)0;
-}
-}
-if (unlikely(var163 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 223);
-show_backtrace(1);
-}
-var_osig = var163;
-var166 = NEW_range__Range(&type_range__Rangekernel__Int);
-var167 = 0;
-{
-var168 = model__MSignature__arity(var_sig);
-}
-{
-var169 = BOX_kernel__Int(var167); /* autobox from Int to Discrete */
-var170 = BOX_kernel__Int(var168); /* autobox from Int to Discrete */
-range__Range__without_last(var166, var169, var170); /* Direct call range#Range#without_last on <var166:Range[Int]>*/
-}
-{
-var171 = range__Range__iterator(var166);
-}
-for(;;) {
-{
-var172 = ((short int (*)(val*))(var171->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var171) /* is_ok on <var171:Iterator[Discrete]>*/;
-}
-if(!var172) break;
-{
-var173 = ((val* (*)(val*))(var171->class->vft[COLOR_abstract_collection__Iterator__item]))(var171) /* item on <var171:Iterator[Discrete]>*/;
-}
-var174 = ((struct instance_kernel__Int*)var173)->value; /* autounbox from nullable Object to Int */;
-var_i = var174;
-{
-{ /* Inline model#MSignature#mparameters (var_osig) on <var_osig:MSignature> */
-var177 = var_osig->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var_osig:MSignature> */
-if (unlikely(var177 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
-show_backtrace(1);
-}
-var175 = var177;
-RET_LABEL176:(void)0;
-}
-}
-{
-var178 = array__Array___91d_93d(var175, var_i);
-}
-{
-{ /* Inline model#MParameter#mtype (var178) on <var178:nullable Object(MParameter)> */
-var181 = var178->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var178:nullable Object(MParameter)> */
+var181 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
 if (unlikely(var181 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var179 = var181;
 RET_LABEL180:(void)0;
 }
 }
-var_origtype = var179;
-{
-var182 = ((short int (*)(val*))(var_origtype->class->vft[COLOR_model__MType__need_anchor]))(var_origtype) /* need_anchor on <var_origtype:MType>*/;
+if (varonce182) {
+var183 = varonce182;
+} else {
+var184 = "NativeArray";
+var185 = 11;
+var186 = string__NativeString__to_s_with_length(var184, var185);
+var183 = var186;
+varonce182 = var183;
 }
-var183 = !var182;
-if (var183){
-goto CONTINUE_label;
+{
+var187 = model__MModule__get_primitive_class(var179, var183);
+}
+var188 = NEW_array__Array(&type_array__Arraymodel__MType);
+var189 = 1;
+{
+array__Array__with_capacity(var188, var189); /* Direct call array#Array#with_capacity on <var188:Array[MType]>*/
+}
+var_190 = var188;
+{
+array__AbstractArray__push(var_190, var_elttype); /* Direct call array#AbstractArray#push on <var_190:Array[MType]>*/
+}
+{
+var191 = model__MClass__get_mtype(var187, var_190);
+}
+var_native = var191;
+{
+rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_native); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
+var194 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var194 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
+show_backtrace(1);
+}
+var192 = var194;
+RET_LABEL193:(void)0;
+}
+}
+if (varonce195) {
+var196 = varonce195;
+} else {
+var197 = "with_native";
+var198 = 11;
+var199 = string__NativeString__to_s_with_length(var197, var198);
+var196 = var199;
+varonce195 = var196;
+}
+{
+{ /* Inline model#MClassType#mclass (var_vararg) on <var_vararg:MClassType> */
+var202 = var_vararg->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_vararg:MClassType> */
+if (unlikely(var202 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
+show_backtrace(1);
+}
+var200 = var202;
+RET_LABEL201:(void)0;
+}
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
+var205 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var205 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
+show_backtrace(1);
+}
+var203 = var205;
+RET_LABEL204:(void)0;
+}
+}
+{
+var206 = modelbuilder__ModelBuilder__force_get_primitive_method(var192, var_node, var196, var200, var203);
+}
+{
+rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send(var_v, var_vararg, var206); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_monomorphic_send on <var_v:RapidTypeVisitor>*/
+}
+} else {
+}
+{
+{ /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
+var209 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
+var207 = var209;
+RET_LABEL208:(void)0;
+}
+}
+if (unlikely(var207 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 229);
+show_backtrace(1);
+}
+var_sig = var207;
+{
+{ /* Inline model#MProperty#intro (var_mmeth) on <var_mmeth:MMethod> */
+var212 = var_mmeth->attrs[COLOR_model__MProperty___intro].val; /* _intro on <var_mmeth:MMethod> */
+if (unlikely(var212 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1649);
+show_backtrace(1);
+}
+var210 = var212;
+RET_LABEL211:(void)0;
+}
+}
+{
+{ /* Inline model#MMethodDef#msignature (var210) on <var210:MPropDef(MMethodDef)> */
+var215 = var210->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var210:MPropDef(MMethodDef)> */
+var213 = var215;
+RET_LABEL214:(void)0;
+}
+}
+if (unlikely(var213 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 230);
+show_backtrace(1);
+}
+var_osig = var213;
+var216 = 0;
+var_i = var216;
+{
+var217 = model__MSignature__arity(var_sig);
+}
+var_218 = var217;
+for(;;) {
+{
+{ /* Inline kernel#Int#< (var_i,var_218) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_218:Int> isa OTHER */
+/* <var_218:Int> isa OTHER */
+var221 = 1; /* easy <var_218:Int> isa OTHER*/
+if (unlikely(!var221)) {
+var_class_name224 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name224);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
+show_backtrace(1);
+}
+var225 = var_i < var_218;
+var219 = var225;
+goto RET_LABEL220;
+RET_LABEL220:(void)0;
+}
+}
+if (var219){
+{
+{ /* Inline model#MSignature#mparameters (var_osig) on <var_osig:MSignature> */
+var228 = var_osig->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var_osig:MSignature> */
+if (unlikely(var228 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
+show_backtrace(1);
+}
+var226 = var228;
+RET_LABEL227:(void)0;
+}
+}
+{
+var229 = array__Array___91d_93d(var226, var_i);
+}
+{
+{ /* Inline model#MParameter#mtype (var229) on <var229:nullable Object(MParameter)> */
+var232 = var229->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var229:nullable Object(MParameter)> */
+if (unlikely(var232 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
+show_backtrace(1);
+}
+var230 = var232;
+RET_LABEL231:(void)0;
+}
+}
+var_origtype = var230;
+{
+var233 = ((short int (*)(val*))(var_origtype->class->vft[COLOR_model__MType__need_anchor]))(var_origtype) /* need_anchor on <var_origtype:MType>*/;
+}
+var234 = !var233;
+if (var234){
+goto BREAK_label;
 } else {
 }
 {
 { /* Inline model#MSignature#mparameters (var_sig) on <var_sig:MSignature> */
-var186 = var_sig->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var_sig:MSignature> */
-if (unlikely(var186 == NULL)) {
+var237 = var_sig->attrs[COLOR_model__MSignature___mparameters].val; /* _mparameters on <var_sig:MSignature> */
+if (unlikely(var237 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1452);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1465);
 show_backtrace(1);
 }
-var184 = var186;
-RET_LABEL185:(void)0;
+var235 = var237;
+RET_LABEL236:(void)0;
 }
 }
 {
-var187 = array__Array___91d_93d(var184, var_i);
+var238 = array__Array___91d_93d(var235, var_i);
 }
 {
-{ /* Inline model#MParameter#mtype (var187) on <var187:nullable Object(MParameter)> */
-var190 = var187->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var187:nullable Object(MParameter)> */
-if (unlikely(var190 == NULL)) {
+{ /* Inline model#MParameter#mtype (var238) on <var238:nullable Object(MParameter)> */
+var241 = var238->attrs[COLOR_model__MParameter___mtype].val; /* _mtype on <var238:nullable Object(MParameter)> */
+if (unlikely(var241 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1552);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1565);
 show_backtrace(1);
 }
-var188 = var190;
-RET_LABEL189:(void)0;
+var239 = var241;
+RET_LABEL240:(void)0;
 }
 }
-var_paramtype = var188;
+var_paramtype = var239;
 {
 rapid_type_analysis__RapidTypeAnalysis__add_cast(self, var_paramtype); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_cast on <self:RapidTypeAnalysis>*/
 }
-CONTINUE_label: (void)0;
-{
-((void (*)(val*))(var171->class->vft[COLOR_abstract_collection__Iterator__next]))(var171) /* next on <var171:Iterator[Discrete]>*/;
-}
-}
 BREAK_label: (void)0;
+var242 = 1;
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var193 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var193 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
-show_backtrace(1);
+var243 = kernel__Int__successor(var_i, var242);
 }
-var191 = var193;
-RET_LABEL192:(void)0;
-}
-}
-{
-{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var191) on <var191:ModelBuilder> */
-var196 = var191->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var191:ModelBuilder> */
-if (unlikely(var196 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdef2npropdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_property.nit", 39);
-show_backtrace(1);
-}
-var194 = var196;
-RET_LABEL195:(void)0;
-}
-}
-{
-var197 = abstract_collection__MapRead__has_key(var194, var_mmethoddef);
-}
-var198 = !var197;
-if (var198){
-{
-{ /* Inline model#MProperty#name (var_mmeth) on <var_mmeth:MMethod> */
-var201 = var_mmeth->attrs[COLOR_model__MProperty___name].val; /* _name on <var_mmeth:MMethod> */
-if (unlikely(var201 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1607);
-show_backtrace(1);
-}
-var199 = var201;
-RET_LABEL200:(void)0;
-}
-}
-if (varonce202) {
-var203 = varonce202;
+var_i = var243;
 } else {
-var204 = "init";
-var205 = 4;
-var206 = string__NativeString__to_s_with_length(var204, var205);
-var203 = var206;
-varonce202 = var203;
+goto BREAK_label244;
 }
-{
-var208 = string__FlatString___61d_61d(var199, var203);
-var207 = var208;
 }
-if (var207){
+BREAK_label244: (void)0;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var211 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var211 == NULL)) {
+var247 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var247 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
-var209 = var211;
-RET_LABEL210:(void)0;
+var245 = var247;
+RET_LABEL246:(void)0;
 }
 }
 {
-{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var209) on <var209:ModelBuilder> */
-var214 = var209->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var209:ModelBuilder> */
-if (unlikely(var214 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef2nclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_class.nit", 399);
+{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var245) on <var245:ModelBuilder> */
+var250 = var245->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var245:ModelBuilder> */
+if (unlikely(var250 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdef2npropdef");
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_property.nit", 39);
 show_backtrace(1);
 }
-var212 = var214;
-RET_LABEL213:(void)0;
+var248 = var250;
+RET_LABEL249:(void)0;
+}
+}
+{
+var251 = abstract_collection__MapRead__has_key(var248, var_mmethoddef);
+}
+var252 = !var251;
+if (var252){
+{
+{ /* Inline model#MMethod#is_root_init (var_mmeth) on <var_mmeth:MMethod> */
+var255 = var_mmeth->attrs[COLOR_model__MMethod___is_root_init].s; /* _is_root_init on <var_mmeth:MMethod> */
+var253 = var255;
+RET_LABEL254:(void)0;
+}
+}
+if (var253){
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
+var258 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var258 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
+show_backtrace(1);
+}
+var256 = var258;
+RET_LABEL257:(void)0;
+}
+}
+{
+{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var256) on <var256:ModelBuilder> */
+var261 = var256->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var256:ModelBuilder> */
+if (unlikely(var261 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef2nclassdef");
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_class.nit", 410);
+show_backtrace(1);
+}
+var259 = var261;
+RET_LABEL260:(void)0;
 }
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var217 = var_mmethoddef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mmethoddef:MMethodDef> */
-if (unlikely(var217 == NULL)) {
+var264 = var_mmethoddef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mmethoddef:MMethodDef> */
+if (unlikely(var264 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var215 = var217;
-RET_LABEL216:(void)0;
+var262 = var264;
+RET_LABEL263:(void)0;
 }
 }
 {
-var218 = hash_collection__HashMap___91d_93d(var212, var215);
+var265 = hash_collection__HashMap___91d_93d(var259, var262);
 }
-var_nclassdef = var218;
+var_nclassdef = var265;
 {
-{ /* Inline modelize_property#AClassdef#super_inits (var_nclassdef) on <var_nclassdef:AClassdef> */
-var221 = var_nclassdef->attrs[COLOR_modelize_property__AClassdef___super_inits].val; /* _super_inits on <var_nclassdef:AClassdef> */
-var219 = var221;
-RET_LABEL220:(void)0;
+{ /* Inline modelize_property#AClassdef#mfree_init (var_nclassdef) on <var_nclassdef:AClassdef> */
+var268 = var_nclassdef->attrs[COLOR_modelize_property__AClassdef___mfree_init].val; /* _mfree_init on <var_nclassdef:AClassdef> */
+var266 = var268;
+RET_LABEL267:(void)0;
 }
 }
-var_super_inits = var219;
-var222 = NULL;
-if (var_super_inits == NULL) {
-var223 = 0; /* is null */
+{
+{ /* Inline kernel#Object#== (var_mmethoddef,var266) on <var_mmethoddef:MMethodDef> */
+var_other = var266;
+{
+{ /* Inline kernel#Object#is_same_instance (var_mmethoddef,var_other) on <var_mmethoddef:MMethodDef> */
+var274 = var_mmethoddef == var_other;
+var272 = var274;
+goto RET_LABEL273;
+RET_LABEL273:(void)0;
+}
+}
+var270 = var272;
+goto RET_LABEL271;
+RET_LABEL271:(void)0;
+}
+var269 = var270;
+}
+if (unlikely(!var269)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 242);
+show_backtrace(1);
+}
+{
+{ /* Inline model#MPropDef#mproperty (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
+var278 = var_mmethoddef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mmethoddef:MMethodDef> */
+if (unlikely(var278 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
+show_backtrace(1);
+}
+var276 = var278;
+RET_LABEL277:(void)0;
+}
+}
+{
+{ /* Inline model#MMethod#is_root_init (var276) on <var276:MProperty(MMethod)> */
+var281 = var276->attrs[COLOR_model__MMethod___is_root_init].s; /* _is_root_init on <var276:MProperty(MMethod)> */
+var279 = var281;
+RET_LABEL280:(void)0;
+}
+}
+var_282 = var279;
+if (var279){
+{
+var283 = model__MPropDef__is_intro(var_mmethoddef);
+}
+var284 = !var283;
+var275 = var284;
 } else {
-var223 = 1; /* arg is null and recv is not */
+var275 = var_282;
 }
-if (0) {
-{ /* Inline kernel#Object#!= (var_super_inits,var222) on <var_super_inits:nullable Collection[MMethod]> */
-var_other26 = var222;
-{
-var227 = ((short int (*)(val*, val*))(var_super_inits->class->vft[COLOR_kernel__Object___61d_61d]))(var_super_inits, var_other26) /* == on <var_super_inits:nullable Collection[MMethod](Collection[MMethod])>*/;
-var226 = var227;
-}
-var228 = !var226;
-var224 = var228;
-goto RET_LABEL225;
-RET_LABEL225:(void)0;
-}
-var223 = var224;
-}
-if (var223){
-{
-var229 = ((val* (*)(val*))(var_super_inits->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_super_inits) /* iterator on <var_super_inits:nullable Collection[MMethod](Collection[MMethod])>*/;
-}
-for(;;) {
-{
-var230 = ((short int (*)(val*))(var229->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var229) /* is_ok on <var229:Iterator[nullable Object]>*/;
-}
-if(!var230) break;
-{
-var231 = ((val* (*)(val*))(var229->class->vft[COLOR_abstract_collection__Iterator__item]))(var229) /* item on <var229:Iterator[nullable Object]>*/;
-}
-var_su = var231;
+if (var275){
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#receiver (var_v) on <var_v:RapidTypeVisitor> */
-var234 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <var_v:RapidTypeVisitor> */
-if (unlikely(var234 == NULL)) {
+var287 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <var_v:RapidTypeVisitor> */
+if (unlikely(var287 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
-var232 = var234;
-RET_LABEL233:(void)0;
+var285 = var287;
+RET_LABEL286:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send(var_v, var232, var_su); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_monomorphic_send on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeAnalysis__add_super_send(self, var285, var_mmethoddef); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_super_send on <self:RapidTypeAnalysis>*/
 }
-CONTINUE_label235: (void)0;
-{
-((void (*)(val*))(var229->class->vft[COLOR_abstract_collection__Iterator__next]))(var229) /* next on <var229:Iterator[nullable Object]>*/;
-}
-}
-BREAK_label235: (void)0;
 } else {
+}
+} else {
+{
+{ /* Inline model#MMethodDef#constant_value (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
+var290 = var_mmethoddef->attrs[COLOR_model__MMethodDef___constant_value].val; /* _constant_value on <var_mmethoddef:MMethodDef> */
+var288 = var290;
+RET_LABEL289:(void)0;
+}
+}
+var291 = NULL;
+if (var288 == NULL) {
+var292 = 0; /* is null */
+} else {
+var292 = 1; /* arg is null and recv is not */
+}
+if (0) {
+var293 = ((short int (*)(val*, val*))(var288->class->vft[COLOR_kernel__Object___33d_61d]))(var288, var291) /* != on <var288:nullable Object>*/;
+var292 = var293;
+}
+if (var292){
+{
+{ /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
+var296 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
+var294 = var296;
+RET_LABEL295:(void)0;
+}
+}
+if (var294 == NULL) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 249);
+show_backtrace(1);
+} else {
+{ /* Inline model#MSignature#return_mtype (var294) on <var294:nullable MSignature> */
+if (unlikely(var294 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1468);
+show_backtrace(1);
+}
+var299 = var294->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <var294:nullable MSignature> */
+var297 = var299;
+RET_LABEL298:(void)0;
+}
+}
+/* <var297:nullable MType> isa MClassType */
+cltype301 = type_model__MClassType.color;
+idtype302 = type_model__MClassType.id;
+if(var297 == NULL) {
+var300 = 0;
+} else {
+if(cltype301 >= var297->type->table_size) {
+var300 = 0;
+} else {
+var300 = var297->type->type_table[cltype301] == idtype302;
+}
+}
+if (unlikely(!var300)) {
+var_class_name303 = var297 == NULL ? "null" : var297->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name303);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 249);
+show_backtrace(1);
+}
+{
+rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var297); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
 }
 } else {
 PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 244);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 251);
 show_backtrace(1);
 }
-goto CONTINUE_label236;
+}
+goto BREAK_label304;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var239 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var239 == NULL)) {
+var307 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var307 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
-var237 = var239;
-RET_LABEL238:(void)0;
+var305 = var307;
+RET_LABEL306:(void)0;
 }
 }
 {
-{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var237) on <var237:ModelBuilder> */
-var242 = var237->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var237:ModelBuilder> */
-if (unlikely(var242 == NULL)) {
+{ /* Inline modelize_property#ModelBuilder#mpropdef2npropdef (var305) on <var305:ModelBuilder> */
+var310 = var305->attrs[COLOR_modelize_property__ModelBuilder___mpropdef2npropdef].val; /* _mpropdef2npropdef on <var305:ModelBuilder> */
+if (unlikely(var310 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdef2npropdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_property.nit", 39);
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_property.nit", 39);
 show_backtrace(1);
 }
-var240 = var242;
-RET_LABEL241:(void)0;
+var308 = var310;
+RET_LABEL309:(void)0;
 }
 }
 {
-var243 = hash_collection__HashMap___91d_93d(var240, var_mmethoddef);
+var311 = hash_collection__HashMap___91d_93d(var308, var_mmethoddef);
 }
-var_npropdef = var243;
+var_npropdef = var311;
 /* <var_npropdef:APropdef> isa AMethPropdef */
-cltype245 = type_parser_nodes__AMethPropdef.color;
-idtype246 = type_parser_nodes__AMethPropdef.id;
-if(cltype245 >= var_npropdef->type->table_size) {
-var244 = 0;
+cltype313 = type_parser_nodes__AMethPropdef.color;
+idtype314 = type_parser_nodes__AMethPropdef.id;
+if(cltype313 >= var_npropdef->type->table_size) {
+var312 = 0;
 } else {
-var244 = var_npropdef->type->type_table[cltype245] == idtype246;
+var312 = var_npropdef->type->type_table[cltype313] == idtype314;
 }
-if (var244){
+if (var312){
 {
 { /* Inline auto_super_init#AMethPropdef#auto_super_inits (var_npropdef) on <var_npropdef:APropdef(AMethPropdef)> */
-var249 = var_npropdef->attrs[COLOR_auto_super_init__AMethPropdef___auto_super_inits].val; /* _auto_super_inits on <var_npropdef:APropdef(AMethPropdef)> */
-var247 = var249;
-RET_LABEL248:(void)0;
+var317 = var_npropdef->attrs[COLOR_auto_super_init__AMethPropdef___auto_super_inits].val; /* _auto_super_inits on <var_npropdef:APropdef(AMethPropdef)> */
+var315 = var317;
+RET_LABEL316:(void)0;
 }
 }
-var_auto_super_inits = var247;
-var250 = NULL;
+var_auto_super_inits = var315;
+var318 = NULL;
 if (var_auto_super_inits == NULL) {
-var251 = 0; /* is null */
+var319 = 0; /* is null */
 } else {
-var251 = 1; /* arg is null and recv is not */
+var319 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_auto_super_inits,var250) on <var_auto_super_inits:nullable Array[CallSite]> */
-var_other26 = var250;
+{ /* Inline kernel#Object#!= (var_auto_super_inits,var318) on <var_auto_super_inits:nullable Array[CallSite]> */
+var_other26 = var318;
 {
-var255 = ((short int (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_kernel__Object___61d_61d]))(var_auto_super_inits, var_other26) /* == on <var_auto_super_inits:nullable Array[CallSite](Array[CallSite])>*/;
-var254 = var255;
+var323 = ((short int (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_kernel__Object___61d_61d]))(var_auto_super_inits, var_other26) /* == on <var_auto_super_inits:nullable Array[CallSite](Array[CallSite])>*/;
+var322 = var323;
 }
-var256 = !var254;
-var252 = var256;
-goto RET_LABEL253;
-RET_LABEL253:(void)0;
+var324 = !var322;
+var320 = var324;
+goto RET_LABEL321;
+RET_LABEL321:(void)0;
 }
-var251 = var252;
+var319 = var320;
 }
-if (var251){
+if (var319){
+var_325 = var_auto_super_inits;
 {
-var257 = array__AbstractArrayRead__iterator(var_auto_super_inits);
+var326 = array__AbstractArrayRead__iterator(var_325);
 }
+var_327 = var326;
 for(;;) {
 {
-var258 = array__ArrayIterator__is_ok(var257);
+var328 = array__ArrayIterator__is_ok(var_327);
 }
-if(!var258) break;
+if (var328){
 {
-var259 = array__ArrayIterator__item(var257);
+var329 = array__ArrayIterator__item(var_327);
 }
-var_auto_super_init = var259;
+var_auto_super_init = var329;
 {
 rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var_auto_super_init); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
 }
-CONTINUE_label260: (void)0;
 {
-array__ArrayIterator__next(var257); /* Direct call array#ArrayIterator#next on <var257:ArrayIterator[nullable Object]>*/
-}
-}
-BREAK_label260: (void)0;
-} else {
+array__ArrayIterator__next(var_327); /* Direct call array#ArrayIterator#next on <var_327:ArrayIterator[CallSite]>*/
 }
 } else {
+goto BREAK_label330;
+}
+}
+BREAK_label330: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_327) on <var_327:ArrayIterator[CallSite]> */
+RET_LABEL331:(void)0;
+}
+}
+} else {
 }
 {
-{ /* Inline model#MMethod#is_new (var_mmeth) on <var_mmeth:MMethod> */
-var263 = var_mmeth->attrs[COLOR_model__MMethod___is_new].s; /* _is_new on <var_mmeth:MMethod> */
-var261 = var263;
-RET_LABEL262:(void)0;
+{ /* Inline auto_super_init#AMethPropdef#auto_super_call (var_npropdef) on <var_npropdef:APropdef(AMethPropdef)> */
+var334 = var_npropdef->attrs[COLOR_auto_super_init__AMethPropdef___auto_super_call].s; /* _auto_super_call on <var_npropdef:APropdef(AMethPropdef)> */
+var332 = var334;
+RET_LABEL333:(void)0;
 }
 }
-if (var261){
+if (var332){
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#receiver (var_v) on <var_v:RapidTypeVisitor> */
-var266 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <var_v:RapidTypeVisitor> */
-if (unlikely(var266 == NULL)) {
+var337 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <var_v:RapidTypeVisitor> */
+if (unlikely(var337 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
-var264 = var266;
-RET_LABEL265:(void)0;
+var335 = var337;
+RET_LABEL336:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var264); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeAnalysis__add_super_send(self, var335, var_mmethoddef); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_super_send on <self:RapidTypeAnalysis>*/
 }
 } else {
+}
+} else {
+}
 {
 { /* Inline model#MMethodDef#is_intern (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var270 = var_mmethoddef->attrs[COLOR_model__MMethodDef___is_intern].s; /* _is_intern on <var_mmethoddef:MMethodDef> */
-var268 = var270;
-RET_LABEL269:(void)0;
+var341 = var_mmethoddef->attrs[COLOR_model__MMethodDef___is_intern].s; /* _is_intern on <var_mmethoddef:MMethodDef> */
+var339 = var341;
+RET_LABEL340:(void)0;
 }
 }
-var_271 = var268;
-if (var268){
-var267 = var_271;
+var_342 = var339;
+if (var339){
+var338 = var_342;
 } else {
 {
 { /* Inline model#MMethodDef#is_extern (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var274 = var_mmethoddef->attrs[COLOR_model__MMethodDef___is_extern].s; /* _is_extern on <var_mmethoddef:MMethodDef> */
-var272 = var274;
-RET_LABEL273:(void)0;
+var345 = var_mmethoddef->attrs[COLOR_model__MMethodDef___is_extern].s; /* _is_extern on <var_mmethoddef:MMethodDef> */
+var343 = var345;
+RET_LABEL344:(void)0;
 }
 }
-var267 = var272;
+var338 = var343;
 }
-if (var267){
+if (var338){
 {
 { /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
-var277 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
-var275 = var277;
-RET_LABEL276:(void)0;
+var348 = var_mmethoddef->attrs[COLOR_model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
+var346 = var348;
+RET_LABEL347:(void)0;
 }
 }
-if (var275 == NULL) {
+if (var346 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 264);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 272);
 show_backtrace(1);
 } else {
-{ /* Inline model#MSignature#return_mtype (var275) on <var275:nullable MSignature> */
-if (unlikely(var275 == NULL)) {
+{ /* Inline model#MSignature#return_mtype (var346) on <var346:nullable MSignature> */
+if (unlikely(var346 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1455);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1468);
 show_backtrace(1);
 }
-var280 = var275->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <var275:nullable MSignature> */
-var278 = var280;
-RET_LABEL279:(void)0;
+var351 = var346->attrs[COLOR_model__MSignature___return_mtype].val; /* _return_mtype on <var346:nullable MSignature> */
+var349 = var351;
+RET_LABEL350:(void)0;
 }
 }
-var_ret = var278;
-var284 = NULL;
+var_ret = var349;
+var355 = NULL;
 if (var_ret == NULL) {
-var285 = 0; /* is null */
+var356 = 0; /* is null */
 } else {
-var285 = 1; /* arg is null and recv is not */
+var356 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_ret,var284) on <var_ret:nullable MType> */
-var_other26 = var284;
+{ /* Inline kernel#Object#!= (var_ret,var355) on <var_ret:nullable MType> */
+var_other26 = var355;
 {
-var289 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other26) /* == on <var_ret:nullable MType(MType)>*/;
-var288 = var289;
+var360 = ((short int (*)(val*, val*))(var_ret->class->vft[COLOR_kernel__Object___61d_61d]))(var_ret, var_other26) /* == on <var_ret:nullable MType(MType)>*/;
+var359 = var360;
 }
-var290 = !var288;
-var286 = var290;
-goto RET_LABEL287;
-RET_LABEL287:(void)0;
+var361 = !var359;
+var357 = var361;
+goto RET_LABEL358;
+RET_LABEL358:(void)0;
 }
-var285 = var286;
+var356 = var357;
 }
-var_291 = var285;
-if (var285){
+var_362 = var356;
+if (var356){
 /* <var_ret:nullable MType(MType)> isa MClassType */
-cltype293 = type_model__MClassType.color;
-idtype294 = type_model__MClassType.id;
-if(cltype293 >= var_ret->type->table_size) {
-var292 = 0;
+cltype364 = type_model__MClassType.color;
+idtype365 = type_model__MClassType.id;
+if(cltype364 >= var_ret->type->table_size) {
+var363 = 0;
 } else {
-var292 = var_ret->type->type_table[cltype293] == idtype294;
+var363 = var_ret->type->type_table[cltype364] == idtype365;
 }
-var283 = var292;
+var354 = var363;
 } else {
-var283 = var_291;
+var354 = var_362;
 }
-var_295 = var283;
-if (var283){
+var_366 = var354;
+if (var354){
 {
 { /* Inline model#MClassType#mclass (var_ret) on <var_ret:nullable MType(MClassType)> */
-var298 = var_ret->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_ret:nullable MType(MClassType)> */
-if (unlikely(var298 == NULL)) {
+var369 = var_ret->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_ret:nullable MType(MClassType)> */
+if (unlikely(var369 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
-var296 = var298;
-RET_LABEL297:(void)0;
+var367 = var369;
+RET_LABEL368:(void)0;
 }
 }
 {
-{ /* Inline model#MClass#kind (var296) on <var296:MClass> */
-var301 = var296->attrs[COLOR_model__MClass___kind].val; /* _kind on <var296:MClass> */
-if (unlikely(var301 == NULL)) {
+{ /* Inline model#MClass#kind (var367) on <var367:MClass> */
+var372 = var367->attrs[COLOR_model__MClass___kind].val; /* _kind on <var367:MClass> */
+if (unlikely(var372 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _kind");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 355);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 371);
 show_backtrace(1);
 }
-var299 = var301;
-RET_LABEL300:(void)0;
+var370 = var372;
+RET_LABEL371:(void)0;
 }
 }
 {
-var302 = model__Object__abstract_kind(self);
+var373 = model__Object__abstract_kind(self);
 }
 {
-{ /* Inline kernel#Object#!= (var299,var302) on <var299:MClassKind> */
-var_other26 = var302;
+{ /* Inline kernel#Object#!= (var370,var373) on <var370:MClassKind> */
+var_other26 = var373;
 {
-var307 = ((short int (*)(val*, val*))(var299->class->vft[COLOR_kernel__Object___61d_61d]))(var299, var_other26) /* == on <var299:MClassKind>*/;
-var306 = var307;
+var378 = ((short int (*)(val*, val*))(var370->class->vft[COLOR_kernel__Object___61d_61d]))(var370, var_other26) /* == on <var370:MClassKind>*/;
+var377 = var378;
 }
-var308 = !var306;
-var304 = var308;
-goto RET_LABEL305;
-RET_LABEL305:(void)0;
+var379 = !var377;
+var375 = var379;
+goto RET_LABEL376;
+RET_LABEL376:(void)0;
 }
-var303 = var304;
+var374 = var375;
 }
-var282 = var303;
+var353 = var374;
 } else {
-var282 = var_295;
+var353 = var_366;
 }
-var_309 = var282;
-if (var282){
+var_380 = var353;
+if (var353){
 {
 { /* Inline model#MClassType#mclass (var_ret) on <var_ret:nullable MType(MClassType)> */
-var312 = var_ret->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_ret:nullable MType(MClassType)> */
-if (unlikely(var312 == NULL)) {
+var383 = var_ret->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_ret:nullable MType(MClassType)> */
+if (unlikely(var383 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
-var310 = var312;
-RET_LABEL311:(void)0;
+var381 = var383;
+RET_LABEL382:(void)0;
 }
 }
 {
-{ /* Inline model#MClass#kind (var310) on <var310:MClass> */
-var315 = var310->attrs[COLOR_model__MClass___kind].val; /* _kind on <var310:MClass> */
-if (unlikely(var315 == NULL)) {
+{ /* Inline model#MClass#kind (var381) on <var381:MClass> */
+var386 = var381->attrs[COLOR_model__MClass___kind].val; /* _kind on <var381:MClass> */
+if (unlikely(var386 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _kind");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 355);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 371);
 show_backtrace(1);
 }
-var313 = var315;
-RET_LABEL314:(void)0;
+var384 = var386;
+RET_LABEL385:(void)0;
 }
 }
 {
-var316 = model__Object__interface_kind(self);
+var387 = model__Object__interface_kind(self);
 }
 {
-{ /* Inline kernel#Object#!= (var313,var316) on <var313:MClassKind> */
-var_other26 = var316;
+{ /* Inline kernel#Object#!= (var384,var387) on <var384:MClassKind> */
+var_other26 = var387;
 {
-var321 = ((short int (*)(val*, val*))(var313->class->vft[COLOR_kernel__Object___61d_61d]))(var313, var_other26) /* == on <var313:MClassKind>*/;
-var320 = var321;
+var392 = ((short int (*)(val*, val*))(var384->class->vft[COLOR_kernel__Object___61d_61d]))(var384, var_other26) /* == on <var384:MClassKind>*/;
+var391 = var392;
 }
-var322 = !var320;
-var318 = var322;
-goto RET_LABEL319;
-RET_LABEL319:(void)0;
+var393 = !var391;
+var389 = var393;
+goto RET_LABEL390;
+RET_LABEL390:(void)0;
 }
-var317 = var318;
+var388 = var389;
 }
-var281 = var317;
+var352 = var388;
 } else {
-var281 = var_309;
+var352 = var_380;
 }
-if (var281){
+if (var352){
 {
 rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_ret); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_type on <var_v:RapidTypeVisitor>*/
 }
@@ -2512,138 +2883,140 @@ rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_ret); /* Direct call 
 }
 } else {
 }
-}
 {
 parser_nodes__Visitor__enter_visit(var_v, var_npropdef); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:RapidTypeVisitor>*/
 }
-CONTINUE_label236: (void)0;
+} else {
+goto BREAK_label394;
 }
-BREAK_label236: (void)0;
-var323 = NEW_list__List(&type_list__Listmodel__MClassType);
+BREAK_label304: (void)0;
+}
+BREAK_label394: (void)0;
+var395 = NEW_list__List(&type_list__Listmodel__MClassType);
 {
-{ /* Inline list#List#init (var323) on <var323:List[MClassType]> */
-RET_LABEL324:(void)0;
+((void (*)(val*))(var395->class->vft[COLOR_kernel__Object__init]))(var395) /* init on <var395:List[MClassType]>*/;
 }
-}
-var_todo_types = var323;
+var_todo_types = var395;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_types (self) on <self:RapidTypeAnalysis> */
-var327 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
-if (unlikely(var327 == NULL)) {
+var398 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
+if (unlikely(var398 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
-var325 = var327;
-RET_LABEL326:(void)0;
+var396 = var398;
+RET_LABEL397:(void)0;
 }
 }
 {
-abstract_collection__SimpleCollection__add_all(var_todo_types, var325); /* Direct call abstract_collection#SimpleCollection#add_all on <var_todo_types:List[MClassType]>*/
+abstract_collection__SimpleCollection__add_all(var_todo_types, var396); /* Direct call abstract_collection#SimpleCollection#add_all on <var_todo_types:List[MClassType]>*/
 }
 for(;;) {
 {
-var328 = list__List__is_empty(var_todo_types);
+var399 = list__List__is_empty(var_todo_types);
 }
-var329 = !var328;
-if (!var329) break;
+var400 = !var399;
+if (var400){
 {
-var330 = list__List__shift(var_todo_types);
+var401 = list__List__shift(var_todo_types);
 }
-var_t = var330;
+var_t = var401;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_open_types (self) on <self:RapidTypeAnalysis> */
-var333 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:RapidTypeAnalysis> */
-if (unlikely(var333 == NULL)) {
+var404 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:RapidTypeAnalysis> */
+if (unlikely(var404 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 58);
 show_backtrace(1);
 }
-var331 = var333;
-RET_LABEL332:(void)0;
+var402 = var404;
+RET_LABEL403:(void)0;
 }
 }
+var_405 = var402;
 {
-var334 = hash_collection__HashSet__iterator(var331);
+var406 = hash_collection__HashSet__iterator(var_405);
 }
+var_407 = var406;
 for(;;) {
 {
-var335 = ((short int (*)(val*))(var334->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var334) /* is_ok on <var334:Iterator[Object]>*/;
+var408 = ((short int (*)(val*))(var_407->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_407) /* is_ok on <var_407:Iterator[MClassType]>*/;
 }
-if(!var335) break;
+if (var408){
 {
-var336 = ((val* (*)(val*))(var334->class->vft[COLOR_abstract_collection__Iterator__item]))(var334) /* item on <var334:Iterator[Object]>*/;
+var409 = ((val* (*)(val*))(var_407->class->vft[COLOR_abstract_collection__Iterator__item]))(var_407) /* item on <var_407:Iterator[MClassType]>*/;
 }
-var_ot = var336;
+var_ot = var409;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var339 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var339 == NULL)) {
+var412 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var412 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var337 = var339;
-RET_LABEL338:(void)0;
+var410 = var412;
+RET_LABEL411:(void)0;
 }
 }
 {
-var340 = ((short int (*)(val*, val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot, var_t, var_t, var337) /* can_resolve_for on <var_ot:MClassType>*/;
+var413 = ((short int (*)(val*, val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot, var_t, var_t, var410) /* can_resolve_for on <var_ot:MClassType>*/;
 }
-var341 = !var340;
-if (var341){
-goto CONTINUE_label342;
+var414 = !var413;
+if (var414){
+goto BREAK_label415;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var345 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var345 == NULL)) {
+var418 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var418 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var343 = var345;
-RET_LABEL344:(void)0;
+var416 = var418;
+RET_LABEL417:(void)0;
 }
 }
 {
-var346 = model__MClassType__anchor_to(var_ot, var343, var_t);
+var419 = model__MClassType__anchor_to(var_ot, var416, var_t);
 }
-var_rt = var346;
+var_rt = var419;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_types (self) on <self:RapidTypeAnalysis> */
-var349 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
-if (unlikely(var349 == NULL)) {
+var422 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
+if (unlikely(var422 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
-var347 = var349;
-RET_LABEL348:(void)0;
+var420 = var422;
+RET_LABEL421:(void)0;
 }
 }
 {
-var350 = hash_collection__HashSet__has(var347, var_rt);
+var423 = hash_collection__HashSet__has(var420, var_rt);
 }
-if (var350){
-goto CONTINUE_label342;
+if (var423){
+goto BREAK_label415;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_types (self) on <self:RapidTypeAnalysis> */
-var353 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
-if (unlikely(var353 == NULL)) {
+var426 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
+if (unlikely(var426 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
-var351 = var353;
-RET_LABEL352:(void)0;
+var424 = var426;
+RET_LABEL425:(void)0;
 }
 }
 {
-hash_collection__HashSet__add(var351, var_rt); /* Direct call hash_collection#HashSet#add on <var351:HashSet[MClassType]>*/
+hash_collection__HashSet__add(var424, var_rt); /* Direct call hash_collection#HashSet#add on <var424:HashSet[MClassType]>*/
 }
 {
 abstract_collection__Sequence__add(var_todo_types, var_rt); /* Direct call abstract_collection#Sequence#add on <var_todo_types:List[MClassType]>*/
@@ -2651,126 +3024,155 @@ abstract_collection__Sequence__add(var_todo_types, var_rt); /* Direct call abstr
 {
 rapid_type_analysis__RapidTypeAnalysis__check_depth(self, var_rt); /* Direct call rapid_type_analysis#RapidTypeAnalysis#check_depth on <self:RapidTypeAnalysis>*/
 }
-CONTINUE_label342: (void)0;
+BREAK_label415: (void)0;
 {
-((void (*)(val*))(var334->class->vft[COLOR_abstract_collection__Iterator__next]))(var334) /* next on <var334:Iterator[Object]>*/;
+((void (*)(val*))(var_407->class->vft[COLOR_abstract_collection__Iterator__next]))(var_407) /* next on <var_407:Iterator[MClassType]>*/;
+}
+} else {
+goto BREAK_label427;
 }
 }
-BREAK_label342: (void)0;
-CONTINUE_label354: (void)0;
+BREAK_label427: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_407) on <var_407:Iterator[MClassType]> */
+RET_LABEL428:(void)0;
 }
-BREAK_label354: (void)0;
+}
+} else {
+goto BREAK_label429;
+}
+}
+BREAK_label429: (void)0;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_open_cast_types (self) on <self:RapidTypeAnalysis> */
-var357 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types].val; /* _live_open_cast_types on <self:RapidTypeAnalysis> */
-if (unlikely(var357 == NULL)) {
+var432 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types].val; /* _live_open_cast_types on <self:RapidTypeAnalysis> */
+if (unlikely(var432 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 70);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 68);
 show_backtrace(1);
 }
-var355 = var357;
-RET_LABEL356:(void)0;
+var430 = var432;
+RET_LABEL431:(void)0;
 }
 }
+var_433 = var430;
 {
-var358 = hash_collection__HashSet__iterator(var355);
+var434 = hash_collection__HashSet__iterator(var_433);
 }
+var_435 = var434;
 for(;;) {
 {
-var359 = ((short int (*)(val*))(var358->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var358) /* is_ok on <var358:Iterator[Object]>*/;
+var436 = ((short int (*)(val*))(var_435->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_435) /* is_ok on <var_435:Iterator[MType]>*/;
 }
-if(!var359) break;
+if (var436){
 {
-var360 = ((val* (*)(val*))(var358->class->vft[COLOR_abstract_collection__Iterator__item]))(var358) /* item on <var358:Iterator[Object]>*/;
+var437 = ((val* (*)(val*))(var_435->class->vft[COLOR_abstract_collection__Iterator__item]))(var_435) /* item on <var_435:Iterator[MType]>*/;
 }
-var_ot361 = var360;
+var_ot438 = var437;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_types (self) on <self:RapidTypeAnalysis> */
-var364 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
-if (unlikely(var364 == NULL)) {
+var441 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
+if (unlikely(var441 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
-var362 = var364;
-RET_LABEL363:(void)0;
+var439 = var441;
+RET_LABEL440:(void)0;
 }
 }
+var_442 = var439;
 {
-var365 = hash_collection__HashSet__iterator(var362);
+var443 = hash_collection__HashSet__iterator(var_442);
 }
+var_444 = var443;
 for(;;) {
 {
-var366 = ((short int (*)(val*))(var365->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var365) /* is_ok on <var365:Iterator[Object]>*/;
+var445 = ((short int (*)(val*))(var_444->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_444) /* is_ok on <var_444:Iterator[MClassType]>*/;
 }
-if(!var366) break;
+if (var445){
 {
-var367 = ((val* (*)(val*))(var365->class->vft[COLOR_abstract_collection__Iterator__item]))(var365) /* item on <var365:Iterator[Object]>*/;
+var446 = ((val* (*)(val*))(var_444->class->vft[COLOR_abstract_collection__Iterator__item]))(var_444) /* item on <var_444:Iterator[MClassType]>*/;
 }
-var_t368 = var367;
+var_t447 = var446;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var371 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var371 == NULL)) {
+var450 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var450 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var369 = var371;
-RET_LABEL370:(void)0;
+var448 = var450;
+RET_LABEL449:(void)0;
 }
 }
 {
-var372 = ((short int (*)(val*, val*, val*, val*))(var_ot361->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot361, var_t368, var_t368, var369) /* can_resolve_for on <var_ot361:MType>*/;
+var451 = ((short int (*)(val*, val*, val*, val*))(var_ot438->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot438, var_t447, var_t447, var448) /* can_resolve_for on <var_ot438:MType>*/;
 }
-var373 = !var372;
-if (var373){
-goto CONTINUE_label374;
+var452 = !var451;
+if (var452){
+goto BREAK_label453;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var377 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var377 == NULL)) {
+var456 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var456 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var375 = var377;
-RET_LABEL376:(void)0;
+var454 = var456;
+RET_LABEL455:(void)0;
 }
 }
 {
-var378 = ((val* (*)(val*, val*, val*))(var_ot361->class->vft[COLOR_model__MType__anchor_to]))(var_ot361, var375, var_t368) /* anchor_to on <var_ot361:MType>*/;
+var457 = ((val* (*)(val*, val*, val*))(var_ot438->class->vft[COLOR_model__MType__anchor_to]))(var_ot438, var454, var_t447) /* anchor_to on <var_ot438:MType>*/;
 }
-var_rt379 = var378;
+var_rt458 = var457;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_cast_types (self) on <self:RapidTypeAnalysis> */
-var382 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types].val; /* _live_cast_types on <self:RapidTypeAnalysis> */
-if (unlikely(var382 == NULL)) {
+var461 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types].val; /* _live_cast_types on <self:RapidTypeAnalysis> */
+if (unlikely(var461 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 67);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 65);
 show_backtrace(1);
 }
-var380 = var382;
-RET_LABEL381:(void)0;
+var459 = var461;
+RET_LABEL460:(void)0;
 }
 }
 {
-hash_collection__HashSet__add(var380, var_rt379); /* Direct call hash_collection#HashSet#add on <var380:HashSet[MType]>*/
+hash_collection__HashSet__add(var459, var_rt458); /* Direct call hash_collection#HashSet#add on <var459:HashSet[MType]>*/
 }
-CONTINUE_label374: (void)0;
+BREAK_label453: (void)0;
 {
-((void (*)(val*))(var365->class->vft[COLOR_abstract_collection__Iterator__next]))(var365) /* next on <var365:Iterator[Object]>*/;
+((void (*)(val*))(var_444->class->vft[COLOR_abstract_collection__Iterator__next]))(var_444) /* next on <var_444:Iterator[MClassType]>*/;
+}
+} else {
+goto BREAK_label462;
 }
 }
-BREAK_label374: (void)0;
-CONTINUE_label383: (void)0;
+BREAK_label462: (void)0;
 {
-((void (*)(val*))(var358->class->vft[COLOR_abstract_collection__Iterator__next]))(var358) /* next on <var358:Iterator[Object]>*/;
+{ /* Inline abstract_collection#Iterator#finish (var_444) on <var_444:Iterator[MClassType]> */
+RET_LABEL463:(void)0;
 }
 }
-BREAK_label383: (void)0;
+{
+((void (*)(val*))(var_435->class->vft[COLOR_abstract_collection__Iterator__next]))(var_435) /* next on <var_435:Iterator[MType]>*/;
+}
+} else {
+goto BREAK_label464;
+}
+}
+BREAK_label464: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_435) on <var_435:Iterator[MType]> */
+RET_LABEL465:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method rapid_type_analysis#RapidTypeAnalysis#run_analysis for (self: Object) */
@@ -2829,7 +3231,7 @@ var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var5 = var_d > var1;
@@ -2844,7 +3246,7 @@ if (var2){
 var8 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
 var6 = var8;
@@ -2856,7 +3258,7 @@ RET_LABEL7:(void)0;
 var11 = var6->attrs[COLOR_modelbuilder__ModelBuilder___toolcontext].val; /* _toolcontext on <var6:ModelBuilder> */
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", "src/modelbuilder.nit", 101);
+PRINT_ERROR(" (%s:%d)\n", "modelbuilder.nit", 106);
 show_backtrace(1);
 }
 var9 = var11;
@@ -2947,72 +3349,81 @@ val* var24 /* : HashSet[MClass] */;
 val* var26 /* : HashSet[MClass] */;
 val* var27 /* : HashSet[MMethod] */;
 val* var29 /* : HashSet[MMethod] */;
+val* var_ /* var : HashSet[MMethod] */;
 val* var30 /* : Iterator[Object] */;
-short int var31 /* : Bool */;
-val* var32 /* : nullable Object */;
+val* var_31 /* var : Iterator[MMethod] */;
+short int var32 /* : Bool */;
+val* var33 /* : nullable Object */;
 val* var_p /* var p: MMethod */;
-val* var33 /* : HashSet[MMethodDef] */;
 val* var35 /* : HashSet[MMethodDef] */;
-val* var36 /* : Iterator[Object] */;
-short int var37 /* : Bool */;
-val* var38 /* : nullable Object */;
-val* var_p39 /* var p: MMethodDef */;
-val* var41 /* : Array[MMethod] */;
-val* var43 /* : Array[MMethod] */;
-val* var44 /* : ArrayIterator[nullable Object] */;
-short int var45 /* : Bool */;
-val* var46 /* : nullable Object */;
-val* var_p47 /* var p: MMethod */;
-val* var48 /* : HashSet[MMethod] */;
-val* var50 /* : HashSet[MMethod] */;
-val* var52 /* : Array[MMethod] */;
-val* var54 /* : Array[MMethod] */;
-val* var55 /* : MModule */;
-val* var57 /* : MModule */;
-val* var58 /* : MClassType */;
+val* var37 /* : HashSet[MMethodDef] */;
+val* var_38 /* var : HashSet[MMethodDef] */;
+val* var39 /* : Iterator[Object] */;
+val* var_40 /* var : Iterator[MMethodDef] */;
+short int var41 /* : Bool */;
+val* var42 /* : nullable Object */;
+val* var_p43 /* var p: MMethodDef */;
+val* var46 /* : Array[MMethod] */;
+val* var48 /* : Array[MMethod] */;
+val* var_49 /* var : Array[MMethod] */;
+val* var50 /* : ArrayIterator[nullable Object] */;
+val* var_51 /* var : ArrayIterator[MMethod] */;
+short int var52 /* : Bool */;
+val* var53 /* : nullable Object */;
+val* var_p54 /* var p: MMethod */;
+val* var55 /* : HashSet[MMethod] */;
+val* var57 /* : HashSet[MMethod] */;
+val* var60 /* : Array[MMethod] */;
+val* var62 /* : Array[MMethod] */;
+val* var63 /* : MModule */;
+val* var65 /* : MModule */;
+val* var66 /* : MClassType */;
 val* var_bound_mtype /* var bound_mtype: MClassType */;
-val* var59 /* : MModule */;
-val* var61 /* : MModule */;
-val* var62 /* : Set[MClassDef] */;
-val* var63 /* : Iterator[nullable Object] */;
-short int var64 /* : Bool */;
-val* var65 /* : nullable Object */;
+val* var67 /* : MModule */;
+val* var69 /* : MModule */;
+val* var70 /* : Set[MClassDef] */;
+val* var_71 /* var : Set[MClassDef] */;
+val* var72 /* : Iterator[nullable Object] */;
+val* var_73 /* var : Iterator[MClassDef] */;
+short int var74 /* : Bool */;
+val* var75 /* : nullable Object */;
 val* var_cd /* var cd: MClassDef */;
-val* var66 /* : ModelBuilder */;
-val* var68 /* : ModelBuilder */;
-val* var69 /* : HashMap[MClassDef, AClassdef] */;
-val* var71 /* : HashMap[MClassDef, AClassdef] */;
-short int var72 /* : Bool */;
-short int var73 /* : Bool */;
-val* var75 /* : ModelBuilder */;
-val* var77 /* : ModelBuilder */;
-val* var78 /* : HashMap[MClassDef, AClassdef] */;
-val* var80 /* : HashMap[MClassDef, AClassdef] */;
-val* var81 /* : nullable Object */;
+val* var76 /* : ModelBuilder */;
+val* var78 /* : ModelBuilder */;
+val* var79 /* : HashMap[MClassDef, AClassdef] */;
+val* var81 /* : HashMap[MClassDef, AClassdef] */;
+short int var82 /* : Bool */;
+short int var83 /* : Bool */;
+val* var85 /* : ModelBuilder */;
+val* var87 /* : ModelBuilder */;
+val* var88 /* : HashMap[MClassDef, AClassdef] */;
+val* var90 /* : HashMap[MClassDef, AClassdef] */;
+val* var91 /* : nullable Object */;
 val* var_nclassdef /* var nclassdef: AClassdef */;
-val* var82 /* : ANodes[APropdef] */;
-val* var84 /* : ANodes[APropdef] */;
-val* var85 /* : Iterator[ANode] */;
-short int var86 /* : Bool */;
-val* var87 /* : nullable Object */;
+val* var92 /* : ANodes[APropdef] */;
+val* var94 /* : ANodes[APropdef] */;
+val* var_95 /* var : ANodes[APropdef] */;
+val* var96 /* : Iterator[ANode] */;
+val* var_97 /* var : Iterator[APropdef] */;
+short int var98 /* : Bool */;
+val* var99 /* : nullable Object */;
 val* var_npropdef /* var npropdef: APropdef */;
-short int var88 /* : Bool */;
+short int var100 /* : Bool */;
 int cltype;
 int idtype;
-short int var89 /* : Bool */;
-val* var91 /* : nullable AExpr */;
-val* var_nexpr /* var nexpr: nullable AExpr */;
-val* var92 /* : null */;
-short int var93 /* : Bool */;
-short int var94 /* : Bool */;
-val* var_other /* var other: nullable Object */;
-short int var96 /* : Bool */;
-short int var98 /* : Bool */;
-val* var99 /* : nullable MPropDef */;
-val* var101 /* : nullable MPropDef */;
+short int var101 /* : Bool */;
+short int var103 /* : Bool */;
+short int var105 /* : Bool */;
+short int var106 /* : Bool */;
+val* var107 /* : nullable MPropDef */;
+val* var109 /* : nullable MPropDef */;
 val* var_mpropdef /* var mpropdef: MAttributeDef */;
-val* var102 /* : RapidTypeVisitor */;
+val* var110 /* : RapidTypeVisitor */;
 val* var_v /* var v: RapidTypeVisitor */;
+val* var111 /* : nullable AExpr */;
+val* var113 /* : nullable AExpr */;
+val* var114 /* : nullable AExpr */;
+val* var116 /* : nullable AExpr */;
 var_recv = p0;
 var_mtype = p1;
 {
@@ -3021,7 +3432,7 @@ var = ((short int (*)(val*))(var_recv->class->vft[COLOR_model__MType__need_ancho
 var1 = !var;
 if (unlikely(!var1)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 317);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 325);
 show_backtrace(1);
 }
 {
@@ -3033,7 +3444,7 @@ if (var2){
 var5 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:RapidTypeAnalysis> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 58);
 show_backtrace(1);
 }
 var3 = var5;
@@ -3052,7 +3463,7 @@ goto RET_LABEL;
 var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_types].val; /* _live_open_types on <self:RapidTypeAnalysis> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 60);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 58);
 show_backtrace(1);
 }
 var7 = var9;
@@ -3068,7 +3479,7 @@ hash_collection__HashSet__add(var7, var_mtype); /* Direct call hash_collection#H
 var12 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
 var10 = var12;
@@ -3087,7 +3498,7 @@ goto RET_LABEL;
 var16 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
 if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 53);
 show_backtrace(1);
 }
 var14 = var16;
@@ -3103,7 +3514,7 @@ hash_collection__HashSet__add(var14, var_mtype); /* Direct call hash_collection#
 var19 = var_mtype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_mtype:MClassType> */
 if (unlikely(var19 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
 var17 = var19;
@@ -3116,7 +3527,7 @@ var_mclass = var17;
 var22 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
 var20 = var22;
@@ -3135,7 +3546,7 @@ goto RET_LABEL;
 var26 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
 if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
 var24 = var26;
@@ -3150,133 +3561,117 @@ hash_collection__HashSet__add(var24, var_mclass); /* Direct call hash_collection
 var29 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var29 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 162);
 show_backtrace(1);
 }
 var27 = var29;
 RET_LABEL28:(void)0;
 }
 }
+var_ = var27;
 {
-var30 = hash_collection__HashSet__iterator(var27);
+var30 = hash_collection__HashSet__iterator(var_);
 }
+var_31 = var30;
 for(;;) {
 {
-var31 = ((short int (*)(val*))(var30->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var30) /* is_ok on <var30:Iterator[Object]>*/;
+var32 = ((short int (*)(val*))(var_31->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_31) /* is_ok on <var_31:Iterator[MMethod]>*/;
 }
-if(!var31) break;
+if (var32){
 {
-var32 = ((val* (*)(val*))(var30->class->vft[COLOR_abstract_collection__Iterator__item]))(var30) /* item on <var30:Iterator[Object]>*/;
+var33 = ((val* (*)(val*))(var_31->class->vft[COLOR_abstract_collection__Iterator__item]))(var_31) /* item on <var_31:Iterator[MMethod]>*/;
 }
-var_p = var32;
+var_p = var33;
 {
 rapid_type_analysis__RapidTypeAnalysis__try_send(self, var_mtype, var_p); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_send on <self:RapidTypeAnalysis>*/
 }
-CONTINUE_label: (void)0;
 {
-((void (*)(val*))(var30->class->vft[COLOR_abstract_collection__Iterator__next]))(var30) /* next on <var30:Iterator[Object]>*/;
+((void (*)(val*))(var_31->class->vft[COLOR_abstract_collection__Iterator__next]))(var_31) /* next on <var_31:Iterator[MMethod]>*/;
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_super_sends (self) on <self:RapidTypeAnalysis> */
-var35 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
-if (unlikely(var35 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 110);
-show_backtrace(1);
-}
-var33 = var35;
+{ /* Inline abstract_collection#Iterator#finish (var_31) on <var_31:Iterator[MMethod]> */
 RET_LABEL34:(void)0;
 }
 }
 {
-var36 = hash_collection__HashSet__iterator(var33);
-}
-for(;;) {
-{
-var37 = ((short int (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var36) /* is_ok on <var36:Iterator[Object]>*/;
-}
-if(!var37) break;
-{
-var38 = ((val* (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__item]))(var36) /* item on <var36:Iterator[Object]>*/;
-}
-var_p39 = var38;
-{
-rapid_type_analysis__RapidTypeAnalysis__try_super_send(self, var_mtype, var_p39); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_super_send on <self:RapidTypeAnalysis>*/
-}
-CONTINUE_label40: (void)0;
-{
-((void (*)(val*))(var36->class->vft[COLOR_abstract_collection__Iterator__next]))(var36) /* next on <var36:Iterator[Object]>*/;
-}
-}
-BREAK_label40: (void)0;
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
-var43 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
-if (unlikely(var43 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 167);
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_super_sends (self) on <self:RapidTypeAnalysis> */
+var37 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
+if (unlikely(var37 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 108);
 show_backtrace(1);
 }
-var41 = var43;
-RET_LABEL42:(void)0;
+var35 = var37;
+RET_LABEL36:(void)0;
 }
 }
+var_38 = var35;
 {
-var44 = array__AbstractArrayRead__iterator(var41);
+var39 = hash_collection__HashSet__iterator(var_38);
 }
+var_40 = var39;
 for(;;) {
 {
-var45 = array__ArrayIterator__is_ok(var44);
+var41 = ((short int (*)(val*))(var_40->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_40) /* is_ok on <var_40:Iterator[MMethodDef]>*/;
 }
-if(!var45) break;
+if (var41){
 {
-var46 = array__ArrayIterator__item(var44);
+var42 = ((val* (*)(val*))(var_40->class->vft[COLOR_abstract_collection__Iterator__item]))(var_40) /* item on <var_40:Iterator[MMethodDef]>*/;
 }
-var_p47 = var46;
+var_p43 = var42;
+{
+rapid_type_analysis__RapidTypeAnalysis__try_super_send(self, var_mtype, var_p43); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_super_send on <self:RapidTypeAnalysis>*/
+}
+{
+((void (*)(val*))(var_40->class->vft[COLOR_abstract_collection__Iterator__next]))(var_40) /* next on <var_40:Iterator[MMethodDef]>*/;
+}
+} else {
+goto BREAK_label44;
+}
+}
+BREAK_label44: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_40) on <var_40:Iterator[MMethodDef]> */
+RET_LABEL45:(void)0;
+}
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
+var48 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
+if (unlikely(var48 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 165);
+show_backtrace(1);
+}
+var46 = var48;
+RET_LABEL47:(void)0;
+}
+}
+var_49 = var46;
+{
+var50 = array__AbstractArrayRead__iterator(var_49);
+}
+var_51 = var50;
+for(;;) {
+{
+var52 = array__ArrayIterator__is_ok(var_51);
+}
+if (var52){
+{
+var53 = array__ArrayIterator__item(var_51);
+}
+var_p54 = var53;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods (self) on <self:RapidTypeAnalysis> */
-var50 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
-if (unlikely(var50 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
-show_backtrace(1);
-}
-var48 = var50;
-RET_LABEL49:(void)0;
-}
-}
-{
-hash_collection__HashSet__remove(var48, var_p47); /* Direct call hash_collection#HashSet#remove on <var48:HashSet[MMethod]>*/
-}
-CONTINUE_label51: (void)0;
-{
-array__ArrayIterator__next(var44); /* Direct call array#ArrayIterator#next on <var44:ArrayIterator[nullable Object]>*/
-}
-}
-BREAK_label51: (void)0;
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
-var54 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
-if (unlikely(var54 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 167);
-show_backtrace(1);
-}
-var52 = var54;
-RET_LABEL53:(void)0;
-}
-}
-{
-array__AbstractArray__clear(var52); /* Direct call array#AbstractArray#clear on <var52:Array[MMethod]>*/
-}
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var57 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+var57 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var57 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 162);
 show_backtrace(1);
 }
 var55 = var57;
@@ -3284,197 +3679,258 @@ RET_LABEL56:(void)0;
 }
 }
 {
-var58 = model__MClassType__anchor_to(var_mtype, var55, var_recv);
+hash_collection__HashSet__remove(var55, var_p54); /* Direct call hash_collection#HashSet#remove on <var55:HashSet[MMethod]>*/
 }
-var_bound_mtype = var58;
+{
+array__ArrayIterator__next(var_51); /* Direct call array#ArrayIterator#next on <var_51:ArrayIterator[MMethod]>*/
+}
+} else {
+goto BREAK_label58;
+}
+}
+BREAK_label58: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_51) on <var_51:ArrayIterator[MMethod]> */
+RET_LABEL59:(void)0;
+}
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
+var62 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
+if (unlikely(var62 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 165);
+show_backtrace(1);
+}
+var60 = var62;
+RET_LABEL61:(void)0;
+}
+}
+{
+array__AbstractArray__clear(var60); /* Direct call array#AbstractArray#clear on <var60:Array[MMethod]>*/
+}
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var61 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var61 == NULL)) {
+var65 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var65 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var59 = var61;
-RET_LABEL60:(void)0;
+var63 = var65;
+RET_LABEL64:(void)0;
 }
 }
 {
-var62 = model__MClassType__collect_mclassdefs(var_bound_mtype, var59);
+var66 = model__MClassType__anchor_to(var_mtype, var63, var_recv);
+}
+var_bound_mtype = var66;
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
+var69 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var69 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
+show_backtrace(1);
+}
+var67 = var69;
+RET_LABEL68:(void)0;
+}
 }
 {
-var63 = ((val* (*)(val*))(var62->class->vft[COLOR_abstract_collection__Collection__iterator]))(var62) /* iterator on <var62:Set[MClassDef]>*/;
+var70 = model__MClassType__collect_mclassdefs(var_bound_mtype, var67);
 }
+var_71 = var70;
+{
+var72 = ((val* (*)(val*))(var_71->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_71) /* iterator on <var_71:Set[MClassDef]>*/;
+}
+var_73 = var72;
 for(;;) {
 {
-var64 = ((short int (*)(val*))(var63->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var63) /* is_ok on <var63:Iterator[nullable Object]>*/;
+var74 = ((short int (*)(val*))(var_73->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_73) /* is_ok on <var_73:Iterator[MClassDef]>*/;
 }
-if(!var64) break;
+if (var74){
 {
-var65 = ((val* (*)(val*))(var63->class->vft[COLOR_abstract_collection__Iterator__item]))(var63) /* item on <var63:Iterator[nullable Object]>*/;
+var75 = ((val* (*)(val*))(var_73->class->vft[COLOR_abstract_collection__Iterator__item]))(var_73) /* item on <var_73:Iterator[MClassDef]>*/;
 }
-var_cd = var65;
+var_cd = var75;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var68 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var68 == NULL)) {
+var78 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var78 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
-var66 = var68;
-RET_LABEL67:(void)0;
+var76 = var78;
+RET_LABEL77:(void)0;
 }
 }
 {
-{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var66) on <var66:ModelBuilder> */
-var71 = var66->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var66:ModelBuilder> */
-if (unlikely(var71 == NULL)) {
+{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var76) on <var76:ModelBuilder> */
+var81 = var76->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var76:ModelBuilder> */
+if (unlikely(var81 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef2nclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_class.nit", 399);
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_class.nit", 410);
 show_backtrace(1);
 }
-var69 = var71;
-RET_LABEL70:(void)0;
+var79 = var81;
+RET_LABEL80:(void)0;
 }
 }
 {
-var72 = abstract_collection__MapRead__has_key(var69, var_cd);
+var82 = abstract_collection__MapRead__has_key(var79, var_cd);
 }
-var73 = !var72;
-if (var73){
-goto CONTINUE_label74;
+var83 = !var82;
+if (var83){
+goto BREAK_label84;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#modelbuilder (self) on <self:RapidTypeAnalysis> */
-var77 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
-if (unlikely(var77 == NULL)) {
+var87 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <self:RapidTypeAnalysis> */
+if (unlikely(var87 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
-var75 = var77;
-RET_LABEL76:(void)0;
+var85 = var87;
+RET_LABEL86:(void)0;
 }
 }
 {
-{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var75) on <var75:ModelBuilder> */
-var80 = var75->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var75:ModelBuilder> */
-if (unlikely(var80 == NULL)) {
+{ /* Inline modelize_class#ModelBuilder#mclassdef2nclassdef (var85) on <var85:ModelBuilder> */
+var90 = var85->attrs[COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef].val; /* _mclassdef2nclassdef on <var85:ModelBuilder> */
+if (unlikely(var90 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef2nclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/modelize_class.nit", 399);
+PRINT_ERROR(" (%s:%d)\n", "modelize/modelize_class.nit", 410);
 show_backtrace(1);
 }
-var78 = var80;
-RET_LABEL79:(void)0;
+var88 = var90;
+RET_LABEL89:(void)0;
 }
 }
 {
-var81 = hash_collection__HashMap___91d_93d(var78, var_cd);
+var91 = hash_collection__HashMap___91d_93d(var88, var_cd);
 }
-var_nclassdef = var81;
+var_nclassdef = var91;
 {
 { /* Inline parser_nodes#AClassdef#n_propdefs (var_nclassdef) on <var_nclassdef:AClassdef> */
-var84 = var_nclassdef->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <var_nclassdef:AClassdef> */
-if (unlikely(var84 == NULL)) {
+var94 = var_nclassdef->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <var_nclassdef:AClassdef> */
+if (unlikely(var94 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_propdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_nodes.nit", 802);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 929);
 show_backtrace(1);
 }
-var82 = var84;
-RET_LABEL83:(void)0;
+var92 = var94;
+RET_LABEL93:(void)0;
 }
 }
+var_95 = var92;
 {
-var85 = parser_nodes__ANodes__iterator(var82);
+var96 = parser_nodes__ANodes__iterator(var_95);
 }
+var_97 = var96;
 for(;;) {
 {
-var86 = ((short int (*)(val*))(var85->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var85) /* is_ok on <var85:Iterator[ANode]>*/;
+var98 = ((short int (*)(val*))(var_97->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_97) /* is_ok on <var_97:Iterator[APropdef]>*/;
 }
-if(!var86) break;
+if (var98){
 {
-var87 = ((val* (*)(val*))(var85->class->vft[COLOR_abstract_collection__Iterator__item]))(var85) /* item on <var85:Iterator[ANode]>*/;
+var99 = ((val* (*)(val*))(var_97->class->vft[COLOR_abstract_collection__Iterator__item]))(var_97) /* item on <var_97:Iterator[APropdef]>*/;
 }
-var_npropdef = var87;
+var_npropdef = var99;
 /* <var_npropdef:APropdef> isa AAttrPropdef */
 cltype = type_parser_nodes__AAttrPropdef.color;
 idtype = type_parser_nodes__AAttrPropdef.id;
 if(cltype >= var_npropdef->type->table_size) {
-var88 = 0;
+var100 = 0;
 } else {
-var88 = var_npropdef->type->type_table[cltype] == idtype;
+var100 = var_npropdef->type->type_table[cltype] == idtype;
 }
-var89 = !var88;
-if (var89){
-goto CONTINUE_label90;
+var101 = !var100;
+if (var101){
+goto BREAK_label102;
 } else {
 }
 {
-var91 = parser_nodes__AAttrPropdef__n_expr(var_npropdef);
-}
-var_nexpr = var91;
-var92 = NULL;
-if (var_nexpr == NULL) {
-var93 = 1; /* is null */
-} else {
-var93 = 0; /* arg is null but recv is not */
-}
-if (0) {
-{ /* Inline kernel#Object#== (var_nexpr,var92) on <var_nexpr:nullable AExpr> */
-var_other = var92;
-{
-{ /* Inline kernel#Object#is_same_instance (var_nexpr,var_other) on <var_nexpr:nullable AExpr(AExpr)> */
-var98 = var_nexpr == var_other;
-var96 = var98;
-goto RET_LABEL97;
-RET_LABEL97:(void)0;
+{ /* Inline modelize_property#AAttrPropdef#has_value (var_npropdef) on <var_npropdef:APropdef(AAttrPropdef)> */
+var105 = var_npropdef->attrs[COLOR_modelize_property__AAttrPropdef___has_value].s; /* _has_value on <var_npropdef:APropdef(AAttrPropdef)> */
+var103 = var105;
+RET_LABEL104:(void)0;
 }
 }
-var94 = var96;
-goto RET_LABEL95;
-RET_LABEL95:(void)0;
-}
-var93 = var94;
-}
-if (var93){
-goto CONTINUE_label90;
+var106 = !var103;
+if (var106){
+goto BREAK_label102;
 } else {
 }
 {
 { /* Inline modelize_property#APropdef#mpropdef (var_npropdef) on <var_npropdef:APropdef(AAttrPropdef)> */
-var101 = var_npropdef->attrs[COLOR_modelize_property__APropdef___mpropdef].val; /* _mpropdef on <var_npropdef:APropdef(AAttrPropdef)> */
-var99 = var101;
-RET_LABEL100:(void)0;
+var109 = var_npropdef->attrs[COLOR_modelize_property__APropdef___mpropdef].val; /* _mpropdef on <var_npropdef:APropdef(AAttrPropdef)> */
+var107 = var109;
+RET_LABEL108:(void)0;
 }
 }
-if (unlikely(var99 == NULL)) {
+if (unlikely(var107 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 346);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 354);
 show_backtrace(1);
 }
-var_mpropdef = var99;
-var102 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__RapidTypeVisitor);
+var_mpropdef = var107;
+var110 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__RapidTypeVisitor);
 {
-rapid_type_analysis__RapidTypeVisitor__init(var102, self, var_bound_mtype, var_mpropdef); /* Direct call rapid_type_analysis#RapidTypeVisitor#init on <var102:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__init(var110, self, var_bound_mtype, var_mpropdef); /* Direct call rapid_type_analysis#RapidTypeVisitor#init on <var110:RapidTypeVisitor>*/
 }
-var_v = var102;
+var_v = var110;
 {
-parser_nodes__Visitor__enter_visit(var_v, var_nexpr); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:RapidTypeVisitor>*/
+{ /* Inline parser_nodes#AAttrPropdef#n_expr (var_npropdef) on <var_npropdef:APropdef(AAttrPropdef)> */
+var113 = var_npropdef->attrs[COLOR_parser_nodes__AAttrPropdef___n_expr].val; /* _n_expr on <var_npropdef:APropdef(AAttrPropdef)> */
+var111 = var113;
+RET_LABEL112:(void)0;
 }
-CONTINUE_label90: (void)0;
+}
 {
-((void (*)(val*))(var85->class->vft[COLOR_abstract_collection__Iterator__next]))(var85) /* next on <var85:Iterator[ANode]>*/;
+parser_nodes__Visitor__enter_visit(var_v, var111); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:RapidTypeVisitor>*/
 }
-}
-BREAK_label90: (void)0;
-CONTINUE_label74: (void)0;
 {
-((void (*)(val*))(var63->class->vft[COLOR_abstract_collection__Iterator__next]))(var63) /* next on <var63:Iterator[nullable Object]>*/;
+{ /* Inline parser_nodes#AAttrPropdef#n_block (var_npropdef) on <var_npropdef:APropdef(AAttrPropdef)> */
+var116 = var_npropdef->attrs[COLOR_parser_nodes__AAttrPropdef___n_block].val; /* _n_block on <var_npropdef:APropdef(AAttrPropdef)> */
+var114 = var116;
+RET_LABEL115:(void)0;
 }
 }
-BREAK_label74: (void)0;
+{
+parser_nodes__Visitor__enter_visit(var_v, var114); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:RapidTypeVisitor>*/
+}
+BREAK_label102: (void)0;
+{
+((void (*)(val*))(var_97->class->vft[COLOR_abstract_collection__Iterator__next]))(var_97) /* next on <var_97:Iterator[APropdef]>*/;
+}
+} else {
+goto BREAK_label117;
+}
+}
+BREAK_label117: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_97) on <var_97:Iterator[APropdef]> */
+RET_LABEL118:(void)0;
+}
+}
+BREAK_label84: (void)0;
+{
+((void (*)(val*))(var_73->class->vft[COLOR_abstract_collection__Iterator__next]))(var_73) /* next on <var_73:Iterator[MClassDef]>*/;
+}
+} else {
+goto BREAK_label119;
+}
+}
+BREAK_label119: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_73) on <var_73:Iterator[MClassDef]> */
+RET_LABEL120:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method rapid_type_analysis#RapidTypeAnalysis#add_new for (self: Object, MClassType, MClassType) */
@@ -3500,7 +3956,7 @@ if (var){
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_open_cast_types].val; /* _live_open_cast_types on <self:RapidTypeAnalysis> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_open_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 70);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 68);
 show_backtrace(1);
 }
 var1 = var3;
@@ -3516,7 +3972,7 @@ hash_collection__HashSet__add(var1, var_mtype); /* Direct call hash_collection#H
 var6 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_cast_types].val; /* _live_cast_types on <self:RapidTypeAnalysis> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_cast_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 67);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 65);
 show_backtrace(1);
 }
 var4 = var6;
@@ -3541,15 +3997,16 @@ val* var_mproperty /* var mproperty: MMethod */;
 val* var /* : MClass */;
 val* var2 /* : MClass */;
 val* var3 /* : MClassDef */;
-val* var4 /* : MClassType */;
+val* var5 /* : MClassDef */;
 val* var6 /* : MClassType */;
-val* var7 /* : MModule */;
+val* var8 /* : MClassType */;
 val* var9 /* : MModule */;
-short int var10 /* : Bool */;
-short int var11 /* : Bool */;
-val* var12 /* : MModule */;
+val* var11 /* : MModule */;
+short int var12 /* : Bool */;
+short int var13 /* : Bool */;
 val* var14 /* : MModule */;
-val* var15 /* : MPropDef */;
+val* var16 /* : MModule */;
+val* var17 /* : MPropDef */;
 val* var_d /* var d: MMethodDef */;
 var_recv = p0;
 var_mproperty = p1;
@@ -3558,7 +4015,7 @@ var_mproperty = p1;
 var2 = var_recv->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_recv:MClassType> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
 var = var2;
@@ -3566,57 +4023,66 @@ RET_LABEL1:(void)0;
 }
 }
 {
-var3 = model__MClass__intro(var);
+{ /* Inline model#MClass#intro (var) on <var:MClass> */
+var5 = var->attrs[COLOR_model__MClass___intro].val; /* _intro on <var:MClass> */
+if (unlikely(var5 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
+show_backtrace(1);
+}
+var3 = var5;
+RET_LABEL4:(void)0;
+}
 }
 {
 { /* Inline model#MClassDef#bound_mtype (var3) on <var3:MClassDef> */
-var6 = var3->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var3:MClassDef> */
-if (unlikely(var6 == NULL)) {
+var8 = var3->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var3:MClassDef> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var4 = var6;
-RET_LABEL5:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
-var_recv = var4;
+var_recv = var6;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var9 == NULL)) {
+var11 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-var10 = model__MType__has_mproperty(var_recv, var7, var_mproperty);
+var12 = model__MType__has_mproperty(var_recv, var9, var_mproperty);
 }
-var11 = !var10;
-if (var11){
+var13 = !var12;
+if (var13){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var14 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var14 == NULL)) {
+var16 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var12 = var14;
-RET_LABEL13:(void)0;
+var14 = var16;
+RET_LABEL15:(void)0;
 }
 }
 {
-var15 = model__MProperty__lookup_first_definition(var_mproperty, var12, var_recv);
+var17 = model__MProperty__lookup_first_definition(var_mproperty, var14, var_recv);
 }
-var_d = var15;
+var_d = var17;
 {
 rapid_type_analysis__RapidTypeAnalysis__add_call(self, var_d); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_call on <self:RapidTypeAnalysis>*/
 }
@@ -3643,36 +4109,39 @@ val* var_mproperty /* var mproperty: MMethod */;
 val* var13 /* : Array[MPropDef] */;
 val* var15 /* : Array[MPropDef] */;
 long var16 /* : Int */;
-long var17 /* : Int */;
-short int var18 /* : Bool */;
+long var18 /* : Int */;
+long var19 /* : Int */;
 short int var20 /* : Bool */;
+short int var22 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var21 /* : Bool */;
-val* var22 /* : Array[MPropDef] */;
+short int var23 /* : Bool */;
 val* var24 /* : Array[MPropDef] */;
-val* var25 /* : ArrayIterator[nullable Object] */;
-short int var26 /* : Bool */;
-val* var27 /* : nullable Object */;
+val* var26 /* : Array[MPropDef] */;
+val* var_ /* var : Array[MMethodDef] */;
+val* var27 /* : ArrayIterator[nullable Object] */;
+val* var_28 /* var : ArrayIterator[MMethodDef] */;
+short int var29 /* : Bool */;
+val* var30 /* : nullable Object */;
 val* var_d /* var d: MMethodDef */;
-short int var28 /* : Bool */;
-short int var30 /* : Bool */;
-val* var31 /* : HashSet[MMethodDef] */;
-val* var33 /* : HashSet[MMethodDef] */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
-val* var36 /* : Array[MMethod] */;
-val* var38 /* : Array[MMethod] */;
-val* var39 /* : MProperty */;
-val* var41 /* : MProperty */;
+short int var31 /* : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : HashSet[MMethodDef] */;
+val* var36 /* : HashSet[MMethodDef] */;
+short int var37 /* : Bool */;
+short int var38 /* : Bool */;
+val* var41 /* : Array[MMethod] */;
+val* var43 /* : Array[MMethod] */;
+val* var44 /* : MProperty */;
+val* var46 /* : MProperty */;
 var_mpropdef = p0;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_methoddefs (self) on <self:RapidTypeAnalysis> */
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:RapidTypeAnalysis> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 72);
 show_backtrace(1);
 }
 var = var2;
@@ -3691,7 +4160,7 @@ goto RET_LABEL;
 var6 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:RapidTypeAnalysis> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 74);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 72);
 show_backtrace(1);
 }
 var4 = var6;
@@ -3706,7 +4175,7 @@ hash_collection__HashSet__add(var4, var_mpropdef); /* Direct call hash_collectio
 var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___todo].val; /* _todo on <self:RapidTypeAnalysis> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _todo");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 174);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 172);
 show_backtrace(1);
 }
 var7 = var9;
@@ -3721,7 +4190,7 @@ abstract_collection__Sequence__add(var7, var_mpropdef); /* Direct call abstract_
 var12 = var_mpropdef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mpropdef:MMethodDef> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
 show_backtrace(1);
 }
 var10 = var12;
@@ -3734,7 +4203,7 @@ var_mproperty = var10;
 var15 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var13 = var15;
@@ -3742,117 +4211,131 @@ RET_LABEL14:(void)0;
 }
 }
 {
-var16 = array__AbstractArrayRead__length(var13);
+{ /* Inline array#AbstractArrayRead#length (var13) on <var13:Array[MPropDef](Array[MMethodDef])> */
+var18 = var13->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var13:Array[MPropDef](Array[MMethodDef])> */
+var16 = var18;
+RET_LABEL17:(void)0;
 }
-var17 = 1;
+}
+var19 = 1;
 {
-{ /* Inline kernel#Int#<= (var16,var17) on <var16:Int> */
-/* Covariant cast for argument 0 (i) <var17:Int> isa OTHER */
-/* <var17:Int> isa OTHER */
-var20 = 1; /* easy <var17:Int> isa OTHER*/
-if (unlikely(!var20)) {
+{ /* Inline kernel#Int#<= (var16,var19) on <var16:Int> */
+/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
+/* <var19:Int> isa OTHER */
+var22 = 1; /* easy <var19:Int> isa OTHER*/
+if (unlikely(!var22)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
-var21 = var16 <= var17;
-var18 = var21;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var23 = var16 <= var19;
+var20 = var23;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
 }
-if (var18){
+if (var20){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline model#MProperty#mpropdefs (var_mproperty) on <var_mproperty:MMethod> */
-var24 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
-if (unlikely(var24 == NULL)) {
+var26 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
-var22 = var24;
-RET_LABEL23:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
+var_ = var24;
 {
-var25 = array__AbstractArrayRead__iterator(var22);
+var27 = array__AbstractArrayRead__iterator(var_);
 }
+var_28 = var27;
 for(;;) {
 {
-var26 = array__ArrayIterator__is_ok(var25);
+var29 = array__ArrayIterator__is_ok(var_28);
 }
-if(!var26) break;
+if (var29){
 {
-var27 = array__ArrayIterator__item(var25);
+var30 = array__ArrayIterator__item(var_28);
 }
-var_d = var27;
+var_d = var30;
 {
 { /* Inline model#MMethodDef#is_abstract (var_d) on <var_d:MMethodDef> */
-var30 = var_d->attrs[COLOR_model__MMethodDef___is_abstract].s; /* _is_abstract on <var_d:MMethodDef> */
-var28 = var30;
-RET_LABEL29:(void)0;
-}
-}
-if (var28){
-goto CONTINUE_label;
-} else {
-}
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_methoddefs (self) on <self:RapidTypeAnalysis> */
-var33 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:RapidTypeAnalysis> */
-if (unlikely(var33 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 74);
-show_backtrace(1);
-}
+var33 = var_d->attrs[COLOR_model__MMethodDef___is_abstract].s; /* _is_abstract on <var_d:MMethodDef> */
 var31 = var33;
 RET_LABEL32:(void)0;
 }
 }
-{
-var34 = hash_collection__HashSet__has(var31, var_d);
+if (var31){
+goto BREAK_label;
+} else {
 }
-var35 = !var34;
-if (var35){
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_methoddefs (self) on <self:RapidTypeAnalysis> */
+var36 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methoddefs].val; /* _live_methoddefs on <self:RapidTypeAnalysis> */
+if (unlikely(var36 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methoddefs");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 72);
+show_backtrace(1);
+}
+var34 = var36;
+RET_LABEL35:(void)0;
+}
+}
+{
+var37 = hash_collection__HashSet__has(var34, var_d);
+}
+var38 = !var37;
+if (var38){
 goto RET_LABEL;
 } else {
 }
-CONTINUE_label: (void)0;
-{
-array__ArrayIterator__next(var25); /* Direct call array#ArrayIterator#next on <var25:ArrayIterator[nullable Object]>*/
-}
-}
 BREAK_label: (void)0;
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
-var38 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
-if (unlikely(var38 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 167);
-show_backtrace(1);
+array__ArrayIterator__next(var_28); /* Direct call array#ArrayIterator#next on <var_28:ArrayIterator[MMethodDef]>*/
 }
-var36 = var38;
-RET_LABEL37:(void)0;
+} else {
+goto BREAK_label39;
 }
 }
+BREAK_label39: (void)0;
 {
-{ /* Inline model#MPropDef#mproperty (var_mpropdef) on <var_mpropdef:MMethodDef> */
-var41 = var_mpropdef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mpropdef:MMethodDef> */
-if (unlikely(var41 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1882);
-show_backtrace(1);
-}
-var39 = var41;
+{ /* Inline abstract_collection#Iterator#finish (var_28) on <var_28:ArrayIterator[MMethodDef]> */
 RET_LABEL40:(void)0;
 }
 }
 {
-array__Array__add(var36, var39); /* Direct call array#Array#add on <var36:Array[MMethod]>*/
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods_to_remove (self) on <self:RapidTypeAnalysis> */
+var43 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods_to_remove].val; /* _totry_methods_to_remove on <self:RapidTypeAnalysis> */
+if (unlikely(var43 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods_to_remove");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 165);
+show_backtrace(1);
+}
+var41 = var43;
+RET_LABEL42:(void)0;
+}
+}
+{
+{ /* Inline model#MPropDef#mproperty (var_mpropdef) on <var_mpropdef:MMethodDef> */
+var46 = var_mpropdef->attrs[COLOR_model__MPropDef___mproperty].val; /* _mproperty on <var_mpropdef:MMethodDef> */
+if (unlikely(var46 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1898);
+show_backtrace(1);
+}
+var44 = var46;
+RET_LABEL45:(void)0;
+}
+}
+{
+array__Array__add(var41, var44); /* Direct call array#Array#add on <var41:Array[MMethod]>*/
 }
 RET_LABEL:;
 }
@@ -3875,25 +4358,29 @@ val* var9 /* : HashSet[MMethod] */;
 val* var10 /* : Array[MPropDef] */;
 val* var12 /* : Array[MPropDef] */;
 long var13 /* : Int */;
-long var14 /* : Int */;
-short int var15 /* : Bool */;
-short int var16 /* : Bool */;
+long var15 /* : Int */;
+long var16 /* : Int */;
+short int var17 /* : Bool */;
 short int var18 /* : Bool */;
-val* var19 /* : Array[MPropDef] */;
+short int var20 /* : Bool */;
 val* var21 /* : Array[MPropDef] */;
-val* var22 /* : nullable Object */;
+val* var23 /* : Array[MPropDef] */;
+val* var24 /* : nullable Object */;
 val* var_d /* var d: MMethodDef */;
-val* var23 /* : HashSet[MMethod] */;
 val* var25 /* : HashSet[MMethod] */;
-val* var26 /* : HashSet[MClass] */;
+val* var27 /* : HashSet[MMethod] */;
 val* var28 /* : HashSet[MClass] */;
-val* var29 /* : Iterator[Object] */;
-short int var30 /* : Bool */;
-val* var31 /* : nullable Object */;
+val* var30 /* : HashSet[MClass] */;
+val* var_ /* var : HashSet[MClass] */;
+val* var31 /* : Iterator[Object] */;
+val* var_32 /* var : Iterator[MClass] */;
+short int var33 /* : Bool */;
+val* var34 /* : nullable Object */;
 val* var_c /* var c: MClass */;
-val* var32 /* : MClassDef */;
-val* var33 /* : MClassType */;
-val* var35 /* : MClassType */;
+val* var35 /* : MClassDef */;
+val* var37 /* : MClassDef */;
+val* var38 /* : MClassType */;
+val* var40 /* : MClassType */;
 var_recv = p0;
 var_mproperty = p1;
 {
@@ -3901,7 +4388,7 @@ var_mproperty = p1;
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___try_methods].val; /* _try_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _try_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 170);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 168);
 show_backtrace(1);
 }
 var = var2;
@@ -3920,7 +4407,7 @@ goto RET_LABEL;
 var6 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods].val; /* _live_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 77);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 75);
 show_backtrace(1);
 }
 var4 = var6;
@@ -3935,7 +4422,7 @@ hash_collection__HashSet__add(var4, var_mproperty); /* Direct call hash_collecti
 var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___try_methods].val; /* _try_methods on <self:RapidTypeAnalysis> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _try_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 170);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 168);
 show_backtrace(1);
 }
 var7 = var9;
@@ -3950,7 +4437,7 @@ hash_collection__HashSet__add(var7, var_mproperty); /* Direct call hash_collecti
 var12 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
 var10 = var12;
@@ -3958,35 +4445,39 @@ RET_LABEL11:(void)0;
 }
 }
 {
-var13 = array__AbstractArrayRead__length(var10);
+{ /* Inline array#AbstractArrayRead#length (var10) on <var10:Array[MPropDef](Array[MMethodDef])> */
+var15 = var10->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var10:Array[MPropDef](Array[MMethodDef])> */
+var13 = var15;
+RET_LABEL14:(void)0;
 }
-var14 = 1;
+}
+var16 = 1;
 {
-{ /* Inline kernel#Int#== (var13,var14) on <var13:Int> */
-var18 = var13 == var14;
-var16 = var18;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+{ /* Inline kernel#Int#== (var13,var16) on <var13:Int> */
+var20 = var13 == var16;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
-var15 = var16;
+var17 = var18;
 }
-if (var15){
+if (var17){
 {
 { /* Inline model#MProperty#mpropdefs (var_mproperty) on <var_mproperty:MMethod> */
-var21 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
-if (unlikely(var21 == NULL)) {
+var23 = var_mproperty->attrs[COLOR_model__MProperty___mpropdefs].val; /* _mpropdefs on <var_mproperty:MMethod> */
+if (unlikely(var23 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdefs");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1631);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1644);
 show_backtrace(1);
 }
-var19 = var21;
-RET_LABEL20:(void)0;
+var21 = var23;
+RET_LABEL22:(void)0;
 }
 }
 {
-var22 = abstract_collection__SequenceRead__first(var19);
+var24 = abstract_collection__SequenceRead__first(var21);
 }
-var_d = var22;
+var_d = var24;
 {
 rapid_type_analysis__RapidTypeAnalysis__add_call(self, var_d); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_call on <self:RapidTypeAnalysis>*/
 }
@@ -3995,67 +4486,85 @@ goto RET_LABEL;
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#totry_methods (self) on <self:RapidTypeAnalysis> */
-var25 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
-if (unlikely(var25 == NULL)) {
+var27 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___totry_methods].val; /* _totry_methods on <self:RapidTypeAnalysis> */
+if (unlikely(var27 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _totry_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 162);
 show_backtrace(1);
 }
-var23 = var25;
-RET_LABEL24:(void)0;
+var25 = var27;
+RET_LABEL26:(void)0;
 }
 }
 {
-hash_collection__HashSet__add(var23, var_mproperty); /* Direct call hash_collection#HashSet#add on <var23:HashSet[MMethod]>*/
+hash_collection__HashSet__add(var25, var_mproperty); /* Direct call hash_collection#HashSet#add on <var25:HashSet[MMethod]>*/
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_classes (self) on <self:RapidTypeAnalysis> */
-var28 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
-if (unlikely(var28 == NULL)) {
+var30 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
+if (unlikely(var30 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 64);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
 show_backtrace(1);
 }
-var26 = var28;
-RET_LABEL27:(void)0;
+var28 = var30;
+RET_LABEL29:(void)0;
 }
 }
+var_ = var28;
 {
-var29 = hash_collection__HashSet__iterator(var26);
+var31 = hash_collection__HashSet__iterator(var_);
 }
+var_32 = var31;
 for(;;) {
 {
-var30 = ((short int (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var29) /* is_ok on <var29:Iterator[Object]>*/;
+var33 = ((short int (*)(val*))(var_32->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_32) /* is_ok on <var_32:Iterator[MClass]>*/;
 }
-if(!var30) break;
+if (var33){
 {
-var31 = ((val* (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__item]))(var29) /* item on <var29:Iterator[Object]>*/;
+var34 = ((val* (*)(val*))(var_32->class->vft[COLOR_abstract_collection__Iterator__item]))(var_32) /* item on <var_32:Iterator[MClass]>*/;
 }
-var_c = var31;
+var_c = var34;
 {
-var32 = model__MClass__intro(var_c);
-}
-{
-{ /* Inline model#MClassDef#bound_mtype (var32) on <var32:MClassDef> */
-var35 = var32->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var32:MClassDef> */
-if (unlikely(var35 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+{ /* Inline model#MClass#intro (var_c) on <var_c:MClass> */
+var37 = var_c->attrs[COLOR_model__MClass___intro].val; /* _intro on <var_c:MClass> */
+if (unlikely(var37 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
 show_backtrace(1);
 }
-var33 = var35;
-RET_LABEL34:(void)0;
+var35 = var37;
+RET_LABEL36:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__try_send(self, var33, var_mproperty); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_send on <self:RapidTypeAnalysis>*/
+{ /* Inline model#MClassDef#bound_mtype (var35) on <var35:MClassDef> */
+var40 = var35->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var35:MClassDef> */
+if (unlikely(var40 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
+show_backtrace(1);
 }
-CONTINUE_label: (void)0;
+var38 = var40;
+RET_LABEL39:(void)0;
+}
+}
 {
-((void (*)(val*))(var29->class->vft[COLOR_abstract_collection__Iterator__next]))(var29) /* next on <var29:Iterator[Object]>*/;
+rapid_type_analysis__RapidTypeAnalysis__try_send(self, var38, var_mproperty); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_send on <self:RapidTypeAnalysis>*/
+}
+{
+((void (*)(val*))(var_32->class->vft[COLOR_abstract_collection__Iterator__next]))(var_32) /* next on <var_32:Iterator[MClass]>*/;
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_32) on <var_32:Iterator[MClass]> */
+RET_LABEL41:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method rapid_type_analysis#RapidTypeAnalysis#add_send for (self: Object, MType, MMethod) */
@@ -4070,18 +4579,19 @@ val* var_mpropdef /* var mpropdef: MMethodDef */;
 val* var /* : MClass */;
 val* var2 /* : MClass */;
 val* var3 /* : MClassDef */;
-val* var4 /* : MClassType */;
+val* var5 /* : MClassDef */;
 val* var6 /* : MClassType */;
-val* var7 /* : MModule */;
+val* var8 /* : MClassType */;
 val* var9 /* : MModule */;
-val* var10 /* : Set[MClassDef] */;
-val* var11 /* : MClassDef */;
+val* var11 /* : MModule */;
+val* var12 /* : Set[MClassDef] */;
 val* var13 /* : MClassDef */;
-short int var14 /* : Bool */;
-short int var15 /* : Bool */;
-val* var16 /* : MModule */;
+val* var15 /* : MClassDef */;
+short int var16 /* : Bool */;
+short int var17 /* : Bool */;
 val* var18 /* : MModule */;
-val* var19 /* : MPropDef */;
+val* var20 /* : MModule */;
+val* var21 /* : MPropDef */;
 val* var_d /* var d: MMethodDef */;
 var_recv = p0;
 var_mpropdef = p1;
@@ -4090,7 +4600,7 @@ var_mpropdef = p1;
 var2 = var_recv->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_recv:MClassType> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
 var = var2;
@@ -4098,72 +4608,81 @@ RET_LABEL1:(void)0;
 }
 }
 {
-var3 = model__MClass__intro(var);
+{ /* Inline model#MClass#intro (var) on <var:MClass> */
+var5 = var->attrs[COLOR_model__MClass___intro].val; /* _intro on <var:MClass> */
+if (unlikely(var5 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
+show_backtrace(1);
+}
+var3 = var5;
+RET_LABEL4:(void)0;
+}
 }
 {
 { /* Inline model#MClassDef#bound_mtype (var3) on <var3:MClassDef> */
-var6 = var3->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var3:MClassDef> */
-if (unlikely(var6 == NULL)) {
+var8 = var3->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var3:MClassDef> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 477);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
 show_backtrace(1);
 }
-var4 = var6;
-RET_LABEL5:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
-var_recv = var4;
+var_recv = var6;
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var9 == NULL)) {
+var11 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-var10 = model__MClassType__collect_mclassdefs(var_recv, var7);
+var12 = model__MClassType__collect_mclassdefs(var_recv, var9);
 }
 {
 { /* Inline model#MPropDef#mclassdef (var_mpropdef) on <var_mpropdef:MMethodDef> */
-var13 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MMethodDef> */
-if (unlikely(var13 == NULL)) {
+var15 = var_mpropdef->attrs[COLOR_model__MPropDef___mclassdef].val; /* _mclassdef on <var_mpropdef:MMethodDef> */
+if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclassdef");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 1879);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1895);
 show_backtrace(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var13 = var15;
+RET_LABEL14:(void)0;
 }
 }
 {
-var14 = ((short int (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__Collection__has]))(var10, var11) /* has on <var10:Set[MClassDef]>*/;
+var16 = ((short int (*)(val*, val*))(var12->class->vft[COLOR_abstract_collection__Collection__has]))(var12, var13) /* has on <var12:Set[MClassDef]>*/;
 }
-var15 = !var14;
-if (var15){
+var17 = !var16;
+if (var17){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (self) on <self:RapidTypeAnalysis> */
-var18 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
-if (unlikely(var18 == NULL)) {
+var20 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <self:RapidTypeAnalysis> */
+if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-var19 = model__MPropDef__lookup_next_definition(var_mpropdef, var16, var_recv);
+var21 = model__MPropDef__lookup_next_definition(var_mpropdef, var18, var_recv);
 }
-var_d = var19;
+var_d = var21;
 {
 rapid_type_analysis__RapidTypeAnalysis__add_call(self, var_d); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_call on <self:RapidTypeAnalysis>*/
 }
@@ -4178,59 +4697,64 @@ RET_LABEL:;
 void rapid_type_analysis__RapidTypeAnalysis__add_super_send(val* self, val* p0, val* p1) {
 val* var_recv /* var recv: MType */;
 val* var_mpropdef /* var mpropdef: MMethodDef */;
-val* var /* : HashSet[MMethodDef] */;
-val* var2 /* : HashSet[MMethodDef] */;
-short int var3 /* : Bool */;
-val* var4 /* : HashSet[MMethodDef] */;
-val* var6 /* : HashSet[MMethodDef] */;
-val* var7 /* : HashSet[MClassType] */;
-val* var9 /* : HashSet[MClassType] */;
-val* var10 /* : Iterator[Object] */;
-short int var11 /* : Bool */;
-val* var12 /* : nullable Object */;
-val* var_t /* var t: MClassType */;
+short int var /* : Bool */;
+short int var2 /* : Bool */;
+val* var3 /* : HashSet[MMethodDef] */;
+val* var5 /* : HashSet[MMethodDef] */;
+short int var6 /* : Bool */;
+val* var7 /* : HashSet[MMethodDef] */;
+val* var9 /* : HashSet[MMethodDef] */;
+val* var10 /* : HashSet[MClass] */;
+val* var12 /* : HashSet[MClass] */;
+val* var_ /* var : HashSet[MClass] */;
+val* var13 /* : Iterator[Object] */;
+val* var_14 /* var : Iterator[MClass] */;
+short int var15 /* : Bool */;
+val* var16 /* : nullable Object */;
+val* var_c /* var c: MClass */;
+val* var17 /* : MClassDef */;
+val* var19 /* : MClassDef */;
+val* var20 /* : MClassType */;
+val* var22 /* : MClassType */;
 var_recv = p0;
 var_mpropdef = p1;
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_super_sends (self) on <self:RapidTypeAnalysis> */
-var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
-if (unlikely(var2 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 110);
-show_backtrace(1);
-}
+{ /* Inline modelize_property#MPropDef#has_supercall (var_mpropdef) on <var_mpropdef:MMethodDef> */
+var2 = var_mpropdef->attrs[COLOR_modelize_property__MPropDef___has_supercall].s; /* _has_supercall on <var_mpropdef:MMethodDef> */
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
-{
-var3 = hash_collection__HashSet__has(var, var_mpropdef);
+if (unlikely(!var)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 427);
+show_backtrace(1);
 }
-if (var3){
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_super_sends (self) on <self:RapidTypeAnalysis> */
+var5 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
+if (unlikely(var5 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 108);
+show_backtrace(1);
+}
+var3 = var5;
+RET_LABEL4:(void)0;
+}
+}
+{
+var6 = hash_collection__HashSet__has(var3, var_mpropdef);
+}
+if (var6){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeAnalysis#live_super_sends (self) on <self:RapidTypeAnalysis> */
-var6 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
-if (unlikely(var6 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 110);
-show_backtrace(1);
-}
-var4 = var6;
-RET_LABEL5:(void)0;
-}
-}
-{
-hash_collection__HashSet__add(var4, var_mpropdef); /* Direct call hash_collection#HashSet#add on <var4:HashSet[MMethodDef]>*/
-}
-{
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_types (self) on <self:RapidTypeAnalysis> */
-var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types].val; /* _live_types on <self:RapidTypeAnalysis> */
+var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_super_sends].val; /* _live_super_sends on <self:RapidTypeAnalysis> */
 if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_types");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_super_sends");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 108);
 show_backtrace(1);
 }
 var7 = var9;
@@ -4238,26 +4762,74 @@ RET_LABEL8:(void)0;
 }
 }
 {
-var10 = hash_collection__HashSet__iterator(var7);
+hash_collection__HashSet__add(var7, var_mpropdef); /* Direct call hash_collection#HashSet#add on <var7:HashSet[MMethodDef]>*/
 }
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_classes (self) on <self:RapidTypeAnalysis> */
+var12 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_classes].val; /* _live_classes on <self:RapidTypeAnalysis> */
+if (unlikely(var12 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_classes");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 62);
+show_backtrace(1);
+}
+var10 = var12;
+RET_LABEL11:(void)0;
+}
+}
+var_ = var10;
+{
+var13 = hash_collection__HashSet__iterator(var_);
+}
+var_14 = var13;
 for(;;) {
 {
-var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var10) /* is_ok on <var10:Iterator[Object]>*/;
+var15 = ((short int (*)(val*))(var_14->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var_14) /* is_ok on <var_14:Iterator[MClass]>*/;
 }
-if(!var11) break;
+if (var15){
 {
-var12 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__item]))(var10) /* item on <var10:Iterator[Object]>*/;
+var16 = ((val* (*)(val*))(var_14->class->vft[COLOR_abstract_collection__Iterator__item]))(var_14) /* item on <var_14:Iterator[MClass]>*/;
 }
-var_t = var12;
+var_c = var16;
 {
-rapid_type_analysis__RapidTypeAnalysis__try_super_send(self, var_t, var_mpropdef); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_super_send on <self:RapidTypeAnalysis>*/
+{ /* Inline model#MClass#intro (var_c) on <var_c:MClass> */
+var19 = var_c->attrs[COLOR_model__MClass___intro].val; /* _intro on <var_c:MClass> */
+if (unlikely(var19 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _intro");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 420);
+show_backtrace(1);
 }
-CONTINUE_label: (void)0;
+var17 = var19;
+RET_LABEL18:(void)0;
+}
+}
 {
-((void (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__next]))(var10) /* next on <var10:Iterator[Object]>*/;
+{ /* Inline model#MClassDef#bound_mtype (var17) on <var17:MClassDef> */
+var22 = var17->attrs[COLOR_model__MClassDef___bound_mtype].val; /* _bound_mtype on <var17:MClassDef> */
+if (unlikely(var22 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _bound_mtype");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 495);
+show_backtrace(1);
+}
+var20 = var22;
+RET_LABEL21:(void)0;
+}
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__try_super_send(self, var20, var_mpropdef); /* Direct call rapid_type_analysis#RapidTypeAnalysis#try_super_send on <self:RapidTypeAnalysis>*/
+}
+{
+((void (*)(val*))(var_14->class->vft[COLOR_abstract_collection__Iterator__next]))(var_14) /* next on <var_14:Iterator[MClass]>*/;
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_14) on <var_14:Iterator[MClass]> */
+RET_LABEL23:(void)0;
+}
+}
 RET_LABEL:;
 }
 /* method rapid_type_analysis#RapidTypeAnalysis#add_super_send for (self: Object, MType, MMethodDef) */
@@ -4265,17 +4837,19 @@ void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__add_super_send(val* self, v
 rapid_type_analysis__RapidTypeAnalysis__add_super_send(self, p0, p1); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_super_send on <self:Object(RapidTypeAnalysis)>*/
 RET_LABEL:;
 }
-/* method rapid_type_analysis#RapidTypeAnalysis#init for (self: RapidTypeAnalysis, ModelBuilder, MModule) */
-void rapid_type_analysis__RapidTypeAnalysis__init(val* self, val* p0, val* p1) {
-self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val = p0; /* _modelbuilder on <self:RapidTypeAnalysis> */
-self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val = p1; /* _mainmodule on <self:RapidTypeAnalysis> */
+/* method rapid_type_analysis#RapidTypeAnalysis#init for (self: RapidTypeAnalysis) */
+void rapid_type_analysis__RapidTypeAnalysis__init(val* self) {
+{
+((void (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__init]))(self) /* init on <self:RapidTypeAnalysis>*/;
+}
 RET_LABEL:;
 }
-/* method rapid_type_analysis#RapidTypeAnalysis#init for (self: Object, ModelBuilder, MModule) */
-void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__init(val* self, val* p0, val* p1) {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#init (self,p0,p1) on <self:Object(RapidTypeAnalysis)> */
-self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val = p0; /* _modelbuilder on <self:Object(RapidTypeAnalysis)> */
-self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val = p1; /* _mainmodule on <self:Object(RapidTypeAnalysis)> */
+/* method rapid_type_analysis#RapidTypeAnalysis#init for (self: Object) */
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__init(val* self) {
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#init (self) on <self:Object(RapidTypeAnalysis)> */
+{
+((void (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__init]))(self) /* init on <self:Object(RapidTypeAnalysis)>*/;
+}
 RET_LABEL1:(void)0;
 }
 RET_LABEL:;
@@ -4287,7 +4861,7 @@ val* var1 /* : RapidTypeAnalysis */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var = var1;
@@ -4303,7 +4877,7 @@ val* var3 /* : RapidTypeAnalysis */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:Object(RapidTypeVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4333,7 +4907,7 @@ val* var1 /* : MClassType */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <self:RapidTypeVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
 var = var1;
@@ -4349,7 +4923,7 @@ val* var3 /* : MClassType */;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <self:Object(RapidTypeVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4391,11 +4965,9 @@ val* var_analysis /* var analysis: RapidTypeAnalysis */;
 val* var_receiver /* var receiver: MClassType */;
 val* var_mpropdef /* var mpropdef: MPropDef */;
 short int var /* : Bool */;
-short int var5 /* : Bool */;
+short int var4 /* : Bool */;
 {
-{ /* Inline parser_nodes#Visitor#init (self) on <self:RapidTypeVisitor> */
-RET_LABEL1:(void)0;
-}
+((void (*)(val*))(self->class->vft[COLOR_kernel__Object__init]))(self) /* init on <self:RapidTypeVisitor>*/;
 }
 var_analysis = p0;
 var_receiver = p1;
@@ -4403,28 +4975,28 @@ var_mpropdef = p2;
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#analysis= (self,var_analysis) on <self:RapidTypeVisitor> */
 self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val = var_analysis; /* _analysis on <self:RapidTypeVisitor> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#receiver= (self,var_receiver) on <self:RapidTypeVisitor> */
 self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val = var_receiver; /* _receiver on <self:RapidTypeVisitor> */
-RET_LABEL3:(void)0;
+RET_LABEL2:(void)0;
 }
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#mpropdef= (self,var_mpropdef) on <self:RapidTypeVisitor> */
 self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___mpropdef].val = var_mpropdef; /* _mpropdef on <self:RapidTypeVisitor> */
-RET_LABEL4:(void)0;
+RET_LABEL3:(void)0;
 }
 }
 {
 var = ((short int (*)(val*))(var_receiver->class->vft[COLOR_model__MType__need_anchor]))(var_receiver) /* need_anchor on <var_receiver:MClassType>*/;
 }
-var5 = !var;
-if (unlikely(!var5)) {
+var4 = !var;
+if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 439);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 449);
 show_backtrace(1);
 }
 RET_LABEL:;
@@ -4552,7 +5124,7 @@ var_mtype = p0;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4564,7 +5136,7 @@ RET_LABEL2:(void)0;
 var6 = var1->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <var1:RapidTypeAnalysis> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var4 = var6;
@@ -4576,7 +5148,7 @@ RET_LABEL5:(void)0;
 var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <self:RapidTypeVisitor> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
 var7 = var9;
@@ -4615,7 +5187,7 @@ var14 = var_mtype->type->type_table[cltype15] == idtype16;
 }
 if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 461);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 471);
 show_backtrace(1);
 }
 {
@@ -4624,7 +5196,7 @@ var17 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_an
 var18 = !var17;
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 462);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 472);
 show_backtrace(1);
 }
 var = var_mtype;
@@ -4656,7 +5228,7 @@ var_name = p0;
 var3 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var1 = var3;
@@ -4668,7 +5240,7 @@ RET_LABEL2:(void)0;
 var6 = var1->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <var1:RapidTypeAnalysis> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var4 = var6;
@@ -4711,13 +5283,14 @@ val* var11 /* : RapidTypeAnalysis */;
 val* var12 /* : ModelBuilder */;
 val* var14 /* : ModelBuilder */;
 val* var15 /* : nullable ANode */;
-val* var16 /* : MClass */;
+val* var17 /* : nullable ANode */;
 val* var18 /* : MClass */;
-val* var19 /* : RapidTypeAnalysis */;
+val* var20 /* : MClass */;
 val* var21 /* : RapidTypeAnalysis */;
-val* var22 /* : MModule */;
+val* var23 /* : RapidTypeAnalysis */;
 val* var24 /* : MModule */;
-val* var25 /* : MMethod */;
+val* var26 /* : MModule */;
+val* var27 /* : MMethod */;
 var_recv = p0;
 var_name = p1;
 {
@@ -4746,7 +5319,7 @@ var3 = var4;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 474);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 484);
 show_backtrace(1);
 }
 {
@@ -4754,7 +5327,7 @@ show_backtrace(1);
 var11 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var9 = var11;
@@ -4766,7 +5339,7 @@ RET_LABEL10:(void)0;
 var14 = var9->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___modelbuilder].val; /* _modelbuilder on <var9:RapidTypeAnalysis> */
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _modelbuilder");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 48);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 46);
 show_backtrace(1);
 }
 var12 = var14;
@@ -4774,53 +5347,57 @@ RET_LABEL13:(void)0;
 }
 }
 {
-var15 = parser_nodes__Visitor__current_node(self);
+{ /* Inline parser_nodes#Visitor#current_node (self) on <self:RapidTypeVisitor> */
+var17 = self->attrs[COLOR_parser_nodes__Visitor___current_node].val; /* _current_node on <self:RapidTypeVisitor> */
+var15 = var17;
+RET_LABEL16:(void)0;
+}
 }
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 475);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 485);
 show_backtrace(1);
 }
 {
 { /* Inline model#MClassType#mclass (var_mtype) on <var_mtype:nullable MClassType(MClassType)> */
-var18 = var_mtype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_mtype:nullable MClassType(MClassType)> */
-if (unlikely(var18 == NULL)) {
+var20 = var_mtype->attrs[COLOR_model__MClassType___mclass].val; /* _mclass on <var_mtype:nullable MClassType(MClassType)> */
+if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 969);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 986);
 show_backtrace(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#analysis (self) on <self:RapidTypeVisitor> */
-var21 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
-if (unlikely(var21 == NULL)) {
+var23 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
+if (unlikely(var23 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
-var19 = var21;
-RET_LABEL20:(void)0;
+var21 = var23;
+RET_LABEL22:(void)0;
 }
 }
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (var19) on <var19:RapidTypeAnalysis> */
-var24 = var19->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <var19:RapidTypeAnalysis> */
-if (unlikely(var24 == NULL)) {
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#mainmodule (var21) on <var21:RapidTypeAnalysis> */
+var26 = var21->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <var21:RapidTypeAnalysis> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
-var22 = var24;
-RET_LABEL23:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-var25 = modelbuilder__ModelBuilder__force_get_primitive_method(var12, var15, var_name, var16, var22);
+var27 = modelbuilder__ModelBuilder__force_get_primitive_method(var12, var15, var_name, var18, var24);
 }
-var = var25;
+var = var27;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -4847,7 +5424,7 @@ var_mtype = p0;
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var = var2;
@@ -4859,7 +5436,7 @@ RET_LABEL1:(void)0;
 var5 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <self:RapidTypeVisitor> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
 var3 = var5;
@@ -4897,7 +5474,7 @@ var_mproperty = p1;
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var = var2;
@@ -4909,7 +5486,7 @@ RET_LABEL1:(void)0;
 var5 = var->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_methods].val; /* _live_methods on <var:RapidTypeAnalysis> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_methods");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 77);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 75);
 show_backtrace(1);
 }
 var3 = var5;
@@ -4924,7 +5501,7 @@ hash_collection__HashSet__add(var3, var_mproperty); /* Direct call hash_collecti
 var8 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var6 = var8;
@@ -4942,7 +5519,7 @@ var9 = var_mtype->type->type_table[cltype] == idtype;
 if (unlikely(!var9)) {
 var_class_name = var_mtype == NULL ? "null" : var_mtype->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 483);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 493);
 show_backtrace(1);
 }
 {
@@ -4966,7 +5543,7 @@ var_mtype = p0;
 var2 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var = var2;
@@ -4993,16 +5570,33 @@ val* var_other /* var other: nullable Object */;
 short int var4 /* : Bool */;
 short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-val* var7 /* : RapidTypeAnalysis */;
-val* var9 /* : RapidTypeAnalysis */;
-val* var10 /* : MType */;
-val* var12 /* : MType */;
-val* var13 /* : MMethod */;
-val* var15 /* : MMethod */;
-val* var16 /* : RapidTypeAnalysis */;
+val* var7 /* : MMethodDef */;
+val* var9 /* : MMethodDef */;
+val* var10 /* : Array[MProperty] */;
+val* var12 /* : Array[MProperty] */;
+val* var_ /* var : Array[MProperty] */;
+val* var13 /* : ArrayIterator[nullable Object] */;
+val* var_14 /* var : ArrayIterator[MProperty] */;
+short int var15 /* : Bool */;
+val* var16 /* : nullable Object */;
+val* var_m /* var m: MProperty */;
+short int var17 /* : Bool */;
+int cltype;
+int idtype;
 val* var18 /* : RapidTypeAnalysis */;
-val* var19 /* : HashSet[CallSite] */;
-val* var21 /* : HashSet[CallSite] */;
+val* var20 /* : RapidTypeAnalysis */;
+val* var21 /* : MType */;
+val* var23 /* : MType */;
+val* var25 /* : RapidTypeAnalysis */;
+val* var27 /* : RapidTypeAnalysis */;
+val* var28 /* : MType */;
+val* var30 /* : MType */;
+val* var31 /* : MMethod */;
+val* var33 /* : MMethod */;
+val* var34 /* : RapidTypeAnalysis */;
+val* var36 /* : RapidTypeAnalysis */;
+val* var37 /* : HashSet[CallSite] */;
+val* var39 /* : HashSet[CallSite] */;
 var_callsite = p0;
 var = NULL;
 if (var_callsite == NULL) {
@@ -5026,11 +5620,11 @@ var1 = var2;
 }
 if (var1){
 {
-{ /* Inline rapid_type_analysis#RapidTypeVisitor#analysis (self) on <self:RapidTypeVisitor> */
-var9 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
+{ /* Inline typing#CallSite#mpropdef (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
+var9 = var_callsite->attrs[COLOR_typing__CallSite___mpropdef].val; /* _mpropdef on <var_callsite:nullable CallSite(CallSite)> */
 if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mpropdef");
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 486);
 show_backtrace(1);
 }
 var7 = var9;
@@ -5038,58 +5632,147 @@ RET_LABEL8:(void)0;
 }
 }
 {
-{ /* Inline typing#CallSite#recv (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
-var12 = var_callsite->attrs[COLOR_typing__CallSite___recv].val; /* _recv on <var_callsite:nullable CallSite(CallSite)> */
+{ /* Inline model#MMethodDef#initializers (var7) on <var7:MMethodDef> */
+var12 = var7->attrs[COLOR_model__MMethodDef___initializers].val; /* _initializers on <var7:MMethodDef> */
 if (unlikely(var12 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _recv");
-PRINT_ERROR(" (%s:%d)\n", "src/typing.nit", 408);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _initializers");
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 1967);
 show_backtrace(1);
 }
 var10 = var12;
 RET_LABEL11:(void)0;
 }
 }
+var_ = var10;
 {
-{ /* Inline typing#CallSite#mproperty (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
-var15 = var_callsite->attrs[COLOR_typing__CallSite___mproperty].val; /* _mproperty on <var_callsite:nullable CallSite(CallSite)> */
-if (unlikely(var15 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
-PRINT_ERROR(" (%s:%d)\n", "src/typing.nit", 422);
+var13 = array__AbstractArrayRead__iterator(var_);
+}
+var_14 = var13;
+for(;;) {
+{
+var15 = array__ArrayIterator__is_ok(var_14);
+}
+if (var15){
+{
+var16 = array__ArrayIterator__item(var_14);
+}
+var_m = var16;
+/* <var_m:MProperty> isa MMethod */
+cltype = type_model__MMethod.color;
+idtype = type_model__MMethod.id;
+if(cltype >= var_m->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_m->type->type_table[cltype] == idtype;
+}
+if (var17){
+{
+{ /* Inline rapid_type_analysis#RapidTypeVisitor#analysis (self) on <self:RapidTypeVisitor> */
+var20 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
-var13 = var15;
-RET_LABEL14:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeAnalysis__add_send(var7, var10, var13); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_send on <var7:RapidTypeAnalysis>*/
+{ /* Inline typing#CallSite#recv (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
+var23 = var_callsite->attrs[COLOR_typing__CallSite___recv].val; /* _recv on <var_callsite:nullable CallSite(CallSite)> */
+if (unlikely(var23 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _recv");
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 469);
+show_backtrace(1);
+}
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__add_send(var18, var21, var_m); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_send on <var18:RapidTypeAnalysis>*/
+}
+} else {
+}
+{
+array__ArrayIterator__next(var_14); /* Direct call array#ArrayIterator#next on <var_14:ArrayIterator[MProperty]>*/
+}
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_14) on <var_14:ArrayIterator[MProperty]> */
+RET_LABEL24:(void)0;
+}
 }
 {
 { /* Inline rapid_type_analysis#RapidTypeVisitor#analysis (self) on <self:RapidTypeVisitor> */
-var18 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
-if (unlikely(var18 == NULL)) {
+var27 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
+if (unlikely(var27 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var25 = var27;
+RET_LABEL26:(void)0;
 }
 }
 {
-{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_callsites (var16) on <var16:RapidTypeAnalysis> */
-var21 = var16->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_callsites].val; /* _live_callsites on <var16:RapidTypeAnalysis> */
-if (unlikely(var21 == NULL)) {
+{ /* Inline typing#CallSite#recv (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
+var30 = var_callsite->attrs[COLOR_typing__CallSite___recv].val; /* _recv on <var_callsite:nullable CallSite(CallSite)> */
+if (unlikely(var30 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _recv");
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 469);
+show_backtrace(1);
+}
+var28 = var30;
+RET_LABEL29:(void)0;
+}
+}
+{
+{ /* Inline typing#CallSite#mproperty (var_callsite) on <var_callsite:nullable CallSite(CallSite)> */
+var33 = var_callsite->attrs[COLOR_typing__CallSite___mproperty].val; /* _mproperty on <var_callsite:nullable CallSite(CallSite)> */
+if (unlikely(var33 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproperty");
+PRINT_ERROR(" (%s:%d)\n", "semantize/typing.nit", 483);
+show_backtrace(1);
+}
+var31 = var33;
+RET_LABEL32:(void)0;
+}
+}
+{
+rapid_type_analysis__RapidTypeAnalysis__add_send(var25, var28, var31); /* Direct call rapid_type_analysis#RapidTypeAnalysis#add_send on <var25:RapidTypeAnalysis>*/
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeVisitor#analysis (self) on <self:RapidTypeVisitor> */
+var36 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <self:RapidTypeVisitor> */
+if (unlikely(var36 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
+show_backtrace(1);
+}
+var34 = var36;
+RET_LABEL35:(void)0;
+}
+}
+{
+{ /* Inline rapid_type_analysis#RapidTypeAnalysis#live_callsites (var34) on <var34:RapidTypeAnalysis> */
+var39 = var34->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___live_callsites].val; /* _live_callsites on <var34:RapidTypeAnalysis> */
+if (unlikely(var39 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _live_callsites");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 80);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 78);
 show_backtrace(1);
 }
-var19 = var21;
-RET_LABEL20:(void)0;
+var37 = var39;
+RET_LABEL38:(void)0;
 }
 }
 {
-hash_collection__HashSet__add(var19, var_callsite); /* Direct call hash_collection#HashSet#add on <var19:HashSet[CallSite]>*/
+hash_collection__HashSet__add(var37, var_callsite); /* Direct call hash_collection#HashSet#add on <var37:HashSet[CallSite]>*/
 }
 } else {
 }
@@ -5147,7 +5830,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 507);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 522);
 show_backtrace(1);
 }
 {
@@ -5192,7 +5875,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 514);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 529);
 show_backtrace(1);
 }
 {
@@ -5237,7 +5920,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 521);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 536);
 show_backtrace(1);
 }
 {
@@ -5309,7 +5992,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 528);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 543);
 show_backtrace(1);
 }
 var_mtype = var;
@@ -5321,7 +6004,7 @@ rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_mtype); /* Direct cal
 var6 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <var_v:RapidTypeVisitor> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var4 = var6;
@@ -5333,7 +6016,7 @@ RET_LABEL5:(void)0;
 var9 = var4->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___mainmodule].val; /* _mainmodule on <var4:RapidTypeAnalysis> */
 if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mainmodule");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 51);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 49);
 show_backtrace(1);
 }
 var7 = var9;
@@ -5363,7 +6046,7 @@ var_ = var15;
 var19 = var_mtype->attrs[COLOR_model__MClassType___arguments].val; /* _arguments on <var_mtype:MClassType> */
 if (unlikely(var19 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _arguments");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 979);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 996);
 show_backtrace(1);
 }
 var17 = var19;
@@ -5388,7 +6071,7 @@ var22 = rapid_type_analysis__RapidTypeVisitor__cleanup_type(var_v, var_mtype);
 }
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 532);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 547);
 show_backtrace(1);
 }
 var_mtype = var22;
@@ -5452,7 +6135,7 @@ var4 = rapid_type_analysis__RapidTypeVisitor__get_class(var_v, var);
 var7 = var4->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var4:MClass> */
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
 var5 = var7;
@@ -5576,7 +6259,7 @@ var12 = rapid_type_analysis__RapidTypeVisitor__get_class(var_v, var8);
 var15 = var12->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var12:MClass> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
 var13 = var15;
@@ -5628,7 +6311,7 @@ var31 = rapid_type_analysis__RapidTypeVisitor__get_class(var_v, var27);
 var34 = var31->attrs[COLOR_model__MClass___mclass_type].val; /* _mclass_type on <var31:MClass> */
 if (unlikely(var34 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mclass_type");
-PRINT_ERROR(" (%s:%d)\n", "src/model/model.nit", 417);
+PRINT_ERROR(" (%s:%d)\n", "model/model.nit", 435);
 show_backtrace(1);
 }
 var32 = var34;
@@ -5718,7 +6401,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 564);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 579);
 show_backtrace(1);
 }
 var_mtype = var;
@@ -5777,7 +6460,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 573);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 588);
 show_backtrace(1);
 }
 var_mtype = var;
@@ -5833,7 +6516,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 582);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 597);
 show_backtrace(1);
 }
 {
@@ -5878,7 +6561,7 @@ var3 = var->type->type_table[cltype] == idtype;
 if (unlikely(!var3)) {
 var_class_name = var == NULL ? "null" : var->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 589);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 604);
 show_backtrace(1);
 }
 {
@@ -5906,7 +6589,7 @@ RET_LABEL1:(void)0;
 }
 if (unlikely(var == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 596);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 611);
 show_backtrace(1);
 }
 {
@@ -5934,7 +6617,7 @@ RET_LABEL1:(void)0;
 }
 if (unlikely(var == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 603);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 618);
 show_backtrace(1);
 }
 {
@@ -6123,7 +6806,7 @@ goto RET_LABEL;
 var12 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___analysis].val; /* _analysis on <var_v:RapidTypeVisitor> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _analysis");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 430);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 440);
 show_backtrace(1);
 }
 var10 = var12;
@@ -6135,7 +6818,7 @@ RET_LABEL11:(void)0;
 var15 = var_v->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___receiver].val; /* _receiver on <var_v:RapidTypeVisitor> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _receiver");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 431);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 441);
 show_backtrace(1);
 }
 var13 = var15;
@@ -6151,7 +6834,7 @@ RET_LABEL17:(void)0;
 }
 if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 647);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 662);
 show_backtrace(1);
 }
 {
@@ -6174,25 +6857,37 @@ val* var5 /* : nullable CallSite */;
 val* var6 /* : nullable Array[Variable] */;
 val* var8 /* : nullable Array[Variable] */;
 long var9 /* : Int */;
-long var10 /* : Int */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
+long var11 /* : Int */;
+long var12 /* : Int */;
+short int var13 /* : Bool */;
 short int var14 /* : Bool */;
-val* var15 /* : nullable CallSite */;
+short int var16 /* : Bool */;
 val* var17 /* : nullable CallSite */;
-val* var18 /* : nullable Array[Variable] */;
+val* var19 /* : nullable CallSite */;
 val* var20 /* : nullable Array[Variable] */;
-long var21 /* : Int */;
-long var22 /* : Int */;
-short int var23 /* : Bool */;
-short int var24 /* : Bool */;
-short int var26 /* : Bool */;
-val* var27 /* : nullable CallSite */;
-val* var29 /* : nullable CallSite */;
-val* var30 /* : nullable CallSite */;
-val* var32 /* : nullable CallSite */;
+val* var22 /* : nullable Array[Variable] */;
+long var23 /* : Int */;
+long var25 /* : Int */;
+long var26 /* : Int */;
+short int var27 /* : Bool */;
+short int var28 /* : Bool */;
+short int var30 /* : Bool */;
+val* var31 /* : nullable CallSite */;
 val* var33 /* : nullable CallSite */;
-val* var35 /* : nullable CallSite */;
+val* var34 /* : nullable CallSite */;
+val* var36 /* : nullable CallSite */;
+val* var37 /* : nullable CallSite */;
+val* var39 /* : nullable CallSite */;
+val* var40 /* : nullable CallSite */;
+val* var42 /* : nullable CallSite */;
+val* var_mf /* var mf: nullable CallSite */;
+val* var43 /* : null */;
+short int var44 /* : Bool */;
+short int var45 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var47 /* : Bool */;
+short int var48 /* : Bool */;
+short int var49 /* : Bool */;
 var_v = p0;
 {
 { /* Inline typing#AForExpr#method_iterator (self) on <self:AForExpr> */
@@ -6223,93 +6918,145 @@ RET_LABEL7:(void)0;
 }
 if (var6 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 656);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 671);
 show_backtrace(1);
 } else {
-var9 = array__AbstractArrayRead__length(var6);
+{ /* Inline array#AbstractArrayRead#length (var6) on <var6:nullable Array[Variable]> */
+if (unlikely(var6 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/collection/array.nit", 24);
+show_backtrace(1);
 }
-var10 = 1;
+var11 = var6->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var6:nullable Array[Variable]> */
+var9 = var11;
+RET_LABEL10:(void)0;
+}
+}
+var12 = 1;
 {
-{ /* Inline kernel#Int#== (var9,var10) on <var9:Int> */
-var14 = var9 == var10;
-var12 = var14;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+{ /* Inline kernel#Int#== (var9,var12) on <var9:Int> */
+var16 = var9 == var12;
+var14 = var16;
+goto RET_LABEL15;
+RET_LABEL15:(void)0;
 }
-var11 = var12;
+var13 = var14;
 }
-if (var11){
+if (var13){
 {
 { /* Inline typing#AForExpr#method_item (self) on <self:AForExpr> */
-var17 = self->attrs[COLOR_typing__AForExpr___method_item].val; /* _method_item on <self:AForExpr> */
-var15 = var17;
-RET_LABEL16:(void)0;
+var19 = self->attrs[COLOR_typing__AForExpr___method_item].val; /* _method_item on <self:AForExpr> */
+var17 = var19;
+RET_LABEL18:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var15); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var17); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
 }
 } else {
 {
 { /* Inline scope#AForExpr#variables (self) on <self:AForExpr> */
-var20 = self->attrs[COLOR_scope__AForExpr___variables].val; /* _variables on <self:AForExpr> */
-var18 = var20;
-RET_LABEL19:(void)0;
+var22 = self->attrs[COLOR_scope__AForExpr___variables].val; /* _variables on <self:AForExpr> */
+var20 = var22;
+RET_LABEL21:(void)0;
 }
 }
-if (var18 == NULL) {
+if (var20 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 658);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 673);
 show_backtrace(1);
 } else {
-var21 = array__AbstractArrayRead__length(var18);
+{ /* Inline array#AbstractArrayRead#length (var20) on <var20:nullable Array[Variable]> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/collection/array.nit", 24);
+show_backtrace(1);
 }
-var22 = 2;
+var25 = var20->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var20:nullable Array[Variable]> */
+var23 = var25;
+RET_LABEL24:(void)0;
+}
+}
+var26 = 2;
 {
-{ /* Inline kernel#Int#== (var21,var22) on <var21:Int> */
-var26 = var21 == var22;
-var24 = var26;
-goto RET_LABEL25;
-RET_LABEL25:(void)0;
+{ /* Inline kernel#Int#== (var23,var26) on <var23:Int> */
+var30 = var23 == var26;
+var28 = var30;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
-var23 = var24;
+var27 = var28;
 }
-if (var23){
+if (var27){
 {
 { /* Inline typing#AForExpr#method_key (self) on <self:AForExpr> */
-var29 = self->attrs[COLOR_typing__AForExpr___method_key].val; /* _method_key on <self:AForExpr> */
-var27 = var29;
-RET_LABEL28:(void)0;
+var33 = self->attrs[COLOR_typing__AForExpr___method_key].val; /* _method_key on <self:AForExpr> */
+var31 = var33;
+RET_LABEL32:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var27); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var31); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
 }
 {
 { /* Inline typing#AForExpr#method_item (self) on <self:AForExpr> */
-var32 = self->attrs[COLOR_typing__AForExpr___method_item].val; /* _method_item on <self:AForExpr> */
-var30 = var32;
-RET_LABEL31:(void)0;
+var36 = self->attrs[COLOR_typing__AForExpr___method_item].val; /* _method_item on <self:AForExpr> */
+var34 = var36;
+RET_LABEL35:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var30); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var34); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
 }
 } else {
 PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 662);
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 677);
 show_backtrace(1);
 }
 }
 {
 { /* Inline typing#AForExpr#method_next (self) on <self:AForExpr> */
-var35 = self->attrs[COLOR_typing__AForExpr___method_next].val; /* _method_next on <self:AForExpr> */
-var33 = var35;
-RET_LABEL34:(void)0;
+var39 = self->attrs[COLOR_typing__AForExpr___method_next].val; /* _method_next on <self:AForExpr> */
+var37 = var39;
+RET_LABEL38:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var33); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var37); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+}
+{
+{ /* Inline typing#AForExpr#method_finish (self) on <self:AForExpr> */
+var42 = self->attrs[COLOR_typing__AForExpr___method_finish].val; /* _method_finish on <self:AForExpr> */
+var40 = var42;
+RET_LABEL41:(void)0;
+}
+}
+var_mf = var40;
+var43 = NULL;
+if (var_mf == NULL) {
+var44 = 0; /* is null */
+} else {
+var44 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_mf,var43) on <var_mf:nullable CallSite> */
+var_other = var43;
+{
+var48 = ((short int (*)(val*, val*))(var_mf->class->vft[COLOR_kernel__Object___61d_61d]))(var_mf, var_other) /* == on <var_mf:nullable CallSite(CallSite)>*/;
+var47 = var48;
+}
+var49 = !var47;
+var45 = var49;
+goto RET_LABEL46;
+RET_LABEL46:(void)0;
+}
+var44 = var45;
+}
+if (var44){
+{
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var_mf); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+}
+} else {
 }
 RET_LABEL:;
 }
@@ -6321,39 +7068,22 @@ RET_LABEL:;
 /* method rapid_type_analysis#ANewExpr#accept_rapid_type_visitor for (self: ANewExpr, RapidTypeVisitor) */
 void rapid_type_analysis__ANewExpr__accept_rapid_type_visitor(val* self, val* p0) {
 val* var_v /* var v: RapidTypeVisitor */;
-val* var /* : nullable MType */;
-val* var2 /* : nullable MType */;
-short int var3 /* : Bool */;
-int cltype;
-int idtype;
-const char* var_class_name;
+val* var /* : nullable MClassType */;
+val* var2 /* : nullable MClassType */;
 val* var_mtype /* var mtype: MClassType */;
-val* var4 /* : nullable CallSite */;
-val* var6 /* : nullable CallSite */;
+val* var3 /* : nullable CallSite */;
+val* var5 /* : nullable CallSite */;
 var_v = p0;
 {
-{ /* Inline typing#AExpr#mtype (self) on <self:ANewExpr> */
-var2 = self->attrs[COLOR_typing__AExpr___mtype].val; /* _mtype on <self:ANewExpr> */
+{ /* Inline typing#ANewExpr#recvtype (self) on <self:ANewExpr> */
+var2 = self->attrs[COLOR_typing__ANewExpr___recvtype].val; /* _recvtype on <self:ANewExpr> */
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
-/* <var:nullable MType> isa MClassType */
-cltype = type_model__MClassType.color;
-idtype = type_model__MClassType.id;
-if(var == NULL) {
-var3 = 0;
-} else {
-if(cltype >= var->type->table_size) {
-var3 = 0;
-} else {
-var3 = var->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var3)) {
-var_class_name = var == NULL ? "null" : var->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "src/rapid_type_analysis.nit", 671);
+if (unlikely(var == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", "rapid_type_analysis.nit", 688);
 show_backtrace(1);
 }
 var_mtype = var;
@@ -6362,13 +7092,13 @@ rapid_type_analysis__RapidTypeVisitor__add_type(var_v, var_mtype); /* Direct cal
 }
 {
 { /* Inline typing#ANewExpr#callsite (self) on <self:ANewExpr> */
-var6 = self->attrs[COLOR_typing__ANewExpr___callsite].val; /* _callsite on <self:ANewExpr> */
-var4 = var6;
-RET_LABEL5:(void)0;
+var5 = self->attrs[COLOR_typing__ANewExpr___callsite].val; /* _callsite on <self:ANewExpr> */
+var3 = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
-rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var4); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
+rapid_type_analysis__RapidTypeVisitor__add_callsite(var_v, var3); /* Direct call rapid_type_analysis#RapidTypeVisitor#add_callsite on <var_v:RapidTypeVisitor>*/
 }
 RET_LABEL:;
 }

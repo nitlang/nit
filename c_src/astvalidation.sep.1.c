@@ -13,7 +13,7 @@ var_node = p0;
 var2 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <self:ASTValidationVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var = var2;
@@ -31,7 +31,7 @@ list__List__unshift(var, var_node); /* Direct call list#List#unshift on <var:Lis
 var5 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <self:ASTValidationVisitor> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var3 = var5;
@@ -41,7 +41,6 @@ RET_LABEL4:(void)0;
 {
 var6 = list__List__shift(var3);
 }
-var6;
 RET_LABEL:;
 }
 /* method astvalidation#ASTValidationVisitor#visit for (self: Object, ANode) */
@@ -56,7 +55,7 @@ val* var1 /* : List[ANode] */;
 var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <self:ASTValidationVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var = var1;
@@ -72,7 +71,7 @@ val* var3 /* : List[ANode] */;
 var3 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <self:Object(ASTValidationVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var1 = var3;
@@ -89,7 +88,7 @@ val* var1 /* : HashSet[ANode] */;
 var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___seen].val; /* _seen on <self:ASTValidationVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _seen");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 30);
 show_backtrace(1);
 }
 var = var1;
@@ -105,7 +104,7 @@ val* var3 /* : HashSet[ANode] */;
 var3 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___seen].val; /* _seen on <self:Object(ASTValidationVisitor)> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _seen");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 30);
 show_backtrace(1);
 }
 var1 = var3;
@@ -172,12 +171,11 @@ long var53 /* : Int */;
 val* var54 /* : FlatString */;
 val* var55 /* : HashSet[ANode] */;
 val* var57 /* : HashSet[ANode] */;
-val* var58 /* : nullable Location */;
-val* var59 /* : null */;
-short int var60 /* : Bool */;
-short int var61 /* : Bool */;
+short int var58 /* : Bool */;
+short int var59 /* : Bool */;
+val* var60 /* : nullable ANode */;
 val* var62 /* : nullable ANode */;
-val* var64 /* : nullable ANode */;
+val* var63 /* : Location */;
 val* var65 /* : Location */;
 var_v = p0;
 {
@@ -193,7 +191,7 @@ var_parent = var;
 var5 = var_v->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <var_v:ASTValidationVisitor> */
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var3 = var5;
@@ -212,7 +210,7 @@ var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var11 = var6 > var7;
@@ -227,7 +225,7 @@ if (var8){
 var14 = var_v->attrs[COLOR_astvalidation__ASTValidationVisitor___path].val; /* _path on <var_v:ASTValidationVisitor> */
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _path");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 30);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 29);
 show_backtrace(1);
 }
 var12 = var14;
@@ -337,7 +335,7 @@ parser_nodes__ANode__debug(self, var45); /* Direct call parser_nodes#ANode#debug
 var48 = var_v->attrs[COLOR_astvalidation__ASTValidationVisitor___seen].val; /* _seen on <var_v:ASTValidationVisitor> */
 if (unlikely(var48 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _seen");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 30);
 show_backtrace(1);
 }
 var46 = var48;
@@ -367,7 +365,7 @@ parser_nodes__ANode__debug(self, var51); /* Direct call parser_nodes#ANode#debug
 var57 = var_v->attrs[COLOR_astvalidation__ASTValidationVisitor___seen].val; /* _seen on <var_v:ASTValidationVisitor> */
 if (unlikely(var57 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _seen");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 31);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 30);
 show_backtrace(1);
 }
 var55 = var57;
@@ -377,33 +375,38 @@ RET_LABEL56:(void)0;
 {
 hash_collection__HashSet__add(var55, self); /* Direct call hash_collection#HashSet#add on <var55:HashSet[ANode]>*/
 }
-var58 = self->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <self:ANode> */
-var59 = NULL;
-if (var58 == NULL) {
-var60 = 1; /* is null */
-} else {
-var60 = 0; /* arg is null but recv is not */
-}
-if (0) {
-var61 = location__Location___61d_61d(var58, var59);
-var60 = var61;
-}
-if (var60){
+var58 = self->attrs[COLOR_parser_nodes__ANode___location].val != NULL; /* _location on <self:ANode> */
+var59 = !var58;
+if (var59){
 {
 { /* Inline parser_nodes#ANode#parent (self) on <self:ANode> */
-var64 = self->attrs[COLOR_parser_nodes__ANode___parent].val; /* _parent on <self:ANode> */
-var62 = var64;
-RET_LABEL63:(void)0;
+var62 = self->attrs[COLOR_parser_nodes__ANode___parent].val; /* _parent on <self:ANode> */
+var60 = var62;
+RET_LABEL61:(void)0;
 }
 }
-if (var62 == NULL) {
+if (var60 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", "src/astvalidation.nit", 57);
+PRINT_ERROR(" (%s:%d)\n", "astvalidation.nit", 56);
 show_backtrace(1);
 } else {
-var65 = parser_nodes__ANode__location(var62);
+{ /* Inline parser_nodes#ANode#location (var60) on <var60:nullable ANode> */
+if (unlikely(var60 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Receiver is null");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 23);
+show_backtrace(1);
 }
-self->attrs[COLOR_parser_nodes__ANode___location].val = var65; /* _location on <self:ANode> */
+var65 = var60->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var60:nullable ANode> */
+if (unlikely(var65 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 23);
+show_backtrace(1);
+}
+var63 = var65;
+RET_LABEL64:(void)0;
+}
+}
+self->attrs[COLOR_parser_nodes__ANode___location].val = var63; /* _location on <self:ANode> */
 } else {
 }
 {

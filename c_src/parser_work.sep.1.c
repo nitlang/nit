@@ -25,7 +25,7 @@ var_lexer = p0;
 self->attrs[COLOR_parser_work__Parser___lexer].val = var_lexer; /* _lexer on <self:Parser> */
 var = NEW_array__Array(&type_array__Arrayparser_work__State);
 {
-array__Array__init(var); /* Direct call array#Array#init on <var:Array[State]>*/
+((void (*)(val*))(var->class->vft[COLOR_kernel__Object__init]))(var) /* init on <var:Array[State]>*/;
 }
 self->attrs[COLOR_parser_work__Parser___stack].val = var; /* _stack on <self:Parser> */
 var1 = 1;
@@ -58,7 +58,7 @@ long var2 /* : Int */;
 long var_low /* var low: Int */;
 long var3 /* : Int */;
 long var4 /* : Int */;
-long var6 /* : Int */;
+long var6 /* : Int for extern */;
 long var7 /* : Int */;
 long var8 /* : Int */;
 short int var10 /* : Bool */;
@@ -103,7 +103,7 @@ const char* var_class_name48;
 long var49 /* : Int */;
 long var_subindex /* var subindex: Int */;
 long var50 /* : Int */;
-long var52 /* : Int */;
+long var52 /* : Int for extern */;
 long var_goal /* var goal: Int */;
 short int var53 /* : Bool */;
 short int var55 /* : Bool */;
@@ -139,10 +139,10 @@ int idtype88;
 const char* var_class_name89;
 long var90 /* : Int */;
 long var91 /* : Int */;
-long var93 /* : Int */;
+long var93 /* : Int for extern */;
 long var94 /* : Int */;
 long var95 /* : Int */;
-long var97 /* : Int */;
+long var97 /* : Int for extern */;
 var_index = p0;
 {
 var1 = parser_work__Parser__state(self);
@@ -168,7 +168,7 @@ var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var11 = var4 - var7;
@@ -187,7 +187,7 @@ var14 = 1; /* easy <var_high:Int> isa OTHER*/
 if (unlikely(!var14)) {
 var_class_name17 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
 var18 = var_low <= var_high;
@@ -196,7 +196,7 @@ goto RET_LABEL13;
 RET_LABEL13:(void)0;
 }
 }
-if (!var12) break;
+if (var12){
 {
 { /* Inline kernel#Int#+ (var_low,var_high) on <var_low:Int> */
 /* Covariant cast for argument 0 (i) <var_high:Int> isa OTHER */
@@ -205,7 +205,7 @@ var21 = 1; /* easy <var_high:Int> isa OTHER*/
 if (unlikely(!var21)) {
 var_class_name24 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var25 = var_low + var_high;
@@ -223,7 +223,7 @@ var29 = 1; /* easy <var26:Int> isa OTHER*/
 if (unlikely(!var29)) {
 var_class_name32 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 333);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 379);
 show_backtrace(1);
 }
 var33 = var19 / var26;
@@ -242,7 +242,7 @@ var37 = 1; /* easy <var34:Int> isa OTHER*/
 if (unlikely(!var37)) {
 var_class_name40 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 332);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 378);
 show_backtrace(1);
 }
 var41 = var_middle * var34;
@@ -260,7 +260,7 @@ var45 = 1; /* easy <var42:Int> isa OTHER*/
 if (unlikely(!var45)) {
 var_class_name48 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var49 = var35 + var42;
@@ -287,7 +287,7 @@ var55 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (unlikely(!var55)) {
 var_class_name58 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name58);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var59 = var_state < var_goal;
@@ -306,7 +306,7 @@ var63 = 1; /* easy <var60:Int> isa OTHER*/
 if (unlikely(!var63)) {
 var_class_name66 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name66);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var67 = var_middle - var60;
@@ -325,7 +325,7 @@ var70 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (unlikely(!var70)) {
 var_class_name73 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name73);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var74 = var_state > var_goal;
@@ -344,7 +344,7 @@ var78 = 1; /* easy <var75:Int> isa OTHER*/
 if (unlikely(!var78)) {
 var_class_name81 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name81);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var82 = var_middle + var75;
@@ -364,7 +364,7 @@ var86 = 1; /* easy <var83:Int> isa OTHER*/
 if (unlikely(!var86)) {
 var_class_name89 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name89);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var90 = var_subindex + var83;
@@ -385,7 +385,9 @@ var = var91;
 goto RET_LABEL;
 }
 }
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 var94 = 2;
@@ -426,17 +428,18 @@ long var5 /* : Int */;
 long var_pos /* var pos: Int */;
 val* var6 /* : Array[State] */;
 long var7 /* : Int */;
-short int var8 /* : Bool */;
+long var9 /* : Int */;
 short int var10 /* : Bool */;
-int cltype11;
-int idtype12;
-const char* var_class_name13;
-short int var14 /* : Bool */;
-val* var15 /* : Array[State] */;
-val* var16 /* : nullable Object */;
-val* var_state /* var state: State */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+const char* var_class_name15;
+short int var16 /* : Bool */;
 val* var17 /* : Array[State] */;
-val* var18 /* : State */;
+val* var18 /* : nullable Object */;
+val* var_state /* var state: State */;
+val* var19 /* : Array[State] */;
+val* var20 /* : State */;
 var_numstate = p0;
 var_list_node = p1;
 var = self->attrs[COLOR_parser_work__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
@@ -449,7 +452,7 @@ var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var5 = var + var1;
@@ -463,55 +466,59 @@ self->attrs[COLOR_parser_work__Parser___stack_pos].l = var_pos; /* _stack_pos on
 var6 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 84);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 85);
 show_backtrace(1);
 }
 {
-var7 = array__AbstractArrayRead__length(var6);
+{ /* Inline array#AbstractArrayRead#length (var6) on <var6:Array[State]> */
+var9 = var6->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var6:Array[State]> */
+var7 = var9;
+RET_LABEL8:(void)0;
+}
 }
 {
 { /* Inline kernel#Int#< (var_pos,var7) on <var_pos:Int> */
 /* Covariant cast for argument 0 (i) <var7:Int> isa OTHER */
 /* <var7:Int> isa OTHER */
-var10 = 1; /* easy <var7:Int> isa OTHER*/
-if (unlikely(!var10)) {
-var_class_name13 = type_kernel__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+var12 = 1; /* easy <var7:Int> isa OTHER*/
+if (unlikely(!var12)) {
+var_class_name15 = type_kernel__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
-var14 = var_pos < var7;
-var8 = var14;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var16 = var_pos < var7;
+var10 = var16;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
 }
-if (var8){
-var15 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
-if (unlikely(var15 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 85);
-show_backtrace(1);
-}
-{
-var16 = array__Array___91d_93d(var15, var_pos);
-}
-var_state = var16;
-var_state->attrs[COLOR_parser_work__State___state].l = var_numstate; /* _state on <var_state:State> */
-var_state->attrs[COLOR_parser_work__State___nodes].val = var_list_node; /* _nodes on <var_state:State> */
-} else {
+if (var10){
 var17 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
 if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 89);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 86);
 show_backtrace(1);
 }
-var18 = NEW_parser_work__State(&type_parser_work__State);
 {
-parser_work__State__init(var18, var_numstate, var_list_node); /* Direct call parser_work#State#init on <var18:State>*/
+var18 = array__Array___91d_93d(var17, var_pos);
+}
+var_state = var18;
+var_state->attrs[COLOR_parser_work__State___state].l = var_numstate; /* _state on <var_state:State> */
+var_state->attrs[COLOR_parser_work__State___nodes].val = var_list_node; /* _nodes on <var_state:State> */
+} else {
+var19 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
+if (unlikely(var19 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 90);
+show_backtrace(1);
+}
+var20 = NEW_parser_work__State(&type_parser_work__State);
+{
+parser_work__State__init(var20, var_numstate, var_list_node); /* Direct call parser_work#State#init on <var20:State>*/
 }
 {
-array__AbstractArray__push(var17, var18); /* Direct call array#AbstractArray#push on <var17:Array[State]>*/
+array__AbstractArray__push(var19, var20); /* Direct call array#AbstractArray#push on <var19:Array[State]>*/
 }
 }
 RET_LABEL:;
@@ -531,7 +538,7 @@ long var4 /* : Int */;
 var1 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 96);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 97);
 show_backtrace(1);
 }
 var2 = self->attrs[COLOR_parser_work__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
@@ -572,7 +579,7 @@ long var10 /* : Int */;
 var1 = self->attrs[COLOR_parser_work__Parser___stack].val; /* _stack on <self:Parser> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _stack");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 102);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 103);
 show_backtrace(1);
 }
 var2 = self->attrs[COLOR_parser_work__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
@@ -591,7 +598,7 @@ var9 = 1; /* easy <var6:Int> isa OTHER*/
 if (unlikely(!var9)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var10 = var5 - var6;
@@ -635,17 +642,17 @@ long var9 /* : Int */;
 long var_index /* var index: Int */;
 long var10 /* : Int */;
 long var11 /* : Int */;
-long var13 /* : Int */;
+long var13 /* : Int for extern */;
 long var_action_type /* var action_type: Int */;
 long var14 /* : Int */;
 long var15 /* : Int */;
-long var17 /* : Int */;
+long var17 /* : Int for extern */;
 long var_action_value /* var action_value: Int */;
 long var18 /* : Int */;
 long var_low /* var low: Int */;
 long var19 /* : Int */;
 long var20 /* : Int */;
-long var22 /* : Int */;
+long var22 /* : Int for extern */;
 long var23 /* : Int */;
 long var24 /* : Int */;
 short int var26 /* : Bool */;
@@ -690,7 +697,7 @@ const char* var_class_name66;
 long var67 /* : Int */;
 long var_subindex /* var subindex: Int */;
 long var68 /* : Int */;
-long var70 /* : Int */;
+long var70 /* : Int for extern */;
 long var_goal /* var goal: Int */;
 short int var71 /* : Bool */;
 short int var73 /* : Bool */;
@@ -726,7 +733,7 @@ int idtype106;
 const char* var_class_name107;
 long var108 /* : Int */;
 long var109 /* : Int */;
-long var111 /* : Int */;
+long var111 /* : Int for extern */;
 long var112 /* : Int */;
 long var113 /* : Int */;
 short int var115 /* : Bool */;
@@ -735,7 +742,7 @@ int idtype117;
 const char* var_class_name118;
 long var119 /* : Int */;
 long var120 /* : Int */;
-long var122 /* : Int */;
+long var122 /* : Int for extern */;
 long var123 /* : Int */;
 short int var124 /* : Bool */;
 short int var125 /* : Bool */;
@@ -768,26 +775,25 @@ long var151 /* : Int */;
 short int var152 /* : Bool */;
 short int var153 /* : Bool */;
 short int var155 /* : Bool */;
-val* var156 /* : nullable Location */;
-val* var157 /* : null */;
-short int var158 /* : Bool */;
-short int var159 /* : Bool */;
-val* var160 /* : Token */;
-val* var162 /* : AParserError */;
+short int var156 /* : Bool */;
+short int var157 /* : Bool */;
+val* var158 /* : Token */;
+val* var160 /* : AParserError */;
 static val* varonce;
-val* var163 /* : String */;
-char* var164 /* : NativeString */;
-long var165 /* : Int */;
-val* var166 /* : FlatString */;
-static val* varonce167;
-val* var168 /* : String */;
-char* var169 /* : NativeString */;
-long var170 /* : Int */;
-val* var171 /* : FlatString */;
-val* var172 /* : Array[Object] */;
-long var173 /* : Int */;
-val* var174 /* : NativeArray[Object] */;
-val* var175 /* : String */;
+val* var161 /* : String */;
+char* var162 /* : NativeString */;
+long var163 /* : Int */;
+val* var164 /* : FlatString */;
+static val* varonce165;
+val* var166 /* : String */;
+char* var167 /* : NativeString */;
+long var168 /* : Int */;
+val* var169 /* : FlatString */;
+val* var170 /* : Array[Object] */;
+long var171 /* : Int */;
+val* var172 /* : NativeArray[Object] */;
+val* var173 /* : String */;
+val* var174 /* : Location */;
 val* var176 /* : Location */;
 val* var_node2177 /* var node2: AParserError */;
 val* var178 /* : Start */;
@@ -801,7 +807,7 @@ parser_work__Parser__push(self, var1, var2); /* Direct call parser_work#Parser#p
 var3 = self->attrs[COLOR_parser_work__Parser___lexer].val; /* _lexer on <self:Parser> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _lexer");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 112);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 113);
 show_backtrace(1);
 }
 var_lexer = var3;
@@ -876,7 +882,7 @@ var26 = 1; /* easy <var23:Int> isa OTHER*/
 if (unlikely(!var26)) {
 var_class_name = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var29 = var20 - var23;
@@ -895,7 +901,7 @@ var32 = 1; /* easy <var_high:Int> isa OTHER*/
 if (unlikely(!var32)) {
 var_class_name35 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name35);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 324);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 370);
 show_backtrace(1);
 }
 var36 = var_low <= var_high;
@@ -904,7 +910,7 @@ goto RET_LABEL31;
 RET_LABEL31:(void)0;
 }
 }
-if (!var30) break;
+if (var30){
 {
 { /* Inline kernel#Int#+ (var_low,var_high) on <var_low:Int> */
 /* Covariant cast for argument 0 (i) <var_high:Int> isa OTHER */
@@ -913,7 +919,7 @@ var39 = 1; /* easy <var_high:Int> isa OTHER*/
 if (unlikely(!var39)) {
 var_class_name42 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name42);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var43 = var_low + var_high;
@@ -931,7 +937,7 @@ var47 = 1; /* easy <var44:Int> isa OTHER*/
 if (unlikely(!var47)) {
 var_class_name50 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name50);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 333);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 379);
 show_backtrace(1);
 }
 var51 = var37 / var44;
@@ -950,7 +956,7 @@ var55 = 1; /* easy <var52:Int> isa OTHER*/
 if (unlikely(!var55)) {
 var_class_name58 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name58);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 332);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 378);
 show_backtrace(1);
 }
 var59 = var_middle * var52;
@@ -968,7 +974,7 @@ var63 = 1; /* easy <var60:Int> isa OTHER*/
 if (unlikely(!var63)) {
 var_class_name66 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name66);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var67 = var53 + var60;
@@ -995,7 +1001,7 @@ var73 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (unlikely(!var73)) {
 var_class_name76 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name76);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 325);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 371);
 show_backtrace(1);
 }
 var77 = var_index < var_goal;
@@ -1014,7 +1020,7 @@ var81 = 1; /* easy <var78:Int> isa OTHER*/
 if (unlikely(!var81)) {
 var_class_name84 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name84);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 331);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 377);
 show_backtrace(1);
 }
 var85 = var_middle - var78;
@@ -1033,7 +1039,7 @@ var88 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (unlikely(!var88)) {
 var_class_name91 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name91);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 327);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 373);
 show_backtrace(1);
 }
 var92 = var_index > var_goal;
@@ -1052,7 +1058,7 @@ var96 = 1; /* easy <var93:Int> isa OTHER*/
 if (unlikely(!var96)) {
 var_class_name99 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name99);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var100 = var_middle + var93;
@@ -1072,7 +1078,7 @@ var104 = 1; /* easy <var101:Int> isa OTHER*/
 if (unlikely(!var104)) {
 var_class_name107 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name107);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var108 = var_subindex + var101;
@@ -1099,7 +1105,7 @@ var115 = 1; /* easy <var112:Int> isa OTHER*/
 if (unlikely(!var115)) {
 var_class_name118 = type_kernel__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name118);
-PRINT_ERROR(" (%s:%d)\n", "lib/standard/kernel.nit", 328);
+PRINT_ERROR(" (%s:%d)\n", "../lib/standard/kernel.nit", 374);
 show_backtrace(1);
 }
 var119 = var_subindex + var112;
@@ -1120,7 +1126,9 @@ var_action_value = var120;
 goto BREAK_label;
 }
 }
-CONTINUE_label: (void)0;
+} else {
+goto BREAK_label;
+}
 }
 BREAK_label: (void)0;
 var123 = 0;
@@ -1155,7 +1163,7 @@ if (var130){
 var134 = self->attrs[COLOR_parser_work__Parser___reduce_table].val; /* _reduce_table on <self:Parser> */
 if (unlikely(var134 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _reduce_table");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 146);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 147);
 show_backtrace(1);
 }
 {
@@ -1190,7 +1198,7 @@ var142 = var_node2->type->type_table[cltype143] == idtype144;
 }
 if (unlikely(!var142)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 149);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 150);
 show_backtrace(1);
 }
 {
@@ -1211,7 +1219,7 @@ var146 = var_node1->type->type_table[cltype147] == idtype148;
 }
 if (unlikely(!var146)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 151);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 152);
 show_backtrace(1);
 }
 var149 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
@@ -1221,7 +1229,7 @@ parser_nodes__Start__init(var149, var_node1, var_node2); /* Direct call parser_n
 var_node = var149;
 var150 = NEW_parser_work__ComputeProdLocationVisitor(&type_parser_work__ComputeProdLocationVisitor);
 {
-parser_work__ComputeProdLocationVisitor__init(var150); /* Direct call parser_work#ComputeProdLocationVisitor#init on <var150:ComputeProdLocationVisitor>*/
+((void (*)(val*))(var150->class->vft[COLOR_kernel__Object__init]))(var150) /* init on <var150:ComputeProdLocationVisitor>*/;
 }
 {
 parser_nodes__Visitor__enter_visit(var150, var_node); /* Direct call parser_nodes#Visitor#enter_visit on <var150:ComputeProdLocationVisitor>*/
@@ -1241,65 +1249,67 @@ var152 = var153;
 }
 if (var152){
 for(;;) {
-var156 = var_token->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var_token:Token> */
-var157 = NULL;
-if (var156 == NULL) {
-var158 = 1; /* is null */
-} else {
-var158 = 0; /* arg is null but recv is not */
-}
-if (0) {
-var159 = location__Location___61d_61d(var156, var157);
-var158 = var159;
-}
-if (!var158) break;
+var156 = var_token->attrs[COLOR_parser_nodes__ANode___location].val != NULL; /* _location on <var_token:Token> */
+var157 = !var156;
+if (var157){
 {
-var160 = lexer_work__Lexer__next(var_lexer);
+var158 = lexer_work__Lexer__next(var_lexer);
 }
-var_token = var160;
-CONTINUE_label161: (void)0;
+var_token = var158;
+} else {
+goto BREAK_label159;
 }
-BREAK_label161: (void)0;
-var162 = NEW_parser_nodes__AParserError(&type_parser_nodes__AParserError);
+}
+BREAK_label159: (void)0;
+var160 = NEW_parser_nodes__AParserError(&type_parser_nodes__AParserError);
 if (varonce) {
-var163 = varonce;
+var161 = varonce;
 } else {
-var164 = "Syntax error: unexpected ";
-var165 = 25;
-var166 = string__NativeString__to_s_with_length(var164, var165);
-var163 = var166;
-varonce = var163;
+var162 = "Syntax error: unexpected ";
+var163 = 25;
+var164 = string__NativeString__to_s_with_length(var162, var163);
+var161 = var164;
+varonce = var161;
 }
-if (varonce167) {
-var168 = varonce167;
+if (varonce165) {
+var166 = varonce165;
 } else {
-var169 = ".";
-var170 = 1;
-var171 = string__NativeString__to_s_with_length(var169, var170);
-var168 = var171;
-varonce167 = var168;
+var167 = ".";
+var168 = 1;
+var169 = string__NativeString__to_s_with_length(var167, var168);
+var166 = var169;
+varonce165 = var166;
 }
-var172 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var172 = array_instance Array[Object] */
-var173 = 3;
-var174 = NEW_array__NativeArray(var173, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var174)->values[0] = (val*) var163;
-((struct instance_array__NativeArray*)var174)->values[1] = (val*) var_token;
-((struct instance_array__NativeArray*)var174)->values[2] = (val*) var168;
+var170 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var170 = array_instance Array[Object] */
+var171 = 3;
+var172 = NEW_array__NativeArray(var171, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var172)->values[0] = (val*) var161;
+((struct instance_array__NativeArray*)var172)->values[1] = (val*) var_token;
+((struct instance_array__NativeArray*)var172)->values[2] = (val*) var166;
 {
-((void (*)(val*, val*, long))(var172->class->vft[COLOR_array__Array__with_native]))(var172, var174, var173) /* with_native on <var172:Array[Object]>*/;
+((void (*)(val*, val*, long))(var170->class->vft[COLOR_array__Array__with_native]))(var170, var172, var171) /* with_native on <var170:Array[Object]>*/;
 }
-}
-{
-var175 = ((val* (*)(val*))(var172->class->vft[COLOR_string__Object__to_s]))(var172) /* to_s on <var172:Array[Object]>*/;
 }
 {
-var176 = parser_nodes__ANode__location(var_token);
+var173 = ((val* (*)(val*))(var170->class->vft[COLOR_string__Object__to_s]))(var170) /* to_s on <var170:Array[Object]>*/;
 }
 {
-lexer_work__AParserError__init_parser_error(var162, var175, var176, var_token); /* Direct call lexer_work#AParserError#init_parser_error on <var162:AParserError>*/
+{ /* Inline parser_nodes#ANode#location (var_token) on <var_token:Token> */
+var176 = var_token->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var_token:Token> */
+if (unlikely(var176 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_nodes.nit", 23);
+show_backtrace(1);
 }
-var_node2177 = var162;
+var174 = var176;
+RET_LABEL175:(void)0;
+}
+}
+{
+lexer_work__AParserError__init_parser_error(var160, var173, var174, var_token); /* Direct call lexer_work#AParserError#init_parser_error on <var160:AParserError>*/
+}
+var_node2177 = var160;
 var178 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
 var179 = NULL;
 {
@@ -1313,9 +1323,7 @@ goto RET_LABEL;
 }
 }
 }
-CONTINUE_label181: (void)0;
 }
-BREAK_label181: (void)0;
 RET_LABEL:;
 return var;
 }
@@ -1328,101 +1336,200 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method parser_work#Prod#collect_text for (self: Prod): String */
+val* parser_work__Prod__collect_text(val* self) {
+val* var /* : String */;
+val* var1 /* : TextCollectorVisitor */;
+val* var_v /* var v: TextCollectorVisitor */;
+val* var2 /* : String */;
+val* var4 /* : String */;
+static val* varonce;
+val* var5 /* : String */;
+char* var6 /* : NativeString */;
+long var7 /* : Int */;
+val* var8 /* : FlatString */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var12 /* : Bool */;
+short int var13 /* : Bool */;
+short int var14 /* : Bool */;
+val* var15 /* : String */;
+val* var17 /* : String */;
+var1 = NEW_parser_work__TextCollectorVisitor(&type_parser_work__TextCollectorVisitor);
+{
+((void (*)(val*))(var1->class->vft[COLOR_kernel__Object__init]))(var1) /* init on <var1:TextCollectorVisitor>*/;
+}
+var_v = var1;
+{
+parser_nodes__Visitor__enter_visit(var_v, self); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:TextCollectorVisitor>*/
+}
+{
+{ /* Inline parser_work#TextCollectorVisitor#text (var_v) on <var_v:TextCollectorVisitor> */
+var4 = var_v->attrs[COLOR_parser_work__TextCollectorVisitor___text].val; /* _text on <var_v:TextCollectorVisitor> */
+if (unlikely(var4 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _text");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 253);
+show_backtrace(1);
+}
+var2 = var4;
+RET_LABEL3:(void)0;
+}
+}
+if (varonce) {
+var5 = varonce;
+} else {
+var6 = "";
+var7 = 0;
+var8 = string__NativeString__to_s_with_length(var6, var7);
+var5 = var8;
+varonce = var5;
+}
+{
+{ /* Inline kernel#Object#!= (var2,var5) on <var2:String> */
+var_other = var5;
+{
+var13 = ((short int (*)(val*, val*))(var2->class->vft[COLOR_kernel__Object___61d_61d]))(var2, var_other) /* == on <var2:String>*/;
+var12 = var13;
+}
+var14 = !var12;
+var10 = var14;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
+}
+var9 = var10;
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 180);
+show_backtrace(1);
+}
+{
+{ /* Inline parser_work#TextCollectorVisitor#text (var_v) on <var_v:TextCollectorVisitor> */
+var17 = var_v->attrs[COLOR_parser_work__TextCollectorVisitor___text].val; /* _text on <var_v:TextCollectorVisitor> */
+if (unlikely(var17 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _text");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 253);
+show_backtrace(1);
+}
+var15 = var17;
+RET_LABEL16:(void)0;
+}
+}
+var = var15;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method parser_work#Prod#collect_text for (self: Object): String */
+val* VIRTUAL_parser_work__Prod__collect_text(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = parser_work__Prod__collect_text(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method parser_work#ComputeProdLocationVisitor#visit for (self: ComputeProdLocationVisitor, ANode) */
 void parser_work__ComputeProdLocationVisitor__visit(val* self, val* p0) {
 val* var_n /* var n: ANode */;
 short int var /* : Bool */;
 int cltype;
 int idtype;
-val* var1 /* : nullable Location */;
-val* var_loc /* var loc: nullable Location */;
-val* var2 /* : null */;
-short int var3 /* : Bool */;
-short int var4 /* : Bool */;
-val* var5 /* : Array[Prod] */;
+short int var1 /* : Bool */;
+short int var2 /* : Bool */;
+val* var3 /* : Location */;
+val* var_loc /* var loc: Location */;
+val* var4 /* : Array[Prod] */;
+short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-short int var7 /* : Bool */;
-val* var8 /* : Array[Prod] */;
-val* var9 /* : ArrayIterator[nullable Object] */;
+val* var7 /* : Array[Prod] */;
+val* var_ /* var : Array[Prod] */;
+val* var8 /* : ArrayIterator[nullable Object] */;
+val* var_9 /* var : ArrayIterator[Prod] */;
 short int var10 /* : Bool */;
 val* var11 /* : nullable Object */;
 val* var_no /* var no: Prod */;
-val* var12 /* : Array[Prod] */;
 val* var13 /* : Array[Prod] */;
-short int var14 /* : Bool */;
+val* var14 /* : Array[Prod] */;
 short int var15 /* : Bool */;
-val* var16 /* : Location */;
-val* var17 /* : nullable SourceFile */;
-val* var19 /* : nullable SourceFile */;
-long var20 /* : Int */;
-long var22 /* : Int */;
+short int var16 /* : Bool */;
+val* var17 /* : Location */;
+val* var18 /* : nullable SourceFile */;
+val* var20 /* : nullable SourceFile */;
+long var21 /* : Int */;
 long var23 /* : Int */;
-long var25 /* : Int */;
+long var24 /* : Int */;
 long var26 /* : Int */;
-long var28 /* : Int */;
+long var27 /* : Int */;
 long var29 /* : Int */;
-long var31 /* : Int */;
+long var30 /* : Int */;
+long var32 /* : Int */;
 val* var_loco /* var loco: Location */;
-val* var32 /* : Array[Prod] */;
-val* var33 /* : ArrayIterator[nullable Object] */;
-short int var34 /* : Bool */;
-val* var35 /* : nullable Object */;
-val* var_no36 /* var no: Prod */;
-val* var38 /* : Array[Prod] */;
-short int var39 /* : Bool */;
-int cltype40;
-int idtype41;
-val* var42 /* : Array[Prod] */;
-val* var43 /* : nullable Location */;
+val* var33 /* : Array[Prod] */;
+val* var_34 /* var : Array[Prod] */;
+val* var35 /* : ArrayIterator[nullable Object] */;
+val* var_36 /* var : ArrayIterator[Prod] */;
+short int var37 /* : Bool */;
+val* var38 /* : nullable Object */;
+val* var_no39 /* var no: Prod */;
+val* var43 /* : Array[Prod] */;
+short int var44 /* : Bool */;
+int cltype45;
+int idtype46;
+val* var47 /* : Array[Prod] */;
+val* var48 /* : nullable Location */;
 val* var_startl /* var startl: nullable Location */;
-val* var44 /* : null */;
-short int var45 /* : Bool */;
-short int var46 /* : Bool */;
-val* var_other /* var other: nullable Object */;
-short int var48 /* : Bool */;
-short int var49 /* : Bool */;
+val* var49 /* : null */;
 short int var50 /* : Bool */;
-val* var51 /* : nullable Location */;
-val* var_endl /* var endl: nullable Location */;
-val* var52 /* : null */;
+short int var51 /* : Bool */;
+val* var_other /* var other: nullable Object */;
 short int var53 /* : Bool */;
 short int var54 /* : Bool */;
-short int var56 /* : Bool */;
-short int var57 /* : Bool */;
+short int var55 /* : Bool */;
+val* var56 /* : nullable Location */;
+val* var_endl /* var endl: nullable Location */;
+val* var57 /* : null */;
 short int var58 /* : Bool */;
-val* var59 /* : Location */;
-val* var60 /* : nullable SourceFile */;
-val* var62 /* : nullable SourceFile */;
-long var63 /* : Int */;
-long var65 /* : Int */;
-long var66 /* : Int */;
+short int var59 /* : Bool */;
+short int var61 /* : Bool */;
+short int var62 /* : Bool */;
+short int var63 /* : Bool */;
+val* var64 /* : Location */;
+val* var65 /* : nullable SourceFile */;
+val* var67 /* : nullable SourceFile */;
 long var68 /* : Int */;
-long var69 /* : Int */;
+long var70 /* : Int */;
 long var71 /* : Int */;
-long var72 /* : Int */;
+long var73 /* : Int */;
 long var74 /* : Int */;
-val* var75 /* : Array[Prod] */;
-short int var76 /* : Bool */;
-short int var77 /* : Bool */;
-val* var78 /* : Location */;
-val* var79 /* : nullable SourceFile */;
-val* var81 /* : nullable SourceFile */;
-long var82 /* : Int */;
-long var84 /* : Int */;
-long var85 /* : Int */;
-long var87 /* : Int */;
+long var76 /* : Int */;
+long var77 /* : Int */;
+long var79 /* : Int */;
+val* var81 /* : Array[Prod] */;
+short int var82 /* : Bool */;
+short int var83 /* : Bool */;
+val* var84 /* : Location */;
+val* var85 /* : nullable SourceFile */;
+val* var87 /* : nullable SourceFile */;
 long var88 /* : Int */;
 long var90 /* : Int */;
 long var91 /* : Int */;
 long var93 /* : Int */;
-val* var_loc94 /* var loc: Location */;
-val* var95 /* : Array[Prod] */;
-val* var96 /* : ArrayIterator[nullable Object] */;
-short int var97 /* : Bool */;
-val* var98 /* : nullable Object */;
-val* var_no99 /* var no: Prod */;
+long var94 /* : Int */;
+long var96 /* : Int */;
+long var97 /* : Int */;
+long var99 /* : Int */;
+val* var_loc100 /* var loc: Location */;
 val* var101 /* : Array[Prod] */;
-val* var102 /* : Array[Prod] */;
+val* var_102 /* var : Array[Prod] */;
+val* var103 /* : ArrayIterator[nullable Object] */;
+val* var_104 /* var : ArrayIterator[Prod] */;
+short int var105 /* : Bool */;
+val* var106 /* : nullable Object */;
+val* var_no107 /* var no: Prod */;
+val* var111 /* : Array[Prod] */;
+val* var112 /* : Array[Prod] */;
 var_n = p0;
 /* <var_n:ANode> isa Token */
 cltype = type_parser_nodes__Token.color;
@@ -1433,375 +1540,408 @@ var = 0;
 var = var_n->type->type_table[cltype] == idtype;
 }
 if (var){
-var1 = var_n->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var_n:ANode(Token)> */
-var_loc = var1;
-var2 = NULL;
-if (var_loc == NULL) {
-var3 = 1; /* is null */
-} else {
-var3 = 0; /* arg is null but recv is not */
-}
-if (0) {
-var4 = location__Location___61d_61d(var_loc, var2);
-var3 = var4;
-}
-if (var3){
+var1 = var_n->attrs[COLOR_parser_nodes__ANode___location].val != NULL; /* _location on <var_n:ANode(Token)> */
+var2 = !var1;
+if (var2){
 goto RET_LABEL;
 } else {
 }
+var3 = var_n->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var_n:ANode(Token)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 202);
+show_backtrace(1);
+}
+var_loc = var3;
 self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___last_location].val = var_loc; /* _last_location on <self:ComputeProdLocationVisitor> */
-var5 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (unlikely(var5 == NULL)) {
+var4 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
+if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_first_prods");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 196);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 206);
 show_backtrace(1);
 }
 {
-var6 = array__AbstractArrayRead__is_empty(var5);
+var5 = array__AbstractArrayRead__is_empty(var4);
 }
-var7 = !var6;
-if (var7){
-var8 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (unlikely(var8 == NULL)) {
+var6 = !var5;
+if (var6){
+var7 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_first_prods");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 197);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 207);
 show_backtrace(1);
 }
+var_ = var7;
 {
-var9 = array__AbstractArrayRead__iterator(var8);
+var8 = array__AbstractArrayRead__iterator(var_);
 }
+var_9 = var8;
 for(;;) {
 {
-var10 = array__ArrayIterator__is_ok(var9);
+var10 = array__ArrayIterator__is_ok(var_9);
 }
-if(!var10) break;
+if (var10){
 {
-var11 = array__ArrayIterator__item(var9);
+var11 = array__ArrayIterator__item(var_9);
 }
 var_no = var11;
 var_no->attrs[COLOR_parser_work__Prod___first_location].val = var_loc; /* _first_location on <var_no:Prod> */
-CONTINUE_label: (void)0;
 {
-array__ArrayIterator__next(var9); /* Direct call array#ArrayIterator#next on <var9:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_9); /* Direct call array#ArrayIterator#next on <var_9:ArrayIterator[Prod]>*/
+}
+} else {
+goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var12 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (unlikely(var12 == NULL)) {
+{
+{ /* Inline abstract_collection#Iterator#finish (var_9) on <var_9:ArrayIterator[Prod]> */
+RET_LABEL12:(void)0;
+}
+}
+var13 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
+if (unlikely(var13 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_first_prods");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 200);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 210);
 show_backtrace(1);
 }
 {
-array__AbstractArray__clear(var12); /* Direct call array#AbstractArray#clear on <var12:Array[Prod]>*/
+array__AbstractArray__clear(var13); /* Direct call array#AbstractArray#clear on <var13:Array[Prod]>*/
 }
 } else {
 }
-var13 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var13 == NULL)) {
+var14 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 204);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 214);
 show_backtrace(1);
 }
 {
-var14 = array__AbstractArrayRead__is_empty(var13);
+var15 = array__AbstractArrayRead__is_empty(var14);
 }
-var15 = !var14;
-if (var15){
-var16 = NEW_location__Location(&type_location__Location);
+var16 = !var15;
+if (var16){
+var17 = NEW_location__Location(&type_location__Location);
 {
-{ /* Inline location#Location#file (var_loc) on <var_loc:nullable Location(Location)> */
-var19 = var_loc->attrs[COLOR_location__Location___file].val; /* _file on <var_loc:nullable Location(Location)> */
-var17 = var19;
-RET_LABEL18:(void)0;
-}
-}
-{
-{ /* Inline location#Location#line_start (var_loc) on <var_loc:nullable Location(Location)> */
-var22 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:nullable Location(Location)> */
-var20 = var22;
-RET_LABEL21:(void)0;
+{ /* Inline location#Location#file (var_loc) on <var_loc:Location> */
+var20 = var_loc->attrs[COLOR_location__Location___file].val; /* _file on <var_loc:Location> */
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-{ /* Inline location#Location#line_start (var_loc) on <var_loc:nullable Location(Location)> */
-var25 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:nullable Location(Location)> */
-var23 = var25;
-RET_LABEL24:(void)0;
+{ /* Inline location#Location#line_start (var_loc) on <var_loc:Location> */
+var23 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:Location> */
+var21 = var23;
+RET_LABEL22:(void)0;
 }
 }
 {
-{ /* Inline location#Location#column_start (var_loc) on <var_loc:nullable Location(Location)> */
-var28 = var_loc->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_loc:nullable Location(Location)> */
-var26 = var28;
-RET_LABEL27:(void)0;
+{ /* Inline location#Location#line_start (var_loc) on <var_loc:Location> */
+var26 = var_loc->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_loc:Location> */
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-{ /* Inline location#Location#column_start (var_loc) on <var_loc:nullable Location(Location)> */
-var31 = var_loc->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_loc:nullable Location(Location)> */
-var29 = var31;
-RET_LABEL30:(void)0;
+{ /* Inline location#Location#column_start (var_loc) on <var_loc:Location> */
+var29 = var_loc->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_loc:Location> */
+var27 = var29;
+RET_LABEL28:(void)0;
 }
 }
 {
-location__Location__init(var16, var17, var20, var23, var26, var29); /* Direct call location#Location#init on <var16:Location>*/
+{ /* Inline location#Location#column_start (var_loc) on <var_loc:Location> */
+var32 = var_loc->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_loc:Location> */
+var30 = var32;
+RET_LABEL31:(void)0;
 }
-var_loco = var16;
-var32 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var32 == NULL)) {
+}
+{
+location__Location__init(var17, var18, var21, var24, var27, var30); /* Direct call location#Location#init on <var17:Location>*/
+}
+var_loco = var17;
+var33 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 206);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 216);
 show_backtrace(1);
 }
+var_34 = var33;
 {
-var33 = array__AbstractArrayRead__iterator(var32);
+var35 = array__AbstractArrayRead__iterator(var_34);
 }
+var_36 = var35;
 for(;;) {
 {
-var34 = array__ArrayIterator__is_ok(var33);
+var37 = array__ArrayIterator__is_ok(var_36);
 }
-if(!var34) break;
+if (var37){
 {
-var35 = array__ArrayIterator__item(var33);
+var38 = array__ArrayIterator__item(var_36);
 }
-var_no36 = var35;
+var_no39 = var38;
 {
-parser_nodes__Prod__location_61d(var_no36, var_loco); /* Direct call parser_nodes#Prod#location= on <var_no36:Prod>*/
+{ /* Inline parser_nodes#ANode#location= (var_no39,var_loco) on <var_no39:Prod> */
+var_no39->attrs[COLOR_parser_nodes__ANode___location].val = var_loco; /* _location on <var_no39:Prod> */
+RET_LABEL40:(void)0;
 }
-CONTINUE_label37: (void)0;
+}
 {
-array__ArrayIterator__next(var33); /* Direct call array#ArrayIterator#next on <var33:ArrayIterator[nullable Object]>*/
+array__ArrayIterator__next(var_36); /* Direct call array#ArrayIterator#next on <var_36:ArrayIterator[Prod]>*/
+}
+} else {
+goto BREAK_label41;
 }
 }
-BREAK_label37: (void)0;
-var38 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var38 == NULL)) {
+BREAK_label41: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_36) on <var_36:ArrayIterator[Prod]> */
+RET_LABEL42:(void)0;
+}
+}
+var43 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var43 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 209);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 219);
 show_backtrace(1);
 }
 {
-array__AbstractArray__clear(var38); /* Direct call array#AbstractArray#clear on <var38:Array[Prod]>*/
+array__AbstractArray__clear(var43); /* Direct call array#AbstractArray#clear on <var43:Array[Prod]>*/
 }
 } else {
 }
 } else {
 /* <var_n:ANode> isa Prod */
-cltype40 = type_parser_nodes__Prod.color;
-idtype41 = type_parser_nodes__Prod.id;
-if(cltype40 >= var_n->type->table_size) {
-var39 = 0;
+cltype45 = type_parser_nodes__Prod.color;
+idtype46 = type_parser_nodes__Prod.id;
+if(cltype45 >= var_n->type->table_size) {
+var44 = 0;
 } else {
-var39 = var_n->type->type_table[cltype40] == idtype41;
+var44 = var_n->type->type_table[cltype45] == idtype46;
 }
-if (unlikely(!var39)) {
+if (unlikely(!var44)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 212);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 222);
 show_backtrace(1);
 }
-var42 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
-if (unlikely(var42 == NULL)) {
+var47 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods].val; /* _need_first_prods on <self:ComputeProdLocationVisitor> */
+if (unlikely(var47 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_first_prods");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 213);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 223);
 show_backtrace(1);
 }
 {
-array__Array__add(var42, var_n); /* Direct call array#Array#add on <var42:Array[Prod]>*/
+array__Array__add(var47, var_n); /* Direct call array#Array#add on <var47:Array[Prod]>*/
 }
 {
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__visit_all]))(var_n, self) /* visit_all on <var_n:ANode(Prod)>*/;
 }
-var43 = var_n->attrs[COLOR_parser_work__Prod___first_location].val; /* _first_location on <var_n:ANode(Prod)> */
-var_startl = var43;
-var44 = NULL;
+var48 = var_n->attrs[COLOR_parser_work__Prod___first_location].val; /* _first_location on <var_n:ANode(Prod)> */
+var_startl = var48;
+var49 = NULL;
 if (var_startl == NULL) {
-var45 = 0; /* is null */
+var50 = 0; /* is null */
 } else {
-var45 = 1; /* arg is null and recv is not */
+var50 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_startl,var44) on <var_startl:nullable Location> */
-var_other = var44;
+{ /* Inline kernel#Object#!= (var_startl,var49) on <var_startl:nullable Location> */
+var_other = var49;
 {
-var49 = ((short int (*)(val*, val*))(var_startl->class->vft[COLOR_kernel__Object___61d_61d]))(var_startl, var_other) /* == on <var_startl:nullable Location(Location)>*/;
-var48 = var49;
-}
-var50 = !var48;
-var46 = var50;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
-}
-var45 = var46;
-}
-if (var45){
-var51 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___last_location].val; /* _last_location on <self:ComputeProdLocationVisitor> */
-var_endl = var51;
-var52 = NULL;
-if (var_endl == NULL) {
-var53 = 0; /* is null */
-} else {
-var53 = 1; /* arg is null and recv is not */
-}
-if (0) {
-{ /* Inline kernel#Object#!= (var_endl,var52) on <var_endl:nullable Location> */
-var_other = var52;
-{
-var57 = ((short int (*)(val*, val*))(var_endl->class->vft[COLOR_kernel__Object___61d_61d]))(var_endl, var_other) /* == on <var_endl:nullable Location(Location)>*/;
-var56 = var57;
-}
-var58 = !var56;
-var54 = var58;
-goto RET_LABEL55;
-RET_LABEL55:(void)0;
-}
+var54 = ((short int (*)(val*, val*))(var_startl->class->vft[COLOR_kernel__Object___61d_61d]))(var_startl, var_other) /* == on <var_startl:nullable Location(Location)>*/;
 var53 = var54;
 }
-if (unlikely(!var53)) {
+var55 = !var53;
+var51 = var55;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
+}
+var50 = var51;
+}
+if (var50){
+var56 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___last_location].val; /* _last_location on <self:ComputeProdLocationVisitor> */
+var_endl = var56;
+var57 = NULL;
+if (var_endl == NULL) {
+var58 = 0; /* is null */
+} else {
+var58 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_endl,var57) on <var_endl:nullable Location> */
+var_other = var57;
+{
+var62 = ((short int (*)(val*, val*))(var_endl->class->vft[COLOR_kernel__Object___61d_61d]))(var_endl, var_other) /* == on <var_endl:nullable Location(Location)>*/;
+var61 = var62;
+}
+var63 = !var61;
+var59 = var63;
+goto RET_LABEL60;
+RET_LABEL60:(void)0;
+}
+var58 = var59;
+}
+if (unlikely(!var58)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 221);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 231);
 show_backtrace(1);
 }
-var59 = NEW_location__Location(&type_location__Location);
+var64 = NEW_location__Location(&type_location__Location);
 {
 { /* Inline location#Location#file (var_startl) on <var_startl:nullable Location(Location)> */
-var62 = var_startl->attrs[COLOR_location__Location___file].val; /* _file on <var_startl:nullable Location(Location)> */
-var60 = var62;
-RET_LABEL61:(void)0;
+var67 = var_startl->attrs[COLOR_location__Location___file].val; /* _file on <var_startl:nullable Location(Location)> */
+var65 = var67;
+RET_LABEL66:(void)0;
 }
 }
 {
 { /* Inline location#Location#line_start (var_startl) on <var_startl:nullable Location(Location)> */
-var65 = var_startl->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_startl:nullable Location(Location)> */
-var63 = var65;
-RET_LABEL64:(void)0;
+var70 = var_startl->attrs[COLOR_location__Location___line_start].l; /* _line_start on <var_startl:nullable Location(Location)> */
+var68 = var70;
+RET_LABEL69:(void)0;
 }
 }
 {
 { /* Inline location#Location#line_end (var_endl) on <var_endl:nullable Location(Location)> */
-var68 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
-var66 = var68;
-RET_LABEL67:(void)0;
+var73 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
+var71 = var73;
+RET_LABEL72:(void)0;
 }
 }
 {
 { /* Inline location#Location#column_start (var_startl) on <var_startl:nullable Location(Location)> */
-var71 = var_startl->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_startl:nullable Location(Location)> */
-var69 = var71;
-RET_LABEL70:(void)0;
+var76 = var_startl->attrs[COLOR_location__Location___column_start].l; /* _column_start on <var_startl:nullable Location(Location)> */
+var74 = var76;
+RET_LABEL75:(void)0;
 }
 }
 {
 { /* Inline location#Location#column_end (var_endl) on <var_endl:nullable Location(Location)> */
-var74 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
-var72 = var74;
-RET_LABEL73:(void)0;
+var79 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
+var77 = var79;
+RET_LABEL78:(void)0;
 }
 }
 {
-location__Location__init(var59, var60, var63, var66, var69, var72); /* Direct call location#Location#init on <var59:Location>*/
+location__Location__init(var64, var65, var68, var71, var74, var77); /* Direct call location#Location#init on <var64:Location>*/
 }
 {
-parser_nodes__Prod__location_61d(var_n, var59); /* Direct call parser_nodes#Prod#location= on <var_n:ANode(Prod)>*/
-}
-var75 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var75 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 225);
-show_backtrace(1);
-}
-{
-var76 = array__AbstractArrayRead__is_empty(var75);
-}
-var77 = !var76;
-if (var77){
-var78 = NEW_location__Location(&type_location__Location);
-{
-{ /* Inline location#Location#file (var_endl) on <var_endl:nullable Location(Location)> */
-var81 = var_endl->attrs[COLOR_location__Location___file].val; /* _file on <var_endl:nullable Location(Location)> */
-var79 = var81;
+{ /* Inline parser_nodes#ANode#location= (var_n,var64) on <var_n:ANode(Prod)> */
+var_n->attrs[COLOR_parser_nodes__ANode___location].val = var64; /* _location on <var_n:ANode(Prod)> */
 RET_LABEL80:(void)0;
 }
 }
-{
-{ /* Inline location#Location#line_end (var_endl) on <var_endl:nullable Location(Location)> */
-var84 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
-var82 = var84;
-RET_LABEL83:(void)0;
+var81 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var81 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 235);
+show_backtrace(1);
 }
-}
 {
-{ /* Inline location#Location#line_end (var_endl) on <var_endl:nullable Location(Location)> */
-var87 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
+var82 = array__AbstractArrayRead__is_empty(var81);
+}
+var83 = !var82;
+if (var83){
+var84 = NEW_location__Location(&type_location__Location);
+{
+{ /* Inline location#Location#file (var_endl) on <var_endl:nullable Location(Location)> */
+var87 = var_endl->attrs[COLOR_location__Location___file].val; /* _file on <var_endl:nullable Location(Location)> */
 var85 = var87;
 RET_LABEL86:(void)0;
 }
 }
 {
-{ /* Inline location#Location#column_end (var_endl) on <var_endl:nullable Location(Location)> */
-var90 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
+{ /* Inline location#Location#line_end (var_endl) on <var_endl:nullable Location(Location)> */
+var90 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
 var88 = var90;
 RET_LABEL89:(void)0;
 }
 }
 {
-{ /* Inline location#Location#column_end (var_endl) on <var_endl:nullable Location(Location)> */
-var93 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
+{ /* Inline location#Location#line_end (var_endl) on <var_endl:nullable Location(Location)> */
+var93 = var_endl->attrs[COLOR_location__Location___line_end].l; /* _line_end on <var_endl:nullable Location(Location)> */
 var91 = var93;
 RET_LABEL92:(void)0;
 }
 }
 {
-location__Location__init(var78, var79, var82, var85, var88, var91); /* Direct call location#Location#init on <var78:Location>*/
+{ /* Inline location#Location#column_end (var_endl) on <var_endl:nullable Location(Location)> */
+var96 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
+var94 = var96;
+RET_LABEL95:(void)0;
 }
-var_loc94 = var78;
-var95 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var95 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 227);
-show_backtrace(1);
 }
 {
-var96 = array__AbstractArrayRead__iterator(var95);
+{ /* Inline location#Location#column_end (var_endl) on <var_endl:nullable Location(Location)> */
+var99 = var_endl->attrs[COLOR_location__Location___column_end].l; /* _column_end on <var_endl:nullable Location(Location)> */
+var97 = var99;
+RET_LABEL98:(void)0;
 }
-for(;;) {
+}
 {
-var97 = array__ArrayIterator__is_ok(var96);
+location__Location__init(var84, var85, var88, var91, var94, var97); /* Direct call location#Location#init on <var84:Location>*/
 }
-if(!var97) break;
-{
-var98 = array__ArrayIterator__item(var96);
-}
-var_no99 = var98;
-{
-parser_nodes__Prod__location_61d(var_no99, var_loc94); /* Direct call parser_nodes#Prod#location= on <var_no99:Prod>*/
-}
-CONTINUE_label100: (void)0;
-{
-array__ArrayIterator__next(var96); /* Direct call array#ArrayIterator#next on <var96:ArrayIterator[nullable Object]>*/
-}
-}
-BREAK_label100: (void)0;
+var_loc100 = var84;
 var101 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
 if (unlikely(var101 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 231);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 237);
 show_backtrace(1);
 }
+var_102 = var101;
 {
-array__AbstractArray__clear(var101); /* Direct call array#AbstractArray#clear on <var101:Array[Prod]>*/
+var103 = array__AbstractArrayRead__iterator(var_102);
+}
+var_104 = var103;
+for(;;) {
+{
+var105 = array__ArrayIterator__is_ok(var_104);
+}
+if (var105){
+{
+var106 = array__ArrayIterator__item(var_104);
+}
+var_no107 = var106;
+{
+{ /* Inline parser_nodes#ANode#location= (var_no107,var_loc100) on <var_no107:Prod> */
+var_no107->attrs[COLOR_parser_nodes__ANode___location].val = var_loc100; /* _location on <var_no107:Prod> */
+RET_LABEL108:(void)0;
+}
+}
+{
+array__ArrayIterator__next(var_104); /* Direct call array#ArrayIterator#next on <var_104:ArrayIterator[Prod]>*/
 }
 } else {
+goto BREAK_label109;
 }
-} else {
-var102 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
-if (unlikely(var102 == NULL)) {
+}
+BREAK_label109: (void)0;
+{
+{ /* Inline abstract_collection#Iterator#finish (var_104) on <var_104:ArrayIterator[Prod]> */
+RET_LABEL110:(void)0;
+}
+}
+var111 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var111 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser_work.nit", 235);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 241);
 show_backtrace(1);
 }
 {
-array__Array__add(var102, var_n); /* Direct call array#Array#add on <var102:Array[Prod]>*/
+array__AbstractArray__clear(var111); /* Direct call array#AbstractArray#clear on <var111:Array[Prod]>*/
+}
+} else {
+}
+} else {
+var112 = self->attrs[COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons].val; /* _need_after_epsilons on <self:ComputeProdLocationVisitor> */
+if (unlikely(var112 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _need_after_epsilons");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 245);
+show_backtrace(1);
+}
+{
+array__Array__add(var112, var_n); /* Direct call array#Array#add on <var112:Array[Prod]>*/
 }
 }
 }
@@ -1812,18 +1952,108 @@ void VIRTUAL_parser_work__ComputeProdLocationVisitor__visit(val* self, val* p0) 
 parser_work__ComputeProdLocationVisitor__visit(self, p0); /* Direct call parser_work#ComputeProdLocationVisitor#visit on <self:Object(ComputeProdLocationVisitor)>*/
 RET_LABEL:;
 }
-/* method parser_work#ComputeProdLocationVisitor#init for (self: ComputeProdLocationVisitor) */
-void parser_work__ComputeProdLocationVisitor__init(val* self) {
-{
-{ /* Inline parser_nodes#Visitor#init (self) on <self:ComputeProdLocationVisitor> */
-RET_LABEL1:(void)0;
+/* method parser_work#TextCollectorVisitor#text for (self: TextCollectorVisitor): String */
+val* parser_work__TextCollectorVisitor__text(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = self->attrs[COLOR_parser_work__TextCollectorVisitor___text].val; /* _text on <self:TextCollectorVisitor> */
+if (unlikely(var1 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _text");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 253);
+show_backtrace(1);
 }
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_work#TextCollectorVisitor#text for (self: Object): String */
+val* VIRTUAL_parser_work__TextCollectorVisitor__text(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+val* var3 /* : String */;
+{ /* Inline parser_work#TextCollectorVisitor#text (self) on <self:Object(TextCollectorVisitor)> */
+var3 = self->attrs[COLOR_parser_work__TextCollectorVisitor___text].val; /* _text on <self:Object(TextCollectorVisitor)> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _text");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 253);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_work#TextCollectorVisitor#text= for (self: TextCollectorVisitor, String) */
+void parser_work__TextCollectorVisitor__text_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_work__TextCollectorVisitor___text].val = p0; /* _text on <self:TextCollectorVisitor> */
+RET_LABEL:;
+}
+/* method parser_work#TextCollectorVisitor#text= for (self: Object, String) */
+void VIRTUAL_parser_work__TextCollectorVisitor__text_61d(val* self, val* p0) {
+{ /* Inline parser_work#TextCollectorVisitor#text= (self,p0) on <self:Object(TextCollectorVisitor)> */
+self->attrs[COLOR_parser_work__TextCollectorVisitor___text].val = p0; /* _text on <self:Object(TextCollectorVisitor)> */
+RET_LABEL1:(void)0;
 }
 RET_LABEL:;
 }
-/* method parser_work#ComputeProdLocationVisitor#init for (self: Object) */
-void VIRTUAL_parser_work__ComputeProdLocationVisitor__init(val* self) {
-parser_work__ComputeProdLocationVisitor__init(self); /* Direct call parser_work#ComputeProdLocationVisitor#init on <self:Object(ComputeProdLocationVisitor)>*/
+/* method parser_work#TextCollectorVisitor#visit for (self: TextCollectorVisitor, ANode) */
+void parser_work__TextCollectorVisitor__visit(val* self, val* p0) {
+val* var_n /* var n: ANode */;
+short int var /* : Bool */;
+int cltype;
+int idtype;
+val* var_ /* var : TextCollectorVisitor */;
+val* var1 /* : String */;
+val* var3 /* : String */;
+val* var4 /* : String */;
+val* var5 /* : String */;
+var_n = p0;
+/* <var_n:ANode> isa Token */
+cltype = type_parser_nodes__Token.color;
+idtype = type_parser_nodes__Token.id;
+if(cltype >= var_n->type->table_size) {
+var = 0;
+} else {
+var = var_n->type->type_table[cltype] == idtype;
+}
+if (var){
+var_ = self;
+{
+{ /* Inline parser_work#TextCollectorVisitor#text (var_) on <var_:TextCollectorVisitor> */
+var3 = var_->attrs[COLOR_parser_work__TextCollectorVisitor___text].val; /* _text on <var_:TextCollectorVisitor> */
+if (unlikely(var3 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _text");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser_work.nit", 253);
+show_backtrace(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+{
+var4 = lexer_work__Token__text(var_n);
+}
+{
+var5 = string__FlatString___43d(var1, var4);
+}
+{
+{ /* Inline parser_work#TextCollectorVisitor#text= (var_,var5) on <var_:TextCollectorVisitor> */
+var_->attrs[COLOR_parser_work__TextCollectorVisitor___text].val = var5; /* _text on <var_:TextCollectorVisitor> */
+RET_LABEL6:(void)0;
+}
+}
+} else {
+}
+{
+((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__visit_all]))(var_n, self) /* visit_all on <var_n:ANode>*/;
+}
+RET_LABEL:;
+}
+/* method parser_work#TextCollectorVisitor#visit for (self: Object, ANode) */
+void VIRTUAL_parser_work__TextCollectorVisitor__visit(val* self, val* p0) {
+parser_work__TextCollectorVisitor__visit(self, p0); /* Direct call parser_work#TextCollectorVisitor#visit on <self:Object(TextCollectorVisitor)>*/
 RET_LABEL:;
 }
 /* method parser_work#ReduceAction#concat for (self: ReduceAction, Array[Object], Array[Object]): Array[Object] */

@@ -3,10 +3,12 @@ long VIRTUAL_kernel__Object__object_id(val* self);
 short int VIRTUAL_kernel__Object__is_same_instance(val* self, val* p0);
 short int VIRTUAL_kernel__Object___61d_61d(val* self, val* p0);
 short int VIRTUAL_kernel__Object___33d_61d(val* self, val* p0);
+long VIRTUAL_kernel__Object__hash(val* self);
 void VIRTUAL_kernel__Object__exit(val* self, long p0);
 val* VIRTUAL_kernel__Object__sys(val* self);
-long VIRTUAL_kernel__Object__hash(val* self);
-val* VIRTUAL_string__Object__to_s(val* self);
+void VIRTUAL_kernel__Object__init(val* self);
+val* VIRTUAL_sorter__Object__default_comparator(val* self);
+val* VIRTUAL_phase__Phase__to_s(val* self);
 char* VIRTUAL_string__Object__native_class_name(val* self);
 val* VIRTUAL_string__Object__class_name(val* self);
 val* VIRTUAL_string__Object__inspect(val* self);
@@ -17,37 +19,1396 @@ void VIRTUAL_file__Object__printn(val* self, val* p0);
 void VIRTUAL_file__Object__print(val* self, val* p0);
 val* VIRTUAL_file__Object__getcwd(val* self);
 char* VIRTUAL_file__Object__file_getcwd(val* self);
-val* VIRTUAL_version__Object__nit_version(val* self);
 val* VIRTUAL_model_base__Object__intrude_visibility(val* self);
 val* VIRTUAL_model_base__Object__public_visibility(val* self);
 val* VIRTUAL_model_base__Object__protected_visibility(val* self);
 val* VIRTUAL_model_base__Object__private_visibility(val* self);
 val* VIRTUAL_model_base__Object__none_visibility(val* self);
+val* VIRTUAL_version__Object__nit_version(val* self);
 val* VIRTUAL_model__Object__abstract_kind(val* self);
 val* VIRTUAL_model__Object__concrete_kind(val* self);
 val* VIRTUAL_model__Object__interface_kind(val* self);
 val* VIRTUAL_model__Object__enum_kind(val* self);
 val* VIRTUAL_model__Object__extern_kind(val* self);
-void VIRTUAL_phase__AnnotationPhaseVisitor__visit(val* self, val* p0);
-void VIRTUAL_parser_nodes__Visitor__enter_visit(val* self, val* p0);
-val* VIRTUAL_parser_nodes__Visitor__current_node(val* self);
-void VIRTUAL_parser_nodes__Visitor__init(val* self);
-val* VIRTUAL_phase__AnnotationPhaseVisitor__phase(val* self);
-void VIRTUAL_phase__AnnotationPhaseVisitor__phase_61d(val* self, val* p0);
-void VIRTUAL_phase__AnnotationPhaseVisitor__init(val* self, val* p0);
-extern const struct class class_phase__AnnotationPhaseVisitor;
-#define COLOR_parser_nodes__Visitor___current_node 0
-val* VIRTUAL_toolcontext__Message__to_s(val* self);
-short int VIRTUAL_toolcontext__Message___60d(val* self, val* p0);
+val* VIRTUAL_phase__Phase__toolcontext(val* self);
+void VIRTUAL_phase__Phase__toolcontext_61d(val* self, val* p0);
+val* VIRTUAL_phase__Phase__in_hierarchy(val* self);
+void VIRTUAL_phase__Phase__in_hierarchy_61d(val* self, val* p0);
+void VIRTUAL_phase__Phase__init(val* self, val* p0, val* p1);
+short int VIRTUAL_phase__Phase__disabled(val* self);
+void VIRTUAL_phase__Phase__disabled_61d(val* self, short int p0);
+void VIRTUAL_modelize_property__ModelizePropertyPhase__process_nmodule(val* self, val* p0);
+void VIRTUAL_phase__Phase__process_nclassdef(val* self, val* p0);
+void VIRTUAL_phase__Phase__process_npropdef(val* self, val* p0);
+void VIRTUAL_phase__Phase__process_annotated_node(val* self, val* p0, val* p1);
+void VIRTUAL_modelbuilder__Phase__process_mainmodule(val* self, val* p0, val* p1);
+extern const struct class class_modelize_property__ModelizePropertyPhase;
+#define COLOR_phase__Phase___disabled 2
+void VIRTUAL_modelize_class__ModelizeClassPhase__process_nmodule(val* self, val* p0);
+extern const struct class class_modelize_class__ModelizeClassPhase;
+val* VIRTUAL_string__Object__to_s(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__model(val* self);
+void VIRTUAL_modelbuilder__ModelBuilder__model_61d(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__toolcontext(val* self);
+void VIRTUAL_modelbuilder__ModelBuilder__toolcontext_61d(val* self, val* p0);
+void VIRTUAL_modelbuilder__ModelBuilder__run_phases(val* self);
+void VIRTUAL_modelbuilder__ModelBuilder__init(val* self, val* p0, val* p1);
+val* VIRTUAL_modelbuilder__ModelBuilder__parse(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mclass_by_name(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name2(val* self, val* p0, val* p1, val* p2, val* p3);
+val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name2_cache(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__paths(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__search_mmodule_by_name(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__get_mmodule_by_name(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__search_module_in_paths(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__identified_files(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__identify_file(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__mgroups(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__get_mgroup(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__module_absolute_path(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__load_module_ast(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__load_module(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__build_a_mmodule(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_modelbuilder__ModelBuilder__build_module_importation(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModelBuilder__nmodules(val* self);
+val* VIRTUAL_modelbuilder__ModelBuilder__mmodule2nmodule(val* self);
+void VIRTUAL_modelbuilder__ModelBuilder__error(val* self, val* p0, val* p1);
+void VIRTUAL_modelbuilder__ModelBuilder__warning(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_modelbuilder__ModelBuilder__advice(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelbuilder__ModelBuilder__force_get_primitive_method(val* self, val* p0, val* p1, val* p2, val* p3);
+void VIRTUAL_modelize_class__ModelBuilder__build_a_mclass(val* self, val* p0, val* p1);
+void VIRTUAL_modelize_class__ModelBuilder__build_a_mclassdef(val* self, val* p0, val* p1);
+void VIRTUAL_modelize_class__ModelBuilder__collect_a_mclassdef_inheritance(val* self, val* p0, val* p1);
+void VIRTUAL_modelize_class__ModelBuilder__check_supertypes(val* self, val* p0, val* p1);
+void VIRTUAL_modelize_class__ModelBuilder__build_classes(val* self, val* p0);
+val* VIRTUAL_modelize_class__ModelBuilder__mclassdef2nclassdef(val* self);
+val* VIRTUAL_modelize_class__ModelBuilder__resolve_mtype_unchecked(val* self, val* p0, val* p1, val* p2, short int p3);
+val* VIRTUAL_modelize_class__ModelBuilder__resolve_mtype(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_modelize_property__ModelBuilder__mpropdef2npropdef(val* self);
+void VIRTUAL_modelize_property__ModelBuilder__build_properties(val* self, val* p0);
+val* VIRTUAL_modelize_property__ModelBuilder__the_root_init_mmethod(val* self);
+void VIRTUAL_modelize_property__ModelBuilder__the_root_init_mmethod_61d(val* self, val* p0);
+void VIRTUAL_modelize_property__ModelBuilder__process_default_constructors(val* self, val* p0);
+void VIRTUAL_modelize_property__ModelBuilder__check_visibility(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__ModelBuilder__compile_dir(val* self);
+void VIRTUAL_abstract_compiler__ModelBuilder__compile_dir_61d(val* self, val* p0);
+void VIRTUAL_abstract_compiler__ModelBuilder__write_and_make(val* self, val* p0);
+void VIRTUAL_separate_compiler__ModelBuilder__run_separate_compiler(val* self, val* p0, val* p1);
+long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_tables(val* self);
+void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_tables_61d(val* self, long p0);
+long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_direct(val* self);
+void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_direct_61d(val* self, long p0);
+long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_inline(val* self);
+void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_inline_61d(val* self, long p0);
+void VIRTUAL_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler(val* self, val* p0, val* p1);
+extern const struct class class_modelbuilder__ModelBuilder;
+val* NEW_more_collections__HashMap3(const struct type* type);
+extern const struct type type_more_collections__HashMap3mmodule__MModulemodel__MTypestring__Stringnullable_model__MProperty;
+#define COLOR_kernel__Object__init 7
+#define COLOR_modelbuilder__ModelBuilder___try_get_mproperty_by_name2_cache 2
+val* NEW_array__Array(const struct type* type);
+extern const struct type type_array__Arraystring__String;
+#define COLOR_modelbuilder__ModelBuilder___paths 3
+val* NEW_hash_collection__HashMap(const struct type* type);
+extern const struct type type_hash_collection__HashMapstring__Stringnullable_modelbuilder__ModulePath;
+#define COLOR_modelbuilder__ModelBuilder___identified_files 4
+extern const struct type type_hash_collection__HashMapstring__Stringnullable_mproject__MGroup;
+#define COLOR_modelbuilder__ModelBuilder___mgroups 5
+extern const struct type type_array__Arrayparser_nodes__AModule;
+#define COLOR_modelbuilder__ModelBuilder___nmodules 6
+extern const struct type type_hash_collection__HashMapmmodule__MModuleparser_nodes__AModule;
+#define COLOR_modelbuilder__ModelBuilder___mmodule2nmodule 7
+extern const struct type type_hash_collection__HashMapmodel__MClassDefparser_nodes__AClassdef;
+#define COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef 8
+extern const struct type type_hash_collection__HashMapstring__Stringmmodule_data__MModuleDataparser_nodes__AAnnotation;
+#define COLOR_annotation__ModelBuilder___collect_annotations_data_cache 9
+extern const struct type type_hash_collection__HashMapmodel__MPropDefparser_nodes__APropdef;
+#define COLOR_modelize_property__ModelBuilder___mpropdef2npropdef 10
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_tables 13
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_direct 14
+#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_inline 15
+void VIRTUAL_modelbuilder__ModulePath__init(val* self);
+val* VIRTUAL_modelbuilder__ModulePath__to_s(val* self);
+val* VIRTUAL_modelbuilder__ModulePath__name(val* self);
+void VIRTUAL_modelbuilder__ModulePath__name_61d(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModulePath__filepath(val* self);
+void VIRTUAL_modelbuilder__ModulePath__filepath_61d(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModulePath__mgroup(val* self);
+void VIRTUAL_modelbuilder__ModulePath__mgroup_61d(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ModulePath__mmodule(val* self);
+void VIRTUAL_modelbuilder__ModulePath__mmodule_61d(val* self, val* p0);
+extern const struct class class_modelbuilder__ModulePath;
+#define COLOR_modelbuilder__ModulePath___mmodule 3
+void VIRTUAL_model__MClassDefSorter__init(val* self);
+long VIRTUAL_model__MClassDefSorter__compare(val* self, val* p0, val* p1);
+void VIRTUAL_sorter__Comparator__sort(val* self, val* p0);
+void VIRTUAL_sorter__Comparator__sub_sort(val* self, val* p0, long p1, long p2);
+void VIRTUAL_sorter__Comparator__quick_sort(val* self, val* p0, long p1, long p2);
+void VIRTUAL_sorter__Comparator__bubble_sort(val* self, val* p0, long p1, long p2);
+val* VIRTUAL_model__MClassDefSorter__mmodule(val* self);
+void VIRTUAL_model__MClassDefSorter__mmodule_61d(val* self, val* p0);
+extern const struct class class_model__MClassDefSorter;
+void VIRTUAL_model__MPropDefSorter__init(val* self);
+long VIRTUAL_model__MPropDefSorter__compare(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MPropDefSorter__mmodule(val* self);
+void VIRTUAL_model__MPropDefSorter__mmodule_61d(val* self, val* p0);
+extern const struct class class_model__MPropDefSorter;
+val* VIRTUAL_model__MClass__to_s(val* self);
+val* VIRTUAL_model__MClass__name(val* self);
+val* VIRTUAL_model__MClass__model(val* self);
+val* VIRTUAL_mdoc__MEntity__mdoc(val* self);
+void VIRTUAL_mdoc__MEntity__mdoc_61d(val* self, val* p0);
+val* VIRTUAL_mdoc__MEntity__deprecation(val* self);
+void VIRTUAL_mdoc__MEntity__deprecation_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__intro_mmodule(val* self);
+void VIRTUAL_model__MClass__intro_mmodule_61d(val* self, val* p0);
+void VIRTUAL_model__MClass__name_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__full_name(val* self);
+long VIRTUAL_model__MClass__arity(val* self);
+void VIRTUAL_model__MClass__arity_61d(val* self, long p0);
+val* VIRTUAL_model__MClass__mparameters(val* self);
+void VIRTUAL_model__MClass__mparameters_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__kind(val* self);
+void VIRTUAL_model__MClass__kind_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__visibility(val* self);
+void VIRTUAL_model__MClass__visibility_61d(val* self, val* p0);
+void VIRTUAL_model__MClass__init(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
+val* VIRTUAL_model__MClass__mclassdefs(val* self);
+val* VIRTUAL_model__MClass__intro(val* self);
+void VIRTUAL_model__MClass__intro_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__in_hierarchy(val* self, val* p0);
+val* VIRTUAL_model__MClass__mclass_type(val* self);
+void VIRTUAL_model__MClass__mclass_type_61d(val* self, val* p0);
+val* VIRTUAL_model__MClass__get_mtype(val* self, val* p0);
+val* VIRTUAL_model__MClass__get_mtype_cache(val* self);
+val* VIRTUAL_modelize_property__MClass__root_init(val* self);
+void VIRTUAL_modelize_property__MClass__root_init_61d(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MClass__c_name(val* self);
+val* VIRTUAL_abstract_compiler__MClass__c_name_cache(val* self);
+void VIRTUAL_abstract_compiler__MClass__c_name_cache_61d(val* self, val* p0);
+extern const struct class class_model__MClass;
+#define COLOR_mdoc__MEntity___deprecation 1
+extern const struct type type_array__Arraymodel__MParameterType;
+#define COLOR_model__MClass___mparameters 5
+extern const struct type type_array__Arraymodel__MClassDef;
+#define COLOR_model__MClass___mclassdefs 8
+extern const struct type type_array__Arraymodel__MGenericType;
+#define COLOR_model__MClass___get_mtype_cache 11
+#define COLOR_modelize_property__MClass___root_init 12
+val* VIRTUAL_model__MClassDef__to_s(val* self);
+val* VIRTUAL_model__MClassDef__name(val* self);
+val* VIRTUAL_model__MClassDef__model(val* self);
+val* VIRTUAL_model__MClassDef__mmodule(val* self);
+void VIRTUAL_model__MClassDef__mmodule_61d(val* self, val* p0);
+val* VIRTUAL_model__MClassDef__mclass(val* self);
+void VIRTUAL_model__MClassDef__mclass_61d(val* self, val* p0);
+val* VIRTUAL_model__MClassDef__bound_mtype(val* self);
+void VIRTUAL_model__MClassDef__bound_mtype_61d(val* self, val* p0);
+void VIRTUAL_model__MClassDef__location_61d(val* self, val* p0);
+void VIRTUAL_model__MClassDef__to_s_61d(val* self, val* p0);
+void VIRTUAL_model__MClassDef__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MClassDef__supertypes(val* self);
+void VIRTUAL_model__MClassDef__set_supertypes(val* self, val* p0);
+void VIRTUAL_model__MClassDef__add_in_hierarchy(val* self);
+val* VIRTUAL_model__MClassDef__in_hierarchy(val* self);
+void VIRTUAL_model__MClassDef__in_hierarchy_61d(val* self, val* p0);
+short int VIRTUAL_model__MClassDef__is_intro(val* self);
+val* VIRTUAL_model__MClassDef__intro_mproperties(val* self);
+val* VIRTUAL_model__MClassDef__mpropdefs(val* self);
+val* VIRTUAL_modelize_property__MClassDef__mprop2npropdef(val* self);
+extern const struct class class_model__MClassDef;
+extern const struct type type_array__Arraymodel__MClassType;
+#define COLOR_model__MClassDef___supertypes 7
+#define COLOR_model__MClassDef___in_hierarchy 8
+extern const struct type type_array__Arraymodel__MProperty;
+#define COLOR_model__MClassDef___intro_mproperties 9
+extern const struct type type_array__Arraymodel__MPropDef;
+#define COLOR_model__MClassDef___mpropdefs 10
+extern const struct type type_hash_collection__HashMapmodel__MPropertyparser_nodes__APropdef;
+#define COLOR_modelize_property__MClassDef___mprop2npropdef 11
+val* VIRTUAL_model__MClassType__to_s(val* self);
+val* VIRTUAL_model__MType__name(val* self);
+val* VIRTUAL_model__MClassType__model(val* self);
+short int VIRTUAL_model__MType__is_subtype(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MClassType__anchor_to(val* self, val* p0, val* p1);
+short int VIRTUAL_model__MClassType__need_anchor(val* self);
+val* VIRTUAL_model__MType__supertype_to(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MClassType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MClassType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MType__as_nullable(val* self);
+val* VIRTUAL_model__MType__as_notnullable(val* self);
+val* VIRTUAL_model__MType__as_nullable_cache(val* self);
+void VIRTUAL_model__MType__as_nullable_cache_61d(val* self, val* p0);
+long VIRTUAL_model__MType__length(val* self);
+val* VIRTUAL_model__MClassType__collect_mclassdefs(val* self, val* p0);
+val* VIRTUAL_model__MClassType__collect_mclasses(val* self, val* p0);
+val* VIRTUAL_model__MClassType__collect_mtypes(val* self, val* p0);
+short int VIRTUAL_model__MType__has_mproperty(val* self, val* p0, val* p1);
+val* VIRTUAL_abstract_compiler__MClassType__ctype(val* self);
+val* VIRTUAL_abstract_compiler__MClassType__ctype_extern(val* self);
+val* VIRTUAL_abstract_compiler__MClassType__ctypename(val* self);
+val* VIRTUAL_abstract_compiler__MClassType__c_name(val* self);
+val* VIRTUAL_abstract_compiler__MType__c_name_cache(val* self);
+void VIRTUAL_abstract_compiler__MType__c_name_cache_61d(val* self, val* p0);
+val* VIRTUAL_separate_compiler__MType__const_color(val* self);
+val* VIRTUAL_model__MClassType__mclass(val* self);
+void VIRTUAL_model__MClassType__mclass_61d(val* self, val* p0);
+void VIRTUAL_model__MClassType__init(val* self, val* p0);
+val* VIRTUAL_model__MClassType__arguments(val* self);
+void VIRTUAL_model__MClassType__arguments_61d(val* self, val* p0);
+void VIRTUAL_model__MClassType__collect_things(val* self, val* p0);
+val* VIRTUAL_model__MClassType__collect_mclassdefs_cache(val* self);
+val* VIRTUAL_model__MClassType__collect_mclasses_cache(val* self);
+val* VIRTUAL_model__MClassType__collect_mtypes_cache(val* self);
+val* VIRTUAL_model__MType__anchor_to(val* self, val* p0, val* p1);
+extern const struct class class_model__MClassType;
+#define COLOR_model__MType___as_nullable_cache 2
+extern const struct type type_array__Arraymodel__MType;
+#define COLOR_model__MClassType___arguments 5
+extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClassDef;
+#define COLOR_model__MClassType___collect_mclassdefs_cache 6
+extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClass;
+#define COLOR_model__MClassType___collect_mclasses_cache 7
+extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClassType;
+#define COLOR_model__MClassType___collect_mtypes_cache 8
+val* VIRTUAL_model__MGenericType__to_s(val* self);
+short int VIRTUAL_model__MGenericType__need_anchor(val* self);
+val* VIRTUAL_model__MGenericType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MGenericType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+long VIRTUAL_model__MGenericType__length(val* self);
+val* VIRTUAL_abstract_compiler__MGenericType__c_name(val* self);
+void VIRTUAL_model__MGenericType__init(val* self, val* p0, val* p1);
+void VIRTUAL_model__MGenericType__to_s_61d(val* self, val* p0);
+void VIRTUAL_model__MGenericType__need_anchor_61d(val* self, short int p0);
+extern const struct class class_model__MGenericType;
+val* VIRTUAL_model__MVirtualType__to_s(val* self);
+val* VIRTUAL_model__MVirtualType__model(val* self);
+short int VIRTUAL_model__MType__need_anchor(val* self);
+val* VIRTUAL_model__MVirtualType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MVirtualType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MType__collect_mclassdefs(val* self, val* p0);
+val* VIRTUAL_model__MType__collect_mclasses(val* self, val* p0);
+val* VIRTUAL_model__MType__collect_mtypes(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MType__ctype(val* self);
+val* VIRTUAL_abstract_compiler__MType__ctype_extern(val* self);
+val* VIRTUAL_abstract_compiler__MType__ctypename(val* self);
+val* VIRTUAL_abstract_compiler__MVirtualType__c_name(val* self);
+val* VIRTUAL_model__MVirtualType__mproperty(val* self);
+void VIRTUAL_model__MVirtualType__mproperty_61d(val* self, val* p0);
+val* VIRTUAL_model__MVirtualType__lookup_bound(val* self, val* p0, val* p1);
+short int VIRTUAL_model__MVirtualType__is_fixed(val* self, val* p0, val* p1);
+void VIRTUAL_model__MVirtualType__init(val* self, val* p0);
+extern const struct class class_model__MVirtualType;
+val* VIRTUAL_model__MParameterType__to_s(val* self);
+val* VIRTUAL_model__MParameterType__name(val* self);
+val* VIRTUAL_model__MParameterType__model(val* self);
+val* VIRTUAL_model__MParameterType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MParameterType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_abstract_compiler__MParameterType__c_name(val* self);
+val* VIRTUAL_model__MParameterType__mclass(val* self);
+void VIRTUAL_model__MParameterType__mclass_61d(val* self, val* p0);
+long VIRTUAL_model__MParameterType__rank(val* self);
+void VIRTUAL_model__MParameterType__rank_61d(val* self, long p0);
+void VIRTUAL_model__MParameterType__name_61d(val* self, val* p0);
+val* VIRTUAL_model__MParameterType__lookup_bound(val* self, val* p0, val* p1);
+void VIRTUAL_model__MParameterType__init(val* self, val* p0, long p1, val* p2);
+extern const struct class class_model__MParameterType;
+val* VIRTUAL_model__MNullableType__to_s(val* self);
+val* VIRTUAL_model__MNullableType__model(val* self);
+short int VIRTUAL_model__MNullableType__need_anchor(val* self);
+val* VIRTUAL_model__MNullableType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MNullableType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MNullableType__as_nullable(val* self);
+val* VIRTUAL_model__MNullableType__as_notnullable(val* self);
+long VIRTUAL_model__MNullableType__length(val* self);
+val* VIRTUAL_model__MNullableType__collect_mclassdefs(val* self, val* p0);
+val* VIRTUAL_model__MNullableType__collect_mclasses(val* self, val* p0);
+val* VIRTUAL_model__MNullableType__collect_mtypes(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MNullableType__c_name(val* self);
+val* VIRTUAL_model__MNullableType__mtype(val* self);
+void VIRTUAL_model__MNullableType__mtype_61d(val* self, val* p0);
+void VIRTUAL_model__MNullableType__init(val* self, val* p0);
+void VIRTUAL_model__MNullableType__to_s_61d(val* self, val* p0);
+extern const struct class class_model__MNullableType;
+val* VIRTUAL_model__MNullType__to_s(val* self);
+val* VIRTUAL_model__MNullType__model(val* self);
+short int VIRTUAL_model__MNullType__need_anchor(val* self);
+val* VIRTUAL_model__MNullType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MNullType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MNullType__as_nullable(val* self);
+val* VIRTUAL_model__MNullType__collect_mclassdefs(val* self, val* p0);
+val* VIRTUAL_model__MNullType__collect_mclasses(val* self, val* p0);
+val* VIRTUAL_model__MNullType__collect_mtypes(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MType__c_name(val* self);
+void VIRTUAL_model__MNullType__model_61d(val* self, val* p0);
+void VIRTUAL_model__MNullType__init(val* self, val* p0);
+extern const struct class class_model__MNullType;
+val* VIRTUAL_model__MSignature__to_s(val* self);
+val* VIRTUAL_model_base__MEntity__model(val* self);
+val* VIRTUAL_model__MSignature__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_model__MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+long VIRTUAL_model__MSignature__length(val* self);
+val* VIRTUAL_model__MSignature__mparameters(val* self);
+void VIRTUAL_model__MSignature__mparameters_61d(val* self, val* p0);
+val* VIRTUAL_model__MSignature__return_mtype(val* self);
+void VIRTUAL_model__MSignature__return_mtype_61d(val* self, val* p0);
+void VIRTUAL_model__MSignature__init(val* self, val* p0, val* p1);
+long VIRTUAL_model__MSignature__vararg_rank(val* self);
+void VIRTUAL_model__MSignature__vararg_rank_61d(val* self, long p0);
+long VIRTUAL_model__MSignature__arity(val* self);
+extern const struct class class_model__MSignature;
+val* VIRTUAL_model__MParameter__to_s(val* self);
+val* VIRTUAL_model__MParameter__name(val* self);
+val* VIRTUAL_model__MParameter__model(val* self);
+void VIRTUAL_model__MParameter__name_61d(val* self, val* p0);
+val* VIRTUAL_model__MParameter__mtype(val* self);
+void VIRTUAL_model__MParameter__mtype_61d(val* self, val* p0);
+short int VIRTUAL_model__MParameter__is_vararg(val* self);
+void VIRTUAL_model__MParameter__is_vararg_61d(val* self, short int p0);
+void VIRTUAL_model__MParameter__init(val* self, val* p0, val* p1, short int p2);
+val* VIRTUAL_model__MParameter__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+extern const struct class class_model__MParameter;
+val* VIRTUAL_model__MProperty__to_s(val* self);
+val* VIRTUAL_model__MProperty__name(val* self);
+val* VIRTUAL_model__MProperty__model(val* self);
+val* VIRTUAL_model__MProperty__intro_mclassdef(val* self);
+void VIRTUAL_model__MProperty__intro_mclassdef_61d(val* self, val* p0);
+void VIRTUAL_model__MProperty__name_61d(val* self, val* p0);
+val* VIRTUAL_model__MProperty__full_name(val* self);
+val* VIRTUAL_model__MProperty__visibility(val* self);
+void VIRTUAL_model__MProperty__visibility_61d(val* self, val* p0);
+void VIRTUAL_model__MProperty__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MProperty__mpropdefs(val* self);
+val* VIRTUAL_model__MProperty__intro(val* self);
+void VIRTUAL_model__MProperty__intro_61d(val* self, val* p0);
+val* VIRTUAL_model__MProperty__lookup_definitions(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MProperty__lookup_definitions_cache(val* self);
+val* VIRTUAL_model__MProperty__lookup_super_definitions(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MProperty__select_most_specific(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MProperty__lookup_first_definition(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MProperty__lookup_all_definitions(val* self, val* p0, val* p1);
+val* VIRTUAL_model__MProperty__lookup_all_definitions_cache(val* self);
+val* VIRTUAL_abstract_compiler__MProperty__c_name(val* self);
+val* VIRTUAL_abstract_compiler__MProperty__c_name_cache(val* self);
+void VIRTUAL_abstract_compiler__MProperty__c_name_cache_61d(val* self, val* p0);
+val* VIRTUAL_separate_compiler__MProperty__const_color(val* self);
+void VIRTUAL_model__MMethod__init(val* self, val* p0, val* p1, val* p2);
+short int VIRTUAL_model__MMethod__is_toplevel(val* self);
+void VIRTUAL_model__MMethod__is_toplevel_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethod__is_init(val* self);
+void VIRTUAL_model__MMethod__is_init_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethod__is_root_init(val* self);
+void VIRTUAL_model__MMethod__is_root_init_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethod__is_new(val* self);
+void VIRTUAL_model__MMethod__is_new_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethod__is_init_for(val* self, val* p0);
+extern const struct class class_model__MMethod;
+#define COLOR_array__Arraymodel__MProperty_VTMPROPDEF 0
+#define COLOR_model__MProperty___mpropdefs 5
+val* NEW_more_collections__HashMap2(const struct type* type);
+#define COLOR_more_collections__HashMap2mmodule__MModulemodel__MTypearray__Arraymodel__MProperty_VTMPROPDEF 1
+#define COLOR_model__MProperty___lookup_definitions_cache 7
+#define COLOR_model__MProperty___lookup_all_definitions_cache 8
+#define COLOR_model__MMethod___is_toplevel 10
+#define COLOR_model__MMethod___is_init 11
+#define COLOR_model__MMethod___is_root_init 12
+#define COLOR_model__MMethod___is_new 13
+void VIRTUAL_model__MAttribute__init(val* self, val* p0, val* p1, val* p2);
+extern const struct class class_model__MAttribute;
+void VIRTUAL_model__MVirtualTypeProp__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MVirtualTypeProp__mvirtualtype(val* self);
+extern const struct class class_model__MVirtualTypeProp;
+val* NEW_model__MVirtualType(const struct type* type);
+extern const struct type type_model__MVirtualType;
+void model__MVirtualType__init(val* self, val* p0);
+#define COLOR_model__MVirtualTypeProp___mvirtualtype 10
+val* VIRTUAL_model__MPropDef__to_s(val* self);
+val* VIRTUAL_model__MPropDef__name(val* self);
+val* VIRTUAL_model__MPropDef__model(val* self);
+val* VIRTUAL_model__MPropDef__location(val* self);
+void VIRTUAL_model__MPropDef__location_61d(val* self, val* p0);
+val* VIRTUAL_model__MPropDef__mclassdef(val* self);
+void VIRTUAL_model__MPropDef__mclassdef_61d(val* self, val* p0);
+val* VIRTUAL_model__MPropDef__mproperty(val* self);
+void VIRTUAL_model__MPropDef__mproperty_61d(val* self, val* p0);
+void VIRTUAL_model__MPropDef__init(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_model__MPropDef__to_s_61d(val* self, val* p0);
+short int VIRTUAL_model__MPropDef__is_intro(val* self);
+val* VIRTUAL_model__MPropDef__lookup_next_definition(val* self, val* p0, val* p1);
+short int VIRTUAL_modelize_property__MPropDef__has_supercall(val* self);
+void VIRTUAL_modelize_property__MPropDef__has_supercall_61d(val* self, short int p0);
+val* VIRTUAL_abstract_compiler__MPropDef__c_name_cache(val* self);
+void VIRTUAL_abstract_compiler__MPropDef__c_name_cache_61d(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MPropDef__c_name(val* self);
+val* VIRTUAL_separate_compiler__MPropDef__const_color(val* self);
+void VIRTUAL_model__MMethodDef__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MMethodDef__msignature(val* self);
+void VIRTUAL_model__MMethodDef__msignature_61d(val* self, val* p0);
+val* VIRTUAL_model__MMethodDef__new_msignature(val* self);
+void VIRTUAL_model__MMethodDef__new_msignature_61d(val* self, val* p0);
+val* VIRTUAL_model__MMethodDef__initializers(val* self);
+short int VIRTUAL_model__MMethodDef__is_abstract(val* self);
+void VIRTUAL_model__MMethodDef__is_abstract_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethodDef__is_intern(val* self);
+void VIRTUAL_model__MMethodDef__is_intern_61d(val* self, short int p0);
+short int VIRTUAL_model__MMethodDef__is_extern(val* self);
+void VIRTUAL_model__MMethodDef__is_extern_61d(val* self, short int p0);
+val* VIRTUAL_model__MMethodDef__constant_value(val* self);
+void VIRTUAL_model__MMethodDef__constant_value_61d(val* self, val* p0);
+short int VIRTUAL_abstract_compiler__MMethodDef__can_inline(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MMethodDef__compile_inside_to_c(val* self, val* p0, val* p1);
+void VIRTUAL_abstract_compiler__MMethodDef__compile_parameter_check(val* self, val* p0, val* p1);
+val* VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function(val* self);
+val* VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function_cache(val* self);
+void VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function_cache_61d(val* self, val* p0);
+val* VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function(val* self);
+val* VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function_cache(val* self);
+void VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function_cache_61d(val* self, val* p0);
+extern const struct class class_model__MMethodDef;
+#define COLOR_modelize_property__MPropDef___has_supercall 6
+#define COLOR_model__MMethodDef___msignature 8
+#define COLOR_model__MMethodDef___new_msignature 9
+#define COLOR_model__MMethodDef___initializers 10
+#define COLOR_model__MMethodDef___is_abstract 11
+#define COLOR_model__MMethodDef___is_intern 12
+#define COLOR_model__MMethodDef___is_extern 13
+#define COLOR_model__MMethodDef___constant_value 14
+void VIRTUAL_model__MAttributeDef__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MAttributeDef__static_mtype(val* self);
+void VIRTUAL_model__MAttributeDef__static_mtype_61d(val* self, val* p0);
+extern const struct class class_model__MAttributeDef;
+#define COLOR_model__MAttributeDef___static_mtype 8
+void VIRTUAL_model__MVirtualTypeDef__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_model__MVirtualTypeDef__bound(val* self);
+void VIRTUAL_model__MVirtualTypeDef__bound_61d(val* self, val* p0);
+short int VIRTUAL_model__MVirtualTypeDef__is_fixed(val* self);
+void VIRTUAL_model__MVirtualTypeDef__is_fixed_61d(val* self, short int p0);
+extern const struct class class_model__MVirtualTypeDef;
+#define COLOR_model__MVirtualTypeDef___bound 8
+#define COLOR_model__MVirtualTypeDef___is_fixed 9
+val* VIRTUAL_model__MClassKind__to_s(val* self);
+void VIRTUAL_model__MClassKind__to_s_61d(val* self, val* p0);
+short int VIRTUAL_model__MClassKind__need_init(val* self);
+void VIRTUAL_model__MClassKind__need_init_61d(val* self, short int p0);
+void VIRTUAL_model__MClassKind__init(val* self, val* p0, short int p1);
+short int VIRTUAL_model__MClassKind__can_specialize(val* self, val* p0);
+extern const struct class class_model__MClassKind;
+val* VIRTUAL_mmodule__MModule__to_s(val* self);
+val* VIRTUAL_mmodule__MModule__name(val* self);
+val* VIRTUAL_mmodule__MModule__model(val* self);
+void VIRTUAL_mmodule__MModule__model_61d(val* self, val* p0);
+val* VIRTUAL_mmodule__MModule__mgroup(val* self);
+void VIRTUAL_mmodule__MModule__mgroup_61d(val* self, val* p0);
+void VIRTUAL_mmodule__MModule__name_61d(val* self, val* p0);
+val* VIRTUAL_mmodule__MModule__location(val* self);
+void VIRTUAL_mmodule__MModule__location_61d(val* self, val* p0);
+void VIRTUAL_mmodule__MModule__in_nesting_61d(val* self, val* p0);
+val* VIRTUAL_mmodule__MModule__in_importation(val* self);
+void VIRTUAL_mmodule__MModule__in_importation_61d(val* self, val* p0);
+val* VIRTUAL_mmodule__MModule__full_name(val* self);
+void VIRTUAL_mmodule__MModule__init(val* self, val* p0, val* p1, val* p2, val* p3);
+void VIRTUAL_mmodule__MModule__set_imported_mmodules(val* self, val* p0);
+val* VIRTUAL_mmodule__MModule__intrude_mmodules(val* self);
+val* VIRTUAL_mmodule__MModule__public_mmodules(val* self);
+val* VIRTUAL_mmodule__MModule__private_mmodules(val* self);
+val* VIRTUAL_mmodule__MModule__visibility_for(val* self, val* p0);
+void VIRTUAL_mmodule__MModule__set_visibility_for(val* self, val* p0, val* p1);
+short int VIRTUAL_mmodule__MModule__is_visible(val* self, val* p0, val* p1);
+short int VIRTUAL_mmodule__MModule__is_fictive(val* self);
+void VIRTUAL_mmodule__MModule__is_fictive_61d(val* self, short int p0);
+val* VIRTUAL_model__MModule__intro_mclasses(val* self);
+val* VIRTUAL_model__MModule__mclassdefs(val* self);
+val* VIRTUAL_model__MModule__flatten_mclass_hierarchy(val* self);
+void VIRTUAL_model__MModule__linearize_mclasses(val* self, val* p0);
+void VIRTUAL_model__MModule__linearize_mclassdefs(val* self, val* p0);
+void VIRTUAL_model__MModule__linearize_mpropdefs(val* self, val* p0);
+val* VIRTUAL_model__MModule__flatten_mclass_hierarchy_cache(val* self);
+void VIRTUAL_model__MModule__flatten_mclass_hierarchy_cache_61d(val* self, val* p0);
+val* VIRTUAL_model__MModule__object_type(val* self);
+val* VIRTUAL_model__MModule__object_type_cache(val* self);
+void VIRTUAL_model__MModule__object_type_cache_61d(val* self, val* p0);
+val* VIRTUAL_model__MModule__pointer_type(val* self);
+val* VIRTUAL_model__MModule__bool_type(val* self);
+val* VIRTUAL_model__MModule__bool_type_cache(val* self);
+void VIRTUAL_model__MModule__bool_type_cache_61d(val* self, val* p0);
+val* VIRTUAL_model__MModule__sys_type(val* self);
+val* VIRTUAL_model__MModule__finalizable_type(val* self);
+val* VIRTUAL_model__MModule__get_primitive_class(val* self, val* p0);
+val* VIRTUAL_model__MModule__try_get_primitive_method(val* self, val* p0, val* p1);
+val* VIRTUAL_platform__MModule__local_target_platform(val* self);
+void VIRTUAL_platform__MModule__local_target_platform_61d(val* self, val* p0);
+val* VIRTUAL_platform__MModule__target_platform(val* self);
+val* VIRTUAL_abstract_compiler__MModule__properties(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MModule__properties_cache(val* self);
+void VIRTUAL_abstract_compiler__MModule__finalize_ffi(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__MModule__collect_linker_libs(val* self);
+extern const struct class class_mmodule__MModule;
+val* NEW_hash_collection__HashSet(const struct type* type);
+extern const struct type type_hash_collection__HashSetmmodule__MModule;
+#define COLOR_mmodule__MModule___intrude_mmodules 8
+#define COLOR_mmodule__MModule___public_mmodules 9
+#define COLOR_mmodule__MModule___private_mmodules 10
+#define COLOR_mmodule__MModule___is_fictive 11
+extern const struct type type_array__Arraymodel__MClass;
+#define COLOR_model__MModule___intro_mclasses 12
+#define COLOR_model__MModule___mclassdefs 13
+#define COLOR_model__MModule___flatten_mclass_hierarchy_cache 14
+#define COLOR_platform__MModule___local_target_platform 19
+extern const struct type type_hash_collection__HashMapmodel__MClassabstract_collection__Setmodel__MProperty;
+#define COLOR_abstract_compiler__MModule___properties_cache 20
+val* VIRTUAL_location__SourceFile__filename(val* self);
+void VIRTUAL_location__SourceFile__filename_61d(val* self, val* p0);
+val* VIRTUAL_location__SourceFile__string(val* self);
+void VIRTUAL_location__SourceFile__string_61d(val* self, val* p0);
+void VIRTUAL_location__SourceFile__init(val* self, val* p0, val* p1);
+val* VIRTUAL_location__SourceFile__line_starts(val* self);
+void VIRTUAL_parser_nodes__SourceFile__first_token_61d(val* self, val* p0);
+void VIRTUAL_parser_nodes__SourceFile__last_token_61d(val* self, val* p0);
+extern const struct class class_location__SourceFile;
+extern const struct type type_array__Arraykernel__Int;
+#define COLOR_location__SourceFile___line_starts 2
+#define COLOR_parser_nodes__SourceFile___first_token 3
+#define COLOR_parser_nodes__SourceFile___last_token 4
+short int VIRTUAL_location__Location___61d_61d(val* self, val* p0);
+val* VIRTUAL_location__Location__to_s(val* self);
+short int VIRTUAL_location__Location___60d(val* self, val* p0);
 short int VIRTUAL_kernel__Comparable___60d_61d(val* self, val* p0);
 short int VIRTUAL_kernel__Comparable___62d_61d(val* self, val* p0);
 short int VIRTUAL_kernel__Comparable___62d(val* self, val* p0);
 long VIRTUAL_kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_location__Location__file(val* self);
+void VIRTUAL_location__Location__file_61d(val* self, val* p0);
+long VIRTUAL_location__Location__line_start(val* self);
+void VIRTUAL_location__Location__line_start_61d(val* self, long p0);
+long VIRTUAL_location__Location__line_end(val* self);
+void VIRTUAL_location__Location__line_end_61d(val* self, long p0);
+long VIRTUAL_location__Location__column_start(val* self);
+void VIRTUAL_location__Location__column_start_61d(val* self, long p0);
+long VIRTUAL_location__Location__column_end(val* self);
+void VIRTUAL_location__Location__column_end_61d(val* self, long p0);
+void VIRTUAL_location__Location__init(val* self, val* p0, long p1, long p2, long p3, long p4);
+long VIRTUAL_location__Location__pstart(val* self);
+long VIRTUAL_location__Location__pend(val* self);
+val* VIRTUAL_location__Location__text(val* self);
+val* VIRTUAL_location__Location__text_cache(val* self);
+void VIRTUAL_location__Location__text_cache_61d(val* self, val* p0);
+short int VIRTUAL_location__Location__located_in(val* self, val* p0);
+val* VIRTUAL_location__Location__colored_line(val* self, val* p0);
+extern const struct class class_location__Location;
+val* VIRTUAL_string__FlatSubstringsIter__item(val* self);
+void VIRTUAL_string__FlatSubstringsIter__next(val* self);
+short int VIRTUAL_string__FlatSubstringsIter__is_ok(val* self);
+val* VIRTUAL_abstract_collection__Iterator__iterator(val* self);
+void VIRTUAL_abstract_collection__Iterator__finish(val* self);
+val* VIRTUAL_array__Iterator__to_a(val* self);
+val* VIRTUAL_string__FlatSubstringsIter__tgt(val* self);
+void VIRTUAL_string__FlatSubstringsIter__tgt_61d(val* self, val* p0);
+void VIRTUAL_string__FlatSubstringsIter__init(val* self, val* p0);
+extern const struct class class_string__FlatSubstringsIter;
+short int VIRTUAL_string__FlatString___61d_61d(val* self, val* p0);
+long VIRTUAL_string__FlatString__hash(val* self);
+void VIRTUAL_string__FlatText__init(val* self);
+val* VIRTUAL_string__String__to_s(val* self);
+short int VIRTUAL_string__FlatString___60d(val* self, val* p0);
+char* VIRTUAL_string__StringCapable__calloc_string(val* self, long p0);
+long VIRTUAL_string_search__Text__search_index_in(val* self, val* p0, long p1);
+val* VIRTUAL_string_search__Text__search_in(val* self, val* p0, long p1);
+val* VIRTUAL_string_search__Pattern__split_in(val* self, val* p0);
+void VIRTUAL_stream__Text__write_to(val* self, val* p0);
+val* VIRTUAL_string__FlatString__chars(val* self);
+long VIRTUAL_string__FlatText__length(val* self);
+val* VIRTUAL_string__FlatString__substring(val* self, long p0, long p1);
+val* VIRTUAL_string__FlatString__substrings(val* self);
+short int VIRTUAL_string__Text__is_empty(val* self);
+val* VIRTUAL_string__FlatString__empty(val* self);
+char VIRTUAL_string__FlatString___91d_93d(val* self, long p0);
+char VIRTUAL_string__Text__last(val* self);
+char* VIRTUAL_string__FlatString__to_cstring(val* self);
+val* VIRTUAL_string__Text__substring_from(val* self, long p0);
+short int VIRTUAL_string__Text__has_substring(val* self, val* p0, long p1);
+short int VIRTUAL_string__Text__has_prefix(val* self, val* p0);
+short int VIRTUAL_string__Text__has_suffix(val* self, val* p0);
+long VIRTUAL_string__Text__to_i(val* self);
+double VIRTUAL_string__Text__to_f(val* self);
+long VIRTUAL_string__Text__to_hex(val* self);
+long VIRTUAL_string__Text__a_to(val* self, long p0);
+short int VIRTUAL_string__Text__is_numeric(val* self);
+val* VIRTUAL_string__Text__to_cmangle(val* self);
+val* VIRTUAL_string__Text__escape_to_c(val* self);
+val* VIRTUAL_string__Text__unescape_nit(val* self);
+val* VIRTUAL_string__Text__hash_cache(val* self);
+void VIRTUAL_string__Text__hash_cache_61d(val* self, val* p0);
+val* VIRTUAL_string_search__Text__split(val* self, val* p0);
+val* VIRTUAL_string_search__Text__split_with(val* self, val* p0);
+val* VIRTUAL_string_search__Text__split_once_on(val* self, val* p0);
+char* VIRTUAL_string__FlatText__items(val* self);
+void VIRTUAL_string__FlatText__items_61d(val* self, char* p0);
+val* VIRTUAL_string__FlatText__real_items(val* self);
+void VIRTUAL_string__FlatText__real_items_61d(val* self, val* p0);
+void VIRTUAL_string__FlatText__length_61d(val* self, long p0);
+val* VIRTUAL_string__FlatString___43d(val* self, val* p0);
+val* VIRTUAL_string__FlatString___42d(val* self, long p0);
+val* VIRTUAL_string__FlatString__to_upper(val* self);
+val* VIRTUAL_string__FlatString__to_lower(val* self);
+short int VIRTUAL_file__String__file_exists(val* self);
+void VIRTUAL_file__String__file_copy_to(val* self, val* p0);
+val* VIRTUAL_file__String__strip_extension(val* self, val* p0);
+val* VIRTUAL_file__String__basename(val* self, val* p0);
+val* VIRTUAL_file__String__dirname(val* self);
+val* VIRTUAL_file__String__realpath(val* self);
+val* VIRTUAL_file__String__simplify_path(val* self);
+val* VIRTUAL_file__String__join_path(val* self, val* p0);
+val* VIRTUAL_file__String___47d(val* self, val* p0);
+val* VIRTUAL_file__String__relpath(val* self, val* p0);
+void VIRTUAL_file__String__mkdir(val* self);
+val* VIRTUAL_file__String__file_extension(val* self);
+val* VIRTUAL_environ__String__environ(val* self);
+long VIRTUAL_string__FlatString__index_from(val* self);
+void VIRTUAL_string__FlatString__index_from_61d(val* self, long p0);
+long VIRTUAL_string__FlatString__index_to(val* self);
+void VIRTUAL_string__FlatString__index_to_61d(val* self, long p0);
+void VIRTUAL_string__FlatString__with_infos(val* self, char* p0, long p1, long p2, long p3);
+short int VIRTUAL_string__Text___60d(val* self, val* p0);
+short int VIRTUAL_string__Text___61d_61d(val* self, val* p0);
+extern const struct class class_string__FlatString;
+#define COLOR_string__Text___hash_cache 0
+#define COLOR_string__FlatText___real_items 2
+#define COLOR_string__FlatText___length 3
+val* NEW_string__FlatStringCharView(const struct type* type);
+extern const struct type type_string__FlatStringCharView;
+void string__StringCharView__init(val* self, val* p0);
+#define COLOR_string__FlatString___chars 6
+void VIRTUAL_string__FlatStringIterator__init(val* self);
+val* VIRTUAL_string__FlatStringIterator__item(val* self);
+void VIRTUAL_string__FlatStringIterator__next(val* self);
+short int VIRTUAL_string__FlatStringIterator__is_ok(val* self);
+long VIRTUAL_string__FlatStringIterator__index(val* self);
+val* VIRTUAL_string__FlatStringIterator__target(val* self);
+void VIRTUAL_string__FlatStringIterator__target_61d(val* self, val* p0);
+char* VIRTUAL_string__FlatStringIterator__target_items(val* self);
+void VIRTUAL_string__FlatStringIterator__target_items_61d(val* self, char* p0);
+long VIRTUAL_string__FlatStringIterator__curr_pos(val* self);
+void VIRTUAL_string__FlatStringIterator__curr_pos_61d(val* self, long p0);
+void VIRTUAL_string__FlatStringIterator__with_pos(val* self, val* p0, long p1);
+extern const struct class class_string__FlatStringIterator;
+short int VIRTUAL_abstract_collection__SequenceRead___61d_61d(val* self, val* p0);
+long VIRTUAL_abstract_collection__SequenceRead__hash(val* self);
+val* VIRTUAL_string__Collection__to_s(val* self);
+val* VIRTUAL_string__StringCharView__iterator(val* self);
+short int VIRTUAL_string__StringCharView__is_empty(val* self);
+long VIRTUAL_string__StringCharView__length(val* self);
+short int VIRTUAL_abstract_collection__Collection__has(val* self, val* p0);
+val* VIRTUAL_abstract_collection__SequenceRead__first(val* self);
+short int VIRTUAL_abstract_collection__Collection__has_all(val* self, val* p0);
+val* VIRTUAL_array__Collection__to_a(val* self);
+val* VIRTUAL_string__Collection__join(val* self, val* p0);
+val* VIRTUAL_string__FlatStringCharView___91d_93d(val* self, long p0);
+val* VIRTUAL_abstract_collection__SequenceRead__last(val* self);
+long VIRTUAL_abstract_collection__SequenceRead__index_of(val* self, val* p0);
+long VIRTUAL_abstract_collection__SequenceRead__last_index_of(val* self, val* p0);
+long VIRTUAL_abstract_collection__SequenceRead__index_of_from(val* self, val* p0, long p1);
+long VIRTUAL_abstract_collection__SequenceRead__last_index_of_from(val* self, val* p0, long p1);
+val* VIRTUAL_string__FlatStringCharView__iterator_from(val* self, long p0);
+val* VIRTUAL_string__StringCharView__target(val* self);
+void VIRTUAL_string__StringCharView__target_61d(val* self, val* p0);
+void VIRTUAL_string__StringCharView__init(val* self, val* p0);
+extern const struct class class_string__FlatStringCharView;
+long VIRTUAL_string__Buffer__hash(val* self);
+void VIRTUAL_string__FlatBuffer__init(val* self);
+val* VIRTUAL_string__FlatBuffer__to_s(val* self);
+val* VIRTUAL_string__FlatBuffer__chars(val* self);
+val* VIRTUAL_string__FlatBuffer__substring(val* self, long p0, long p1);
+val* VIRTUAL_string__FlatBuffer__substrings(val* self);
+val* VIRTUAL_string__FlatBuffer__empty(val* self);
+char VIRTUAL_string__FlatBuffer___91d_93d(val* self, long p0);
+char* VIRTUAL_string__FlatBuffer__to_cstring(val* self);
+short int VIRTUAL_string__Buffer__is_dirty(val* self);
+void VIRTUAL_string__Buffer__is_dirty_61d(val* self, short int p0);
+short int VIRTUAL_string__Buffer__written(val* self);
+void VIRTUAL_string__Buffer__written_61d(val* self, short int p0);
+void VIRTUAL_string__FlatBuffer__add(val* self, char p0);
+void VIRTUAL_string__FlatBuffer__clear(val* self);
+void VIRTUAL_string__FlatBuffer__enlarge(val* self, long p0);
+void VIRTUAL_string__FlatBuffer__append(val* self, val* p0);
+long VIRTUAL_string__Text__hash(val* self);
+long VIRTUAL_string__FlatBuffer__capacity(val* self);
+void VIRTUAL_string__FlatBuffer__capacity_61d(val* self, long p0);
+void VIRTUAL_string__FlatBuffer__reset(val* self);
+void VIRTUAL_string__FlatBuffer__from(val* self, val* p0);
+void VIRTUAL_string__FlatBuffer__with_capacity(val* self, long p0);
+extern const struct class class_string__FlatBuffer;
+#define COLOR_string__Buffer___is_dirty 4
+#define COLOR_string__Buffer___written 5
+val* NEW_string__FlatBufferCharView(const struct type* type);
+extern const struct type type_string__FlatBufferCharView;
+#define COLOR_string__FlatBuffer___chars 6
+#define COLOR_string__FlatBuffer___capacity 7
+val* VIRTUAL_string__FlatBufferCharView___91d_93d(val* self, long p0);
+val* VIRTUAL_string__FlatBufferCharView__iterator_from(val* self, long p0);
+void VIRTUAL_abstract_collection__RemovableCollection__clear(val* self);
+void VIRTUAL_abstract_collection__RemovableCollection__remove(val* self, val* p0);
+void VIRTUAL_string__FlatBufferCharView__add(val* self, val* p0);
+void VIRTUAL_abstract_collection__SimpleCollection__add_all(val* self, val* p0);
+void VIRTUAL_abstract_collection__Sequence__first_61d(val* self, val* p0);
+void VIRTUAL_string__FlatBufferCharView__push(val* self, val* p0);
+void VIRTUAL_string__FlatBufferCharView__append(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Sequence__pop(val* self);
+void VIRTUAL_abstract_collection__Sequence__unshift(val* self, val* p0);
+void VIRTUAL_abstract_collection__Sequence__prepend(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Sequence__shift(val* self);
+void VIRTUAL_string__FlatBufferCharView___91d_93d_61d(val* self, long p0, val* p1);
+void VIRTUAL_abstract_collection__Sequence__insert(val* self, val* p0, long p1);
+void VIRTUAL_abstract_collection__Sequence__insert_all(val* self, val* p0, long p1);
+void VIRTUAL_abstract_collection__Sequence__remove_at(val* self, long p0);
+void VIRTUAL_string__FlatBufferCharView__enlarge(val* self, long p0);
+extern const struct class class_string__FlatBufferCharView;
+void VIRTUAL_string__FlatBufferIterator__init(val* self);
+val* VIRTUAL_string__FlatBufferIterator__item(val* self);
+void VIRTUAL_string__FlatBufferIterator__next(val* self);
+short int VIRTUAL_string__FlatBufferIterator__is_ok(val* self);
+long VIRTUAL_string__FlatBufferIterator__index(val* self);
+val* VIRTUAL_string__FlatBufferIterator__target(val* self);
+void VIRTUAL_string__FlatBufferIterator__target_61d(val* self, val* p0);
+char* VIRTUAL_string__FlatBufferIterator__target_items(val* self);
+void VIRTUAL_string__FlatBufferIterator__target_items_61d(val* self, char* p0);
+long VIRTUAL_string__FlatBufferIterator__curr_pos(val* self);
+void VIRTUAL_string__FlatBufferIterator__curr_pos_61d(val* self, long p0);
+void VIRTUAL_string__FlatBufferIterator__with_pos(val* self, val* p0, long p1);
+extern const struct class class_string__FlatBufferIterator;
+val* VIRTUAL_string__NativeString__to_s(val* self);
+short int VIRTUAL_kernel__Pointer__address_is_null(val* self);
+char* VIRTUAL_string__NativeString__new(val* self, long p0);
+char VIRTUAL_string__NativeString___91d_93d(val* self, long p0);
+void VIRTUAL_string__NativeString___91d_93d_61d(val* self, long p0, char p1);
+void VIRTUAL_string__NativeString__copy_to(val* self, char* p0, long p1, long p2, long p3);
+long VIRTUAL_string__NativeString__cstring_length(val* self);
+long VIRTUAL_string__NativeString__atoi(val* self);
+double VIRTUAL_string__NativeString__atof(val* self);
+val* VIRTUAL_string__NativeString__to_s_with_length(val* self, long p0);
+val* VIRTUAL_string__NativeString__to_s_with_copy(val* self);
+long VIRTUAL_exec__NativeString__system(val* self);
+short int VIRTUAL_file__NativeString__file_exists(val* self);
+short int VIRTUAL_file__NativeString__file_mkdir(val* self);
+char* VIRTUAL_file__NativeString__file_realpath(val* self);
+char* VIRTUAL_environ__NativeString__get_environ(val* self);
+extern const struct type type_string__NativeString;
+extern const struct class class_string__NativeString;
+extern const struct class class_kernel__Object;
+void VIRTUAL_abstract_compiler__Sys__main(val* self);
+void VIRTUAL_kernel__Sys__run(val* self);
+long VIRTUAL_kernel__Sys__errno(val* self);
+val* VIRTUAL_string__Sys__program_args(val* self);
+val* VIRTUAL_string__Sys__program_name(val* self);
+void VIRTUAL_string__Sys__init_args(val* self);
+long VIRTUAL_string__Sys__native_argc(val* self);
+char* VIRTUAL_string__Sys__native_argv(val* self, long p0);
+long VIRTUAL_exec__Sys__system(val* self, val* p0);
+val* VIRTUAL_file__Sys__stdout(val* self);
+val* VIRTUAL_file__Sys__stderr(val* self);
+extern const struct class class_kernel__Sys;
+val* NEW_file__Stdin(const struct type* type);
+extern const struct type type_file__Stdin;
+void file__Stdin__init(val* self);
+#define COLOR_file__Sys___stdin 1
+val* NEW_file__Stdout(const struct type* type);
+extern const struct type type_file__Stdout;
+void file__Stdout__init(val* self);
+#define COLOR_file__Sys___stdout 2
+val* NEW_file__Stderr(const struct type* type);
+extern const struct type type_file__Stderr;
+void file__Stderr__init(val* self);
+#define COLOR_file__Sys___stderr 3
+long VIRTUAL_kernel__Bool__object_id(val* self);
+short int VIRTUAL_kernel__Bool___61d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Bool___33d_61d(val* self, val* p0);
+long VIRTUAL_kernel__Bool__hash(val* self);
+val* VIRTUAL_string__Bool__to_s(val* self);
+long VIRTUAL_kernel__Bool__to_i(val* self);
+extern const struct type type_kernel__Bool;
+extern const struct class class_kernel__Bool;
+long VIRTUAL_kernel__Float__object_id(val* self);
+short int VIRTUAL_kernel__Float___61d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Float___33d_61d(val* self, val* p0);
+val* VIRTUAL_string__Float__to_s(val* self);
+short int VIRTUAL_kernel__Float___60d(val* self, val* p0);
+short int VIRTUAL_kernel__Float___60d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Float___62d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Float___62d(val* self, val* p0);
+long VIRTUAL_kernel__Float___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_kernel__Float___43d(val* self, val* p0);
+val* VIRTUAL_kernel__Float___45d(val* self, val* p0);
+val* VIRTUAL_kernel__Float__unary_32d_45d(val* self);
+val* VIRTUAL_kernel__Float___42d(val* self, val* p0);
+val* VIRTUAL_kernel__Float___47d(val* self, val* p0);
+long VIRTUAL_kernel__Float__to_i(val* self);
+double VIRTUAL_kernel__Float__to_f(val* self);
+short int VIRTUAL_math__Float__is_nan(val* self);
+long VIRTUAL_math__Float__is_inf(val* self);
+short int VIRTUAL_math__Float__is_inf_extern(val* self);
+val* VIRTUAL_string__Float__to_precision(val* self, long p0);
+extern const struct type type_kernel__Float;
+extern const struct class class_kernel__Float;
+long VIRTUAL_kernel__Int__object_id(val* self);
+short int VIRTUAL_kernel__Int___61d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Int___33d_61d(val* self, val* p0);
+long VIRTUAL_kernel__Int__hash(val* self);
+val* VIRTUAL_string__Int__to_s(val* self);
+short int VIRTUAL_kernel__Int___60d(val* self, val* p0);
+short int VIRTUAL_kernel__Int___60d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Int___62d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Int___62d(val* self, val* p0);
+long VIRTUAL_kernel__Int___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_kernel__Int__successor(val* self, long p0);
+val* VIRTUAL_kernel__Int___43d(val* self, val* p0);
+val* VIRTUAL_kernel__Int___45d(val* self, val* p0);
+val* VIRTUAL_kernel__Int__unary_32d_45d(val* self);
+long VIRTUAL_kernel__Int__distance(val* self, val* p0);
+val* VIRTUAL_kernel__Int___42d(val* self, val* p0);
+val* VIRTUAL_kernel__Int___47d(val* self, val* p0);
+long VIRTUAL_kernel__Int__to_i(val* self);
+double VIRTUAL_kernel__Int__to_f(val* self);
+long VIRTUAL_kernel__Int___37d(val* self, long p0);
+long VIRTUAL_kernel__Int__lshift(val* self, long p0);
+char VIRTUAL_kernel__Int__ascii(val* self);
+long VIRTUAL_kernel__Int__digit_count(val* self, long p0);
+long VIRTUAL_kernel__Int__digit_count_base_95d10(val* self);
+char VIRTUAL_kernel__Int__to_c(val* self);
+long VIRTUAL_kernel__Int__abs(val* self);
+char* VIRTUAL_string__Int__strerror_ext(val* self);
+val* VIRTUAL_string__Int__strerror(val* self);
+void VIRTUAL_string__Int__fill_buffer(val* self, val* p0, long p1, short int p2);
+char* VIRTUAL_string__Int__native_int_to_s(val* self);
+val* VIRTUAL_string__Int__to_hex(val* self);
+val* VIRTUAL_string__Int__to_base(val* self, long p0, short int p1);
+extern const struct type type_kernel__Int;
+extern const struct class class_kernel__Int;
+long VIRTUAL_kernel__Char__object_id(val* self);
+short int VIRTUAL_kernel__Char___61d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Char___33d_61d(val* self, val* p0);
+long VIRTUAL_kernel__Char__hash(val* self);
+val* VIRTUAL_string__Char__to_s(val* self);
+short int VIRTUAL_kernel__Char___60d(val* self, val* p0);
+short int VIRTUAL_kernel__Char___60d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Char___62d_61d(val* self, val* p0);
+short int VIRTUAL_kernel__Char___62d(val* self, val* p0);
+val* VIRTUAL_kernel__Char__successor(val* self, long p0);
+long VIRTUAL_string_search__Char__search_index_in(val* self, val* p0, long p1);
+val* VIRTUAL_string_search__Char__search_in(val* self, val* p0, long p1);
+long VIRTUAL_kernel__Char__distance(val* self, val* p0);
+long VIRTUAL_kernel__Char__to_i(val* self);
+long VIRTUAL_kernel__Char__ascii(val* self);
+char VIRTUAL_kernel__Char__to_lower(val* self);
+char VIRTUAL_kernel__Char__to_upper(val* self);
+short int VIRTUAL_kernel__Char__is_digit(val* self);
+short int VIRTUAL_kernel__Char__is_lower(val* self);
+short int VIRTUAL_kernel__Char__is_upper(val* self);
+short int VIRTUAL_string__Char__is_numeric(val* self);
+extern const struct type type_kernel__Char;
+extern const struct class class_kernel__Char;
+extern const struct type type_kernel__Pointer;
+extern const struct class class_kernel__Pointer;
+val* VIRTUAL_abstract_collection__ContainerIterator__item(val* self);
+void VIRTUAL_abstract_collection__ContainerIterator__next(val* self);
+short int VIRTUAL_abstract_collection__ContainerIterator__is_ok(val* self);
+void VIRTUAL_abstract_collection__ContainerIterator__init(val* self, val* p0);
+void VIRTUAL_abstract_collection__ContainerIterator__is_ok_61d(val* self, short int p0);
+extern const struct class class_abstract_collection__ContainerIterator;
+#define COLOR_abstract_collection__ContainerIterator___is_ok 0
+void VIRTUAL_abstract_collection__MapKeysIterator__init(val* self);
+val* VIRTUAL_abstract_collection__MapKeysIterator__item(val* self);
+void VIRTUAL_abstract_collection__MapKeysIterator__next(val* self);
+short int VIRTUAL_abstract_collection__MapKeysIterator__is_ok(val* self);
+val* VIRTUAL_abstract_collection__MapKeysIterator__original_iterator(val* self);
+void VIRTUAL_abstract_collection__MapKeysIterator__original_iterator_61d(val* self, val* p0);
+extern const struct class class_abstract_collection__MapKeysIterator;
+void VIRTUAL_abstract_collection__MapValuesIterator__init(val* self);
+val* VIRTUAL_abstract_collection__MapValuesIterator__item(val* self);
+void VIRTUAL_abstract_collection__MapValuesIterator__next(val* self);
+short int VIRTUAL_abstract_collection__MapValuesIterator__is_ok(val* self);
+val* VIRTUAL_abstract_collection__MapValuesIterator__original_iterator(val* self);
+void VIRTUAL_abstract_collection__MapValuesIterator__original_iterator_61d(val* self, val* p0);
+extern const struct class class_abstract_collection__MapValuesIterator;
+val* VIRTUAL_abstract_collection__CoupleMapIterator__item(val* self);
+val* VIRTUAL_abstract_collection__CoupleMapIterator__key(val* self);
+void VIRTUAL_abstract_collection__CoupleMapIterator__next(val* self);
+short int VIRTUAL_abstract_collection__CoupleMapIterator__is_ok(val* self);
+void VIRTUAL_abstract_collection__MapIterator__finish(val* self);
+void VIRTUAL_abstract_collection__CoupleMapIterator__init(val* self, val* p0);
+extern const struct class class_abstract_collection__CoupleMapIterator;
+val* VIRTUAL_abstract_collection__Couple__first(val* self);
+void VIRTUAL_abstract_collection__Couple__first_61d(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Couple__second(val* self);
+void VIRTUAL_abstract_collection__Couple__second_61d(val* self, val* p0);
+void VIRTUAL_abstract_collection__Couple__init(val* self, val* p0, val* p1);
+extern const struct class class_abstract_collection__Couple;
+void VIRTUAL_list__List__init(val* self);
+val* VIRTUAL_list__List__iterator(val* self);
+short int VIRTUAL_list__List__is_empty(val* self);
+long VIRTUAL_list__List__length(val* self);
+short int VIRTUAL_list__List__has(val* self, val* p0);
+val* VIRTUAL_list__List__first(val* self);
+val* VIRTUAL_list__List___91d_93d(val* self, long p0);
+val* VIRTUAL_list__List__last(val* self);
+val* VIRTUAL_abstract_collection__SequenceRead__iterator_from(val* self, long p0);
+void VIRTUAL_list__List__clear(val* self);
+void VIRTUAL_list__List__remove(val* self, val* p0);
+void VIRTUAL_abstract_collection__Sequence__add(val* self, val* p0);
+void VIRTUAL_list__List__first_61d(val* self, val* p0);
+void VIRTUAL_list__List__push(val* self, val* p0);
+void VIRTUAL_abstract_collection__Sequence__append(val* self, val* p0);
+val* VIRTUAL_list__List__pop(val* self);
+void VIRTUAL_list__List__unshift(val* self, val* p0);
+val* VIRTUAL_list__List__shift(val* self);
+void VIRTUAL_list__List___91d_93d_61d(val* self, long p0, val* p1);
+void VIRTUAL_list__List__insert(val* self, val* p0, long p1);
+void VIRTUAL_list__List__remove_at(val* self, long p0);
+val* VIRTUAL_list__List__get_node(val* self, long p0);
+val* VIRTUAL_list__List__search_node_after(val* self, val* p0, val* p1);
+void VIRTUAL_list__List__remove_node(val* self, val* p0);
+extern const struct class class_list__List;
+#define COLOR_list__List___head 0
+#define COLOR_list__List___tail 1
+val* VIRTUAL_list__ListIterator__item(val* self);
+void VIRTUAL_list__ListIterator__next(val* self);
+short int VIRTUAL_list__ListIterator__is_ok(val* self);
+long VIRTUAL_list__ListIterator__index(val* self);
+void VIRTUAL_list__ListIterator__init(val* self, val* p0);
+extern const struct class class_list__ListIterator;
+val* VIRTUAL_abstract_collection__Container__iterator(val* self);
+short int VIRTUAL_abstract_collection__Container__is_empty(val* self);
+long VIRTUAL_abstract_collection__Container__length(val* self);
+short int VIRTUAL_abstract_collection__Container__has(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Container__first(val* self);
+void VIRTUAL_abstract_collection__Container__init(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Container__item(val* self);
+void VIRTUAL_abstract_collection__Container__item_61d(val* self, val* p0);
+void VIRTUAL_list__ListNode__init(val* self, val* p0);
+val* VIRTUAL_list__ListNode__next(val* self);
+void VIRTUAL_list__ListNode__next_61d(val* self, val* p0);
+val* VIRTUAL_list__ListNode__prev(val* self);
+void VIRTUAL_list__ListNode__prev_61d(val* self, val* p0);
+extern const struct class class_list__ListNode;
+short int VIRTUAL_array__Array___61d_61d(val* self, val* p0);
+void VIRTUAL_array__Array__init(val* self);
+val* VIRTUAL_string__Array__to_s(val* self);
+val* VIRTUAL_array__AbstractArrayRead__iterator(val* self);
+short int VIRTUAL_array__AbstractArrayRead__is_empty(val* self);
+long VIRTUAL_array__AbstractArrayRead__length(val* self);
+short int VIRTUAL_array__AbstractArrayRead__has(val* self, val* p0);
+val* VIRTUAL_array__ArrayCapable__calloc_array(val* self, long p0);
+val* VIRTUAL_array__Array___91d_93d(val* self, long p0);
+long VIRTUAL_array__AbstractArrayRead__index_of(val* self, val* p0);
+long VIRTUAL_array__AbstractArrayRead__last_index_of(val* self, val* p0);
+long VIRTUAL_array__AbstractArrayRead__index_of_from(val* self, val* p0, long p1);
+long VIRTUAL_array__AbstractArrayRead__last_index_of_from(val* self, val* p0, long p1);
+void VIRTUAL_array__AbstractArray__clear(val* self);
+void VIRTUAL_array__AbstractArray__remove(val* self, val* p0);
+val* VIRTUAL_array__AbstractArrayRead__reversed(val* self);
+void VIRTUAL_array__AbstractArrayRead__copy_to(val* self, long p0, long p1, val* p2, long p3);
+void VIRTUAL_array__Array__add(val* self, val* p0);
+void VIRTUAL_array__AbstractArray__push(val* self, val* p0);
+val* VIRTUAL_array__AbstractArray__pop(val* self);
+void VIRTUAL_array__AbstractArray__unshift(val* self, val* p0);
+val* VIRTUAL_array__AbstractArray__shift(val* self);
+void VIRTUAL_array__Array___91d_93d_61d(val* self, long p0, val* p1);
+void VIRTUAL_array__AbstractArray__insert(val* self, val* p0, long p1);
+void VIRTUAL_array__AbstractArray__insert_all(val* self, val* p0, long p1);
+void VIRTUAL_array__AbstractArray__remove_at(val* self, long p0);
+void VIRTUAL_array__Array__enlarge(val* self, long p0);
+void VIRTUAL_array__Array__with_items(val* self, val* p0);
+void VIRTUAL_array__Array__with_capacity(val* self, long p0);
+void VIRTUAL_array__Array__with_native(val* self, val* p0, long p1);
+extern const struct class class_array__Array;
+#define COLOR_array__AbstractArrayRead___length 0
+#define COLOR_array__Array___items 1
+#define COLOR_array__Array___capacity 2
+val* VIRTUAL_array__ArrayIterator__item(val* self);
+void VIRTUAL_array__ArrayIterator__next(val* self);
+short int VIRTUAL_array__ArrayIterator__is_ok(val* self);
+long VIRTUAL_array__ArrayIterator__index(val* self);
+void VIRTUAL_array__ArrayIterator__init(val* self, val* p0);
+extern const struct class class_array__ArrayIterator;
+#define COLOR_array__ArrayIterator___index 0
+short int VIRTUAL_abstract_collection__Set___61d_61d(val* self, val* p0);
+long VIRTUAL_abstract_collection__Set__hash(val* self);
+void VIRTUAL_array__ArraySet__init(val* self);
+val* VIRTUAL_array__ArraySet__iterator(val* self);
+short int VIRTUAL_array__ArraySet__is_empty(val* self);
+long VIRTUAL_array__ArraySet__length(val* self);
+short int VIRTUAL_array__ArraySet__has(val* self, val* p0);
+val* VIRTUAL_array__ArraySet__first(val* self);
+void VIRTUAL_array__ArraySet__clear(val* self);
+void VIRTUAL_array__ArraySet__remove(val* self, val* p0);
+void VIRTUAL_array__ArraySet__add(val* self, val* p0);
+void VIRTUAL_array__ArraySet__remove_at(val* self, long p0);
+extern const struct class class_array__ArraySet;
+val* VIRTUAL_array__ArraySetIterator__item(val* self);
+void VIRTUAL_array__ArraySetIterator__next(val* self);
+short int VIRTUAL_array__ArraySetIterator__is_ok(val* self);
+void VIRTUAL_array__ArraySetIterator__init(val* self, val* p0);
+extern const struct class class_array__ArraySetIterator;
+val* VIRTUAL_array__ArrayMap___91d_93d(val* self, val* p0);
+val* VIRTUAL_abstract_collection__MapRead__get_or_null(val* self, val* p0);
+short int VIRTUAL_abstract_collection__MapRead__has_key(val* self, val* p0);
+val* VIRTUAL_abstract_collection__CoupleMap__iterator(val* self);
+val* VIRTUAL_array__ArrayMap__values(val* self);
+val* VIRTUAL_array__ArrayMap__keys(val* self);
+short int VIRTUAL_array__ArrayMap__is_empty(val* self);
+long VIRTUAL_array__ArrayMap__length(val* self);
+val* VIRTUAL_abstract_collection__MapRead__provide_default_value(val* self, val* p0);
+void VIRTUAL_array__ArrayMap___91d_93d_61d(val* self, val* p0, val* p1);
+void VIRTUAL_array__ArrayMap__clear(val* self);
+val* VIRTUAL_array__ArrayMap__couple_iterator(val* self);
+void VIRTUAL_array__ArrayMap__remove_at_index(val* self, long p0);
+long VIRTUAL_array__ArrayMap__index(val* self, val* p0);
+extern const struct class class_array__ArrayMap;
+val* NEW_array__ArrayMapKeys(const struct type* type);
+#define COLOR_array__ArrayMapKeysarray__ArrayMap_FT0array__ArrayMap_FT1 0
+#define COLOR_array__ArrayMapKeys__map_61d 56
+#define COLOR_array__ArrayMap___keys 0
+val* NEW_array__ArrayMapValues(const struct type* type);
+#define COLOR_array__ArrayMapValuesarray__ArrayMap_FT0array__ArrayMap_FT1 1
+#define COLOR_array__ArrayMapValues__map_61d 56
+#define COLOR_array__ArrayMap___values 1
+#define COLOR_array__Arrayabstract_collection__Couplearray__ArrayMap_FT0array__ArrayMap_FT1 3
+#define COLOR_array__ArrayMap___items 2
+#define COLOR_array__ArrayMap___last_index 3
+void VIRTUAL_array__ArrayMapKeys__init(val* self);
+val* VIRTUAL_array__ArrayMapKeys__iterator(val* self);
+short int VIRTUAL_array__ArrayMapKeys__is_empty(val* self);
+long VIRTUAL_array__ArrayMapKeys__length(val* self);
+short int VIRTUAL_array__ArrayMapKeys__has(val* self, val* p0);
+val* VIRTUAL_array__ArrayMapKeys__first(val* self);
+void VIRTUAL_array__ArrayMapKeys__clear(val* self);
+void VIRTUAL_array__ArrayMapKeys__remove(val* self, val* p0);
+val* VIRTUAL_array__ArrayMapKeys__map(val* self);
+void VIRTUAL_array__ArrayMapKeys__map_61d(val* self, val* p0);
+extern const struct class class_array__ArrayMapKeys;
+void VIRTUAL_array__ArrayMapValues__init(val* self);
+val* VIRTUAL_array__ArrayMapValues__iterator(val* self);
+short int VIRTUAL_array__ArrayMapValues__is_empty(val* self);
+long VIRTUAL_array__ArrayMapValues__length(val* self);
+short int VIRTUAL_array__ArrayMapValues__has(val* self, val* p0);
+val* VIRTUAL_array__ArrayMapValues__first(val* self);
+void VIRTUAL_array__ArrayMapValues__clear(val* self);
+void VIRTUAL_array__ArrayMapValues__remove(val* self, val* p0);
+val* VIRTUAL_array__ArrayMapValues__map(val* self);
+void VIRTUAL_array__ArrayMapValues__map_61d(val* self, val* p0);
+extern const struct class class_array__ArrayMapValues;
+val* VIRTUAL_array__NativeArray__new(val* self, long p0);
+val* VIRTUAL_array__NativeArray___91d_93d(val* self, long p0);
+void VIRTUAL_array__NativeArray___91d_93d_61d(val* self, long p0, val* p1);
+void VIRTUAL_array__NativeArray__copy_to(val* self, val* p0, long p1);
+extern const struct class class_array__NativeArray;
+long VIRTUAL_sorter__DefaultComparator__compare(val* self, val* p0, val* p1);
+extern const struct class class_sorter__DefaultComparator;
+void VIRTUAL_hash_collection__HashMap__init(val* self);
+val* VIRTUAL_hash_collection__HashMap___91d_93d(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashMap__iterator(val* self);
+val* VIRTUAL_hash_collection__HashMap__values(val* self);
+val* VIRTUAL_hash_collection__HashMap__keys(val* self);
+short int VIRTUAL_hash_collection__HashMap__is_empty(val* self);
+long VIRTUAL_hash_collection__HashMap__length(val* self);
+void VIRTUAL_hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
+void VIRTUAL_hash_collection__HashMap__clear(val* self);
+long VIRTUAL_hash_collection__HashCollection__index_at(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashCollection__node_at(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashCollection__node_at_idx(val* self, long p0, val* p1);
+void VIRTUAL_hash_collection__HashCollection__store(val* self, long p0, val* p1);
+void VIRTUAL_hash_collection__HashCollection__remove_node(val* self, val* p0);
+void VIRTUAL_hash_collection__HashCollection__raz(val* self);
+void VIRTUAL_hash_collection__HashCollection__enlarge(val* self, long p0);
+extern const struct class class_hash_collection__HashMap;
+#define COLOR_hash_collection__HashCollection___array 0
+#define COLOR_hash_collection__HashCollection___capacity 1
+#define COLOR_hash_collection__HashCollection___the_length 2
+#define COLOR_hash_collection__HashCollection___first_item 3
+#define COLOR_hash_collection__HashCollection___last_item 4
+#define COLOR_hash_collection__HashCollection___last_accessed_key 5
+#define COLOR_hash_collection__HashCollection___last_accessed_node 6
+val* NEW_hash_collection__HashMapKeys(const struct type* type);
+#define COLOR_hash_collection__HashMapKeyshash_collection__HashMap_FT0hash_collection__HashMap_FT1 0
+#define COLOR_hash_collection__HashMapKeys__map_61d 56
+#define COLOR_hash_collection__HashMap___keys 7
+val* NEW_hash_collection__HashMapValues(const struct type* type);
+#define COLOR_hash_collection__HashMapValueshash_collection__HashMap_FT0hash_collection__HashMap_FT1 1
+#define COLOR_hash_collection__HashMapValues__map_61d 56
+#define COLOR_hash_collection__HashMap___values 8
+void VIRTUAL_hash_collection__HashMapKeys__init(val* self);
+val* VIRTUAL_hash_collection__HashMapKeys__iterator(val* self);
+short int VIRTUAL_hash_collection__HashMapKeys__is_empty(val* self);
+long VIRTUAL_hash_collection__HashMapKeys__length(val* self);
+short int VIRTUAL_hash_collection__HashMapKeys__has(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashMapKeys__first(val* self);
+void VIRTUAL_hash_collection__HashMapKeys__clear(val* self);
+void VIRTUAL_hash_collection__HashMapKeys__remove(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashMapKeys__map(val* self);
+void VIRTUAL_hash_collection__HashMapKeys__map_61d(val* self, val* p0);
+extern const struct class class_hash_collection__HashMapKeys;
+void VIRTUAL_hash_collection__HashMapValues__init(val* self);
+val* VIRTUAL_hash_collection__HashMapValues__iterator(val* self);
+short int VIRTUAL_hash_collection__HashMapValues__is_empty(val* self);
+long VIRTUAL_hash_collection__HashMapValues__length(val* self);
+short int VIRTUAL_hash_collection__HashMapValues__has(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashMapValues__first(val* self);
+void VIRTUAL_hash_collection__HashMapValues__clear(val* self);
+void VIRTUAL_hash_collection__HashMapValues__remove(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashMapValues__map(val* self);
+void VIRTUAL_hash_collection__HashMapValues__map_61d(val* self, val* p0);
+extern const struct class class_hash_collection__HashMapValues;
+void VIRTUAL_hash_collection__HashNode__init(val* self, val* p0);
+void VIRTUAL_hash_collection__HashMapNode__init(val* self, val* p0, val* p1);
+extern const struct class class_hash_collection__HashMapNode;
+#define COLOR_hash_collection__HashNode___next_item 1
+#define COLOR_hash_collection__HashNode___prev_item 2
+#define COLOR_hash_collection__HashNode___prev_in_bucklet 3
+#define COLOR_hash_collection__HashNode___next_in_bucklet 4
+val* VIRTUAL_hash_collection__HashMapIterator__item(val* self);
+val* VIRTUAL_hash_collection__HashMapIterator__key(val* self);
+void VIRTUAL_hash_collection__HashMapIterator__next(val* self);
+short int VIRTUAL_hash_collection__HashMapIterator__is_ok(val* self);
+void VIRTUAL_hash_collection__HashMapIterator__init(val* self, val* p0);
+extern const struct class class_hash_collection__HashMapIterator;
+void VIRTUAL_hash_collection__HashSet__init(val* self);
+val* VIRTUAL_hash_collection__HashSet__iterator(val* self);
+short int VIRTUAL_hash_collection__HashSet__is_empty(val* self);
+long VIRTUAL_hash_collection__HashSet__length(val* self);
+short int VIRTUAL_hash_collection__HashSet__has(val* self, val* p0);
+val* VIRTUAL_hash_collection__HashSet__first(val* self);
+void VIRTUAL_hash_collection__HashSet__clear(val* self);
+void VIRTUAL_hash_collection__HashSet__remove(val* self, val* p0);
+void VIRTUAL_hash_collection__HashSet__add(val* self, val* p0);
+void VIRTUAL_hash_collection__HashSet__from(val* self, val* p0);
+extern const struct class class_hash_collection__HashSet;
+void VIRTUAL_hash_collection__HashSetNode__init(val* self, val* p0);
+extern const struct class class_hash_collection__HashSetNode;
+val* VIRTUAL_hash_collection__HashSetIterator__item(val* self);
+void VIRTUAL_hash_collection__HashSetIterator__next(val* self);
+short int VIRTUAL_hash_collection__HashSetIterator__is_ok(val* self);
+void VIRTUAL_hash_collection__HashSetIterator__init(val* self, val* p0);
+extern const struct class class_hash_collection__HashSetIterator;
+void VIRTUAL_file__IFStream__close(val* self);
+void VIRTUAL_file__FStream__path_61d(val* self, val* p0);
+val* VIRTUAL_stream__BufferedIStream__read(val* self, long p0);
+val* VIRTUAL_stream__IStream__read_line(val* self);
+val* VIRTUAL_stream__BufferedIStream__read_all(val* self);
+void VIRTUAL_stream__BufferedIStream__append_line_to(val* self, val* p0);
+short int VIRTUAL_stream__BufferedIStream__eof(val* self);
+void VIRTUAL_file__IFStream__fill_buffer(val* self);
+short int VIRTUAL_file__IFStream__end_reached(val* self);
+void VIRTUAL_stream__BufferedIStream__prepare_buffer(val* self, long p0);
+void VIRTUAL_file__IFStream__end_reached_61d(val* self, short int p0);
+void VIRTUAL_file__IFStream__open(val* self, val* p0);
+void VIRTUAL_file__IFStream__init(val* self);
+extern const struct class class_file__IFStream;
+#define COLOR_file__FStream___path 0
+#define COLOR_file__FStream___file 1
+#define COLOR_stream__BufferedIStream___buffer 2
+#define COLOR_stream__BufferedIStream___buffer_pos 3
+#define COLOR_file__IFStream___end_reached 4
+void VIRTUAL_file__OFStream__close(val* self);
+void VIRTUAL_file__OFStream__write(val* self, val* p0);
+void VIRTUAL_file__OFStream__write_native(val* self, char* p0, long p1);
+void VIRTUAL_file__OFStream__open(val* self, val* p0);
+void VIRTUAL_file__OFStream__init(val* self);
+extern const struct class class_file__OFStream;
+#define COLOR_file__OFStream___is_writable 2
+void VIRTUAL_file__Stdin__init(val* self);
+extern const struct class class_file__Stdin;
+void VIRTUAL_file__Stdout__init(val* self);
+extern const struct class class_file__Stdout;
+void VIRTUAL_file__Stderr__init(val* self);
+extern const struct class class_file__Stderr;
+long VIRTUAL_file__NativeFile__io_read(val* self, char* p0, long p1);
+long VIRTUAL_file__NativeFile__io_write(val* self, char* p0, long p1);
+long VIRTUAL_file__NativeFile__io_close(val* self);
+val* VIRTUAL_file__NativeFile__io_open_read(val* self, char* p0);
+val* VIRTUAL_file__NativeFile__io_open_write(val* self, char* p0);
+val* VIRTUAL_file__NativeFile__native_stdin(val* self);
+val* VIRTUAL_file__NativeFile__native_stdout(val* self);
+val* VIRTUAL_file__NativeFile__native_stderr(val* self);
+extern const struct class class_file__NativeFile;
+val* VIRTUAL_string_search__Match__to_s(val* self);
+val* VIRTUAL_string_search__Match__string(val* self);
+void VIRTUAL_string_search__Match__string_61d(val* self, val* p0);
+long VIRTUAL_string_search__Match__from(val* self);
+void VIRTUAL_string_search__Match__from_61d(val* self, long p0);
+long VIRTUAL_string_search__Match__length(val* self);
+void VIRTUAL_string_search__Match__length_61d(val* self, long p0);
+long VIRTUAL_string_search__Match__after(val* self);
+void VIRTUAL_string_search__Match__init(val* self, val* p0, long p1, long p2);
+extern const struct class class_string_search__Match;
+val* VIRTUAL_mproject__MProject__to_s(val* self);
+val* VIRTUAL_mproject__MProject__name(val* self);
+val* VIRTUAL_mproject__MProject__model(val* self);
+void VIRTUAL_mproject__MProject__name_61d(val* self, val* p0);
+void VIRTUAL_mproject__MProject__model_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MProject__root(val* self);
+void VIRTUAL_mproject__MProject__root_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MProject__mgroups(val* self);
+void VIRTUAL_mproject__MProject__init(val* self, val* p0, val* p1);
+extern const struct class class_mproject__MProject;
+#define COLOR_mproject__MProject___root 4
+val* NEW_poset__POSet(const struct type* type);
+extern const struct type type_poset__POSetmproject__MGroup;
+#define COLOR_mproject__MProject___mgroups 5
+val* VIRTUAL_mproject__MGroup__to_s(val* self);
+val* VIRTUAL_mproject__MGroup__name(val* self);
+val* VIRTUAL_mproject__MGroup__model(val* self);
+void VIRTUAL_mproject__MGroup__name_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MGroup__mproject(val* self);
+void VIRTUAL_mproject__MGroup__mproject_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MGroup__parent(val* self);
+void VIRTUAL_mproject__MGroup__parent_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MGroup__full_name(val* self);
+void VIRTUAL_mproject__MGroup__in_nesting_61d(val* self, val* p0);
+val* VIRTUAL_mproject__MGroup__filepath(val* self);
+void VIRTUAL_mproject__MGroup__filepath_61d(val* self, val* p0);
+void VIRTUAL_mproject__MGroup__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_mmodule__MGroup__mmodules(val* self);
+val* VIRTUAL_mmodule__MGroup__default_mmodule(val* self);
+void VIRTUAL_mmodule__MGroup__default_mmodule_61d(val* self, val* p0);
+val* VIRTUAL_modelbuilder__MGroup__module_paths(val* self);
+extern const struct class class_mproject__MGroup;
+extern const struct type type_array__Arraymmodule__MModule;
+#define COLOR_mmodule__MGroup___mmodules 7
+#define COLOR_mmodule__MGroup___default_mmodule 8
+extern const struct type type_array__Arraymodelbuilder__ModulePath;
+#define COLOR_modelbuilder__MGroup___module_paths 9
+val* VIRTUAL_mproject__Model__mprojects(val* self);
+val* VIRTUAL_mproject__Model__mproject_by_name(val* self);
+val* VIRTUAL_mmodule__Model__mmodules(val* self);
+val* VIRTUAL_mmodule__Model__mmodule_nesting_hierarchy(val* self);
+val* VIRTUAL_mmodule__Model__mmodule_importation_hierarchy(val* self);
+val* VIRTUAL_mmodule__Model__mmodules_by_name(val* self);
+val* VIRTUAL_model__Model__mclasses(val* self);
+val* VIRTUAL_model__Model__mproperties(val* self);
+val* VIRTUAL_model__Model__mclassdef_hierarchy(val* self);
+val* VIRTUAL_model__Model__intro_mtype_specialization_hierarchy(val* self);
+val* VIRTUAL_model__Model__full_mtype_specialization_hierarchy(val* self);
+val* VIRTUAL_model__Model__mclasses_by_name(val* self);
+val* VIRTUAL_model__Model__get_mclasses_by_name(val* self, val* p0);
+val* VIRTUAL_model__Model__mproperties_by_name(val* self);
+val* VIRTUAL_model__Model__get_mproperties_by_name(val* self, val* p0);
+val* VIRTUAL_model__Model__null_type(val* self);
+extern const struct class class_model_base__Model;
+extern const struct type type_array__Arraymproject__MProject;
+#define COLOR_mproject__Model___mprojects 0
+val* NEW_more_collections__MultiHashMap(const struct type* type);
+extern const struct type type_more_collections__MultiHashMapstring__Stringmproject__MProject;
+#define COLOR_mproject__Model___mproject_by_name 1
+#define COLOR_mmodule__Model___mmodules 2
+extern const struct type type_poset__POSetmmodule__MModule;
+#define COLOR_mmodule__Model___mmodule_nesting_hierarchy 3
+#define COLOR_mmodule__Model___mmodule_importation_hierarchy 4
+extern const struct type type_more_collections__MultiHashMapstring__Stringmmodule__MModule;
+#define COLOR_mmodule__Model___mmodules_by_name 5
+#define COLOR_model__Model___mclasses 6
+#define COLOR_model__Model___mproperties 7
+extern const struct type type_poset__POSetmodel__MClassDef;
+#define COLOR_model__Model___mclassdef_hierarchy 8
+extern const struct type type_poset__POSetmodel__MClassType;
+#define COLOR_model__Model___intro_mtype_specialization_hierarchy 9
+#define COLOR_model__Model___full_mtype_specialization_hierarchy 10
+extern const struct type type_more_collections__MultiHashMapstring__Stringmodel__MClass;
+#define COLOR_model__Model___mclasses_by_name 11
+extern const struct type type_more_collections__MultiHashMapstring__Stringmodel__MProperty;
+#define COLOR_model__Model___mproperties_by_name 12
+val* NEW_model__MNullType(const struct type* type);
+extern const struct type type_model__MNullType;
+void model__MNullType__init(val* self, val* p0);
+#define COLOR_model__Model___null_type 13
+val* VIRTUAL_model_base__MVisibility__to_s(val* self);
+short int VIRTUAL_model_base__MVisibility___60d(val* self, val* p0);
+void VIRTUAL_model_base__MVisibility__to_s_61d(val* self, val* p0);
+long VIRTUAL_model_base__MVisibility__level(val* self);
+void VIRTUAL_model_base__MVisibility__level_61d(val* self, long p0);
+void VIRTUAL_model_base__MVisibility__init(val* self, val* p0, long p1);
+extern const struct class class_model_base__MVisibility;
+void VIRTUAL_more_collections__MultiHashMap__init(val* self);
+val* VIRTUAL_more_collections__MultiHashMap__provide_default_value(val* self, val* p0);
+void VIRTUAL_more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1);
+extern const struct class class_more_collections__MultiHashMap;
+val* VIRTUAL_more_collections__HashMap2__level1(val* self);
+val* VIRTUAL_more_collections__HashMap2___91d_93d(val* self, val* p0, val* p1);
+void VIRTUAL_more_collections__HashMap2___91d_93d_61d(val* self, val* p0, val* p1, val* p2);
+extern const struct class class_more_collections__HashMap2;
+#define COLOR_hash_collection__HashMapmore_collections__HashMap2_FT0hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2 0
+#define COLOR_more_collections__HashMap2___level1 0
+val* VIRTUAL_more_collections__HashMap3__level1(val* self);
+val* VIRTUAL_more_collections__HashMap3___91d_93d(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_more_collections__HashMap3___91d_93d_61d(val* self, val* p0, val* p1, val* p2, val* p3);
+extern const struct class class_more_collections__HashMap3;
+#define COLOR_hash_collection__HashMapmore_collections__HashMap3_FT0more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3 0
+#define COLOR_more_collections__HashMap3___level1 0
+long VIRTUAL_poset__POSet__compare(val* self, val* p0, val* p1);
+val* VIRTUAL_poset__POSet__iterator(val* self);
+short int VIRTUAL_abstract_collection__Collection__is_empty(val* self);
+long VIRTUAL_abstract_collection__Collection__length(val* self);
+short int VIRTUAL_poset__POSet__has(val* self, val* p0);
+val* VIRTUAL_abstract_collection__Collection__first(val* self);
+val* VIRTUAL_poset__POSet__elements(val* self);
+val* VIRTUAL_poset__POSet__add_node(val* self, val* p0);
+val* VIRTUAL_poset__POSet___91d_93d(val* self, val* p0);
+void VIRTUAL_poset__POSet__add_edge(val* self, val* p0, val* p1);
+val* VIRTUAL_poset__POSet__linearize(val* self, val* p0);
+extern const struct class class_poset__POSet;
+#define COLOR_hash_collection__HashMapposet__POSet_FT0poset__POSetElementposet__POSet_FT0 0
+#define COLOR_poset__POSet___elements 0
+void VIRTUAL_poset__POSetElement__init(val* self);
+val* VIRTUAL_poset__POSetElement__poset(val* self);
+void VIRTUAL_poset__POSetElement__poset_61d(val* self, val* p0);
+val* VIRTUAL_poset__POSetElement__element(val* self);
+void VIRTUAL_poset__POSetElement__element_61d(val* self, val* p0);
+val* VIRTUAL_poset__POSetElement__tos(val* self);
+val* VIRTUAL_poset__POSetElement__froms(val* self);
+val* VIRTUAL_poset__POSetElement__dtos(val* self);
+val* VIRTUAL_poset__POSetElement__dfroms(val* self);
+long VIRTUAL_poset__POSetElement__count(val* self);
+void VIRTUAL_poset__POSetElement__count_61d(val* self, long p0);
+val* VIRTUAL_poset__POSetElement__greaters(val* self);
+val* VIRTUAL_poset__POSetElement__direct_greaters(val* self);
+val* VIRTUAL_poset__POSetElement__smallers(val* self);
+val* VIRTUAL_poset__POSetElement__direct_smallers(val* self);
+short int VIRTUAL_poset__POSetElement___60d_61d(val* self, val* p0);
+short int VIRTUAL_poset__POSetElement___60d(val* self, val* p0);
+extern const struct class class_poset__POSetElement;
+#define COLOR_hash_collection__HashSetposet__POSetElement_FT0 0
+#define COLOR_poset__POSetElement___tos 2
+#define COLOR_poset__POSetElement___froms 3
+#define COLOR_poset__POSetElement___dtos 4
+#define COLOR_poset__POSetElement___dfroms 5
+val* VIRTUAL_mdoc__MDoc__content(val* self);
+void VIRTUAL_mdoc__MDoc__original_mentity_61d(val* self, val* p0);
+extern const struct class class_mdoc__MDoc;
+#define COLOR_mdoc__MDoc___content 0
+#define COLOR_mdoc__MDoc___original_mentity 1
+val* VIRTUAL_mdoc__MDeprecationInfo__mdoc(val* self);
+void VIRTUAL_mdoc__MDeprecationInfo__mdoc_61d(val* self, val* p0);
+extern const struct class class_mdoc__MDeprecationInfo;
+#define COLOR_mdoc__MDeprecationInfo___mdoc 0
+void VIRTUAL_phase__AnnotationPhaseVisitor__visit(val* self, val* p0);
+void VIRTUAL_parser_nodes__Visitor__enter_visit(val* self, val* p0);
+val* VIRTUAL_parser_nodes__Visitor__current_node(val* self);
+val* VIRTUAL_phase__AnnotationPhaseVisitor__annotations(val* self);
+extern const struct class class_phase__AnnotationPhaseVisitor;
+#define COLOR_parser_nodes__Visitor___current_node 0
+extern const struct type type_array__Arrayparser_nodes__AAnnotation;
+#define COLOR_phase__AnnotationPhaseVisitor___annotations 1
+void VIRTUAL_toolcontext__Message__init(val* self);
+val* VIRTUAL_toolcontext__Message__to_s(val* self);
+short int VIRTUAL_toolcontext__Message___60d(val* self, val* p0);
 val* VIRTUAL_toolcontext__Message__location(val* self);
+void VIRTUAL_toolcontext__Message__location_61d(val* self, val* p0);
+val* VIRTUAL_toolcontext__Message__tag(val* self);
+void VIRTUAL_toolcontext__Message__tag_61d(val* self, val* p0);
 val* VIRTUAL_toolcontext__Message__text(val* self);
+void VIRTUAL_toolcontext__Message__text_61d(val* self, val* p0);
 val* VIRTUAL_toolcontext__Message__to_color_string(val* self);
-void VIRTUAL_toolcontext__Message__init(val* self, val* p0, val* p1);
 extern const struct class class_toolcontext__Message;
+void VIRTUAL_separate_erasure_compiler__ToolContext__init(val* self);
 long VIRTUAL_toolcontext__ToolContext__error_count(val* self);
 void VIRTUAL_toolcontext__ToolContext__error_count_61d(val* self, long p0);
 long VIRTUAL_toolcontext__ToolContext__warning_count(val* self);
@@ -57,12 +1418,15 @@ void VIRTUAL_toolcontext__ToolContext__log_directory_61d(val* self, val* p0);
 val* VIRTUAL_toolcontext__ToolContext__messages(val* self);
 val* VIRTUAL_toolcontext__ToolContext__message_sorter(val* self);
 void VIRTUAL_toolcontext__ToolContext__check_errors(val* self);
+void VIRTUAL_toolcontext__ToolContext__errors_info(val* self);
 void VIRTUAL_toolcontext__ToolContext__error(val* self, val* p0, val* p1);
 void VIRTUAL_toolcontext__ToolContext__fatal_error(val* self, val* p0, val* p1);
-void VIRTUAL_toolcontext__ToolContext__warning(val* self, val* p0, val* p1);
+void VIRTUAL_toolcontext__ToolContext__warning(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_toolcontext__ToolContext__advice(val* self, val* p0, val* p1, val* p2);
 void VIRTUAL_toolcontext__ToolContext__info(val* self, val* p0, long p1);
 val* VIRTUAL_toolcontext__ToolContext__option_context(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_warn(val* self);
+val* VIRTUAL_toolcontext__ToolContext__opt_warning(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_quiet(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_log(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_log_dir(val* self);
@@ -73,9 +1437,9 @@ val* VIRTUAL_toolcontext__ToolContext__opt_verbose(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_stop_on_first_error(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_no_color(val* self);
 val* VIRTUAL_toolcontext__ToolContext__opt_bash_completion(val* self);
+val* VIRTUAL_toolcontext__ToolContext__opt_stub_man(val* self);
 long VIRTUAL_toolcontext__ToolContext__verbose_level(val* self);
 void VIRTUAL_toolcontext__ToolContext__verbose_level_61d(val* self, long p0);
-void VIRTUAL_separate_erasure_compiler__ToolContext__init(val* self);
 val* VIRTUAL_toolcontext__ToolContext__tooldescription(val* self);
 void VIRTUAL_toolcontext__ToolContext__tooldescription_61d(val* self, val* p0);
 short int VIRTUAL_toolcontext__ToolContext__accept_no_arguments(val* self);
@@ -89,7 +1453,9 @@ val* VIRTUAL_toolcontext__ToolContext__compute_nit_dir(val* self);
 val* VIRTUAL_phase__ToolContext__phases(val* self);
 val* VIRTUAL_phase__ToolContext__opt_disable_phase(val* self);
 val* VIRTUAL_phase__ToolContext__phases_list(val* self);
+val* VIRTUAL_phase__ToolContext__phased_modules(val* self);
 void VIRTUAL_phase__ToolContext__run_phases(val* self, val* p0);
+void VIRTUAL_phase__ToolContext__phase_process_npropdef(val* self, val* p0, val* p1);
 val* VIRTUAL_scope__ToolContext__scope_phase(val* self);
 val* VIRTUAL_flow__ToolContext__flow_phase(val* self);
 val* VIRTUAL_local_var_init__ToolContext__local_var_init_phase(val* self);
@@ -100,26 +1466,32 @@ val* VIRTUAL_modelbuilder__ToolContext__opt_ignore_visibility(val* self);
 val* VIRTUAL_modelbuilder__ToolContext__modelbuilder(val* self);
 val* VIRTUAL_modelbuilder__ToolContext__modelbuilder_real(val* self);
 void VIRTUAL_modelbuilder__ToolContext__modelbuilder_real_61d(val* self, val* p0);
+val* VIRTUAL_mixin__ToolContext__make_main_module(val* self, val* p0);
 void VIRTUAL_modelbuilder__ToolContext__run_global_phases(val* self, val* p0);
 val* VIRTUAL_modelize_class__ToolContext__modelize_class_phase(val* self);
+val* VIRTUAL_mixin__ToolContext__opt_mixins(val* self);
+val* VIRTUAL_mixin__ToolContext__opt_defines(val* self);
 val* VIRTUAL_modelize_property__ToolContext__modelize_property_phase(val* self);
 val* VIRTUAL_platform__ToolContext__platform_from_name(val* self, val* p0);
 val* VIRTUAL_typing__ToolContext__typing_phase(val* self);
 val* VIRTUAL_auto_super_init__ToolContext__auto_super_init_phase(val* self);
+val* VIRTUAL_transform__ToolContext__opt_no_shortcut_range(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_output(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_dir(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_cc(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_main(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_cc_path(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_make_flags(val* self);
+val* VIRTUAL_abstract_compiler__ToolContext__opt_max_c_lines(val* self);
+val* VIRTUAL_abstract_compiler__ToolContext__opt_group_c_files(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_compile_dir(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_hardening(val* self);
-val* VIRTUAL_abstract_compiler__ToolContext__opt_no_shortcut_range(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_covariance(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_attr_isset(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_assert(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_autocast(val* self);
-val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_other(val* self);
+val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_null(val* self);
+val* VIRTUAL_abstract_compiler__ToolContext__opt_no_check_all(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_typing_test_metrics(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_invocation_metrics(val* self);
 val* VIRTUAL_abstract_compiler__ToolContext__opt_isset_checks_metrics(val* self);
@@ -141,143 +1513,154 @@ val* VIRTUAL_separate_erasure_compiler__ToolContext__opt_erasure(val* self);
 val* VIRTUAL_separate_erasure_compiler__ToolContext__opt_rta(val* self);
 val* VIRTUAL_separate_erasure_compiler__ToolContext__opt_no_check_erasure_cast(val* self);
 void VIRTUAL_separate_compiler__ToolContext__init(val* self);
-void VIRTUAL_separate_compiler__ToolContext__process_options(val* self, val* p0);
+void VIRTUAL_separate_erasure_compiler__ToolContext__process_options(val* self, val* p0);
 void VIRTUAL_abstract_compiler__ToolContext__init(val* self);
+void VIRTUAL_separate_compiler__ToolContext__process_options(val* self, val* p0);
+val* VIRTUAL_modelbuilder__ToolContext__make_main_module(val* self, val* p0);
+void VIRTUAL_transform__ToolContext__init(val* self);
 void VIRTUAL_abstract_compiler__ToolContext__process_options(val* self, val* p0);
-void VIRTUAL_modelbuilder__ToolContext__init(val* self);
+void VIRTUAL_mixin__ToolContext__init(val* self);
 void VIRTUAL_phase__ToolContext__process_options(val* self, val* p0);
-void VIRTUAL_phase__ToolContext__init(val* self);
+void VIRTUAL_modelbuilder__ToolContext__init(val* self);
 void VIRTUAL_toolcontext__ToolContext__process_options(val* self, val* p0);
+void VIRTUAL_phase__ToolContext__init(val* self);
 void VIRTUAL_toolcontext__ToolContext__init(val* self);
 extern const struct class class_toolcontext__ToolContext;
 #define COLOR_toolcontext__ToolContext___error_count 0
 #define COLOR_toolcontext__ToolContext___warning_count 1
 val* string__NativeString__to_s_with_length(char* self, long p0);
 #define COLOR_toolcontext__ToolContext___log_directory 2
-val* NEW_array__Array(const struct type* type);
 extern const struct type type_array__Arraytoolcontext__Message;
-void array__Array__init(val* self);
 #define COLOR_toolcontext__ToolContext___messages 3
-val* NEW_sorter__ComparableSorter(const struct type* type);
-extern const struct type type_sorter__ComparableSortertoolcontext__Message;
+val* sorter__Object__default_comparator(val* self);
 #define COLOR_toolcontext__ToolContext___message_sorter 4
 val* NEW_opts__OptionContext(const struct type* type);
 extern const struct type type_opts__OptionContext;
-void opts__OptionContext__init(val* self);
 #define COLOR_toolcontext__ToolContext___option_context 5
 val* NEW_opts__OptionCount(const struct type* type);
 extern const struct type type_opts__OptionCount;
-extern const struct type type_array__Arraystring__String;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraystring__String;
-#define COLOR_array__Array__with_native 65
+#define COLOR_array__Array__with_native 74
 void opts__OptionCount__init(val* self, val* p0, val* p1);
 #define COLOR_toolcontext__ToolContext___opt_warn 6
-val* NEW_opts__OptionBool(const struct type* type);
-extern const struct type type_opts__OptionBool;
-void opts__OptionBool__init(val* self, val* p0, val* p1);
-#define COLOR_toolcontext__ToolContext___opt_quiet 7
-#define COLOR_toolcontext__ToolContext___opt_log 8
-val* NEW_opts__OptionString(const struct type* type);
-extern const struct type type_opts__OptionString;
-void opts__OptionString__init(val* self, val* p0, val* p1);
-#define COLOR_toolcontext__ToolContext___opt_log_dir 9
-#define COLOR_toolcontext__ToolContext___opt_help 10
-#define COLOR_toolcontext__ToolContext___opt_version 11
-#define COLOR_toolcontext__ToolContext___opt_set_dummy_tool 12
-#define COLOR_toolcontext__ToolContext___opt_verbose 13
-#define COLOR_toolcontext__ToolContext___opt_stop_on_first_error 14
-#define COLOR_toolcontext__ToolContext___opt_no_color 15
-#define COLOR_toolcontext__ToolContext___opt_bash_completion 16
-#define COLOR_toolcontext__ToolContext___verbose_level 17
-#define COLOR_toolcontext__ToolContext___tooldescription 18
-#define COLOR_toolcontext__ToolContext___accept_no_arguments 19
-val* NEW_poset__POSet(const struct type* type);
-extern const struct type type_poset__POSetphase__Phase;
-#define COLOR_phase__ToolContext___phases 21
 val* NEW_opts__OptionArray(const struct type* type);
 extern const struct type type_opts__OptionArray;
 void opts__OptionArray__init(val* self, val* p0, val* p1);
-#define COLOR_phase__ToolContext___opt_disable_phase 22
+#define COLOR_toolcontext__ToolContext___opt_warning 7
+val* NEW_opts__OptionBool(const struct type* type);
+extern const struct type type_opts__OptionBool;
+void opts__OptionBool__init(val* self, val* p0, val* p1);
+#define COLOR_toolcontext__ToolContext___opt_quiet 8
+#define COLOR_toolcontext__ToolContext___opt_log 9
+val* NEW_opts__OptionString(const struct type* type);
+extern const struct type type_opts__OptionString;
+void opts__OptionString__init(val* self, val* p0, val* p1);
+#define COLOR_toolcontext__ToolContext___opt_log_dir 10
+#define COLOR_toolcontext__ToolContext___opt_help 11
+#define COLOR_toolcontext__ToolContext___opt_version 12
+#define COLOR_toolcontext__ToolContext___opt_set_dummy_tool 13
+#define COLOR_toolcontext__ToolContext___opt_verbose 14
+#define COLOR_toolcontext__ToolContext___opt_stop_on_first_error 15
+#define COLOR_toolcontext__ToolContext___opt_no_color 16
+#define COLOR_toolcontext__ToolContext___opt_bash_completion 17
+#define COLOR_toolcontext__ToolContext___opt_stub_man 18
+#define COLOR_toolcontext__ToolContext___verbose_level 19
+#define COLOR_toolcontext__ToolContext___tooldescription 20
+#define COLOR_toolcontext__ToolContext___accept_no_arguments 21
+#define COLOR_toolcontext__ToolContext___nit_dir 22
+extern const struct type type_poset__POSetphase__Phase;
+#define COLOR_phase__ToolContext___phases 23
+#define COLOR_phase__ToolContext___opt_disable_phase 24
+extern const struct type type_hash_collection__HashSetparser_nodes__AModule;
+#define COLOR_phase__ToolContext___phased_modules 25
 val* NEW_literal__LiteralPhase(const struct type* type);
 extern const struct type type_literal__LiteralPhase;
 void phase__Phase__init(val* self, val* p0, val* p1);
-#define COLOR_literal__ToolContext___literal_phase 23
+#define COLOR_literal__ToolContext___literal_phase 26
 val* NEW_scope__ScopePhase(const struct type* type);
 extern const struct type type_scope__ScopePhase;
-#define COLOR_scope__ToolContext___scope_phase 24
+#define COLOR_scope__ToolContext___scope_phase 27
 val* NEW_flow__FlowPhase(const struct type* type);
 extern const struct type type_flow__FlowPhase;
 extern const struct type type_array__Arrayphase__Phase;
 void array__Array__with_capacity(val* self, long p0);
 void array__AbstractArray__push(val* self, val* p0);
-#define COLOR_flow__ToolContext___flow_phase 25
+#define COLOR_flow__ToolContext___flow_phase 28
 val* NEW_local_var_init__LocalVarInitPhase(const struct type* type);
 extern const struct type type_local_var_init__LocalVarInitPhase;
-#define COLOR_local_var_init__ToolContext___local_var_init_phase 26
-#define COLOR_modelbuilder__ToolContext___opt_path 27
-#define COLOR_modelbuilder__ToolContext___opt_only_metamodel 28
-#define COLOR_modelbuilder__ToolContext___opt_only_parse 29
-#define COLOR_modelbuilder__ToolContext___opt_ignore_visibility 30
-#define COLOR_modelbuilder__ToolContext___modelbuilder_real 31
+#define COLOR_local_var_init__ToolContext___local_var_init_phase 29
+#define COLOR_modelbuilder__ToolContext___opt_path 30
+#define COLOR_modelbuilder__ToolContext___opt_only_metamodel 31
+#define COLOR_modelbuilder__ToolContext___opt_only_parse 32
+#define COLOR_modelbuilder__ToolContext___opt_ignore_visibility 33
+#define COLOR_modelbuilder__ToolContext___modelbuilder_real 34
 val* NEW_modelize_class__ModelizeClassPhase(const struct type* type);
 extern const struct type type_modelize_class__ModelizeClassPhase;
-#define COLOR_modelize_class__ToolContext___modelize_class_phase 32
+#define COLOR_modelize_class__ToolContext___modelize_class_phase 35
+#define COLOR_mixin__ToolContext___opt_mixins 36
+#define COLOR_mixin__ToolContext___opt_defines 37
 val* NEW_modelize_property__ModelizePropertyPhase(const struct type* type);
 extern const struct type type_modelize_property__ModelizePropertyPhase;
-#define COLOR_modelize_property__ToolContext___modelize_property_phase 33
+#define COLOR_modelize_property__ToolContext___modelize_property_phase 38
 val* NEW_platform__PlatformPhase(const struct type* type);
 extern const struct type type_platform__PlatformPhase;
-#define COLOR_platform__ToolContext___platform_phase 34
+#define COLOR_platform__ToolContext___platform_phase 39
 val* NEW_typing__TypingPhase(const struct type* type);
 extern const struct type type_typing__TypingPhase;
-#define COLOR_typing__ToolContext___typing_phase 35
+#define COLOR_typing__ToolContext___typing_phase 40
 val* NEW_auto_super_init__AutoSuperInitPhase(const struct type* type);
 extern const struct type type_auto_super_init__AutoSuperInitPhase;
-#define COLOR_auto_super_init__ToolContext___auto_super_init_phase 36
+#define COLOR_auto_super_init__ToolContext___auto_super_init_phase 41
 val* NEW_transform__TransformPhase(const struct type* type);
 extern const struct type type_transform__TransformPhase;
-#define COLOR_transform__ToolContext___transform_phase 37
-#define COLOR_abstract_compiler__ToolContext___opt_output 38
-#define COLOR_abstract_compiler__ToolContext___opt_dir 39
-#define COLOR_abstract_compiler__ToolContext___opt_no_cc 40
-#define COLOR_abstract_compiler__ToolContext___opt_no_main 41
-#define COLOR_abstract_compiler__ToolContext___opt_cc_path 42
-#define COLOR_abstract_compiler__ToolContext___opt_make_flags 43
-#define COLOR_abstract_compiler__ToolContext___opt_compile_dir 44
-#define COLOR_abstract_compiler__ToolContext___opt_hardening 45
-#define COLOR_abstract_compiler__ToolContext___opt_no_shortcut_range 46
-#define COLOR_abstract_compiler__ToolContext___opt_no_check_covariance 47
-#define COLOR_abstract_compiler__ToolContext___opt_no_check_attr_isset 48
-#define COLOR_abstract_compiler__ToolContext___opt_no_check_assert 49
-#define COLOR_abstract_compiler__ToolContext___opt_no_check_autocast 50
-#define COLOR_abstract_compiler__ToolContext___opt_no_check_other 51
-#define COLOR_abstract_compiler__ToolContext___opt_typing_test_metrics 52
-#define COLOR_abstract_compiler__ToolContext___opt_invocation_metrics 53
-#define COLOR_abstract_compiler__ToolContext___opt_isset_checks_metrics 54
-#define COLOR_abstract_compiler__ToolContext___opt_stacktrace 55
-#define COLOR_abstract_compiler__ToolContext___opt_no_gcc_directive 56
-#define COLOR_abstract_compiler__ToolContext___opt_release 57
-#define COLOR_separate_compiler__ToolContext___opt_separate 58
-#define COLOR_separate_compiler__ToolContext___opt_no_inline_intern 59
-#define COLOR_separate_compiler__ToolContext___opt_no_union_attribute 60
-#define COLOR_separate_compiler__ToolContext___opt_no_shortcut_equate 61
-#define COLOR_separate_compiler__ToolContext___opt_inline_coloring_numbers 62
-#define COLOR_separate_compiler__ToolContext___opt_inline_some_methods 63
-#define COLOR_separate_compiler__ToolContext___opt_direct_call_monomorph 64
-#define COLOR_separate_compiler__ToolContext___opt_skip_dead_methods 65
-#define COLOR_separate_compiler__ToolContext___opt_semi_global 66
-#define COLOR_separate_compiler__ToolContext___opt_colo_dead_methods 67
-#define COLOR_separate_compiler__ToolContext___opt_tables_metrics 68
+#define COLOR_transform__ToolContext___transform_phase 42
+#define COLOR_transform__ToolContext___opt_no_shortcut_range 43
+#define COLOR_abstract_compiler__ToolContext___opt_output 44
+#define COLOR_abstract_compiler__ToolContext___opt_dir 45
+#define COLOR_abstract_compiler__ToolContext___opt_no_cc 46
+#define COLOR_abstract_compiler__ToolContext___opt_no_main 47
+#define COLOR_abstract_compiler__ToolContext___opt_cc_path 48
+#define COLOR_abstract_compiler__ToolContext___opt_make_flags 49
+val* NEW_opts__OptionInt(const struct type* type);
+extern const struct type type_opts__OptionInt;
+void opts__OptionInt__init(val* self, val* p0, long p1, val* p2);
+#define COLOR_abstract_compiler__ToolContext___opt_max_c_lines 50
+#define COLOR_abstract_compiler__ToolContext___opt_group_c_files 51
+#define COLOR_abstract_compiler__ToolContext___opt_compile_dir 52
+#define COLOR_abstract_compiler__ToolContext___opt_hardening 53
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_covariance 54
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_attr_isset 55
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_assert 56
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_autocast 57
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_null 58
+#define COLOR_abstract_compiler__ToolContext___opt_no_check_all 59
+#define COLOR_abstract_compiler__ToolContext___opt_typing_test_metrics 60
+#define COLOR_abstract_compiler__ToolContext___opt_invocation_metrics 61
+#define COLOR_abstract_compiler__ToolContext___opt_isset_checks_metrics 62
+#define COLOR_abstract_compiler__ToolContext___opt_stacktrace 63
+#define COLOR_abstract_compiler__ToolContext___opt_no_gcc_directive 64
+#define COLOR_abstract_compiler__ToolContext___opt_release 65
+#define COLOR_separate_compiler__ToolContext___opt_separate 66
+#define COLOR_separate_compiler__ToolContext___opt_no_inline_intern 67
+#define COLOR_separate_compiler__ToolContext___opt_no_union_attribute 68
+#define COLOR_separate_compiler__ToolContext___opt_no_shortcut_equate 69
+#define COLOR_separate_compiler__ToolContext___opt_inline_coloring_numbers 70
+#define COLOR_separate_compiler__ToolContext___opt_inline_some_methods 71
+#define COLOR_separate_compiler__ToolContext___opt_direct_call_monomorph 72
+#define COLOR_separate_compiler__ToolContext___opt_skip_dead_methods 73
+#define COLOR_separate_compiler__ToolContext___opt_semi_global 74
+#define COLOR_separate_compiler__ToolContext___opt_colo_dead_methods 75
+#define COLOR_separate_compiler__ToolContext___opt_tables_metrics 76
 val* NEW_separate_compiler__SeparateCompilerPhase(const struct type* type);
 extern const struct type type_separate_compiler__SeparateCompilerPhase;
-#define COLOR_separate_compiler__ToolContext___separate_compiler_phase 69
-#define COLOR_separate_erasure_compiler__ToolContext___opt_erasure 70
-#define COLOR_separate_erasure_compiler__ToolContext___opt_rta 71
-#define COLOR_separate_erasure_compiler__ToolContext___opt_no_check_erasure_cast 72
+#define COLOR_separate_compiler__ToolContext___separate_compiler_phase 77
+#define COLOR_separate_erasure_compiler__ToolContext___opt_erasure 78
+#define COLOR_separate_erasure_compiler__ToolContext___opt_rta 79
+#define COLOR_separate_erasure_compiler__ToolContext___opt_no_check_erasure_cast 80
 val* NEW_separate_erasure_compiler__ErasureCompilerPhase(const struct type* type);
 extern const struct type type_separate_erasure_compiler__ErasureCompilerPhase;
-#define COLOR_separate_erasure_compiler__ToolContext___erasure_compiler_phase 73
+#define COLOR_separate_erasure_compiler__ToolContext___erasure_compiler_phase 81
 void VIRTUAL_template__Template__write_to(val* self, val* p0);
 void VIRTUAL_toolcontext__BashCompletion__rendering(val* self);
 void VIRTUAL_template__Template__add(val* self, val* p0);
@@ -291,7 +1674,6 @@ void VIRTUAL_template__Template__render_done_61d(val* self, short int p0);
 void VIRTUAL_template__Template__force_render(val* self);
 short int VIRTUAL_template__Template__is_writing(val* self);
 void VIRTUAL_template__Template__is_writing_61d(val* self, short int p0);
-void VIRTUAL_template__Template__init(val* self);
 val* VIRTUAL_toolcontext__BashCompletion__toolcontext(val* self);
 void VIRTUAL_toolcontext__BashCompletion__toolcontext_61d(val* self, val* p0);
 void VIRTUAL_toolcontext__BashCompletion__init(val* self, val* p0);
@@ -335,20 +1717,18 @@ short int VIRTUAL_opts__OptionParameter__parameter_mandatory(val* self);
 void VIRTUAL_opts__OptionString__init(val* self, val* p0, val* p1);
 extern const struct class class_opts__OptionString;
 #define COLOR_opts__OptionParameter___parameter_mandatory 8
+val* VIRTUAL_opts__OptionInt__convert(val* self, val* p0);
+void VIRTUAL_opts__OptionInt__init(val* self, val* p0, long p1, val* p2);
+extern const struct class class_opts__OptionInt;
 val* VIRTUAL_opts__OptionArray__convert(val* self, val* p0);
 void VIRTUAL_opts__OptionArray__init(val* self, val* p0, val* p1);
 val* VIRTUAL_opts__OptionArray__values(val* self);
 void VIRTUAL_opts__OptionArray__values_61d(val* self, val* p0);
 extern const struct class class_opts__OptionArray;
 val* VIRTUAL_opts__OptionContext__options(val* self);
-void VIRTUAL_opts__OptionContext__options_61d(val* self, val* p0);
 val* VIRTUAL_opts__OptionContext__rest(val* self);
-void VIRTUAL_opts__OptionContext__rest_61d(val* self, val* p0);
 val* VIRTUAL_opts__OptionContext__errors(val* self);
-void VIRTUAL_opts__OptionContext__errors_61d(val* self, val* p0);
 val* VIRTUAL_opts__OptionContext__optmap(val* self);
-void VIRTUAL_opts__OptionContext__optmap_61d(val* self, val* p0);
-void VIRTUAL_opts__OptionContext__init(val* self);
 void VIRTUAL_opts__OptionContext__add_option(val* self, val* p0);
 void VIRTUAL_opts__OptionContext__usage(val* self);
 void VIRTUAL_opts__OptionContext__parse(val* self, val* p0);
@@ -356,674 +1736,12 @@ void VIRTUAL_opts__OptionContext__parse_intern(val* self, val* p0);
 void VIRTUAL_opts__OptionContext__build(val* self);
 val* VIRTUAL_opts__OptionContext__get_errors(val* self);
 extern const struct class class_opts__OptionContext;
-short int VIRTUAL_kernel__Pointer__address_is_null(val* self);
-val* VIRTUAL_string__FlatSubstringsIter__item(val* self);
-void VIRTUAL_string__FlatSubstringsIter__next(val* self);
-short int VIRTUAL_string__FlatSubstringsIter__is_ok(val* self);
-val* VIRTUAL_abstract_collection__Iterator__iterator(val* self);
-val* VIRTUAL_array__Iterator__to_a(val* self);
-val* VIRTUAL_string__FlatSubstringsIter__tgt(val* self);
-void VIRTUAL_string__FlatSubstringsIter__tgt_61d(val* self, val* p0);
-void VIRTUAL_string__FlatSubstringsIter__init(val* self, val* p0);
-extern const struct class class_string__FlatSubstringsIter;
-short int VIRTUAL_string__FlatString___61d_61d(val* self, val* p0);
-long VIRTUAL_string__FlatString__hash(val* self);
-val* VIRTUAL_string__String__to_s(val* self);
-short int VIRTUAL_string__FlatString___60d(val* self, val* p0);
-char* VIRTUAL_string__StringCapable__calloc_string(val* self, long p0);
-long VIRTUAL_string_search__Text__search_index_in(val* self, val* p0, long p1);
-val* VIRTUAL_string_search__Text__search_in(val* self, val* p0, long p1);
-val* VIRTUAL_string_search__Pattern__split_in(val* self, val* p0);
-void VIRTUAL_stream__Text__write_to(val* self, val* p0);
-val* VIRTUAL_string__FlatString__chars(val* self);
-long VIRTUAL_string__FlatText__length(val* self);
-val* VIRTUAL_string__FlatString__substring(val* self, long p0, long p1);
-val* VIRTUAL_string__FlatString__substrings(val* self);
-short int VIRTUAL_string__Text__is_empty(val* self);
-val* VIRTUAL_string__FlatString__empty(val* self);
-char* VIRTUAL_string__FlatString__to_cstring(val* self);
-val* VIRTUAL_string__Text__substring_from(val* self, long p0);
-short int VIRTUAL_string__Text__has_substring(val* self, val* p0, long p1);
-short int VIRTUAL_string__Text__has_prefix(val* self, val* p0);
-short int VIRTUAL_string__Text__has_suffix(val* self, val* p0);
-long VIRTUAL_string__Text__to_i(val* self);
-double VIRTUAL_string__Text__to_f(val* self);
-long VIRTUAL_string__Text__to_hex(val* self);
-long VIRTUAL_string__Text__a_to(val* self, long p0);
-val* VIRTUAL_string__Text__to_cmangle(val* self);
-val* VIRTUAL_string__Text__escape_to_c(val* self);
-val* VIRTUAL_string__Text__unescape_nit(val* self);
-val* VIRTUAL_string__Text__hash_cache(val* self);
-void VIRTUAL_string__Text__hash_cache_61d(val* self, val* p0);
-void VIRTUAL_string__Text__init(val* self);
-val* VIRTUAL_string_search__Text__split(val* self, val* p0);
-val* VIRTUAL_string_search__Text__split_with(val* self, val* p0);
-char* VIRTUAL_string__FlatText__items(val* self);
-void VIRTUAL_string__FlatText__items_61d(val* self, char* p0);
-val* VIRTUAL_string__FlatText__real_items(val* self);
-void VIRTUAL_string__FlatText__real_items_61d(val* self, val* p0);
-void VIRTUAL_string__FlatText__length_61d(val* self, long p0);
-void VIRTUAL_string__FlatText__init(val* self);
-val* VIRTUAL_string__FlatString___43d(val* self, val* p0);
-val* VIRTUAL_string__FlatString___42d(val* self, long p0);
-val* VIRTUAL_string__FlatString__to_lower(val* self);
-val* VIRTUAL_environ__String__environ(val* self);
-short int VIRTUAL_file__String__file_exists(val* self);
-void VIRTUAL_file__String__file_copy_to(val* self, val* p0);
-val* VIRTUAL_file__String__strip_extension(val* self, val* p0);
-val* VIRTUAL_file__String__basename(val* self, val* p0);
-val* VIRTUAL_file__String__dirname(val* self);
-val* VIRTUAL_file__String__realpath(val* self);
-val* VIRTUAL_file__String__simplify_path(val* self);
-val* VIRTUAL_file__String__join_path(val* self, val* p0);
-void VIRTUAL_file__String__mkdir(val* self);
-val* VIRTUAL_file__String__file_extension(val* self);
-long VIRTUAL_string__FlatString__index_from(val* self);
-void VIRTUAL_string__FlatString__index_from_61d(val* self, long p0);
-long VIRTUAL_string__FlatString__index_to(val* self);
-void VIRTUAL_string__FlatString__index_to_61d(val* self, long p0);
-void VIRTUAL_string__FlatString__with_infos(val* self, char* p0, long p1, long p2, long p3);
-short int VIRTUAL_string__Text___61d_61d(val* self, val* p0);
-short int VIRTUAL_string__Text___60d(val* self, val* p0);
-extern const struct class class_string__FlatString;
-#define COLOR_string__Text___hash_cache 0
-#define COLOR_string__FlatText___real_items 2
-#define COLOR_string__FlatText___length 3
-val* NEW_string__FlatStringCharView(const struct type* type);
-extern const struct type type_string__FlatStringCharView;
-void string__StringCharView__init(val* self, val* p0);
-#define COLOR_string__FlatString___chars 6
-val* VIRTUAL_string__FlatStringIterator__item(val* self);
-void VIRTUAL_string__FlatStringIterator__next(val* self);
-short int VIRTUAL_string__FlatStringIterator__is_ok(val* self);
-long VIRTUAL_string__FlatStringIterator__index(val* self);
-val* VIRTUAL_string__FlatStringIterator__target(val* self);
-void VIRTUAL_string__FlatStringIterator__target_61d(val* self, val* p0);
-char* VIRTUAL_string__FlatStringIterator__target_items(val* self);
-void VIRTUAL_string__FlatStringIterator__target_items_61d(val* self, char* p0);
-long VIRTUAL_string__FlatStringIterator__curr_pos(val* self);
-void VIRTUAL_string__FlatStringIterator__curr_pos_61d(val* self, long p0);
-void VIRTUAL_string__FlatStringIterator__with_pos(val* self, val* p0, long p1);
-extern const struct class class_string__FlatStringIterator;
-short int VIRTUAL_abstract_collection__SequenceRead___61d_61d(val* self, val* p0);
-long VIRTUAL_abstract_collection__SequenceRead__hash(val* self);
-val* VIRTUAL_string__Collection__to_s(val* self);
-val* VIRTUAL_string__StringCharView__iterator(val* self);
-short int VIRTUAL_string__StringCharView__is_empty(val* self);
-long VIRTUAL_string__StringCharView__length(val* self);
-short int VIRTUAL_abstract_collection__Collection__has(val* self, val* p0);
-val* VIRTUAL_abstract_collection__SequenceRead__first(val* self);
-short int VIRTUAL_abstract_collection__Collection__has_all(val* self, val* p0);
-val* VIRTUAL_array__Collection__to_a(val* self);
-val* VIRTUAL_string__Collection__join(val* self, val* p0);
-val* VIRTUAL_string__FlatStringCharView___91d_93d(val* self, long p0);
-val* VIRTUAL_abstract_collection__SequenceRead__last(val* self);
-long VIRTUAL_abstract_collection__SequenceRead__index_of(val* self, val* p0);
-long VIRTUAL_abstract_collection__SequenceRead__last_index_of(val* self, val* p0);
-long VIRTUAL_abstract_collection__SequenceRead__index_of_from(val* self, val* p0, long p1);
-long VIRTUAL_abstract_collection__SequenceRead__last_index_of_from(val* self, val* p0, long p1);
-val* VIRTUAL_string__FlatStringCharView__iterator_from(val* self, long p0);
-val* VIRTUAL_string__StringCharView__target(val* self);
-void VIRTUAL_string__StringCharView__target_61d(val* self, val* p0);
-void VIRTUAL_string__StringCharView__init(val* self, val* p0);
-extern const struct class class_string__FlatStringCharView;
-long VIRTUAL_string__Buffer__hash(val* self);
-val* VIRTUAL_string__FlatBuffer__to_s(val* self);
-val* VIRTUAL_string__FlatBuffer__chars(val* self);
-val* VIRTUAL_string__FlatBuffer__substring(val* self, long p0, long p1);
-val* VIRTUAL_string__FlatBuffer__substrings(val* self);
-val* VIRTUAL_string__FlatBuffer__empty(val* self);
-char* VIRTUAL_string__FlatBuffer__to_cstring(val* self);
-short int VIRTUAL_string__Buffer__is_dirty(val* self);
-void VIRTUAL_string__Buffer__is_dirty_61d(val* self, short int p0);
-void VIRTUAL_string__FlatBuffer__add(val* self, char p0);
-void VIRTUAL_string__FlatBuffer__enlarge(val* self, long p0);
-void VIRTUAL_string__FlatBuffer__append(val* self, val* p0);
-long VIRTUAL_string__Text__hash(val* self);
-long VIRTUAL_string__FlatBuffer__capacity(val* self);
-void VIRTUAL_string__FlatBuffer__capacity_61d(val* self, long p0);
-void VIRTUAL_string__FlatBuffer__init(val* self);
-void VIRTUAL_string__FlatBuffer__from(val* self, val* p0);
-void VIRTUAL_string__FlatBuffer__with_capacity(val* self, long p0);
-extern const struct class class_string__FlatBuffer;
-#define COLOR_string__Buffer___is_dirty 4
-val* NEW_string__FlatBufferCharView(const struct type* type);
-extern const struct type type_string__FlatBufferCharView;
-#define COLOR_string__FlatBuffer___chars 5
-#define COLOR_string__FlatBuffer___capacity 6
-val* VIRTUAL_string__FlatBufferCharView___91d_93d(val* self, long p0);
-val* VIRTUAL_string__FlatBufferCharView__iterator_from(val* self, long p0);
-void VIRTUAL_abstract_collection__RemovableCollection__clear(val* self);
-void VIRTUAL_abstract_collection__RemovableCollection__remove(val* self, val* p0);
-void VIRTUAL_string__FlatBufferCharView__add(val* self, val* p0);
-void VIRTUAL_abstract_collection__SimpleCollection__add_all(val* self, val* p0);
-void VIRTUAL_abstract_collection__Sequence__first_61d(val* self, val* p0);
-void VIRTUAL_string__FlatBufferCharView__push(val* self, val* p0);
-void VIRTUAL_string__FlatBufferCharView__append(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Sequence__pop(val* self);
-void VIRTUAL_abstract_collection__Sequence__unshift(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Sequence__shift(val* self);
-void VIRTUAL_string__FlatBufferCharView___91d_93d_61d(val* self, long p0, val* p1);
-void VIRTUAL_abstract_collection__Sequence__remove_at(val* self, long p0);
-void VIRTUAL_string__FlatBufferCharView__enlarge(val* self, long p0);
-extern const struct class class_string__FlatBufferCharView;
-val* VIRTUAL_string__FlatBufferIterator__item(val* self);
-void VIRTUAL_string__FlatBufferIterator__next(val* self);
-short int VIRTUAL_string__FlatBufferIterator__is_ok(val* self);
-long VIRTUAL_string__FlatBufferIterator__index(val* self);
-val* VIRTUAL_string__FlatBufferIterator__target(val* self);
-void VIRTUAL_string__FlatBufferIterator__target_61d(val* self, val* p0);
-char* VIRTUAL_string__FlatBufferIterator__target_items(val* self);
-void VIRTUAL_string__FlatBufferIterator__target_items_61d(val* self, char* p0);
-long VIRTUAL_string__FlatBufferIterator__curr_pos(val* self);
-void VIRTUAL_string__FlatBufferIterator__curr_pos_61d(val* self, long p0);
-void VIRTUAL_string__FlatBufferIterator__with_pos(val* self, val* p0, long p1);
-extern const struct class class_string__FlatBufferIterator;
-val* VIRTUAL_string__NativeString__to_s(val* self);
-char VIRTUAL_string__NativeString___91d_93d(val* self, long p0);
-void VIRTUAL_string__NativeString___91d_93d_61d(val* self, long p0, char p1);
-void VIRTUAL_string__NativeString__copy_to(val* self, char* p0, long p1, long p2, long p3);
-long VIRTUAL_string__NativeString__cstring_length(val* self);
-long VIRTUAL_string__NativeString__atoi(val* self);
-double VIRTUAL_string__NativeString__atof(val* self);
-val* VIRTUAL_string__NativeString__to_s_with_length(val* self, long p0);
-val* VIRTUAL_string__NativeString__to_s_with_copy(val* self);
-char* VIRTUAL_environ__NativeString__get_environ(val* self);
-long VIRTUAL_exec__NativeString__system(val* self);
-short int VIRTUAL_file__NativeString__file_exists(val* self);
-short int VIRTUAL_file__NativeString__file_mkdir(val* self);
-char* VIRTUAL_file__NativeString__file_realpath(val* self);
-extern const struct type type_string__NativeString;
-extern const struct class class_string__NativeString;
-void VIRTUAL_abstract_compiler__Sys__main(val* self);
-long VIRTUAL_kernel__Sys__errno(val* self);
-void VIRTUAL_kernel__Sys__init(val* self);
-val* VIRTUAL_string__Sys__program_args(val* self);
-val* VIRTUAL_string__Sys__program_name(val* self);
-void VIRTUAL_string__Sys__init_args(val* self);
-long VIRTUAL_string__Sys__native_argc(val* self);
-char* VIRTUAL_string__Sys__native_argv(val* self, long p0);
-long VIRTUAL_exec__Sys__system(val* self, val* p0);
-val* VIRTUAL_file__Sys__stdout(val* self);
-val* VIRTUAL_file__Sys__stderr(val* self);
-extern const struct class class_kernel__Sys;
-val* NEW_file__Stdin(const struct type* type);
-extern const struct type type_file__Stdin;
-void file__Stdin__init(val* self);
-#define COLOR_file__Sys___stdin 1
-val* NEW_file__Stdout(const struct type* type);
-extern const struct type type_file__Stdout;
-void file__Stdout__init(val* self);
-#define COLOR_file__Sys___stdout 2
-val* NEW_file__Stderr(const struct type* type);
-extern const struct type type_file__Stderr;
-void file__Stderr__init(val* self);
-#define COLOR_file__Sys___stderr 3
-long VIRTUAL_kernel__Bool__object_id(val* self);
-short int VIRTUAL_kernel__Bool___61d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Bool___33d_61d(val* self, val* p0);
-long VIRTUAL_kernel__Bool__hash(val* self);
-val* VIRTUAL_string__Bool__to_s(val* self);
-long VIRTUAL_kernel__Bool__to_i(val* self);
-extern const struct type type_kernel__Bool;
-extern const struct class class_kernel__Bool;
-long VIRTUAL_kernel__Float__object_id(val* self);
-val* VIRTUAL_string__Float__to_s(val* self);
-short int VIRTUAL_kernel__Float___60d(val* self, val* p0);
-short int VIRTUAL_kernel__Float___60d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Float___62d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Float___62d(val* self, val* p0);
-val* VIRTUAL_kernel__Float___43d(val* self, val* p0);
-val* VIRTUAL_kernel__Float___45d(val* self, val* p0);
-val* VIRTUAL_kernel__Float__unary_32d_45d(val* self);
-val* VIRTUAL_kernel__Float___42d(val* self, val* p0);
-val* VIRTUAL_kernel__Float___47d(val* self, val* p0);
-long VIRTUAL_kernel__Float__to_i(val* self);
-double VIRTUAL_kernel__Float__to_f(val* self);
-short int VIRTUAL_math__Float__is_nan(val* self);
-long VIRTUAL_math__Float__is_inf(val* self);
-short int VIRTUAL_math__Float__is_inf_extern(val* self);
-val* VIRTUAL_string__Float__to_precision(val* self, long p0);
-extern const struct type type_kernel__Float;
-extern const struct class class_kernel__Float;
-long VIRTUAL_kernel__Int__object_id(val* self);
-short int VIRTUAL_kernel__Int___61d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Int___33d_61d(val* self, val* p0);
-long VIRTUAL_kernel__Int__hash(val* self);
-val* VIRTUAL_string__Int__to_s(val* self);
-short int VIRTUAL_kernel__Int___60d(val* self, val* p0);
-short int VIRTUAL_kernel__Int___60d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Int___62d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Int___62d(val* self, val* p0);
-long VIRTUAL_kernel__Int___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_kernel__Int__successor(val* self, long p0);
-val* VIRTUAL_kernel__Int___43d(val* self, val* p0);
-val* VIRTUAL_kernel__Int___45d(val* self, val* p0);
-val* VIRTUAL_kernel__Int__unary_32d_45d(val* self);
-val* VIRTUAL_kernel__Int__predecessor(val* self, long p0);
-long VIRTUAL_kernel__Int__distance(val* self, val* p0);
-val* VIRTUAL_kernel__Int___42d(val* self, val* p0);
-val* VIRTUAL_kernel__Int___47d(val* self, val* p0);
-long VIRTUAL_kernel__Int__to_i(val* self);
-double VIRTUAL_kernel__Int__to_f(val* self);
-long VIRTUAL_kernel__Int___37d(val* self, long p0);
-long VIRTUAL_kernel__Int__lshift(val* self, long p0);
-char VIRTUAL_kernel__Int__ascii(val* self);
-long VIRTUAL_kernel__Int__digit_count(val* self, long p0);
-long VIRTUAL_kernel__Int__digit_count_base_95d10(val* self);
-char VIRTUAL_kernel__Int__to_c(val* self);
-char* VIRTUAL_string__Int__strerror_ext(val* self);
-val* VIRTUAL_string__Int__strerror(val* self);
-void VIRTUAL_string__Int__fill_buffer(val* self, val* p0, long p1, short int p2);
-char* VIRTUAL_string__Int__native_int_to_s(val* self);
-val* VIRTUAL_string__Int__to_hex(val* self);
-val* VIRTUAL_string__Int__to_base(val* self, long p0, short int p1);
-extern const struct type type_kernel__Int;
-extern const struct class class_kernel__Int;
-long VIRTUAL_kernel__Char__object_id(val* self);
-short int VIRTUAL_kernel__Char___61d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Char___33d_61d(val* self, val* p0);
-long VIRTUAL_kernel__Char__hash(val* self);
-val* VIRTUAL_string__Char__to_s(val* self);
-short int VIRTUAL_kernel__Char___60d(val* self, val* p0);
-short int VIRTUAL_kernel__Char___60d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Char___62d_61d(val* self, val* p0);
-short int VIRTUAL_kernel__Char___62d(val* self, val* p0);
-val* VIRTUAL_kernel__Char__successor(val* self, long p0);
-long VIRTUAL_string_search__Char__search_index_in(val* self, val* p0, long p1);
-val* VIRTUAL_string_search__Char__search_in(val* self, val* p0, long p1);
-val* VIRTUAL_kernel__Char__predecessor(val* self, long p0);
-long VIRTUAL_kernel__Char__distance(val* self, val* p0);
-long VIRTUAL_kernel__Char__to_i(val* self);
-long VIRTUAL_kernel__Char__ascii(val* self);
-char VIRTUAL_kernel__Char__to_lower(val* self);
-short int VIRTUAL_kernel__Char__is_digit(val* self);
-short int VIRTUAL_kernel__Char__is_upper(val* self);
-extern const struct type type_kernel__Char;
-extern const struct class class_kernel__Char;
-extern const struct type type_kernel__Pointer;
-extern const struct class class_kernel__Pointer;
-val* VIRTUAL_abstract_collection__ContainerIterator__item(val* self);
-void VIRTUAL_abstract_collection__ContainerIterator__next(val* self);
-short int VIRTUAL_abstract_collection__ContainerIterator__is_ok(val* self);
-void VIRTUAL_abstract_collection__ContainerIterator__init(val* self, val* p0);
-void VIRTUAL_abstract_collection__ContainerIterator__is_ok_61d(val* self, short int p0);
-extern const struct class class_abstract_collection__ContainerIterator;
-#define COLOR_abstract_collection__ContainerIterator___is_ok 0
-val* VIRTUAL_abstract_collection__MapKeysIterator__item(val* self);
-void VIRTUAL_abstract_collection__MapKeysIterator__next(val* self);
-short int VIRTUAL_abstract_collection__MapKeysIterator__is_ok(val* self);
-val* VIRTUAL_abstract_collection__MapKeysIterator__original_iterator(val* self);
-void VIRTUAL_abstract_collection__MapKeysIterator__init(val* self, val* p0);
-extern const struct class class_abstract_collection__MapKeysIterator;
-val* VIRTUAL_abstract_collection__MapValuesIterator__item(val* self);
-void VIRTUAL_abstract_collection__MapValuesIterator__next(val* self);
-short int VIRTUAL_abstract_collection__MapValuesIterator__is_ok(val* self);
-val* VIRTUAL_abstract_collection__MapValuesIterator__original_iterator(val* self);
-void VIRTUAL_abstract_collection__MapValuesIterator__init(val* self, val* p0);
-extern const struct class class_abstract_collection__MapValuesIterator;
-val* VIRTUAL_abstract_collection__CoupleMapIterator__item(val* self);
-val* VIRTUAL_abstract_collection__CoupleMapIterator__key(val* self);
-void VIRTUAL_abstract_collection__CoupleMapIterator__next(val* self);
-short int VIRTUAL_abstract_collection__CoupleMapIterator__is_ok(val* self);
-void VIRTUAL_abstract_collection__CoupleMapIterator__init(val* self, val* p0);
-extern const struct class class_abstract_collection__CoupleMapIterator;
-val* VIRTUAL_abstract_collection__Couple__first(val* self);
-void VIRTUAL_abstract_collection__Couple__first_61d(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Couple__second(val* self);
-void VIRTUAL_abstract_collection__Couple__second_61d(val* self, val* p0);
-void VIRTUAL_abstract_collection__Couple__init(val* self, val* p0, val* p1);
-extern const struct class class_abstract_collection__Couple;
-val* VIRTUAL_range__Range__iterator(val* self);
-short int VIRTUAL_range__Range__is_empty(val* self);
-long VIRTUAL_range__Range__length(val* self);
-short int VIRTUAL_range__Range__has(val* self, val* p0);
-val* VIRTUAL_range__Range__first(val* self);
-void VIRTUAL_range__Range__first_61d(val* self, val* p0);
-val* VIRTUAL_range__Range__last(val* self);
-void VIRTUAL_range__Range__last_61d(val* self, val* p0);
-val* VIRTUAL_range__Range__after(val* self);
-void VIRTUAL_range__Range__after_61d(val* self, val* p0);
-void VIRTUAL_range__Range__init(val* self, val* p0, val* p1);
-void VIRTUAL_range__Range__without_last(val* self, val* p0, val* p1);
-extern const struct class class_range__Range;
-val* VIRTUAL_range__IteratorRange__item(val* self);
-void VIRTUAL_range__IteratorRange__next(val* self);
-short int VIRTUAL_range__IteratorRange__is_ok(val* self);
-void VIRTUAL_range__IteratorRange__init(val* self, val* p0);
-extern const struct class class_range__IteratorRange;
-val* VIRTUAL_list__List__iterator(val* self);
-short int VIRTUAL_list__List__is_empty(val* self);
-long VIRTUAL_list__List__length(val* self);
-short int VIRTUAL_list__List__has(val* self, val* p0);
-val* VIRTUAL_list__List__first(val* self);
-val* VIRTUAL_list__List___91d_93d(val* self, long p0);
-val* VIRTUAL_list__List__last(val* self);
-val* VIRTUAL_abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-void VIRTUAL_list__List__clear(val* self);
-void VIRTUAL_list__List__remove(val* self, val* p0);
-void VIRTUAL_abstract_collection__Sequence__add(val* self, val* p0);
-void VIRTUAL_list__List__first_61d(val* self, val* p0);
-void VIRTUAL_list__List__push(val* self, val* p0);
-void VIRTUAL_abstract_collection__Sequence__append(val* self, val* p0);
-val* VIRTUAL_list__List__pop(val* self);
-void VIRTUAL_list__List__unshift(val* self, val* p0);
-val* VIRTUAL_list__List__shift(val* self);
-void VIRTUAL_list__List___91d_93d_61d(val* self, long p0, val* p1);
-void VIRTUAL_list__List__remove_at(val* self, long p0);
-void VIRTUAL_list__List__init(val* self);
-val* VIRTUAL_list__List__get_node(val* self, long p0);
-val* VIRTUAL_list__List__search_node_after(val* self, val* p0, val* p1);
-void VIRTUAL_list__List__remove_node(val* self, val* p0);
-extern const struct class class_list__List;
-val* VIRTUAL_list__ListIterator__item(val* self);
-void VIRTUAL_list__ListIterator__next(val* self);
-short int VIRTUAL_list__ListIterator__is_ok(val* self);
-long VIRTUAL_list__ListIterator__index(val* self);
-void VIRTUAL_list__ListIterator__init(val* self, val* p0);
-extern const struct class class_list__ListIterator;
-val* VIRTUAL_abstract_collection__Container__iterator(val* self);
-short int VIRTUAL_abstract_collection__Container__is_empty(val* self);
-long VIRTUAL_abstract_collection__Container__length(val* self);
-short int VIRTUAL_abstract_collection__Container__has(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Container__first(val* self);
-void VIRTUAL_abstract_collection__Container__init(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Container__item(val* self);
-void VIRTUAL_abstract_collection__Container__item_61d(val* self, val* p0);
-void VIRTUAL_list__ListNode__init(val* self, val* p0);
-val* VIRTUAL_list__ListNode__next(val* self);
-void VIRTUAL_list__ListNode__next_61d(val* self, val* p0);
-val* VIRTUAL_list__ListNode__prev(val* self);
-void VIRTUAL_list__ListNode__prev_61d(val* self, val* p0);
-extern const struct class class_list__ListNode;
-val* VIRTUAL_string__Array__to_s(val* self);
-val* VIRTUAL_array__AbstractArrayRead__iterator(val* self);
-short int VIRTUAL_array__AbstractArrayRead__is_empty(val* self);
-long VIRTUAL_array__AbstractArrayRead__length(val* self);
-short int VIRTUAL_array__AbstractArrayRead__has(val* self, val* p0);
-val* VIRTUAL_array__ArrayCapable__calloc_array(val* self, long p0);
-val* VIRTUAL_array__Array___91d_93d(val* self, long p0);
-long VIRTUAL_array__AbstractArrayRead__index_of(val* self, val* p0);
-long VIRTUAL_array__AbstractArrayRead__last_index_of(val* self, val* p0);
-long VIRTUAL_array__AbstractArrayRead__index_of_from(val* self, val* p0, long p1);
-long VIRTUAL_array__AbstractArrayRead__last_index_of_from(val* self, val* p0, long p1);
-void VIRTUAL_array__AbstractArray__clear(val* self);
-void VIRTUAL_array__AbstractArray__remove(val* self, val* p0);
-val* VIRTUAL_array__AbstractArrayRead__reversed(val* self);
-void VIRTUAL_array__AbstractArrayRead__init(val* self);
-void VIRTUAL_array__Array__add(val* self, val* p0);
-void VIRTUAL_array__AbstractArray__push(val* self, val* p0);
-val* VIRTUAL_array__AbstractArray__pop(val* self);
-void VIRTUAL_array__AbstractArray__unshift(val* self, val* p0);
-val* VIRTUAL_array__AbstractArray__shift(val* self);
-void VIRTUAL_array__Array___91d_93d_61d(val* self, long p0, val* p1);
-void VIRTUAL_array__AbstractArray__remove_at(val* self, long p0);
-void VIRTUAL_array__Array__enlarge(val* self, long p0);
-void VIRTUAL_array__Array__init(val* self);
-void VIRTUAL_array__Array__with_items(val* self, val* p0);
-void VIRTUAL_array__Array__with_capacity(val* self, long p0);
-void VIRTUAL_array__Array__with_native(val* self, val* p0, long p1);
-extern const struct class class_array__Array;
-#define COLOR_array__AbstractArrayRead___length 0
-#define COLOR_array__Array___items 1
-#define COLOR_array__Array___capacity 2
-val* VIRTUAL_array__ArrayIterator__item(val* self);
-void VIRTUAL_array__ArrayIterator__next(val* self);
-short int VIRTUAL_array__ArrayIterator__is_ok(val* self);
-long VIRTUAL_array__ArrayIterator__index(val* self);
-void VIRTUAL_array__ArrayIterator__init(val* self, val* p0);
-extern const struct class class_array__ArrayIterator;
-#define COLOR_array__ArrayIterator___index 0
-short int VIRTUAL_abstract_collection__Set___61d_61d(val* self, val* p0);
-long VIRTUAL_abstract_collection__Set__hash(val* self);
-val* VIRTUAL_array__ArraySet__iterator(val* self);
-short int VIRTUAL_array__ArraySet__is_empty(val* self);
-long VIRTUAL_array__ArraySet__length(val* self);
-short int VIRTUAL_array__ArraySet__has(val* self, val* p0);
-val* VIRTUAL_array__ArraySet__first(val* self);
-void VIRTUAL_array__ArraySet__clear(val* self);
-void VIRTUAL_array__ArraySet__remove(val* self, val* p0);
-void VIRTUAL_array__ArraySet__add(val* self, val* p0);
-void VIRTUAL_array__ArraySet__remove_at(val* self, long p0);
-void VIRTUAL_array__ArraySet__init(val* self);
-extern const struct class class_array__ArraySet;
-val* VIRTUAL_array__ArraySetIterator__item(val* self);
-void VIRTUAL_array__ArraySetIterator__next(val* self);
-short int VIRTUAL_array__ArraySetIterator__is_ok(val* self);
-void VIRTUAL_array__ArraySetIterator__init(val* self, val* p0);
-extern const struct class class_array__ArraySetIterator;
-val* VIRTUAL_array__ArrayMap___91d_93d(val* self, val* p0);
-val* VIRTUAL_abstract_collection__MapRead__get_or_null(val* self, val* p0);
-short int VIRTUAL_abstract_collection__MapRead__has_key(val* self, val* p0);
-val* VIRTUAL_abstract_collection__CoupleMap__iterator(val* self);
-val* VIRTUAL_array__ArrayMap__values(val* self);
-val* VIRTUAL_array__ArrayMap__keys(val* self);
-short int VIRTUAL_array__ArrayMap__is_empty(val* self);
-long VIRTUAL_array__ArrayMap__length(val* self);
-val* VIRTUAL_abstract_collection__MapRead__provide_default_value(val* self, val* p0);
-void VIRTUAL_array__ArrayMap___91d_93d_61d(val* self, val* p0, val* p1);
-void VIRTUAL_array__ArrayMap__clear(val* self);
-val* VIRTUAL_array__ArrayMap__couple_iterator(val* self);
-void VIRTUAL_array__ArrayMap__remove_at_index(val* self, long p0);
-long VIRTUAL_array__ArrayMap__index(val* self, val* p0);
-void VIRTUAL_array__ArrayMap__init(val* self);
-extern const struct class class_array__ArrayMap;
-val* NEW_array__ArrayMapKeys(const struct type* type);
-#define COLOR_array__ArrayMapKeysarray__ArrayMap_FT0array__ArrayMap_FT1 0
-#define COLOR_array__ArrayMaparray__ArrayMapKeys_FT0array__ArrayMapKeys_FT1 0
-#define COLOR_array__ArrayMapKeys___map 0
-#define COLOR_array__ArrayMap___keys 0
-val* NEW_array__ArrayMapValues(const struct type* type);
-#define COLOR_array__ArrayMapValuesarray__ArrayMap_FT0array__ArrayMap_FT1 1
-#define COLOR_array__ArrayMaparray__ArrayMapValues_FT0array__ArrayMapValues_FT1 0
-#define COLOR_array__ArrayMapValues___map 0
-#define COLOR_array__ArrayMap___values 1
-#define COLOR_array__ArrayMap___last_index 3
-val* VIRTUAL_array__ArrayMapKeys__iterator(val* self);
-short int VIRTUAL_array__ArrayMapKeys__is_empty(val* self);
-long VIRTUAL_array__ArrayMapKeys__length(val* self);
-short int VIRTUAL_array__ArrayMapKeys__has(val* self, val* p0);
-val* VIRTUAL_array__ArrayMapKeys__first(val* self);
-void VIRTUAL_array__ArrayMapKeys__clear(val* self);
-void VIRTUAL_array__ArrayMapKeys__remove(val* self, val* p0);
-val* VIRTUAL_array__ArrayMapKeys__map(val* self);
-void VIRTUAL_array__ArrayMapKeys__init(val* self, val* p0);
-extern const struct class class_array__ArrayMapKeys;
-val* VIRTUAL_array__ArrayMapValues__iterator(val* self);
-short int VIRTUAL_array__ArrayMapValues__is_empty(val* self);
-long VIRTUAL_array__ArrayMapValues__length(val* self);
-short int VIRTUAL_array__ArrayMapValues__has(val* self, val* p0);
-val* VIRTUAL_array__ArrayMapValues__first(val* self);
-void VIRTUAL_array__ArrayMapValues__clear(val* self);
-void VIRTUAL_array__ArrayMapValues__remove(val* self, val* p0);
-val* VIRTUAL_array__ArrayMapValues__map(val* self);
-void VIRTUAL_array__ArrayMapValues__init(val* self, val* p0);
-extern const struct class class_array__ArrayMapValues;
-val* VIRTUAL_array__NativeArray___91d_93d(val* self, long p0);
-void VIRTUAL_array__NativeArray___91d_93d_61d(val* self, long p0, val* p1);
-void VIRTUAL_array__NativeArray__copy_to(val* self, val* p0, long p1);
-extern const struct class class_array__NativeArray;
-long VIRTUAL_sorter__DefaultComparator__compare(val* self, val* p0, val* p1);
-void VIRTUAL_sorter__Comparator__sort(val* self, val* p0);
-void VIRTUAL_sorter__Comparator__sub_sort(val* self, val* p0, long p1, long p2);
-void VIRTUAL_sorter__Comparator__quick_sort(val* self, val* p0, long p1, long p2);
-void VIRTUAL_sorter__Comparator__bubble_sort(val* self, val* p0, long p1, long p2);
-void VIRTUAL_sorter__DefaultComparator__init(val* self);
-extern const struct class class_sorter__ComparableSorter;
-val* VIRTUAL_hash_collection__HashMap___91d_93d(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashMap__iterator(val* self);
-val* VIRTUAL_hash_collection__HashMap__values(val* self);
-val* VIRTUAL_hash_collection__HashMap__keys(val* self);
-short int VIRTUAL_hash_collection__HashMap__is_empty(val* self);
-long VIRTUAL_hash_collection__HashMap__length(val* self);
-void VIRTUAL_hash_collection__HashMap___91d_93d_61d(val* self, val* p0, val* p1);
-void VIRTUAL_hash_collection__HashMap__clear(val* self);
-long VIRTUAL_hash_collection__HashCollection__index_at(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashCollection__node_at(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashCollection__node_at_idx(val* self, long p0, val* p1);
-void VIRTUAL_hash_collection__HashCollection__store(val* self, long p0, val* p1);
-void VIRTUAL_hash_collection__HashCollection__remove_node(val* self, val* p0);
-void VIRTUAL_hash_collection__HashCollection__raz(val* self);
-void VIRTUAL_hash_collection__HashCollection__enlarge(val* self, long p0);
-void VIRTUAL_hash_collection__HashCollection__init(val* self);
-void VIRTUAL_hash_collection__HashMap__init(val* self);
-extern const struct class class_hash_collection__HashMap;
-#define COLOR_hash_collection__HashCollection___array 0
-#define COLOR_hash_collection__HashCollection___capacity 1
-#define COLOR_hash_collection__HashCollection___length 2
-#define COLOR_hash_collection__HashCollection___first_item 3
-#define COLOR_hash_collection__HashCollection___last_item 4
-#define COLOR_hash_collection__HashCollection___last_accessed_key 5
-#define COLOR_hash_collection__HashCollection___last_accessed_node 6
-val* NEW_hash_collection__HashMapKeys(const struct type* type);
-#define COLOR_hash_collection__HashMapKeyshash_collection__HashMap_FT0hash_collection__HashMap_FT1 5
-#define COLOR_hash_collection__HashMaphash_collection__HashMapKeys_FT0hash_collection__HashMapKeys_FT1 0
-#define COLOR_hash_collection__HashMapKeys___map 0
-#define COLOR_hash_collection__HashMap___keys 7
-val* NEW_hash_collection__HashMapValues(const struct type* type);
-#define COLOR_hash_collection__HashMapValueshash_collection__HashMap_FT0hash_collection__HashMap_FT1 6
-#define COLOR_hash_collection__HashMaphash_collection__HashMapValues_FT0hash_collection__HashMapValues_FT1 0
-#define COLOR_hash_collection__HashMapValues___map 0
-#define COLOR_hash_collection__HashMap___values 8
-val* VIRTUAL_hash_collection__HashMapKeys__iterator(val* self);
-short int VIRTUAL_hash_collection__HashMapKeys__is_empty(val* self);
-long VIRTUAL_hash_collection__HashMapKeys__length(val* self);
-short int VIRTUAL_hash_collection__HashMapKeys__has(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashMapKeys__first(val* self);
-void VIRTUAL_hash_collection__HashMapKeys__clear(val* self);
-void VIRTUAL_hash_collection__HashMapKeys__remove(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashMapKeys__map(val* self);
-void VIRTUAL_hash_collection__HashMapKeys__init(val* self, val* p0);
-extern const struct class class_hash_collection__HashMapKeys;
-val* VIRTUAL_hash_collection__HashMapValues__iterator(val* self);
-short int VIRTUAL_hash_collection__HashMapValues__is_empty(val* self);
-long VIRTUAL_hash_collection__HashMapValues__length(val* self);
-short int VIRTUAL_hash_collection__HashMapValues__has(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashMapValues__first(val* self);
-void VIRTUAL_hash_collection__HashMapValues__clear(val* self);
-void VIRTUAL_hash_collection__HashMapValues__remove(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashMapValues__map(val* self);
-void VIRTUAL_hash_collection__HashMapValues__init(val* self, val* p0);
-extern const struct class class_hash_collection__HashMapValues;
-void VIRTUAL_hash_collection__HashNode__init(val* self, val* p0);
-void VIRTUAL_hash_collection__HashMapNode__init(val* self, val* p0, val* p1);
-extern const struct class class_hash_collection__HashMapNode;
-#define COLOR_hash_collection__HashNode___next_item 1
-#define COLOR_hash_collection__HashNode___prev_item 2
-#define COLOR_hash_collection__HashNode___prev_in_bucklet 3
-#define COLOR_hash_collection__HashNode___next_in_bucklet 4
-val* VIRTUAL_hash_collection__HashMapIterator__item(val* self);
-val* VIRTUAL_hash_collection__HashMapIterator__key(val* self);
-void VIRTUAL_hash_collection__HashMapIterator__next(val* self);
-short int VIRTUAL_hash_collection__HashMapIterator__is_ok(val* self);
-void VIRTUAL_hash_collection__HashMapIterator__init(val* self, val* p0);
-extern const struct class class_hash_collection__HashMapIterator;
-val* VIRTUAL_hash_collection__HashSet__iterator(val* self);
-short int VIRTUAL_hash_collection__HashSet__is_empty(val* self);
-long VIRTUAL_hash_collection__HashSet__length(val* self);
-short int VIRTUAL_hash_collection__HashSet__has(val* self, val* p0);
-val* VIRTUAL_hash_collection__HashSet__first(val* self);
-void VIRTUAL_hash_collection__HashSet__clear(val* self);
-void VIRTUAL_hash_collection__HashSet__remove(val* self, val* p0);
-void VIRTUAL_hash_collection__HashSet__add(val* self, val* p0);
-void VIRTUAL_hash_collection__HashSet__init(val* self);
-void VIRTUAL_hash_collection__HashSet__from(val* self, val* p0);
-extern const struct class class_hash_collection__HashSet;
-void VIRTUAL_hash_collection__HashSetNode__init(val* self, val* p0);
-extern const struct class class_hash_collection__HashSetNode;
-val* VIRTUAL_hash_collection__HashSetIterator__item(val* self);
-void VIRTUAL_hash_collection__HashSetIterator__next(val* self);
-short int VIRTUAL_hash_collection__HashSetIterator__is_ok(val* self);
-void VIRTUAL_hash_collection__HashSetIterator__init(val* self, val* p0);
-extern const struct class class_hash_collection__HashSetIterator;
-val* VIRTUAL_string_search__Match__to_s(val* self);
-val* VIRTUAL_string_search__Match__string(val* self);
-void VIRTUAL_string_search__Match__string_61d(val* self, val* p0);
-long VIRTUAL_string_search__Match__from(val* self);
-void VIRTUAL_string_search__Match__from_61d(val* self, long p0);
-long VIRTUAL_string_search__Match__length(val* self);
-void VIRTUAL_string_search__Match__length_61d(val* self, long p0);
-long VIRTUAL_string_search__Match__after(val* self);
-void VIRTUAL_string_search__Match__init(val* self, val* p0, long p1, long p2);
-extern const struct class class_string_search__Match;
-void VIRTUAL_file__IFStream__close(val* self);
-void VIRTUAL_file__FStream__path_61d(val* self, val* p0);
-void VIRTUAL_file__FStream__init(val* self);
-val* VIRTUAL_stream__BufferedIStream__read(val* self, long p0);
-val* VIRTUAL_stream__IStream__read_line(val* self);
-val* VIRTUAL_stream__BufferedIStream__read_all(val* self);
-void VIRTUAL_stream__BufferedIStream__append_line_to(val* self, val* p0);
-short int VIRTUAL_stream__BufferedIStream__eof(val* self);
-void VIRTUAL_file__IFStream__fill_buffer(val* self);
-short int VIRTUAL_file__IFStream__end_reached(val* self);
-void VIRTUAL_stream__BufferedIStream__prepare_buffer(val* self, long p0);
-void VIRTUAL_stream__BufferedIStream__init(val* self);
-void VIRTUAL_file__IFStream__end_reached_61d(val* self, short int p0);
-void VIRTUAL_file__IFStream__open(val* self, val* p0);
-void VIRTUAL_file__IFStream__init(val* self);
-extern const struct class class_file__IFStream;
-#define COLOR_file__FStream___path 0
-#define COLOR_file__FStream___file 1
-#define COLOR_stream__BufferedIStream___buffer 2
-#define COLOR_stream__BufferedIStream___buffer_pos 3
-#define COLOR_file__IFStream___end_reached 4
-void VIRTUAL_file__OFStream__close(val* self);
-void VIRTUAL_file__OFStream__write(val* self, val* p0);
-void VIRTUAL_file__OFStream__write_native(val* self, char* p0, long p1);
-void VIRTUAL_file__OFStream__open(val* self, val* p0);
-void VIRTUAL_file__OFStream__init(val* self);
-extern const struct class class_file__OFStream;
-void VIRTUAL_file__Stdin__init(val* self);
-extern const struct class class_file__Stdin;
-void VIRTUAL_file__Stdout__init(val* self);
-extern const struct class class_file__Stdout;
-void VIRTUAL_file__Stderr__init(val* self);
-extern const struct class class_file__Stderr;
-long VIRTUAL_file__NativeFile__io_read(val* self, char* p0, long p1);
-long VIRTUAL_file__NativeFile__io_write(val* self, char* p0, long p1);
-long VIRTUAL_file__NativeFile__io_close(val* self);
-void* VIRTUAL_file__NativeFile__io_open_read(val* self, char* p0);
-void* VIRTUAL_file__NativeFile__io_open_write(val* self, char* p0);
-void* VIRTUAL_file__NativeFile__native_stdin(val* self);
-void* VIRTUAL_file__NativeFile__native_stdout(val* self);
-void* VIRTUAL_file__NativeFile__native_stderr(val* self);
-extern const struct type type_file__NativeFile;
-extern const struct class class_file__NativeFile;
-val* VIRTUAL_location__SourceFile__filename(val* self);
-void VIRTUAL_location__SourceFile__filename_61d(val* self, val* p0);
-val* VIRTUAL_location__SourceFile__string(val* self);
-void VIRTUAL_location__SourceFile__string_61d(val* self, val* p0);
-void VIRTUAL_location__SourceFile__init(val* self, val* p0, val* p1);
-val* VIRTUAL_location__SourceFile__line_starts(val* self);
-void VIRTUAL_parser_nodes__SourceFile__first_token_61d(val* self, val* p0);
-void VIRTUAL_parser_nodes__SourceFile__last_token_61d(val* self, val* p0);
-extern const struct class class_location__SourceFile;
-extern const struct type type_array__Arraykernel__Int;
-#define COLOR_location__SourceFile___line_starts 2
-#define COLOR_parser_nodes__SourceFile___first_token 3
-#define COLOR_parser_nodes__SourceFile___last_token 4
-short int VIRTUAL_location__Location___61d_61d(val* self, val* p0);
-val* VIRTUAL_location__Location__to_s(val* self);
-short int VIRTUAL_location__Location___60d(val* self, val* p0);
-val* VIRTUAL_location__Location__file(val* self);
-void VIRTUAL_location__Location__file_61d(val* self, val* p0);
-long VIRTUAL_location__Location__line_start(val* self);
-void VIRTUAL_location__Location__line_start_61d(val* self, long p0);
-long VIRTUAL_location__Location__line_end(val* self);
-void VIRTUAL_location__Location__line_end_61d(val* self, long p0);
-long VIRTUAL_location__Location__column_start(val* self);
-void VIRTUAL_location__Location__column_start_61d(val* self, long p0);
-long VIRTUAL_location__Location__column_end(val* self);
-void VIRTUAL_location__Location__column_end_61d(val* self, long p0);
-void VIRTUAL_location__Location__init(val* self, val* p0, long p1, long p2, long p3, long p4);
-long VIRTUAL_location__Location__pstart(val* self);
-long VIRTUAL_location__Location__pend(val* self);
-val* VIRTUAL_location__Location__text(val* self);
-val* VIRTUAL_location__Location__text_cache(val* self);
-void VIRTUAL_location__Location__text_cache_61d(val* self, val* p0);
-short int VIRTUAL_location__Location__located_in(val* self, val* p0);
-val* VIRTUAL_location__Location__colored_line(val* self, val* p0);
-extern const struct class class_location__Location;
+extern const struct type type_array__Arrayopts__Option;
+#define COLOR_opts__OptionContext___options 0
+#define COLOR_opts__OptionContext___rest 1
+#define COLOR_opts__OptionContext___errors 2
+extern const struct type type_hash_collection__HashMapstring__Stringopts__Option;
+#define COLOR_opts__OptionContext___optmap 3
 void VIRTUAL_parser__ReduceAction0__action(val* self, val* p0);
 val* VIRTUAL_parser_work__ReduceAction__concat(val* self, val* p0, val* p1);
 void VIRTUAL_parser_work__ReduceAction__init(val* self, long p0);
@@ -1192,10 +1910,6 @@ void VIRTUAL_parser__ReduceAction83__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction83;
 void VIRTUAL_parser__ReduceAction84__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction84;
-void VIRTUAL_parser__ReduceAction85__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction85;
-void VIRTUAL_parser__ReduceAction86__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction86;
 void VIRTUAL_parser__ReduceAction87__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction87;
 void VIRTUAL_parser__ReduceAction88__action(val* self, val* p0);
@@ -1206,6 +1920,10 @@ void VIRTUAL_parser__ReduceAction90__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction90;
 void VIRTUAL_parser__ReduceAction91__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction91;
+void VIRTUAL_parser__ReduceAction92__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction92;
+void VIRTUAL_parser__ReduceAction93__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction93;
 void VIRTUAL_parser__ReduceAction94__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction94;
 void VIRTUAL_parser__ReduceAction95__action(val* self, val* p0);
@@ -1254,8 +1972,6 @@ void VIRTUAL_parser__ReduceAction116__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction116;
 void VIRTUAL_parser__ReduceAction117__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction117;
-void VIRTUAL_parser__ReduceAction118__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction118;
 void VIRTUAL_parser__ReduceAction119__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction119;
 void VIRTUAL_parser__ReduceAction120__action(val* self, val* p0);
@@ -1270,14 +1986,12 @@ void VIRTUAL_parser__ReduceAction124__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction124;
 void VIRTUAL_parser__ReduceAction125__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction125;
-void VIRTUAL_parser__ReduceAction127__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction127;
+void VIRTUAL_parser__ReduceAction126__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction126;
 void VIRTUAL_parser__ReduceAction128__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction128;
 void VIRTUAL_parser__ReduceAction129__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction129;
-void VIRTUAL_parser__ReduceAction130__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction130;
 void VIRTUAL_parser__ReduceAction131__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction131;
 void VIRTUAL_parser__ReduceAction132__action(val* self, val* p0);
@@ -1286,16 +2000,18 @@ void VIRTUAL_parser__ReduceAction133__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction133;
 void VIRTUAL_parser__ReduceAction134__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction134;
+void VIRTUAL_parser__ReduceAction135__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction135;
 void VIRTUAL_parser__ReduceAction136__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction136;
 void VIRTUAL_parser__ReduceAction137__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction137;
+void VIRTUAL_parser__ReduceAction138__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction138;
 void VIRTUAL_parser__ReduceAction139__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction139;
 void VIRTUAL_parser__ReduceAction140__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction140;
-void VIRTUAL_parser__ReduceAction141__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction141;
 void VIRTUAL_parser__ReduceAction142__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction142;
 void VIRTUAL_parser__ReduceAction143__action(val* self, val* p0);
@@ -1306,10 +2022,10 @@ void VIRTUAL_parser__ReduceAction145__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction145;
 void VIRTUAL_parser__ReduceAction146__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction146;
-void VIRTUAL_parser__ReduceAction147__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction147;
 void VIRTUAL_parser__ReduceAction148__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction148;
+void VIRTUAL_parser__ReduceAction149__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction149;
 void VIRTUAL_parser__ReduceAction150__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction150;
 void VIRTUAL_parser__ReduceAction151__action(val* self, val* p0);
@@ -1320,12 +2036,8 @@ void VIRTUAL_parser__ReduceAction153__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction153;
 void VIRTUAL_parser__ReduceAction154__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction154;
-void VIRTUAL_parser__ReduceAction156__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction156;
-void VIRTUAL_parser__ReduceAction157__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction157;
-void VIRTUAL_parser__ReduceAction158__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction158;
+void VIRTUAL_parser__ReduceAction155__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction155;
 void VIRTUAL_parser__ReduceAction159__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction159;
 void VIRTUAL_parser__ReduceAction160__action(val* self, val* p0);
@@ -1336,16 +2048,16 @@ void VIRTUAL_parser__ReduceAction162__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction162;
 void VIRTUAL_parser__ReduceAction163__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction163;
+void VIRTUAL_parser__ReduceAction164__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction164;
+void VIRTUAL_parser__ReduceAction165__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction165;
+void VIRTUAL_parser__ReduceAction166__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction166;
 void VIRTUAL_parser__ReduceAction167__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction167;
 void VIRTUAL_parser__ReduceAction168__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction168;
-void VIRTUAL_parser__ReduceAction169__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction169;
-void VIRTUAL_parser__ReduceAction170__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction170;
-void VIRTUAL_parser__ReduceAction171__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction171;
 void VIRTUAL_parser__ReduceAction172__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction172;
 void VIRTUAL_parser__ReduceAction173__action(val* self, val* p0);
@@ -1356,20 +2068,22 @@ void VIRTUAL_parser__ReduceAction175__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction175;
 void VIRTUAL_parser__ReduceAction176__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction176;
-void VIRTUAL_parser__ReduceAction180__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction180;
-void VIRTUAL_parser__ReduceAction181__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction181;
-void VIRTUAL_parser__ReduceAction182__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction182;
-void VIRTUAL_parser__ReduceAction183__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction183;
-void VIRTUAL_parser__ReduceAction184__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction184;
+void VIRTUAL_parser__ReduceAction177__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction177;
+void VIRTUAL_parser__ReduceAction178__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction178;
 void VIRTUAL_parser__ReduceAction185__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction185;
 void VIRTUAL_parser__ReduceAction186__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction186;
+void VIRTUAL_parser__ReduceAction187__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction187;
+void VIRTUAL_parser__ReduceAction189__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction189;
+void VIRTUAL_parser__ReduceAction190__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction190;
+void VIRTUAL_parser__ReduceAction191__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction191;
 void VIRTUAL_parser__ReduceAction193__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction193;
 void VIRTUAL_parser__ReduceAction194__action(val* self, val* p0);
@@ -1380,14 +2094,14 @@ void VIRTUAL_parser__ReduceAction196__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction196;
 void VIRTUAL_parser__ReduceAction197__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction197;
-void VIRTUAL_parser__ReduceAction198__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction198;
 void VIRTUAL_parser__ReduceAction199__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction199;
-void VIRTUAL_parser__ReduceAction201__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction201;
+void VIRTUAL_parser__ReduceAction200__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction200;
 void VIRTUAL_parser__ReduceAction202__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction202;
+void VIRTUAL_parser__ReduceAction203__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction203;
 void VIRTUAL_parser__ReduceAction204__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction204;
 void VIRTUAL_parser__ReduceAction205__action(val* self, val* p0);
@@ -1414,10 +2128,6 @@ void VIRTUAL_parser__ReduceAction215__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction215;
 void VIRTUAL_parser__ReduceAction216__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction216;
-void VIRTUAL_parser__ReduceAction217__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction217;
-void VIRTUAL_parser__ReduceAction218__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction218;
 void VIRTUAL_parser__ReduceAction219__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction219;
 void VIRTUAL_parser__ReduceAction220__action(val* self, val* p0);
@@ -1430,16 +2140,16 @@ void VIRTUAL_parser__ReduceAction223__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction223;
 void VIRTUAL_parser__ReduceAction224__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction224;
-void VIRTUAL_parser__ReduceAction225__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction225;
-void VIRTUAL_parser__ReduceAction226__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction226;
 void VIRTUAL_parser__ReduceAction227__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction227;
 void VIRTUAL_parser__ReduceAction228__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction228;
 void VIRTUAL_parser__ReduceAction229__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction229;
+void VIRTUAL_parser__ReduceAction230__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction230;
+void VIRTUAL_parser__ReduceAction231__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction231;
 void VIRTUAL_parser__ReduceAction232__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction232;
 void VIRTUAL_parser__ReduceAction233__action(val* self, val* p0);
@@ -1448,10 +2158,6 @@ void VIRTUAL_parser__ReduceAction234__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction234;
 void VIRTUAL_parser__ReduceAction235__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction235;
-void VIRTUAL_parser__ReduceAction236__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction236;
-void VIRTUAL_parser__ReduceAction237__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction237;
 void VIRTUAL_parser__ReduceAction238__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction238;
 void VIRTUAL_parser__ReduceAction239__action(val* self, val* p0);
@@ -1464,10 +2170,12 @@ void VIRTUAL_parser__ReduceAction242__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction242;
 void VIRTUAL_parser__ReduceAction243__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction243;
-void VIRTUAL_parser__ReduceAction244__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction244;
+void VIRTUAL_parser__ReduceAction246__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction246;
 void VIRTUAL_parser__ReduceAction247__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction247;
+void VIRTUAL_parser__ReduceAction248__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction248;
 void VIRTUAL_parser__ReduceAction249__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction249;
 void VIRTUAL_parser__ReduceAction250__action(val* self, val* p0);
@@ -1476,12 +2184,12 @@ void VIRTUAL_parser__ReduceAction251__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction251;
 void VIRTUAL_parser__ReduceAction252__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction252;
+void VIRTUAL_parser__ReduceAction253__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction253;
 void VIRTUAL_parser__ReduceAction254__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction254;
-void VIRTUAL_parser__ReduceAction256__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction256;
-void VIRTUAL_parser__ReduceAction257__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction257;
+void VIRTUAL_parser__ReduceAction255__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction255;
 void VIRTUAL_parser__ReduceAction258__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction258;
 void VIRTUAL_parser__ReduceAction259__action(val* self, val* p0);
@@ -1498,54 +2206,56 @@ void VIRTUAL_parser__ReduceAction264__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction264;
 void VIRTUAL_parser__ReduceAction265__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction265;
+void VIRTUAL_parser__ReduceAction266__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction266;
 void VIRTUAL_parser__ReduceAction267__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction267;
 void VIRTUAL_parser__ReduceAction268__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction268;
 void VIRTUAL_parser__ReduceAction270__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction270;
-void VIRTUAL_parser__ReduceAction271__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction271;
 void VIRTUAL_parser__ReduceAction272__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction272;
+void VIRTUAL_parser__ReduceAction273__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction273;
 void VIRTUAL_parser__ReduceAction274__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction274;
 void VIRTUAL_parser__ReduceAction275__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction275;
 void VIRTUAL_parser__ReduceAction277__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction277;
-void VIRTUAL_parser__ReduceAction278__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction278;
 void VIRTUAL_parser__ReduceAction279__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction279;
 void VIRTUAL_parser__ReduceAction280__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction280;
 void VIRTUAL_parser__ReduceAction281__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction281;
+void VIRTUAL_parser__ReduceAction282__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction282;
+void VIRTUAL_parser__ReduceAction283__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction283;
+void VIRTUAL_parser__ReduceAction284__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction284;
+void VIRTUAL_parser__ReduceAction285__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction285;
+void VIRTUAL_parser__ReduceAction286__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction286;
 void VIRTUAL_parser__ReduceAction287__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction287;
 void VIRTUAL_parser__ReduceAction288__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction288;
-void VIRTUAL_parser__ReduceAction289__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction289;
 void VIRTUAL_parser__ReduceAction290__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction290;
 void VIRTUAL_parser__ReduceAction291__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction291;
-void VIRTUAL_parser__ReduceAction292__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction292;
 void VIRTUAL_parser__ReduceAction293__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction293;
 void VIRTUAL_parser__ReduceAction294__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction294;
 void VIRTUAL_parser__ReduceAction295__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction295;
-void VIRTUAL_parser__ReduceAction296__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction296;
 void VIRTUAL_parser__ReduceAction297__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction297;
-void VIRTUAL_parser__ReduceAction298__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction298;
 void VIRTUAL_parser__ReduceAction299__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction299;
 void VIRTUAL_parser__ReduceAction300__action(val* self, val* p0);
@@ -1558,46 +2268,26 @@ void VIRTUAL_parser__ReduceAction304__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction304;
 void VIRTUAL_parser__ReduceAction305__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction305;
-void VIRTUAL_parser__ReduceAction306__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction306;
 void VIRTUAL_parser__ReduceAction307__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction307;
 void VIRTUAL_parser__ReduceAction308__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction308;
-void VIRTUAL_parser__ReduceAction309__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction309;
 void VIRTUAL_parser__ReduceAction310__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction310;
-void VIRTUAL_parser__ReduceAction311__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction311;
+void VIRTUAL_parser__ReduceAction312__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction312;
 void VIRTUAL_parser__ReduceAction314__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction314;
-void VIRTUAL_parser__ReduceAction315__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction315;
-void VIRTUAL_parser__ReduceAction316__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction316;
-void VIRTUAL_parser__ReduceAction317__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction317;
 void VIRTUAL_parser__ReduceAction318__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction318;
 void VIRTUAL_parser__ReduceAction320__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction320;
-void VIRTUAL_parser__ReduceAction321__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction321;
 void VIRTUAL_parser__ReduceAction322__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction322;
-void VIRTUAL_parser__ReduceAction323__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction323;
-void VIRTUAL_parser__ReduceAction324__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction324;
 void VIRTUAL_parser__ReduceAction326__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction326;
-void VIRTUAL_parser__ReduceAction327__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction327;
 void VIRTUAL_parser__ReduceAction328__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction328;
-void VIRTUAL_parser__ReduceAction329__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction329;
 void VIRTUAL_parser__ReduceAction330__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction330;
 void VIRTUAL_parser__ReduceAction331__action(val* self, val* p0);
@@ -1614,14 +2304,12 @@ void VIRTUAL_parser__ReduceAction336__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction336;
 void VIRTUAL_parser__ReduceAction337__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction337;
-void VIRTUAL_parser__ReduceAction338__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction338;
-void VIRTUAL_parser__ReduceAction339__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction339;
 void VIRTUAL_parser__ReduceAction340__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction340;
 void VIRTUAL_parser__ReduceAction341__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction341;
+void VIRTUAL_parser__ReduceAction342__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction342;
 void VIRTUAL_parser__ReduceAction343__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction343;
 void VIRTUAL_parser__ReduceAction344__action(val* self, val* p0);
@@ -1636,18 +2324,20 @@ void VIRTUAL_parser__ReduceAction348__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction348;
 void VIRTUAL_parser__ReduceAction349__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction349;
+void VIRTUAL_parser__ReduceAction350__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction350;
 void VIRTUAL_parser__ReduceAction351__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction351;
-void VIRTUAL_parser__ReduceAction354__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction354;
+void VIRTUAL_parser__ReduceAction352__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction352;
+void VIRTUAL_parser__ReduceAction355__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction355;
 void VIRTUAL_parser__ReduceAction356__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction356;
 void VIRTUAL_parser__ReduceAction357__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction357;
 void VIRTUAL_parser__ReduceAction358__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction358;
-void VIRTUAL_parser__ReduceAction359__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction359;
 void VIRTUAL_parser__ReduceAction360__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction360;
 void VIRTUAL_parser__ReduceAction361__action(val* self, val* p0);
@@ -1662,104 +2352,207 @@ void VIRTUAL_parser__ReduceAction365__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction365;
 void VIRTUAL_parser__ReduceAction366__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction366;
-void VIRTUAL_parser__ReduceAction368__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction368;
 void VIRTUAL_parser__ReduceAction369__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction369;
 void VIRTUAL_parser__ReduceAction370__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction370;
+void VIRTUAL_parser__ReduceAction371__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction371;
 void VIRTUAL_parser__ReduceAction372__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction372;
 void VIRTUAL_parser__ReduceAction373__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction373;
-void VIRTUAL_parser__ReduceAction374__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction374;
+void VIRTUAL_parser__ReduceAction375__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction375;
 void VIRTUAL_parser__ReduceAction376__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction376;
 void VIRTUAL_parser__ReduceAction377__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction377;
+void VIRTUAL_parser__ReduceAction378__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction378;
 void VIRTUAL_parser__ReduceAction379__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction379;
-void VIRTUAL_parser__ReduceAction380__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction380;
 void VIRTUAL_parser__ReduceAction382__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction382;
-void VIRTUAL_parser__ReduceAction383__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction383;
+void VIRTUAL_parser__ReduceAction384__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction384;
 void VIRTUAL_parser__ReduceAction386__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction386;
 void VIRTUAL_parser__ReduceAction387__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction387;
 void VIRTUAL_parser__ReduceAction388__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction388;
-void VIRTUAL_parser__ReduceAction604__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction604;
-void VIRTUAL_parser__ReduceAction605__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction605;
-void VIRTUAL_parser__ReduceAction606__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction606;
-void VIRTUAL_parser__ReduceAction608__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction608;
-void VIRTUAL_parser__ReduceAction624__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction624;
-void VIRTUAL_parser__ReduceAction625__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction625;
-void VIRTUAL_parser__ReduceAction792__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction792;
+void VIRTUAL_parser__ReduceAction389__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction389;
+void VIRTUAL_parser__ReduceAction390__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction390;
+void VIRTUAL_parser__ReduceAction391__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction391;
+void VIRTUAL_parser__ReduceAction392__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction392;
+void VIRTUAL_parser__ReduceAction393__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction393;
+void VIRTUAL_parser__ReduceAction394__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction394;
+void VIRTUAL_parser__ReduceAction395__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction395;
+void VIRTUAL_parser__ReduceAction396__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction396;
+void VIRTUAL_parser__ReduceAction397__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction397;
+void VIRTUAL_parser__ReduceAction399__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction399;
+void VIRTUAL_parser__ReduceAction402__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction402;
+void VIRTUAL_parser__ReduceAction403__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction403;
+void VIRTUAL_parser__ReduceAction404__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction404;
+void VIRTUAL_parser__ReduceAction405__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction405;
+void VIRTUAL_parser__ReduceAction406__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction406;
+void VIRTUAL_parser__ReduceAction407__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction407;
+void VIRTUAL_parser__ReduceAction408__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction408;
+void VIRTUAL_parser__ReduceAction409__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction409;
+void VIRTUAL_parser__ReduceAction411__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction411;
+void VIRTUAL_parser__ReduceAction413__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction413;
+void VIRTUAL_parser__ReduceAction414__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction414;
+void VIRTUAL_parser__ReduceAction415__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction415;
+void VIRTUAL_parser__ReduceAction417__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction417;
+void VIRTUAL_parser__ReduceAction418__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction418;
+void VIRTUAL_parser__ReduceAction419__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction419;
+void VIRTUAL_parser__ReduceAction420__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction420;
+void VIRTUAL_parser__ReduceAction421__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction421;
+void VIRTUAL_parser__ReduceAction422__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction422;
+void VIRTUAL_parser__ReduceAction423__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction423;
+void VIRTUAL_parser__ReduceAction424__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction424;
+void VIRTUAL_parser__ReduceAction425__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction425;
+void VIRTUAL_parser__ReduceAction426__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction426;
+void VIRTUAL_parser__ReduceAction427__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction427;
+void VIRTUAL_parser__ReduceAction428__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction428;
+void VIRTUAL_parser__ReduceAction429__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction429;
+void VIRTUAL_parser__ReduceAction431__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction431;
+void VIRTUAL_parser__ReduceAction432__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction432;
+void VIRTUAL_parser__ReduceAction433__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction433;
+void VIRTUAL_parser__ReduceAction435__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction435;
+void VIRTUAL_parser__ReduceAction436__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction436;
+void VIRTUAL_parser__ReduceAction437__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction437;
+void VIRTUAL_parser__ReduceAction439__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction439;
+void VIRTUAL_parser__ReduceAction440__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction440;
+void VIRTUAL_parser__ReduceAction442__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction442;
+void VIRTUAL_parser__ReduceAction443__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction443;
+void VIRTUAL_parser__ReduceAction445__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction445;
+void VIRTUAL_parser__ReduceAction446__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction446;
+void VIRTUAL_parser__ReduceAction449__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction449;
+void VIRTUAL_parser__ReduceAction450__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction450;
+void VIRTUAL_parser__ReduceAction451__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction451;
+void VIRTUAL_parser__ReduceAction780__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction780;
+void VIRTUAL_parser__ReduceAction782__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction782;
+void VIRTUAL_parser__ReduceAction783__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction783;
+void VIRTUAL_parser__ReduceAction784__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction784;
+void VIRTUAL_parser__ReduceAction785__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction785;
+void VIRTUAL_parser__ReduceAction786__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction786;
 void VIRTUAL_parser__ReduceAction793__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction793;
 void VIRTUAL_parser__ReduceAction794__action(val* self, val* p0);
 extern const struct class class_parser__ReduceAction794;
-void VIRTUAL_parser__ReduceAction795__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction795;
-void VIRTUAL_parser__ReduceAction796__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction796;
-void VIRTUAL_parser__ReduceAction797__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction797;
-void VIRTUAL_parser__ReduceAction798__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction798;
-void VIRTUAL_parser__ReduceAction799__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction799;
-void VIRTUAL_parser__ReduceAction800__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction800;
-void VIRTUAL_parser__ReduceAction801__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction801;
-void VIRTUAL_parser__ReduceAction802__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction802;
-void VIRTUAL_parser__ReduceAction803__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction803;
-void VIRTUAL_parser__ReduceAction804__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction804;
-void VIRTUAL_parser__ReduceAction805__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction805;
-void VIRTUAL_parser__ReduceAction806__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction806;
-void VIRTUAL_parser__ReduceAction807__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction807;
-void VIRTUAL_parser__ReduceAction809__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction809;
-void VIRTUAL_parser__ReduceAction810__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction810;
-void VIRTUAL_parser__ReduceAction811__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction811;
-void VIRTUAL_parser__ReduceAction812__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction812;
-void VIRTUAL_parser__ReduceAction813__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction813;
-void VIRTUAL_parser__ReduceAction815__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction815;
-void VIRTUAL_parser__ReduceAction821__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction821;
-void VIRTUAL_parser__ReduceAction825__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction825;
-void VIRTUAL_parser__ReduceAction826__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction826;
-void VIRTUAL_parser__ReduceAction827__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction827;
-void VIRTUAL_parser__ReduceAction828__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction828;
-void VIRTUAL_parser__ReduceAction829__action(val* self, val* p0);
-extern const struct class class_parser__ReduceAction829;
+void VIRTUAL_parser__ReduceAction817__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction817;
+void VIRTUAL_parser__ReduceAction818__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction818;
+void VIRTUAL_parser__ReduceAction968__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction968;
+void VIRTUAL_parser__ReduceAction969__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction969;
+void VIRTUAL_parser__ReduceAction970__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction970;
+void VIRTUAL_parser__ReduceAction971__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction971;
+void VIRTUAL_parser__ReduceAction972__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction972;
+void VIRTUAL_parser__ReduceAction973__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction973;
+void VIRTUAL_parser__ReduceAction974__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction974;
+void VIRTUAL_parser__ReduceAction975__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction975;
+void VIRTUAL_parser__ReduceAction976__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction976;
+void VIRTUAL_parser__ReduceAction977__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction977;
+void VIRTUAL_parser__ReduceAction978__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction978;
+void VIRTUAL_parser__ReduceAction979__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction979;
+void VIRTUAL_parser__ReduceAction980__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction980;
+void VIRTUAL_parser__ReduceAction981__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction981;
+void VIRTUAL_parser__ReduceAction982__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction982;
+void VIRTUAL_parser__ReduceAction983__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction983;
+void VIRTUAL_parser__ReduceAction985__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction985;
+void VIRTUAL_parser__ReduceAction987__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction987;
+void VIRTUAL_parser__ReduceAction991__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction991;
+void VIRTUAL_parser__ReduceAction993__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction993;
+void VIRTUAL_parser__ReduceAction1003__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction1003;
+void VIRTUAL_parser__ReduceAction1004__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction1004;
+void VIRTUAL_parser__ReduceAction1005__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction1005;
+void VIRTUAL_parser__ReduceAction1006__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction1006;
+void VIRTUAL_parser__ReduceAction1007__action(val* self, val* p0);
+extern const struct class class_parser__ReduceAction1007;
+void VIRTUAL_parser_nodes__ANodes__init(val* self);
 val* VIRTUAL_parser_nodes__ANodes__iterator(val* self);
 short int VIRTUAL_parser_nodes__ANodes__is_empty(val* self);
 long VIRTUAL_parser_nodes__ANodes__length(val* self);
@@ -1772,23 +2565,23 @@ val* VIRTUAL_parser_nodes__ANodes__shift(val* self);
 void VIRTUAL_parser_nodes__ANodes___91d_93d_61d(val* self, long p0, val* p1);
 void VIRTUAL_parser_nodes__ANodes__remove_at(val* self, long p0);
 val* VIRTUAL_parser_nodes__ANodes__parent(val* self);
+void VIRTUAL_parser_nodes__ANodes__parent_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ANodes__items(val* self);
 void VIRTUAL_parser_nodes__ANodes__hook_add(val* self, val* p0);
 void VIRTUAL_parser_nodes__ANodes__hook_remove(val* self, val* p0);
 void VIRTUAL_parser_nodes__ANodes__unsafe_add_all(val* self, val* p0);
 short int VIRTUAL_parser_nodes__ANodes__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_nodes__ANodes__visit_all(val* self, val* p0);
-void VIRTUAL_parser_nodes__ANodes__init(val* self, val* p0);
 extern const struct class class_parser_nodes__ANodes;
-#define COLOR_array__Arrayparser_nodes__ANodes_FT0 2
+#define COLOR_array__Arrayparser_nodes__ANodes_FT0 0
 #define COLOR_parser_nodes__ANodes___items 1
 val* VIRTUAL_parser_nodes__TEol__to_s(val* self);
 val* VIRTUAL_parser_nodes__ANode__location(val* self);
+void VIRTUAL_parser_nodes__ANode__location_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ANode__hot_location(val* self);
 void VIRTUAL_parser_nodes__ANode__debug(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ANode__parent(val* self);
 void VIRTUAL_parser_nodes__ANode__parent_61d(val* self, val* p0);
-void VIRTUAL_parser_nodes__ANode__init(val* self);
 void VIRTUAL_parser_nodes__Token__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_nodes__ANode__replace_with(val* self, val* p0);
 void VIRTUAL_parser_nodes__Token__visit_all(val* self, val* p0);
@@ -1806,7 +2599,6 @@ void VIRTUAL_parser_nodes__Token__next_token_61d(val* self, val* p0);
 long VIRTUAL_lexer__TEol__parser_index(val* self);
 void VIRTUAL_lexer__TEol__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TEol;
-#define COLOR_parser_nodes__ANode___location 0
 #define COLOR_parser_nodes__ANode___parent 1
 #define COLOR_parser_nodes__Token___prev_token 2
 #define COLOR_parser_nodes__Token___next_token 3
@@ -1857,18 +2649,9 @@ extern const struct class class_parser_nodes__TKwis;
 long VIRTUAL_lexer__TKwdo__parser_index(val* self);
 void VIRTUAL_lexer__TKwdo__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TKwdo;
-long VIRTUAL_lexer__TKwreadable__parser_index(val* self);
-void VIRTUAL_lexer__TKwreadable__init_tk(val* self, val* p0);
-extern const struct class class_parser_nodes__TKwreadable;
-long VIRTUAL_lexer__TKwwritable__parser_index(val* self);
-void VIRTUAL_lexer__TKwwritable__init_tk(val* self, val* p0);
-extern const struct class class_parser_nodes__TKwwritable;
 long VIRTUAL_lexer__TKwvar__parser_index(val* self);
 void VIRTUAL_lexer__TKwvar__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TKwvar;
-long VIRTUAL_lexer__TKwintern__parser_index(val* self);
-void VIRTUAL_lexer__TKwintern__init_tk(val* self, val* p0);
-extern const struct class class_parser_nodes__TKwintern;
 long VIRTUAL_lexer__TKwextern__parser_index(val* self);
 void VIRTUAL_lexer__TKwextern__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TKwextern;
@@ -2020,6 +2803,9 @@ extern const struct class class_parser_nodes__TMinus;
 long VIRTUAL_lexer__TStar__parser_index(val* self);
 void VIRTUAL_lexer__TStar__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TStar;
+long VIRTUAL_lexer__TStarstar__parser_index(val* self);
+void VIRTUAL_lexer__TStarstar__init_tk(val* self, val* p0);
+extern const struct class class_parser_nodes__TStarstar;
 long VIRTUAL_lexer__TSlash__parser_index(val* self);
 void VIRTUAL_lexer__TSlash__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TSlash;
@@ -2108,7 +2894,7 @@ long VIRTUAL_lexer__TExternCodeSegment__parser_index(val* self);
 void VIRTUAL_lexer__TExternCodeSegment__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__TExternCodeSegment;
 val* VIRTUAL_parser_nodes__EOF__to_s(val* self);
-long VIRTUAL_lexer_work__EOF__parser_index(val* self);
+long VIRTUAL_lexer__EOF__parser_index(val* self);
 void VIRTUAL_lexer_work__EOF__init_tk(val* self, val* p0);
 extern const struct class class_parser_nodes__EOF;
 val* VIRTUAL_lexer_work__AError__message(val* self);
@@ -2123,12 +2909,11 @@ extern const struct class class_parser_nodes__AParserError;
 void VIRTUAL_parser_prod__AModule__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_nodes__Prod__replace_with(val* self, val* p0);
 void VIRTUAL_parser_prod__AModule__visit_all(val* self, val* p0);
-void VIRTUAL_parser_nodes__Prod__location_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__Prod__n_annotations(val* self);
 void VIRTUAL_parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+val* VIRTUAL_parser_work__Prod__collect_text(val* self);
 val* VIRTUAL_annotation__Prod__get_single_annotation(val* self, val* p0, val* p1);
 val* VIRTUAL_annotation__Prod__get_annotations(val* self, val* p0);
-val* VIRTUAL_modelize_property__Prod__collect_text(val* self);
 val* VIRTUAL_parser_nodes__AModule__n_moduledecl(val* self);
 void VIRTUAL_parser_prod__AModule__n_moduledecl_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AModule__n_imports(val* self);
@@ -2148,7 +2933,7 @@ extern const struct class class_parser_nodes__AModule;
 #define COLOR_parser_nodes__AModule___n_moduledecl 4
 val* NEW_parser_nodes__ANodes(const struct type* type);
 extern const struct type type_parser_nodes__ANodesparser_nodes__AImport;
-#define COLOR_parser_nodes__ANodes___parent 0
+#define COLOR_parser_nodes__ANodes__parent_61d 72
 #define COLOR_parser_nodes__AModule___n_imports 5
 extern const struct type type_parser_nodes__ANodesparser_nodes__AExternCodeBlock;
 #define COLOR_parser_nodes__AModule___n_extern_code_blocks 6
@@ -2156,9 +2941,7 @@ extern const struct type type_parser_nodes__ANodesparser_nodes__AClassdef;
 #define COLOR_parser_nodes__AModule___n_classdefs 7
 #define COLOR_modelbuilder__AModule___is_importation_done 9
 #define COLOR_modelize_class__AModule___build_classes_is_done 10
-val* NEW_hash_collection__HashMap(const struct type* type);
 extern const struct type type_hash_collection__HashMapmodel__MClassparser_nodes__AClassdef;
-void hash_collection__HashMap__init(val* self);
 #define COLOR_modelize_class__AModule___mclass2nclassdef 11
 void VIRTUAL_parser_prod__AModuledecl__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AModuledecl__visit_all(val* self, val* p0);
@@ -2183,6 +2966,7 @@ void VIRTUAL_parser_prod__AStdImport__n_kwimport_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AStdImport__n_name(val* self);
 void VIRTUAL_parser_prod__AStdImport__n_name_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AStdImport__init_astdimport(val* self, val* p0, val* p1, val* p2, val* p3);
+val* VIRTUAL_modelbuilder__AStdImport__mmodule(val* self);
 void VIRTUAL_modelbuilder__AStdImport__mmodule_61d(val* self, val* p0);
 extern const struct class class_parser_nodes__AStdImport;
 #define COLOR_modelbuilder__AStdImport___mmodule 7
@@ -2193,6 +2977,7 @@ void VIRTUAL_parser_prod__ANoImport__n_kwimport_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ANoImport__n_kwend_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ANoImport__init_anoimport(val* self, val* p0, val* p1, val* p2);
 extern const struct class class_parser_nodes__ANoImport;
+void VIRTUAL_parser_nodes__APublicVisibility__init(val* self);
 void VIRTUAL_parser_prod__APublicVisibility__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__APublicVisibility__visit_all(val* self, val* p0);
 val* VIRTUAL_modelbuilder__APublicVisibility__mvisibility(val* self);
@@ -2230,8 +3015,6 @@ val* VIRTUAL_modelize_class__AClassdef__all_defs(val* self);
 void VIRTUAL_modelize_class__AClassdef__all_defs_61d(val* self, val* p0);
 short int VIRTUAL_modelize_property__AClassdef__build_properties_is_done(val* self);
 void VIRTUAL_modelize_property__AClassdef__build_properties_is_done_61d(val* self, short int p0);
-val* VIRTUAL_modelize_property__AClassdef__super_inits(val* self);
-void VIRTUAL_modelize_property__AClassdef__super_inits_61d(val* self, val* p0);
 val* VIRTUAL_modelize_property__AClassdef__mfree_init(val* self);
 void VIRTUAL_modelize_property__AClassdef__mfree_init_61d(val* self, val* p0);
 void VIRTUAL_abstract_compiler__AClassdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
@@ -2254,16 +3037,15 @@ extern const struct class class_parser_nodes__AStdClassdef;
 extern const struct type type_parser_nodes__ANodesparser_nodes__APropdef;
 #define COLOR_parser_nodes__AClassdef___n_propdefs 4
 #define COLOR_modelize_property__AClassdef___build_properties_is_done 8
-#define COLOR_modelize_property__AClassdef___super_inits 9
-#define COLOR_modelize_property__AClassdef___mfree_init 10
-#define COLOR_parser_nodes__AStdClassdef___n_doc 11
-#define COLOR_parser_nodes__AStdClassdef___n_kwredef 12
-#define COLOR_parser_nodes__AStdClassdef___n_id 15
+#define COLOR_modelize_property__AClassdef___mfree_init 9
+#define COLOR_parser_nodes__AStdClassdef___n_doc 10
+#define COLOR_parser_nodes__AStdClassdef___n_kwredef 11
+#define COLOR_parser_nodes__AStdClassdef___n_id 14
 extern const struct type type_parser_nodes__ANodesparser_nodes__AFormaldef;
-#define COLOR_parser_nodes__AStdClassdef___n_formaldefs 16
-#define COLOR_parser_nodes__AStdClassdef___n_extern_code_block 17
+#define COLOR_parser_nodes__AStdClassdef___n_formaldefs 15
+#define COLOR_parser_nodes__AStdClassdef___n_extern_code_block 16
 extern const struct type type_parser_nodes__ANodesparser_nodes__ASuperclass;
-#define COLOR_parser_nodes__AStdClassdef___n_superclasses 18
+#define COLOR_parser_nodes__AStdClassdef___n_superclasses 17
 void VIRTUAL_parser_prod__ATopClassdef__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ATopClassdef__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__ATopClassdef__init_atopclassdef(val* self, val* p0);
@@ -2313,7 +3095,6 @@ void VIRTUAL_parser_prod__AFormaldef__n_id_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AFormaldef__n_type(val* self);
 void VIRTUAL_parser_prod__AFormaldef__n_type_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AFormaldef__init_aformaldef(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_modelize_class__AFormaldef__mtype_61d(val* self, val* p0);
 void VIRTUAL_modelize_class__AFormaldef__bound_61d(val* self, val* p0);
 extern const struct class class_parser_nodes__AFormaldef;
 #define COLOR_parser_nodes__AFormaldef___n_type 5
@@ -2349,7 +3130,7 @@ void VIRTUAL_modelize_property__AAttrPropdef__build_property(val* self, val* p0,
 void VIRTUAL_modelize_property__AAttrPropdef__build_signature(val* self, val* p0);
 void VIRTUAL_modelize_property__AAttrPropdef__check_signature(val* self, val* p0);
 val* VIRTUAL_modelize_property__APropdef__new_property_visibility(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_modelize_property__APropdef__set_doc(val* self, val* p0);
+void VIRTUAL_modelize_property__APropdef__set_doc(val* self, val* p0, val* p1);
 void VIRTUAL_modelize_property__APropdef__check_redef_property_visibility(val* self, val* p0, val* p1, val* p2);
 short int VIRTUAL_modelize_property__APropdef__check_redef_keyword(val* self, val* p0, val* p1, val* p2, short int p3, val* p4);
 void VIRTUAL_typing__AAttrPropdef__do_typing(val* self, val* p0);
@@ -2357,23 +3138,21 @@ void VIRTUAL_typing__APropdef__selfvariable_61d(val* self, val* p0);
 void VIRTUAL_abstract_compiler__AAttrPropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
 short int VIRTUAL_abstract_compiler__APropdef__can_inline(val* self);
 void VIRTUAL_parser_prod__AAttrPropdef__n_kwvar_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AAttrPropdef__n_id(val* self);
-void VIRTUAL_parser_prod__AAttrPropdef__n_id_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAttrPropdef__n_id2(val* self);
 void VIRTUAL_parser_prod__AAttrPropdef__n_id2_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAttrPropdef__n_type(val* self);
 void VIRTUAL_parser_prod__AAttrPropdef__n_type_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AAttrPropdef__n_readable(val* self);
-void VIRTUAL_parser_prod__AAttrPropdef__n_readable_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AAttrPropdef__n_writable(val* self);
-void VIRTUAL_parser_prod__AAttrPropdef__n_writable_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAttrPropdef__n_expr(val* self);
 void VIRTUAL_parser_prod__AAttrPropdef__n_expr_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AAttrPropdef__init_aattrpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7, val* p8, val* p9, val* p10);
+val* VIRTUAL_parser_nodes__AAttrPropdef__n_block(val* self);
+void VIRTUAL_parser_prod__AAttrPropdef__n_block_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AAttrPropdef__init_aattrpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7, val* p8);
 short int VIRTUAL_modelize_property__AAttrPropdef__noinit(val* self);
 void VIRTUAL_modelize_property__AAttrPropdef__noinit_61d(val* self, short int p0);
 short int VIRTUAL_modelize_property__AAttrPropdef__is_lazy(val* self);
 void VIRTUAL_modelize_property__AAttrPropdef__is_lazy_61d(val* self, short int p0);
+short int VIRTUAL_modelize_property__AAttrPropdef__has_value(val* self);
+void VIRTUAL_modelize_property__AAttrPropdef__has_value_61d(val* self, short int p0);
 val* VIRTUAL_modelize_property__AAttrPropdef__mlazypropdef(val* self);
 void VIRTUAL_modelize_property__AAttrPropdef__mlazypropdef_61d(val* self, val* p0);
 val* VIRTUAL_modelize_property__AAttrPropdef__mreadpropdef(val* self);
@@ -2382,135 +3161,66 @@ val* VIRTUAL_modelize_property__AAttrPropdef__mwritepropdef(val* self);
 void VIRTUAL_modelize_property__AAttrPropdef__mwritepropdef_61d(val* self, val* p0);
 void VIRTUAL_modelize_property__AAttrPropdef__check_method_signature(val* self, val* p0, val* p1);
 void VIRTUAL_abstract_compiler__AAttrPropdef__init_expr(val* self, val* p0, val* p1);
+val* VIRTUAL_abstract_compiler__AAttrPropdef__evaluate_expr(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__AAttrPropdef;
 #define COLOR_parser_nodes__APropdef___n_doc 4
 #define COLOR_parser_nodes__APropdef___n_kwredef 5
 #define COLOR_parser_nodes__APropdef___n_visibility 6
-#define COLOR_parser_nodes__AAttrPropdef___n_type 14
-#define COLOR_parser_nodes__AAttrPropdef___n_readable 15
-#define COLOR_parser_nodes__AAttrPropdef___n_writable 16
-#define COLOR_parser_nodes__AAttrPropdef___n_expr 17
-#define COLOR_modelize_property__AAttrPropdef___noinit 18
-#define COLOR_modelize_property__AAttrPropdef___is_lazy 19
+#define COLOR_parser_nodes__AAttrPropdef___n_type 13
+#define COLOR_parser_nodes__AAttrPropdef___n_expr 14
+#define COLOR_parser_nodes__AAttrPropdef___n_block 15
+#define COLOR_modelize_property__AAttrPropdef___noinit 16
+#define COLOR_modelize_property__AAttrPropdef___is_lazy 17
+#define COLOR_modelize_property__AAttrPropdef___has_value 18
 val* VIRTUAL_parser_nodes__AMethPropdef__hot_location(val* self);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_visibility_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AMethPropdef__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_annotations_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_doc_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_kwredef_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_visibility_61d(val* self, val* p0);
 void VIRTUAL_modelize_property__AMethPropdef__build_property(val* self, val* p0, val* p1);
 void VIRTUAL_modelize_property__AMethPropdef__build_signature(val* self, val* p0);
 void VIRTUAL_modelize_property__AMethPropdef__check_signature(val* self, val* p0);
 void VIRTUAL_typing__AMethPropdef__do_typing(val* self, val* p0);
 void VIRTUAL_abstract_compiler__AMethPropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
-short int VIRTUAL_abstract_compiler__AMethPropdef__can_inline(val* self);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_kwmeth_61d(val* self, val* p0);
+short int VIRTUAL_separate_compiler__AMethPropdef__can_inline(val* self);
+void VIRTUAL_parser_prod__AMethPropdef__n_kwmeth_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AMethPropdef__n_kwinit(val* self);
-void VIRTUAL_parser_nodes__AMethPropdef__n_kwinit_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_kwinit_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AMethPropdef__n_kwnew(val* self);
-void VIRTUAL_parser_nodes__AMethPropdef__n_kwnew_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_kwnew_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AMethPropdef__n_methid(val* self);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_methid_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_methid_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AMethPropdef__n_signature(val* self);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__n_signature_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_signature_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AMethPropdef__n_block(val* self);
-void VIRTUAL_parser_nodes__AMethPropdef__n_block_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AMethPropdef__n_extern(val* self);
-void VIRTUAL_parser_nodes__AMethPropdef__n_extern_61d(val* self, val* p0);
-void VIRTUAL_parser_nodes__AMethPropdef__n_extern_calls_61d(val* self, val* p0);
-void VIRTUAL_parser_nodes__AMethPropdef__n_extern_code_block_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_block_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__n_extern_calls_61d(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AMethPropdef__n_extern_code_block(val* self);
+void VIRTUAL_parser_prod__AMethPropdef__n_extern_code_block_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethPropdef__init_amethpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7, val* p8, val* p9, val* p10, val* p11);
+short int VIRTUAL_modelize_property__AMethPropdef__look_like_a_root_init(val* self, val* p0);
 val* VIRTUAL_auto_super_init__AMethPropdef__auto_super_inits(val* self);
 void VIRTUAL_auto_super_init__AMethPropdef__auto_super_inits_61d(val* self, val* p0);
+short int VIRTUAL_auto_super_init__AMethPropdef__auto_super_call(val* self);
+void VIRTUAL_auto_super_init__AMethPropdef__auto_super_call_61d(val* self, short int p0);
 void VIRTUAL_auto_super_init__AMethPropdef__do_auto_super_init(val* self, val* p0);
-void VIRTUAL_abstract_compiler__AMethPropdef__compile_intern_to_c(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_abstract_compiler__AMethPropdef__compile_externmeth_to_c(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_abstract_compiler__AMethPropdef__compile_externinit_to_c(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_parser_prod__ADeferredMethPropdef__init_adeferredmethpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6);
-extern const struct class class_parser_nodes__ADeferredMethPropdef;
+short int VIRTUAL_abstract_compiler__AMethPropdef__compile_intern_to_c(val* self, val* p0, val* p1, val* p2);
+short int VIRTUAL_abstract_compiler__AMethPropdef__compile_externmeth_to_c(val* self, val* p0, val* p1, val* p2);
+short int VIRTUAL_abstract_compiler__AMethPropdef__compile_externinit_to_c(val* self, val* p0, val* p1, val* p2);
+short int VIRTUAL_abstract_compiler__AMethPropdef__can_inline(val* self);
+extern const struct class class_parser_nodes__AMethPropdef;
 #define COLOR_parser_nodes__AMethPropdef___n_kwmeth 11
 #define COLOR_parser_nodes__AMethPropdef___n_kwinit 12
 #define COLOR_parser_nodes__AMethPropdef___n_kwnew 13
 #define COLOR_parser_nodes__AMethPropdef___n_methid 14
 #define COLOR_parser_nodes__AMethPropdef___n_signature 15
 #define COLOR_parser_nodes__AMethPropdef___n_block 16
-#define COLOR_parser_nodes__AMethPropdef___n_extern 17
-#define COLOR_parser_nodes__AMethPropdef___n_extern_calls 18
-#define COLOR_parser_nodes__AMethPropdef___n_extern_code_block 19
-#define COLOR_auto_super_init__AMethPropdef___auto_super_inits 20
-void VIRTUAL_parser_prod__AInternMethPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AInternMethPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_kwmeth_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternMethPropdef__init_ainternmethpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
-extern const struct class class_parser_nodes__AInternMethPropdef;
-void VIRTUAL_parser_prod__AExternMethPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AExternMethPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_kwmeth_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_extern_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_extern_calls_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__n_extern_code_block_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternMethPropdef__init_aexternmethpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7, val* p8, val* p9);
-extern const struct class class_parser_nodes__AExternMethPropdef;
-void VIRTUAL_parser_prod__AConcreteMethPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_kwmeth_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__n_block_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteMethPropdef__init_aconcretemethpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7);
-extern const struct class class_parser_nodes__AConcreteMethPropdef;
-void VIRTUAL_parser_prod__AConcreteInitPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_kwinit_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__n_block_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AConcreteInitPropdef__init_aconcreteinitpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7);
-extern const struct class class_parser_nodes__AConcreteInitPropdef;
-void VIRTUAL_parser_prod__AInternNewPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AInternNewPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_kwnew_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AInternNewPropdef__init_ainternnewpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
-extern const struct class class_parser_nodes__AInternNewPropdef;
-void VIRTUAL_parser_prod__AExternInitPropdef__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AExternInitPropdef__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_doc_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_nodes__AMethPropdef__n_kwmeth_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_kwnew_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_methid_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_signature_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_extern_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_extern_calls_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__n_extern_code_block_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExternInitPropdef__init_aexterninitpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7, val* p8, val* p9);
-extern const struct class class_parser_nodes__AExternInitPropdef;
+#define COLOR_parser_nodes__AMethPropdef___n_extern_calls 17
+#define COLOR_parser_nodes__AMethPropdef___n_extern_code_block 18
+#define COLOR_auto_super_init__AMethPropdef___auto_super_inits 19
+#define COLOR_auto_super_init__AMethPropdef___auto_super_call 20
 void VIRTUAL_parser_prod__AMainMethPropdef__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AMainMethPropdef__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__AMainMethPropdef__n_kwredef_61d(val* self, val* p0);
@@ -2590,24 +3300,6 @@ val* VIRTUAL_parser_nodes__ATypePropdef__n_type(val* self);
 void VIRTUAL_parser_prod__ATypePropdef__n_type_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ATypePropdef__init_atypepropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6);
 extern const struct class class_parser_nodes__ATypePropdef;
-void VIRTUAL_parser_prod__AReadAble__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AReadAble__visit_all(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AAble__n_visibility(val* self);
-void VIRTUAL_parser_nodes__AAble__n_visibility_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AAble__n_kwredef(val* self);
-void VIRTUAL_parser_prod__AReadAble__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AReadAble__n_kwreadable_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AReadAble__init_areadable(val* self, val* p0, val* p1);
-extern const struct class class_parser_nodes__AReadAble;
-#define COLOR_parser_nodes__AAble___n_visibility 4
-#define COLOR_parser_nodes__AAble___n_kwredef 5
-void VIRTUAL_parser_prod__AWriteAble__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AWriteAble__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AWriteAble__n_visibility_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AWriteAble__n_kwredef_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AWriteAble__n_kwwritable_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AWriteAble__init_awriteable(val* self, val* p0, val* p1, val* p2);
-extern const struct class class_parser_nodes__AWriteAble;
 void VIRTUAL_parser_prod__AIdMethid__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AIdMethid__visit_all(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AIdMethid__n_id(val* self);
@@ -2629,6 +3321,11 @@ void VIRTUAL_parser_prod__AStarMethid__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__AStarMethid__n_star_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AStarMethid__init_astarmethid(val* self, val* p0);
 extern const struct class class_parser_nodes__AStarMethid;
+void VIRTUAL_parser_prod__AStarstarMethid__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AStarstarMethid__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AStarstarMethid__n_starstar_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AStarstarMethid__init_astarstarmethid(val* self, val* p0);
+extern const struct class class_parser_nodes__AStarstarMethid;
 void VIRTUAL_parser_prod__ASlashMethid__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ASlashMethid__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__ASlashMethid__n_slash_61d(val* self, val* p0);
@@ -2727,7 +3424,6 @@ extern const struct type type_parser_nodes__ANodesparser_nodes__AParam;
 #define COLOR_parser_nodes__ASignature___n_type 7
 #define COLOR_modelize_property__ASignature___is_visited 8
 #define COLOR_modelize_property__ASignature___param_names 9
-extern const struct type type_array__Arraymodel__MType;
 #define COLOR_modelize_property__ASignature___param_types 10
 #define COLOR_modelize_property__ASignature___vararg_rank 11
 #define COLOR_modelize_property__ASignature___ret_type 12
@@ -2769,6 +3465,7 @@ extern const struct type type_parser_nodes__ANodesparser_nodes__AType;
 #define COLOR_parser_nodes__AType___n_types 6
 #define COLOR_modelize_class__AType___mtype 7
 #define COLOR_modelize_class__AType___checked_mtype 8
+void VIRTUAL_parser_nodes__ALabel__init(val* self);
 void VIRTUAL_parser_prod__ALabel__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ALabel__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__ALabel__n_kwlabel_61d(val* self, val* p0);
@@ -2782,6 +3479,8 @@ void VIRTUAL_flow__ABlockExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_astvalidation__AExpr__accept_ast_validation(val* self, val* p0);
 val* VIRTUAL_flow__AExpr__after_flow_context(val* self);
 void VIRTUAL_flow__AExpr__after_flow_context_61d(val* self, val* p0);
+val* VIRTUAL_annotation__AExpr__as_string(val* self);
+val* VIRTUAL_annotation__AExpr__as_id(val* self);
 val* VIRTUAL_typing__ABlockExpr__mtype(val* self);
 void VIRTUAL_typing__AExpr__mtype_61d(val* self, val* p0);
 short int VIRTUAL_typing__AExpr__is_typed(val* self);
@@ -2849,20 +3548,21 @@ extern const struct class class_parser_nodes__AReturnExpr;
 void VIRTUAL_parser_prod__ABreakExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ABreakExpr__visit_all(val* self, val* p0);
 void VIRTUAL_scope__ABreakExpr__accept_scope_visitor(val* self, val* p0);
-void VIRTUAL_flow__ABreakExpr__accept_flow_visitor(val* self, val* p0);
+void VIRTUAL_flow__AEscapeExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_typing__ABreakExpr__accept_typing(val* self, val* p0);
-void VIRTUAL_abstract_compiler__ABreakExpr__stmt(val* self, val* p0);
+void VIRTUAL_abstract_compiler__AEscapeExpr__stmt(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ALabelable__n_label(val* self);
 void VIRTUAL_parser_prod__ABreakExpr__n_label_61d(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AEscapeExpr__n_expr(val* self);
+val* VIRTUAL_scope__AEscapeExpr__escapemark(val* self);
+void VIRTUAL_scope__AEscapeExpr__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_flow__AEscapeExpr__before_flow_context(val* self);
 void VIRTUAL_parser_prod__ABreakExpr__n_kwbreak_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__ABreakExpr__n_expr(val* self);
 void VIRTUAL_parser_prod__ABreakExpr__init_abreakexpr(val* self, val* p0, val* p1);
-val* VIRTUAL_scope__ABreakExpr__escapemark(val* self);
-void VIRTUAL_scope__ABreakExpr__escapemark_61d(val* self, val* p0);
-val* VIRTUAL_flow__ABreakExpr__before_flow_context(val* self);
+void VIRTUAL_astbuilder__ABreakExpr__make(val* self, val* p0);
 extern const struct class class_parser_nodes__ABreakExpr;
 #define COLOR_parser_nodes__ALabelable___n_label 9
-#define COLOR_parser_nodes__ABreakExpr___n_expr 11
+#define COLOR_parser_nodes__AEscapeExpr___n_expr 10
 void VIRTUAL_parser_prod__AAbortExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AAbortExpr__visit_all(val* self, val* p0);
 void VIRTUAL_flow__AAbortExpr__accept_flow_visitor(val* self, val* p0);
@@ -2874,32 +3574,27 @@ extern const struct class class_parser_nodes__AAbortExpr;
 void VIRTUAL_parser_prod__AContinueExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AContinueExpr__visit_all(val* self, val* p0);
 void VIRTUAL_scope__AContinueExpr__accept_scope_visitor(val* self, val* p0);
-void VIRTUAL_flow__AContinueExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_typing__AContinueExpr__accept_typing(val* self, val* p0);
-void VIRTUAL_abstract_compiler__AContinueExpr__stmt(val* self, val* p0);
 void VIRTUAL_parser_prod__AContinueExpr__n_label_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AContinueExpr__n_kwcontinue_61d(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AContinueExpr__n_expr(val* self);
 void VIRTUAL_parser_prod__AContinueExpr__init_acontinueexpr(val* self, val* p0, val* p1);
-val* VIRTUAL_scope__AContinueExpr__escapemark(val* self);
-void VIRTUAL_scope__AContinueExpr__escapemark_61d(val* self, val* p0);
-val* VIRTUAL_flow__AContinueExpr__before_flow_context(val* self);
 extern const struct class class_parser_nodes__AContinueExpr;
-#define COLOR_parser_nodes__AContinueExpr___n_kwcontinue 10
-#define COLOR_parser_nodes__AContinueExpr___n_expr 11
+#define COLOR_parser_nodes__AContinueExpr___n_kwcontinue 12
 void VIRTUAL_parser_prod__ADoExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ADoExpr__visit_all(val* self, val* p0);
 void VIRTUAL_scope__ADoExpr__accept_scope_visitor(val* self, val* p0);
 void VIRTUAL_flow__ADoExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_typing__ADoExpr__accept_typing(val* self, val* p0);
+void VIRTUAL_astbuilder__ADoExpr__add(val* self, val* p0);
 void VIRTUAL_abstract_compiler__ADoExpr__stmt(val* self, val* p0);
 void VIRTUAL_parser_prod__ADoExpr__n_label_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ADoExpr__n_kwdo_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ADoExpr__n_block(val* self);
 void VIRTUAL_parser_prod__ADoExpr__n_block_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ADoExpr__init_adoexpr(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_scope__ADoExpr__escapemark(val* self);
-void VIRTUAL_scope__ADoExpr__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_scope__ADoExpr__break_mark(val* self);
+void VIRTUAL_scope__ADoExpr__break_mark_61d(val* self, val* p0);
+void VIRTUAL_astbuilder__ADoExpr__make(val* self);
 extern const struct class class_parser_nodes__ADoExpr;
 #define COLOR_parser_nodes__ADoExpr___n_block 11
 void VIRTUAL_parser_prod__AIfExpr__replace_child(val* self, val* p0, val* p1);
@@ -2954,8 +3649,10 @@ void VIRTUAL_parser_prod__AWhileExpr__n_kwdo_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AWhileExpr__n_block(val* self);
 void VIRTUAL_parser_prod__AWhileExpr__n_block_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AWhileExpr__init_awhileexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
-val* VIRTUAL_scope__AWhileExpr__escapemark(val* self);
-void VIRTUAL_scope__AWhileExpr__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_scope__AWhileExpr__break_mark(val* self);
+void VIRTUAL_scope__AWhileExpr__break_mark_61d(val* self, val* p0);
+val* VIRTUAL_scope__AWhileExpr__continue_mark(val* self);
+void VIRTUAL_scope__AWhileExpr__continue_mark_61d(val* self, val* p0);
 extern const struct class class_parser_nodes__AWhileExpr;
 #define COLOR_parser_nodes__AWhileExpr___n_block 13
 void VIRTUAL_parser_prod__ALoopExpr__replace_child(val* self, val* p0, val* p1);
@@ -2963,14 +3660,18 @@ void VIRTUAL_parser_prod__ALoopExpr__visit_all(val* self, val* p0);
 void VIRTUAL_scope__ALoopExpr__accept_scope_visitor(val* self, val* p0);
 void VIRTUAL_flow__ALoopExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_typing__ALoopExpr__accept_typing(val* self, val* p0);
+void VIRTUAL_astbuilder__ALoopExpr__add(val* self, val* p0);
 void VIRTUAL_abstract_compiler__ALoopExpr__stmt(val* self, val* p0);
 void VIRTUAL_parser_prod__ALoopExpr__n_label_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ALoopExpr__n_kwloop_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__ALoopExpr__n_block(val* self);
 void VIRTUAL_parser_prod__ALoopExpr__n_block_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ALoopExpr__init_aloopexpr(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_scope__ALoopExpr__escapemark(val* self);
-void VIRTUAL_scope__ALoopExpr__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_scope__ALoopExpr__break_mark(val* self);
+void VIRTUAL_scope__ALoopExpr__break_mark_61d(val* self, val* p0);
+val* VIRTUAL_scope__ALoopExpr__continue_mark(val* self);
+void VIRTUAL_scope__ALoopExpr__continue_mark_61d(val* self, val* p0);
+void VIRTUAL_astbuilder__ALoopExpr__make(val* self);
 extern const struct class class_parser_nodes__ALoopExpr;
 #define COLOR_parser_nodes__ALoopExpr___n_block 11
 void VIRTUAL_parser_prod__AForExpr__replace_child(val* self, val* p0, val* p1);
@@ -2992,8 +3693,10 @@ void VIRTUAL_parser_prod__AForExpr__n_block_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AForExpr__init_aforexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 val* VIRTUAL_scope__AForExpr__variables(val* self);
 void VIRTUAL_scope__AForExpr__variables_61d(val* self, val* p0);
-val* VIRTUAL_scope__AForExpr__escapemark(val* self);
-void VIRTUAL_scope__AForExpr__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_scope__AForExpr__break_mark(val* self);
+void VIRTUAL_scope__AForExpr__break_mark_61d(val* self, val* p0);
+val* VIRTUAL_scope__AForExpr__continue_mark(val* self);
+void VIRTUAL_scope__AForExpr__continue_mark_61d(val* self, val* p0);
 void VIRTUAL_typing__AForExpr__coltype_61d(val* self, val* p0);
 val* VIRTUAL_typing__AForExpr__method_iterator(val* self);
 void VIRTUAL_typing__AForExpr__method_iterator_61d(val* self, val* p0);
@@ -3005,6 +3708,12 @@ val* VIRTUAL_typing__AForExpr__method_next(val* self);
 void VIRTUAL_typing__AForExpr__method_next_61d(val* self, val* p0);
 val* VIRTUAL_typing__AForExpr__method_key(val* self);
 void VIRTUAL_typing__AForExpr__method_key_61d(val* self, val* p0);
+val* VIRTUAL_typing__AForExpr__method_finish(val* self);
+void VIRTUAL_typing__AForExpr__method_finish_61d(val* self, val* p0);
+val* VIRTUAL_typing__AForExpr__method_lt(val* self);
+void VIRTUAL_typing__AForExpr__method_lt_61d(val* self, val* p0);
+val* VIRTUAL_typing__AForExpr__method_successor(val* self);
+void VIRTUAL_typing__AForExpr__method_successor_61d(val* self, val* p0);
 void VIRTUAL_typing__AForExpr__do_type_iterator(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__AForExpr;
 extern const struct type type_parser_nodes__ANodesparser_nodes__TId;
@@ -3028,12 +3737,12 @@ extern const struct class class_parser_nodes__AAssertExpr;
 #define COLOR_parser_nodes__AAssertExpr___n_else 12
 void VIRTUAL_parser_prod__AOnceExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AOnceExpr__visit_all(val* self, val* p0);
-void VIRTUAL_flow__AProxyExpr__accept_flow_visitor(val* self, val* p0);
-void VIRTUAL_typing__AProxyExpr__accept_typing(val* self, val* p0);
+void VIRTUAL_flow__AOnceExpr__accept_flow_visitor(val* self, val* p0);
+void VIRTUAL_typing__AOnceExpr__accept_typing(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AOnceExpr__expr(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AProxyExpr__n_expr(val* self);
-void VIRTUAL_parser_prod__AOnceExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AOnceExpr__n_kwonce_61d(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AOnceExpr__n_expr(val* self);
+void VIRTUAL_parser_prod__AOnceExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AOnceExpr__init_aonceexpr(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__AOnceExpr;
 void VIRTUAL_parser_prod__AOrExpr__replace_child(val* self, val* p0, val* p1);
@@ -3205,6 +3914,13 @@ val* VIRTUAL_typing__AStarExpr__property_name(val* self);
 void VIRTUAL_parser_prod__AStarExpr__n_expr2_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AStarExpr__init_astarexpr(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__AStarExpr;
+void VIRTUAL_parser_prod__AStarstarExpr__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AStarstarExpr__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AStarstarExpr__n_expr_61d(val* self, val* p0);
+val* VIRTUAL_typing__AStarstarExpr__property_name(val* self);
+void VIRTUAL_parser_prod__AStarstarExpr__n_expr2_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AStarstarExpr__init_astarstarexpr(val* self, val* p0, val* p1);
+extern const struct class class_parser_nodes__AStarstarExpr;
 void VIRTUAL_parser_prod__ASlashExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ASlashExpr__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__ASlashExpr__n_expr_61d(val* self, val* p0);
@@ -3242,6 +3958,8 @@ void VIRTUAL_parser_prod__ANewExpr__n_args_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__ANewExpr__init_anewexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 val* VIRTUAL_typing__ANewExpr__callsite(val* self);
 void VIRTUAL_typing__ANewExpr__callsite_61d(val* self, val* p0);
+val* VIRTUAL_typing__ANewExpr__recvtype(val* self);
+void VIRTUAL_typing__ANewExpr__recvtype_61d(val* self, val* p0);
 void VIRTUAL_astbuilder__ANewExpr__make(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__ANewExpr;
 #define COLOR_parser_nodes__ANewExpr___n_id 11
@@ -3264,7 +3982,7 @@ extern const struct class class_parser_nodes__AAttrExpr;
 void VIRTUAL_parser_prod__AAttrAssignExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AAttrAssignExpr__visit_all(val* self, val* p0);
 void VIRTUAL_typing__AAttrAssignExpr__accept_typing(val* self, val* p0);
-void VIRTUAL_abstract_compiler__AAttrAssignExpr__stmt(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__AAttrAssignExpr__expr(val* self, val* p0);
 void VIRTUAL_parser_prod__AAttrAssignExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AAttrAssignExpr__n_id_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAssignFormExpr__n_assign(val* self);
@@ -3414,7 +4132,6 @@ void VIRTUAL_flow__AVarAssignExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_local_var_init__AVarAssignExpr__accept_local_var_visitor(val* self, val* p0);
 void VIRTUAL_typing__AVarAssignExpr__accept_typing(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AVarAssignExpr__expr(val* self, val* p0);
-void VIRTUAL_abstract_compiler__AVarAssignExpr__stmt(val* self, val* p0);
 void VIRTUAL_parser_prod__AVarAssignExpr__n_id_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AVarAssignExpr__n_assign_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AVarAssignExpr__n_value_61d(val* self, val* p0);
@@ -3469,14 +4186,20 @@ void VIRTUAL_transform__AArrayExpr__accept_transform_visitor(val* self, val* p0)
 void VIRTUAL_parser_prod__AArrayExpr__n_annotations_61d(val* self, val* p0);
 void VIRTUAL_typing__AArrayExpr__accept_typing(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AArrayExpr__expr(val* self, val* p0);
+void VIRTUAL_parser_prod__AArrayExpr__n_obra_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AArrayExpr__n_exprs(val* self);
 void VIRTUAL_parser_prod__AArrayExpr__n_exprs_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AArrayExpr__init_aarrayexpr(val* self, val* p0, val* p1);
+val* VIRTUAL_parser_nodes__AArrayExpr__n_type(val* self);
+void VIRTUAL_parser_prod__AArrayExpr__n_type_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AArrayExpr__n_cbra_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AArrayExpr__init_aarrayexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 val* VIRTUAL_typing__AArrayExpr__with_capacity_callsite(val* self);
 void VIRTUAL_typing__AArrayExpr__with_capacity_callsite_61d(val* self, val* p0);
 val* VIRTUAL_typing__AArrayExpr__push_callsite(val* self);
 void VIRTUAL_typing__AArrayExpr__push_callsite_61d(val* self, val* p0);
 extern const struct class class_parser_nodes__AArrayExpr;
+#define COLOR_parser_nodes__AArrayExpr___n_type 11
+void VIRTUAL_parser_nodes__ASelfExpr__init(val* self);
 void VIRTUAL_parser_prod__ASelfExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ASelfExpr__visit_all(val* self, val* p0);
 void VIRTUAL_scope__ASelfExpr__accept_scope_visitor(val* self, val* p0);
@@ -3606,11 +4329,14 @@ extern const struct class class_parser_nodes__ASuperstringExpr;
 #define COLOR_parser_nodes__ASuperstringExpr___n_exprs 9
 void VIRTUAL_parser_prod__AParExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AParExpr__visit_all(val* self, val* p0);
+void VIRTUAL_flow__AParExpr__accept_flow_visitor(val* self, val* p0);
 void VIRTUAL_transform__AParExpr__accept_transform_visitor(val* self, val* p0);
 void VIRTUAL_parser_prod__AParExpr__n_annotations_61d(val* self, val* p0);
+void VIRTUAL_typing__AParExpr__accept_typing(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AParExpr__expr(val* self, val* p0);
-void VIRTUAL_parser_prod__AParExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AParExpr__n_opar_61d(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AParExpr__n_expr(val* self);
+void VIRTUAL_parser_prod__AParExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AParExpr__n_cpar_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AParExpr__init_aparexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 extern const struct class class_parser_nodes__AParExpr;
@@ -3656,11 +4382,35 @@ void VIRTUAL_parser_prod__AIssetAttrExpr__init_aissetattrexpr(val* self, val* p0
 extern const struct class class_parser_nodes__AIssetAttrExpr;
 void VIRTUAL_parser_prod__AVarargExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AVarargExpr__visit_all(val* self, val* p0);
-void VIRTUAL_typing__AExpr__accept_typing(val* self, val* p0);
+void VIRTUAL_typing__AVarargExpr__accept_typing(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AVarargExpr__n_expr(val* self);
 void VIRTUAL_parser_prod__AVarargExpr__n_expr_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AVarargExpr__n_dotdotdot_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AVarargExpr__init_avarargexpr(val* self, val* p0, val* p1);
 extern const struct class class_parser_nodes__AVarargExpr;
+void VIRTUAL_parser_prod__AManyExpr__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AManyExpr__visit_all(val* self, val* p0);
+void VIRTUAL_typing__AExpr__accept_typing(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AManyExpr__n_exprs(val* self);
+void VIRTUAL_parser_prod__AManyExpr__init_amanyexpr(val* self, val* p0);
+extern const struct class class_parser_nodes__AManyExpr;
+#define COLOR_parser_nodes__AManyExpr___n_exprs 9
+void VIRTUAL_parser_prod__ATypeExpr__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__ATypeExpr__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__ATypeExpr__n_type_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__ATypeExpr__init_atypeexpr(val* self, val* p0);
+extern const struct class class_parser_nodes__ATypeExpr;
+void VIRTUAL_parser_prod__AMethidExpr__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AMethidExpr__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethidExpr__n_expr_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethidExpr__n_id_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AMethidExpr__init_amethidexpr(val* self, val* p0, val* p1);
+extern const struct class class_parser_nodes__AMethidExpr;
+void VIRTUAL_parser_prod__AAtExpr__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AAtExpr__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AAtExpr__n_annotations_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AAtExpr__init_aatexpr(val* self, val* p0);
+extern const struct class class_parser_nodes__AAtExpr;
 void VIRTUAL_parser_prod__ADebugTypeExpr__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__ADebugTypeExpr__visit_all(val* self, val* p0);
 void VIRTUAL_typing__ADebugTypeExpr__accept_typing(val* self, val* p0);
@@ -3676,7 +4426,6 @@ extern const struct class class_parser_nodes__ADebugTypeExpr;
 void VIRTUAL_parser_prod__AListExprs__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AListExprs__visit_all(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AExprs__n_exprs(val* self);
-void VIRTUAL_parser_nodes__AExprs__init(val* self);
 val* VIRTUAL_typing__AExprs__to_a(val* self);
 void VIRTUAL_parser_prod__AListExprs__init_alistexprs(val* self, val* p0);
 extern const struct class class_parser_nodes__AListExprs;
@@ -3760,9 +4509,11 @@ extern const struct class class_parser_nodes__AAnnotations;
 extern const struct type type_parser_nodes__ANodesparser_nodes__AAnnotation;
 #define COLOR_parser_nodes__AAnnotations___n_items 6
 #define COLOR_parser_nodes__AAnnotations___n_cpar 7
+void VIRTUAL_parser_nodes__AAnnotation__init(val* self);
 void VIRTUAL_parser_prod__AAnnotation__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AAnnotation__visit_all(val* self, val* p0);
 void VIRTUAL_parser_prod__AAnnotation__n_annotations_61d(val* self, val* p0);
+val* VIRTUAL_parser_nodes__AAnnotation__n_doc(val* self);
 void VIRTUAL_parser_prod__AAnnotation__n_doc_61d(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAnnotation__n_kwredef(val* self);
 void VIRTUAL_parser_prod__AAnnotation__n_kwredef_61d(val* self, val* p0);
@@ -3775,48 +4526,30 @@ val* VIRTUAL_parser_nodes__AAnnotation__n_args(val* self);
 void VIRTUAL_parser_prod__AAnnotation__n_cpar_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AAnnotation__init_aannotation(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7);
 val* VIRTUAL_annotation__AAnnotation__name(val* self);
+val* VIRTUAL_annotation__AAnnotation__arg_as_string(val* self, val* p0);
 val* VIRTUAL_annotation__AAnnotation__arg_as_id(val* self, val* p0);
 extern const struct class class_parser_nodes__AAnnotation;
 #define COLOR_parser_nodes__AAnnotation___n_doc 4
 #define COLOR_parser_nodes__AAnnotation___n_kwredef 5
 #define COLOR_parser_nodes__AAnnotation___n_opar 8
-extern const struct type type_parser_nodes__ANodesparser_nodes__AAtArg;
 #define COLOR_parser_nodes__AAnnotation___n_args 9
 #define COLOR_parser_nodes__AAnnotation___n_cpar 10
-void VIRTUAL_parser_prod__ATypeAtArg__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__ATypeAtArg__visit_all(val* self, val* p0);
-val* VIRTUAL_annotation__AAtArg__as_string(val* self);
-val* VIRTUAL_annotation__AAtArg__as_id(val* self);
-void VIRTUAL_parser_prod__ATypeAtArg__n_type_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__ATypeAtArg__init_atypeatarg(val* self, val* p0);
-extern const struct class class_parser_nodes__ATypeAtArg;
-void VIRTUAL_parser_prod__AExprAtArg__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AExprAtArg__visit_all(val* self, val* p0);
-val* VIRTUAL_parser_nodes__AExprAtArg__n_expr(val* self);
-void VIRTUAL_parser_prod__AExprAtArg__n_expr_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AExprAtArg__init_aexpratarg(val* self, val* p0);
-extern const struct class class_parser_nodes__AExprAtArg;
-void VIRTUAL_parser_prod__AAtAtArg__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AAtAtArg__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AAtAtArg__n_annotations_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AAtAtArg__init_aatatarg(val* self, val* p0);
-extern const struct class class_parser_nodes__AAtAtArg;
 void VIRTUAL_parser_prod__AIdAtid__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__AIdAtid__visit_all(val* self, val* p0);
 val* VIRTUAL_parser_nodes__AAtid__n_id(val* self);
 void VIRTUAL_parser_prod__AIdAtid__n_id_61d(val* self, val* p0);
 void VIRTUAL_parser_prod__AIdAtid__init_aidatid(val* self, val* p0);
 extern const struct class class_parser_nodes__AIdAtid;
-void VIRTUAL_parser_prod__AKwreadableAtid__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AKwreadableAtid__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AKwreadableAtid__n_id_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AKwreadableAtid__init_akwreadableatid(val* self, val* p0);
-extern const struct class class_parser_nodes__AKwreadableAtid;
-void VIRTUAL_parser_prod__AKwwritableAtid__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_prod__AKwwritableAtid__visit_all(val* self, val* p0);
-void VIRTUAL_parser_prod__AKwwritableAtid__n_id_61d(val* self, val* p0);
-void VIRTUAL_parser_prod__AKwwritableAtid__init_akwwritableatid(val* self, val* p0);
-extern const struct class class_parser_nodes__AKwwritableAtid;
+void VIRTUAL_parser_prod__AKwexternAtid__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AKwexternAtid__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AKwexternAtid__n_id_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AKwexternAtid__init_akwexternatid(val* self, val* p0);
+extern const struct class class_parser_nodes__AKwexternAtid;
+void VIRTUAL_parser_prod__AKwabstractAtid__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_prod__AKwabstractAtid__visit_all(val* self, val* p0);
+void VIRTUAL_parser_prod__AKwabstractAtid__n_id_61d(val* self, val* p0);
+void VIRTUAL_parser_prod__AKwabstractAtid__init_akwabstractatid(val* self, val* p0);
+extern const struct class class_parser_nodes__AKwabstractAtid;
 void VIRTUAL_parser_prod__Start__replace_child(val* self, val* p0, val* p1);
 void VIRTUAL_parser_prod__Start__visit_all(val* self, val* p0);
 val* VIRTUAL_parser_nodes__Start__n_base(val* self);
@@ -3843,6 +4576,7 @@ extern const struct class class_lexer_work__Lexer;
 #define COLOR_lexer_work__Lexer___pos 5
 #define COLOR_lexer_work__Lexer___cr 6
 #define COLOR_lexer_work__Lexer___last_token 7
+extern const struct class class_tables__TablesCapable;
 void VIRTUAL_parser_work__State__init(val* self, long p0, val* p1);
 extern const struct class class_parser_work__State;
 void VIRTUAL_parser_work__Parser__init(val* self, val* p0);
@@ -3854,118 +4588,140 @@ val* VIRTUAL_parser_work__Parser__parse(val* self);
 void VIRTUAL_parser__Parser__build_reduce_table(val* self);
 extern const struct class class_parser_work__Parser;
 void VIRTUAL_parser_work__ComputeProdLocationVisitor__visit(val* self, val* p0);
-void VIRTUAL_parser_work__ComputeProdLocationVisitor__init(val* self);
 extern const struct class class_parser_work__ComputeProdLocationVisitor;
 extern const struct type type_array__Arrayparser_nodes__Prod;
 #define COLOR_parser_work__ComputeProdLocationVisitor___need_first_prods 1
 #define COLOR_parser_work__ComputeProdLocationVisitor___need_after_epsilons 2
 #define COLOR_parser_work__ComputeProdLocationVisitor___last_location 3
-val* VIRTUAL_poset__POSet__iterator(val* self);
-short int VIRTUAL_abstract_collection__Collection__is_empty(val* self);
-long VIRTUAL_abstract_collection__Collection__length(val* self);
-short int VIRTUAL_poset__POSet__has(val* self, val* p0);
-val* VIRTUAL_abstract_collection__Collection__first(val* self);
-long VIRTUAL_poset__POSet__compare(val* self, val* p0, val* p1);
-val* VIRTUAL_poset__POSet__elements(val* self);
-val* VIRTUAL_poset__POSet__add_node(val* self, val* p0);
-val* VIRTUAL_poset__POSet___91d_93d(val* self, val* p0);
-void VIRTUAL_poset__POSet__add_edge(val* self, val* p0, val* p1);
-val* VIRTUAL_poset__POSet__linearize(val* self, val* p0);
-void VIRTUAL_poset__POSet__init(val* self);
-extern const struct class class_poset__POSet;
-#define COLOR_hash_collection__HashMapposet__POSet_FT0poset__POSetElementposet__POSet_FT0 0
-#define COLOR_poset__POSet___elements 0
-val* VIRTUAL_poset__POSetElement__poset(val* self);
-val* VIRTUAL_poset__POSetElement__element(val* self);
-val* VIRTUAL_poset__POSetElement__tos(val* self);
-val* VIRTUAL_poset__POSetElement__froms(val* self);
-val* VIRTUAL_poset__POSetElement__dtos(val* self);
-val* VIRTUAL_poset__POSetElement__dfroms(val* self);
-long VIRTUAL_poset__POSetElement__count(val* self);
-val* VIRTUAL_poset__POSetElement__greaters(val* self);
-val* VIRTUAL_poset__POSetElement__direct_greaters(val* self);
-val* VIRTUAL_poset__POSetElement__smallers(val* self);
-val* VIRTUAL_poset__POSetElement__direct_smallers(val* self);
-short int VIRTUAL_poset__POSetElement___60d_61d(val* self, val* p0);
-short int VIRTUAL_poset__POSetElement___60d(val* self, val* p0);
-void VIRTUAL_poset__POSetElement__init(val* self, val* p0, val* p1, long p2);
-extern const struct class class_poset__POSetElement;
-val* NEW_hash_collection__HashSet(const struct type* type);
-#define COLOR_hash_collection__HashSetposet__POSetElement_FT0 0
-void hash_collection__HashSet__init(val* self);
-#define COLOR_poset__POSetElement___tos 2
-#define COLOR_poset__POSetElement___froms 3
-#define COLOR_poset__POSetElement___dtos 4
-#define COLOR_poset__POSetElement___dfroms 5
-val* VIRTUAL_phase__Phase__to_s(val* self);
-val* VIRTUAL_phase__Phase__toolcontext(val* self);
-void VIRTUAL_phase__Phase__toolcontext_61d(val* self, val* p0);
-val* VIRTUAL_phase__Phase__in_hierarchy(val* self);
-void VIRTUAL_phase__Phase__in_hierarchy_61d(val* self, val* p0);
-void VIRTUAL_phase__Phase__init(val* self, val* p0, val* p1);
-short int VIRTUAL_phase__Phase__disabled(val* self);
-void VIRTUAL_phase__Phase__disabled_61d(val* self, short int p0);
+void VIRTUAL_parser_work__TextCollectorVisitor__visit(val* self, val* p0);
+val* VIRTUAL_parser_work__TextCollectorVisitor__text(val* self);
+void VIRTUAL_parser_work__TextCollectorVisitor__text_61d(val* self, val* p0);
+extern const struct class class_parser_work__TextCollectorVisitor;
+#define COLOR_parser_work__TextCollectorVisitor___text 1
 void VIRTUAL_literal__LiteralPhase__process_nmodule(val* self, val* p0);
-void VIRTUAL_phase__Phase__process_nclassdef(val* self, val* p0);
-void VIRTUAL_phase__Phase__process_npropdef(val* self, val* p0);
-void VIRTUAL_phase__Phase__process_annotated_node(val* self, val* p0, val* p1);
-void VIRTUAL_modelbuilder__Phase__process_mainmodule(val* self, val* p0, val* p1);
 extern const struct class class_literal__LiteralPhase;
-#define COLOR_phase__Phase___disabled 2
 void VIRTUAL_literal__LiteralVisitor__visit(val* self, val* p0);
 val* VIRTUAL_literal__LiteralVisitor__toolcontext(val* self);
 void VIRTUAL_literal__LiteralVisitor__toolcontext_61d(val* self, val* p0);
 void VIRTUAL_literal__LiteralVisitor__init(val* self, val* p0);
 extern const struct class class_literal__LiteralVisitor;
 void VIRTUAL_phase__Phase__process_nmodule(val* self, val* p0);
-void VIRTUAL_scope__ScopePhase__process_npropdef(val* self, val* p0);
-extern const struct class class_scope__ScopePhase;
-val* VIRTUAL_scope__Variable__to_s(val* self);
-val* VIRTUAL_scope__Variable__name(val* self);
-void VIRTUAL_scope__Variable__init(val* self, val* p0);
-val* VIRTUAL_typing__Variable__declared_type(val* self);
-void VIRTUAL_typing__Variable__declared_type_61d(val* self, val* p0);
-extern const struct class class_scope__Variable;
-val* VIRTUAL_scope__EscapeMark__name(val* self);
-short int VIRTUAL_scope__EscapeMark__for_loop(val* self);
-val* VIRTUAL_scope__EscapeMark__continues(val* self);
-val* VIRTUAL_scope__EscapeMark__breaks(val* self);
-void VIRTUAL_scope__EscapeMark__init(val* self, val* p0, short int p1);
-extern const struct class class_scope__EscapeMark;
-extern const struct type type_array__Arrayparser_nodes__AContinueExpr;
-#define COLOR_scope__EscapeMark___continues 2
-extern const struct type type_array__Arrayparser_nodes__ABreakExpr;
-#define COLOR_scope__EscapeMark___breaks 3
-void VIRTUAL_scope__ScopeVisitor__visit(val* self, val* p0);
-val* VIRTUAL_scope__ScopeVisitor__toolcontext(val* self);
-void VIRTUAL_scope__ScopeVisitor__toolcontext_61d(val* self, val* p0);
-val* VIRTUAL_scope__ScopeVisitor__selfvariable(val* self);
-void VIRTUAL_scope__ScopeVisitor__init(val* self, val* p0);
-val* VIRTUAL_scope__ScopeVisitor__scopes(val* self);
-short int VIRTUAL_scope__ScopeVisitor__register_variable(val* self, val* p0, val* p1);
-val* VIRTUAL_scope__ScopeVisitor__search_variable(val* self, val* p0);
-void VIRTUAL_scope__ScopeVisitor__enter_visit_block(val* self, val* p0, val* p1);
-val* VIRTUAL_scope__ScopeVisitor__search_label(val* self, val* p0);
-val* VIRTUAL_scope__ScopeVisitor__make_escape_mark(val* self, val* p0, short int p1);
-val* VIRTUAL_scope__ScopeVisitor__get_escapemark(val* self, val* p0, val* p1);
-void VIRTUAL_scope__ScopeVisitor__error(val* self, val* p0, val* p1);
-extern const struct class class_scope__ScopeVisitor;
+void VIRTUAL_transform__TransformPhase__process_npropdef(val* self, val* p0);
+extern const struct class class_transform__TransformPhase;
+void VIRTUAL_transform__TransformVisitor__visit(val* self, val* p0);
+val* VIRTUAL_transform__TransformVisitor__phase(val* self);
+void VIRTUAL_transform__TransformVisitor__phase_61d(val* self, val* p0);
+val* VIRTUAL_transform__TransformVisitor__mmodule(val* self);
+void VIRTUAL_transform__TransformVisitor__mmodule_61d(val* self, val* p0);
+val* VIRTUAL_transform__TransformVisitor__mclassdef(val* self);
+void VIRTUAL_transform__TransformVisitor__mclassdef_61d(val* self, val* p0);
+val* VIRTUAL_transform__TransformVisitor__mpropdef(val* self);
+void VIRTUAL_transform__TransformVisitor__mpropdef_61d(val* self, val* p0);
+val* VIRTUAL_transform__TransformVisitor__builder(val* self);
+void VIRTUAL_transform__TransformVisitor__builder_61d(val* self, val* p0);
+void VIRTUAL_transform__TransformVisitor__init(val* self, val* p0, val* p1);
+extern const struct class class_transform__TransformVisitor;
+void VIRTUAL_astbuilder__ASTBuilder__init(val* self);
+val* VIRTUAL_astbuilder__ASTBuilder__mmodule(val* self);
+void VIRTUAL_astbuilder__ASTBuilder__mmodule_61d(val* self, val* p0);
+val* VIRTUAL_astbuilder__ASTBuilder__anchor(val* self);
+void VIRTUAL_astbuilder__ASTBuilder__anchor_61d(val* self, val* p0);
+val* VIRTUAL_astbuilder__ASTBuilder__make_int(val* self, long p0);
+val* VIRTUAL_astbuilder__ASTBuilder__make_new(val* self, val* p0, val* p1);
+val* VIRTUAL_astbuilder__ASTBuilder__make_call(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_astbuilder__ASTBuilder__make_block(val* self);
+val* VIRTUAL_astbuilder__ASTBuilder__make_loop(val* self);
+val* VIRTUAL_astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1);
+val* VIRTUAL_astbuilder__ASTBuilder__make_var_assign(val* self, val* p0, val* p1);
+val* VIRTUAL_astbuilder__ASTBuilder__make_attr_read(val* self, val* p0, val* p1);
+val* VIRTUAL_astbuilder__ASTBuilder__make_attr_assign(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_astbuilder__ASTBuilder__make_do(val* self);
+val* VIRTUAL_astbuilder__ASTBuilder__make_break(val* self, val* p0);
+val* VIRTUAL_astbuilder__ASTBuilder__make_if(val* self, val* p0, val* p1);
+extern const struct class class_astbuilder__ASTBuilder;
+void VIRTUAL_parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void VIRTUAL_parser_nodes__ANode__visit_all(val* self, val* p0);
+void VIRTUAL_astvalidation__APlaceholderExpr__accept_ast_validation(val* self, val* p0);
+void VIRTUAL_astbuilder__APlaceholderExpr__make(val* self);
+extern const struct class class_astbuilder__APlaceholderExpr;
+void VIRTUAL_typing__TypingPhase__process_npropdef(val* self, val* p0);
+extern const struct class class_typing__TypingPhase;
+val* VIRTUAL_typing__TypeVisitor__modelbuilder(val* self);
+void VIRTUAL_typing__TypeVisitor__modelbuilder_61d(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__mmodule(val* self);
+void VIRTUAL_typing__TypeVisitor__mmodule_61d(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__anchor(val* self);
+void VIRTUAL_typing__TypeVisitor__anchor_61d(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__mclassdef(val* self);
+void VIRTUAL_typing__TypeVisitor__mclassdef_61d(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__mpropdef(val* self);
+void VIRTUAL_typing__TypeVisitor__mpropdef_61d(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__selfvariable(val* self);
+void VIRTUAL_typing__TypeVisitor__selfvariable_61d(val* self, val* p0);
+short int VIRTUAL_typing__TypeVisitor__is_toplevel_context(val* self);
+void VIRTUAL_typing__TypeVisitor__is_toplevel_context_61d(val* self, short int p0);
+void VIRTUAL_typing__TypeVisitor__init(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_typing__TypeVisitor__anchor_to(val* self, val* p0);
+short int VIRTUAL_typing__TypeVisitor__is_subtype(val* self, val* p0, val* p1);
+val* VIRTUAL_typing__TypeVisitor__resolve_for(val* self, val* p0, val* p1, short int p2);
+val* VIRTUAL_typing__TypeVisitor__check_subtype(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_typing__TypeVisitor__visit_stmt(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__visit_expr(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__visit_expr_subtype(val* self, val* p0, val* p1);
+val* VIRTUAL_typing__TypeVisitor__visit_expr_bool(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__visit_expr_cast(val* self, val* p0, val* p1, val* p2);
+void VIRTUAL_typing__TypeVisitor__null_test(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__try_get_mproperty_by_name2(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_typing__TypeVisitor__resolve_mtype(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__try_get_mclass(val* self, val* p0, val* p1);
+val* VIRTUAL_typing__TypeVisitor__get_mclass(val* self, val* p0, val* p1);
+val* VIRTUAL_typing__TypeVisitor__type_bool(val* self, val* p0);
+val* VIRTUAL_typing__TypeVisitor__get_method(val* self, val* p0, val* p1, val* p2, short int p3);
+val* VIRTUAL_typing__TypeVisitor__try_get_method(val* self, val* p0, val* p1, val* p2, short int p3);
+short int VIRTUAL_typing__TypeVisitor__check_signature(val* self, val* p0, val* p1, val* p2, val* p3);
+void VIRTUAL_typing__TypeVisitor__error(val* self, val* p0, val* p1);
+val* VIRTUAL_typing__TypeVisitor__get_variable(val* self, val* p0, val* p1);
+void VIRTUAL_typing__TypeVisitor__set_variable(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_typing__TypeVisitor__merge_types(val* self, val* p0, val* p1);
+extern const struct class class_typing__TypeVisitor;
 val* NEW_scope__Variable(const struct type* type);
 extern const struct type type_scope__Variable;
-#define COLOR_scope__Variable___name 0
-#define COLOR_scope__ScopeVisitor___selfvariable 2
-val* NEW_list__List(const struct type* type);
-extern const struct type type_list__Listscope__Scope;
-#define COLOR_scope__ScopeVisitor___scopes 3
-val* VIRTUAL_scope__Scope__variables(val* self);
-val* VIRTUAL_scope__Scope__escapemark(val* self);
-void VIRTUAL_scope__Scope__escapemark_61d(val* self, val* p0);
-val* VIRTUAL_scope__Scope__get_variable(val* self, val* p0);
-void VIRTUAL_scope__Scope__init(val* self);
-extern const struct class class_scope__Scope;
-extern const struct type type_hash_collection__HashMapstring__Stringscope__Variable;
-#define COLOR_scope__Scope___variables 0
-#define COLOR_scope__Scope___escapemark 1
+#define COLOR_scope__Variable__name_61d 32
+#define COLOR_typing__TypeVisitor___selfvariable 5
+#define COLOR_typing__TypeVisitor___is_toplevel_context 6
+void VIRTUAL_typing__CallSite__init(val* self);
+val* VIRTUAL_typing__CallSite__node(val* self);
+void VIRTUAL_typing__CallSite__node_61d(val* self, val* p0);
+val* VIRTUAL_typing__CallSite__recv(val* self);
+void VIRTUAL_typing__CallSite__recv_61d(val* self, val* p0);
+val* VIRTUAL_typing__CallSite__mmodule(val* self);
+void VIRTUAL_typing__CallSite__mmodule_61d(val* self, val* p0);
+val* VIRTUAL_typing__CallSite__anchor(val* self);
+void VIRTUAL_typing__CallSite__anchor_61d(val* self, val* p0);
+void VIRTUAL_typing__CallSite__recv_is_self_61d(val* self, short int p0);
+val* VIRTUAL_typing__CallSite__mproperty(val* self);
+void VIRTUAL_typing__CallSite__mproperty_61d(val* self, val* p0);
+val* VIRTUAL_typing__CallSite__mpropdef(val* self);
+void VIRTUAL_typing__CallSite__mpropdef_61d(val* self, val* p0);
+val* VIRTUAL_typing__CallSite__msignature(val* self);
+void VIRTUAL_typing__CallSite__msignature_61d(val* self, val* p0);
+short int VIRTUAL_typing__CallSite__erasure_cast(val* self);
+void VIRTUAL_typing__CallSite__erasure_cast_61d(val* self, short int p0);
+short int VIRTUAL_typing__CallSite__check_signature(val* self, val* p0, val* p1);
+extern const struct class class_typing__CallSite;
+void VIRTUAL_local_var_init__LocalVarInitPhase__process_npropdef(val* self, val* p0);
+extern const struct class class_local_var_init__LocalVarInitPhase;
+void VIRTUAL_local_var_init__LocalVarInitVisitor__visit(val* self, val* p0);
+val* VIRTUAL_local_var_init__LocalVarInitVisitor__toolcontext(val* self);
+void VIRTUAL_local_var_init__LocalVarInitVisitor__toolcontext_61d(val* self, val* p0);
+void VIRTUAL_local_var_init__LocalVarInitVisitor__init(val* self, val* p0);
+val* VIRTUAL_local_var_init__LocalVarInitVisitor__maybe_unset_vars(val* self);
+void VIRTUAL_local_var_init__LocalVarInitVisitor__mark_is_unset(val* self, val* p0, val* p1);
+void VIRTUAL_local_var_init__LocalVarInitVisitor__mark_is_set(val* self, val* p0, val* p1);
+void VIRTUAL_local_var_init__LocalVarInitVisitor__check_is_set(val* self, val* p0, val* p1);
+extern const struct class class_local_var_init__LocalVarInitVisitor;
+extern const struct type type_hash_collection__HashSetscope__Variable;
+#define COLOR_local_var_init__LocalVarInitVisitor___maybe_unset_vars 2
 void VIRTUAL_flow__FlowPhase__process_npropdef(val* self, val* p0);
 extern const struct class class_flow__FlowPhase;
 void VIRTUAL_flow__FlowVisitor__visit(val* self, val* p0);
@@ -4006,7 +4762,6 @@ val* VIRTUAL_flow__FlowContext__when_false(val* self);
 void VIRTUAL_flow__FlowContext__when_false_61d(val* self, val* p0);
 void VIRTUAL_flow__FlowContext__add_previous(val* self, val* p0);
 void VIRTUAL_flow__FlowContext__add_loop(val* self, val* p0);
-void VIRTUAL_flow__FlowContext__init(val* self);
 val* VIRTUAL_local_var_init__FlowContext__set_vars(val* self);
 short int VIRTUAL_local_var_init__FlowContext__is_variable_set(val* self, val* p0);
 val* VIRTUAL_typing__FlowContext__vars(val* self);
@@ -4023,675 +4778,86 @@ extern const struct class class_flow__FlowContext;
 #define COLOR_flow__FlowContext___name 6
 #define COLOR_flow__FlowContext___when_true 7
 #define COLOR_flow__FlowContext___when_false 8
-extern const struct type type_hash_collection__HashSetscope__Variable;
 #define COLOR_local_var_init__FlowContext___set_vars 9
 extern const struct type type_hash_collection__HashMapscope__Variablenullable_model__MType;
 #define COLOR_typing__FlowContext___vars 10
 extern const struct type type_hash_collection__HashMapscope__Variablenullable_array__Arraynullable_model__MType;
 #define COLOR_typing__FlowContext___cache 11
-void VIRTUAL_local_var_init__LocalVarInitPhase__process_npropdef(val* self, val* p0);
-extern const struct class class_local_var_init__LocalVarInitPhase;
-void VIRTUAL_local_var_init__LocalVarInitVisitor__visit(val* self, val* p0);
-val* VIRTUAL_local_var_init__LocalVarInitVisitor__toolcontext(val* self);
-void VIRTUAL_local_var_init__LocalVarInitVisitor__toolcontext_61d(val* self, val* p0);
-void VIRTUAL_local_var_init__LocalVarInitVisitor__init(val* self, val* p0);
-val* VIRTUAL_local_var_init__LocalVarInitVisitor__maybe_unset_vars(val* self);
-void VIRTUAL_local_var_init__LocalVarInitVisitor__mark_is_unset(val* self, val* p0, val* p1);
-void VIRTUAL_local_var_init__LocalVarInitVisitor__mark_is_set(val* self, val* p0, val* p1);
-void VIRTUAL_local_var_init__LocalVarInitVisitor__check_is_set(val* self, val* p0, val* p1);
-extern const struct class class_local_var_init__LocalVarInitVisitor;
-#define COLOR_local_var_init__LocalVarInitVisitor___maybe_unset_vars 2
-void VIRTUAL_typing__TypingPhase__process_npropdef(val* self, val* p0);
-extern const struct class class_typing__TypingPhase;
-val* VIRTUAL_typing__TypeVisitor__modelbuilder(val* self);
-void VIRTUAL_typing__TypeVisitor__modelbuilder_61d(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__mmodule(val* self);
-void VIRTUAL_typing__TypeVisitor__mmodule_61d(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__anchor(val* self);
-void VIRTUAL_typing__TypeVisitor__anchor_61d(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__mclassdef(val* self);
-void VIRTUAL_typing__TypeVisitor__mclassdef_61d(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__mpropdef(val* self);
-void VIRTUAL_typing__TypeVisitor__mpropdef_61d(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__selfvariable(val* self);
-void VIRTUAL_typing__TypeVisitor__selfvariable_61d(val* self, val* p0);
-short int VIRTUAL_typing__TypeVisitor__is_toplevel_context(val* self);
-void VIRTUAL_typing__TypeVisitor__is_toplevel_context_61d(val* self, short int p0);
-void VIRTUAL_typing__TypeVisitor__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_typing__TypeVisitor__anchor_to(val* self, val* p0);
-short int VIRTUAL_typing__TypeVisitor__is_subtype(val* self, val* p0, val* p1);
-val* VIRTUAL_typing__TypeVisitor__resolve_for(val* self, val* p0, val* p1, short int p2);
-val* VIRTUAL_typing__TypeVisitor__check_subtype(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_typing__TypeVisitor__visit_stmt(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__visit_expr(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__visit_expr_subtype(val* self, val* p0, val* p1);
-val* VIRTUAL_typing__TypeVisitor__visit_expr_bool(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__visit_expr_cast(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_typing__TypeVisitor__try_get_mproperty_by_name2(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_typing__TypeVisitor__resolve_mtype(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__try_get_mclass(val* self, val* p0, val* p1);
-val* VIRTUAL_typing__TypeVisitor__get_mclass(val* self, val* p0, val* p1);
-val* VIRTUAL_typing__TypeVisitor__type_bool(val* self, val* p0);
-val* VIRTUAL_typing__TypeVisitor__get_method(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_typing__TypeVisitor__check_signature(val* self, val* p0, val* p1, val* p2, val* p3);
-void VIRTUAL_typing__TypeVisitor__error(val* self, val* p0, val* p1);
-val* VIRTUAL_typing__TypeVisitor__get_variable(val* self, val* p0, val* p1);
-void VIRTUAL_typing__TypeVisitor__set_variable(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_typing__TypeVisitor__merge_types(val* self, val* p0, val* p1);
-extern const struct class class_typing__TypeVisitor;
-#define COLOR_typing__TypeVisitor___selfvariable 5
-#define COLOR_typing__TypeVisitor___is_toplevel_context 6
-val* VIRTUAL_typing__CallSite__node(val* self);
-val* VIRTUAL_typing__CallSite__recv(val* self);
-val* VIRTUAL_typing__CallSite__mmodule(val* self);
-val* VIRTUAL_typing__CallSite__anchor(val* self);
-val* VIRTUAL_typing__CallSite__mproperty(val* self);
-val* VIRTUAL_typing__CallSite__mpropdef(val* self);
-val* VIRTUAL_typing__CallSite__msignature(val* self);
-short int VIRTUAL_typing__CallSite__erasure_cast(val* self);
-short int VIRTUAL_typing__CallSite__check_signature(val* self, val* p0, val* p1);
-void VIRTUAL_typing__CallSite__init(val* self, val* p0, val* p1, val* p2, val* p3, short int p4, val* p5, val* p6, val* p7, short int p8);
-extern const struct class class_typing__CallSite;
-void VIRTUAL_modelize_property__ModelizePropertyPhase__process_nmodule(val* self, val* p0);
-extern const struct class class_modelize_property__ModelizePropertyPhase;
-void VIRTUAL_modelize_property__TextCollectorVisitor__visit(val* self, val* p0);
-val* VIRTUAL_modelize_property__TextCollectorVisitor__text(val* self);
-void VIRTUAL_modelize_property__TextCollectorVisitor__text_61d(val* self, val* p0);
-extern const struct class class_modelize_property__TextCollectorVisitor;
-#define COLOR_modelize_property__TextCollectorVisitor___text 1
-void VIRTUAL_modelize_class__ModelizeClassPhase__process_nmodule(val* self, val* p0);
-extern const struct class class_modelize_class__ModelizeClassPhase;
-val* VIRTUAL_modelbuilder__ModelBuilder__model(val* self);
-void VIRTUAL_modelbuilder__ModelBuilder__model_61d(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__toolcontext(val* self);
-void VIRTUAL_modelbuilder__ModelBuilder__toolcontext_61d(val* self, val* p0);
-void VIRTUAL_modelbuilder__ModelBuilder__run_phases(val* self);
-void VIRTUAL_modelbuilder__ModelBuilder__init(val* self, val* p0, val* p1);
-val* VIRTUAL_modelbuilder__ModelBuilder__parse(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mclass_by_name(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name2(val* self, val* p0, val* p1, val* p2, val* p3);
-val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name2_cache(val* self);
-val* VIRTUAL_modelbuilder__ModelBuilder__try_get_mproperty_by_name(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelbuilder__ModelBuilder__paths(val* self);
-val* VIRTUAL_modelbuilder__ModelBuilder__search_mmodule_by_name(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelbuilder__ModelBuilder__get_mmodule_by_name(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelbuilder__ModelBuilder__search_module_in_paths(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelbuilder__ModelBuilder__identified_files(val* self);
-val* VIRTUAL_modelbuilder__ModelBuilder__identify_file(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__mgroups(val* self);
-val* VIRTUAL_modelbuilder__ModelBuilder__get_mgroup(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__module_absolute_path(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__load_module_ast(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__load_module(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__build_a_mmodule(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_modelbuilder__ModelBuilder__build_module_importation(val* self, val* p0);
-val* VIRTUAL_modelbuilder__ModelBuilder__nmodules(val* self);
-val* VIRTUAL_modelbuilder__ModelBuilder__mmodule2nmodule(val* self);
-void VIRTUAL_modelbuilder__ModelBuilder__error(val* self, val* p0, val* p1);
-void VIRTUAL_modelbuilder__ModelBuilder__warning(val* self, val* p0, val* p1);
-val* VIRTUAL_modelbuilder__ModelBuilder__force_get_primitive_method(val* self, val* p0, val* p1, val* p2, val* p3);
-void VIRTUAL_modelize_class__ModelBuilder__build_a_mclass(val* self, val* p0, val* p1);
-void VIRTUAL_modelize_class__ModelBuilder__build_a_mclassdef(val* self, val* p0, val* p1);
-void VIRTUAL_modelize_class__ModelBuilder__collect_a_mclassdef_inheritance(val* self, val* p0, val* p1);
-void VIRTUAL_modelize_class__ModelBuilder__check_supertypes(val* self, val* p0, val* p1);
-void VIRTUAL_modelize_class__ModelBuilder__build_classes(val* self, val* p0);
-val* VIRTUAL_modelize_class__ModelBuilder__mclassdef2nclassdef(val* self);
-val* VIRTUAL_modelize_class__ModelBuilder__resolve_mtype_unchecked(val* self, val* p0, val* p1, val* p2, short int p3);
-val* VIRTUAL_modelize_class__ModelBuilder__resolve_mtype(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_modelize_property__ModelBuilder__mpropdef2npropdef(val* self);
-void VIRTUAL_modelize_property__ModelBuilder__build_properties(val* self, val* p0);
-void VIRTUAL_modelize_property__ModelBuilder__process_default_constructors(val* self, val* p0);
-void VIRTUAL_modelize_property__ModelBuilder__check_visibility(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__ModelBuilder__compile_dir(val* self);
-void VIRTUAL_abstract_compiler__ModelBuilder__compile_dir_61d(val* self, val* p0);
-void VIRTUAL_abstract_compiler__ModelBuilder__write_and_make(val* self, val* p0);
-void VIRTUAL_separate_compiler__ModelBuilder__run_separate_compiler(val* self, val* p0, val* p1);
-long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_tables(val* self);
-void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_tables_61d(val* self, long p0);
-long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_direct(val* self);
-void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_direct_61d(val* self, long p0);
-long VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_inline(val* self);
-void VIRTUAL_separate_compiler__ModelBuilder__nb_invok_by_inline_61d(val* self, long p0);
-void VIRTUAL_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler(val* self, val* p0, val* p1);
-extern const struct class class_modelbuilder__ModelBuilder;
-val* NEW_more_collections__HashMap3(const struct type* type);
-extern const struct type type_more_collections__HashMap3mmodule__MModulemodel__MTypestring__Stringnullable_model__MProperty;
-#define COLOR_modelbuilder__ModelBuilder___try_get_mproperty_by_name2_cache 2
-#define COLOR_modelbuilder__ModelBuilder___paths 3
-extern const struct type type_hash_collection__HashMapstring__Stringnullable_modelbuilder__ModulePath;
-#define COLOR_modelbuilder__ModelBuilder___identified_files 4
-extern const struct type type_hash_collection__HashMapstring__Stringnullable_mproject__MGroup;
-#define COLOR_modelbuilder__ModelBuilder___mgroups 5
-extern const struct type type_array__Arrayparser_nodes__AModule;
-#define COLOR_modelbuilder__ModelBuilder___nmodules 6
-extern const struct type type_hash_collection__HashMapmmodule__MModuleparser_nodes__AModule;
-#define COLOR_modelbuilder__ModelBuilder___mmodule2nmodule 7
-extern const struct type type_hash_collection__HashMapmodel__MClassDefparser_nodes__AClassdef;
-#define COLOR_modelize_class__ModelBuilder___mclassdef2nclassdef 8
-extern const struct type type_hash_collection__HashMapmodel__MPropDefparser_nodes__APropdef;
-#define COLOR_modelize_property__ModelBuilder___mpropdef2npropdef 9
-#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_tables 11
-#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_direct 12
-#define COLOR_separate_compiler__ModelBuilder___nb_invok_by_inline 13
-val* VIRTUAL_modelbuilder__ModulePath__to_s(val* self);
-val* VIRTUAL_modelbuilder__ModulePath__name(val* self);
-val* VIRTUAL_modelbuilder__ModulePath__filepath(val* self);
-val* VIRTUAL_modelbuilder__ModulePath__mgroup(val* self);
-val* VIRTUAL_modelbuilder__ModulePath__mmodule(val* self);
-void VIRTUAL_modelbuilder__ModulePath__mmodule_61d(val* self, val* p0);
-void VIRTUAL_modelbuilder__ModulePath__init(val* self, val* p0, val* p1, val* p2);
-extern const struct class class_modelbuilder__ModulePath;
-#define COLOR_modelbuilder__ModulePath___mmodule 3
-long VIRTUAL_model__MClassDefSorter__compare(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MClassDefSorter__mmodule(val* self);
-void VIRTUAL_model__MClassDefSorter__init(val* self, val* p0);
-extern const struct class class_model__MClassDefSorter;
-long VIRTUAL_model__MPropDefSorter__compare(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MPropDefSorter__mmodule(val* self);
-void VIRTUAL_model__MPropDefSorter__init(val* self, val* p0);
-extern const struct class class_model__MPropDefSorter;
-val* VIRTUAL_model__MClass__to_s(val* self);
-val* VIRTUAL_model__MClass__name(val* self);
-val* VIRTUAL_model__MClass__model(val* self);
-void VIRTUAL_model_base__MEntity__init(val* self);
-val* VIRTUAL_mdoc__MEntity__mdoc(val* self);
-void VIRTUAL_mdoc__MEntity__mdoc_61d(val* self, val* p0);
-val* VIRTUAL_model__MClass__intro_mmodule(val* self);
-void VIRTUAL_model__MClass__intro_mmodule_61d(val* self, val* p0);
-void VIRTUAL_model__MClass__name_61d(val* self, val* p0);
-val* VIRTUAL_model__MClass__full_name(val* self);
-long VIRTUAL_model__MClass__arity(val* self);
-void VIRTUAL_model__MClass__arity_61d(val* self, long p0);
-val* VIRTUAL_model__MClass__kind(val* self);
-void VIRTUAL_model__MClass__kind_61d(val* self, val* p0);
-val* VIRTUAL_model__MClass__visibility(val* self);
-void VIRTUAL_model__MClass__visibility_61d(val* self, val* p0);
-void VIRTUAL_model__MClass__init(val* self, val* p0, val* p1, long p2, val* p3, val* p4);
-val* VIRTUAL_model__MClass__mclassdefs(val* self);
-val* VIRTUAL_model__MClass__intro(val* self);
-val* VIRTUAL_model__MClass__in_hierarchy(val* self, val* p0);
-val* VIRTUAL_model__MClass__mclass_type(val* self);
-void VIRTUAL_model__MClass__mclass_type_61d(val* self, val* p0);
-val* VIRTUAL_model__MClass__get_mtype(val* self, val* p0);
-val* VIRTUAL_model__MClass__get_mtype_cache(val* self);
-val* VIRTUAL_modelize_property__MClass__inherit_init_from(val* self);
-void VIRTUAL_modelize_property__MClass__inherit_init_from_61d(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MClass__c_name(val* self);
-val* VIRTUAL_abstract_compiler__MClass__c_name_cache(val* self);
-void VIRTUAL_abstract_compiler__MClass__c_name_cache_61d(val* self, val* p0);
-val* VIRTUAL_separate_compiler__MClass__c_instance_name(val* self);
-extern const struct class class_model__MClass;
-extern const struct type type_array__Arraymodel__MClassDef;
-#define COLOR_model__MClass___mclassdefs 6
-extern const struct type type_array__Arraymodel__MGenericType;
-#define COLOR_model__MClass___get_mtype_cache 8
-#define COLOR_modelize_property__MClass___inherit_init_from 9
-val* VIRTUAL_model__MClassDef__to_s(val* self);
-val* VIRTUAL_model__MClassDef__name(val* self);
-val* VIRTUAL_model__MClassDef__model(val* self);
-val* VIRTUAL_model__MClassDef__mmodule(val* self);
-void VIRTUAL_model__MClassDef__mmodule_61d(val* self, val* p0);
-val* VIRTUAL_model__MClassDef__mclass(val* self);
-void VIRTUAL_model__MClassDef__mclass_61d(val* self, val* p0);
-val* VIRTUAL_model__MClassDef__bound_mtype(val* self);
-void VIRTUAL_model__MClassDef__bound_mtype_61d(val* self, val* p0);
-val* VIRTUAL_model__MClassDef__parameter_names(val* self);
-void VIRTUAL_model__MClassDef__parameter_names_61d(val* self, val* p0);
-void VIRTUAL_model__MClassDef__location_61d(val* self, val* p0);
-void VIRTUAL_model__MClassDef__to_s_61d(val* self, val* p0);
-void VIRTUAL_model__MClassDef__init(val* self, val* p0, val* p1, val* p2, val* p3);
-val* VIRTUAL_model__MClassDef__supertypes(val* self);
-void VIRTUAL_model__MClassDef__set_supertypes(val* self, val* p0);
-void VIRTUAL_model__MClassDef__add_in_hierarchy(val* self);
-val* VIRTUAL_model__MClassDef__in_hierarchy(val* self);
-void VIRTUAL_model__MClassDef__in_hierarchy_61d(val* self, val* p0);
-short int VIRTUAL_model__MClassDef__is_intro(val* self);
-val* VIRTUAL_model__MClassDef__intro_mproperties(val* self);
-val* VIRTUAL_model__MClassDef__mpropdefs(val* self);
-val* VIRTUAL_modelize_property__MClassDef__mprop2npropdef(val* self);
-extern const struct class class_model__MClassDef;
-extern const struct type type_array__Arraymodel__MClassType;
-#define COLOR_model__MClassDef___supertypes 7
-#define COLOR_model__MClassDef___in_hierarchy 8
-extern const struct type type_array__Arraymodel__MProperty;
-#define COLOR_model__MClassDef___intro_mproperties 9
-extern const struct type type_array__Arraymodel__MPropDef;
-#define COLOR_model__MClassDef___mpropdefs 10
-extern const struct type type_hash_collection__HashMapmodel__MPropertyparser_nodes__APropdef;
-#define COLOR_modelize_property__MClassDef___mprop2npropdef 11
-val* VIRTUAL_model__MClassType__to_s(val* self);
-val* VIRTUAL_model__MType__name(val* self);
-val* VIRTUAL_model__MClassType__model(val* self);
-short int VIRTUAL_model__MType__is_subtype(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MClassType__anchor_to(val* self, val* p0, val* p1);
-short int VIRTUAL_model__MClassType__need_anchor(val* self);
-val* VIRTUAL_model__MType__supertype_to(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MClassType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MClassType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MType__as_nullable(val* self);
-val* VIRTUAL_model__MType__as_notnullable(val* self);
-val* VIRTUAL_model__MType__as_nullable_cache(val* self);
-void VIRTUAL_model__MType__as_nullable_cache_61d(val* self, val* p0);
-long VIRTUAL_model__MType__length(val* self);
-val* VIRTUAL_model__MClassType__collect_mclassdefs(val* self, val* p0);
-val* VIRTUAL_model__MClassType__collect_mclasses(val* self, val* p0);
-val* VIRTUAL_model__MClassType__collect_mtypes(val* self, val* p0);
-short int VIRTUAL_model__MType__has_mproperty(val* self, val* p0, val* p1);
-val* VIRTUAL_abstract_compiler__MClassType__ctype(val* self);
-val* VIRTUAL_abstract_compiler__MClassType__ctypename(val* self);
-val* VIRTUAL_abstract_compiler__MClassType__c_name(val* self);
-val* VIRTUAL_abstract_compiler__MType__c_name_cache(val* self);
-void VIRTUAL_abstract_compiler__MType__c_name_cache_61d(val* self, val* p0);
-val* VIRTUAL_separate_compiler__MType__const_color(val* self);
-val* VIRTUAL_separate_compiler__MClassType__c_instance_name(val* self);
-val* VIRTUAL_model__MClassType__mclass(val* self);
-void VIRTUAL_model__MClassType__mclass_61d(val* self, val* p0);
-void VIRTUAL_model__MClassType__init(val* self, val* p0);
-val* VIRTUAL_model__MClassType__arguments(val* self);
-void VIRTUAL_model__MClassType__arguments_61d(val* self, val* p0);
-void VIRTUAL_model__MClassType__collect_things(val* self, val* p0);
-val* VIRTUAL_model__MClassType__collect_mclassdefs_cache(val* self);
-val* VIRTUAL_model__MClassType__collect_mclasses_cache(val* self);
-val* VIRTUAL_model__MClassType__collect_mtypes_cache(val* self);
-val* VIRTUAL_model__MType__anchor_to(val* self, val* p0, val* p1);
-extern const struct class class_model__MClassType;
-#define COLOR_model__MType___as_nullable_cache 1
-#define COLOR_model__MClassType___arguments 4
-extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClassDef;
-#define COLOR_model__MClassType___collect_mclassdefs_cache 5
-extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClass;
-#define COLOR_model__MClassType___collect_mclasses_cache 6
-extern const struct type type_hash_collection__HashMapmmodule__MModuleabstract_collection__Setmodel__MClassType;
-#define COLOR_model__MClassType___collect_mtypes_cache 7
-val* VIRTUAL_model__MGenericType__to_s(val* self);
-short int VIRTUAL_model__MGenericType__need_anchor(val* self);
-val* VIRTUAL_model__MGenericType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MGenericType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-long VIRTUAL_model__MGenericType__length(val* self);
-val* VIRTUAL_abstract_compiler__MGenericType__c_name(val* self);
-void VIRTUAL_model__MGenericType__init(val* self, val* p0, val* p1);
-void VIRTUAL_model__MGenericType__to_s_61d(val* self, val* p0);
-void VIRTUAL_model__MGenericType__need_anchor_61d(val* self, short int p0);
-extern const struct class class_model__MGenericType;
-val* VIRTUAL_model__MVirtualType__to_s(val* self);
-val* VIRTUAL_model__MVirtualType__model(val* self);
-short int VIRTUAL_model__MType__need_anchor(val* self);
-val* VIRTUAL_model__MVirtualType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MVirtualType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MType__collect_mclassdefs(val* self, val* p0);
-val* VIRTUAL_model__MType__collect_mclasses(val* self, val* p0);
-val* VIRTUAL_model__MType__collect_mtypes(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MType__ctype(val* self);
-val* VIRTUAL_abstract_compiler__MType__ctypename(val* self);
-val* VIRTUAL_abstract_compiler__MVirtualType__c_name(val* self);
-val* VIRTUAL_separate_compiler__MType__c_instance_name(val* self);
-val* VIRTUAL_model__MVirtualType__mproperty(val* self);
-void VIRTUAL_model__MVirtualType__mproperty_61d(val* self, val* p0);
-val* VIRTUAL_model__MVirtualType__lookup_bound(val* self, val* p0, val* p1);
-short int VIRTUAL_model__MVirtualType__is_fixed(val* self, val* p0, val* p1);
-void VIRTUAL_model__MVirtualType__init(val* self, val* p0);
-extern const struct class class_model__MVirtualType;
-val* VIRTUAL_model__MParameterType__to_s(val* self);
-val* VIRTUAL_model__MParameterType__model(val* self);
-val* VIRTUAL_model__MParameterType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MParameterType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_abstract_compiler__MParameterType__c_name(val* self);
-val* VIRTUAL_model__MParameterType__mclass(val* self);
-void VIRTUAL_model__MParameterType__mclass_61d(val* self, val* p0);
-long VIRTUAL_model__MParameterType__rank(val* self);
-void VIRTUAL_model__MParameterType__rank_61d(val* self, long p0);
-val* VIRTUAL_model__MParameterType__lookup_bound(val* self, val* p0, val* p1);
-void VIRTUAL_model__MParameterType__init(val* self, val* p0, long p1);
-extern const struct class class_model__MParameterType;
-val* VIRTUAL_model__MNullableType__to_s(val* self);
-val* VIRTUAL_model__MNullableType__model(val* self);
-short int VIRTUAL_model__MNullableType__need_anchor(val* self);
-val* VIRTUAL_model__MNullableType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MNullableType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MNullableType__as_nullable(val* self);
-val* VIRTUAL_model__MNullableType__as_notnullable(val* self);
-long VIRTUAL_model__MNullableType__length(val* self);
-val* VIRTUAL_model__MNullableType__collect_mclassdefs(val* self, val* p0);
-val* VIRTUAL_model__MNullableType__collect_mclasses(val* self, val* p0);
-val* VIRTUAL_model__MNullableType__collect_mtypes(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MNullableType__c_name(val* self);
-val* VIRTUAL_model__MNullableType__mtype(val* self);
-void VIRTUAL_model__MNullableType__mtype_61d(val* self, val* p0);
-void VIRTUAL_model__MNullableType__init(val* self, val* p0);
-void VIRTUAL_model__MNullableType__to_s_61d(val* self, val* p0);
-extern const struct class class_model__MNullableType;
-val* VIRTUAL_model__MNullType__to_s(val* self);
-val* VIRTUAL_model__MNullType__model(val* self);
-short int VIRTUAL_model__MNullType__need_anchor(val* self);
-val* VIRTUAL_model__MNullType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MNullType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MNullType__as_nullable(val* self);
-val* VIRTUAL_model__MNullType__collect_mclassdefs(val* self, val* p0);
-val* VIRTUAL_model__MNullType__collect_mclasses(val* self, val* p0);
-val* VIRTUAL_model__MNullType__collect_mtypes(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MType__c_name(val* self);
-void VIRTUAL_model__MNullType__model_61d(val* self, val* p0);
-void VIRTUAL_model__MNullType__init(val* self, val* p0);
-extern const struct class class_model__MNullType;
-val* VIRTUAL_model__MSignature__to_s(val* self);
-val* VIRTUAL_model_base__MEntity__model(val* self);
-val* VIRTUAL_model__MSignature__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-short int VIRTUAL_model__MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
-long VIRTUAL_model__MSignature__length(val* self);
-val* VIRTUAL_model__MSignature__mparameters(val* self);
-void VIRTUAL_model__MSignature__mparameters_61d(val* self, val* p0);
-val* VIRTUAL_model__MSignature__return_mtype(val* self);
-void VIRTUAL_model__MSignature__return_mtype_61d(val* self, val* p0);
-void VIRTUAL_model__MSignature__init(val* self, val* p0, val* p1);
-long VIRTUAL_model__MSignature__vararg_rank(val* self);
-void VIRTUAL_model__MSignature__vararg_rank_61d(val* self, long p0);
-long VIRTUAL_model__MSignature__arity(val* self);
-extern const struct class class_model__MSignature;
-val* VIRTUAL_model__MParameter__to_s(val* self);
-val* VIRTUAL_model__MParameter__name(val* self);
-val* VIRTUAL_model__MParameter__model(val* self);
-void VIRTUAL_model__MParameter__name_61d(val* self, val* p0);
-val* VIRTUAL_model__MParameter__mtype(val* self);
-void VIRTUAL_model__MParameter__mtype_61d(val* self, val* p0);
-short int VIRTUAL_model__MParameter__is_vararg(val* self);
-void VIRTUAL_model__MParameter__is_vararg_61d(val* self, short int p0);
-void VIRTUAL_model__MParameter__init(val* self, val* p0, val* p1, short int p2);
-val* VIRTUAL_model__MParameter__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
-extern const struct class class_model__MParameter;
-val* VIRTUAL_model__MProperty__to_s(val* self);
-val* VIRTUAL_model__MProperty__name(val* self);
-val* VIRTUAL_model__MProperty__model(val* self);
-val* VIRTUAL_model__MProperty__intro_mclassdef(val* self);
-void VIRTUAL_model__MProperty__intro_mclassdef_61d(val* self, val* p0);
-void VIRTUAL_model__MProperty__name_61d(val* self, val* p0);
-val* VIRTUAL_model__MProperty__full_name(val* self);
-val* VIRTUAL_model__MProperty__visibility(val* self);
-void VIRTUAL_model__MProperty__visibility_61d(val* self, val* p0);
-void VIRTUAL_model__MProperty__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MProperty__mpropdefs(val* self);
-val* VIRTUAL_model__MProperty__intro(val* self);
-val* VIRTUAL_model__MProperty__lookup_definitions(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MProperty__lookup_definitions_cache(val* self);
-val* VIRTUAL_model__MProperty__lookup_super_definitions(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MProperty__select_most_specific(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MProperty__lookup_first_definition(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MProperty__lookup_all_definitions(val* self, val* p0, val* p1);
-val* VIRTUAL_model__MProperty__lookup_all_definitions_cache(val* self);
-val* VIRTUAL_abstract_compiler__MProperty__c_name(val* self);
-val* VIRTUAL_abstract_compiler__MProperty__c_name_cache(val* self);
-void VIRTUAL_abstract_compiler__MProperty__c_name_cache_61d(val* self, val* p0);
-val* VIRTUAL_separate_compiler__MProperty__const_color(val* self);
-void VIRTUAL_model__MMethod__init(val* self, val* p0, val* p1, val* p2);
-short int VIRTUAL_model__MMethod__is_toplevel(val* self);
-void VIRTUAL_model__MMethod__is_toplevel_61d(val* self, short int p0);
-short int VIRTUAL_model__MMethod__is_init(val* self);
-void VIRTUAL_model__MMethod__is_init_61d(val* self, short int p0);
-short int VIRTUAL_model__MMethod__is_new(val* self);
-void VIRTUAL_model__MMethod__is_new_61d(val* self, short int p0);
-short int VIRTUAL_model__MMethod__is_init_for(val* self, val* p0);
-extern const struct class class_model__MMethod;
-#define COLOR_array__Arraymodel__MProperty_VTMPROPDEF 0
-#define COLOR_model__MProperty___mpropdefs 4
-val* NEW_more_collections__HashMap2(const struct type* type);
-#define COLOR_more_collections__HashMap2mmodule__MModulemodel__MTypearray__Arraymodel__MProperty_VTMPROPDEF 1
-#define COLOR_model__MProperty___lookup_definitions_cache 5
-#define COLOR_model__MProperty___lookup_all_definitions_cache 6
-#define COLOR_model__MMethod___is_toplevel 8
-#define COLOR_model__MMethod___is_init 9
-#define COLOR_model__MMethod___is_new 10
-void VIRTUAL_model__MAttribute__init(val* self, val* p0, val* p1, val* p2);
-extern const struct class class_model__MAttribute;
-void VIRTUAL_model__MVirtualTypeProp__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MVirtualTypeProp__mvirtualtype(val* self);
-extern const struct class class_model__MVirtualTypeProp;
-val* NEW_model__MVirtualType(const struct type* type);
-extern const struct type type_model__MVirtualType;
-void model__MVirtualType__init(val* self, val* p0);
-#define COLOR_model__MVirtualTypeProp___mvirtualtype 8
-val* VIRTUAL_model__MPropDef__to_s(val* self);
-val* VIRTUAL_model__MPropDef__name(val* self);
-val* VIRTUAL_model__MPropDef__model(val* self);
-val* VIRTUAL_model__MPropDef__location(val* self);
-void VIRTUAL_model__MPropDef__location_61d(val* self, val* p0);
-val* VIRTUAL_model__MPropDef__mclassdef(val* self);
-void VIRTUAL_model__MPropDef__mclassdef_61d(val* self, val* p0);
-val* VIRTUAL_model__MPropDef__mproperty(val* self);
-void VIRTUAL_model__MPropDef__mproperty_61d(val* self, val* p0);
-void VIRTUAL_model__MPropDef__init(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_model__MPropDef__to_s_61d(val* self, val* p0);
-short int VIRTUAL_model__MPropDef__is_intro(val* self);
-val* VIRTUAL_model__MPropDef__lookup_next_definition(val* self, val* p0, val* p1);
-short int VIRTUAL_modelize_property__MPropDef__has_supercall(val* self);
-void VIRTUAL_modelize_property__MPropDef__has_supercall_61d(val* self, short int p0);
-val* VIRTUAL_abstract_compiler__MPropDef__c_name_cache(val* self);
-void VIRTUAL_abstract_compiler__MPropDef__c_name_cache_61d(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MPropDef__c_name(val* self);
-val* VIRTUAL_separate_compiler__MPropDef__const_color(val* self);
-void VIRTUAL_model__MMethodDef__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MMethodDef__msignature(val* self);
-void VIRTUAL_model__MMethodDef__msignature_61d(val* self, val* p0);
-short int VIRTUAL_model__MMethodDef__is_abstract(val* self);
-void VIRTUAL_model__MMethodDef__is_abstract_61d(val* self, short int p0);
-short int VIRTUAL_model__MMethodDef__is_intern(val* self);
-void VIRTUAL_model__MMethodDef__is_intern_61d(val* self, short int p0);
-short int VIRTUAL_model__MMethodDef__is_extern(val* self);
-void VIRTUAL_model__MMethodDef__is_extern_61d(val* self, short int p0);
-short int VIRTUAL_abstract_compiler__MMethodDef__can_inline(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MMethodDef__compile_inside_to_c(val* self, val* p0, val* p1);
-void VIRTUAL_abstract_compiler__MMethodDef__compile_parameter_check(val* self, val* p0, val* p1);
-val* VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function(val* self);
-val* VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function_cache(val* self);
-void VIRTUAL_separate_compiler__MMethodDef__separate_runtime_function_cache_61d(val* self, val* p0);
-val* VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function(val* self);
-val* VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function_cache(val* self);
-void VIRTUAL_separate_compiler__MMethodDef__virtual_runtime_function_cache_61d(val* self, val* p0);
-extern const struct class class_model__MMethodDef;
-#define COLOR_modelize_property__MPropDef___has_supercall 5
-#define COLOR_model__MMethodDef___msignature 7
-#define COLOR_model__MMethodDef___is_abstract 8
-#define COLOR_model__MMethodDef___is_intern 9
-#define COLOR_model__MMethodDef___is_extern 10
-void VIRTUAL_model__MAttributeDef__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MAttributeDef__static_mtype(val* self);
-void VIRTUAL_model__MAttributeDef__static_mtype_61d(val* self, val* p0);
-extern const struct class class_model__MAttributeDef;
-#define COLOR_model__MAttributeDef___static_mtype 7
-void VIRTUAL_model__MVirtualTypeDef__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_model__MVirtualTypeDef__bound(val* self);
-void VIRTUAL_model__MVirtualTypeDef__bound_61d(val* self, val* p0);
-short int VIRTUAL_model__MVirtualTypeDef__is_fixed(val* self);
-void VIRTUAL_model__MVirtualTypeDef__is_fixed_61d(val* self, short int p0);
-extern const struct class class_model__MVirtualTypeDef;
-#define COLOR_model__MVirtualTypeDef___bound 7
-#define COLOR_model__MVirtualTypeDef___is_fixed 8
-val* VIRTUAL_model__MClassKind__to_s(val* self);
-void VIRTUAL_model__MClassKind__to_s_61d(val* self, val* p0);
-short int VIRTUAL_model__MClassKind__need_init(val* self);
-void VIRTUAL_model__MClassKind__need_init_61d(val* self, short int p0);
-void VIRTUAL_model__MClassKind__init(val* self, val* p0, short int p1);
-short int VIRTUAL_model__MClassKind__can_specialize(val* self, val* p0);
-extern const struct class class_model__MClassKind;
-val* VIRTUAL_mmodule__MModule__to_s(val* self);
-val* VIRTUAL_mmodule__MModule__name(val* self);
-val* VIRTUAL_mmodule__MModule__model(val* self);
-void VIRTUAL_mmodule__MModule__model_61d(val* self, val* p0);
-void VIRTUAL_mmodule__MModule__direct_owner_61d(val* self, val* p0);
-val* VIRTUAL_mmodule__MModule__mgroup(val* self);
-void VIRTUAL_mmodule__MModule__mgroup_61d(val* self, val* p0);
-void VIRTUAL_mmodule__MModule__name_61d(val* self, val* p0);
-val* VIRTUAL_mmodule__MModule__location(val* self);
-void VIRTUAL_mmodule__MModule__location_61d(val* self, val* p0);
-void VIRTUAL_mmodule__MModule__in_nesting_61d(val* self, val* p0);
-val* VIRTUAL_mmodule__MModule__in_importation(val* self);
-void VIRTUAL_mmodule__MModule__in_importation_61d(val* self, val* p0);
-val* VIRTUAL_mmodule__MModule__full_name(val* self);
-void VIRTUAL_mmodule__MModule__init(val* self, val* p0, val* p1, val* p2, val* p3);
-void VIRTUAL_mmodule__MModule__set_imported_mmodules(val* self, val* p0);
-val* VIRTUAL_mmodule__MModule__intrude_mmodules(val* self);
-val* VIRTUAL_mmodule__MModule__public_mmodules(val* self);
-val* VIRTUAL_mmodule__MModule__private_mmodules(val* self);
-val* VIRTUAL_mmodule__MModule__visibility_for(val* self, val* p0);
-void VIRTUAL_mmodule__MModule__set_visibility_for(val* self, val* p0, val* p1);
-short int VIRTUAL_mmodule__MModule__is_visible(val* self, val* p0, val* p1);
-void VIRTUAL_mmodule__MModule__is_fictive_61d(val* self, short int p0);
-val* VIRTUAL_model__MModule__intro_mclasses(val* self);
-val* VIRTUAL_model__MModule__mclassdefs(val* self);
-val* VIRTUAL_model__MModule__flatten_mclass_hierarchy(val* self);
-void VIRTUAL_model__MModule__linearize_mclasses(val* self, val* p0);
-void VIRTUAL_model__MModule__linearize_mclassdefs(val* self, val* p0);
-void VIRTUAL_model__MModule__linearize_mpropdefs(val* self, val* p0);
-val* VIRTUAL_model__MModule__flatten_mclass_hierarchy_cache(val* self);
-void VIRTUAL_model__MModule__flatten_mclass_hierarchy_cache_61d(val* self, val* p0);
-val* VIRTUAL_model__MModule__object_type(val* self);
-val* VIRTUAL_model__MModule__object_type_cache(val* self);
-void VIRTUAL_model__MModule__object_type_cache_61d(val* self, val* p0);
-val* VIRTUAL_model__MModule__bool_type(val* self);
-val* VIRTUAL_model__MModule__bool_type_cache(val* self);
-void VIRTUAL_model__MModule__bool_type_cache_61d(val* self, val* p0);
-val* VIRTUAL_model__MModule__sys_type(val* self);
-val* VIRTUAL_model__MModule__get_primitive_class(val* self, val* p0);
-val* VIRTUAL_model__MModule__try_get_primitive_method(val* self, val* p0, val* p1);
-val* VIRTUAL_platform__MModule__local_target_platform(val* self);
-void VIRTUAL_platform__MModule__local_target_platform_61d(val* self, val* p0);
-val* VIRTUAL_platform__MModule__target_platform(val* self);
-val* VIRTUAL_abstract_compiler__MModule__properties(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MModule__properties_cache(val* self);
-void VIRTUAL_abstract_compiler__MModule__finalize_ffi(val* self, val* p0);
-val* VIRTUAL_abstract_compiler__MModule__collect_linker_libs(val* self);
-extern const struct class class_mmodule__MModule;
-extern const struct type type_hash_collection__HashSetmmodule__MModule;
-#define COLOR_mmodule__MModule___intrude_mmodules 8
-#define COLOR_mmodule__MModule___public_mmodules 9
-#define COLOR_mmodule__MModule___private_mmodules 10
-#define COLOR_mmodule__MModule___is_fictive 11
-extern const struct type type_array__Arraymodel__MClass;
-#define COLOR_model__MModule___intro_mclasses 12
-#define COLOR_model__MModule___mclassdefs 13
-#define COLOR_model__MModule___flatten_mclass_hierarchy_cache 14
-#define COLOR_platform__MModule___local_target_platform 17
-extern const struct type type_hash_collection__HashMapmodel__MClassabstract_collection__Setmodel__MProperty;
-#define COLOR_abstract_compiler__MModule___properties_cache 18
-val* VIRTUAL_mproject__MProject__to_s(val* self);
-val* VIRTUAL_mproject__MProject__name(val* self);
-val* VIRTUAL_mproject__MProject__model(val* self);
-void VIRTUAL_mproject__MProject__name_61d(val* self, val* p0);
-void VIRTUAL_mproject__MProject__model_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MProject__root(val* self);
-void VIRTUAL_mproject__MProject__root_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MProject__mgroups(val* self);
-void VIRTUAL_mproject__MProject__init(val* self, val* p0, val* p1);
-extern const struct class class_mproject__MProject;
-#define COLOR_mproject__MProject___root 3
-extern const struct type type_poset__POSetmproject__MGroup;
-#define COLOR_mproject__MProject___mgroups 4
-val* VIRTUAL_mproject__MGroup__to_s(val* self);
-val* VIRTUAL_mproject__MGroup__name(val* self);
-val* VIRTUAL_mproject__MGroup__model(val* self);
-void VIRTUAL_mproject__MGroup__name_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MGroup__mproject(val* self);
-void VIRTUAL_mproject__MGroup__mproject_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MGroup__parent(val* self);
-void VIRTUAL_mproject__MGroup__parent_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MGroup__full_name(val* self);
-void VIRTUAL_mproject__MGroup__in_nesting_61d(val* self, val* p0);
-val* VIRTUAL_mproject__MGroup__filepath(val* self);
-void VIRTUAL_mproject__MGroup__filepath_61d(val* self, val* p0);
-void VIRTUAL_mproject__MGroup__init(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_mmodule__MGroup__mmodules(val* self);
-val* VIRTUAL_mmodule__MGroup__fuzzy_owner(val* self);
-val* VIRTUAL_modelbuilder__MGroup__module_paths(val* self);
-extern const struct class class_mproject__MGroup;
-extern const struct type type_array__Arraymmodule__MModule;
-#define COLOR_mmodule__MGroup___mmodules 6
-extern const struct type type_array__Arraymodelbuilder__ModulePath;
-#define COLOR_modelbuilder__MGroup___module_paths 7
-void VIRTUAL_model_base__Model__init(val* self);
-val* VIRTUAL_mproject__Model__mprojects(val* self);
-val* VIRTUAL_mproject__Model__mproject_by_name(val* self);
-val* VIRTUAL_mmodule__Model__mmodules(val* self);
-val* VIRTUAL_mmodule__Model__mmodule_nesting_hierarchy(val* self);
-val* VIRTUAL_mmodule__Model__mmodule_importation_hierarchy(val* self);
-val* VIRTUAL_mmodule__Model__mmodules_by_name(val* self);
-val* VIRTUAL_model__Model__mclasses(val* self);
-val* VIRTUAL_model__Model__mproperties(val* self);
-val* VIRTUAL_model__Model__mclassdef_hierarchy(val* self);
-val* VIRTUAL_model__Model__intro_mtype_specialization_hierarchy(val* self);
-val* VIRTUAL_model__Model__full_mtype_specialization_hierarchy(val* self);
-val* VIRTUAL_model__Model__mclasses_by_name(val* self);
-val* VIRTUAL_model__Model__get_mclasses_by_name(val* self, val* p0);
-val* VIRTUAL_model__Model__mproperties_by_name(val* self);
-val* VIRTUAL_model__Model__get_mproperties_by_name(val* self, val* p0);
-val* VIRTUAL_model__Model__null_type(val* self);
-extern const struct class class_model_base__Model;
-extern const struct type type_array__Arraymproject__MProject;
-#define COLOR_mproject__Model___mprojects 0
-val* NEW_more_collections__MultiHashMap(const struct type* type);
-extern const struct type type_more_collections__MultiHashMapstring__Stringmproject__MProject;
-void more_collections__MultiHashMap__init(val* self);
-#define COLOR_mproject__Model___mproject_by_name 1
-#define COLOR_mmodule__Model___mmodules 2
-extern const struct type type_poset__POSetmmodule__MModule;
-#define COLOR_mmodule__Model___mmodule_nesting_hierarchy 3
-#define COLOR_mmodule__Model___mmodule_importation_hierarchy 4
-extern const struct type type_more_collections__MultiHashMapstring__Stringmmodule__MModule;
-#define COLOR_mmodule__Model___mmodules_by_name 5
-#define COLOR_model__Model___mclasses 6
-#define COLOR_model__Model___mproperties 7
-extern const struct type type_poset__POSetmodel__MClassDef;
-#define COLOR_model__Model___mclassdef_hierarchy 8
-extern const struct type type_poset__POSetmodel__MClassType;
-#define COLOR_model__Model___intro_mtype_specialization_hierarchy 9
-#define COLOR_model__Model___full_mtype_specialization_hierarchy 10
-extern const struct type type_more_collections__MultiHashMapstring__Stringmodel__MClass;
-#define COLOR_model__Model___mclasses_by_name 11
-extern const struct type type_more_collections__MultiHashMapstring__Stringmodel__MProperty;
-#define COLOR_model__Model___mproperties_by_name 12
-val* NEW_model__MNullType(const struct type* type);
-extern const struct type type_model__MNullType;
-void model__MNullType__init(val* self, val* p0);
-#define COLOR_model__Model___null_type 13
-val* VIRTUAL_model_base__MVisibility__to_s(val* self);
-short int VIRTUAL_model_base__MVisibility___60d(val* self, val* p0);
-void VIRTUAL_model_base__MVisibility__to_s_61d(val* self, val* p0);
-long VIRTUAL_model_base__MVisibility__level(val* self);
-void VIRTUAL_model_base__MVisibility__level_61d(val* self, long p0);
-void VIRTUAL_model_base__MVisibility__init(val* self, val* p0, long p1);
-extern const struct class class_model_base__MVisibility;
-val* VIRTUAL_more_collections__MultiHashMap__provide_default_value(val* self, val* p0);
-void VIRTUAL_more_collections__MultiHashMap__add_one(val* self, val* p0, val* p1);
-void VIRTUAL_more_collections__MultiHashMap__init(val* self);
-extern const struct class class_more_collections__MultiHashMap;
-val* VIRTUAL_more_collections__HashMap2__level1(val* self);
-val* VIRTUAL_more_collections__HashMap2___91d_93d(val* self, val* p0, val* p1);
-void VIRTUAL_more_collections__HashMap2___91d_93d_61d(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_more_collections__HashMap2__init(val* self);
-extern const struct class class_more_collections__HashMap2;
-#define COLOR_hash_collection__HashMapmore_collections__HashMap2_FT0hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2 0
-#define COLOR_more_collections__HashMap2___level1 0
-val* VIRTUAL_more_collections__HashMap3__level1(val* self);
-val* VIRTUAL_more_collections__HashMap3___91d_93d(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_more_collections__HashMap3___91d_93d_61d(val* self, val* p0, val* p1, val* p2, val* p3);
-void VIRTUAL_more_collections__HashMap3__init(val* self);
-extern const struct class class_more_collections__HashMap3;
-#define COLOR_hash_collection__HashMapmore_collections__HashMap3_FT0more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3 0
-#define COLOR_more_collections__HashMap3___level1 0
-val* VIRTUAL_mdoc__MDoc__content(val* self);
-void VIRTUAL_mdoc__MDoc__original_mentity_61d(val* self, val* p0);
-void VIRTUAL_mdoc__MDoc__init(val* self);
-extern const struct class class_mdoc__MDoc;
-#define COLOR_mdoc__MDoc___content 0
-#define COLOR_mdoc__MDoc___original_mentity 1
+void VIRTUAL_scope__ScopePhase__process_npropdef(val* self, val* p0);
+extern const struct class class_scope__ScopePhase;
+void VIRTUAL_scope__Variable__init(val* self);
+val* VIRTUAL_scope__Variable__to_s(val* self);
+val* VIRTUAL_scope__Variable__name(val* self);
+void VIRTUAL_scope__Variable__name_61d(val* self, val* p0);
+val* VIRTUAL_scope__Variable__location(val* self);
+void VIRTUAL_scope__Variable__location_61d(val* self, val* p0);
+short int VIRTUAL_scope__Variable__warn_unread(val* self);
+void VIRTUAL_scope__Variable__warn_unread_61d(val* self, short int p0);
+val* VIRTUAL_typing__Variable__declared_type(val* self);
+void VIRTUAL_typing__Variable__declared_type_61d(val* self, val* p0);
+extern const struct class class_scope__Variable;
+#define COLOR_scope__Variable___location 1
+#define COLOR_scope__Variable___warn_unread 2
+void VIRTUAL_scope__EscapeMark__init(val* self);
+val* VIRTUAL_scope__EscapeMark__name(val* self);
+void VIRTUAL_scope__EscapeMark__name_61d(val* self, val* p0);
+val* VIRTUAL_scope__EscapeMark__continue_mark(val* self);
+void VIRTUAL_scope__EscapeMark__continue_mark_61d(val* self, val* p0);
+val* VIRTUAL_scope__EscapeMark__escapes(val* self);
+extern const struct class class_scope__EscapeMark;
+#define COLOR_scope__EscapeMark___continue_mark 1
+extern const struct type type_array__Arrayparser_nodes__AEscapeExpr;
+#define COLOR_scope__EscapeMark___escapes 2
+void VIRTUAL_scope__ScopeVisitor__visit(val* self, val* p0);
+val* VIRTUAL_scope__ScopeVisitor__toolcontext(val* self);
+void VIRTUAL_scope__ScopeVisitor__toolcontext_61d(val* self, val* p0);
+val* VIRTUAL_scope__ScopeVisitor__selfvariable(val* self);
+void VIRTUAL_scope__ScopeVisitor__init(val* self, val* p0);
+val* VIRTUAL_scope__ScopeVisitor__scopes(val* self);
+void VIRTUAL_scope__ScopeVisitor__shift_scope(val* self);
+short int VIRTUAL_scope__ScopeVisitor__register_variable(val* self, val* p0, val* p1);
+val* VIRTUAL_scope__ScopeVisitor__search_variable(val* self, val* p0);
+void VIRTUAL_scope__ScopeVisitor__enter_visit_block(val* self, val* p0, val* p1);
+val* VIRTUAL_scope__ScopeVisitor__search_label(val* self, val* p0);
+val* VIRTUAL_scope__ScopeVisitor__make_escape_mark(val* self, val* p0, short int p1);
+val* VIRTUAL_scope__ScopeVisitor__get_escapemark(val* self, val* p0, val* p1);
+void VIRTUAL_scope__ScopeVisitor__error(val* self, val* p0, val* p1);
+extern const struct class class_scope__ScopeVisitor;
+#define COLOR_scope__ScopeVisitor___selfvariable 2
+val* NEW_list__List(const struct type* type);
+extern const struct type type_list__Listscope__Scope;
+#define COLOR_scope__ScopeVisitor___scopes 3
+val* VIRTUAL_scope__Scope__variables(val* self);
+val* VIRTUAL_scope__Scope__escapemark(val* self);
+void VIRTUAL_scope__Scope__escapemark_61d(val* self, val* p0);
+val* VIRTUAL_scope__Scope__get_variable(val* self, val* p0);
+extern const struct class class_scope__Scope;
+extern const struct type type_hash_collection__HashMapstring__Stringscope__Variable;
+#define COLOR_scope__Scope___variables 0
+#define COLOR_scope__Scope___escapemark 1
+void VIRTUAL_astvalidation__ASTValidationVisitor__visit(val* self, val* p0);
+val* VIRTUAL_astvalidation__ASTValidationVisitor__path(val* self);
+val* VIRTUAL_astvalidation__ASTValidationVisitor__seen(val* self);
+extern const struct class class_astvalidation__ASTValidationVisitor;
+extern const struct type type_list__Listparser_nodes__ANode;
+#define COLOR_astvalidation__ASTValidationVisitor___path 1
+extern const struct type type_hash_collection__HashSetparser_nodes__ANode;
+#define COLOR_astvalidation__ASTValidationVisitor___seen 2
 void VIRTUAL_auto_super_init__AutoSuperInitPhase__process_npropdef(val* self, val* p0);
 extern const struct class class_auto_super_init__AutoSuperInitPhase;
 void VIRTUAL_auto_super_init__AutoSuperInitVisitor__visit(val* self, val* p0);
-void VIRTUAL_auto_super_init__AutoSuperInitVisitor__init(val* self);
-short int VIRTUAL_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init(val* self);
-void VIRTUAL_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d(val* self, short int p0);
+val* VIRTUAL_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init(val* self);
+void VIRTUAL_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d(val* self, val* p0);
+short int VIRTUAL_auto_super_init__AutoSuperInitVisitor__is_broken(val* self);
+void VIRTUAL_auto_super_init__AutoSuperInitVisitor__is_broken_61d(val* self, short int p0);
 extern const struct class class_auto_super_init__AutoSuperInitVisitor;
 #define COLOR_auto_super_init__AutoSuperInitVisitor___has_explicit_super_init 1
+#define COLOR_auto_super_init__AutoSuperInitVisitor___is_broken 2
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__init(val* self);
 val* VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__modelbuilder(val* self);
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__modelbuilder_61d(val* self, val* p0);
 val* VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__mainmodule(val* self);
+void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__mainmodule_61d(val* self, val* p0);
 val* VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__live_types(val* self);
 val* VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__live_open_types(val* self);
 val* VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__live_classes(val* self);
@@ -4717,7 +4883,6 @@ void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__add_call(val* self, val* p0
 void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__add_send(val* self, val* p0, val* p1);
 void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__try_super_send(val* self, val* p0, val* p1);
 void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__add_super_send(val* self, val* p0, val* p1);
-void VIRTUAL_rapid_type_analysis__RapidTypeAnalysis__init(val* self, val* p0, val* p1);
 extern const struct class class_rapid_type_analysis__RapidTypeAnalysis;
 extern const struct type type_hash_collection__HashSetmodel__MClassType;
 #define COLOR_rapid_type_analysis__RapidTypeAnalysis___live_types 2
@@ -4779,6 +4944,7 @@ void VIRTUAL_abstract_compiler__AbstractCompiler__build_c_to_nit_bindings(val* s
 void VIRTUAL_abstract_compiler__AbstractCompiler__compile_header(val* self);
 void VIRTUAL_separate_erasure_compiler__SeparateErasureCompiler__compile_header_structs(val* self);
 void VIRTUAL_separate_compiler__SeparateCompiler__compile_nitni_structs(val* self);
+void VIRTUAL_abstract_compiler__AbstractCompiler__compile_finalizer_function(val* self);
 void VIRTUAL_abstract_compiler__AbstractCompiler__compile_main_function(val* self);
 void VIRTUAL_abstract_compiler__AbstractCompiler__compile_nitni_global_ref_functions(val* self);
 val* VIRTUAL_abstract_compiler__AbstractCompiler__extern_bodies(val* self);
@@ -4873,7 +5039,6 @@ extern const struct type type_array__Arrayc_tools__ExternFile;
 #define COLOR_abstract_compiler__AbstractCompiler___files_to_copy 9
 val* NEW_array__ArraySet(const struct type* type);
 extern const struct type type_array__ArraySetstring__String;
-void array__ArraySet__init(val* self);
 #define COLOR_abstract_compiler__AbstractCompiler___seen_extern 10
 #define COLOR_abstract_compiler__AbstractCompiler___count_type_test_tags 11
 val* abstract_compiler__AbstractCompiler__init_count_type_test_tags(val* self);
@@ -4913,13 +5078,16 @@ val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__compile_
 val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__native_array_instance(val* self, val* p0, val* p1);
 void VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__calloc_array(val* self, val* p0, val* p1);
 void VIRTUAL_separate_compiler__SeparateCompilerVisitor__native_array_def(val* self, val* p0, val* p1, val* p2);
-void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__varargize(val* self, val* p0, val* p1, val* p2);
+val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__varargize(val* self, val* p0, val* p1, val* p2);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__anchor(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__resolve_for(val* self, val* p0, val* p1);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__autoadapt(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__supercall(val* self, val* p0, val* p1, val* p2);
 void VIRTUAL_separate_compiler__SeparateCompilerVisitor__adapt_signature(val* self, val* p0, val* p1);
+void VIRTUAL_separate_compiler__SeparateCompilerVisitor__unbox_signature_extern(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__autobox(val* self, val* p0, val* p1);
+val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__box_extern(val* self, val* p0, val* p1);
+val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__unbox_extern(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__type_test(val* self, val* p0, val* p1, val* p2);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__is_same_type_test(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__equal_test(val* self, val* p0, val* p1);
@@ -4936,16 +5104,21 @@ long VIRTUAL_abstract_compiler__AbstractCompilerVisitor__last(val* self);
 void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__last_61d(val* self, long p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__get_name(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__escapemark_name(val* self, val* p0);
+void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__add_escape_label(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__escapemark_names(val* self);
 val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__class_name_string(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__variables(val* self);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__variable(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__new_var(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__new_var_extern(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__new_named_var(val* self, val* p0, val* p1);
 void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__assign(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_erasure_compiler__SeparateErasureCompilerVisitor__init_instance(val* self, val* p0);
+void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__set_finalizer(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__int_instance(val* self, long p0);
+val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__bool_instance(val* self, short int p0);
 val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__string_instance(val* self, val* p0);
+val* VIRTUAL_abstract_compiler__AbstractCompilerVisitor__value_instance(val* self, val* p0);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__array_instance(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__vararg_instance(val* self, val* p0, val* p1, val* p2, val* p3);
 void VIRTUAL_abstract_compiler__AbstractCompilerVisitor__add(val* self, val* p0);
@@ -4990,29 +5163,35 @@ void VIRTUAL_separate_compiler__SeparateCompiler__display_sizes(val* self);
 extern const struct class class_separate_compiler__SeparateCompiler;
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__native_array_instance(val* self, val* p0, val* p1);
 void VIRTUAL_separate_compiler__SeparateCompilerVisitor__calloc_array(val* self, val* p0, val* p1);
+val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__box_extern(val* self, val* p0, val* p1);
+val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__unbox_extern(val* self, val* p0, val* p1);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__type_test(val* self, val* p0, val* p1, val* p2);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__class_name_string(val* self, val* p0);
 val* VIRTUAL_separate_compiler__SeparateCompilerVisitor__init_instance(val* self, val* p0);
 extern const struct class class_separate_compiler__SeparateCompilerVisitor;
+void VIRTUAL_abstract_compiler__AbstractRuntimeFunction__init(val* self);
 val* VIRTUAL_separate_compiler__SeparateRuntimeFunction__to_s(val* self);
 val* VIRTUAL_abstract_compiler__AbstractRuntimeFunction__mmethoddef(val* self);
+void VIRTUAL_abstract_compiler__AbstractRuntimeFunction__mmethoddef_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__AbstractRuntimeFunction__c_name(val* self);
 val* VIRTUAL_separate_compiler__SeparateRuntimeFunction__build_c_name(val* self);
 val* VIRTUAL_abstract_compiler__AbstractRuntimeFunction__c_name_cache(val* self);
 void VIRTUAL_abstract_compiler__AbstractRuntimeFunction__c_name_cache_61d(val* self, val* p0);
 void VIRTUAL_separate_compiler__SeparateRuntimeFunction__compile_to_c(val* self, val* p0);
-void VIRTUAL_abstract_compiler__AbstractRuntimeFunction__init(val* self, val* p0);
 extern const struct class class_separate_compiler__SeparateRuntimeFunction;
 #define COLOR_abstract_compiler__AbstractRuntimeFunction___c_name_cache 1
 val* VIRTUAL_separate_compiler__VirtualRuntimeFunction__to_s(val* self);
 val* VIRTUAL_separate_compiler__VirtualRuntimeFunction__build_c_name(val* self);
 void VIRTUAL_separate_compiler__VirtualRuntimeFunction__compile_to_c(val* self, val* p0);
 extern const struct class class_separate_compiler__VirtualRuntimeFunction;
+void VIRTUAL_abstract_compiler__Toolchain__init(val* self);
 val* VIRTUAL_abstract_compiler__Toolchain__toolcontext(val* self);
+void VIRTUAL_abstract_compiler__Toolchain__toolcontext_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Toolchain__compile_dir(val* self);
 void VIRTUAL_abstract_compiler__MakefileToolchain__write_and_make(val* self, val* p0);
-void VIRTUAL_abstract_compiler__Toolchain__init(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__MakefileToolchain__cc_paths(val* self);
+val* VIRTUAL_abstract_compiler__MakefileToolchain__clib(val* self);
+void VIRTUAL_abstract_compiler__MakefileToolchain__clib_61d(val* self, val* p0);
 void VIRTUAL_abstract_compiler__MakefileToolchain__gather_cc_paths(val* self);
 void VIRTUAL_abstract_compiler__MakefileToolchain__write_files(val* self, val* p0, val* p1, val* p2);
 val* VIRTUAL_abstract_compiler__MakefileToolchain__makefile_name(val* self, val* p0);
@@ -5022,10 +5201,11 @@ void VIRTUAL_abstract_compiler__MakefileToolchain__write_makefile(val* self, val
 void VIRTUAL_abstract_compiler__MakefileToolchain__compile_c_code(val* self, val* p0, val* p1);
 extern const struct class class_abstract_compiler__MakefileToolchain;
 #define COLOR_abstract_compiler__MakefileToolchain___cc_paths 1
+void VIRTUAL_abstract_compiler__CodeFile__init(val* self);
 val* VIRTUAL_abstract_compiler__CodeFile__name(val* self);
+void VIRTUAL_abstract_compiler__CodeFile__name_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__CodeFile__writers(val* self);
 val* VIRTUAL_abstract_compiler__CodeFile__required_declarations(val* self);
-void VIRTUAL_abstract_compiler__CodeFile__init(val* self, val* p0);
 extern const struct class class_abstract_compiler__CodeFile;
 extern const struct type type_array__Arrayabstract_compiler__CodeWriter;
 #define COLOR_abstract_compiler__CodeFile___writers 1
@@ -5053,14 +5233,18 @@ void VIRTUAL_abstract_compiler__RuntimeVariable__is_exact_61d(val* self, short i
 void VIRTUAL_abstract_compiler__RuntimeVariable__init(val* self, val* p0, val* p1, val* p2);
 extern const struct class class_abstract_compiler__RuntimeVariable;
 #define COLOR_abstract_compiler__RuntimeVariable___is_exact 3
+void VIRTUAL_abstract_compiler__Frame__init(val* self);
+void VIRTUAL_abstract_compiler__Frame__visitor_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Frame__mpropdef(val* self);
+void VIRTUAL_abstract_compiler__Frame__mpropdef_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Frame__receiver(val* self);
+void VIRTUAL_abstract_compiler__Frame__receiver_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Frame__arguments(val* self);
+void VIRTUAL_abstract_compiler__Frame__arguments_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Frame__returnvar(val* self);
 void VIRTUAL_abstract_compiler__Frame__returnvar_61d(val* self, val* p0);
 val* VIRTUAL_abstract_compiler__Frame__returnlabel(val* self);
 void VIRTUAL_abstract_compiler__Frame__returnlabel_61d(val* self, val* p0);
-void VIRTUAL_abstract_compiler__Frame__init(val* self, val* p0, val* p1, val* p2, val* p3);
 extern const struct class class_abstract_compiler__Frame;
 #define COLOR_abstract_compiler__Frame___returnvar 4
 #define COLOR_abstract_compiler__Frame___returnlabel 5
@@ -5068,12 +5252,13 @@ void VIRTUAL_platform__PlatformPhase__process_annotated_node(val* self, val* p0,
 extern const struct class class_platform__PlatformPhase;
 short int VIRTUAL_c_tools__ExternCFile___61d_61d(val* self, val* p0);
 long VIRTUAL_c_tools__ExternCFile__hash(val* self);
+void VIRTUAL_c_tools__ExternFile__init(val* self);
 val* VIRTUAL_c_tools__ExternFile__filename(val* self);
+void VIRTUAL_c_tools__ExternFile__filename_61d(val* self, val* p0);
 val* VIRTUAL_c_tools__ExternCFile__makefile_rule_name(val* self);
 val* VIRTUAL_c_tools__ExternCFile__makefile_rule_content(val* self);
 short int VIRTUAL_c_tools__ExternCFile__compiles_to_o_file(val* self);
 short int VIRTUAL_c_tools__ExternFile__add_to_jar(val* self);
-void VIRTUAL_c_tools__ExternFile__init(val* self, val* p0);
 void VIRTUAL_c_tools__ExternCFile__init(val* self, val* p0, val* p1);
 val* VIRTUAL_c_tools__ExternCFile__cflags(val* self);
 void VIRTUAL_c_tools__ExternCFile__cflags_61d(val* self, val* p0);
@@ -5112,7 +5297,6 @@ val* VIRTUAL_coloring__POSetColorer__conflicts_cache(val* self);
 void VIRTUAL_coloring__POSetColorer__conflicts_cache_61d(val* self, val* p0);
 val* VIRTUAL_coloring__POSetColorer__graph(val* self);
 void VIRTUAL_coloring__POSetColorer__graph_61d(val* self, val* p0);
-void VIRTUAL_coloring__POSetColorer__init(val* self);
 void VIRTUAL_coloring__POSetColorer__colorize(val* self, val* p0);
 void VIRTUAL_coloring__POSetColorer__allocate_ids(val* self);
 void VIRTUAL_coloring__POSetColorer__compute_colors(val* self);
@@ -5127,7 +5311,6 @@ extern const struct class class_coloring__POSetColorer;
 #define COLOR_coloring__POSetColorer___colors_cache 2
 val* VIRTUAL_coloring__BucketsColorer__colors(val* self);
 val* VIRTUAL_coloring__BucketsColorer__conflicts(val* self);
-void VIRTUAL_coloring__BucketsColorer__init(val* self);
 val* VIRTUAL_coloring__BucketsColorer__colorize(val* self, val* p0);
 short int VIRTUAL_coloring__BucketsColorer__is_color_free(val* self, val* p0, long p1);
 void VIRTUAL_coloring__BucketsColorer__compute_conflicts(val* self, val* p0);
@@ -5149,43 +5332,3 @@ short int VIRTUAL_coloring__POSetBucketsColorer__is_color_free(val* self, long p
 extern const struct class class_coloring__POSetBucketsColorer;
 #define COLOR_hash_collection__HashMapcoloring__POSetBucketsColorer_FT1kernel__Int 0
 #define COLOR_coloring__POSetBucketsColorer___colors 0
-void VIRTUAL_transform__TransformPhase__process_npropdef(val* self, val* p0);
-extern const struct class class_transform__TransformPhase;
-void VIRTUAL_transform__TransformVisitor__visit(val* self, val* p0);
-void VIRTUAL_transform__TransformVisitor__phase_61d(val* self, val* p0);
-val* VIRTUAL_transform__TransformVisitor__mmodule(val* self);
-void VIRTUAL_transform__TransformVisitor__mmodule_61d(val* self, val* p0);
-val* VIRTUAL_transform__TransformVisitor__mclassdef(val* self);
-void VIRTUAL_transform__TransformVisitor__mclassdef_61d(val* self, val* p0);
-val* VIRTUAL_transform__TransformVisitor__mpropdef(val* self);
-void VIRTUAL_transform__TransformVisitor__mpropdef_61d(val* self, val* p0);
-val* VIRTUAL_transform__TransformVisitor__builder(val* self);
-void VIRTUAL_transform__TransformVisitor__builder_61d(val* self, val* p0);
-void VIRTUAL_transform__TransformVisitor__init(val* self, val* p0, val* p1);
-extern const struct class class_transform__TransformVisitor;
-val* VIRTUAL_astbuilder__ASTBuilder__mmodule(val* self);
-val* VIRTUAL_astbuilder__ASTBuilder__anchor(val* self);
-val* VIRTUAL_astbuilder__ASTBuilder__make_int(val* self, long p0);
-val* VIRTUAL_astbuilder__ASTBuilder__make_new(val* self, val* p0, val* p1);
-val* VIRTUAL_astbuilder__ASTBuilder__make_call(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_astbuilder__ASTBuilder__make_block(val* self);
-val* VIRTUAL_astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1);
-val* VIRTUAL_astbuilder__ASTBuilder__make_var_assign(val* self, val* p0, val* p1);
-val* VIRTUAL_astbuilder__ASTBuilder__make_attr_read(val* self, val* p0, val* p1);
-val* VIRTUAL_astbuilder__ASTBuilder__make_attr_assign(val* self, val* p0, val* p1, val* p2);
-val* VIRTUAL_astbuilder__ASTBuilder__make_if(val* self, val* p0, val* p1);
-void VIRTUAL_astbuilder__ASTBuilder__init(val* self, val* p0, val* p1);
-extern const struct class class_astbuilder__ASTBuilder;
-void VIRTUAL_parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void VIRTUAL_parser_nodes__ANode__visit_all(val* self, val* p0);
-void VIRTUAL_astvalidation__APlaceholderExpr__accept_ast_validation(val* self, val* p0);
-void VIRTUAL_astbuilder__APlaceholderExpr__make(val* self);
-extern const struct class class_astbuilder__APlaceholderExpr;
-void VIRTUAL_astvalidation__ASTValidationVisitor__visit(val* self, val* p0);
-val* VIRTUAL_astvalidation__ASTValidationVisitor__path(val* self);
-val* VIRTUAL_astvalidation__ASTValidationVisitor__seen(val* self);
-extern const struct class class_astvalidation__ASTValidationVisitor;
-extern const struct type type_list__Listparser_nodes__ANode;
-#define COLOR_astvalidation__ASTValidationVisitor___path 1
-extern const struct type type_hash_collection__HashSetparser_nodes__ANode;
-#define COLOR_astvalidation__ASTValidationVisitor___seen 2

@@ -1,242 +1,782 @@
 #include "parser.sep.0.h"
-/* method parser#ReduceAction69#action for (self: ReduceAction69, Parser) */
-void parser__ReduceAction69__action(val* self, val* p0) {
+/* method parser#ReduceAction63#action for (self: ReduceAction63, Parser) */
+void parser__ReduceAction63__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
 val* var2 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
 val* var3 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
 val* var4 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
 val* var5 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
 val* var6 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
 val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
 val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var8 /* : Bool */;
+short int var10 /* : Bool */;
 int cltype;
 int idtype;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
-short int var9 /* : Bool */;
-int cltype10;
-int idtype11;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var27 /* : AAttrPropdef */;
-val* var28 /* : null */;
-val* var29 /* : null */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AMethPropdef */;
 val* var30 /* : null */;
 val* var31 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var32 /* : Int */;
-long var33 /* : Int */;
+val* var32 /* : null */;
+val* var33 /* : null */;
+val* var34 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var35 /* : Int */;
+long var36 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
 {
 var1 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist7 = var1;
+var_nodearraylist9 = var1;
 {
 var2 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist6 = var2;
+var_nodearraylist8 = var2;
 {
 var3 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist5 = var3;
+var_nodearraylist7 = var3;
 {
 var4 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist4 = var4;
+var_nodearraylist6 = var4;
 {
 var5 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist3 = var5;
+var_nodearraylist5 = var5;
 {
 var6 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist2 = var6;
+var_nodearraylist4 = var6;
 {
 var7 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist1 = var7;
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
 var_pdocnode2 = var_nodearraylist1;
 /* <var_pdocnode2:nullable Object> isa nullable ADoc */
 cltype = type_nullable_parser_nodes__ADoc.color;
 idtype = type_nullable_parser_nodes__ADoc.id;
 if(var_pdocnode2 == NULL) {
-var8 = 1;
+var10 = 1;
 } else {
 if(cltype >= var_pdocnode2->type->table_size) {
-var8 = 0;
+var10 = 0;
 } else {
-var8 = var_pdocnode2->type->type_table[cltype] == idtype;
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 }
-if (unlikely(!var8)) {
+if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3241);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3190);
 show_backtrace(1);
 }
-var_pablenode4 = var_nodearraylist2;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype10 = type_nullable_parser_nodes__AAble.color;
-idtype11 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
-var9 = 1;
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
 } else {
-if(cltype10 >= var_pablenode4->type->table_size) {
-var9 = 0;
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
 } else {
-var9 = var_pablenode4->type->type_table[cltype10] == idtype11;
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 }
-if (unlikely(!var9)) {
+if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3243);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3192);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist3;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3194);
+show_backtrace(1);
+}
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
+cltype18 = type_nullable_parser_nodes__TKwnew.color;
+idtype19 = type_nullable_parser_nodes__TKwnew.id;
+if(var_tkwnewnode7 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwnewnode7->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwnewnode7->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3196);
+show_backtrace(1);
+}
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
+cltype21 = type_nullable_parser_nodes__AMethid.color;
+idtype22 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode8 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pmethidnode8->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pmethidnode8->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3198);
+show_backtrace(1);
+}
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype24 = type_nullable_parser_nodes__ASignature.color;
+idtype25 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_psignaturenode9->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_psignaturenode9->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3200);
+show_backtrace(1);
+}
+var_pexprnode13 = var_nodearraylist8;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pexprnode13->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pexprnode13->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3202);
+show_backtrace(1);
+}
+var29 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var30 = NULL;
+var31 = NULL;
+var32 = NULL;
+var33 = NULL;
+var34 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var30, var31, var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var32, var33, var34, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var29:AMethPropdef>*/
+}
+var_ppropdefnode1 = var29;
+var_node_list = var_ppropdefnode1;
+var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction63> */
+{
+var36 = parser_work__Parser__go_to(var_p, var35);
+}
+{
+parser_work__Parser__push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction63#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction63__action(val* self, val* p0) {
+parser__ReduceAction63__action(self, p0); /* Direct call parser#ReduceAction63#action on <self:Object(ReduceAction63)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction64#action for (self: ReduceAction64, Parser) */
+void parser__ReduceAction64__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AMethPropdef */;
+val* var30 /* : null */;
+val* var31 /* : null */;
+val* var32 /* : null */;
+val* var33 /* : null */;
+val* var34 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var35 /* : Int */;
+long var36 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3236);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3238);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3240);
+show_backtrace(1);
+}
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
+cltype18 = type_nullable_parser_nodes__TKwnew.color;
+idtype19 = type_nullable_parser_nodes__TKwnew.id;
+if(var_tkwnewnode7 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwnewnode7->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwnewnode7->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3242);
+show_backtrace(1);
+}
+var_psignaturenode9 = var_nodearraylist5;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype21 = type_nullable_parser_nodes__ASignature.color;
+idtype22 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_psignaturenode9->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_psignaturenode9->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3244);
+show_backtrace(1);
+}
+var_pannotationsnode10 = var_nodearraylist6;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
+cltype24 = type_nullable_parser_nodes__AAnnotations.color;
+idtype25 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode10 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pannotationsnode10->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pannotationsnode10->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3246);
+show_backtrace(1);
+}
+var_pexprnode13 = var_nodearraylist8;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pexprnode13->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pexprnode13->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3248);
+show_backtrace(1);
+}
+var29 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var30 = NULL;
+var31 = NULL;
+var32 = NULL;
+var33 = NULL;
+var34 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var30, var31, var_tkwnewnode7, var32, var_psignaturenode9, var_pannotationsnode10, var33, var34, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var29:AMethPropdef>*/
+}
+var_ppropdefnode1 = var29;
+var_node_list = var_ppropdefnode1;
+var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction64> */
+{
+var36 = parser_work__Parser__go_to(var_p, var35);
+}
+{
+parser_work__Parser__push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction64#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction64__action(val* self, val* p0) {
+parser__ReduceAction64__action(self, p0); /* Direct call parser#ReduceAction64#action on <self:Object(ReduceAction64)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction65#action for (self: ReduceAction65, Parser) */
+void parser__ReduceAction65__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var11 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+val* var33 /* : AMethPropdef */;
+val* var34 /* : null */;
+val* var35 /* : null */;
+val* var36 /* : null */;
+val* var37 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var38 /* : Int */;
+long var39 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var11 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3283);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
 cltype13 = type_nullable_parser_nodes__TKwredef.color;
 idtype14 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
+if(var_tkwredefnode3 == NULL) {
 var12 = 1;
 } else {
-if(cltype13 >= var_tkwredefnode5->type->table_size) {
+if(cltype13 >= var_tkwredefnode3->type->table_size) {
 var12 = 0;
 } else {
-var12 = var_tkwredefnode5->type->type_table[cltype13] == idtype14;
+var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3245);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3285);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist4;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
 cltype16 = type_nullable_parser_nodes__AVisibility.color;
 idtype17 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
+if(var_pvisibilitynode4 == NULL) {
 var15 = 1;
 } else {
-if(cltype16 >= var_pvisibilitynode6->type->table_size) {
+if(cltype16 >= var_pvisibilitynode4->type->table_size) {
 var15 = 0;
 } else {
-var15 = var_pvisibilitynode6->type->type_table[cltype16] == idtype17;
+var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 }
 if (unlikely(!var15)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3247);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3287);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist5;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype19 = type_nullable_parser_nodes__TKwvar.color;
-idtype20 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
+cltype19 = type_nullable_parser_nodes__TKwnew.color;
+idtype20 = type_nullable_parser_nodes__TKwnew.id;
+if(var_tkwnewnode7 == NULL) {
 var18 = 1;
 } else {
-if(cltype19 >= var_tkwvarnode7->type->table_size) {
+if(cltype19 >= var_tkwnewnode7->type->table_size) {
 var18 = 0;
 } else {
-var18 = var_tkwvarnode7->type->type_table[cltype19] == idtype20;
+var18 = var_tkwnewnode7->type->type_table[cltype19] == idtype20;
 }
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3249);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3289);
 show_backtrace(1);
 }
-var_tattridnode8 = var_nodearraylist6;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype22 = type_nullable_parser_nodes__TAttrid.color;
-idtype23 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
+cltype22 = type_nullable_parser_nodes__AMethid.color;
+idtype23 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode8 == NULL) {
 var21 = 1;
 } else {
-if(cltype22 >= var_tattridnode8->type->table_size) {
+if(cltype22 >= var_pmethidnode8->type->table_size) {
 var21 = 0;
 } else {
-var21 = var_tattridnode8->type->type_table[cltype22] == idtype23;
+var21 = var_pmethidnode8->type->type_table[cltype22] == idtype23;
 }
 }
 if (unlikely(!var21)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3251);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3291);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist7;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype25 = type_nullable_parser_nodes__AType.color;
-idtype26 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype25 = type_nullable_parser_nodes__ASignature.color;
+idtype26 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
 var24 = 1;
 } else {
-if(cltype25 >= var_ptypenode10->type->table_size) {
+if(cltype25 >= var_psignaturenode9->type->table_size) {
 var24 = 0;
 } else {
-var24 = var_ptypenode10->type->type_table[cltype25] == idtype26;
+var24 = var_psignaturenode9->type->type_table[cltype25] == idtype26;
 }
 }
 if (unlikely(!var24)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3253);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3293);
 show_backtrace(1);
 }
-var27 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var28 = NULL;
-var29 = NULL;
-var30 = NULL;
-var31 = NULL;
-{
-parser_prod__AAttrPropdef__init_aattrpropdef(var27, var_pdocnode2, var28, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var29, var_ptypenode10, var30, var31); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var27:AAttrPropdef>*/
+var_pannotationsnode10 = var_nodearraylist7;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
+cltype28 = type_nullable_parser_nodes__AAnnotations.color;
+idtype29 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode10 == NULL) {
+var27 = 1;
+} else {
+if(cltype28 >= var_pannotationsnode10->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_pannotationsnode10->type->type_table[cltype28] == idtype29;
 }
-var_ppropdefnode1 = var27;
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3295);
+show_backtrace(1);
+}
+var_pexprnode13 = var_nodearraylist9;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype31 = type_nullable_parser_nodes__AExpr.color;
+idtype32 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
+var30 = 1;
+} else {
+if(cltype31 >= var_pexprnode13->type->table_size) {
+var30 = 0;
+} else {
+var30 = var_pexprnode13->type->type_table[cltype31] == idtype32;
+}
+}
+if (unlikely(!var30)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3297);
+show_backtrace(1);
+}
+var33 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var34 = NULL;
+var35 = NULL;
+var36 = NULL;
+var37 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var34, var35, var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var36, var37, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var33:AMethPropdef>*/
+}
+var_ppropdefnode1 = var33;
 var_node_list = var_ppropdefnode1;
-var32 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction69> */
+var38 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction65> */
 {
-var33 = parser_work__Parser__go_to(var_p, var32);
+var39 = parser_work__Parser__go_to(var_p, var38);
 }
 {
-parser_work__Parser__push(var_p, var33, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var39, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction69#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction69__action(val* self, val* p0) {
-parser__ReduceAction69__action(self, p0); /* Direct call parser#ReduceAction69#action on <self:Object(ReduceAction69)>*/
+/* method parser#ReduceAction65#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction65__action(val* self, val* p0) {
+parser__ReduceAction65__action(self, p0); /* Direct call parser#ReduceAction65#action on <self:Object(ReduceAction65)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction70#action for (self: ReduceAction70, Parser) */
-void parser__ReduceAction70__action(val* self, val* p0) {
+/* method parser#ReduceAction66#action for (self: ReduceAction66, Parser) */
+void parser__ReduceAction66__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -260,41 +800,42 @@ val* var_pdocnode2 /* var pdocnode2: nullable Object */;
 short int var9 /* : Bool */;
 int cltype;
 int idtype;
-val* var_pablenode3 /* var pablenode3: nullable Object */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
 short int var10 /* : Bool */;
 int cltype11;
 int idtype12;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
 short int var16 /* : Bool */;
 int cltype17;
 int idtype18;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var22 /* : Bool */;
 int cltype23;
 int idtype24;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
 short int var25 /* : Bool */;
 int cltype26;
 int idtype27;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
 short int var28 /* : Bool */;
 int cltype29;
 int idtype30;
-val* var31 /* : AAttrPropdef */;
+val* var31 /* : AMethPropdef */;
 val* var32 /* : null */;
 val* var33 /* : null */;
 val* var34 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var35 /* : Int */;
+val* var35 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
 long var36 /* : Int */;
+long var37 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -345,150 +886,1181 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3285);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3330);
 show_backtrace(1);
 }
-var_pablenode3 = var_nodearraylist2;
-/* <var_pablenode3:nullable Object> isa nullable AAble */
-cltype11 = type_nullable_parser_nodes__AAble.color;
-idtype12 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode3 == NULL) {
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
 var10 = 1;
 } else {
-if(cltype11 >= var_pablenode3->type->table_size) {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
 var10 = 0;
 } else {
-var10 = var_pablenode3->type->type_table[cltype11] == idtype12;
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3287);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3332);
 show_backtrace(1);
 }
-var_pablenode4 = var_nodearraylist3;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype14 = type_nullable_parser_nodes__AAble.color;
-idtype15 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
 var13 = 1;
 } else {
-if(cltype14 >= var_pablenode4->type->table_size) {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
 var13 = 0;
 } else {
-var13 = var_pablenode4->type->type_table[cltype14] == idtype15;
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3289);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3334);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist4;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype17 = type_nullable_parser_nodes__TKwredef.color;
-idtype18 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype17 = type_nullable_parser_nodes__TKwmeth.color;
+idtype18 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
 var16 = 1;
 } else {
-if(cltype17 >= var_tkwredefnode5->type->table_size) {
+if(cltype17 >= var_tkwmethnode5->type->table_size) {
 var16 = 0;
 } else {
-var16 = var_tkwredefnode5->type->type_table[cltype17] == idtype18;
+var16 = var_tkwmethnode5->type->type_table[cltype17] == idtype18;
 }
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3291);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3336);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist5;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype20 = type_nullable_parser_nodes__AVisibility.color;
-idtype21 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
+cltype20 = type_nullable_parser_nodes__AMethid.color;
+idtype21 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode8 == NULL) {
 var19 = 1;
 } else {
-if(cltype20 >= var_pvisibilitynode6->type->table_size) {
+if(cltype20 >= var_pmethidnode8->type->table_size) {
 var19 = 0;
 } else {
-var19 = var_pvisibilitynode6->type->type_table[cltype20] == idtype21;
+var19 = var_pmethidnode8->type->type_table[cltype20] == idtype21;
 }
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3293);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3338);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist6;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype23 = type_nullable_parser_nodes__TKwvar.color;
-idtype24 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype23 = type_nullable_parser_nodes__ASignature.color;
+idtype24 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
 var22 = 1;
 } else {
-if(cltype23 >= var_tkwvarnode7->type->table_size) {
+if(cltype23 >= var_psignaturenode9->type->table_size) {
 var22 = 0;
 } else {
-var22 = var_tkwvarnode7->type->type_table[cltype23] == idtype24;
+var22 = var_psignaturenode9->type->type_table[cltype23] == idtype24;
 }
 }
 if (unlikely(!var22)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3295);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3340);
 show_backtrace(1);
 }
-var_tattridnode8 = var_nodearraylist7;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype26 = type_nullable_parser_nodes__TAttrid.color;
-idtype27 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
+var_pexterncallsnode11 = var_nodearraylist7;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
+cltype26 = type_nullable_parser_nodes__AExternCalls.color;
+idtype27 = type_nullable_parser_nodes__AExternCalls.id;
+if(var_pexterncallsnode11 == NULL) {
 var25 = 1;
 } else {
-if(cltype26 >= var_tattridnode8->type->table_size) {
+if(cltype26 >= var_pexterncallsnode11->type->table_size) {
 var25 = 0;
 } else {
-var25 = var_tattridnode8->type->type_table[cltype26] == idtype27;
+var25 = var_pexterncallsnode11->type->type_table[cltype26] == idtype27;
 }
 }
 if (unlikely(!var25)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3297);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3342);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist8;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype29 = type_nullable_parser_nodes__AType.color;
-idtype30 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
+var_pexterncodeblocknode12 = var_nodearraylist8;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
+cltype29 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype30 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode12 == NULL) {
 var28 = 1;
 } else {
-if(cltype29 >= var_ptypenode10->type->table_size) {
+if(cltype29 >= var_pexterncodeblocknode12->type->table_size) {
 var28 = 0;
 } else {
-var28 = var_ptypenode10->type->type_table[cltype29] == idtype30;
+var28 = var_pexterncodeblocknode12->type->type_table[cltype29] == idtype30;
 }
 }
 if (unlikely(!var28)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3299);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3344);
 show_backtrace(1);
 }
-var31 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var31 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
 var32 = NULL;
 var33 = NULL;
 var34 = NULL;
+var35 = NULL;
 {
-parser_prod__AAttrPropdef__init_aattrpropdef(var31, var_pdocnode2, var_pablenode3, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var32, var_ptypenode10, var33, var34); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var31:AAttrPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var32, var33, var_pmethidnode8, var_psignaturenode9, var34, var_pexterncallsnode11, var_pexterncodeblocknode12, var35); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var31:AMethPropdef>*/
 }
 var_ppropdefnode1 = var31;
 var_node_list = var_ppropdefnode1;
-var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction70> */
+var36 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction66> */
+{
+var37 = parser_work__Parser__go_to(var_p, var36);
+}
+{
+parser_work__Parser__push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction66#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction66__action(val* self, val* p0) {
+parser__ReduceAction66__action(self, p0); /* Direct call parser#ReduceAction66#action on <self:Object(ReduceAction66)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction67#action for (self: ReduceAction67, Parser) */
+void parser__ReduceAction67__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwmethnode5 /* var tkwmethnode5: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+val* var35 /* : AMethPropdef */;
+val* var36 /* : null */;
+val* var37 /* : null */;
+val* var38 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var39 /* : Int */;
+long var40 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3378);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3380);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3382);
+show_backtrace(1);
+}
+var_tkwmethnode5 = var_nodearraylist4;
+/* <var_tkwmethnode5:nullable Object> isa nullable TKwmeth */
+cltype18 = type_nullable_parser_nodes__TKwmeth.color;
+idtype19 = type_nullable_parser_nodes__TKwmeth.id;
+if(var_tkwmethnode5 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwmethnode5->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwmethnode5->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3384);
+show_backtrace(1);
+}
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
+cltype21 = type_nullable_parser_nodes__AMethid.color;
+idtype22 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode8 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pmethidnode8->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pmethidnode8->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3386);
+show_backtrace(1);
+}
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype24 = type_nullable_parser_nodes__ASignature.color;
+idtype25 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_psignaturenode9->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_psignaturenode9->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3388);
+show_backtrace(1);
+}
+var_pannotationsnode10 = var_nodearraylist7;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
+cltype27 = type_nullable_parser_nodes__AAnnotations.color;
+idtype28 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode10 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pannotationsnode10->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pannotationsnode10->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3390);
+show_backtrace(1);
+}
+var_pexterncallsnode11 = var_nodearraylist8;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
+cltype30 = type_nullable_parser_nodes__AExternCalls.color;
+idtype31 = type_nullable_parser_nodes__AExternCalls.id;
+if(var_pexterncallsnode11 == NULL) {
+var29 = 1;
+} else {
+if(cltype30 >= var_pexterncallsnode11->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_pexterncallsnode11->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3392);
+show_backtrace(1);
+}
+var_pexterncodeblocknode12 = var_nodearraylist9;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
+cltype33 = type_nullable_parser_nodes__AExternCodeBlock.color;
+idtype34 = type_nullable_parser_nodes__AExternCodeBlock.id;
+if(var_pexterncodeblocknode12 == NULL) {
+var32 = 1;
+} else {
+if(cltype33 >= var_pexterncodeblocknode12->type->table_size) {
+var32 = 0;
+} else {
+var32 = var_pexterncodeblocknode12->type->type_table[cltype33] == idtype34;
+}
+}
+if (unlikely(!var32)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3394);
+show_backtrace(1);
+}
+var35 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var36 = NULL;
+var37 = NULL;
+var38 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, var36, var37, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var_pexterncallsnode11, var_pexterncodeblocknode12, var38); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var35:AMethPropdef>*/
+}
+var_ppropdefnode1 = var35;
+var_node_list = var_ppropdefnode1;
+var39 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction67> */
+{
+var40 = parser_work__Parser__go_to(var_p, var39);
+}
+{
+parser_work__Parser__push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction67#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction67__action(val* self, val* p0) {
+parser__ReduceAction67__action(self, p0); /* Direct call parser#ReduceAction67#action on <self:Object(ReduceAction67)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction68#action for (self: ReduceAction68, Parser) */
+void parser__ReduceAction68__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var27 /* : AAttrPropdef */;
+val* var28 /* : null */;
+val* var29 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+long var30 /* : Int */;
+long var31 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3426);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype10 = type_nullable_parser_nodes__TKwredef.color;
+idtype11 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_tkwredefnode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3428);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype13 = type_nullable_parser_nodes__AVisibility.color;
+idtype14 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_pvisibilitynode4->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3430);
+show_backtrace(1);
+}
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
+cltype16 = type_nullable_parser_nodes__TKwvar.color;
+idtype17 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode5 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwvarnode5->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwvarnode5->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3432);
+show_backtrace(1);
+}
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype19 = type_nullable_parser_nodes__TId.color;
+idtype20 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_tidnode6->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_tidnode6->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3434);
+show_backtrace(1);
+}
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
+cltype22 = type_nullable_parser_nodes__AType.color;
+idtype23 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode7 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_ptypenode7->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_ptypenode7->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3436);
+show_backtrace(1);
+}
+var_pannotationsnode9 = var_nodearraylist7;
+/* <var_pannotationsnode9:nullable Object> isa nullable AAnnotations */
+cltype25 = type_nullable_parser_nodes__AAnnotations.color;
+idtype26 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode9 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_pannotationsnode9->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_pannotationsnode9->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3438);
+show_backtrace(1);
+}
+var27 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var28 = NULL;
+var29 = NULL;
+{
+parser_prod__AAttrPropdef__init_aattrpropdef(var27, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var28, var_pannotationsnode9, var29); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var27:AAttrPropdef>*/
+}
+var_ppropdefnode1 = var27;
+var_node_list = var_ppropdefnode1;
+var30 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction68> */
+{
+var31 = parser_work__Parser__go_to(var_p, var30);
+}
+{
+parser_work__Parser__push(var_p, var31, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction68#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction68__action(val* self, val* p0) {
+parser__ReduceAction68__action(self, p0); /* Direct call parser#ReduceAction68#action on <self:Object(ReduceAction68)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction69#action for (self: ReduceAction69, Parser) */
+void parser__ReduceAction69__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var10 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var11 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+val* var_pexprnode8 /* var pexprnode8: nullable Object */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable Object */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+val* var33 /* : AAttrPropdef */;
+val* var34 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+long var35 /* : Int */;
+long var36 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist10 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var9;
+{
+var10 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var10;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var11 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3470);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype13 = type_nullable_parser_nodes__TKwredef.color;
+idtype14 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_tkwredefnode3->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3472);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype16 = type_nullable_parser_nodes__AVisibility.color;
+idtype17 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_pvisibilitynode4->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3474);
+show_backtrace(1);
+}
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
+cltype19 = type_nullable_parser_nodes__TKwvar.color;
+idtype20 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode5 == NULL) {
+var18 = 1;
+} else {
+if(cltype19 >= var_tkwvarnode5->type->table_size) {
+var18 = 0;
+} else {
+var18 = var_tkwvarnode5->type->type_table[cltype19] == idtype20;
+}
+}
+if (unlikely(!var18)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3476);
+show_backtrace(1);
+}
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype22 = type_nullable_parser_nodes__TId.color;
+idtype23 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
+var21 = 1;
+} else {
+if(cltype22 >= var_tidnode6->type->table_size) {
+var21 = 0;
+} else {
+var21 = var_tidnode6->type->type_table[cltype22] == idtype23;
+}
+}
+if (unlikely(!var21)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3478);
+show_backtrace(1);
+}
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
+cltype25 = type_nullable_parser_nodes__AType.color;
+idtype26 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode7 == NULL) {
+var24 = 1;
+} else {
+if(cltype25 >= var_ptypenode7->type->table_size) {
+var24 = 0;
+} else {
+var24 = var_ptypenode7->type->type_table[cltype25] == idtype26;
+}
+}
+if (unlikely(!var24)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3480);
+show_backtrace(1);
+}
+var_pexprnode8 = var_nodearraylist9;
+/* <var_pexprnode8:nullable Object> isa nullable AExpr */
+cltype28 = type_nullable_parser_nodes__AExpr.color;
+idtype29 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode8 == NULL) {
+var27 = 1;
+} else {
+if(cltype28 >= var_pexprnode8->type->table_size) {
+var27 = 0;
+} else {
+var27 = var_pexprnode8->type->type_table[cltype28] == idtype29;
+}
+}
+if (unlikely(!var27)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3482);
+show_backtrace(1);
+}
+var_pannotationsnode9 = var_nodearraylist10;
+/* <var_pannotationsnode9:nullable Object> isa nullable AAnnotations */
+cltype31 = type_nullable_parser_nodes__AAnnotations.color;
+idtype32 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode9 == NULL) {
+var30 = 1;
+} else {
+if(cltype31 >= var_pannotationsnode9->type->table_size) {
+var30 = 0;
+} else {
+var30 = var_pannotationsnode9->type->type_table[cltype31] == idtype32;
+}
+}
+if (unlikely(!var30)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3484);
+show_backtrace(1);
+}
+var33 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var34 = NULL;
+{
+parser_prod__AAttrPropdef__init_aattrpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var_pexprnode8, var_pannotationsnode9, var34); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var33:AAttrPropdef>*/
+}
+var_ppropdefnode1 = var33;
+var_node_list = var_ppropdefnode1;
+var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction69> */
 {
 var36 = parser_work__Parser__go_to(var_p, var35);
 }
 {
 parser_work__Parser__push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction69#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction69__action(val* self, val* p0) {
+parser__ReduceAction69__action(self, p0); /* Direct call parser#ReduceAction69#action on <self:Object(ReduceAction69)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction70#action for (self: ReduceAction70, Parser) */
+void parser__ReduceAction70__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var9 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
+short int var22 /* : Bool */;
+int cltype23;
+int idtype24;
+val* var_pexprnode10 /* var pexprnode10: nullable Object */;
+short int var25 /* : Bool */;
+int cltype26;
+int idtype27;
+val* var28 /* : AAttrPropdef */;
+val* var29 /* : null */;
+val* var30 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+long var31 /* : Int */;
+long var32 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var8;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var9 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3514);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var10 = 1;
+} else {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3516);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var13 = 1;
+} else {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
+var13 = 0;
+} else {
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
+}
+}
+if (unlikely(!var13)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3518);
+show_backtrace(1);
+}
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
+cltype17 = type_nullable_parser_nodes__TKwvar.color;
+idtype18 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode5 == NULL) {
+var16 = 1;
+} else {
+if(cltype17 >= var_tkwvarnode5->type->table_size) {
+var16 = 0;
+} else {
+var16 = var_tkwvarnode5->type->type_table[cltype17] == idtype18;
+}
+}
+if (unlikely(!var16)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3520);
+show_backtrace(1);
+}
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype20 = type_nullable_parser_nodes__TId.color;
+idtype21 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
+var19 = 1;
+} else {
+if(cltype20 >= var_tidnode6->type->table_size) {
+var19 = 0;
+} else {
+var19 = var_tidnode6->type->type_table[cltype20] == idtype21;
+}
+}
+if (unlikely(!var19)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3522);
+show_backtrace(1);
+}
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
+cltype23 = type_nullable_parser_nodes__AType.color;
+idtype24 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode7 == NULL) {
+var22 = 1;
+} else {
+if(cltype23 >= var_ptypenode7->type->table_size) {
+var22 = 0;
+} else {
+var22 = var_ptypenode7->type->type_table[cltype23] == idtype24;
+}
+}
+if (unlikely(!var22)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3524);
+show_backtrace(1);
+}
+var_pexprnode10 = var_nodearraylist8;
+/* <var_pexprnode10:nullable Object> isa nullable AExpr */
+cltype26 = type_nullable_parser_nodes__AExpr.color;
+idtype27 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode10 == NULL) {
+var25 = 1;
+} else {
+if(cltype26 >= var_pexprnode10->type->table_size) {
+var25 = 0;
+} else {
+var25 = var_pexprnode10->type->type_table[cltype26] == idtype27;
+}
+}
+if (unlikely(!var25)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3526);
+show_backtrace(1);
+}
+var28 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var29 = NULL;
+var30 = NULL;
+{
+parser_prod__AAttrPropdef__init_aattrpropdef(var28, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var29, var30, var_pexprnode10); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var28:AAttrPropdef>*/
+}
+var_ppropdefnode1 = var28;
+var_node_list = var_ppropdefnode1;
+var31 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction70> */
+{
+var32 = parser_work__Parser__go_to(var_p, var31);
+}
+{
+parser_work__Parser__push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
@@ -524,34 +2096,35 @@ val* var_pdocnode2 /* var pdocnode2: nullable Object */;
 short int var10 /* : Bool */;
 int cltype;
 int idtype;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
 short int var11 /* : Bool */;
 int cltype12;
 int idtype13;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var14 /* : Bool */;
 int cltype15;
 int idtype16;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
 short int var17 /* : Bool */;
 int cltype18;
 int idtype19;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
 short int var20 /* : Bool */;
 int cltype21;
 int idtype22;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
 short int var23 /* : Bool */;
 int cltype24;
 int idtype25;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable Object */;
 short int var26 /* : Bool */;
 int cltype27;
 int idtype28;
-val* var29 /* : AAttrPropdef */;
-val* var30 /* : null */;
-val* var31 /* : null */;
-val* var32 /* : null */;
+val* var_pexprnode10 /* var pexprnode10: nullable Object */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+val* var32 /* : AAttrPropdef */;
 val* var33 /* : null */;
 val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
 long var34 /* : Int */;
@@ -610,126 +2183,141 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3332);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3557);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist2;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
 cltype12 = type_nullable_parser_nodes__TKwredef.color;
 idtype13 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
+if(var_tkwredefnode3 == NULL) {
 var11 = 1;
 } else {
-if(cltype12 >= var_tkwredefnode5->type->table_size) {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
 var11 = 0;
 } else {
-var11 = var_tkwredefnode5->type->type_table[cltype12] == idtype13;
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3334);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3559);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist3;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
 cltype15 = type_nullable_parser_nodes__AVisibility.color;
 idtype16 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
+if(var_pvisibilitynode4 == NULL) {
 var14 = 1;
 } else {
-if(cltype15 >= var_pvisibilitynode6->type->table_size) {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
 var14 = 0;
 } else {
-var14 = var_pvisibilitynode6->type->type_table[cltype15] == idtype16;
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 }
 if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3336);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3561);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist4;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
 cltype18 = type_nullable_parser_nodes__TKwvar.color;
 idtype19 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
+if(var_tkwvarnode5 == NULL) {
 var17 = 1;
 } else {
-if(cltype18 >= var_tkwvarnode7->type->table_size) {
+if(cltype18 >= var_tkwvarnode5->type->table_size) {
 var17 = 0;
 } else {
-var17 = var_tkwvarnode7->type->type_table[cltype18] == idtype19;
+var17 = var_tkwvarnode5->type->type_table[cltype18] == idtype19;
 }
 }
 if (unlikely(!var17)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3338);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3563);
 show_backtrace(1);
 }
-var_tattridnode8 = var_nodearraylist5;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype21 = type_nullable_parser_nodes__TAttrid.color;
-idtype22 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype21 = type_nullable_parser_nodes__TId.color;
+idtype22 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
 var20 = 1;
 } else {
-if(cltype21 >= var_tattridnode8->type->table_size) {
+if(cltype21 >= var_tidnode6->type->table_size) {
 var20 = 0;
 } else {
-var20 = var_tattridnode8->type->type_table[cltype21] == idtype22;
+var20 = var_tidnode6->type->type_table[cltype21] == idtype22;
 }
 }
 if (unlikely(!var20)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3340);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3565);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist6;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
 cltype24 = type_nullable_parser_nodes__AType.color;
 idtype25 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
+if(var_ptypenode7 == NULL) {
 var23 = 1;
 } else {
-if(cltype24 >= var_ptypenode10->type->table_size) {
+if(cltype24 >= var_ptypenode7->type->table_size) {
 var23 = 0;
 } else {
-var23 = var_ptypenode10->type->type_table[cltype24] == idtype25;
+var23 = var_ptypenode7->type->type_table[cltype24] == idtype25;
 }
 }
 if (unlikely(!var23)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3342);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3567);
 show_backtrace(1);
 }
-var_pexprnode12 = var_nodearraylist9;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype27 = type_nullable_parser_nodes__AExpr.color;
-idtype28 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
+var_pannotationsnode9 = var_nodearraylist7;
+/* <var_pannotationsnode9:nullable Object> isa nullable AAnnotations */
+cltype27 = type_nullable_parser_nodes__AAnnotations.color;
+idtype28 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode9 == NULL) {
 var26 = 1;
 } else {
-if(cltype27 >= var_pexprnode12->type->table_size) {
+if(cltype27 >= var_pannotationsnode9->type->table_size) {
 var26 = 0;
 } else {
-var26 = var_pexprnode12->type->type_table[cltype27] == idtype28;
+var26 = var_pannotationsnode9->type->type_table[cltype27] == idtype28;
 }
 }
 if (unlikely(!var26)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3344);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3569);
 show_backtrace(1);
 }
-var29 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var30 = NULL;
-var31 = NULL;
-var32 = NULL;
+var_pexprnode10 = var_nodearraylist9;
+/* <var_pexprnode10:nullable Object> isa nullable AExpr */
+cltype30 = type_nullable_parser_nodes__AExpr.color;
+idtype31 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode10 == NULL) {
+var29 = 1;
+} else {
+if(cltype30 >= var_pexprnode10->type->table_size) {
+var29 = 0;
+} else {
+var29 = var_pexprnode10->type->type_table[cltype30] == idtype31;
+}
+}
+if (unlikely(!var29)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3571);
+show_backtrace(1);
+}
+var32 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
 var33 = NULL;
 {
-parser_prod__AAttrPropdef__init_aattrpropdef(var29, var_pdocnode2, var30, var31, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var32, var_ptypenode10, var33, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var29:AAttrPropdef>*/
+parser_prod__AAttrPropdef__init_aattrpropdef(var32, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var33, var_pannotationsnode9, var_pexprnode10); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var32:AAttrPropdef>*/
 }
-var_ppropdefnode1 = var29;
+var_ppropdefnode1 = var32;
 var_node_list = var_ppropdefnode1;
 var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction71> */
 {
@@ -751,266 +2339,236 @@ val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var2 /* : nullable Object */;
 val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var3 /* : nullable Object */;
+val* var2 /* : nullable Object */;
 val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var4 /* : nullable Object */;
+val* var3 /* : nullable Object */;
 val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var5 /* : nullable Object */;
+val* var4 /* : nullable Object */;
 val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var6 /* : nullable Object */;
+val* var5 /* : nullable Object */;
 val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var7 /* : nullable Object */;
+val* var6 /* : nullable Object */;
 val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var8 /* : nullable Object */;
+val* var7 /* : nullable Object */;
 val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var9 /* : nullable Object */;
+val* var8 /* : nullable Object */;
 val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var10 /* : nullable Object */;
+val* var9 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
 val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var11 /* : Bool */;
+short int var10 /* : Bool */;
 int cltype;
 int idtype;
-val* var_pablenode3 /* var pablenode3: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-val* var33 /* : AAttrPropdef */;
-val* var34 /* : null */;
-val* var35 /* : null */;
-val* var36 /* : null */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode10 /* var pexprnode10: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AAttrPropdef */;
+val* var30 /* : null */;
+val* var31 /* : null */;
 val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var37 /* : Int */;
-long var38 /* : Int */;
+long var32 /* : Int */;
+long var33 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
 {
 var1 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist10 = var1;
+var_nodearraylist9 = var1;
 {
 var2 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist9 = var2;
+var_nodearraylist8 = var2;
 {
 var3 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist8 = var3;
+var_nodearraylist7 = var3;
 {
 var4 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist7 = var4;
+var_nodearraylist6 = var4;
 {
 var5 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist6 = var5;
+var_nodearraylist5 = var5;
 {
 var6 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist5 = var6;
+var_nodearraylist4 = var6;
 {
 var7 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist4 = var7;
+var_nodearraylist3 = var7;
 {
 var8 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist3 = var8;
+var_nodearraylist2 = var8;
 {
 var9 = parser_work__Parser__pop(var_p);
 }
-var_nodearraylist2 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var10;
+var_nodearraylist1 = var9;
 var_pdocnode2 = var_nodearraylist1;
 /* <var_pdocnode2:nullable Object> isa nullable ADoc */
 cltype = type_nullable_parser_nodes__ADoc.color;
 idtype = type_nullable_parser_nodes__ADoc.id;
 if(var_pdocnode2 == NULL) {
-var11 = 1;
+var10 = 1;
 } else {
 if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3602);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
 var11 = 0;
 } else {
-var11 = var_pdocnode2->type->type_table[cltype] == idtype;
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3378);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3604);
 show_backtrace(1);
 }
-var_pablenode3 = var_nodearraylist2;
-/* <var_pablenode3:nullable Object> isa nullable AAble */
-cltype13 = type_nullable_parser_nodes__AAble.color;
-idtype14 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode3 == NULL) {
-var12 = 1;
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
 } else {
-if(cltype13 >= var_pablenode3->type->table_size) {
-var12 = 0;
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
 } else {
-var12 = var_pablenode3->type->type_table[cltype13] == idtype14;
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 }
-if (unlikely(!var12)) {
+if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3380);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3606);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist3;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype16 = type_nullable_parser_nodes__TKwredef.color;
-idtype17 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
-var15 = 1;
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
+cltype18 = type_nullable_parser_nodes__TKwvar.color;
+idtype19 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode5 == NULL) {
+var17 = 1;
 } else {
-if(cltype16 >= var_tkwredefnode5->type->table_size) {
-var15 = 0;
+if(cltype18 >= var_tkwvarnode5->type->table_size) {
+var17 = 0;
 } else {
-var15 = var_tkwredefnode5->type->type_table[cltype16] == idtype17;
+var17 = var_tkwvarnode5->type->type_table[cltype18] == idtype19;
 }
 }
-if (unlikely(!var15)) {
+if (unlikely(!var17)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3382);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3608);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist4;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype19 = type_nullable_parser_nodes__AVisibility.color;
-idtype20 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
-var18 = 1;
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype21 = type_nullable_parser_nodes__TId.color;
+idtype22 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
+var20 = 1;
 } else {
-if(cltype19 >= var_pvisibilitynode6->type->table_size) {
-var18 = 0;
+if(cltype21 >= var_tidnode6->type->table_size) {
+var20 = 0;
 } else {
-var18 = var_pvisibilitynode6->type->type_table[cltype19] == idtype20;
+var20 = var_tidnode6->type->type_table[cltype21] == idtype22;
 }
 }
-if (unlikely(!var18)) {
+if (unlikely(!var20)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3384);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3610);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist5;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype22 = type_nullable_parser_nodes__TKwvar.color;
-idtype23 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
-var21 = 1;
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
+cltype24 = type_nullable_parser_nodes__AType.color;
+idtype25 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode7 == NULL) {
+var23 = 1;
 } else {
-if(cltype22 >= var_tkwvarnode7->type->table_size) {
-var21 = 0;
+if(cltype24 >= var_ptypenode7->type->table_size) {
+var23 = 0;
 } else {
-var21 = var_tkwvarnode7->type->type_table[cltype22] == idtype23;
+var23 = var_ptypenode7->type->type_table[cltype24] == idtype25;
 }
 }
-if (unlikely(!var21)) {
+if (unlikely(!var23)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3386);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3612);
 show_backtrace(1);
 }
-var_tattridnode8 = var_nodearraylist6;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype25 = type_nullable_parser_nodes__TAttrid.color;
-idtype26 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
-var24 = 1;
+var_pexprnode10 = var_nodearraylist8;
+/* <var_pexprnode10:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode10 == NULL) {
+var26 = 1;
 } else {
-if(cltype25 >= var_tattridnode8->type->table_size) {
-var24 = 0;
+if(cltype27 >= var_pexprnode10->type->table_size) {
+var26 = 0;
 } else {
-var24 = var_tattridnode8->type->type_table[cltype25] == idtype26;
+var26 = var_pexprnode10->type->type_table[cltype27] == idtype28;
 }
 }
-if (unlikely(!var24)) {
+if (unlikely(!var26)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3388);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3614);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist7;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype28 = type_nullable_parser_nodes__AType.color;
-idtype29 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var27 = 1;
-} else {
-if(cltype28 >= var_ptypenode10->type->table_size) {
-var27 = 0;
-} else {
-var27 = var_ptypenode10->type->type_table[cltype28] == idtype29;
-}
-}
-if (unlikely(!var27)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3390);
-show_backtrace(1);
-}
-var_pexprnode12 = var_nodearraylist10;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype31 = type_nullable_parser_nodes__AExpr.color;
-idtype32 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var30 = 1;
-} else {
-if(cltype31 >= var_pexprnode12->type->table_size) {
-var30 = 0;
-} else {
-var30 = var_pexprnode12->type->type_table[cltype31] == idtype32;
-}
-}
-if (unlikely(!var30)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3392);
-show_backtrace(1);
-}
-var33 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var34 = NULL;
-var35 = NULL;
-var36 = NULL;
+var29 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var30 = NULL;
+var31 = NULL;
 {
-parser_prod__AAttrPropdef__init_aattrpropdef(var33, var_pdocnode2, var_pablenode3, var34, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var35, var_ptypenode10, var36, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var33:AAttrPropdef>*/
+parser_prod__AAttrPropdef__init_aattrpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var30, var31, var_pexprnode10); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var29:AAttrPropdef>*/
 }
-var_ppropdefnode1 = var33;
+var_ppropdefnode1 = var29;
 var_node_list = var_ppropdefnode1;
-var37 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction72> */
+var32 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction72> */
 {
-var38 = parser_work__Parser__go_to(var_p, var37);
+var33 = parser_work__Parser__go_to(var_p, var32);
 }
 {
-parser_work__Parser__push(var_p, var38, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var33, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
@@ -1048,41 +2606,39 @@ val* var_pdocnode2 /* var pdocnode2: nullable Object */;
 short int var11 /* : Bool */;
 int cltype;
 int idtype;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
 short int var12 /* : Bool */;
 int cltype13;
 int idtype14;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var15 /* : Bool */;
 int cltype16;
 int idtype17;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+val* var_tidnode6 /* var tidnode6: nullable Object */;
 short int var21 /* : Bool */;
 int cltype22;
 int idtype23;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
+val* var_ptypenode7 /* var ptypenode7: nullable Object */;
 short int var24 /* : Bool */;
 int cltype25;
 int idtype26;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+val* var_pannotationsnode9 /* var pannotationsnode9: nullable Object */;
 short int var27 /* : Bool */;
 int cltype28;
 int idtype29;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
+val* var_pexprnode10 /* var pexprnode10: nullable Object */;
 short int var30 /* : Bool */;
 int cltype31;
 int idtype32;
 val* var33 /* : AAttrPropdef */;
 val* var34 /* : null */;
-val* var35 /* : null */;
-val* var36 /* : null */;
 val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var37 /* : Int */;
-long var38 /* : Int */;
+long var35 /* : Int */;
+long var36 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -1141,150 +2697,148 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3426);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3646);
 show_backtrace(1);
 }
-var_pablenode4 = var_nodearraylist2;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype13 = type_nullable_parser_nodes__AAble.color;
-idtype14 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype13 = type_nullable_parser_nodes__TKwredef.color;
+idtype14 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
 var12 = 1;
 } else {
-if(cltype13 >= var_pablenode4->type->table_size) {
+if(cltype13 >= var_tkwredefnode3->type->table_size) {
 var12 = 0;
 } else {
-var12 = var_pablenode4->type->type_table[cltype13] == idtype14;
+var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3428);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3648);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist3;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype16 = type_nullable_parser_nodes__TKwredef.color;
-idtype17 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype16 = type_nullable_parser_nodes__AVisibility.color;
+idtype17 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
 var15 = 1;
 } else {
-if(cltype16 >= var_tkwredefnode5->type->table_size) {
+if(cltype16 >= var_pvisibilitynode4->type->table_size) {
 var15 = 0;
 } else {
-var15 = var_tkwredefnode5->type->type_table[cltype16] == idtype17;
+var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 }
 if (unlikely(!var15)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3430);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3650);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist4;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype19 = type_nullable_parser_nodes__AVisibility.color;
-idtype20 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
+var_tkwvarnode5 = var_nodearraylist4;
+/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
+cltype19 = type_nullable_parser_nodes__TKwvar.color;
+idtype20 = type_nullable_parser_nodes__TKwvar.id;
+if(var_tkwvarnode5 == NULL) {
 var18 = 1;
 } else {
-if(cltype19 >= var_pvisibilitynode6->type->table_size) {
+if(cltype19 >= var_tkwvarnode5->type->table_size) {
 var18 = 0;
 } else {
-var18 = var_pvisibilitynode6->type->type_table[cltype19] == idtype20;
+var18 = var_tkwvarnode5->type->type_table[cltype19] == idtype20;
 }
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3432);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3652);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist5;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype22 = type_nullable_parser_nodes__TKwvar.color;
-idtype23 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
+var_tidnode6 = var_nodearraylist5;
+/* <var_tidnode6:nullable Object> isa nullable TId */
+cltype22 = type_nullable_parser_nodes__TId.color;
+idtype23 = type_nullable_parser_nodes__TId.id;
+if(var_tidnode6 == NULL) {
 var21 = 1;
 } else {
-if(cltype22 >= var_tkwvarnode7->type->table_size) {
+if(cltype22 >= var_tidnode6->type->table_size) {
 var21 = 0;
 } else {
-var21 = var_tkwvarnode7->type->type_table[cltype22] == idtype23;
+var21 = var_tidnode6->type->type_table[cltype22] == idtype23;
 }
 }
 if (unlikely(!var21)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3434);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3654);
 show_backtrace(1);
 }
-var_tattridnode8 = var_nodearraylist6;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype25 = type_nullable_parser_nodes__TAttrid.color;
-idtype26 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
+var_ptypenode7 = var_nodearraylist6;
+/* <var_ptypenode7:nullable Object> isa nullable AType */
+cltype25 = type_nullable_parser_nodes__AType.color;
+idtype26 = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode7 == NULL) {
 var24 = 1;
 } else {
-if(cltype25 >= var_tattridnode8->type->table_size) {
+if(cltype25 >= var_ptypenode7->type->table_size) {
 var24 = 0;
 } else {
-var24 = var_tattridnode8->type->type_table[cltype25] == idtype26;
+var24 = var_ptypenode7->type->type_table[cltype25] == idtype26;
 }
 }
 if (unlikely(!var24)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3436);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3656);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist7;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype28 = type_nullable_parser_nodes__AType.color;
-idtype29 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
+var_pannotationsnode9 = var_nodearraylist7;
+/* <var_pannotationsnode9:nullable Object> isa nullable AAnnotations */
+cltype28 = type_nullable_parser_nodes__AAnnotations.color;
+idtype29 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode9 == NULL) {
 var27 = 1;
 } else {
-if(cltype28 >= var_ptypenode10->type->table_size) {
+if(cltype28 >= var_pannotationsnode9->type->table_size) {
 var27 = 0;
 } else {
-var27 = var_ptypenode10->type->type_table[cltype28] == idtype29;
+var27 = var_pannotationsnode9->type->type_table[cltype28] == idtype29;
 }
 }
 if (unlikely(!var27)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3438);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3658);
 show_backtrace(1);
 }
-var_pexprnode12 = var_nodearraylist10;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
+var_pexprnode10 = var_nodearraylist9;
+/* <var_pexprnode10:nullable Object> isa nullable AExpr */
 cltype31 = type_nullable_parser_nodes__AExpr.color;
 idtype32 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
+if(var_pexprnode10 == NULL) {
 var30 = 1;
 } else {
-if(cltype31 >= var_pexprnode12->type->table_size) {
+if(cltype31 >= var_pexprnode10->type->table_size) {
 var30 = 0;
 } else {
-var30 = var_pexprnode12->type->type_table[cltype31] == idtype32;
+var30 = var_pexprnode10->type->type_table[cltype31] == idtype32;
 }
 }
 if (unlikely(!var30)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3440);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3660);
 show_backtrace(1);
 }
 var33 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
 var34 = NULL;
-var35 = NULL;
-var36 = NULL;
 {
-parser_prod__AAttrPropdef__init_aattrpropdef(var33, var_pdocnode2, var34, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var35, var_ptypenode10, var36, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var33:AAttrPropdef>*/
+parser_prod__AAttrPropdef__init_aattrpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var34, var_pannotationsnode9, var_pexprnode10); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var33:AAttrPropdef>*/
 }
 var_ppropdefnode1 = var33;
 var_node_list = var_ppropdefnode1;
-var37 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction73> */
+var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction73> */
 {
-var38 = parser_work__Parser__go_to(var_p, var37);
+var36 = parser_work__Parser__go_to(var_p, var35);
 }
 {
-parser_work__Parser__push(var_p, var38, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
@@ -1299,596 +2853,55 @@ val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
 val* var1 /* : nullable Object */;
-val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var4 /* : nullable Object */;
 val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var5 /* : nullable Object */;
+val* var2 /* : nullable Object */;
 val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var6 /* : nullable Object */;
+val* var3 /* : nullable Object */;
 val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var7 /* : nullable Object */;
+val* var4 /* : nullable Object */;
 val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var8 /* : nullable Object */;
+val* var5 /* : nullable Object */;
 val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var9 /* : nullable Object */;
+val* var6 /* : nullable Object */;
 val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var10 /* : nullable Object */;
+val* var7 /* : nullable Object */;
 val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var11 /* : nullable Object */;
+val* var8 /* : nullable Object */;
 val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
 val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var12 /* : Bool */;
+short int var9 /* : Bool */;
 int cltype;
 int idtype;
-val* var_pablenode3 /* var pablenode3: nullable Object */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
+val* var_tkwinitnode6 /* var tkwinitnode6: nullable Object */;
 short int var16 /* : Bool */;
 int cltype17;
 int idtype18;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
 short int var22 /* : Bool */;
 int cltype23;
 int idtype24;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_tattridnode8 /* var tattridnode8: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-val* var37 /* : AAttrPropdef */;
-val* var38 /* : null */;
-val* var39 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var40 /* : Int */;
-long var41 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist11 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist10 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var10;
-{
-var11 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var11;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var12 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3475);
-show_backtrace(1);
-}
-var_pablenode3 = var_nodearraylist2;
-/* <var_pablenode3:nullable Object> isa nullable AAble */
-cltype14 = type_nullable_parser_nodes__AAble.color;
-idtype15 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode3 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= var_pablenode3->type->table_size) {
-var13 = 0;
-} else {
-var13 = var_pablenode3->type->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3477);
-show_backtrace(1);
-}
-var_pablenode4 = var_nodearraylist3;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype17 = type_nullable_parser_nodes__AAble.color;
-idtype18 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= var_pablenode4->type->table_size) {
-var16 = 0;
-} else {
-var16 = var_pablenode4->type->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3479);
-show_backtrace(1);
-}
-var_tkwredefnode5 = var_nodearraylist4;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype20 = type_nullable_parser_nodes__TKwredef.color;
-idtype21 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= var_tkwredefnode5->type->table_size) {
-var19 = 0;
-} else {
-var19 = var_tkwredefnode5->type->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3481);
-show_backtrace(1);
-}
-var_pvisibilitynode6 = var_nodearraylist5;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype23 = type_nullable_parser_nodes__AVisibility.color;
-idtype24 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= var_pvisibilitynode6->type->table_size) {
-var22 = 0;
-} else {
-var22 = var_pvisibilitynode6->type->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3483);
-show_backtrace(1);
-}
-var_tkwvarnode7 = var_nodearraylist6;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype26 = type_nullable_parser_nodes__TKwvar.color;
-idtype27 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
-var25 = 1;
-} else {
-if(cltype26 >= var_tkwvarnode7->type->table_size) {
-var25 = 0;
-} else {
-var25 = var_tkwvarnode7->type->type_table[cltype26] == idtype27;
-}
-}
-if (unlikely(!var25)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3485);
-show_backtrace(1);
-}
-var_tattridnode8 = var_nodearraylist7;
-/* <var_tattridnode8:nullable Object> isa nullable TAttrid */
-cltype29 = type_nullable_parser_nodes__TAttrid.color;
-idtype30 = type_nullable_parser_nodes__TAttrid.id;
-if(var_tattridnode8 == NULL) {
-var28 = 1;
-} else {
-if(cltype29 >= var_tattridnode8->type->table_size) {
-var28 = 0;
-} else {
-var28 = var_tattridnode8->type->type_table[cltype29] == idtype30;
-}
-}
-if (unlikely(!var28)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3487);
-show_backtrace(1);
-}
-var_ptypenode10 = var_nodearraylist8;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype32 = type_nullable_parser_nodes__AType.color;
-idtype33 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var31 = 1;
-} else {
-if(cltype32 >= var_ptypenode10->type->table_size) {
-var31 = 0;
-} else {
-var31 = var_ptypenode10->type->type_table[cltype32] == idtype33;
-}
-}
-if (unlikely(!var31)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3489);
-show_backtrace(1);
-}
-var_pexprnode12 = var_nodearraylist11;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype35 = type_nullable_parser_nodes__AExpr.color;
-idtype36 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var34 = 1;
-} else {
-if(cltype35 >= var_pexprnode12->type->table_size) {
-var34 = 0;
-} else {
-var34 = var_pexprnode12->type->type_table[cltype35] == idtype36;
-}
-}
-if (unlikely(!var34)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3491);
-show_backtrace(1);
-}
-var37 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var38 = NULL;
-var39 = NULL;
-{
-parser_prod__AAttrPropdef__init_aattrpropdef(var37, var_pdocnode2, var_pablenode3, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var_tattridnode8, var38, var_ptypenode10, var39, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var37:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var37;
-var_node_list = var_ppropdefnode1;
-var40 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction74> */
-{
-var41 = parser_work__Parser__go_to(var_p, var40);
-}
-{
-parser_work__Parser__push(var_p, var41, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction74#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction74__action(val* self, val* p0) {
-parser__ReduceAction74__action(self, p0); /* Direct call parser#ReduceAction74#action on <self:Object(ReduceAction74)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction75#action for (self: ReduceAction75, Parser) */
-void parser__ReduceAction75__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var8 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
-short int var9 /* : Bool */;
-int cltype10;
-int idtype11;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_tidnode9 /* var tidnode9: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_pannotationsnode11 /* var pannotationsnode11: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var27 /* : AAttrPropdef */;
+val* var25 /* : AMethPropdef */;
+val* var26 /* : null */;
+val* var27 /* : null */;
 val* var28 /* : null */;
 val* var29 /* : null */;
 val* var30 /* : null */;
 val* var31 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
 long var32 /* : Int */;
 long var33 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var7;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var8 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var8 = 0;
-} else {
-var8 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var8)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3522);
-show_backtrace(1);
-}
-var_tkwredefnode5 = var_nodearraylist2;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype10 = type_nullable_parser_nodes__TKwredef.color;
-idtype11 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
-var9 = 1;
-} else {
-if(cltype10 >= var_tkwredefnode5->type->table_size) {
-var9 = 0;
-} else {
-var9 = var_tkwredefnode5->type->type_table[cltype10] == idtype11;
-}
-}
-if (unlikely(!var9)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3524);
-show_backtrace(1);
-}
-var_pvisibilitynode6 = var_nodearraylist3;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype13 = type_nullable_parser_nodes__AVisibility.color;
-idtype14 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
-var12 = 1;
-} else {
-if(cltype13 >= var_pvisibilitynode6->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_pvisibilitynode6->type->type_table[cltype13] == idtype14;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3526);
-show_backtrace(1);
-}
-var_tkwvarnode7 = var_nodearraylist4;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype16 = type_nullable_parser_nodes__TKwvar.color;
-idtype17 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
-var15 = 1;
-} else {
-if(cltype16 >= var_tkwvarnode7->type->table_size) {
-var15 = 0;
-} else {
-var15 = var_tkwvarnode7->type->type_table[cltype16] == idtype17;
-}
-}
-if (unlikely(!var15)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3528);
-show_backtrace(1);
-}
-var_tidnode9 = var_nodearraylist5;
-/* <var_tidnode9:nullable Object> isa nullable TId */
-cltype19 = type_nullable_parser_nodes__TId.color;
-idtype20 = type_nullable_parser_nodes__TId.id;
-if(var_tidnode9 == NULL) {
-var18 = 1;
-} else {
-if(cltype19 >= var_tidnode9->type->table_size) {
-var18 = 0;
-} else {
-var18 = var_tidnode9->type->type_table[cltype19] == idtype20;
-}
-}
-if (unlikely(!var18)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3530);
-show_backtrace(1);
-}
-var_ptypenode10 = var_nodearraylist6;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype22 = type_nullable_parser_nodes__AType.color;
-idtype23 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var21 = 1;
-} else {
-if(cltype22 >= var_ptypenode10->type->table_size) {
-var21 = 0;
-} else {
-var21 = var_ptypenode10->type->type_table[cltype22] == idtype23;
-}
-}
-if (unlikely(!var21)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3532);
-show_backtrace(1);
-}
-var_pannotationsnode11 = var_nodearraylist7;
-/* <var_pannotationsnode11:nullable Object> isa nullable AAnnotations */
-cltype25 = type_nullable_parser_nodes__AAnnotations.color;
-idtype26 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode11 == NULL) {
-var24 = 1;
-} else {
-if(cltype25 >= var_pannotationsnode11->type->table_size) {
-var24 = 0;
-} else {
-var24 = var_pannotationsnode11->type->type_table[cltype25] == idtype26;
-}
-}
-if (unlikely(!var24)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3534);
-show_backtrace(1);
-}
-var27 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var28 = NULL;
-var29 = NULL;
-var30 = NULL;
-var31 = NULL;
-{
-parser_prod__AAttrPropdef__init_aattrpropdef(var27, var_pdocnode2, var28, var29, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var30, var_tidnode9, var_ptypenode10, var_pannotationsnode11, var31); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var27:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var27;
-var_node_list = var_ppropdefnode1;
-var32 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction75> */
-{
-var33 = parser_work__Parser__go_to(var_p, var32);
-}
-{
-parser_work__Parser__push(var_p, var33, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction75#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction75__action(val* self, val* p0) {
-parser__ReduceAction75__action(self, p0); /* Direct call parser#ReduceAction75#action on <self:Object(ReduceAction75)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction76#action for (self: ReduceAction76, Parser) */
-void parser__ReduceAction76__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var9 /* : Bool */;
-int cltype;
-int idtype;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
-short int var10 /* : Bool */;
-int cltype11;
-int idtype12;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_tidnode9 /* var tidnode9: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_pannotationsnode11 /* var pannotationsnode11: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var31 /* : AAttrPropdef */;
-val* var32 /* : null */;
-val* var33 /* : null */;
-val* var34 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var35 /* : Int */;
-long var36 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -1939,143 +2952,610 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3566);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3690);
 show_backtrace(1);
 }
-var_pablenode4 = var_nodearraylist7;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype11 = type_nullable_parser_nodes__AAble.color;
-idtype12 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype11 = type_nullable_parser_nodes__TKwredef.color;
+idtype12 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
 var10 = 1;
 } else {
-if(cltype11 >= var_pablenode4->type->table_size) {
+if(cltype11 >= var_tkwredefnode3->type->table_size) {
 var10 = 0;
 } else {
-var10 = var_pablenode4->type->type_table[cltype11] == idtype12;
+var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3568);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3692);
 show_backtrace(1);
 }
-var_tkwredefnode5 = var_nodearraylist2;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype14 = type_nullable_parser_nodes__TKwredef.color;
-idtype15 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype14 = type_nullable_parser_nodes__AVisibility.color;
+idtype15 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
 var13 = 1;
 } else {
-if(cltype14 >= var_tkwredefnode5->type->table_size) {
+if(cltype14 >= var_pvisibilitynode4->type->table_size) {
 var13 = 0;
 } else {
-var13 = var_tkwredefnode5->type->type_table[cltype14] == idtype15;
+var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3570);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3694);
 show_backtrace(1);
 }
-var_pvisibilitynode6 = var_nodearraylist3;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype17 = type_nullable_parser_nodes__AVisibility.color;
-idtype18 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
+var_tkwinitnode6 = var_nodearraylist4;
+/* <var_tkwinitnode6:nullable Object> isa nullable TKwinit */
+cltype17 = type_nullable_parser_nodes__TKwinit.color;
+idtype18 = type_nullable_parser_nodes__TKwinit.id;
+if(var_tkwinitnode6 == NULL) {
 var16 = 1;
 } else {
-if(cltype17 >= var_pvisibilitynode6->type->table_size) {
+if(cltype17 >= var_tkwinitnode6->type->table_size) {
 var16 = 0;
 } else {
-var16 = var_pvisibilitynode6->type->type_table[cltype17] == idtype18;
+var16 = var_tkwinitnode6->type->type_table[cltype17] == idtype18;
 }
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3572);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3696);
 show_backtrace(1);
 }
-var_tkwvarnode7 = var_nodearraylist4;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype20 = type_nullable_parser_nodes__TKwvar.color;
-idtype21 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
+var_psignaturenode9 = var_nodearraylist5;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype20 = type_nullable_parser_nodes__ASignature.color;
+idtype21 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
 var19 = 1;
 } else {
-if(cltype20 >= var_tkwvarnode7->type->table_size) {
+if(cltype20 >= var_psignaturenode9->type->table_size) {
 var19 = 0;
 } else {
-var19 = var_tkwvarnode7->type->type_table[cltype20] == idtype21;
+var19 = var_psignaturenode9->type->type_table[cltype20] == idtype21;
 }
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3574);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3698);
 show_backtrace(1);
 }
-var_tidnode9 = var_nodearraylist5;
-/* <var_tidnode9:nullable Object> isa nullable TId */
-cltype23 = type_nullable_parser_nodes__TId.color;
-idtype24 = type_nullable_parser_nodes__TId.id;
-if(var_tidnode9 == NULL) {
+var_pexprnode13 = var_nodearraylist7;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype23 = type_nullable_parser_nodes__AExpr.color;
+idtype24 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
 var22 = 1;
 } else {
-if(cltype23 >= var_tidnode9->type->table_size) {
+if(cltype23 >= var_pexprnode13->type->table_size) {
 var22 = 0;
 } else {
-var22 = var_tidnode9->type->type_table[cltype23] == idtype24;
+var22 = var_pexprnode13->type->type_table[cltype23] == idtype24;
 }
 }
 if (unlikely(!var22)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3576);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3700);
 show_backtrace(1);
 }
-var_ptypenode10 = var_nodearraylist6;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype26 = type_nullable_parser_nodes__AType.color;
-idtype27 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var25 = 1;
+var25 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var26 = NULL;
+var27 = NULL;
+var28 = NULL;
+var29 = NULL;
+var30 = NULL;
+var31 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var25, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var26, var_tkwinitnode6, var27, var28, var_psignaturenode9, var29, var30, var31, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var25:AMethPropdef>*/
+}
+var_ppropdefnode1 = var25;
+var_node_list = var_ppropdefnode1;
+var32 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction74> */
+{
+var33 = parser_work__Parser__go_to(var_p, var32);
+}
+{
+parser_work__Parser__push(var_p, var33, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction74#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction74__action(val* self, val* p0) {
+parser__ReduceAction74__action(self, p0); /* Direct call parser#ReduceAction74#action on <self:Object(ReduceAction74)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction75#action for (self: ReduceAction75, Parser) */
+void parser__ReduceAction75__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwinitnode6 /* var tkwinitnode6: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AMethPropdef */;
+val* var30 /* : null */;
+val* var31 /* : null */;
+val* var32 /* : null */;
+val* var33 /* : null */;
+val* var34 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var35 /* : Int */;
+long var36 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
 } else {
-if(cltype26 >= var_ptypenode10->type->table_size) {
-var25 = 0;
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
 } else {
-var25 = var_ptypenode10->type->type_table[cltype26] == idtype27;
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 }
-if (unlikely(!var25)) {
+if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3578);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3734);
 show_backtrace(1);
 }
-var_pannotationsnode11 = var_nodearraylist8;
-/* <var_pannotationsnode11:nullable Object> isa nullable AAnnotations */
-cltype29 = type_nullable_parser_nodes__AAnnotations.color;
-idtype30 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode11 == NULL) {
-var28 = 1;
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
 } else {
-if(cltype29 >= var_pannotationsnode11->type->table_size) {
-var28 = 0;
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
 } else {
-var28 = var_pannotationsnode11->type->type_table[cltype29] == idtype30;
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 }
-if (unlikely(!var28)) {
+if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3580);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3736);
 show_backtrace(1);
 }
-var31 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3738);
+show_backtrace(1);
+}
+var_tkwinitnode6 = var_nodearraylist4;
+/* <var_tkwinitnode6:nullable Object> isa nullable TKwinit */
+cltype18 = type_nullable_parser_nodes__TKwinit.color;
+idtype19 = type_nullable_parser_nodes__TKwinit.id;
+if(var_tkwinitnode6 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwinitnode6->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwinitnode6->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3740);
+show_backtrace(1);
+}
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
+cltype21 = type_nullable_parser_nodes__AMethid.color;
+idtype22 = type_nullable_parser_nodes__AMethid.id;
+if(var_pmethidnode8 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_pmethidnode8->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_pmethidnode8->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3742);
+show_backtrace(1);
+}
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype24 = type_nullable_parser_nodes__ASignature.color;
+idtype25 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_psignaturenode9->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_psignaturenode9->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3744);
+show_backtrace(1);
+}
+var_pexprnode13 = var_nodearraylist8;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pexprnode13->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pexprnode13->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3746);
+show_backtrace(1);
+}
+var29 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var30 = NULL;
+var31 = NULL;
 var32 = NULL;
 var33 = NULL;
 var34 = NULL;
 {
-parser_prod__AAttrPropdef__init_aattrpropdef(var31, var_pdocnode2, var32, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var33, var_tidnode9, var_ptypenode10, var_pannotationsnode11, var34); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var31:AAttrPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var30, var_tkwinitnode6, var31, var_pmethidnode8, var_psignaturenode9, var32, var33, var34, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var29:AMethPropdef>*/
 }
-var_ppropdefnode1 = var31;
+var_ppropdefnode1 = var29;
+var_node_list = var_ppropdefnode1;
+var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction75> */
+{
+var36 = parser_work__Parser__go_to(var_p, var35);
+}
+{
+parser_work__Parser__push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction75#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction75__action(val* self, val* p0) {
+parser__ReduceAction75__action(self, p0); /* Direct call parser#ReduceAction75#action on <self:Object(ReduceAction75)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction76#action for (self: ReduceAction76, Parser) */
+void parser__ReduceAction76__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var8 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var9 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pdocnode2 /* var pdocnode2: nullable Object */;
+short int var10 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
+short int var14 /* : Bool */;
+int cltype15;
+int idtype16;
+val* var_tkwinitnode6 /* var tkwinitnode6: nullable Object */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
+short int var23 /* : Bool */;
+int cltype24;
+int idtype25;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : AMethPropdef */;
+val* var30 /* : null */;
+val* var31 /* : null */;
+val* var32 /* : null */;
+val* var33 /* : null */;
+val* var34 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var35 /* : Int */;
+long var36 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist9 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist8 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var7;
+{
+var8 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var8;
+{
+var9 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var9;
+var_pdocnode2 = var_nodearraylist1;
+/* <var_pdocnode2:nullable Object> isa nullable ADoc */
+cltype = type_nullable_parser_nodes__ADoc.color;
+idtype = type_nullable_parser_nodes__ADoc.id;
+if(var_pdocnode2 == NULL) {
+var10 = 1;
+} else {
+if(cltype >= var_pdocnode2->type->table_size) {
+var10 = 0;
+} else {
+var10 = var_pdocnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var10)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3780);
+show_backtrace(1);
+}
+var_tkwredefnode3 = var_nodearraylist2;
+/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
+cltype12 = type_nullable_parser_nodes__TKwredef.color;
+idtype13 = type_nullable_parser_nodes__TKwredef.id;
+if(var_tkwredefnode3 == NULL) {
+var11 = 1;
+} else {
+if(cltype12 >= var_tkwredefnode3->type->table_size) {
+var11 = 0;
+} else {
+var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
+}
+}
+if (unlikely(!var11)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3782);
+show_backtrace(1);
+}
+var_pvisibilitynode4 = var_nodearraylist3;
+/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
+cltype15 = type_nullable_parser_nodes__AVisibility.color;
+idtype16 = type_nullable_parser_nodes__AVisibility.id;
+if(var_pvisibilitynode4 == NULL) {
+var14 = 1;
+} else {
+if(cltype15 >= var_pvisibilitynode4->type->table_size) {
+var14 = 0;
+} else {
+var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
+}
+}
+if (unlikely(!var14)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3784);
+show_backtrace(1);
+}
+var_tkwinitnode6 = var_nodearraylist4;
+/* <var_tkwinitnode6:nullable Object> isa nullable TKwinit */
+cltype18 = type_nullable_parser_nodes__TKwinit.color;
+idtype19 = type_nullable_parser_nodes__TKwinit.id;
+if(var_tkwinitnode6 == NULL) {
+var17 = 1;
+} else {
+if(cltype18 >= var_tkwinitnode6->type->table_size) {
+var17 = 0;
+} else {
+var17 = var_tkwinitnode6->type->type_table[cltype18] == idtype19;
+}
+}
+if (unlikely(!var17)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3786);
+show_backtrace(1);
+}
+var_psignaturenode9 = var_nodearraylist5;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
+cltype21 = type_nullable_parser_nodes__ASignature.color;
+idtype22 = type_nullable_parser_nodes__ASignature.id;
+if(var_psignaturenode9 == NULL) {
+var20 = 1;
+} else {
+if(cltype21 >= var_psignaturenode9->type->table_size) {
+var20 = 0;
+} else {
+var20 = var_psignaturenode9->type->type_table[cltype21] == idtype22;
+}
+}
+if (unlikely(!var20)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3788);
+show_backtrace(1);
+}
+var_pannotationsnode10 = var_nodearraylist6;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
+cltype24 = type_nullable_parser_nodes__AAnnotations.color;
+idtype25 = type_nullable_parser_nodes__AAnnotations.id;
+if(var_pannotationsnode10 == NULL) {
+var23 = 1;
+} else {
+if(cltype24 >= var_pannotationsnode10->type->table_size) {
+var23 = 0;
+} else {
+var23 = var_pannotationsnode10->type->type_table[cltype24] == idtype25;
+}
+}
+if (unlikely(!var23)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3790);
+show_backtrace(1);
+}
+var_pexprnode13 = var_nodearraylist8;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
+cltype27 = type_nullable_parser_nodes__AExpr.color;
+idtype28 = type_nullable_parser_nodes__AExpr.id;
+if(var_pexprnode13 == NULL) {
+var26 = 1;
+} else {
+if(cltype27 >= var_pexprnode13->type->table_size) {
+var26 = 0;
+} else {
+var26 = var_pexprnode13->type->type_table[cltype27] == idtype28;
+}
+}
+if (unlikely(!var26)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3792);
+show_backtrace(1);
+}
+var29 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var30 = NULL;
+var31 = NULL;
+var32 = NULL;
+var33 = NULL;
+var34 = NULL;
+{
+parser_prod__AMethPropdef__init_amethpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var30, var_tkwinitnode6, var31, var32, var_psignaturenode9, var_pannotationsnode10, var33, var34, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var29:AMethPropdef>*/
+}
+var_ppropdefnode1 = var29;
 var_node_list = var_ppropdefnode1;
 var35 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction76> */
 {
@@ -2120,41 +3600,42 @@ val* var_pdocnode2 /* var pdocnode2: nullable Object */;
 short int var11 /* : Bool */;
 int cltype;
 int idtype;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
+val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
 short int var12 /* : Bool */;
 int cltype13;
 int idtype14;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
+val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var15 /* : Bool */;
 int cltype16;
 int idtype17;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
+val* var_tkwinitnode6 /* var tkwinitnode6: nullable Object */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-val* var_tidnode9 /* var tidnode9: nullable Object */;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
 short int var21 /* : Bool */;
 int cltype22;
 int idtype23;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var24 /* : Bool */;
 int cltype25;
 int idtype26;
-val* var_pannotationsnode11 /* var pannotationsnode11: nullable Object */;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
 short int var27 /* : Bool */;
 int cltype28;
 int idtype29;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
+val* var_pexprnode13 /* var pexprnode13: nullable Object */;
 short int var30 /* : Bool */;
 int cltype31;
 int idtype32;
-val* var33 /* : AAttrPropdef */;
+val* var33 /* : AMethPropdef */;
 val* var34 /* : null */;
 val* var35 /* : null */;
 val* var36 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var37 /* : Int */;
+val* var37 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
 long var38 /* : Int */;
+long var39 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -2213,1278 +3694,7 @@ var11 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3614);
-show_backtrace(1);
-}
-var_tkwredefnode5 = var_nodearraylist2;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype13 = type_nullable_parser_nodes__TKwredef.color;
-idtype14 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
-var12 = 1;
-} else {
-if(cltype13 >= var_tkwredefnode5->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_tkwredefnode5->type->type_table[cltype13] == idtype14;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3616);
-show_backtrace(1);
-}
-var_pvisibilitynode6 = var_nodearraylist3;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype16 = type_nullable_parser_nodes__AVisibility.color;
-idtype17 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
-var15 = 1;
-} else {
-if(cltype16 >= var_pvisibilitynode6->type->table_size) {
-var15 = 0;
-} else {
-var15 = var_pvisibilitynode6->type->type_table[cltype16] == idtype17;
-}
-}
-if (unlikely(!var15)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3618);
-show_backtrace(1);
-}
-var_tkwvarnode7 = var_nodearraylist4;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype19 = type_nullable_parser_nodes__TKwvar.color;
-idtype20 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
-var18 = 1;
-} else {
-if(cltype19 >= var_tkwvarnode7->type->table_size) {
-var18 = 0;
-} else {
-var18 = var_tkwvarnode7->type->type_table[cltype19] == idtype20;
-}
-}
-if (unlikely(!var18)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3620);
-show_backtrace(1);
-}
-var_tidnode9 = var_nodearraylist5;
-/* <var_tidnode9:nullable Object> isa nullable TId */
-cltype22 = type_nullable_parser_nodes__TId.color;
-idtype23 = type_nullable_parser_nodes__TId.id;
-if(var_tidnode9 == NULL) {
-var21 = 1;
-} else {
-if(cltype22 >= var_tidnode9->type->table_size) {
-var21 = 0;
-} else {
-var21 = var_tidnode9->type->type_table[cltype22] == idtype23;
-}
-}
-if (unlikely(!var21)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3622);
-show_backtrace(1);
-}
-var_ptypenode10 = var_nodearraylist6;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype25 = type_nullable_parser_nodes__AType.color;
-idtype26 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var24 = 1;
-} else {
-if(cltype25 >= var_ptypenode10->type->table_size) {
-var24 = 0;
-} else {
-var24 = var_ptypenode10->type->type_table[cltype25] == idtype26;
-}
-}
-if (unlikely(!var24)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3624);
-show_backtrace(1);
-}
-var_pannotationsnode11 = var_nodearraylist10;
-/* <var_pannotationsnode11:nullable Object> isa nullable AAnnotations */
-cltype28 = type_nullable_parser_nodes__AAnnotations.color;
-idtype29 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode11 == NULL) {
-var27 = 1;
-} else {
-if(cltype28 >= var_pannotationsnode11->type->table_size) {
-var27 = 0;
-} else {
-var27 = var_pannotationsnode11->type->type_table[cltype28] == idtype29;
-}
-}
-if (unlikely(!var27)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3626);
-show_backtrace(1);
-}
-var_pexprnode12 = var_nodearraylist9;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype31 = type_nullable_parser_nodes__AExpr.color;
-idtype32 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var30 = 1;
-} else {
-if(cltype31 >= var_pexprnode12->type->table_size) {
-var30 = 0;
-} else {
-var30 = var_pexprnode12->type->type_table[cltype31] == idtype32;
-}
-}
-if (unlikely(!var30)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3628);
-show_backtrace(1);
-}
-var33 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var34 = NULL;
-var35 = NULL;
-var36 = NULL;
-{
-parser_prod__AAttrPropdef__init_aattrpropdef(var33, var_pdocnode2, var34, var35, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var36, var_tidnode9, var_ptypenode10, var_pannotationsnode11, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var33:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var33;
-var_node_list = var_ppropdefnode1;
-var37 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction77> */
-{
-var38 = parser_work__Parser__go_to(var_p, var37);
-}
-{
-parser_work__Parser__push(var_p, var38, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction77#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction77__action(val* self, val* p0) {
-parser__ReduceAction77__action(self, p0); /* Direct call parser#ReduceAction77#action on <self:Object(ReduceAction77)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction78#action for (self: ReduceAction78, Parser) */
-void parser__ReduceAction78__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var10 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var11 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var12 /* : Bool */;
-int cltype;
-int idtype;
-val* var_pablenode4 /* var pablenode4: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_tkwredefnode5 /* var tkwredefnode5: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_pvisibilitynode6 /* var pvisibilitynode6: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_tkwvarnode7 /* var tkwvarnode7: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var_tidnode9 /* var tidnode9: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_ptypenode10 /* var ptypenode10: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var_pannotationsnode11 /* var pannotationsnode11: nullable Object */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-val* var37 /* : AAttrPropdef */;
-val* var38 /* : null */;
-val* var39 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var40 /* : Int */;
-long var41 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist11 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist10 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var10;
-{
-var11 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var11;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var12 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3663);
-show_backtrace(1);
-}
-var_pablenode4 = var_nodearraylist7;
-/* <var_pablenode4:nullable Object> isa nullable AAble */
-cltype14 = type_nullable_parser_nodes__AAble.color;
-idtype15 = type_nullable_parser_nodes__AAble.id;
-if(var_pablenode4 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= var_pablenode4->type->table_size) {
-var13 = 0;
-} else {
-var13 = var_pablenode4->type->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3665);
-show_backtrace(1);
-}
-var_tkwredefnode5 = var_nodearraylist2;
-/* <var_tkwredefnode5:nullable Object> isa nullable TKwredef */
-cltype17 = type_nullable_parser_nodes__TKwredef.color;
-idtype18 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode5 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= var_tkwredefnode5->type->table_size) {
-var16 = 0;
-} else {
-var16 = var_tkwredefnode5->type->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3667);
-show_backtrace(1);
-}
-var_pvisibilitynode6 = var_nodearraylist3;
-/* <var_pvisibilitynode6:nullable Object> isa nullable AVisibility */
-cltype20 = type_nullable_parser_nodes__AVisibility.color;
-idtype21 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode6 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= var_pvisibilitynode6->type->table_size) {
-var19 = 0;
-} else {
-var19 = var_pvisibilitynode6->type->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3669);
-show_backtrace(1);
-}
-var_tkwvarnode7 = var_nodearraylist4;
-/* <var_tkwvarnode7:nullable Object> isa nullable TKwvar */
-cltype23 = type_nullable_parser_nodes__TKwvar.color;
-idtype24 = type_nullable_parser_nodes__TKwvar.id;
-if(var_tkwvarnode7 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= var_tkwvarnode7->type->table_size) {
-var22 = 0;
-} else {
-var22 = var_tkwvarnode7->type->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3671);
-show_backtrace(1);
-}
-var_tidnode9 = var_nodearraylist5;
-/* <var_tidnode9:nullable Object> isa nullable TId */
-cltype26 = type_nullable_parser_nodes__TId.color;
-idtype27 = type_nullable_parser_nodes__TId.id;
-if(var_tidnode9 == NULL) {
-var25 = 1;
-} else {
-if(cltype26 >= var_tidnode9->type->table_size) {
-var25 = 0;
-} else {
-var25 = var_tidnode9->type->type_table[cltype26] == idtype27;
-}
-}
-if (unlikely(!var25)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3673);
-show_backtrace(1);
-}
-var_ptypenode10 = var_nodearraylist6;
-/* <var_ptypenode10:nullable Object> isa nullable AType */
-cltype29 = type_nullable_parser_nodes__AType.color;
-idtype30 = type_nullable_parser_nodes__AType.id;
-if(var_ptypenode10 == NULL) {
-var28 = 1;
-} else {
-if(cltype29 >= var_ptypenode10->type->table_size) {
-var28 = 0;
-} else {
-var28 = var_ptypenode10->type->type_table[cltype29] == idtype30;
-}
-}
-if (unlikely(!var28)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3675);
-show_backtrace(1);
-}
-var_pannotationsnode11 = var_nodearraylist11;
-/* <var_pannotationsnode11:nullable Object> isa nullable AAnnotations */
-cltype32 = type_nullable_parser_nodes__AAnnotations.color;
-idtype33 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode11 == NULL) {
-var31 = 1;
-} else {
-if(cltype32 >= var_pannotationsnode11->type->table_size) {
-var31 = 0;
-} else {
-var31 = var_pannotationsnode11->type->type_table[cltype32] == idtype33;
-}
-}
-if (unlikely(!var31)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3677);
-show_backtrace(1);
-}
-var_pexprnode12 = var_nodearraylist10;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype35 = type_nullable_parser_nodes__AExpr.color;
-idtype36 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var34 = 1;
-} else {
-if(cltype35 >= var_pexprnode12->type->table_size) {
-var34 = 0;
-} else {
-var34 = var_pexprnode12->type->type_table[cltype35] == idtype36;
-}
-}
-if (unlikely(!var34)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3679);
-show_backtrace(1);
-}
-var37 = NEW_parser_nodes__AAttrPropdef(&type_parser_nodes__AAttrPropdef);
-var38 = NULL;
-var39 = NULL;
-{
-parser_prod__AAttrPropdef__init_aattrpropdef(var37, var_pdocnode2, var38, var_pablenode4, var_tkwredefnode5, var_pvisibilitynode6, var_tkwvarnode7, var39, var_tidnode9, var_ptypenode10, var_pannotationsnode11, var_pexprnode12); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var37:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var37;
-var_node_list = var_ppropdefnode1;
-var40 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction78> */
-{
-var41 = parser_work__Parser__go_to(var_p, var40);
-}
-{
-parser_work__Parser__push(var_p, var41, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction78#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction78__action(val* self, val* p0) {
-parser__ReduceAction78__action(self, p0); /* Direct call parser#ReduceAction78#action on <self:Object(ReduceAction78)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction79#action for (self: ReduceAction79, Parser) */
-void parser__ReduceAction79__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var9 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var10 /* : Bool */;
-int cltype11;
-int idtype12;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_tkwinitnode5 /* var tkwinitnode5: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_pexprnode9 /* var pexprnode9: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var25 /* : AConcreteInitPropdef */;
-val* var26 /* : null */;
-val* var27 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteInitPropdef */;
-long var28 /* : Int */;
-long var29 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var8;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var9 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var9 = 0;
-} else {
-var9 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var9)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3711);
-show_backtrace(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype11 = type_nullable_parser_nodes__TKwredef.color;
-idtype12 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var10 = 1;
-} else {
-if(cltype11 >= var_tkwredefnode3->type->table_size) {
-var10 = 0;
-} else {
-var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
-}
-}
-if (unlikely(!var10)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3713);
-show_backtrace(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype14 = type_nullable_parser_nodes__AVisibility.color;
-idtype15 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= var_pvisibilitynode4->type->table_size) {
-var13 = 0;
-} else {
-var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3715);
-show_backtrace(1);
-}
-var_tkwinitnode5 = var_nodearraylist4;
-/* <var_tkwinitnode5:nullable Object> isa nullable TKwinit */
-cltype17 = type_nullable_parser_nodes__TKwinit.color;
-idtype18 = type_nullable_parser_nodes__TKwinit.id;
-if(var_tkwinitnode5 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= var_tkwinitnode5->type->table_size) {
-var16 = 0;
-} else {
-var16 = var_tkwinitnode5->type->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3717);
-show_backtrace(1);
-}
-var_psignaturenode7 = var_nodearraylist5;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
-cltype20 = type_nullable_parser_nodes__ASignature.color;
-idtype21 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= var_psignaturenode7->type->table_size) {
-var19 = 0;
-} else {
-var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3719);
-show_backtrace(1);
-}
-var_pexprnode9 = var_nodearraylist7;
-/* <var_pexprnode9:nullable Object> isa nullable AExpr */
-cltype23 = type_nullable_parser_nodes__AExpr.color;
-idtype24 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode9 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= var_pexprnode9->type->table_size) {
-var22 = 0;
-} else {
-var22 = var_pexprnode9->type->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3721);
-show_backtrace(1);
-}
-var25 = NEW_parser_nodes__AConcreteInitPropdef(&type_parser_nodes__AConcreteInitPropdef);
-var26 = NULL;
-var27 = NULL;
-{
-parser_prod__AConcreteInitPropdef__init_aconcreteinitpropdef(var25, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwinitnode5, var26, var_psignaturenode7, var27, var_pexprnode9); /* Direct call parser_prod#AConcreteInitPropdef#init_aconcreteinitpropdef on <var25:AConcreteInitPropdef>*/
-}
-var_ppropdefnode1 = var25;
-var_node_list = var_ppropdefnode1;
-var28 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction79> */
-{
-var29 = parser_work__Parser__go_to(var_p, var28);
-}
-{
-parser_work__Parser__push(var_p, var29, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction79#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction79__action(val* self, val* p0) {
-parser__ReduceAction79__action(self, p0); /* Direct call parser#ReduceAction79#action on <self:Object(ReduceAction79)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction80#action for (self: ReduceAction80, Parser) */
-void parser__ReduceAction80__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var10 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-val* var_tkwinitnode5 /* var tkwinitnode5: nullable Object */;
-short int var17 /* : Bool */;
-int cltype18;
-int idtype19;
-val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var23 /* : Bool */;
-int cltype24;
-int idtype25;
-val* var_pexprnode9 /* var pexprnode9: nullable Object */;
-short int var26 /* : Bool */;
-int cltype27;
-int idtype28;
-val* var29 /* : AConcreteInitPropdef */;
-val* var30 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteInitPropdef */;
-long var31 /* : Int */;
-long var32 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var9;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var10 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var10 = 0;
-} else {
-var10 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var10)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3751);
-show_backtrace(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype12 = type_nullable_parser_nodes__TKwredef.color;
-idtype13 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var11 = 1;
-} else {
-if(cltype12 >= var_tkwredefnode3->type->table_size) {
-var11 = 0;
-} else {
-var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
-}
-}
-if (unlikely(!var11)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3753);
-show_backtrace(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype15 = type_nullable_parser_nodes__AVisibility.color;
-idtype16 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var14 = 1;
-} else {
-if(cltype15 >= var_pvisibilitynode4->type->table_size) {
-var14 = 0;
-} else {
-var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
-}
-}
-if (unlikely(!var14)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3755);
-show_backtrace(1);
-}
-var_tkwinitnode5 = var_nodearraylist4;
-/* <var_tkwinitnode5:nullable Object> isa nullable TKwinit */
-cltype18 = type_nullable_parser_nodes__TKwinit.color;
-idtype19 = type_nullable_parser_nodes__TKwinit.id;
-if(var_tkwinitnode5 == NULL) {
-var17 = 1;
-} else {
-if(cltype18 >= var_tkwinitnode5->type->table_size) {
-var17 = 0;
-} else {
-var17 = var_tkwinitnode5->type->type_table[cltype18] == idtype19;
-}
-}
-if (unlikely(!var17)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3757);
-show_backtrace(1);
-}
-var_pmethidnode6 = var_nodearraylist5;
-/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
-cltype21 = type_nullable_parser_nodes__AMethid.color;
-idtype22 = type_nullable_parser_nodes__AMethid.id;
-if(var_pmethidnode6 == NULL) {
-var20 = 1;
-} else {
-if(cltype21 >= var_pmethidnode6->type->table_size) {
-var20 = 0;
-} else {
-var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
-}
-}
-if (unlikely(!var20)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3759);
-show_backtrace(1);
-}
-var_psignaturenode7 = var_nodearraylist6;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
-cltype24 = type_nullable_parser_nodes__ASignature.color;
-idtype25 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
-var23 = 1;
-} else {
-if(cltype24 >= var_psignaturenode7->type->table_size) {
-var23 = 0;
-} else {
-var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
-}
-}
-if (unlikely(!var23)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3761);
-show_backtrace(1);
-}
-var_pexprnode9 = var_nodearraylist8;
-/* <var_pexprnode9:nullable Object> isa nullable AExpr */
-cltype27 = type_nullable_parser_nodes__AExpr.color;
-idtype28 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode9 == NULL) {
-var26 = 1;
-} else {
-if(cltype27 >= var_pexprnode9->type->table_size) {
-var26 = 0;
-} else {
-var26 = var_pexprnode9->type->type_table[cltype27] == idtype28;
-}
-}
-if (unlikely(!var26)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3763);
-show_backtrace(1);
-}
-var29 = NEW_parser_nodes__AConcreteInitPropdef(&type_parser_nodes__AConcreteInitPropdef);
-var30 = NULL;
-{
-parser_prod__AConcreteInitPropdef__init_aconcreteinitpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwinitnode5, var_pmethidnode6, var_psignaturenode7, var30, var_pexprnode9); /* Direct call parser_prod#AConcreteInitPropdef#init_aconcreteinitpropdef on <var29:AConcreteInitPropdef>*/
-}
-var_ppropdefnode1 = var29;
-var_node_list = var_ppropdefnode1;
-var31 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction80> */
-{
-var32 = parser_work__Parser__go_to(var_p, var31);
-}
-{
-parser_work__Parser__push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction80#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction80__action(val* self, val* p0) {
-parser__ReduceAction80__action(self, p0); /* Direct call parser#ReduceAction80#action on <self:Object(ReduceAction80)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction81#action for (self: ReduceAction81, Parser) */
-void parser__ReduceAction81__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var10 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-val* var_tkwinitnode5 /* var tkwinitnode5: nullable Object */;
-short int var17 /* : Bool */;
-int cltype18;
-int idtype19;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
-val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
-short int var23 /* : Bool */;
-int cltype24;
-int idtype25;
-val* var_pexprnode9 /* var pexprnode9: nullable Object */;
-short int var26 /* : Bool */;
-int cltype27;
-int idtype28;
-val* var29 /* : AConcreteInitPropdef */;
-val* var30 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteInitPropdef */;
-long var31 /* : Int */;
-long var32 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var9;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var10 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var10 = 0;
-} else {
-var10 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var10)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3793);
-show_backtrace(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype12 = type_nullable_parser_nodes__TKwredef.color;
-idtype13 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var11 = 1;
-} else {
-if(cltype12 >= var_tkwredefnode3->type->table_size) {
-var11 = 0;
-} else {
-var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
-}
-}
-if (unlikely(!var11)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3795);
-show_backtrace(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype15 = type_nullable_parser_nodes__AVisibility.color;
-idtype16 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var14 = 1;
-} else {
-if(cltype15 >= var_pvisibilitynode4->type->table_size) {
-var14 = 0;
-} else {
-var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
-}
-}
-if (unlikely(!var14)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3797);
-show_backtrace(1);
-}
-var_tkwinitnode5 = var_nodearraylist4;
-/* <var_tkwinitnode5:nullable Object> isa nullable TKwinit */
-cltype18 = type_nullable_parser_nodes__TKwinit.color;
-idtype19 = type_nullable_parser_nodes__TKwinit.id;
-if(var_tkwinitnode5 == NULL) {
-var17 = 1;
-} else {
-if(cltype18 >= var_tkwinitnode5->type->table_size) {
-var17 = 0;
-} else {
-var17 = var_tkwinitnode5->type->type_table[cltype18] == idtype19;
-}
-}
-if (unlikely(!var17)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3799);
-show_backtrace(1);
-}
-var_psignaturenode7 = var_nodearraylist5;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
-cltype21 = type_nullable_parser_nodes__ASignature.color;
-idtype22 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
-var20 = 1;
-} else {
-if(cltype21 >= var_psignaturenode7->type->table_size) {
-var20 = 0;
-} else {
-var20 = var_psignaturenode7->type->type_table[cltype21] == idtype22;
-}
-}
-if (unlikely(!var20)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3801);
-show_backtrace(1);
-}
-var_pannotationsnode8 = var_nodearraylist6;
-/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
-cltype24 = type_nullable_parser_nodes__AAnnotations.color;
-idtype25 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode8 == NULL) {
-var23 = 1;
-} else {
-if(cltype24 >= var_pannotationsnode8->type->table_size) {
-var23 = 0;
-} else {
-var23 = var_pannotationsnode8->type->type_table[cltype24] == idtype25;
-}
-}
-if (unlikely(!var23)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3803);
-show_backtrace(1);
-}
-var_pexprnode9 = var_nodearraylist8;
-/* <var_pexprnode9:nullable Object> isa nullable AExpr */
-cltype27 = type_nullable_parser_nodes__AExpr.color;
-idtype28 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode9 == NULL) {
-var26 = 1;
-} else {
-if(cltype27 >= var_pexprnode9->type->table_size) {
-var26 = 0;
-} else {
-var26 = var_pexprnode9->type->type_table[cltype27] == idtype28;
-}
-}
-if (unlikely(!var26)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3805);
-show_backtrace(1);
-}
-var29 = NEW_parser_nodes__AConcreteInitPropdef(&type_parser_nodes__AConcreteInitPropdef);
-var30 = NULL;
-{
-parser_prod__AConcreteInitPropdef__init_aconcreteinitpropdef(var29, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwinitnode5, var30, var_psignaturenode7, var_pannotationsnode8, var_pexprnode9); /* Direct call parser_prod#AConcreteInitPropdef#init_aconcreteinitpropdef on <var29:AConcreteInitPropdef>*/
-}
-var_ppropdefnode1 = var29;
-var_node_list = var_ppropdefnode1;
-var31 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction81> */
-{
-var32 = parser_work__Parser__go_to(var_p, var31);
-}
-{
-parser_work__Parser__push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction81#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction81__action(val* self, val* p0) {
-parser__ReduceAction81__action(self, p0); /* Direct call parser#ReduceAction81#action on <self:Object(ReduceAction81)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction82#action for (self: ReduceAction82, Parser) */
-void parser__ReduceAction82__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var10 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var11 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_tkwinitnode5 /* var tkwinitnode5: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
-short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
-val* var_pexprnode9 /* var pexprnode9: nullable Object */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-val* var33 /* : AConcreteInitPropdef */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AConcreteInitPropdef */;
-long var34 /* : Int */;
-long var35 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist10 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var10;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var11 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var11 = 0;
-} else {
-var11 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var11)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3836);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3827);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3502,7 +3712,7 @@ var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3838);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3829);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3520,121 +3730,125 @@ var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
 }
 if (unlikely(!var15)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3840);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3831);
 show_backtrace(1);
 }
-var_tkwinitnode5 = var_nodearraylist4;
-/* <var_tkwinitnode5:nullable Object> isa nullable TKwinit */
+var_tkwinitnode6 = var_nodearraylist4;
+/* <var_tkwinitnode6:nullable Object> isa nullable TKwinit */
 cltype19 = type_nullable_parser_nodes__TKwinit.color;
 idtype20 = type_nullable_parser_nodes__TKwinit.id;
-if(var_tkwinitnode5 == NULL) {
+if(var_tkwinitnode6 == NULL) {
 var18 = 1;
 } else {
-if(cltype19 >= var_tkwinitnode5->type->table_size) {
+if(cltype19 >= var_tkwinitnode6->type->table_size) {
 var18 = 0;
 } else {
-var18 = var_tkwinitnode5->type->type_table[cltype19] == idtype20;
+var18 = var_tkwinitnode6->type->type_table[cltype19] == idtype20;
 }
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3842);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3833);
 show_backtrace(1);
 }
-var_pmethidnode6 = var_nodearraylist5;
-/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
 cltype22 = type_nullable_parser_nodes__AMethid.color;
 idtype23 = type_nullable_parser_nodes__AMethid.id;
-if(var_pmethidnode6 == NULL) {
+if(var_pmethidnode8 == NULL) {
 var21 = 1;
 } else {
-if(cltype22 >= var_pmethidnode6->type->table_size) {
+if(cltype22 >= var_pmethidnode8->type->table_size) {
 var21 = 0;
 } else {
-var21 = var_pmethidnode6->type->type_table[cltype22] == idtype23;
+var21 = var_pmethidnode8->type->type_table[cltype22] == idtype23;
 }
 }
 if (unlikely(!var21)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3844);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3835);
 show_backtrace(1);
 }
-var_psignaturenode7 = var_nodearraylist6;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
 cltype25 = type_nullable_parser_nodes__ASignature.color;
 idtype26 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
+if(var_psignaturenode9 == NULL) {
 var24 = 1;
 } else {
-if(cltype25 >= var_psignaturenode7->type->table_size) {
+if(cltype25 >= var_psignaturenode9->type->table_size) {
 var24 = 0;
 } else {
-var24 = var_psignaturenode7->type->type_table[cltype25] == idtype26;
+var24 = var_psignaturenode9->type->type_table[cltype25] == idtype26;
 }
 }
 if (unlikely(!var24)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3846);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3837);
 show_backtrace(1);
 }
-var_pannotationsnode8 = var_nodearraylist7;
-/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+var_pannotationsnode10 = var_nodearraylist7;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
 cltype28 = type_nullable_parser_nodes__AAnnotations.color;
 idtype29 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode8 == NULL) {
+if(var_pannotationsnode10 == NULL) {
 var27 = 1;
 } else {
-if(cltype28 >= var_pannotationsnode8->type->table_size) {
+if(cltype28 >= var_pannotationsnode10->type->table_size) {
 var27 = 0;
 } else {
-var27 = var_pannotationsnode8->type->type_table[cltype28] == idtype29;
+var27 = var_pannotationsnode10->type->type_table[cltype28] == idtype29;
 }
 }
 if (unlikely(!var27)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3848);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3839);
 show_backtrace(1);
 }
-var_pexprnode9 = var_nodearraylist9;
-/* <var_pexprnode9:nullable Object> isa nullable AExpr */
+var_pexprnode13 = var_nodearraylist9;
+/* <var_pexprnode13:nullable Object> isa nullable AExpr */
 cltype31 = type_nullable_parser_nodes__AExpr.color;
 idtype32 = type_nullable_parser_nodes__AExpr.id;
-if(var_pexprnode9 == NULL) {
+if(var_pexprnode13 == NULL) {
 var30 = 1;
 } else {
-if(cltype31 >= var_pexprnode9->type->table_size) {
+if(cltype31 >= var_pexprnode13->type->table_size) {
 var30 = 0;
 } else {
-var30 = var_pexprnode9->type->type_table[cltype31] == idtype32;
+var30 = var_pexprnode13->type->type_table[cltype31] == idtype32;
 }
 }
 if (unlikely(!var30)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3850);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3841);
 show_backtrace(1);
 }
-var33 = NEW_parser_nodes__AConcreteInitPropdef(&type_parser_nodes__AConcreteInitPropdef);
+var33 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
+var34 = NULL;
+var35 = NULL;
+var36 = NULL;
+var37 = NULL;
 {
-parser_prod__AConcreteInitPropdef__init_aconcreteinitpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwinitnode5, var_pmethidnode6, var_psignaturenode7, var_pannotationsnode8, var_pexprnode9); /* Direct call parser_prod#AConcreteInitPropdef#init_aconcreteinitpropdef on <var33:AConcreteInitPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var34, var_tkwinitnode6, var35, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var36, var37, var_pexprnode13); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var33:AMethPropdef>*/
 }
 var_ppropdefnode1 = var33;
 var_node_list = var_ppropdefnode1;
-var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction82> */
+var38 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction77> */
 {
-var35 = parser_work__Parser__go_to(var_p, var34);
+var39 = parser_work__Parser__go_to(var_p, var38);
 }
 {
-parser_work__Parser__push(var_p, var35, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var39, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction82#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction82__action(val* self, val* p0) {
-parser__ReduceAction82__action(self, p0); /* Direct call parser#ReduceAction82#action on <self:Object(ReduceAction82)>*/
+/* method parser#ReduceAction77#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction77__action(val* self, val* p0) {
+parser__ReduceAction77__action(self, p0); /* Direct call parser#ReduceAction77#action on <self:Object(ReduceAction77)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction83#action for (self: ReduceAction83, Parser) */
-void parser__ReduceAction83__action(val* self, val* p0) {
+/* method parser#ReduceAction78#action for (self: ReduceAction78, Parser) */
+void parser__ReduceAction78__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3730,7 +3944,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3878);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3873);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3748,7 +3962,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3880);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3875);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3766,7 +3980,7 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3882);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3877);
 show_backtrace(1);
 }
 var_tkwtypenode5 = var_nodearraylist4;
@@ -3784,7 +3998,7 @@ var15 = var_tkwtypenode5->type->type_table[cltype16] == idtype17;
 }
 if (unlikely(!var15)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3884);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3879);
 show_backtrace(1);
 }
 var_tclassidnode6 = var_nodearraylist5;
@@ -3802,7 +4016,7 @@ var18 = var_tclassidnode6->type->type_table[cltype19] == idtype20;
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3886);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3881);
 show_backtrace(1);
 }
 var_ptypenode7 = var_nodearraylist6;
@@ -3820,7 +4034,7 @@ var21 = var_ptypenode7->type->type_table[cltype22] == idtype23;
 }
 if (unlikely(!var21)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3888);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3883);
 show_backtrace(1);
 }
 var_pannotationsnode8 = var_nodearraylist7;
@@ -3838,7 +4052,7 @@ var24 = var_pannotationsnode8->type->type_table[cltype25] == idtype26;
 }
 if (unlikely(!var24)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3890);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3885);
 show_backtrace(1);
 }
 var27 = NEW_parser_nodes__ATypePropdef(&type_parser_nodes__ATypePropdef);
@@ -3847,7 +4061,7 @@ parser_prod__ATypePropdef__init_atypepropdef(var27, var_pdocnode2, var_tkwredefn
 }
 var_ppropdefnode1 = var27;
 var_node_list = var_ppropdefnode1;
-var28 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction83> */
+var28 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction78> */
 {
 var29 = parser_work__Parser__go_to(var_p, var28);
 }
@@ -3856,583 +4070,13 @@ parser_work__Parser__push(var_p, var29, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction83#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction83__action(val* self, val* p0) {
-parser__ReduceAction83__action(self, p0); /* Direct call parser#ReduceAction83#action on <self:Object(ReduceAction83)>*/
+/* method parser#ReduceAction78#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction78__action(val* self, val* p0) {
+parser__ReduceAction78__action(self, p0); /* Direct call parser#ReduceAction78#action on <self:Object(ReduceAction78)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction84#action for (self: ReduceAction84, Parser) */
-void parser__ReduceAction84__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var10 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var11 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_tstringnode9 /* var tstringnode9: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
-short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-val* var33 /* : AExternInitPropdef */;
-val* var34 /* : null */;
-val* var35 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var36 /* : Int */;
-long var37 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist10 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var10;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var11 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var11 = 0;
-} else {
-var11 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var11)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3920);
-show_backtrace(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype13 = type_nullable_parser_nodes__TKwredef.color;
-idtype14 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var12 = 1;
-} else {
-if(cltype13 >= var_tkwredefnode3->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_tkwredefnode3->type->type_table[cltype13] == idtype14;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3922);
-show_backtrace(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype16 = type_nullable_parser_nodes__AVisibility.color;
-idtype17 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var15 = 1;
-} else {
-if(cltype16 >= var_pvisibilitynode4->type->table_size) {
-var15 = 0;
-} else {
-var15 = var_pvisibilitynode4->type->type_table[cltype16] == idtype17;
-}
-}
-if (unlikely(!var15)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3924);
-show_backtrace(1);
-}
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
-cltype19 = type_nullable_parser_nodes__TKwnew.color;
-idtype20 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
-var18 = 1;
-} else {
-if(cltype19 >= var_tkwnewnode5->type->table_size) {
-var18 = 0;
-} else {
-var18 = var_tkwnewnode5->type->type_table[cltype19] == idtype20;
-}
-}
-if (unlikely(!var18)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3926);
-show_backtrace(1);
-}
-var_psignaturenode7 = var_nodearraylist5;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
-cltype22 = type_nullable_parser_nodes__ASignature.color;
-idtype23 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
-var21 = 1;
-} else {
-if(cltype22 >= var_psignaturenode7->type->table_size) {
-var21 = 0;
-} else {
-var21 = var_psignaturenode7->type->type_table[cltype22] == idtype23;
-}
-}
-if (unlikely(!var21)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3928);
-show_backtrace(1);
-}
-var_tstringnode9 = var_nodearraylist8;
-/* <var_tstringnode9:nullable Object> isa nullable TString */
-cltype25 = type_nullable_parser_nodes__TString.color;
-idtype26 = type_nullable_parser_nodes__TString.id;
-if(var_tstringnode9 == NULL) {
-var24 = 1;
-} else {
-if(cltype25 >= var_tstringnode9->type->table_size) {
-var24 = 0;
-} else {
-var24 = var_tstringnode9->type->type_table[cltype25] == idtype26;
-}
-}
-if (unlikely(!var24)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3930);
-show_backtrace(1);
-}
-var_pexterncallsnode10 = var_nodearraylist9;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
-cltype28 = type_nullable_parser_nodes__AExternCalls.color;
-idtype29 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
-var27 = 1;
-} else {
-if(cltype28 >= var_pexterncallsnode10->type->table_size) {
-var27 = 0;
-} else {
-var27 = var_pexterncallsnode10->type->type_table[cltype28] == idtype29;
-}
-}
-if (unlikely(!var27)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3932);
-show_backtrace(1);
-}
-var_pexterncodeblocknode11 = var_nodearraylist10;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
-cltype31 = type_nullable_parser_nodes__AExternCodeBlock.color;
-idtype32 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
-var30 = 1;
-} else {
-if(cltype31 >= var_pexterncodeblocknode11->type->table_size) {
-var30 = 0;
-} else {
-var30 = var_pexterncodeblocknode11->type->type_table[cltype31] == idtype32;
-}
-}
-if (unlikely(!var30)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3934);
-show_backtrace(1);
-}
-var33 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
-var34 = NULL;
-var35 = NULL;
-{
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var33, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var34, var_psignaturenode7, var35, var_tstringnode9, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var33:AExternInitPropdef>*/
-}
-var_ppropdefnode1 = var33;
-var_node_list = var_ppropdefnode1;
-var36 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction84> */
-{
-var37 = parser_work__Parser__go_to(var_p, var36);
-}
-{
-parser_work__Parser__push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction84#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction84__action(val* self, val* p0) {
-parser__ReduceAction84__action(self, p0); /* Direct call parser#ReduceAction84#action on <self:Object(ReduceAction84)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction85#action for (self: ReduceAction85, Parser) */
-void parser__ReduceAction85__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist11 /* var nodearraylist11: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist10 /* var nodearraylist10: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var9 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var10 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var11 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var12 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_tstringnode9 /* var tstringnode9: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
-short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-val* var37 /* : AExternInitPropdef */;
-val* var38 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var39 /* : Int */;
-long var40 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist11 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist10 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist9 = var3;
-{
-var4 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist8 = var4;
-{
-var5 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist7 = var5;
-{
-var6 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist6 = var6;
-{
-var7 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist5 = var7;
-{
-var8 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist4 = var8;
-{
-var9 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var9;
-{
-var10 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var10;
-{
-var11 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var11;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable_parser_nodes__ADoc.color;
-idtype = type_nullable_parser_nodes__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var12 = 1;
-} else {
-if(cltype >= var_pdocnode2->type->table_size) {
-var12 = 0;
-} else {
-var12 = var_pdocnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3968);
-show_backtrace(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype14 = type_nullable_parser_nodes__TKwredef.color;
-idtype15 = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= var_tkwredefnode3->type->table_size) {
-var13 = 0;
-} else {
-var13 = var_tkwredefnode3->type->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3970);
-show_backtrace(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype17 = type_nullable_parser_nodes__AVisibility.color;
-idtype18 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= var_pvisibilitynode4->type->table_size) {
-var16 = 0;
-} else {
-var16 = var_pvisibilitynode4->type->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3972);
-show_backtrace(1);
-}
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
-cltype20 = type_nullable_parser_nodes__TKwnew.color;
-idtype21 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= var_tkwnewnode5->type->table_size) {
-var19 = 0;
-} else {
-var19 = var_tkwnewnode5->type->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3974);
-show_backtrace(1);
-}
-var_pmethidnode6 = var_nodearraylist5;
-/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
-cltype23 = type_nullable_parser_nodes__AMethid.color;
-idtype24 = type_nullable_parser_nodes__AMethid.id;
-if(var_pmethidnode6 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= var_pmethidnode6->type->table_size) {
-var22 = 0;
-} else {
-var22 = var_pmethidnode6->type->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3976);
-show_backtrace(1);
-}
-var_psignaturenode7 = var_nodearraylist6;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
-cltype26 = type_nullable_parser_nodes__ASignature.color;
-idtype27 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
-var25 = 1;
-} else {
-if(cltype26 >= var_psignaturenode7->type->table_size) {
-var25 = 0;
-} else {
-var25 = var_psignaturenode7->type->type_table[cltype26] == idtype27;
-}
-}
-if (unlikely(!var25)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3978);
-show_backtrace(1);
-}
-var_tstringnode9 = var_nodearraylist9;
-/* <var_tstringnode9:nullable Object> isa nullable TString */
-cltype29 = type_nullable_parser_nodes__TString.color;
-idtype30 = type_nullable_parser_nodes__TString.id;
-if(var_tstringnode9 == NULL) {
-var28 = 1;
-} else {
-if(cltype29 >= var_tstringnode9->type->table_size) {
-var28 = 0;
-} else {
-var28 = var_tstringnode9->type->type_table[cltype29] == idtype30;
-}
-}
-if (unlikely(!var28)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3980);
-show_backtrace(1);
-}
-var_pexterncallsnode10 = var_nodearraylist10;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
-cltype32 = type_nullable_parser_nodes__AExternCalls.color;
-idtype33 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
-var31 = 1;
-} else {
-if(cltype32 >= var_pexterncallsnode10->type->table_size) {
-var31 = 0;
-} else {
-var31 = var_pexterncallsnode10->type->type_table[cltype32] == idtype33;
-}
-}
-if (unlikely(!var31)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3982);
-show_backtrace(1);
-}
-var_pexterncodeblocknode11 = var_nodearraylist11;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
-cltype35 = type_nullable_parser_nodes__AExternCodeBlock.color;
-idtype36 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
-var34 = 1;
-} else {
-if(cltype35 >= var_pexterncodeblocknode11->type->table_size) {
-var34 = 0;
-} else {
-var34 = var_pexterncodeblocknode11->type->type_table[cltype35] == idtype36;
-}
-}
-if (unlikely(!var34)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 3984);
-show_backtrace(1);
-}
-var37 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
-var38 = NULL;
-{
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var37, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var_pmethidnode6, var_psignaturenode7, var38, var_tstringnode9, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var37:AExternInitPropdef>*/
-}
-var_ppropdefnode1 = var37;
-var_node_list = var_ppropdefnode1;
-var39 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction85> */
-{
-var40 = parser_work__Parser__go_to(var_p, var39);
-}
-{
-parser_work__Parser__push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction85#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction85__action(val* self, val* p0) {
-parser__ReduceAction85__action(self, p0); /* Direct call parser#ReduceAction85#action on <self:Object(ReduceAction85)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction86#action for (self: ReduceAction86, Parser) */
-void parser__ReduceAction86__action(val* self, val* p0) {
+/* method parser#ReduceAction79#action for (self: ReduceAction79, Parser) */
+void parser__ReduceAction79__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4462,29 +4106,31 @@ val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var12 /* : Bool */;
 int cltype13;
 int idtype14;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
 short int var15 /* : Bool */;
 int cltype16;
 int idtype17;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
 short int var21 /* : Bool */;
 int cltype22;
 int idtype23;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
 short int var24 /* : Bool */;
 int cltype25;
 int idtype26;
-val* var27 /* : AExternInitPropdef */;
+val* var27 /* : AMethPropdef */;
 val* var28 /* : null */;
 val* var29 /* : null */;
 val* var30 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var31 /* : Int */;
-long var32 /* : Int */;
+val* var31 /* : null */;
+val* var32 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var33 /* : Int */;
+long var34 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -4531,7 +4177,7 @@ var8 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4014);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3912);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4549,7 +4195,7 @@ var9 = var_tkwredefnode3->type->type_table[cltype10] == idtype11;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4016);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3914);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4567,106 +4213,108 @@ var12 = var_pvisibilitynode4->type->type_table[cltype13] == idtype14;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4018);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3916);
 show_backtrace(1);
 }
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
 cltype16 = type_nullable_parser_nodes__TKwnew.color;
 idtype17 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
+if(var_tkwnewnode7 == NULL) {
 var15 = 1;
 } else {
-if(cltype16 >= var_tkwnewnode5->type->table_size) {
+if(cltype16 >= var_tkwnewnode7->type->table_size) {
 var15 = 0;
 } else {
-var15 = var_tkwnewnode5->type->type_table[cltype16] == idtype17;
+var15 = var_tkwnewnode7->type->type_table[cltype16] == idtype17;
 }
 }
 if (unlikely(!var15)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4020);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3918);
 show_backtrace(1);
 }
-var_psignaturenode7 = var_nodearraylist5;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+var_psignaturenode9 = var_nodearraylist5;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
 cltype19 = type_nullable_parser_nodes__ASignature.color;
 idtype20 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
+if(var_psignaturenode9 == NULL) {
 var18 = 1;
 } else {
-if(cltype19 >= var_psignaturenode7->type->table_size) {
+if(cltype19 >= var_psignaturenode9->type->table_size) {
 var18 = 0;
 } else {
-var18 = var_psignaturenode7->type->type_table[cltype19] == idtype20;
+var18 = var_psignaturenode9->type->type_table[cltype19] == idtype20;
 }
 }
 if (unlikely(!var18)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4022);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3920);
 show_backtrace(1);
 }
-var_pexterncallsnode10 = var_nodearraylist6;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+var_pexterncallsnode11 = var_nodearraylist6;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
 cltype22 = type_nullable_parser_nodes__AExternCalls.color;
 idtype23 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
+if(var_pexterncallsnode11 == NULL) {
 var21 = 1;
 } else {
-if(cltype22 >= var_pexterncallsnode10->type->table_size) {
+if(cltype22 >= var_pexterncallsnode11->type->table_size) {
 var21 = 0;
 } else {
-var21 = var_pexterncallsnode10->type->type_table[cltype22] == idtype23;
+var21 = var_pexterncallsnode11->type->type_table[cltype22] == idtype23;
 }
 }
 if (unlikely(!var21)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4024);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3922);
 show_backtrace(1);
 }
-var_pexterncodeblocknode11 = var_nodearraylist7;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+var_pexterncodeblocknode12 = var_nodearraylist7;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
 cltype25 = type_nullable_parser_nodes__AExternCodeBlock.color;
 idtype26 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
+if(var_pexterncodeblocknode12 == NULL) {
 var24 = 1;
 } else {
-if(cltype25 >= var_pexterncodeblocknode11->type->table_size) {
+if(cltype25 >= var_pexterncodeblocknode12->type->table_size) {
 var24 = 0;
 } else {
-var24 = var_pexterncodeblocknode11->type->type_table[cltype25] == idtype26;
+var24 = var_pexterncodeblocknode12->type->type_table[cltype25] == idtype26;
 }
 }
 if (unlikely(!var24)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4026);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3924);
 show_backtrace(1);
 }
-var27 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
+var27 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
 var28 = NULL;
 var29 = NULL;
 var30 = NULL;
+var31 = NULL;
+var32 = NULL;
 {
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var27, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var28, var_psignaturenode7, var29, var30, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var27:AExternInitPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var27, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var28, var29, var_tkwnewnode7, var30, var_psignaturenode9, var31, var_pexterncallsnode11, var_pexterncodeblocknode12, var32); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var27:AMethPropdef>*/
 }
 var_ppropdefnode1 = var27;
 var_node_list = var_ppropdefnode1;
-var31 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction86> */
+var33 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction79> */
 {
-var32 = parser_work__Parser__go_to(var_p, var31);
+var34 = parser_work__Parser__go_to(var_p, var33);
 }
 {
-parser_work__Parser__push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var34, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction86#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction86__action(val* self, val* p0) {
-parser__ReduceAction86__action(self, p0); /* Direct call parser#ReduceAction86#action on <self:Object(ReduceAction86)>*/
+/* method parser#ReduceAction79#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction79__action(val* self, val* p0) {
+parser__ReduceAction79__action(self, p0); /* Direct call parser#ReduceAction79#action on <self:Object(ReduceAction79)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction87#action for (self: ReduceAction87, Parser) */
-void parser__ReduceAction87__action(val* self, val* p0) {
+/* method parser#ReduceAction80#action for (self: ReduceAction80, Parser) */
+void parser__ReduceAction80__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4698,32 +4346,34 @@ val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
 short int var16 /* : Bool */;
 int cltype17;
 int idtype18;
-val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var22 /* : Bool */;
 int cltype23;
 int idtype24;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
 short int var25 /* : Bool */;
 int cltype26;
 int idtype27;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
 short int var28 /* : Bool */;
 int cltype29;
 int idtype30;
-val* var31 /* : AExternInitPropdef */;
+val* var31 /* : AMethPropdef */;
 val* var32 /* : null */;
 val* var33 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var34 /* : Int */;
-long var35 /* : Int */;
+val* var34 /* : null */;
+val* var35 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var36 /* : Int */;
+long var37 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -4774,7 +4424,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4057);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3957);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4792,7 +4442,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4059);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3959);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4810,123 +4460,125 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4061);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3961);
 show_backtrace(1);
 }
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
 cltype17 = type_nullable_parser_nodes__TKwnew.color;
 idtype18 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
+if(var_tkwnewnode7 == NULL) {
 var16 = 1;
 } else {
-if(cltype17 >= var_tkwnewnode5->type->table_size) {
+if(cltype17 >= var_tkwnewnode7->type->table_size) {
 var16 = 0;
 } else {
-var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
+var16 = var_tkwnewnode7->type->type_table[cltype17] == idtype18;
 }
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4063);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3963);
 show_backtrace(1);
 }
-var_pmethidnode6 = var_nodearraylist5;
-/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
 cltype20 = type_nullable_parser_nodes__AMethid.color;
 idtype21 = type_nullable_parser_nodes__AMethid.id;
-if(var_pmethidnode6 == NULL) {
+if(var_pmethidnode8 == NULL) {
 var19 = 1;
 } else {
-if(cltype20 >= var_pmethidnode6->type->table_size) {
+if(cltype20 >= var_pmethidnode8->type->table_size) {
 var19 = 0;
 } else {
-var19 = var_pmethidnode6->type->type_table[cltype20] == idtype21;
+var19 = var_pmethidnode8->type->type_table[cltype20] == idtype21;
 }
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4065);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3965);
 show_backtrace(1);
 }
-var_psignaturenode7 = var_nodearraylist6;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
 cltype23 = type_nullable_parser_nodes__ASignature.color;
 idtype24 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
+if(var_psignaturenode9 == NULL) {
 var22 = 1;
 } else {
-if(cltype23 >= var_psignaturenode7->type->table_size) {
+if(cltype23 >= var_psignaturenode9->type->table_size) {
 var22 = 0;
 } else {
-var22 = var_psignaturenode7->type->type_table[cltype23] == idtype24;
+var22 = var_psignaturenode9->type->type_table[cltype23] == idtype24;
 }
 }
 if (unlikely(!var22)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4067);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3967);
 show_backtrace(1);
 }
-var_pexterncallsnode10 = var_nodearraylist7;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+var_pexterncallsnode11 = var_nodearraylist7;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
 cltype26 = type_nullable_parser_nodes__AExternCalls.color;
 idtype27 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
+if(var_pexterncallsnode11 == NULL) {
 var25 = 1;
 } else {
-if(cltype26 >= var_pexterncallsnode10->type->table_size) {
+if(cltype26 >= var_pexterncallsnode11->type->table_size) {
 var25 = 0;
 } else {
-var25 = var_pexterncallsnode10->type->type_table[cltype26] == idtype27;
+var25 = var_pexterncallsnode11->type->type_table[cltype26] == idtype27;
 }
 }
 if (unlikely(!var25)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4069);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3969);
 show_backtrace(1);
 }
-var_pexterncodeblocknode11 = var_nodearraylist8;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+var_pexterncodeblocknode12 = var_nodearraylist8;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
 cltype29 = type_nullable_parser_nodes__AExternCodeBlock.color;
 idtype30 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
+if(var_pexterncodeblocknode12 == NULL) {
 var28 = 1;
 } else {
-if(cltype29 >= var_pexterncodeblocknode11->type->table_size) {
+if(cltype29 >= var_pexterncodeblocknode12->type->table_size) {
 var28 = 0;
 } else {
-var28 = var_pexterncodeblocknode11->type->type_table[cltype29] == idtype30;
+var28 = var_pexterncodeblocknode12->type->type_table[cltype29] == idtype30;
 }
 }
 if (unlikely(!var28)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4071);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 3971);
 show_backtrace(1);
 }
-var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
+var31 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
 var32 = NULL;
 var33 = NULL;
+var34 = NULL;
+var35 = NULL;
 {
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var_pmethidnode6, var_psignaturenode7, var32, var33, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var31:AExternInitPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var32, var33, var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var34, var_pexterncallsnode11, var_pexterncodeblocknode12, var35); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var31:AMethPropdef>*/
 }
 var_ppropdefnode1 = var31;
 var_node_list = var_ppropdefnode1;
-var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction87> */
+var36 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction80> */
 {
-var35 = parser_work__Parser__go_to(var_p, var34);
+var37 = parser_work__Parser__go_to(var_p, var36);
 }
 {
-parser_work__Parser__push(var_p, var35, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction87#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction87__action(val* self, val* p0) {
-parser__ReduceAction87__action(self, p0); /* Direct call parser#ReduceAction87#action on <self:Object(ReduceAction87)>*/
+/* method parser#ReduceAction80#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction80__action(val* self, val* p0) {
+parser__ReduceAction80__action(self, p0); /* Direct call parser#ReduceAction80#action on <self:Object(ReduceAction80)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction88#action for (self: ReduceAction88, Parser) */
-void parser__ReduceAction88__action(val* self, val* p0) {
+/* method parser#ReduceAction81#action for (self: ReduceAction81, Parser) */
+void parser__ReduceAction81__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4958,32 +4610,34 @@ val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
 short int var16 /* : Bool */;
 int cltype17;
 int idtype18;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
 short int var22 /* : Bool */;
 int cltype23;
 int idtype24;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
 short int var25 /* : Bool */;
 int cltype26;
 int idtype27;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
 short int var28 /* : Bool */;
 int cltype29;
 int idtype30;
-val* var31 /* : AExternInitPropdef */;
+val* var31 /* : AMethPropdef */;
 val* var32 /* : null */;
 val* var33 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var34 /* : Int */;
-long var35 /* : Int */;
+val* var34 /* : null */;
+val* var35 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var36 /* : Int */;
+long var37 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -5034,7 +4688,7 @@ var9 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4102);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4004);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5052,7 +4706,7 @@ var10 = var_tkwredefnode3->type->type_table[cltype11] == idtype12;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4104);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4006);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5070,123 +4724,125 @@ var13 = var_pvisibilitynode4->type->type_table[cltype14] == idtype15;
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4106);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4008);
 show_backtrace(1);
 }
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
 cltype17 = type_nullable_parser_nodes__TKwnew.color;
 idtype18 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
+if(var_tkwnewnode7 == NULL) {
 var16 = 1;
 } else {
-if(cltype17 >= var_tkwnewnode5->type->table_size) {
+if(cltype17 >= var_tkwnewnode7->type->table_size) {
 var16 = 0;
 } else {
-var16 = var_tkwnewnode5->type->type_table[cltype17] == idtype18;
+var16 = var_tkwnewnode7->type->type_table[cltype17] == idtype18;
 }
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4108);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4010);
 show_backtrace(1);
 }
-var_psignaturenode7 = var_nodearraylist5;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+var_psignaturenode9 = var_nodearraylist5;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
 cltype20 = type_nullable_parser_nodes__ASignature.color;
 idtype21 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
+if(var_psignaturenode9 == NULL) {
 var19 = 1;
 } else {
-if(cltype20 >= var_psignaturenode7->type->table_size) {
+if(cltype20 >= var_psignaturenode9->type->table_size) {
 var19 = 0;
 } else {
-var19 = var_psignaturenode7->type->type_table[cltype20] == idtype21;
+var19 = var_psignaturenode9->type->type_table[cltype20] == idtype21;
 }
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4110);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4012);
 show_backtrace(1);
 }
-var_pannotationsnode8 = var_nodearraylist6;
-/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+var_pannotationsnode10 = var_nodearraylist6;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
 cltype23 = type_nullable_parser_nodes__AAnnotations.color;
 idtype24 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode8 == NULL) {
+if(var_pannotationsnode10 == NULL) {
 var22 = 1;
 } else {
-if(cltype23 >= var_pannotationsnode8->type->table_size) {
+if(cltype23 >= var_pannotationsnode10->type->table_size) {
 var22 = 0;
 } else {
-var22 = var_pannotationsnode8->type->type_table[cltype23] == idtype24;
+var22 = var_pannotationsnode10->type->type_table[cltype23] == idtype24;
 }
 }
 if (unlikely(!var22)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4112);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4014);
 show_backtrace(1);
 }
-var_pexterncallsnode10 = var_nodearraylist7;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+var_pexterncallsnode11 = var_nodearraylist7;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
 cltype26 = type_nullable_parser_nodes__AExternCalls.color;
 idtype27 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
+if(var_pexterncallsnode11 == NULL) {
 var25 = 1;
 } else {
-if(cltype26 >= var_pexterncallsnode10->type->table_size) {
+if(cltype26 >= var_pexterncallsnode11->type->table_size) {
 var25 = 0;
 } else {
-var25 = var_pexterncallsnode10->type->type_table[cltype26] == idtype27;
+var25 = var_pexterncallsnode11->type->type_table[cltype26] == idtype27;
 }
 }
 if (unlikely(!var25)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4114);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4016);
 show_backtrace(1);
 }
-var_pexterncodeblocknode11 = var_nodearraylist8;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+var_pexterncodeblocknode12 = var_nodearraylist8;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
 cltype29 = type_nullable_parser_nodes__AExternCodeBlock.color;
 idtype30 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
+if(var_pexterncodeblocknode12 == NULL) {
 var28 = 1;
 } else {
-if(cltype29 >= var_pexterncodeblocknode11->type->table_size) {
+if(cltype29 >= var_pexterncodeblocknode12->type->table_size) {
 var28 = 0;
 } else {
-var28 = var_pexterncodeblocknode11->type->type_table[cltype29] == idtype30;
+var28 = var_pexterncodeblocknode12->type->type_table[cltype29] == idtype30;
 }
 }
 if (unlikely(!var28)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4116);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4018);
 show_backtrace(1);
 }
-var31 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
+var31 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
 var32 = NULL;
 var33 = NULL;
+var34 = NULL;
+var35 = NULL;
 {
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var32, var_psignaturenode7, var_pannotationsnode8, var33, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var31:AExternInitPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var31, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var32, var33, var_tkwnewnode7, var34, var_psignaturenode9, var_pannotationsnode10, var_pexterncallsnode11, var_pexterncodeblocknode12, var35); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var31:AMethPropdef>*/
 }
 var_ppropdefnode1 = var31;
 var_node_list = var_ppropdefnode1;
-var34 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction88> */
+var36 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction81> */
 {
-var35 = parser_work__Parser__go_to(var_p, var34);
+var37 = parser_work__Parser__go_to(var_p, var36);
 }
 {
-parser_work__Parser__push(var_p, var35, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction88#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction88__action(val* self, val* p0) {
-parser__ReduceAction88__action(self, p0); /* Direct call parser#ReduceAction88#action on <self:Object(ReduceAction88)>*/
+/* method parser#ReduceAction81#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction81__action(val* self, val* p0) {
+parser__ReduceAction81__action(self, p0); /* Direct call parser#ReduceAction81#action on <self:Object(ReduceAction81)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction89#action for (self: ReduceAction89, Parser) */
-void parser__ReduceAction89__action(val* self, val* p0) {
+/* method parser#ReduceAction82#action for (self: ReduceAction82, Parser) */
+void parser__ReduceAction82__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5220,35 +4876,37 @@ val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
 short int var14 /* : Bool */;
 int cltype15;
 int idtype16;
-val* var_tkwnewnode5 /* var tkwnewnode5: nullable Object */;
+val* var_tkwnewnode7 /* var tkwnewnode7: nullable Object */;
 short int var17 /* : Bool */;
 int cltype18;
 int idtype19;
-val* var_pmethidnode6 /* var pmethidnode6: nullable Object */;
+val* var_pmethidnode8 /* var pmethidnode8: nullable Object */;
 short int var20 /* : Bool */;
 int cltype21;
 int idtype22;
-val* var_psignaturenode7 /* var psignaturenode7: nullable Object */;
+val* var_psignaturenode9 /* var psignaturenode9: nullable Object */;
 short int var23 /* : Bool */;
 int cltype24;
 int idtype25;
-val* var_pannotationsnode8 /* var pannotationsnode8: nullable Object */;
+val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
 short int var26 /* : Bool */;
 int cltype27;
 int idtype28;
-val* var_pexterncallsnode10 /* var pexterncallsnode10: nullable Object */;
+val* var_pexterncallsnode11 /* var pexterncallsnode11: nullable Object */;
 short int var29 /* : Bool */;
 int cltype30;
 int idtype31;
-val* var_pexterncodeblocknode11 /* var pexterncodeblocknode11: nullable Object */;
+val* var_pexterncodeblocknode12 /* var pexterncodeblocknode12: nullable Object */;
 short int var32 /* : Bool */;
 int cltype33;
 int idtype34;
-val* var35 /* : AExternInitPropdef */;
+val* var35 /* : AMethPropdef */;
 val* var36 /* : null */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AExternInitPropdef */;
-long var37 /* : Int */;
-long var38 /* : Int */;
+val* var37 /* : null */;
+val* var38 /* : null */;
+val* var_ppropdefnode1 /* var ppropdefnode1: nullable AMethPropdef */;
+long var39 /* : Int */;
+long var40 /* : Int */;
 var_p = p0;
 var = NULL;
 var_node_list = var;
@@ -5303,7 +4961,7 @@ var10 = var_pdocnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4148);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4052);
 show_backtrace(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5321,7 +4979,7 @@ var11 = var_tkwredefnode3->type->type_table[cltype12] == idtype13;
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4150);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4054);
 show_backtrace(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5339,140 +4997,142 @@ var14 = var_pvisibilitynode4->type->type_table[cltype15] == idtype16;
 }
 if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4152);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4056);
 show_backtrace(1);
 }
-var_tkwnewnode5 = var_nodearraylist4;
-/* <var_tkwnewnode5:nullable Object> isa nullable TKwnew */
+var_tkwnewnode7 = var_nodearraylist4;
+/* <var_tkwnewnode7:nullable Object> isa nullable TKwnew */
 cltype18 = type_nullable_parser_nodes__TKwnew.color;
 idtype19 = type_nullable_parser_nodes__TKwnew.id;
-if(var_tkwnewnode5 == NULL) {
+if(var_tkwnewnode7 == NULL) {
 var17 = 1;
 } else {
-if(cltype18 >= var_tkwnewnode5->type->table_size) {
+if(cltype18 >= var_tkwnewnode7->type->table_size) {
 var17 = 0;
 } else {
-var17 = var_tkwnewnode5->type->type_table[cltype18] == idtype19;
+var17 = var_tkwnewnode7->type->type_table[cltype18] == idtype19;
 }
 }
 if (unlikely(!var17)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4154);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4058);
 show_backtrace(1);
 }
-var_pmethidnode6 = var_nodearraylist5;
-/* <var_pmethidnode6:nullable Object> isa nullable AMethid */
+var_pmethidnode8 = var_nodearraylist5;
+/* <var_pmethidnode8:nullable Object> isa nullable AMethid */
 cltype21 = type_nullable_parser_nodes__AMethid.color;
 idtype22 = type_nullable_parser_nodes__AMethid.id;
-if(var_pmethidnode6 == NULL) {
+if(var_pmethidnode8 == NULL) {
 var20 = 1;
 } else {
-if(cltype21 >= var_pmethidnode6->type->table_size) {
+if(cltype21 >= var_pmethidnode8->type->table_size) {
 var20 = 0;
 } else {
-var20 = var_pmethidnode6->type->type_table[cltype21] == idtype22;
+var20 = var_pmethidnode8->type->type_table[cltype21] == idtype22;
 }
 }
 if (unlikely(!var20)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4156);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4060);
 show_backtrace(1);
 }
-var_psignaturenode7 = var_nodearraylist6;
-/* <var_psignaturenode7:nullable Object> isa nullable ASignature */
+var_psignaturenode9 = var_nodearraylist6;
+/* <var_psignaturenode9:nullable Object> isa nullable ASignature */
 cltype24 = type_nullable_parser_nodes__ASignature.color;
 idtype25 = type_nullable_parser_nodes__ASignature.id;
-if(var_psignaturenode7 == NULL) {
+if(var_psignaturenode9 == NULL) {
 var23 = 1;
 } else {
-if(cltype24 >= var_psignaturenode7->type->table_size) {
+if(cltype24 >= var_psignaturenode9->type->table_size) {
 var23 = 0;
 } else {
-var23 = var_psignaturenode7->type->type_table[cltype24] == idtype25;
+var23 = var_psignaturenode9->type->type_table[cltype24] == idtype25;
 }
 }
 if (unlikely(!var23)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4158);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4062);
 show_backtrace(1);
 }
-var_pannotationsnode8 = var_nodearraylist7;
-/* <var_pannotationsnode8:nullable Object> isa nullable AAnnotations */
+var_pannotationsnode10 = var_nodearraylist7;
+/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
 cltype27 = type_nullable_parser_nodes__AAnnotations.color;
 idtype28 = type_nullable_parser_nodes__AAnnotations.id;
-if(var_pannotationsnode8 == NULL) {
+if(var_pannotationsnode10 == NULL) {
 var26 = 1;
 } else {
-if(cltype27 >= var_pannotationsnode8->type->table_size) {
+if(cltype27 >= var_pannotationsnode10->type->table_size) {
 var26 = 0;
 } else {
-var26 = var_pannotationsnode8->type->type_table[cltype27] == idtype28;
+var26 = var_pannotationsnode10->type->type_table[cltype27] == idtype28;
 }
 }
 if (unlikely(!var26)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4160);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4064);
 show_backtrace(1);
 }
-var_pexterncallsnode10 = var_nodearraylist8;
-/* <var_pexterncallsnode10:nullable Object> isa nullable AExternCalls */
+var_pexterncallsnode11 = var_nodearraylist8;
+/* <var_pexterncallsnode11:nullable Object> isa nullable AExternCalls */
 cltype30 = type_nullable_parser_nodes__AExternCalls.color;
 idtype31 = type_nullable_parser_nodes__AExternCalls.id;
-if(var_pexterncallsnode10 == NULL) {
+if(var_pexterncallsnode11 == NULL) {
 var29 = 1;
 } else {
-if(cltype30 >= var_pexterncallsnode10->type->table_size) {
+if(cltype30 >= var_pexterncallsnode11->type->table_size) {
 var29 = 0;
 } else {
-var29 = var_pexterncallsnode10->type->type_table[cltype30] == idtype31;
+var29 = var_pexterncallsnode11->type->type_table[cltype30] == idtype31;
 }
 }
 if (unlikely(!var29)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4162);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4066);
 show_backtrace(1);
 }
-var_pexterncodeblocknode11 = var_nodearraylist9;
-/* <var_pexterncodeblocknode11:nullable Object> isa nullable AExternCodeBlock */
+var_pexterncodeblocknode12 = var_nodearraylist9;
+/* <var_pexterncodeblocknode12:nullable Object> isa nullable AExternCodeBlock */
 cltype33 = type_nullable_parser_nodes__AExternCodeBlock.color;
 idtype34 = type_nullable_parser_nodes__AExternCodeBlock.id;
-if(var_pexterncodeblocknode11 == NULL) {
+if(var_pexterncodeblocknode12 == NULL) {
 var32 = 1;
 } else {
-if(cltype33 >= var_pexterncodeblocknode11->type->table_size) {
+if(cltype33 >= var_pexterncodeblocknode12->type->table_size) {
 var32 = 0;
 } else {
-var32 = var_pexterncodeblocknode11->type->type_table[cltype33] == idtype34;
+var32 = var_pexterncodeblocknode12->type->type_table[cltype33] == idtype34;
 }
 }
 if (unlikely(!var32)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4164);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4068);
 show_backtrace(1);
 }
-var35 = NEW_parser_nodes__AExternInitPropdef(&type_parser_nodes__AExternInitPropdef);
+var35 = NEW_parser_nodes__AMethPropdef(&type_parser_nodes__AMethPropdef);
 var36 = NULL;
+var37 = NULL;
+var38 = NULL;
 {
-parser_prod__AExternInitPropdef__init_aexterninitpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwnewnode5, var_pmethidnode6, var_psignaturenode7, var_pannotationsnode8, var36, var_pexterncallsnode10, var_pexterncodeblocknode11); /* Direct call parser_prod#AExternInitPropdef#init_aexterninitpropdef on <var35:AExternInitPropdef>*/
+parser_prod__AMethPropdef__init_amethpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var36, var37, var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var_pexterncallsnode11, var_pexterncodeblocknode12, var38); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var35:AMethPropdef>*/
 }
 var_ppropdefnode1 = var35;
 var_node_list = var_ppropdefnode1;
-var37 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction89> */
+var39 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction82> */
 {
-var38 = parser_work__Parser__go_to(var_p, var37);
+var40 = parser_work__Parser__go_to(var_p, var39);
 }
 {
-parser_work__Parser__push(var_p, var38, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+parser_work__Parser__push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction89#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction89__action(val* self, val* p0) {
-parser__ReduceAction89__action(self, p0); /* Direct call parser#ReduceAction89#action on <self:Object(ReduceAction89)>*/
+/* method parser#ReduceAction82#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction82__action(val* self, val* p0) {
+parser__ReduceAction82__action(self, p0); /* Direct call parser#ReduceAction82#action on <self:Object(ReduceAction82)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction90#action for (self: ReduceAction90, Parser) */
-void parser__ReduceAction90__action(val* self, val* p0) {
+/* method parser#ReduceAction83#action for (self: ReduceAction83, Parser) */
+void parser__ReduceAction83__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5496,7 +5156,7 @@ var2 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var2;
 var_pannotationsnode1 = var_nodearraylist2;
 var_node_list = var_pannotationsnode1;
-var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction90> */
+var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction83> */
 {
 var4 = parser_work__Parser__go_to(var_p, var3);
 }
@@ -5505,13 +5165,13 @@ parser_work__Parser__push(var_p, var4, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction90#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction90__action(val* self, val* p0) {
-parser__ReduceAction90__action(self, p0); /* Direct call parser#ReduceAction90#action on <self:Object(ReduceAction90)>*/
+/* method parser#ReduceAction83#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction83__action(val* self, val* p0) {
+parser__ReduceAction83__action(self, p0); /* Direct call parser#ReduceAction83#action on <self:Object(ReduceAction83)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction91#action for (self: ReduceAction91, Parser) */
-void parser__ReduceAction91__action(val* self, val* p0) {
+/* method parser#ReduceAction84#action for (self: ReduceAction84, Parser) */
+void parser__ReduceAction84__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5547,7 +5207,7 @@ var4 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var4;
 var_pannotationsnode1 = var_nodearraylist3;
 var_node_list = var_pannotationsnode1;
-var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction91> */
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction84> */
 {
 var6 = parser_work__Parser__go_to(var_p, var5);
 }
@@ -5556,13 +5216,13 @@ parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction91#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction91__action(val* self, val* p0) {
-parser__ReduceAction91__action(self, p0); /* Direct call parser#ReduceAction91#action on <self:Object(ReduceAction91)>*/
+/* method parser#ReduceAction84#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction84__action(val* self, val* p0) {
+parser__ReduceAction84__action(self, p0); /* Direct call parser#ReduceAction84#action on <self:Object(ReduceAction84)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction94#action for (self: ReduceAction94, Parser) */
-void parser__ReduceAction94__action(val* self, val* p0) {
+/* method parser#ReduceAction87#action for (self: ReduceAction87, Parser) */
+void parser__ReduceAction87__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5592,7 +5252,7 @@ var3 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var3;
 var_pannotationsnode1 = var_nodearraylist3;
 var_node_list = var_pannotationsnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction94> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction87> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -5601,223 +5261,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction94#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction94__action(val* self, val* p0) {
-parser__ReduceAction94__action(self, p0); /* Direct call parser#ReduceAction94#action on <self:Object(ReduceAction94)>*/
+/* method parser#ReduceAction87#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction87__action(val* self, val* p0) {
+parser__ReduceAction87__action(self, p0); /* Direct call parser#ReduceAction87#action on <self:Object(ReduceAction87)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction95#action for (self: ReduceAction95, Parser) */
-void parser__ReduceAction95__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_tkwredefnode2 /* var tkwredefnode2: nullable Object */;
-short int var4 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwreadablenode3 /* var tkwreadablenode3: nullable Object */;
-short int var5 /* : Bool */;
-int cltype6;
-int idtype7;
-val* var8 /* : AReadAble */;
-val* var_pablenode1 /* var pablenode1: nullable AReadAble */;
-long var9 /* : Int */;
-long var10 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var3;
-var_tkwredefnode2 = var_nodearraylist1;
-/* <var_tkwredefnode2:nullable Object> isa nullable TKwredef */
-cltype = type_nullable_parser_nodes__TKwredef.color;
-idtype = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode2 == NULL) {
-var4 = 1;
-} else {
-if(cltype >= var_tkwredefnode2->type->table_size) {
-var4 = 0;
-} else {
-var4 = var_tkwredefnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var4)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4229);
-show_backtrace(1);
-}
-var_tkwreadablenode3 = var_nodearraylist3;
-/* <var_tkwreadablenode3:nullable Object> isa nullable TKwreadable */
-cltype6 = type_nullable_parser_nodes__TKwreadable.color;
-idtype7 = type_nullable_parser_nodes__TKwreadable.id;
-if(var_tkwreadablenode3 == NULL) {
-var5 = 1;
-} else {
-if(cltype6 >= var_tkwreadablenode3->type->table_size) {
-var5 = 0;
-} else {
-var5 = var_tkwreadablenode3->type->type_table[cltype6] == idtype7;
-}
-}
-if (unlikely(!var5)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4231);
-show_backtrace(1);
-}
-var8 = NEW_parser_nodes__AReadAble(&type_parser_nodes__AReadAble);
-{
-parser_prod__AReadAble__init_areadable(var8, var_tkwredefnode2, var_tkwreadablenode3); /* Direct call parser_prod#AReadAble#init_areadable on <var8:AReadAble>*/
-}
-var_pablenode1 = var8;
-var_node_list = var_pablenode1;
-var9 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction95> */
-{
-var10 = parser_work__Parser__go_to(var_p, var9);
-}
-{
-parser_work__Parser__push(var_p, var10, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction95#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction95__action(val* self, val* p0) {
-parser__ReduceAction95__action(self, p0); /* Direct call parser#ReduceAction95#action on <self:Object(ReduceAction95)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction96#action for (self: ReduceAction96, Parser) */
-void parser__ReduceAction96__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_tkwredefnode2 /* var tkwredefnode2: nullable Object */;
-short int var4 /* : Bool */;
-int cltype;
-int idtype;
-val* var_pvisibilitynode3 /* var pvisibilitynode3: nullable Object */;
-short int var5 /* : Bool */;
-int cltype6;
-int idtype7;
-val* var_tkwwritablenode4 /* var tkwwritablenode4: nullable Object */;
-short int var8 /* : Bool */;
-int cltype9;
-int idtype10;
-val* var11 /* : AWriteAble */;
-val* var_pablenode1 /* var pablenode1: nullable AWriteAble */;
-long var12 /* : Int */;
-long var13 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist3 = var1;
-{
-var2 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist2 = var2;
-{
-var3 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var3;
-var_tkwredefnode2 = var_nodearraylist1;
-/* <var_tkwredefnode2:nullable Object> isa nullable TKwredef */
-cltype = type_nullable_parser_nodes__TKwredef.color;
-idtype = type_nullable_parser_nodes__TKwredef.id;
-if(var_tkwredefnode2 == NULL) {
-var4 = 1;
-} else {
-if(cltype >= var_tkwredefnode2->type->table_size) {
-var4 = 0;
-} else {
-var4 = var_tkwredefnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var4)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4249);
-show_backtrace(1);
-}
-var_pvisibilitynode3 = var_nodearraylist2;
-/* <var_pvisibilitynode3:nullable Object> isa nullable AVisibility */
-cltype6 = type_nullable_parser_nodes__AVisibility.color;
-idtype7 = type_nullable_parser_nodes__AVisibility.id;
-if(var_pvisibilitynode3 == NULL) {
-var5 = 1;
-} else {
-if(cltype6 >= var_pvisibilitynode3->type->table_size) {
-var5 = 0;
-} else {
-var5 = var_pvisibilitynode3->type->type_table[cltype6] == idtype7;
-}
-}
-if (unlikely(!var5)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4251);
-show_backtrace(1);
-}
-var_tkwwritablenode4 = var_nodearraylist3;
-/* <var_tkwwritablenode4:nullable Object> isa nullable TKwwritable */
-cltype9 = type_nullable_parser_nodes__TKwwritable.color;
-idtype10 = type_nullable_parser_nodes__TKwwritable.id;
-if(var_tkwwritablenode4 == NULL) {
-var8 = 1;
-} else {
-if(cltype9 >= var_tkwwritablenode4->type->table_size) {
-var8 = 0;
-} else {
-var8 = var_tkwwritablenode4->type->type_table[cltype9] == idtype10;
-}
-}
-if (unlikely(!var8)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4253);
-show_backtrace(1);
-}
-var11 = NEW_parser_nodes__AWriteAble(&type_parser_nodes__AWriteAble);
-{
-parser_prod__AWriteAble__init_awriteable(var11, var_tkwredefnode2, var_pvisibilitynode3, var_tkwwritablenode4); /* Direct call parser_prod#AWriteAble#init_awriteable on <var11:AWriteAble>*/
-}
-var_pablenode1 = var11;
-var_node_list = var_pablenode1;
-var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction96> */
-{
-var13 = parser_work__Parser__go_to(var_p, var12);
-}
-{
-parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction96#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction96__action(val* self, val* p0) {
-parser__ReduceAction96__action(self, p0); /* Direct call parser#ReduceAction96#action on <self:Object(ReduceAction96)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction97#action for (self: ReduceAction97, Parser) */
-void parser__ReduceAction97__action(val* self, val* p0) {
+/* method parser#ReduceAction88#action for (self: ReduceAction88, Parser) */
+void parser__ReduceAction88__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5836,7 +5286,7 @@ parser_prod__APublicVisibility__init_apublicvisibility(var1, var2); /* Direct ca
 }
 var_pvisibilitynode1 = var1;
 var_node_list = var_pvisibilitynode1;
-var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction97> */
+var3 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction88> */
 {
 var4 = parser_work__Parser__go_to(var_p, var3);
 }
@@ -5845,13 +5295,13 @@ parser_work__Parser__push(var_p, var4, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction97#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction97__action(val* self, val* p0) {
-parser__ReduceAction97__action(self, p0); /* Direct call parser#ReduceAction97#action on <self:Object(ReduceAction97)>*/
+/* method parser#ReduceAction88#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction88__action(val* self, val* p0) {
+parser__ReduceAction88__action(self, p0); /* Direct call parser#ReduceAction88#action on <self:Object(ReduceAction88)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction98#action for (self: ReduceAction98, Parser) */
-void parser__ReduceAction98__action(val* self, val* p0) {
+/* method parser#ReduceAction89#action for (self: ReduceAction89, Parser) */
+void parser__ReduceAction89__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5893,7 +5343,7 @@ var3 = var_tkwpublicnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4283);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4146);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__APublicVisibility(&type_parser_nodes__APublicVisibility);
@@ -5902,7 +5352,7 @@ parser_prod__APublicVisibility__init_apublicvisibility(var4, var_tkwpublicnode2)
 }
 var_pvisibilitynode1 = var4;
 var_node_list = var_pvisibilitynode1;
-var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction98> */
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction89> */
 {
 var6 = parser_work__Parser__go_to(var_p, var5);
 }
@@ -5911,13 +5361,13 @@ parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction98#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction98__action(val* self, val* p0) {
-parser__ReduceAction98__action(self, p0); /* Direct call parser#ReduceAction98#action on <self:Object(ReduceAction98)>*/
+/* method parser#ReduceAction89#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction89__action(val* self, val* p0) {
+parser__ReduceAction89__action(self, p0); /* Direct call parser#ReduceAction89#action on <self:Object(ReduceAction89)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction99#action for (self: ReduceAction99, Parser) */
-void parser__ReduceAction99__action(val* self, val* p0) {
+/* method parser#ReduceAction90#action for (self: ReduceAction90, Parser) */
+void parser__ReduceAction90__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5959,7 +5409,7 @@ var3 = var_tkwprivatenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4299);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4162);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__APrivateVisibility(&type_parser_nodes__APrivateVisibility);
@@ -5968,7 +5418,7 @@ parser_prod__APrivateVisibility__init_aprivatevisibility(var4, var_tkwprivatenod
 }
 var_pvisibilitynode1 = var4;
 var_node_list = var_pvisibilitynode1;
-var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction99> */
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction90> */
 {
 var6 = parser_work__Parser__go_to(var_p, var5);
 }
@@ -5977,13 +5427,13 @@ parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction99#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction99__action(val* self, val* p0) {
-parser__ReduceAction99__action(self, p0); /* Direct call parser#ReduceAction99#action on <self:Object(ReduceAction99)>*/
+/* method parser#ReduceAction90#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction90__action(val* self, val* p0) {
+parser__ReduceAction90__action(self, p0); /* Direct call parser#ReduceAction90#action on <self:Object(ReduceAction90)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction100#action for (self: ReduceAction100, Parser) */
-void parser__ReduceAction100__action(val* self, val* p0) {
+/* method parser#ReduceAction91#action for (self: ReduceAction91, Parser) */
+void parser__ReduceAction91__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6025,7 +5475,7 @@ var3 = var_tkwprotectednode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4315);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4178);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__AProtectedVisibility(&type_parser_nodes__AProtectedVisibility);
@@ -6034,7 +5484,7 @@ parser_prod__AProtectedVisibility__init_aprotectedvisibility(var4, var_tkwprotec
 }
 var_pvisibilitynode1 = var4;
 var_node_list = var_pvisibilitynode1;
-var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction100> */
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction91> */
 {
 var6 = parser_work__Parser__go_to(var_p, var5);
 }
@@ -6043,13 +5493,13 @@ parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction100#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction100__action(val* self, val* p0) {
-parser__ReduceAction100__action(self, p0); /* Direct call parser#ReduceAction100#action on <self:Object(ReduceAction100)>*/
+/* method parser#ReduceAction91#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction91__action(val* self, val* p0) {
+parser__ReduceAction91__action(self, p0); /* Direct call parser#ReduceAction91#action on <self:Object(ReduceAction91)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction101#action for (self: ReduceAction101, Parser) */
-void parser__ReduceAction101__action(val* self, val* p0) {
+/* method parser#ReduceAction92#action for (self: ReduceAction92, Parser) */
+void parser__ReduceAction92__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6091,7 +5541,7 @@ var3 = var_tkwintrudenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4331);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4194);
 show_backtrace(1);
 }
 var4 = NEW_parser_nodes__AIntrudeVisibility(&type_parser_nodes__AIntrudeVisibility);
@@ -6100,7 +5550,7 @@ parser_prod__AIntrudeVisibility__init_aintrudevisibility(var4, var_tkwintrudenod
 }
 var_pvisibilitynode1 = var4;
 var_node_list = var_pvisibilitynode1;
-var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction101> */
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction92> */
 {
 var6 = parser_work__Parser__go_to(var_p, var5);
 }
@@ -6109,73 +5559,13 @@ parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction101#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction101__action(val* self, val* p0) {
-parser__ReduceAction101__action(self, p0); /* Direct call parser#ReduceAction101#action on <self:Object(ReduceAction101)>*/
+/* method parser#ReduceAction92#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction92__action(val* self, val* p0) {
+parser__ReduceAction92__action(self, p0); /* Direct call parser#ReduceAction92#action on <self:Object(ReduceAction92)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction102#action for (self: ReduceAction102, Parser) */
-void parser__ReduceAction102__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var /* : null */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_tidnode2 /* var tidnode2: nullable Object */;
-short int var2 /* : Bool */;
-int cltype;
-int idtype;
-val* var3 /* : AIdMethid */;
-val* var_pmethidnode1 /* var pmethidnode1: nullable AIdMethid */;
-long var4 /* : Int */;
-long var5 /* : Int */;
-var_p = p0;
-var = NULL;
-var_node_list = var;
-{
-var1 = parser_work__Parser__pop(var_p);
-}
-var_nodearraylist1 = var1;
-var_tidnode2 = var_nodearraylist1;
-/* <var_tidnode2:nullable Object> isa nullable TId */
-cltype = type_nullable_parser_nodes__TId.color;
-idtype = type_nullable_parser_nodes__TId.id;
-if(var_tidnode2 == NULL) {
-var2 = 1;
-} else {
-if(cltype >= var_tidnode2->type->table_size) {
-var2 = 0;
-} else {
-var2 = var_tidnode2->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var2)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4346);
-show_backtrace(1);
-}
-var3 = NEW_parser_nodes__AIdMethid(&type_parser_nodes__AIdMethid);
-{
-parser_prod__AIdMethid__init_aidmethid(var3, var_tidnode2); /* Direct call parser_prod#AIdMethid#init_aidmethid on <var3:AIdMethid>*/
-}
-var_pmethidnode1 = var3;
-var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction102> */
-{
-var5 = parser_work__Parser__go_to(var_p, var4);
-}
-{
-parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction102#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction102__action(val* self, val* p0) {
-parser__ReduceAction102__action(self, p0); /* Direct call parser#ReduceAction102#action on <self:Object(ReduceAction102)>*/
-RET_LABEL:;
-}
-/* method parser#ReduceAction103#action for (self: ReduceAction103, Parser) */
-void parser__ReduceAction103__action(val* self, val* p0) {
+/* method parser#ReduceAction93#action for (self: ReduceAction93, Parser) */
+void parser__ReduceAction93__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6211,7 +5601,7 @@ var2 = var_tplusnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4361);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4209);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__APlusMethid(&type_parser_nodes__APlusMethid);
@@ -6220,7 +5610,7 @@ parser_prod__APlusMethid__init_aplusmethid(var3, var_tplusnode2); /* Direct call
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction103> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction93> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6229,13 +5619,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction103#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction103__action(val* self, val* p0) {
-parser__ReduceAction103__action(self, p0); /* Direct call parser#ReduceAction103#action on <self:Object(ReduceAction103)>*/
+/* method parser#ReduceAction93#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction93__action(val* self, val* p0) {
+parser__ReduceAction93__action(self, p0); /* Direct call parser#ReduceAction93#action on <self:Object(ReduceAction93)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction104#action for (self: ReduceAction104, Parser) */
-void parser__ReduceAction104__action(val* self, val* p0) {
+/* method parser#ReduceAction94#action for (self: ReduceAction94, Parser) */
+void parser__ReduceAction94__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6271,7 +5661,7 @@ var2 = var_tminusnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4376);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4224);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AMinusMethid(&type_parser_nodes__AMinusMethid);
@@ -6280,7 +5670,7 @@ parser_prod__AMinusMethid__init_aminusmethid(var3, var_tminusnode2); /* Direct c
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction104> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction94> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6289,13 +5679,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction104#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction104__action(val* self, val* p0) {
-parser__ReduceAction104__action(self, p0); /* Direct call parser#ReduceAction104#action on <self:Object(ReduceAction104)>*/
+/* method parser#ReduceAction94#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction94__action(val* self, val* p0) {
+parser__ReduceAction94__action(self, p0); /* Direct call parser#ReduceAction94#action on <self:Object(ReduceAction94)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction105#action for (self: ReduceAction105, Parser) */
-void parser__ReduceAction105__action(val* self, val* p0) {
+/* method parser#ReduceAction95#action for (self: ReduceAction95, Parser) */
+void parser__ReduceAction95__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6331,7 +5721,7 @@ var2 = var_tstarnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4391);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4239);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AStarMethid(&type_parser_nodes__AStarMethid);
@@ -6340,7 +5730,7 @@ parser_prod__AStarMethid__init_astarmethid(var3, var_tstarnode2); /* Direct call
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction105> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction95> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6349,13 +5739,73 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction105#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction105__action(val* self, val* p0) {
-parser__ReduceAction105__action(self, p0); /* Direct call parser#ReduceAction105#action on <self:Object(ReduceAction105)>*/
+/* method parser#ReduceAction95#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction95__action(val* self, val* p0) {
+parser__ReduceAction95__action(self, p0); /* Direct call parser#ReduceAction95#action on <self:Object(ReduceAction95)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction106#action for (self: ReduceAction106, Parser) */
-void parser__ReduceAction106__action(val* self, val* p0) {
+/* method parser#ReduceAction96#action for (self: ReduceAction96, Parser) */
+void parser__ReduceAction96__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tstarstarnode2 /* var tstarstarnode2: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AStarstarMethid */;
+val* var_pmethidnode1 /* var pmethidnode1: nullable AStarstarMethid */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tstarstarnode2 = var_nodearraylist1;
+/* <var_tstarstarnode2:nullable Object> isa nullable TStarstar */
+cltype = type_nullable_parser_nodes__TStarstar.color;
+idtype = type_nullable_parser_nodes__TStarstar.id;
+if(var_tstarstarnode2 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_tstarstarnode2->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_tstarstarnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4254);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AStarstarMethid(&type_parser_nodes__AStarstarMethid);
+{
+parser_prod__AStarstarMethid__init_astarstarmethid(var3, var_tstarstarnode2); /* Direct call parser_prod#AStarstarMethid#init_astarstarmethid on <var3:AStarstarMethid>*/
+}
+var_pmethidnode1 = var3;
+var_node_list = var_pmethidnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction96> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction96#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction96__action(val* self, val* p0) {
+parser__ReduceAction96__action(self, p0); /* Direct call parser#ReduceAction96#action on <self:Object(ReduceAction96)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction97#action for (self: ReduceAction97, Parser) */
+void parser__ReduceAction97__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6391,7 +5841,7 @@ var2 = var_tslashnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4406);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4269);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ASlashMethid(&type_parser_nodes__ASlashMethid);
@@ -6400,7 +5850,7 @@ parser_prod__ASlashMethid__init_aslashmethid(var3, var_tslashnode2); /* Direct c
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction106> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction97> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6409,13 +5859,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction106#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction106__action(val* self, val* p0) {
-parser__ReduceAction106__action(self, p0); /* Direct call parser#ReduceAction106#action on <self:Object(ReduceAction106)>*/
+/* method parser#ReduceAction97#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction97__action(val* self, val* p0) {
+parser__ReduceAction97__action(self, p0); /* Direct call parser#ReduceAction97#action on <self:Object(ReduceAction97)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction107#action for (self: ReduceAction107, Parser) */
-void parser__ReduceAction107__action(val* self, val* p0) {
+/* method parser#ReduceAction98#action for (self: ReduceAction98, Parser) */
+void parser__ReduceAction98__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6451,7 +5901,7 @@ var2 = var_tpercentnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4421);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4284);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__APercentMethid(&type_parser_nodes__APercentMethid);
@@ -6460,7 +5910,7 @@ parser_prod__APercentMethid__init_apercentmethid(var3, var_tpercentnode2); /* Di
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction107> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction98> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6469,13 +5919,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction107#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction107__action(val* self, val* p0) {
-parser__ReduceAction107__action(self, p0); /* Direct call parser#ReduceAction107#action on <self:Object(ReduceAction107)>*/
+/* method parser#ReduceAction98#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction98__action(val* self, val* p0) {
+parser__ReduceAction98__action(self, p0); /* Direct call parser#ReduceAction98#action on <self:Object(ReduceAction98)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction108#action for (self: ReduceAction108, Parser) */
-void parser__ReduceAction108__action(val* self, val* p0) {
+/* method parser#ReduceAction99#action for (self: ReduceAction99, Parser) */
+void parser__ReduceAction99__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6511,7 +5961,7 @@ var2 = var_teqnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4436);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4299);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AEqMethid(&type_parser_nodes__AEqMethid);
@@ -6520,7 +5970,7 @@ parser_prod__AEqMethid__init_aeqmethid(var3, var_teqnode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction108> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction99> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6529,13 +5979,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction108#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction108__action(val* self, val* p0) {
-parser__ReduceAction108__action(self, p0); /* Direct call parser#ReduceAction108#action on <self:Object(ReduceAction108)>*/
+/* method parser#ReduceAction99#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction99__action(val* self, val* p0) {
+parser__ReduceAction99__action(self, p0); /* Direct call parser#ReduceAction99#action on <self:Object(ReduceAction99)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction109#action for (self: ReduceAction109, Parser) */
-void parser__ReduceAction109__action(val* self, val* p0) {
+/* method parser#ReduceAction100#action for (self: ReduceAction100, Parser) */
+void parser__ReduceAction100__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6571,7 +6021,7 @@ var2 = var_tnenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4451);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4314);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ANeMethid(&type_parser_nodes__ANeMethid);
@@ -6580,7 +6030,7 @@ parser_prod__ANeMethid__init_anemethid(var3, var_tnenode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction109> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction100> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6589,13 +6039,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction109#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction109__action(val* self, val* p0) {
-parser__ReduceAction109__action(self, p0); /* Direct call parser#ReduceAction109#action on <self:Object(ReduceAction109)>*/
+/* method parser#ReduceAction100#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction100__action(val* self, val* p0) {
+parser__ReduceAction100__action(self, p0); /* Direct call parser#ReduceAction100#action on <self:Object(ReduceAction100)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction110#action for (self: ReduceAction110, Parser) */
-void parser__ReduceAction110__action(val* self, val* p0) {
+/* method parser#ReduceAction101#action for (self: ReduceAction101, Parser) */
+void parser__ReduceAction101__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6631,7 +6081,7 @@ var2 = var_tlenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4466);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4329);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ALeMethid(&type_parser_nodes__ALeMethid);
@@ -6640,7 +6090,7 @@ parser_prod__ALeMethid__init_alemethid(var3, var_tlenode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction110> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction101> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6649,13 +6099,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction110#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction110__action(val* self, val* p0) {
-parser__ReduceAction110__action(self, p0); /* Direct call parser#ReduceAction110#action on <self:Object(ReduceAction110)>*/
+/* method parser#ReduceAction101#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction101__action(val* self, val* p0) {
+parser__ReduceAction101__action(self, p0); /* Direct call parser#ReduceAction101#action on <self:Object(ReduceAction101)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction111#action for (self: ReduceAction111, Parser) */
-void parser__ReduceAction111__action(val* self, val* p0) {
+/* method parser#ReduceAction102#action for (self: ReduceAction102, Parser) */
+void parser__ReduceAction102__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6691,7 +6141,7 @@ var2 = var_tgenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4481);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4344);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AGeMethid(&type_parser_nodes__AGeMethid);
@@ -6700,7 +6150,7 @@ parser_prod__AGeMethid__init_agemethid(var3, var_tgenode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction111> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction102> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6709,13 +6159,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction111#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction111__action(val* self, val* p0) {
-parser__ReduceAction111__action(self, p0); /* Direct call parser#ReduceAction111#action on <self:Object(ReduceAction111)>*/
+/* method parser#ReduceAction102#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction102__action(val* self, val* p0) {
+parser__ReduceAction102__action(self, p0); /* Direct call parser#ReduceAction102#action on <self:Object(ReduceAction102)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction112#action for (self: ReduceAction112, Parser) */
-void parser__ReduceAction112__action(val* self, val* p0) {
+/* method parser#ReduceAction103#action for (self: ReduceAction103, Parser) */
+void parser__ReduceAction103__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6751,7 +6201,7 @@ var2 = var_tltnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4496);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4359);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ALtMethid(&type_parser_nodes__ALtMethid);
@@ -6760,7 +6210,7 @@ parser_prod__ALtMethid__init_altmethid(var3, var_tltnode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction112> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction103> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6769,13 +6219,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction112#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction112__action(val* self, val* p0) {
-parser__ReduceAction112__action(self, p0); /* Direct call parser#ReduceAction112#action on <self:Object(ReduceAction112)>*/
+/* method parser#ReduceAction103#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction103__action(val* self, val* p0) {
+parser__ReduceAction103__action(self, p0); /* Direct call parser#ReduceAction103#action on <self:Object(ReduceAction103)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction113#action for (self: ReduceAction113, Parser) */
-void parser__ReduceAction113__action(val* self, val* p0) {
+/* method parser#ReduceAction104#action for (self: ReduceAction104, Parser) */
+void parser__ReduceAction104__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6811,7 +6261,7 @@ var2 = var_tgtnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4511);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4374);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AGtMethid(&type_parser_nodes__AGtMethid);
@@ -6820,7 +6270,7 @@ parser_prod__AGtMethid__init_agtmethid(var3, var_tgtnode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction113> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction104> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6829,13 +6279,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction113#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction113__action(val* self, val* p0) {
-parser__ReduceAction113__action(self, p0); /* Direct call parser#ReduceAction113#action on <self:Object(ReduceAction113)>*/
+/* method parser#ReduceAction104#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction104__action(val* self, val* p0) {
+parser__ReduceAction104__action(self, p0); /* Direct call parser#ReduceAction104#action on <self:Object(ReduceAction104)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction114#action for (self: ReduceAction114, Parser) */
-void parser__ReduceAction114__action(val* self, val* p0) {
+/* method parser#ReduceAction105#action for (self: ReduceAction105, Parser) */
+void parser__ReduceAction105__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6871,7 +6321,7 @@ var2 = var_tllnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4526);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4389);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ALlMethid(&type_parser_nodes__ALlMethid);
@@ -6880,7 +6330,7 @@ parser_prod__ALlMethid__init_allmethid(var3, var_tllnode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction114> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction105> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6889,13 +6339,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction114#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction114__action(val* self, val* p0) {
-parser__ReduceAction114__action(self, p0); /* Direct call parser#ReduceAction114#action on <self:Object(ReduceAction114)>*/
+/* method parser#ReduceAction105#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction105__action(val* self, val* p0) {
+parser__ReduceAction105__action(self, p0); /* Direct call parser#ReduceAction105#action on <self:Object(ReduceAction105)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction115#action for (self: ReduceAction115, Parser) */
-void parser__ReduceAction115__action(val* self, val* p0) {
+/* method parser#ReduceAction106#action for (self: ReduceAction106, Parser) */
+void parser__ReduceAction106__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6931,7 +6381,7 @@ var2 = var_tggnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4541);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4404);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AGgMethid(&type_parser_nodes__AGgMethid);
@@ -6940,7 +6390,7 @@ parser_prod__AGgMethid__init_aggmethid(var3, var_tggnode2); /* Direct call parse
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction115> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction106> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -6949,13 +6399,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction115#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction115__action(val* self, val* p0) {
-parser__ReduceAction115__action(self, p0); /* Direct call parser#ReduceAction115#action on <self:Object(ReduceAction115)>*/
+/* method parser#ReduceAction106#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction106__action(val* self, val* p0) {
+parser__ReduceAction106__action(self, p0); /* Direct call parser#ReduceAction106#action on <self:Object(ReduceAction106)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction116#action for (self: ReduceAction116, Parser) */
-void parser__ReduceAction116__action(val* self, val* p0) {
+/* method parser#ReduceAction107#action for (self: ReduceAction107, Parser) */
+void parser__ReduceAction107__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7001,7 +6451,7 @@ var3 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4557);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4420);
 show_backtrace(1);
 }
 var_tcbranode3 = var_nodearraylist2;
@@ -7019,7 +6469,7 @@ var4 = var_tcbranode3->type->type_table[cltype5] == idtype6;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4559);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4422);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__ABraMethid(&type_parser_nodes__ABraMethid);
@@ -7028,7 +6478,7 @@ parser_prod__ABraMethid__init_abramethid(var7, var_tobranode2, var_tcbranode3); 
 }
 var_pmethidnode1 = var7;
 var_node_list = var_pmethidnode1;
-var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction116> */
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction107> */
 {
 var9 = parser_work__Parser__go_to(var_p, var8);
 }
@@ -7037,13 +6487,13 @@ parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction116#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction116__action(val* self, val* p0) {
-parser__ReduceAction116__action(self, p0); /* Direct call parser#ReduceAction116#action on <self:Object(ReduceAction116)>*/
+/* method parser#ReduceAction107#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction107__action(val* self, val* p0) {
+parser__ReduceAction107__action(self, p0); /* Direct call parser#ReduceAction107#action on <self:Object(ReduceAction107)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction117#action for (self: ReduceAction117, Parser) */
-void parser__ReduceAction117__action(val* self, val* p0) {
+/* method parser#ReduceAction108#action for (self: ReduceAction108, Parser) */
+void parser__ReduceAction108__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7079,7 +6529,7 @@ var2 = var_tstarshipnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4575);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4438);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AStarshipMethid(&type_parser_nodes__AStarshipMethid);
@@ -7088,7 +6538,7 @@ parser_prod__AStarshipMethid__init_astarshipmethid(var3, var_tstarshipnode2); /*
 }
 var_pmethidnode1 = var3;
 var_node_list = var_pmethidnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction117> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction108> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -7097,13 +6547,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction117#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction117__action(val* self, val* p0) {
-parser__ReduceAction117__action(self, p0); /* Direct call parser#ReduceAction117#action on <self:Object(ReduceAction117)>*/
+/* method parser#ReduceAction108#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction108__action(val* self, val* p0) {
+parser__ReduceAction108__action(self, p0); /* Direct call parser#ReduceAction108#action on <self:Object(ReduceAction108)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction118#action for (self: ReduceAction118, Parser) */
-void parser__ReduceAction118__action(val* self, val* p0) {
+/* method parser#ReduceAction109#action for (self: ReduceAction109, Parser) */
+void parser__ReduceAction109__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7149,7 +6599,7 @@ var3 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4591);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4454);
 show_backtrace(1);
 }
 var_tassignnode3 = var_nodearraylist2;
@@ -7167,7 +6617,7 @@ var4 = var_tassignnode3->type->type_table[cltype5] == idtype6;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4593);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4456);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AAssignMethid(&type_parser_nodes__AAssignMethid);
@@ -7176,7 +6626,7 @@ parser_prod__AAssignMethid__init_aassignmethid(var7, var_tidnode2, var_tassignno
 }
 var_pmethidnode1 = var7;
 var_node_list = var_pmethidnode1;
-var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction118> */
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction109> */
 {
 var9 = parser_work__Parser__go_to(var_p, var8);
 }
@@ -7185,13 +6635,13 @@ parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction118#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction118__action(val* self, val* p0) {
-parser__ReduceAction118__action(self, p0); /* Direct call parser#ReduceAction118#action on <self:Object(ReduceAction118)>*/
+/* method parser#ReduceAction109#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction109__action(val* self, val* p0) {
+parser__ReduceAction109__action(self, p0); /* Direct call parser#ReduceAction109#action on <self:Object(ReduceAction109)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction119#action for (self: ReduceAction119, Parser) */
-void parser__ReduceAction119__action(val* self, val* p0) {
+/* method parser#ReduceAction110#action for (self: ReduceAction110, Parser) */
+void parser__ReduceAction110__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7247,7 +6697,7 @@ var4 = var_tobranode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4611);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4474);
 show_backtrace(1);
 }
 var_tcbranode3 = var_nodearraylist2;
@@ -7265,7 +6715,7 @@ var5 = var_tcbranode3->type->type_table[cltype6] == idtype7;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4613);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4476);
 show_backtrace(1);
 }
 var_tassignnode4 = var_nodearraylist3;
@@ -7283,7 +6733,7 @@ var8 = var_tassignnode4->type->type_table[cltype9] == idtype10;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4615);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4478);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__ABraassignMethid(&type_parser_nodes__ABraassignMethid);
@@ -7292,7 +6742,7 @@ parser_prod__ABraassignMethid__init_abraassignmethid(var11, var_tobranode2, var_
 }
 var_pmethidnode1 = var11;
 var_node_list = var_pmethidnode1;
-var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction119> */
+var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction110> */
 {
 var13 = parser_work__Parser__go_to(var_p, var12);
 }
@@ -7301,13 +6751,73 @@ parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction119#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction119__action(val* self, val* p0) {
-parser__ReduceAction119__action(self, p0); /* Direct call parser#ReduceAction119#action on <self:Object(ReduceAction119)>*/
+/* method parser#ReduceAction110#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction110__action(val* self, val* p0) {
+parser__ReduceAction110__action(self, p0); /* Direct call parser#ReduceAction110#action on <self:Object(ReduceAction110)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction120#action for (self: ReduceAction120, Parser) */
-void parser__ReduceAction120__action(val* self, val* p0) {
+/* method parser#ReduceAction111#action for (self: ReduceAction111, Parser) */
+void parser__ReduceAction111__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tidnode2 /* var tidnode2: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AIdMethid */;
+val* var_pmethidnode1 /* var pmethidnode1: nullable AIdMethid */;
+long var4 /* : Int */;
+long var5 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tidnode2 = var_nodearraylist1;
+/* <var_tidnode2:nullable Object> isa nullable TId */
+cltype = type_nullable_parser_nodes__TId.color;
+idtype = type_nullable_parser_nodes__TId.id;
+if(var_tidnode2 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_tidnode2->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_tidnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4495);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AIdMethid(&type_parser_nodes__AIdMethid);
+{
+parser_prod__AIdMethid__init_aidmethid(var3, var_tidnode2); /* Direct call parser_prod#AIdMethid#init_aidmethid on <var3:AIdMethid>*/
+}
+var_pmethidnode1 = var3;
+var_node_list = var_pmethidnode1;
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction111> */
+{
+var5 = parser_work__Parser__go_to(var_p, var4);
+}
+{
+parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction111#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction111__action(val* self, val* p0) {
+parser__ReduceAction111__action(self, p0); /* Direct call parser#ReduceAction111#action on <self:Object(ReduceAction111)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction112#action for (self: ReduceAction112, Parser) */
+void parser__ReduceAction112__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7375,7 +6885,7 @@ var6 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var6;
 var7 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var7); /* Direct call array#Array#init on <var7:Array[Object]>*/
+((void (*)(val*))(var7->class->vft[COLOR_kernel__Object__init]))(var7) /* init on <var7:Array[Object]>*/;
 }
 var_listnode4 = var7;
 var_toparnode2 = var_nodearraylist1;
@@ -7393,7 +6903,7 @@ var8 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4638);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4516);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist3;
@@ -7411,7 +6921,7 @@ var9 = var_listnode3->type->type_table[cltype10] == idtype11;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4640);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4518);
 show_backtrace(1);
 }
 {
@@ -7433,7 +6943,7 @@ var13 = var_tcparnode5->type->type_table[cltype14] == idtype15;
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4643);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4521);
 show_backtrace(1);
 }
 var_ptypenode6 = var_nodearraylist5;
@@ -7451,7 +6961,7 @@ var16 = var_ptypenode6->type->type_table[cltype17] == idtype18;
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4645);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4523);
 show_backtrace(1);
 }
 var19 = NEW_parser_nodes__ASignature(&type_parser_nodes__ASignature);
@@ -7460,7 +6970,7 @@ parser_prod__ASignature__init_asignature(var19, var_toparnode2, var_listnode4, v
 }
 var_psignaturenode1 = var19;
 var_node_list = var_psignaturenode1;
-var20 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction120> */
+var20 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction112> */
 {
 var21 = parser_work__Parser__go_to(var_p, var20);
 }
@@ -7469,13 +6979,13 @@ parser_work__Parser__push(var_p, var21, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction120#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction120__action(val* self, val* p0) {
-parser__ReduceAction120__action(self, p0); /* Direct call parser#ReduceAction120#action on <self:Object(ReduceAction120)>*/
+/* method parser#ReduceAction112#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction112__action(val* self, val* p0) {
+parser__ReduceAction112__action(self, p0); /* Direct call parser#ReduceAction112#action on <self:Object(ReduceAction112)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction121#action for (self: ReduceAction121, Parser) */
-void parser__ReduceAction121__action(val* self, val* p0) {
+/* method parser#ReduceAction113#action for (self: ReduceAction113, Parser) */
+void parser__ReduceAction113__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7534,7 +7044,7 @@ var5 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var5;
 var6 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+((void (*)(val*))(var6->class->vft[COLOR_kernel__Object__init]))(var6) /* init on <var6:Array[Object]>*/;
 }
 var_listnode4 = var6;
 var_toparnode2 = var_nodearraylist1;
@@ -7552,7 +7062,7 @@ var7 = var_toparnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var7)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4668);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4546);
 show_backtrace(1);
 }
 var_listnode3 = var_nodearraylist3;
@@ -7570,7 +7080,7 @@ var8 = var_listnode3->type->type_table[cltype9] == idtype10;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4670);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4548);
 show_backtrace(1);
 }
 {
@@ -7592,7 +7102,7 @@ var12 = var_tcparnode5->type->type_table[cltype13] == idtype14;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4673);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4551);
 show_backtrace(1);
 }
 var15 = NEW_parser_nodes__ASignature(&type_parser_nodes__ASignature);
@@ -7602,7 +7112,7 @@ parser_prod__ASignature__init_asignature(var15, var_toparnode2, var_listnode4, v
 }
 var_psignaturenode1 = var15;
 var_node_list = var_psignaturenode1;
-var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction121> */
+var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction113> */
 {
 var18 = parser_work__Parser__go_to(var_p, var17);
 }
@@ -7611,13 +7121,13 @@ parser_work__Parser__push(var_p, var18, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction121#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction121__action(val* self, val* p0) {
-parser__ReduceAction121__action(self, p0); /* Direct call parser#ReduceAction121#action on <self:Object(ReduceAction121)>*/
+/* method parser#ReduceAction113#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction113__action(val* self, val* p0) {
+parser__ReduceAction113__action(self, p0); /* Direct call parser#ReduceAction113#action on <self:Object(ReduceAction113)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction122#action for (self: ReduceAction122, Parser) */
-void parser__ReduceAction122__action(val* self, val* p0) {
+/* method parser#ReduceAction114#action for (self: ReduceAction114, Parser) */
+void parser__ReduceAction114__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7650,7 +7160,7 @@ var2 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+((void (*)(val*))(var3->class->vft[COLOR_kernel__Object__init]))(var3) /* init on <var3:Array[Object]>*/;
 }
 var_listnode3 = var3;
 var_ptypenode5 = var_nodearraylist1;
@@ -7668,7 +7178,7 @@ var4 = var_ptypenode5->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4693);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4571);
 show_backtrace(1);
 }
 var5 = NEW_parser_nodes__ASignature(&type_parser_nodes__ASignature);
@@ -7679,7 +7189,7 @@ parser_prod__ASignature__init_asignature(var5, var6, var_listnode3, var7, var_pt
 }
 var_psignaturenode1 = var5;
 var_node_list = var_psignaturenode1;
-var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction122> */
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction114> */
 {
 var9 = parser_work__Parser__go_to(var_p, var8);
 }
@@ -7688,13 +7198,13 @@ parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction122#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction122__action(val* self, val* p0) {
-parser__ReduceAction122__action(self, p0); /* Direct call parser#ReduceAction122#action on <self:Object(ReduceAction122)>*/
+/* method parser#ReduceAction114#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction114__action(val* self, val* p0) {
+parser__ReduceAction114__action(self, p0); /* Direct call parser#ReduceAction114#action on <self:Object(ReduceAction114)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction123#action for (self: ReduceAction123, Parser) */
-void parser__ReduceAction123__action(val* self, val* p0) {
+/* method parser#ReduceAction115#action for (self: ReduceAction115, Parser) */
+void parser__ReduceAction115__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7718,7 +7228,7 @@ var1 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+((void (*)(val*))(var2->class->vft[COLOR_kernel__Object__init]))(var2) /* init on <var2:Array[Object]>*/;
 }
 var_listnode3 = var2;
 var3 = NEW_parser_nodes__ASignature(&type_parser_nodes__ASignature);
@@ -7730,7 +7240,7 @@ parser_prod__ASignature__init_asignature(var3, var4, var_listnode3, var5, var6);
 }
 var_psignaturenode1 = var3;
 var_node_list = var_psignaturenode1;
-var7 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction123> */
+var7 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction115> */
 {
 var8 = parser_work__Parser__go_to(var_p, var7);
 }
@@ -7739,13 +7249,13 @@ parser_work__Parser__push(var_p, var8, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction123#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction123__action(val* self, val* p0) {
-parser__ReduceAction123__action(self, p0); /* Direct call parser#ReduceAction123#action on <self:Object(ReduceAction123)>*/
+/* method parser#ReduceAction115#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction115__action(val* self, val* p0) {
+parser__ReduceAction115__action(self, p0); /* Direct call parser#ReduceAction115#action on <self:Object(ReduceAction115)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction124#action for (self: ReduceAction124, Parser) */
-void parser__ReduceAction124__action(val* self, val* p0) {
+/* method parser#ReduceAction116#action for (self: ReduceAction116, Parser) */
+void parser__ReduceAction116__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7774,7 +7284,7 @@ var2 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+((void (*)(val*))(var3->class->vft[COLOR_kernel__Object__init]))(var3) /* init on <var3:Array[Object]>*/;
 }
 var_listnode2 = var3;
 var_pparamnode1 = var_nodearraylist1;
@@ -7795,7 +7305,7 @@ array__Array__add(var_listnode2, var_pparamnode1); /* Direct call array#Array#ad
 } else {
 }
 var_node_list = var_listnode2;
-var7 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction124> */
+var7 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction116> */
 {
 var8 = parser_work__Parser__go_to(var_p, var7);
 }
@@ -7804,13 +7314,13 @@ parser_work__Parser__push(var_p, var8, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction124#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction124__action(val* self, val* p0) {
-parser__ReduceAction124__action(self, p0); /* Direct call parser#ReduceAction124#action on <self:Object(ReduceAction124)>*/
+/* method parser#ReduceAction116#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction116__action(val* self, val* p0) {
+parser__ReduceAction116__action(self, p0); /* Direct call parser#ReduceAction116#action on <self:Object(ReduceAction116)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction125#action for (self: ReduceAction125, Parser) */
-void parser__ReduceAction125__action(val* self, val* p0) {
+/* method parser#ReduceAction117#action for (self: ReduceAction117, Parser) */
+void parser__ReduceAction117__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7850,7 +7360,7 @@ var3 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+((void (*)(val*))(var4->class->vft[COLOR_kernel__Object__init]))(var4) /* init on <var4:Array[Object]>*/;
 }
 var_listnode3 = var4;
 var_pparamnode1 = var_nodearraylist1;
@@ -7869,7 +7379,7 @@ var5 = var_listnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4748);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4626);
 show_backtrace(1);
 }
 var6 = NULL;
@@ -7893,7 +7403,7 @@ var9 = parser_work__ReduceAction__concat(self, var_listnode3, var_listnode2);
 }
 var_listnode3 = var9;
 var_node_list = var_listnode3;
-var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction125> */
+var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction117> */
 {
 var11 = parser_work__Parser__go_to(var_p, var10);
 }
@@ -7902,13 +7412,13 @@ parser_work__Parser__push(var_p, var11, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction125#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction125__action(val* self, val* p0) {
-parser__ReduceAction125__action(self, p0); /* Direct call parser#ReduceAction125#action on <self:Object(ReduceAction125)>*/
+/* method parser#ReduceAction117#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction117__action(val* self, val* p0) {
+parser__ReduceAction117__action(self, p0); /* Direct call parser#ReduceAction117#action on <self:Object(ReduceAction117)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction127#action for (self: ReduceAction127, Parser) */
-void parser__ReduceAction127__action(val* self, val* p0) {
+/* method parser#ReduceAction119#action for (self: ReduceAction119, Parser) */
+void parser__ReduceAction119__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7938,7 +7448,7 @@ var3 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var3;
 var_pparamnode1 = var_nodearraylist3;
 var_node_list = var_pparamnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction127> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction119> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -7947,13 +7457,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction127#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction127__action(val* self, val* p0) {
-parser__ReduceAction127__action(self, p0); /* Direct call parser#ReduceAction127#action on <self:Object(ReduceAction127)>*/
+/* method parser#ReduceAction119#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction119__action(val* self, val* p0) {
+parser__ReduceAction119__action(self, p0); /* Direct call parser#ReduceAction119#action on <self:Object(ReduceAction119)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction128#action for (self: ReduceAction128, Parser) */
-void parser__ReduceAction128__action(val* self, val* p0) {
+/* method parser#ReduceAction120#action for (self: ReduceAction120, Parser) */
+void parser__ReduceAction120__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8001,7 +7511,7 @@ var3 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4778);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4656);
 show_backtrace(1);
 }
 var_pannotationsnode5 = var_nodearraylist2;
@@ -8019,7 +7529,7 @@ var4 = var_pannotationsnode5->type->type_table[cltype5] == idtype6;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4780);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4658);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AParam(&type_parser_nodes__AParam);
@@ -8030,7 +7540,7 @@ parser_prod__AParam__init_aparam(var7, var_tidnode2, var8, var9, var_pannotation
 }
 var_pparamnode1 = var7;
 var_node_list = var_pparamnode1;
-var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction128> */
+var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction120> */
 {
 var11 = parser_work__Parser__go_to(var_p, var10);
 }
@@ -8039,13 +7549,13 @@ parser_work__Parser__push(var_p, var11, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction128#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction128__action(val* self, val* p0) {
-parser__ReduceAction128__action(self, p0); /* Direct call parser#ReduceAction128#action on <self:Object(ReduceAction128)>*/
+/* method parser#ReduceAction120#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction120__action(val* self, val* p0) {
+parser__ReduceAction120__action(self, p0); /* Direct call parser#ReduceAction120#action on <self:Object(ReduceAction120)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction129#action for (self: ReduceAction129, Parser) */
-void parser__ReduceAction129__action(val* self, val* p0) {
+/* method parser#ReduceAction121#action for (self: ReduceAction121, Parser) */
+void parser__ReduceAction121__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8093,7 +7603,7 @@ var3 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var3)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4799);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4677);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist2;
@@ -8111,7 +7621,7 @@ var4 = var_ptypenode3->type->type_table[cltype5] == idtype6;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4801);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4679);
 show_backtrace(1);
 }
 var7 = NEW_parser_nodes__AParam(&type_parser_nodes__AParam);
@@ -8122,7 +7632,7 @@ parser_prod__AParam__init_aparam(var7, var_tidnode2, var_ptypenode3, var8, var9)
 }
 var_pparamnode1 = var7;
 var_node_list = var_pparamnode1;
-var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction129> */
+var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction121> */
 {
 var11 = parser_work__Parser__go_to(var_p, var10);
 }
@@ -8131,13 +7641,13 @@ parser_work__Parser__push(var_p, var11, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction129#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction129__action(val* self, val* p0) {
-parser__ReduceAction129__action(self, p0); /* Direct call parser#ReduceAction129#action on <self:Object(ReduceAction129)>*/
+/* method parser#ReduceAction121#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction121__action(val* self, val* p0) {
+parser__ReduceAction121__action(self, p0); /* Direct call parser#ReduceAction121#action on <self:Object(ReduceAction121)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction130#action for (self: ReduceAction130, Parser) */
-void parser__ReduceAction130__action(val* self, val* p0) {
+/* method parser#ReduceAction122#action for (self: ReduceAction122, Parser) */
+void parser__ReduceAction122__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8194,7 +7704,7 @@ var4 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4821);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4699);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -8212,7 +7722,7 @@ var5 = var_ptypenode3->type->type_table[cltype6] == idtype7;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4823);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4701);
 show_backtrace(1);
 }
 var_pannotationsnode5 = var_nodearraylist2;
@@ -8230,7 +7740,7 @@ var8 = var_pannotationsnode5->type->type_table[cltype9] == idtype10;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4825);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4703);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__AParam(&type_parser_nodes__AParam);
@@ -8240,7 +7750,7 @@ parser_prod__AParam__init_aparam(var11, var_tidnode2, var_ptypenode3, var12, var
 }
 var_pparamnode1 = var11;
 var_node_list = var_pparamnode1;
-var13 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction130> */
+var13 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction122> */
 {
 var14 = parser_work__Parser__go_to(var_p, var13);
 }
@@ -8249,13 +7759,13 @@ parser_work__Parser__push(var_p, var14, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction130#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction130__action(val* self, val* p0) {
-parser__ReduceAction130__action(self, p0); /* Direct call parser#ReduceAction130#action on <self:Object(ReduceAction130)>*/
+/* method parser#ReduceAction122#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction122__action(val* self, val* p0) {
+parser__ReduceAction122__action(self, p0); /* Direct call parser#ReduceAction122#action on <self:Object(ReduceAction122)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction131#action for (self: ReduceAction131, Parser) */
-void parser__ReduceAction131__action(val* self, val* p0) {
+/* method parser#ReduceAction123#action for (self: ReduceAction123, Parser) */
+void parser__ReduceAction123__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8312,7 +7822,7 @@ var4 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4845);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4723);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist2;
@@ -8330,7 +7840,7 @@ var5 = var_ptypenode3->type->type_table[cltype6] == idtype7;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4847);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4725);
 show_backtrace(1);
 }
 var_tdotdotdotnode4 = var_nodearraylist3;
@@ -8348,7 +7858,7 @@ var8 = var_tdotdotdotnode4->type->type_table[cltype9] == idtype10;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4849);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4727);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__AParam(&type_parser_nodes__AParam);
@@ -8358,7 +7868,7 @@ parser_prod__AParam__init_aparam(var11, var_tidnode2, var_ptypenode3, var_tdotdo
 }
 var_pparamnode1 = var11;
 var_node_list = var_pparamnode1;
-var13 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction131> */
+var13 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction123> */
 {
 var14 = parser_work__Parser__go_to(var_p, var13);
 }
@@ -8367,13 +7877,13 @@ parser_work__Parser__push(var_p, var14, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction131#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction131__action(val* self, val* p0) {
-parser__ReduceAction131__action(self, p0); /* Direct call parser#ReduceAction131#action on <self:Object(ReduceAction131)>*/
+/* method parser#ReduceAction123#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction123__action(val* self, val* p0) {
+parser__ReduceAction123__action(self, p0); /* Direct call parser#ReduceAction123#action on <self:Object(ReduceAction123)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction132#action for (self: ReduceAction132, Parser) */
-void parser__ReduceAction132__action(val* self, val* p0) {
+/* method parser#ReduceAction124#action for (self: ReduceAction124, Parser) */
+void parser__ReduceAction124__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8439,7 +7949,7 @@ var5 = var_tidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4870);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4748);
 show_backtrace(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -8457,7 +7967,7 @@ var6 = var_ptypenode3->type->type_table[cltype7] == idtype8;
 }
 if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4872);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4750);
 show_backtrace(1);
 }
 var_tdotdotdotnode4 = var_nodearraylist4;
@@ -8475,7 +7985,7 @@ var9 = var_tdotdotdotnode4->type->type_table[cltype10] == idtype11;
 }
 if (unlikely(!var9)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4874);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4752);
 show_backtrace(1);
 }
 var_pannotationsnode5 = var_nodearraylist2;
@@ -8493,7 +8003,7 @@ var12 = var_pannotationsnode5->type->type_table[cltype13] == idtype14;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4876);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4754);
 show_backtrace(1);
 }
 var15 = NEW_parser_nodes__AParam(&type_parser_nodes__AParam);
@@ -8502,7 +8012,7 @@ parser_prod__AParam__init_aparam(var15, var_tidnode2, var_ptypenode3, var_tdotdo
 }
 var_pparamnode1 = var15;
 var_node_list = var_pparamnode1;
-var16 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction132> */
+var16 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction124> */
 {
 var17 = parser_work__Parser__go_to(var_p, var16);
 }
@@ -8511,13 +8021,13 @@ parser_work__Parser__push(var_p, var17, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction132#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction132__action(val* self, val* p0) {
-parser__ReduceAction132__action(self, p0); /* Direct call parser#ReduceAction132#action on <self:Object(ReduceAction132)>*/
+/* method parser#ReduceAction124#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction124__action(val* self, val* p0) {
+parser__ReduceAction124__action(self, p0); /* Direct call parser#ReduceAction124#action on <self:Object(ReduceAction124)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction133#action for (self: ReduceAction133, Parser) */
-void parser__ReduceAction133__action(val* self, val* p0) {
+/* method parser#ReduceAction125#action for (self: ReduceAction125, Parser) */
+void parser__ReduceAction125__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8565,7 +8075,7 @@ var3 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+((void (*)(val*))(var4->class->vft[COLOR_kernel__Object__init]))(var4) /* init on <var4:Array[Object]>*/;
 }
 var_listnode4 = var4;
 var_tkwimportnode2 = var_nodearraylist1;
@@ -8583,7 +8093,7 @@ var5 = var_tkwimportnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4897);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4775);
 show_backtrace(1);
 }
 var_pexterncallnode3 = var_nodearraylist3;
@@ -8601,7 +8111,7 @@ var6 = var_pexterncallnode3->type->type_table[cltype7] == idtype8;
 }
 if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4899);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4777);
 show_backtrace(1);
 }
 var9 = NULL;
@@ -8636,7 +8146,7 @@ parser_prod__AExternCalls__init_aexterncalls(var16, var_tkwimportnode2, var_list
 }
 var_pexterncallsnode1 = var16;
 var_node_list = var_pexterncallsnode1;
-var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction133> */
+var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction125> */
 {
 var18 = parser_work__Parser__go_to(var_p, var17);
 }
@@ -8645,13 +8155,13 @@ parser_work__Parser__push(var_p, var18, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction133#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction133__action(val* self, val* p0) {
-parser__ReduceAction133__action(self, p0); /* Direct call parser#ReduceAction133#action on <self:Object(ReduceAction133)>*/
+/* method parser#ReduceAction125#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction125__action(val* self, val* p0) {
+parser__ReduceAction125__action(self, p0); /* Direct call parser#ReduceAction125#action on <self:Object(ReduceAction125)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction134#action for (self: ReduceAction134, Parser) */
-void parser__ReduceAction134__action(val* self, val* p0) {
+/* method parser#ReduceAction126#action for (self: ReduceAction126, Parser) */
+void parser__ReduceAction126__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8710,7 +8220,7 @@ var4 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var4;
 var5 = NEW_array__Array(&type_array__Arraykernel__Object);
 {
-array__Array__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+((void (*)(val*))(var5->class->vft[COLOR_kernel__Object__init]))(var5) /* init on <var5:Array[Object]>*/;
 }
 var_listnode5 = var5;
 var_tkwimportnode2 = var_nodearraylist1;
@@ -8728,7 +8238,7 @@ var6 = var_tkwimportnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4922);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4800);
 show_backtrace(1);
 }
 var_pexterncallnode3 = var_nodearraylist3;
@@ -8746,7 +8256,7 @@ var7 = var_pexterncallnode3->type->type_table[cltype8] == idtype9;
 }
 if (unlikely(!var7)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4924);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4802);
 show_backtrace(1);
 }
 var_listnode4 = var_nodearraylist4;
@@ -8764,7 +8274,7 @@ var10 = var_listnode4->type->type_table[cltype11] == idtype12;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4926);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4804);
 show_backtrace(1);
 }
 var13 = NULL;
@@ -8803,7 +8313,7 @@ parser_prod__AExternCalls__init_aexterncalls(var21, var_tkwimportnode2, var_list
 }
 var_pexterncallsnode1 = var21;
 var_node_list = var_pexterncallsnode1;
-var22 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction134> */
+var22 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction126> */
 {
 var23 = parser_work__Parser__go_to(var_p, var22);
 }
@@ -8812,13 +8322,13 @@ parser_work__Parser__push(var_p, var23, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction134#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction134__action(val* self, val* p0) {
-parser__ReduceAction134__action(self, p0); /* Direct call parser#ReduceAction134#action on <self:Object(ReduceAction134)>*/
+/* method parser#ReduceAction126#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction126__action(val* self, val* p0) {
+parser__ReduceAction126__action(self, p0); /* Direct call parser#ReduceAction126#action on <self:Object(ReduceAction126)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction136#action for (self: ReduceAction136, Parser) */
-void parser__ReduceAction136__action(val* self, val* p0) {
+/* method parser#ReduceAction128#action for (self: ReduceAction128, Parser) */
+void parser__ReduceAction128__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8848,7 +8358,7 @@ var3 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var3;
 var_pexterncallnode1 = var_nodearraylist3;
 var_node_list = var_pexterncallnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction136> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction128> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -8857,13 +8367,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction136#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction136__action(val* self, val* p0) {
-parser__ReduceAction136__action(self, p0); /* Direct call parser#ReduceAction136#action on <self:Object(ReduceAction136)>*/
+/* method parser#ReduceAction128#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction128__action(val* self, val* p0) {
+parser__ReduceAction128__action(self, p0); /* Direct call parser#ReduceAction128#action on <self:Object(ReduceAction128)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction137#action for (self: ReduceAction137, Parser) */
-void parser__ReduceAction137__action(val* self, val* p0) {
+/* method parser#ReduceAction129#action for (self: ReduceAction129, Parser) */
+void parser__ReduceAction129__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8881,7 +8391,7 @@ var1 = parser_work__Parser__pop(var_p);
 var_nodearraylist1 = var1;
 var_pexterncallnode1 = var_nodearraylist1;
 var_node_list = var_pexterncallnode1;
-var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction137> */
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction129> */
 {
 var3 = parser_work__Parser__go_to(var_p, var2);
 }
@@ -8890,13 +8400,13 @@ parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction137#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction137__action(val* self, val* p0) {
-parser__ReduceAction137__action(self, p0); /* Direct call parser#ReduceAction137#action on <self:Object(ReduceAction137)>*/
+/* method parser#ReduceAction129#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction129__action(val* self, val* p0) {
+parser__ReduceAction129__action(self, p0); /* Direct call parser#ReduceAction129#action on <self:Object(ReduceAction129)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction139#action for (self: ReduceAction139, Parser) */
-void parser__ReduceAction139__action(val* self, val* p0) {
+/* method parser#ReduceAction131#action for (self: ReduceAction131, Parser) */
+void parser__ReduceAction131__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8932,7 +8442,7 @@ var2 = var_tkwsupernode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4970);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4848);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ASuperExternCall(&type_parser_nodes__ASuperExternCall);
@@ -8941,7 +8451,7 @@ parser_prod__ASuperExternCall__init_asuperexterncall(var3, var_tkwsupernode2); /
 }
 var_pexterncallnode1 = var3;
 var_node_list = var_pexterncallnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction139> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction131> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -8950,13 +8460,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction139#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction139__action(val* self, val* p0) {
-parser__ReduceAction139__action(self, p0); /* Direct call parser#ReduceAction139#action on <self:Object(ReduceAction139)>*/
+/* method parser#ReduceAction131#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction131__action(val* self, val* p0) {
+parser__ReduceAction131__action(self, p0); /* Direct call parser#ReduceAction131#action on <self:Object(ReduceAction131)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction140#action for (self: ReduceAction140, Parser) */
-void parser__ReduceAction140__action(val* self, val* p0) {
+/* method parser#ReduceAction132#action for (self: ReduceAction132, Parser) */
+void parser__ReduceAction132__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8992,7 +8502,7 @@ var2 = var_pmethidnode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 4985);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4863);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__ALocalPropExternCall(&type_parser_nodes__ALocalPropExternCall);
@@ -9001,7 +8511,7 @@ parser_prod__ALocalPropExternCall__init_alocalpropexterncall(var3, var_pmethidno
 }
 var_pexterncallnode1 = var3;
 var_node_list = var_pexterncallnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction140> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction132> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -9010,13 +8520,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction140#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction140__action(val* self, val* p0) {
-parser__ReduceAction140__action(self, p0); /* Direct call parser#ReduceAction140#action on <self:Object(ReduceAction140)>*/
+/* method parser#ReduceAction132#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction132__action(val* self, val* p0) {
+parser__ReduceAction132__action(self, p0); /* Direct call parser#ReduceAction132#action on <self:Object(ReduceAction132)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction141#action for (self: ReduceAction141, Parser) */
-void parser__ReduceAction141__action(val* self, val* p0) {
+/* method parser#ReduceAction133#action for (self: ReduceAction133, Parser) */
+void parser__ReduceAction133__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9072,7 +8582,7 @@ var4 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5002);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4880);
 show_backtrace(1);
 }
 var_tdotnode3 = var_nodearraylist2;
@@ -9090,7 +8600,7 @@ var5 = var_tdotnode3->type->type_table[cltype6] == idtype7;
 }
 if (unlikely(!var5)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5004);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4882);
 show_backtrace(1);
 }
 var_pmethidnode4 = var_nodearraylist3;
@@ -9108,7 +8618,7 @@ var8 = var_pmethidnode4->type->type_table[cltype9] == idtype10;
 }
 if (unlikely(!var8)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5006);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4884);
 show_backtrace(1);
 }
 var11 = NEW_parser_nodes__AFullPropExternCall(&type_parser_nodes__AFullPropExternCall);
@@ -9117,7 +8627,7 @@ parser_prod__AFullPropExternCall__init_afullpropexterncall(var11, var_ptypenode2
 }
 var_pexterncallnode1 = var11;
 var_node_list = var_pexterncallnode1;
-var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction141> */
+var12 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction133> */
 {
 var13 = parser_work__Parser__go_to(var_p, var12);
 }
@@ -9126,13 +8636,13 @@ parser_work__Parser__push(var_p, var13, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction141#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction141__action(val* self, val* p0) {
-parser__ReduceAction141__action(self, p0); /* Direct call parser#ReduceAction141#action on <self:Object(ReduceAction141)>*/
+/* method parser#ReduceAction133#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction133__action(val* self, val* p0) {
+parser__ReduceAction133__action(self, p0); /* Direct call parser#ReduceAction133#action on <self:Object(ReduceAction133)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction142#action for (self: ReduceAction142, Parser) */
-void parser__ReduceAction142__action(val* self, val* p0) {
+/* method parser#ReduceAction134#action for (self: ReduceAction134, Parser) */
+void parser__ReduceAction134__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9168,7 +8678,7 @@ var2 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5023);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4901);
 show_backtrace(1);
 }
 var3 = NEW_parser_nodes__AInitPropExternCall(&type_parser_nodes__AInitPropExternCall);
@@ -9177,7 +8687,7 @@ parser_prod__AInitPropExternCall__init_ainitpropexterncall(var3, var_ptypenode2)
 }
 var_pexterncallnode1 = var3;
 var_node_list = var_pexterncallnode1;
-var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction142> */
+var4 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction134> */
 {
 var5 = parser_work__Parser__go_to(var_p, var4);
 }
@@ -9186,13 +8696,13 @@ parser_work__Parser__push(var_p, var5, var_node_list); /* Direct call parser_wor
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction142#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction142__action(val* self, val* p0) {
-parser__ReduceAction142__action(self, p0); /* Direct call parser#ReduceAction142#action on <self:Object(ReduceAction142)>*/
+/* method parser#ReduceAction134#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction134__action(val* self, val* p0) {
+parser__ReduceAction134__action(self, p0); /* Direct call parser#ReduceAction134#action on <self:Object(ReduceAction134)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction143#action for (self: ReduceAction143, Parser) */
-void parser__ReduceAction143__action(val* self, val* p0) {
+/* method parser#ReduceAction135#action for (self: ReduceAction135, Parser) */
+void parser__ReduceAction135__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9288,7 +8798,7 @@ var10 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5046);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4924);
 show_backtrace(1);
 }
 var_tdotnode3 = var_nodearraylist2;
@@ -9306,7 +8816,7 @@ var11 = var_tdotnode3->type->type_table[cltype12] == idtype13;
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5048);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4926);
 show_backtrace(1);
 }
 var_tkwasnode4 = var_nodearraylist3;
@@ -9324,7 +8834,7 @@ var14 = var_tkwasnode4->type->type_table[cltype15] == idtype16;
 }
 if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5050);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4928);
 show_backtrace(1);
 }
 var_ptypenode5 = var_nodearraylist7;
@@ -9342,7 +8852,7 @@ var17 = var_ptypenode5->type->type_table[cltype18] == idtype19;
 }
 if (unlikely(!var17)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5052);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4930);
 show_backtrace(1);
 }
 var20 = NEW_parser_nodes__ACastAsExternCall(&type_parser_nodes__ACastAsExternCall);
@@ -9351,7 +8861,7 @@ parser_prod__ACastAsExternCall__init_acastasexterncall(var20, var_ptypenode2, va
 }
 var_pexterncallnode1 = var20;
 var_node_list = var_pexterncallnode1;
-var21 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction143> */
+var21 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction135> */
 {
 var22 = parser_work__Parser__go_to(var_p, var21);
 }
@@ -9360,13 +8870,13 @@ parser_work__Parser__push(var_p, var22, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction143#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction143__action(val* self, val* p0) {
-parser__ReduceAction143__action(self, p0); /* Direct call parser#ReduceAction143#action on <self:Object(ReduceAction143)>*/
+/* method parser#ReduceAction135#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction135__action(val* self, val* p0) {
+parser__ReduceAction135__action(self, p0); /* Direct call parser#ReduceAction135#action on <self:Object(ReduceAction135)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction144#action for (self: ReduceAction144, Parser) */
-void parser__ReduceAction144__action(val* self, val* p0) {
+/* method parser#ReduceAction136#action for (self: ReduceAction136, Parser) */
+void parser__ReduceAction136__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9438,7 +8948,7 @@ var6 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5074);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4952);
 show_backtrace(1);
 }
 var_tdotnode3 = var_nodearraylist2;
@@ -9456,7 +8966,7 @@ var7 = var_tdotnode3->type->type_table[cltype8] == idtype9;
 }
 if (unlikely(!var7)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5076);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4954);
 show_backtrace(1);
 }
 var_tkwasnode4 = var_nodearraylist3;
@@ -9474,7 +8984,7 @@ var10 = var_tkwasnode4->type->type_table[cltype11] == idtype12;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5078);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4956);
 show_backtrace(1);
 }
 var_ptypenode5 = var_nodearraylist5;
@@ -9492,7 +9002,7 @@ var13 = var_ptypenode5->type->type_table[cltype14] == idtype15;
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5080);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4958);
 show_backtrace(1);
 }
 var16 = NEW_parser_nodes__ACastAsExternCall(&type_parser_nodes__ACastAsExternCall);
@@ -9501,7 +9011,7 @@ parser_prod__ACastAsExternCall__init_acastasexterncall(var16, var_ptypenode2, va
 }
 var_pexterncallnode1 = var16;
 var_node_list = var_pexterncallnode1;
-var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction144> */
+var17 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction136> */
 {
 var18 = parser_work__Parser__go_to(var_p, var17);
 }
@@ -9510,13 +9020,13 @@ parser_work__Parser__push(var_p, var18, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction144#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction144__action(val* self, val* p0) {
-parser__ReduceAction144__action(self, p0); /* Direct call parser#ReduceAction144#action on <self:Object(ReduceAction144)>*/
+/* method parser#ReduceAction136#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction136__action(val* self, val* p0) {
+parser__ReduceAction136__action(self, p0); /* Direct call parser#ReduceAction136#action on <self:Object(ReduceAction136)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction145#action for (self: ReduceAction145, Parser) */
-void parser__ReduceAction145__action(val* self, val* p0) {
+/* method parser#ReduceAction137#action for (self: ReduceAction137, Parser) */
+void parser__ReduceAction137__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9608,7 +9118,7 @@ var10 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5106);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4984);
 show_backtrace(1);
 }
 var_tkwasnode3 = var_nodearraylist3;
@@ -9626,7 +9136,7 @@ var11 = var_tkwasnode3->type->type_table[cltype12] == idtype13;
 }
 if (unlikely(!var11)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5108);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4986);
 show_backtrace(1);
 }
 var_tkwnullablenode4 = var_nodearraylist7;
@@ -9644,7 +9154,7 @@ var14 = var_tkwnullablenode4->type->type_table[cltype15] == idtype16;
 }
 if (unlikely(!var14)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5110);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 4988);
 show_backtrace(1);
 }
 var17 = NEW_parser_nodes__AAsNullableExternCall(&type_parser_nodes__AAsNullableExternCall);
@@ -9653,7 +9163,7 @@ parser_prod__AAsNullableExternCall__init_aasnullableexterncall(var17, var_ptypen
 }
 var_pexterncallnode1 = var17;
 var_node_list = var_pexterncallnode1;
-var18 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction145> */
+var18 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction137> */
 {
 var19 = parser_work__Parser__go_to(var_p, var18);
 }
@@ -9662,13 +9172,13 @@ parser_work__Parser__push(var_p, var19, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction145#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction145__action(val* self, val* p0) {
-parser__ReduceAction145__action(self, p0); /* Direct call parser#ReduceAction145#action on <self:Object(ReduceAction145)>*/
+/* method parser#ReduceAction137#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction137__action(val* self, val* p0) {
+parser__ReduceAction137__action(self, p0); /* Direct call parser#ReduceAction137#action on <self:Object(ReduceAction137)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction146#action for (self: ReduceAction146, Parser) */
-void parser__ReduceAction146__action(val* self, val* p0) {
+/* method parser#ReduceAction138#action for (self: ReduceAction138, Parser) */
+void parser__ReduceAction138__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9736,7 +9246,7 @@ var6 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5131);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5009);
 show_backtrace(1);
 }
 var_tkwasnode3 = var_nodearraylist3;
@@ -9754,7 +9264,7 @@ var7 = var_tkwasnode3->type->type_table[cltype8] == idtype9;
 }
 if (unlikely(!var7)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5133);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5011);
 show_backtrace(1);
 }
 var_tkwnullablenode4 = var_nodearraylist5;
@@ -9772,7 +9282,7 @@ var10 = var_tkwnullablenode4->type->type_table[cltype11] == idtype12;
 }
 if (unlikely(!var10)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5135);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5013);
 show_backtrace(1);
 }
 var13 = NEW_parser_nodes__AAsNullableExternCall(&type_parser_nodes__AAsNullableExternCall);
@@ -9781,7 +9291,7 @@ parser_prod__AAsNullableExternCall__init_aasnullableexterncall(var13, var_ptypen
 }
 var_pexterncallnode1 = var13;
 var_node_list = var_pexterncallnode1;
-var14 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction146> */
+var14 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction138> */
 {
 var15 = parser_work__Parser__go_to(var_p, var14);
 }
@@ -9790,13 +9300,13 @@ parser_work__Parser__push(var_p, var15, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction146#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction146__action(val* self, val* p0) {
-parser__ReduceAction146__action(self, p0); /* Direct call parser#ReduceAction146#action on <self:Object(ReduceAction146)>*/
+/* method parser#ReduceAction138#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction138__action(val* self, val* p0) {
+parser__ReduceAction138__action(self, p0); /* Direct call parser#ReduceAction138#action on <self:Object(ReduceAction138)>*/
 RET_LABEL:;
 }
-/* method parser#ReduceAction147#action for (self: ReduceAction147, Parser) */
-void parser__ReduceAction147__action(val* self, val* p0) {
+/* method parser#ReduceAction139#action for (self: ReduceAction139, Parser) */
+void parser__ReduceAction139__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var /* : null */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9904,7 +9414,7 @@ var12 = var_ptypenode2->type->type_table[cltype] == idtype;
 }
 if (unlikely(!var12)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5162);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5040);
 show_backtrace(1);
 }
 var_tkwasnode3 = var_nodearraylist3;
@@ -9922,7 +9432,7 @@ var13 = var_tkwasnode3->type->type_table[cltype14] == idtype15;
 }
 if (unlikely(!var13)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5164);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5042);
 show_backtrace(1);
 }
 var_tkwnotnode4 = var_nodearraylist7;
@@ -9940,7 +9450,7 @@ var16 = var_tkwnotnode4->type->type_table[cltype17] == idtype18;
 }
 if (unlikely(!var16)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5166);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5044);
 show_backtrace(1);
 }
 var_tkwnullablenode5 = var_nodearraylist9;
@@ -9958,7 +9468,7 @@ var19 = var_tkwnullablenode5->type->type_table[cltype20] == idtype21;
 }
 if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", "src/parser/parser.nit", 5168);
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5046);
 show_backtrace(1);
 }
 var22 = NEW_parser_nodes__AAsNotNullableExternCall(&type_parser_nodes__AAsNotNullableExternCall);
@@ -9967,7 +9477,7 @@ parser_prod__AAsNotNullableExternCall__init_aasnotnullableexterncall(var22, var_
 }
 var_pexterncallnode1 = var22;
 var_node_list = var_pexterncallnode1;
-var23 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction147> */
+var23 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction139> */
 {
 var24 = parser_work__Parser__go_to(var_p, var23);
 }
@@ -9976,8 +9486,486 @@ parser_work__Parser__push(var_p, var24, var_node_list); /* Direct call parser_wo
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction147#action for (self: Object, Parser) */
-void VIRTUAL_parser__ReduceAction147__action(val* self, val* p0) {
-parser__ReduceAction147__action(self, p0); /* Direct call parser#ReduceAction147#action on <self:Object(ReduceAction147)>*/
+/* method parser#ReduceAction139#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction139__action(val* self, val* p0) {
+parser__ReduceAction139__action(self, p0); /* Direct call parser#ReduceAction139#action on <self:Object(ReduceAction139)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction140#action for (self: ReduceAction140, Parser) */
+void parser__ReduceAction140__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var5 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var7 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_ptypenode2 /* var ptypenode2: nullable Object */;
+short int var8 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tkwasnode3 /* var tkwasnode3: nullable Object */;
+short int var9 /* : Bool */;
+int cltype10;
+int idtype11;
+val* var_tkwnotnode4 /* var tkwnotnode4: nullable Object */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+val* var_tkwnullablenode5 /* var tkwnullablenode5: nullable Object */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+val* var18 /* : AAsNotNullableExternCall */;
+val* var_pexterncallnode1 /* var pexterncallnode1: nullable AAsNotNullableExternCall */;
+long var19 /* : Int */;
+long var20 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist7 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist6 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist5 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var4;
+{
+var5 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var5;
+{
+var6 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var6;
+{
+var7 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var7;
+var_ptypenode2 = var_nodearraylist1;
+/* <var_ptypenode2:nullable Object> isa nullable AType */
+cltype = type_nullable_parser_nodes__AType.color;
+idtype = type_nullable_parser_nodes__AType.id;
+if(var_ptypenode2 == NULL) {
+var8 = 1;
+} else {
+if(cltype >= var_ptypenode2->type->table_size) {
+var8 = 0;
+} else {
+var8 = var_ptypenode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var8)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5070);
+show_backtrace(1);
+}
+var_tkwasnode3 = var_nodearraylist3;
+/* <var_tkwasnode3:nullable Object> isa nullable TKwas */
+cltype10 = type_nullable_parser_nodes__TKwas.color;
+idtype11 = type_nullable_parser_nodes__TKwas.id;
+if(var_tkwasnode3 == NULL) {
+var9 = 1;
+} else {
+if(cltype10 >= var_tkwasnode3->type->table_size) {
+var9 = 0;
+} else {
+var9 = var_tkwasnode3->type->type_table[cltype10] == idtype11;
+}
+}
+if (unlikely(!var9)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5072);
+show_backtrace(1);
+}
+var_tkwnotnode4 = var_nodearraylist5;
+/* <var_tkwnotnode4:nullable Object> isa nullable TKwnot */
+cltype13 = type_nullable_parser_nodes__TKwnot.color;
+idtype14 = type_nullable_parser_nodes__TKwnot.id;
+if(var_tkwnotnode4 == NULL) {
+var12 = 1;
+} else {
+if(cltype13 >= var_tkwnotnode4->type->table_size) {
+var12 = 0;
+} else {
+var12 = var_tkwnotnode4->type->type_table[cltype13] == idtype14;
+}
+}
+if (unlikely(!var12)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5074);
+show_backtrace(1);
+}
+var_tkwnullablenode5 = var_nodearraylist7;
+/* <var_tkwnullablenode5:nullable Object> isa nullable TKwnullable */
+cltype16 = type_nullable_parser_nodes__TKwnullable.color;
+idtype17 = type_nullable_parser_nodes__TKwnullable.id;
+if(var_tkwnullablenode5 == NULL) {
+var15 = 1;
+} else {
+if(cltype16 >= var_tkwnullablenode5->type->table_size) {
+var15 = 0;
+} else {
+var15 = var_tkwnullablenode5->type->type_table[cltype16] == idtype17;
+}
+}
+if (unlikely(!var15)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5076);
+show_backtrace(1);
+}
+var18 = NEW_parser_nodes__AAsNotNullableExternCall(&type_parser_nodes__AAsNotNullableExternCall);
+{
+parser_prod__AAsNotNullableExternCall__init_aasnotnullableexterncall(var18, var_ptypenode2, var_tkwasnode3, var_tkwnotnode4, var_tkwnullablenode5); /* Direct call parser_prod#AAsNotNullableExternCall#init_aasnotnullableexterncall on <var18:AAsNotNullableExternCall>*/
+}
+var_pexterncallnode1 = var18;
+var_node_list = var_pexterncallnode1;
+var19 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction140> */
+{
+var20 = parser_work__Parser__go_to(var_p, var19);
+}
+{
+parser_work__Parser__push(var_p, var20, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction140#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction140__action(val* self, val* p0) {
+parser__ReduceAction140__action(self, p0); /* Direct call parser#ReduceAction140#action on <self:Object(ReduceAction140)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction142#action for (self: ReduceAction142, Parser) */
+void parser__ReduceAction142__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tstringnode1 /* var tstringnode1: nullable Object */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_tstringnode1 = var_nodearraylist1;
+var_node_list = var_tstringnode1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction142> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction142#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction142__action(val* self, val* p0) {
+parser__ReduceAction142__action(self, p0); /* Direct call parser#ReduceAction142#action on <self:Object(ReduceAction142)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction143#action for (self: ReduceAction143, Parser) */
+void parser__ReduceAction143__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
+val* var3 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var4 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_tkwinnode2 /* var tkwinnode2: nullable Object */;
+short int var5 /* : Bool */;
+int cltype;
+int idtype;
+val* var_tstringnode3 /* var tstringnode3: nullable Object */;
+short int var6 /* : Bool */;
+int cltype7;
+int idtype8;
+val* var9 /* : AInLanguage */;
+val* var_pinlanguagenode1 /* var pinlanguagenode1: nullable AInLanguage */;
+long var10 /* : Int */;
+long var11 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist4 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist3 = var2;
+{
+var3 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var3;
+{
+var4 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var4;
+var_tkwinnode2 = var_nodearraylist1;
+/* <var_tkwinnode2:nullable Object> isa nullable TKwin */
+cltype = type_nullable_parser_nodes__TKwin.color;
+idtype = type_nullable_parser_nodes__TKwin.id;
+if(var_tkwinnode2 == NULL) {
+var5 = 1;
+} else {
+if(cltype >= var_tkwinnode2->type->table_size) {
+var5 = 0;
+} else {
+var5 = var_tkwinnode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var5)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5108);
+show_backtrace(1);
+}
+var_tstringnode3 = var_nodearraylist3;
+/* <var_tstringnode3:nullable Object> isa nullable TString */
+cltype7 = type_nullable_parser_nodes__TString.color;
+idtype8 = type_nullable_parser_nodes__TString.id;
+if(var_tstringnode3 == NULL) {
+var6 = 1;
+} else {
+if(cltype7 >= var_tstringnode3->type->table_size) {
+var6 = 0;
+} else {
+var6 = var_tstringnode3->type->type_table[cltype7] == idtype8;
+}
+}
+if (unlikely(!var6)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5110);
+show_backtrace(1);
+}
+var9 = NEW_parser_nodes__AInLanguage(&type_parser_nodes__AInLanguage);
+{
+parser_prod__AInLanguage__init_ainlanguage(var9, var_tkwinnode2, var_tstringnode3); /* Direct call parser_prod#AInLanguage#init_ainlanguage on <var9:AInLanguage>*/
+}
+var_pinlanguagenode1 = var9;
+var_node_list = var_pinlanguagenode1;
+var10 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction143> */
+{
+var11 = parser_work__Parser__go_to(var_p, var10);
+}
+{
+parser_work__Parser__push(var_p, var11, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction143#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction143__action(val* self, val* p0) {
+parser__ReduceAction143__action(self, p0); /* Direct call parser#ReduceAction143#action on <self:Object(ReduceAction143)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction144#action for (self: ReduceAction144, Parser) */
+void parser__ReduceAction144__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_texterncodesegmentnode3 /* var texterncodesegmentnode3: nullable Object */;
+short int var2 /* : Bool */;
+int cltype;
+int idtype;
+val* var3 /* : AExternCodeBlock */;
+val* var4 /* : null */;
+val* var_pexterncodeblocknode1 /* var pexterncodeblocknode1: nullable AExternCodeBlock */;
+long var5 /* : Int */;
+long var6 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_texterncodesegmentnode3 = var_nodearraylist1;
+/* <var_texterncodesegmentnode3:nullable Object> isa nullable TExternCodeSegment */
+cltype = type_nullable_parser_nodes__TExternCodeSegment.color;
+idtype = type_nullable_parser_nodes__TExternCodeSegment.id;
+if(var_texterncodesegmentnode3 == NULL) {
+var2 = 1;
+} else {
+if(cltype >= var_texterncodesegmentnode3->type->table_size) {
+var2 = 0;
+} else {
+var2 = var_texterncodesegmentnode3->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var2)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5126);
+show_backtrace(1);
+}
+var3 = NEW_parser_nodes__AExternCodeBlock(&type_parser_nodes__AExternCodeBlock);
+var4 = NULL;
+{
+parser_prod__AExternCodeBlock__init_aexterncodeblock(var3, var4, var_texterncodesegmentnode3); /* Direct call parser_prod#AExternCodeBlock#init_aexterncodeblock on <var3:AExternCodeBlock>*/
+}
+var_pexterncodeblocknode1 = var3;
+var_node_list = var_pexterncodeblocknode1;
+var5 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction144> */
+{
+var6 = parser_work__Parser__go_to(var_p, var5);
+}
+{
+parser_work__Parser__push(var_p, var6, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction144#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction144__action(val* self, val* p0) {
+parser__ReduceAction144__action(self, p0); /* Direct call parser#ReduceAction144#action on <self:Object(ReduceAction144)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction145#action for (self: ReduceAction145, Parser) */
+void parser__ReduceAction145__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
+val* var2 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pinlanguagenode2 /* var pinlanguagenode2: nullable Object */;
+short int var3 /* : Bool */;
+int cltype;
+int idtype;
+val* var_texterncodesegmentnode3 /* var texterncodesegmentnode3: nullable Object */;
+short int var4 /* : Bool */;
+int cltype5;
+int idtype6;
+val* var7 /* : AExternCodeBlock */;
+val* var_pexterncodeblocknode1 /* var pexterncodeblocknode1: nullable AExternCodeBlock */;
+long var8 /* : Int */;
+long var9 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist2 = var1;
+{
+var2 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var2;
+var_pinlanguagenode2 = var_nodearraylist1;
+/* <var_pinlanguagenode2:nullable Object> isa nullable AInLanguage */
+cltype = type_nullable_parser_nodes__AInLanguage.color;
+idtype = type_nullable_parser_nodes__AInLanguage.id;
+if(var_pinlanguagenode2 == NULL) {
+var3 = 1;
+} else {
+if(cltype >= var_pinlanguagenode2->type->table_size) {
+var3 = 0;
+} else {
+var3 = var_pinlanguagenode2->type->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var3)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5143);
+show_backtrace(1);
+}
+var_texterncodesegmentnode3 = var_nodearraylist2;
+/* <var_texterncodesegmentnode3:nullable Object> isa nullable TExternCodeSegment */
+cltype5 = type_nullable_parser_nodes__TExternCodeSegment.color;
+idtype6 = type_nullable_parser_nodes__TExternCodeSegment.id;
+if(var_texterncodesegmentnode3 == NULL) {
+var4 = 1;
+} else {
+if(cltype5 >= var_texterncodesegmentnode3->type->table_size) {
+var4 = 0;
+} else {
+var4 = var_texterncodesegmentnode3->type->type_table[cltype5] == idtype6;
+}
+}
+if (unlikely(!var4)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", "parser/parser.nit", 5145);
+show_backtrace(1);
+}
+var7 = NEW_parser_nodes__AExternCodeBlock(&type_parser_nodes__AExternCodeBlock);
+{
+parser_prod__AExternCodeBlock__init_aexterncodeblock(var7, var_pinlanguagenode2, var_texterncodesegmentnode3); /* Direct call parser_prod#AExternCodeBlock#init_aexterncodeblock on <var7:AExternCodeBlock>*/
+}
+var_pexterncodeblocknode1 = var7;
+var_node_list = var_pexterncodeblocknode1;
+var8 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction145> */
+{
+var9 = parser_work__Parser__go_to(var_p, var8);
+}
+{
+parser_work__Parser__push(var_p, var9, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction145#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction145__action(val* self, val* p0) {
+parser__ReduceAction145__action(self, p0); /* Direct call parser#ReduceAction145#action on <self:Object(ReduceAction145)>*/
+RET_LABEL:;
+}
+/* method parser#ReduceAction146#action for (self: ReduceAction146, Parser) */
+void parser__ReduceAction146__action(val* self, val* p0) {
+val* var_p /* var p: Parser */;
+val* var /* : null */;
+val* var_node_list /* var node_list: nullable Object */;
+val* var1 /* : nullable Object */;
+val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
+val* var_pexterncodeblocknode1 /* var pexterncodeblocknode1: nullable Object */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+var_p = p0;
+var = NULL;
+var_node_list = var;
+{
+var1 = parser_work__Parser__pop(var_p);
+}
+var_nodearraylist1 = var1;
+var_pexterncodeblocknode1 = var_nodearraylist1;
+var_node_list = var_pexterncodeblocknode1;
+var2 = self->attrs[COLOR_parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction146> */
+{
+var3 = parser_work__Parser__go_to(var_p, var2);
+}
+{
+parser_work__Parser__push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+}
+RET_LABEL:;
+}
+/* method parser#ReduceAction146#action for (self: Object, Parser) */
+void VIRTUAL_parser__ReduceAction146__action(val* self, val* p0) {
+parser__ReduceAction146__action(self, p0); /* Direct call parser#ReduceAction146#action on <self:Object(ReduceAction146)>*/
 RET_LABEL:;
 }

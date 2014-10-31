@@ -5,7 +5,7 @@ long var /* : Int */;
 val* var_command /* var command: String */;
 char* var1 /* : NativeString */;
 long var2 /* : Int */;
-long var4 /* : Int */;
+long var4 /* : Int for extern */;
 var_command = p0;
 {
 var1 = string__FlatString__to_cstring(var_command);
@@ -35,7 +35,7 @@ return var;
 /* method exec#NativeString#system for (self: NativeString): Int */
 long exec__NativeString__system(char* self) {
 long var /* : Int */;
-long var1 /* : Int */;
+long var1 /* : Int for extern */;
 var1 = string_NativeString_NativeString_system_0(self);
 var = var1;
 goto RET_LABEL;
@@ -46,10 +46,10 @@ return var;
 long VIRTUAL_exec__NativeString__system(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
-long var3 /* : Int */;
+long var3 /* : Int for extern */;
 char* var4 /* : NativeString */;
 { /* Inline exec#NativeString#system (self) on <self:Object(NativeString)> */
-var4 = ((struct instance_kernel__Pointer*)self)->value; /* autounbox from Object to NativeString */;
+var4 = ((struct instance_string__NativeString*)self)->value; /* autounbox from Object to NativeString */;
 var3 = string_NativeString_NativeString_system_0(var4);
 var1 = var3;
 goto RET_LABEL2;
