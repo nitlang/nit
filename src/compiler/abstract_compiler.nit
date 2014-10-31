@@ -38,6 +38,10 @@ redef class ToolContext
 	var opt_cc_path = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
+	# --max-c-lines
+	var opt_max_c_lines = new OptionInt("Maximum number of lines in generated C files. Use 0 for unlimited", 10000, "--max-c-lines")
+	# --group-c-files
+	var opt_group_c_files = new OptionBool("Group all generated code in the same series of files", "--group-c-files")
 	# --compile-dir
 	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
@@ -76,6 +80,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
+		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
 	end
 
 	redef fun process_options(args)
@@ -154,17 +159,20 @@ class MakefileToolchain
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
+	# The clib directory of Nit
+	# Used to found some common runtime
+	var clib: String is noinit
+
 	protected fun gather_cc_paths
 	do
 		# Look for the the Nit clib path
 		var path_env = toolcontext.nit_dir
 		if path_env != null then
 			var libname = "{path_env}/clib"
-			if libname.file_exists then cc_paths.add(libname)
-		end
-
-		if cc_paths.is_empty then
-			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+			if not libname.file_exists then
+				toolcontext.fatal_error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+			end
+			clib = libname
 		end
 
 		# Add user defined cc_paths
@@ -223,8 +231,8 @@ class MakefileToolchain
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
-		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
-		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
+		compiler.files_to_copy.add "{clib}/gc_chooser.c"
+		compiler.files_to_copy.add "{clib}/gc_chooser.h"
 
 		# FFI
 		for m in compiler.mainmodule.in_importation.greaters do
@@ -251,12 +259,42 @@ class MakefileToolchain
 		end
 		h.close
 
+		var max_c_lines = toolcontext.opt_max_c_lines.value
 		for f in compiler.files do
 			var i = 0
-			var hfile: nullable OFStream = null
 			var count = 0
+			var file: nullable OFStream = null
+			for vis in f.writers do
+				if vis == compiler.header then continue
+				var total_lines = vis.lines.length + vis.decl_lines.length
+				if total_lines == 0 then continue
+				count += total_lines
+				if file == null or (count > max_c_lines and max_c_lines > 0) then
+					i += 1
+					if file != null then file.close
+					var cfilename = "{f.name}.{i}.c"
+					var cfilepath = "{compile_dir}/{cfilename}"
+					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
+					cfiles.add(cfilename)
+					file = new OFStream.open(cfilepath)
+					file.write "#include \"{f.name}.0.h\"\n"
+					count = total_lines
+				end
+				for l in vis.decl_lines do
+					file.write l
+					file.write "\n"
+				end
+				for l in vis.lines do
+					file.write l
+					file.write "\n"
+				end
+			end
+			if file == null then continue
+			file.close
+
 			var cfilename = "{f.name}.0.h"
 			var cfilepath = "{compile_dir}/{cfilename}"
+			var hfile: nullable OFStream = null
 			hfile = new OFStream.open(cfilepath)
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
@@ -273,33 +311,6 @@ class MakefileToolchain
 				hfile.write "\n"
 			end
 			hfile.close
-			var file: nullable OFStream = null
-			for vis in f.writers do
-				if vis == compiler.header then continue
-				var total_lines = vis.lines.length + vis.decl_lines.length
-				if total_lines == 0 then continue
-				count += total_lines
-				if file == null or count > 10000  then
-					i += 1
-					if file != null then file.close
-					cfilename = "{f.name}.{i}.c"
-					cfilepath = "{compile_dir}/{cfilename}"
-					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
-					cfiles.add(cfilename)
-					file = new OFStream.open(cfilepath)
-					file.write "#include \"{f.name}.0.h\"\n"
-					count = total_lines
-				end
-				for l in vis.decl_lines do
-					file.write l
-					file.write "\n"
-				end
-				for l in vis.lines do
-					file.write l
-					file.write "\n"
-				end
-			end
-			if file != null then file.close
 		end
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
@@ -336,8 +347,7 @@ class MakefileToolchain
 
 		var outname = outfile(mainmodule)
 
-		var orig_dir = compile_dir.relpath(".")
-		var outpath = orig_dir.join_path(outname).simplify_path
+		var outpath = compile_dir.relpath(outname)
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
@@ -419,6 +429,8 @@ class MakefileToolchain
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
+
+		makepath.file_copy_to "{compile_dir}/Makefile"
 	end
 
 	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
@@ -472,6 +484,13 @@ abstract class AbstractCompiler
 	# The point is to avoid contamination between must-be-compiled-separately files
 	fun new_file(name: String): CodeFile
 	do
+		if modelbuilder.toolcontext.opt_group_c_files.value then
+			if self.files.is_empty then
+				var f = new CodeFile(mainmodule.name)
+				self.files.add(f)
+			end
+			return self.files.first
+		end
 		var f = new CodeFile(name)
 		self.files.add(f)
 		return f
