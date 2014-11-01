@@ -94,8 +94,6 @@ class IFStream
 		end
 	end
 
-	private init do end
-	private init without_file do end
 end
 
 # File output stream
@@ -142,9 +140,6 @@ class OFStream
 		self.path = path
 		_is_writable = true
 	end
-	
-	private init do end
-	private init without_file do end
 end
 
 ###############################################################################
@@ -152,7 +147,7 @@ end
 class Stdin
 	super IFStream
 
-	private init do
+	init do
 		_file = new NativeFile.native_stdin
 		path = "/dev/stdin"
 		prepare_buffer(1)
@@ -163,7 +158,7 @@ end
 
 class Stdout
 	super OFStream
-	private init do
+	init do
 		_file = new NativeFile.native_stdout
 		path = "/dev/stdout"
 		_is_writable = true
@@ -172,7 +167,7 @@ end
 
 class Stderr
 	super OFStream
-	private init do
+	init do
 		_file = new NativeFile.native_stderr
 		path = "/dev/stderr"
 		_is_writable = true

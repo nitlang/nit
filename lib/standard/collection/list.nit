@@ -289,21 +289,19 @@ class ListIterator[E]
 	end
 
 	# Build a new iterator for `list`.
-	private init(list: List[E])
+	init
 	do
-		_list = list
-		_node = list._head
-		_index = 0
+		_node = _list._head
 	end
 
 	# The current list
 	private var list: List[E]
 
 	# The current node of the list
-	private var node: nullable ListNode[E]
+	private var node: nullable ListNode[E] = null
 
 	# The index of the current node
-	redef var index
+	redef var index = 0
 
 	# Remove the current item
 	fun delete
@@ -327,9 +325,9 @@ private class ListReverseIterator[E]
 		_index -= 1
 	end
 
-	private init(list: List[E])
+	init
 	do
-		_list = list
+		var list = _list
 		_node = list._tail
 		_index = list.length
 	end
@@ -338,14 +336,10 @@ end
 # Linked nodes that constitute a linked list.
 private class ListNode[E]
 	super Container[E]
-	init(i: E)
-	do 
-		item = i
-	end
 
 	# The next node.
-	var next: nullable ListNode[E]
+	var next: nullable ListNode[E] = null
 
 	# The previous node.
-	var prev: nullable ListNode[E]
+	var prev: nullable ListNode[E] = null
 end

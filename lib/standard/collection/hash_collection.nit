@@ -197,10 +197,6 @@ private abstract class HashNode[K: Object]
 	private var prev_item: nullable N = null
 	private var prev_in_bucklet: nullable N = null
 	private var next_in_bucklet: nullable N = null
-	init(k: K)
-	do
-		_key = k
-	end
 end
 
 # A map implemented with a hash table.
@@ -346,12 +342,6 @@ private class HashMapNode[K: Object, V]
 	super HashNode[K]
 	redef type N: HashMapNode[K, V]
 	private var value: V
-
-	init(k: K, v: V)
-	do
-		super(k)
-		_value = v
-	end
 end
 
 class HashMapIterator[K: Object, V]
@@ -386,12 +376,12 @@ class HashMapIterator[K: Object, V]
 	private var map: HashMap[K, V]
 
 	# The current node
-	private var node: nullable HashMapNode[K, V]
+	private var node: nullable HashMapNode[K, V] = null
 
-	init(map: HashMap[K, V])
+	init
 	do
 		_map = map
-		_node = map._first_item
+		_node = _map._first_item
 	end
 end
 
@@ -452,11 +442,6 @@ end
 private class HashSetNode[E: Object]
 	super HashNode[E]
 	redef type N: HashSetNode[E]
-
-	init(e: E)
-	do
-		_key = e
-	end
 end
 
 private class HashSetIterator[E: Object]
@@ -479,12 +464,11 @@ private class HashSetIterator[E: Object]
 	private var set: HashSet[E]
 
 	# The position in the internal map storage
-	private var node: nullable HashSetNode[E]
+	private var node: nullable HashSetNode[E] = null
 
-	init(set: HashSet[E])
+	init
 	do
-		_set = set
-		_node = set._first_item
+		_node = _set._first_item
 	end
 end
 
