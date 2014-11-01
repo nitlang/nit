@@ -3498,8 +3498,8 @@ abstract_compiler__AbstractCompiler__build_c_to_nit_bindings(var_compiler); /* D
 if (varonce26) {
 var27 = varonce26;
 } else {
-var28 = "-DWITH_LIBGC";
-var29 = 12;
+var28 = "-DWITH_LIBGC `pkg-config --cflags bdw-gc` ";
+var29 = 42;
 var30 = string__NativeString__to_s_with_length(var28, var29);
 var27 = var30;
 varonce26 = var27;
@@ -5985,8 +5985,8 @@ varonce65 = var66;
 if (varonce70) {
 var71 = varonce70;
 } else {
-var72 = "\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc ";
-var73 = 33;
+var72 = "\nLDFLAGS ?= \nLDLIBS  ?= -lm `pkg-config --libs bdw-gc`";
+var73 = 55;
 var74 = string__NativeString__to_s_with_length(var72, var73);
 var71 = var74;
 varonce70 = var71;

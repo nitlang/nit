@@ -225,7 +225,7 @@ class MakefileToolchain
 	do
 		var platform = compiler.mainmodule.target_platform
 		if self.toolcontext.opt_stacktrace.value == "nitstack" and (platform == null or platform.supports_libunwind) then compiler.build_c_to_nit_bindings
-		var cc_opt_with_libgc = "-DWITH_LIBGC"
+		var cc_opt_with_libgc = "-DWITH_LIBGC `pkg-config --cflags bdw-gc`"
 		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
 
 		# Add gc_choser.h to aditionnal bodies
@@ -363,7 +363,7 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm `pkg-config --libs bdw-gc` {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
 		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
