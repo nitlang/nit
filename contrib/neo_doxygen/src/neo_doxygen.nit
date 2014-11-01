@@ -39,6 +39,7 @@ class NeoDoxygenJob
 	# * `dir`: Doxygen XML output directory path.
 	# * `source`: The language-specific logics to use.
 	fun load_project(name: String, dir: String, source: SourceLanguage) do
+		check_name name
 		model = new ProjectGraph(name)
 		# TODO Let the user select the language.
 		var reader = new CompoundFileReader(model, source)
@@ -60,6 +61,22 @@ class NeoDoxygenJob
 			end
 			if directories.length <= 0 then break
 			dir = directories.pop
+		end
+	end
+
+	# Check the project’s name.
+	private fun check_name(name: String) do
+		assert name_valid: not name.chars.first.is_upper else
+			sys.stderr.write("{sys.program_name}: The project’s name must not" +
+					" begin with an upper case letter. Got `{name}`.\n")
+		end
+		var query = new CypherQuery.from_string("match n where \{name\} in labels(n) return count(n)")
+		query.params["name"] = name
+		var data = client.cypher(query).as(JsonObject)["data"]
+		var result = data.as(JsonArray).first.as(JsonArray).first.as(Int)
+		assert name_unused: result == 0 else
+			sys.stderr.write("{sys.program_name}: The label `{name}` is already" +
+			" used in the specified graph.\n")
 		end
 	end
 
