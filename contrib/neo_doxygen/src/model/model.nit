@@ -16,6 +16,7 @@
 module model
 
 import location
+import linked_text
 import graph
 import class_compound
 import module_compound

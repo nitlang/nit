@@ -220,3 +220,53 @@ class TextListener
 
 	redef fun to_s do return buffer.to_s
 end
+
+# Processes a content of type `linkedTextType`.
+abstract class LinkedTextListener[T: LinkedText]
+	super TextListener
+
+	# The read text.
+	var linked_text: T is noinit
+
+	private var refid = ""
+
+	# Create a new instance of `T`.
+	protected fun create_linked_text: T is abstract
+
+	redef fun listen_until(uri: String, local_name: String) do
+		linked_text = create_linked_text
+		refid = ""
+		super
+	end
+
+	redef fun start_dox_element(local_name: String, atts: Attributes) do
+		super
+		push_part
+		if "ref" == local_name then refid = get_required(atts, "refid")
+	end
+
+	redef fun end_dox_element(local_name: String) do
+		super
+		push_part
+		if "ref" == local_name then refid = ""
+	end
+
+	private fun push_part do
+		var s = flush_buffer
+
+		if not s.is_empty then
+			linked_text.add_part(s, refid)
+		end
+	end
+
+	redef fun to_s do return linked_text.to_s
+end
+
+# Processes the content of a `<type>` element.
+class TypeListener
+	super LinkedTextListener[RawType]
+
+	private var raw_type: RawType is noinit
+
+	redef fun create_linked_text do return new RawType(graph)
+end

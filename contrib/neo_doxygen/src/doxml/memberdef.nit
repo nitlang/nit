@@ -23,9 +23,11 @@ class MemberDefListener
 
 	# The current member.
 	var member: Member is writable, noinit
+	private var type_listener: TypeListener is noinit
 
 	init do
 		super
+		type_listener = new TypeListener(reader, self)
 	end
 
 	redef fun entity do return member
@@ -36,8 +38,7 @@ class MemberDefListener
 		else if "reimplements" == local_name then
 			member.reimplement(get_required(atts, "refid"))
 		else if "type" == local_name then
-			text.listen_until(dox_uri, local_name)
-			# TODO links
+			type_listener.listen_until(dox_uri, local_name)
 		else
 			super
 		end
@@ -49,7 +50,7 @@ class MemberDefListener
 		else if "name" == local_name then
 			member.name = text.to_s
 		else if "type" == local_name then
-			# TODO
+			member.static_type = type_listener.linked_text
 		else
 			super
 		end
