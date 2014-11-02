@@ -24,6 +24,9 @@ class CompoundFileReader
 	# The project graph.
 	var model: ProjectGraph
 
+	# The language-specific strategies to use.
+	redef var source_language: SourceLanguage
+
 	private var reader: XMLReader = new XophonReader
 	private var compounddef: CompoundDefListener is noinit
 	private var noop: NoopListener is noinit

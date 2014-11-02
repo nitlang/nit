@@ -50,7 +50,7 @@ class MemberDefListener
 		else if "name" == local_name then
 			member.name = text.to_s
 		else if "type" == local_name then
-			member.static_type = type_listener.linked_text
+			source_language.apply_member_type(member, type_listener.linked_text)
 		else
 			super
 		end
