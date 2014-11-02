@@ -74,8 +74,8 @@ saferun()
 	if test -n "$TIME"; then
 		$TIME -o "$o" $a $TIMEOUT "$@"
 	else
-		$TIMEOUT "$@"
 		if test -n "$a"; then echo 0 >> "$o"; else echo 0 > "$o"; fi
+		$TIMEOUT "$@"
 	fi
 }
 
