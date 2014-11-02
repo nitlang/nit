@@ -16,6 +16,7 @@
 module model::class_compound
 
 import graph
+import type_entity
 
 # A class.
 class ClassCompound
@@ -31,13 +32,16 @@ class ClassCompound
 
 	init do
 		super
-		class_type = new ClassType(graph, self)
+		class_type = new ClassType(graph)
+		class_type.class_compound = self
 		class_def = new ClassDef(graph, self)
 		self.labels.add("MClass")
-		self["arity"] = 0 # TODO
 		kind = "class"
 		visibility = "public"
 	end
+
+	# Return the number of type parameters.
+	fun arity: Int do return class_type.arity
 
 	redef fun name=(name: String) do
 		super
@@ -80,6 +84,14 @@ class ClassCompound
 	redef fun put_edges do
 		super
 		graph.add_edge(self, "CLASSTYPE", class_type)
+		if arity > 0 then
+			var names = new JsonArray
+
+			for p in class_type.arguments do
+				names.add(p.name)
+			end
+			self["parameter_names"] = names
+		end
 	end
 end
 
@@ -114,17 +126,61 @@ end
 
 # A type defined by a class.
 class ClassType
-	super Entity
+	super TypeEntity
 
-	var class_compound: ClassCompound
+	# The associated class.
+	#
+	# You may use this attribute or `class_compound_id` to specify the class.
+	var class_compound: nullable ClassCompound = null is writable
+
+	# The `model_id` of the associated class.
+	#
+	# You may use this attribute or `class_compound` to specify the class.
+	var class_compound_id: String = "" is writable
+
+	var arguments = new Array[TypeEntity]
 
 	init do
 		super
-		self.labels.add("MType")
 		self.labels.add("MClassType")
 	end
 
+	# Return the number of arguments.
+	fun arity: Int do return 0 # TODO
+
+	fun is_generic: Bool do return arity > 0
+
+	redef fun put_in_graph do
+		super
+		if is_generic then
+			self.labels.add("MGenericType")
+		else
+			var i = self.labels.index_of("MGenericType")
+			if i >= 0 then self.labels.remove_at(i)
+		end
+	end
+
 	redef fun put_edges do
-		graph.add_edge(self, "CLASS", class_compound)
+		var cls = class_compound
+
+		if cls == null and class_compound_id != "" then
+			cls = graph.by_id[class_compound_id].as(ClassCompound)
+		end
+		assert cls != null
+
+		super
+		graph.add_edge(self, "CLASS", cls)
+		assert cls.arity == self.arity
+		for i in [0..arguments.length[ do
+			var a = arguments[i]
+			if cls.class_type != self then
+				a.name = cls.class_type.arguments[i].name
+			end
+			if a isa TypeParameter then
+				a.rank = i
+				graph.add_edge(a, "CLASS", cls)
+			end
+			graph.add_edge(self, "ARGUMENT", a)
+		end
 	end
 end
