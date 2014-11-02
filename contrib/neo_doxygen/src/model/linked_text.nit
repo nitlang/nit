@@ -146,7 +146,19 @@ abstract class Link
 	# * `refid` : `model_id` of the linked entity.
 	var refid: String
 
+	init do
+		super
+		self["rank"] = -1
+	end
+
 	redef fun put_edges do
 		graph.add_edge(self, "TARGET", graph.by_id[refid])
+	end
+
+	# Specify the rank (index) of the parameter in the signature.
+	#
+	# Called by `LinkedText.put_edges`.
+	private fun rank=(rank: Int) do
+		self["rank"] = rank
 	end
 end

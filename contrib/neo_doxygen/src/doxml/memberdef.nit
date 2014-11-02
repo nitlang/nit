@@ -23,11 +23,14 @@ class MemberDefListener
 
 	# The current member.
 	var member: Member is writable, noinit
+
 	private var type_listener: TypeListener is noinit
+	private var param_listener: MemberParamListener is noinit
 
 	init do
 		super
 		type_listener = new TypeListener(reader, self)
+		param_listener = new MemberParamListener(reader, self)
 	end
 
 	redef fun entity do return member
@@ -39,20 +42,29 @@ class MemberDefListener
 			member.reimplement(get_required(atts, "refid"))
 		else if "type" == local_name then
 			type_listener.listen_until(dox_uri, local_name)
+		else if "param" == local_name then
+			param_listener.listen_until(dox_uri, local_name)
 		else
 			super
 		end
 	end
 
 	redef fun end_dox_element(local_name: String) do
-		if "memberdef" == local_name then
-			member.put_in_graph
-		else if "name" == local_name then
+		if "name" == local_name then
 			member.name = text.to_s
 		else if "type" == local_name then
 			source_language.apply_member_type(member, type_listener.linked_text)
+		else if "param" == local_name then
+			member.add_parameter(param_listener.parameter)
 		else
 			super
 		end
 	end
+end
+
+# Processes the content of a `<param>` element in a `<memberdef>` element.
+class MemberParamListener
+	super ParamListener[MemberParameter]
+
+	redef fun create_parameter do return new MemberParameter(graph)
 end

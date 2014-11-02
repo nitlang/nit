@@ -29,6 +29,15 @@ abstract class SourceLanguage
 		end
 	end
 
+	# Apply the information deduced from `type_text` to `parameter`.
+	#
+	# `type_text` is the content of the `<type>` element.
+	fun apply_parameter_type(parameter: Parameter, type_text: RawType) do
+		if type_text["text"] != null then
+			parameter.static_type = type_text
+		end
+	end
+
 	# Extract the specified keyword at the beginning of the specified text.
 	#
 	# If the keyword is at the beginning of the specified text, return `true`
@@ -85,6 +94,57 @@ abstract class SourceLanguage
 		end
 		return found
 	end
+
+	# Extract the specified suffix in the specified text.
+	#
+	# If the suffix is at the end of the specified text, return `true`
+	# and remove the suffix. Else, return false.
+	#
+	# Used to extract stuff like `...` that Doxygen puts in the type.
+	#
+	#     class DummySource
+	#     	super JavaSource
+	#     #
+	#     	fun test(text: LinkedText, s: String): Bool do
+	#     		return extract_suffix(text, s)
+	#     	end
+	#     end
+	#     #
+	#     var text = new RawType(new ProjectGraph(""))
+	#     var dummy = new DummySource
+	#     var res: Bool
+	#     #
+	#     text.add_part("Object...+++", "")
+	#     res = dummy.test(text, "...")
+	#     assert not res
+	#     res = dummy.test(text, "+++")
+	#     assert res
+	#     assert "Object..." == text["text"].as(JsonArray).first
+	#     res = dummy.test(text, "...")
+	#     assert res
+	#     assert "Object" == text["text"].as(JsonArray).first
+	protected fun extract_suffix(text: LinkedText, suffix: String): Bool do
+		var text_array = text["text"]
+		if text_array == null then return false
+		assert text_array isa JsonArray
+		if text_array.is_empty then return false
+
+		var content = text_array.last.as(String).r_trim
+		var link = text.links.first
+		var found = false
+
+		if link == null and content.has_suffix(suffix) then
+			content = content.substring(0, content.length - suffix.length).r_trim
+			if "" == content then
+				text.pop_part
+			else
+				text.set_part(0, content, "")
+			end
+			return true
+		else
+			return false
+		end
+	end
 end
 
 # Importation logics for Java.
@@ -99,6 +159,15 @@ class JavaSource
 		# TODO final
 		# TODO void
 		# TODO Avoid using `RawType` when possible. Only use `RawType` as a fallback.
+		super
+	end
+
+	redef fun apply_parameter_type(parmeter, type_text) do
+		# We assume that Doxygen do not put annotations in the type (it seems to
+		# be the case).
+		# TODO final
+		# TODO Avoid using `RawType` when possible. Only use `RawType` as a fallback.
+		parmeter.is_vararg = extract_suffix(type_text, "...")
 		super
 	end
 end

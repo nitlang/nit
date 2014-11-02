@@ -75,3 +75,48 @@ abstract class EntityDefListener
 		return location
 	end
 end
+
+# Processes the content of a `<param>` element.
+abstract class ParamListener[T: Parameter]
+	super EntityDefListener
+
+	# The current parameter.
+	var parameter: T is noinit
+
+	private var type_listener: TypeListener is noinit
+
+	init do
+		super
+		type_listener = new TypeListener(reader, self)
+	end
+
+	redef fun entity do return parameter
+
+	redef fun listen_until(uri, local_name) do
+		super
+		parameter = create_parameter
+	end
+
+	# Create a new parameter.
+	protected fun create_parameter: T is abstract
+
+	redef fun start_dox_element(local_name: String, atts: Attributes) do
+		if "declname" == local_name then
+			text.listen_until(dox_uri, local_name)
+		else if "type" == local_name then
+			type_listener.listen_until(dox_uri, local_name)
+		else
+			super
+		end
+	end
+
+	redef fun end_dox_element(local_name: String) do
+		if "declname" == local_name then
+			parameter.name = text.to_s
+		else if "type" == local_name then
+			source_language.apply_parameter_type(parameter, type_listener.linked_text)
+		else
+			super
+		end
+	end
+end

@@ -113,9 +113,7 @@ class CompoundDefListener
 	end
 
 	redef fun end_dox_element(local_name: String) do
-		if local_name == "compounddef" then
-			compound.put_in_graph
-		else if local_name == "compoundname" then
+		if local_name == "compoundname" then
 			compound.full_name = text.to_s
 		else if local_name == "innerclass" then
 			compound.declare_class(refid, text.to_s)
