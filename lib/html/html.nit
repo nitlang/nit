@@ -60,7 +60,7 @@ class HTMLPage
 
 	# Add a raw html string
 	# add_html("<a href='#top'>top</a>")
-	fun add_html(html: String) do current.add(new HTMLRaw(html))
+	fun add_html(html: String) do current.add(new HTMLRaw("", html))
 
 	# Open a html tag
 	# open("ul")
@@ -89,8 +89,7 @@ class HTMLTag
 
 	# HTML tagname: 'div' for <div></div>
 	var tag: String
-	init(tag: String) do
-		self.tag = tag
+	init do
 		self.is_void = (once ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]).has(tag)
 	end
 
@@ -98,7 +97,7 @@ class HTMLTag
 	#
 	#     assert (new HTMLTag("img")).is_void    == true
 	#     assert (new HTMLTag("p")).is_void      == false
-	var is_void: Bool
+	var is_void: Bool is noinit
 
 	init with_attrs(tag: String, attrs: Map[String, String]) do
 		self.tag = tag
@@ -237,7 +236,7 @@ class HTMLTag
 	#     assert p.write_to_string      ==  "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
-		add(new HTMLRaw(txt.html_escape))
+		add(new HTMLRaw("", txt.html_escape))
 		return self
 	end
 
@@ -250,7 +249,7 @@ class HTMLTag
 	#
 	# Note: the HTML in insered as it, no verification is done.
 	fun add_raw_html(txt: String): HTMLTag do
-		add(new HTMLRaw(txt))
+		add(new HTMLRaw("", txt))
 		return self
 	end
 
@@ -327,6 +326,5 @@ private class HTMLRaw
 	super HTMLTag
 
 	private var content: String
-	init(content: String) do self.content = content
 	redef fun render_in(res) do res.add content
 end
