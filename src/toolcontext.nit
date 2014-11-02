@@ -422,6 +422,13 @@ The Nit language documentation and the source code of its tools and libraries ma
 			if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
 		end
 
+		# search in the PATH
+		var ps = "PATH".environ.split(":")
+		for p in ps do
+			res = p/".."
+			if res.file_exists and "{res}/src/nit.nit".file_exists then return res.simplify_path
+		end
+
 		return null
 	end
 end
