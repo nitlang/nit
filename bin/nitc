@@ -1,4 +1,3 @@
 #!/bin/bash
-self=`readlink /proc/$$/fd/255`
-dir=`dirname "$self"`
+dir=`dirname "$BASH_SOURCE"`
 exec "$dir/nitg" "$@"
