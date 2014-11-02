@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-all.sh directory
+# ./gen-all.sh <source_language> <directory>
 #
 # Document all projects in the specified directory.
 #
@@ -26,11 +26,11 @@
 NEO_DOXYGEN="${PWD}/bin/neo_doxygen"
 NX="${PWD}/../../bin/nx"
 
-for dir in "$1"/*; do
+for dir in "$2"/*; do
 	if [ -d "$dir" ]; then
 		if [ -f "$dir/.nx_config" ]; then
 			# Note: gen-one.sh already prints errors.
-			./gen-one.sh "$dir" || exit
+			./gen-one.sh "$1" "$dir" || exit
 		fi
 	fi
 done

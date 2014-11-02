@@ -147,6 +147,13 @@ abstract class SourceLanguage
 	end
 end
 
+# The default importation logics.
+#
+# Do nothing special.
+class DefaultSource
+	super SourceLanguage
+end
+
 # Importation logics for Java.
 class JavaSource
 	super SourceLanguage

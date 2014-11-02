@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-one.sh directory
+# ./gen-one.sh <source_language> <directory>
 #
 # Document the project in the specified directory.
 #
@@ -25,13 +25,13 @@
 
 NEO_DOXYGEN="${PWD}/bin/neo_doxygen"
 NX="${PWD}/../../bin/nx"
-dir=$1
+dir=$2
 
 . sh-lib/errors.sh
 
 echo "$0: Documenting \"${dir##*/}\"..."
 pushd "$dir"
-try "$NEO_DOXYGEN" "${dir##*/}" "$dir/doxygen/xml" http://localhost:7474 > neo_doxygen.out
+try "$NEO_DOXYGEN" --src-lang "$1" --dest http://localhost:7474 -- "${dir##*/}" "$dir/doxygen/xml" > neo_doxygen.out
 try echo "$0: [done] neo_doxygen"
 try "$NX" neo doc "${dir##*/}"
 try echo "$0: [done] nx"
