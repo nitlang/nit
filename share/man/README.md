@@ -13,9 +13,9 @@ man -l man1/nitg.1
 ~~~
 
 For global access, one can set the `MANPATH` environment variable to this `man` directory (not the `man1` subdirectory).
-Do not forget to append a trailing column (`:`) to keep existing manpages accessible.
+Do not forget to append `$MANPATH` to keep existing manpages accessible.
 
 ~~~
-export MANPATH=/path/to/nit/share/man:
+export MANPATH=/path/to/nit/share/man:$MANPATH
 man nitg
 ~~~
