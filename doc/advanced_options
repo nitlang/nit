@@ -1,5 +1,0 @@
-* GC **************************************************************************
-
-Nit programs can dynamically select a GC at runtime. Just set NIT_GC_OPTION envvar.
-Set it to "help" to list available GC at the begin of the program.
-
