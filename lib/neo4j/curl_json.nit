@@ -50,6 +50,7 @@ abstract class JsonCurlRequest
 		headers = new HeaderMap
 		headers["Accept"] = "application/json; charset=UTF-8"
 		headers["Transfer-Encoding"] = "chunked"
+		headers["X-Stream"] = "true"
 		if auth != null then
 			headers["Authorization"] = "token {auth.to_s}"
 		end
@@ -95,7 +96,7 @@ abstract class JsonCurlRequest
 		end
 
 		var err_hook = execute_hook
-	    if err_hook != null then return err_hook
+		if err_hook != null then return err_hook
 
 		var err_resp = perform
 		if err_resp != null then return err_resp

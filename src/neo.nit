@@ -213,27 +213,27 @@ class NeoModel
 
 	# Fill `model` using base pointed by `client`.
 	fun load(model: Model): Model do
-		toolcontext.info("Locate all mentities...", 1)
-		var nodes = client.nodes_with_label(model_name)
+		var nodes: Array[NeoNode]
 
-		toolcontext.info("Preload nodes...", 1)
-		pull_all_nodes(nodes)
-		toolcontext.info("Preload edges...", 1)
-		pull_all_edges(nodes)
-
-		toolcontext.info("Build model...", 1)
+		toolcontext.info("Loading project node...", 1)
 		nodes = client.nodes_with_labels([model_name, "MProject"])
 		for node in nodes do to_mproject(model, node)
+		toolcontext.info("Loading groups...", 1)
 		nodes = client.nodes_with_labels([model_name, "MGroup"])
 		for node in nodes do to_mgroup(model, node)
+		toolcontext.info("Loading modules...", 1)
 		nodes = client.nodes_with_labels([model_name, "MModule"])
 		for node in nodes do to_mmodule(model, node)
+		toolcontext.info("Loading classes...", 1)
 		nodes = client.nodes_with_labels([model_name, "MClass"])
 		for node in nodes do to_mclass(model, node)
+		toolcontext.info("Loading class definitions...", 1)
 		nodes = client.nodes_with_labels([model_name, "MClassDef"])
 		for node in nodes do to_mclassdef(model, node)
+		toolcontext.info("Loading properties...", 1)
 		nodes = client.nodes_with_labels([model_name, "MProperty"])
 		for node in nodes do to_mproperty(model, node)
+		toolcontext.info("Loading property definitions...", 1)
 		nodes = client.nodes_with_labels([model_name, "MPropDef"])
 		for node in nodes do to_mpropdef(model, node)
 		return model
@@ -257,52 +257,6 @@ class NeoModel
 		var i = 1
 		for nentity in neo_entities do
 			batch.save_entity(nentity)
-			if i == batch_max_size then
-				do_batch(batch)
-				sum += batch_max_size
-				toolcontext.info(" {sum * 100 / len}% done", 1)
-				batch = new NeoBatch(client)
-				i = 1
-			else
-				i += 1
-			end
-		end
-		do_batch(batch)
-	end
-
-	# Load content for all `nodes` from base.
-	#
-	# Content corresponds to properties and labels that are loaded in batch mode.
-	private fun pull_all_nodes(nodes: Collection[NeoNode]) do
-		var batch = new NeoBatch(client)
-		var len = nodes.length
-		var sum = 0
-		var i = 1
-		for node in nodes do
-			batch.load_node(node)
-			if i == batch_max_size then
-				do_batch(batch)
-				sum += batch_max_size
-				toolcontext.info(" {sum * 100 / len}% done", 1)
-				batch = new NeoBatch(client)
-				i = 1
-			else
-				i += 1
-			end
-		end
-		do_batch(batch)
-	end
-
-	# Load all edges from base linked to `nodes`.
-	#
-	# Edges are loaded in batch mode.
-	private fun pull_all_edges(nodes: Collection[NeoNode]) do
-		var batch = new NeoBatch(client)
-		var len = nodes.length
-		var sum = 0
-		var i = 1
-		for node in nodes do
-			batch.load_node_edges(node)
 			if i == batch_max_size then
 				do_batch(batch)
 				sum += batch_max_size
