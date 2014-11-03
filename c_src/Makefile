@@ -3,7 +3,7 @@ CXX = ccache c++
 CFLAGS = -g -O2 -Wno-unused-value -Wno-switch
 CINCL = 
 LDFLAGS ?= 
-LDLIBS  ?= -lm -lgc 
+LDLIBS  ?= -lm `pkg-config --libs bdw-gc` 
 
 NEED_LIBUNWIND := YesPlease
 uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
@@ -315,7 +315,7 @@ c_functions_hash.extern.o: c_functions_hash.c
 	$(CC) $(CFLAGS)  -c -o c_functions_hash.extern.o c_functions_hash.c
 
 gc_chooser.extern.o: gc_chooser.c
-	$(CC) $(CFLAGS) -DWITH_LIBGC -c -o gc_chooser.extern.o gc_chooser.c
+	$(CC) $(CFLAGS) -DWITH_LIBGC `pkg-config --cflags bdw-gc` -c -o gc_chooser.extern.o gc_chooser.c
 
 string._ffi.extern.o: string._ffi.c
 	$(CC) $(CFLAGS)  -c -o string._ffi.extern.o string._ffi.c

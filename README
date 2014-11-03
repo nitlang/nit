@@ -17,6 +17,7 @@ Some Nit features:
 Requirement:
 
 	* gcc		http://gcc.gnu.org/
+	* pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
 	* ccache	http://ccache.samba.org/	to improve recompilation
 	* libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
 	* graphviz	http://www.graphviz.org/	to enable graphes with the nitdoc tool
@@ -24,7 +25,7 @@ Requirement:
 
 Those are available in most linux distributions
 
-    # sudo apt-get install build-essential ccache libgc-dev graphviz libunwind
+    # sudo apt-get install build-essential ccache libgc-dev graphviz libunwind pkg-config
 
 Important files and directory:
 
