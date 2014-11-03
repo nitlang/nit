@@ -19,6 +19,11 @@ import model_utils
 import markdown
 import doc_templates
 import ordered_tree
+import model_ext
+
+
+################################################################################
+# Additions to Nit entities.
 
 redef class MDoc
 	# Comment synopsys HTML escaped
@@ -712,5 +717,24 @@ redef class ConcernsTree
 			end
 		end
 		li.append lst
+	end
+end
+
+
+################################################################################
+# Additions to `model_ext`.
+
+redef class MRawType
+	redef fun tpl_signature do
+		var tpl = new Template
+
+		for part in parts do
+			if part.target != null then
+				tpl.add part.target.as(not null).tpl_link
+			else
+				tpl.add part.text.html_escape
+			end
+		end
+		return tpl
 	end
 end

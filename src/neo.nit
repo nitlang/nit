@@ -133,8 +133,8 @@
 # `MType`
 #
 # * labels: `MType`, `model_name` and `MEntity`. Must also have `MClassType`,
-# `MNullableType`, `MVirtualType` or `MSignature`, depending on the class of
-# the represented entity.
+# `MNullableType`, `MVirtualType`, `MRawType` or `MSignature`, depending on the
+# class of the represented entity.
 #
 # Additional label and relationships for `MClassType`:
 #
@@ -159,6 +159,11 @@
 # Additional relationship for `MNullableType`:
 #
 # * `(:MNullableType)-[:TYPE]->(:MType)`: base type of the nullable type.
+#
+# Additional attribute and relationship for `MRawType`:
+#
+# * `text`: JSON array of the parts’ text.
+# * `(:MRawType)-[:LINK]->(:MTypePart)`: the parts that link to another entity.
 #
 # Additional attribute and relationships for `MSignature`:
 #
@@ -188,9 +193,15 @@
 #
 # MParameters are also ranked by their position in the corresponding signature.
 # Rank 0 for the first parameter, 1 for the next one and etc.
+#
+# `MTypePart`
+#
+# * labels: `MTypePart`, `model_name` and `MEntity`.
+# * `rank`: position in the `MRawType`.
+# * `(:MTypePart)-[:TARGET]->(:MEntity)`: the target of the link.
 module neo
 
-import model
+import doc::model_ext
 import neo4j
 import toolcontext
 
@@ -367,6 +378,20 @@ class NeoModel
 		if mentity isa MPropDef then return mpropdef_node(mentity)
 		if mentity isa MType then return mtype_node(mentity)
 		if mentity isa MParameter then return mparameter_node(mentity)
+		abort
+	end
+
+	# Get the `MEntity` associated with `node`.
+	fun to_mentity(model: Model, node: NeoNode): MEntity do
+		if node.labels.has("MProject") then return to_mproject(model, node)
+		if node.labels.has("MGroup") then return to_mgroup(model, node)
+		if node.labels.has("MModule") then return to_mmodule(model, node)
+		if node.labels.has("MClass") then return to_mclass(model, node)
+		if node.labels.has("MClassDef") then return to_mclassdef(model, node)
+		if node.labels.has("MProperty") then return to_mproperty(model, node)
+		if node.labels.has("MPropDef") then return to_mpropdef(model, node)
+		if node.labels.has("MType") then return to_mtype(model, node)
+		if node.labels.has("MParameter") then return to_mparameter(model, node)
 		abort
 	end
 
@@ -713,6 +738,31 @@ class NeoModel
 			if return_mtype != null then
 				node.out_edges.add(new NeoEdge(node, "RETURNTYPE", to_node(return_mtype)))
 			end
+		else if mtype isa MRawType then
+			node.labels.add "MRawType"
+			var text = new JsonArray
+			var rank = 0
+			for part in mtype.parts do
+				text.add part.text
+				if part.target != null then
+					var pnode = mtypepart_node(part)
+					pnode["rank"] = rank
+					node.out_edges.add(new NeoEdge(node, "LINK", pnode))
+				end
+				rank += 1
+			end
+			if not text.is_empty then node["text"] = text
+		end
+		return node
+	end
+
+	# Build a `NeoNode` representing `mtypepart`.
+	private fun mtypepart_node(mtypepart: MTypePart): NeoNode do
+		var node = make_node(mtypepart)
+		node.labels.add "MTypePart"
+		if mtypepart.target != null then
+			var target_node = to_node(mtypepart.target.as(not null))
+			node.out_edges.add(new NeoEdge(node, "TARGET", target_node))
 		end
 		return node
 	end
@@ -773,6 +823,25 @@ class NeoModel
 			var mtype = new MSignature(mparameters, return_mtype)
 			mentities[node] = mtype
 			return mtype
+		else if node.labels.has("MRawType") then
+			var mtype = new MRawType(model)
+			var parts = node["text"]
+			if parts isa JsonArray then
+				for p in parts do
+					mtype.parts.add(new MTypePart(model, p.to_s, null))
+				end
+				for pnode in node.out_nodes("LINK") do
+					assert pnode.labels.has("MTypePart")
+					if not pnode.out_nodes("TARGET").is_empty then
+						var rank = pnode["rank"]
+						var target = to_mentity(model, pnode.out_nodes("TARGET").first)
+						assert rank isa Int
+						mtype.parts[rank] = mtype.parts[rank].link_to(target)
+					end
+				end
+			end
+			mentities[node] = mtype
+			return mtype
 		end
 		print "not yet implemented to_mtype for {node.labels.join(",")}"
 		abort
@@ -828,6 +897,8 @@ class NeoModel
 			return protected_visibility
 		else if vis == private_visibility.to_s then
 			return private_visibility
+		else if vis == package_visibility.to_s then
+			return package_visibility
 		else
 			return none_visibility
 		end
@@ -845,8 +916,9 @@ class NeoModel
 			return enum_kind
 		else if kind == extern_kind.to_s then
 			return extern_kind
+		else
+			return raw_kind(kind)
 		end
-		abort
 	end
 
 	# Extract the `MDoc` from `node` and link it to `mentity`.
