@@ -15,13 +15,21 @@
 # `compounddef` element reading.
 module doxml::compounddef
 
-import entitydef
+import memberdef
+import more_collections
 
 # Processes the content of a `compounddef` element.
 class CompoundDefListener
 	super EntityDefListener
 
 	var compound: Compound is writable, noinit
+	private var memberdef: MemberDefListener is noinit
+
+	# Default attributes for members in the current section.
+	private var member_defaults: MemberDefaults is noinit
+
+	# For each section kind, default attributes for member in that section.
+	private var section_kinds: DefaultMap[String, MemberDefaults] is noinit
 
 
 	# Attributes of the current `<basecompoundref>` element.
@@ -33,6 +41,50 @@ class CompoundDefListener
 
 	init do
 		super
+		var defaults = new MemberDefaults("public", false, false)
+
+		memberdef = new MemberDefListener(reader, self)
+
+		member_defaults = defaults
+		section_kinds = new DefaultMap[String, MemberDefaults](defaults)
+
+		section_kinds["public-type"] = defaults
+		section_kinds["public-func"] = defaults
+		section_kinds["public-attrib"] = defaults
+		section_kinds["public-slot"] = defaults
+		defaults = new MemberDefaults("public", true, false)
+		section_kinds["public-static-func"] = defaults
+		section_kinds["public-static-attrib"] = defaults
+
+		defaults = new MemberDefaults("protected", false, false)
+		section_kinds["protected-type"] = defaults
+		section_kinds["protected-func"] = defaults
+		section_kinds["protected-attrib"] = defaults
+		section_kinds["protected-slot"] = defaults
+		defaults = new MemberDefaults("protected", true, false)
+		section_kinds["protected-static-func"] = defaults
+		section_kinds["protected-static-attrib"] = defaults
+
+		defaults = new MemberDefaults("package", false, false)
+		section_kinds["package-type"] = defaults
+		section_kinds["package-func"] = defaults
+		section_kinds["package-attrib"] = defaults
+		defaults = new MemberDefaults("package", true, false)
+		section_kinds["package-static-func"] = defaults
+		section_kinds["package-static-attrib"] = defaults
+
+		defaults = new MemberDefaults("private", false, false)
+		section_kinds["private-type"] = defaults
+		section_kinds["private-func"] = defaults
+		section_kinds["private-attrib"] = defaults
+		section_kinds["private-slot"] = defaults
+		defaults = new MemberDefaults("private", true, false)
+		section_kinds["private-static-func"] = defaults
+		section_kinds["private-static-attrib"] = defaults
+
+		defaults = new MemberDefaults("public", true, true)
+		section_kinds["related"] = defaults
+		section_kinds["user-defined"] = defaults
 	end
 
 	redef fun entity: Entity do return compound
@@ -48,6 +100,13 @@ class CompoundDefListener
 			prot = get_optional(atts, "prot", "")
 			virt = get_optional(atts, "virt", "")
 			text.listen_until(dox_uri, local_name)
+		else if "memberdef" == local_name then
+			read_member(atts)
+		else if local_name == "sectiondef" then
+			member_defaults = section_kinds[get_required(atts, "kind")]
+			if member_defaults.is_special then
+				super # TODO
+			end
 		else
 			super
 		end
@@ -62,10 +121,43 @@ class CompoundDefListener
 			compound.declare_class(refid, text.to_s)
 		else if local_name == "innernamespace" then
 			compound.declare_namespace(refid, text.to_s)
+		else if "memberdef" == local_name then
+			if not (memberdef.member isa UnknownMember) then
+				compound.declare_member(memberdef.member)
+			end
 		else if local_name == "basecompoundref" then
 			compound.declare_super(refid, text.to_s, prot, virt)
 		else
 			super
 		end
 	end
+
+	private fun read_member(atts: Attributes) do
+		var kind = get_required(atts, "kind")
+
+		create_member(kind)
+		memberdef.member.model_id = get_required(atts, "id")
+		memberdef.member.visibility = get_optional(atts, "prot",
+				member_defaults.visibility)
+	end
+
+	private fun create_member(kind: String) do
+		if kind == "variable" then
+			memberdef.member = new Attribute(compound.graph)
+		else if kind == "function" then
+			memberdef.member = new Method(compound.graph)
+		else
+			memberdef.member = new UnknownMember(compound.graph)
+			noop.listen_until(dox_uri, "memberdef")
+			return
+		end
+		memberdef.listen_until(dox_uri, "memberdef")
+	end
+end
+
+# Default attributes for members in the current section.
+private class MemberDefaults
+	var visibility: String
+	var is_static: Bool
+	var is_special: Bool
 end

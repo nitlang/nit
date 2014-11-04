@@ -16,6 +16,7 @@
 module model::class_compound
 
 import graph
+import member
 import type_entity
 
 # A class.
@@ -75,6 +76,10 @@ class ClassCompound
 		class_def.declare_super(id, name, prot, virt)
 	end
 
+	redef fun declare_member(member: Member) do
+		class_def.declare_member(member)
+	end
+
 	redef fun put_in_graph do
 		super
 		class_type.put_in_graph
@@ -101,10 +106,12 @@ class ClassDef
 
 	var class_compound: ClassCompound
 	var supers: SimpleCollection[String] = new Array[String]
+	var members: SimpleCollection[Member] = new Array[Member]
 
 	init do
 		super
 		self.labels.add("MClassDef")
+		self["is_intro"] = true
 	end
 
 	fun declare_super(id: String, name: String, prot: String, virt: String) do
@@ -114,12 +121,43 @@ class ClassDef
 		end
 	end
 
+	fun declare_member(member: Member) do
+		var full_name = self["full_name"]
+
+		if full_name != null then
+			member.parent_name = full_name.to_s
+		end
+		members.add(member)
+	end
+
+	redef fun full_name=(full_name: String) do
+		super
+		for m in members do
+			m.parent_name = full_name
+		end
+	end
+
+	redef fun parent_name=(parent_name: String) do
+		super
+		for m in members do
+			m.parent_name = full_name
+		end
+	end
+
 	redef fun put_edges do
 		super
 		graph.add_edge(self, "BOUNDTYPE", class_compound.class_type)
 		graph.add_edge(self, "MCLASS", class_compound)
 		for s in supers do
 			graph.add_edge(self, "INHERITS", graph.by_id[s].as(ClassCompound).class_type)
+		end
+		for m in members do
+			if m.is_intro then
+				var intro = m.introducer.as(not null)
+				graph.add_edge(self, "INTRODUCES", intro)
+				graph.add_edge(intro, "INTRO_CLASSDEF", self)
+			end
+			graph.add_edge(self, "DECLARES", m)
 		end
 	end
 end
