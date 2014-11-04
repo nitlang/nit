@@ -3,7 +3,7 @@ CXX = ccache c++
 CFLAGS = -g -O2 -Wno-unused-value -Wno-switch
 CINCL = 
 LDFLAGS ?= 
-LDLIBS  ?= -lm -lgc 
+LDLIBS  ?= -lm 
 
 NEED_LIBUNWIND := YesPlease
 uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
@@ -296,41 +296,49 @@ nith.types.4.o: nith.types.4.c
 nith.types.5.o: nith.types.5.c
 	$(CC) $(CFLAGS) $(CINCL) -c -o nith.types.5.o nith.types.5.c
 
+# does pkg-config exists?
+ifneq ($(shell which pkg-config >/dev/null; echo $$?), 0)
+$(error "Command `pkg-config` not found. Please install it")
+endif
+# Check for library bdw-gc
+ifneq ($(shell pkg-config --exists 'bdw-gc'; echo $$?), 0)
+$(error "pkg-config: package bdw-gc is not found.")
+endif
 time_nit.extern.o: time_nit.c
-	$(CC) $(CFLAGS)  -c -o time_nit.extern.o time_nit.c
+	$(CC) $(CFLAGS)   -c -o time_nit.extern.o time_nit.c
 
 string_nit.extern.o: string_nit.c
-	$(CC) $(CFLAGS)  -c -o string_nit.extern.o string_nit.c
+	$(CC) $(CFLAGS)   -c -o string_nit.extern.o string_nit.c
 
 file_nit.extern.o: file_nit.c
-	$(CC) $(CFLAGS)  -c -o file_nit.extern.o file_nit.c
+	$(CC) $(CFLAGS)   -c -o file_nit.extern.o file_nit.c
 
 exec_nit.extern.o: exec_nit.c
-	$(CC) $(CFLAGS)  -c -o exec_nit.extern.o exec_nit.c
+	$(CC) $(CFLAGS)   -c -o exec_nit.extern.o exec_nit.c
 
 tables_nit.extern.o: tables_nit.c
-	$(CC) $(CFLAGS)  -c -o tables_nit.extern.o tables_nit.c
+	$(CC) $(CFLAGS)   -c -o tables_nit.extern.o tables_nit.c
 
 c_functions_hash.extern.o: c_functions_hash.c
-	$(CC) $(CFLAGS)  -c -o c_functions_hash.extern.o c_functions_hash.c
+	$(CC) $(CFLAGS)   -c -o c_functions_hash.extern.o c_functions_hash.c
 
 gc_chooser.extern.o: gc_chooser.c
-	$(CC) $(CFLAGS) -DWITH_LIBGC -c -o gc_chooser.extern.o gc_chooser.c
+	$(CC) $(CFLAGS) -DWITH_LIBGC `pkg-config --cflags bdw-gc` -c -o gc_chooser.extern.o gc_chooser.c
 
 string._ffi.extern.o: string._ffi.c
-	$(CC) $(CFLAGS)  -c -o string._ffi.extern.o string._ffi.c
+	$(CC) $(CFLAGS)   -c -o string._ffi.extern.o string._ffi.c
 
 string._nitni.extern.o: string._nitni.c
-	$(CC) $(CFLAGS)  -c -o string._nitni.extern.o string._nitni.c
+	$(CC) $(CFLAGS)   -c -o string._nitni.extern.o string._nitni.c
 
 kernel._ffi.extern.o: kernel._ffi.c
-	$(CC) $(CFLAGS)  -c -o kernel._ffi.extern.o kernel._ffi.c
+	$(CC) $(CFLAGS)   -c -o kernel._ffi.extern.o kernel._ffi.c
 
 kernel._nitni.extern.o: kernel._nitni.c
-	$(CC) $(CFLAGS)  -c -o kernel._nitni.extern.o kernel._nitni.c
+	$(CC) $(CFLAGS)   -c -o kernel._nitni.extern.o kernel._nitni.c
 
 nitg: nith.classes.1.o nith.classes.2.o nith.classes.3.o nith.classes.4.o nith.classes.5.o nith.classes.6.o nith.classes.7.o nith.main.1.o nith.sep.1.o modelize_property.sep.1.o modelize_property.sep.2.o modelize_class.sep.1.o modelbuilder.sep.1.o model.sep.1.o model.sep.2.o mmodule.sep.1.o location.sep.1.o string.sep.1.o string.sep.2.o math.sep.1.o kernel.sep.1.o abstract_collection.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o environ.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o exec.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o poset.sep.1.o mdoc.sep.1.o phase.sep.1.o toolcontext.sep.1.o opts.sep.1.o version.sep.1.o template.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o lexer_work.sep.1.o tables.sep.1.o parser_work.sep.1.o annotation.sep.1.o literal.sep.1.o transform.sep.1.o astbuilder.sep.1.o typing.sep.1.o typing.sep.2.o typing.sep.3.o local_var_init.sep.1.o flow.sep.1.o scope.sep.1.o astvalidation.sep.1.o auto_super_init.sep.1.o rapid_type_analysis.sep.1.o separate_erasure_compiler.sep.1.o separate_erasure_compiler.sep.2.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o separate_compiler.sep.4.o separate_compiler.sep.5.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o abstract_compiler.sep.4.o abstract_compiler.sep.5.o platform.sep.1.o c_tools.sep.1.o mixin.sep.1.o coloring.sep.1.o nith.types.1.o nith.types.2.o nith.types.3.o nith.types.4.o nith.types.5.o time_nit.extern.o string_nit.extern.o file_nit.extern.o exec_nit.extern.o tables_nit.extern.o c_functions_hash.extern.o gc_chooser.extern.o string._ffi.extern.o string._nitni.extern.o kernel._ffi.extern.o kernel._nitni.extern.o
-	$(CC) $(LDFLAGS) -o nitg nith.classes.1.o nith.classes.2.o nith.classes.3.o nith.classes.4.o nith.classes.5.o nith.classes.6.o nith.classes.7.o nith.main.1.o nith.sep.1.o modelize_property.sep.1.o modelize_property.sep.2.o modelize_class.sep.1.o modelbuilder.sep.1.o model.sep.1.o model.sep.2.o mmodule.sep.1.o location.sep.1.o string.sep.1.o string.sep.2.o math.sep.1.o kernel.sep.1.o abstract_collection.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o environ.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o exec.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o poset.sep.1.o mdoc.sep.1.o phase.sep.1.o toolcontext.sep.1.o opts.sep.1.o version.sep.1.o template.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o lexer_work.sep.1.o tables.sep.1.o parser_work.sep.1.o annotation.sep.1.o literal.sep.1.o transform.sep.1.o astbuilder.sep.1.o typing.sep.1.o typing.sep.2.o typing.sep.3.o local_var_init.sep.1.o flow.sep.1.o scope.sep.1.o astvalidation.sep.1.o auto_super_init.sep.1.o rapid_type_analysis.sep.1.o separate_erasure_compiler.sep.1.o separate_erasure_compiler.sep.2.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o separate_compiler.sep.4.o separate_compiler.sep.5.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o abstract_compiler.sep.4.o abstract_compiler.sep.5.o platform.sep.1.o c_tools.sep.1.o mixin.sep.1.o coloring.sep.1.o nith.types.1.o nith.types.2.o nith.types.3.o nith.types.4.o nith.types.5.o time_nit.extern.o string_nit.extern.o file_nit.extern.o exec_nit.extern.o tables_nit.extern.o c_functions_hash.extern.o gc_chooser.extern.o string._ffi.extern.o string._nitni.extern.o kernel._ffi.extern.o kernel._nitni.extern.o $(LDLIBS)
+	$(CC) $(LDFLAGS) -o nitg nith.classes.1.o nith.classes.2.o nith.classes.3.o nith.classes.4.o nith.classes.5.o nith.classes.6.o nith.classes.7.o nith.main.1.o nith.sep.1.o modelize_property.sep.1.o modelize_property.sep.2.o modelize_class.sep.1.o modelbuilder.sep.1.o model.sep.1.o model.sep.2.o mmodule.sep.1.o location.sep.1.o string.sep.1.o string.sep.2.o math.sep.1.o kernel.sep.1.o abstract_collection.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o environ.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o exec.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o poset.sep.1.o mdoc.sep.1.o phase.sep.1.o toolcontext.sep.1.o opts.sep.1.o version.sep.1.o template.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o lexer_work.sep.1.o tables.sep.1.o parser_work.sep.1.o annotation.sep.1.o literal.sep.1.o transform.sep.1.o astbuilder.sep.1.o typing.sep.1.o typing.sep.2.o typing.sep.3.o local_var_init.sep.1.o flow.sep.1.o scope.sep.1.o astvalidation.sep.1.o auto_super_init.sep.1.o rapid_type_analysis.sep.1.o separate_erasure_compiler.sep.1.o separate_erasure_compiler.sep.2.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o separate_compiler.sep.4.o separate_compiler.sep.5.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o abstract_compiler.sep.4.o abstract_compiler.sep.5.o platform.sep.1.o c_tools.sep.1.o mixin.sep.1.o coloring.sep.1.o nith.types.1.o nith.types.2.o nith.types.3.o nith.types.4.o nith.types.5.o time_nit.extern.o string_nit.extern.o file_nit.extern.o exec_nit.extern.o tables_nit.extern.o c_functions_hash.extern.o gc_chooser.extern.o string._ffi.extern.o string._nitni.extern.o kernel._ffi.extern.o kernel._nitni.extern.o $(LDLIBS) `pkg-config --libs bdw-gc`
 
 clean:
 	rm nith.classes.1.o nith.classes.2.o nith.classes.3.o nith.classes.4.o nith.classes.5.o nith.classes.6.o nith.classes.7.o nith.main.1.o nith.sep.1.o modelize_property.sep.1.o modelize_property.sep.2.o modelize_class.sep.1.o modelbuilder.sep.1.o model.sep.1.o model.sep.2.o mmodule.sep.1.o location.sep.1.o string.sep.1.o string.sep.2.o math.sep.1.o kernel.sep.1.o abstract_collection.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o environ.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o exec.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o poset.sep.1.o mdoc.sep.1.o phase.sep.1.o toolcontext.sep.1.o opts.sep.1.o version.sep.1.o template.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o lexer_work.sep.1.o tables.sep.1.o parser_work.sep.1.o annotation.sep.1.o literal.sep.1.o transform.sep.1.o astbuilder.sep.1.o typing.sep.1.o typing.sep.2.o typing.sep.3.o local_var_init.sep.1.o flow.sep.1.o scope.sep.1.o astvalidation.sep.1.o auto_super_init.sep.1.o rapid_type_analysis.sep.1.o separate_erasure_compiler.sep.1.o separate_erasure_compiler.sep.2.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o separate_compiler.sep.4.o separate_compiler.sep.5.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o abstract_compiler.sep.4.o abstract_compiler.sep.5.o platform.sep.1.o c_tools.sep.1.o mixin.sep.1.o coloring.sep.1.o nith.types.1.o nith.types.2.o nith.types.3.o nith.types.4.o nith.types.5.o time_nit.extern.o string_nit.extern.o file_nit.extern.o exec_nit.extern.o tables_nit.extern.o c_functions_hash.extern.o gc_chooser.extern.o string._ffi.extern.o string._nitni.extern.o kernel._ffi.extern.o kernel._nitni.extern.o 2>/dev/null
