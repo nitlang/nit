@@ -110,3 +110,13 @@ class HashMap3[K1: Object, K2: Object, K3: Object, V]
 		level2[k2, k3] = v
 	end
 end
+
+# A map with a default value.
+class DefaultMap[K: Object, V]
+	super HashMap[K, V]
+
+	# The default value.
+	var default: V
+
+	redef fun provide_default_value(key) do return default
+end
