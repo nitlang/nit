@@ -334,6 +334,30 @@ redef class Text
 	#     assert "I say hello to the world!".search_from("hello",7)       == null
 	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
+	# Search the last occurence of the text `t`.
+	#
+	#     assert "bob".search_last("b").from == 2
+	fun search_last(t: Text): nullable Match do
+		return search_last_up_to(t, length)
+	end
+
+	# Search the last occurence of the text `t` before `up_to`.
+	#
+	#     assert "bobbob".search_last_up_to("b", 3).from == 2
+	#     assert "bobbob".search_last_up_to("b", 6).from == 5
+	#     assert "bobbob".search_last_up_to("b", 0) == null
+	fun search_last_up_to(t: Text, up_to: Int): nullable Match do
+		var i = up_to - t.length
+
+		while i >= 0 do
+			if substring(i, t.length) == t then
+				return new Match(self.to_s, i, t.length)
+			end
+			i -= 1
+		end
+		return null
+	end
+
 	# Search all occurrences of p into self.
 	#
 	#     var a = new Array[Int]
