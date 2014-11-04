@@ -18,4 +18,7 @@ OUT=$(patsubst %.md,man1/%.1,$(IN))
 all: $(OUT)
 
 man1/%.1: %.md
+	mkdir -p man1
 	pandoc $< -t man -s -o $@
+
+clean:

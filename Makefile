@@ -66,12 +66,16 @@ doc/nitc/index.html: bin/nitdoc bin/nitls
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
 
+man:
+	$(MAKE) -C share/man
+
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
 	rm -rf -- doc/stdlib doc/nitc || true
 	cd c_src; make clean
 	cd src; make clean
 	cd tests; make clean
+	cd share/man; make clean
 	for m in $(PROGS); do \
 		$(MAKE) clean -C "$$m"; \
 		test -d $$m/.nit_compile && rm -r $$m/.nit_compile; \
