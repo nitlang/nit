@@ -74,6 +74,10 @@ end
 redef class MModule
 	var c_compiler_options = "" is writable
 	var c_linker_options = "" is writable
+
+	# Additional libraries needed for the compilation
+	# Will be used with pkg-config
+	var pkgconfigs = new Array[String]
 end
 
 class ForeignCType

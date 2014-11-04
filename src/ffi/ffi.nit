@@ -60,7 +60,11 @@ redef class MModule
 		end
 
 		ffi_ccu.write_as_impl(self, compdir)
-		for filename in ffi_ccu.files do ffi_files.add(new ExternCFile(filename, c_compiler_options))
+		for filename in ffi_ccu.files do
+			var f = new ExternCFile(filename, c_compiler_options)
+			f.pkgconfigs.add_all pkgconfigs
+			ffi_files.add(f)
+		end
 	end
 
 	# Avoid the compile a ffi propdef more than once

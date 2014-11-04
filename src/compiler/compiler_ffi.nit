@@ -53,7 +53,9 @@ extern void nitni_global_ref_decr(void*);
 		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
 		for file in nitni_ccu.files do
-			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))
+			var f = new ExternCFile(file, c_compiler_options)
+			f.pkgconfigs.add_all pkgconfigs
+			v.compiler.extern_bodies.add(f)
 		end
 
 		# reset FFI things so the next compilation job, if any, starts with a clean context

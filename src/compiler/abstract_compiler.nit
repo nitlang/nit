@@ -191,11 +191,12 @@ class MakefileToolchain
 	do
 		var platform = compiler.mainmodule.target_platform
 		if self.toolcontext.opt_stacktrace.value == "nitstack" and (platform == null or platform.supports_libunwind) then compiler.build_c_to_nit_bindings
-		var cc_opt_with_libgc = "-DWITH_LIBGC `pkg-config --cflags bdw-gc`"
+		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
 
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
+		if cc_opt_with_libgc != "" then gc_chooser.pkgconfigs.add "bdw-gc"
 		compiler.extern_bodies.add(gc_chooser)
 		var clib = toolcontext.nit_dir / "clib"
 		compiler.files_to_copy.add "{clib}/gc_chooser.c"
@@ -325,7 +326,7 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm `pkg-config --libs bdw-gc` {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
 		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
@@ -361,6 +362,28 @@ class MakefileToolchain
 
 		var java_files = new Array[ExternFile]
 
+		var pkgconfigs = new Array[String]
+		for f in compiler.extern_bodies do
+			pkgconfigs.add_all f.pkgconfigs
+		end
+		# Protect pkg-config
+		if not pkgconfigs.is_empty then
+			makefile.write """
+# does pkg-config exists?
+ifneq ($(shell which pkg-config >/dev/null; echo $$?), 0)
+$(error "Command `pkg-config` not found. Please install it")
+endif
+"""
+			for p in pkgconfigs do
+				makefile.write """
+# Check for library {{{p}}}
+ifneq ($(shell pkg-config --exists '{{{p}}}'; echo $$?), 0)
+$(error "pkg-config: package {{{p}}} is not found.")
+endif
+"""
+			end
+		end
+
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
@@ -386,7 +409,11 @@ class MakefileToolchain
 		end
 
 		# Link edition
-		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		var pkg = ""
+		if not pkgconfigs.is_empty then
+			pkg = "`pkg-config --libs {pkgconfigs.join(" ")}`"
+		end
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
