@@ -505,7 +505,7 @@ for ii in "$@"; do
 
 		if [ -n "$isinterpret" ]; then
 			cat > "$ff.bin" <<END
-exec $NITC --no-color $OPT "$i" $includes -- "\$@"
+exec $NITC --no-color $OPT $includes -- "$i" "\$@"
 END
 			chmod +x "$ff.bin"
 			> "$ff.cmp.err"
@@ -521,10 +521,10 @@ END
 			# Compile
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo $NITC --no-color $OPT -o "$ffout" "$i" "$includes" $nocc
+				echo $NITC --no-color $OPT -o "$ffout" "$includes" $nocc "$i"
 			fi
 			NIT_NO_STACK=1 JNI_LIB_PATH=$JNI_LIB_PATH JAVA_HOME=$JAVA_HOME \
-				saferun -o "$ff.time.out" $NITC --no-color $OPT -o "$ffout" "$i" $includes $nocc 2> "$ff.cmp.err" > "$ff.compile.log"
+				saferun -o "$ff.time.out" $NITC --no-color $OPT -o "$ffout" $includes $nocc "$i" 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
