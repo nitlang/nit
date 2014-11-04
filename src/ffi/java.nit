@@ -221,7 +221,7 @@ redef class MModule
 			jni_methods.add_all(cb.jni_methods_declaration(self))
 		end
 
-		var cf = new CFunction("static void nit_ffi_with_java_register_natives(JNIEnv* env, jclass jclazz)")
+		var cf = new CFunction("void nit_ffi_with_java_register_natives(JNIEnv* env, jclass jclazz)")
 		cf.exprs.add """
 	nit_ffi_with_java_registered_natives = 1;
 

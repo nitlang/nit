@@ -49,9 +49,9 @@ class CCompilationUnit
 
 	fun add_local_function( efc : CFunction )
 	do
-		body_decl.add( "{efc.signature};\n" )
-		body_impl.add( "\n" )
-		body_impl.add( efc.to_writer )
+		body_decl.add "static {efc.signature};\n"
+		body_impl.add "\n"
+		body_impl.add efc.to_writer
 	end
 
 	fun add_exported_function( efc : CFunction )
