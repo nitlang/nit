@@ -87,15 +87,7 @@ class PkgconfigPhase
 				return
 			end
 
-			# compiler
-			var proc = new IProcess("pkg-config", "--cflags", pkg)
-			var compiler_opts = proc.read_all
-			mmodule.c_compiler_options = "{mmodule.c_compiler_options} {compiler_opts.replace("\n", " ")}"
-
-			# linker
-			proc = new IProcess("pkg-config", "--libs", pkg)
-			var linker_opts = proc.read_all
-			mmodule.c_linker_options = "{mmodule.c_linker_options} {linker_opts.replace("\n", " ")}"
+			mmodule.pkgconfigs.add pkg
 		end
 
 	end
