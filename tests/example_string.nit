@@ -18,6 +18,9 @@
 # It displays the value of a local variable.
 # It exhibs ways to concatenate strings.
 
+#alt1 import standard
+#alt1 import standard::ropes
+
 var a = 10
 # First way: Multiple parameters.
 # Pro: Simple.
@@ -27,7 +30,8 @@ printn("The value of a is: ", a, ".\n")
 # Second way: Build a string and display it.
 # Pro: Eiffel way (rigourous).
 # Con: Eiffel way (heavy).
-var s = new FlatBuffer.from("The value of a is: ")
+var s: Buffer = new FlatBuffer.from("The value of a is: ")
+#alt1 s = new RopeBuffer.from("The value of a is: ")
 s.append(a.to_s)
 s.append(".\n")
 printn(s)

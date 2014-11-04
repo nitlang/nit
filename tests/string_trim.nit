@@ -1,10 +1,12 @@
-module string_trim
+#alt1 import standard::ropes
+#alt1 import standard
 
 var trimtest = "   \t nono nono   \n \t"
 
 var subtrim = trimtest.substring(2,15)
 
-var buffertrimtest = new FlatBuffer.from(trimtest)
+var buffertrimtest: Buffer = new FlatBuffer.from(trimtest)
+#alt1 buffertrimtest = new RopeBuffer.from(trimtest)
 
 print "resulttrim = {buffertrimtest.trim}"
 
@@ -14,7 +16,8 @@ print "thirdtrim = {subtrim.trim}"
 
 var emptytrim = "         \t  "
 
-var bufferemptytest = new FlatBuffer.from(emptytrim)
+var bufferemptytest: Buffer = new FlatBuffer.from(emptytrim)
+#alt1 bufferemptytest = new RopeBuffer.from(emptytrim)
 
 print "emptytrim = {emptytrim.trim}"
 
@@ -22,7 +25,8 @@ print "bufferemptytrim = {bufferemptytest.trim}"
 
 var onelettertrim = "    \n   d      \n\t  "
 
-var oneletterbuftest = new FlatBuffer.from(onelettertrim)
+var oneletterbuftest: Buffer = new FlatBuffer.from(onelettertrim)
+#alt1 oneletterbuftest = new RopeBuffer.from(onelettertrim)
 
 print "onelettertrim = {onelettertrim.trim}"
 
@@ -30,7 +34,8 @@ print "oneletterbuftest = {oneletterbuftest.trim}"
 
 var twolettertrim = "    \n   hg      \n\t  "
 
-var twoletterbuftest = new FlatBuffer.from(twolettertrim)
+var twoletterbuftest: Buffer = new FlatBuffer.from(twolettertrim)
+#alt1 twoletterbuftest = new RopeBuffer.from(twolettertrim)
 
 print "twolettertrim = {twolettertrim.trim}"
 
@@ -38,7 +43,8 @@ print "twoletterbuftest = {twoletterbuftest.trim}"
 
 var firstlettertrim = "d                "
 
-var firstlettertrimbuf = new FlatBuffer.from(firstlettertrim)
+var firstlettertrimbuf: Buffer = new FlatBuffer.from(firstlettertrim)
+#alt1 firstlettertrimbuf = new RopeBuffer.from(firstlettertrim)
 
 print "firstlettertrimtest = {firstlettertrim.trim}"
 
@@ -46,7 +52,8 @@ print "firstlettertrimbuftest = {firstlettertrimbuf.trim}"
 
 var lastlettertrim = "                     d"
 
-var lastlettertrimbuf = new FlatBuffer.from(lastlettertrim)
+var lastlettertrimbuf: Buffer = new FlatBuffer.from(lastlettertrim)
+#alt1 lastlettertrimbuf = new RopeBuffer.from(lastlettertrim)
 
 print "lastlettertrimtest = {lastlettertrim.trim}"
 

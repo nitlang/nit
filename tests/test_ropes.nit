@@ -12,20 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import splay_ropes
-#alt2 import bufferized_ropes
+import standard
+intrude import standard::ropes
 
-var x :String = new RopeString
+# Force building a Rope
+redef fun maxlen: Int do return once 2
 
-x = x + "NODE"
-x = x + "AT"
-x = x + "TEST"
+var x :String = new Concat("NODE", "AT")
+
+x += "TEST"
 
 print x
 
 var lst = new List[String]
 
-lst.push(new RopeString.from("ZZ"))
+lst.push("ZZ")
 
 lst.push((lst.last * 5))
 
@@ -41,7 +42,7 @@ var ss = lst.last.substring(4,4)
 
 print ss
 
-ss = ss.as(RopeString).insert_at("DD", 2)
+ss = ss.insert_at("DD", 2)
 
 print ss
 
@@ -67,15 +68,14 @@ print ss
 
 var atb = new Array[String]
 
-var s: String = new RopeString
-s = s + "./examples/hello_world.nit".substring(11,11) + ".types"
+var s: String = "./examples/hello_world.nit".substring(11,11) + ".types"
 s += "."
 s += "1"
 s += ".o"
 
 print s
 
-var str = new RopeString.from("now") + " step" + " live..."
+var str = "now" + " step" + " live..."
 
 print str
 
@@ -101,16 +101,13 @@ printn "\n"
 for i in str.chars.iterator_from(str.length-1) do printn i
 printn "\n"
 
-for i in str.as(RopeString).reverse_substrings_from(12) do printn i
-printn "\n"
-
 for i in str.chars.reverse_iterator do printn i
 printn "\n"
 
 for i in str.chars.reverse_iterator_from(0) do printn i
 printn "\n"
 
-var str2 = str.as(RopeString).insert_at(str.substring_from(3), 3)
+var str2 = str.insert_at(str.substring_from(3), 3)
 
 print str2
 
