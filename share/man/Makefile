@@ -21,4 +21,22 @@ man1/%.1: %.md
 	mkdir -p man1
 	pandoc $< -t man -s -o $@
 
+# Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
+web:
+	rm -r www 2>/dev/null || true
+	mkdir -p www
+	cp nit*.md www
+	rename '$$_ = "$${_}wn"' www/*.md
+	sed -i -e '1d;/SEE ALSO/,$$d' www/*.mdwn
+
+publish: web
+	rsync www/* asimov:wiki/nitlanguage/doc/tools/
+	ssh asimov make -C wiki/nitlanguage
+
+pdf:
+	mkdir -p pdf.out
+	for x in nit*.md; do echo $$x; pandoc -V header-includes='\usepackage{savetrees}' $$x -o pdf.out/$$x.pdf; done
+	pdfjoin pdf.out/*.pdf -o man.pdf
+
 clean:
+	rm -r www pdf.out || true
