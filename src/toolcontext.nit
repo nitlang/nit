@@ -279,6 +279,11 @@ class ToolContext
 	init
 	do
 		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
+
+		# Hide some internal options
+		opt_stub_man.hidden = true
+		opt_bash_completion.hidden = true
+		opt_set_dummy_tool.hidden = true
 	end
 
 	# Name, usage and synopsis of the tool.

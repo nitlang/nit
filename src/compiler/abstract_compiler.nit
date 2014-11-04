@@ -79,6 +79,8 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
+
+		opt_no_main.hidden = true
 	end
 
 	redef fun process_options(args)
