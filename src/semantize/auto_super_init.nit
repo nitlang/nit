@@ -65,7 +65,7 @@ redef class AMethPropdef
 		var nosuper = get_single_annotation("nosuper", modelbuilder)
 
 		# Collect only for constructors
-		if not mpropdef.mproperty.is_init then
+		if not mpropdef.mproperty.is_init or mpropdef.mproperty.is_new then
 			if nosuper != null then modelbuilder.error(nosuper, "Error: nosuper only in `init`")
 			return
 		end
