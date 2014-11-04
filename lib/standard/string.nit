@@ -739,6 +739,8 @@ abstract class String
 
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 
+	redef fun substrings: Iterator[String] is abstract
+
 	# Returns a reversed version of self
 	#
 	#     assert "hello".reversed  == "olleh"
