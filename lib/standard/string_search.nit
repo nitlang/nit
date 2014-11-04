@@ -337,6 +337,13 @@ redef class Text
 	# Search the last occurence of the text `t`.
 	#
 	#     assert "bob".search_last("b").from == 2
+	#     assert "bob".search_last("bo").from == 0
+	#     assert "bob".search_last("ob").from == 1
+	#     assert "bobob".search_last("ob").from == 3
+	#     assert "bobbob".search_last("bb").from == 2
+	#     assert "bobbob".search_last("bob").from == 3
+	#     assert "bob".search_last("z") == null
+	#     assert "".search_last("b") == null
 	fun search_last(t: Text): nullable Match do
 		return search_last_up_to(t, length)
 	end
