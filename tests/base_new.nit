@@ -49,6 +49,11 @@ class C
 	end
 end
 
+class D
+	super C
+	new(z: Bool): B do return new C(1111)
+end
+
 redef class Int
 	new z do return 0
 	new a: A do return new A
@@ -76,6 +81,10 @@ end
 
 (new C(111)).output
 #alt7#(new C.n2).output
+
+'\n'.output
+
+(new D(true)).output
 
 '\n'.output
 
