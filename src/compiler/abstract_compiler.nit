@@ -399,6 +399,10 @@ class MakefileToolchain
 
 		var java_files = new Array[ExternFile]
 
+		var pkgconfigs = new Array[String]
+		for f in compiler.extern_bodies do
+			pkgconfigs.add_all f.pkgconfigs
+		end
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
@@ -424,7 +428,11 @@ class MakefileToolchain
 		end
 
 		# Link edition
-		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		var pkg = ""
+		if not pkgconfigs.is_empty then
+			pkg = "`pkg-config --libs {pkgconfigs.join(" ")}`"
+		end
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close

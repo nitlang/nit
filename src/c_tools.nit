@@ -115,6 +115,10 @@ class ExternFile
 	fun compiles_to_o_file: Bool do return false
 
 	fun add_to_jar: Bool do return false
+
+	# Additional libraries needed for the compilation
+	# Will be used with pkg-config
+	var pkgconfigs = new Array[String]
 end
 
 # An extern C file to compile
@@ -128,7 +132,7 @@ class ExternCFile
 		self.cflags = cflags
 	end
 
-	# Additionnal specific CC compiler -c flags
+	# Additional specific CC compiler -c flags
 	var cflags: String
 
 	redef fun hash do return filename.hash
@@ -143,7 +147,11 @@ class ExternCFile
 	redef fun makefile_rule_content do
 		var ff = filename.basename("")
 		var o = makefile_rule_name
-		return "$(CC) $(CFLAGS) {self.cflags} -c -o {o} {ff}"
+		var pkg = ""
+		if not pkgconfigs.is_empty then
+			pkg = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
+		end
+		return "$(CC) $(CFLAGS) {self.cflags} {pkg} -c -o {o} {ff}"
 	end
 
 	redef fun compiles_to_o_file do return true
