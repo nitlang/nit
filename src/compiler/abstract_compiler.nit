@@ -404,6 +404,24 @@ class MakefileToolchain
 		for f in compiler.extern_bodies do
 			pkgconfigs.add_all f.pkgconfigs
 		end
+		# Protect pkg-config
+		if not pkgconfigs.is_empty then
+			makefile.write """
+# does pkg-config exists?
+ifneq ($(shell which pkg-config >/dev/null; echo $$?), 0)
+$(error "Command `pkg-config` not found. Please install it")
+endif
+"""
+			for p in pkgconfigs do
+				makefile.write """
+# Check for library {{{p}}}
+ifneq ($(shell pkg-config --exists '{{{p}}}'; echo $$?), 0)
+$(error "pkg-config: package {{{p}}} is not found.")
+endif
+"""
+			end
+		end
+
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
