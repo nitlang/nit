@@ -580,9 +580,9 @@ redef class AMethPropdef
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		if mpropdef.is_intro then
-			modelbuilder.toolcontext.info("{mpropdef} introduces new method {mprop.full_name}", 3)
+			modelbuilder.toolcontext.info("{mpropdef} introduces new method {mprop.full_name}", 4)
 		else
-			modelbuilder.toolcontext.info("{mpropdef} redefines method {mprop.full_name}", 3)
+			modelbuilder.toolcontext.info("{mpropdef} redefines method {mprop.full_name}", 4)
 		end
 	end
 

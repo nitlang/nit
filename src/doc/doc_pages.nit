@@ -115,11 +115,7 @@ class Nitdoc
 		var sharedir = ctx.opt_sharedir.value
 		if sharedir == null then
 			var dir = ctx.nit_dir
-			if dir == null then
-				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
-				abort
-			end
-			sharedir = "{dir}/share/nitdoc"
+			sharedir = dir/"share/nitdoc"
 			if not sharedir.file_exists then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort

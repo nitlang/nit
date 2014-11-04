@@ -282,6 +282,14 @@ class OptionContext
 		parse_intern(it)
 	end
 
+	# Must all option be given before the first argument?
+	#
+	# When set to `false` (the default), options of the command line are
+	# all parsed until the end of the list of arguments or until "--" is met (in this case "--" is discarded).
+	#
+	# When set to `true` options are parsed until the first non-option is met.
+	var options_before_rest = false is writable
+
 	# Parse the command line
 	protected fun parse_intern(it: Iterator[String])
 	do
@@ -319,6 +327,10 @@ class OptionContext
 					else
 						rest.add(it.item)
 						it.next
+						if options_before_rest then
+							rest.add_all(it.to_a)
+							parseargs = false
+						end
 					end
 				end
 			end

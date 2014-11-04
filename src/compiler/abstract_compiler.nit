@@ -34,8 +34,6 @@ redef class ToolContext
 	var opt_no_cc = new OptionBool("Do not invoke C compiler", "--no-cc")
 	# --no-main
 	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
-	# --cc-paths
-	var opt_cc_path = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
 	# --max-c-lines
@@ -81,6 +79,8 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
+
+		opt_no_main.hidden = true
 	end
 
 	redef fun process_options(args)
@@ -151,43 +151,9 @@ end
 
 class MakefileToolchain
 	super Toolchain
-	# The list of directories to search for included C headers (-I for C compilers)
-	# The list is initially set with :
-	#   * the toolcontext --cc-path option
-	#   * the NIT_CC_PATH environment variable
-	#   * `toolcontext.nit_dir`
-	# Path can be added (or removed) by the client
-	var cc_paths = new Array[String]
-
-	# The clib directory of Nit
-	# Used to found some common runtime
-	var clib: String is noinit
-
-	protected fun gather_cc_paths
-	do
-		# Look for the the Nit clib path
-		var path_env = toolcontext.nit_dir
-		if path_env != null then
-			var libname = "{path_env}/clib"
-			if not libname.file_exists then
-				toolcontext.fatal_error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
-			end
-			clib = libname
-		end
-
-		# Add user defined cc_paths
-		cc_paths.append(toolcontext.opt_cc_path.value)
-
-		path_env = "NIT_CC_PATH".environ
-		if not path_env.is_empty then
-			cc_paths.append(path_env.split_with(':'))
-		end
-	end
 
 	redef fun write_and_make(compiler)
 	do
-		gather_cc_paths
-
 		var compile_dir = compile_dir
 
 		# Generate the .h and .c files
@@ -231,6 +197,7 @@ class MakefileToolchain
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		compiler.extern_bodies.add(gc_chooser)
+		var clib = toolcontext.nit_dir / "clib"
 		compiler.files_to_copy.add "{clib}/gc_chooser.c"
 		compiler.files_to_copy.add "{clib}/gc_chooser.h"
 
@@ -352,18 +319,13 @@ class MakefileToolchain
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
-		var cc_includes = ""
-		for p in cc_paths do
-			cc_includes += " -I \"" + p + "\""
-		end
-
 		var linker_options = new HashSet[String]
 		for m in mainmodule.in_importation.greaters do
 			var libs = m.collect_linker_libs
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm `pkg-config --libs bdw-gc` {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm `pkg-config --libs bdw-gc` {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
 		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")

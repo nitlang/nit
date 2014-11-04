@@ -57,7 +57,7 @@ end
 
 redef class ToolContext
 	# We don't need 'the compute_nit_dir'.
-	redef fun compute_nit_dir: nullable String
+	redef fun compute_nit_dir
 	do
 		return "/pnacl"
 	end
