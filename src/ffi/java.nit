@@ -155,6 +155,8 @@ class JavaLanguage
 		{{{block.code}}}
 	}
 """
+
+		mmodule.callbacks_used_from_java.join m.foreign_callbacks
 	end
 
 	redef fun compile_extern_class(block, m, ccu, mmodule) do end
@@ -170,7 +172,7 @@ class JavaLanguage
 		mmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null), mmodule.ffi_callbacks[self])
+		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null))
 
 		# Java implementation code
 		var java_file = mmodule.java_file
@@ -189,6 +191,7 @@ class JavaLanguage
 end
 
 redef class MModule
+	private var callbacks_used_from_java = new ForeignCallbackSet
 
 	# Pure java class source file
 	private var java_file: nullable JavaClassTemplate = null
@@ -203,8 +206,9 @@ redef class MModule
 	end
 
 	# Compile C code to call JNI and link C callbacks implementations to Java extern methods
-	private fun ensure_linking_callback_methods(ccu: CCompilationUnit, callbacks: Set[NitniCallback])
+	private fun ensure_linking_callback_methods(ccu: CCompilationUnit)
 	do
+		var callbacks = callbacks_used_from_java.callbacks
 		if callbacks.is_empty then
 			ccu.body_decl.add "static int nit_ffi_with_java_registered_natives = 1;\n"
 			return
@@ -413,6 +417,8 @@ end
 redef class MExplicitCall
 	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
 	do
+		if not mmodule.callbacks_used_from_java.callbacks.has(self) then return
+
 		var mproperty = mproperty
 		assert mproperty isa MMethod
 
