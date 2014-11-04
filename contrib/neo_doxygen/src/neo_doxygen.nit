@@ -31,6 +31,11 @@ class NeoDoxygenJob
 	# How many operation can be executed in one batch?
 	private var batch_max_size = 1000
 
+	private var save_cursor: String = (new TermSaveCursor).to_s
+
+	# Escape control sequence to reset the current line.
+	private var reset_line: String = "{new TermRestoreCursor}{new TermEraseDisplayDown}"
+
 	# Generate a graph from the specified project model.
 	#
 	# Parameters:
@@ -49,19 +54,21 @@ class NeoDoxygenJob
 		if dir.length > 1 and dir.chars.last == "/" then
 			dir = dir.substring(0, dir.length - 1)
 		end
+		sys.stdout.write save_cursor
 		loop
 			for f in dir.files do
 				var path = dir/f
 				if path.file_stat.is_dir then
 					directories.push(path)
 				else if f.has_suffix(".xml") and f != "index.xml" then
-					print "Processing {path}..."
+					print "{reset_line}Reading {path}..."
 					reader.read(path)
 				end
 			end
 			if directories.length <= 0 then break
 			dir = directories.pop
 		end
+		print "{reset_line}Reading... Done."
 	end
 
 	# Check the project’s name.
@@ -82,12 +89,14 @@ class NeoDoxygenJob
 
 	# Save the graph.
 	fun save do
+		print "Linking nodes...{save_cursor}"
 		model.put_edges
+		print "{reset_line} Done."
 		var nodes = model.all_nodes
-		print("Saving {nodes.length} nodes...")
+		print "Saving {nodes.length} nodes...{save_cursor}"
 		push_all(nodes)
 		var edges = model.all_edges
-		print("Saving {edges.length} edges...")
+		print "Saving {edges.length} edges...{save_cursor}"
 		push_all(edges)
 	end
 
@@ -103,7 +112,7 @@ class NeoDoxygenJob
 			if i == batch_max_size then
 				do_batch(batch)
 				sum += batch_max_size
-				print("\t{sum * 100 / len}% done.")
+				print("{reset_line} {sum * 100 / len}%")
 				batch = new NeoBatch(client)
 				i = 1
 			else
@@ -111,6 +120,7 @@ class NeoDoxygenJob
 			end
 		end
 		do_batch(batch)
+		print("{reset_line} Done.")
 	end
 
 	# Execute `batch` and check for errors.

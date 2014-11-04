@@ -31,7 +31,7 @@ dir=$2
 
 echo "$0: Documenting \"${dir##*/}\"..."
 pushd "$dir"
-try "$NEO_DOXYGEN" --src-lang "$1" --dest http://localhost:7474 -- "${dir##*/}" "$dir/doxygen/xml" > neo_doxygen.out
+try "$NEO_DOXYGEN" --src-lang "$1" --dest http://localhost:7474 -- "${dir##*/}" "$dir/doxygen/xml"
 try echo "$0: [done] neo_doxygen"
 try "$NX" neo doc "${dir##*/}"
 try echo "$0: [done] nx"
