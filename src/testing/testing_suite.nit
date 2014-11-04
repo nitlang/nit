@@ -214,8 +214,8 @@ class TestCase
 	fun compile do
 		# find nitg
 		var nit_dir = toolcontext.nit_dir
-		var nitg = "{nit_dir or else ""}/bin/nitg"
-		if nit_dir == null or not nitg.file_exists then
+		var nitg = nit_dir/"bin/nitg"
+		if not nitg.file_exists then
 			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
 			toolcontext.check_errors
 		end

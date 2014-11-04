@@ -402,7 +402,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 	end
 
 	# The identified root directory of the Nit project
-	var nit_dir: nullable String = null
+	var nit_dir: String is noinit
 
 	private fun compute_nit_dir: String
 	do

@@ -141,10 +141,8 @@ class ModelBuilder
 		end
 
 		var nit_dir = toolcontext.nit_dir
-		if nit_dir != null then
-			var libname = "{nit_dir}/lib"
-			if libname.file_exists then paths.add(libname)
-		end
+		var libname = "{nit_dir}/lib"
+		if libname.file_exists then paths.add(libname)
 	end
 
 	# Load a bunch of modules.
