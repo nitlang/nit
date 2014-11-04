@@ -19,9 +19,162 @@ module console
 abstract class TermEscape
 	# The US-ASCII ESC character.
 	protected fun esc: Char do return 27.ascii
+
+	# The Control Sequence Introducer (CSI).
+	protected fun csi: String do return "{esc}["
 end
 
-# ANSI/VT100 code to switch character attributes (SGR).
+# Abstract class of the ANSI/VT100 escape sequences for directional moves.
+abstract class TermDirectionalMove
+	super TermEscape
+
+	# The length of the move.
+	var magnitude: Int = 1 is protected writable
+
+	redef fun to_s do
+		if magnitude == 1 then return "{csi}{code}"
+		return "{csi}{magnitude}{code}"
+	end
+
+	# The code of the command.
+	protected fun code: String is abstract
+end
+
+# ANSI/VT100 code to move the cursor up by `magnitude` rows (CUU).
+class TermMoveUp
+	super TermDirectionalMove
+
+	init do end
+
+	# Move by the specified number of cells.
+	init by(magnitude: Int) do self.magnitude = magnitude
+
+	redef fun code do return "A"
+end
+
+# ANSI/VT100 code to move the cursor down by `magnitude` rows (CUD).
+class TermMoveDown
+	super TermDirectionalMove
+
+	init do end
+
+	# Move by the specified number of cells.
+	init by(magnitude: Int) do self.magnitude = magnitude
+
+	redef fun code do return "B"
+end
+
+# ANSI/VT100 code to move the cursor foward by `magnitude` columns (CUF).
+class TermMoveFoward
+	super TermDirectionalMove
+
+	init do end
+
+	# Move by the specified number of cells.
+	init by(magnitude: Int) do self.magnitude = magnitude
+
+	redef fun code do return "C"
+end
+
+# ANSI/VT100 code to move the cursor backward by `magnitude` columns (CUB).
+class TermMoveBackward
+	super TermDirectionalMove
+
+	init do end
+
+	# Move by the specified number of cells.
+	init by(magnitude: Int) do self.magnitude = magnitude
+
+	redef fun code do return "D"
+end
+
+# ANSI/VT100 code to move the cursor at the specified position (CUP).
+class TermMove
+	super TermEscape
+
+	# Vertical position.
+	#
+	# 1 is the top.
+	var row: Int = 1
+
+	# Horizontal position.
+	#
+	# 1 is the left.
+	var column: Int = 1
+
+	init do end
+
+	# Move at the specified position.
+	#
+	# (1, 1) is the top-left corner of the display.
+	init at(row: Int, column: Int) do
+		self.row = row
+		self.column = column
+	end
+
+	redef fun to_s do
+		if row == 1 then
+			if column == 1 then return "{csi}H"
+			return "{csi};{column}H"
+		else
+			if column == 1 then return "{csi}{row}H"
+			return "{csi}{row};{column}H"
+		end
+	end
+end
+
+# ANSI/VT100 code to clear from the cursor to the end of the screen (ED 0).
+class TermEraseDisplayDown
+	super TermEscape
+	redef fun to_s do return "{csi}J"
+end
+
+# ANSI/VT100 code to clear from the cursor to the beginning of the screen (ED 1).
+class TermEraseDisplayUp
+	super TermEscape
+	redef fun to_s do return "{csi}1J"
+end
+
+# ANSI/VT100 code to clear the entire display and move the cursor to the top left of screen (ED 2).
+#
+# Note: Some terminals always move the cursor when the screen is cleared. So we
+# force this behaviour to ensure interoperability of the code.
+class TermClearDisplay
+	super TermEscape
+	redef fun to_s do return "{csi}2J{csi}H"
+end
+
+# ANSI/VT100 code to erase anything after the cursor in the line (EL 0).
+class TermEraseLineFoward
+	super TermEscape
+	redef fun to_s do return "{csi}K"
+end
+
+# ANSI/VT100 code to erase anything before the cursor in the line (EL 1).
+class TermEraseLineBackward
+	super TermEscape
+	redef fun to_s do return "{csi}1K"
+end
+
+# ANSI/VT100 code to clear everything in the current line (EL 2).
+class TermClearLine
+	super TermEscape
+	redef fun to_s do return "{csi}2K"
+end
+
+# ANSI/VT100 code to save the current cursor position (SCP).
+class TermSaveCursor
+	super TermEscape
+	redef fun to_s do return "{csi}s"
+end
+
+# ANSI/VT100 code to restore the current cursor position (RCP).
+class TermRestoreCursor
+	super TermEscape
+	redef fun to_s do return "{csi}u"
+end
+
+# ANSI/VT100 code to change character look (SGR).
 #
 # By default, resets everything to the terminal’s defaults.
 #
@@ -46,7 +199,7 @@ class TermCharFormat
 		attributes.add_all(format.attributes)
 	end
 
-	redef fun to_s: String do return "{esc}[{attributes.join(";")}m"
+	redef fun to_s: String do return "{csi}{attributes.join(";")}m"
 
 	# Apply the specified SGR and return `self`.
 	private fun apply(sgr: String): TermCharFormat do
