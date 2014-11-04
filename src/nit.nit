@@ -23,6 +23,7 @@ import parser_util
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
+toolcontext.option_context.options_before_rest = true
 toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets and debugs Nit programs."
 # Add an option "-o" to enable compatibilit with the tests.sh script
 var opt = new OptionString("compatibility (does noting)", "-o")
