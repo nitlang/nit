@@ -2,7 +2,7 @@
 
 # NAME
 
-nitg --- compiles Nit programs.
+nitg - compiles Nit programs.
 
 
 # SYNOPSIS
@@ -31,7 +31,11 @@ To produce more optimized executables, the current best option is `--semi-global
 To improve the compilation time and simplify the compilation of multiple programs, more than one file can be given.
 Each one will be compiled into a distinct executable.
 
+    $ nitg prog1.nit prog2.nit
+
 To combine files into a single program, use the `-m` option.
+
+    $ nitg prog1.nit -m other_module.nit
 
 nitg can produces executables for various platforms when specific modules are used.
 Currently, android, pnacl and emscripten are supported.
@@ -75,15 +79,15 @@ See the documentation of these specific modules for details.
 
     To show only `missing-doc` warnings in standard"
 
-      $ nitg -q -w missing-doc standard
+        $ nitg -q -w missing-doc standard
 
     To show all warnings and advices, except `missing-doc`:
 
-      $ nitg -W -w no-missing-doc standard
+        $ nitg -W -w no-missing-doc standard
 
     To show important warnings except `useless-type-test`, but not advice except `missing-doc`:
 
-      $ nitg -w missing-doc -w no-useless-type-test standard
+        $ nitg -w missing-doc -w no-useless-type-test standard
 
 `-q`, `--quiet`
 :   Do not show warnings.
@@ -106,7 +110,8 @@ See the documentation of these specific modules for details.
 
     With one `-v`, there is constant number of lines.
     With two `-v`, the number of lines is proportional to the number of modules.
-    With three `-v`, the number of lines is proportional to the number of definition of properties.
+    With three `-v`, the number of lines is proportional to the number of definition of classes.
+    With four `-v`, the number of lines is proportional to the number of definition of properties.
 
 `--log`
 :   Generate various log files.
@@ -127,7 +132,7 @@ See the documentation of these specific modules for details.
 ## PATHS
 
 `-I`, `--path`
-:   Add an include path.
+:   Add an additional include path.
 
     This option is used to indicate an additional path of a directory containing Nit libraries.
 
@@ -143,13 +148,17 @@ See the documentation of these specific modules for details.
     Note: it is better to use `--dir` if only the directory is important.
     This way, the platform extension will be correctly set.
 
-    `-o` is not available if multiple programs are compiled at once.
+    `-o` is not usable if multiple programs are compiled at once.
 
 `--dir`
 :   Output directory.
 
     Produce the executables in the given directory instead of the current directory.
 
+`--nit-dir`
+:   Base directory of the Nit installation.
+
+    Has precedence over the environment variable `NIT_DIR`.
 
 ## COMPILATION
 
@@ -166,7 +175,7 @@ See the documentation of these specific modules for details.
     This option is mainly used to produce C files distributable then compilable on system that do not have a Nit compiler (e.g. embedded system).
     In this case, it is suggested to also use the options `--dir`, `--compile-dir` and `--semi-global`.
 
-      $ nitg examples/hello_world.nit --no-cc --dir hello --compile-dir hello --semi-global
+        $ nitg examples/hello_world.nit --no-cc --dir hello --compile-dir hello --semi-global
 
     Will produce a `hello` directory that contains the required C files to finish the compilation.
     Only the C files required for the program are generated.
@@ -187,7 +196,7 @@ See the documentation of these specific modules for details.
 
     A last usage is to develop programs as product lines with a main basic module (vanilla) and specific distinct features as flavor modules, then to combine them at compile-time.
 
-      $ nitg prog_vanilla.nit -m feature_chocolate.nit -m feature_cherry.nit
+        $ nitg prog_vanilla.nit -m feature_chocolate.nit -m feature_cherry.nit
 
 `-D`, `--define`
 :   Define a specific property.
@@ -200,7 +209,7 @@ See the documentation of these specific modules for details.
     The argument of the `-D` option is "{name}={value}".
     For Bool, the argument can also be just "{name}", in this case, the value is considered to be `true`.
 
-      $ nitg foo.nit -D prefix=/opt/foo -D port=8080 -D with_ssl
+        $ nitg foo.nit -D prefix=/opt/foo -D port=8080 -D with_ssl
 
 `--release`
 :   Compile in release mode and finalize application.
@@ -262,7 +271,7 @@ will increase.
     Need `--rta`.
 
 `--skip-dead-methods`
-:   Do not compile dead methods (semi-global)
+:   Do not compile dead methods (semi-global).
     Need `--rta`.
 
 
@@ -356,7 +365,7 @@ They are useless for a normal user.
 `--make-flags`
 :   Additional options to the `make` command.
 
-      $ nitg foo.nit --make-flags 'CC=clang' --make-flags 'CFLAGS="-O0 -g"'
+          $ nitg foo.nit --make-flags 'CC=clang' --make-flags 'CFLAGS="-O0 -g"'
 
 `--typing-test-metrics`
 :   Enable static and dynamic count of all type tests.
@@ -383,13 +392,15 @@ They are useless for a normal user.
 # ENVIRONMENT VARIABLES
 
 `NIT_DIR`
-:   Nit install directory.
+:   Base directory of the Nit installation.
 
     When the `NIT_DIR` environment variable is set then it specifies the path of the Nit install directory.
 
     This directory is used to locate binaries, shared files and the common libraries.
 
     When unset, the directory is guessed according to some heuristic.
+
+    The `--nit-dir` option also set the base directory of the Nit installation but has precedence.
 
 `NIT_PATH`
 :   Additional include paths.
