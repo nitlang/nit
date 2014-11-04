@@ -213,27 +213,27 @@ class NeoModel
 
 	# Fill `model` using base pointed by `client`.
 	fun load(model: Model): Model do
-		toolcontext.info("Locate all mentities...", 1)
-		var nodes = client.nodes_with_label(model_name)
+		var nodes: Array[NeoNode]
 
-		toolcontext.info("Preload nodes...", 1)
-		pull_all_nodes(nodes)
-		toolcontext.info("Preload edges...", 1)
-		pull_all_edges(nodes)
-
-		toolcontext.info("Build model...", 1)
+		toolcontext.info("Loading project node...", 1)
 		nodes = client.nodes_with_labels([model_name, "MProject"])
 		for node in nodes do to_mproject(model, node)
+		toolcontext.info("Loading groups...", 1)
 		nodes = client.nodes_with_labels([model_name, "MGroup"])
 		for node in nodes do to_mgroup(model, node)
+		toolcontext.info("Loading modules...", 1)
 		nodes = client.nodes_with_labels([model_name, "MModule"])
 		for node in nodes do to_mmodule(model, node)
+		toolcontext.info("Loading classes...", 1)
 		nodes = client.nodes_with_labels([model_name, "MClass"])
 		for node in nodes do to_mclass(model, node)
+		toolcontext.info("Loading class definitions...", 1)
 		nodes = client.nodes_with_labels([model_name, "MClassDef"])
 		for node in nodes do to_mclassdef(model, node)
+		toolcontext.info("Loading properties...", 1)
 		nodes = client.nodes_with_labels([model_name, "MProperty"])
 		for node in nodes do to_mproperty(model, node)
+		toolcontext.info("Loading property definitions...", 1)
 		nodes = client.nodes_with_labels([model_name, "MPropDef"])
 		for node in nodes do to_mpropdef(model, node)
 		return model
@@ -257,52 +257,6 @@ class NeoModel
 		var i = 1
 		for nentity in neo_entities do
 			batch.save_entity(nentity)
-			if i == batch_max_size then
-				do_batch(batch)
-				sum += batch_max_size
-				toolcontext.info(" {sum * 100 / len}% done", 1)
-				batch = new NeoBatch(client)
-				i = 1
-			else
-				i += 1
-			end
-		end
-		do_batch(batch)
-	end
-
-	# Load content for all `nodes` from base.
-	#
-	# Content corresponds to properties and labels that are loaded in batch mode.
-	private fun pull_all_nodes(nodes: Collection[NeoNode]) do
-		var batch = new NeoBatch(client)
-		var len = nodes.length
-		var sum = 0
-		var i = 1
-		for node in nodes do
-			batch.load_node(node)
-			if i == batch_max_size then
-				do_batch(batch)
-				sum += batch_max_size
-				toolcontext.info(" {sum * 100 / len}% done", 1)
-				batch = new NeoBatch(client)
-				i = 1
-			else
-				i += 1
-			end
-		end
-		do_batch(batch)
-	end
-
-	# Load all edges from base linked to `nodes`.
-	#
-	# Edges are loaded in batch mode.
-	private fun pull_all_edges(nodes: Collection[NeoNode]) do
-		var batch = new NeoBatch(client)
-		var len = nodes.length
-		var sum = 0
-		var i = 1
-		for node in nodes do
-			batch.load_node_edges(node)
 			if i == batch_max_size then
 				do_batch(batch)
 				sum += batch_max_size
@@ -349,7 +303,9 @@ class NeoModel
 	end
 
 	# Mentities associated to nodes.
-	private var mentities = new HashMap[NeoNode, MEntity]
+	#
+	# The key is the node’s id.
+	private var mentities = new HashMap[Int, MEntity]
 
 	# Nodes associated with MEntities.
 	private var nodes = new HashMap[MEntity, NeoNode]
@@ -396,10 +352,12 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MProject")`
 	private fun to_mproject(model: Model, node: NeoNode): MProject do
-		if mentities.has_key(node) then return mentities[node].as(MProject)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MProject then return m
+
 		assert node.labels.has("MProject")
 		var mproject = new MProject(node["name"].to_s, model)
-		mentities[node] = mproject
+		mentities[node.id.as(Int)] = mproject
 		set_doc(node, mproject)
 		mproject.root = to_mgroup(model, node.out_nodes("ROOT").first)
 		return mproject
@@ -428,7 +386,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MGroup")`
 	private fun to_mgroup(model: Model, node: NeoNode): MGroup do
-		if mentities.has_key(node) then return mentities[node].as(MGroup)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MGroup then return m
+
 		assert node.labels.has("MGroup")
 		var mproject = to_mproject(model, node.out_nodes("PROJECT").first)
 		var parent: nullable MGroup = null
@@ -437,7 +397,7 @@ class NeoModel
 			parent = to_mgroup(model, out.first)
 		end
 		var mgroup = new MGroup(node["name"].to_s, mproject, parent)
-		mentities[node] = mgroup
+		mentities[node.id.as(Int)] = mgroup
 		set_doc(node, mgroup)
 		return mgroup
 	end
@@ -464,7 +424,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MModule")`
 	private fun to_mmodule(model: Model, node: NeoNode): MModule do
-		if mentities.has_key(node) then return mentities[node].as(MModule)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MModule then return m
+
 		assert node.labels.has("MModule")
 		var ins = node.in_nodes("DECLARES")
 		var mgroup: nullable MGroup = null
@@ -474,7 +436,7 @@ class NeoModel
 		var name = node["name"].to_s
 		var location = to_location(node["location"].to_s)
 		var mmodule = new MModule(model, mgroup, name, location)
-		mentities[node] = mmodule
+		mentities[node.id.as(Int)] = mmodule
 		set_doc(node, mmodule)
 		var imported_mmodules = new Array[MModule]
 		for smod in node.out_nodes("IMPORTS") do
@@ -504,7 +466,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MClass")`
 	private fun to_mclass(model: Model, node: NeoNode): MClass do
-		if mentities.has_key(node) then return mentities[node].as(MClass)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MClass then return m
+
 		assert node.labels.has("MClass")
 		var mmodule = to_mmodule(model, node.in_nodes("INTRODUCES").first)
 		var name = node["name"].to_s
@@ -517,7 +481,7 @@ class NeoModel
 			end
 		end
 		var mclass = new MClass(mmodule, name, parameter_names, kind, visibility)
-		mentities[node] = mclass
+		mentities[node.id.as(Int)] = mclass
 		set_doc(node, mclass)
 		return mclass
 	end
@@ -545,13 +509,15 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MClassDef")`
 	private fun to_mclassdef(model: Model, node: NeoNode): MClassDef do
-		if mentities.has_key(node) then return mentities[node].as(MClassDef)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MClassDef then return m
+
 		assert node.labels.has("MClassDef")
 		var mmodule = to_mmodule(model, node.in_nodes("DEFINES").first)
 		var mtype = to_mtype(model, node.out_nodes("BOUNDTYPE").first).as(MClassType)
 		var location = to_location(node["location"].to_s)
 		var mclassdef = new MClassDef(mmodule, mtype, location)
-		mentities[node] = mclassdef
+		mentities[node.id.as(Int)] = mclassdef
 		set_doc(node, mclassdef)
 		var supertypes = new Array[MClassType]
 		for sup in node.out_nodes("INHERITS") do
@@ -584,7 +550,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MProperty")`
 	private fun to_mproperty(model: Model, node: NeoNode): MProperty do
-		if mentities.has_key(node) then return mentities[node].as(MProperty)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MProperty then return m
+
 		assert node.labels.has("MProperty")
 		var intro_mclassdef = to_mclassdef(model, node.out_nodes("INTRO_CLASSDEF").first)
 		var name = node["name"].to_s
@@ -602,7 +570,7 @@ class NeoModel
 			print "not yet implemented to_mproperty for {node.labels.join(",")}"
 			abort
 		end
-		mentities[node] = mprop
+		mentities[node.id.as(Int)] = mprop
 		set_doc(node, mprop)
 		return mprop
 	end
@@ -642,7 +610,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MPropDef")`
 	private fun to_mpropdef(model: Model, node: NeoNode): MPropDef do
-		if mentities.has_key(node) then return mentities[node].as(MPropDef)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MPropDef then return m
+
 		assert node.labels.has("MPropDef")
 		var mclassdef = to_mclassdef(model, node.in_nodes("DECLARES").first)
 		var mproperty = to_mproperty(model, node.out_nodes("DEFINES").first)
@@ -653,16 +623,16 @@ class NeoModel
 			mpropdef.is_abstract = node["is_abstract"].as(Bool)
 			mpropdef.is_intern = node["is_intern"].as(Bool)
 			mpropdef.is_extern = node["is_extern"].as(Bool)
-			mentities[node] = mpropdef
+			mentities[node.id.as(Int)] = mpropdef
 			mpropdef.msignature = to_mtype(model, node.out_nodes("SIGNATURE").first).as(MSignature)
 		else if node.labels.has("MAttributeDef") then
 			mpropdef = new MAttributeDef(mclassdef, mproperty.as(MAttribute), location)
-			mentities[node] = mpropdef
+			mentities[node.id.as(Int)] = mpropdef
 			var static_mtype = node.out_nodes("TYPE")
 			if not static_mtype.is_empty then mpropdef.static_mtype = to_mtype(model, static_mtype.first)
 		else if node.labels.has("MVirtualTypeDef") then
 			mpropdef = new MVirtualTypeDef(mclassdef, mproperty.as(MVirtualTypeProp), location)
-			mentities[node] = mpropdef
+			mentities[node.id.as(Int)] = mpropdef
 			var bound = node.out_nodes("BOUND")
 			if not bound.is_empty then mpropdef.bound = to_mtype(model, bound.first)
 		end
@@ -720,7 +690,9 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MType")`
 	private fun to_mtype(model: Model, node: NeoNode): MType do
-		if mentities.has_key(node) then return mentities[node].as(MType)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MType then return m
+
 		assert node.labels.has("MType")
 		if node.labels.has("MClassType") then
 			var mclass = to_mclass(model, node.out_nodes("CLASS").first)
@@ -729,24 +701,24 @@ class NeoModel
 				args.add to_mtype(model, narg)
 			end
 			var mtype = mclass.get_mtype(args)
-			mentities[node] = mtype
+			mentities[node.id.as(Int)] = mtype
 			return mtype
 		else if node.labels.has("MParameterType") then
 			var mclass = to_mclass(model, node.out_nodes("CLASS").first)
 			var rank = node["rank"].to_s.to_i
 			var mtype = mclass.mparameters[rank]
-			mentities[node] = mtype
+			mentities[node.id.as(Int)] = mtype
 			return  mtype
 		else if node.labels.has("MNullableType") then
 			var intype = to_mtype(model, node.out_nodes("TYPE").first)
 			var mtype = intype.as_nullable
-			mentities[node] = mtype
+			mentities[node.id.as(Int)] = mtype
 			return mtype
 		else if node.labels.has("MVirtualType") then
 			var mproperty = to_mproperty(model, node.out_nodes("PROPERTY").first)
 			assert mproperty isa MVirtualTypeProp
 			var mtype = mproperty.mvirtualtype
-			mentities[node] = mtype
+			mentities[node.id.as(Int)] = mtype
 			return mtype
 		else if node.labels.has("MSignature") then
 			# Get all param nodes
@@ -770,7 +742,7 @@ class NeoModel
 				return_mtype = to_mtype(model, ret_nodes.first)
 			end
 			var mtype = new MSignature(mparameters, return_mtype)
-			mentities[node] = mtype
+			mentities[node.id.as(Int)] = mtype
 			return mtype
 		end
 		print "not yet implemented to_mtype for {node.labels.join(",")}"
@@ -791,13 +763,15 @@ class NeoModel
 	#
 	# REQUIRE `node.labels.has("MParameter")`
 	private fun to_mparameter(model: Model, node: NeoNode): MParameter do
-		if mentities.has_key(node) then return mentities[node].as(MParameter)
+		var m = mentities.get_or_null(node.id.as(Int))
+		if m isa MParameter then return m
+
 		assert node.labels.has("MParameter")
 		var name = node["name"].to_s
 		var mtype = to_mtype(model, node.out_nodes("TYPE").first)
 		var is_vararg = node["is_vararg"].as(Bool)
 		var mparameter = new MParameter(name, mtype, is_vararg)
-		mentities[node] = mparameter
+		mentities[node.id.as(Int)] = mparameter
 		return mparameter
 	end
 
