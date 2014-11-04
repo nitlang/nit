@@ -246,6 +246,9 @@ class ToolContext
 	# Option --log-dir
 	var opt_log_dir = new OptionString("Directory where to generate log files", "--log-dir")
 
+	# Option --nit-dir
+	var opt_nit_dir = new OptionString("Base directory of the Nit installation", "--nit-dir")
+
 	# Option --help
 	var opt_help = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
@@ -275,7 +278,7 @@ class ToolContext
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
 	end
 
 	# Name, usage and synopsis of the tool.
@@ -365,6 +368,8 @@ The Nit language documentation and the source code of its tools and libraries ma
 			exit 1
 		end
 
+		nit_dir = compute_nit_dir
+
 		if option_context.rest.is_empty and not accept_no_arguments then
 			print tooldescription
 			print "Use --help for help"
@@ -382,7 +387,6 @@ The Nit language documentation and the source code of its tools and libraries ma
 			log_directory.mkdir
 		end
 
-		nit_dir = compute_nit_dir
 	end
 
 	# Get the current `nit_version` or "DUMMY_VERSION" if `--set-dummy-tool` is set.
@@ -406,8 +410,17 @@ The Nit language documentation and the source code of its tools and libraries ma
 
 	private fun compute_nit_dir: String
 	do
-		# a environ variable has precedence
-		var res = "NIT_DIR".environ
+		# the option has precedence
+		var res = opt_nit_dir.value
+		if res != null then
+			if not check_nit_dir(res) then
+				fatal_error(null, "Fatal Error: the value of --nit-dir does not seem to be a valid base Nit directory: {res}")
+			end
+			return res
+		end
+
+		# then the environ variable has precedence
+		res = "NIT_DIR".environ
 		if not res.is_empty then
 			if not check_nit_dir(res) then
 				fatal_error(null, "Fatal Error: the value of NIT_DIR does not seem to be a valid base Nit directory: {res}")
