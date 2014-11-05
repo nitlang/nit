@@ -338,9 +338,6 @@ class Worker
 	# Output file of the `tests.sh` script
 	var tests_sh_out = "/dev/shm/nit_local_out{rank}" is lazy
 
-	# Path to the local copy of the Nit repository
-	var nit_copy_dir = "/dev/shm/nit{rank}/" is lazy
-
 	# Source Nit repository, must be already updated and `make` before execution
 	var nit_source_dir = "~/nit"
 
@@ -365,7 +362,6 @@ class Worker
 	fun setup
 	do
 		if verbose > 0 then sys.system "hostname"
-		sys.system "git clone {nit_source_dir} {nit_copy_dir}"
 	end
 
 	# Clean up the testing environment
@@ -375,7 +371,6 @@ class Worker
 	do
 		if comp_dir.file_exists then comp_dir.rmdir
 		if out_dir.file_exists then out_dir.rmdir
-		if nit_copy_dir.file_exists then nit_copy_dir.rmdir
 		if tests_sh_out.file_exists then tests_sh_out.file_delete
 	end
 
@@ -408,7 +403,7 @@ class Worker
 					var cmd = "XMLDIR={xml_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
 						"CCACHE_DIR={ccache_dir} CCACHE_TEMPDIR={ccache_dir} CCACHE_BASEDIR={comp_dir} " +
 						"./tests.sh --compdir {comp_dir} --outdir {out_dir} " +
-						" --node --engine {task.engine} {nit_copy_dir / "tests" / task.test_program} > {tests_sh_out}"
+						" --node --engine {task.engine} {task.test_program} > {tests_sh_out}"
 
 					# Execute test
 					sys.system cmd
