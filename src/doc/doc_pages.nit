@@ -1006,7 +1006,7 @@ class NitdocModule
 		end
 		# build graph
 		var op = new FlatBuffer
-		var name = "dep_{mmodule.name}"
+		var name = "dep_module_{mmodule.nitdoc_id}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
 			if mmodule == self.mmodule then
@@ -1389,7 +1389,7 @@ class NitdocClass
 		end
 
 		var op = new FlatBuffer
-		var name = "dep_{mclass.name}"
+		var name = "dep_class_{mclass.nitdoc_id}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		var classes = poset.to_a
 		var todo = new Array[MClass]
