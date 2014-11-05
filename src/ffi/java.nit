@@ -330,7 +330,6 @@ class JavaClassTemplate
 	super Template
 
 	var java_class_name: String
-	init(name: String) do self.java_class_name = name
 
 	var header = new Template
 	var class_content = new Template
@@ -394,7 +393,6 @@ class ForeignJavaType
 	super ForeignType
 
 	var java_type: String
-	init (java_type: String) do self.java_type = java_type
 end
 
 redef class NitniCallback

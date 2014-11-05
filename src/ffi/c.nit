@@ -80,11 +80,6 @@ class ForeignCType
 	super ForeignType
 
 	redef var ctype: String
-
-	init(ctype: String)
-	do
-		self.ctype = ctype
-	end
 end
 
 redef class NitniCallback
@@ -114,7 +109,7 @@ end
 class ToCCallContext
 	super CallContext
 
-	private init do end
+	# TODO: private init because singleton instance (see `to_c_call_context`)
 
 	redef fun name_mtype(mtype)
 	do
@@ -127,7 +122,7 @@ end
 class FromCCallContext
 	super CallContext
 
-	private init do end
+	# TODO: private init because singleton instance (see `from_c_call_context`)
 
 	redef fun name_mtype(mtype) do return mtype.cname
 end

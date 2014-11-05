@@ -39,10 +39,10 @@ private class TypeVisitor
 
 	# The static type of the receiver
 	# Mainly used for type tests and type resolutions
-	var anchor: nullable MClassType
+	var anchor: nullable MClassType = null
 
 	# The analyzed mclassdef
-	var mclassdef: nullable MClassDef
+	var mclassdef: nullable MClassDef = null
 
 	# The analyzed property
 	var mpropdef: nullable MPropDef
@@ -54,10 +54,9 @@ private class TypeVisitor
 	# * method called on the implicit self must be top-level
 	var is_toplevel_context = false
 
-	init(modelbuilder: ModelBuilder, mmodule: MModule, mpropdef: nullable MPropDef)
+	init
 	do
-		self.modelbuilder = modelbuilder
-		self.mmodule = mmodule
+		var mpropdef = self.mpropdef
 
 		if mpropdef != null then
 			self.mpropdef = mpropdef

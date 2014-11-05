@@ -44,11 +44,6 @@ private class LocalVarInitVisitor
 
 	var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext)
-	do
-		self.toolcontext = toolcontext
-	end
-
 	# Local variables that are possibly unset (ie local variable without an initial value)
 	var maybe_unset_vars: Set[Variable] = new HashSet[Variable]
 

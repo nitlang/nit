@@ -23,12 +23,13 @@ class SourceFile
 	var filename: String
 
 	# The content of the source
-	var string: String
+	var string: String is noinit
 
-	# Create a new sourcefile using a filename and a stream
-	init(filename: String, stream: IStream)
+	# The original stream used to initialize `string`
+	var stream: IStream
+
+	init
 	do
-		self.filename = filename
 		string = stream.read_all
 		line_starts[0] = 0
 	end
@@ -56,14 +57,6 @@ class Location
 	var column_start: Int
 	var column_end: Int
 
-	init(f: nullable SourceFile, line_s: Int, line_e: Int, column_s: Int, column_e: Int) do
-		file = f
-		line_start = line_s
-		line_end = line_e
-		column_start = column_s
-		column_end = column_e
-	end
-
 	# The index in the start character in the source
 	fun pstart: Int do return file.line_starts[line_start-1] + column_start-1
 
@@ -83,7 +76,7 @@ class Location
 		return res
 	end
 
-	private var text_cache: nullable String
+	private var text_cache: nullable String = null
 
 	init with_file(f: SourceFile) do init(f,0,0,0,0)
 

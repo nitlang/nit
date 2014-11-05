@@ -58,11 +58,7 @@ class MVisibility
 
 	private var level: Int
 
-	private init(s: String, level: Int)
-	do
-		self.to_s = s
-		self.level = level
-	end
+	# TODO: private init because enumeration.
 
 	# Is self give less visibility than other
 	# none < private < protected < public < intrude

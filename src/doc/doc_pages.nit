@@ -86,15 +86,9 @@ end
 
 # The Nitdoc class explores the model and generate pages for each mentities found
 class Nitdoc
+	var ctx: ToolContext
 	var model: Model
 	var mainmodule: MModule
-	var ctx: ToolContext
-
-	init(ctx: ToolContext, model: Model, mainmodule: MModule) do
-		self.ctx = ctx
-		self.model = model
-		self.mainmodule = mainmodule
-	end
 
 	fun generate do
 		init_output_dir
@@ -196,7 +190,10 @@ class QuickSearch
 	private var mclasses = new HashSet[MClass]
 	private var mpropdefs = new HashMap[String, Set[MPropDef]]
 
-	init(ctx: ToolContext, model: Model) do
+	var ctx: ToolContext
+	var model: Model
+
+	init do
 		for mmodule in model.mmodules do
 			if mmodule.is_fictive then continue
 			mmodules.add mmodule
@@ -252,12 +249,6 @@ abstract class NitdocPage
 	private var model: Model
 	private var mainmodule: MModule
 	private var name_sorter = new MEntityNameSorter
-
-	init(ctx: ToolContext, model: Model, mainmodule: MModule) do
-		self.ctx = ctx
-		self.model = model
-		self.mainmodule = mainmodule
-	end
 
 	# Render the page as a html template
 	fun render: Template do
@@ -673,13 +664,11 @@ class NitdocGroup
 
 	private var mgroup: MGroup
 
-	private var concerns: ConcernsTree
-	private var intros: Set[MClass]
-	private var redefs: Set[MClass]
+	private var concerns: ConcernsTree is noinit
+	private var intros: Set[MClass] is noinit
+	private var redefs: Set[MClass] is noinit
 
-	init(ctx: ToolContext, model: Model, mainmodule: MModule, mgroup: MGroup) do
-		super
-		self.mgroup = mgroup
+	init do
 		self.concerns = model.concerns_tree(mgroup.collect_mmodules)
 		self.concerns.sort_with(new MConcernRankSorter)
 		self.intros = mgroup.in_nesting_intro_mclasses(ctx.min_visibility)
@@ -800,14 +789,12 @@ class NitdocModule
 	super NitdocPage
 
 	private var mmodule: MModule
-	private var concerns: ConcernsTree
-	private var mclasses2mdefs: Map[MClass, Set[MClassDef]]
-	private var mmodules2mclasses: Map[MModule, Set[MClass]]
+	private var concerns: ConcernsTree is noinit
+	private var mclasses2mdefs: Map[MClass, Set[MClassDef]] is noinit
+	private var mmodules2mclasses: Map[MModule, Set[MClass]] is noinit
 
 
-	init(ctx: ToolContext, model: Model, mainmodule: MModule, mmodule: MModule) do
-		super
-		self.mmodule = mmodule
+	init do
 		var mclassdefs = new HashSet[MClassDef]
 		mclassdefs.add_all mmodule.intro_mclassdefs(ctx.min_visibility)
 		mclassdefs.add_all mmodule.redef_mclassdefs(ctx.min_visibility)
@@ -1043,13 +1030,11 @@ class NitdocClass
 	super NitdocPage
 
 	private var mclass: MClass
-	private var concerns: ConcernsTree
-	private var mprops2mdefs: Map[MProperty, Set[MPropDef]]
-	private var mmodules2mprops: Map[MModule, Set[MProperty]]
+	private var concerns: ConcernsTree is noinit
+	private var mprops2mdefs: Map[MProperty, Set[MPropDef]] is noinit
+	private var mmodules2mprops: Map[MModule, Set[MProperty]] is noinit
 
-	init(ctx: ToolContext, model: Model, mainmodule: MModule, mclass: MClass) do
-		super
-		self.mclass = mclass
+	init do
 		var mpropdefs = new HashSet[MPropDef]
 		mpropdefs.add_all mclass.intro_mpropdefs(ctx.min_visibility)
 		mpropdefs.add_all mclass.redef_mpropdefs(ctx.min_visibility)
@@ -1429,11 +1414,10 @@ class NitdocProperty
 	super NitdocPage
 
 	private var mproperty: MProperty
-	private var concerns: ConcernsTree
-	private var mmodules2mdefs: Map[MModule, Set[MPropDef]]
+	private var concerns: ConcernsTree is noinit
+	private var mmodules2mdefs: Map[MModule, Set[MPropDef]] is noinit
 
-	init(ctx: ToolContext, model: Model, mainmodule: MModule, mproperty: MProperty) do
-		super
+	init do
 		self.mproperty = mproperty
 		self.mmodules2mdefs = sort_by_mmodule(collect_mpropdefs)
 		self.concerns = model.concerns_tree(mmodules2mdefs.keys)

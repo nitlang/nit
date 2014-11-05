@@ -150,5 +150,6 @@ end
 # Length of the signature of a C function (long version hase the module name as prefix)
 class SignatureLength
 	private var long: Bool
-	private init(long: Bool) do self.long = long
+
+	# TODO: private init because singleton class.
 end

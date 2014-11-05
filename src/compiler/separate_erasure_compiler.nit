@@ -101,12 +101,11 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_ids: Map[MClass, Int]
-	private var class_colors: Map[MClass, Int]
-	protected var vt_colors: Map[MVirtualTypeProp, Int]
+	private var class_ids: Map[MClass, Int] is noinit
+	private var class_colors: Map[MClass, Int] is noinit
+	protected var vt_colors: Map[MVirtualTypeProp, Int] is noinit
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
-		super
+	init do
 
 		# Class coloring
 		var poset = mainmodule.flatten_mclass_hierarchy
@@ -438,8 +437,8 @@ class SeparateErasureCompiler
 
 	# Stats
 
-	private var class_tables: Map[MClass, Array[nullable MClass]]
-	private var vt_tables: Map[MClass, Array[nullable MPropDef]]
+	private var class_tables: Map[MClass, Array[nullable MClass]] is noinit
+	private var vt_tables: Map[MClass, Array[nullable MPropDef]] is noinit
 
 	redef fun display_sizes
 	do

@@ -99,7 +99,9 @@ end
 # Visitor for a specific languages. Works kinda like a `Phase` and is executed
 # by a `Phase`.
 class FFILanguage
-	init(ffi_language_assignation_phase: FFILanguageAssignationPhase)
+	var ffi_language_assignation_phase: FFILanguageAssignationPhase
+
+	init
 	do
 		ffi_language_assignation_phase.languages.add(self)
 	end

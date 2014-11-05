@@ -178,11 +178,6 @@ class ExternCppFile
 	super ExternFile
 
 	var mmodule: MModule
-	init(path: String, mmodule: MModule)
-	do
-		super
-		self.mmodule = mmodule
-	end
 
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
 	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
@@ -193,11 +188,6 @@ class ForeignCppType
 	super ForeignType
 
 	var cpp_type: String
-
-	init (cpp_type: String)
-	do
-		self.cpp_type = cpp_type
-	end
 end
 
 redef class NitniCallback

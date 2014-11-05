@@ -88,10 +88,10 @@ class MModule
 	# The view of the module in the `model.mmodule_nesting_hierarchy`
 	#
 	# TODO REMOVE, rely on mgroup instead
-	var in_nesting: POSetElement[MModule]
+	var in_nesting: POSetElement[MModule] is noinit
 
 	# The view of the module in the `model.mmodule_importation_hierarchy`
-	var in_importation: POSetElement[MModule]
+	var in_importation: POSetElement[MModule] is noinit
 
 	# The canonical name of the module
 	# Example: `"project::name"`
@@ -106,15 +106,11 @@ class MModule
 	end
 
 	# Create a new empty module and register it to a model
-	init(model: Model, mgroup: nullable MGroup, name: String, location: Location)
+	init
 	do
-		self.model = model
-		self.name = name
-		self.location = location
 		model.mmodules_by_name.add_one(name, self)
 		model.mmodules.add(self)
 		self.in_nesting = model.mmodule_nesting_hierarchy.add_node(self)
-		self.mgroup = mgroup
 		if mgroup != null then
 			mgroup.mmodules.add(self)
 			if mgroup.name == name then

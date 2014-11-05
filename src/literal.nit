@@ -44,11 +44,6 @@ private class LiteralVisitor
 
 	var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext)
-	do
-		self.toolcontext = toolcontext
-	end
-
 	redef fun visit(n)
 	do
 		n.accept_literal(self)

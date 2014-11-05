@@ -24,12 +24,6 @@ private class State
 
 	# The node stored with the state in the stack
 	var nodes: nullable Object
-
-	init(state: Int, nodes: nullable Object)
-	do
-		_state = state
-		_nodes = nodes
-	end
 end
 
 # The parser of the Nit language.
@@ -39,17 +33,13 @@ class Parser
 	var lexer: Lexer
 
 	# Stack of pushed states and productions
-	private var stack: Array[State]
+	private var stack = new Array[State]
 
 	# Position in the stack
-	private var stack_pos: Int
+	private var stack_pos: Int = -1
 
-	# Create a new parser based on a given lexer
-	init(lexer: Lexer)
+	init
 	do
-		_lexer = lexer
-		_stack = new Array[State]
-		_stack_pos = -1
 		build_reduce_table
 	end
 
@@ -163,7 +153,7 @@ class Parser
 		end
 	end
 
-	private var reduce_table: Array[ReduceAction]
+	private var reduce_table: Array[ReduceAction] is noinit
 	private fun build_reduce_table is abstract
 end
 
@@ -269,5 +259,4 @@ private abstract class ReduceAction
 		return l1
 	end
 	var goto: Int
-	init(g: Int) do _goto = g
 end

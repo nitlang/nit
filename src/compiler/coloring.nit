@@ -47,8 +47,7 @@ class POSetConflictGraph[E: Object]
 
 	var poset: POSet[E]
 
-	init(poset: POSet[E]) do
-		self.poset = poset
+	init do
 		extract_core
 		extract_border
 		extract_crown
@@ -330,11 +329,6 @@ class POSetBucketsColorer[H: Object, E: Object]
 	private var colors = new HashMap[E, Int]
 	private var poset: POSet[H]
 	private var conflicts: Map[H, Set[H]]
-
-	init(poset: POSet[H], conflicts: Map[H, Set[H]]) do
-		self.poset = poset
-		self.conflicts = conflicts
-	end
 
 	# Colorize buckets using the POSet and conflict graph
 	fun colorize(buckets: Map[H, Set[E]]): Map[E, Int] do

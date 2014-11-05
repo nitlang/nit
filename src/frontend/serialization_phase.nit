@@ -190,13 +190,6 @@ private class PreciseTypeVisitor
 	var mclassdef: MClassDef
 	var toolcontext: ToolContext
 
-	init(npropdef: AMethPropdef, mclassdef: MClassDef, toolcontext: ToolContext)
-	do
-		self.npropdef = npropdef
-		self.mclassdef = mclassdef
-		self.toolcontext = toolcontext
-	end
-
 	redef fun visit(n) do n.accept_precise_type_visitor(self)
 end
 

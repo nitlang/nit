@@ -33,19 +33,17 @@ end
 private class FlowVisitor
 	super Visitor
 
-	var current_flow_context: FlowContext
+	var current_flow_context = new FlowContext
 
 	var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext)
+	init
 	do
-		self.toolcontext = toolcontext
-		current_flow_context = new FlowContext
 		flows.add(current_flow_context)
 		current_flow_context.is_start = true
 	end
 
-	var first: nullable ANode
+	var first: nullable ANode = null
 
 	redef fun visit(node)
 	do
