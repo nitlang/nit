@@ -1725,7 +1725,7 @@ redef class ANewExpr
 		if not callsite.mproperty.is_new then
 			var kind = recvtype.mclass.kind
 			if kind != concrete_kind then
-				v.error(self, "Cannot instantiate {kind} {recvtype}.")
+				v.error(self, "Type Error: Cannot instantiate {kind} {recvtype}.")
 				return
 			end
 			self.mtype = recvtype
