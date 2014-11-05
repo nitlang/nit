@@ -103,7 +103,7 @@ class CPPLanguage
 		end
 		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context, "_for_cpp"))
 		fc.exprs.add("\n")
-		mmodule.cpp_file.add_local_function(fc)
+		mmodule.cpp_file.add_exported_function(fc)
 
 		# Custom C++, the body of the Nit C++ method is copied to its own C++ function
 		var cpp_signature = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context)
