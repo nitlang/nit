@@ -2,97 +2,90 @@
 
 # NAME
 
-Generates HTML pages of API documentation from Nit source files.
+nitdoc - generates HTML pages of API documentation from Nit source files.
 
-# SYNOPSYS
+# SYNOPSIS
 
-nitdoc [*options*]...
+nitdoc [*options*]... FILE...
+
+# DESCRIPTION
+
+`nitdoc` takes one or more modules and generate HTML pages of API documentation for these modules and their imported modules.
+
+The documentation is extracted from the comments found above the definition of modules, classes, and properties.
+
+Internally, `nitdoc` relies on the presence of the `dot` command from the [graphviz] project.
+If the dot program is not present or not found, no image of hierarchies are generated.
+See option `--no-dot`.
+
+The documentation of the Nit [standard library] is generated with this tool.
+
+  [graphviz]: http://www.graphviz.org
+  [standard library]: http://nitlanguage.org/doc/stdlib
+
+# DOCUMENTATION FORMAT
+
+The format of the documentation is a dialect of [markdown] that allows GitHub fences (`~~~`).
+
+Code blocks are interpreted as snippets of Nit programs and intended to be used as examples of code.
+When these code snippets are valid, executable and contain at least and `assert` clause, they could be automatically executed and verified.
+See niunit(1) for details.
+
+  [markdown]: http://daringfireball.net/projects/markdown
 
 # OPTIONS
 
-`-W`, `--warn`
-:   Show more warnings
-
-`-w`, `--warning`
-:   Show/hide a specific warning
-
-`-q`, `--quiet`
-:   Do not show warnings
-
-`--stop-on-first-error`
-:   Stop on first error
-
-`--no-color`
-:   Do not use color to display errors and warnings
-
-`--log`
-:   Generate various log files
-
-`--log-dir`
-:   Directory where to generate log files
-
-`-h`, `-?`, `--help`
-:   Show Help (This screen)
-
-`--version`
-:   Show version and exit
-
-`--set-dummy-tool`
-:   Set toolname and version to DUMMY. Useful for testing
-
-`-v`, `--verbose`
-:   Verbose
-
-`--bash-completion`
-:   Generate bash_completion file for this program
-
-`--stub-man`
-:   Generate a stub manpage in pandoc markdown format
-
-`--disable-phase`
-:   DEBUG: Disable a specific phase; use `list` to get the list.
-
-`-I`, `--path`
-:   Set include path for loaders (may be used more than once)
-
-`--only-parse`
-:   Only proceed to parse step of loaders
-
-`--only-metamodel`
-:   Stop after meta-model processing
-
-`--ignore-visibility`
-:   Do not check, and produce errors, on visibility issues.
-
 `-d`, `--dir`
-:   output directory
+:   output directory.
+
+    Where the HTML files are generated.
+
+    By default, the directory is named `doc`.
 
 `--source`
-:   link for source (%f for filename, %l for first line, %L for last line)
+:   Format to link source code.
 
-`--sharedir`
-:   directory containing nitdoc assets
+    The format string is used to generated links to some parts of the source-code.
+    Use `%f` for filename, `%l` for first line, and `%L` for last line.
 
-`--shareurl`
-:   use shareurl instead of copy shared files
+    For instance, the [standard library] use the following value to link to files in GitHub:
+
+        "https://github.com/privat/nit/blob/$(git rev-parse HEAD)/%f#L%l-%L"
+
+    Here, the `git rev-parse HEAD` is used to link to the current snapshot revision of the file.
 
 `--no-dot`
-:   do not generate graphes with graphviz
+:   do not generate graphs with graphviz.
 
 `--private`
-:   also generate private API
+:   also generate private API.
+
+## CUSTOMIZATION
+
+`--sharedir`
+:   directory containing nitdoc assets.
+
+    By default `$NIT_DIR/share/nitdoc/` is used.
+
+`--shareurl`
+:   use shareurl instead of copy shared files.
+
+    By default, assets from the sharedir a copied into the output directory and refered with a relative path in the generated files.
+    Whith this option, the assets are not copied and the given URL of path is used in the generated files to locate assets.
 
 `--custom-title`
-:   custom title for homepage
+:   custom title for homepage.
 
 `--custom-footer-text`
-:   custom footer text
+:   custom footer text.
 
 `--custom-overview-text`
 :   custom intro text for homepage
 
 `--custom-brand`
 :   custom link to external site
+
+## SERVICES
 
 `--github-upstream`
 :   Git branch where edited commits will be pulled into (ex: user:repo:branch)
@@ -104,7 +97,7 @@ nitdoc [*options*]...
 :   Git working directory used to resolve path name (ex: /home/me/myproject/)
 
 `--piwik-tracker`
-:   Piwik tracker URL (ex: nitlanguage.org/piwik/)
+:   Piwik tracker URL (ex: `"nitlanguage.org/piwik/"`)
 
 `--piwik-site-id`
 :   Piwik site ID
