@@ -126,28 +126,40 @@ class POSet[E: Object]
 		return fe.dtos.has(t)
 	end
 
-	# Display the POSet in a gaphical windows.
-	# Graphviz with a working -Txlib is expected.
-	# Used fo debugging.
-	fun show_dot
+	# Write the POSet as a graphviz digraph.
+	#
+	# Nodes are identified with their `to_s`.
+	# Edges are unlabeled.
+	fun write_dot(f: OStream)
 	do
-		var f = new OProcess("dot", "-Txlib")
-		#var f = stdout
 		f.write "digraph \{\n"
 		for x in elements.keys do
-			f.write "\"{x}\";\n"
+			var xstr = x.to_s.escape_to_dot
+			f.write "\"{xstr}\";\n"
 			var xe = self.elements[x]
 			for y in xe.dtos do
+				var ystr = y.to_s.escape_to_dot
 				if self.has_edge(y,x) then
-					f.write "\"{x}\" -> \"{y}\"[dir=both];\n"
+					f.write "\"{xstr}\" -> \"{ystr}\"[dir=both];\n"
 				else
-					f.write "\"{x}\" -> \"{y}\";\n"
+					f.write "\"{xstr}\" -> \"{ystr}\";\n"
 				end
 			end
 		end
 		f.write "\}\n"
-		#f.close
-		#f.wait
+	end
+
+	# Display the POSet in a graphical windows.
+	# Graphviz with a working -Txlib is expected.
+	#
+	# See `write_dot` for details.
+	fun show_dot
+	do
+		var f = new OProcess("dot", "-Txlib")
+		f.write "\}\n"
+		write_dot(f)
+		f.close
+		f.wait
 	end
 
 	# Compare two elements in an arbitrary total order.
