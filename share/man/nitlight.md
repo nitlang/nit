@@ -2,82 +2,52 @@
 
 # NAME
 
-Generates HTML of highlited code from Nit source files.
+nitlight - generates HTML of highlighted code from Nit source files.
 
-# SYNOPSYS
+# SYNOPSIS
 
-nitlight [*options*]...
+nitlight [*options*] FILE...
+
+# DESCRIPTION
+
+Unlike generic lexical or syntactic highlighter, nitlight use semantic information on programs to improve the rendered result.
 
 # OPTIONS
 
-`-W`, `--warn`
-:   Show more warnings
-
-`-w`, `--warning`
-:   Show/hide a specific warning
-
-`-q`, `--quiet`
-:   Do not show warnings
-
-`--stop-on-first-error`
-:   Stop on first error
-
-`--no-color`
-:   Do not use color to display errors and warnings
-
-`--log`
-:   Generate various log files
-
-`--log-dir`
-:   Directory where to generate log files
-
-`-h`, `-?`, `--help`
-:   Show Help (This screen)
-
-`--version`
-:   Show version and exit
-
-`--set-dummy-tool`
-:   Set toolname and version to DUMMY. Useful for testing
-
-`-v`, `--verbose`
-:   Verbose
-
-`--bash-completion`
-:   Generate bash_completion file for this program
-
-`--stub-man`
-:   Generate a stub manpage in pandoc markdown format
-
-`--disable-phase`
-:   DEBUG: Disable a specific phase; use `list` to get the list.
-
-`-I`, `--path`
-:   Set include path for loaders (may be used more than once)
-
-`--only-parse`
-:   Only proceed to parse step of loaders
-
-`--only-metamodel`
-:   Stop after meta-model processing
-
-`--ignore-visibility`
-:   Do not check, and produce errors, on visibility issues.
+Common options of the Nit tools are understood.
+Here, only the specific one are indicated.
 
 `-f`, `--fragment`
-:   Omit document header and footer
+:   Omit document header and footer.
+
+    By default, a complete autonomous HTML document is generated.
+    If `-f` is given, only the inside of the body part is generated such that it could be integrated
+    into a HTML document.
 
 `--first-line`
-:   Start the source file at this line (default: 1)
+:   Start the source file at this line (default: 1).
+
+    The generated HTML will only contains lines bellow the specified one.
 
 `--last-line`
 :   End the source file at this line (default: to the end)
 
+    The generated HTML will only contains lines ebove the specified one.
+
 `-d`, `--dir`
-:   Output html files in a specific directory (required if more than one module)
+:   Output html files in a specific directory (required if more than one module).
+
+    By default the generated HTML is outputted on the screen.
+    If this option is used, then HTML files are generated in the specified directory.
+
+    A basic `index.heml` and a `style.css` file are also generated in the directory.
 
 `--full`
-:   Process also imported modules
+:   Process also imported modules.
+
+    By default, only the modules indicated on the command line are highlighted.
+
+    With the `--full` option, all imported modules (even those in standard) are also precessed.
 
 # SEE ALSO
 

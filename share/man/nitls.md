@@ -2,91 +2,78 @@
 
 # NAME
 
-Lists the projects and/or paths of Nit sources files.
+nitls - lists the projects, groups and paths of Nit sources files.
 
-# SYNOPSYS
+# SYNOPSIS
 
-nitls [*options*]...
+nitls [*options*] FILE...
+
+# DESCRIPTION
+
+`nitls` is used to list Nit files in directories and extract the module-group-project relation.
+
+It is basically a `ls` or a simple `find` specialized on `.nit` source files.
+
+# EXAMPLES
+
+Show the tree of modules from the current directory and subdirectories.
+
+    $ nitls -t -r .
+
+Show the list of projects imported by the modules of the current directory.
+
+    $ nitls -d -P *.nit
 
 # OPTIONS
 
-`-W`, `--warn`
-:   Show more warnings
-
-`-w`, `--warning`
-:   Show/hide a specific warning
-
-`-q`, `--quiet`
-:   Do not show warnings
-
-`--stop-on-first-error`
-:   Stop on first error
-
-`--no-color`
-:   Do not use color to display errors and warnings
-
-`--log`
-:   Generate various log files
-
-`--log-dir`
-:   Directory where to generate log files
-
-`-h`, `-?`, `--help`
-:   Show Help (This screen)
-
-`--version`
-:   Show version and exit
-
-`--set-dummy-tool`
-:   Set toolname and version to DUMMY. Useful for testing
-
-`-v`, `--verbose`
-:   Verbose
-
-`--bash-completion`
-:   Generate bash_completion file for this program
-
-`--stub-man`
-:   Generate a stub manpage in pandoc markdown format
-
-`--disable-phase`
-:   DEBUG: Disable a specific phase; use `list` to get the list.
-
-`-I`, `--path`
-:   Set include path for loaders (may be used more than once)
-
-`--only-parse`
-:   Only proceed to parse step of loaders
-
-`--only-metamodel`
-:   Stop after meta-model processing
-
-`--ignore-visibility`
-:   Do not check, and produce errors, on visibility issues.
-
-`-k`, `--keep`
-:   Ignore errors and files that are not a Nit source file
+## COLLECT
 
 `-r`, `--recursive`
-:   Process directories recussively
+:   Process directories recursively.
 
-`-t`, `--tree`
-:   List source files in their groups and projects
-
-`-s`, `--source`
-:   List source files
-
-`-P`, `--project`
-:   List projects paths (default)
+    All `.nit` files found in the specified directory and subdirectories are considered.
 
 `-d`, `--depends`
 :   List dependencies of given modules
 
+    All imported modules are also considered.
+
+`-k`, `--keep`
+:   Ignore errors and files that are not a Nit source file.
+
+    When a file that is not a valit Nit module is encoutered, it is ignored and the rest of the file are
+    processed.
+
+    Without this option, a error message is displayed and nitls terminates on such a case.
+
+## PRESENTATION MODE
+
+Three presentation modes are available.
+
+`-P`, `--project`
+:   List projects in a flat list (default).
+
+    Only project are displayed (and not the individual files).
+
+`-t`, `--tree`
+:   List source files in their groups and projects.
+
+    Each `.nit` file is presented in a tree of projects and groups.
+
+`-s`, `--source`
+:   List source files in a flat list.
+
+    Each `.nit` file is presented indivitually.
+
+## PRESENTATION OPTIONS
+
 `-p`, `--path`
-:   List only path (instead of name + path)
+:   List only path (instead of name + path).
 
 `-M`
-:   List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s
+:   List dependencies suitable for a rule in a Makefile.
+
+    Alias for `-d`, `-p` and `-s`.
 
 # SEE ALSO
 
