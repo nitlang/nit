@@ -13,18 +13,6 @@ module substr_bench
 
 import opts
 
-fun bench_rope(nb_cct: Int, loops: Int, strlen: Int)
-do
-	var a = "a" * strlen
-	var x:String = new RopeString.from(a)
-	for i in [0 .. nb_cct] do x += a
-	var cnt = 0
-	while cnt != loops do
-		x.substring(0,5)
-		cnt += 1
-	end
-end
-
 fun bench_flatstr(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
@@ -50,7 +38,7 @@ do
 end
 
 var opts = new OptionContext
-var mode = new OptionEnum(["rope", "flatstr", "flatbuf"], "Mode", -1, "-m")
+var mode = new OptionEnum(["flatstr", "flatbuf"], "Mode", -1, "-m")
 var nb_ccts = new OptionInt("Number of concatenations done to the string (in the case of the rope, this will increase its depth)", -1, "--ccts")
 var loops = new OptionInt("Number of loops to be done", -1, "--loops")
 var strlen = new OptionInt("Length of the base string", -1, "--strlen")
@@ -66,10 +54,8 @@ end
 var modval = mode.value
 
 if modval == 0 then
-	bench_rope(nb_ccts.value, loops.value, strlen.value)
-else if modval == 1 then
 	bench_flatstr(nb_ccts.value, loops.value, strlen.value)
-else if modval == 2 then
+else if modval == 1 then
 	bench_flatbuf(nb_ccts.value, loops.value, strlen.value)
 else
 	opts.usage

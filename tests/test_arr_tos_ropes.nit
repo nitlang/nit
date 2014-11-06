@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var rp: String = new RopeString.from("xxx")
-rp += "yyy"
+import standard
+intrude import standard::ropes
+
+var rp: String = new Concat("xxx", "yyy")
 rp += "zzz"
 var arr = ["FlatString", rp]
 print arr.to_s

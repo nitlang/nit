@@ -1,890 +1,922 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
-# This file is free software, which comes along with NIT.  This software is
-# distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
-# PARTICULAR PURPOSE.  You can modify it if you want,  provided this header
-# is kept unaltered, and a notification of the changes is added.
-# You  are  allowed  to  redistribute it and sell it, alone or as a part of
-# another product.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# Nit implementation of the Ropes (see Ropes : An Alternative to Strings,
-# SOFTWARE - PRACTICE AND EXPERIENCE, VOL. 25(12), 1315 - 1330 (DECEMBER 1995)
-# Hans. J Boehm, Russ Atkinson and Michael Plass)
+# Tree-based representation of a String.
 #
-# A rope is a kind of string but instead of being flat, it relies on a binary tree structure to store data.
+# Ropes are a data structure introduced in a 1995 paper from
+# Hans J. Boehm, Russ Atkinson and Michael Plass.
+# See : `Ropes : an Alternative to Strings`, `Software - Practice and Experience,
+# Vol. 25(12), 1315-1330 (December 1995)`.
+#
+# The implementation developed here provides an automatic change
+# of data structure depending on the length of the leaves.
+#
+# The length from which a `Rope` is built from a `flat` string
+# if defined at top-level (see `maxlen`) and can be redefined by clients
+# depending on their needs (e.g. if you need to bench the speed of
+# the creation of concat nodes, lower the size of maxlen).
+#
+# A Rope as defined in the original paper is a Tree made of concatenation
+# nodes and containing `Flat` (that is Array-based) strings as Leaves.
+#
+# Example :
+#
+# `            Concat                   `
+# `          /        \                 `
+# `    Concat          Concat           `
+# `   /      \        /      \          `
+# `"My"     " Name"  " is"   " Simon."  `
+#
+# Note that the above example is not representative of the actual implementation
+# of `Ropes`, since short leaves are merged to keep the rope at an acceptable
+# height (hence, this rope here might actually be a `FlatString` !).
 module ropes
 
 intrude import string
 
-# Used when searching for a particular node
-# Returns the path to the node from the root of the rope
-# Also, the node and the offset for seeked position in the rope
-private class Path
-	# Leaf found
-	var leaf: Leaf
-	# Offset in leaf
-	var offset: Int
-	# Stack of the nodes traversed, and the path used
-	var stack: List[PathElement]
-end
-
-# An element for a Path, has the concat node and whether or not
-# left or right child was visited.
-private class PathElement
-	# Visited node
-	var node: Concat
-	# Was the left child visited ?
-	var left = false
-	# Was the right child visited ?
-	var right = false
-end
-
-# A node for a Rope
-private abstract class RopeNode
-	# Length of the node
-	var length = 0
-
-	# Transforms the current node to a Leaf.
-	# This might be costly to invoke since this produces a FlatString concatenation.
-	# Can be used internally to limit the growth of the Rope when working with small leaves.
-	fun to_leaf: Leaf is abstract
-end
-
-# Node that represents a concatenation between two nodes (of any RopeNode type)
-private class Concat
-	super RopeNode
-
-	# Left child of the node
-	var left: nullable RopeNode
-	# Right child of the node
-	var right: nullable RopeNode
-
-	init(l: nullable RopeNode, r: nullable RopeNode)
-	do
-		left = l
-		right = r
-		if l != null then length += l.length
-		if r != null then length += r.length
-	end
-
-	redef fun to_leaf
-	do
-		if left == null then
-			if right == null then return new StringLeaf("".as(FlatString))
-			return right.to_leaf
-		end
-		if right == null then return left.as(not null).to_leaf
-		return new StringLeaf((left.to_leaf.str.as(FlatString) + right.to_leaf.str.as(FlatString)).as(FlatString))
-	end
-end
-
-# Leaf of a Rope, contains a FlatString
-private abstract class Leaf
-	super RopeNode
-
-	# Encapsulated FlatString in the leaf node
-	var str: FlatText
-
-end
-
-private class StringLeaf
-	super Leaf
-
-	init(val: FlatString) do
-		self.str = val
-		length = str.length
-	end
-
-	redef fun to_leaf do return self
-end
-
-# Used as a cache when using indexed access to a substring in the Rope
-private class LeafCache
-	# Cached leaf
-	var leaf: Leaf
-	# Position in Rope
-	var pos: Int
-end
-
-# Basic structure, binary tree with a root node.
+# Maxlen is the maximum length of a Leaf node
 #
-# Also shared services by subsequent implementations.
-abstract class Rope
+# When concatenating two leaves, if `new_length` > `maxlen`,
+# A `Concat` node is created instead
+#
+# Its purpose is to limit the depth of the `Rope` (this
+# improves performance when accessing/iterating).
+fun maxlen: Int do return 64
+
+# String using a tree-based representation with leaves as `FlatStrings`
+private abstract class Rope
 	super Text
-
-	# Root node, entry point of a Rope.
-	private var root: RopeNode is noinit
-
-	# Cached version of self as a flat String
-	private var str_representation: nullable NativeString = null
-
-	private var leaf_cache: nullable LeafCache = null
-
-	# Empty Rope
-	init do root = new StringLeaf("".as(FlatString))
-
-	# Creates a new Rope with `s` as root
-	init from(s: String) do
-		if s isa RopeString then root = s.root else root = new StringLeaf(s.as(FlatString))
-	end
-
-	private init from_root(r: RopeNode)
-	do
-		root = r
-	end
-
-	redef fun length do return root.length
-
-	# Iterator on the nodes of the rope, in forward postfix order
-	private fun postfix(from: Int): Postfix do return new Postfix.from(self, from)
-
-	# Iterator on the leaves of the rope, forward order
-	private fun leaves(from: Int): LeavesIterator do return new LeavesIterator(self, from)
-
-	# Iterator on the substrings from 0, in forward order
-	redef fun substrings do return new SubstringsIterator(self, 0)
-
-	# Iterator on the substrings, starting at position `from`, in forward order
-	fun substrings_from(from: Int): IndexedIterator[Text] do return new SubstringsIterator(self, from)
-
-	# Iterator on the nodes of the rope, in backwards postfix order
-	private fun reverse_postfix(from: Int): ReversePostfix do return new ReversePostfix.from(self, from)
-
-	# Iterator on the leaves of the rope, backwards order
-	private fun reverse_leaves(from: Int): ReverseLeavesIterator do return new ReverseLeavesIterator(self,from)
-
-	# Iterator on the substrings, in reverse order
-	fun reverse_substrings: IndexedIterator[Text] do return new ReverseSubstringsIterator(self, length-1)
-
-	# Iterator on the substrings, in reverse order, starting iteration at position `from`
-	fun reverse_substrings_from(from: Int): IndexedIterator[Text] do return new ReverseSubstringsIterator(self, from)
-
-	redef fun output
-	do
-		for i in substrings do
-			i.output
-		end
-	end
-
-	redef fun to_cstring
-	do
-		if str_representation != null then return str_representation.as(not null)
-
-		var native_final_str = calloc_string(length + 1)
-
-		native_final_str[length] = '\0'
-
-		if self.length == 0 then
-			str_representation = native_final_str
-			return native_final_str
-		end
-
-		var offset = 0
-
-		for i in substrings do
-			var str = i.flatten
-			if str isa FlatString then str.items.copy_to(native_final_str, str.length, str.index_from, offset)
-			offset += i.length
-		end
-
-		str_representation = native_final_str
-
-		return native_final_str
-	end
-
-	# Path to the Leaf for `position`
-	private fun node_at(position: Int): Path
-	do
-		assert position >= 0 and position <= length
-		if position == length then
-			var st = new List[PathElement]
-			stack_to_end(root,st)
-			if not st.is_empty then
-				var lst = st.last
-				var lf = lst.node.right
-				if lf != null then
-					return new Path(lf.as(Leaf), lf.length, st)
-				else
-					lf = lst.node.left
-					return new Path(lf.as(Leaf), lf.length, st)
-				end
-			else
-				return new Path(root.as(Leaf), length, st)
-			end
-		end
-		return get_node_from(root, 0, position, new List[PathElement])
-	end
-
-	# Special case for when the required pos is length
-	private fun stack_to_end(nod: RopeNode, st: List[PathElement])
-	do
-		if nod isa Leaf then return
-		var n = nod.as(Concat)
-		var r = n.right
-		var ele = new PathElement(n)
-		ele.right = true
-		st.push(ele)
-		if r != null then
-			stack_to_end(r, st)
-		end
-		return
-	end
-
-	# Builds the path to Leaf at position `seek_pos`
-	private fun get_node_from(node: RopeNode, curr_pos: Int, seek_pos: Int, stack: List[PathElement]): Path
-	do
-		assert curr_pos >= 0
-		if node isa Leaf then
-			self.leaf_cache = new LeafCache(node, curr_pos)
-			return new Path(node, seek_pos - curr_pos, stack)
-		end
-		node = node.as(Concat)
-
-		if node.left != null then
-			var next_pos = curr_pos + node.left.length
-			stack.add(new PathElement(node))
-			if next_pos > seek_pos then
-				stack.last.left = true
-				return get_node_from(node.left.as(not null), curr_pos, seek_pos, stack)
-			end
-			stack.last.right = true
-			return get_node_from(node.right.as(not null), next_pos, seek_pos, stack)
-		else
-			var vis = new PathElement(node)
-			vis.right = true
-			stack.add(vis)
-			return get_node_from(node.right.as(not null), curr_pos, seek_pos, stack)
-		end
-	end
-
-	redef fun ==(o)
-	do
-		if not o isa Text then return false
-		if o.length != self.length then return false
-		var oit = o.chars.iterator
-		for i in self.chars.iterator do
-			if i != oit.item then return false
-			oit.next
-		end
-		return true
-	end
 end
 
-# Rope that cannot be modified
-class RopeString
+private abstract class RopeString
 	super Rope
 	super String
 
-	redef fun to_s do return self
+	redef fun chars is cached do return new RopeChars(self)
+end
 
-	redef fun empty do return once new RopeString.from("")
+# Node that represents a concatenation between two `String`
+private class Concat
+	super RopeString
 
-	redef var chars: SequenceRead[Char] = new RopeStringChars(self)
+	redef var length: Int
 
-	redef fun reversed
-	do
-		var ret = empty
+	redef fun substrings do return new RopeSubstrings(self)
+
+	redef fun empty do return ""
+
+	redef fun to_cstring is cached do
+		var len = length
+		var ns = new NativeString(len + 1)
+		ns[len] = '\0'
+		var off = 0
 		for i in substrings do
-			ret = i.as(String).reversed + ret
+			var ilen = i.length
+			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).index_from, off)
+			off += ilen
 		end
-		return ret
+		return ns
 	end
 
-	redef fun to_upper
-	do
-		var ret = empty
-		for i in substrings do
-			ret += i.as(String).to_upper
-		end
-		return ret
+	# Left child of the node
+	var left: String
+	# Right child of the node
+	var right: String
+
+	init(l: String, r: String) do
+		left = l
+		right = r
+		length = l.length + r.length
 	end
 
-	redef fun to_lower
-	do
-		var ret = empty
-		for i in substrings do
-			ret += i.as(String).to_lower
-		end
-		return ret
+	redef fun output do
+		left.output
+		right.output
 	end
+
+	redef fun iterator do return new RopeIter(self)
+
+	redef fun *(i) do
+		var x: String = self
+		for j in [1 .. i[ do x += self
+		return x
+	end
+
+	redef fun [](i) do
+		var llen = left.length
+		if i >= llen then return right[i - llen]
+		return left[i]
+	end
+
+	redef fun substring(from, len) do
+		var llen = left.length
+		if from < llen then
+			if from + len < llen then return left.substring(from,len)
+			var lsublen = llen - from
+			return left.substring_from(from) + right.substring(0, len - lsublen)
+		else
+			return right.substring(from - llen, len)
+		end
+	end
+
+	redef fun reversed do return new Concat(right.reversed, left.reversed)
+
+	redef fun insert_at(s, pos) do
+		if pos > left.length then
+			return left + right.insert_at(s, pos - left.length)
+		end
+		return left.insert_at(s, pos) + right
+	end
+
+	redef fun to_upper do return new Concat(left.to_upper, right.to_upper)
+
+	redef fun to_lower do return new Concat(left.to_lower, right.to_lower)
 
 	redef fun +(o) do
-		if self.length == 0 then return o.to_s
-		if o.length == 0 then return self
-		var str = o.to_s
-		if str isa FlatString then
-			return new RopeString.from_root(new Concat(root, new StringLeaf(str)))
-		else if str isa RopeString then
-			return new RopeString.from_root(new Concat(root, str.root))
+		var s = o.to_s
+		var mlen = length
+		var slen = s.length
+		if s isa Concat then
+			return new Concat(self, s)
 		else
-			abort
+			var r = right
+			var rlen = r.length
+			if rlen + slen > maxlen then return new Concat(left, new Concat(r, s))
+			return new Concat(left, r + s)
 		end
 	end
+end
 
-	redef fun *(n)
-	do
-		var ret = new RopeString.from("")
-		for i in [0..n[ do
-			ret = (ret + self).as(RopeString)
-		end
-		return ret
+# Mutable `Rope`, optimized for concatenation operations
+#
+# A `RopeBuffer` is an efficient way of building a `String` when
+# concatenating small strings.
+#
+# It does concatenations in an optimized way by having a
+# mutable part and an immutable part built by efficiently
+# concatenating strings in chain.
+#
+# Every concatenation operation is done by copying a string to
+# the mutable part and flushing it when full.
+#
+# However, when a long string is appended to the `Buffer`,
+# the concatenation is done at it would be in a `Rope`.
+class RopeBuffer
+	super Rope
+	super Buffer
+
+	redef fun chars: Sequence[Char] is cached do return new RopeBufferChars(self)
+
+	# The final string being built on the fly
+	private var str: String is noinit
+
+	# Current concatenation buffer
+	private var ns: NativeString is noinit
+
+	# Next available (e.g. unset) character in the `Buffer`
+	private var rpos = 0
+
+	# Keeps track of the buffer's currently dumped part
+	#
+	# This might happen if for instance, a String was being
+	# built by concatenating small parts of string and suddenly
+	# a long string (length > maxlen) is appended.
+	private var dumped: Int is noinit
+
+	# Length of the complete rope
+	redef var length = 0
+
+	# Length of the mutable part
+	#
+	# Is also used as base to compute the size of the next
+	# mutable native string (`ns`)
+	private var buf_size: Int is noinit
+
+	redef fun substrings: Iterator[String] do return new RopeBufSubstringIterator(self)
+
+	# Builds an empty `RopeBuffer`
+	init do
+		str = ""
+		ns = new NativeString(maxlen)
+		buf_size = maxlen
+		dumped = 0
 	end
 
-	# Inserts a String `str` at position `pos`
-	redef fun insert_at(str, pos)
-	do
-		if str.length == 0 then return self
-		if self.length == 0 then return new RopeString.from(str)
+	# Builds a new `RopeBuffer` with `str` in it.
+	init from(str: String) do
+		self.str = str
+		ns = new NativeString(maxlen)
+		buf_size = maxlen
+		length = str.length
+		dumped = 0
+	end
 
-		assert pos >= 0 and pos <= length
+	# Resets the informations of the `Buffer`
+	#
+	# This is called when doing in-place modifications
+	# on a previously to_s'd `RopeBuffer`
+	private fun reset do
+		var nns = new NativeString(buf_size)
+		var blen = rpos - dumped
+		ns.copy_to(nns, blen, dumped, 0)
+		dumped = 0
+		rpos = blen
+		written = false
+	end
 
-		var path = node_at(pos)
+	redef fun empty do return new RopeBuffer
 
-		var last_concat: Concat
+	redef fun clear do
+		str = ""
+		length = 0
+		rpos = 0
+	end
 
-		if path.offset == 0 then
-			if str isa FlatString then
-				last_concat = new Concat(new StringLeaf(str), path.leaf)
+	redef fun substring(from, count) do
+		var strlen = str.length
+
+		if from < 0 then
+			count += from
+			if count < 0 then count = 0
+			from = 0
+		end
+
+		if count > length then count = length - from
+
+		if count == 0 then return empty
+
+		if from < strlen then
+			var subpos = strlen - from
+			if count <= subpos then
+				return new RopeBuffer.from(str.substring(from, count))
 			else
-				last_concat = new Concat(str.as(RopeString).root, path.leaf)
-			end
-		else if path.offset == path.leaf.length then
-			if str isa FlatString then
-				last_concat = new Concat(path.leaf, new StringLeaf(str))
-			else
-				last_concat = new Concat(path.leaf, str.as(RopeString).root)
+				var l = str.substring_from(from)
+				var rem = count - subpos
+				var nns = new NativeString(rem)
+				ns.copy_to(nns, rem, dumped, 0)
+				return new RopeBuffer.from(l + nns.to_s_with_length(rem))
 			end
 		else
-			var s = path.leaf.str
-			var l_half = s.substring(0, s.length - path.offset)
-			var r_half = s.substring_from(s.length - path.offset)
-			var cct: Concat
-			var ll = new StringLeaf(l_half.as(FlatString))
-			if str isa FlatString then
-				cct = new Concat(ll, new StringLeaf(str))
-			else
-				cct = new Concat(ll, str.as(RopeString).root)
-			end
-			last_concat = new Concat(cct, new StringLeaf(r_half.as(FlatString)))
+			var nns = new NativeString(count)
+			ns.copy_to(nns, count, dumped, 0)
+			return new RopeBuffer.from(nns.to_s_with_length(count))
 		end
-
-		for i in path.stack.reverse_iterator do
-			if i.left then
-				last_concat = new Concat(last_concat, i.node.right)
-			else
-				last_concat = new Concat(i.node.left, last_concat)
-			end
-		end
-
-		return new RopeString.from_root(last_concat)
 	end
 
-	# O(log(n))
+	redef fun append(s) do
+		var slen = s.length
+		length += slen
+		var rp = rpos
+		if s isa Rope then
+			if rp > 0 and dumped != rp then
+				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
+				dumped = rp
+			end
+			str = str + s
+			return
+		end
+		if slen > maxlen then
+			if rp > 0 and dumped != rp then
+				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
+				dumped = rp
+			end
+			str = str + s
+			return
+		end
+		var remsp = buf_size - rp
+		var sits: NativeString
+		var begin: Int
+		if s isa FlatString then
+			begin = s.index_from
+			sits = s.items
+		else if s isa FlatBuffer then
+			begin = 0
+			sits = s.items
+		else
+			if slen <= remsp then
+				for i in s.chars do
+					ns[rpos] = i
+					rpos += 1
+				end
+			else
+				var spos = 0
+				for i in [0..remsp[ do
+					ns[rpos] = s[spos]
+					rpos += 1
+					spos += 1
+				end
+				dump_buffer
+				while spos < slen do
+					ns[rpos] = s[spos]
+					spos += 1
+					rpos += 1
+				end
+			end
+			return
+		end
+		if slen <= remsp then
+			sits.copy_to(ns, slen, begin, rp)
+			if rp == buf_size then
+				rpos = buf_size
+				dump_buffer
+				rpos = 0
+			else
+				rpos += slen
+			end
+		else
+			sits.copy_to(ns, remsp, begin, rp)
+			rpos = buf_size
+			dump_buffer
+			var nlen = slen - remsp
+			sits.copy_to(ns, nlen, begin + remsp, 0)
+			rpos = nlen
+		end
+	end
+
+	redef fun add(c) do
+		var rp = rpos
+		length += 1
+		ns[rp] = c
+		rp += 1
+		if rp == buf_size then
+			rpos = rp
+			dump_buffer
+			rp = 0
+		end
+		rpos = rp
+	end
+
+	# Converts the Buffer to a FlatString, appends it to
+	# the final String and re-allocates a new larger Buffer.
+	private fun dump_buffer do
+		written = false
+		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		str += nstr
+		var bs = buf_size
+		bs = bs * 2
+		ns = new NativeString(bs)
+		buf_size = bs
+		dumped = 0
+	end
+
+	redef fun output do
+		str.output
+		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
+	end
+
+	# Enlarge is useless here since the `Buffer`
+	# part is automatically dumped when necessary.
 	#
-	#     var rope = new RopeString.from("abcd")
-	#     assert rope.substring(1, 2)         ==  "bc"
-	#     assert rope.substring(-1, 2)         ==  "a"
-	#     assert rope.substring(1, 0)         ==  ""
-	#     assert rope.substring(2, 5)         ==  "cd"
+	# Also, since the buffer can not be overused by a
+	# single string, there is no need for manual
+	# resizing.
 	#
-	redef fun substring(pos, len)
-	do
-		if pos < 0 then
-			len += pos
-			pos = 0
+	# "You have no power here !"
+	redef fun enlarge(i) do end
+
+	redef fun to_s do
+		written = true
+		var nnslen = rpos - dumped
+		if nnslen == 0 then return str
+		return str + new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+	end
+
+	redef fun reverse do
+		str = str.reversed
+		var nns = new NativeString(buf_size)
+		var j = rpos
+		var mits = ns
+		for i in [0 .. rpos[ do
+			nns[i] = mits[j]
+			j -= 1
 		end
+		ns = nns
+	end
 
-		if pos + len > length then len = length - pos
-
-		if len <= 0 then return new RopeString.from("")
-
-		var path = node_at(pos)
-
-		var lf = path.leaf
-		var offset = path.offset
-
-		if path.leaf.str.length - offset > len then lf = new StringLeaf(lf.str.substring(offset,len).as(FlatString)) else lf = new StringLeaf(lf.str.substring_from(offset).as(FlatString))
-
-		var nod: RopeNode = lf
-
-		for i in path.stack.reverse_iterator do
-			if i.right then continue
-			nod = new Concat(nod, i.node.right)
+	redef fun upper do
+		if written then reset
+		str = str.to_upper
+		var mits = ns
+		for i in [0 .. rpos[ do
+			mits[i] = mits[i].to_upper
 		end
+	end
 
-		var ret = new RopeString
-		ret.root = nod
-
-		path = ret.node_at(len-1)
-
-		offset = path.offset
-		nod = new StringLeaf(path.leaf.str.substring(0, offset+1).as(FlatString))
-
-		for i in path.stack.reverse_iterator do
-			if i.left then continue
-			nod = new Concat(i.node.left, nod)
+	redef fun lower do
+		if written then reset
+		str = str.to_lower
+		var mits = ns
+		for i in [0 .. rpos[ do
+			mits[i] = mits[i].to_lower
 		end
-
-		ret.root = nod
-
-		return ret
 	end
 end
 
 redef class FlatString
 
-	redef fun insert_at(s, pos)
-	do
-
-		if pos == 0 then
-			var r = new RopeString.from(s)
-			return r + self
-		end
-		if pos == length then
-			var r = new RopeString.from(self)
-			return r + s
-		end
-
-		var l = substring(0,pos)
+	redef fun insert_at(s, pos) do
+		var l = substring(0, pos)
 		var r = substring_from(pos)
-		var ret: String = new RopeString.from(l)
-		ret += s
-		return ret + r
+		return l + s + r
 	end
 
-end
-
-private class RopeStringChars
-	super SequenceRead[Char]
-
-	var tgt: Rope
-
-	redef fun [](pos)
-	do
-		assert pos < tgt.length
-		if tgt.leaf_cache != null and pos >= tgt.leaf_cache.pos and (tgt.leaf_cache.pos + tgt.leaf_cache.leaf.length) > pos then return tgt.leaf_cache.leaf.str.chars[pos - tgt.leaf_cache.pos]
-		var path = tgt.node_at(pos)
-		return path.leaf.str.chars[path.offset]
-	end
-
-	redef fun iterator do return iterator_from(0)
-
-	redef fun iterator_from(pos) do return new RopeCharIterator(tgt, pos)
-
-	redef fun reverse_iterator do return reverse_iterator_from(tgt.length-1)
-
-	redef fun reverse_iterator_from(pos) do return new ReverseRopeCharIterator(tgt, pos)
-end
-
-# Used to iterate on a Rope
-private class IteratorElement
-
-	init(e: RopeNode)
-	do
-		if e isa Leaf then
-			left = true
-			right = true
-		end
-		node = e
-	end
-
-	# The node being visited
-	var node: RopeNode
-	# If the node has a left child, was it visited ?
-	var left = false
-	# If the node has a right child, was it visited ?
-	var right = false
-	# Was the current node visited ?
-	var done = false
-end
-
-# Simple Postfix iterator on the nodes of a Rope
-private class Postfix
-	super IndexedIterator[RopeNode]
-
-	# Target Rope to iterate on
-	var target: Rope
-
-	# Current position in Rope
-	var pos: Int
-
-	# Visited nodes
-	var stack = new List[IteratorElement]
-
-	init from(tgt: Rope, pos: Int)
-	do
-		self.target = tgt
-		self.pos = pos
-		if pos < 0 or pos >= tgt.length then return
-		var path = tgt.node_at(pos)
-		self.pos -= path.offset
-		for i in path.stack do
-			var item = new IteratorElement(i.node)
-			item.left = true
-			if i.right then item.right = true
-			stack.push item
-		end
-		var item = new IteratorElement(path.leaf)
-		item.done = true
-		stack.push item
-	end
-
-	redef fun item
-	do
-		assert is_ok
-		return stack.last.node
-	end
-
-	redef fun is_ok do return not stack.is_empty
-
-	redef fun index do return pos
-
-	redef fun next do
-		if stack.is_empty then return
-		if pos > target.length-1 then
-			stack.clear
-			return
-		end
-		var lst = stack.last
-		if lst.done then
-			if lst.node isa Leaf then
-				pos += lst.node.length
-			end
-			stack.pop
-			next
-			return
-		end
-		if not lst.left then
-			lst.left = true
-			var nod = lst.node
-			if nod isa Concat and nod.left != null then
-				stack.push(new IteratorElement(nod.left.as(not null)))
-				next
-				return
-			end
-		end
-		if not lst.right then
-			lst.right = true
-			var nod = lst.node
-			if nod isa Concat and nod.right != null then
-				stack.push(new IteratorElement(nod.right.as(not null)))
-				next
-				return
-			end
-		end
-		lst.done = true
-	end
-end
-
-# Iterates on the leaves (substrings) of the Rope
-class LeavesIterator
-	super IndexedIterator[Leaf]
-
-	private var nodes: Postfix
-
-	init(tgt: Rope, pos: Int)
-	do
-		nodes = tgt.postfix(pos)
-	end
-
-	redef fun is_ok do return nodes.is_ok
-
-	redef fun item
-	do
-		assert is_ok
-		return nodes.item.as(Leaf)
-	end
-
-	redef fun index do return nodes.index
-
-	redef fun next
-	do
-		while nodes.is_ok do
-			nodes.next
-			if nodes.is_ok and nodes.item isa Leaf then break
+	redef fun +(o) do
+		var s = o.to_s
+		var slen = s.length
+		var mlen = length
+		if slen == 0 then return self
+		if mlen == 0 then return s
+		var nlen = slen + mlen
+		if s isa FlatString then
+			if nlen > maxlen then return new Concat(self, s)
+			var mits = items
+			var sifrom = s.index_from
+			var mifrom = index_from
+			var sits = s.items
+			var ns = new NativeString(nlen + 1)
+			mits.copy_to(ns, mlen, mifrom, 0)
+			sits.copy_to(ns, slen, sifrom, mlen)
+			return ns.to_s_with_length(nlen)
+		else if s isa Concat then
+			var sl = s.left
+			var sllen = sl.length
+			if sllen + mlen > maxlen then return new Concat(self, s)
+			return new Concat(self + sl, s.right)
+		else
+			abort
 		end
 	end
 end
 
-# Uses the leaves and calculates a new substring on each iteration
-class SubstringsIterator
-	super IndexedIterator[Text]
-
-	private var nodes: IndexedIterator[Leaf]
-
-	# Current position in Rope
-	var pos: Int
-
-	# Current substring, computed from the current Leaf and indexes
-	var substring: Text
-
-	init(tgt: Rope, pos: Int)
-	do
-		nodes = tgt.leaves(pos)
-		self.pos = pos
-		if pos < 0 or pos >= tgt.length then return
-		make_substring
-	end
-
-	# Compute the bounds of the current substring and makes the substring
-	private fun make_substring
-	do
-		substring = nodes.item.str
-		var min = 0
-		var length = substring.length
-		if nodes.index < pos then
-			min = pos - nodes.index
-		end
-		substring = substring.substring(min, length)
-	end
-
-	redef fun is_ok do return nodes.is_ok
-
-	redef fun item
-	do
-		assert is_ok
-		return substring
-	end
-
-	redef fun index do return pos
-
-	redef fun next
-	do
-		pos += substring.length
-		nodes.next
-		if nodes.is_ok then make_substring
-	end
-
+# A simple linked list for use with iterators
+private class RopeIterPiece
+	# The encapsulated node of the `Rope`
+	var node: String
+	# Was its left child (if any) visited ?
+	var ldone: Bool
+	# Was its right child (if any) visited ?
+	var rdone: Bool
+	# The previous node in the list.
+	var prev: nullable RopeIterPiece
 end
 
-class RopeCharIterator
+# A reverse iterator capable of working with `Rope` objects
+private class RopeReviter
 	super IndexedIterator[Char]
 
-	var substrings: IndexedIterator[Text]
-
+	# Current NativeString
+	var ns: String
+	# Current position in NativeString
+	var pns: Int
+	# Position in the Rope (0-indexed)
 	var pos: Int
+	# Iterator on the substrings, does the Postfix part of
+	# the Rope traversal.
+	var subs: IndexedIterator[String]
 
-	var max: Int
-
-	var substr_iter: IndexedIterator[Char]
-
-	init(tgt: Rope, from: Int)
-	do
-		substrings = tgt.substrings_from(from)
-		max = tgt.length - 1
-		if not substrings.is_ok then
-			pos = tgt.length
-			return
-		end
-		pos = from
-		substr_iter = substrings.item.chars.iterator
+	init(root: RopeString) do
+		pos = root.length - 1
+		subs = new ReverseRopeSubstrings(root)
+		ns = subs.item
+		pns = ns.length - 1
 	end
 
-	redef fun item do return substr_iter.item
+	init from(root: RopeString, pos: Int) do
+		self.pos = pos
+		subs = new ReverseRopeSubstrings.from(root, pos)
+		ns = subs.item
+		pns = pos - subs.index
+	end
+
+	redef fun index do return pos
+
+	redef fun is_ok do return pos >= 0
+
+	redef fun item do return ns[pns]
+
+	redef fun next do
+		pns -= 1
+		pos -= 1
+		if pns >= 0 then return
+		if not subs.is_ok then return
+		subs.next
+		if not subs.is_ok then return
+		ns = subs.item
+		pns = ns.length - 1
+	end
+end
+
+# Forward iterator on the chars of a `Rope`
+private class RopeIter
+	super IndexedIterator[Char]
+
+	# Position in current `String`
+	var pns: Int
+	# Current `String` being iterated on
+	var str: String
+	# Substrings of the Rope
+	var subs: IndexedIterator[String]
+	# Maximum position to iterate on (e.g. Rope.length)
+	var max: Int
+	# Position (char) in the Rope (0-indexed)
+	var pos: Int
+
+	init(root: RopeString) do
+		subs = new RopeSubstrings(root)
+		pns = 0
+		str = subs.item
+		max = root.length - 1
+		pos = 0
+	end
+
+	init from(root: RopeString, pos: Int) do
+		subs = new RopeSubstrings.from(root, pos)
+		pns = pos - subs.index
+		self.pos = pos
+		str = subs.item
+		max = root.length - 1
+	end
+
+	redef fun item do return str[pns]
 
 	redef fun is_ok do return pos <= max
 
 	redef fun index do return pos
 
-	redef fun next
-	do
+	redef fun next do
+		pns += 1
 		pos += 1
-		if substr_iter.is_ok then
-			substr_iter.next
-		end
-		if not substr_iter.is_ok then
-			substrings.next
-			if substrings.is_ok then
-				substr_iter = substrings.item.chars.iterator
-			end
-		end
+		if pns < subs.item.length then return
+		if not subs.is_ok then return
+		subs.next
+		if not subs.is_ok then return
+		str = subs.item
+		pns = 0
 	end
 end
 
-private class ReversePostfix
-	super IndexedIterator[RopeNode]
+# Substrings of a Rope (i.e. Reverse postfix iterator on leaves)
+private class ReverseRopeSubstrings
+	super IndexedIterator[String]
 
-	var target: Rope
+	# Visit Stack
+	var iter: RopeIterPiece is noinit
+	# Position in `Rope`
+	var pos: Int is noinit
 
-	var pos: Int
+	# Current leaf
+	var str: String is noinit
 
-	var min = 0
-
-	var stack = new List[IteratorElement]
-
-	init from(tgt: Rope, pos: Int)
-	do
-		self.pos = pos
-		target = tgt
-		if pos < 0 or pos >= tgt.length then return
-		var path = tgt.node_at(pos)
-		self.pos -= path.offset
-		for i in path.stack do
-			var elemt = new IteratorElement(i.node)
-			elemt.right = true
-			if i.left then
-				elemt.left = true
+	init(root: RopeString) do
+		var r = new RopeIterPiece(root, false, true, null)
+		pos = root.length - 1
+		var lnod: String = root
+		loop
+			if lnod isa Concat then
+				lnod = lnod.right
+				r = new RopeIterPiece(lnod, false, true, r)
+			else
+				str = lnod
+				iter = r
+				break
 			end
-			stack.push elemt
 		end
-		stack.push(new IteratorElement(path.leaf))
-		stack.last.done = true
 	end
 
-	redef fun item do
-		assert is_ok
-		return stack.last.node
+	init from(root: RopeString, pos: Int) do
+		var r = new RopeIterPiece(root, false, true, null)
+		var rnod: String = root
+		var off = pos
+		loop
+			if rnod isa Concat then
+				if off >= rnod.left.length then
+					off -= rnod.left.length
+					rnod = rnod.right
+					r = new RopeIterPiece(rnod, false, true, r)
+				else
+					r.ldone = true
+					rnod = rnod.left
+					r = new RopeIterPiece(rnod, false, true, r)
+				end
+			else
+				str = rnod
+				r.ldone = true
+				iter = r
+				self.pos = pos - off
+				break
+			end
+		end
 	end
 
-	redef fun is_ok do return not stack.is_empty
+	redef fun item do return str
 
 	redef fun index do return pos
-
-	redef fun next
-	do
-		if stack.is_empty then return
-		if pos < min then
-			stack.clear
-			return
-		end
-		var lst = stack.last
-		if lst.done then
-			stack.pop
-			next
-			return
-		end
-		if not lst.right then
-			var nod = lst.node.as(Concat)
-			var rgt = nod.right
-			lst.right = true
-			if rgt != null then
-				stack.push(new IteratorElement(rgt))
-				next
-				return
-			end
-		end
-		if not lst.left then
-			var nod = lst.node.as(Concat)
-			var lft = nod.left
-			lst.left = true
-			if lft != null then
-				stack.push(new IteratorElement(lft))
-				next
-				return
-			end
-		end
-		if lst.node isa Leaf then pos -= lst.node.length
-		lst.done = true
-	end
-end
-
-private class ReverseLeavesIterator
-	super IndexedIterator[Leaf]
-
-	var nodes: ReversePostfix
-
-	init(tgt: Rope, from: Int)
-	do
-		nodes = tgt.reverse_postfix(from)
-	end
-
-	redef fun is_ok do return nodes.is_ok
-
-	redef fun item do
-		assert is_ok
-		return nodes.item.as(Leaf)
-	end
-
-	redef fun next do
-		while nodes.is_ok do
-			nodes.next
-			if nodes.is_ok then if nodes.item isa Leaf then break
-		end
-	end
-
-	redef fun index do return nodes.index
-
-end
-
-private class ReverseSubstringsIterator
-	super IndexedIterator[Text]
-
-	var leaves: ReverseLeavesIterator
-
-	var pos: Int
-
-	var str: Text
-
-	init(tgt: Rope, from: Int)
-	do
-		leaves = tgt.reverse_leaves(from)
-		pos = from
-		if not leaves.is_ok then return
-		str = leaves.item.str
-		make_substring
-	end
-
-	fun make_substring
-	do
-		if pos >= (leaves.index + str.length - 1) then return
-		str = str.substring(0, (pos - leaves.index + 1))
-	end
-
-	redef fun is_ok do return leaves.is_ok
-
-	redef fun item do
-		assert is_ok
-		return str
-	end
-
-	redef fun index do return pos
-
-	redef fun next do
-		pos -= str.length
-		leaves.next
-		if not leaves.is_ok then return
-		str = leaves.item.str
-		make_substring
-	end
-end
-
-private class ReverseRopeCharIterator
-	super IndexedIterator[Char]
-
-	var substrs: IndexedIterator[Text]
-
-	var pos: Int
-
-	var subiter: IndexedIterator[Char]
-
-	init(tgt: Rope, from: Int)
-	do
-		substrs = tgt.reverse_substrings_from(from)
-		if not substrs.is_ok then
-			pos = -1
-			return
-		end
-		subiter = substrs.item.chars.reverse_iterator
-		pos = from
-	end
 
 	redef fun is_ok do return pos >= 0
 
+	redef fun next do
+		if pos < 0 then return
+		var curr: nullable RopeIterPiece = iter.prev
+		var currit = curr.node
+		while curr != null do
+			currit = curr.node
+			if not currit isa Concat then
+				str = currit
+				pos -= str.length
+				iter = curr
+				return
+			end
+			if not curr.rdone then
+				curr.rdone = true
+				curr = new RopeIterPiece(currit.right, false, false, curr)
+				continue
+			end
+			if not curr.ldone then
+				curr.ldone = true
+				curr = new RopeIterPiece(currit.left, false, false, curr)
+				continue
+			end
+			curr = curr.prev
+		end
+		pos = -1
+	end
+end
+
+private class RopeBufSubstringIterator
+	super Iterator[String]
+
+	# Iterator on the substrings of the building string
+	var iter: Iterator[String]
+	# Makes a String out of the buffered part of the Ropebuffer
+	var nsstr: String
+	# Did we attain the buffered part ?
+	var nsstr_done = false
+
+	init(str: RopeBuffer) do
+		iter = str.str.substrings
+		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
+		if str.length == 0 then nsstr_done = true
+	end
+
+	redef fun is_ok do return iter.is_ok or not nsstr_done
+
 	redef fun item do
 		assert is_ok
-		return subiter.item
+		if iter.is_ok then return iter.item
+		return nsstr
 	end
+
+	redef fun next do
+		if iter.is_ok then
+			iter.next
+			return
+		end
+		nsstr_done = true
+	end
+end
+
+# Substrings of a Rope (i.e. Postfix iterator on leaves)
+private class RopeSubstrings
+	super IndexedIterator[String]
+
+	# Visit Stack
+	var iter: RopeIterPiece is noinit
+	# Position in `Rope`
+	var pos: Int is noinit
+	# Maximum position in `Rope` (i.e. length - 1)
+	var max: Int is noinit
+
+	# Current leaf
+	var str: String is noinit
+
+	init(root: RopeString) do
+		var r = new RopeIterPiece(root, true, false, null)
+		pos = 0
+		max = root.length - 1
+		var rnod: String = root
+		loop
+			if rnod isa Concat then
+				rnod = rnod.left
+				r = new RopeIterPiece(rnod, true, false, r)
+			else
+				str = rnod
+				r.rdone = true
+				iter = r
+				break
+			end
+		end
+	end
+
+	init from(root: RopeString, pos: Int) do
+		var r = new RopeIterPiece(root, true, false, null)
+		max = root.length - 1
+		var rnod: String = root
+		var off = pos
+		loop
+			if rnod isa Concat then
+				if off >= rnod.left.length then
+					r.rdone = true
+					off -= rnod.left.length
+					rnod = rnod.right
+					r = new RopeIterPiece(rnod, true, false, r)
+				else
+					rnod = rnod.left
+					r = new RopeIterPiece(rnod, true, false, r)
+				end
+			else
+				str = rnod
+				r.rdone = true
+				iter = r
+				self.pos = pos - off
+				break
+			end
+		end
+	end
+
+	redef fun item do return str
+
+	redef fun is_ok do return pos <= max
 
 	redef fun index do return pos
 
 	redef fun next do
-		pos -= 1
-		if subiter.is_ok then subiter.next
-		if not subiter.is_ok then
-			if substrs.is_ok then substrs.next
-			if substrs.is_ok then subiter = substrs.item.chars.reverse_iterator
+		pos += str.length
+		if pos > max then return
+		var it = iter.prev
+		var rnod: String = it.node
+		loop
+			if not rnod isa Concat then
+				it.ldone = true
+				it.rdone = true
+				str = rnod
+				iter = it.as(not null)
+				break
+			end
+			if not it.ldone then
+				rnod = rnod.left
+				it.ldone = true
+				it = new RopeIterPiece(rnod, false, false, it)
+			else if not it.rdone then
+				it.rdone = true
+				rnod = rnod.right
+				it = new RopeIterPiece(rnod, false, false, it)
+			else
+				it = it.prev
+				rnod = it.node
+				continue
+			end
 		end
 	end
 end
 
+# Implementation of a `StringCharView` for `RopeString` objects
+private class RopeChars
+	super StringCharView
+
+	var tgt: RopeString
+
+	init(s: RopeString) do tgt = s
+
+	redef fun [](i) do
+		return tgt[i]
+	end
+
+	redef fun iterator_from(i) do return new RopeIter.from(tgt, i)
+
+	redef fun reverse_iterator_from(i) do return new RopeReviter.from(tgt, i)
+
+end
+
+class RopeBufferIter
+	super IndexedIterator[Char]
+
+	var sit: IndexedIterator[Char]
+
+	var ns: NativeString
+
+	var pns: Int
+
+	var maxpos: Int
+
+	redef var index: Int
+
+	init(t: RopeBuffer) do
+		ns = t.ns
+		maxpos = t.rpos
+		sit = t.str.chars.iterator
+		pns = t.dumped
+		index = 0
+	end
+
+	init from(t: RopeBuffer, pos: Int) do
+		ns = t.ns
+		maxpos = t.length
+		sit = t.str.chars.iterator_from(pos)
+		pns = pos - t.str.length
+		index = pos
+	end
+
+	redef fun is_ok do return index < maxpos
+
+	redef fun item do
+		if sit.is_ok then return sit.item
+		return ns[pns]
+	end
+
+	redef fun next do
+		index += 1
+		if sit.is_ok then
+			sit.next
+		else
+			pns += 1
+		end
+	end
+end
+
+class RopeBufferReviter
+	super IndexedIterator[Char]
+
+	var sit: IndexedIterator[Char]
+
+	var ns: NativeString
+
+	var pns: Int
+
+	redef var index: Int
+
+	init(tgt: RopeBuffer) do
+		sit = tgt.str.chars.reverse_iterator
+		pns = tgt.rpos - 1
+		index = tgt.length - 1
+		ns = tgt.ns
+	end
+
+	init from(tgt: RopeBuffer, pos: Int) do
+		sit = tgt.str.chars.reverse_iterator_from(pos - tgt.rpos - tgt.dumped)
+		pns = pos - tgt.str.length
+		index = pos
+		ns = tgt.ns
+	end
+
+	redef fun is_ok do return index > 0
+
+	redef fun item do
+		if pns >= 0 then return ns[pns]
+		return sit.item
+	end
+
+	redef fun next do
+		index -= 1
+		if pns >= 0 then
+			pns -= 1
+		else
+			sit.next
+		end
+	end
+end
+
+# View on the chars of a `RopeBuffer`
+class RopeBufferChars
+	super BufferCharView
+
+	redef type SELFTYPE: RopeBuffer
+
+	redef fun [](i) do
+		if i < target.str.length then
+			return target.str[i]
+		else
+			return target.ns[i - target.str.length]
+		end
+	end
+
+	redef fun []=(i,c) do
+		if i == target.length then target.add c
+		if i < target.str.length then
+			var s = target.str
+			var l = s.substring(0, i)
+			var r = s.substring_from(i + 1)
+			target.str = l + c.to_s + r
+		else
+			target.ns[i - target.str.length] = c
+		end
+	end
+
+	redef fun add(c) do target.add c
+
+	redef fun push(c) do target.add c
+
+	redef fun iterator_from(i) do return new RopeBufferIter.from(target, i)
+
+	redef fun reverse_iterator_from(i) do return new RopeBufferReviter.from(target, i)
+end

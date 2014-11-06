@@ -12,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var x = new FlatBuffer.from("test")
-var y = new FlatBuffer.from("TEST")
+#alt1 import standard::ropes
+
+var x: Buffer = new FlatBuffer.from("test")
+#alt1 x = new RopeBuffer.from("test")
+var y: Buffer = new FlatBuffer.from("TEST")
+#alt1 y = new RopeBuffer.from("TEST")
 
 x.upper
 y.lower

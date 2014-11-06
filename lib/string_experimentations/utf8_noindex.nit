@@ -448,8 +448,8 @@ redef class FlatString
 			items.copy_to(new_str, bytelen, index_from, 0)
 			o.items.copy_to(new_str, o.bytelen, o.index_from, bytelen)
 			return new FlatString.full(new_str, 0, new_bytelen - 1, new_bytelen, newlen)
-		else if o isa RopeString then
-			return new RopeString.from(self) + o
+		else if o isa Concat then
+			return new Concat(self, o)
 		else
 			# If it goes to this point, that means another String implementation was concerned, therefore you need to support the + operation for this variant
 			abort
@@ -519,7 +519,7 @@ redef class FlatBuffer
 	redef var bytelen: Int
 
 	redef init from(s) do
-		if s isa RopeString then
+		if s isa Concat then
 			with_capacity(50)
 			for i in s.substrings do self.append(i)
 		end
@@ -618,7 +618,7 @@ redef class FlatBuffer
 	end
 
 	redef fun append(s) do
-		if s isa RopeString then
+		if s isa Concat then
 			for i in s.substrings do append i
 		end
 		var i = s.as(FlatString)

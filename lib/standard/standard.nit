@@ -22,9 +22,9 @@ import string_search
 import file
 import exec
 import stream
-import ropes
 import collection
 import math
+import ropes
 import kernel
 import gc
 import bitset

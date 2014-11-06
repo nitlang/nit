@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#alt1 import standard
+#alt1 import standard::ropes
+
 var n = 7
 if not args.is_empty then
 	n = args.first.to_i
@@ -22,7 +25,8 @@ end
 var s = "*"
 var i = 0
 while i < n do
-	var s2 = new FlatBuffer.from("Je dis «")
+	var s2: Buffer = new FlatBuffer.from("Je dis «")
+	#alt1 s2 = new RopeBuffer.from("Je dis «")
 	s2.append(s)
 	s2.append("» et redis «")
 	s2.append(s)

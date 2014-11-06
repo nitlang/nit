@@ -778,6 +778,8 @@ abstract class String
 
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 
+	redef fun substrings: Iterator[String] is abstract
+
 	# Returns a reversed version of self
 	#
 	#     assert "hello".reversed  == "olleh"
@@ -2098,7 +2100,6 @@ extern class NativeString `{ char* `}
 	do
 		assert length >= 0
 		var str = new FlatString.with_infos(self, length, 0, length - 1)
-		str.real_items = self
 		return str
 	end
 
@@ -2108,7 +2109,8 @@ extern class NativeString `{ char* `}
 		var new_self = calloc_string(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
-		str.real_items = self
+		new_self[length] = '\0'
+		str.real_items = new_self
 		return str
 	end
 end

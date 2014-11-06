@@ -13,39 +13,6 @@ module iteration_bench
 
 import opts
 
-fun bench_rope_iter(nb_cct: Int, loops: Int, strlen: Int)
-do
-	var a = "a" * strlen
-	var x:String = new RopeString.from(a)
-	for i in [0 .. nb_cct] do x += a
-	var cnt = 0
-	var c: Char
-	while cnt != loops do
-		for i in x do
-			c = i
-		end
-		cnt += 1
-	end
-end
-
-fun bench_rope_index(nb_cct: Int, loops: Int, strlen: Int)
-do
-	var a = "a" * strlen
-	var x:String = new RopeString.from(a)
-	for i in [0 .. nb_cct] do x += a
-	var cnt = 0
-	var c: Char
-	var pos = 0
-	while cnt != loops do
-		pos = 0
-		while pos < x.length do
-			c = x[pos]
-			pos += 1
-		end
-		cnt += 1
-	end
-end
-
 fun bench_flatstr_iter(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
@@ -113,7 +80,7 @@ do
 end
 
 var opts = new OptionContext
-var mode = new OptionEnum(["rope", "flatstr", "flatbuf"], "Mode", -1, "-m")
+var mode = new OptionEnum(["flatstr", "flatbuf"], "Mode", -1, "-m")
 var access_mode = new OptionEnum(["iterator", "index"], "Iteration mode", -1, "--iter-mode")
 var nb_ccts = new OptionInt("Number of concatenations done to the string (in the case of the rope, this will increase its depth)", -1, "--ccts")
 var loops = new OptionInt("Number of loops to be done", -1, "--loops")
@@ -132,15 +99,6 @@ var iterval = access_mode.value
 
 if modval == 0 then
 	if iterval == 0 then
-		bench_rope_iter(nb_ccts.value, loops.value, strlen.value)
-	else if iterval == 1 then
-		bench_rope_index(nb_ccts.value, loops.value, strlen.value)
-	else
-		opts.usage
-		exit(-1)
-	end
-else if modval == 1 then
-	if iterval == 0 then
 		bench_flatstr_iter(nb_ccts.value, loops.value, strlen.value)
 	else if iterval == 1 then
 		bench_flatstr_index(nb_ccts.value, loops.value, strlen.value)
@@ -148,7 +106,7 @@ else if modval == 1 then
 		opts.usage
 		exit(-1)
 	end
-else if modval == 2 then
+else if modval == 1 then
 	if iterval == 0 then
 		bench_flatbuf_iter(nb_ccts.value, loops.value, strlen.value)
 	else if iterval == 1 then

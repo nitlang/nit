@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import splay_ropes
-#alt2 import bufferized_ropes
+#alt1 import standard
+#alt1 import buffered_ropes
 
 var st = "quick brown fox over the lazy dog"
 
