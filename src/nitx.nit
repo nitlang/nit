@@ -23,11 +23,11 @@ import modelize
 # then wait for query on std in to display documentation
 class NitIndex
 	private var toolcontext: ToolContext
-	private var model: Model
-	private var mbuilder: ModelBuilder
-	private var mainmodule: MModule
-	private var arguments: Array[String]
-	private var renderer: PagerMatchesRenderer
+	private var model: Model is noinit
+	private var mbuilder: ModelBuilder is noinit
+	private var mainmodule: MModule is noinit
+	private var arguments: Array[String] is noinit
+	private var renderer: PagerMatchesRenderer is noinit
 
 	# New constructor to use the pre-calculated model when interpreting a module
 	init with_infos(mbuilder: ModelBuilder, mmodule: MModule) do
@@ -42,9 +42,8 @@ class NitIndex
 		renderer = new PagerMatchesRenderer(self)
 	end
 
-	init(toolcontext: ToolContext) do
+	init do
 		# We need a model to collect stufs
-		self.toolcontext = toolcontext
 		self.arguments = toolcontext.option_context.rest
 
 		if arguments.length > 2 then
@@ -234,19 +233,11 @@ end
 private class IndexQuery
 	var string: String
 	var keyword: String
-	init(string: String, keyword: String) do
-		self.string = string
-		self.keyword = keyword
-	end
 end
 
 private class IndexQueryPair
 	super IndexQuery
 	var category: String
-	init(string: String, keyword: String, category: String) do
-		super(string, keyword)
-		self.category = category
-	end
 end
 
 # A match to a query in the nit index
@@ -298,7 +289,6 @@ end
 
 private class PagerMatchesRenderer
 	var index: NitIndex
-	init(index: NitIndex) do self.index = index
 
 	fun render_matches(query: IndexQuery, matches: Collection[IndexMatch]) do
 		var pager = new Pager

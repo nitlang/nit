@@ -269,7 +269,6 @@ end
 private class CollectTokensByTextVisitor
 	super Visitor
 	var text: String
-	init(text: String) do self.text = text
 	var result = new Array[Token]
 	redef fun visit(node)
 	do
@@ -281,7 +280,6 @@ end
 private class CollectAnnotationsByNameVisitor
 	super Visitor
 	var name: String
-	init(name: String) do self.name = name
 	var result = new Array[AAnnotation]
 	redef fun visit(node)
 	do

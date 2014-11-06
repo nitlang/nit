@@ -125,10 +125,8 @@ class ModelBuilder
 
 	# Instantiate a modelbuilder for a model and a toolcontext
 	# Important, the options of the toolcontext must be correctly set (parse_option already called)
-	init(model: Model, toolcontext: ToolContext)
+	init
 	do
-		self.model = model
-		self.toolcontext = toolcontext
 		assert toolcontext.modelbuilder_real == null
 		toolcontext.modelbuilder_real = self
 

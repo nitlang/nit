@@ -77,16 +77,15 @@ private class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
 	private var range: Range[E]
-	redef var item
+	redef var item is noinit
 
 	redef fun is_ok do return _item < _range.after
 	
 	redef fun next do _item = _item.successor(1)
 	
-	init(r: Range[E])
+	init
 	do
-		_range = r
-		_item = r.first
+		_item = _range.first
 	end
 end
 

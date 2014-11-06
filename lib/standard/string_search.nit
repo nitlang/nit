@@ -139,13 +139,10 @@ class BM_Pattern
 		end
 	end
 
-	# Compile a new motif
-	init(motif: String)
+	init
 	do
-		_motif = motif
 		_length = _motif.length
 		_gs = new Array[Int].with_capacity(_length)
-		_bc_table = new ArrayMap[Char, Int]
 		compute_gs
 		compute_bc
 	end
@@ -154,7 +151,7 @@ class BM_Pattern
 	private var motif: String
 
 	# length of the motif
-	private var length: Int
+	private var length: Int is noinit
 
 	private fun bc(e: Char): Int
 	do
@@ -166,10 +163,10 @@ class BM_Pattern
 	end
 
 	# good shifts
-	private var gs: Array[Int]
+	private var gs: Array[Int] is noinit
 	
 	# bad characters
-	private var bc_table: Map[Char, Int]
+	private var bc_table = new ArrayMap[Char, Int]
 
 	private fun compute_bc
 	do
@@ -255,15 +252,11 @@ class Match
 	# The contents of the matching part
 	redef fun to_s do return string.substring(from,length)
 
-	# Matches `len` characters of `s` from `f`.
-	init(s: String, f: Int, len: Int)
+	init
 	do
-		assert positive_length: len >= 0
-		assert valid_from: f >= 0
-		assert valid_after: f + len <= s.length
-		string = s
-		from = f
-		length = len
+		assert positive_length: length >= 0
+		assert valid_from: from >= 0
+		assert valid_after: from + length <= string.length
 	end
 end
 

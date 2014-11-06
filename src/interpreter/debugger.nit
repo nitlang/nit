@@ -65,7 +65,7 @@ end
 
 redef class ScopeVisitor
 
-	redef init(toolcontext)
+	redef init
 	do
 		super
 		if toolcontext.dbg != null then
@@ -1442,15 +1442,10 @@ end
 private class TraceObject
 
 	# Map of the local names bound to a frame
-	var trace_map: HashMap[Frame, String]
+	var trace_map = new HashMap[Frame, String]
+
 	# Decides if breaking or printing statement when the variable is encountered
 	var break_on_encounter: Bool
-
-	init(break_on_encounter: Bool)
-	do
-		trace_map = new HashMap[Frame, String]
-		self.break_on_encounter = break_on_encounter
-	end
 
 	# Adds the local alias for a variable and the frame bound to it
 	fun add_frame_variable(frame: Frame, variable_name: String)

@@ -49,8 +49,6 @@ class TplPage
 	# JS scripts to append at the end of the body
 	var scripts = new Array[TplScript]
 
-	init do end
-
 	# Add a section to this page
 	fun add_section(section: TplSection) do
 		sections.add section
@@ -162,10 +160,6 @@ class TplTopMenu
 	# Used to select the active link.
 	private var current_url: String
 
-	init(current_url: String) do
-		self.current_url = current_url
-	end
-
 	# Add a new link to the menu.
 	fun add_link(content: TplLink) do
 		var is_active = content.href == current_url
@@ -272,18 +266,17 @@ class TplSideBox
 	# Box HTML id
 	# equals to `title.to_cmangle` by default
 	# Used for collapsing
-	var id: String
+	var id: String is noinit
 
 	# Content to display in the box
 	# box will not be rendered if the content is null
-	var content: nullable Streamable is writable
+	var content: nullable Streamable = null is writable
 
 	# Is the box opened by default
 	# otherwise, the user will have to clic on the title to display the content
 	var is_open = false is writable
 
-	init(title: String) do
-		self.title = title
+	init do
 		self.id = title.to_cmangle
 	end
 
@@ -358,8 +351,6 @@ class TplSummaryEntry
 	# Will be displayed as a tree
 	var children = new Array[TplSummaryElt]
 
-	init(text: Streamable) do self.text = text
-
 	redef fun add_child(child) do children.add child
 
 	redef fun rendering do
@@ -385,14 +376,14 @@ class TplSectionElt
 	# Title to display if any
 	# if both `title` and `summary_title` are null then
 	# the section will not appear in the summary
-	var title: nullable Streamable is writable
+	var title: nullable Streamable = null is writable
 
 	# Subtitle to display if any
-	var subtitle: nullable Streamable is writable
+	var subtitle: nullable Streamable = null is writable
 
 	# Title that appear in the summary
 	# if null use `title` instead
-	var summary_title: nullable String is writable
+	var summary_title: nullable String = null is writable
 
 	# CSS classes to apply on the section element
 	var css_classes = new Array[String]
@@ -401,9 +392,7 @@ class TplSectionElt
 	var title_classes = new Array[String]
 
 	# Parent article/section if any
-	var parent: nullable TplSectionElt
-
-	init(id: String) do self.id = id
+	var parent: nullable TplSectionElt = null
 
 	init with_title(id: String, title: Streamable) do
 		init(id)
@@ -660,12 +649,7 @@ class TplLink
 	var text: Streamable is writable
 
 	# Optional title
-	var title: nullable String is writable
-
-	init(href, text: String) do
-		self.href = href
-		self.text = text
-	end
+	var title: nullable String = null is writable
 
 	init with_title(href, text, title: String) do
 		init(href, text)
@@ -780,7 +764,7 @@ class TplTabPanel
 	# The panel id.
 	#
 	# Used to show/hide panel.
-	var id: String
+	var id: String is noinit
 
 	# The panel name.
 	#
@@ -856,11 +840,6 @@ class TagAttribute
 	var name: String
 	var value: nullable String
 
-	init(name: String, value: nullable String) do
-		self.name = name
-		self.value = value
-	end
-
 	redef fun rendering do
 		var value = self.value
 		if value == null then
@@ -901,12 +880,6 @@ class TplPiwikScript
 
 	var tracker_url: String
 	var site_id: String
-
-	init(tracker_url, site_id: String) do
-		super
-		self.tracker_url = tracker_url
-		self.site_id = site_id
-	end
 
 	redef fun render_content do
 		add "<!-- Piwik -->"

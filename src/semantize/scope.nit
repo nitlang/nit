@@ -71,9 +71,8 @@ private class ScopeVisitor
 
 	var selfvariable = new Variable("self")
 
-	init(toolcontext: ToolContext)
+	init
 	do
-		self.toolcontext = toolcontext
 		scopes.add(new Scope)
 	end
 

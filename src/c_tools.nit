@@ -125,13 +125,6 @@ end
 class ExternCFile
 	super ExternFile
 
-	init (filename, cflags: String)
-	do
-		super filename
-
-		self.cflags = cflags
-	end
-
 	# Additional specific CC compiler -c flags
 	var cflags: String
 

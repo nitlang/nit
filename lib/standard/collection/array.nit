@@ -408,12 +408,6 @@ private class ArrayIterator[E]
 
 	redef fun next do _index += 1
 
-	init(a: AbstractArrayRead[E])
-	do
-		_array = a
-		_index = 0
-	end
-
 	redef var index = 0
 
 	private var array: AbstractArrayRead[E]
@@ -426,10 +420,9 @@ private class ArrayReverseIterator[E]
 
 	redef fun next do _index -= 1
 
-	init(a: AbstractArrayRead[E])
+	init
 	do
-		_array = a
-		_index = a.length - 1
+		_index = _array.length - 1
 	end
 end
 
@@ -495,8 +488,6 @@ private class ArraySetIterator[E: Object]
 	redef fun next do _iter.next
 
 	redef fun item: E do return _iter.item
-
-	init(iter: ArrayIterator[E]) do _iter = iter
 
 	private var iter: ArrayIterator[E]
 end

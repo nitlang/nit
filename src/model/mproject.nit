@@ -37,10 +37,8 @@ class MProject
 
 	redef fun to_s do return name
 
-	init(name: String, model: Model)
+	init
 	do
-		self.name = name
-		self.model = model
 		model.mprojects.add(self)
 		model.mproject_by_name.add_one(name, self)
 	end
@@ -75,21 +73,19 @@ class MGroup
 	# The group is the group tree on the project (`mproject.mgroups`)
 	# nested groups (children) are smaller
 	# nesting group (see `parent`) is bigger
-	var in_nesting: POSetElement[MGroup]
+	var in_nesting: POSetElement[MGroup] is noinit
 
 	# Is `self` the root of its project?
 	fun is_root: Bool do return mproject.root == self
 
 	# The filepath (usually a directory) of the group, if any
-	var filepath: nullable String is writable
+	var filepath: nullable String = null is writable
 
-	init (name: String, mproject: MProject, parent: nullable MGroup)
+	init
 	do
-		self.name = name
-		self.mproject = mproject
-		self.parent = parent
 		var tree = mproject.mgroups
 		self.in_nesting = tree.add_node(self)
+		var parent = self.parent
 		if parent != null then
 			tree.add_edge(self, parent)
 		end

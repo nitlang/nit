@@ -166,7 +166,6 @@ class DirectCCompilerOption
 	super CCompilerOption
 
 	var option: String
-	init (opt: String) do option = opt
 end
 
 class ExecCCompilerOption
@@ -174,10 +173,4 @@ class ExecCCompilerOption
 
 	var command: Array[String]
 	var exec_node: ACallExpr
-
-	init (command: Array[String], exec_node: ACallExpr)
-	do
-		self.command = command
-		self.exec_node = exec_node
-	end
 end

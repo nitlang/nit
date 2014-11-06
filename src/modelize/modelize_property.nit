@@ -490,16 +490,12 @@ redef class AMethPropdef
 
 
 	# Can self be used as a root init?
-	private fun look_like_a_root_init(modelbuilder: ModelBuilder): Bool
+	private fun look_like_a_root_init(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
 	do
 		# Need the `init` keyword
 		if n_kwinit == null then return false
 		# Need to by anonymous
 		if self.n_methid != null then return false
-		# No parameters
-		if self.n_signature.n_params.length > 0 then return false
-		# Cannot be private or something
-		if not self.n_visibility isa APublicVisibility then return false
 		# No annotation on itself
 		if get_single_annotation("old_style_init", modelbuilder) != null then return false
 		# Nor on its module
@@ -508,6 +504,16 @@ redef class AMethPropdef
 		if amoddecl != null then
 			var old = amoddecl.get_single_annotation("old_style_init", modelbuilder)
 			if old != null then return false
+		end
+		# No parameters
+		if self.n_signature.n_params.length > 0 then
+			modelbuilder.advice(self, "old-init", "Warning: init with signature in {mclassdef}")
+			return false
+		end
+		# Cannot be private or something
+		if not self.n_visibility isa APublicVisibility then
+			modelbuilder.advice(self, "old-init", "Warning: non-public init in {mclassdef}")
+			return false
 		end
 
 		return true
@@ -547,9 +553,10 @@ redef class AMethPropdef
 			end
 		end
 
+		var look_like_a_root_init = look_like_a_root_init(modelbuilder, mclassdef)
 		var mprop: nullable MMethod = null
 		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
-		if mprop == null and look_like_a_root_init(modelbuilder) then
+		if mprop == null and look_like_a_root_init then
 			mprop = modelbuilder.the_root_init_mmethod
 			var nb = n_block
 			if nb isa ABlockExpr and nb.n_expr.is_empty and n_doc == null then
@@ -559,7 +566,7 @@ redef class AMethPropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MMethod(mclassdef, name, mvisibility)
-			if look_like_a_root_init(modelbuilder) and modelbuilder.the_root_init_mmethod == null then
+			if look_like_a_root_init and modelbuilder.the_root_init_mmethod == null then
 				modelbuilder.the_root_init_mmethod = mprop
 				mprop.is_root_init = true
 			end

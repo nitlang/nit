@@ -441,11 +441,8 @@ class RapidTypeVisitor
 	var receiver: MClassType
 	var mpropdef: MPropDef
 
-	init(analysis: RapidTypeAnalysis, receiver: MClassType, mpropdef: MPropDef)
+	init
 	do
-		self.analysis = analysis
-		self.receiver = receiver
-		self.mpropdef = mpropdef
 		assert not receiver.need_anchor
 	end
 

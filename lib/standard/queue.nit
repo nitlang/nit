@@ -232,8 +232,6 @@ class MinHeap[E: Object]
 		init(default_comparator)
 	end
 
-	init(comparator: Comparator) do self.comparator = comparator
-
 	redef fun is_empty do return items.is_empty
 	redef fun length do return items.length
 	redef fun iterator do return items.iterator

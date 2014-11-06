@@ -156,17 +156,15 @@ class SeparateCompiler
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
-	private var type_ids: Map[MType, Int]
-	private var type_colors: Map[MType, Int]
-	private var opentype_colors: Map[MType, Int]
-	protected var method_colors: Map[PropertyLayoutElement, Int]
-	protected var attr_colors: Map[MAttribute, Int]
+	private var type_ids: Map[MType, Int] is noinit
+	private var type_colors: Map[MType, Int] is noinit
+	private var opentype_colors: Map[MType, Int] is noinit
+	protected var method_colors: Map[PropertyLayoutElement, Int] is noinit
+	protected var attr_colors: Map[MAttribute, Int] is noinit
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
-		super(mainmodule, mmbuilder)
+	init do
 		var file = new_file("nit.common")
 		self.header = new CodeWriter(file)
-		self.runtime_type_analysis = runtime_type_analysis
 		self.compile_box_kinds
 	end
 

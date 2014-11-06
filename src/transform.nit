@@ -41,7 +41,7 @@ private class TransformPhase
 	do
 		var val
 
-		var v = new TransformVisitor(self, npropdef)
+		var v = new TransformVisitor(self, npropdef.mpropdef.as(not null))
 		v.enter_visit(npropdef)
 
 		val = new ASTValidationVisitor
@@ -53,15 +53,13 @@ private class TransformVisitor
 	super Visitor
 
 	var phase: TransformPhase
-	var mmodule: MModule
-	var mclassdef: MClassDef
+	var mmodule: MModule is noinit
+	var mclassdef: MClassDef is noinit
 	var mpropdef: MPropDef
-	var builder: ASTBuilder
+	var builder: ASTBuilder is noinit
 
-	init(phase: TransformPhase, npropdef: APropdef)
+	init
 	do
-		self.phase = phase
-		self.mpropdef = npropdef.mpropdef.as(not null)
 		self.mclassdef = mpropdef.mclassdef
 		self.mmodule = mclassdef.mmodule
 		self.builder = new ASTBuilder(mmodule, mpropdef.mclassdef.bound_mtype)

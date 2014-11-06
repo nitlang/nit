@@ -362,35 +362,20 @@ class MClass
 
 	# The number of generic formal parameters
 	# 0 if the class is not generic
-	var arity: Int
+	var arity: Int is noinit
 
 	# Each generic formal parameters in order.
 	# is empty if the class is not generic
 	var mparameters = new Array[MParameterType]
 
-	# The kind of the class (interface, abstract class, etc.)
-	# In Nit, the kind of a class cannot evolve in refinements
-	var kind: MClassKind
-
-	# The visibility of the class
-	# In Nit, the visibility of a class cannot evolve in refinements
-	var visibility: MVisibility
-
-	init(intro_mmodule: MModule, name: String, parameter_names: nullable Array[String], kind: MClassKind, visibility: MVisibility)
+	protected fun setup_parameter_names(parameter_names: nullable Array[String]) is
+		autoinit
 	do
-		self.intro_mmodule = intro_mmodule
-		self.name = name
 		if parameter_names == null then
 			self.arity = 0
 		else
 			self.arity = parameter_names.length
 		end
-		self.kind = kind
-		self.visibility = visibility
-		intro_mmodule.intro_mclasses.add(self)
-		var model = intro_mmodule.model
-		model.mclasses_by_name.add_one(name, self)
-		model.mclasses.add(self)
 
 		# Create the formal parameter types
 		if arity > 0 then
@@ -409,6 +394,22 @@ class MClass
 		end
 	end
 
+	# The kind of the class (interface, abstract class, etc.)
+	# In Nit, the kind of a class cannot evolve in refinements
+	var kind: MClassKind
+
+	# The visibility of the class
+	# In Nit, the visibility of a class cannot evolve in refinements
+	var visibility: MVisibility
+
+	init
+	do
+		intro_mmodule.intro_mclasses.add(self)
+		var model = intro_mmodule.model
+		model.mclasses_by_name.add_one(name, self)
+		model.mclasses.add(self)
+	end
+
 	redef fun model do return intro_mmodule.model
 
 	# All class definitions (introduction and refinements)
@@ -421,7 +422,7 @@ class MClass
 	#
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
-	var intro: MClassDef
+	var intro: MClassDef is noinit
 
 	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
@@ -447,7 +448,7 @@ class MClass
 	# To get other types based on a generic class, see `get_mtype`.
 	#
 	# ENSURE: `mclass_type.mclass == self`
-	var mclass_type: MClassType
+	var mclass_type: MClassType is noinit
 
 	# Return a generic type based on the class
 	# Is the class is not generic, then the result is `mclass_type`
@@ -490,7 +491,7 @@ class MClassDef
 	var mmodule: MModule
 
 	# The associated `MClass`
-	var mclass: MClass
+	var mclass: MClass is noinit
 
 	# The bounded type associated to the mclassdef
 	#
@@ -509,14 +510,11 @@ class MClassDef
 
 	# Internal name combining the module and the class
 	# Example: "mymodule#MyClass"
-	redef var to_s: String
+	redef var to_s: String is noinit
 
-	init(mmodule: MModule, bound_mtype: MClassType, location: Location)
+	init
 	do
-		self.bound_mtype = bound_mtype
-		self.mmodule = mmodule
 		self.mclass = bound_mtype.mclass
-		self.location = location
 		mmodule.mclassdefs.add(self)
 		mclass.mclassdefs.add(self)
 		if mclass.intro_mmodule == mmodule then
@@ -988,10 +986,7 @@ class MClassType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
-	private init(mclass: MClass)
-	do
-		self.mclass = mclass
-	end
+	# TODO: private init because strongly bounded to its mclass. see `mclass.mclass_type`
 
 	# The formal arguments of the type
 	# ENSURE: `result.length == self.mclass.arity`
@@ -1081,11 +1076,13 @@ end
 class MGenericType
 	super MClassType
 
-	private init(mclass: MClass, arguments: Array[MType])
+	redef var arguments
+
+	# TODO: private init because strongly bounded to its mclass. see `mclass.get_mtype`
+
+	init
 	do
-		super(mclass)
 		assert self.mclass.arity == arguments.length
-		self.arguments = arguments
 
 		self.need_anchor = false
 		for t in arguments do
@@ -1100,9 +1097,9 @@ class MGenericType
 
 	# Recursively print the type of the arguments within brackets.
 	# Example: `"Map[String, List[Int]]"`
-	redef var to_s: String
+	redef var to_s: String is noinit
 
-	redef var need_anchor: Bool
+	redef var need_anchor: Bool is noinit
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
@@ -1243,11 +1240,6 @@ class MVirtualType
 	end
 
 	redef fun to_s do return self.mproperty.to_s
-
-	init(mproperty: MProperty)
-	do
-		self.mproperty = mproperty
-	end
 end
 
 # The type associated to a formal parameter generic type of a class
@@ -1372,13 +1364,6 @@ class MParameterType
 		end
 		return mtype.collect_mclassdefs(mmodule).has(mclass.intro)
 	end
-
-	init(mclass: MClass, rank: Int, name: String)
-	do
-		self.mclass = mclass
-		self.rank = rank
-		self.name = name
-	end
 end
 
 # A type prefixed with "nullable"
@@ -1390,13 +1375,12 @@ class MNullableType
 
 	redef fun model do return self.mtype.model
 
-	init(mtype: MType)
+	init
 	do
-		self.mtype = mtype
 		self.to_s = "nullable {mtype}"
 	end
 
-	redef var to_s: String
+	redef var to_s: String is noinit
 
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
@@ -1441,10 +1425,6 @@ end
 class MNullType
 	super MType
 	redef var model: Model
-	protected init(model: Model)
-	do
-		self.model = model
-	end
 	redef fun to_s do return "null"
 	redef fun as_nullable do return self
 	redef fun need_anchor do return false
@@ -1492,7 +1472,7 @@ class MSignature
 	end
 
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
-	init(mparameters: Array[MParameter], return_mtype: nullable MType)
+	init
 	do
 		var vararg_rank = -1
 		for i in [0..mparameters.length[ do
@@ -1502,15 +1482,13 @@ class MSignature
 				vararg_rank = i
 			end
 		end
-		self.mparameters = mparameters
-		self.return_mtype = return_mtype
 		self.vararg_rank = vararg_rank
 	end
 
 	# The rank of the ellipsis (`...`) for vararg (starting from 0).
 	# value is -1 if there is no vararg.
 	# Example: for "(a: Int, b: Bool..., c: Char)" #-> vararg_rank=1
-	var vararg_rank: Int
+	var vararg_rank: Int is noinit
 
 	# The number or parameters
 	fun arity: Int do return mparameters.length
@@ -1568,12 +1546,6 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
-	init(name: String, mtype: MType, is_vararg: Bool) do
-		self.name = name
-		self.mtype = mtype
-		self.is_vararg = is_vararg
-	end
-
 	redef fun to_s
 	do
 		if is_vararg then
@@ -1630,11 +1602,8 @@ abstract class MProperty
 	# The visibility of the property
 	var visibility: MVisibility
 
-	init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
+	init
 	do
-		self.intro_mclassdef = intro_mclassdef
-		self.name = name
-		self.visibility = visibility
 		intro_mclassdef.intro_mproperties.add(self)
 		var model = intro_mclassdef.mmodule.model
 		model.mproperties_by_name.add_one(name, self)
@@ -1650,7 +1619,7 @@ abstract class MProperty
 	#
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
-	var intro: MPROPDEF
+	var intro: MPROPDEF is noinit
 
 	redef fun model do return intro.model
 
@@ -1819,11 +1788,6 @@ class MMethod
 
 	redef type MPROPDEF: MMethodDef
 
-	init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
-	do
-		super
-	end
-
 	# Is the property defined at the top_level of the module?
 	# Currently such a property are stored in `Object`
 	var is_toplevel: Bool = false is writable
@@ -1854,10 +1818,6 @@ class MAttribute
 
 	redef type MPROPDEF: MAttributeDef
 
-	init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
-	do
-		super
-	end
 end
 
 # A global virtual type
@@ -1865,11 +1825,6 @@ class MVirtualTypeProp
 	super MProperty
 
 	redef type MPROPDEF: MVirtualTypeDef
-
-	init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
-	do
-		super
-	end
 
 	# The formal type associated to the virtual type property
 	var mvirtualtype = new MVirtualType(self)
@@ -1889,20 +1844,17 @@ abstract class MPropDef
 	# Self class
 	type MPROPDEF: MPropDef
 
-	# The origin of the definition
-	var location: Location
-
 	# The class definition where the property definition is
 	var mclassdef: MClassDef
 
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	init(mclassdef: MClassDef, mproperty: MPROPERTY, location: Location)
+	# The origin of the definition
+	var location: Location
+
+	init
 	do
-		self.mclassdef = mclassdef
-		self.mproperty = mproperty
-		self.location = location
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
 		if mproperty.intro_mclassdef == mclassdef then
@@ -1919,7 +1871,7 @@ abstract class MPropDef
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"
-	redef var to_s: String
+	redef var to_s: String is noinit
 
 	# Is self the definition that introduce the property?
 	fun is_intro: Bool do return mproperty.intro == self
@@ -1949,11 +1901,6 @@ class MMethodDef
 
 	redef type MPROPERTY: MMethod
 	redef type MPROPDEF: MMethodDef
-
-	init(mclassdef: MClassDef, mproperty: MPROPERTY, location: Location)
-	do
-		super
-	end
 
 	# The signature attached to the property definition
 	var msignature: nullable MSignature = null is writable
@@ -1998,11 +1945,6 @@ class MAttributeDef
 	redef type MPROPERTY: MAttribute
 	redef type MPROPDEF: MAttributeDef
 
-	init(mclassdef: MClassDef, mproperty: MPROPERTY, location: Location)
-	do
-		super
-	end
-
 	# The static type of the attribute
 	var static_mtype: nullable MType = null is writable
 end
@@ -2013,11 +1955,6 @@ class MVirtualTypeDef
 
 	redef type MPROPERTY: MVirtualTypeProp
 	redef type MPROPDEF: MVirtualTypeDef
-
-	init(mclassdef: MClassDef, mproperty: MPROPERTY, location: Location)
-	do
-		super
-	end
 
 	# The bound of the virtual type
 	var bound: nullable MType = null is writable
@@ -2041,11 +1978,8 @@ class MClassKind
 
 	# Is a constructor required?
 	var need_init: Bool
-	private init(s: String, need_init: Bool)
-	do
-		self.to_s = s
-		self.need_init = need_init
-	end
+
+	# TODO: private init because enumeration.
 
 	# Can a class of kind `self` specializes a class of kine `other`?
 	fun can_specialize(other: MClassKind): Bool

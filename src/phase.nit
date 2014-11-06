@@ -163,13 +163,16 @@ abstract class Phase
 	var toolcontext: ToolContext
 
 	# The dependence relation of the phase with the other phases
-	var in_hierarchy: POSetElement[Phase]
+	var in_hierarchy: POSetElement[Phase] is noinit
+
+	# The explicit dependences, used to initialize `in_importation`
+	var depends: nullable Collection[Phase]
 
 	# Initialize and register a phase to the toolcontext
-	init(toolcontext: ToolContext, depends: nullable Collection[Phase])
+	init
 	do
-		self.toolcontext = toolcontext
 		in_hierarchy = toolcontext.phases.add_node(self)
+		var depends = self.depends
 		if depends != null then
 			for d in depends do
 				toolcontext.phases.add_edge(self, d)

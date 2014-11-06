@@ -31,7 +31,7 @@ end
 private class CachedPhase
 	super Phase
 
-	init(toolcontext, depends)
+	init
 	do
 		# FIXME The phase has to be executed just after `modelize_property_phase`
 		# But there is no simple way to express this

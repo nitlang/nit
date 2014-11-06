@@ -85,7 +85,7 @@ end
 class PatternWithDir
 	super BM_Pattern
 
-	var dir: String
+	var dir: String is noinit
 
 	init with_dir(motif, dir: String)
 	do

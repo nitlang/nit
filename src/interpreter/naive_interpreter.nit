@@ -67,13 +67,10 @@ class NaiveInterpreter
 	var arguments: Array[String]
 
 	# The main Sys instance
-	var mainobj: nullable Instance
+	var mainobj: nullable Instance is noinit
 
-	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
+	init
 	do
-		self.modelbuilder = modelbuilder
-		self.mainmodule = mainmodule
-		self.arguments = arguments
 		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		self.null_instance = new MutableInstance(mainmodule.model.null_type)
@@ -211,13 +208,13 @@ class NaiveInterpreter
 	end
 
 	# The unique instance of the `true` value.
-	var true_instance: Instance
+	var true_instance: Instance is noinit
 
 	# The unique instance of the `false` value.
-	var false_instance: Instance
+	var false_instance: Instance is noinit
 
 	# The unique instance of the `null` value.
-	var null_instance: Instance
+	var null_instance: Instance is noinit
 
 	# Return a new array made of `values`.
 	# The dynamic type of the result is Array[elttype].
@@ -588,12 +585,6 @@ class PrimitiveInstance[E: Object]
 
 	# The real value encapsulated
 	redef var val: E
-
-	init(mtype: MType, val: E)
-	do
-		super(mtype)
-		self.val = val
-	end
 
 	redef fun is_true
 	do

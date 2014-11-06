@@ -158,9 +158,7 @@ private class OrderedTreeIterator[E: Object]
 
 	var iterators = new Array[Iterator[E]]
 
-	init(tree: OrderedTree[E]) do
-		self.tree = tree
-
+	init do
 		if not tree.is_empty then
 			iterators.add tree.roots.iterator
 		end

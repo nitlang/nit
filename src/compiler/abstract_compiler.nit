@@ -454,7 +454,7 @@ abstract class AbstractCompiler
 	var mainmodule: MModule is writable
 
 	# The real main module of the program
-	var realmainmodule: MModule
+	var realmainmodule: MModule is noinit
 
 	# The modelbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder is protected writable
@@ -462,11 +462,9 @@ abstract class AbstractCompiler
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
-	init(mainmodule: MModule, modelbuilder: ModelBuilder)
+	init
 	do
-		self.mainmodule = mainmodule
 		self.realmainmodule = mainmodule
-		self.modelbuilder = modelbuilder
 	end
 
 	# Force the creation of a new file
@@ -493,7 +491,7 @@ abstract class AbstractCompiler
 	fun new_visitor: VISITOR is abstract
 
 	# Where global declaration are stored (the main .h)
-	var header: CodeWriter is writable
+	var header: CodeWriter is writable, noinit
 
 	# Provide a declaration that can be requested (before or latter) by a visitor
 	fun provide_declaration(key: String, s: String)
@@ -1015,9 +1013,8 @@ class CodeWriter
 	# (used for local or global declaration)
 	fun add_decl(s: String) do self.decl_lines.add(s)
 
-	init(file: CodeFile)
+	init
 	do
-		self.file = file
 		file.writers.add(self)
 	end
 end
@@ -1034,7 +1031,7 @@ abstract class AbstractCompilerVisitor
 	var current_node: nullable ANode = null is writable
 
 	# The current `Frame`
-	var frame: nullable Frame is writable
+	var frame: nullable Frame = null is writable
 
 	# Alias for self.compiler.mainmodule.object_type
 	fun object_type: MClassType do return self.compiler.mainmodule.object_type
@@ -1042,11 +1039,10 @@ abstract class AbstractCompilerVisitor
 	# Alias for self.compiler.mainmodule.bool_type
 	fun bool_type: MClassType do return self.compiler.mainmodule.bool_type
 
-	var writer: CodeWriter
+	var writer: CodeWriter is noinit
 
-	init(compiler: COMPILER)
+	init
 	do
-		self.compiler = compiler
 		self.writer = new CodeWriter(compiler.files.last)
 	end
 
@@ -1630,11 +1626,8 @@ class RuntimeVariable
 	# false (usual value) means that the variable is a mcasttype or a subtype.
 	var is_exact: Bool = false is writable
 
-	init(name: String, mtype: MType, mcasttype: MType)
+	init
 	do
-		self.name = name
-		self.mtype = mtype
-		self.mcasttype = mcasttype
 		assert not mtype.need_anchor
 		assert not mcasttype.need_anchor
 	end

@@ -22,23 +22,14 @@ intrude import markdown
 class NitUnitExecutor
 	super Doc2Mdwn
 
-	# The module to import
-	var mmodule: MModule
-
 	# The prefix of the generated Nit source-file
 	var prefix: String
 
+	# The module to import
+	var mmodule: MModule
+
 	# The XML node associated to the module
 	var testsuite: HTMLTag
-
-	# Initialize a new e
-	init(toolcontext: ToolContext, prefix: String, mmodule: MModule, testsuite: HTMLTag)
-	do
-		super(toolcontext)
-		self.prefix = prefix
-		self.mmodule = mmodule
-		self.testsuite = testsuite
-	end
 
 	# All blocks of code from a same `ADoc`
 	var blocks = new Array[Array[String]]
@@ -80,7 +71,7 @@ class NitUnitExecutor
 	end
 
 	# The associated node to localize warnings
-	var ndoc: nullable ADoc
+	var ndoc: nullable ADoc = null
 
 	# used to generate distinct names
 	var cpt = 0

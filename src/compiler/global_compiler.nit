@@ -114,12 +114,10 @@ class GlobalCompiler
 	# The result of the RTA (used to know live types and methods)
 	var runtime_type_analysis: RapidTypeAnalysis
 
-	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
+	init
 	do
-		super(mainmodule, modelbuilder)
 		var file = new_file("{mainmodule.name}.nitgg")
 		self.header = new CodeWriter(file)
-		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
 		for t in runtime_type_analysis.live_types do
 			if t.ctype != "val*" or t.mclass.name == "Pointer" then
@@ -163,7 +161,7 @@ class GlobalCompiler
 
 	# Subset of runtime_type_analysis.live_types that contains only primitive types
 	# Used to implement the equal test
-	var live_primitive_types: Array[MClassType]
+	var live_primitive_types: Array[MClassType] is noinit
 
 	# Add a new todo task
 	fun todo(m: AbstractRuntimeFunction)
@@ -915,12 +913,6 @@ private class CustomizedRuntimeFunction
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)
 	var recv: MClassType
-
-	init(mmethoddef: MMethodDef, recv: MClassType)
-	do
-		super(mmethoddef)
-		self.recv = recv
-	end
 
 	redef fun build_c_name
 	do

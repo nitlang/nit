@@ -26,8 +26,6 @@ class MProjectTree
 	# The model where to look for information
 	var model: Model
 
-	init(model: Model) do self.model = model
-
 	redef fun display(a) do
 		if a isa MGroup then
 			if a.parent == null then return "{a.mproject.name} ({a.filepath.to_s})"

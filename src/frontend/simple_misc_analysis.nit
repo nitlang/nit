@@ -58,11 +58,6 @@ private class SimpleMiscVisitor
 	do
 		toolcontext.warning(node.hot_location, tag, msg)
 	end
-
-	init(toolcontext: ToolContext)
-	do
-		self.toolcontext = toolcontext
-	end
 end
 
 

@@ -737,11 +737,6 @@ private abstract class StringCharView
 
 	private var target: SELFTYPE
 
-	private init(tgt: SELFTYPE)
-	do
-		target = tgt
-	end
-
 	redef fun is_empty do return target.is_empty
 
 	redef fun length do return target.length
@@ -912,8 +907,6 @@ private class FlatSubstringsIter
 	super Iterator[FlatText]
 
 	var tgt: nullable FlatText
-
-	init(tgt: FlatText) do self.tgt = tgt
 
 	redef fun item do
 		assert is_ok

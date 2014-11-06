@@ -80,8 +80,9 @@ end
 # It is better user with the Parser
 class Lexer
 	super TablesCapable
+
 	# Last peeked token
-	var token: nullable Token
+	var token: nullable Token = null
 
 	# Lexer current state
 	private var state: Int = 0
@@ -103,12 +104,6 @@ class Lexer
 
 	# Constante state values
 	private fun state_initial: Int do return 0 end
-
-	# Create a new lexer for a stream (and a name)
-	init(file: SourceFile)
-	do
-		self.file = file
-	end
 
 	# The last peeked token to chain them
 	private var last_token: nullable Token = null

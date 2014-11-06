@@ -55,12 +55,6 @@ private class DivByZeroVisitor
 	# The mmodule is the current module
 	var mmodule: MModule
 
-	init(toolcontext: ToolContext, mmodule: MModule)
-	do
-		self.toolcontext = toolcontext
-		self.mmodule = mmodule
-	end
-
 	redef fun visit(node)
 	do
 		# Recursively visit all sub-nodes

@@ -194,9 +194,6 @@ class Container[E]
 
 	redef fun iterator do return new ContainerIterator[E](self)
 
-	# Create a new instance with a given initial value.
-	init(e: E) do item = e
-
 	# The stored item
 	var item: E is writable
 end
@@ -207,8 +204,6 @@ private class ContainerIterator[E]
 	redef fun item do return _container.item
 
 	redef fun next do is_ok = false
-
-	init(c: Container[E]) do _container = c
 
 	redef var is_ok: Bool = true
 
@@ -950,8 +945,6 @@ private class CoupleMapIterator[K: Object, V]
 	end
 
 	private var iter: Iterator[Couple[K,V]]
-
-	init(i: Iterator[Couple[K,V]]) do _iter = i
 end
 
 # Some tools ###################################################################
@@ -964,11 +957,4 @@ class Couple[F, S]
 
 	# The second element of the couple.
 	var second: S is writable
-
-	# Create a new instance with a first and a second object.
-	init(f: F, s: S)
-	do
-		first = f
-		second = s
-	end
 end

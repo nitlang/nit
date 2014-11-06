@@ -484,10 +484,6 @@ class BashCompletion
 
 	var toolcontext: ToolContext
 
-	init(toolcontext: ToolContext) do
-		self.toolcontext = toolcontext
-	end
-
 	private fun extract_options_names: Array[String] do
 		var names = new Array[String]
 		for option in toolcontext.option_context.options do

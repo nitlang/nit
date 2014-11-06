@@ -2070,10 +2070,5 @@ end
 class Start
 	super Prod
 	var n_base: nullable AModule is writable
-	var n_eof: EOF is writable, noinit
-	init(n_base: nullable AModule, n_eof: EOF)
-	do
-		self._n_base = n_base
-		self._n_eof = n_eof
-	end
+	var n_eof: EOF is writable
 end
