@@ -1,6 +1,6 @@
 bin/pep8analysis:
 	mkdir -p bin
-	../../bin/nitg --global -o bin/pep8analysis src/pep8analysis.nit
+	../../bin/nitg -o bin/pep8analysis src/pep8analysis.nit
 
 doc/index.html:
 	../../bin/nitdoc src/pep8analysis.nit
