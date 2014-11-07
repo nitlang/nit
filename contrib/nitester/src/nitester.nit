@@ -407,7 +407,7 @@ class Worker
 					# Command line to execute test
 					var cmd = "XMLDIR={xml_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
 						"CCACHE_DIR={ccache_dir} CCACHE_TEMPDIR={ccache_dir} CCACHE_BASEDIR={comp_dir} " +
-						"./tests.sh --compdir {comp_dir} --outdir {out_dir} -o \"--make-flags '-j1'\"" +
+						"./tests.sh --compdir {comp_dir} --outdir {out_dir} " +
 						" --node --engine {task.engine} {nit_copy_dir / "tests" / task.test_program} > {tests_sh_out}"
 
 					# Execute test
