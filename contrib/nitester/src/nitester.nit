@@ -248,6 +248,8 @@ class Controller
 					if res == 5 then result.fail = true
 					if res == 6 then result.soso = true
 					if res == 7 then result.skip = true
+					if res == 8 then result.todo = true
+					if res == 9 then result.skip_exec = true
 					if res == 0 then result.unknown = true
 
 					results.add result
@@ -303,6 +305,8 @@ class Controller
 		print "* {results.fixmes.length} fixmes"
 		print "* {results.sosos.length} sosos"
 		print "* {results.skips.length} skips"
+		print "* {results.todos.length} todos"
+		print "* {results.skip_execs.length} skip execs"
 		print "* {results.unknowns.length} unknowns (bug in tests.sh or nitester)"
 	end
 
@@ -442,6 +446,8 @@ class Worker
 						if line.has("[======= fail") then res = 5
 						if line.has("[======= soso") then res = 6
 						if line.has("[skip]") then res = 7
+						if line.has("[todo]") then res = 8
+						if line.has("[skip exec]") then res = 9
 
 						if res == null then
 							res = 0
@@ -548,8 +554,14 @@ class Result
 	# Is `self` result a _soso_?
 	var soso = false
 
-	# Is `self` skipped test?
+	# Has `self` been skipped?
 	var skip = false
+
+	# Is `self` TODO?
+	var todo = false
+
+	# Has the execution of `self` been skipped?
+	var skip_exec = false
 
 	# Is `self` an unknown result, probably an error
 	var unknown = false
@@ -562,6 +574,10 @@ class Result
 		if ok_empty then err = "0k"
 		if fixme then err = "fixme"
 		if fail then err = "fail"
+		if soso then err = "soso"
+		if skip then err = "skip"
+		if todo then err = "todo"
+		if skip_exec then err = "skip_exec"
 
 		return "{task} arg{arg} alt{alt} => {err}"
 	end
@@ -578,6 +594,8 @@ class ResultSet
 	var fails = new HashSet[Result]
 	var sosos = new HashSet[Result]
 	var skips = new HashSet[Result]
+	var todos = new HashSet[Result]
+	var skip_execs = new HashSet[Result]
 	var unknowns = new HashSet[Result]
 
 	# TODO remove
@@ -592,6 +610,8 @@ class ResultSet
 		if result.fail then fails.add result
 		if result.soso then sosos.add result
 		if result.skip then skips.add result
+		if result.todo then todos.add result
+		if result.skip_exec then skip_execs.add result
 		if result.unknown then unknowns.add result
 
 		super
