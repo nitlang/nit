@@ -457,7 +457,8 @@ todos=""
 if [ "x$XMLDIR" = "x" ]; then
 	xml="tests-$engine.xml"
 else
-	xml="$XMLDIR/tests-$engine.xml"
+	sum=`echo $@ | md5sum | cut -f1 -d " "`
+	xml="$XMLDIR/tests-$engine-$sum.xml"
 	mkdir -p "$XMLDIR"
 fi
 
