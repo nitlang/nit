@@ -73,9 +73,8 @@ end
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
 page.write_to_file(file)
-print "Results saved in {file}"
 # print docunits results
-print "\nDocUnits:"
+print "DocUnits:"
 if modelbuilder.unit_entities == 0 then
 	print "No doc units found"
 else if modelbuilder.failed_entities == 0 and not toolcontext.opt_noact.value then

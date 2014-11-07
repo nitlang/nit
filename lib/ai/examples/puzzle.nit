@@ -285,6 +285,6 @@ for arg in args do
 		break
 	end
 
-	print "Solved, after looking at {r.steps} positions during {c.lapse}"
+	print "Solved, after looking at {r.steps} positions"
 	pb.print_plan(r.plan)
 end

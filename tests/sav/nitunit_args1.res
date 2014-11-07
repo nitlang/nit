@@ -4,8 +4,6 @@ test_nitunit.nit:23,2--25,0: FAILURE: nitunit.test_nitunit.test_nitunit::X.test_
 
 test_test_nitunit.nit:36,2--40,4: ERROR: test_foo1 (in file .nitunit/test_test_nitunit_TestX_test_foo1.nit): Runtime error: Assert failed (test_test_nitunit.nit:39)
 
-Results saved in out/nitunit_args1.write
-
 DocUnits:
 Entities: 27; Documented ones: 3; With nitunits: 3; Failures: 2
 
