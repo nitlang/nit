@@ -395,7 +395,7 @@ class Worker
 				# Receive tasks to execute
 				mpi.recv_into(task_buffer, 0, 1, status.source, status.tag, comm_world)
 				var first_id = task_buffer[0]
-				for task_id in [first_id .. first_id + tasks_per_packet] do
+				for task_id in [first_id .. first_id + tasks_per_packet[ do
 
 					# If id is over all known tasks, stop right here
 					if task_id >= tasks.length then break
