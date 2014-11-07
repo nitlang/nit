@@ -26,7 +26,7 @@ class Perfecthashing
 	# A null value represents the upper bound of identifier
 	private var interval = new List[Couple[nullable Int, nullable Int]]
 
-	# An array used as a temporary Hashtable for 
+	# An array used as a temporary Hashtable for
 	# checking there is no collision between identifiers
 	private var tempht = new Array[nullable Int]
 
@@ -36,9 +36,9 @@ class Perfecthashing
 		# By default, all identifiers are available
 		interval.push(new Couple[nullable Int, nullable Int](1, null))
 	end
-	
+
 	# Returns a mask composed by discriminants bits
-	# for these given identifiers 
+	# for these given identifiers
 	# The mask + 1 value is the size of the hastable to create
 	fun phand(ids: Array[Int]): Int
 	do
@@ -59,7 +59,7 @@ class Perfecthashing
 		mask = orMask.bin_xor(andMask)
 
 		# Re-initialize the hashtable with null values
-		for i in [0..mask+1] do tempht[i] = null
+		for i in [0..(mask+1)] do tempht[i] = null
 
 		# Optimize the already computed mask
 		var newmask = 0
@@ -67,7 +67,7 @@ class Perfecthashing
 		while i != 0 do
 			if mask.getbit(i) == 1 then
 				newmask = mask.bin_xor(1.lshift(i))
-				
+
 				# If there is no collision, replace the old mask
 				if phandp(ids, newmask) then
 					mask = newmask
@@ -92,7 +92,7 @@ class Perfecthashing
 				tempht[hv] = mask
 			end
 		end
-	
+
 		return true
 	end
 
@@ -121,6 +121,9 @@ class Perfecthashing
 		end
 
 		# Resetting hashtable
+		for j in [0..(mask+1)] do tempht[j] = null
+
+		# Set the temporary hashtable for `compute_least_free_ids`
 		phandp(ids, mask)
 
 		# Fill the given array with n free identifiers
@@ -155,7 +158,7 @@ class Perfecthashing
 				# Tests if this id is free for this mask
 				var hv = i.bin_and(mask)
 
-				# If the hashtable if full, push an empty item 
+				# If the hashtable if full, push an empty item
 				if hv >= tempht.length then
 					tempht.push(null)
 				end
@@ -163,7 +166,7 @@ class Perfecthashing
 				if tempht[hv] != mask then
 					found = true
 					id = i
-				end	
+				end
 				i = i + 1
 			end
 
@@ -179,7 +182,7 @@ class Perfecthashing
 			else
 				inter.item.first += 1
 			end
-		else 
+		else
 			if id != inter.item.first and id != inter.item.second then
 				# We need to split in two this interval
 				var last = inter.item.second

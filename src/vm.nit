@@ -49,9 +49,9 @@ class VirtualMachine super NaiveInterpreter
 
 	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
 	do
-		super
 		var init_type = new MInitType(mainmodule.model)
 		initialization_value = new MutableInstance(init_type)
+		super
 	end
 
 	# Subtyping test for the virtual machine
@@ -145,10 +145,28 @@ class VirtualMachine super NaiveInterpreter
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 
-		assert(recv isa MutableInstance)
+		assert recv isa MutableInstance
 
 		recv.internal_attributes = init_internal_attributes(initialization_value, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
 		super
+	end
+
+	# Associate a `PrimitiveInstance` to its `VTable`
+	redef fun init_instance_primitive(recv: Instance)
+	do
+		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
+
+		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
+	end
+
+	# Create a virtual table for this `MClass` if not already done
+	redef fun get_primitive_class(name: String): MClass
+	do
+		var mclass = super
+
+		if not mclass.loaded then create_class(mclass)
+
+		return mclass
 	end
 
 	# Initialize the internal representation of an object (its attribute values)
@@ -168,6 +186,40 @@ class VirtualMachine super NaiveInterpreter
 
 	# Creates the runtime structures for this class
 	fun create_class(mclass: MClass) do	mclass.make_vt(self)
+
+	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
+	redef fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
+	do
+		var recv = args.first
+		var mtype = recv.mtype
+		var ret = send_commons(mproperty, args, mtype)
+		if ret != null then return ret
+
+		var propdef = method_dispatch(mproperty, recv.vtable.as(not null))
+
+		return self.call(propdef, args)
+	end
+
+	# Method dispatch, for a given global method `mproperty`
+	# returns the most specific local method in the class corresponding to `vtable`
+	private fun method_dispatch(mproperty: MMethod, vtable: VTable): MMethodDef
+	do
+		return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
+				mproperty.intro_mclassdef.mclass.vtable.id, mproperty.offset)
+	end
+
+	# Execute a method dispatch with perfect hashing
+	private fun method_dispatch_ph(vtable: Pointer, mask: Int, id: Int, offset: Int): MMethodDef `{
+		// Perfect hashing position
+		int hv = mask & id;
+		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
+
+		// pointer+2 is the position where methods are
+		// Add the offset of property and get the method implementation
+		MMethodDef propdef = (MMethodDef)*(pointer + 2 + offset);
+
+		return propdef;
+	`}
 
 	# Return the value of the attribute `mproperty` for the object `recv`
 	redef fun read_attribute(mproperty: MAttribute, recv: Instance): Instance
@@ -317,7 +369,12 @@ redef class MClass
 		# When all super-classes have their identifiers and vtables, allocate current one
 		allocate_vtable(v, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
 		loaded = true
+
 		# The virtual table now needs to be filled with pointer to methods
+		superclasses.add(self)
+		for cl in superclasses do
+			fill_vtable(v, vtable.as(not null), cl)
+		end
 	end
 
 	# Allocate a single vtable
@@ -347,14 +404,19 @@ redef class MClass
 		var self_methods = 0
 		var nb_introduced_attributes = 0
 
-		# For self attributes, fixing offsets
-		var relative_offset = 0
+		# Fixing offsets for self attributes and methods
+		var relative_offset_attr = 0
+		var relative_offset_meth = 0
 		for p in intro_mproperties(none_visibility) do
-			if p isa MMethod then self_methods += 1
+			if p isa MMethod then
+				self_methods += 1
+				p.offset = relative_offset_meth
+				relative_offset_meth += 1
+			end
 			if p isa MAttribute then
 				nb_introduced_attributes += 1
-				p.offset = relative_offset
-				relative_offset += 1
+				p.offset = relative_offset_attr
+				relative_offset_attr += 1
 			end
 		end
 
@@ -372,6 +434,24 @@ redef class MClass
 		# Since we have the number of attributes for each class, calculate the delta
 		var d = calculate_delta(nb_attributes_total)
 		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, d, vtable.mask)
+	end
+
+	# Fill the vtable with methods of `self` class
+	#     `v` : Current instance of the VirtualMachine
+	#     `table` : the table of self class, will be filled with its methods
+	private fun fill_vtable(v:VirtualMachine, table: VTable, cl: MClass)
+	do
+		var methods = new Array[MMethodDef]
+		for m in cl.intro_mproperties(none_visibility) do
+			if m isa MMethod then
+				# `propdef` is the most specific implementation for this MMethod
+				var propdef = m.lookup_first_definition(v.mainmodule, self.intro.bound_mtype)
+				methods.push(propdef)
+			end
+		end
+
+		# Call a method in C to put propdefs of self methods in the vtables
+		v.memory_manager.put_methods(vtable.internal_vtable, vtable.mask, cl.vtable.id, methods)
 	end
 
 	# Computes delta for each class
@@ -482,11 +562,21 @@ redef class MAttribute
 	var offset: Int
 end
 
+redef class MMethod
+	# Represents the relative offset of this attribute in the runtime instance
+	var offset: Int
+end
+
 # Redef MutableInstance to improve implementation of attributes in objects
 redef class MutableInstance
 
 	# C-array to store pointers to attributes of this Object
 	var internal_attributes: Pointer
+end
+
+# Redef to associate an `Instance` to its `VTable`
+redef class Instance
+	var vtable: nullable VTable
 end
 
 # Is the type of the initial value inside attributes
@@ -526,10 +616,6 @@ class VTable
 
 	# The short classname of this class
 	var classname: String is noinit
-end
-
-redef class Instance
-	var vtable: nullable VTable
 end
 
 # Handle memory, used for allocate virtual table and associated structures
@@ -593,5 +679,30 @@ class MemoryManager
 		}
 
 		return vtable;
+	`}
+
+	# Put implementation of methods of a class in `vtable`
+	# `vtable` : Pointer to the C-virtual table
+	# `mask` : perfect-hashing mask of the class corresponding to the vtable
+	# `id` : id of the target class
+	# `methods` : array of MMethodDef of the target class
+	fun put_methods(vtable: Pointer, mask: Int, id: Int, methods: Array[MMethodDef])
+		import Array[MMethodDef].length, Array[MMethodDef].[] `{
+
+		// Get the area to fill with methods by a sequence of perfect hashing
+		int hv = mask & id;
+		long unsigned int *pointer = (long unsigned int*)(((long unsigned int *)vtable)[-hv]);
+
+		// pointer+2 is the beginning of the area for methods implementation
+		int length = Array_of_MMethodDef_length(methods);
+		long unsigned int *area = (pointer + 2);
+		int i;
+
+		for(i=0; i<length; i++)
+		{
+			MMethodDef method = Array_of_MMethodDef__index(methods, i);
+			area[i] = (long unsigned int)method;
+			MMethodDef_incr_ref(method);
+		}
 	`}
 end
