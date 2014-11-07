@@ -163,10 +163,8 @@ abstract class Processor
 	# Gather and registar all tasks
 	fun create_tasks
 	do
-		var c = 0
-		for engine in engines do for prog in test_programs do
+		for prog in test_programs do for engine in engines do
 			tasks.add new Task(engine, prog)
-			c += 1
 		end
 	end
 end
