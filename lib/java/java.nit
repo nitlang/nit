@@ -38,7 +38,7 @@ redef class Sys
 	private var jvm_cache: nullable JavaVM = null
 	private var jni_env_cache: nullable JniEnv = null
 
-	# Default Java Virtual Machine to use (will be instanciated using
+	# Default Java Virtual Machine to use (will be instantiated using
 	# `create_default_jvm` if not already set)
 	fun jvm: JavaVM
 	do
@@ -59,13 +59,13 @@ redef class Sys
 	# Sets the current default JNI env (use with `jvm=`)
 	fun jni_env=(jni_env: JniEnv) do jni_env_cache = jni_env
 
-	# Called by `jvm` and `jni_env` to instanciate a Java Virual Machine.
+	# Called by `jvm` and `jni_env` to instantiate a Java Virtual Machine.
 	# Used mostly for the FFI with Java.
 	protected fun create_default_jvm
 	do
 		var builder = new JavaVMBuilder
 
-		# By default, look for Java classes in a jar file the same dir as the executable
+		# By default, look for Java classes in a jar file the same directory as the executable
 		builder.options.add "-Djava.class.path={sys.program_name}.jar"
 
 		var jvm = builder.create_jvm
@@ -79,7 +79,7 @@ redef class Sys
 	fun load_jclass(name: NativeString): JClass import jni_env `{
 		JNIEnv *nit_ffi_jni_env = Sys_jni_env(recv);
 
-		// retreive the implementation Java class
+		// retrieve the implementation Java class
 		jclass java_class = (*nit_ffi_jni_env)->FindClass(nit_ffi_jni_env, name);
 		if (java_class == NULL) {
 			fprintf(stderr, "Nit FFI with Java error: failed to load class.\\n");
@@ -135,6 +135,7 @@ redef class NativeString
 end
 
 redef class Text
+	# Get `self` as a `JavaString`
 	fun to_java_string: JavaString do return to_cstring.to_java_string
 end
 
@@ -177,4 +178,26 @@ redef extern class JavaObject
 	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
 		return (*jni_env)->PopLocalFrame(jni_env, recv);
 	`}
+
+	# Is `self` null in Java?
+	#
+	# Since Java type system doesn't have the same `nullable` concept as Nit's,
+	# the two systems are not directly compatible. Any Nit instances of
+	# `JavaObject` may hold a Java null.
+	#
+	# To benefit from the safer type system of Nit, it is recommended to check
+	# the return of all extern methods implemented in Java to ensure the value
+	# is not a Java null. In case it is, you should replace it by a normal Nit
+	# `null`.
+	fun is_java_null: Bool in "Java" `{ return recv == null; `}
+
+	# `JavaString` representation of `self` using Java's `toString`
+	fun to_java_string: JavaString in "Java" `{ return recv.toString(); `}
+
+	# Use Java's `toString` for any `JavaObject`
+	redef fun to_s
+	do
+		if is_java_null then return super
+		return to_java_string.to_s
+	end
 end
