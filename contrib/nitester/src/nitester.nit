@@ -62,7 +62,7 @@ abstract class Processor
 	var done_tag: Tag = 5.tag
 
 	# Number of tasks within each task assignation with `task_tag`
-	var tasks_per_packet = 4
+	var tasks_per_packet = 1
 
 	# Run the main logic of this node
 	fun run is abstract
