@@ -117,9 +117,9 @@ class Nitdoc
 		end
 		# copy shared files
 		if ctx.opt_shareurl.value == null then
-			sys.system("cp -r {sharedir.to_s}/* {output_dir.to_s}/")
+			sys.system("cp -r -- {sharedir.to_s.escape_to_sh}/* {output_dir.to_s.escape_to_sh}/")
 		else
-			sys.system("cp -r {sharedir.to_s}/resources/ {output_dir.to_s}/resources/")
+			sys.system("cp -r -- {sharedir.to_s.escape_to_sh}/resources/ {output_dir.to_s.escape_to_sh}/resources/")
 		end
 
 	end
@@ -314,11 +314,13 @@ abstract class NitdocPage
 	fun tpl_graph(dot: Buffer, name: String, title: nullable String): nullable TplArticle do
 		if ctx.opt_nodot.value then return null
 		var output_dir = ctx.output_dir
-		var file = new OFStream.open("{output_dir}/{name}.dot")
+		var path = output_dir / name
+		var path_sh = path.escape_to_sh
+		var file = new OFStream.open("{path}.dot")
 		file.write(dot)
 		file.close
-		sys.system("\{ test -f {output_dir}/{name}.png && test -f {output_dir}/{name}.s.dot && diff {output_dir}/{name}.dot {output_dir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {output_dir}/{name}.dot {output_dir}/{name}.s.dot && dot -Tpng -o{output_dir}/{name}.png -Tcmapx -o{output_dir}/{name}.map {output_dir}/{name}.s.dot ; \}")
-		var fmap = new IFStream.open("{output_dir}/{name}.map")
+		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
+		var fmap = new IFStream.open("{path}.map")
 		var map = fmap.read_all
 		fmap.close
 
@@ -326,11 +328,12 @@ abstract class NitdocPage
 		var alt = ""
 		if title != null then
 			article.title = title
-			alt = "alt='{title}'"
+			alt = "alt='{title.html_escape}'"
 		end
 		article.css_classes.add "text-center"
 		var content = new Template
-		content.add "<img src='{name}.png' usemap='#{name}' style='margin:auto' {alt}/>"
+		var name_html = name.html_escape
+		content.add "<img src='{name_html}.png' usemap='#{name_html}' style='margin:auto' {alt}/>"
 		content.add map
 		article.content = content
 		return article
