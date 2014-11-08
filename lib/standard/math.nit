@@ -83,6 +83,14 @@ redef class Int
 	#
 	#    assert not 13.is_even
 	fun is_odd: Bool do return not is_even
+
+	# Returns the `self` raised to the power of `e`.
+	#
+	#    assert 2 ** 3 == 8
+	fun **(e: Int): Int
+	do
+		return self.to_f.pow(e.to_f).to_i
+	end
 end
 
 redef class Float
