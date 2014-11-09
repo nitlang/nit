@@ -120,21 +120,21 @@ redef class AMethPropdef
 				mtype.compile_extern_type(v, ccu)
 
 				# has callbacks already been compiled? (this may very well happen with global compilation)
-				if mmodule.check_callback_compilation(mtype) then mtype.compile_extern_helper_functions(v, ccu)
+				mtype.compile_extern_helper_functions(v, ccu, mmodule.check_callback_compilation(mtype))
 			end
 		end
 
 		# compile callbacks
-		for cb in foreign_callbacks.callbacks do if mainmodule.check_callback_compilation(cb) then
-			cb.compile_extern_callback(v, ccu)
+		for cb in foreign_callbacks.callbacks do
+			cb.compile_extern_callback(v, ccu, mainmodule.check_callback_compilation(cb))
 		end
 
-		for cb in foreign_callbacks.supers do if mainmodule.check_callback_compilation(cb) then
-			cb.compile_extern_callback(v, ccu)
+		for cb in foreign_callbacks.supers do
+			cb.compile_extern_callback(v, ccu, mainmodule.check_callback_compilation(cb))
 		end
 
-		for cb in foreign_callbacks.casts do if mainmodule.check_callback_compilation(cb) then
-			cb.compile_extern_callbacks(v, ccu)
+		for cb in foreign_callbacks.casts do
+			cb.compile_extern_callbacks(v, ccu, mainmodule.check_callback_compilation(cb))
 		end
 
 		# manage nitni callback set
@@ -312,7 +312,7 @@ redef class MType
 		ccu.header_c_types.add("#endif\n")
 	end
 
-	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
 	do
 		# actually, we do not need to do anything when using the bohem garbage collector
 		var call_context = from_c_call_context
@@ -330,7 +330,7 @@ redef class MType
 end
 
 redef class MNullableType
-	redef fun compile_extern_helper_functions(v, ccu)
+	redef fun compile_extern_helper_functions(v, ccu, compile_implementation_too)
 	do
 		super
 
@@ -343,6 +343,8 @@ redef class MNullableType
 
 		# In nitni files, #define friendly as extern
 		ccu.header_decl.add("#define {base_cname} {full_cname}\n")
+
+		if not compile_implementation_too then return
 
 		# FIXME: This is ugly an broke the separate compilation principle
 		# The real function MUST be compiled only once, #define pragma only protect the compiler, not the loader
@@ -364,7 +366,7 @@ redef class MNullableType
 end
 
 redef class MExplicitCall
-	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
 	do
 		var mproperty = mproperty
 		assert mproperty isa MMethod
@@ -372,6 +374,8 @@ redef class MExplicitCall
 		# In nitni files, declare internal function as extern
 		var full_friendly_csignature = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
+
+		if not compile_implementation_too then return
 
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
@@ -424,7 +428,7 @@ redef class MExplicitCall
 end
 
 redef class MExplicitSuper
-	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
 	do
 		var mproperty = from.mproperty
 		assert mproperty isa MMethod
@@ -438,6 +442,8 @@ redef class MExplicitSuper
 		var friendly_cname = mproperty.build_cname(mclass_type, v.compiler.mainmodule, "___super", short_signature)
 		var internal_cname = mproperty.build_cname(mclass_type, v.compiler.mainmodule, "___super", long_signature)
 		ccu.header_decl.add("#define {friendly_cname} {internal_cname}\n")
+
+		if not compile_implementation_too then return
 
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
@@ -477,7 +483,7 @@ redef class MExplicitSuper
 end
 
 redef class MExplicitCast
-	private fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit)
+	private fun compile_extern_callbacks(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
 	do
 		var from = from
 		var to = to
@@ -493,22 +499,23 @@ redef class MExplicitCast
 		# In nitni files, #define friendly as extern
 		ccu.header_decl.add("#define {check_cname} {v.compiler.mainmodule.name}___{check_cname}\n")
 
-		# Internally, implement internal function
-		var nitni_visitor = v.compiler.new_visitor
-		nitni_visitor.frame = v.frame
+		if compile_implementation_too then
+			# Internally, implement internal function
+			var nitni_visitor = v.compiler.new_visitor
+			nitni_visitor.frame = v.frame
 
-		var full_internal_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
+			var full_internal_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
 
-		nitni_visitor.add_decl("/* nitni check for {from} to {to} */")
-		nitni_visitor.add_decl("{full_internal_csignature} \{")
+			nitni_visitor.add_decl("/* nitni check for {from} to {to} */")
+			nitni_visitor.add_decl("{full_internal_csignature} \{")
 
-		#var from_var = new RuntimeVariable("from->value", from, from)
-		var from_var = nitni_visitor.var_from_c("from", from)
-		from_var = nitni_visitor.box_extern(from_var, from)
-		var recv_var = nitni_visitor.type_test(from_var, to, "FFI isa")
-		nitni_visitor.add("return {recv_var};")
+			var from_var = nitni_visitor.var_from_c("from", from)
+			from_var = nitni_visitor.box_extern(from_var, from)
+			var recv_var = nitni_visitor.type_test(from_var, to, "FFI isa")
+			nitni_visitor.add("return {recv_var};")
 
-		nitni_visitor.add("\}")
+			nitni_visitor.add("\}")
+		end
 
 		# special checks
 		if from == to.as_nullable then
@@ -527,30 +534,32 @@ redef class MExplicitCast
 		# In nitni files, #define friendly as extern
 		ccu.header_decl.add("#define {cast_cname} {v.compiler.mainmodule.name}___{cast_cname}\n")
 
-		# Internally, implement internal function
-		nitni_visitor = v.compiler.new_visitor
-		nitni_visitor.frame = v.frame
+		if compile_implementation_too then
+			# Internally, implement internal function
+			var nitni_visitor = v.compiler.new_visitor
+			nitni_visitor.frame = v.frame
 
-		full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
-		nitni_visitor.add_decl("/* nitni cast for {from} to {to} */")
-		nitni_visitor.add_decl("{full_internal_csignature} \{")
+			var full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
+			nitni_visitor.add_decl("/* nitni cast for {from} to {to} */")
+			nitni_visitor.add_decl("{full_internal_csignature} \{")
 
-		from_var = nitni_visitor.var_from_c("from", from)
-		from_var = nitni_visitor.box_extern(from_var, from)
+			var from_var = nitni_visitor.var_from_c("from", from)
+			from_var = nitni_visitor.box_extern(from_var, from)
 
-		## test type
-		var check = nitni_visitor.type_test(from_var, to, "FFI cast")
-		nitni_visitor.add("if (!{check}) \{")
-		nitni_visitor.add_abort("FFI cast failed")
-		nitni_visitor.add("\}")
+			## test type
+			var check = nitni_visitor.type_test(from_var, to, "FFI cast")
+			nitni_visitor.add("if (!{check}) \{")
+			nitni_visitor.add_abort("FFI cast failed")
+			nitni_visitor.add("\}")
 
-		## internal cast
-		recv_var = nitni_visitor.autobox(from_var, to)
-		recv_var = nitni_visitor.unbox_extern(recv_var, to)
+			## internal cast
+			var recv_var = nitni_visitor.autobox(from_var, to)
+			recv_var = nitni_visitor.unbox_extern(recv_var, to)
 
-		nitni_visitor.ret_to_c(recv_var, to)
+			nitni_visitor.ret_to_c(recv_var, to)
 
-		nitni_visitor.add("\}")
+			nitni_visitor.add("\}")
+		end
 
 		# special casts
 		if from.as_nullable == to then
