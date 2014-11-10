@@ -92,9 +92,11 @@ redef class ModelBuilder
 		var compiler = new SeparateCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
 
+		var c_name = mainmodule.c_name
+
 		# compile class structures
 		self.toolcontext.info("Property coloring", 2)
-		compiler.new_file("{mainmodule.name}.classes")
+		compiler.new_file("{c_name}.classes")
 		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
@@ -104,21 +106,21 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
-		compiler.new_file("{mainmodule.name}.main")
+		compiler.new_file("{c_name}.main")
 		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 		compiler.compile_finalizer_function
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
-			self.toolcontext.info("Generate C for module {m}", 2)
-			compiler.new_file("{m.name}.sep")
+			self.toolcontext.info("Generate C for module {m.full_name}", 2)
+			compiler.new_file("{m.c_name}.sep")
 			compiler.compile_module_to_c(m)
 		end
 
 		# compile live & cast type structures
 		self.toolcontext.info("Type coloring", 2)
-		compiler.new_file("{mainmodule.name}.types")
+		compiler.new_file("{c_name}.types")
 		var mtypes = compiler.do_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
