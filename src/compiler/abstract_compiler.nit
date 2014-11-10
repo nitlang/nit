@@ -315,7 +315,7 @@ class MakefileToolchain
 
 		var outname = outfile(mainmodule)
 
-		var outpath = compile_dir.relpath(outname)
+		var outpath = compile_dir.relpath(outname).escape_to_mk
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
@@ -413,7 +413,7 @@ endif
 		if not pkgconfigs.is_empty then
 			pkg = "`pkg-config --libs {pkgconfigs.join(" ")}`"
 		end
-		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath.escape_to_sh} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
