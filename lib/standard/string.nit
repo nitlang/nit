@@ -494,6 +494,27 @@ abstract class Text
 	#     assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
 	fun escape_to_nit: String do return escape_more_to_c("\{\}")
 
+	# Escape to POSIX Shell (sh).
+	#
+	# Abort if the text contains a null byte.
+	#
+	#     assert "\n\"'\\\{\}0".escape_to_sh == "'\n\"'\\''\\\{\}0'"
+	fun escape_to_sh: String do
+		var b = new FlatBuffer
+		b.chars.add '\''
+		for i in [0..length[ do
+			var c = chars[i]
+			if c == '\'' then
+				b.append("'\\''")
+			else
+				assert without_null_byte: c != '\0'
+				b.add(c)
+			end
+		end
+		b.chars.add '\''
+		return b.to_s
+	end
+
 	# Return a string where Nit escape sequences are transformed.
 	#
 	#     var s = "\\n"
