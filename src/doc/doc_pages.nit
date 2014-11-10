@@ -994,15 +994,15 @@ class NitdocModule
 		# build graph
 		var op = new RopeBuffer
 		var name = "dep_module_{mmodule.nitdoc_id}"
-		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
 			if mmodule == self.mmodule then
-				op.append("\"{mmodule.name}\"[shape=box,margin=0.03];\n")
+				op.append("\"{mmodule.name.escape_to_dot}\"[shape=box,margin=0.03];\n")
 			else
-				op.append("\"{mmodule.name}\"[URL=\"{mmodule.nitdoc_url}\"];\n")
+				op.append("\"{mmodule.name.escape_to_dot}\"[URL=\"{mmodule.nitdoc_url.escape_to_dot}\"];\n")
 			end
 			for omodule in poset[mmodule].direct_greaters do
-				op.append("\"{mmodule.name}\"->\"{omodule.name}\";\n")
+				op.append("\"{mmodule.name.escape_to_dot}\"->\"{omodule.name.escape_to_dot}\";\n")
 			end
 		end
 		op.append("\}\n")
@@ -1375,7 +1375,7 @@ class NitdocClass
 
 		var op = new RopeBuffer
 		var name = "dep_class_{mclass.nitdoc_id}"
-		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		var classes = poset.to_a
 		var todo = new Array[MClass]
 		var done = new HashSet[MClass]
@@ -1386,18 +1386,18 @@ class NitdocClass
 			if done.has(c) then continue
 			done.add c
 			if c == mclass then
-				op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
+				op.append("\"{c.name.escape_to_dot}\"[shape=box,margin=0.03];\n")
 			else
-				op.append("\"{c.name}\"[URL=\"{c.nitdoc_url}\"];\n")
+				op.append("\"{c.name.escape_to_dot}\"[URL=\"{c.nitdoc_url.escape_to_dot}\"];\n")
 			end
 			var smallers = poset[c].direct_smallers
 			if smallers.length < 10 then
 				for c2 in smallers do
-					op.append("\"{c2.name}\"->\"{c.name}\";\n")
+					op.append("\"{c2.name.escape_to_dot}\"->\"{c.name.escape_to_dot}\";\n")
 				end
 				todo.add_all smallers
 			else
-				op.append("\"...\"->\"{c.name}\";\n")
+				op.append("\"...\"->\"{c.name.escape_to_dot}\";\n")
 			end
 		end
 		op.append("\}\n")
