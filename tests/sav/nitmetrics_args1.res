@@ -470,8 +470,8 @@ Average number of composing class definition by runtime class: 2.00
 Total size of tables (classes and instances): 38 (not including stuff like info for subtyping or call-next-method)
 Average size of table by runtime class: 6.33
 Values never redefined: 32 (84.21%)
-generating out/nitmetrics_args1.write/project_hierarchy.dot
-generating out/nitmetrics_args1.write/module_hierarchy.dot
+generating project_hierarchy.dot
+generating module_hierarchy.dot
 
 # Inheritance metrics
 

@@ -1,5 +1,7 @@
 #!/bin/sh
-printf "%s\n" "$@" *.nit \
+printf "%s\n" "$@" \
+	../src/nit*.nit \
+	../src/test_*.nit \
 	../examples/*.nit \
 	../examples/*/*.nit \
 	../examples/shoot/src/shoot_logic.nit \
@@ -12,5 +14,4 @@ printf "%s\n" "$@" *.nit \
 	../lib/*/examples/*.nit \
 	../contrib/friendz/src/solver_cmd.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
-	../src/nit*.nit \
-	../src/test_*.nit
+	*.nit

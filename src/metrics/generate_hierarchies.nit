@@ -53,12 +53,12 @@ do
 		dot.mprojects.add(g.mproject)
 	end
 	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
-	print "generating {projectpath}"
+	print "generating project_hierarchy.dot"
 	dot.write_to_file(projectpath)
 
 	var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
 	dot.mprojects.add_all(model.mprojects)
-	print "generating {modulepath}"
+	print "generating module_hierarchy.dot"
 	dot.write_to_file(modulepath)
 end
 

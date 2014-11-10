@@ -62,7 +62,7 @@ abstract class Processor
 	var done_tag: Tag = 5.tag
 
 	# Number of tasks within each task assignation with `task_tag`
-	var tasks_per_packet = 4
+	var tasks_per_packet = 1
 
 	# Run the main logic of this node
 	fun run is abstract
@@ -163,10 +163,8 @@ abstract class Processor
 	# Gather and registar all tasks
 	fun create_tasks
 	do
-		var c = 0
-		for engine in engines do for prog in test_programs do
+		for prog in test_programs do for engine in engines do
 			tasks.add new Task(engine, prog)
-			c += 1
 		end
 	end
 end
@@ -250,6 +248,8 @@ class Controller
 					if res == 5 then result.fail = true
 					if res == 6 then result.soso = true
 					if res == 7 then result.skip = true
+					if res == 8 then result.todo = true
+					if res == 9 then result.skip_exec = true
 					if res == 0 then result.unknown = true
 
 					results.add result
@@ -305,6 +305,8 @@ class Controller
 		print "* {results.fixmes.length} fixmes"
 		print "* {results.sosos.length} sosos"
 		print "* {results.skips.length} skips"
+		print "* {results.todos.length} todos"
+		print "* {results.skip_execs.length} skip execs"
 		print "* {results.unknowns.length} unknowns (bug in tests.sh or nitester)"
 	end
 
@@ -332,11 +334,11 @@ class Worker
 	# Output file directory
 	var out_dir = "/dev/shm/nit_out{rank}" is lazy
 
+	# Directory to store the xml files produced for Jenkins
+	var xml_dir = "~/jenkins_xml/"
+
 	# Output file of the `tests.sh` script
 	var tests_sh_out = "/dev/shm/nit_local_out{rank}" is lazy
-
-	# Path to the local copy of the Nit repository
-	var nit_copy_dir = "/dev/shm/nit{rank}/" is lazy
 
 	# Source Nit repository, must be already updated and `make` before execution
 	var nit_source_dir = "~/nit"
@@ -362,7 +364,6 @@ class Worker
 	fun setup
 	do
 		if verbose > 0 then sys.system "hostname"
-		sys.system "git clone {nit_source_dir} {nit_copy_dir}"
 	end
 
 	# Clean up the testing environment
@@ -372,7 +373,6 @@ class Worker
 	do
 		if comp_dir.file_exists then comp_dir.rmdir
 		if out_dir.file_exists then out_dir.rmdir
-		if nit_copy_dir.file_exists then nit_copy_dir.rmdir
 		if tests_sh_out.file_exists then tests_sh_out.file_delete
 	end
 
@@ -395,17 +395,17 @@ class Worker
 				# Receive tasks to execute
 				mpi.recv_into(task_buffer, 0, 1, status.source, status.tag, comm_world)
 				var first_id = task_buffer[0]
-				for task_id in [first_id .. first_id + tasks_per_packet] do
+				for task_id in [first_id .. first_id + tasks_per_packet[ do
 
 					# If id is over all known tasks, stop right here
 					if task_id >= tasks.length then break
 					var task = tasks[task_id]
 
 					# Command line to execute test
-					var cmd = "XMLDIR={out_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
+					var cmd = "XMLDIR={xml_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
 						"CCACHE_DIR={ccache_dir} CCACHE_TEMPDIR={ccache_dir} CCACHE_BASEDIR={comp_dir} " +
-						"./tests.sh --compdir {comp_dir} --outdir {out_dir} -o \"--make-flags '-j1'\"" +
-						" --node --engine {task.engine} {nit_copy_dir / "tests" / task.test_program} > {tests_sh_out}"
+						"./tests.sh --compdir {comp_dir} --outdir {out_dir} " +
+						" --node --engine {task.engine} {task.test_program} > {tests_sh_out}"
 
 					# Execute test
 					sys.system cmd
@@ -446,6 +446,8 @@ class Worker
 						if line.has("[======= fail") then res = 5
 						if line.has("[======= soso") then res = 6
 						if line.has("[skip]") then res = 7
+						if line.has("[todo]") then res = 8
+						if line.has("[skip exec]") then res = 9
 
 						if res == null then
 							res = 0
@@ -552,8 +554,14 @@ class Result
 	# Is `self` result a _soso_?
 	var soso = false
 
-	# Is `self` skipped test?
+	# Has `self` been skipped?
 	var skip = false
+
+	# Is `self` TODO?
+	var todo = false
+
+	# Has the execution of `self` been skipped?
+	var skip_exec = false
 
 	# Is `self` an unknown result, probably an error
 	var unknown = false
@@ -566,6 +574,10 @@ class Result
 		if ok_empty then err = "0k"
 		if fixme then err = "fixme"
 		if fail then err = "fail"
+		if soso then err = "soso"
+		if skip then err = "skip"
+		if todo then err = "todo"
+		if skip_exec then err = "skip_exec"
 
 		return "{task} arg{arg} alt{alt} => {err}"
 	end
@@ -582,6 +594,8 @@ class ResultSet
 	var fails = new HashSet[Result]
 	var sosos = new HashSet[Result]
 	var skips = new HashSet[Result]
+	var todos = new HashSet[Result]
+	var skip_execs = new HashSet[Result]
 	var unknowns = new HashSet[Result]
 
 	# TODO remove
@@ -596,6 +610,8 @@ class ResultSet
 		if result.fail then fails.add result
 		if result.soso then sosos.add result
 		if result.skip then skips.add result
+		if result.todo then todos.add result
+		if result.skip_exec then skip_execs.add result
 		if result.unknown then unknowns.add result
 
 		super
