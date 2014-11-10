@@ -19,8 +19,8 @@
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is
-	c_compiler_option("-I $(JAVA_HOME)/include/")
-	c_linker_option("-L $(JNI_LIB_PATH) -ljvm")
+	c_compiler_option "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
+	c_linker_option "-L $(JNI_LIB_PATH) -ljvm"
 end
 
 in "C Header" `{

@@ -153,7 +153,16 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	fun destroy do close
 
 	# Close this connection
-	fun close `{ sqlite3_close_v2(recv); `}
+	fun close `{
+#if SQLITE_VERSION_NUMBER >= 3007014
+		sqlite3_close_v2(recv);
+#else
+		// A program using the older version should not rely on the garbage-collector
+		// to close its connections. They must be closed manually after the associated
+		// prepare statements have been finalized.
+		sqlite3_close(recv);
+#endif
+	`}
 
 	# Execute a SQL statement
 	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
