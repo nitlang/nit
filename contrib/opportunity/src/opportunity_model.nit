@@ -154,7 +154,7 @@ class People
 	# NOTE: If `self` does not exist in the Database, no answers will be fetched
 	fun load_answers(db: OpportunityDB, meetup: Meetup) do
 		self.answers = new HashMap[Answer, Int]
-		var req = db.select("answers.id, answers.name, part_answers.value FROM part_answers, answers WHERE part_answers.id_part={id} AND answers.id=part_answers.id_ans AND answers.meetup_id={meetup.id.to_sql_string} GROUP BY answers.id;")
+		var req = db.select("answers.id, answers.name, part_answers.value FROM part_answers, answers WHERE part_answers.id_part={id} AND answers.id=part_answers.id_ans AND answers.meetup_id={meetup.id.html_escape.to_sql_string} GROUP BY answers.id;")
 		for i in req do
 			var ans = new Answer.from_db(i[0].to_i, i[1].to_s)
 			answers[ans] = i[2].to_i
@@ -165,14 +165,14 @@ class People
 
 	redef fun commit(db) do
 		if id == -1 then
-			if not db.execute("INSERT INTO people (name,surname) VALUES ({name.to_sql_string}, {surname.to_sql_string});") then
+			if not db.execute("INSERT INTO people (name,surname) VALUES ({name.html_escape.to_sql_string}, {surname.html_escape.to_sql_string});") then
 				print "Error while adding people {self}"
 				print db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
-			if not db.execute("UPDATE people SET name={name.to_sql_string}, surname={surname.to_sql_string} WHERE ID={id};") then
+			if not db.execute("UPDATE people SET name={name.html_escape.to_sql_string}, surname={surname.html_escape.to_sql_string} WHERE ID={id};") then
 				print "Error while updating people {self}"
 				print db.error or else "Unknown error"
 				return false
@@ -248,7 +248,7 @@ class Meetup
 		if id == "" then
 			var time = get_time
 			var tmpid = (name + date + place + time.to_s).sha1_to_s
-			if not db.execute("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES({tmpid.to_sql_string}, {name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string}, {answer_mode});") then
+			if not db.execute("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES({tmpid.to_sql_string}, {name.html_escape.to_sql_string}, {date.html_escape.to_sql_string}, {place.html_escape.to_sql_string}, {answer_mode});") then
 				print "Error recording entry Meetup {self}"
 				print db.error or else "Null error"
 				return false
@@ -256,7 +256,7 @@ class Meetup
 			id = tmpid
 			return true
 		else
-			return db.execute("UPDATE meetups SET name={name.to_sql_string}, date={date.to_sql_string}, place={place.to_sql_string}, answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
+			return db.execute("UPDATE meetups SET name={name.html_escape.to_sql_string}, date={date.html_escape.to_sql_string}, place={place.html_escape.to_sql_string}, answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
 		end
 	end
 
@@ -337,14 +337,14 @@ class Answer
 			end
 		end
 		if id == -1 then
-			if not db.execute("INSERT INTO answers (name, meetup_id) VALUES({name.to_sql_string}, {m.id.to_sql_string});") then
+			if not db.execute("INSERT INTO answers (name, meetup_id) VALUES({name.html_escape.to_sql_string}, {m.id.to_sql_string});") then
 				print "Cannot create {self} in database"
 				print db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
-			if not db.execute("UPDATE answers SET name=({name.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
+			if not db.execute("UPDATE answers SET name=({name.html_escape.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
 				print "Error updating {self} in database"
 				print db.error or else "Unknown error"
 				return false
