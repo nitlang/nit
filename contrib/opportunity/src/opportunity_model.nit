@@ -300,6 +300,33 @@ class Answer
 		abort
 	end
 
+	# Counts the number of positive or maybe answers
+	fun count(db: OpportunityDB): Int do
+		if id == -1 then return -1
+		var count = 0
+		var res = db.select("part_answers.value FROM part_answers WHERE part_answers.id_ans={id};")
+		if meetup == null then meetup = load_meetup(db)
+		for i in res do
+			if meetup.answer_mode == 0 then
+				count += i[0].to_i
+			else
+				if i[0].to_i == 2 then count += 1
+			end
+		end
+		return count
+	end
+
+	# Counts the score for this particular answer
+	fun score(db: OpportunityDB): Int do
+		if id == -1 then return -1
+		var score = 0
+		var res = db.select("part_answers.value FROM part_answers WHERE part_answers.id_ans={id};")
+		for i in res do
+			score += i[0].to_i
+		end
+		return score
+	end
+
 	redef fun commit(db) do
 		var m = meetup
 		if m == null then return false

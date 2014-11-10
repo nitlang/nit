@@ -40,17 +40,78 @@ class OpportunityMeetupPage
 	init do
 		header.page_js = "mode = {mode};\n"
 		header.page_js += """
+		function update_scores(){
+			var anss = $('.answer');
+			var count = {};
+			var scores = {};
+			var answers = [];
+			var maxscore = 0;
+			for(i=0; i < anss.length; i++){
+				var incscore = 0;
+				var inccount = 0;
+				var idparts = anss[i].id.split("_");
+				var ansid = idparts[1];
+				var html = anss[i].innerHTML;
+				if(html === "<center>✔</center>"){
+					inccount = 1;
+					incscore = 2;
+				}else if(html === "<center>❓</center>"){
+					incscore = 1;
+				}
+				var intansid = parseInt(ansid)
+				if(answers.indexOf(intansid) == -1){
+					answers.push(intansid);
+				}
+				if(ansid in count){
+					count[ansid] += inccount;
+				}else{
+					count[ansid] = inccount;
+				}
+				if(ansid in scores){
+					scores[ansid] += incscore;
+				}else{
+					scores[ansid] = incscore;
+				}
+				if(scores[ansid] > maxscore){
+					maxscore = scores[ansid];
+				}
+			}
+			for(i=0; i < answers.length; i++){
+				var ansid = answers[i].toString();
+				var el = $('#total'+ansid)[0];
+				var ins = "<center>"+count[ansid];
+				if(scores[ansid] >= maxscore){
+					ins += "<br/><span style=\\"color:blue\\">★</span>";
+				}
+				ins += "</center>";
+				el.innerHTML = ins;
+			}
+		}
 		function change_answer(ele, id){
 			// modify only the currently selected entry
 			if (in_modification_id != id) return;
 
 			var e = document.getElementById(ele.id);
 			var i = e.innerHTML;
-			var ans = true;
+			var ans = true;"""
+		if mode == 0 then
+			header.page_js += """
+			if(i === "<center>✔</center>"){
+				ans = 0;
+				e.innerHTML = "<center>✘</center>"
+				e.style.color = "red";
+			}else{
+				ans = 1;
+				e.innerHTML = "<center>✔</center>";
+				e.style.color = "green";
+			}"""
+
+		else
+			header.page_js += """
 			if(i === "<center>✔</center>"){
 				ans = 1;
 				e.innerHTML = "<center>❓</center>"
-				e.style.color = "orange";
+				e.style.color = "#B8860B";
 			}else if(i === "<center>❓</center>"){
 				ans = 0;
 				e.innerHTML = "<center>✘</center>"
@@ -59,10 +120,13 @@ class OpportunityMeetupPage
 				ans = 2;
 				e.innerHTML = "<center>✔</center>";
 				e.style.color = "green";
-			}
+			}"""
+		end
+		header.page_js += """
 			var a = ele.id.split('_')
 			var pid = a[1]
 			var aid = a[2]
+			update_scores();
 			$.ajax({
 				type: "POST",
 				url: "./rest/answer",
@@ -90,7 +154,7 @@ class OpportunityMeetupPage
 			header.page_js += """
 			if(i === "<center>✔</center>"){
 				e.innerHTML = "<center>❓</center>";
-				e.style.color = "orange";
+				e.style.color = "#B8860B";
 			}else if(i === "<center>❓</center>"){
 				e.innerHTML = "<center>✘</center>"
 				e.style.color = "red";
@@ -101,6 +165,7 @@ class OpportunityMeetupPage
 			"""
 		end
 		header.page_js += """
+			update_scores();
 		}
 		function add_part(ele){
 			var e = document.getElementById(ele.id);
@@ -151,6 +216,7 @@ class OpportunityMeetupPage
 			var arr = ele.id.split("_")
 			var pid = arr[1]
 			$('#' + ele.id).parent().parent().parent().remove();
+			update_scores();
 			$.ajax({
 				type: "POST",
 				url: "./rest/people",
@@ -160,7 +226,6 @@ class OpportunityMeetupPage
 				}
 			});
 		}
-
 		// ID of line currently open for modification
 		var in_modification_id = null;
 		function modify_people(ele, id){
@@ -282,6 +347,28 @@ redef class Meetup
 		t.add """
 	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Done</button></span></center></td>"""
 		t.add "</tr>"
+		# Compute score for each answer
+		var scores = new HashMap[Int, Int]
+		var maxsc = 0
+		for i in answers(db) do
+			scores[i.id] = i.score(db)
+			if scores[i.id] > maxsc then maxsc = scores[i.id]
+		end
+		t.add """
+<tr id="total">
+	<th>Total</th>
+		"""
+		for i in answers(db) do
+			t.add """<th id="total{{{i.id}}}"><center>{{{i.count(db)}}}"""
+			if scores.has_key(i.id) and scores[i.id] >= maxsc then
+				t.add """<br/><span style="color:blue">★</span>"""
+			end
+			t.add "</center></th>"
+		end
+		t.add "</th>"
+		t.add """
+		<th></th>
+</tr>"""
 		t.add "</table>"
 		t.add "</div>"
 		return t
