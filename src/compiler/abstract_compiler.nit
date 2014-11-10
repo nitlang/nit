@@ -284,7 +284,7 @@ class MakefileToolchain
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 	end
 
-	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.name}.mk"
+	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.c_name}.mk"
 
 	fun default_outname(mainmodule: MModule): String
 	do
@@ -473,7 +473,7 @@ abstract class AbstractCompiler
 	do
 		if modelbuilder.toolcontext.opt_group_c_files.value then
 			if self.files.is_empty then
-				var f = new CodeFile(mainmodule.name)
+				var f = new CodeFile(mainmodule.c_name)
 				self.files.add(f)
 			end
 			return self.files.first
@@ -1697,7 +1697,7 @@ redef class MClassType
 	do
 		var res = self.c_name_cache
 		if res != null then return res
-		res = "{mclass.intro_mmodule.name.to_cmangle}__{mclass.name.to_cmangle}"
+		res = "{mclass.intro_mmodule.c_name}__{mclass.name.to_cmangle}"
 		self.c_name_cache = res
 		return res
 	end
@@ -1803,7 +1803,7 @@ redef class MClass
 	fun c_name: String do
 		var res = self.c_name_cache
 		if res != null then return res
-		res = "{intro_mmodule.name.to_cmangle}__{name.to_cmangle}"
+		res = "{intro_mmodule.c_name}__{name.to_cmangle}"
 		self.c_name_cache = res
 		return res
 	end
@@ -1831,7 +1831,7 @@ redef class MPropDef
 	do
 		var res = self.c_name_cache
 		if res != null then return res
-		res = "{self.mclassdef.mmodule.name.to_cmangle}__{self.mclassdef.mclass.name.to_cmangle}__{self.mproperty.name.to_cmangle}"
+		res = "{self.mclassdef.mmodule.c_name}__{self.mclassdef.mclass.name.to_cmangle}__{self.mproperty.name.to_cmangle}"
 		self.c_name_cache = res
 		return res
 	end
@@ -3015,6 +3015,19 @@ redef class Array[E]
 end
 
 redef class MModule
+	# Return the name of the global C identifier associated to `self`.
+	# This name is used to prefix files and other C identifiers associated with `self`.
+	var c_name: String is lazy do
+		var g = mgroup
+		var res
+		if g != null and g.mproject.name != name then
+			res = g.mproject.name.to_cmangle + "__" + name.to_cmangle
+		else
+			res = name.to_cmangle
+		end
+		return res
+	end
+
 	# All `MProperty` associated to all `MClassDef` of `mclass`
 	fun properties(mclass: MClass): Set[MProperty] do
 		if not self.properties_cache.has_key(mclass) then
