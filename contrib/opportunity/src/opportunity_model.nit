@@ -31,7 +31,7 @@ class OpportunityDB
 
 	# Creates the tables and triggers for Opportunity (SQLite3 DB)
 	fun create_db do
-		assert create_table("IF NOT EXISTS meetups (id CHAR(40) PRIMARY KEY, name TEXT, date TEXT, place TEXT);") else
+		assert create_table("IF NOT EXISTS meetups (id CHAR(40) PRIMARY KEY, name TEXT, date TEXT, place TEXT, answer_mode INTEGER DEFAULT 0);") else
 			print error or else "?"
 		end
 		assert create_table("IF NOT EXISTS people(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT);") else
@@ -68,7 +68,7 @@ class OpportunityDB
 	fun find_meetup_by_id(id: String): nullable Meetup do
 		var req = select("* FROM meetups where id={id.to_sql_string};")
 		for i in req do
-			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s)
+			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s, i[4].to_i)
 		end
 		return null
 	end
@@ -76,10 +76,8 @@ class OpportunityDB
 	# Change an Answer `ansid` for someone with an id `pid` to `resp`
 	#
 	# Returns `true` if the request was sucessful, false otherwise
-	fun change_answer(pid: Int, ansid: Int, resp: Bool): Bool do
-		var rsp = 0
-		if resp then rsp = 1
-		var rq = execute("INSERT OR REPLACE INTO part_answers(id_part, id_ans, value) VALUES({pid},{ansid},{rsp});")
+	fun change_answer(pid: Int, ansid: Int, resp: Int): Bool do
+		var rq = execute("INSERT OR REPLACE INTO part_answers(id_part, id_ans, value) VALUES({pid},{ansid},{resp});")
 		if not rq then
 			print "Error while updating answer {ansid}:{pid}"
 			print error or else "Unknown error"
@@ -120,7 +118,10 @@ class People
 	# Surname of the participant
 	var surname: String
 	# Map of the answers of a Meetup and the answers of the participant
-	var answers: Map[Answer, Bool] = new HashMap[Answer, Bool]
+	# 0 = No
+	# 1 = Maybe
+	# 2 = Yes
+	var answers: Map[Answer, Int] = new HashMap[Answer, Int]
 
 	# To be used internally when fetching the `People` in Database
 	private init from_db(id: Int, name, surname: String) do
@@ -129,7 +130,7 @@ class People
 	end
 
 	# Changes an answer `ans` (or adds it)
-	fun answer=(ans: Answer, resp: Bool) do
+	fun answer=(ans: Answer, resp: Int) do
 		answers[ans] = resp
 	end
 
@@ -137,12 +138,11 @@ class People
 	#
 	# NOTE: If `self` does not exist in the Database, no answers will be fetched
 	fun load_answers(db: OpportunityDB, meetup: Meetup) do
-		self.answers = new HashMap[Answer, Bool]
+		self.answers = new HashMap[Answer, Int]
 		var req = db.select("answers.id, answers.name, part_answers.value FROM part_answers, answers WHERE part_answers.id_part={id} AND answers.id=part_answers.id_ans AND answers.meetup_id={meetup.id.to_sql_string} GROUP BY answers.id;")
 		for i in req do
 			var ans = new Answer.from_db(i[0].to_i, i[1].to_s)
-			answers[ans] = false
-			if i[2].to_i == 1 then answers[ans] = true
+			answers[ans] = i[2].to_i
 		end
 	end
 
@@ -165,8 +165,7 @@ class People
 		end
 		for i,j in answers do
 			if i.id == -1 then i.commit(db)
-			var val = 0
-			if j then val = 1
+			var val = j
 			if not db.execute("INSERT OR REPLACE INTO part_answers(id_part, id_ans, value) VALUES ({id},{i.id},{val});") then
 				print("Error while adding/replacing part_answers {id}|{i.id}|{j}")
 				print db.error or else "Unknown error"
@@ -189,13 +188,13 @@ class Meetup
 	var date: String
 	# Place of the meetup
 	var place: String
+	# Mode of answering to the meetup (atm supports with or without Maybe)
+	var answer_mode: Int
 
 	# Builds the object with all the informations found in the database
-	private init from_db(id, name, date, place: String) do
+	private init from_db(id, name, date, place: String, mode: Int) do
 		self.id = id
-		self.name = name
-		self.date = date
-		self.place = place
+		init(name, date, place, mode)
 	end
 
 	# Gets the answers bound to the current `Meetup`
@@ -225,7 +224,7 @@ class Meetup
 		if id == "" then
 			var time = get_time
 			var tmpid = (name + date + place + time.to_s).sha1_to_s
-			if not db.execute("INSERT INTO meetups (id, name, date, place) VALUES({tmpid.to_sql_string}, {name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string});") then
+			if not db.execute("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES({tmpid.to_sql_string}, {name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string}, {answer_mode});") then
 				print "Error recording entry Meetup {self}"
 				print db.error or else "Null error"
 				return false
@@ -233,7 +232,7 @@ class Meetup
 			id = tmpid
 			return true
 		else
-			return db.execute("UPDATE meetups (name, date, place) VALUES({name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string}) WHERE ID={id.to_sql_string};")
+			return db.execute("UPDATE meetups (name, date, place, answer_mode) VALUES({name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string}), answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
 		end
 	end
 
@@ -266,7 +265,7 @@ class Answer
 		assert id != -1
 		var res = db.select("meetups.* FROM meetups, answers WHERE answers.id={id} AND answers.meetup_id=meetups.id;")
 		for i in res do
-			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s)
+			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s, i[4].to_i)
 		end
 		# If no Meetup could be loaded, the contract was not respected
 		abort

@@ -26,15 +26,20 @@ class OpportunityMeetupPage
 
 	# Meetup the page is supposed to show
 	var meetup: nullable Meetup = null
+	# Answer mode for the meetup
+	var mode = 0
 
 	init from_id(id: String) do
 		var db = new OpportunityDB.open("opportunity")
 		meetup = db.find_meetup_by_id(id)
 		db.close
+		if meetup != null then mode = meetup.answer_mode
+		init
 	end
 
 	init do
-		header.page_js = """
+		header.page_js = "mode = {mode};\n"
+		header.page_js += """
 		function change_answer(ele, id){
 			// modify only the currently selected entry
 			if (in_modification_id != id) return;
@@ -43,10 +48,15 @@ class OpportunityMeetupPage
 			var i = e.innerHTML;
 			var ans = true;
 			if(i === "<center>✔</center>"){
-				ans = false;
+				ans = 1;
+				e.innerHTML = "<center>❓</center>"
+				e.style.color = "orange";
+			}else if(i === "<center>❓</center>"){
+				ans = 0;
 				e.innerHTML = "<center>✘</center>"
 				e.style.color = "red";
 			}else{
+				ans = 2;
 				e.innerHTML = "<center>✔</center>";
 				e.style.color = "green";
 			}
@@ -65,16 +75,32 @@ class OpportunityMeetupPage
 		}
 		function change_temp_answer(ele){
 			var e = document.getElementById(ele.id);
-			var i = e.innerHTML;
-			var ans = true;
+			var i = e.innerHTML;"""
+		if mode == 0 then
+			header.page_js += """
 			if(i === "<center>✔</center>"){
-				ans = false;
-				e.innerHTML = "<center>✘</center>";
+				e.innerHTML = "<center>✘</center>"
 				e.style.color = "red";
 			}else{
 				e.innerHTML = "<center>✔</center>";
 				e.style.color = "green";
 			}
+			"""
+		else
+			header.page_js += """
+			if(i === "<center>✔</center>"){
+				e.innerHTML = "<center>❓</center>";
+				e.style.color = "orange";
+			}else if(i === "<center>❓</center>"){
+				e.innerHTML = "<center>✘</center>"
+				e.style.color = "red";
+			}else{
+				e.innerHTML = "<center>✔</center>";
+				e.style.color = "green";
+			}
+			"""
+		end
+		header.page_js += """
 		}
 		function add_part(ele){
 			var e = document.getElementById(ele.id);
@@ -85,11 +111,25 @@ class OpportunityMeetupPage
 			ansmap = {};
 			for(i=0;i<ans.length;i++){
 				var curr = ans.eq(i)
+			"""
+		if mode == 0 then
+			header.page_js += """
 				if(curr[0].innerHTML === "<center>✔</center>"){
-					ansmap[curr.attr('id')] = true
+					ansmap[curr.attr('id')] = 1
 				}else{
-					ansmap[curr.attr('id')] = false
-				}
+					ansmap[curr.attr('id')] = 0
+				}"""
+		else
+			header.page_js += """
+				if(curr[0].innerHTML === "<center>✔</center>"){
+					ansmap[curr.attr('id')] = 2
+				}else if(curr[0].innerHTML === "<center>❓</center>"){
+					ansmap[curr.attr('id')] = 1
+				}else{
+					ansmap[curr.attr('id')] = 0
+				}"""
+		end
+		header.page_js += """
 			}
 			$.ajax({
 				type: "POST",
@@ -192,18 +232,39 @@ redef class Meetup
 			t.add "<td>"
 			t.add i.to_s
 			t.add "</td>"
-			for j,k in i.answers do
+			for j, k in i.answers do
 				var color
-				if k then
-					color = "green"
-				else color = "red"
-
+				if answer_mode == 0 then
+					if k == 1 then
+						color = "green"
+					else
+						color = "red"
+					end
+				else
+					if k == 2 then
+						color = "green"
+					else if k == 1 then
+						color = "#B8860B"
+					else
+						color = "red"
+					end
+				end
 				t.add """<td class="answer" onclick="change_answer(this, {{{i.id}}})" id="answer_{{{j.id}}}_{{{i.id}}}" style="color:{{{color}}}">"""
 				t.add "<center>"
-				if k then
-					t.add "✔"
+				if answer_mode == 0 then
+					if k == 1 then
+						t.add "✔"
+					else
+						t.add "✘"
+					end
 				else
-					t.add "✘"
+					if k == 2 then
+						t.add "✔"
+					else if k == 1 then
+						t.add "❓"
+					else
+						t.add "✘"
+					end
 				end
 				t.add "</center></td>"
 			end

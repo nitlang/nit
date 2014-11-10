@@ -60,13 +60,18 @@ class OpportunityWelcome
 			var mname = request.string_arg("meetup_name")
 			var mdate = request.string_arg("meetup_date")
 			var mplace = request.string_arg("meetup_place")
+			var mmodestr = request.string_arg("meetup_mode")
+			var mmode = 0
 			if mdate == null then mdate = ""
 			if mplace == null then mplace = ""
+			if mmodestr != null then
+				mmode = 1
+			end
 			if mname == null then
 				mname = ""
 				var rsp = new HttpResponse(200)
 				var meetpage = new MeetupCreationPage
-				var meet = new Meetup(mname, mdate, mplace)
+				var meet = new Meetup(mname, mdate, mplace, mmode)
 				meetpage.ans = ansset
 				meetpage.meet = meet
 				meetpage.error = "'Meetup name' is a mandatory fields."
@@ -75,7 +80,7 @@ class OpportunityWelcome
 
 			end
 			var db = new OpportunityDB.open(db_path)
-			var meet = new Meetup(mname, mdate, mplace)
+			var meet = new Meetup(mname, mdate, mplace, mmode)
 			if ansset.is_empty then
 				db.close
 				var rsp = new HttpResponse(200)
@@ -176,7 +181,7 @@ class OpportunityAnswerREST
 	redef fun answer(request, uri) do
 		var persid = request.int_arg("pers_id")
 		var ansid = request.int_arg("answer_id")
-		var ans = request.bool_arg("answer")
+		var ans = request.int_arg("answer")
 		if persid == null or ansid == null or ans == null then return bad_req
 		var db = new OpportunityDB.open(db_path)
 		db.change_answer(ansid, persid, ans)
@@ -197,12 +202,11 @@ class OpportunityMeetupREST
 			var ans = request.string_arg("answers").split("&")
 			if name == null or m_id == null then return bad_req
 			print ans
-			var ansmap = new HashMap[Int, Bool]
+			var ansmap = new HashMap[Int, Int]
 			for i in ans do
 				var mp = i.split("=")
-				var b = false
-				if mp.last == "true" then b = true
 				var id = mp.first.split("_").last
+				var b = mp.last.to_i
 				if not id.is_numeric then continue
 				ansmap[id.to_i] = b
 			end
@@ -220,7 +224,7 @@ class OpportunityMeetupREST
 			var p = new People(rname, rsurname)
 			for i in m.answers(db) do
 				if not ansmap.has_key(i.id) then
-					p.answers[i] = false
+					p.answers[i] = 0
 				else
 					p.answers[i] = ansmap[i.id]
 				end
