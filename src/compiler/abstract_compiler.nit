@@ -524,9 +524,9 @@ abstract class AbstractCompiler
 		stream.write("static const C_Nit_Names map[{names.length}] = \{\n")
 		for i in names.keys do
 			stream.write("\{\"")
-			stream.write(i)
+			stream.write(i.escape_to_c)
 			stream.write("\",\"")
-			stream.write(names[i])
+			stream.write(names[i].escape_to_c)
 			stream.write("\"\},\n")
 		end
 		stream.write("\};\n")
