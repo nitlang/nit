@@ -116,7 +116,7 @@ class GlobalCompiler
 
 	init
 	do
-		var file = new_file("{mainmodule.name}.nitgg")
+		var file = new_file("{mainmodule.c_name}.nitgg")
 		self.header = new CodeWriter(file)
 		self.live_primitive_types = new Array[MClassType]
 		for t in runtime_type_analysis.live_types do
