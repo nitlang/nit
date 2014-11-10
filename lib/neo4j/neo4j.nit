@@ -300,7 +300,7 @@ class Neo4jClient
 	# Perform a `CypherQuery`
 	# see: CypherQuery
 	fun cypher(query: CypherQuery): Jsonable do
-		return post("{cypher_url}", query.to_json)
+		return post("{cypher_url}", query.to_rest)
 	end
 
 	# GET JSON data from `url`
@@ -436,8 +436,8 @@ class CypherQuery
 		return self
 	end
 
-	# Translate the query to JSON
-	fun to_json: JsonObject do
+	# Translate the query to the body of a corresponding Neo4j REST request.
+	fun to_rest: JsonObject do
 		var obj = new JsonObject
 		obj["query"] = query
 		if not params.is_empty then
@@ -446,7 +446,7 @@ class CypherQuery
 		return obj
 	end
 
-	redef fun to_s do return to_json.to_s
+	redef fun to_s do return to_rest.to_s
 end
 
 # The fundamental units that form a graph are nodes and relationships.
@@ -546,9 +546,6 @@ abstract class NeoEntity
 
 	# Is the property `key` set?
 	fun has_key(key: String): Bool do return properties.has_key(key)
-
-	# Translate `self` to JSON
-	fun to_json: JsonObject do return properties
 end
 
 # Nodes are used to represent entities stored in base.
@@ -595,7 +592,7 @@ class NeoNode
 		var tpl = new FlatBuffer
 		tpl.append "\{"
 		tpl.append "labels: [{labels.join(", ")}],"
-		tpl.append "data: {to_json}"
+		tpl.append "data: {properties.to_json}"
 		tpl.append "\}"
 		return tpl.write_to_string
 	end
@@ -743,7 +740,8 @@ class NeoEdge
 	# Get edge type
 	fun rel_type: nullable String do return internal_type
 
-	redef fun to_json do
+	# Get the JSON body of a REST request that create the relationship.
+	private fun to_rest: JsonObject do
 		var obj = new JsonObject
 		if to.is_linked then
 			obj["to"] = to.url
@@ -891,7 +889,7 @@ class NeoBatch
 		else
 			job.to = "\{{edge.from.batch_id.to_s}\}/relationships"
 		end
-		job.body = edge.to_json
+		job.body = edge.to_rest
 	end
 
 	# Create multiple edges
@@ -902,7 +900,7 @@ class NeoBatch
 		var request = new JsonPOST(client.batch_url, client.curl)
 		# request.headers["X-Stream"] = "true"
 		var json_jobs = new JsonArray
-		for job in jobs.values do json_jobs.add job.to_json
+		for job in jobs.values do json_jobs.add job.to_rest
 		request.data = json_jobs
 		var response = request.execute
 		var res = client.parse_response(response)
@@ -1003,7 +1001,7 @@ class NeoJob
 	var body: nullable Jsonable = null
 
 	# JSON formated job
-	fun to_json: JsonObject do
+	fun to_rest: JsonObject do
 		var job = new JsonObject
 		job["id"] = id
 		job["method"] = method
