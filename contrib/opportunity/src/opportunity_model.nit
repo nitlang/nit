@@ -73,17 +73,32 @@ class OpportunityDB
 		return null
 	end
 
+	# Find an `Answer` by its `id` or `null` if it could not be found
+	fun find_answer_by_id(id: Int): nullable Answer do
+		var req = select("* FROM answers WHERE id={id};")
+		for i in req do
+			return new Answer.from_db(i[0].to_i, i[2].to_s)
+		end
+		return null
+	end
+
 	# Change an Answer `ansid` for someone with an id `pid` to `resp`
 	#
 	# Returns `true` if the request was sucessful, false otherwise
 	fun change_answer(pid: Int, ansid: Int, resp: Int): Bool do
-		var rq = execute("INSERT OR REPLACE INTO part_answers(id_part, id_ans, value) VALUES({pid},{ansid},{resp});")
-		if not rq then
+		var p = find_people_by_id(pid)
+		if p == null then
 			print "Error while updating answer {ansid}:{pid}"
-			print error or else "Unknown error"
 			return false
 		end
-		return true
+		var a = find_answer_by_id(ansid)
+		if a == null then
+			print "Error while updating answer {ansid}:{pid}"
+			return false
+		end
+		p.answers[a] = resp
+		if p.commit(self) then return true
+		return false
 	end
 
 	# Removes a person in the Database by its `id`
@@ -166,8 +181,17 @@ class People
 		for i,j in answers do
 			if i.id == -1 then i.commit(db)
 			var val = j
-			if not db.execute("INSERT OR REPLACE INTO part_answers(id_part, id_ans, value) VALUES ({id},{i.id},{val});") then
-				print("Error while adding/replacing part_answers {id}|{i.id}|{j}")
+			var s = db.select("* FROM part_answers WHERE id_part={id} AND id_ans={i.id}")
+			if s != null and s.iterator.is_ok then
+				if not db.execute("UPDATE part_answers SET value={j} WHERE id_part={id} AND id_ans={i.id};") then
+					print "Error while updating part_answers {id}|{i.id} = {j}"
+					print db.error or else "Unknown error"
+					return false
+				end
+				continue
+			end
+			if not db.execute("INSERT INTO part_answers(id_part, id_ans, value) VALUES ({id},{i.id},{val});") then
+				print("Error while adding part_answers {id}|{i.id}|{j}")
 				print db.error or else "Unknown error"
 				return false
 			end
@@ -232,7 +256,7 @@ class Meetup
 			id = tmpid
 			return true
 		else
-			return db.execute("UPDATE meetups (name, date, place, answer_mode) VALUES({name.to_sql_string}, {date.to_sql_string}, {place.to_sql_string}), answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
+			return db.execute("UPDATE meetups SET name={name.to_sql_string}, date={date.to_sql_string}, place={place.to_sql_string}, answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
 		end
 	end
 
@@ -256,6 +280,11 @@ class Answer
 	private init from_db(id: Int, name: String) do
 		init name
 		self.id = id
+	end
+
+	redef fun hash do
+		if id != -1 then return id
+		return super
 	end
 
 	# Loads the Meetup associated to `self`
@@ -288,7 +317,7 @@ class Answer
 			end
 			id = db.last_insert_rowid
 		else
-			if not db.execute("UPDATE answers (name) VALUES ({name.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
+			if not db.execute("UPDATE answers SET name=({name.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
 				print "Error updating {self} in database"
 				print db.error or else "Unknown error"
 				return false
