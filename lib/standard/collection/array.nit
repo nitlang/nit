@@ -394,6 +394,26 @@ class Array[E]
 		res.append(other)
 		return res
 	end
+
+	# Repetition of arrays.
+	#
+	# returns a new array built by concatenating `self` `repeat` times.
+	#
+	#    var a = [1,2,3]
+	#    assert (a * 0).is_empty
+	#    assert a * 1  ==  [1,2,3]
+	#    assert a * 2  ==  [1,2,3,1,2,3]
+	#    assert (a * 10).length  ==  30
+	fun *(repeat: Int): Array[E]
+	do
+		assert repeat >= 0
+		var res = new Array[E].with_capacity(length * repeat)
+		while repeat > 0 do
+			res.add_all(self)
+			repeat -= 1
+		end
+		return res
+	end
 end
 
 # An `Iterator` on `AbstractArray`

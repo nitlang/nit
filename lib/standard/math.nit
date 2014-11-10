@@ -83,6 +83,34 @@ redef class Int
 	#
 	#    assert not 13.is_even
 	fun is_odd: Bool do return not is_even
+
+	# Returns the `self` raised to the power of `e`.
+	#
+	#    assert 2 ** 3 == 8
+	fun **(e: Int): Int
+	do
+		return self.to_f.pow(e.to_f).to_i
+	end
+
+	# The factorial of `self` (aka `self!`)
+	#
+	# Returns `1 * 2 * 3 * ... * self-1 * self`
+	#
+	#    assert 0.factorial == 1  # by convention for an empty product
+	#    assert 1.factorial == 1
+	#    assert 4.factorial == 24
+	#    assert 9.factorial == 362880
+	fun factorial: Int
+	do
+		assert self >= 0
+		var res = 1
+		var n = self
+		while n > 0 do
+			res = res * n
+			n -= 1
+		end
+		return res
+	end
 end
 
 redef class Float
