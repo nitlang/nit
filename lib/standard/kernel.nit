@@ -30,6 +30,28 @@ import end # Mark this module is a top level one. (must be only one)
 #
 # Currently, Object is also used to collect all top-level methods.
 interface Object
+	# Type of this instance, automatically specialized in every class
+	#
+	# A common use case of the virtual type `SELF` is to type an attribute and
+	# store another instance of the same type as `self`. It can also be used as as
+	# return type to a method producing a copy of `self` or returning an instance
+	# expected to be the exact same type as self.
+	#
+	# This virtual type must be used with caution as it can hinder specialization.
+	# In fact, it imposes strict restrictions on all sub-classes and their usage.
+	# For example, using `SELF` as a return type of a method `foo`
+	# forces all subclasses to ensure that `foo` returns the correct and updated
+	# type.
+	# A dangerous usage take the form of a method typed by `SELF` which creates
+	# and returns a new instance.
+	# If not correctly specialized, this method would break when invoked on a
+	# sub-class.
+	#
+	# A general rule for safe usage of `SELF` is to ensure that inputs typed
+	# `SELF` are stored in attributes typed `SELF` and returned by methods typed
+	# `SELF`, pretty much the same things as you would do with parameter types.
+	type SELF: Object
+
 	# The unique object identifier in the class.
 	# Unless specific code, you should not use this method.
 	# The identifier is used internally to provide a hash value.
