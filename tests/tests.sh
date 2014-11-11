@@ -146,6 +146,13 @@ function compare_to_result()
 	fi
 }
 
+function xmlesc()
+{
+	sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'<<EOF
+$*
+EOF
+}
+
 # As argument: the pattern used for the file
 function process_result()
 {
@@ -164,7 +171,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
+	echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$description"`' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -225,7 +232,7 @@ function process_result()
 	if [ -n "$SAV" ]; then
 		if [ -n "$OLD" ]; then
 			echo "[*ok*] $outdir/$pattern.res $SAV - but $OLD remains!"
-			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
+			echo >>$xml "<error message='`xmlesc "ok $outdir/$pattern.res - but $OLD remains"`'/>"
 			remains="$remains $OLD"
 		else
 			echo "[ok] $outdir/$pattern.res $SAV"
@@ -234,7 +241,7 @@ function process_result()
 	elif [ -n "$FIXME" ]; then
 		if [ -n "$OLD" ]; then
 			echo "[*fixme*] $outdir/$pattern.res $FIXME - but $OLD remains!"
-			echo >>$xml "<error message='ok $outdir/$pattern.res - but $OLD remains'/>"
+			echo >>$xml "<error message='`xmlesc "ok $outdir/$pattern.res - but $OLD remains"`'/>"
 			remains="$remains $OLD"
 		else
 			echo "[fixme] $outdir/$pattern.res $FIXME"
@@ -247,7 +254,7 @@ function process_result()
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
 		echo "[======= soso $outdir/$pattern.res $SOSO =======]"
-		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
+		echo >>$xml "<error message='`xmlesc "soso $outdir/$pattern.res $SOSO"`'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
@@ -255,7 +262,7 @@ function process_result()
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$SOSOF" ]; then
 		echo "[======= fixme soso $outdir/$pattern.res $SOSOF =======]"
-		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
+		echo >>$xml "<error message='`xmlesc "soso $outdir/$pattern.res $SOSO"`'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v  -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
@@ -263,7 +270,7 @@ function process_result()
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NSAV" ]; then
 		echo "[======= fail $outdir/$pattern.res $NSAV =======]"
-		echo >>$xml "<error message='fail $outdir/$pattern.res $NSAV'/>"
+		echo >>$xml "<error message='`xmlesc "fail $outdir/$pattern.res $NSAV"`'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
@@ -271,7 +278,7 @@ function process_result()
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
 		echo "[======= changed $outdir/$pattern.res $NFIXME ======]"
-		echo >>$xml "<error message='changed $outdir/$pattern.res $NFIXME'/>"
+		echo >>$xml "<error message='`xmlesc "changed $outdir/$pattern.res $NFIXME"`'/>"
 		echo >>$xml "<system-out><![CDATA["
 		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
@@ -303,12 +310,12 @@ need_skip()
 	test "$noskip" = true && return 1
 	if echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip]"
-		echo >>$xml "<testcase classname='$3' name='$2' `timestamp`><skipped/></testcase>"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
 	if test -n "$isinterpret" && echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip exec]"
-		echo >>$xml "<testcase classname='$3' name='$2' `timestamp`><skipped/></testcase>"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
 	return 1
@@ -538,7 +545,7 @@ END
 			chmod +x "$ff.bin"
 			if grep "Fatal Error: more than one primitive class" "$ff.compile.log" > /dev/null; then
 				echo " [skip] do no not imports kernel"
-				echo >>$xml "<testcase classname='$pack' name='$bf' `timestamp`><skipped/></testcase>"
+				echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$bf"`' `timestamp`><skipped/></testcase>"
 				continue
 			fi
 		fi
