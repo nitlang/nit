@@ -1,0 +1,11 @@
+X
+X
+X
+Y
+Y
+Y
+Y
+A[Int]
+G[A[Int]]
+B[Bool]
+G[B[Bool]]
