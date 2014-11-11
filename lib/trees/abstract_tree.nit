@@ -42,7 +42,7 @@ end
 class TreeNode[K: Comparable, E]
 
 	# TreeNode type
-	type SELF: TreeNode[K, E]
+	type N: TreeNode[K, E]
 
 	# `key` for this node
 	var key: K
@@ -51,7 +51,7 @@ class TreeNode[K: Comparable, E]
 	var value: E
 
 	# Direct parent of this node (null if the node is root)
-	var parent: nullable SELF = null is writable
+	var parent: nullable N = null is writable
 
 	redef fun to_s do return "\{{value or else ""}\}"
 
