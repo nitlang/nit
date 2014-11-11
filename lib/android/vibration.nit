@@ -26,7 +26,6 @@ import native_app_glue
 # Handle to an Android vibrator
 extern class Vibrator in "Java" `{ android.os.Vibrator `}
 	super JavaObject
-	redef type SELF: Vibrator
 
 	# Vibrate for `n` miliseconds
 	fun vibrate(n: Int) in "Java" `{ recv.vibrate(n); `}

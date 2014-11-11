@@ -46,7 +46,6 @@ in "Java" `{
 # This is a low-level class, use `AssetManager` instead
 extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	super JavaObject
-	redef type SELF: NativeAssetManager
 
 	fun close in "Java" `{ recv.close(); `}
 
@@ -172,7 +171,6 @@ end
 # This is a low-level class, use `ResourcesManager` instead
 extern class NativeResources in "Java" `{ android.content.res.Resources `}
 	super JavaObject
-	redef type SELF: NativeResources
 
 	fun get_assets:NativeAssetManager in "Java" `{ return recv.getAssets(); `}
 	fun get_color(id: Int): Int in "Java" `{ return recv.getColor((int)id); `}
@@ -283,7 +281,6 @@ end
 # An android Bitmap, get an instance using the AssetManager or the ResourceManager
 extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	super JavaObject
-	redef type SELF: NativeBitmap
 
 	# Create a NativeBitmap from a NativeInputStream retrieved with `open` function of the AssetManager
 	# Called by the AssetManager
@@ -299,7 +296,6 @@ end
 # Android AssetFileDescriptor, can be retrieve by AssetManager and used to load a sound in a SoundPool
 extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFileDescriptor `}
 	super JavaObject
-	redef type SELF: NativeAssetFileDescriptor
 
 	fun close in "Java" `{
 		try {

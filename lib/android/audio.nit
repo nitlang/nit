@@ -38,7 +38,6 @@ in "Java" `{
 # AudioManager of the application, used to manage the audio mode
 extern class NativeAudioManager in "Java" `{ android.media.AudioManager `}
 	super JavaObject
-	redef type SELF: NativeAudioManager
 
 	fun mode: Int in "Java" `{ return recv.getMode(); `}
 	fun mode=(i: Int) in "Java" `{ recv.setMode((int)i); `}
@@ -61,7 +60,6 @@ end
 # This is a low-level class, use `MediaPlater` instead
 extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 	super JavaObject
-	redef type SELF: NativeMediaPlayer
 
 	new in "Java" `{ return new MediaPlayer(); `}
 	fun start in "Java" `{ recv.start(); `}
@@ -108,7 +106,6 @@ end
 # This is a low-level class, use `SoundPool`instead
 extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	super JavaObject
-	redef type SELF: NativeSoundPool
 
 	new(max_streams, stream_type, src_quality: Int) in "Java" `{
 		return new SoundPool((int)max_streams, (int)stream_type, (int)src_quality);

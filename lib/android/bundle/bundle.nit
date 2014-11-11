@@ -31,7 +31,6 @@ in "Java" `{
 
 extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	super JavaObject
-	redef type SELF: NativeBundle
 
 	fun clone: JavaObject in "Java" `{ return recv.clone(); `}
 	fun size: Int in "Java" `{ return recv.size(); `}
