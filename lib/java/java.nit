@@ -98,8 +98,6 @@ end
 extern class JavaString in "Java" `{ java.lang.String `}
 	super JavaObject
 
-	redef type SELF: JavaString
-
 	# Get the string from Java and copy it to Nit memory
 	fun to_cstring: NativeString import sys, Sys.jni_env `{
 		Sys sys = JavaString_sys(recv);
@@ -140,7 +138,6 @@ redef class Text
 end
 
 redef extern class JavaObject
-	type SELF: JavaObject
 
 	# Returns a global reference to the Java object behind this reference
 	#

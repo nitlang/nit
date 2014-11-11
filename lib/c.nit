@@ -29,7 +29,6 @@ end
 # A native C array, as in a pointer to the first element of the array
 extern class NativeCArray `{ void * `}
 	type E: nullable Object
-	type SELF: NativeCArray
 
 	fun [](index: E): E is abstract
 	fun []=(index: E, val: E) is abstract
@@ -79,7 +78,6 @@ end
 extern class NativeCIntArray `{ int* `}
 	super NativeCArray
 	redef type E: Int
-	redef type SELF: NativeCIntArray
 
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
 	redef fun [](index) `{ return recv[index]; `}
@@ -91,7 +89,6 @@ end
 redef class NativeString
 	super NativeCArray
 	redef type E: Char
-	redef type SELF: NativeString
 
 	redef fun +(offset) `{ return recv + offset; `}
 end
