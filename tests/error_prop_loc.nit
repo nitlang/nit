@@ -14,22 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import end
-class Object
-end
+import kernel
 
 class A
-	fun toto do end
+	fun toto do 1.output
 end
 class B
 	super A
-	redef fun toto do end
+	redef fun toto do 2.output
 end
 class C
 	super A
-	redef fun toto do end
+	redef fun toto do 3.output
 end
 class D
 	super B
 	super C
 end
+
+(new A).toto
+(new B).toto
+(new C).toto
+#alt1#(new D).toto
