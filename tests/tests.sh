@@ -65,7 +65,7 @@ saferun()
 	local o=
 	local a=
 	while [ $stop = false ]; do
-		case $1 in
+		case "$1" in
 			-o) o="$2"; shift; shift;;
 			-a) a="-a"; shift;;
 			*) stop=true
@@ -129,8 +129,8 @@ function compare_to_result()
 	local pattern="$1"
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
-	test "`cat "$sav"`" = "UNDEFINED" && return 1
-	diff -u "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
+	test "`cat -- "$sav"`" = "UNDEFINED" && return 1
+	diff -u -- "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
@@ -164,7 +164,7 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
-	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat $outdir/$pattern.time.out`' `timestamp`>"
+	echo >>$xml "<testcase classname='$pack' name='$description' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
 		sav=$savdir/fixme/$pattern.res
@@ -249,7 +249,7 @@ function process_result()
 		echo "[======= soso $outdir/$pattern.res $SOSO =======]"
 		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -257,7 +257,7 @@ function process_result()
 		echo "[======= fixme soso $outdir/$pattern.res $SOSOF =======]"
 		echo >>$xml "<error message='soso $outdir/$pattern.res $SOSO'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v  -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -265,7 +265,7 @@ function process_result()
 		echo "[======= fail $outdir/$pattern.res $NSAV =======]"
 		echo >>$xml "<error message='fail $outdir/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -273,15 +273,15 @@ function process_result()
 		echo "[======= changed $outdir/$pattern.res $NFIXME ======]"
 		echo >>$xml "<error message='changed $outdir/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v $outdir/$pattern.diff.sav.log | head >>$xml -n 50
+		cat -v -- "$outdir/$pattern.diff.sav.log" | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ -s $outdir/$pattern.res ]; then
+	elif [ -s "$outdir/$pattern.res" ]; then
 		echo "[=== no sav ===] $outdir/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat -v >>$xml $outdir/$pattern.res
+		cat -v >>$xml -- "$outdir/$pattern.res"
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -290,9 +290,9 @@ function process_result()
 		echo "[0k] $outdir/$pattern.res is empty"
 		ok="$ok $pattern"
 	fi
-	if test -s $outdir/$pattern.cmp.err; then
+	if test -s "$outdir/$pattern.cmp.err"; then
 		echo >>$xml "<system-err><![CDATA["
-		cat -v >>$xml $outdir/$pattern.cmp.err
+		cat -v >>$xml -- "$outdir/$pattern.cmp.err"
 		echo >>$xml "]]></system-err>"
 	fi
 	echo >>$xml "</testcase>"
@@ -465,16 +465,16 @@ fi
 echo >$xml "<testsuites><testsuite>"
 
 for ii in "$@"; do
-	if [ ! -f $ii ]; then
+	if [ ! -f "$ii" ]; then
 		echo "File '$ii' does not exist."
 		continue
 	fi
-	f=`basename "$ii" .nit`
+	f=`basename -- "$ii" .nit`
 
 	pack="tests.${engine}".`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
 
 	# Sould we skip the file for this engine?
-	need_skip $f $f $pack && continue
+	need_skip "$f" "$f" "$pack" && continue
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
@@ -483,12 +483,12 @@ for ii in "$@"; do
 		includes="-I alt"
 	fi
 
-	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
-		bf=`basename $i .nit`
+	for i in "$ii" `./alterner.pl --start '#' --altsep '_' -- "$ii"`; do
+		bf=`basename -- "$i" .nit`
 		ff="$outdir/$bf"
 
 		# Sould we skip the alternative for this engine?
-		need_skip $bf $bf $pack && continue
+		need_skip "$bf" "$bf" "$pack" && continue
 
 		echo -n "=> $bf: "
 
@@ -507,7 +507,7 @@ for ii in "$@"; do
 
 		if [ -n "$isinterpret" ]; then
 			cat > "$ff.bin" <<END
-exec $NITC --no-color $OPT $includes -- "$i" "\$@"
+exec $NITC --no-color $OPT $includes -- $(printf '%q' "$i") "\$@"
 END
 			chmod +x "$ff.bin"
 			> "$ff.cmp.err"
@@ -529,8 +529,8 @@ END
 				saferun -o "$ff.time.out" $NITC --no-color $OPT -o "$ffout" $includes $nocc "$i" 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
-				cat "$ff.compile.log"
-				cat >&2 "$ff.cmp.err"
+				cat -- "$ff.compile.log"
+				cat >&2 -- "$ff.cmp.err"
 			fi
 		fi
 		if [ "$engine" = "emscripten" ]; then
@@ -544,18 +544,18 @@ END
 		fi
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
-			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
-			process_result $bf $bf $pack
+			cat -- "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
+			process_result "$bf" "$bf" "$pack"
 		elif [ -n "$nocc" ]; then
 			# not compiled
 			echo -n "nocc "
 			> "$ff.res"
-			process_result $bf $bf $pack
+			process_result "$bf" "$bf" "$pack"
 		elif [ -x "$ff.bin" ]; then
 			if skip_exec "$bf"; then
 				# No exec
 				> "$ff.res"
-				process_result $bf $bf $pack
+				process_result "$bf" "$bf" "$pack"
 				break
 			fi
 			echo -n ". "
@@ -567,21 +567,21 @@ END
 			fi
 			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
 				saferun -a -o "$ff.time.out" "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
-			mv $ff.time.out $ff.times.out
-			awk '{ SUM += $1} END { print SUM }' $ff.times.out > $ff.time.out
+			mv "$ff.time.out" "$ff.times.out"
+			awk '{ SUM += $1} END { print SUM }' "$ff.times.out" > "$ff.time.out"
 
 			if [ "x$verbose" = "xtrue" ]; then
-				cat "$ff.res"
-				cat >&2 "$ff.err"
+				cat -- "$ff.res"
+				cat >&2 -- "$ff.err"
 			fi
 			if [ -f "$ff.write" ]; then
-				cat "$ff.write" >> "$ff.res"
+				cat -- "$ff.write" >> "$ff.res"
 			elif [ -d "$ff.write" ]; then
-				LANG=C /bin/ls -F $ff.write >> "$ff.res"
+				LANG=C /bin/ls -F "$ff.write" >> "$ff.res"
 			fi
-			cp "$ff.res"  "$ff.res2"
-			cat "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
-			process_result $bf $bf $pack
+			cp -- "$ff.res"  "$ff.res2"
+			cat -- "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
+			process_result "$bf" "$bf" "$pack"
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -594,13 +594,13 @@ END
 					name="$bf args $cptr"
 
 					# Sould we skip the input for this engine?
-					need_skip $bff "  $name" $pack && continue
+					need_skip "$bff" "  $name" "$pack" && continue
 
 					# use a specific inputs file, if required
 					if [ -f "$bff.inputs" ]; then
 						ffinputs="$bff.inputs"
 					else
-						ffinputs=$inputs
+						ffinputs="$inputs"
 					fi
 
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
@@ -613,30 +613,30 @@ END
 					chmod +x "$fff.bin"
 					WRITE="$fff.write" saferun -o "$fff.time.out" sh -c "NIT_NO_STACK=1 $fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
-						cat "$fff.res"
-						cat >&2 "$fff.err"
+						cat -- "$fff.res"
+						cat >&2 -- "$fff.err"
 					fi
 					if [ -f "$fff.write" ]; then
-						cat "$fff.write" >> "$fff.res"
+						cat -- "$fff.write" >> "$fff.res"
 					elif [ -d "$fff.write" ]; then
-						LANG=C /bin/ls -F $fff.write >> "$fff.res"
+						LANG=C /bin/ls -F -- "$fff.write" >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
-						cp "$fff.res"  "$fff.res2"
-						cat "$fff.err" "$fff.res2" > "$fff.res"
+						cp -- "$fff.res"  "$fff.res2"
+						cat -- "$fff.err" "$fff.res2" > "$fff.res"
 					fi
-					process_result $bff "  $name" $pack
-				done < $fargs
+					process_result "$bff" "  $name" "$pack"
+				done < "$fargs"
 			fi
 		elif [ -f "$ff.bin" ]; then
 			#Not executable (platform?)"
 			> "$ff.res"
-			process_result $bf "$bf" $pack
+			process_result "$bf" "$bf" "$pack"
 		else
 			echo -n "! "
-			cat "$ff.cmp.err" > "$ff.res"
+			cat -- "$ff.cmp.err" > "$ff.res"
 			echo "Compilation error" > "$ff.res"
-			process_result $bf "$bf" $pack
+			process_result "$bf" "$bf" "$pack"
 		fi
 	done
 done
