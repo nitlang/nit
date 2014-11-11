@@ -4,5 +4,5 @@ B{A}ba
 C{B{A}}cba
 Ama
 A2ma
-B{A}nbma
-O{C{B{A}}}onmcba
+B{A}nmba
+O{C{B{A}}}oncmba

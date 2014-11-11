@@ -1,4 +1,4 @@
 Bba
-Bomba
-Bpbna
-Bqombna
+Bobma
+Bpnba
+Bqonbma

@@ -1,11 +1,19 @@
-alt/base_init_inherit_alt1.nit:95,2--9: Error: ca is not a constructor in B.
-alt/base_init_inherit_alt1.nit:96,2--10: Error: ca2 is not a constructor in B.
-alt/base_init_inherit_alt1.nit:98,2--9: Error: ca is not a constructor in C.
-alt/base_init_inherit_alt1.nit:99,2--10: Error: ca2 is not a constructor in C.
-alt/base_init_inherit_alt1.nit:100,2--9: Error: cb is not a constructor in C.
-alt/base_init_inherit_alt1.nit:104,2--9: Error: ca is not a constructor in N.
-alt/base_init_inherit_alt1.nit:105,2--10: Error: ca2 is not a constructor in N.
-alt/base_init_inherit_alt1.nit:107,2--9: Error: ca is not a constructor in O.
-alt/base_init_inherit_alt1.nit:108,2--10: Error: ca2 is not a constructor in O.
-alt/base_init_inherit_alt1.nit:109,2--9: Error: cb is not a constructor in O.
-alt/base_init_inherit_alt1.nit:110,2--9: Error: cc is not a constructor in O.
+Aa
+A2a
+B{A}ba
+Aba
+A2ba
+C{B{A}}cba
+Acba
+A2cba
+B{A}cba
+Ama
+A2ma
+B{A}nmba
+Anmba
+A2nmba
+O{C{B{A}}}oncmba
+Aoncmba
+A2oncmba
+B{A}oncmba
+C{B{A}}oncmba

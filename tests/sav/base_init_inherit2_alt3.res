@@ -1,1 +1,1 @@
-alt/base_init_inherit2_alt3.nit:75,7: Error: Explicit constructor required in N since multiple inheritance of constructor is forbiden. Conflicting classes are B, C. Costructors are base_init_inherit2_alt3::B::cb, base_init_inherit2_alt3::A::ca, base_init_inherit2_alt3::C::cc.
+Aa
