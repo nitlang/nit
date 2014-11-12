@@ -2,6 +2,6 @@ Aa
 Ama
 B{A}ba
 Ana
-B{A}omba
-B{A}pbna
-B{A}qmbna
+B{A}obma
+B{A}pnba
+B{A}qnbma

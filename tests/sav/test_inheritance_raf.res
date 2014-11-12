@@ -1,1 +1,16 @@
-Property inheritance conflict in class B for `i': conflicting properties are defined in B, A
+1
+1
+5
+5
+1
+2
+5
+2
+1
+1
+3
+7
+1
+2
+3
+4

@@ -2,4 +2,4 @@ Aa
 Aba
 C{A}ca
 C{A}mca
-C{A}nbmca
+C{A}nmcba

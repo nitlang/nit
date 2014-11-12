@@ -373,22 +373,27 @@ case $engine in
 		engine=nitg-s;
 		enginebinname=nitg;
 		OPT="--separate $OPT --compile-dir $compdir"
+		savdirs="sav/nitg-common/"
 		;;
 	nitg-s)
 		enginebinname=nitg;
 		OPT="--separate $OPT --compile-dir $compdir"
+		savdirs="sav/nitg-common/"
 		;;
 	nitg-e)
 		enginebinname=nitg;
 		OPT="--erasure $OPT --compile-dir $compdir"
+		savdirs="sav/nitg-common/"
 		;;
 	nitg-sg)
 		enginebinname=nitg;
 		OPT="--semi-global $OPT --compile-dir $compdir"
+		savdirs="sav/nitg-common/"
 		;;
 	nitg-g)
 		enginebinname=nitg;
 		OPT="--global $OPT --compile-dir $compdir"
+		savdirs="sav/nitg-common/"
 		;;
 	nit)
 		engine=niti

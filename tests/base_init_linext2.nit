@@ -68,7 +68,7 @@ class C
 		'C'.output
 		'1'.output
 		' '.output
-		inita
+		super
 		'C'.output
 		'2'.output
 		' '.output

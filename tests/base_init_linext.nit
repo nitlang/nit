@@ -31,7 +31,7 @@ class B
 		'B'.output
 		'1'.output
 		' '.output
-		inita
+		super
 		'B'.output
 		'2'.output
 		' '.output
@@ -45,7 +45,7 @@ class C
 		'C'.output
 		'1'.output
 		' '.output
-		inita
+		super
 		'C'.output
 		'2'.output
 		' '.output
@@ -58,51 +58,11 @@ class D
 	super C
 	init do
 		'D'.output
-		'0'.output
-		' '.output
-#alt1#		inita
-#alt3#		inita
-#alt5#		inita
-#alt7#		inita
-#alt9#		inita
-#alt11#		inita
-#alt13#		inita
-#alt15#		inita
-		'D'.output
 		'1'.output
 		' '.output
-#alt2#		initb
-#alt3#		initb
-#alt6#		initb
-#alt7#		initb
-#alt10#		initb
-#alt11#		initb
-#alt14#		initb
-#alt15#		initb
+		super
 		'D'.output
 		'2'.output
-		' '.output
-#alt4#		initc
-#alt5#		initc
-#alt6#		initc
-#alt7#		initc
-#alt12#		initc
-#alt13#		initc
-#alt14#		initc
-#alt15#		initc
-		'D'.output
-		'3'.output
-		' '.output
-#alt8#		inite
-#alt9#		inite
-#alt10#		inite
-#alt11#		inite
-#alt12#		inite
-#alt13#		inite
-#alt14#		inite
-#alt15#		inite
-		'D'.output
-		'4'.output
 		' '.output
 	end
 

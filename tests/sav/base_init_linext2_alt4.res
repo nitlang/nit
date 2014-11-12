@@ -1,1 +1,8 @@
-alt/base_init_linext2_alt4.nit:99,2--5: Error: there is no available compatible constructor in B. Discarded candidates are base_init_linext2_alt4::B::initb, base_init_linext2_alt4::B::init_par, base_init_linext2_alt4::B::init_par2(c: Char).
+A 
+A2x 
+B1 A B2 
+A B3 
+A B4y 
+C1 C2 
+A2z C3z 
+D1 C1 C2 B1 A B2 D2 D3 
