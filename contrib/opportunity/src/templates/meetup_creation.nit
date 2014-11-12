@@ -93,6 +93,12 @@ function new_answer(sender){
 					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="Place of the event" value="{{{if meet != null then meet.place else ""}}}">
 				</div>
 			</div>
+			<div class = "form-group">
+				<label for="meetup=maybe" class="col-sm-4 control-label">Add a Maybe option?</label>
+				<div class="col-sm-8">
+					<input name="meetup_mode" id="meetup_mode" type="checkbox" class="form-control">
+				</div>
+			</div>
 				<h2>Opportunities</h2>
 <div id="answers">
 """

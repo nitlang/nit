@@ -47,7 +47,7 @@ db = new OpportunityDB.open("opportunity")
 
 var hj = new People("Jack", "Handsome")
 
-var m = new Meetup("Awaken the warrior", "2024/05/28", "Vault of the Warrior")
+var m = new Meetup("Awaken the warrior", "2024/05/28", "Vault of the Warrior", 0)
 assert m.commit(db)
 
 var vh = new People("Hunter", "Vault")
@@ -66,17 +66,17 @@ var h = new Answer("I have no choice, I'm a hostage")
 h.meetup = m
 h.commit(db)
 
-hj.answer(y) = true
-hj.answer(n) = false
-hj.answer(h) = false
+hj.answer(y) = 1
+hj.answer(n) = 0
+hj.answer(h) = 0
 
-vh.answer(y) = true
-vh.answer(n) = false
-vh.answer(h) = false
+vh.answer(y) = 1
+vh.answer(n) = 0
+vh.answer(h) = 0
 
-ll.answer(y) = true
-ll.answer(n) = false
-ll.answer(h) = true
+ll.answer(y) = 1
+ll.answer(n) = 0
+ll.answer(h) = 1
 
 hj.commit db
 vh.commit db
