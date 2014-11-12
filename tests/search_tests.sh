@@ -15,7 +15,7 @@
 
 stop=false
 while [ "$stop" = false ]; do
-	case $1 in
+	case "$1" in
 		-v) verbose=true; shift;;
 		*) stop=true
 	esac
@@ -42,29 +42,31 @@ for f in "$@"; do
 				echo "$f"
 				continue
 			fi
-			b=`basename "$f" .nit`
+			b=`basename -- "$f" .nit`
 			;;
 		*.res)
-			b=`basename "$f" .res`
+			b=`basename -- "$f" .res`
 			;;
 		*)
-			b=`basename "$f"`
+			b=`basename -- "$f"`
 			;;
 	esac
+	# remove bad chars
+	c=`echo "$b" | sed 's/\([\\.*^$]\|\[\|]\)/./g'`
 	# Remove alts of args test variations
-	c=`echo "$b" | sed 's/\(_[0-9]*alt[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/g;s/\(_args[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/'`
+	c=`echo "$c" | sed 's/\(_[0-9]*alt[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/g;s/\(_args[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/'`
 	b=`echo "$b" | sed 's/_[0-9]*alt[0-9][0-9]*//g;s/_args[0-9][0-9]*//'`
 	# Search the orig nit file in the list
-	cat listfull.out | grep "\b$c.nit" || {
+	cat listfull.out | grep -- "\(^\|/\)$c.nit" || {
 		res=1
 		echo >&2 "No test $b.nit found for $f"
 		test "$verbose" == "true" || continue
 		# Search the nit file outside the list...
-		find ../../nit* -name $b.nit >&2
+		find ../../nit* -name "$b.nit" >&2
 		# Search the nit file in the git history...
-		git log -1 -- $b.nit >&2
+		git log -1 -- "$b.nit" >&2
 		# Search the orig file in the git history...
-		git log -1 -- $f >&2
+		git log -1 -- "$f" >&2
 	}
 done
 
