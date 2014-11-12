@@ -27,11 +27,11 @@ extern class JavaArrayList in "Java" `{ java.util.ArrayList `}
 		return new ArrayList();
 	`}
 
-	fun add(o: Int) in "Java" `{ recv.add(o); `}
+	fun add(o: JavaString) in "Java" `{ recv.add(o); `}
 
 	redef fun output in "Java" `{
 		for (Object i: recv) {
-			System.out.println((long)i);
+			System.out.println((String)i);
 		}
 	`}
 
@@ -41,12 +41,12 @@ extern class JavaArrayList in "Java" `{ java.util.ArrayList `}
 end
 
 var ll = new JavaArrayList
-ll.add(1)
-ll.add(2)
-ll.add(1)
-ll.add(3)
-ll.add(20)
-ll.add(10)
+ll.add "1".to_java_string
+ll.add "2".to_java_string
+ll.add "1".to_java_string
+ll.add "3".to_java_string
+ll.add "20".to_java_string
+ll.add "10".to_java_string
 ll.output
 ll.sort
 ll.output
