@@ -64,6 +64,7 @@
 module neo4j
 
 import curl_json
+import error
 
 # Handles Neo4j server start and stop command
 #
@@ -350,15 +351,15 @@ class Neo4jClient
 					if res.has_key("message") then
 						msg = res["message"].to_s
 					end
-					return new JsonError(error, msg.to_json)
+					return new NeoError(msg, error)
 				else
 					return res
 				end
 			end
 		else if response isa CurlResponseFailed then
-			return new JsonError("Curl error", "{response.error_msg} ({response.error_code})")
+			return new NeoError("{response.error_msg} ({response.error_code})", "CurlError")
 		else
-			return new JsonError("Curl error", "Unexpected response '{response}'")
+			return new NeoError("Unexpected response \"{response}\".", "CurlError")
 		end
 	end
 end
@@ -896,7 +897,7 @@ class NeoBatch
 	fun save_edges(edges: Collection[NeoEdge]) do for edge in edges do save_edge(edge)
 
 	# Execute the batch and update local nodes
-	fun execute: List[JsonError] do
+	fun execute: List[NeoError] do
 		var request = new JsonPOST(client.batch_url, client.curl)
 		# request.headers["X-Stream"] = "true"
 		var json_jobs = new JsonArray
@@ -908,16 +909,16 @@ class NeoBatch
 	end
 
 	# Associate data from response in original nodes and edges
-	private fun finalize_batch(response: Jsonable): List[JsonError] do
-		var errors = new List[JsonError]
+	private fun finalize_batch(response: Jsonable): List[NeoError] do
+		var errors = new List[NeoError]
 		if not response isa JsonArray then
-			errors.add(new JsonError("Neo4jError", "Unexpected batch response format"))
+			errors.add(new NeoError("Unexpected batch response format.", "Neo4jError"))
 			return errors
 		end
 		# print " {res.length} jobs executed"
 		for res in response do
 			if not res isa JsonObject then
-				errors.add(new JsonError("Neo4jError", "Unexpected job format in batch response"))
+				errors.add(new NeoError("Unexpected job format in batch response.", "Neo4jError"))
 				continue
 			end
 			var id = res["id"].as(Int)
