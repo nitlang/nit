@@ -19,7 +19,7 @@
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is
-	c_compiler_option "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
+	c_compiler_option "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/ -I /System/Library/Frameworks/JavaVM.framework/Headers/"
 	c_linker_option "-L $(JNI_LIB_PATH) -ljvm"
 end
 
@@ -173,6 +173,7 @@ extern class JavaVM `{JavaVM *`}
 			JavaVM_jni_error(NULL, "Could not attach current thread to Java VM", res);
 			return NULL;
 		}
+		return env;
 	`}
 end
 
@@ -216,36 +217,41 @@ extern class JniEnv `{JNIEnv *`}
 	# Call a method on `obj` designed by `method_id` with an array `args` of argument returning a JavaObject
 	fun call_object_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): JavaObject import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
-		(*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
+		jobject res = (*recv)->CallObjectMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
+		return res;
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Bool
 	fun call_boolean_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
-		return (*recv)->CallBooleanMethod(recv, obj, method_id, args_tab);
+		jboolean res = (*recv)->CallBooleanMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
+		return res;
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Char
 	fun call_char_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Char import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
-		return (*recv)->CallCharMethod(recv, obj, method_id, args_tab);
+		jchar res = (*recv)->CallCharMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
+		return res;
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning an Int
 	fun call_int_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Int import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
-		return (*recv)->CallIntMethod(recv, obj, method_id, args_tab);
+		jint res = (*recv)->CallIntMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
+		return res;
 	`}
 	
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Float
 	fun call_float_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
-		return (*recv)->CallFloatMethod(recv, obj, method_id, args_tab);
+		jfloat res = (*recv)->CallFloatMethod(recv, obj, method_id, args_tab);
 		free(args_tab);
+		return res;
 	`}
 
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a NativeString
