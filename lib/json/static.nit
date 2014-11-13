@@ -23,7 +23,7 @@
 # languages features (`isa` and `as`).
 module static
 
-import standard
+import error
 private import json_parser
 private import json_lexer
 
@@ -83,14 +83,8 @@ redef class Text
 		var root_node = parser.parse
 		if root_node isa NStart then
 			return root_node.n_0.to_nit_object
-		else if root_node isa NLexerError then
-			var pos = root_node.position
-			print "Json lexer error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
-		else if root_node isa NParserError then
-			var pos = root_node.position
-			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
+		else if root_node isa NError then
+			return new JsonParseError(root_node.message, root_node.position)
 		else abort
 	end
 end
@@ -230,6 +224,43 @@ end
 class JsonArray
 	super JsonSequenceRead[nullable Jsonable]
 	super Array[nullable Jsonable]
+end
+
+redef class JsonParseError
+	super Jsonable
+
+	# Get the JSON representation of `self`.
+	#
+	#     var err = new JsonParseError("foo", new Position(1, 2, 3, 4, 5, 6))
+	#     assert err.to_json == "\{\"error\":\"JsonParseError\"," +
+	#     		"\"position\":\{" +
+	#     			"\"pos_start\":1,\"pos_end\":2," +
+	#     			"\"line_start\":3,\"line_end\":4," +
+	#     			"\"col_start\":5,\"col_end\":6" +
+	#     		"\},\"message\":\"foo\"\}"
+	redef fun to_json do
+		return "\{\"error\":\"JsonParseError\"," +
+				"\"position\":{position.to_json}," +
+				"\"message\":{message.to_json}\}"
+	end
+end
+
+redef class Position
+	super Jsonable
+
+	# Get the JSON representation of `self`.
+	#
+	#     var pos = new Position(1, 2, 3, 4, 5, 6)
+	#     assert pos.to_json == "\{" +
+	#     			"\"pos_start\":1,\"pos_end\":2," +
+	#     			"\"line_start\":3,\"line_end\":4," +
+	#     			"\"col_start\":5,\"col_end\":6" +
+	#     		"\}"
+	redef fun to_json do
+		return "\{\"pos_start\":{pos_start},\"pos_end\":{pos_end}," +
+				"\"line_start\":{line_start},\"line_end\":{line_end}," +
+				"\"col_start\":{col_start},\"col_end\":{col_end}\}"
+	end
 end
 
 ################################################################################
