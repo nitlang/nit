@@ -515,6 +515,29 @@ abstract class Text
 		return b.to_s
 	end
 
+	# Escape to include in a Makefile
+	#
+	# Unfortunately, some characters are not escapable in Makefile.
+	# These characters are `;`, `|`, `\`, and the non-printable ones.
+	# They will be rendered as `"?{hex}"`.
+	fun escape_to_mk: String do
+		var b = new FlatBuffer
+		for i in [0..length[ do
+			var c = chars[i]
+			if c == '$' then
+				b.append("$$")
+			else if c == ':' or c == ' ' or c == '#' then
+				b.add('\\')
+				b.add(c)
+			else if c.ascii < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
+				b.append("?{c.ascii.to_base(16, false)}")
+			else
+				b.add(c)
+			end
+		end
+		return b.to_s
+	end
+
 	# Return a string where Nit escape sequences are transformed.
 	#
 	#     var s = "\\n"

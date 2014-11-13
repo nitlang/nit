@@ -315,7 +315,14 @@ class MakefileToolchain
 
 		var outname = outfile(mainmodule)
 
-		var outpath = compile_dir.relpath(outname)
+		var real_outpath = compile_dir.relpath(outname)
+		var outpath = real_outpath.escape_to_mk
+		if outpath != real_outpath then
+			# If the name is crazy and need escaping, we will do an indirection
+			# 1. generate the binary in the .nit_compile dir under an escaped name
+			# 2. copy the binary at the right place in the `all` goal.
+			outpath = mainmodule.c_name
+		end
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
@@ -348,7 +355,11 @@ class MakefileToolchain
 
 		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
 
-		makefile.write("all: {outpath}\n\n")
+		makefile.write("all: {outpath}\n")
+		if outpath != real_outpath then
+			makefile.write("\tcp -- {outpath.escape_to_sh} {real_outpath.escape_to_sh.replace("$","$$")}")
+		end
+		makefile.write("\n")
 
 		var ofiles = new Array[String]
 		var dep_rules = new Array[String]
@@ -413,9 +424,12 @@ endif
 		if not pkgconfigs.is_empty then
 			pkg = "`pkg-config --libs {pkgconfigs.join(" ")}`"
 		end
-		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
+		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath.escape_to_sh} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
-		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
+		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n")
+		if outpath != real_outpath then
+			makefile.write("\trm -- {outpath.escape_to_sh} 2>/dev/null\n")
+		end
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
 
@@ -524,9 +538,9 @@ abstract class AbstractCompiler
 		stream.write("static const C_Nit_Names map[{names.length}] = \{\n")
 		for i in names.keys do
 			stream.write("\{\"")
-			stream.write(i)
+			stream.write(i.escape_to_c)
 			stream.write("\",\"")
-			stream.write(names[i])
+			stream.write(names[i].escape_to_c)
 			stream.write("\"\},\n")
 		end
 		stream.write("\};\n")
