@@ -216,7 +216,7 @@ class JsonValue
 	end
 end
 
-redef class String
+redef class Text
 	# Parse `self` to obtain a `JsonValue`
 	fun to_json_value: JsonValue
 	do
