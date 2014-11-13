@@ -36,6 +36,9 @@ class NitUnitExecutor
 
 	redef fun process_code(n: HTMLTag, text: String)
 	do
+		# Skip non-blocks
+		if n.tag != "pre" then return
+
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
 
