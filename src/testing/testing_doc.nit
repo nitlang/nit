@@ -101,7 +101,7 @@ class NitUnitExecutor
 		toolcontext.modelbuilder.unit_entities += 1
 
 		cpt += 1
-		var file = "{prefix}{cpt}.nit"
+		var file = "{prefix}-{cpt}.nit"
 
 		toolcontext.info("Execute doc-unit {tc.attrs["name"]} in {file}", 1)
 
