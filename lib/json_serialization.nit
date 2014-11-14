@@ -197,18 +197,11 @@ redef class Bool
 end
 
 redef class Char
-	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": \"{to_s.to_json_s}\"\}"
+	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": {to_s.to_json}\}"
 end
 
 redef class String
-	redef fun serialize_to_json(v) do v.stream.write("\"{to_json_s}\"")
-
-	private fun to_json_s: String do return self.replace("\\", "\\\\").
-		replace("\"", "\\\"").replace("/", "\\/").
-		replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
-		# FIXME add support for unicode char when supported by Nit strings
-		# FIXME add support for \f! # .replace("\f", "\\f")
-		# FIXME add support for \b .replace("\b", "\\b")
+	redef fun serialize_to_json(v) do v.stream.write(to_json)
 end
 
 redef class NativeString
