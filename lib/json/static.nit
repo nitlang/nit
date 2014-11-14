@@ -30,18 +30,22 @@ private import json_lexer
 # Something that can be translated to JSON.
 interface Jsonable
 	# Encode `self` in JSON.
+	#
+	# SEE: `append_json`
 	fun to_json: String is abstract
+
+	# Append the JSON representation of `self` to the specified buffer.
+	#
+	# SEE: `to_json`
+	fun append_json(buffer: Buffer) do
+		buffer.append(to_json)
+	end
 end
 
 redef class Text
 	super Jsonable
 
-	# Encode `self` in JSON.
-	#
-	#     assert "\t\"http://example.com\"\r\n\0\\".to_json ==
-	#     		"\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
-	redef fun to_json do
-		var buffer = new FlatBuffer
+	redef fun append_json(buffer) do
 		buffer.add '\"'
 		for i in [0..self.length[ do
 			var char = self[i]
@@ -72,6 +76,15 @@ redef class Text
 			end
 		end
 		buffer.add '\"'
+	end
+
+	# Encode `self` in JSON.
+	#
+	#     assert "\t\"http://example.com\"\r\n\0\\".to_json ==
+	#     		"\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		append_json(buffer)
 		return buffer.write_to_string
 	end
 
@@ -176,16 +189,7 @@ interface JsonMapRead[K: String, V: nullable Jsonable]
 	super MapRead[K, V]
 	super Jsonable
 
-	# Encode `self` in JSON.
-	#
-	#     var obj = new JsonObject
-	#     obj["foo"] = "bar"
-	#     assert obj.to_json == "\{\"foo\":\"bar\"\}"
-	#     obj = new JsonObject
-	#     obj["baz"] = null
-	#     assert obj.to_json == "\{\"baz\":null\}"
-	redef fun to_json do
-		var buffer = new FlatBuffer
+	redef fun append_json(buffer) do
 		buffer.append "\{"
 		var it = iterator
 		if it.is_ok then
@@ -197,6 +201,19 @@ interface JsonMapRead[K: String, V: nullable Jsonable]
 		end
 		it.finish
 		buffer.append "\}"
+	end
+
+	# Encode `self` in JSON.
+	#
+	#     var obj = new JsonObject
+	#     obj["foo"] = "bar"
+	#     assert obj.to_json == "\{\"foo\":\"bar\"\}"
+	#     obj = new JsonObject
+	#     obj["baz"] = null
+	#     assert obj.to_json == "\{\"baz\":null\}"
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		append_json(buffer)
 		return buffer.write_to_string
 	end
 
@@ -220,16 +237,7 @@ class JsonSequenceRead[E: nullable Jsonable]
 	super Jsonable
 	super SequenceRead[E]
 
-	# Encode `self` in JSON.
-	#
-	#     var arr = new JsonArray.with_items("foo", null)
-	#     assert arr.to_json == "[\"foo\",null]"
-	#     arr.pop
-	#     assert arr.to_json =="[\"foo\"]"
-	#     arr.pop
-	#     assert arr.to_json =="[]"
-	redef fun to_json do
-		var buffer = new FlatBuffer
+	redef fun append_json(buffer) do
 		buffer.append "["
 		var it = iterator
 		if it.is_ok then
@@ -241,6 +249,19 @@ class JsonSequenceRead[E: nullable Jsonable]
 		end
 		it.finish
 		buffer.append "]"
+	end
+
+	# Encode `self` in JSON.
+	#
+	#     var arr = new JsonArray.with_items("foo", null)
+	#     assert arr.to_json == "[\"foo\",null]"
+	#     arr.pop
+	#     assert arr.to_json =="[\"foo\"]"
+	#     arr.pop
+	#     assert arr.to_json =="[]"
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		append_json(buffer)
 		return buffer.write_to_string
 	end
 
