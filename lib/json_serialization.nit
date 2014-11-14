@@ -71,8 +71,8 @@ end
 class JsonDeserializer
 	super Deserializer
 
-	var root: nullable Object
-	var path = new Array[HashMap[String, nullable Object]]
+	var root: nullable Jsonable
+	var path = new Array[JsonObject]
 	var id_to_object = new HashMap[Int, Object]
 
 	var just_opened_id: nullable Int = null
@@ -80,7 +80,7 @@ class JsonDeserializer
 	init(text: Text)
 	do
 		var root = text.json_to_nit_object
-		if root isa HashMap[String, nullable Object] then path.add(root)
+		if root isa JsonObject then path.add(root)
 		self.root = root
 	end
 
@@ -107,7 +107,7 @@ class JsonDeserializer
 	# Convert from simple Json object to Nit object
 	private fun convert_object(object: nullable Object): nullable Object
 	do
-		if object isa HashMap[String, nullable Object] then
+		if object isa JsonObject then
 			assert object.keys.has("__kind")
 			var kind = object["__kind"]
 
@@ -259,7 +259,7 @@ redef class Array[E]
 			v.notify_of_creation self
 
 			var length = v.deserialize_attribute("__length").as(Int)
-			var arr = v.path.last["__items"].as(Array[nullable Object])
+			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
 			for i in length.times do
 				var obj = v.convert_object(arr[i])
 				self.add obj

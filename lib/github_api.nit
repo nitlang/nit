@@ -45,7 +45,7 @@ class GithubCurl
 
 	# Get the requested URI, and check the HTTP response. Then convert to JSON
 	# and check for Github errors.
-	fun get_and_check(uri: String): nullable Object
+	fun get_and_check(uri: String): nullable Jsonable
 	do
 		var request = new CurlHTTPRequest(uri, self)
 		request.user_agent = user_agent
@@ -54,7 +54,7 @@ class GithubCurl
 
 		if response isa CurlResponseSuccess then
 			var obj = response.body_str.json_to_nit_object
-			if obj isa HashMap[String, nullable Object] then
+			if obj isa JsonObject then
 				if obj.keys.has("message") then
 					print "Message from Github API: {obj["message"] or else ""}"
 					print "Requested URI: {uri}"

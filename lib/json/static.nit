@@ -75,8 +75,7 @@ redef class Text
 		return buffer.write_to_string
 	end
 
-	fun json_to_nit_object: nullable Object
-	do
+	fun json_to_nit_object: nullable Jsonable do
 		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
 		var tokens = lexer.lex
@@ -237,7 +236,7 @@ end
 # Redef parser
 
 redef class Nvalue
-	fun to_nit_object: nullable Object is abstract
+	fun to_nit_object: nullable Jsonable is abstract
 end
 
 redef class Nvalue_number
@@ -304,9 +303,8 @@ redef class Nstring
 end
 
 redef class Nvalue_object
-	redef fun to_nit_object
-	do
-		var obj = new HashMap[String, nullable Object]
+	redef fun to_nit_object do
+		var obj = new JsonObject
 		var members = n_members
 		if members != null then
 			var pairs = members.pairs
@@ -335,13 +333,13 @@ end
 
 redef class Npair
 	fun name: String do return n_string.to_nit_string
-	fun value: nullable Object do return n_value.to_nit_object
+	fun value: nullable Jsonable do return n_value.to_nit_object
 end
 
 redef class Nvalue_array
 	redef fun to_nit_object
 	do
-		var arr = new Array[nullable Object]
+		var arr = new JsonArray
 		var elements = n_elements
 		if elements != null then
 			var items = elements.items

@@ -19,13 +19,12 @@ module github_search_for_jni
 
 import github_api
 
-# The proprieties introduced by this redef are to be used only on HashMap
+# The proprieties introduced by this redef are to be used only on a JSON object
 # representing a Github repository.
-redef class HashMap[K, V]
+redef class JsonObject
 	# The repository has at least 50% Java code
 	fun has_lots_of_java: Bool
 	do
-		assert self isa HashMap[String, nullable Object]
 		var java_count = 0
 		if keys.has("Java") then java_count = self["Java"].as(Int)
 
@@ -43,7 +42,6 @@ redef class HashMap[K, V]
 	# The repository has at least 100 lines of C code
 	fun has_some_c: Bool
 	do
-		assert self isa HashMap[String, nullable Object]
 		var c_count = 0
 		if keys.has("C") then c_count = self["C"].as(Int)
 		return c_count > 100
@@ -64,14 +62,14 @@ var per_page = 100
 loop
 	# Get a page of the main query
 	var uri = "https://api.github.com/search/repositories?q={main_query}&page={page}&per_page={per_page}&sort=stars"
-	var obj = curl.get_and_check(uri).as(HashMap[String, nullable Object])
+	var obj = curl.get_and_check(uri).as(JsonObject)
 
 	# Main object has "total_count" and "items"
-	var items = obj["items"].as(Array[nullable Object])
+	var items = obj["items"].as(JsonArray)
 
 	# "items" is an array of Json objects
 	for item in items do
-		assert item isa HashMap[String, nullable Object]
+		assert item isa JsonObject
 
 		# Each item has "name" and "languages_url"
 		assert item.keys.has("name")
@@ -79,7 +77,7 @@ loop
 
 		# Download the language list
 		var lang_url = item["languages_url"].as(String)
-		var langs = curl.get_and_check(lang_url).as(HashMap[String, nullable Object])
+		var langs = curl.get_and_check(lang_url).as(JsonObject)
 
 		# The project is of interest if it has lots of Java and at least some C
 		var may_be_of_interest = langs.has_lots_of_java and langs.has_some_c
