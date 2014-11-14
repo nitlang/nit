@@ -337,24 +337,26 @@ class Neo4jClient
 	# Parse the cURL `response` as a JSON string
 	private fun parse_response(response: CurlResponse): Jsonable do
 		if response isa CurlResponseSuccess then
-			if response.body_str.is_empty then
+			var str = response.body_str
+			if str.is_empty then return new JsonObject
+			var res = str.parse_json
+			if res isa JsonParseError then
+				var e = new NeoError(res.to_s, "JsonParseError")
+				e.cause = res
+				return e
+			end
+			if res == null then
+				# empty response wrap it in empty object
 				return new JsonObject
-			else
-				var str = response.body_str
-				var res = str.to_jsonable
-				if res == null then
-					# empty response wrap it in empty object
-					return new JsonObject
-				else if res isa JsonObject and res.has_key("exception") then
-					var error = "Neo4jError::{res["exception"] or else "null"}"
-					var msg = ""
-					if res.has_key("message") then
-						msg = res["message"].to_s
-					end
-					return new NeoError(msg, error)
-				else
-					return res
+			else if res isa JsonObject and res.has_key("exception") then
+				var error = "Neo4jError::{res["exception"] or else "null"}"
+				var msg = ""
+				if res.has_key("message") then
+					msg = res["message"].to_s
 				end
+				return new NeoError(msg, error)
+			else
+				return res
 			end
 		else if response isa CurlResponseFailed then
 			return new NeoError("{response.error_msg} ({response.error_code})", "CurlError")

@@ -70,7 +70,7 @@ class JsonGraph
 	#     end
 	#     assert 2 == graph.nodes.length
 	init from_json(t: Text) do
-		from_json_object(t.to_jsonable.as(JsonObject))
+		from_json_object(t.parse_json.as(JsonObject))
 	end
 
 	# Retrieve the graph from the specified JSON object.
@@ -138,7 +138,7 @@ redef class NeoNode
 	#     assert ["foo", "Bar"] == node.labels
 	#     assert 42 == node["baz"]
 	init from_json(t: Text) do
-		from_json_object(t.to_jsonable.as(JsonObject))
+		from_json_object(t.parse_json.as(JsonObject))
 	end
 
 	# Retrieve the node from the specified JSON value.

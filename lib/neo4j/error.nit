@@ -11,7 +11,7 @@
 # Errors thrown by the `neo4j` library.
 module neo4j::error
 
-import jsonable
+import json::static
 
 # An error thrown by the `neo4j` API.
 #

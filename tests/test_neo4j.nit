@@ -43,7 +43,7 @@ assert res1.is_linked
 print res1["name"].to_s
 print res1["age"].to_s
 print res1["status"].to_s
-print res1["groups"].to_s
+print res1["groups"].to_json
 print res1.labels.join(" ")
 assert res1.out_edges.is_empty
 
@@ -92,7 +92,7 @@ assert res4.is_linked
 print res4["name"].to_s
 print res4["age"].to_s
 print res4["status"].to_s
-print res4["groups"].to_s
+print res4["groups"].to_json
 print res4.labels.join(" ")
 assert res4.in_edges.is_empty
 assert not res4.out_edges.is_empty
