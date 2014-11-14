@@ -27,7 +27,7 @@ var c = "\{\"foo\":\"bar\\\"\\\\\\/\\b\\f\\n\\r\\t\\u0020\\u0000\"\}"
 var d = "\{ \"face with tears of joy\" : \"\\uD83D\\uDE02\" \}"
 
 for s in [a, b, c, d] do
-	var obj = s.json_to_nit_object
+	var obj = s.parse_json
 	print "# Json: {s}"
 	print "# Nit: {obj or else "<null>"}"
 end

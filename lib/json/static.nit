@@ -18,7 +18,7 @@
 
 # Static interface to get Nit objects from a Json string.
 #
-# `String::json_to_nit_object` returns an equivalent Nit object from
+# `Text::parse_json` returns an equivalent Nit object from
 # the Json source. This object can then be type checked by the usual
 # languages features (`isa` and `as`).
 module static
@@ -75,7 +75,7 @@ redef class Text
 		return buffer.write_to_string
 	end
 
-	fun json_to_nit_object: nullable Jsonable do
+	fun parse_json: nullable Jsonable do
 		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
 		var tokens = lexer.lex

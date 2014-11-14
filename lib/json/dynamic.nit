@@ -218,9 +218,8 @@ end
 
 redef class Text
 	# Parse `self` to obtain a `JsonValue`
-	fun to_json_value: JsonValue
-	do
-		var value = json_to_nit_object
+	fun to_json_value: JsonValue do
+		var value = parse_json
 		return new JsonValue(value)
 	end
 end

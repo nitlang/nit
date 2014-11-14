@@ -79,7 +79,7 @@ class JsonDeserializer
 
 	init(text: Text)
 	do
-		var root = text.json_to_nit_object
+		var root = text.parse_json
 		if root isa JsonObject then path.add(root)
 		self.root = root
 	end
