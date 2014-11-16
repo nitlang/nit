@@ -34,6 +34,8 @@ end
 class AndroidPlatform
 	super Platform
 
+	redef fun supports_libgc do return true
+
 	redef fun supports_libunwind do return false
 
 	redef fun supports_linker_script do return false
@@ -146,11 +148,11 @@ include $(call all-subdir-makefiles)
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_CFLAGS	:= -D ANDROID
+LOCAL_CFLAGS	:= -D ANDROID -D WITH_LIBGC
 LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lz
+LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lz libgc.a
 LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 
 include $(BUILD_SHARED_LIBRARY)
@@ -218,6 +220,15 @@ $(call import-module,android/native_app_glue)
 		if not target_png_dir.file_exists then
 			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir], "Android project error")
 		end
+
+		# Ensure that android-setup-libgc.sh has been executed
+		if not "{share_dir}/libgc/lib".file_exists then
+			toolcontext.exec_and_check(["{share_dir}/libgc/android-setup-libgc.sh"], "Android project error")
+		end
+
+		# Copy GC files
+		toolcontext.exec_and_check(["cp", "{share_dir}/libgc/lib/libgc.a", "{android_project_root}/libgc.a"], "Android project error")
+		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/include/gc/", "{android_project_root}/jni/nit_compile/gc"], "Android project error")
 
 		### Link to assets (for mnit and others)
 		# This will be accessed from `android_project_root`
