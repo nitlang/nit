@@ -41,7 +41,7 @@ class VirtualMachine super NaiveInterpreter
 	# Perfect hashing and perfect numbering
 	var ph: Perfecthashing = new Perfecthashing
 
-	# Handles memory and garbage collection
+	# Handles memory allocated in C
 	var memory_manager: MemoryManager = new MemoryManager
 
 	# The unique instance of the `MInit` value
@@ -336,9 +336,9 @@ redef class MClass
 		var nb_methods = new Array[Int]
 		var nb_attributes = new Array[Int]
 
-		# Absolute offset of the beginning of the attributes table
+		# Absolute offset of attribute from the beginning of the attributes table
 		var offset_attributes = 0
-		# Absolute offset of the beginning of the methods table
+		# Absolute offset of method from the beginning of the methods table
 		var offset_methods = 0
 
 		for parent in superclasses do
@@ -350,9 +350,7 @@ redef class MClass
 
 			for p in parent.intro_mproperties(none_visibility) do
 				if p isa MMethod then methods += 1
-				if p isa MAttribute then
-					attributes += 1
-				end
+				if p isa MAttribute then attributes += 1
 			end
 
 			ids.push(parent.vtable.id)
@@ -411,11 +409,13 @@ redef class MClass
 			if p isa MMethod then
 				self_methods += 1
 				p.offset = relative_offset_meth
+				p.absolute_offset = offset_methods + relative_offset_meth
 				relative_offset_meth += 1
 			end
 			if p isa MAttribute then
 				nb_introduced_attributes += 1
 				p.offset = relative_offset_attr
+				p.absolute_offset = offset_attributes + relative_offset_attr
 				relative_offset_attr += 1
 			end
 		end
@@ -432,8 +432,8 @@ redef class MClass
 		update_positions(offset_attributes, offset_methods, self)
 
 		# Since we have the number of attributes for each class, calculate the delta
-		var d = calculate_delta(nb_attributes_total)
-		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, d, vtable.mask)
+		var deltas = calculate_delta(nb_attributes_total)
+		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, deltas, vtable.mask)
 	end
 
 	# Fill the vtable with methods of `self` class
@@ -558,13 +558,20 @@ redef class MClass
 end
 
 redef class MAttribute
-	# Represents the relative offset of this attribute in the runtime instance
+	# Relative offset of this attribute in the runtime instance
+	# (beginning of the block of its introducing class)
 	var offset: Int
+
+	# Absolute offset of this attribute in the runtime instance (beginning of the attribute table)
+	var absolute_offset: Int
 end
 
 redef class MMethod
-	# Represents the relative offset of this attribute in the runtime instance
+	# Relative offset of this method in the virtual table (from the beginning of the block)
 	var offset: Int
+
+	# Absolute offset of this method in the virtual table (from the beginning of the vtable)
+	var absolute_offset: Int
 end
 
 # Redef MutableInstance to improve implementation of attributes in objects
