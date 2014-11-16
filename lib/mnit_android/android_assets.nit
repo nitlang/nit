@@ -129,8 +129,8 @@ redef class Opengles1Image
 		int has_alpha;
 
 		unsigned int row_bytes;
-		png_bytepp row_pointers;
-		unsigned char *pixels;
+		png_bytepp row_pointers = NULL;
+		unsigned char *pixels = NULL;
 		unsigned int i;
 
 		unsigned char sig[8];
@@ -180,10 +180,10 @@ redef class Opengles1Image
 
 		row_bytes = png_get_rowbytes(png_ptr, info_ptr);
 		pixels = malloc(row_bytes * height);
-        row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
+		row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
 
-        for (i=0; i<height; i++)
-            row_pointers[i] = (png_byte*) malloc(row_bytes);
+		for (i=0; i<height; i++)
+			row_pointers[i] = (png_byte*) malloc(row_bytes);
 
 		png_read_image(png_ptr, row_pointers);
 
@@ -199,6 +199,15 @@ redef class Opengles1Image
 			png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
 		else
 			png_destroy_read_struct(&png_ptr, NULL, NULL);
+
+		if (pixels != NULL)
+			free(pixels);
+
+		if (row_pointers != NULL) {
+			for (i=0; i<height; i++)
+				free(row_pointers[i]);
+			free(row_pointers);
+		}
 
 	close_stream:
 		return recv;
