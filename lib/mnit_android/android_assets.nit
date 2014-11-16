@@ -166,14 +166,7 @@ redef class Opengles1Image
 
 		png_get_IHDR(	png_ptr, info_ptr, &width, &height,
 						&depth, &color_type, NULL, NULL, NULL);
-		if (color_type == PNG_COLOR_TYPE_RGBA)
-			has_alpha = 1;
-		else if (color_type == PNG_COLOR_TYPE_RGB)
-			has_alpha = 0;
-		else {
-			LOGW("unknown color_type");
-			goto close_png_ptr;
-		}
+		has_alpha = color_type & PNG_COLOR_MASK_ALPHA;
 
 		LOGW("w: %i, h: %i", width, height);
 
