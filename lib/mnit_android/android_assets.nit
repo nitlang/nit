@@ -168,6 +168,14 @@ redef class Opengles1Image
 						&depth, &color_type, NULL, NULL, NULL);
 		has_alpha = color_type & PNG_COLOR_MASK_ALPHA;
 
+		// If we get gray and alpha only, standardize the format of the pixels.
+		// GA is not supported by OpenGL ES 1.
+		if (!(color_type & PNG_COLOR_MASK_COLOR)) {
+			png_set_gray_to_rgb(png_ptr);
+			png_set_palette_to_rgb(png_ptr);
+			png_read_update_info(png_ptr, info_ptr);
+		}
+
 		LOGW("w: %i, h: %i", width, height);
 
 		row_bytes = png_get_rowbytes(png_ptr, info_ptr);
