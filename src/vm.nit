@@ -226,11 +226,18 @@ class VirtualMachine super NaiveInterpreter
 	do
 		assert recv isa MutableInstance
 
-		# Read the attribute value with perfect hashing
-		var id = mproperty.intro_mclassdef.mclass.vtable.id
+		var i: Instance
 
-		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+			# if this attribute class has an unique position for this receiver, then use direct access
+			i = read_attribute_sst(recv.internal_attributes, mproperty.absolute_offset)
+		else
+			# Otherwise, read the attribute value with perfect hashing
+			var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+			i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset)
+		end
 
 		# If we get a `MInit` value, throw an error
 		if i == initialization_value then
@@ -256,6 +263,18 @@ class VirtualMachine super NaiveInterpreter
 		int absolute_offset = *(pointer + 1);
 
 		Instance res = ((Instance *)instance)[absolute_offset + offset];
+
+		return res;
+	`}
+
+	# Return the attribute value in `instance` with a direct access (SST)
+	#     `instance` is the attributes array of the receiver
+	#     `offset` is the absolute offset of this attribute
+	private fun read_attribute_sst(instance: Pointer, offset: Int): Instance `{
+		/* We can make a direct access to the attribute value
+		   because this attribute is always at the same position
+		   for the class of this receiver */
+		Instance res = ((Instance *)instance)[offset];
 
 		return res;
 	`}
@@ -341,6 +360,9 @@ redef class MClass
 		# Absolute offset of method from the beginning of the methods table
 		var offset_methods = 0
 
+		# The previous element in `superclasses`
+		var previous_parent: nullable MClass = null
+		if superclasses.length > 0 then	previous_parent = superclasses[0]
 		for parent in superclasses do
 			if not parent.loaded then parent.make_vt(v)
 
@@ -357,8 +379,16 @@ redef class MClass
 			nb_methods.push(methods)
 			nb_attributes.push(attributes)
 
-			# Update `positions_attributes` and `positions_methods` in `parent`
-			update_positions(offset_attributes, offset_methods, parent)
+			# Update `positions_attributes` and `positions_methods` in `parent`.
+			# If the position is invariant for this parent, store this position
+			# else store a special value (-1)
+			var pos_attr = -1
+			var pos_meth = -1
+
+			if previous_parent.as(not null).positions_attributes[parent] == offset_attributes then pos_attr = offset_attributes
+			if previous_parent.as(not null).positions_methods[parent] == offset_methods then pos_meth = offset_methods
+
+			parent.update_positions(pos_attr, pos_meth, self)
 
 			offset_attributes += attributes
 			offset_methods += methods
@@ -427,8 +457,6 @@ redef class MClass
 		nb_attributes_total.push(nb_introduced_attributes)
 
 		# Save the offsets of self class
-		offset_attributes += nb_introduced_attributes
-		offset_methods += self_methods
 		update_positions(offset_attributes, offset_methods, self)
 
 		# Since we have the number of attributes for each class, calculate the delta
@@ -547,13 +575,13 @@ redef class MClass
 		return res
 	end
 
-	# Update positions of self class in `parent`
+	# Update positions of the class `cl`
 	#     `attributes_offset`: absolute offset of introduced attributes
 	#     `methods_offset`: absolute offset of introduced methods
-	private fun update_positions(attributes_offsets: Int, methods_offset:Int, parent: MClass)
+	private fun update_positions(attributes_offsets: Int, methods_offset:Int, cl: MClass)
 	do
-		parent.positions_attributes[self] = attributes_offsets
-		parent.positions_methods[self] = methods_offset
+		positions_attributes[cl] = attributes_offsets
+		positions_methods[cl] = methods_offset
 	end
 end
 
