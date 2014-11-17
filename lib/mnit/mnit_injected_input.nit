@@ -78,6 +78,8 @@ redef class App
 		var env = "MNIT_SRAND".environ
 		if env != "" then
 			srand_from(env.to_i)
+		else
+			srand_from(0)
 		end
 
 		var input = "MNIT_READ_INPUT".environ
