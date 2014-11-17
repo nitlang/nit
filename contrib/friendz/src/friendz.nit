@@ -834,7 +834,7 @@ redef class Display
 	fun measureText(str: String, height: Int): Int
 	do
 		var font = app.game.font
-		return str.length * (app.game.font.width + app.game.font.hspace)
+		return str.length * (font.width + font.hspace.to_i)
 	end
 
 	# displays a debug rectangle
