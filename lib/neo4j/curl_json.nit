@@ -15,7 +15,7 @@
 # cURL requests compatible with the JSON REST APIs.
 module curl_json
 
-import jsonable
+import json::static
 intrude import curl
 
 # An abstract request that defines most of the standard options for Neo4j REST API

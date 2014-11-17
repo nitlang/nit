@@ -71,16 +71,16 @@ end
 class JsonDeserializer
 	super Deserializer
 
-	var root: nullable Object
-	var path = new Array[HashMap[String, nullable Object]]
+	var root: nullable Jsonable
+	var path = new Array[JsonObject]
 	var id_to_object = new HashMap[Int, Object]
 
 	var just_opened_id: nullable Int = null
 
 	init(text: Text)
 	do
-		var root = text.json_to_nit_object
-		if root isa HashMap[String, nullable Object] then path.add(root)
+		var root = text.parse_json
+		if root isa JsonObject then path.add(root)
 		self.root = root
 	end
 
@@ -107,7 +107,7 @@ class JsonDeserializer
 	# Convert from simple Json object to Nit object
 	private fun convert_object(object: nullable Object): nullable Object
 	do
-		if object isa HashMap[String, nullable Object] then
+		if object isa JsonObject then
 			assert object.keys.has("__kind")
 			var kind = object["__kind"]
 
@@ -197,18 +197,11 @@ redef class Bool
 end
 
 redef class Char
-	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": \"{to_s.to_json_s}\"\}"
+	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": {to_s.to_json}\}"
 end
 
 redef class String
-	redef fun serialize_to_json(v) do v.stream.write("\"{to_json_s}\"")
-
-	private fun to_json_s: String do return self.replace("\\", "\\\\").
-		replace("\"", "\\\"").replace("/", "\\/").
-		replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
-		# FIXME add support for unicode char when supported by Nit strings
-		# FIXME add support for \f! # .replace("\f", "\\f")
-		# FIXME add support for \b .replace("\b", "\\b")
+	redef fun serialize_to_json(v) do v.stream.write(to_json)
 end
 
 redef class NativeString
@@ -259,7 +252,7 @@ redef class Array[E]
 			v.notify_of_creation self
 
 			var length = v.deserialize_attribute("__length").as(Int)
-			var arr = v.path.last["__items"].as(Array[nullable Object])
+			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
 			for i in length.times do
 				var obj = v.convert_object(arr[i])
 				self.add obj

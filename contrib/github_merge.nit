@@ -20,14 +20,14 @@ import template
 
 redef class Object
 	# Factorize cast
-	fun json_as_a: Array[nullable Object] do return self.as(Array[nullable Object])
+	fun json_as_a: JsonArray do return self.as(JsonArray)
 	# Factorize cast
-	fun json_as_map: Map[String, nullable Object] do return self.as(Map[String, nullable Object])
+	fun json_as_map: JsonObject do return self.as(JsonObject)
 end
 
 redef class GithubCurl
 	# Get a given pull request (PR)
-	fun getpr(number: Int): Map[String, nullable Object]
+	fun getpr(number: Int): JsonObject
 	do
 		var pr = get_and_check("https://api.github.com/repos/privat/nit/pulls/{number}")
 		var prm = pr.json_as_map
@@ -46,7 +46,7 @@ redef class GithubCurl
 	end
 
 	# Get reviewers of a PR
-	fun getrev(pr: Map[String, nullable Object]): Array[String]
+	fun getrev(pr: JsonObject): Array[String]
 	do
 		var number = pr["number"].as(Int)
 		var user = pr["user"].json_as_map["login"].as(String)

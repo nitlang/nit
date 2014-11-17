@@ -17,6 +17,7 @@ module doc_pages
 
 import toolcontext
 import doc_model
+private import json::static
 
 redef class ToolContext
 	private var opt_dir = new OptionString("output directory", "-d", "--dir")
@@ -212,23 +213,23 @@ class QuickSearch
 		var tpl = new Template
 		tpl.add "var nitdocQuickSearchRawList=\{ "
 		for mmodule in mmodules do
-			tpl.add "\"{mmodule.name}\":["
-			tpl.add "\{txt:\"{mmodule.full_name}\",url:\"{mmodule.nitdoc_url}\"\},"
+			tpl.add "{mmodule.name.to_json}:["
+			tpl.add "\{txt:{mmodule.full_name.to_json},url:{mmodule.nitdoc_url.to_json}\},"
 			tpl.add "],"
 		end
 		for mclass in mclasses do
 			var full_name = mclass.intro.mmodule.full_name
-			tpl.add "\"{mclass.name}\":["
-			tpl.add "\{txt:\"{full_name}\",url:\"{mclass.nitdoc_url}\"\},"
+			tpl.add "{mclass.name.to_json}:["
+			tpl.add "\{txt:{full_name.to_json},url:{mclass.nitdoc_url.to_json}\},"
 			tpl.add "],"
 		end
 		for mproperty, mprops in mpropdefs do
-			tpl.add "\"{mproperty}\":["
+			tpl.add "{mproperty.to_json}:["
 			for mpropdef in mprops do
 				var full_name = mpropdef.mclassdef.mclass.full_name
 				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
 				var def_url = "{cls_url}#{mpropdef.mproperty.nitdoc_id}"
-				tpl.add "\{txt:\"{full_name}\",url:\"{def_url}\"\},"
+				tpl.add "\{txt:{full_name.to_json},url:{def_url.to_json}\},"
 			end
 			tpl.add "],"
 		end

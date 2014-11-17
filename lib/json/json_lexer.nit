@@ -36,6 +36,10 @@ redef class Object
 	private fun dfastate_28: DFAState28 do return once new DFAState28
 	private fun dfastate_29: DFAState29 do return once new DFAState29
 	private fun dfastate_30: DFAState30 do return once new DFAState30
+	private fun dfastate_31: DFAState31 do return once new DFAState31
+	private fun dfastate_32: DFAState32 do return once new DFAState32
+	private fun dfastate_33: DFAState33 do return once new DFAState33
+	private fun dfastate_34: DFAState34 do return once new DFAState34
 end
 class MyNToken
 	super NToken
@@ -391,6 +395,75 @@ private class DFAState30
 	super DFAState
 	redef fun trans(char) do
 		var c = char.ascii
-		return dfastate_2
+		if c <= 33 then return null
+		if c <= 34 then return dfastate_2
+		if c <= 46 then return null
+		if c <= 47 then return dfastate_2
+		if c <= 91 then return null
+		if c <= 92 then return dfastate_2
+		if c <= 97 then return null
+		if c <= 98 then return dfastate_2
+		if c <= 101 then return null
+		if c <= 102 then return dfastate_2
+		if c <= 109 then return null
+		if c <= 110 then return dfastate_2
+		if c <= 113 then return null
+		if c <= 114 then return dfastate_2
+		if c <= 115 then return null
+		if c <= 116 then return dfastate_2
+		if c <= 117 then return dfastate_31
+		return null
+	end
+end
+private class DFAState31
+	super DFAState
+	redef fun trans(char) do
+		var c = char.ascii
+		if c <= 47 then return null
+		if c <= 57 then return dfastate_32
+		if c <= 64 then return null
+		if c <= 90 then return dfastate_32
+		if c <= 96 then return null
+		if c <= 122 then return dfastate_32
+		return null
+	end
+end
+private class DFAState32
+	super DFAState
+	redef fun trans(char) do
+		var c = char.ascii
+		if c <= 47 then return null
+		if c <= 57 then return dfastate_33
+		if c <= 64 then return null
+		if c <= 90 then return dfastate_33
+		if c <= 96 then return null
+		if c <= 122 then return dfastate_33
+		return null
+	end
+end
+private class DFAState33
+	super DFAState
+	redef fun trans(char) do
+		var c = char.ascii
+		if c <= 47 then return null
+		if c <= 57 then return dfastate_34
+		if c <= 64 then return null
+		if c <= 90 then return dfastate_34
+		if c <= 96 then return null
+		if c <= 122 then return dfastate_34
+		return null
+	end
+end
+private class DFAState34
+	super DFAState
+	redef fun trans(char) do
+		var c = char.ascii
+		if c <= 47 then return null
+		if c <= 57 then return dfastate_2
+		if c <= 64 then return null
+		if c <= 90 then return dfastate_2
+		if c <= 96 then return null
+		if c <= 122 then return dfastate_2
+		return null
 	end
 end

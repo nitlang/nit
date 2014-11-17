@@ -9,7 +9,18 @@ frac = '.' d+;
 exp = e d+;
 e = ('e'|'E') ('+'|'-')?;
 
-string = '"' (Any-'\\'-'"' | '\\'Any)* '"';
+hexdig = '0'..'9' | 'a'..'z' | 'A'..'Z';
+string = '"' (Any - '\\' - '"' | '\\' (
+		'\\' |
+		'"' |
+		'/' |
+		'b' |
+		'f' |
+		'n' |
+		'r' |
+		't' |
+		'u' hexdig hexdig hexdig hexdig
+	))* '"';
 
 blank = (' '|'\n'|'\t')+;
 

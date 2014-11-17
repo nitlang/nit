@@ -65,7 +65,7 @@ assert res4.is_linked
 print res4["name"].to_s
 print res4["age"].to_s
 print res4["status"].to_s
-print res4["groups"].to_s
+print res4["groups"].to_json
 print res4.labels.join(" ")
 assert res4.in_edges.is_empty
 assert not res4.out_edges.is_empty
