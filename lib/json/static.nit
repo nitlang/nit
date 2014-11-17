@@ -27,6 +27,215 @@ import standard
 private import json_parser
 private import json_lexer
 
+# Something that can be translated to JSON.
+interface Jsonable
+	# Encode `self` in JSON.
+	fun to_json: String is abstract
+end
+
+redef class Text
+	super Jsonable
+
+	# Encode `self` in JSON.
+	#
+	#     assert "\t\"http://example.com\"\r\n\0\\".to_json ==
+	#     		"\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		buffer.add '\"'
+		for i in [0..self.length[ do
+			var char = self[i]
+			if char == '\\' then
+				buffer.append "\\\\"
+			else if char == '\"' then
+				buffer.append "\\\""
+			else if char == '\/' then
+				buffer.append "\\/"
+			else if char < 16.ascii then
+				if char == '\n' then
+					buffer.append "\\n"
+				else if char == '\r' then
+					buffer.append "\\r"
+				else if char == '\t' then
+					buffer.append "\\t"
+				else if char == 0x0C.ascii then
+					buffer.append "\\f"
+				else if char == 0x08.ascii then
+					buffer.append "\\b"
+				else
+					buffer.append "\\u000{char.ascii.to_hex}"
+				end
+			else if char < ' ' then
+				buffer.append "\\u00{char.ascii.to_hex}"
+			else
+				buffer.add char
+			end
+		end
+		buffer.add '\"'
+		return buffer.write_to_string
+	end
+
+	fun json_to_nit_object: nullable Object
+	do
+		var lexer = new Lexer_json(to_s)
+		var parser = new Parser_json
+		var tokens = lexer.lex
+		parser.tokens.add_all(tokens)
+		var root_node = parser.parse
+		if root_node isa NStart then
+			return root_node.n_0.to_nit_object
+		else if root_node isa NLexerError then
+			var pos = root_node.position
+			print "Json lexer error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return null
+		else if root_node isa NParserError then
+			var pos = root_node.position
+			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
+			return null
+		else abort
+	end
+end
+
+redef class Buffer
+
+	# Append the JSON representation of `jsonable` to `self`.
+	#
+	# Append `"null"` for `null`.
+	private fun append_json_of(jsonable: nullable Jsonable) do
+		if jsonable isa Jsonable then
+			append jsonable.to_json
+		else
+			append "null"
+		end
+	end
+end
+
+redef class Int
+	super Jsonable
+
+	# Encode `self` in JSON.
+	#
+	#     assert 0.to_json == "0"
+	#     assert (-42).to_json == "-42"
+	redef fun to_json do return self.to_s
+end
+
+redef class Float
+	super Jsonable
+
+	# Encode `self` in JSON.
+	#
+	# Note: Because this method use `to_s`, it may lose precision.
+	#
+	# ~~~
+	# # Will not work as expected.
+	# # assert (-0.0).to_json == "-0.0"
+	#
+	# assert (.5).to_json == "0.5"
+	# assert (0.0).to_json == "0.0"
+	# ~~~
+	redef fun to_json do return self.to_s
+end
+
+redef class Bool
+	super Jsonable
+
+	# Encode `self` in JSON.
+	#
+	#     assert true.to_json == "true"
+	#     assert false.to_json == "false"
+	redef fun to_json do return self.to_s
+end
+
+# A map that can be translated into a JSON object.
+interface JsonMapRead[K: String, V: nullable Jsonable]
+	super MapRead[K, V]
+	super Jsonable
+
+	# Encode `self` in JSON.
+	#
+	#     var obj = new JsonObject
+	#     obj["foo"] = "bar"
+	#     assert obj.to_json == "\{\"foo\":\"bar\"\}"
+	#     obj = new JsonObject
+	#     obj["baz"] = null
+	#     assert obj.to_json == "\{\"baz\":null\}"
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		buffer.append "\{"
+		var it = iterator
+		if it.is_ok then
+			append_json_entry(it, buffer)
+			while it.is_ok do
+				buffer.append ","
+				append_json_entry(it, buffer)
+			end
+		end
+		it.finish
+		buffer.append "\}"
+		return buffer.write_to_string
+	end
+
+	private fun append_json_entry(iterator: MapIterator[String, nullable Jsonable],
+			buffer: Buffer) do
+		buffer.append iterator.key.to_json
+		buffer.append ":"
+		buffer.append_json_of(iterator.item)
+		iterator.next
+	end
+end
+
+# A JSON Object.
+class JsonObject
+	super JsonMapRead[String, nullable Jsonable]
+	super HashMap[String, nullable Jsonable]
+end
+
+# A sequence that can be translated into a JSON array.
+class JsonSequenceRead[E: nullable Jsonable]
+	super Jsonable
+	super SequenceRead[E]
+
+	# Encode `self` in JSON.
+	#
+	#     var arr = new JsonArray.with_items("foo", null)
+	#     assert arr.to_json == "[\"foo\",null]"
+	#     arr.pop
+	#     assert arr.to_json =="[\"foo\"]"
+	#     arr.pop
+	#     assert arr.to_json =="[]"
+	redef fun to_json do
+		var buffer = new FlatBuffer
+		buffer.append "["
+		var it = iterator
+		if it.is_ok then
+			append_json_entry(it, buffer)
+			while it.is_ok do
+				buffer.append ","
+				append_json_entry(it, buffer)
+			end
+		end
+		it.finish
+		buffer.append "]"
+		return buffer.write_to_string
+	end
+
+	private fun append_json_entry(iterator: Iterator[nullable Jsonable],
+			buffer: Buffer) do
+		buffer.append_json_of(iterator.item)
+		iterator.next
+	end
+end
+
+# A JSON array.
+class JsonArray
+	super JsonSequenceRead[nullable Jsonable]
+	super Array[nullable Jsonable]
+end
+
+################################################################################
+# Redef parser
+
 redef class Nvalue
 	fun to_nit_object: nullable Object is abstract
 end
@@ -157,26 +366,4 @@ end
 
 redef class Nelements_head
 	redef fun items do return [n_value]
-end
-
-redef class Text
-	fun json_to_nit_object: nullable Object
-	do
-		var lexer = new Lexer_json(to_s)
-		var parser = new Parser_json
-		var tokens = lexer.lex
-		parser.tokens.add_all(tokens)
-		var root_node = parser.parse
-		if root_node isa NStart then
-			return root_node.n_0.to_nit_object
-		else if root_node isa NLexerError then
-			var pos = root_node.position
-			print "Json lexer error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
-		else if root_node isa NParserError then
-			var pos = root_node.position
-			print "Json parsing error: {root_node.message} at {pos or else "<unknown>"} for {root_node}"
-			return null
-		else abort
-	end
 end
