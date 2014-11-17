@@ -705,6 +705,13 @@ class ModelBuilder
 		self.toolcontext.info("{mmodule} imports {imported_modules.join(", ")}", 3)
 		mmodule.set_imported_mmodules(imported_modules)
 
+		# Force standard to be public if imported
+		for sup in mmodule.in_importation.greaters do
+			if sup.name == "standard" then
+				mmodule.set_visibility_for(sup, public_visibility)
+			end
+		end
+
 		# TODO: Correctly check for useless importation
 		# It is even doable?
 		var directs = mmodule.in_importation.direct_greaters
