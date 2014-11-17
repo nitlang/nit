@@ -75,6 +75,37 @@ redef class Text
 		return buffer.write_to_string
 	end
 
+	# Parse `self` as JSON.
+	#
+	# If `self` is not a valid JSON document or contains an unsupported escape
+	# sequence, return a `JSONParseError`.
+	#
+	# Example with `JsonObject`:
+	#
+	#     var obj = "\{\"foo\": \{\"bar\": true, \"goo\": [1, 2, 3]\}\}".parse_json
+	#     assert obj isa JsonObject
+	#     assert obj["foo"] isa JsonObject
+	#     assert obj["foo"].as(JsonObject)["bar"] == true
+	#
+	# Example with `JsonArray`:
+	#
+	#     var arr = "[1, 2, 3]".parse_json
+	#     assert arr isa JsonArray
+	#     assert arr.length == 3
+	#     assert arr.first == 1
+	#     assert arr.last == 3
+	#
+	# Example with `String`:
+	#
+	#     var str = "\"foo, bar, baz\"".parse_json
+	#     assert str isa String
+	#     assert str == "foo, bar, baz"
+	#
+	# Example of a syntaxic error:
+	#
+	#     var bad = "\{foo: \"bar\"\}".parse_json
+	#     assert bad isa JsonParseError
+	#     assert bad.position.col_start == 2
 	fun parse_json: nullable Jsonable do
 		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
