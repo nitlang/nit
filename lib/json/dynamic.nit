@@ -214,6 +214,18 @@ class JsonValue
 		end
 		return new JsonValue(value)
 	end
+
+	# Return a human-readable description of the type.
+	fun json_type: String do
+		if is_array then return "array"
+		if is_bool then return "bool"
+		if is_float then return "float"
+		if is_int then return "int"
+		if is_null then return "null"
+		if is_map then return "map"
+		if is_string then return "string"
+		return "undefined"
+	end
 end
 
 redef class Text
