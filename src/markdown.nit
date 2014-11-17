@@ -27,6 +27,9 @@ private class Doc2Mdwn
 	# The lines of the current code block, empty is no current code block
 	var curblock = new Array[String]
 
+	# Count empty lines between code blocks
+	var empty_lines = 0
+
 	fun work(mdoc: MDoc): HTMLTag
 	do
 		var root = new HTMLTag("div")
@@ -70,16 +73,18 @@ private class Doc2Mdwn
 
 			# Is codeblock? Then just collect them
 			if indent >= 3 then
+				for i in [0..empty_lines[ do curblock.add("")
+				empty_lines = 0
 				# to allows 4 spaces including the one that follows the #
 				curblock.add(text)
 				continue
 			end
 
-			# Was a codblock just before the current line ?
-			close_codeblock(n or else root)
-
 			# fence opening
 			if text.substring(0,3) == "~~~" then
+				# Was a codblock just before the current line ?
+				close_codeblock(n or else root)
+
 				var l = 3
 				while l < text.length and text.chars[l] == '~' do l += 1
 				in_fence = text.substring(0, l)
@@ -96,8 +101,14 @@ private class Doc2Mdwn
 			if text.is_empty or indent < lastindent then
 				n = null
 				ul = null
-				if text.is_empty then continue
+				if text.is_empty then
+					if not curblock.is_empty then empty_lines += 1
+					continue
+				end
 			end
+
+			# Was a codblock just before the current line ?
+			close_codeblock(n or else root)
 
 			# Special first word: new paragraph
 			if text.has_prefix("TODO") or text.has_prefix("FIXME") then
@@ -186,15 +197,20 @@ private class Doc2Mdwn
 	do
 		# Is there a codeblock to manage?
 		if not curblock.is_empty then
+			empty_lines = 0
+
 			# determine the smalest indent
 			var minindent = -1
 			for text in curblock do
 				var indent = 0
 				while indent < text.length and text.chars[indent] == ' ' do indent += 1
+				# skip white lines
+				if indent >= text.length then continue
 				if minindent == -1 or indent < minindent then
 					minindent = indent
 				end
 			end
+			if minindent < 0 then minindent = 0
 
 			# Generate the text
 			var btext = new FlatBuffer

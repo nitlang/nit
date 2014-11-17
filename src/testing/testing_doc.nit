@@ -36,6 +36,9 @@ class NitUnitExecutor
 
 	redef fun process_code(n: HTMLTag, text: String)
 	do
+		# Skip non-blocks
+		if n.tag != "pre" then return
+
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
 
@@ -98,7 +101,7 @@ class NitUnitExecutor
 		toolcontext.modelbuilder.unit_entities += 1
 
 		cpt += 1
-		var file = "{prefix}{cpt}.nit"
+		var file = "{prefix}-{cpt}.nit"
 
 		toolcontext.info("Execute doc-unit {tc.attrs["name"]} in {file}", 1)
 

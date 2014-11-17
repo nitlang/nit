@@ -1,3 +1,4 @@
 test_nitunit.nit --no-color -o $WRITE
 test_nitunit.nit --gen-suite --only-show
 test_nitunit.nit --gen-suite --only-show --private
+test_nitunit2.nit -o $WRITE
