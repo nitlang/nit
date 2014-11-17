@@ -178,6 +178,13 @@ redef class Collection[ E ]
 	end
 end
 
+redef class Sys
+	init
+	do
+		srand
+	end
+end
+
 fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
 fun pi: Float is extern "kernel_Any_Any_pi_0"
 fun srand_from(x: Int) is extern "kernel_Any_Any_srand_from_1"
