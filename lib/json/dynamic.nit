@@ -20,8 +20,8 @@
 # to get the underlying Json data. It can also be used as any Json types.
 module dynamic
 
+import error
 private import static
-import standard
 
 class JsonValue
 	var value: nullable Object
@@ -162,6 +162,35 @@ class JsonValue
 		return a
 	end
 
+	### Error
+
+	# Is this value an error?
+	#
+	#     assert "[]".to_json_value[0].is_error
+	#     assert "[".to_json_value.is_error
+	#     assert not "[]".to_json_value.is_error
+	fun is_error: Bool do return value isa Error
+
+	# Get this value as a `Error`.
+	#
+	# require: `self.is_error`
+	fun to_error: Error do return value.as(Error)
+
+	### JsonParseError
+
+	# Is this value a parse error?
+	#
+	#     assert "[".to_json_value.is_parse_error
+	#     assert not "[]".to_json_value.is_parse_error
+	fun is_parse_error: Bool do return value isa JsonParseError
+
+	# Get this value as a `JsonParseError`.
+	#
+	# require: `self.is_parse_error`
+	fun to_parse_error: JsonParseError do return value.as(JsonParseError)
+
+	### Children access
+
 	# Iterator over the values of the array `self`
 	#
 	# require: `self.is_array`
@@ -181,17 +210,39 @@ class JsonValue
 	#     assert """{"a": 123}""".to_json_value["a"].to_i == 123
 	#     assert """{"123": "a"}""".to_json_value[123].to_s == "a"
 	#     assert """{"John Smith": 1980}""".to_json_value[["John ", "Smith"]].to_i == 1980
+	#     assert """{"a": 123}""".to_json_value["b"].is_error
 	#
 	#     assert """["a", "b", "c"]""".to_json_value[0].to_s == "a"
-	fun [](key: Object): JsonValue
-	do
+	#     assert """["a", "b", "c"]""".to_json_value[3].is_error
+	fun [](key: Object): JsonValue do
 		var value = value
-		if value isa MapRead[String, nullable Object] then
-			return new JsonValue(value[key.to_s])
+		var result: nullable Object
+		if is_error then
+			return self
+		else if value isa MapRead[String, nullable Object] then
+			key = key.to_s
+			if value.has_key(key) then
+				result = value[key]
+			else
+				result = new JsonKeyError("Key `{key}` not found.", self, key)
+			end
 		else if value isa SequenceRead[nullable Object] then
-			assert key isa Int
-			return new JsonValue(value[key])
-		else abort
+			if key isa Int then
+				if key < value.length and key >= 0 then
+					result = value[key]
+				else
+					result = new JsonKeyError("Index `{key}` out of bounds.",
+							self, key)
+				end
+			else
+				result = new JsonKeyError("Invalid key type. Expecting `Int`. Got `{key.class_name}`.",
+						self, key)
+			end
+		else
+			result = new JsonKeyError("Invalid `[]` access on a `{json_type}` JsonValue.",
+					self, key)
+		end
+		return new JsonValue(result)
 	end
 
 	# Advanced query to get a value within the map `self` or it's children.
@@ -203,19 +254,47 @@ class JsonValue
 	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a").is_map
 	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t").to_bool
 	#     assert not """{"a": {"t": true, "f": false}}""".to_json_value.get("a.f").to_bool
+	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t.t").is_error
 	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.b.c.d").to_i == 123
-	fun get(query: String): JsonValue
-	do
+	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.z.c.d").is_error
+	fun get(query: String): JsonValue do
 		var keys = query.split(".")
 		var value = value
-		for key in keys do
-			assert value isa MapRead[String, nullable Object]
-			value = value[key]
+		if is_error then return self
+		for i in [0..keys.length[ do
+			var key = keys[i]
+			if value isa MapRead[String, nullable Object] then
+				if value.has_key(key) then
+					value = value[key]
+				else
+					var sub_query = sub_query_to_s(keys, i)
+					var e = new JsonKeyError("Key `{key}` not found.",
+							self, sub_query)
+					return new JsonValue(e)
+				end
+			else
+				var sub_query = sub_query_to_s(keys, i)
+				var val_type = (new JsonValue(value)).json_type
+				var e = new JsonKeyError("Value at `{sub_query}` is not a map. Got type `{val_type}`",
+						self, sub_query)
+				return new JsonValue(e)
+			end
 		end
 		return new JsonValue(value)
 	end
 
+	# Concatenate all keys up to `last` for debugging purposes.
+	#
+	# Note: This method deletes elements in `keys`.
+	private fun sub_query_to_s(keys: Array[String], last: Int): String do
+		last += 1
+		for j in [last..keys.length[ do keys.pop
+		return keys.join(".")
+	end
+
 	# Return a human-readable description of the type.
+	#
+	# For debugging purpose only.
 	fun json_type: String do
 		if is_array then return "array"
 		if is_bool then return "bool"
@@ -224,8 +303,23 @@ class JsonValue
 		if is_null then return "null"
 		if is_map then return "map"
 		if is_string then return "string"
+		if is_parse_error then return "parse_error"
+		if is_error then return "error"
 		return "undefined"
 	end
+end
+
+# Keyed access failed.
+class JsonKeyError
+	super Error
+
+	# The value on which the access was requested.
+	var json_value: JsonValue
+
+	# The requested key.
+	#
+	# In the case of `JsonValue.get`, the sub-query that failed.
+	var key: Object
 end
 
 redef class Text
