@@ -88,6 +88,18 @@ class TileSetFont
 	# Distance between the beginning of a letter tile and the beginning of the next letter tile
 	fun advance: Numeric do return width.add(hspace)
 
+	# Distance between the beginning and the end of the longest line of `text`
+	fun text_width(text: String): Numeric
+	do
+		var lines = text.split('\n')
+		if lines.is_empty then return 0
+
+		var longest = 0
+		for line in lines do longest = longest.max(line.length)
+
+		return longest.mul(advance)
+	end
+
 	# Distance between the top of the first line to the bottom of the last line in `text`
 	fun text_height(text: Text): Numeric
 	do
