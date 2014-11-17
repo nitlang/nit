@@ -60,6 +60,7 @@ class ProjectGraph
 
 	# Request to all nodes in the graph to add their related edges.
 	fun put_edges do
+		all_edges.clear
 		add_edge(project, "ROOT", by_id[""])
 		for n in all_nodes do
 			if n isa Entity then
