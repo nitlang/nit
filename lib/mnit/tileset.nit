@@ -87,6 +87,15 @@ class TileSetFont
 
 	# Distance between the beginning of a letter tile and the beginning of the next letter tile
 	fun advance: Numeric do return width.add(hspace)
+
+	# Distance between the top of the first line to the bottom of the last line in `text`
+	fun text_height(text: Text): Numeric
+	do
+		if text.is_empty then return 0
+
+		var n_lines = text.chars.count('\n')
+		return (n_lines+1).mul(height.add(vspace)).sub(vspace)
+	end
 end
 
 redef class Display
