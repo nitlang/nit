@@ -37,6 +37,17 @@ class DisjointSet[E: Object]
 	# The node in the hiearchical structure for each element
 	private var nodes = new HashMap[E, DisjointSetNode]
 
+	# The number of subsets in the partition
+	#
+	#     var s = new DisjointSet[Int]
+	#     s.add_all([1,2,3,4,5])
+	#     assert s.number_of_subsets == 5
+	#     s.union_all([1,4,5])
+	#     assert s.number_of_subsets == 3
+	#     s.union(4,5)
+	#     assert s.number_of_subsets == 3
+	var number_of_subsets: Int = 0
+
 	# Get the root node of an element
 	# require: `has(e)`
 	private fun find(e:E): DisjointSetNode
@@ -84,6 +95,7 @@ class DisjointSet[E: Object]
 		if nodes.has_key(e) then return
 		var ne = new DisjointSetNode
 		nodes[e] = ne
+		number_of_subsets += 1
 	end
 
 	# Are two elements in the same subset?
@@ -171,6 +183,7 @@ class DisjointSet[E: Object]
 				ne.rank = er+1
 			end
 		end
+		number_of_subsets -= 1
 	end
 
 	# Combine the subsets of all elements of `es`
