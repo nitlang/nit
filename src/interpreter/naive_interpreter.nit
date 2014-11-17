@@ -1046,6 +1046,9 @@ redef class AMethPropdef
 			return v.native_string_instance(txt)
 		else if pname == "get_time" then
 			return v.int_instance(get_time)
+		else if pname == "srand" then
+			srand
+			return null
 		else if pname == "srand_from" then
 			srand_from(args[1].to_i)
 			return null
