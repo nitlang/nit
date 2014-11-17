@@ -55,13 +55,6 @@
 # ~~~
 module a_star
 
-redef class Object
-	protected fun debug_a_star: Bool do return false
-	private fun debug(msg: String) do if debug_a_star then
-		sys.stderr.write "a_star debug: {msg}\n"
-	end
-end
-
 # General graph node
 class Node
 	type N: Node
@@ -130,14 +123,12 @@ class Node
 				var current_bucket = buckets[cost % nbr_buckets]
 
 				if current_bucket.is_empty then # move to next bucket
-					debug "b {cost} {cost % nbr_buckets} {buckets[cost % nbr_buckets].hash}"
 					cost += 1
 					if cost > max_cost then return null
 					bucket_searched += 1
 
 					if bucket_searched > nbr_buckets then break
 				else # found a node
-					debug "c {cost}"
 					frontier_node = current_bucket.pop
 
 					if frontier_node.open then break
@@ -151,7 +142,6 @@ class Node
 			# at destination
 			else if frontier_node == destination or
 			     (alt_targets != null and alt_targets.accept(frontier_node)) then
-				debug "picked {frontier_node}, is destination"
 
 				var path = new Path[N](cost)
 
@@ -166,11 +156,8 @@ class Node
 			else
 				frontier_node.open = false
 
-				debug "w exploring adjacents of {frontier_node}"
-
 				for link in frontier_node.links do
 					var peek_node = link.to
-					debug "v {context.is_blocked(link)} {peek_node.last_pathfinding_evocation != graph.pathfinding_current_evocation} {peek_node.best_cost_up_to > frontier_node.best_cost_up_to + context.cost(link)}, {peek_node.best_cost_up_to} > {frontier_node.best_cost_up_to} + {context.cost(link)}"
 					if not context.is_blocked(link) and
 					 (peek_node.last_pathfinding_evocation != graph.pathfinding_current_evocation or
 					   (peek_node.open and
@@ -190,8 +177,6 @@ class Node
 
 						var at_bucket = buckets[est_cost % nbr_buckets]
 						at_bucket.add(peek_node)
-
-						debug "u putting {peek_node} at {est_cost} -> {est_cost % nbr_buckets} {at_bucket.hash}, {cost}+{context.cost(link)}"
 					end
 				end
 			end

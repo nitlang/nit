@@ -83,6 +83,8 @@ class Buckets[G: Game]
 		var current_bucket = buckets[current_bucket_key]
 
 		var next_bucket = new HashSet[Bucketable[G]]
+		buckets[current_bucket_key] = next_bucket
+		self.next_bucket = next_bucket
 
 		for e in current_bucket do
 			var act_at = e.act_at
@@ -96,9 +98,6 @@ class Buckets[G: Game]
 				end
 			end
 		end
-
-		self.next_bucket = next_bucket
-		buckets[current_bucket_key] = next_bucket
 	end
 end
 

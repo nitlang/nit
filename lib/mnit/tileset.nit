@@ -70,11 +70,11 @@ class TileSetFont
 
 	# Additional space to insert horizontally between characters
 	# A negave value will display tile overlaped
-	var hspace: Int = 0 is writable
+	var hspace: Numeric = 0.0 is writable
 
 	# Additional space to insert vertically between characters
 	# A negave value will display tile overlaped
-	var vspace: Int = 0 is writable
+	var vspace: Numeric = 0.0 is writable
 
 	# The glyph (tile) associated to the caracter `c` according to `chars`
 	# Returns null if `c` is not in `chars`
@@ -91,10 +91,11 @@ redef class Display
 	# '\n' are rendered as carriage return
 	fun text(text: String, font: TileSetFont, x, y: Numeric)
 	do
+		x = x.to_f
 		var cx = x
-		var cy = y
-		var sw = font.width + font.hspace
-		var sh = font.height + font.vspace
+		var cy = y.to_f
+		var sw = font.width.to_f + font.hspace.to_f
+		var sh = font.height.to_f + font.vspace.to_f
 		for c in text.chars do
 			if c == '\n' then
 				cx = x

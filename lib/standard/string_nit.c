@@ -14,7 +14,7 @@
 // Integer to NativeString method
 char* native_int_to_s(long recv){
 	int len = snprintf(NULL, 0, "%ld", recv);
-	char* str = malloc(len);
+	char* str = malloc(len+1);
 	sprintf(str, "%ld", recv);
 	return str;
 }
