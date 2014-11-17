@@ -178,7 +178,31 @@ redef class Collection[ E ]
 	end
 end
 
+redef class Sys
+	init
+	do
+		srand
+	end
+end
+
 fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
 fun pi: Float is extern "kernel_Any_Any_pi_0"
+
+# Initialize the pseudo-random generator with the given seed.
+# The pseudo-random generator is used by the method `rand` and other to generate sequence of numbers.
+# These sequences are repeatable by calling `srand_from` with a same seed value.
+#
+# ~~~~
+# srand_from(0)
+# var a = 10.rand
+# var b = 100.rand
+# srand_from(0)
+# assert 10.rand == a
+# assert 100.rand == b
+# ~~~~
 fun srand_from(x: Int) is extern "kernel_Any_Any_srand_from_1"
+
+# Reinitialize the pseudo-random generator used by the method `rand` and other.
+# This method is automatically invoked at the begin of the program, so usually, there is no need to manually invoke it.
+# The only exception is in conjunction with `srand_from` to reset the pseudo-random generator.
 fun srand is extern "kernel_Any_Any_srand_0"

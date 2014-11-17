@@ -1052,6 +1052,7 @@ end
 
 fun headless_run
 do
+	srand_from 0
 	print "Headless run"
 	# Only run the playscene
 	var scene = new PlayScene(80000,60000)
