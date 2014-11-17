@@ -1,6 +1,8 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-concept.com>
+# Copyright 2014 Jean-Christophe Beaupré <jcbrinfo@users.noreply.github.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,11 +57,41 @@ redef class Nvalue_null
 end
 
 redef class Nstring
-	# FIXME support \n, etc.
-	fun to_nit_string: String do return text.substring(1, text.length-2).
-		replace("\\\\", "\\").replace("\\\"", "\"").replace("\\b", "\b").
-		replace("\\/", "/").replace("\\n", "\n").replace("\\r", "\r").
-		replace("\\t", "\t")
+	fun to_nit_string: String do
+		var res = new FlatBuffer
+		var i = 1
+		while i < text.length - 1 do
+			var char = text[i]
+			if char == '\\' then
+				i += 1
+				char = text[i]
+				if char == 'b' then
+					char = 0x08.ascii
+				else if char == 'f' then
+					char = 0x0C.ascii
+				else if char == 'n' then
+					char = '\n'
+				else if char == 'r' then
+					char = '\r'
+				else if char == 't' then
+					char = '\t'
+				else if char == 'u' then
+					var code = text.substring(i + 1, 4).to_hex
+					# TODO UTF-16 escaping is not supported yet.
+					if code >= 128 then
+						char = '?'
+					else
+						char = code.ascii
+					end
+					i += 4
+				end
+				# `"`, `/` or `\` => Keep `char` as-is.
+			end
+			res.add char
+			i += 1
+		end
+		return res.write_to_string
+	end
 end
 
 redef class Nvalue_object
