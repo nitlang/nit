@@ -30,7 +30,6 @@ intrude import collection::array
 # High-level abstraction for all text representations
 abstract class Text
 	super Comparable
-	super StringCapable
 
 	redef type OTHER: Text
 
@@ -992,7 +991,7 @@ class FlatString
 
 	redef fun reversed
 	do
-		var native = calloc_string(self.length + 1)
+		var native = new NativeString(self.length + 1)
 		var length = self.length
 		var items = self.items
 		var pos = 0
@@ -1030,7 +1029,7 @@ class FlatString
 
 	redef fun to_upper
 	do
-		var outstr = calloc_string(self.length + 1)
+		var outstr = new NativeString(self.length + 1)
 		var out_index = 0
 
 		var myitems = self.items
@@ -1050,7 +1049,7 @@ class FlatString
 
 	redef fun to_lower
 	do
-		var outstr = calloc_string(self.length + 1)
+		var outstr = new NativeString(self.length + 1)
 		var out_index = 0
 
 		var myitems = self.items
@@ -1095,7 +1094,7 @@ class FlatString
 		if real_items != null then
 			return real_items.as(not null)
 		else
-			var newItems = calloc_string(length + 1)
+			var newItems = new NativeString(length + 1)
 			self.items.copy_to(newItems, length, index_from, 0)
 			newItems[length] = '\0'
 			self.real_items = newItems
@@ -1173,7 +1172,7 @@ class FlatString
 
 		var total_length = my_length + its_length
 
-		var target_string = calloc_string(my_length + its_length + 1)
+		var target_string = new NativeString(my_length + its_length + 1)
 
 		self.items.copy_to(target_string, my_length, index_from, 0)
 		if s isa FlatString then
@@ -1204,7 +1203,7 @@ class FlatString
 
 		var my_items = self.items
 
-		var target_string = calloc_string((final_length) + 1)
+		var target_string = new NativeString(final_length + 1)
 
 		target_string[final_length] = '\0'
 
@@ -1502,7 +1501,7 @@ class FlatBuffer
 		# The COW flag can be set at false here, since
 		# it does a copy of the current `Buffer`
 		written = false
-		var a = calloc_string(c+1)
+		var a = new NativeString(c+1)
 		if length > 0 then items.copy_to(a, length, 0, 0)
 		items = a
 		capacity = c
@@ -1518,7 +1517,7 @@ class FlatBuffer
 	redef fun to_cstring
 	do
 		if is_dirty then
-			var new_native = calloc_string(length + 1)
+			var new_native = new NativeString(length + 1)
 			new_native[length] = '\0'
 			if length > 0 then items.copy_to(new_native, length, 0, 0)
 			real_items = new_native
@@ -1534,7 +1533,7 @@ class FlatBuffer
 	do
 		capacity = s.length + 1
 		length = s.length
-		items = calloc_string(capacity)
+		items = new NativeString(capacity)
 		if s isa FlatString then
 			s.items.copy_to(items, length, s.index_from, 0)
 		else if s isa FlatBuffer then
@@ -1554,7 +1553,7 @@ class FlatBuffer
 	do
 		assert cap >= 0
 		# _items = new NativeString.calloc(cap)
-		items = calloc_string(cap+1)
+		items = new NativeString(cap+1)
 		capacity = cap
 		length = 0
 	end
@@ -1611,7 +1610,7 @@ class FlatBuffer
 	redef fun reverse
 	do
 		written = false
-		var ns = calloc_string(capacity)
+		var ns = new NativeString(capacity)
 		var si = length - 1
 		var ni = 0
 		var it = items
@@ -1682,7 +1681,6 @@ end
 
 private class FlatBufferCharView
 	super BufferCharView
-	super StringCapable
 
 	redef type SELFTYPE: FlatBuffer
 
@@ -2118,7 +2116,6 @@ end
 
 # Native strings are simple C char *
 extern class NativeString `{ char* `}
-	super StringCapable
 	# Creates a new NativeString with a capacity of `length`
 	new(length: Int) is intern
 	fun [](index: Int): Char is intern
@@ -2150,18 +2147,13 @@ extern class NativeString `{ char* `}
 	fun to_s_with_copy: FlatString
 	do
 		var length = cstring_length
-		var new_self = calloc_string(length + 1)
+		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
 		new_self[length] = '\0'
 		str.real_items = new_self
 		return str
 	end
-end
-
-# StringCapable objects can create native strings
-interface StringCapable
-	protected fun calloc_string(size: Int): NativeString is intern
 end
 
 redef class Sys

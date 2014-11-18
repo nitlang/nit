@@ -21,8 +21,6 @@ redef class NativeArray[E]
 end
 
 redef class Array[E]
-	super StringCapable
-
 	redef fun to_s: String do
 		var l = length
 		var its = _items
@@ -35,7 +33,7 @@ redef class Array[E]
 			na[i] = tmp
 			i += 1
 		end
-		var ns = calloc_string(sl + 1)
+		var ns = new NativeString(sl + 1)
 		ns[sl] = '\0'
 		i = 0
 		var off = 0

@@ -214,7 +214,7 @@ redef class FlatString
 	redef fun to_cstring
 	do
 		if real_items != null then return real_items.as(not null)
-		var new_items = calloc_string(bytelen + 1)
+		var new_items = new NativeString(bytelen + 1)
 		self.items.copy_to(new_items, bytelen, index[index_from].pos, 0)
 		new_items[bytelen] = '\0'
 		self.real_items = new_items
@@ -245,7 +245,7 @@ redef class FlatString
 
 	redef fun reversed
 	do
-		var native = calloc_string(self.bytelen + 1)
+		var native = new NativeString(self.bytelen + 1)
 		var length = self.length
 		var index = self.index
 		var pos = 0
@@ -278,7 +278,7 @@ redef class FlatString
 		var my_real_len = length
 		var my_real_fin_len = my_real_len * i
 
-		var target_string = calloc_string((finlen) + 1)
+		var target_string = new NativeString((finlen) + 1)
 
 		var my_index = index
 		var new_index = new StringIndex(my_real_fin_len)
@@ -300,7 +300,7 @@ redef class FlatString
 
 	redef fun to_upper
 	do
-		var outstr = calloc_string(self.bytelen + 1)
+		var outstr = new NativeString(self.bytelen + 1)
 
 		var out_index = 0
 		var index = self.index
@@ -322,7 +322,7 @@ redef class FlatString
 
 	redef fun to_lower
 	do
-		var outstr = calloc_string(self.bytelen + 1)
+		var outstr = new NativeString(self.bytelen + 1)
 
 		var out_index = 0
 		var index = self.index
@@ -406,7 +406,7 @@ redef class NativeString
 		var real_len = new Container[Int](0)
 		var length = cstring_length
 		var x = make_index(length, real_len)
-		var new_self = calloc_string(length + 1)
+		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		return new FlatString.with_infos_index(new_self, real_len.item, 0, real_len.item - 1, x, length)
 	end
