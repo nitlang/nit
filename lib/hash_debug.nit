@@ -121,7 +121,7 @@ do
 	super
 end
 
-redef class HashCollection[K,N]
+redef class HashCollection[K]
 	redef fun node_at_idx(i,k)
 	do
 		sys.gt_count += 1
