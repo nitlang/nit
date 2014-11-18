@@ -12,7 +12,6 @@
 
 class DummyArray
 	super Set[Int]
-	super ArrayCapable[Int]
 	private var capacity: Int
 	redef var length: Int
 	private var keys: NativeArray[Int]
@@ -79,8 +78,8 @@ class DummyArray
 	init(capacity: Int)
 	do
 		_capacity = capacity
-		_keys = calloc_array(capacity)
-		_values = calloc_array(capacity)
+		_keys = new NativeArray[Int](capacity)
+		_values = new NativeArray[Int](capacity)
 	end
 end
 

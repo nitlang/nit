@@ -17,7 +17,6 @@ import array
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K: Object, N: HashNode[Object]]
-	super ArrayCapable[nullable N]
 
 	private var array: nullable NativeArray[nullable N] = null # Used to store items
 	private var capacity: Int = 0 # Size of _array
@@ -163,7 +162,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		_last_accessed_key = null
 
 		# get a new array
-		var new_array = calloc_array(cap)
+		var new_array = new NativeArray[nullable N](cap)
 		_array = new_array
 
 		# clean the new array

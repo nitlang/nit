@@ -251,7 +251,6 @@ end
 #     assert a == b
 class Array[E]
 	super AbstractArray[E]
-	super ArrayCapable[E]
 
 	redef fun [](index)
 	do
@@ -286,7 +285,7 @@ class Array[E]
 		var c = _capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
-		var a = calloc_array(c)
+		var a = new NativeArray[E](c)
 		if _capacity > 0 then _items.copy_to(a, _length)
 		_items = a
 		_capacity = c
@@ -317,7 +316,7 @@ class Array[E]
 	init with_capacity(cap: Int)
 	do
 		assert positive: cap >= 0
-		_items = calloc_array(cap)
+		_items = new NativeArray[E](cap)
 		_capacity = cap
 		_length = 0
 	end
@@ -326,7 +325,7 @@ class Array[E]
 	init filled_with(value: E, count: Int)
 	do
 		assert positive: count >= 0
-		_items = calloc_array(count)
+		_items = new NativeArray[E](count)
 		_capacity = count
 		_length = count
 		var i = 0
@@ -768,12 +767,6 @@ redef class Collection[E]
 end
 
 # Native classes ##############################################################
-
-# Subclasses of this class can create native arrays
-interface ArrayCapable[E]
-	# Get a new array of `size` elements.
-	protected fun calloc_array(size: Int): NativeArray[E] is intern
-end
 
 # Native Nit array
 # Access are unchecked and it has a fixed size
