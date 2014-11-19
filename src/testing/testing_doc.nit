@@ -34,7 +34,7 @@ class NitUnitExecutor
 	# All blocks of code from a same `ADoc`
 	var blocks = new Array[Array[String]]
 
-	redef fun process_code(n: HTMLTag, text: String)
+	redef fun process_code(n: HTMLTag, text: String, tag: nullable String)
 	do
 		# Skip non-blocks
 		if n.tag != "pre" then return

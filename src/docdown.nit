@@ -30,6 +30,9 @@ private class Doc2Mdwn
 	# Count empty lines between code blocks
 	var empty_lines = 0
 
+	# Optional tag for a fence
+	var fence_tag = ""
+
 	fun work(mdoc: MDoc): HTMLTag
 	do
 		var root = new HTMLTag("div")
@@ -77,6 +80,7 @@ private class Doc2Mdwn
 				empty_lines = 0
 				# to allows 4 spaces including the one that follows the #
 				curblock.add(text)
+				fence_tag = ""
 				continue
 			end
 
@@ -88,6 +92,8 @@ private class Doc2Mdwn
 				var l = 3
 				while l < text.length and text.chars[l] == '~' do l += 1
 				in_fence = text.substring(0, l)
+				while l < text.length and (text.chars[l] == '.' or text.chars[l] == ' ') do l += 1
+				fence_tag = text.substring_from(l)
 				continue
 			end
 
@@ -187,7 +193,7 @@ private class Doc2Mdwn
 				# Code part
 				var n2 = new HTMLTag("code")
 				n.add(n2)
-				process_code(n2, part)
+				process_code(n2, part, null)
 			end
 			is_text = not is_text
 		end
@@ -222,12 +228,12 @@ private class Doc2Mdwn
 			# add the node
 			var n = new HTMLTag("pre")
 			root.add(n)
-			process_code(n, btext.to_s)
+			process_code(n, btext.to_s, fence_tag)
 			curblock.clear
 		end
 	end
 
-	fun process_code(n: HTMLTag, text: String)
+	fun process_code(n: HTMLTag, text: String, tag: nullable String)
 	do
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
