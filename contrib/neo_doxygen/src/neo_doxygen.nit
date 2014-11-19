@@ -46,7 +46,6 @@ class NeoDoxygenJob
 	fun load_project(name: String, dir: String, source: SourceLanguage) do
 		check_name name
 		model = new ProjectGraph(name)
-		# TODO Let the user select the language.
 		var reader = new CompoundFileReader(model, source)
 		# Queue for sub-directories.
 		var directories = new Array[String]
