@@ -114,17 +114,38 @@ redef class Int
 end
 
 redef class Float
+
+	# Returns the non-negative square root of `self`.
 	fun sqrt: Float is extern "kernel_Float_Float_sqrt_0"
+
+	# Computes the cosine of `self` (expressed in radians).
 	fun cos: Float is extern "kernel_Float_Float_cos_0"
+
+	# Computes the sine of `self` (expressed in radians).
 	fun sin: Float is extern "kernel_Float_Float_sin_0"
+
+	# Computes the cosine of x (expressed in radians).
 	fun tan: Float is extern "kernel_Float_Float_tan_0"
+
+	# Computes the arc cosine of `self`.
 	fun acos: Float is extern "kernel_Float_Float_acos_0"
+
+	# Computes the arc sine of `self`.
 	fun asin: Float is extern "kernel_Float_Float_asin_0"
+
+	# Computes the arc tangent of `self`.
 	fun atan: Float is extern "kernel_Float_Float_atan_0"
+
+	# Returns the absolute value of `self`.
 	fun abs: Float `{ return fabs(recv); `}
 
+	# Returns `self` raised at `e` power.
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
+
+	# Returns the logarithm of `self`.
 	fun log: Float is extern "kernel_Float_Float_log_0"
+
+	# Returns **e** raised to `self`.
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
 
 	#     assert 1.1.ceil == 2.0
@@ -141,8 +162,11 @@ redef class Float
 	
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
-	fun hypot_with( b : Float ) : Float is extern "hypotf"
 
+	# Returns the euclidean distance from `b`.
+	fun hypot_with(b : Float): Float is extern "hypotf"
+
+	# Returns true is self is not a number.
 	fun is_nan: Bool is extern "isnan"
 
 	# Is the float an infinite value
@@ -185,7 +209,10 @@ redef class Sys
 	end
 end
 
+# Computes the arc tangent given `x` and `y`.
 fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
+
+# Approximate value of **pi**.
 fun pi: Float is extern "kernel_Any_Any_pi_0"
 
 # Initialize the pseudo-random generator with the given seed.
