@@ -261,6 +261,101 @@ class MarkdownProcessor
 		return new LineOther
 	end
 
+	# Get the token kind at `pos`.
+	fun token_at(text: Text, pos: Int): Token do
+		var c0: Char
+		var c1: Char
+		var c2: Char
+
+		if pos > 0 then
+			c0 = text[pos - 1]
+		else
+			c0 = ' '
+		end
+		var c = text[pos]
+
+		if pos + 1 < text.length then
+			c1 = text[pos + 1]
+		else
+			c1 = ' '
+		end
+		if pos + 2 < text.length then
+			c2 = text[pos + 2]
+		else
+			c2 = ' '
+		end
+
+		if c == '*' then
+			if c1 == '*' then
+				if c0 != ' ' or c2 != ' ' then
+					return new TokenStrongStar(pos, c)
+				else
+					return new TokenEmStar(pos, c)
+				end
+			end
+			if c0 != ' ' or c1 != ' ' then
+				return new TokenEmStar(pos, c)
+			else
+				return new TokenNone(pos, c)
+			end
+		else if c == '_' then
+			if c1 == '_' then
+				if c0 != ' ' or c2 != ' 'then
+					return new TokenStrongUnderscore(pos, c)
+				else
+					return new TokenEmUnderscore(pos, c)
+				end
+			end
+			if c0 != ' ' or c1 != ' ' then
+				return new TokenEmUnderscore(pos, c)
+			else
+				return new TokenNone(pos, c)
+			end
+		else if c == '!' then
+			if c1 == '[' then return new TokenImage(pos, c)
+			return new TokenNone(pos, c)
+		else if c == '[' then
+			return new TokenLink(pos, c)
+		else if c == ']' then
+			return new TokenNone(pos, c)
+		else if c == '`' then
+			if c1 == '`' then
+				return new TokenCodeDouble(pos, c)
+			else
+				return new TokenCodeSingle(pos, c)
+			end
+		else if c == '\\' then
+			if c1 == '\\' or c1 == '[' or c1 == ']' or c1 == '(' or c1 == ')' or c1 == '{' or c1 == '}' or c1 == '#' or c1 == '"' or c1 == '\'' or c1 == '.' or c1 == '<' or c1 == '>' or c1 == '*' or c1 == '+' or c1 == '-' or c1 == '_' or c1 == '!' or c1 == '`' or c1 == '~' or c1 == '^' then
+				return new TokenEscape(pos, c)
+			else
+				return new TokenNone(pos, c)
+			end
+		else if c == '<' then
+			return new TokenHTML(pos, c)
+		else if c == '&' then
+			return new TokenEntity(pos, c)
+		else if c == '^' then
+			if c0 == '^' or c1 == '^' then
+				return new TokenNone(pos, c)
+			else
+				return new TokenSuper(pos, c)
+			end
+		else
+			return new TokenNone(pos, c)
+		end
+	end
+
+	# Find the position of a `token` in `self`.
+	fun find_token(text: Text, start: Int, token: Token): Int do
+		var pos = start
+		while pos < text.length do
+			if token_at(text, pos).is_same_type(token) then
+				return pos
+			end
+			pos += 1
+		end
+		return -1
+	end
 end
 
 # Emit output corresponding to blocks content.
@@ -312,7 +407,7 @@ class MarkdownEmitter
 		current_text = text
 		current_pos = start
 		while current_pos < text.length do
-			var mt = text.token_at(current_pos)
+			var mt = processor.token_at(text, current_pos)
 			if (token != null and not token isa TokenNone) and
 			(mt.is_same_type(token) or
 			(token isa TokenEmStar and mt isa TokenStrongStar) or
@@ -1675,7 +1770,7 @@ abstract class TokenCode
 
 	redef fun emit(v) do
 		var a = pos + next_pos + 1
-		var b = v.current_text.find_token(a, self)
+		var b = v.processor.find_token(v.current_text.as(not null), a, self)
 		if b > 0 then
 			v.current_pos = b + next_pos
 			while a < b and v.current_text[a] == ' ' do a += 1
@@ -1966,102 +2061,6 @@ class TokenSuper
 end
 
 redef class Text
-
-	# Get the token kind at `pos`.
-	private fun token_at(pos: Int): Token do
-		var c0: Char
-		var c1: Char
-		var c2: Char
-
-		if pos > 0 then
-			c0 = self[pos - 1]
-		else
-			c0 = ' '
-		end
-		var c = self[pos]
-
-		if pos + 1 < length then
-			c1 = self[pos + 1]
-		else
-			c1 = ' '
-		end
-		if pos + 2 < length then
-			c2 = self[pos + 2]
-		else
-			c2 = ' '
-		end
-
-		if c == '*' then
-			if c1 == '*' then
-				if c0 != ' ' or c2 != ' ' then
-					return new TokenStrongStar(pos, c)
-				else
-					return new TokenEmStar(pos, c)
-				end
-			end
-			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmStar(pos, c)
-			else
-				return new TokenNone(pos, c)
-			end
-		else if c == '_' then
-			if c1 == '_' then
-				if c0 != ' ' or c2 != ' 'then
-					return new TokenStrongUnderscore(pos, c)
-				else
-					return new TokenEmUnderscore(pos, c)
-				end
-			end
-			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmUnderscore(pos, c)
-			else
-				return new TokenNone(pos, c)
-			end
-		else if c == '!' then
-			if c1 == '[' then return new TokenImage(pos, c)
-			return new TokenNone(pos, c)
-		else if c == '[' then
-			return new TokenLink(pos, c)
-		else if c == ']' then
-			return new TokenNone(pos, c)
-		else if c == '`' then
-			if c1 == '`' then
-				return new TokenCodeDouble(pos, c)
-			else
-				return new TokenCodeSingle(pos, c)
-			end
-		else if c == '\\' then
-			if c1 == '\\' or c1 == '[' or c1 == ']' or c1 == '(' or c1 == ')' or c1 == '{' or c1 == '}' or c1 == '#' or c1 == '"' or c1 == '\'' or c1 == '.' or c1 == '<' or c1 == '>' or c1 == '*' or c1 == '+' or c1 == '-' or c1 == '_' or c1 == '!' or c1 == '`' or c1 == '~' or c1 == '^' then
-				return new TokenEscape(pos, c)
-			else
-				return new TokenNone(pos, c)
-			end
-		else if c == '<' then
-			return new TokenHTML(pos, c)
-		else if c == '&' then
-			return new TokenEntity(pos, c)
-		else if c == '^' then
-			if c0 == '^' or c1 == '^' then
-				return new TokenNone(pos, c)
-			else
-				return new TokenSuper(pos, c)
-			end
-		else
-			return new TokenNone(pos, c)
-		end
-	end
-
-	# Find the position of a `token` in `self`.
-	private fun find_token(start: Int, token: Token): Int do
-		var pos = start
-		while pos < length do
-			if token_at(pos).is_same_type(token) then
-				return pos
-			end
-			pos += 1
-		end
-		return -1
-	end
 
 	# Get the position of the next non-space character.
 	private fun skip_spaces(start: Int): Int do
