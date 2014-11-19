@@ -85,6 +85,7 @@ interface Pattern
 		return res
 	end
 
+	# Is `self` in `s`?
 	protected fun is_in(s: Text): Bool do return search_index_in(s, 0) != -1
 end
 
