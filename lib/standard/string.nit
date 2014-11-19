@@ -798,6 +798,11 @@ private abstract class BufferCharView
 
 end
 
+# A `String` holds and manipulates an arbitrary sequence of characters.
+#
+# String objects may be created using literals.
+#
+#     assert "Hello World!" isa String
 abstract class String
 	super Text
 
@@ -818,6 +823,9 @@ abstract class String
 	#     assert "abc" * 0 == ""
 	fun *(i: Int): SELFTYPE is abstract
 
+	# Insert `s` at `pos`.
+	#
+	#     assert "helloworld".insert_at(" ", 5)	== "hello world"
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 
 	redef fun substrings: Iterator[String] is abstract
@@ -1312,6 +1320,7 @@ private class FlatStringCharView
 
 end
 
+# A mutable sequence of characters.
 abstract class Buffer
 	super Text
 
@@ -1528,6 +1537,7 @@ class FlatBuffer
 	# Create a new empty string.
 	init do end
 
+	# Create a new string copied from `s`.
 	init from(s: Text)
 	do
 		capacity = s.length + 1
@@ -2118,8 +2128,14 @@ extern class NativeString `{ char* `}
 	super StringCapable
 	# Creates a new NativeString with a capacity of `length`
 	new(length: Int) is intern
+
+	# Get char at `index`.
 	fun [](index: Int): Char is intern
+
+	# Set char `item` at index.
 	fun []=(index: Int, item: Char) is intern
+
+	# Copy `self` to `dest`.
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
 
 	# Position of the first nul character.
@@ -2129,7 +2145,11 @@ extern class NativeString `{ char* `}
 		while self[l] != '\0' do l += 1
 		return l
 	end
+
+	# Parse `self` as an Int.
 	fun atoi: Int is intern
+
+	# Parse `self` as a Float.
 	fun atof: Float is extern "atof"
 
 	redef fun to_s
@@ -2137,6 +2157,7 @@ extern class NativeString `{ char* `}
 		return to_s_with_length(cstring_length)
 	end
 
+	# Returns `self` as a String of `length`.
 	fun to_s_with_length(length: Int): FlatString
 	do
 		assert length >= 0
@@ -2144,6 +2165,7 @@ extern class NativeString `{ char* `}
 		return str
 	end
 
+	# Returns `self` as a new String.
 	fun to_s_with_copy: FlatString
 	do
 		var length = cstring_length
@@ -2158,6 +2180,8 @@ end
 
 # StringCapable objects can create native strings
 interface StringCapable
+
+	# Allocate a string of `size`.
 	protected fun calloc_string(size: Int): NativeString is intern
 end
 
