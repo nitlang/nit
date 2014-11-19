@@ -205,7 +205,6 @@ class BM_Pattern
 
 	private fun compute_gs
 	do
-		var x = _motif
 		var m = _length
 		var suff = suffixes
 		var i = 0
