@@ -396,6 +396,7 @@ class GlobalCompilerVisitor
 	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
 	do
 		var ret_type = self.get_class("NativeArray").get_mtype([elttype])
+		ret_type = anchor(ret_type).as(MClassType)
 		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
 
