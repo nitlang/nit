@@ -1713,7 +1713,6 @@ private class FlatBufferCharView
 
 	redef fun append(s)
 	do
-		var my_items = target.items
 		var s_length = s.length
 		if target.capacity < s.length then enlarge(s_length + target.length)
 	end
