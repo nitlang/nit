@@ -76,7 +76,7 @@ end
 private class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
-	private var range: Range[E]
+	var range: Range[E]
 	redef var item is noinit
 
 	redef fun is_ok do return _item < _range.after
