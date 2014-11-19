@@ -13,11 +13,11 @@
 # limitations under the License.
 
 class Toto
-	super ArrayCapable[Int]
+
 
 	fun toto
 	do
-		var a = calloc_array(3)
+		var a = new NativeArray[Int](3)
 		a[0] = 10
 		a[1] = 20
 		a[2] = 30

@@ -28,7 +28,7 @@ class Toto[E]
 end
 
 class TestNative
-	super ArrayCapable[Int]
+
 
 init
 do
@@ -39,7 +39,7 @@ do
 	a[1] = 2
 	print(a[0])
 	print(a[1])
-	b = calloc_array(5)
+	b = new NativeArray[Int](5)
 	b[0]=200
 	b[1]=300
 	print(b[0])

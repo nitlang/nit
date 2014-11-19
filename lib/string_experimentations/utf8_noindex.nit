@@ -401,7 +401,7 @@ redef class FlatString
 	end
 
 	redef fun reversed do
-		var new_str = calloc_string(bytelen)
+		var new_str = new NativeString(bytelen)
 		var s_pos = bytelen
 		var my_pos = index_from
 		var its = items
@@ -415,7 +415,7 @@ redef class FlatString
 	end
 
 	redef fun to_upper do
-		var ns = calloc_string(bytelen)
+		var ns = new NativeString(bytelen)
 		var offset = 0
 		for i in [0 .. length[
 		do
@@ -427,7 +427,7 @@ redef class FlatString
 	end
 
 	redef fun to_lower do
-		var ns = calloc_string(bytelen)
+		var ns = new NativeString(bytelen)
 		var offset = 0
 		for i in [0 .. length[
 		do
@@ -441,7 +441,7 @@ redef class FlatString
 	redef fun +(o) do
 		if o isa Buffer then o = o.to_s
 		if o isa FlatString then
-			var new_str = calloc_string(bytelen + o.bytelen + 1)
+			var new_str = new NativeString(bytelen + o.bytelen + 1)
 			var new_bytelen = bytelen + o.bytelen
 			new_str[new_bytelen] = '\0'
 			var newlen = length + o.length
@@ -461,7 +461,7 @@ redef class FlatString
 		var new_bytelen = mybtlen * i
 		var mylen = length
 		var newlen = mylen * i
-		var ns = calloc_string(new_bytelen + 1)
+		var ns = new NativeString(new_bytelen + 1)
 		ns[new_bytelen] = '\0'
 		var offset = 0
 		while i > 0 do
@@ -499,7 +499,7 @@ redef class FlatString
 
 	redef fun to_cstring do
 		if real_items != null then return real_items.as(not null)
-		var new_items = calloc_string(bytelen + 1)
+		var new_items = new NativeString(bytelen + 1)
 		self.items.copy_to(new_items, bytelen, index_from, 0)
 		new_items[bytelen] = '\0'
 		self.real_items = new_items
@@ -523,7 +523,7 @@ redef class FlatBuffer
 			with_capacity(50)
 			for i in s.substrings do self.append(i)
 		end
-		items = calloc_string(s.bytelen)
+		items = new NativeString(s.bytelen)
 		if s isa FlatString then
 			s.items.copy_to(items, s.bytelen, s.index_from, 0)
 		else
@@ -611,7 +611,7 @@ redef class FlatBuffer
 		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
-		var a = calloc_string(c+1)
+		var a = new NativeString(c+1)
 		if bytelen > 0 then items.copy_to(a, bytelen, 0, 0)
 		items = a
 		capacity = c
@@ -635,7 +635,7 @@ redef class FlatBuffer
 
 	redef fun reverse
 	do
-		var nns = calloc_string(bytelen)
+		var nns = new NativeString(bytelen)
 		var ns = items
 		var btlen = bytelen
 		var myp = 0
@@ -701,7 +701,7 @@ redef class FlatBuffer
 	end
 
 	redef fun to_cstring do
-		var ns = calloc_string(bytelen)
+		var ns = new NativeString(bytelen)
 		items.copy_to(ns, bytelen, 0, 0)
 		return ns
 	end
@@ -723,7 +723,7 @@ redef class NativeString
 	redef fun to_s_with_copy
 	do
 		var length = cstring_length
-		var new_self = calloc_string(length + 1)
+		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		return new FlatString.with_bytelen(new_self, 0, length - 1, length)
 	end

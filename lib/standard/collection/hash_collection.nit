@@ -16,8 +16,8 @@ module hash_collection
 import array
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
-private abstract class HashCollection[K: Object, N: HashNode[Object]]
-	super ArrayCapable[nullable N]
+private abstract class HashCollection[K: Object]
+	type N: HashNode[K]
 
 	private var array: nullable NativeArray[nullable N] = null # Used to store items
 	private var capacity: Int = 0 # Size of _array
@@ -163,7 +163,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		_last_accessed_key = null
 
 		# get a new array
-		var new_array = calloc_array(cap)
+		var new_array = new NativeArray[nullable N](cap)
 		_array = new_array
 
 		# clean the new array
@@ -203,7 +203,9 @@ end
 # Keys of such a map cannot be null and require a working `hash` method
 class HashMap[K: Object, V]
 	super Map[K, V]
-	super HashCollection[K, HashMapNode[K, V]]
+	super HashCollection[K]
+
+	redef type N: HashMapNode[K, V] is fixed
 
 	redef fun [](key)
 	do
@@ -389,7 +391,9 @@ end
 # Keys of such a map cannot be null and require a working `hash` method
 class HashSet[E: Object]
 	super Set[E]
-	super HashCollection[E, HashSetNode[E]]
+	super HashCollection[E]
+
+	redef type N: HashSetNode[E] is fixed
 
 	redef fun length do return _the_length
 
