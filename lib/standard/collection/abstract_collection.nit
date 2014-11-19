@@ -207,7 +207,7 @@ private class ContainerIterator[E]
 
 	redef var is_ok: Bool = true
 
-	private var container: Container[E]
+	var container: Container[E]
 end
 
 # Items can be removed from this collection
@@ -944,7 +944,7 @@ private class CoupleMapIterator[K: Object, V]
 		_iter.next
 	end
 
-	private var iter: Iterator[Couple[K,V]]
+	var iter: Iterator[Couple[K,V]]
 end
 
 # Some tools ###################################################################
