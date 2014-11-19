@@ -145,7 +145,6 @@ private class Concat
 
 	redef fun +(o) do
 		var s = o.to_s
-		var mlen = length
 		var slen = s.length
 		if s isa Concat then
 			return new Concat(self, s)
