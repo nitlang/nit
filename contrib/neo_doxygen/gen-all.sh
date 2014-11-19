@@ -23,9 +23,6 @@
 # Also, every project must include the Doxygen XML output in its `doxygen/xml`
 # directory.
 
-NEO_DOXYGEN="${PWD}/bin/neo_doxygen"
-NX="${PWD}/../../bin/nx"
-
 for dir in "$2"/*; do
 	if [ -d "$dir" ]; then
 		if [ -f "$dir/.nx_config" ]; then
