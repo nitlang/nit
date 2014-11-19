@@ -30,6 +30,7 @@ import template
 # SEE: `String::md_to_html` for a shortcut.
 class MarkdownProcessor
 
+	# `MarkdownEmitter` used for ouput.
 	var emitter: MarkdownEmitter is noinit
 
 	init do self.emitter = new MarkdownEmitter(self)
@@ -370,11 +371,6 @@ class MarkdownEmitter
 	# Decorator used for output.
 	# Default is `HTMLDecorator`
 	var decorator: Decorator = new HTMLDecorator is writable
-
-	# Create a new `MardownEmitter` using the default `HTMLDecorator`
-	init(processor: MarkdownProcessor) do
-		self.processor = processor
-	end
 
 	# Create a new `MarkdownEmitter` using a custom `decorator`.
 	init with_decorator(processor: MarkdownProcessor, decorator: Decorator) do
@@ -1207,8 +1203,7 @@ class MDLine
 	var next_empty: Bool = false is writable
 
 	# Initialize a new MDLine from its string value
-	init(value: String) do
-		self.value = value
+	init do
 		self.leading = process_leading
 		if leading != value.length then
 			self.is_empty = false
