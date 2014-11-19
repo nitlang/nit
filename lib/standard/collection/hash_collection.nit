@@ -344,6 +344,7 @@ private class HashMapNode[K: Object, V]
 	private var value: V
 end
 
+# A `MapIterator` over a `HashMap`.
 class HashMapIterator[K: Object, V]
 	super MapIterator[K, V]
 	redef fun is_ok do return _node != null
