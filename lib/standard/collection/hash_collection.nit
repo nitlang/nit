@@ -19,18 +19,18 @@ import array
 private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	super ArrayCapable[nullable N]
 
-	private var array: nullable NativeArray[nullable N] = null # Used to store items
-	private var capacity: Int = 0 # Size of _array
-	private var the_length: Int = 0 # Number of items in the map
+	var array: nullable NativeArray[nullable N] = null # Used to store items
+	var capacity: Int = 0 # Size of _array
+	var the_length: Int = 0 # Number of items in the map
 
-	private var first_item: nullable N = null # First added item (used to visit items in nice order)
-	private var last_item: nullable N = null # Last added item (same)
+	var first_item: nullable N = null # First added item (used to visit items in nice order)
+	var last_item: nullable N = null # Last added item (same)
 
 	# The last key accessed (used for cache)
-	private var last_accessed_key: nullable K = null
+	var last_accessed_key: nullable K = null
 
 	# The last node accessed (used for cache)
-	private var last_accessed_node: nullable N = null
+	var last_accessed_node: nullable N = null
 
 	# Return the index of the key k
 	fun index_at(k: K): Int
@@ -191,12 +191,12 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 end
 
 private abstract class HashNode[K: Object]
-	private var key: K
+	var key: K
 	type N: HashNode[K]
-	private var next_item: nullable N = null
-	private var prev_item: nullable N = null
-	private var prev_in_bucklet: nullable N = null
-	private var next_in_bucklet: nullable N = null
+	var next_item: nullable N = null
+	var prev_item: nullable N = null
+	var prev_in_bucklet: nullable N = null
+	var next_in_bucklet: nullable N = null
 end
 
 # A map implemented with a hash table.
@@ -341,7 +341,7 @@ end
 private class HashMapNode[K: Object, V]
 	super HashNode[K]
 	redef type N: HashMapNode[K, V]
-	private var value: V
+	var value: V
 end
 
 # A `MapIterator` over a `HashMap`.
@@ -462,10 +462,10 @@ private class HashSetIterator[E: Object]
 	end
 
 	# The set to iterate on
-	private var set: HashSet[E]
+	var set: HashSet[E]
 
 	# The position in the internal map storage
-	private var node: nullable HashSetNode[E] = null
+	var node: nullable HashSetNode[E] = null
 
 	init
 	do
