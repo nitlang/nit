@@ -777,7 +777,7 @@ private abstract class StringCharView
 
 	type SELFTYPE: Text
 
-	private var target: SELFTYPE
+	var target: SELFTYPE
 
 	redef fun is_empty do return target.is_empty
 
