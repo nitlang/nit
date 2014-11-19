@@ -21,6 +21,8 @@ import hash_collection
 import union_find
 
 redef class Sequence[E]
+
+	# Copy the content of `self` between `start` and `len` to a new Array.
 	fun subarray(start, len: Int): Array[E]
 	do
 		var a = new Array[E].with_capacity(len)
