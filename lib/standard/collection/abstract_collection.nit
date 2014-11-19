@@ -334,6 +334,10 @@ interface Set[E: Object]
 		return nhs
 	end
 
+	# Returns a new instance of `Set`.
+	#
+	# Depends on the subclass, mainly used for copy services
+	# like `union` or `intersection`.
 	protected fun new_set: Set[E] is abstract
 end
 
