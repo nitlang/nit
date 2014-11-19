@@ -758,8 +758,6 @@ abstract class FlatText
 
 	redef var length: Int = 0
 
-	init do end
-
 	redef fun output
 	do
 		var i = 0
