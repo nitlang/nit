@@ -206,15 +206,15 @@ class NeoDoxygenCommand
 		opt_dest.default_value = default_dest
 		option_context.add_option(opt_dest)
 
+		opt_help = new OptionBool("Show the help (this page).",
+				"-h", "--help")
+		option_context.add_option(opt_help)
+
 		var keys = new Array[String].from(sources.keys)
 		opt_src_lang = new OptionEnum(keys,
 				"The programming language to assume when processing chunk in the declarations left as-is by Doxygen. Use `any` (the default) to disable any language-specific processing.",
 				keys.index_of("any"), "--src-lang")
 		option_context.add_option(opt_src_lang)
-
-		opt_help = new OptionBool("Show the help (this page).",
-				"-h", "--help")
-		option_context.add_option(opt_help)
 	end
 
 	# Start the application.
