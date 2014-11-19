@@ -19,10 +19,33 @@ import poset
 
 # A counter counts occurrences of things
 # Use this instead of a `HashMap[E, Int]`
+#
+# ~~~
+# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+# assert c["a"]   == 2
+# assert c["b"]   == 3
+# assert c["c"]   == 1
+# assert c["d"]   == 0
+# ~~~
+#
+# The counter class can also be used to gather statistical informations.
+#
+# ~~~~
+# assert c.length == 3   # because 3 distinct values
+# assert c.max    == "b" # because "b" has the most count (3)
+# assert c.avg    == 2.0 # because it is the mean of the counts
+# ~~~~
 class Counter[E: Object]
 	super Map[E, Int]
 
 	# Total number of counted occurrences
+	#
+	# ~~~
+	# var c = new Counter[String]
+	# assert c.sum == 0
+	# c.inc_all(["a", "a", "b", "b", "b", "c"])
+	# assert c.sum == 6
+	# ~~~
 	var sum: Int = 0
 
 	private var map = new HashMap[E, Int]
@@ -64,7 +87,24 @@ class Counter[E: Object]
 		sum += 1
 	end
 
+	# Count one more for each element of `es`
+	fun inc_all(es: Collection[E])
+	do
+		for e in es do inc(e)
+	end
+
+	# A new Counter initialized with `inc_all`.
+	init from(es: Collection[E])
+	do
+		inc_all(es)
+	end
+
 	# Return an array of elements sorted by occurrences
+	#
+	# ~~~
+	# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+	# assert c.sort == ["c", "a", "b"]
+	# ~~~
 	fun sort: Array[E]
 	do
 		var res = map.keys.to_a
@@ -77,7 +117,7 @@ class Counter[E: Object]
 	# @toimplement by default just call `to_s` on the element
 	protected fun element_to_s(e: E): String
 	do
-		do return e.to_s
+		return e.to_s
 	end
 
 	# Display statistical information
@@ -130,7 +170,14 @@ class Counter[E: Object]
 		end
 	end
 
-	# Return the element with the highest value
+	# Return the element with the highest value (aka. the mode)
+	#
+	# ~~~
+	# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+	# assert c.max == "b"
+	# ~~~
+	#
+	# If more than one max exists, the first one is returned.
 	fun max: nullable E do
 		var max: nullable Int = null
 		var elem: nullable E = null
@@ -144,6 +191,13 @@ class Counter[E: Object]
 	end
 
 	# Return the couple with the lowest value
+	#
+	# ~~~
+	# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+	# assert c.min == "c"
+	# ~~~
+	#
+	# If more than one min exists, the first one is returned.
 	fun min: nullable E do
 		var min: nullable Int = null
 		var elem: nullable E = null
@@ -156,13 +210,24 @@ class Counter[E: Object]
 		return elem
 	end
 
-	# Values average
+	# Values average (aka. arithmetic mean)
+	#
+	# ~~~
+	# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+	# assert c.avg == 2.0
+	# ~~~
 	fun avg: Float do
 		if values.is_empty then return 0.0
 		return (sum / values.length).to_f
 	end
 
 	# The standard derivation of the counter values
+	#
+	# ~~~
+	# var c = new Counter[String].from(["a", "a", "b", "b", "b", "c"])
+	# assert c.std_dev > 0.81
+	# assert c.std_dev < 0.82
+	# ~~~
 	fun std_dev: Float do
 		var avg = self.avg
 		var sum = 0.0
