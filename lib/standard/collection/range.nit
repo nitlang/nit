@@ -49,8 +49,13 @@ class Range[E: Discrete]
 
 	redef fun iterator do return new IteratorRange[E](self)
 
+	#     assert [1..10].length		== 10
+	#     assert [1..10[.length		== 9
+	#     assert [1..1].length		== 1
+	#     assert [1..-10].length	== 0
 	redef fun length
 	do
+		if is_empty then return 0
 		var nb = first.distance(after)
 		if nb > 0 then
 			return nb
