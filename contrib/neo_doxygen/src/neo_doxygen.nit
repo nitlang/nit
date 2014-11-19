@@ -50,25 +50,32 @@ class NeoDoxygenJob
 		var reader = new CompoundFileReader(model, source)
 		# Queue for sub-directories.
 		var directories = new Array[String]
+		var file_count = 0
 
-		if dir.length > 1 and dir.chars.last == "/" then
-			dir = dir.substring(0, dir.length - 1)
+		if dir == "" then
+			sys.stdout.write "Reading the current directory... "
+		else
+			sys.stdout.write "Reading {dir}... "
 		end
-		sys.stdout.write save_cursor
 		loop
 			for f in dir.files do
 				var path = dir/f
 				if path.file_stat.is_dir then
 					directories.push(path)
 				else if f.has_suffix(".xml") and f != "index.xml" then
-					print "{reset_line}Reading {path}..."
 					reader.read(path)
+					file_count += 1
 				end
 			end
 			if directories.length <= 0 then break
 			dir = directories.pop
 		end
-		print "{reset_line}Reading... Done."
+		print "Done."
+		if file_count < 2 then
+			print "{file_count} file read."
+		else
+			print "{file_count} files read."
+		end
 	end
 
 	# Check the project’s name.
@@ -89,14 +96,14 @@ class NeoDoxygenJob
 
 	# Save the graph.
 	fun save do
-		print "Linking nodes...{save_cursor}"
+		sys.stdout.write "Linking nodes...{save_cursor} "
 		model.put_edges
 		print "{reset_line} Done."
 		var nodes = model.all_nodes
-		print "Saving {nodes.length} nodes...{save_cursor}"
+		sys.stdout.write "Saving {nodes.length} nodes...{save_cursor} "
 		push_all(nodes)
 		var edges = model.all_edges
-		print "Saving {edges.length} edges...{save_cursor}"
+		sys.stdout.write "Saving {edges.length} edges...{save_cursor} "
 		push_all(edges)
 	end
 
@@ -112,7 +119,7 @@ class NeoDoxygenJob
 			if i == batch_max_size then
 				do_batch(batch)
 				sum += batch_max_size
-				print("{reset_line} {sum * 100 / len}%")
+				sys.stdout.write("{reset_line} {sum * 100 / len}% ")
 				batch = new NeoBatch(client)
 				i = 1
 			else
