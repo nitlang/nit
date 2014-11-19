@@ -430,7 +430,7 @@ private class ArrayIterator[E]
 
 	redef var index = 0
 
-	private var array: AbstractArrayRead[E]
+	var array: AbstractArrayRead[E]
 end
 
 private class ArrayReverseIterator[E]
@@ -509,7 +509,7 @@ private class ArraySetIterator[E: Object]
 
 	redef fun item: E do return _iter.item
 
-	private var iter: ArrayIterator[E]
+	var iter: ArrayIterator[E]
 end
 
 
