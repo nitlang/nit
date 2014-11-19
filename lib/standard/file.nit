@@ -65,7 +65,7 @@ class IFStream
 
 	redef fun close
 	do
-		var i = _file.io_close
+		_file.io_close
 		_buffer.clear
 		end_reached = true
 	end
@@ -114,7 +114,7 @@ class OFStream
 
 	redef fun close
 	do
-		var i = _file.io_close
+		_file.io_close
 		_is_writable = false
 	end
 
