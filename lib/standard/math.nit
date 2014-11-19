@@ -116,33 +116,61 @@ end
 redef class Float
 
 	# Returns the non-negative square root of `self`.
+	#
+	#     assert 9.0.sqrt == 3.0
+	#     #assert 3.0.sqrt == 1.732
+	#     assert 1.0.sqrt == 1.0
+	#     assert 0.0.sqrt == 0.0
 	fun sqrt: Float is extern "kernel_Float_Float_sqrt_0"
 
 	# Computes the cosine of `self` (expressed in radians).
+	#
+	#     #assert pi.cos == -1.0
 	fun cos: Float is extern "kernel_Float_Float_cos_0"
 
 	# Computes the sine of `self` (expressed in radians).
+	#
+	#     #assert pi.sin == 0.0
 	fun sin: Float is extern "kernel_Float_Float_sin_0"
 
 	# Computes the cosine of x (expressed in radians).
+	#
+	#     #assert 0.0.tan == 0.0
 	fun tan: Float is extern "kernel_Float_Float_tan_0"
 
 	# Computes the arc cosine of `self`.
+	#
+	#     #assert 0.0.acos == pi / 2.0
 	fun acos: Float is extern "kernel_Float_Float_acos_0"
 
 	# Computes the arc sine of `self`.
+	#
+	#     #assert 1.0.asin == pi / 2.0
 	fun asin: Float is extern "kernel_Float_Float_asin_0"
 
 	# Computes the arc tangent of `self`.
+	#
+	#     #assert 0.0.tan == 0.0
 	fun atan: Float is extern "kernel_Float_Float_atan_0"
 
 	# Returns the absolute value of `self`.
+	#
+	#     assert 12.0.abs == 12.0
+	#     assert (-34.56).abs == 34.56
+	#     assert -34.56.abs == -34.56
 	fun abs: Float `{ return fabs(recv); `}
 
 	# Returns `self` raised at `e` power.
+	#
+	#     #assert 2.0.pow(0.0) == 1.0
+	#     #assert 2.0.pow(3.0) == 8.0
+	#     #assert 0.0.pow(9.0) == 0.0
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 
 	# Returns the logarithm of `self`.
+	#
+	#     assert 0.0.log.is_inf == -1
+	#     #assert 1.0.log == 0.0
 	fun log: Float is extern "kernel_Float_Float_log_0"
 
 	# Returns **e** raised to `self`.
@@ -210,6 +238,9 @@ redef class Sys
 end
 
 # Computes the arc tangent given `x` and `y`.
+#
+#     assert atan2(-0.0, 1.0) == -0.0
+#     assert atan2(0.0, 1.0) == 0.0
 fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
 
 # Approximate value of **pi**.
