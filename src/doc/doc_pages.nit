@@ -183,9 +183,7 @@ end
 # All entities are grouped by name to make the research easier.
 class QuickSearch
 
-	private var mmodules = new HashSet[MModule]
-	private var mclasses = new HashSet[MClass]
-	private var mpropdefs = new HashMap[String, Set[MPropDef]]
+	private var table = new QuickSearchTable
 
 	var ctx: ToolContext
 	var model: Model
@@ -193,48 +191,69 @@ class QuickSearch
 	init do
 		for mmodule in model.mmodules do
 			if mmodule.is_fictive then continue
-			mmodules.add mmodule
+			add_result_for(mmodule.name, mmodule.full_name, mmodule.nitdoc_url)
 		end
 		for mclass in model.mclasses do
 			if mclass.visibility < ctx.min_visibility then continue
-			mclasses.add mclass
+			add_result_for(mclass.name, mclass.full_name, mclass.nitdoc_url)
 		end
 		for mproperty in model.mproperties do
 			if mproperty.visibility < ctx.min_visibility then continue
 			if mproperty isa MAttribute then continue
-			if not mpropdefs.has_key(mproperty.name) then
-				mpropdefs[mproperty.name] = new HashSet[MPropDef]
+			for mpropdef in mproperty.mpropdefs do
+				var full_name = mpropdef.mclassdef.mclass.full_name
+				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
+				var def_url = "{cls_url}#{mpropdef.mproperty.nitdoc_id}"
+				add_result_for(mproperty.name, full_name, def_url)
 			end
-			mpropdefs[mproperty.name].add_all(mproperty.mpropdefs)
 		end
+	end
+
+	private fun add_result_for(query: String, txt: String, url: String) do
+		table[query].add new QuickSearchResult(txt, url)
 	end
 
 	fun render: Template do
 		var tpl = new Template
-		tpl.add "var nitdocQuickSearchRawList=\{ "
-		for mmodule in mmodules do
-			tpl.add "{mmodule.name.to_json}:["
-			tpl.add "\{txt:{mmodule.full_name.to_json},url:{mmodule.nitdoc_url.to_json}\},"
-			tpl.add "],"
-		end
-		for mclass in mclasses do
-			var full_name = mclass.intro.mmodule.full_name
-			tpl.add "{mclass.name.to_json}:["
-			tpl.add "\{txt:{full_name.to_json},url:{mclass.nitdoc_url.to_json}\},"
-			tpl.add "],"
-		end
-		for mproperty, mprops in mpropdefs do
-			tpl.add "{mproperty.to_json}:["
-			for mpropdef in mprops do
-				var full_name = mpropdef.mclassdef.mclass.full_name
-				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
-				var def_url = "{cls_url}#{mpropdef.mproperty.nitdoc_id}"
-				tpl.add "\{txt:{full_name.to_json},url:{def_url.to_json}\},"
-			end
-			tpl.add "],"
-		end
-		tpl.add " \};"
+		var buffer = new RopeBuffer
+		tpl.add buffer
+		buffer.append "var nitdocQuickSearchRawList="
+		table.append_json buffer
+		buffer.append ";"
 		return tpl
+	end
+end
+
+# The result map for QuickSearch.
+private class QuickSearchTable
+	super JsonMapRead[String, QuickSearchResultList]
+	super HashMap[String, QuickSearchResultList]
+
+	redef fun provide_default_value(key) do
+		var v = new QuickSearchResultList
+		self[key] = v
+		return v
+	end
+end
+
+# A QuickSearch result list.
+private class QuickSearchResultList
+	super JsonSequenceRead[QuickSearchResult]
+	super Array[QuickSearchResult]
+end
+
+# A QuickSearch result.
+private class QuickSearchResult
+	super Jsonable
+
+	# The text of the link.
+	var txt: String
+
+	# The destination of the link.
+	var url: String
+
+	redef fun to_json do
+		return "\{\"txt\":{txt.to_json},\"url\":{url.to_json}\}"
 	end
 end
 
