@@ -244,6 +244,7 @@ abstract class BufferedIStream
 	end
 end
 
+# An Input/Output Stream
 interface IOStream
 	super IStream
 	super OStream
@@ -251,6 +252,7 @@ end
 
 ##############################################################"
 
+# A File Descriptor Stream.
 abstract class FDStream
 	super IOS
 	# File description
@@ -265,6 +267,7 @@ abstract class FDStream
 	private fun native_write_char(i: Int, c: Char): Int is extern "stream_FDStream_FDStream_native_write_char_2"
 end
 
+# An Input File Descriptor Stream.
 class FDIStream
 	super FDStream
 	super IStream
@@ -278,6 +281,7 @@ class FDIStream
 	end
 end
 
+# An Output File Descriptor Stream.
 class FDOStream
 	super FDStream
 	super OStream
@@ -290,6 +294,7 @@ class FDOStream
 	end
 end
 
+# An Input/Output File Descriptor Stream.
 class FDIOStream
 	super FDIStream
 	super FDOStream
@@ -389,7 +394,9 @@ class StringOStream
 		content.add(str.to_s)
 	end
 
+	# Is the stream closed?
 	protected var closed = false
+
 	redef fun close do closed = true
 end
 
