@@ -94,7 +94,7 @@ private class Concat
 	# Right child of the node
 	var right: String
 
-	init(l: String, r: String) do
+	init(l: String, r: String) is old_style_init do
 		left = l
 		right = r
 		length = l.length + r.length
@@ -485,7 +485,7 @@ private class RopeReviter
 	# the Rope traversal.
 	var subs: IndexedIterator[String]
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		pos = root.length - 1
 		subs = new ReverseRopeSubstrings(root)
 		ns = subs.item
@@ -532,7 +532,7 @@ private class RopeIter
 	# Position (char) in the Rope (0-indexed)
 	var pos: Int
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		subs = new RopeSubstrings(root)
 		pns = 0
 		str = subs.item
@@ -578,7 +578,7 @@ private class ReverseRopeSubstrings
 	# Current leaf
 	var str: String is noinit
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		var r = new RopeIterPiece(root, false, true, null)
 		pos = root.length - 1
 		var lnod: String = root
@@ -663,7 +663,7 @@ private class RopeBufSubstringIterator
 	# Did we attain the buffered part ?
 	var nsstr_done = false
 
-	init(str: RopeBuffer) do
+	init(str: RopeBuffer) is old_style_init do
 		iter = str.str.substrings
 		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
 		if str.length == 0 then nsstr_done = true
@@ -700,7 +700,7 @@ private class RopeSubstrings
 	# Current leaf
 	var str: String is noinit
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		var r = new RopeIterPiece(root, true, false, null)
 		pos = 0
 		max = root.length - 1
@@ -786,7 +786,7 @@ private class RopeChars
 
 	var tgt: RopeString
 
-	init(s: RopeString) do tgt = s
+	init(s: RopeString) is old_style_init do tgt = s
 
 	redef fun [](i) do
 		return tgt[i]
@@ -811,7 +811,7 @@ class RopeBufferIter
 
 	redef var index: Int
 
-	init(t: RopeBuffer) do
+	init(t: RopeBuffer) is old_style_init do
 		ns = t.ns
 		maxpos = t.rpos
 		sit = t.str.chars.iterator
@@ -855,7 +855,7 @@ class RopeBufferReviter
 
 	redef var index: Int
 
-	init(tgt: RopeBuffer) do
+	init(tgt: RopeBuffer) is old_style_init do
 		sit = tgt.str.chars.reverse_iterator
 		pns = tgt.rpos - 1
 		index = tgt.length - 1
