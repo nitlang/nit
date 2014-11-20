@@ -48,8 +48,7 @@ class Process
 	var arguments: nullable Array[String]
 
 	# Launch a command with some arguments
-	init(command: String, arguments: String...)
-	do
+	init(command: String, arguments: String...) is old_style_init do
 		self.command = command
 		self.arguments = arguments
 		execute
