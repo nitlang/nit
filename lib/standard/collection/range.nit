@@ -27,10 +27,17 @@ class Range[E: Discrete]
 	# Get the element after the last one.
 	var after: E
 
+	#     assert [1..10].has(5)
+	#     assert [1..10].has(10)
+	#     assert not [1..10[.has(10)
 	redef fun has(item) do return item >= first and item <= last
 
+	#     assert [1..1].has_only(1)
+	#     assert not [1..10].has_only(1)
 	redef fun has_only(item) do return first == item and item == last or is_empty
 
+	#     assert [1..10].count(1)	== 1
+	#     assert [1..10].count(0)	== 0
 	redef fun count(item)
 	do
 		if has(item) then
@@ -52,10 +59,18 @@ class Range[E: Discrete]
 		end
 	end
 
+	#     assert not [1..10[.is_empty
+	#     assert not [1..1].is_empty
+	#     assert [1..-10].is_empty
 	redef fun is_empty do return first >= after
 
 	# Create a range [`from`, `to`].
 	# The syntax `[from..to]` is equivalent.
+	#
+	#     var a = [10..15]
+	#     var b = new Range[Int] (10,15)
+	#     assert a == b
+	#     assert a.to_a == [10, 11, 12, 13, 14, 15]
 	init(from: E, to: E) is old_style_init do
 		first = from
 		last = to
@@ -64,6 +79,11 @@ class Range[E: Discrete]
 
 	# Create a range [`from`, `to`[.
 	# The syntax `[from..to[` is equivalent.
+	#
+	#     var a = [10..15[
+	#     var b = new Range[Int].without_last(10,15)
+	#     assert a == b
+	#     assert a.to_a == [10, 11, 12, 13, 14]
 	init without_last(from: E, to: E)
 	do
 		first = from
