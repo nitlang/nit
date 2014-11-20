@@ -83,6 +83,16 @@ class MarkdownProcessor
 	#
 	#		<p>Con_cat_this</p>
 	#
+	# * Strikethrough
+	#
+	#   Like in [GFM](https://help.github.com/articles/github-flavored-markdown),
+	#   strikethrought span is marked with `~~`.
+	#
+	#		~~Mistaken text.~~
+	#
+	#   becomes
+	#
+	#		<del>Mistaken text.</del>
 	var ext_mode = false
 
 	init do self.emitter = new MarkdownEmitter(self)
@@ -398,6 +408,11 @@ class MarkdownProcessor
 		else if c == '&' then
 			return new TokenEntity(pos, c)
 		else
+			if ext_mode then
+				if c == '~' and c1 == '~' then
+					return new TokenStrike(pos, c)
+				end
+			end
 			return new TokenNone(pos, c)
 		end
 	end
@@ -575,6 +590,11 @@ interface Decorator
 	# Render a strong text.
 	fun add_strong(v: MarkdownEmitter, text: Text) is abstract
 
+	# Render a strike text.
+	#
+	# Extended mode only (see `MarkdownProcessor::ext_mode`)
+	fun add_strike(v: MarkdownEmitter, text: Text) is abstract
+
 	# Render a link.
 	fun add_link(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
 
@@ -686,6 +706,12 @@ class HTMLDecorator
 		v.add "<strong>"
 		v.add text
 		v.add "</strong>"
+	end
+
+	redef fun add_strike(v, text) do
+		v.add "<del>"
+		v.add text
+		v.add "</del>"
 	end
 
 	redef fun add_image(v, link, name, comment) do
@@ -2082,6 +2108,25 @@ class TokenEscape
 	redef fun emit(v) do
 		v.current_pos += 1
 		v.addc v.current_text[v.current_pos]
+	end
+end
+
+# A markdown strike token.
+#
+# Extended mode only (see `MarkdownProcessor::ext_mode`)
+class TokenStrike
+	super Token
+
+	redef fun emit(v) do
+		var tmp = v.push_buffer
+		var b = v.emit_text_until(v.current_text.as(not null), pos + 2, self)
+		v.pop_buffer
+		if b > 0 then
+			v.decorator.add_strike(v, tmp)
+			v.current_pos = b + 1
+		else
+			v.addc char
+		end
 	end
 end
 

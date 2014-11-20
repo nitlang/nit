@@ -986,6 +986,23 @@ break</a> with a line-ending space.</p>
 		assert res == exp
 	end
 
+	fun test_process_strike do
+		var test = "This is how you ~~strike text~~"
+		var exp = "<p>This is how you ~~strike text~~</p>\n"
+		var res = test.md_to_html.write_to_string
+		assert exp == res
+	end
+
+	fun test_process_strike_ext do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = true
+		var test = "This is how you ~~strike text~~"
+		var exp = "<p>This is how you <del>strike text</del></p>\n"
+		var res = proc.process(test).write_to_string
+		assert exp == res
+	end
+
+
 	fun test_daring_encoding do
 		var test = """
 AT&T has an ampersand in their name.
