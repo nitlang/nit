@@ -138,6 +138,14 @@ redef class Float
 	#     assert 2.0.floor == 2.0
 	#     assert (-1.5).floor == -2.0
 	fun floor: Float `{ return floor(recv); `}
+
+	# Rounds the value of a float to its nearest integer value
+	#
+	#     assert 1.67.round == 2.0
+	#     assert 1.34.round == 1.0
+	#     assert -1.34.round == -1.0
+	#     assert -1.67.round == -2.0
+	fun round: Float is extern "round"
 	
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
