@@ -21,7 +21,7 @@ NEO4J_DIR=/var/lib/neo4j
 # Compile the tool.
 bin:
 	mkdir -p bin
-	../../bin/nitg --dir bin src/neo_doxygen.nit
+	$(NITG) $(NITG_FLAGS) src/neo_doxygen.nit
 
 # Reset the local graph.
 reset-neo:
