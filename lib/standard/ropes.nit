@@ -797,19 +797,25 @@ private class RopeChars
 
 end
 
+# An Iterator over a RopeBuffer.
 class RopeBufferIter
 	super IndexedIterator[Char]
 
+	# Subiterator.
 	var sit: IndexedIterator[Char]
 
+	# Native string iterated over.
 	var ns: NativeString
 
+	# Current position in `ns`.
 	var pns: Int
 
+	# Maximum position iterable.
 	var maxpos: Int
 
 	redef var index: Int
 
+	# Init the iterator from a RopeBuffer.
 	init(t: RopeBuffer) is old_style_init do
 		ns = t.ns
 		maxpos = t.rpos
@@ -818,6 +824,7 @@ class RopeBufferIter
 		index = 0
 	end
 
+	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
 		ns = t.ns
 		maxpos = t.length
@@ -843,17 +850,22 @@ class RopeBufferIter
 	end
 end
 
+# Reverse iterator over a RopeBuffer.
 class RopeBufferReviter
 	super IndexedIterator[Char]
 
+	# Subiterator.
 	var sit: IndexedIterator[Char]
 
+	# Native string iterated over.
 	var ns: NativeString
 
+	# Current position in `ns`.
 	var pns: Int
 
 	redef var index: Int
 
+	# Init the iterator from a RopeBuffer.
 	init(tgt: RopeBuffer) is old_style_init do
 		sit = tgt.str.chars.reverse_iterator
 		pns = tgt.rpos - 1
@@ -861,6 +873,7 @@ class RopeBufferReviter
 		ns = tgt.ns
 	end
 
+	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(tgt: RopeBuffer, pos: Int) do
 		sit = tgt.str.chars.reverse_iterator_from(pos - tgt.rpos - tgt.dumped)
 		pns = pos - tgt.str.length
