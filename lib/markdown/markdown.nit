@@ -33,6 +33,58 @@ class MarkdownProcessor
 	# `MarkdownEmitter` used for ouput.
 	var emitter: MarkdownEmitter is noinit
 
+	# Work in extended mode.
+	#
+	# Behavior changes when using extended mode:
+	#
+	# * Lists and code blocks end a paragraph
+	#
+	#   In normal markdown the following:
+	#
+	#		This is a paragraph
+	#		* and this is not a list
+	#
+	#   Will produce:
+	#
+	#		<p>This is a paragraph
+	#		* and this is not a list</p>
+	#
+	#	When using extended mode this changes to:
+	#
+	#		<p>This is a paragraph</p>
+	#		<ul>
+	#		<li>and this is not a list</li>
+	#		</ul>
+	#
+	# * Fences code blocks
+	#
+	#   If you don't want to indent your all your code with 4 spaces,
+	#   you can wrap your code in ``` ``` ``` or `~~~`.
+	#
+	#	Here's an example:
+	#
+	#		```
+	#		fun test do
+	#			print "Hello World!"
+	#		end
+	#		```
+	#
+	# * Underscores (Emphasis)
+	#
+	#   Underscores in the middle of a word like:
+	#
+	#		Con_cat_this
+	#
+	#	normally produces this:
+	#
+	#		<p>Con<em>cat</em>this</p>
+	#
+	#   With extended mode they don't result in emphasis.
+	#
+	#		<p>Con_cat_this</p>
+	#
+	var ext_mode = false
+
 	init do self.emitter = new MarkdownEmitter(self)
 
 	# Process the mardown `input` string and return the processed output.
@@ -219,12 +271,14 @@ class MarkdownProcessor
 		if value[leading] == '#' then return new LineHeadline
 		if value[leading] == '>' then return new LineBlockquote
 
-		if value.length - leading - trailing > 2 then
-			if value[leading] == '`' and md.count_chars_start('`') >= 3 then
-				return new LineFence
-			end
-			if value[leading] == '~' and md.count_chars_start('~') >= 3 then
-				return new LineFence
+		if ext_mode then
+			if value.length - leading - trailing > 2 then
+				if value[leading] == '`' and md.count_chars_start('`') >= 3 then
+					return new LineFence
+				end
+				if value[leading] == '~' and md.count_chars_start('~') >= 3 then
+					return new LineFence
+				end
 			end
 		end
 
@@ -303,6 +357,14 @@ class MarkdownProcessor
 			if c1 == '_' then
 				if c0 != ' ' or c2 != ' 'then
 					return new TokenStrongUnderscore(pos, c)
+				else
+					return new TokenEmUnderscore(pos, c)
+				end
+			end
+			if ext_mode then
+				if (c0.is_letter or c0.is_digit) and c0 != '_' and
+				   (c1.is_letter or c1.is_digit) then
+					return new TokenNone(pos, c)
 				else
 					return new TokenEmUnderscore(pos, c)
 				end
@@ -1394,10 +1456,10 @@ class LineOther
 		var was_empty = line.prev_empty
 		while line != null and not line.is_empty do
 			var t = v.line_kind(line)
-			if v.in_list and t isa LineList then
+			if (v.in_list or v.ext_mode) and t isa LineList then
 				break
 			end
-			if t isa LineCode or t isa LineFence then
+			if v.ext_mode and (t isa LineCode or t isa LineFence) then
 				break
 			end
 			if t isa LineHeadline or t isa LineHeadline1 or t isa LineHeadline2 or
