@@ -680,7 +680,11 @@ abstract class MType
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
-			sub = sub.anchor_to(mmodule, anchor)
+			if sup isa MGenericType then
+				sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)
+			else
+				sub = sub.anchor_to(mmodule, anchor)
+			end
 
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then
