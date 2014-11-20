@@ -56,8 +56,7 @@ class Range[E: Discrete]
 
 	# Create a range [`from`, `to`].
 	# The syntax `[from..to[` is equivalent.
-	init(from: E, to: E)
-	do
+	init(from: E, to: E) is old_style_init do
 		first = from
 		last = to
 		after = to.successor(1)
