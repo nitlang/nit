@@ -331,6 +331,21 @@ universal Float
 		end
 	end
 
+	# Compare float numbers with a given precision.
+	#
+	# Because of the loss of precision in floating numbers,
+	# the `==` method is often not the best way to compare them.
+	#
+	# ~~~
+	# assert 0.01.is_approx(0.02, 0.1)   == true
+	# assert 0.01.is_approx(0.02, 0.001) == false
+	# ~~~
+	fun is_approx(other, precision: Float): Bool
+	do
+		assert precision >= 0.0
+		return self <= other + precision and self >= other - precision
+	end
+
 	redef fun max(other)
 	do
 		if self < other then
