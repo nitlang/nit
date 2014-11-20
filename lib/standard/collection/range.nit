@@ -55,7 +55,7 @@ class Range[E: Discrete]
 	redef fun is_empty do return first >= after
 
 	# Create a range [`from`, `to`].
-	# The syntax `[from..to[` is equivalent.
+	# The syntax `[from..to]` is equivalent.
 	init(from: E, to: E) is old_style_init do
 		first = from
 		last = to
