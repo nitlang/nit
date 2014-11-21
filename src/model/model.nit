@@ -1293,7 +1293,11 @@ class MParameterType
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
+		assert resolved_receiver isa MClassType
 		var goalclass = self.mclass
+		if resolved_receiver.mclass == goalclass then
+			return resolved_receiver.arguments[self.rank]
+		end
 		var supertypes = resolved_receiver.collect_mtypes(mmodule)
 		for t in supertypes do
 			if t.mclass == goalclass then
