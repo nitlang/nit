@@ -901,6 +901,8 @@ redef class AMethPropdef
 				return v.bool_instance(args[0].to_f.is_nan)
 			else if pname == "is_inf_extern" then
 				return v.bool_instance(args[0].to_f.is_inf != 0)
+			else if pname == "round" then
+				return v.float_instance(args[0].to_f.round)
 			end
 		else if cname == "NativeString" then
 			if pname == "new" then
