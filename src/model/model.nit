@@ -1201,6 +1201,7 @@ class MVirtualType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		if not cleanup_virtual then return self
 		assert can_resolve_for(mtype, anchor, mmodule)
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
