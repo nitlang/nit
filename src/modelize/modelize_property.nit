@@ -1090,6 +1090,11 @@ redef class ATypePropdef
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
+		if mpropdef.is_intro then
+			modelbuilder.toolcontext.info("{mpropdef} introduces new type {mprop.full_name}", 4)
+		else
+			modelbuilder.toolcontext.info("{mpropdef} redefines type {mprop.full_name}", 4)
+		end
 		set_doc(mpropdef, modelbuilder)
 
 		var atfixed = get_single_annotation("fixed", modelbuilder)
