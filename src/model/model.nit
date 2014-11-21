@@ -877,6 +877,20 @@ abstract class MType
 	#
 	# In case of conflict, the method aborts.
 	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
+
+	# Resolve the formal type to its simplest equivalent form.
+	#
+	# Formal types are either free or fixed.
+	# When it is fixed, it means that it is equivalent with a simpler type.
+	# When a formal type is free, it means that it is only equivalent with itself.
+	# This method return the most simple equivalent type of `self`.
+	#
+	# This method is mainly used for subtype test in order to sanely compare fixed.
+	#
+	# By default, return self.
+	# See the redefinitions for specific behavior in each kind of type.
+	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
+
 	# Can the type be resolved?
 	#
 	# In order to resolve open types, the formal types must make sence.
@@ -1178,6 +1192,7 @@ class MVirtualType
 		var res  = props.first
 		for p in props do
 			types.add(p.bound.as(not null))
+			if not res.is_fixed then res = p
 		end
 		if types.length == 1 then
 			return res
@@ -1185,18 +1200,32 @@ class MVirtualType
 		abort
 	end
 
-	# Is the virtual type fixed for a given resolved_receiver?
-	fun is_fixed(mmodule: MModule, resolved_receiver: MType): Bool
+	# A VT is fixed when:
+	# * the VT is (re-)defined with the annotation `is fixed`
+	# * the VT is (indirectly) bound to an enum class (see `enum_kind`) since there is no subtype possible
+	# * the receiver is an enum class since there is no subtype possible
+	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
-		if props.is_empty then
-			abort
-		end
-		for p in props do
-			if p.as(MVirtualTypeDef).is_fixed then return true
-		end
-		return false
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
+
+		var prop = lookup_single_definition(mmodule, resolved_receiver)
+		var res = prop.bound.as(not null)
+
+		# Recursively lookup the fixed result
+		res = res.lookup_fixed(mmodule, resolved_receiver)
+
+		# 1. For a fixed VT, return the resolved bound
+		if prop.is_fixed then return res
+
+		# 2. For a enum boud, return the bound
+		if res isa MClassType and res.mclass.kind == enum_kind then return res
+
+		# 3. for a enum receiver return the bound
+		if resolved_receiver.mclass.kind == enum_kind then return res
+
+		return self
 	end
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
@@ -1207,36 +1236,19 @@ class MVirtualType
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
-		var resolved_reciever
+		var resolved_receiver
 		if mtype.need_anchor then
 			assert anchor != null
-			resolved_reciever = mtype.resolve_for(anchor, null, mmodule, true)
+			resolved_receiver = mtype.resolve_for(anchor, null, mmodule, true)
 		else
-			resolved_reciever = mtype
+			resolved_receiver = mtype
 		end
 		# Now, we can get the bound
-		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
+		var verbatim_bound = lookup_bound(mmodule, resolved_receiver)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
 		var res = verbatim_bound.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		#print "{class_name}: {self}/{mtype}/{anchor} -> {self}/{resolved_receiver}/{anchor} -> {verbatim_bound}/{mtype}/{anchor} -> {res}"
 
-		# What to return here? There is a bunch a special cases:
-		# If 'cleanup_virtual' we must return the resolved type, since we cannot return self
-		if cleanup_virtual then return res
-		# If the receiver is a intern class, then the virtual type cannot be redefined since there is no possible subclass. self is just fixed. so simply return the resolution
-		if resolved_reciever isa MNullableType then resolved_reciever = resolved_reciever.mtype
-		if resolved_reciever.as(MClassType).mclass.kind == enum_kind then return res
-		# If the resolved type isa MVirtualType, it means that self was bound to it, and cannot be unbound. self is just fixed. so return the resolution.
-		if res isa MVirtualType then return res
-		# If we are final, just return the resolution
-		if is_fixed(mmodule, resolved_reciever) then return res
-		# If the resolved type isa intern class, then there is no possible valid redefinition in any potential subclass. self is just fixed. so simply return the resolution
-		if res isa MClassType and res.mclass.kind == enum_kind then return res
-		# TODO: What if bound to a MParameterType?
-		# Note that Nullable types can always be redefined by the non nullable version, so there is no specific case on it.
-
-		# If anything apply, then `self' cannot be resolved, so return self
-		return self
+		return res
 	end
 
 	redef fun can_resolve_for(mtype, anchor, mmodule)
@@ -1309,6 +1321,20 @@ class MParameterType
 			end
 		end
 		abort
+	end
+
+	# A PT is fixed when:
+	# * Its bound is a enum class (see `enum_kind`).
+	#   The PT is just useless, but it is still a case.
+	# * More usually, the `resolved_receiver` is a subclass of `self.mclass`,
+	#   so it is necessarily fixed in a `super` clause, either with a normal type
+	#   or with another PT.
+	#   See `resolve_for` for examples about related issues.
+	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
+	do
+		assert resolved_receiver isa MClassType
+		var res = self.resolve_for(resolved_receiver.mclass.mclass_type, resolved_receiver, mmodule, false)
+		return res
 	end
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
@@ -1405,6 +1431,14 @@ class MNullableType
 	redef fun can_resolve_for(mtype, anchor, mmodule)
 	do
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
+		if t == mtype then return self
+		return t.as_nullable
 	end
 
 	redef fun depth do return self.mtype.depth
