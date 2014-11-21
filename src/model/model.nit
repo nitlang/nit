@@ -631,24 +631,18 @@ abstract class MType
 	do
 		var sub = self
 		if sub == sup then return true
+
+		#print "1.is {sub} a {sup}? ===="
+
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
 		else
+			# First, resolve the formal types to the simplest equivalent forms in the receiver
 			assert sub.can_resolve_for(anchor, null, mmodule)
+			sub = sub.lookup_fixed(mmodule, anchor)
 			assert sup.can_resolve_for(anchor, null, mmodule)
-		end
-
-		# First, resolve the formal types to a common version in the receiver
-		# The trick here is that fixed formal type will be associated to the bound
-		# And unfixed formal types will be associated to a canonical formal type.
-		if sub isa MParameterType or sub isa MVirtualType then
-			assert anchor != null
-			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
-		end
-		if sup isa MParameterType or sup isa MVirtualType then
-			assert anchor != null
-			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
+			sup = sup.lookup_fixed(mmodule, anchor)
 		end
 
 		# Does `sup` accept null or not?
@@ -672,15 +666,17 @@ abstract class MType
 		end
 		# Now the case of direct null and nullable is over.
 
-		# A unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
-			return sub == sup
-		end
-
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
-		if sub isa MParameterType or sub isa MVirtualType then
+		while sub isa MParameterType or sub isa MVirtualType do
+			#print "3.is {sub} a {sup}?"
+
+			# A unfixed formal type can only accept itself
+			if sub == sup then return true
+
 			assert anchor != null
-			sub = sub.anchor_to(mmodule, anchor)
+			sub = sub.lookup_bound(mmodule, anchor)
+
+			#print "3.is {sub} a {sup}?"
 
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then
@@ -690,8 +686,14 @@ abstract class MType
 				return sup_accept_null
 			end
 		end
+		#print "4.is {sub} a {sup}? <- no more resolution"
 
 		assert sub isa MClassType # It is the only remaining type
+
+		# A unfixed formal type can only accept itself
+		if sup isa MParameterType or sup isa MVirtualType then
+			return false
+		end
 
 		if sup isa MNullType then
 			# `sup` accepts only null
