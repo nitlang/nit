@@ -12,6 +12,7 @@
 module stream
 
 intrude import ropes
+import error
 
 in "C" `{
 	#include <unistd.h>
@@ -21,14 +22,27 @@ in "C" `{
 	#include <signal.h>
 `}
 
+# Any kind of error that could be produced by an operation on Streams
+class IOError
+	super Error
+end
+
 # Abstract stream class
-interface IOS
+abstract class IOS
+	# Error produced by the file stream
+	#
+	#     var ifs = new IFStream.open("donotmakethisfile.binx")
+	#     ifs.read_all
+	#     ifs.close
+	#     assert ifs.last_error != null
+	var last_error: nullable IOError = null
+
 	# close the stream
 	fun close is abstract
 end
 
 # Abstract input streams
-interface IStream
+abstract class IStream
 	super IOS
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
 	fun read_char: Int is abstract
@@ -36,6 +50,7 @@ interface IStream
 	# Read at most i bytes
 	fun read(i: Int): String
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
@@ -50,6 +65,7 @@ interface IStream
 	# Read a string until the end of the line.
 	fun read_line: String
 	do
+		if last_error != null then return ""
 		assert not eof
 		var s = new FlatBuffer
 		append_line_to(s)
@@ -59,6 +75,7 @@ interface IStream
 	# Read all the stream until the eof.
 	fun read_all: String
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
@@ -70,6 +87,7 @@ interface IStream
 	# Read a string until the end of the line and append it to `s`.
 	fun append_line_to(s: Buffer)
 	do
+		if last_error != null then return
 		loop
 			var x = read_char
 			if x == -1 then
@@ -88,7 +106,7 @@ interface IStream
 end
 
 # IStream capable of declaring if readable without blocking
-interface PollableIStream
+abstract class PollableIStream
 	super IStream
 
 	# Is there something to read? (without blocking)
@@ -97,7 +115,7 @@ interface PollableIStream
 end
 
 # Abstract output stream
-interface OStream
+abstract class OStream
 	super IOS
 	# write a string
 	fun write(s: Text) is abstract
@@ -140,7 +158,8 @@ abstract class BufferedIStream
 	super IStream
 	redef fun read_char
 	do
-		assert not eof
+		if last_error != null then return 0
+		if eof then last_error = new IOError("Stream has reached eof")
 		if _buffer_pos >= _buffer.length then
 			fill_buffer
 		end
@@ -154,6 +173,7 @@ abstract class BufferedIStream
 
 	redef fun read(i)
 	do
+		if last_error != null then return ""
 		if _buffer.length == _buffer_pos then
 			if not eof then
 				fill_buffer
@@ -172,6 +192,7 @@ abstract class BufferedIStream
 
 	redef fun read_all
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer
 		while not eof do
 			var j = _buffer_pos
@@ -244,7 +265,7 @@ abstract class BufferedIStream
 	end
 end
 
-interface IOStream
+abstract class IOStream
 	super IStream
 	super OStream
 end

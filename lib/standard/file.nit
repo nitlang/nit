@@ -55,8 +55,14 @@ class IFStream
 	# The original path is reused, therefore the reopened file can be a different file.
 	fun reopen
 	do
-		if not eof then close
+		if not eof and not _file.address_is_null then close
+		last_error = null
 		_file = new NativeFile.io_open_read(path.to_cstring)
+		if _file.address_is_null then
+			last_error = new IOError("Error: Opening file at '{path.as(not null)}' failed with '{sys.errno.strerror}'")
+			end_reached = true
+			return
+		end
 		end_reached = false
 		_buffer_pos = 0
 		_buffer.clear
@@ -64,6 +70,7 @@ class IFStream
 
 	redef fun close
 	do
+		if _file.address_is_null then return
 		var i = _file.io_close
 		_buffer.clear
 		end_reached = true
@@ -79,7 +86,7 @@ class IFStream
 		_buffer.length = nb
 		_buffer_pos = 0
 	end
-	
+
 	# End of file?
 	redef var end_reached: Bool = false
 
@@ -89,8 +96,9 @@ class IFStream
 		self.path = path
 		prepare_buffer(10)
 		_file = new NativeFile.io_open_read(path.to_cstring)
-		assert not _file.address_is_null else
-			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
+		if _file.address_is_null then
+			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			end_reached = true
 		end
 	end
 
@@ -103,7 +111,11 @@ class OFStream
 	
 	redef fun write(s)
 	do
-		assert _is_writable
+		if last_error != null then return
+		if not _is_writable then
+			last_error = new IOError("Cannot write to non-writable stream")
+			return
+		end
 		if s isa FlatText then
 			write_native(s.to_cstring, s.length)
 		else
@@ -113,20 +125,37 @@ class OFStream
 
 	redef fun close
 	do
+		if _file.address_is_null then
+			if last_error != null then return
+			last_error = new IOError("Cannot close unopened write stream")
+			_is_writable = false
+			return
+		end
 		var i = _file.io_close
+		if i != 0 then
+			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
+		end
 		_is_writable = false
 	end
-
 	redef var is_writable = false
 	
 	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
-		assert _is_writable
+		if last_error != null then return
+		if not _is_writable then
+			last_error = new IOError("Cannot write to non-writable stream")
+			return
+		end
+		if _file.address_is_null then
+			last_error = new IOError("Writing on a null stream")
+			_is_writable = false
+			return
+		end
 		var err = _file.io_write(native, len)
 		if err != len then
 			# Big problem
-			printn("Problem in writing : ", err, " ", len, "\n")
+			last_error = new IOError("Problem in writing : {err} {len} \n")
 		end
 	end
 	
@@ -134,11 +163,12 @@ class OFStream
 	init open(path: String)
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
-		assert not _file.address_is_null else
-			print "Error: Opening file at '{path}' failed with '{sys.errno.strerror}'"
-		end
 		self.path = path
 		_is_writable = true
+		if _file.address_is_null then
+			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			is_writable = false
+		end
 	end
 end
 
