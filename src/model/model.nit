@@ -869,6 +869,14 @@ abstract class MType
 	# ENSURE: `not self.need_anchor implies result == self`
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
 
+	# Resolve formal type to its verbatim bound.
+	# If the type is not formal, just return self
+	#
+	# The result is returned exactly as declared in the "type" property (verbatim).
+	# So it could be another formal type.
+	#
+	# In case of conflict, the method aborts.
+	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
 	# Can the type be resolved?
 	#
 	# In order to resolve open types, the formal types must make sence.
@@ -1152,13 +1160,7 @@ class MVirtualType
 
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
-	# Lookup the bound for a given resolved_receiver
-	# The result may be a other virtual type (or a parameter type)
-	#
-	# The result is returned exactly as declared in the "type" property (verbatim).
-	#
-	# In case of conflict, the method aborts.
-	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
 		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
@@ -1282,9 +1284,7 @@ class MParameterType
 
 	redef fun to_s do return name
 
-	# Resolve the bound for a given resolved_receiver
-	# The result may be a other virtual type (or a parameter type)
-	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
 		var goalclass = self.mclass
