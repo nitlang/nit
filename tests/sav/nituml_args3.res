@@ -41,7 +41,7 @@ Bool [
 Object -> Bool [dir=back arrowtail=open style=dashed];
 
 Float [
- label = "{Float||}"
+ label = "{Float||+ is_approx(other: Float, precision: Float): Bool\l}"
 ]
 Numeric -> Float [dir=back arrowtail=open style=dashed];
 
