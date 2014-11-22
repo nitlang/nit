@@ -15,7 +15,12 @@
 # limitations under the License.
 
 # Impements the services of `mnit:app` using the API from the Android ndk
-module android_app
+module android_app is
+	android_manifest_activity """
+		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+		android:configChanges="orientation|keyboardHidden"
+		android:screenOrientation="portrait""""
+end
 
 import mnit
 import android
