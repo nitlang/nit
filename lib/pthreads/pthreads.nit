@@ -218,6 +218,27 @@ private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	`}
 end
 
+private extern class NativePthreadCond in "C" `{ pthread_cond_t * `}
+	new `{
+		pthread_cond_t cond;
+		int r = pthread_cond_init(&cond, NULL);
+		if (r == 0) {
+			pthread_cond_t *pcond = malloc(sizeof(pthread_cond_t));
+			memmove(pcond, &cond, sizeof(pthread_cond_t));
+			return pcond;
+		}
+		return NULL;
+	`}
+
+	fun destroy `{ pthread_cond_destroy(recv); `}
+
+	fun signal `{ pthread_cond_signal(recv); `}
+
+	fun broadcast `{ pthread_cond_broadcast(recv);  `}
+
+	fun wait(mutex: NativePthreadMutex) `{ pthread_cond_wait(recv, mutex); `}
+end
+
 #
 ## Nity part
 #
@@ -349,24 +370,36 @@ end
 class Barrier
 	super Finalizable
 
+	private var mutex = new Mutex
+	private var cond: nullable NativePthreadCond = new NativePthreadCond
+
 	# Number of threads that must be waiting for `wait` to unblock
 	var count: Int
 
-	private var native: nullable NativePthreadBarrier is noinit
-
-	init do native = new NativePthreadBarrier(count)
+	private var threads_waiting = 0
 
 	# Wait at this barrier and block until there are a `count` threads waiting
-	fun wait do native.wait
+	fun wait
+	do
+		mutex.lock
+		threads_waiting += 1
+		if threads_waiting == count then
+			threads_waiting = 0
+			cond.broadcast
+		else
+			cond.wait(mutex.native.as(not null))
+		end
+		mutex.unlock
+	end
 
 	redef fun finalize
 	do
-		var native = self.native
-		if native != null then
-			native.destroy
-			native.free
+		var cond = self.cond
+		if cond != null then
+			cond.destroy
+			cond.free
 		end
-		self.native = null
+		self.cond = null
 	end
 end
 
