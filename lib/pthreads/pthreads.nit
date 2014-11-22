@@ -114,10 +114,6 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 		return (nullable_Object)thread_return;
 	`}
 
-	fun cancel: Bool `{
-		return pthread_cancel(*recv);
-	`}
-
 	fun attr: NativePthreadAttr `{
 		pthread_attr_t *pattr = malloc(sizeof(pthread_attr_t));
 		pthread_getattr_np(*recv, pattr);
@@ -272,14 +268,6 @@ abstract class Thread
 		return r
 	end
 
-	# Cancel the execution of the thread
-	fun cancel
-	do
-		if native == null then return
-		native.cancel
-		native = null
-	end
-
 	redef fun finalize
 	do
 		if native == null then return
@@ -297,9 +285,6 @@ end
 
 # Exit current thread and return `value` to caller of `Thread::join`
 fun exit_thread(value: nullable Object) `{ pthread_exit(value); `}
-
-# Does not return if the running thread is to be cancelled
-fun test_cancel `{ pthread_testcancel(); `}
 
 # Returns the handle to the running `Thread`
 fun thread: Thread
