@@ -183,6 +183,7 @@ $(call import-module,android/native_app_glue)
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                 android:configChanges="orientation|keyboardHidden"
                 android:screenOrientation="portrait"
+                {{{project.manifest_activity_attributes.join("\n")}}}
                 {{{icon_declaration}}}>
             <!-- Tell NativeActivity the name of our .so -->
             <meta-data android:name=\"android.app.lib_name\"
