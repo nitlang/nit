@@ -188,18 +188,6 @@ private extern class NativePthreadMutexAttr in "C" `{ pthread_mutexattr_t * `}
 	# pthread_mutexattr_setrobust_np
 end
 
-private extern class NativePthreadBarrier in "C" `{ pthread_barrier_t * `}
-	new(count: Int) `{
-		pthread_barrier_t *barrier = malloc(sizeof(pthread_barrier_t));
-		int res = pthread_barrier_init(barrier, NULL, count);
-		return barrier;
-	`}
-
-	fun destroy `{ pthread_barrier_destroy(recv); `}
-
-	fun wait `{ pthread_barrier_wait(recv); `}
-end
-
 private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	new `{
 		pthread_key_t *key = malloc(sizeof(pthread_key_t));

@@ -47,3 +47,15 @@ end
 
 # Does not return if the running thread is to be cancelled
 fun test_cancel `{ pthread_testcancel(); `}
+
+private extern class NativePthreadBarrier in "C" `{ pthread_barrier_t * `}
+	new(count: Int) `{
+		pthread_barrier_t *barrier = malloc(sizeof(pthread_barrier_t));
+		int res = pthread_barrier_init(barrier, NULL, count);
+		return barrier;
+	`}
+
+	fun destroy `{ pthread_barrier_destroy(recv); `}
+
+	fun wait `{ pthread_barrier_wait(recv); `}
+end
