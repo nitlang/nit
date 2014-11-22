@@ -24,9 +24,10 @@ intrude import pthreads
 
 in "C" `{
 	// TODO protect with: #ifdef WITH_LIBGC
+	#ifndef ANDROID
 		#define GC_THREADS
 		#include <gc.h>
-	//#endif
+	#endif
 `}
 
 redef extern class NativePthread

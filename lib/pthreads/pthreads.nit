@@ -34,9 +34,10 @@ in "C" `{
 	// TODO protect with: #ifdef WITH_LIBGC
 	// We might have to add the next line to gc_chooser.c too, especially
 	// if we get an error like "thread not registered with GC".
+	#ifndef ANDROID
 		#define GC_THREADS
 		#include <gc.h>
-	//#endif
+	#endif
 `}
 
 redef class Sys
