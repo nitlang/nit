@@ -260,7 +260,7 @@ class Neo4jClient
 	#     assert nodes.has(andres)
 	#     assert nodes.has(kate)
 	fun nodes_with_label(lbl: String): Array[NeoNode] do
-		var res = get("{base_url}/db/data/label/{lbl}/nodes")
+		var res = get("{base_url}/db/data/label/{lbl.to_percent_encoding}/nodes")
 		var nodes = new Array[NeoNode]
 		for json in res.as(JsonArray) do
 			var obj = json.as(JsonObject)
@@ -287,7 +287,21 @@ class Neo4jClient
 	#     assert not nodes.has(kate)
 	fun nodes_with_labels(labels: Array[String]): Array[NeoNode] do
 		assert not labels.is_empty
-		var res = cypher(new CypherQuery.from_string("MATCH (n:{labels.join(":")}) RETURN n"))
+
+		# Build the query.
+		var buffer = new RopeBuffer
+		buffer.append "match n where \{label_0\} in labels(n)"
+		for i in [1..labels.length[ do
+			buffer.append " and \{label_{i}\} in labels(n)"
+		end
+		buffer.append " return n"
+		var query = new CypherQuery.from_string(buffer.write_to_string)
+		for i in [0..labels.length[ do
+			query.params["label_{i}"] = labels[i]
+		end
+
+		# Retrieve the answer.
+		var res = cypher(query)
 		var nodes = new Array[NeoNode]
 		for json in res.as(JsonObject)["data"].as(JsonArray) do
 			var obj = json.as(JsonArray).first.as(JsonObject)
