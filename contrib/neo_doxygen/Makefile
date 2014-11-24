@@ -15,8 +15,9 @@
 NITG=../../bin/nitg
 NITG_FLAGS=--dir bin
 NEO4J_DIR=/var/lib/neo4j
+OLD_PWD=${PWD}
 
-.PHONY: bin reset-neo
+.PHONY: bin reset-neo run-tests tests
 
 # Compile the tool.
 bin:
@@ -28,3 +29,13 @@ reset-neo:
 	sudo -u neo4j "${NEO4J_DIR}/bin/neo4j" stop \
 	&& sudo -u neo4j rm -rf "${NEO4J_DIR}/data/graph.db" \
 	&& sudo -u neo4j "${NEO4J_DIR}/bin/neo4j" start
+
+# Regenerate the XML documents in `tests`.
+tests:
+	$(MAKE) -C tests
+
+# Run the tests.
+run-tests:
+	cd ../../tests; \
+	./tests.sh ../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit ; \
+	cd "${OLD_PWD}"

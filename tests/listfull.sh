@@ -13,5 +13,6 @@ printf "%s\n" "$@" \
 	../examples/mpi/src/*.nit \
 	../lib/*/examples/*.nit \
 	../contrib/friendz/src/solver_cmd.nit \
+	../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
 	*.nit
