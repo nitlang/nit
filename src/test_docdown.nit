@@ -17,7 +17,7 @@ module test_docdown
 
 import modelize
 import highlight
-import markdown
+import docdown
 
 redef class ModelBuilder
 	fun test_markdown(page: HTMLTag, mmodule: MModule)
