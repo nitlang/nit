@@ -416,7 +416,9 @@ This is a paragraph
 <p>This is a paragraph
 * and this is not a list</p>
 """
-		var res = test.md_to_html.write_to_string
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+		var res = proc.process(test).write_to_string
 		assert res == exp
 	end
 
@@ -431,9 +433,7 @@ This is a paragraph
 <li>and this is not a list</li>
 </ul>
 """
-		var proc = new MarkdownProcessor
-		proc.ext_mode = true
-		var res = proc.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
@@ -479,8 +479,6 @@ end tell
 	end
 
 	fun test_process_code_ext1 do
-		var processor = new MarkdownProcessor
-		processor.ext_mode = true
 		var test = """
 Here is an example of AppleScript:
 ~~~
@@ -504,13 +502,11 @@ end tell
 &lt;/div&gt;
 </code></pre>
 """
-		var res = processor.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
 	fun test_process_code_ext2 do
-		var processor = new MarkdownProcessor
-		processor.ext_mode = true
 		var test = """
 Here is an example of AppleScript:
 ```
@@ -534,11 +530,14 @@ end tell
 &lt;/div&gt;
 </code></pre>
 """
-		var res = processor.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
 	fun test_process_code_ext3 do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+
 		var test = """
 Here is an example of AppleScript:
     beep
@@ -547,13 +546,11 @@ Here is an example of AppleScript:
 <p>Here is an example of AppleScript:
 beep</p>
 """
-		var res = test.md_to_html.write_to_string
+		var res = proc.process(test).write_to_string
 		assert res == exp
 	end
 
 	fun test_process_code_ext4 do
-		var processor = new MarkdownProcessor
-		processor.ext_mode = true
 		var test = """
 Here is an example of AppleScript:
     beep
@@ -563,13 +560,11 @@ Here is an example of AppleScript:
 <pre><code>beep
 </code></pre>
 """
-		var res = processor.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
 	fun test_process_code_ext5 do
-		var processor = new MarkdownProcessor
-		processor.ext_mode = true
 		var test = """
 ```nit
 print "Hello World!"
@@ -579,7 +574,7 @@ print "Hello World!"
 <pre class="nit"><code>print "Hello World!"
 </code></pre>
 """
-		var res = processor.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
@@ -720,18 +715,18 @@ __double underscores__
 	end
 
 	fun test_process_emph3 do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
 		var test = "Con_cat_this"
 		var exp = "<p>Con<em>cat</em>this</p>\n"
-		var res = test.md_to_html.write_to_string
+		var res = proc.process(test).write_to_string
 		assert res == exp
 	end
 
 	fun test_process_emph_ext do
 		var test = "Con_cat_this"
 		var exp = "<p>Con_cat_this</p>\n"
-		var proc = new MarkdownProcessor
-		proc.ext_mode = true
-		var res = proc.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
@@ -1003,18 +998,18 @@ break</a> with a line-ending space.</p>
 	end
 
 	fun test_process_strike do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
 		var test = "This is how you ~~strike text~~"
 		var exp = "<p>This is how you ~~strike text~~</p>\n"
-		var res = test.md_to_html.write_to_string
+		var res = proc.process(test).write_to_string
 		assert exp == res
 	end
 
 	fun test_process_strike_ext do
-		var proc = new MarkdownProcessor
-		proc.ext_mode = true
 		var test = "This is how you ~~strike text~~"
 		var exp = "<p>This is how you <del>strike text</del></p>\n"
-		var res = proc.process(test).write_to_string
+		var res = test.md_to_html.write_to_string
 		assert exp == res
 	end
 
@@ -1386,6 +1381,9 @@ Here's how you put `` `backticks` `` in a code span.
 	end
 
 	fun test_daring_pars do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+
 		var test = """
 In Markdown 1.0.0 and earlier. Version
 8. This line turns into a list item.
@@ -1406,7 +1404,7 @@ list item.</p>
 <p>Here's one with a bullet.
 * criminey.</p>
 """
-		var res = test.md_to_html.write_to_string
+		var res = proc.process(test).write_to_string
 		assert res == exp
 	end
 
@@ -2607,7 +2605,6 @@ class TestLine
 
 	fun test_line_type_ext do
 		var v = new MarkdownProcessor
-		v.ext_mode = true
 		subject = new MDLine("  ~~~")
 		assert v.line_kind(subject) isa LineFence
 		subject = new MDLine("  ```")

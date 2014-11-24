@@ -33,7 +33,7 @@ class MarkdownProcessor
 	# `MarkdownEmitter` used for ouput.
 	var emitter: MarkdownEmitter is noinit
 
-	# Work in extended mode.
+	# Work in extended mode (default).
 	#
 	# Behavior changes when using extended mode:
 	#
@@ -113,7 +113,7 @@ class MarkdownProcessor
 	#   becomes
 	#
 	#		<del>Mistaken text.</del>
-	var ext_mode = false
+	var ext_mode = true
 
 	init do self.emitter = new MarkdownEmitter(self)
 
