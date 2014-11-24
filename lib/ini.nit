@@ -72,16 +72,16 @@ class ConfigTree
 	#    assert values.has_key("bar")
 	#    assert values.has_key("baz")
 	#    assert not values.has_key("goo")
-	fun at(key: String): Map[String, String] do
+	fun at(key: String): Map[String, nullable String] do
 		if not has_key(key) then
 			print "error: config key `{key}` not found"
 			abort
 		end
-		var map = new HashMap[String, String]
+		var map = new HashMap[String, nullable String]
 		var node = get_node(key).as(not null)
 		for k, child in node.children do
-			if child.value == null then continue
-			map[k] = child.value.to_s
+			if child.value == null and child.children.is_empty then continue
+			map[k] = child.value
 		end
 		return map
 	end
@@ -222,15 +222,11 @@ class ConfigTree
 	private var roots = new Array[ConfigNode]
 
 	private fun set_node(key: String, value: nullable String) do
-		var children = roots
 		var parts = key.split(".").reversed
 		var k = parts.pop
 		var root = get_root(k)
 		if root == null then
 			root = new ConfigNode(k)
-			if parts.is_empty then
-				root.value = value
-			end
 			roots.add root
 		end
 		while not parts.is_empty do
@@ -241,11 +237,12 @@ class ConfigTree
 				node.parent = root
 				root.children[node.name] = node
 			end
-			if parts.is_empty then
-				node.value = value
-			end
 			root = node
 		end
+		if not root.children.is_empty then
+			root.children.clear
+		end
+		root.value = value
 	end
 
 	private fun get_node(key: String): nullable ConfigNode do

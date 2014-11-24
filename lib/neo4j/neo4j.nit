@@ -94,6 +94,24 @@ class Neo4jServer
 		sys.system("neo4j stop > /dev/null")
 		return true
 	end
+
+	fun status do
+		var pipe = new IProcess("neo4j", "status")
+		var str = new Array[String]
+		while not pipe.eof do
+			var l = pipe.read_line
+			if l == "" then break # last line
+			l = l.substring(0,l.length-1) # strip last oef
+			str.add l
+		end
+		pipe.close
+		pipe.wait
+		if pipe.status != 0 then
+			print "Neo4j error: cannot fin neo4j instance"
+			abort
+		end
+		for l in str do print l
+	end
 end
 
 # `Neo4jClient` is needed to communicate through the REST API
