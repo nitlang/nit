@@ -50,6 +50,8 @@ tests/out
 tests/*.xml
 tests/nitunit
 
+nitunit.xml
+
 *.stub.nit.[ch]
 
 .metadata/*
