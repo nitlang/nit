@@ -124,7 +124,7 @@ class Neo4jClient
 		self.cypher_url = root["cypher"].to_s
 	end
 
-	fun service_root: Jsonable do return get("{base_url}/db/data")
+	fun service_root: Jsonable do return get(base_url / "db/data")
 
 	# Is the connection with the Neo4j server ok?
 	fun is_ok: Bool do return service_root isa JsonObject
@@ -260,7 +260,7 @@ class Neo4jClient
 	#     assert nodes.has(andres)
 	#     assert nodes.has(kate)
 	fun nodes_with_label(lbl: String): Array[NeoNode] do
-		var res = get("{base_url}/db/data/label/{lbl.to_percent_encoding}/nodes")
+		var res = get(base_url / "db/data/label/{lbl.to_percent_encoding}/nodes")
 		var nodes = new Array[NeoNode]
 		for json in res.as(JsonArray) do
 			var obj = json.as(JsonObject)
@@ -541,7 +541,7 @@ abstract class NeoEntity
 	private var internal_properties: nullable JsonObject = null
 
 	private fun load_properties: JsonObject do
-		var obj = neo.get("{url.to_s}/properties").as(JsonObject)
+		var obj = neo.get(url.to_s / "properties").as(JsonObject)
 		internal_properties = obj
 		return obj
 	end
@@ -626,7 +626,7 @@ class NeoNode
 
 	private fun load_labels: Array[String] do
 		var labels = new Array[String]
-		var res = neo.get("{url.to_s}/labels")
+		var res = neo.get(url.to_s / "labels")
 		if res isa JsonArray then
 			for val in res do labels.add val.to_s
 		end
@@ -641,7 +641,7 @@ class NeoNode
 
 	private fun load_in_edges: List[NeoEdge] do
 		var edges = new List[NeoEdge]
-		var res = neo.get("{url.to_s}/relationships/in").as(JsonArray)
+		var res = neo.get(url.to_s / "relationships/in").as(JsonArray)
 		for obj in res do
 			edges.add(new NeoEdge.from_json(neo, obj.as(JsonObject)))
 		end
@@ -656,7 +656,7 @@ class NeoNode
 
 	private fun load_out_edges: List[NeoEdge] do
 		var edges = new List[NeoEdge]
-		var res = neo.get("{url.to_s}/relationships/out")
+		var res = neo.get(url.to_s / "relationships/out")
 		for obj in res.as(JsonArray) do
 			edges.add(new NeoEdge.from_json(neo, obj.as(JsonObject)))
 		end
