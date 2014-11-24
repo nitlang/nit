@@ -95,6 +95,20 @@ class Range[E: Discrete]
 		last = to.predecessor(1)
 		after = to
 	end
+
+	# Two ranges are equals if they have the same first and last elements.
+	#
+	#     var a = new Range[Int](10, 15)
+	#     var b = new Range[Int].without_last(10, 15)
+	#     assert a == [10..15]
+	#     assert a == [10..16[
+	#     assert not a == [10..15[
+	#     assert b == [10..15[
+	#     assert b == [10..14]
+	#     assert not b == [10..15]
+	redef fun ==(o) do
+		return o isa Range[E] and self.first == o.first and self.last == o.last
+	end
 end
 
 private class IteratorRange[E: Discrete]
