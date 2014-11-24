@@ -205,29 +205,37 @@ abstract class Compound
 
 	# Declare an inner namespace.
 	#
+	# Note: Althought Doxygen indicates that the name is optional,
+	# declarations with an empty name are not supported yet.
+	#
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner namespace. May be empty.
-	# * `name`: string identifying the inner namespace. May be empty.
-	fun declare_namespace(id: String, name: String) do end
+	# * `full_name`: qualified name of the inner namespace.
+	fun declare_namespace(id: String, full_name: String) do end
 
 	# Declare an inner class.
 	#
+	# Note: Althought Doxygen indicates that both arguments are optional,
+	# declarations with either an empty name or an empty ID are not
+	# supported yet.
+	#
 	# Parameters:
 	#
-	# * `id`: `model_id` of the inner class. May be empty.
-	# * `name`: string identifying the inner class. May be empty.
-	fun declare_class(id: String, name: String) do end
+	# * `id`: `model_id` of the inner class.
+	# * `full_name`: qualified name of the inner class.
+	fun declare_class(id: String, full_name: String) do end
 
 	# Declare a base compound (usually, a base class).
 	#
 	# Parameters:
 	#
 	# * `id`: `model_id` of the base compound. May be empty.
-	# * `name`: string identifying the base compound. May be empty.
+	# * `full_name`: qualified name of the base compound. May be empty.
 	# * `prot`: visibility (proctection) of the relationship.
 	# * `virt`: level of virtuality of the relationship.
-	fun declare_super(id: String, name: String, prot: String, virt: String) do end
+	fun declare_super(id: String, full_name: String, prot: String,
+			virt: String) do end
 end
 
 # An unrecognized compound.
