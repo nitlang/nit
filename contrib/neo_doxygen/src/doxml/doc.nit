@@ -25,6 +25,7 @@ class DocListener
 
 	redef fun end_listening do
 		super
-		doc.add(to_s)
+		var line = to_s.trim
+		if not line.is_empty then doc.add(line)
 	end
 end
