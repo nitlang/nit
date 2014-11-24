@@ -162,7 +162,9 @@ class JavaSource
 		# For abstract members, Doxygen put `abstract` at the beginning of the type.
 		# We assume that Doxygen do not put annotations in the type (it seems to
 		# be the case).
-		member.is_abstract = extract_keyword(type_text, "abstract")
+		if extract_keyword(type_text, "abstract") then
+			member.is_abstract = true
+		end
 		# TODO final
 		# TODO void
 		# TODO Avoid using `RawType` when possible. Only use `RawType` as a fallback.
