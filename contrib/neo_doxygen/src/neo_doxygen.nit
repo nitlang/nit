@@ -20,21 +20,24 @@ module neo_doxygen
 
 import model
 import doxml
+import graph_store
 import console
 import opts
 
 # An importation task.
 class NeoDoxygenJob
-	var client: Neo4jClient
+
+	# The storage medium to use.
+	var store: GraphStore
+
+	# The loaded project graph.
 	var model: ProjectGraph is noinit
 
-	# How many operation can be executed in one batch?
-	private var batch_max_size = 1000
+	# Escape control sequence to save the cursor position.
+	private var term_save_cursor: String = (new TermSaveCursor).to_s
 
-	private var save_cursor: String = (new TermSaveCursor).to_s
-
-	# Escape control sequence to reset the current line.
-	private var reset_line: String = "{new TermRestoreCursor}{new TermEraseDisplayDown}"
+	# Escape control sequence to rewind to the last saved cursor position.
+	private var term_rewind: String = "{new TermRestoreCursor}{new TermEraseDisplayDown}"
 
 	# Generate a graph from the specified project model.
 	#
@@ -52,9 +55,9 @@ class NeoDoxygenJob
 		var file_count = 0
 
 		if dir == "" then
-			sys.stdout.write "Reading the current directory... "
+			printn "Reading the current directory... "
 		else
-			sys.stdout.write "Reading {dir}... "
+			printn "Reading {dir}... "
 		end
 		loop
 			for f in dir.files do
@@ -83,11 +86,7 @@ class NeoDoxygenJob
 			sys.stderr.write("{sys.program_name}: The project’s name must not" +
 					" begin with an upper case letter. Got `{name}`.\n")
 		end
-		var query = new CypherQuery.from_string("match n where \{name\} in labels(n) return count(n)")
-		query.params["name"] = name
-		var data = client.cypher(query).as(JsonObject)["data"]
-		var result = data.as(JsonArray).first.as(JsonArray).first.as(Int)
-		assert name_unused: result == 0 else
+		assert name_unused: not store.has_node_label(name) else
 			sys.stderr.write("{sys.program_name}: The label `{name}` is already" +
 			" used in the specified graph.\n")
 		end
@@ -95,49 +94,15 @@ class NeoDoxygenJob
 
 	# Save the graph.
 	fun save do
-		sys.stdout.write "Linking nodes...{save_cursor} "
+		sys.stdout.write "Linking nodes...{term_save_cursor} "
 		model.put_edges
-		print "{reset_line} Done."
+		print "{term_rewind} Done."
 		var nodes = model.all_nodes
-		sys.stdout.write "Saving {nodes.length} nodes...{save_cursor} "
-		push_all(nodes)
+		sys.stdout.write "Saving {nodes.length} nodes..."
+		store.save_all(nodes)
 		var edges = model.all_edges
-		sys.stdout.write "Saving {edges.length} edges...{save_cursor} "
-		push_all(edges)
-	end
-
-	# Save `neo_entities` in the database using batch mode.
-	private fun push_all(neo_entities: Collection[NeoEntity]) do
-		var batch = new NeoBatch(client)
-		var len = neo_entities.length
-		var sum = 0
-		var i = 1
-
-		for nentity in neo_entities do
-			batch.save_entity(nentity)
-			if i == batch_max_size then
-				do_batch(batch)
-				sum += batch_max_size
-				sys.stdout.write("{reset_line} {sum * 100 / len}% ")
-				batch = new NeoBatch(client)
-				i = 1
-			else
-				i += 1
-			end
-		end
-		do_batch(batch)
-		print("{reset_line} Done.")
-	end
-
-	# Execute `batch` and check for errors.
-	#
-	# Abort if `batch.execute` returns errors.
-	private fun do_batch(batch: NeoBatch) do
-		var errors = batch.execute
-		if not errors.is_empty then
-			for e in errors do sys.stderr.write("{sys.program_name}: {e}\n")
-			exit(1)
-		end
+		sys.stdout.write "Saving {edges.length} edges..."
+		store.save_all(edges)
 	end
 end
 
@@ -244,11 +209,16 @@ class NeoDoxygenCommand
 		var dest = opt_dest.value
 		var project_name = rest[0]
 		var dir = rest[1]
-		var neo = new NeoDoxygenJob(new Neo4jClient(dest or else default_dest))
+		var neo = new NeoDoxygenJob(create_store(dest or else default_dest))
 
 		neo.load_project(project_name, dir, source)
 		neo.save
 		return 0
+	end
+
+	# Create an instance of `GraphStore` for the specified destination.
+	protected fun create_store(dest: String): GraphStore do
+		return new Neo4jStore(new Neo4jClient(dest))
 	end
 
 	# Show the help.
