@@ -16,7 +16,7 @@
 module doc_model
 
 import model_utils
-import markdown
+import docdown
 import doc_templates
 import ordered_tree
 import model_ext

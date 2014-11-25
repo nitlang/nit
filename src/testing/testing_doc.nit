@@ -16,7 +16,7 @@
 module testing_doc
 
 import testing_base
-intrude import markdown
+intrude import docdown
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor

@@ -1,0 +1,30 @@
+header { margin: 15px 0; }
+header img {
+	padding: 10px;
+	float: left;
+}
+header h1, header h2 { display: none; }
+
+footer {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.menu {
+	border-top: 6px solid #47CA42;
+	background-color: #0d8921;
+}
+
+.menu .navbar-brand, .menu a { color: #fff; }
+.menu .navbar-nav>.active>a, .menu .navbar-nav>li>a:hover { background-color: #47CA42; }
+
+.sidebar { margin-top: 20px; }
+
+.summary a { color: #333; }
+.summary a:hover { text-decoration: none; }
+.summary a:hover, .summary li:active>a { color: #428bca; }
+.summary li { padding: 2px 0; font-weight: bold }
+.summary li li { font-size: 13px;}
+.summary li li li { font-size: 12px; font-weight: normal }
+
+.breadcrumb { margin-top: 20px; }

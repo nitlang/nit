@@ -14,4 +14,5 @@ printf "%s\n" "$@" \
 	../lib/*/examples/*.nit \
 	../contrib/friendz/src/solver_cmd.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
+	../contrib/nitiwiki/src/nitiwiki.nit \
 	*.nit

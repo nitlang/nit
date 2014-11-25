@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Transform Nit verbatim documentation into HTML
-module markdown
+module docdown
 
 private import parser
 import html
