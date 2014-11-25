@@ -18,6 +18,7 @@
 module pthreads is
 	c_compiler_option("-pthread")
 	c_linker_option("-pthread")
+	pkgconfig "bdw-gc"
 end
 
 #
