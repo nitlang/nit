@@ -33,6 +33,88 @@ class MarkdownProcessor
 	# `MarkdownEmitter` used for ouput.
 	var emitter: MarkdownEmitter is noinit
 
+	# Work in extended mode (default).
+	#
+	# Behavior changes when using extended mode:
+	#
+	# * Lists and code blocks end a paragraph
+	#
+	#   In normal markdown the following:
+	#
+	#		This is a paragraph
+	#		* and this is not a list
+	#
+	#   Will produce:
+	#
+	#		<p>This is a paragraph
+	#		* and this is not a list</p>
+	#
+	#	When using extended mode this changes to:
+	#
+	#		<p>This is a paragraph</p>
+	#		<ul>
+	#		<li>and this is not a list</li>
+	#		</ul>
+	#
+	# * Fences code blocks
+	#
+	#   If you don't want to indent your all your code with 4 spaces,
+	#   you can wrap your code in ``` ``` ``` or `~~~`.
+	#
+	#	Here's an example:
+	#
+	#		```
+	#		fun test do
+	#			print "Hello World!"
+	#		end
+	#		```
+	#
+	# * Code blocks meta
+	#
+	#   If you want to use syntax highlighting tools, most of them need to know what kind
+	#   of language they are highlighting.
+	#   You can add an optional language identifier after the fence declaration to output
+	#   it in the HTML render.
+	#
+	#		```nit
+	#		import markdown
+	#
+	#		print "# Hello World!".md_to_html
+	#		```
+	#
+	#   Becomes
+	#
+	#		<pre class="nit"><code>import markdown
+	#
+	#		print "Hello World!".md_to_html
+	#		</code></pre>
+	#
+	# * Underscores (Emphasis)
+	#
+	#   Underscores in the middle of a word like:
+	#
+	#		Con_cat_this
+	#
+	#	normally produces this:
+	#
+	#		<p>Con<em>cat</em>this</p>
+	#
+	#   With extended mode they don't result in emphasis.
+	#
+	#		<p>Con_cat_this</p>
+	#
+	# * Strikethrough
+	#
+	#   Like in [GFM](https://help.github.com/articles/github-flavored-markdown),
+	#   strikethrought span is marked with `~~`.
+	#
+	#		~~Mistaken text.~~
+	#
+	#   becomes
+	#
+	#		<del>Mistaken text.</del>
+	var ext_mode = true
+
 	init do self.emitter = new MarkdownEmitter(self)
 
 	# Process the mardown `input` string and return the processed output.
@@ -219,12 +301,14 @@ class MarkdownProcessor
 		if value[leading] == '#' then return new LineHeadline
 		if value[leading] == '>' then return new LineBlockquote
 
-		if value.length - leading - trailing > 2 then
-			if value[leading] == '`' and md.count_chars_start('`') >= 3 then
-				return new LineFence
-			end
-			if value[leading] == '~' and md.count_chars_start('~') >= 3 then
-				return new LineFence
+		if ext_mode then
+			if value.length - leading - trailing > 2 then
+				if value[leading] == '`' and md.count_chars_start('`') >= 3 then
+					return new LineFence
+				end
+				if value[leading] == '~' and md.count_chars_start('~') >= 3 then
+					return new LineFence
+				end
 			end
 		end
 
@@ -307,6 +391,14 @@ class MarkdownProcessor
 					return new TokenEmUnderscore(pos, c)
 				end
 			end
+			if ext_mode then
+				if (c0.is_letter or c0.is_digit) and c0 != '_' and
+				   (c1.is_letter or c1.is_digit) then
+					return new TokenNone(pos, c)
+				else
+					return new TokenEmUnderscore(pos, c)
+				end
+			end
 			if c0 != ' ' or c1 != ' ' then
 				return new TokenEmUnderscore(pos, c)
 			else
@@ -335,13 +427,12 @@ class MarkdownProcessor
 			return new TokenHTML(pos, c)
 		else if c == '&' then
 			return new TokenEntity(pos, c)
-		else if c == '^' then
-			if c0 == '^' or c1 == '^' then
-				return new TokenNone(pos, c)
-			else
-				return new TokenSuper(pos, c)
-			end
 		else
+			if ext_mode then
+				if c == '~' and c1 == '~' then
+					return new TokenStrike(pos, c)
+				end
+			end
 			return new TokenNone(pos, c)
 		end
 	end
@@ -519,8 +610,10 @@ interface Decorator
 	# Render a strong text.
 	fun add_strong(v: MarkdownEmitter, text: Text) is abstract
 
-	# Render a super text.
-	fun add_super(v: MarkdownEmitter, text: Text) is abstract
+	# Render a strike text.
+	#
+	# Extended mode only (see `MarkdownProcessor::ext_mode`)
+	fun add_strike(v: MarkdownEmitter, text: Text) is abstract
 
 	# Render a link.
 	fun add_link(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
@@ -594,7 +687,11 @@ class HTMLDecorator
 	end
 
 	redef fun add_code(v, block) do
-		v.add "<pre><code>"
+		if block isa BlockFence and block.meta != null then
+			v.add "<pre class=\"{block.meta.to_s}\"><code>"
+		else
+			v.add "<pre><code>"
+		end
 		v.emit_in block
 		v.add "</code></pre>\n"
 	end
@@ -635,10 +732,10 @@ class HTMLDecorator
 		v.add "</strong>"
 	end
 
-	redef fun add_super(v, text) do
-		v.add "<sup>"
+	redef fun add_strike(v, text) do
+		v.add "<del>"
 		v.add text
-		v.add "</sup>"
+		v.add "</del>"
 	end
 
 	redef fun add_image(v, link, name, comment) do
@@ -1032,6 +1129,9 @@ end
 class BlockFence
 	super BlockCode
 
+	# Any string found after fence token.
+	var meta: nullable Text
+
 	# Fence code lines start at 0 spaces.
 	redef var line_start = 0
 end
@@ -1409,10 +1509,10 @@ class LineOther
 		var was_empty = line.prev_empty
 		while line != null and not line.is_empty do
 			var t = v.line_kind(line)
-			if v.in_list and t isa LineList then
+			if (v.in_list or v.ext_mode) and t isa LineList then
 				break
 			end
-			if t isa LineCode or t isa LineFence then
+			if v.ext_mode and (t isa LineCode or t isa LineFence) then
 				break
 			end
 			if t isa LineHeadline or t isa LineHeadline1 or t isa LineHeadline2 or
@@ -1551,7 +1651,8 @@ class LineFence
 		else
 			block = v.current_block.split(v.current_block.last_line.as(not null))
 		end
-		block.kind = new BlockFence(block)
+		var meta = block.first_line.value.meta_from_fence
+		block.kind = new BlockFence(block, meta)
 		block.first_line.clear
 		var last = block.last_line
 		if last != null and v.line_kind(last) isa LineFence then
@@ -2038,17 +2139,19 @@ class TokenEscape
 	end
 end
 
-# A markdown super token.
-class TokenSuper
+# A markdown strike token.
+#
+# Extended mode only (see `MarkdownProcessor::ext_mode`)
+class TokenStrike
 	super Token
 
 	redef fun emit(v) do
 		var tmp = v.push_buffer
-		var b = v.emit_text_until(v.current_text.as(not null), pos + 1, self)
+		var b = v.emit_text_until(v.current_text.as(not null), pos + 2, self)
 		v.pop_buffer
 		if b > 0 then
-			v.decorator.add_super(v, tmp)
-			v.current_pos = b
+			v.decorator.add_strike(v, tmp)
+			v.current_pos = b + 1
 		else
 			v.addc char
 		end
@@ -2286,6 +2389,18 @@ redef class Text
 		end
 		out.add '\\'
 		return pos
+	end
+
+	# Extract string found at end of fence opening.
+	private fun meta_from_fence: nullable Text do
+		for i in [0..chars.length[ do
+			var c = chars[i]
+			print c
+			if c != ' ' and c != '`' and c != '~' then
+				return substring_from(i).trim
+			end
+		end
+		return null
 	end
 
 	# Is `self` an unsafe HTML element?

@@ -407,6 +407,36 @@ sit amet, consectetuer adipiscing elit.</p>
 		assert res == exp
 	end
 
+	fun test_process_list11 do
+		var test = """
+This is a paragraph
+* and this is not a list
+"""
+		var exp = """
+<p>This is a paragraph
+* and this is not a list</p>
+"""
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+		var res = proc.process(test).write_to_string
+		assert res == exp
+	end
+
+	fun test_process_list_ext do
+		var test = """
+This is a paragraph
+* and this is not a list
+"""
+		var exp = """
+<p>This is a paragraph</p>
+<ul>
+<li>and this is not a list</li>
+</ul>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
 	fun test_process_code1 do
 		var test = """
 This is a normal paragraph:
@@ -448,7 +478,7 @@ end tell
 		assert res == exp
 	end
 
-	fun test_process_code3 do
+	fun test_process_code_ext1 do
 		var test = """
 Here is an example of AppleScript:
 ~~~
@@ -476,7 +506,7 @@ end tell
 		assert res == exp
 	end
 
-	fun test_process_code4 do
+	fun test_process_code_ext2 do
 		var test = """
 Here is an example of AppleScript:
 ```
@@ -504,6 +534,49 @@ end tell
 		assert res == exp
 	end
 
+	fun test_process_code_ext3 do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+
+		var test = """
+Here is an example of AppleScript:
+    beep
+"""
+		var exp = """
+<p>Here is an example of AppleScript:
+beep</p>
+"""
+		var res = proc.process(test).write_to_string
+		assert res == exp
+	end
+
+	fun test_process_code_ext4 do
+		var test = """
+Here is an example of AppleScript:
+    beep
+"""
+		var exp = """
+<p>Here is an example of AppleScript:</p>
+<pre><code>beep
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+	fun test_process_code_ext5 do
+		var test = """
+```nit
+print "Hello World!"
+```
+"""
+		var exp = """
+<pre class="nit"><code>print "Hello World!"
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
 
 	fun test_process_nesting1 do
 		var test = """
@@ -637,6 +710,22 @@ __double underscores__
 	fun test_process_emph2 do
 		var test = "un*frigging*believable"
 		var exp = "<p>un<em>frigging</em>believable</p>\n"
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+	fun test_process_emph3 do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+		var test = "Con_cat_this"
+		var exp = "<p>Con<em>cat</em>this</p>\n"
+		var res = proc.process(test).write_to_string
+		assert res == exp
+	end
+
+	fun test_process_emph_ext do
+		var test = "Con_cat_this"
+		var exp = "<p>Con_cat_this</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
@@ -907,6 +996,23 @@ break</a> with a line-ending space.</p>
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
+
+	fun test_process_strike do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+		var test = "This is how you ~~strike text~~"
+		var exp = "<p>This is how you ~~strike text~~</p>\n"
+		var res = proc.process(test).write_to_string
+		assert exp == res
+	end
+
+	fun test_process_strike_ext do
+		var test = "This is how you ~~strike text~~"
+		var exp = "<p>This is how you <del>strike text</del></p>\n"
+		var res = test.md_to_html.write_to_string
+		assert exp == res
+	end
+
 
 	fun test_daring_encoding do
 		var test = """
@@ -1275,6 +1381,9 @@ Here's how you put `` `backticks` `` in a code span.
 	end
 
 	fun test_daring_pars do
+		var proc = new MarkdownProcessor
+		proc.ext_mode = false
+
 		var test = """
 In Markdown 1.0.0 and earlier. Version
 8. This line turns into a list item.
@@ -1295,7 +1404,7 @@ list item.</p>
 <p>Here's one with a bullet.
 * criminey.</p>
 """
-		var res = test.md_to_html.write_to_string
+		var res = proc.process(test).write_to_string
 		assert res == exp
 	end
 
@@ -2462,10 +2571,6 @@ class TestLine
 		assert v.line_kind(subject) isa LineHeadline
 		subject = new MDLine("    code")
 		assert v.line_kind(subject) isa LineCode
-		subject = new MDLine("  ~~~")
-		assert v.line_kind(subject) isa LineFence
-		subject = new MDLine("  ```")
-		assert v.line_kind(subject) isa LineFence
 		subject = new MDLine("   Title  ")
 		subject.next = new MDLine("== ")
 		assert v.line_kind(subject) isa LineHeadline1
@@ -2496,6 +2601,14 @@ class TestLine
 		assert v.line_kind(subject) isa LineOList
 		subject = new MDLine("   11111. foo")
 		assert v.line_kind(subject) isa LineOList
+	end
+
+	fun test_line_type_ext do
+		var v = new MarkdownProcessor
+		subject = new MDLine("  ~~~")
+		assert v.line_kind(subject) isa LineFence
+		subject = new MDLine("  ```")
+		assert v.line_kind(subject) isa LineFence
 	end
 
 	fun test_count_chars do
