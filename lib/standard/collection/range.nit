@@ -109,6 +109,15 @@ class Range[E: Discrete]
 	redef fun ==(o) do
 		return o isa Range[E] and self.first == o.first and self.last == o.last
 	end
+
+	#     var a = new Range[Int](10, 15)
+	#     assert a.hash == 455
+	#     var b = new Range[Int].without_last(10, 15)
+	#     assert b.hash == 432
+	redef fun hash do
+		# 11 and 23 are magic numbers empirically determined to be not so bad.
+		return first.hash * 11 + last.hash * 23
+	end
 end
 
 private class IteratorRange[E: Discrete]
