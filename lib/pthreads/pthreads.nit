@@ -18,6 +18,7 @@
 module pthreads is
 	c_compiler_option("-pthread")
 	c_linker_option("-pthread")
+	pkgconfig "bdw-gc"
 end
 
 #
@@ -115,13 +116,7 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 		return (nullable_Object)thread_return;
 	`}
 
-	fun attr: NativePthreadAttr `{
-		pthread_attr_t *pattr = malloc(sizeof(pthread_attr_t));
-		pthread_getattr_np(*recv, pattr);
-		return pattr;
-	`}
-
-	fun equal(other: NativePthread): Bool `{ pthread_equal(*recv, *other); `}
+	fun equal(other: NativePthread): Bool `{ return pthread_equal(*recv, *other); `}
 
 	fun kill(signal: Int) `{ pthread_kill(*recv, signal); `}
 end
