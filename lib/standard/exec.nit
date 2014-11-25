@@ -48,8 +48,7 @@ class Process
 	var arguments: nullable Array[String]
 
 	# Launch a command with some arguments
-	init(command: String, arguments: String...)
-	do
+	init(command: String, arguments: String...) is old_style_init do
 		self.command = command
 		self.arguments = arguments
 		execute
@@ -92,6 +91,8 @@ end
 class IProcess
 	super Process
 	super IStream
+
+	# File Descriptor used for the input.
 	var stream_in: FDIStream is noinit
 
 	redef fun close do stream_in.close
@@ -113,6 +114,8 @@ end
 class OProcess
 	super Process
 	super OStream
+
+	# File Descriptor used for the output.
 	var stream_out: OStream is noinit
 
 	redef fun close do stream_out.close
@@ -159,6 +162,9 @@ redef class Sys
 end
 
 redef class NativeString
+	# Execute self as a shell command.
+	#
+	# See the posix function system(3).
 	fun system: Int is extern "string_NativeString_NativeString_system_0"
 end
 

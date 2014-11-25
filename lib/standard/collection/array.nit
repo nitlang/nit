@@ -429,7 +429,7 @@ private class ArrayIterator[E]
 
 	redef var index = 0
 
-	private var array: AbstractArrayRead[E]
+	var array: AbstractArrayRead[E]
 end
 
 private class ArrayReverseIterator[E]
@@ -508,7 +508,7 @@ private class ArraySetIterator[E: Object]
 
 	redef fun item: E do return _iter.item
 
-	private var iter: ArrayIterator[E]
+	var iter: ArrayIterator[E]
 end
 
 
@@ -778,8 +778,14 @@ universal NativeArray[E]
 	fun length: Int is intern
 	# Use `self` to initialize a standard Nit Array.
 	fun to_a: Array[E] do return new Array[E].with_native(self, length)
+
+	# Get item at `index`.
 	fun [](index: Int): E is intern
+
+	# Set `item` at `index`.
 	fun []=(index: Int, item: E) is intern
+
+	# Copy `length` items to `dest`.
 	fun copy_to(dest: NativeArray[E], length: Int) is intern
 	#fun =(o: NativeArray[E]): Bool is intern
 	#fun !=(o: NativeArray[E]): Bool is intern

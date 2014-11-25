@@ -278,6 +278,7 @@ class ListIterator[E]
 	super IndexedIterator[E]
 	redef fun item do return _node.item
 
+	# Set item `e` at self `index`.
 	fun item=(e: E) do _node.item = e
 
 	redef fun is_ok do return not _node == null

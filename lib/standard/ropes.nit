@@ -94,7 +94,7 @@ private class Concat
 	# Right child of the node
 	var right: String
 
-	init(l: String, r: String) do
+	init(l: String, r: String) is old_style_init do
 		left = l
 		right = r
 		length = l.length + r.length
@@ -145,7 +145,6 @@ private class Concat
 
 	redef fun +(o) do
 		var s = o.to_s
-		var mlen = length
 		var slen = s.length
 		if s isa Concat then
 			return new Concat(self, s)
@@ -485,7 +484,7 @@ private class RopeReviter
 	# the Rope traversal.
 	var subs: IndexedIterator[String]
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		pos = root.length - 1
 		subs = new ReverseRopeSubstrings(root)
 		ns = subs.item
@@ -532,7 +531,7 @@ private class RopeIter
 	# Position (char) in the Rope (0-indexed)
 	var pos: Int
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		subs = new RopeSubstrings(root)
 		pns = 0
 		str = subs.item
@@ -578,7 +577,7 @@ private class ReverseRopeSubstrings
 	# Current leaf
 	var str: String is noinit
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		var r = new RopeIterPiece(root, false, true, null)
 		pos = root.length - 1
 		var lnod: String = root
@@ -663,7 +662,7 @@ private class RopeBufSubstringIterator
 	# Did we attain the buffered part ?
 	var nsstr_done = false
 
-	init(str: RopeBuffer) do
+	init(str: RopeBuffer) is old_style_init do
 		iter = str.str.substrings
 		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
 		if str.length == 0 then nsstr_done = true
@@ -700,7 +699,7 @@ private class RopeSubstrings
 	# Current leaf
 	var str: String is noinit
 
-	init(root: RopeString) do
+	init(root: RopeString) is old_style_init do
 		var r = new RopeIterPiece(root, true, false, null)
 		pos = 0
 		max = root.length - 1
@@ -786,7 +785,7 @@ private class RopeChars
 
 	var tgt: RopeString
 
-	init(s: RopeString) do tgt = s
+	init(s: RopeString) is old_style_init do tgt = s
 
 	redef fun [](i) do
 		return tgt[i]
@@ -798,20 +797,26 @@ private class RopeChars
 
 end
 
+# An Iterator over a RopeBuffer.
 class RopeBufferIter
 	super IndexedIterator[Char]
 
+	# Subiterator.
 	var sit: IndexedIterator[Char]
 
+	# Native string iterated over.
 	var ns: NativeString
 
+	# Current position in `ns`.
 	var pns: Int
 
+	# Maximum position iterable.
 	var maxpos: Int
 
 	redef var index: Int
 
-	init(t: RopeBuffer) do
+	# Init the iterator from a RopeBuffer.
+	init(t: RopeBuffer) is old_style_init do
 		ns = t.ns
 		maxpos = t.rpos
 		sit = t.str.chars.iterator
@@ -819,6 +824,7 @@ class RopeBufferIter
 		index = 0
 	end
 
+	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
 		ns = t.ns
 		maxpos = t.length
@@ -844,24 +850,30 @@ class RopeBufferIter
 	end
 end
 
+# Reverse iterator over a RopeBuffer.
 class RopeBufferReviter
 	super IndexedIterator[Char]
 
+	# Subiterator.
 	var sit: IndexedIterator[Char]
 
+	# Native string iterated over.
 	var ns: NativeString
 
+	# Current position in `ns`.
 	var pns: Int
 
 	redef var index: Int
 
-	init(tgt: RopeBuffer) do
+	# Init the iterator from a RopeBuffer.
+	init(tgt: RopeBuffer) is old_style_init do
 		sit = tgt.str.chars.reverse_iterator
 		pns = tgt.rpos - 1
 		index = tgt.length - 1
 		ns = tgt.ns
 	end
 
+	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(tgt: RopeBuffer, pos: Int) do
 		sit = tgt.str.chars.reverse_iterator_from(pos - tgt.rpos - tgt.dumped)
 		pns = pos - tgt.str.length

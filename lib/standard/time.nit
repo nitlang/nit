@@ -31,11 +31,17 @@ end
 
 # Time since epoch
 extern class TimeT `{time_t`}
+
+	# Returns Time since epoch from now.
 	new `{ return time(NULL); `}
+
+	# Returns Time since epoch from `i` (expressed in seconds).
 	new from_i(i: Int) `{ return i; `}
 
+	# Update current time.
 	fun update `{ time(&recv); `}
 
+	# Convert `self` to a human readable String.
 	fun ctime: String import NativeString.to_s_with_copy `{
 		return NativeString_to_s_with_copy( ctime(&recv) );
 	`}
@@ -44,50 +50,81 @@ extern class TimeT `{time_t`}
 	fun difftime(start: TimeT): Float `{ return difftime(recv, start); `}
 
 	redef fun to_s do return ctime.replace("\n", "")
+
+	# Convert self to Int (expressed as seconds since epoch).
 	fun to_i: Int `{ return (int)recv; `}
 end
 
 # Time structure
 extern class Tm `{struct tm *`}
+
+	# Create a new Time structure expressed in Coordinated Universal Time (UTC).
 	new gmtime `{
 		struct tm *tm;
 		time_t t = time(NULL);
 		tm = gmtime(&t);
 		return tm;
 	`}
+
+	# Create a new Time structure expressed in UTC from `t`.
 	new gmtime_from_timet(t: TimeT) `{
 		struct tm *tm;
 		tm = gmtime(&t);
 		return tm;
 	`}
 
+	# Create a new Time structure expressed in the local timezone.
 	new localtime `{
 		struct tm *tm;
 		time_t t = time(NULL);
 		tm = localtime(&t);
 		return tm;
 	`}
+
+	# Create a new Time structure expressed in the local timezone from `t`.
 	new localtime_from_timet(t: TimeT) `{
 		struct tm *tm;
 		tm = localtime(&t);
 		return tm;
 	`}
 
+	# Convert `self` as a TimeT.
 	fun to_timet: TimeT `{ return mktime(recv); `}
 
+	# Seconds after the minute.
 	fun sec: Int `{ return recv->tm_sec; `}
+
+	# Minutes after the hour.
 	fun min: Int `{ return recv->tm_min; `}
+
+	# hours since midnight.
 	fun hour: Int `{ return recv->tm_hour; `}
+
+	# Day of the month.
 	fun mday: Int `{ return recv->tm_mday; `}
+
+	# Months since January.
 	fun mon: Int `{ return recv->tm_mon; `}
+
+	# Years since 1900.
 	fun year: Int `{ return recv->tm_year; `}
+
+	# Days since Sunday.
 	fun wday: Int `{ return recv->tm_wday; `}
+
+	# Days since January 1st.
 	fun yday: Int `{ return recv->tm_yday; `}
+
+	# Is `self` in Daylight Saving Time.
 	fun is_dst: Bool `{ return recv->tm_isdst; `}
 
+	# Convert `self` to a human readable String.
 	fun asctime: String import NativeString.to_s_with_copy `{
 		return NativeString_to_s_with_copy( asctime(recv) );
 	`}
+
+	# Convert `self` to a human readable String corresponding to `format`.
+	# TODO document allowed format.
 	fun strftime(format: String): String import String.to_cstring, NativeString.to_s `{
 		char* buf, *c_format;
 		size_t res;

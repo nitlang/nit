@@ -207,7 +207,7 @@ private class ContainerIterator[E]
 
 	redef var is_ok: Bool = true
 
-	private var container: Container[E]
+	var container: Container[E]
 end
 
 # Items can be removed from this collection
@@ -334,6 +334,10 @@ interface Set[E: Object]
 		return nhs
 	end
 
+	# Returns a new instance of `Set`.
+	#
+	# Depends on the subclass, mainly used for copy services
+	# like `union` or `intersection`.
 	protected fun new_set: Set[E] is abstract
 end
 
@@ -944,7 +948,7 @@ private class CoupleMapIterator[K: Object, V]
 		_iter.next
 	end
 
-	private var iter: Iterator[Couple[K,V]]
+	var iter: Iterator[Couple[K,V]]
 end
 
 # Some tools ###################################################################

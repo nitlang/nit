@@ -38,6 +38,7 @@ abstract class FStream
 	# The FILE *.
 	private var file: nullable NativeFile = null
 
+	# The status of a file. see POSIX stat(2).
 	fun file_stat: FileStat do return _file.file_stat
 
 	# File descriptor of this file
@@ -64,7 +65,7 @@ class IFStream
 
 	redef fun close
 	do
-		var i = _file.io_close
+		_file.io_close
 		_buffer.clear
 		end_reached = true
 	end
@@ -113,7 +114,7 @@ class OFStream
 
 	redef fun close
 	do
-		var i = _file.io_close
+		_file.io_close
 		_is_writable = false
 	end
 
@@ -144,6 +145,7 @@ end
 
 ###############################################################################
 
+# Standard input stream.
 class Stdin
 	super IFStream
 
@@ -156,6 +158,7 @@ class Stdin
 	redef fun poll_in: Bool is extern "file_stdin_poll_in"
 end
 
+# Standard output stream.
 class Stdout
 	super OFStream
 	init do
@@ -165,6 +168,7 @@ class Stdout
 	end
 end
 
+# Standard error stream.
 class Stderr
 	super OFStream
 	init do

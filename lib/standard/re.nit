@@ -349,7 +349,6 @@ class Regex
 		var cstr = text.substring_from(from).to_cstring
 		var eflags = gather_eflags
 		var match = self.native_match
-		var matches = new Array[Match]
 
 		var res = native.regexec(cstr, 1, match, eflags)
 

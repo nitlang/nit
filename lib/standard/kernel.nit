@@ -414,6 +414,13 @@ universal Int
 	redef fun -(i) is intern
 	redef fun *(i) is intern
 	redef fun /(i) is intern
+
+	# Modulo of `self` with `i`.
+	#
+	# Finds the remainder of division of `self` by `i`.
+	#
+	#     assert 5 % 2			== 1
+	#     assert 10 % 2			== 0
 	fun %(i: Int): Int is intern
 
 	redef fun zero do return 0

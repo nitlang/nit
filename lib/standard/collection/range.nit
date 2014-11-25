@@ -27,10 +27,17 @@ class Range[E: Discrete]
 	# Get the element after the last one.
 	var after: E
 
+	#     assert [1..10].has(5)
+	#     assert [1..10].has(10)
+	#     assert not [1..10[.has(10)
 	redef fun has(item) do return item >= first and item <= last
 
+	#     assert [1..1].has_only(1)
+	#     assert not [1..10].has_only(1)
 	redef fun has_only(item) do return first == item and item == last or is_empty
 
+	#     assert [1..10].count(1)	== 1
+	#     assert [1..10].count(0)	== 0
 	redef fun count(item)
 	do
 		if has(item) then
@@ -42,8 +49,13 @@ class Range[E: Discrete]
 
 	redef fun iterator do return new IteratorRange[E](self)
 
+	#     assert [1..10].length		== 10
+	#     assert [1..10[.length		== 9
+	#     assert [1..1].length		== 1
+	#     assert [1..-10].length	== 0
 	redef fun length
 	do
+		if is_empty then return 0
 		var nb = first.distance(after)
 		if nb > 0 then
 			return nb
@@ -52,12 +64,19 @@ class Range[E: Discrete]
 		end
 	end
 
+	#     assert not [1..10[.is_empty
+	#     assert not [1..1].is_empty
+	#     assert [1..-10].is_empty
 	redef fun is_empty do return first >= after
 
 	# Create a range [`from`, `to`].
-	# The syntax `[from..to[` is equivalent.
-	init(from: E, to: E)
-	do
+	# The syntax `[from..to]` is equivalent.
+	#
+	#     var a = [10..15]
+	#     var b = new Range[Int] (10,15)
+	#     assert a == b
+	#     assert a.to_a == [10, 11, 12, 13, 14, 15]
+	init(from: E, to: E) is old_style_init do
 		first = from
 		last = to
 		after = to.successor(1)
@@ -65,18 +84,46 @@ class Range[E: Discrete]
 
 	# Create a range [`from`, `to`[.
 	# The syntax `[from..to[` is equivalent.
+	#
+	#     var a = [10..15[
+	#     var b = new Range[Int].without_last(10,15)
+	#     assert a == b
+	#     assert a.to_a == [10, 11, 12, 13, 14]
 	init without_last(from: E, to: E)
 	do
 		first = from
 		last = to.predecessor(1)
 		after = to
 	end
+
+	# Two ranges are equals if they have the same first and last elements.
+	#
+	#     var a = new Range[Int](10, 15)
+	#     var b = new Range[Int].without_last(10, 15)
+	#     assert a == [10..15]
+	#     assert a == [10..16[
+	#     assert not a == [10..15[
+	#     assert b == [10..15[
+	#     assert b == [10..14]
+	#     assert not b == [10..15]
+	redef fun ==(o) do
+		return o isa Range[E] and self.first == o.first and self.last == o.last
+	end
+
+	#     var a = new Range[Int](10, 15)
+	#     assert a.hash == 455
+	#     var b = new Range[Int].without_last(10, 15)
+	#     assert b.hash == 432
+	redef fun hash do
+		# 11 and 23 are magic numbers empirically determined to be not so bad.
+		return first.hash * 11 + last.hash * 23
+	end
 end
 
 private class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
-	private var range: Range[E]
+	var range: Range[E]
 	redef var item is noinit
 
 	redef fun is_ok do return _item < _range.after
