@@ -83,7 +83,7 @@ print "{kate["name"].to_s} IS LOVED BY {kate.in_nodes("LOVES").first["name"].to_
 
 print "\n# Test lazy\n"
 
-client = new Neo4jClient("http://localhost:7474")
+client = new Neo4jClient("http://localhost:7474/")
 assert client.is_ok
 
 # Read Andres
