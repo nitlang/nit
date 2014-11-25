@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
@@ -14,20 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-all.sh <source_language> <directory>
-#
-# Document all projects in the specified directory.
-#
-# Projects are direct sub-directories of the specified directory.
-# Every project directory must contain a `.nx_config` file.
-# Also, every project must include the Doxygen XML output in its `doxygen/xml`
-# directory.
+# Functions related to the `sed` utility.
 
-for dir in "$2"/*; do
-	if [ -d "$dir" ]; then
-		if [ -f "$dir/.nx_config" ]; then
-			# Note: gen-one.sh already prints errors.
-			./gen-one.sh "$1" "$dir" || exit
-		fi
-	fi
-done
+# Replace `$1` by `$2` in the specified files (the rest of the arguments).
+#
+# Replacements are done in place.
+#
+# SETS: `local_1`
+# SETS: `local_2`
+replace() {
+	local_1=`escape_to_bre "$1"`
+	local_2=`escape_to_bre "$2"`
+	shift 2
+	sed -s -i -e s."${local_1}"."${local_2}".g -- "$@"
+	unset local_1
+	unset local_2
+}
+
+# Escape `$1` for inclusion in a POSIX BRE.
+escape_to_bre() {
+	echo "$1" | sed -e 's/\*\|\.\|\^\|\$\|\[\|\\/\\\0/g'
+}

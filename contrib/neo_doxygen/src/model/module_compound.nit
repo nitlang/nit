@@ -65,30 +65,39 @@ class FileCompound
 		end
 	end
 
-	redef fun declare_namespace(id: String, name: String) do
+	redef fun declare_namespace(id: String, full_name: String) do
 		var m: Module
 
-		if inner_namespaces.keys.has(name) then
-			m = inner_namespaces[name]
+		assert not full_name.is_empty else
+			sys.stderr.write "Inner mamespace declarations without name are not yet supported.\n"
+		end
+		if inner_namespaces.keys.has(full_name) then
+			m = inner_namespaces[full_name]
 			if id != "" then m.parent = id
 		else
 			m = new Module(graph)
-			m.full_name = "{name}{ns_separator}{basename}"
+			m.full_name = "{full_name}{ns_separator}{basename}"
 			m.parent = id
 			m.location = self["location"].as(nullable Location)
-			inner_namespaces[name] = m
+			inner_namespaces[full_name] = m
 		end
 	end
 
-	redef fun declare_class(id: String, name: String) do
-		var match = name.search_last(ns_separator)
+	redef fun declare_class(id: String, full_name: String) do
+		assert not id.is_empty else
+			sys.stderr.write "Inner class declarations without ID are not yet supported.\n"
+		end
+		assert not full_name.is_empty else
+			sys.stderr.write "Inner class declarations without name are not yet supported.\n"
+		end
+		var match = full_name.search_last(ns_separator)
 		var ns_name: String
 		var m: Module
 
 		if match == null then
 			ns_name = ""
 		else
-			ns_name = name.substring(0, match.from)
+			ns_name = full_name.substring(0, match.from)
 		end
 		if inner_namespaces.keys.has(ns_name) then
 			m = inner_namespaces[ns_name]
@@ -96,7 +105,7 @@ class FileCompound
 			declare_namespace("", ns_name)
 			m = inner_namespaces[ns_name]
 		end
-		m.declare_class(id, name)
+		m.declare_class(id, full_name)
 	end
 
 	redef fun put_in_graph do
@@ -124,7 +133,10 @@ class Module
 		self.labels.add("MModule")
 	end
 
-	redef fun declare_class(id: String, name: String) do
+	redef fun declare_class(id: String, full_name: String) do
+		assert not id.is_empty else
+			sys.stderr.write "Inner class declarations without ID not supported yet.\n"
+		end
 		inner_classes.add(id)
 	end
 

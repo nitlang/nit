@@ -72,8 +72,8 @@ class ClassCompound
 		class_def["mdoc"] = doc
 	end
 
-	redef fun declare_super(id: String, name: String, prot: String, virt: String) do
-		class_def.declare_super(id, name, prot, virt)
+	redef fun declare_super(id: String, full_name: String, prot: String, virt: String) do
+		class_def.declare_super(id, full_name, prot, virt)
 	end
 
 	redef fun declare_member(member: Member) do
@@ -119,8 +119,9 @@ class ClassDef
 		self["is_intro"] = true
 	end
 
-	fun declare_super(id: String, name: String, prot: String, virt: String) do
-		# TODO prot, virt, name
+	fun declare_super(id: String, full_name: String, prot: String,
+			virt: String) do
+		# TODO prot, virt, full_name
 		if "" != id then
 			supers.add(id)
 		end

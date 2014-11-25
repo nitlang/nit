@@ -1,5 +1,3 @@
-#! /bin/bash
-
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-all.sh <source_language> <directory>
-#
-# Document all projects in the specified directory.
-#
-# Projects are direct sub-directories of the specified directory.
-# Every project directory must contain a `.nx_config` file.
-# Also, every project must include the Doxygen XML output in its `doxygen/xml`
-# directory.
+.PHONY: clean doxygen strip_paths xml
 
-for dir in "$2"/*; do
-	if [ -d "$dir" ]; then
-		if [ -f "$dir/.nx_config" ]; then
-			# Note: gen-one.sh already prints errors.
-			./gen-one.sh "$1" "$dir" || exit
-		fi
-	fi
-done
+# Regenerate the XML documents.
+xml: strip_paths
+
+clean:
+	rm -rf xml
+
+doxygen: clean
+	doxygen Doxyfile
+
+# Get rid of the absolute paths in the generated files.
+#
+# Doxygen ignores the `STRIP_FROM_PATH` setting when generating a XML output.
+# So, we have to replace the paths manually in order to get reproducible
+# results.
+#
+# WARNING: FOR USE ON TEST DATA ONLY.
+strip_paths: doxygen
+	. ../../sh-lib/more_sed.sh; \
+	replace `readlink -f -- ./src` '%SOURCE_DIRECTORY%' xml/*.xml

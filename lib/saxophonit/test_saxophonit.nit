@@ -193,4 +193,22 @@ class TestSaxophonit
 		expected.end_document
 		assert_equals
 	end
+
+	fun test_mixed do
+		var atts = new AttributesImpl
+
+		# TODO For the moment, ignorable white space is not detected.
+		before_test
+		parse_string("<foo>  \r\n\n<bar>  baz  </bar></foo>")
+		expected.document_locator = new SAXLocatorImpl
+		expected.start_document
+		expected.start_element("", "foo", "foo", atts)
+		expected.characters("  \n\n")
+		expected.start_element("", "bar", "bar", atts)
+		expected.characters("  baz  ")
+		expected.end_element("", "bar", "bar")
+		expected.end_element("", "foo", "foo")
+		expected.end_document
+		assert_equals
+	end
 end

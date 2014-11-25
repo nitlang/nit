@@ -1,5 +1,3 @@
-#! /bin/bash
-
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-all.sh <source_language> <directory>
-#
-# Document all projects in the specified directory.
-#
-# Projects are direct sub-directories of the specified directory.
-# Every project directory must contain a `.nx_config` file.
-# Also, every project must include the Doxygen XML output in its `doxygen/xml`
-# directory.
+import tests
 
-for dir in "$2"/*; do
-	if [ -d "$dir" ]; then
-		if [ -f "$dir/.nx_config" ]; then
-			# Note: gen-one.sh already prints errors.
-			./gen-one.sh "$1" "$dir" || exit
-		fi
-	fi
-done
+var graph = new ProjectGraph("foo")
+var buffer = new RopeBuffer
+
+graph.put_edges
+graph.debug buffer
+print buffer

@@ -1,5 +1,3 @@
-#! /bin/bash
-
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ./gen-all.sh <source_language> <directory>
-#
-# Document all projects in the specified directory.
-#
-# Projects are direct sub-directories of the specified directory.
-# Every project directory must contain a `.nx_config` file.
-# Also, every project must include the Doxygen XML output in its `doxygen/xml`
-# directory.
+import model::member
 
-for dir in "$2"/*; do
-	if [ -d "$dir" ]; then
-		if [ -f "$dir/.nx_config" ]; then
-			# Note: gen-one.sh already prints errors.
-			./gen-one.sh "$1" "$dir" || exit
-		fi
-	fi
-done
+# Copied from the documentation of `Member::resolve_introducer`.
+
+var g = new ProjectGraph("foo")
+var m1 = new Attribute(g)
+var m2 = new Attribute(g)
+var m3 = new Attribute(g)
+
+m1.model_id = "1"
+m1.put_in_graph
+m2.reimplement("1")
+m2.put_in_graph
+assert m1.resolve_introducer == m1.introducer
+assert m2.resolve_introducer == m1.introducer
+
+m3.model_id = "3"
+m3.reimplement("3")
+m3.put_in_graph
+assert m3.resolve_introducer == null
