@@ -34,5 +34,5 @@ interface DataStore
 	fun [](key: String): nullable Object is abstract
 
 	# Store `value` at `key`
-	fun []=(key: String, value: Serializable) is abstract
+	fun []=(key: String, value: nullable Serializable) is abstract
 end

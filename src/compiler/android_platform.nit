@@ -124,10 +124,12 @@ class AndroidToolchain
 
 		# Also copy over the java files
 		dir = "{android_project_root}/src/"
-		var extra_java_files = compiler.mainmodule.extra_java_files
-		if extra_java_files != null then for file in extra_java_files do
-			var path = file.filename
-			path.file_copy_to("{dir}/{path.basename("")}")
+		for mmodule in compiler.mainmodule.in_importation.greaters do
+			var extra_java_files = mmodule.extra_java_files
+			if extra_java_files != null then for file in extra_java_files do
+				var path = file.filename
+				path.file_copy_to(dir/path.basename(""))
+			end
 		end
 
 		## Generate delagating makefile
@@ -178,13 +180,11 @@ $(call import-module,android/native_app_glue)
              This will take care of integrating with our NDK code. -->
         <activity android:name="android.app.NativeActivity"
                 android:label="@string/app_name"
-                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-                android:configChanges="orientation|keyboardHidden"
-                android:screenOrientation="portrait"
+                {{{project.manifest_activity_attributes.join("\n")}}}
                 {{{icon_declaration}}}>
-            <!-- Tell NativeActivity the name of or .so -->
-            <meta-data android:name=\"{{{app_package}}}\"
-                    android:value=\"{{{app_name}}}\" />
+            <!-- Tell NativeActivity the name of our .so -->
+            <meta-data android:name=\"android.app.lib_name\"
+                    android:value=\"main\" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

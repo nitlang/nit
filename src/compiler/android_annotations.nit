@@ -44,6 +44,9 @@ class AndroidProject
 	# Custom lines to add to the AndroidManifest.xml in the <application> node
 	var manifest_application_lines = new Array[String]
 
+	# Custom lines to add to AndroidManifest.xml as attributes inside the <activity> node
+	var manifest_activity_attributes = new Array[String]
+
 	# Minimum API level required for the application to run
 	var min_api: nullable Int = null
 
@@ -106,6 +109,9 @@ redef class ModelBuilder
 
 		annots = collect_annotations_on_modules("android_manifest_application", mmodule)
 		for an in annots do project.manifest_application_lines.add an.arg_as_string(self) or else ""
+
+		annots = collect_annotations_on_modules("android_manifest_activity", mmodule)
+		for an in annots do project.manifest_activity_attributes.add an.arg_as_string(self) or else ""
 
 		# Get the date and time (down to the minute) as string
 		var local_time = new Tm.localtime

@@ -34,9 +34,10 @@ in "C" `{
 	// TODO protect with: #ifdef WITH_LIBGC
 	// We might have to add the next line to gc_chooser.c too, especially
 	// if we get an error like "thread not registered with GC".
+	#ifndef ANDROID
 		#define GC_THREADS
 		#include <gc.h>
-	//#endif
+	#endif
 `}
 
 redef class Sys
@@ -114,10 +115,6 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 		return (nullable_Object)thread_return;
 	`}
 
-	fun cancel: Bool `{
-		return pthread_cancel(*recv);
-	`}
-
 	fun attr: NativePthreadAttr `{
 		pthread_attr_t *pattr = malloc(sizeof(pthread_attr_t));
 		pthread_getattr_np(*recv, pattr);
@@ -192,18 +189,6 @@ private extern class NativePthreadMutexAttr in "C" `{ pthread_mutexattr_t * `}
 	# pthread_mutexattr_setrobust_np
 end
 
-private extern class NativePthreadBarrier in "C" `{ pthread_barrier_t * `}
-	new(count: Int) `{
-		pthread_barrier_t *barrier = malloc(sizeof(pthread_barrier_t));
-		int res = pthread_barrier_init(barrier, NULL, count);
-		return barrier;
-	`}
-
-	fun destroy `{ pthread_barrier_destroy(recv); `}
-
-	fun wait `{ pthread_barrier_wait(recv); `}
-end
-
 private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	new `{
 		pthread_key_t *key = malloc(sizeof(pthread_key_t));
@@ -220,6 +205,27 @@ private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	fun set(val: nullable Object) `{
 		pthread_setspecific(*recv, val);
 	`}
+end
+
+private extern class NativePthreadCond in "C" `{ pthread_cond_t * `}
+	new `{
+		pthread_cond_t cond;
+		int r = pthread_cond_init(&cond, NULL);
+		if (r == 0) {
+			pthread_cond_t *pcond = malloc(sizeof(pthread_cond_t));
+			memmove(pcond, &cond, sizeof(pthread_cond_t));
+			return pcond;
+		}
+		return NULL;
+	`}
+
+	fun destroy `{ pthread_cond_destroy(recv); `}
+
+	fun signal `{ pthread_cond_signal(recv); `}
+
+	fun broadcast `{ pthread_cond_broadcast(recv);  `}
+
+	fun wait(mutex: NativePthreadMutex) `{ pthread_cond_wait(recv, mutex); `}
 end
 
 #
@@ -272,14 +278,6 @@ abstract class Thread
 		return r
 	end
 
-	# Cancel the execution of the thread
-	fun cancel
-	do
-		if native == null then return
-		native.cancel
-		native = null
-	end
-
 	redef fun finalize
 	do
 		if native == null then return
@@ -297,9 +295,6 @@ end
 
 # Exit current thread and return `value` to caller of `Thread::join`
 fun exit_thread(value: nullable Object) `{ pthread_exit(value); `}
-
-# Does not return if the running thread is to be cancelled
-fun test_cancel `{ pthread_testcancel(); `}
 
 # Returns the handle to the running `Thread`
 fun thread: Thread
@@ -364,24 +359,36 @@ end
 class Barrier
 	super Finalizable
 
+	private var mutex = new Mutex
+	private var cond: nullable NativePthreadCond = new NativePthreadCond
+
 	# Number of threads that must be waiting for `wait` to unblock
 	var count: Int
 
-	private var native: nullable NativePthreadBarrier is noinit
-
-	init do native = new NativePthreadBarrier(count)
+	private var threads_waiting = 0
 
 	# Wait at this barrier and block until there are a `count` threads waiting
-	fun wait do native.wait
+	fun wait
+	do
+		mutex.lock
+		threads_waiting += 1
+		if threads_waiting == count then
+			threads_waiting = 0
+			cond.broadcast
+		else
+			cond.wait(mutex.native.as(not null))
+		end
+		mutex.unlock
+	end
 
 	redef fun finalize
 	do
-		var native = self.native
-		if native != null then
-			native.destroy
-			native.free
+		var cond = self.cond
+		if cond != null then
+			cond.destroy
+			cond.free
 		end
-		self.native = null
+		self.cond = null
 	end
 end
 

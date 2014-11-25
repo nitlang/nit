@@ -21,6 +21,8 @@ module platform is
 	new_annotation max_api_version
 	new_annotation target_api_version
 	new_annotation android_manifest
+	new_annotation android_manifest_application
+	new_annotation android_manifest_activity
 end
 
 import java
