@@ -62,7 +62,7 @@ class NeoDoxygenJob
 		end
 		flush_stdout
 		loop
-			for f in dir.files do
+			for f in list_files(dir) do
 				var path = dir/f
 				if path.file_stat.is_dir then
 					directories.push(path)
@@ -81,6 +81,14 @@ class NeoDoxygenJob
 			print "{file_count} files read."
 		end
 		flush_stdout
+	end
+
+	# List files in a directory.
+	#
+	# This method may be redefined to force the order in which the files
+	# are read by `load_project`.
+	protected fun list_files(dir: String): Collection[String] do
+		return dir.files
 	end
 
 	# Check the project’s name.

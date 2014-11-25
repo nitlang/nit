@@ -1,0 +1,5 @@
+'empty project with default settings' ../contrib/neo_doxygen/tests/empty-project/xml
+--src-lang any -- empty-project ../contrib/neo_doxygen/tests/empty-project/xml
+--src-lang java empty-project ../contrib/neo_doxygen/tests/empty-project/xml
+--src-lang any -- foo ../contrib/neo_doxygen/tests/java-project/xml
+--src-lang java -- foo ../contrib/neo_doxygen/tests/java-project/xml
