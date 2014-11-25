@@ -370,38 +370,38 @@ class BinTreeNode[K: Comparable, E]
 	private var prev: nullable BinTreeNode[K, E]
 	private var next: nullable BinTreeNode[K, E]
 
-	redef type SELF: BinTreeNode[K, E]
+	redef type N: BinTreeNode[K, E]
 
 	init(key: K, item: E) do
 		super(key, item)
 	end
 
-	private var left_node: nullable SELF = null
+	private var left_node: nullable N = null
 
 	# `left` tree node child (null if node has no left child)
-	fun left: nullable SELF do return left_node
+	fun left: nullable N do return left_node
 
 	# set `left` child for this node (or null if left no child)
 	# ENSURE: node.key < key (only if node != null)
-	fun left=(node: nullable SELF) do
+	fun left=(node: nullable N) do
 		#assert node != null implies node.key < key
 		left_node = node
 	end
 
-	private var right_node: nullable SELF = null
+	private var right_node: nullable N = null
 
 	# `right` tree node child (null if node has no right child)
-	fun right: nullable SELF do return right_node
+	fun right: nullable N do return right_node
 
 	# set `right` child for this node (or null if right no child)
 	# ENSURE: node.key < key (only if node != null)
-	fun right=(node: nullable SELF) do
+	fun right=(node: nullable N) do
 		#assert node != null implies node.key > key
 		right_node = node
 	end
 
 	# `parent` of the `parent` of this node (null if root)
-	fun grandparent: nullable SELF do
+	fun grandparent: nullable N do
 		if parent == null then
 			return null
 		else
@@ -411,7 +411,7 @@ class BinTreeNode[K: Comparable, E]
 
 	# Other child of the `grandparent`
 	# `left` or `right` depends on the position of the current node against its parent
-	fun uncle: nullable SELF do
+	fun uncle: nullable N do
 		var g = grandparent
 		if g == null then
 			return null
@@ -426,7 +426,7 @@ class BinTreeNode[K: Comparable, E]
 
 	# Other child of the parent
 	# `left` or `right` depends on the position of the current node against its parent
-	fun sibling: nullable SELF do
+	fun sibling: nullable N do
 		if parent == null then
 			return null
 		else if self == parent.left then

@@ -33,7 +33,6 @@ in "Java" `{
 
 extern class NativeIntent in "Java" `{ android.content.Intent `}
 	super JavaObject
-	redef type SELF: NativeIntent
 
 	fun add_category(category: JavaString) in "Java" `{ recv.addCategory(category); `}
 	fun add_flags(flags: Int) in "Java" `{ recv.addFlags((int)flags); `}

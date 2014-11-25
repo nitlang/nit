@@ -32,7 +32,6 @@ in "Java" `{
 
 extern class NativeFile in "Java" `{ java.io.File `}
 	super JavaObject
-	redef type SELF: NativeFile
 
 	fun can_execute: Bool in "Java" `{ return recv.canExecute(); `}
 	fun can_read: Bool in "Java" `{ return recv.canRead(); `}
@@ -77,7 +76,6 @@ end
 
 extern class NativeFileInputStream in "Java" `{ java.io.FileInputStream `}
 	super JavaObject
-	redef type SELF: NativeFileInputStream
 
 	fun available: Int in "Java" `{
 		try {
@@ -114,7 +112,6 @@ end
 
 extern class NativeFileOutputStream in "Java" `{ java.io.FileOutputStream `}
 	super JavaObject
-	redef type SELF: NativeFileOutputStream
 
 	fun close in "Java" `{
 		try {
@@ -141,7 +138,7 @@ end
 
 extern class NativeFileDescriptor in "Java" `{ java.io.FileDescriptor `}
 	super JavaObject
-	redef type SELF: NativeFileDescriptor
+
 	fun sync in "Java" `{
 		try{
 			recv.sync();
@@ -154,7 +151,6 @@ end
 
 extern class NativeInputStream in "Java" `{ java.io.InputStream `}
 	super JavaObject
-	redef type SELF: NativeInputStream
 
 	fun available: Int in "Java" `{
 		try {

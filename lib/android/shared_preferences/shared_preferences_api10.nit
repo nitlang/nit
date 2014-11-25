@@ -33,7 +33,6 @@ in "Java" `{
 
 extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferences `}
 	super JavaObject
-	redef type SELF: NativeSharedPreferences
 	
 	fun contains(key: JavaString): Bool in "Java" `{ return recv.contains(key); `}
 	fun get_all: HashMap[JavaString, JavaObject] import HashMap[JavaString, JavaObject],
@@ -113,7 +112,6 @@ end
 
 extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences$Editor `}
 	super JavaObject
-	redef type SELF: NativeSharedPreferencesEditor
 
 	fun clear: NativeSharedPreferencesEditor in "Java" `{ return recv.clear(); `}
 	fun commit: Bool in "Java" `{ return recv.commit(); `}

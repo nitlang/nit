@@ -130,7 +130,7 @@ end
 class RBTreeNode[K: Comparable, E]
 	super BinTreeNode[K, E]
 
-	redef type SELF: RBTreeNode[K, E]
+	redef type N: RBTreeNode[K, E]
 
 	# Is the node red?
 	private var is_red = true

@@ -54,6 +54,7 @@ redef class ModelBuilder
 			build_properties(mclassdef2nclassdef[superclassdef])
 		end
 
+		mclassdef.build_self_type(self, nclassdef)
 		for nclassdef2 in nclassdef.all_defs do
 			for npropdef in nclassdef2.n_propdefs do
 				npropdef.build_property(self, mclassdef)
@@ -310,6 +311,50 @@ redef class MClassDef
 	# What is the `APropdef` associated to a `MProperty`?
 	# Used to check multiple definition of a property.
 	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
+
+	# Build the virtual type `SELF` only for introduction `MClassDef`
+	fun build_self_type(modelbuilder: ModelBuilder, nclassdef: AClassdef)
+	do
+		if not is_intro then return
+
+		var name = "SELF"
+		var mprop = modelbuilder.try_get_mproperty_by_name(nclassdef, self, name)
+
+		# If SELF type is declared nowherer?
+		if mprop == null then return
+
+		# SELF is not a virtual type? it is weird but we ignore it
+		if not mprop isa MVirtualTypeProp then return
+
+		# Is this the intro of SELF in the library?
+		var intro = mprop.intro
+		var intro_mclassdef = intro.mclassdef
+		if intro_mclassdef == self then
+			var nintro = modelbuilder.mpropdef2npropdef[intro]
+
+			# SELF must be declared in Object, otherwise this will create conflicts
+			if intro_mclassdef.mclass.name != "Object" then
+				modelbuilder.error(nintro, "Error: the virtual type SELF must be declared in Object.")
+			end
+
+			# SELF must be public
+			if mprop.visibility != public_visibility then
+				modelbuilder.error(nintro, "Error: the virtual type SELF must be public.")
+			end
+
+			# SELF must not be fixed
+			if intro.is_fixed then
+				modelbuilder.error(nintro, "Error: the virtual type SELF cannot be fixed.")
+			end
+
+			return
+		end
+
+		# This class introduction inherits a SELF
+		# We insert an artificial property to update it
+		var mpropdef = new MVirtualTypeDef(self, mprop, self.location)
+		mpropdef.bound = mclass.mclass_type
+	end
 end
 
 redef class APropdef
