@@ -122,7 +122,7 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 		return pattr;
 	`}
 
-	fun equal(other: NativePthread): Bool `{ pthread_equal(*recv, *other); `}
+	fun equal(other: NativePthread): Bool `{ return pthread_equal(*recv, *other); `}
 
 	fun kill(signal: Int) `{ pthread_kill(*recv, signal); `}
 end
