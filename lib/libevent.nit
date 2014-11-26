@@ -154,7 +154,7 @@ class Connection
 	# Write a string to the connection
 	fun write(str: String)
 	do
-		var res = native_buffer_event.write(str.to_cstring, str.length)
+		native_buffer_event.write(str.to_cstring, str.length)
 	end
 
 	# Write a file to the connection
