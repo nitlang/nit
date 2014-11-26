@@ -21,7 +21,7 @@ module emscripten is platform
 	#include <gc.h>
 `}
 
-redef class String
+redef class Text
 	fun run_js do run_js_native(self.escape_to_js.to_cstring)
 	private fun run_js_native(script: NativeString) `{ emscripten_run_script(script); `}
 
