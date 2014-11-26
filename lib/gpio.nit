@@ -17,6 +17,8 @@
 # GPIO related functionnalities
 module gpio
 
+# A physical binary pin
 interface Pin
+	# Set the output of this pin
 	fun write(high: Bool) is abstract
 end
