@@ -108,6 +108,27 @@ class POSet[E: Object]
 		te.dfroms.add f
 	end
 
+	# Add an edge between all elements of `es` in order.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos.has_direct_edge("A", "B")
+	# assert pos.has_direct_edge("B", "C")
+	# assert pos.has_direct_edge("C", "D")
+	# ~~~~
+	fun add_chain(es: SequenceRead[E])
+	do
+		if es.is_empty then return
+		var i = es.iterator
+		var e = i.item
+		i.next
+		for f in i do
+			add_edge(e, f)
+			e = f
+		end
+	end
+
 	# Is there an edge (transitive or not) from `f` to `t`?
 	# Since the POSet is reflexive, true is returned if `f == t`.
 	fun has_edge(f,t: E): Bool
