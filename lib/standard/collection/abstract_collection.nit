@@ -123,12 +123,18 @@ interface Collection[E]
 		return iterator.item
 	end
 
-	# Is the collection contains all the elements of `other`?
+	# Does the collection contain at least each element of `other`?
 	#
-	#    assert [1,1,1].has_all([1])         == true
-	#    assert [1,1,1].has_all([1,2])       == false
 	#    assert [1,3,4,2].has_all([1..2])    == true
 	#    assert [1,3,4,2].has_all([1..5])    == false
+	#
+	# Repeated elements in the collections are not considered.
+	#
+	#    assert [1,1,1].has_all([1])         == true
+	#    assert [1..5].has_all([1,1,1])      == true
+	#
+	# Note that the default implementation is general and correct for any lawful Collections.
+	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
 	fun has_all(other: Collection[E]): Bool
 	do
 		for x in other do if not has(x) then return false
