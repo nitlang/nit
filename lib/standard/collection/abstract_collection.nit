@@ -140,6 +140,31 @@ interface Collection[E]
 		for x in other do if not has(x) then return false
 		return true
 	end
+
+	# Does the collection contain exactly all the elements of `other`?
+	#
+	# The same elements must be present in both `self` and `other`,
+	# but the order of the elements in the collections are not considered.
+	#
+	#    assert [1..3].has_exactly([3,1,2]) == true  # the same elements
+	#    assert [1..3].has_exactly([3,1])   == false # 2 is not in the array
+	#    assert [1..2].has_exactly([3,1,2]) == false # 3 is not in the range
+	#
+	# Repeated elements must be present in both collections in the same amount.
+	# So basically it is a multi-set comparison.
+	#
+	#    assert [1,2,3,2].has_exactly([1,2,2,3]) == true  # the same elements
+	#    assert [1,2,3,2].has_exactly([1,2,3])   == false # more 2 in the first array
+	#    assert [1,2,3].has_exactly([1,2,2,3])   == false # more 2 in the second array
+	#
+	# Note that the default implementation is general and correct for any lawful Collections.
+	# It is memory-efficient but relies on `count` so may be CPU-inefficient for some kind of collections.
+	fun has_exactly(other: Collection[E]): Bool
+	do
+		if length != other.length then return false
+		for e in self do if self.count(e) != other.count(e) then return false
+		return true
+	end
 end
 
 # Instances of the Iterator class generates a series of elements, one at a time.
