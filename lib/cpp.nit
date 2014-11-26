@@ -25,12 +25,12 @@ end
 
 redef class Text
 	# Get `self` as a `CppString`
-	fun to_cpp_string: CppString do return to_cstring.to_cpp_string
+	fun to_cpp_string: CppString do return to_cstring.to_cpp_string(length)
 end
 
 redef class NativeString
 	# Get `self` as a `CppString`
-	fun to_cpp_string: CppString in "C++" `{
-		return new std::string(recv);
+	fun to_cpp_string(length: Int): CppString in "C++" `{
+		return new std::string(recv, length);
 	`}
 end
