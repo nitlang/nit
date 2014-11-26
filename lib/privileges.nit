@@ -90,8 +90,7 @@ class OptionUserAndGroup
 			return new UserGroup(words[0], words[1])
 		else
 			errors.add("Option {names.join(", ")} expected parameter in the format \"user:group\" or simply \"user\".\n")
-			abort # FIXME only for nitc, remove and replace with next line when FFI is working in nitg
-			#return null
+			return null
 		end
 	end
 end
