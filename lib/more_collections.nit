@@ -51,6 +51,14 @@ class MultiHashMap[K: Object, V]
 end
 
 # Simple way to store an `HashMap[K1, HashMap[K2, V]]`
+#
+# ~~~~
+# var hm2 = new HashMap2[Int, String, Float]
+# hm2[1, "one"] = 1.0
+# hm2[2, "two"] = 2.0
+# assert hm2[1, "one"] == 1.0
+# assert hm2[2, "not-two"] == null
+# ~~~~
 class HashMap2[K1: Object, K2: Object, V]
 	private var level1 = new HashMap[K1, HashMap[K2, V]]
 
@@ -81,6 +89,14 @@ class HashMap2[K1: Object, K2: Object, V]
 end
 
 # Simple way to store an `HashMap[K1, HashMap[K2, HashMap[K3, V]]]`
+#
+# ~~~~
+# var hm3 = new HashMap3[Int, String, Int, Float]
+# hm3[1, "one", 11] = 1.0
+# hm3[2, "two", 22] = 2.0
+# assert hm3[1, "one", 11] == 1.0
+# assert hm3[2, "not-two", 22] == null
+# ~~~~
 class HashMap3[K1: Object, K2: Object, K3: Object, V]
 	private var level1 = new HashMap[K1, HashMap2[K2, K3, V]]
 
@@ -110,6 +126,45 @@ class HashMap3[K1: Object, K2: Object, K3: Object, V]
 end
 
 # A map with a default value.
+#
+# ~~~~
+# var dm = new DefaultMap[String, Int](10)
+# assert dm["a"] == 10
+# ~~~~
+#
+# The default value is used when the key is not present.
+# And getting a default value does not register the key.
+#
+# ~~~~
+# assert dm["a"] == 10
+# assert dm.length == 0
+# assert dm.has_key("a") == false
+# ~~~~
+#
+# It also means that removed key retrieve the default value.
+#
+# ~~~~
+# dm["a"] = 2
+# assert dm["a"] == 2
+# dm.keys.remove("a")
+# assert dm["a"] == 10
+# ~~~~
+#
+# Warning: the default value is used as is, so using mutable object might
+# cause side-effects.
+#
+# ~~~~
+# var dma = new DefaultMap[String, Array[Int]](new Array[Int])
+#
+# dma["a"].add(65)
+# assert dma["a"] == [65]
+# assert dma.default == [65]
+# assert dma["c"] == [65]
+#
+# dma["b"] += [66]
+# assert dma["b"] == [65, 66]
+# assert dma.default == [65]
+# ~~~~
 class DefaultMap[K: Object, V]
 	super HashMap[K, V]
 
