@@ -24,10 +24,12 @@ extern class CppString in "C++" `{ std::string* `}
 end
 
 redef class Text
+	# Get `self` as a `CppString`
 	fun to_cpp_string: CppString do return to_cstring.to_cpp_string
 end
 
 redef class NativeString
+	# Get `self` as a `CppString`
 	fun to_cpp_string: CppString in "C++" `{
 		return new std::string(recv);
 	`}
