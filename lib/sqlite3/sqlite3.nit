@@ -132,6 +132,7 @@ class Statement
 	end
 end
 
+# A row from a `Statement`
 class StatementRow
 	# Statement linked to `self`
 	var statement: Statement
@@ -298,6 +299,9 @@ end
 class Blob
 	super Sqlite3Data
 
+	# Pointer to the beginning of the blob
 	var pointer: Pointer
+
+	# Size of the blob
 	var length: Int
 end
