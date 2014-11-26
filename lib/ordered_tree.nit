@@ -21,24 +21,57 @@ module ordered_tree
 #
 # Ordered tree are tree where the elements of a same parent are in a specific order
 #
-# The class can be used as it to work with generic tree.
-# The class can also be specialized to provide more specific behavior.
+# Elements of the trees are added with the `add` method that takes a parent and
+# a sub-element.
+# If the parent is `null`, then the element is considered a root.
+#
+# ~~~~
+# var t = new OrderedTree[String]
+# t.add(null, "root")
+# t.add("root", "child1")
+# t.add("root", "child2")
+# t.add("child1", "grand-child")
+# assert t.length == 4
+# ~~~~
+#
+# By default, the elements with a same parent
+# are visited in the order they are added.
+#
+# ~~~
+# assert t.to_a == ["root", "child1", "grand-child", "child2"]
+# assert t.write_to_string == """
+# root
+# |--child1
+# |  `--grand-child
+# `--child2
+# """
+# ~~~
+#
+# The `sort_with` method can be used reorder elements
+#
+# ~~~
+# t.add("root", "aaa")
+# assert t.to_a == ["root", "child1", "grand-child", "child2", "aaa"]
+# t.sort_with(alpha_comparator)
+# assert t.to_a == ["root", "aaa", "child1", "grand-child", "child2"]
+# ~~~
+#
+# This class can be used as it to work with generic trees but can also be specialized to provide more specific
+# behavior or display. It is why the internal attributes are mutable.
 class OrderedTree[E: Object]
 	super Streamable
 	super Collection[E]
 
-	# Sequence
+	# The roots of the tree (in sequence)
 	var roots = new Array[E]
+
+	# The branches of the trees.
+	# For each element, the ordered array of its direct sub-elements.
 	var sub = new HashMap[E, Array[E]]
 
-	# Add a new element `e` in the tree
+	# Add a new element `e` in the tree.
 	# `p` is the parent of `e`.
 	# if `p` is null, then `e` is a root element.
-	#
-	# By defauld, the elements with a same parent 
-	# are displayed in the order they are added.
-	#
-	# The `sort_with` method can be used reorder elements
 	fun add(p: nullable E, e: E)
 	do
 		if p == null then
