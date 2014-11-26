@@ -48,13 +48,11 @@ class MultiHashMap[K: Object, V]
 		self[key] = res
 		return res
 	end
-
-	init do end
 end
 
 # Simple way to store an `HashMap[K1, HashMap[K2, V]]`
 class HashMap2[K1: Object, K2: Object, V]
-	private var level1: HashMap[K1, HashMap[K2, V]] = new HashMap[K1, HashMap[K2, V]]
+	private var level1 = new HashMap[K1, HashMap[K2, V]]
 
 	# Return the value associated to the keys `k1` and `k2`.
 	# Return `null` if no such a value.
@@ -84,7 +82,7 @@ end
 
 # Simple way to store an `HashMap[K1, HashMap[K2, HashMap[K3, V]]]`
 class HashMap3[K1: Object, K2: Object, K3: Object, V]
-	private var level1: HashMap[K1, HashMap2[K2, K3, V]] = new HashMap[K1, HashMap2[K2, K3, V]]
+	private var level1 = new HashMap[K1, HashMap2[K2, K3, V]]
 
 	# Return the value associated to the keys `k1`, `k2`, and `k3`.
 	# Return `null` if no such a value.

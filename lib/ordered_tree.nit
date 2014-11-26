@@ -54,7 +54,6 @@ class OrderedTree[E: Object]
 	# Write a ASCII-style tree and use the `display` method to label elements
 	redef fun write_to(stream: OStream)
 	do
-		var last = roots.last
 		for r in roots do
 			stream.write display(r)
 			stream.write "\n"

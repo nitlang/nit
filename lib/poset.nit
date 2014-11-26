@@ -31,7 +31,7 @@ class POSet[E: Object]
 	redef fun iterator do return elements.keys.iterator
 
 	# All the nodes
-	private var elements: HashMap[E, POSetElement[E]] = new HashMap[E, POSetElement[E]]
+	private var elements = new HashMap[E, POSetElement[E]]
 
 	redef fun has(e) do return self.elements.keys.has(e)
 
