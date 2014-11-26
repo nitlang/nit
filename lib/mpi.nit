@@ -123,26 +123,34 @@ class MPI
 		return deserialized
 	end
 
+	# Send an empty buffer, only for the `tag`
 	fun send_empty(dest: Rank, tag: Tag, comm: Comm): SuccessOrError
 	`{
 		return MPI_Send(NULL, 0, MPI_CHAR, dest, tag, comm);
 	`}
 
+	# Receive an empty buffer, only for the `tag`
 	fun recv_empty(dest: Rank, tag: Tag, comm: Comm): SuccessOrError
 	`{
 		return MPI_Recv(NULL, 0, MPI_CHAR, dest, tag, comm, MPI_STATUS_IGNORE);
 	`}
 
-	fun native_send(data: NativeCArray, count: Int, data_type: DataType, dest: Rank, tag: Tag, comm: Comm): SuccessOrError
+	# Send a `NativeCArray` `buffer` with a given `count` of `data_type`
+	fun native_send(buffer: NativeCArray, count: Int, data_type: DataType, dest: Rank, tag: Tag, comm: Comm): SuccessOrError
 	`{
-		return MPI_Send(data, count, data_type, dest, tag, comm);
+		return MPI_Send(buffer, count, data_type, dest, tag, comm);
 	`}
 
-	fun native_recv(data: NativeCArray, count: Int, data_type: DataType, dest: Rank, tag: Tag, comm: Comm, status: Status): SuccessOrError
+	# Receive into a `NativeCArray` `buffer` with a given `count` of `data_type`
+	fun native_recv(buffer: NativeCArray, count: Int, data_type: DataType, dest: Rank, tag: Tag, comm: Comm, status: Status): SuccessOrError
 	`{
-		return MPI_Recv(data, count, data_type, dest, tag, comm, status);
+		return MPI_Recv(buffer, count, data_type, dest, tag, comm, status);
 	`}
 
+	# Probe for the next data to receive, store the result in `status`
+	#
+	# Note: If you encounter an error where the next receive does not correspond
+	# to the last `probe`, call this method twice to ensure a correct result.
 	fun probe(source: Rank, tag: Tag, comm: Comm, status: Status): SuccessOrError
 	`{
 		return MPI_Probe(source, tag, comm, status);
@@ -157,8 +165,13 @@ end
 
 # An MPI communicator
 extern class Comm `{ MPI_Comm `}
+	# The _null_ communicator, targeting no processors
 	new null_ `{ return MPI_COMM_NULL; `}
+
+	# The _world_ communicator, targeting all processors
 	new world `{ return MPI_COMM_WORLD; `}
+
+	# The _self_ communicator, targeting this processor only
 	new self_ `{ return MPI_COMM_SELF; `}
 
 	# Number of processors in this communicator
@@ -278,6 +291,7 @@ end
 
 # An MPI rank within a communcator
 extern class Rank `{ int `}
+	# Special rank accepting any processor
 	new any `{ return MPI_ANY_SOURCE; `}
 
 	# This Rank as an `Int`
@@ -287,6 +301,7 @@ end
 
 # An MPI tag, can be defined using `Int::tag`
 extern class Tag `{ int `}
+	# Special tag accepting any tag
 	new any `{ return MPI_ANY_TAG; `}
 
 	# This tag as an `Int`
