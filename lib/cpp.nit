@@ -23,7 +23,7 @@ end
 extern class CppString in "C++" `{ std::string* `}
 end
 
-redef class String
+redef class Text
 	fun to_cpp_string: CppString do return to_cstring.to_cpp_string
 end
 
