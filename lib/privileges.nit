@@ -75,8 +75,11 @@ class OptionUserAndGroup
 
 	redef type VALUE: nullable UserGroup
 
-	init for_dropping_privileges do init("Drop privileges to user:group or simply user", "-u", "--usergroup")
-	init(help: String, names: String...) do super(help, null, names)
+	# Create an `OptionUserAndGroup` for dropping privileges
+	init for_dropping_privileges
+	do
+		init("Drop privileges to user:group or simply user", null, ["-u", "--usergroup"])
+	end
 
 	redef fun convert(str)
 	do
