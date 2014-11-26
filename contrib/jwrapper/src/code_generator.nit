@@ -221,7 +221,7 @@ class CodeGenerator
 
 		# FIXME : This huge `if` block is only necessary to copy primitive arrays as long as there's no better way to do it
 		if comment == "#" then
-			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
+			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods with return type
 		else if return_type != null then
 			if jreturn_type.is_primitive_array then
@@ -238,7 +238,7 @@ class CodeGenerator
 				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, true))
 			# No copy
 			else
-				temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
+				temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 			end
 		# Methods without return type
 		else if jreturn_type.is_void then
@@ -247,11 +247,11 @@ class CodeGenerator
 				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, false))
 			# No copy
 			else
-				temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
+				temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 			end
 		# No copy
 		else
-			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params}); \n{comment}\t`\}\n")
+			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		end
 
 		return temp.join("")
