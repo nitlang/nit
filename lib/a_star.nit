@@ -62,9 +62,8 @@ class Node
 	# parent graph
 	var graph: Graph[N, Link]
 
-	init(graph: Graph[N, Link])
+	init
 	do
-		self.graph = graph
 		graph.add_node(self)
 	end
 
@@ -194,12 +193,8 @@ class Link
 	var from: N
 	var to: N
 
-	init(graph: Graph[N, L], from, to: N)
+	init
 	do
-		self.graph = graph
-		self.from = from
-		self.to = to
-
 		graph.add_link(self)
 	end
 end
@@ -236,7 +231,6 @@ class Path[N]
 
 	var nodes = new List[N]
 
-	init (cost: Int) do total_cost = cost
 
 	var at: Int = 0
 	fun step: N
@@ -297,7 +291,7 @@ class WeightedPathContext
 
 	redef type L: WeightedLink
 
-	init(graph: Graph[N, L])
+	init
 	do
 		super
 
@@ -309,7 +303,7 @@ class WeightedPathContext
 		self.worst_cost = worst_cost
 	end
 
-	redef var worst_cost: Int
+	redef var worst_cost: Int is noinit
 
 	redef fun cost(l) do
 		return l.weight
@@ -324,12 +318,6 @@ class WeightedLink
 
 	var weight: Int
 
-	init(graph: Graph[N, L], from, to: N, weight: Int)
-	do
-		super
-
-		self.weight = weight
-	end
 end
 
 # Advanced path conditions with customizable accept states
