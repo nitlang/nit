@@ -354,7 +354,7 @@ class OptionContext
 
 	fun get_errors: Array[String]
 	do
-		var errors: Array[String] = new Array[String]
+		var errors = new Array[String]
 		errors.add_all(errors)
 		for o in options do
 			for e in o.errors do

@@ -626,7 +626,7 @@ private class ReverseRopeSubstrings
 
 	redef fun next do
 		if pos < 0 then return
-		var curr: nullable RopeIterPiece = iter.prev
+		var curr = iter.prev
 		var currit = curr.node
 		while curr != null do
 			currit = curr.node
@@ -753,7 +753,7 @@ private class RopeSubstrings
 		pos += str.length
 		if pos > max then return
 		var it = iter.prev
-		var rnod: String = it.node
+		var rnod = it.node
 		loop
 			if not rnod isa Concat then
 				it.ldone = true

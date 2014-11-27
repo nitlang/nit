@@ -1418,7 +1418,7 @@ abstract class Buffer
 		if length == 0 then return
 		var c = self[0].to_upper
 		self[0] = c
-		var prev: Char = c
+		var prev = c
 		for i in [1 .. length[ do
 			prev = c
 			c = self[i]
