@@ -34,6 +34,9 @@ class NitUnitExecutor
 	# All blocks of code from a same `ADoc`
 	var blocks = new Array[Array[String]]
 
+	# All failures from a same `ADoc`
+	var failures = new Array[String]
+
 	redef fun process_code(n: HTMLTag, text: String, tag: nullable String)
 	do
 		# Skip non-blocks
@@ -47,24 +50,15 @@ class NitUnitExecutor
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
 
+		# Skip pure comments
+		if ast isa TComment then return
+
 		# We want executable code
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
-			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
-				toolcontext.warning(ndoc.location, "invalid-block", "Warning: There is a block of code that is not valid Nit, thus not considered a nitunit")
-				if ast isa AError then toolcontext.warning(ast.location, "syntax-error", ast.message)
-				ndoc = null # To avoid multiple warning in the same node
-			end
-			return
-		end
-
-		# Search `assert` in the AST
-		var v = new SearchAssertVisitor
-		v.enter_visit(ast)
-		if not v.foundit then
-			if ndoc != null and n.tag == "pre" and toolcontext.opt_warn.value > 1 then
-				toolcontext.warning(ndoc.location, "invalid-block", "Warning: There is a block of Nit code without `assert`, thus not considered a nitunit")
-				ndoc = null # To avoid multiple warning in the same node
-			end
+			var message = ""
+			if ast isa AError then message = " At {ast.location}: {ast.message}."
+			toolcontext.warning(ndoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			failures.add("{ndoc.location}: Invalid block of code.{message}")
 			return
 		end
 
@@ -89,11 +83,23 @@ class NitUnitExecutor
 	fun extract(ndoc: ADoc, tc: HTMLTag)
 	do
 		blocks.clear
+		failures.clear
 
 		self.ndoc = ndoc
 
 		work(ndoc.to_mdoc)
+
 		toolcontext.check_errors
+
+		if not failures.is_empty then
+			for msg in failures do
+				var ne = new HTMLTag("failure")
+				ne.attr("message", msg)
+				tc.add ne
+				toolcontext.modelbuilder.failed_entities += 1
+			end
+			if blocks.is_empty then testsuite.add(tc)
+		end
 
 		if blocks.is_empty then return
 
