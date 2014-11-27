@@ -284,11 +284,17 @@ class VirtualMachine super NaiveInterpreter
 	do
 		assert recv isa MutableInstance
 
-		var id = mproperty.intro_mclassdef.mclass.vtable.id
-
 		# Replace the old value of mproperty in recv
-		write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+			# if this attribute class has an unique position for this receiver, then use direct access
+			write_attribute_sst(recv.internal_attributes, mproperty.absolute_offset, value)
+		else
+			# Otherwise, use perfect hashing to replace the old value
+			var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+			write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset, value)
+		end
 	end
 
 	# Replace the value of an attribute in an instance
@@ -307,6 +313,16 @@ class VirtualMachine super NaiveInterpreter
 		int absolute_offset = *(pointer + 1);
 
 		((Instance *)instance)[absolute_offset + offset] = value;
+		Instance_incr_ref(value);
+	`}
+
+	# Replace the value of an attribute in an instance with direct access
+	#     `instance` is the attributes array of the receiver
+	#     `offset` is the absolute offset of this attribute
+	#     `value` is the new value for this attribute
+	private fun write_attribute_sst(instance: Pointer, offset: Int, value: Instance) `{
+		// Direct access to the position with the absolute offset
+		((Instance *)instance)[offset] = value;
 		Instance_incr_ref(value);
 	`}
 
