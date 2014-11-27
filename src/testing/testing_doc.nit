@@ -39,6 +39,11 @@ class NitUnitExecutor
 		# Skip non-blocks
 		if n.tag != "pre" then return
 
+		# Skip strict non-nit
+		if tag != null and tag != "nit" and tag != "" then
+			return
+		end
+
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
 

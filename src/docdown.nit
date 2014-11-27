@@ -235,6 +235,13 @@ private class Doc2Mdwn
 
 	fun process_code(n: HTMLTag, text: String, tag: nullable String)
 	do
+		# Do not try to highlight non-nit code.
+		if tag != null and tag != "" and tag != "nit" and tag != "nitish" then
+			n.append text
+			n.add_class("rawcode")
+			return
+		end
+
 		# Try to parse it
 		var ast = toolcontext.parse_something(text)
 
