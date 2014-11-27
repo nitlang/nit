@@ -68,7 +68,7 @@ redef class AExternCodeBlock
 end
 
 redef class Location
-	fun as_line_pragma: String do return "#line {line_start} \"{file.filename}\"\n"
+	fun as_line_pragma: String do return "#line {line_start-1} \"{file.filename}\"\n"
 end
 
 redef class MModule
