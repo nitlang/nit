@@ -668,7 +668,11 @@ redef class AVardeclExpr
 		var nexpr = self.n_expr
 		if nexpr != null then
 			if mtype != null then
-				v.visit_expr_subtype(nexpr, mtype)
+				var etype = v.visit_expr_subtype(nexpr, mtype)
+				if etype == mtype then
+					assert ntype != null
+					v.modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition for variable `{variable.name}`")
+				end
 			else
 				mtype = v.visit_expr(nexpr)
 				if mtype == null then return # Skip error
