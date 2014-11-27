@@ -383,13 +383,13 @@ redef class ModelBuilder
 			test_file = "{include_dir}/{test_file}"
 		end
 		if not test_file.file_exists then
-			toolcontext.info("Skip test for {mmodule}, no file {test_file} found", 1)
+			toolcontext.info("Skip test for {mmodule}, no file {test_file} found", 2)
 			return ts
 		end
 		var tester = new NitUnitTester(self)
 		var res = tester.test_module_unit(test_file)
 		if res == null then
-			toolcontext.info("Skip test for {mmodule}, no test suite found", 1)
+			toolcontext.info("Skip test for {mmodule}, no test suite found", 2)
 			return ts
 		end
 		return res.to_xml
