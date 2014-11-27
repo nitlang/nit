@@ -109,8 +109,16 @@ end
 class ClassDef
 	super CodeBlock
 
+	# The defined class.
 	var class_compound: ClassCompound
+
+	# The `model_id` of the base classes.
 	var supers: SimpleCollection[String] = new Array[String]
+
+	# The set of the introduced/redefined members.
+	#
+	# To ensure that the `full_name` of each member is correctly set,
+	# `declare_member` should be used to add each member.
 	var members: SimpleCollection[Member] = new Array[Member]
 
 	init do
@@ -119,6 +127,14 @@ class ClassDef
 		self["is_intro"] = true
 	end
 
+	# Declare a base compound (usually, a base class).
+	#
+	# Parameters:
+	#
+	# * `id`: `model_id` of the base compound. May be empty.
+	# * `full_name`: qualified name of the base compound. May be empty.
+	# * `prot`: visibility (proctection) of the relationship.
+	# * `virt`: level of virtuality of the relationship.
 	fun declare_super(id: String, full_name: String, prot: String,
 			virt: String) do
 		# TODO prot, virt, full_name
@@ -127,6 +143,7 @@ class ClassDef
 		end
 	end
 
+	# Append the specified member.
 	fun declare_member(member: Member) do
 		var full_name = self["full_name"]
 
