@@ -75,12 +75,12 @@ interface Boxed[N: Numeric]
 			self.top >= other.bottom and other.top >= self.bottom
 	end
 
-	# Create a bounding box that englobes the actual bounding box.
+	# Create a bounding box that encloses the actual bounding box.
 	# `dist` is the distance between the inner boundaries and the outer boundaries.
 	# ~~~
 	# var p = new Point[Int](5,10)
 	# var b = p.padded(3)
-	# assert b.top == 2 and b.bot = 8 and b.left == 7 and b.right == 13
+	# assert b.left == 2 and b.right == 8 and b.top == 13 and b.bottom == 7
 	# ~~~
 	fun padded(dist: N): Box[N] do return new Box[N].lrtb(left - dist, right + dist, top + dist, bottom - dist)
 end

@@ -47,7 +47,7 @@
 # r.handle_signal(sigint, true)
 # r.handle_signal(sigalarm, true)
 #
-# Ask system to receive a `sigalarm` signal in 1 second
+# # Ask system to receive a `sigalarm` signal in 1 second
 # set_alarm(1)
 #
 # loop
