@@ -945,11 +945,13 @@ redef class AAttrPropdef
 			if mtype == null then return
 		end
 
+		var inherited_type: nullable MType = null
 		# Inherit the type from the getter (usually an abstract getter)
-		if mtype == null and mreadpropdef != null and not mreadpropdef.is_intro then
+		if mreadpropdef != null and not mreadpropdef.is_intro then
 			var msignature = mreadpropdef.mproperty.intro.msignature
 			if msignature == null then return # Error, thus skipped
-			mtype = msignature.return_mtype
+			inherited_type = msignature.return_mtype
+			if mtype == null then mtype = inherited_type
 		end
 
 		var nexpr = self.n_expr
@@ -981,7 +983,7 @@ redef class AAttrPropdef
 
 				if mtype == null then return
 			end
-		else if ntype != null then
+		else if ntype != null and inherited_type == mtype then
 			if nexpr isa ANewExpr then
 				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
 				if xmtype == mtype then
