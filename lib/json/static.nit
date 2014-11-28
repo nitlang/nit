@@ -319,6 +319,7 @@ end
 # Redef parser
 
 redef class Nvalue
+	# The represented value.
 	private fun to_nit_object: nullable Jsonable is abstract
 end
 
@@ -348,6 +349,7 @@ redef class Nvalue_null
 end
 
 redef class Nstring
+	# The represented string.
 	private fun to_nit_string: String do
 		var res = new FlatBuffer
 		var i = 1
@@ -398,6 +400,7 @@ redef class Nvalue_object
 end
 
 redef class Nmembers
+	# All the key-value pairs.
 	private fun pairs: Array[Npair] is abstract
 end
 
@@ -415,7 +418,10 @@ redef class Nmembers_head
 end
 
 redef class Npair
+	# The represented key.
 	private fun name: String do return n_string.to_nit_string
+
+	# The represented value.
 	private fun value: nullable Jsonable do return n_value.to_nit_object
 end
 
@@ -433,6 +439,7 @@ redef class Nvalue_array
 end
 
 redef class Nelements
+	# All the items.
 	private fun items: Array[Nvalue] is abstract
 end
 
