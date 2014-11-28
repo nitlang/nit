@@ -73,6 +73,8 @@ if sum > 1 then
 	exit 1
 end
 
+tc.keep_going = opt_keep.value
+
 var model = new Model
 var mb = new ModelBuilder(model, tc)
 
@@ -106,7 +108,7 @@ else
 	for a in files do
 		var mp = mb.identify_file(a)
 		if mp == null then
-			if not opt_keep.value then tc.check_errors
+			tc.check_errors
 		end
 	end
 end
