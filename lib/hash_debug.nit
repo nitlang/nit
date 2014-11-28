@@ -136,7 +136,7 @@ redef class HashCollection[K]
 	# Count and update length of collisions for `node_at_idx`
 	# Note for dynamic call-graph analysis: callers of this functions are
 	# responsible of collisions.
-	private fun gt_collide(i: Int, k: K)
+	fun gt_collide(i: Int, k: K)
 	do
 		var c = _array[i]
 		sys.gt_coll += 1
@@ -159,7 +159,7 @@ redef class HashCollection[K]
 	# Count and update length of collisions for `store`
 	# Note for dynamic call-graph analysis: callers of this functions are
 	# responsible of collisions.
-	private fun st_collide(i: Int, n: N)
+	fun st_collide(i: Int, n: N)
 	do
 		var c = _array[i]
 		sys.st_coll += 1

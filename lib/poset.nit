@@ -17,11 +17,60 @@
 # Pre order sets and partial order set (ie hierarchies)
 module poset
 
-# Preorder set graph.
-# This class modelize an incremental preorder graph where new node and edges can be added (but no removal)
-# Preorder graph has two caracteristics:
+# Pre-order set graph.
+# This class models an incremental pre-order graph where new nodes and edges can be added (but not removed).
+# Pre-order graph has two characteristics:
 #  * reflexivity: an element is in relation with itself (ie `self.has(e) implies self.has_edge(e,e)`)
 #  * transitivity: `(self.has_edge(e,f) and self.has_edge(f,g)) implies self.has_edge(e,g)`
+#
+# Nodes and edges are added to the POSet.
+#
+# ~~~
+# var pos = new POSet[String]
+# pos.add_edge("A", "B") # add A->B
+# pos.add_edge("B", "C") # add B->C
+# pos.add_node("D") # add unconnected node "D"
+#
+# # A -> B -> C    D
+#
+# assert pos.has_edge("A", "B") == true  # direct
+# ~~~
+#
+# Since a poset is transitive, direct and indirect edges are considered by default.
+# Direct edges (transitive-reduction) can also be considered independently.
+#
+# ~~~
+# assert pos.has_edge("A", "C") == true  # indirect
+# assert pos.has_edge("A", "D") == false # no edge
+# assert pos.has_edge("B", "A") == false # edges are directed
+#
+# assert pos.has_direct_edge("A", "B") == true  # direct
+# assert pos.has_direct_edge("A", "C") == false # indirect
+# ~~~
+#
+# POSet are dynamic.
+# It means that the transitivity is updated while new nodes and edges are added.
+# The transitive-reduction (*direct edges*)) is also updated,
+# so adding new edges can make some direct edge to disappear.
+#
+# ~~~
+# pos.add_edge("A","D")
+# pos.add_edge("D","B")
+# pos.add_edge("A","E")
+# pos.add_edge("E","C")
+#
+# # A -> D -> B
+# # |         |
+# # v         v
+# # E ------> C
+#
+# assert pos.has_edge("D", "C") == true # new indirect edge
+# assert pos.has_edge("A", "B") == true # still an edge
+# assert pos.has_direct_edge("A", "B") == false  # but no-more a direct one
+# ~~~
+#
+# Thanks to the `[]` method, elements can be considered relatively to the poset.
+# SEE `POSetElement`
 class POSet[E: Object]
 	super Collection[E]
 	super Comparator
@@ -31,7 +80,7 @@ class POSet[E: Object]
 	redef fun iterator do return elements.keys.iterator
 
 	# All the nodes
-	private var elements: HashMap[E, POSetElement[E]] = new HashMap[E, POSetElement[E]]
+	private var elements = new HashMap[E, POSetElement[E]]
 
 	redef fun has(e) do return self.elements.keys.has(e)
 
@@ -50,14 +99,15 @@ class POSet[E: Object]
 	end
 
 	# Return a view of `e` in the poset.
-	# This allows to asks manipulate elements in thier relation with others elements.
+	# This allows to view the elements in their relation with others elements.
 	#
-	#     var poset: POSet[Something] # ...
-	#     for x in poset do
-	#         for y in poset[x].direct_greaters do
-	#             print "{x} -> {y}"
-	#         end
-	#     end
+	#     var poset = new POSet[String]
+	#     poset.add_chain(["A", "B", "D"])
+	#     poset.add_chain(["A", "C", "D"])
+	#     var a = poset["A"]
+	#     assert a.direct_greaters.has_exactly(["B", "C"])
+	#     assert a.greaters.has_exactly(["A", "B", "C", "D"])
+	#     assert a.direct_smallers.is_empty
 	#
 	# REQUIRE: has(e)
 	fun [](e: E): POSetElement[E]
@@ -69,9 +119,18 @@ class POSet[E: Object]
 	# Add an edge from `f` to `t`.
 	# Because a POSet is transitive, all transitive edges are also added to the graph.
 	# If the edge already exists, the this function does nothing.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_edge("A", "B") # add A->B
+	# assert pos.has_edge("A", "C") == false
+	# pos.add_edge("B", "C") # add B->C
+	# assert pos.has_edge("A", "C") == true
+	# ~~~
+	#
 	# If a reverse edge (from `t` to `f`) already exists, a loop is created.
 	#
-	# FIXME: Do somethind clever to manage loops.
+	# FIXME: Do something clever to manage loops.
 	fun add_edge(f, t: E)
 	do
 		var fe = add_node(f)
@@ -108,8 +167,38 @@ class POSet[E: Object]
 		te.dfroms.add f
 	end
 
+	# Add an edge between all elements of `es` in order.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos.has_direct_edge("A", "B")
+	# assert pos.has_direct_edge("B", "C")
+	# assert pos.has_direct_edge("C", "D")
+	# ~~~~
+	fun add_chain(es: SequenceRead[E])
+	do
+		if es.is_empty then return
+		var i = es.iterator
+		var e = i.item
+		i.next
+		for f in i do
+			add_edge(e, f)
+			e = f
+		end
+	end
+
 	# Is there an edge (transitive or not) from `f` to `t`?
+	#
+	# SEE: `add_edge`
+	#
 	# Since the POSet is reflexive, true is returned if `f == t`.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_node("A")
+	# assert pos.has_edge("A", "A") == true
+	# ~~~
 	fun has_edge(f,t: E): Bool
 	do
 		if not elements.keys.has(f) then return false
@@ -118,6 +207,15 @@ class POSet[E: Object]
 	end
 
 	# Is there a direct edge from `f` to `t`?
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C"]) # add A->B->C
+	# assert pos.has_direct_edge("A", "B") == true
+	# assert pos.has_direct_edge("A", "C") == false
+	# assert pos.has_edge("A", "C")        == true
+	# ~~~
+	#
 	# Note that because of loops, the result may not be the expected one.
 	fun has_direct_edge(f,t: E): Bool
 	do
@@ -163,12 +261,32 @@ class POSet[E: Object]
 	end
 
 	# Compare two elements in an arbitrary total order.
-	# Tis function is mainly used to sort elements of the set in an arbitrary linear extension.
-	# if a<b then return -1
-	# if a>b then return 1
+	#
+	# This function is mainly used to sort elements of the set in an coherent way.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D", "E"])
+	# pos.add_chain(["A", "X", "C", "Y", "E"])
+	# var a = ["X", "C", "E", "A", "D"]
+	# pos.sort(a)
+	# assert a == ["E", "D", "C", "X", "A"]
+	# ~~~~
+	#
+	# POSet are not necessarily total orders because some distinct elements may be incomparable (neither greater or smaller).
+	# Therefore this method relies on arbitrary linear extension.
+	# This linear extension is a lawful total order (transitive, anti-symmetric, reflexive, and total), so can be used to compare the elements.
+	#
+	# The abstract behavior of the method is thus the following:
+	#
+	# ~~~~nitish
 	# if a == b then return 0
-	# else return -1 or 1
-	# The total order is stable unless a new node or a new edge is added
+	# if has_edge(b, a) then return -1
+	# if has_edge(a, b) then return 1
+	# return -1 or 1 # according to the linear extension.
+	# ~~~~
+	#
+	# Note that the linear extension is stable, unless a new node or a new edge is added.
 	redef fun compare(a, b: E): Int
 	do
 		var ae = self.elements[a]
@@ -203,6 +321,8 @@ class POSet[E: Object]
 		return res
 	end
 
+	# Filter elements to return only the greatest ones
+	#
 	# ~~~
 	# var s = new POSet[String]
 	# s.add_edge("B", "A")
@@ -213,7 +333,6 @@ class POSet[E: Object]
 	# assert s.select_greatest(["A", "B", "C"]) == ["A"]
 	# assert s.select_greatest(["B", "C", "D"]) == ["B", "C"]
 	# ~~~
-	# Filter elements to return only the greatest ones
 	fun select_greatest(elements: Collection[E]): Array[E]
 	do
 		var res = new Array[E]
@@ -228,6 +347,13 @@ class POSet[E: Object]
 	end
 
 	# Sort a sorted array of poset elements using linearization order
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D", "E"])
+	# pos.add_chain(["A", "X", "C", "Y", "E"])
+	# var a = pos.linearize(["X", "C", "E", "A", "D"])
+	# assert a == ["E", "D", "C", "X", "A"]
+	# ~~~~
 	fun linearize(elements: Collection[E]): Array[E] do
 		var lin = elements.to_a
 		sort(lin)
@@ -265,12 +391,24 @@ class POSetElement[E: Object]
 
 	# Return the set of all elements `t` that have an edge from `element` to `t`.
 	# Since the POSet is reflexive, element is included in the set.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos["B"].greaters.has_exactly(["B", "C", "D"])
+	# ~~~~
 	fun greaters: Collection[E]
 	do
 		return self.tos
 	end
 
 	# Return the set of all elements `t` that have a direct edge from `element` to `t`.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos["B"].direct_greaters.has_exactly(["C"])
+	# ~~~~
 	fun direct_greaters: Collection[E]
 	do
 		return self.dtos
@@ -278,30 +416,67 @@ class POSetElement[E: Object]
 
 	# Return the set of all elements `f` that have an edge from `f` to `element`.
 	# Since the POSet is reflexive, element is included in the set.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos["C"].smallers.has_exactly(["A", "B", "C"])
+	# ~~~~
 	fun smallers: Collection[E]
 	do
 		return self.froms
 	end
 
 	# Return the set of all elements `f` that have an edge from `f` to `element`.
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos["C"].direct_smallers.has_exactly(["B"])
+	# ~~~~
 	fun direct_smallers: Collection[E]
 	do
 		return self.dfroms
 	end
 
 	# Is there an edge from `element` to `t`?
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert     pos["B"] <= "D"
+	# assert     pos["B"] <= "C"
+	# assert     pos["B"] <= "B"
+	# assert not pos["B"] <= "A"
+	# ~~~~
 	fun <=(t: E): Bool
 	do
 		return self.tos.has(t)
 	end
 
 	# Is `t != element` and is there an edge from `element` to `t`?
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert     pos["B"] < "D"
+	# assert     pos["B"] < "C"
+	# assert not pos["B"] < "B"
+	# assert not pos["B"] < "A"
+	# ~~~~
 	fun <(t: E): Bool
 	do
 		return t != self.element and self.tos.has(t)
 	end
 
 	# The length of the shortest path to the root of the poset hierarchy
+	#
+	# ~~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D"])
+	# assert pos["A"].depth == 3
+	# assert pos["D"].depth == 0
+	# ~~~~
 	fun depth: Int do
 		if direct_greaters.is_empty then
 			return 0

@@ -14,9 +14,8 @@
 
 # Pipelined filters and operations on iterators.
 #
-# This module enhance `Iterator`s with some methods that enable a
-# pipeline-like programing that offers the manupulation of
-# collections trough connected filters with reasonable memory constraints.
+# This module enhances `Iterator` with some methods that enable a pipeline-like programing.
+# The processing of elements in a pipeline is done trough connected filters that are implemented with reasonable memory constraints.
 module pipeline
 
 redef interface Iterator[E]
@@ -35,6 +34,8 @@ redef interface Iterator[E]
 
 	# Filter: sort with a given `comparator`.
 	# Important: require O(n) memory.
+	#
+	#    assert ["a", "c", "b"].iterator.sort_with(alpha_comparator).to_a  == ["a", "b", "c"]
 	fun sort_with(comparator: Comparator): Iterator[E]
 	do
 		var a = self.to_a
