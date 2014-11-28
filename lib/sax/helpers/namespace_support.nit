@@ -74,8 +74,8 @@ class NamespaceSupport
 	# to the `xmlns` prefix.
 	var nsdecl = "http://www.w3.org/xmlns/2000/"
 
-	private var contexts: Array[Context] = new Array[Context].with_capacity(32)
-	private var current_context: Context = new Context
+	private var contexts = new Array[Context].with_capacity(32)
+	private var current_context = new Context
 	private var context_position: Int = 0
 
 	init do

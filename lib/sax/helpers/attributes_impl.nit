@@ -30,7 +30,7 @@ import sax::attributes
 class AttributesImpl
 	super Attributes
 
-	private var data: Array[String] = new Array[String]
+	private var data = new Array[String]
 	redef var length: Int = 0
 
 	redef fun uri(index: Int): nullable String do
