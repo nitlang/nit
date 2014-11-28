@@ -1,0 +1,2 @@
+all:
+	${MAKE} docs -C ..
