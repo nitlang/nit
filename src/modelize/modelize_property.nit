@@ -175,7 +175,8 @@ redef class ModelBuilder
 		# Look for most-specific new-stype init definitions
 		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
 		if spropdefs.is_empty then
-			toolcontext.fatal_error(nclassdef.location, "Fatal error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
+			toolcontext.error(nclassdef.location, "Error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
+			return
 		end
 
 		# Search the longest-one and checks for conflict
