@@ -12,7 +12,8 @@ nitg_args3
 nitg_args5
 nitg_args6
 nitg_args8
-test_markdown_args1
+nitunit_args
+test_docdown_args
 pep8analysis
 emscripten
 nitserial_args
