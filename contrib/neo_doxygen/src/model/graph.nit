@@ -34,9 +34,12 @@ class NeoGraph
 	end
 end
 
-# The project’s graph.
+# A project’s graph.
 class ProjectGraph
 	super NeoGraph
+
+	# The project’s name.
+	var project_name: String
 
 	# The node reperesenting the project.
 	#
@@ -49,11 +52,11 @@ class ProjectGraph
 	# Initialize a new project graph using the specified project name.
 	#
 	# The specified name will label all nodes of the project’s graph.
-	init(name: String) do
-		project.labels.add(name)
+	init do
+		project.labels.add(project_name)
 		project.labels.add("MEntity")
 		project.labels.add("MProject")
-		project["name"] = name
+		project["name"] = project_name
 		all_nodes.add(project)
 
 		var root = new RootNamespace(self)
@@ -91,7 +94,7 @@ abstract class Entity
 	var doc = new JsonArray is writable
 
 	init do
-		self.labels.add(graph.project["name"].to_s)
+		self.labels.add(graph.project_name)
 		self.labels.add("MEntity")
 	end
 
