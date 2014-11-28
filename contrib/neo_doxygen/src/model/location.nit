@@ -21,10 +21,19 @@ import neo4j
 class Location
 	super Jsonable
 
+	# The file’s path.
 	var path: nullable String = null is writable
+
+	# The one-based index of the first line.
 	var line_start: Int = 1 is writable
+
+	# The one-based index of the last line.
 	var line_end: Int = 1 is writable
+
+	# The one-based column index of the first character.
 	var column_start: Int = 1 is writable
+
+	# The one-based column index of the last character.
 	var column_end: Int = 1 is writable
 
 	redef fun to_s: String do
