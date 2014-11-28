@@ -114,8 +114,6 @@ end
 class Statement
 	private var native_statement: NativeStatement
 
-	private init(ns: NativeStatement) do self.native_statement = ns
-
 	# Is this statement usable?
 	var is_open = true
 
@@ -134,11 +132,10 @@ class Statement
 	end
 end
 
+# A row from a `Statement`
 class StatementRow
 	# Statement linked to `self`
 	var statement: Statement
-
-	private init(s: Statement) do self.statement = s
 
 	# Number of entries in this row
 	#
@@ -160,12 +157,6 @@ class StatementEntry
 	var statement: Statement
 
 	private var index: Int
-
-	private init(s: Statement, i: Int)
-	do
-		self.statement = s
-		self.index = i
-	end
 
 	# Name of the column
 	#
@@ -258,17 +249,15 @@ class StatementIterator
 	# Statement linked to `self`
 	var statement: Statement
 
-	private init(s: Statement)
+	init
 	do
-		self.statement = s
- 		self.item = new StatementRow(s)
-
+		self.item = new StatementRow(statement)
 		self.is_ok = statement.native_statement.step.is_row
 	end
 
-	redef var item: StatementRow
+	redef var item: StatementRow is noinit
 
-	redef var is_ok: Bool
+	redef var is_ok: Bool is noinit
 
 	# require: `self.statement.is_open`
 	redef fun next
@@ -310,12 +299,9 @@ end
 class Blob
 	super Sqlite3Data
 
-	private init(pointer: Pointer, length: Int)
-	do
-		self.pointer = pointer
-		self.length = length
-	end
-
+	# Pointer to the beginning of the blob
 	var pointer: Pointer
+
+	# Size of the blob
 	var length: Int
 end

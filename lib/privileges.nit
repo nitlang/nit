@@ -75,8 +75,11 @@ class OptionUserAndGroup
 
 	redef type VALUE: nullable UserGroup
 
-	init for_dropping_privileges do init("Drop privileges to user:group or simply user", "-u", "--usergroup")
-	init(help: String, names: String...) do super(help, null, names)
+	# Create an `OptionUserAndGroup` for dropping privileges
+	init for_dropping_privileges
+	do
+		init("Drop privileges to user:group or simply user", null, ["-u", "--usergroup"])
+	end
 
 	redef fun convert(str)
 	do
@@ -87,8 +90,7 @@ class OptionUserAndGroup
 			return new UserGroup(words[0], words[1])
 		else
 			errors.add("Option {names.join(", ")} expected parameter in the format \"user:group\" or simply \"user\".\n")
-			abort # FIXME only for nitc, remove and replace with next line when FFI is working in nitg
-			#return null
+			return null
 		end
 	end
 end

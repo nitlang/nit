@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Platform for the _emscripten_ framework
+#
+# Importing this module from your project will tell _nitg_ to compile
+# to JavaScript for the _emscripten_ framework.
 module emscripten is platform
 
 `{
@@ -21,12 +25,16 @@ module emscripten is platform
 	#include <gc.h>
 `}
 
-redef class String
+redef class Text
+	# Run `self` as JavaScript code
 	fun run_js do run_js_native(self.escape_to_js.to_cstring)
+
 	private fun run_js_native(script: NativeString) `{ emscripten_run_script(script); `}
 
-	fun escape_to_js: String do return self.replace('\n', "\\n")
+	# Escape the content of `self` to pass to JavaScript code
+	fun escape_to_js: Text do return replace('\n', "\\n")
 
+	# Raise a JavaScript alert
 	fun alert do "alert('{self.escape_to_js}')".run_js
 end
 

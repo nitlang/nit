@@ -92,8 +92,9 @@ extern class NativeEventBase `{ struct event_base * `}
 
 	# Create a new event_base to use with the rest of Libevent
 	new `{ return event_base_new(); `}
+
+	# Has `self` been correctly initialized?
 	fun is_valid: Bool do return not address_is_null
-	#fun creation_ok
 
 	# Event dispatching loop
 	#
@@ -154,7 +155,7 @@ class Connection
 	# Write a string to the connection
 	fun write(str: String)
 	do
-		var res = native_buffer_event.write(str.to_cstring, str.length)
+		native_buffer_event.write(str.to_cstring, str.length)
 	end
 
 	# Write a file to the connection
@@ -175,6 +176,7 @@ end
 
 # A buffer event structure, strongly associated to a connection, an input buffer and an output_buffer
 extern class NativeBufferEvent `{ struct bufferevent * `}
+	# Write `length` bytes of `line`
 	fun write(line: NativeString, length: Int): Int `{
 		return bufferevent_write(recv, line, length);
 	`}
@@ -205,6 +207,7 @@ extern class NativeEvBuffer `{ struct evbuffer * `}
 	fun length: Int `{ return evbuffer_get_length(recv); `}
 end
 
+# An input buffer
 extern class InputNativeEvBuffer
 	super NativeEvBuffer
 
@@ -212,6 +215,7 @@ extern class InputNativeEvBuffer
 	fun drain(length: Int) `{ evbuffer_drain(recv, length); `}
 end
 
+# An output buffer
 extern class OutputNativeEvBuffer
 	super NativeEvBuffer
 
@@ -270,6 +274,7 @@ end
 
 # Factory to listen on sockets and create new `Connection`
 class ConnectionFactory
+	# The `NativeEventBase` for the dispatch loop of this factory
 	var event_base: NativeEventBase
 
 	# On new connection, create the handler `Connection` object

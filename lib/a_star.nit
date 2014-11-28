@@ -57,14 +57,14 @@ module a_star
 
 # General graph node
 class Node
+	# Type of the others nodes in the `graph`
 	type N: Node
 
 	# parent graph
 	var graph: Graph[N, Link]
 
-	init(graph: Graph[N, Link])
+	init
 	do
-		self.graph = graph
 		graph.add_node(self)
 	end
 
@@ -186,29 +186,36 @@ end
 
 # Link between two nodes and associated to a graph
 class Link
+	# Type of the nodes in `graph`
 	type N: Node
+
+	# Type of the other links in `graph`
 	type L: Link
 
+	# The graph to which belongs `self`
 	var graph: Graph[N, L]
 
+	# Origin of this link
 	var from: N
+
+	# Endpoint of this link
 	var to: N
 
-	init(graph: Graph[N, L], from, to: N)
+	init
 	do
-		self.graph = graph
-		self.from = from
-		self.to = to
-
 		graph.add_link(self)
 	end
 end
 
 # General graph
 class Graph[N: Node, L: Link]
+	# Nodes in this graph
 	var nodes: Set[N] = new HashSet[N]
+
+	# Links in this graph
 	var links: Set[L] = new HashSet[L]
 
+	# Add a `node` to this graph
 	fun add_node(node: N): N
 	do
 		nodes.add(node)
@@ -216,6 +223,7 @@ class Graph[N: Node, L: Link]
 		return node
 	end
 
+	# Add a `link` to this graph
 	fun add_link(link: L): L
 	do
 		links.add(link)
@@ -225,20 +233,22 @@ class Graph[N: Node, L: Link]
 		return link
 	end
 
-	# used to check if nodes have been searched in one pathfinding
-	var pathfinding_current_evocation: Int = 0
+	# Used to check if nodes have been searched in one pathfinding
+	private var pathfinding_current_evocation: Int = 0
 end
 
-# Result from pathfinding, a walkable path
+# Result from path finding and a walkable path
 class Path[N]
 
+	# The total cost of this path
 	var total_cost: Int
 
+	# The list of nodes composing this path
 	var nodes = new List[N]
 
-	init (cost: Int) do total_cost = cost
+	private var at: Int = 0
 
-	var at: Int = 0
+	# Step on the path and get the next node to travel
 	fun step: N
 	do
 		assert nodes.length >= at else print "a_star::Path::step failed, is at_end_of_path"
@@ -249,16 +259,22 @@ class Path[N]
 		return s
 	end
 
+	# Peek at the next step of the path
 	fun peek_step: N do return nodes[at]
 
+	# Are we at the end of this path?
 	fun at_end_of_path: Bool do return at >= nodes.length
 end
 
 # Context related to an evocation of pathfinding
 class PathContext
+	# Type of the nodes in `graph`
 	type N: Node
+
+	# Type of the links in `graph`
 	type L: Link
 
+	# Graph to which is associated `self`
 	var graph: Graph[N, L]
 
 	# Worst cost of all the link's costs
@@ -273,6 +289,7 @@ class PathContext
 	# Heuristic
 	fun heuristic_cost(a, b: N): Int is abstract
 
+	# The worst cost suggested by the heuristic
 	fun worst_heuristic_cost: Int is abstract
 end
 
@@ -292,12 +309,13 @@ class ConstantPathContext
 	redef fun worst_heuristic_cost do return 0
 end
 
+# A `PathContext` for graphs with `WeightedLink`
 class WeightedPathContext
 	super PathContext
 
 	redef type L: WeightedLink
 
-	init(graph: Graph[N, L])
+	init
 	do
 		super
 
@@ -309,7 +327,7 @@ class WeightedPathContext
 		self.worst_cost = worst_cost
 	end
 
-	redef var worst_cost: Int
+	redef var worst_cost: Int is noinit
 
 	redef fun cost(l) do
 		return l.weight
@@ -319,17 +337,12 @@ class WeightedPathContext
 	redef fun worst_heuristic_cost do return 0
 end
 
+# A `Link` with a `weight`
 class WeightedLink
 	super Link
 
+	# The `weight`, or cost, of this link
 	var weight: Int
-
-	init(graph: Graph[N, L], from, to: N, weight: Int)
-	do
-		super
-
-		self.weight = weight
-	end
 end
 
 # Advanced path conditions with customizable accept states
