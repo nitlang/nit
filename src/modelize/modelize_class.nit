@@ -168,6 +168,10 @@ redef class ModelBuilder
 						warning(nfdt, "useless-bound", "Warning: Useless formal parameter type since `{bound}` cannnot have subclasses.")
 					end
 				else if mclass.mclassdefs.is_empty then
+					if objectclass == null then
+						error(nfd, "Error: Formal parameter type `{pname}' unbounded but no Object class exist.")
+						return
+					end
 					# No bound, then implicitely bound by nullable Object
 					var bound = objectclass.mclass_type.as_nullable
 					bounds.add(bound)
