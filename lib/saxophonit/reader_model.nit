@@ -36,6 +36,7 @@ class XophonReaderModel
 	# “Namespaces in XML”.
 	private var qname_re: Regex = "^[^:]+(:[^:]+)?$".to_re
 
+	# The locator that is used to indicate the current location.
 	var locator: nullable SAXLocatorImpl = null is writable
 
 

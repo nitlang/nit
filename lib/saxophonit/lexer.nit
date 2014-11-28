@@ -20,8 +20,14 @@ import reader_model
 # They both foward the cursor to the next byte on success, but only `expect`
 # functions fire a fatal error on mismatch.
 class XophonLexer
+
+	# The model.
 	var reader_model: XophonReaderModel
+
+	# The input to read from.
 	var input: IStream is writable
+
+	# Alias to `reader_model.locator`.
 	private var locator: SAXLocatorImpl is noinit
 
 	init do
