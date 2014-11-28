@@ -41,8 +41,6 @@ module sax::input_source
 # from [SAX 2.0](http://www.saxproject.org).
 class InputSource
 
-	init do end
-
 	# Create a new input source with the specified system identifier.
 	#
 	# Applications may use `public_id=` to include a public identifier as well,

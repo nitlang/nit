@@ -428,9 +428,6 @@ private class Context
 	# Parent context.
 	private var p_parent: nullable Context = null
 
-	init do
-	end
-
 	# (Re)set the parent of this Namespace context.
 	#
 	# The context must either have been freshly constructed,
