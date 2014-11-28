@@ -22,6 +22,9 @@ var toolcontext = new ToolContext
 # Disable `cached` because it causes issues when printing transformed AST. FIXME
 toolcontext.cached_phase.disabled = true
 
+# Try to colorize, even if programs are non valid
+toolcontext.keep_going = true
+
 var opt_fragment = new OptionBool("Omit document header and footer", "-f", "--fragment")
 var opt_first_line = new OptionInt("Start the source file at this line (default: 1)", 0, "--first-line")
 var opt_last_line = new OptionInt("End the source file at this line (default: to the end)", 0, "--last-line")
