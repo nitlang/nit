@@ -263,7 +263,7 @@ redef class MModule
 			var msg = "Fatal Error: more than one primitive class {name}:"
 			for c in cla do msg += " {c.full_name}"
 			print msg
-			exit(1)
+			#exit(1)
 		end
 		return cla.first
 	end
