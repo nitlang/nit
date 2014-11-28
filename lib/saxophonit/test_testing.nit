@@ -35,8 +35,8 @@ class TestSaxEventLogger
 	private var del_em: String is noinit
 
 
-	private var a: SAXEventLogger = new SAXEventLogger
-	private var b: SAXEventLogger = new SAXEventLogger
+	private var a = new SAXEventLogger
+	private var b = new SAXEventLogger
 
 	private var init_done: Bool = false
 

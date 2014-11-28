@@ -40,7 +40,7 @@ class SAXEventLogger
 	# order they fired (the oldest first). Two event loggers have equivalent
 	# logs if and only if they received the same events in the same order and
 	# with equivalent arguments.
-	private var log: Array[Array[String]] = new Array[Array[String]]
+	private var log = new Array[Array[String]]
 
 	# http://xml.org/sax/properties/declaration-handler
 	private var decl_handler: nullable DeclHandler = null
@@ -545,10 +545,10 @@ abstract class SAXTestSuite
 	super TestSuite
 
 	# Logger of the expected event sequence.
-	var expected: SAXEventLogger = new SAXEventLogger
+	var expected = new SAXEventLogger
 
 	# Logger of the actual event sequence.
-	var actual: SAXEventLogger = new SAXEventLogger
+	var actual = new SAXEventLogger
 
 	# The tested SAX reader.
 	var reader: XMLReader is noinit
