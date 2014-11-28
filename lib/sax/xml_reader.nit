@@ -275,9 +275,11 @@ interface XMLReader
 	# document from a system identifier. It is the exact
 	# equivalent of the following:
 	#
-	#     var source = new InputSouce
-	#     source.system_id = system_id
-	#     parse(source)
+	# ~~~nitish
+	# var source = new InputSouce
+	# source.system_id = system_id
+	# parse(source)
+	# ~~~
 	#
 	# If the system identifier is a URL, it must be fully resolved
 	# by the application before it is passed to the parser.

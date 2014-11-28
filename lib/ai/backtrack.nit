@@ -86,7 +86,7 @@ end
 # 2. Apply the method `run`, that will search and return a solution.
 # 3. Retrieve information from the solution.
 #
-# ~~~~
+# ~~~~nitish
 # var p: BacktrackProblem = new MyProblem
 # var solver = p.solve
 # var res = solver.run

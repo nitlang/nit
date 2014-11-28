@@ -41,45 +41,55 @@
 # `Licence comments` are attached to the top of the file
 # no blank line before, one after.
 #
-#     # This is a licence comment
+# ~~~nitish
+# # This is a licence comment
 #
-#     # Documentation for module `foo`
-#     module foo
+# # Documentation for module `foo`
+# module foo
+# ~~~
 #
 # `ADoc` are documentation comments attached to a `AModule`, `AClassdef`, `APropdef`.
 #
 # They are printed before the definition with a blank line before and no after
 # at the same indentation level than the definition.
 #
-#     # Documentation for module `foo`
-#     module foo
+# ~~~nitish
+# # Documentation for module `foo`
+# module foo
 #
-#     # Documentation for class `Bar`
-#     class Bar
-#          # Documentation for method `baz`
-#          fun baz do end
-#     end
+# # Documentation for class `Bar`
+# class Bar
+#      # Documentation for method `baz`
+#      fun baz do end
+# end
+# ~~~
 #
 # `Block comments` are comments composed of one or more line rattached to nothing.
 # They are displayed with one blank line before and after at current indent level.
 #
-#     <blank>
-#     # block
-#     # comment
-#     <blank>
+# ~~~nitish
+# <blank>
+# # block
+# # comment
+# <blank>
+# ~~~
 #
 # `Attached comments` are comments attached to a production.
 # They are printed as this.
 #
-#     fun foo do # attached comment
-#     end
+# ~~~nitish
+# fun foo do # attached comment
+# end
+# ~~~
 #
 # `nitpretty` automatically remove multiple blanks between comments:
 #
-#     # Licence
-#     # ...
-#     <blank>
-#     # Block comment
+# ~~~nitish
+# # Licence
+# # ...
+# <blank>
+# # Block comment
+# ~~~
 #
 # ### Inlining
 #
@@ -99,17 +109,19 @@
 # * There is a blank between each class definition
 # * There is no blank line at the end of the module
 #
-#     # Documentation for module `foo`
-#     module foo
+# ~~~nitish
+# # Documentation for module `foo`
+# module foo
 #
-#     import a
-#     # import b
-#     import c
+# import a
+# # import b
+# import c
 #
-#     # Documentation for class `Bar`
-#     class Bar end
+# # Documentation for class `Bar`
+# class Bar end
 #
-#     class Baz end # not a `ADoc` comment
+# class Baz end # not a `ADoc` comment
+# ~~~
 #
 #
 # ### Classes
@@ -119,60 +131,73 @@
 # * There is a blank between each block definition
 # * There no blank line at the end of the class definition
 #
-#     # Documentation for class `Bar`
-#     class Bar end
+# ~~~nitish
+# # Documentation for class `Bar`
+# class Bar end
 #
-#     class Baz
-#          super Bar
+# class Baz
+#     super Bar
 #
-#          fun a is abstract
-#          private fun b do end
+#      fun a is abstract
+#      private fun b do end
 #
-#          fun c do
-#               # ...
-#          end
-#     end
+#      fun c do
+#           # ...
+#      end
+# end
+# ~~~
 #
-# Generic types have no espace after or before brackets and are separated by a comma and a space:
+# Generic types have no space after or before brackets and are separated by a comma and a space:
 #
-#     class A[E: Type1, F: Type1] do end
+# ~~~nitish
+# class A[E: Type1, F: Type1] end
+# ~~~
 #
 # ### Blocks
 #
 # * Inlined productions have no blank lines between them
 # * Block productions have a blank before and after
 #
-#     var a = 10
-#     var b = 0
+# ~~~nitish
+# var a = 10
+# var b = 0
 #
-#     if a > b then
-#          # is positive
-#          print "positive"
-#     end
+# if a > b then
+#      # is positive
+#      print "positive"
+# end
 #
-#     print "end"
+# print "end"
+# ~~~
 #
 # ### Calls and Binary Ops
 #
 # Arguments are always printed separated with a comma and a space:
 #
-#     foo(a, b, c)
+# ~~~nitish
+# foo(a, b, c)
+# ~~~
 #
 # Binary ops are always printed wrapped with spaces:
 #
-#     var c = 1 + 2
+# ~~~nitish
+# var c = 1 + 2
+# ~~~
 #
 # Calls and binary ops can be splitted to fit the `max-size` constraint.
 # Breaking priority is given to arguments declaration after the comma.
 #
-#     return foo("aaaaaaaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbbbbbbbbbb",
-#        "cccccccccccccccccccccccccc")
+# ~~~nitish
+# return foo("aaaaaaaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbbbbbbbbbb",
+#     "cccccccccccccccccccccccccc")
+# ~~~
 #
 # Binary ops can also be broken to fit the `max-size` limit:
 #
-#     return "aaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbbbbbbbbbbbbbbbb" +
-#        "cccccccccccccccccccccccccc"
-#
+# ~~~nitish
+# return "aaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+#     "cccccccccccccccccccccccccc"
+# ~~~
 module nitpretty
 
 import template

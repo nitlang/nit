@@ -199,7 +199,7 @@ end
 # 2. Apply the method `run`, that will search and return a solution.
 # 3. Retrieve information from the solution.
 #
-# ~~~~
+# ~~~~nitish
 # var p: SearchProblem = new MyProblem
 # var res = p.astar.run
 # if res != null then print "Found plan with {res.depth} actions, that cost {res.cost}: {res.plan.join(", ")}"

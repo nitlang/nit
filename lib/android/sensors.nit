@@ -18,7 +18,8 @@
 # The sensor support is implemented in android_app module, so the user can enable the type of sensor he wants to use.
 # There is an example of how you can use the android sensors in nit/examples/mnit_ballz :
 #
-# ~~~~
+# ~~~~nitish
+# #FIXME rewrite the example
 # var app = new MyApp
 # app.sensors_support_enabled = true
 # app.accelerometer.enabled = true

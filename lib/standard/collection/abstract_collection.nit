@@ -33,25 +33,29 @@ import kernel
 # Subclasses often provide a more efficient implementation.
 #
 # Because of the `iterator` method, Collections instances can use
-# the `for` control structure:
+# the `for` control structure.
 #
-#         var x: Collection[U]
-#         # ...
-#         for u in x do
-#             # u is a U
-#             # ...
-#         end
+# ~~~nitish
+# var x: Collection[U]
+# # ...
+# for u in x do
+#     # u is a U
+#     # ...
+# end
+# ~~~
 #
-# that is equivalent with
+# that is equivalent with the following:
 #
-#         var x: Collection[U]
-#         # ...
-#         var i = x.iterator
-#         while i.is_ok do
-#             var u = i.item # u is a U
-#             # ...
-#             i.next
-#         end
+# ~~~nitish
+# var x: Collection[U]
+# # ...
+# var i = x.iterator
+#     while i.is_ok do
+#     var u = i.item # u is a U
+#     # ...
+#     i.next
+# end
+# ~~~
 interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract

@@ -52,12 +52,14 @@ class POSet[E: Object]
 	# Return a view of `e` in the poset.
 	# This allows to asks manipulate elements in thier relation with others elements.
 	#
-	#     var poset: POSet[Something] # ...
-	#     for x in poset do
-	#         for y in poset[x].direct_greaters do
-	#             print "{x} -> {y}"
-	#         end
+	# ~~~nitish
+	# var poset: POSet[Something] # ...
+	# for x in poset do
+	#     for y in poset[x].direct_greaters do
+	#         print "{x} -> {y}"
 	#     end
+	# end
+	# ~~~
 	#
 	# REQUIRE: has(e)
 	fun [](e: E): POSetElement[E]
@@ -240,13 +242,15 @@ end
 #
 # For instance, one common usage is to add a specific attribute for each poset a class belong.
 #
-#     class Thing
-#         var in_some_relation: POSetElement[Thing]
-#         var in_other_relation: POSetElement[Thing]
-#     end
-#     var t: Thing # ...
-#     t.in_some_relation.greaters
-#
+# ~~~nitish
+# class Thing
+#     var in_some_relation: POSetElement[Thing]
+#     var in_other_relation: POSetElement[Thing]
+# end
+# var t: Thing
+# # ...
+# t.in_some_relation.greaters
+# ~~~
 class POSetElement[E: Object]
 	# The poset self belong to
 	var poset: POSet[E]

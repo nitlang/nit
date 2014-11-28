@@ -16,7 +16,7 @@
 
 # Services to show notification in the Android status bar
 #
-# ~~~~
+# ~~~~nitish
 # # Create and show a notification
 # var notif = new Notification("My Title", "Some content")
 # notif.ticker = "Ticker text"
@@ -25,7 +25,7 @@
 # # Update the notification
 # notif.text = "New content!"
 # notif.ongoing = true # Make it un-dismissable
-# nofif.show
+# notif.show
 #
 # # Hide the notification
 # notif.cancel

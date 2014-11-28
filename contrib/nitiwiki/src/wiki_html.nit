@@ -121,15 +121,17 @@ redef class WikiSection
 	#
 	# The generated tree will be something like this:
 	#
-	#    <ul>
-	#     <li>section 1</li>
-	#     <li>section 2
-	#      <ul>
-	#       <li>section 2.1</li>
-	#       <li>section 2.2</li>
-	#      </ul>
-	#     </li>
-	#    </ul>
+	# ~~~html
+	# <ul>
+	#  <li>section 1</li>
+	#  <li>section 2
+	#   <ul>
+	#    <li>section 2.1</li>
+	#    <li>section 2.2</li>
+	#   </ul>
+	#  </li>
+	# </ul>
+	# ~~~
 	fun tpl_tree(limit: Int): Template do
 		return tpl_tree_intern(limit, 1)
 	end

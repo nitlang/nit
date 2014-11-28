@@ -73,10 +73,9 @@ redef class SharedPreferences
 	#
 	# User has to manage local stack deallocation himself
 	#
-	# Example :
-	# ~~~
-	# var a_hash_set = shared_preferences.string_set("A key")
-	# ...
+	# ~~~nitish
+	# var a_hash_set = app.shared_preferences.string_set("A key")
+	# # ...
 	# for element in a_hash_set do element.delete_local_ref
 	# ~~~
 	fun string_set(key: String): HashSet[JavaString] 
@@ -92,10 +91,9 @@ redef class SharedPreferences
 	#
 	# User has to manage local stack deallocation himself
 	#
-	# Example :
-	# ~~~
+	# ~~~nitish
 	# var foo = new HashSet[JavaString]
-	# shared_preferences.add_string_set("A key", foo)
+	# app.shared_preferences.add_string_set("A key", foo)
 	# for element in foo do element.delete_local_ref
 	# ~~~
 	fun add_string_set(key: String, value: HashSet[JavaString]): SharedPreferences

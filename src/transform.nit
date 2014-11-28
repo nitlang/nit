@@ -272,10 +272,12 @@ end
 redef class AArrayExpr
 	# `[x,y]` is replaced with
 	#
-	#     var t = new Array[X].with_capacity(2)
-	#     t.add(x)
-	#     t.add(y)
-	#     t
+	# ~~~nitish
+	# var t = new Array[X].with_capacity(2)
+	# t.add(x)
+	# t.add(y)
+	# t
+	# ~~~
 	redef fun accept_transform_visitor(v)
 	do
 		var nblock = v.builder.make_block
@@ -323,11 +325,15 @@ end
 redef class ASendReassignFormExpr
 	# `x.foo(y)+=z` is replaced with
 	#
-	#     x.foo(y) = x.foo(y) + z
+	# ~~~nitish
+	# x.foo(y) = x.foo(y) + z
+	# ~~~
 	#
 	# witch is, in reality:
 	#
-	#     x."foo="(y, x.foo(y)."+"(z))
+	# ~~~nitish
+	# x."foo="(y, x.foo(y)."+"(z))
+	# ~~~
 	redef fun accept_transform_visitor(v)
 	do
 		var nblock = v.builder.make_block

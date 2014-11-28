@@ -30,7 +30,8 @@ in "C Header" `{
 # Utility to select options to create the VM using `create_jvm`
 #
 # Usage example:
-# ~~~~
+#
+# ~~~~nitish
 # var builder = new JavaVMBuilder
 # builder.options.add "-Djava.class.path=."
 # var jvm = builder.create_jvm

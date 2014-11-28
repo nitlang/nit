@@ -134,11 +134,13 @@ redef class AExpr
 	# To create the new node `n`, we need to attach the child to it.
 	# But, to put `n` where `c` was in `p`, the place has to be remembered.
 	#
-	#     var p: AExpr
-	#     var c = p.c
-	#     var h = c.detach_with_placeholder
-	#     var n = astbuilder.make_XXX(c)
-	#     h.replace_with(n)
+	# ~~~nitish
+	# var p: AExpr
+	# var c = p.c
+	# var h = c.detach_with_placeholder
+	# var n = astbuilder.make_XXX(c)
+	# h.replace_with(n)
+	# ~~~
 	fun detach_with_placeholder: AExpr
 	do
 		var h = new APlaceholderExpr.make

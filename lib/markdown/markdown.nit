@@ -555,9 +555,9 @@ end
 # A Link Reference.
 # Links that are specified somewhere in the mardown document to be reused as shortcuts.
 #
-# Example:
-#
-#    [1]: http://example.com/ "Optional title"
+# ~~~raw
+# [1]: http://example.com/ "Optional title"
+# ~~~
 class LinkRef
 
 	# Link href

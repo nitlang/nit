@@ -646,8 +646,8 @@ class Intent
 
 	# The general action to be performed
 	#
-	# Example :
-	# ~~~
+	# ~~~nitish
+	# # TODO better example
 	# intent.action = intent_action.view.to_s
 	# ~~~
 	fun action=(action: String)
@@ -667,8 +667,8 @@ class Intent
 	# Add category to the intent
 	# Only activities providing all of the requested categories will be used
 	#
-	# Example :
-	# ~~~
+	# ~~~nitish
+	# # TODO better example
 	# intent.add_category(intent_category.home.to_s)
 	# ~~~
 	# Returns `self` allowing fluent programming
@@ -720,8 +720,8 @@ class Intent
 
 	# Add a flag to be used by the intent
 	#
-	# Example :
-	# ~~~
+	# ~~~nitish
+	# # TODO better example
 	# intent.add_flags(intent_flag.activity_new_task)
 	# ~~~
 	# Returns `self` allowing fluent programming

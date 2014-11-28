@@ -773,9 +773,13 @@ abstract class MType
 	# In Nit, for each super-class of a type, there is a equivalent super-type.
 	#
 	# Example:
+	#
+	# ~~~nitish
 	#     class G[T, U] end
 	#     class H[V] super G[V, Bool] end
+	#
 	# H[Int]  supertype_to  G  #->  G[Int, Bool]
+	# ~~~
 	#
 	# REQUIRE: `super_mclass` is a super-class of `self`
 	# REQUIRE: `self.need_anchor implies anchor != null and self.can_resolve_for(anchor, null, mmodule)`
@@ -809,9 +813,11 @@ abstract class MType
 	#
 	# ## Example 1
 	#
-	#     class G[E] end
-	#     class H[F] super G[F] end
-	#     class X[Z] end
+	# ~~~
+	# class G[E] end
+	# class H[F] super G[F] end
+	# class X[Z] end
+	# ~~~
 	#
 	#  * Array[E].resolve_for(H[Int])  #->  Array[Int]
 	#  * Array[E].resolve_for(G[Z], X[Int]) #->  Array[Z]
@@ -829,30 +835,34 @@ abstract class MType
 	#
 	# ## Example 2
 	#
-	#     class A[E]
-	#         fun foo(e:E):E is abstract
-	#     end
-	#     class B super A[Int] end
+	# ~~~
+	# class A[E]
+	#     fun foo(e:E):E is abstract
+	# end
+	# class B super A[Int] end
+	# ~~~
 	#
 	# The signature on foo is (e: E): E
 	# If we resolve the signature for B, we get (e:Int):Int
 	#
 	# ## Example 3
 	#
-	#     class A[E]
-	#         fun foo(e:E) is abstract
-	#     end
-	#     class B[F]
-	#         var a: A[Array[F]]
-	#         fun bar do a.foo(x) # <- x is here
-	#     end
+	# ~~~nitish
+	# class A[E]
+	#     fun foo(e:E):E is abstract
+	# end
+	# class C[F]
+	#     var a: A[Array[F]]
+	#     fun bar do a.foo(x) # <- x is here
+	# end
+	# ~~~
 	#
 	# The first question is: is foo available on `a`?
 	#
 	# The static type of a is `A[Array[F]]`, that is an open type.
 	# in order to find a method `foo`, whe must look at a resolved type.
 	#
-	#   A[Array[F]].anchor_to(B[nullable Object])  #->  A[Array[nullable Object]]
+	#   A[Array[F]].anchor_to(C[nullable Object])  #->  A[Array[nullable Object]]
 	#
 	# the method `foo` exists in `A[Array[nullable Object]]`, therefore `foo` exists for `a`.
 	#
@@ -860,7 +870,7 @@ abstract class MType
 	#
 	# the signature of `foo` is `foo(e:E)`, thus we must resolve the type E
 	#
-	#   E.resolve_for(A[Array[F]],B[nullable Object])  #->  Array[F]
+	#   E.resolve_for(A[Array[F]],C[nullable Object])  #->  Array[F]
 	#
 	# The resolution can be done because `E` make sense for the class A (see `can_resolve_for`)
 	#
