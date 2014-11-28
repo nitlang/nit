@@ -105,9 +105,20 @@ class ToolContext
 	private var messages = new Array[Message]
 	private var message_sorter: Comparator = default_comparator
 
-	# Output all current stacked messages.
-	# If some errors occurred, exits the program.
-	fun check_errors
+	# Does an error prevent the program to stop at `check_errors`?
+	#
+	# Default to false.
+	# Set this value to `true` if you need to keep the program going in case of error.
+	var keep_going = false is writable
+
+	# Output all current stacked messages and display total error informations
+	#
+	# Return true if no errors occurred.
+	#
+	# If some errors occurred, the behavior depends on the value of `keep_going`.
+	# If `keep_going` is false, then the program exits.
+	# Else, the error count and the warning count are reset and false is returned.
+	fun check_errors: Bool
 	do
 		if messages.length > 0 then
 			message_sorter.sort(messages)
@@ -125,8 +136,10 @@ class ToolContext
 
 		if error_count > 0 then
 			errors_info
-			exit(1)
+			if not keep_going then exit(1)
+			return false
 		end
+		return true
 	end
 
 	# Display (and reset) total error informations
