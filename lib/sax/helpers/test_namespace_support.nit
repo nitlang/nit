@@ -132,7 +132,6 @@ class TestNamespaceSupport
 	end
 
 	fun test_prefixes do
-		var subject = sample
 		var res = sample.prefixes
 
 		assert 3 == res.length else
@@ -171,7 +170,6 @@ class TestNamespaceSupport
 	end
 
 	fun test_declared_prefixes do
-		var subject = sample
 		var res = sample.declared_prefixes
 
 		assert 2 == res.length else
