@@ -732,6 +732,7 @@ abstract class MType
 	# types to their bounds.
 	#
 	# Example
+	#
 	#     class A end
 	#     class B super A end
 	#     class X end
@@ -743,6 +744,7 @@ abstract class MType
 	#       super G[B]
 	#       redef type U: Y
 	#     end
+	#
 	# Map[T,U]  anchor_to  H  #->  Map[B,Y]
 	#
 	# Explanation of the example:
@@ -880,11 +882,15 @@ abstract class MType
 	#     class B[F]
 	#     end
 	#
-	#  * E.can_resolve_for(A[Int])  #->  true, E make sense in A
-	#  * E.can_resolve_for(B[Int])  #->  false, E does not make sense in B
-	#  * B[E].can_resolve_for(A[F], B[Object])  #->  true,
-	#    B[E] is a red hearing only the E is important,
-	#    E make sense in A
+	# ~~~nitish
+	# E.can_resolve_for(A[Int])  #->  true, E make sense in A
+	#
+	# E.can_resolve_for(B[Int])  #->  false, E does not make sense in B
+	#
+	# B[E].can_resolve_for(A[F], B[Object])  #->  true,
+	# # B[E] is a red hearing only the E is important,
+	# # E make sense in A
+	# ~~~
 	#
 	# REQUIRE: `anchor != null implies not anchor.need_anchor`
 	# REQUIRE: `mtype.need_anchor implies anchor != null and mtype.can_resolve_for(anchor, null, mmodule)`
@@ -1254,12 +1260,14 @@ end
 # directly to the parameter types of the super-classes.
 #
 # Example:
+#
 #     class A[E]
 #         fun e: E is abstract
 #     end
 #     class B[F]
 #         super A[Array[F]]
 #     end
+#
 # In the class definition B[F], `F` is a valid type but `E` is not.
 # However, `self.e` is a valid method call, and the signature of `e` is
 # declared `e: E`.

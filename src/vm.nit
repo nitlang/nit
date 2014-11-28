@@ -242,11 +242,11 @@ class VirtualMachine super NaiveInterpreter
 	end
 
 	# Return the attribute value in `instance` with a sequence of perfect_hashing
-	#     `instance` is the attributes array of the receiver
-	#     `vtable` is the pointer to the virtual table of the class (of the receiver)
-	#     `mask` is the perfect hashing mask of the class
-	#     `id` is the identifier of the class
-	#     `offset` is the relative offset of this attribute
+	# * `instance` is the attributes array of the receiver
+	# * `vtable` is the pointer to the virtual table of the class (of the receiver)
+	# * `mask` is the perfect hashing mask of the class
+	# * `id` is the identifier of the class
+	# * `offset` is the relative offset of this attribute
 	private fun read_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int): Instance `{
 		// Perfect hashing position
 		int hv = mask & id;
@@ -273,12 +273,12 @@ class VirtualMachine super NaiveInterpreter
 	end
 
 	# Replace the value of an attribute in an instance
-	#     `instance` is the attributes array of the receiver
-	#     `vtable` is the pointer to the virtual table of the class (of the receiver)
-	#     `mask` is the perfect hashing mask of the class
-	#     `id` is the identifier of the class
-	#     `offset` is the relative offset of this attribute
-	#     `value` is the new value for this attribute
+	# * `instance` is the attributes array of the receiver
+	# * `vtable` is the pointer to the virtual table of the class (of the receiver)
+	# * `mask` is the perfect hashing mask of the class
+	# * `id` is the identifier of the class
+	# * `offset` is the relative offset of this attribute
+	# * `value` is the new value for this attribute
 	private fun write_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int, value: Instance) `{
 		// Perfect hashing position
 		int hv = mask & id;
@@ -378,11 +378,11 @@ redef class MClass
 	end
 
 	# Allocate a single vtable
-	#     `ids : Array of superclasses identifiers
-	#     `nb_methods : Array which contain the number of introduced methods for each class in ids
-	#     `nb_attributes : Array which contain the number of introduced attributes for each class in ids
-	#     `offset_attributes : Offset from the beginning of the table of the group of attributes
-	#     `offset_methods : Offset from the beginning of the table of the group of methods
+	# * `ids : Array of superclasses identifiers
+	# * `nb_methods : Array which contain the number of introduced methods for each class in ids
+	# * `nb_attributes : Array which contain the number of introduced attributes for each class in ids
+	# * `offset_attributes : Offset from the beginning of the table of the group of attributes
+	# * `offset_methods : Offset from the beginning of the table of the group of methods
 	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int], nb_attributes: Array[Int],
 			offset_attributes: Int, offset_methods: Int)
 	do
@@ -437,8 +437,8 @@ redef class MClass
 	end
 
 	# Fill the vtable with methods of `self` class
-	#     `v` : Current instance of the VirtualMachine
-	#     `table` : the table of self class, will be filled with its methods
+	# * `v` : Current instance of the VirtualMachine
+	# * `table` : the table of self class, will be filled with its methods
 	private fun fill_vtable(v:VirtualMachine, table: VTable, cl: MClass)
 	do
 		var methods = new Array[MMethodDef]
@@ -456,8 +456,8 @@ redef class MClass
 
 	# Computes delta for each class
 	# A delta represents the offset for this group of attributes in the object
-	#     `nb_attributes` : number of attributes for each class (classes are linearized from Object to current)
-	#     return deltas for each class
+	# *`nb_attributes` : number of attributes for each class (classes are linearized from Object to current)
+	# * return deltas for each class
 	private fun calculate_delta(nb_attributes: Array[Int]): Array[Int]
 	do
 		var deltas = new Array[Int]
@@ -491,8 +491,8 @@ redef class MClass
 	end
 
 	# A kind of Depth-First-Search for superclasses ordering
-	#     `v` : the current executed instance of VirtualMachine
-	#     `res` : Result Array, ie current superclasses ordering
+	# *`v` : the current executed instance of VirtualMachine
+	# * `res` : Result Array, ie current superclasses ordering
 	private fun dfs(v: VirtualMachine, res: Array[MClass]): Array[MClass]
 	do
 		# Add this class at the beginning
@@ -548,8 +548,8 @@ redef class MClass
 	end
 
 	# Update positions of self class in `parent`
-	#     `attributes_offset`: absolute offset of introduced attributes
-	#     `methods_offset`: absolute offset of introduced methods
+	# * `attributes_offset`: absolute offset of introduced attributes
+	# * `methods_offset`: absolute offset of introduced methods
 	private fun update_positions(attributes_offsets: Int, methods_offset:Int, parent: MClass)
 	do
 		parent.positions_attributes[self] = attributes_offsets
@@ -682,10 +682,10 @@ class MemoryManager
 	`}
 
 	# Put implementation of methods of a class in `vtable`
-	# `vtable` : Pointer to the C-virtual table
-	# `mask` : perfect-hashing mask of the class corresponding to the vtable
-	# `id` : id of the target class
-	# `methods` : array of MMethodDef of the target class
+	# * `vtable` : Pointer to the C-virtual table
+	# * `mask` : perfect-hashing mask of the class corresponding to the vtable
+	# * `id` : id of the target class
+	# * `methods` : array of MMethodDef of the target class
 	fun put_methods(vtable: Pointer, mask: Int, id: Int, methods: Array[MMethodDef])
 		import Array[MMethodDef].length, Array[MMethodDef].[] `{
 

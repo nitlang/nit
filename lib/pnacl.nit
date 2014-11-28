@@ -13,15 +13,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Targets the PNaCl platform
+
+# Provides PNaCl support for Nit.
 #
 # To use this module and compile for PNaCl, you must install the
 # NaCl SDK (This file is based on Pepper 33).
 # If NACL_SDK_ROOT is not set in your PATH, you have to work in
 # 'nacl_sdk/pepper_your_pepper_version/getting_started/your_project_folder'.
-#
-# Provides PNaCl support for Nit.
 module pnacl is platform
 
 import standard

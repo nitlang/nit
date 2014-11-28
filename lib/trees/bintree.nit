@@ -244,11 +244,13 @@ class BinTreeMap[K: Comparable, E]
 
 	# Perform left rotation on `node`
 	#
+	# ~~~raw
 	#     N             Y
 	#    / \     >     / \
 	#   a   Y         N   c
 	#      / \   <   / \
 	#     b   c     a   b
+	# ~~~
 	#
 	protected fun rotate_left(node: N) do
 		var y = node.right
@@ -270,11 +272,13 @@ class BinTreeMap[K: Comparable, E]
 
 	# Perform right rotation on `node`
 	#
+	# ~~~raw
 	#     N             Y
 	#    / \     >     / \
 	#   a   Y         N   c
 	#      / \   <   / \
 	#     b   c     a   b
+	# ~~~
 	#
 	protected fun rotate_right(node: N) do
 		var y = node.left

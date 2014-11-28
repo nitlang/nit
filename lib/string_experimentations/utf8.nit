@@ -47,6 +47,7 @@ extern class UnicodeChar `{ UTF8Char* `}
 	#
 	# As per the specification :
 	#
+	# ~~~raw
 	#  Length  |        UTF-8 octet sequence
 	#          |              (binary)
 	# ---------+-------------------------------------------------
@@ -54,6 +55,7 @@ extern class UnicodeChar `{ UTF8Char* `}
 	#  2       | 110xxxxx 10xxxxxx
 	#  3       | 1110xxxx 10xxxxxx 10xxxxxx
 	#  4       | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+	# ~~~
 	private fun len: Int `{
 		char* ns = recv->ns;
 		int pos = recv->pos;

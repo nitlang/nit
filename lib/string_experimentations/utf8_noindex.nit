@@ -53,6 +53,7 @@ extern class UnicodeChar `{ uint32_t* `}
 	#
 	# As per the specification :
 	#
+	# ~~~raw
 	#  Length  |        UTF-8 octet sequence
 	#          |              (binary)
 	# ---------+-------------------------------------------------
@@ -60,6 +61,7 @@ extern class UnicodeChar `{ uint32_t* `}
 	#  2       | 110xxxxx 10xxxxxx
 	#  3       | 1110xxxx 10xxxxxx 10xxxxxx
 	#  4       | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+	# ~~~
 	fun len: Int `{
 		uint32_t s = *recv;
 		if(s <= 127) {return 1;}
