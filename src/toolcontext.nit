@@ -129,12 +129,14 @@ class ToolContext
 		end
 	end
 
-	# Display total error informations
+	# Display (and reset) total error informations
 	fun errors_info
 	do
 		if error_count == 0 and warning_count == 0 then return
 		if opt_no_color.value then return
 		sys.stderr.write "Errors: {error_count}. Warnings: {warning_count}.\n"
+		error_count = 0
+		warning_count = 0
 	end
 
 	# Display an error
