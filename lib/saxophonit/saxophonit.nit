@@ -125,7 +125,6 @@ class XophonReader
 	end
 
 	redef fun parse(input: InputSource) do
-		var stream: IStream
 		var system_id: nullable MaybeError[String, Error] = null
 		model.locator = new SAXLocatorImpl
 
@@ -182,7 +181,6 @@ class XophonReader
 
 	# Expect a `document` production.
 	private fun expect_document: Bool do
-		var success = true
 		var got_doctype = false
 		var got_element = false
 

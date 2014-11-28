@@ -190,8 +190,6 @@ class SAXEventLogger
 	# in the specified entry.
 	private fun diff_append_deletion(buf: Buffer, log: Array[Array[String]],
 			entry_index: Int, sorted_mismatches: Collection[Int]) do
-		var sub_buf = new FlatBuffer
-
 		buf.append(term_deletion)
 		buf.append("< {entry_index}|")
 		diff_append_mismatch_entry(buf, log[entry_index], sorted_mismatches,
