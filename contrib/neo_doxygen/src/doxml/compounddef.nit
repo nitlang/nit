@@ -22,7 +22,9 @@ import more_collections
 class CompoundDefListener
 	super EntityDefListener
 
+	# The defined compound.
 	var compound: Compound is writable, noinit
+
 	private var memberdef: MemberDefListener is noinit
 	private var param_listener: TypeParamListener is noinit
 

@@ -36,6 +36,9 @@ redef class NeoDoxygenCommand
 	redef fun create_store(url) do return new DebugStore
 end
 
+# Dummy storage medium that write a debugging output to the standard output.
+#
+# For testing purposes only.
 class DebugStore
 	super GraphStore
 

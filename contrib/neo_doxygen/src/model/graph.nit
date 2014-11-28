@@ -20,7 +20,10 @@ import location
 
 # A Neo4j graph.
 class NeoGraph
+	# All the nodes in the graph.
 	var all_nodes: SimpleCollection[NeoNode] = new Array[NeoNode]
+
+	# All the edges in the graph.
 	var all_edges: SimpleCollection[NeoEdge] = new Array[NeoEdge]
 
 	# Add a relationship between two nodes.

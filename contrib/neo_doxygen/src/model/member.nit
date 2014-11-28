@@ -92,6 +92,15 @@ abstract class Member
 		end
 	end
 
+	# Get the visibility.
+	#
+	# Return `""` by default.
+	fun visibility: String do
+		var visibility = self["visibility"]
+		if visibility isa String then return visibility
+		return ""
+	end
+
 	redef fun name=(name: String) do
 		super
 		if introducer != null then
@@ -174,6 +183,7 @@ class UnknownMember
 	redef fun put_edges do end
 end
 
+# A local definition of a method.
 class Method
 	super Member
 
@@ -216,6 +226,7 @@ class Method
 	end
 end
 
+# A local definition of an attribute.
 class Attribute
 	super Member
 
@@ -256,8 +267,18 @@ abstract class MemberIntroducer
 		self["visibility"] = "public"
 	end
 
+	# Set the visibility.
 	fun visibility=(visibility: String) do
 		self["visibility"] = visibility
+	end
+
+	# Get the visibility.
+	#
+	# Return `""` by default.
+	fun visibility: String do
+		var visibility = self["visibility"]
+		if visibility isa String then return visibility
+		return ""
 	end
 end
 

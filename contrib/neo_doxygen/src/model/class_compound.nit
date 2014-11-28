@@ -210,6 +210,7 @@ class ClassType
 	# Return the number of arguments.
 	fun arity: Int do return arguments.length
 
+	# Is the class generic?
 	fun is_generic: Bool do return arity > 0
 
 	redef fun put_in_graph do
