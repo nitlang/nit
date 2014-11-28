@@ -38,7 +38,7 @@ class ProjectGraph
 	# The node reperesenting the project.
 	#
 	# Once the project’s graph is initialized, this node must not be edited.
-	var project: NeoNode = new NeoNode
+	var project = new NeoNode
 
 	# Entities by `model_id`.
 	var by_id: Map[String, Entity] = new HashMap[String, Entity]
@@ -85,7 +85,7 @@ abstract class Entity
 	var model_id: String = "" is writable
 
 	# Associated documentation.
-	var doc: JsonArray = new JsonArray is writable
+	var doc = new JsonArray is writable
 
 	init do
 		self.labels.add(graph.project["name"].to_s)
