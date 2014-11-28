@@ -47,16 +47,18 @@ import template
 #
 # In external file `example.tpl`:
 #
-#    <!DOCTYPE html>
-#    <html lang="en">
-#     <head>
-#      <title>%TITLE%</title>
-#     </head>
-#     <body>
-#      <h1>%TITLE%</h1>
-#      <p>%ARTICLE%</p>
-#     </body>
-#    </html>
+# ~~~html
+# <!DOCTYPE html>
+# <html lang="en">
+#  <head>
+#   <title>%TITLE%</title>
+#  </head>
+#  <body>
+#   <h1>%TITLE%</h1>
+#   <p>%ARTICLE%</p>
+#  </body>
+# </html>
+# ~~~
 #
 # Loading the template file using `TemplateString`:
 #

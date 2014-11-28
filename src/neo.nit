@@ -178,7 +178,9 @@
 #
 # For example, if the source code contains:
 #
+# ~~~nitish
 #     fun foo(a: A, b: B, c: C)
+# ~~~
 #
 # The `MSignature` node will contain a property
 # `parameter_names = ["a", "b", "c"]` so the MSignature can be reconstructed

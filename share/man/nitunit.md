@@ -25,8 +25,8 @@ They contain a list of test methods called TestCase.
 
 ## Working with `DocUnits`
 
-With DocUnits, executable code can be placed in comments of modules, classes and properties.
-The execution can be verified using `assert`
+DocUnits are blocks of executable code placed in comments of modules, classes and properties.
+The execution can be verified using `assert`.
 
 Example with a class:
 
@@ -48,6 +48,59 @@ To test a method you have to instantiate its class:
         #    assert foo.baz(1, 2) == 3
         fun baz(a, b: Int) do return a + b
     end
+
+In a single piece of documentation, each docunit is considered a part of a single module, thus regrouped when
+tested.
+Therefore, it is possible (and recommended) to split docunits in small parts if it make the explanation easier.
+
+~~~~
+# Some example of grouped docunits
+#
+# Declare and initialize a variable `a`.
+#
+#     var a = 1
+#
+# So the value of `a` can be used
+#
+#     assert a == 1
+#
+# even in complex operations
+#
+#     assert a + 1 == 2
+fun foo do end
+~~~~
+
+Sometime, some blocks of code has to be included in documentation but not considered by `nitunit`.
+Those blocks are distinguished by their tagged fences (untagged fences or fences tagged `nit` are considered to be docunits).
+
+~~~~
+# Some ASCII drawing
+#
+# ~~~~raw
+#   @<
+# <__)
+# ~~~~
+fun foo do end
+~~~~
+
+The special fence-tag `nitish` could also be used to indicate pseudo-nit that will be ignored by nitunit but highlighted by nitdoc.
+Such `nitish` piece of code can be used to enclose examples that cannot compile or that one do not want to be automatically executed.
+
+~~~~
+# Some pseudo-nit
+#
+# ~~~~nitish
+# var a: Int = someting
+# # ...
+# if a == 1 then something else something-else
+# ~~~~
+#
+# Some code to not try to execute automatically
+#
+# ~~~~nitish
+# system("rm -rf /")
+# ~~~~
+~~~~
 
 The `nitunit` command is used to test Nit files:
 

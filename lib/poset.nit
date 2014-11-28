@@ -366,13 +366,15 @@ end
 #
 # For instance, one common usage is to add a specific attribute for each poset a class belong.
 #
-#     class Thing
-#         var in_some_relation: POSetElement[Thing]
-#         var in_other_relation: POSetElement[Thing]
-#     end
-#     var t: Thing # ...
-#     t.in_some_relation.greaters
-#
+# ~~~nitish
+# class Thing
+#     var in_some_relation: POSetElement[Thing]
+#     var in_other_relation: POSetElement[Thing]
+# end
+# var t: Thing
+# # ...
+# t.in_some_relation.greaters
+# ~~~
 class POSetElement[E: Object]
 	# The poset self belong to
 	var poset: POSet[E]

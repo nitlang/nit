@@ -535,7 +535,9 @@ end
 #
 # Comparison is made with the formula:
 #
-#     a.concern_rank + a.booster_rank <=> b.concern_rank + b.booster_ran
+# ~~~nitish
+# a.concern_rank + a.booster_rank <=> b.concern_rank + b.booster_ran
+# ~~~
 #
 # If both `a` and `b` have the same ranking,
 # ordering is based on lexicographic comparison of `a.name` and `b.name`

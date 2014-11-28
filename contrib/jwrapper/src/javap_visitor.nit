@@ -300,6 +300,7 @@ end
 #                                  #
 #    C L A S S     H E A D E R     #
 #                                  #
+
 redef class Nclass_header
 	redef fun accept_visitor(v)
 	do

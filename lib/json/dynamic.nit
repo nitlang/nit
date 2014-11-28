@@ -74,8 +74,8 @@ class JsonValue
 	#
 	# require: `self.is_numeric`
 	#
-	#     assert "1.234".to_json_value.to_numeric = 1.234
-	#     assert "1234".to_json_value.to_numeric = 1234
+	#     assert "1.234".to_json_value.to_numeric == 1.234
+	#     assert "1234".to_json_value.to_numeric == 1234
 	fun to_numeric: Numeric
 	do
 		if is_int then return to_i

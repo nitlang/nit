@@ -24,7 +24,7 @@
 #
 # The input event file is made of event descriptions, one event by line.
 #
-# ~~~
+# ~~~raw
 # 10 click 10.0 20.0
 # 20 quit
 # ~~~

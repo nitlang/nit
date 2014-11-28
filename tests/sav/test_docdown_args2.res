@@ -55,14 +55,11 @@ h5 {font-weight:bold;}
 .popover { max-width: 800px !important; }
 
 </style>
-</head><body><h3 id='test_doc'>module test_doc</h1><h4 id='test_doc#A'>class test_doc#A</h2><div class="nitdoc"><p class="synopsys">Synopsys</p><p>Paragraph
-same paragraph</p><p>Other paragraph with <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">code</span><span></span></span></span></code></p><ul><li>bullet</li><li>other buller</li><li>last
-but long
-bullet</li></ul><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">some</span>
-</span><span class="line" id="L2"><span class="nc_i">block</span>
-</span><span class="line" id="L3"><span></span></span></span></pre><p>a first example</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_l">1</span> <span class="nc_o">+</span> <span class="nc_l">1</span> <span class="nc_o">==</span> <span class="nc_l">2</span>
-</span><span class="line" id="L2"><span></span></span></span></pre><p>and a last example to illustrate the <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_i">to_s</span><span></span></span></span></code> method on <code class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_t">A</span><span></span></span></span></code>.</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">var</span> <span class="nc_i">a</span> <span>=</span> <span class="nc_k">new</span> <span class="nc_t">A</span>
-</span><span class="line" id="L2"><span class="nc_k">assert</span> <span class="nc_i">a</span><span>.</span><span class="nc_i">to_s</span> <span class="nc_o">==</span> <span class="nc_s">&quot;A&quot;</span>
-</span><span class="line" id="L3"><span></span></span></span></pre></div><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head><body><h3 id='test_doc2'>module test_doc2</h1><h5 id='test_doc2#Object#foo1'>prop test_doc2#Object#foo1</h3><div class="nitdoc"><p class="synopsys">Test code</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_k">true</span> <span># tested
+</span></span><span class="line" id="L2"><span></span></span></span></pre></div><h5 id='test_doc2#Object#foo2'>prop test_doc2#Object#foo2</h3><div class="nitdoc"><p class="synopsys">Test code</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_k">true</span> <span># tested
+</span></span><span class="line" id="L2"><span></span></span></span></pre></div><h5 id='test_doc2#Object#foo3'>prop test_doc2#Object#foo3</h3><div class="nitdoc"><p class="synopsys">Test code</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_k">true</span> <span># tested
+</span></span><span class="line" id="L2"><span></span></span></span></pre></div><h5 id='test_doc2#Object#foo4'>prop test_doc2#Object#foo4</h3><div class="nitdoc"><p class="synopsys">Test code</p><pre class="rawcode">assert false # not tested (and not highlighted)
+</pre></div><h5 id='test_doc2#Object#foo5'>prop test_doc2#Object#foo5</h3><div class="nitdoc"><p class="synopsys">Test code</p><pre class="nitcode"><span class="nitcode"><span class="line" id="L1"><span class="nc_k">assert</span> <span class="nc_k">false</span> <span># not tested (but highlighted)
+</span></span><span class="line" id="L2"><span></span></span></span></pre></div><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script></body></html>

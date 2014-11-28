@@ -1405,7 +1405,7 @@ abstract class Buffer
 	#
 	# SEE: `Char::is_letter` for the definition of a letter.
 	#
-	#    var b = new FlatBuffer.from("jAVAsCriPt")"
+	#    var b = new FlatBuffer.from("jAVAsCriPt")
 	#    b.capitalize
 	#    assert b == "Javascript"
 	#    b = new FlatBuffer.from("i am root")

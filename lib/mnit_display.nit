@@ -84,7 +84,7 @@ interface Drawable
 	# Draw image by specifying the positon of each image corners
 	# Corners are in counter-clockwise order stating top left
 	# a is top left, b is bottom left, c is bottom right and d is top right
-	# ~~~
+	# ~~~raw
 	# a-d
 	# | |
 	# b-c

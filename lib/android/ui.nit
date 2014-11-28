@@ -21,7 +21,7 @@
 # methods of the main thread to customize the response to a given event.
 #
 # This graph shows the path of a button click:
-# ~~~
+# ~~~raw
 #     UI Thread     #   Main thread
 #
 #       User

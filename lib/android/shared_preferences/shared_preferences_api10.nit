@@ -205,15 +205,14 @@ class SharedPreferences
 	#
 	# User has to manage local stack deallocation himself
 	#
-	# Example :
-	# ~~~
+	# ~~~nitish
 	# var foo = new HashMap[JavaString, JavaObject]
 	# # ...
 	# for key, value in foo do
 	#      key.delete_local_ref
 	#      value.delete_local_ref
 	# end
-	# ~~~
+	# ~~~
 	# *You should use Nit getters instead and get each value one by one* 
 	fun all: nullable HashMap[JavaString, JavaObject]
 	do 

@@ -124,6 +124,8 @@ end
 # Two elements from a POSet cannot have the same color if they share common subelements
 #
 # Example:
+#
+# ~~~raw
 #       A
 #     / | \
 #    /  |  \
@@ -134,22 +136,26 @@ end
 #   E   F   G
 #   |
 #   H
-# Conflicts:
-#   A: {B, C, D, E, F, G, H}
-#   B: {A, C, E, H}
-#   C: {A, E, H, F}
-#   D: {A, G}
-#   E: {A, B, C, H}
-#   F: {A, C}
-#   G: {A, D}
-#   H: {A, B, C, E}
-# Possible colors:
-#   A:0, B:1, C: 2, D: 1, E: 3, F:3, G:2, H:4
+# ~~~
 #
-# see:
-#	Ducournau, R. (2011).
-#	Coloring, a versatile technique for implementing object-oriented languages.
-#	Software: Practice and Experience, 41(6), 627–659.
+# Conflicts:
+#
+# * A: {B, C, D, E, F, G, H}
+# * B: {A, C, E, H}
+# * C: {A, E, H, F}
+# * D: {A, G}
+# * E: {A, B, C, H}
+# * F: {A, C}
+# * G: {A, D}
+# * H: {A, B, C, E}
+#
+# Possible colors:
+#
+# * A:0, B:1, C: 2, D: 1, E: 3, F:3, G:2, H:4
+#
+# see: Ducournau, R. (2011).
+# Coloring, a versatile technique for implementing object-oriented languages.
+# Software: Practice and Experience, 41(6), 627–659.
 class POSetColorer[E: Object]
 
 	# Is the poset already colored?

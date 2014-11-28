@@ -32,17 +32,17 @@ import bintree
 
 # Red-Black Tree Map
 # Properties of a Red-Black tree map:
-#  * every node is either red or black
-#  * root is black
-#  * every leaf (null) is black
-#  * if a node is red, then both its children are black
-#  * for each node, all simple path from the node to descendant
-#    leaves contain the same number of black nodes
+# * every node is either red or black
+# * root is black
+# * every leaf (null) is black
+# * if a node is red, then both its children are black
+# * for each node, all simple path from the node to descendant
+#   leaves contain the same number of black nodes
 #
 # Operations:
-#  * search average O(lg n) worst O(lg n)
-#  * insert average O(lg n) worst O(lg n)
-#  * delete average O(lg n) worst O(lg n)
+# * search average O(lg n) worst O(lg n)
+# * insert average O(lg n) worst O(lg n)
+# * delete average O(lg n) worst O(lg n)
 class RBTreeMap[K: Comparable, E]
 	super BinTreeMap[K, E]
 

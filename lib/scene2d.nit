@@ -151,8 +151,8 @@ interface View
 	# This method must be implemented for each specific view.
 	# A traditional way of implementation is to use a double-dispatch mechanism
 	#
-	# Exemple:
 	#     class MyView
+	#         super View
 	#         redef fun draw_sprite(s) do s.draw_on_myview(self)
 	#     end
 	#     redef class Sprite

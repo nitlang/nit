@@ -19,24 +19,17 @@ import sax::sax_locator
 # can use it to make a persistent snapshot of a locator at any
 # point during a document parse:
 #
-#     module example
-#     #
-#     import sax::helpers::SAXLocatorImpl
-#     import sax::ContentHandler
-#     #
+#     import sax::helpers::sax_locator_impl
+#     import sax::content_handler
+#
 #     class Example super ContentHandler
-#     	private var _locator: nullable SAXLocator = null
+#     	private var locator: SAXLocator
 #     	private var start_loc: nullable SAXLocator = null
-#     #
-#     	fun locator=(Locator locator) do
-#     		# note the locator
-#     		_locator = locator
-#     	end
-#     #
-#     	fun start_document do
+#
+#     	redef fun start_document do
 #     		# save the location of the start of the document
 #     		# for future use.
-#     		start_loc = new SAXLocatorImpl.from(locator)
+#     		start_loc = new SAXLocatorImpl.with(locator)
 #     	end
 #     end
 #

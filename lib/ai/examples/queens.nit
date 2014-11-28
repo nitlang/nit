@@ -14,7 +14,7 @@
 # The constraint is that two queens cannot be on the same row, column or diagonal.
 #
 # Eg. a solution to the 8-queens problem is
-# ~~~
+# ~~~raw
 # +--------+
 # |Q.......|
 # |....Q...|
