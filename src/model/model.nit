@@ -1030,13 +1030,20 @@ class MClassType
 
 	redef fun collect_mclasses(mmodule)
 	do
+		if collect_mclasses_last_module == mmodule then return collect_mclasses_last_module_cache
 		assert not self.need_anchor
 		var cache = self.collect_mclasses_cache
 		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return cache[mmodule]
+		var res = cache[mmodule]
+		collect_mclasses_last_module = mmodule
+		collect_mclasses_last_module_cache = res
+		return res
 	end
+
+	private var collect_mclasses_last_module: nullable MModule = null
+	private var collect_mclasses_last_module_cache: Set[MClass] is noinit
 
 	redef fun collect_mtypes(mmodule)
 	do
