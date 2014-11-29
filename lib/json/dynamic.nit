@@ -14,16 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Dynamic interface to read Json strings.
+# Dynamic interface to read JSON strings.
 #
 # `String::to_json_value` returns a `JsonValue` which can be queried
-# to get the underlying Json data. It can also be used as any Json types.
+# to get the underlying JSON data.
 module dynamic
 
 import error
 private import static
 
+# Wraps a JSON value.
+#
+# Offer methods to query the type, to dynamicaly cast the underlying value and
+# to query elements (in case of a JSON object or a JSON array).
+#
+# Use `String::to_json_value` to get a `JsonValue` from a string.
 class JsonValue
+
+	# The wrapped JSON value.
 	var value: nullable Object
 
 	# Is this value null?

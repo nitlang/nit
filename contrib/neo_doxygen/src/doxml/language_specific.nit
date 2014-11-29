@@ -131,7 +131,6 @@ abstract class SourceLanguage
 
 		var content = text_array.last.as(String).r_trim
 		var link = text.links.first
-		var found = false
 
 		if link == null and content.has_suffix(suffix) then
 			content = content.substring(0, content.length - suffix.length).r_trim

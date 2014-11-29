@@ -36,6 +36,7 @@ abstract class DoxmlListener
 		self.locator = locator
 	end
 
+	# The Doxygen’s namespace IRI.
 	protected fun dox_uri: String do return ""
 
 	redef fun start_element(uri: String, local_name: String, qname: String,
@@ -61,6 +62,9 @@ abstract class DoxmlListener
 	# See `ContentHandler.start_element` for the description of the parameters.
 	protected fun end_dox_element(local_name: String) do end
 
+	# Get the boolean value of the specified attribute.
+	#
+	# `false` by default.
 	protected fun get_bool(atts: Attributes, local_name: String): Bool do
 		return get_optional(atts, local_name, "no") == "yes"
 	end
@@ -197,7 +201,10 @@ end
 class TextListener
 	super StackableListener
 
+	# The read text.
 	protected var buffer: Buffer = new FlatBuffer
+
+	# Is the last read chunk was ignorable white space?
 	private var sp: Bool = false
 
 	redef fun listen_until(uri: String, local_name: String) do

@@ -20,7 +20,10 @@ import location
 
 # A Neo4j graph.
 class NeoGraph
+	# All the nodes in the graph.
 	var all_nodes: SimpleCollection[NeoNode] = new Array[NeoNode]
+
+	# All the edges in the graph.
 	var all_edges: SimpleCollection[NeoEdge] = new Array[NeoEdge]
 
 	# Add a relationship between two nodes.
@@ -31,14 +34,17 @@ class NeoGraph
 	end
 end
 
-# The project’s graph.
+# A project’s graph.
 class ProjectGraph
 	super NeoGraph
+
+	# The project’s name.
+	var project_name: String
 
 	# The node reperesenting the project.
 	#
 	# Once the project’s graph is initialized, this node must not be edited.
-	var project: NeoNode = new NeoNode
+	var project = new NeoNode
 
 	# Entities by `model_id`.
 	var by_id: Map[String, Entity] = new HashMap[String, Entity]
@@ -46,11 +52,11 @@ class ProjectGraph
 	# Initialize a new project graph using the specified project name.
 	#
 	# The specified name will label all nodes of the project’s graph.
-	init(name: String) do
-		project.labels.add(name)
+	init do
+		project.labels.add(project_name)
 		project.labels.add("MEntity")
 		project.labels.add("MProject")
-		project["name"] = name
+		project["name"] = project_name
 		all_nodes.add(project)
 
 		var root = new RootNamespace(self)
@@ -85,10 +91,10 @@ abstract class Entity
 	var model_id: String = "" is writable
 
 	# Associated documentation.
-	var doc: JsonArray = new JsonArray is writable
+	var doc = new JsonArray is writable
 
 	init do
-		self.labels.add(graph.project["name"].to_s)
+		self.labels.add(graph.project_name)
 		self.labels.add("MEntity")
 	end
 

@@ -74,8 +74,8 @@ class NamespaceSupport
 	# to the `xmlns` prefix.
 	var nsdecl = "http://www.w3.org/xmlns/2000/"
 
-	private var contexts: Array[Context] = new Array[Context].with_capacity(32)
-	private var current_context: Context = new Context
+	private var contexts = new Array[Context].with_capacity(32)
+	private var current_context = new Context
 	private var context_position: Int = 0
 
 	init do
@@ -398,38 +398,35 @@ end
 # from [SAX 2.0](http://www.saxproject.org).
 private class Context
 
-	private var empty: Collection[String] = new Array[String].with_capacity(0)
+	var empty: Collection[String] = new Array[String].with_capacity(0)
 
 	# `prefix` -> `uri`
-	private var prefix_table: nullable Map[String, String] = null
+	var prefix_table: nullable Map[String, String] = null
 
 	# Cache of `process_name` for elements.
 	#
 	# `qname -> [uri, local_name, qname]`
-	private var element_name_table: nullable Map[String, Array[String]] = null
+	var element_name_table: nullable Map[String, Array[String]] = null
 
 	# Cache of `process_name` for attributes.
 	#
 	# `qname -> [uri, local_name, qname]`
-	private var attribute_name_table: nullable Map[String, Array[String]] = null
+	var attribute_name_table: nullable Map[String, Array[String]] = null
 
 	# Namespace in absence of prefix.
-	private var default_ns: nullable String = null
+	var default_ns: nullable String = null
 
 	# Can we currently declare prefixes in this context?
 	var decls_ok: Bool = true is writable
 
 	# All prefixes declared in this context.
-	private var declarations: nullable Array[String] = null
+	var declarations: nullable Array[String] = null
 
 	# Was `copy_tables` called since the last call to `parent=`?
-	private var decl_seen: Bool = false
+	var decl_seen: Bool = false
 
 	# Parent context.
-	private var p_parent: nullable Context = null
-
-	init do
-	end
+	var p_parent: nullable Context = null
 
 	# (Re)set the parent of this Namespace context.
 	#
@@ -649,7 +646,7 @@ private class Context
 	#
 	# This class is optimized for the normal case where most
 	# elements do not contain Namespace declarations.
-	private fun copy_tables do
+	fun copy_tables do
 		if prefix_table != null then
 			var old_prefix_table = prefix_table.as(not null)
 			prefix_table = new HashMap[String, String]

@@ -21,7 +21,8 @@ import listener
 class DocListener
 	super TextListener
 
-	var doc: JsonArray = new JsonArray is writable
+	# The read documentation.
+	var doc = new JsonArray is writable
 
 	redef fun end_listening do
 		super
