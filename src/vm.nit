@@ -41,7 +41,7 @@ class VirtualMachine super NaiveInterpreter
 	# Perfect hashing and perfect numbering
 	var ph: Perfecthashing = new Perfecthashing
 
-	# Handles memory and garbage collection
+	# Handles memory allocated in C
 	var memory_manager: MemoryManager = new MemoryManager
 
 	# The unique instance of the `MInit` value
@@ -226,11 +226,18 @@ class VirtualMachine super NaiveInterpreter
 	do
 		assert recv isa MutableInstance
 
-		# Read the attribute value with perfect hashing
-		var id = mproperty.intro_mclassdef.mclass.vtable.id
+		var i: Instance
 
-		var i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+			# if this attribute class has an unique position for this receiver, then use direct access
+			i = read_attribute_sst(recv.internal_attributes, mproperty.absolute_offset)
+		else
+			# Otherwise, read the attribute value with perfect hashing
+			var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+			i = read_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset)
+		end
 
 		# If we get a `MInit` value, throw an error
 		if i == initialization_value then
@@ -260,16 +267,34 @@ class VirtualMachine super NaiveInterpreter
 		return res;
 	`}
 
+	# Return the attribute value in `instance` with a direct access (SST)
+	# * `instance` is the attributes array of the receiver
+	# * `offset` is the absolute offset of this attribute
+	private fun read_attribute_sst(instance: Pointer, offset: Int): Instance `{
+		/* We can make a direct access to the attribute value
+		   because this attribute is always at the same position
+		   for the class of this receiver */
+		Instance res = ((Instance *)instance)[offset];
+
+		return res;
+	`}
+
 	# Replace in `recv` the value of the attribute `mproperty` by `value`
 	redef fun write_attribute(mproperty: MAttribute, recv: Instance, value: Instance)
 	do
 		assert recv isa MutableInstance
 
-		var id = mproperty.intro_mclassdef.mclass.vtable.id
-
 		# Replace the old value of mproperty in recv
-		write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
+		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+			# if this attribute class has an unique position for this receiver, then use direct access
+			write_attribute_sst(recv.internal_attributes, mproperty.absolute_offset, value)
+		else
+			# Otherwise, use perfect hashing to replace the old value
+			var id = mproperty.intro_mclassdef.mclass.vtable.id
+
+			write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, mproperty.offset, value)
+		end
 	end
 
 	# Replace the value of an attribute in an instance
@@ -288,6 +313,16 @@ class VirtualMachine super NaiveInterpreter
 		int absolute_offset = *(pointer + 1);
 
 		((Instance *)instance)[absolute_offset + offset] = value;
+		Instance_incr_ref(value);
+	`}
+
+	# Replace the value of an attribute in an instance with direct access
+	# * `instance` is the attributes array of the receiver
+	# * `offset` is the absolute offset of this attribute
+	# * `value` is the new value for this attribute
+	private fun write_attribute_sst(instance: Pointer, offset: Int, value: Instance) `{
+		// Direct access to the position with the absolute offset
+		((Instance *)instance)[offset] = value;
 		Instance_incr_ref(value);
 	`}
 
@@ -336,11 +371,14 @@ redef class MClass
 		var nb_methods = new Array[Int]
 		var nb_attributes = new Array[Int]
 
-		# Absolute offset of the beginning of the attributes table
+		# Absolute offset of attribute from the beginning of the attributes table
 		var offset_attributes = 0
-		# Absolute offset of the beginning of the methods table
+		# Absolute offset of method from the beginning of the methods table
 		var offset_methods = 0
 
+		# The previous element in `superclasses`
+		var previous_parent: nullable MClass = null
+		if superclasses.length > 0 then	previous_parent = superclasses[0]
 		for parent in superclasses do
 			if not parent.loaded then parent.make_vt(v)
 
@@ -350,17 +388,23 @@ redef class MClass
 
 			for p in parent.intro_mproperties(none_visibility) do
 				if p isa MMethod then methods += 1
-				if p isa MAttribute then
-					attributes += 1
-				end
+				if p isa MAttribute then attributes += 1
 			end
 
 			ids.push(parent.vtable.id)
 			nb_methods.push(methods)
 			nb_attributes.push(attributes)
 
-			# Update `positions_attributes` and `positions_methods` in `parent`
-			update_positions(offset_attributes, offset_methods, parent)
+			# Update `positions_attributes` and `positions_methods` in `parent`.
+			# If the position is invariant for this parent, store this position
+			# else store a special value (-1)
+			var pos_attr = -1
+			var pos_meth = -1
+
+			if previous_parent.as(not null).positions_attributes[parent] == offset_attributes then pos_attr = offset_attributes
+			if previous_parent.as(not null).positions_methods[parent] == offset_methods then pos_meth = offset_methods
+
+			parent.update_positions(pos_attr, pos_meth, self)
 
 			offset_attributes += attributes
 			offset_methods += methods
@@ -411,11 +455,13 @@ redef class MClass
 			if p isa MMethod then
 				self_methods += 1
 				p.offset = relative_offset_meth
+				p.absolute_offset = offset_methods + relative_offset_meth
 				relative_offset_meth += 1
 			end
 			if p isa MAttribute then
 				nb_introduced_attributes += 1
 				p.offset = relative_offset_attr
+				p.absolute_offset = offset_attributes + relative_offset_attr
 				relative_offset_attr += 1
 			end
 		end
@@ -427,13 +473,11 @@ redef class MClass
 		nb_attributes_total.push(nb_introduced_attributes)
 
 		# Save the offsets of self class
-		offset_attributes += nb_introduced_attributes
-		offset_methods += self_methods
 		update_positions(offset_attributes, offset_methods, self)
 
 		# Since we have the number of attributes for each class, calculate the delta
-		var d = calculate_delta(nb_attributes_total)
-		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, d, vtable.mask)
+		var deltas = calculate_delta(nb_attributes_total)
+		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, deltas, vtable.mask)
 	end
 
 	# Fill the vtable with methods of `self` class
@@ -547,24 +591,31 @@ redef class MClass
 		return res
 	end
 
-	# Update positions of self class in `parent`
+	# Update positions of the class `cl`
 	# * `attributes_offset`: absolute offset of introduced attributes
 	# * `methods_offset`: absolute offset of introduced methods
-	private fun update_positions(attributes_offsets: Int, methods_offset:Int, parent: MClass)
+	private fun update_positions(attributes_offsets: Int, methods_offset:Int, cl: MClass)
 	do
-		parent.positions_attributes[self] = attributes_offsets
-		parent.positions_methods[self] = methods_offset
+		positions_attributes[cl] = attributes_offsets
+		positions_methods[cl] = methods_offset
 	end
 end
 
 redef class MAttribute
-	# Represents the relative offset of this attribute in the runtime instance
+	# Relative offset of this attribute in the runtime instance
+	# (beginning of the block of its introducing class)
 	var offset: Int
+
+	# Absolute offset of this attribute in the runtime instance (beginning of the attribute table)
+	var absolute_offset: Int
 end
 
 redef class MMethod
-	# Represents the relative offset of this attribute in the runtime instance
+	# Relative offset of this method in the virtual table (from the beginning of the block)
 	var offset: Int
+
+	# Absolute offset of this method in the virtual table (from the beginning of the vtable)
+	var absolute_offset: Int
 end
 
 # Redef MutableInstance to improve implementation of attributes in objects
