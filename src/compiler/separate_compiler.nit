@@ -418,13 +418,12 @@ class SeparateCompiler
 		var live_cast_types = runtime_type_analysis.live_cast_types
 		var mtypes = new HashSet[MType]
 		mtypes.add_all(live_types)
-		mtypes.add_all(live_cast_types)
 		for c in self.box_kinds.keys do
 			mtypes.add(c.mclass_type)
 		end
 
 		# Compute colors
-		var poset = poset_from_mtypes(mtypes)
+		var poset = poset_from_mtypes(mtypes, live_cast_types)
 		var colorer = new POSetColorer[MType]
 		colorer.colorize(poset)
 		type_ids = colorer.ids
@@ -437,12 +436,13 @@ class SeparateCompiler
 		return poset
 	end
 
-	private fun poset_from_mtypes(mtypes: Set[MType]): POSet[MType] do
+	private fun poset_from_mtypes(mtypes, cast_types: Set[MType]): POSet[MType] do
 		var poset = new POSet[MType]
 		for e in mtypes do
 			poset.add_node(e)
-			for o in mtypes do
+			for o in cast_types do
 				if e == o then continue
+				poset.add_node(o)
 				if e.is_subtype(mainmodule, null, o) then
 					poset.add_edge(e, o)
 				end
