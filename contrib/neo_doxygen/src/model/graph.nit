@@ -16,6 +16,7 @@
 module model::graph
 
 import neo4j
+import more_collections
 import location
 
 # A Neo4j graph.
@@ -35,6 +36,22 @@ class NeoGraph
 end
 
 # A project’s graph.
+#
+# Here is the usual steps to build a project graph:
+#
+# <ul>
+# <li>Instantiate `ProjectGraph` by giving the name that will label the project.</li>
+# <li>For each compound:
+# <ul>
+# <li>Instantiate the compound.</li>
+# <li>Provide all the related data.</li>
+# <li>Call the `put_in_graph` method of the compound.</li>
+# </ul></li>
+# <li>Call the `add_global_modules` method of the project’s graph (defined in
+# the `module_compound` module). This permits to take global classes into
+# account correctly.</li>
+# <li>Call the `put_edges` method of the project’s graph.</li>
+# </ul>
 class ProjectGraph
 	super NeoGraph
 
@@ -49,6 +66,21 @@ class ProjectGraph
 	# Entities by `model_id`.
 	var by_id: Map[String, Entity] = new HashMap[String, Entity]
 
+	# Namespaces by `full_name`.
+	var namespaces: Map[String, Namespace] = new HashMap[String, Namespace]
+
+	# For each `ClassCompound` in the graph, the mapping between its `model_id` and its namespace.
+	#
+	# Defaults to the root namespace. An entry is added each time
+	# `Namespace.declare_class` is called.
+	#
+	# Note: In the graph, there is no direct link between a namespace and a
+	# class. It is the role of a module (created internally by a `FileCompound`)
+	# to link a class with its namespace. So, this collection is used by modules
+	# to know which class in a file belong to their related namespace. It is
+	# also used by `FileCompound` to detect classes in the root namespace.
+	var class_to_ns: Map[String, Namespace] is noinit
+
 	# Initialize a new project graph using the specified project name.
 	#
 	# The specified name will label all nodes of the project’s graph.
@@ -62,9 +94,15 @@ class ProjectGraph
 		var root = new RootNamespace(self)
 		root.put_in_graph
 		by_id[""] = root
+		class_to_ns = new DefaultMap[String, Namespace](root)
 	end
 
 	# Request to all nodes in the graph to add their related edges.
+	#
+	# Note: For the rare cases where a node need to wait the `put_edges` to add
+	# an implicit node, this method makes sure to call the `put_edges` method
+	# of the newly added nodes only after processing all the nodes that was
+	# already there.
 	fun put_edges do
 		all_edges.clear
 		add_edge(project, "ROOT", by_id[""])
@@ -229,13 +267,14 @@ abstract class Compound
 	# Declare an inner class.
 	#
 	# Note: Althought Doxygen indicates that both arguments are optional,
-	# declarations with either an empty name or an empty ID are not
-	# supported yet.
+	# declarations with an empty ID are not supported yet.
 	#
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner class.
-	# * `full_name`: qualified name of the inner class.
+	# * `full_name`: qualified name of the inner class. Ignored in practice.
+	#
+	# TODO: Handle cases where only the `full_name` is available.
 	fun declare_class(id: String, full_name: String) do end
 
 	# Declare a base compound (usually, a base class).
@@ -266,18 +305,28 @@ end
 class Namespace
 	super Compound
 
-	# Inner namespaces (IDs).
+	# The inner namespaces.
 	#
 	# Left empty for the root namespace.
-	var inner_namespaces: SimpleCollection[String] = new Array[String]
+	var inner_namespaces: SimpleCollection[NamespaceRef] = new Array[NamespaceRef]
 
 	init do
 		super
 		self.labels.add("MGroup")
 	end
 
-	redef fun declare_namespace(id: String, name: String) do
-		inner_namespaces.add(id)
+	redef fun declare_namespace(id: String, full_name: String) do
+		inner_namespaces.add new NamespaceRef(id, full_name)
+	end
+
+	redef fun declare_class(id: String, full_name: String) do
+		graph.class_to_ns[id] = self
+	end
+
+	redef fun put_in_graph do
+		super
+		var full_name = self["full_name"]
+		if full_name isa String then graph.namespaces[full_name] = self
 	end
 
 	redef fun put_edges do
@@ -290,10 +339,39 @@ class Namespace
 			graph.add_edge(root, "NESTS", self)
 		end
 		for ns in inner_namespaces do
-			var node = graph.by_id[ns]
+			var node = ns.seek_in(graph)
 			graph.add_edge(node, "PARENT", self)
 			graph.add_edge(self, "NESTS", node)
 		end
+	end
+end
+
+# A reference to a namespace.
+class NamespaceRef
+	# The `model_id` of the target.
+	#
+	# Empty when unknown or for the root namespace.
+	var model_id: String
+
+	# The `full_name` of the target.
+	#
+	# Empty only for the root namespace.
+	var full_name: String
+
+	# Look for the targeted namespace in the specified graph.
+	fun seek_in(graph: ProjectGraph): Namespace do
+		var ns_compound: Namespace
+
+		if model_id.is_empty and not full_name.is_empty then
+			# ID unspecified. => We have to look by name
+			assert graph.namespaces.has_key(full_name) else
+				sys.stderr.write "Namespace `{full_name}` not found."
+			end
+			ns_compound = graph.namespaces[full_name]
+		else
+			ns_compound = graph.by_id[model_id].as(Namespace)
+		end
+		return ns_compound
 	end
 end
 

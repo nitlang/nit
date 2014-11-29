@@ -67,7 +67,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","full_name":"org::example::foo::A","name":"A"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
 
 
 Edge
@@ -81,7 +81,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","full_name":"org::example::foo::A","name":"A"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
 ----
 =to=Entity#32:classorg_1_1example_1_1foo_1_1_a
 =labels=Array(3):
@@ -103,7 +103,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","full_name":"org::example::foo::A","name":"A"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -133,7 +133,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","full_name":"org::example::foo::B","name":"B"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
 
 
 Edge
@@ -147,7 +147,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","full_name":"org::example::foo::B","name":"B"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
 ----
 =to=Entity#32:classorg_1_1example_1_1foo_1_1_b
 =labels=Array(3):
@@ -169,7 +169,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","full_name":"org::example::foo::B","name":"B"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -199,7 +199,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","full_name":"org::example::foo::C","name":"C"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
 
 
 Edge
@@ -213,7 +213,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","full_name":"org::example::foo::C","name":"C"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
 ----
 =to=Entity#36:interfaceorg_1_1example_1_1foo_1_1_c
 =labels=Array(3):
@@ -235,7 +235,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","full_name":"org::example::foo::C","name":"C"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -265,7 +265,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","full_name":"org::example::foo::EmptyClass","name":"EmptyClass"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
 
 
 Edge
@@ -279,7 +279,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","full_name":"org::example::foo::EmptyClass","name":"EmptyClass"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
 ----
 =to=Entity#42:classorg_1_1example_1_1foo_1_1_empty_class
 =labels=Array(3):
@@ -301,7 +301,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","full_name":"org::example::foo::EmptyClass","name":"EmptyClass"}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
 ----
 =to=Entity#0:
 =labels=Array(3):
