@@ -207,7 +207,7 @@ end
 
 private fun gl_get_bool(key: Int): Bool `{
 	GLboolean val;
-	glGetBooleanv(GL_SHADER_COMPILER, &val);
+	glGetBooleanv(key, &val);
 	return val == GL_TRUE;
 `}
 private fun gl_get_float(key: Int): Float `{
