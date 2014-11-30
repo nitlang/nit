@@ -83,7 +83,7 @@ function! SyntaxCheckers_nit_nitg_GetLocList()
 		endfor
 	endfor
 
-	let loclist = SyntasticMake({ 'makeprg': makeprg, 'errorformat':errorformat })
+	let loclist = SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat, 'postprocess': ['guards'] })
 
 	for e in loclist
 		if e['type'] ==? 'd' " is a documentation warning
