@@ -85,13 +85,17 @@ extern class GLShader `{GLuint`}
 		GLchar *c_code = String_to_cstring(code);
 		glShaderSource(recv, 1, (const GLchar * const*)&c_code, NULL);
 	`}
-	fun source: nullable String import NativeString.to_s `{
-		int size;
-		glGetShaderiv(recv, GL_SHADER_SOURCE_LENGTH, &size);
-		if (size == 0) return NULL;
+	fun source: nullable String
+	do
+		var size = query(0x8B88)
+		if size == 0 then return null
+		return source_native(size).to_s
+	end
+
+	private fun source_native(size: Int): NativeString `{
 		GLchar *code = malloc(size);
 		glGetShaderSource(recv, size, NULL, code);
-		return NativeString_to_s(code);
+		return code;
 	`}
 
 	protected fun query(pname: Int): Int `{
