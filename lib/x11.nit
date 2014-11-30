@@ -17,6 +17,10 @@
 # Serices from the X11 library
 module x11 is pkgconfig
 
+`{
+	#include <X11/Xlib.h>
+`}
+
 # Open the current display from the environment variables
 #
 # See <http://www.x.org/releases/X11R7.7/doc/man/man3/XOpenDisplay.3.xhtml>
