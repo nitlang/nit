@@ -72,6 +72,7 @@ function! SyntaxCheckers_nit_nitg_GetLocList()
 				   \ '%f:%l\,%c--%*[0-9]\,%*[0-9]:',
 				   \ '%f:%l\,%c:' ]
 	let ef_type = [ ' %tarning: ',
+				  \ ' %tocumentation warning: ',
 				  \ '' ]
 
 	" generate errorformat from combinations
@@ -82,7 +83,16 @@ function! SyntaxCheckers_nit_nitg_GetLocList()
 		endfor
 	endfor
 
-	return SyntasticMake({ 'makeprg': makeprg, 'errorformat':errorformat })
+	let loclist = SyntasticMake({ 'makeprg': makeprg, 'errorformat':errorformat })
+
+	for e in loclist
+		if e['type'] ==? 'd' " is a documentation warning
+			let e['type'] = 'w'
+			let e['subtype'] = 'Style'
+		endif
+	endfor
+
+	return loclist
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
