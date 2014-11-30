@@ -182,14 +182,6 @@ end
 
 protected fun gl_clear_color(r, g, b, a: Float) `{ glClearColor(r, g, b, a); `}
 protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
-protected fun gl_vertex_attrib_pointer_int(index, length: Int, normalize: Bool, stride: Int, vertex: Array[Int]) import Array[Int].length, Array[Int].intern_items `{
-	int* c_vertex = Array_of_Int_intern_items(vertex);
-	glVertexAttribPointer(index, length, GL_INT, normalize, stride, c_vertex);
-`}
-protected fun gl_vertex_attrib_pointer_float(index, length: Int, normalize: Bool, stride: Int, vertex: Array[Float]) import Array[Float].length, Array[Float].intern_items `{
-	int* c_vertex = Array_of_Float_intern_items(vertex);
-	glVertexAttribPointer(index, length, GL_FLOAT, normalize, stride, c_vertex);
-`}
 
 # Direct call to `glClear`, call with a combinaison of `gl_clear_color_buffer`,
 # `gl_stencil_buffer_bit` and `gl_color_buffer_bit`.
