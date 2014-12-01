@@ -23,7 +23,33 @@ intrude import standard::collection::array
 abstract class CArray[E]
 	super AbstractArrayRead[E]
 
+	type NATIVE: NativeCArray
+	var native_array: NATIVE is noinit
+
 	private init(length: Int) do self._length = length
+
+	redef fun [](index)
+	do
+		assert not destroyed
+		assert index >= 0 and index < length
+		return native_array[index]
+	end
+
+	fun []=(index: Int, val: E)
+	do
+		assert not destroyed
+		assert index >= 0 and index < length
+		native_array[index] = val
+	end
+
+	var destroyed = false
+	fun destroy
+	do
+		if destroyed then return
+
+		native_array.free
+		destroyed = true
+	end
 end
 
 # A native C array, as in a pointer to the first element of the array
@@ -42,35 +68,12 @@ end
 # Wrapper around an array of `int` in C (`int*`) with length and destroy state
 class CIntArray
 	super CArray[Int]
+	redef type NATIVE: NativeCIntArray
 
-	var native_array: NativeCIntArray
 	init(size: Int)
 	do
 		native_array = new NativeCIntArray(size)
 		super size
-	end
-
-	redef fun [](index)
-	do
-		assert not destroyed
-		assert index >= 0 and index < length
-		return native_array[index]
-	end
-
-	fun []=(index: Int, val: Int)
-	do
-		assert not destroyed
-		assert index >= 0 and index < length
-		native_array[index] = val
-	end
-
-	var destroyed = false
-	fun destroy
-	do
-		if destroyed then return
-
-		native_array.free
-		destroyed = true
 	end
 end
 
