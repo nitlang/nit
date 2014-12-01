@@ -63,6 +63,13 @@ redef class MGroup
 	# Return `null` if the group has no default module or if the default
 	# module is not loaded.
 	var default_mmodule: nullable MModule = null
+
+	redef fun mdoc_or_fallback
+	do
+		if mdoc != null then return mdoc
+		if default_mmodule == null then return null
+		return default_mmodule.mdoc_or_fallback
+	end
 end
 
 # A Nit module is usually associated with a Nit source file.
