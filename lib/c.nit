@@ -75,6 +75,16 @@ class CIntArray
 		native_array = new NativeCIntArray(size)
 		super size
 	end
+
+	# Build from an `Array[Int]`
+	new from(array: Array[Int])
+	do
+		var carray = new CIntArray(array.length)
+		for i in array.length.times do
+			carray[i] = array[i]
+		end
+		return carray
+	end
 end
 
 # An array of `int` in C (`int*`)
