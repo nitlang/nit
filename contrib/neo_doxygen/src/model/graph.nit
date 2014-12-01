@@ -146,7 +146,11 @@ abstract class Entity
 
 	# Set the full name using the current name and the specified parent name.
 	fun parent_name=(parent_name: String) do
-		self["full_name"] = parent_name + name_separator + self["name"].as(not null).to_s
+		if parent_name.is_empty then
+			self["full_name"] = name
+		else
+			self["full_name"] = parent_name + name_separator + name
+		end
 	end
 
 	# Set the location of the entity in the source code.
@@ -212,12 +216,14 @@ abstract class Compound
 	# Declare an inner namespace.
 	#
 	# Note: Althought Doxygen indicates that the name is optional,
-	# declarations with an empty name are not supported yet.
+	# declarations with an empty name are not supported yet, except for the root
+	# namespace. For the root namespace, both arguments are empty.
 	#
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner namespace. May be empty.
-	# * `full_name`: qualified name of the inner namespace.
+	# * `full_name`: qualified name of the inner namespace. Use an empty name
+	# for the root namespace.
 	fun declare_namespace(id: String, full_name: String) do end
 
 	# Declare an inner class.

@@ -61,22 +61,30 @@ class FileCompound
 		end
 		# Update the modules’ name.
 		for ns, m in inner_namespaces do
-			m.full_name = "{ns}{ns_separator}{basename}"
+			if ns.is_empty then
+				m.full_name = basename
+			else
+				m.full_name = "{ns}{ns_separator}{basename}"
+			end
 		end
 	end
 
 	redef fun declare_namespace(id: String, full_name: String) do
 		var m: Module
 
-		assert not full_name.is_empty else
-			sys.stderr.write "Inner mamespace declarations without name are not yet supported.\n"
+		assert not full_name.is_empty or id.is_empty else
+			sys.stderr.write "Inner mamespace declarations without name are not yet supported (except for the root namespace).\n"
 		end
 		if inner_namespaces.keys.has(full_name) then
 			m = inner_namespaces[full_name]
 			if id != "" then m.parent = id
 		else
 			m = new Module(graph)
-			m.full_name = "{full_name}{ns_separator}{basename}"
+			if full_name.is_empty then
+				m.full_name = basename
+			else
+				m.full_name = "{full_name}{ns_separator}{basename}"
+			end
 			m.parent = id
 			m.location = self["location"].as(nullable Location)
 			inner_namespaces[full_name] = m

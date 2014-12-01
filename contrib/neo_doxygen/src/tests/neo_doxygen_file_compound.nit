@@ -19,12 +19,14 @@ var graph = new ProjectGraph("foo")
 var file = new FileCompound(graph)
 var file_2 = new FileCompound(graph)
 var bar_class = new ClassCompound(graph)
+var baz_class = new ClassCompound(graph)
 var c_ns = new Namespace(graph)
 var buffer = new RopeBuffer
 
 file.full_name = "Bar.java"
 file.model_id = "_Bar_8java"
 file.declare_class("classa_b_bar", "a::b::Bar")
+file.declare_class("classbaz", "Baz")
 file.declare_namespace("", "a::b")
 file.put_in_graph
 
@@ -37,6 +39,10 @@ file_2.put_in_graph
 bar_class.model_id = "classa_b_bar"
 bar_class.full_name = "a::b::Bar"
 bar_class.put_in_graph
+
+baz_class.model_id = "classbaz"
+baz_class.full_name = "Baz"
+baz_class.put_in_graph
 
 c_ns.model_id = "namespacec"
 c_ns.full_name = "c"
