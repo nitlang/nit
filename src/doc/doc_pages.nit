@@ -1351,6 +1351,7 @@ class NitdocClass
 		map["type"] = new HashSet[MProperty]
 		map["init"] = new HashSet[MProperty]
 		map["fun"] = new HashSet[MProperty]
+		map["inner"] = new HashSet[MProperty]
 		for mprop in mprops do
 			if mprop isa MVirtualTypeProp then
 				map["type"].add mprop
@@ -1360,6 +1361,8 @@ class NitdocClass
 				else
 					map["fun"].add mprop
 				end
+			else if mprop isa MInnerClass then
+				map["inner"].add mprop
 			end
 		end
 		return map
