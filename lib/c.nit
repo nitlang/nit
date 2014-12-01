@@ -99,6 +99,43 @@ extern class NativeCIntArray `{ int* `}
 	redef fun +(offset) `{ return recv + offset; `}
 end
 
+# Wrapper around an array of `unsigned char` in C (`unsigned char*`) with length and destroy state
+class CByteArray
+	super CArray[Int]
+	redef type NATIVE: NativeCByteArray
+
+	# Allocate a new array of `size`
+	init(size: Int)
+	do
+		native_array = new NativeCByteArray(size)
+		super size
+	end
+
+	# Build from an `Array[Int]`
+	new from(array: Array[Int])
+	do
+		var carray = new CByteArray(array.length)
+		for i in array.length.times do
+			carray[i] = array[i]
+		end
+		return carray
+	end
+end
+
+# An array of `unsigned char` in C (`unsigned char*`)
+extern class NativeCByteArray `{ unsigned char* `}
+	super NativeCArray
+	redef type E: Int
+
+	# Allocate a new array of `size`
+	new(size: Int) `{ return calloc(size, sizeof(unsigned char)); `}
+
+	redef fun [](index) `{ return recv[index]; `}
+	redef fun []=(index, val) `{ recv[index] = val; `}
+
+	redef fun +(offset) `{ return recv + offset; `}
+end
+
 redef class NativeString
 	super NativeCArray
 	redef type E: Char
