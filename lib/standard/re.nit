@@ -74,7 +74,7 @@ private extern class NativeRegex `{ regex_t* `}
 		return message;
 	`}
 
-	# This field holds the number of parenthetical subexpressions in the regular expression that was compiled.
+	# The number of parenthetical subexpressions in this compiled regular expression
 	fun re_nsub: Int `{ return recv->re_nsub; `}
 end
 
