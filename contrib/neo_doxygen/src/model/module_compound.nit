@@ -80,7 +80,7 @@ class FileCompound
 		inner_namespaces.add m
 	end
 
-	redef fun declare_class(id: String, full_name: String) do
+	redef fun declare_class(id, full_name, prot) do
 		assert not id.is_empty else
 			sys.stderr.write "Inner class declarations without ID are not yet supported.\n"
 		end

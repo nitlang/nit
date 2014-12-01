@@ -273,9 +273,10 @@ abstract class Compound
 	#
 	# * `id`: `model_id` of the inner class.
 	# * `full_name`: qualified name of the inner class. Ignored in practice.
+	# * `prot`: visibility (proctection).
 	#
 	# TODO: Handle cases where only the `full_name` is available.
-	fun declare_class(id: String, full_name: String) do end
+	fun declare_class(id: String, full_name: String, prot: String) do end
 
 	# Declare a base compound (usually, a base class).
 	#
@@ -319,7 +320,7 @@ class Namespace
 		inner_namespaces.add new NamespaceRef(id, full_name)
 	end
 
-	redef fun declare_class(id: String, full_name: String) do
+	redef fun declare_class(id: String, full_name: String, prot: String) do
 		graph.class_to_ns[id] = self
 	end
 

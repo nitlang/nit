@@ -28,8 +28,8 @@ var buffer = new RopeBuffer
 
 file.full_name = "Bar.java"
 file.model_id = "_Bar_8java"
-file.declare_class("classa_b_bar", "a::b::Bar")
-file.declare_class("classbaz", "Baz")
+file.declare_class("classa_b_bar", "a::b::Bar", "package")
+file.declare_class("classbaz", "Baz", "")
 file.declare_namespace("", "a::b")
 file.put_in_graph
 
@@ -52,7 +52,7 @@ a_ns.declare_namespace("", "a::b")
 a_ns.put_in_graph
 
 b_ns.full_name = "a::b"
-b_ns.declare_class("classa_b_bar", "")
+b_ns.declare_class("classa_b_bar", "", "")
 b_ns.put_in_graph
 
 c_ns.model_id = "namespacec"
