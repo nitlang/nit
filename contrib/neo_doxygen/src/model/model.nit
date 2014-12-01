@@ -21,3 +21,4 @@ import graph
 import class_compound
 import module_compound
 import member
+import inner_class
