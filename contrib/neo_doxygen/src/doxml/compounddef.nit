@@ -107,7 +107,7 @@ class CompoundDefListener
 			end
 		else if "memberdef" == local_name then
 			read_member(atts)
-		else if local_name == "sectiondef" then
+		else if "sectiondef" == local_name then
 			member_defaults = section_kinds[get_required(atts, "kind")]
 			if member_defaults.is_special then
 				super # TODO
@@ -120,17 +120,17 @@ class CompoundDefListener
 	end
 
 	redef fun end_dox_element(local_name: String) do
-		if local_name == "compoundname" then
+		if "compoundname" == local_name then
 			compound.full_name = text.to_s
-		else if local_name == "innerclass" then
+		else if "innerclass" == local_name then
 			compound.declare_class(refid, text.to_s, prot)
-		else if local_name == "innernamespace" then
+		else if "innernamespace" == local_name then
 			compound.declare_namespace(refid, text.to_s)
 		else if "memberdef" == local_name then
 			if not (memberdef.member isa UnknownMember) then
 				compound.declare_member(memberdef.member)
 			end
-		else if local_name == "basecompoundref" then
+		else if "basecompoundref" == local_name then
 			compound.declare_super(refid, text.to_s, prot, virt)
 		else if "param" == local_name and compound isa ClassCompound then
 			compound.as(ClassCompound).add_type_parameter(param_listener.parameter)
