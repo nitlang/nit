@@ -174,7 +174,12 @@ class Location
 		while line_end+1 < string.length and string.chars[line_end+1] != '\n' and string.chars[line_end+1] != '\r' do
 			line_end += 1
 		end
-		var lstart = string.substring(line_start, l.column_start - 1)
+		var lstart
+		if l.column_start > 0 then
+			lstart = string.substring(line_start, l.column_start - 1)
+		else
+			lstart = ""
+		end
 		var cend
 		if i != l.line_end then
 			cend = line_end - line_start + 1
