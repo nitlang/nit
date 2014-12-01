@@ -1090,6 +1090,9 @@ class NitdocClass
 		tpl_sidebar_list("Virtual types", kind_map["type"].to_a, summary)
 		tpl_sidebar_list("Constructors", kind_map["init"].to_a, summary)
 		tpl_sidebar_list("Methods", kind_map["fun"].to_a, summary)
+		if not kind_map["inner"].is_empty then
+			tpl_sidebar_list("Inner classes", kind_map["inner"].to_a, summary)
+		end
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
 	end
 
@@ -1275,6 +1278,10 @@ class NitdocClass
 				end
 				# methods
 				for article in tpl_mproperty_articles(kind_map, "fun") do
+					section.add_child article
+				end
+				# inner classes
+				for article in tpl_mproperty_articles(kind_map, "inner") do
 					section.add_child article
 				end
 				parent.add_child section
