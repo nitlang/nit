@@ -163,6 +163,8 @@ class Nitdoc
 	private fun properties do
 		for mproperty in model.mproperties do
 			if mproperty.visibility <= ctx.min_visibility then continue
+			if mproperty isa MInnerClass then continue
+			if mproperty isa MAttribute then continue
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
