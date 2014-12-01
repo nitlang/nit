@@ -18,42 +18,26 @@ module model::member
 import graph
 import type_entity
 
-# A member.
-abstract class Member
+# A member or an inner class.
+abstract class MemberOrInner
 	super CodeBlock
+
+	# The type of the introducer.
+	type INTRODUCER_TYPE: MemberIntroducer
 
 	# The node used to represent the `MProperty` node.
 	#
 	# Only defined if `self` is at the root of a reimplementation graph, and
 	# only once `put_in_graph` is called.
-	var introducer: nullable MemberIntroducer = null
-
-	# Members that this member redefines/reimplements.
-	var reimplemented: SimpleCollection[String] = new Array[String]
+	var introducer: nullable INTRODUCER_TYPE = null
 
 	init do
 		super
 		self.labels.add("MPropDef")
 	end
 
-	# Set the static type.
-	fun static_type=(static_type: nullable TypeEntity) is abstract
-
-	# Get the static type.
-	fun static_type: nullable TypeEntity is abstract
-
-	# Append the specified parameter to the signature.
-	fun add_parameter(parameter: MemberParameter) do end
-
-	# Append a member that is reimplemeneted by `self`.
-	fun reimplement(parent: String) do
-		reimplemented.add(parent)
-	end
-
 	# Does this member introduce the property?
-	fun is_intro: Bool do
-		return reimplemented.length <= 0
-	end
+	fun is_intro: Bool is abstract
 
 	redef fun put_in_graph do
 		super
@@ -122,13 +106,40 @@ abstract class Member
 		end
 	end
 
+	# Create an instance of `MemberIntroducer` that will be linked to `self`.
+	protected fun create_introducer: INTRODUCER_TYPE is abstract
+
+	# Find the nearest reimplementation root.
+	fun resolve_introducer: nullable INTRODUCER_TYPE is abstract
+end
+
+# A member.
+abstract class Member
+	super MemberOrInner
+
+	# Members that this member redefines/reimplements.
+	var reimplemented: SimpleCollection[String] = new Array[String]
+
+	# Set the static type.
+	fun static_type=(static_type: nullable TypeEntity) is abstract
+
+	# Get the static type.
+	fun static_type: nullable TypeEntity is abstract
+
+	# Append the specified parameter to the signature.
+	fun add_parameter(parameter: MemberParameter) do end
+
+	# Append a member that is reimplemeneted by `self`.
+	fun reimplement(parent: String) do
+		reimplemented.add(parent)
+	end
+
+	redef fun is_intro do return reimplemented.length <= 0
+
 	# Is the member abstract?
 	fun is_abstract=(is_abstract: Bool) do
 		self["is_abstract"] = is_abstract
 	end
-
-	# Create an instance of `MemberIntroducer` that will be linked to `self`.
-	protected fun create_introducer: MemberIntroducer is abstract
 
 	# Find the nearest reimplementation root.
 	#
@@ -148,7 +159,7 @@ abstract class Member
 	#     m3.reimplement("3")
 	#     m3.put_in_graph
 	#     assert m3.resolve_introducer == null
-	fun resolve_introducer: nullable MemberIntroducer do
+	redef fun resolve_introducer do
 		if introducer == null then
 			var member_queue = new List[String]
 			var visited = new HashSet[Member]
@@ -187,6 +198,8 @@ end
 class Method
 	super Member
 
+	redef type INTRODUCER_TYPE: MethodIntroducer
+
 	# The method’s signature.
 	var signature: Signature is noinit, writable
 
@@ -211,9 +224,7 @@ class Method
 		signature.parameters.add(parameter)
 	end
 
-	redef fun create_introducer: MemberIntroducer do
-		return new MethodIntroducer(graph)
-	end
+	redef fun create_introducer do return new MethodIntroducer(graph)
 
 	redef fun put_in_graph do
 		super
@@ -230,6 +241,8 @@ end
 class Attribute
 	super Member
 
+	redef type INTRODUCER_TYPE: AttributeIntroducer
+
 	# The declared type.
 	redef var static_type: nullable TypeEntity = null is writable
 
@@ -238,9 +251,7 @@ class Attribute
 		self.labels.add("MAttributeDef")
 	end
 
-	redef fun create_introducer: MemberIntroducer do
-		return new AttributeIntroducer(graph)
-	end
+	redef fun create_introducer do return new AttributeIntroducer(graph)
 
 	redef fun put_in_graph do
 		super
