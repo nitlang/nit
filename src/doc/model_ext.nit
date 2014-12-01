@@ -88,6 +88,28 @@ class MTypePart
 	end
 end
 
+# An inner class.
+class MInnerClass
+	super MProperty
+
+	redef type MPROPDEF: MInnerClassDef
+
+	# The actual class.
+	var inner: MClass
+end
+
+# An inner class definition.
+class MInnerClassDef
+	super MPropDef
+
+	redef type MPROPDEF: MInnerClassDef
+	redef type MPROPERTY: MInnerClass
+
+	# The actual class definition.
+	var inner: MClassDef
+end
+
+
 # The “package” visiblity.
 #
 # Any visibility roughly equivalent to the default visibility of Java, that is
