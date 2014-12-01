@@ -442,4 +442,23 @@ redef class Match
 	# assert match.subs.first.to_s == "d eee"
 	# ~~~
 	var subs = new Array[Match] is lazy
+
+	# Get the `n`th expression in this match
+	#
+	# `n == 0` returns this match, and a greater `n` returns the corresponding
+	# subexpression.
+	#
+	# Require: `n >= 0 and n <= subs.length`
+	#
+	# ~~~
+	# var re = "c (d e+) f".to_re
+	# var match = "a b c d eee f g".search(re)
+	# assert match[0].to_s == "c d eee f"
+	# assert match[1].to_s == "d eee"
+	# ~~~
+	fun [](n: Int): Match do
+		if n == 0 then return self
+		assert n > 0 and n <= subs.length
+		return subs[n-1]
+	end
 end
