@@ -23,6 +23,7 @@ import div_by_zero
 import cached
 import serialization_phase
 import check_annotation
+import glsl_validation
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
