@@ -619,7 +619,7 @@ redef class AMethPropdef
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
 			if parent isa ATopClassdef then mprop.is_toplevel = true
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then return
+			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else
 			if not mprop.is_root_init and not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
