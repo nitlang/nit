@@ -180,7 +180,12 @@ class Regex
 	private var native: nullable NativeRegex = null
 
 	# Cache of a single `regmatch_t` to prevent many calls to `malloc`
-	private var native_match = new NativeMatchArray.malloc(native.re_nsub+1) is lazy
+	private var native_match: NativeMatchArray is lazy do
+		native_match_is_init = true
+		return new NativeMatchArray.malloc(native.re_nsub+1)
+	end
+
+	private var native_match_is_init = false
 
 	# `cflags` of the last successful `compile`
 	private var cflags_cache = 0
@@ -249,7 +254,10 @@ class Regex
 			native.regfree
 			native.free
 			self.native = null
-			self.native_match.free
+
+			if native_match_is_init then
+				self.native_match.free
+			end
 		end
 	end
 
