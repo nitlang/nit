@@ -610,6 +610,28 @@ redef class MVirtualTypeDef
 	end
 end
 
+redef class MInnerClass
+	redef fun nitdoc_url do return inner.nitdoc_url
+	redef fun tpl_signature do return inner.tpl_signature
+end
+
+redef class MInnerClassDef
+	redef fun nitdoc_url do return inner.nitdoc_url
+
+	redef fun tpl_anchor do return inner.tpl_anchor
+	redef fun tpl_link do return inner.tpl_link
+	redef fun tpl_signature do return inner.tpl_signature
+
+	redef fun tpl_definition do
+		var tpl = new TplClassDefinition
+		tpl.namespace = mclassdef.tpl_namespace
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+end
+
 redef class MType
 	fun tpl_signature: Template is abstract
 end

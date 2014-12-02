@@ -74,6 +74,7 @@ class NeoDoxygenJob
 			if directories.length <= 0 then break
 			dir = directories.pop
 		end
+		model.add_global_modules
 		print "Done."
 		if file_count < 2 then
 			print "{file_count} file read."

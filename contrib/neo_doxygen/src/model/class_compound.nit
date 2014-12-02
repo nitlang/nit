@@ -117,9 +117,13 @@ class ClassDef
 
 	# The set of the introduced/redefined members.
 	#
+	# Includes inner classes.
+	#
 	# To ensure that the `full_name` of each member is correctly set,
-	# `declare_member` should be used to add each member.
-	var members: SimpleCollection[Member] = new Array[Member]
+	# `declare_member` or `declare_class` should be used to add each member.
+	#
+	# Note: `declare_class` is defined by the `inner_class` module.
+	var members: SimpleCollection[MemberOrInner] = new Array[MemberOrInner]
 
 	init do
 		super

@@ -163,6 +163,8 @@ class Nitdoc
 	private fun properties do
 		for mproperty in model.mproperties do
 			if mproperty.visibility <= ctx.min_visibility then continue
+			if mproperty isa MInnerClass then continue
+			if mproperty isa MAttribute then continue
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -1088,6 +1090,9 @@ class NitdocClass
 		tpl_sidebar_list("Virtual types", kind_map["type"].to_a, summary)
 		tpl_sidebar_list("Constructors", kind_map["init"].to_a, summary)
 		tpl_sidebar_list("Methods", kind_map["fun"].to_a, summary)
+		if not kind_map["inner"].is_empty then
+			tpl_sidebar_list("Inner classes", kind_map["inner"].to_a, summary)
+		end
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
 	end
 
@@ -1275,6 +1280,10 @@ class NitdocClass
 				for article in tpl_mproperty_articles(kind_map, "fun") do
 					section.add_child article
 				end
+				# inner classes
+				for article in tpl_mproperty_articles(kind_map, "inner") do
+					section.add_child article
+				end
 				parent.add_child section
 			end
 		end
@@ -1342,6 +1351,7 @@ class NitdocClass
 		map["type"] = new HashSet[MProperty]
 		map["init"] = new HashSet[MProperty]
 		map["fun"] = new HashSet[MProperty]
+		map["inner"] = new HashSet[MProperty]
 		for mprop in mprops do
 			if mprop isa MVirtualTypeProp then
 				map["type"].add mprop
@@ -1351,6 +1361,8 @@ class NitdocClass
 				else
 					map["fun"].add mprop
 				end
+			else if mprop isa MInnerClass then
+				map["inner"].add mprop
 			end
 		end
 		return map

@@ -94,19 +94,20 @@ class CompoundDefListener
 	redef fun entity: Entity do return compound
 
 	redef fun start_dox_element(local_name: String, atts: Attributes) do
-		if ["compoundname", "innerclass", "innernamespace"].has(local_name) then
+		if "compoundname" == local_name then
 			text.listen_until(dox_uri, local_name)
-			if ["innerclass", "innernamespace"].has(local_name) then
+		else if ["innerclass", "innernamespace", "basecompoundref"].has(local_name) then
+			prot = get_optional(atts, "prot", "")
+			text.listen_until(dox_uri, local_name)
+			if "basecompoundref" == local_name then
+				refid = get_optional(atts, "refid", "")
+				virt = get_optional(atts, "virt", "")
+			else
 				refid = get_required(atts, "refid")
 			end
-		else if "basecompoundref" == local_name then
-			refid = get_optional(atts, "refid", "")
-			prot = get_optional(atts, "prot", "")
-			virt = get_optional(atts, "virt", "")
-			text.listen_until(dox_uri, local_name)
 		else if "memberdef" == local_name then
 			read_member(atts)
-		else if local_name == "sectiondef" then
+		else if "sectiondef" == local_name then
 			member_defaults = section_kinds[get_required(atts, "kind")]
 			if member_defaults.is_special then
 				super # TODO
@@ -119,17 +120,17 @@ class CompoundDefListener
 	end
 
 	redef fun end_dox_element(local_name: String) do
-		if local_name == "compoundname" then
+		if "compoundname" == local_name then
 			compound.full_name = text.to_s
-		else if local_name == "innerclass" then
-			compound.declare_class(refid, text.to_s)
-		else if local_name == "innernamespace" then
+		else if "innerclass" == local_name then
+			compound.declare_class(refid, text.to_s, prot)
+		else if "innernamespace" == local_name then
 			compound.declare_namespace(refid, text.to_s)
 		else if "memberdef" == local_name then
 			if not (memberdef.member isa UnknownMember) then
 				compound.declare_member(memberdef.member)
 			end
-		else if local_name == "basecompoundref" then
+		else if "basecompoundref" == local_name then
 			compound.declare_super(refid, text.to_s, prot, virt)
 		else if "param" == local_name and compound isa ClassCompound then
 			compound.as(ClassCompound).add_type_parameter(param_listener.parameter)

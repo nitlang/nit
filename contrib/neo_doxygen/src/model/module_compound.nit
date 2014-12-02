@@ -23,12 +23,18 @@ import class_compound
 # Creates one modules by inner namespace. The full name of the modules begin
 # with the namespace’s full name, and end with the unqualified name of the file,
 # without the extension.
+#
+# Note: If a module associated to the root namespace is needed, it is added to
+# the graph only when `put_edges` is called.
 class FileCompound
 	super Compound
 	super CodeBlock
 
-	# Mapping between inner namespace’s names and corresponding modules.
-	private var inner_namespaces: Map[String, Module] = new HashMap[String, Module]
+	# Modules corresponding to the namespaces defined/redefined in the file.
+	private var inner_namespaces = new Array[Module]
+
+	# `model_id` of the classes declared in the file.
+	private var inner_classes = new Array[String]
 
 	# The last component of the path, without the extension.
 	#
@@ -46,7 +52,7 @@ class FileCompound
 		if location != null and location.path != null then
 			full_name = location.path.as(not null)
 		end
-		for m in inner_namespaces.values do m.location = location
+		for m in inner_namespaces do m.location = location
 	end
 
 	redef fun name=(name: String) do
@@ -60,92 +66,112 @@ class FileCompound
 			basename = name.substring(0, match.from)
 		end
 		# Update the modules’ name.
-		for ns, m in inner_namespaces do
-			m.full_name = "{ns}{ns_separator}{basename}"
-		end
+		for m in inner_namespaces do m.update_name
 	end
 
 	redef fun declare_namespace(id: String, full_name: String) do
 		var m: Module
 
-		assert not full_name.is_empty else
-			sys.stderr.write "Inner mamespace declarations without name are not yet supported.\n"
+		assert not full_name.is_empty or id.is_empty else
+			sys.stderr.write "Inner mamespace declarations without name are not yet supported (except for the root namespace).\n"
 		end
-		if inner_namespaces.keys.has(full_name) then
-			m = inner_namespaces[full_name]
-			if id != "" then m.parent = id
-		else
-			m = new Module(graph)
-			m.full_name = "{full_name}{ns_separator}{basename}"
-			m.parent = id
-			m.location = self["location"].as(nullable Location)
-			inner_namespaces[full_name] = m
-		end
+		m = new Module(graph, self, new NamespaceRef(id, full_name))
+		m.location = self["location"].as(nullable Location)
+		inner_namespaces.add m
 	end
 
-	redef fun declare_class(id: String, full_name: String) do
+	redef fun declare_class(id, full_name, prot) do
 		assert not id.is_empty else
 			sys.stderr.write "Inner class declarations without ID are not yet supported.\n"
 		end
-		assert not full_name.is_empty else
-			sys.stderr.write "Inner class declarations without name are not yet supported.\n"
-		end
-		var match = full_name.search_last(ns_separator)
-		var ns_name: String
-		var m: Module
-
-		if match == null then
-			ns_name = ""
-		else
-			ns_name = full_name.substring(0, match.from)
-		end
-		if inner_namespaces.keys.has(ns_name) then
-			m = inner_namespaces[ns_name]
-		else
-			declare_namespace("", ns_name)
-			m = inner_namespaces[ns_name]
-		end
-		m.declare_class(id, full_name)
+		inner_classes.add id
 	end
 
 	redef fun put_in_graph do
 		# Do not add `self` to the Neo4j graph...
 		# ... but add its modules...
-		for m in inner_namespaces.values do m.put_in_graph
-		# ... and add `self` to the index.
+		for m in inner_namespaces do m.put_in_graph
+		# ... and add `self` to the indexes.
 		if model_id != "" then graph.by_id[model_id] = self
+		graph.files.add self
+	end
+
+	# If the file contains some classes in the root namespace, add an implicit
+	# module to handle them.
+	#
+	# This method is called by `ProjectGraph.add_global_modules` and assumes
+	# that all the namespaces are already fully set and put in the graph.
+	fun declare_root_namespace do
+		if has_globals then
+			declare_namespace("", "")
+			inner_namespaces.last.put_in_graph
+		end
+	end
+
+	# Does this file contain classes in the root namespace?
+	private fun has_globals: Bool do
+		var root = graph.by_id[""]
+		for c in inner_classes do
+			if graph.class_to_ns[c] == root then return true
+		end
+		return false
 	end
 end
 
-# A module.
-class Module
+# A `MModule` node.
+#
+# For each file, there is one module by inner namespace.
+private class Module
 	super Compound
 	super CodeBlock
 
-	# The `model_id` of the parent namespace.
-	var parent: String = "" is writable
+	# The file that declares the module.
+	var file_compound: FileCompound
 
-	# The classes defined in the module.
-	var inner_classes: SimpleCollection[String] = new Array[String]
+	# The namespace defined or redefined by the module.
+	var namespace: NamespaceRef
 
 	init do
 		super
 		self.labels.add("MModule")
+		update_name
 	end
 
-	redef fun declare_class(id: String, full_name: String) do
-		assert not id.is_empty else
-			sys.stderr.write "Inner class declarations without ID not supported yet.\n"
-		end
-		inner_classes.add(id)
+	# Update the `full_name` and the `name`.
+	#
+	# Update the short name of the module to the `basename` of the file that
+	# declares it.
+	fun update_name do
+		name = file_compound.basename
+		parent_name = namespace.full_name
 	end
 
 	redef fun put_edges do
-		graph.add_edge(graph.by_id[parent], "DECLARES", self)
-		for c in inner_classes do
-			var node = graph.by_id[c].as(ClassCompound)
-			graph.add_edge(self, "INTRODUCES", node)
-			graph.add_edge(self, "DEFINES", node.class_def)
+		var ns_compound = namespace.seek_in(graph)
+		graph.add_edge(ns_compound, "DECLARES", self)
+
+		for c in file_compound.inner_classes do
+			if graph.class_to_ns[c] != ns_compound then continue
+			var class_compound = graph.by_id[c].as(ClassCompound)
+			graph.add_edge(self, "INTRODUCES", class_compound)
+			graph.add_edge(self, "DEFINES", class_compound.class_def)
 		end
+	end
+end
+
+# Adds the `add_global_modules` phase to `ProjectGraph`.
+redef class ProjectGraph
+
+	# Project’s source files.
+	var files: SimpleCollection[FileCompound] = new Array[FileCompound]
+
+	# Add the modules that define the root namespace.
+	#
+	# **Must** be called before any call to `put_edges`, and after all the
+	# namespaces are fully set and put in the graph.
+	#
+	# Note: This method is not idempotent so it has to be called only once.
+	fun add_global_modules do
+		for f in files do f.declare_root_namespace
 	end
 end

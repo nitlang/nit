@@ -94,8 +94,8 @@
 # `MProperty`
 #
 # * labels: `MProperty`, `model_name` and `MEntity`. Must also have `MMethod`,
-# `MAttribute` or `MVirtualTypeProp`, depending on the class of the represented
-# entity.
+# `MAttribute` `MVirtualTypeProp` or `MInnerClass`, depending on the class of
+# the represented entity.
 # * `full_name`: fully qualified name.
 # * `visibility`: visibility of the property.
 # * `is_init`: Indicates if the property is a constructor. Exists only if the
@@ -103,11 +103,15 @@
 # * `(:MProperty)-[:INTRO_CLASSDEF]->(:MClassDef)`: classdef that introduces
 # the property.
 #
+# Additional relationship for `MInnerClass`:
+#
+# * `(:MInnerClassDef)-[:NESTS]->(:MClass)`: actual inner class.
+#
 # `MPropDef`
 #
 # * labels: `MPropDef`, `model_name` and `MEntity`. Must also have `MMethodDef`,
-# `MAttributeDef` or `MVirtualTypeDef`, depending on the class of the
-# represented entity.
+# `MAttributeDef`, `MVirtualTypeDef` or `MInnerClassDef`, depending on the
+# class of the represented entity.
 # * `location`: origin of the definition. SEE: `Location.to_s`.
 # * `(:MPropDef)-[:DEFINES]->(:MProperty)`: associated property.
 #
@@ -129,6 +133,11 @@
 # * `(:MVirtualTypeDef)-[:BOUND]->(:MType)`: type to which the virtual type
 # is bound in this definition. Exists only if this definition bound the virtual
 # type to an effective type.
+#
+# Additional relationship for `MInnerClassDef`:
+#
+# * `(:MInnerClassDef)-[:NESTS]->(:MClassDef)`: actual inner class'
+# definition.
 #
 # `MType`
 #
@@ -568,6 +577,9 @@ class NeoModel
 			node.labels.add "MAttribute"
 		else if mproperty isa MVirtualTypeProp then
 			node.labels.add "MVirtualTypeProp"
+		else if mproperty isa MInnerClass then
+			node.labels.add "MInnerClass"
+			node.out_edges.add(new NeoEdge(node, "NESTS", to_node(mproperty.inner)))
 		end
 		node.out_edges.add(new NeoEdge(node, "INTRO_CLASSDEF", to_node(mproperty.intro_mclassdef)))
 		return node
@@ -592,6 +604,9 @@ class NeoModel
 			mprop = new MAttribute(intro_mclassdef, name, visibility)
 		else if node.labels.has("MVirtualTypeProp") then
 			mprop = new MVirtualTypeProp(intro_mclassdef, name, visibility)
+		else if node.labels.has("MInnerClass") then
+			var inner = to_mclass(model, node.out_nodes("NESTS").first)
+			mprop = new MInnerClass(intro_mclassdef, name, visibility, inner)
 		end
 		if mprop == null then
 			print "not yet implemented to_mproperty for {node.labels.join(",")}"
@@ -629,6 +644,9 @@ class NeoModel
 			if bound != null then
 				node.out_edges.add(new NeoEdge(node, "BOUND", to_node(bound)))
 			end
+		else if mpropdef isa MInnerClassDef then
+			node.labels.add "MInnerClassDef"
+			node.out_edges.add(new NeoEdge(node, "NESTS", to_node(mpropdef.inner)))
 		end
 		return node
 	end
@@ -662,6 +680,11 @@ class NeoModel
 			mentities[node.id.as(Int)] = mpropdef
 			var bound = node.out_nodes("BOUND")
 			if not bound.is_empty then mpropdef.bound = to_mtype(model, bound.first)
+		else if node.labels.has("MInnerClassDef") then
+			var inner = to_mclassdef(model, node.out_nodes("NESTS").first)
+			mpropdef = new MInnerClassDef(mclassdef,
+					mproperty.as(MInnerClass), location, inner)
+			mentities[node.id.as(Int)] = mpropdef
 		end
 		if mpropdef == null then
 			print "not yet implemented to_mpropdef for {node.labels.join(",")}"

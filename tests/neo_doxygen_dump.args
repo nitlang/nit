@@ -3,3 +3,5 @@
 --src-lang java empty-project ../contrib/neo_doxygen/tests/empty-project/xml
 --src-lang any -- foo ../contrib/neo_doxygen/tests/java-project/xml
 --src-lang java -- foo ../contrib/neo_doxygen/tests/java-project/xml
+--src-lang java -- root-namespace ../contrib/neo_doxygen/tests/root-namespace/xml
+--src-lang java -- inner-class ../contrib/neo_doxygen/tests/inner-class/xml
