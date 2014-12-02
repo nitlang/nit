@@ -54,7 +54,16 @@ class Location
 	var file: nullable SourceFile
 	var line_start: Int
 	var line_end: Int
+
+	# Start of this location on `line_start`
+	#
+	# A `column_start` of 1 means the first column or character.
+	#
+	# If `column_start == 0` this location concerns the whole line.
+	#
+	# Require: `column_start >= 0`
 	var column_start: Int
+
 	var column_end: Int
 
 	# The index in the start character in the source
