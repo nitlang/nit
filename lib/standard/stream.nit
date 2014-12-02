@@ -56,6 +56,29 @@ interface IStream
 		return s.to_s
 	end
 
+	# Read all the lines until the eof.
+	#
+	# The line terminator '\n' is removed in each line,
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_lines == ["Hello", "", "World"]
+	# ~~~
+	#
+	# This method is more efficient that splitting
+	# the result of `read_all`.
+	#
+	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	fun read_lines: Array[String]
+	do
+		var res = new Array[String]
+		while not eof do
+			res.add read_line.chomp
+		end
+		return res
+	end
+
 	# Read all the stream until the eof.
 	fun read_all: String
 	do
