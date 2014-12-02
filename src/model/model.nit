@@ -1156,25 +1156,31 @@ class MVirtualType
 
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
-	var mproperty: MProperty
+	var mproperty: MVirtualTypeProp
 
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	do
+		return lookup_single_definition(mmodule, resolved_receiver).bound.as(not null)
+	end
+
+	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
 	do
 		assert not resolved_receiver.need_anchor
 		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
 		if props.is_empty then
 			abort
 		else if props.length == 1 then
-			return props.first.as(MVirtualTypeDef).bound.as(not null)
+			return props.first
 		end
 		var types = new ArraySet[MType]
+		var res  = props.first
 		for p in props do
-			types.add(p.as(MVirtualTypeDef).bound.as(not null))
+			types.add(p.bound.as(not null))
 		end
 		if types.length == 1 then
-			return types.first
+			return res
 		end
 		abort
 	end
