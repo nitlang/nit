@@ -1194,7 +1194,8 @@ redef class ATypePropdef
 		# Check redefinitions
 		bound = mpropdef.bound.as(not null)
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
-			var supbound = p.bound.as(not null)
+			var supbound = p.bound
+			if supbound == null then break # broken super bound, skip error
 			if p.is_fixed then
 				modelbuilder.error(self, "Redef Error: Virtual type {mpropdef.mproperty} is fixed in super-class {p.mclassdef.mclass}")
 				break
