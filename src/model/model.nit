@@ -388,7 +388,7 @@ class MClass
 			self.mparameters = mparametertypes
 			var mclass_type = new MGenericType(self, mparametertypes)
 			self.mclass_type = mclass_type
-			self.get_mtype_cache.add(mclass_type)
+			self.get_mtype_cache[mparametertypes] = mclass_type
 		else
 			self.mclass_type = new MClassType(self)
 		end
@@ -458,17 +458,14 @@ class MClass
 	do
 		assert mtype_arguments.length == self.arity
 		if self.arity == 0 then return self.mclass_type
-		for t in self.get_mtype_cache do
-			if t.arguments == mtype_arguments then
-				return t
-			end
-		end
-		var res = new MGenericType(self, mtype_arguments)
-		self.get_mtype_cache.add res
+		var res = get_mtype_cache.get_or_null(mtype_arguments)
+		if res != null then return res
+		res = new MGenericType(self, mtype_arguments)
+		self.get_mtype_cache[mtype_arguments.to_a] = res
 		return res
 	end
 
-	private var get_mtype_cache = new Array[MGenericType]
+	private var get_mtype_cache = new HashMap[Array[MType], MGenericType]
 end
 
 
@@ -1033,13 +1030,20 @@ class MClassType
 
 	redef fun collect_mclasses(mmodule)
 	do
+		if collect_mclasses_last_module == mmodule then return collect_mclasses_last_module_cache
 		assert not self.need_anchor
 		var cache = self.collect_mclasses_cache
 		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return cache[mmodule]
+		var res = cache[mmodule]
+		collect_mclasses_last_module = mmodule
+		collect_mclasses_last_module_cache = res
+		return res
 	end
+
+	private var collect_mclasses_last_module: nullable MModule = null
+	private var collect_mclasses_last_module_cache: Set[MClass] is noinit
 
 	redef fun collect_mtypes(mmodule)
 	do
