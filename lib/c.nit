@@ -23,7 +23,10 @@ intrude import standard::collection::array
 abstract class CArray[E]
 	super AbstractArrayRead[E]
 
+	# The corresponding C type
 	type NATIVE: NativeCArray
+
+	# Pointer to the real C array
 	var native_array: NATIVE is noinit
 
 	private init(length: Int) do self._length = length
