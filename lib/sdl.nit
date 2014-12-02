@@ -160,7 +160,26 @@ extern class SDLDisplay `{SDL_Surface *`}
 	fun warp_mouse(x,y: Int) `{ SDL_WarpMouse(x, y); `}
 
 	# Show or hide the cursor
-	fun show_cursor(show: Bool) `{ SDL_ShowCursor(show); `}
+	fun show_cursor=(val: Bool) `{ SDL_ShowCursor(val? SDL_ENABLE: SDL_DISABLE); `}
+
+	# Is the cursor visible?
+	fun show_cursor: Bool `{ SDL_ShowCursor(SDL_QUERY); `}
+
+	# Grab or release the input
+	fun grab_input=(val: Bool) `{ SDL_WM_GrabInput(val? SDL_GRAB_ON: SDL_GRAB_OFF); `}
+
+	# Is the input grabbed?
+	fun grab_input: Bool `{ SDL_WM_GrabInput(SDL_GRAB_QUERY) == SDL_GRAB_ON; `}
+
+	# Are instances of `SDLMouseMotionEvent` ignored?
+	fun ignore_mouse_motion_events: Bool `{
+		return SDL_EventState(SDL_MOUSEMOTION, SDL_QUERY);
+	`}
+
+	# Do not raise instances of `SDLMouseMotionEvent` if `val`
+	fun ignore_mouse_motion_events=(val: Bool) `{
+		SDL_EventState(SDL_MOUSEMOTION, val? SDL_IGNORE: SDL_ENABLE);
+	`}
 end
 
 # Basic Drawing figures
