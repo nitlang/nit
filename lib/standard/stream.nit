@@ -48,6 +48,30 @@ interface IStream
 	end
 
 	# Read a string until the end of the line.
+	#
+	# The line terminator '\n', if any, is preserved in each line.
+	# Use the method `Text::chomp` to safely remove it.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_line == "Hello\n"
+	# assert i.read_line == "\n"
+	# assert i.read_line == "World\n"
+	# assert i.eof
+	# ~~~
+	#
+	# If `\n` is not present at the end of the result, it means that
+	# a non-eol terminated last line was returned.
+	#
+	# ~~~
+	# var i2 = new StringIStream("hello")
+	# assert not i2.eof
+	# assert i2.read_line == "hello"
+	# assert i2.eof
+	# ~~~
+	#
+	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
 	fun read_line: String
 	do
 		assert not eof
@@ -91,6 +115,8 @@ interface IStream
 	end
 
 	# Read a string until the end of the line and append it to `s`.
+	#
+	# SEE: `read_line` for details.
 	fun append_line_to(s: Buffer)
 	do
 		loop
