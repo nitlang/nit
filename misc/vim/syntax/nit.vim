@@ -146,6 +146,12 @@ unlet b:current_syntax
 syn match NITFFILanguage	'"C++"' nextgroup=NITFFIBlockCpp skipwhite
 syn region NITFFIBlockCpp matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFICpp
 
+" FFI Objective-C
+syntax include @FFIObjC syntax/objc.vim
+unlet b:current_syntax
+syn match NITFFILanguage	/\c"ObjC\(\| Header\| Body\)"/ nextgroup=NITFFIBlockObjC skipwhite
+syn region NITFFIBlockObjC matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIObjC
+
 " FFI C (the last one is the default)
 syntax include @FFIC syntax/c.vim
 unlet b:current_syntax
