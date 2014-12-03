@@ -52,43 +52,64 @@ class CompoundDefListener
 		member_defaults = defaults
 		section_kinds = new DefaultMap[String, MemberDefaults](defaults)
 
+		# public
 		section_kinds["public-type"] = defaults
 		section_kinds["public-func"] = defaults
 		section_kinds["public-attrib"] = defaults
 		section_kinds["public-slot"] = defaults
+		# public static
 		defaults = new MemberDefaults("public", true, false)
 		section_kinds["public-static-func"] = defaults
 		section_kinds["public-static-attrib"] = defaults
+		# Not scoped => public static
+		section_kinds["signal"] = defaults
+		section_kinds["dcop-func"] = defaults
+		section_kinds["property"] = defaults
+		section_kinds["event"] = defaults
+		section_kinds["define"] = defaults
+		section_kinds["typedef"] = defaults
+		section_kinds["enum"] = defaults
+		section_kinds["func"] = defaults
+		section_kinds["var"] = defaults
 
+		# protected
 		defaults = new MemberDefaults("protected", false, false)
 		section_kinds["protected-type"] = defaults
 		section_kinds["protected-func"] = defaults
 		section_kinds["protected-attrib"] = defaults
 		section_kinds["protected-slot"] = defaults
+		# protected static
 		defaults = new MemberDefaults("protected", true, false)
 		section_kinds["protected-static-func"] = defaults
 		section_kinds["protected-static-attrib"] = defaults
 
+		# package
 		defaults = new MemberDefaults("package", false, false)
 		section_kinds["package-type"] = defaults
 		section_kinds["package-func"] = defaults
 		section_kinds["package-attrib"] = defaults
+		# package static
 		defaults = new MemberDefaults("package", true, false)
 		section_kinds["package-static-func"] = defaults
 		section_kinds["package-static-attrib"] = defaults
 
+		# private
 		defaults = new MemberDefaults("private", false, false)
 		section_kinds["private-type"] = defaults
 		section_kinds["private-func"] = defaults
 		section_kinds["private-attrib"] = defaults
 		section_kinds["private-slot"] = defaults
+		# private static
 		defaults = new MemberDefaults("private", true, false)
 		section_kinds["private-static-func"] = defaults
 		section_kinds["private-static-attrib"] = defaults
 
+		# Special sections.
+		# TODO Do something these sections.
 		defaults = new MemberDefaults("public", true, true)
 		section_kinds["related"] = defaults
 		section_kinds["user-defined"] = defaults
+		# TODO Determine what `friend` and `prototype` mean.
 	end
 
 	redef fun entity: Entity do return compound
