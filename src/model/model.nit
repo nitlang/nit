@@ -1308,7 +1308,8 @@ class MParameterType
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		assert resolved_receiver isa MClassType
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
 		if resolved_receiver.mclass == goalclass then
 			return resolved_receiver.arguments[self.rank]
@@ -1334,7 +1335,9 @@ class MParameterType
 	#   See `resolve_for` for examples about related issues.
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
-		assert resolved_receiver isa MClassType
+		assert not resolved_receiver.need_anchor
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
 		var res = self.resolve_for(resolved_receiver.mclass.mclass_type, resolved_receiver, mmodule, false)
 		return res
 	end
@@ -1371,7 +1374,7 @@ class MParameterType
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
-		assert resolved_receiver isa MClassType
+		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
