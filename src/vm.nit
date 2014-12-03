@@ -195,17 +195,21 @@ class VirtualMachine super NaiveInterpreter
 		var ret = send_commons(mproperty, args, mtype)
 		if ret != null then return ret
 
-		var propdef = method_dispatch(mproperty, recv.vtable.as(not null))
+		var propdef = method_dispatch(mproperty, recv.vtable.as(not null), recv)
 
 		return self.call(propdef, args)
 	end
 
 	# Method dispatch, for a given global method `mproperty`
 	# returns the most specific local method in the class corresponding to `vtable`
-	private fun method_dispatch(mproperty: MMethod, vtable: VTable): MMethodDef
+	private fun method_dispatch(mproperty: MMethod, vtable: VTable, recv: Instance): MMethodDef
 	do
-		return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
+		if mproperty.intro_mclassdef.mclass.positions_methods[recv.mtype.as(MClassType).mclass] != -1 then
+			return method_dispatch_sst(vtable.internal_vtable, mproperty.absolute_offset)
+		else
+			return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
 				mproperty.intro_mclassdef.mclass.vtable.id, mproperty.offset)
+		end
 	end
 
 	# Execute a method dispatch with perfect hashing
@@ -217,6 +221,17 @@ class VirtualMachine super NaiveInterpreter
 		// pointer+2 is the position where methods are
 		// Add the offset of property and get the method implementation
 		MMethodDef propdef = (MMethodDef)*(pointer + 2 + offset);
+
+		return propdef;
+	`}
+
+	# Execute a method dispatch with direct access and return the appropriate `MMethodDef`
+	# `vtable` : Pointer to the internal pointer of the class
+	# `absolute_offset` : Absolute offset from the beginning of the virtual table
+	private fun method_dispatch_sst(vtable: Pointer, absolute_offset: Int): MMethodDef `{
+		// pointer+2 is the position where methods are
+		// Add the offset of property and get the method implementation
+		MMethodDef propdef = (MMethodDef)((long int *)vtable)[absolute_offset];
 
 		return propdef;
 	`}
@@ -373,8 +388,11 @@ redef class MClass
 
 		# Absolute offset of attribute from the beginning of the attributes table
 		var offset_attributes = 0
-		# Absolute offset of method from the beginning of the methods table
-		var offset_methods = 0
+
+		# Absolute offset of method from the beginning of the methods table,
+		# is initialize to 3 because the first position is empty in the virtual table
+		# and the second and third are respectively class id and delta
+		var offset_methods = 3
 
 		# The previous element in `superclasses`
 		var previous_parent: nullable MClass = null
@@ -408,6 +426,7 @@ redef class MClass
 
 			offset_attributes += attributes
 			offset_methods += methods
+			offset_methods += 2 # Because each block starts with an id and the delta
 		end
 
 		# When all super-classes have their identifiers and vtables, allocate current one
