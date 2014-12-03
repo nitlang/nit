@@ -580,7 +580,7 @@ class TplClassDefinition
 
 	private fun render_list(name: String, elts: Array[TplListElt]) do
 		if elts.is_empty then return
-		add "<h5>{name}</h5>"
+		add "<h5>{name.html_escape}</h5>"
 		add "<ul class='list-unstyled list-definition'>"
 		for elt in elts do add elt
 		add "</ul>"
@@ -597,7 +597,7 @@ class TplSearchPage
 
 	redef fun rendering do
 		var title = self.title
-		if title != null then add "<h1>{title}</h1>"
+		if title != null then add "<h1>{title.to_s.html_escape}</h1>"
 		add "<div class='container-fluid'>"
 		add " <div class='row'>"
 		if not modules.is_empty then
