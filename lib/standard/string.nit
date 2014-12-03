@@ -385,6 +385,19 @@ abstract class Text
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
+	# Returns `self` removed from its last `\n` (if any).
+	#
+	#    assert "Hello\n".chomp == "Hello"
+	#    assert "Hello".chomp   == "Hello"
+	#    assert "\n\n\n".chomp  == "\n\n"
+	#
+	# This method is mainly used to remove the LINE_FEED character from lines of text.
+	fun chomp: SELFTYPE
+	do
+		if self.chars.last != '\n' then return self
+		return substring(0, length-1)
+	end
+
 	# Justify a self in a space of `length`
 	#
 	# `left` is the space ratio on the left side.
