@@ -44,12 +44,12 @@ private class ExternClassesTypingPhaseAst
 		end
 
 		var ftype = code_block.language.get_ftype(code_block, nclassdef)
-		nclassdef.ftype_cache = ftype
-		nclassdef.ftype_computed = true
+		nclassdef.mclassdef.ftype_cache = ftype
+		nclassdef.mclassdef.ftype_computed = true
 	end
 end
 
-redef class AClassdef
+redef class MClassDef
 	private var ftype_cache: nullable ForeignType = null
 	private var ftype_computed = false
 
@@ -103,8 +103,7 @@ redef class MClass
 			return ftype_cache
 		end
 
-		var intro_nclassdef = v.toolcontext.modelbuilder.mclassdef2nclassdef[intro]
-		var ftype = intro_nclassdef.ftype
+		var ftype = intro.ftype
 		if ftype == null then
 			var ftype_b: nullable ForeignType = null # FIXME hack to circumvent bug where ftype is typed null
 
