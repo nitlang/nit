@@ -103,7 +103,7 @@ redef class ToolContext
 	redef fun check_errors
 	do
 		if dbg == null then
-			super
+			return super
 		else
 			if messages.length > 0 then
 				message_sorter.sort(messages)
@@ -116,6 +116,7 @@ redef class ToolContext
 
 			messages.clear
 		end
+		return not had_error
 	end
 
 	# -d

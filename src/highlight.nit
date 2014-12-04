@@ -349,6 +349,8 @@ redef class MClassDef
 		if mdoc == null then mdoc = mclass.intro.mdoc
 		if mdoc != null then mdoc.fill_infobox(res)
 
+		if in_hierarchy == null then return res
+
 		if in_hierarchy.greaters.length > 1 then
 			var c = res.new_dropdown("hier", "super-classes")
 			for x in in_hierarchy.greaters do
@@ -395,11 +397,11 @@ redef class MPropDef
 		var res = new HInfoBox(v, to_s)
 		res.href = href
 		if self isa MMethodDef then
-			res.new_field("fun").append(mproperty.name).add msignature.linkto
+			if msignature != null then res.new_field("fun").append(mproperty.name).add msignature.linkto
 		else if self isa MAttributeDef then
-			res.new_field("fun").append(mproperty.name).add static_mtype.linkto
+			if static_mtype != null then res.new_field("fun").append(mproperty.name).add static_mtype.linkto
 		else if self isa MVirtualTypeDef then
-			res.new_field("add").append(mproperty.name).add bound.linkto
+			if bound != null then res.new_field("add").append(mproperty.name).add bound.linkto
 		else
 			res.new_field("wat?").append(mproperty.name)
 		end

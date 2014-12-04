@@ -175,7 +175,8 @@ redef class ModelBuilder
 		# Look for most-specific new-stype init definitions
 		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
 		if spropdefs.is_empty then
-			toolcontext.fatal_error(nclassdef.location, "Fatal error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
+			toolcontext.error(nclassdef.location, "Error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
+			return
 		end
 
 		# Search the longest-one and checks for conflict
@@ -618,7 +619,7 @@ redef class AMethPropdef
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
 			if parent isa ATopClassdef then mprop.is_toplevel = true
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then return
+			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else
 			if not mprop.is_root_init and not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
@@ -1195,7 +1196,8 @@ redef class ATypePropdef
 		# Check redefinitions
 		bound = mpropdef.bound.as(not null)
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
-			var supbound = p.bound.as(not null)
+			var supbound = p.bound
+			if supbound == null then break # broken super bound, skip error
 			if p.is_fixed then
 				modelbuilder.error(self, "Redef Error: Virtual type {mpropdef.mproperty} is fixed in super-class {p.mclassdef.mclass}")
 				break
