@@ -172,6 +172,7 @@ redef class MProject
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
@@ -213,6 +214,7 @@ redef class MGroup
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end

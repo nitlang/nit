@@ -18,6 +18,7 @@ module mproject
 import model_base
 private import more_collections
 import poset
+import mdoc
 
 # A Nit project, that encompass a product
 class MProject
@@ -45,6 +46,12 @@ class MProject
 
 	# MProject are always roots of the concerns hierarchy
 	redef fun parent_concern do return null
+
+	redef fun mdoc_or_fallback
+	do
+		if mdoc != null then return mdoc
+		return root.mdoc_or_fallback
+	end
 end
 
 # A group of modules in a project

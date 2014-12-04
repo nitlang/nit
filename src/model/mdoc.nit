@@ -33,6 +33,16 @@ redef class MEntity
 	# The documentation associated to the entity
 	var mdoc: nullable MDoc is writable
 
+	# The documentation associated to the entity or their main nested entity.
+	#
+	# MProject fall-back to their root MGroup
+	# MGroup fall-back to their default_mmodule
+	# Other entities do not fall-back
+	#
+	# One may use `MDoc::original_mentity` to retrieve the original
+	# source of the documentation.
+	fun mdoc_or_fallback: nullable MDoc do return mdoc
+
 	# Is the entity deprecated?
 	#
 	# Used for warnings and in documentation.
