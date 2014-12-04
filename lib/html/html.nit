@@ -119,7 +119,7 @@ class HTMLTag
 	# Set a 'value' for 'key'
 	#     var img = new HTMLTag("img")
 	#     img.attr("src", "./image.png").attr("alt", "image")
-	#     assert img.write_to_string      == """<img src="./image.png" alt="image"/>"""
+	#     assert img.write_to_string      == """<img src=".&#47;image.png" alt="image"/>"""
 	fun attr(key: String, value: String): HTMLTag do
 		attrs[key] = value
 		return self

@@ -17,6 +17,7 @@
 module doc_templates
 
 import template
+import json::static
 
 # A documentation page
 class TplPage
@@ -56,16 +57,19 @@ class TplPage
 
 	# Render the html header
 	private fun render_head do
+		var css = (self.shareurl / "css").html_escape
+		var vendors = (self.shareurl / "vendors").html_escape
+
 		add "<!DOCTYPE html>"
 		add "<head>"
 		add " <meta charset='utf-8'/>"
-		add " <!--link rel='stylesheet' href='{shareurl}/css/Nitdoc.UI.css' type='text/css'/-->"
-		add " <link rel='stylesheet' href='{shareurl}/vendors/bootstrap/css/bootstrap.min.css'/>"
-		add " <link rel='stylesheet' href='{shareurl}/css/nitdoc.bootstrap.css'/>"
-		add " <link rel='stylesheet' href='{shareurl}/css/nitdoc.css'/>"
-		add " <link rel='stylesheet' href='{shareurl}/css/Nitdoc.QuickSearch.css'/>"
-		add " <link rel='stylesheet' href='{shareurl}/css/Nitdoc.ModalBox.css'/>"
-		add " <link rel='stylesheet' href='{shareurl}/css/Nitdoc.GitHub.css'/>"
+		add " <!--link rel='stylesheet' href='{css}/Nitdoc.UI.css' type='text/css'/-->"
+		add " <link rel='stylesheet' href='{vendors}/bootstrap/css/bootstrap.min.css'/>"
+		add " <link rel='stylesheet' href='{css}/nitdoc.bootstrap.css'/>"
+		add " <link rel='stylesheet' href='{css}/nitdoc.css'/>"
+		add " <link rel='stylesheet' href='{css}/Nitdoc.QuickSearch.css'/>"
+		add " <link rel='stylesheet' href='{css}/Nitdoc.ModalBox.css'/>"
+		add " <link rel='stylesheet' href='{css}/Nitdoc.GitHub.css'/>"
 		add " <title>{title}</title>"
 		add "</head>"
 		add "<body"
@@ -103,10 +107,13 @@ class TplPage
 
 	# Render JS scripts
 	private fun render_footer do
-		add "<script src='{shareurl}/vendors/jquery/jquery-1.11.1.min.js'></script>"
-		add "<script src='{shareurl}/vendors/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
-		add "<script src='{shareurl}/vendors/bootstrap/js/bootstrap.min.js'></script>"
-		add "<script data-main='{shareurl}/js/nitdoc' src='{shareurl}/js/lib/require.js'></script>"
+		var vendors = (self.shareurl / "vendors").html_escape
+		var js = (self.shareurl / "js").html_escape
+
+		add "<script src='{vendors}/jquery/jquery-1.11.1.min.js'></script>"
+		add "<script src='{vendors}/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
+		add "<script src='{vendors}/bootstrap/js/bootstrap.min.js'></script>"
+		add "<script data-main='{js}/nitdoc' src='{js}/lib/require.js'></script>"
 		for script in scripts do add script
 		add """<script>
 			$(function () {
@@ -573,7 +580,7 @@ class TplClassDefinition
 
 	private fun render_list(name: String, elts: Array[TplListElt]) do
 		if elts.is_empty then return
-		add "<h5>{name}</h5>"
+		add "<h5>{name.html_escape}</h5>"
 		add "<ul class='list-unstyled list-definition'>"
 		for elt in elts do add elt
 		add "</ul>"
@@ -590,7 +597,7 @@ class TplSearchPage
 
 	redef fun rendering do
 		var title = self.title
-		if title != null then add "<h1>{title}</h1>"
+		if title != null then add "<h1>{title.to_s.html_escape}</h1>"
 		add "<div class='container-fluid'>"
 		add " <div class='row'>"
 		if not modules.is_empty then
@@ -834,6 +841,16 @@ end
 
 # A HTML tag attribute
 #  `<tag attr="value">`
+#
+# ~~~nit
+# var attr: TagAttribute
+#
+# attr = new TagAttribute("foo", null)
+# assert attr.write_to_string == " foo=\"\""
+#
+# attr = new TagAttribute("foo", "bar<>")
+# assert attr.write_to_string == " foo=\"bar&lt;&gt;\""
+# ~~~
 class TagAttribute
 	super Template
 
@@ -843,9 +860,10 @@ class TagAttribute
 	redef fun rendering do
 		var value = self.value
 		if value == null then
-			add(" {name}")
+			# SEE: http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes
+			add " {name.html_escape}=\"\""
 		else
-			add(" {name}=\"{value}\"")
+			add " {name.html_escape}=\"{value.html_escape}\""
 		end
 	end
 end
@@ -882,14 +900,19 @@ class TplPiwikScript
 	var site_id: String
 
 	redef fun render_content do
+		var site_id = self.site_id.to_json
+		var tracker_url = self.tracker_url.trim
+		if tracker_url.chars.last != '/' then tracker_url += "/"
+		tracker_url = "://{tracker_url}".to_json
+
 		add "<!-- Piwik -->"
 		add "var _paq = _paq || [];"
 		add " _paq.push([\"trackPageView\"]);"
 		add " _paq.push([\"enableLinkTracking\"]);"
 		add "(function() \{"
-		add " var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://{tracker_url}\";"
+		add " var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + {tracker_url};"
 		add " _paq.push([\"setTrackerUrl\", u+\"piwik.php\"]);"
-		add " _paq.push([\"setSiteId\", \"{site_id}\"]);"
+		add " _paq.push([\"setSiteId\", {site_id}]);"
 		add " var d=document, g=d.createElement(\"script\"), s=d.getElementsByTagName(\"script\")[0]; g.type=\"text/javascript\";"
 		add " g.defer=true; g.async=true; g.src=u+\"piwik.js\"; s.parentNode.insertBefore(g,s);"
 		add "\})();"
