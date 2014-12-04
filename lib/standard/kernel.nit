@@ -489,8 +489,8 @@ universal Int
 
 	# The character whose ASCII value is `self`.
 	#
-	#      assert 65.ascii   == 'A'
-	#      assert 10.ascii   == '\n'
+	#     assert 65.ascii   == 'A'
+	#     assert 10.ascii   == '\n'
 	fun ascii: Char is intern
 
 	# Number of digits of an integer in base `b` (plus one if negative)

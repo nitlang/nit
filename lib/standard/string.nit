@@ -947,9 +947,9 @@ abstract class String
 	#
 	# SEE : `Char::is_letter` for the definition of letter.
 	#
-	#    assert "jAVASCRIPT".capitalized == "Javascript"
-	#    assert "i am root".capitalized == "I Am Root"
-	#    assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
+	#     assert "jAVASCRIPT".capitalized == "Javascript"
+	#     assert "i am root".capitalized == "I Am Root"
+	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
 	fun capitalized: SELFTYPE do
 		if length == 0 then return self
 
@@ -1424,15 +1424,15 @@ abstract class Buffer
 	#
 	# SEE: `Char::is_letter` for the definition of a letter.
 	#
-	#    var b = new FlatBuffer.from("jAVAsCriPt")
-	#    b.capitalize
-	#    assert b == "Javascript"
-	#    b = new FlatBuffer.from("i am root")
-	#    b.capitalize
-	#    assert b == "I Am Root"
-	#    b = new FlatBuffer.from("ab_c -ab0c ab\nc")
-	#    b.capitalize
-	#    assert b == "Ab_C -Ab0C Ab\nC"
+	#     var b = new FlatBuffer.from("jAVAsCriPt")
+	#     b.capitalize
+	#     assert b == "Javascript"
+	#     b = new FlatBuffer.from("i am root")
+	#     b.capitalize
+	#     assert b == "I Am Root"
+	#     b = new FlatBuffer.from("ab_c -ab0c ab\nc")
+	#     b.capitalize
+	#     assert b == "Ab_C -Ab0C Ab\nC"
 	fun capitalize do
 		if length == 0 then return
 		var c = self[0].to_upper
@@ -1789,7 +1789,7 @@ redef class Object
 
 	# The class name of the object.
 	#
-	#    assert 5.class_name == "Int"
+	#     assert 5.class_name == "Int"
 	fun class_name: String do return native_class_name.to_s
 
 	# Developer readable representation of `self`.
@@ -1984,10 +1984,10 @@ redef class Char
 
 	# Returns true if the char is a numerical digit
 	#
-	#      assert '0'.is_numeric
-	#      assert '9'.is_numeric
-	#      assert not 'a'.is_numeric
-	#      assert not '?'.is_numeric
+	#     assert '0'.is_numeric
+	#     assert '9'.is_numeric
+	#     assert not 'a'.is_numeric
+	#     assert not '?'.is_numeric
 	fun is_numeric: Bool
 	do
 		return self >= '0' and self <= '9'
@@ -1995,10 +1995,10 @@ redef class Char
 
 	# Returns true if the char is an alpha digit
 	#
-	#      assert 'a'.is_alpha
-	#      assert 'Z'.is_alpha
-	#      assert not '0'.is_alpha
-	#      assert not '?'.is_alpha
+	#     assert 'a'.is_alpha
+	#     assert 'Z'.is_alpha
+	#     assert not '0'.is_alpha
+	#     assert not '?'.is_alpha
 	fun is_alpha: Bool
 	do
 		return (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z')
@@ -2006,11 +2006,11 @@ redef class Char
 
 	# Returns true if the char is an alpha or a numeric digit
 	#
-	#      assert 'a'.is_alphanumeric
-	#      assert 'Z'.is_alphanumeric
-	#      assert '0'.is_alphanumeric
-	#      assert '9'.is_alphanumeric
-	#      assert not '?'.is_alphanumeric
+	#     assert 'a'.is_alphanumeric
+	#     assert 'Z'.is_alphanumeric
+	#     assert '0'.is_alphanumeric
+	#     assert '9'.is_alphanumeric
+	#     assert not '?'.is_alphanumeric
 	fun is_alphanumeric: Bool
 	do
 		return self.is_numeric or self.is_alpha

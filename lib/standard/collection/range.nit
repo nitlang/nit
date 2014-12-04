@@ -139,12 +139,12 @@ end
 redef class Int
 	# Returns the range from 0 to `self-1`, is used to do:
 	#
-	#    var s = new Array[String]
-	#    for i in 3.times do s.add "cool"
-	#    assert s.join(" ") == "cool cool cool"
+	#     var s = new Array[String]
+	#     for i in 3.times do s.add "cool"
+	#     assert s.join(" ") == "cool cool cool"
 	#
-	#    s.clear
-	#    for i in 10.times do s.add(i.to_s)
-	#    assert s.to_s == "0123456789"
+	#     s.clear
+	#     for i in 10.times do s.add(i.to_s)
+	#     assert s.to_s == "0123456789"
 	fun times: Range[Int] do return [0 .. self[
 end

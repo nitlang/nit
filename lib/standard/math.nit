@@ -26,27 +26,27 @@ redef class Int
 
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
-	#    assert 0x10.bin_and(0x01) == 0
+	#     assert 0x10.bin_and(0x01) == 0
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
-	#    assert 0x10.bin_or(0x01) == 0x11
+	#     assert 0x10.bin_or(0x01) == 0x11
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
-	#    assert 0x101.bin_xor(0x110) == 0x11
+	#     assert 0x101.bin_xor(0x110) == 0x11
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
 
 	# Returns the 1's complement of `self`
 	#
-	#    assert 0x2F.bin_not == -48
+	#     assert 0x2F.bin_not == -48
 	fun bin_not: Int is extern "kernel_Int_Int_binnot_0"
 
 	# Returns the square root of `self`
 	#
-	#    assert 16.sqrt == 4
+	#     assert 16.sqrt == 4
 	fun sqrt: Int `{ return sqrt(recv); `}
 
 	# Returns the greatest common divisor of `self` and `o`
@@ -76,17 +76,17 @@ redef class Int
 
 	# Is `self` even ?
 	#
-	#    assert 12.is_even
+	#     assert 12.is_even
 	fun is_even: Bool do return self % 2 == 0
 
 	# Is `self` odd ?
 	#
-	#    assert not 13.is_even
+	#     assert not 13.is_even
 	fun is_odd: Bool do return not is_even
 
 	# Returns the `self` raised to the power of `e`.
 	#
-	#    assert 2 ** 3 == 8
+	#     assert 2 ** 3 == 8
 	fun **(e: Int): Int
 	do
 		return self.to_f.pow(e.to_f).to_i
@@ -96,10 +96,10 @@ redef class Int
 	#
 	# Returns `1 * 2 * 3 * ... * self-1 * self`
 	#
-	#    assert 0.factorial == 1  # by convention for an empty product
-	#    assert 1.factorial == 1
-	#    assert 4.factorial == 24
-	#    assert 9.factorial == 362880
+	#     assert 0.factorial == 1  # by convention for an empty product
+	#     assert 1.factorial == 1
+	#     assert 4.factorial == 24
+	#     assert 9.factorial == 362880
 	fun factorial: Int
 	do
 		assert self >= 0

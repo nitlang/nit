@@ -398,11 +398,11 @@ class Array[E]
 	#
 	# returns a new array built by concatenating `self` `repeat` times.
 	#
-	#    var a = [1,2,3]
-	#    assert (a * 0).is_empty
-	#    assert a * 1  ==  [1,2,3]
-	#    assert a * 2  ==  [1,2,3,1,2,3]
-	#    assert (a * 10).length  ==  30
+	#     var a = [1,2,3]
+	#     assert (a * 0).is_empty
+	#     assert a * 1  ==  [1,2,3]
+	#     assert a * 2  ==  [1,2,3,1,2,3]
+	#     assert (a * 10).length  ==  30
 	fun *(repeat: Int): Array[E]
 	do
 		assert repeat >= 0
