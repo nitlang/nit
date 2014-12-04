@@ -17,7 +17,8 @@
 # Simple tool to list Nit source files
 module nitls
 
-intrude import modelbuilder
+import modelbuilder
+intrude import loader
 import ordered_tree
 
 class ProjTree
