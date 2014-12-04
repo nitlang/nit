@@ -240,6 +240,7 @@ class RopeBuffer
 		str = ""
 		length = 0
 		rpos = 0
+		dumped = 0
 	end
 
 	redef fun substring(from, count) do
