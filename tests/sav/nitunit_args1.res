@@ -11,8 +11,8 @@ TestSuites:
 Class suites: 1; Test Cases: 3; Failures: 1
 <testsuites><testsuite package="test_nitunit"><testcase classname="nitunit.test_nitunit.&lt;module&gt;" name="&lt;module&gt;"><system-err></system-err><system-out>assert true
 </system-out></testcase><testcase classname="nitunit.test_nitunit.test_nitunit::X" name="&lt;class&gt;"><system-err></system-err><system-out>assert false
-</system-out><error message="Runtime error: Assert failed (.nitunit/test_nitunit-2.nit:5)
+</system-out><error message="Runtime error: Assert failed (.nitunit&#47;test_nitunit-2.nit:5)
 "></error></testcase><testcase classname="nitunit.test_nitunit.test_nitunit::X" name="test_nitunit::X::foo"><system-err></system-err><system-out>assert undefined_identifier
-</system-out><failure message=".nitunit/test_nitunit-3.nit:5,8--27: Error: Method or variable 'undefined_identifier' unknown in Sys.
+</system-out><failure message=".nitunit&#47;test_nitunit-3.nit:5,8--27: Error: Method or variable &#39;undefined_identifier&#39; unknown in Sys.
 "></failure></testcase></testsuite><testsuite package="test_test_nitunit"><testcase classname="nitunit.test_test_nitunit.test_test_nitunit::TestX" name="test_test_nitunit::TestX::test_foo"><system-err></system-err><system-out>out</system-out></testcase><testcase classname="nitunit.test_test_nitunit.test_test_nitunit::TestX" name="test_test_nitunit::TestX::test_foo1"><system-err></system-err><system-out>out</system-out><error message="Runtime error: Assert failed (test_test_nitunit.nit:39)
 "></error></testcase><testcase classname="nitunit.test_test_nitunit.test_test_nitunit::TestX" name="test_test_nitunit::TestX::test_foo2"><system-err></system-err><system-out>out</system-out></testcase></testsuite></testsuites>

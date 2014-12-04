@@ -653,9 +653,11 @@ abstract class Text
 		return buf.to_s
 	end
 
-	# Escape the four characters `<`, `>`, `&`, and `"` with their html counterpart
+	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
 	#
-	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
+	#     assert "a&b-<>\"x\"/'".html_escape      ==  "a&amp;b-&lt;&gt;&#34;x&#34;&#47;&#39;"
+	#
+	# SEE: <https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>
 	fun html_escape: SELFTYPE
 	do
 		var buf = new FlatBuffer
@@ -669,7 +671,11 @@ abstract class Text
 			else if c == '>' then
 				buf.append "&gt;"
 			else if c == '"' then
-				buf.append "&quot;"
+				buf.append "&#34;"
+			else if c == '\'' then
+				buf.append "&#39;"
+			else if c == '/' then
+				buf.append "&#47;"
 			else buf.add c
 		end
 
