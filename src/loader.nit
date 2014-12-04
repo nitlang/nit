@@ -94,7 +94,7 @@ redef class ModelBuilder
 	var paths = new Array[String]
 
 	# Like (an used by) `get_mmodule_by_name` but just return the ModulePath
-	private fun search_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
+	private fun search_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
 	do
 		# First, look in groups
 		var c = mgroup
@@ -155,7 +155,7 @@ redef class ModelBuilder
 	# If `mgroup` is set, then the module search starts from it up to the top level (see `paths`);
 	# if `mgroup` is null then the module is searched in the top level only.
 	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
-	fun get_mmodule_by_name(anode: ANode, mgroup: nullable MGroup, name: String): nullable MModule
+	fun get_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable MModule
 	do
 		var path = search_mmodule_by_name(anode, mgroup, name)
 		if path == null then return null # Forward error

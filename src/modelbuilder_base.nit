@@ -176,23 +176,29 @@ class ModelBuilder
 
 	# Helper function to display an error on a node.
 	# Alias for `self.toolcontext.error(n.hot_location, text)`
-	fun error(n: ANode, text: String)
+	fun error(n: nullable ANode, text: String)
 	do
-		self.toolcontext.error(n.hot_location, text)
+		var l = null
+		if n != null then l = n.hot_location
+		self.toolcontext.error(l, text)
 	end
 
 	# Helper function to display a warning on a node.
 	# Alias for: `self.toolcontext.warning(n.hot_location, text)`
-	fun warning(n: ANode, tag, text: String)
+	fun warning(n: nullable ANode, tag, text: String)
 	do
-		self.toolcontext.warning(n.hot_location, tag, text)
+		var l = null
+		if n != null then l = n.hot_location
+		self.toolcontext.warning(l, tag, text)
 	end
 
 	# Helper function to display an advice on a node.
 	# Alias for: `self.toolcontext.advice(n.hot_location, text)`
-	fun advice(n: ANode, tag, text: String)
+	fun advice(n: nullable ANode, tag, text: String)
 	do
-		self.toolcontext.advice(n.hot_location, tag, text)
+		var l = null
+		if n != null then l = n.hot_location
+		self.toolcontext.advice(l, tag, text)
 	end
 
 	# Force to get the primitive method named `name` on the type `recv` or do a fatal error on `n`
