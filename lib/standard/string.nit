@@ -415,9 +415,9 @@ abstract class Text
 	#
 	#     assert "hello".justify(2, 0.0)   == "hello"
 	#
-	# REQUIRE: left >= 0.0 and left <= 1.0
+	# REQUIRE: `left >= 0.0 and left <= 1.0`
 	# ENSURE: `self.length <= length implies result.length == length`
-	# ENSURE: `self.length >= length implies result == self
+	# ENSURE: `self.length >= length implies result == self`
 	fun justify(length: Int, left: Float): SELFTYPE
 	do
 		var diff = length - self.length
