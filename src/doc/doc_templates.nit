@@ -841,6 +841,16 @@ end
 
 # A HTML tag attribute
 #  `<tag attr="value">`
+#
+# ~~~nit
+# var attr: TagAttribute
+#
+# attr = new TagAttribute("foo", null)
+# assert attr.write_to_string == " foo=\"\""
+#
+# attr = new TagAttribute("foo", "bar<>")
+# assert attr.write_to_string == " foo=\"bar&lt;&gt;\""
+# ~~~
 class TagAttribute
 	super Template
 
@@ -850,9 +860,10 @@ class TagAttribute
 	redef fun rendering do
 		var value = self.value
 		if value == null then
-			add(" {name}")
+			# SEE: http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes
+			add " {name.html_escape}=\"\""
 		else
-			add(" {name}=\"{value}\"")
+			add " {name.html_escape}=\"{value.html_escape}\""
 		end
 	end
 end
