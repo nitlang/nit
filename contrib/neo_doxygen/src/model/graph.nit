@@ -165,7 +165,7 @@ abstract class Entity
 	#
 	# Also set `name` using `name_separator`.
 	fun full_name=(full_name: String) do
-		var m: nullable Match = full_name.search_last(name_separator)
+		var m = full_name.search_last(name_separator)
 
 		self["full_name"] = full_name
 		if m == null then
