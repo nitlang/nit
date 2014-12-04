@@ -143,9 +143,13 @@ if opt_tree.value then
 	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
 		for g in p.mgroups do
-			ot.add(g.parent, g)
+			var pa = g.parent
+			if g.is_interesting then
+				ot.add(pa, g)
+				pa = g
+			end
 			for mp in g.module_paths do
-				ot.add(g, mp)
+				ot.add(pa, mp)
 			end
 		end
 	end
