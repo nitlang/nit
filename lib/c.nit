@@ -70,10 +70,10 @@ extern class NativeCArray `{ void * `}
 	type E: nullable Object
 
 	# Get element at `index`.
-	fun [](index: E): E is abstract
+	fun [](index: Int): E is abstract
 
 	# Set `val` at `index`.
-	fun []=(index: E, val: E) is abstract
+	fun []=(index: Int, val: E) is abstract
 
 	# Return pointer to the address to the second element of this array
 	#
