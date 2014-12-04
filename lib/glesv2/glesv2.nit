@@ -51,15 +51,15 @@ extern class GLProgram `{GLuint`}
 	`}
 
 	fun link `{ glLinkProgram(recv); `}
-	fun is_linked: Bool do return query("8B82".to_hex) != 0
+	fun is_linked: Bool do return query(0x8B82) != 0
 
 	fun use `{ glUseProgram(recv); `}
 
 	fun delete `{ glDeleteProgram(recv); `}
-	fun is_deleted: Bool do return query("8B80".to_hex) != 0
+	fun is_deleted: Bool do return query(0x8B80) != 0
 
 	fun validate `{ glValidateProgram(recv); `}
-	fun is_validated: Bool do return query("8B83".to_hex) != 0
+	fun is_validated: Bool do return query(0x8B83) != 0
 
 	fun info_log: String import NativeString.to_s `{
 		int size;
@@ -92,10 +92,10 @@ extern class GLShader `{GLuint`}
 	`}
 
 	fun compile `{ glCompileShader(recv); `}
-	fun is_compiled: Bool do return query("8B81".to_hex) != 0
+	fun is_compiled: Bool do return query(0x8B81) != 0
 
 	fun delete `{ glDeleteShader(recv); `}
-	fun is_deleted: Bool do return query("8B80".to_hex) != 0
+	fun is_deleted: Bool do return query(0x8B80) != 0
 
 	fun is_ok: Bool `{ return glIsShader(recv); `}
 
@@ -182,22 +182,14 @@ end
 
 protected fun gl_clear_color(r, g, b, a: Float) `{ glClearColor(r, g, b, a); `}
 protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
-protected fun gl_vertex_attrib_pointer_int(index, length: Int, normalize: Bool, stride: Int, vertex: Array[Int]) import Array[Int].length, Array[Int].intern_items `{
-	int* c_vertex = Array_of_Int_intern_items(vertex);
-	glVertexAttribPointer(index, length, GL_INT, normalize, stride, c_vertex);
-`}
-protected fun gl_vertex_attrib_pointer_float(index, length: Int, normalize: Bool, stride: Int, vertex: Array[Float]) import Array[Float].length, Array[Float].intern_items `{
-	int* c_vertex = Array_of_Float_intern_items(vertex);
-	glVertexAttribPointer(index, length, GL_FLOAT, normalize, stride, c_vertex);
-`}
 
 # Direct call to `glClear`, call with a combinaison of `gl_clear_color_buffer`,
 # `gl_stencil_buffer_bit` and `gl_color_buffer_bit`.
 private fun gl_clear(flag: Int) `{ glClear(flag); `}
 
-protected fun gl_depth_buffer_bit: Int do return once "0100".to_hex
-protected fun gl_stencil_buffer_bit: Int do return once "0400".to_hex
-protected fun gl_color_buffer_bit: Int do return once "4000".to_hex
+protected fun gl_depth_buffer_bit: Int do return 0x0100
+protected fun gl_stencil_buffer_bit: Int do return 0x0400
+protected fun gl_color_buffer_bit: Int do return 0x4000
 
 protected fun gl_clear_color_buffer do gl_clear(gl_color_buffer_bit)
 protected fun gl_clear_depth_buffer do gl_clear(gl_depth_buffer_bit)
@@ -215,7 +207,7 @@ end
 
 private fun gl_get_bool(key: Int): Bool `{
 	GLboolean val;
-	glGetBooleanv(GL_SHADER_COMPILER, &val);
+	glGetBooleanv(key, &val);
 	return val == GL_TRUE;
 `}
 private fun gl_get_float(key: Int): Float `{
@@ -229,4 +221,4 @@ private fun gl_get_int(key: Int): Int `{
 	return val;
 `}
 
-fun gl_shader_compiler: Bool do return gl_get_bool("8DFA".to_hex)
+fun gl_shader_compiler: Bool do return gl_get_bool(0x8DFA)

@@ -23,7 +23,36 @@ intrude import standard::collection::array
 abstract class CArray[E]
 	super AbstractArrayRead[E]
 
+	# The corresponding C type
+	type NATIVE: NativeCArray
+
+	# Pointer to the real C array
+	var native_array: NATIVE is noinit
+
 	private init(length: Int) do self._length = length
+
+	redef fun [](index)
+	do
+		assert not destroyed
+		assert index >= 0 and index < length
+		return native_array[index]
+	end
+
+	fun []=(index: Int, val: E)
+	do
+		assert not destroyed
+		assert index >= 0 and index < length
+		native_array[index] = val
+	end
+
+	var destroyed = false
+	fun destroy
+	do
+		if destroyed then return
+
+		native_array.free
+		destroyed = true
+	end
 end
 
 # A native C array, as in a pointer to the first element of the array
@@ -42,35 +71,22 @@ end
 # Wrapper around an array of `int` in C (`int*`) with length and destroy state
 class CIntArray
 	super CArray[Int]
+	redef type NATIVE: NativeCIntArray
 
-	var native_array: NativeCIntArray
 	init(size: Int)
 	do
 		native_array = new NativeCIntArray(size)
 		super size
 	end
 
-	redef fun [](index)
+	# Build from an `Array[Int]`
+	new from(array: Array[Int])
 	do
-		assert not destroyed
-		assert index >= 0 and index < length
-		return native_array[index]
-	end
-
-	fun []=(index: Int, val: Int)
-	do
-		assert not destroyed
-		assert index >= 0 and index < length
-		native_array[index] = val
-	end
-
-	var destroyed = false
-	fun destroy
-	do
-		if destroyed then return
-
-		native_array.free
-		destroyed = true
+		var carray = new CIntArray(array.length)
+		for i in array.length.times do
+			carray[i] = array[i]
+		end
+		return carray
 	end
 end
 
@@ -80,6 +96,43 @@ extern class NativeCIntArray `{ int* `}
 	redef type E: Int
 
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
+	redef fun [](index) `{ return recv[index]; `}
+	redef fun []=(index, val) `{ recv[index] = val; `}
+
+	redef fun +(offset) `{ return recv + offset; `}
+end
+
+# Wrapper around an array of `unsigned char` in C (`unsigned char*`) with length and destroy state
+class CByteArray
+	super CArray[Int]
+	redef type NATIVE: NativeCByteArray
+
+	# Allocate a new array of `size`
+	init(size: Int)
+	do
+		native_array = new NativeCByteArray(size)
+		super size
+	end
+
+	# Build from an `Array[Int]`
+	new from(array: Array[Int])
+	do
+		var carray = new CByteArray(array.length)
+		for i in array.length.times do
+			carray[i] = array[i]
+		end
+		return carray
+	end
+end
+
+# An array of `unsigned char` in C (`unsigned char*`)
+extern class NativeCByteArray `{ unsigned char* `}
+	super NativeCArray
+	redef type E: Int
+
+	# Allocate a new array of `size`
+	new(size: Int) `{ return calloc(size, sizeof(unsigned char)); `}
+
 	redef fun [](index) `{ return recv[index]; `}
 	redef fun []=(index, val) `{ recv[index] = val; `}
 

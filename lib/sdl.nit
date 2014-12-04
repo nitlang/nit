@@ -92,17 +92,14 @@ extern class SDLDisplay `{SDL_Surface *`}
 		SDL_FillRect(recv, NULL, SDL_MapRGB(recv->format,ri,gi,bi));
 	`}
 
+	# SDL events since the last call to this method
 	fun events: Sequence[SDLInputEvent]
 	do
-		var new_event: nullable Object = null
-		var events = new List[SDLInputEvent]
+		var events = new Array[SDLInputEvent]
 		loop
-			new_event = poll_event
-			if new_event != null then # new_event isa Event then #
-				events.add(new_event)
-			else
-				break
-			end
+			var new_event = poll_event
+			if new_event == null then break
+			events.add new_event
 		end
 		return events
 	end
@@ -173,7 +170,7 @@ extern class SDLDrawable `{SDL_Surface*`}
 	redef type I: SDLImage
 
 	redef fun blit(img, x, y) do native_blit(img, x.to_i, y.to_i)
-	fun native_blit(img: I, x, y: Int) `{
+	private fun native_blit(img: I, x, y: Int) `{
 		SDL_Rect dst;
 		dst.x = x;
 		dst.y = y;
