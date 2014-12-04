@@ -89,39 +89,34 @@ tc.keep_going = opt_keep.value
 var model = new Model
 var mb = new ModelBuilder(model, tc)
 
-if opt_depends.value then
-	if opt_recursive.value then
-		print "-M incompatible with -r"
-		exit 1
+var files
+if opt_recursive.value then
+	files = new Array[String]
+	for d in tc.option_context.rest do
+		var pipe = new IProcess("find", d, "-name", "*.nit")
+		while not pipe.eof do
+			var l = pipe.read_line
+			if l == "" then break # last line
+			l = l.substring(0,l.length-1) # strip last oef
+			files.add l
+		end
+		pipe.close
+		pipe.wait
+		if pipe.status != 0 and not opt_keep.value then exit 1
 	end
-
-	mb.parse(tc.option_context.rest)
 else
-	var files
-	if opt_recursive.value then
-		files = new Array[String]
-		for d in tc.option_context.rest do
-			var pipe = new IProcess("find", d, "-name", "*.nit")
-			while not pipe.eof do
-				var l = pipe.read_line
-				if l == "" then break # last line
-				l = l.substring(0,l.length-1) # strip last oef
-				files.add l
-			end
-			pipe.close
-			pipe.wait
-			if pipe.status != 0 and not opt_keep.value then exit 1
-		end
-	else
-		files = tc.option_context.rest
-	end
+	files = tc.option_context.rest
+end
 
-	for a in files do
-		var mp = mb.identify_file(a)
-		tc.check_errors
-		if mp != null and not opt_paths.value then
-			mb.load_module(mp.filepath)
+for a in files do
+	var mp = mb.identify_file(a)
+	tc.check_errors
+	if mp != null and not opt_paths.value then
+		var mm = mb.load_module(mp.filepath)
+		if mm != null and opt_depends.value then
+			mb.build_module_importation(mm)
 		end
+		tc.check_errors
 	end
 end
 
