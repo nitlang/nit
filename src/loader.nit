@@ -553,6 +553,22 @@ end
 redef class MGroup
 	# modules paths associated with the group
 	private var module_paths = new Array[ModulePath]
+
+	# Is the group interesting for a final user?
+	#
+	# groups are mandatory in the model but for simple projects they are not
+	# always interesting.
+	#
+	# A interesting group has, at least, one of the following true:
+	#
+	# * it has 2 modules or more
+	# * it has a subgroup
+	# * it has a documentation
+	fun is_interesting: Bool
+	do
+		return module_paths.length > 1 or mmodules.length > 1 or not in_nesting.direct_smallers.is_empty or mdoc != null
+	end
+
 end
 
 redef class AStdImport
