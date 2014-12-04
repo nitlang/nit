@@ -2412,7 +2412,6 @@ redef class Text
 	private fun meta_from_fence: nullable Text do
 		for i in [0..chars.length[ do
 			var c = chars[i]
-			print c
 			if c != ' ' and c != '`' and c != '~' then
 				return substring_from(i).trim
 			end
