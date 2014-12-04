@@ -116,8 +116,8 @@ end
 
 if sum == 0 then opt_project.value = true
 
+var ot = new ProjTree
 if opt_tree.value then
-	var ot = new ProjTree
 	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
 		for g in p.mgroups do
@@ -139,7 +139,7 @@ if opt_source.value then
 				if opt_paths.value then
 					list.add(mp.filepath)
 				else
-					list.add("{g.full_name}/{mp.name} ({mp.filepath})")
+					list.add("{g.full_name}/{ot.display(mp)}")
 				end
 			end
 		end
