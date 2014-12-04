@@ -298,6 +298,7 @@ redef class String
 	# trainling "/" is removed
 	#
 	# Note that the method only wonrk on the string:
+	#
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
 	#

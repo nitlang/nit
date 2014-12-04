@@ -283,6 +283,7 @@ end
 
 # Native Booleans.
 # `true` and `false` are the only instances.
+#
 # Boolean are manipulated trough three special operators:
 #	 `and`, `or`, `not`.
 # Booleans are mainly used by conditional statement and loops.

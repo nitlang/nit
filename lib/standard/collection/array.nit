@@ -242,6 +242,7 @@ end
 # Resizable one dimension array of objects.
 #
 # Arrays have a literal representation.
+#
 #     var a = [12, 32, 8]
 #     # is equivalent with:
 #     var b = new Array[Int]
