@@ -69,8 +69,7 @@ graph.debug buffer
 print buffer
 
 print "---===WITH GLOBALS===---"
-#buffer.clear	# Buggy.
-buffer = new RopeBuffer
+buffer.clear
 graph.add_global_modules
 graph.put_edges
 graph.debug buffer
