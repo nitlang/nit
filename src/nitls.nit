@@ -53,6 +53,7 @@ class ProjTree
 				return o.filepath
 			else
 				var d = ""
+				var dd = ""
 				if o.mmodule != null and o.mmodule.mdoc != null then
 					if tc.opt_no_color.value then
 						d = ": {o.mmodule.mdoc.content.first}"
@@ -60,10 +61,25 @@ class ProjTree
 						d = ": {o.mmodule.mdoc.content.first.green}"
 					end
 				end
+				if o.mmodule != null and not o.mmodule.in_importation.direct_greaters.is_empty then
+					var ms = new Array[String]
+					for m in o.mmodule.in_importation.direct_greaters do
+						if m.mgroup.mproject == o.mmodule.mgroup.mproject then
+							ms.add m.name
+						else
+							ms.add m.full_name
+						end
+					end
+					if tc.opt_no_color.value then
+						dd = " ({ms.join(" ")})"
+					else
+						dd = " ({ms.join(" ")})".light_gray
+					end
+				end
 				if tc.opt_no_color.value then
-					return "{o.name.bold}{d} ({o.filepath.to_s})"
+					return "{o.name.bold}{d} ({o.filepath.to_s}){dd}"
 				else
-					return "{o.name.bold}{d} ({o.filepath.yellow})"
+					return "{o.name.bold}{d} ({o.filepath.yellow}){dd}"
 				end
 			end
 		else
