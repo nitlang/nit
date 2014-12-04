@@ -70,6 +70,9 @@ redef class ModelBuilder
 		for a in modules do
 			var nmodule = self.load_module(a)
 			if nmodule == null then continue # Skip error
+			# Load imported module
+			build_module_importation(nmodule)
+
 			mmodules.add(nmodule.mmodule.as(not null))
 		end
 		var time1 = get_time
@@ -161,6 +164,8 @@ redef class ModelBuilder
 		if path == null then return null # Forward error
 		var res = self.load_module(path.filepath)
 		if res == null then return null # Forward error
+		# Load imported module
+		build_module_importation(res)
 		return res.mmodule.as(not null)
 	end
 
@@ -355,9 +360,12 @@ redef class ModelBuilder
 		return nmodule
 	end
 
-	# Try to load a module and its imported modules using a path.
-	# Display an error if there is a problem (IO / lexer / parser / importation) and return null
+	# Try to load a module modules using a path.
+	# Display an error if there is a problem (IO / lexer / parser) and return null.
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
+	#
+	# The MModule is created however, the importation is not performed,
+	# therefore you should call `build_module_importation`.
 	fun load_module(filename: String): nullable AModule
 	do
 		# Look for the module
@@ -381,9 +389,6 @@ redef class ModelBuilder
 
 		# Update the file information
 		file.mmodule = mmodule
-
-		# Load imported module
-		build_module_importation(nmodule)
 
 		return nmodule
 	end
@@ -448,7 +453,9 @@ redef class ModelBuilder
 	end
 
 	# Analysis the module importation and fill the module_importation_hierarchy
-	private fun build_module_importation(nmodule: AModule)
+	#
+	# Unless you used `load_module`, the importation is already done and this method does a no-op.
+	fun build_module_importation(nmodule: AModule)
 	do
 		if nmodule.is_importation_done then return
 		nmodule.is_importation_done = true
