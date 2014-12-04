@@ -55,6 +55,21 @@ redef class ModelBuilder
 		return null
 	end
 
+	# Retrieve all the attributes nodes localy definied
+	# FIXME think more about this method and how the separations separate/global and ast/model should be done.
+	fun collect_attr_propdef(mclassdef: MClassDef): Array[AAttrPropdef]
+	do
+		var res = new Array[AAttrPropdef]
+		var n = mclassdef2nclassdef.get_or_null(mclassdef)
+		if n == null then return res
+		for npropdef in n.n_propdefs do
+			if npropdef isa AAttrPropdef then
+				res.add(npropdef)
+			end
+		end
+		return res
+	end
+
 	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.
 	private fun build_properties(nclassdef: AClassdef)

@@ -343,10 +343,7 @@ class RapidTypeAnalysis
 		var bound_mtype = mtype.anchor_to(mainmodule, recv)
 		for cd in bound_mtype.collect_mclassdefs(mainmodule)
 		do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in nclassdef.n_propdefs do
-				if not npropdef isa AAttrPropdef then continue
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
 				if not npropdef.has_value then continue
 
 				var mpropdef = npropdef.mpropdef.as(not null)

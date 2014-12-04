@@ -914,12 +914,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, recv)
-				end
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
+				npropdef.init_expr(v, recv)
 			end
 		end
 	end
@@ -930,12 +926,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.check_expr(v, recv)
-				end
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
+				npropdef.check_expr(v, recv)
 			end
 		end
 	end
