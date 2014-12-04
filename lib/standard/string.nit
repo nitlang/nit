@@ -405,6 +405,8 @@ abstract class Text
 	# * 1.0 for right-justified (all spaces at the left)
 	# * 0.5 for centered (half the spaces at the left)
 	#
+	# Examples
+	#
 	#     assert "hello".justify(10, 0.0)  == "hello     "
 	#     assert "hello".justify(10, 1.0)  == "     hello"
 	#     assert "hello".justify(10, 0.5)  == "  hello   "
