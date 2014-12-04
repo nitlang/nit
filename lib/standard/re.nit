@@ -74,7 +74,7 @@ private extern class NativeRegex `{ regex_t* `}
 		return message;
 	`}
 
-	# This field holds the number of parenthetical subexpressions in the regular expression that was compiled.
+	# Number of parenthetical subexpressions in this compiled regular expression
 	fun re_nsub: Int `{ return recv->re_nsub; `}
 end
 
@@ -180,7 +180,12 @@ class Regex
 	private var native: nullable NativeRegex = null
 
 	# Cache of a single `regmatch_t` to prevent many calls to `malloc`
-	private var native_match = new NativeMatchArray.malloc(1) is lazy
+	private var native_match: NativeMatchArray is lazy do
+		native_match_is_init = true
+		return new NativeMatchArray.malloc(native.re_nsub+1)
+	end
+
+	private var native_match_is_init = false
 
 	# `cflags` of the last successful `compile`
 	private var cflags_cache = 0
@@ -249,7 +254,10 @@ class Regex
 			native.regfree
 			native.free
 			self.native = null
-			self.native_match.free
+
+			if native_match_is_init then
+				self.native_match.free
+			end
 		end
 	end
 
@@ -348,12 +356,26 @@ class Regex
 		text = text.to_s
 		var cstr = text.substring_from(from).to_cstring
 		var eflags = gather_eflags
-		var match = self.native_match
+		var native_match = self.native_match
 
-		var res = native.regexec(cstr, 1, match, eflags)
+		var nsub = native.re_nsub
+		var res = native.regexec(cstr, nsub+1, native_match, eflags)
 
 		# Found one?
-		if res == 0 then return new Match(text, from + match.rm_so, match.rm_eo - match.rm_so)
+		if res == 0 then
+			var match = new Match(text,
+				from + native_match.rm_so,
+				native_match.rm_eo - native_match.rm_so)
+
+			# Add sub expressions
+			for i in [1..nsub] do
+				match.subs.add new Match( text,
+					native_match[i].rm_so,
+					native_match[i].rm_eo - native_match[i].rm_so)
+			end
+
+			return match
+		end
 
 		# No more match?
 		if res.is_nomatch then return null
@@ -380,18 +402,30 @@ class Regex
 		var cstr = text.to_cstring
 		var eflags = gather_eflags
 		var eflags_or_notbol = eflags.bin_or(flag_notbol)
-		var match = self.native_match
+		var native_match = self.native_match
 		var matches = new Array[Match]
 
-		var res = native.regexec(cstr, 1, match, eflags)
+		var nsub = native.re_nsub
+		var res = native.regexec(cstr, nsub+1, native_match, eflags)
 		var d = 0
 		while res == 0 do
-			matches.add new Match(text, d + match.rm_so, match.rm_eo - match.rm_so)
-			if d == match.rm_eo then
+			var match = new Match(text,
+				d + native_match.rm_so,
+				native_match.rm_eo - native_match.rm_so)
+			matches.add match
+
+			# Add sub expressions
+			for i in [1..nsub] do
+				match.subs.add new Match( text,
+					d + native_match[i].rm_so,
+					native_match[i].rm_eo - native_match[i].rm_so)
+			end
+
+			if d == native_match.rm_eo then
 				d += 1
-			else d = d + match.rm_eo
-			cstr = cstr.substring_from(match.rm_eo)
-			res = native.regexec(cstr, 1, match, eflags_or_notbol)
+			else d = d + native_match.rm_eo
+			cstr = cstr.substring_from(native_match.rm_eo)
+			res = native.regexec(cstr, nsub+1, native_match, eflags_or_notbol)
 		end
 
 		# No more match?
@@ -404,4 +438,35 @@ class Regex
 	end
 
 	redef fun to_s do return "/{string}/"
+end
+
+redef class Match
+	# Parenthesized subexpressions in this match
+	#
+	# ~~~
+	# var re = "c (d e+) f".to_re
+	# var match = "a b c d eee f g".search(re)
+	# assert match.subs.length == 1
+	# assert match.subs.first.to_s == "d eee"
+	# ~~~
+	var subs = new Array[Match] is lazy
+
+	# Get the `n`th expression in this match
+	#
+	# `n == 0` returns this match, and a greater `n` returns the corresponding
+	# subexpression.
+	#
+	# Require: `n >= 0 and n <= subs.length`
+	#
+	# ~~~
+	# var re = "c (d e+) f".to_re
+	# var match = "a b c d eee f g".search(re)
+	# assert match[0].to_s == "c d eee f"
+	# assert match[1].to_s == "d eee"
+	# ~~~
+	fun [](n: Int): Match do
+		if n == 0 then return self
+		assert n > 0 and n <= subs.length
+		return subs[n-1]
+	end
 end
