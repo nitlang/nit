@@ -215,10 +215,19 @@ if opt_project.value then
 		if opt_paths.value then
 			list.add(path)
 		else
+			var d = ""
+			var md = p.mdoc_or_fallback
+			if md != null then
+				if tc.opt_no_color.value then
+					d = ": {md.content.first}"
+				else
+					d = ": {md.content.first.green}"
+				end
+			end
 			if tc.opt_no_color.value then
-				list.add("{p.name} ({path})")
+				list.add("{p.name}{d} ({path})")
 			else
-				list.add("{p.name} ({path.yellow})")
+				list.add("{p.name}{d} ({path.yellow})")
 			end
 		end
 	end
