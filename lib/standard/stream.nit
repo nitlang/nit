@@ -48,12 +48,59 @@ interface IStream
 	end
 
 	# Read a string until the end of the line.
+	#
+	# The line terminator '\n', if any, is preserved in each line.
+	# Use the method `Text::chomp` to safely remove it.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_line == "Hello\n"
+	# assert i.read_line == "\n"
+	# assert i.read_line == "World\n"
+	# assert i.eof
+	# ~~~
+	#
+	# If `\n` is not present at the end of the result, it means that
+	# a non-eol terminated last line was returned.
+	#
+	# ~~~
+	# var i2 = new StringIStream("hello")
+	# assert not i2.eof
+	# assert i2.read_line == "hello"
+	# assert i2.eof
+	# ~~~
+	#
+	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
 	fun read_line: String
 	do
 		assert not eof
 		var s = new FlatBuffer
 		append_line_to(s)
 		return s.to_s
+	end
+
+	# Read all the lines until the eof.
+	#
+	# The line terminator '\n' is removed in each line,
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_lines == ["Hello", "", "World"]
+	# ~~~
+	#
+	# This method is more efficient that splitting
+	# the result of `read_all`.
+	#
+	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	fun read_lines: Array[String]
+	do
+		var res = new Array[String]
+		while not eof do
+			res.add read_line.chomp
+		end
+		return res
 	end
 
 	# Read all the stream until the eof.
@@ -68,6 +115,8 @@ interface IStream
 	end
 
 	# Read a string until the end of the line and append it to `s`.
+	#
+	# SEE: `read_line` for details.
 	fun append_line_to(s: Buffer)
 	do
 		loop
