@@ -2266,6 +2266,7 @@ redef class Text
 	# Safe mode can be activated to limit reading to valid xml.
 	private fun read_xml(out: FlatBuffer, start: Int, safe_mode: Bool): Int do
 		var pos = 0
+		var is_valid = true
 		var is_close_tag = false
 		if start + 1 >= length then return -1
 		if self[start + 1] == '/' then
@@ -2283,7 +2284,11 @@ redef class Text
 			pos = read_xml_until(tmp, pos, ' ', '/', '>')
 			if pos == -1 then return -1
 			var tag = tmp.write_to_string.trim.to_lower
-			if tag.is_html_unsafe then
+			if not tag.is_valid_html_tag then
+				out.append "&lt;"
+				pos = -1
+			else if tag.is_html_unsafe then
+				is_valid = false
 				out.append "&lt;"
 				if is_close_tag then out.add '/'
 				out.append tmp
@@ -2306,7 +2311,11 @@ redef class Text
 			if pos == -1 then return -1
 		end
 		if self[pos] == '>' then
-			out.add '>'
+			if is_valid then
+				out.add '>'
+			else
+				out.append "&gt;"
+			end
 			return pos
 		end
 		return -1
@@ -2376,6 +2385,14 @@ redef class Text
 			pos += 1
 		end
 		return tpl.write_to_string.to_lower
+	end
+
+	private fun is_valid_html_tag: Bool do
+		if is_empty then return false
+		for c in self do
+			if not c.is_alpha then return false
+		end
+		return true
 	end
 
 	# Read and escape the markdown contained in `self`.
