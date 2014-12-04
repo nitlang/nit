@@ -16,11 +16,20 @@
 
 # OpenGL graphics rendering library for embedded systems, version 2.0.
 #
+# Defines the annotations `glsl_vertex_shader` and `glsl_fragment_shader`
+# applicable on string literals to check shader code using `glslangValidator`.
+# The tool must be in PATH. It can be downloaded from
+# https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/
+#
 # Most services of this module are a direct wrapper of the underlying
 # C library. If a method or class is not documented in Nit, refer to
 # the official documentation by the Khronos Group at:
 # http://www.khronos.org/opengles/sdk/docs/man/
-module glesv2 is pkgconfig
+module glesv2 is
+	pkgconfig
+	new_annotation glsl_vertex_shader
+	new_annotation glsl_fragment_shader
+end
 
 in "C Header" `{
 	#include <GLES2/gl2.h>
