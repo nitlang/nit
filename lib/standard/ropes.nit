@@ -278,15 +278,7 @@ class RopeBuffer
 		var slen = s.length
 		length += slen
 		var rp = rpos
-		if s isa Rope then
-			if rp > 0 and dumped != rp then
-				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
-				dumped = rp
-			end
-			str = str + s
-			return
-		end
-		if slen > maxlen then
+		if s isa Rope or slen > maxlen then
 			if rp > 0 and dumped != rp then
 				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
 				dumped = rp
@@ -326,12 +318,11 @@ class RopeBuffer
 			return
 		end
 		if slen <= remsp then
-			sits.copy_to(ns, slen, begin, rp)
-			if rp == buf_size then
-				rpos = buf_size
+			if remsp <= 0 then
 				dump_buffer
 				rpos = 0
 			else
+				sits.copy_to(ns, slen, begin, rp)
 				rpos += slen
 			end
 		else
