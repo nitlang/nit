@@ -1857,10 +1857,10 @@ redef class MMethodDef
 	do
 		if is_abstract then return true
 		var modelbuilder = v.compiler.modelbuilder
-		if modelbuilder.mpropdef2npropdef.has_key(self) then
-			var npropdef = modelbuilder.mpropdef2npropdef[self]
-			return npropdef.can_inline
-		else if self.mproperty.is_root_init then
+		var node = modelbuilder.mpropdef2node(self)
+		if node isa APropdef then
+			return node.can_inline
+		else if node isa AClassdef then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
 			return true
 		else
@@ -1873,19 +1873,18 @@ redef class MMethodDef
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		var val = constant_value
-		if modelbuilder.mpropdef2npropdef.has_key(self) then
-			var npropdef = modelbuilder.mpropdef2npropdef[self]
+		var node = modelbuilder.mpropdef2node(self)
+		if node isa APropdef then
 			var oldnode = v.current_node
-			v.current_node = npropdef
+			v.current_node = node
 			self.compile_parameter_check(v, arguments)
-			npropdef.compile_to_c(v, self, arguments)
+			node.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
-		else if self.mproperty.is_root_init then
-			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
+		else if node isa AClassdef then
 			var oldnode = v.current_node
-			v.current_node = nclassdef
+			v.current_node = node
 			self.compile_parameter_check(v, arguments)
-			nclassdef.compile_to_c(v, self, arguments)
+			node.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
 		else if val != null then
 			v.ret(v.value_instance(val))

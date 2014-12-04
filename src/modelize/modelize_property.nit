@@ -40,6 +40,21 @@ redef class ModelBuilder
 	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
 	var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
 
+	# Retrieve the associated AST node of a mpropertydef.
+	# This method is used to associate model entity with syntactic entities.
+	#
+	# If the property definition is not associated with a node, returns node.
+	fun mpropdef2node(mpropdef: MPropDef): nullable ANode
+	do
+		var res: nullable ANode = mpropdef2npropdef.get_or_null(mpropdef)
+		if res != null then return res
+		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
+			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
+			if res != null then return res
+		end
+		return null
+	end
+
 	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.
 	private fun build_properties(nclassdef: AClassdef)
