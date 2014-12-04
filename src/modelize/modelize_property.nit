@@ -17,7 +17,7 @@
 # Analysis and verification of property definitions to instantiate model element
 module modelize_property
 
-import modelize_class
+intrude import modelize_class
 private import annotation
 
 redef class ToolContext
@@ -36,9 +36,10 @@ private class ModelizePropertyPhase
 end
 
 redef class ModelBuilder
-	# Register the npropdef associated to each mpropdef
-	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
-	var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
+	# Registration of the npropdef associated to each mpropdef.
+	#
+	# Public clients need to use `mpropdef2node` to access stuff.
+	private var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
 
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
