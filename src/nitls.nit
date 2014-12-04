@@ -20,11 +20,13 @@ module nitls
 import modelbuilder
 intrude import loader
 import ordered_tree
+import console
 
 class ProjTree
 	super OrderedTree[Object]
 
 	var opt_paths = false
+	var tc: ToolContext
 
 	redef fun display(o)
 	do
@@ -34,21 +36,35 @@ class ProjTree
 			else
 				var d = ""
 				if o.mdoc != null then
-					d = ": {o.mdoc.content.first}"
+					if tc.opt_no_color.value then
+						d = ": {o.mdoc.content.first}"
+					else
+						d = ": {o.mdoc.content.first.green}"
+					end
 				end
-				return "{o.name} ({o.filepath.to_s}){d}"
+				if tc.opt_no_color.value then
+					return "{o.name}{d} ({o.filepath.to_s})"
+				else
+					return "{o.name}{d} ({o.filepath.yellow})"
+				end
 			end
 		else if o isa ModulePath then
 			if opt_paths then
 				return o.filepath
-			else if o.mmodule != null then
-				var d = ""
-				if o.mmodule.mdoc != null then
-					d = ": {o.mmodule.mdoc.content.first}"
-				end
-				return "{o.name}{d} ({o.filepath})"
 			else
-				return "{o.name} ({o.filepath})"
+				var d = ""
+				if o.mmodule != null and o.mmodule.mdoc != null then
+					if tc.opt_no_color.value then
+						d = ": {o.mmodule.mdoc.content.first}"
+					else
+						d = ": {o.mmodule.mdoc.content.first.green}"
+					end
+				end
+				if tc.opt_no_color.value then
+					return "{o.name.bold}{d} ({o.filepath.to_s})"
+				else
+					return "{o.name.bold}{d} ({o.filepath.yellow})"
+				end
 			end
 		else
 			abort
@@ -122,7 +138,7 @@ end
 
 if sum == 0 then opt_project.value = true
 
-var ot = new ProjTree
+var ot = new ProjTree(tc)
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
@@ -161,7 +177,11 @@ if opt_project.value then
 		if opt_paths.value then
 			list.add(path)
 		else
-			list.add("{p.name} ({path})")
+			if tc.opt_no_color.value then
+				list.add("{p.name} ({path})")
+			else
+				list.add("{p.name} ({path.yellow})")
+			end
 		end
 	end
 	alpha_comparator.sort(list)
