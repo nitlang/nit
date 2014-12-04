@@ -32,11 +32,21 @@ class ProjTree
 			if opt_paths then
 				return o.filepath.as(not null)
 			else
-				return "{o.name} ({o.filepath.to_s})"
+				var d = ""
+				if o.mdoc != null then
+					d = ": {o.mdoc.content.first}"
+				end
+				return "{o.name} ({o.filepath.to_s}){d}"
 			end
 		else if o isa ModulePath then
 			if opt_paths then
 				return o.filepath
+			else if o.mmodule != null then
+				var d = ""
+				if o.mmodule.mdoc != null then
+					d = ": {o.mmodule.mdoc.content.first}"
+				end
+				return "{o.name}{d} ({o.filepath})"
 			else
 				return "{o.name} ({o.filepath})"
 			end
@@ -108,8 +118,9 @@ else
 
 	for a in files do
 		var mp = mb.identify_file(a)
-		if mp == null then
-			tc.check_errors
+		tc.check_errors
+		if mp != null and not opt_paths.value then
+			mb.load_module(mp.filepath)
 		end
 	end
 end
