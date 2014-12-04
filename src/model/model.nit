@@ -628,24 +628,18 @@ abstract class MType
 	do
 		var sub = self
 		if sub == sup then return true
+
+		#print "1.is {sub} a {sup}? ===="
+
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
 		else
+			# First, resolve the formal types to the simplest equivalent forms in the receiver
 			assert sub.can_resolve_for(anchor, null, mmodule)
+			sub = sub.lookup_fixed(mmodule, anchor)
 			assert sup.can_resolve_for(anchor, null, mmodule)
-		end
-
-		# First, resolve the formal types to a common version in the receiver
-		# The trick here is that fixed formal type will be associated to the bound
-		# And unfixed formal types will be associated to a canonical formal type.
-		if sub isa MParameterType or sub isa MVirtualType then
-			assert anchor != null
-			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
-		end
-		if sup isa MParameterType or sup isa MVirtualType then
-			assert anchor != null
-			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
+			sup = sup.lookup_fixed(mmodule, anchor)
 		end
 
 		# Does `sup` accept null or not?
@@ -669,15 +663,17 @@ abstract class MType
 		end
 		# Now the case of direct null and nullable is over.
 
-		# A unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
-			return sub == sup
-		end
-
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
-		if sub isa MParameterType or sub isa MVirtualType then
+		while sub isa MParameterType or sub isa MVirtualType do
+			#print "3.is {sub} a {sup}?"
+
+			# A unfixed formal type can only accept itself
+			if sub == sup then return true
+
 			assert anchor != null
-			sub = sub.anchor_to(mmodule, anchor)
+			sub = sub.lookup_bound(mmodule, anchor)
+
+			#print "3.is {sub} a {sup}?"
 
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then
@@ -687,8 +683,14 @@ abstract class MType
 				return sup_accept_null
 			end
 		end
+		#print "4.is {sub} a {sup}? <- no more resolution"
 
 		assert sub isa MClassType # It is the only remaining type
+
+		# A unfixed formal type can only accept itself
+		if sup isa MParameterType or sup isa MVirtualType then
+			return false
+		end
 
 		if sup isa MNullType then
 			# `sup` accepts only null
@@ -877,6 +879,28 @@ abstract class MType
 	# REQUIRE: `can_resolve_for(mtype, anchor, mmodule)`
 	# ENSURE: `not self.need_anchor implies result == self`
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+
+	# Resolve formal type to its verbatim bound.
+	# If the type is not formal, just return self
+	#
+	# The result is returned exactly as declared in the "type" property (verbatim).
+	# So it could be another formal type.
+	#
+	# In case of conflict, the method aborts.
+	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
+
+	# Resolve the formal type to its simplest equivalent form.
+	#
+	# Formal types are either free or fixed.
+	# When it is fixed, it means that it is equivalent with a simpler type.
+	# When a formal type is free, it means that it is only equivalent with itself.
+	# This method return the most simple equivalent type of `self`.
+	#
+	# This method is mainly used for subtype test in order to sanely compare fixed.
+	#
+	# By default, return self.
+	# See the redefinitions for specific behavior in each kind of type.
+	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Can the type be resolved?
 	#
@@ -1168,86 +1192,85 @@ class MVirtualType
 
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
-	var mproperty: MProperty
+	var mproperty: MVirtualTypeProp
 
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
-	# Lookup the bound for a given resolved_receiver
-	# The result may be a other virtual type (or a parameter type)
-	#
-	# The result is returned exactly as declared in the "type" property (verbatim).
-	#
-	# In case of conflict, the method aborts.
-	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	do
+		return lookup_single_definition(mmodule, resolved_receiver).bound.as(not null)
+	end
+
+	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
 	do
 		assert not resolved_receiver.need_anchor
 		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
 		if props.is_empty then
 			abort
 		else if props.length == 1 then
-			return props.first.as(MVirtualTypeDef).bound.as(not null)
+			return props.first
 		end
 		var types = new ArraySet[MType]
+		var res  = props.first
 		for p in props do
-			types.add(p.as(MVirtualTypeDef).bound.as(not null))
+			types.add(p.bound.as(not null))
+			if not res.is_fixed then res = p
 		end
 		if types.length == 1 then
-			return types.first
+			return res
 		end
 		abort
 	end
 
-	# Is the virtual type fixed for a given resolved_receiver?
-	fun is_fixed(mmodule: MModule, resolved_receiver: MType): Bool
+	# A VT is fixed when:
+	# * the VT is (re-)defined with the annotation `is fixed`
+	# * the VT is (indirectly) bound to an enum class (see `enum_kind`) since there is no subtype possible
+	# * the receiver is an enum class since there is no subtype possible
+	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		var props = self.mproperty.lookup_definitions(mmodule, resolved_receiver)
-		if props.is_empty then
-			abort
-		end
-		for p in props do
-			if p.as(MVirtualTypeDef).is_fixed then return true
-		end
-		return false
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
+
+		var prop = lookup_single_definition(mmodule, resolved_receiver)
+		var res = prop.bound.as(not null)
+
+		# Recursively lookup the fixed result
+		res = res.lookup_fixed(mmodule, resolved_receiver)
+
+		# 1. For a fixed VT, return the resolved bound
+		if prop.is_fixed then return res
+
+		# 2. For a enum boud, return the bound
+		if res isa MClassType and res.mclass.kind == enum_kind then return res
+
+		# 3. for a enum receiver return the bound
+		if resolved_receiver.mclass.kind == enum_kind then return res
+
+		return self
 	end
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		if not cleanup_virtual then return self
 		assert can_resolve_for(mtype, anchor, mmodule)
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
-		var resolved_reciever
+		var resolved_receiver
 		if mtype.need_anchor then
 			assert anchor != null
-			resolved_reciever = mtype.resolve_for(anchor, null, mmodule, true)
+			resolved_receiver = mtype.resolve_for(anchor, null, mmodule, true)
 		else
-			resolved_reciever = mtype
+			resolved_receiver = mtype
 		end
 		# Now, we can get the bound
-		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
+		var verbatim_bound = lookup_bound(mmodule, resolved_receiver)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
 		var res = verbatim_bound.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		#print "{class_name}: {self}/{mtype}/{anchor} -> {self}/{resolved_receiver}/{anchor} -> {verbatim_bound}/{mtype}/{anchor} -> {res}"
 
-		# What to return here? There is a bunch a special cases:
-		# If 'cleanup_virtual' we must return the resolved type, since we cannot return self
-		if cleanup_virtual then return res
-		# If the receiver is a intern class, then the virtual type cannot be redefined since there is no possible subclass. self is just fixed. so simply return the resolution
-		if resolved_reciever isa MNullableType then resolved_reciever = resolved_reciever.mtype
-		if resolved_reciever.as(MClassType).mclass.kind == enum_kind then return res
-		# If the resolved type isa MVirtualType, it means that self was bound to it, and cannot be unbound. self is just fixed. so return the resolution.
-		if res isa MVirtualType then return res
-		# If we are final, just return the resolution
-		if is_fixed(mmodule, resolved_reciever) then return res
-		# If the resolved type isa intern class, then there is no possible valid redefinition in any potential subclass. self is just fixed. so simply return the resolution
-		if res isa MClassType and res.mclass.kind == enum_kind then return res
-		# TODO: What if bound to a MParameterType?
-		# Note that Nullable types can always be redefined by the non nullable version, so there is no specific case on it.
-
-		# If anything apply, then `self' cannot be resolved, so return self
-		return self
+		return res
 	end
 
 	redef fun can_resolve_for(mtype, anchor, mmodule)
@@ -1304,12 +1327,15 @@ class MParameterType
 
 	redef fun to_s do return name
 
-	# Resolve the bound for a given resolved_receiver
-	# The result may be a other virtual type (or a parameter type)
-	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
+		if resolved_receiver.mclass == goalclass then
+			return resolved_receiver.arguments[self.rank]
+		end
 		var supertypes = resolved_receiver.collect_mtypes(mmodule)
 		for t in supertypes do
 			if t.mclass == goalclass then
@@ -1320,6 +1346,22 @@ class MParameterType
 			end
 		end
 		abort
+	end
+
+	# A PT is fixed when:
+	# * Its bound is a enum class (see `enum_kind`).
+	#   The PT is just useless, but it is still a case.
+	# * More usually, the `resolved_receiver` is a subclass of `self.mclass`,
+	#   so it is necessarily fixed in a `super` clause, either with a normal type
+	#   or with another PT.
+	#   See `resolve_for` for examples about related issues.
+	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
+	do
+		assert not resolved_receiver.need_anchor
+		resolved_receiver = resolved_receiver.as_notnullable
+		assert resolved_receiver isa MClassType # It is the only remaining type
+		var res = self.resolve_for(resolved_receiver.mclass.mclass_type, resolved_receiver, mmodule, false)
+		return res
 	end
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
@@ -1354,7 +1396,7 @@ class MParameterType
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
-		assert resolved_receiver isa MClassType
+		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
@@ -1416,6 +1458,14 @@ class MNullableType
 	redef fun can_resolve_for(mtype, anchor, mmodule)
 	do
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
+		if t == mtype then return self
+		return t.as_nullable
 	end
 
 	redef fun depth do return self.mtype.depth
