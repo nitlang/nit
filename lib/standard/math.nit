@@ -173,7 +173,7 @@ redef class Float
 	#     #assert 1.0.log == 0.0
 	fun log: Float is extern "kernel_Float_Float_log_0"
 
-	# Returns **e** raised to `self`.
+	# Returns *e* raised to `self`.
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
 
 	#     assert 1.1.ceil == 2.0
