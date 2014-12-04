@@ -139,7 +139,7 @@ class List[E]
 	end
 
 	# Append `l` to `self` but clear `l`.
-	##
+	#
 	# O(1)
 	fun link(l: List[E])
 	do
