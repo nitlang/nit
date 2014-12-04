@@ -132,6 +132,7 @@ class OFStream
 		else
 			for i in s.substrings do write_native(i.to_cstring, i.length)
 		end
+		_file.flush
 	end
 
 	redef fun close
@@ -682,6 +683,8 @@ private extern class NativeFile `{ FILE* `}
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 	fun fileno: Int `{ return fileno(recv); `}
+	# Flushes the buffer, forcing the write operation
+	fun flush: Int is extern "fflush"
 
 	new io_open_read(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
 	new io_open_write(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
