@@ -411,9 +411,8 @@ redef class ModelBuilder
 		end
 	end
 
-	# Register the nclassdef associated to each mclassdef
-	# FIXME: why not refine the `MClassDef` class with a nullable attribute?
-	var mclassdef2nclassdef = new HashMap[MClassDef, AClassdef]
+	# Registration of the nclassdef associated to each mclassdef
+	private var mclassdef2nclassdef = new HashMap[MClassDef, AClassdef]
 
 	# Return the static type associated to the node `ntype`.
 	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)

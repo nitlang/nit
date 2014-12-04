@@ -17,7 +17,7 @@
 # Analysis and verification of property definitions to instantiate model element
 module modelize_property
 
-import modelize_class
+intrude import modelize_class
 private import annotation
 
 redef class ToolContext
@@ -36,9 +36,40 @@ private class ModelizePropertyPhase
 end
 
 redef class ModelBuilder
-	# Register the npropdef associated to each mpropdef
-	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
-	var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
+	# Registration of the npropdef associated to each mpropdef.
+	#
+	# Public clients need to use `mpropdef2node` to access stuff.
+	private var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
+
+	# Retrieve the associated AST node of a mpropertydef.
+	# This method is used to associate model entity with syntactic entities.
+	#
+	# If the property definition is not associated with a node, returns node.
+	fun mpropdef2node(mpropdef: MPropDef): nullable ANode
+	do
+		var res: nullable ANode = mpropdef2npropdef.get_or_null(mpropdef)
+		if res != null then return res
+		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
+			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
+			if res != null then return res
+		end
+		return null
+	end
+
+	# Retrieve all the attributes nodes localy definied
+	# FIXME think more about this method and how the separations separate/global and ast/model should be done.
+	fun collect_attr_propdef(mclassdef: MClassDef): Array[AAttrPropdef]
+	do
+		var res = new Array[AAttrPropdef]
+		var n = mclassdef2nclassdef.get_or_null(mclassdef)
+		if n == null then return res
+		for npropdef in n.n_propdefs do
+			if npropdef isa AAttrPropdef then
+				res.add(npropdef)
+			end
+		end
+		return res
+	end
 
 	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.

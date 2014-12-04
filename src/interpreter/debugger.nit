@@ -280,20 +280,13 @@ class Debugger
 		assert args.length == mpropdef.msignature.arity + 1 else debug("Invalid arity for {mpropdef}. {args.length} arguments given.")
 
 		# Look for the AST node that implements the property
-		var mproperty = mpropdef.mproperty
-		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
-			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
-			self.parameter_check(npropdef, mpropdef, args)
-			if npropdef isa AMethPropdef then
-				return npropdef.rt_call(self, mpropdef, args)
-			else
-				print "Error, invalid propdef to call at runtime !"
-				return null
-			end
-		else if mproperty.is_root_init then
-			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
-			self.parameter_check(nclassdef, mpropdef, args)
-			return nclassdef.call(self, mpropdef, args)
+		var node = modelbuilder.mpropdef2node(mpropdef)
+		if node isa AMethPropdef then
+			self.parameter_check(node, mpropdef, args)
+			return node.rt_call(self, mpropdef, args)
+		else if node isa AClassdef then
+			self.parameter_check(node, mpropdef, args)
+			return node.call(self, mpropdef, args)
 		else
 			fatal("Fatal Error: method {mpropdef} not found in the AST")
 			abort

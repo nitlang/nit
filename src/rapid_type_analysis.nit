@@ -215,7 +215,7 @@ class RapidTypeAnalysis
 
 			var vararg_rank = mmethoddef.msignature.vararg_rank
 			if vararg_rank > -1 then
-				var node = self.modelbuilder.mpropdef2npropdef[mmethoddef]
+				var node = self.modelbuilder.mpropdef2node(mmethoddef)
 				var elttype = mmethoddef.msignature.mparameters[vararg_rank].mtype
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
@@ -235,27 +235,25 @@ class RapidTypeAnalysis
 				add_cast(paramtype)
 			end
 
-			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
-				# It is an init for a class?
-				if mmeth.is_root_init then
-					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
-					assert mmethoddef == nclassdef.mfree_init
+			var npropdef = modelbuilder.mpropdef2node(mmethoddef)
 
-					if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
-						self.add_super_send(v.receiver, mmethoddef)
-					end
-				else if mmethoddef.constant_value != null then
-					# Make the return type live
-					v.add_type(mmethoddef.msignature.return_mtype.as(MClassType))
-				else
-					abort
+			if npropdef isa AClassdef then
+				# It is an init for a class
+				assert mmethoddef == npropdef.mfree_init
+
+				if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
+					self.add_super_send(v.receiver, mmethoddef)
 				end
 				continue
+			else if mmethoddef.constant_value != null then
+				# Make the return type live
+				v.add_type(mmethoddef.msignature.return_mtype.as(MClassType))
+				continue
+			else if npropdef == null then
+				abort
 			end
 
-			var npropdef = modelbuilder.mpropdef2npropdef[mmethoddef]
-
-			if npropdef isa AMethPropdef  then
+			if npropdef isa AMethPropdef then
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
@@ -345,10 +343,7 @@ class RapidTypeAnalysis
 		var bound_mtype = mtype.anchor_to(mainmodule, recv)
 		for cd in bound_mtype.collect_mclassdefs(mainmodule)
 		do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in nclassdef.n_propdefs do
-				if not npropdef isa AAttrPropdef then continue
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
 				if not npropdef.has_value then continue
 
 				var mpropdef = npropdef.mpropdef.as(not null)

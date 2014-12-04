@@ -914,12 +914,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, recv)
-				end
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
+				npropdef.init_expr(v, recv)
 			end
 		end
 	end
@@ -930,12 +926,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
 		self.mainmodule.linearize_mclassdefs(cds)
 		for cd in cds do
-			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.check_expr(v, recv)
-				end
+			for npropdef in modelbuilder.collect_attr_propdef(cd) do
+				npropdef.check_expr(v, recv)
 			end
 		end
 	end
@@ -1857,10 +1849,10 @@ redef class MMethodDef
 	do
 		if is_abstract then return true
 		var modelbuilder = v.compiler.modelbuilder
-		if modelbuilder.mpropdef2npropdef.has_key(self) then
-			var npropdef = modelbuilder.mpropdef2npropdef[self]
-			return npropdef.can_inline
-		else if self.mproperty.is_root_init then
+		var node = modelbuilder.mpropdef2node(self)
+		if node isa APropdef then
+			return node.can_inline
+		else if node isa AClassdef then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
 			return true
 		else
@@ -1873,19 +1865,18 @@ redef class MMethodDef
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		var val = constant_value
-		if modelbuilder.mpropdef2npropdef.has_key(self) then
-			var npropdef = modelbuilder.mpropdef2npropdef[self]
+		var node = modelbuilder.mpropdef2node(self)
+		if node isa APropdef then
 			var oldnode = v.current_node
-			v.current_node = npropdef
+			v.current_node = node
 			self.compile_parameter_check(v, arguments)
-			npropdef.compile_to_c(v, self, arguments)
+			node.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
-		else if self.mproperty.is_root_init then
-			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
+		else if node isa AClassdef then
 			var oldnode = v.current_node
-			v.current_node = nclassdef
+			v.current_node = node
 			self.compile_parameter_check(v, arguments)
-			nclassdef.compile_to_c(v, self, arguments)
+			node.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
 		else if val != null then
 			v.ret(v.value_instance(val))
