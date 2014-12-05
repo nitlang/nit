@@ -175,6 +175,7 @@ end
 if sum == 0 then opt_project.value = true
 
 var ot = new ProjTree(tc)
+var sorter = new AlphaEntityComparator
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
@@ -189,36 +190,42 @@ if opt_tree.value then
 			end
 		end
 	end
-	ot.sort_with(new AlphaEntityComparator)
+	ot.sort_with(sorter)
 	ot.write_to(stdout)
 end
 
 if opt_source.value then
-	var list = new Array[String]
+	var list = new Array[ModulePath]
 	for p in model.mprojects do
 		for g in p.mgroups do
 			for mp in g.module_paths do
-				if opt_paths.value then
-					list.add(mp.filepath)
-				else
-					list.add("{g.full_name}/{ot.display(mp)}")
-				end
+				list.add mp
 			end
 		end
 	end
-	alpha_comparator.sort(list)
-	for l in list do print l
+	sorter.sort(list)
+	for mp in list do
+		if opt_paths.value then
+			print mp.filepath
+		else
+			print "{mp.mgroup.full_name}/{ot.display(mp)}"
+		end
+	end
 end
 
 if opt_project.value then
-	var list = new Array[String]
+	var list = new Array[MGroup]
 	for p in model.mprojects do
-		var path = p.root.filepath.as(not null)
+		list.add p.root.as(not null)
+	end
+	sorter.sort(list)
+	for g in list do
+		var path = g.filepath.as(not null)
 		if opt_paths.value then
-			list.add(path)
+			print path
 		else
 			var d = ""
-			var md = p.mdoc_or_fallback
+			var md = g.mdoc_or_fallback
 			if md != null then
 				if tc.opt_no_color.value then
 					d = ": {md.content.first}"
@@ -227,12 +234,10 @@ if opt_project.value then
 				end
 			end
 			if tc.opt_no_color.value then
-				list.add("{p.name}{d} ({path})")
+				print "{g.name}{d} ({path})"
 			else
-				list.add("{p.name}{d} ({path.yellow})")
+				print "{g.name}{d} ({path.yellow})"
 			end
 		end
 	end
-	alpha_comparator.sort(list)
-	for l in list do print l
 end
