@@ -123,11 +123,12 @@ class VirtualMachine super NaiveInterpreter
 		var super_id = sup.mclass.vtable.id
 		var mask = sub.mclass.vtable.mask
 
-		return inter_is_subtype(super_id, mask, sub.mclass.vtable.internal_vtable)
+		# For now, we always use perfect hashing for subtyping test
+		return inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
 	end
 
 	# Subtyping test with perfect hashing
-	private fun inter_is_subtype(id: Int, mask:Int, vtable: Pointer): Bool `{
+	private fun inter_is_subtype_ph(id: Int, mask:Int, vtable: Pointer): Bool `{
 		// hv is the position in hashtable
 		int hv = id & mask;
 
@@ -136,6 +137,14 @@ class VirtualMachine super NaiveInterpreter
 
 		// If the pointed value is corresponding to the identifier, the test is true, otherwise false
 		return *offset == id;
+	`}
+
+	# Subtyping test with Cohen test (direct access)
+	private fun inter_is_subtype_sst(id: Int, position: Int, vtable: Pointer): Bool `{
+		// Direct access to the position given in parameter
+		int tableid = (long unsigned int)((long int *)vtable)[position];
+
+		return id == tableid;
 	`}
 
 	# Redef init_instance to simulate the loading of a class
@@ -364,6 +373,10 @@ redef class MClass
 	# True when the class is effectively loaded by the vm, false otherwise
 	var loaded: Bool = false
 
+	# Color for Cohen subtyping test : the absolute position of the id
+	# of this class in virtual tables
+	var color: Int
+
 	# For each loaded subclass, keep the position of the group of attributes
 	# introduced by self class in the object
 	var positions_attributes: HashMap[MClass, Int] = new HashMap[MClass, Int]
@@ -432,6 +445,9 @@ redef class MClass
 		# When all super-classes have their identifiers and vtables, allocate current one
 		allocate_vtable(v, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
 		loaded = true
+
+		# Set the absolute position of the identifier of this class in the virtual table
+		color = offset_methods - 2
 
 		# The virtual table now needs to be filled with pointer to methods
 		superclasses.add(self)
