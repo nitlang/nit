@@ -217,9 +217,11 @@ redef class ModelBuilder
 	do
 		# special case for not a nit file
 		if path.file_extension != "nit" then
-			# search in known -I paths
-			var res = search_module_in_paths(null, path, self.paths)
-			if res != null then return res
+			# search dirless files in known -I paths
+			if path.dirname == "" then
+				var res = search_module_in_paths(null, path, self.paths)
+				if res != null then return res
+			end
 
 			# Found nothins? maybe it is a group...
 			var candidate = null
