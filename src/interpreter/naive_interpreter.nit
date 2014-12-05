@@ -75,7 +75,7 @@ class NaiveInterpreter
 		init_instance_primitive(self.true_instance)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		init_instance_primitive(self.false_instance)
-		self.null_instance = new MutableInstance(mainmodule.model.null_type)
+		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
 	end
 
 	# Starts the interpreter on the main module of a program
