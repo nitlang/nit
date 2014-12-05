@@ -984,7 +984,7 @@ redef class AMethPropdef
 			else if pname == "length" then
 				return v.int_instance(recvval.length)
 			else if pname == "copy_to" then
-				recvval.copy(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
+				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
 		else if cname == "NativeFile" then
@@ -1074,13 +1074,6 @@ redef class AMethPropdef
 			return v.false_instance
 		end
 		return v.error_instance
-	end
-end
-
-redef class AbstractArray[E]
-	fun copy(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
-	do
-		self.copy_to(start, len, dest, new_start)
 	end
 end
 
