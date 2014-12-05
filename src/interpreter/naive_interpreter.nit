@@ -100,14 +100,14 @@ class NaiveInterpreter
 	# Subtype test in the context of the mainmodule
 	fun is_subtype(sub, sup: MType): Bool
 	do
-		return sub.is_subtype(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType), sup)
+		return sub.is_subtype(self.mainmodule, current_receiver_class, sup)
 	end
 
 	# Get a primitive method in the context of the main module
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
-		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv.mclass, self.mainmodule)
+		return self.modelbuilder.force_get_primitive_method(current_node, name, recv.mclass, self.mainmodule)
 	end
 
 	# Is a return executed?
@@ -292,13 +292,27 @@ class NaiveInterpreter
 		return b.to_s
 	end
 
+	# The current node, used to print errors, debug and stack-traces
+	fun current_node: nullable ANode
+	do
+		if frames.is_empty then return null
+		return frames.first.current_node
+	end
+
+	# The dynamic type of the current `self`
+	fun current_receiver_class: MClassType
+	do
+		return frames.first.arguments.first.mtype.as(MClassType)
+	end
+
 	# Exit the program with a message
 	fun fatal(message: String)
 	do
-		if frames.is_empty then
+		var node = current_node
+		if node == null then
 			print message
 		else
-			self.frame.current_node.fatal(self, message)
+			node.fatal(self, message)
 		end
 		exit(1)
 	end
@@ -306,10 +320,11 @@ class NaiveInterpreter
 	# Debug on the current node
 	fun debug(message: String)
 	do
-		if frames.is_empty then
+		var node = current_node
+		if node == null then
 			print message
 		else
-			self.frame.current_node.debug(message)
+			node.debug(message)
 		end
 	end
 
@@ -556,7 +571,7 @@ class NaiveInterpreter
 	# This function determine the correct type according the reciever of the current definition (self).
 	fun unanchor_type(mtype: MType): MType
 	do
-		return mtype.anchor_to(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType))
+		return mtype.anchor_to(self.mainmodule, current_receiver_class)
 	end
 
 	# Placebo instance used to mark internal error result when `null` already have a meaning.
