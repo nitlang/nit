@@ -172,17 +172,26 @@ if sum == 0 then
 	end
 end
 
+# Identify all relevant files
 for a in files do
+	var g = mb.get_mgroup(a)
 	var mp = mb.identify_file(a)
-	tc.check_errors
-	if mp != null and not opt_paths.value then
+	if g != null and not opt_project.value then
+		mb.visit_group(g)
+	end
+end
+
+# Load modules to get more informations
+for mp in mb.identified_files.values do
+	if mp == null then continue
+	if not opt_paths.value or opt_depends.value then
 		var mm = mb.load_module(mp.filepath)
 		if mm != null and opt_depends.value then
 			mb.build_module_importation(mm)
 		end
-		tc.check_errors
 	end
 end
+#tc.check_errors
 
 
 var ot = new ProjTree(tc)
