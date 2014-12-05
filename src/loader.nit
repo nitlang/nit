@@ -324,6 +324,17 @@ redef class ModelBuilder
 		return mgroup
 	end
 
+	# Force the identification of all ModulePath of the group and sub-groups.
+	fun visit_group(mgroup: MGroup) do
+		var p = mgroup.filepath
+		for f in p.files do
+			var fp = p/f
+			var g = get_mgroup(fp)
+			if g != null then visit_group(g)
+			identify_file(fp)
+		end
+	end
+
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
 		return getcwd.join_path(path).simplify_path
