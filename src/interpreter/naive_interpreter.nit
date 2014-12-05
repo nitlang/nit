@@ -476,7 +476,7 @@ class NaiveInterpreter
 					self.send(p, args)
 				else if p isa MAttribute then
 					assert recv isa MutableInstance
-					recv.attributes[p] = arguments[i]
+					write_attribute(p, recv, arguments[i])
 					i += 1
 				else abort
 			end
