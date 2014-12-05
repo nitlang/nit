@@ -103,6 +103,7 @@ class NaiveInterpreter
 		return sub.is_subtype(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType), sup)
 	end
 
+	# Get a primitive method in the context of the main module
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
@@ -238,6 +239,8 @@ class NaiveInterpreter
 		return res
 	end
 
+	# Return a instance associated to a primitive class
+	# Current primitive classes are `Int`, `Bool`, and `String`
 	fun value_instance(object: Object): Instance
 	do
 		if object isa Int then
