@@ -431,6 +431,8 @@ class NaiveInterpreter
 			var origmtype =  mpropdef.mproperty.intro.msignature.mparameters[i].mtype
 			if not origmtype.need_anchor then continue
 
+			#print "{mpropdef}: {mpropdef.mproperty.intro.msignature.mparameters[i]}"
+
 			# get the parameter type
 			var mtype = msignature.mparameters[i].mtype
 			var anchor = args.first.mtype.as(MClassType)
@@ -606,7 +608,7 @@ abstract class Instance
 
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
-	fun val: Object do abort
+	fun val: nullable Object do abort
 end
 
 # A instance with attribute (standards objects)
@@ -619,7 +621,7 @@ end
 
 # Special instance to handle primitives values (int, bool, etc.)
 # The trick it just to encapsulate the <<real>> value
-class PrimitiveInstance[E: Object]
+class PrimitiveInstance[E]
 	super Instance
 
 	# The real value encapsulated
@@ -634,17 +636,17 @@ class PrimitiveInstance[E: Object]
 
 	redef fun ==(o)
 	do
-		if not o isa PrimitiveInstance[Object] then return false
+		if not o isa PrimitiveInstance[nullable Object] then return false
 		return self.val == o.val
 	end
 
 	redef fun eq_is(o)
 	do
-		if not o isa PrimitiveInstance[Object] then return false
+		if not o isa PrimitiveInstance[nullable Object] then return false
 		return self.val.is_same_instance(o.val)
 	end
 
-	redef fun to_s do return "{mtype}#{val.object_id}({val})"
+	redef fun to_s do return "{mtype}#{val.object_id}({val or else "null"})"
 
 	redef fun to_i do return val.as(Int)
 
