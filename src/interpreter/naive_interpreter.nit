@@ -963,6 +963,14 @@ redef class AMethPropdef
 			else if pname == "atof" then
 				return v.float_instance(recvval.to_f)
 			end
+		else if cname == "String" then
+			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
+			var str = cs.val.to_s
+			if pname == "files" then
+				var res = new Array[Instance]
+				for f in str.files do res.add v.string_instance(f)
+				return v.array_instance(res, v.get_primitive_class("String").mclass_type)
+			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance("!" * args[1].to_i)
 		else if cname == "NativeArray" then
