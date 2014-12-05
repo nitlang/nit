@@ -211,6 +211,8 @@ redef class ModelBuilder
 
 	# Identify a source file
 	# Load the associated project and groups if required
+	#
+	# Silently return `null` if `path` is not a valid module path.
 	private fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
@@ -230,7 +232,6 @@ redef class ModelBuilder
 			end
 
 			if candidate == null then
-				toolcontext.error(null, "Error: cannot find module `{path}`.")
 				return null
 			end
 			path = candidate
@@ -370,7 +371,10 @@ redef class ModelBuilder
 	do
 		# Look for the module
 		var file = identify_file(filename)
-		if file == null then return null # forward error
+		if file == null then
+			toolcontext.error(null, "Error: cannot find module `{filename}`.")
+			return null
+		end
 
 		# Already known and loaded? then return it
 		var mmodule = file.mmodule
