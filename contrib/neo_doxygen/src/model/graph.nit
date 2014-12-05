@@ -386,7 +386,7 @@ class RootNamespace
 	init do
 		super
 		self["full_name"] = ""
-		self["name"] = graph.project["name"]
+		self["name"] = graph.project_name
 	end
 
 	redef fun declare_namespace(id: String, name: String) do end
