@@ -21,6 +21,7 @@ import literal
 import semantize
 private import parser::tables
 import mixin
+import primitive_types
 
 redef class ToolContext
 	# --discover-call-trace
@@ -987,43 +988,49 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeFile" then
 			if pname == "native_stdout" then
-				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdout)
+				var inst = new PrimitiveNativeFile.native_stdout
+				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
 				v.init_instance_primitive(instance)
 				return instance
 			else if pname == "native_stdin" then
-				var instance = new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, sys.stdin)
+				var inst = new PrimitiveNativeFile.native_stdin
+				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
 				v.init_instance_primitive(instance)
 				return instance
 			else if pname == "native_stderr" then
-				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, sys.stderr)
+				var inst = new PrimitiveNativeFile.native_stderr
+				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
 				v.init_instance_primitive(instance)
 				return instance
 			else if pname == "io_open_read" then
 				var a1 = args[1].val.as(Buffer)
-				var instance = new PrimitiveInstance[IStream](mpropdef.mclassdef.mclass.mclass_type, new IFStream.open(a1.to_s))
+				var inst = new PrimitiveNativeFile.io_open_read(a1.to_s)
+				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
 				v.init_instance_primitive(instance)
 				return instance
 			else if pname == "io_open_write" then
 				var a1 = args[1].val.as(Buffer)
-				var instance = new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
+				var inst = new PrimitiveNativeFile.io_open_write(a1.to_s)
+				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
 				v.init_instance_primitive(instance)
 				return instance
 			end
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
-				recvval.as(OStream).write(a1.substring(0, args[2].to_i).to_s)
-				return args[2]
+				return v.int_instance(recvval.as(PrimitiveNativeFile).io_write(a1.to_cstring, args[2].to_i))
 			else if pname == "io_read" then
-				var str = recvval.as(IStream).read(args[2].to_i)
 				var a1 = args[1].val.as(Buffer)
-				new FlatBuffer.from(str).copy(0, str.length, a1.as(FlatBuffer), 0)
-				return v.int_instance(str.length)
+				var ns = new NativeString(a1.length)
+				var len = recvval.as(PrimitiveNativeFile).io_read(ns, args[2].to_i)
+				a1.clear
+				a1.append(ns.to_s_with_length(len))
+				return v.int_instance(len)
+			else if pname == "flush" then
+				recvval.as(PrimitiveNativeFile).flush
+				return null
 			else if pname == "io_close" then
-				recvval.as(IOS).close
-				return v.int_instance(0)
-			else if pname == "address_is_null" then
-				return v.false_instance
+				return v.int_instance(recvval.as(PrimitiveNativeFile).io_close)
 			end
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)
@@ -1069,6 +1076,10 @@ redef class AMethPropdef
 		else if pname == "errno" then
 			return v.int_instance(sys.errno)
 		else if pname == "address_is_null" then
+			var recv = args[0]
+			if recv isa PrimitiveInstance[PrimitiveNativeFile] then
+				return v.bool_instance(recv.val.address_is_null)
+			end
 			return v.false_instance
 		end
 		return v.error_instance
