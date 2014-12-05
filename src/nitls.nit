@@ -134,7 +134,7 @@ if sum > 1 then
 	print tc.tooldescription
 	exit 1
 end
-
+if sum == 0 then opt_project.value = true
 tc.keep_going = opt_keep.value
 
 var model = new Model
@@ -160,6 +160,18 @@ else
 	files = tc.option_context.rest
 end
 
+if sum == 0 then
+	# If one of the file is a group, default is `opt_tree` instead of `opt_project`
+	for a in files do
+		var g = mb.get_mgroup(a)
+		if g != null then
+			opt_tree.value = true
+			opt_project.value = false
+			break
+		end
+	end
+end
+
 for a in files do
 	var mp = mb.identify_file(a)
 	tc.check_errors
@@ -172,7 +184,6 @@ for a in files do
 	end
 end
 
-if sum == 0 then opt_project.value = true
 
 var ot = new ProjTree(tc)
 var sorter = new AlphaEntityComparator
