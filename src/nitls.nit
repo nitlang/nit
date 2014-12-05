@@ -119,6 +119,7 @@ var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", 
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths, opt_make)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
+tc.accept_no_arguments = true
 tc.process_options(args)
 
 if opt_make.value then
@@ -139,6 +140,7 @@ tc.keep_going = opt_keep.value
 var model = new Model
 var mb = new ModelBuilder(model, tc)
 
+if tc.option_context.rest.is_empty then tc.option_context.rest.add "."
 var files
 if opt_recursive.value then
 	files = new Array[String]
