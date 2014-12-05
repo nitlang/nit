@@ -45,9 +45,9 @@ class VirtualMachine super NaiveInterpreter
 	var memory_manager: MemoryManager = new MemoryManager
 
 	# The unique instance of the `MInit` value
-	var initialization_value: Instance
+	var initialization_value: Instance is noinit
 
-	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
+	init
 	do
 		var init_type = new MInitType(mainmodule.model)
 		initialization_value = new MutableInstance(init_type)
@@ -627,6 +627,8 @@ end
 
 # Redef to associate an `Instance` to its `VTable`
 redef class Instance
+
+	# Associate a runtime instance to its virtual table which contains methods, types etc.
 	var vtable: nullable VTable
 end
 
@@ -635,10 +637,6 @@ class MInitType
 	super MType
 
 	redef var model: Model
-	protected init(model: Model)
-	do
-		self.model = model
-	end
 
 	redef fun to_s do return "InitType"
 	redef fun as_nullable do return self
