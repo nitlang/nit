@@ -419,7 +419,7 @@ class NaiveInterpreter
 		end
 	end
 
-	# Generate type checks in the C code to check covariant parameters
+	# Execute type checks of covariant parameters
 	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
 	do
 		var msignature = mpropdef.msignature
@@ -570,7 +570,7 @@ class NaiveInterpreter
 		return mainmodule.get_primitive_class(name)
 	end
 
-	# This function determine the correct type according the reciever of the current definition (self).
+	# This function determines the correct type according to the receiver of the current propdef (self).
 	fun unanchor_type(mtype: MType): MType
 	do
 		return mtype.anchor_to(self.mainmodule, current_receiver_class)
