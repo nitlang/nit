@@ -1,0 +1,14 @@
+digraph g {
+rankdir=BT;node[shape=box];
+subgraph cluster_37053984 {
+label=".."
+	m_41649040 [label="kernel"]
+subgraph cluster_37183344 {
+label="../collection"
+	m_38874592 [label="array"]
+	m_40662960 [label="abstract_collection"]
+}
+}
+	m_38874592 -> m_40662960
+	m_40662960 -> m_41649040
+}

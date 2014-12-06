@@ -74,7 +74,7 @@ interface IStream
 	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
 	fun read_line: String
 	do
-		assert not eof
+		if eof then return ""
 		var s = new FlatBuffer
 		append_line_to(s)
 		return s.to_s
@@ -189,7 +189,6 @@ abstract class BufferedIStream
 	super IStream
 	redef fun read_char
 	do
-		assert not eof
 		if _buffer_pos >= _buffer.length then
 			fill_buffer
 		end
@@ -205,7 +204,6 @@ abstract class BufferedIStream
 	do
 		if _buffer.length == _buffer_pos then
 			if not eof then
-				fill_buffer
 				return read(i)
 			end
 			return ""
@@ -271,7 +269,13 @@ abstract class BufferedIStream
 		end
 	end
 
-	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
+	redef fun eof
+	do
+		if _buffer_pos < _buffer.length then return false
+		if end_reached then return true
+		fill_buffer
+		return _buffer_pos >= _buffer.length and end_reached
+	end
 
 	# The buffer
 	private var buffer: nullable FlatBuffer = null
