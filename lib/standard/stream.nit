@@ -116,7 +116,36 @@ interface IStream
 
 	# Read a string until the end of the line and append it to `s`.
 	#
-	# SEE: `read_line` for details.
+	# the line terminator '\n', if any, is preserved in each line.
+	# Use the method `Text::chomp` to safely remove it.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# var b = new FlatBuffer
+	# i.append_line_to(b)
+	# assert b == "Hello\n"
+	# i.append_line_to(b)
+	# assert b == "Hello\n\n"
+	# i.append_line_to(b)
+	# assert b == txt
+	# assert i.eof
+	# ~~~
+	#
+	# If `\n` is not present at the end of the result, it means that
+	# a non-eol terminated last line was returned.
+	#
+	# ~~~
+	# var i2 = new StringIStream("hello")
+	# assert not i2.eof
+	# var b2 = new FlatBuffer
+	# i2.append_line_to(b2)
+	# assert b2 == "hello"
+	# assert i2.eof
+	# ~~~
+	#
+	# NOTE: The single character LINE FEED (`\n`) delimits the end of lines.
+	# Therefore CARRIAGE RETURN & LINE FEED (`\r\n`) is also recognized.
 	fun append_line_to(s: Buffer)
 	do
 		loop
