@@ -49,40 +49,42 @@ interface IStream
 
 	# Read a string until the end of the line.
 	#
-	# The line terminator '\n', if any, is preserved in each line.
-	# Use the method `Text::chomp` to safely remove it.
+	# The line terminator '\n' and '\r\n', if any, is removed in each line.
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
 	# var i = new StringIStream(txt)
-	# assert i.read_line == "Hello\n"
-	# assert i.read_line == "\n"
-	# assert i.read_line == "World\n"
+	# assert i.read_line == "Hello"
+	# assert i.read_line == ""
+	# assert i.read_line == "World"
 	# assert i.eof
 	# ~~~
 	#
-	# If `\n` is not present at the end of the result, it means that
-	# a non-eol terminated last line was returned.
+	# Only LINE FEED (`\n`), CARRIAGE RETURN & LINE FEED (`\r\n`), and
+	# the end or file (EOF) is considered to delimit the end of lines.
+	# CARRIAGE RETURN (`\r`) alone is not used for the end of line.
 	#
 	# ~~~
-	# var i2 = new StringIStream("hello")
-	# assert not i2.eof
-	# assert i2.read_line == "hello"
+	# var txt2 = "Hello\r\n\n\rWorld"
+	# var i2 = new StringIStream(txt2)
+	# assert i2.read_line == "Hello"
+	# assert i2.read_line == ""
+	# assert i2.read_line == "\rWorld"
 	# assert i2.eof
 	# ~~~
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: Use `append_line_to` if the line terminator needs to be preserved.
 	fun read_line: String
 	do
 		if eof then return ""
 		var s = new FlatBuffer
 		append_line_to(s)
-		return s.to_s
+		return s.to_s.chomp
 	end
 
 	# Read all the lines until the eof.
 	#
-	# The line terminator '\n' is removed in each line,
+	# The line terminator '\n' and `\r\n` is removed in each line,
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
@@ -93,12 +95,12 @@ interface IStream
 	# This method is more efficient that splitting
 	# the result of `read_all`.
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: SEE `read_line` for details.
 	fun read_lines: Array[String]
 	do
 		var res = new Array[String]
 		while not eof do
-			res.add read_line.chomp
+			res.add read_line
 		end
 		return res
 	end
@@ -116,6 +118,7 @@ interface IStream
 
 	# Read a string until the end of the line and append it to `s`.
 	#
+	# Unlike `read_line` and other related methods,
 	# the line terminator '\n', if any, is preserved in each line.
 	# Use the method `Text::chomp` to safely remove it.
 	#
