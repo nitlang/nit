@@ -208,7 +208,11 @@ redef class ModelBuilder
 	end
 
 	# Cache for `identify_file` by realpath
-	private var identified_files = new HashMap[String, nullable ModulePath]
+	private var identified_files_by_path = new HashMap[String, nullable ModulePath]
+
+	# All the currently identified modules.
+	# See `identify_file`.
+	var identified_files = new Array[ModulePath]
 
 	# Identify a source file
 	# Load the associated project and groups if required
@@ -243,7 +247,7 @@ redef class ModelBuilder
 		# Fast track, the path is already known
 		var pn = path.basename(".nit")
 		var rp = module_absolute_path(path)
-		if identified_files.has_key(rp) then return identified_files[rp]
+		if identified_files_by_path.has_key(rp) then return identified_files_by_path[rp]
 
 		# Search for a group
 		var mgrouppath = path.join_path("..").simplify_path
@@ -261,7 +265,8 @@ redef class ModelBuilder
 		var res = new ModulePath(pn, path, mgroup)
 		mgroup.module_paths.add(res)
 
-		identified_files[rp] = res
+		identified_files_by_path[rp] = res
+		identified_files.add(res)
 		return res
 	end
 

@@ -194,8 +194,7 @@ for a in files do
 end
 
 # Load modules to get more informations
-for mp in mb.identified_files.values do
-	if mp == null then continue
+for mp in mb.identified_files do
 	if not opt_paths.value or opt_depends.value then
 		var mm = mb.load_module(mp.filepath)
 		if mm != null and opt_depends.value then
