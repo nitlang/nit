@@ -106,6 +106,14 @@ interface IStream
 	end
 
 	# Read all the stream until the eof.
+	#
+	# The content of the file is returned verbatim.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_all == txt
+	# ~~~
 	fun read_all: String
 	do
 		var s = new FlatBuffer
