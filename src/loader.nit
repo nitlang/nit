@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Load nit source files and build the associated model
+# Loading of Nit source files
 module loader
 
 import modelbuilder_base
@@ -60,7 +60,7 @@ redef class ModelBuilder
 	# The result is the corresponding model elements.
 	# Errors and warnings are printed with the toolcontext.
 	#
-	# Note: class and property model element are not analysed.
+	# Note: class and property model elements are not analysed.
 	fun parse(modules: Sequence[String]): Array[MModule]
 	do
 		var time0 = get_time
@@ -89,15 +89,16 @@ redef class ModelBuilder
 	end
 
 	# The list of directories to search for top level modules
-	# The list is initially set with :
+	# The list is initially set with:
+	#
 	#   * the toolcontext --path option
 	#   * the NIT_PATH environment variable
 	#   * `toolcontext.nit_dir`
 	# Path can be added (or removed) by the client
 	var paths = new Array[String]
 
-	# Like (an used by) `get_mmodule_by_name` but just return the ModulePath
-	private fun search_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
+	# Like (and used by) `get_mmodule_by_name` but just return the ModulePath
+	fun search_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
 	do
 		# First, look in groups
 		var c = mgroup
@@ -128,7 +129,7 @@ redef class ModelBuilder
 		# Look at some known directories
 		var lookpaths = self.paths
 
-		# Look in the directory of the group project also (even if not explicitely in the path)
+		# Look in the directory of the group project also (even if not explicitly in the path)
 		if mgroup != null then
 			# path of the root group
 			var dirname = mgroup.mproject.root.filepath
@@ -206,14 +207,14 @@ redef class ModelBuilder
 		return identify_file(candidate)
 	end
 
-	# cache for `identify_file` by realpath
+	# Cache for `identify_file` by realpath
 	private var identified_files = new HashMap[String, nullable ModulePath]
 
 	# Identify a source file
 	# Load the associated project and groups if required
 	#
 	# Silently return `null` if `path` is not a valid module path.
-	private fun identify_file(path: String): nullable ModulePath
+	fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
 		if path.file_extension != "nit" then
@@ -223,7 +224,7 @@ redef class ModelBuilder
 				if res != null then return res
 			end
 
-			# Found nothins? maybe it is a group...
+			# Found nothing? maybe it is a group...
 			var candidate = null
 			if path.file_exists then
 				var mgroup = get_mgroup(path)
@@ -264,12 +265,12 @@ redef class ModelBuilder
 		return res
 	end
 
-	# groups by path
+	# Groups by path
 	private var mgroups = new HashMap[String, nullable MGroup]
 
-	# return the mgroup associated to a directory path
-	# if the directory is not a group null is returned
-	private fun get_mgroup(dirpath: String): nullable MGroup
+	# Return the mgroup associated to a directory path.
+	# If the directory is not a group null is returned.
+	fun get_mgroup(dirpath: String): nullable MGroup
 	do
 		var rdp = module_absolute_path(dirpath)
 		if mgroups.has_key(rdp) then
@@ -374,7 +375,7 @@ redef class ModelBuilder
 		return nmodule
 	end
 
-	# Try to load a module modules using a path.
+	# Try to load a module using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null.
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
 	#
@@ -411,7 +412,7 @@ redef class ModelBuilder
 	end
 
 	# Injection of a new module without source.
-	# Used by the interpreted
+	# Used by the interpreter.
 	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable AModule
 	do
 		# Create the module
@@ -469,7 +470,7 @@ redef class ModelBuilder
 		return mmodule
 	end
 
-	# Analysis the module importation and fill the module_importation_hierarchy
+	# Analyze the module importation and fill the module_importation_hierarchy
 	#
 	# Unless you used `load_module`, the importation is already done and this method does a no-op.
 	fun build_module_importation(nmodule: AModule)
@@ -549,8 +550,8 @@ redef class ModelBuilder
 	var mmodule2nmodule = new HashMap[MModule, AModule]
 end
 
-# placeholder to a module file identified but not always loaded in a project
-private class ModulePath
+# File-system location of a module (file) that is identified but not always loaded.
+class ModulePath
 	# The name of the module
 	# (it's the basename of the filepath)
 	var name: String
@@ -568,12 +569,12 @@ private class ModulePath
 end
 
 redef class MGroup
-	# modules paths associated with the group
-	private var module_paths = new Array[ModulePath]
+	# Modules paths associated with the group
+	var module_paths = new Array[ModulePath]
 
 	# Is the group interesting for a final user?
 	#
-	# groups are mandatory in the model but for simple projects they are not
+	# Groups are mandatory in the model but for simple projects they are not
 	# always interesting.
 	#
 	# A interesting group has, at least, one of the following true:
