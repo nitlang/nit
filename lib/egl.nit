@@ -167,13 +167,13 @@ extern class EGLDisplay `{ EGLDisplay `}
 		return NativeString_to_s((char *)eglQueryString(recv, name));
 	`}
 
-	fun vendor: String do return query_string("3053".to_hex)
+	fun vendor: String do return query_string(0x3053)
 
-	fun version: String do return query_string("3054".to_hex)
+	fun version: String do return query_string(0x3054)
 
-	fun extensions: Array[String] do return query_string("3055".to_hex).split_with(" ")
+	fun extensions: Array[String] do return query_string(0x3055).split_with(" ")
 
-	fun client_apis: Array[String] do return query_string("308D".to_hex).split_with(" ")
+	fun client_apis: Array[String] do return query_string(0x308D).split_with(" ")
 
 	fun swap_buffers(surface: EGLSurface) `{ eglSwapBuffers(recv, surface); `}
 end
@@ -208,23 +208,23 @@ class EGLConfigAttribs
 	var display: EGLDisplay
 	var config: EGLConfig
 
-	fun buffer_size: Int do return display.config_attrib(config, "3020".to_hex)
-	fun alpha_size: Int do return display.config_attrib(config, "3021".to_hex)
-	fun blue_size: Int do return display.config_attrib(config, "3022".to_hex)
-	fun green_size: Int do return display.config_attrib(config, "3023".to_hex)
-	fun red_size: Int do return display.config_attrib(config, "3024".to_hex)
-	fun depth_size: Int do return display.config_attrib(config, "3025".to_hex)
-	fun stencil_size: Int do return display.config_attrib(config, "3026".to_hex)
+	fun buffer_size: Int do return display.config_attrib(config, 0x3020)
+	fun alpha_size: Int do return display.config_attrib(config, 0x3021)
+	fun blue_size: Int do return display.config_attrib(config, 0x3022)
+	fun green_size: Int do return display.config_attrib(config, 0x3023)
+	fun red_size: Int do return display.config_attrib(config, 0x3024)
+	fun depth_size: Int do return display.config_attrib(config, 0x3025)
+	fun stencil_size: Int do return display.config_attrib(config, 0x3026)
 
-	fun native_visual_id: Int do return display.config_attrib(config, "302E".to_hex)
-	fun native_visual_type: Int do return display.config_attrib(config, "302F".to_hex)
+	fun native_visual_id: Int do return display.config_attrib(config, 0x302E)
+	fun native_visual_type: Int do return display.config_attrib(config, 0x302F)
 
 	fun caveat: EGLConfigCaveat do
-		return new EGLConfigCaveat.from_i(display.config_attrib(config, "3027".to_hex))
+		return new EGLConfigCaveat.from_i(display.config_attrib(config, 0x3027))
 	end
 
 	fun conformant: EGLConformant do
-		return new EGLConformant.from_i(display.config_attrib(config, "3042".to_hex))
+		return new EGLConformant.from_i(display.config_attrib(config, 0x3042))
 	end
 end
 
@@ -290,21 +290,21 @@ class EGLSurfaceAttribs
 	var display: EGLDisplay
 	var surface: EGLSurface
 
-	fun height: Int do return display.query_surface(surface, "3056".to_hex)
-	fun width: Int do return display.query_surface(surface, "3057".to_hex)
-	fun largest_pbuffer: Int do return display.query_surface(surface, "3058".to_hex)
-	fun texture_format: Int do return display.query_surface(surface, "3080".to_hex)
-	fun texture_target: Int do return display.query_surface(surface, "3081".to_hex)
-	fun mipmap_texture: Int do return display.query_surface(surface, "3082".to_hex)
-	fun mipmap_level: Int do return display.query_surface(surface, "3083".to_hex)
-	fun render_buffer: Int do return display.query_surface(surface, "3086".to_hex)
-	fun vg_colorspace: Int do return display.query_surface(surface, "3087".to_hex)
-	fun vg_alpha_format: Int do return display.query_surface(surface, "3088".to_hex)
-	fun horizontal_resolution: Int do return display.query_surface(surface, "3090".to_hex)
-	fun vertical_resolution: Int do return display.query_surface(surface, "3091".to_hex)
-	fun pixel_aspect_ratio: Int do return display.query_surface(surface, "3092".to_hex)
-	fun swap_behavior: Int do return display.query_surface(surface, "3093".to_hex)
-	fun multisample_resolve: Int do return display.query_surface(surface, "3099".to_hex)
+	fun height: Int do return display.query_surface(surface, 0x3056)
+	fun width: Int do return display.query_surface(surface, 0x3057)
+	fun largest_pbuffer: Int do return display.query_surface(surface, 0x3058)
+	fun texture_format: Int do return display.query_surface(surface, 0x3080)
+	fun texture_target: Int do return display.query_surface(surface, 0x3081)
+	fun mipmap_texture: Int do return display.query_surface(surface, 0x3082)
+	fun mipmap_level: Int do return display.query_surface(surface, 0x3083)
+	fun render_buffer: Int do return display.query_surface(surface, 0x3086)
+	fun vg_colorspace: Int do return display.query_surface(surface, 0x3087)
+	fun vg_alpha_format: Int do return display.query_surface(surface, 0x3088)
+	fun horizontal_resolution: Int do return display.query_surface(surface, 0x3090)
+	fun vertical_resolution: Int do return display.query_surface(surface, 0x3091)
+	fun pixel_aspect_ratio: Int do return display.query_surface(surface, 0x3092)
+	fun swap_behavior: Int do return display.query_surface(surface, 0x3093)
+	fun multisample_resolve: Int do return display.query_surface(surface, 0x3099)
 end
 
 extern class EGLError `{ EGLint `}
@@ -405,26 +405,26 @@ class EGLConfigChooser
 	end
 
 	fun close do
-		insert_attrib_key "3038".to_hex
+		insert_attrib_key 0x3038
 		closed = true
 	end
 
-	fun surface_type=(flag: Int) do insert_attrib_with_val("3033".to_hex, flag)
+	fun surface_type=(flag: Int) do insert_attrib_with_val(0x3033, flag)
 	fun surface_type_egl do surface_type = 4
 
-	fun blue_size=(size: Int) do insert_attrib_with_val("3022".to_hex, size)
-	fun green_size=(size: Int) do insert_attrib_with_val("3023".to_hex, size)
-	fun red_size=(size: Int) do insert_attrib_with_val("3024".to_hex, size)
+	fun blue_size=(size: Int) do insert_attrib_with_val(0x3022, size)
+	fun green_size=(size: Int) do insert_attrib_with_val(0x3023, size)
+	fun red_size=(size: Int) do insert_attrib_with_val(0x3024, size)
 
-	fun buffer_size=(size: Int) do insert_attrib_with_val("3020".to_hex, size)
-	fun alpha_size=(size: Int) do insert_attrib_with_val("3021".to_hex, size)
-	fun depth_size=(size: Int) do insert_attrib_with_val("3025".to_hex, size)
-	fun stencil_size=(size: Int) do insert_attrib_with_val("3026".to_hex, size)
-	fun sample_buffers=(size: Int) do insert_attrib_with_val("3031".to_hex, size)
+	fun buffer_size=(size: Int) do insert_attrib_with_val(0x3020, size)
+	fun alpha_size=(size: Int) do insert_attrib_with_val(0x3021, size)
+	fun depth_size=(size: Int) do insert_attrib_with_val(0x3025, size)
+	fun stencil_size=(size: Int) do insert_attrib_with_val(0x3026, size)
+	fun sample_buffers=(size: Int) do insert_attrib_with_val(0x3031, size)
 
-	fun caveat=(caveat: EGLConfigCaveat) do insert_attrib_with_val("3050".to_hex, caveat.to_i)
+	fun caveat=(caveat: EGLConfigCaveat) do insert_attrib_with_val(0x3050, caveat.to_i)
 
-	fun conformant=(conformant: EGLConformant) do insert_attrib_with_val("3042".to_hex, conformant.to_i)
+	fun conformant=(conformant: EGLConformant) do insert_attrib_with_val(0x3042, conformant.to_i)
 
 	fun choose(display: EGLDisplay): nullable Array[EGLConfig]
 	do
