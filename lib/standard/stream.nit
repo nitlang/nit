@@ -240,6 +240,15 @@ abstract class BufferedIStream
 			var i = _buffer_pos
 			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
+			var eol
+			if i < _buffer.length then
+				assert _buffer.chars[i] == '\n'
+				i += 1
+				eol = true
+			else
+				eol = false
+			end
+
 			# if there is something to append
 			if i > _buffer_pos then
 				# Enlarge the string (if needed)
@@ -251,20 +260,19 @@ abstract class BufferedIStream
 					s.add(_buffer.chars[j])
 					j += 1
 				end
+				_buffer_pos = i
+			else
+				assert end_reached
+				return
 			end
 
-			if i < _buffer.length then
-				# so \n is in _buffer[i]
-				_buffer_pos = i + 1 # skip \n
+			if eol then
+				# so \n is found
 				return
 			else
 				# so \n is not found
-				_buffer_pos = i
-				if end_reached then
-					return
-				else
-					fill_buffer
-				end
+				if end_reached then return
+				fill_buffer
 			end
 		end
 	end
