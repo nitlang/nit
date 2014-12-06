@@ -199,7 +199,8 @@ class ConfigTree
 			else if line.has_prefix(";") then
 				continue
 			else if line.has_prefix("[") then
-				var key = line.trim.substring(1, line.length - 2)
+				line = line.trim
+				var key = line.substring(1, line.length - 2)
 				path = key
 				set_node(path, null)
 			else
