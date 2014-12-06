@@ -21,7 +21,7 @@ import interpreter::naive_interpreter
 import interpreter::debugger
 import pnacl
 intrude import toolcontext
-intrude import modelbuilder
+intrude import loader
 intrude import standard::file
 
 # We redefine exit to start a new thread before killing the one that called exit.
