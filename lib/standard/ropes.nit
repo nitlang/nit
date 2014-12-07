@@ -337,14 +337,13 @@ class RopeBuffer
 
 	redef fun add(c) do
 		var rp = rpos
-		length += 1
-		ns[rp] = c
-		rp += 1
-		if rp == buf_size then
-			rpos = rp
+		if rp >= buf_size then
 			dump_buffer
 			rp = 0
 		end
+		ns[rp] = c
+		rp += 1
+		length += 1
 		rpos = rp
 	end
 
