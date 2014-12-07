@@ -383,15 +383,12 @@ class RopeBuffer
 	end
 
 	redef fun reverse do
-		str = str.reversed
-		var nns = new NativeString(buf_size)
-		var j = rpos
-		var mits = ns
-		for i in [0 .. rpos[ do
-			nns[i] = mits[j]
-			j -= 1
+		# Flush the buffer in order to only have to reverse `str`.
+		if rpos > 0 and dumped != rpos then
+			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+			dumped = rpos
 		end
-		ns = nns
+		str = str.reversed
 	end
 
 	redef fun upper do
