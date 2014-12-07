@@ -241,6 +241,10 @@ class RopeBuffer
 		length = 0
 		rpos = 0
 		dumped = 0
+		if written then
+			ns = new NativeString(buf_size)
+			written = false
+		end
 	end
 
 	redef fun substring(from, count) do
