@@ -56,3 +56,24 @@ buffer.append "ab"
 s = buffer.to_s
 buffer.append("*" * (maxlen -1))
 print s
+
+sys.stdout.write "`reverse`: "
+buffer.clear
+buffer.append "xyz"
+s = buffer.to_s
+buffer.reverse
+print s
+
+sys.stdout.write "`upper`: "
+buffer.clear
+buffer.append "foo"
+s = buffer.to_s
+buffer.upper
+print s
+
+sys.stdout.write "`lower`: "
+buffer.clear
+buffer.append "BAR"
+s = buffer.to_s
+buffer.lower
+print s

@@ -229,6 +229,7 @@ class RopeBuffer
 		var nns = new NativeString(buf_size)
 		var blen = rpos - dumped
 		ns.copy_to(nns, blen, dumped, 0)
+		ns = nns
 		dumped = 0
 		rpos = blen
 		written = false
