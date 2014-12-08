@@ -67,6 +67,13 @@ extern class GLProgram `{GLuint`}
 		return glGetAttribLocation(recv, c_name);
 	`}
 
+	# Get the location of the uniform by `name`
+	#
+	# Returns `-1` if there is no active uniform named `name`.
+	fun uniform_location(name: String): Int import String.to_cstring `{
+		GLchar *c_name = String_to_cstring(name);
+		return glGetUniformLocation(recv, c_name);
+	`}
 
 	# Query information on this program
 	fun query(pname: Int): Int `{
@@ -109,6 +116,83 @@ extern class GLProgram `{GLuint`}
 		GLchar *msg = malloc(size);
 		glGetProgramInfoLog(recv, size, NULL, msg);
 		return NativeString_to_s(msg);
+	`}
+
+	# Number of active uniform in this program
+	#
+	# This should be the number of uniforms declared in all shader, except
+	# unused uniforms which may have been optimized out.
+	fun n_active_uniforms: Int do return query(0x8B86)
+
+	# Length of the longest uniform name in this program, including `\n`
+	fun active_uniform_max_length: Int do return query(0x8B87)
+
+	# Number of active attributes in this program
+	#
+	# This should be the number of uniforms declared in all shader, except
+	# unused uniforms which may have been optimized out.
+	fun n_active_attributes: Int do return query(0x8B89)
+
+	# Length of the longest uniform name in this program, including `\n`
+	fun active_attribute_max_length: Int do return query(0x8B8A)
+
+	# Number of shaders attached to this program
+	fun n_attached_shaders: Int do return query(0x8B85)
+
+	# Name of the active attribute at `index`
+	fun active_attrib_name(index: Int): String
+	do
+		var max_size = active_attribute_max_length
+		return active_attrib_name_native(index, max_size).to_s
+	end
+	private fun active_attrib_name_native(index, max_size: Int): NativeString `{
+		char *name = malloc(max_size);
+		glGetActiveAttrib(recv, index, max_size, NULL, NULL, NULL, name);
+		return name;
+	`}
+
+	# Size of the active attribute at `index`
+	fun active_attrib_size(index: Int): Int `{
+		int size;
+		glGetActiveAttrib(recv, index, 0, NULL, NULL, &size, NULL);
+		return size;
+	`}
+
+	# Type of the active attribute at `index`
+	#
+	# May only be float related data types (single float, vectors and matrix).
+	fun active_attrib_type(index: Int): GLFloatDataType `{
+		GLenum type;
+		glGetActiveAttrib(recv, index, 0, NULL, &type, NULL, NULL);
+		return type;
+	`}
+
+	# Name of the active uniform at `index`
+	fun active_uniform_name(index: Int): String
+	do
+		var max_size = active_attribute_max_length
+		return active_uniform_name_native(index, max_size).to_s
+	end
+	private fun active_uniform_name_native(index, max_size: Int): NativeString `{
+		char *name = malloc(max_size);
+		glGetActiveUniform(recv, index, max_size, NULL, NULL, NULL, name);
+		return name;
+	`}
+
+	# Size of the active uniform at `index`
+	fun active_uniform_size(index: Int): Int `{
+		int size;
+		glGetActiveUniform(recv, index, 0, NULL, NULL, &size, NULL);
+		return size;
+	`}
+
+	# Type of the active uniform at `index`
+	#
+	# May be any data type supported by OpenGL ES 2.0 shaders.
+	fun active_uniform_type(index: Int): GLDataType `{
+		GLenum type;
+		glGetActiveUniform(recv, index, 0, NULL, &type, NULL, NULL);
+		return type;
 	`}
 end
 
@@ -309,3 +393,36 @@ private fun gl_get_int(key: Int): Int `{
 #
 # Should always return `true` in OpenGL ES 2.0 and 3.0.
 fun gl_shader_compiler: Bool do return gl_get_bool(0x8DFA)
+
+# Float related data types of OpenGL ES 2.0 shaders
+#
+# Only data types supported by shader attributes, as seen with
+# `GLProgram::active_attrib_type`.
+extern class GLFloatDataType `{ GLenum `}
+	fun is_float: Bool `{ return recv == GL_FLOAT; `}
+	fun is_float_vec2: Bool `{ return recv == GL_FLOAT_VEC2; `}
+	fun is_float_vec3: Bool `{ return recv == GL_FLOAT_VEC3; `}
+	fun is_float_vec4: Bool `{ return recv == GL_FLOAT_VEC4; `}
+	fun is_float_mat2: Bool `{ return recv == GL_FLOAT_MAT2; `}
+	fun is_float_mat3: Bool `{ return recv == GL_FLOAT_MAT3; `}
+	fun is_float_mat4: Bool `{ return recv == GL_FLOAT_MAT4; `}
+end
+
+# All data types of OpenGL ES 2.0 shaders
+#
+# These types can be used by shader uniforms, as seen with
+# `GLProgram::active_uniform_type`.
+extern class GLDataType
+	super GLFloatDataType
+
+	fun is_int: Bool `{ return recv == GL_INT; `}
+	fun is_int_vec2: Bool `{ return recv == GL_INT_VEC2; `}
+	fun is_int_vec3: Bool `{ return recv == GL_INT_VEC3; `}
+	fun is_int_vec4: Bool `{ return recv == GL_INT_VEC4; `}
+	fun is_bool: Bool `{ return recv == GL_BOOL; `}
+	fun is_bool_vec2: Bool `{ return recv == GL_BOOL_VEC2; `}
+	fun is_bool_vec3: Bool `{ return recv == GL_BOOL_VEC3; `}
+	fun is_bool_vec4: Bool `{ return recv == GL_BOOL_VEC4; `}
+	fun is_sampler_2d: Bool `{ return recv == GL_SAMPLER_2D; `}
+	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
+end
