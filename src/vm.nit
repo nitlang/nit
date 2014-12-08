@@ -555,7 +555,9 @@ redef class MClass
 	private fun superclasses_ordering(v: VirtualMachine): Array[MClass]
 	do
 		var superclasses = new Array[MClass]
-		superclasses.add_all(ancestors)
+
+		# Add all superclasses of `self`
+		superclasses.add_all(self.in_hierarchy(v.mainmodule).greaters)
 
 		var res = new Array[MClass]
 		if superclasses.length > 1 then
