@@ -712,6 +712,10 @@ end
 
 redef class Sys
 
+	init do
+		if stdout isa FStream then stdout.as(FStream).set_buffering_mode(256, buffer_mode_line)
+	end
+
 	# Standard input
 	var stdin: PollableIStream = new Stdin is protected writable
 
