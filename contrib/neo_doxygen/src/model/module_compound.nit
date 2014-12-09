@@ -167,6 +167,7 @@ private class Module
 		if self_class isa SelfClass then
 			# We assume that only one file is linked to the namespace.
 			# TODO When Doxygen will provide a way to know which file defines which member, use it.
+			self_class.location = file_compound.location
 			graph.add_edge(self, "INTRODUCES", self_class)
 			graph.add_edge(self, "DEFINES", self_class.class_def)
 		end

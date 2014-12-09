@@ -80,8 +80,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)"}
+=properties=JsonObject(5):
+{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)","location":"\/dev\/null:1,1--1,1"}
 
 Edge
 =type=7:DEFINES
@@ -200,8 +200,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)"}
+=properties=JsonObject(5):
+{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -231,8 +231,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)"}
+=properties=JsonObject(5):
+{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)","location":"\/dev\/null:1,1--1,1"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -274,8 +274,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)"}
+=properties=JsonObject(5):
+{"kind":"class","visibility":"public","name":"(self)","full_name":"foo::(self)","location":"\/dev\/null:1,1--1,1"}
 
 Edge
 =type=10:INTRODUCES
