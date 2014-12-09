@@ -87,14 +87,14 @@ class Node
 	private var open: Bool = false
 
 	# Main functionnality, returns path from `self` to `dest`
-	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable Path[N]
+	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable AStarPath[N]
 	do
 		return path_to_alts(dest, max_cost, context, null)
 	end
 
 	# Find a path to a possible `destination` or a node accepted by `alt_targets`
 	fun path_to_alts(destination: nullable N, max_cost: Int, context: PathContext,
-		alt_targets: nullable TargetCondition[N]): nullable Path[N]
+		alt_targets: nullable TargetCondition[N]): nullable AStarPath[N]
 	do
 		var cost = 0
 
@@ -143,7 +143,7 @@ class Node
 			else if frontier_node == destination or
 			     (alt_targets != null and alt_targets.accept(frontier_node)) then
 
-				var path = new Path[N](cost)
+				var path = new AStarPath[N](cost)
 
 				while frontier_node != self do
 					path.nodes.unshift(frontier_node)
@@ -238,7 +238,7 @@ class Graph[N: Node, L: Link]
 end
 
 # Result from path finding and a walkable path
-class Path[N]
+class AStarPath[N]
 
 	# The total cost of this path
 	var total_cost: Int
@@ -251,7 +251,7 @@ class Path[N]
 	# Step on the path and get the next node to travel
 	fun step: N
 	do
-		assert nodes.length >= at else print "a_star::Path::step failed, is at_end_of_path"
+		assert nodes.length >= at else print "a_star::AStarPath::step failed, is at_end_of_path"
 
 		var s = nodes[at]
 		at += 1
