@@ -109,7 +109,7 @@ abstract class AbstractArrayRead[E]
 	#     var b = [10, 20, 30, 40, 50]
 	#     a.copy_to(1, 2, b, 2)
 	#     assert b      ==  [10, 20, 2, 3, 50]
-	protected fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
+	fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
 		var i = len

@@ -75,7 +75,7 @@ class NaiveInterpreter
 		init_instance_primitive(self.true_instance)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		init_instance_primitive(self.false_instance)
-		self.null_instance = new MutableInstance(mainmodule.model.null_type)
+		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
 	end
 
 	# Starts the interpreter on the main module of a program
@@ -100,13 +100,14 @@ class NaiveInterpreter
 	# Subtype test in the context of the mainmodule
 	fun is_subtype(sub, sup: MType): Bool
 	do
-		return sub.is_subtype(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType), sup)
+		return sub.is_subtype(self.mainmodule, current_receiver_class, sup)
 	end
 
+	# Get a primitive method in the context of the main module
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
-		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv.mclass, self.mainmodule)
+		return self.modelbuilder.force_get_primitive_method(current_node, name, recv.mclass, self.mainmodule)
 	end
 
 	# Is a return executed?
@@ -238,6 +239,8 @@ class NaiveInterpreter
 		return res
 	end
 
+	# Return a instance associated to a primitive class
+	# Current primitive classes are `Int`, `Bool`, and `String`
 	fun value_instance(object: Object): Instance
 	do
 		if object isa Int then
@@ -289,13 +292,27 @@ class NaiveInterpreter
 		return b.to_s
 	end
 
+	# The current node, used to print errors, debug and stack-traces
+	fun current_node: nullable ANode
+	do
+		if frames.is_empty then return null
+		return frames.first.current_node
+	end
+
+	# The dynamic type of the current `self`
+	fun current_receiver_class: MClassType
+	do
+		return frames.first.arguments.first.mtype.as(MClassType)
+	end
+
 	# Exit the program with a message
 	fun fatal(message: String)
 	do
-		if frames.is_empty then
+		var node = current_node
+		if node == null then
 			print message
 		else
-			self.frame.current_node.fatal(self, message)
+			node.fatal(self, message)
 		end
 		exit(1)
 	end
@@ -303,10 +320,11 @@ class NaiveInterpreter
 	# Debug on the current node
 	fun debug(message: String)
 	do
-		if frames.is_empty then
+		var node = current_node
+		if node == null then
 			print message
 		else
-			self.frame.current_node.debug(message)
+			node.debug(message)
 		end
 	end
 
@@ -403,7 +421,7 @@ class NaiveInterpreter
 		end
 	end
 
-	# Generate type checks in the C code to check covariant parameters
+	# Execute type checks of covariant parameters
 	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
 	do
 		var msignature = mpropdef.msignature
@@ -414,6 +432,8 @@ class NaiveInterpreter
 			# skip if the cast is not required
 			var origmtype =  mpropdef.mproperty.intro.msignature.mparameters[i].mtype
 			if not origmtype.need_anchor then continue
+
+			#print "{mpropdef}: {mpropdef.mproperty.intro.msignature.mparameters[i]}"
 
 			# get the parameter type
 			var mtype = msignature.mparameters[i].mtype
@@ -458,7 +478,7 @@ class NaiveInterpreter
 					self.send(p, args)
 				else if p isa MAttribute then
 					assert recv isa MutableInstance
-					recv.attributes[p] = arguments[i]
+					write_attribute(p, recv, arguments[i])
 					i += 1
 				else abort
 			end
@@ -546,10 +566,10 @@ class NaiveInterpreter
 		return mainmodule.get_primitive_class(name)
 	end
 
-	# This function determine the correct type according the reciever of the current definition (self).
+	# This function determines the correct type according to the receiver of the current propdef (self).
 	fun unanchor_type(mtype: MType): MType
 	do
-		return mtype.anchor_to(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType))
+		return mtype.anchor_to(self.mainmodule, current_receiver_class)
 	end
 
 	# Placebo instance used to mark internal error result when `null` already have a meaning.
@@ -584,7 +604,7 @@ abstract class Instance
 
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
-	fun val: Object do abort
+	fun val: nullable Object do abort
 end
 
 # A instance with attribute (standards objects)
@@ -597,7 +617,7 @@ end
 
 # Special instance to handle primitives values (int, bool, etc.)
 # The trick it just to encapsulate the <<real>> value
-class PrimitiveInstance[E: Object]
+class PrimitiveInstance[E]
 	super Instance
 
 	# The real value encapsulated
@@ -612,17 +632,17 @@ class PrimitiveInstance[E: Object]
 
 	redef fun ==(o)
 	do
-		if not o isa PrimitiveInstance[Object] then return false
+		if not o isa PrimitiveInstance[nullable Object] then return false
 		return self.val == o.val
 	end
 
 	redef fun eq_is(o)
 	do
-		if not o isa PrimitiveInstance[Object] then return false
+		if not o isa PrimitiveInstance[nullable Object] then return false
 		return self.val.is_same_instance(o.val)
 	end
 
-	redef fun to_s do return "{mtype}#{val.object_id}({val})"
+	redef fun to_s do return "{mtype}#{val.object_id}({val or else "null"})"
 
 	redef fun to_i do return val.as(Int)
 
@@ -959,6 +979,14 @@ redef class AMethPropdef
 			else if pname == "atof" then
 				return v.float_instance(recvval.to_f)
 			end
+		else if cname == "String" then
+			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
+			var str = cs.val.to_s
+			if pname == "files" then
+				var res = new Array[Instance]
+				for f in str.files do res.add v.string_instance(f)
+				return v.array_instance(res, v.get_primitive_class("String").mclass_type)
+			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance("!" * args[1].to_i)
 		else if cname == "NativeArray" then
@@ -980,7 +1008,7 @@ redef class AMethPropdef
 			else if pname == "length" then
 				return v.int_instance(recvval.length)
 			else if pname == "copy_to" then
-				recvval.copy(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
+				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
 		else if cname == "NativeFile" then
@@ -1070,13 +1098,6 @@ redef class AMethPropdef
 			return v.false_instance
 		end
 		return v.error_instance
-	end
-end
-
-redef class AbstractArray[E]
-	fun copy(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
-	do
-		self.copy_to(start, len, dest, new_start)
 	end
 end
 
