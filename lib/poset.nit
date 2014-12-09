@@ -226,21 +226,26 @@ class POSet[E: Object]
 
 	# Write the POSet as a graphviz digraph.
 	#
-	# Nodes are identified with their `to_s`.
+	# Nodes are labeled with their `to_s` so homonymous nodes may appear.
 	# Edges are unlabeled.
 	fun write_dot(f: OStream)
 	do
 		f.write "digraph \{\n"
+		var ids = new HashMap[E, Int]
+		for x in elements.keys do
+			ids[x] = ids.length
+		end
 		for x in elements.keys do
 			var xstr = x.to_s.escape_to_dot
-			f.write "\"{xstr}\";\n"
+			var nx = "n{ids[x]}"
+			f.write "{nx}[label=\"{xstr}\"];\n"
 			var xe = self.elements[x]
 			for y in xe.dtos do
-				var ystr = y.to_s.escape_to_dot
+				var ny = "n{ids[y]}"
 				if self.has_edge(y,x) then
-					f.write "\"{xstr}\" -> \"{ystr}\"[dir=both];\n"
+					f.write "{nx} -> {ny}[dir=both];\n"
 				else
-					f.write "\"{xstr}\" -> \"{ystr}\";\n"
+					f.write "{nx} -> {ny};\n"
 				end
 			end
 		end
