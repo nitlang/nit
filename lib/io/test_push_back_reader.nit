@@ -99,16 +99,16 @@ efg
 	fun test_read_line do
 		var subject = sample
 
-		assert "abcd\n" == subject.read_line
-		assert "\n" == subject.read_line
+		assert "abcd" == subject.read_line
+		assert "" == subject.read_line
 	end
 
 	fun test_unread_read_line do
 		var subject = sample
 
 		subject.unread("a\nb")
-		assert "a\n" == subject.read_line
-		assert "babcd\n" == subject.read_line
+		assert "a" == subject.read_line
+		assert "babcd" == subject.read_line
 	end
 
 	fun test_eof do

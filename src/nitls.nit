@@ -94,7 +94,6 @@ else
 			while not pipe.eof do
 				var l = pipe.read_line
 				if l == "" then break # last line
-				l = l.substring(0,l.length-1) # strip last oef
 				files.add l
 			end
 			pipe.close
