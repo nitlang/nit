@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# OpenGL graphics rendering library for embedded systems, version 2.0.
+# OpenGL graphics rendering library for embedded systems, version 2.0
+#
+# This is a low-level wrapper, it can be useful for developers already familiar
+# with the C API of OpenGL. Most developers will prefer to use higher level
+# wrappers such as `mnit` and `gammit`.
 #
 # Defines the annotations `glsl_vertex_shader` and `glsl_fragment_shader`
 # applicable on string literals to check shader code using `glslangValidator`.
@@ -31,45 +35,81 @@ module glesv2 is
 	new_annotation glsl_fragment_shader
 end
 
+
 in "C Header" `{
 	#include <GLES2/gl2.h>
 `}
 
-# Opengl ES program to which we attach shaders
+# OpenGL ES program to which we attach shaders
 extern class GLProgram `{GLuint`}
+	# Create a new program
+	#
+	# The newly created instance should be checked using `is_ok`.
 	new `{ return glCreateProgram(); `}
 
+	# Is this a valid program?
 	fun is_ok: Bool `{ return glIsProgram(recv); `}
 
+	# Attach a `shader` to this program
 	fun attach_shader(shader: GLShader) `{ glAttachShader(recv, shader); `}
 
+	# Set the location for the attribute by `name`
 	fun bind_attrib_location(index: Int, name: String) import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
 		glBindAttribLocation(recv, index, c_name);
 	`}
 
+	# Get the location of the attribute by `name`
+	#
+	# Returns `-1` if there is no active attribute named `name`.
 	fun attrib_location(name: String): Int import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
 		return glGetAttribLocation(recv, c_name);
 	`}
 
+	# Get the location of the uniform by `name`
+	#
+	# Returns `-1` if there is no active uniform named `name`.
+	fun uniform_location(name: String): Int import String.to_cstring `{
+		GLchar *c_name = String_to_cstring(name);
+		return glGetUniformLocation(recv, c_name);
+	`}
+
+	# Query information on this program
 	fun query(pname: Int): Int `{
 		int val;
 		glGetProgramiv(recv, pname, &val);
 		return val;
 	`}
 
+	# Try to link this program
+	#
+	# Check result using `in_linked` and `info_log`.
 	fun link `{ glLinkProgram(recv); `}
+
+	# Is this program linked?
 	fun is_linked: Bool do return query(0x8B82) != 0
 
+	# Use this program for the following operations
 	fun use `{ glUseProgram(recv); `}
 
+	# Delete this program
 	fun delete `{ glDeleteProgram(recv); `}
+
+	# Has this program been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
 
+	# Validate whether this program can be executed in the current OpenGL state
+	#
+	# Check results using `is_validated` and `info_log`.
 	fun validate `{ glValidateProgram(recv); `}
+
+	# Boolean result of `validate`, must be called after `validate`
 	fun is_validated: Bool do return query(0x8B83) != 0
 
+	# Retrieve the information log of this program
+	#
+	# Useful with `link` and `validate`
 	fun info_log: String import NativeString.to_s `{
 		int size;
 		glGetProgramiv(recv, GL_INFO_LOG_LENGTH, &size);
@@ -77,37 +117,137 @@ extern class GLProgram `{GLuint`}
 		glGetProgramInfoLog(recv, size, NULL, msg);
 		return NativeString_to_s(msg);
 	`}
+
+	# Number of active uniform in this program
+	#
+	# This should be the number of uniforms declared in all shader, except
+	# unused uniforms which may have been optimized out.
+	fun n_active_uniforms: Int do return query(0x8B86)
+
+	# Length of the longest uniform name in this program, including `\n`
+	fun active_uniform_max_length: Int do return query(0x8B87)
+
+	# Number of active attributes in this program
+	#
+	# This should be the number of uniforms declared in all shader, except
+	# unused uniforms which may have been optimized out.
+	fun n_active_attributes: Int do return query(0x8B89)
+
+	# Length of the longest uniform name in this program, including `\n`
+	fun active_attribute_max_length: Int do return query(0x8B8A)
+
+	# Number of shaders attached to this program
+	fun n_attached_shaders: Int do return query(0x8B85)
+
+	# Name of the active attribute at `index`
+	fun active_attrib_name(index: Int): String
+	do
+		var max_size = active_attribute_max_length
+		return active_attrib_name_native(index, max_size).to_s
+	end
+	private fun active_attrib_name_native(index, max_size: Int): NativeString `{
+		char *name = malloc(max_size);
+		glGetActiveAttrib(recv, index, max_size, NULL, NULL, NULL, name);
+		return name;
+	`}
+
+	# Size of the active attribute at `index`
+	fun active_attrib_size(index: Int): Int `{
+		int size;
+		glGetActiveAttrib(recv, index, 0, NULL, NULL, &size, NULL);
+		return size;
+	`}
+
+	# Type of the active attribute at `index`
+	#
+	# May only be float related data types (single float, vectors and matrix).
+	fun active_attrib_type(index: Int): GLFloatDataType `{
+		GLenum type;
+		glGetActiveAttrib(recv, index, 0, NULL, &type, NULL, NULL);
+		return type;
+	`}
+
+	# Name of the active uniform at `index`
+	fun active_uniform_name(index: Int): String
+	do
+		var max_size = active_attribute_max_length
+		return active_uniform_name_native(index, max_size).to_s
+	end
+	private fun active_uniform_name_native(index, max_size: Int): NativeString `{
+		char *name = malloc(max_size);
+		glGetActiveUniform(recv, index, max_size, NULL, NULL, NULL, name);
+		return name;
+	`}
+
+	# Size of the active uniform at `index`
+	fun active_uniform_size(index: Int): Int `{
+		int size;
+		glGetActiveUniform(recv, index, 0, NULL, NULL, &size, NULL);
+		return size;
+	`}
+
+	# Type of the active uniform at `index`
+	#
+	# May be any data type supported by OpenGL ES 2.0 shaders.
+	fun active_uniform_type(index: Int): GLDataType `{
+		GLenum type;
+		glGetActiveUniform(recv, index, 0, NULL, &type, NULL, NULL);
+		return type;
+	`}
 end
 
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
+	# Set the source of the shader
 	fun source=(code: String) import String.to_cstring, String.length `{
 		GLchar *c_code = String_to_cstring(code);
 		glShaderSource(recv, 1, (const GLchar * const*)&c_code, NULL);
 	`}
-	fun source: nullable String import NativeString.to_s `{
-		int size;
-		glGetShaderiv(recv, GL_SHADER_SOURCE_LENGTH, &size);
-		if (size == 0) return NULL;
+
+	# Source of the shader, if available
+	#
+	# Returns `null` if the source is not available, usually when the shader
+	# was created from a binary file.
+	fun source: nullable String
+	do
+		var size = query(0x8B88)
+		if size == 0 then return null
+		return source_native(size).to_s
+	end
+
+	private fun source_native(size: Int): NativeString `{
 		GLchar *code = malloc(size);
 		glGetShaderSource(recv, size, NULL, code);
-		return NativeString_to_s(code);
+		return code;
 	`}
 
+	# Query information on this shader
 	protected fun query(pname: Int): Int `{
 		int val;
 		glGetShaderiv(recv, pname, &val);
 		return val;
 	`}
 
+	# Try to compile `source` into a binary GPU program
+	#
+	# Check the result using `is_compiled` and `info_log`
 	fun compile `{ glCompileShader(recv); `}
+
+	# Has this shader been compiled?
 	fun is_compiled: Bool do return query(0x8B81) != 0
 
+	# Delete this shader
 	fun delete `{ glDeleteShader(recv); `}
+
+	# Has this shader been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
 
+	# Is this a valid shader?
 	fun is_ok: Bool `{ return glIsShader(recv); `}
 
+	# Retrieve the information log of this shader
+	#
+	# Useful with `link` and `validate`
 	fun info_log: String import NativeString.to_s `{
 		int size;
 		glGetShaderiv(recv, GL_INFO_LOG_LENGTH, &size);
@@ -115,25 +255,35 @@ extern class GLShader `{GLuint`}
 		glGetShaderInfoLog(recv, size, NULL, msg);
 		return NativeString_to_s(msg);
 	`}
-
 end
 
+# An OpenGL ES 2.0 fragment shader
 extern class GLFragmentShader
 	super GLShader
 
+	# Create a new fragment shader
+	#
+	# The newly created instance should be checked using `is_ok`.
 	new `{ return glCreateShader(GL_FRAGMENT_SHADER); `}
 end
 
+# An OpenGL ES 2.0 vertex shader
 extern class GLVertexShader
 	super GLShader
 
+	# Create a new fragment shader
+	#
+	# The newly created instance should be checked using `is_ok`.
 	new `{ return glCreateShader(GL_VERTEX_SHADER); `}
 end
 
 # An array of `Float` associated to a program variable
 class VertexArray
 	var index: Int
+
+	# Number of data per vertex
 	var count: Int
+
 	protected var glfloat_array: GLfloatArray
 
 	init(index, count: Int, array: Array[Float])
@@ -168,6 +318,7 @@ extern class GLfloatArray `{GLfloat *`}
 	`}
 end
 
+# An OpenGL ES 2.0 error code
 extern class GLError `{ GLenum `}
 	fun is_ok: Bool do return is_no_error
 	fun is_no_error: Bool `{ return recv == GL_NO_ERROR; `}
@@ -189,7 +340,10 @@ extern class GLError `{ GLenum `}
 	end
 end
 
+# Clear the color buffer with `r`, `g`, `b`, `a`
 protected fun gl_clear_color(r, g, b, a: Float) `{ glClearColor(r, g, b, a); `}
+
+# Set the viewport
 protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 
 # Direct call to `glClear`, call with a combinaison of `gl_clear_color_buffer`,
@@ -214,20 +368,61 @@ do
 	end
 end
 
+# Query the boolean value at `key`
 private fun gl_get_bool(key: Int): Bool `{
 	GLboolean val;
 	glGetBooleanv(key, &val);
 	return val == GL_TRUE;
 `}
+
+# Query the floating point value at `key`
 private fun gl_get_float(key: Int): Float `{
 	GLfloat val;
 	glGetFloatv(key, &val);
 	return val;
 `}
+
+# Query the integer value at `key`
 private fun gl_get_int(key: Int): Int `{
 	GLint val;
 	glGetIntegerv(key, &val);
 	return val;
 `}
 
+# Does this driver support shader compilation?
+#
+# Should always return `true` in OpenGL ES 2.0 and 3.0.
 fun gl_shader_compiler: Bool do return gl_get_bool(0x8DFA)
+
+# Float related data types of OpenGL ES 2.0 shaders
+#
+# Only data types supported by shader attributes, as seen with
+# `GLProgram::active_attrib_type`.
+extern class GLFloatDataType `{ GLenum `}
+	fun is_float: Bool `{ return recv == GL_FLOAT; `}
+	fun is_float_vec2: Bool `{ return recv == GL_FLOAT_VEC2; `}
+	fun is_float_vec3: Bool `{ return recv == GL_FLOAT_VEC3; `}
+	fun is_float_vec4: Bool `{ return recv == GL_FLOAT_VEC4; `}
+	fun is_float_mat2: Bool `{ return recv == GL_FLOAT_MAT2; `}
+	fun is_float_mat3: Bool `{ return recv == GL_FLOAT_MAT3; `}
+	fun is_float_mat4: Bool `{ return recv == GL_FLOAT_MAT4; `}
+end
+
+# All data types of OpenGL ES 2.0 shaders
+#
+# These types can be used by shader uniforms, as seen with
+# `GLProgram::active_uniform_type`.
+extern class GLDataType
+	super GLFloatDataType
+
+	fun is_int: Bool `{ return recv == GL_INT; `}
+	fun is_int_vec2: Bool `{ return recv == GL_INT_VEC2; `}
+	fun is_int_vec3: Bool `{ return recv == GL_INT_VEC3; `}
+	fun is_int_vec4: Bool `{ return recv == GL_INT_VEC4; `}
+	fun is_bool: Bool `{ return recv == GL_BOOL; `}
+	fun is_bool_vec2: Bool `{ return recv == GL_BOOL_VEC2; `}
+	fun is_bool_vec3: Bool `{ return recv == GL_BOOL_VEC3; `}
+	fun is_bool_vec4: Bool `{ return recv == GL_BOOL_VEC4; `}
+	fun is_sampler_2d: Bool `{ return recv == GL_SAMPLER_2D; `}
+	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
+end
