@@ -196,6 +196,11 @@ abstract class Entity
 		self["location"] = location
 	end
 
+	# Get the location of the entity in the source code.
+	fun location: nullable Location do
+		return self["location"].as(nullable Location)
+	end
+
 	# Put the entity in the graph.
 	#
 	# Called by the loader when it has finished to read the entity.
