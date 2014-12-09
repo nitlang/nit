@@ -52,17 +52,21 @@ define([
 		},
 
 		_create: function() {
-			this.element
-				.attr(this.options.fieldAttrs)
-				.keydown($.proxy(this._doKeyDown, this))
-				.keyup($.proxy(this._doKeyUp, this))
-
+			// set widget options
+			this.element.attr(this.options.fieldAttrs);
+			// event dispatch
+			this._on(this.element, {
+				"keydown": this._doKeyDown,
+				"keyup": this._doKeyUp,
+				"input": this._doInput
+			});
+			// add result table element once
 			this._table = $("<table/>")
 				.attr("id", this.options.tableID)
 				.css(this.options.tableCSS)
 				.css("min-width", this.element.outerWidth());
 			$("body").append(this._table);
-
+			// make table disappear when a click occurs outside
 			$(document).click($.proxy(this.closeTable, this));
 		},
 
@@ -94,9 +98,12 @@ define([
 					this.closeTable();
 					return true;
 				default: // Other keys
-					utils.delayEvent($.proxy(this.search, this));
 					return true;
 			}
+		},
+
+		_doInput: function(event) {
+			utils.delayEvent($.proxy(this.search, this));
 		},
 
 		/* Result lookup */
