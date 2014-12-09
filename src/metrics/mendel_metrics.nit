@@ -103,6 +103,7 @@ private class MendelMetricsPhase
 
 		if csv then
 			var csvh = new CsvDocument
+			csvh.format = new CsvFormat('"', ';', "\n")
 			csvh.header = ["povr", "ovr", "pext", "ext", "pspe", "spe", "prep", "rep", "eq"]
 			for mclass in mclasses do
 				var povr = mclass.is_pure_overrider(vis).object_id

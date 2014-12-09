@@ -122,6 +122,7 @@ class RapidTypeAnalysis
 		var types = typeset.to_a
 		(new CachedAlphaComparator).sort(types)
 		var res = new CsvDocument
+		res.format = new CsvFormat('"', ';', "\n")
 		res.header = ["Type", "Resolution", "Liveness", "Cast-liveness"]
 		for t in types do
 			var reso

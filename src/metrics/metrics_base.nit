@@ -370,6 +370,8 @@ class MetricSet
 	fun to_csv: CsvDocument do
 		var csv = new CsvDocument
 
+		csv.format = new CsvFormat('"', ';', "\n")
+
 		# set csv headers
 		csv.header.add("entry")
 		for metric in metrics do csv.header.add(metric.name)
