@@ -163,44 +163,6 @@ redef class MModule
 		return mclasses
 	end
 
-	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mmodule in in_nesting.greaters do
-			for mclass in mmodule.filter_intro_mclasses(min_visibility) do
-				if mclass.visibility < min_visibility then continue
-				res.add mclass
-			end
-		end
-		return res
-	end
-
-	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mmodule in self.in_nesting.greaters do
-			for mclass in mmodule.filter_redef_mclasses(min_visibility) do
-				if mclass.visibility < min_visibility then continue
-				res.add mclass
-			end
-		end
-		return res
-	end
-
-	fun in_nesting_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		for mmodule in in_nesting.greaters do
-			res.add_all mmodule.intro_mclassdefs(min_visibility)
-		end
-		return res
-	end
-
-	fun in_nesting_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		for mmodule in self.in_nesting.greaters do
-			res.add_all mmodule.redef_mclassdefs(min_visibility)
-		end
-		return res
-	end
-
 	redef fun concern_rank is cached do
 		var max = 0
 		for p in in_importation.direct_greaters do
