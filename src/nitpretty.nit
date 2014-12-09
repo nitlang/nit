@@ -203,16 +203,25 @@ module nitpretty
 import pretty
 
 redef class ToolContext
+	# The working directory used to store temp files.
 	var opt_dir = new OptionString("Working directory (default is '.nitpretty')", "--dir")
 
+	# Output pretty printed code with this filename.
 	var opt_output = new OptionString("Output name (default is pretty.nit)", "-o",
 	   "--output")
 
+	# Show diff between source and pretty printed code.
 	var opt_diff = new OptionBool("Show diff between source and output", "--diff")
 
+	# Show diff between source and pretty printed code using meld.
 	var opt_meld = new OptionBool("Show diff between source and output using meld",
 	   "--meld")
 
+	# Check formatting instead of pretty printing.
+	#
+	# This option create a tempory pretty printed file then check if
+	# the output of the diff command on the source file and the pretty
+	# printed one is empty.
 	var opt_check = new OptionBool("Check format of Nit source files", "--check")
 end
 

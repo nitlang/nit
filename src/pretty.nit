@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Library used to pretty print Nit code.
+#
+# See `nitpretty` tool for more documentation.
 module pretty
 
 import template
@@ -221,6 +224,7 @@ class PrettyPrinterVisitor
 	# Add a space.
 	fun adds do add " "
 
+	# Visit explicit receiver, implicit self will be ignored.
 	fun visit_recv(n_expr: AExpr) do
 		if not n_expr isa AImplicitSelfExpr then
 			visit n_expr
