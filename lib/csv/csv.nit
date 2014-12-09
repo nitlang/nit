@@ -19,14 +19,23 @@ module csv
 class CsvDocument
 	super Streamable
 
+	# The header.
+	#
+	# Contains the name of all fields in this table.
 	var header: Array[String] = new Array[String] is writable
+
+	# The list of the records.
+	#
+	# All records must have the same length than `header`.
 	var records: Array[Array[String]] = new Array[Array[String]]
 
+	# Replace the header by the specified row.
 	fun set_header(values: Object...) do
 		header.clear
 		for value in values do header.add(value.to_s)
 	end
 
+	# Append the specfied record.
 	fun add_record(values: Object...) do
 		assert values.length == header.length else
 			sys.stderr.write "CSV error: Header declares {header.length} columns, record contains {values.length} values.\n"
