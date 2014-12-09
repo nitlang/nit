@@ -102,7 +102,7 @@ private class MendelMetricsPhase
 		end
 
 		if csv then
-			var csvh = new CSVDocument
+			var csvh = new CsvDocument
 			csvh.header = ["povr", "ovr", "pext", "ext", "pspe", "spe", "prep", "rep", "eq"]
 			for mclass in mclasses do
 				var povr = mclass.is_pure_overrider(vis).object_id
@@ -114,7 +114,7 @@ private class MendelMetricsPhase
 				var prep = mclass.is_pure_replacer(vis).object_id
 				var rep = mclass.is_replacer(vis).object_id
 				var eq = mclass.is_equal(vis).object_id
-				csvh.add_line(povr, ovr, pext, ext, pspe, spe, prep, rep, eq)
+				csvh.add_record(povr, ovr, pext, ext, pspe, spe, prep, rep, eq)
 			end
 			csvh.save("{out}/inheritance_behaviour.csv")
 		end

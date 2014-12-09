@@ -15,30 +15,25 @@
 # CSV output facilities
 module csv
 
-# A CSV document representation
-class CSVDocument
+# A CSV document representation.
+class CsvDocument
 	super Streamable
 
 	var header: Array[String] = new Array[String] is writable
-	var lines: Array[Array[String]] = new Array[Array[String]]
+	var records: Array[Array[String]] = new Array[Array[String]]
 
 	fun set_header(values: Object...) do
 		header.clear
-		for value in values do
-			header.add(value.to_s)
-		end
+		for value in values do header.add(value.to_s)
 	end
 
-	fun add_line(values: Object...) do
-		if values.length != header.length then
-			print "CSV error: header declares {header.length} columns, line contains {values.length} values"
-			abort
+	fun add_record(values: Object...) do
+		assert values.length == header.length else
+			sys.stderr.write "CSV error: Header declares {header.length} columns, record contains {values.length} values.\n"
 		end
-		var line = new Array[String]
-		for value in values do
-			line.add(value.to_s)
-		end
-		lines.add(line)
+		var record = new Array[String]
+		for value in values do record.add(value.to_s)
+		records.add(record)
 	end
 
 	private fun write_line_to(line: Collection[String], stream: OStream)
@@ -56,12 +51,11 @@ class CSVDocument
 		stream.write("\n")
 	end
 
-	redef fun write_to(stream)
-	do
+	redef fun write_to(stream) do
 		write_line_to(header, stream)
-		for line in lines do write_line_to(line, stream)
+		for record in records do write_line_to(record, stream)
 	end
 
-	# deprecated alias for `write_to_file`
+	# Deprecated alias for `write_to_file`.
 	fun save(file: String) do write_to_file(file)
 end
