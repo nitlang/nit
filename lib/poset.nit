@@ -254,7 +254,6 @@ class POSet[E: Object]
 	fun show_dot
 	do
 		var f = new OProcess("dot", "-Txlib")
-		f.write "\}\n"
 		write_dot(f)
 		f.close
 		f.wait
