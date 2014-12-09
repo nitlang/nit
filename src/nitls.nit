@@ -17,13 +17,15 @@
 # Simple tool to list Nit source files
 module nitls
 
-intrude import modelbuilder
+import modelbuilder
 import ordered_tree
+import console
 
 class ProjTree
 	super OrderedTree[Object]
 
 	var opt_paths = false
+	var tc: ToolContext
 
 	redef fun display(o)
 	do
@@ -31,17 +33,75 @@ class ProjTree
 			if opt_paths then
 				return o.filepath.as(not null)
 			else
-				return "{o.name} ({o.filepath.to_s})"
+				var d = ""
+				if o.mdoc != null then
+					if tc.opt_no_color.value then
+						d = ": {o.mdoc.content.first}"
+					else
+						d = ": {o.mdoc.content.first.green}"
+					end
+				end
+				if tc.opt_no_color.value then
+					return "{o.name}{d} ({o.filepath.to_s})"
+				else
+					return "{o.name}{d} ({o.filepath.yellow})"
+				end
 			end
 		else if o isa ModulePath then
 			if opt_paths then
 				return o.filepath
 			else
-				return "{o.name} ({o.filepath})"
+				var d = ""
+				var dd = ""
+				if o.mmodule != null and o.mmodule.mdoc != null then
+					if tc.opt_no_color.value then
+						d = ": {o.mmodule.mdoc.content.first}"
+					else
+						d = ": {o.mmodule.mdoc.content.first.green}"
+					end
+				end
+				if o.mmodule != null and not o.mmodule.in_importation.direct_greaters.is_empty then
+					var ms = new Array[String]
+					for m in o.mmodule.in_importation.direct_greaters do
+						if m.mgroup.mproject == o.mmodule.mgroup.mproject then
+							ms.add m.name
+						else
+							ms.add m.full_name
+						end
+					end
+					if tc.opt_no_color.value then
+						dd = " ({ms.join(" ")})"
+					else
+						dd = " ({ms.join(" ")})".light_gray
+					end
+				end
+				if tc.opt_no_color.value then
+					return "{o.name.bold}{d} ({o.filepath.to_s}){dd}"
+				else
+					return "{o.name.bold}{d} ({o.filepath.yellow}){dd}"
+				end
 			end
 		else
 			abort
 		end
+	end
+end
+
+class AlphaEntityComparator
+	super Comparator
+	fun nameof(a: COMPARED): String
+	do
+		if a isa MGroup then
+			return a.name
+		else if a isa ModulePath then
+			return a.name
+		else
+			abort
+		end
+	end
+	redef fun compare(a,b)
+	do
+		return nameof(a) <=> nameof(b)
 	end
 end
 
@@ -58,6 +118,7 @@ var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", 
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths, opt_make)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
+tc.accept_no_arguments = true
 tc.process_options(args)
 
 if opt_make.value then
@@ -72,91 +133,141 @@ if sum > 1 then
 	print tc.tooldescription
 	exit 1
 end
-
+if sum == 0 then opt_project.value = true
 tc.keep_going = opt_keep.value
 
 var model = new Model
 var mb = new ModelBuilder(model, tc)
 
-if opt_depends.value then
-	if opt_recursive.value then
-		print "-M incompatible with -r"
-		exit 1
-	end
-
-	mb.parse(tc.option_context.rest)
-else
-	var files
-	if opt_recursive.value then
-		files = new Array[String]
-		for d in tc.option_context.rest do
-			var pipe = new IProcess("find", d, "-name", "*.nit")
-			while not pipe.eof do
-				var l = pipe.read_line
-				if l == "" then break # last line
-				l = l.substring(0,l.length-1) # strip last oef
-				files.add l
-			end
-			pipe.close
-			pipe.wait
-			if pipe.status != 0 and not opt_keep.value then exit 1
+if tc.option_context.rest.is_empty then tc.option_context.rest.add "."
+var files
+if opt_recursive.value then
+	files = new Array[String]
+	for d in tc.option_context.rest do
+		var pipe = new IProcess("find", d, "-name", "*.nit")
+		while not pipe.eof do
+			var l = pipe.read_line
+			if l == "" then break # last line
+			l = l.substring(0,l.length-1) # strip last oef
+			files.add l
 		end
-	else
-		files = tc.option_context.rest
+		pipe.close
+		pipe.wait
+		if pipe.status != 0 and not opt_keep.value then exit 1
 	end
+else
+	files = tc.option_context.rest
+end
 
+if sum == 0 then
+	# If one of the file is a group, default is `opt_tree` instead of `opt_project`
 	for a in files do
-		var mp = mb.identify_file(a)
-		if mp == null then
-			tc.check_errors
+		var g = mb.get_mgroup(a)
+		if g != null then
+			opt_tree.value = true
+			opt_project.value = false
+			break
 		end
 	end
 end
 
-if sum == 0 then opt_project.value = true
+# Identify all relevant files
+for a in files do
+	var g = mb.get_mgroup(a)
+	var mp = mb.identify_file(a)
+	if g != null and not opt_project.value then
+		mb.visit_group(g)
+	end
+	if g == null and mp == null then
+		# not a group not a module, then look at files in the directory
+		var fs = a.files
+		for f in fs do
+			g = mb.get_mgroup(a/f)
+			if g != null and not opt_project.value then
+				mb.visit_group(g)
+			end
+			mp = mb.identify_file(a/f)
+			#print "{a/f}: {mp or else "?"}"
+		end
+	end
+end
 
+# Load modules to get more informations
+for mp in mb.identified_files do
+	if not opt_paths.value or opt_depends.value then
+		var mm = mb.load_module(mp.filepath)
+		if mm != null and opt_depends.value then
+			mb.build_module_importation(mm)
+		end
+	end
+end
+#tc.check_errors
+
+
+var ot = new ProjTree(tc)
+var sorter = new AlphaEntityComparator
 if opt_tree.value then
-	var ot = new ProjTree
 	ot.opt_paths = opt_paths.value
 	for p in model.mprojects do
 		for g in p.mgroups do
-			ot.add(g.parent, g)
+			var pa = g.parent
+			if g.is_interesting then
+				ot.add(pa, g)
+				pa = g
+			end
 			for mp in g.module_paths do
-				ot.add(g, mp)
+				ot.add(pa, mp)
 			end
 		end
 	end
-	ot.sort_with(new CachedAlphaComparator)
+	ot.sort_with(sorter)
 	ot.write_to(stdout)
 end
 
 if opt_source.value then
-	var list = new Array[String]
+	var list = new Array[ModulePath]
 	for p in model.mprojects do
 		for g in p.mgroups do
 			for mp in g.module_paths do
-				if opt_paths.value then
-					list.add(mp.filepath)
-				else
-					list.add("{g.full_name}/{mp.name} ({mp.filepath})")
-				end
+				list.add mp
 			end
 		end
 	end
-	alpha_comparator.sort(list)
-	for l in list do print l
+	sorter.sort(list)
+	for mp in list do
+		if opt_paths.value then
+			print mp.filepath
+		else
+			print "{mp.mgroup.full_name}/{ot.display(mp)}"
+		end
+	end
 end
 
 if opt_project.value then
-	var list = new Array[String]
+	var list = new Array[MGroup]
 	for p in model.mprojects do
-		var path = p.root.filepath.as(not null)
+		list.add p.root.as(not null)
+	end
+	sorter.sort(list)
+	for g in list do
+		var path = g.filepath.as(not null)
 		if opt_paths.value then
-			list.add(path)
+			print path
 		else
-			list.add("{p.name} ({path})")
+			var d = ""
+			var md = g.mdoc_or_fallback
+			if md != null then
+				if tc.opt_no_color.value then
+					d = ": {md.content.first}"
+				else
+					d = ": {md.content.first.green}"
+				end
+			end
+			if tc.opt_no_color.value then
+				print "{g.name}{d} ({path})"
+			else
+				print "{g.name}{d} ({path.yellow})"
+			end
 		end
 	end
-	alpha_comparator.sort(list)
-	for l in list do print l
 end

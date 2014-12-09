@@ -51,12 +51,11 @@ if opt_eval.value then
 
 	var parent = null
 	if opt_loop.value then
-		var nruntime = modelbuilder.load_module("niti_runtime")
-		if nruntime == null then
+		parent = modelbuilder.get_mmodule_by_name(null, null, "niti_runtime")
+		if parent == null then
 			toolcontext.check_errors
 			abort
 		end
-		parent = nruntime.mmodule
 	end
 
 	modelbuilder.load_rt_module(parent, amodule, "-")
