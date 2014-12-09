@@ -94,6 +94,41 @@ class CsvDocument
 
 	# Deprecated alias for `write_to_file`.
 	fun save(file: String) do write_to_file(file)
+
+	# Load from the specified stream.
+	#
+	# Parameters:
+	#
+	# * `stream`: Input stream.
+	# * `has_header`: Is the first row the header?
+	# * `skip_empty`: Do we skip the empty lines?
+	# For details, see `CsvReader.skip_empty`.
+	fun load_from(stream: IStream, has_header: Bool, skip_empty: Bool) do
+		var reader = new CsvReader.with_format(stream, format)
+		reader.skip_empty = skip_empty
+		if has_header then
+			if reader.is_ok then
+				header = reader.item
+			else
+				header.clear
+			end
+		end
+		records.clear
+		for record in reader do records.add(record)
+	end
+
+	# Load from the specified file.
+	#
+	# Parameters:
+	#
+	# * `path`: Path of the file.
+	# * `has_header`: Is the first row the header?
+	# * `skip_empty`: Do we skip the empty lines?
+	fun load(path: String, has_header: Bool, skip_empty: Bool) do
+		var istream = new IFStream.open(path)
+		load_from(istream, has_header, skip_empty)
+		istream.close
+	end
 end
 
 # Appends CSV rows to a file.
@@ -173,7 +208,176 @@ class CsvWriter
 	end
 end
 
-# The CSV format recommended by RFC 4180.
+# Reads rows from a CSV file.
+#
+# By default, uses the format recommended by RFC 4180 (see `rfc4180`).
+#
+# ~~~nit
+# var example = new StringIStream("""
+# foo,bar\r
+# "Hello, word!",1234.5 + 42\r
+# "Something\r
+# ""else""\", baz\r
+# """)
+# var reader = new CsvReader(example)
+# var table = new Array[Array[String]]
+#
+# for row in reader do table.add row
+# assert table == [
+# 			["foo","bar"],
+# 			["Hello, word!","1234.5 + 42"],
+# 			["Something\r\n\"else\""," baz"]
+# 		]
+# ~~~
+class CsvReader
+	super Iterator[Array[String]]
+
+	# The input stream.
+	var istream: IStream
+
+	# The format to use.
+	#
+	# Defaults to `rfc4180`.
+	var format: CsvFormat = rfc4180 is lazy
+
+	# Do we skip the empty lines?
+	#
+	# Note: Even if this attribute is `false`, the presence of an line ending at
+	# end of the last row does not change the number of returned rows.
+	# This is because the line endings are processed as terminators, not as
+	# separators. Therefore, when there is more than one line ending at the end
+	# of the file, the additional lines are interpreted as empty rows that
+	# are skipped only if `skip_empty` is set to `true`.
+	#
+	# `false` by default.
+	var skip_empty: Bool = false is writable
+
+	# The last read row.
+	private var row: nullable Array[String] = null
+
+	# Did we read something?
+	private var started = false
+
+	# Create a new reader with the specified format.
+	init with_format(istream:IStream, format: CsvFormat) do
+		self.istream = istream
+		self.format = format
+	end
+
+	# Read the first row, if needed.
+	fun prepare do
+		if not started then
+			row = read_row
+			started = true
+		end
+	end
+
+	redef fun next do
+		prepare
+		assert is_ok else
+			sys.stderr.write "Already at the end of the stream.\n"
+		end
+		row = read_row
+	end
+
+	# Return the last read row.
+	redef fun item do
+		prepare
+		return row.as(not null)
+	end
+
+	redef fun is_ok do
+		prepare
+		return row != null
+	end
+
+	# Free some internal ressources and set `is_ok` to `false`.
+	#
+	# Do not close the input stream.
+	redef fun finish do row = null
+
+	# Close the input stream.
+	fun close do istream.close
+
+	private fun read_row: nullable Array[String] do
+		if istream.eof then return null
+		var row = new Array[String]
+		var value = new RopeBuffer
+
+		# Number of unescaped characters since the last delimiter or separator.
+		var unescaped = 0
+
+		# Do we read the start of a row?
+		var got_row = false
+
+		# Do we found a delimited string in the current cell?
+		var got_delimiter = false
+
+		loop
+			var i = istream.read_char
+			var c: Char
+
+			if i < 0 then
+				if got_row then
+					row.add value.to_s
+					return row
+				else
+					return null
+				end
+			end
+			c = i.ascii
+
+			if c == format.delimiter then
+				if got_delimiter and unescaped == 0 then
+					# Got an escaped delimiter.
+					value.add format.delimiter
+				end
+				# Read all bytes until the delimiter.
+				loop
+					i = istream.read_char
+					assert not_eof: i >= 0 else
+						sys.stderr.write "Unexpected end of file before the end of a delimited value.\n"
+					end
+					c = i.ascii
+					if c == format.delimiter then break
+					value.add c
+				end
+				unescaped = 0
+				got_row = true
+				got_delimiter = true
+			else if c == format.separator then
+				# Flush the value to the row.
+				row.add value.to_s
+				value.clear
+				unescaped = 0
+				got_delimiter = false
+			else
+				value.add c
+				unescaped += 1
+				if unescaped >= format.eol.length and
+						value.has_suffix(format.eol) then
+					var value_trimed = value.substring(0,
+							value.length - format.eol.length).to_s
+					if skip_empty and row.is_empty and
+							value_trimed.is_empty and
+							not got_delimiter then
+						# Skip the empty line.
+						value.clear
+						unescaped = 0
+						got_row = false
+					else
+						row.add value_trimed
+						return row
+					end
+				else
+					got_row = true
+				end
+			end
+		end
+	end
+end
+
+# The CSV format recommended by [RFC 4180](https://tools.ietf.org/html/rfc4180).
 #
 # * `delimiter`: `'"'`
 # * `separator`: `','`
