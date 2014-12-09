@@ -12,14 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The model used to populate the Neo4j graph.
-module model
+import tests
+import model
 
-import location
-import linked_text
-import graph
-import class_compound
-import module_compound
-import member
-import inner_class
-import namespace_members
+var graph = new ProjectGraph("foo")
+var file = new FileCompound(graph)
+var ns = new Namespace(graph)
+var member = new Attribute(graph)
+var buffer = new RopeBuffer
+
+file.full_name = "foo.py"
+file.model_id = "_foo_8py"
+file.declare_namespace("namespacefoo", "foo")
+file.put_in_graph
+
+member.name = "bar"
+member.put_in_graph
+
+ns.model_id = "namespacefoo"
+ns.full_name = "foo"
+ns.declare_member(member)
+ns.put_in_graph
+
+graph.add_global_modules
+graph.put_edges
+graph.debug buffer
+print buffer
