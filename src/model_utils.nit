@@ -209,6 +209,23 @@ redef class MModule
 		end
 		return max + 1
 	end
+
+	# Find all mmodules nested in `self` if `self` is the default module of a `MGroup`.
+	fun nested_mmodules: Array[MModule] do
+		var res = new Array[MModule]
+		var mgroup = mgroup
+		if mgroup == null or self != mgroup.default_mmodule then return res
+		for mmodule in mgroup.mmodules do
+			if mmodule == self then continue
+			res.add mmodule
+		end
+		for nested in mgroup.in_nesting.direct_smallers do
+			var default = nested.default_mmodule
+			if default == null then continue
+			res.add default
+		end
+		return res
+	end
 end
 
 redef class MClass
