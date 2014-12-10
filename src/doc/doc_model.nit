@@ -265,7 +265,7 @@ end
 
 redef class MClass
 	redef fun nitdoc_name do return name.html_escape
-	redef fun nitdoc_id do return "{intro_mmodule.mgroup.mproject}__{name.to_cmangle}"
+	redef fun nitdoc_id do return "{intro_mmodule.nitdoc_id}__{name.to_cmangle}"
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc do return intro.mdoc
 
