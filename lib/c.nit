@@ -29,7 +29,7 @@ abstract class CArray[E]
 	# Pointer to the real C array
 	var native_array: NATIVE is noinit
 
-	private init(length: Int) do self._length = length
+	private init(length: Int) is old_style_init do self._length = length
 
 	redef fun [](index)
 	do
@@ -86,8 +86,8 @@ class CIntArray
 	super CArray[Int]
 	redef type NATIVE: NativeCIntArray
 
-	init(size: Int)
-	do
+	# Initialize a new CIntArray of `size` elements.
+	init(size: Int) is old_style_init do
 		native_array = new NativeCIntArray(size)
 		super size
 	end
@@ -123,8 +123,7 @@ class CByteArray
 	redef type NATIVE: NativeCByteArray
 
 	# Allocate a new array of `size`
-	init(size: Int)
-	do
+	init(size: Int) is old_style_init do
 		native_array = new NativeCByteArray(size)
 		super size
 	end
