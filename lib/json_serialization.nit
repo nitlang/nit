@@ -25,8 +25,6 @@ class JsonSerializer
 	# Target writing stream
 	var stream: OStream
 
-	init(stream: OStream) do self.stream = stream
-
 	redef fun serialize(object)
 	do
 		if object == null then
@@ -71,14 +69,14 @@ end
 class JsonDeserializer
 	super Deserializer
 
-	var root: nullable Jsonable
+	private var text: Text
+	var root: nullable Jsonable is noinit
 	var path = new Array[JsonObject]
 	var id_to_object = new HashMap[Int, Object]
 
 	var just_opened_id: nullable Int = null
 
-	init(text: Text)
-	do
+	init do
 		var root = text.parse_json
 		if root isa JsonObject then path.add(root)
 		self.root = root
