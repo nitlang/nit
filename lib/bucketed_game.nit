@@ -129,11 +129,12 @@ end
 
 # Game turn on the client
 class ThinGameTurn[G: ThinGame]
-	var tick: Int = 0 is protected writable
 
+	# Game tick when `self` should act.
+	var tick: Int is protected writable
+
+	# List of game events occured for `self`.
 	var events: List[GameEvent] = new List[GameEvent] is protected writable
-
-	init (t: Int) do tick = t
 end
 
 # Game turn on the full logic
@@ -143,10 +144,10 @@ class GameTurn[G: Game]
 	# Game that `self` belongs to.
 	var game: G
 
-	init (g: G)
-	do
-		super(g.tick)
-		game = g
+	# Create a new game turn for `game`.
+	init (game: G) is old_style_init do
+		super(game.tick)
+		self.game = game
 	end
 
 	# Insert the Bucketable event `e` to be executed at next tick.
