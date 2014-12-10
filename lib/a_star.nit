@@ -116,7 +116,7 @@ class Node
 		loop
 			var frontier_node: nullable N = null
 
-			var bucket_searched: Int = 0
+			var bucket_searched = 0
 
 			# find next valid node in frontier/buckets
 			loop
