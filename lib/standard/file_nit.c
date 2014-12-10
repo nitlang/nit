@@ -65,3 +65,7 @@ int file_stdin_poll_in_(void) {
 	}
 	return res > 0;
 }
+
+FILE* file_int_fdtostream(int fd, char* mode){
+	return fdopen(fd, mode);
+}

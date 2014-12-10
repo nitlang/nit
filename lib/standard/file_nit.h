@@ -24,6 +24,7 @@ extern int string_NativeString_NativeString_file_exists_0(char *f);
 extern void *string_NativeString_NativeString_file_stat_0(char *f);
 extern void *file_NativeFile_NativeFile_file_stat_0(FILE *f);
 extern int string_NativeString_NativeString_file_delete_0(char *f);
+FILE* file_int_fdtostream(int fd, char* mode);
 
 #define file_NativeFile_NativeFile_io_read_2(p, b, l) fread((b), 1, (l), (FILE*)(p))
 #define file_NativeFile_NativeFile_io_write_2(p, b, l) fwrite((b), 1, (l), (FILE*)(p))

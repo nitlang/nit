@@ -27,6 +27,8 @@ in "C Header" `{
 	#include <sys/stat.h>
 	#include <unistd.h>
 	#include <stdio.h>
+	#include <poll.h>
+	#include <errno.h>
 `}
 
 # File Abstract Stream
@@ -102,6 +104,15 @@ class IFStream
 		end
 	end
 
+	init from_fd(fd: Int) do
+		self.path = ""
+		prepare_buffer(1)
+		_file = fd.fd_to_stream(read_only)
+		if _file.address_is_null then
+			last_error = new IOError("Error: Converting fd {fd} to stream failed with '{sys.errno.strerror}'")
+			end_reached = true
+		end
+	end
 end
 
 # File output stream
@@ -170,7 +181,35 @@ class OFStream
 			is_writable = false
 		end
 	end
+
+	# Creates a new File stream from a file descriptor
+	init from_fd(fd: Int) do
+		self.path = ""
+		_file = fd.fd_to_stream(wipe_write)
+		_is_writable = true
+		 if _file.address_is_null then
+			 last_error = new IOError("Error: Opening stream from file descriptor {fd} failed with '{sys.errno.strerror}'")
+			_is_writable = false
+		end
+	end
 end
+
+redef class Int
+	# Creates a file stream from a file descriptor `fd` using the file access `mode`.
+	#
+	# NOTE: The `mode` specified must be compatible with the one used in the file descriptor.
+	private fun fd_to_stream(mode: NativeString): NativeFile is extern "file_int_fdtostream"
+end
+
+# Constant for read-only file streams
+private fun read_only: NativeString do return "r".to_cstring
+
+# Constant for write-only file streams
+#
+# If a stream is opened on a file with this method,
+# it will wipe the previous file if any.
+# Else, it will create the file.
+private fun wipe_write: NativeString do return "w".to_cstring
 
 ###############################################################################
 
@@ -661,6 +700,89 @@ redef class Sys
 
 	# Standard output for errors
 	var stderr: OStream = new Stderr is protected writable
+
+	# Enumeration for buffer mode full (flushes when buffer is full)
+	fun buffer_mode_full: Int is extern "file_Sys_Sys_buffer_mode_full_0"
+	# Enumeration for buffer mode line (flushes when a `\n` is encountered)
+	fun buffer_mode_line: Int is extern "file_Sys_Sys_buffer_mode_line_0"
+	# Enumeration for buffer mode none (flushes ASAP when something is written)
+	fun buffer_mode_none: Int is extern "file_Sys_Sys_buffer_mode_none_0"
+
+	# returns first available stream to read or write to
+	# return null on interruption (possibly a signal)
+	protected fun poll( streams : Sequence[FStream] ) : nullable FStream
+	do
+		var in_fds = new Array[Int]
+		var out_fds = new Array[Int]
+		var fd_to_stream = new HashMap[Int,FStream]
+		for s in streams do
+			var fd = s.fd
+			if s isa IFStream then in_fds.add( fd )
+			if s isa OFStream then out_fds.add( fd )
+
+			fd_to_stream[fd] = s
+		end
+
+		var polled_fd = intern_poll( in_fds, out_fds )
+
+		if polled_fd == null then
+			return null
+		else
+			return fd_to_stream[polled_fd]
+		end
+	end
+
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+		int in_len, out_len, total_len;
+		struct pollfd *c_fds;
+		sigset_t sigmask;
+		int i;
+		int first_polled_fd = -1;
+		int result;
+
+		in_len = Array_of_Int_length( in_fds );
+		out_len = Array_of_Int_length( out_fds );
+		total_len = in_len + out_len;
+		c_fds = malloc( sizeof(struct pollfd) * total_len );
+
+		/* input streams */
+		for ( i=0; i<in_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( in_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLIN;
+		}
+
+		/* output streams */
+		for ( i=0; i<out_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( out_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLOUT;
+		}
+
+		/* poll all fds, unlimited timeout */
+		result = poll( c_fds, total_len, -1 );
+
+		if ( result > 0 ) {
+			/* analyse results */
+			for ( i=0; i<total_len; i++ )
+				if ( c_fds[i].revents & c_fds[i].events || /* awaited event */
+					 c_fds[i].revents & POLLHUP ) /* closed */
+				{
+					first_polled_fd = c_fds[i].fd;
+					break;
+				}
+
+			return Int_as_nullable( first_polled_fd );
+		}
+		else if ( result < 0 )
+			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+
+		return null_Int();
+	`}
 
 end
 
