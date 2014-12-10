@@ -24,6 +24,8 @@ module bucketed_game
 
 # Something acting on the game
 class Turnable[G: Game]
+
+	# Execute `turn` for this instance.
 	fun do_turn(turn: GameTurn[G]) is abstract
 end
 
@@ -39,9 +41,11 @@ class Bucketable[G: Game]
 	fun cancel_act do act_at = null
 end
 
-# Optiomized organization of `Bucketable` instances
+# Optimized organization of `Bucketable` instances
 class Buckets[G: Game]
 	super Turnable[G]
+
+	# Bucket type used in this implementation.
 	type BUCKET: HashSet[Bucketable[G]]
 
 	private var buckets: Array[BUCKET] is noinit
@@ -59,6 +63,7 @@ class Buckets[G: Game]
 		end
 	end
 
+	# Add the Bucketable event `e` at `at_tick`.
 	fun add_at(e: Bucketable[G], at_tick: Int)
 	do
 		var at_key = key_for_tick(at_tick)
@@ -103,6 +108,8 @@ end
 
 # Game related event
 interface GameEvent
+
+	# Apply `self` to `game` logic.
 	fun apply( game : ThinGame ) is abstract
 end
 
@@ -113,6 +120,10 @@ end
 
 # Game logic on the client
 class ThinGame
+
+	# Game tick when `self` should act.
+	#
+	# Default is 0.
 	var tick: Int = 0 is protected writable
 end
 
@@ -128,6 +139,8 @@ end
 # Game turn on the full logic
 class GameTurn[G: Game]
 	super ThinGameTurn[G]
+
+	# Game that `self` belongs to.
 	var game: G
 
 	init (g: G)
@@ -136,16 +149,13 @@ class GameTurn[G: Game]
 		game = g
 	end
 
-	fun act_next(e: Bucketable[G])
-	do
-		game.buckets.add_at(e, tick + 1)
-	end
+	# Insert the Bucketable event `e` to be executed at next tick.
+	fun act_next(e: Bucketable[G]) do game.buckets.add_at(e, tick + 1)
 
-	fun act_in(e: Bucketable[G], t: Int)
-	do
-		game.buckets.add_at(e, tick + t)
-	end
+	# Insert the Bucketable event `e` to be executed at tick `t`.
+	fun act_in(e: Bucketable[G], t: Int) do game.buckets.add_at(e, tick + t)
 
+	# Add and `apply` a game `event`.
 	fun add_event( event : GameEvent )
 	do
 		event.apply( game )
@@ -156,8 +166,11 @@ end
 # Full game logic
 class Game
 	super ThinGame
+
+	# Game type used in this implementation.
 	type G: Game
 
+	# Bucket list in this game.
 	var buckets: Buckets[G] = new Buckets[G]
 
 	# Last turn executed in this game
@@ -167,6 +180,10 @@ class Game
 
 	init do end
 
+	# Execute and return a new GameTurn.
+	#
+	# This method calls `do_pre_turn` before executing the GameTurn
+	# and `do_post_turn` after.
 	fun do_turn: GameTurn[G]
 	do
 		var turn = new GameTurn[G](self)
@@ -182,6 +199,15 @@ class Game
 		return turn
 	end
 
+	# Execute something before executing the current GameTurn.
+	#
+	# Should be redefined by clients to add a pre-turn behavior.
+	# See `Game::do_turn`.
 	fun do_pre_turn(turn: GameTurn[G]) do end
+
+	# Execute something after executing the current GameTurn.
+	#
+	# Should be redefined by clients to add a post-turn behavior.
+	# See `Game::do_turn`.
 	fun do_post_turn(turn: GameTurn[G]) do end
 end
