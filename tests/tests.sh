@@ -29,9 +29,9 @@ unset NIT_DIR
 shopt -s nullglob
 JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 
-paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/`
-paths=($paths)	
-JNI_LIB_PATH=${paths[0]}
+paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
+paths=($paths)
+JNI_LIB_PATH=`dirname ${paths[0]}`
 shopt -u nullglob
 
 outdir="out"
