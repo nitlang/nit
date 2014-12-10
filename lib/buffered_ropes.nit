@@ -68,10 +68,13 @@ end
 private class LeafSubstrings
 	super IndexedIterator[Text]
 
-	var str: String
+	var leaf: Leaf
+	var str: String is noinit
 	var avail = true
 
-	init(l: Leaf) do str = new FlatString.with_infos(l.buf.ns, l.length, 0, l.length - 1)
+	init do
+		str = new FlatString.with_infos(leaf.buf.ns, leaf.length, 0, leaf.length - 1)
+	end
 
 	redef fun is_ok do return avail
 
