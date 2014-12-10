@@ -38,6 +38,7 @@ abstract class CArray[E]
 		return native_array[index]
 	end
 
+	# Set `val` at `index`.
 	fun []=(index: Int, val: E)
 	do
 		assert not destroyed
@@ -45,7 +46,14 @@ abstract class CArray[E]
 		native_array[index] = val
 	end
 
+	# Was this instance destroyed?
+	#
+	# See `CArray::destroy`.
 	var destroyed = false
+
+	# Free used memory used by `native_array`.
+	#
+	# Also set `destroyed` to true.
 	fun destroy
 	do
 		if destroyed then return
@@ -57,9 +65,14 @@ end
 
 # A native C array, as in a pointer to the first element of the array
 extern class NativeCArray `{ void * `}
+
+	# Type of contained elements.
 	type E: nullable Object
 
+	# Get element at `index`.
 	fun [](index: E): E is abstract
+
+	# Set `val` at `index`.
 	fun []=(index: E, val: E) is abstract
 
 	# Return pointer to the address to the second element of this array
@@ -95,7 +108,9 @@ extern class NativeCIntArray `{ int* `}
 	super NativeCArray
 	redef type E: Int
 
+	# Initialize a new NativeCIntArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
+
 	redef fun [](index) `{ return recv[index]; `}
 	redef fun []=(index, val) `{ recv[index] = val; `}
 
