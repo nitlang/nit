@@ -19,9 +19,13 @@ module csv
 class CSVDocument
 	super Streamable
 
+	# Line headers (the first line displayed in CSV).
 	var header: Array[String] = new Array[String] is writable
+
+	# List of lines to append in the CSV.
 	var lines: Array[Array[String]] = new Array[Array[String]]
 
+	# Set header values.
 	fun set_header(values: Object...) do
 		header.clear
 		for value in values do
@@ -29,6 +33,9 @@ class CSVDocument
 		end
 	end
 
+	# Add a line.
+	#
+	# Abort if the line doesn't have the same number of columns than `header.length`.
 	fun add_line(values: Object...) do
 		if values.length != header.length then
 			print "CSV error: header declares {header.length} columns, line contains {values.length} values"
