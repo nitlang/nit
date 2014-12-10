@@ -89,8 +89,8 @@ end
 private class Leaf
 	super RopeString
 
-	private var buf: ManualBuffer
-	private var bns: NativeString is noinit
+	var buf: ManualBuffer
+	var bns: NativeString is noinit
 	redef var length: Int is noinit
 
 	redef fun empty do return new Leaf(new ManualBuffer)
