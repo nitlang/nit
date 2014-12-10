@@ -251,9 +251,13 @@ redef class MModule
 	do
 		var cla = self.model.get_mclasses_by_name(name)
 		if cla == null then
-			if name == "Bool" then
+			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
+				# Bool is injected because it is needed by engine to code the result
+				# of the implicit casts.
 				var c = new MClass(self, name, null, enum_kind, public_visibility)
 				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0))
+				cladef.set_supertypes([object_type])
+				cladef.add_in_hierarchy
 				return c
 			end
 			print("Fatal Error: no primitive class {name}")
