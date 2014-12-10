@@ -134,7 +134,7 @@ class ThinGameTurn[G: ThinGame]
 	var tick: Int is protected writable
 
 	# List of game events occured for `self`.
-	var events: List[GameEvent] = new List[GameEvent] is protected writable
+	var events = new List[GameEvent] is protected writable
 end
 
 # Game turn on the full logic
