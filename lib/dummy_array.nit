@@ -75,8 +75,7 @@ class DummyArray
 		return _values[pos]
 	end
 
-	init(capacity: Int)
-	do
+	init(capacity: Int) is old_style_init do
 		_capacity = capacity
 		_keys = new NativeArray[Int](capacity)
 		_values = new NativeArray[Int](capacity)
@@ -101,8 +100,7 @@ class DummyIterator
 
 	redef fun next do _pos = _pos + 1 end
 
-	init(array: DummyArray)
-	do
+	init(array: DummyArray) is old_style_init do
 		_pos = 0
 		_array = array
 	end
