@@ -243,7 +243,6 @@ redef class Concat
 
 	redef fun +(o) do
 		var s = o.to_s
-		var mlen = length
 		var slen = s.length
 		if s isa FlatString then
 			var r = right
@@ -289,7 +288,6 @@ redef class FlatString
 			return new Concat(sl + self, s.right)
 		else if s isa Leaf then
 			if slen + mlen > maxlen then return new Concat(self, s)
-			var mits = items
 			var mifrom = index_from
 			var sb = s.buf
 			var b = new ManualBuffer
