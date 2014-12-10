@@ -21,12 +21,20 @@ import socket
 
 # Connection to a MPD server
 class MPDConnection
+
+	# Socket connection to server.
 	var socket: nullable Socket = null
 
+	# Server hostname.
 	var host: String
+
+	# Server port.
 	var port: Int
+
+	# Server password.
 	var password: nullable String
 
+	# Last occured error.
 	var error: nullable String = null
 
 	# Connect to the MPD server
@@ -130,6 +138,7 @@ class MPDConnection
 		error = "Cannot get volume"
 	end
 
+	# Set MPD server volume.
 	fun volume=(vol: Int) do write_and_check("setvol {vol}\n")
 
 	# Pause music playing on the MPD server
@@ -179,6 +188,7 @@ class MPDConnection
 		end
 	end
 
+	# Load playlist named `name`.
 	fun load_playlist(name: String)
 	do
 		write_and_check "load \"{name}\""
@@ -187,23 +197,44 @@ end
 
 # MPD song info
 class SongInfo
+	# Song album.
 	var album: String
+
+	# Song artist.
 	var artist: String
+
+	# Song title.
 	var title: String
+
+	# Song total duration.
 	var time: Int
 end
 
 # MPD server status
 class ServerStatus
+
+	# MPD server volume.
 	var volume: nullable Int
 
+	# Playback state (play/stop/pause).
 	var state: String
+
+	# Is MPD server playing?
 	fun playing: Bool do return state == "play"
+
+	# Is MPD server stopped?
 	fun stopped: Bool do return state == "stop"
 
+	# Time elapsed within the current song.
 	var elapsed: nullable Int
+
+	# TODO comment
 	var time_at: nullable Int
+
+	# Total time of the current song.
 	var time_total: nullable Int
+
+	# Get the cursor position on the song duration.
 	fun time_ratio: nullable Float do
 		if time_at == null or time_total == null then return null
 		return time_at.to_f / time_total.to_f
