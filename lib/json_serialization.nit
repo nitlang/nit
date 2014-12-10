@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Handles serialization and deserialization of objects to/from Json.
 module json_serialization
 
 import serialization
 import json::static
 
+# Serializer of Nit objects to Json string.
 class JsonSerializer
 	super Serializer
 
@@ -50,9 +52,10 @@ class JsonSerializer
 		end
 	end
 
-	# Map of references to already serialized objects
+	# Map of references to already serialized objects.
 	var refs_map = new HashMap[Serializable,Int]
 
+	# Get the internal serialized reference for this `object`.
 	private fun ref_id_for(object: Serializable): Int
 	do
 		if refs_map.keys.has(object) then
@@ -65,15 +68,25 @@ class JsonSerializer
 	end
 end
 
-# Deserializer from a Json string
+# Deserializer from a Json string.
 class JsonDeserializer
 	super Deserializer
 
+	# Json text to deserialize from.
 	private var text: Text
+
+	# Root json object parsed from input text.
 	var root: nullable Jsonable is noinit
+
+	# Depth-first path in the serialized object tree.
 	var path = new Array[JsonObject]
+
+	# Map of refenrences to already deserialized objects.
 	var id_to_object = new HashMap[Int, Object]
 
+	# Last encountered object reference id.
+	#
+	# See `id_to_object`.
 	var just_opened_id: nullable Int = null
 
 	init do
@@ -244,6 +257,7 @@ redef class Array[E]
 		end
 	end
 
+	# Instanciate a new `Array` from its serialized representation.
 	init from_deserializer(v: Deserializer)
 	do
 		if v isa JsonDeserializer then
