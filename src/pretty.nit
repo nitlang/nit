@@ -14,6 +14,18 @@
 
 # Library used to pretty print Nit code.
 #
+# Usage:
+#
+#     import parser_util
+#     var tc = new ToolContext
+#     var nmodule = tc.parse_something("class A\nfun   toto :  Int  do   return   5\nend")
+#     var ppv = new PrettyPrinterVisitor
+#     var pmodule = ppv.pretty(nmodule)
+#     assert pmodule.write_to_string == """
+#     class A
+#     \tfun toto: Int do return 5
+#     end"""
+#
 # See `nitpretty` tool for more documentation.
 module pretty
 
