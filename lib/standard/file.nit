@@ -44,6 +44,21 @@ abstract class FStream
 
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
+
+	# Sets the buffering mode for the current FStream
+	#
+	# If the buf_size is <= 0, its value will be 512 by default
+	#
+	# The mode is any of the buffer_mode enumeration in `Sys`:
+	#	- buffer_mode_full
+	#	- buffer_mode_line
+	#	- buffer_mode_none
+	fun set_buffering_mode(buf_size, mode: Int) do
+		if buf_size <= 0 then buf_size = 512
+		if _file.set_buffering_type(buf_size, mode) != 0 then
+			last_error = new IOError("Error while changing buffering type for FStream, returned error {sys.errno.strerror}")
+		end
+	end
 end
 
 # File input stream
@@ -685,6 +700,8 @@ private extern class NativeFile `{ FILE* `}
 	fun fileno: Int `{ return fileno(recv); `}
 	# Flushes the buffer, forcing the write operation
 	fun flush: Int is extern "fflush"
+	# Used to specify how the buffering will be handled for the current stream.
+	fun set_buffering_type(buf_length: Int, mode: Int): Int is extern "file_NativeFile_NativeFile_set_buffering_type_0"
 
 	new io_open_read(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
 	new io_open_write(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"

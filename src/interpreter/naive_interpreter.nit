@@ -781,6 +781,12 @@ redef class AMethPropdef
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
+		else if pname == "buffer_mode_full" then
+			return v.int_instance(sys.buffer_mode_full)
+		else if pname == "buffer_mode_line" then
+			return v.int_instance(sys.buffer_mode_line)
+		else if pname == "buffer_mode_none" then
+			return v.int_instance(sys.buffer_mode_none)
 		else if pname == "sys" then
 			return v.mainobj
 		else if cname == "Int" then
@@ -1031,6 +1037,8 @@ redef class AMethPropdef
 				return null
 			else if pname == "io_close" then
 				return v.int_instance(recvval.as(PrimitiveNativeFile).io_close)
+			else if pname == "set_buffering_type" then
+				return v.int_instance(recvval.as(PrimitiveNativeFile).set_buffering_type(args[1].to_i, args[2].to_i))
 			end
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)

@@ -54,4 +54,8 @@ class PrimitiveNativeFile
 	fun fileno: Int do return file._file.fileno
 
 	fun flush: Int do return file._file.flush
+
+	fun set_buffering_type(size, mode: Int): Int do
+		return file._file.set_buffering_type(size, mode)
+	end
 end
