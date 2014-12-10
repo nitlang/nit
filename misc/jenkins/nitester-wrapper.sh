@@ -24,14 +24,11 @@ shift
 set +x
 
 local_repo=nit/
-remote_repo=privat
-
 tools_dir=misc/jenkins/
 
 cd $local_repo
 git clean -fdxq .
-
-git fetch $remote_repo
+git fetch origin
 git checkout $hash
 
 # Make nitg and tools
