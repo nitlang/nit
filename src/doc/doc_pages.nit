@@ -905,7 +905,7 @@ class NitdocModule
 
 		# Graph
 		var mmodules = new HashSet[MModule]
-		mmodules.add_all mmodule.in_nesting.direct_greaters
+		mmodules.add_all mmodule.nested_mmodules
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mmodule
