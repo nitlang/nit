@@ -1,1 +1,3 @@
 module_1.nit -d $WRITE
+base_attr_nullable.nit -d $WRITE
+--private base_attr_nullable.nit -d $WRITE
