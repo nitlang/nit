@@ -4,8 +4,8 @@ set -x
 # Check c_src is up-to-date
 make -C ../c_src
 
-# Compile nitg
-time ../c_src/nitg nitg.nit
+# Compile nitc
+time ../c_src/nitg nitc.nit
 
 # delete old c_src
 rm -rf ../c_src
