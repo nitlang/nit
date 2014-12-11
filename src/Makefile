@@ -16,33 +16,33 @@
 
 NITCOPT=
 OLDNITCOPT=
-OBJS=nitg nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
+OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
 all: $(BINS)
 
-nitg_0: ../c_src/nitg parser/parser.nit
+nitc_0: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
-	@echo '* Compile nitg_0 from NIT source files                        *'
+	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${OLDNITCOPT} -o nitg_0 -v nitg.nit
+	../c_src/nitg ${OLDNITCOPT} -o nitc_0 -v nitc.nit
 
-$(BINS): nitg_0 parser/parser.nit
+$(BINS): nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	./nitg_0 ${NITCOPT} -v --dir ../bin $(SRCS)
+	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 
-$(OBJS): nitg_0 parser/parser.nit
+$(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
-	./nitg_0 ${NITCOPT} -v $@.nit
+	./nitc_0 ${NITCOPT} -v $@.nit
 
 ../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
-	@echo '* Compile nitg from C source files                            *'
+	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
 	cd ../c_src; make
 
@@ -53,5 +53,5 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* version.nit nitg_0 2> /dev/null || true
+	rm -rf -- .nit_compile* version.nit nitc_0 2> /dev/null || true
 	cd parser; make clean
