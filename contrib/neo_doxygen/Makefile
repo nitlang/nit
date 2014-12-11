@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITG=../../bin/nitg
+NITG=../../bin/nitc
 NITG_FLAGS=--dir bin
 NEO4J_DIR=/var/lib/neo4j
 OLD_PWD=${PWD}

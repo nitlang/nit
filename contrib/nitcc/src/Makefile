@@ -1,4 +1,4 @@
-NITC=../../../bin/nitg
+NITC=../../../bin/nitc
 
 all: nitcc calc minilang
 

@@ -2,11 +2,11 @@ all: images icons linux
 
 linux:
 	mkdir -p bin
-	../../../../bin/nitg -o bin/s2pn src/s2pn_linux.nit
+	../../../../bin/nitc -o bin/s2pn src/s2pn_linux.nit
 
 android:
 	mkdir -p bin
-	../../../../bin/nitg -o bin/s2pn.apk src/s2pn_android.nit
+	../../../../bin/nitc -o bin/s2pn.apk src/s2pn_android.nit
 
 images:
 	mkdir -p assets/images

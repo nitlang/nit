@@ -2,7 +2,7 @@ all: bins tests
 
 bins:
 	mkdir -p bin
-	../../bin/nitg --dir bin src/svg_to_png_and_nit.nit src/svg_to_icons.nit
+	../../bin/nitc --dir bin src/svg_to_png_and_nit.nit src/svg_to_icons.nit
 
 tests: test-dino test-app
 

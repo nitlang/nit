@@ -2,11 +2,11 @@ default: linux
 
 linux:
 	mkdir -p bin
-	../../bin/nitg -o bin/moles src/moles_linux.nit
+	../../bin/nitc -o bin/moles src/moles_linux.nit
 
 android: android-icons
 	mkdir -p bin
-	../../bin/nitg -o bin/moles.apk src/moles_android.nit
+	../../bin/nitc -o bin/moles.apk src/moles_android.nit
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	$(MAKE) -C ../../contrib/inkscape_tools
