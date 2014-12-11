@@ -578,6 +578,17 @@ redef class MPropDef
 	end
 end
 
+redef class MAttributeDef
+	redef fun tpl_signature do
+		var tpl = new Template
+		if static_mtype != null then
+			tpl.add ": "
+			tpl.add static_mtype.tpl_signature
+		end
+		return tpl
+	end
+end
+
 redef class MMethod
 	redef fun tpl_signature do
 		var tpl = new Template
