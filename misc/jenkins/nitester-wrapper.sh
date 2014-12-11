@@ -29,7 +29,10 @@ tools_dir=misc/jenkins/
 cd $local_repo
 git clean -fdxq .
 git fetch origin
-git checkout $hash
+
+if ! git checkout $hash; then
+	exit 1
+fi
 
 # Make nitg and tools
 $tools_dir/unitrun.sh "run-make-0initial_make" make
