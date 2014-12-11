@@ -54,7 +54,7 @@ function bench_array()
 		echo "*** Benching Array.to_s performance ***"
 	fi
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_ropes.out arr_tos_ropes ropes
 	if $verbose; then
@@ -67,7 +67,7 @@ function bench_array()
 		bench_command $i ropes$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_buf_ropes.out arr_tos_buf_ropes buffered_ropes
 	if $verbose; then
@@ -80,7 +80,7 @@ function bench_array()
 		bench_command $i buf_ropes$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_flatstr.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_flat.out arr_tos_flat flatstring
 	if $verbose; then
@@ -93,7 +93,7 @@ function bench_array()
 		bench_command $i flatstring$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_buffer.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_buffer.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_buf.out arr_tos_buf flatbuffer
 	if $verbose; then
@@ -106,7 +106,7 @@ function bench_array()
 		bench_command $i flatbuffer$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_manual.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_manual.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_man.out arr_tos_man memmove
 	if $verbose; then
@@ -119,7 +119,7 @@ function bench_array()
 		bench_command $i memmove$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_man_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_man_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_man_buf.out arr_tos_man_buf flatbuf_with_capacity
 	if $verbose; then
@@ -132,7 +132,7 @@ function bench_array()
 		bench_command $i flatbuf_with_capacity$i ./array_tos --loops $2 --strlen $i --ccts $1 "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_rope_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/array_tos.nit -m ./strings/array_to_s_vars/array_to_s_rope_buf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res arr_tos_rope_buf.out arr_tos_rope_buf ropebuf
 	if $verbose; then
@@ -150,8 +150,8 @@ function bench_array()
 
 function bench_concat()
 {
-	../bin/nitg --global ./strings/chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	../bin/nitg --global ./strings/utf_chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/utf_chain_concat.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	if $verbose; then
 		echo "*** Benching concat performance ***"
@@ -190,7 +190,7 @@ function bench_concat()
 		bench_command $i flatstr_utf8_noindex$i ./utf_chain_concat -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/chain_concat.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/chain_concat.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res concat_ropes.out concat_ropes ropes
 	if $verbose; then
@@ -203,7 +203,7 @@ function bench_concat()
 		bench_command $i ropes$i ./chain_concat -m flatstr --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/chain_concat.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/chain_concat.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res concat_buf_ropes.out concat_buf_ropes buffered_ropes
 	if $verbose; then
@@ -216,7 +216,7 @@ function bench_concat()
 		bench_command $i buf_ropes$i ./chain_concat -m flatstr --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/chain_cct_ropebuf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/chain_cct_ropebuf.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res cct_buf_ropes.out cct_buf_ropes cctbuf_ropes
 	if $verbose; then
@@ -238,8 +238,8 @@ function bench_iteration()
 		echo "*** Benching iteration performance ***"
 	fi
 
-	../bin/nitg --global ./strings/iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	../bin/nitg --global ./strings/utf_iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/utf_iteration_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res iter_flat_iter.out iter_flat_iter flatstring_iter
 	if $verbose; then
@@ -307,7 +307,7 @@ function bench_iteration()
 		bench_command $i flatstr_index_utf8_noindex$i ./utf_iteration_bench -m flatstr_utf8_noindex --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/iteration_bench.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/iteration_bench.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res iter_ropes_iter.out iter_ropes_iter ropes_iter
 	if $verbose; then
@@ -331,7 +331,7 @@ function bench_iteration()
 		bench_command $i ropes_index$i ./iteration_bench -m flatstr --iter-mode index --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/iteration_bench.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/iteration_bench.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res iter_buf_ropes_iter.out iter_buf_ropes_iter buf_ropes_iter
 	if $verbose; then
@@ -364,8 +364,8 @@ function bench_substr()
 		echo "*** Benching substring performance ***"
 	fi
 
-	../bin/nitg --global ./strings/substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	../bin/nitg --global ./strings/utf_substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/utf_substr_bench.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res substr_flat.out substr_flat flatstring
 	if $verbose; then
@@ -400,7 +400,7 @@ function bench_substr()
 		bench_command $i flatstring_utf8_noindex$i ./utf_substr_bench -m flatstr_utf8_noindex --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/substr_bench.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/substr_bench.nit -m ../lib/standard/ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res substr_ropes.out substr_ropes ropes
 	if $verbose; then
@@ -413,7 +413,7 @@ function bench_substr()
 		bench_command $i ropes$i ./substr_bench -m flatstr --loops $2 --strlen $3 --ccts $i "NIT_GC_CHOOSER=large"
 	done
 
-	../bin/nitg --global ./strings/substr_bench.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	../bin/nitc --global ./strings/substr_bench.nit -m ../lib/standard/ropes.nit -m ../lib/buffered_ropes.nit --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 
 	prepare_res substr_buf_ropes.out substr_buf_ropes buf_ropes
 	if $verbose; then

@@ -44,8 +44,8 @@ function run_compiler()
 	local title=$1
 	shift
 	if test -n "$fast"; then
-		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg-g" "nitg --global ../src/test_parser.nit" "./nitg.$title.bin" -v --global --no-cc ../src/test_parser.nit
+		run_command "$@" ../src/nitc.nit -o "nitc.$title.bin"
+		bench_command "nitc-g" "nitc --global ../src/test_parser.nit" "./nitc.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/location.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/location.nit
 		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
@@ -53,9 +53,9 @@ function run_compiler()
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
-		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg-g" "nitg --global --no-cc ../src/nitls.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitls.nit
-		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
+		run_command "$@" ../src/nitc.nit -o "nitc.$title.bin"
+		bench_command "nitc-g" "nitc --global --no-cc ../src/nitls.nit" "./nitc.$title.bin" -v --global --no-cc ../src/nitls.nit
+		bench_command "nitc-s" "nitc --separate ../src/nitc.nit" "./nitc.$title.bin" -v --no-cc --separate ../src/nitc.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/nitls.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/nitls.nit
 		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
@@ -116,8 +116,8 @@ fi
 
 ## COMPILE ENGINES
 
-# get the bootstrapped nitg
-cp ../bin/nitg .
+# get the bootstrapped nitc
+cp ../bin/nitc .
 
 ## EFFECTIVE BENCHS ##
 
@@ -125,172 +125,172 @@ function bench_steps()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg.dat" "nitg-g" "Various steps of nitg --global"
-	bench_command "parse" "" ./nitg --global --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ./nitg --global --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ./nitg --global --no-cc ../src/nitg.nit
-	bench_command "full" "" ./nitg --global ../src/nitg.nit -o "nitg_nitg.bin"
+	prepare_res "$name-nitc.dat" "nitc-g" "Various steps of nitc --global"
+	bench_command "parse" "" ./nitc --global --only-parse ../src/nitc.nit
+	bench_command "metamodel" "" ./nitc --global --only-metamodel ../src/nitc.nit
+	bench_command "generate c" "" ./nitc --global --no-cc ../src/nitc.nit
+	bench_command "full" "" ./nitc --global ../src/nitc.nit -o "nitc_nitc.bin"
 
-	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
-	bench_command "parse" "" ./nitg --separate --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ./nitg --separate --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ./nitg --separate --no-cc ../src/nitg.nit
-	bench_command "full" "" ./nitg --separate ../src/nitg.nit -o "nitg_nitg-e.bin"
+	prepare_res "$name-nitc-s.dat" "nitc-s" "Various steps of nitc --separate"
+	bench_command "parse" "" ./nitc --separate --only-parse ../src/nitc.nit
+	bench_command "metamodel" "" ./nitc --separate --only-metamodel ../src/nitc.nit
+	bench_command "generate c" "" ./nitc --separate --no-cc ../src/nitc.nit
+	bench_command "full" "" ./nitc --separate ../src/nitc.nit -o "nitc_nitc-e.bin"
 
-	prepare_res "$name-nitg-e.dat" "nitg-e" "Various steps of nitg --erasure"
-	bench_command "parse" "" ./nitg --erasure --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ./nitg --erasure --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ./nitg --erasure --no-cc ../src/nitg.nit
-	bench_command "full" "" ./nitg --erasure ../src/nitg.nit -o "nitg_nitg-e.bin"
+	prepare_res "$name-nitc-e.dat" "nitc-e" "Various steps of nitc --erasure"
+	bench_command "parse" "" ./nitc --erasure --only-parse ../src/nitc.nit
+	bench_command "metamodel" "" ./nitc --erasure --only-metamodel ../src/nitc.nit
+	bench_command "generate c" "" ./nitc --erasure --no-cc ../src/nitc.nit
+	bench_command "full" "" ./nitc --erasure ../src/nitc.nit -o "nitc_nitc-e.bin"
 
 	plot "$name.gnu"
 }
 bench_steps
 
 # $#: options to compare
-function bench_nitg-g_options()
+function bench_nitc-g_options()
 {
 	tag=$1
 	shift
 	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitg-g without options"
-	run_compiler "nitg-g" ./nitg --global
+	prepare_res "$name.dat" "no options" "nitc-g without options"
+	run_compiler "nitc-g" ./nitc --global
 
 	if test "$1" = NOALL; then
 		shift
 	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitg-g with all options $@"
-		run_compiler "nitg-g-$tag" ./nitg --global $@
+		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
+		run_compiler "nitc-g-$tag" ./nitc --global $@
 	fi
 
 	for opt in "$@"; do
 		ot=${opt// /+}
-		prepare_res "$name$ot.dat" "$opt" "nitg-g with option $opt"
-		run_compiler "nitg-g$ot" ./nitg --global $opt
+		prepare_res "$name$ot.dat" "$opt" "nitc-g with option $opt"
+		run_compiler "nitc-g$ot" ./nitc --global $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitg-g_options "slower" --hardening --no-shortcut-range
-bench_nitg-g_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
+bench_nitc-g_options "slower" --hardening --no-shortcut-range
+bench_nitc-g_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
-function bench_nitg-s_options()
+function bench_nitc-s_options()
 {
 	tag=$1
 	shift
 	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitg-s without options"
-	run_compiler "nitg-s" ./nitg --separate
+	prepare_res "$name.dat" "no options" "nitc-s without options"
+	run_compiler "nitc-s" ./nitc --separate
 
 	if test "$1" = NOALL; then
 		shift
 	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitg-s with all options $@"
-		run_compiler "nitg-s-$tag" ./nitg --separate $@
+		prepare_res "$name-all.dat" "all" "nitc-s with all options $@"
+		run_compiler "nitc-s-$tag" ./nitc --separate $@
 	fi
 
 	for opt in "$@"; do
 		ot=${opt// /+}
-		prepare_res "$name-$ot.dat" "$opt" "nitg-s with option $opt"
-		run_compiler "nitg-s$ot" ./nitg --separate $opt
+		prepare_res "$name-$ot.dat" "$opt" "nitc-s with option $opt"
+		run_compiler "nitc-s$ot" ./nitc --separate $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitg-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn"
-bench_nitg-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
-bench_nitg-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
+bench_nitc-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn"
+bench_nitc-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
+bench_nitc-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
 
-function bench_nitg-e_options()
+function bench_nitc-e_options()
 {
 	tag=$1
 	shift
 	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitg-e without options"
-	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name.dat" "no options" "nitc-e without options"
+	run_compiler "nitc-e" ./nitc --erasure
 
 	if test "$1" = NOALL; then
 		shift
 	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitg-e with all options $@"
-		run_compiler "nitg-e-$tag" ./nitg --erasure $@
+		prepare_res "$name-all.dat" "all" "nitc-e with all options $@"
+		run_compiler "nitc-e-$tag" ./nitc --erasure $@
 	fi
 
 	for opt in "$@"; do
 		ot=${opt// /+}
-		prepare_res "$name$ot.dat" "$opt" "nitg-e with option $opt"
-		run_compiler "nitg-e$ot" ./nitg --erasure $opt
+		prepare_res "$name$ot.dat" "$opt" "nitc-e with option $opt"
+		run_compiler "nitc-e$ot" ./nitc --erasure $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitg-e_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
-bench_nitg-e_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
-bench_nitg-e_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
+bench_nitc-e_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
+bench_nitc-e_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitc-e_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
 function bench_engines()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
-	run_compiler "nitg-s" ./nitg --separate
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
-	run_compiler "nitg-e" ./nitg --erasure
-	prepare_res "$name-nitg-sg.dat" "nitg-sg" "nitg with --separate --semi-global"
-	run_compiler "nitg-sg" ./nitg --separate --semi-global
-	prepare_res "$name-nitg-eg.dat" "nitg-eg" "nitg with --erasure --semi-global"
-	run_compiler "nitg-eg" ./nitg --erasure --semi-global
-	prepare_res "$name-nitg-egt.dat" "nitg-egt" "nitg with --erasure --semi-global --rta"
-	run_compiler "nitg-egt" ./nitg --erasure --semi-global --rta
-	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
-	run_compiler "nitg-g" ./nitg --global
+	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
+	run_compiler "nitc-s" ./nitc --separate
+	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc with --erasure"
+	run_compiler "nitc-e" ./nitc --erasure
+	prepare_res "$name-nitc-sg.dat" "nitc-sg" "nitc with --separate --semi-global"
+	run_compiler "nitc-sg" ./nitc --separate --semi-global
+	prepare_res "$name-nitc-eg.dat" "nitc-eg" "nitc with --erasure --semi-global"
+	run_compiler "nitc-eg" ./nitc --erasure --semi-global
+	prepare_res "$name-nitc-egt.dat" "nitc-egt" "nitc with --erasure --semi-global --rta"
+	run_compiler "nitc-egt" ./nitc --erasure --semi-global --rta
+	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
+	run_compiler "nitc-g" ./nitc --global
 	plot "$name.gnu"
 }
 bench_engines
 
-function bench_nitg-e_gc()
+function bench_nitc-e_gc()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
-	run_compiler "nitg-e" ./nitg --erasure
-	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
-	NIT_GC_OPTION="malloc" run_compiler "nitg-e-malloc" ./nitg --erasure
-	prepare_res "$name-nitg-e-large.dat" "nitg-e-large" "nitg with --erasure and large"
-	NIT_GC_OPTION="large" run_compiler "nitg-e-large" ./nitg --erasure
+	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc with --erasure"
+	run_compiler "nitc-e" ./nitc --erasure
+	prepare_res "$name-nitc-e-malloc.dat" "nitc-e-malloc" "nitc with --erasure and malloc"
+	NIT_GC_OPTION="malloc" run_compiler "nitc-e-malloc" ./nitc --erasure
+	prepare_res "$name-nitc-e-large.dat" "nitc-e-large" "nitc with --erasure and large"
+	NIT_GC_OPTION="large" run_compiler "nitc-e-large" ./nitc --erasure
 	plot "$name.gnu"
 }
-bench_nitg-e_gc
+bench_nitc-e_gc
 
-function bench_cc_nitg-e()
+function bench_cc_nitc-e()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
 	for o in "gcc0:CC=\"ccache gcc\" CFLAGS=-O0" "cl0:CC=\"ccache clang\" CFLAGS=-O0" "gccs:CC=\"ccache gcc\" CFLAGS=-Os" "cls:CC=\"ccache clang\" CFLAGS=-Os" "gcc2:CC=\"ccache gcc\" CFLAGS=-O2" "cl2:CC=\"ccache clang\" CFLAGS=-O2" "gcc3:CC=\"ccache gcc\" CFLAGS=-O3"  "cl3:CC=\"ccache clang\" CFLAGS=-O3"; do
 		f=`echo "$o" | cut -f1 -d:`
 		o=`echo "$o" | cut -f2 -d:`
-		prepare_res "$name-nitg-e-$f.dat" "nitg-e-$f" "nitg with --erasure --make-flags $o"
-		run_compiler "nitg-e-$f" ./nitg --erasure --make-flags "$o"
+		prepare_res "$name-nitc-e-$f.dat" "nitc-e-$f" "nitc with --erasure --make-flags $o"
+		run_compiler "nitc-e-$f" ./nitc --erasure --make-flags "$o"
 	done
 	plot "$name.gnu"
 }
-bench_cc_nitg-e
+bench_cc_nitc-e
 
 function bench_policy()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
-	run_compiler "nitg-s" ./nitg --separate
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
-	run_compiler "nitg-e" ./nitg --erasure
-	prepare_res "$name-nitg-su.dat" "nitg-su" "nitg with --separate --no-check-covariance"
-	run_compiler "nitg-su" ./nitg --separate --no-check-covariance
-	prepare_res "$name-nitg-eu.dat" "nitg-eu" "nitg with --erasure --no-check-covariance --no-check-erasure-cast"
-	run_compiler "nitg-eu" ./nitg --erasure --no-check-covariance --no-check-erasure-cast
+	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
+	run_compiler "nitc-s" ./nitc --separate
+	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc with --erasure"
+	run_compiler "nitc-e" ./nitc --erasure
+	prepare_res "$name-nitc-su.dat" "nitc-su" "nitc with --separate --no-check-covariance"
+	run_compiler "nitc-su" ./nitc --separate --no-check-covariance
+	prepare_res "$name-nitc-eu.dat" "nitc-eu" "nitc with --erasure --no-check-covariance --no-check-erasure-cast"
+	run_compiler "nitc-eu" ./nitc --erasure --no-check-covariance --no-check-erasure-cast
 	plot "$name.gnu"
 }
 bench_policy
@@ -300,13 +300,13 @@ function bench_nullables()
 	name="$FUNCNAME"
 	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc no options"
-	run_compiler "nitc" ./nitg --separate
+	run_compiler "nitc" ./nitc --separate
 	prepare_res "$name-nitc-ni.dat" "nitc-ni" "nitc --no-check-attr-isset"
-	run_compiler "nitc" ./nitg --separate --no-check-attr-isset
+	run_compiler "nitc" ./nitc --separate --no-check-attr-isset
 	prepare_res "$name-nitc-nu.dat" "nitc-nu" "nitc --no-union-attribute"
-	run_compiler "nitc" ./nitg --separate --no-union-attribute
+	run_compiler "nitc" ./nitc --separate --no-union-attribute
 	prepare_res "$name-nitc-nu-ni.dat" "nitc-nu-ni" "nitc --no-union-attribute --no-check-attr-isset"
-	run_compiler "nitc" ./nitg --separate --no-union-attribute --no-check-attr-isset
+	run_compiler "nitc" ./nitc --separate --no-union-attribute --no-check-attr-isset
 	plot "$name.gnu"
 }
 bench_nullables
@@ -315,17 +315,17 @@ function bench_compilation_time
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg --global"
-	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
+	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc --global"
+	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitc.nit; do
+		bench_command `basename "$i" .nit` "" ./nitc --global "$i" --no-cc
 	done
-	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg --separate"
-	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg --separate "$i" --no-cc
+	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc --separate"
+	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitc.nit; do
+		bench_command `basename "$i" .nit` "" ./nitc --separate "$i" --no-cc
 	done
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --erasure"
-	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg --erasure "$i" --no-cc
+	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc --erasure"
+	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitc.nit; do
+		bench_command `basename "$i" .nit` "" ./nitc --erasure "$i" --no-cc
 	done
 	plot "$name.gnu"
 }
