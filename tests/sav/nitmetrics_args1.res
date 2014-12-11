@@ -440,6 +440,24 @@ Distribution of direct smallers
   intern: 1 (1.81%)
   Object: 1 (1.81%)
   Bool: 1 (1.81%)
+--- Metrics of covariance detection ---
+-- Generic classes --
+ list:
+  non generic: 7 (100.00%)
+  total classes: 7
+  total formal parameters: 0
+-- Including `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
+-- Excluding `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
 --- Metrics of refinement usage ---
 Number of modules: 1
 
