@@ -46,6 +46,7 @@ in "C Header" `{
 	#include <string.h>
 	#include <stdlib.h>
 	#include <pthread.h>
+	#include <poll.h>
 
 	#define MAX_DICTIONARY_QUEUE_SIZE 200
 	#define MAX_MESSAGE_QUEUE_SIZE 10
@@ -360,7 +361,7 @@ in "C Header" `{
 	}
 
 	/* Hack in order to avoid the problem with file. */
-	int poll(void *fds, int nfds, int timeout) { return 0; }
+	int poll(struct pollfd* fds, nfds_t nfds, int timeout) { return 0; }
 `}
 
 # Nit class representing a Pepper C API PP_Var typed as a Dictionary.
