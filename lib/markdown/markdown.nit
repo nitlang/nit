@@ -31,7 +31,7 @@ import template
 class MarkdownProcessor
 
 	# `MarkdownEmitter` used for ouput.
-	var emitter: MarkdownEmitter is noinit
+	var emitter: MarkdownEmitter is noinit, protected writable
 
 	# Work in extended mode (default).
 	#
