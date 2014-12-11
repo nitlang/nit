@@ -1084,22 +1084,17 @@ class NitdocClass
 
 	# Property list to display in sidebar
 	fun tpl_sidebar_properties do
-		var kind_map = sort_by_kind(mclass_inherited_mprops)
+		var by_kind = new PropertiesByKind.with_elements(mclass_inherited_mprops)
 		var summary = new TplList.with_classes(["list-unstyled"])
 
-		tpl_sidebar_list("Virtual types", kind_map["type"].to_a, summary)
-		tpl_sidebar_list("Constructors", kind_map["init"].to_a, summary)
-		tpl_sidebar_list("Methods", kind_map["fun"].to_a, summary)
-		if not kind_map["inner"].is_empty then
-			tpl_sidebar_list("Inner classes", kind_map["inner"].to_a, summary)
-		end
+		by_kind.sort_groups(name_sorter)
+		for g in by_kind.groups do tpl_sidebar_list(g, summary)
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
 	end
 
-	private fun tpl_sidebar_list(name: String, mprops: Array[MProperty], summary: TplList) do
+	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: TplList) do
 		if mprops.is_empty then return
-		name_sorter.sort(mprops)
-		var entry = new TplListItem.with_content(name)
+		var entry = new TplListItem.with_content(mprops.title)
 		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
 		for mprop in mprops do
 			list.add_li tpl_sidebar_item(mprop)
@@ -1266,34 +1261,21 @@ class NitdocClass
 
 				# properties
 				var mprops = mmodules2mprops[mentity]
-				var kind_map = sort_by_kind(mprops)
+				var by_kind = new PropertiesByKind.with_elements(mprops)
 
-				# virtual types
-				for article in tpl_mproperty_articles(kind_map, "type") do
-					section.add_child article
-				end
-				# constructors
-				for article in tpl_mproperty_articles(kind_map, "init") do
-					section.add_child article
-				end
-				# methods
-				for article in tpl_mproperty_articles(kind_map, "fun") do
-					section.add_child article
-				end
-				# inner classes
-				for article in tpl_mproperty_articles(kind_map, "inner") do
-					section.add_child article
+				for g in by_kind.groups do
+					for article in tpl_mproperty_articles(g) do
+						section.add_child article
+					end
 				end
 				parent.add_child section
 			end
 		end
 	end
 
-	private fun tpl_mproperty_articles(kind_map: Map[String, Set[MProperty]],
-		kind_name: String): Sequence[TplArticle] do
+	private fun tpl_mproperty_articles(elts: Collection[MProperty]):
+			Sequence[TplArticle] do
 		var articles = new List[TplArticle]
-		var elts = kind_map[kind_name].to_a
-		name_sorter.sort(elts)
 		for elt in elts do
 			var local_defs = mprops2mdefs[elt]
 			# var all_defs = elt.mpropdefs
@@ -1342,28 +1324,6 @@ class NitdocClass
 			var mmodule = mpropdefs.first.mclassdef.mmodule
 			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MProperty]
 			map[mmodule].add mprop
-		end
-		return map
-	end
-
-	private fun sort_by_kind(mprops: Collection[MProperty]): Map[String, Set[MProperty]] do
-		var map = new HashMap[String, Set[MProperty]]
-		map["type"] = new HashSet[MProperty]
-		map["init"] = new HashSet[MProperty]
-		map["fun"] = new HashSet[MProperty]
-		map["inner"] = new HashSet[MProperty]
-		for mprop in mprops do
-			if mprop isa MVirtualTypeProp then
-				map["type"].add mprop
-			else if mprop isa MMethod then
-				if mprop.is_init then
-					map["init"].add mprop
-				else
-					map["fun"].add mprop
-				end
-			else if mprop isa MInnerClass then
-				map["inner"].add mprop
-			end
 		end
 		return map
 	end
@@ -1438,6 +1398,68 @@ class NitdocClass
 		op.append("\}\n")
 		return tpl_graph(op, name, null)
 	end
+end
+
+# Groups properties by kind.
+private class PropertiesByKind
+	# The virtual types.
+	var virtual_types = new PropertyGroup[MVirtualTypeProp]("Virtual types")
+
+	# The constructors.
+	var constructors = new PropertyGroup[MMethod]("Contructors")
+
+	# The methods.
+	var methods = new PropertyGroup[MMethod]("Methods")
+
+	# The inner classes.
+	var inner_classes = new PropertyGroup[MInnerClass]("Inner classes")
+
+	# All the groups.
+	#
+	# Sorted in the order they are displayed to the user.
+	var groups: SequenceRead[PropertyGroup[MProperty]] = [
+			virtual_types,
+			constructors,
+			methods,
+			inner_classes: PropertyGroup[MProperty]]
+
+	# Add each the specified property to the appropriate list.
+	init with_elements(properties: Collection[MProperty]) do add_all(properties)
+
+	# Add the specified property to the appropriate list.
+	fun add(property: MProperty) do
+		if property isa MMethod then
+			if property.is_init then
+				constructors.add property
+			else
+				methods.add property
+			end
+		else if property isa MVirtualTypeProp then
+			virtual_types.add property
+		else if property isa MInnerClass then
+			inner_classes.add property
+		else
+			abort
+		end
+	end
+
+	# Add each the specified property to the appropriate list.
+	fun add_all(properties: Collection[MProperty]) do
+		for p in properties do add(p)
+	end
+
+	# Sort each group with the specified comparator.
+	fun sort_groups(comparator: Comparator) do
+		for g in groups do comparator.sort(g)
+	end
+end
+
+# A Group of properties of the same kind.
+private class PropertyGroup[E: MProperty]
+	super Array[E]
+
+	# The title of the group, as displayed to the user.
+	var title: String
 end
 
 # A MProperty page
