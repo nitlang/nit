@@ -83,6 +83,23 @@ redef class ToolContext
 			end
 		end
 	end
+
+	# Filter the entity based on the options specified by the user.
+	#
+	# Return `true` if the specified entity has to be included in the generated
+	# documentation
+	private fun filter_mclass(mclass: MClass): Bool do
+		return mclass.visibility >= min_visibility
+	end
+
+	# Filter the entity based on the options specified by the user.
+	#
+	# Return `true` if the specified entity has to be included in the generated
+	# documentation
+	private fun filter_mproperty(mproperty: MProperty): Bool do
+		return mproperty.visibility >= min_visibility and
+			not mproperty isa MAttribute
+	end
 end
 
 # The Nitdoc class explores the model and generate pages for each mentities found
@@ -154,7 +171,7 @@ class Nitdoc
 
 	private fun classes do
 		for mclass in model.mclasses do
-			if mclass.visibility <= ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			var page = new NitdocClass(ctx, model, mainmodule, mclass)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -162,9 +179,8 @@ class Nitdoc
 
 	private fun properties do
 		for mproperty in model.mproperties do
-			if mproperty.visibility <= ctx.min_visibility then continue
+			if not ctx.filter_mproperty(mproperty) then continue
 			if mproperty isa MInnerClass then continue
-			if mproperty isa MAttribute then continue
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -196,12 +212,11 @@ class QuickSearch
 			add_result_for(mmodule.name, mmodule.full_name, mmodule.nitdoc_url)
 		end
 		for mclass in model.mclasses do
-			if mclass.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			add_result_for(mclass.name, mclass.full_name, mclass.nitdoc_url)
 		end
 		for mproperty in model.mproperties do
-			if mproperty.visibility < ctx.min_visibility then continue
-			if mproperty isa MAttribute then continue
+			if not ctx.filter_mproperty(mproperty) then continue
 			for mpropdef in mproperty.mpropdefs do
 				var full_name = mpropdef.mclassdef.mclass.full_name
 				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
@@ -658,7 +673,7 @@ class NitdocSearch
 	private fun classes_list: Array[MClass] do
 		var sorted = new Array[MClass]
 		for mclass in model.mclasses do
-			if mclass.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			sorted.add mclass
 		end
 		name_sorter.sort(sorted)
@@ -669,9 +684,7 @@ class NitdocSearch
 	private fun mprops_list: Array[MProperty] do
 		var sorted = new Array[MProperty]
 		for mproperty in model.mproperties do
-			if mproperty.visibility < ctx.min_visibility then continue
-			if mproperty isa MAttribute then continue
-			sorted.add mproperty
+			if ctx.filter_mproperty(mproperty) then sorted.add mproperty
 		end
 		name_sorter.sort(sorted)
 		return sorted
@@ -1154,15 +1167,14 @@ class NitdocClass
 		# parents
 		var hparents = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if c.visibility < ctx.min_visibility then continue
-			hparents.add c
+			if ctx.filter_mclass(c) then hparents.add c
 		end
 
 		# ancestors
 		var hancestors = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).greaters do
 			if c == mclass then continue
-			if c.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(c) then continue
 			if hparents.has(c) then continue
 			hancestors.add c
 		end
@@ -1170,15 +1182,14 @@ class NitdocClass
 		# children
 		var hchildren = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if c.visibility < ctx.min_visibility then continue
-			hchildren.add c
+			if ctx.filter_mclass(c) then hchildren.add c
 		end
 
 		# descendants
 		var hdescendants = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).smallers do
 			if c == mclass then continue
-			if c.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(c) then continue
 			if hchildren.has(c) then continue
 			hdescendants.add c
 		end
