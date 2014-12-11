@@ -31,20 +31,20 @@ See the `DEBUGGER` section for details.
 The behavior of the interpreter may differs slightly from the compiler.
 
 First, the interpreted is the reference implementation for the specification of the Nit language.
-That means if `nitg` and `nit` have a different behavior on a same program, it is likely that `nit` is right and `nitg` is wrong.
+That means if `nitc` and `nit` have a different behavior on a same program, it is likely that `nit` is right and `nitc` is wrong.
 
 Second, the FFI is not yet implemented in the interpreter.
 Only a subset of the standard methods are implemented with some hard-coded behaviors.
 While it is enough to use most of the standard library, a lot of additional libraries may not be usable by the interpreter.
 
-Last, `nit` is the *Naive Interpretation Tool*, it means that it is slow and may take an average of 50.000% in overhead comparatively to `nitg`(it also means that `nitg` is fast).
+Last, `nit` is the *Naive Interpretation Tool*, it means that it is slow and may take an average of 50.000% in overhead comparatively to `nitc`(it also means that `nitc` is fast).
 In practice, the slowness is not an issue for simple Nit scripts;
-it is not a big deal if `nit` takes  millisecond to execute programs even if `nitg` only need microseconds.
+it is not a big deal if `nit` takes  millisecond to execute programs even if `nitc` only need microseconds.
 
 
 # OPTIONS
 
-Most options are the same than `nitg(1)`.
+Most options are the same than `nitc(1)`.
 Here, only the specific one are indicated.
 
 Note that, unlike in other Nit tools, the options *MUST* be indicated before the main module of a program.

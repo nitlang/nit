@@ -32,7 +32,6 @@ Important files and directory:
 	benchmarks/	Script to bench the compilers
 	bin/		The Nit tools
 	bin/nitc	The Nit compiler
-	bin/nitg	The new Nit compiler
 	bin/nit		The Nit interpreter
 	bin/nitdoc	The Nit autodoc
 	c_src/		C code of nitc (needed to bootstrap)
