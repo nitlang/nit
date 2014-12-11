@@ -1408,6 +1408,9 @@ private class PropertiesByKind
 	# The constructors.
 	var constructors = new PropertyGroup[MMethod]("Contructors")
 
+	# The attributes.
+	var attributes = new PropertyGroup[MAttribute]("Attributes")
+
 	# The methods.
 	var methods = new PropertyGroup[MMethod]("Methods")
 
@@ -1420,6 +1423,7 @@ private class PropertiesByKind
 	var groups: SequenceRead[PropertyGroup[MProperty]] = [
 			virtual_types,
 			constructors,
+			attributes,
 			methods,
 			inner_classes: PropertyGroup[MProperty]]
 
@@ -1436,6 +1440,8 @@ private class PropertiesByKind
 			end
 		else if property isa MVirtualTypeProp then
 			virtual_types.add property
+		else if property isa MAttribute then
+			attributes.add property
 		else if property isa MInnerClass then
 			inner_classes.add property
 		else
