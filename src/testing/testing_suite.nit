@@ -366,8 +366,13 @@ redef class MModule
 end
 
 redef class ModelBuilder
+	# Number of test classes generated.
 	var total_classes = 0
+
+	# Number of tests generated.
 	var total_tests = 0
+
+	# Number of failed tests.
 	var failed_tests = 0
 
 	# Run NitUnit test file for mmodule (if exists).
