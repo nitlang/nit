@@ -52,7 +52,7 @@ abstract class Processor
 	# Tag of a new task packet of size `tasks_per_packet`
 	var task_tag: Tag = 0.tag
 
-	# Tag to return a set of `Result` throught `buffer`
+	# Tag to return a set of `Result` thought `buffer`
 	var result_tag: Tag = 1.tag
 
 	# Tag to notify `Worker` when to quit
@@ -70,7 +70,7 @@ abstract class Processor
 	# Run the main logic of this node
 	fun run is abstract
 
-	# Engines targetted by this execution
+	# Engines targeted by this execution
 	var engines: Array[String] is noinit
 
 	# All known engines, used to detect errors in `engines`
@@ -163,12 +163,30 @@ abstract class Processor
 	# All tasks to be performed
 	var tasks = new Array[Task]
 
-	# Gather and registar all tasks
+	# Gather and register all tasks
 	fun create_tasks
 	do
-		for prog in test_programs do for engine in engines do
-			tasks.add new Task(engine, prog)
+		# At this point we are in our local nit
+		var skip_path = "tests/turing.skip"
+		var skip
+		if skip_path.file_exists then
+			var skip_file = new IFStream.open(skip_path)
+			skip = skip_file.read_lines
+			skip_file.close
+		else
+			skip = new Array[String]
 		end
+
+		for prog in test_programs do for engine in engines do
+
+			# Is is blacklisted?
+			for s in skip do if not s.is_empty and prog.has(s) then
+				if verbose > 0 and rank == 0 then print "Skipping test '{prog}' because of '{s}' in turing.skip"
+				continue label
+			end
+
+			tasks.add new Task(engine, prog)
+		end label
 	end
 end
 
