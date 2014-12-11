@@ -5,3 +5,4 @@
 --src-lang java -- foo ../contrib/neo_doxygen/tests/java-project/xml
 --src-lang java -- root-namespace ../contrib/neo_doxygen/tests/root-namespace/xml
 --src-lang java -- inner-class ../contrib/neo_doxygen/tests/inner-class/xml
+-- python-def ../contrib/neo_doxygen/tests/python-def/xml
