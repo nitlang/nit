@@ -2,7 +2,7 @@ test_nitunit.nit:20,1--22,0: ERROR: nitunit.test_nitunit.test_nitunit::X.<class>
 
 test_nitunit.nit:23,2--25,0: FAILURE: nitunit.test_nitunit.test_nitunit::X.test_nitunit::X::foo (in .nitunit/test_nitunit-3.nit): .nitunit/test_nitunit-3.nit:5,8--27: Error: Method or variable 'undefined_identifier' unknown in Sys.
 
-test_test_nitunit.nit:36,2--40,4: ERROR: test_foo1 (in file .nitunit/test_test_nitunit_TestX_test_foo1.nit): Runtime error: Assert failed (test_test_nitunit.nit:39)
+test_test_nitunit.nit:36,2--40,4: ERROR: test_foo1 (in file .nitunit/gen_test_test_nitunit.nit): Runtime error: Assert failed (test_test_nitunit.nit:39)
 
 DocUnits:
 Entities: 27; Documented ones: 3; With nitunits: 3; Failures: 2
