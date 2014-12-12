@@ -23,18 +23,18 @@ class Automaton
 	# The start state
 	var start: State
 
-	# State that are accect states
+	# State that are accept states
 	var accept = new Array[State]
 
 	# All states
 	var states = new Array[State]
 
-	# Tokens associated on accept states
-	# use `add_tag` to update
+	# Tokens associated on accept states.
+	# Use `add_tag` to update
 	var tags = new HashMap[State, Set[Token]]
 
-	# Accept states associated on tokens
-	# use `add_tag` to update
+	# Accept states associated on tokens.
+	# Use `add_tag` to update
 	var retrotags = new HashMap[Token, Set[State]]
 
 	# Tag all accept states
@@ -66,7 +66,7 @@ class Automaton
 		assert retrotags[t].has(s)
 	end
 
-	# Remove all occurences of a tag in an automaton
+	# Remove all occurrences of a tag in an automaton
 	fun clear_tag(t: Token)
 	do
 		if not retrotags.has_key(t) then return
@@ -78,7 +78,7 @@ class Automaton
 		retrotags.keys.remove(t)
 	end
 
-	# Remove tokens from conflicting state according the the inclusion of language
+	# Remove tokens from conflicting state according the inclusion of language.
 	# REQUIRE: self isa DFA automaton
 	fun solve_token_inclusion
 	do
@@ -101,8 +101,8 @@ class Automaton
 		end
 	end
 
-	# Initialize a new automaton for the empty language
-	# one state, no accept, no transition
+	# Initialize a new automaton for the empty language.
+	# One state, no accept, no transition.
 	init empty
 	do
 		var state = new State
@@ -110,8 +110,8 @@ class Automaton
 		states.add state
 	end
 
-	# Initialize a new automaton for the empty-string language
-	# one state, is accept, no transition
+	# Initialize a new automaton for the empty-string language.
+	# One state, is accept, no transition.
 	init epsilon
 	do
 		var state = new State
@@ -120,8 +120,8 @@ class Automaton
 		states.add state
 	end
 
-	# Initialize a new automation for the language that accepts only a single symbol
-	# Two state, the second is accept, one transition on `symbol`
+	# Initialize a new automation for the language that accepts only a single symbol.
+	# Two state, the second is accept, one transition on `symbol`.
 	init atom(symbol: Int)
 	do
 		var s = new State
@@ -148,8 +148,8 @@ class Automaton
 		states.add a
 	end
 
-	# Contatenate `other` to `self`
-	# other is modified and invalidated.
+	# Concatenate `other` to `self`.
+	# Other is modified and invalidated.
 	fun concat(other: Automaton)
 	do
 		var s2 = other.start
@@ -160,7 +160,7 @@ class Automaton
 		states.add_all other.states
 	end
 
-	# `self` become the alternation of `self` and `other`
+	# `self` become the alternation of `self` and `other`.
 	# `other` is modified and invalidated.
 	fun alternate(other: Automaton)
 	do
@@ -184,9 +184,9 @@ class Automaton
 		states.add_all other.states
 	end
 
-	# Return a new automaton that recognize `self` but not `other`
-	# For a theorical POV, this is the substraction of languages.
-	# Note: the implementation use `to_dfa` internally, so the theorical complexity is not cheap.
+	# Return a new automaton that recognize `self` but not `other`.
+	# For a theoretical POV, this is the subtraction of languages.
+	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
 	fun except(other: Automaton): Automaton
 	do
 		var ta = new Token("1")
@@ -209,8 +209,8 @@ class Automaton
 		return c
 	end
 
-	# `self` absorbs all states, transisions, tags, and acceptations of `other`
-	# An epsilon transition is added between `self.start` and `other.start`
+	# `self` absorbs all states, transitions, tags, and acceptations of `other`.
+	# An epsilon transition is added between `self.start` and `other.start`.
 	fun absorb(other: Automaton)
 	do
 		states.add_all other.states
@@ -494,8 +494,8 @@ class Automaton
 		f.close
 	end
 
-	# Transform a NFA to a DFA
-	# note: the DFA is not miminized
+	# Transform a NFA to a DFA.
+	# note: the DFA is not minimized.
 	fun to_dfa: Automaton
 	do
 		trim
@@ -581,8 +581,8 @@ class Automaton
 		return dfa
 	end
 
-	# epsilon-closure on a state of states
-	# used by `to_dfa`
+	# Epsilon-closure on a state of states.
+	# Used by `to_dfa`.
 	private fun eclosure(states: Collection[State]): Set[State]
 	do
 		var res = new ArraySet[State]
@@ -601,8 +601,8 @@ class Automaton
 		return res
 	end
 
-	# trans on a set of states
-	# Used by `to_dfa`
+	# Trans on a set of states.
+	# Used by `to_dfa`.
 	fun trans(states: Collection[State], symbol: Int): Set[State]
 	do
 		var res = new ArraySet[State]
@@ -621,9 +621,9 @@ class Automaton
 		return res
 	end
 
-	# Generate the Nit source code of the lexer
-	# `filepath` is the name of the ouptit file
-	# `parser` is the name of the parser module (used to import the token classes)
+	# Generate the Nit source code of the lexer.
+	# `filepath` is the name of the output file.
+	# `parser` is the name of the parser module (used to import the token classes).
 	fun gen_to_nit(filepath: String, name: String, parser: nullable String)
 	do
 		var gen = new DFAGenerator(filepath, name, self, parser)
@@ -638,12 +638,9 @@ private class DFAGenerator
 	var automaton: Automaton
 	var parser: nullable String
 
-	var out: OStream
-	init(filepath: String, name: String, automaton: Automaton, parser: nullable String) do
-		self.filepath = filepath
-		self.name = name
-		self.automaton = automaton
-		self.parser = parser
+	var out: OStream is noinit
+
+	init do
 		self.out = new OFStream.open(filepath)
 	end
 
@@ -747,9 +744,9 @@ end
 # A state in a finite automaton
 class State
 	# Outgoing transitions
-
 	var outs = new Array[Transition]
-	# Ingoing tyransitions
+
+	# Ingoing transitions
 	var ins = new Array[Transition]
 
 	# Add a transitions to `to` on `symbol` (null means epsilon)
@@ -761,6 +758,8 @@ class State
 		return t
 	end
 
+	# Get the first state following the transition `i`.
+	# Null if no transition for `i`.
 	fun trans(i: Int): nullable State
 	do
 		for t in outs do
@@ -778,7 +777,12 @@ end
 
 # A range of symbols on a transition
 class TSymbol
+	# The first symbol in the range
 	var first: Int
+
+	# The last symbol if any.
+	#
+	# `null` means infinity.
 	var last: nullable Int
 
 	redef fun to_s
@@ -808,8 +812,8 @@ class Transition
 	# The symbol on the transition (null means epsilon)
 	var symbol: nullable TSymbol
 
-	# Remove the transition from the automaton
-	# Detash from `from` and `to`
+	# Remove the transition from the automaton.
+	# Detach from `from` and `to`.
 	fun delete
 	do
 		from.outs.remove(self)
