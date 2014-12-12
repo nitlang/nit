@@ -141,19 +141,26 @@ class TestSuite
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
 		end
+		write_to_nit
+		compile
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
-		if not before_module == null then run_case(before_module)
-		for case in test_cases do run_case(case)
+		if not before_module == null then before_module.run
+		for case in test_cases do case.run
 		var after_module = self.after_module
-		if not after_module == null then run_case(after_module)
+		if not after_module == null then after_module.run
 	end
 
-	# Execute a test case
-	fun run_case(test_case: TestCase) do
-		test_case.write_to_nit
-		test_case.compile
-		test_case.run
+	# Write the test unit for `self` in a nit compilable file.
+	fun write_to_nit do
+		var file = new Template
+		file.addn "intrude import test_suite"
+		file.addn "import {mmodule.name}\n"
+		file.addn "var name = args.first"
+		for case in test_cases do
+			case.write_to_nit(file)
+		end
+		file.write_to_file("{test_file}.nit")
 	end
 
 	# Return the test suite in XML format compatible with Jenkins.
@@ -161,9 +168,50 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		for test in test_cases do n.add test.to_xml
+		if failure != null then
+			var f = new HTMLTag("failure")
+			f.attr("message", failure.to_s)
+			n.add f
+		else
+			for test in test_cases do n.add test.to_xml
+		end
 		return n
 	end
+
+	# Generated test file name.
+	fun test_file: String do
+		return toolcontext.test_dir / "gen_{mmodule.name.escape_to_c}"
+	end
+
+	# Compile all `test_cases` cases in one file.
+	fun compile do
+		# find nitg
+		var nit_dir = toolcontext.nit_dir
+		var nitg = nit_dir/"bin/nitg"
+		if not nitg.file_exists then
+			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+			toolcontext.check_errors
+		end
+		# compile test suite
+		var file = test_file
+		var include_dir = mmodule.location.file.filename.dirname
+		var cmd = "{nitg} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
+		var res = sys.system(cmd)
+		var f = new IFStream.open("{file}.out")
+		var msg = f.read_all
+		f.close
+		# set test case result
+		var loc = mmodule.location
+		if res != 0 then
+			failure = msg
+			toolcontext.warning(loc, "failure", "FAILURE: {mmodule.name} (in file {file}.nit): {msg}")
+			toolcontext.modelbuilder.failed_tests += 1
+		end
+		toolcontext.check_errors
+	end
+
+	# Error occured during test-suite compilation.
+	var failure: nullable String = null
 end
 
 # A test case is a unit test considering only a `MMethodDef`.
@@ -184,57 +232,19 @@ class TestCase
 	# `MMethodDef` to call after the test case.
 	var after_test: nullable MMethodDef = null
 
-	# Generated test file name.
-	fun test_file: String do
-		var dir = toolcontext.test_dir
-		var mod = test_method.mclassdef.mmodule.name
-		var cls = test_method.mclassdef.name
+	# Generate the test unit for `self` in `file`.
+	fun write_to_nit(file: Template) do
 		var name = test_method.name
-		return "{dir}/{mod}_{cls}_{name}"
-	end
-
-	# Generate the test unit in a nit file.
-	fun write_to_nit do
-		var name = test_method.name
-		var file = new Template
-		file.addn "intrude import test_suite"
-		file.addn "import {test_method.mclassdef.mmodule.name}\n"
+		file.addn "if name == \"{name}\" then"
 		if test_method.mproperty.is_toplevel then
-			file.addn name
+			file.addn "\t{name}"
 		else
-			file.addn "var subject = new {test_method.mclassdef.name}.nitunit"
-			if before_test != null then file.addn "subject.{before_test.name}"
-			file.addn "subject.{name}"
-			if after_test != null then file.addn "subject.{after_test.name}"
+			file.addn "\tvar subject = new {test_method.mclassdef.name}.nitunit"
+			if before_test != null then file.addn "\tsubject.{before_test.name}"
+			file.addn "\tsubject.{name}"
+			if after_test != null then file.addn "\tsubject.{after_test.name}"
 		end
-		file.write_to_file("{test_file}.nit")
-	end
-
-	# Compile all test cases in once.
-	fun compile do
-		# find nitg
-		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
-		# compile test suite
-		var file = test_file
-		var include_dir = test_method.mclassdef.mmodule.location.file.filename.dirname
-		var cmd = "{nitg} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
-		var res = sys.system(cmd)
-		var f = new IFStream.open("{file}.out")
-		var msg = f.read_all
-		f.close
-		# set test case result
-		var loc = test_method.location
-		if res != 0 then
-			failure = msg
-			toolcontext.warning(loc, "failure", "FAILURE: {test_method.name} (in file {file}.nit): {msg}")
-			toolcontext.modelbuilder.failed_tests += 1
-		end
-		toolcontext.check_errors
+		file.addn "end"
 	end
 
 	# Execute the test case.
@@ -243,26 +253,26 @@ class TestCase
 		was_exec = true
 		if toolcontext.opt_noact.value then return
 		# execute
-		var file = test_file
-		var res = sys.system("{file.to_program_name}.bin > '{file}.out1' 2>&1 </dev/null")
-		var f = new IFStream.open("{file}.out1")
+		var method_name = test_method.name
+		var test_file = test_suite.test_file
+		var res_name = "{test_file}_{method_name.escape_to_c}"
+		var res = sys.system("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		var f = new IFStream.open("{res_name}.out1")
 		var msg = f.read_all
 		f.close
 		# set test case result
 		var loc = test_method.location
 		if res != 0 then
 			error = msg
-			toolcontext.warning(loc, "failure", "ERROR: {test_method.name} (in file {file}.nit): {msg}")
+			toolcontext.warning(loc, "failure",
+			   "ERROR: {method_name} (in file {test_file}.nit): {msg}")
 			toolcontext.modelbuilder.failed_tests += 1
 		end
 		toolcontext.check_errors
 	end
 
-	# Error occured during execution.
+	# Error occured during test-case execution.
 	var error: nullable String = null
-
-	# Error occured during compilation.
-	var failure: nullable String = null
 
 	# Was the test case executed at least one?
 	var was_exec = false
@@ -282,11 +292,6 @@ class TestCase
 			if error != null then
 				n = new HTMLTag("error")
 				n.attr("message", error.to_s)
-				tc.add n
-			end
-			if failure != null then
-				n = new HTMLTag("failure")
-				n.attr("message", failure.to_s)
 				tc.add n
 			end
 		end
@@ -366,8 +371,13 @@ redef class MModule
 end
 
 redef class ModelBuilder
+	# Number of test classes generated.
 	var total_classes = 0
+
+	# Number of tests generated.
 	var total_tests = 0
+
+	# Number of failed tests.
 	var failed_tests = 0
 
 	# Run NitUnit test file for mmodule (if exists).
