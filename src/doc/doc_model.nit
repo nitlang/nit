@@ -35,7 +35,15 @@ redef class MEntity
 	# HTML Escaped name
 	fun nitdoc_name: String is abstract
 
-	# Used as HTML unique ids
+	# ID used as a HTML unique ID and in file names.
+	#
+	# **Must** match the following (POSIX ERE) regular expression:
+	#
+	# ~~~POSIX ERE
+	# ^[A-Za-z_][A-Za-z0-9._-]*$
+	# ~~~
+	#
+	# That way, the ID is always a valid URI component and a valid XML name.
 	fun nitdoc_id: String is abstract
 
 	# URL of this entity’s Nitdoc page.
