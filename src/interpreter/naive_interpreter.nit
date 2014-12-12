@@ -71,10 +71,12 @@ class NaiveInterpreter
 
 	init
 	do
-		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
-		init_instance_primitive(self.true_instance)
-		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
-		init_instance_primitive(self.false_instance)
+		if mainmodule.model.get_mclasses_by_name("Bool") != null then
+			self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
+			init_instance_primitive(self.true_instance)
+			self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
+			init_instance_primitive(self.false_instance)
+		end
 		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
 	end
 
