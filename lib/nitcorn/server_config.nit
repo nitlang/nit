@@ -40,8 +40,7 @@ class VirtualHost
 	var routes = new Routes(self)
 
 	# Create a virtual host from interfaces as strings
-	init(interfaces: String ...)
-	do
+	init(interfaces: String ...) is old_style_init do
 		for i in interfaces do self.interfaces.add_from_string i
 	end
 end
