@@ -650,10 +650,10 @@ class TplLink
 	# Link href
 	var href: String is writable
 
-	# Text to display in the link
+	# The raw HTML content to display in the link
 	var text: Streamable is writable
 
-	# Optional title
+	# The unescaped optional title.
 	var title: nullable String = null is writable
 
 	init with_title(href, text, title: String) do
@@ -663,11 +663,11 @@ class TplLink
 
 	redef fun rendering do
 		add "<a href=\""
-		add href
+		add href.html_escape
 		add "\""
 		if title != null then
 			add " title=\""
-			add title.as(not null)
+			add title.as(not null).html_escape
 			add "\""
 		end
 		add ">"

@@ -386,7 +386,7 @@ abstract class NitdocPage
 		var source = ctx.opt_source.value
 		if source == null then
 			var url = location.file.filename.simplify_path
-			return "<a target='_blank' title='Show source' href=\"{url}\">View Source</a>"
+			return "<a target='_blank' title='Show source' href=\"{url.html_escape}\">View Source</a>"
 		end
 		# THIS IS JUST UGLY ! (but there is no replace yet)
 		var x = source.split_with("%f")
@@ -396,7 +396,7 @@ abstract class NitdocPage
 		x = source.split_with("%L")
 		source = x.join(location.line_end.to_s)
 		source = source.simplify_path
-		return "<a target='_blank' title='Show source' href=\"{source.to_s}\">View Source</a>"
+		return "<a target='_blank' title='Show source' href=\"{source.to_s.html_escape}\">View Source</a>"
 	end
 
 	# MProject description template
