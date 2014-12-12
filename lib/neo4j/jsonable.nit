@@ -172,8 +172,6 @@ class JsonArray
 
 	private var array = new Array[nullable Jsonable]
 
-	init do end
-
 	# init the JSON Array from a Nit `Collection`
 	init from(items: Collection[nullable Jsonable]) do
 		array.add_all(items)
