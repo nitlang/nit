@@ -316,6 +316,14 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
+
+	# Skip by OS
+	os_skip_file=`uname`.skip
+	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file"; then
+		echo "=> $2: [skip os]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
 	return 1
 }
 
