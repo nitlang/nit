@@ -21,6 +21,7 @@ redef class Sys
 	# Keeps the average length of an Array when calling to_s
 	var arr_len = new Counter[Int]
 
+	# Compute the average array length.
 	fun avg_arr_len: Float do
 		var total = 0
 		var sum = 0
@@ -31,6 +32,7 @@ redef class Sys
 		return sum.to_f / total.to_f
 	end
 
+	# Compute the average string length.
 	fun avg_s_len: Float do
 		var total = 0
 		var sum = 0
@@ -41,6 +43,7 @@ redef class Sys
 		return sum.to_f / total.to_f
 	end
 
+	# Display statistics in standard output.
 	fun print_stats do
 		if arr_len.sum == 0 then
 			print "*** No Array stats ***"
