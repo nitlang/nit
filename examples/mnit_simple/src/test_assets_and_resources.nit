@@ -33,14 +33,14 @@ redef class App
 	# Testing the assets manager
 	fun test_assets
 	do
-		assert asset_manager.bitmap("fighter.png") != null
+		assert asset_manager.bitmap("fighter.png").width == 32
 	end
 
 	# Testing the resources manager
 	fun test_resources do
 		assert resource_manager.string("string_test") == "string test"
 		assert resource_manager.boolean("test_bool") == true
-		assert resource_manager.dimension("test_dimen_1") != null
-		assert resource_manager.dimension("test_dimen_2") != null
+		assert resource_manager.dimension("test_dimen_1") == 25
+		assert resource_manager.dimension("test_dimen_2") == 150
 	end
 end
