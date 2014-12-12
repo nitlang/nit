@@ -23,7 +23,8 @@ module nitcorn_hello_world
 
 import nitcorn
 
-class MyAction
+# An action that responds by displaying a static html content.
+class StaticAction
 	super Action
 
 	redef fun answer(http_request, turi)
@@ -52,7 +53,7 @@ end
 var vh = new VirtualHost("localhost:8080")
 
 # Serve index.html with our custom handler
-vh.routes.add new Route("/index.html", new MyAction)
+vh.routes.add new Route("/index.html", new StaticAction)
 
 # Serve everything else with a standard `FileServer` with a root at "www/hello_world/"
 vh.routes.add new Route(null, new FileServer("www/hello_world/"))
