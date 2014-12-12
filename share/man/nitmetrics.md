@@ -54,6 +54,11 @@ nitmetrics [*options*]... FILE...
 `--poset`
 :   Complete metrics on posets
 
+`--detect-variance-constraints`
+:   Detects the definition-site variance constraints on formal parameters.
+
+    Infers the possible variance annotations of formal types in Nit programs by identifying the existing constraints on the usage of those formal type.
+
 ## OUTPUT
 
 `--csv`
