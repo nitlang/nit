@@ -34,8 +34,11 @@ if ! git checkout $hash; then
 	exit 1
 fi
 
-# Make nitg and tools
-$tools_dir/unitrun.sh "run-make-0initial_make" make
+# Make nitg (quickly)
+$tools_dir/unitrun.sh "run-make-csrc" make -C c_src
+$tools_dir/unitrun.sh "run-make-version" src/git-gen-version.sh
+$tools_dir/unitrun.sh "run-make-nitg_0" c_src/nitg -o bin/nitg_0 src/nitg.nit
+$tools_dir/unitrun.sh "run-make-nitg" bin/nitg_0 -o bin/nitg src/nitg.nit
 
 # Make nitester
 $tools_dir/unitrun.sh "run-make-nitester" make -C contrib/nitester/
