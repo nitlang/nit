@@ -48,9 +48,16 @@ class Sprite
 	# height of the sprite
 	var height: Int = 100 is writable
 
+	# X coordinate of left side.
 	fun left: Int do return x - width/2
+
+	# X coordinate of right side.
 	fun right: Int do return x + width/2
+
+	# Y coordinate of top.
 	fun top: Int do return y - height/2
+
+	# Y coordinate of bottom.
 	fun bottom: Int do return y + height/2
 
 	# x velocity (applied by `update')
