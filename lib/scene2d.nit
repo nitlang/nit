@@ -102,10 +102,6 @@ class LiveGroup[E: LiveObject]
 	super LiveObject
 	super List[E]
 
-	init
-	do
-	end
-
 	# Recursively update each live objects that `exists'
 	redef fun update
 	do
