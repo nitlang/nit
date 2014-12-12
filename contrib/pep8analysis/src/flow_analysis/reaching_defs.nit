@@ -14,7 +14,6 @@ end
 class ReachingDefsAnalysis
 	super FineFlowAnalysis[ReachingDefsMap]
 
-	init do end
 	redef fun is_forward do return true
 
 	redef fun visit( node )
