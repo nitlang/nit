@@ -52,6 +52,7 @@ redef class MEntity
 	# A template link to the mentity `nitdoc_id`
 	fun tpl_anchor: TplLink do
 		var tpl = new TplLink("#{nitdoc_id}", nitdoc_name)
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
 		end
@@ -61,6 +62,7 @@ redef class MEntity
 	# A template link to the mentity `nitdoc_url`
 	fun tpl_link: TplLink do
 		var tpl = new TplLink(nitdoc_url, nitdoc_name)
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
 		end
@@ -70,6 +72,7 @@ redef class MEntity
 	# A template article that briefly describe the entity
 	fun tpl_short_article: TplArticle do
 		var tpl = tpl_article
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.content = mdoc.tpl_short_comment
 		end
@@ -100,6 +103,7 @@ redef class MEntity
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes)
 		lnk.add tpl_link
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
 			lnk.add mdoc.tpl_short_comment
@@ -130,6 +134,7 @@ redef class MConcern
 	private fun tpl_concern_item: TplListItem do
 		var lnk = new Template
 		lnk.add tpl_anchor
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
 			lnk.add mdoc.tpl_short_comment
@@ -142,13 +147,6 @@ redef class MProject
 	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return root.nitdoc_url
-
-	redef fun mdoc do
-		if root != null then
-			return root.mdoc
-		end
-		return super
-	end
 
 	redef fun tpl_declaration do
 		var tpl = new Template
@@ -248,6 +246,7 @@ redef class MModule
 
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
@@ -261,7 +260,7 @@ redef class MClass
 	redef fun nitdoc_name do return name.html_escape
 	redef var nitdoc_id = "{intro_mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
-	redef fun mdoc do return intro.mdoc
+	redef fun mdoc_or_fallback do return intro.mdoc
 
 	redef fun tpl_declaration do return intro.tpl_declaration
 
@@ -312,6 +311,8 @@ redef class MClassDef
 	redef var nitdoc_id = "{mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mclass.nitdoc_url}#{nitdoc_id}"
 
+	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
+
 	redef fun tpl_namespace do
 		var tpl = new Template
 		tpl.add mmodule.tpl_namespace
@@ -330,6 +331,7 @@ redef class MClassDef
 		title.add "in "
 		title.add mmodule.tpl_namespace
 		tpl.subtitle = title
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.content = mdoc.tpl_comment
 		end
@@ -370,6 +372,7 @@ redef class MClassDef
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
 		tpl.namespace = tpl_namespace
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
@@ -392,40 +395,6 @@ redef class MClassDef
 		end
 		return tpl
 	end
-
-	redef fun tpl_list_item do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(tpl_css_classes)
-		lnk.add tpl_link
-		if mdoc != null then
-			lnk.add ": "
-			lnk.add mdoc.tpl_short_comment
-		else if mclass.intro.mdoc != null then
-			lnk.add ": "
-			lnk.add mclass.intro.mdoc.tpl_short_comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-
-	redef fun tpl_anchor: TplLink do
-		var tpl = new TplLink("#{nitdoc_id}", nitdoc_name)
-		if mdoc != null then
-			tpl.title = mdoc.short_comment
-		else if mclass.intro.mdoc != null then
-			tpl.title = mclass.intro.mdoc.short_comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_link: TplLink do
-		var tpl = new TplLink(nitdoc_url, nitdoc_name)
-		if mdoc != null then
-			tpl.title = mdoc.short_comment
-		else if mclass.intro.mdoc != null then
-			tpl.title = mclass.intro.mdoc.short_comment
-		end
-		return tpl
-	end
 end
 
 redef class MProperty
@@ -433,7 +402,7 @@ redef class MProperty
 	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
 
-	redef fun mdoc do return intro.mdoc
+	redef fun mdoc_or_fallback do return intro.mdoc
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -460,25 +429,7 @@ redef class MPropDef
 	redef var nitdoc_id = "{mclassdef.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mproperty.nitdoc_url}#{nitdoc_id}"
 
-	redef fun tpl_anchor: TplLink do
-		var tpl = new TplLink("#{nitdoc_id}", nitdoc_name)
-		if mdoc != null then
-			tpl.title = mdoc.short_comment
-		else if mproperty.intro.mdoc != null then
-			tpl.title = mproperty.intro.mdoc.short_comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_link: TplLink do
-		var tpl = new TplLink(nitdoc_url, nitdoc_name)
-		if mdoc != null then
-			tpl.title = mdoc.short_comment
-		else if mproperty.intro.mdoc != null then
-			tpl.title = mproperty.intro.mdoc.short_comment
-		end
-		return tpl
-	end
+	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -496,6 +447,7 @@ redef class MPropDef
 		title.add mclassdef.tpl_link
 		tpl.title = title
 		tpl.subtitle = tpl_declaration
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.content = mdoc.tpl_comment
 		end
@@ -505,6 +457,7 @@ redef class MPropDef
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
 		tpl.namespace = mclassdef.tpl_namespace
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
@@ -544,12 +497,10 @@ redef class MPropDef
 		var anchor = tpl_link
 		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
 		lnk.add anchor
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
 			lnk.add mdoc.tpl_short_comment
-		else if mproperty.intro.mdoc != null then
-			lnk.add ": "
-			lnk.add mproperty.intro.mdoc.tpl_short_comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -562,6 +513,7 @@ redef class MPropDef
 		var anchor = mclassdef.tpl_link
 		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
 		lnk.add anchor
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
 			lnk.add mdoc.tpl_short_comment
@@ -761,6 +713,7 @@ redef class MInnerClassDef
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
 		tpl.namespace = mclassdef.tpl_namespace
+		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
