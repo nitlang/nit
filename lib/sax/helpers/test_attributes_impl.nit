@@ -18,7 +18,7 @@ class TestAttributesImpl
 	super TestSuite
 
 	private fun sample: AttributesImpl do
-		var subject: AttributesImpl = new AttributesImpl
+		var subject = new AttributesImpl
 
 		# The parser may include everything...
 		subject.add("http://example.com/", "bar", "foo:bar", "CDATA", "baz")
@@ -33,7 +33,7 @@ class TestAttributesImpl
 	end
 
 	fun test_length do
-		var subject: AttributesImpl = new AttributesImpl
+		var subject = new AttributesImpl
 
 		assert 0 == subject.length
 		subject.add("http://example.com/", "bar", "foo:bar", "CDATA", "baz")
@@ -48,7 +48,7 @@ class TestAttributesImpl
 	end
 
 	fun test_uri do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "http://example.com/" == subject.uri(0)
 		assert "urn:is:not:often:used" == subject.uri(1)
@@ -61,7 +61,7 @@ class TestAttributesImpl
 	end
 
 	fun test_local_name do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "bar" == subject.local_name(0)
 		assert "i-am_ME" == subject.local_name(1)
@@ -74,7 +74,7 @@ class TestAttributesImpl
 	end
 
 	fun test_qname do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "foo:bar" == subject.qname(0)
 		assert "" == subject.qname(1)
@@ -87,7 +87,7 @@ class TestAttributesImpl
 	end
 
 	fun test_type_of do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "CDATA" == subject.type_of(0)
 		assert "ID" == subject.type_of(1)
@@ -100,7 +100,7 @@ class TestAttributesImpl
 	end
 
 	fun test_type_of_qname do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "CDATA" == subject.type_of("foo:bar")
 		assert subject.type_of("") == null
@@ -112,7 +112,7 @@ class TestAttributesImpl
 	end
 
 	fun test_value_of do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "baz" == subject.value_of(0)
 		assert "noop" == subject.value_of(1)
@@ -125,7 +125,7 @@ class TestAttributesImpl
 	end
 
 	fun test_value_of_qname do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "baz" == subject.value_of("foo:bar")
 		assert subject.value_of("") == null
@@ -137,7 +137,7 @@ class TestAttributesImpl
 	end
 
 	fun test_index_ns do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert 0 == subject.index_ns("http://example.com/", "bar")
 		assert 1 == subject.index_ns("urn:is:not:often:used", "i-am_ME")
@@ -149,7 +149,7 @@ class TestAttributesImpl
 	end
 
 	fun test_index_of do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert 0 == subject.index_of("foo:bar")
 		assert -1 == subject.index_of("")
@@ -161,7 +161,7 @@ class TestAttributesImpl
 	end
 
 	fun test_type_ns do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "CDATA" == subject.type_ns("http://example.com/", "bar")
 		assert "ID" == subject.type_ns("urn:is:not:often:used", "i-am_ME")
@@ -173,7 +173,7 @@ class TestAttributesImpl
 	end
 
 	fun test_value_ns do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		assert "baz" == subject.value_ns("http://example.com/", "bar")
 		assert "noop" == subject.value_ns("urn:is:not:often:used", "i-am_ME")
@@ -185,8 +185,8 @@ class TestAttributesImpl
 	end
 
 	fun test_attributes_set do
-		var subject: AttributesImpl = sample
-		var subject2: AttributesImpl = new AttributesImpl
+		var subject = sample
+		var subject2 = new AttributesImpl
 
 		subject.attributes = subject2
 		assert subject.length == 0
@@ -196,7 +196,7 @@ class TestAttributesImpl
 	end
 
 	fun test_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.set(1, "urn:is:not:often:used", "i-am_ME", "i-am_ME", "ID",
 				"noop")
@@ -206,7 +206,7 @@ class TestAttributesImpl
 	end
 
 	fun test_remove_at do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.remove_at(1)
 		assert 3 == subject.length
@@ -214,7 +214,7 @@ class TestAttributesImpl
 	end
 
 	fun test_uri_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.uri(0) = "https://example.org/serious"
 		subject.uri(1) = "ftp://wat"
@@ -223,7 +223,7 @@ class TestAttributesImpl
 	end
 
 	fun test_local_name_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.local_name(0) = "trololol"
 		subject.local_name(1) = "ImYou42"
@@ -232,7 +232,7 @@ class TestAttributesImpl
 	end
 
 	fun test_qname_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.qname(0) = "go-to:bar"
 		subject.qname(1) = "yo:i-am_ME"
@@ -241,7 +241,7 @@ class TestAttributesImpl
 	end
 
 	fun test_type_of_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.type_of(0) = "NMTOKENS"
 		subject.type_of(1) = "ENTITY"
@@ -250,7 +250,7 @@ class TestAttributesImpl
 	end
 
 	fun test_value_of_set do
-		var subject: AttributesImpl = sample
+		var subject = sample
 
 		subject.value_of(0) = "buz"
 		subject.value_of(1) = "bizzz"
