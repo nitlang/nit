@@ -23,7 +23,7 @@ import json::static
 class TplPage
 	super Template
 
-	# Page title in HTML header
+	# The unescaped page title to put in the HTML header.
 	var title: String is writable, noinit
 
 	# Page url
@@ -70,7 +70,7 @@ class TplPage
 		addn " <link rel='stylesheet' href='{css}/Nitdoc.QuickSearch.css'/>"
 		addn " <link rel='stylesheet' href='{css}/Nitdoc.ModalBox.css'/>"
 		addn " <link rel='stylesheet' href='{css}/Nitdoc.GitHub.css'/>"
-		addn " <title>{title}</title>"
+		addn " <title>{title.html_escape}</title>"
 		addn "</head>"
 		add "<body"
 		for attr in body_attrs do add attr
