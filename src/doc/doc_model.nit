@@ -376,8 +376,8 @@ redef class MClassDef
 	redef fun tpl_css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		set.add_all mclass.intro.modifiers
-		set.add_all modifiers
+		for m in mclass.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 
@@ -385,7 +385,7 @@ redef class MClassDef
 		var tpl = new Template
 		for modifier in modifiers do
 			if modifier == "public" then continue
-			tpl.add "{modifier} "
+			tpl.add "{modifier.html_escape} "
 		end
 		return tpl
 	end
@@ -468,8 +468,8 @@ redef class MPropDef
 	redef fun tpl_css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		set.add_all mproperty.intro.modifiers
-		set.add_all modifiers
+		for m in mproperty.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 
@@ -477,7 +477,7 @@ redef class MPropDef
 		var tpl = new Template
 		for modifier in modifiers do
 			if modifier == "public" then continue
-			tpl.add "{modifier} "
+			tpl.add "{modifier.html_escape} "
 		end
 		return tpl
 	end
