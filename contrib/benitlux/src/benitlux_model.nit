@@ -57,7 +57,6 @@ class BeerEvents
 		var content = new Array[String]
 
 		# New beers
-		var new_beers_name = new Array[String]
 		for beer in self.new_beers do
 			content.add "+ {beer.name}: {beer.desc}"
 		end
