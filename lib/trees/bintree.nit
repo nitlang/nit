@@ -378,14 +378,10 @@ end
 class BinTreeNode[K: Comparable, E]
 	super TreeNode[K, E]
 
-	private var prev: nullable BinTreeNode[K, E]
-	private var next: nullable BinTreeNode[K, E]
+	private var prev: nullable BinTreeNode[K, E] = null
+	private var next: nullable BinTreeNode[K, E] = null
 
 	redef type N: BinTreeNode[K, E]
-
-	init(key: K, item: E) do
-		super(key, item)
-	end
 
 	private var left_node: nullable N = null
 
@@ -455,11 +451,10 @@ end
 private class BinTreeMapIterator[K: Comparable, E]
 	super MapIterator[K, E]
 
-	var current: nullable BinTreeNode[K, E]
+	var tree: BinTreeMap[K, E]
+	var current: nullable BinTreeNode[K, E] = null
 
-	init(tree: BinTreeMap[K, E]) do
-		current = tree.first_node
-	end
+	init do current = tree.first_node
 
 	redef fun is_ok do return not current == null
 	redef fun next do current = current.next
