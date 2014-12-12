@@ -41,7 +41,7 @@ print "Sequence for 27 has {size27} begin with: {sequence27[0]}, " +
 		 "and end with: {sequence27[size27 - 4]}, {sequence27[size27 - 3]}, " +
 		 "{sequence27[size27 - 2]}, {sequence27[size27 - 1]}"
 
-var max: Int = hailstone(1).length
+var max = hailstone(1).length
 var max_sequence = hailstone(1)
 var max_element = 1
 
