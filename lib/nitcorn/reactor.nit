@@ -32,7 +32,10 @@ class HttpServer
 	# The associated `HttpFactory`
 	var factory: HttpFactory
 
-	init(buf_ev: NativeBufferEvent, factory: HttpFactory) do self.factory = factory
+	# Init the server using `HttpFactory`.
+	init(buf_ev: NativeBufferEvent, factory: HttpFactory) is old_style_init do
+		self.factory = factory
+	end
 
 	private var parser = new HttpRequestParser is lazy
 
