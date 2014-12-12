@@ -91,7 +91,7 @@ redef abstract class Action
 	# `request` is fully formed request object and has a reference to the session
 	# if one preexists.
 	#
-	# `truncated_uri` is the ending of the fulle request URI, truncated from the route
+	# `truncated_uri` is the ending of the full request URI, truncated from the route
 	# leading to this `Action`.
 	fun answer(request: HttpRequest, truncated_uri: String): HttpResponse is abstract
 end
