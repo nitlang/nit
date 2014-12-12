@@ -21,7 +21,7 @@ module reactor
 import more_collections
 import libevent
 
-import server_config
+import vararg_routes
 import http_request
 import http_response
 
@@ -72,6 +72,9 @@ class HttpServer
 		if virtual_host != null then
 			var route = virtual_host.routes[request.uri]
 			if route != null then
+				# include uri parameters in request
+				request.uri_params = route.parse_params(request.uri)
+
 				var handler = route.handler
 				var root = route.path
 				var turi
