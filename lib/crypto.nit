@@ -69,7 +69,6 @@ redef class String
 		var rot = x % 26
 		if rot < 0 then rot += 26
 		var d = new FlatBuffer.with_capacity(length)
-		var p = 0
 		for i in chars do
 			d.add i.rot(rot)
 		end

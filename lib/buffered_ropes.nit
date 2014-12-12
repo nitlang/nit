@@ -68,10 +68,13 @@ end
 private class LeafSubstrings
 	super IndexedIterator[Text]
 
-	var str: String
+	var leaf: Leaf
+	var str: String is noinit
 	var avail = true
 
-	init(l: Leaf) do str = new FlatString.with_infos(l.buf.ns, l.length, 0, l.length - 1)
+	init do
+		str = new FlatString.with_infos(leaf.buf.ns, leaf.length, 0, leaf.length - 1)
+	end
 
 	redef fun is_ok do return avail
 
@@ -86,8 +89,8 @@ end
 private class Leaf
 	super RopeString
 
-	private var buf: ManualBuffer
-	private var bns: NativeString is noinit
+	var buf: ManualBuffer
+	var bns: NativeString is noinit
 	redef var length: Int is noinit
 
 	redef fun empty do return new Leaf(new ManualBuffer)
@@ -240,7 +243,6 @@ redef class Concat
 
 	redef fun +(o) do
 		var s = o.to_s
-		var mlen = length
 		var slen = s.length
 		if s isa FlatString then
 			var r = right
@@ -286,7 +288,6 @@ redef class FlatString
 			return new Concat(sl + self, s.right)
 		else if s isa Leaf then
 			if slen + mlen > maxlen then return new Concat(self, s)
-			var mits = items
 			var mifrom = index_from
 			var sb = s.buf
 			var b = new ManualBuffer

@@ -120,7 +120,7 @@ private class CartesianIterator[E]
 	var collection: CartesianCollection[E]
 
 	# The array of iterations that will be increased in the lexicographic order.
-	private var iterators = new Array[Iterator[E]]
+	var iterators = new Array[Iterator[E]]
 
 	init
 	do
@@ -314,8 +314,8 @@ private class CombinationIterator[E]
 	super Iterator[SequenceRead[E]]
 	var product: CombinationCollection[E]
 
-	private var iterators = new Array[Iterator[E]]
-	private var indices = new Array[Int]
+	var iterators = new Array[Iterator[E]]
+	var indices = new Array[Int]
 
 	var are_sorted: Bool is noinit
 	var are_unique: Bool is noinit
@@ -374,7 +374,7 @@ private class CombinationIterator[E]
 		end
 	end
 
-	private fun next_free(rank: Int, start: Int): Int
+	fun next_free(rank: Int, start: Int): Int
 	do
 		loop
 			for i in [0..rank[ do
@@ -388,7 +388,7 @@ private class CombinationIterator[E]
 		return start
 	end
 
-	private fun reset_iterator(rank: Int): Iterator[E]
+	fun reset_iterator(rank: Int): Iterator[E]
 	do
 		var it = product.collection.iterator
 		iterators[rank] = it
