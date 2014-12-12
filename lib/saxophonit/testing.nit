@@ -87,7 +87,7 @@ class SAXEventLogger
 		var buf = new FlatBuffer
 		var sub_diff: Array[Int]
 		var equal: Bool
-		var i: Int = 0
+		var i = 0
 		var min: Int
 		var max: Int
 
@@ -140,7 +140,7 @@ class SAXEventLogger
 	private fun diff_entry(actual: Array[String], expected: Array[String]):
 			Array[Int] do
 		var result = new Array[Int]
-		var i: Int = 0
+		var i = 0
 		var min: Int
 		var max: Int
 
@@ -234,7 +234,7 @@ class SAXEventLogger
 	private fun diff_append_mismatch_entry(buf: Buffer, entry: Array[String],
 			sorted_mismatches: Collection[Int], term_normal: String,
 			term_emphasis: String) do
-		var i: Int = 0
+		var i = 0
 		var j = sorted_mismatches.iterator
 		var length = entry.length
 
