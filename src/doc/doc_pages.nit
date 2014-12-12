@@ -24,6 +24,8 @@ redef class ToolContext
 	private var opt_source = new OptionString("link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
 	private var opt_shareurl = new OptionString("use shareurl instead of copy shared files", "--shareurl")
+	private var opt_no_attributes = new OptionBool("ignore the attributes",
+			"--no-attributes")
 	private var opt_nodot = new OptionBool("do not generate graphes with graphviz", "--no-dot")
 	private var opt_private = new OptionBool("also generate private API", "--private")
 
@@ -46,7 +48,8 @@ redef class ToolContext
 		super
 
 		var opts = option_context
-		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl, opt_nodot, opt_private)
+		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl,
+				opt_no_attributes, opt_nodot, opt_private)
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
 		opts.add_option(opt_piwik_tracker, opt_piwik_site_id)
@@ -98,7 +101,7 @@ redef class ToolContext
 	# documentation
 	private fun filter_mproperty(mproperty: MProperty): Bool do
 		return mproperty.visibility >= min_visibility and
-			not mproperty isa MAttribute
+			not (opt_no_attributes.value and mproperty isa MAttribute)
 	end
 end
 
