@@ -455,10 +455,13 @@ abstract class Text
 	#
 	# * Contains only US-ASCII letters, digits and underscores.
 	# * Never starts with a digit.
+	# * Never ends with an underscore.
 	# * Never contains two contiguous underscores.
 	#
 	#     assert "42_is/The answer!".to_cmangle == "_52d2_is_47dThe_32danswer_33d"
+	#     assert "__".to_cmangle == "_95d_95d"
 	#     assert "__d".to_cmangle == "_95d_d"
+	#     assert "_d_".to_cmangle == "_d_95d"
 	#     assert "_42".to_cmangle == "_95d42"
 	#     assert "foo".to_cmangle == "foo"
 	#     assert "".to_cmangle == ""
@@ -499,6 +502,10 @@ abstract class Text
 				res.add('d')
 				underscore = false
 			end
+		end
+		if underscore then
+			res.append('_'.ascii.to_s)
+			res.add('d')
 		end
 		return res.to_s
 	end
