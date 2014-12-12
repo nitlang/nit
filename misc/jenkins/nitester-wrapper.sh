@@ -21,7 +21,7 @@
 hash=$1
 shift
 
-set +x
+set -x
 
 local_repo=nit/
 tools_dir=misc/jenkins/
