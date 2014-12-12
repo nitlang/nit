@@ -1,10 +1,11 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2008 Floréal Morandat <morandat@lirmm.fr>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -14,6 +15,7 @@
 module time
 
 import string_search
+import stream
 
 in "C Header" `{
 	#include <time.h>
@@ -137,4 +139,102 @@ extern class Tm `{struct tm *`}
 	`}
 
 	redef fun to_s do return asctime.replace("\n", "")
+end
+
+# Date using the international format defined by ISO 8601.
+#
+# Usage:
+#
+#     # By default ISODate at today.
+#     var date = new ISODate
+#     var tm = new Tm.localtime
+#     assert date.year == tm.year + 1900
+#     assert date.month == tm.mon + 1
+#     assert date.day == tm.mday
+#
+#     # ISODate can be initialized from a String.
+#     date = new ISODate.from_string("1970-01-01T00:00:00Z")
+#     assert date.year == 1970
+#     assert date.month == 1
+#     assert date.day == 1
+#
+#     # ISODate can be printed as String following the ISO format.
+#     assert date.to_s == "1970-01-01T00:00:00Z"
+#
+# Note that only the `YYYY-MM-DDTHH:MM:SSZ` is supported for now.
+#
+# See <http://www.w3.org/QA/Tips/iso-date>
+class ISODate
+	super Comparable
+
+	# UTC years as Int.
+	var year: Int is noinit
+
+	# UTC months as Int (`1` for January).
+	var month: Int is noinit
+
+	# UTC days as Int (starting at `1`).
+	var day: Int is noinit
+
+	# UTC hours as Int.
+	var hours: Int is noinit
+
+	# UTC minutes as Int.
+	var minutes: Int is noinit
+
+	# UTC seconds as Int.
+	var seconds: Int is noinit
+
+	# UTC timezone marker.
+	#
+	# Note that I don't know what will happen if you change this value...
+	var timezone = "Z"
+
+	init do
+		var t = new Tm.localtime
+		year = 1900 + t.year
+		month = t.mon + 1
+		day = t.mday
+		hours = t.hour
+		minutes = t.min
+		seconds = t.sec
+	end
+
+	# Init `self` from a ISODate formatted string.
+	init from_string(str: String) do
+		year = str.substring(0, 4).to_i
+		month = str.substring(5, 2).to_i
+		day = str.substring(8, 2).to_i
+		hours = str.substring(11, 2).to_i
+		minutes = str.substring(14, 2).to_i
+		seconds = str.substring(17, 2).to_i
+		timezone = str.substring(19, str.length)
+	end
+
+	redef fun to_s do
+		var buff = new FlatBuffer
+		buff.append year.to_s
+		buff.add '-'
+		if month < 10 then buff.add '0'
+		buff.append month.to_s
+		buff.add '-'
+		if day < 10 then buff.add '0'
+		buff.append day.to_s
+		buff.add 'T'
+		if hours < 10 then buff.add '0'
+		buff.append hours.to_s
+		buff.add ':'
+		if minutes < 10 then buff.add '0'
+		buff.append minutes.to_s
+		buff.add ':'
+		if seconds < 10 then buff.add '0'
+		buff.append seconds.to_s
+		buff.append timezone
+		return buff.write_to_string
+	end
+
+	redef type OTHER: ISODate
+
+	# TODO handle timezones
+	redef fun <(o) do return to_s < o.to_s
 end
