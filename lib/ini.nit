@@ -37,10 +37,7 @@ class ConfigTree
 	# The ini file used to read/store data
 	var ini_file: String
 
-	init(file: String) do
-		self.ini_file = file
-		if file.file_exists then load
-	end
+	init do if ini_file.file_exists then load
 
 	# Get the config value for `key`
 	#
@@ -283,14 +280,11 @@ class ConfigTree
 end
 
 private class ConfigNode
-	var parent: nullable ConfigNode
+
+	var parent: nullable ConfigNode = null
 	var children = new HashMap[String, ConfigNode]
 	var name: String is writable
-	var value: nullable String
-
-	init(name: String) do
-		self.name = name
-	end
+	var value: nullable String = null
 
 	fun key: String do
 		if parent == null then
