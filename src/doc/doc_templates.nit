@@ -567,8 +567,6 @@ class TplClassDefinition
 	var intros = new Array[TplListElt]
 	var redefs = new Array[TplListElt]
 
-	init do end
-
 	redef fun rendering do
 		addn "<div class='definition'>"
 		render_comment
@@ -692,8 +690,6 @@ class TplList
 	# Add content wrapped in a <li> element
 	fun add_li(item: TplListItem) do elts.add item
 
-	init do end
-
 	init with_classes(classes: Array[String]) do self.css_classes = classes
 
 	fun is_empty: Bool do return elts.is_empty
@@ -720,8 +716,6 @@ class TplListItem
 
 	# CSS classes of the <li> element
 	var css_classes = new Array[String]
-
-	init do end
 
 	init with_content(content: Streamable) do append(content)
 
