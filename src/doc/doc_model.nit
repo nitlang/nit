@@ -283,7 +283,7 @@ redef class MClass
 			tpl.add "["
 			var parameter_names = new Array[String]
 			for p in mparameters do
-				parameter_names.add(p.name)
+				parameter_names.add(p.nitdoc_name)
 			end
 			tpl.add parameter_names.join(", ")
 			tpl.add "]"
@@ -354,7 +354,7 @@ redef class MClassDef
 		if not mparameters.is_empty then
 			tpl.add "["
 			for i in [0..mparameters.length[ do
-				tpl.add "{mparameters[i].name}: "
+				tpl.add "{mparameters[i].nitdoc_name}: "
 				tpl.add bound_mtype.arguments[i].tpl_signature
 				if i < mparameters.length - 1 then tpl.add ", "
 			end
@@ -533,7 +533,7 @@ redef class MMethod
 		var tpl = new Template
 		var params = new Array[String]
 		for param in intro.msignature.mparameters do
-			params.add param.name
+			params.add param.name.html_escape
 		end
 		if not params.is_empty then
 			tpl.add "("
@@ -596,7 +596,7 @@ end
 
 redef class MParameterType
 	redef fun tpl_link do
-		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name}", name, "formal type")
+		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
 	end
 	redef fun tpl_signature do return tpl_link
 end

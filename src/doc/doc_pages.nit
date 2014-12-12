@@ -518,7 +518,8 @@ abstract class NitdocPage
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink.with_title(def_url, mprop.name, "Go to introduction")
+			var lnk = new TplLink.with_title(def_url, mprop.nitdoc_name,
+					"Go to introduction")
 			title.add "redef "
 			title.add lnk
 		end
@@ -1126,7 +1127,7 @@ class NitdocClass
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink(def_url, mprop.name)
+			var lnk = new TplLink(def_url, mprop.nitdoc_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
 			var item = new Template
