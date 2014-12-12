@@ -31,6 +31,9 @@ abstract class Processor
 	# Controller rank is always 0
 	var controller_rank: Rank = 0.rank
 
+	# Rank on this processor
+	fun rank: Rank is abstract
+
 	# Where to store data for transfer between nodes
 	#
 	# Require: `buffer.length % 4 == 0`
@@ -172,6 +175,8 @@ end
 # Single controller to dispatch tasks, gather results and produce stats
 class Controller
 	super Processor
+
+	redef fun rank do return controller_rank
 
 	# Id as `Int` of the next task to distribute
 	var next_task_id = 0
@@ -326,7 +331,7 @@ class Worker
 	super Processor
 
 	# The `Rank` of `self`
-	var rank: Rank
+	redef var rank: Rank
 
 	# Compilation directory
 	var comp_dir = "/dev/shm/nit_compile{rank}" is lazy
