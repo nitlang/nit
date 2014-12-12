@@ -100,7 +100,6 @@ class ConfigTree
 	#    assert config.has_key("foo.bar")
 	#    assert not config.has_key("zoo")
 	fun has_key(key: String): Bool do
-		var children = roots
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
 		if node == null then return false
@@ -220,7 +219,6 @@ class ConfigTree
 	private var roots = new Array[ConfigNode]
 
 	private fun set_node(key: String, value: nullable String) do
-		var children = roots
 		var parts = key.split(".").reversed
 		var k = parts.pop
 		var root = get_root(k)
@@ -247,7 +245,6 @@ class ConfigTree
 	end
 
 	private fun get_node(key: String): nullable ConfigNode do
-		var children = roots
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
 		while not parts.is_empty do
