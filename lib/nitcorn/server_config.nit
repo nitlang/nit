@@ -114,18 +114,19 @@ class Routes
 	# Back reference to the config of the virtual host
 	var config: VirtualHost
 
-	private var array = new Array[Route]
+	# Internal routes array.
+	protected var routes = new Array[Route]
 
 	# Add `e` to `self`
-	fun add(e: Route) do array.add e
+	fun add(e: Route) do routes.add e
 
 	# Remove `e` from `self`
-	fun remove(e: Route) do array.remove e
+	fun remove(e: Route) do routes.remove e
 
 	# Get the first `Route` than has `key` as prefix to its path
 	fun [](key: String): nullable Route
 	do
-		for route in array do
+		for route in routes do
 			var path = route.path
 			if path == null or key.has_prefix(path) then return route
 		end
