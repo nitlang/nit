@@ -32,8 +32,8 @@ redef class Location
 end
 
 redef class MEntity
-	# HTML Escaped name
-	fun nitdoc_name: String is abstract
+	# HTML-escaped name.
+	fun nitdoc_name: String do return name.html_escape
 
 	# ID used as a HTML unique ID and in file names.
 	#
@@ -145,7 +145,6 @@ end
 
 redef class MProject
 	redef var nitdoc_id = name.to_cmangle is lazy
-	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return root.nitdoc_url
 
 	redef fun tpl_declaration do
@@ -171,8 +170,6 @@ redef class MProject
 end
 
 redef class MGroup
-	redef fun nitdoc_name do return name.html_escape
-
 	redef var nitdoc_id is lazy do
 		if parent != null then
 			return "{parent.nitdoc_id}__{name.to_cmangle}"
@@ -211,8 +208,6 @@ redef class MGroup
 end
 
 redef class MModule
-	redef fun nitdoc_name do return name.html_escape
-
 	redef var nitdoc_id is lazy do
 		if mgroup != null then
 			if mgroup.mmodules.length == 1 then
@@ -257,7 +252,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun nitdoc_name do return name.html_escape
 	redef var nitdoc_id = "{intro_mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc_or_fallback do return intro.mdoc
@@ -399,7 +393,6 @@ end
 
 redef class MProperty
 	redef var nitdoc_id = "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}" is lazy
-	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
 
 	redef fun mdoc_or_fallback do return intro.mdoc
