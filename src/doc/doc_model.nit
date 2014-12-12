@@ -38,7 +38,7 @@ redef class MEntity
 	# Used as HTML unique ids
 	fun nitdoc_id: String is abstract
 
-	# URL of this entity Nitdoc page
+	# URL of this entity’s Nitdoc page.
 	fun nitdoc_url: String is abstract
 
 	# A template link to the mentity `nitdoc_id`
