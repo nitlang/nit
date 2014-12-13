@@ -405,9 +405,8 @@ class Worker
 		exec_and_check "git config remote.origin.fetch +refs/remotes/origin/pr/*:refs/remotes/origin/pr/*"
 		exec_and_check "git fetch origin --quiet"
 		exec_and_check "git checkout {branch_hash}"
-		exec_and_check "cp {remote_nit}/bin/nitg bin/"
+		exec_and_check "cp {remote_nit}/bin/*  bin/"
 		exec_and_check "src/git-gen-version.sh"
-		exec_and_check "bin/nitg --dir bin/ src/nit.nit src/nitvm.nit"
 	end
 
 	private fun exec_and_check(cmd: String)
