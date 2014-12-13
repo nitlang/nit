@@ -14,7 +14,7 @@
 
 # Curl extention to access the Github API
 # See https://developer.github.com/v3/ for details
-module github_api
+module github_curl
 
 import curl
 import json::static
@@ -78,4 +78,3 @@ do
 	p.close
 	return token.trim
 end
-

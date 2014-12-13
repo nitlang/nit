@@ -15,7 +15,7 @@
 # Query the Github PR API to perform a merge
 module github_merge
 
-import github_api
+import github::github_curl
 import template
 
 redef class Object
