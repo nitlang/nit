@@ -49,8 +49,6 @@ class PrimitiveNativeFile
 
 	fun io_close: Int do return file._file.io_close
 
-	fun file_stat: FileStat do return file._file.file_stat
-
 	fun fileno: Int do return file._file.fileno
 
 	fun flush: Int do return file._file.flush
