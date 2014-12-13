@@ -333,7 +333,7 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
 		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
