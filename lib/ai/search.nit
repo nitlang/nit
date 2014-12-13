@@ -159,8 +159,6 @@ interface SearchProblem[S: Object, A]
 	# `steps` is the maximum number of steps a giver configuration can run.
 	fun run_configs(steps: Int)
 	do
-		var s
-
 		var c = 0
 		loop
 			if astar.run_config(steps, c, "A*") then break
@@ -597,7 +595,7 @@ class SearchSolver[S: Object, A]
 		print msg
 
 		var t = new Clock
-		var res = run_steps(steps)
+		run_steps(steps)
 		print "\t{self}"
 		var l = t.lapse
 		print "\ttime={l}"
