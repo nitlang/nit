@@ -33,6 +33,13 @@ else
 	TIME=
 fi
 
+# Detect a working date command
+if date -Iseconds >/dev/null 2>&1; then
+	TIMESTAMP="timestamp='`date -Iseconds`'"
+else
+	TIMESTAMP=
+fi
+
 # Magic here! This tee and save both stdout and stderr in distinct files without messing with them
 # Time  just get the user time
 $TIME "$@" > >(tee "${name}.out") 2> >(tee "${name}.2.out" >&2)
@@ -43,7 +50,7 @@ n=${name##*-}
 
 cat > "${name}.xml"<<END
 <testsuites><testsuite>
-<testcase classname='$c' name='$n' time='`cat "${name}.t.out"`' timestamp='`date -Iseconds`'>
+<testcase classname='$c' name='$n' time='`cat "${name}.t.out"`' $TIMESTAMP>
 END
 if test "$res" != "0"; then
 echo >> "${name}.xml" "<error message='Command returned $res'/>"
