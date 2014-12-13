@@ -15,7 +15,7 @@
 # Standard input and output can be handled through streams.
 module exec
 
-import stream
+import file
 
 # Simple sub-process
 class Process
@@ -93,7 +93,7 @@ class IProcess
 	super IStream
 
 	# File Descriptor used for the input.
-	var stream_in: FDIStream is noinit
+	var stream_in: IFStream is noinit
 
 	redef fun close do stream_in.close
 
@@ -106,7 +106,7 @@ class IProcess
 	redef fun execute
 	do
 		super
-		stream_in = new FDIStream(data.out_fd)
+		stream_in = new IFStream.from_fd(data.out_fd)
 	end
 end
 
@@ -129,7 +129,7 @@ class OProcess
 	redef fun execute
 	do
 		super
-		stream_out = new FDOStream(data.in_fd)
+		stream_out = new OFStream.from_fd(data.in_fd)
 	end
 end
 

@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2006-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,16 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import file
+var ifs = new IFStream.open("donotcreate.bing")
 
-var fd_in = new IFStream.from_fd(0)
-var fd_out = new OFStream.from_fd(1)
-var fd_err = new OFStream.from_fd(2)
+var s = ifs.read_all
 
-fd_out.write("Hello\n")
+ifs.close
 
-var s = fd_in.read_line
-fd_out.write(s)
-fd_out.write("\n")
+if ifs.last_error != null then print ifs.last_error.as(not null)
 
-fd_err.write("World\n")
+ifs.reopen
+
+s = ifs.read_all
+
+ifs.close
+
+if ifs.last_error != null then print ifs.last_error.as(not null)
