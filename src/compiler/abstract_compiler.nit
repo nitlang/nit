@@ -3067,7 +3067,7 @@ end
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
+toolcontext.tooldescription = "Usage: nitc [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)

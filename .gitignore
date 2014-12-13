@@ -27,7 +27,7 @@ src/*.dot
 src/*.dat
 src/*.gnu
 src/*.bin
-src/nitg_0
+src/nitc_0
 
 c_src/*.o
 c_src/*.cksum

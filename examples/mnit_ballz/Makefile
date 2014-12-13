@@ -5,7 +5,7 @@ default: android
 
 android: icon
 	mkdir -p bin
-	../../bin/nitg -o bin/ballz.apk src/ballz_android.nit
+	../../bin/nitc -o bin/ballz.apk src/ballz_android.nit
 
 icon: ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p res

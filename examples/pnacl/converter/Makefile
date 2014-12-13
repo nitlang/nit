@@ -1,5 +1,5 @@
 default: 
-	../../../bin/nitg --semi-global converter.nit
+	../../../bin/nitc --semi-global converter.nit
 
 HTTPD_PY := python $(NACL_SDK_ROOT)/tools/httpd.py
 serve:

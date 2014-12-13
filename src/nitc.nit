@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A global Nit compiler
-module nitg
+# A Nit compiler
+module nitc
 
 import frontend
 import compiler

@@ -70,7 +70,7 @@ fi
 cd ../src
 test -f ./nitc_3 || ./ncall.sh -O
 cd ../benchmarks
-test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
+test -f ./nitc || ../src/nitc_3 ../src/nitc.nit -O -v
 
 ## EFFECTIVE BENCHS ##
 
@@ -87,7 +87,7 @@ function bench_language()
 	s=20
 	seq="2 4 8"
 	for b in $seq; do
-		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
+		run_command ./nitc languages/$name.nit -o $basedir/$name.bin
 		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
 	done
 
@@ -152,35 +152,35 @@ function bench_language()
 	done
 
 	nitdir="${basedir}/nit"
-	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
+	prepare_res $nitdir/$name-nitc.dat "nitc" "nitc"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --global -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
+		run_command ./nitc $nitdir/${t}_$b.nit --global -o "$nitdir/${t}_$b.nitc.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitc.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
+	prepare_res $nitdir/$name-nitc-s.dat "nitc-s" "nitc-s"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
+		run_command ./nitc $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitc-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitc-s.bin" $s
 	done
 
 <<XXX
-	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
+	prepare_res $nitdir/$name-nitc-su.dat "nitc-su" "nitc-su"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
+		run_command ./nitc $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitc-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitc-su.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
+	prepare_res $nitdir/$name-nitc-e.dat "nitc-e" "nitc-e"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
+		run_command ./nitc $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitc-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitc-e.bin" $s
 	done
 
-	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
+	prepare_res $nitdir/$name-nitc-eu.dat "nitc-eu" "nitc-eu"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
+		run_command ./nitc $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitc-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitc-eu.bin" $s
 	done
 XXX
 

@@ -1,3 +1,3 @@
 all:
 	mkdir -p bin/
-	../../bin/nitg --dir bin/ src/opportunity_web.nit
+	../../bin/nitc --dir bin/ src/opportunity_web.nit
