@@ -494,6 +494,19 @@ class Repo
 		return res
 	end
 
+	# List of contributor related statistics.
+	fun contrib_stats: Array[ContributorStats] do
+		api.message(1, "Get contributor stats for {full_name}")
+		var res = new Array[ContributorStats]
+		var array = api.get("{key}/stats/contributors")
+		if array isa JsonArray then
+			for obj in array do
+				res.add new ContributorStats.from_json(api, obj.as(JsonObject))
+			end
+		end
+		return res
+	end
+
 	# Repo default branch.
 	fun default_branch: Branch do
 		var name = json["default_branch"].to_s
@@ -1149,4 +1162,41 @@ class RenameAction
 
 	# Name after renaming.
 	fun to: String do return json["to"].to_s
+end
+
+# Contributors list with additions, deletions, and commit counts.
+#
+# Should be accessed from `Repo::contrib_stats`.
+#
+# See <https://developer.github.com/v3/repos/statistics/>.
+class ContributorStats
+	super Comparable
+
+	redef type OTHER: ContributorStats
+
+	# Github API client.
+	var api: GithubAPI
+
+	# Json content.
+	var json: JsonObject
+
+	# Init `self` from a `json` object.
+	init from_json(api: GithubAPI, json: JsonObject) do
+		self.api = api
+		self.json = json
+	end
+
+	# User these statistics are about.
+	fun author: User do
+		return new User.from_json(api, json["author"].as(JsonObject))
+	end
+
+	# Total number of commit.
+	fun total: Int do return json["total"].to_s.to_i
+
+	# Are of weeks of activity with detailed statistics.
+	fun weeks: JsonArray do return json["weeks"].as(JsonArray)
+
+	# ContributorStats can be compared on the total amount of commits.
+	redef fun <(o) do return total < o.total
 end
