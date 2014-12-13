@@ -44,8 +44,7 @@ abstract class Option
 	var default_value: VALUE is writable
 
 	# Create a new option
-	init(help: String, default: VALUE, names: nullable Array[String])
-	do
+	init(help: String, default: VALUE, names: nullable Array[String]) is old_style_init do
 		init_opt(help, default, names)
 	end
 
@@ -97,7 +96,8 @@ end
 # Not really an option. Just add a line of text when displaying the usage
 class OptionText
 	super Option
-	init(text: String) do super(text, null, null)
+
+	init(text: String) is old_style_init do super(text, null, null)
 
 	redef fun pretty(off) do return to_s
 
@@ -109,7 +109,7 @@ class OptionBool
 	super Option
 	redef type VALUE: Bool
 
-	init(help: String, names: String...) do super(help, false, names)
+	init(help: String, names: String...) is old_style_init do super(help, false, names)
 
 	redef fun read_param(it)
 	do
@@ -123,7 +123,7 @@ class OptionCount
 	super Option
 	redef type VALUE: Int
 
-	init(help: String, names: String...) do super(help, 0, names)
+	init(help: String, names: String...) is old_style_init do super(help, 0, names)
 
 	redef fun read_param(it)
 	do
@@ -159,7 +159,7 @@ class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
 
-	init(help: String, names: String...) do super(help, null, names)
+	init(help: String, names: String...) is old_style_init do super(help, null, names)
 
 	redef fun convert(str) do return str
 end
@@ -172,8 +172,7 @@ class OptionEnum
 	redef type VALUE: Int
 	var values: Array[String]
 
-	init(values: Array[String], help: String, default: Int, names: String...)
-	do
+	init(values: Array[String], help: String, default: Int, names: String...) is old_style_init do
 		assert values.length > 0
 		self.values = values.to_a
 		super("{help} <{values.join(", ")}>", default, names)
@@ -203,7 +202,9 @@ class OptionInt
 	super OptionParameter
 	redef type VALUE: Int
 
-	init(help: String, default: Int, names: String...) do super(help, default, names)
+	init(help: String, default: Int, names: String...) is old_style_init do
+		super(help, default, names)
+	end
 
 	redef fun convert(str) do return str.to_i
 end
@@ -213,7 +214,9 @@ class OptionFloat
 	super OptionParameter
 	redef type VALUE: Float
 
-	init(help: String, default: Float, names: String...) do super(help, default, names)
+	init(help: String, default: Float, names: String...) is old_style_init do
+		super(help, default, names)
+	end
 
 	redef fun convert(str) do return str.to_f
 end
@@ -224,8 +227,7 @@ class OptionArray
 	super OptionParameter
 	redef type VALUE: Array[String]
 
-	init(help: String, names: String...)
-	do
+	init(help: String, names: String...) is old_style_init do
 		values = new Array[String]
 		super(help, values, names)
 	end
