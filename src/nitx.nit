@@ -310,7 +310,7 @@ private class PagerMatchesRenderer
 		pager.render
 	end
 
-	private fun props_fulldoc(pager: Pager, raw_mprops: List[MProperty]) do
+	fun props_fulldoc(pager: Pager, raw_mprops: List[MProperty]) do
 		# group by module
 		var cats = new HashMap[MModule, Array[MProperty]]
 		for mprop in raw_mprops do

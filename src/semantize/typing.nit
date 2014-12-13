@@ -178,7 +178,7 @@ private class TypeVisitor
 	end
 
 
-	private fun visit_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
+	fun visit_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
 		var sub = visit_expr(nexpr)
 		if sub == null then return null # Forward error

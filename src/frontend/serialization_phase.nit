@@ -73,7 +73,7 @@ private class SerializationPhasePreModel
 		end
 	end
 
-	private fun generate_serialization_method(nclassdef: AClassdef)
+	fun generate_serialization_method(nclassdef: AClassdef)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -94,7 +94,7 @@ private class SerializationPhasePreModel
 	end
 
 	# Add a constructor to the automated nclassdef
-	private fun generate_deserialization_init(nclassdef: AClassdef)
+	fun generate_deserialization_init(nclassdef: AClassdef)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -128,7 +128,7 @@ private class SerializationPhasePreModel
 	end
 
 	# Added to the abstract serialization service
-	private fun generate_deserialization_method(nmodule: AModule, nclassdefs: Array[AStdClassdef])
+	fun generate_deserialization_method(nmodule: AModule, nclassdefs: Array[AStdClassdef])
 	do
 		var code = new Array[String]
 

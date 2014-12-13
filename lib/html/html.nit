@@ -325,6 +325,6 @@ end
 private class HTMLRaw
 	super HTMLTag
 
-	private var content: String
+	var content: String
 	redef fun render_in(res) do res.add content
 end
