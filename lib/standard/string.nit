@@ -394,7 +394,7 @@ abstract class Text
 	# This method is mainly used to remove the LINE_FEED character from lines of text.
 	fun chomp: SELFTYPE
 	do
-		if self.chars.last != '\n' then return self
+		if self.is_empty or self.chars.last != '\n' then return self
 		return substring(0, length-1)
 	end
 
