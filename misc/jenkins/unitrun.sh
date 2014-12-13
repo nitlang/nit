@@ -26,9 +26,9 @@ shift
 
 # Detect a working time command
 if env time --quiet -f%U true 2>/dev/null; then
-	TIME="env time --quiet -f%U -o '${name}.t.out'"
+	TIME="env time --quiet -f%U -o ${name}.t.out"
 elif env time -f%U true 2>/dev/null; then
-	TIME="env time -f%U -o '${name}.t.out'"
+	TIME="env time -f%U -o ${name}.t.out"
 else
 	TIME=
 fi
@@ -48,9 +48,16 @@ res=$?
 c=`echo "${name%-*}" | tr "-" "."`
 n=${name##*-}
 
+# Do we have a time result?
+if test -f "${name}.t.out"; then
+	T="time='`cat "${name}.t.out"`'"
+else
+	T=
+fi
+
 cat > "${name}.xml"<<END
 <testsuites><testsuite>
-<testcase classname='$c' name='$n' time='`cat "${name}.t.out"`' $TIMESTAMP>
+<testcase classname='$c' name='$n' $T $TIMESTAMP>
 END
 if test "$res" != "0"; then
 echo >> "${name}.xml" "<error message='Command returned $res'/>"
@@ -67,4 +74,4 @@ cat >> "${name}.xml"<<END
 </testsuite></testsuites>
 END
 
-rm "${name}.out" "${name}.2.out" "${name}.t.out"
+rm "${name}.out" "${name}.2.out" "${name}.t.out" 2> /dev/null || true
