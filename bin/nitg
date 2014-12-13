@@ -1,0 +1,4 @@
+#!/bin/bash
+self=`readlink /proc/$$/fd/255`
+dir=`dirname "$self"`
+exec "$dir/nitc" "$@"

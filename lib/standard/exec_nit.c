@@ -26,22 +26,19 @@ se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, c
 	if (pipeflag & 1) {
 		int res = pipe(in_fd);
 		if ( res == -1 ) {
-			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
-			exit(1);
+			return NULL;
 		}
 	}
 	if (pipeflag & 2) {
 		int res = pipe(out_fd);
 		if ( res == -1 ) {
-			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
-			exit(1);
+			return NULL;
 		}
 	}
 	if (pipeflag & 4) {
 		int res = pipe(err_fd);
 		if ( res == -1 ) {
-			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
-			exit(1);
+			return NULL;
 		}
 	}
 					

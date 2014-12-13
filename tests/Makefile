@@ -1,5 +1,5 @@
 
-PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../contrib/pep8analysis/src/pep8analysis ../contrib/nitiwiki/src/nitiwiki ../lib/*.nit ../src/nitdoc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nitg.nit
+PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../contrib/pep8analysis/src/pep8analysis ../contrib/nitiwiki/src/nitiwiki ../lib/*.nit ../src/nitdoc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nitc.nit
 
 all: niti nitg-g nitg-s
 

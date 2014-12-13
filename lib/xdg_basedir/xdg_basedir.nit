@@ -110,7 +110,7 @@ end
 
 private extern class ConstPointer `{ const void * `}
 	# Convert a C `char **` to a Nit `Array[String]`
-	private fun to_string_array: Array[String]
+	fun to_string_array: Array[String]
 	import Array[String], Array[String].add, NativeString.to_s `{
 		char **strings = (char**)recv;
 

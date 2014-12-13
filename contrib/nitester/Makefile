@@ -1,3 +1,3 @@
 all:
 	mkdir -p bin/
-	../../bin/nitg src/nitester.nit -o bin/nitester
+	../../bin/nitc src/nitester.nit -o bin/nitester

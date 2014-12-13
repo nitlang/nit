@@ -29,9 +29,9 @@ unset NIT_DIR
 shopt -s nullglob
 JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 
-paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/`
-paths=($paths)	
-JNI_LIB_PATH=${paths[0]}
+paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
+paths=($paths)
+JNI_LIB_PATH=`dirname ${paths[0]}`
 shopt -u nullglob
 
 outdir="out"
@@ -45,7 +45,7 @@ Usage: $e [options] modulenames
 -o option   Pass option to the engine
 -v          Verbose (show tests steps)
 -h          This help
---engine    Use a specific engine (default=nitg)
+--engine    Use a specific engine (default=nitc)
 --noskip    Do not skip a test even if the .skip file matches
 --outdir    Use a specific output folder (default=out/)
 --compdir   Use a specific temporary compilation folder (default=.nit_compile)
@@ -316,6 +316,14 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
+
+	# Skip by OS
+	os_skip_file=`uname`.skip
+	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file"; then
+		echo "=> $2: [skip os]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
 	return 1
 }
 
@@ -355,7 +363,7 @@ find_nitc()
 verbose=false
 isnode=false
 stop=false
-engine=nitg
+engine=nitc
 noskip=
 savdirs=
 while [ $stop = false ]; do
@@ -374,29 +382,29 @@ done
 enginebinname=$engine
 isinterpret=
 case $engine in
-	nitg)
+	nitc|nitg)
 		engine=nitg-s;
-		enginebinname=nitg;
+		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
-	nitg-s)
-		enginebinname=nitg;
+	nitcs|nitg-s)
+		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
-	nitg-e)
-		enginebinname=nitg;
+	nitce|nitg-e)
+		enginebinname=nitc;
 		OPT="--erasure $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
-	nitg-sg)
-		enginebinname=nitg;
+	nitcsg|nitg-sg)
+		enginebinname=nitc;
 		OPT="--semi-global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
-	nitg-g)
-		enginebinname=nitg;
+	nitcg|nitg-g)
+		enginebinname=nitc;
 		OPT="--global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
@@ -413,7 +421,7 @@ case $engine in
 		savdirs="sav/niti/"
 		;;
 	emscripten)
-		enginebinname=nitg
+		enginebinname=nitc
 		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-sg/"
 		;;

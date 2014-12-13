@@ -111,7 +111,7 @@ class RapidTypeAnalysis
 	# Return a ready-to-save CSV document objet that agregates informations about live types.
 	# Each discovered type is listed in a line, with its status: resolution, liveness, cast-liveness.
 	# Note: types are listed in an alphanumeric order to improve human reading.
-	fun live_types_to_csv: CSVDocument
+	fun live_types_to_csv: CsvDocument
 	do
 		# Gather all kind of type
 		var typeset = new HashSet[MType]
@@ -121,7 +121,8 @@ class RapidTypeAnalysis
 		typeset.add_all(live_open_cast_types)
 		var types = typeset.to_a
 		(new CachedAlphaComparator).sort(types)
-		var res = new CSVDocument
+		var res = new CsvDocument
+		res.format = new CsvFormat('"', ';', "\n")
 		res.header = ["Type", "Resolution", "Liveness", "Cast-liveness"]
 		for t in types do
 			var reso
@@ -130,7 +131,7 @@ class RapidTypeAnalysis
 			if t isa MClassType and (live_types.has(t) or live_open_types.has(t)) then live = "LIVE" else live = "DEAD"
 			var cast
 			if live_cast_types.has(t) or live_open_cast_types.has(t) then cast = "CAST LIVE" else cast = "CAST DEAD"
-			res.add_line(t, reso, live, cast)
+			res.add_record(t, reso, live, cast)
 		end
 		return res
 	end

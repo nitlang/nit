@@ -28,6 +28,7 @@ import re2nfa
 class CollectNameVisitor
 	super Visitor
 
+	# All the productions
 	var nprods = new Array[Nprod]
 
 	# Symbol table to associate things (prods and exprs) with their name
@@ -44,7 +45,7 @@ class CollectNameVisitor
 	# The current production, used to initialize priorities
 	var prod: nullable Production = null
 
-	# The current priority counter to name tranformed productions
+	# The current priority counter to name transformed productions
 	var pricpt: Int = 0
 
 	# Run the semantic analysis of the grammar
@@ -53,13 +54,13 @@ class CollectNameVisitor
 		# First visit to collect names
 		enter_visit(n)
 
-		# Second visit to use collectec names and build rhings
+		# Second visit to use collected names and build things
 		var v2 = new CheckNameVisitor(self)
 		v2.enter_visit(n)
 
-		# Inline all the ?
+		# Inline all the `?`
 		gram.inline(v2.quesizes.values)
-		# Inlile all the prods sufixed by '_imline' #TODO use a real keyword
+		# Inline all the prods suffixed by '_inline' #TODO use a real keyword
 		for p in gram.prods do
 			if not p.name.has_suffix("_inline") then continue
 			print "inline {p}"
@@ -102,14 +103,14 @@ private class CheckNameVisitor
 	# The collected element names, for the alternative
 	var elems_names = new Array[nullable String]
 
-	# The collected elementname, for the nelem
+	# The collected element names, for the nelem
 	var elemname: nullable String = null
 
 	# Is the alternative transformed, for the alternative
 	var trans = false
 
 	# The current priority class
-	# Used the check, and tranform the grammar
+	# Used the check, and transform the grammar
 	var pri: nullable Npriority = null
 
 	# Known ignored tokens
@@ -119,7 +120,7 @@ private class CheckNameVisitor
 	var rejecteds = new Array[Element]
 
 	# Pool of elements that are modified with + (reuse them!)
-	private var plusizes = new HashMap[Element, Production]
+	var plusizes = new HashMap[Element, Production]
 
 	# Create a + version of an element
 	fun plusize(e: Element): Production
@@ -136,7 +137,7 @@ private class CheckNameVisitor
 	end
 
 	# Pool of elements that are modified with ? (reuse them!)
-	private var quesizes = new HashMap[Element, Production]
+	var quesizes = new HashMap[Element, Production]
 
 	# Create a ? version of an element
 	fun quesize(e: Element): Production
@@ -155,14 +156,13 @@ private class CheckNameVisitor
 	end
 
 	# The current nexpr, used to track dependency on named expressions (see `Nexpr::precs`)
-	var nexpr: nullable Nexpr
+	var nexpr: nullable Nexpr = null
 
 	# The current production, used to initialize alternatives
-	var prod: nullable Production
+	var prod: nullable Production = null
 
 	# The main visitor, used to access the grammar of the symbol table
 	var v1: CollectNameVisitor
-	init(v1: CollectNameVisitor) do self.v1 = v1
 
 	redef fun visit(n) do n.accept_check_name_visitor(self)
 end
@@ -204,7 +204,7 @@ redef class Nexpr
 	# The associated NFA (cached, see `build_nfa`)
 	private var nfa: nullable Automaton
 
-	# Build the NFA, possibily building the NFA of required expressions
+	# Build the NFA, possibly building the NFA of required expressions
 	# Print an error if there is a circular dependency
 	# The result is cached
 	fun build_nfa: Automaton do
@@ -269,7 +269,7 @@ redef class Nign
 				abort
 			else if e isa Token then
 				# The token was build and registered during the visit
-				# So, unregister then, the bit Ignred token will be build later
+				# So, unregister them, the big Ignored token will be build later
 				v.v1.gram.tokens.remove(e)
 			else
 				abort
@@ -298,13 +298,13 @@ redef class Nrej
 end
 
 redef class Nprod
-	# The associated main production
-	# ie the last priority class
+	# The associated main production.
+	# i.e. the last priority class.
 	var prod: nullable Production
 
-	# The associated most-priority production
-	# ie the first priority class
-	# If there is no priority then `sub_prod == prod`
+	# The associated most-priority production.
+	# i.e. the first priority class.
+	# If there is no priority then `sub_prod == prod`.
 	var sub_prod: nullable Production
 
 	redef fun accept_collect_prod(v) do
@@ -376,13 +376,14 @@ redef class Natrans
 end
 
 redef class Npriority
+	# It is the last priority group?
 	var is_last = false
 
 	# The associated production
 	var prod: nullable Production
 
-	# The production in the with the next less priority class
-	# null is there is no priority or if the first priority class
+	# The production in the with the next less priority class.
+	# `null` if there is no priority or if the first priority class.
 	var next: nullable Production
 
 	redef fun accept_collect_prod(v) do
@@ -409,7 +410,7 @@ redef class Npriority
 		v.pri = self
 		super
 
-		# Inject a new alternative that goes to the next less prioty class
+		# Inject a new alternative that goes to the next less priority class
 		var alt = prod.new_alt2(prod.name + "_" + prod.alts.length.to_s, [next.as(not null)])
 		alt.trans = true
 		alt.codes = [new CodePop]
@@ -462,6 +463,8 @@ redef class Npriority_unary
 end
 
 redef class Alternative
+	# The short name of the alternative.
+	# Used for errors
 	var short_name: nullable String
 end
 

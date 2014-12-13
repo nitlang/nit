@@ -44,8 +44,6 @@ end
 class TermMoveUp
 	super TermDirectionalMove
 
-	init do end
-
 	# Move by the specified number of cells.
 	init by(magnitude: Int) do self.magnitude = magnitude
 
@@ -55,8 +53,6 @@ end
 # ANSI/VT100 code to move the cursor down by `magnitude` rows (CUD).
 class TermMoveDown
 	super TermDirectionalMove
-
-	init do end
 
 	# Move by the specified number of cells.
 	init by(magnitude: Int) do self.magnitude = magnitude
@@ -68,8 +64,6 @@ end
 class TermMoveFoward
 	super TermDirectionalMove
 
-	init do end
-
 	# Move by the specified number of cells.
 	init by(magnitude: Int) do self.magnitude = magnitude
 
@@ -79,8 +73,6 @@ end
 # ANSI/VT100 code to move the cursor backward by `magnitude` columns (CUB).
 class TermMoveBackward
 	super TermDirectionalMove
-
-	init do end
 
 	# Move by the specified number of cells.
 	init by(magnitude: Int) do self.magnitude = magnitude
@@ -101,8 +93,6 @@ class TermMove
 	#
 	# 1 is the left.
 	var column: Int = 1
-
-	init do end
 
 	# Move at the specified position.
 	#

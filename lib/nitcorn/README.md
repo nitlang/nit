@@ -10,6 +10,7 @@ Want to see `nitcorn` in action? Examples are available at ../../examples/nitcor
  - [x] Configuration change on the fly
  - [x] Sessions
  - [x] Reading cookies
+ - [x] Parameterized routes
  - [ ] Full cookie support
  - [ ] Close interfaces on the fly
  - [ ] Better logging
@@ -28,3 +29,7 @@ Jean-Philippe Caissy, Guillaume Auger, Frederic Sevillano, Justin Michaud-Ouelle
 Stephan Michaud and Maxime Bélanger.
 
 It has been adapted to a library, and is currently maintained, by Alexis Laferrière.
+
+Other contributors:
+
+* Alexandre Terrasa

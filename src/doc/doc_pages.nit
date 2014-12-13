@@ -905,7 +905,7 @@ class NitdocModule
 
 		# Graph
 		var mmodules = new HashSet[MModule]
-		mmodules.add_all mmodule.in_nesting.direct_greaters
+		mmodules.add_all mmodule.nested_mmodules
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mmodule
@@ -1498,7 +1498,12 @@ class NitdocProperty
 
 	private fun tpl_properties(parent: TplSection) do
 		# intro title
-		var section = new TplSection.with_title("intro", "Introduction")
+		var ns = mproperty.intro.mclassdef.mmodule.tpl_namespace
+		var section = new TplSection("intro")
+		var title = new Template
+		title.add "Introduction in "
+		title.add ns
+		section.title = title
 		section.summary_title = "Introduction"
 		section.add_child tpl_mpropdef_article(mproperty.intro)
 		parent.add_child section
@@ -1516,7 +1521,7 @@ class NitdocProperty
 				parent.add_child new TplSection(mentity.nitdoc_id)
 			else if mentity isa MModule then
 				var ssection = new TplSection(mentity.nitdoc_id)
-				var title = new Template
+				title = new Template
 				title.add "in "
 				title.add mentity.tpl_namespace
 				ssection.title = title

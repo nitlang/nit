@@ -591,7 +591,7 @@ class XophonReader
 		var buffer: Buffer = new FlatBuffer
 
 		# Number of consecutive closing brackets.
-		var closing: Int = 0
+		var closing = 0
 
 		if lexer.expect_string("CDATA[",
 				" at the beginning of a CDATA section.") then

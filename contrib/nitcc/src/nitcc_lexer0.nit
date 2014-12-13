@@ -12,24 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ad-hoc hand-writen lexer for nitcc
-# This avoid to commit (and relyon ) a generated lexer
-#
+# Ad-hoc hand-written lexer for nitcc
+# This avoid to commit (and rely on) a generated lexer
 module nitcc_lexer0
 
 # Required for the tokens definitions
 import nitcc_parser
 
-# Hand-writen lexer of nitcc
-# Used only for the boostrap of the tool.
+# Hand-written lexer of nitcc.
+# Used only for the bootstrap of the tool.
 class Lexer_nitcc
+	# The text to tokenize
 	var text: String
 
-	var iter: Iterator[Char] = "".chars.iterator
+	# The iterator on text
+	private var iter: Iterator[Char] is noinit
+
+	# The current position
 	var pos = 0
 
-	var tokens = new Array[NToken]
+	# The tokens currently produced
+	private var tokens = new Array[NToken]
 
+	# Tokenize and returns the tokens
 	fun lex: Array[NToken]
 	do
 		iter = text.chars.iterator
@@ -88,13 +93,13 @@ class Lexer_nitcc
 		return tokens
 	end
 
-	fun error(c: Char)
+	private fun error(c: Char)
 	do
 		print "pos {pos}: Lexer error on '{c}'."
 		abort
 	end
 
-	fun str
+	private fun str
 	do
 		var b = new FlatBuffer
 		b.add('\'')
@@ -121,7 +126,7 @@ class Lexer_nitcc
 		abort
 	end
 
-	fun id(c: Char)
+	private fun id(c: Char)
 	do
 		var b = new FlatBuffer
 		b.add c
@@ -138,7 +143,7 @@ class Lexer_nitcc
 		tokens.add token
 	end
 
-	fun kw(c: Char)
+	private fun kw(c: Char)
 	do
 		var b = new FlatBuffer
 		b.add c
@@ -155,7 +160,7 @@ class Lexer_nitcc
 		tokens.add token
 	end
 
-	fun trim
+	private fun trim
 	do
 		while iter.is_ok and iter.item <= ' ' do
 			iter.next

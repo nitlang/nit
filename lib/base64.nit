@@ -36,6 +36,10 @@ redef class String
 	# Encodes the receiver string to base64.
 	# By default, uses "=" for padding.
 	fun encode_base64 : String do return encode_base64_custom_padding( '=' )
+
+	# Encodes the receiver string to base64 using a custom padding character.
+	#
+	# If using the default padding character `=`, see `encode_base64`.
 	fun encode_base64_custom_padding( padding : Char ) : String
 	do
 		var base64_chars = once base64_chars
@@ -78,6 +82,10 @@ redef class String
 	# Decodes the receiver string from base64.
 	# By default, uses "=" for padding.
 	fun decode_base64 : String do return decode_base64_custom_padding( '=' )
+
+	# Decodes the receiver string to base64 using a custom padding character.
+	#
+	# If using the default padding character `=`, see `decode_base64`.
 	fun decode_base64_custom_padding( padding : Char ) : String
 	do
 		var inverted_base64_chars = once inverted_base64_chars

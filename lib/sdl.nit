@@ -280,6 +280,24 @@ class SDLMouseButtonEvent
 	redef var pressed: Bool
 	redef fun depressed: Bool do return not pressed
 
+	# Is this event raised by the left button?
+	fun is_left_button: Bool do return button == 1
+
+	# Is this event raised by the right button?
+	fun is_right_button: Bool do return button == 2
+
+	# Is this event raised by the middle button?
+	fun is_middle_button: Bool do return button == 3
+
+	# Is this event raised by the wheel going down?
+	fun is_down_wheel: Bool do return button == 4
+
+	# Is this event raised by the wheel going up?
+	fun is_up_wheel: Bool do return button == 5
+
+	# Is this event raised by the wheel?
+	fun is_wheel: Bool do return is_down_wheel or is_up_wheel
+
 	init (x, y: Float, button: Int, pressed: Bool)
 	do
 		super(x, y)

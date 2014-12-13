@@ -45,19 +45,30 @@ class VirtualMachine super NaiveInterpreter
 	var memory_manager: MemoryManager = new MemoryManager
 
 	# The unique instance of the `MInit` value
-	var initialization_value: Instance
+	var initialization_value: Instance is noinit
 
-	init(modelbuilder: ModelBuilder, mainmodule: MModule, arguments: Array[String])
+	init
 	do
 		var init_type = new MInitType(mainmodule.model)
 		initialization_value = new MutableInstance(init_type)
 		super
 	end
 
-	# Subtyping test for the virtual machine
+	# Runtime subtyping test
 	redef fun is_subtype(sub, sup: MType): Bool
 	do
+		if sub == sup then return true
+
 		var anchor = self.frame.arguments.first.mtype.as(MClassType)
+
+		# `sub` or `sup` are formal or virtual types, resolve them to concrete types
+		if sub isa MParameterType or sub isa MVirtualType then
+			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
+		end
+		if sup isa MParameterType or sup isa MVirtualType then
+			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
+		end
+
 		var sup_accept_null = false
 		if sup isa MNullableType then
 			sup_accept_null = true
@@ -77,11 +88,6 @@ class VirtualMachine super NaiveInterpreter
 		end
 		# Now the case of direct null and nullable is over
 
-		# An unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
-			return sub == sup
-		end
-
 		if sub isa MParameterType or sub isa MVirtualType then
 			sub = sub.anchor_to(mainmodule, anchor)
 			# Manage the second layer of null/nullable
@@ -100,34 +106,33 @@ class VirtualMachine super NaiveInterpreter
 
 		assert sup isa MClassType
 
-		# Create the sup vtable if not create
+		# `sub` and `sup` can be discovered inside a Generic type during the subtyping test
 		if not sup.mclass.loaded then create_class(sup.mclass)
-
-		# Sub can be discovered inside a Generic type during the subtyping test
 		if not sub.mclass.loaded then create_class(sub.mclass)
 
-		if sup isa MGenericType then
-			var sub2 = sub.supertype_to(mainmodule, anchor, sup.mclass)
-			assert sub2.mclass == sup.mclass
-
-			for i in [0..sup.mclass.arity[ do
-				var sub_arg = sub2.arguments[i]
-				var sup_arg = sup.arguments[i]
-				var res = is_subtype(sub_arg, sup_arg)
-
-				if res == false then return false
-			end
-			return true
-		end
-
+		# For now, always use perfect hashing for subtyping test
 		var super_id = sup.mclass.vtable.id
 		var mask = sub.mclass.vtable.mask
 
-		return inter_is_subtype(super_id, mask, sub.mclass.vtable.internal_vtable)
+		var res = inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
+		if res == false then return false
+		# sub and sup can be generic types, each argument of generics has to be tested
+
+		if not sup isa MGenericType then return true
+		var sub2 = sub.supertype_to(mainmodule, anchor, sup.mclass)
+
+		# Test each argument of a generic by recursive calls
+		for i in [0..sup.mclass.arity[ do
+			var sub_arg = sub2.arguments[i]
+			var sup_arg = sup.arguments[i]
+			var res2 = is_subtype(sub_arg, sup_arg)
+			if res2 == false then return false
+		end
+		return true
 	end
 
 	# Subtyping test with perfect hashing
-	private fun inter_is_subtype(id: Int, mask:Int, vtable: Pointer): Bool `{
+	private fun inter_is_subtype_ph(id: Int, mask:Int, vtable: Pointer): Bool `{
 		// hv is the position in hashtable
 		int hv = id & mask;
 
@@ -136,6 +141,14 @@ class VirtualMachine super NaiveInterpreter
 
 		// If the pointed value is corresponding to the identifier, the test is true, otherwise false
 		return *offset == id;
+	`}
+
+	# Subtyping test with Cohen test (direct access)
+	private fun inter_is_subtype_sst(id: Int, position: Int, vtable: Pointer): Bool `{
+		// Direct access to the position given in parameter
+		int tableid = (long unsigned int)((long int *)vtable)[position];
+
+		return id == tableid;
 	`}
 
 	# Redef init_instance to simulate the loading of a class
@@ -195,17 +208,21 @@ class VirtualMachine super NaiveInterpreter
 		var ret = send_commons(mproperty, args, mtype)
 		if ret != null then return ret
 
-		var propdef = method_dispatch(mproperty, recv.vtable.as(not null))
+		var propdef = method_dispatch(mproperty, recv.vtable.as(not null), recv)
 
 		return self.call(propdef, args)
 	end
 
 	# Method dispatch, for a given global method `mproperty`
 	# returns the most specific local method in the class corresponding to `vtable`
-	private fun method_dispatch(mproperty: MMethod, vtable: VTable): MMethodDef
+	private fun method_dispatch(mproperty: MMethod, vtable: VTable, recv: Instance): MMethodDef
 	do
-		return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
+		if mproperty.intro_mclassdef.mclass.positions_methods[recv.mtype.as(MClassType).mclass] != -1 then
+			return method_dispatch_sst(vtable.internal_vtable, mproperty.absolute_offset)
+		else
+			return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
 				mproperty.intro_mclassdef.mclass.vtable.id, mproperty.offset)
+		end
 	end
 
 	# Execute a method dispatch with perfect hashing
@@ -217,6 +234,17 @@ class VirtualMachine super NaiveInterpreter
 		// pointer+2 is the position where methods are
 		// Add the offset of property and get the method implementation
 		MMethodDef propdef = (MMethodDef)*(pointer + 2 + offset);
+
+		return propdef;
+	`}
+
+	# Execute a method dispatch with direct access and return the appropriate `MMethodDef`
+	# `vtable` : Pointer to the internal pointer of the class
+	# `absolute_offset` : Absolute offset from the beginning of the virtual table
+	private fun method_dispatch_sst(vtable: Pointer, absolute_offset: Int): MMethodDef `{
+		// pointer+2 is the position where methods are
+		// Add the offset of property and get the method implementation
+		MMethodDef propdef = (MMethodDef)((long int *)vtable)[absolute_offset];
 
 		return propdef;
 	`}
@@ -349,6 +377,10 @@ redef class MClass
 	# True when the class is effectively loaded by the vm, false otherwise
 	var loaded: Bool = false
 
+	# Color for Cohen subtyping test : the absolute position of the id
+	# of this class in virtual tables
+	var color: Int
+
 	# For each loaded subclass, keep the position of the group of attributes
 	# introduced by self class in the object
 	var positions_attributes: HashMap[MClass, Int] = new HashMap[MClass, Int]
@@ -373,8 +405,11 @@ redef class MClass
 
 		# Absolute offset of attribute from the beginning of the attributes table
 		var offset_attributes = 0
-		# Absolute offset of method from the beginning of the methods table
-		var offset_methods = 0
+
+		# Absolute offset of method from the beginning of the methods table,
+		# is initialize to 3 because the first position is empty in the virtual table
+		# and the second and third are respectively class id and delta
+		var offset_methods = 3
 
 		# The previous element in `superclasses`
 		var previous_parent: nullable MClass = null
@@ -408,11 +443,15 @@ redef class MClass
 
 			offset_attributes += attributes
 			offset_methods += methods
+			offset_methods += 2 # Because each block starts with an id and the delta
 		end
 
 		# When all super-classes have their identifiers and vtables, allocate current one
 		allocate_vtable(v, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
 		loaded = true
+
+		# Set the absolute position of the identifier of this class in the virtual table
+		color = offset_methods - 2
 
 		# The virtual table now needs to be filled with pointer to methods
 		superclasses.add(self)
@@ -520,7 +559,9 @@ redef class MClass
 	private fun superclasses_ordering(v: VirtualMachine): Array[MClass]
 	do
 		var superclasses = new Array[MClass]
-		superclasses.add_all(ancestors)
+
+		# Add all superclasses of `self`
+		superclasses.add_all(self.in_hierarchy(v.mainmodule).greaters)
 
 		var res = new Array[MClass]
 		if superclasses.length > 1 then
@@ -627,6 +668,8 @@ end
 
 # Redef to associate an `Instance` to its `VTable`
 redef class Instance
+
+	# Associate a runtime instance to its virtual table which contains methods, types etc.
 	var vtable: nullable VTable
 end
 
@@ -635,10 +678,6 @@ class MInitType
 	super MType
 
 	redef var model: Model
-	protected init(model: Model)
-	do
-		self.model = model
-	end
 
 	redef fun to_s do return "InitType"
 	redef fun as_nullable do return self

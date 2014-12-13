@@ -229,6 +229,7 @@ class RopeBuffer
 		var nns = new NativeString(buf_size)
 		var blen = rpos - dumped
 		ns.copy_to(nns, blen, dumped, 0)
+		ns = nns
 		dumped = 0
 		rpos = blen
 		written = false
@@ -241,6 +242,10 @@ class RopeBuffer
 		length = 0
 		rpos = 0
 		dumped = 0
+		if written then
+			ns = new NativeString(buf_size)
+			written = false
+		end
 	end
 
 	redef fun substring(from, count) do
@@ -337,14 +342,13 @@ class RopeBuffer
 
 	redef fun add(c) do
 		var rp = rpos
-		length += 1
-		ns[rp] = c
-		rp += 1
-		if rp == buf_size then
-			rpos = rp
+		if rp >= buf_size then
 			dump_buffer
 			rp = 0
 		end
+		ns[rp] = c
+		rp += 1
+		length += 1
 		rpos = rp
 	end
 
@@ -384,15 +388,12 @@ class RopeBuffer
 	end
 
 	redef fun reverse do
-		str = str.reversed
-		var nns = new NativeString(buf_size)
-		var j = rpos
-		var mits = ns
-		for i in [0 .. rpos[ do
-			nns[i] = mits[j]
-			j -= 1
+		# Flush the buffer in order to only have to reverse `str`.
+		if rpos > 0 and dumped != rpos then
+			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+			dumped = rpos
 		end
-		ns = nns
+		str = str.reversed
 	end
 
 	redef fun upper do

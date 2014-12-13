@@ -25,7 +25,7 @@ p1 = new IProcess( "sleep", "0.2" )
 p2 = new IProcess( "sleep", "0.1" )
 p3 = new IProcess( "sleep", "0.4" )
 
-var order = new Array[FDStream]
+var order = new Array[FStream]
 var streams = [p1.stream_in, p2.stream_in, p3.stream_in]
 
 while not streams.is_empty do
@@ -33,7 +33,7 @@ while not streams.is_empty do
 	if s == null then continue # may have been interrupted
 
 	order.add( s )
-	streams.remove( s.as(FDIStream ) )
+	streams.remove( s.as(IFStream ) )
 end
 
 print order[0] == p2.stream_in

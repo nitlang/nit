@@ -20,7 +20,7 @@ nitcc generates a bunches of control files, a lexer, a parser, and a tester.
 
 To compile and run the tester:
 
-    nitg file_test_parser.nit
+    nitc file_test_parser.nit
     ./file_test_parser an_input_file_to_parse
 
 ## Examples and regression tests

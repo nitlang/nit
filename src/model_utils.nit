@@ -163,44 +163,6 @@ redef class MModule
 		return mclasses
 	end
 
-	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mmodule in in_nesting.greaters do
-			for mclass in mmodule.filter_intro_mclasses(min_visibility) do
-				if mclass.visibility < min_visibility then continue
-				res.add mclass
-			end
-		end
-		return res
-	end
-
-	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mmodule in self.in_nesting.greaters do
-			for mclass in mmodule.filter_redef_mclasses(min_visibility) do
-				if mclass.visibility < min_visibility then continue
-				res.add mclass
-			end
-		end
-		return res
-	end
-
-	fun in_nesting_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		for mmodule in in_nesting.greaters do
-			res.add_all mmodule.intro_mclassdefs(min_visibility)
-		end
-		return res
-	end
-
-	fun in_nesting_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		for mmodule in self.in_nesting.greaters do
-			res.add_all mmodule.redef_mclassdefs(min_visibility)
-		end
-		return res
-	end
-
 	redef fun concern_rank is cached do
 		var max = 0
 		for p in in_importation.direct_greaters do
@@ -208,6 +170,23 @@ redef class MModule
 			if pmax > max then max = pmax
 		end
 		return max + 1
+	end
+
+	# Find all mmodules nested in `self` if `self` is the default module of a `MGroup`.
+	fun nested_mmodules: Array[MModule] do
+		var res = new Array[MModule]
+		var mgroup = mgroup
+		if mgroup == null or self != mgroup.default_mmodule then return res
+		for mmodule in mgroup.mmodules do
+			if mmodule == self then continue
+			res.add mmodule
+		end
+		for nested in mgroup.in_nesting.direct_smallers do
+			var default = nested.default_mmodule
+			if default == null then continue
+			res.add default
+		end
+		return res
 	end
 end
 

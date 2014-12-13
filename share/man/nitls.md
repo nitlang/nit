@@ -6,7 +6,7 @@ nitls - lists the projects, groups and paths of Nit sources files.
 
 # SYNOPSIS
 
-nitls [*options*] FILE...
+nitls [*options*] [*FILE*]...
 
 # DESCRIPTION
 
@@ -14,11 +14,24 @@ nitls [*options*] FILE...
 
 It is basically a `ls` or a simple `find` specialized on `.nit` source files.
 
+By default `nitls` works with the current directory (`.`).
+
+Each file can then be:
+
+* A Nit module (file).
+  In this case, only this single module is considered
+* A Nit group (directory).
+  In this case, all the modules of the groups (and recursively the sub-groups) are considered
+* A normal directory.
+  In this case, all its entries are analysed.
+  Files that are Nit modules and directories that are Nit groups are considered.
+  Other files and directories are ignored.
+
 # EXAMPLES
 
-Show the tree of modules from the current directory and subdirectories.
+Show the tree of modules from the current directory.
 
-    $ nitls -t -r .
+    $ nitls -t
 
 Show the list of projects imported by the modules of the current directory.
 
@@ -26,25 +39,7 @@ Show the list of projects imported by the modules of the current directory.
 
 # OPTIONS
 
-## COLLECT
-
-`-r`, `--recursive`
-:   Process directories recursively.
-
-    All `.nit` files found in the specified directory and subdirectories are considered.
-
-`-d`, `--depends`
-:   List dependencies of given modules
-
-    All imported modules are also considered.
-
-`-k`, `--keep`
-:   Ignore errors and files that are not a Nit source file.
-
-    When a file that is not a valit Nit module is encoutered, it is ignored and the rest of the file are
-    processed.
-
-    Without this option, a error message is displayed and nitls terminates on such a case.
+Each combination of option
 
 ## PRESENTATION MODE
 
@@ -65,10 +60,38 @@ Three presentation modes are available.
 
     Each `.nit` file is presented indivitually.
 
+The three modes are exclusives.
+
+The default mode is `--project` unless one on the argument is a group, then it is `--group`.
+
+## COLLECT
+
+`-r`, `--recursive`
+:   Process directories recursively.
+
+    All `.nit` files found in the specified directory and subdirectories are considered.
+
+`-d`, `--depends`
+:   List dependencies of given modules
+
+    All imported modules are also considered.
+
+    In --tree and --source modes, the modules direclty imported are also displayed.
+
+`-k`, `--keep`
+:   Ignore errors and files that are not a Nit source file.
+
+    When a file that is not a valid Nit module is encoutered, it is ignored and the rest of the files are
+    processed.
+
+    Without this option, an error message is displayed and nitls terminates on such a case.
+
 ## PRESENTATION OPTIONS
 
 `-p`, `--path`
 :   List only path (instead of name + path).
+
+    Paths are displayed uncolored.
 
 `-M`
 :   List dependencies suitable for a rule in a Makefile.

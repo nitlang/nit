@@ -14,7 +14,7 @@
 
 # Curl extention to access the Github API
 # See https://developer.github.com/v3/ for details
-module github_api
+module github_curl
 
 import curl
 import json::static
@@ -24,7 +24,7 @@ class GithubCurl
 	super Curl
 
 	# Headers to use on all requests
-	var header: HeaderMap
+	var header: HeaderMap is noinit
 
 	# OAuth token
 	var auth: String
@@ -33,12 +33,7 @@ class GithubCurl
 	# Eg. "Awesome-Octocat-App"
 	var user_agent: String
 
-	init(auth: String, user_agent: String)
-	do
-		super
-		self.auth = auth
-		self.user_agent = user_agent
-
+	init do
 		header = new HeaderMap
 		header["Authorization"] = "token {auth}"
 	end
@@ -83,4 +78,3 @@ do
 	p.close
 	return token.trim
 end
-
